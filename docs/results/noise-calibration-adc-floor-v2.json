@@ -1,0 +1,333 @@
+{
+  "status": "completed-ADC-floor-bug-fix-with-retained-input-regression-check",
+  "recorded_local": "2026-10-25T16:13:58.182982-07:00",
+  "study": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/result-v1.json",
+    "sha256": "19c4cee293f0f09a40072088bfdf7b1772fc62998443599b0e1f9edf1c41d86a"
+  },
+  "study_result": {
+    "status": "completed240-retained-noisy-input-ADC-floor-estimator-comparison",
+    "recorded_local": "2026-10-25T16:03:23.580584-07:00",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/run-study-v1.py",
+      "sha256": "16223f5dc96e753917e923e7ca2161f1ca41675969f8e71d5154f72bfd6dbc21"
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/plan-v1.json",
+      "sha256": "7a35e01977d339fe772254c3810352186ed7d09d4639b17cc4a5c7328a316e14"
+    },
+    "cases": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/cases-v1.jsonl",
+      "sha256": "6c36db921ae61ff404f4594ac83b10e6c19bec7d43e72f0f7657f55d541f713d"
+    },
+    "case_count": 240,
+    "old_accepted": 192,
+    "new_accepted": 192,
+    "acceptance_changed": 0,
+    "accepted_worst_inside_support_dB": 0.6256640707457821,
+    "accepted_inside_support_over1dB": 0,
+    "accepted_worst_all_levels_dB": 7.042466427120617,
+    "accepted_all_levels_over1dB": 50,
+    "scene_groups": {
+      "broad-flat-fields": {
+        "cases": 48,
+        "old_accepted": 48,
+        "new_accepted": 48,
+        "worst_inside_support_dB": 0.2883500296953051,
+        "worst_all_levels_dB": 7.042466427120617
+      },
+      "affine-shading": {
+        "cases": 48,
+        "old_accepted": 48,
+        "new_accepted": 48,
+        "worst_inside_support_dB": 0.1705432854556349,
+        "worst_all_levels_dB": 5.733788946821294
+      },
+      "sparse-fine-texture": {
+        "cases": 48,
+        "old_accepted": 48,
+        "new_accepted": 48,
+        "worst_inside_support_dB": 0.6256640707457821,
+        "worst_all_levels_dB": 5.730992532571019
+      },
+      "clipped-and-dark": {
+        "cases": 48,
+        "old_accepted": 48,
+        "new_accepted": 48,
+        "worst_inside_support_dB": 0.3923647830893935,
+        "worst_all_levels_dB": 5.379148706978568
+      },
+      "narrow-span-gray": {
+        "cases": 48,
+        "old_accepted": 0,
+        "new_accepted": 0,
+        "worst_inside_support_dB": null,
+        "worst_all_levels_dB": null
+      }
+    },
+    "new_noise_observations": 0,
+    "new_RAW_decodes": 0,
+    "new_neural_forwards": 0,
+    "optimizer_updates": 0,
+    "scope": "All240noisyarraysreusedandhashchecked. Correctedclipfloorhandling, sameunderlyingestimator/seeds/thresholds. ErrorscompareknownpreADCvariancefunctions, notrestorationquality; out-of-support errorsremainunvalidatedbyinternalreliableflag. No source data rewritten."
+  },
+  "plan": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/calibration-executed-v1.py",
+      "sha256": "49fc00d2f1ff9bf52c18bb16291d26e670f58702f133a8244bf4dfca09bf0918"
+    },
+    "parent_evidence": {
+      "path": "/home/dllu/proj/demosaic/docs/results/noise-calibration-synthetic-stress.json",
+      "sha256": "4afcbec09c88004c9dfd2f86d3110eb21d8d655dab927e863129059a660d13ad"
+    },
+    "parent_plan": {
+      "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/plan.json",
+      "sha256": "2d88d2725e9bbf40bedc7d9688eed716c06d50202e4095ca1823cb0863aefd90"
+    },
+    "parent_cases": {
+      "path": "/mnt/external/demosaic/benchmarks/noise-calibration-synthetic-stress-v1/cases.jsonl",
+      "sha256": "e51d0a8ab1d0a9c0a2361e120bf0e9221a2ddcfc42358a1bfb4c1b7510e58f2c"
+    },
+    "scope": "Evaluate corrected ADC-floor metadata handling on all240 retained noisy inputs. Same patch32/max4096/seed42, true preADC profiles and fixed probe levels .001,.005,.02,.08,.2,.6; compare corrected all/in-support error and old192accepted fits. No new noise, arrays, RAW, model forward or training. Preserveoldalgorithm/receipts. Recordchangedcasecounts, falseacceptednarrowspancases and worsterrors; no parameter tuning or fabricatedqualitygain."
+  },
+  "independent_audit": {
+    "status": "passed-independent-scalar-and-native-pixel-audit",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/independent-audit-v1.py",
+      "sha256": "7ff810a0149839a63715b5cf6b422c11aa1ba0e79489c366cbea913bb1402b8f"
+    },
+    "cases": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/cases-v1.jsonl",
+      "sha256": "6c36db921ae61ff404f4594ac83b10e6c19bec7d43e72f0f7657f55d541f713d"
+    },
+    "manifest": {
+      "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-profile-transfer-v1/manifest.json",
+      "sha256": "528237f3fe47e5db873344f43c48066c53a368e435399b5bd27ea5c8620c8a10"
+    },
+    "case_count": 240,
+    "scalar_max_error": 0.0,
+    "statistics": {
+      "old_estimate": {
+        "accepted": 192,
+        "all_over1dB": 55,
+        "inside_over1dB": 0,
+        "all_worst_dB": 7.042466427120617,
+        "inside_worst_dB": 0.4404950919183843
+      },
+      "estimate": {
+        "accepted": 192,
+        "all_over1dB": 50,
+        "inside_over1dB": 0,
+        "all_worst_dB": 7.042466427120617,
+        "inside_worst_dB": 0.6256640707457821
+      }
+    },
+    "native_boards": 4,
+    "native_board_cells": 24,
+    "native_board_pixel_samples": 1843200,
+    "independent_numpy_transform_max_uint8_difference": 0,
+    "independent_numpy_transform_different_samples": 0,
+    "exact_board_to_triplet_cells": 12,
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "noise_observations": 0,
+    "estimator_calls": 0,
+    "scope": "Python math variance ratios and NumPy display transforms; no neural imports or original-media reads."
+  },
+  "mesh_context": {
+    "status": "completed-actual-stored-mesh-context-floor-aware-Haar-check",
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/calibration-executed-v1.py",
+      "sha256": "49fc00d2f1ff9bf52c18bb16291d26e670f58702f133a8244bf4dfca09bf0918"
+    },
+    "inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/result-v1.json",
+      "sha256": "6b4afa65727e4ee792e4bbadcb96c3fc63ea8bbaf82bf3b18d7556efa839dcaa"
+    },
+    "legacy_zero_floor_estimate": {
+      "shot": null,
+      "read": null,
+      "reliable": false,
+      "reason": "insufficient_flat_patches",
+      "candidate_patches": 4096,
+      "accepted_patches": 51,
+      "intensity_span": 0.0,
+      "reference_intensity": null,
+      "reference_variance": null,
+      "shot_interval": null,
+      "read_interval": null,
+      "bins": [],
+      "lower_clip_levels": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "lower_clip_tolerances": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "metadata_ADC_floor_estimate": {
+      "shot": null,
+      "read": null,
+      "reliable": false,
+      "reason": "insufficient_intensity_span",
+      "candidate_patches": 4096,
+      "accepted_patches": 2134,
+      "intensity_span": 0.004957086604554204,
+      "reference_intensity": 0.0035299600567668676,
+      "reference_variance": 6.729862434440292e-06,
+      "shot_interval": null,
+      "read_interval": null,
+      "bins": [
+        {
+          "mean": 0.0019498104229569435,
+          "variance": 3.6694426626127097e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0022284514270722866,
+          "variance": 4.109913334104931e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0024297935888171196,
+          "variance": 4.396071062728879e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0026596547104418278,
+          "variance": 4.9300319915346336e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0028248338494449854,
+          "variance": 5.1741244533332065e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.003005090751685202,
+          "variance": 5.46582509741711e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0031698259990662336,
+          "variance": 5.853868515259819e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.00341729330830276,
+          "variance": 6.238354217202868e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.0036822049878537655,
+          "variance": 6.887280960654607e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.00418152566999197,
+          "variance": 7.568067758256802e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.004807819612324238,
+          "variance": 8.954028089647181e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.005267135798931122,
+          "variance": 9.431695616513025e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.005591046065092087,
+          "variance": 1.0342094356019516e-05,
+          "patches": 133
+        },
+        {
+          "mean": 0.005993497557938099,
+          "variance": 1.0850268154172227e-05,
+          "patches": 133
+        },
+        {
+          "mean": 0.0064246999099850655,
+          "variance": 1.1457235814305022e-05,
+          "patches": 133
+        },
+        {
+          "mean": 0.00751451263204217,
+          "variance": 1.3721192772209179e-05,
+          "patches": 133
+        }
+      ],
+      "lower_clip_levels": [
+        -0.0667024776339531,
+        -0.06668511033058167,
+        -0.06680665910243988,
+        -0.06680665910243988
+      ],
+      "lower_clip_tolerances": [
+        8.138417797454167e-06,
+        8.13828592072241e-06,
+        8.139212695823517e-06,
+        8.139212695823517e-06
+      ]
+    },
+    "legacy_profile_consistency": {},
+    "corrected_profile_consistency": {
+      "nominal3842": {
+        "median_absolute_relative_variance_error": 0.6937949827910616,
+        "mean_signed_relative_variance_error": 0.7217792213109333
+      },
+      "locked3879": {
+        "median_absolute_relative_variance_error": 0.05811421078145207,
+        "mean_signed_relative_variance_error": -0.03373021991810064
+      }
+    },
+    "profiles_are_fixed_not_fitted_here": true,
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "scope": "Same stored signed768RAW context; correctedADCfloorvalidation, no source/HDDreads orreference/modeloutputuse. Narrowcontextspanstillcannotidentifyshot/read. Haartexture/correlation limitthisdiagnostic;donotlabelgroundtruthnoise."
+  },
+  "implementation": {
+    "src/demosaic/calibration.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/calibration.py",
+      "sha256": "49fc00d2f1ff9bf52c18bb16291d26e670f58702f133a8244bf4dfca09bf0918"
+    },
+    "src/demosaic/cli.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/cli.py",
+      "sha256": "b7fbb2af8c3b9d9d2a54f4582b014e65f228f9742e87bd35e0d4b2720b10501f"
+    },
+    "src/demosaic/realdata.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/realdata.py",
+      "sha256": "943540dfd4fddfad96d6337e134da5c96ca8ee27f23b3dbb689d423d6b5a2dd0"
+    },
+    "scripts/report_raw_pair.py": {
+      "path": "/home/dllu/proj/demosaic/scripts/report_raw_pair.py",
+      "sha256": "bd4a23af6af3a3ab380baaac32cb9fb960cf9718cd9ee40bedf6ef5c3c72db82"
+    },
+    "scripts/export_raw_dng.py": {
+      "path": "/home/dllu/proj/demosaic/scripts/export_raw_dng.py",
+      "sha256": "b805f572a3092addb225cb0a91bb1469587d0912cd31f56e013fb0abad07d1f6"
+    },
+    "tests/test_calibration.py": {
+      "path": "/home/dllu/proj/demosaic/tests/test_calibration.py",
+      "sha256": "3565ed362e79c52146f26f7e091f4945395703e0c8b271915497abe6ee2f16cc"
+    }
+  },
+  "verification": {
+    "existing_expanded_subset": "34 passed in16.77s: calibration, real-noise conditioning, DNG",
+    "new_CLI_integration": "1 passed in1.75s; signed observations and phase metadata reach real noise-profile command",
+    "new_noise_observations": 0,
+    "new_neural_forwards": 0,
+    "new_RAW_decodes": 0,
+    "optimizer_updates": 0
+  },
+  "scope": "Correct clipping convention for metadata-backed fits; no threshold tuning, frozen training/cache rewrite, reference fitting, physical-calibration truth or restoration-score claim. Independent scalar error exactly0; accepted support probes differ when bin support changes."
+}

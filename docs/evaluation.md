@@ -282,6 +282,10 @@ camera RAWs without modifying the original. It samples each CFA phase separately
 uses three orthonormal Haar bands, rejects clipped/textured patches with a
 detrended low-pass check, and fits nonnegative coefficients to intensity-binned
 variance medians. Bootstrap intervals and failure reasons expose unstable fits.
+Metadata-backed fits reject the true per-phase ADC floor
+`-black/(white-black)`, allowing valid negative black-subtracted read noise.
+Half an ADC code accounts for floating normalization at that floor. New receipts
+record these floors and identify the ADC-floor-v2 estimator.
 
 ```bash
 uv run demosaic noise-profile photo.raf /mnt/external/demosaic/profiles/photo.json
@@ -296,11 +300,12 @@ not establish physical calibration: residual texture, correlated noise and
 clipping can bias a single-image estimate. Dedicated flat/dark captures are
 stronger evidence. Shot/read priors alone do not establish final quality.
 
-The [synthetic fit-support check](noise-calibration-fit-support.md) evaluates240
-known-noise cases: all192 accepted fits stay within1dB at tested in-range levels,
-but55 exceed1dB somewhere across a wider probe range, with worst errors at.001.
-The internal `reliable` flag does not validate deep-shadow extrapolation. Current
-estimation, inference conditioning and frozen benchmark inputs are unchanged.
+The [retained-input fit-support check](noise-calibration-fit-support.md) evaluates
+the correction on240 known-noise cases: all192 accepted fits stay within1dB at
+tested in-range levels, but50 exceed1dB somewhere across the wider probe range.
+The worst error remains7.042dB at.001. The internal `reliable` flag does not
+validate deep-shadow extrapolation. Existing frozen profiles, training caches
+and benchmark inputs remain unchanged.
 
 Relevant primary research: [Foi et al., 2008](https://pubmed.ncbi.nlm.nih.gov/18784024/)
 on single-image Poisson-Gaussian fitting, and a [2021 noise-parameter estimation study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8705815/)

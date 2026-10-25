@@ -158,7 +158,7 @@ def run(args):
         "checkpoint": str(checkpoint_path),
         "precision": "IEEE FP32",
         "self_ensemble": args.self_ensemble,
-        "noise_policy": "Explicit coefficients or reliable input-only Haar fit, nominal ISO fallback",
+        "noise_policy": "Explicit coefficients or ADC-floor-aware input-only Haar fit, nominal ISO fallback",
         "preview": "Original darktable edits; identity RAW preparation; RAW/profiled denoising disabled; sRGB JPEG 4:4:4",
         "completed": [],
     }
@@ -183,14 +183,16 @@ def run(args):
             raw, metadata = read_raw(source)
             estimate = None
             if args.shot is None:
-                estimate = estimate_noise(raw)
+                estimate = estimate_noise(raw, metadata=metadata)
                 shot, read = (
                     (estimate.shot, estimate.read)
                     if estimate.reliable
                     else Sensor(iso=metadata.iso or 100).coefficients()
                 )
                 noise_method = (
-                    "input-only-Haar-fit" if estimate.reliable else "nominal-ISO-fallback"
+                    "input-only-Haar-NNLS-ADC-floor-v2"
+                    if estimate.reliable
+                    else "nominal-ISO-fallback"
                 )
             else:
                 shot, read, noise_method = args.shot, args.read, "explicit"

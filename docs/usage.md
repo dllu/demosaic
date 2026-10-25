@@ -321,6 +321,8 @@ read noise and ISO to this convention. Measure camera-specific coefficients for
 reliable results, especially at high ISO. `noise-profile` provides conservative
 single-image estimates and `--noise-profile` applies reliable camera/ISO-matched
 fits; see [limitations and commands](evaluation.md#noise-profiles).
+New metadata-backed fits distinguish the true ADC floor from valid negative
+black-subtracted samples; narrow-range shadow crops can still be rejected.
 
 The main TIFF is linear **camera RGB**, before WB and color conversion, with a
 JSON description. It is not a rendered sRGB TIFF. `--preview` produces a separate

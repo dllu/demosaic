@@ -371,11 +371,13 @@ def main(argv=None):
         if args.output.resolve() == args.input.resolve():
             raise ValueError("Noise profile must not overwrite its RAW input")
         raw, metadata = read_raw(args.input)
-        estimate = estimate_noise(raw, patch=args.patch, max_patches=args.max_patches)
+        estimate = estimate_noise(
+            raw, patch=args.patch, max_patches=args.max_patches, metadata=metadata
+        )
         dump(
             args.output,
             {
-                "method": "flat-patch-Haar-NNLS-v1",
+                "method": "flat-patch-Haar-NNLS-ADC-floor-v2",
                 "raw_metadata": asdict(metadata),
                 "estimate": estimate.to_dict(),
             },

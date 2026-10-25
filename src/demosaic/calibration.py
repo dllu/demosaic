@@ -24,6 +24,8 @@ class NoiseEstimate:
     shot_interval: list[float] | None
     read_interval: list[float] | None
     bins: list[dict]
+    lower_clip_levels: list[float] | None = None
+    lower_clip_tolerances: list[float] | None = None
 
     def to_dict(self):
         return asdict(self)
@@ -43,12 +45,17 @@ def _nonnegative_fit(x, y, weights):
     return min(candidates, key=lambda p: np.sum(weights * (design @ p - y) ** 2))
 
 
-def estimate_noise(raw, *, patch=32, max_patches=4096, seed=42):
+def estimate_noise(raw, *, patch=32, max_patches=4096, seed=42, metadata=None):
     """Fit Var(y|x)=shot*x+read on black/white-normalized Bayer measurements.
 
     Sample all four CFA phases independently. Three orthonormal Haar detail
     bands remove smooth intensity trends; a detrended low-pass image rejects
-    texture. Clipped/black-censored patches are excluded. Quantile-bin medians
+    texture. Clipped/ADC-censored patches are excluded. With read_raw metadata,
+    the lower limit is -black/(white-black) for each visible CFA phase: zero
+    after black subtraction is not the ADC floor. Half an ADC code of tolerance
+    accounts for floating normalization at the floor. Without metadata the legacy
+    zero-floor convention applies. Negative read noise stays unmodified.
+    Quantile-bin medians
     limit outlier influence, and a bin bootstrap exposes poor identifiability.
     Input arrays are never modified; work is bounded by max_patches*patch².
     """
@@ -57,6 +64,22 @@ def estimate_noise(raw, *, patch=32, max_patches=4096, seed=42):
         raise ValueError("Expected a Bayer image at least twice the even patch size")
     if not 64 <= max_patches <= 32768:
         raise ValueError("max_patches must be in [64, 32768]")
+    if metadata is None:
+        floors = np.zeros(4, dtype=np.float32)
+        tolerance = np.zeros(4, dtype=np.float32)
+    else:
+        black = np.asarray(metadata.black_levels, dtype=np.float32)
+        white = np.asarray(metadata.white_levels, dtype=np.float32)
+        if (
+            black.shape != (4,)
+            or white.shape != (4,)
+            or not np.isfinite(black).all()
+            or not np.isfinite(white).all()
+            or np.any(white <= black)
+        ):
+            raise ValueError("Noise estimation requires four finite phase black/white levels")
+        floors = -black / (white - black)
+        tolerance = 0.5 / (white - black)
     side = max(1, int(np.sqrt(max_patches // 4)))
     rows = np.unique(np.linspace(0, raw.shape[0] - 2 * patch, side).astype(int) // 2 * 2)
     cols = np.unique(np.linspace(0, raw.shape[1] - 2 * patch, side).astype(int) // 2 * 2)
@@ -70,7 +93,8 @@ def estimate_noise(raw, *, patch=32, max_patches=4096, seed=42):
     ).astype(np.float32)
     means = patches.mean(axis=(1, 2))
     valid = np.isfinite(patches).all(axis=(1, 2))
-    valid &= ((patches <= 0) | (patches >= 0.99)).mean(axis=(1, 2)) < 0.01
+    lower = np.tile(floors + tolerance, len(patches) // 4)[:, None, None]
+    valid &= ((patches <= lower) | (patches >= 0.99)).mean(axis=(1, 2)) < 0.01
     valid &= (means > 0.001) & (means < 0.9)
     a, b = patches[:, ::2, ::2], patches[:, ::2, 1::2]
     c, d = patches[:, 1::2, ::2], patches[:, 1::2, 1::2]
@@ -101,6 +125,8 @@ def estimate_noise(raw, *, patch=32, max_patches=4096, seed=42):
         "shot_interval": None,
         "read_interval": None,
         "bins": [],
+        "lower_clip_levels": floors.astype(float).tolist(),
+        "lower_clip_tolerances": tolerance.astype(float).tolist(),
     }
     if len(x) < 64:
         return NoiseEstimate(**base)

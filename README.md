@@ -77,15 +77,16 @@ The independent ISO100 exposure is an approximate qualitative reference,
 ![V117 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v117-v118-quality/V117-gfx-chain-link-fence.png)
 
 The additional **fine green mesh beside the red train's cab** remains difficult:
-V112 and the current useful models largely erase its lattice. Below: DSCF3842
-ISO6400 camera JPEG → noisy Malvar → V112 → V114 → separate DSCF3835 ISO100
-camera reference, **not GT**. Native160px cells share +4EV display; these are
-context crops, and camera processing/aperture differ.
-[All five methods, sources, conditioning and limits](docs/gfx-green-mesh.md).
+the nominal ISO6400 prior largely erases its lattice. A fixed nearby-capture
+profile makes more diagonal texture visible in V114/V115, with substantial fine
+detail still missing. Below: DSCF3842 camera JPEG → noisy Malvar → V114 nominal
+→ V114 nearby profile → DSCF3835 ISO100 AHD → ISO100 camera JPEG. Both ISO100
+references are **not GT**. Native160px cells share +4EV display; camera
+processing/aperture differ. [Matched comparison and limits](docs/gfx-green-mesh.md).
 
-![Fine green mesh, left native crop](docs/images/gfx-green-mesh-20231231-v1/fine-green-mesh-left-4EV.png)
+![Fine green mesh, left native crop](docs/images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-left-4EV.png)
 
-![Fine green mesh, right native crop](docs/images/gfx-green-mesh-20231231-v1/fine-green-mesh-right-4EV.png)
+![Fine green mesh, right native crop](docs/images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-right-4EV.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)

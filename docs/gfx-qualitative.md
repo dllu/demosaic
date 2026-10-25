@@ -31,9 +31,21 @@ disclosed nominal ISO6400 prior; this exposes a weakness that the larger mesh
 in the existing standing case does not resolve. RawNIND pre-upsampled retains
 more directional texture, without clearly recovering the reference lattice.
 
+Using one fixed input-only profile from nearby DSCF3879 makes more diagonal
+texture visible in V114/V115 on the same saved context, with substantial fine
+lattice loss remaining. This is a conditioning comparison with reused nominal
+controls, not a newly trained model. The shared +4EV example below is native160px:
+camera JPEG → noisy → V114 nominal → V114 nearby profile → independent ISO100
+AHD → ISO100 camera JPEG, with both ISO100 references **not GT**.
+
+![Matched V114 nominal/nearby-profile fine green mesh](images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-right-4EV.png)
+
+[Both regions, V115, triplets and conditioning evidence](gfx-green-mesh.md#fixed-nearby-capture-profile).
+
 ![Fine green mesh, camera controls and all five methods](images/gfx-green-mesh-20231231-v1/comparison-2EV.png)
 
-All cells are native160 crops from one768px context with shared +2EV display,
+The original five-method board above uses the nominal prior and +2EV display.
+All its cells are native160 crops from one768px context,
 input-only integer coordinate matching and no resizing or warp. The ISO100
 f/5.6 frame was taken46s earlier; its AHD output and camera JPEG are independent
 qualitative references, **not GT**. These context comparisons supplement the

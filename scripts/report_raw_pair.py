@@ -138,7 +138,7 @@ def main():
     del reference_raw
     if meta.camera != refmeta.camera:
         raise ValueError("This qualitative report requires the same camera")
-    estimate = estimate_noise(raw)
+    estimate = estimate_noise(raw, metadata=meta)
     shot, read = (
         (estimate.shot, estimate.read)
         if estimate.reliable

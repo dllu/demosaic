@@ -69,7 +69,7 @@ def prepare_pairs(manifest, output, *, size=512, grid=3, max_shift=128):
         "split": source["split"],
         "registration": "green phase correlation + integer L1, scalar gain, max green L1 .035",
         "reference": "Measured clean CFA samples; independently calibrated LibRaw AHD RGB is auxiliary",
-        "noise": "Reliable input-only Haar estimate; disclosed nominal ISO prior otherwise",
+        "noise": "Reliable input-only Haar estimate using per-phase ADC floors; disclosed nominal ISO prior otherwise",
         "mask": "Measured clean raw <.99, transformed reference RGB in [-.005,.98), >=50% valid crop pixels",
     }
     protocol_path = output / "protocol.json"
@@ -117,10 +117,10 @@ def prepare_pairs(manifest, output, *, size=512, grid=3, max_shift=128):
                     flush=True,
                 )
                 continue
-            estimate = estimate_noise(raw)
+            estimate = estimate_noise(raw, metadata=metadata)
             if estimate.reliable:
                 shot, read = estimate.shot, estimate.read
-                method = "input-only-Haar-fit"
+                method = "input-only-Haar-NNLS-ADC-floor-v2"
             else:
                 shot, read = Sensor(iso=metadata.iso or record["iso_label"] or 100).coefficients()
                 method = "nominal-ISO-fallback"

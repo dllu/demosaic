@@ -1,0 +1,844 @@
+{
+  "status": "completed-two-fixed-profile-operators-with-actual-native-review",
+  "recorded_local": "2026-10-25T16:13:58.182982-07:00",
+  "prospective_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/evaluation-plan-v1.json",
+    "sha256": "58cfddae00ddf2ef3881d518b5c6aa19814c63acd177b8b5640f5a45129f2a68"
+  },
+  "plan": {
+    "recorded_local": "2026-10-25T16:05:24.460681-07:00",
+    "inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/result-v1.json",
+      "sha256": "610a2fe72e84e5a51daf4cf78a853a4624d56e7118a9235ab2bd007ffd849bbc"
+    },
+    "methods": [
+      {
+        "label": "V114-profile3879",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2.pt",
+          "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+        }
+      },
+      {
+        "label": "V115-profile3879",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+          "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+        }
+      }
+    ],
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/scripts/evaluate_gfx_green_mesh.py",
+      "sha256": "cdfc4958b36b576524bb6c7c656701b626d1fc7bbf03580d74e09d58953d758a"
+    },
+    "matched_nominal_controls": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/result-v1.json",
+      "sha256": "648f6b905c7461347fbf38c5eaf14cca7f252cced7b31f905e1739c37f92351f"
+    },
+    "profile_provenance": {
+      "path": "/mnt/external/demosaic/v104-loss-scale-fullframe-20261023-v2/report.json",
+      "sha256": "66bb77c7a8cddec903f07baecfb5d27d18fd756fbae1a80ae6c4760117aa6edc"
+    },
+    "earlier_fixed_profile_receipt": {
+      "path": "/home/dllu/proj/demosaic/docs/results/gfx-noise-conditioning-CPU-v1.json",
+      "sha256": "b94609e3a647d84f36f714f905e531aad2365fbdff2f401e7be9ae84e1be811e"
+    },
+    "planned_new_root_forwards": 2,
+    "planned_new_encoder_forwards": 2,
+    "planned_RAW_decodes": 0,
+    "planned_noise_observations": 0,
+    "planned_optimizer_updates": 0,
+    "scope": "Two fixedcurrentmodels, oneexternalinput-onlyphysicalprofile, bothnativeROIsbeforeviewingnewoutputs. Reusealreadyexecuted nominalcontrols. No sweep, earlycheckpoint, image-dependentparameterselection, reference fit ortrained-qualityclaim;casequalitative."
+  },
+  "executed_evaluation": {
+    "status": "completed-new-green-mesh-CPU-context-inference-awaiting-actual-native-viewing",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/scripts/evaluate_gfx_green_mesh.py",
+      "sha256": "cdfc4958b36b576524bb6c7c656701b626d1fc7bbf03580d74e09d58953d758a"
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/evaluation-plan-v1.json",
+      "sha256": "58cfddae00ddf2ef3881d518b5c6aa19814c63acd177b8b5640f5a45129f2a68"
+    },
+    "inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/result-v1.json",
+      "sha256": "610a2fe72e84e5a51daf4cf78a853a4624d56e7118a9235ab2bd007ffd849bbc"
+    },
+    "input_arrays": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+      "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+    },
+    "methods": [
+      {
+        "label": "V114-profile3879",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2.pt",
+          "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2"
+        },
+        "step": 20000,
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+          "dino_revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/V114-profile3879-RGB-f32.npy",
+          "sha256": "0e6bb7d95df34f8da1b69332fdea0cb53f5aa67a1c9076a394ad448f361f4b42"
+        },
+        "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+        "actual_root_forwards": 1,
+        "actual_encoder_forwards": 1,
+        "new_inference": true,
+        "seconds": 95.40011291299015
+      },
+      {
+        "label": "V115-profile3879",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+          "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+        },
+        "step": 20000,
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/V115-profile3879-RGB-f32.npy",
+          "sha256": "8a6e92bc30048c3e4d0cfbae952c308a6ce7a9412ab252fc289e7104221c3eee"
+        },
+        "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+        "actual_root_forwards": 1,
+        "actual_encoder_forwards": 1,
+        "new_inference": true,
+        "seconds": 99.37817374896258
+      }
+    ],
+    "native_comparison": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/comparison-native.png",
+      "sha256": "cbb446d02a0377448f6c2047d84cfe00302b6be41918397284a7f2250e964a09"
+    },
+    "triplets": [
+      {
+        "label": "V114-profile3879",
+        "region": "fine-green-mesh-left",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-3940d2d0d4a009b1.png",
+          "sha256": "e86ab2abe1e87d8d0ae2e08d7641e8a67370e98cd758f2ecb33bc524c8efb4dd"
+        },
+        "metadata": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-3940d2d0d4a009b1.json",
+          "sha256": "30e944da5f636e0d3d3f0e1e1d5dda662aee5d38e83c59444b3f92c8dbff0cf4"
+        }
+      },
+      {
+        "label": "V115-profile3879",
+        "region": "fine-green-mesh-left",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-7b7b3f9a984b03cb.png",
+          "sha256": "ae7a692233fc2ae8dc8cc6ba92ce7f276092746d78a58421ce5b54e74aa8739b"
+        },
+        "metadata": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-7b7b3f9a984b03cb.json",
+          "sha256": "44b2bb6de7b4bd537c161d30ed5e7e70b9cde3d6af95e7a499e68fcce441de4c"
+        }
+      },
+      {
+        "label": "V114-profile3879",
+        "region": "fine-green-mesh-right",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-68a7a35b0c504247.png",
+          "sha256": "92d5fa6987ba81e81c8beaaafd9f3cb35a43c6182b2784baa84bd17aa18f5536"
+        },
+        "metadata": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-68a7a35b0c504247.json",
+          "sha256": "0f5e67ebc0fdbba6316eea270bffb0543bc89133a07778022e06e4fb471e237d"
+        }
+      },
+      {
+        "label": "V115-profile3879",
+        "region": "fine-green-mesh-right",
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-52e0b0e0cf785b97.png",
+          "sha256": "393e3766778b76820f644251922ca137c439a764d258d0e5240291ff9afaebd5"
+        },
+        "metadata": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/triplets/crop-52e0b0e0cf785b97.json",
+          "sha256": "f4faaf232bb7e2d951bd5811cac295b5ce45356ac2d4214fd5fe8edef3632e2b"
+        }
+      }
+    ],
+    "display_exposure": 4.0,
+    "JPEG_display": "Decode camera sRGB, apply sharedlinear x4 display gain, encode sRGB; intrinsic camera tone/sharpness/denoising/geometric processing differs from RAW pipeline.",
+    "new_root_forwards": 2,
+    "new_encoder_forwards": 2,
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "CUDA_initialized": false,
+    "scope": "Two new native160 regions from one768context, same observedRAW and conditioning across RAW methods. CameraJPEGs separately integer-matched; residual lens/framing/processing differences remain. No warp, native resize, target fit, exactGT, PSNR, training or full-frame/speed claim. Future reports may reuse bound FP32 controls without new forwards."
+  },
+  "matched_nominal_controls": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/result-v1.json",
+    "sha256": "648f6b905c7461347fbf38c5eaf14cca7f252cced7b31f905e1739c37f92351f"
+  },
+  "archived_input_profile_consistency": {
+    "status": "completed-archived-input-only-profile-agreement-and-shadow-floor-diagnostic",
+    "recorded_local": "2026-10-25T15:52:13.384866-07:00",
+    "inputs": {
+      "3842_Haar_bins": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b-metadata.json",
+        "sha256": "0b06029a247455f9eb6c1048c8279b0e225fd3ca0338e6013d6405b40c961ca3"
+      },
+      "locked3879_profile_report": {
+        "path": "/mnt/external/demosaic/v104-loss-scale-fullframe-20261023-v2/report.json",
+        "sha256": "66bb77c7a8cddec903f07baecfb5d27d18fd756fbae1a80ae6c4760117aa6edc"
+      },
+      "earlier_Oct17_profile_receipt": {
+        "path": "/home/dllu/proj/demosaic/docs/results/gfx-noise-conditioning-CPU-v1.json",
+        "sha256": "b94609e3a647d84f36f714f905e531aad2365fbdff2f401e7be9ae84e1be811e"
+      },
+      "new_mesh_inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/result-v1.json",
+        "sha256": "6b4afa65727e4ee792e4bbadcb96c3fc63ea8bbaf82bf3b18d7556efa839dcaa"
+      }
+    },
+    "profiles": {
+      "nominal3842": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "locked3879": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit"
+      }
+    },
+    "3842_bins": [
+      {
+        "mean": 0.007329472806304693,
+        "variance": 1.1212351637368556e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 1.5935325192070008e-05,
+          "locked3879": 1.1798822574200636e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.4212295250320827,
+          "locked3879": 0.05230579237967245
+        }
+      },
+      {
+        "mean": 0.008058307692408562,
+        "variance": 1.2951884855283424e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 1.686823384628296e-05,
+          "locked3879": 1.2865528981855157e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.30237676097019583,
+          "locked3879": -0.006667436777979124
+        }
+      },
+      {
+        "mean": 0.00863637961447239,
+        "variance": 1.376775207972969e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 1.7608165906524658e-05,
+          "locked3879": 1.3711582093619582e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.27894269191912774,
+          "locked3879": -0.0040798226017453145
+        }
+      },
+      {
+        "mean": 0.00912708230316639,
+        "variance": 1.4333081253425917e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 1.823626534805298e-05,
+          "locked3879": 1.4429763553183519e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.2723199586756071,
+          "locked3879": 0.006745395358342289
+        }
+      },
+      {
+        "mean": 0.009817061014473438,
+        "variance": 1.49797733683954e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 1.9119438098526e-05,
+          "locked3879": 1.5439600934090045e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.27635029104409164,
+          "locked3879": 0.030696563585187384
+        }
+      },
+      {
+        "mean": 0.010441528633236885,
+        "variance": 1.6194640011235606e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 1.9918756650543214e-05,
+          "locked3879": 1.6353557747914674e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.22995982848176125,
+          "locked3879": 0.009812983590176344
+        }
+      },
+      {
+        "mean": 0.01121448166668415,
+        "variance": 1.765823344612727e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 2.0908136533355714e-05,
+          "locked3879": 1.7484834487426694e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.1840446326153424,
+          "locked3879": -0.009819722863535068
+        }
+      },
+      {
+        "mean": 0.012145820073783398,
+        "variance": 1.9053898540732916e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 2.210024969444275e-05,
+          "locked3879": 1.8847920510734776e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.1598807271486948,
+          "locked3879": -0.01081028271237017
+        }
+      },
+      {
+        "mean": 0.013172911014407873,
+        "variance": 2.0338953618193045e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 2.341492609844208e-05,
+          "locked3879": 2.035114779649878e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.15123553246601637,
+          "locked3879": 0.000599547967641105
+        }
+      },
+      {
+        "mean": 0.01416056603193283,
+        "variance": 2.262902671645861e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 2.4679124520874025e-05,
+          "locked3879": 2.1796657548889896e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.09059593371394672,
+          "locked3879": -0.03678325091035904
+        }
+      },
+      {
+        "mean": 0.01539386436343193,
+        "variance": 2.358829169679666e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 2.6257746385192875e-05,
+          "locked3879": 2.3601685351266844e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.11316863140024391,
+          "locked3879": 0.0005678094303032248
+        }
+      },
+      {
+        "mean": 0.01708341483026743,
+        "variance": 2.6296196665498428e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 2.8420370982742314e-05,
+          "locked3879": 2.6074473555277523e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.08077876600424427,
+          "locked3879": -0.008431755855850223
+        }
+      },
+      {
+        "mean": 0.018991870805621147,
+        "variance": 2.922604380728444e-05,
+        "patches": 48,
+        "predicted_variance": {
+          "nominal3842": 3.086319463119507e-05,
+          "locked3879": 2.8867646956346368e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.05601684698435232,
+          "locked3879": -0.012262927315832749
+        }
+      },
+      {
+        "mean": 0.022024966776371002,
+        "variance": 3.354269210831262e-05,
+        "patches": 47,
+        "predicted_variance": {
+          "nominal3842": 3.474555747375488e-05,
+          "locked3879": 3.330681825387519e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.03586072821937164,
+          "locked3879": -0.007032048998207226
+        }
+      },
+      {
+        "mean": 0.03205864876508713,
+        "variance": 4.5584198232972994e-05,
+        "patches": 47,
+        "predicted_variance": {
+          "nominal3842": 4.758867041931152e-05,
+          "locked3879": 4.7991890378984634e-05
+        },
+        "relative_error": {
+          "nominal3842": 0.043972961333969635,
+          "locked3879": 0.05281856957769312
+        }
+      },
+      {
+        "mean": 0.05841492861509323,
+        "variance": 8.342704677488655e-05,
+        "patches": 47,
+        "predicted_variance": {
+          "nominal3842": 8.132470862731935e-05,
+          "locked3879": 8.656635097900942e-05
+        },
+        "relative_error": {
+          "nominal3842": -0.025199719141922823,
+          "locked3879": 0.03762933395681304
+        }
+      }
+    ],
+    "3842_bin_errors": {
+      "nominal3842": {
+        "median_absolute_relative_error": 0.1555581298073556,
+        "mean_signed_relative_error": 0.16697088105419533,
+        "RMS_relative_error": 0.20416340991794082
+      },
+      "locked3879": {
+        "median_absolute_relative_error": 0.009816353226855706,
+        "mean_signed_relative_error": 0.005955546738121878,
+        "RMS_relative_error": 0.024905747150971033
+      }
+    },
+    "shadow_phases": [
+      {
+        "phase": 0,
+        "mean": 0.004907960072159767,
+        "median": 0.003938994370400906,
+        "fraction_at_or_below_black_subtracted_zero": 0.0685696072048611,
+        "actual_normalized_ADC_floor": -0.06670247570682163,
+        "fraction_at_ADC_floor": 0.0,
+        "minimum": -0.03966664895415306
+      },
+      {
+        "phase": 1,
+        "mean": 0.008415129035711288,
+        "median": 0.006754777394235134,
+        "fraction_at_or_below_black_subtracted_zero": 0.021599663628472224,
+        "actual_normalized_ADC_floor": -0.06668511344770338,
+        "fraction_at_ADC_floor": 0.0,
+        "minimum": -0.04254695773124695
+      },
+      {
+        "phase": 2,
+        "mean": 0.008390400558710098,
+        "median": 0.006706711370497942,
+        "fraction_at_or_below_black_subtracted_zero": 0.020623101128472224,
+        "actual_normalized_ADC_floor": -0.06680666113200176,
+        "fraction_at_ADC_floor": 0.0,
+        "minimum": -0.032312676310539246
+      },
+      {
+        "phase": 3,
+        "mean": 0.0031116993632167578,
+        "median": 0.0026045481208711863,
+        "fraction_at_or_below_black_subtracted_zero": 0.10527208116319445,
+        "actual_normalized_ADC_floor": -0.06680666113200176,
+        "fraction_at_ADC_floor": 0.0,
+        "minimum": -0.026371050626039505
+      }
+    ],
+    "calibration_code_observation": "estimate_noise currently rejects phase patches with>=1% samples<=0 after black subtraction. io.read_raw deliberately retains negative read noise. Actual normalized ADC floor is about-.0667, not0. Existing3842wholecapture fit excludesdeep shadows, so archivedbins cannot directly validate readterm atmeshlevels. Investigate floor-aware source-only noise diagnostics before choosing modelconditioning.",
+    "new_neural_forwards": 0,
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "scope": "Compare two alreadyfixed profiles to archived3842measurements; no coefficient fit or reference/model-output use. Analyze storedactualRAWcontext only. Single-captureHaartexture/correlation limits remain; no calibrationtruth/quality/default change."
+  },
+  "ADC_floor_mesh_context": {
+    "status": "completed-actual-stored-mesh-context-floor-aware-Haar-check",
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/calibration-executed-v1.py",
+      "sha256": "49fc00d2f1ff9bf52c18bb16291d26e670f58702f133a8244bf4dfca09bf0918"
+    },
+    "inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/result-v1.json",
+      "sha256": "6b4afa65727e4ee792e4bbadcb96c3fc63ea8bbaf82bf3b18d7556efa839dcaa"
+    },
+    "legacy_zero_floor_estimate": {
+      "shot": null,
+      "read": null,
+      "reliable": false,
+      "reason": "insufficient_flat_patches",
+      "candidate_patches": 4096,
+      "accepted_patches": 51,
+      "intensity_span": 0.0,
+      "reference_intensity": null,
+      "reference_variance": null,
+      "shot_interval": null,
+      "read_interval": null,
+      "bins": [],
+      "lower_clip_levels": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "lower_clip_tolerances": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "metadata_ADC_floor_estimate": {
+      "shot": null,
+      "read": null,
+      "reliable": false,
+      "reason": "insufficient_intensity_span",
+      "candidate_patches": 4096,
+      "accepted_patches": 2134,
+      "intensity_span": 0.004957086604554204,
+      "reference_intensity": 0.0035299600567668676,
+      "reference_variance": 6.729862434440292e-06,
+      "shot_interval": null,
+      "read_interval": null,
+      "bins": [
+        {
+          "mean": 0.0019498104229569435,
+          "variance": 3.6694426626127097e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0022284514270722866,
+          "variance": 4.109913334104931e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0024297935888171196,
+          "variance": 4.396071062728879e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0026596547104418278,
+          "variance": 4.9300319915346336e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0028248338494449854,
+          "variance": 5.1741244533332065e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.003005090751685202,
+          "variance": 5.46582509741711e-06,
+          "patches": 134
+        },
+        {
+          "mean": 0.0031698259990662336,
+          "variance": 5.853868515259819e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.00341729330830276,
+          "variance": 6.238354217202868e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.0036822049878537655,
+          "variance": 6.887280960654607e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.00418152566999197,
+          "variance": 7.568067758256802e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.004807819612324238,
+          "variance": 8.954028089647181e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.005267135798931122,
+          "variance": 9.431695616513025e-06,
+          "patches": 133
+        },
+        {
+          "mean": 0.005591046065092087,
+          "variance": 1.0342094356019516e-05,
+          "patches": 133
+        },
+        {
+          "mean": 0.005993497557938099,
+          "variance": 1.0850268154172227e-05,
+          "patches": 133
+        },
+        {
+          "mean": 0.0064246999099850655,
+          "variance": 1.1457235814305022e-05,
+          "patches": 133
+        },
+        {
+          "mean": 0.00751451263204217,
+          "variance": 1.3721192772209179e-05,
+          "patches": 133
+        }
+      ],
+      "lower_clip_levels": [
+        -0.0667024776339531,
+        -0.06668511033058167,
+        -0.06680665910243988,
+        -0.06680665910243988
+      ],
+      "lower_clip_tolerances": [
+        8.138417797454167e-06,
+        8.13828592072241e-06,
+        8.139212695823517e-06,
+        8.139212695823517e-06
+      ]
+    },
+    "legacy_profile_consistency": {},
+    "corrected_profile_consistency": {
+      "nominal3842": {
+        "median_absolute_relative_variance_error": 0.6937949827910616,
+        "mean_signed_relative_variance_error": 0.7217792213109333
+      },
+      "locked3879": {
+        "median_absolute_relative_variance_error": 0.05811421078145207,
+        "mean_signed_relative_variance_error": -0.03373021991810064
+      }
+    },
+    "profiles_are_fixed_not_fitted_here": true,
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "scope": "Same stored signed768RAW context; correctedADCfloorvalidation, no source/HDDreads orreference/modeloutputuse. Narrowcontextspanstillcannotidentifyshot/read. Haartexture/correlation limitthisdiagnostic;donotlabelgroundtruthnoise."
+  },
+  "published_images": {
+    "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-profile-transfer-v1/manifest.json",
+    "sha256": "528237f3fe47e5db873344f43c48066c53a368e435399b5bd27ea5c8620c8a10"
+  },
+  "independent_audit": {
+    "status": "passed-independent-scalar-and-native-pixel-audit",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/independent-audit-v1.py",
+      "sha256": "7ff810a0149839a63715b5cf6b422c11aa1ba0e79489c366cbea913bb1402b8f"
+    },
+    "cases": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/noise-calibration-adc-floor-v1/cases-v1.jsonl",
+      "sha256": "6c36db921ae61ff404f4594ac83b10e6c19bec7d43e72f0f7657f55d541f713d"
+    },
+    "manifest": {
+      "path": "/home/dllu/proj/demosaic/docs/images/gfx-green-mesh-profile-transfer-v1/manifest.json",
+      "sha256": "528237f3fe47e5db873344f43c48066c53a368e435399b5bd27ea5c8620c8a10"
+    },
+    "case_count": 240,
+    "scalar_max_error": 0.0,
+    "statistics": {
+      "old_estimate": {
+        "accepted": 192,
+        "all_over1dB": 55,
+        "inside_over1dB": 0,
+        "all_worst_dB": 7.042466427120617,
+        "inside_worst_dB": 0.4404950919183843
+      },
+      "estimate": {
+        "accepted": 192,
+        "all_over1dB": 50,
+        "inside_over1dB": 0,
+        "all_worst_dB": 7.042466427120617,
+        "inside_worst_dB": 0.6256640707457821
+      }
+    },
+    "native_boards": 4,
+    "native_board_cells": 24,
+    "native_board_pixel_samples": 1843200,
+    "independent_numpy_transform_max_uint8_difference": 0,
+    "independent_numpy_transform_different_samples": 0,
+    "exact_board_to_triplet_cells": 12,
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "noise_observations": 0,
+    "estimator_calls": 0,
+    "scope": "Python math variance ratios and NumPy display transforms; no neural imports or original-media reads."
+  },
+  "actual_views": {
+    "original_two_region_new_profile_board": true,
+    "four_native_matched_boards": true,
+    "four_native_triplets": true,
+    "pixel_size": [
+      160,
+      160
+    ],
+    "display_exposure": 16.0
+  },
+  "findings": "Both V114 and V115 retain more diagonal mesh texture with the fixed nearby-capture profile than their nominal-prior controls. The fine lattice remains weak and soft versus the independent ISO100 reference; residual irregular texture, grain/detail ambiguity and isolated blue point remain. This is a limited qualitative conditioning gain, not a trained-model or calibrated-quality win.",
+  "actual_execution": {
+    "new_root_forwards": 2,
+    "new_encoder_forwards": 2,
+    "nominal_control_forwards": 0,
+    "rendering_neural_module_calls": "forbidden",
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "CUDA_initialized": false
+  },
+  "conditioning_selection": "One unchanged external input-only DSCF3879 ISO6400 profile, established Oct17 before new mesh case. No coefficient or strength sweep; no output/reference/JPEG fitting. Same exact signed RAW and all input fields except variance map.",
+  "reference_scope": "Corrected DSCF3835 ISO100 f/5.6 2.5s, 46s earlier than DSCF3842 ISO6400 f/1.7 1/300s; independent AHD and camera JPEG, not exactGT. No real-photo PSNR.",
+  "scope": "Native768 context only. Existing nominal machine receipts and predictions remain intact; no full-frame or speed result. Main DSCF3879/3880 test and frozen V119 training/queues unchanged."
+}

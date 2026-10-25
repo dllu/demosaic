@@ -1,12 +1,15 @@
 # Fine green fence beside the red train
 
-**This additional real-capture case exposes missing weak detail in the useful
-current models.** V112, V114, V115 Small and V117 largely erase the fine green
-chain-link lattice while retaining the broad rails. RawNIND pre-upsampled keeps
-more directional texture, without clearly recovering the reference lattice.
+**This additional real-capture case exposes missing weak detail and sensitivity
+to noise conditioning.** With the nominal ISO6400 prior, V112, V114, V115 Small
+and V117 largely erase the fine green lattice while retaining broad rails.
+A fixed profile from nearby DSCF3879 makes more diagonal mesh texture visible in
+V114 and V115, but the fine lattice remains much weaker than the reference.
+RawNIND pre-upsampled keeps more directional texture under the nominal prior,
+without clearly recovering the reference lattice.
 The ISO6400 camera JPEG has very faint mesh amid grain; the separate ISO100
-capture makes the physical structure much clearer. This remains an adverse case,
-with no new restoration-quality gain established here.
+capture makes the physical structure much clearer. This remains an adverse case;
+the limited conditioning gain is not a new trained-model result.
 
 The case pairs **DSCF3842 ISO6400** with **DSCF3835 ISO100**, taken 46 seconds
 earlier. Both camera JPEGs are included.
@@ -16,7 +19,64 @@ The existing DSCF3879/3880 standing scene and its six regions remain in use.
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
-## Native comparisons
+## Fixed nearby-capture profile
+
+The same V114 and V115 checkpoints were each run once more on the stored 768px
+RAW context with one unchanged **DSCF3879 ISO6400 input-only profile**. It was
+already recorded on October 17, before this mesh case. No coefficient sweep or
+reference/output fitting was performed. The nominal predictions are reused.
+
+| Conditioning | Shot | Read variance |
+| --- | ---: | ---: |
+| Generic ISO6400 prior | .00128 | 6.5536e-6 |
+| Fixed nearby DSCF3879 profile | .0014635775921166604 | 1.0715704128646712e-6 |
+
+This changes the physical profile, including a higher shot term and lower read
+term; it is not a uniform strength multiplier. All observed RAW values, WB,
+matrix, CFA geometry, ROI/reference/JPEG pixels and checkpoint bytes are identical.
+Only the coefficients and their variance map change. The latter's median ratio
+to the nominal map is .6344 in this context.
+
+The two **native 160px** rows below share **+4EV display**. Columns: ISO6400 camera
+JPEG, noisy Malvar, V114 nominal, V114 nearby profile, independent ISO100 AHD,
+ISO100 camera JPEG. Neither ISO100 column is exact GT.
+
+![Left mesh: fixed V114 checkpoint with nominal and nearby-capture profiles](images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-left-4EV.png)
+
+![Right mesh: the same matched V114 operators](images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-right-4EV.png)
+
+Both V114 and V115 show more diagonal structure, especially in the right crop.
+The mesh remains soft, weak and irregular; grain/detail ambiguity and the small
+blue point remain. This is a useful qualitative improvement in conditioning,
+without establishing accurate lattice recovery or broad model superiority.
+
+V115 matched comparisons: [left](images/gfx-green-mesh-profile-transfer-v1/V115-fine-green-mesh-left-4EV.png) ·
+[right](images/gfx-green-mesh-profile-transfer-v1/V115-fine-green-mesh-right-4EV.png).
+Native noisy/denoised/independent-reference triplets:
+[V114 left](images/gfx-green-mesh-profile-transfer-v1/triplets/crop-4d11d77a521a9cc0.png) ·
+[right](images/gfx-green-mesh-profile-transfer-v1/triplets/crop-8bcc58b8b6da3dc8.png) ·
+[V115 left](images/gfx-green-mesh-profile-transfer-v1/triplets/crop-cc155f6f0840d134.png) ·
+[right](images/gfx-green-mesh-profile-transfer-v1/triplets/crop-abe369d2868bd951.png).
+
+The archived full-image DSCF3842 Haar bins have median absolute relative variance
+mismatch of 15.56% with the nominal prior and .98% with the fixed nearby profile.
+An [ADC-floor correction](noise-calibration-fit-support.md) additionally allows
+valid negative read-noise samples in the actual mesh context: accepted patches
+rise 51→2,134. Their median mismatches are 69.38%/5.81%, respectively. These are
+input-only consistency diagnostics, not known camera-noise errors. The context's
+intensity span is only .004957, so it remains correctly rejected for separate
+shot/read fitting. Texture, correlation and selection can bias these statistics;
+the transferred profile is not dedicated flat/dark calibration.
+
+[Prospective plan, execution, actual review and independent audit](results/gfx-green-mesh-profile-transfer-v1.json) ·
+[Source/ROI/checkpoint/conditioning/display metadata](images/gfx-green-mesh-profile-transfer-v1/manifest.json).
+Exactly two new root/DINO forwards were executed, CPU FP32, with zero new RAW
+decodes, noisy observations or training. Rendering forbids neural module calls.
+Independent NumPy display arithmetic reproduces all 24 board cells exactly;
+all 12 triplet cells equal their board counterparts. No full-frame, speed or
+pixelwise quality claim is made.
+
+## Nominal-prior controls
 
 Columns: ISO6400 camera JPEG, noisy Malvar, V112, V114, V115 Small, V117,
 RawNIND pre-upsampled, independent ISO100 AHD, ISO100 camera JPEG. Each cell is
@@ -73,16 +133,16 @@ followed by native integer translation selects coordinates. Coarse binning is
 only for registration analysis. The displayed pixels are never resized or warped;
 residual lens/rendering differences remain.
 
-All RAW methods receive the same signed black-subtracted/white-normalized
-observation, RGGB geometry, noisy-capture WB/matrix and nominal ISO6400 prior:
+The original nominal comparison gives all five RAW methods the same signed
+black-subtracted/white-normalized observation, RGGB geometry, noisy-capture WB/matrix and nominal ISO6400 prior:
 **shot .00128, read variance 6.5536e-6**. This is a disclosed generic sensor prior,
 not measured camera calibration. The existing DSCF3842 input-only fit was
 unreliable because of insufficient intensity span. Restoration parameters are
 fixed before viewing outputs. The reference uses LibRaw AHD camera RGB calibrated
 only to its own RAW capture.
 
-This is a **768px context comparison**, with exactly one new CPU IEEE-FP32
-forward for each of the five methods and four DINO forwards. It is separate
+The original five-method run is a **768px context comparison**, with one CPU
+IEEE-FP32 forward for each of the five methods and four DINO forwards. It is separate
 from the complete102MP standing-scene restorations. All predictions are retained
 as FP32 arrays, and future checkpoint additions can reuse these controls without
 new control inference. A retained-output integration check forbids model loading
