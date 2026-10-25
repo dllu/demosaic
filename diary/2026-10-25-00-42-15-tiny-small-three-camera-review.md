@@ -53,4 +53,3 @@ adds no Torch import or neural work.
 [Native triplet/board metadata](../docs/images/current-cameras-v114-v115/manifest.json).
 README/current-model/real-camera/reference guides now link these current results.
 The original V117/V118 training and downstream owners remain unchanged.
-
