@@ -11,7 +11,7 @@ Current V117/V118 retain their frozen 90,864 membership and matched recipes.
 
 [Latest decisions, coverage and future manifests](results/source-tail-top512-review-v1.json) ·
 [Actual six-ROI reader checks](results/source-tail-top512-ROI-reader-v1.json) ·
-[Original source-sampler compatibility](results/source-tail-top512-sampling-reference-v1.json).
+[Source schedule and native augmented-reader preflight](results/cleaned90791-source-reader-preflight-v1.json).
 
 ## Selection and actual viewing
 
@@ -169,9 +169,9 @@ binning and inspection layout. [Metadata](images/source-tail-top256-20261025-v1/
 
 ### Preserve draws for a matched curation comparison
 
-The preceding 90,802-source sampling study removes 62 rows from the current
-90,864-source cohort, changing integer source indices. At seed64 over a
-prospective 20,000-update schedule, ordinary
+The latest 90,791-source cohort removes 73 rows from the current 90,864-source
+corpus, changing integer source indices. At seed64 over a prospective
+20,000-update schedule, ordinary
 sampling from the filtered manifest changes 98,605 of 112,330 photo source
 draws. This would change every Commons batch, far beyond the excluded photos.
 
@@ -182,26 +182,34 @@ that reference. Ordinary photographic sampling remains uniform over eligible
 sources. Reviewed ROI overrides occur before retries, preserving their geometry
 RNG even when the nominal source was excluded.
 
-| Sampling for the prepared 90,802-source cohort | Changed photo source draws | Affected Commons batches |
+| Sampling for the prepared 90,791-source cohort | Changed photo source draws | Affected Commons batches |
 | --- | ---: | ---: |
 | Filtered manifest indices | 98,605 | 10,032 |
-| Original reference with exclusion retries | 53 | 52 |
+| Original reference with exclusion retries | 67 | 66 |
 
-These are prospective source choices at the original seed/quotas, rather than
-completed training or measured quality. The actual sampler's counts match all
-112,330 scheduled photo draws. A separate real augmented-reader check exercises
-93 native256 indices: all 93 default targets match the frozen V117 reader;
-40 unchanged future targets remain exact and all 53 excluded-photo draws are
-replaced. It covers the six ROIs and four nominal excluded sources overridden
-by an ROI. All 26,148,864 compared FP32 clean values match, and the future reader
-opens no excluded cache. [Schedule, real-reader evidence and 45 passing tests](results/source-preserving-curation-v1.json).
+These are prospective source choices at the original seed/quotas. The actual
+sampler's counts match all 112,330 scheduled photo draws, preserving source
+selection RNG for every unaffected draw. The real augmented reader checks
+107 native256 targets: all 67 excluded-photo draws are replaced, and 40 unchanged
+targets match the frozen control byte hashes. This covers the six ROIs and four
+nominal excluded sources overridden by an ROI. Every new target is finite and
+the future reader opens no excluded or held-out cache.
 
-The latest 90,791-source cohort also passes the actual source-reference
-constructor: all active metadata/cache paths are an exact subset of the original
-90,864 identities, and all 73 excluded identities route to eligible rows without
-opening images. [Current compatibility receipt](results/source-tail-top512-sampling-reference-v1.json).
-The complete schedule/native-reader counts above retain their 90,802 membership
-scope; they are not reattributed to this newer cohort.
+All 55 reader source files remain byte-identical to the preceding checked
+implementation. Its 93 original target hashes are reused; only 14 newly affected
+indices need additional frozen-original clean reads. The new future reader
+generates 21,037,056 FP32 clean values, with matching original hashes for the
+7,864,320 values in unchanged targets. Global RNG states remain unchanged and
+CUDA stays uninitialized. There are no neural forwards, noise observations,
+optimizer updates or RAW decodes. Pixel equivalence outside the sampled indices
+is not independently enumerated.
+[Latest schedule and actual-reader evidence](results/cleaned90791-source-reader-preflight-v1.json).
+
+The preceding 90,802-source comparison retains its 53 changed draws/52 affected
+batches, 93 native reader checks and 45 passing implementation/regression tests.
+[Preserved earlier evidence](results/source-preserving-curation-v1.json).
+The [initial 90,791 source-reference constructor check](results/source-tail-top512-sampling-reference-v1.json)
+also retains its narrower all-73-excluded-identities membership scope.
 
 For a future matched recipe using the latest manifest and rebound six-ROI
 catalogue, the reference fields remain:
@@ -215,7 +223,12 @@ The trainer snapshots those reference bytes, records the hash and rejects a
 changed or disabled reference on resume. The recipe controller includes the
 reference as a frozen input. Omitting it retains existing sampling. Current
 V117/V118 keep their original recipes and executed sources; this optional mode
-is ready for a later curation comparison after their quality review.
+is ready for later training. An isolated curation comparison can reuse the
+corresponding completed V117 or V118 control when initializer, coefficient,
+seed, data outside Commons, optimizer, LR, horizon and every other recipe setting
+match. Its actual production prefix still needs checking when run. This is an
+option for attributing a data effect; the preflight does not select the next
+model baseline or establish a restoration-quality gain.
 
 ### Latest prepared cohort
 

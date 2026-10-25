@@ -30,8 +30,9 @@ Originals, existing manifests and protected evaluation scenes remain read-only.
 The GFX train/platform pair and siblings remain outside training.
 The optional [source-sampling reference](next-source-tail-review.md#preserve-draws-for-a-matched-curation-comparison)
 keeps unaffected photo/geometry draws exact when comparing a subset with its
-original corpus. The preceding 90,802 native256 reader and snapshot/resume checks
-pass; the latest 90,791 source-reference constructor and six-ROI checks also pass.
+original corpus. The latest 90,791 cohort passes full source-schedule accounting
+and 107 actual native256 reader checks, including every changed draw; all six
+ROI targets remain valid. [Current preflight](results/cleaned90791-source-reader-preflight-v1.json).
 Current V117/V118 remain on their original frozen inputs.
 
 The additional [3,809-source arrival batch](commons-download.md) has finalized3,807
