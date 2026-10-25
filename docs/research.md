@@ -481,6 +481,12 @@ signal-independent noise with spectral/histogram constraints. This motivates
 checking real sensor correlations; it does not supply a calibration for our
 GFX captures. No fabricated camera-specific dark-noise model is added.
 
+The [current PNNP release check](calibrated-noise-releases.md) pins its April2026
+author resources and both LRID cards. Released noise weights cover A7S2/IMX686;
+new cameras require measured dark frames. LRID is CC BY-NC4.0 and is excluded
+from training under the commercial-use data requirement. No GFX calibration,
+new restoration result or change to the running loss pair follows.
+
 The [official darktable5.6 release](https://www.darktable.org/2026/06/darktable-5.6.0-released/)
 names RawNIND UtNet2 as its default RAW AI model, already covered by our existing
 reference. That integration is not a separate independent restoration method.
