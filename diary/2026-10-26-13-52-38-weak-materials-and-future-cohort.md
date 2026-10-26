@@ -85,4 +85,3 @@ introduced by these publication checks.
 [Actual review, manifests, native reconstruction and reader](../docs/results/thin-photographic-materials-v1.json) ·
 [Preserved verifier correction](../docs/results/thin-photographic-materials-publication-v1.json) ·
 [Current material guide](../docs/weak-photographic-targets.md#prepared20-region-material-extension).
-
