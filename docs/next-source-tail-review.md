@@ -1,9 +1,13 @@
 # High-loss source review
 
-**The latest pass visually reviews 336 additional sources: 332 retained and four
-withheld.** The prepared future cohort has **90,787 training sources**. Every
+**The current Small-model loss review retains all28 selected sources** after
+native source/target inspection and four larger checks. It adds no exclusions
+to the running trials. [Current losses, examples and scope](current-source-loss-review.md).
+
+The preceding corpus-cleanup pass reviews336 additional sources:332 retained and
+four withheld. The selected V121 cohort has **90,787 training sources**. Every
 still-active source through rank 768 in both original difficulty lists now has
-a visual decision. V119 continues its frozen **90,791-source** experiment from
+a visual decision. V119 used its frozen **90,791-source** experiment from
 V115 Small; its [complete quality review](v119-quality.md) is published. These
 four new withholds are selected for V121, queued after the V120 paired32 control,
 with no change to V119/V120 membership. Both new arms passed implementation
@@ -110,8 +114,9 @@ cropping, binning, context-thumbnail creation and display/layout conversion.
 These sources remain eligible under ordinary sampling. This review adds no new
 ROI quota and does not change V119's existing six examples. A separate
 [weak photographic material bank](weak-photographic-targets.md) prepares eight
-other measured low-contrast contexts while preserving the original six; it is
-untrained and does not change source membership.
+other measured low-contrast contexts while preserving the original six. V121
+selects it after implementation checks; endpoint quality remains unmeasured.
+The region bank itself does not change source membership.
 
 ## Future data and reader checks
 
@@ -161,9 +166,10 @@ The targeted indices are selected by metadata search through index 512382;
 this is not an executed 20k training schedule. The constructor receipt retains
 its earlier, narrower scope; the additive actual-reader receipt records the
 subsequent augmented-pixel check. No neural inference, new noise observations,
-RAW decoding or optimizer updates occur in either check. These inputs are
-prepared and untrained; neither a corpus defect rate nor a restoration gain
-follows from this targeted review.
+RAW decoding or optimizer updates occur in either reader check. V121 now selects
+these inputs after discarded CPU/CUDA updates, with its full run queued after
+V120. Neither a corpus defect rate nor a restoration gain follows from this
+targeted review; endpoint quality is still pending.
 
 ## Preserved preceding evidence
 

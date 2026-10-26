@@ -80,6 +80,11 @@ and photographic draws, not32 independent photographs or additive training-loss
 contributions. High loss nominates visual inspection rather than automatic
 source removal. [Trace definitions and limitations](source-loss-diagnostics.md).
 
+The [bounded first800-update source review](current-source-loss-review.md)
+inspects28 selected photographs from95 distinct traced photos, including four
+larger native views. All28 are retained; current manifests remain unchanged.
+This is source-quality review, not a new endpoint-performance result.
+
 Preparation verifies the actual clean/paired/native cached readers without
 RAW decoding or neural calls. A first preflight used the wrong native-field
 name; the corrected version uses `camera_rgb`, the actual clean-reader rows and

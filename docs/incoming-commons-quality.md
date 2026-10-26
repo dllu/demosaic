@@ -14,6 +14,11 @@ inspection, rather than native inspection of every image.
 
 ## Current data and training
 
+The [first current Small-model loss review](current-source-loss-review.md)
+inspects28 selected photographs from the first800 V120 updates. All are retained
+after native views and four larger checks. Actual training losses now nominate
+source/ROI inspection; no new dataset exclusion follows this bounded sample.
+
 | Cohort | Training sources | Status |
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
