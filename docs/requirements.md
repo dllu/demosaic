@@ -12,6 +12,12 @@ weak detail and dark-camera behavior still need work. The stronger released
 RawNIND wins four of nine camera scene means; this small development set and
 the GFX gallery do not establish broad real-camera superiority. Quality precedes speed.
 
+The [V120/V121 data trials](paired32-weak-detail-training.md) and
+[V122/V123 learned-frequency scope comparison](learned-raw-frequency-training.md)
+are active. The latter uses the prepared90,786-source/fourteen-region corpus;
+its adapter-only arm preserves the parent restoration weights. Their successful
+implementation checks do not yet establish better image quality.
+
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
 | Excellent joint restoration | V114 photo36.97973dB,422/427 source gains over V112; improved8/16px carrier response | Recover finest detail and reduce adverse cases before SOTA claims |

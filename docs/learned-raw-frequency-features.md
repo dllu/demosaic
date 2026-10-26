@@ -6,6 +6,8 @@ and starts with exactly zero effect on the parent. It passes mathematical,
 initialization, gradient, checkpoint and discarded CPU/CUDA training checks.
 **Trained image quality and complete-frame behavior remain unmeasured.**
 Current model recommendations and the original V120/V121 trials are unchanged.
+The subsequent [V122/V123 full-budget scope comparison](learned-raw-frequency-training.md)
+is running; its endpoint image quality remains unmeasured.
 
 [Execution, retained arrays and independent state audits](results/raw-frequency-features-engineering-v1.json) ·
 [Implementation](../src/demosaic/raw_frequency_features.py) ·
@@ -84,7 +86,7 @@ The multiplier defaults to 1 and affects only the five new parameter tensors.
 Invalid multipliers or incompatible RAW-head/late-head/normalization-augmentation
 combinations are rejected. A changed multiplier is rejected on resume. The
 checked prototype uses a fresh initializer and optimizer; it is not a recommended
-trained checkpoint or a newly launched full-budget recipe.
+trained checkpoint. The separate V122/V123 recipes now test full-budget training.
 
 Construction preserves global Torch RNG. The zero projection preserves initial
 parent outputs and common gradients, including CPU BF16 autocast checks. All

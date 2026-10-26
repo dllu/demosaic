@@ -114,11 +114,32 @@ def validate_late_rgb_only(config):
     return value
 
 
+def validate_raw_frequency_only(config):
+    value = config.get("raw_frequency_only", False)
+    if type(value) is not bool:
+        raise ValueError("RAW frequency-only training must be a boolean")
+    if value and any(
+        config.get(key, False)
+        for key in (
+            "raw_kernel_only",
+            "refiner_only",
+            "coarse_refiner_only",
+            "pyramid_refiner_only",
+            "late_rgb_only",
+        )
+    ):
+        raise ValueError("RAW frequency-only training cannot combine with another head-only mode")
+    return value
+
+
 def make_optimizer(model, config):
     """Select optional RAW-head warmup or packed-phase learning-rate groups."""
     late_only = validate_late_rgb_only(config)
+    frequency_only = validate_raw_frequency_only(config)
     if late_only and model.config.late_rgb_refinement == "none":
         raise ValueError("Late RGB-only training requires late RGB refinement")
+    if frequency_only and not model.config.raw_frequency_features:
+        raise ValueError("RAW frequency-only training requires RAW frequency features")
     raw_kernel_only = config.get("raw_kernel_only", False)
     if type(raw_kernel_only) is not bool:
         raise ValueError("RAW kernel-only training must be a boolean")
@@ -173,6 +194,9 @@ def make_optimizer(model, config):
     if late_only:
         model.requires_grad_(False)
         model.pretrained_rgb.rgb_refinement.requires_grad_(True)
+    if frequency_only:
+        model.requires_grad_(False)
+        model.pretrained_rgb.raw_frequency.requires_grad_(True)
     parameters = [p for p in model.parameters() if p.requires_grad]
     if multiplier != 1:
         phase = [
@@ -441,6 +465,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
 def _train(config, *, resume=None, initialize=None, stop_after=None):
     source_loss_every = validate_source_loss_every(config.get("source_loss_every", 0))
     late_only = validate_late_rgb_only(config)
+    frequency_only = validate_raw_frequency_only(config)
     training_context = TrainingContext.from_config(config)
     objective = validate_reconstruction_objective(
         config.get("reconstruction_objective", "charbonnier-v1")
@@ -628,6 +653,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     if resume_state:
         if validate_late_rgb_only(resume_state["config"]) != late_only:
             raise ValueError("Resume late RGB training scope differs; initialize a new run")
+        if validate_raw_frequency_only(resume_state["config"]) != frequency_only:
+            raise ValueError("Resume RAW frequency training scope differs; initialize a new run")
         require_resume_execution(
             resume_state["config"],
             config["training_execution"],
@@ -1129,7 +1156,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             model,
             ema,
             min(config.get("ema_decay", 0.999), (1 + step) / (10 + step)),
-            trainable_only=late_only,
+            trainable_only=late_only or frequency_only,
         )
         if log_step:
             metrics = {

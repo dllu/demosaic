@@ -64,7 +64,10 @@ now has an optional implementation and discarded mature-V115 CPU/CUDA checks. It
 uses signed complex phase features as RGB-stem input, with zero initial output,
 instead of the earlier fixed MHC correction. Parent preservation, finite mixed
 training and resume checks pass, including native256/B16/BF16 on GB10. No
-trained-quality or full-frame gain is established; current V120/V121 trials and model choices are unchanged.
+trained-quality or full-frame gain is established. The subsequent
+[V122/V123 trial](learned-raw-frequency-training.md) compares training only this
+adapter with updating the common restoration path too, on the same cleaned
+data. Original V120/V121 data trials continue; endpoint quality remains pending.
 
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing

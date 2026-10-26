@@ -34,7 +34,7 @@ updates the current guides without an old promotion gate.
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [V120/V121 controlled data trials](paired32-weak-detail-training.md) · [V119 complete quality review](v119-quality.md) · [Native-camera comparison](native-camera-development.md) · [Current model choices](current-model.md) |
+| Current work | [V122/V123 learned frequency trials](learned-raw-frequency-training.md) · [V120/V121 controlled data trials](paired32-weak-detail-training.md) · [V119 complete quality review](v119-quality.md) · [Native-camera comparison](native-camera-development.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V114, V115 and useful alternatives](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |

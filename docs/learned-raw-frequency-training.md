@@ -1,0 +1,115 @@
+# Learned RAW frequency features: V122/V123 training
+
+**V122 is training its original 20,000 updates; V123 follows.** These are the
+first full-budget trials of the [learned frequency input adapter](learned-raw-frequency-features.md).
+All four discarded CPU/CUDA checks passed. Endpoint PSNR and native image
+quality remain unmeasured. V114, V115 and V117 retain their documented uses.
+
+[Launch and implementation evidence](results/v122-v123-frequency-training-start-v1.json) ·
+[V122 recipe](../configs/quality-v115-learned-frequency-only-v122.yaml) ·
+[V123 recipe](../configs/quality-v115-learned-frequency-joint-v123.yaml) ·
+[Runner](../scripts/train_raw_frequency_trial.py).
+
+## Question and controlled difference
+
+V119 improved photo PSNR while worsening known-camera performance and its ADC
+color tail. The RAW mesh diagnostics found attenuated physical frequency
+structure. This experiment tests learned frequency features while preserving
+the useful parent's restoration weights, alongside a jointly trained arm.
+
+Both start from final V115 Small EMA, SHA256
+`fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84`,
+with the same zero-output 3,264-parameter adapter. Official DINOv3
+ConvNeXt-Small remains frozen, hash
+`691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14`.
+
+| Setting | V122 | V123 |
+| --- | --- | --- |
+| Trainable restoration parameters | New adapter only: 3,264 | Common restoration and adapter: 32,907,968 |
+| Trainable tensors / AdamW states | 5 | 94 |
+| Common restoration learning rate | Frozen | 1e−5 |
+| Adapter learning rate | 2e−4 | 2e−4 |
+| Common model / EMA tensors | All 91 retained exactly | Updated normally |
+| Parent, data, seed and budget | Same | Same |
+
+The different base-LR/multiplier representations implement the same adapter
+learning rate. Both retain the same warmup, decay, weight decay and gradient
+clipping rule. Freezing changes which gradients participate in that rule.
+V122 still backpropagates through the RGB trunk to the input adapter.
+
+The adapter produces exactly zero features for spatially constant per-phase
+measurements, including after learning. Freezing the common weights therefore
+protects that parent behavior. This does not protect noisy or slowly varying
+backgrounds, establish better camera color generally, or fix existing parent
+errors. V123 tests the quality tradeoff of allowing the common path to adapt.
+
+## Shared data and training
+
+Both use the prepared **90,786-source corpus and fourteen reviewed photographic
+regions**, corrected paired32 groups and existing native-RAW cohort. The new
+snapshot withholds the individually inspected roofing advertisement; original
+V120/V121 cohorts remain immutable. [Source review](current-source-loss-review.md) ·
+[Photographic targets](weak-photographic-targets.md).
+
+Settings are seed 66, native 256px/B16/BF16, 20,000 fresh updates, 200-step
+warmup, 50% Commons/procedural, 25% paired and 25% native. Only the selected
+domain loads a batch. Workers stay at zero and CPU threads at two for these
+runs; this is a quality comparison, not a throughput sweep.
+
+Targets retain 4× binning → geometry → final area2 downsampling, zero optical
+PSFs, weak textures .15, photographic contrast attenuation .25, reconstruction
+epsilon .0003 / paired .0001 and band loss off. Detached source diagnostics use
+existing predictions every 100 updates. No DINO feature fit repeats. Standing
+GFX3879/3880 and mesh3842/3835 captures, JPEGs and siblings stay out of training.
+
+Compared with V121, this pair changes architecture, training seed and one
+withheld source. V122 versus V123 is the controlled scope comparison. Comparing
+either to V121 alone cannot isolate an architecture effect.
+
+## Completed implementation checks
+
+Each arm completes 16 fresh and two resumed updates at CPU128/B1/FP32 and
+GB10 CUDA256/B16/BF16: nine Commons, three paired and six native batches.
+The arms use identical prepared inputs and identical first outputs within each
+device setting. These deterministic observations are reused for a controlled
+comparison, not independent noise samples for each arm.
+
+Initial shared weights match all 91 parent tensors. V122 retains them in model
+and EMA after training; only five optimizer states exist. V123 has 94 optimizer
+states. All model/EMA/AdamW values remain finite; gradients reach all five new
+adapter tensors. Changed-scope resume rejects before a neural forward. Valid
+resume restores step 16 before new steps 17/18, preserving the 16-step files.
+
+Twelve new scope tests pass, including FP32/BF16 learning and constant-field
+preservation for all four CFAs. Twenty-three existing optimizer/head-only
+regressions pass. Twelve new evaluation-boundary tests reject short, nonfinite,
+wrong-scope or drifting frozen states without neural calls.
+
+Production starts freshly from V115; first inputs/outputs must match its CUDA
+check. There is no automatic retry or budget extension. Launch requires 56 GiB
+available RAM, the CUDA allocator cap is 16 GiB, and the training guard uses
+**32 decimal GB** (about 29.8 GiB). The first frozen plan mislabeled that runtime
+field as GiB; its configured value and executed bytes are preserved. The public
+runner corrects the field name. Disk reserves are 96 GiB internally and 208 GiB
+externally. Existing jobs retain their original owners.
+
+## Endpoint evidence
+
+Eight queued single-view FP32 stages evaluate only the new endpoints: all 427
+photos, known/unseen measured cameras, weak carriers, color, standing GFX,
+highlights and a complete 101.996MP frame. Across both models they declare
+9,172 restoration/encoder calls and 28,380 primary/analytic observations.
+Earlier controls and input witnesses are reused from retained arrays.
+
+A queued independent NumPy audit checks saved numerical predictions and
+prepares two native noisy/restored/exact-synthetic-GT triplets per endpoint.
+The evaluator accepts the trainer's actual plan/status schema and verifies
+final optimizer steps, finite states and V122's frozen common tensors before
+releasing a checkpoint to evaluation.
+
+Matched parent/scope contrasts, local photographic-detail analysis, native
+RGB16 verification, actual image viewing and fine green mesh at both existing
+fixed noise profiles remain to be completed after training. Separate ISO100/AHD
+references stay labeled **not exact GT**. Useful gains and weaknesses will
+update the current guides; successful training or a protected flat-field
+invariant alone establishes no quality improvement.

@@ -27,6 +27,9 @@ geometry before final downsampling. [Data review](docs/incoming-commons-quality.
 [V120/V121 Small data trials](docs/paired32-weak-detail-training.md) passed their
 CPU/CUDA checks: V120 is training with corrected paired32 data; V121 follows
 with the cleaner corpus and expanded weak-detail regions. Endpoint quality is pending.
+The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
+now compares training the new input adapter alone with adapting the full
+restoration path on the same cleaned corpus. Image quality is still unmeasured.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

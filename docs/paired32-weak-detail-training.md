@@ -80,10 +80,13 @@ and photographic draws, not32 independent photographs or additive training-loss
 contributions. High loss nominates visual inspection rather than automatic
 source removal. [Trace definitions and limitations](source-loss-diagnostics.md).
 
-The [bounded first800-update source review](current-source-loss-review.md)
-inspects28 selected photographs from95 distinct traced photos, including four
-larger native views. All28 are retained; current manifests remain unchanged.
-This is source-quality review, not a new endpoint-performance result.
+The [bounded source reviews](current-source-loss-review.md) inspect28 photographs
+from the first800 updates and28 further sources nominated through5000, with
+larger native views where needed. Fifty-five are retained; one roofing
+advertisement is withheld from the prepared future90786-source snapshot.
+The original V120/V121 cohorts remain unchanged. The newer
+[V122/V123 architectural trials](learned-raw-frequency-training.md) use that
+future snapshot; this inspection is not an endpoint-performance result.
 
 Preparation verifies the actual clean/paired/native cached readers without
 RAW decoding or neural calls. A first preflight used the wrong native-field

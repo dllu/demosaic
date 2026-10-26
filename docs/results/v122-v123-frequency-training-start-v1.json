@@ -1,0 +1,172 @@
+{
+  "status": "verified-started-full-V122-with-V123-and-quality-audit-queued",
+  "recorded_local": "2026-10-25T22:48:10.638911-07:00",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/learned-frequency-training-v1/run/plan.json",
+    "sha256": "a9bb8f7fb5aca71a3af756f0d404bb658be6f39e6ef6fbc0cd44e20b76f2b5d1"
+  },
+  "quality_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V122-V123-learned-frequency-quality-v1/queue-plan-v1.json",
+    "sha256": "420d1172538b05dc9e5cc1948c6cb294ce74a8fc96fb6a086030aa4b38f60ff4"
+  },
+  "independent_audit_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V122-V123-learned-frequency-independent-audit-v1/queue-plan-v1.json",
+    "sha256": "fc5aea11b52798d444ef34eaadeab248a43d85c5d67084e365925a42a12a577b"
+  },
+  "checks": [
+    {
+      "phase": "CPU",
+      "arm": "V122",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/learned-frequency-training-v1/run/CPU-V122-result.json",
+        "sha256": "77006b85ee1038a061c05db24f8d5fdd06db76fc90f5b070cd059a93afcf64fe"
+      },
+      "optimizer_states": 5,
+      "updates": 18,
+      "all_model_EMA_optimizer_finite": true,
+      "common91_model_and_EMA_bytes_exact_at16_and18": true,
+      "CUDA_peak_allocated_bytes": 0,
+      "CUDA_peak_reserved_bytes": 0
+    },
+    {
+      "phase": "CPU",
+      "arm": "V123",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/learned-frequency-training-v1/run/CPU-V123-result.json",
+        "sha256": "b7b2dc7a224efec58c81c384392a342ccfd6f30a829652e28b553fbdb7ff5366"
+      },
+      "optimizer_states": 94,
+      "updates": 18,
+      "all_model_EMA_optimizer_finite": true,
+      "common91_model_and_EMA_bytes_exact_at16_and18": false,
+      "CUDA_peak_allocated_bytes": 0,
+      "CUDA_peak_reserved_bytes": 0
+    },
+    {
+      "phase": "CUDA",
+      "arm": "V122",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/learned-frequency-training-v1/run/CUDA-V122-result.json",
+        "sha256": "0009eaa18c86b6912a9af55cc6ccb7406abcd5b3c7a412339c64abb6b1a2e2ba"
+      },
+      "optimizer_states": 5,
+      "updates": 18,
+      "all_model_EMA_optimizer_finite": true,
+      "common91_model_and_EMA_bytes_exact_at16_and18": true,
+      "CUDA_peak_allocated_bytes": 8173707264,
+      "CUDA_peak_reserved_bytes": 9479127040
+    },
+    {
+      "phase": "CUDA",
+      "arm": "V123",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/learned-frequency-training-v1/run/CUDA-V123-result.json",
+        "sha256": "4b32b757f1ba937aeb67e0ef9d99af04fac91244db875a0d2244fb02e11af7d3"
+      },
+      "optimizer_states": 94,
+      "updates": 18,
+      "all_model_EMA_optimizer_finite": true,
+      "common91_model_and_EMA_bytes_exact_at16_and18": false,
+      "CUDA_peak_allocated_bytes": 8624142848,
+      "CUDA_peak_reserved_bytes": 10095689728
+    }
+  ],
+  "independent_saved_state_audit": {
+    "code": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/learned-frequency-training-v1/run/audit-launch-v1.py",
+      "sha256": "d061b21856f24a9a73cab243f9ef272396ed5e011b42ca942ea4f9cd2155be9d"
+    },
+    "input_batches_reconstructed": 36,
+    "tensor_fields": 330,
+    "numeric_values": 162944388,
+    "matched_initial_output_FP32_pairs": 4259840,
+    "frozen_common_bytes_checked": 1052950720,
+    "V122_V123_inputs_exact_each_device": true,
+    "production_first_input_output_matches_CUDA_check": true,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0
+  },
+  "test_results": {
+    "new_training_scope": "12 passed in24.40s",
+    "related_optimizer_head_only": "23 passed,46 deselected in24.70s",
+    "new_quality_boundary": "12 passed in2.29s",
+    "focused_passes": 47,
+    "initial_quality_test_collection": "scripts import path missing;0 tests/NN ran. Corrected documented PYTHONPATH=.:src:scripts.",
+    "source_bindings": [
+      {
+        "path": "/home/dllu/proj/demosaic/src/demosaic/train.py",
+        "sha256": "dc0e193ed7d10bfe921cc114fe9923bb222e1a6c2e2450653ff4adfa4ebb9c3f"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/tests/test_raw_frequency_training_scope.py",
+        "sha256": "bf28c6cac659b283937d0d8d23f783d1dcae992cd91611f9e22d467a0e3fce4b"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/tests/test_frequency_quality_queue.py",
+        "sha256": "e3e3e256e4cc560e2299fe705f9f0cdfe64344740b97f1a5ddb120253bb244ee"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/scripts/queue_matched_quality_predictions.py",
+        "sha256": "c5b893ca379015e64ec14e8fe72fb4192278bce44341d28562b486900622935c"
+      }
+    ]
+  },
+  "live_controllers": [
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/learned-frequency-training-v1/run",
+      "owner": {
+        "pid": 4066396,
+        "created": 1792992904.87
+      },
+      "status": "running-frequency-training"
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V122-V123-learned-frequency-quality-v1",
+      "owner": {
+        "pid": 4073072,
+        "created": 1792993313.29
+      },
+      "status": "waiting-for-exact-matched-training-owner"
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V122-V123-learned-frequency-independent-audit-v1",
+      "owner": {
+        "pid": 4073170,
+        "created": 1792993332.06
+      },
+      "status": "waiting-for-exact-endpoint-evaluation-owner"
+    }
+  ],
+  "live_V122_child": {
+    "pid": 4074525,
+    "created": 1792993440.57
+  },
+  "V122_last_complete_log_row": {
+    "event": "train",
+    "step": 75,
+    "loss": 0.005350771825760603,
+    "lr": 7.500000000000001e-05,
+    "grad_norm": 0.010105247609317303,
+    "seconds_per_step": 2.3187944852001965,
+    "cuda_gb": 8.177376256,
+    "domain": "synthetic",
+    "linear": 0.0016394954873248935,
+    "rendered": 0.0043771821074187756,
+    "gradient": 0.0031885455828160048,
+    "highlight": 0.010585613548755646,
+    "sensor": 0.0014526958111673594,
+    "batch_sha256": "113512b12c9cb6978241b97ade1e964de15e8187fbdb9838984f64a6bd25cdb0"
+  },
+  "original_V120_V121_and_three_queue_exact_owners_live": 5,
+  "resources": {
+    "available_RAM_GiB": 56.49488830566406,
+    "launch_available_RAM_GiB": 56,
+    "configured_runtime_RAM_GB": 32,
+    "runtime_guard_bytes": 32000000000,
+    "CUDA_allocator_cap_GiB": 16,
+    "unit_label_correction": "Frozen v1 plan/runner call the decimal runtime RAM setting GiB. Executed files unchanged. Public runner only renames that key to GB; otherwise ASTs identical."
+  },
+  "new_endpoint_quality_claim": null,
+  "remaining": "Full endpoint PSNR/weak detail/color/GFX/RGB16; matched saved-output contrasts/local detail, actual image viewing and extra fine-green-mesh evaluation. No completed quality inference replay."
+}
