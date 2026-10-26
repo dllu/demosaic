@@ -48,6 +48,11 @@ conditioning it shows no clear fine-lattice recovery gain over V115; this
 remains an adverse case. The [complete V119 quality review](v119-quality.md)
 now documents its photo gains and camera/color regressions.
 
+A [saved-array green-phase diagnostic](green-phase-spectrum.md) finds matching
+diagonal frequency peaks in both measured RAW greens that V115/V119 strongly
+attenuate. This supports the visible mesh loss; it is not a new restoration or
+an exact-reference quality measurement.
+
 ![Fine green mesh, camera controls and all five methods](images/gfx-green-mesh-20231231-v1/comparison-2EV.png)
 
 The original five-method board above uses the nominal prior and +2EV display.

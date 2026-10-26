@@ -27,8 +27,9 @@ recover more fine lattice than V115 at the same conditioning**. The nearby
 profile reveals more diagonal texture than the nominal prior, as it does for
 the parents; weak, soft and irregular mesh, grain/detail ambiguity and the blue
 point remain. Cleaning plus this continuation has not solved this failure.
-Its complete numerical and main GFX panels are still running, so this observation
-does not establish an overall quality ranking.
+Its [complete numerical and main GFX review](v119-quality.md) documents a photo
+gain over V115 alongside known-camera and ADC-color regressions; this mesh
+observation alone does not establish an overall quality ranking.
 
 The endpoint checkpoint is
 `b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427`.
@@ -59,6 +60,12 @@ all 18 triplet cells match their boards. Four parent-control PNGs remain
 byte-identical to the earlier actually viewed publication.
 
 ## Fixed nearby-capture profile
+
+The [measured-green spectral diagnostic](green-phase-spectrum.md) finds strong
+matching diagonal peaks in both RAW green phases, with much less power in the
+saved V115/V119 outputs at those frequencies. It supports the visible detail
+loss without establishing exact recovery, a safe correction or a GT-based score.
+It uses the same retained nearby-profile arrays, with no new model inference.
 
 The same V114 and V115 checkpoints were each run once more on the stored 768px
 RAW context with one unchanged **DSCF3879 ISO6400 input-only profile**. It was

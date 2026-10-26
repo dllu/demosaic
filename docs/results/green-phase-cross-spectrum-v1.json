@@ -1,0 +1,834 @@
+{
+  "status": "complete-saved-array-diagnostic-and-actual-visual-review",
+  "scope": "Not a new model performance or restoration result. No new neural forwards, RAW decodes, noisy observations, optimizer steps or parameter/profile sweeps.",
+  "prospective_plan": {
+    "algorithm": "green-phase-cross-spectrum-v1",
+    "created_local": "2026-10-25T18:56:27-07:00",
+    "purpose": "Diagnose separately measured RAW greens before MHC and compare descriptive saved-output frequency power. No restoration, no noise fitting, no inference gate or promotion test.",
+    "code": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/work/scripts/green_phase_spectrum.py",
+        "sha256": "e39df9714605d23cf230e43478f1aacaab29b0deb09a285ca373421a0307c5f4"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/work/scripts/report_green_phase_spectrum.py",
+        "sha256": "ef27f696517df5aa7d7249c79240fb3752a1acc9e8392190f399837e8475a44a"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/work/scripts/test_green_phase_spectrum.py",
+        "sha256": "34a64995b77ee2d8e3119b802c6904d3e7a9a7b0faae240b24a44ba0fed6d1ed"
+      }
+    ],
+    "receipts": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/result-v1.json",
+        "sha256": "610a2fe72e84e5a51daf4cf78a853a4624d56e7118a9235ab2bd007ffd849bbc"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/result-v1.json",
+        "sha256": "7325304660956a4426518862adcdfd50ada492b7db14b91c72ac6e2f957ea988"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/V119-profile3879-method.json",
+        "sha256": "839e65c14253a071a23b9b40a2a8323b3898a062c0ad0e8df9c1d37e6943ccbe"
+      }
+    ],
+    "inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+      "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+    },
+    "source": "DSCF3842 ISO6400; separately exposed/apertured DSCF3835 ISO100 qualitative AHD reference, not GT. No camera source decode.",
+    "context_global_xywh": [
+      600,
+      6260,
+      768,
+      768
+    ],
+    "conditioning": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06,
+      "source": "unchanged fixed nearby3879 input-only profile"
+    },
+    "methods": [
+      {
+        "label": "V115",
+        "checkpoint_sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/V115-profile3879-RGB-f32.npy",
+          "sha256": "8a6e92bc30048c3e4d0cfbae952c308a6ce7a9412ab252fc289e7104221c3eee"
+        }
+      },
+      {
+        "label": "V119",
+        "checkpoint_sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427",
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/V119-profile3879-RGB-f32.npy",
+          "sha256": "0b949fe5611be2aa15ff14d9186170c2b1bbf176ae3045459bfc1d56277996f1"
+        }
+      }
+    ],
+    "windows": [
+      {
+        "name": "left",
+        "context_xywh": [
+          158,
+          180,
+          256,
+          256
+        ],
+        "global_xywh": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "fixed_native_ROI_global_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ]
+      },
+      {
+        "name": "right",
+        "context_xywh": [
+          378,
+          140,
+          256,
+          256
+        ],
+        "global_xywh": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "fixed_native_ROI_global_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ]
+      }
+    ],
+    "fixed_math": "FP64 weighted plane Q=[1,x,y], separable Hann, orthonormal FFT, exact conditional independent-noise variance including plane fit; half-packed-pixel physical phase alignment, periodic3x3 frequency average. No input clipping.",
+    "peak_selection": "After input only: separate top4 absolute cross/noise and top4 mean per-phase power/noise rankings, union. Native radial1/16..1/3; conjugate half-plane fy>0 orfy=0andfx>0; row-major tie-break;3x3 nonmaximum suppression plus conjugate within each ranking. No reference/prediction selection.",
+    "limitations": [
+      "Two separated green phases are not identical colocated sensors. Principal-band phase compensation fails for aliases; deterministic4px carriers can vanish in one phase.",
+      "Conditional independent noise only; observed-signal variance proxy and nearby profile not established camera truth; correlated read noise or unequal greens can bias cross power.",
+      "Hann bins and3x3 neighbors are correlated; no calibrated significance, false-discovery probability or signal detection threshold.",
+      "Power of deterministic saved green reconstruction divided by noisy observed power includes raw noise. Not transfer gain, correct mesh recovery, image quality or a new model result.",
+      "ISO100 AHD from independent capture differs in aperture/time/noise/processing. Only own-mean-normalized spectral context, not ground truth or selection.",
+      "Single256window per existingROI; no window/profile sweep, new inference/noise/training or restoration correction."
+    ],
+    "theory_source": {
+      "title": "Fleming, Ninness and Wills (2013), Recovering the spectrum of a low level signal from two noisy measurements using the cross power spectral density",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24007112/",
+      "application": "Uncorrelated-noise cross-spectrum principle only; Bayer subpixel phase/alias cautions derived independently here."
+    }
+  },
+  "executed_result": {
+    "status": "complete-saved-array-diagnostic",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/plan-v1.json",
+      "sha256": "96b26ebe7894746816eb3c6aa8b98de5984ae0ec0ae0e1543a499491c12221bb"
+    },
+    "cases": [
+      {
+        "name": "left",
+        "context_xywh": [
+          158,
+          180,
+          256,
+          256
+        ],
+        "global_xywh": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "fixed_native_ROI_global_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "peaks": [
+          {
+            "bin_yx": [
+              19,
+              30
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.1171875,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 20.122911570000607,
+            "conditional_noise_units_phase_power": 20.871314657255056,
+            "signed_coherence": 0.9641604127799426,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.03064206444751625,
+              "V119": 0.034303370352812265
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.1489351155576157
+          },
+          {
+            "bin_yx": [
+              18,
+              105
+            ],
+            "selected_by": [
+              "absolute_cross"
+            ],
+            "native_frequency_xy": [
+              -0.08984375,
+              0.0703125
+            ],
+            "conditional_noise_units_cross": 10.479319930959198,
+            "conditional_noise_units_phase_power": 11.256071285333075,
+            "signed_coherence": 0.9332655362026818,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.052356000897217335,
+              "V119": 0.03711783421078325
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 1.7979978351770367
+          },
+          {
+            "bin_yx": [
+              1,
+              100
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.109375,
+              0.00390625
+            ],
+            "conditional_noise_units_cross": 9.46049552375465,
+            "conditional_noise_units_phase_power": 10.66617558681179,
+            "signed_coherence": 0.8994450348146736,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.67943572866085,
+              "V119": 0.6719461424795174
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 0.9416662393133186
+          },
+          {
+            "bin_yx": [
+              1,
+              104
+            ],
+            "selected_by": [
+              "absolute_cross"
+            ],
+            "native_frequency_xy": [
+              -0.09375,
+              0.00390625
+            ],
+            "conditional_noise_units_cross": 9.29872121686382,
+            "conditional_noise_units_phase_power": 10.189433899941015,
+            "signed_coherence": 0.912611864107145,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.7361814140284383,
+              "V119": 0.7249439544335243
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 0.7831595755524882
+          },
+          {
+            "bin_yx": [
+              18,
+              106
+            ],
+            "selected_by": [
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.0859375,
+              0.0703125
+            ],
+            "conditional_noise_units_cross": 10.442488679182146,
+            "conditional_noise_units_phase_power": 11.733612891479362,
+            "signed_coherence": 0.8912189311287426,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.051356897469887905,
+              "V119": 0.03544097647520413
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 1.7319795179719835
+          },
+          {
+            "bin_yx": [
+              1,
+              105
+            ],
+            "selected_by": [
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.08984375,
+              0.00390625
+            ],
+            "conditional_noise_units_cross": 9.203487073824363,
+            "conditional_noise_units_phase_power": 10.925436897738763,
+            "signed_coherence": 0.8558048087814301,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.6403160380561406,
+              "V119": 0.6286338833092135
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 0.6310630720893093
+          }
+        ]
+      },
+      {
+        "name": "right",
+        "context_xywh": [
+          378,
+          140,
+          256,
+          256
+        ],
+        "global_xywh": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "fixed_native_ROI_global_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "peaks": [
+          {
+            "bin_yx": [
+              19,
+              30
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.1171875,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 49.97981100361049,
+            "conditional_noise_units_phase_power": 50.567514867870216,
+            "signed_coherence": 0.9884084255591915,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.1764572664505969,
+              "V119": 0.1788518747847596
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.599906966246173
+          },
+          {
+            "bin_yx": [
+              19,
+              105
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.08984375,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 24.566861303342314,
+            "conditional_noise_units_phase_power": 25.67906172771295,
+            "signed_coherence": 0.9781766768159984,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.13281422017406208,
+              "V119": 0.11920486358064207
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.247740625380759
+          },
+          {
+            "bin_yx": [
+              17,
+              30
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.1171875,
+              0.06640625
+            ],
+            "conditional_noise_units_cross": 16.113120627858713,
+            "conditional_noise_units_phase_power": 16.838030610661384,
+            "signed_coherence": 0.9616435422910328,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.17722529982541055,
+              "V119": 0.17967587053178205
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.765322678360118
+          },
+          {
+            "bin_yx": [
+              19,
+              28
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.109375,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 12.53048436626357,
+            "conditional_noise_units_phase_power": 13.547882071460284,
+            "signed_coherence": 0.9262194536373332,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.20519934305999796,
+              "V119": 0.20129004636742975
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.3643325454507376
+          }
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/analysis-v1/input-only-selection.json",
+        "sha256": "818e85eb400eee7ded52a9c64753911f8886d25e7663e6f69849292df9bef3fb"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/analysis-v1/spectra.npz",
+        "sha256": "c79fc67d6f177ec0a4290a0b4a7a6a9711ca46e20a920e07cbb6db155724a600"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/analysis-v1/phase-diagnostic.png",
+        "sha256": "073339fa62a459d9d1d21dc41994b7fc5f9fd0f2364f1e5120a82c8f7962d676"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/analysis-v1/phase-diagnostic.pdf",
+        "sha256": "104ed2bfa8aefbdfad5969ead12ed3e23bb7a16133b7482e7cfbdc4f6abc3671"
+      }
+    ],
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "optimizer_updates": 0,
+    "limitations": [
+      "Two separated green phases are not identical colocated sensors. Principal-band phase compensation fails for aliases; deterministic4px carriers can vanish in one phase.",
+      "Conditional independent noise only; observed-signal variance proxy and nearby profile not established camera truth; correlated read noise or unequal greens can bias cross power.",
+      "Hann bins and3x3 neighbors are correlated; no calibrated significance, false-discovery probability or signal detection threshold.",
+      "Power of deterministic saved green reconstruction divided by noisy observed power includes raw noise. Not transfer gain, correct mesh recovery, image quality or a new model result.",
+      "ISO100 AHD from independent capture differs in aperture/time/noise/processing. Only own-mean-normalized spectral context, not ground truth or selection.",
+      "Single256window per existingROI; no window/profile sweep, new inference/noise/training or restoration correction."
+    ]
+  },
+  "independent_check": {
+    "status": "independently-reproduced",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/plan-v1.json",
+      "sha256": "96b26ebe7894746816eb3c6aa8b98de5984ae0ec0ae0e1543a499491c12221bb"
+    },
+    "execution": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/analysis-v1/result.json",
+      "sha256": "7545b1351abde78504c8fb71939e958e9370e4401a50d01c25a39b806545c948"
+    },
+    "audit_code": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/audit-v1.py",
+      "sha256": "5430aabf48a89ff0295bf41f295888390872e5bd649c61ea1e3d6d08607cd059"
+    },
+    "peak_count": 10,
+    "neighboring_complex_coefficients_per_field": 180,
+    "fields_per_peak": 4,
+    "scalar_metric_checks": 60,
+    "maximum_absolute_cross_error": 1.0995309859989738e-18,
+    "maximum_absolute_noise_variance_error": 3.1763735522036263e-21,
+    "maximum_absolute_reported_metric_error": 5.861977570020827e-14,
+    "method": "Explicit complex Fourier rows and weighted-plane projection, no FFT or production diagnostic imports; independent variance row sums. Reuses saved arrays only.",
+    "records": [
+      {
+        "case": "left",
+        "bin_yx": [
+          19,
+          30
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 20.122911570000582,
+            "coherence": 0.9641604127799424,
+            "power": 20.871314657255034
+          },
+          "V115": {
+            "cross": 0.6378870551955955,
+            "coherence": 0.9978748995550232,
+            "power": 0.6395401688320006
+          },
+          "V119": {
+            "cross": 0.7143333054535713,
+            "coherence": 0.9982291722402769,
+            "power": 0.7159564364378999
+          },
+          "independent_ISO100_AHD": {
+            "cross": 112.34101313674671,
+            "coherence": 0.9996214464577204,
+            "power": 112.41508819874474
+          }
+        }
+      },
+      {
+        "case": "left",
+        "bin_yx": [
+          18,
+          105
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 10.479319930959228,
+            "coherence": 0.9332655362026806,
+            "power": 11.256071285333123
+          },
+          "V115": {
+            "cross": 0.5882817268044529,
+            "coherence": 0.9984019368616153,
+            "power": 0.5893228783140496
+          },
+          "V119": {
+            "cross": 0.41606903401978035,
+            "coherence": 0.9964107454064711,
+            "power": 0.4178009878337595
+          },
+          "independent_ISO100_AHD": {
+            "cross": 50.646997959369486,
+            "coherence": 0.9984497557615419,
+            "power": 50.72563549515522
+          }
+        }
+      },
+      {
+        "case": "left",
+        "bin_yx": [
+          1,
+          100
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 9.460495523754695,
+            "coherence": 0.8994450348146747,
+            "power": 10.666175586811821
+          },
+          "V115": {
+            "cross": 7.245664117543489,
+            "coherence": 0.9998202659836382,
+            "power": 7.246980781850069
+          },
+          "V119": {
+            "cross": 7.165500748589247,
+            "coherence": 0.9998055696666609,
+            "power": 7.1670955405674075
+          },
+          "independent_ISO100_AHD": {
+            "cross": 25.128637477456454,
+            "coherence": 0.99937751773424,
+            "power": 25.17428974249451
+          }
+        }
+      },
+      {
+        "case": "left",
+        "bin_yx": [
+          1,
+          104
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 9.298721216863852,
+            "coherence": 0.9126118641071459,
+            "power": 10.18943389994104
+          },
+          "V115": {
+            "cross": 7.497955620369244,
+            "coherence": 0.9998729959373966,
+            "power": 7.501271856607892
+          },
+          "V119": {
+            "cross": 7.383409876789072,
+            "coherence": 0.9998349806523337,
+            "power": 7.386768504862264
+          },
+          "independent_ISO100_AHD": {
+            "cross": 19.721100065529864,
+            "coherence": 0.9905529594212715,
+            "power": 20.001004886494524
+          }
+        }
+      },
+      {
+        "case": "left",
+        "bin_yx": [
+          18,
+          106
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 10.4424886791822,
+            "coherence": 0.8912189311287425,
+            "power": 11.73361289147942
+          },
+          "V115": {
+            "cross": 0.6010698939679303,
+            "coherence": 0.997475207988666,
+            "power": 0.602601954219069
+          },
+          "V119": {
+            "cross": 0.4136320483706424,
+            "coherence": 0.9948070739094415,
+            "power": 0.4158506984560788
+          },
+          "independent_ISO100_AHD": {
+            "cross": 50.85329074579977,
+            "coherence": 0.9983886155412245,
+            "power": 50.936137032889334
+          }
+        }
+      },
+      {
+        "case": "left",
+        "bin_yx": [
+          1,
+          105
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 9.20348707382436,
+            "coherence": 0.8558048087814294,
+            "power": 10.925436897738766
+          },
+          "V115": {
+            "cross": 6.993021527959329,
+            "coherence": 0.9998671060714492,
+            "power": 6.995732468392424
+          },
+          "V119": {
+            "cross": 6.865167311437178,
+            "coherence": 0.9998056373712491,
+            "power": 6.868099823875248
+          },
+          "independent_ISO100_AHD": {
+            "cross": 17.03865377875505,
+            "coherence": 0.9941983558134986,
+            "power": 17.280769508221184
+          }
+        }
+      },
+      {
+        "case": "right",
+        "bin_yx": [
+          19,
+          30
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 49.97981100361049,
+            "coherence": 0.9884084255591916,
+            "power": 50.567514867870216
+          },
+          "V115": {
+            "cross": 8.920303688277135,
+            "coherence": 0.9997199153348589,
+            "power": 8.923005444784298
+          },
+          "V119": {
+            "cross": 9.04124421914954,
+            "coherence": 0.9996873538445009,
+            "power": 9.0440948373248
+          },
+          "independent_ISO100_AHD": {
+            "cross": 323.7314253368568,
+            "coherence": 0.9994758972866279,
+            "power": 323.94118138702515
+          }
+        }
+      },
+      {
+        "case": "right",
+        "bin_yx": [
+          19,
+          105
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 24.566861303342314,
+            "coherence": 0.9781766768159981,
+            "power": 25.679061727712956
+          },
+          "V115": {
+            "cross": 3.407766516736041,
+            "coherence": 0.9996867605149092,
+            "power": 3.4105445581677962
+          },
+          "V119": {
+            "cross": 3.0580296511205916,
+            "coherence": 0.9995161556880308,
+            "power": 3.061069050130908
+          },
+          "independent_ISO100_AHD": {
+            "cross": 142.07931072021185,
+            "coherence": 0.9992274521926849,
+            "power": 142.22046343396005
+          }
+        }
+      },
+      {
+        "case": "right",
+        "bin_yx": [
+          17,
+          30
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 16.113120627858702,
+            "coherence": 0.9616435422910327,
+            "power": 16.83803061066137
+          },
+          "V115": {
+            "cross": 2.9821549644650602,
+            "coherence": 0.9994506721893723,
+            "power": 2.9841250234439
+          },
+          "V119": {
+            "cross": 3.0231392869855025,
+            "coherence": 0.9993130177296086,
+            "power": 3.0253878080113745
+          },
+          "independent_ISO100_AHD": {
+            "cross": 114.66056889465537,
+            "coherence": 0.9997447108253545,
+            "power": 114.72917039004943
+          }
+        }
+      },
+      {
+        "case": "right",
+        "bin_yx": [
+          19,
+          28
+        ],
+        "direct_values": {
+          "observed": {
+            "cross": 12.530484366263515,
+            "coherence": 0.9262194536373324,
+            "power": 13.54788207146024
+          },
+          "V115": {
+            "cross": 2.778156910761755,
+            "coherence": 0.9993877845340655,
+            "power": 2.7800165009179683
+          },
+          "V119": {
+            "cross": 2.725117996107295,
+            "coherence": 0.9993194365083338,
+            "power": 2.727053810344706
+          },
+          "independent_ISO100_AHD": {
+            "cross": 78.80843421214225,
+            "coherence": 0.9986207671854603,
+            "power": 78.92538539441998
+          }
+        }
+      }
+    ],
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "new_noise_observations": 0
+  },
+  "publication_render": {
+    "status": "rendered-from-retained-spectrum-arrays",
+    "code": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/render-v2.py",
+      "sha256": "ffc56579ce0c2f071df828dc3a75df3bd81f0c085ae923a425794ff145f5cdff"
+    },
+    "source_result": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/analysis-v1/result.json",
+      "sha256": "7545b1351abde78504c8fb71939e958e9370e4401a50d01c25a39b806545c948"
+    },
+    "source_maps": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/analysis-v1/spectra.npz",
+      "sha256": "c79fc67d6f177ec0a4290a0b4a7a6a9711ca46e20a920e07cbb6db155724a600"
+    },
+    "changes": "Correct imshow half-bin edge extent, shared log-power color limits, label only first two peaks to avoid overlap. Numeric arrays, selections and all predictions unchanged. Original rendering preserved.",
+    "artifacts": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/publication-v2/phase-diagnostic.png",
+        "sha256": "73e16ba80cf41b4bb823f155f9f2d4350432368e33ebfca4c0845f4935a0b03a"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/publication-v2/phase-diagnostic.pdf",
+        "sha256": "cd9743f9d12d8502a695ad79b2c8b0c2e190566d5c0971a7bbdb8a304ea97179"
+      }
+    ],
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "new_noise_observations": 0
+  },
+  "publication_images": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/green-phase-cross-spectrum-v1/phase-diagnostic.png",
+      "sha256": "73e16ba80cf41b4bb823f155f9f2d4350432368e33ebfca4c0845f4935a0b03a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/green-phase-cross-spectrum-v1/phase-diagnostic.pdf",
+      "sha256": "cd9743f9d12d8502a695ad79b2c8b0c2e190566d5c0971a7bbdb8a304ea97179"
+    }
+  ],
+  "actual_visual_review": {
+    "viewed": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/publication-v2/phase-diagnostic.png",
+        "sha256": "73e16ba80cf41b4bb823f155f9f2d4350432368e33ebfca4c0845f4935a0b03a"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/profile3879-comparison-2EV.png",
+        "sha256": "71c23572080d041f9c05b9ead50b26acad3975b62111fd2861a237dc37a12d44"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/triplets/crop-402acb1a6059987f.png",
+        "sha256": "a514eb9e8a57df6022c5423dfa0440d6245958d8bb36121b4f369f8aeda02df0"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/triplets/crop-795173216ecceaff.png",
+        "sha256": "590744907a2c028b6d52fc623428a9ff369da3125b052b606c8d2f61b5676fe1"
+      }
+    ],
+    "observation": "Both RAW green phase maps show matching diagonal peaks; saved outputs have much lower power at these frequencies. Native board/triplets retain soft faint diagonals, lost fine lattice and small blue point. Independent ISO100 AHD/JPEG remain much clearer, with aperture/time/processing differences; not GT.",
+    "no_display_crop_resize": true
+  },
+  "preserved_initial_launcher_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/launch-v1-failure.json",
+    "sha256": "b136726525e61ea6becd07d9d78c80844d11377b0e5bca0cba4104ac0eb6f214"
+  },
+  "active_training_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-cross-spectrum-v1/live-training-status-at-publication-v1.json",
+    "sha256": "8b99467365afa71d3ac31723717aec60f7a58753b8f693259ee557116d602282"
+  },
+  "checks": {
+    "focused_pytest_passes": 19,
+    "mathematical_tests": 17,
+    "existing_coordinate_tests": 2,
+    "ruff": "pass: check and format for both public scripts and mathematical tests",
+    "diff_check": "pass",
+    "local_markdown_link_destinations": 216
+  },
+  "public_math": {
+    "path": "/home/dllu/proj/demosaic/scripts/green_phase_spectrum.py",
+    "sha256": "e39df9714605d23cf230e43478f1aacaab29b0deb09a285ca373421a0307c5f4"
+  },
+  "public_runner": {
+    "path": "/home/dllu/proj/demosaic/scripts/report_green_phase_spectrum.py",
+    "sha256": "92e3e291dc05d95409c3f2d2b36970e70bcafd9e44c537e675a26312d8f45818"
+  }
+}

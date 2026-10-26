@@ -92,6 +92,8 @@ shows no clear lattice-recovery gain over V115 at the same conditioning; its
 full panels and native review are now complete. The
 [V119 report](docs/v119-quality.md) adds native bark/feather triplets and matched
 foliage/fence comparisons alongside its measured gains and regressions.
+The [RAW green-phase diagnostic](docs/green-phase-spectrum.md) finds matching
+diagonal frequency peaks that remain strongly attenuated in the saved outputs.
 
 ![Fine green mesh, left native crop](docs/images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-left-4EV.png)
 
