@@ -54,6 +54,22 @@ def verify_model_coverage(checkpoints, records, alignment=None):
     return len(expected)
 
 
+def verify_forward_witness(witness, index, actual):
+    """Check all five input arguments before any neural work for this batch."""
+    if witness is None:
+        return
+    if not 0 <= index < len(witness):
+        raise ValueError("Input witness does not cover the next forward")
+    previous = witness[index]
+    if {key: value["sha256"] for key, value in actual.items()} != previous["argument_fingerprints"]:
+        raise ValueError(f"Input witness differs before forward {index}")
+    if "argument_metadata" in previous:
+        metadata = {key: {field: value[field] for field in ("shape", "dtype")}
+                    for key, value in actual.items()}
+        if metadata != previous["argument_metadata"]:
+            raise ValueError(f"Input witness shape/dtype differs before forward {index}")
+
+
 @torch.inference_mode()
 def collect(plan_path, stage):
     plan = read(plan_path)
@@ -74,6 +90,10 @@ def collect(plan_path, stage):
     strict_float32()
     archive = PredictionArchive(output / "archive") if stage in {"photo", "known", "unseen", "texture", "color"} else None
     witness = [json.loads(line) for line in Path(specification["input_witness"]["path"]).read_text().splitlines()] if "input_witness" in specification else None
+    if witness is not None and len(witness) != specification["calls_per_model"]:
+        raise ValueError("Input witness length differs from the declared forward budget")
+    if "noise_profile" in specification and ref(specification["noise_profile"]["path"]) != specification["noise_profile"]:
+        raise ValueError("Fixed noise profile binding differs from the stage declaration")
     models, full_native = [], []
 
     def input_fingerprints(args):
@@ -130,6 +150,7 @@ def collect(plan_path, stage):
                 assert psutil.virtual_memory().available >= 32*2**30
                 assert shutil.disk_usage("/mnt/external").free >= plan["runtime_external_reserve_GiB"]*2**30
                 record["latest_inputs"] = input_fingerprints(arguments)
+                verify_forward_witness(witness, record["calls"], record["latest_inputs"])
 
             def after(module, arguments, prediction):
                 assert prediction.dtype == torch.float32 and torch.isfinite(prediction).all()
@@ -207,6 +228,8 @@ def collect(plan_path, stage):
                     "--output", str(report_dir), "--device", "cuda", "--precision", "float32"]
         if stage == "full-gfx":
             sys.argv.append("--full-frame")
+        if "noise_profile" in specification:
+            sys.argv += ["--noise-profile", specification["noise_profile"]["path"]]
         gfx.main()
         report = report_dir / "report.json"
     verify_model_coverage(plan["checkpoints"], models)

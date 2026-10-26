@@ -6,9 +6,10 @@ and removing its large tested ADC color outlier. The further cleaned-source/
 fourteen-region V121 arm has a small photo/known-camera change, lower unseen
 mean and a large remaining ADC outlier. These are single-run observations.
 Full saved/local-detail comparisons and the selected native review are complete,
-including all six main GFX regions and both fine-mesh profiles. Matching-profile
-full-frame comparison against older models and detailed ADC-outlier visual
-diagnosis remain open. The primary panels and independent audit are complete.
+including all six main GFX regions and both fine-mesh profiles. Additional
+fixed-Haar full-frame operators now match older models' inputs exactly.
+The primary panels, independent audit, matched-profile native review and
+selected ADC-tail inspection below are complete.
 It is now the [current general recommendation](current-model.md); active
 controlled trials retain their original V115 parents.
 
@@ -96,6 +97,77 @@ The separate ISO100/f5.6 exposure remains **not GT**.
 
 ![V120/V121 foliage, platform and sky at the same matched conditioning](images/v120-v121-review-v1/V120-V121-matched-gfx-2.png)
 
+## Matched-profile full-frame GFX
+
+The additional V120/V121 operators use the **fixed historical input-Haar profile**:
+shot `.0014635775921166604`, read `1.0715704128646712e−6`.
+Each of130 complete five-argument input batches exactly matches the original
+V119 sequence, including variance, CFA, WB and matrix. The unchanged checkpoints
+and neural source restore all101.996MP in IEEE FP32, B4/native512/overlap64.
+Both linear/sRGB RGB16 TIFFs per model verify;921,600 native linear values
+exactly match retained FP32 clip/round quantization. This adds260 root/encoder
+calls and two shared cached RAW decodes, with no estimator or training work.
+
+All ten saved comparison boards were actually viewed. V115/V119/V120/V121 show
+subtle differences: fence/building geometry is coherent and sky quiet, while
+foliage stays painterly and neon markings smear. There is no clear large
+V120/V121 fine-detail recovery at matched conditioning. Rows below are noisy →
+V115 → V120 → independent ISO100 reference, with unchanged160px cells/+2EV.
+
+![Matched historical-Haar building, fence and neon: noisy, V115, V120, separate ISO100](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-1.png)
+
+![Matched historical-Haar foliage, platform and sky: noisy, V115, V120, separate ISO100](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-2.png)
+
+[V119/V120 first three regions](images/v120-v121-fixed-Haar-GFX-v1/V119-V120-fixed-Haar-matched-gfx-1.png) ·
+[last three](images/v120-v121-fixed-Haar-GFX-v1/V119-V120-fixed-Haar-matched-gfx-2.png) ·
+[V120/V121 first three](images/v120-v121-fixed-Haar-GFX-v1/V120-V121-fixed-Haar-matched-gfx-1.png) ·
+[last three](images/v120-v121-fixed-Haar-GFX-v1/V120-V121-fixed-Haar-matched-gfx-2.png).
+
+The same-weight nominal/Haar contrasts also change only subtly at these regions;
+neither profile resolves the fine foliage or saturated sign detail.
+[V120 profile-only comparison, first three](images/v120-v121-fixed-Haar-GFX-v1/V120-profile-only-conditioning-different-gfx-1.png) ·
+[last three](images/v120-v121-fixed-Haar-GFX-v1/V120-profile-only-conditioning-different-gfx-2.png) ·
+[V121 first three](images/v120-v121-fixed-Haar-GFX-v1/V121-profile-only-conditioning-different-gfx-1.png) ·
+[last three](images/v120-v121-fixed-Haar-GFX-v1/V121-profile-only-conditioning-different-gfx-2.png).
+The original nominal outputs and estimator diagnostics remain preserved.
+
+The [archived profile](results/DSCF3879-fixed-historical-Haar-v1.json) is a fixed
+comparison convention, **not newly verified camera calibration**. The current
+ADC-floor-aware estimator still falls back here; its behavior is unchanged.
+The separate ISO100 f/5.6 exposure remains **not GT**, and shared-device timings
+do not establish a speed ranking.
+[Complete CPU checks and four native triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
+[Actual viewing, source/ROI/checkpoint/display bindings and publication checks](results/v120-v121-fixed-Haar-GFX-native-review-v1.json).
+All132 published native cells verify exactly, without resizing.
+
+## Selected ADC-tail inspection
+
+V121's largest ADC error is a predominantly coherent green bias on a bright
+saturated yellow flat field. Its green mean error is+1645.36DN16;98.19% of
+the squared RGB error comes from channel-mean shifts. The green error's
+1st–99th pixel percentiles are+1002.23 to+2077.33DN16. This is a broad field
+error rather than one isolated bright pixel. The original quantized CFA
+phase-mean errors stay within.40DN16. V120's maximum channel-mean error on
+this same case is36.02DN16.
+
+| Adverse analytic case | V120 maximum channel-mean error, DN16 | V121 |
+| --- | ---: | ---: |
+| V120's worst: pink, RGGB, case792 | 55.52 | 18.48 |
+| V121's worst: saturated yellow, BGGR, case1017 | 36.02 | 1645.36 |
+
+These two cases were selected **after** the complete grid by each model's
+largest ADC mean bias. They are deliberately adverse examples, not a
+representative sample. The native160 cells below share the retained input,
+exact analytic GT, WB/matrix and exposure×1. The clipped sRGB8 previews look
+similar despite the linear-camera error; no obvious strong blotch is visible.
+This does not identify which training intervention caused the bias.
+
+![Selected ADC tails: noisy, V120, V121 and exact analytic GT](images/v120-v121-ADC-tail-v1/selected-ADC-tail-native.png)
+
+[Selected metrics and four native noisy/restored/GT triplets](results/v120-v121-ADC-tail-v1.json) ·
+[Source bindings, publication and actual native review](results/v120-v121-ADC-tail-native-review-v1.json).
+The saved-array inspection uses zero model calls, RAW decodes or new noise.
+
 ## Real-photo limits and remaining work
 
 V120's [matched two-profile fine green mesh review](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
@@ -104,10 +176,10 @@ shows no clear lattice-recovery gain over V115/V119. The
 also shows no clear gain over V120 under either matched profile. Separate ISO100 captures remain qualitative
 references, not exact GT.
 
-The completed new main-GFX outputs use nominal ISO conditioning; older outputs
-use the Haar-fit profile. The [report repair](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
-labels both profiles explicitly and preserves all RAW/reference/display checks.
-These saved pipeline boards cannot isolate a model-only gain. Matching-profile
-full-frame comparisons against older models and detailed ADC-outlier visual
-diagnosis remain to finish. No broad real-photo superiority,10-second102MP
+The original new main-GFX outputs use nominal ISO conditioning; older outputs
+use the Haar-fit profile. The additional fixed-profile operators above close
+the matched full-frame comparison, while the
+[report repair](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
+preserves and labels the original pipeline difference. No broad real-photo
+superiority,10-second102MP
 runtime or overall final model ranking is claimed here.

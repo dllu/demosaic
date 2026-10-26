@@ -3,7 +3,7 @@
 **V120 Small is the current general recommendation in V84's architectural family.**
 Its photo/known/unseen means are37.04008/54.31272/54.00872dB, with ADC maximum55.52DN16.
 [Completed primary/local/native results](v120-v121-primary.md) document the gains,
-remaining detail loss and explicit main-GFX profile-comparison limit.
+remaining detail loss and completed matched-profile main-GFX comparison.
 V114 remains a useful Tiny alternative; V115 has higher known-camera quality
 and V117 a slightly higher photo mean. In the earlier V114/V115 pair, Tiny has
 slightly higher photo PSNR and lower color bias.
@@ -33,7 +33,9 @@ V120/V121 completed20,000 updates and independent numerical audits. The
 shows no clear lattice-recovery gain over V115/V119, and V121's mesh remains
 similarly weak. Saved/local-detail and selected native review is complete. The [report repair](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
 preserves material-pair differences and explicitly labels the older/new
-main-GFX noise profiles; matching-profile comparison remains required.
+main-GFX noise profiles. The additional
+[fixed-Haar full-frame comparison](v120-v121-primary.md#matched-profile-full-frame-gfx)
+now matches older inputs exactly, with subtle changes and continued detail loss.
 [Completed primary means and native triplets](v120-v121-primary.md) show V120's
 camera/color recovery and V121's remaining ADC tail.
 

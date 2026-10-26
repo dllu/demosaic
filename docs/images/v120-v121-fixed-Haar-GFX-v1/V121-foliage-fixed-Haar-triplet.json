@@ -1,0 +1,252 @@
+{
+  "image": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-fixed-Haar-full-GFX-v2/review-work/output/V121-foliage-fixed-Haar-triplet.png",
+    "sha256": "3ba6e8ed81af69910f3b458992b3ec7ed1d60f465c3f5343c8e7347d982104ee"
+  },
+  "region": "foliage",
+  "checkpoint": {
+    "arm": "V121",
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/weights/weights-40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077.pt",
+    "sha256": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+    "expected_lineage": {
+      "step": 20000,
+      "initialized_from": {
+        "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+        "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+        "step": 20000
+      }
+    },
+    "expected_backbone": {
+      "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+      "revision": "421020015aa4266363db803b6049a529999afb1e",
+      "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+    }
+  },
+  "conditioning": {
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06,
+    "source": "input Haar fit"
+  },
+  "display_exposure": 4.0,
+  "pixel_scale": "One native sensor pixel per PNG pixel; no resizing",
+  "reference": "Independent ISO100 f/5.6 exposure, not exact GT",
+  "provenance": {
+    "shared": {
+      "region": {
+        "name": "foliage",
+        "noisy_xy": [
+          8890,
+          5570
+        ],
+        "reference_xy": [
+          8890,
+          5570
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9597686529159546
+      },
+      "conditioning": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06
+      },
+      "display_exposure": 4.0,
+      "shared_wb": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "shared_matrix": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+    },
+    "float_metadata": {
+      "noisy-packed": {
+        "shape": [
+          1,
+          4,
+          256,
+          256
+        ],
+        "dtype": "float32",
+        "role": "noisy-packed",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "context_xywh": [
+          8714,
+          5394,
+          512,
+          512
+        ],
+        "pattern": "RGGB",
+        "encoding": "Four packed CFA phases, black-subtracted/white-normalized sensor units"
+      },
+      "reference-rgb": {
+        "shape": [
+          1,
+          3,
+          160,
+          160
+        ],
+        "dtype": "float32",
+        "role": "reference-rgb",
+        "region": {
+          "name": "foliage",
+          "noisy_xy": [
+            8890,
+            5570
+          ],
+          "reference_xy": [
+            8890,
+            5570
+          ],
+          "size": 160,
+          "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+          "context_green_correlation": 0.9597686529159546
+        },
+        "source_roi_xywh": [
+          8890,
+          5570,
+          160,
+          160
+        ],
+        "encoding": "Independent LibRaw AHD camera RGB calibrated against its own CFA; not GT"
+      }
+    },
+    "shared_float_bindings": {
+      "noisy-packed": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-fixed-Haar-full-GFX-v2/work/artifacts/full-gfx/report/foliage-noisy-packed-f32.npy",
+        "sha256": "a67eec1789664a3e3ea1aaa43e7cb8ece9c8cb9001a8f3b2d7717053d802f278"
+      },
+      "reference-rgb": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-fixed-Haar-full-GFX-v2/work/artifacts/full-gfx/report/foliage-reference-rgb-f32.npy",
+        "sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a"
+      }
+    },
+    "shared_value_sha256": {
+      "noisy-packed": "8cf107fdd1ea6739e6bac90bb804506a378460ff3aa0084c4cd67ae3ff38933b",
+      "reference-rgb": "d4e1e4dc93eaa2ee4f96d51bd6814ccb66c1068f23c2b80b010ec0c00ac34ff5"
+    },
+    "prediction": {
+      "checkpoint": {
+        "arm": "V121",
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/weights/weights-40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077.pt",
+        "sha256": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+        "expected_lineage": {
+          "step": 20000,
+          "initialized_from": {
+            "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+            "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+            "step": 20000
+          }
+        },
+        "expected_backbone": {
+          "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "revision": "421020015aa4266363db803b6049a529999afb1e",
+          "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+        }
+      },
+      "region": {
+        "name": "foliage",
+        "noisy_xy": [
+          8890,
+          5570
+        ],
+        "reference_xy": [
+          8890,
+          5570
+        ],
+        "size": 160,
+        "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+        "context_green_correlation": 0.9597686529159546
+      },
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-fixed-Haar-full-GFX-v2/work/artifacts/full-gfx/V121-foliage-RGB-f32.npy",
+        "sha256": "afd4634433c6902398b8946d7fd41516a28b2384e2aa374839c90840ef46cbe6"
+      },
+      "timing": {
+        "seconds": 263.4547902601771,
+        "tile_seconds": 263.36338896723464,
+        "compute_transfer_seconds": 261.8072372195311,
+        "blend_seconds": 1.4259516731835902,
+        "megapixels": 101.995852,
+        "tiles": 520,
+        "tile": 512,
+        "overlap": 64,
+        "tile_grid_alignment": 2,
+        "tile_stride": 448,
+        "batch_size": 4,
+        "self_ensemble": "none",
+        "model_views_per_tile": 1,
+        "compute_precision": "float32",
+        "refinement_compute_precision": "float32",
+        "memory_format": "channels_last",
+        "peak_cuda_gb": 2.970097152
+      }
+    },
+    "report": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-fixed-Haar-full-GFX-v2/work/artifacts/full-gfx/report/report.json",
+      "sha256": "d10492065a296cc1847cc51d1061770738fcb2709b5b8548dac79ddb779ade22"
+    }
+  },
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ],
+      "pixel_sha256": "ba55d95594ee2191261f921fac936ae69c96d1ead88bb93314465674c937f11e"
+    },
+    {
+      "label": "V121 fixed Haar",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ],
+      "pixel_sha256": "1f2ceb12fdf471bee138976c43f82395e565628e016ff57ec85eb1a1de0445ed"
+    },
+    {
+      "label": "ISO100 ref (not GT)",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ],
+      "pixel_sha256": "cd38aecbada20ef30a8c67e3bd3c6d5c0271863222b85b5137583e973dc376bd"
+    }
+  ],
+  "review_status": "Prepared; native viewing pending"
+}

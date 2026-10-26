@@ -1,9 +1,31 @@
 # GFX100S qualitative comparisons
 
-**V120 Small is the current general recommendation.** Its
-[new V120/V121 nominal-profile comparisons](v120-v121-primary.md#completed-local-and-native-review)
-show all six standing regions with their remaining detail loss. The older
-matched Haar-profile V114 Tiny/V115 Small boards below remain useful alternatives.
+**V120 Small is the current general recommendation.** The completed
+[fixed-Haar full-frame comparison](v120-v121-primary.md#matched-profile-full-frame-gfx)
+now matches older V115/V119 inputs exactly, including all130 variance/CFA/WB/
+matrix batches. Rows below: noisy → V115 Small → V120 Small → separate ISO100
+reference. Each cell is native160 pixels with shared +2EV and no resizing.
+DSCF3879 ISO6400 and DSCF3880 ISO100 f/5.6 differ in aperture, time and moving
+subjects; the independent ISO100 exposure is **not GT**.
+
+![Matched V115/V120 building, fence and neon](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-1.png)
+
+![Matched V115/V120 foliage, platform and sky](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-2.png)
+
+Actually viewed: changes are subtle. Larger fence/building geometry is coherent
+and sky quiet; foliage remains painterly and neon markings smear. Matched
+V119/V120 and V120/V121 comparisons show no clear large fine-detail recovery.
+Same-weight nominal/Haar comparisons also leave these weaknesses unresolved.
+Both complete101.996MP outputs and four RGB16 TIFFs verify, including921,600
+exact native linear-quantization values. The historical profile is a fixed
+comparison convention, not newly verified camera calibration; current automatic
+estimation and original nominal outputs remain preserved.
+[All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
+[Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
+
+## Tiny/Small alternatives
+
+The older matched Haar-profile V114 Tiny/V115 Small boards remain useful alternatives.
 Both have complete101.996MP FP32 blended outputs and verified linear/sRGB RGB16
 exports. These new boards compare all six fixed regions at native160 pixels,
 with shared +2EV/WB/matrix and no resizing. Rows: noisy, Tiny, Small, separate
@@ -27,15 +49,15 @@ states prevent a speed ranking. Quality remains the priority before speed work.
 
 ## Additional fine green mesh case
 
-V120/V121 now have completed nominal-profile full-frame outputs, independently
+V120/V121 also retain their completed nominal-profile full-frame outputs, independently
 audited primary panels and actually viewed saved comparisons. Their
 [matched nominal-profile six-region boards](v120-v121-primary.md#completed-local-and-native-review)
 show coherent larger fence/building edges but soft foliage/neon detail, with
-no clear large V121 real-detail gain.
-Older main-scene outputs use the input-Haar profile; the new ones fall back to
-the nominal ISO prior. [Explicit profile labels and remaining comparison limits](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
-preserve this distinction. Shared RAW/reference pixels and display remain the
-same; a pipeline difference alone cannot establish a model-only quality gain.
+no clear large V121 real-detail gain. Those original outputs fall back to the
+nominal ISO prior, while older outputs use the input-Haar profile. The additional
+fixed-profile operators above close the matched model comparison. The
+[explicit original profile labels](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
+preserve the pipeline difference.
 
 The [DSCF3842/DSCF3835 comparison](gfx-green-mesh.md) adds the fine green
 chain-link fence beside the red train's cab, with both straight-out-of-camera

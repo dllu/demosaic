@@ -3,7 +3,8 @@
 **The current V114 sites export improves the complete ADC-only photo panel by
 .23563 dB, from 37.78013 to 38.01575 dB.** All 427 source means and all 1,708
 source/CFA cases improve. It keeps V114's learned weights and activates for
-explicit shot=read=0 profiles. V114 remains the general noisy-RAW model.
+explicit shot=read=0 profiles. This optional export is specific to V114;
+[V120 Small is the general noisy-RAW recommendation](current-model.md).
 [Complete current evidence, export and native review](results/v114-adc-sites-current-v1.json).
 
 ## Current V114 results

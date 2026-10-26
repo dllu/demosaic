@@ -31,7 +31,7 @@ Their complete panels, native crops and RGB16 checks are published.
 
 | Model | Architecture | Full-photo PSNR | Known / unseen measured-CFA PSNR | Useful strength and remaining weakness |
 | --- | --- | ---: | ---: | --- |
-| V120 | DINOv3 ConvNeXt-Small + DRUNet, corrected paired32 continuation | 37.04008 dB | 54.31272 / 54.00872 dB | Current balanced recommendation, ADC maximum55.52DN16; unresolved fine mesh and explicit GFX profile limits |
+| V120 | DINOv3 ConvNeXt-Small + DRUNet, corrected paired32 continuation | 37.04008 dB | 54.31272 / 54.00872 dB | Current balanced recommendation, ADC maximum55.52DN16; matched-profile GFX review complete, fine foliage/neon/mesh remain weak |
 | V121 | Same Small, cleaner90787/fourteen-region continuation | 37.04157 dB | 54.32184 / 53.98947 dB | Tiny photo change; ADC maximum1645.36DN16 and no clear fine-mesh gain |
 | V114 | Frozen DINOv3 ConvNeXt-Tiny + pretrained DRUNet RGB trunk | 36.97973 dB | 54.28627 / 54.00290 dB | General camera/color balance; faint foliage and neon remain soft |
 | V115 | Fitted DINOv3 ConvNeXt-Small + the same restoration family | 36.97700 dB | 54.32405 / 54.00417 dB | Stronger known-camera mean and eight-pixel weak response; higher tested color bias |

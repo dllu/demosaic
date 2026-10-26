@@ -4,7 +4,8 @@
 Its primary panels, native synthetic triplets, full local statistics and selected
 native review are complete. Photo37.04008dB and known/unseen54.31272/54.00872dB
 coexist with a much lower tested ADC maximum than V119:55.52DN16.
-Matching-profile full-frame comparison against older models remains open.
+[Matched-profile full-frame comparisons](v120-v121-primary.md#matched-profile-full-frame-gfx)
+against V115/V119 are complete; differences remain subtle and fine detail stays soft.
 [V120/V121 measured gains and remaining limits](v120-v121-primary.md).
 Quality development uses the Small architecture; active V122/V123 keep their
 fixed V115 parent for the controlled frequency-scope comparison.
@@ -107,7 +108,8 @@ V119's photo score with a+.21209dB known-camera recovery and much lower tested
 ADC maximum. V121's small photo/known changes coexist with lower unseen mean
 and a large ADC tail. [Two native exact-GT triplets per model](v120-v121-primary.md)
 are published; full local statistics and selected native review are complete. Older Haar/new nominal
-GFX conditioning is labeled, with matching-profile comparison still required.
+GFX conditioning is labeled; the additional fixed-Haar full-frame operators
+now match older V115/V119 inputs exactly, with no clear large detail recovery.
 
 ## Quality and remaining work
 

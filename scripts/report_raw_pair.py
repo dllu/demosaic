@@ -9,6 +9,7 @@ The low-ISO frame is a reference, never exact GT; no paired quality scores.
 import argparse
 import hashlib
 import json
+import math
 from dataclasses import asdict
 from pathlib import Path
 
@@ -29,6 +30,57 @@ from demosaic.reference import RawNind, load_rawnind, publisher_input_scale
 from demosaic.reporting import display_crop, save_triplet
 from demosaic.safety import writable_path
 from demosaic.suite import freeze_checkpoint
+
+
+def read_noise_profile(path):
+    """Read a fixed input profile using the same wrapper as the restore CLI."""
+    profile = json.loads(Path(path).read_text())
+    if not isinstance(profile, dict):
+        raise TypeError("Noise profile must be a JSON object")
+    estimate = profile.get("estimate", profile)
+    if not isinstance(estimate, dict) or estimate.get("reliable") is not True:
+        raise ValueError("A fixed noise profile must contain a reliable estimate")
+    for key in ("shot", "read"):
+        value = estimate.get(key)
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+            or value < 0
+        ):
+            raise ValueError(f"Noise profile {key} must be a finite nonnegative number")
+    if "raw_metadata" in profile and not isinstance(profile["raw_metadata"], dict):
+        raise ValueError("Noise profile raw_metadata must be an object")
+    source = profile.get("conditioning_source", "input Haar fit")
+    if not isinstance(source, str) or not source.strip():
+        raise ValueError("Noise profile conditioning_source must be a nonempty string")
+    return profile
+
+
+def noise_conditioning(raw, metadata, profile=None):
+    """Choose conditioning once; a supplied profile never invokes the estimator."""
+    if profile is not None:
+        for key in ("camera", "iso"):
+            expected = profile.get("raw_metadata", {}).get(key)
+            if expected is not None and expected != getattr(metadata, key):
+                raise ValueError(f"Noise profile {key} does not match the noisy capture")
+        estimate = profile.get("estimate", profile)
+        return estimate, {
+            "shot": estimate["shot"],
+            "read": estimate["read"],
+            "source": profile.get("conditioning_source", "input Haar fit"),
+        }
+    estimate = estimate_noise(raw, metadata=metadata)
+    shot, read = (
+        (estimate.shot, estimate.read)
+        if estimate.reliable
+        else Sensor(iso=metadata.iso or 100).coefficients()
+    )
+    return estimate.to_dict(), {
+        "shot": shot,
+        "read": read,
+        "source": "input Haar fit" if estimate.reliable else "nominal ISO prior (not calibrated)",
+    }
 
 
 def rawnind_comparators(directory, modes, *, device="cuda"):
@@ -61,6 +113,11 @@ def main():
     parser.add_argument("selection", type=Path)
     parser.add_argument("checkpoint", type=Path, nargs="+")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--noise-profile",
+        type=Path,
+        help="Use a fixed reliable JSON profile instead of fitting the noisy capture",
+    )
     parser.add_argument("--rawnind", type=Path)
     parser.add_argument(
         "--rawnind-gain-modes",
@@ -80,6 +137,7 @@ def main():
         help="Restore the complete photo before cropping; also save linear/sRGB16 TIFFs",
     )
     args = parser.parse_args()
+    profile = read_noise_profile(args.noise_profile) if args.noise_profile else None
     if args.device == "cpu" and (
         args.precision != "float32" or args.refinement_precision != "float32"
     ):
@@ -95,6 +153,23 @@ def main():
     for path in [Path(__file__), *sorted(Path("src/demosaic").glob("*.py"))]:
         (archive / path.name).write_bytes(path.read_bytes())
     (archive / "selection.json").write_bytes(args.selection.read_bytes())
+    conditioning_policy = None
+    if args.noise_profile:
+        profile_bytes = args.noise_profile.read_bytes()
+        if json.loads(profile_bytes) != profile:
+            raise ValueError("Noise profile changed while preparing the report")
+        (archive / "noise-profile.json").write_bytes(profile_bytes)
+        conditioning_policy = {
+            "mode": "fixed supplied profile",
+            "profile": {
+                "path": str(args.noise_profile.resolve()),
+                "sha256": hashlib.sha256(profile_bytes).hexdigest(),
+            },
+            "archived_profile": "source/noise-profile.json",
+            "estimator_executed": False,
+            "diagnostic_origin": "Supplied profile; diagnostic fields were not recomputed",
+            "interpretation": "Fixed comparison convention; not newly verified camera calibration",
+        }
     models, weights = [], []
     for i, path in enumerate(args.checkpoint):
         frozen, digest = freeze_checkpoint(path, output / "weights")
@@ -138,12 +213,8 @@ def main():
     del reference_raw
     if meta.camera != refmeta.camera:
         raise ValueError("This qualitative report requires the same camera")
-    estimate = estimate_noise(raw, metadata=meta)
-    shot, read = (
-        (estimate.shot, estimate.read)
-        if estimate.reliable
-        else Sensor(iso=meta.iso or 100).coefficients()
-    )
+    estimate, conditioning = noise_conditioning(raw, meta, profile)
+    shot, read = conditioning["shot"], conditioning["read"]
     colors = color_indices(meta.pattern, device=args.device)[None]
     wb = torch.tensor(meta.white_balance, device=args.device)[None]
     matrix = torch.tensor(meta.camera_to_srgb, device=args.device)[None]
@@ -342,14 +413,8 @@ def main():
         "selection": selection,
         "sources": sources,
         "models": weights,
-        "noise_estimate": estimate.to_dict(),
-        "conditioning": {
-            "shot": shot,
-            "read": read,
-            "source": "input Haar fit"
-            if estimate.reliable
-            else "nominal ISO prior (not calibrated)",
-        },
+        "noise_estimate": estimate,
+        "conditioning": conditioning,
         "reference_calibration": calibration,
         "native_crops": crops,
         "full_frames": full_frames,
@@ -363,6 +428,8 @@ def main():
         "usage": "Qualitative evaluation only; never training",
         "quality_scores": None,
     }
+    if conditioning_policy is not None:
+        receipt["conditioning_policy"] = conditioning_policy
     if args.device == "cpu" and receipt["runtime"]["cuda_initialized"]:
         raise RuntimeError("CPU paired-capture comparison unexpectedly initialized CUDA")
     (output / "report.json").write_text(json.dumps(receipt, indent=2) + "\n")
@@ -378,6 +445,15 @@ def main():
         + ". No PSNR/SSIM against this reference.",
         "",
     ]
+    if conditioning_policy is not None:
+        lines += [
+            (
+                "Conditioning uses the supplied archived profile; the input estimator was skipped. "
+                "Its diagnostic fields are historical. This is a fixed comparison convention, "
+                "not newly verified camera calibration."
+            ),
+            "",
+        ]
     for crop in crops:
         lines += [crop["caption"], "", f"![Native pixel comparison]({crop['image']})", ""]
     lines += ["[Coordinates, settings and source/model hashes](report.json)", ""]

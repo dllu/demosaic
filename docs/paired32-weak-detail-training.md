@@ -11,8 +11,9 @@ profile. Endpoint predictions, the full numerical audit and RGB16 checks are
 complete, as are four saved/local-detail contrasts and selected native viewing.
 The [report repair](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
 preserves differing material selections and explicitly labels the older/new
-main-GFX conditioning difference. A matching-profile full-frame comparison
-remains required for isolating a model-only gain over older outputs.
+main-GFX conditioning difference. The additional
+[fixed-Haar full-frame comparison](v120-v121-primary.md#matched-profile-full-frame-gfx)
+now matches older model inputs exactly, with no clear large detail recovery.
 [Completed primary scores and two native exact-GT triplets per model](v120-v121-primary.md)
 document V120's recovered camera/color balance and V121's remaining ADC outlier.
 

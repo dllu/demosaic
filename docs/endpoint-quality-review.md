@@ -55,8 +55,16 @@ The default matched-profile guard still rejects it. The new plans explicitly
 allow a **labeled pipeline comparison**: image rows include their actual profile,
 filenames say `conditioning-different`, and receipts flag that it cannot isolate
 a model-only gain. All original RAW/reference/geometry/display checks remain
-required. A complete-frame comparison at matching fixed conditioning is still
-needed against older models; the nominal outputs remain preserved evidence.
+required. The additional V120/V121
+[fixed-Haar complete-frame comparison](v120-v121-primary.md#matched-profile-full-frame-gfx)
+now passes strict matching against older V115/V119 outputs, including every
+five-argument input fingerprint before each forward. All six native regions,
+both RGB16 exports per model and actual viewing are complete. Model differences
+remain subtle, with continued foliage/neon detail loss. The supplied profile
+skips estimation; it is an archived comparison convention, not revalidated camera
+calibration. Current automatic ADC-floor handling and nominal outputs remain
+preserved. This adds260 root/encoder calls and two shared cached RAW decodes;
+primary panels and old controls are reused.
 V120 versus V121 uses the same nominal profile. The independent primary/analytic
 numerical joins remain matched, and the extra fine mesh uses its two fixed
 matched profiles with V120 predictions reused.

@@ -2,22 +2,23 @@
 
 ## Current quality model
 
-Use **V114 Tiny final20k** for general restoration and continued quality training:
-`/mnt/external/demosaic/models/v114-final20000.pt`. It uses DRUNet RGB
-restoration and frozen official DINOv3 ConvNeXt-Tiny features. The
+Use **V120 Small final20k** for general restoration and continued quality training:
+`/mnt/external/demosaic/models/v120-final20000.pt`. It uses DRUNet RGB
+restoration and frozen official DINOv3 ConvNeXt-Small features. The
 [current model guide](current-model.md) records its hash and alternatives;
-[completed primary panels, diagnostics and native crops](v114-v115-quality.md)
+[completed primary panels, diagnostics and native crops](v120-v121-primary.md)
 cover full427 photos,known/unseen measured-camera and complete 102MP GFX output.
 Continue quality work with the [reviewed corpus and zero-blur recipe](quality-first-training.md).
 Earlier measurements below retain their checkpoint labels.
 For explicit shot=read=0 inputs, the separately tested
-[V104 observed-site ADC export](adc-consistency.md#use-the-optional-export) gains
-.2885 dB across 427 sources/four CFAs with unchanged learned weights. All 1,708
+[V114 observed-site ADC export](adc-consistency.md#current-export-and-verification) gains
+.23563 dB across 427 sources/four CFAs with unchanged learned weights. All 1,708
 cases improve; positive-noise profiles bypass the correction. Its report includes
-actual serialized-export triplets and remaining flat-color limitations.
-V112 retains a slightly lower ADC maximum; V115 Small has higher known-camera
-quality and eight-pixel weak response, with higher color bias. The model guide
-records these useful alternatives.
+actual serialized-export triplets and the increased flat-field spatial variation.
+V114 Tiny retains a slightly lower tested ADC maximum; V115 Small has a slightly
+higher known-camera mean and V117 a higher photo mean. The model guide records
+these useful alternatives. Active V122/V123 retain their fixed V115 parent for
+the controlled frequency-adapter experiment.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality
 inference. It preserves Bayer geometry and averages camera-RGB predictions
@@ -31,6 +32,15 @@ photo/camera gains and remaining color/detail tradeoffs. V112 has a separate
 [fixed24 pilot](v112-eight-view.md). The [current V114 fixed24 result](v114-eight-view.md)
 improves all12 material cases and both selected camera crops, with a small
 selected color-bias tradeoff. Full V114 eight-view panels/frame remain unmeasured.
+
+For reproducible real-capture comparisons, `scripts/report_raw_pair.py` accepts
+`--noise-profile profile.json`. It supports the `demosaic noise-profile` wrapper
+(`estimate` plus optional `raw_metadata`) or a direct reliable estimate with
+finite, nonnegative `shot` and `read`. Camera/ISO metadata, when supplied, must
+match the noisy capture. The report archives the exact supplied bytes and records
+that the estimator was skipped. Fixed historical coefficients are a comparison
+convention, not newly verified camera calibration. Omitting the option retains
+automatic input estimation and its nominal-prior fallback.
 
 ## Environment and storage
 

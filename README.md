@@ -13,8 +13,9 @@ camera/color regression while keeping its photo score. Fine detail remains weak.
 V115 Small has a slightly higher known-camera mean54.324dB; V117 has a slightly
 higher photo score. These choices retain soft fine foliage/neon detail and
 dark-camera mottling. V120's numerical/local panels, selected native review and
-complete102MP RGB16 checks are done; matching-profile GFX comparison against
-older models remains open.
+complete102MP RGB16 checks are done. The
+[matched-profile GFX comparison](docs/v120-v121-primary.md#matched-profile-full-frame-gfx)
+against V115/V119 shows subtle changes with continued fine-detail loss.
 [Current choices](docs/current-model.md) · [GFX gallery](docs/gfx-qualitative.md).
 
 The [V121 data arm](docs/v120-v121-primary.md) has a small photo change and a
@@ -35,8 +36,8 @@ their original20k updates and independent numerical audit. Saved-output
 comparisons and selected native review are complete; the
 [early V120 mesh comparison](docs/gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
 shows no clear lattice-recovery gain over V115/V119.
-Older/new main GFX outputs use different noise profiles, which are
-[explicitly labeled](docs/endpoint-quality-review.md#material-selection-and-gfx-conditioning).
+The new [fixed-Haar main-GFX comparison](docs/v120-v121-primary.md#matched-profile-full-frame-gfx)
+matches older inputs exactly; original nominal-profile outputs are also preserved.
 The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
 now compares training the new input adapter alone with adapting the full
 restoration path on the same cleaned corpus. Image quality is still unmeasured.
@@ -82,16 +83,16 @@ Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-
 [CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/), modified by binning,
 cropping, simulated noise and restoration.
 
-Real GFX100S: DSCF3879 ISO6400 → **V117 Tiny** → DSCF3880 ISO100 f/5.6.
+Real GFX100S: DSCF3879 ISO6400 → **V120 Small, fixed historical Haar profile** → DSCF3880 ISO100 f/5.6.
 Native160×160 sensor-pixel crops from complete102MP outputs share +2EV display.
 The independent ISO100 exposure is an approximate qualitative reference,
 **not GT**. Fine foliage remains painterly; fence geometry is coherent.
 [All six regions and other useful models](docs/gfx-qualitative.md) ·
-[Metadata](docs/images/v117-v118-quality/manifest.json).
+[Metadata](docs/images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
-![V117 GFX foliage: noisy, restored and separate ISO100 reference](docs/images/v117-v118-quality/V117-gfx-foliage.png)
+![V120 GFX foliage: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-foliage-fixed-Haar-triplet.png)
 
-![V117 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v117-v118-quality/V117-gfx-chain-link-fence.png)
+![V120 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
 The additional **fine green mesh beside the red train's cab** remains difficult:
 the nominal ISO6400 prior largely erases its lattice. A fixed nearby-capture
@@ -102,7 +103,7 @@ references are **not GT**. Native160px cells share +4EV display; camera
 processing/aperture differ. [Matched comparison and limits](docs/gfx-green-mesh.md).
 The [matched V115/V119/V120 mesh check](docs/gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
 shows no clear V120 lattice-recovery gain at the same conditioning. The
-[V119 report](docs/v119-quality.md) adds native bark/feather triplets and matched
+[V119 report](docs/v119-quality.md) adds native material triplets and matched
 foliage/fence comparisons alongside its measured gains and regressions.
 The [RAW green-phase diagnostic](docs/green-phase-spectrum.md) finds matching
 diagonal frequency peaks that remain strongly attenuated in the saved outputs.
@@ -123,7 +124,7 @@ the lockfile. DINOv3 requires approved Hugging Face access through `HF_TOKEN`.
 ```bash
 source scripts/env.sh
 uv sync --extra dev
-uv run demosaic infer /mnt/external/demosaic/models/v114-final20000.pt photo.raf \
+uv run demosaic infer /mnt/external/demosaic/models/v120-final20000.pt photo.raf \
   /mnt/external/demosaic/output/photo-linear.tiff \
   --preview /mnt/external/demosaic/output/photo-srgb.tiff \
   --shot 0.001 --read 0.000001 \
