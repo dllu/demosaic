@@ -109,8 +109,11 @@ The queued independent CPU audit rebuilds all28,380 observations without new
 inference/noise/RAW work. Four full saved-output contrasts are V119→V120,
 V115→V120,V120→V121 and V117→V121. Each includes matched primary/analytic rows,
 native material/all six GFX regions and427-photo local detail over5,124 cases
-and96,075 reused GT blocks. Both linear/sRGB RGB16 exports per endpoint receive
-native quantization checks at921,600 channel values altogether.
+and96,075 reused GT blocks. Both linear/sRGB RGB16 exports receive file/type/shape
+checks; native linear-camera quantization is checked at921,600 channel values
+across the two endpoints. The corrected
+[comparison and fine-mesh queues](endpoint-quality-review.md) cover every
+declared model; the former waiting comparison controller is preserved and retired.
 
 Before recommending either endpoint, inspect at least two native noisy/restored/
 exact-synthetic-GT triplets, the six main GFX regions, adverse camera/color cases

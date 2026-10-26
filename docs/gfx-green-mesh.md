@@ -15,6 +15,11 @@ The case pairs **DSCF3842 ISO6400** with **DSCF3835 ISO100**, taken 46 seconds
 earlier. Both camera JPEGs are included.
 The existing DSCF3879/3880 standing scene and its six regions remain in use.
 
+The [V120–V123 endpoint review queues](endpoint-quality-review.md) now include
+both fixed mesh noise profiles and both native160 regions, reusing saved
+V115/V119/RawNIND controls. New endpoint predictions and actual viewing remain
+pending; queue preparation establishes no new mesh-quality result.
+
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).

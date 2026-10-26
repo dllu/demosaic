@@ -107,9 +107,10 @@ The evaluator accepts the trainer's actual plan/status schema and verifies
 final optimizer steps, finite states and V122's frozen common tensors before
 releasing a checkpoint to evaluation.
 
-Matched parent/scope contrasts, local photographic-detail analysis, native
-RGB16 verification, actual image viewing and fine green mesh at both existing
-fixed noise profiles remain to be completed after training. Separate ISO100/AHD
+The [complete review queues](endpoint-quality-review.md) now cover matched
+parent/scope contrasts, local photographic-detail analysis, native linear
+RGB16 verification and fine green mesh at both existing fixed noise profiles.
+These and actual image viewing remain pending after training. Separate ISO100/AHD
 references stay labeled **not exact GT**. Useful gains and weaknesses will
 update the current guides; successful training or a protected flat-field
 invariant alone establishes no quality improvement.
