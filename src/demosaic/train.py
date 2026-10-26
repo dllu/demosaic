@@ -151,13 +151,23 @@ def make_optimizer(model, config):
         raise ValueError("Spectral learning-rate multiplier requires the spectral branch")
     if spectral_multiplier != 1 and (multiplier != 1 or directional_multiplier != 1):
         raise ValueError("Spectral learning-rate groups cannot combine with other RAW-head groups")
+    frequency_multiplier = float(config.get("raw_frequency_lr_multiplier", 1))
+    if not math.isfinite(frequency_multiplier) or frequency_multiplier <= 0:
+        raise ValueError("Frequency learning-rate multiplier must be finite and positive")
+    if frequency_multiplier != 1 and not model.config.raw_frequency_features:
+        raise ValueError("Frequency learning-rate multiplier requires RAW frequency features")
+    if frequency_multiplier != 1 and any(
+        x != 1 for x in (multiplier, directional_multiplier, spectral_multiplier)
+    ):
+        raise ValueError("Frequency learning-rate groups cannot combine with other RAW-head groups")
     late_multiplier = float(config.get("late_rgb_lr_multiplier", 1))
     if not math.isfinite(late_multiplier) or late_multiplier <= 0:
         raise ValueError("Late RGB learning-rate multiplier must be finite and positive")
     if late_multiplier != 1 and model.config.late_rgb_refinement == "none":
         raise ValueError("Late RGB learning-rate multiplier requires late RGB refinement")
     if late_multiplier != 1 and any(
-        x != 1 for x in [multiplier, directional_multiplier, spectral_multiplier]
+        x != 1
+        for x in [multiplier, directional_multiplier, spectral_multiplier, frequency_multiplier]
     ):
         raise ValueError("Late RGB learning-rate groups cannot combine with other RAW-head groups")
     if late_only:
@@ -235,6 +245,23 @@ def make_optimizer(model, config):
                 "params": late,
                 "lr_multiplier": late_multiplier,
                 "lr": config.get("lr", 2e-4) * late_multiplier,
+            },
+        ]
+    if frequency_multiplier != 1:
+        frequency = [
+            p
+            for name, p in model.named_parameters()
+            if p.requires_grad and name.startswith("pretrained_rgb.raw_frequency.")
+        ]
+        if not frequency:
+            raise ValueError("Frequency learning-rate multiplier needs trainable branch parameters")
+        identities = {id(p) for p in frequency}
+        parameters = [
+            {"params": [p for p in parameters if id(p) not in identities], "lr_multiplier": 1.0},
+            {
+                "params": frequency,
+                "lr_multiplier": frequency_multiplier,
+                "lr": config.get("lr", 2e-4) * frequency_multiplier,
             },
         ]
     return torch.optim.AdamW(parameters, lr=config.get("lr", 2e-4), weight_decay=0.01)
@@ -453,6 +480,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             or options.get("raw_kernel_reconstruction", False)
             or options.get("raw_directional_residual", False)
             or options.get("raw_spectral_residual", False)
+            or options.get("raw_frequency_features", False)
             or options.get("late_rgb_refinement", "none") != "none"
         ):
             raise ValueError(
@@ -666,6 +694,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 else ()
             )
             + (("pretrained_rgb.raw_spectral.",) if model.config.raw_spectral_residual else ())
+            + (("pretrained_rgb.raw_frequency.",) if model.config.raw_frequency_features else ())
             + (
                 ("pretrained_rgb.rgb_refinement.",)
                 if model.config.late_rgb_refinement != "none"
@@ -812,6 +841,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             config.get("raw_spectral_lr_multiplier", 1)
         ):
             raise ValueError("Resume spectral learning rate differs; initialize a new run")
+        if float(state["config"].get("raw_frequency_lr_multiplier", 1)) != float(
+            config.get("raw_frequency_lr_multiplier", 1)
+        ):
+            raise ValueError("Resume frequency learning rate differs; initialize a new run")
         if float(state["config"].get("late_rgb_lr_multiplier", 1)) != float(
             config.get("late_rgb_lr_multiplier", 1)
         ):

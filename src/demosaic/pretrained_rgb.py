@@ -308,6 +308,7 @@ class PretrainedRgbDemosaic(nn.Module):
         raw_directional_bank_context=False,
         raw_directional_bank_detach_input=False,
         raw_spectral_residual=False,
+        raw_frequency_features=False,
     ):
         super().__init__()
         if raw_directional_bank_context and not raw_directional_residual:
@@ -353,6 +354,18 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError(
                 "Spectral residual requires native stabilized anchored RGB without other RAW heads"
             )
+        if raw_frequency_features and (
+            not stabilized
+            or not physical_anchors
+            or processing_scale != 1
+            or raw_kernel
+            or raw_directional_residual
+            or raw_spectral_residual
+            or adc_projection
+        ):
+            raise ValueError(
+                "RAW frequency features require native anchored RGB without other RAW heads"
+            )
         self.network = RgbRestorationTrunk(
             hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
         )
@@ -393,7 +406,12 @@ class PretrainedRgbDemosaic(nn.Module):
         self.raw_kernel = None
         self.raw_directional = None
         self.raw_spectral = None
+        self.raw_frequency = None
         self.rgb_refinement = None
+        if raw_frequency_features:
+            from .raw_frequency_features import RawFrequencyFeatures
+
+            self.raw_frequency = RawFrequencyFeatures()
         if raw_spectral_residual:
             from .raw_spectral import RawSpectralResidual
 
@@ -607,6 +625,7 @@ class PretrainedRgbDemosaic(nn.Module):
             or self.raw_kernel is not None
             or self.raw_directional is not None
             or self.raw_spectral is not None
+            or self.raw_frequency is not None
             or self.rgb_refinement is not None
         ):
             raise ValueError(
@@ -679,6 +698,9 @@ class PretrainedRgbDemosaic(nn.Module):
             )
             with torch.autocast(packed.device.type, enabled=False), ieee_fp32():
                 head_offset = self.project_measurements(condition)
+                if self.raw_frequency is not None:
+                    frequency_offset = self.raw_frequency(packed, variance, colors, span)
+                    head_offset = head_offset + F.pad(frequency_offset, pad, mode="replicate")
             middle_offset, encoder_kwargs = None, {}
             late_features = None
             if context is not None:
@@ -756,7 +778,10 @@ class PretrainedRgbDemosaic(nn.Module):
                             else wb.reshape(-1, 3).expand(len(output), -1)[indices]
                         )
                         corrected = adc_cfa_projection(
-                            output[indices], original_packed[indices], colors[indices], balance,
+                            output[indices],
+                            original_packed[indices],
+                            colors[indices],
+                            balance,
                             mode=self.adc_projection_mode,
                         )
                         output = output.index_copy(0, indices, corrected)

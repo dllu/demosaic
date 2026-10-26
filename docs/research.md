@@ -59,6 +59,13 @@ the reference-only spectra. This supports studying signed phase information
 instead of a forced positive-only mask; it establishes no new trained model
 and leaves current data trials unchanged.
 
+The resulting [learned RAW frequency adapter](learned-raw-frequency-features.md)
+now has an optional implementation and discarded mature-V115 CPU/CUDA checks. It
+uses signed complex phase features as RGB-stem input, with zero initial output,
+instead of the earlier fixed MHC correction. Parent preservation, finite mixed
+training and resume checks pass, including native256/B16/BF16 on GB10. No
+trained-quality or full-frame gain is established; current V120/V121 trials and model choices are unchanged.
+
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing
 GFX contexts. Lower conditioning retains more fine structure and grain while

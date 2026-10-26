@@ -1,0 +1,743 @@
+{
+  "status": "implemented-optional-learned-RAW-frequency-adapter-with-CPU-CUDA-engineering-checks",
+  "recorded_local": "2026-10-25T22:20:16-07:00",
+  "model_quality_claim": null,
+  "implementation": {
+    "new_parameter_count": 3264,
+    "new_parameter_tensors": 5,
+    "default_enabled": false,
+    "model_flag": "raw_frequency_features",
+    "optional_LR_setting": "raw_frequency_lr_multiplier",
+    "descriptor_channels": 31,
+    "packed_latent_channels": 8,
+    "native_latent_channels": 2,
+    "RGB_stem_offset_channels": 64,
+    "maximum_packed_frame": 64,
+    "overlap_fraction": 0.5,
+    "raw_cross_sign_clipping": false,
+    "fixed_RGB_or_MHC_correction": false,
+    "reference_dependent_forward": false,
+    "current_source_bindings": [
+      {
+        "path": "/home/dllu/proj/demosaic/src/demosaic/raw_frequency_features.py",
+        "sha256": "c8831e53c478f0ca7127dfa333485485ccb0b4842c8f739d5cdec51e60489d3a"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/src/demosaic/model.py",
+        "sha256": "95c53615fbcd3fed5d49eadb8b1312054220819894ba33e1c0f494548d09edf7"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py",
+        "sha256": "8befef9266d000dc46a1e3de7755f76eea2ed51d2a9092fc92b9945326fd7b70"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/src/demosaic/train.py",
+        "sha256": "3a39da1e3bed0d4dcf48af386708e94be7e63a07a0a1ecc4d56f0a24a3e9be62"
+      }
+    ]
+  },
+  "primary_research_context": {
+    "title": "Frequency-Domain Feature Learning Network for Joint Image Demosaicing and Denoising, April2026",
+    "URL": "https://www.mdpi.com/2227-7390/14/7/1175",
+    "scope": "Primary-paper motivation for studying learned Fourier features only; independent implementation, no imported code/weights or reproduced paper benchmark claim."
+  },
+  "CPU": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/execution-plan-v1.json",
+      "sha256": "894a82e808ca53ab809f0b293bf384f4ace8fe73f33ceb4e8bdb43f0921ade4e"
+    },
+    "execution": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/result-v1.json",
+      "sha256": "746454d12909f38a82ef92cf32068800a7e130e5173680f19055db93c7e95330"
+    },
+    "status": "completed-discarded-CPU-frequency-adapter-engineering-check",
+    "recorded_local": "2026-10-25T21:39:10.006188-07:00",
+    "execution_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/execution-plan-v1.json",
+      "sha256": "894a82e808ca53ab809f0b293bf384f4ace8fe73f33ceb4e8bdb43f0921ade4e"
+    },
+    "owner": {
+      "pid": 3976476,
+      "created": 1792989354.08
+    },
+    "counts": {
+      "prepared_batches": 18,
+      "training_forwards": 18,
+      "encoder_forwards": 19,
+      "feature_disabled_first_input_forwards": 1,
+      "adapter_forwards": 18,
+      "source_diagnostics_calls": 18,
+      "optimizer_steps": 18
+    },
+    "domain_counts": {
+      "native": 6,
+      "commons": 9,
+      "paired": 3
+    },
+    "first_disabled_enabled_outputs_exact": true,
+    "initial_checks": [
+      {
+        "phase": "fresh",
+        "restoration_tensor_count": 96,
+        "new_tensors": [
+          "pretrained_rgb.raw_frequency.kernel_in.bias",
+          "pretrained_rgb.raw_frequency.kernel_in.weight",
+          "pretrained_rgb.raw_frequency.kernel_out.bias",
+          "pretrained_rgb.raw_frequency.kernel_out.weight",
+          "pretrained_rgb.raw_frequency.project.weight"
+        ],
+        "common91_or_resumed96_exact": true,
+        "optimizer_initial_steps": 0,
+        "official_encoder_exact": true
+      },
+      {
+        "phase": "resume",
+        "restoration_tensor_count": 96,
+        "new_tensors": [
+          "pretrained_rgb.raw_frequency.kernel_in.bias",
+          "pretrained_rgb.raw_frequency.kernel_in.weight",
+          "pretrained_rgb.raw_frequency.kernel_out.bias",
+          "pretrained_rgb.raw_frequency.kernel_out.weight",
+          "pretrained_rgb.raw_frequency.project.weight"
+        ],
+        "common91_or_resumed96_exact": true,
+        "optimizer_initial_steps": 16,
+        "official_encoder_exact": true
+      }
+    ],
+    "new_parameter_maximum_absolute_gradients": {
+      "kernel_in.weight": 1.0365843600146363e-11,
+      "kernel_in.bias": 1.0365843600146363e-11,
+      "kernel_out.weight": 3.1212940143632295e-07,
+      "kernel_out.bias": 9.543018677504733e-07,
+      "project.weight": 0.012593257240951061
+    },
+    "rejected_changed_frequency_LR_resume": "Resume frequency learning rate differs; initialize a new run",
+    "fresh16_checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/work/artifacts/step16-preserved.pt",
+      "sha256": "2b58ddefed020d5e2e349a2825f07721acc479199205c6a8d1bcd92da5771319"
+    },
+    "resumed18_checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/work/artifacts/train/prototype/last.pt",
+      "sha256": "8ee7dcaa3f312f450102ad4ace2a052e0e2e761f494de48d5cbeddd0915ce73f"
+    },
+    "source_archive_sha256": "a7a836131488c88198aea1cf1b95ae29f2f4b0288c7686e73b9bb56e434d4d8d",
+    "official_encoder_sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14",
+    "all_model_EMA_AdamW_states_finite": true,
+    "new_optimizer_states": 94,
+    "new_parameter_tensors": 5,
+    "new_parameter_count": 3264,
+    "new_neural_root_forwards": 19,
+    "new_encoder_forwards": 19,
+    "new_synthetic_noise_or_ADC_observations": 15,
+    "new_paired_training_observations": 3,
+    "RAW_decodes": 0,
+    "CUDA_initialized": false,
+    "seconds": 194.7146302270703,
+    "audit": {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/audit-v1.json",
+        "sha256": "054853ab2d76217d3b3164be744b9caaee97e46a5ece893264121dc08e4e73bc"
+      },
+      "status": "independently-verified-saved-engineering-state-no-NN",
+      "recorded_local": "2026-10-25T21:44:27.942168-07:00",
+      "code": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/audit-v1.py",
+        "sha256": "0c0ecf019a2b579606d6ec68434b33e9cd220a674ead4f449010b08d968e58a5"
+      },
+      "execution": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/result-v1.json",
+        "sha256": "746454d12909f38a82ef92cf32068800a7e130e5173680f19055db93c7e95330"
+      },
+      "input_batches_verified": 18,
+      "input_tensor_fields_verified": 165,
+      "input_numeric_values_verified": 2507076,
+      "initial_output_pairs_verified": [
+        {
+          "file": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/work/artifacts/first-outputs/output-0.npz",
+            "sha256": "9a921f7c21e3bce017dd7b3844d05a34d5aa539248fcb07a78e0946890b8c0a7"
+          },
+          "shape": [
+            1,
+            3,
+            128,
+            128
+          ],
+          "paired_FP32_values": 49152,
+          "all_bytes_exact": true
+        },
+        {
+          "file": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/work/artifacts/first-outputs/output-1.npz",
+            "sha256": "6eee7befc11686886fab92f9fb1ebb5ca4f8a608c66e70965909da030d48c063"
+          },
+          "shape": [
+            1,
+            4,
+            64,
+            64
+          ],
+          "paired_FP32_values": 16384,
+          "all_bytes_exact": true
+        }
+      ],
+      "first_input_exact_FP32_pairs": 65536,
+      "fresh16_and_resumed18_model_EMA_optimizer_finite": true,
+      "optimizer_state_count": 94,
+      "new_tensors_changed_between16_and18": [
+        "pretrained_rgb.raw_frequency.kernel_in.bias",
+        "pretrained_rgb.raw_frequency.kernel_in.weight",
+        "pretrained_rgb.raw_frequency.kernel_out.bias",
+        "pretrained_rgb.raw_frequency.kernel_out.weight",
+        "pretrained_rgb.raw_frequency.project.weight"
+      ],
+      "source_archive_matches_frozen_executed_Python": true,
+      "all18_step_input_hashes_match_actual_training_log": true,
+      "source_trace_actual_Commons_draws": 9,
+      "negative_LR_resume_has_no_training_log": true,
+      "new_neural_forwards": 0,
+      "new_noise_observations": 0,
+      "RAW_decodes": 0,
+      "CUDA_initialized": false
+    }
+  },
+  "constructor_fix": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/constructor-parity-v1.json",
+      "sha256": "d84d7d09bd352d77b73a32df98121bbcbb233b8b2c2a9e64c686e6416b07a77e"
+    },
+    "status": "public-constructor-fixed-without-replaying-completed-CPU-inference",
+    "executed_CPU_source": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/work/src/demosaic/raw_frequency_features.py",
+      "sha256": "5307c28da9729e9534357671245e5b52acc48abc13aee3b786e2e828e6a79531"
+    },
+    "public_fixed_source": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/raw_frequency_features.py",
+      "sha256": "c8831e53c478f0ca7127dfa333485485ccb0b4842c8f739d5cdec51e60489d3a"
+    },
+    "original_CPU_result": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/result-v1.json",
+      "sha256": "746454d12909f38a82ef92cf32068800a7e130e5173680f19055db93c7e95330"
+    },
+    "changed_behavior": "Use explicit CPU-local generator/state and CPU allocations; avoid torch.manual_seed, which also seeds CUDA. Completed CPU execution kept CUDA hidden/uninitialized.",
+    "same_initial_CPU_parameters_and_buffers": [
+      {
+        "kind": "parameter",
+        "name": "kernel_in.weight",
+        "shape": [
+          32,
+          31,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "sha256": "f851989249c637bb470d478d083e5dbbf4bdbdb08f154c504aaed48e864ea691",
+        "numeric_values": 992,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "parameter",
+        "name": "kernel_in.bias",
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "sha256": "2fb84c40f53884ac592e5c54f9c83ebee5d2c4d32c9908276c4df970886d9d3d",
+        "numeric_values": 32,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "parameter",
+        "name": "kernel_out.weight",
+        "shape": [
+          64,
+          32,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+        "numeric_values": 2048,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "parameter",
+        "name": "kernel_out.bias",
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+        "numeric_values": 64,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "parameter",
+        "name": "project.weight",
+        "shape": [
+          64,
+          2,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "numeric_values": 128,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "base_mixing",
+        "shape": [
+          8,
+          4
+        ],
+        "dtype": "torch.float32",
+        "sha256": "11c4f57e6ed1a9fa777a00a8f73afbf8e2307d97395affeee9a79ea13677d1f8",
+        "numeric_values": 32,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "window_4",
+        "shape": [
+          4,
+          4
+        ],
+        "dtype": "torch.float32",
+        "sha256": "af02209be48865577aa55201a3a8b5600960cbd44717b1cbf6762a8b2127841f",
+        "numeric_values": 16,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "basis_4",
+        "shape": [
+          4,
+          4,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "afb00def3d9fec71f18b683088e149a7858876490424eef05f6db5741475c398",
+        "numeric_values": 48,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "inverse_4",
+        "shape": [
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "828c9883896c8994c46e2031fbb776cb1b8099359c41d4916ebe1bf5306b9f21",
+        "numeric_values": 9,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "window_8",
+        "shape": [
+          8,
+          8
+        ],
+        "dtype": "torch.float32",
+        "sha256": "8c10d6262e84f685328d41672b2204853b455a7f6c79f247ae24e87e7ba35ac5",
+        "numeric_values": 64,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "basis_8",
+        "shape": [
+          8,
+          8,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "c1d34f56ec0a29c77a1b28645f72a3db1fe3660d754e9fb99aeddbc9df7a183a",
+        "numeric_values": 192,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "inverse_8",
+        "shape": [
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "992149cdfb929944dcd1e981292a9c3ff3a2cad8a715b376f3d57af9ea1f8b0d",
+        "numeric_values": 9,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "window_16",
+        "shape": [
+          16,
+          16
+        ],
+        "dtype": "torch.float32",
+        "sha256": "b5317dc003f1b18f5faf6aef89c76b83980446f23bfa62154e953b23ce307240",
+        "numeric_values": 256,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "basis_16",
+        "shape": [
+          16,
+          16,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "b02c257df389fc51c335f2ba5c93a8a7ca90f02e440fb514102f172f92634942",
+        "numeric_values": 768,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "inverse_16",
+        "shape": [
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "592cddec2b7cf0abe23ccc00ad3546af851a3048df5ec70e4ad5e7480111687b",
+        "numeric_values": 9,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "window_32",
+        "shape": [
+          32,
+          32
+        ],
+        "dtype": "torch.float32",
+        "sha256": "2964c71f1131c0ebaabc2e9385256527763675973c57b591489077006d23cc53",
+        "numeric_values": 1024,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "basis_32",
+        "shape": [
+          32,
+          32,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "292382626aec7427dc213202ed70241527a64180668e6f86c4c23deb5f64e6d8",
+        "numeric_values": 3072,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "inverse_32",
+        "shape": [
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "347923f8586c2af999d583c7eaf2c83345d89095214c50412bd1835ee7bd0d96",
+        "numeric_values": 9,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "window_64",
+        "shape": [
+          64,
+          64
+        ],
+        "dtype": "torch.float32",
+        "sha256": "cdd9eeaf75df0586dba29b40817ea7731496e53aa8d0117ab1a1fe26e84286d6",
+        "numeric_values": 4096,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "basis_64",
+        "shape": [
+          64,
+          64,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "e071d72d0383712df5118ed6f218dbf94f092524e9b13dbdcce26aac06a317c9",
+        "numeric_values": 12288,
+        "exact_to_executed_CPU_constructor": true
+      },
+      {
+        "kind": "buffer",
+        "name": "inverse_64",
+        "shape": [
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "9659bd18126df26a17b0aff6ddc54b80b9df13b6bfcacc64db037e0d7144d8dd",
+        "numeric_values": 9,
+        "exact_to_executed_CPU_constructor": true
+      }
+    ],
+    "unchanged_runtime_method_ASTs": [
+      "mix_spectrum",
+      "packed_features",
+      "forward"
+    ],
+    "matched_numeric_values": 25165,
+    "CPU_RNG_unchanged": true,
+    "CUDA_initialized": false,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "scope": "Constructor/state parity only. All runtime method ASTs are identical, so the retained CPU check remains applicable. A separate test forbids CUDA seeding and verifies CPU construction under ambient meta device. No GPU numerical/accuracy claim or prior NN replay."
+  },
+  "CUDA": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/execution-plan-v1.json",
+      "sha256": "37ed6eff578036a0b79f768c47163b4713cc1797b7946501921addaeb621b165"
+    },
+    "execution": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/result-v1.json",
+      "sha256": "188d9402b432e043ee69672040e6f39a8e38624655ec933dacfac147cd7417f0"
+    },
+    "status": "completed-discarded-CUDA256-B16-BF16-frequency-adapter-engineering-check",
+    "recorded_local": "2026-10-25T22:05:14.879516-07:00",
+    "execution_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/execution-plan-v1.json",
+      "sha256": "37ed6eff578036a0b79f768c47163b4713cc1797b7946501921addaeb621b165"
+    },
+    "owner": {
+      "pid": 4026410,
+      "created": 1792990952.09
+    },
+    "counts": {
+      "prepared_batches": 18,
+      "training_forwards": 18,
+      "encoder_forwards": 19,
+      "feature_disabled_first_input_forwards": 1,
+      "adapter_forwards": 18,
+      "source_diagnostics_calls": 18,
+      "optimizer_steps": 18
+    },
+    "domain_counts": {
+      "native": 6,
+      "commons": 9,
+      "paired": 3
+    },
+    "first_disabled_enabled_outputs_exact": true,
+    "initial_checks": [
+      {
+        "phase": "fresh",
+        "restoration_tensor_count": 96,
+        "new_tensors": [
+          "pretrained_rgb.raw_frequency.kernel_in.bias",
+          "pretrained_rgb.raw_frequency.kernel_in.weight",
+          "pretrained_rgb.raw_frequency.kernel_out.bias",
+          "pretrained_rgb.raw_frequency.kernel_out.weight",
+          "pretrained_rgb.raw_frequency.project.weight"
+        ],
+        "common91_or_resumed96_exact": true,
+        "optimizer_initial_steps": 0,
+        "official_encoder_exact": true
+      },
+      {
+        "phase": "resume",
+        "restoration_tensor_count": 96,
+        "new_tensors": [
+          "pretrained_rgb.raw_frequency.kernel_in.bias",
+          "pretrained_rgb.raw_frequency.kernel_in.weight",
+          "pretrained_rgb.raw_frequency.kernel_out.bias",
+          "pretrained_rgb.raw_frequency.kernel_out.weight",
+          "pretrained_rgb.raw_frequency.project.weight"
+        ],
+        "common91_or_resumed96_exact": true,
+        "optimizer_initial_steps": 16,
+        "official_encoder_exact": true
+      }
+    ],
+    "new_parameter_maximum_absolute_gradients": {
+      "kernel_in.weight": 6.9940845649762995e-12,
+      "kernel_in.bias": 5.087452160934536e-12,
+      "kernel_out.weight": 3.198726616915337e-08,
+      "kernel_out.bias": 1.276717114251369e-07,
+      "project.weight": 0.00414971774443984
+    },
+    "rejected_changed_frequency_LR_resume": "Resume frequency learning rate differs; initialize a new run",
+    "fresh16_checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/work/artifacts/step16-preserved.pt",
+      "sha256": "c02aa16ffbc25083dc13f3739ead8025b4027d6f37011737656754d189748621"
+    },
+    "resumed18_checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/work/artifacts/train/prototype/last.pt",
+      "sha256": "26268a1f531b1f27fd36614435e2486dee0af8af99d9a80bfff06ce23799f134"
+    },
+    "source_archive_sha256": "3989cf20a024e4774ef8c1f14aeb393a0f3a7254175c9a0223606539a023cb80",
+    "official_encoder_sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14",
+    "all_model_EMA_AdamW_states_finite": true,
+    "new_optimizer_states": 94,
+    "new_parameter_tensors": 5,
+    "new_parameter_count": 3264,
+    "new_neural_root_forwards": 19,
+    "new_encoder_forwards": 19,
+    "new_synthetic_noise_or_ADC_observations": 240,
+    "new_paired_training_observations": 48,
+    "RAW_decodes": 0,
+    "CUDA_initialized": true,
+    "CUDA_allocator_cap_GiB": 16,
+    "CUDA_peak_allocated_bytes": 9684891136,
+    "CUDA_peak_reserved_bytes": 10659823616,
+    "constructor_RNG_checks": [
+      {
+        "phase": "fresh",
+        "CPU_RNG_unchanged": true,
+        "CUDA_RNG_unchanged": true,
+        "CUDA_rng_sha256": "8bd6d99d996e1dc4251feaceafe6497b5669feca7dc9caa23b9648b0e4810ff0"
+      },
+      {
+        "phase": "rejected-resume",
+        "CPU_RNG_unchanged": true,
+        "CUDA_RNG_unchanged": true,
+        "CUDA_rng_sha256": "8bd6d99d996e1dc4251feaceafe6497b5669feca7dc9caa23b9648b0e4810ff0"
+      },
+      {
+        "phase": "resume",
+        "CPU_RNG_unchanged": true,
+        "CUDA_RNG_unchanged": true,
+        "CUDA_rng_sha256": "8bd6d99d996e1dc4251feaceafe6497b5669feca7dc9caa23b9648b0e4810ff0"
+      }
+    ],
+    "seconds": 161.47322410112247,
+    "audit": {
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/audit-v1.json",
+        "sha256": "b812c89f0299419bc3d24dac0358d627e6543600776e4f6bd12a7084f10e9e3a"
+      },
+      "status": "independently-verified-saved-engineering-state-no-NN",
+      "recorded_local": "2026-10-25T22:09:23.170571-07:00",
+      "code": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/audit-v1.py",
+        "sha256": "a5807e1238fb4b33e558efa1e0feb0167f2122fc57759e25c887e4e32bea21f0"
+      },
+      "execution": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/result-v1.json",
+        "sha256": "188d9402b432e043ee69672040e6f39a8e38624655ec933dacfac147cd7417f0"
+      },
+      "input_batches_verified": 18,
+      "input_tensor_fields_verified": 165,
+      "input_numeric_values_verified": 160437312,
+      "initial_output_pairs_verified": [
+        {
+          "file": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/work/artifacts/first-outputs/output-0.npz",
+            "sha256": "576fa63e0bb90514702fae1c9a73669959fc677d6c73f8bd5f34d97027fac87c"
+          },
+          "shape": [
+            16,
+            3,
+            256,
+            256
+          ],
+          "paired_FP32_values": 3145728,
+          "all_bytes_exact": true
+        },
+        {
+          "file": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CUDA-v1/work/artifacts/first-outputs/output-1.npz",
+            "sha256": "54e6ba09607f320fb06ceb02b5682ca47b80325de0d4d8ae491c034e5a5c9a4e"
+          },
+          "shape": [
+            16,
+            4,
+            128,
+            128
+          ],
+          "paired_FP32_values": 1048576,
+          "all_bytes_exact": true
+        }
+      ],
+      "first_input_exact_FP32_pairs": 4194304,
+      "fresh16_and_resumed18_model_EMA_optimizer_finite": true,
+      "optimizer_state_count": 94,
+      "new_tensors_changed_between16_and18": [
+        "pretrained_rgb.raw_frequency.kernel_in.bias",
+        "pretrained_rgb.raw_frequency.kernel_in.weight",
+        "pretrained_rgb.raw_frequency.kernel_out.bias",
+        "pretrained_rgb.raw_frequency.kernel_out.weight",
+        "pretrained_rgb.raw_frequency.project.weight"
+      ],
+      "source_archive_matches_frozen_executed_Python": true,
+      "all18_step_input_hashes_match_actual_training_log": true,
+      "source_trace_actual_Commons_draws": 144,
+      "negative_LR_resume_has_no_training_log": true,
+      "new_neural_forwards": 0,
+      "new_noise_observations": 0,
+      "RAW_decodes": 0,
+      "CUDA_initialized": false,
+      "CUDA_allocator_cap_respected": true,
+      "three_constructor_CPU_CUDA_RNG_checks_pass": true,
+      "no_CPU_input_batch_fingerprint_reused": true
+    }
+  },
+  "counts_across_checks": {
+    "fresh_updates": 32,
+    "resumed_new_updates": 4,
+    "training_batches": 36,
+    "training_samples": 306,
+    "new_synthetic_noise_or_ADC_observations": 255,
+    "new_paired_training_observations": 51,
+    "new_neural_restoration_forwards": 38,
+    "new_encoder_forwards": 38,
+    "first_input_feature_disabled_witness_forwards": 2,
+    "initial_paired_FP32_values_exact": 4259840,
+    "saved_input_tensor_fields_independently_verified": 330,
+    "saved_input_numeric_values_independently_verified": 162944388,
+    "new_audit_neural_forwards": 0,
+    "RAW_decodes": 0
+  },
+  "tests": {
+    "current_adapter_tests": 29,
+    "current_adapter_log": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/current-feature-tests-v1.log",
+      "sha256": "bcb0b3d6fd96a7ed7e60c810a09c3dd7d55f40a5f45b1b5d505090880f141d56"
+    },
+    "related_spectral_RGB_regressions": 29,
+    "initial_integration_test_run": {
+      "files": [
+        "tests/test_raw_frequency_features.py",
+        "tests/test_raw_spectral.py",
+        "tests/test_pretrained_rgb.py"
+      ],
+      "result": "56 passed in88.45s before two additional layout/constructor tests; current adapter suite rerun29 passed in47.03s. Related default-disabled paths use unchanged core source."
+    },
+    "focused_checks_covered": 58,
+    "public_test_source": {
+      "path": "/home/dllu/proj/demosaic/tests/test_raw_frequency_features.py",
+      "sha256": "2fd9f588ba31a9a825a047a2b96f0e949ee30253d71e8fd32e8beb6628adeca7"
+    },
+    "ruff_check_and_format": "pass",
+    "independent_dense_DFT_weighted_fit_and_overlap_add": "pass",
+    "negative_cross_and_single_phase_evidence": "retained",
+    "nonzero_learned_kernel_common_phase_rotation": "pass",
+    "constant_per_phase_colors_after_weight_changes": "exactzero",
+    "nonconstant_channels_last": "exact",
+    "CPU_local_constructor_under_meta_and_forbidden_CUDA_seed": "pass"
+  },
+  "original_trials_after_checks": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-frequency-feature-CPU-v1/active-original-trials-at-publication-v1.json",
+    "sha256": "44d6127b7d5e99eb5fee9635509a6fc8775822f59f9b788b6f5818f0feb2f98e"
+  },
+  "limitations": [
+    "Discarded implementation checks, not a new full-budget model, PSNR gain or native-photo improvement.",
+    "CPU128/B1/FP32 and CUDA256/B16/BF16 use different prepared training tensors; no cross-device/precision quality equivalence claim.",
+    "No full-frame inference/export or speed ranking; CUDA9.02/9.93GiB allocated/reserved peaks include retained fresh/resume models and shared GPU work.",
+    "Frame-noise proxy is not exact post-fit coefficient variance or calibrated detection confidence. The1e-12 floor is numerical ADC arithmetic.",
+    "Overlapping frame-grid/boundary effects, mean shifts on nonconstant images and drift of the separately trained common trunk remain quality concerns.",
+    "Current model choices and all V120/V121 frozen sources/recipes/controllers/evaluation queues remain unchanged."
+  ],
+  "scope": "Concrete optional architecture/trainer implementation with genuineV115Small parent preservation, fresh/resumed mixed-data training, actualGPU RNG/memory checks and independent archived-state verification. All completed outputs/observations/frozen code retained; no old quality-control inference replay, automatic full-budget launch or model recommendation."
+}
