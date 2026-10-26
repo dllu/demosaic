@@ -125,3 +125,46 @@ def green_pair(packed, variance, colors):
         "native_fy": np.broadcast_to(fy, (height, width)).copy(),
         "removed_planes": np.stack([first["plane"], second["plane"]]),
     }
+
+
+def cross_decomposition(packed, reference, variance, colors):
+    """Separate reference, residual and mixed terms in observed green cross-power.
+
+    This is an algebraic diagnostic, not an independence or unbiasedness claim.
+    The residual can include added noise, ADC quantization/clipping and reference
+    mismatch. A low-noise camera estimate must not be called noiseless GT.
+    """
+    observed = green_pair(packed, variance, colors)
+    target = green_pair(reference, variance, colors)
+    if np.shape(reference) != np.shape(packed):
+        raise ValueError("Reference must match packed observation geometry")
+    signal = target["spectra"]
+    residual = observed["spectra"] - signal
+    first, second = observed["green_phase_indices"]
+    y0, x0 = divmod(int(first), 2)
+    y1, x1 = divmod(int(second), 2)
+    alignment = np.exp(
+        2j * np.pi * ((y1 - y0) * observed["native_fy"] + (x1 - x0) * observed["native_fx"])
+    )
+    products = {
+        "reference": signal[0] * np.conj(signal[1]),
+        "residual": residual[0] * np.conj(residual[1]),
+        "mixed": signal[0] * np.conj(residual[1]) + residual[0] * np.conj(signal[1]),
+    }
+    cross = {name: _average3(value * alignment) for name, value in products.items()}
+    total = sum(cross.values())
+    scale = max(float(np.max(np.abs(observed["average_cross"]))), np.finfo(float).tiny)
+    if np.max(np.abs(total - observed["average_cross"])) > 64 * np.finfo(float).eps * scale:
+        raise ArithmeticError("Reference/residual/mixed cross-power identity failed")
+    noise_scale = np.sqrt(
+        np.prod(np.stack([_average3(v) for v in observed["noise_variance"]]), axis=0)
+    )
+    normalized = None
+    if np.all(noise_scale > 0):
+        normalized = {name: value.real / noise_scale for name, value in cross.items()}
+    return {
+        "observed": observed,
+        "reference": target,
+        "component_cross": cross,
+        "noise_units_components": normalized,
+    }

@@ -1,0 +1,1617 @@
+{
+  "status": "completed-retained-input-reference-check-and-actual-visual-review",
+  "recorded_local": "2026-10-25T19:25:18-07:00",
+  "scope": "Input/reference diagnostic only, not a new restoration or trained model result. No new model forward, RAW decode, noise realization, optimizer step, camera fit or training membership change.",
+  "prospective_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/plan-v1.json",
+    "sha256": "c443810923c8f8bc86dde9ca0be48a92143c44fbd9da4140c97915a95aca90bf"
+  },
+  "fixed_protocol": {
+    "algorithm": "green-phase-reference-check-v1",
+    "created_local": "2026-10-25T19:15:26-07:00",
+    "purpose": "Check whether the input green cross statistic corresponds to reference frequency power on existing photographic inputs; not a restoration, inference mask or architecture ranking.",
+    "code": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/work/scripts/green_phase_spectrum.py",
+        "sha256": "1880258616df1b589dc71953f3740cea3cb7c5e55c983a441067df770d7040b4"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/work/scripts/report_green_phase_reference.py",
+        "sha256": "7c37c2b186d34ef9c6e7816958d40dfb5f97589ab6b754611e0854931bb51436"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/work/scripts/report_green_phase_spectrum.py",
+        "sha256": "92e3e291dc05d95409c3f2d2b36970e70bcafd9e44c537e675a26312d8f45818"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/work/scripts/test_green_phase_reference.py",
+        "sha256": "c27f0c710cd740896eca4584f1e81f8bd7416920b017178bc10f9a441dc7e717"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/work/scripts/test_green_phase_spectrum.py",
+        "sha256": "62eee249df4146cf4a36589f6ef278a8fc549d5bf40085bd31ec05e3cdd2860f"
+      }
+    ],
+    "receipts": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/native-camera-development-inputs-v1/manifest.json",
+        "sha256": "d6e4109660ab1ec2b0e4c78b4c02bbc1798c00e1ff48e8490a0a8ab59cf2be3f"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/configs/heldout-fine-detail-v1.json",
+        "sha256": "c156094d3d2037aa39af438b307da22dee7a074086c7714d5d0c75d4a8a619c0"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/native-camera-development-inputs-v1/result-v1.json",
+        "sha256": "76d917e284ae96a24e4603fd52752340f690dc25a3a822d0f7e2f0500e2eb103"
+      }
+    ],
+    "math": "Unchanged128x128 packed green fields, Hann weighted affine removal/orthonormalFFT, principal-band phase compensation and periodic3x3 frequency average. Conditional independent-noise variance includes plane fit. Reference/residual/mixed sum is an exact complex cross-power identity.",
+    "band": "native radial1/16..1/3 cycles/pixel and conjugate half-plane fy>0 orfy=0andfx>0",
+    "fixed_descriptive_bins": {
+      "observed_signed_cross_over_conditional_noise": [
+        "<=0",
+        "(0,1]",
+        "(1,4]",
+        "(4,16]",
+        ">16"
+      ],
+      "reference_mean_phase_power_over_conditional_noise": [
+        "<=1",
+        "(1,4]",
+        "(4,16]",
+        ">16"
+      ]
+    },
+    "peak_selection": "Same input-only top4 absolute signed cross plus top4 phase power union as mesh diagnostic, with3x3/conjugate suppression within each ranking; selection saved before loading reference arrays. No threshold is used for restoration.",
+    "aggregation": "Pool CFAs/ROIs per source and noise condition; normalize each observed-cross row within source; equal-weight sources having row support. Keep support counts and raw source tables. Repeated CFAs/ROIs/noise conditions are not independent photos.",
+    "limitations": [
+      "15 source captures, 24 contexts; Commons4 exact synthetic target photos and11 native-camera low-noise estimates. This is finite development support, not the full427 photographic panel or real highISO.",
+      "Native low-noise references contain reduced original source noise/optical blur and are not exact noiseless GT. Relative spectra describe added-noise recovery of those fixed estimates only.",
+      "Residual includes quantization/clipping/reference mismatch as well as added noise. Cross mixed terms can be negative. No independence or unbiasedness follows from algebraic decomposition.",
+      "Conditional variance uses saved observed-signal proxy, not known true variance. Hann/3x3 bins are correlated, no confidence or calibrated detection threshold.",
+      "Reference strength bins/selected peaks are descriptive, not parameter-fitting, selection of training inputs or an inference operator. No model outputs, profiles, crops or checkpoints are fitted.",
+      "One existing noisy realization per context/condition/CFA, not repeated sampling. No new noise generation, model inference or RAW decode.",
+      "No ADC-only normalization because its supplied variance is zero. All positive-noise conditions use existing priors."
+    ]
+  },
+  "support": {
+    "source_captures": 15,
+    "contexts": 24,
+    "observations": 168,
+    "Commons_sources": 4,
+    "Commons_observations": 8,
+    "native_sources": 11,
+    "native_observations": 160,
+    "native_reference_role": "Binned low-noise estimate, not exact noiseless GT; added-noise development task.",
+    "main_and_mesh_GFX_training_status": "All original protected GFX scenes, sibling images and comparisons unchanged."
+  },
+  "execution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/analysis-v1/result.json",
+    "sha256": "082691f0bbd80240b64f3bb86c386da199a07e68f5b8e0fb3a74cbce8c9c7693"
+  },
+  "case_maps_and_counts": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/analysis-v1/cases.jsonl",
+    "sha256": "4a3e8e80c20cefb6c54f4df8206e8a2e0e99611c8ab0b6952d90fc2a1809d9b4"
+  },
+  "summaries": [
+    {
+      "domain": "Commons exact synthetic target",
+      "condition": "iso100-prior",
+      "sources": [
+        "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "14d8ea6cea4a27346a643e6d767f800729fb4693",
+        "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "2b5a51667b9906eecead8f82e08c7ba11750f8c6"
+      ],
+      "observations": 4,
+      "total_band_bins": 30728,
+      "source_counts_by_cross_bin": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "source_balanced_reference_power_fractions_by_cross_bin": [
+        [
+          0.0,
+          0.0,
+          0.00030807147258163895,
+          0.9996919285274184
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.001366120218579235,
+          0.9986338797814207
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "per_source_bin_counts": {
+        "0ae232278265dabbdd54f52c34045a3d03323aa7": [
+          [
+            0,
+            0,
+            0,
+            1647
+          ],
+          [
+            0,
+            0,
+            0,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            11
+          ],
+          [
+            0,
+            0,
+            0,
+            43
+          ],
+          [
+            0,
+            0,
+            0,
+            5976
+          ]
+        ],
+        "14d8ea6cea4a27346a643e6d767f800729fb4693": [
+          [
+            0,
+            0,
+            2,
+            1621
+          ],
+          [
+            0,
+            0,
+            0,
+            61
+          ],
+          [
+            0,
+            0,
+            1,
+            182
+          ],
+          [
+            0,
+            0,
+            0,
+            566
+          ],
+          [
+            0,
+            0,
+            0,
+            5249
+          ]
+        ],
+        "212ae12913effa23268af953b4c8f8e8b7ab4ef5": [
+          [
+            0,
+            0,
+            0,
+            1963
+          ],
+          [
+            0,
+            0,
+            0,
+            12
+          ],
+          [
+            0,
+            0,
+            0,
+            22
+          ],
+          [
+            0,
+            0,
+            0,
+            90
+          ],
+          [
+            0,
+            0,
+            0,
+            5595
+          ]
+        ],
+        "2b5a51667b9906eecead8f82e08c7ba11750f8c6": [
+          [
+            0,
+            0,
+            0,
+            1552
+          ],
+          [
+            0,
+            0,
+            0,
+            18
+          ],
+          [
+            0,
+            0,
+            0,
+            77
+          ],
+          [
+            0,
+            0,
+            0,
+            262
+          ],
+          [
+            0,
+            0,
+            0,
+            5773
+          ]
+        ]
+      },
+      "reference_power_at_least4_bins": 30728,
+      "reference_power_at_least4_nonpositive_observed_cross_bins": 6785,
+      "selected_peaks_observed_cross_above4": 16,
+      "selected_peaks_above4_reference_power_at_most1": 0,
+      "selected_peaks_above4_nonpositive_reference_cross": 0
+    },
+    {
+      "domain": "Commons exact synthetic target",
+      "condition": "iso12800-prior",
+      "sources": [
+        "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "14d8ea6cea4a27346a643e6d767f800729fb4693",
+        "212ae12913effa23268af953b4c8f8e8b7ab4ef5",
+        "2b5a51667b9906eecead8f82e08c7ba11750f8c6"
+      ],
+      "observations": 4,
+      "total_band_bins": 30728,
+      "source_counts_by_cross_bin": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "source_balanced_reference_power_fractions_by_cross_bin": [
+        [
+          0.3069738891976349,
+          0.315411579949762,
+          0.3287620853290327,
+          0.048852445523570445
+        ],
+        [
+          0.2720704052136814,
+          0.39055200143304103,
+          0.3120906549447091,
+          0.02528693840856844
+        ],
+        [
+          0.05126058562808856,
+          0.4778145134836619,
+          0.4346911551154436,
+          0.03623374577280593
+        ],
+        [
+          0.0,
+          0.05551951649042915,
+          0.7657810049318388,
+          0.17869947857773208
+        ],
+        [
+          0.0,
+          0.0,
+          0.04746814145541611,
+          0.9525318585445839
+        ]
+      ],
+      "per_source_bin_counts": {
+        "0ae232278265dabbdd54f52c34045a3d03323aa7": [
+          [
+            0,
+            16,
+            1376,
+            333
+          ],
+          [
+            0,
+            11,
+            384,
+            44
+          ],
+          [
+            0,
+            8,
+            1133,
+            188
+          ],
+          [
+            0,
+            0,
+            1210,
+            1314
+          ],
+          [
+            0,
+            0,
+            1,
+            1664
+          ]
+        ],
+        "14d8ea6cea4a27346a643e6d767f800729fb4693": [
+          [
+            1781,
+            290,
+            0,
+            0
+          ],
+          [
+            2114,
+            716,
+            0,
+            0
+          ],
+          [
+            291,
+            1417,
+            88,
+            0
+          ],
+          [
+            0,
+            94,
+            632,
+            13
+          ],
+          [
+            0,
+            0,
+            32,
+            214
+          ]
+        ],
+        "212ae12913effa23268af953b4c8f8e8b7ab4ef5": [
+          [
+            0,
+            1056,
+            1052,
+            5
+          ],
+          [
+            2,
+            685,
+            399,
+            1
+          ],
+          [
+            1,
+            782,
+            1511,
+            8
+          ],
+          [
+            0,
+            24,
+            1437,
+            236
+          ],
+          [
+            0,
+            0,
+            4,
+            479
+          ]
+        ],
+        "2b5a51667b9906eecead8f82e08c7ba11750f8c6": [
+          [
+            585,
+            974,
+            31,
+            0
+          ],
+          [
+            722,
+            1391,
+            14,
+            0
+          ],
+          [
+            97,
+            1769,
+            412,
+            0
+          ],
+          [
+            0,
+            114,
+            1245,
+            53
+          ],
+          [
+            0,
+            0,
+            14,
+            261
+          ]
+        ]
+      },
+      "reference_power_at_least4_bins": 15788,
+      "reference_power_at_least4_nonpositive_observed_cross_bins": 2797,
+      "selected_peaks_observed_cross_above4": 21,
+      "selected_peaks_above4_reference_power_at_most1": 0,
+      "selected_peaks_above4_nonpositive_reference_cross": 0
+    },
+    {
+      "domain": "Native low-noise reference estimate",
+      "condition": "iso100-prior",
+      "sources": [
+        "1825b615a472962bbef13a6717e754e2aeb53d353de10d3503767932c420070c",
+        "1b67d15817dbd4143a1f1089e2f09e319a2a2327c124e2643284509dd7621030",
+        "26be5e06dfb53a2938dab3ca8f06024533a9c0dd0c652938f39eb48bc325f95e",
+        "455ea401c070b0318bcc8f2d8e19f463cc47042bdf1e3dd66d654f2f406ffd77",
+        "58f995caccaa76a24d03f15bed1ee191b9c8e8f0c3def53f2acc2b9c9127334d",
+        "aa9fd9ef937ed34467d6f91bfa2603be00cb47542b7fffd7258b79652d3b7bef",
+        "be898847ac6da485874d95469bf274df1f8f77f8b8542460464f0f393981b2d2",
+        "c0bd3c927ddd5244a064866352af952b510b125cfc71bac4c961f9ed9b432d3f",
+        "cf53a9018d5a77cd854ea0a91afee2a35ac8fab8f814020d79f728f99ba99892",
+        "f1893ec9824fe7cb6f3be006fa5dc4ae4f8358eafeff3566effa26cacf6dfa1b",
+        "f7b2a6b6d7684536511cf2db2e2bfa46fae1ad7e52214093714f35e7ca60acbf"
+      ],
+      "observations": 80,
+      "total_band_bins": 614560,
+      "source_counts_by_cross_bin": [
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "source_balanced_reference_power_fractions_by_cross_bin": [
+        [
+          0.0,
+          0.007946418689665159,
+          0.07232030527828551,
+          0.9197332760320492
+        ],
+        [
+          0.00013725579905751018,
+          0.030929386260951545,
+          0.12797303843414928,
+          0.8409603195058416
+        ],
+        [
+          1.643925694558606e-05,
+          0.015038760470867942,
+          0.1360165638033797,
+          0.8489282364688069
+        ],
+        [
+          0.0,
+          0.00031320190784705007,
+          0.09024538272272874,
+          0.9094414153694242
+        ],
+        [
+          0.0,
+          0.0,
+          0.0001483406613620046,
+          0.9998516593386381
+        ]
+      ],
+      "per_source_bin_counts": {
+        "1825b615a472962bbef13a6717e754e2aeb53d353de10d3503767932c420070c": [
+          [
+            0,
+            0,
+            0,
+            9792
+          ],
+          [
+            0,
+            0,
+            0,
+            68
+          ],
+          [
+            0,
+            0,
+            0,
+            190
+          ],
+          [
+            0,
+            0,
+            0,
+            770
+          ],
+          [
+            0,
+            0,
+            0,
+            19908
+          ]
+        ],
+        "1b67d15817dbd4143a1f1089e2f09e319a2a2327c124e2643284509dd7621030": [
+          [
+            0,
+            0,
+            0,
+            14623
+          ],
+          [
+            0,
+            0,
+            0,
+            184
+          ],
+          [
+            0,
+            0,
+            0,
+            659
+          ],
+          [
+            0,
+            0,
+            0,
+            2816
+          ],
+          [
+            0,
+            0,
+            0,
+            43174
+          ]
+        ],
+        "26be5e06dfb53a2938dab3ca8f06024533a9c0dd0c652938f39eb48bc325f95e": [
+          [
+            0,
+            0,
+            24,
+            14676
+          ],
+          [
+            0,
+            0,
+            3,
+            402
+          ],
+          [
+            0,
+            0,
+            13,
+            1237
+          ],
+          [
+            0,
+            0,
+            6,
+            4642
+          ],
+          [
+            0,
+            0,
+            0,
+            40453
+          ]
+        ],
+        "455ea401c070b0318bcc8f2d8e19f463cc47042bdf1e3dd66d654f2f406ffd77": [
+          [
+            0,
+            0,
+            0,
+            13100
+          ],
+          [
+            0,
+            0,
+            0,
+            276
+          ],
+          [
+            0,
+            0,
+            0,
+            838
+          ],
+          [
+            0,
+            0,
+            0,
+            3797
+          ],
+          [
+            0,
+            0,
+            0,
+            43445
+          ]
+        ],
+        "58f995caccaa76a24d03f15bed1ee191b9c8e8f0c3def53f2acc2b9c9127334d": [
+          [
+            0,
+            0,
+            0,
+            11421
+          ],
+          [
+            0,
+            0,
+            0,
+            129
+          ],
+          [
+            0,
+            0,
+            0,
+            484
+          ],
+          [
+            0,
+            0,
+            0,
+            2028
+          ],
+          [
+            0,
+            0,
+            0,
+            47394
+          ]
+        ],
+        "aa9fd9ef937ed34467d6f91bfa2603be00cb47542b7fffd7258b79652d3b7bef": [
+          [
+            0,
+            0,
+            13,
+            12208
+          ],
+          [
+            0,
+            0,
+            3,
+            358
+          ],
+          [
+            0,
+            0,
+            6,
+            1173
+          ],
+          [
+            0,
+            0,
+            4,
+            4709
+          ],
+          [
+            0,
+            0,
+            0,
+            42982
+          ]
+        ],
+        "be898847ac6da485874d95469bf274df1f8f77f8b8542460464f0f393981b2d2": [
+          [
+            0,
+            1085,
+            4298,
+            7755
+          ],
+          [
+            3,
+            647,
+            1232,
+            105
+          ],
+          [
+            1,
+            884,
+            4312,
+            333
+          ],
+          [
+            0,
+            35,
+            7315,
+            2809
+          ],
+          [
+            0,
+            0,
+            50,
+            30592
+          ]
+        ],
+        "c0bd3c927ddd5244a064866352af952b510b125cfc71bac4c961f9ed9b432d3f": [
+          [
+            0,
+            0,
+            93,
+            13268
+          ],
+          [
+            0,
+            0,
+            15,
+            538
+          ],
+          [
+            0,
+            0,
+            42,
+            1905
+          ],
+          [
+            0,
+            0,
+            58,
+            7313
+          ],
+          [
+            0,
+            0,
+            0,
+            38224
+          ]
+        ],
+        "cf53a9018d5a77cd854ea0a91afee2a35ac8fab8f814020d79f728f99ba99892": [
+          [
+            0,
+            0,
+            5,
+            10925
+          ],
+          [
+            0,
+            0,
+            3,
+            335
+          ],
+          [
+            0,
+            0,
+            11,
+            1177
+          ],
+          [
+            0,
+            0,
+            3,
+            5110
+          ],
+          [
+            0,
+            0,
+            0,
+            43887
+          ]
+        ],
+        "f1893ec9824fe7cb6f3be006fa5dc4ae4f8358eafeff3566effa26cacf6dfa1b": [
+          [
+            0,
+            27,
+            2564,
+            3004
+          ],
+          [
+            0,
+            13,
+            655,
+            222
+          ],
+          [
+            0,
+            14,
+            1684,
+            815
+          ],
+          [
+            0,
+            0,
+            1473,
+            4148
+          ],
+          [
+            0,
+            0,
+            0,
+            16109
+          ]
+        ],
+        "f7b2a6b6d7684536511cf2db2e2bfa46fae1ad7e52214093714f35e7ca60acbf": [
+          [
+            0,
+            0,
+            0,
+            17266
+          ],
+          [
+            0,
+            0,
+            0,
+            249
+          ],
+          [
+            0,
+            0,
+            0,
+            715
+          ],
+          [
+            0,
+            0,
+            0,
+            3073
+          ],
+          [
+            0,
+            0,
+            0,
+            40153
+          ]
+        ]
+      },
+      "reference_power_at_least4_bins": 611851,
+      "reference_power_at_least4_nonpositive_observed_cross_bins": 135035,
+      "selected_peaks_observed_cross_above4": 328,
+      "selected_peaks_above4_reference_power_at_most1": 0,
+      "selected_peaks_above4_nonpositive_reference_cross": 0
+    },
+    {
+      "domain": "Native low-noise reference estimate",
+      "condition": "iso12800-prior",
+      "sources": [
+        "1825b615a472962bbef13a6717e754e2aeb53d353de10d3503767932c420070c",
+        "1b67d15817dbd4143a1f1089e2f09e319a2a2327c124e2643284509dd7621030",
+        "26be5e06dfb53a2938dab3ca8f06024533a9c0dd0c652938f39eb48bc325f95e",
+        "455ea401c070b0318bcc8f2d8e19f463cc47042bdf1e3dd66d654f2f406ffd77",
+        "58f995caccaa76a24d03f15bed1ee191b9c8e8f0c3def53f2acc2b9c9127334d",
+        "aa9fd9ef937ed34467d6f91bfa2603be00cb47542b7fffd7258b79652d3b7bef",
+        "be898847ac6da485874d95469bf274df1f8f77f8b8542460464f0f393981b2d2",
+        "c0bd3c927ddd5244a064866352af952b510b125cfc71bac4c961f9ed9b432d3f",
+        "cf53a9018d5a77cd854ea0a91afee2a35ac8fab8f814020d79f728f99ba99892",
+        "f1893ec9824fe7cb6f3be006fa5dc4ae4f8358eafeff3566effa26cacf6dfa1b",
+        "f7b2a6b6d7684536511cf2db2e2bfa46fae1ad7e52214093714f35e7ca60acbf"
+      ],
+      "observations": 80,
+      "total_band_bins": 614560,
+      "source_counts_by_cross_bin": [
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "source_balanced_reference_power_fractions_by_cross_bin": [
+        [
+          0.49865064974532414,
+          0.424913767943673,
+          0.07245518249623649,
+          0.003980399814766435
+        ],
+        [
+          0.5048842990675196,
+          0.46082906761175574,
+          0.03417879431275,
+          0.00010783900797475365
+        ],
+        [
+          0.11340975327237719,
+          0.6764629241930492,
+          0.20949522966249062,
+          0.0006320928720829605
+        ],
+        [
+          0.00016700996492790738,
+          0.08842419608128546,
+          0.863554451273568,
+          0.04785434268021875
+        ],
+        [
+          0.0,
+          0.0,
+          0.08783871704814887,
+          0.9121612829518511
+        ]
+      ],
+      "per_source_bin_counts": {
+        "1825b615a472962bbef13a6717e754e2aeb53d353de10d3503767932c420070c": [
+          [
+            49,
+            8791,
+            1483,
+            0
+          ],
+          [
+            53,
+            6033,
+            810,
+            0
+          ],
+          [
+            3,
+            5563,
+            3609,
+            0
+          ],
+          [
+            0,
+            150,
+            3179,
+            188
+          ],
+          [
+            0,
+            0,
+            25,
+            792
+          ]
+        ],
+        "1b67d15817dbd4143a1f1089e2f09e319a2a2327c124e2643284509dd7621030": [
+          [
+            3212,
+            15071,
+            86,
+            0
+          ],
+          [
+            3493,
+            17789,
+            117,
+            0
+          ],
+          [
+            468,
+            15788,
+            1933,
+            0
+          ],
+          [
+            0,
+            533,
+            2577,
+            51
+          ],
+          [
+            0,
+            0,
+            25,
+            313
+          ]
+        ],
+        "26be5e06dfb53a2938dab3ca8f06024533a9c0dd0c652938f39eb48bc325f95e": [
+          [
+            10168,
+            5945,
+            1614,
+            495
+          ],
+          [
+            12959,
+            7784,
+            409,
+            9
+          ],
+          [
+            1952,
+            8624,
+            2375,
+            41
+          ],
+          [
+            0,
+            357,
+            4980,
+            744
+          ],
+          [
+            0,
+            0,
+            56,
+            2944
+          ]
+        ],
+        "455ea401c070b0318bcc8f2d8e19f463cc47042bdf1e3dd66d654f2f406ffd77": [
+          [
+            7909,
+            7514,
+            949,
+            185
+          ],
+          [
+            10227,
+            10129,
+            414,
+            11
+          ],
+          [
+            1558,
+            11789,
+            2811,
+            31
+          ],
+          [
+            0,
+            523,
+            5203,
+            554
+          ],
+          [
+            0,
+            0,
+            60,
+            1589
+          ]
+        ],
+        "58f995caccaa76a24d03f15bed1ee191b9c8e8f0c3def53f2acc2b9c9127334d": [
+          [
+            2536,
+            11983,
+            233,
+            0
+          ],
+          [
+            2845,
+            14285,
+            252,
+            0
+          ],
+          [
+            442,
+            16247,
+            3311,
+            0
+          ],
+          [
+            0,
+            629,
+            7095,
+            319
+          ],
+          [
+            0,
+            0,
+            113,
+            1166
+          ]
+        ],
+        "aa9fd9ef937ed34467d6f91bfa2603be00cb47542b7fffd7258b79652d3b7bef": [
+          [
+            11276,
+            4368,
+            1236,
+            34
+          ],
+          [
+            15067,
+            7343,
+            238,
+            0
+          ],
+          [
+            2580,
+            10151,
+            1894,
+            0
+          ],
+          [
+            0,
+            487,
+            4659,
+            178
+          ],
+          [
+            0,
+            0,
+            123,
+            1822
+          ]
+        ],
+        "be898847ac6da485874d95469bf274df1f8f77f8b8542460464f0f393981b2d2": [
+          [
+            12406,
+            6526,
+            1741,
+            0
+          ],
+          [
+            15402,
+            6404,
+            1160,
+            0
+          ],
+          [
+            1046,
+            6679,
+            4760,
+            0
+          ],
+          [
+            0,
+            182,
+            4339,
+            152
+          ],
+          [
+            0,
+            0,
+            33,
+            626
+          ]
+        ],
+        "c0bd3c927ddd5244a064866352af952b510b125cfc71bac4c961f9ed9b432d3f": [
+          [
+            17692,
+            2050,
+            5,
+            0
+          ],
+          [
+            20668,
+            5419,
+            14,
+            0
+          ],
+          [
+            2658,
+            8512,
+            781,
+            0
+          ],
+          [
+            0,
+            483,
+            2736,
+            53
+          ],
+          [
+            0,
+            0,
+            52,
+            333
+          ]
+        ],
+        "cf53a9018d5a77cd854ea0a91afee2a35ac8fab8f814020d79f728f99ba99892": [
+          [
+            11176,
+            6069,
+            13,
+            0
+          ],
+          [
+            15390,
+            9801,
+            32,
+            0
+          ],
+          [
+            2241,
+            12247,
+            1016,
+            0
+          ],
+          [
+            0,
+            562,
+            2815,
+            26
+          ],
+          [
+            0,
+            0,
+            26,
+            42
+          ]
+        ],
+        "f1893ec9824fe7cb6f3be006fa5dc4ae4f8358eafeff3566effa26cacf6dfa1b": [
+          [
+            9367,
+            518,
+            118,
+            0
+          ],
+          [
+            12803,
+            1244,
+            100,
+            0
+          ],
+          [
+            1188,
+            2764,
+            600,
+            0
+          ],
+          [
+            3,
+            123,
+            1430,
+            77
+          ],
+          [
+            0,
+            0,
+            4,
+            389
+          ]
+        ],
+        "f7b2a6b6d7684536511cf2db2e2bfa46fae1ad7e52214093714f35e7ca60acbf": [
+          [
+            7054,
+            6596,
+            6364,
+            69
+          ],
+          [
+            8147,
+            6886,
+            2235,
+            4
+          ],
+          [
+            963,
+            6307,
+            7577,
+            28
+          ],
+          [
+            0,
+            193,
+            7717,
+            592
+          ],
+          [
+            0,
+            0,
+            56,
+            668
+          ]
+        ]
+      },
+      "reference_power_at_least4_bins": 112118,
+      "reference_power_at_least4_nonpositive_observed_cross_bins": 14625,
+      "selected_peaks_observed_cross_above4": 339,
+      "selected_peaks_above4_reference_power_at_most1": 0,
+      "selected_peaks_above4_nonpositive_reference_cross": 0
+    }
+  ],
+  "independent_audit": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/audit-v1.json",
+      "sha256": "eb48cd49abb5a0a1c5e48b03140dcd9a39414fda925cb43e9ae4a79b12f6f19f"
+    },
+    "status": "independently-verified",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/plan-v1.json",
+      "sha256": "c443810923c8f8bc86dde9ca0be48a92143c44fbd9da4140c97915a95aca90bf"
+    },
+    "result": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/analysis-v1/result.json",
+      "sha256": "082691f0bbd80240b64f3bb86c386da199a07e68f5b8e0fb3a74cbce8c9c7693"
+    },
+    "code": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/audit-v1.py",
+      "sha256": "881e11d3a1d1aa1c4d1769fe1699fcc2bd24803b01039e09fb86d0c6f487c987"
+    },
+    "cases": 168,
+    "scalar_metrics_checked": 840,
+    "complex_coefficients_computed": 6048,
+    "conditional_variance_rows_computed": 3024,
+    "integer_histogram_cells_checked": 3360,
+    "source_balanced_fraction_cells_checked": 80,
+    "maximum_reported_metric_error_divided_by_max1_magnitude": 4.97406330875289e-12,
+    "maximum_relative_component_identity_error": 6.510874173720706e-16,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0
+  },
+  "exploratory_negative_reference_cross": [
+    {
+      "domain": "Commons exact synthetic target",
+      "condition": "iso100-prior",
+      "sources": 4,
+      "reference_supported_band_bins": 30728,
+      "observed_nonpositive_bins": 6785,
+      "reference_nonpositive_bins": 6763,
+      "both_nonpositive_bins": 6556,
+      "source_balanced_fraction_observed_nonpositive": 0.22080838323353294,
+      "source_balanced_fraction_reference_nonpositive": 0.22009242384795624,
+      "per_source_counts": {
+        "0ae232278265dabbdd54f52c34045a3d03323aa7": [
+          7682,
+          1647,
+          1642,
+          1616
+        ],
+        "14d8ea6cea4a27346a643e6d767f800729fb4693": [
+          7682,
+          1623,
+          1603,
+          1521
+        ],
+        "212ae12913effa23268af953b4c8f8e8b7ab4ef5": [
+          7682,
+          1963,
+          1959,
+          1922
+        ],
+        "2b5a51667b9906eecead8f82e08c7ba11750f8c6": [
+          7682,
+          1552,
+          1559,
+          1497
+        ]
+      },
+      "interpretation": "Exploratory follow-up after observed negative-cross counts: reference-supported means reference phase-power/noise>=4; not an inference or quality threshold. Reference signed cross is evaluated without the added noisy residual. Aliases, finite-window phase compensation and genuine phase differences may contribute; no exclusive cause assignment."
+    },
+    {
+      "domain": "Commons exact synthetic target",
+      "condition": "iso12800-prior",
+      "sources": 4,
+      "reference_supported_band_bins": 15788,
+      "observed_nonpositive_bins": 2797,
+      "reference_nonpositive_bins": 2608,
+      "both_nonpositive_bins": 2203,
+      "source_balanced_fraction_observed_nonpositive": 0.1111799645389924,
+      "source_balanced_fraction_reference_nonpositive": 0.10363260106569852,
+      "per_source_counts": {
+        "0ae232278265dabbdd54f52c34045a3d03323aa7": [
+          7647,
+          1709,
+          1624,
+          1387
+        ],
+        "14d8ea6cea4a27346a643e6d767f800729fb4693": [
+          979,
+          0,
+          0,
+          0
+        ],
+        "212ae12913effa23268af953b4c8f8e8b7ab4ef5": [
+          5132,
+          1057,
+          949,
+          791
+        ],
+        "2b5a51667b9906eecead8f82e08c7ba11750f8c6": [
+          2030,
+          31,
+          35,
+          25
+        ]
+      },
+      "interpretation": "Exploratory follow-up after observed negative-cross counts: reference-supported means reference phase-power/noise>=4; not an inference or quality threshold. Reference signed cross is evaluated without the added noisy residual. Aliases, finite-window phase compensation and genuine phase differences may contribute; no exclusive cause assignment."
+    },
+    {
+      "domain": "Native low-noise reference estimate",
+      "condition": "iso100-prior",
+      "sources": 11,
+      "reference_supported_band_bins": 611851,
+      "observed_nonpositive_bins": 135035,
+      "reference_nonpositive_bins": 134398,
+      "both_nonpositive_bins": 127974,
+      "source_balanced_fraction_observed_nonpositive": 0.2233065858603447,
+      "source_balanced_fraction_reference_nonpositive": 0.22238013124884423,
+      "per_source_counts": {
+        "cf53a9018d5a77cd854ea0a91afee2a35ac8fab8f814020d79f728f99ba99892": [
+          61456,
+          10930,
+          10850,
+          10276
+        ],
+        "26be5e06dfb53a2938dab3ca8f06024533a9c0dd0c652938f39eb48bc325f95e": [
+          61456,
+          14700,
+          14670,
+          13991
+        ],
+        "f7b2a6b6d7684536511cf2db2e2bfa46fae1ad7e52214093714f35e7ca60acbf": [
+          61456,
+          17266,
+          17268,
+          16638
+        ],
+        "aa9fd9ef937ed34467d6f91bfa2603be00cb47542b7fffd7258b79652d3b7bef": [
+          61456,
+          12221,
+          12154,
+          11575
+        ],
+        "1b67d15817dbd4143a1f1089e2f09e319a2a2327c124e2643284509dd7621030": [
+          61456,
+          14623,
+          14580,
+          14036
+        ],
+        "f1893ec9824fe7cb6f3be006fa5dc4ae4f8358eafeff3566effa26cacf6dfa1b": [
+          30674,
+          5568,
+          5538,
+          4905
+        ],
+        "c0bd3c927ddd5244a064866352af952b510b125cfc71bac4c961f9ed9b432d3f": [
+          61456,
+          13361,
+          13146,
+          12333
+        ],
+        "58f995caccaa76a24d03f15bed1ee191b9c8e8f0c3def53f2acc2b9c9127334d": [
+          61456,
+          11421,
+          11380,
+          10982
+        ],
+        "1825b615a472962bbef13a6717e754e2aeb53d353de10d3503767932c420070c": [
+          30728,
+          9792,
+          9838,
+          9597
+        ],
+        "be898847ac6da485874d95469bf274df1f8f77f8b8542460464f0f393981b2d2": [
+          58801,
+          12053,
+          11938,
+          11144
+        ],
+        "455ea401c070b0318bcc8f2d8e19f463cc47042bdf1e3dd66d654f2f406ffd77": [
+          61456,
+          13100,
+          13036,
+          12497
+        ]
+      },
+      "interpretation": "Exploratory follow-up after observed negative-cross counts: reference-supported means reference phase-power/noise>=4; not an inference or quality threshold. Reference signed cross is evaluated without the added noisy residual. Aliases, finite-window phase compensation and genuine phase differences may contribute; no exclusive cause assignment."
+    },
+    {
+      "domain": "Native low-noise reference estimate",
+      "condition": "iso12800-prior",
+      "sources": 11,
+      "reference_supported_band_bins": 112118,
+      "observed_nonpositive_bins": 14625,
+      "reference_nonpositive_bins": 13623,
+      "both_nonpositive_bins": 11440,
+      "source_balanced_fraction_observed_nonpositive": 0.09051142350780489,
+      "source_balanced_fraction_reference_nonpositive": 0.08423915774234696,
+      "per_source_counts": {
+        "cf53a9018d5a77cd854ea0a91afee2a35ac8fab8f814020d79f728f99ba99892": [
+          3970,
+          13,
+          10,
+          9
+        ],
+        "26be5e06dfb53a2938dab3ca8f06024533a9c0dd0c652938f39eb48bc325f95e": [
+          13667,
+          2109,
+          2094,
+          1897
+        ],
+        "f7b2a6b6d7684536511cf2db2e2bfa46fae1ad7e52214093714f35e7ca60acbf": [
+          25310,
+          6433,
+          6011,
+          4947
+        ],
+        "aa9fd9ef937ed34467d6f91bfa2603be00cb47542b7fffd7258b79652d3b7bef": [
+          10184,
+          1270,
+          1241,
+          1153
+        ],
+        "1b67d15817dbd4143a1f1089e2f09e319a2a2327c124e2643284509dd7621030": [
+          5102,
+          86,
+          57,
+          49
+        ],
+        "f1893ec9824fe7cb6f3be006fa5dc4ae4f8358eafeff3566effa26cacf6dfa1b": [
+          2718,
+          118,
+          124,
+          90
+        ],
+        "c0bd3c927ddd5244a064866352af952b510b125cfc71bac4c961f9ed9b432d3f": [
+          3974,
+          5,
+          2,
+          2
+        ],
+        "58f995caccaa76a24d03f15bed1ee191b9c8e8f0c3def53f2acc2b9c9127334d": [
+          12489,
+          233,
+          166,
+          124
+        ],
+        "1825b615a472962bbef13a6717e754e2aeb53d353de10d3503767932c420070c": [
+          10086,
+          1483,
+          1329,
+          1102
+        ],
+        "be898847ac6da485874d95469bf274df1f8f77f8b8542460464f0f393981b2d2": [
+          12811,
+          1741,
+          1520,
+          1153
+        ],
+        "455ea401c070b0318bcc8f2d8e19f463cc47042bdf1e3dd66d654f2f406ffd77": [
+          11807,
+          1134,
+          1069,
+          914
+        ]
+      },
+      "interpretation": "Exploratory follow-up after observed negative-cross counts: reference-supported means reference phase-power/noise>=4; not an inference or quality threshold. Reference signed cross is evaluated without the added noisy residual. Aliases, finite-window phase compensation and genuine phase differences may contribute; no exclusive cause assignment."
+    }
+  ],
+  "actual_visual_review": {
+    "viewed": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/analysis-v1/reference-check.png",
+        "sha256": "a3a029db68e3b9e1d6df009292c68eab809aa3636e5cb9ef3dbf3314924527ac"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/docs/images/native-camera-development-comparison-v1/V119-pixls-5002-fine-native-triplet.png",
+        "sha256": "d609647e685b51f68384617b57e7649f0bfa824279f3e6ee8ef8ce2210533cfd"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/docs/images/native-camera-development-comparison-v1/V119-pixls-1951-field-native-triplet.png",
+        "sha256": "642a437b5c08ce72e7e0916a6ba751c76b79218fb83e1a77dbad5ee15cb2292d"
+      }
+    ],
+    "observations": "Plot shows strong positive cross values track reference power on this finite support, while reference-supported bins can have nonpositive observed/reference-only cross even at low noise. Native grass/wood strips retain fine-detail softness. No new predicted pixels.",
+    "photograph_cells_native160_without_resizing": true
+  },
+  "published_images": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/green-phase-reference-v1/reference-check.png",
+      "sha256": "a3a029db68e3b9e1d6df009292c68eab809aa3636e5cb9ef3dbf3314924527ac"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/green-phase-reference-v1/reference-check.pdf",
+      "sha256": "2bcbcbb0100f4c2ae6d5eeebe7eee6e682f922987880e3a7b7bfe79ca8512d16"
+    }
+  ],
+  "checks": {
+    "focused_pytest_passes": 24,
+    "math_tests": 22,
+    "sampling_and_source_weighting_tests": 2,
+    "ruff_check_and_format": "pass",
+    "local_link_destinations": 132,
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0
+  },
+  "live_training": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/green-phase-reference-check-v1/live-training-at-publication-v1.json",
+    "sha256": "01c18a24ede12e26ca9f88360ecdbb61fabdee61ec0ab1a6380f6e9dfddbb28e"
+  },
+  "next_action_constraint": "Do not use a forced positive-only cross-power mask or revive the stronger fixed MHC spectral correction. Any learned-frequency proposal must handle signed phase/alias information and remain subject to matched photographic/camera/color/native evaluation. Current V120/V121 plans remain unchanged."
+}

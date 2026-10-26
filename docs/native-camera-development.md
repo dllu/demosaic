@@ -113,6 +113,12 @@ CUDA_VISIBLE_DEVICES='' HF_HUB_OFFLINE=1 .venv/bin/python \
 
 ## Native source-reference inspection
 
+The [green-phase reference check](green-phase-reference.md) reuses all160
+positive-noise observations alongside four Commons photos. Matching positive
+peaks can describe structure, but many reference-powered frequencies have
+nonpositive cross-power even without the added residual. This input-only
+diagnostic is separate from the completed model comparison below.
+
 These unchanged160×160 cells are at8×-binned target resolution, with metadata
 WB/matrix, exposure×1 and no resized pixels. They are source-reference
 inspections, with no added noise or learned output in the PNGs.

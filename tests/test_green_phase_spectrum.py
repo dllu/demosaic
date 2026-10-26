@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from green_phase_spectrum import green_pair, tapered_spectrum
+from green_phase_spectrum import cross_decomposition, green_pair, tapered_spectrum
 
 PATTERNS = [(0, 1, 1, 2), (2, 1, 1, 0), (1, 0, 2, 1), (1, 2, 0, 1)]
 
@@ -91,3 +91,28 @@ def test_invalid_inputs_rejected(damage):
         colors = (0, 0, 1, 2)
     with pytest.raises(ValueError):
         green_pair(packed, variance, colors)
+
+
+@pytest.mark.parametrize("pattern", PATTERNS)
+def test_reference_residual_mixed_split_keeps_cancellation_and_negative_terms(pattern):
+    y, x = np.meshgrid(np.arange(32), np.arange(40), indexing="ij")
+    reference = packed_field(0.18 + 0.01 * np.cos(2 * np.pi * (3 * x / 40 + 2 * y / 32)))
+    # A deterministic algebra fixture: observed contrast is reduced by half.
+    observed = 0.18 + 0.5 * (reference - 0.18)
+    before = reference.copy(), observed.copy()
+    result = cross_decomposition(observed, reference, np.full_like(reference, 1e-4), pattern)
+    parts = result["component_cross"]
+    np.testing.assert_allclose(parts["residual"], 0.25 * parts["reference"], atol=1e-17)
+    np.testing.assert_allclose(parts["mixed"], -parts["reference"], atol=1e-17)
+    np.testing.assert_allclose(sum(parts.values()), result["observed"]["average_cross"], atol=1e-17)
+    assert np.min(parts["mixed"].real) < 0
+    assert np.array_equal(reference, before[0]) and np.array_equal(observed, before[1])
+
+
+def test_reference_residual_split_has_zero_residual_for_identical_fields():
+    y, x = np.meshgrid(np.arange(32), np.arange(40), indexing="ij")
+    field = packed_field(0.18 + 0.01 * np.cos(2 * np.pi * x / 8 + y))
+    result = cross_decomposition(field, field, np.zeros_like(field), PATTERNS[0])
+    assert np.array_equal(result["component_cross"]["residual"], np.zeros((16, 20)))
+    assert np.array_equal(result["component_cross"]["mixed"], np.zeros((16, 20)))
+    assert result["noise_units_components"] is None

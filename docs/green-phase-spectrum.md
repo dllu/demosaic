@@ -10,6 +10,12 @@ The corrected reference is **DSCF3835 ISO100**, an independent exposure, not GT.
 [Sources, native comparisons and conditioning](gfx-green-mesh.md) ·
 [Frozen plan, numerical results, independent check and publication bindings](results/green-phase-cross-spectrum-v1.json).
 
+The [photographic reference check](green-phase-reference.md) now extends this
+diagnostic to168 retained observations from15 sources. Strong positive peaks
+track reference structure there, but nonpositive cross-power also occurs at
+many supported frequencies. Positive agreement cannot define a universal detail
+mask; this is not a newly trained restoration result.
+
 ## Measured result
 
 Two fixed256px windows surround the existing160px mesh regions. Frequencies are
@@ -113,9 +119,11 @@ Neither checkpoint is reopened. Captures and siblings remain held out.
 The NumPy implementation is in
 [`green_phase_spectrum.py`](../scripts/green_phase_spectrum.py); the saved-array
 runner is [`report_green_phase_spectrum.py`](../scripts/report_green_phase_spectrum.py).
-Seventeen mathematical tests cover independent dense-DFT/noise propagation,
+The original17 mathematical tests cover independent dense-DFT/noise propagation,
 affine removal, phase alignment, aliases and phase-null counterexamples.
-With the existing camera-coordinate checks, **19 tests pass**.
+With the existing camera-coordinate checks, that run passed19 tests. The
+reference-check extension adds decomposition and source-aggregation checks;
+its current focused suite passes24 tests.
 
 A separate implementation uses explicit complex Fourier rows, rather than FFTs
 or the diagnostic module, to compute720 neighboring complex coefficients

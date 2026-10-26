@@ -51,6 +51,14 @@ shared input hashes and source diagnostics with no extra neural calls or RNG
 changes. V120 production is active; V121 follows sequentially. Full endpoint
 quality/native review is pending, with saved older controls reused.
 
+The [green-phase photographic reference check](green-phase-reference.md)
+tests the fence diagnostic on168 retained observations from15 source captures.
+Strong positive peaks correspond to reference structure on this finite support,
+but negative cross-power also occurs in many reference-powered bins, including
+the reference-only spectra. This supports studying signed phase information
+instead of a forced positive-only mask; it establishes no new trained model
+and leaves current data trials unchanged.
+
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing
 GFX contexts. Lower conditioning retains more fine structure and grain while
