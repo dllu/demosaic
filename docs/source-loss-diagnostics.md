@@ -14,6 +14,11 @@ completed passes:83 of84 inspected sources are retained, with one standalone
 digital advertisement withheld. The newest28-source inspection through18000
 retains all28 after larger native checks. V122/V123 use the90,786-source cohort
 with all fourteen regions intact.
+An additional16-source material/domain review uses historical ADC-only target
+statistics, separately from these live losses. It prepares a future90,784-source
+cohort after two specific withholds and a20-region bank with six inspected weak
+fields. Actual source reconstruction and the clean reader pass; no active
+cohort changes. [Latest source decisions and boundaries](current-source-loss-review.md).
 Losses nominate inspection rather than label bad photos automatically. The
 active V120/V121 cohorts retain their original frozen membership.
 

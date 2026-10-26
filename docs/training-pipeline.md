@@ -5,10 +5,12 @@ high-loss Commons examples to their actual source and crop without an additional
 neural forward. They are disabled by default and active in V120/V121;
 V119's frozen run is unchanged.
 
-The [current source inspection](current-source-loss-review.md) retains all28
-new nominees, leaving the90,786-source/fourteen-region cohort intact. Its earlier
-one-advertisement exclusion and reader/sampling checks remain valid. V122/V123
-use this cohort; V120/V121 retain their original frozen input plans.
+The [current source inspection](current-source-loss-review.md) prepares a future
+90,784-source cohort and optional20-region bank: two source-specific withholds
+and six weak material additions, with exact source/target reconstruction and
+actual reader checks. V122/V123 still use90,786/fourteen regions; V120/V121
+retain their original frozen input plans. No sampling quota, blur policy or
+active training change results from that preparation.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;

@@ -1,10 +1,11 @@
 # Weak photographic material targets
 
-The **14-region catalogue** preserves the original six training regions
+The **active14-region catalogue** preserves the original six training regions
 and adds eight existing photographs with inspected low-contrast material detail.
-It is selected for **V121 on90,787 sources** and passes actual reader plus
-discarded16-update CPU/CUDA checks. V120 completed20k and V121's full run is active;
-its endpoint quality effect remains unmeasured. V119/V120 retain six regions,
+It was used by **V121 on90,787 sources** and passes actual reader plus
+discarded16-update CPU/CUDA checks. V120/V121 completed20k; their primary
+predictions and independent audit are complete, with matched/native review
+awaiting a report-builder repair. V119/V120 retain six regions,
 90,791 sources and the same5% conditional-photo ROI probability.
 [Matched training and queued review](paired32-weak-detail-training.md).
 
@@ -14,13 +15,101 @@ region objects, source pixels and target hashes. Its
 [rebound catalogue](../configs/low-contrast-training-rois-cleaned90786-v1.json)
 passes actual source/crop/target and sampler checks. V121 keeps its original
 90,787-source binding. The [V122/V123 architectural trials](learned-raw-frequency-training.md)
-now use the90,786-source/fourteen-region binding. The latest28-source inspection
-retains all28, with no further catalogue or membership changes.
+now use the90,786-source/fourteen-region binding.
+
+An **optional20-region bank on90,784 sources** is now prepared for a future
+trial. It preserves all fourteen example objects and adds six actually inspected
+weak material fields. Two separately inspected sources—a painting reproduction
+and a thermographic display—are withheld only from that future cohort.
+The real reader validates all twenty regions and exercises the six additions.
+No active recipe, quota or training input changes; its quality effect is unknown.
+[New catalogue](../configs/low-contrast-training-rois-cleaned90784-v1.json) ·
+[Actual review, reconstruction and reader evidence](results/thin-photographic-materials-v1.json).
+[Preserved verification correction](results/thin-photographic-materials-publication-v1.json).
 
 [Catalogue](../configs/low-contrast-training-rois-cleaned90787-v1.json) ·
 [Actual visual decisions](results/weak-photographic-targets-review-v1.json) ·
 [Preparation and source reconstruction](results/weak-photographic-targets-preparation-v1.json) ·
 [Completed actual-reader check](results/weak-photographic-targets-v1.json).
+
+## Prepared20-region material extension
+
+The latest pass first inspected three previously retained thin-structure photos:
+bamboo rails, radial metal rods and stone-sculpture folds. Their aligned
+contexts and nine local fields are mostly mixed or high contrast. None is added
+to the weak-region bank. They remain ordinary eligible photographs.
+
+A historical ADC-only source screen then nominates sixteen new IDs, including
+fourteen varied photographic subjects and two checks of target-domain suitability.
+Its whole-context mean-RGB statistics are inspection cues, not current-model
+losses or an image-quality ranking. All sixteen source thumbnails and32 native256
+source/area8-target cells were actually viewed. Six specific physical fields
+received additional original512/native64 inspection and are admitted below.
+
+| Added source | Resolved target detail | Bin4 context xywh | Local64 linear-luminance SD |
+| --- | --- | --- | ---: |
+| `e97e5f43e7a1` | Dark platform paving and faint tile joints | [468,228,512,512] | .01728 |
+| `17b6eb0bdde8` | Mist-softened reeds, twigs and reflections | [360,154,512,512] | .02369 |
+| `01c5a6923407` | Gray door grain and shallow panel seams | [182,392,512,512] | .01814 |
+| `43ebd8b30c9b` | Dark carved stone and small block boundaries | [212,306,512,512] | .03097 |
+| `6c58c7d1a935` | Shallow plaster leaf relief and radial ribs | [494,244,512,512] | .02508 |
+| `cb7bb84fcbb8` | Faint etched architectural grid on metal | [392,108,512,512] | .03574 |
+
+These local64 annotations identify observed material, without changing trainer
+crop geometry or adding a loss mask. Dark exposure, natural haze and occasional
+stronger edges remain; low absolute SD does not make every edge weak. Fine
+individual reed fibers or all plaque microtexture are not asserted resolved.
+
+The views below place unchanged native512 source pixels beside the native64
+area8 target of the **same physical field**, at display exposure ×1. Full-context
+strips and source/ROI metadata are linked with each example. These inspect clean
+training sources; there is no noisy/restored comparison or model-quality result.
+
+![Dark platform paving, native source512 and same-field target64](images/weak-photographic-targets-20261026-v1/platform-paving-local.png)
+
+[Whole context](images/weak-photographic-targets-20261026-v1/platform-paving-context.png) ·
+[Metadata](images/weak-photographic-targets-20261026-v1/platform-paving-local.json).
+Source: [Arild Vågen, Gullmarsplan Metro station](https://commons.wikimedia.org/wiki/File:Gullmarsplan_Metro_station_February_2015.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+![Naturally mist-softened twigs and reeds, native source512 and target64](images/weak-photographic-targets-20261026-v1/misty-reeds-local.png)
+
+[Whole context](images/weak-photographic-targets-20261026-v1/misty-reeds-context.png) ·
+[Metadata](images/weak-photographic-targets-20261026-v1/misty-reeds-local.json).
+Source: [Johann Jaritz, Pörtschach bridge](https://commons.wikimedia.org/wiki/File:P%C3%B6rtschach_Blumeninsel_und_Br%C3%BCcke_N-Ansicht_29112020_8502.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+![Gray door grain, native source512 and same-field target64](images/weak-photographic-targets-20261026-v1/gray-wood-grain-local.png)
+
+[Whole context](images/weak-photographic-targets-20261026-v1/gray-wood-grain-context.png) ·
+[Metadata](images/weak-photographic-targets-20261026-v1/gray-wood-grain-local.json).
+Source: [Ermell, Eggolsheim church door](https://commons.wikimedia.org/wiki/File:Eggolsheim_church_door_030140.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+![Faint physical etched grid, native source512 and same-field target64](images/weak-photographic-targets-20261026-v1/etched-metal-grid-local.png)
+
+[Whole context](images/weak-photographic-targets-20261026-v1/etched-metal-grid-context.png) ·
+[Metadata](images/weak-photographic-targets-20261026-v1/etched-metal-grid-local.json).
+Source: [P e z i, Rotundenbrücke plaque](https://commons.wikimedia.org/wiki/File:Plaque_Rotundenbruecke_NW_DSC_5297a.jpg),
+[CC BY-SA3.0 AT](https://creativecommons.org/licenses/by-sa/3.0/at/deed.en).
+Modifications: cropping, binning, source-thumbnail creation where shown,
+ICC-to-sRGB and inspection-layout conversion. Native source/target cells never resize.
+
+Independent reconstruction from the six original JPEG fields reproduces294,912
+bin4 uint16 and73,728 final FP32 channel values exactly. All fourteen prior
+example objects remain identical. Coupled4×/8× manifests omit exactly two
+training IDs; every other literal row, including validation/test and order,
+is preserved. [Specific source decisions](current-source-loss-review.md).
+
+Using the original frozen V121 clean-reader code, constructor checks validate
+all twenty region caches/crops/targets, and the metadata chooser covers all20.
+The six additions pass actual geometry-before-area2 and existing contrast
+attenuation at native256/FP32. Four ordinary-photo and two procedural outputs
+match saved earlier hashes on the changed manifest. All12 outputs/2,359,296
+values are finite; global Python/NumPy/Torch RNG stays unchanged. No excluded
+or held-out cache opens, neural calls, RAW decodes, noise observations, CUDA
+initialization or optimizer updates occur. These are metadata-selected reader
+checks, not an executed training schedule or a change to the5% ROI quota.
 
 ## Selection and limits
 

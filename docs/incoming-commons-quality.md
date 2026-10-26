@@ -14,12 +14,13 @@ inspection, rather than native inspection of every image.
 
 ## Current data and training
 
-The [current Small-model loss review](current-source-loss-review.md) now covers
-84 selected sources in three passes. The newest28-source inspection retains
-all28 after native views and four larger checks. One previously identified
-nonphotographic advertisement remains excluded from the90,786-source cohort,
-preserving all fourteen regions. V122/V123 use that cohort; V120/V121 keep
-their original frozen inputs. Losses nominate inspection, not automatic labels.
+The [current source review](current-source-loss-review.md) covers84 loss-ranked
+sources plus16 new material/domain nominees. The latter retain14 photos and
+withhold a painting reproduction and thermographic display from a future90,784
+cohort, with an optional20-region weak-material bank. Actual source/target
+reconstruction and the real reader pass. V122/V123 keep90,786/fourteen regions;
+V120/V121 keep their original frozen inputs. Losses/statistics nominate inspection,
+not automatic labels or proven model-quality gains.
 
 | Cohort | Training sources | Status |
 | --- | ---: | --- |
@@ -30,6 +31,7 @@ their original frozen inputs. Losses nominate inspection, not automatic labels.
 | V120 paired32 control | **90,791** | [Original20k training complete](paired32-weak-detail-training.md), saved state independently verified; endpoint quality pending |
 | V121 reviewed weak-detail arm | **90,787** | [Full run active](paired32-weak-detail-training.md) after CPU/CUDA checks; four further withholds and fourteen reviewed regions; quality pending |
 | V122/V123 frequency-feature cohort | **90,786** | [One nonphotographic graphic removed](current-source-loss-review.md); all14 regions retained; [full-budget scope trials](learned-raw-frequency-training.md) started, with GPU coordination; quality pending |
+| Prepared next photographic cohort | **90,784** | [Two further source-specific withholds](current-source-loss-review.md), [optional20-region bank](weak-photographic-targets.md); actual reader verified; untrained and not selected by active runs |
 
 The completed-model 90,864-source cohort applies **eight additional training-source
 withholds relative to V104**: the three previously inspected photo-quality cases and five printed
