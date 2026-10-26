@@ -42,10 +42,12 @@ AHD → ISO100 camera JPEG, with both ISO100 references **not GT**.
 
 [Both regions, V115, triplets and conditioning evidence](gfx-green-mesh.md#fixed-nearby-capture-profile).
 
-The [completed V119 endpoint comparison](gfx-green-mesh.md#v119-after-cleaned-data-training)
-adds the same two fixed profiles after20k cleaned-data updates. At matched
-conditioning it shows no clear fine-lattice recovery gain over V115; this
-remains an adverse case. The [complete V119 quality review](v119-quality.md)
+The [completed V120 mesh comparison](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
+adds the corrected-paired32 continuation after20k updates. At either fixed
+profile it shows no clear fine-lattice recovery gain over V115 or V119; the blue
+point and substantial mesh loss remain. Two native triplets and both matched
+three-model boards are published. V120's broader numerical and complete-frame
+comparisons are pending. The [complete V119 quality review](v119-quality.md)
 now documents its photo gains and camera/color regressions.
 
 A [saved-array green-phase diagnostic](green-phase-spectrum.md) finds matching

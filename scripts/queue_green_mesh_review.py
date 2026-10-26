@@ -30,13 +30,26 @@ def report_ready(state, dependency, *, is_live=live):
     return True
 
 
-def endpoint_methods(checkpoints, arms, suffix):
-    if not arms:
+def endpoint_methods(checkpoints, arms, suffix, *, adopted=()):
+    if not arms or len(set(arms)) != len(arms):
         raise ValueError("Declare new mesh endpoints")
     if set(checkpoints) != set(arms) or len({v["sha256"] for v in checkpoints.values()}) != len(
         arms
     ):
         raise ValueError("Completed mesh endpoint coverage differs")
+    labels = {arm + suffix: arm for arm in arms}
+    adopted_labels = set()
+    for method in adopted:
+        label = method["label"]
+        if (
+            label not in labels
+            or label in adopted_labels
+            or method["kind"] != "checkpoint"
+            or "prediction" not in method
+            or method["checkpoint"]["sha256"] != checkpoints[labels[label]]["sha256"]
+        ):
+            raise ValueError("Adopted mesh endpoint differs from the completed checkpoint")
+        adopted_labels.add(label)
     return [
         {
             "label": arm + suffix,
@@ -45,10 +58,68 @@ def endpoint_methods(checkpoints, arms, suffix):
             "expected_step": 20000,
         }
         for arm in arms
+        if arm + suffix not in adopted_labels
     ]
 
 
-def prepare(root, comparison_plan, quality_plan, nominal, nearby):
+def completed_endpoint_methods(result, expected_inputs, input_arrays, arms, suffix):
+    """Adopt only a genuine completed endpoint forward on this exact observation."""
+    if (
+        result["inputs"] != expected_inputs
+        or result["input_arrays"] != input_arrays
+        or result["new_RAW_decodes"]
+        or result["new_noise_observations"]
+        or result["optimizer_updates"]
+        or result["CUDA_initialized"]
+        or not result["status"].startswith("completed-new-green-mesh-CPU-context-inference")
+    ):
+        raise ValueError("Completed endpoint mesh inputs or execution scope differ")
+    allowed = {arm + suffix for arm in arms}
+    selected = []
+    seen = set()
+    for method in result["methods"]:
+        label = method["label"]
+        if label in seen:
+            raise ValueError("Duplicate completed mesh method")
+        seen.add(label)
+        if method["new_inference"] and label not in allowed:
+            raise ValueError("Unexpected newly evaluated mesh endpoint")
+        if label not in allowed:
+            if method["actual_root_forwards"] or method["actual_encoder_forwards"]:
+                raise ValueError("Retained controls must not have been rerun")
+            continue
+        if (
+            method["kind"] != "checkpoint"
+            or not method["new_inference"]
+            or method["actual_root_forwards"] != 1
+            or method["actual_encoder_forwards"] != 1
+            or method["step"] != 20000
+            or method["source_inputs_sha256"] != input_arrays["sha256"]
+        ):
+            raise ValueError("Adoption requires the original completed endpoint execution")
+        selected.append(
+            {
+                key: method[key]
+                for key in (
+                    "label",
+                    "kind",
+                    "checkpoint",
+                    "prediction",
+                    "source_inputs_sha256",
+                    "step",
+                )
+            }
+        )
+    if (
+        not selected
+        or result["new_root_forwards"] != len(selected)
+        or result["new_encoder_forwards"] != len(selected)
+    ):
+        raise ValueError("Completed endpoint mesh accounting differs")
+    return selected
+
+
+def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=None):
     root = root.resolve()
     if not root.is_relative_to(REPO / ".cache"):
         raise ValueError("Mesh queues belong in the repository cache")
@@ -66,6 +137,9 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby):
         or state["status"].startswith("failed")
     ):
         raise ValueError("Expected the original live comparison queue")
+    adopted = adopted or {}
+    if set(adopted) - {"nominal", "profile3879"}:
+        raise ValueError("Unknown adopted mesh profile")
     inputs = [binding(comparison_plan), binding(quality_plan)]
     variants, records = [], []
     for name, path, labels, suffix in (
@@ -94,11 +168,30 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby):
             if case["ROI_xywh"][2:] != [160, 160]:
                 raise ValueError("Mesh crops must retain native160 pixels")
             inputs.extend(item["pixels"] for item in case["camera_JPEGs"].values())
+        endpoints = []
+        adopted_result = None
+        if name in adopted:
+            adopted_result = binding(adopted[name])
+            endpoints = completed_endpoint_methods(
+                read(adopted[name]),
+                result["inputs"],
+                metadata["input_arrays"],
+                comparison["new_arms"],
+                suffix,
+            )
+            for method in endpoints:
+                checkpoint = Path(method["checkpoint"]["path"])
+                if checkpoint.is_symlink() or checkpoint.stat().st_mode & 0o222:
+                    raise ValueError("Adopted mesh checkpoint must be an immutable copy")
+            inputs.append(adopted_result)
+            inputs.extend(m[key] for m in endpoints for key in ("prediction", "checkpoint"))
         variants.append(
             {
                 "name": name,
                 "inputs": result["inputs"],
                 "retained_methods": retained,
+                "adopted_methods": endpoints,
+                "adopted_result": adopted_result,
                 "new_label_suffix": suffix,
                 "conditioning": metadata["conditioning"],
             }
@@ -148,8 +241,15 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby):
         "new_arms": comparison["new_arms"],
         "variants": variants,
         "model_source_quality_plan": binding(quality_plan),
-        "planned_new_root_forwards": 2 * len(comparison["new_arms"]),
-        "planned_new_encoder_forwards": 2 * len(comparison["new_arms"]),
+        "planned_new_root_forwards": sum(
+            len(comparison["new_arms"]) - len(v["adopted_methods"]) for v in variants
+        ),
+        "planned_new_encoder_forwards": sum(
+            len(comparison["new_arms"]) - len(v["adopted_methods"]) for v in variants
+        ),
+        "planned_completed_endpoint_predictions_adopted": sum(
+            len(v["adopted_methods"]) for v in variants
+        ),
         "planned_retained_control_predictions_reused": sum(
             len(v["retained_methods"]) for v in variants
         ),
@@ -159,7 +259,7 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby):
         "minimum_free_output_GiB": 4,
         "inputs": inputs,
         "frozen_files": {str(p): binding(p)["sha256"] for p in work.rglob("*") if p.is_file()},
-        "scope": "Completed declared endpoints only, CPU IEEE FP32/B1/native768, same saved DSCF3842 observation and independent DSCF3835 reference, two fixed existing noise profiles and two160px ROIs. Reuse all selected controls with zero NN. Native4EV boards/triplets; no RAW/noise regeneration, profile search, full-frame/speed/PSNR or automatic retry/promotion. Actual viewing remains pending.",
+        "scope": "Completed declared endpoints only, CPU IEEE FP32/B1/native768, same saved DSCF3842 observation and independent DSCF3835 reference, two fixed existing noise profiles and two160px ROIs. Reuse selected controls and explicitly adopted completed endpoint predictions with zero NN, checking adopted checkpoint SHA against the final comparison. Native4EV boards/triplets; no RAW/noise regeneration, profile search, full-frame/speed/PSNR or automatic retry/promotion. Actual viewing remains pending.",
     }
     write(root / "queue-plan-v1.json", plan)
     guard(plan)
@@ -253,7 +353,10 @@ def controller(path):
         checkpoints = result["checkpoints"]
         reports = {}
         for variant in plan["variants"]:
-            methods = endpoint_methods(checkpoints, plan["new_arms"], variant["new_label_suffix"])
+            adopted = variant.get("adopted_methods", [])
+            methods = endpoint_methods(
+                checkpoints, plan["new_arms"], variant["new_label_suffix"], adopted=adopted
+            )
             for method in methods:
                 checkpoint = method["checkpoint"]
                 p = Path(checkpoint["path"])
@@ -262,7 +365,10 @@ def controller(path):
             stage_plan = root / (variant["name"] + "-evaluation-plan-v1.json")
             write(
                 stage_plan,
-                {"inputs": variant["inputs"], "methods": [*variant["retained_methods"], *methods]},
+                {
+                    "inputs": variant["inputs"],
+                    "methods": [*variant["retained_methods"], *adopted, *methods],
+                },
             )
             output = work / "artifacts" / variant["name"]
             run(
@@ -287,12 +393,14 @@ def controller(path):
             ):
                 raise ValueError("Mesh exceeded its declared input/runtime scope")
             for method in report["methods"]:
-                if method["label"] in {m["label"] for m in variant["retained_methods"]} and (
+                if method["label"] in {
+                    m["label"] for m in [*variant["retained_methods"], *adopted]
+                } and (
                     method["new_inference"]
                     or method["actual_root_forwards"]
                     or method["actual_encoder_forwards"]
                 ):
-                    raise ValueError("Retained mesh control was rerun")
+                    raise ValueError("Retained mesh prediction was rerun")
             reports[variant["name"]] = binding(output / "result-v1.json")
             state["completed"][variant["name"]] = reports[variant["name"]]
             record("completed-new-endpoint-mesh-profile", child=None)
@@ -325,6 +433,9 @@ def controller(path):
                 "retained_control_predictions_reused": plan[
                     "planned_retained_control_predictions_reused"
                 ],
+                "completed_endpoint_predictions_adopted": plan.get(
+                    "planned_completed_endpoint_predictions_adopted", 0
+                ),
                 "new_RAW_decodes": 0,
                 "new_noise_observations": 0,
                 "optimizer_updates": 0,
@@ -359,8 +470,27 @@ if __name__ == "__main__":
     parser.add_argument("--quality", type=Path)
     parser.add_argument("--nominal", type=Path)
     parser.add_argument("--nearby", type=Path)
+    parser.add_argument("--adopted-nominal", type=Path)
+    parser.add_argument("--adopted-nearby", type=Path)
     args = parser.parse_args()
     if args.mode == "controller":
         controller(args.path.resolve())
     else:
-        print(prepare(args.path, args.comparisons, args.quality, args.nominal, args.nearby))
+        adopted = {
+            name: path
+            for name, path in (
+                ("nominal", args.adopted_nominal),
+                ("profile3879", args.adopted_nearby),
+            )
+            if path is not None
+        }
+        print(
+            prepare(
+                args.path,
+                args.comparisons,
+                args.quality,
+                args.nominal,
+                args.nearby,
+                adopted=adopted,
+            )
+        )

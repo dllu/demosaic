@@ -27,7 +27,9 @@ geometry before final downsampling. [Data review](docs/incoming-commons-quality.
 [V120/V121 Small data trials](docs/paired32-weak-detail-training.md) passed their
 CPU/CUDA checks: V120 completed its original20k updates with corrected paired32
 data; V121 is training with the cleaner corpus and expanded weak-detail regions.
-Endpoint quality is pending.
+Full numerical evaluation is pending; the
+[early V120 mesh comparison](docs/gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
+shows no clear lattice-recovery gain over V115/V119.
 The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
 now compares training the new input adapter alone with adapting the full
 restoration path on the same cleaned corpus. Image quality is still unmeasured.
@@ -86,22 +88,21 @@ The independent ISO100 exposure is an approximate qualitative reference,
 
 The additional **fine green mesh beside the red train's cab** remains difficult:
 the nominal ISO6400 prior largely erases its lattice. A fixed nearby-capture
-profile makes more diagonal texture visible in V114/V115, with substantial fine
-detail still missing. Below: DSCF3842 camera JPEG → noisy Malvar → V114 nominal
-→ V114 nearby profile → DSCF3835 ISO100 AHD → ISO100 camera JPEG. Both ISO100
+profile makes more diagonal texture visible, with substantial fine detail still
+missing in V120. Below: DSCF3842 camera JPEG → noisy Malvar → V120 nominal
+→ V120 nearby profile → DSCF3835 ISO100 AHD → ISO100 camera JPEG. Both ISO100
 references are **not GT**. Native160px cells share +4EV display; camera
 processing/aperture differ. [Matched comparison and limits](docs/gfx-green-mesh.md).
-The [completed V119 mesh check](docs/gfx-green-mesh.md#v119-after-cleaned-data-training)
-shows no clear lattice-recovery gain over V115 at the same conditioning; its
-full panels and native review are now complete. The
+The [matched V115/V119/V120 mesh check](docs/gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
+shows no clear V120 lattice-recovery gain at the same conditioning. The
 [V119 report](docs/v119-quality.md) adds native bark/feather triplets and matched
 foliage/fence comparisons alongside its measured gains and regressions.
 The [RAW green-phase diagnostic](docs/green-phase-spectrum.md) finds matching
 diagonal frequency peaks that remain strongly attenuated in the saved outputs.
 
-![Fine green mesh, left native crop](docs/images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-left-4EV.png)
+![V120 fine green mesh, left native crop](docs/images/v120-green-mesh-v1/V120-fine-green-mesh-left-4EV.png)
 
-![Fine green mesh, right native crop](docs/images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-right-4EV.png)
+![V120 fine green mesh, right native crop](docs/images/v120-green-mesh-v1/V120-fine-green-mesh-right-4EV.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)

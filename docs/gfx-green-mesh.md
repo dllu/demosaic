@@ -9,20 +9,69 @@ RawNIND pre-upsampled keeps more directional texture under the nominal prior,
 without clearly recovering the reference lattice.
 The ISO6400 camera JPEG has very faint mesh amid grain; the separate ISO100
 capture makes the physical structure much clearer. This remains an adverse case;
-the limited conditioning gain is not a new trained-model result.
+V120's corrected-paired-data continuation also shows no clear lattice-recovery
+gain at matched conditioning.
 
 The case pairs **DSCF3842 ISO6400** with **DSCF3835 ISO100**, taken 46 seconds
 earlier. Both camera JPEGs are included.
 The existing DSCF3879/3880 standing scene and its six regions remain in use.
 
-The [V120–V123 endpoint review queues](endpoint-quality-review.md) now include
-both fixed mesh noise profiles and both native160 regions, reusing saved
-V115/V119/RawNIND controls. New endpoint predictions and actual viewing remain
-pending; queue preparation establishes no new mesh-quality result.
+The [V120–V123 endpoint review queues](endpoint-quality-review.md) include both
+fixed noise profiles and both native160 regions, reusing saved controls.
+V120's mesh review is complete below. Its two saved predictions are adopted by
+the later V120/V121 report; V121–V123 mesh predictions and full numerical
+comparisons remain pending.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V120 after correcting the paired-data mix
+
+**V120 shows no clear fine-lattice recovery gain over V115 or V119 under either
+fixed profile.** The completed20,000-update Small model restores the corrected
+32-group paired set while keeping V119's Commons cohort and six photographic
+regions. The nominal prior still largely erases the mesh. The nearby profile
+reveals more diagonal texture, particularly on the right, but the lattice stays
+soft, irregular and much weaker than the independent ISO100 reference. The blue
+point remains. This case supplies no overall model ranking; primary numerical,
+main-scene and complete-frame comparisons are still pending.
+
+Columns below are camera JPEG, noisy Malvar, V115 Small, V119, V120, independent
+ISO100 AHD and ISO100 camera JPEG. Top/bottom rows use the nominal/nearby profiles
+listed below. Every cell is a native160×160 crop with the same +4EV display.
+Both ISO100 columns are **qualitative references, not exact GT**.
+
+![Left mesh: V115, V119 and V120 at both fixed profiles](images/v120-green-mesh-v1/V115-V119-V120-fine-green-mesh-left-4EV.png)
+
+![Right mesh: identical coordinates and display across the three models](images/v120-green-mesh-v1/V115-V119-V120-fine-green-mesh-right-4EV.png)
+
+The two nearby-profile noisy/V120/independent-reference triplets retain native
+pixels and the same display transform:
+
+![V120 left: noisy, restored and separate ISO100 reference](images/v120-green-mesh-v1/triplets/crop-5438260ed93da07a.png)
+
+![V120 right: noisy, restored and separate ISO100 reference](images/v120-green-mesh-v1/triplets/crop-852e1aa94ac42810.png)
+
+The checkpoint SHA256 is
+`a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb`.
+Exactly two new CPU IEEE-FP32 root/encoder forwards used the existing768px
+context at B1; five selected parent/RawNIND predictions were reused. There was
+no new RAW decode, noise generation, profile search or optimizer update.
+Context coordinates are `[600,6260,768,768]`; local left/right ROIs are
+`[206,229,160,160]` and `[426,189,160,160]`. Originals stayed read-only and cached.
+
+Independent NumPy64 display arithmetic checks2,150,400 channel values in the
+28 matched cells: ten differ by one DN8 from FP32 rendering; all others match.
+Sixteen shared camera/noisy/reference control cells and all six triplet cells
+match exactly. The actual frozen reuse path forbids model construction/calls
+and reproduces the two +2EV and two +4EV boards and two triplets byte-for-byte.
+The later family review checks the completed checkpoint hash before adopting
+these V120 predictions and runs only V121's two new mesh forwards.
+
+[Source/ROI/checkpoint/noise/display metadata](images/v120-green-mesh-v1/manifest.json) ·
+[Execution, actual viewing, pixel verification and queue adoption](results/v120-green-mesh-v1.json) ·
+[Completed training evidence](paired32-weak-detail-training.md).
 
 ## V119 after cleaned-data training
 

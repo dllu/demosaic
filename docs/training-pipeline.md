@@ -34,8 +34,10 @@ all three data paths. Its [complete20k quality review](v119-quality.md) finds
 a+.06131dB photo gain over V115, a−.22342dB known-camera change and a large ADC
 color tail. The [V120/V121 follow-up](paired32-weak-detail-training.md) keeps
 the Small architecture and restores corrected paired32; the second arm selects
-reviewed90787/fourteen ROIs. All four discarded checks pass; V120 is training,
-V121 is queued sequentially, and endpoint quality remains pending. Both retain
+reviewed90787/fourteen ROIs. All four discarded checks pass; V120 completed its
+original20,000 updates and V121 is training. V120's
+[early fine-mesh review](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
+shows no clear recovery gain; full numerical evaluation remains pending. Both retain
 zero optical PSFs, current geometry and batch16.
 
 The completed [spectral](spectral-original4k-review.md) and

@@ -1,0 +1,681 @@
+{
+  "status": "completed-original20000-V120-fine-mesh-native-review-and-prediction-adoption",
+  "recorded_local": "2026-10-26T00:55:19.898347-07:00",
+  "recorder": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/record-reviewed-v1.py",
+    "sha256": "0cd76bf5fc9ae0d80aace1a6f5fb304516a0a941ba92f978d92c429cdda67458"
+  },
+  "endpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+    "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+  },
+  "expected_training_step": 20000,
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v120-training-complete-v1.json",
+    "sha256": "6b576e28f3229ccff0f7920c97e9328eace8e1061752f698d6e2d3babb91cc85"
+  },
+  "training_verification": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v120-training-complete-verification-v1.json",
+    "sha256": "aa7746cb734192ac0714ac847700c9b13d95dfa25bdd90c3778504cf81237ed6"
+  },
+  "prospective_execution_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/plan-v1.json",
+    "sha256": "392b66a98cce655886e168d71277e19d1498b0c09e77359e019c75bfe511f9dc"
+  },
+  "executed_inference": {
+    "owner": {
+      "pid": 12492,
+      "created": 1793000728.03
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/plan-v1.json",
+      "sha256": "392b66a98cce655886e168d71277e19d1498b0c09e77359e019c75bfe511f9dc"
+    },
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+    },
+    "reports": {
+      "nominal": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/nominal/result-v1.json",
+        "sha256": "d6e344ffdc3ef0d6f2b67c7c3cc448e7bdafa67c40f40ac81a384d8ca3b2ccc2"
+      },
+      "profile3879": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/profile3879/result-v1.json",
+        "sha256": "4a838d978b619c4780115fb734e6a526ee4e070f713b2ddaa8eac43fa9895532"
+      }
+    },
+    "native_manifest": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/native4EV/manifest.json",
+      "sha256": "181cfca0b5d4632a38a86d19602ea7cdac73ce079ddfeb128a5ba2977ad301bb"
+    },
+    "new_root_forwards": 2,
+    "new_encoder_forwards": 2,
+    "reused_control_predictions": 5,
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "controller_Torch_imported": false,
+    "scope": "Completed V120 only, once per already-fixed nominal/nearby profile; CPU IEEE FP32/B1/native768, two native160 regions. Five old predictions reused. No RAW/noise/optimizer/CUDA or profile search. DSCF3835 independent ISO100 reference is not GT. Later family review must adopt these predictions without rerunning V120.",
+    "actual_native_viewing": "pending"
+  },
+  "methods": {
+    "nominal": [
+      {
+        "label": "V115",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+          "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/V115-RGB-f32.npy",
+          "sha256": "d28c5c55213d4dd08f92d8b97ff0da23bbe018630188cb3641027ab6c6993f7e"
+        },
+        "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+        "actual_root_forwards": 0,
+        "actual_encoder_forwards": 0,
+        "new_inference": false
+      },
+      {
+        "label": "RawNIND-preup",
+        "kind": "rawnind-preup",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/references/rawnind-preupsample-20261023-v1/utnet2-bayer.pt",
+          "sha256": "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/comparison-v1/RawNIND-preup-RGB-f32.npy",
+          "sha256": "59a1a0c84e77b852b964616ae292e2b0ebdb25f2ca142748ff6996d670100f58"
+        },
+        "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+        "actual_root_forwards": 0,
+        "actual_encoder_forwards": 0,
+        "new_inference": false
+      },
+      {
+        "label": "V119",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/work/artifacts/weights/weights-b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427.pt",
+          "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/nominal/V119-RGB-f32.npy",
+          "sha256": "5f36acc845be449dd71e3bd8a0e31ddd3a0d971fa7ae7142c5ba2b126b64d5b8"
+        },
+        "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+        "actual_root_forwards": 0,
+        "actual_encoder_forwards": 0,
+        "new_inference": false
+      },
+      {
+        "label": "V120",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "expected_step": 20000,
+        "step": 20000,
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/nominal/V120-RGB-f32.npy",
+          "sha256": "fe96564033fcd3ce231ca17639ca92857e41c7124ad18bf9d0b76aa1827a77cb"
+        },
+        "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+        "actual_root_forwards": 1,
+        "actual_encoder_forwards": 1,
+        "new_inference": true,
+        "seconds": 58.97541036223993
+      }
+    ],
+    "profile3879": [
+      {
+        "label": "V115-profile3879",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+          "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/profile-transfer-v1/V115-profile3879-RGB-f32.npy",
+          "sha256": "8a6e92bc30048c3e4d0cfbae952c308a6ce7a9412ab252fc289e7104221c3eee"
+        },
+        "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+        "actual_root_forwards": 0,
+        "actual_encoder_forwards": 0,
+        "new_inference": false
+      },
+      {
+        "label": "V119-profile3879",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-cleaned-diverse-quality-v1/work/artifacts/weights/weights-b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427.pt",
+          "sha256": "b3c0d43264c6ad8446dd930aafa337298e4690d0d08f2967824f03ecd844f427"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V119-green-mesh-v2/work/artifacts/profile3879/V119-profile3879-RGB-f32.npy",
+          "sha256": "0b949fe5611be2aa15ff14d9186170c2b1bbf176ae3045459bfc1d56277996f1"
+        },
+        "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+        "actual_root_forwards": 0,
+        "actual_encoder_forwards": 0,
+        "new_inference": false
+      },
+      {
+        "label": "V120-profile3879",
+        "kind": "checkpoint",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "expected_step": 20000,
+        "step": 20000,
+        "model_config": {
+          "restoration_backbone": "pretrained-rgb",
+          "width": 64,
+          "encoder_blocks": [
+            2,
+            2,
+            4
+          ],
+          "middle_blocks": 6,
+          "decoder_blocks": [
+            2,
+            2,
+            2
+          ],
+          "attention": true,
+          "dino": true,
+          "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+          "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+          "dino_lora_rank": 0,
+          "dino_input_adapter": false,
+          "dino_feature_fusion": "convnext-pyramid",
+          "camera_conditioning": true,
+          "noise_modulation": false,
+          "physical_fp32": true,
+          "baseline": "bilinear",
+          "prior_window": 7,
+          "standardized_noise": false,
+          "noise_refinement": false,
+          "refinement_width": 24,
+          "refinement_blocks": 4,
+          "refinement_window": 63,
+          "coarse_refinement_factor": 0,
+          "coarse_refinement_width": 24,
+          "coarse_refinement_blocks": 4,
+          "coarse_refinement_window": 31,
+          "pyramid_refinement": false,
+          "pyramid_measurements": true,
+          "pyramid_width": 24,
+          "pyramid_blocks": 2,
+          "variance_stabilization": true,
+          "physical_anchors": true,
+          "rgb_processing_scale": 1,
+          "packed_detail_prior": false,
+          "rgb_hidden_autocast": false,
+          "rgb_center_camera_matrix": false,
+          "rgb_middle_skip_fp32": true,
+          "adc_cfa_projection": false,
+          "adc_cfa_projection_mode": "malvar",
+          "raw_kernel_reconstruction": false,
+          "raw_kernel_windows": [
+            1,
+            5,
+            17
+          ],
+          "raw_kernel_phase_conditioning": false,
+          "raw_directional_residual": false,
+          "raw_directional_bank_context": false,
+          "raw_directional_bank_detach_input": false,
+          "raw_spectral_residual": false,
+          "late_rgb_refinement": "none",
+          "isotropic_groups": 6,
+          "isotropic_blocks": 8,
+          "isotropic_local_width": 32,
+          "isotropic_raw_gain": 1.0,
+          "isotropic_residual_scale": 1.0
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/profile3879/V120-profile3879-RGB-f32.npy",
+          "sha256": "6351c4ff5444f5773db59302fde58b4048b445426a2361d10402e4ab68f234dc"
+        },
+        "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+        "actual_root_forwards": 1,
+        "actual_encoder_forwards": 1,
+        "new_inference": true,
+        "seconds": 52.15215567778796
+      }
+    ]
+  },
+  "preparation_failure": {
+    "receipt": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/preparation-failure-v1.json",
+      "sha256": "17381fc8a1ddbfe4dd408e823b1dd38598d60a88c11f6406186b45e7f9142ec1"
+    },
+    "details": {
+      "status": "preparation-stopped-before-inference",
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/prepare-v1.py",
+        "sha256": "f21421e362f5a713b6f9422ef9b444b3dee55a84a0680a3804967a409f5947ff"
+      },
+      "failure": "AssertionError: broad workspace walk encountered old preflight previews outside src/scripts/third_party",
+      "new_neural_forwards": 0,
+      "new_encoder_forwards": 0,
+      "new_RAW_decodes": 0,
+      "new_noise_observations": 0,
+      "completed_checkpoint_preserved": true,
+      "correction": "prepare-v2.py copies only the existing frozen_files entries; completed read-only checkpoint snapshot is reused; no executed source modified"
+    },
+    "corrected_source": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/prepare-v2.py",
+      "sha256": "dd062968f5d61dbe666be11af8b901555cb3e8af138678d6a24730da8fe07151"
+    },
+    "scope": "Initial source walk encountered cached preflight previews before any model was loaded or called. Executed source and checkpoint snapshot preserved; corrected prepare selects only recorded frozen source files. Exactly two total V120 forwards, no repeated inference."
+  },
+  "actual_native_viewing": {
+    "status": "completed",
+    "images": [
+      {
+        "artifact": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/nominal/comparison-native.png",
+          "sha256": "1c3731dbf1a7a951d9ffe39a53002a8b82fd92ff91629eb05048e92c5955f9a2"
+        },
+        "finding": "Actually viewed both native160 regions at +2EV: nominal V120 largely loses fine lattice, comparable to V115/V119; RawNIND directional texture does not clearly reproduce ISO100 lattice."
+      },
+      {
+        "artifact": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/profile3879/comparison-native.png",
+          "sha256": "948fe3c87e3da5115c2dc0ef39e93fc0c05dbe2980c809acb85865248b60f40c"
+        },
+        "finding": "Actually viewed both native160 regions at +2EV: nearby profile exposes more diagonals but substantial soft/irregular lattice loss remains; no clear V120 recovery gain over V115/V119."
+      },
+      {
+        "artifact": {
+          "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V115-V119-V120-fine-green-mesh-left-4EV.png",
+          "sha256": "d437ea369172326a1b96aba854454855b01edf9c7f3f49dbddbebd09b4e62e72"
+        },
+        "finding": "Actually viewed at original resolution: both fixed profiles, native160 cells, shared +4EV. V120 has no clear fine-lattice gain over V115/V119. Independent ISO100 lattice much clearer; blue point persists on left. No real-photo PSNR or global ranking."
+      },
+      {
+        "artifact": {
+          "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V115-V119-V120-fine-green-mesh-right-4EV.png",
+          "sha256": "f4b578966c8919618404546f087dc63a257c00e3962b60fb05f437615ecddefa"
+        },
+        "finding": "Actually viewed at original resolution: both fixed profiles, native160 cells, shared +4EV. V120 has no clear fine-lattice gain over V115/V119. Independent ISO100 lattice much clearer; blue point persists on left. No real-photo PSNR or global ranking."
+      },
+      {
+        "artifact": {
+          "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/triplets/crop-5438260ed93da07a.png",
+          "sha256": "487475aa8b70884e66bff821a0c5e3f566396ee89c886b184712cbe7a6e4df90"
+        },
+        "finding": "Actually viewed native noisy/V120/independent ISO100 triplet at shared +4EV; labels correctly identify separate ISO100 as not GT."
+      },
+      {
+        "artifact": {
+          "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/triplets/crop-852e1aa94ac42810.png",
+          "sha256": "3811caf24c0ad867735d8cdb65c00c6ab3a6e9993dc20b633db81116fabcc610"
+        },
+        "finding": "Actually viewed native noisy/V120/independent ISO100 triplet at shared +4EV; labels correctly identify separate ISO100 as not GT."
+      }
+    ],
+    "conclusion": "No clear fine-lattice recovery gain over V115/V119 at either matched profile. Nearby conditioning reveals more diagonal texture but mesh remains soft, irregular and incomplete; blue point persists. Dataset/paired32 continuation has not solved this adverse case.",
+    "scope": "Two native160 regions from fixed768 context. DSCF3842 ISO6400 and DSCF3835 ISO100/f5.6/2.5s, 46s apart, plus both camera JPEGs. Independent aperture/time/processing and moving subjects differ; ISO100 is not exact GT. No full-frame/speed/PSNR or broad superiority claim."
+  },
+  "publication": {
+    "manifest": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/manifest.json",
+      "sha256": "5bd38a66be04e08b68311a26d13399b3fb08199f73c7f581a3afaa4e34c6de93"
+    },
+    "verification": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/publication-verification-v1.json",
+      "sha256": "f69a23ab5238818f5a52714b2ab738f43a3d32e276a6692c17a029b7bee48dc1"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/publish-native-v1.py",
+      "sha256": "a35925ffbf26e2a6fd54220da5546f644d92aa88c2b78fb4d99d3f8b26f268ac"
+    }
+  },
+  "independent_native_verification": {
+    "recorded_local": "2026-10-26T00:48:23.044926-07:00",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/publish-native-v1.py",
+      "sha256": "a35925ffbf26e2a6fd54220da5546f644d92aa88c2b78fb4d99d3f8b26f268ac"
+    },
+    "matched_native_cells": 28,
+    "native_channel_values": 2150400,
+    "exact_NumPy64_display_channels": 2150390,
+    "channels_differing_by_one_DN8": 10,
+    "maximum_DN8_difference": 1,
+    "shared_old_control_cells_exact": 16,
+    "triplet_cells_exact_to_native_boards": 6,
+    "new_neural_forwards": 0,
+    "Torch_imported": false,
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "resized_pixels": 0,
+    "scope": "Independent NumPy64 WB/matrix/sRGB arithmetic on bound native data; at most one DN8 for FP32 rounding. Exact parent-control panel copies, exact triplet/board identity and byte-identical original V120 images. Independent DSCF3835 reference, not GT; no score or full-frame claim."
+  },
+  "adoption_preflight": {
+    "status": "passed-actual-frozen-adoption-path-with-all-model-calls-forbidden",
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/preflight-adoption-v1.py",
+      "sha256": "6d198de3e38ff21126d2ce4db75fd931ab319e5800d0b68ece4a8e31e17e91ba"
+    },
+    "queue_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/queue-plan-v1.json",
+      "sha256": "92e48a5a84d5fd21b40d54072f492509566ff80d9104e441eb01740425500e03"
+    },
+    "checks": [
+      {
+        "profile": "nominal",
+        "reused_predictions": 4,
+        "early_2EV_board_byte_identical": true,
+        "mismatched_endpoint_rejected": true,
+        "scheduled_future_endpoint_only": "V121"
+      },
+      {
+        "profile": "profile3879",
+        "reused_predictions": 3,
+        "early_2EV_board_byte_identical": true,
+        "mismatched_endpoint_rejected": true,
+        "scheduled_future_endpoint_only": "V121-profile3879"
+      }
+    ],
+    "reports": {
+      "nominal": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/work/preflight-adopted-v1/nominal/result-v1.json",
+        "sha256": "4fc97e6a2a4d7d01e4abd0bdc1851c7e961af96ea72e86ea986f53340cb20116"
+      },
+      "profile3879": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/work/preflight-adopted-v1/profile3879/result-v1.json",
+        "sha256": "d84df6c929f09cadc2212f8af870dea3f7a78940e7d7081532783a5969c0ab83"
+      }
+    },
+    "native_manifest": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/work/preflight-adopted-v1/native4EV/manifest.json",
+      "sha256": "20d32ed72a77f9e979009e184b5375ab7558807b19ba7bbcb8423da7c074af67"
+    },
+    "4EV_boards_byte_identical": 2,
+    "triplets_byte_identical": 2,
+    "new_root_forwards": 0,
+    "new_encoder_forwards": 0,
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "CUDA_initialized": false,
+    "future_V121_checkpoint": "Placeholder for scheduling test only; not loaded or treated as a completed result"
+  },
+  "queue_replacement": {
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/replace-idle-queue-v1.py",
+      "sha256": "033ed8acb0d2a32f9a8ddf6a0ad7f27dba42b1fbbb246a129468b9d8efd04d18"
+    },
+    "retirement_before": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/retirement-before-v1.json",
+      "sha256": "c2ed4fe64b7c460f8a1fe385240ee744ad220090714a34448eaa4e5896c896f1"
+    },
+    "old_terminal_state": {
+      "owner": {
+        "pid": 4131655,
+        "created": 1792995519.74
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v1/queue-plan-v1.json",
+        "sha256": "b50dbf64c56abc0ddfbe2f9d8359bb9dd1c0abf1eb1c30824fdb792b4b09e1ed"
+      },
+      "completed": {},
+      "status": "failed-mesh-review-preserved-no-automatic-retry",
+      "updated_unix": 1793001073.685351,
+      "dependency": {
+        "pid": 4129946,
+        "created": 1792994940.64
+      },
+      "child": null,
+      "error": "KeyboardInterrupt()"
+    },
+    "old_log": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v1/controller.log",
+      "sha256": "0d62196aab83abd673c7868658592d70a43a5ab8ed893cd61adb49efca83c8b6"
+    },
+    "old_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v1/queue-plan-v1.json",
+      "sha256": "b50dbf64c56abc0ddfbe2f9d8359bb9dd1c0abf1eb1c30824fdb792b4b09e1ed"
+    },
+    "old_original_source_unchanged": true,
+    "old_prediction_outputs": 0,
+    "new_queue_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/queue-plan-v1.json",
+      "sha256": "92e48a5a84d5fd21b40d54072f492509566ff80d9104e441eb01740425500e03"
+    },
+    "new_owner": {
+      "pid": 59653,
+      "created": 1793001074.1
+    },
+    "new_state_at_launch": {
+      "owner": {
+        "pid": 59653,
+        "created": 1793001074.1
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/queue-plan-v1.json",
+        "sha256": "92e48a5a84d5fd21b40d54072f492509566ff80d9104e441eb01740425500e03"
+      },
+      "completed": {},
+      "status": "waiting-for-completed-endpoint-comparisons",
+      "updated_unix": 1793001074.6630776,
+      "dependency": {
+        "pid": 4129946,
+        "created": 1792994940.64
+      },
+      "child": null
+    },
+    "adoption_preflight": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-green-mesh-review-v2/adoption-preflight-v1.json",
+      "sha256": "d41cececa4b156e432f848faa03f3af12280afe3bf6a334e1171b27bd752fbee"
+    },
+    "completed_V120_predictions_adopted": 2,
+    "future_V121_root_forwards": 2,
+    "future_V121_encoder_forwards": 2,
+    "scope": "Only the exact owned idle fine-mesh queue was retired via SIGINT. Its existing source, preflights, claim, plans and terminal state remain. Original training, GPU coordinator, quality, audit, matched-report and frequency mesh queues were not signaled or restarted."
+  },
+  "implementation_validation": {
+    "test_command": "CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=1 PYTHONPATH=src:scripts .venv/bin/python -m pytest -q tests/test_green_mesh_queue.py",
+    "observed_result": "34 passed in 0.11s",
+    "Ruff_check": "All checks passed",
+    "queue_source": {
+      "path": "/home/dllu/proj/demosaic/scripts/queue_green_mesh_review.py",
+      "sha256": "d5731c0441c8bed154c048dae19c2cc9ae898b67efd6466953c8a6ab786f9b69"
+    },
+    "test_source": {
+      "path": "/home/dllu/proj/demosaic/tests/test_green_mesh_queue.py",
+      "sha256": "d0e93c46343f5ba0860f8289f5f8b4a4adddfd5490e9f50d816ec7cd3af7c426"
+    },
+    "scope": "Exact process/plan boundaries, partial/all endpoint adoption, incorrect input/profile/step/call counts, duplicates/unexpected endpoints, and mismatch against final checkpoint. Actual frozen reuse preflight separately exercises saved-array rendering with model calls/construction forbidden."
+  },
+  "live_owned_jobs_at_recording": {
+    "Small-paired32-weak-detail-training-v1/run": {
+      "status": "running-quality-training",
+      "owner": {
+        "pid": 3688946,
+        "created": 1792975789.34
+      },
+      "actual_process_status": "sleeping",
+      "child": {
+        "pid": 7359,
+        "created": 1792999356.56
+      },
+      "actual_child_status": "running"
+    },
+    "learned-frequency-training-v1/run": {
+      "status": "running-frequency-training",
+      "owner": {
+        "pid": 4066396,
+        "created": 1792992904.87
+      },
+      "actual_process_status": "sleeping",
+      "child": {
+        "pid": 4074525,
+        "created": 1792993440.57
+      },
+      "actual_child_status": "stopped"
+    },
+    "owned-training-GPU-yield-v1": {
+      "status": "yielded-training-until-original-priority-controller-exits",
+      "owner": {
+        "pid": 4136252,
+        "created": 1792996895.9
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V120-V121-paired32-weak-detail-quality-v1": {
+      "status": "waiting-for-exact-matched-training-owner",
+      "owner": {
+        "pid": 3731018,
+        "created": 1792975962.07
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V120-V121-paired32-weak-detail-independent-audit-v1": {
+      "status": "waiting-for-exact-endpoint-evaluation-owner",
+      "owner": {
+        "pid": 3731154,
+        "created": 1792976020.7
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V120-V121-paired32-weak-detail-matched-review-v3": {
+      "status": "waiting-for-original-independent-audit",
+      "owner": {
+        "pid": 4129946,
+        "created": 1792994940.64
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V120-V121-green-mesh-review-v2": {
+      "status": "waiting-for-completed-endpoint-comparisons",
+      "owner": {
+        "pid": 59653,
+        "created": 1793001074.1
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V122-V123-learned-frequency-quality-v1": {
+      "status": "waiting-for-exact-matched-training-owner",
+      "owner": {
+        "pid": 4073072,
+        "created": 1792993313.29
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V122-V123-learned-frequency-independent-audit-v1": {
+      "status": "waiting-for-exact-endpoint-evaluation-owner",
+      "owner": {
+        "pid": 4073170,
+        "created": 1792993332.06
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V122-V123-learned-frequency-matched-review-v2": {
+      "status": "waiting-for-original-independent-audit",
+      "owner": {
+        "pid": 4129947,
+        "created": 1792994940.65
+      },
+      "actual_process_status": "sleeping"
+    },
+    "V122-V123-green-mesh-review-v1": {
+      "status": "waiting-for-completed-endpoint-comparisons",
+      "owner": {
+        "pid": 4131656,
+        "created": 1792995519.74
+      },
+      "actual_process_status": "sleeping"
+    }
+  },
+  "neural_accounting_this_change": {
+    "V120_root_forwards": 2,
+    "V120_encoder_forwards": 2,
+    "retained_control_predictions_reused": 5,
+    "adoption_preflight_new_neural_forwards": 0,
+    "publication_new_neural_forwards": 0,
+    "new_RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "future_V121_mesh_root_forwards": 2,
+    "future_V121_mesh_encoder_forwards": 2,
+    "future_V120_mesh_forwards": 0
+  },
+  "pending": [
+    "V121 original20000 training completion",
+    "V120/V121 full primary and analytic panels, standing six-region GFX, highlights and complete101.996MP exports",
+    "V122/V123 frequency trial completion and full quality review",
+    "V121/V122/V123 mesh inference and actual viewing"
+  ]
+}

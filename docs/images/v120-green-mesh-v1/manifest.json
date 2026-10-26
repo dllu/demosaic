@@ -1,0 +1,758 @@
+{
+  "status": "native-V120-mesh-published-awaiting-actual-review",
+  "renderer": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/scripts/report_gfx_green_mesh_profiles.py",
+    "sha256": "4ffab3fbfd6aaa19b313b01e3a760779e1b5f5ff3f24ab0c0eb052ec6686492d"
+  },
+  "nominal": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/nominal/result-v1.json",
+    "sha256": "d6e344ffdc3ef0d6f2b67c7c3cc448e7bdafa67c40f40ac81a384d8ca3b2ccc2"
+  },
+  "nearby": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/profile3879/result-v1.json",
+    "sha256": "4a838d978b619c4780115fb734e6a526ee4e070f713b2ddaa8eac43fa9895532"
+  },
+  "conditioning": {
+    "nominal": {
+      "shot": 0.00128,
+      "read": 6.5536e-06,
+      "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+    },
+    "nearby": {
+      "shot": 0.0014635775921166604,
+      "read": 1.0715704128646712e-06,
+      "source": "input Haar fit",
+      "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+    }
+  },
+  "inputs_equal_except_variance": true,
+  "source_bindings": {
+    "noisy": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+      "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+    },
+    "reference": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+      "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+    },
+    "noisy_camera_jpeg": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+      "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+    },
+    "reference_camera_jpeg": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+      "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+    }
+  },
+  "display_exposure": 16.0,
+  "native_pixel_size": [
+    160,
+    160
+  ],
+  "boards": [
+    {
+      "model": "V120",
+      "case": {
+        "name": "fine-green-mesh-left",
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          805,
+          6489,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+              "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+            },
+            "xywh": [
+              760,
+              6500,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+              "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+            },
+            "xywh": [
+              759,
+              6501,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        }
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V120-fine-green-mesh-left-4EV.png",
+        "sha256": "396a01b640ae2e4ba5bda662fba79b7d1c7e373c4792d84b56559cba6f51dd58"
+      },
+      "panels": [
+        {
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Noisy Malvar",
+          "png_xywh": [
+            184,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 nominal prior",
+          "png_xywh": [
+            360,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 nearby profile",
+          "png_xywh": [
+            536,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD, not GT",
+          "png_xywh": [
+            712,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            888,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/native4EV/V120-fine-green-mesh-left-4EV.png",
+        "sha256": "396a01b640ae2e4ba5bda662fba79b7d1c7e373c4792d84b56559cba6f51dd58"
+      }
+    },
+    {
+      "model": "V120",
+      "case": {
+        "name": "fine-green-mesh-right",
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          1025,
+          6449,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+              "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+            },
+            "xywh": [
+              980,
+              6460,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+              "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+            },
+            "xywh": [
+              979,
+              6461,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        }
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V120-fine-green-mesh-right-4EV.png",
+        "sha256": "944b09ca414612cc9286e791ad3918e261d09915a29e7072f3a2e0b4a0799118"
+      },
+      "panels": [
+        {
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Noisy Malvar",
+          "png_xywh": [
+            184,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 nominal prior",
+          "png_xywh": [
+            360,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 nearby profile",
+          "png_xywh": [
+            536,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 AHD, not GT",
+          "png_xywh": [
+            712,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            888,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/native4EV/V120-fine-green-mesh-right-4EV.png",
+        "sha256": "944b09ca414612cc9286e791ad3918e261d09915a29e7072f3a2e0b4a0799118"
+      }
+    }
+  ],
+  "triplets": [
+    {
+      "model": "V120",
+      "case": "fine-green-mesh-left",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/triplets/crop-5438260ed93da07a.png",
+        "sha256": "487475aa8b70884e66bff821a0c5e3f566396ee89c886b184712cbe7a6e4df90"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/triplets/crop-5438260ed93da07a.json",
+        "sha256": "8a2a398470002a60f64e93fa0a636e7b4c2170734f4f8cbd83dcc1363ed1f045"
+      }
+    },
+    {
+      "model": "V120",
+      "case": "fine-green-mesh-right",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/triplets/crop-852e1aa94ac42810.png",
+        "sha256": "3811caf24c0ad867735d8cdb65c00c6ab3a6e9993dc20b633db81116fabcc610"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/triplets/crop-852e1aa94ac42810.json",
+        "sha256": "c65c02af5b3bbd5fab7a5811e0ff8fd550b6b769df1af1bc9e9e46e2ad8ba8ab"
+      }
+    }
+  ],
+  "new_neural_forwards": 0,
+  "new_RAW_decodes": 0,
+  "new_noise_observations": 0,
+  "scope": "Retained context predictions only. No resampling, fitting, scoring, calibration truth or full-frame/speed claim.",
+  "original_manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/native4EV/manifest.json",
+    "sha256": "181cfca0b5d4632a38a86d19602ea7cdac73ce079ddfeb128a5ba2977ad301bb"
+  },
+  "execution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/result-v1.json",
+    "sha256": "2aa211f547ae0dd8e2d57a3277aa2ac772f3a4b948f9b7cd9116fa516df909f1"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+    "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+  },
+  "matched_parent_boards": [
+    {
+      "case": {
+        "name": "fine-green-mesh-left",
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          805,
+          6489,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+              "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+            },
+            "xywh": [
+              760,
+              6500,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+              "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+            },
+            "xywh": [
+              759,
+              6501,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        }
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V115-V119-V120-fine-green-mesh-left-4EV.png",
+        "sha256": "d437ea369172326a1b96aba854454855b01edf9c7f3f49dbddbebd09b4e62e72"
+      },
+      "panels": [
+        {
+          "profile": "nominal",
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "Noisy Malvar",
+          "png_xywh": [
+            184,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "V115 Small",
+          "png_xywh": [
+            360,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "V119",
+          "png_xywh": [
+            536,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "V120",
+          "png_xywh": [
+            712,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "ISO100 AHD, not GT",
+          "png_xywh": [
+            888,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1064,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "Noisy Malvar",
+          "png_xywh": [
+            184,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "V115 Small",
+          "png_xywh": [
+            360,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "V119",
+          "png_xywh": [
+            536,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "V120",
+          "png_xywh": [
+            712,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "ISO100 AHD, not GT",
+          "png_xywh": [
+            888,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1064,
+            252,
+            160,
+            160
+          ]
+        }
+      ],
+      "parent_images": [
+        {
+          "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/V115-fine-green-mesh-left-4EV.png",
+          "sha256": "a4a841c78f563eeb9ae6f8aaab498cdb015aa5ccde49520b0531f85e719e3b36"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/V119-fine-green-mesh-left-4EV.png",
+          "sha256": "34db91e006256a54315f28ed1d2563e8b3c0791dd139505ce6ea58b482cab5b9"
+        }
+      ],
+      "V120_image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V120-fine-green-mesh-left-4EV.png",
+        "sha256": "396a01b640ae2e4ba5bda662fba79b7d1c7e373c4792d84b56559cba6f51dd58"
+      },
+      "pixels": "Exact native panel copies; no resize or new display operation"
+    },
+    {
+      "case": {
+        "name": "fine-green-mesh-right",
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noisy_raw_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "reference_raw_xywh": [
+          1025,
+          6449,
+          160,
+          160
+        ],
+        "camera_JPEGs": {
+          "noisy_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+              "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+            },
+            "xywh": [
+              980,
+              6460,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          },
+          "reference_camera_jpeg": {
+            "pixels": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+              "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+            },
+            "xywh": [
+              979,
+              6461,
+              160,
+              160
+            ],
+            "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+          }
+        }
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V115-V119-V120-fine-green-mesh-right-4EV.png",
+        "sha256": "f4b578966c8919618404546f087dc63a257c00e3962b60fb05f437615ecddefa"
+      },
+      "panels": [
+        {
+          "profile": "nominal",
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "Noisy Malvar",
+          "png_xywh": [
+            184,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "V115 Small",
+          "png_xywh": [
+            360,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "V119",
+          "png_xywh": [
+            536,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "V120",
+          "png_xywh": [
+            712,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "ISO100 AHD, not GT",
+          "png_xywh": [
+            888,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "nominal",
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1064,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "ISO6400 camera JPEG",
+          "png_xywh": [
+            8,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "Noisy Malvar",
+          "png_xywh": [
+            184,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "V115 Small",
+          "png_xywh": [
+            360,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "V119",
+          "png_xywh": [
+            536,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "V120",
+          "png_xywh": [
+            712,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "ISO100 AHD, not GT",
+          "png_xywh": [
+            888,
+            252,
+            160,
+            160
+          ]
+        },
+        {
+          "profile": "profile3879",
+          "label": "ISO100 camera JPEG",
+          "png_xywh": [
+            1064,
+            252,
+            160,
+            160
+          ]
+        }
+      ],
+      "parent_images": [
+        {
+          "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/V115-fine-green-mesh-right-4EV.png",
+          "sha256": "b31fea141bbac136174678dcff50f436c56ee9b2129b3d77b5da4e392aa5e43a"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/docs/images/v119-green-mesh-v1/V119-fine-green-mesh-right-4EV.png",
+          "sha256": "5bf52eb413f3d992d39f62e1499970423200f88c590c21d28d6c92d50ddcd6a8"
+        }
+      ],
+      "V120_image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-green-mesh-v1/V120-fine-green-mesh-right-4EV.png",
+        "sha256": "944b09ca414612cc9286e791ad3918e261d09915a29e7072f3a2e0b4a0799118"
+      },
+      "pixels": "Exact native panel copies; no resize or new display operation"
+    }
+  ],
+  "publication_verification": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/publication-verification-v1.json",
+    "sha256": "f69a23ab5238818f5a52714b2ab738f43a3d32e276a6692c17a029b7bee48dc1"
+  }
+}

@@ -25,8 +25,10 @@ the joint models' clearer detail than RawNIND on11 binned camera captures.
 The [V120/V121 follow-up](paired32-weak-detail-training.md) keeps V115 Small,
 restores corrected paired32 at V119's90791/six-region data, then tests the
 reviewed90787/fourteen-region intervention. CPU/CUDA checks pass for both;
-V120 production is active and V121 follows sequentially. Full endpoint quality
-and native review remain pending; source-loss tracing is active.
+V120 completed20,000 updates and V121 is training. The
+[early V120 mesh review](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
+shows no clear lattice-recovery gain over V115/V119. Full numerical, main-scene
+and complete-frame comparisons remain pending; source-loss tracing is active.
 
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias

@@ -1,7 +1,8 @@
 # Endpoint quality and native-image review
 
 **Both active model pairs now have complete comparison and fine-mesh review
-queues.** Their endpoint image quality remains unmeasured. The queues check
+queues.** V120's early mesh check is complete, with no clear lattice-recovery
+gain over V115/V119; full endpoint numerical quality remains unmeasured. The queues check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 
@@ -9,6 +10,7 @@ score changes or select a model automatically.
 [Saved-output comparison runner](../scripts/queue_quality_comparisons.py) ·
 [RGB16 verifier](../scripts/verify_rgb16_exports.py) ·
 [Fine-mesh runner](../scripts/queue_green_mesh_review.py).
+[Completed V120 mesh and prediction adoption](results/v120-green-mesh-v1.json).
 
 ```mermaid
 flowchart LR
@@ -53,8 +55,10 @@ preserved. Training, endpoint prediction and independent-audit jobs continue.
 
 ## Standing fine green mesh
 
-Both pairs also run the user-selected DSCF3842 ISO6400 / **DSCF3835 ISO100**
-scene after the comparisons complete. This supplements the six main
+Both pairs include the user-selected DSCF3842 ISO6400 / **DSCF3835 ISO100**
+scene. V120's mesh predictions and actual viewing are already complete; later
+family reports adopt those two predictions and run the remaining endpoints
+after the comparisons complete. This supplements the six main
 DSCF3879/3880 regions. The two existing fixed noise profiles are:
 
 | Profile | Shot | Read |
@@ -75,6 +79,14 @@ the released RawNIND control is reused under the nominal prior. Model code comes
 from each pair's actual frozen quality workspace. No original RAF is reopened,
 new noise generated or control model rerun.
 
+The V120/V121 mesh queue now adopts V120's two completed predictions instead of
+evaluating it again. Adoption binds the exact observation, profile, completed
+20,000-update execution, prediction and checkpoint hashes. The final report's
+checkpoint SHA must agree even when its immutable copy has another path. Only
+V121's two forwards remain in that queue. The previous owned idle mesh queue was
+retired before producing predictions; all its original source and preflight
+receipts remain preserved. The V122/V123 mesh queue is unchanged.
+
 The separate DSCF3835 f/5.6, 2.5s capture precedes DSCF3842 by 46 seconds. Its
 AHD RGB and camera JPEG are **qualitative references, not exact GT**. Camera
 processing, aperture and moving subjects differ; no real-photo PSNR is computed.
@@ -84,5 +96,9 @@ establishing full-frame mesh behavior or runtime.
 The retained-control preflight forbids neural module calls. It reproduces four
 existing V115/V119 native boards byte-for-byte and prepares four triplets with
 zero neural calls, RAW decodes or new noise. Actual viewing and pixel checks of
-the new endpoint outputs remain pending. Successful queue setup supplies no
-evidence of improved lattice recovery.
+V121–V123 endpoint outputs remain pending. A second preflight exercises the
+actual frozen V120 adoption path with model construction and all neural calls
+forbidden. Both +2EV boards, both +4EV boards and both triplets are byte-identical
+to the completed V120 outputs. The
+[actual V120 review](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
+documents the remaining mesh loss without inferring a numerical quality ranking.

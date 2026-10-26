@@ -5,7 +5,9 @@ discarded16-update CPU and CUDA checks. This follows V119's photographic gain,
 known-camera regression and large ADC color tail. The paired-set control tests
 whether restoring the corrected32-ID set helps the overall balance. The second
 arm tests the prepared cleaner corpus and expanded weak-detail material bank.
-There is no new endpoint quality result yet.
+The [early V120 mesh review](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
+shows no clear fine-lattice recovery gain over V115/V119 under either fixed
+profile. Full numerical, main-scene and complete-frame comparisons are pending.
 
 [Completed V120 training accounting](results/v120-training-complete-v1.json) ·
 [Independent saved-state verification](results/v120-training-complete-verification-v1.json).
@@ -119,6 +121,10 @@ checks; native linear-camera quantization is checked at921,600 channel values
 across the two endpoints. The corrected
 [comparison and fine-mesh queues](endpoint-quality-review.md) cover every
 declared model; the former waiting comparison controller is preserved and retired.
+V120's two mesh predictions are already complete and actually viewed. The family
+mesh queue adopts their bound arrays after matching the final checkpoint hash,
+and schedules only V121's two new forwards. A preflight with all model calls
+forbidden reproduces the saved V120 boards and triplets byte-for-byte.
 
 Before recommending either endpoint, inspect at least two native noisy/restored/
 exact-synthetic-GT triplets, the six main GFX regions, adverse camera/color cases
