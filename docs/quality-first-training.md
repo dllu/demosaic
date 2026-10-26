@@ -14,6 +14,12 @@ photo score while recovering camera/color balance. V121's cleaner90787/fourteen-
 region intervention has a small photo change, no clear mesh gain and a large
 ADC tail. [Completed results](v120-v121-primary.md).
 
+The [independent-noise response diagnostic](conditional-noise-response.md) finds
+that faint fur/wood errors persist in the mean of repeated V120/V117 outputs,
+while strong bark is mainly variance-limited. It motivates a controlled
+two-view conditional-mean loss on the prepared90784/twenty-region data;
+that loss is not implemented/trained yet and does not change the active runs.
+
 V119 completed a full 20,000-update continuation from **V115 Small** on the
 cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA
 checks passed before the fresh production run. The [complete review](v119-quality.md)

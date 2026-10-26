@@ -120,6 +120,13 @@ now match older V115/V119 inputs exactly, with no clear large detail recovery.
 
 ## Quality and remaining work
 
+The [independent-noise diagnostic](conditional-noise-response.md) separates
+persistent error from output variance on four fixed targets. Faint fur/wood
+remain biased after averaging independent V120/V117 restorations; strong bark
+is mainly variance-limited. This supports testing a conditional-mean loss,
+without an inference-strength or recommendation change. The multi-observation
+mean is a diagnostic unavailable from one capture.
+
 At2% contrast/ISO12800, Tiny's eight/sixteen-pixel carrier gains rise to
 .13371/.71335; Small reaches.15217/.68865. Four-pixel structure remains nearly
 absent. Native material/GFX examples show soft fine foliage and saturated signs,

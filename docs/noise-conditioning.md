@@ -1,15 +1,18 @@
 # Noise conditioning and fine detail
 
-**Current model: [V114](v114-v115-quality.md).** The conditioning measurements below hold V104 fixed; they do not establish a V114 conditioning sweep.
+**Current model: [V120 Small](current-model.md).** The strength measurements below
+hold V104 fixed; they do not establish a V120 conditioning sweep. The newer
+[independent-noise diagnostic](conditional-noise-response.md) finds persistent
+weak-detail error in V120/V117 even at the specified known synthetic noise law.
 
 **Use suitable physical shot/read priors with V104.** Lower conditioning retains
 more structure and grain in these fixed examples, with lower high-noise PSNR.
 It is a useful denoising/detail control, with no demonstrated general quality
-win from the alternative strengths. V114 is the current positive-noise/training
+win from the alternative strengths. V120 is the current positive-noise/training
 baseline. These V104 measurements do not establish an alternative conditioning
-recommendation for V114.
+recommendation for V120.
 
-This current-model check holds the V104 final20000 EMA and all observations
+This historical checkpoint check holds the V104 final20000 EMA and all observations
 fixed. Factors .50/.75/1.00/1.25 multiply the supplied shot coefficient,
 read-noise variance and input variance map. They are **variance factors**, so
 .50× corresponds to approximately .707× standard deviation. Actual noise,
@@ -141,8 +144,11 @@ strength control. Set both physical shot/read coefficients deliberately.
 The [earlier V101 investigation](v101-conditioning-study.md) retains its numerical
 path interventions and DINO-preview counterchecks. Those measurements localize
 the earlier strength response mainly to the CNN noise channel; they are
-separate from the current V104 scores. The current quality work addresses
-faint-detail supervision with the [matched V111/V112 loss-scale trial](loss-scale-training.md).
+separate from these V104 scores and the
+[completed V111/V112 loss-scale comparison](loss-scale-training.md).
+[Current training](quality-first-training.md) and the
+[conditional-noise diagnostic](conditional-noise-response.md) cover later
+efforts to preserve faint detail.
 
 V104 checkpoint SHA256:
 `8a3a7d94f2b1465cbdddbeec201fb37a2f69b12c74f9298527a94e3a7bbf6300`.
