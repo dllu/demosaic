@@ -25,8 +25,9 @@ geometry before final downsampling. [Data review](docs/incoming-commons-quality.
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
 [V120/V121 Small data trials](docs/paired32-weak-detail-training.md) passed their
-CPU/CUDA checks: V120 is training with corrected paired32 data; V121 follows
-with the cleaner corpus and expanded weak-detail regions. Endpoint quality is pending.
+CPU/CUDA checks: V120 completed its original20k updates with corrected paired32
+data; V121 is training with the cleaner corpus and expanded weak-detail regions.
+Endpoint quality is pending.
 The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
 now compares training the new input adapter alone with adapting the full
 restoration path on the same cleaned corpus. Image quality is still unmeasured.

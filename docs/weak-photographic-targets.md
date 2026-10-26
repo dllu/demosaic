@@ -3,17 +3,19 @@
 The **14-region catalogue** preserves the original six training regions
 and adds eight existing photographs with inspected low-contrast material detail.
 It is selected for **V121 on90,787 sources** and passes actual reader plus
-discarded16-update CPU/CUDA checks. V121's full run is queued after V120;
+discarded16-update CPU/CUDA checks. V120 completed20k and V121's full run is active;
 its endpoint quality effect remains unmeasured. V119/V120 retain six regions,
 90,791 sources and the same5% conditional-photo ROI probability.
 [Matched training and queued review](paired32-weak-detail-training.md).
 
-A [future90,786-source snapshot](current-source-loss-review.md) removes one
+A [90,786-source snapshot](current-source-loss-review.md) removes one
 separately inspected nonphotographic advertisement while preserving all fourteen
 region objects, source pixels and target hashes. Its
 [rebound catalogue](../configs/low-contrast-training-rois-cleaned90786-v1.json)
 passes actual source/crop/target and sampler checks. V121 keeps its original
-90,787-source binding; the future snapshot launches no new training job.
+90,787-source binding. The [V122/V123 architectural trials](learned-raw-frequency-training.md)
+now use the90,786-source/fourteen-region binding. The latest28-source inspection
+retains all28, with no further catalogue or membership changes.
 
 [Catalogue](../configs/low-contrast-training-rois-cleaned90787-v1.json) ·
 [Actual visual decisions](results/weak-photographic-targets-review-v1.json) ·

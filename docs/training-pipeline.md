@@ -5,10 +5,10 @@ high-loss Commons examples to their actual source and crop without an additional
 neural forward. They are disabled by default and active in V120/V121;
 V119's frozen run is unchanged.
 
-The [current source inspection](current-source-loss-review.md) prepares a
-90,786-source next snapshot by removing one actual digital advertisement from
-90,787. Coupled manifests retain every other row/order and all fourteen reviewed
-regions. Reader/sampling checks pass; V120/V121 retain their frozen input plans.
+The [current source inspection](current-source-loss-review.md) retains all28
+new nominees, leaving the90,786-source/fourteen-region cohort intact. Its earlier
+one-advertisement exclusion and reader/sampling checks remain valid. V122/V123
+use this cohort; V120/V121 retain their original frozen input plans.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;

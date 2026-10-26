@@ -15,9 +15,10 @@ inspection, rather than native inspection of every image.
 ## Current data and training
 
 The [current Small-model loss review](current-source-loss-review.md) now covers
-56 selected sources in two passes. The later28-source inspection retains27
-photos and removes one nonphotographic advertisement from a prepared90,786-source
-snapshot, preserving all fourteen regions. The active V120/V121 comparisons keep
+84 selected sources in three passes. The newest28-source inspection retains
+all28 after native views and four larger checks. One previously identified
+nonphotographic advertisement remains excluded from the90,786-source cohort,
+preserving all fourteen regions. V122/V123 use that cohort; V120/V121 keep
 their original frozen inputs. Losses nominate inspection, not automatic labels.
 
 | Cohort | Training sources | Status |
@@ -26,9 +27,9 @@ their original frozen inputs. Losses nominate inspection, not automatic labels.
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
 | Completed-model cohort | **90,864** | V114 is the general baseline; V115/V117 have useful camera/photo tradeoffs; their complete reviews retain this corpus |
 | V119 training cohort | **90,791** | [Complete V119 review](v119-quality.md): +.06131dB photo over V115, −.22342dB known-camera, large ADC color tail; no clear fine-mesh gain |
-| V120 paired32 control | **90,791** | [Full run active](paired32-weak-detail-training.md) after discarded CPU/CUDA checks; endpoint quality pending |
-| V121 reviewed weak-detail arm | **90,787** | [Queued full run](paired32-weak-detail-training.md) after CPU/CUDA checks; four further withholds and fourteen reviewed regions; quality pending |
-| Prepared next snapshot | **90,786** | [One further nonphotographic graphic removed](current-source-loss-review.md); all14 regions retained and actual reader bindings pass; no new training job |
+| V120 paired32 control | **90,791** | [Original20k training complete](paired32-weak-detail-training.md), saved state independently verified; endpoint quality pending |
+| V121 reviewed weak-detail arm | **90,787** | [Full run active](paired32-weak-detail-training.md) after CPU/CUDA checks; four further withholds and fourteen reviewed regions; quality pending |
+| V122/V123 frequency-feature cohort | **90,786** | [One nonphotographic graphic removed](current-source-loss-review.md); all14 regions retained; [full-budget scope trials](learned-raw-frequency-training.md) started, with GPU coordination; quality pending |
 
 The completed-model 90,864-source cohort applies **eight additional training-source
 withholds relative to V104**: the three previously inspected photo-quality cases and five printed

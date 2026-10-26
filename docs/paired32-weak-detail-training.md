@@ -1,11 +1,17 @@
 # V120/V121: paired-data control and weak photographic targets
 
-**V120 is training from V115 Small; V121 is queued after it.** Both passed
+**V120 completed its original 20,000 updates; V121 is now training from V115 Small.** Both passed
 discarded16-update CPU and CUDA checks. This follows V119's photographic gain,
 known-camera regression and large ADC color tail. The paired-set control tests
 whether restoring the corrected32-ID set helps the overall balance. The second
 arm tests the prepared cleaner corpus and expanded weak-detail material bank.
 There is no new endpoint quality result yet.
+
+[Completed V120 training accounting](results/v120-training-complete-v1.json) ·
+[Independent saved-state verification](results/v120-training-complete-verification-v1.json).
+The completed checkpoint is finite, with91 model/EMA tensors and89 AdamW
+states at step20,000. Its encoder identity, original domain counts and lineage
+verify. No extra inference or update was added by this completion check.
 
 [Started-run evidence and exact owners](results/v120-v121-training-start-v1.json) ·
 [Launch verification](results/v120-v121-training-start-verification-v1.json) ·
@@ -15,7 +21,7 @@ There is no new endpoint quality result yet.
 
 ## Controlled differences
 
-| Setting | V119, completed | V120, running | V121, queued |
+| Setting | V119, completed | V120, completed training | V121, running |
 | --- | --- | --- | --- |
 | Initializer | Final V115 Small EMA | Same weights, immutable copy | Same weights, immutable copy |
 | Commons sources |90,791 |90,791 |90,787 |
@@ -80,10 +86,9 @@ and photographic draws, not32 independent photographs or additive training-loss
 contributions. High loss nominates visual inspection rather than automatic
 source removal. [Trace definitions and limitations](source-loss-diagnostics.md).
 
-The [bounded source reviews](current-source-loss-review.md) inspect28 photographs
-from the first800 updates and28 further sources nominated through5000, with
-larger native views where needed. Fifty-five are retained; one roofing
-advertisement is withheld from the prepared future90786-source snapshot.
+The [bounded source reviews](current-source-loss-review.md) inspect84 photographs
+in three passes through18000, with larger native views where needed. Eighty-three
+are retained; one roofing advertisement is withheld from the90786-source snapshot.
 The original V120/V121 cohorts remain unchanged. The newer
 [V122/V123 architectural trials](learned-raw-frequency-training.md) use that
 future snapshot; this inspection is not an endpoint-performance result.

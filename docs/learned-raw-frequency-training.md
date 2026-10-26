@@ -1,7 +1,9 @@
 # Learned RAW frequency features: V122/V123 training
 
-**V122 is training its original 20,000 updates; V123 follows.** These are the
-first full-budget trials of the [learned frequency input adapter](learned-raw-frequency-features.md).
+**V122 has started its original 20,000-update run; V123 follows.** V122's GPU
+work is temporarily yielded at logged step 1,400 while V120/V121 finish. The
+same worker resumes automatically, preserving its in-memory training state.
+These are the first full-budget trials of the [learned frequency input adapter](learned-raw-frequency-features.md).
 All four discarded CPU/CUDA checks passed. Endpoint PSNR and native image
 quality remain unmeasured. V114, V115 and V117 retain their documented uses.
 
@@ -9,6 +11,29 @@ quality remain unmeasured. V114, V115 and V117 retain their documented uses.
 [V122 recipe](../configs/quality-v115-learned-frequency-only-v122.yaml) ·
 [V123 recipe](../configs/quality-v115-learned-frequency-joint-v123.yaml) ·
 [Runner](../scripts/train_raw_frequency_trial.py).
+
+## Shared GPU scheduling
+
+Recent V120 updates took about 2.46 seconds while both runs shared the GPU.
+At that observed rate, V121's next 20,000 updates alone project to 13.7 hours,
+beyond its existing 12-hour controller limit. This is a scheduling observation,
+not a controlled speed comparison or an image-quality result.
+
+The [owned-process coordinator](../scripts/yield_training_gpu.py) temporarily
+suspends only V122's exact worker, leaving its original controller live. It
+resumes that same PID after the original V120/V121 controller exits, on its wait
+bound or during handled interruption. Eleven focused tests and an actual owned
+subprocess stop/resume/exception check pass. A
+[full coordinator fixture](results/training-GPU-coordination-full-process-v1.json)
+also verifies same-worker resumption after its dummy priority controller exits.
+No model reconstruction, checkpoint
+reload, optimizer restart or update-budget change occurs.
+[Live-owner and stopped-log evidence](results/training-GPU-coordination-v1.json).
+
+The wait is capped at twelve hours with eight hours reserved inside V122's
+existing 24-hour wall limit. Training timing logs include the yielded interval;
+they must not be interpreted as inference benchmarks. The active project work
+and queued endpoint review continue.
 
 ## Question and controlled difference
 

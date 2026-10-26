@@ -6,13 +6,14 @@ updates. Zero, the default, adds no source metadata or diagnostic computation.
 This option has not been enabled retroactively in the frozen V119 run.
 Both new arms passed actual16-update CPU/CUDA checks. Their source diagnostics
 forbid neural Module calls and verify unchanged Python/NumPy/Torch CPU/CUDA RNG
-states; V120 production is running, with V121 queued sequentially.
+states; V120 completed20k and V121 production is now running.
 [Current controlled trials and launch evidence](paired32-weak-detail-training.md).
 
-The [current Small-model source review](current-source-loss-review.md) has two
-completed passes: the first28 sources were retained; a later28-source inspection
-retains27 photos and identifies one standalone digital advertisement. Its removal
-is prepared in a future90,786-source snapshot with all fourteen regions intact.
+The [current Small-model source review](current-source-loss-review.md) has three
+completed passes:83 of84 inspected sources are retained, with one standalone
+digital advertisement withheld. The newest28-source inspection through18000
+retains all28 after larger native checks. V122/V123 use the90,786-source cohort
+with all fourteen regions intact.
 Losses nominate inspection rather than label bad photos automatically. The
 active V120/V121 cohorts retain their original frozen membership.
 
