@@ -1,0 +1,401 @@
+{
+  "status": "started-matched-V120-V121-after-all-four-discarded-checks",
+  "recorded_local": "2026-10-25T17:57:36.626322-07:00",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/plan.json",
+    "sha256": "f723498e8ea291b4aaae3c0f0924c03c674e116782f74d0e78825b7fa7349a80"
+  },
+  "execution": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/execution-plan-v1.json",
+    "sha256": "44a2a7d489d279f0e7ba87be59407d815384c52f249a66d7d49796b0151fc0d3"
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/controller-launch-v2.json",
+    "sha256": "9aee80eeec475c3fffdd5f434ed4d11b3f1b5a784545db1cc686d2c1082f6ef8"
+  },
+  "frozen_preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/frozen-preflight-v1.json",
+    "sha256": "f693d89acd0a3568e4a135496d70d2a1efb798b60bca14141375f3b5b30f8706"
+  },
+  "training_state_at_receipt": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/plan.json",
+      "sha256": "f723498e8ea291b4aaae3c0f0924c03c674e116782f74d0e78825b7fa7349a80"
+    },
+    "controller": {
+      "pid": 3688946,
+      "created": 1792975789.34
+    },
+    "completed": {
+      "CPU-V120": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CPU-V120-result.json",
+        "sha256": "b9af1a156f03026c882a4e641759c102ba6d6be43162273570b0f78b1862cdc3"
+      },
+      "CPU-V121": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CPU-V121-result.json",
+        "sha256": "acdb997ed968735a38b626f8b6400fe5a8f4e2db0f1155a741802117ef9426e0"
+      },
+      "CUDA-V120": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CUDA-V120-result.json",
+        "sha256": "816ab9c1b4dd243672a15a53b836002140e2bcb65d003187846a8c566c6585b2"
+      },
+      "CUDA-V121": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CUDA-V121-result.json",
+        "sha256": "b0a89285cd8a0eb82d27def2725bb72fabe2fa9ddbaee9fe6e43d457a5021c4c"
+      }
+    },
+    "status": "running-quality-training",
+    "updated_unix": 1792976031.9980798,
+    "phase": "train",
+    "arm": "V120",
+    "child": {
+      "pid": 3731172,
+      "created": 1792976031.95
+    }
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+    "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+    "step": 20000
+  },
+  "official_frozen_encoder": {
+    "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+    "revision": "421020015aa4266363db803b6049a529999afb1e",
+    "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+  },
+  "recipes": {
+    "V120": {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v115-paired32-control-v120.yaml",
+      "sha256": "f55bf8237067d131b445f5089a3b516379d9b4be71e481e415b854cedc2540ee"
+    },
+    "V121": {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v115-reviewed-weak-detail-v121.yaml",
+      "sha256": "8b6616598928b58cafaea77a4f763f37d4e6a99c6cfcbd4fb307137831f38dbc"
+    }
+  },
+  "prospective_domain_batches_per_arm": {
+    "commons": 10013,
+    "paired": 5021,
+    "native": 4966
+  },
+  "planned_production_updates_per_arm": 20000,
+  "discarded_checks": {
+    "CPU-V120": {
+      "accounting": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CPU-V120-accounting-v1.json",
+        "sha256": "caf173d1e8bca3f8376bb66a4bb62664cc0eea07aa6a333f0e2fc1928bc6276f"
+      },
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CPU-V120-result.json",
+        "sha256": "b9af1a156f03026c882a4e641759c102ba6d6be43162273570b0f78b1862cdc3"
+      },
+      "actual_updates": 16,
+      "domains": {
+        "commons": 11,
+        "paired": 4,
+        "native": 1
+      },
+      "source_diagnostic_examples": 1,
+      "matched_legacy_shared_steps": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16
+      ],
+      "matched_paired_native_control_steps": []
+    },
+    "CPU-V121": {
+      "accounting": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CPU-V121-accounting-v1.json",
+        "sha256": "c5c49d1401d72042adb808fc9cb44200b6daafd8fb98b87be4b45e6e4433bfab"
+      },
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CPU-V121-result.json",
+        "sha256": "acdb997ed968735a38b626f8b6400fe5a8f4e2db0f1155a741802117ef9426e0"
+      },
+      "actual_updates": 16,
+      "domains": {
+        "commons": 11,
+        "paired": 4,
+        "native": 1
+      },
+      "source_diagnostic_examples": 1,
+      "matched_legacy_shared_steps": [],
+      "matched_paired_native_control_steps": [
+        2,
+        5,
+        10,
+        12,
+        14
+      ]
+    },
+    "CUDA-V120": {
+      "accounting": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CUDA-V120-accounting-v1.json",
+        "sha256": "88b8ab184822768952f21da02173c329b9714a1852c68bbb460190201a9ea18b"
+      },
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CUDA-V120-result.json",
+        "sha256": "816ab9c1b4dd243672a15a53b836002140e2bcb65d003187846a8c566c6585b2"
+      },
+      "actual_updates": 16,
+      "domains": {
+        "commons": 11,
+        "paired": 4,
+        "native": 1
+      },
+      "source_diagnostic_examples": 16,
+      "matched_legacy_shared_steps": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16
+      ],
+      "matched_paired_native_control_steps": []
+    },
+    "CUDA-V121": {
+      "accounting": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CUDA-V121-accounting-v1.json",
+        "sha256": "bd057f991ec96489299b29335701391ed27caa8d1cc683fc3e504ae47c39629d"
+      },
+      "worker_result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/CUDA-V121-result.json",
+        "sha256": "b0a89285cd8a0eb82d27def2725bb72fabe2fa9ddbaee9fe6e43d457a5021c4c"
+      },
+      "actual_updates": 16,
+      "domains": {
+        "commons": 11,
+        "paired": 4,
+        "native": 1
+      },
+      "source_diagnostic_examples": 16,
+      "matched_legacy_shared_steps": [],
+      "matched_paired_native_control_steps": [
+        2,
+        5,
+        10,
+        12,
+        14
+      ]
+    }
+  },
+  "actual_first_production_step": {
+    "event": "train",
+    "step": 1,
+    "loss": 0.011190276592969894,
+    "lr": 5.0000000000000004e-08,
+    "grad_norm": 0.5365549325942993,
+    "seconds_per_step": 5.537919181864709,
+    "cuda_gb": 6.682914816,
+    "domain": "synthetic",
+    "linear": 0.004433204419910908,
+    "rendered": 0.007577940355986357,
+    "gradient": 0.0075577422976493835,
+    "highlight": 0.019348781555891037,
+    "sensor": 0.0027744905091822147,
+    "batch_sha256": "f13dcff3baf25878f126d6af4f091ceee280d666ad1b4cf8e974609d785276c8"
+  },
+  "latest_logged_production_step_at_receipt": 175,
+  "production_start_log_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/production-start-log-prefix-v1.jsonl",
+    "sha256": "f5ad30d6c2474ed52a8fc87e81165f66e1ce46be1b9b4b784afb3237a859d7ab"
+  },
+  "production_source_loss_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/production-source-loss-prefix-v1.jsonl",
+    "sha256": "d2910f78771ccbe9b44c359c87dabe02cb1077c84ed6dd93ca9fd82ca03c6cf5"
+  },
+  "source_diagnostic_records_at_receipt": 32,
+  "reader_preflight": {
+    "V120": {
+      "Commons_sources": 90791,
+      "reviewed_regions": 6,
+      "first_clean_tensor_SHA256": "8c54f34f841a7b0c0413f8c4097a4b9f19deae64118dcd80f0feb4f2d0c8c47f",
+      "first_source_metadata": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/f2/f228e4ae9ec570a344d0f3d9df936fbb56d66a22.npy",
+        "cache_sha256": "824bf864b9f56f098f25aed4f3f767f6e9d7b79b94fdbda38f337bf0f393d4ab",
+        "cache_xywh": [
+          234,
+          113,
+          568,
+          643
+        ],
+        "draw_index": 0,
+        "draw_seed": 65,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/next-source-tail-top512-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": null,
+        "source_id": "f228e4ae9ec570a344d0f3d9df936fbb56d66a22"
+      },
+      "paired_groups": 32,
+      "paired_cameras": {
+        "Canon EOS 6D": 4,
+        "ILCE-7C": 24,
+        "NIKON D40": 1,
+        "NIKON Z 6": 3
+      },
+      "paired_sample_tensor_SHA256": "6db8cdf7cba8855c1872525c94ab5e37d1f3ee7e5243914d65c5a426a600c063",
+      "native_groups": 106,
+      "native_sample_tensor_SHA256": "2cf66bde9077dbc83c84503a87fb77b4b909f6475c2a3e257858d356d646b2dc",
+      "RAW_decodes": 0,
+      "neural_calls": 0
+    },
+    "V121": {
+      "Commons_sources": 90787,
+      "reviewed_regions": 14,
+      "first_clean_tensor_SHA256": "8c54f34f841a7b0c0413f8c4097a4b9f19deae64118dcd80f0feb4f2d0c8c47f",
+      "first_source_metadata": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/f2/f228e4ae9ec570a344d0f3d9df936fbb56d66a22.npy",
+        "cache_sha256": "824bf864b9f56f098f25aed4f3f767f6e9d7b79b94fdbda38f337bf0f393d4ab",
+        "cache_xywh": [
+          234,
+          113,
+          568,
+          643
+        ],
+        "draw_index": 0,
+        "draw_seed": 65,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/next-source-tail-top768-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": null,
+        "source_id": "f228e4ae9ec570a344d0f3d9df936fbb56d66a22"
+      },
+      "paired_groups": 32,
+      "paired_cameras": {
+        "Canon EOS 6D": 4,
+        "ILCE-7C": 24,
+        "NIKON D40": 1,
+        "NIKON Z 6": 3
+      },
+      "paired_sample_tensor_SHA256": "6db8cdf7cba8855c1872525c94ab5e37d1f3ee7e5243914d65c5a426a600c063",
+      "native_groups": 106,
+      "native_sample_tensor_SHA256": "2cf66bde9077dbc83c84503a87fb77b4b909f6475c2a3e257858d356d646b2dc",
+      "RAW_decodes": 0,
+      "neural_calls": 0
+    }
+  },
+  "queues": {
+    "quality": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/queue-plan-v1.json",
+        "sha256": "f9473f7e048db0f1bbb75ac0ce1c7f1c05a4d1d2cf937705db9a8f5a99a2828a"
+      },
+      "owner": {
+        "pid": 3731018,
+        "created": 1792975962.07
+      },
+      "status_at_receipt": {
+        "owner": {
+          "pid": 3731018,
+          "created": 1792975962.07
+        },
+        "queue_plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/queue-plan-v1.json",
+          "sha256": "f9473f7e048db0f1bbb75ac0ce1c7f1c05a4d1d2cf937705db9a8f5a99a2828a"
+        },
+        "completed": {},
+        "status": "waiting-for-exact-matched-training-owner",
+        "updated_unix": 1792975962.5456517,
+        "dependency": {
+          "pid": 3688946,
+          "created": 1792975789.34
+        }
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/controller-launch-v1.json",
+        "sha256": "4601aefa404407eabf845b2175bb3f256792ea25fe1fec09b4e6d538dd841c67"
+      }
+    },
+    "audit": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/queue-plan-v1.json",
+        "sha256": "29b61cd88c5798a77591fc6f53723ced65616742f8d7827e9ece043afee92bed"
+      },
+      "owner": {
+        "pid": 3731154,
+        "created": 1792976020.7
+      },
+      "status_at_receipt": {
+        "owner": {
+          "pid": 3731154,
+          "created": 1792976020.7
+        },
+        "plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/queue-plan-v1.json",
+          "sha256": "29b61cd88c5798a77591fc6f53723ced65616742f8d7827e9ece043afee92bed"
+        },
+        "completed": {},
+        "status": "waiting-for-exact-endpoint-evaluation-owner",
+        "updated_unix": 1792976020.9080646,
+        "dependency": {
+          "pid": 3731018,
+          "created": 1792975962.07
+        }
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/controller-launch-v1.json",
+        "sha256": "51323a52bc3b358acd8652ad6a4eee29283cf0a25322073c8ef7dede904e870a"
+      }
+    },
+    "matched": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-matched-review-v1/queue-plan-v1.json",
+        "sha256": "cc375075a065d57feb8c47d9303051745e9b363eda0b560a733a7becbaf72dfe"
+      },
+      "owner": {
+        "pid": 3731477,
+        "created": 1792976145.04
+      },
+      "status_at_receipt": {
+        "owner": {
+          "pid": 3731477,
+          "created": 1792976145.04
+        },
+        "plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-matched-review-v1/queue-plan-v1.json",
+          "sha256": "cc375075a065d57feb8c47d9303051745e9b363eda0b560a733a7becbaf72dfe"
+        },
+        "completed": {},
+        "status": "waiting-for-original-V120-V121-independent-audit",
+        "updated_unix": 1792976146.3383586,
+        "dependency": {
+          "pid": 3731154,
+          "created": 1792976020.7
+        }
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-matched-review-v1/controller-launch-v1.json",
+        "sha256": "51a42707abff957d45bc38ba6763302b2c4e77b429fce7c17eb381419563e60e"
+      }
+    }
+  },
+  "quality_claim": null,
+  "preworker_failures_preserved": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/prepare-v1-failure.json",
+      "sha256": "1c4c557aac6e5786b6e899da1e2421e812b040cdd4102a5c0423558d48d01ed7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/Small-paired32-weak-detail-training-v1/run/controller-launch-v1-failure.json",
+      "sha256": "b0637bfc468cd5f601e89d1ad5a7fb41da270cd084b95dfc08e47110d5d1e2c2"
+    }
+  ],
+  "scope": "Fresh V115 Small parent for each full20k arm. V120 changes V119 paired83 to corrected32 at the same Commons90791/six regions. V121 changes only Commons90791/six to reviewed90787/fourteen versus V120; same5% quota. Source diagnostics act on existing outputs with no neural/RNG changes. V120 production live; V121 production queued sequentially. Full endpoint quality/native/fine-green-mesh review required; no automatic promotion or retry."
+}

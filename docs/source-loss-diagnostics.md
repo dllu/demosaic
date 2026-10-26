@@ -1,9 +1,13 @@
 # Trace difficult training crops back to their sources
 
-Future runs can set `source_loss_every: 100` to append per-example Commons
+V120/V121 set `source_loss_every: 100` to append per-example Commons
 diagnostics to `RUN/source-loss.jsonl` on the first update and every 100 optimizer
 updates. Zero, the default, adds no source metadata or diagnostic computation.
 This option has not been enabled retroactively in the frozen V119 run.
+Both new arms passed actual16-update CPU/CUDA checks. Their source diagnostics
+forbid neural Module calls and verify unchanged Python/NumPy/Torch CPU/CUDA RNG
+states; V120 production is running, with V121 queued sequentially.
+[Current controlled trials and launch evidence](paired32-weak-detail-training.md).
 
 Each record identifies the actual photograph after exclusion retries or a
 reviewed-ROI override: source ID, cache path and manifest-declared hash, cache crop rectangle,

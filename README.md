@@ -20,9 +20,13 @@ V115 after cleaned-data training, but a −.22342dB known-camera regression and
 a large ADC color outlier. Its real fine-detail softness remains. The completed
 [11-capture native-camera comparison](docs/native-camera-development.md) shows
 substantially finer detail than RawNIND on binned references with added noise;
-V117 remains ahead of V119 there. These comparisons use zero optical blur and
+V117 remains ahead of V119 there. Our current training uses zero optical blur and
 geometry before final downsampling. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
+
+[V120/V121 Small data trials](docs/paired32-weak-detail-training.md) passed their
+CPU/CUDA checks: V120 is training with corrected paired32 data; V121 follows
+with the cleaner corpus and expanded weak-detail regions. Endpoint quality is pending.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

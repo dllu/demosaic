@@ -44,6 +44,13 @@ masks use a fixed128px setting. No numerical quality comparison was run, and
 this release check is not evidence of an improvement over our models.
 [Pinned commit and inspected-file hashes](results/dfenet-release-availability-v1.json).
 
+The [V120/V121 controlled data trials](paired32-weak-detail-training.md) now
+keep V115 Small while testing corrected paired32 and the reviewed90787-source/
+fourteen-region material bank. All four discarded CPU/CUDA checks pass, including
+shared input hashes and source diagnostics with no extra neural calls or RNG
+changes. V120 production is active; V121 follows sequentially. Full endpoint
+quality/native review is pending, with saved older controls reused.
+
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing
 GFX contexts. Lower conditioning retains more fine structure and grain while

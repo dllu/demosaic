@@ -1,5 +1,11 @@
 # Current quality training
 
+**V120 is training from V115 Small, with V121 queued after it.** Both passed
+discarded16-update CPU/CUDA checks. V120 tests corrected paired32 with V119's
+90791 Commons/six-region reader; V121 tests the reviewed90787-source/fourteen-
+region intervention with the same paired32 set. Detached source-loss tracing is
+enabled in both. [Controlled differences, checks and queued endpoint review](paired32-weak-detail-training.md).
+
 V119 completed a full 20,000-update continuation from **V115 Small** on the
 cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA
 checks passed before the fresh production run. The [complete review](v119-quality.md)
@@ -62,14 +68,16 @@ This is targeted quality review, not exhaustive manual inspection of the corpus.
 Further native review retains 332 of 336 additional sources and prepares a
 **90,787-source future cohort**, withholding two unreliable fine-texture photos
 and two flat map/document layouts. Its coupled manifests and targeted actual
-reader checks pass. It is untrained; V119 retains its original 90,791 sources.
+reader checks pass. It is selected for the queued V121 full run; its endpoint
+quality effect remains unmeasured. V119 retains its original90,791 sources.
 [Latest source decisions, native examples and reader scope](next-source-tail-review.md).
 
 An optional [14-region material bank](weak-photographic-targets.md) preserves
 the six original examples and adds eight measured weak photographic contexts,
 including brick joints, plaster cracks, wavelets and sand ripples. Its actual
 reader checks pass. It is prepared for the future cohort; its quality effect
-is unmeasured and V119's six-region recipe remains unchanged.
+is unmeasured; V121 selects it after passing implementation checks, while
+V119/V120 retain their six-region recipes.
 
 The paired set has **83 publisher IDs / 71 groups / 166 cases / 1,492 cached
 crops**, preserving all four corrected legacy masks and every registered new
@@ -100,10 +108,10 @@ Independent NumPy64 checks operate on retained predictions/targets. Matched
 comparisons reuse saved V115, V114 and V117 controls without new control inference.
 Its [11-capture native development comparison](native-camera-development.md)
 also completed: clearer texture than RawNIND under added noise, small gains
-over V115 and lower means than V117. The prepared90,787-source/14-region bank
-remains untrained; opt-in [per-source loss tracing](source-loss-diagnostics.md)
-is available for the next quality trial. Investigate the camera/color regressions
-before treating the combined V119 data recipe as the next baseline.
+over V115 and lower means than V117. The90,787-source/14-region bank is selected
+for the queued V121 full run; [per-source loss tracing](source-loss-diagnostics.md)
+is active in V120/V121. The matched paired32 control investigates the camera/color
+regressions before treating the combined V119 recipe as the next baseline.
 
 Improved-model reports include at least two native noisy/denoised/exact-GT
 triplets with identical coordinates and display transforms, without resized

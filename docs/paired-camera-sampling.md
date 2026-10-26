@@ -11,9 +11,13 @@ A separate derived83-ID/71-group manifest now includes the four corrected
 train32 masks. All102 new reviewed cases and their crops retain their original
 records and bytes; the canonical admission payload is unchanged. This is
 prepared data, without a trained-quality claim or a change to current models.
-The [V119 Small continuation](cleaned-diverse-small-training.md) now uses it
-with the cleaned Commons corpus; both discarded checks pass and full quality
-results are pending.
+The [completed V119 Small continuation](v119-quality.md) uses it with the cleaned
+Commons corpus. Its photo gain coexists with known-camera and ADC-color
+regressions. The [V120/V121 controlled follow-up](paired32-weak-detail-training.md)
+restores corrected paired32 under the same camera probabilities, then tests
+the further Commons/material-bank cleanup. All four discarded CPU/CUDA checks
+pass; V120 is training and V121 is queued. Their quality is unmeasured. The
+83-ID admissions and source bytes remain preserved.
 [Data/reader/source receipts](results/paired83-camera-mask-reader-v1.json) ·
 [Original review](paired-training-admission.md) ·
 [Reference-mask rationale](paired-reference-quality.md).

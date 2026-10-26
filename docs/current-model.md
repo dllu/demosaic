@@ -81,6 +81,13 @@ much finer detail than RawNIND on its11 binned captures under added noise,
 with V117 still slightly ahead of V119. This does not establish broad real
 high-ISO superiority.
 
+The [V120/V121 follow-up](paired32-weak-detail-training.md) keeps the V115 Small
+architecture, tests corrected paired32 against V119's expansion, then tests the
+reviewed90787-source/fourteen-region intervention at a matched20k budget.
+All four discarded CPU/CUDA checks pass; V120 production is running and V121
+is queued sequentially. Both trace per-source losses from existing predictions.
+No new endpoint quality is established yet.
+
 ## Quality and remaining work
 
 At2% contrast/ISO12800, Tiny's eight/sixteen-pixel carrier gains rise to

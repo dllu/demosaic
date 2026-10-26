@@ -1,8 +1,9 @@
 # Training data work, sampling order and batch size
 
-Optional [per-source loss diagnostics](source-loss-diagnostics.md) trace future
+Optional [per-source loss diagnostics](source-loss-diagnostics.md) trace
 high-loss Commons examples to their actual source and crop without an additional
-neural forward. They are disabled by default; V119's frozen run is unchanged.
+neural forward. They are disabled by default and active in V120/V121;
+V119's frozen run is unchanged.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;
@@ -24,9 +25,13 @@ recorded in the [source review](incoming-commons-quality.md) and
 The [completed V119 Small continuation](cleaned-diverse-small-training.md) uses
 90,791 cleaned Commons sources and the corrected83-ID paired extension with
 the original camera probabilities. Both16-step CPU/CUDA checks pass, including
-all three data paths. Its completed20k endpoint has a running full quality, independent
-and native comparison against saved V115/V114/V117 outputs. It retains zero
-optical PSFs and the current geometry; trained-quality results remain pending.
+all three data paths. Its [complete20k quality review](v119-quality.md) finds
+a+.06131dB photo gain over V115, a−.22342dB known-camera change and a large ADC
+color tail. The [V120/V121 follow-up](paired32-weak-detail-training.md) keeps
+the Small architecture and restores corrected paired32; the second arm selects
+reviewed90787/fourteen ROIs. All four discarded checks pass; V120 is training,
+V121 is queued sequentially, and endpoint quality remains pending. Both retain
+zero optical PSFs, current geometry and batch16.
 
 The completed [spectral](spectral-original4k-review.md) and
 [late RGB](late-rgb-original4k-review.md) trials use native 256×256/B16 and all88,508

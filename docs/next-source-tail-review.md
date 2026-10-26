@@ -4,8 +4,11 @@
 withheld.** The prepared future cohort has **90,787 training sources**. Every
 still-active source through rank 768 in both original difficulty lists now has
 a visual decision. V119 continues its frozen **90,791-source** experiment from
-V115 Small; its endpoint quality review is pending. These four new withholds
-apply to future training, with no change to that running comparison.
+V115 Small; its [complete quality review](v119-quality.md) is published. These
+four new withholds are selected for V121, queued after the V120 paired32 control,
+with no change to V119/V120 membership. Both new arms passed implementation
+checks; their endpoint quality remains pending.
+[Controlled trials and actual launch evidence](paired32-weak-detail-training.md).
 
 [Decisions, coverage and coupled manifests](results/source-tail-top768-review-v1.json) ·
 [Six-ROI and source-reference constructors](results/source-tail-top768-readers-v1.json) ·
@@ -13,8 +16,10 @@ apply to future training, with no change to that running comparison.
 
 ## Selection and actual viewing
 
-Current training logs contain batch-average losses, without individual-photo
-losses. The completed historical V43 screen provides per-source reference-white
+Earlier training logs contain batch-average losses, without individual-photo
+losses. New V120/V121 [source diagnostics](source-loss-diagnostics.md) now trace
+detached per-draw losses from existing predictions; they do not retroactively
+change this completed source review. The historical V43 screen provides per-source reference-white
 scores for 88,508 earlier sources. These nominate inspection candidates; they
 are not current V119 training losses or automatic quality labels.
 

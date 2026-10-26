@@ -21,6 +21,13 @@ and a large ADC color tail. Weak natural detail and real fine mesh remain soft.
 All endpoint, independent, native and full-output checks are complete. The
 [native development comparison](native-camera-development.md) also documents
 the joint models' clearer detail than RawNIND on11 binned camera captures.
+
+The [V120/V121 follow-up](paired32-weak-detail-training.md) keeps V115 Small,
+restores corrected paired32 at V119's90791/six-region data, then tests the
+reviewed90787/fourteen-region intervention. CPU/CUDA checks pass for both;
+V120 production is active and V121 follows sequentially. Full endpoint quality
+and native review remain pending; source-loss tracing is active.
+
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain

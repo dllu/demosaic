@@ -151,4 +151,7 @@ This trial combines cleaned90,791 Commons sources, expanded83-ID paired data
 and20k extra updates from V115; it does not isolate any individual data change.
 Keep the band term off and optical blur at zero. Further quality work should
 use the reviewed weak-detail source bank while investigating the camera/color
-regressions, with per-source loss tracing available for new training.
+regressions. The [V120/V121 controlled trials](paired32-weak-detail-training.md)
+now test corrected paired32 and that bank with per-source loss tracing; all
+discarded checks pass, V120 is training and V121 is queued. Their quality remains
+unmeasured.
