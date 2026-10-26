@@ -43,6 +43,8 @@ matches older inputs exactly; original nominal-profile outputs are also preserve
 The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
 now compares training the new input adapter alone with adapting the full
 restoration path on the same cleaned corpus. Image quality is still unmeasured.
+[V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
+the cleaned90,784-source/twenty-region corpus after that review chain.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

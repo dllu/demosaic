@@ -1,24 +1,26 @@
 # Documentation guide
 
 Start with the [README](../README.md) for setup, inference and representative
-native crops. **V114 Tiny is the current general quality baseline**, with
-36.97973dB on full427 and54.28627/54.00290dB known/unseen measured-CFA means.
-V115 fitted Small has a higher known-camera mean and eight-pixel weak response;
-Tiny has slightly higher photo PSNR and lower tested color bias.
-[Completed comparison and native images](v114-v115-quality.md) ·
-[Current choices](current-model.md). The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
+native crops. **V120 Small is the current general recommendation**, with
+37.04008dB on full427 and54.31272/54.00872dB known/unseen measured-CFA means.
+[Completed primary/local/native results](v120-v121-primary.md) document its
+camera/color recovery and remaining weak-detail loss. V114 remains a useful
+Tiny alternative; V115 has higher known-camera quality and V117 a slightly
+higher photo mean. [Current choices](current-model.md).
+The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
 adds material/camera gains and native examples, with selected color-bias tradeoffs
 and unmeasured complete-panel/frame scope.
 
-All primary/analytic panels, independent saved-output checks, native review
-and complete102MP RGB16 exports are finished for both endpoints. Fine foliage,
+V120's primary/analytic panels, independent saved-output checks, selected native
+review, matched-profile GFX comparisons and complete102MP RGB16 exports are
+finished. Fine foliage,
 neon detail and camera mottling remain weak; broad real-camera superiority
 and100MP/10s remain goals. [GFX gallery](gfx-qualitative.md).
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
 weak-carrier gain, but does not improve broad weak natural detail and worsens
 the ADC color tail. Complete metrics, native triplets, six GFX regions and RGB16
-checks are published. V114 retains the better overall balance.
+checks are published. V114 retains the better balance within that Tiny comparison.
 
 The [completed V117/V118 comparison](v117-v118-quality.md) adds a useful V117
 single-view photo option at37.04408dB, with slightly lower camera means and
@@ -34,13 +36,13 @@ updates the current guides without an old promotion gate.
 
 | Topic | Start here |
 | --- | --- |
-| Current work | [V122/V123 learned frequency trials](learned-raw-frequency-training.md) · [V120/V121 controlled data trials](paired32-weak-detail-training.md) · [V119 complete quality review](v119-quality.md) · [Native-camera comparison](native-camera-development.md) · [Current model choices](current-model.md) |
+| Current work | [V124/V125 conditional-mean training](conditional-mean-training.md) · [V122/V123 learned frequency trials](learned-raw-frequency-training.md) · [V120/V121 controlled data trials](paired32-weak-detail-training.md) · [Native-camera comparison](native-camera-development.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
-| Current model | [V114, V115 and useful alternatives](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
+| Current model | [V120 and useful alternatives](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
 | Usage | [Commands and data conventions](usage.md) · [Linear DNG/JPEG export](dng-export.md) |
 | Data | [Current Small-model source inspection](current-source-loss-review.md), [paired32/weak-detail trials](paired32-weak-detail-training.md), [native camera development inputs](native-camera-development.md), [corpus and native review](incoming-commons-quality.md), [paired camera sampler](paired-camera-sampling.md), [source quality](corpus-source-review.md), [source exclusions](commons-content-overlap.md), [native RAW targets](public-raw-expansion-v2.md) |
-| Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [current loss-pair checks](band-loss-training.md), [earlier V93–V95 engineering evidence](quality-training-validation.md) |
+| Training | [Data/augmentation pipeline](training-pipeline.md), [execution/restart](training-execution.md), [mean-loss training](conditional-mean-training.md), [band-loss checks](band-loss-training.md), [earlier V93–V95 engineering evidence](quality-training-validation.md) |
 | Evaluation | [Current endpoint review queues](endpoint-quality-review.md), [quality/noise diagnostics](evaluation.md), [natural fine detail](heldout-detail.md), [conditional-noise bias](conditional-noise-response.md), [RawNIND variants](rawnind-variants.md), [noise/detail tradeoff](noise-conditioning.md), [ADC-only consistency](adc-consistency.md), [V104 color/texture projection diagnostics](v104-adc-color-projection.md), [GFX test](gfx-qualitative.md), [prepared test reserve](paired-reserved-test.md) |
 | Method research | [Research/design record](research.md), [learned RAW frequency prototype](learned-raw-frequency-features.md), [measured green-phase mesh diagnostic](green-phase-spectrum.md) |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |

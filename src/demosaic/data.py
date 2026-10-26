@@ -151,7 +151,10 @@ class CleanDataset(Dataset):
             raise ValueError(f"No {split} images in {manifest}")
         if photo_sampling_reference_manifest is not None and split != "train":
             raise ValueError("Photo sampling reference is only for training")
-        if photo_sampling_reference_manifest is None and photo_sampling_reference_sha256 is not None:
+        if (
+            photo_sampling_reference_manifest is None
+            and photo_sampling_reference_sha256 is not None
+        ):
             raise ValueError("Photo sampling reference hash requires a manifest")
         self.photo_sampling_reference = (
             PhotoSamplingReference(
@@ -175,7 +178,9 @@ class CleanDataset(Dataset):
         if not 0 <= weak_texture_fraction <= synthetic_fraction:
             raise ValueError("Weak texture fraction must be within the existing synthetic fraction")
         self.weak_texture_fraction = weak_texture_fraction if split == "train" else 0
-        fine_fraction = validate_probability(fine_weak_texture_fraction, "Fine weak texture fraction")
+        fine_fraction = validate_probability(
+            fine_weak_texture_fraction, "Fine weak texture fraction"
+        )
         if fine_fraction > weak_texture_fraction:
             raise ValueError("Fine weak texture fraction must fit inside the weak texture quota")
         self.fine_weak_texture_fraction = fine_fraction if split == "train" else 0
@@ -230,8 +235,12 @@ class CleanDataset(Dataset):
                 if draw < self.flat_fraction + self.fine_weak_texture_fraction:
                     if provenance is not None:
                         provenance["kind"] = "fine-weak-texture"
-                    rgb, _ = weak_texture(size, rng, pixel_scale=self.augmentation_downsample,
-                                          frequency_profile="fine-v1")
+                    rgb, _ = weak_texture(
+                        size,
+                        rng,
+                        pixel_scale=self.augmentation_downsample,
+                        frequency_profile="fine-v1",
+                    )
                 else:
                     if provenance is not None:
                         provenance["kind"] = "weak-texture"
@@ -242,7 +251,9 @@ class CleanDataset(Dataset):
             photographic = True
             if self.photo_sampling_reference is None:
                 record = self.rows[
-                    rng.randrange(len(self.rows)) if self.split == "train" else index % len(self.rows)
+                    rng.randrange(len(self.rows))
+                    if self.split == "train"
+                    else index % len(self.rows)
                 ]
             else:
                 record = self.photo_sampling_reference.initial(rng)
@@ -438,6 +449,7 @@ def degrade(
     noise_free_fraction=0.0,
     broad_camera=False,
     retain_sensor_target=False,
+    retain_noise_settings=False,
 ):
     """Convert clean linear sRGB to randomized camera RGB, then mosaic/noise.
 
@@ -450,6 +462,8 @@ def degrade(
         raise ValueError("Noise-free fraction must be in [0,1]")
     if type(retain_sensor_target) is not bool:
         raise ValueError("Sensor target retention must be a boolean")
+    if type(retain_noise_settings) is not bool:
+        raise ValueError("Noise metadata retention must be a boolean")
     if training:
         if broad_camera:
             wb, inverse = sample_broad_cameras(batch, device)
@@ -501,4 +515,11 @@ def degrade(
     }
     if retain_sensor_target:
         result["sensor_target"] = clean
+    if retain_noise_settings:
+        result["adc_black_level"] = (
+            torch.as_tensor(black, device=device, dtype=torch.float32)
+            .expand(batch, 1, 1, 1)
+            .clone()
+        )
+        result["adc_bit_depth"] = torch.full((batch, 1, 1, 1), 16, device=device, dtype=torch.long)
     return result

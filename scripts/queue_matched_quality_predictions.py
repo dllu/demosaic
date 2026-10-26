@@ -48,12 +48,50 @@ def function_ast(path, name):
 
 
 def execution_arms(execution, binding, training_format):
+    if training_format == "independent-noise-mean-v1":
+        assert execution["arm_weights"] == {"V124": 0.0, "V125": 0.25}
+        assert set(execution["arms"]) == set(execution["arm_weights"])
+        return [{"arm": arm, "training_plan": binding} for arm in execution["arms"]]
     if training_format == "learned-frequency-scopes-v1":
         assert execution["arm_scopes"] == {"V122": True, "V123": False}
         assert set(execution["arms"]) == set(execution["arm_scopes"])
         return [{"arm": arm, "training_plan": binding} for arm in execution["arms"]]
     assert training_format == "matched-execution-v1"
     return execution["arms"]
+
+
+def verify_noise_pair_training_state(actual, snapshot, weight):
+    """Reject partial runs or changed supervision using retained state only."""
+    import torch
+
+    from demosaic.noise_pairs import noise_pair_options
+
+    assert actual["status"] == "completed-noise-pair-training-phase"
+    assert actual["phase"] == "train" and actual["updates"] == snapshot["step"] == 20000
+    assert noise_pair_options(snapshot["config"]) == (2, weight)
+    assert actual["conditional_mean_weight"] == weight and actual["noise_pair_draws"] == 2
+    assert all(
+        actual["counts"][key] == 20000
+        for key in ("training_forwards", "optimizer_steps", "prepared_training_batches")
+    )
+    assert actual["counts"]["unique_target_contexts"] == 320000
+    domains = actual["domain_counts"]
+    assert sum(domains.values()) == 20000
+    assert actual["counts"]["sensor_observations"] == 16 * (
+        2 * (domains["commons"] + domains["native"]) + domains["paired"]
+    )
+    assert actual["initial_checks"][0]["official_encoder_exact"]
+    assert actual["model_EMA_Adam_finite"] and actual["frozen_encoder_no_gradients"]
+    assert len(snapshot["model"]) == len(snapshot["ema"]) == 91
+    states = snapshot["optimizer"]["state"]
+    assert len(states) == 89 and all(float(s["step"]) == 20000 for s in states.values())
+    assert all(torch.isfinite(v).all() for key in ("model", "ema") for v in snapshot[key].values())
+    assert all(
+        torch.isfinite(v).all()
+        for s in states.values()
+        for v in s.values()
+        if isinstance(v, torch.Tensor)
+    )
 
 
 def verify_frequency_training_state(actual, snapshot, parent, only):
@@ -91,13 +129,17 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
     internal_artifacts = artifacts.is_relative_to(root / "work")
     assert internal_artifacts or artifacts.is_relative_to(Path("/mnt/external/demosaic"))
     status = read(training_root / "status.json")
-    frequency = "execution_plan" not in status and "plan" in status
-    training_format = "learned-frequency-scopes-v1" if frequency else "matched-execution-v1"
-    execution = ref(training_root / ("plan.json" if frequency else "execution-plan-v1.json"))
+    shared_plan = "execution_plan" not in status and "plan" in status
+    execution = ref(training_root / ("plan.json" if shared_plan else "execution-plan-v1.json"))
     training = read(execution["path"])
+    training_format = (
+        training.get("training_format", "learned-frequency-scopes-v1")
+        if shared_plan
+        else "matched-execution-v1"
+    )
     guard(training)
     owner_field, execution_field = (
-        ("controller", "plan") if frequency else ("owner", "execution_plan")
+        ("controller", "plan") if shared_plan else ("owner", "execution_plan")
     )
     assert status[execution_field] == execution and live(status[owner_field])
     assert not status["status"].startswith("failed")
@@ -188,13 +230,13 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
         "training_owner_field": owner_field,
         "training_execution_field": execution_field,
         "expected_training_terminal": "completed-training-awaiting-model-comparisons"
-        if frequency
+        if shared_plan
         else training.get(
             "terminal_status", "completed-matched-V114-V115-training-awaiting-quality-comparisons"
         ),
         "expected_training_phases": [
             f"{phase}-{arm}"
-            for phase in (["CPU", "CUDA", "train"] if frequency else ["CUDA", "train"])
+            for phase in (["CPU", "CUDA", "train"] if shared_plan else ["CUDA", "train"])
             for arm in arm_names
         ],
         "expected_model_count": len(arm_names),
@@ -269,6 +311,8 @@ def endpoint_plan(plan, state):
             )
             verify_frequency_training_state(actual, snapshot, parent, execution["arm_scopes"][name])
             del parent
+        if training_format == "independent-noise-mean-v1":
+            verify_noise_pair_training_state(actual, snapshot, execution["arm_weights"][name])
         lineage = {**training["parent"], "step": 20000}
         assert snapshot["step"] == 20000 and snapshot["config"]["initialized_from"] == lineage
         checkpoints.append(

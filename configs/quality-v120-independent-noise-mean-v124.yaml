@@ -1,0 +1,95 @@
+amp: true
+augmentation_downsample: 2
+batch_size: 16
+broad_camera: true
+camera_supervision: sensor-valid-v1
+channels_last: true
+checkpoint_every: 1000
+conditional_mean_weight: 0.0
+cpu_threads: 2
+data_seed_per_step: true
+device: cuda
+expected_dino_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+experiment_notes: 'V124: fresh20000 V120 Small EMA continuation, seed67/LR1e-5/warm200.
+  Cleaned90784 and reviewed20ROI bank, corrected paired32/native128, zeroPSF. Load16
+  unique256 targets once; simulated Commons/native batches get two independent sensor-noise
+  views with identical geometry/camera/CFA/shot/read/ADC metadata, physical32 BF16.
+  Paired real observations remain16 and use existing loss. Convex mean-prediction
+  loss weight0.0; matched arm differs only in this weight. No input/noise-prior averaging,
+  band0, epsilon.0003/paired.0001, weak.15/photoatten.25. Source diagnostics use original
+  view only. CPU128/B1 and CUDA256/B16 discarded16+2resume precede fresh full training.
+  Full production waits for original V122/V123 chain; no automatic retry or budget
+  extension.'
+fine_weak_texture_fraction: 0.0
+flat_chroma_stops: 8
+flat_fraction: 0.1
+initialize_parent:
+  path: /mnt/external/demosaic/models/v120-final20000.pt
+  sha256: a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb
+  step: 20000
+log_every: 25
+lr: 1.0e-05
+manifest: /home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/thin-material-ROIs-20261026-v1/future-cohort-v1/manifest4.jsonl
+min_available_gb: 32
+model:
+  camera_conditioning: true
+  dino: true
+  dino_feature_fusion: convnext-pyramid
+  dino_model: facebook/dinov3-convnext-small-pretrain-lvd1689m
+  dino_revision: 421020015aa4266363db803b6049a529999afb1e
+  physical_anchors: true
+  physical_fp32: true
+  restoration_backbone: pretrained-rgb
+  rgb_hidden_autocast: false
+  rgb_middle_skip_fp32: true
+  rgb_processing_scale: 1
+  variance_stabilization: true
+  width: 64
+multiscale_sensor_weight: 0
+noise_free_fraction: 0.1
+noise_pair_draws: 2
+noise_pair_policy: independent-sensor-noise-v1
+normalized_band_weight: 0.0
+normalized_sensor_weight: 0
+optical_blur_probability: 0.0
+paired_camera_sampling_weights:
+  Canon EOS 6D: 0.125
+  ILCE-7C: 0.75
+  NIKON D40: 0.03125
+  NIKON Z 6: 0.09375
+paired_fraction: 0.25
+paired_manifest: /home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/paired-reference-outliers-v1/work/cleaned-train32-v1/manifest.json
+paired_workers: 0
+parent_dino_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+patch_size: 256
+photo_sampling_reference_manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl
+photo_sampling_reference_sha256: 4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e
+photographic_low_contrast_fraction: 0.25
+precision: bfloat16
+preserve_negative_read_noise: true
+raw_clean_augmentation_downsample: 2
+raw_clean_fraction: 0.25
+raw_clean_manifest: /mnt/external/demosaic/raw-clean-public-extension-v2/bin4/manifest.json
+raw_clean_optical_blur_probability: 0.0
+raw_clean_workers: 0
+reconstruct_highlights: true
+reconstruction_charbonnier_epsilon: 0.0003
+reconstruction_objective: charbonnier-v1
+reference_interval_weight: 0.0
+reviewed_roi_catalogue: /home/dllu/proj/demosaic/configs/low-contrast-training-rois-cleaned90784-v1.json
+reviewed_roi_fraction: 0.05
+run: /home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-mean-training-v1/run/work/artifacts/train/V124
+seed: 67
+source_loss_every: 100
+steps: 20000
+synthetic_fraction: 0.2
+trace_observations: true
+training_execution: deterministic-v1
+val_batches: 4
+validation_images: 8
+validation_manifest: /mnt/external/demosaic/audits/commons-44732-v1/manifest.jsonl
+validation_protocol: configs/evaluation.yaml
+warmup_steps: 200
+weak_texture_fraction: 0.15
+worker_start_method: spawn
+workers: 0

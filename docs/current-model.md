@@ -126,6 +126,8 @@ remain biased after averaging independent V120/V117 restorations; strong bark
 is mainly variance-limited. This supports testing a conditional-mean loss,
 without an inference-strength or recommendation change. The multi-observation
 mean is a diagnostic unavailable from one capture.
+[V124/V125 now implement the matched training trial](conditional-mean-training.md)
+on the cleaned90784/twenty-region data; quality is unmeasured.
 
 At2% contrast/ISO12800, Tiny's eight/sixteen-pixel carrier gains rise to
 .13371/.71335; Small reaches.15217/.68865. Four-pixel structure remains nearly

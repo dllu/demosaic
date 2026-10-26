@@ -1,10 +1,12 @@
 # Endpoint quality and native-image review
 
-**Both active model pairs now have complete comparison and fine-mesh review
-queues.** V120/V121 training, endpoint predictions and independent numerical
+**V122/V123 and V124/V125 have complete comparison and fine-mesh review
+queues.** [V124/V125 mean-loss training](conditional-mean-training.md) waits for
+the original V122/V123 chain after discarded implementation checks.
+V120/V121 training, endpoint predictions and independent numerical
 audits, four saved/local-detail contrasts and selected native review are
 complete. V120/V121 mesh checks have no clear lattice-recovery gain over
-V115/V119. V122/V123 endpoint quality remains unmeasured. The queues check
+V115/V119. V122–V125 endpoint quality remains unmeasured. The queues check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 
@@ -83,6 +85,7 @@ neither restarted nor signaled.
 | --- | --- |
 | V120/V121 data trials | V119→V120, V115→V120, V120→V121, V117→V121 |
 | V122/V123 frequency scopes | V115→V122, V115→V123, V122→V123, V117→V122, V117→V123 |
+| V124/V125 independent-noise loss | V120→V124, V120→V125, V124→V125, V117→V124, V117→V125 |
 
 Each contrast joins all 14,190 numerical observations, two native material
 triplets and all six standing GFX regions with their conditioning disclosed.

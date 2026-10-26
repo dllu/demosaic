@@ -17,8 +17,11 @@ ADC tail. [Completed results](v120-v121-primary.md).
 The [independent-noise response diagnostic](conditional-noise-response.md) finds
 that faint fur/wood errors persist in the mean of repeated V120/V117 outputs,
 while strong bark is mainly variance-limited. It motivates a controlled
-two-view conditional-mean loss on the prepared90784/twenty-region data;
-that loss is not implemented/trained yet and does not change the active runs.
+two-view conditional-mean loss on the prepared90784/twenty-region data.
+[V124/V125 implement the matched comparison](conditional-mean-training.md):
+both use16 unique targets and32 simulated observations, with mean-loss weights
+0/.25. Discarded checks precede fresh full training after the original V122/V123
+review chain; quality is unmeasured and the active runs remain unchanged.
 
 V119 completed a full 20,000-update continuation from **V115 Small** on the
 cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA

@@ -330,12 +330,15 @@ def degrade_raw_clean(
     noise_free_fraction=0.0,
     preserve_negative_read_noise=False,
     retain_sensor_target=False,
+    retain_noise_settings=False,
 ):
     """Apply fresh Poisson/read/ADC noise directly to true camera-linear targets."""
     if not 0 <= noise_free_fraction <= 1:
         raise ValueError("Noise-free fraction must be in [0,1]")
     if type(retain_sensor_target) is not bool:
         raise ValueError("Sensor target retention must be a boolean")
+    if type(retain_noise_settings) is not bool:
+        raise ValueError("Noise metadata retention must be a boolean")
     rgb = batch["camera_rgb"]
     device = rgb.device
     count = len(rgb)
@@ -375,4 +378,13 @@ def degrade_raw_clean(
         }
         if retain_sensor_target:
             result["sensor_target"] = clean
+        if retain_noise_settings:
+            result["adc_black_level"] = (
+                torch.as_tensor(black, device=device, dtype=torch.float32)
+                .expand(count, 1, 1, 1)
+                .clone()
+            )
+            result["adc_bit_depth"] = torch.full(
+                (count, 1, 1, 1), 16, device=device, dtype=torch.long
+            )
         return result

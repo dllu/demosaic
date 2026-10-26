@@ -43,6 +43,13 @@ adds480 new predictions on the frozen11-capture development set and reuses960
 controls. V120 gains modestly over V115 and retains much finer texture than
 RawNIND; V117 retains higher condition means and V121's changes are tiny.
 
+The [V124/V125 mean-loss trial](conditional-mean-training.md) uses V120's
+architecture and parent on the cleaned90,784-source/twenty-region corpus.
+All four CPU/CUDA16+2 checks pass; fresh20k runs and complete endpoint/crop
+review are queued after the original V122/V123 chain. Both arms use16 unique
+targets and32 simulated observations, with mean-loss weights0/.25.
+Quality is unmeasured.
+
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain

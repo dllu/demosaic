@@ -10,7 +10,11 @@ The [current source inspection](current-source-loss-review.md) prepares a future
 and six weak material additions, with exact source/target reconstruction and
 actual reader checks. V122/V123 still use90,786/fourteen regions; V120/V121
 retain their original frozen input plans. No sampling quota, blur policy or
-active training change results from that preparation.
+active V122/V123 change results from that preparation. The queued
+[V124/V125 independent-noise trial](conditional-mean-training.md) uses this new
+cohort and region bank. It loads16 unique targets once and draws32 simulated
+observations after augmentation; real paired data stays16. This is a controlled
+quality experiment, with no new throughput claim.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;

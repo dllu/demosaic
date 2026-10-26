@@ -113,7 +113,7 @@ Modified by binning/cropping, simulated noise, restoration and display conversio
 
 Test a convex mixture of the existing per-view reconstruction loss and the same
 loss applied to the mean restored signal from two independent corruptions of
-one clean target. Proposed mean-loss weight.25 versus a matched zero-weight
+one clean target. Mean-loss weight.25 versus a matched zero-weight
 control; both arms must use the same two noisy views and unique-target count.
 For squared error, the mean term weights conditional bias more heavily relative
 to variance. That identity alone does not establish the behavior of the actual
@@ -124,6 +124,8 @@ data. Pair only simulated-noise Commons/native targets; keep real paired input
 steps on their existing single-observation path. Avoid loading examples that
 the paired-view layout would discard. Preserve the current zero-blur recipe,
 and compare noise, camera color and real weak detail alongside photo PSNR.
-This change is **proposed, not implemented or trained** here. The active
-V123 run and original endpoint-review chain remain unchanged; no model choice,
-noise estimator or inference strength changes from this diagnostic.
+The [V124/V125 implementation and queued comparison](conditional-mean-training.md)
+now implement this experiment; quality is unmeasured. Both arms load16 unique
+targets once and create32 simulated observations. The active V123 run and
+original endpoint-review chain remain unchanged; no model choice, noise
+estimator or inference strength changes from this diagnostic.

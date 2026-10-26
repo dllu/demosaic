@@ -28,6 +28,15 @@ from .losses import (
     validate_reconstruction_objective,
 )
 from .model import JointDemosaic, ModelConfig
+from .noise_pairs import (
+    POLICY as NOISE_PAIR_POLICY,
+)
+from .noise_pairs import (
+    conditional_mean_reconstruction_loss,
+    independent_noise_view,
+    noise_pair_options,
+    require_resume_noise_pairs,
+)
 from .optimizer_batches import backward_groups, batch_layout, optimizer_batches
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
 from .photo_sampling import require_resume_photo_sampling
@@ -370,30 +379,40 @@ def selected_batches(loaders, first, last, seed, paired_fraction, raw_clean_frac
 def prepare_training_batch(data_step, domain, clean, *, model, device, config, seed):
     """Preserve the original source-step noise stream before any batch grouping."""
     with data_random_context(device, seed, data_step, config.get("data_seed_per_step", False)):
+        noise_draws, _ = noise_pair_options(config)
         retain_sensor_target = (
             validate_camera_supervision(config.get("camera_supervision", "reference-white-v1"))
             == "sensor-valid-v1"
-        )
+        ) or noise_draws == 2
+        noise_options = {"retain_noise_settings": True} if noise_draws == 2 else {}
         if domain == "paired":
             return {key: value.to(device) for key, value in clean.items()}
         if domain == "native":
-            return degrade_raw_clean(
+            batch = degrade_raw_clean(
                 {key: value.to(device) for key, value in clean.items()},
                 reconstruct_highlights=config.get("reconstruct_highlights", False),
                 preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
                 noise_free_fraction=config.get("noise_free_fraction", 0.0),
                 retain_sensor_target=retain_sensor_target,
+                **noise_options,
             )
-        if domain != "commons":
+        elif domain == "commons":
+            batch = degrade(
+                clean["rgb"].to(device),
+                reconstruct_highlights=config.get("reconstruct_highlights", False),
+                preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
+                physical_fp32=model.config.physical_fp32,
+                noise_free_fraction=config.get("noise_free_fraction", 0.0),
+                broad_camera=config.get("broad_camera", False),
+                retain_sensor_target=retain_sensor_target,
+                **noise_options,
+            )
+        else:
             raise ValueError("Unknown training domain")
-        return degrade(
-            clean["rgb"].to(device),
-            reconstruct_highlights=config.get("reconstruct_highlights", False),
-            preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
-            physical_fp32=model.config.physical_fp32,
-            noise_free_fraction=config.get("noise_free_fraction", 0.0),
-            broad_camera=config.get("broad_camera", False),
-            retain_sensor_target=retain_sensor_target,
+        return (
+            independent_noise_view(batch, seed=seed, step=data_step, domain=domain)
+            if noise_draws == 2
+            else batch
         )
 
 
@@ -467,6 +486,12 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     late_only = validate_late_rgb_only(config)
     frequency_only = validate_raw_frequency_only(config)
     training_context = TrainingContext.from_config(config)
+    noise_draws, mean_weight = noise_pair_options(config)
+    config.update(
+        noise_pair_draws=noise_draws,
+        conditional_mean_weight=mean_weight,
+        noise_pair_policy=NOISE_PAIR_POLICY if noise_draws == 2 else None,
+    )
     objective = validate_reconstruction_objective(
         config.get("reconstruction_objective", "charbonnier-v1")
     )
@@ -492,6 +517,12 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     if camera_supervision == "sensor-valid-v1" and not config.get("reconstruct_highlights", False):
         raise ValueError("Sensor-valid camera supervision requires reference-white display targets")
     groups, forward_groups = batch_layout(config)
+    if noise_draws == 2 and (
+        groups != 1 or training_context is not None or not config.get("data_seed_per_step", False)
+    ):
+        raise ValueError(
+            "Independent noise pairs require per-step RNG, one optimizer group and no context override"
+        )
     normalization_policy = config.get("normalization_augmentation", "none")
     if normalization_policy not in ("none", "center-half-mix-v1"):
         raise ValueError("Unknown normalization augmentation policy")
@@ -512,6 +543,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 "Normalization augmentation requires full-resolution anchored RGB training"
             )
     config["normalization_augmentation"] = normalization_policy
+    if noise_draws == 2 and normalization_policy != "none":
+        raise ValueError("Independent noise pairs require a shared, fixed normalization policy")
     config["flat_chroma_stops"] = validate_flat_chroma_stops(config.get("flat_chroma_stops", 0.0))
     config["reviewed_roi_fraction"] = validate_roi_fraction(
         config.get("reviewed_roi_fraction", 0.0)
@@ -651,6 +684,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
+        require_resume_noise_pairs(resume_state["config"], config)
         if validate_late_rgb_only(resume_state["config"]) != late_only:
             raise ValueError("Resume late RGB training scope differs; initialize a new run")
         if validate_raw_frequency_only(resume_state["config"]) != frequency_only:
@@ -1121,7 +1155,13 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                         objective=objective,
                     )
                 else:
-                    loss, terms = reconstruction_loss(
+                    loss_function = (
+                        conditional_mean_reconstruction_loss
+                        if noise_draws == 2
+                        else reconstruction_loss
+                    )
+                    mean_options = {"weight": mean_weight} if noise_draws == 2 else {}
+                    loss, terms = loss_function(
                         prediction,
                         loss_batch,
                         auxiliary,
@@ -1133,11 +1173,24 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                         reference_interval_weight=interval_weight,
                         reconstruction_charbonnier_epsilon=reconstruction_epsilon,
                         normalized_band_weight=band_weight,
+                        **mean_options,
                     )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
             if source_observer is not None:
-                source_observer(data_step, domain, clean, prediction, auxiliary, loss_batch)
+                # One diagnostic per unique source, on its first declared view.
+                if noise_draws == 2 and not use_pair:
+                    trace_size = len(prediction) // 2
+                    source_observer(
+                        data_step,
+                        domain,
+                        clean,
+                        prediction[:trace_size],
+                        None if auxiliary is None else auxiliary[:trace_size],
+                        {k: v[:trace_size] for k, v in loss_batch.items()},
+                    )
+                else:
+                    source_observer(data_step, domain, clean, prediction, auxiliary, loss_batch)
             with (
                 ieee_fp32()
                 if precision == "float32"
@@ -1190,6 +1243,19 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                 )
             if fingerprint is not None:
                 metrics["batch_sha256"] = fingerprint
+            if noise_draws == 2:
+                metrics.update(
+                    unique_context_batch_size=len(
+                        clean["rgb"]
+                        if domain == "commons"
+                        else clean["camera_rgb"]
+                        if use_native
+                        else clean["packed"]
+                    ),
+                    forward_observation_batch_size=len(prediction),
+                    independent_noise_draws=1 if use_pair else 2,
+                    conditional_mean_weight_applied=0.0 if use_pair else mean_weight,
+                )
             if normalization_mask is not None:
                 metrics["normalization_mask"] = normalization_mask.tolist()
             if training_context:

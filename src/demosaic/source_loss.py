@@ -88,6 +88,10 @@ class SourceLossTrace:
                         "score_definition": "FP32 detached singleton reconstruction, not an additive batch-loss contribution",
                     }
                 )
+                if "noise_view" in sample:
+                    records[-1]["source_trace_noise_view"] = int(
+                        sample["noise_view"].reshape(-1)[0]
+                    )
         # Finish all diagnostics before appending; don't leave a partial batch.
         with self.path.open("a") as stream:
             for record in records:
