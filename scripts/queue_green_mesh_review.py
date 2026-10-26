@@ -131,12 +131,10 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=Non
         raise ValueError("Mesh models and comparison refer to different quality runs")
     state_path = Path(comparison["root"]) / "status.json"
     state = read(state_path)
-    if (
-        state["plan"] != binding(comparison_plan)
-        or not live(state["owner"])
-        or state["status"].startswith("failed")
-    ):
-        raise ValueError("Expected the original live comparison queue")
+    if state["plan"] != binding(comparison_plan) or state["status"].startswith("failed"):
+        raise ValueError("Expected the original successful comparison queue")
+    if not live(state["owner"]):
+        report_ready(state, {"owner": state["owner"], "plan": binding(comparison_plan)})
     adopted = adopted or {}
     if set(adopted) - {"nominal", "profile3879"}:
         raise ValueError("Unknown adopted mesh profile")

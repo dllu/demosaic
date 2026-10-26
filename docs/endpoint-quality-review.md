@@ -1,8 +1,10 @@
 # Endpoint quality and native-image review
 
 **Both active model pairs now have complete comparison and fine-mesh review
-queues.** V120's early mesh check is complete, with no clear lattice-recovery
-gain over V115/V119; full endpoint numerical quality remains unmeasured. The queues check
+queues.** V120/V121 training, endpoint predictions and independent numerical
+audits, four saved/local-detail contrasts and selected native review are
+complete. V120/V121 mesh checks have no clear lattice-recovery gain over
+V115/V119. V122/V123 endpoint quality remains unmeasured. The queues check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 
@@ -11,6 +13,9 @@ score changes or select a model automatically.
 [RGB16 verifier](../scripts/verify_rgb16_exports.py) ·
 [Fine-mesh runner](../scripts/queue_green_mesh_review.py).
 [Completed V120 mesh and prediction adoption](results/v120-green-mesh-v1.json).
+[Material-pair and conditioning repair](results/endpoint-material-and-conditioning-repair-v1.json).
+[Completed native/local review](results/v120-v121-native-review-v1.json) ·
+[Primary scores and native triplets](v120-v121-primary.md).
 
 ```mermaid
 flowchart LR
@@ -26,6 +31,44 @@ status cannot release work while its owner is still live, and an expired
 observation window does not trigger a replacement training run. Partial outputs,
 failed checks and executed source snapshots remain preserved.
 
+## Material selection and GFX conditioning
+
+The original completed V120/V121 audit declared bark/raccoon-fur triplets, while
+older audits declared bark/forest-canopy. The first report stopped rather than join
+different examples. The builder now uses the candidate audit's declared pair,
+reuses existing PNGs and renders only a missing control crop from its exact
+saved FP32 prediction/supervision. Exact model/context/input/target bindings and
+native noisy/GT pixels must agree. The original selections remain intact; no
+inference, observation generation or output-based crop selection is added.
+The [primary report](v120-v121-primary.md) corrects earlier repair prose that
+misnamed these second sources. Source IDs and exact pixel bindings were always
+matched; the original machine narratives remain preserved.
+
+The next check found a **real main-GFX conditioning difference**. Older outputs
+use the input-Haar coefficients `.0014635775921166604 / 1.0715704128646712e−6`.
+The new evaluator's input estimator reports insufficient intensity span and
+falls back to nominal ISO coefficients `.00128 / 6.553600000000001e−6`.
+The source RAW/reference pixels, all six integer regions, WB/matrix and display
+still match. This difference must remain visible when comparing saved pipelines.
+
+The default matched-profile guard still rejects it. The new plans explicitly
+allow a **labeled pipeline comparison**: image rows include their actual profile,
+filenames say `conditioning-different`, and receipts flag that it cannot isolate
+a model-only gain. All original RAW/reference/geometry/display checks remain
+required. A complete-frame comparison at matching fixed conditioning is still
+needed against older models; the nominal outputs remain preserved evidence.
+V120 versus V121 uses the same nominal profile. The independent primary/analytic
+numerical joins remain matched, and the extra fine mesh uses its two fixed
+matched profiles with V120 predictions reused.
+
+Seventy-nine focused tests pass. The real saved-array proof reproduces both
+original failures, prepares matched synthetic material crops, and renders all
+six main GFX regions only after explicitly declaring the profile difference.
+No Torch/model/noise/RAW work occurs. Failed executed sources/outputs are
+preserved; only owned idle frequency report/mesh queues were retired to install
+the proven reporting change. Training, endpoint inference and audits were
+neither restarted nor signaled.
+
 ## Matched comparisons
 
 | Pair | Saved-output contrasts |
@@ -34,7 +77,8 @@ failed checks and executed source snapshots remain preserved.
 | V122/V123 frequency scopes | V115→V122, V115→V123, V122→V123, V117→V122, V117→V123 |
 
 Each contrast joins all 14,190 numerical observations, two native material
-triplets and all six standing GFX regions. The local photographic-detail
+triplets and all six standing GFX regions with their conditioning disclosed.
+The local photographic-detail
 analysis covers 427 sources, 5,124 source/noise/CFA cases and 96,075 unique GT
 blocks. Those blocks and earlier controls are reused, not new independent
 observations for each contrast. This work uses NumPy and saved arrays, with no
@@ -79,13 +123,14 @@ the released RawNIND control is reused under the nominal prior. Model code comes
 from each pair's actual frozen quality workspace. No original RAF is reopened,
 new noise generated or control model rerun.
 
-The V120/V121 mesh queue now adopts V120's two completed predictions instead of
+The V120/V121 mesh queue adopted V120's two completed predictions instead of
 evaluating it again. Adoption binds the exact observation, profile, completed
 20,000-update execution, prediction and checkpoint hashes. The final report's
 checkpoint SHA must agree even when its immutable copy has another path. Only
-V121's two forwards remain in that queue. The previous owned idle mesh queue was
+V121's two forwards then completed and were actually viewed. The previous owned idle mesh queue was
 retired before producing predictions; all its original source and preflight
-receipts remain preserved. The V122/V123 mesh queue is unchanged.
+receipts remain preserved. V122/V123 retain their four planned mesh forwards;
+their idle report/mesh dependencies were rebound to the repaired reporting code.
 
 The separate DSCF3835 f/5.6, 2.5s capture precedes DSCF3842 by 46 seconds. Its
 AHD RGB and camera JPEG are **qualitative references, not exact GT**. Camera
@@ -96,7 +141,8 @@ establishing full-frame mesh behavior or runtime.
 The retained-control preflight forbids neural module calls. It reproduces four
 existing V115/V119 native boards byte-for-byte and prepares four triplets with
 zero neural calls, RAW decodes or new noise. Actual viewing and pixel checks of
-V121–V123 endpoint outputs remain pending. A second preflight exercises the
+V122/V123 endpoint outputs remain pending; V121's completed review is linked above.
+A second preflight exercises the
 actual frozen V120 adoption path with model construction and all neural calls
 forbidden. Both +2EV boards, both +4EV boards and both triplets are byte-identical
 to the completed V120 outputs. The

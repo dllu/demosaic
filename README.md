@@ -2,18 +2,24 @@
 
 Joint Bayer demosaicing and denoising in linear camera RGB, with physical noise
 conditioning, frozen DINOv3 features and tiled16-bit output on NVIDIA GB10.
-**V114 Tiny is the current general quality baseline**, using V84's pretrained
-DRUNet RGB trunk and official DINOv3 ConvNeXt-Tiny pyramid. It reaches
-**36.980dB** on the full427-photo panel, +.077dB over V112, with422/427 source
-means improving. Known/unseen measured-CFA means are54.286/54.003dB.
-[Complete results, native comparisons and remaining weaknesses](docs/v114-v115-quality.md).
+**V120 Small is the current general recommendation**, using V84's pretrained
+DRUNet RGB trunk and official DINOv3 ConvNeXt-Small pyramid. It reaches
+**37.04008dB** on the full427-photo panel, with known/unseen measured-CFA means
+**54.31272/54.00872dB** and tested ADC maximum55.52DN16. It recovers V119's
+camera/color regression while keeping its photo score. Fine detail remains weak.
+[Results, native comparisons and explicit GFX profile limits](docs/v120-v121-primary.md).
 
-**V115 Small is a useful alternative:** its known-camera mean is higher at
-54.324dB and its tested eight-pixel weak-carrier response improves. Tiny has
-slightly higher photo PSNR and lower tested color bias. Both retain soft fine
-foliage/neon detail and dark-camera mottling. All numerical panels, independent
-saved-prediction checks, native review and complete102MP RGB16 exports are done.
+**V114 Tiny remains a useful alternative**, with lower tested ADC maximum51.73DN16.
+V115 Small has a slightly higher known-camera mean54.324dB; V117 has a slightly
+higher photo score. These choices retain soft fine foliage/neon detail and
+dark-camera mottling. V120's numerical/local panels, selected native review and
+complete102MP RGB16 checks are done; matching-profile GFX comparison against
+older models remains open.
 [Current choices](docs/current-model.md) · [GFX gallery](docs/gfx-qualitative.md).
+
+The [V121 data arm](docs/v120-v121-primary.md) has a small photo change and a
+large remaining ADC outlier. Current selection advances to the useful measured
+balance without imposing a study-specific promotion gate.
 
 [V119's complete review](docs/v119-quality.md) finds a +.06131dB photo gain over
 V115 after cleaned-data training, but a −.22342dB known-camera regression and
@@ -24,12 +30,13 @@ V117 remains ahead of V119 there. Our current training uses zero optical blur an
 geometry before final downsampling. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
-[V120/V121 Small data trials](docs/paired32-weak-detail-training.md) passed their
-CPU/CUDA checks: V120 completed its original20k updates with corrected paired32
-data; V121 is training with the cleaner corpus and expanded weak-detail regions.
-Full numerical evaluation is pending; the
+[V120/V121 Small data trials](docs/paired32-weak-detail-training.md) completed
+their original20k updates and independent numerical audit. Saved-output
+comparisons and selected native review are complete; the
 [early V120 mesh comparison](docs/gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
 shows no clear lattice-recovery gain over V115/V119.
+Older/new main GFX outputs use different noise profiles, which are
+[explicitly labeled](docs/endpoint-quality-review.md#material-selection-and-gfx-conditioning).
 The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
 now compares training the new input adapter alone with adapting the full
 restoration path on the same cleaned corpus. Image quality is still unmeasured.
@@ -60,19 +67,19 @@ isolated architecture ablation.
 
 Photo cells are unchanged160×160 crops at the8×-binned evaluation resolution,
 with shared coordinates/transforms. ISO12800-prior noisy observation →
-**V117 Tiny, single view** → exact synthetic GT. Fine texture remains softer
-than GT. V117 is the photo-score option; V114 retains the camera/color balance.
-[Results and parent comparison](docs/v117-v118-quality.md) ·
-[Source/ROI/checkpoint/noise/display metadata](docs/images/v117-v118-quality/manifest.json).
+**V120 Small, single view** → exact synthetic GT. Bark remains coherent;
+fine raccoon fur remains softer than GT.
+[Audited results and current review limits](docs/v120-v121-primary.md) ·
+[Source/ROI/checkpoint/noise/display metadata](docs/images/v120-v121-primary-v1/manifest.json).
 
-![V117 bark: noisy, restored and exact synthetic GT](docs/images/v117-v118-quality/V117-material-1.png)
+![V120 bark: noisy, restored and exact synthetic GT](docs/images/v120-v121-primary-v1/crop-801b668c1c29105a.png)
 
-![V117 canopy: noisy, restored and exact synthetic GT](docs/images/v117-v118-quality/V117-material-2.png)
+![V120 raccoon fur: noisy, restored and exact synthetic GT](docs/images/v120-v121-primary-v1/crop-881399e7a68af49a.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
-[Grendelkhan](https://commons.wikimedia.org/wiki/File:Forest_covered_hills_on_Yakushima.jpg),
-[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), modified by binning,
+[Korall](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
+[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/), modified by binning,
 cropping, simulated noise and restoration.
 
 Real GFX100S: DSCF3879 ISO6400 → **V117 Tiny** → DSCF3880 ISO100 f/5.6.

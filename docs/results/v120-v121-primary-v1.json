@@ -1,0 +1,340 @@
+{
+  "status": "completed-primary-audit-native-triplets-published-full-review-in-progress",
+  "recorded_local": "2026-10-26T14:16:52.396706-07:00",
+  "publisher": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V123-material-alignment-repair-v1/publish-primary-v1.py",
+    "sha256": "ddbb9ccba2864447878ba06877b9469f833932ae583da368cd6cc76f2567443a"
+  },
+  "comparisons": [
+    {
+      "panel": "full427",
+      "kind": "photo",
+      "metric": "srgb_psnr",
+      "sources": 427,
+      "first": "V120-step-20000",
+      "second": "V121-step-20000",
+      "first_checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "second_checkpoint_sha256": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+      "first_source_balanced_mean": 37.04008289980411,
+      "second_source_balanced_mean": 37.04157240877831,
+      "scope": "Completed independent primary means; photo sources or camera scenes are the balanced units. These values do not imply a positive paired change or complete real-photo/native review."
+    },
+    {
+      "panel": "known",
+      "kind": "real",
+      "metric": "sensor_psnr",
+      "sources": 4,
+      "first": "V120-step-20000",
+      "second": "V121-step-20000",
+      "first_checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "second_checkpoint_sha256": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+      "first_source_balanced_mean": 54.312717907748564,
+      "second_source_balanced_mean": 54.32183575945744,
+      "scope": "Completed independent primary means; photo sources or camera scenes are the balanced units. These values do not imply a positive paired change or complete real-photo/native review."
+    },
+    {
+      "panel": "unseen",
+      "kind": "real",
+      "metric": "sensor_psnr",
+      "sources": 5,
+      "first": "V120-step-20000",
+      "second": "V121-step-20000",
+      "first_checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "second_checkpoint_sha256": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+      "first_source_balanced_mean": 54.008722197126545,
+      "second_source_balanced_mean": 53.98946550395054,
+      "scope": "Completed independent primary means; photo sources or camera scenes are the balanced units. These values do not imply a positive paired change or complete real-photo/native review."
+    }
+  ],
+  "means": {
+    "V120": {
+      "photo": 37.04008289980411,
+      "known": 54.312717907748564,
+      "unseen": 54.008722197126545
+    },
+    "V121": {
+      "photo": 37.04157240877831,
+      "known": 54.32183575945744,
+      "unseen": 53.98946550395054
+    }
+  },
+  "models": {
+    "V120": {
+      "arm": "V120",
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "expected_lineage": {
+        "step": 20000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+          "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+          "step": 20000
+        }
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "revision": "421020015aa4266363db803b6049a529999afb1e",
+        "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+      }
+    },
+    "V121": {
+      "arm": "V121",
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/weights/weights-40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077.pt",
+      "sha256": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+      "expected_lineage": {
+        "step": 20000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+          "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+          "step": 20000
+        }
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "revision": "421020015aa4266363db803b6049a529999afb1e",
+        "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+      }
+    }
+  },
+  "color": [
+    {
+      "model": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean_DN16": 15.64894975685615,
+      "p95_DN16": 27.02507961857613,
+      "maximum_DN16": 1645.3644903625943,
+      "worst_case": 1017
+    },
+    {
+      "model": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean_DN16": 16.693220665229386,
+      "p95_DN16": 46.454321776876455,
+      "maximum_DN16": 77.75149028508459,
+      "worst_case": 1020
+    },
+    {
+      "model": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "condition": "adc-only",
+      "cases": 588,
+      "mean_DN16": 6.435033768511365,
+      "p95_DN16": 24.765061211561534,
+      "maximum_DN16": 55.52459227844957,
+      "worst_case": 792
+    },
+    {
+      "model": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "condition": "iso12800-prior",
+      "cases": 588,
+      "mean_DN16": 16.68250843628449,
+      "p95_DN16": 46.8515033459739,
+      "maximum_DN16": 78.8224068663083,
+      "worst_case": 1020
+    }
+  ],
+  "original_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/result-v1.json",
+    "sha256": "c9e1686f312f7b97b61f2fe6128e0c457e25b71013a780ece4b6ef231908e8f9"
+  },
+  "completed_evaluation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/completed-evaluation-boundary-v1.json",
+    "sha256": "7e6c3453d4139125e24bec502b1f5bda20ce3effecb5e8c4e14369efe78e5355"
+  },
+  "independent_stages": {
+    "photo": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/work/audit-output/photo/result.json",
+      "sha256": "1d6e4722bfa4c094fb7e383bea12cb74e6c9b4df7a27c09921319cf49f9b4990"
+    },
+    "known": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/work/audit-output/known/result.json",
+      "sha256": "8e0e49c7fbbc3613a30ecb1412e54fe449eefc7fe2f1c960f8dc889fd5f7400c"
+    },
+    "unseen": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/work/audit-output/unseen/result.json",
+      "sha256": "e900a0006c8183543aa3881eb93a0325d7385a6429880c5b2b58e01b079ac28c"
+    },
+    "texture": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/work/audit-output/texture/result.json",
+      "sha256": "4a720eff002fac5b95a8c1215d21670dcc195147c6876449719737e7c9da0316"
+    },
+    "color": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-independent-audit-v1/work/audit-output/color/result.json",
+      "sha256": "75785b85624c861d9d2ba566bd59471629c97667d82eb4c44fbd74e02fef2eaf"
+    }
+  },
+  "native_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/manifest.json",
+    "sha256": "5716d8e4761a26d4cd62e5bed097667f057cd3dbf37f8029207d817ef9016709"
+  },
+  "triplets": [
+    {
+      "model": "V120",
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-801b668c1c29105a.png",
+        "sha256": "41cec583bd293152ed615dbdbc8431239930a48e2d0ae08fe61adef5acfc7783"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-801b668c1c29105a.json",
+        "sha256": "e60fdc6b2249bf0a3252cbb0b9f5ee4224558edf74b0b15c16fd7f020f10b6fa"
+      },
+      "source": {
+        "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+        "license": "CC BY-SA 2.5",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+        "attribution": null,
+        "credit": "Self-photographed",
+        "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+        "width": 3264,
+        "height": 2448,
+        "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+        "shape": [
+          306,
+          408,
+          3
+        ],
+        "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+      }
+    },
+    {
+      "model": "V121",
+      "source_id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-e82d6dfea31b1720.png",
+        "sha256": "0e083fea58c546f6ccd9d9778d7c13c6bff9368c51a55d3be88be4b822e17917"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-e82d6dfea31b1720.json",
+        "sha256": "8b0f3b3772bd1617cb9e6054260329967fa7157a15338c339d111cbf49539dac"
+      },
+      "source": {
+        "title": "File:Kentucky Coffee-tree Gymnocladus dioicus 3264px.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+        "license": "CC BY-SA 2.5",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+        "attribution": null,
+        "credit": "Self-photographed",
+        "sha1": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "sha1_hex": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "download_path": "images/0a/e2/0ae232278265dabbdd54f52c34045a3d03323aa7.jpg",
+        "width": 3264,
+        "height": 2448,
+        "id": "0ae232278265dabbdd54f52c34045a3d03323aa7",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/0a/0ae232278265dabbdd54f52c34045a3d03323aa7.npy",
+        "shape": [
+          306,
+          408,
+          3
+        ],
+        "cache_sha256": "a2c1759485e1be5d43c88f439ff801da4a5f39e68953bcb966b66e813788e563"
+      }
+    },
+    {
+      "model": "V120",
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-881399e7a68af49a.png",
+        "sha256": "e2e24ebc42b0bc1a861576dab716fdeda9d09525d9098677bd611c4468977dc2"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-881399e7a68af49a.json",
+        "sha256": "93638471ab464752f31c03bba3ae0d63104da65d84cf5686eccef3b61b51c393"
+      },
+      "source": {
+        "title": "File:Racoon clinging to a tree.JPG",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Korall",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+        "width": 2592,
+        "height": 3888,
+        "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+        "shape": [
+          486,
+          324,
+          3
+        ],
+        "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+      }
+    },
+    {
+      "model": "V121",
+      "source_id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-52f8eac2aad5b961.png",
+        "sha256": "42426754de14709bafaca250939dc4fffd00bb8083eb97e56bda261bfc9bf95a"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v120-v121-primary-v1/crop-52f8eac2aad5b961.json",
+        "sha256": "801140d354f53ae53a43f211f93c0985f9923897a18ac3cb045d70be6355d79b"
+      },
+      "source": {
+        "title": "File:Racoon clinging to a tree.JPG",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Racoon_clinging_to_a_tree.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Korall",
+        "license": "CC BY 3.0",
+        "license_url": "https://creativecommons.org/licenses/by/3.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "sha1_hex": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "download_path": "images/2b/5a/2b5a51667b9906eecead8f82e08c7ba11750f8c6.jpg",
+        "width": 2592,
+        "height": 3888,
+        "id": "2b5a51667b9906eecead8f82e08c7ba11750f8c6",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/2b/2b5a51667b9906eecead8f82e08c7ba11750f8c6.npy",
+        "shape": [
+          486,
+          324,
+          3
+        ],
+        "cache_sha256": "a4f70f06dbfe2c044c3be5c85ab5047cb004b3378a980a7140bc3be71fab8a1f"
+      }
+    }
+  ],
+  "actual_native_viewing_complete_for_published_triplets": true,
+  "material_source_label_correction": "Older audits declared bark/forest canopy; new audit declares bark/raccoon fur. Earlier repair prose misnamed the second sources. Logical source IDs, checkpoint/context/target bindings and all PNG checks were correct; earlier machine receipts remain preserved unchanged.",
+  "GFX_conditioning_and_repair": {
+    "path": "/home/dllu/proj/demosaic/docs/results/endpoint-material-and-conditioning-repair-v1.json",
+    "sha256": "11e302cc8bf137449fb4902641ae875800d825f0b1265dc4054f075751b5ba43"
+  },
+  "remaining_review": "Four full matched numerical/local-detail contrasts and all-six-region native viewing are in progress; V121 fine green mesh pending; older Haar/new nominal GFX comparison is explicitly confounded and requires matching-profile full-frame followup. No overall real-photo superiority or speed claim.",
+  "new_neural_forwards": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "optimizer_updates": 0
+}

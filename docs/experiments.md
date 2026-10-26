@@ -1,9 +1,12 @@
 # Experiment index
 
-**V114 Tiny is the current general baseline in V84's architectural family.**
-Its full-photo mean is36.97973dB, +.07735 over V112, with422/427 source means
-rising. V115 fitted Small has higher known-camera quality and eight-pixel weak
-response, while Tiny has slightly higher photo PSNR and lower color bias.
+**V120 Small is the current general recommendation in V84's architectural family.**
+Its photo/known/unseen means are37.04008/54.31272/54.00872dB, with ADC maximum55.52DN16.
+[Completed primary/local/native results](v120-v121-primary.md) document the gains,
+remaining detail loss and explicit main-GFX profile-comparison limit.
+V114 remains a useful Tiny alternative; V115 has higher known-camera quality
+and V117 a slightly higher photo mean. In the earlier V114/V115 pair, Tiny has
+slightly higher photo PSNR and lower color bias.
 [Completed panels, native comparisons and full exports](v114-v115-quality.md).
 Fine foliage/neon and dark-camera mottling remain weak. [V116 has completed full review](v116-quality.md)
 to test fine weak sources and reviewed reference masks against matched V114;
@@ -25,10 +28,14 @@ the joint models' clearer detail than RawNIND on11 binned camera captures.
 The [V120/V121 follow-up](paired32-weak-detail-training.md) keeps V115 Small,
 restores corrected paired32 at V119's90791/six-region data, then tests the
 reviewed90787/fourteen-region intervention. CPU/CUDA checks pass for both;
-V120 completed20,000 updates and V121 is training. The
+V120/V121 completed20,000 updates and independent numerical audits. The
 [early V120 mesh review](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
-shows no clear lattice-recovery gain over V115/V119. Full numerical, main-scene
-and complete-frame comparisons remain pending; source-loss tracing is active.
+shows no clear lattice-recovery gain over V115/V119, and V121's mesh remains
+similarly weak. Saved/local-detail and selected native review is complete. The [report repair](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
+preserves material-pair differences and explicitly labels the older/new
+main-GFX noise profiles; matching-profile comparison remains required.
+[Completed primary means and native triplets](v120-v121-primary.md) show V120's
+camera/color recovery and V121's remaining ADC tail.
 
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias

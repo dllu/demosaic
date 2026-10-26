@@ -4,10 +4,16 @@ The **active14-region catalogue** preserves the original six training regions
 and adds eight existing photographs with inspected low-contrast material detail.
 It was used by **V121 on90,787 sources** and passes actual reader plus
 discarded16-update CPU/CUDA checks. V120/V121 completed20k; their primary
-predictions and independent audit are complete, with matched/native review
-awaiting a report-builder repair. V119/V120 retain six regions,
+predictions, independent audit, full local statistics and selected native review
+are complete. V119/V120 retain six regions,
 90,791 sources and the same5% conditional-photo ROI probability.
 [Matched training and queued review](paired32-weak-detail-training.md).
+
+The [completed V121 comparison](v120-v121-primary.md) has a+.00149dB photo change
+from V120 (paired-source95% interval[−.00080,+.00401]), a tiny weak-detail gain
+change and no clear fine-mesh recovery gain. A large ADC outlier remains. This
+combined cleanup/fourteen-region intervention has not solved weak-detail loss;
+the prepared20-region option below has not been trained.
 
 A [90,786-source snapshot](current-source-loss-review.md) removes one
 separately inspected nonphotographic advertisement while preserving all fourteen

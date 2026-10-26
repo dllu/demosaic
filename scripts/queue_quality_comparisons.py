@@ -11,7 +11,7 @@ from pathlib import Path
 import psutil
 from audit_quality_archive import binding, write
 from compare_quality_archives import compare, read_bound
-from compare_quality_crops import gfx_comparison, photo_comparison
+from compare_quality_crops import gfx_comparison, matched_material_stage, photo_comparison
 from diagnose_archive_local_detail import analyze
 from queue_quality_archive_audit import guard, live, read
 from verify_rgb16_exports import verify_exports
@@ -52,7 +52,9 @@ def endpoint_checkpoints(evaluation, arms):
     return {r["arm"]: {k: r[k] for k in ("path", "sha256")} for r in records}
 
 
-def prepare(root, audit_plan, references, arms, contrasts):
+def prepare(
+    root, audit_plan, references, arms, contrasts, *, allow_gfx_conditioning_difference=False
+):
     root, audit_plan = root.resolve(), audit_plan.resolve()
     if not root.is_relative_to(REPO / ".cache"):
         raise ValueError("Comparison queues belong in the repository cache")
@@ -60,10 +62,12 @@ def prepare(root, audit_plan, references, arms, contrasts):
     guard(audit)
     state_path = Path(audit["root"]) / "status.json"
     state = read(state_path)
-    if state["plan"] != binding(audit_plan) or not live(state["owner"]):
-        raise ValueError("Expected the original live independent audit queue")
+    if state["plan"] != binding(audit_plan):
+        raise ValueError("Independent audit plan differs")
     if state["status"].startswith("failed"):
         raise ValueError("Cannot queue comparisons from a failed audit")
+    if not live(state["owner"]):
+        audit_ready(state, {"owner": state["owner"], "plan": binding(audit_plan)})
     arms = list(arms)
     available = set(references) | set(arms)
     if not arms or len(set(arms)) != len(arms) or not contrasts:
@@ -115,6 +119,7 @@ def prepare(root, audit_plan, references, arms, contrasts):
         "new_arms": arms,
         "references": references,
         "contrasts": contrasts,
+        "allow_gfx_conditioning_difference": allow_gfx_conditioning_difference,
         "expected_observations": EXPECTED,
         "maximum_wait_seconds": 345600,
         "planned_linear_RGB16_values": 460800 * len(arms),
@@ -122,7 +127,7 @@ def prepare(root, audit_plan, references, arms, contrasts):
         "minimum_free_output_GiB": 4,
         "inputs": inputs,
         "frozen_files": {str(p): binding(p)["sha256"] for p in work.rglob("*") if p.is_file()},
-        "scope": "Retained arrays only: complete matched primary/analytic contrasts, 427-source local detail, two native synthetic-GT material triplets and all six standing GFX regions per contrast, all declared endpoint RGB16 exports. No Torch/model calls/noise/RAW. Actual native viewing and fine green mesh remain separate; no retry or model promotion.",
+        "scope": "Retained arrays only: complete matched primary/analytic contrasts, 427-source local detail, two native synthetic-GT material triplets and all six standing GFX regions per contrast, all declared endpoint RGB16 exports. Any explicitly allowed GFX conditioning difference is labeled on the boards and recorded separately; it cannot establish a model-only effect and requires later matching-profile comparison. Shared RAW/reference pixels, ROI and display must still match. No Torch/model calls/noise/RAW. Actual native viewing and fine green mesh remain separate; no retry or model promotion.",
     }
     write(root / "queue-plan-v1.json", plan)
     guard(plan)
@@ -223,7 +228,11 @@ def controller(path):
                 raise ValueError("Numerical contrast support differs")
             labels = (left + " retained", right)
             materials = photo_comparison(
-                read_bound(statistics["stages"]["photo"]), directory, labels=labels
+                matched_material_stage(
+                    read_bound(statistics["stages"]["photo"]), directory / "matched-material-inputs"
+                ),
+                directory,
+                labels=labels,
             )
             gfx = gfx_comparison(
                 old_boundary["stage_results"]["full-gfx"]["path"],
@@ -232,6 +241,7 @@ def controller(path):
                 new_sha,
                 directory,
                 labels=labels,
+                allow_conditioning_difference=plan.get("allow_gfx_conditioning_difference", False),
             )
             photo = [
                 read_bound(read_bound(a)["stages"]["photo"])
@@ -285,6 +295,11 @@ def controller(path):
                 "checkpoints": checkpoints,
                 "references": plan["references"],
                 "contrasts": contrasts,
+                "GFX_conditioning_differences": [
+                    label
+                    for label, values in contrasts.items()
+                    if not values["gfx"]["conditioning_matched"]
+                ],
                 "RGB16_export_verification": exports,
                 "new_neural_forwards": 0,
                 "new_encoder_forwards": 0,
@@ -315,6 +330,13 @@ if __name__ == "__main__":
         spec = json.loads(args.specification.read_text())
         print(
             prepare(
-                args.path, args.audit_plan, spec["references"], spec["new_arms"], spec["contrasts"]
+                args.path,
+                args.audit_plan,
+                spec["references"],
+                spec["new_arms"],
+                spec["contrasts"],
+                allow_gfx_conditioning_difference=spec.get(
+                    "allow_gfx_conditioning_difference", False
+                ),
             )
         )

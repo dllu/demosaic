@@ -6,7 +6,7 @@ updates. Zero, the default, adds no source metadata or diagnostic computation.
 This option has not been enabled retroactively in the frozen V119 run.
 Both new arms passed actual16-update CPU/CUDA checks. Their source diagnostics
 forbid neural Module calls and verify unchanged Python/NumPy/Torch CPU/CUDA RNG
-states; V120 completed20k and V121 production is now running.
+states; both V120/V121 production runs completed20k and independent numerical audits.
 [Current controlled trials and launch evidence](paired32-weak-detail-training.md).
 
 The [current Small-model source review](current-source-loss-review.md) has three

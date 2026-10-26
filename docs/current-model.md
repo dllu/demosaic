@@ -1,14 +1,22 @@
 # Current model choices
 
-**V114 Tiny is the general restoration and quality-training baseline.**
-Its full-photo mean is36.97973dB, +.07735 over V112, with422/427 photo-source
+**V120 Small is the current general restoration and quality-development recommendation.**
+Its primary panels, native synthetic triplets, full local statistics and selected
+native review are complete. Photo37.04008dB and known/unseen54.31272/54.00872dB
+coexist with a much lower tested ADC maximum than V119:55.52DN16.
+Matching-profile full-frame comparison against older models remains open.
+[V120/V121 measured gains and remaining limits](v120-v121-primary.md).
+Quality development uses the Small architecture; active V122/V123 keep their
+fixed V115 parent for the controlled frequency-scope comparison.
+V114's full-photo mean is36.97973dB, +.07735 over V112, with422/427 photo-source
 means improving. Complete primary/analytic panels, independent saved-output
 metrics, native review and102MP RGB16 exports are verified.
 [Full Tiny/Small comparison](v114-v115-quality.md).
 
 | Use | Current choice and tradeoff |
 | --- | --- |
-| General RAW and further quality work | **V114 Tiny**: photo36.97973dB; known/unseen CFA54.28627/54.00290dB; ADC mean/max bias7.08/51.73DN16 |
+| General RAW and quality development | **[V120 Small](v120-v121-primary.md)**: photo37.04008dB; known/unseen54.31272/54.00872dB; ADC maximum55.52DN16; recovers V119 camera/color regressions. Remaining mesh softness and GFX profile-comparison limits are explicit |
+| Fully reviewed Tiny alternative / lower tested ADC maximum | **V114 Tiny**: photo36.97973dB; known/unseen CFA54.28627/54.00290dB; ADC mean/max bias7.08/51.73DN16 |
 | Higher single-view photo score | **[V117 Tiny](v117-v118-quality.md)**: photo37.04408dB, +.06435 over V114; camera54.27303/53.97339dB and ADC max63.89DN16; remaining fine-detail softness |
 | Higher measured known-camera mean / eight-pixel weak response | **V115 fitted Small**: photo36.97700dB; camera54.32405/54.00417dB; ADC max65.64DN16 and high-noise max106.79 versus Tiny85.40 |
 | Optional eight-view V114 inference | [Fixed24 pilot](v114-eight-view.md): all12 material cases and both selected adverse camera crops improve; selected color bias rises slightly while spatial variation falls. Real fine detail remains soft; full panels/frame unmeasured; eight evaluations per tile |
@@ -16,10 +24,11 @@ metrics, native review and102MP RGB16 exports are verified.
 | Earlier full-panel eight-view option | [V104 dihedral8](dihedral-quality.md): photo37.04376dB, camera54.33283/53.99412dB; worse ADC maximum420.90DN16 and unresolved fine detail; eight evaluations per tile |
 | Explicit ADC observed-sample fidelity | [V114 sites export](adc-consistency.md): ADC photo 37.78013→38.01575dB across 427 sources; worst color bias 51.73→37.82 DN16, with higher flat-field spatial RMS; positive-noise profiles bypass it |
 
-Small has4/4 known-camera scene means above Tiny and a slightly higher unseen
-mean, with3/5 scenes rising. Tiny has slightly higher photo PSNR and lower color
-bias. Both improve over V112. This selects a useful general balance without
-hiding Small's gains or applying an old study-specific promotion threshold.
+In the earlier controlled comparison, V115 Small has4/4 known-camera scene means
+above V114 Tiny and a slightly higher unseen mean, with3/5 scenes rising. V114
+has slightly higher photo PSNR and lower color bias in that pair. Both improve
+over V112. The newer V120 continuation supplies the measured general balance
+above without applying a study-specific promotion threshold.
 
 The [V114 eight-view pilot](v114-eight-view.md) is complete on the same24 saved
 inputs as V112. Material gains average+.55750/.26416/.07938dB at ADC/ISO100/
@@ -37,18 +46,27 @@ does not change the general photo/color baseline choice.
 ## Run the current model
 
 [Explicit selection](../configs/current-model.json):
-`/mnt/external/demosaic/models/v114-final20000.pt`, SHA256
-`2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2`.
+`/mnt/external/demosaic/models/v120-final20000.pt`, SHA256
+`a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb`.
 The architecture retains V84's pretrained DRUNet RGB trunk, physical
-noise/camera conditioning and official frozen DINOv3 ConvNeXt-Tiny pyramid.
+noise/camera conditioning and official frozen DINOv3 ConvNeXt-Small pyramid.
 [Inference and linear DNG/JPEG usage](usage.md).
 
 The useful V117 photo-score option is
 `/mnt/external/demosaic/models/v117-final20000.pt`, SHA256
 `f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0`.
 Its modest photo and weak-carrier gains coexist with lower camera means and
-higher ADC bias. Choosing V114 for camera/color balance does not hide V117's
-progress or impose a study-specific promotion gate.
+higher ADC bias. The current V120 recommendation keeps V117 available for its
+higher photo mean and V114 for its lower tested ADC maximum.
+
+The V114 Tiny alternative remains available at
+`/mnt/external/demosaic/models/v114-final20000.pt`, SHA256
+`2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2`.
+[Verified immutable endpoint aliases](results/v120-v121-endpoint-aliases-v1.json)
+also preserve V121 for reproducible comparison. The
+[selection change](results/current-model-v120-selection-v1.json) preserves the
+previous selector and plot bytes. All five active plans pass their binding guards
+before and after the change; their fixed V115 parents and inputs stay unchanged.
 
 The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) now compares both
 current models with V104 and both released RawNIND variants on the same cached
@@ -84,9 +102,12 @@ high-ISO superiority.
 The [V120/V121 follow-up](paired32-weak-detail-training.md) keeps the V115 Small
 architecture, tests corrected paired32 against V119's expansion, then tests the
 reviewed90787-source/fourteen-region intervention at a matched20k budget.
-All four discarded CPU/CUDA checks pass; V120 production is running and V121
-is queued sequentially. Both trace per-source losses from existing predictions.
-No new endpoint quality is established yet.
+Both original20k runs and independent numerical audits are complete. V120 keeps
+V119's photo score with a+.21209dB known-camera recovery and much lower tested
+ADC maximum. V121's small photo/known changes coexist with lower unseen mean
+and a large ADC tail. [Two native exact-GT triplets per model](v120-v121-primary.md)
+are published; full local statistics and selected native review are complete. Older Haar/new nominal
+GFX conditioning is labeled, with matching-profile comparison still required.
 
 ## Quality and remaining work
 

@@ -1,16 +1,24 @@
 # V120/V121: paired-data control and weak photographic targets
 
-**V120 completed its original 20,000 updates; V121 is now training from V115 Small.** Both passed
+**V120 and V121 completed their original20,000 updates from V115 Small.** Both passed
 discarded16-update CPU and CUDA checks. This follows V119's photographic gain,
 known-camera regression and large ADC color tail. The paired-set control tests
 whether restoring the corrected32-ID set helps the overall balance. The second
 arm tests the prepared cleaner corpus and expanded weak-detail material bank.
 The [early V120 mesh review](gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
 shows no clear fine-lattice recovery gain over V115/V119 under either fixed
-profile. Full numerical, main-scene and complete-frame comparisons are pending.
+profile. Endpoint predictions, the full numerical audit and RGB16 checks are
+complete, as are four saved/local-detail contrasts and selected native viewing.
+The [report repair](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
+preserves differing material selections and explicitly labels the older/new
+main-GFX conditioning difference. A matching-profile full-frame comparison
+remains required for isolating a model-only gain over older outputs.
+[Completed primary scores and two native exact-GT triplets per model](v120-v121-primary.md)
+document V120's recovered camera/color balance and V121's remaining ADC outlier.
 
 [Completed V120 training accounting](results/v120-training-complete-v1.json) ·
 [Independent saved-state verification](results/v120-training-complete-verification-v1.json).
+[Completed V121 training accounting](results/v121-training-complete-v1.json).
 The completed checkpoint is finite, with91 model/EMA tensors and89 AdamW
 states at step20,000. Its encoder identity, original domain counts and lineage
 verify. No extra inference or update was added by this completion check.
@@ -23,7 +31,7 @@ verify. No extra inference or update was added by this completion check.
 
 ## Controlled differences
 
-| Setting | V119, completed | V120, completed training | V121, running |
+| Setting | V119, completed | V120, completed training | V121, completed training |
 | --- | --- | --- | --- |
 | Initializer | Final V115 Small EMA | Same weights, immutable copy | Same weights, immutable copy |
 | Commons sources |90,791 |90,791 |90,787 |

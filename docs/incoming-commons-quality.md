@@ -26,10 +26,10 @@ not automatic labels or proven model-quality gains.
 | --- | ---: | --- |
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
-| Completed-model cohort | **90,864** | V114 is the general baseline; V115/V117 have useful camera/photo tradeoffs; their complete reviews retain this corpus |
+| Completed earlier-model cohort | **90,864** | V114/V115/V117 have useful Tiny/camera/photo tradeoffs; their complete reviews retain this corpus; current V120 uses90791 below |
 | V119 training cohort | **90,791** | [Complete V119 review](v119-quality.md): +.06131dB photo over V115, −.22342dB known-camera, large ADC color tail; no clear fine-mesh gain |
-| V120 paired32 control | **90,791** | [Original20k training complete](paired32-weak-detail-training.md), saved state independently verified; endpoint quality pending |
-| V121 reviewed weak-detail arm | **90,787** | [Full run active](paired32-weak-detail-training.md) after CPU/CUDA checks; four further withholds and fourteen reviewed regions; quality pending |
+| V120 paired32 control | **90,791** | [Primary/native review](v120-v121-primary.md): photo37.04008, known/unseen54.31272/54.00872dB, ADC maximum55.52DN16; main-GFX profile limits explicit |
+| V121 reviewed weak-detail arm | **90,787** | [Primary/native review](v120-v121-primary.md): photo37.04157dB; small local-detail change and no clear mesh gain; large ADC outlier remains |
 | V122/V123 frequency-feature cohort | **90,786** | [One nonphotographic graphic removed](current-source-loss-review.md); all14 regions retained; [full-budget scope trials](learned-raw-frequency-training.md) started, with GPU coordination; quality pending |
 | Prepared next photographic cohort | **90,784** | [Two further source-specific withholds](current-source-loss-review.md), [optional20-region bank](weak-photographic-targets.md); actual reader verified; untrained and not selected by active runs |
 
@@ -66,7 +66,7 @@ The [V114 Tiny / V115 fitted Small continuations](small-aligned-training.md)
 use seed63 and this same corpus, six ROIs, zero optical blur and existing
 contrast/detail recipe. Their actual CPU/CUDA checks and both original
 20,000-update runs and [complete quality review](v114-v115-quality.md) finished;
-V114 is now the general baseline. No new frequency-profile option changes these
+The later V120 is now the general recommendation. No new frequency-profile option changes these
 frozen recipes.
 
 A separate [paired-reference review](paired-reference-quality.md) inspects all

@@ -1,10 +1,16 @@
 # Current quality training
 
-**V120 is training from V115 Small, with V121 queued after it.** Both passed
-discarded16-update CPU/CUDA checks. V120 tests corrected paired32 with V119's
-90791 Commons/six-region reader; V121 tests the reviewed90787-source/fourteen-
-region intervention with the same paired32 set. Detached source-loss tracing is
-enabled in both. [Controlled differences, checks and queued endpoint review](paired32-weak-detail-training.md).
+**V122 is training its learned frequency input adapter; V123 follows with joint
+adaptation.** Both retain their fixed V115 Small parent and90786/fourteen-region
+cohort for the controlled scope comparison. The GPU coordinator resumed V122's
+same worker after V120/V121 completed, preserving its in-memory state.
+[Current training, checks and queued review](learned-raw-frequency-training.md).
+
+V120/V121 completed their original20k runs, independent audits and selected
+native review. **V120 is the current general recommendation**: it retains V119's
+photo score while recovering camera/color balance. V121's cleaner90787/fourteen-
+region intervention has a small photo change, no clear mesh gain and a large
+ADC tail. [Completed results](v120-v121-primary.md).
 
 V119 completed a full 20,000-update continuation from **V115 Small** on the
 cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA
@@ -25,6 +31,8 @@ Their complete panels, native crops and RGB16 checks are published.
 
 | Model | Architecture | Full-photo PSNR | Known / unseen measured-CFA PSNR | Useful strength and remaining weakness |
 | --- | --- | ---: | ---: | --- |
+| V120 | DINOv3 ConvNeXt-Small + DRUNet, corrected paired32 continuation | 37.04008 dB | 54.31272 / 54.00872 dB | Current balanced recommendation, ADC maximum55.52DN16; unresolved fine mesh and explicit GFX profile limits |
+| V121 | Same Small, cleaner90787/fourteen-region continuation | 37.04157 dB | 54.32184 / 53.98947 dB | Tiny photo change; ADC maximum1645.36DN16 and no clear fine-mesh gain |
 | V114 | Frozen DINOv3 ConvNeXt-Tiny + pretrained DRUNet RGB trunk | 36.97973 dB | 54.28627 / 54.00290 dB | General camera/color balance; faint foliage and neon remain soft |
 | V115 | Fitted DINOv3 ConvNeXt-Small + the same restoration family | 36.97700 dB | 54.32405 / 54.00417 dB | Stronger known-camera mean and eight-pixel weak response; higher tested color bias |
 | V117 | V114 architecture, further 20k continuation | 37.04408 dB | 54.27303 / 53.97339 dB | Higher photo score, 421/427 source means up; slight camera regressions |
@@ -33,9 +41,9 @@ Their complete panels, native crops and RGB16 checks are published.
 [Current selection and inference](current-model.md) ·
 [Tiny/Small comparison](v114-v115-quality.md) ·
 [V117 and the negative V118 band-loss result](v117-v118-quality.md).
-V115 is the architectural parent for the completed V119 trial. Choosing V114 as the
-current general inference option does not freeze the training architecture or
-hide the useful Small and V117 gains. Study-specific promotion/significance
+V115 is the fixed parent for completed V119–V121 and active V122/V123 trials.
+The current V120 inference recommendation leaves those original comparisons
+unchanged. Useful Small/V117/V114 tradeoffs remain explicit. Study-specific promotion/significance
 criteria do not replace direct comparison of overall metrics and actual images.
 
 Broad weak natural-detail response is nearly unchanged between Tiny and Small

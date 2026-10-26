@@ -1,6 +1,9 @@
 # GFX100S qualitative comparisons
 
-**V114 Tiny is the current general baseline; V115 Small is a useful alternative.**
+**V120 Small is the current general recommendation.** Its
+[new V120/V121 nominal-profile comparisons](v120-v121-primary.md#completed-local-and-native-review)
+show all six standing regions with their remaining detail loss. The older
+matched Haar-profile V114 Tiny/V115 Small boards below remain useful alternatives.
 Both have complete101.996MP FP32 blended outputs and verified linear/sRGB RGB16
 exports. These new boards compare all six fixed regions at native160 pixels,
 with shared +2EV/WB/matrix and no resizing. Rows: noisy, Tiny, Small, separate
@@ -23,6 +26,16 @@ inference/blending observations are116.57s/101.66s; different warmup/workspace
 states prevent a speed ranking. Quality remains the priority before speed work.
 
 ## Additional fine green mesh case
+
+V120/V121 now have completed nominal-profile full-frame outputs, independently
+audited primary panels and actually viewed saved comparisons. Their
+[matched nominal-profile six-region boards](v120-v121-primary.md#completed-local-and-native-review)
+show coherent larger fence/building edges but soft foliage/neon detail, with
+no clear large V121 real-detail gain.
+Older main-scene outputs use the input-Haar profile; the new ones fall back to
+the nominal ISO prior. [Explicit profile labels and remaining comparison limits](endpoint-quality-review.md#material-selection-and-gfx-conditioning)
+preserve this distinction. Shared RAW/reference pixels and display remain the
+same; a pipeline difference alone cannot establish a model-only quality gain.
 
 The [DSCF3842/DSCF3835 comparison](gfx-green-mesh.md) adds the fine green
 chain-link fence beside the red train's cab, with both straight-out-of-camera
@@ -47,7 +60,9 @@ adds the corrected-paired32 continuation after20k updates. At either fixed
 profile it shows no clear fine-lattice recovery gain over V115 or V119; the blue
 point and substantial mesh loss remain. Two native triplets and both matched
 three-model boards are published. V120's broader numerical and complete-frame
-comparisons are pending. The [complete V119 quality review](v119-quality.md)
+comparisons are complete with their profile limits. The
+[completed V121 mesh review](gfx-green-mesh.md#v121-after-adding-the-fourteen-region-bank)
+also shows no clear gain at either matched profile. The [complete V119 quality review](v119-quality.md)
 now documents its photo gains and camera/color regressions.
 
 A [saved-array green-phase diagnostic](green-phase-spectrum.md) finds matching
@@ -135,7 +150,8 @@ Both preserve coherent fence/building structure and a smooth sky. Foliage stays
 waxy and neon/platform detail soft; no clear visual improvement appears here.
 V116's analytic eight-pixel carrier gain rises, but full-photo/unseen-CFA means
 are slightly lower, broad weak natural-detail gain is unchanged and the ADC
-color tail is worse. V114 remains the general choice for that measured balance.
+color tail is worse. V114 has the better balance within that comparison; the
+current general recommendation is the later V120 Small continuation.
 ISO100 remains **approximate, not GT**. [Source/ROI/noise/weights/display receipts](images/v116-quality/manifest.json).
 Both V116 TIFFs and all six retained native ROIs pass RGB16 checks. Its113.86s
 FP32 interval is a separate timing observation, not a controlled speed gain.

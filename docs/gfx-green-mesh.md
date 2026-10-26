@@ -18,9 +18,9 @@ The existing DSCF3879/3880 standing scene and its six regions remain in use.
 
 The [V120–V123 endpoint review queues](endpoint-quality-review.md) include both
 fixed noise profiles and both native160 regions, reusing saved controls.
-V120's mesh review is complete below. Its two saved predictions are adopted by
-the later V120/V121 report; V121–V123 mesh predictions and full numerical
-comparisons remain pending.
+V120/V121 mesh review is complete below, with no clear V121 lattice-recovery
+gain. V120's two saved predictions were adopted without rerunning it. V122/V123
+mesh predictions remain pending.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
@@ -72,6 +72,34 @@ these V120 predictions and runs only V121's two new mesh forwards.
 [Source/ROI/checkpoint/noise/display metadata](images/v120-green-mesh-v1/manifest.json) ·
 [Execution, actual viewing, pixel verification and queue adoption](results/v120-green-mesh-v1.json) ·
 [Completed training evidence](paired32-weak-detail-training.md).
+
+## V121 after adding the fourteen-region bank
+
+**V121 shows no clear fine-lattice recovery gain over V120 at either matched
+profile.** Its original20k run uses the cleaner90787-source/fourteen-region
+cohort at the same5% conditional-photo ROI quota. Nominal conditioning still
+largely erases the mesh. The nearby profile exposes more diagonals, but fine
+structure remains weak, soft and irregular; the left blue point persists.
+This specific material-bank intervention has not solved the adverse capture.
+
+V121 checkpoint SHA256:
+`40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077`.
+Two new CPU-FP32 root/encoder forwards completed, once per fixed profile.
+Both V120 predictions and all five selected old controls were reused. There was
+no new RAW/noise/optimizer work. Input, source, ROI and display are the same as
+V120 above. Both ISO100 columns remain **independent references, not exact GT**.
+
+![V121 left mesh at nominal and nearby conditioning, native160 and shared+4EV](images/v120-v121-review-v1/V121-fine-green-mesh-left-4EV.png)
+
+![V121 right mesh under the same fixed operators and display](images/v120-v121-review-v1/V121-fine-green-mesh-right-4EV.png)
+
+[Left native noisy/V121/independent-reference triplet](images/v120-v121-review-v1/V121-fine-green-mesh-left-triplet.png) ·
+[Right triplet](images/v120-v121-review-v1/V121-fine-green-mesh-right-triplet.png) ·
+[Source/ROI/checkpoint/conditioning/display metadata](images/v120-v121-review-v1/manifest.json) ·
+[Completed review and independent native-pixel checks](results/v120-v121-native-review-v1.json).
+Independent NumPy64 arithmetic matches921,598 of921,600 V121 board channels
+exactly; two differ by one DN8 at FP32 rendering boundaries. Published PNGs
+are byte-identical to the actually viewed outputs.
 
 ## V119 after cleaned-data training
 
