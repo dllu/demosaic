@@ -15,10 +15,12 @@ worst ADC bias to843.05DN16. All numerical/native/full-frame review is complete;
 the term stays off for further quality work.
 The [V119 trial](cleaned-diverse-small-training.md) continued from
 final V115 Small on90,791 cleaned Commons sources and the corrected83-ID paired
-set with the original camera proportions. Both discarded16-step checks pass;
-the original full20k run is complete and its quality/native reviews are running
-or queued. The additional fine-mesh review finds no clear gain over V115 at the
-same conditioning; full-panel results remain pending.
+set with the original camera proportions. Its [complete review](v119-quality.md)
+finds a+.06131dB photographic gain over V115, −.22342dB known-camera change,
+and a large ADC color tail. Weak natural detail and real fine mesh remain soft.
+All endpoint, independent, native and full-output checks are complete. The
+[native development comparison](native-camera-development.md) also documents
+the joint models' clearer detail than RawNIND on11 binned camera captures.
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain

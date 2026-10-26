@@ -3,15 +3,20 @@
 A supplementary development set has **20 fixed 256px regions from 11 CC0
 captures**, with 240 shared synthetic-noise observations. It starts from
 phase-aligned, low-ISO camera RGB rather than processed Commons RGB. Source WB
-and color matrices remain attached to each region. **The five-method comparison
-is queued behind V119's original job chain; predictions and quality results
-are pending.**
+and color matrices remain attached to each region. **All five methods, CPU
+metrics and actual native review are complete.** Our joint models preserve
+much finer texture than released RawNIND on these binned inputs with added
+noise. V119 improves slightly over V115; V117 retains higher condition means.
 [Selection and protocol](../configs/native-camera-development-v1.json) ·
 [Preparation and actual readback evidence](results/native-camera-development-inputs-v1.json) ·
-[Queued comparison and preflight](results/native-camera-development-queue-v1.json).
+[Original queue and preflight](results/native-camera-development-queue-v1.json) ·
+[Completed metrics, recovery and native review](results/native-camera-development-comparison-complete-v1.json).
+[Independent publication checks](results/v119-quality-publication-verification-v1.json)
+verify all420 board cells against retained inputs/predictions and all ten
+triplets against those cells:32,256,000 channel values, exactly.
 
 The source references are **low-noise estimates, not exact noiseless GT**.
-They retain reduced source noise and optical blur. Future scores describe
+They retain reduced source noise and optical blur. Scores describe
 recovery of these fixed binned references under added noise. The full photo,
 measured-camera and standing GFX comparisons continue to provide their own
 quality evidence; this supplementary test does not replace them.
@@ -123,50 +128,81 @@ Sources: per-file CC0 grants from the [RAW source catalogue](https://raw.pixls.u
 with original URLs and metadata checksums in the selection. Modified by
 phase-aligned binning, cropping and the shared display transform.
 
-## Queued comparison
+## Completed comparison
 
-The [queue](../scripts/queue_native_camera_development.py) waits for the original
-V119 training, all eight endpoint stages, independent CPU audit and three
-saved-output contrasts to finish and release their exact process owners. It
-then resolves the completed, immutable final 20,000-step V119 checkpoint from
-those receipts. It does not read the live intermediate checkpoint.
+| Method | ADC camera RGB / sRGB | ISO100 camera RGB / sRGB | ISO12800 camera RGB / sRGB |
+| --- | ---: | ---: | ---: |
+| V114 | 49.929 / 38.634 | 49.731 / 38.769 | 41.828 / 33.088 |
+| V115 | 49.912 / 38.614 | 49.726 / 38.761 | 41.827 / 33.084 |
+| **V117** | **50.027 / 38.716** | **49.783 / 38.816** | **41.841 / 33.102** |
+| V119 | 50.001 / 38.695 | 49.773 / 38.804 | 41.836 / 33.093 |
+| RawNIND preupsample | 39.107 / 30.447 | 39.091 / 30.434 | 38.139 / 29.749 |
 
-The useful V114/V115/V117 options and the released RawNIND preupsample model
-share all 240 stored observations with V119. These are **first predictions on
-new inputs**: 1,200 declared model calls, including 960 frozen DINO encoder
-calls and 240 RawNIND network calls. Existing controls on the full photo/camera
-panels continue to reuse saved predictions. RawNIND uses the existing CFA-channel
-gain adapter without target fitting, input clipping or additional input scaling.
+PSNR is in dB. The80 observations per method/condition average within capture,
+then give each of11 captures equal weight. All1200 predictions share the same
+stored noisy inputs and low-noise reference estimates. These are neither exact
+noiseless GT nor real high-ISO captures. Small differences between joint models
+should be considered alongside the larger full-photo/measured-camera panels.
+[Complete per-case/source metrics and bootstrap intervals](results/native-camera-development-comparison-complete-v1.json).
 
-The [collector and CPU analysis](../scripts/evaluate_native_camera_development.py)
-retain native FP32 predictions, exact reference arrays, actual input fingerprints,
-checkpoint/encoder identity and call counts. Camera RGB PSNR, rendered sRGB PSNR,
-chroma and gradient errors average CFAs/regions within capture before giving each
-capture equal weight. Matched V119 comparisons include capture bootstrap intervals;
-they do not capture training-seed uncertainty or unknown place relationships.
-Reference-only local DCT bands describe low-contrast reference recovery and may
-include residual reference noise.
+V119's camera-RGB gains over V115 are+.08889/.04624/.00958dB at ADC/ISO100/
+ISO12800. It stays below V117 on each condition mean. Its high-noise gain over
+RawNIND is+3.69779dB; that substantial result applies to these11 binned sources
+and declared added-noise priors, without establishing broad real-camera
+superiority. RawNIND uses its genuine released preupsample32 checkpoint and the
+existing CFA-channel adapter, with no target fitting, input clipping or extra
+input scaling. Checkpoint SHA256 is
+`3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814`.
 
-Ten unchanged 160px noisy/denoised/reference triplets cover grass/root and
-weathered wood for all five methods. Twelve native comparison boards show all
-20 regions at each noise condition, with identical coordinates, WB/matrix and
-exposure across methods. No pixels are resized. Actual native viewing and
-interpretation follow these outputs; no model recommendation changes merely
-because a queued job finishes.
+## Native comparisons
 
-The frozen preflight passes closed-form camera/sRGB PSNR and unequal-coverage
-source weighting. It rejects a live V119 endpoint, changed process identity or
-changed plan before resolving any checkpoint. Source compilation and CPU imports
-pass without Torch; no new model inference, noise generation or RAW decoding has
-occurred at the recorded launch. The controller is idle while training continues.
-The bounded worker keeps the existing 48/24GiB available-RAM floors, 24GiB CUDA
-quota and 128/96GiB internal disk floors, preserving failures without automatic
-retry. Useful completed progress continues to update current guides as full
-results and native review become available.
+All12 boards were actually viewed:20 contexts at each of three conditions,
+with420 unchanged160px cells across noisy/five methods/reference. Grass,
+weathered-rail grain, mortar joints, fine branches and lettering are substantially
+clearer in the joint models than RawNIND. High-noise grass/foliage remain soft,
+and differences between our versions are subtle. The reference can contain
+residual source noise/optical blur. A higher reference-band response alone does
+not establish better scene detail.
 
-The [archive-layout check](results/native-camera-development-output-layout-v1.json)
-places the queued archive under `work/artifacts/archive`, reached through the
-controller's existing `archive` path. The actual frozen safety module accepts
-that destination. This was set up before any predictions or endpoint resolution;
-the waiting controller, its 67 frozen source bindings and original plan remain
-unchanged.
+Native noisy → V119 → low-noise reference estimate, ISO12800 prior:
+
+![GFX50S II grass and roots, V119 and reference estimate](images/native-camera-development-comparison-v1/V119-pixls-5002-fine-native-triplet.png)
+
+![Leica SL weathered rail, V119 and reference estimate](images/native-camera-development-comparison-v1/V119-pixls-1951-field-native-triplet.png)
+
+Same inputs and display, released RawNIND:
+
+![GFX50S II grass and roots, RawNIND and reference estimate](images/native-camera-development-comparison-v1/RawNIND-preup-pixls-5002-fine-native-triplet.png)
+
+![Leica SL weathered rail, RawNIND and reference estimate](images/native-camera-development-comparison-v1/RawNIND-preup-pixls-1951-field-native-triplet.png)
+
+All cells are native160 at8×-binned reference resolution, RGGB, context256,
+ROI[48,48,160,160], shot.00256/read2.62144e−5. Each source uses its recorded
+WB/matrix/exposure identically across methods; no pixels are resized.
+[Full source/ROI/checkpoint/display metadata and all12 boards](images/native-camera-development-comparison-v1/manifest.json) ·
+[Grass/mortar/foliage high-noise board](images/native-camera-development-comparison-v1/all-native-iso12800-prior-1.png) ·
+[Wood/woodland](images/native-camera-development-comparison-v1/all-native-iso12800-prior-2.png) ·
+[Masonry/pond](images/native-camera-development-comparison-v1/all-native-iso12800-prior-3.png) ·
+[Tea/trees/lettering](images/native-camera-development-comparison-v1/all-native-iso12800-prior-4.png).
+Sources are the per-file CC0 captures listed above, modified by phase-aligned
+binning, cropping, simulated noise and restoration.
+
+## Preserved failure and recovery
+
+The original collector saved all960 V114/V115/V117/V119 predictions, then
+stopped before any RawNIND forward: its expected wrapper hash was compared with
+the bare UtNet2 network hash. A CPU identity check verifies all46 network tensors
+exactly against the genuine checkpoint. The wrapper prefixes state keys with
+`network.`, giving a different hash despite identical network tensor values.
+The fix checks the intended wrapper state; integrity checks remain enforced.
+
+Recovery uses a separate frozen workspace and archive. It verifies original
+input, target, checkpoint and saved-prediction bindings, reuses all960 completed
+joint outputs, and runs only the240 missing RawNIND cases. Original failed
+sources, logs, receipts and arrays remain unchanged. New per-method receipts
+are written before final collection assembly. Nineteen focused recovery/archive
+tests pass, including refusal of changed observations or prior reference calls.
+No new training, noise draw or RAW decode occurs. NumPy analysis and publication
+add zero neural calls. The original job-chain and
+[archive-layout evidence](results/native-camera-development-output-layout-v1.json)
+remain historical receipts rather than live queue status.

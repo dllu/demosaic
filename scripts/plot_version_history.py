@@ -100,6 +100,7 @@ STUDIES = [
     ("v114-v115-quality-complete-v1.json", [114, 115], "v114-v115-quality.md"),
     ("v116-quality-complete-v1.json", [116], "v116-quality.md"),
     ("v117-v118-quality-complete-v1.json", [117, 118], "v117-v118-quality.md"),
+    ("v119-quality-complete-v1.json", [119], "v119-quality.md"),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -296,7 +297,7 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-current.json"
+    destination = REPO / "docs/results/version-PSNR-history-v119-current-v1.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():

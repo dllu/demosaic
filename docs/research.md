@@ -35,6 +35,15 @@ DN16. Its eight-pixel analytic gain is documented alongside those weaknesses.
 Complete independent metrics, native/GFX views and full RGB16 checks support
 keeping the term off for further quality work, without freezing a model baseline.
 
+An October25 primary-source check of [DFENet](https://arxiv.org/abs/2503.15800)
+(2025 preprint, later journal publication) finds MIT source in the
+[author repository](https://github.com/VelvetReverie/DFENet-demosaicking), but
+no genuine checkpoint/download link in the inspected tree or README; its test
+configuration leaves `pretrain_network_g` null. The inspected learned frequency
+masks use a fixed128px setting. No numerical quality comparison was run, and
+this release check is not evidence of an improvement over our models.
+[Pinned commit and inspected-file hashes](results/dfenet-release-availability-v1.json).
+
 The current [V104 conditioning study](noise-conditioning.md) repeats the
 fixed-strength comparison on twelve exact-target observations and six standing
 GFX contexts. Lower conditioning retains more fine structure and grain while
@@ -50,8 +59,13 @@ unavailable clean-image oracle is never a candidate method. Current quality
 work now includes the [V119 Small continuation](cleaned-diverse-small-training.md)
 from final V115 on90,791 cleaned Commons sources and the corrected83-ID paired
 set with the original camera probabilities. Both discarded16-step checks pass;
-the fresh full20k training is complete and full quality review is running.
-The additional fine-mesh case has no clear gain over V115 at matched conditioning.
+the [full20k quality review is complete](v119-quality.md). Photo PSNR improves
+.06131dB over V115, but known-camera PSNR falls.22342dB and ADC worst color
+bias rises to2526.70DN16. Weak natural-detail gain changes only modestly and
+the additional fine mesh has no clear gain at matched conditioning. The
+[native development comparison](native-camera-development.md) retains much
+more texture than RawNIND on its fixed binned inputs, with V117 still ahead
+of V119. This separates useful gains from remaining real-camera limitations.
 The V112-derived
 Tiny/Small material, full quality panels and complete-frame review are finished.
 

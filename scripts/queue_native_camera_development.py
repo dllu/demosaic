@@ -11,12 +11,11 @@ import time
 from pathlib import Path
 
 import psutil
-
 from evaluate_native_camera_development import binding, checked, guard, local_time, read, write
 
 REPO = Path(__file__).absolute().parents[1]
 BASE = REPO / ".cache/current-quality-20261023-v1"
-NETWORK_SHA = "3304b0c69ea2cb84b400597aa501bb6f2ed26ab0809e26068e10bc597605afc3"
+RAWNIND_WRAPPER_SHA = "3304b0c69ea2cb84b400597aa501bb6f2ed26ab0809e26068e10bc597605afc3"
 REFERENCE_SHA = "3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814"
 
 
@@ -131,7 +130,7 @@ def prepare(root):
     checkpoint = binding(reference_dir / "utnet2-bayer.pt")
     assert checkpoint["sha256"] == REFERENCE_SHA
     methods.append({"label": "RawNIND-preup", "kind": "rawnind-preup", "checkpoint": checkpoint,
-                    "directory": str(reference_dir), "expected_network_sha256": NETWORK_SHA,
+                    "directory": str(reference_dir), "expected_wrapper_sha256": RAWNIND_WRAPPER_SHA,
                     "gain_mode": "cfa-channel", "input_scale": None, "clip_input": False})
     inputs.append(checkpoint)
     frozen = {str(p): binding(p)["sha256"] for p in work.rglob("*") if p.is_file()}

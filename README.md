@@ -15,13 +15,13 @@ foliage/neon detail and dark-camera mottling. All numerical panels, independent
 saved-prediction checks, native review and complete102MP RGB16 exports are done.
 [Current choices](docs/current-model.md) · [GFX gallery](docs/gfx-qualitative.md).
 
-[V116's complete review](docs/v116-quality.md) finds higher tested eight-pixel
-carrier gain, similar weak natural detail and a worse ADC color tail; V114
-retains the better overall balance. These models use90,864 sources, zero optical blur and geometry
-before final downsampling. [V119 completed 20k updates](docs/cleaned-diverse-small-training.md)
-from V115 Small with90,791 cleaned sources and the expanded paired set; its full
-quality evaluation is running. A [native-camera comparison](docs/native-camera-development.md)
-is queued on 11 held-out captures. [Data review](docs/incoming-commons-quality.md) ·
+[V119's complete review](docs/v119-quality.md) finds a +.06131dB photo gain over
+V115 after cleaned-data training, but a −.22342dB known-camera regression and
+a large ADC color outlier. Its real fine-detail softness remains. The completed
+[11-capture native-camera comparison](docs/native-camera-development.md) shows
+substantially finer detail than RawNIND on binned references with added noise;
+V117 remains ahead of V119 there. These comparisons use zero optical blur and
+geometry before final downsampling. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
@@ -85,7 +85,9 @@ references are **not GT**. Native160px cells share +4EV display; camera
 processing/aperture differ. [Matched comparison and limits](docs/gfx-green-mesh.md).
 The [completed V119 mesh check](docs/gfx-green-mesh.md#v119-after-cleaned-data-training)
 shows no clear lattice-recovery gain over V115 at the same conditioning; its
-full quality panels are still running.
+full panels and native review are now complete. The
+[V119 report](docs/v119-quality.md) adds native bark/feather triplets and matched
+foliage/fence comparisons alongside its measured gains and regressions.
 
 ![Fine green mesh, left native crop](docs/images/gfx-green-mesh-profile-transfer-v1/V114-fine-green-mesh-left-4EV.png)
 

@@ -3,8 +3,9 @@
 V119 completed the full 20,000 updates from the final V115 Small EMA.
 Both discarded implementation checks passed: 16 CPU updates at 64px/B1/FP32
 and 16 CUDA updates at native 256px/B16/BF16. The production run started fresh
-from V115, with fresh AdamW and EMA. Full quality evaluation is running; the existing
-V114 general, V115 camera/detail and V117 photo-score options remain documented.
+from V115, with fresh AdamW and EMA. The [complete quality review](v119-quality.md) finds a+.06131dB photo gain over
+V115, a−.22342dB known-camera regression and a large ADC color tail. V114 general,
+V115 camera/detail and V117 photo-score choices retain their measured strengths.
 [Recipe](../configs/quality-v115-cleaned-diverse-v119.yaml) ·
 [Started-run and queued-review receipts](results/v119-training-start-v1.json).
 [Completed training, immutable endpoint and actual counts](results/v119-training-completed-v1.json).
@@ -54,7 +55,7 @@ updates; the full endpoint is reviewed after 20,000. This is a combined data
 recipe plus additional training. It does not isolate the effect of corpus size,
 reference masks, camera sampling or extra optimization individually.
 
-## Completed training and quality review in progress
+## Completed training and quality review
 
 The seed first reaches native data at step 14, so both discarded checks cover
 16 updates: 11 Commons, four paired and one native batch. Each verifies the
@@ -68,11 +69,12 @@ It uses a 24GiB CUDA model quota, 48/24GiB start/runtime available-RAM floors,
 128/96GiB internal disk headroom and 208GiB external input reserves. Jobs are
 bounded; failures preserve their sources and evidence without automatic retry.
 
-The queued endpoint evaluation runs eight FP32 stages: full photographic,
+The completed endpoint evaluation covers eight FP32 stages: full photographic,
 known/unseen camera, weak carriers, color, ordinary GFX, highlight GFX and the
 complete 101.996MP GFX frame. It declares 4,586 model/encoder calls and 14,190
-primary numerical observations for V119 alone. An independent CPU audit then
-checks retained predictions and targets without new inference or noise.
+primary numerical observations for V119 alone. An independent CPU audit
+checks retained predictions and targets without new inference or noise. All stages,
+three matched contrasts and the RGB16/native checks have finished.
 
 Saved V115, V114 and V117 outputs are reused for three matched contrasts.
 Each covers the full 427-photo support, all primary/analytic records and
@@ -83,8 +85,9 @@ exports receive exact native-region quantization checks at 460,800 channel value
 The review prepares at least two native 160px noisy/denoised/exact-GT triplets
 and all six GFX regions, including foliage and chain-link fence. It retains
 identical coordinates and display transforms without resizing pixels. GFX's
-separate ISO100 exposure is an approximate reference, not GT. Actual viewing,
-interpretation and current documentation updates follow the completed results.
+separate ISO100 exposure is an approximate reference, not GT. All nine matched material/GFX boards and the new bark/egret triplets were
+actually viewed; the complete report records gains, regressions and remaining
+fine-detail softness.
 
 The additional [DSCF3842/3835 fine green mesh](gfx-green-mesh.md#v119-after-cleaned-data-training)
 has completed its endpoint review under both previously fixed noise profiles. It uses
@@ -93,14 +96,14 @@ predictions. Two new V119 CPU FP32 forwards add no fresh noise or RAW decoding.
 That case supplements the original six main GFX regions; no independent ISO100
 reference is exact GT.
 At matched conditioning V119 shows no clear fine-lattice recovery gain over
-V115. The larger numerical and main GFX results remain pending.
+V115. The [larger numerical and main GFX results](v119-quality.md) are complete.
 
 A supplementary [native-camera development comparison](native-camera-development.md)
-is queued after that original job chain. It compares the final V119 checkpoint
+is complete after that original job chain. It compares the final V119 checkpoint
 with V114/V115/V117 and RawNIND on 240 new, shared stored observations from
 11 held-out camera captures. Low-noise reference estimates retain their own
 scope and do not replace the primary panels or real GFX review.
 
 A byte-verified persistent copy of the completed endpoint is available at
-`/mnt/external/demosaic/models/v119-final20000.pt`. Its availability does not
-change the current model recommendation while full comparisons are running.
+`/mnt/external/demosaic/models/v119-final20000.pt`. The completed comparison documents its photo gain, without replacing the
+current camera/color and photo-score choices with this regressed endpoint.

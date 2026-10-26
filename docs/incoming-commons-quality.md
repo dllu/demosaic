@@ -19,7 +19,7 @@ inspection, rather than native inspection of every image.
 | V102/V103 | 88,477 | Completed model comparison |
 | V104 | 90,872 | Original 20k training, all panels and full-frame exports complete |
 | Completed-model cohort | **90,864** | V114 is the general baseline; V115/V117 have useful camera/photo tradeoffs; their complete reviews retain this corpus |
-| V119 training cohort | **90,791** | [V119 completed20k from V115 Small](cleaned-diverse-small-training.md); full quality evaluation running; no clear fine-mesh gain yet |
+| V119 training cohort | **90,791** | [Complete V119 review](v119-quality.md): +.06131dB photo over V115, −.22342dB known-camera, large ADC color tail; no clear fine-mesh gain |
 | Prepared future cohort | **90,787** | [Latest top768 source review](next-source-tail-review.md): 332 of 336 additional sources retained; four withheld; actual augmented-reader checks pass; not trained |
 
 The completed-model 90,864-source cohort applies **eight additional training-source

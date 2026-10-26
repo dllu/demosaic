@@ -100,10 +100,85 @@ def collect(plan_path):
         raise
 
 
+def reuse_completed_joint_predictions(plan, dataset, archive):
+    """Recover a fully saved joint prefix after a pre-forward reference failure.
+
+    Preserve the original manifest and call receipt. Append verified NPY links
+    to a new archive, without loading any joint model or rerunning its encoder.
+    """
+    retained = plan.get("retained_collection")
+    if retained is None:
+        return []
+    failure = read(checked(retained["failure"]))
+    previous = read(checked(retained["execution_plan"]))
+    assert failure["execution_plan"] == retained["execution_plan"]
+    assert previous["dataset_manifest"] == plan["dataset_manifest"]
+    labels = [m["label"] for m in plan["methods"] if m["kind"] == "joint"]
+    assert labels == ["V114", "V115", "V117", "V119"]
+    expected = {o["id"]: o for o in dataset["observations"]}
+    total = len(expected) * len(labels)
+    tracking = failure["actual_tracking"]
+    assert tracking["method"] == "RawNIND-preup"
+    assert tracking["started_root_calls"] == tracking["completed_valid_root_calls"] == total
+    assert tracking["encoder_calls"] == total and tracking["reference_network_calls"] == 0
+    methods = {m["label"]: m for m in plan["methods"] if m["kind"] == "joint"}
+    prior = {m["label"]: m for m in previous["methods"] if m["kind"] == "joint"}
+    assert methods == prior
+    references = {
+        r["case_id"]: fingerprint(np.load(checked(r["reference_camera_FP32"]), allow_pickle=False))
+        for r in dataset["rows"]
+    }
+    seen = {label: set() for label in labels}
+    for record, prediction, supervision in iter_predictions(checked(retained["archive"])):
+        label, context = record["model"]["label"], record["context"]
+        assert label in methods and len(context["ids"]) == 1
+        identity = context["ids"][0]
+        assert identity in expected and identity not in seen[label]
+        observation = expected[identity]
+        assert context["input_arrays"] == observation["arrays"]
+        assert context["input_fingerprints"] == observation["input_fingerprints"]
+        assert context["case_id"] == observation["case_id"]
+        assert fingerprint(supervision["target"]) == references[context["case_id"]]
+        for key in ("wb", "matrix"):
+            assert fingerprint(supervision[key]) == observation["input_fingerprints"][key]
+        method = methods[label]
+        assert record["model"] == {
+            "label": label,
+            "sha256": method["checkpoint"]["sha256"],
+            "step": 20000,
+            "self_ensemble": "none",
+            "kind": "joint",
+        }
+        archive.append(
+            record["model"],
+            context,
+            prediction,
+            supervision,
+            prediction_file=record["prediction"]["path"],
+        )
+        seen[label].add(identity)
+    assert all(values == set(expected) for values in seen.values())
+    return [
+        {
+            "method": methods[label],
+            "root_calls": len(expected),
+            "encoder_calls": len(expected),
+            "reference_network_calls": 0,
+            "new_root_calls": 0,
+            "reused_prediction_count": len(expected),
+            "source_failure": retained["failure"],
+            "source_archive": retained["archive"],
+            "integrity": "Original collector passed each joint method's final state/gradient checks before failing the reference pre-forward check; saved arrays and all input/reference bindings are verified here.",
+        }
+        for label in labels
+    ]
+
+
 def _collect(plan_path, tracking):
     import torch
-    from profile_raw_kernel_inference import model_hash
     from frozen_backbone_identity import verify_backbone_identity
+    from profile_raw_kernel_inference import model_hash
+
     from demosaic.inference import load_checkpoint
     from demosaic.reference import load_rawnind
 
@@ -137,8 +212,11 @@ def _collect(plan_path, tracking):
         assert {k: fingerprint(v) for k, v in batch.items()} == observation["input_fingerprints"]
         loaded.append((observation, batch))
     archive = PredictionArchive(root / "archive")
-    results = []
+    results = reuse_completed_joint_predictions(plan, dataset, archive)
+    reused = {r["method"]["label"] for r in results}
     for method in plan["methods"]:
+        if method["label"] in reused:
+            continue
         tracking["method"] = method["label"]
         record = {"method": method, "root_calls": 0, "encoder_calls": 0, "reference_network_calls": 0}
         python_rng = random.getstate()
@@ -160,7 +238,9 @@ def _collect(plan_path, tracking):
                 model = load_rawnind(method["directory"], gain_mode="cfa-channel", device="cuda",
                                      input_scale=None, clip_input=False)
                 assert model.reference_config["preupsample"] and model.reference_config["funit"] == 32
-                assert model_hash(model.network) == method["expected_network_sha256"]
+                # Established hash includes wrapper network.* state keys.
+                expected = method.get("expected_wrapper_sha256", method.get("expected_network_sha256"))
+                assert model_hash(model) == expected
         random.setstate(python_rng)
         model.eval()
         record["initial_model_sha256"] = model_hash(model)
@@ -168,27 +248,27 @@ def _collect(plan_path, tracking):
             assert record["initial_model_sha256"] == method["expected_full_model_sha256"]
         handles = []
 
-        def before(module, args):
+        def before(module, args, record=record):
             tracking["started_root_calls"] += 1
             assert not module.training and len(args) == 5
             assert not torch.backends.cuda.matmul.allow_tf32 and not torch.backends.cudnn.allow_tf32
             actual_inputs = {k: fingerprint(v) for k, v in zip(("packed", "variance", "colors", "wb", "matrix"), args, strict=True)}
-            assert actual_inputs == expected_observation["input_fingerprints"]
+            assert actual_inputs == record["expected_inputs"]
             record["latest_inputs"] = actual_inputs
             assert psutil.virtual_memory().available >= 24 * 2**30
 
-        def after(module, args, prediction):
+        def after(module, args, prediction, record=record):
             assert prediction.shape == (1, 3, 256, 256) and prediction.dtype == torch.float32
             assert torch.isfinite(prediction).all()
             assert {k: fingerprint(v) for k, v in zip(("packed", "variance", "colors", "wb", "matrix"), args, strict=True)} == record["latest_inputs"]
             record["root_calls"] += 1
             tracking["completed_valid_root_calls"] += 1
 
-        def encoded(*args):
+        def encoded(*args, record=record):
             record["encoder_calls"] += 1
             tracking["encoder_calls"] += 1
 
-        def reference_called(*args):
+        def reference_called(*args, record=record):
             record["reference_network_calls"] += 1
             tracking["reference_network_calls"] += 1
 
@@ -202,7 +282,7 @@ def _collect(plan_path, tracking):
                       "kind": method["kind"]}
         with torch.inference_mode():
             for index, (observation, cpu) in enumerate(loaded):
-                expected_observation = observation
+                record["expected_inputs"] = observation["input_fingerprints"]
                 batch = {k: v.to("cuda") for k, v in cpu.items()}
                 if hasattr(model, "set_noise"):
                     model.set_noise(observation["condition"]["shot"], observation["condition"]["read"])
@@ -234,6 +314,10 @@ def _collect(plan_path, tracking):
         gc.collect()
         torch.cuda.empty_cache()
         record.pop("latest_inputs")
+        record.pop("expected_inputs")
+        record["new_root_calls"] = record["root_calls"]
+        record["reused_prediction_count"] = 0
+        write(root / (method["label"] + "-method-v1.json"), record)
         results.append(record)
     alignment = archive.verify_alignment()
     assert alignment["models"] == 5 and alignment["observations_per_model"] == 240 and alignment["records"] == 1200
@@ -245,13 +329,16 @@ def _collect(plan_path, tracking):
           "execution_plan": binding(plan_path), "archive": binding(archive.manifest), "methods": results,
           "alignment": alignment, "neural_root_calls": 1200, "frozen_DINO_encoder_calls": 960,
           "actual_tracking": tracking,
+          "retained_collection": plan.get("retained_collection"),
+          "new_neural_root_calls": sum(r["new_root_calls"] for r in results),
+          "reused_prediction_count": sum(r["reused_prediction_count"] for r in results),
           "new_noise_observations": 0, "optimizer_updates": 0, "RAW_decodes": 0,
           "scope": "First predictions on the frozen 240 native-camera development inputs; single-view IEEE FP32. Identical stored inputs and target estimates across methods. No new noise, target/inverse-camera conversion or intermediate V119 checkpoint. Native viewing and recommendation remain separate."})
 
 
 def analyze(plan_path):
-    from PIL import ImageDraw, ImageFont
     from diagnose_local_material_detail import basis
+    from PIL import ImageDraw, ImageFont
 
     assert os.environ["CUDA_VISIBLE_DEVICES"] == "" and "torch" not in sys.modules
     os.nice(10)
@@ -335,7 +422,7 @@ def analyze(plan_path):
                         data = {k:values[k] for k in values.files}
                     noisy = archive_metrics.noisy_malvar(data)
                     exposure = targets[row["case_id"]]["display_exposure"]
-                    def pixels(value):
+                    def pixels(value, supervision=supervision, exposure=exposure):
                         return np.rint(np.clip(archive_metrics.display(value, supervision, exposure)[0,:,48:208,48:208].transpose(1,2,0),0,1)*255).astype(np.uint8)
                     displayed[key] = (pixels(noisy),pixels(supervision["target"]),supervision)
     assert len(numerical) == 1200 and len(reference_cache) == 20

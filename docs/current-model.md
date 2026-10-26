@@ -71,8 +71,15 @@ parent for the [V119 cleaned-data trial](cleaned-diverse-small-training.md), wit
 faint detail. The [reviewed83-ID paired extension](paired-camera-sampling.md)
 retains corrected reference masks and the original camera proportions. Both
 discarded implementation checks passed and all20k training updates completed.
-Full quality review is running; the additional fine-mesh comparison shows no
-clear lattice-recovery gain over V115 at matched noise conditioning.
+[V119's full review is complete](v119-quality.md): photo37.03831dB, a+.06131dB
+gain over V115, but known/unseen54.10063/54.00742dB and ADC maximum2526.70DN16.
+Weak high-noise photographic gain changes only.36422→.36523; no clear real
+fine-mesh gain appears at matched conditioning. These camera/color regressions
+favor retaining the useful choices above. The
+[native-camera development comparison](native-camera-development.md) finds
+much finer detail than RawNIND on its11 binned captures under added noise,
+with V117 still slightly ahead of V119. This does not establish broad real
+high-ISO superiority.
 
 ## Quality and remaining work
 
@@ -105,7 +112,7 @@ small eight-pixel carrier gain. Complete metrics, native material/GFX comparison
 and RGB16 checks are published. Keep the term off for further quality work;
 architecture and parent remain choices guided by their measured tradeoffs.
 
-[PSNR history](performance-history.md) includes both new endpoints.
+[PSNR history](performance-history.md) includes V119 and all earlier reviewed endpoints.
 The [fixed V115/V117 output mean](fixed-tiny-small-mean.md) gives an intermediate
 tradeoff: photo 37.02408dB and camera 54.31387/54.00195dB. It loses photo score
 to V117 and camera means to V115, with unchanged visible GFX fine-detail loss.

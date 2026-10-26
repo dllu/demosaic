@@ -45,7 +45,8 @@ AHD → ISO100 camera JPEG, with both ISO100 references **not GT**.
 The [completed V119 endpoint comparison](gfx-green-mesh.md#v119-after-cleaned-data-training)
 adds the same two fixed profiles after20k cleaned-data updates. At matched
 conditioning it shows no clear fine-lattice recovery gain over V115; this
-remains an adverse case. The complete main GFX/numerical evaluation is running.
+remains an adverse case. The [complete V119 quality review](v119-quality.md)
+now documents its photo gains and camera/color regressions.
 
 ![Fine green mesh, camera controls and all five methods](images/gfx-green-mesh-20231231-v1/comparison-2EV.png)
 
@@ -55,6 +56,30 @@ input-only integer coordinate matching and no resizing or warp. The ISO100
 f/5.6 frame was taken46s earlier; its AHD output and camera JPEG are independent
 qualitative references, **not GT**. These context comparisons supplement the
 existing six full-frame regions. [Sources, noise and checkpoint metadata](images/gfx-green-mesh-20231231-v1/manifest.json).
+
+## Completed V119 cleaned-data comparison
+
+Rows are noisy,V115 Small,V119 Small,and the independent ISO100 reference.
+All cells are native160px sensor crops from complete blended102MP outputs,
+with the same+2EV/WB/matrix and no resizing. The ISO100 exposure remains
+**approximate, not GT**.
+
+![V115/V119 building, chain-link fence and neon](images/v119-quality-v1/V115-V119-matched-gfx-1.png)
+
+![V115/V119 foliage, platform boundary and sky](images/v119-quality-v1/V115-V119-matched-gfx-2.png)
+
+Native differences are small: fence/building geometry stays coherent, sky
+smooth, foliage waxy and fine neon/platform detail soft. All three V119 parent
+comparisons were viewed. Its photographic PSNR gain over V115 coexists with
+known-camera and ADC-color regressions; these regions show no large real-photo
+gain. [Complete metrics and native triplets](v119-quality.md) ·
+[Source/ROI/checkpoint/noise/display metadata](images/v119-quality-v1/manifest.json) ·
+[V117/V119 regions1–3](images/v119-quality-v1/V117-V119-matched-gfx-1.png) ·
+[regions4–6](images/v119-quality-v1/V117-V119-matched-gfx-2.png).
+
+Both V119 RGB16 outputs and460,800 retained-ROI channel values verify. Its
+163.09s FP32 interval is an observation with separate warmup/workspace state,
+not a speed ranking. Quality and100MP/10s remain open goals.
 
 ## Completed V117/V118 comparison
 

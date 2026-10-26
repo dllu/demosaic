@@ -2,9 +2,10 @@
 
 V119 completed a full 20,000-update continuation from **V115 Small** on the
 cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA
-checks passed before the fresh production run. Full numerical, independent and
-native-image reviews are running or queued. The additional fine-mesh review
-shows no clear lattice-recovery gain over V115; full quality results are pending.
+checks passed before the fresh production run. The [complete review](v119-quality.md)
+finds a+.06131dB photo gain over V115, a−.22342dB known-camera regression and
+a large ADC color outlier. Fine mesh remains unresolved. All numerical,
+independent, native-image and full-output checks are complete.
 [Current recipe, execution and review](cleaned-diverse-small-training.md) ·
 [Recipe file](../configs/quality-v115-cleaned-diverse-v119.yaml) ·
 [Started-run evidence](results/v119-training-start-v1.json).
@@ -21,11 +22,12 @@ Their complete panels, native crops and RGB16 checks are published.
 | V114 | Frozen DINOv3 ConvNeXt-Tiny + pretrained DRUNet RGB trunk | 36.97973 dB | 54.28627 / 54.00290 dB | General camera/color balance; faint foliage and neon remain soft |
 | V115 | Fitted DINOv3 ConvNeXt-Small + the same restoration family | 36.97700 dB | 54.32405 / 54.00417 dB | Stronger known-camera mean and eight-pixel weak response; higher tested color bias |
 | V117 | V114 architecture, further 20k continuation | 37.04408 dB | 54.27303 / 53.97339 dB | Higher photo score, 421/427 source means up; slight camera regressions |
+| V119 | V115 Small, cleaned90791/paired83 continuation | 37.03831 dB | 54.10063 / 54.00742 dB | Photo gain over V115; known-camera and ADC-color regressions, unresolved fine mesh |
 
 [Current selection and inference](current-model.md) ·
 [Tiny/Small comparison](v114-v115-quality.md) ·
 [V117 and the negative V118 band-loss result](v117-v118-quality.md).
-V115 is the architectural parent for the running trial. Choosing V114 as the
+V115 is the architectural parent for the completed V119 trial. Choosing V114 as the
 current general inference option does not freeze the training architecture or
 hide the useful Small and V117 gains. Study-specific promotion/significance
 criteria do not replace direct comparison of overall metrics and actual images.
@@ -38,7 +40,7 @@ wins four of nine camera scene means. Broad real-photo superiority, state of
 the art and 100MP within 10 seconds remain unmet goals.
 [Local natural detail](local-material-detail.md) · [Real-photo comparisons](gfx-qualitative.md).
 
-## Running recipe and data
+## Completed recipe and prepared data
 
 V119 retains V115's fitted encoder/laterals and restoration weights, with fresh
 AdamW/EMA, seed 65, B16/native 256px/BF16, LR 1e-5 and 200 warmup steps. No feature
@@ -91,11 +93,17 @@ resource checks are recorded in the [V119 guide](cleaned-diverse-small-training.
 
 ## Review and documentation
 
-Review the full endpoint after its declared budget. V119 has eight queued FP32
+Review the full endpoint after its declared budget. V119 completed eight FP32
 stages: full 427-photo/seven-condition/four-CFA, known/unseen cameras, weak
 carriers, color, standing GFX, highlights and complete 101.996MP GFX output.
 Independent NumPy64 checks operate on retained predictions/targets. Matched
 comparisons reuse saved V115, V114 and V117 controls without new control inference.
+Its [11-capture native development comparison](native-camera-development.md)
+also completed: clearer texture than RawNIND under added noise, small gains
+over V115 and lower means than V117. The prepared90,787-source/14-region bank
+remains untrained; opt-in [per-source loss tracing](source-loss-diagnostics.md)
+is available for the next quality trial. Investigate the camera/color regressions
+before treating the combined V119 data recipe as the next baseline.
 
 Improved-model reports include at least two native noisy/denoised/exact-GT
 triplets with identical coordinates and display transforms, without resized
