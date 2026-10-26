@@ -14,10 +14,11 @@ inspection, rather than native inspection of every image.
 
 ## Current data and training
 
-The [first current Small-model loss review](current-source-loss-review.md)
-inspects28 selected photographs from the first800 V120 updates. All are retained
-after native views and four larger checks. Actual training losses now nominate
-source/ROI inspection; no new dataset exclusion follows this bounded sample.
+The [current Small-model loss review](current-source-loss-review.md) now covers
+56 selected sources in two passes. The later28-source inspection retains27
+photos and removes one nonphotographic advertisement from a prepared90,786-source
+snapshot, preserving all fourteen regions. The active V120/V121 comparisons keep
+their original frozen inputs. Losses nominate inspection, not automatic labels.
 
 | Cohort | Training sources | Status |
 | --- | ---: | --- |
@@ -27,6 +28,7 @@ source/ROI inspection; no new dataset exclusion follows this bounded sample.
 | V119 training cohort | **90,791** | [Complete V119 review](v119-quality.md): +.06131dB photo over V115, −.22342dB known-camera, large ADC color tail; no clear fine-mesh gain |
 | V120 paired32 control | **90,791** | [Full run active](paired32-weak-detail-training.md) after discarded CPU/CUDA checks; endpoint quality pending |
 | V121 reviewed weak-detail arm | **90,787** | [Queued full run](paired32-weak-detail-training.md) after CPU/CUDA checks; four further withholds and fourteen reviewed regions; quality pending |
+| Prepared next snapshot | **90,786** | [One further nonphotographic graphic removed](current-source-loss-review.md); all14 regions retained and actual reader bindings pass; no new training job |
 
 The completed-model 90,864-source cohort applies **eight additional training-source
 withholds relative to V104**: the three previously inspected photo-quality cases and five printed
@@ -38,13 +40,13 @@ rows, protected scenes and source/cache metadata retain their bytes. Originals
 and cache pixels are unchanged.
 [Coupled 4×/8× manifests and literal-row audit](results/commons-source-tail-reviewed90864-v1.json).
 
-The latest 336-source inspection extends both historical loss-ranked lists
+The preceding336-source inspection extends both historical loss-ranked lists
 through rank 768, preparing four additional withholds for future training. Two
 have unreliable faceted/flattened clean-photo texture; two are flat map/document
 layouts. Larger native views clear four ambiguous photographs, preserving
 useful fine blossoms, stems, masonry and weak gray fur. Originals and cache
 pixels remain unchanged; V119 keeps its original 90,791 membership. The new
-90,787 manifest preserves all other literal rows and the original six ROI
+90,787 V121 manifest preserves all other literal rows and the original six ROI
 objects. Its targeted actual reader checks all four new replacements and 12
 unchanged native256 targets, without neural inference or noise generation.
 [Decisions and examples](next-source-tail-review.md) ·

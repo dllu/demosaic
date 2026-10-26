@@ -9,11 +9,12 @@ forbid neural Module calls and verify unchanged Python/NumPy/Torch CPU/CUDA RNG
 states; V120 production is running, with V121 queued sequentially.
 [Current controlled trials and launch evidence](paired32-weak-detail-training.md).
 
-The [first actual Small-model source review](current-source-loss-review.md)
-freezes128 diagnostic draws through update800, including95 distinct photographs.
-Twenty-eight selected sources receive native inspection and are retained. The
-review uses losses to find examples rather than treating high loss as a bad-photo
-label; neither active cohort changes.
+The [current Small-model source review](current-source-loss-review.md) has two
+completed passes: the first28 sources were retained; a later28-source inspection
+retains27 photos and identifies one standalone digital advertisement. Its removal
+is prepared in a future90,786-source snapshot with all fourteen regions intact.
+Losses nominate inspection rather than label bad photos automatically. The
+active V120/V121 cohorts retain their original frozen membership.
 
 Each record identifies the actual photograph after exclusion retries or a
 reviewed-ROI override: source ID, cache path and manifest-declared hash, cache crop rectangle,

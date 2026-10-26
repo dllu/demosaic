@@ -8,6 +8,13 @@ its endpoint quality effect remains unmeasured. V119/V120 retain six regions,
 90,791 sources and the same5% conditional-photo ROI probability.
 [Matched training and queued review](paired32-weak-detail-training.md).
 
+A [future90,786-source snapshot](current-source-loss-review.md) removes one
+separately inspected nonphotographic advertisement while preserving all fourteen
+region objects, source pixels and target hashes. Its
+[rebound catalogue](../configs/low-contrast-training-rois-cleaned90786-v1.json)
+passes actual source/crop/target and sampler checks. V121 keeps its original
+90,787-source binding; the future snapshot launches no new training job.
+
 [Catalogue](../configs/low-contrast-training-rois-cleaned90787-v1.json) ·
 [Actual visual decisions](results/weak-photographic-targets-review-v1.json) ·
 [Preparation and source reconstruction](results/weak-photographic-targets-preparation-v1.json) ·

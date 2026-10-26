@@ -1,130 +1,138 @@
-# Current Small-model losses: 28 photographic sources inspected
+# Current Small-model source review
 
-**All28 selected photographs remain eligible.** Actual source/native-target
-inspection, followed by larger native views for four ambiguous cases, finds no
-new unsuitable target in this sample. Real mesh, stone grain, faint surfaces,
-organic texture and saturated painted materials account for many selected cases.
-High loss alone would have removed useful hard examples. The active V120/V121
-manifests and their source pixels remain unchanged.
+**The latest28-source inspection retains27 photographs and excludes one
+nonphotographic roofing advertisement from the prepared next corpus.** The
+future snapshot has90,786 training sources and preserves all fourteen reviewed
+regions. V120/V121 continue with their original frozen inputs; this is data
+cleanup, not a new model-performance result.
 
-[Decisions and evidence](results/v120-current-source-loss-review-v1.json) ·
-[All28 decisions, reasons and source links, CSV](results/v120-current-source-loss-decisions-v1.csv) ·
-[Independent pixel/selection checks](results/v120-current-source-loss-review-verification-v1.json) ·
-[Publication bindings](results/v120-current-source-loss-publication-v1.json).
+[Latest decisions and evidence](results/v120-source-loss-through5000-review-v1.json) ·
+[All28 decisions, source links and reasons, CSV](results/v120-source-loss-through5000-decisions-v1.csv) ·
+[Independent pixel/selection/cohort checks](results/v120-source-loss-through5000-verification-v1.json) ·
+[Publication bindings and live-owner check](results/v120-source-loss-through5000-publication-v1.json) ·
+[Future fourteen-region catalogue](../configs/low-contrast-training-rois-cleaned90786-v1.json).
 
-## Selection and limits
+## Latest nomination and inspection
 
-The frozen prefix covers V120 updates1–800:128 Commons diagnostic draws,
-including95 distinct photographs. Six photographs already occur in the loaded
-native-review ledgers, leaving89 eligible for this pass. Before viewing these
-outputs, select six highest singleton losses in each declared noise group,
-then four remaining photographs with the highest gradient-error term:
+A frozen prefix through update5,000 retains480 Commons diagnostic draws.
+Nomination uses only updates801–5,000:352 draws, including254 draws/250 IDs
+from the loader's photographic branch. That branch label does not establish
+photographic content. Fifteen draws from eleven previously reviewed IDs are
+skipped, leaving239 distinct eligible sources. Select six highest singleton
+losses in each noise group, then four remaining sources with highest gradient
+error. All five sheets were actually viewed:28 source thumbnails and56 unchanged
+native256 source/target cells. Two ambiguous sources received native1024 views.
 
-| Nomination group | Eligible photographs | Selected |
+| Nomination group | Eligible sources | Selected |
 | --- | ---: | ---: |
-| ADC-only, shot/read both zero |11 |6 |
-| Positive sigma18≤.005 |34 |6 |
-| .005<sigma18≤.02 |31 |6 |
-| sigma18>.02 |13 |6 |
-| Remaining gradient-error candidates |Within the same89 |4 |
+| ADC-only, shot/read both zero |28 |6 |
+| Positive sigma18≤.005 |87 |6 |
+| .005<sigma18≤.02 |97 |6 |
+| sigma18>.02 |27 |6 |
+| Remaining gradient-error candidates |Within the same239 |4 |
 
-Here sigma18=`sqrt(.18 × shot + read)` uses the declared training coefficients,
-not the source camera's measured ISO/noise. Grouping reduces one obvious source
-of selection bias; it does not make losses comparable across exposure, material,
-camera transforms or changing model states. No fixed endpoint is scored here.
-Each photograph appears once in this prefix, without repeated-source evidence.
-The logger's detached FP32 singleton losses are not additive contributions to
-the optimizer's batch loss. [Trace definitions](source-loss-diagnostics.md).
+Here sigma18=`sqrt(.18 × shot + read)` uses training coefficients, not measured
+source-camera noise. Exposure, material, camera transforms and V120's changing
+weights still confound cross-case losses. These detached singleton diagnostics
+are nomination cues, not additive batch-loss contributions or fixed-endpoint
+scores. [Trace definitions](source-loss-diagnostics.md).
 
-All five sheets were actually inspected:28 full-source thumbnails plus56
-unchanged native256 source/target cells. Four sources then received unchanged
-native1024 inspection. The source-review context is a centered512px bin4 region
-inside the actual traced pre-augmentation crop. It does not reproduce the later
-geometry, exposure or synthetic-noise observation that produced the loss.
+The source-review512px bin4 context is centered inside the actual traced
+pre-augmentation crop. It does not replay the geometry, exposure or synthetic
+noise used for that update. Strips below show full-source thumbnail → original
+native256 crop → area8 native256 target. Only the thumbnail is resized.
+Source pixels use ICC-to-sRGB where present; targets use linear-area2 from bin4
+then sRGB display, exposure×1. Source and target columns cover different fields
+of view: the native source is a centered detail from the larger target context.
+[Full source/ROI/display/trace metadata](images/v120-source-loss-through5000-v1/manifest.json).
 
-## Useful difficult material
+## Remove an actual digital advertisement
 
-Each strip shows a full-source thumbnail, an original native256 source crop,
-then a native256 area8 target. Only the thumbnail is resized. Source crops use
-ICC-to-sRGB where present; targets use linear-area2 from the bin4 cache and
-the same exposure×1 sRGB display. These are source-quality inspections, without
-noisy/restored model-output panels or a new model-performance claim.
-The native source and binned target cover different fields of view; the source
-view is centered within the larger review context.
-[Source, crop, display and trace metadata](images/v120-source-loss-first800-v1/manifest.json).
+Uniform yellow background, blue vector roof/house shapes, typeset lettering
+and phone numbers identify a standalone graphic, without a photographed scene.
+This is different from a photograph of a sign, sculpture or printed physical
+object. Its high loss nominated inspection; the visual content justifies removal.
+The exact source ID is `e264392bcea19447f69f7d4599945de78f7e0c7c`.
+A bounded exact-author-field check finds no other active source with that author;
+no author-wide or title-based exclusion is applied.
 
-The radiator grille is genuine repeated metal structure with sharp glossy
-boundaries and small fasteners. Its high loss is a useful difficult-detail cue,
-not evidence of an unsuitable photograph.
+![Excluded nonphotographic advertisement: context, native source and binned target](images/v120-source-loss-through5000-v1/nonphotographic-advertisement.png)
 
-![Radiator mesh: context, native source and native area8 target](images/v120-source-loss-first800-v1/radiator-mesh.png)
+Source: [اجرای خرپا شیروانی, roofing advertisement](https://commons.wikimedia.org/wiki/File:%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C_%D8%A7%D9%86%D9%88%D8%A7%D8%B9_%D8%B3%D9%82%D9%81%D9%87%D8%A7%DB%8C_%D8%B4%DB%8C%D8%A8%D8%AF%D8%A7%D8%B1.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Modified by cropping, binning, thumbnail creation and color/display conversion.
+Original and cache files remain unchanged.
 
-Source: [Palauenc05, Zettelmeyer Z2](https://commons.wikimedia.org/wiki/File:Zettelmeyer_Z2_1936_Konz.jpg),
-[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/). Modified by
-cropping, binning, thumbnail creation and color/display conversion.
+## Keep useful hard photographic detail
 
-The sandstone memorial retains weak relief and fine surface grain in nearly
-uniform material. Photographed sculpture and painted physical objects remain
-useful when their source and binned target are coherent. The same review retains
-faint plaster, weathered wood/window paint, stonework and leaf/branch detail.
+Fine curtain fabric, weak pale facade texture and weathered surfaces remain
+eligible. High ADC-only loss is not a reason to remove actual woven detail.
 
-![Faint stone relief: context, native source and native area8 target](images/v120-source-loss-first800-v1/faint-stone-relief.png)
+![Retained curtain/facade detail: context, native source and area8 target](images/v120-source-loss-through5000-v1/weak-window-fabric.png)
 
-Source: [Ermell, Kirchehrenbach memorial](https://commons.wikimedia.org/wiki/File:Kirchehrenbach_Grabplatte-20160821-RM-171306.jpg),
+Source: [Jacek Halicki, Kłodzko window](https://commons.wikimedia.org/wiki/File:2025_K%C5%82odzko,_ul._Okrzei_20_(4).jpg),
 [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/). Same modifications.
 
-## Larger views resolve four ambiguities
+Brown fur and fine grass provide difficult, real material with low-contrast
+structure. The native hair texture and coherent binned body/grass are retained;
+this does not add a new ROI quota or claim the source is noiseless.
 
-The winter scene's larger view separates snow along real fence rails, fine
-branches, wood and layered gardens. The binned target retains coherent geometry.
-Some native grain and strong edge contrast remain; neither alone establishes
-pervasive false texture.
+![Retained fine brown fur: context, native source and area8 target](images/v120-source-loss-through5000-v1/fine-brown-fur.png)
 
-![Winter fences: context, native source and native area8 target](images/v120-source-loss-first800-v1/winter-fences.png)
+Source: [Diego Delso, waterbuck](https://commons.wikimedia.org/wiki/File:Ant%C3%ADlopes_acu%C3%A1ticos_(Kobus_ellipsiprymnus),_parque_nacional_del_Lago_Mburo,_Uganda,_2024-02-01,_DD_41.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/). Same modifications.
 
-[Unchanged native1024 view](images/v120-source-loss-first800-v1/native1024-c72250acfd9d.png).
-Source: [mattbuck, Beeston MMB80](https://commons.wikimedia.org/wiki/File:Beeston_MMB_80.jpg),
-[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/). Same modifications.
+Larger views clear two ambiguities. Saturated flowers show real petal veins,
+folds, surface specks and shadow overlap; vivid color and some source grain
+remain. The night church shows worn plaster/masonry, roof seams, twigs and
+window mesh under colored illumination. Its dark roof is grainy, but the
+inspected area8 target remains coherent. These are retained under the current
+binning strategy, without claiming noiseless scenes or identifying a particular
+processing algorithm.
 
-The football source visibly contains grain in cloth and dark clothing. Larger
-pixels also show coherent folds, seams and lettering; area8 reduces the grain
-while retaining scene structure. Retain it under the current binning strategy,
-without calling the source noiseless.
+![Retained night church after larger native inspection](images/v120-source-loss-through5000-v1/retained-night-church.png)
 
-![Grainy banner: context, native source and native area8 target](images/v120-source-loss-first800-v1/grainy-banner.png)
-
-[Unchanged native1024 view](images/v120-source-loss-first800-v1/native1024-30a0663203bb.png).
-Source: [Steindy, Austria–Liechtenstein2015](https://commons.wikimedia.org/wiki/File:AUT_vs._LIE_2015-10-12_(154).jpg),
-[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/). Same modifications.
-
-The other two larger views resolve coherent leaf clusters/twigs and distant
-bridge/building structure. Ordinary distance/focus variation does not justify
-removing these photographs.
-[Foliage native1024](images/v120-source-loss-first800-v1/native1024-16536c5ab12c.png) ·
-[Bridge/city native1024](images/v120-source-loss-first800-v1/native1024-2c5a649be198.png).
-Sources: [Steffen Schmitz, Moers foliage](https://commons.wikimedia.org/wiki/File:Moers,_Kaisers_Buche,_2015-08_CN-02.jpg),
+Unchanged native1024 views: [flowers](images/v120-source-loss-through5000-v1/native1024-81a7bcc2fab8.png) ·
+[night church](images/v120-source-loss-through5000-v1/native1024-da1d85988cd2.png).
+Sources: [Krzysztof Golik, Primula](https://commons.wikimedia.org/wiki/File:Primula_cultivar_in_Jardins_de_la_Fontaine_in_Nimes_04.jpg),
 [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/), and
-[Berthold Werner, Córdoba](https://commons.wikimedia.org/wiki/File:Spain_Andalusia_Cordoba_BW_2015-10-27_12-11-26.jpg),
-[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/). Modified by
-cropping and color/display conversion; full metadata is adjacent to each image.
+[PereslavlFoto, All Saints church](https://commons.wikimedia.org/wiki/File:Gm-allsaints-6744.jpg),
+[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/). Same modifications;
+native1024 views are cropped and color-managed without resizing or binning.
 
-## Verification and next use
+## Prepared next corpus and verification
 
-Original JPEG SHA1 and complete bin4-cache SHA256 checks pass for all28 sources.
-Independent integer four-phase sums and float64 display arithmetic rebuild
-5,505,024 target-preview channel values. Only32 values differ from the renderer's
-FP32 result, each by one DN8 at rounding. Four native1024 supplements overlap
-the earlier native256 crops at786,432 exactly matching channel values. All eight
-published PNGs are byte-identical to their actually inspected originals.
+The coupled4×/8× manifests remove exactly that one training ID from90,787.
+Every other literal row and its order, all validation/test/reserved membership,
+and all source/cache pixels stay identical. The rebound catalogue keeps all14
+region objects and target hashes. Actual `ReviewedPhotoROIs` construction
+verifies every source/crop/target; `PhotoSamplingReference` accepts90,786 active
+sources from the same90,864-ID reference, with all78 excluded-ID routes landing
+on eligible sources. The changed catalogue binding correctly rejects resume;
+use a new run configuration rather than mutating an existing run.
 
-The bounded trace prefix still exactly matches the live log's original bytes.
-Training and all three queued-review input guards pass. This review adds no
-neural calls, noise observations, RAW decodes or source/membership changes.
-A separate ID ledger supports de-duplicating future inspections across explicit
-review scopes; it is not an exclusion list or a uniform corpus audit.
+The future snapshot is prepared for subsequent quality work, with no new
+training job. The current V120/V121 trials still contain the newly identified
+source; their recipes, draw sequence and comparison inputs are not rewritten.
+Both original source/media bytes and their machine receipts remain preserved.
 
-This small, biased early-training sample does not establish whole-corpus
-cleanliness. Continue inspecting current-model source nominations as the run
-grows, while preserving hard photographic detail. The full
-[V120/V121 endpoint comparison](paired32-weak-detail-training.md), actual native
-material/GFX/green-mesh review and model recommendation remain pending.
+All28 original JPEG SHA1 and whole-cache SHA256 checks pass. Independent integer
+four-phase sums plus float64 display arithmetic rebuild5,505,024 target-preview
+channel values;12 differ by one DN8 from FP32 rendering at rounding. Two larger
+views overlap the prior native256 crops at393,216 exactly matching channels.
+All six public PNGs are byte-identical to their actually viewed originals.
+Training and all three queued-review input guards pass. No neural call, noise
+observation, RAW decode or optimizer update is added by this review.
+
+The [earlier first800 review](results/v120-current-source-loss-review-v1.json)
+retained28 sources after native views and four larger checks; its
+[CSV](results/v120-current-source-loss-decisions-v1.csv),
+[pixel verification](results/v120-current-source-loss-review-verification-v1.json)
+and [publication bindings](results/v120-current-source-loss-publication-v1.json)
+remain unchanged. Useful examples include the
+[radiator grille](images/v120-source-loss-first800-v1/radiator-mesh.png) and
+[faint stone relief](images/v120-source-loss-first800-v1/faint-stone-relief.png).
+Across the two Small-model passes,56 distinct sources were inspected:55 retained,
+one withheld. The de-duplication ledger now contains1,615 IDs across explicit
+prior scopes; it is neither a membership/exclusion list nor a uniform corpus
+audit. Whole-corpus cleanliness and a trained-quality effect remain unproven.
