@@ -97,6 +97,19 @@ The separate ISO100/f5.6 exposure remains **not GT**.
 
 ![V120/V121 foliage, platform and sky at the same matched conditioning](images/v120-v121-review-v1/V120-V121-matched-gfx-2.png)
 
+## Supplementary camera-linear reference recovery
+
+The [completed11-capture camera comparison](native-camera-development.md#v120v121-extension)
+adds240 stored observations per endpoint and reuses all existing controls.
+At high noise V120 gains+.01081dB camera-RGB PSNR over V115 and+3.69903dB
+over RawNIND, while V117 retains higher condition means. V121 changes only
+slightly from V120, with no clear large native detail gain. Grass, wood grain
+and lettering remain substantially finer than RawNIND, but faint foliage stays
+soft. Two native noisy/restored/reference triplets per new endpoint and all
+twelve boards are published. These binned low-noise references are **not exact
+noiseless GT**, and the inputs have added noise rather than real high ISO.
+[Full metrics, independent reductions and actual native review](results/native-camera-development-v120-v121-v1.json).
+
 ## Matched-profile full-frame GFX
 
 The additional V120/V121 operators use the **fixed historical input-Haar profile**:

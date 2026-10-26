@@ -75,6 +75,13 @@ inputs. Version differences are small in these six low-ISO regions; dark rocks
 and window edges stay soft. Concrete texture looks finer than RawNIND, with no
 clean reference establishing every fluctuation as real detail.
 
+The [completed camera-linear development comparison](native-camera-development.md#v120v121-extension)
+also includes V120/V121 on11 binned captures under added noise. V120 exceeds
+RawNIND by3.69903dB in high-noise camera-RGB PSNR and retains substantially finer
+native texture. V117 still has higher condition means; V121 changes only slightly.
+Low-noise reference estimates and added-noise inputs do not establish broad
+real high-ISO superiority.
+
 V114 adds20k updates to the V112 EMA at seed63, using90,864 reviewed Commons
 sources, native128/paired32 targets,4×→geometry→area2, zero optical PSFs,
 weak textures and photographic contrast attenuation. Reconstruction epsilon

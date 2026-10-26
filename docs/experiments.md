@@ -38,6 +38,10 @@ main-GFX noise profiles. The additional
 now matches older inputs exactly, with subtle changes and continued detail loss.
 [Completed primary means and native triplets](v120-v121-primary.md) show V120's
 camera/color recovery and V121's remaining ADC tail.
+The [V120/V121 camera-linear extension](native-camera-development.md#v120v121-extension)
+adds480 new predictions on the frozen11-capture development set and reuses960
+controls. V120 gains modestly over V115 and retains much finer texture than
+RawNIND; V117 retains higher condition means and V121's changes are tiny.
 
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias

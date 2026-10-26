@@ -1,11 +1,24 @@
 # Learned RAW frequency features: V122/V123 training
 
-**V122 is running its original20,000-update run; V123 follows.** The same V122
-worker resumed after V120/V121 completed. Its temporary GPU yield preserved
-the in-memory training state, without a restart or checkpoint reload.
+**V122 completed its original20,000 updates; V123 joint adaptation is running.**
+The original controller advanced to V123 after the same V122 worker completed.
+V122's temporary GPU yield preserved the in-memory training state, without a
+restart or checkpoint reload.
 These are the first full-budget trials of the [learned frequency input adapter](learned-raw-frequency-features.md).
 All four discarded CPU/CUDA checks passed. Endpoint PSNR and native image
-quality remain unmeasured. V114, V115 and V117 retain their documented uses.
+quality remain unmeasured. V120 remains the current general recommendation;
+V114, V115 and V117 retain their documented uses.
+
+[Original V122 completion receipt](results/v122-frequency-training-complete-v1.json) ·
+[Independent saved-state verification](results/v122-frequency-training-verification-v1.json).
+All96 model/EMA tensors and five AdamW states are finite at step20,000.
+The91 common tensors exactly equal the V115 parent in both model and EMA;
+only the3,264-value adapter was trainable. Counts are20,000 prepared batches,
+training forwards and optimizer updates, plus640 validation forwards and20,640
+encoder calls. Domains match the prospectively declared9,900 Commons/procedural,4,979
+paired/5,121 native batches. The CPU verification constructs no model, adds no
+forwards and leaves CUDA uninitialized; it does not reconstruct every training
+input or establish image quality. The original evaluator waits for both full runs.
 
 [Launch and implementation evidence](results/v122-v123-frequency-training-start-v1.json) ·
 [V122 recipe](../configs/quality-v115-learned-frequency-only-v122.yaml) ·

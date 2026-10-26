@@ -3,14 +3,20 @@
 A supplementary development set has **20 fixed 256px regions from 11 CC0
 captures**, with 240 shared synthetic-noise observations. It starts from
 phase-aligned, low-ISO camera RGB rather than processed Commons RGB. Source WB
-and color matrices remain attached to each region. **All five methods, CPU
-metrics and actual native review are complete.** Our joint models preserve
-much finer texture than released RawNIND on these binned inputs with added
-noise. V119 improves slightly over V115; V117 retains higher condition means.
+and color matrices remain attached to each region. **The original five-method
+comparison and V120/V121 extension, CPU metrics and native review are complete.**
+V120 adds a small gain over V115 and preserves much finer texture than released
+RawNIND on these binned inputs with added noise. V117 retains the highest
+condition means; V121 changes only slightly from V120.
 [Selection and protocol](../configs/native-camera-development-v1.json) ·
 [Preparation and actual readback evidence](results/native-camera-development-inputs-v1.json) ·
 [Original queue and preflight](results/native-camera-development-queue-v1.json) ·
 [Completed metrics, recovery and native review](results/native-camera-development-comparison-complete-v1.json).
+[Current V120/V121 extension, all metrics and actual native viewing](results/native-camera-development-v120-v121-v1.json)
+adds480 new root/encoder calls and reuses960 completed controls, with no new
+noise draws, reference-network calls or RAW decoding. All39,628,800 channel
+values in the twelve native boards and twelve saved triplets independently
+match the retained arrays and a separate display implementation.
 [Independent publication checks](results/v119-quality-publication-verification-v1.json)
 verify all420 board cells against retained inputs/predictions and all ten
 triplets against those cells:32,256,000 channel values, exactly.
@@ -142,11 +148,15 @@ phase-aligned binning, cropping and the shared display transform.
 | V115 | 49.912 / 38.614 | 49.726 / 38.761 | 41.827 / 33.084 |
 | **V117** | **50.027 / 38.716** | **49.783 / 38.816** | **41.841 / 33.102** |
 | V119 | 50.001 / 38.695 | 49.773 / 38.804 | 41.836 / 33.093 |
+| **V120 current general choice** | 49.999 / 38.697 | 49.775 / 38.806 | 41.838 / 33.095 |
+| V121 | 49.995 / 38.694 | 49.775 / 38.808 | 41.838 / 33.096 |
 | RawNIND preupsample | 39.107 / 30.447 | 39.091 / 30.434 | 38.139 / 29.749 |
 
 PSNR is in dB. The80 observations per method/condition average within capture,
-then give each of11 captures equal weight. All1200 predictions share the same
-stored noisy inputs and low-noise reference estimates. These are neither exact
+then give each of11 captures equal weight. The current matched archive contains
+1440 predictions from V115/V117/V119/V120/V121/RawNIND on the same stored noisy
+inputs and low-noise reference estimates. V114 retains its original completed
+scores; its inference was not repeated or added to this archive. These are neither exact
 noiseless GT nor real high-ISO captures. Small differences between joint models
 should be considered alongside the larger full-photo/measured-camera panels.
 [Complete per-case/source metrics and bootstrap intervals](results/native-camera-development-comparison-complete-v1.json).
@@ -160,21 +170,54 @@ existing CFA-channel adapter, with no target fitting, input clipping or extra
 input scaling. Checkpoint SHA256 is
 `3d8d5fab966f790f4adbaf1786ca1ee81cb027d9cd45220787247b0af99fd814`.
 
+### V120/V121 extension
+
+V120's rendered-sRGB changes over V115 are+.08257/+.04507/+.01150dB at ADC/
+ISO100/ISO12800. Its high-noise camera-RGB gain is+.01081dB, with10/11 capture
+means rising and a capture-bootstrap95% interval of[+.00544,+.01690]dB.
+Against V119, changes are smaller: high-noise camera-RGB+.00124dB, with an
+interval crossing zero. V120 remains below V117's means on all three conditions.
+
+V120 exceeds RawNIND at high noise by+3.69903dB in camera RGB and+3.34656dB in
+rendered sRGB, with11/11 camera-RGB capture means rising. This establishes
+reference recovery on this fixed binned set, not broad real high-ISO superiority.
+V121 versus V120 changes high-noise camera RGB by+.00004dB and sRGB by+.00086dB;
+both intervals cross zero. No clear large native detail gain appears.
+
+For the2–5% relative reference-contrast group at high noise, projected band gain
+is.44065(V119),.44185(V120) and.43920(V121), over seven contributing captures.
+These small changes coexist with soft grass/foliage. Reference noise can enter
+the band. The still weaker0–2% group has only four captures and includes a sky/
+field control plus very few blocks in three other sources; its response is not
+a direct measurement of lost noiseless scene detail.
+
+[Full per-source changes and intervals, local-band support, exact checkpoint/input bindings](results/native-camera-development-v120-v121-v1.json).
+All960 reused per-observation metric rows remain exactly equal to the original
+analysis. Independent hierarchical reductions verify90 reported means. The
+[incremental collector](../scripts/evaluate_native_camera_development.py) checks
+all five input arguments before each new forward and never loads reused models.
+
 ## Native comparisons
 
-All12 boards were actually viewed:20 contexts at each of three conditions,
-with420 unchanged160px cells across noisy/five methods/reference. Grass,
+All12 new boards were actually viewed:20 contexts at each of three conditions,
+with480 unchanged160px cells across noisy/six methods/reference. Grass,
 weathered-rail grain, mortar joints, fine branches and lettering are substantially
 clearer in the joint models than RawNIND. High-noise grass/foliage remain soft,
 and differences between our versions are subtle. The reference can contain
 residual source noise/optical blur. A higher reference-band response alone does
 not establish better scene detail.
 
-Native noisy → V119 → low-noise reference estimate, ISO12800 prior:
+Native noisy → **V120** → low-noise reference estimate, ISO12800 prior:
 
-![GFX50S II grass and roots, V119 and reference estimate](images/native-camera-development-comparison-v1/V119-pixls-5002-fine-native-triplet.png)
+![GFX50S II grass and roots, V120 and reference estimate](images/native-camera-development-v120-v121-v1/V120-pixls-5002-fine-native-triplet.png)
 
-![Leica SL weathered rail, V119 and reference estimate](images/native-camera-development-comparison-v1/V119-pixls-1951-field-native-triplet.png)
+![Leica SL weathered rail, V120 and reference estimate](images/native-camera-development-v120-v121-v1/V120-pixls-1951-field-native-triplet.png)
+
+Same observations and display, V121:
+
+![GFX50S II grass and roots, V121 and reference estimate](images/native-camera-development-v120-v121-v1/V121-pixls-5002-fine-native-triplet.png)
+
+![Leica SL weathered rail, V121 and reference estimate](images/native-camera-development-v120-v121-v1/V121-pixls-1951-field-native-triplet.png)
 
 Same inputs and display, released RawNIND:
 
@@ -185,11 +228,11 @@ Same inputs and display, released RawNIND:
 All cells are native160 at8×-binned reference resolution, RGGB, context256,
 ROI[48,48,160,160], shot.00256/read2.62144e−5. Each source uses its recorded
 WB/matrix/exposure identically across methods; no pixels are resized.
-[Full source/ROI/checkpoint/display metadata and all12 boards](images/native-camera-development-comparison-v1/manifest.json) ·
-[Grass/mortar/foliage high-noise board](images/native-camera-development-comparison-v1/all-native-iso12800-prior-1.png) ·
-[Wood/woodland](images/native-camera-development-comparison-v1/all-native-iso12800-prior-2.png) ·
-[Masonry/pond](images/native-camera-development-comparison-v1/all-native-iso12800-prior-3.png) ·
-[Tea/trees/lettering](images/native-camera-development-comparison-v1/all-native-iso12800-prior-4.png).
+[Full source/ROI/checkpoint/display metadata and all12 current boards](images/native-camera-development-v120-v121-v1/manifest.json) ·
+[Grass/mortar/foliage high-noise board](images/native-camera-development-v120-v121-v1/all-native-iso12800-prior-1.png) ·
+[Wood/woodland](images/native-camera-development-v120-v121-v1/all-native-iso12800-prior-2.png) ·
+[Masonry/pond](images/native-camera-development-v120-v121-v1/all-native-iso12800-prior-3.png) ·
+[Tea/trees/lettering](images/native-camera-development-v120-v121-v1/all-native-iso12800-prior-4.png).
 Sources are the per-file CC0 captures listed above, modified by phase-aligned
 binning, cropping, simulated noise and restoration.
 

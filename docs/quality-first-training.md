@@ -1,9 +1,11 @@
 # Current quality training
 
-**V122 is training its learned frequency input adapter; V123 follows with joint
-adaptation.** Both retain their fixed V115 Small parent and90786/fourteen-region
-cohort for the controlled scope comparison. The GPU coordinator resumed V122's
-same worker after V120/V121 completed, preserving its in-memory state.
+**V122 completed20,000 adapter-only updates; V123 joint adaptation is running.**
+Both retain their fixed V115 Small parent and90786/fourteen-region cohort for
+the controlled scope comparison. V122's91 common model/EMA tensors remain
+exactly equal to V115, with five finite AdamW states at step20,000. Image quality
+is still unmeasured; the original evaluator waits for both full runs. The GPU
+coordinator preserved V122's same in-memory worker through its temporary yield.
 [Current training, checks and queued review](learned-raw-frequency-training.md).
 
 V120/V121 completed their original20k runs, independent audits and selected

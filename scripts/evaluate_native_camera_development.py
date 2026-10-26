@@ -7,6 +7,7 @@ import json
 import math
 import os
 import random
+import shutil
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -58,6 +59,101 @@ def source_means(rows, metric):
     for row in rows:
         groups[row["source_id"]].append(row[metric])
     return {source: float(np.mean(values)) for source, values in sorted(groups.items())}
+
+
+def validate_methods(plan):
+    """Declare distinct operators before any checkpoint or neural work."""
+    methods = plan["methods"]
+    labels = [m["label"] for m in methods]
+    digests = [m["checkpoint"]["sha256"] for m in methods]
+    if (not methods or len(set(labels)) != len(labels) or len(set(digests)) != len(digests)
+            or any(not isinstance(label, str) or not label for label in labels)
+            or any(m["kind"] not in {"joint", "rawnind-preup"} for m in methods)
+            or any(not isinstance(digest, str) or len(digest) != 64
+                   or any(c not in "0123456789abcdef" for c in digest) for digest in digests)):
+        raise ValueError("Declare distinct native operators with valid checkpoint identities")
+    return methods
+
+
+def expected_counts(plan, observations):
+    methods = validate_methods(plan)
+    return {"root": observations*len(methods),
+            "encoder": observations*sum(m["kind"] == "joint" for m in methods),
+            "reference": observations*sum(m["kind"] == "rawnind-preup" for m in methods)}
+
+
+def comparison_pairs(plan):
+    labels = {m["label"] for m in validate_methods(plan)}
+    pairs = plan.get("comparison_pairs", [[c, "V119"] for c in ("V114", "V115", "V117", "RawNIND-preup")])
+    if (not pairs or any(len(p) != 2 or p[0] == p[1] or set(p)-labels for p in pairs)
+            or len({tuple(p) for p in pairs}) != len(pairs)):
+        raise ValueError("Declare distinct native comparison pairs covered by the methods")
+    return pairs
+
+
+def reuse_verified_predictions(plan, dataset, archive):
+    """Extend a completed comparison without loading or forwarding old controls."""
+    retained = plan.get("retained_predictions", {})
+    if not retained:
+        return []
+    if plan.get("retained_collection"):
+        raise ValueError("Choose completed prediction reuse or legacy failure recovery")
+    methods = {m["label"]: m for m in validate_methods(plan)}
+    if set(retained)-methods.keys():
+        raise ValueError("Retained predictions include an undeclared method")
+    expected = {o["id"]:o for o in dataset["observations"]}
+    if len(expected) != len(dataset["observations"]):
+        raise ValueError("Duplicate native observation identities")
+    references = {r["case_id"]:fingerprint(np.load(checked(r["reference_camera_FP32"]), allow_pickle=False))
+                  for r in dataset["rows"]}
+    targets = {r["case_id"]:r for r in dataset["rows"]}
+    groups, seen, results = {}, {label:set() for label in retained}, []
+    for label, item in retained.items():
+        collection = read(checked(item["collection"]))
+        assert collection["status"] == "completed-new-native-input-predictions-awaiting-CPU-review"
+        assert collection["archive"] == item["archive"]
+        previous = read(checked(collection["execution_plan"]))
+        assert previous["dataset_manifest"] == plan["dataset_manifest"]
+        record = next(r for r in collection["methods"] if r["method"]["label"] == label)
+        assert record["method"] == methods[label]
+        assert record["root_calls"] == len(expected)
+        assert record["encoder_calls"] == (len(expected) if methods[label]["kind"] == "joint" else 0)
+        assert record["reference_network_calls"] == (len(expected) if methods[label]["kind"] == "rawnind-preup" else 0)
+        key = (item["archive"]["path"], item["archive"]["sha256"])
+        groups.setdefault(key, []).append(label)
+        results.append({"method":methods[label], "root_calls":len(expected),
+                        "encoder_calls":record["encoder_calls"],
+                        "reference_network_calls":record["reference_network_calls"],
+                        "new_root_calls":0, "reused_prediction_count":len(expected),
+                        "source_collection":item["collection"],"source_archive":item["archive"],
+                        "integrity":"Completed source method receipt and exact stored input/target/prediction bindings verified; no model loading or new forwards."})
+    for (path, digest), labels in groups.items():
+        for record, prediction, supervision in iter_predictions(checked({"path":path,"sha256":digest})):
+            label, context = record["model"]["label"], record["context"]
+            if label not in labels:
+                continue
+            assert len(context["ids"]) == 1
+            identity = context["ids"][0]
+            assert identity in expected and identity not in seen[label]
+            observation, method = expected[identity], methods[label]
+            assert context["input_arrays"] == observation["arrays"]
+            assert context["input_fingerprints"] == observation["input_fingerprints"]
+            assert context["case_id"] == observation["case_id"]
+            assert all(context[k] == observation[k] for k in
+                       ("source_id","scene_group","source_file_id","condition","pattern"))
+            assert context["score_ROI_xywh"] == [48,48,160,160]
+            assert context["display_exposure"] == targets[observation["case_id"]]["display_exposure"]
+            assert context["target_role"] == dataset["target_role"]
+            assert fingerprint(supervision["target"]) == references[observation["case_id"]]
+            assert all(fingerprint(supervision[k]) == observation["input_fingerprints"][k] for k in ("wb","matrix"))
+            assert record["model"] == {"label":label,"sha256":method["checkpoint"]["sha256"],
+                "step":20000 if method["kind"] == "joint" else None,
+                "self_ensemble":"none","kind":method["kind"]}
+            archive.append(record["model"], context, prediction, supervision,
+                           prediction_file=record["prediction"]["path"])
+            seen[label].add(identity)
+    assert all(identities == set(expected) for identities in seen.values())
+    return results
 
 
 def proof(output):
@@ -186,14 +282,13 @@ def _collect(plan_path, tracking):
     guard(plan)
     root, work = Path(plan["root"]), Path(plan["work"])
     assert binding(__file__) == plan["collector_source"]
-    assert [m["label"] for m in plan["methods"]] == ["V114", "V115", "V117", "V119", "RawNIND-preup"]
-    assert len({m["checkpoint"]["sha256"] for m in plan["methods"]}) == 5
+    validate_methods(plan)
     assert os.environ["CUDA_VISIBLE_DEVICES"] == "0"
     assert Path(load_checkpoint.__code__.co_filename).absolute().is_relative_to(work / "src")
     (root / "collector.claim").open("x").close()
     assert psutil.virtual_memory().available >= 48 * 2**30
     torch.set_num_threads(4)
-    torch.cuda.set_per_process_memory_fraction(min(1, 24*2**30/torch.cuda.get_device_properties(0).total_memory))
+    torch.cuda.set_per_process_memory_fraction(min(1, plan.get("CUDA_quota_GiB",24)*2**30/torch.cuda.get_device_properties(0).total_memory))
     torch.set_float32_matmul_precision("highest")
     torch.backends.cuda.matmul.allow_tf32 = torch.backends.cudnn.allow_tf32 = False
     torch.backends.cudnn.benchmark = True
@@ -201,6 +296,7 @@ def _collect(plan_path, tracking):
     targets = {r["case_id"]: r for r in dataset["rows"]}
     manifest = dataset["observations"]
     assert len(manifest) == 240 and len(targets) == 20
+    counts = expected_counts(plan, len(manifest))
     loaded, references = [], {}
     for row in targets.values():
         values = np.load(checked(row["reference_camera_FP32"]), allow_pickle=False)
@@ -212,7 +308,7 @@ def _collect(plan_path, tracking):
         assert {k: fingerprint(v) for k, v in batch.items()} == observation["input_fingerprints"]
         loaded.append((observation, batch))
     archive = PredictionArchive(root / "archive")
-    results = reuse_completed_joint_predictions(plan, dataset, archive)
+    results = reuse_completed_joint_predictions(plan, dataset, archive) + reuse_verified_predictions(plan, dataset, archive)
     reused = {r["method"]["label"] for r in results}
     for method in plan["methods"]:
         if method["label"] in reused:
@@ -250,12 +346,17 @@ def _collect(plan_path, tracking):
 
         def before(module, args, record=record):
             tracking["started_root_calls"] += 1
+            assert tracking["started_root_calls"] <= plan.get("planned_new_root_calls",counts["root"])
             assert not module.training and len(args) == 5
             assert not torch.backends.cuda.matmul.allow_tf32 and not torch.backends.cudnn.allow_tf32
             actual_inputs = {k: fingerprint(v) for k, v in zip(("packed", "variance", "colors", "wb", "matrix"), args, strict=True)}
             assert actual_inputs == record["expected_inputs"]
             record["latest_inputs"] = actual_inputs
-            assert psutil.virtual_memory().available >= 24 * 2**30
+            assert psutil.virtual_memory().available >= plan.get("runtime_RAM_GiB",24) * 2**30
+            if "runtime_internal_reserve_GiB" in plan:
+                assert shutil.disk_usage(root).free >= plan["runtime_internal_reserve_GiB"]*2**30
+            if "external_free_reserve_GiB" in plan:
+                assert shutil.disk_usage("/mnt/external").free >= plan["external_free_reserve_GiB"]*2**30
 
         def after(module, args, prediction, record=record):
             assert prediction.shape == (1, 3, 256, 256) and prediction.dtype == torch.float32
@@ -320,20 +421,25 @@ def _collect(plan_path, tracking):
         write(root / (method["label"] + "-method-v1.json"), record)
         results.append(record)
     alignment = archive.verify_alignment()
-    assert alignment["models"] == 5 and alignment["observations_per_model"] == 240 and alignment["records"] == 1200
-    assert sum(r["root_calls"] for r in results) == 1200
-    assert sum(r["encoder_calls"] for r in results) == 960
+    assert alignment["models"] == len(plan["methods"]) and alignment["observations_per_model"] == 240 and alignment["records"] == counts["root"]
+    assert sum(r["root_calls"] for r in results) == counts["root"]
+    assert sum(r["encoder_calls"] for r in results) == counts["encoder"]
+    assert sum(r["reference_network_calls"] for r in results) == counts["reference"]
+    if "planned_new_root_calls" in plan:
+        assert tracking["started_root_calls"] == tracking["completed_valid_root_calls"] == plan["planned_new_root_calls"]
     guard(plan)
     write(root / "collection-result-v1.json", {"status": "completed-new-native-input-predictions-awaiting-CPU-review",
           "recorded_local": local_time(), "owner": {"pid": os.getpid(), "created": psutil.Process().create_time()},
           "execution_plan": binding(plan_path), "archive": binding(archive.manifest), "methods": results,
-          "alignment": alignment, "neural_root_calls": 1200, "frozen_DINO_encoder_calls": 960,
+          "alignment": alignment, "neural_root_calls": counts["root"], "frozen_DINO_encoder_calls": counts["encoder"],
           "actual_tracking": tracking,
           "retained_collection": plan.get("retained_collection"),
           "new_neural_root_calls": sum(r["new_root_calls"] for r in results),
+          "new_frozen_DINO_encoder_calls": tracking["encoder_calls"],
+          "new_reference_network_calls": tracking["reference_network_calls"],
           "reused_prediction_count": sum(r["reused_prediction_count"] for r in results),
           "new_noise_observations": 0, "optimizer_updates": 0, "RAW_decodes": 0,
-          "scope": "First predictions on the frozen 240 native-camera development inputs; single-view IEEE FP32. Identical stored inputs and target estimates across methods. No new noise, target/inverse-camera conversion or intermediate V119 checkpoint. Native viewing and recommendation remain separate."})
+          "scope": "Only declared new endpoints are inferred on the frozen240 observations; completed controls can be reused with exact input/target/transform and source-collection bindings. Single-view IEEE FP32, explicit new/reused call counts, no new noise/RAW/target conversion. Native viewing and recommendation remain separate."})
 
 
 def analyze(plan_path):
@@ -349,7 +455,8 @@ def analyze(plan_path):
     root = Path(plan["root"])
     (root / "analysis.claim").open("x").close()
     collection = read(checked(binding(root / "collection-result-v1.json")))
-    assert collection["neural_root_calls"] == 1200 and collection["execution_plan"] == binding(plan_path)
+    counts = expected_counts(plan,240)
+    assert collection["neural_root_calls"] == counts["root"] and collection["execution_plan"] == binding(plan_path)
     output = root / "analysis"
     output.mkdir(exist_ok=False)
     proof(output / "metric-proof-v1.json")
@@ -425,7 +532,7 @@ def analyze(plan_path):
                     def pixels(value, supervision=supervision, exposure=exposure):
                         return np.rint(np.clip(archive_metrics.display(value, supervision, exposure)[0,:,48:208,48:208].transpose(1,2,0),0,1)*255).astype(np.uint8)
                     displayed[key] = (pixels(noisy),pixels(supervision["target"]),supervision)
-    assert len(numerical) == 1200 and len(reference_cache) == 20
+    assert len(numerical) == counts["root"] and len(reference_cache) == 20
     summaries = []
     for method in plan["methods"]:
         for condition in dataset["noise_protocol"]["conditions"]:
@@ -453,15 +560,15 @@ def analyze(plan_path):
     comparisons = []
     index = {(r["method"],r["condition"]):r for r in summaries}
     resampling = np.random.default_rng(20261025).integers(0,11,size=(10000,11))
-    for control in ("V114","V115","V117","RawNIND-preup"):
+    for control, candidate in comparison_pairs(plan):
         for condition in dataset["noise_protocol"]["conditions"]:
             for metric in ("linear_psnr","srgb_psnr","chroma_mae","gradient_mae"):
                 left = index[(control,condition["name"])]["metrics"][metric]["by_source"]
-                right = index[("V119",condition["name"])]["metrics"][metric]["by_source"]
+                right = index[(candidate,condition["name"])]["metrics"][metric]["by_source"]
                 assert left.keys()==right.keys() and len(left)==11
                 changes = np.array([right[k]-left[k] for k in sorted(left)])
                 sampled = changes[resampling].mean(1)
-                comparisons.append({"control":control,"candidate":"V119","condition":condition["name"],
+                comparisons.append({"control":control,"candidate":candidate,"condition":condition["name"],
                     "metric":metric,"change":float(changes.mean()),"capture_bootstrap_95_interval":np.quantile(sampled,[.025,.975]).tolist(),
                     "source_changes":dict(zip(sorted(left),changes.tolist(),strict=True)),
                     "positive_is_better":metric.endswith("psnr")})
@@ -472,7 +579,7 @@ def analyze(plan_path):
         name = condition["name"]
         for page in range(4):
             case_rows = dataset["rows"][page*5:page*5+5]
-            board = Image.new("RGB",(1120,960),(25,25,25))
+            board = Image.new("RGB",(160*(len(labels)+2),960),(25,25,25))
             draw = ImageDraw.Draw(board)
             for j,label in enumerate(["Noisy Malvar",*labels,"Low-noise reference"]):
                 draw.text((j*160+4,7),label,font=font,fill="white")
@@ -503,12 +610,13 @@ def analyze(plan_path):
             boards.append({"image":binding(path),"condition":name,"pattern":"RGGB","case_ids":[r["case_id"] for r in case_rows],"resized":False})
     write(output/"native-images-v1.json",{"triplets":images,"boards":boards,"methods":plan["methods"],"dataset":plan["dataset_manifest"],
          "target_role":dataset["target_role"],"scope":"All cells native160 without resizing; noisy Malvar/method/low-noise reference. Same source transforms/exposure across methods. Source estimates retain noise/optics; actual viewing remains pending."})
-    write(output/"metrics-v1.json",{"primary":summaries,"V119_comparisons":comparisons,"local_reference_band":local_summaries,
+    comparison_field = "comparisons" if "comparison_pairs" in plan else "V119_comparisons"
+    write(output/"metrics-v1.json",{"primary":summaries,comparison_field:comparisons,"local_reference_band":local_summaries,
          "unique_physical_reference_blocks":len(physical_blocks),"total_ROI_reference_blocks":2000,
          "local_definition":{"block":16,"band":[1/8,1/3],"reference_RMS_minimum":1e-5,"reference_luma_range":[.02,.9],"relative_reference_contrast_edges":[0,.02,.05,.1,.2]},
          "scope":"NumPy64 scored native160. CFA/ROI repetitions average within source before equal-source means. Local band pools CFA/ROI blocks within source; repeated/overlapping blocks add no independent sources. Reference noise may contribute to fine bands; these measure reference recovery, not exact scene-detail recovery."})
     lines = ["# Native camera development comparison", "",
-             "First predictions on 20 fixed binned contexts from 11 captures, three declared noise priors/four CFAs. References are low-noise estimates, not exact noiseless GT. Actual native viewing and interpretation remain pending.", "",
+             "Retained predictions on20 fixed binned contexts from11 captures, three declared noise priors/four CFAs. Completed controls are reused when declared. References are low-noise estimates, not exact noiseless GT. Actual native viewing and interpretation remain pending.", "",
              "Source-level means average the repeated CFA/ROI cases within capture before equal-capture aggregation. Camera/place identities and training-seed uncertainty are not resolved by these small-set bootstrap intervals. The full 427-photo, measured-camera and standing GFX results retain their own scope.", "",
              "| Method | Condition | Camera RGB PSNR | Rendered sRGB PSNR | Chroma MAE | Gradient MAE |",
              "| --- | --- | ---: | ---: | ---: | ---: |"]
@@ -531,7 +639,7 @@ def analyze(plan_path):
          "per_observation":binding(output/"per-observation-v1.jsonl"),"metrics":binding(output/"metrics-v1.json"),
          "native_images":binding(output/"native-images-v1.json"),"metric_proof":binding(output/"metric-proof-v1.json"),
          "report":binding(output/"report.md"),
-         "methods":5,"observations":1200,"sources":11,"native_triplets":10,"native_boards":12,
+         "methods":len(plan["methods"]),"observations":counts["root"],"sources":11,"native_triplets":2*len(plan["methods"]),"native_boards":12,
          "new_neural_forwards":0,"new_noise_observations":0,"RAW_decodes":0,"Torch_imported":False,
          "scope":"First source-balanced camera-RGB/sRGB/local-reference-band results on the frozen native development inputs. Capture-level/finite identity limits apply. Actual native viewing, interpretation and useful-model documentation remain required; no automatic promotion."})
 

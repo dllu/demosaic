@@ -25,9 +25,11 @@ balance without imposing a study-specific promotion gate.
 [V119's complete review](docs/v119-quality.md) finds a +.06131dB photo gain over
 V115 after cleaned-data training, but a −.22342dB known-camera regression and
 a large ADC color outlier. Its real fine-detail softness remains. The completed
-[11-capture native-camera comparison](docs/native-camera-development.md) shows
-substantially finer detail than RawNIND on binned references with added noise;
-V117 remains ahead of V119 there. Our current training uses zero optical blur and
+[11-capture native-camera comparison](docs/native-camera-development.md) now includes
+V120/V121: V120 retains substantially finer detail than RawNIND and gains3.699dB
+in high-noise camera-RGB PSNR on binned references with added noise. V117 retains
+higher condition means; changes among the newer joint models are small.
+Our current training uses zero optical blur and
 geometry before final downsampling. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
 
