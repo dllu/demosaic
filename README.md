@@ -32,6 +32,8 @@ higher condition means; changes among the newer joint models are small.
 Our current training uses zero optical blur and
 geometry before final downsampling. [Data review](docs/incoming-commons-quality.md) ·
 [Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
+The [latest source review](docs/v123-final-source-review.md) prepares90,781 photos/
+29 regions, adding weak petal veins and sharp mesh; existing trial inputs stay fixed.
 
 [V120/V121 Small data trials](docs/paired32-weak-detail-training.md) completed
 their original20k updates and independent numerical audit. Saved-output

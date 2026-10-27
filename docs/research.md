@@ -16,19 +16,24 @@ unresolved; broad state-of-the-art quality is unproven.
 | Question | Evidence and current action |
 | --- | --- |
 | Can a frozen foundation encoder supply useful detail supervision? | [Completed V128 pilot](v128-feature-pilot-quality.md): the26-call gradient diagnostic passes, but weight.1 gives no useful gain at1,000 matched updates. Independent scores and all28 native boards are complete; the term stays off by default |
-| Can RAW phase/frequency features preserve thin structures? | [V122/V123 trial](learned-raw-frequency-training.md):V122 adapter-only20k is complete; V123 joint-path continuation preserves its12,249-update emergency state and original20k budget/deadline. [9k pilot](v123-midpoint-quality.md) shows no clear fine-detail gain; final joint review is pending |
+| Can RAW phase/frequency features preserve thin structures? | [V122/V123 trial](learned-raw-frequency-training.md):both20k runs are complete; full endpoint evaluation is collecting. The [9k pilot](v123-midpoint-quality.md) shows no clear fine-detail gain; final review is pending |
+| Does training precision limit faint detail? | [V130](training-precision-pilot.md) matches saved V129 except FP32 training. The [faint ADC panel](faint-adc-precision.md) has completed V120/V129 baselines with mixed small changes; V130 quality is pending |
 | Is weak detail lost through persistent conditional bias? | [Independent-noise diagnosis](conditional-noise-response.md) finds persistent faint fur/wood error after diagnostic multi-observation averaging. [V124/V125](conditional-mean-training.md) tests an additional mean loss with two noise views on both arms; checks are complete and production is queued |
 | Does adding more realistic reviewed shadow detail help? | [Completed V126/V1271000-update pilot](reviewed-shadow-pilot-quality.md) finds no useful gain on its retained material/shadow/GFX support. Shadow policy stays off by default; the23-region reviewed bank remains available |
 | Does fine-detail loss reweighting suffice? | [Completed V117/V11820k comparison](v117-v118-quality.md) finds lower weak natural-detail response and a worse ADC color tail with the normalized band term. Keep it off; improved local output-gradient alignment did not predict trained quality |
 | Does encoder size alone fix weak contrast? | [Full Tiny/Small diagnosis](local-material-detail.md) finds nearly unchanged weakest-stratum gain on427 photos. Small's camera/detail tradeoffs remain useful; no size-only explanation is established |
 
-The latest [source inspection](current-source-loss-review.md) has1,799 unique
+The latest [source inspection](current-source-loss-review.md) has1,839 unique
 reviewed source IDs. Quality work uses zero optical PSF augmentation and
 geometry before final downsampling, with reviewed material regions and corrected
 paired-reference masks. [Training pipeline](training-pipeline.md) ·
 [Actual target contrast coverage](training-target-contrast-coverage.md).
-The most recent forty-source review retains39 and withholds one poster-dominated
-image from a future90,782-source/27-region cohort. Existing training inputs remain fixed. [V129](reviewed-detail-training-pilot.md) now tests the curated27-region cohort using the original loss.
+The final-stage forty-source review retains39 and withholds one painted-tile-
+dominated frame from a future90,781-source/29-region cohort. It adds actual weak
+petal veins and strong fine mesh, preserving all27 earlier region objects.
+Existing training inputs remain fixed. [V129](reviewed-detail-training-pilot.md)
+completed its27-region pilot with small mixed changes and no clear large visible
+recovery; the newer prepared data have not been trained.
 
 ## Foundation features and the new objective
 
