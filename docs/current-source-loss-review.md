@@ -1,17 +1,32 @@
 # Current Small-model source review
 
-**The latest V123 loss-ranked review retains19 of20 photographs and prepares a
-90,783-source future cohort.** One painting-dominated source is withheld;
-fine feathers, foliage, insect hairs and physical glazed tiles remain eligible.
-All twenty weak-detail region objects are preserved. Trained-quality effects
-are unmeasured. Active V122/V123 keep90,786 sources/fourteen regions; queued
-V124/V125 keep their frozen90,784-source/twenty-region inputs.
+**The latest V123 pass retains all40 newly inspected source IDs and extends a
+separate future material bank from20 to23 regions.** Pale animal hair, gray
+feathers and whitewashed brick add physical fine-detail contexts. The earlier
+90,783-source future manifest is unchanged, including its existing exclusions;
+all twenty prior region objects remain exact. Trained-quality effects are
+unmeasured. Active V122/V123 keep90,786/fourteen; queued V124/V125 keep their
+frozen90,784-source/twenty-region inputs.
 
-[Latest20 decisions and independent checks](results/v123-source-loss-through5400-review-v1.json) ·
+[Latest40 decisions, native fields and actual23-region reader checks](v123-source-review-through9800.md) ·
+[All40 decisions and credits](results/v123-source-loss-through9800-decisions-v1.csv) ·
+[Execution and independent verification](results/v123-source-loss-through9800-review-v1.json).
+
+The trace through update9,800 contains752 diagnostic draws,546 photographic
+draws and451 eligible draws from450 IDs after skipping previously inspected
+sources. Eight distinct IDs per noise group plus eight remaining high-gradient
+cases receive actual native review. Seven sheets, four larger source views and
+specific local source/target fields support retaining all40. No automatic
+loss/title filter is applied. The future23-region catalogue passes59 actual
+clean reads; controlled common-region/control targets match5,505,024 values.
+These contexts mix fine detail with strong boundaries, rather than certifying
+uniformly weak contrast or noiseless targets.
+
+[Earlier20 decisions and independent checks](results/v123-source-loss-through5400-review-v1.json) ·
 [Decisions and source credits, CSV](results/v123-source-loss-through5400-decisions-v1.csv) ·
 [Native image metadata](images/v123-source-loss-through5400-v1/manifest.json).
 
-## V123 high-loss source inspection
+## Earlier V123 source inspection through5,400
 
 The frozen trace prefix through update5,400 contains448 diagnostic draws,
 including326 photographic-branch draws. Skipping49 draws already covered by the

@@ -1,35 +1,38 @@
 # Project goals and current evidence
 
-**V114 Tiny is the general restoration and quality-training baseline.**
-It reaches36.97973dB on all427 photos, +.07735 over V112, with422 source means
-improving. Known/unseen measured-CFA means are54.28627/54.00290dB.
-Small improves the known-camera mean and eight-pixel carrier response, while
-Tiny has slightly higher photo PSNR and lower color bias.
-[Current choices](current-model.md) · [Complete comparison](v114-v115-quality.md).
+**V120 Small is the current general restoration and quality-development choice.**
+It reaches37.04008dB on all427 photos and54.31272/54.00872dB known/unseen
+measured-CFA means, with tested ADC maximum55.52DN16. V114 remains a useful
+Tiny alternative with lower tested ADC maximum51.73DN16; V115 has a slightly
+higher known-camera mean and V117 a slightly higher photo score.
+[Current choices](current-model.md) · [Completed primary/native review](v120-v121-primary.md).
 
 The full [PROMPT](../PROMPT.md) objective remains active. Real foliage, finest
 weak detail and dark-camera behavior still need work. The stronger released
 RawNIND wins four of nine camera scene means; this small development set and
 the GFX gallery do not establish broad real-camera superiority. Quality precedes speed.
 
-The [V120/V121 data trials](paired32-weak-detail-training.md) and
-[V122/V123 learned-frequency scope comparison](learned-raw-frequency-training.md)
-are active. The latter uses the prepared90,786-source/fourteen-region corpus;
-its adapter-only arm preserves the parent restoration weights. Their successful
-implementation checks do not yet establish better image quality.
+The [V120/V121 data trials](paired32-weak-detail-training.md) completed their
+original20k updates, numerical/native review and matched-profile complete-frame
+comparisons. In the [V122/V123 frequency trial](learned-raw-frequency-training.md),
+V122 completed20k and V123 is running on90,786 sources/fourteen regions; its
+[9k midpoint](v123-midpoint-quality.md) shows no clear detail gain. The
+[V124/V125 mean-loss trial](conditional-mean-training.md) is queued with frozen
+90,784-source/twenty-region inputs. Successful implementation checks and source
+cleanup alone do not establish trained quality gains.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
-| Excellent joint restoration | V114 photo36.97973dB,422/427 source gains over V112; improved8/16px carrier response | Recover finest detail and reduce adverse cases before SOTA claims |
-| Much better real-photo quality than RawNIND | Complete Tiny/Small GFX frames, six native regions and nine measured-camera scene comparisons; coherent mesh | Reduce foliage/neon smoothing and dark-field mottling; broaden real-camera evidence |
-| 16-bit/full-resolution output | Both101.996MP linear/sRGB RGB16 exports rehashed/reopened;921,600 native channel values match original quantization | Preserve per-checkpoint precision/quality evidence |
+| Excellent joint restoration | V120 photo37.04008dB; recovers V119's camera/color regression while retaining its photo score;427-source panels complete | Recover finest detail and reduce adverse cases before SOTA claims |
+| Much better real-photo quality than RawNIND | Complete GFX frames/six regions and9 measured-camera scene means; supplementary11-capture binned-reference comparison favors joint-model detail | Reduce foliage/neon/fine-mesh loss and dark-field mottling; broaden evidence beyond these small development sets |
+| 16-bit/full-resolution output | V120/V121 complete101.996MP FP32 outputs and linear/sRGB RGB16 exports verified, including matched-Haar full-frame comparisons | Preserve per-checkpoint precision/quality evidence |
 | 100MP within10s on GB10 | Ordered Tiny/Small FP32 observations116.57/101.66s, not a controlled speed ranking | Target open; improve quality before speed work |
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
-| Diverse clean targets and binning |90,864 reviewed sources;4×→geometry→area2, zero optical blur, six ROIs; completed V116 fine-source/mask comparison | Broader weak natural-detail recovery remains poor |
-| Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; Tiny ADC/high-noise max bias51.73/85.40DN16 | Spatial dark-field/weak-detail failures remain |
-| Resource-aware training and evaluation | Exact source/parent snapshots and retained failures; complete V114/V115/V116 numerical, native and RGB16 review | Improve real-photo/detail quality using the measured failures |
-| Protected originals/tests | Local GFX3879/3880 cache; originals read-only; standing scene/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
-| Current documentation |49 completed primary endpoints in plot; native triplets and GFX comparisons with metadata; local-time diary | Update useful results without promotion freezes |
+| Diverse clean targets and binning | Active90,786/fourteen regions, queued90,784/twenty; separate future90,783/23-region option with actual-reader checks;4×→geometry→area2, zero optical blur; shadow policy passes CPU/CUDA preparation on its20-region bank | Train/evaluate useful data changes; faint-shadow coverage and broad weak-detail recovery remain incomplete |
+| Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; V120 ADC max55.52DN16, Tiny alternative51.73DN16 | Spatial dark-field/weak-detail failures and real-noise calibration limits remain |
+| Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V120/V121 numerical/native/full-frame review complete; V123 midpoint measured | Finish current trained comparisons and improve real-photo/detail quality |
+| Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
+| Current documentation |54 completed primary endpoints in plot; native triplets, latest GFX comparisons and explicit profiles/checkpoints; local-time diary | Update useful results without promotion freezes |
 
 The [V116 data review](v116-quality.md) is complete at its original20k endpoint.
 Its matched Tiny control is V114; the original V112 initializer/seed/budget stay

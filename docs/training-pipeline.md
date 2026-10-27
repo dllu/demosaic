@@ -6,7 +6,10 @@ neural forward. They are disabled by default and enabled in V120–V123 recipes
 and queued V124/V125; V119's frozen run is unchanged.
 
 The [current source inspection](current-source-loss-review.md) prepares a separate
-90,783-source cohort preserving all twenty weak-material regions. The preceding
+90,783-source cohort preserving all twenty prior regions, with a separate
+[23-region option](v123-source-review-through9800.md) adding inspected animal
+hair, feathers and faint brick texture. All23 pass actual clean-reader checks.
+The preceding
 90,784-source/twenty-region snapshot remains frozen for queued
 [V124/V125 independent-noise training](conditional-mean-training.md).
 V122/V123 keep90,786/fourteen regions; V120/V121 retain their original inputs.

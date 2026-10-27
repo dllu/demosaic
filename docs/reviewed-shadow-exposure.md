@@ -122,3 +122,8 @@ grain, ADC/color behavior, camera scores and the standing GFX scenes, including
 native noisy/restored/GT triplets and correctly labeled independent references.
 No training run is started or queued by this readiness change. Both private
 train/platform pairs and their siblings remain outside training.
+
+A later [23-region future bank](v123-source-review-through9800.md) preserves the
+twenty objects tested above and adds three inspected physical-detail contexts.
+Its actual clean-reader checks pass; the CPU/CUDA shadow-preparation evidence
+on this page remains bound to the original twenty-region bank.
