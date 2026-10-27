@@ -3,8 +3,10 @@
 **An optional 22,664-parameter branch now mixes signed RAW detail across local
 windows before the pretrained RGB trunk.** Both discarded genuine-V120 CPU16+2
 and CUDA256/B16 checks pass. Model quality is
-unmeasured. V120 remains the general recommendation, and the original V124/V125
-mean-loss experiment keeps its frozen inputs and schedule.
+unmeasured. The [V131/V132 full-budget trial](raw-spatial-training.md) has four new
+matched CPU/CUDA checks complete and production queued after V125's memory
+admission. V120 remains the general recommendation; the original mean-loss trial
+keeps its frozen inputs and schedule.
 
 [Implementation](../src/demosaic/raw_spatial_features.py) ·
 [Bounded check runner](../scripts/check_raw_spatial_features.py) ·
@@ -111,8 +113,8 @@ cases. The CPU check's loader predates only the new-flag tile-grid addition;
 all direct training/model mathematics and portable-loader ASTs match the current
 implementation. The CUDA check executes the current model-source bytes.
 
-These are discarded implementation states. Production training, a matched
-architectural quality comparison and native photographic/GFX recovery remain
-to be measured. The new cohort has only implementation-check use so far; it
-has no production quality result. Both real train scenes and siblings stay
-outside training.
+These are discarded implementation states. The separate
+[V131/V132 trial](raw-spatial-training.md) uses seed70 and full20k horizons on both
+arms, with four newly executed exact-recipe checks. Production is queued; a
+matched architectural comparison and native photographic/GFX recovery remain
+to be measured. Both real train scenes and siblings stay outside training.

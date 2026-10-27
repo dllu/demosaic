@@ -1,0 +1,380 @@
+{
+  "status": "completed-four-matched-discarded-checks-full20000-production-queued-after-existing-admission",
+  "recorded_UTC": "2026-10-27T13:56:30.828346+00:00",
+  "original_worker_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/plan.json",
+    "sha256": "7f3d0edbd8c59eafe2ea83e6b959d49af3a1d5e39907c84e492cfb43594487b0"
+  },
+  "original_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/launch.json",
+    "sha256": "594d30ae8398736822deb25bf441fd65a3c5d582478f665449ccacaf185b1ae2"
+  },
+  "controller_handoff": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/admission-handoff-v1.json",
+    "sha256": "40d23ae0752804da5aa48309ea6f91d7634900079b7a4537a1282848533f0066"
+  },
+  "checks": [
+    {
+      "phase": "CPU",
+      "arm": "V131",
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 18,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "model_EMA_tensor_count": 91,
+      "optimizer_state_count": 89,
+      "CUDA_peak_allocated_bytes": 0,
+      "all_observed_inputs_match_saved_control": false,
+      "first_outputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/retained/CPU/V131/first-outputs.npz",
+        "sha256": "166fa55f338becb941662086ce534d6d21dc029c3d2117ef74ae1249c70d2f76"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/artifacts/CPU/V131/last.pt",
+        "sha256": "988f0034f82a995f86212049d8a805221fec8ab62e5e93c50f6588dd27272724"
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 91,
+          "optimizer_state_count": 89,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 91,
+          "optimizer_state_count": 89,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/CPU-V131-result.json",
+        "sha256": "5b642d7b0c41364b3b73560b31ae372f2ce854da29f5770e8d48dc39ab3cec7c"
+      }
+    },
+    {
+      "phase": "CPU",
+      "arm": "V132",
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 18,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "model_EMA_tensor_count": 114,
+      "optimizer_state_count": 112,
+      "CUDA_peak_allocated_bytes": 0,
+      "all_observed_inputs_match_saved_control": true,
+      "first_outputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/retained/CPU/V132/first-outputs.npz",
+        "sha256": "166fa55f338becb941662086ce534d6d21dc029c3d2117ef74ae1249c70d2f76"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/artifacts/CPU/V132/last.pt",
+        "sha256": "045b13327771c5f983cb4da2d491606c4359fed56726ff2e5f4dce461d08ba75"
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 114,
+          "optimizer_state_count": 112,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 114,
+          "optimizer_state_count": 112,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/CPU-V132-result.json",
+        "sha256": "dc1170ef377fc843382f882fa073d6d38525992771f64aaecfdf08de46ef8481"
+      }
+    },
+    {
+      "phase": "CUDA",
+      "arm": "V131",
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 288,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "model_EMA_tensor_count": 91,
+      "optimizer_state_count": 89,
+      "CUDA_peak_allocated_bytes": 7041804800,
+      "all_observed_inputs_match_saved_control": false,
+      "first_outputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/retained/CUDA/V131/first-outputs.npz",
+        "sha256": "225e966a557cdb5f5dec6289c67cc5710b94c8c6aae068e68c6107be5916d49d"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/artifacts/CUDA/V131/last.pt",
+        "sha256": "7bbbb9c3ab59dfac9a641566246f43d7a5f135e13f00ca5e50f59c345b5fff15"
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 91,
+          "optimizer_state_count": 89,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 91,
+          "optimizer_state_count": 89,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/CUDA-V131-result.json",
+        "sha256": "8c22d990cbc1ee718dbe6b4c9324031e23f7f87b6421d95345fcc6d5150307e0"
+      }
+    },
+    {
+      "phase": "CUDA",
+      "arm": "V132",
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 288,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "model_EMA_tensor_count": 114,
+      "optimizer_state_count": 112,
+      "CUDA_peak_allocated_bytes": 9048249856,
+      "all_observed_inputs_match_saved_control": true,
+      "first_outputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/retained/CUDA/V132/first-outputs.npz",
+        "sha256": "225e966a557cdb5f5dec6289c67cc5710b94c8c6aae068e68c6107be5916d49d"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/artifacts/CUDA/V132/last.pt",
+        "sha256": "cb4cef0657f2283366169370d5c7c139075903ea6c988ec1d1383367c0edb1aa"
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 114,
+          "optimizer_state_count": 112,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "model_tensor_count": 114,
+          "optimizer_state_count": 112,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "receipt": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/CUDA-V132-result.json",
+        "sha256": "29a466eeabe5fbf0c537921d443faddb501fe04ba030be0648ebb708dee827ab"
+      }
+    }
+  ],
+  "independent_state_input_output_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-setup-review-v1/independent-check-audit-v1.json",
+    "sha256": "91796a639e2ab527a3e9c046dcefbfe0ae48e4bf79e45de165ab54170ae1b5e7"
+  },
+  "independent_audit_summary": {
+    "finite_saved_state_values": 1053314052,
+    "model_source_files_exact": true,
+    "existing_mean_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-mean-training-recovery-v5/run/plan.json",
+      "sha256": "1e0eb79bdeb6fd6c36d21c7c1b96d2ec6259e8fe50c76afcdf3b86ca3e4f302d"
+    },
+    "existing_mean_input_source_bindings_unchanged": 120,
+    "new_neural_forwards": 0,
+    "optimizer_updates": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "CUDA_initialized": false
+  },
+  "live_queues": {
+    "training": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-admission-v2/run/plan.json",
+        "sha256": "03fe6427a839be4994bc7311c649134c5ad9b0750bb3eb61c34e83cda7eaa600"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-admission-v2/run/launch.json",
+        "sha256": "bf57b8b615e6c53d2e65b312726077e25bcaaedb2f8557ce31ce4919db94f646"
+      },
+      "owner": {
+        "pid": 2294106,
+        "created": 1793109048.34
+      },
+      "observed_status_at_publication": "waiting-for-existing-training-admission"
+    },
+    "quality": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-raw-spatial-quality-admission-v2/queue-plan-v1.json",
+        "sha256": "74739c32e1fa5d8e6ae1d3421a7d4269887fb0b06b45c903f5c03fdedcb64c27"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-raw-spatial-quality-admission-v2/launch.json",
+        "sha256": "a76144a1f94bf05af5520b5f2abd37368d2884d64db46c47c23a751ea0ade9dd"
+      },
+      "owner": {
+        "pid": 2294305,
+        "created": 1793109123.12
+      },
+      "observed_status_at_publication": "waiting-for-exact-matched-training-owner"
+    },
+    "independent_audit": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-raw-spatial-independent-audit-v1/queue-plan-v1.json",
+        "sha256": "16ee64a0082ff7cc6d146cfed9763cf8a5f7477cd1bcc8b7aa9e66fc1cb12400"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-raw-spatial-independent-audit-v1/launch.json",
+        "sha256": "73cc641c961df1796aca84b1859f06404691b8e8a5fee79f8c6e53a50e4f82b0"
+      },
+      "owner": {
+        "pid": 2294329,
+        "created": 1793109135.25
+      },
+      "observed_status_at_publication": "waiting-for-exact-endpoint-evaluation-owner"
+    },
+    "matched_review": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-raw-spatial-matched-review-v1/queue-plan-v1.json",
+        "sha256": "499fb6b6712673c024b756075b1b4ae498739fddf1b28b9e6e4a3b1406517e36"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-raw-spatial-matched-review-v1/launch.json",
+        "sha256": "d89f6de79acd6a0471c4d06e7f05defdd455a3b5146cca894a650c31f42b4ed8"
+      },
+      "owner": {
+        "pid": 2294337,
+        "created": 1793109136.78
+      },
+      "observed_status_at_publication": "waiting-for-original-independent-audit"
+    },
+    "mesh": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-green-mesh-review-v1/queue-plan-v1.json",
+        "sha256": "9d7c894011d9869e59faf5cc0ca2dc9345833bf174fbbe2f15603c29112562fd"
+      },
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-green-mesh-review-v1/launch.json",
+        "sha256": "fe455be16172e5d7983baa5c287fe990065f444ed284dd376c2b7907e78174ea"
+      },
+      "owner": {
+        "pid": 2294342,
+        "created": 1793109138.89
+      },
+      "observed_status_at_publication": "waiting-for-completed-endpoint-comparisons"
+    }
+  },
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+    "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+  },
+  "recipe_difference": "Only model.raw_spatial_features; output paths and human notes differ.",
+  "future_training_budget_per_arm": {
+    "optimizer_training_prepared_batches": 20000,
+    "validation_forwards": 640,
+    "encoder_forwards": 20640,
+    "target_contexts": 320000,
+    "domain_batches": {
+      "commons": 10046,
+      "native": 4965,
+      "paired": 4989
+    },
+    "horizon": 20000,
+    "maximum_worker_seconds": 172800
+  },
+  "progress_steps": [
+    1000
+  ],
+  "progress_collection_queued": false,
+  "implementation_work": {
+    "optimizer_updates": 72,
+    "root_encoder_calls": 72,
+    "target_contexts": 612,
+    "production_updates_at_publication": 0
+  },
+  "full_GFX_common_grid_alignment": 32,
+  "full_GFX_tiles_calls_per_model": [
+    520,
+    130
+  ],
+  "comparison_scope": "V131/V132 identical inputs and32px full-frame grids; older saved pipelines keep original profile/tiling, differences labeled and cannot isolate model-only effects.",
+  "extra_mesh_config": {
+    "path": "/home/dllu/proj/demosaic/configs/gfx-green-mesh-20231231.json",
+    "sha256": "c998ceade0eeb509a11af97806161dbddaaa4bbc5e16cefff14884f6c9d5369f"
+  },
+  "corrected_ISO100": "DSCF3835; independently demosaiced reference and camera JPEG, approximate qualitative reference, never exactGT",
+  "unused_original_quality_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-raw-spatial-quality-v1/queue-plan-v1.json",
+    "sha256": "b46401817698ba095a06129b347e1298fc41e0f5253f4e8fcdd5f11de13f3899"
+  },
+  "unused_quality_controller_launches": 0,
+  "selector": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "d2519511945bfeeee0c89154aba872726b3b5922a7dc98279e6b868d115ec41e"
+  },
+  "quality_measured": false,
+  "PSNR_history_point_added": false,
+  "scope": "Implementation/trial setup only. Checks run once; original controller retired after all four exited and before any production. Controller-only admission handoff keeps original frozen neural sources/checkpoints/receipts/horizons/budgets; waits for exact V125 live admission or original mean-trial success. Existing mean workers not signaled. Originals read-only; heldout GFX sources cached and excluded from training. Primary/image/weak-detail quality remains unmeasured."
+}

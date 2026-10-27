@@ -323,6 +323,34 @@ def test_comparison_modules_import_without_torch_or_cuda():
     subprocess.run([sys.executable, "-c", code], check=True, capture_output=True)
 
 
+@pytest.mark.parametrize("common_grid", [False, True])
+def test_GFX_tile_geometry_difference_is_visible_in_native_labels(tmp_path, common_grid):
+    a, b = saved_gfx(tmp_path / "a", "a" * 64, 0), saved_gfx(tmp_path / "b", "b" * 64, 0.001)
+    for path, alignment in ((a, 2), (b, 32)):
+        stage = json.loads(path.read_text())
+        for item in stage["full_native_floats"]:
+            item["timing"] = {
+                "tile_grid_alignment": alignment,
+                "tile": 512,
+                "overlap": 64,
+                "tile_stride": 448,
+            }
+            if common_grid:
+                item["timing"].update(
+                    common_input_grid_alignment=32,
+                    common_grid_padded_shape=[8768, 11680],
+                )
+        path.write_text(json.dumps(stage))
+    output = tmp_path / "boards"
+    output.mkdir()
+    result = gfx_comparison(a, b, "a" * 64, "b" * 64, output)
+    assert result["tile_grid_matched"] is common_grid
+    if not common_grid:
+        assert "cannot isolate" in result["interpretation"]
+        assert any("tile grid 32px" in p["label"] for p in result["boards"][0]["panels"])
+        assert all("grid-different" in x["image"]["path"] for x in result["boards"])
+
+
 @pytest.mark.parametrize("change", [None, "model", "seed", "blur", "parent", "loss"])
 def test_recipe_changes_are_limited_to_declared_data_and_equivalent_protocol(tmp_path, change):
     protocol_a, protocol_b, reviewed = (

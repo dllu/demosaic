@@ -1,5 +1,10 @@
 # Endpoint quality and native-image review
 
+The [V131/V132 spatial trial](raw-spatial-training.md) also has a live full-panel
+→ independent audit → matched native review → extra green-mesh queue chain.
+All four new checks passed; production waits for V125's startup admission.
+It uses the90,781/29 cohort and matched full-frame32px tile grids. Quality is pending.
+
 **[V122/V123 full quality and selected native review](v122-v123-quality.md) are
 complete; [V124's mean-loss control](conditional-mean-training.md) is training.**
 V125 follows with the additional mean loss. Their complete comparison and

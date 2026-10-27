@@ -17,7 +17,7 @@ unresolved; broad state-of-the-art quality is unproven.
 | --- | --- |
 | Can a frozen foundation encoder supply useful detail supervision? | [Completed V128 pilot](v128-feature-pilot-quality.md): the26-call gradient diagnostic passes, but weight.1 gives no useful gain at1,000 matched updates. Independent scores and all28 native boards are complete; the term stays off by default |
 | Can RAW phase/frequency features preserve thin structures? | [Completed V122/V123 trial](v122-v123-quality.md): V122 slightly improves weak eight-pixel carrier response; V123 gains0.05493dB photo PSNR against it but lowers unseen-camera PSNR and greatly worsens the ADC tail. Weak natural detail/mesh remain soft; full numerical/selected native review is published |
-| Can local attention use spatial repetition more effectively? | [Optional RAW spatial branch](raw-spatial-features.md) adds22,664 parameters before the V120 stem. Genuine-parent CPU128/B1 and CUDA256/B16 checks each pass16+2 updates, zero initialization, finite learned states and portable loading. It preserves per-phase constant features; matched trained quality is still unmeasured |
+| Can local attention use spatial repetition more effectively? | [Optional RAW spatial branch](raw-spatial-features.md) adds22,664 parameters and preserves constant features. The [V131/V13220k trial](raw-spatial-training.md) has four exact-recipe CPU/CUDA16+2 checks complete on90,781 photos/29 regions. Production waits for V125's admission; quality remains unmeasured |
 | Does training precision limit faint detail? | [Completed V130](training-precision-pilot.md) changes only BF16→FP32 training against saved V129. Selected weak fur/grass/wood [faint-ADC bands](faint-adc-precision.md) improve slightly in gain/error while global PSNR falls0.01720dB. Native changes are subtle; noisy material and real mesh remain weak |
 | Is weak detail lost through persistent conditional bias? | [Independent-noise diagnosis](conditional-noise-response.md) finds persistent faint fur/wood error after diagnostic multi-observation averaging. [V124/V125](conditional-mean-training.md) tests an additional mean loss with two noise views on both arms; V124's full control training has started |
 | Does adding more realistic reviewed shadow detail help? | [Completed V126/V1271000-update pilot](reviewed-shadow-pilot-quality.md) finds no useful gain on its retained material/shadow/GFX support. Shadow policy stays off by default; the23-region reviewed bank remains available |
@@ -34,8 +34,8 @@ dominated frame from a future90,781-source/29-region cohort. It adds actual weak
 petal veins and strong fine mesh, preserving all27 earlier region objects.
 Existing training inputs remain fixed. [V129](reviewed-detail-training-pilot.md)
 completed its27-region pilot with small mixed changes and no clear large visible
-recovery; the newer prepared data have only discarded spatial-branch
-implementation-check use and no production quality result.
+recovery. The newer cohort has four matched spatial-trial checks complete and
+full20k production queued; it has no production quality result.
 
 ## Foundation features and the new objective
 

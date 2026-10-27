@@ -48,6 +48,11 @@ def function_ast(path, name):
 
 
 def execution_arms(execution, binding, training_format):
+    if training_format == "matched-raw-spatial-v1":
+        assert execution["restoration_tensors_by_arm"] == {"V131": 91, "V132": 114}
+        assert list(execution["arms"]) == ["V131", "V132"]
+        assert execution["paired_control_arm"] == "V131"
+        return [{"arm": arm, "training_plan": binding} for arm in execution["arms"]]
     if training_format == "independent-noise-mean-v1":
         assert execution["arm_weights"] == {"V124": 0.0, "V125": 0.25}
         assert set(execution["arms"]) == set(execution["arm_weights"])
@@ -121,6 +126,46 @@ def verify_frequency_training_state(actual, snapshot, parent, only):
         for key, value in parent["ema"].items():
             assert torch.equal(snapshot["model"][key], value)
             assert torch.equal(snapshot["ema"][key], value)
+
+
+def verify_spatial_training_state(actual, snapshot, spatial):
+    """Require the full matched horizon and the declared 91/114-tensor state."""
+    import torch
+
+    tensors, adam_states = (114, 112) if spatial else (91, 89)
+    assert actual["status"] == "completed-raw-spatial-training-phase"
+    assert actual["phase"] == "train" and actual["updates"] == snapshot["step"] == 20000
+    assert snapshot["config"]["steps"] == 20000
+    assert snapshot["model_config"]["raw_spatial_features"] is spatial
+    counts = actual["counts"]
+    assert all(
+        counts[k] == 20000
+        for k in ("training_forwards", "optimizer_steps", "prepared_training_batches")
+    )
+    assert counts["validation_forwards"] == 640 and counts["encoder_forwards"] == 20640
+    assert counts["target_contexts"] == 320000
+    assert actual["initial_checks"][0]["official_encoder_exact"]
+    assert actual["initial_checks"][0]["91_parent_or_resume_tensors_exact"]
+    assert actual["model_EMA_Adam_finite"] and actual["frozen_encoder_no_gradients"]
+    assert actual["model_EMA_tensor_count"] == tensors
+    assert snapshot["model"].keys() == snapshot["ema"].keys()
+    assert len(snapshot["model"]) == tensors
+    assert sum(k.startswith("pretrained_rgb.raw_spatial.") for k in snapshot["model"]) == (
+        23 if spatial else 0
+    )
+    states = snapshot["optimizer"]["state"]
+    assert len(states) == adam_states and all(float(s["step"]) == 20000 for s in states.values())
+    assert all(torch.isfinite(v).all() for key in ("model", "ema") for v in snapshot[key].values())
+    assert all(
+        torch.isfinite(v).all()
+        for state in states.values()
+        for v in state.values()
+        if isinstance(v, torch.Tensor)
+    )
+    rows = actual["observed_inputs"]
+    assert len(rows) == 20000 and [r["step"] for r in rows] == list(range(1, 20001))
+    if spatial:
+        assert actual["all_observed_inputs_match_saved_control"]
 
 
 def prepare(root, artifacts, training_root, witness_plan, gfx_selections, controls=()):
@@ -227,6 +272,9 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
         "training_owner": status[owner_field],
         "training_status": str(training_root / "status.json"),
         "training_format": training_format,
+        "full_gfx_common_grid_alignment": 32
+        if training_format == "matched-raw-spatial-v1"
+        else None,
         "training_owner_field": owner_field,
         "training_execution_field": execution_field,
         "expected_training_terminal": "completed-training-awaiting-model-comparisons"
@@ -254,7 +302,9 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
         "estimated_retained_and_export_budget_GiB": 15 * len(arm_names),
         "collector_source": ref(work / "scripts/collect_quality_predictions.py"),
         "controller_source": ref(work / "scripts/queue_matched_quality_predictions.py"),
-        "maximum_training_wait_seconds": 259200,
+        "maximum_training_wait_seconds": 432000
+        if training_format == "matched-raw-spatial-v1"
+        else 259200,
         "first_stage_external_free_GiB": 208 if internal_artifacts else 248,
         "phase_start_external_free_GiB": 208 if internal_artifacts else 216,
         "runtime_external_reserve_GiB": 208,
@@ -313,6 +363,8 @@ def endpoint_plan(plan, state):
             del parent
         if training_format == "independent-noise-mean-v1":
             verify_noise_pair_training_state(actual, snapshot, execution["arm_weights"][name])
+        if training_format == "matched-raw-spatial-v1":
+            verify_spatial_training_state(actual, snapshot, name == "V132")
         lineage = {**training["parent"], "step": 20000}
         assert snapshot["step"] == 20000 and snapshot["config"]["initialized_from"] == lineage
         checkpoints.append(

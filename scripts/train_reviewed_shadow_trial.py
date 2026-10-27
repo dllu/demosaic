@@ -1,4 +1,4 @@
-"""Train a bounded matched shadow-data pilot from the completed V120 EMA."""
+"""Run source-frozen V120 continuations with matched-input and state checks."""
 
 import argparse
 import gc
@@ -13,6 +13,52 @@ from train_quality_recipes import REPO, controller
 from train_quality_recipes import prepare as prepare_recipes
 
 FRACTIONS = {"V126": 0.0, "V127": 0.5}
+
+
+def verify_initial_restoration(actual, expected, *, spatial, fresh):
+    """Check the complete common state and the explicitly declared new branch."""
+    import torch
+
+    count = 114 if spatial else 91
+    assert len(actual) == count
+    if fresh and spatial:
+        assert len(expected) == 91 and expected.keys() <= actual.keys()
+        extra = actual.keys() - expected.keys()
+        assert len(extra) == 23 and all(k.startswith("pretrained_rgb.raw_spatial.") for k in extra)
+        assert actual["pretrained_rgb.raw_spatial.project.weight"].count_nonzero() == 0
+    else:
+        assert actual.keys() == expected.keys()
+    assert all(torch.equal(actual[k].cpu(), v) for k, v in expected.items())
+
+
+def capture_progress(root, arm, checkpoint, *, step, horizon, counts, inputs, tensor_count):
+    """Retain a completed checkpoint without stopping or replaying the worker."""
+    import torch
+
+    assert 0 < step < horizon
+    assert counts["optimizer_steps"] == counts["training_forwards"] == step
+    assert len(inputs) == step and [r["step"] for r in inputs] == list(range(1, step + 1))
+    checkpoint = Path(checkpoint)
+    state = torch.load(checkpoint, map_location="cpu", weights_only=True, mmap=True)
+    assert state["step"] == step and state["config"]["steps"] == horizon
+    assert len(state["model"]) == len(state["ema"]) == tensor_count
+    target = Path(root) / f"{arm}-progress{step}.pt"
+    assert not target.exists()
+    assert not (Path(root) / f"train-{arm}-progress{step}.json").exists()
+    os.link(checkpoint, target)
+    receipt = {
+        "status": "immutable-progress-checkpoint-within-original-training-budget",
+        "arm": arm,
+        "step": step,
+        "declared_training_horizon": horizon,
+        "checkpoint": ref(target),
+        "owner": {"pid": os.getpid(), "created": psutil.Process().create_time()},
+        "counts_at_checkpoint": dict(counts),
+        "observed_inputs": list(inputs),
+        "scope": "Progress only; the same worker continues toward its original full horizon. No extra forward, noise draw, optimizer update or restarted schedule. This is not the completed endpoint.",
+    }
+    save(Path(root) / f"train-{arm}-progress{step}.json", receipt)
+    return receipt
 
 
 def prepare(root):
@@ -110,6 +156,10 @@ def worker(path, phase, arm):
             / torch.cuda.get_device_properties(0).total_memory
         )
     config = yaml.safe_load(Path(plan["arms"][arm][phase]).read_text())
+    spatial = config["model"].get("raw_spatial_features", False)
+    expected_tensors, expected_states = (114, 112) if spatial else (91, 89)
+    declared = plan.get("restoration_tensors_by_arm", {}).get(arm, 91)
+    assert expected_tensors == declared
     fractions = plan.get("arm_fractions", FRACTIONS)
     assert config["reviewed_shadow_fraction"] == fractions[arm]
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
@@ -130,6 +180,16 @@ def worker(path, phase, arm):
         control = read(control_binding["path"])
         assert control["phase"] == phase and control["arm"] == plan.get("saved_control_arm", "V126")
         assert control["updates"] == (plan["train_updates"] if phase == "train" else 18)
+    elif peer := plan.get("paired_control_arm"):
+        control_binding = ref(root / f"{phase}-{peer}-result.json") if arm != peer else None
+        control = read(control_binding["path"]) if control_binding else None
+        if control:
+            from train_v43_quality_trial import live
+
+            assert control["phase"] == phase and control["arm"] == peer
+            assert control["updates"] == (plan["train_updates"] if phase == "train" else 18)
+            assert not live(control["owner"])
+            assert ref(control["checkpoint"]["path"]) == control["checkpoint"]
     else:
         control = read(root / f"{phase}-V126-result.json") if arm == "V127" else None
     prior_inputs = {r["step"]: r for r in control["observed_inputs"]} if control else {}
@@ -147,17 +207,18 @@ def worker(path, phase, arm):
         def initial(module, args):
             expected = parent["ema"] if current == "fresh" else preserved_state["model"]
             actual = module.restoration_state_dict()
-            assert len(actual) == 91 and actual.keys() == expected.keys()
-            assert all(torch.equal(actual[k].cpu(), v) for k, v in expected.items())
+            verify_initial_restoration(actual, expected, spatial=spatial, fresh=current == "fresh")
             assert model_hash(module.context.backbone) == config["expected_dino_sha256"]
             assert all(
                 not p.requires_grad and p.grad is None for p in module.context.backbone.parameters()
             )
-            assert len([p for p in module.parameters() if p.requires_grad]) == 89
+            assert len([p for p in module.parameters() if p.requires_grad]) == expected_states
             initials.append(
                 {
                     "phase": current,
                     "91_parent_or_resume_tensors_exact": True,
+                    "model_tensor_count": expected_tensors,
+                    "optimizer_state_count": expected_states,
                     "official_encoder_exact": True,
                 }
             )
@@ -165,6 +226,24 @@ def worker(path, phase, arm):
 
         model.register_forward_pre_hook(before)
         first = model.register_forward_pre_hook(initial)
+        if plan.get("require_equal_initial_outputs", False):
+
+            def first_output(module, args, result):
+                if current == "fresh" and counts["training_forwards"] == 1:
+                    arrays = {
+                        f"output_{i}": v.detach().float().cpu().numpy()
+                        for i, v in enumerate(result)
+                    }
+                    if control_binding:
+                        assert ref(control["first_outputs"]["path"]) == control["first_outputs"]
+                        with np.load(
+                            Path(control["first_outputs"]["path"]), allow_pickle=False
+                        ) as previous:
+                            assert set(arrays) == set(previous.files)
+                            assert all(np.array_equal(v, previous[k]) for k, v in arrays.items())
+                    np.savez(destination / "first-outputs.npz", **arrays)
+
+            model.register_forward_hook(first_output)
         model.context.backbone.register_forward_hook(
             lambda *args: counts.update(encoder_forwards=1)
         )
@@ -175,6 +254,17 @@ def worker(path, phase, arm):
         return model
 
     def batch(step, domain, clean, **kwargs):
+        if phase == "train" and step - 1 in plan.get("progress_steps", []):
+            capture_progress(
+                root,
+                arm,
+                Path(config["run"]) / "last.pt",
+                step=step - 1,
+                horizon=plan["train_updates"],
+                counts=counts,
+                inputs=inputs,
+                tensor_count=expected_tensors,
+            )
         assert domain == training.training_domain(step, 70, 0.25, 0.25)
         clean_hash = training.batch_fingerprint(
             {k: v for k, v in clean.items() if isinstance(v, torch.Tensor)}
@@ -228,7 +318,10 @@ def worker(path, phase, arm):
     def optimizer(model, options):
         result = optimizer_factory(model, options)
         captured["optimizer"] = result
-        assert not result.state and sum(len(g["params"]) for g in result.param_groups) == 89
+        assert (
+            not result.state
+            and sum(len(g["params"]) for g in result.param_groups) == expected_states
+        )
 
         def before_step(*args):
             if phase != "train" or counts["optimizer_steps"] < 16:
@@ -284,8 +377,11 @@ def worker(path, phase, arm):
             last = Path(training.train(plan["arms"][arm][phase], resume=preserved, stop_after=2))
             expected += 2
         state = torch.load(last, map_location="cpu", weights_only=True, mmap=True)
-        assert state["step"] == expected and len(state["model"]) == len(state["ema"]) == 91
-        assert len(state["optimizer"]["state"]) == 89
+        assert (
+            state["step"] == expected
+            and len(state["model"]) == len(state["ema"]) == expected_tensors
+        )
+        assert len(state["optimizer"]["state"]) == expected_states
         assert all(float(s["step"]) == expected for s in state["optimizer"]["state"].values())
         assert all(
             torch.isfinite(v).all() for field in ("model", "ema") for v in state[field].values()
@@ -296,14 +392,21 @@ def worker(path, phase, arm):
             for v in s.values()
             if isinstance(v, torch.Tensor)
         )
-        assert len(gradients) == 89 and any(v > 0 for v in gradients.values())
+        assert len(gradients) == expected_states and any(v > 0 for v in gradients.values())
+        if spatial:
+            branch = [
+                v for k, v in gradients.items() if k.startswith("pretrained_rgb.raw_spatial.")
+            ]
+            assert len(branch) == 23 and all(v > 0 for v in branch)
         assert (
             counts["training_forwards"]
             == counts["optimizer_steps"]
             == counts["prepared_training_batches"]
             == expected
         )
-        assert counts["validation_forwards"] == (64 if phase == "train" else 0)
+        assert counts["validation_forwards"] == (
+            plan.get("expected_train_validation_forwards", 64) if phase == "train" else 0
+        )
         assert (
             counts["encoder_forwards"]
             == counts["training_forwards"] + counts["validation_forwards"]
@@ -317,10 +420,14 @@ def worker(path, phase, arm):
             assert dict(domains) == plan["prospective_domain_batches"]
             if fractions[arm]:
                 assert counts["shadow_selected_targets"] > 0
-        if plan.get("require_matched_noisy_inputs", False):
+        if plan.get("require_matched_noisy_inputs", False) and arm in plan.get(
+            "matched_input_arms", [arm]
+        ):
             assert control_binding and len(inputs) == len(control["observed_inputs"])
             assert [r["step"] for r in inputs] == [r["step"] for r in control["observed_inputs"]]
         guard(plan)
+        if control_binding:
+            assert ref(control_binding["path"]) == control_binding
         save(
             root / f"{phase}-{arm}-result.json",
             {
@@ -337,8 +444,18 @@ def worker(path, phase, arm):
                 "gradient_maxima": gradients,
                 plan.get("rejection_result_key", "changed_shadow_resume_rejections"): rejected,
                 "model_EMA_Adam_finite": True,
+                "source_sha256": state["config"]["source_sha256"],
+                "frozen_encoder_no_gradients": all(
+                    not p.requires_grad and p.grad is None
+                    for p in captured["model"].context.backbone.parameters()
+                ),
                 "all_AdamW_steps": expected,
-                "optimizer_state_count": 89,
+                "optimizer_state_count": expected_states,
+                "model_EMA_tensor_count": expected_tensors,
+                "matched_control_result": control_binding,
+                "first_outputs": ref(destination / "first-outputs.npz")
+                if plan.get("require_equal_initial_outputs", False)
+                else None,
                 "dino_feature_weight": config.get("dino_feature_weight", 0),
                 "dino_feature_policy": config.get("dino_feature_policy"),
                 "all_observed_inputs_match_saved_control": control is not None
@@ -355,7 +472,10 @@ def worker(path, phase, arm):
                 else 0,
                 "scope": "Discarded implementation check"
                 if phase != "train"
-                else "Bounded1000-update pilot endpoint; image-quality review pending",
+                else plan.get(
+                    "production_scope",
+                    "Bounded1000-update pilot endpoint; image-quality review pending",
+                ),
             },
         )
     except BaseException as error:

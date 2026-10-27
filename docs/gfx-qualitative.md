@@ -8,6 +8,11 @@ reference. Each cell is native160 pixels with shared +2EV and no resizing.
 DSCF3879 ISO6400 and DSCF3880 ISO100 f/5.6 differ in aperture, time and moving
 subjects; the independent ISO100 exposure is **not GT**.
 
+The [V131/V132 spatial trial](raw-spatial-training.md) queues this six-region
+scene and full-frame output, plus the additional DSCF3842/**DSCF3835** green
+mesh. Both new full-frame methods use identical32px tile grids; older saved
+pipelines retain their recorded grids/profiles with differences labeled.
+
 ![Matched V115/V120 building, fence and neon](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-1.png)
 
 ![Matched V115/V120 foliage, platform and sky](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-2.png)

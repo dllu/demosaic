@@ -27,6 +27,22 @@ def strict_float32():
     torch.backends.cudnn.allow_tf32 = False
 
 
+def common_grid_mosaic(raw, alignment):
+    """Extend whole CFA cells so compared models receive identical border tiles."""
+    raw = np.asarray(raw)
+    if raw.ndim != 2 or min(raw.shape) < 2 or alignment < 2 or alignment % 2:
+        raise ValueError("Use a two-dimensional CFA mosaic and an even grid")
+    h, w = raw.shape
+    padded_h = (h + alignment - 1) // alignment * alignment
+    padded_w = (w + alignment - 1) // alignment * alignment
+    if (h, w) == (padded_h, padded_w):
+        return raw
+    rows, cols = np.arange(padded_h), np.arange(padded_w)
+    rows = np.where(rows < h, rows, 2 * ((h - 2) // 2) + rows % 2)
+    cols = np.where(cols < w, cols, 2 * ((w - 2) // 2) + cols % 2)
+    return raw[rows[:, None], cols[None, :]]
+
+
 def verify_recorded_backbone(model, checkpoint):
     identity = checkpoint["expected_backbone"]
     return verify_backbone_identity(model.config.to_dict(), model_hash(model.context.backbone), checkpoint,
@@ -226,7 +242,21 @@ def collect(plan_path, stage):
         if stage == "full-gfx":
             original_restore = gfx.restore_tiled
             def retain_full(model, *args, **kwargs):
+                original_shape = args[0].shape
+                common_grid = plan.get("full_gfx_common_grid_alignment")
+                if common_grid:
+                    assert kwargs["tile"] % common_grid == 0
+                    assert (kwargs["tile"] - kwargs["overlap"]) % common_grid == 0
+                    args = (common_grid_mosaic(args[0], common_grid), *args[1:])
                 value, statistics = original_restore(model, *args, **kwargs)
+                if common_grid:
+                    statistics.update(
+                        common_input_grid_alignment=common_grid,
+                        common_grid_padded_shape=list(args[0].shape),
+                        original_mosaic_shape=list(original_shape),
+                        megapixels=original_shape[0] * original_shape[1] / 1e6,
+                    )
+                    value = value[:, :original_shape[0], :original_shape[1]]
                 record = next(r for r in models if r["model"] is model)
                 selection = read(specification["selection"]["path"])
                 for region in selection["regions"]:

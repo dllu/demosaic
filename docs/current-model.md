@@ -135,7 +135,9 @@ general recommendation.
 An optional [RAW spatial-attention branch](raw-spatial-features.md) now passes
 genuine-V120 CPU/CUDA16+2 implementation checks. It adds22,664 parameters with
 zero initial effect and a constant-preserving feature path. Model quality remains
-unmeasured; the original V124/V125 mean-loss trial and current V120 choice stay fixed.
+unmeasured. The [V131/V132 trial](raw-spatial-training.md) has four exact-recipe
+checks complete and20k production queued after V125's admission. Original mean-loss
+inputs and the current V120 recommendation remain.
 
 The completed48-call [faint ADC comparison](faint-adc-precision.md) shows V130's
 slightly stronger gain and lower relative error in selected weak fur, grass and

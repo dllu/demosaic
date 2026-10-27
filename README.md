@@ -50,8 +50,9 @@ review and two exact-GT triplets per model are published. Both original20k
 budgets completed, including V123's preserved12,249+7,751 continuation.
 [V124/V125 mean-loss training](docs/conditional-mean-training.md) has now started
 V124's two-noise-view control on the fixed90,784-source/twenty-region corpus.
-An optional [RAW spatial-attention branch](docs/raw-spatial-features.md) passes
-CPU/CUDA16+2 implementation checks; its trained quality is still unmeasured.
+The [matched V131/V132 spatial trial](docs/raw-spatial-training.md) queues20k
+updates per arm on90,781 photos/29 regions. All four CPU/CUDA16+2 checks pass;
+production waits for V125's memory admission. Trained quality remains unmeasured.
 The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.md)
 uses90,783 sources/23 regions and shows no useful quality gain; native material
 and both train-scene comparisons are published. The shadow policy stays off by default.

@@ -19,12 +19,13 @@ cleanup alone does not prove quality gains.
 | V124/V125 mean-loss comparison |90,784 /20 | Four checks reused; V124 control training, V125 follows |
 | Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k; complete native review |
 | V129 data pilot / V130 precision trial |90,782 /27 | Both1k reviews complete; FP32 slightly improves selected faint-ADC bands, without a clear large noisy/GFX recovery |
-| Prepared future cohort |90,781 /29 | Reader proof and discarded spatial-branch CPU/CUDA checks pass; no production quality result |
+| V131/V132 spatial trial |90,781 /29 | Reader proof and four matched CPU/CUDA16+2 checks pass; full20k queued after V125's admission; quality unmeasured |
 
 [V123 training/review](v123-memory-guard-recovery.md) ·
 [Mean-loss trial](conditional-mean-training.md) ·
 [V129 curated-data results](reviewed-detail-training-pilot.md) ·
-[V130 precision trial](training-precision-pilot.md).
+[V130 precision trial](training-precision-pilot.md) ·
+[V131/V132 full-budget spatial trial](raw-spatial-training.md).
 Earlier memberships, recipes, quotas and blur policies remain unchanged.
 
 The [29-region catalogue](../configs/low-contrast-training-rois-cleaned90781-v1.json)

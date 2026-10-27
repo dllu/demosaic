@@ -252,9 +252,26 @@ def gfx_comparison(
     conditioning_matched = reports[0]["conditioning"] == reports[1]["conditioning"]
     if not conditioning_matched and not allow_conditioning_difference:
         raise ValueError("GFX shared conditioning differs")
-    methods = []
+    methods, tile_grids = [], []
     for stage, report, sha in zip(stages, reports, (control_sha, candidate_sha), strict=True):
         native = [r for r in stage["full_native_floats"] if r["checkpoint"]["sha256"] == sha]
+        grids = []
+        for item in native:
+            timing = item.get("timing", {})
+            grids.append(
+                {
+                    "alignment": timing.get(
+                        "common_input_grid_alignment", timing.get("tile_grid_alignment")
+                    ),
+                    "tile": timing.get("tile"),
+                    "overlap": timing.get("overlap"),
+                    "stride": timing.get("tile_stride"),
+                    "padded_shape": timing.get("common_grid_padded_shape"),
+                }
+            )
+        if not grids or any(grid != grids[0] for grid in grids):
+            raise ValueError("Inconsistent full-frame tile geometry within one method")
+        tile_grids.append(grids[0])
         crops = [
             r for r in report["native_crops"] if r["checkpoint_sha256"] == sha and r["full_frame"]
         ]
@@ -360,6 +377,13 @@ def gfx_comparison(
             for label, profile in zip(labels, profile_labels, strict=True)
         )
     prefix = "matched-gfx" if conditioning_matched else "conditioning-different-gfx"
+    grid_matched = tile_grids[0] == tile_grids[1]
+    if not grid_matched:
+        labels = tuple(
+            f"{label} [tile grid {grid['alignment']}px]"
+            for label, grid in zip(labels, tile_grids, strict=True)
+        )
+        prefix = "grid-different-" + prefix
     boards = [
         board(
             Path(output) / f"{prefix}-{i // 3 + 1}.png",
@@ -377,10 +401,17 @@ def gfx_comparison(
         "reference": "Independently demosaiced ISO100 f/5.6; aperture/moving-subject differences; not pixelwise GT",
         "conditioning_matched": conditioning_matched,
         "conditioning_by_method": [r["conditioning"] for r in reports],
+        "tile_grid_matched": grid_matched,
+        "tile_grid_by_method": tile_grids,
         "interpretation": (
             "Same noise conditioning across methods"
             if conditioning_matched
             else "Different noise conditioning is explicit in the image labels and metadata. These boards compare the recorded pipelines, and cannot isolate an architectural/model effect. Matching-profile full-frame comparison remains required."
+        )
+        + (
+            " Tile grids differ as labeled. These saved pipeline outputs cannot isolate an architectural/model effect."
+            if not grid_matched
+            else ""
         ),
         "new_neural_forwards": 0,
         "RAW_decodes": 0,

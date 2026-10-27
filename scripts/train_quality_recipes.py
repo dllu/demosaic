@@ -293,6 +293,16 @@ def controller(path):
                     assert live(dependency["controller"])
                 time.sleep(15)
         for phase in ("CPU", "CUDA", "train"):
+            if phase == "train" and (dependency := plan.get("before_train_admission")):
+                began = time.monotonic()
+                while True:
+                    guard(plan)
+                    observed = read(dependency["status"])
+                    if training_admission_ready(observed, dependency):
+                        break
+                    record("waiting-for-existing-training-admission", dependency=dependency)
+                    assert time.monotonic() - began < dependency["maximum_wait_seconds"]
+                    time.sleep(15)
             for arm in plan["arms"]:
                 guard(plan)
                 if binding := state["completed"].get(f"{phase}-{arm}"):
@@ -389,6 +399,26 @@ def controller(path):
                 child.wait(timeout=30)
         record("failed-training-preserved-no-automatic-retry", error=repr(error))
         raise
+
+
+def training_admission_ready(state, dependency):
+    """Protect an existing job's startup headroom without changing its owner."""
+    assert state["plan"] == dependency["plan"]
+    assert state["controller"] == dependency["controller"]
+    assert not state["status"].startswith("failed"), state.get("error", state["status"])
+    if state["status"] == "completed-training-awaiting-model-comparisons":
+        assert set(state["completed"]) == set(dependency["completed_phases"])
+        return not live(state["controller"]) and (
+            state.get("child") is None or not live(state["child"])
+        )
+    assert live(state["controller"]), "Existing training controller exited before admission"
+    return (
+        state.get("phase") == "train"
+        and state.get("arm") == dependency["arm"]
+        and state["status"] == dependency["running_status"]
+        and state.get("child") is not None
+        and live(state["child"])
+    )
 
 
 if __name__ == "__main__":

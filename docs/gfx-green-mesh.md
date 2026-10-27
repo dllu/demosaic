@@ -16,6 +16,10 @@ The case pairs **DSCF3842 ISO6400** with **DSCF3835 ISO100**, taken 46 seconds
 earlier. Both camera JPEGs are included.
 The existing DSCF3879/3880 standing scene and its six regions remain in use.
 
+The [V131/V132 spatial-detail trial](raw-spatial-training.md) queues both fixed
+mesh profiles and both native160 regions, with this corrected DSCF3835 reference
+and both camera JPEGs. Model quality and actual viewing are pending.
+
 The [V120–V125 endpoint review queues](endpoint-quality-review.md) include both
 fixed noise profiles and both native160 regions, reusing saved controls.
 V120/V121 mesh review is complete below, with no clear V121 lattice-recovery
