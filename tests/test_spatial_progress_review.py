@@ -328,3 +328,78 @@ def test_preserved_absolute_wait_deadline_rejects_even_an_available_snapshot(tmp
     with pytest.raises(AssertionError):
         queue.controller(path)
     assert not list(path.parent.glob("*/fixture-collect.claim"))
+
+
+def retained_control_fixture(tmp_path):
+    prediction = tmp_path / "retained-prediction.txt"
+    prediction.write_text("Saved prediction reference fixture; no model execution\n")
+    observations = [
+        {
+            "id": str(i),
+            "arrays": {"path": "same-array", "sha256": "b" * 64},
+            "input_fingerprints": {"raw": "c" * 64},
+            "target": {"sha256": "d" * 64},
+            "ROI_xywh": [48, 48, 160, 160],
+            "display_exposure": 1,
+            "noise": {"shot": 0.00256, "read": 0.0000262144},
+            "reference_role": "exact synthetic target",
+            "controls": [{"model": {"label": "V120"}}],
+        }
+        for i in range(2)
+    ]
+    collection = {
+        "progress_checkpoint_verified": True,
+        "observations": [{"id": str(i), "prediction": ref(prediction)} for i in range(2)],
+    }
+    execution = {
+        "step": 1000,
+        "training_horizon": 20000,
+        "model_label": "V131 progress1k/20k",
+        "progress_checkpoint": True,
+        "observations": copy.deepcopy(observations),
+    }
+    return observations, collection, execution, prediction
+
+
+def test_retained_progress_controls_join_without_mutating_inputs(tmp_path):
+    observations, collection, execution, _ = retained_control_fixture(tmp_path)
+    original = copy.deepcopy(observations)
+    result = queue.attach_progress_control(observations, collection, execution)
+    assert observations == original
+    assert all(len(row["controls"]) == 2 for row in result)
+    assert all(row["controls"][-1]["model"]["label"] == "V131 progress1k/20k" for row in result)
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        "arrays",
+        "input_fingerprints",
+        "target",
+        "ROI_xywh",
+        "display_exposure",
+        "noise",
+        "reference_role",
+        "duplicate",
+        "partial",
+        "endpoint",
+        "label",
+        "prediction",
+    ],
+)
+def test_retained_controls_reject_changed_observations_or_provenance(tmp_path, change):
+    observations, collection, execution, prediction = retained_control_fixture(tmp_path)
+    if change in observations[0]:
+        observations[0][change] = "changed"
+    elif change == "duplicate":
+        collection["observations"].append(collection["observations"][0])
+    elif change == "partial":
+        collection["observations"].pop()
+    elif change == "endpoint":
+        execution["progress_checkpoint"] = False
+    elif change == "label":
+        execution["model_label"] = "V131 final20k"
+    else:
+        prediction.write_text("Unexpected replacement\n")
+    with pytest.raises(AssertionError):
+        queue.attach_progress_control(observations, collection, execution)

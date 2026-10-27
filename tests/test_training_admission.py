@@ -71,3 +71,17 @@ def test_successful_completion_requires_all_phases_and_exited_owners(monkeypatch
     assert runner.training_admission_ready(state, dependency)
     monkeypatch.setattr(runner, "live", lambda owner: True)
     assert not runner.training_admission_ready(state, dependency)
+
+
+def test_completed_only_dependency_never_releases_at_live_training(monkeypatch):
+    state, dependency = fixture()
+    dependency["require_completed"] = True
+    state["arm"] = dependency["arm"]
+    state["status"] = dependency["running_status"]
+    monkeypatch.setattr(runner, "live", lambda owner: True)
+    assert not runner.training_admission_ready(state, dependency)
+    state["status"] = "completed-training-awaiting-model-comparisons"
+    state["completed"] = dict.fromkeys(dependency["completed_phases"])
+    assert not runner.training_admission_ready(state, dependency)
+    monkeypatch.setattr(runner, "live", lambda owner: False)
+    assert runner.training_admission_ready(state, dependency)

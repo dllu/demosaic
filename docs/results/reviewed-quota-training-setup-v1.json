@@ -1,0 +1,887 @@
+{
+  "status": "completed-discarded-device-checks-full20000-and-progress-review-queued",
+  "recorded_UTC": "2026-10-27T16:43:52.210102+00:00",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/controller-plan-v1.json",
+    "sha256": "614f176fc803dae2bbd3e044eecf7789492f9f9995a87a14f9d2108e7e37f4d5"
+  },
+  "training_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/launch.json",
+    "sha256": "2626ac95ffddcaf854c38c374092acd737083ff46ee75d5f884aded48f8c2e3a"
+  },
+  "training_owner": {
+    "pid": 2423684,
+    "created": 1793118798.17
+  },
+  "observed_training_status": "waiting-for-existing-training-admission",
+  "original_failed_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-v1/run/plan.json",
+    "sha256": "332f676d7fe9a00825914da232282c2c321b94fe684f61a77b7dcb615ea9b221"
+  },
+  "original_CPU_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-v1/run/CPU-V133-failure.json",
+    "sha256": "94a44bfb258580a9dbc32e414ee2c1022068a97d0f81e30483a16a09f23ea2dd"
+  },
+  "original_failed_controller_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-v1/run/status.json",
+    "sha256": "f1ec64c0c091c008dc11b73b149fbb8951ff78b705997fbd49bd208cf7cbf81c"
+  },
+  "CPU_continuation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/CPU-continuation-plan-v1.json",
+    "sha256": "d69e34ec2e54b258294178f95d812555cf5527bcfa40a78599f2dfdc54c60855"
+  },
+  "original_CPU_prefix_updates": 16,
+  "new_CPU_resume_updates": 2,
+  "original_CPU_prefix_replayed": false,
+  "original_CPU_absolute_deadline_preserved": true,
+  "checks": [
+    {
+      "phase": "CPU",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/CPU-V133-result.json",
+        "sha256": "c25de09e37d29898d551043934b126b3c2ab529e271c430cc43b941690b4d3be"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/artifacts/CPU/V133/last.pt",
+        "sha256": "115ea3df85d502acccdaa95ea0e000fe6c9593d34c2f408e9d2d83b6a03a93a7"
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 18,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "input_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/CPU-V133-input-comparison-v1.json",
+        "sha256": "061889e2fe8dc9eba503ca652cb43cb6b4c7c05e4fd4dadb304530421d9f80c5"
+      },
+      "input_counts": {
+        "commons_steps": 9,
+        "commons_whole_batches_exact": 6,
+        "exact_unaffected_prepared_values": 2113806,
+        "unaffected_first18_examples": 15,
+        "native_steps": 6,
+        "native_whole_batches_exact": 6,
+        "paired_steps": 3,
+        "paired_whole_batches_exact": 3,
+        "Commons_batches_with_expected_selection_changes": 3
+      },
+      "model_EMA_tensor_count": 91,
+      "optimizer_state_count": 89,
+      "all_AdamW_steps": 18,
+      "CUDA_peak_allocated_bytes": 0
+    },
+    {
+      "phase": "CUDA",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/CUDA-V133-result.json",
+        "sha256": "94bdb48be09cb9792900ff5c3b2f59fa7dfbcc282b5cceeb48e4b65f82210a49"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/artifacts/CUDA/V133/last.pt",
+        "sha256": "fccda6582a1286277ccdec0a889120794151019ec4c402a0a0d6d90cfd016df6"
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 288,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "input_comparison": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/CUDA-V133-input-comparison-v1.json",
+        "sha256": "850032f4fb32a06ff9e1bb4de2e22a7879e0e63d84f6bb7e56564aa12ca01d19"
+      },
+      "input_counts": {
+        "commons_steps": 9,
+        "Commons_batches_with_expected_selection_changes": 9,
+        "exact_unaffected_prepared_values": 138940766,
+        "unaffected_first18_examples": 247,
+        "native_steps": 6,
+        "native_whole_batches_exact": 6,
+        "paired_steps": 3,
+        "paired_whole_batches_exact": 3
+      },
+      "model_EMA_tensor_count": 91,
+      "optimizer_state_count": 89,
+      "all_AdamW_steps": 18,
+      "CUDA_peak_allocated_bytes": 7041804800
+    }
+  ],
+  "independent_saved_state_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/independent-check-audit-v1.json",
+    "sha256": "ebb28599e9696ac0caef790441dfe441f34a760ea291ff7ef4807a7d737b2d93"
+  },
+  "finite_saved_model_EMA_Adam_values": 526475668,
+  "exact_unaffected_prepared_values": 141054572,
+  "unaffected_examples": 262,
+  "actual_discarded_train_encoder_optimizer_calls": 36,
+  "actual_discarded_target_contexts": 306,
+  "actual_new_production_updates": 0,
+  "training_source_compatibility_with_V131": {
+    "demosaic/paired_admission.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/paired_admission.py",
+        "sha256": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/paired_admission.py",
+        "sha256": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/prior.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/prior.py",
+        "sha256": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/prior.py",
+        "sha256": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/metrics.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/metrics.py",
+        "sha256": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/metrics.py",
+        "sha256": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/noise_pairs.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/noise_pairs.py",
+        "sha256": "d4404f8c353ec0703572a903e41f01dae5ac2f61c345e7276f8ba8dff394de10"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/noise_pairs.py",
+        "sha256": "d4404f8c353ec0703572a903e41f01dae5ac2f61c345e7276f8ba8dff394de10"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/inference.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/inference.py",
+        "sha256": "c6129d65eb9d28235cc750b6d694a1bbda7afa2bf7413a727a4d92011e82a94a"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/inference.py",
+        "sha256": "c6129d65eb9d28235cc750b6d694a1bbda7afa2bf7413a727a4d92011e82a94a"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/train.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/train.py",
+        "sha256": "4ecacccf5479183e8422c6f7a80349ca39fde030c5db310aab1d057b6beb2343"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/train.py",
+        "sha256": "cb4fa5d7581958b2c589111e4c1ff1af45c9c541a35088b9245ecc0b9087589c"
+      },
+      "bytes_exact": false,
+      "only_change": "Move pure ROI resume compatibility check before model construction",
+      "reversing_guard_relocation_restores_all_original_bytes": true
+    },
+    "demosaic/personal_admission.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/personal_admission.py",
+        "sha256": "9431fa9ccda526e79f07a1ce9a8e4834689e519828395ce40135c2d09a4f777f"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/personal_admission.py",
+        "sha256": "9431fa9ccda526e79f07a1ce9a8e4834689e519828395ce40135c2d09a4f777f"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/archive_metrics.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/archive_metrics.py",
+        "sha256": "a7ba33502539a26ecd87add43f0ab561d7b7fc09122dcbe6d1b839ba59450f8c"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/archive_metrics.py",
+        "sha256": "a7ba33502539a26ecd87add43f0ab561d7b7fc09122dcbe6d1b839ba59450f8c"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/execution.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/execution.py",
+        "sha256": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/execution.py",
+        "sha256": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/packed_isotropic.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/packed_isotropic.py",
+        "sha256": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/packed_isotropic.py",
+        "sha256": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/dino_adaptation.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/dino_adaptation.py",
+        "sha256": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/dino_adaptation.py",
+        "sha256": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/late_rgb.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/late_rgb.py",
+        "sha256": "8e81263dd3eaf619700ad34c550153f066ed6125788356feb3812b31b6eb1fb7"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/late_rgb.py",
+        "sha256": "8e81263dd3eaf619700ad34c550153f066ed6125788356feb3812b31b6eb1fb7"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/dng.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/dng.py",
+        "sha256": "dc2a54f4ee88d032013cf806892c1c1bb688b8c47a5efaaec738268f449c3999"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/dng.py",
+        "sha256": "dc2a54f4ee88d032013cf806892c1c1bb688b8c47a5efaaec738268f449c3999"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/paired_training.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/paired_training.py",
+        "sha256": "8eff2a50ed898ffa0b79bc5f20c98b90e8a6aa561a9f227f491932031c3cc03e"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/paired_training.py",
+        "sha256": "8eff2a50ed898ffa0b79bc5f20c98b90e8a6aa561a9f227f491932031c3cc03e"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/reference.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/reference.py",
+        "sha256": "91cba3dbcab05f25e67f6c6f9b6122c7fe7059cafe10c58bdc3a153984e4345b"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/reference.py",
+        "sha256": "91cba3dbcab05f25e67f6c6f9b6122c7fe7059cafe10c58bdc3a153984e4345b"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/prepare.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/prepare.py",
+        "sha256": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/prepare.py",
+        "sha256": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/raw_spectral.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/raw_spectral.py",
+        "sha256": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/raw_spectral.py",
+        "sha256": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/realdata.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/realdata.py",
+        "sha256": "943540dfd4fddfad96d6337e134da5c96ca8ee27f23b3dbb689d423d6b5a2dd0"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/realdata.py",
+        "sha256": "943540dfd4fddfad96d6337e134da5c96ca8ee27f23b3dbb689d423d6b5a2dd0"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/cfa.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/cfa.py",
+        "sha256": "da90a3863904a0c6517b2e5d9e4270cd31103f620785d5f23e78f8ff1aed8aed"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/cfa.py",
+        "sha256": "da90a3863904a0c6517b2e5d9e4270cd31103f620785d5f23e78f8ff1aed8aed"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/paired.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/paired.py",
+        "sha256": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/paired.py",
+        "sha256": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/raw_directional.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/raw_directional.py",
+        "sha256": "4309e5c0952b6957035fb13d3c9149e4f42e18c6c7cd1d305677c2ae02a5df55"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/raw_directional.py",
+        "sha256": "4309e5c0952b6957035fb13d3c9149e4f42e18c6c7cd1d305677c2ae02a5df55"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/photo_sampling.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/photo_sampling.py",
+        "sha256": "7638dc5914ff97dfbed758567223f62a4949596e7a9656d90eac8817db7a1d04"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/photo_sampling.py",
+        "sha256": "7638dc5914ff97dfbed758567223f62a4949596e7a9656d90eac8817db7a1d04"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/audit.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/audit.py",
+        "sha256": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/audit.py",
+        "sha256": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/source_loss.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/source_loss.py",
+        "sha256": "ed7764326f019f32eebbb2a6b25b18597551366c18af4bf36b1c617f2bd831d8"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/source_loss.py",
+        "sha256": "ed7764326f019f32eebbb2a6b25b18597551366c18af4bf36b1c617f2bd831d8"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/self_ensemble.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/self_ensemble.py",
+        "sha256": "6f54d52dc39bf0f073ff402f1e9fab6d0419608868c4dff09a6f837d7993bf54"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/self_ensemble.py",
+        "sha256": "6f54d52dc39bf0f073ff402f1e9fab6d0419608868c4dff09a6f837d7993bf54"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/losses.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/losses.py",
+        "sha256": "0ba684381dbd6d0b00c58b63ef1ec3177de7de5adac2f3fa3d9f25cd398a5340"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/losses.py",
+        "sha256": "0ba684381dbd6d0b00c58b63ef1ec3177de7de5adac2f3fa3d9f25cd398a5340"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/gaussian.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/gaussian.py",
+        "sha256": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/gaussian.py",
+        "sha256": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/real_suite.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/real_suite.py",
+        "sha256": "b54703f430e070733f9dceb9859801e7405f9c01a39b8bbf1c0b6477aa307ba1"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/real_suite.py",
+        "sha256": "b54703f430e070733f9dceb9859801e7405f9c01a39b8bbf1c0b6477aa307ba1"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/hotpixels.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/hotpixels.py",
+        "sha256": "0a4b8777a47b49af0f16c83c86b970387960c44432228e5f958b433c71d30672"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/hotpixels.py",
+        "sha256": "0a4b8777a47b49af0f16c83c86b970387960c44432228e5f958b433c71d30672"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/raw_frequency_features.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/raw_frequency_features.py",
+        "sha256": "c8831e53c478f0ca7127dfa333485485ccb0b4842c8f739d5cdec51e60489d3a"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/raw_frequency_features.py",
+        "sha256": "c8831e53c478f0ca7127dfa333485485ccb0b4842c8f739d5cdec51e60489d3a"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/shadow_exposure.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/shadow_exposure.py",
+        "sha256": "a3d5c3385bad3bc98375aeb578ecaf820d12e84b21184790368efb03ec89d49d"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/shadow_exposure.py",
+        "sha256": "a3d5c3385bad3bc98375aeb578ecaf820d12e84b21184790368efb03ec89d49d"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/prediction_archive.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/prediction_archive.py",
+        "sha256": "d92c79c2895db0dd265bc4894276ec513ec1e3add60218373fa56406a927ec48"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/prediction_archive.py",
+        "sha256": "d92c79c2895db0dd265bc4894276ec513ec1e3add60218373fa56406a927ec48"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/raw_clean.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/raw_clean.py",
+        "sha256": "37237ec96d00ab83e0a9fd6d65d456495c2c9e23803395c908cc4de3b9c52209"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/raw_clean.py",
+        "sha256": "37237ec96d00ab83e0a9fd6d65d456495c2c9e23803395c908cc4de3b9c52209"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/checkpoint_cache.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/checkpoint_cache.py",
+        "sha256": "24399e0946d6d07872e6aa01cc4a7e12b4ae0c5c055bac9470a2dea8be2d4622"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/checkpoint_cache.py",
+        "sha256": "24399e0946d6d07872e6aa01cc4a7e12b4ae0c5c055bac9470a2dea8be2d4622"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/raw_admission.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/raw_admission.py",
+        "sha256": "06fe28c7a12559ce964f28571ecbbed282ac53ee4ecea1998945358dc7d5737b"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/raw_admission.py",
+        "sha256": "06fe28c7a12559ce964f28571ecbbed282ac53ee4ecea1998945358dc7d5737b"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/raw_spatial_features.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/raw_spatial_features.py",
+        "sha256": "b2f1603a1734e69c21cbaa6c3583e666ebc7d06662d0dbc34f5498592ec682d3"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/raw_spatial_features.py",
+        "sha256": "b2f1603a1734e69c21cbaa6c3583e666ebc7d06662d0dbc34f5498592ec682d3"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/vst.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/vst.py",
+        "sha256": "9ac639792870c11ceb4960dc836ff7c70d7740491eb7b8c829ccf263616e9077"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/vst.py",
+        "sha256": "9ac639792870c11ceb4960dc836ff7c70d7740491eb7b8c829ccf263616e9077"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/conditional_bias.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/conditional_bias.py",
+        "sha256": "3c780cd22135a86c1ec61ccb63e9d5062d74ee6d0329dcae76014a39446cace5"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/conditional_bias.py",
+        "sha256": "3c780cd22135a86c1ec61ccb63e9d5062d74ee6d0329dcae76014a39446cace5"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/detail_loss.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/detail_loss.py",
+        "sha256": "e3b50def1463258d4703cd803b6c600130a93903a6afb4bc4e7809a43c37c59f"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/detail_loss.py",
+        "sha256": "e3b50def1463258d4703cd803b6c600130a93903a6afb4bc4e7809a43c37c59f"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/io.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/io.py",
+        "sha256": "3e693732086ee6c4995989dbb9740dc76f3ee13449c407a85d89a138466f798a"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/io.py",
+        "sha256": "3e693732086ee6c4995989dbb9740dc76f3ee13449c407a85d89a138466f798a"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/data.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/data.py",
+        "sha256": "d224fa731acc0239273c20de8e1ab925ab7c9b5fb306411eb8151f0fe0af64ea"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/data.py",
+        "sha256": "d224fa731acc0239273c20de8e1ab925ab7c9b5fb306411eb8151f0fe0af64ea"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/__init__.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/__init__.py",
+        "sha256": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/__init__.py",
+        "sha256": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/calibration.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/calibration.py",
+        "sha256": "49fc00d2f1ff9bf52c18bb16291d26e670f58702f133a8244bf4dfca09bf0918"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/calibration.py",
+        "sha256": "49fc00d2f1ff9bf52c18bb16291d26e670f58702f133a8244bf4dfca09bf0918"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/noise.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/noise.py",
+        "sha256": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/noise.py",
+        "sha256": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/__main__.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/__main__.py",
+        "sha256": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/__main__.py",
+        "sha256": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/precision.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/precision.py",
+        "sha256": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/precision.py",
+        "sha256": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/cli.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/cli.py",
+        "sha256": "b7fbb2af8c3b9d9d2a54f4582b014e65f228f9742e87bd35e0d4b2720b10501f"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/cli.py",
+        "sha256": "b7fbb2af8c3b9d9d2a54f4582b014e65f228f9742e87bd35e0d4b2720b10501f"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/reporting.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/reporting.py",
+        "sha256": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/reporting.py",
+        "sha256": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/model.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/model.py",
+        "sha256": "350dbb3ff98ef73a493f272e9e598df115a14eddc5d706e41915e4e6fc16a202"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/model.py",
+        "sha256": "350dbb3ff98ef73a493f272e9e598df115a14eddc5d706e41915e4e6fc16a202"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/color.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/color.py",
+        "sha256": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/color.py",
+        "sha256": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/dino_pyramid.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/dino_pyramid.py",
+        "sha256": "430c272eee1c764197b4f20810215798644f565a8d5e3637c7002d6fb71232af"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/dino_pyramid.py",
+        "sha256": "430c272eee1c764197b4f20810215798644f565a8d5e3637c7002d6fb71232af"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/textures.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/textures.py",
+        "sha256": "66838193b3f792d423a6716749aaed7dfb85329461bd00d366552a586965e5b2"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/textures.py",
+        "sha256": "66838193b3f792d423a6716749aaed7dfb85329461bd00d366552a586965e5b2"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/nonlocal_reference.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/nonlocal_reference.py",
+        "sha256": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/nonlocal_reference.py",
+        "sha256": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/reviewed_rois.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/reviewed_rois.py",
+        "sha256": "c1f4ce7d6d46d65a447903913fd8555ae9fdb511f1f8b1fc415446daba2c7cf4"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/reviewed_rois.py",
+        "sha256": "c1f4ce7d6d46d65a447903913fd8555ae9fdb511f1f8b1fc415446daba2c7cf4"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/safety.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/safety.py",
+        "sha256": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/safety.py",
+        "sha256": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/conditional_gradient.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/conditional_gradient.py",
+        "sha256": "eda41a837a1604f4bb2af8c1b16847dd63b77555dd52e442179dbaba5358e448"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/conditional_gradient.py",
+        "sha256": "eda41a837a1604f4bb2af8c1b16847dd63b77555dd52e442179dbaba5358e448"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/raw_kernel.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/raw_kernel.py",
+        "sha256": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/raw_kernel.py",
+        "sha256": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/training_context.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/training_context.py",
+        "sha256": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/training_context.py",
+        "sha256": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/pretrained_rgb.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/pretrained_rgb.py",
+        "sha256": "47a3a2ad150f96ff7a3225069b3a8acd7e27b1c054df1124821e3135774a2f1e"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/pretrained_rgb.py",
+        "sha256": "47a3a2ad150f96ff7a3225069b3a8acd7e27b1c054df1124821e3135774a2f1e"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/dino_supervision.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/dino_supervision.py",
+        "sha256": "203982984ef0ae84b91fa973949761f57c2a10f29cf93e3024775b7bde8c07e5"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/dino_supervision.py",
+        "sha256": "203982984ef0ae84b91fa973949761f57c2a10f29cf93e3024775b7bde8c07e5"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/optimizer_batches.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/optimizer_batches.py",
+        "sha256": "381bdf08ec3bc4e64d79c7c38141ad7209515371870e2e1e6e3c01af9de79949"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/optimizer_batches.py",
+        "sha256": "381bdf08ec3bc4e64d79c7c38141ad7209515371870e2e1e6e3c01af9de79949"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/registration.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/registration.py",
+        "sha256": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/registration.py",
+        "sha256": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202"
+      },
+      "bytes_exact": true
+    },
+    "demosaic/suite.py": {
+      "candidate": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-quota-training-recovery-v2/run/work/src/demosaic/suite.py",
+        "sha256": "58eceac48377a8b52f1f4838b2051bd54d3d20f66b7cf1306b03f5264fc6dbb3"
+      },
+      "control": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-v1/run/work/src/demosaic/suite.py",
+        "sha256": "58eceac48377a8b52f1f4838b2051bd54d3d20f66b7cf1306b03f5264fc6dbb3"
+      },
+      "bytes_exact": true
+    }
+  },
+  "source_change": "62 modules byte-exact; only train.py pure ROI resume guard moved before construction. Reversing the move restores all control bytes.",
+  "progress_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-progress1000-quota-review-v1/queue-plan-launched-v1.json",
+    "sha256": "3cded0e5754c4416c7ad4b1dedbe9805c06296b3180e722944cd8a1f9a83f869"
+  },
+  "progress_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-progress1000-quota-review-v1/launch.json",
+    "sha256": "0a6be963725d5e9939b6d1523cf1190916dbe752872a138e1af0d22ebf1bae53"
+  },
+  "progress_owner": {
+    "pid": 2424110,
+    "created": 1793118975.9
+  },
+  "progress_observed_status": "waiting-for-immutable-training-progress",
+  "progress_planned_new_root_encoder_calls": 102,
+  "progress_actual_new_calls": 0,
+  "saved_control_progress": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-progress1000-review-resource-v2/queue-plan-v1.json",
+      "sha256": "d24e4a76d5f51a668621342b7f86a75c32226449d9afabe8698cf1d3231caab9"
+    },
+    "status": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V131-V132-progress1000-review-resource-v2/status.json",
+    "owner": {
+      "pid": 2302637,
+      "created": 1793111667.77
+    },
+    "arm": "V131"
+  },
+  "retained_input_preflight_adoption": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-progress1000-quota-review-v1/retained-input-preflight-adoption-v1.json",
+    "sha256": "9e1b446de5110dd6e03ca9d7ad8e70ed3bb3b5c2374c744d538d42c0ac653dc4"
+  },
+  "new_noise_for_progress_review": 0,
+  "RAW_decodes_for_progress_review": 0,
+  "old_control_neural_calls_repeated": 0,
+  "focused_tests_passed": 78,
+  "focused_tests_seconds": 16.82,
+  "Ruff_passed": true,
+  "source_coverage": "Same seed70/cohort90781/29, .05 visits62872 sources versus42086 under.5; counts are prospective, not quality.",
+  "production_dependency": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-admission-v2/run/plan.json",
+      "sha256": "03fe6427a839be4994bc7311c649134c5ad9b0750bb3eb61c34e83cda7eaa600"
+    },
+    "status": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-training-admission-v2/run/status.json",
+    "controller": {
+      "pid": 2294106,
+      "created": 1793109048.34
+    },
+    "arm": "V132",
+    "running_status": "running-quality-training",
+    "require_completed": true,
+    "completed_phases": [
+      "CPU-V131",
+      "CPU-V132",
+      "CUDA-V131",
+      "CUDA-V132",
+      "train-V131",
+      "train-V132"
+    ],
+    "maximum_wait_seconds": 691200
+  },
+  "quality_measured": false,
+  "current_model_selection_changed": false,
+  "scope": "Quota-only matched-budget training against original V131; all original jobs retain source/data/schedules/budgets. No production or quality result yet. CPU16 prefix preserved across explicit validation-order repair; no prefix training replay. Early native GT/real-reference comparisons are queued; actual viewing follows."
+}

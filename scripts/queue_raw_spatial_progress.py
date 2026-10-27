@@ -38,7 +38,16 @@ def checked_collection(binding, expected):
     return result, execution
 
 
-def prepare(root, training_path, shadow_path, faint_path):
+def prepare(
+    root,
+    training_path,
+    shadow_path,
+    faint_path,
+    *,
+    arms=ARMS,
+    training_format="matched-raw-spatial-v1",
+    saved_progress_control_path=None,
+):
     root, training_path, shadow_path, faint_path = (
         Path(p).resolve() for p in (root, training_path, shadow_path, faint_path)
     )
@@ -46,8 +55,10 @@ def prepare(root, training_path, shadow_path, faint_path):
     training, shadow, faint = [read(p) for p in (training_path, shadow_path, faint_path)]
     for plan in (training, shadow, faint):
         guard(plan)
-    assert training["training_format"] == "matched-raw-spatial-v1"
-    assert list(training["arms"]) == list(ARMS)
+    assert training["training_format"] == training_format
+    assert list(training["arms"]) == list(arms)
+    assert tuple(arms) in (ARMS, ("V133",))
+    assert (saved_progress_control_path is not None) == (tuple(arms) == ("V133",))
     assert training["train_updates"] == 20000 and training["progress_steps"] == [1000]
     status = read(Path(training["root"]) / "status.json")
     assert status["plan"] == ref(training_path) and live(status["controller"])
@@ -101,6 +112,28 @@ def prepare(root, training_path, shadow_path, faint_path):
             }
         )
     assert len(observations) == len({o["id"] for o in observations}) == 102
+    saved_control = None
+    if saved_progress_control_path is not None:
+        saved_progress_control_path = Path(saved_progress_control_path).resolve()
+        previous = read(saved_progress_control_path)
+        guard(previous)
+        assert previous["arms"] == list(ARMS)
+        assert previous["step"] == 1000 and previous["training_horizon"] == 20000
+        assert previous["observations"] == observations
+        previous_state_path = Path(previous["root"]) / "status.json"
+        previous_state = read(previous_state_path)
+        assert previous_state["plan"] == ref(saved_progress_control_path)
+        assert not previous_state["status"].startswith("failed")
+        assert live(previous_state["owner"]) or previous_state["status"] == (
+            "completed-progress-comparisons-awaiting-actual-native-viewing"
+        )
+        saved_control = {
+            "plan": ref(saved_progress_control_path),
+            "status": str(previous_state_path),
+            "owner": previous_state["owner"],
+            "arm": "V131",
+        }
+        inputs.append(ref(saved_progress_control_path))
     for observation in observations:
         inputs.append(observation["arrays"])
         if "target" in observation:
@@ -113,7 +146,7 @@ def prepare(root, training_path, shadow_path, faint_path):
     shutil.copyfile(__file__, controller_source)
     for name in ("train_directional_bank_trial.py", "train_v43_quality_trial.py"):
         shutil.copyfile(REPO / "scripts" / name, root / name)
-    for arm in ARMS:
+    for arm in arms:
         work = root / arm / "work"
         shutil.copytree(
             Path(training["work"]) / "src",
@@ -134,15 +167,16 @@ def prepare(root, training_path, shadow_path, faint_path):
         "worker_root": original_root,
         "controller_source": ref(controller_source),
         "python": sys.executable,
-        "arms": list(ARMS),
+        "arms": list(arms),
+        "saved_progress_control": saved_control,
         "step": 1000,
         "training_horizon": 20000,
         "observations": observations,
         "saved_V120_shadow": shadow_control,
         "saved_V120_faint_ADC": faint_control,
         "planned_new_root_forwards_per_model": 102,
-        "planned_new_encoder_forwards_total": 204,
-        "planned_new_root_forwards_total": 204,
+        "planned_new_encoder_forwards_total": 102 * len(arms),
+        "planned_new_root_forwards_total": 102 * len(arms),
         "new_noise_observations": 0,
         "RAW_decodes": 0,
         "optimizer_updates": 0,
@@ -164,10 +198,11 @@ def prepare(root, training_path, shadow_path, faint_path):
             **{str(p): ref(p)["sha256"] for p in root.rglob("*") if p.is_file()},
         },
         "scope": (
-            "V131/V132 step1000 progress within original20000-update horizons, never "
+            f"{'/'.join(arms)} step1000 progress within original20000-update horizons, never "
             "completed endpoints.102 new FP32 calls each:64 retained shadow,16 ordinary "
             "material,4 main-GFX512,2 extra-mesh768 fixed profiles,16 retained faint-ADC. "
-            "Reuse all V120 predictions; V132 also compares saved V131 progress predictions. "
+            "Reuse all V120 predictions; later spatial arms or the quota candidate also "
+            "compare original saved V131 progress predictions, without control replay. "
             "No new inputs/noise/RAW/reference/optimizer work or training signals/reset. "
             "Exact step/horizon/Adam/EMA/lineage checks precede model construction. "
             "Sequential collections with52GiB admission/12GiB CUDAcap/32GiB runtime floor; "
@@ -179,6 +214,47 @@ def prepare(root, training_path, shadow_path, faint_path):
     save(path, plan)
     guard(plan)
     return path
+
+
+def attach_progress_control(observations, collection, execution):
+    """Reuse predictions only with identical observation/target/display metadata."""
+    assert execution["step"] == 1000 and execution["training_horizon"] == 20000
+    assert execution["model_label"] == "V131 progress1k/20k"
+    assert execution["progress_checkpoint"] is True
+    assert collection["progress_checkpoint_verified"]
+    actual = {row["id"]: row for row in collection["observations"]}
+    expected = {row["id"]: row for row in execution["observations"]}
+    assert len(actual) == len(collection["observations"])
+    assert len(expected) == len(execution["observations"])
+    assert len(actual) == len(expected) == len(observations)
+    assert {row["id"] for row in observations} == set(actual) == set(expected)
+    keys = (
+        "arrays",
+        "input_fingerprints",
+        "target",
+        "ROI_xywh",
+        "display_exposure",
+        "noise",
+        "reference_role",
+    )
+    attached = []
+    for row in observations:
+        assert all(row.get(key) == expected[row["id"]].get(key) for key in keys)
+        prediction = actual[row["id"]]["prediction"]
+        assert ref(prediction["path"]) == prediction
+        attached.append(
+            {
+                **row,
+                "controls": [
+                    *row["controls"],
+                    {
+                        "model": {"label": execution["model_label"]},
+                        "prediction": prediction,
+                    },
+                ],
+            }
+        )
+    return attached
 
 
 def progress_ready(plan, state, arm, progress):
@@ -386,6 +462,30 @@ def controller(path):
                     for o in observations
                 ]
                 extra = [state["completed"]["V131"], *[r["prediction"] for r in rows.values()]]
+            elif dependency := plan.get("saved_progress_control"):
+                record("waiting-for-saved-V131-progress-predictions", child=None)
+                while True:
+                    previous = read(dependency["status"])
+                    assert previous["plan"] == dependency["plan"]
+                    assert previous["owner"] == dependency["owner"]
+                    assert not previous["status"].startswith("failed")
+                    binding = previous["completed"].get(dependency["arm"])
+                    if binding is not None:
+                        break
+                    assert live(dependency["owner"])
+                    assert time.monotonic() - began < plan["maximum_training_wait_seconds"]
+                    time.sleep(15)
+                control, control_execution = checked_collection(binding, 102)
+                observations = attach_progress_control(observations, control, control_execution)
+                original = read(dependency["plan"]["path"])
+                snapshot = Path(original["worker_root"]) / "train-V131-progress1000.json"
+                assert control_execution["checkpoint"] == read(snapshot)["checkpoint"]
+                extra = [
+                    binding,
+                    control["plan"],
+                    ref(snapshot),
+                    *[r["prediction"] for r in control["observations"]],
+                ]
             analysis = {
                 **execution,
                 "root": str(analysis_root),
@@ -440,8 +540,21 @@ if __name__ == "__main__":
     parser.add_argument("--training", type=Path)
     parser.add_argument("--shadow-inputs", type=Path)
     parser.add_argument("--faint-inputs", type=Path)
+    parser.add_argument("--arms", nargs="+", choices=(*ARMS, "V133"), default=ARMS)
+    parser.add_argument("--training-format", default="matched-raw-spatial-v1")
+    parser.add_argument("--saved-progress-control", type=Path)
     args = parser.parse_args()
     if args.mode == "prepare":
-        print(prepare(args.path, args.training, args.shadow_inputs, args.faint_inputs))
+        print(
+            prepare(
+                args.path,
+                args.training,
+                args.shadow_inputs,
+                args.faint_inputs,
+                arms=tuple(args.arms),
+                training_format=args.training_format,
+                saved_progress_control_path=args.saved_progress_control,
+            )
+        )
     else:
         controller(args.path.resolve())

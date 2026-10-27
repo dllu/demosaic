@@ -35,6 +35,11 @@ has four exact-recipe CPU/CUDA checks complete on90781/29, with full20k producti
 queued after V125's admission. A102-input progress comparison is also queued;
 trained quality remains unmeasured.
 
+The [V133 quota comparison](reviewed-quota-training.md) has completed both
+device checks and queues20k updates against the original V131 control, changing
+only the reviewed photographic quota. A102-input progress review is queued;
+source diversity and restoration quality remain separate measurements.
+
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
 | Excellent joint restoration | V120 photo37.04008dB; recovers V119's camera/color regression while retaining its photo score;427-source panels complete | Recover finest detail and reduce adverse cases before SOTA claims |

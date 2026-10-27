@@ -274,7 +274,7 @@ def equal_state(first, second):
         assert first == second
 
 
-def test_actual_cpu_training_snapshots_catalogue_and_resumes_exactly(corpus, tmp_path):
+def test_actual_cpu_training_snapshots_catalogue_and_resumes_exactly(corpus, tmp_path, monkeypatch):
     manifest, catalogue, _ = corpus
     config = {
         "manifest": str(manifest),
@@ -331,7 +331,22 @@ def test_actual_cpu_training_snapshots_catalogue_and_resumes_exactly(corpus, tmp
     changed = copy.deepcopy(config)
     changed["reviewed_roi_fraction"] = 0
     path.write_text(yaml.safe_dump(changed))
+    import demosaic.train as training
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Changed reviewed data must reject before model construction")
+
+    monkeypatch.setattr(training, "JointDemosaic", forbidden)
     with pytest.raises(ValueError, match="ROI fraction"):
+        train(path, resume=resumed)
+    changed_catalogue = tmp_path / "changed-catalogue.json"
+    payload = json.loads(catalogue.read_text())
+    payload["resume_rejection_fixture"] = True
+    changed_catalogue.write_text(json.dumps(payload))
+    changed = copy.deepcopy(config)
+    changed["reviewed_roi_catalogue"] = str(changed_catalogue)
+    path.write_text(yaml.safe_dump(changed))
+    with pytest.raises(ValueError, match="ROI catalogue"):
         train(path, resume=resumed)
     catalogue.write_text(catalogue.read_text() + "\n")
     path.write_text(yaml.safe_dump(config))

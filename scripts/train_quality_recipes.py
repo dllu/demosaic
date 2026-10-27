@@ -412,6 +412,8 @@ def training_admission_ready(state, dependency):
             state.get("child") is None or not live(state["child"])
         )
     assert live(state["controller"]), "Existing training controller exited before admission"
+    if dependency.get("require_completed", False):
+        return False
     return (
         state.get("phase") == "train"
         and state.get("arm") == dependency["arm"]

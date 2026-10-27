@@ -91,12 +91,17 @@ The figure was actually viewed after rendering.
 The frozen plan, complete private per-index CSVs, independent aggregation,
 executed sources and original render are hash-referenced in the receipts/diary.
 
-## Next quality comparison
+## Queued quality comparison
 
 Test a lower reviewed quota while holding the chosen useful architecture,
 cleaned corpus and training budget fixed. Compare ordinary/noisy photographic
 detail, camera/color tails and both real GFX scenes alongside whole-patch scores.
 Source coverage alone cannot choose the best quota or replace native inspection.
+
+[V133 now implements that matched20k test](reviewed-quota-training.md) against
+the original V131 control, changing only the photographic reviewed quota. Its
+actual CPU/CUDA16+2 checks and independent saved-state audit pass. A102-input
+retained-progress comparison is queued; production and quality remain pending.
 
 The [V124/V125](conditional-mean-training.md) and
 [V131/V132](raw-spatial-training.md) recipes, parents, checkpoints, collectors

@@ -705,6 +705,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         require_resume_features(resume_state["config"], config)
         require_resume_noise_pairs(resume_state["config"], config)
         require_resume_reviewed_shadows(resume_state["config"], config)
+        require_resume_rois(resume_state["config"], config)
         if validate_late_rgb_only(resume_state["config"]) != late_only:
             raise ValueError("Resume late RGB training scope differs; initialize a new run")
         if validate_raw_frequency_only(resume_state["config"]) != frequency_only:
@@ -854,7 +855,6 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             != config["validation_manifest_sha256"]
         ):
             raise ValueError("Resume validation manifest differs from checkpoint")
-        require_resume_rois(state["config"], config)
         require_resume_photo_sampling(state["config"], config)
         if state["config"].get("augmentation_downsample", 1) != config.get(
             "augmentation_downsample", 1

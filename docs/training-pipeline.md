@@ -13,6 +13,7 @@ It is reader-verified and untrained. Existing trials retain their frozen inputs:
 | --- | --- | ---: |
 | Running [V124/V125 mean-loss comparison](conditional-mean-training.md) |90,784 /20 |5% |
 | Queued [V131/V132 spatial comparison](raw-spatial-training.md) |90,781 /29 |50% |
+| Queued [V133 quota comparison](reviewed-quota-training.md) |90,781 /29 |5% |
 | [Newest prepared future dataset](v124-first-source-review.md) |90,780 /31 |Not a trained recipe |
 
 Corpus size is distinct from scheduled source diversity. The
@@ -20,7 +21,8 @@ Corpus size is distinct from scheduled source diversity. The
 trial's 50% reviewed quota gives 56,256 draws to 29 sources and visits 46.36% of its
 photo corpus. A 5% quota on the same seed/cohort would visit69.26%, based on
 metadata only. This supports testing the quota at fixed architecture/data;
-restoration quality under that change is unmeasured. Current trials stay fixed.
+restoration quality under that change is unmeasured. V133 now queues that
+quota-only20k comparison, reusing V131 and preserving the original trials.
 
 ## Augmentation before the final reduction
 
@@ -111,6 +113,8 @@ Exact studies use their [frozen control/treatment recipes and runner](raw-spatia
 An independent new run should bind its intended manifests/catalogue, parent EMA,
 encoder revision/hash, output directory and complete LR horizon. The trainer
 snapshots code/config/data identities and rejects incompatible resumes.
+Changed reviewed-region quotas/catalogues now reject before model construction;
+the actual V133 check exposed and corrected the previous late validation.
 Portable endpoints, optimizer checkpoints, retained progress snapshots and
 discarded CPU/CUDA implementation checks remain distinct artifacts.
 

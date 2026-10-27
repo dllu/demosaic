@@ -21,6 +21,7 @@ model-quality gains or certify every remaining photo pristine.
 | Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k; complete native review |
 | V129 data pilot / V130 precision trial |90,782 /27 | Both1k reviews complete; small mixed precision/detail changes |
 | V131/V132 spatial trial |90,781 /29 | Four CPU/CUDA checks complete; full20k production and early progress review queued; quality unmeasured |
+| V133 quota trial |90,781 /29 | Both CPU/CUDA16+2 checks complete;5% quota against original V13150% control; full20k and progress review queued |
 | New prepared future cohort |90,780 /31 | Actual reader visits all31 regions; no production training or measured quality result |
 
 [Mean-loss trial](conditional-mean-training.md) ·
@@ -32,6 +33,9 @@ separately measures visitation: the spatial trial's50% reviewed quota visits
 46.36% of its available photos; the same seed/cohort at5% would visit69.26%.
 Catalogue expansion and corpus size alone do not establish training diversity
 or quality. The counterfactual is metadata only; current recipes remain fixed.
+The separate [V133 quota trial](reviewed-quota-training.md) now has both device
+checks complete and a102-input progress review queued; it reuses the original
+V131 cohort/control while leaving the newest90780/31 data prepared and untrained.
 
 The [31-region catalogue](../configs/low-contrast-training-rois-cleaned90780-v1.json)
 preserves all29 preceding example objects. The new manifest removes exactly one
