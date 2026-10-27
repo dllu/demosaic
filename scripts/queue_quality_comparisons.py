@@ -52,8 +52,59 @@ def endpoint_checkpoints(evaluation, arms):
     return {r["arm"]: {k: r[k] for k in ("path", "sha256")} for r in records}
 
 
+def deferred_reference(state, dependency, label):
+    """Resolve a completed audit by its original owner and declared endpoint."""
+    if not audit_ready(state, dependency):
+        return None
+    audited = read_bound(state["result"])
+    if (
+        audited["owner"] != dependency["owner"]
+        or audited["new_neural_forwards"]
+        or audited["Torch_imported"]
+    ):
+        raise ValueError("Expected the original completed CPU control audit")
+    quality = read_bound(dependency["quality_plan"])
+    training = read_bound(quality["training_execution"])
+    boundary = read_bound(audited["completed_evaluation"])
+    evaluation = read_bound(boundary["evaluation_plan"])
+    if evaluation["training_execution"] != quality["training_execution"]:
+        raise ValueError("Deferred control training lineage differs")
+    checkpoints = endpoint_checkpoints(evaluation, list(training["arms"]))
+    if label not in checkpoints:
+        raise ValueError("Deferred control endpoint is not declared")
+    checkpoint = checkpoints[label]
+    if binding(checkpoint["path"]) != checkpoint:
+        raise ValueError("Deferred control checkpoint changed")
+    return {"audit": state["result"], "checkpoint": checkpoint}
+
+
+def matching_fullframe_inputs(control, candidate, control_sha, candidate_sha):
+    """Compare every actual tile batch, rather than only a grid declaration."""
+    sequences = []
+    for stage, sha in ((control, control_sha), (candidate, candidate_sha)):
+        rows = [row for row in stage["invariants"] if row["checkpoint"]["sha256"] == sha]
+        if len(rows) != 1:
+            raise ValueError("Require one declared full-frame endpoint")
+        row = rows[0]
+        if row["calls"] != 130 or row["encoder_calls"] != 130 or len(row["input_sequence"]) != 130:
+            raise ValueError("Full-frame input coverage differs")
+        sequences.append(row["input_sequence"])
+    if sequences[0] != sequences[1]:
+        raise ValueError("Actual full-frame tile inputs differ")
+    return {"actual_tile_batches_exact": 130, "new_neural_forwards": 0}
+
+
 def prepare(
-    root, audit_plan, references, arms, contrasts, *, allow_gfx_conditioning_difference=False
+    root,
+    audit_plan,
+    references,
+    arms,
+    contrasts,
+    *,
+    allow_gfx_conditioning_difference=False,
+    deferred_reference_plans=None,
+    strict_gfx_contrasts=(),
+    maximum_wait_seconds=345600,
 ):
     root, audit_plan = root.resolve(), audit_plan.resolve()
     if not root.is_relative_to(REPO / ".cache"):
@@ -69,7 +120,10 @@ def prepare(
     if not live(state["owner"]):
         audit_ready(state, {"owner": state["owner"], "plan": binding(audit_plan)})
     arms = list(arms)
-    available = set(references) | set(arms)
+    deferred_reference_plans = deferred_reference_plans or {}
+    if set(deferred_reference_plans) & (set(references) | set(arms)):
+        raise ValueError("Deferred controls must have distinct labels")
+    available = set(references) | set(arms) | set(deferred_reference_plans)
     if not arms or len(set(arms)) != len(arms) or not contrasts:
         raise ValueError("Require distinct declared endpoints and contrasts")
     if any(
@@ -78,12 +132,34 @@ def prepare(
         raise ValueError("Contrasts must use declared controls and new candidates")
     if {right for _, right in contrasts} != set(arms):
         raise ValueError("Every endpoint needs a candidate comparison")
+    if any(list(pair) not in [list(c) for c in contrasts] for pair in strict_gfx_contrasts):
+        raise ValueError("Strict GFX comparisons must name declared contrasts")
     inputs = [binding(audit_plan)]
     for reference in references.values():
         old = read_bound(reference["audit"])
         if live(old["owner"]) or old["new_neural_forwards"] != 0:
             raise ValueError("Controls require completed independent retained-output audits")
         inputs.extend(reference.values())
+    deferred = {}
+    for label, path in deferred_reference_plans.items():
+        previous = read(path)
+        guard(previous)
+        previous_state_path = Path(previous["root"]) / "status.json"
+        previous_state = read(previous_state_path)
+        dependency = {
+            "owner": previous_state["owner"],
+            "plan": binding(path),
+            "status": str(previous_state_path),
+            "quality_plan": previous["quality_plan"],
+        }
+        quality = read_bound(previous["quality_plan"])
+        training = read_bound(quality["training_execution"])
+        if label not in training["arms"]:
+            raise ValueError("Deferred control is absent from its training plan")
+        # Checking readiness also rejects failure, identity drift or premature exit.
+        audit_ready(previous_state, dependency)
+        deferred[label] = dependency
+        inputs.extend((binding(path), previous["quality_plan"]))
     root.mkdir(parents=True, exist_ok=False)
     work = root / "work"
     helpers = (
@@ -118,10 +194,12 @@ def prepare(
         },
         "new_arms": arms,
         "references": references,
+        "deferred_references": deferred,
         "contrasts": contrasts,
+        "strict_gfx_contrasts": [list(pair) for pair in strict_gfx_contrasts],
         "allow_gfx_conditioning_difference": allow_gfx_conditioning_difference,
         "expected_observations": EXPECTED,
-        "maximum_wait_seconds": 345600,
+        "maximum_wait_seconds": maximum_wait_seconds,
         "planned_linear_RGB16_values": 460800 * len(arms),
         "minimum_available_RAM_GiB": 8,
         "minimum_free_output_GiB": 4,
@@ -192,8 +270,19 @@ def controller(path):
             checkpoints,
             output / "full-export-verification-v1.json",
         )
+        reference_controls = dict(plan["references"])
+        for label, dependency in plan.get("deferred_references", {}).items():
+            record("waiting-for-original-control-independent-audit", control=label)
+            while True:
+                resolved = deferred_reference(read(dependency["status"]), dependency, label)
+                if resolved is not None:
+                    reference_controls[label] = resolved
+                    break
+                if time.monotonic() - began > plan["maximum_wait_seconds"]:
+                    raise TimeoutError("Deferred control audit observation window expired")
+                time.sleep(10)
         references = {
-            **plan["references"],
+            **reference_controls,
             **{
                 arm: {"checkpoint": item, "audit": audited_state["result"]}
                 for arm, item in checkpoints.items()
@@ -234,6 +323,15 @@ def controller(path):
                 directory,
                 labels=labels,
             )
+            strict_gfx = [left, right] in plan.get("strict_gfx_contrasts", [])
+            full_input_proof = None
+            if strict_gfx:
+                full_input_proof = matching_fullframe_inputs(
+                    read_bound(old_boundary["stage_results"]["full-gfx"]),
+                    read_bound(boundary["stage_results"]["full-gfx"]),
+                    old_sha,
+                    new_sha,
+                )
             gfx = gfx_comparison(
                 old_boundary["stage_results"]["full-gfx"]["path"],
                 boundary["stage_results"]["full-gfx"]["path"],
@@ -241,8 +339,16 @@ def controller(path):
                 new_sha,
                 directory,
                 labels=labels,
-                allow_conditioning_difference=plan.get("allow_gfx_conditioning_difference", False),
+                allow_conditioning_difference=(
+                    plan.get("allow_gfx_conditioning_difference", False) and not strict_gfx
+                ),
             )
+            if strict_gfx and not (gfx["conditioning_matched"] and gfx["tile_grid_matched"]):
+                raise ValueError(
+                    "Quota GFX comparison requires matching conditioning and tile grid"
+                )
+            if full_input_proof is not None:
+                gfx["actual_fullframe_input_proof"] = full_input_proof
             photo = [
                 read_bound(read_bound(a)["stages"]["photo"])
                 for a in (reference["audit"], audited_state["result"])
@@ -293,7 +399,7 @@ def controller(path):
                 "original_audit": audited_state["result"],
                 "completed_evaluation": audited["completed_evaluation"],
                 "checkpoints": checkpoints,
-                "references": plan["references"],
+                "references": reference_controls,
                 "contrasts": contrasts,
                 "GFX_conditioning_differences": [
                     label

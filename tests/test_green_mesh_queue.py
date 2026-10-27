@@ -6,6 +6,7 @@ from queue_green_mesh_review import (
     completed_endpoint_methods,
     endpoint_methods,
     report_ready,
+    retained_profile_controls,
 )
 
 DEPENDENCY = {
@@ -194,3 +195,27 @@ def test_adopted_endpoint_must_match_the_final_quality_checkpoint(damage):
         del adopted[0]["prediction"]
     with pytest.raises(ValueError):
         endpoint_methods(CHECKPOINTS, ["V120", "V121"], "", adopted=adopted)
+
+
+def test_completed_control_mesh_queue_keeps_its_own_terminal_contract():
+    current = state()
+    terminal = "completed-new-mesh-predictions-native-viewing-pending"
+    current["status"] = terminal
+    assert not report_ready(current, DEPENDENCY, terminal=terminal, is_live=lambda _: True)
+    assert report_ready(current, DEPENDENCY, terminal=terminal, is_live=lambda _: False)
+    with pytest.raises(RuntimeError):
+        report_ready(current, DEPENDENCY, is_live=lambda _: False)
+
+
+def test_saved_profile_control_uses_audited_weights_with_alias_paths():
+    references = {"V120": {"checkpoint": CHECKPOINTS["V120"]}}
+    selected = retained_profile_controls(
+        completed_mesh(), INPUTS, ARRAYS, ["V120", "V121"], ["V120"], "", references
+    )
+    assert selected[0]["checkpoint"]["path"] == "early-V120.pt"
+    assert selected[0]["prediction"]["path"] == "V120.npy"
+    references["V120"]["checkpoint"] = {"path": "different.pt", "sha256": "x" * 64}
+    with pytest.raises(ValueError, match="audited control"):
+        retained_profile_controls(
+            completed_mesh(), INPUTS, ARRAYS, ["V120", "V121"], ["V120"], "", references
+        )

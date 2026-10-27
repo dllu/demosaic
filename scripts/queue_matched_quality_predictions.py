@@ -48,6 +48,11 @@ def function_ast(path, name):
 
 
 def execution_arms(execution, binding, training_format):
+    if training_format == "reviewed-photographic-quota-v1":
+        assert list(execution["arms"]) == ["V133"]
+        assert execution["restoration_tensors_by_arm"] == {"V133": 91}
+        assert execution["saved_control_arm"] == "V131"
+        return [{"arm": "V133", "training_plan": binding}]
     if training_format == "matched-raw-spatial-v1":
         assert execution["restoration_tensors_by_arm"] == {"V131": 91, "V132": 114}
         assert list(execution["arms"]) == ["V131", "V132"]
@@ -128,12 +133,14 @@ def verify_frequency_training_state(actual, snapshot, parent, only):
             assert torch.equal(snapshot["ema"][key], value)
 
 
-def verify_spatial_training_state(actual, snapshot, spatial):
+def verify_spatial_training_state(
+    actual, snapshot, spatial, *, expected_status="completed-raw-spatial-training-phase"
+):
     """Require the full matched horizon and the declared 91/114-tensor state."""
     import torch
 
     tensors, adam_states = (114, 112) if spatial else (91, 89)
-    assert actual["status"] == "completed-raw-spatial-training-phase"
+    assert actual["status"] == expected_status
     assert actual["phase"] == "train" and actual["updates"] == snapshot["step"] == 20000
     assert snapshot["config"]["steps"] == 20000
     assert snapshot["model_config"]["raw_spatial_features"] is spatial
@@ -168,14 +175,58 @@ def verify_spatial_training_state(actual, snapshot, spatial):
         assert actual["all_observed_inputs_match_saved_control"]
 
 
+def verify_quota_training_state(actual, snapshot, comparison, expected_config=None):
+    """Require a complete quota-only endpoint and its finished input proof."""
+    verify_spatial_training_state(
+        actual, snapshot, False, expected_status="completed-reviewed-quota-training-phase"
+    )
+    assert actual["arm"] == "V133"
+    config = snapshot["config"]
+    assert config["reviewed_roi_fraction"] == 0.05 and config["seed"] == 70
+    assert config["noise_pair_draws"] == 1 and config["conditional_mean_weight"] == 0
+    assert config["reviewed_shadow_fraction"] == config.get("dino_feature_weight", 0) == 0
+    assert config["normalized_band_weight"] == 0
+    if expected_config is not None:
+        ignored = {"run", "experiment_notes", "validation_protocol"}
+        assert all(
+            config.get(key) == value for key, value in expected_config.items() if key not in ignored
+        )
+        if "validation_protocol" in expected_config:
+            assert (
+                config["validation_protocol_sha256"]
+                == ref(expected_config["validation_protocol"])["sha256"]
+            )
+    assert comparison["status"] == "passed-quota-only-unaffected-batch-and-example-proof"
+    assert comparison["control"] == actual["matched_control_result"]
+    counts = comparison["counts"]
+    assert counts["native_steps"] == counts["native_whole_batches_exact"] == 4965
+    assert counts["paired_steps"] == counts["paired_whole_batches_exact"] == 4989
+    assert counts["commons_steps"] == 10046
+    assert (
+        counts.get("commons_whole_batches_exact", 0)
+        + counts["Commons_batches_with_expected_selection_changes"]
+        == 10046
+    )
+    assert counts["exact_unaffected_prepared_values"] > 0
+
+
+def training_execution_binding(training_root, status):
+    """Follow the exact live controller's receipt, including nondefault filenames."""
+    shared = "execution_plan" not in status and "plan" in status
+    field = "plan" if shared else "execution_plan"
+    binding = status[field]
+    assert Path(binding["path"]).resolve().parent == Path(training_root).resolve()
+    assert ref(binding["path"]) == binding
+    return binding, shared
+
+
 def prepare(root, artifacts, training_root, witness_plan, gfx_selections, controls=()):
     root, artifacts, training_root = root.resolve(), artifacts.resolve(), training_root.resolve()
     assert root.is_relative_to(REPO / ".cache")
     internal_artifacts = artifacts.is_relative_to(root / "work")
     assert internal_artifacts or artifacts.is_relative_to(Path("/mnt/external/demosaic"))
     status = read(training_root / "status.json")
-    shared_plan = "execution_plan" not in status and "plan" in status
-    execution = ref(training_root / ("plan.json" if shared_plan else "execution-plan-v1.json"))
+    execution, shared_plan = training_execution_binding(training_root, status)
     training = read(execution["path"])
     training_format = (
         training.get("training_format", "learned-frequency-scopes-v1")
@@ -273,7 +324,7 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
         "training_status": str(training_root / "status.json"),
         "training_format": training_format,
         "full_gfx_common_grid_alignment": 32
-        if training_format == "matched-raw-spatial-v1"
+        if training_format in {"matched-raw-spatial-v1", "reviewed-photographic-quota-v1"}
         else None,
         "training_owner_field": owner_field,
         "training_execution_field": execution_field,
@@ -302,9 +353,13 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
         "estimated_retained_and_export_budget_GiB": 15 * len(arm_names),
         "collector_source": ref(work / "scripts/collect_quality_predictions.py"),
         "controller_source": ref(work / "scripts/queue_matched_quality_predictions.py"),
-        "maximum_training_wait_seconds": 432000
-        if training_format == "matched-raw-spatial-v1"
-        else 259200,
+        "maximum_training_wait_seconds": (
+            691200
+            if training_format == "reviewed-photographic-quota-v1"
+            else 432000
+            if training_format == "matched-raw-spatial-v1"
+            else 259200
+        ),
         "first_stage_external_free_GiB": 208 if internal_artifacts else 248,
         "phase_start_external_free_GiB": 208 if internal_artifacts else 216,
         "runtime_external_reserve_GiB": 208,
@@ -365,6 +420,15 @@ def endpoint_plan(plan, state):
             verify_noise_pair_training_state(actual, snapshot, execution["arm_weights"][name])
         if training_format == "matched-raw-spatial-v1":
             verify_spatial_training_state(actual, snapshot, name == "V132")
+        if training_format == "reviewed-photographic-quota-v1":
+            import yaml
+
+            comparison_path = Path(training["root"]) / "train-V133-input-comparison-v1.json"
+            comparison = read(comparison_path)
+            assert comparison["candidate"] == accounting
+            expected_config = yaml.safe_load(Path(training["arms"][name]["train"]).read_text())
+            verify_quota_training_state(actual, snapshot, comparison, expected_config)
+            inputs.append(ref(comparison_path))
         lineage = {**training["parent"], "step": 20000}
         assert snapshot["step"] == 20000 and snapshot["config"]["initialized_from"] == lineage
         checkpoints.append(

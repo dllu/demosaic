@@ -82,8 +82,40 @@ triplets, plus both real GFX scenes. Separate DSCF3880/DSCF3835 ISO100 and camer
 JPEG references remain qualitative, not GT; aperture, exposure time and moving
 subjects differ.
 
-Progress quality and actual viewing are pending. Full20k primary panels and
-complete-frame review remain to be arranged when the endpoint is available;
-this early support does not establish broad real-camera superiority or SOTA.
-Useful measured gains should be documented with their remaining weaknesses,
-without a historical promotion threshold freezing the baseline.
+## Full endpoint review
+
+Four live queues now wait for the exact completed 20k training owner: endpoint
+collection, independent CPU audit, saved-output comparisons and the extra mesh.
+[Full-review setup and constructor-free preflight](results/reviewed-quota-full-review-setup-v1.json).
+The genuine 18-step candidate was tested and rejected before neural construction;
+no full V133 endpoint or quality result is available yet.
+
+| Collection | Planned V133 root/encoder calls | Retained observations |
+| --- | ---: | ---: |
+|427 photos and 16 procedural targets |3,108 |12,404 |
+| Known / unseen measured cameras |24 /30 |72 /90 |
+| Texture / color probes |112 /1,176 |448 /1,176 |
+| Main GFX / highlights |4 /2 |4 /2 |
+| Complete 102MP GFX,520 tiles |130 |520 |
+| Extra fine mesh, two fixed profiles |2 |Both native 160 regions/profile |
+
+This is 4,586 full-panel calls plus two mesh calls; the already queued 102-call
+progress review is separate. Numerical inputs match the original saved
+witnesses. The CPU audit will check 14,190 numerical observations, and comparisons
+will cover all 427 photos' local detail, two native exact-synthetic-GT triplets and
+all six main GFX regions. Complete linear/sRGB RGB16 exports will be verified.
+
+V120/V117 results are reused. V131 will be resolved after its original independent
+audit completes, by owner, plan and checkpoint identity, without a control rerun.
+The quota-only V131/V133 full-frame contrast requires matching noise conditioning,
+the same 32-pixel grid and identical actual inputs for all 130 tile batches.
+Older V120/V117 profiles/grids retain their explicit comparison limitations.
+
+The mesh queue will reuse nine controls, including existing V120 predictions and
+V131's original predictions once available. Only V133 gets two new CPU FP32 forwards.
+V120/V131/V133 native boards and triplets will share both ROIs and +4EV; the ISO100
+reference remains nonexact. Model quality and actual native viewing are pending.
+Useful measured gains should update current recommendations and galleries with
+their remaining weaknesses, without a historical promotion threshold freezing
+the baseline. These finite reviews do not establish broad real-camera superiority
+or SOTA by themselves.

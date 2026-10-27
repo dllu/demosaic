@@ -18,14 +18,14 @@ REPO = Path(__file__).resolve().parents[1]
 REPORT_TERMINAL = "completed-saved-quality-comparisons-native-viewing-pending"
 
 
-def report_ready(state, dependency, *, is_live=live):
+def report_ready(state, dependency, *, is_live=live, terminal=REPORT_TERMINAL):
     if state["owner"] != dependency["owner"] or state["plan"] != dependency["plan"]:
         raise ValueError("Comparison queue identity differs")
     if state["status"].startswith("failed"):
         raise RuntimeError("Comparison failed; preserve its existing work")
     if is_live(dependency["owner"]):
         return False
-    if state["status"] != REPORT_TERMINAL:
+    if state["status"] != terminal:
         raise RuntimeError("Comparison owner exited before completion")
     return True
 
@@ -119,7 +119,34 @@ def completed_endpoint_methods(result, expected_inputs, input_arrays, arms, suff
     return selected
 
 
-def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=None):
+def retained_profile_controls(result, inputs, arrays, source_arms, wanted_arms, suffix, references):
+    """Select saved profile predictions only for the audited control weights."""
+    selected = completed_endpoint_methods(result, inputs, arrays, source_arms, suffix)
+    retained = []
+    for arm in wanted_arms:
+        matches = [method for method in selected if method["label"] == arm + suffix]
+        if (
+            len(matches) != 1
+            or matches[0]["checkpoint"]["sha256"] != references[arm]["checkpoint"]["sha256"]
+        ):
+            raise ValueError("Retained mesh checkpoint differs from the audited control")
+        retained.extend(matches)
+    return retained
+
+
+def prepare(
+    root,
+    comparison_plan,
+    quality_plan,
+    nominal,
+    nearby,
+    *,
+    adopted=None,
+    retained_endpoint_results=None,
+    deferred_endpoint_plan=None,
+    render_models=None,
+    maximum_wait_seconds=432000,
+):
     root = root.resolve()
     if not root.is_relative_to(REPO / ".cache"):
         raise ValueError("Mesh queues belong in the repository cache")
@@ -139,6 +166,9 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=Non
     if set(adopted) - {"nominal", "profile3879"}:
         raise ValueError("Unknown adopted mesh profile")
     inputs = [binding(comparison_plan), binding(quality_plan)]
+    retained_endpoint_results = retained_endpoint_results or {}
+    if set(retained_endpoint_results) - {"nominal", "profile3879"}:
+        raise ValueError("Unknown retained mesh profile")
     variants, records = [], []
     for name, path, labels, suffix in (
         ("nominal", nominal, {"V115", "V119", "RawNIND-preup"}, ""),
@@ -162,6 +192,25 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=Non
             raise ValueError("Retained control conditioning differs")
         inputs += [metadata["input_arrays"], metadata["derived_selection"]]
         inputs += [m["prediction"] for m in retained]
+        for entry in retained_endpoint_results.get(name, []):
+            source = entry["result"]
+            if binding(source["path"]) != source:
+                raise ValueError("Retained endpoint mesh receipt changed")
+            selected = retained_profile_controls(
+                read(source["path"]),
+                result["inputs"],
+                metadata["input_arrays"],
+                entry["arms"],
+                entry["arms"],
+                suffix,
+                comparison["references"],
+            )
+            retained.extend(selected)
+            inputs.extend(
+                [source, *[m[key] for m in selected for key in ("prediction", "checkpoint")]]
+            )
+        if len({m["label"] for m in retained}) != len(retained):
+            raise ValueError("Retained mesh labels must be distinct")
         for case in metadata["cases"]:
             if case["ROI_xywh"][2:] != [160, 160]:
                 raise ValueError("Mesh crops must retain native160 pixels")
@@ -198,6 +247,44 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=Non
         records[0][key] != records[1][key] for key in ("cases", "source_bindings", "registrations")
     ):
         raise ValueError("Mesh profile geometry or reference differs")
+    deferred = None
+    if deferred_endpoint_plan is not None:
+        previous = read(deferred_endpoint_plan)
+        guard(previous)
+        previous_state_path = Path(previous["root"]) / "status.json"
+        previous_state = read(previous_state_path)
+        if (
+            previous_state["plan"] != binding(deferred_endpoint_plan)
+            or previous_state["status"].startswith("failed")
+            or "V131" not in previous["new_arms"]
+        ):
+            raise ValueError("Expected original V131 mesh-control queue")
+        if (
+            not live(previous_state["owner"])
+            and previous_state["status"] != "completed-new-mesh-predictions-native-viewing-pending"
+        ):
+            raise ValueError("Mesh-control queue exited before successful completion")
+        if {v["name"]: v["inputs"] for v in previous["variants"]} != {
+            v["name"]: v["inputs"] for v in variants
+        }:
+            raise ValueError("Deferred mesh-control observations differ")
+        deferred = {
+            "plan": binding(deferred_endpoint_plan),
+            "status": str(previous_state_path),
+            "owner": previous_state["owner"],
+            "arms": ["V131"],
+        }
+        inputs.append(binding(deferred_endpoint_plan))
+    rendered_models = list(render_models or comparison["new_arms"])
+    if not rendered_models or len(set(rendered_models)) != len(rendered_models):
+        raise ValueError("Require distinct mesh render models")
+    for variant in variants:
+        available = {m["label"] for m in variant["retained_methods"]}
+        available |= {arm + variant["new_label_suffix"] for arm in comparison["new_arms"]}
+        if deferred:
+            available |= {arm + variant["new_label_suffix"] for arm in deferred["arms"]}
+        if any(arm + variant["new_label_suffix"] not in available for arm in rendered_models):
+            raise ValueError("Mesh render model has no declared prediction")
     root.mkdir(parents=True, exist_ok=False)
     work = root / "work"
     for source in (Path(quality["work"]) / "src/demosaic").glob("*.py"):
@@ -237,6 +324,8 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=Non
             "status": str(state_path),
         },
         "new_arms": comparison["new_arms"],
+        "deferred_endpoint_controls": deferred,
+        "render_models": rendered_models,
         "variants": variants,
         "model_source_quality_plan": binding(quality_plan),
         "planned_new_root_forwards": sum(
@@ -248,10 +337,11 @@ def prepare(root, comparison_plan, quality_plan, nominal, nearby, *, adopted=Non
         "planned_completed_endpoint_predictions_adopted": sum(
             len(v["adopted_methods"]) for v in variants
         ),
-        "planned_retained_control_predictions_reused": sum(
-            len(v["retained_methods"]) for v in variants
-        ),
-        "maximum_wait_seconds": 432000,
+        "planned_retained_control_predictions_reused": (
+            2 * len(deferred["arms"]) if deferred else 0
+        )
+        + sum(len(v["retained_methods"]) for v in variants),
+        "maximum_wait_seconds": maximum_wait_seconds,
         "start_RAM_GiB": 48,
         "runtime_RAM_GiB": 32,
         "minimum_free_output_GiB": 4,
@@ -349,9 +439,47 @@ def controller(path):
         ):
             raise ValueError("Completed comparison evidence differs")
         checkpoints = result["checkpoints"]
+        saved_result = saved_plan = saved_binding = None
+        if saved := plan.get("deferred_endpoint_controls"):
+            record("waiting-for-original-retained-mesh-controls", child=None)
+            while not report_ready(
+                read(saved["status"]),
+                saved,
+                terminal="completed-new-mesh-predictions-native-viewing-pending",
+            ):
+                if time.monotonic() - began > plan["maximum_wait_seconds"]:
+                    raise TimeoutError("Retained mesh-control observation window expired")
+                time.sleep(10)
+            saved_state = read(saved["status"])
+            saved_binding = saved_state["result"]
+            if binding(saved_binding["path"]) != saved_binding:
+                raise ValueError("Retained mesh-control result changed")
+            saved_result = read(saved_binding["path"])
+            if saved_result["owner"] != saved["owner"]:
+                raise ValueError("Retained mesh-control producer differs")
+            saved_plan = read(saved["plan"]["path"])
+            guard(saved_plan)
         reports = {}
         for variant in plan["variants"]:
             adopted = variant.get("adopted_methods", [])
+            retained = list(variant["retained_methods"])
+            if saved_result is not None:
+                saved_stage = saved_result["reports"][variant["name"]]
+                if binding(saved_stage["path"]) != saved_stage:
+                    raise ValueError("Retained mesh profile result changed")
+                metadata = read(variant["inputs"]["path"])
+                selected = retained_profile_controls(
+                    read(saved_stage["path"]),
+                    variant["inputs"],
+                    metadata["input_arrays"],
+                    saved_plan["new_arms"],
+                    saved["arms"],
+                    variant["new_label_suffix"],
+                    result["references"],
+                )
+                retained.extend(selected)
+            if len({m["label"] for m in retained}) != len(retained):
+                raise ValueError("Resolved retained mesh controls duplicate labels")
             methods = endpoint_methods(
                 checkpoints, plan["new_arms"], variant["new_label_suffix"], adopted=adopted
             )
@@ -365,7 +493,7 @@ def controller(path):
                 stage_plan,
                 {
                     "inputs": variant["inputs"],
-                    "methods": [*variant["retained_methods"], *adopted, *methods],
+                    "methods": [*retained, *adopted, *methods],
                 },
             )
             output = work / "artifacts" / variant["name"]
@@ -391,9 +519,7 @@ def controller(path):
             ):
                 raise ValueError("Mesh exceeded its declared input/runtime scope")
             for method in report["methods"]:
-                if method["label"] in {
-                    m["label"] for m in [*variant["retained_methods"], *adopted]
-                } and (
+                if method["label"] in {m["label"] for m in [*retained, *adopted]} and (
                     method["new_inference"]
                     or method["actual_root_forwards"]
                     or method["actual_encoder_forwards"]
@@ -412,7 +538,7 @@ def controller(path):
                 reports["profile3879"]["path"],
                 str(rendering),
                 "--models",
-                *plan["new_arms"],
+                *plan.get("render_models", plan["new_arms"]),
             ],
             "native4EV",
         )
@@ -425,6 +551,7 @@ def controller(path):
                 "completed_comparisons": completed["result"],
                 "checkpoints": checkpoints,
                 "reports": reports,
+                "retained_endpoint_control_result": saved_binding,
                 "native_manifest": binding(rendering / "manifest.json"),
                 "new_root_forwards": plan["planned_new_root_forwards"],
                 "new_encoder_forwards": plan["planned_new_encoder_forwards"],

@@ -37,8 +37,9 @@ trained quality remains unmeasured.
 
 The [V133 quota comparison](reviewed-quota-training.md) has completed both
 device checks and queues20k updates against the original V131 control, changing
-only the reviewed photographic quota. A102-input progress review is queued;
-source diversity and restoration quality remain separate measurements.
+only the reviewed photographic quota. Both102-input progress and complete
+photo/camera/color/GFX/mesh reviews are queued; source diversity and restoration
+quality remain separate measurements. Actual quality is pending.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |

@@ -48,7 +48,7 @@ def verify_audit_counts(result, expected_models, expected_observations):
         raise ValueError("Independent observation counts differ")
 
 
-def prepare(root, quality_plan, proof):
+def prepare(root, quality_plan, proof, *, maximum_wait_seconds=345600):
     root, quality_plan = root.absolute(), quality_plan.absolute()
     if not root.resolve().is_relative_to(REPO/".cache"):
         raise ValueError("Audit queue roots belong in the repository cache")
@@ -85,7 +85,7 @@ def prepare(root, quality_plan, proof):
             "proof": binding(proof), "controls": controls, "baseline_sha256": V112,
             "strong_reference": quality["existing_control_files"][-1],
             "material_ids": ["0ae232278265dabbdd54f52c34045a3d03323aa7", "212ae12913effa23268af953b4c8f8e8b7ab4ef5"],
-            "maximum_wait_seconds": 345600, "minimum_available_RAM_GiB": 8, "minimum_free_output_GiB": 2,
+            "maximum_wait_seconds": maximum_wait_seconds, "minimum_available_RAM_GiB": 8, "minimum_free_output_GiB": 2,
             "expected_observations_per_model": {s: quality["stages"][s]["observations_per_model"] for s in NUMERICAL},
             "expected_model_count": expected_models,
             "controller_source": binding(work/"scripts/queue_quality_archive_audit.py"),

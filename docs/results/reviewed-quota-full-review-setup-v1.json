@@ -1,0 +1,137 @@
+{
+  "status": "four-live-complete-endpoint-review-queues-no-new-quality-execution",
+  "recorded_UTC": "2026-10-27T17:23:38.630744+00:00",
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-full-review-setup-v1/preparation-v1.json",
+    "sha256": "77df1841adaa46b9bfc9e6f0f841a938ac263127d41cc871f8e36091321a9ea2"
+  },
+  "constructor_free_preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-full-review-setup-v1/preflight-v1.json",
+    "sha256": "ef996c445ca4a682847d73514f8705d3efddca67f6d9cfdacc3f0314cf1ba656"
+  },
+  "queues": {
+    "quality": {
+      "recorded_UTC": "2026-10-27T17:15:25.229723+00:00",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-reviewed-quota-quality-v1/queue-plan-v1.json",
+        "sha256": "489162bb5ad5c2de1f9bb3e226f7a08ee7511828fd08d2ffafc21ecb9dbb4267"
+      },
+      "owner": {
+        "pid": 2476176,
+        "created": 1793121325.18
+      },
+      "observed_status": "waiting-for-exact-matched-training-owner",
+      "frozen_files": 82
+    },
+    "independent_audit": {
+      "recorded_UTC": "2026-10-27T17:15:26.471795+00:00",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-reviewed-quota-independent-audit-v1/queue-plan-v1.json",
+        "sha256": "91637176c8942bd4f9e3f14eecb6853119241468943b734d7a3d98a36b89aee9"
+      },
+      "owner": {
+        "pid": 2476178,
+        "created": 1793121326.42
+      },
+      "observed_status": "waiting-for-exact-endpoint-evaluation-owner",
+      "frozen_files": 8
+    },
+    "comparisons": {
+      "recorded_UTC": "2026-10-27T17:15:27.923184+00:00",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-reviewed-quota-comparisons-v1/queue-plan-v1.json",
+        "sha256": "d859f214395799e8ebb4ac25020aa52abb4778015957705fe7a43ced0bc44bf5"
+      },
+      "owner": {
+        "pid": 2476181,
+        "created": 1793121327.88
+      },
+      "observed_status": "waiting-for-original-independent-audit",
+      "frozen_files": 12
+    },
+    "green_mesh": {
+      "recorded_UTC": "2026-10-27T17:17:55.949223+00:00",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V133-reviewed-quota-green-mesh-v1/queue-plan-v1.json",
+        "sha256": "ecf41f9c13bc3ed85f707cf1f29178f6f6cdc37a7a732c42b2c914b739d453cf"
+      },
+      "owner": {
+        "pid": 2476448,
+        "created": 1793121475.9
+      },
+      "observed_status": "waiting-for-completed-endpoint-comparisons",
+      "frozen_files": 73
+    }
+  },
+  "planned_full_panel_root_encoder_calls": 4586,
+  "planned_new_mesh_root_encoder_calls": 2,
+  "planned_final_review_calls_total": 4588,
+  "already_queued_progress_calls_separate": 102,
+  "stages": {
+    "photo": {
+      "calls_per_model": 3108,
+      "observations_per_model": 12404
+    },
+    "known": {
+      "calls_per_model": 24,
+      "observations_per_model": 72
+    },
+    "unseen": {
+      "calls_per_model": 30,
+      "observations_per_model": 90
+    },
+    "texture": {
+      "calls_per_model": 112,
+      "observations_per_model": 448
+    },
+    "color": {
+      "calls_per_model": 1176,
+      "observations_per_model": 1176
+    },
+    "gfx": {
+      "calls_per_model": 4,
+      "observations_per_model": 4
+    },
+    "gfx-highlights": {
+      "calls_per_model": 2,
+      "observations_per_model": 2
+    },
+    "full-gfx": {
+      "calls_per_model": 130,
+      "observations_per_model": 520
+    }
+  },
+  "numerical_observations_per_new_model": 14190,
+  "all_retained_observations_including_GFX_tiles": 14716,
+  "fullframe_common_grid_alignment": 32,
+  "fullframe_actual_input_batches_to_match_V131": 130,
+  "fixed_completed_controls": [
+    "V120",
+    "V117"
+  ],
+  "deferred_original_control": "V131",
+  "planned_mesh_control_predictions_reused": 9,
+  "mesh_render_models": [
+    "V120",
+    "V131",
+    "V133"
+  ],
+  "genuine_partial_candidate_rejected_step": 18,
+  "positive_full_endpoint_available": false,
+  "inference_and_observation_math_unchanged_to_original_control": true,
+  "source_qualification": "62 training-source modules byte-exact to V131; train.py differs only by pure resume-guard relocation. Five inference helpers and independent archive metric math are byte-exact.",
+  "original_preparer_correction": "Caller supplied a cached-input metadata receipt where the mesh template API needs a completed inference receipt. Resolve exact inference templates from the old plan inputs. Three live queues adopted without restart; no existing/neural work repeated.",
+  "old_queues_adopted_without_restart_during_correction": 3,
+  "focused_tests_passed": 127,
+  "focused_tests_seconds": 5.09,
+  "Ruff_passed": true,
+  "actual_new_root_encoder_calls": 0,
+  "old_control_neural_calls_repeated": 0,
+  "actual_new_optimizer_updates": 0,
+  "actual_new_RAW_decodes": 0,
+  "planned_cached_RAW_decodes_full_GFX_stages": 6,
+  "planned_new_RAW_decodes_mesh": 0,
+  "new_model_quality_measured": false,
+  "current_selector_changed": false,
+  "scope": "V133 alone after genuine full20k completion. Original training, progress and spatial quality budgets/sources unchanged. Retained CPU audits/native crops and strict quota-only actual tile-input comparison follow. All ISO100/AHD and camera-JPEG real references are nonexact; actual viewing and measured gains remain pending."
+}
