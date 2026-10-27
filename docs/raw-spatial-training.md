@@ -32,7 +32,30 @@ Every source/domain, clean-batch and noisy-batch hash must match the control,
 including the first18 exact-recipe CUDA check inputs. A hardlinked step1,000
 progress checkpoint is retained within the same live worker and original20k
 schedule, after validation. Atomic replacement of `last.pt` preserves it.
-It is not a completed endpoint; early quality collection is not yet queued.
+It is not a completed endpoint. The early comparison below is now queued.
+
+## Early retained-input comparison
+
+A separate live queue waits for each immutable1,000-step progress snapshot
+while the original20k workers continue. Each model gets102 IEEE FP32 calls:
+64 saved shadow observations,16 ordinary material inputs, four main-GFX512px
+contexts, two mesh768px fixed profiles and16 faint-ADC observations. All V120
+predictions are reused; V132 also compares the saved V131 progress predictions.
+Every1,000-step clean/noisy training hash must agree between the two snapshots.
+[Queue implementation](../scripts/queue_raw_spatial_progress.py) ·
+[Verified inputs, real saved-state checks and live owner](results/raw-spatial-progress-review-setup-v1.json).
+
+Step,20k horizon, parent,91/114 EMA tensors and89/112 Adam states at1,000 are
+checked before model construction. The snapshot may belong to the exact live
+training worker or the same completed worker's matching prefix. Collection does
+not pause training, restart a schedule or repeat an old model. It uses52GiB
+admission,12GiB CUDA cap and32GiB runtime floor, waiting up to48h for headroom
+within its original absolute observation deadline. CPU reporting and independent
+FFT/native-pixel audits follow automatically, including exact synthetic-GT
+triplets and accurately labeled approximate real references. Actual viewing and
+quality outcomes remain pending. Four material sources do not become independent
+photographs through different noise/CFA conditions. The full endpoint chain below
+keeps its original source and call budgets.
 
 ## Executed checks and admission
 

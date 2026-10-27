@@ -30,10 +30,10 @@ useful gain at1,000 matched updates, with independently audited native/GFX views
 [V129's completed curated27-region pilot](reviewed-detail-training-pilot.md)
 finds small mixed changes without clear noisy/GFX recovery. The matched
 [V130 FP32 pilot](training-precision-pilot.md) slightly improves selected faint-ADC
-bands, with subtle native changes. The newest90781/29-region cohort has only
-discarded [spatial-branch implementation checks](raw-spatial-features.md), with
-no production quality result. The optional attention branch passes CPU/CUDA16+2
-checks; a matched trained comparison remains necessary.
+bands, with subtle native changes. The [V131/V132 spatial trial](raw-spatial-training.md)
+has four exact-recipe CPU/CUDA checks complete on90781/29, with full20k production
+queued after V125's admission. A102-input progress comparison is also queued;
+trained quality remains unmeasured.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
@@ -46,7 +46,7 @@ checks; a matched trained comparison remains necessary.
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; V120 ADC max55.52DN16, Tiny alternative51.73DN16 | Spatial dark-field/weak-detail failures and real-noise calibration limits remain |
 | Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V122/V123 full evaluation and selected native review complete; V124 training with original guards | Finish conditional-mean training/comparison and improve real-photo/detail quality |
 | Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
-| Current documentation |54 completed primary endpoints in plot; native triplets, latest GFX comparisons and explicit profiles/checkpoints; local-time diary | Update useful results without promotion freezes |
+| Current documentation |56 completed primary endpoints in plot; native triplets, latest GFX comparisons and explicit profiles/checkpoints; local-time diary | Update useful results without promotion freezes |
 
 The [V116 data review](v116-quality.md) is complete at its original20k endpoint.
 Its matched Tiny control is V114; the original V112 initializer/seed/budget stay

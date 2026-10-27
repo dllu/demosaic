@@ -19,6 +19,35 @@ from train_directional_bank_trial import guard, read, ref, save
 NAMES = ("packed", "variance", "colors", "wb", "matrix")
 
 
+def verify_progress_checkpoint(state, plan):
+    """Validate a retained training prefix before constructing its neural model."""
+    import torch
+
+    step, horizon = plan["step"], plan["training_horizon"]
+    spatial = plan["raw_spatial_features"]
+    tensors, optimizer_states = (114, 112) if spatial else (91, 89)
+    if not (
+        0 < step < horizon
+        and state["step"] == step
+        and state["config"]["steps"] == horizon
+        and state["model_config"].get("raw_spatial_features", False) is spatial
+        and state["config"]["initialized_from"] == plan["expected_lineage"]
+        and len(state["model"]) == len(state["ema"]) == plan["EMA_tensors"] == tensors
+        and state["model"].keys() == state["ema"].keys()
+    ):
+        raise ValueError("Progress checkpoint step, horizon, architecture or lineage differs")
+    states = state["optimizer"]["state"]
+    if len(states) != optimizer_states or any(float(s["step"]) != step for s in states.values()):
+        raise ValueError("Progress optimizer state count or update step differs")
+    values = [*state["model"].values(), *state["ema"].values()]
+    values += [v for s in states.values() for v in s.values() if isinstance(v, torch.Tensor)]
+    if any(not torch.isfinite(v).all() for v in values):
+        raise ValueError("Nonfinite progress model, EMA or optimizer state")
+    branch = [k for k in state["model"] if k.startswith("pretrained_rgb.raw_spatial.")]
+    if len(branch) != (23 if spatial else 0):
+        raise ValueError("Progress spatial state coverage differs")
+
+
 def collect(path):
     import torch
     from frozen_backbone_identity import verify_backbone_identity
@@ -66,6 +95,12 @@ def collect(path):
     counts = {"root": 0, "encoder": 0}
     rows = []
     witness = {}
+    if plan.get("progress_checkpoint", False):
+        state = torch.load(
+            plan["checkpoint"]["path"], map_location="cpu", weights_only=True, mmap=True
+        )
+        verify_progress_checkpoint(state, plan)
+        del state
     with torch.random.fork_rng(devices=[0]):
         model, state = load_checkpoint(plan["checkpoint"]["path"], "cuda")
         if (
@@ -75,6 +110,10 @@ def collect(path):
             or model.config.raw_frequency_features != plan.get("raw_frequency_features", True)
             or (model.pretrained_rgb.raw_frequency is not None)
             != plan.get("raw_frequency_features", True)
+            or (
+                "raw_spatial_features" in plan
+                and model.config.raw_spatial_features is not plan["raw_spatial_features"]
+            )
         ):
             raise ValueError("Loaded checkpoint identity or frequency-adapter setting differs")
         actual = model.restoration_state_dict()
@@ -84,7 +123,8 @@ def collect(path):
             raise ValueError("Model did not load the exact preserved EMA")
         backbone_before = model_hash(model.context.backbone)
         verify_backbone_identity(
-            model.config.to_dict(), backbone_before,
+            model.config.to_dict(),
+            backbone_before,
             {"expected_backbone": plan["expected_backbone"]},
             legacy_sha256=plan["expected_backbone"]["sha256"],
         )
@@ -93,15 +133,22 @@ def collect(path):
         before = model_hash(model)
         if plan.get("expected_full_model_sha256", before) != before:
             raise ValueError("Loaded model differs from its retained identity")
-        save(root / "loaded-model-v1.json", {
-            "plan": ref(path), "full_model_sha256": before,
-            "backbone_sha256": backbone_before, "new_forwards_so_far": 0,
-        })
+        save(
+            root / "loaded-model-v1.json",
+            {
+                "plan": ref(path),
+                "full_model_sha256": before,
+                "backbone_sha256": backbone_before,
+                "new_forwards_so_far": 0,
+            },
+        )
 
         def pre_hook(module, args):
             resources()
-            if module.training or torch.is_autocast_enabled("cuda") or (
-                torch.backends.cuda.matmul.allow_tf32 or torch.backends.cudnn.allow_tf32
+            if (
+                module.training
+                or torch.is_autocast_enabled("cuda")
+                or (torch.backends.cuda.matmul.allow_tf32 or torch.backends.cudnn.allow_tf32)
             ):
                 raise RuntimeError("Pilot requires evaluation in IEEE FP32")
             if counts["root"] >= len(observations):
@@ -115,8 +162,10 @@ def collect(path):
             if counts["encoder"] > len(observations):
                 raise RuntimeError("Encoder forward budget exhausted")
 
-        handles = [model.register_forward_pre_hook(pre_hook),
-                   model.context.backbone.register_forward_hook(encoder_hook)]
+        handles = [
+            model.register_forward_pre_hook(pre_hook),
+            model.context.backbone.register_forward_hook(encoder_hook),
+        ]
         destination = work / "artifacts/predictions"
         destination.mkdir(parents=True, exist_ok=False)
         journal = root / "predictions-v1.jsonl"
@@ -130,8 +179,11 @@ def collect(path):
                 batch = {k: torch.from_numpy(v).to("cuda") for k, v in arrays.items()}
                 model.set_noise(observation["noise"]["shot"], observation["noise"]["read"])
                 value = model(*(batch[k] for k in NAMES))
-                if (value.dtype != torch.float32 or list(value.shape) != observation["output_shape"]
-                        or not torch.isfinite(value).all()):
+                if (
+                    value.dtype != torch.float32
+                    or list(value.shape) != observation["output_shape"]
+                    or not torch.isfinite(value).all()
+                ):
                     raise ValueError("Invalid native FP32 prediction")
                 if {k: fingerprint(v) for k, v in batch.items()} != witness["inputs"]:
                     raise ValueError("Inference mutated input observations")
@@ -139,8 +191,12 @@ def collect(path):
                 output = destination / f"prediction-{index:03d}.npy"
                 with output.open("xb") as handle:
                     np.save(handle, prediction, allow_pickle=False)
-                row = {"id": observation["id"], "prediction": ref(output),
-                       "values": fingerprint(prediction), "counts": dict(counts)}
+                row = {
+                    "id": observation["id"],
+                    "prediction": ref(output),
+                    "values": fingerprint(prediction),
+                    "counts": dict(counts),
+                }
                 stream.write(json.dumps(row, sort_keys=True) + "\n")
                 stream.flush()
                 os.fsync(stream.fileno())
@@ -152,25 +208,43 @@ def collect(path):
         after, backbone_after = model_hash(model), model_hash(model.context.backbone)
         if before != after or backbone_before != backbone_after:
             raise ValueError("Inference mutated model state")
-    if (not torch.equal(cpu_rng, torch.get_rng_state())
-            or not torch.equal(cuda_rng, torch.cuda.get_rng_state())
-            or random.getstate() != python_rng
-            or any(not np.array_equal(a, b) for a, b in zip(numpy_rng, np.random.get_state(), strict=True))):
+    if (
+        not torch.equal(cpu_rng, torch.get_rng_state())
+        or not torch.equal(cuda_rng, torch.cuda.get_rng_state())
+        or random.getstate() != python_rng
+        or any(
+            not np.array_equal(a, b) for a, b in zip(numpy_rng, np.random.get_state(), strict=True)
+        )
+    ):
         raise ValueError("Pilot changed RNG state")
     guard(plan)
     if counts != {"root": len(observations), "encoder": len(observations)}:
         raise ValueError("Actual forward counts differ")
-    save(root / "collection-v1.json", {
-        "status": "completed-declared-checkpoint-retained-input-pilot",
-        "plan": ref(path), "predictions": ref(journal), "counts": counts,
-        "full_model_before": before, "full_model_after": after,
-        "backbone_before": backbone_before, "backbone_after": backbone_after,
-        "new_reference_forwards": 0, "new_noise_observations": 0,
-        "RAW_decodes": 0, "optimizer_updates": 0, "RNG_unchanged": True,
-        "CUDA_peak_allocated_bytes": torch.cuda.max_memory_allocated(),
-        "torch": torch.__version__, "cuda": torch.version.cuda,
-        "scope": plan["scope"], "observations": rows,
-    })
+    save(
+        root / "collection-v1.json",
+        {
+            "status": "completed-declared-checkpoint-retained-input-pilot",
+            "plan": ref(path),
+            "predictions": ref(journal),
+            "counts": counts,
+            "full_model_before": before,
+            "full_model_after": after,
+            "backbone_before": backbone_before,
+            "backbone_after": backbone_after,
+            "new_reference_forwards": 0,
+            "new_noise_observations": 0,
+            "RAW_decodes": 0,
+            "optimizer_updates": 0,
+            "RNG_unchanged": True,
+            "CUDA_peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+            "torch": torch.__version__,
+            "cuda": torch.version.cuda,
+            "progress_checkpoint_verified": plan.get("progress_checkpoint", False),
+            "training_horizon": plan.get("training_horizon"),
+            "scope": plan["scope"],
+            "observations": rows,
+        },
+    )
 
 
 if __name__ == "__main__":

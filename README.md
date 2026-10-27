@@ -9,78 +9,35 @@ DRUNet RGB trunk and official DINOv3 ConvNeXt-Small pyramid. It reaches
 camera/color regression while keeping its photo score. Fine detail remains weak.
 [Results, native comparisons and explicit GFX profile limits](docs/v120-v121-primary.md).
 
-**V114 Tiny remains a useful alternative**, with lower tested ADC maximum51.73DN16.
-V115 Small has a slightly higher known-camera mean54.324dB; V117 has a slightly
-higher photo score. These choices retain soft fine foliage/neon detail and
-dark-camera mottling. V120's numerical/local panels, selected native review and
-complete102MP RGB16 checks are done. The
-[matched-profile GFX comparison](docs/v120-v121-primary.md#matched-profile-full-frame-gfx)
-against V115/V119 shows subtle changes with continued fine-detail loss.
-[Current choices](docs/current-model.md) · [GFX gallery](docs/gfx-qualitative.md).
+**V114 Tiny** offers lower tested ADC maximum51.73DN16. **V117 Tiny** has a
+slightly higher single-view photo mean37.04408dB, with lower camera means and
+higher ADC bias than the current general choice. V120's numerical/native review
+and complete102MP RGB16 checks are done. Foliage, neon, fine mesh and dark-field
+mottling still need work. [Current choices](docs/current-model.md) ·
+[GFX gallery](docs/gfx-qualitative.md) · [Camera comparisons](docs/native-camera-development.md).
 
-The [V121 data arm](docs/v120-v121-primary.md) has a small photo change and a
-large remaining ADC outlier. Current selection advances to the useful measured
-balance without imposing a study-specific promotion gate.
+Training uses geometry before final downsampling and zero optical blur. The
+[latest source review](docs/v123-final-source-review.md) prepares90,781 photos/
+29 regions, including weak petal veins and sharp mesh. Existing jobs retain
+their declared data. [Data pipeline](docs/training-pipeline.md).
 
-[V119's complete review](docs/v119-quality.md) finds a +.06131dB photo gain over
-V115 after cleaned-data training, but a −.22342dB known-camera regression and
-a large ADC color outlier. Its real fine-detail softness remains. The completed
-[11-capture native-camera comparison](docs/native-camera-development.md) now includes
-V120/V121: V120 retains substantially finer detail than RawNIND and gains3.699dB
-in high-noise camera-RGB PSNR on binned references with added noise. V117 retains
-higher condition means; changes among the newer joint models are small.
-Our current training uses zero optical blur and
-geometry before final downsampling. [Data review](docs/incoming-commons-quality.md) ·
-[Training pipeline](docs/training-pipeline.md) · [Historical diary](diary/index.md).
-The [latest source review](docs/v123-final-source-review.md) prepares90,781 photos/
-29 regions, adding weak petal veins and sharp mesh; existing trial inputs stay fixed.
+| Current quality work | Evidence and next comparison |
+| --- | --- |
+| [V122/V123 frequency features](docs/v122-v123-quality.md) | Both20k reviews complete: joint training gains0.05493dB photo PSNR over adapter-only, with lower unseen-camera PSNR, a worse ADC tail and little weak-detail recovery |
+| [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | V124's two-view control is training; V125 follows on the same90,784-source/twenty-region data |
+| [V131/V132 spatial attention](docs/raw-spatial-training.md) | Four genuine CPU/CUDA checks pass;20k per arm queued on90,781/29 after V125's admission. An early102-input comparison waits for their retained1k progress snapshots |
 
-[V120/V121 Small data trials](docs/paired32-weak-detail-training.md) completed
-their original20k updates and independent numerical audit. Saved-output
-comparisons and selected native review are complete; the
-[early V120 mesh comparison](docs/gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
-shows no clear lattice-recovery gain over V115/V119.
-The new [fixed-Haar main-GFX comparison](docs/v120-v121-primary.md#matched-profile-full-frame-gfx)
-matches older inputs exactly; original nominal-profile outputs are also preserved.
-The [completed V122/V123 frequency-feature trial](docs/v122-v123-quality.md)
-finds a+0.05493dB photo gain from joint training over adapter-only training,
-with lower unseen-camera PSNR and a large ADC color-tail regression. Weak natural
-detail and the corrected3842/3835 fine mesh remain soft. Full numerical/native
-review and two exact-GT triplets per model are published. Both original20k
-budgets completed, including V123's preserved12,249+7,751 continuation.
-[V124/V125 mean-loss training](docs/conditional-mean-training.md) has now started
-V124's two-noise-view control on the fixed90,784-source/twenty-region corpus.
-The [matched V131/V132 spatial trial](docs/raw-spatial-training.md) queues20k
-updates per arm on90,781 photos/29 regions. All four CPU/CUDA16+2 checks pass;
-production waits for V125's memory admission. Trained quality remains unmeasured.
-The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.md)
-uses90,783 sources/23 regions and shows no useful quality gain; native material
-and both train-scene comparisons are published. The shadow policy stays off by default.
-The [completed V128 feature-loss pilot](docs/v128-feature-pilot-quality.md) also
-shows no useful gain. The [completed V129 curated-data pilot](docs/reviewed-detail-training-pilot.md)
-also shows no useful visible recovery at1k; its native material/GFX crops are published.
-The [completed V130 matched FP32 trial](docs/training-precision-pilot.md) slightly
-improves selected weak fur/grass/wood bands on its [faint ADC panel](docs/faint-adc-precision.md)
-against saved V129 BF16, with a0.01720dB lower panel mean. Ordinary/shadow changes
-are tiny; native comparisons show no clear large noisy-detail or fine-mesh recovery.
-The report includes native100% triplets and both GFX pairs, with **DSCF3835** as
-the extra mesh's ISO100 reference. V120 remains the general recommendation.
+Shadow, feature-loss and curated-data pilots show no useful large recovery.
+The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
+weak fur/grass/wood [faint-ADC bands](docs/faint-adc-precision.md), with a0.01720dB
+lower panel mean and no clear large real-mesh gain. Measured strengths and
+weaknesses guide the baseline. [Research and complete studies](docs/research.md) ·
+[Historical diary](diary/index.md).
 
-**V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
-V114 with421/427 source means rising. Its camera means are slightly lower and
-ADC color bias higher. The matched V118 band-loss arm lowers weak natural-detail
-response and has a large ADC color-tail regression; the term stays off for
-further quality work. [Complete results and native comparisons](docs/v117-v118-quality.md).
-
-The optional [V114 eight-view comparison](docs/v114-eight-view.md) improves all
-twelve fixed material cases and both selected adverse camera crops. Mean gains
-are+.558/.264/.079dB at ADC/ISO100/ISO12800, with slightly higher selected color
-bias and lower spatial variation. Full V114 eight-view panels/frame remain
-unmeasured. Earlier [V104 eight-view full panels](docs/dihedral-quality.md) reach
-37.044dB with a worse ADC color tail. The current [V114 ADC sites option](docs/adc-consistency.md)
-improves its full ADC photo panel by +.236 dB, with lower color bias and higher
-flat-field spatial variation. It activates only at explicit zero shot/read.
-[Camera-outlier diagnostics](docs/camera-outliers.md).
+Optional [V114 eight-view inference](docs/v114-eight-view.md) improves the selected
+material/camera support with a color-bias tradeoff; full panels/frame remain
+unmeasured. [ADC sample fidelity](docs/adc-consistency.md) improves its ADC-only
+photo panel by0.236dB with higher spatial variation; positive-noise inputs bypass it.
 
 ![PSNR versus model version](docs/images/version-PSNR-history.png)
 

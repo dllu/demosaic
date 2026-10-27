@@ -1,42 +1,29 @@
 # Current quality training
 
-**V122 and V123 completed their original20,000-update training budgets.**
-Both retain their fixed V115 Small parent and90786/fourteen-region cohort for
-the controlled scope comparison. V122's91 common model/EMA tensors remain
-exactly equal to V115, with five finite AdamW states at step20,000. Their
-[completed quality review](v122-v123-quality.md) finds a0.05493dB photo gain
-from joint training against adapter-only training, with lower unseen-camera
-mean, a large ADC tail and little natural weak-detail recovery. The GPU
-coordinator preserved V122's same in-memory worker through its temporary yield.
-[Current training, checks and queued review](learned-raw-frequency-training.md).
+**V120 Small is the current general recommendation and quality-development
+parent.** Its full numerical/native review and complete102MP RGB16 outputs
+are verified. Fine photographic detail, green mesh and dark-field mottling remain
+unresolved. [Current choices](current-model.md) · [Completed results](v120-v121-primary.md).
 
-V120/V121 completed their original20k runs, independent audits and selected
-native review. **V120 is the current general recommendation**: it retains V119's
-photo score while recovering camera/color balance. V121's cleaner90787/fourteen-
-region intervention has a small photo change, no clear mesh gain and a large
-ADC tail. [Completed results](v120-v121-primary.md).
+| Active comparison | Data and hypothesis | Current state |
+| --- | --- | --- |
+| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 sources/twenty regions;16 unique targets and two noise views, mean-loss weights0/.25 | V124 control training; V125 follows; quality unmeasured |
+| [V131/V132 spatial attention](raw-spatial-training.md) |90,781 sources/29 reviewed regions; same V120 parent, seed, inputs, single-view loss and20k schedule; spatial branch off/on | Four CPU/CUDA16+2 checks complete; production waits for V125's admission |
 
-The [independent-noise response diagnostic](conditional-noise-response.md) finds
-that faint fur/wood errors persist in the mean of repeated V120/V117 outputs,
-while strong bark is mainly variance-limited. It motivates a controlled
-two-view conditional-mean loss on the prepared90784/twenty-region data.
-[V124/V125 implement the matched comparison](conditional-mean-training.md):
-both use16 unique targets and32 simulated observations, with mean-loss weights
-0/.25. All four discarded checks are reused. V124's fresh20k control is now
-running after the original frequency review chain; V125 follows. Quality is
-unmeasured and the frozen recipes remain unchanged.
+The spatial trial's live early-review queue uses immutable step1,000 snapshots
+within the original20k workers. Each gets102 retained material/shadow/faint-ADC
+and real-scene inputs, with saved V120 controls reused. A separate full-endpoint
+chain covers the full photo/camera/analytic panels, native images and RGB16 output.
+Early snapshots do not stop training or become completed endpoints. Quality
+and actual viewing are pending.
 
-V119 completed a full 20,000-update continuation from **V115 Small** on the
-cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA
-checks passed before the fresh production run. The [complete review](v119-quality.md)
-finds a+.06131dB photo gain over V115, a−.22342dB known-camera regression and
-a large ADC color outlier. Fine mesh remains unresolved. All numerical,
-independent, native-image and full-output checks are complete.
-[Current recipe, execution and review](cleaned-diverse-small-training.md) ·
-[Recipe file](../configs/quality-v115-cleaned-diverse-v119.yaml) ·
-[Started-run evidence](results/v119-training-start-v1.json).
-[Completed endpoint](results/v119-training-completed-v1.json) ·
-[Fine green mesh comparison](gfx-green-mesh.md#v119-after-cleaned-data-training).
+The [completed V122/V123 frequency trial](v122-v123-quality.md) gains0.05493dB
+photo PSNR from joint training against adapter-only training, with lower unseen-
+camera PSNR, a large ADC tail and little weak-detail recovery. The
+[FP32 pilot](training-precision-pilot.md) gives small mixed faint-ADC changes.
+Shadow/feature/data pilot outcomes and their native images remain linked from
+the [current research page](research.md). New recipes use zero optical PSF and
+geometry before final downsampling; existing trial inputs/budgets remain fixed.
 
 ## Useful completed models
 
@@ -48,14 +35,14 @@ Their complete panels, native crops and RGB16 checks are published.
 | V120 | DINOv3 ConvNeXt-Small + DRUNet, corrected paired32 continuation | 37.04008 dB | 54.31272 / 54.00872 dB | Current balanced recommendation, ADC maximum55.52DN16; matched-profile GFX review complete, fine foliage/neon/mesh remain weak |
 | V121 | Same Small, cleaner90787/fourteen-region continuation | 37.04157 dB | 54.32184 / 53.98947 dB | Tiny photo change; ADC maximum1645.36DN16 and no clear fine-mesh gain |
 | V114 | Frozen DINOv3 ConvNeXt-Tiny + pretrained DRUNet RGB trunk | 36.97973 dB | 54.28627 / 54.00290 dB | General camera/color balance; faint foliage and neon remain soft |
-| V115 | Fitted DINOv3 ConvNeXt-Small + the same restoration family | 36.97700 dB | 54.32405 / 54.00417 dB | Stronger known-camera mean and eight-pixel weak response; higher tested color bias |
+| V115 | Frozen DINOv3 ConvNeXt-Small + the same restoration family | 36.97700 dB | 54.32405 / 54.00417 dB | Stronger known-camera mean and eight-pixel weak response; higher tested color bias |
 | V117 | V114 architecture, further 20k continuation | 37.04408 dB | 54.27303 / 53.97339 dB | Higher photo score, 421/427 source means up; slight camera regressions |
 | V119 | V115 Small, cleaned90791/paired83 continuation | 37.03831 dB | 54.10063 / 54.00742 dB | Photo gain over V115; known-camera and ADC-color regressions, unresolved fine mesh |
 
 [Current selection and inference](current-model.md) ·
 [Tiny/Small comparison](v114-v115-quality.md) ·
 [V117 and the negative V118 band-loss result](v117-v118-quality.md).
-V115 is the fixed parent for completed V119–V121 and active V122/V123 trials.
+V115 is the fixed parent for completed V119–V123 trials.
 The current V120 inference recommendation leaves those original comparisons
 unchanged. Useful Small/V117/V114 tradeoffs remain explicit. Study-specific promotion/significance
 criteria do not replace direct comparison of overall metrics and actual images.
