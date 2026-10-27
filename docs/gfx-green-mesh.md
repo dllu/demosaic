@@ -16,11 +16,11 @@ The case pairs **DSCF3842 ISO6400** with **DSCF3835 ISO100**, taken 46 seconds
 earlier. Both camera JPEGs are included.
 The existing DSCF3879/3880 standing scene and its six regions remain in use.
 
-The [V120–V123 endpoint review queues](endpoint-quality-review.md) include both
+The [V120–V125 endpoint review queues](endpoint-quality-review.md) include both
 fixed noise profiles and both native160 regions, reusing saved controls.
 V120/V121 mesh review is complete below, with no clear V121 lattice-recovery
 gain. V120's two saved predictions were adopted without rerunning it. V122/V123
-mesh predictions remain pending.
+mesh predictions remain pending. V124/V125 are queued after that original chain.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
@@ -34,8 +34,9 @@ fixed profile.** The completed20,000-update Small model restores the corrected
 regions. The nominal prior still largely erases the mesh. The nearby profile
 reveals more diagonal texture, particularly on the right, but the lattice stays
 soft, irregular and much weaker than the independent ISO100 reference. The blue
-point remains. This case supplies no overall model ranking; primary numerical,
-main-scene and complete-frame comparisons are still pending.
+point remains. This case supplies no overall model ranking. The
+[primary, main-scene and complete-frame V120/V121 comparisons](v120-v121-primary.md)
+are now complete; V120 is the current general recommendation.
 
 Columns below are camera JPEG, noisy Malvar, V115 Small, V119, V120, independent
 ISO100 AHD and ISO100 camera JPEG. Top/bottom rows use the nominal/nearby profiles

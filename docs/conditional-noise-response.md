@@ -105,7 +105,7 @@ predictions and computed means with explicit-channel NumPy64 display arithmetic.
 Sources: [Derek Ramsey, Kentucky Coffee-tree](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
 [Korall, Racoon clinging to a tree](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
-[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/); two per-file CC0
+[CC BY3.0](https://creativecommons.org/licenses/by/3.0/); two per-file CC0
 camera captures from the [existing source catalogue](native-camera-development.md).
 Modified by binning/cropping, simulated noise, restoration and display conversion.
 
@@ -129,3 +129,10 @@ now implement this experiment; quality is unmeasured. Both arms load16 unique
 targets once and create32 simulated observations. The active V123 run and
 original endpoint-review chain remain unchanged; no model choice, noise
 estimator or inference strength changes from this diagnostic.
+
+The [complete loss-gradient replay](conditional-loss-gradients.md) now checks
+the intended mechanism on these retained outputs, with no new neural/noise
+work. At mean weight.25, weak fur/grass/wood error-correcting projections rise
+about3% while noise-associated projections fall about10–11%. Existing loss
+components already support fine-detail correction in the tested bands.
+This is a modest output-space shift; trained V124/V125 quality remains pending.

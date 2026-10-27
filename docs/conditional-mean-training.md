@@ -85,3 +85,10 @@ Independent NumPy audits inspected301,396,702 retained array values and verified
 The implementation, regression and adoption suites passed175 tests.
 [Frozen plans, actual counts, source hashes and live follow-up owners](results/independent-noise-mean-training-setup-v1.json).
 Full training has not started; both20,000-update runs wait for the original chain.
+
+The [retained-output loss-gradient diagnostic](conditional-loss-gradients.md)
+replays the entire objective without new neural execution. Mean weight.25
+modestly raises weak-detail bias-correcting projection and lowers its
+noise-associated projection. All tested camera/display/edge/CFA band
+projections already support correction. The predeclared training settings
+remain unchanged; the full trained comparison must establish the result.

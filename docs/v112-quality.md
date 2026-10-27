@@ -1,7 +1,8 @@
 # V112: completed parent and loss-scale reference
 
-**V112 final20k is the measured parent of the current V114 baseline.**
-+[Completed V114/V115 comparison and native images](v114-v115-quality.md).
+**V112 final20k is the measured Tiny-family parent used by V114.**
+[Completed V114/V115 comparison and native images](v114-v115-quality.md).
+V120 Small is now the [current general recommendation](current-model.md).
 It combines V111-like photographic quality with higher camera means and a much
 lower flat-color error tail. All seven matched panels and complete 101.996MP
 linear/sRGB RGB16 exports are verified. FP32 inference/blending takes 167.51s.
