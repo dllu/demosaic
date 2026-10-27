@@ -16,6 +16,8 @@ review, matched-profile GFX comparisons and complete102MP RGB16 exports are
 finished. Fine foliage,
 neon detail and camera mottling remain weak; broad real-camera superiority
 and100MP/10s remain goals. [GFX gallery](gfx-qualitative.md).
+The [V1239k midpoint](v123-midpoint-quality.md) adds measured material and
+matched GFX context crops, with no clear fine-detail gain; final20k review is pending.
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
 weak-carrier gain, but does not improve broad weak natural detail and worsens

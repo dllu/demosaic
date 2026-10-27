@@ -4,8 +4,10 @@
 before the mature RGB restoration trunk.** It preserves signed phase information
 and starts with exactly zero effect on the parent. It passes mathematical,
 initialization, gradient, checkpoint and discarded CPU/CUDA training checks.
-**Trained image quality and complete-frame behavior remain unmeasured.**
-Current model recommendations and the original V120/V121 trials are unchanged.
+The [V1239k midpoint](v123-midpoint-quality.md) shows no clear detail gain on
+selected retained material and GFX inputs. **Completed-model quality and
+complete-frame behavior remain unmeasured.** Current model recommendations
+and the original V120/V121 trials are unchanged.
 The subsequent [V122/V123 full-budget scope comparison](learned-raw-frequency-training.md)
 is running; its endpoint image quality remains unmeasured.
 

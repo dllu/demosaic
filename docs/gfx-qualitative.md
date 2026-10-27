@@ -23,6 +23,23 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V123 midpoint: retained nominal-profile contexts
+
+The [9,000-update V123 review](v123-midpoint-quality.md) adds four512px contexts
+under the original nominal ISO6400 prior, reusing V120/V121 controls. Columns:
+noisy → V120 → V121 → V1239k EMA → independent ISO100 reference, **not GT**.
+Cells are native160px, shared +2EV/WB/matrix, without resizing. These use
+shot`.00128`/read`6.5536e−6`, separate from the full-frame Haar comparison above.
+Fine foliage remains soft, with no clear large recovery gain.
+
+![V123 midpoint foliage, nominal-profile inputs](images/v123-mid9000-v1/main-foliage-comparison.png)
+
+![V123 midpoint chain-link fence, nominal-profile inputs](images/v123-mid9000-v1/main-chain-link-fence-comparison.png)
+
+Both extra [DSCF3842/3835 mesh regions](gfx-green-mesh.md#v123-at-9000-updates)
+also remain weak under both fixed profiles. The original20k V123 run and
+endpoint review remain pending; the current recommendation stays V120.
+
 ## Tiny/Small alternatives
 
 The older matched Haar-profile V114 Tiny/V115 Small boards remain useful alternatives.

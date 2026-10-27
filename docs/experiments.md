@@ -50,6 +50,11 @@ review are queued after the original V122/V123 chain. Both arms use16 unique
 targets and32 simulated observations, with mean-loss weights0/.25.
 Quality is unmeasured.
 
+The [V1239k frequency-feature midpoint](v123-midpoint-quality.md) now includes
+16 material predictions and six GFX contexts, reusing47 saved controls. Selected
+PSNR changes are tiny, and fine mesh/foliage remains weak. The original20k run
+and final endpoint review continue; this midpoint does not establish a quality gain.
+
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias
 tradeoff; independent/native review is complete and full panels/frame remain

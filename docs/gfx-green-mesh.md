@@ -20,11 +20,34 @@ The [V120–V125 endpoint review queues](endpoint-quality-review.md) include bot
 fixed noise profiles and both native160 regions, reusing saved controls.
 V120/V121 mesh review is complete below, with no clear V121 lattice-recovery
 gain. V120's two saved predictions were adopted without rerunning it. V122/V123
-mesh predictions remain pending. V124/V125 are queued after that original chain.
+final mesh predictions remain pending. A separate
+[V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
+V124/V125 are queued after that original chain.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V123 at 9,000 updates
+
+**The V1239k EMA shows no clear fine-lattice recovery gain under either fixed
+profile.** Both native160 regions were viewed, using two new768px contexts and
+saved V115/V119/V120 controls. Nominal conditioning largely erases the mesh;
+the nearby-DSCF3879 profile reveals more diagonal texture but leaves the fine
+lattice weak and irregular. The blue point remains. Full20k results are pending.
+
+Right mesh: noisy → V115 → V119 → V120 → V1239k EMA → independent DSCF3835
+ISO100 AHD reference, **not GT**. Display +4EV (×16), shared WB/matrix, fixed
+nearby profile; native crop pixels are not resized.
+
+![V123 midpoint mesh, matched nearby-capture conditioning](images/v123-mid9000-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+![V123 midpoint noisy, restored and independent ISO100 reference](images/v123-mid9000-v1/mesh-profile3879-fine-green-mesh-right-triplet.png)
+
+[Both profiles, both regions and material GT triplets](v123-midpoint-quality.md) ·
+[Checkpoint/input/profile/ROI and verification](results/v123-mid9000-quality-pilot-v1.json).
+The corrected pair is DSCF3842 ISO6400 / **DSCF3835 ISO100 f/5.6**. The main
+DSCF3879/3880 scene remains in use; neither independent low-ISO capture is GT.
 
 ## V120 after correcting the paired-data mix
 

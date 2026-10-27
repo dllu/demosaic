@@ -5,8 +5,11 @@ The original controller advanced to V123 after the same V122 worker completed.
 V122's temporary GPU yield preserved the in-memory training state, without a
 restart or checkpoint reload.
 These are the first full-budget trials of the [learned frequency input adapter](learned-raw-frequency-features.md).
-All four discarded CPU/CUDA checks passed. Endpoint PSNR and native image
-quality remain unmeasured. V120 remains the current general recommendation;
+All four discarded CPU/CUDA checks passed. A
+[V1239k midpoint review](v123-midpoint-quality.md) now measures16 retained
+material observations and six GFX contexts, with reused controls and native
+triplets. It shows no clear detail-recovery gain. Full endpoint PSNR and native
+review remain pending. V120 remains the current general recommendation;
 V114, V115 and V117 retain their documented uses.
 
 [Original V122 completion receipt](results/v122-frequency-training-complete-v1.json) ·

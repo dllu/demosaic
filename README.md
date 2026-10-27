@@ -42,7 +42,9 @@ The new [fixed-Haar main-GFX comparison](docs/v120-v121-primary.md#matched-profi
 matches older inputs exactly; original nominal-profile outputs are also preserved.
 The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
 now compares training the new input adapter alone with adapting the full
-restoration path on the same cleaned corpus. Image quality is still unmeasured.
+restoration path on the same cleaned corpus. A
+[V1239k midpoint review](docs/v123-midpoint-quality.md) shows no clear fine-detail
+gain on retained materials and both GFX scenes; full endpoint results remain pending.
 [V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
 the cleaned90,784-source/twenty-region corpus after that review chain.
 
