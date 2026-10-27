@@ -85,6 +85,10 @@ def restore_tiled(
         if getattr(config, "restoration_backbone", None) == "packed-isotropic"
         else 2
     )
+    if getattr(config, "raw_spatial_features", False):
+        # Preserve both packed8 attention partitions (native16) and the
+        # optional ConvNeXt32 context at every tile, including the last one.
+        alignment = 32 if config.dino else 16
     if tile % alignment:
         raise ValueError(f"Tile must be divisible by this model's {alignment}-pixel grid")
     stride = (tile - overlap) // alignment * alignment

@@ -34,7 +34,7 @@ not automatic labels or proven model-quality gains.
 | V124/V125 mean-loss cohort | **90,784** | [Twenty-region bank](weak-photographic-targets.md); actual reader verified; V124 control training, V125 follows |
 | Completed V126–V128 pilots | **90,783** | Twenty-three regions; shadow/feature terms show no useful1k gain; full native review complete |
 | Completed V129/V130 pilots | **90,782** | Twenty-seven regions; [matched FP32 trial](training-precision-pilot.md) has small selected faint-ADC gains without clear noisy/GFX recovery |
-| Prepared future photographic cohort | **90,781** | [Final V123 source review](v123-final-source-review.md); twenty-nine regions with weak petal veins and sharp mesh; actual reader verified, untrained |
+| Prepared future photographic cohort | **90,781** | [Final V123 source review](v123-final-source-review.md); twenty-nine regions with weak petal veins and sharp mesh; reader and discarded spatial-branch checks pass, no production quality result |
 
 The completed-model 90,864-source cohort applies **eight additional training-source
 withholds relative to V104**: the three previously inspected photo-quality cases and five printed

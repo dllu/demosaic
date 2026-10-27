@@ -776,6 +776,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             )
             + (("pretrained_rgb.raw_spectral.",) if model.config.raw_spectral_residual else ())
             + (("pretrained_rgb.raw_frequency.",) if model.config.raw_frequency_features else ())
+            + (("pretrained_rgb.raw_spatial.",) if model.config.raw_spatial_features else ())
             + (
                 ("pretrained_rgb.rgb_refinement.",)
                 if model.config.late_rgb_refinement != "none"

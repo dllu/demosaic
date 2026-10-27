@@ -8,7 +8,8 @@ and V124/V125; V119's frozen run is unchanged.
 The [latest source inspection](v123-final-source-review.md) prepares a separate
 90,781-source/29-region cohort, withholding one painted-tile-dominated frame
 and adding actual weak petal veins and strong fine mesh. All27 preceding region
-objects remain exact; actual reader checks cover all29. This cohort is untrained.
+objects remain exact; actual reader checks cover all29. It has only discarded
+[spatial-branch implementation checks](raw-spatial-features.md), with no production quality result.
 The preceding90,782-source/27-region cohort stays fixed for the completed
 [V129/V130 pilots](training-precision-pilot.md). The90,783-source/
 [23-region option](v123-source-review-through9800.md) stays fixed for V126–V128.

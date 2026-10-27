@@ -114,7 +114,8 @@ weakness after this training budget. It does not settle longer FP32 training.
 The already queued [V124/V125 conditional-mean trial](conditional-mean-training.md)
 tests persistent detail bias separately, with its original inputs and budgets.
 The newest [90,781-source/29-region cohort](current-source-loss-review.md) is
-prepared and untrained; this matched comparison retains90,782/27.
+prepared, with only discarded spatial-branch checks and no production quality
+result; this matched comparison retains90,782/27.
 
 Training: `.cache/current-quality-20261023-v1/fp32-training-pilot-v1/run/`.
 Quality: `.cache/current-quality-20261023-v1/fp32-quality-pilot-v1/queue-v2/`.

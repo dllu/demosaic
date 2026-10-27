@@ -154,6 +154,7 @@ failed runs remain intact.
 The [conditional-mean trial](conditional-mean-training.md) now runs V124's
 original two-noise-view control; V125 follows with the additional mean loss.
 It keeps the V120 architecture and frozen90,784-source/twenty-region data.
-The newest [90,781/29 curated cohort](current-source-loss-review.md) remains
-prepared and untrained. Weak-detail bias remains the quality priority;
+The newest [90,781/29 curated cohort](current-source-loss-review.md) has only
+discarded spatial-branch implementation checks and no production quality result.
+Weak-detail bias remains the quality priority;
 frequency features stay optional, and no speed work replaces that objective.

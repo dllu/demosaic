@@ -309,6 +309,7 @@ class PretrainedRgbDemosaic(nn.Module):
         raw_directional_bank_detach_input=False,
         raw_spectral_residual=False,
         raw_frequency_features=False,
+        raw_spatial_features=False,
     ):
         super().__init__()
         if raw_directional_bank_context and not raw_directional_residual:
@@ -366,6 +367,19 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError(
                 "RAW frequency features require native anchored RGB without other RAW heads"
             )
+        if raw_spatial_features and (
+            not stabilized
+            or not physical_anchors
+            or processing_scale != 1
+            or raw_kernel
+            or raw_directional_residual
+            or raw_spectral_residual
+            or raw_frequency_features
+            or adc_projection
+        ):
+            raise ValueError(
+                "RAW spatial features require native anchored RGB without other RAW heads"
+            )
         self.network = RgbRestorationTrunk(
             hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
         )
@@ -407,11 +421,16 @@ class PretrainedRgbDemosaic(nn.Module):
         self.raw_directional = None
         self.raw_spectral = None
         self.raw_frequency = None
+        self.raw_spatial = None
         self.rgb_refinement = None
         if raw_frequency_features:
             from .raw_frequency_features import RawFrequencyFeatures
 
             self.raw_frequency = RawFrequencyFeatures()
+        if raw_spatial_features:
+            from .raw_spatial_features import RawSpatialFeatures
+
+            self.raw_spatial = RawSpatialFeatures()
         if raw_spectral_residual:
             from .raw_spectral import RawSpectralResidual
 
@@ -701,6 +720,9 @@ class PretrainedRgbDemosaic(nn.Module):
                 if self.raw_frequency is not None:
                     frequency_offset = self.raw_frequency(packed, variance, colors, span)
                     head_offset = head_offset + F.pad(frequency_offset, pad, mode="replicate")
+                if self.raw_spatial is not None:
+                    spatial_offset = self.raw_spatial(packed, variance, colors, span)
+                    head_offset = head_offset + F.pad(spatial_offset, pad, mode="replicate")
             middle_offset, encoder_kwargs = None, {}
             late_features = None
             if context is not None:

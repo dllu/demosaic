@@ -19,7 +19,7 @@ cleanup alone does not prove quality gains.
 | V124/V125 mean-loss comparison |90,784 /20 | Four checks reused; V124 control training, V125 follows |
 | Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k; complete native review |
 | V129 data pilot / V130 precision trial |90,782 /27 | Both1k reviews complete; FP32 slightly improves selected faint-ADC bands, without a clear large noisy/GFX recovery |
-| Prepared future cohort |90,781 /29 | One graphic-dominated frame withheld, weak petal/strong mesh added; reader proof passes; untrained |
+| Prepared future cohort |90,781 /29 | Reader proof and discarded spatial-branch CPU/CUDA checks pass; no production quality result |
 
 [V123 training/review](v123-memory-guard-recovery.md) ·
 [Mean-loss trial](conditional-mean-training.md) ·

@@ -1,0 +1,453 @@
+{
+  "status": "completed-CPU-CUDA-spatial-implementation-checks-quality-unmeasured",
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+    "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+  },
+  "feature_parameters": 22664,
+  "new_tensors": 23,
+  "phases": {
+    "CPU": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-implementation-v1/result-v1.json",
+        "sha256": "140b584aa19cc039aec76607bcf6d3b3f5cebfc4d97d5d347e6596e4b7868522"
+      },
+      "actual": {
+        "status": "completed-discarded-CPU-spatial-implementation-check",
+        "plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-implementation-v1/plan-v1.json",
+          "sha256": "1100759bdb169591ae7d772f7c5d699bec7758abcf7547285fdda6313e39b9c8"
+        },
+        "owner": {
+          "pid": 2094658,
+          "created": 1793104123.18
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-implementation-v1/work/artifacts/implementation/last.pt",
+          "sha256": "a102f9585f8392d6e22df46c30290272eea839a9495366f9e665a3557899e380"
+        },
+        "preserved_step16": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-implementation-v1/step16.pt",
+          "sha256": "70ede2f4c3389f3a693eb8b7b4aa740ee549dd452e9007a5df9a52149309b26f"
+        },
+        "counts": {
+          "prepared_batches": 18,
+          "training_forwards": 18,
+          "witness_forwards": 1,
+          "encoder_forwards": 20,
+          "optimizer_steps": 18,
+          "portable_forwards": 1
+        },
+        "domains": {
+          "commons": 9,
+          "paired": 5,
+          "native": 4
+        },
+        "initial_checks": [
+          {
+            "stage": "fresh",
+            "parent91_or_prefix114_exact": true,
+            "official_encoder_exact": true
+          },
+          {
+            "stage": "resume",
+            "parent91_or_prefix114_exact": true,
+            "official_encoder_exact": true
+          }
+        ],
+        "model_EMA_Adam_finite": true,
+        "all_Adam_steps": 18,
+        "new_parameter_tensors": 23,
+        "new_parameters": 22664,
+        "model_and_EMA_tensors": 114,
+        "optimizer_states": 112,
+        "gradient_maxima": {
+          "embed.weight": 2.9484281682812252e-08,
+          "blocks.0.norm1": 9.0154811394072e-10,
+          "blocks.0.norm2": 2.809598997899343e-09,
+          "blocks.0.relative_bias": 1.9117138427837688e-10,
+          "blocks.0.q.weight": 1.775746549803614e-09,
+          "blocks.0.k.weight": 2.2454813564110054e-09,
+          "blocks.0.v.weight": 2.605377913411644e-09,
+          "blocks.0.condition_q.weight": 2.3521686820515697e-09,
+          "blocks.0.out.weight": 3.1813314205209053e-09,
+          "blocks.0.up.weight": 6.142793385066625e-09,
+          "blocks.0.down.weight": 9.033890080445417e-09,
+          "blocks.1.norm1": 8.427262221388787e-10,
+          "blocks.1.norm2": 3.203516341088175e-09,
+          "blocks.1.relative_bias": 1.449524389407486e-10,
+          "blocks.1.q.weight": 2.3758250922156776e-09,
+          "blocks.1.k.weight": 1.8870607298993036e-09,
+          "blocks.1.v.weight": 2.676286525726823e-09,
+          "blocks.1.condition_q.weight": 1.2404749449856922e-09,
+          "blocks.1.out.weight": 2.8038578125944014e-09,
+          "blocks.1.up.weight": 7.857900996555145e-09,
+          "blocks.1.down.weight": 7.668520041193005e-09,
+          "expand.weight": 3.114113056312817e-08,
+          "project.weight": 0.0019983325619250536
+        },
+        "inputs": [
+          {
+            "step": 1,
+            "domain": "commons",
+            "batch_sha256": "257c858c81263bb139987a4503db172767bab77524a9cb3b9a74e53d0cbfea82"
+          },
+          {
+            "step": 2,
+            "domain": "commons",
+            "batch_sha256": "fa92c1611fb16eb9add928e96a506c2b908b79b5227e0d7941150456997da6f3"
+          },
+          {
+            "step": 3,
+            "domain": "paired",
+            "batch_sha256": "b5e33a4796e61acbd7c024827f8a082f88ec64f0d81dcac4dbd867a39677ff44"
+          },
+          {
+            "step": 4,
+            "domain": "native",
+            "batch_sha256": "ce10989416785e1d3aaa6026066f55af5eba9d280a38aa7ad9048eff76b1bd14"
+          },
+          {
+            "step": 5,
+            "domain": "commons",
+            "batch_sha256": "1f5384088f930612554c8b0650fe43e72acd3a1651f8e621c338fb50fc6bc5aa"
+          },
+          {
+            "step": 6,
+            "domain": "paired",
+            "batch_sha256": "1b787e3c38522516d755fae10003a17d94e14edb72ea40ce729d913d872ce1fe"
+          },
+          {
+            "step": 7,
+            "domain": "paired",
+            "batch_sha256": "ca9e141976cb59cc7a14631d139e70362a82b8f7d62b41f1401151a83bfb3146"
+          },
+          {
+            "step": 8,
+            "domain": "commons",
+            "batch_sha256": "907697a83574842c650a6e0ccb583fb096ef9ddbc940abe6daaed4a10bf61a8f"
+          },
+          {
+            "step": 9,
+            "domain": "native",
+            "batch_sha256": "9eab330ce1cdb0d432a27bbaf954f43a7cea6375d687e91d5be12ace23ce39ae"
+          },
+          {
+            "step": 10,
+            "domain": "paired",
+            "batch_sha256": "750c009e7cae322c8bdad9af0ecd7d6fe21210d0d3a3b552dc0fb7535f185e83"
+          },
+          {
+            "step": 11,
+            "domain": "native",
+            "batch_sha256": "c479211a8a37caf75d246dc05efe6ac59a2c38e42cb30cabd9262d9d2a52d859"
+          },
+          {
+            "step": 12,
+            "domain": "commons",
+            "batch_sha256": "a7f6737f36a598138152a8a6604edd2137daa6d5f8ddff30980b694e644d6536"
+          },
+          {
+            "step": 13,
+            "domain": "commons",
+            "batch_sha256": "bb98425a9a3612d544b857b7c82ab6f91a6bf8348d70318132f7beb044803db7"
+          },
+          {
+            "step": 14,
+            "domain": "commons",
+            "batch_sha256": "f4443cd7bdaa7f1a4bba73ff3389f9ab0ef811a05f165df9ed08a5b9099eccae"
+          },
+          {
+            "step": 15,
+            "domain": "paired",
+            "batch_sha256": "b61bad8fc367ea6c844cda8b5e702c0dd343375bf34c8d1589ae4707e6d5b85e"
+          },
+          {
+            "step": 16,
+            "domain": "commons",
+            "batch_sha256": "1566767111486de8ac7de8b52807d01f3743d82373a4c73ca1b7bc19eec6ef02"
+          },
+          {
+            "step": 17,
+            "domain": "commons",
+            "batch_sha256": "80bb9fa1ac35c05e5cba6fbae5f6b8e02856052b7fb487ca49f8a907a8f313e1"
+          },
+          {
+            "step": 18,
+            "domain": "native",
+            "batch_sha256": "38a55090731c652b6f267ea8063750202961c1d7b7e4ff2702ab5220817aa597"
+          }
+        ],
+        "first_full_output_values_exact": 65536,
+        "portable_EMA114_exact": true,
+        "rejected_resume": "Resume model configuration differs from checkpoint",
+        "peak_RSS_bytes": 3242172416,
+        "CUDA_initialized": false,
+        "scope": "New CPU implementation check on90781/29 data, seed71/native128/B1, actual ordinary training loss and optimizer. Preserve16-step checkpoint, reject changed architecture before forwards, resume two new steps, verify finite state and portable learned branch. One actual new first-batch disabled witness; no completed quality observations repeated. No CUDA/production/quality/speed qualification, automatic retry or budget reset."
+      }
+    },
+    "CUDA": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-recovery-v2/result-v1.json",
+        "sha256": "e025362f1fd0b5e25d660827a6a5bf6c538c8287b2379a74db767546b2f3adf3"
+      },
+      "actual": {
+        "status": "completed-discarded-CUDA-spatial-implementation-check",
+        "phase": "CUDA",
+        "plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-recovery-v2/plan-v1.json",
+          "sha256": "daa3b5f950b82f07a184e9066c51b9b68df5a436104527b48d8740c673fda13c"
+        },
+        "owner": {
+          "pid": 2169638,
+          "created": 1793105036.53
+        },
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-recovery-v2/work/artifacts/implementation/last.pt",
+          "sha256": "ad8bbcefb48c0bdbea2c7d8d41bf0453c06749644d533cbda5d604b6ad2da1a1"
+        },
+        "preserved_step16": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-recovery-v2/step16.pt",
+          "sha256": "7f0a3b4cf52627ec75554462064dea78e53cb22e8519263e224262a161cf6a17"
+        },
+        "counts": {
+          "prepared_batches": 18,
+          "training_forwards": 18,
+          "witness_forwards": 1,
+          "encoder_forwards": 20,
+          "optimizer_steps": 18,
+          "portable_forwards": 1
+        },
+        "domains": {
+          "commons": 9,
+          "paired": 5,
+          "native": 4
+        },
+        "initial_checks": [
+          {
+            "stage": "fresh",
+            "parent91_or_prefix114_exact": true,
+            "official_encoder_exact": true
+          },
+          {
+            "stage": "resume",
+            "parent91_or_prefix114_exact": true,
+            "official_encoder_exact": true
+          }
+        ],
+        "branch_construction_RNG_checks": [
+          {
+            "CPU_unchanged": true,
+            "CUDA_unchanged": true
+          },
+          {
+            "CPU_unchanged": true,
+            "CUDA_unchanged": true
+          },
+          {
+            "CPU_unchanged": true,
+            "CUDA_unchanged": true
+          }
+        ],
+        "forward_devices": {
+          "cuda": 19,
+          "cpu": 1
+        },
+        "model_EMA_Adam_finite": true,
+        "all_Adam_steps": 18,
+        "new_parameter_tensors": 23,
+        "new_parameters": 22664,
+        "model_and_EMA_tensors": 114,
+        "optimizer_states": 112,
+        "gradient_maxima": {
+          "embed.weight": 1.0289749496905642e-08,
+          "blocks.0.norm1": 3.945295201646104e-10,
+          "blocks.0.norm2": 1.2035686891564978e-09,
+          "blocks.0.relative_bias": 3.8877012720206494e-11,
+          "blocks.0.q.weight": 7.39298289254009e-10,
+          "blocks.0.k.weight": 1.7203017899092288e-09,
+          "blocks.0.v.weight": 1.950552608320777e-09,
+          "blocks.0.condition_q.weight": 1.1428382684641747e-09,
+          "blocks.0.out.weight": 1.6145726977612185e-09,
+          "blocks.0.up.weight": 2.995474979172741e-09,
+          "blocks.0.down.weight": 6.502838711952563e-09,
+          "blocks.1.norm1": 5.188718898985201e-10,
+          "blocks.1.norm2": 2.4674757792553237e-09,
+          "blocks.1.relative_bias": 3.7383009882097085e-11,
+          "blocks.1.q.weight": 7.482539032821478e-10,
+          "blocks.1.k.weight": 1.4083609833903665e-09,
+          "blocks.1.v.weight": 2.3331550025318393e-09,
+          "blocks.1.condition_q.weight": 1.4525115554775425e-09,
+          "blocks.1.out.weight": 1.895476664515172e-09,
+          "blocks.1.up.weight": 2.8801747653517396e-09,
+          "blocks.1.down.weight": 6.803687835343908e-09,
+          "expand.weight": 1.2023474660338707e-08,
+          "project.weight": 0.0006794321816414595
+        },
+        "inputs": [
+          {
+            "step": 1,
+            "domain": "commons",
+            "batch_sha256": "0d83379398ab34d43df920be6fc64ebf3d32b9792533c9aeddd7c700935a2b2a"
+          },
+          {
+            "step": 2,
+            "domain": "commons",
+            "batch_sha256": "e08462747f473b912bc082052d3e898e2264737fc57123d673762dd8abf53044"
+          },
+          {
+            "step": 3,
+            "domain": "paired",
+            "batch_sha256": "683c0500ce19c9db98ac655a49032ea9ca119b7cd7b2743eebf3f59aa47fe914"
+          },
+          {
+            "step": 4,
+            "domain": "native",
+            "batch_sha256": "40c3d8f72e58e28cb3fd35c608835570b09f0c615a2701536c368953e274101c"
+          },
+          {
+            "step": 5,
+            "domain": "commons",
+            "batch_sha256": "9c8f728d72b383408fc03c0242648b023d698ffbb410743cf158f442580fb516"
+          },
+          {
+            "step": 6,
+            "domain": "paired",
+            "batch_sha256": "f26779f5db26b2b5de140e60edd6c79e26f5f96e52f3041e80fa32f99384001b"
+          },
+          {
+            "step": 7,
+            "domain": "paired",
+            "batch_sha256": "a375fb1bbbf39a66eb8c47696168646b844d085b1df48eb3f9f58ba8a1a8f152"
+          },
+          {
+            "step": 8,
+            "domain": "commons",
+            "batch_sha256": "62710aeab9c0b16cd7f114dfe1bf1f6f8f1bed8d041ebfa95adaa8fbc6ac4ea5"
+          },
+          {
+            "step": 9,
+            "domain": "native",
+            "batch_sha256": "fab22eaaed5b29b07f7a9963f744a5a1780fe8d816e48258846eaf8c6da37b06"
+          },
+          {
+            "step": 10,
+            "domain": "paired",
+            "batch_sha256": "68649a5c3d8e70ef01d4264c13323d00c85ce7efb3616509d4a9264136fc94b7"
+          },
+          {
+            "step": 11,
+            "domain": "native",
+            "batch_sha256": "54f7274e965f70c285fde0605c71f38c662817dea742aa864fba5518e3952883"
+          },
+          {
+            "step": 12,
+            "domain": "commons",
+            "batch_sha256": "54f4d1ca6583d51f2700661928f02fbf746fddacecb10bbbf21a8a79b02b13c7"
+          },
+          {
+            "step": 13,
+            "domain": "commons",
+            "batch_sha256": "0b6b846205007f414a718d7ecf04cfd82a5e56568f735a47546cdd66c9fffe24"
+          },
+          {
+            "step": 14,
+            "domain": "commons",
+            "batch_sha256": "37ab12be572825c724b52017bb84249f38bfee9c4d35420231ae35b4e4e1a682"
+          },
+          {
+            "step": 15,
+            "domain": "paired",
+            "batch_sha256": "67ee29dfb5acb968fbf7f38ea72dab5801778f8dbf6a0915087dd4f516bae1d5"
+          },
+          {
+            "step": 16,
+            "domain": "commons",
+            "batch_sha256": "6e3a96830d836363fcdc4b768f9c8ccdc2d72905b787f79430248c15c4642812"
+          },
+          {
+            "step": 17,
+            "domain": "commons",
+            "batch_sha256": "a034df5ad94dd05485cdb1e33f71479c94e6a1f7a733082e2879d57b03cff241"
+          },
+          {
+            "step": 18,
+            "domain": "native",
+            "batch_sha256": "044691352095ad94560a5ae7d8f96e1ea0111f87c6ee532e4bbf6b1c68f14e5e"
+          }
+        ],
+        "first_full_output_values_exact": 4194304,
+        "portable_EMA114_exact": true,
+        "rejected_resume": "Resume model configuration differs from checkpoint",
+        "peak_RSS_bytes": 4643573760,
+        "CUDA_initialized": true,
+        "CUDA_peak_allocated_bytes": 9069177344,
+        "scope": "New CUDA implementation check on90781/29 data, seed71/native256/B16/BF16, actual ordinary training loss and optimizer. Preserve16-step checkpoint, reject changed architecture before forwards, resume two new steps, verify finite state and learned CPU portable loading. One actual new first-batch disabled witness; no completed quality observations repeated. No production/quality/speed qualification, automatic retry or budget reset. CUDA check requires the completed CPU receipt and unchanged neural mathematics; only new-flag tile-grid handling differs from the old CPU loader source."
+      }
+    }
+  },
+  "independent_state_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-final-review-v1/independent-state-audit-v1.json",
+    "sha256": "20c560bc18bd0365be694049e769691ade935dc77fc93839b62e725090ac4bcb"
+  },
+  "independent_finite_values_checked": 526838384,
+  "tests": {
+    "feature_suites": {
+      "passed": 48,
+      "seconds": 28.0,
+      "files": [
+        "tests/test_raw_spatial_features.py",
+        "tests/test_raw_frequency_features.py"
+      ]
+    },
+    "feature_and_tiling_suites": {
+      "passed": 32,
+      "seconds": 4.37,
+      "files": [
+        "tests/test_raw_spatial_features.py",
+        "tests/test_inference_alignment.py"
+      ]
+    },
+    "overlapping_spatial_cases": 19,
+    "unique_cases_passed_across_suites": 61
+  },
+  "failed_zero_work_CUDA_launch": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-v1/plan-v1.json",
+      "sha256": "70b10ac33f463fecdf1abeda618924bf82adedbd8bc15f1125edf49fae66b6b3"
+    },
+    "launch": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-v1/launch-v1.json",
+      "sha256": "5775dc62fb9093186cf60d251596d7b663f72c4c5ab5131e1b698f73490464fd"
+    },
+    "failure": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-v1/failure-v1.json",
+      "sha256": "1050eb657312e5dfac8c55f507b5387c2a7a9add9a824b58535760efcaf7fc8d"
+    }
+  },
+  "CUDA_recovery_preserves_original_deadline": {
+    "failed_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-v1/plan-v1.json",
+      "sha256": "70b10ac33f463fecdf1abeda618924bf82adedbd8bc15f1125edf49fae66b6b3"
+    },
+    "failure": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-v1/failure-v1.json",
+      "sha256": "1050eb657312e5dfac8c55f507b5387c2a7a9add9a824b58535760efcaf7fc8d"
+    },
+    "original_launch": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-spatial-CUDA-implementation-v1/launch-v1.json",
+      "sha256": "5775dc62fb9093186cf60d251596d7b663f72c4c5ab5131e1b698f73490464fd"
+    },
+    "zero_model_and_data_work": true,
+    "all_neural_source_bytes_unchanged": true,
+    "original_absolute_worker_deadline_unix": 1793106495.6437435,
+    "change": "Set required deterministic cuBLAS environment before process startup; add an early environment guard. No automatic retry or budget reset."
+  },
+  "total_discarded_optimizer_updates": 36,
+  "total_root_forwards": 40,
+  "total_encoder_forwards": 40,
+  "total_training_target_contexts": 306,
+  "reporting_new_neural_forwards": 0,
+  "reporting_RAW_decodes": 0,
+  "scope": "Implementation only; no quality benchmark, production training, recommended checkpoint or speed comparison. Current V124/V125 production remains on its original20-region cohort;90781/29 data have only discarded implementation-check use. Official frozen Small encoder and the common V120 parent are preserved at actual initialization. Future model-quality reports require native exact-GT triplets and both real GFX pairs."
+}

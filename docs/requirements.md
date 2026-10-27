@@ -30,7 +30,10 @@ useful gain at1,000 matched updates, with independently audited native/GFX views
 [V129's completed curated27-region pilot](reviewed-detail-training-pilot.md)
 finds small mixed changes without clear noisy/GFX recovery. The matched
 [V130 FP32 pilot](training-precision-pilot.md) slightly improves selected faint-ADC
-bands, with subtle native changes. The newest90781/29-region cohort remains untrained.
+bands, with subtle native changes. The newest90781/29-region cohort has only
+discarded [spatial-branch implementation checks](raw-spatial-features.md), with
+no production quality result. The optional attention branch passes CPU/CUDA16+2
+checks; a matched trained comparison remains necessary.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |

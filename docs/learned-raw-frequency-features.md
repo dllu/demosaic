@@ -5,11 +5,12 @@ before the mature RGB restoration trunk.** It preserves signed phase information
 and starts with exactly zero effect on the parent. It passes mathematical,
 initialization, gradient, checkpoint and discarded CPU/CUDA training checks.
 The [V1239k midpoint](v123-midpoint-quality.md) shows no clear detail gain on
-selected retained material and GFX inputs. **Completed-model quality and
-complete-frame behavior remain unmeasured.** Current model recommendations
-and the original V120/V121 trials are unchanged.
-The subsequent [V122/V123 full-budget scope comparison](learned-raw-frequency-training.md)
-is running; its endpoint image quality remains unmeasured.
+selected retained material and GFX inputs. The subsequent
+[completed V122/V123 full-budget comparison](v122-v123-quality.md) finds small
+weak-detail changes and a large joint-arm ADC color tail, without clear mesh
+recovery. Frequency features remain optional; V120 stays the general choice.
+A separate [spatial-attention prototype](raw-spatial-features.md) tests a different
+mixing operator; its trained quality is unmeasured.
 
 [Execution, retained arrays and independent state audits](results/raw-frequency-features-engineering-v1.json) ·
 [Implementation](../src/demosaic/raw_frequency_features.py) ·

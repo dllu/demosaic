@@ -109,6 +109,30 @@ def test_legacy_model_keeps_the_existing_bayer_grid_and_stride():
     assert stats["tile_grid_alignment"] == 2 and stats["tile_stride"] == 46
 
 
+@pytest.mark.parametrize("dino,period", [(False, 16), (True, 32)])
+@pytest.mark.parametrize("overlap", [16, 18])
+def test_spatial_feature_tiles_preserve_window_grid_at_odd_last_borders(dino, period, overlap):
+    model = LatticeModel(period, packed=False, dino=dino)
+    model.config.raw_spatial_features = True
+    raw = np.linspace(0.1, 0.2, 69 * 73, dtype=np.float32).reshape(69, 73)
+    actual, stats = restore_tiled(
+        model,
+        raw,
+        color_indices("GBRG"),
+        shot=0,
+        read=0,
+        tile=64,
+        overlap=overlap,
+        batch_size=3,
+        device="cpu",
+    )
+    y, x = torch.meshgrid(torch.arange(69), torch.arange(73), indexing="ij")
+    expected = (torch.from_numpy(raw) + ((y % period) + (x % period)) * 0.0001).expand(3, -1, -1)
+    torch.testing.assert_close(actual, expected, atol=2e-7, rtol=0)
+    assert stats["tile_grid_alignment"] == period
+    assert stats["tile_stride"] % period == 0 and 64 - stats["tile_stride"] >= overlap
+
+
 @pytest.mark.parametrize("tile,overlap", [(48, 16), (64, 62)])
 def test_invalid_packed_dino_grid_reports_geometry_error(tile, overlap):
     with pytest.raises(ValueError, match="32"):

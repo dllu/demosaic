@@ -62,6 +62,7 @@ class ModelConfig:
     raw_directional_bank_detach_input: bool = False
     raw_spectral_residual: bool = False
     raw_frequency_features: bool = False
+    raw_spatial_features: bool = False
     late_rgb_refinement: str = "none"
     isotropic_groups: int = 6
     isotropic_blocks: int = 8
@@ -419,6 +420,23 @@ class JointDemosaic(nn.Module):
             raise ValueError("RAW spectral residual must be a boolean")
         if type(cfg.raw_frequency_features) is not bool:
             raise ValueError("RAW frequency features must be a boolean")
+        if type(cfg.raw_spatial_features) is not bool:
+            raise ValueError("RAW spatial features must be a boolean")
+        if cfg.raw_spatial_features and (
+            cfg.restoration_backbone != "pretrained-rgb"
+            or not cfg.variance_stabilization
+            or not cfg.physical_anchors
+            or cfg.rgb_processing_scale != 1
+            or cfg.raw_kernel_reconstruction
+            or cfg.raw_directional_residual
+            or cfg.raw_spectral_residual
+            or cfg.raw_frequency_features
+            or cfg.adc_cfa_projection
+            or cfg.late_rgb_refinement != "none"
+        ):
+            raise ValueError(
+                "RAW spatial features require native anchored RGB without other RAW heads"
+            )
         if cfg.raw_frequency_features and (
             cfg.restoration_backbone != "pretrained-rgb"
             or not cfg.variance_stabilization
@@ -601,6 +619,7 @@ class JointDemosaic(nn.Module):
                 raw_directional_bank_detach_input=cfg.raw_directional_bank_detach_input,
                 raw_spectral_residual=cfg.raw_spectral_residual,
                 raw_frequency_features=cfg.raw_frequency_features,
+                raw_spatial_features=cfg.raw_spatial_features,
             )
             if cfg.dino and cfg.dino_feature_fusion == "convnext-pyramid":
                 from .dino_pyramid import DinoPyramidContext
