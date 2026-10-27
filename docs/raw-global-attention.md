@@ -7,7 +7,9 @@ V120 remains the general recommendation.
 [Measured results, native triplets and both GFX scenes](v136-global-attention-quality.md).
 The [V137 conditioned follow-up](raw-global-conditioning.md) finds almost
 uniform matching in saved V136 and tests normalized attention with the same
-tensors. CPU/CUDA16+2 checks pass; matched1k training runs and quality is pending.
+tensors. Its [completed matched1k review](v137-global-conditioned-quality.md)
+shows stronger adaptation and a small faint-ADC gain, with tiny ordinary/shadow
+regressions and no clear new fine-mesh recovery.
 This optional18,272-parameter branch summarizes signed RAW detail over a whole
 tile and returns context to individual packed pixels. It complements the
 existing official frozen DINOv3 Small pyramid and DRUNet restoration path.

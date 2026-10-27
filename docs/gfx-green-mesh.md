@@ -20,10 +20,10 @@ The [V131/V132 spatial-detail trial](raw-spatial-training.md) queues both fixed
 mesh profiles and both native160 regions, with this corrected DSCF3835 reference
 and both camera JPEGs. Model quality and actual viewing are pending.
 
-The [V137 conditioned-global pilot](raw-global-conditioning.md) queues these
-same two profiles/regions with corrected DSCF3835 and all three saved controls.
-Passing training checks and more varied internal attention are not a claim of
-mesh recovery; actual quality/viewing are pending.
+The [V137 conditioned-global review](v137-global-conditioned-quality.md) is
+complete on these two profiles/regions with corrected DSCF3835 and all three
+saved controls. Stronger memory adaptation does not produce clear new lattice
+recovery; the native comparisons are below.
 
 The [V120–V125 endpoint review queues](endpoint-quality-review.md) include both
 fixed noise profiles and both native160 regions, reusing saved controls.
@@ -37,6 +37,31 @@ V124's [14k progress review](#v124-at-14000-updates) is complete; its original
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V137 conditioned-global pilot
+
+The [completed matched1k review](v137-global-conditioned-quality.md) leaves the
+fine lattice largely erased under nominal conditioning. The fixed nearby3879
+profile retains weak irregular diagonal texture across all four methods,
+without clear new correct-lattice recovery. Both regions/profiles were actually
+viewed; the left blue point persists.
+
+Columns: noisy → V120 → V1291k → V1361k → V1371k → independent **DSCF3835
+ISO100/AHD reference, not GT**. Native160px cells share768px contexts, WB/matrix
+and+4EV. Aperture, exposure time and moving subjects differ; the corrected ISO100
+capture is46 seconds earlier. The main3879/3880 pair remains in use.
+
+![V137 nominal fine mesh](images/v137-global-conditioned-quality-v1/mesh-nominal-fine-green-mesh-right-comparison.png)
+
+![V137 fixed nearby-profile fine mesh](images/v137-global-conditioned-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+Left regions: [nominal](images/v137-global-conditioned-quality-v1/mesh-nominal-fine-green-mesh-left-comparison.png) ·
+[nearby](images/v137-global-conditioned-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png).
+Nominal shot/read are`.00128`/`6.5536e−6`; nearby are
+`.0014635775921166604`/`1.0715704128646712e−6`. Exactly two new root/DINO forwards
+within the102-input review reuse fixed inputs and all old predictions, with no
+noise sweep, RAW decode or reference fit. Both camera JPEGs remain in the
+standing comparison below. [Source/ROI/all checkpoint hashes/profile/display metadata](images/v137-global-conditioned-quality-v1/manifest.json).
 
 ## V136 global-attention pilot
 

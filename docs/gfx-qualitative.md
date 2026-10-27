@@ -13,10 +13,9 @@ scene and full-frame output, plus the additional DSCF3842/**DSCF3835** green
 mesh. Both new full-frame methods use identical32px tile grids; older saved
 pipelines retain their recorded grids/profiles with differences labeled.
 
-The [V137 conditioned-global pilot](raw-global-conditioning.md) also queues the
-four established512px contexts and corrected extra mesh pair, with saved
-V120/V129/V136 predictions reused. Its training checks pass; actual quality
-and viewing remain pending.
+The [V137 conditioned-global review](v137-global-conditioned-quality.md) is
+complete on the four established512px contexts and corrected extra mesh pair,
+with saved V120/V129/V136 predictions reused. Native comparisons are below.
 
 ![Matched V115/V120 building, fence and neon](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-1.png)
 
@@ -32,6 +31,28 @@ comparison convention, not newly verified camera calibration; current automatic
 estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
+
+## V137 conditioned-global pilot
+
+The [completed matched1k review](v137-global-conditioned-quality.md) shows no
+clear large foliage/fence recovery. Columns: noisy → V120 → V1291k → V1361k →
+V1371k → separate DSCF3880 ISO100/AHD reference, **not GT**. Native160px cells
+share512px contexts,+2EV, WB/matrix and nominal shot`.00128`/read`6.5536e−6`.
+This context profile differs from the fixed-Haar full-frame comparison above.
+
+![V137 main GFX foliage](images/v137-global-conditioned-quality-v1/main-foliage-comparison.png)
+
+![V137 main chain-link fence](images/v137-global-conditioned-quality-v1/main-chain-link-fence-comparison.png)
+
+All four contexts were actually viewed, including
+[sky](images/v137-global-conditioned-quality-v1/main-overcast-sky-comparison.png) and
+[building](images/v137-global-conditioned-quality-v1/main-building-detail-comparison.png).
+Foliage remains soft/painterly, larger geometry coherent and sky quiet.
+Stronger query/key adaptation and a small faint-ADC gain coexist with tiny
+ordinary/shadow regressions and no clear new real-detail recovery. The
+[corrected extra mesh](gfx-green-mesh.md#v137-conditioned-global-pilot) remains
+weak. V120 remains the general recommendation; no new full-frame result is
+claimed. [Source/ROI/all four checkpoint hashes/noise/display metadata](images/v137-global-conditioned-quality-v1/manifest.json).
 
 ## V136 global-attention pilot
 

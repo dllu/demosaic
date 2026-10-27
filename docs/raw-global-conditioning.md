@@ -1,10 +1,11 @@
 # Conditioning the global RAW attention path
 
-**V137 passes genuine CPU/CUDA16+2 checks and its matched1,000-update training
-is running. Restoration quality is unmeasured. V120 remains the general
-recommendation.** The new explicit operator normalizes attention matching while
-retaining value amplitude. It addresses a measured weakness in V136's global
-memory path; it does not establish improved denoising or mesh recovery.
+**V137's matched1,000-update training and102-input quality review are complete.**
+Faint ADC improves.0334dB over V136, while ordinary/shadow means fall.0005–.0044dB.
+Query/key adaptation is stronger, but local detail remains mixed and no clear
+new fine-mesh recovery is visible. V120 remains the general recommendation.
+[Measured results, native triplets and both GFX pairs](v137-global-conditioned-quality.md).
+The explicit operator normalizes attention matching while retaining value amplitude.
 
 [Implementation](../src/demosaic/raw_global_conditioned_features.py) ·
 [Recipe](../configs/quality-v120-raw-global-conditioned-pilot-v137.yaml) ·
@@ -138,11 +139,12 @@ legacy function/method ASTs match. These checks execute no neural modules.
 The discarded training checks use36 root/DINO/optimizer updates over306 contexts;
 the separate mechanism check above has its own12 branch forwards/backwards.
 
-Fresh production starts from V120's20k Small EMA, not V136's endpoint. It keeps
+Production completes its original1k horizon from V120's20k Small EMA, not V136's
+endpoint. It keeps
 V136's seed70,90,782 photos/27 reviewed regions,50% reviewed quota, B16/native256,
 single-view losses, zero optical PSF, paired32/native128 and original1k schedule
 at LR1e−5/warmup100. Only the global mixing operator changes. Every clean/noisy
-hash must match saved V136 before candidate inference. Record gradient maxima
+hash matches saved V136 before candidate inference. Gradient maxima are recorded
 at updates1–16 and every25 through1,000:56 explicit observations, not all steps.
 The newer90,778/34 bank remains separate; original queued jobs retain their data.
 
@@ -151,20 +153,26 @@ runtime floor. The original horizon is1,000 updates/64 validation calls,
 without automatic retries or schedule resets. No20k conditioned-global run is
 queued.
 
-## Prospective quality review
+## Completed quality review
 
-A live dependent review declares102 new V137 root/DINO calls on the established
+The completed review uses102 new V137 root/DINO calls on the established
 64 shadow,16 ordinary,16 faint-ADC, four main-GFX512px and two extra-mesh768px
 inputs. All306 V120/V129/V136 predictions are reused. Exact66-module trained
 source, semantic mode,1k endpoint/lineage and all training-input matches are
-required before collection. Expected support is384 metrics/96 summaries and64
-native PNGs; independent scoring/pixel auditing and actual viewing follow.
+verified before collection. Independent scoring checks384 metrics/96 summaries
+and5,700 fields; every cell of all64 native PNGs matches,22,118,400 RGB channels.
+All32 comparison boards, two exact-GT triplets and four enhanced faint boards
+were actually viewed.
 
 The faint supplement was frozen before production began. It uses the same
 original-source masks, ROI-mean/spatial error decomposition and shared40× display
-across four methods, with no extra neural calls. Quality reports will include
-at least two native noisy/denoised/exact synthetic-GT triplets and both real
+across four methods, with no extra neural calls. Its independent audit checks240
+strata,128 decompositions and1,843,200 exact PNG channels. The report includes
+two native noisy/denoised/exact synthetic-GT triplets and both real
 scene pairs: DSCF3879/3880 and corrected DSCF3842/DSCF3835. ISO100/AHD and camera
 JPEG references remain approximate, not GT; captures/JPEGs/siblings stay held
-out. Numerical conditioning and passing checks do not establish trained quality,
-convergence, full427/camera/color/full-frame performance or broad superiority.
+out. The final saved-state supplement independently checks720 state/Adam fields
+and1,008 gradient-snapshot metadata entries. Write-query/key EMA changes from
+the CPU decay reference grow to4.89e−5/5.11e−5 versus V136's4.21e−10/5.17e−10.
+Stronger adaptation has not resolved missing fine detail. This1k pilot does not
+establish convergence, full427/camera/color/full-frame performance or broad superiority.
