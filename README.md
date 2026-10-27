@@ -17,8 +17,8 @@ mottling still need work. [Current choices](docs/current-model.md) ·
 [GFX gallery](docs/gfx-qualitative.md) · [Camera comparisons](docs/native-camera-development.md).
 
 Training uses geometry before final downsampling and zero optical blur. The
-[latest source review](docs/v123-final-source-review.md) prepares90,781 photos/
-29 regions, including weak petal veins and sharp mesh. Existing jobs retain
+[latest source review](docs/v124-first-source-review.md) prepares90,780 photos/
+31 regions, including subtle plaster and wing detail. Existing jobs retain
 their declared data. [Data pipeline](docs/training-pipeline.md).
 
 | Current quality work | Evidence and next comparison |

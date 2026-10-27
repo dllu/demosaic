@@ -24,18 +24,19 @@ unresolved; broad state-of-the-art quality is unproven.
 | Does fine-detail loss reweighting suffice? | [Completed V117/V11820k comparison](v117-v118-quality.md) finds lower weak natural-detail response and a worse ADC color tail with the normalized band term. Keep it off; improved local output-gradient alignment did not predict trained quality |
 | Does encoder size alone fix weak contrast? | [Full Tiny/Small diagnosis](local-material-detail.md) finds nearly unchanged weakest-stratum gain on427 photos. Small's camera/detail tradeoffs remain useful; no size-only explanation is established |
 
-The latest [source inspection](current-source-loss-review.md) has1,839 unique
+The latest [source inspection](current-source-loss-review.md) has1,879 unique
 reviewed source IDs. Quality work uses zero optical PSF augmentation and
 geometry before final downsampling, with reviewed material regions and corrected
 paired-reference masks. [Training pipeline](training-pipeline.md) ·
 [Actual target contrast coverage](training-target-contrast-coverage.md).
-The final-stage forty-source review retains39 and withholds one painted-tile-
-dominated frame from a future90,781-source/29-region cohort. It adds actual weak
-petal veins and strong fine mesh, preserving all27 earlier region objects.
-Existing training inputs remain fixed. [V129](reviewed-detail-training-pilot.md)
-completed its27-region pilot with small mixed changes and no clear large visible
-recovery. The newer cohort has four matched spatial-trial checks complete and
-full20k production queued; it has no production quality result.
+The [V124 early forty-source review](v124-first-source-review.md) retains39 and
+withholds one mural-dominated frame from a future90,780-source/31-region cohort.
+It adds subtle plaster and moderate wing-pattern detail while preserving all29
+prior region objects. Actual saved reader draws exercise contrast attenuation;
+that support is distinguished from intrinsic source contrast. Existing training
+inputs stay fixed: V131/V132 use90,781/29 and have full20k production queued;
+their quality is unmeasured. The completed [V129](reviewed-detail-training-pilot.md)
+27-region pilot has small mixed changes without clear large visible recovery.
 
 ## Foundation features and the new objective
 
