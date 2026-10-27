@@ -28,6 +28,14 @@ def require_resume_global_features(previous, current):
     new = current.get("model", {}).get("raw_global_features", False)
     if type(old) is not bool or type(new) is not bool or old != new:
         raise ValueError("Resume RAW global features differ; initialize a new run")
+    modes = [
+        config.get("model", {}).get("raw_global_conditioning", "legacy-v1")
+        for config in (previous, current)
+    ]
+    if any(type(mode) is not str or mode not in ("legacy-v1", "cosine-rms-v2") for mode in modes):
+        raise ValueError("Resume RAW global conditioning is invalid")
+    if modes[0] != modes[1] or not new and modes[1] != "legacy-v1":
+        raise ValueError("Resume RAW global conditioning differs; initialize a new run")
 
 
 class RawGlobalFeatures(nn.Module):

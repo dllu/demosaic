@@ -20,6 +20,11 @@ The [V131/V132 spatial-detail trial](raw-spatial-training.md) queues both fixed
 mesh profiles and both native160 regions, with this corrected DSCF3835 reference
 and both camera JPEGs. Model quality and actual viewing are pending.
 
+The [V137 conditioned-global pilot](raw-global-conditioning.md) queues these
+same two profiles/regions with corrected DSCF3835 and all three saved controls.
+Passing training checks and more varied internal attention are not a claim of
+mesh recovery; actual quality/viewing are pending.
+
 The [V120–V125 endpoint review queues](endpoint-quality-review.md) include both
 fixed noise profiles and both native160 regions, reusing saved controls.
 V120/V121 mesh review is complete below, with no clear V121 lattice-recovery

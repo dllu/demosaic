@@ -138,7 +138,8 @@ def audit(path):
     assert checked_observations == set(policy["observation_ids"])
     assert checked_strata == set(strata) and checked_decomposition == set(decomposition)
     assert max_strata < 1e-10 and max_decomposition < 1e-12
-    assert png_channels == result["PNG_panel_channels_checked"] == 1536000
+    assert png_channels == result["PNG_panel_channels_checked"]
+    assert png_channels == len(images) * (len(policy["methods"]) + 2) * 160 * 160 * 3
     destination = output / "independent-audit-v1.json"
     assert not destination.exists()
     save(

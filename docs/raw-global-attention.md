@@ -5,6 +5,9 @@ Against saved V129, mean gains are+.0003dB ordinary,+.0007–.0026dB shadow and
 +.0131dB faint ADC, with mixed local detail and no clear new mesh recovery.
 V120 remains the general recommendation.
 [Measured results, native triplets and both GFX scenes](v136-global-attention-quality.md).
+The [V137 conditioned follow-up](raw-global-conditioning.md) finds almost
+uniform matching in saved V136 and tests normalized attention with the same
+tensors. CPU/CUDA16+2 checks pass; matched1k training runs and quality is pending.
 This optional18,272-parameter branch summarizes signed RAW detail over a whole
 tile and returns context to individual packed pixels. It complements the
 existing official frozen DINOv3 Small pyramid and DRUNet restoration path.
@@ -133,8 +136,10 @@ triplets and four enhanced boards were actually viewed.
 
 The [quality report](v136-global-attention-quality.md) records tiny mean gains
 over V129 alongside mixed local errors and no clear new fine-mesh recovery.
-Memory-path gradients are very small despite being nonzero; this is an
-optimization concern, without a causal ablation. No20k global run is queued.
+Recorded production gradients cover updates1–16, not all1,000. The
+[follow-up saved-state/branch audit](raw-global-conditioning.md) separately
+measures weak query/key adaptation and almost uniform matching. This is an
+optimization concern, without a causal quality ablation. No20k global run is queued.
 Both main DSCF3879/3880 and corrected extra DSCF3842/DSCF3835 scenes, JPEGs and
 siblings stay held out. This finite pilot does not establish complete20k,
 full427 photo/camera/color/frame quality, convergence or speed.

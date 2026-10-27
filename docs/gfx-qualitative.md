@@ -13,6 +13,11 @@ scene and full-frame output, plus the additional DSCF3842/**DSCF3835** green
 mesh. Both new full-frame methods use identical32px tile grids; older saved
 pipelines retain their recorded grids/profiles with differences labeled.
 
+The [V137 conditioned-global pilot](raw-global-conditioning.md) also queues the
+four established512px contexts and corrected extra mesh pair, with saved
+V120/V129/V136 predictions reused. Its training checks pass; actual quality
+and viewing remain pending.
+
 ![Matched V115/V120 building, fence and neon](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-1.png)
 
 ![Matched V115/V120 foliage, platform and sky](images/v120-v121-fixed-Haar-GFX-v1/V115-V120-fixed-Haar-matched-gfx-2.png)

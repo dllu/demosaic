@@ -176,7 +176,7 @@ def analyze(path):
                 "no_resize": True,
             }
         )
-    assert len(decomposition) == 96 and len(images) == 4
+    assert len(decomposition) == 16 * len(policy["methods"]) * 2 and len(images) == 4
     save(
         out / "result-v1.json",
         {

@@ -311,6 +311,7 @@ class PretrainedRgbDemosaic(nn.Module):
         raw_frequency_features=False,
         raw_spatial_features=False,
         raw_global_features=False,
+        raw_global_conditioning="legacy-v1",
     ):
         super().__init__()
         if raw_directional_bank_context and not raw_directional_residual:
@@ -381,6 +382,13 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError(
                 "RAW spatial features require native anchored RGB without other RAW heads"
             )
+        if type(raw_global_conditioning) is not str or raw_global_conditioning not in (
+            "legacy-v1",
+            "cosine-rms-v2",
+        ):
+            raise ValueError("Unknown RAW global conditioning mode")
+        if raw_global_conditioning != "legacy-v1" and not raw_global_features:
+            raise ValueError("RAW global conditioning requires global features")
         if raw_global_features and (
             not stabilized
             or not physical_anchors
@@ -448,9 +456,14 @@ class PretrainedRgbDemosaic(nn.Module):
 
             self.raw_spatial = RawSpatialFeatures()
         if raw_global_features:
-            from .raw_global_features import RawGlobalFeatures
+            if raw_global_conditioning == "cosine-rms-v2":
+                from .raw_global_conditioned_features import ConditionedRawGlobalFeatures
 
-            self.raw_global = RawGlobalFeatures()
+                self.raw_global = ConditionedRawGlobalFeatures()
+            else:
+                from .raw_global_features import RawGlobalFeatures
+
+                self.raw_global = RawGlobalFeatures()
         if raw_spectral_residual:
             from .raw_spectral import RawSpectralResidual
 

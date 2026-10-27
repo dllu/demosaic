@@ -172,6 +172,7 @@ def worker(path, phase, arm):
     assert parent["step"] == 20000 and len(parent["ema"]) == 91
     counts, domains = Counter(), Counter()
     initials, inputs, gradients = [], [], {}
+    gradient_steps, global_gradient_snapshots = [], []
     global_initial_offsets = []
     captured, current, preserved_state = {}, "fresh", None
     constructor, batch_factory, optimizer_factory = (
@@ -349,13 +350,22 @@ def worker(path, phase, arm):
         )
 
         def before_step(*args):
-            if phase != "train" or counts["optimizer_steps"] < 16:
+            step = counts["optimizer_steps"] + 1
+            declared_steps = plan.get("gradient_observation_steps")
+            if phase != "train" or (
+                step <= 16 if declared_steps is None else step in declared_steps
+            ):
+                gradient_steps.append(step)
+                snapshot = {}
                 for name, parameter in model.named_parameters():
                     if parameter.requires_grad:
                         assert parameter.grad is not None and torch.isfinite(parameter.grad).all()
-                        gradients[name] = max(
-                            gradients.get(name, 0.0), float(parameter.grad.abs().max())
-                        )
+                        maximum = float(parameter.grad.abs().max())
+                        gradients[name] = max(gradients.get(name, 0.0), maximum)
+                        if name.startswith("pretrained_rgb.raw_global."):
+                            snapshot[name] = maximum
+                if global_features:
+                    global_gradient_snapshots.append({"step": step, "maxima": snapshot})
 
         result.register_step_pre_hook(before_step)
         result.register_step_post_hook(lambda *args: counts.update(optimizer_steps=1))
@@ -424,6 +434,9 @@ def worker(path, phase, arm):
             ]
             assert len(branch) == 23 and all(v > 0 for v in branch)
         if global_features:
+            assert state["model_config"].get("raw_global_conditioning", "legacy-v1") == config[
+                "model"
+            ].get("raw_global_conditioning", "legacy-v1")
             branch = [v for k, v in gradients.items() if k.startswith("pretrained_rgb.raw_global.")]
             assert len(branch) == 18 and all(v > 0 for v in branch)
             assert len(global_initial_offsets) == 1 and global_initial_offsets[0]["all_zero"]
@@ -471,6 +484,8 @@ def worker(path, phase, arm):
                 "initial_checks": initials,
                 "observed_inputs": inputs,
                 "gradient_maxima": gradients,
+                "gradient_observation_steps": gradient_steps,
+                "global_gradient_snapshots": global_gradient_snapshots,
                 plan.get("rejection_result_key", "changed_shadow_resume_rejections"): rejected,
                 "model_EMA_Adam_finite": True,
                 "source_sha256": state["config"]["source_sha256"],

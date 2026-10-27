@@ -64,6 +64,7 @@ class ModelConfig:
     raw_frequency_features: bool = False
     raw_spatial_features: bool = False
     raw_global_features: bool = False
+    raw_global_conditioning: str = "legacy-v1"
     late_rgb_refinement: str = "none"
     isotropic_groups: int = 6
     isotropic_blocks: int = 8
@@ -425,6 +426,13 @@ class JointDemosaic(nn.Module):
             raise ValueError("RAW spatial features must be a boolean")
         if type(cfg.raw_global_features) is not bool:
             raise ValueError("RAW global features must be a boolean")
+        if type(cfg.raw_global_conditioning) is not str or cfg.raw_global_conditioning not in (
+            "legacy-v1",
+            "cosine-rms-v2",
+        ):
+            raise ValueError("Unknown RAW global conditioning mode")
+        if cfg.raw_global_conditioning != "legacy-v1" and not cfg.raw_global_features:
+            raise ValueError("RAW global conditioning requires global features")
         if cfg.raw_global_features and (
             cfg.restoration_backbone != "pretrained-rgb"
             or not cfg.variance_stabilization
@@ -640,6 +648,7 @@ class JointDemosaic(nn.Module):
                 raw_frequency_features=cfg.raw_frequency_features,
                 raw_spatial_features=cfg.raw_spatial_features,
                 raw_global_features=cfg.raw_global_features,
+                raw_global_conditioning=cfg.raw_global_conditioning,
             )
             if cfg.dino and cfg.dino_feature_fusion == "convnext-pyramid":
                 from .dino_pyramid import DinoPyramidContext

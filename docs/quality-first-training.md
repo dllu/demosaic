@@ -12,6 +12,7 @@ unresolved. [Current choices](current-model.md) · [Completed results](v120-v121
 | [V133 reviewed quota](reviewed-quota-training.md) | Same90,781/29 and20k as V131,5% versus50% reviewed sampling | CPU/CUDA checks pass; early/full reviews queued; trained quality pending |
 | [V134/V135 photo epochs](photo-epoch-training.md) | Cleaned90,778/33, same20k replacement/epoch comparison | Four CPU/CUDA checks pass; production and full reviews queued after V133's automated review |
 | [V136 global RAW attention](v136-global-attention-quality.md) | Same90,782/27 and1k as saved V129; only18,272-parameter branch differs | Complete102-input review: tiny panel-mean gains, mixed local detail, no clear new mesh recovery;38 boards actually viewed and both audits pass. No20k global run queued |
+| [V137 global conditioning](raw-global-conditioning.md) | Same90,782/27,18 tensors and1k as V136; only matching/value normalization changes | CPU/CUDA16+2 checks pass; first outputs match V136 exactly. Fresh1k training runs;102 new quality calls reuse all306 V120/V129/V136 controls. Quality pending |
 
 The spatial trial's live early-review queue uses immutable step1,000 snapshots
 within the original20k workers. Each gets102 retained material/shadow/faint-ADC

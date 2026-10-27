@@ -58,6 +58,13 @@ changes are mixed and no clear new fine-mesh recovery is visible. Native
 triplets, both corrected GFX scenes and independent score/pixel audits are
 published. V120 remains the general recommendation; no20k global run is queued.
 
+The [V137 conditioned global follow-up](raw-global-conditioning.md) finds weak
+query/key adaptation and almost uniform V136 memory matching on six retained
+training contexts. A normalized operator preserves all18 tensors and initial
+values; actual CPU/CUDA16+2 checks and independent saved-artifact checks pass.
+Matched1k training runs with original V136 controls reused. Restoration quality
+is pending; this mechanism study is not a quality improvement claim.
+
 The [V1239k frequency-feature midpoint](v123-midpoint-quality.md) now includes
 16 material predictions and six GFX contexts, reusing47 saved controls. Selected
 PSNR changes are tiny, and fine mesh/foliage remains weak. Its

@@ -219,6 +219,13 @@ triplets are audited pixel subsets, without a separate viewing claim.
 This is a full original1k pilot endpoint, not a20k convergence result or a new
 427-source/camera/color/full-frame benchmark. Global memory depends on the tile;
 seams, complete-frame quality and speed remain unmeasured for this branch.
-No20k global run is queued from this result. Although all18 tensors have nonzero gradients, the retained memory-path maxima are very small: latents1.07e−11 and memory gain2.46e−14, versus1.89e−3 at the output projection. This is an optimization concern, not a measured causal explanation or evidence that global attention cannot help. The primary PSNR history remains56 completed comparable
+No20k global run is queued from this result. Although all18 tensors have nonzero
+gradients, the retained production maxima cover only **updates1–16**:
+latents1.07e−11 and memory gain2.46e−14, versus1.89e−3 at the output projection.
+They do not establish the maximum over all1,000 updates. The separate
+[saved-state/branch audit and V137 follow-up](raw-global-conditioning.md) inspect
+later adaptation and normalized matching. This is an optimization concern,
+not a measured causal quality explanation or evidence that global attention
+cannot help. The primary PSNR history remains56 completed comparable
 endpoints. V124/V125 and the other original trials retain their inputs, budgets
 and owners. Broad RawNIND superiority, state of the art and100MP/10s remain open.
