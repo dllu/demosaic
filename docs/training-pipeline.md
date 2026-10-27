@@ -6,7 +6,7 @@ Commons targets come from the completed, reviewed Quality Images corpus;
 camera-linear targets and registered paired RAW supply complementary supervision.
 [Current model](current-model.md) · [Source review](current-source-loss-review.md).
 
-The newest prepared dataset has 90,780 training photos and 31 reviewed regions.
+The newest prepared dataset has 90,778 training photos and 33 reviewed regions.
 It is reader-verified and untrained. Existing trials retain their frozen inputs:
 
 | Trial | Commons sources / regions | Reviewed fraction within photographs |
@@ -14,7 +14,7 @@ It is reader-verified and untrained. Existing trials retain their frozen inputs:
 | Running [V124/V125 mean-loss comparison](conditional-mean-training.md) |90,784 /20 |5% |
 | Queued [V131/V132 spatial comparison](raw-spatial-training.md) |90,781 /29 |50% |
 | Queued [V133 quota comparison](reviewed-quota-training.md) |90,781 /29 |5% |
-| [Newest prepared future dataset](v124-first-source-review.md) |90,780 /31 |Not a trained recipe |
+| [Newest prepared future dataset](v124-second-source-review.md) |90,778 /33 |Not a trained recipe |
 
 Corpus size is distinct from scheduled source diversity. The
 [full 20k source audit](training-source-schedule-coverage.md) finds that the spatial
@@ -67,12 +67,12 @@ stream preserves untreated source and geometry draws. A fixed ordered
 `photo_sampling_reference_manifest` uses rejection sampling for future exclusions
 without changing unaffected identities. [Implementation](../src/demosaic/photo_sampling.py).
 
-The [31-region future catalogue](../configs/low-contrast-training-rois-cleaned90780-v1.json)
-preserves all 29 prior example objects. It adds subtle plaster and moderate wing
-detail, with descriptive intrinsic contrast and actual attenuated-target views.
-The actual reader visits all 31 regions in its 76-read verification. These checks
+The [33-region future catalogue](../configs/low-contrast-training-rois-cleaned90778-v1.json)
+preserves all 31 prior example objects. It adds fine dragonfly-wing mesh and
+subtle pitted stone, with native views and descriptive local contrast. The actual
+reader visits all 33 regions in its 80-read verification. These checks
 prove executable data binding, not improved model quality or uniformly pristine
-source texture. [Native examples and limits](v124-first-source-review.md).
+source texture. [Native examples and limits](v124-second-source-review.md).
 
 ## Current recipe sampling and targets
 

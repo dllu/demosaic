@@ -1,94 +1,85 @@
 # Current photographic-source review
 
-**The latest pass retains39 newly inspected sources and withholds one mural-
-dominated real photograph from a separate future cohort.** The review ledger
-contains1,879 unique inspected IDs. Two selected material contexts extend the
-prepared bank to31 regions on90,780 training photos: subtle plaster/facade detail
-and moderate butterfly wing-pattern diversity. Existing training/evaluation
-inputs retain their frozen snapshots. Source cleanup alone does not prove
-model-quality gains or certify every remaining photo pristine.
+**The prepared future dataset contains 90,778 training photos and 33 reviewed
+regions.** The latest actual inspection retains 38 new sources and withholds
+two display/artwork-heavy photographs from that separate future set. Fine
+dragonfly-wing mesh and subtle pitted stone extend the detail bank. The ledger
+contains 1,919 unique inspected IDs. Source cleanup has no measured model-quality
+result and does not certify every retained photo pristine.
 
-[Latest actual inspection and native views](v124-first-source-review.md) ·
-[All40 decisions/credits](results/v124-first-source-decisions-v1.csv) ·
-[Trace, independent pixel audit and actual reader proof](results/v124-first-source-review-v1.json).
+[Latest native inspection](v124-second-source-review.md) ·
+[All 40 decisions and credits](results/v124-second-source-decisions-v1.csv) ·
+[Selection, pixel audit and reader evidence](results/v124-second-source-review-v1.json).
 
-## Current data snapshots
+## Data currently used and prepared
 
 | Use | Commons train sources / reviewed regions | State |
 | --- | --- | --- |
-| V122/V123 frequency comparison |90,786 /14 | Both20k and numerical/selected native review complete; small weak-detail changes and joint-arm ADC tail |
-| V124/V125 mean-loss comparison |90,784 /20 | V124 control training, V125 follows; original inputs fixed |
-| Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k; complete native review |
-| V129 data pilot / V130 precision trial |90,782 /27 | Both1k reviews complete; small mixed precision/detail changes |
-| V131/V132 spatial trial |90,781 /29 | Four CPU/CUDA checks complete; full20k production and early progress review queued; quality unmeasured |
-| V133 quota trial |90,781 /29 | Both CPU/CUDA16+2 checks complete;5% quota against original V13150% control; full20k and progress review queued |
-| New prepared future cohort |90,780 /31 | Actual reader visits all31 regions; no production training or measured quality result |
+| V122/V123 frequency comparison | 90,786 / 14 | Both 20k reviews complete; small weak-detail changes and a worse joint-arm ADC tail |
+| V124/V125 mean-loss comparison | 90,784 / 20 | V124 control training; V125 follows on fixed original inputs |
+| Completed V126–V128 pilots | 90,783 / 23 | Shadow/feature terms show no useful gain at 1k |
+| V129 data / V130 precision pilots | 90,782 / 27 | Both 1k reviews complete; small mixed detail changes |
+| V131/V132 spatial trial | 90,781 / 29 | CPU/CUDA checks pass; full 20k and progress reviews queued; quality unmeasured |
+| V133 quota trial | 90,781 / 29 | CPU/CUDA checks pass; 5% quota against original V131 50% control; full/progress reviews queued |
+| New prepared future cohort | **90,778 / 33** | Actual reader visits all 33 regions; untrained |
 
-[Mean-loss trial](conditional-mean-training.md) ·
-[Spatial trial and progress review](raw-spatial-training.md) ·
-[Completed FP32 comparison](training-precision-pilot.md).
+[Mean-loss trial](conditional-mean-training.md) · [Spatial trial](raw-spatial-training.md) ·
+[Quota trial](reviewed-quota-training.md) · [FP32 pilot](training-precision-pilot.md).
 
-The [full20k source-schedule audit](training-source-schedule-coverage.md)
-separately measures visitation: the spatial trial's50% reviewed quota visits
-46.36% of its available photos; the same seed/cohort at5% would visit69.26%.
-Catalogue expansion and corpus size alone do not establish training diversity
-or quality. The counterfactual is metadata only; current recipes remain fixed.
-The separate [V133 quota trial](reviewed-quota-training.md) now has both device
-checks complete and a102-input progress review queued; it reuses the original
-V131 cohort/control while leaving the newest90780/31 data prepared and untrained.
+The [full source-schedule audit](training-source-schedule-coverage.md) distinguishes
+available photos from actual visitation: the spatial trial's 50% reviewed quota
+visits 46.36% of its photos in 20k updates; the same seed/cohort at 5% would visit
+69.26%. That counterfactual is metadata only. The separate V133 trial measures
+the quota change against the original V131 control. Its current data stay fixed.
 
-The [31-region catalogue](../configs/low-contrast-training-rois-cleaned90780-v1.json)
-preserves all29 preceding example objects. The new manifest removes exactly one
-training row from90,781 and retains every other line's bytes/order; validation/
-test remain2,303/2,255. Neither it nor its new regions replace an active or queued
-trial's inputs. Private GFX pairs, camera JPEGs and siblings remain outside training.
+The [33-region catalogue](../configs/low-contrast-training-rois-cleaned90778-v1.json)
+preserves all 31 preceding example objects. The latest manifest removes exactly
+two rows from the preceding 90,780-photo future set, preserving remaining line
+bytes/order and validation/test counts of 2,303/2,255. Earlier
+[plaster and butterfly additions](v124-first-source-review.md) remain available.
+Neither new membership nor new annotations replace active or queued inputs.
 
-## Current inspection and detail support
+## Latest inspection and detail support
 
-An immutable V124 trace prefix through5,600 contains368 draws from23 Commons
-batches:271 photographic draws/266 IDs. Deduplication against the1,839-ID prior
-ledger leaves203 draws/202 IDs. Eight distinct high-loss sources per noise group
-plus eight remaining high-gradient sources receive native inspection. Scores
-nominate inspection; evolving weights, noise/exposure and camera transforms
-confound loss. Only the first noise view is traced; scored augmentation/noise
-is not regenerated.
+An immutable V124 trace prefix through the 11,200-step boundary ends at its last
+traced Commons batch, 11,100. In the new 5,600 < step ≤ 11,200 window, 247
+photographic draws leave 218 draws/217 IDs after review deduplication. Eight
+highest-loss distinct sources per noise group and eight remaining high-gradient
+sources nominate 40 actual inspections. Only the first noise view is traced;
+evolving weights, exposure, camera transforms and noise confound scores.
 
-Actually viewed: seven sheets,40 thumbnails,80 native256 source/target cells,
-eight native1024 follow-ups and11 distinct native512/local64 proposal boards.
-The withheld frame is real photography of a flat graffiti mural dominating the
-frame. Three-dimensional sculpture and painted signs within larger physical
-scenes remain ordinary photographic data. Native grain, distant softness and
-background bokeh are recorded explicitly. Crunchy fern/rock source texture
-remains uncertain, but its coherent area8 target is retained without a pristine
-fine-detail annotation. [Native examples and all decisions](v124-first-source-review.md).
+Actual viewing covers seven sheets, 40 thumbnails, 80 native256 source/target
+cells, ten native1024 follow-ups and six native512/local64 proposal boards.
+The withheld frames are real photographs dominated by emissive display media
+or decorative tile artwork. Physical sculptures, a fossil and a photographed
+scale-model car remain ordinary data. Natural bokeh/panning blur, distant
+softness, native grain and uncertain processing are recorded rather than
+automatically turned into exclusions. Originals/caches remain intact.
 
-The new plaster annotation has5/16 fine-band blocks below2% contrast and6/16
-below5%, with stronger window/foliage edges. The wing is moderate fine-pattern
-diversity, with1/16 below5% and12/16 at5–10%; neither full context is uniformly
-weak. Other inspected candidates remain ordinary photos. Intrinsic source
-contrast is distinct from the existing photographic attenuation: two saved
-actual256px reader draws have169/256 and223/256 valid blocks below5% respectively.
-These are particular draws, not whole-training or corpus coverage estimates.
+The selected wing local64 has four of 16 fine-band blocks below 5% contrast and
+nine at 5–10%; revised pitted stone has 14 below 5%. The reader uses full contexts
+that also contain stronger edges. Its two saved native256 draws have 57/256 and
+82/256 valid blocks below 5%, without attenuation on those particular draws.
+The configured photographic attenuation probability remains 25%. Local source
+contrast, actual augmented-target contrast and corpus-wide coverage are different
+quantities. [Images, definitions and limits](v124-second-source-review.md).
 
-## Admission and executable verification
+## Executable verification
 
-Inspect original and binned pixels before excluding a source. High loss,
-art/text titles, low contrast, grain or a defocused background are not automatic
-rejection rules. Keep originals intact; exclusions affect separate future manifests.
+Independent heap ranking reproduces all 40 nominations. Original/cache hashes,
+native cells, sheets, large follow-ups and proposal pixels are checked; UINT32
+binning/FP64 display agrees within 1 DN8. Mirrored-FFT DCT reproduces 96 local
+annotation blocks and 512 saved-reader blocks.
 
-Independent heap ranking reproduces all40 nominations. Native/source/sheet/large/
-proposal pixels are checked; independent UINT32 binning/FP64 display agrees
-within1DN8. Mirrored-FFT DCT reproduces144 annotation blocks. Actual
-`CleanDataset` checks visit all31 regions, compare29 common regions at fixed
-identity/index and four ordinary/four procedural controls:7,274,496 common FP32
-values match over76 clean reads. Separate inspection of two saved attenuated
-targets verifies their block counts and native display without another draw.
-No neural/noise/RAW/optimizer work occurs; global RNG is unchanged and CUDA
-stays uninitialized.
+Actual `CleanDataset` checks visit all 33 regions over 80 reads and match
+7,667,712 common FP32 values across 31 fixed-identity regions and four ordinary/
+four procedural controls. Global RNG remains unchanged, CUDA stays uninitialized
+and no neural/noise/RAW/optimizer work occurs. Preparation uses bin4 → geometry
+→ final area2, zero optical PSFs, corrected paired32 and native128 catalogues.
+[Training pipeline](training-pipeline.md).
 
-Preparation uses bin4 → geometry → final area2, zero optical PSFs, corrected
-paired32 and native128 catalogues. [Training pipeline](training-pipeline.md).
-The1,879-ID ledger supports review deduplication; it is not an exclusion list or
-a uniform corpus audit. Historical decisions remain in the
-[local-time diary](../diary/2026-10-27-08-27-35-v124-first-source-curation.md);
-original catalogues, traces and machine receipts retain their bytes.
+The ledger supports deduplication, not exclusions or uniform corpus coverage.
+Historical snapshots, source traces, failed preparation evidence and receipts
+retain their bytes; the [local-time diary](../diary/2026-10-27-10-50-28-v124-second-source-curation.md)
+preserves the prior current guide. Both GFX pairs, camera JPEGs and siblings
+remain outside training.

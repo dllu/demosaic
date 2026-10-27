@@ -17,8 +17,8 @@ mottling still need work. [Current choices](docs/current-model.md) ·
 [GFX gallery](docs/gfx-qualitative.md) · [Camera comparisons](docs/native-camera-development.md).
 
 Training uses geometry before final downsampling and zero optical blur. The
-[latest source review](docs/v124-first-source-review.md) prepares90,780 photos/
-31 regions, including subtle plaster and wing detail. Existing jobs retain
+[latest source review](docs/v124-second-source-review.md) prepares 90,778 photos/
+33 regions, adding fine wing mesh and subtle pitted stone. Existing jobs retain
 their declared data. [Data pipeline](docs/training-pipeline.md).
 
 | Current quality work | Evidence and next comparison |
