@@ -49,8 +49,9 @@ restoration path on the same cleaned corpus. A
 gain on retained materials and both GFX scenes; full endpoint results remain pending.
 V123's [bounded continuation completed20k](docs/v123-memory-guard-recovery.md),
 preserving all12,249 prefix updates and adding exactly7,751. Full endpoint
-evaluation is running after a zero-forward checkpoint-identity repair; dependent
-reviews reuse completed checks and saved controls.
+inference, independent primary audit and saved-output comparisons are complete
+after the zero-forward identity repair. Remaining native comparison and extra-mesh
+review is in progress; dependent trials reuse completed checks and saved controls.
 [V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
 the cleaned90,784-source/twenty-region corpus after that review chain.
 The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.md)

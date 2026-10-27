@@ -1,10 +1,11 @@
 # V123 completed saved-state continuation
 
-**V123 completed its original20,000 updates, and V122/V123 endpoint predictions
-are collecting.** The saved12,249-update prefix was retained exactly; the
+**V123 completed its original20,000 updates. V122/V123 endpoint inference,
+independent primary audit and saved-output comparisons are complete.** The saved12,249-update prefix was retained exactly; the
 continuation performed only7,751 more updates. All96 model/EMA tensors and94
-AdamW states are finite at20,000. Image quality remains unmeasured;
-V120 remains the general recommendation.
+AdamW states are finite at20,000. Remaining native comparisons and extra-mesh
+review are in progress; V120 remains the general recommendation.
+[Current status and actual viewing](results/v122-v123-endpoint-review-status-v1.json).
 
 [Completed training/final-state verification](results/v123-frequency-training-complete-v1.json) ·
 [Quality-identity repair and current owners](results/v123-frequency-quality-identity-repair-v1.json) ·
@@ -46,8 +47,10 @@ still requires exact EMA keys/values and the official encoder identity.
 All frozen inference mathematics, inputs, checkpoints and stage counts remain
 unchanged. The original first photo worker's12h absolute deadline is retained.
 
-The corrected evaluator has progressed past loading and is writing new V122/V123
-predictions. Nine downstream controllers have new exact owner/plan bindings;
+The corrected evaluator, independent primary audit and saved comparisons have
+completed. Four exact-GT primary triplets and twelve full-frame GFX native
+triplets were actually viewed. Remaining comparative native boards and extra
+DSCF3842/DSCF3835 mesh are still being reviewed. Nine downstream controllers have new exact owner/plan bindings;
 all retain their original absolute dependency deadlines. V124/V125 reuse all
 four completed16+2 CPU/CUDA checks and their original20k production budgets.
 They wait for the original quality/audit/comparison/mesh chain; no production

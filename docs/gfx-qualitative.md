@@ -105,7 +105,8 @@ Fine foliage remains soft, with no clear large recovery gain.
 
 Both extra [DSCF3842/3835 mesh regions](gfx-green-mesh.md#v123-at-9000-updates)
 also remain weak under both fixed profiles. V123's original20k run is complete;
-full endpoint review is collecting. The current recommendation stays V120.
+full endpoint inference and primary audit are complete, with remaining native
+comparisons and extra-mesh review in progress. The current recommendation stays V120.
 
 ## Tiny/Small alternatives
 

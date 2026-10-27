@@ -136,8 +136,9 @@ The completed48-call [faint ADC comparison](faint-adc-precision.md) shows V130's
 slightly stronger gain and lower relative error in selected weak fur, grass and
 wood strata against V129. Global faint-target sRGB PSNR falls0.01720dB and native
 changes are subtle. Normal and fixed40× display comparisons are published.
-V123 has completed its original20k updates and its [full quality review](v123-memory-guard-recovery.md)
-is collecting after a zero-forward checkpoint-identity repair.
+V123 has completed its original20k updates. Its [full endpoint review](v123-memory-guard-recovery.md)
+has completed inference, independent primary audit and saved-output comparisons;
+remaining native comparison and extra-mesh review is in progress.
 
 The [independent-noise diagnostic](conditional-noise-response.md) separates
 persistent error from output variance on four fixed targets. Faint fur/wood

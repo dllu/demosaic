@@ -1,7 +1,9 @@
 # Learned RAW frequency features: V122/V123 training
 
-**Both V122 and V123 completed their original20,000 updates; full endpoint
-predictions are collecting.** V123's [exact saved-state continuation](v123-memory-guard-recovery.md)
+**Both V122 and V123 completed their original20,000 updates, full endpoint
+inference and independent primary audit.** Saved-output comparisons are also
+complete; remaining native comparisons and extra-mesh review are in progress.
+[Current review status and actual viewing](results/v122-v123-endpoint-review-status-v1.json). V123's [exact saved-state continuation](v123-memory-guard-recovery.md)
 retained12,249 updates and performed only7,751 more within the original deadline.
 Its96 model/EMA tensors and94 Adam states are finite at20k. A legacy91-tensor
 assertion stopped the first photo collector before any neural forward; explicit
@@ -14,8 +16,8 @@ These are the first full-budget trials of the [learned frequency input adapter](
 All four discarded CPU/CUDA checks passed. A
 [V1239k midpoint review](v123-midpoint-quality.md) now measures16 retained
 material observations and six GFX contexts, with reused controls and native
-triplets. It shows no clear detail-recovery gain. Full endpoint PSNR and native
-review remain pending. V120 remains the current general recommendation;
+triplets. It shows no clear detail-recovery gain. Full endpoint scoring is audited; remaining native comparison
+review is in progress. V120 remains the current general recommendation;
 V114, V115 and V117 retain their documented uses.
 
 [Original V122 completion receipt](results/v122-frequency-training-complete-v1.json) ·
@@ -27,7 +29,7 @@ training forwards and optimizer updates, plus640 validation forwards and20,640
 encoder calls. Domains match the prospectively declared9,900 Commons/procedural,4,979
 paired/5,121 native batches. The CPU verification constructs no model, adds no
 forwards and leaves CUDA uninitialized; it does not reconstruct every training
-input or establish image quality. The corrected evaluator is collecting both full runs.
+input or establish image quality. The corrected evaluator and primary audit have completed both full runs.
 
 [Completed V123 training and final-state verification](results/v123-frequency-training-complete-v1.json) ·
 [Zero-forward identity repair and current dependent owners](results/v123-frequency-quality-identity-repair-v1.json).
