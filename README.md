@@ -59,10 +59,12 @@ and both train-scene comparisons are published. The shadow policy stays off by d
 The [completed V128 feature-loss pilot](docs/v128-feature-pilot-quality.md) also
 shows no useful gain. The [completed V129 curated-data pilot](docs/reviewed-detail-training-pilot.md)
 also shows no useful visible recovery at1k; its native material/GFX crops are published.
-An [audited gradient probe](docs/training-precision-gradients.md) motivates the
-[V130 matched FP32 training trial](docs/training-precision-pilot.md), using V129's
-saved BF16 control. Its [faint ADC panel](docs/faint-adc-precision.md) has completed
-V120/V129 controls and shows small mixed fur/grass changes; V130 quality is pending.
+The [completed V130 matched FP32 trial](docs/training-precision-pilot.md) slightly
+improves selected weak fur/grass/wood bands on its [faint ADC panel](docs/faint-adc-precision.md)
+against saved V129 BF16, with a0.01720dB lower panel mean. Ordinary/shadow changes
+are tiny; native comparisons show no clear large noisy-detail or fine-mesh recovery.
+The report includes native100% triplets and both GFX pairs, with **DSCF3835** as
+the extra mesh's ISO100 reference. V120 remains the general recommendation.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

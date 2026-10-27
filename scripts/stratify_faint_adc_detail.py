@@ -58,6 +58,8 @@ def analyze(path, labels):
     plan = read(path)
     guard(plan)
     root = Path(plan["root"])
+    if not labels or len(set(labels)) != len(labels) or not set(labels) <= set(plan["methods"]):
+        raise ValueError("Declare distinct methods from this fixed faint-ADC plan")
     destination = root / ("source-strata-" + "-".join(labels) + "-v1")
     destination.mkdir(exist_ok=False)
     collections, bindings = {}, {}
@@ -177,8 +179,19 @@ def analyze(path, labels):
         "new_neural_forwards": 0,
         "new_noise_observations": 0,
         "RAW_decodes": 0,
-        "scope": "Descriptive original-target detail strata, defined by existing DCT16/luminance/gamut/RMS rules before the.025 contrast transform. Identical target-only masks across all methods/CFAs; no output-based mask or inference fitting. Derived after V120/V129 outputs and before V130 outputs, not an independent photographic validation or predeclared significance study.",
+        "scope": "Descriptive original-target detail strata, defined by existing DCT16/luminance/gamut/RMS rules before the.025 contrast transform. Identical target-only masks across all methods/CFAs; no output-based mask or inference fitting. Not an independent photographic validation or predeclared significance study.",
     }
+    if "V130" in labels:
+        prior = root / "source-strata-V120-V129-v1/result.json"
+        original = read(prior)
+        assert original["plan"] == ref(path)
+        assert all(original["collections"][label] == bindings[label] for label in ("V120", "V129"))
+        result["pre_V130_control_stratification"] = ref(prior)
+        result["scope"] += (
+            " Original reference strata and V120/V129 measurements were published before V130 predictions; this reduction adds only the new V130 endpoint to the same masks."
+        )
+    else:
+        result["scope"] += " Derived after V120/V129 outputs and before V130 outputs."
     save(destination / "result.json", result)
     print(
         {

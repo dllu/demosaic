@@ -126,13 +126,16 @@ all28 native boards, including both GFX pairs, are complete. The feature term
 stays off by default. The [completed V129 curated27-region pilot](reviewed-detail-training-pilot.md)
 also shows no useful visible recovery at1k, with+.00093dB ordinary/+.00042dB shadow
 sRGB changes versus V126. All28 native boards are reviewed. The
-[audited precision-gradient diagnostic](training-precision-gradients.md) motivates
-[V130 matched FP32 training](training-precision-pilot.md) against saved V129 BF16;
-quality is unmeasured. V120 remains the general recommendation.
+[audited precision-gradient diagnostic](training-precision-gradients.md) led to
+the [completed V130 matched FP32 trial](training-precision-pilot.md) against saved
+V129 BF16. Ordinary/shadow sRGB changes are+0.00009/+0.00055dB; all28 native
+boards show no clear large noisy-detail or real-mesh recovery. V120 remains the
+general recommendation.
 
-The separate [faint ADC comparison](faint-adc-precision.md) shows V129's stronger
-selected-fur response with mixed band errors and weaker grass response. Native
-and fixed40× display comparisons are published; V130 predictions remain pending.
+The completed48-call [faint ADC comparison](faint-adc-precision.md) shows V130's
+slightly stronger gain and lower relative error in selected weak fur, grass and
+wood strata against V129. Global faint-target sRGB PSNR falls0.01720dB and native
+changes are subtle. Normal and fixed40× display comparisons are published.
 V123 has completed its original20k updates and its [full quality review](v123-memory-guard-recovery.md)
 is collecting after a zero-forward checkpoint-identity repair.
 

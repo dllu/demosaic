@@ -1,115 +1,116 @@
 # Faint photographic detail at the ADC floor
 
-**V120 and V129 retain substantial detail in a new faint ADC-only panel;
-V129's changes are mixed. V130's FP32-trained endpoint is pending.**
-This supplements the [precision-gradient diagnostic](training-precision-gradients.md)
-and [matched training trial](training-precision-pilot.md). The current snapshot
-contains32 of48 declared new predictions. It supplies no FP32-versus-BF16
-trained-quality conclusion.
+**V130's FP32 training slightly improves selected weak fur, grass and wood
+bands against V129's BF16 control.** Gain rises and relative band error falls
+in each selected weakest original-source stratum. Global faint-target sRGB PSNR
+falls0.01720dB, and visible changes are small. All three methods retain
+substantial detail; this supports neither a universal faint-detail precision
+ceiling nor a large high-noise/real-mesh recovery.
+[The matched1,000-update training trial](training-precision-pilot.md) is complete.
+V120 remains the general recommendation.
 
-[Results, input/metric/display audits and checkpoint bindings](results/faint-adc-precision-v1.json) ·
-[Primary four-CFA summaries](results/faint-adc-primary-summaries-v1.csv) ·
-[Original-source detail strata](results/faint-adc-original-source-strata-v1.csv) ·
-[Native image/source/ROI/display metadata](images/faint-adc-precision-v1/manifest.json).
+[Completed48-call result and audits](results/faint-adc-precision-v2.json) ·
+[Primary four-CFA summaries](results/faint-adc-primary-summaries-v2.csv) ·
+[Original-source strata](results/faint-adc-original-source-strata-v2.csv) ·
+[Native image/source/ROI/checkpoint/display metadata](images/faint-adc-precision-v2/manifest.json).
+The earlier [32-call publication](results/faint-adc-precision-v1.json) and its
+images remain unchanged.
 
 ## Fixed test and execution
 
-The four existing bark, raccoon fur, grass and wood contexts receive a new
+Four existing bark, raccoon fur, grass and wood contexts receive a new
 controlled contrast transform: retain each camera channel's whole256×256
-spatial mean and scale deviations by.025. A fixed16-bit ADC, black.03,
-shot=read=0 then samples all four CFAs. There is no spatial interpolation,
-stochastic noise draw or RAW decode. These are deliberately faint processed
-targets, not new real exposures. New observations require16 new V120 baseline
-calls; old primary ADC input hashes did not match reconstruction from stored
-targets, so those older predictions were not adopted.
+spatial mean and scale deviations by0.025. A fixed16-bit ADC, black0.03,
+shot=read=0 samples all four CFAs. No spatial interpolation, stochastic noise
+draw or RAW decode occurs. These deliberately faint processed targets are not
+new real exposures. New observations required16 new V120 baseline calls;
+the older primary ADC inputs did not match reconstruction from stored targets,
+so their predictions were not adopted.
 
-Both completed methods made exactly16 IEEE FP32 root/encoder calls, preserving
-their loaded weights/backbone and RNG. V129's full-model identity matches its
-earlier86-call collection. The four source IDs are absent from all90,782 Commons
-train rows,128 native training records and64 paired cases. The mixed manifest's
-validation rows and native admission protected-ID lists remain excluded from
-those actual training records. Four CFAs from one source are not four independent photos.
+Exactly16 IEEE FP32 root/encoder calls per method completed,48 total, with
+loaded weights, backbone and RNG unchanged. V129/V130 are the matched1k
+endpoints; each full-model identity matches its standard86-call collection.
+The four source IDs are absent from90,782 Commons train rows,128 native
+training records and64 paired cases. Validation rows and protected-ID metadata
+in the mixed manifest are excluded from actual training records. Four CFAs
+from one source are not four independent photographs.
 
-Independent preparation auditing verifies786,432 target values and1,048,576
-ADC samples using long-double rational calculations. Independent mirrored-FFT
-scoring checks32 metric rows/eight groups/200 scalar fields and2,150,400 native
-channels in eight primary PNGs. V130 retains its original1,000-update training
-budget and then receives these same16 inputs; the separate86-call high-noise/GFX
-queue remains unchanged. No automatic retry or inference-budget reset occurs.
+Independent long-double preparation verifies786,432 target values and1,048,576
+ADC samples. Mirrored-FFT scoring checks48 metric rows,12 groups,300 scalar
+fields and2,457,600 native channels across eight primary PNGs. The fixed40×
+display's1,536,000 panel channels independently match exactly. No old inference
+was repeated, and neither training nor standard86-call budgets changed.
 
-## Current results
+## Results and original-source detail
 
-| Source | V120 / V129 sRGB PSNR | V120 / V129 faint-band gain |
+| Source | sRGB PSNR V120 / V129 / V130 | Faint-band gain V120 / V129 / V130 |
 | --- | ---: | ---: |
-| Bark |65.42593 /65.23982 |.99055 /.99212 |
-| Fur |70.64078 /70.64100 |.95585 /.95619 |
-| Grass, approximate native target |66.54368 /66.53548 |.99786 /.97774 |
-| Wood, approximate native target |67.31228 /67.25270 |.97300 /.97383 |
+| Bark |65.42593 /65.23982 /65.25060 |0.99055 /0.99212 /0.99301 |
+| Fur |70.64078 /70.64100 /70.58828 |0.95585 /0.95619 /0.95856 |
+| Grass, approximate native target |66.54368 /66.53548 /66.50143 |0.99786 /0.97774 /0.97966 |
+| Wood, approximate native target |67.31228 /67.25270 /67.25987 |0.97300 /0.97383 /0.97505 |
+| Mean sRGB PSNR |67.48067 /67.41725 /67.40004 |— |
 
-These means describe four faint targets at+0EV. Their high PSNR is not comparable
-to the full427-photo benchmark. All transformed eligible blocks fall below2%
-local band contrast, merging originally strong and weak structures. Projection
-near one does not by itself prove accurate detail: errors orthogonal to the
-target remain.
+These high scores describe four deliberately flat faint targets at+0EV and
+are not comparable to the full427-photo benchmark. All transformed eligible
+blocks fall below2% band contrast, merging originally strong and weak detail.
+Projection near one alone does not establish accuracy: orthogonal errors remain.
+Band metrics use linear-sRGB luminance; the [gradient probe's Q](training-precision-gradients.md)
+uses camera-RGB coefficients and measures a different quantity.
 
-These band metrics use linear-sRGB luminance, as in the retained material
-reports. The training-gradient diagnostic's Q instead uses camera-RGB band
-coefficients; the two diagnostics measure different quantities.
+The **original-target** contrast bins provide a more specific fine-detail view.
+Masks depend only on the reference before the0.025 transform, remain identical
+across methods/CFAs and use the established DCT16 annulus1/8–1/3 cycle/pixel,
+luminance/gamut and RMS rules. This descriptive stratification and V120/V129
+results were published before V130 predictions. The final reduction adds V130
+to those same masks; independently computed FFT coefficients and dot/norm
+reductions check180 rows/45 groups/540 fields, max error6.97e−14.
 
-The existing **original-target** contrast bins provide a more specific fine-detail
-view. Masks depend only on the reference before the.025 transform, remain
-identical across methods/CFAs, and use the established DCT16 annulus1/8–1/3
-cycle/pixel, luminance/gamut and RMS rules. This descriptive stratification was
-derived after V120/V129 predictions and before V130 predictions. Independent
-FFT coefficients and dot/norm reductions verify all360 fields, max5.92e−14 error.
-
-| Original detail region | Blocks | Gain V120 → V129 | Relative band error V120 → V129 |
+| Original detail region | Blocks | Gain V120 → V129 → V130 | Relative band error V120 → V129 → V130 |
 | --- | ---: | ---: | ---: |
-| Fur,0–2% |7 |.85184 →.87003 |.28624 →.28712 |
-| Fur,2–5% |5 |.83387 →.85593 |.31109 →.29770 |
-| Grass,2–5% |3 |.96548 →.94039 |.24896 →.24865 |
-| Wood,2–5% |9 |.88083 →.88079 |.18287 →.18379 |
+| Fur,0–2% |7 |0.85184 →0.87003 →0.87913 |0.28624 →0.28712 →0.28590 |
+| Fur,2–5% |5 |0.83387 →0.85593 →0.86250 |0.31109 →0.29770 →0.29647 |
+| Grass,2–5% |3 |0.96548 →0.94039 →0.94348 |0.24896 →0.24865 →0.24706 |
+| Wood,2–5% |9 |0.88083 →0.88079 →0.88446 |0.18287 →0.18379 →0.18292 |
 
-V129 raises selected faint-fur response, with lower error in the2–5% region;
-the lowest-contrast fur error rises slightly. Grass loses response and wood is
-essentially unchanged. Actual native viewing finds small differences, without
-a clear large recovery. V120 remains the general recommendation. The retained
-ADC response argues against a universal faint-detail ceiling, while leaving
-the noisy-material and real-mesh weaknesses unresolved.
+FP32 recovers part of V129's grass response loss and improves the selected
+fur/wood bands slightly. Wood's relative error remains slightly above V120's;
+grass gain remains below V120's. These are small measured gains on four sources,
+with no claim of statistical independence or broad architectural superiority.
+Actual native viewing finds subtle changes without a large recovery.
 
 ## Native pixels and display
 
-Normal triplets: ADC-only Malvar preview → V129 → exact processed synthetic GT,
+Normal triplets: ADC-only Malvar preview → V130 → exact processed synthetic GT,
 RGGB, central160×160 at48,48,+0EV, common WB/matrix/sRGB, no resizing:
 
-![Faint bark: ADC preview, V129 and exact synthetic target](images/faint-adc-precision-v1/bark-contrast0p025-adc-triplet.png)
+![Faint bark: ADC preview, V130 and exact synthetic target](images/faint-adc-precision-v2/bark-contrast0p025-adc-triplet.png)
 
-![Faint fur: ADC preview, V129 and exact synthetic target](images/faint-adc-precision-v1/raccoon-fur-contrast0p025-adc-triplet.png)
+![Faint fur: ADC preview, V130 and exact synthetic target](images/faint-adc-precision-v2/raccoon-fur-contrast0p025-adc-triplet.png)
 
 The following **display-only40× contrast** makes small differences visible.
 It maps every method to `original camera DC +40×(value−DC)` before the identical
-WB/matrix/sRGB transform,+0EV. The original reference defines a common DC;
+WB/matrix/sRGB transform,+0EV. The original reference supplies a common DC;
 no prediction or inference parameter is fitted. This approximately restores
-the target's original display contrast and also amplifies ADC, demosaicing and
-model errors. Scores above use the unamplified faint targets.
+the target's original display contrast and amplifies model, ADC and demosaicing
+errors. Scores above use the unamplified faint targets.
 
-Columns: ADC Malvar → V120 → V129 → target. Each cell remains native160 pixels:
+Columns: ADC Malvar → V120 → V129 → V130 → target. Cells remain native160 pixels:
 
-![Contrast-enhanced faint bark comparison](images/faint-adc-precision-v1/bark-contrast0p025-adc-contrast40.png)
+![Contrast-enhanced faint bark comparison](images/faint-adc-precision-v2/bark-contrast0p025-adc-contrast40.png)
 
-![Contrast-enhanced faint fur comparison](images/faint-adc-precision-v1/raccoon-fur-contrast0p025-adc-contrast40.png)
+![Contrast-enhanced faint fur comparison](images/faint-adc-precision-v2/raccoon-fur-contrast0p025-adc-contrast40.png)
 
-![Contrast-enhanced faint grass comparison, approximate binned target](images/faint-adc-precision-v1/pixls-5002-fine-contrast0p025-adc-contrast40.png)
+![Contrast-enhanced faint grass comparison, approximate binned target](images/faint-adc-precision-v2/pixls-5002-fine-contrast0p025-adc-contrast40.png)
 
-![Contrast-enhanced faint wood comparison, approximate binned target](images/faint-adc-precision-v1/pixls-1951-field-contrast0p025-adc-contrast40.png)
+![Contrast-enhanced faint wood comparison, approximate binned target](images/faint-adc-precision-v2/pixls-1951-field-contrast0p025-adc-contrast40.png)
 
-All four triplets and four enhanced boards were actually viewed. An independent
-saved-PNG audit verifies all1,228,800 enhanced panel channels exactly. Two Commons
-targets are exact for their processed synthetic operator; the two native-camera
-estimates remain **approximate, not GT**. Bark: Derek Ramsey, CC BY-SA2.5;
-raccoon: Korall, CC BY3.0; public RAW references: CC0. Source links, source/ROI,
-both checkpoint hashes, ADC conditioning and every display parameter are in
-the manifest. The real GFX pairs remain separate qualitative tests.
+All four triplets and four enhanced boards were actually viewed. Commons targets
+are exact for their processed synthetic operator; native-camera estimates
+remain **approximate, not GT**. Bark: Derek Ramsey, CC BY-SA2.5; raccoon: Korall,
+CC BY3.0; public RAW references: CC0. The manifest records source links, ROI,
+all checkpoint hashes, ADC conditioning and display parameters. Both real GFX
+pairs remain separate qualitative tests, including corrected DSCF3842/DSCF3835.
 
-Queue/status:
-`.cache/current-quality-20261023-v1/fp32-faint-adc-quality-v1/run/`.
+Queue/status: `.cache/current-quality-20261023-v1/fp32-faint-adc-quality-v1/run/`.
+[Publication/input continuity verification](results/v130-faint-adc-publication-verification-v1.json).

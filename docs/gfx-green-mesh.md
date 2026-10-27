@@ -28,6 +28,29 @@ V124/V125 are queued after that original chain.
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
+## V130 FP32 training pilot
+
+The [completed matched1,000-update precision trial](training-precision-pilot.md)
+still mostly erases the fine lattice under nominal conditioning. The nearby3879
+profile leaves weak irregular diagonal texture, without a clear improvement
+over V129. Both regions/profiles were actually inspected. Native160px columns:
+noisy → V120 → V129 BF16 → V130 FP32 → independent **DSCF3835 ISO100 reference,
+not GT**. Shared768px contexts, WB/matrix,+4EV and fixed conditioning; no resizing.
+
+![V130 nominal left mesh](images/v130-fp32-pilot-quality-v1/mesh-nominal-fine-green-mesh-left-comparison.png)
+
+![V130 nominal right mesh](images/v130-fp32-pilot-quality-v1/mesh-nominal-fine-green-mesh-right-comparison.png)
+
+![V130 nearby-profile left mesh](images/v130-fp32-pilot-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png)
+
+![V130 nearby-profile right mesh](images/v130-fp32-pilot-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+[Source/ROI/checkpoint/noise/display metadata](images/v130-fp32-pilot-quality-v1/manifest.json).
+The corrected reference is DSCF3835,46 seconds earlier,ISO100 f/5.6; exposure,
+aperture and moving subjects differ. The main DSCF3879/3880 pair remains in use.
+Small measured gains on the separate [faint-ADC panel](faint-adc-precision.md)
+do not visibly resolve this real-capture weakness.
+
 ## V129 curated-data pilot
 
 The [completed1,000-update data pilot](reviewed-detail-training-pilot.md) still
@@ -46,8 +69,8 @@ Shared768px contexts, WB/matrix,+4EV and fixed profile; no pixel resizing.
 ![V129 nearby-profile right mesh](images/v129-data-pilot-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
 
 [Source/ROI/checkpoint/noise/display metadata](images/v129-data-pilot-quality-v1/manifest.json).
-The [FP32 training trial](training-precision-pilot.md) will reuse these saved
-BF16-control predictions. The ISO100 aperture/exposure and moving subjects differ.
+The [completed FP32 training trial](training-precision-pilot.md) reuses these
+saved BF16-control predictions. The ISO100 aperture/exposure and moving subjects differ.
 
 ## V128 feature-loss pilot
 

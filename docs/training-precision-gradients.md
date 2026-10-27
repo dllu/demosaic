@@ -4,12 +4,15 @@
 it motivates a matched training trial, without establishing a quality gain.**
 One faint ADC observation has39.6% relative gradient difference and weaker
 alignment with the selected detail correction in BF16. Most other gradients
-are close in direction. The [V130 trial](training-precision-pilot.md) tests the
-training consequence against the saved V129 BF16 control.
+are close in direction. The [completed V130 trial](training-precision-pilot.md)
+tests the training consequence against the saved V129 BF16 control.
 
-The new [heldout faint-ADC baseline comparison](faint-adc-precision.md) retains
-substantial V120/V129 response, with mixed selected-fur/grass changes. That
-limits a universal precision-ceiling interpretation. V130's trained result is pending.
+The completed [heldout faint-ADC comparison](faint-adc-precision.md) retains
+substantial detail in all three methods. V130 slightly improves selected weak
+fur/grass/wood gain and relative error against V129 while global panel PSNR
+falls0.01720dB. Native changes are subtle and noisy/GFX detail remains weak.
+This limits a universal precision-ceiling interpretation; gradient differences
+did not translate into a large trained recovery after1,000 updates.
 
 ![Fixed-weight V120 precision-gradient diagnostic](results/training-precision-gradients-v1/parameter-gradient-precision.png)
 

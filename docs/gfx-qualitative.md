@@ -23,6 +23,23 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V130 FP32 training pilot
+
+The [completed matched1,000-update trial](training-precision-pilot.md) slightly
+improves selected synthetic faint-ADC bands but shows no clear large real-photo
+recovery. Columns: noisy → V120 → V129 BF16 → V130 FP32 → separate DSCF3880
+ISO100 reference, **not GT**. Native160px cells share512px contexts,+2EV,
+WB/matrix and nominal shot0.00128/read0.0000065536.
+
+![V130 foliage comparison](images/v130-fp32-pilot-quality-v1/main-foliage-comparison.png)
+
+![V130 chain-link comparison](images/v130-fp32-pilot-quality-v1/main-chain-link-fence-comparison.png)
+
+Foliage remains painterly and the larger fence coherent; candidate/control
+differences are subtle. The [extra DSCF3842/DSCF3835 mesh](gfx-green-mesh.md#v130-fp32-training-pilot)
+also remains weak under both profiles. All28 comparison boards were actually
+viewed. [Source/ROI/checkpoint/conditioning/display metadata](images/v130-fp32-pilot-quality-v1/manifest.json).
+
 ## V129 curated-data pilot
 
 The [completed1,000-update data pilot](reviewed-detail-training-pilot.md) shows
@@ -87,8 +104,8 @@ Fine foliage remains soft, with no clear large recovery gain.
 ![V123 midpoint chain-link fence, nominal-profile inputs](images/v123-mid9000-v1/main-chain-link-fence-comparison.png)
 
 Both extra [DSCF3842/3835 mesh regions](gfx-green-mesh.md#v123-at-9000-updates)
-also remain weak under both fixed profiles. The original20k V123 run and
-endpoint review remain pending; the current recommendation stays V120.
+also remain weak under both fixed profiles. V123's original20k run is complete;
+full endpoint review is collecting. The current recommendation stays V120.
 
 ## Tiny/Small alternatives
 

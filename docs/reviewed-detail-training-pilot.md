@@ -13,8 +13,9 @@ longer training run on the curated corpus. V120 remains the general recommendati
 
 The [V128 feature-loss pilot](v128-feature-pilot-quality.md) also found no useful
 gain. V129 retains V120's architecture and reconstruction loss, with the optional
-feature and shadow terms off. The next [precision-only trial](training-precision-pilot.md)
-uses V129 as its saved BF16 control.
+feature and shadow terms off. The completed [precision-only trial](training-precision-pilot.md)
+uses V129 as its saved BF16 control and finds small selected faint-ADC gains,
+without a clear large high-noise/GFX recovery.
 
 The supplementary [faint photographic ADC test](faint-adc-precision.md) finds
 slightly stronger selected-fur response and lower2–5% fur-band error, alongside
