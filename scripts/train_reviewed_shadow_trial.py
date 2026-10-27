@@ -15,17 +15,19 @@ from train_quality_recipes import prepare as prepare_recipes
 FRACTIONS = {"V126": 0.0, "V127": 0.5}
 
 
-def verify_initial_restoration(actual, expected, *, spatial, fresh):
+def verify_initial_restoration(actual, expected, *, spatial, fresh, global_features=False):
     """Check the complete common state and the explicitly declared new branch."""
     import torch
 
-    count = 114 if spatial else 91
+    count = 109 if global_features else (114 if spatial else 91)
     assert len(actual) == count
-    if fresh and spatial:
+    if fresh and (spatial or global_features):
         assert len(expected) == 91 and expected.keys() <= actual.keys()
         extra = actual.keys() - expected.keys()
-        assert len(extra) == 23 and all(k.startswith("pretrained_rgb.raw_spatial.") for k in extra)
-        assert actual["pretrained_rgb.raw_spatial.project.weight"].count_nonzero() == 0
+        prefix = "pretrained_rgb.raw_global." if global_features else "pretrained_rgb.raw_spatial."
+        assert len(extra) == (18 if global_features else 23)
+        assert all(k.startswith(prefix) for k in extra)
+        assert actual[prefix + "project.weight"].count_nonzero() == 0
     else:
         assert actual.keys() == expected.keys()
     assert all(torch.equal(actual[k].cpu(), v) for k, v in expected.items())
@@ -157,7 +159,11 @@ def worker(path, phase, arm):
         )
     config = yaml.safe_load(Path(plan["arms"][arm][phase]).read_text())
     spatial = config["model"].get("raw_spatial_features", False)
-    expected_tensors, expected_states = (114, 112) if spatial else (91, 89)
+    global_features = config["model"].get("raw_global_features", False)
+    assert not (spatial and global_features)
+    expected_tensors, expected_states = (
+        (109, 107) if global_features else ((114, 112) if spatial else (91, 89))
+    )
     declared = plan.get("restoration_tensors_by_arm", {}).get(arm, 91)
     assert expected_tensors == declared
     fractions = plan.get("arm_fractions", FRACTIONS)
@@ -166,6 +172,7 @@ def worker(path, phase, arm):
     assert parent["step"] == 20000 and len(parent["ema"]) == 91
     counts, domains = Counter(), Counter()
     initials, inputs, gradients = [], [], {}
+    global_initial_offsets = []
     captured, current, preserved_state = {}, "fresh", None
     constructor, batch_factory, optimizer_factory = (
         training.JointDemosaic,
@@ -207,7 +214,13 @@ def worker(path, phase, arm):
         def initial(module, args):
             expected = parent["ema"] if current == "fresh" else preserved_state["model"]
             actual = module.restoration_state_dict()
-            verify_initial_restoration(actual, expected, spatial=spatial, fresh=current == "fresh")
+            verify_initial_restoration(
+                actual,
+                expected,
+                spatial=spatial,
+                fresh=current == "fresh",
+                global_features=global_features,
+            )
             assert model_hash(module.context.backbone) == config["expected_dino_sha256"]
             assert all(
                 not p.requires_grad and p.grad is None for p in module.context.backbone.parameters()
@@ -226,7 +239,19 @@ def worker(path, phase, arm):
 
         model.register_forward_pre_hook(before)
         first = model.register_forward_pre_hook(initial)
-        if plan.get("require_equal_initial_outputs", False):
+        if global_features and current == "fresh":
+
+            def initial_offset(module, args, result):
+                assert torch.count_nonzero(result) == 0
+                global_initial_offsets.append(
+                    {"shape": list(result.shape), "values": result.numel(), "all_zero": True}
+                )
+                offset_handle.remove()
+
+            offset_handle = model.pretrained_rgb.raw_global.register_forward_hook(initial_offset)
+        if plan.get("require_equal_initial_outputs", False) or plan.get(
+            "capture_initial_outputs", False
+        ):
 
             def first_output(module, args, result):
                 if current == "fresh" and counts["training_forwards"] == 1:
@@ -234,7 +259,7 @@ def worker(path, phase, arm):
                         f"output_{i}": v.detach().float().cpu().numpy()
                         for i, v in enumerate(result)
                     }
-                    if control_binding:
+                    if control_binding and plan.get("require_equal_initial_outputs", False):
                         assert ref(control["first_outputs"]["path"]) == control["first_outputs"]
                         with np.load(
                             Path(control["first_outputs"]["path"]), allow_pickle=False
@@ -398,6 +423,10 @@ def worker(path, phase, arm):
                 v for k, v in gradients.items() if k.startswith("pretrained_rgb.raw_spatial.")
             ]
             assert len(branch) == 23 and all(v > 0 for v in branch)
+        if global_features:
+            branch = [v for k, v in gradients.items() if k.startswith("pretrained_rgb.raw_global.")]
+            assert len(branch) == 18 and all(v > 0 for v in branch)
+            assert len(global_initial_offsets) == 1 and global_initial_offsets[0]["all_zero"]
         assert (
             counts["training_forwards"]
             == counts["optimizer_steps"]
@@ -452,9 +481,11 @@ def worker(path, phase, arm):
                 "all_AdamW_steps": expected,
                 "optimizer_state_count": expected_states,
                 "model_EMA_tensor_count": expected_tensors,
+                "initial_global_offsets": global_initial_offsets,
                 "matched_control_result": control_binding,
                 "first_outputs": ref(destination / "first-outputs.npz")
                 if plan.get("require_equal_initial_outputs", False)
+                or plan.get("capture_initial_outputs", False)
                 else None,
                 "dino_feature_weight": config.get("dino_feature_weight", 0),
                 "dino_feature_policy": config.get("dino_feature_policy"),

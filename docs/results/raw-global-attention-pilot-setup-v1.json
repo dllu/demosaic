@@ -1,0 +1,249 @@
+{
+  "status": "genuine-CPU-CUDA16-plus2-checks-complete-global1000-production-started",
+  "recorded_local": "2026-10-27T13:30:04.523281-07:00",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/plan.json",
+    "sha256": "eb9cddbd504505c3bf68319ad20d869ef90b7d514aeed98004008e5cbd12c654"
+  },
+  "training_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/launch.json",
+    "sha256": "c243f61d3508b227d502e6a1c01fce0464fefb16412d01891d58eaec8ca8c561"
+  },
+  "quality_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-quality-v1/queue-plan-v1.json",
+    "sha256": "002979788e3ac6139a98a6b65735f12e6c868af61968c97408cc0117d306a738"
+  },
+  "quality_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-quality-v1/launch-v1.json",
+    "sha256": "7fbb099eb2ace2102f1b53d464a9a24187eb67134756c916f9170820bc780f67"
+  },
+  "source_recipe": {
+    "path": "/home/dllu/proj/demosaic/configs/quality-v120-raw-global-pilot-v136.yaml",
+    "sha256": "a7c5a6686c1d4644b632c017cbbf3cbcea9626fcc11b2c6e9bc490d0559fe0e9"
+  },
+  "model_source": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/raw_global_features.py",
+      "sha256": "1bc62a1610a4a09f3a1ccc4bcd77cbe068b0f06071e61d9cb86a7581e05f1b76"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/model.py",
+      "sha256": "d706227ce183c18940c5223867fde0213d9b5ceb73570ffd2593066c49442305"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py",
+      "sha256": "25fe5fd6d255239373a979f82f75d3d15002f2c74ba92f1c14d2589a6a8ed946"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/train.py",
+      "sha256": "78e1db52ad822b502af26998affa4704a43820d0663d1dc733e4b0e6d51ee7b2"
+    }
+  ],
+  "worker_sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/train_global_attention_pilot.py",
+      "sha256": "9ed230f55854f0d698c351db97ce4441d1f6482a0f8f5ca450f33445219327c9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/train_reviewed_shadow_trial.py",
+      "sha256": "d66e830d801c12f03ca9548e2fa5a444d24523324f84ecfad11041f54f91546c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/collect_retained_checkpoint_pilot.py",
+      "sha256": "dc0c589edf6ece2cd1452a57b58d1051c250318d97cb910cff89dfcd5a514640"
+    }
+  ],
+  "CPU_CUDA_checks": {
+    "CPU": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/CPU-V136-result.json",
+        "sha256": "f3555001fe1b2bd4f5e1466bf8c5183ad7fd5d517f8849574fbbd52cc64e5e77"
+      },
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 18,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/work/artifacts/CPU/V136/last.pt",
+        "sha256": "d5dd09d4fdaffb5b2b814eb5326b4f5b8d9920c76911ba2551fc742cdca0a7e4"
+      },
+      "initial_zero_offsets": [
+        {
+          "shape": [
+            1,
+            64,
+            128,
+            128
+          ],
+          "values": 1048576,
+          "all_zero": true
+        }
+      ],
+      "changed_global_resume_rejections": {
+        "disabled": "Resume RAW global features differ; initialize a new run",
+        "nonboolean": "Resume RAW global features differ; initialize a new run"
+      },
+      "CUDA_peak_allocated_bytes": 0,
+      "model_EMA_tensor_count": 109,
+      "optimizer_state_count": 107,
+      "all_observed_inputs_match_saved_control": true
+    },
+    "CUDA": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/CUDA-V136-result.json",
+        "sha256": "ebe20b19e74e21c2129b0213ff22521b3ceed1a8337fcd53eae30bb9ddcf407f"
+      },
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 288,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/work/artifacts/CUDA/V136/last.pt",
+        "sha256": "437beac21fa4f618e4852f4ff6ab3e0d37ebaca6cf25a2db37e4249448e7def5"
+      },
+      "initial_zero_offsets": [
+        {
+          "shape": [
+            16,
+            64,
+            256,
+            256
+          ],
+          "values": 67108864,
+          "all_zero": true
+        }
+      ],
+      "changed_global_resume_rejections": {
+        "disabled": "Resume RAW global features differ; initialize a new run",
+        "nonboolean": "Resume RAW global features differ; initialize a new run"
+      },
+      "CUDA_peak_allocated_bytes": 8497402368,
+      "model_EMA_tensor_count": 109,
+      "optimizer_state_count": 107,
+      "all_observed_inputs_match_saved_control": true
+    }
+  },
+  "independent_audit": {
+    "status": "passed-independent-saved-state-input-and-default-operator-audit",
+    "audit_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-preflight-v1/audit-plan-v1.json",
+      "sha256": "eb567c0a392605d46d4e5e26989107e90190bb2d85a3d6beac642da0b22afff7"
+    },
+    "states": [
+      {
+        "phase": "CPU",
+        "step": 16,
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/CPU-V136-step16.pt",
+          "sha256": "deb63436e5148712eb35b1d78bfc463cbcfbe4c0f66715f37ff590714e0ca145"
+        },
+        "finite_values": 131692023
+      },
+      {
+        "phase": "CPU",
+        "step": 18,
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/work/artifacts/CPU/V136/last.pt",
+          "sha256": "d5dd09d4fdaffb5b2b814eb5326b4f5b8d9920c76911ba2551fc742cdca0a7e4"
+        },
+        "finite_values": 131692023
+      },
+      {
+        "phase": "CUDA",
+        "step": 16,
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/CUDA-V136-step16.pt",
+          "sha256": "1b00ecded4da5629a04cfa451ef294275142b3061c44456b8cdf4a6348a75986"
+        },
+        "finite_values": 131692023
+      },
+      {
+        "phase": "CUDA",
+        "step": 18,
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/work/artifacts/CUDA/V136/last.pt",
+          "sha256": "437beac21fa4f618e4852f4ff6ab3e0d37ebaca6cf25a2db37e4249448e7def5"
+        },
+        "finite_values": 131692023
+      }
+    ],
+    "finite_state_values": 526768092,
+    "exact_prepared_array_values": 162944388,
+    "prepared_batches_per_device": 18,
+    "all18_global_gradient_maxima_positive": true,
+    "changed_mode_resumes_rejected": 4,
+    "zero_initial_offsets_values": 68157440,
+    "default_disabled_operator_AST": [
+      {
+        "current": {
+          "path": "/home/dllu/proj/demosaic/src/demosaic/model.py",
+          "sha256": "d706227ce183c18940c5223867fde0213d9b5ceb73570ffd2593066c49442305"
+        },
+        "prior": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/photo-epoch-training-v1/run/work/src/demosaic/model.py",
+          "sha256": "350dbb3ff98ef73a493f272e9e598df115a14eddc5d706e41915e4e6fc16a202"
+        },
+        "default_disabled_operators_exact": true
+      },
+      {
+        "current": {
+          "path": "/home/dllu/proj/demosaic/src/demosaic/pretrained_rgb.py",
+          "sha256": "25fe5fd6d255239373a979f82f75d3d15002f2c74ba92f1c14d2589a6a8ed946"
+        },
+        "prior": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/photo-epoch-training-v1/run/work/src/demosaic/pretrained_rgb.py",
+          "sha256": "47a3a2ad150f96ff7a3225069b3a8acd7e27b1c054df1124821e3135774a2f1e"
+        },
+        "default_disabled_operators_exact": true
+      }
+    ],
+    "neural_calls": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "optimizer_updates": 0,
+    "CUDA_initialized": false,
+    "scope": "Genuine discarded16+2 states and exact first18 data support on both devices; not final1000 quality, convergence, portable inference or speed proof."
+  },
+  "independent_audit_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-preflight-v1/result-v1.json",
+    "sha256": "2033b6bb7f9fc25eeafd6b43f451fcefab4eba9fa0fef48a7934924e145af8ac"
+  },
+  "new_branch_parameters": 18272,
+  "new_branch_tensors": 18,
+  "model_EMA_tensors": 109,
+  "Adam_states": 107,
+  "new_actual_discarded_training_updates": 36,
+  "new_actual_discarded_root_encoder_calls": 36,
+  "new_actual_discarded_target_contexts": 306,
+  "planned_production_training_updates": 1000,
+  "planned_production_validation_calls": 64,
+  "planned_production_root_encoder_calls": 1064,
+  "planned_quality_root_encoder_calls": 102,
+  "new_control_root_calls": 0,
+  "planned_training_target_contexts_excluding_validation": 16306,
+  "quality_controls": "All exact V120/V129 controls reused on102 distinct five-tensor inputs; no old inference replay.",
+  "training_current_owner_at_preparation": {
+    "pid": 2692491,
+    "created": 1793132637.43
+  },
+  "quality_current_status_at_preparation": "waiting-for-original-global1000-training",
+  "tests": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-preflight-v1/public-tests-v1.log",
+    "sha256": "bafa627f89efd38411548d81d6a06c2ab6df5423f8c1b9191954be73c92306aa"
+  },
+  "tests_passed": 93,
+  "research_context": {
+    "ATD": "https://arxiv.org/abs/2603.02581",
+    "official_repository": "https://github.com/CVL-UESTC/Adaptive-Token-Dictionary",
+    "relationship": "Independent two-pass RAW global-summary feature branch motivated by dictionary/global attention; no imported code or weights and no ATD reproduction claim."
+  },
+  "scope": "CPU/CUDA implementation/state/data checks complete; original1000 pilot running, followed by one102-input retained-output review. Training matches saved V129 seed70/90782/27/.5quota, not newer34-region future preparation. Existing22 controllers/old budgets and current V120 recommendation stay fixed. This is no trained-quality, full20k/full427/camera/color/frame or speed claim."
+}

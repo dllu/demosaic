@@ -44,6 +44,7 @@ from .photo_epoch_order import bind_photo_epoch_order, require_resume_photo_epoc
 from .photo_sampling import require_resume_photo_sampling
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
+from .raw_global_features import require_resume_global_features
 from .reviewed_rois import require_resume_rois, validate_roi_fraction
 from .safety import writable_path
 from .shadow_exposure import (
@@ -709,6 +710,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
+        require_resume_global_features(resume_state["config"], config)
         require_resume_photo_epoch_order(resume_state["config"], config)
         require_resume_features(resume_state["config"], config)
         require_resume_noise_pairs(resume_state["config"], config)
@@ -786,6 +788,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             + (("pretrained_rgb.raw_spectral.",) if model.config.raw_spectral_residual else ())
             + (("pretrained_rgb.raw_frequency.",) if model.config.raw_frequency_features else ())
             + (("pretrained_rgb.raw_spatial.",) if model.config.raw_spatial_features else ())
+            + (("pretrained_rgb.raw_global.",) if model.config.raw_global_features else ())
             + (
                 ("pretrained_rgb.rgb_refinement.",)
                 if model.config.late_rgb_refinement != "none"

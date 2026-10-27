@@ -115,6 +115,11 @@ def collect(path):
                 and getattr(model.config, "raw_spatial_features", False)
                 is not plan["raw_spatial_features"]
             )
+            or (
+                "raw_global_features" in plan
+                and getattr(model.config, "raw_global_features", False)
+                is not plan["raw_global_features"]
+            )
         ):
             raise ValueError("Loaded checkpoint identity or frequency-adapter setting differs")
         actual = model.restoration_state_dict()

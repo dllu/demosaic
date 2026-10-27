@@ -310,6 +310,7 @@ class PretrainedRgbDemosaic(nn.Module):
         raw_spectral_residual=False,
         raw_frequency_features=False,
         raw_spatial_features=False,
+        raw_global_features=False,
     ):
         super().__init__()
         if raw_directional_bank_context and not raw_directional_residual:
@@ -380,6 +381,20 @@ class PretrainedRgbDemosaic(nn.Module):
             raise ValueError(
                 "RAW spatial features require native anchored RGB without other RAW heads"
             )
+        if raw_global_features and (
+            not stabilized
+            or not physical_anchors
+            or processing_scale != 1
+            or raw_kernel
+            or raw_directional_residual
+            or raw_spectral_residual
+            or raw_frequency_features
+            or raw_spatial_features
+            or adc_projection
+        ):
+            raise ValueError(
+                "RAW global features require native anchored RGB without other RAW heads"
+            )
         self.network = RgbRestorationTrunk(
             hidden_autocast=hidden_autocast, middle_skip_fp32=middle_skip_fp32
         )
@@ -422,6 +437,7 @@ class PretrainedRgbDemosaic(nn.Module):
         self.raw_spectral = None
         self.raw_frequency = None
         self.raw_spatial = None
+        self.raw_global = None
         self.rgb_refinement = None
         if raw_frequency_features:
             from .raw_frequency_features import RawFrequencyFeatures
@@ -431,6 +447,10 @@ class PretrainedRgbDemosaic(nn.Module):
             from .raw_spatial_features import RawSpatialFeatures
 
             self.raw_spatial = RawSpatialFeatures()
+        if raw_global_features:
+            from .raw_global_features import RawGlobalFeatures
+
+            self.raw_global = RawGlobalFeatures()
         if raw_spectral_residual:
             from .raw_spectral import RawSpectralResidual
 
@@ -723,6 +743,9 @@ class PretrainedRgbDemosaic(nn.Module):
                 if self.raw_spatial is not None:
                     spatial_offset = self.raw_spatial(packed, variance, colors, span)
                     head_offset = head_offset + F.pad(spatial_offset, pad, mode="replicate")
+                if self.raw_global is not None:
+                    global_offset = self.raw_global(packed, variance, colors, span)
+                    head_offset = head_offset + F.pad(global_offset, pad, mode="replicate")
             middle_offset, encoder_kwargs = None, {}
             late_features = None
             if context is not None:

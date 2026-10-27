@@ -11,6 +11,7 @@ unresolved. [Current choices](current-model.md) · [Completed results](v120-v121
 | [V131/V132 spatial attention](raw-spatial-training.md) |90,781 sources/29 reviewed regions; same V120 parent, seed, inputs, single-view loss and20k schedule; spatial branch off/on | Four CPU/CUDA16+2 checks complete; production waits for V125's admission |
 | [V133 reviewed quota](reviewed-quota-training.md) | Same90,781/29 and20k as V131,5% versus50% reviewed sampling | CPU/CUDA checks pass; early/full reviews queued; trained quality pending |
 | [V134/V135 photo epochs](photo-epoch-training.md) | Cleaned90,778/33, same20k replacement/epoch comparison | Four CPU/CUDA checks pass; production and full reviews queued after V133's automated review |
+| [V136 global RAW attention](raw-global-attention.md) | Same90,782/27 and1k as saved V129; only18,272-parameter branch differs | CPU/CUDA16+2 checks pass; fresh1k training running,102-input native/GFX review queued; quality pending |
 
 The spatial trial's live early-review queue uses immutable step1,000 snapshots
 within the original20k workers. Each gets102 retained material/shadow/faint-ADC
