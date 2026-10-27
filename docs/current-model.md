@@ -136,9 +136,10 @@ The completed48-call [faint ADC comparison](faint-adc-precision.md) shows V130's
 slightly stronger gain and lower relative error in selected weak fur, grass and
 wood strata against V129. Global faint-target sRGB PSNR falls0.01720dB and native
 changes are subtle. Normal and fixed40× display comparisons are published.
-V123 has completed its original20k updates. Its [full endpoint review](v123-memory-guard-recovery.md)
-has completed inference, independent primary audit and saved-output comparisons;
-remaining native comparison and extra-mesh review is in progress.
+The completed [V122/V123 frequency trial](v122-v123-quality.md) raises V123's
+photo mean by0.05493dB against adapter-only V122, with lower unseen-camera mean
+and ADC maximum4190.02DN16. Weak natural-detail gain changes only0.36465→0.36500;
+both real GFX scenes remain soft. Full numerical/selected native review is complete.
 
 The [independent-noise diagnostic](conditional-noise-response.md) separates
 persistent error from output variance on four fixed targets. Faint fur/wood
@@ -147,7 +148,8 @@ is mainly variance-limited. This supports testing a conditional-mean loss,
 without an inference-strength or recommendation change. The multi-observation
 mean is a diagnostic unavailable from one capture.
 [V124/V125 now implement the matched training trial](conditional-mean-training.md)
-on the cleaned90784/twenty-region data; quality is unmeasured.
+on the cleaned90784/twenty-region data. V124's two-noise-view control is now
+training; quality is unmeasured.
 
 At2% contrast/ISO12800, Tiny's eight/sixteen-pixel carrier gains rise to
 .13371/.71335; Small reaches.15217/.68865. Four-pixel structure remains nearly

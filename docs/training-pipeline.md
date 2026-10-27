@@ -3,15 +3,17 @@
 Optional [per-source loss diagnostics](source-loss-diagnostics.md) trace
 high-loss Commons examples to their actual source and crop without an additional
 neural forward. They are disabled by default and enabled in V120–V123 recipes
-and queued V124/V125; V119's frozen run is unchanged.
+and V124/V125; V119's frozen run is unchanged.
 
-The [latest source inspection](v123-source-review-through15800.md) prepares a
-separate90,782-source/27-region cohort, excluding one poster-dominated photo
-and adding inspected fur, feather, thin-fence and timber contexts. All27 pass
-actual reader checks. The previous90,783-source/
+The [latest source inspection](v123-final-source-review.md) prepares a separate
+90,781-source/29-region cohort, withholding one painted-tile-dominated frame
+and adding actual weak petal veins and strong fine mesh. All27 preceding region
+objects remain exact; actual reader checks cover all29. This cohort is untrained.
+The preceding90,782-source/27-region cohort stays fixed for the completed
+[V129/V130 pilots](training-precision-pilot.md). The90,783-source/
 [23-region option](v123-source-review-through9800.md) stays fixed for V126–V128.
 The preceding
-90,784-source/twenty-region snapshot remains frozen for queued
+90,784-source/twenty-region snapshot remains frozen for
 [V124/V125 independent-noise training](conditional-mean-training.md).
 V122/V123 keep90,786/fourteen regions; V120/V121 retain their original inputs.
 No sampling quota, blur policy or active/queued cohort changes from the latest
@@ -33,7 +35,7 @@ preserving material geometry and current camera/noise draws, with old/default
 preparation parity verified on CPU/CUDA. The new
 [completed V126/V127 short pilot](reviewed-shadow-pilot-quality.md) tested it
 from V120 with a shared.5 reviewed-region quota and found no useful gain.
-Shadow exposure stays off by default and in original V122/V123 and queued V124/V125.
+Shadow exposure stays off by default and in the original V122/V123 and V124/V125 recipes.
 
 The [completed V128 feature-loss pilot](v128-feature-pilot-quality.md) reuses completed V126
 as its matched control on90,783 sources/23 regions. It adds a default-off spatial

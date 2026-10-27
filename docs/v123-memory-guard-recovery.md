@@ -1,11 +1,12 @@
 # V123 completed saved-state continuation
 
 **V123 completed its original20,000 updates. V122/V123 endpoint inference,
-independent primary audit and saved-output comparisons are complete.** The saved12,249-update prefix was retained exactly; the
+independent primary audit and selected native comparisons are complete.** The saved12,249-update prefix was retained exactly; the
 continuation performed only7,751 more updates. All96 model/EMA tensors and94
-AdamW states are finite at20,000. Remaining native comparisons and extra-mesh
-review are in progress; V120 remains the general recommendation.
-[Current status and actual viewing](results/v122-v123-endpoint-review-status-v1.json).
+AdamW states are finite at20,000. [Final quality and native review](v122-v123-quality.md)
+find small weak-detail changes and a large ADC color tail; V120 remains the
+general recommendation. Earlier [status snapshot](results/v122-v123-endpoint-review-status-v1.json)
+is preserved as historical evidence.
 
 [Completed training/final-state verification](results/v123-frequency-training-complete-v1.json) ·
 [Quality-identity repair and current owners](results/v123-frequency-quality-identity-repair-v1.json) ·
@@ -49,12 +50,12 @@ unchanged. The original first photo worker's12h absolute deadline is retained.
 
 The corrected evaluator, independent primary audit and saved comparisons have
 completed. Four exact-GT primary triplets and twelve full-frame GFX native
-triplets were actually viewed. Remaining comparative native boards and extra
-DSCF3842/DSCF3835 mesh are still being reviewed. Nine downstream controllers have new exact owner/plan bindings;
+triplets were actually viewed. All19 selected comparative material/GFX/mesh
+boards are also now reviewed. Nine downstream controllers have new exact owner/plan bindings;
 all retain their original absolute dependency deadlines. V124/V125 reuse all
 four completed16+2 CPU/CUDA checks and their original20k production budgets.
-They wait for the original quality/audit/comparison/mesh chain; no production
-update has started.
+The original quality/audit/comparison/mesh chain is complete; V124 production
+has started, with V125 retaining its original subsequent budget.
 
 A second-generation rebind preparation exposed a receipt-name collision before
 launch. The helper now preserves prior declarations/helpers under their original

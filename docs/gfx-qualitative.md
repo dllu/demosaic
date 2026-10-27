@@ -23,6 +23,25 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V122/V123 completed frequency trial
+
+The [completed20k frequency trial](v122-v123-quality.md) shows no large new
+foliage/fence recovery. Both complete101.996MP outputs and all six native
+regions were reviewed. Rows: noisy → V122 adapter-only → V123 joint → separate
+DSCF3880 ISO100 reference, **not GT**. Columns cover building/fence/neon and
+foliage/platform/sky. Native160px cells share nominal conditioning,+2EV and
+WB/matrix. V122 versus V123 is a matched model comparison.
+
+![Frequency trial building, fence and neon](images/v122-v123-quality-v1/V122-V123-matched-gfx-1.png)
+
+![Frequency trial foliage, platform and sky](images/v122-v123-quality-v1/V122-V123-matched-gfx-2.png)
+
+Foliage stays painterly and saturated sign details smear. The larger fence is
+coherent; the [extra3842/3835 fine mesh](gfx-green-mesh.md#v122v123-completed-frequency-trial)
+remains weak at both fixed profiles. Older V115/V117 GFX controls use a different
+Haar profile and are explicitly labeled pipeline comparisons. V120 remains the
+general recommendation. [Source/ROI/weights/noise/display metadata](images/v122-v123-quality-v1/manifest.json).
+
 ## V130 FP32 training pilot
 
 The [completed matched1,000-update trial](training-precision-pilot.md) slightly
@@ -105,8 +124,8 @@ Fine foliage remains soft, with no clear large recovery gain.
 
 Both extra [DSCF3842/3835 mesh regions](gfx-green-mesh.md#v123-at-9000-updates)
 also remain weak under both fixed profiles. V123's original20k run is complete;
-full endpoint inference and primary audit are complete, with remaining native
-comparisons and extra-mesh review in progress. The current recommendation stays V120.
+full endpoint numerical and selected native review is now
+[complete](v122-v123-quality.md). The current recommendation stays V120.
 
 ## Tiny/Small alternatives
 

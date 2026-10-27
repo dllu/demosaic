@@ -1,9 +1,10 @@
 # Learned RAW frequency features: V122/V123 training
 
-**Both V122 and V123 completed their original20,000 updates, full endpoint
-inference and independent primary audit.** Saved-output comparisons are also
-complete; remaining native comparisons and extra-mesh review are in progress.
-[Current review status and actual viewing](results/v122-v123-endpoint-review-status-v1.json). V123's [exact saved-state continuation](v123-memory-guard-recovery.md)
+**V122/V123 training, full endpoint evaluation and selected native review are
+complete.** [Final quality report](v122-v123-quality.md): V123 gains0.05493dB
+photo PSNR against adapter-only V122, with lower unseen-camera PSNR and a much
+larger ADC color tail. Weak natural detail and both real GFX scenes remain soft.
+V123's [exact saved-state continuation](v123-memory-guard-recovery.md)
 retained12,249 updates and performed only7,751 more within the original deadline.
 Its96 model/EMA tensors and94 Adam states are finite at20k. A legacy91-tensor
 assertion stopped the first photo collector before any neural forward; explicit
@@ -16,8 +17,8 @@ These are the first full-budget trials of the [learned frequency input adapter](
 All four discarded CPU/CUDA checks passed. A
 [V1239k midpoint review](v123-midpoint-quality.md) now measures16 retained
 material observations and six GFX contexts, with reused controls and native
-triplets. It shows no clear detail-recovery gain. Full endpoint scoring is audited; remaining native comparison
-review is in progress. V120 remains the current general recommendation;
+triplets. It shows no clear detail-recovery gain. Full endpoint numerical and
+selected native review is now published. V120 remains the current general recommendation;
 V114, V115 and V117 retain their documented uses.
 
 [Original V122 completion receipt](results/v122-frequency-training-complete-v1.json) ·

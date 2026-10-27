@@ -4,10 +4,10 @@
 No useful quality gain is visible.** The [completed comparison](reviewed-shadow-pilot-quality.md)
 includes independently checked metrics and native100% crops. Both arms start from completed V120 Small
 EMA on90,783 sources and23 reviewed regions. V120 remains the current general
-recommendation. Original V122/V123 and queued V124/V125 inputs, parents and
+recommendation. Original V122/V123 and V124/V125 inputs, parents and
 budgets are unchanged.
-V123's [saved-state continuation](v123-memory-guard-recovery.md) is now running
-after this pilot's evaluation completed; no pilot training is repeated.
+V123's [saved-state continuation](v123-memory-guard-recovery.md) and final
+[quality review](v122-v123-quality.md) are complete; no pilot training is repeated.
 
 [Execution and independent checks](results/reviewed-shadow-training-pilot-setup-v1.json) ·
 [Publication/live-owner verification](results/reviewed-shadow-training-pilot-publication-v1.json) ·

@@ -1,18 +1,20 @@
 # Endpoint quality and native-image review
 
-**V122/V123 and V124/V125 have complete comparison and fine-mesh review
-queues.** [V124/V125 mean-loss training](conditional-mean-training.md) waits for
-the V122/V123 chain after discarded implementation checks. The original owners
+**[V122/V123 full quality and selected native review](v122-v123-quality.md) are
+complete; [V124's mean-loss control](conditional-mean-training.md) is training.**
+V125 follows with the additional mean loss. Their complete comparison and
+fine-mesh queues retain saved controls and original budgets. The original owners
 exited after V123's memory guard; [explicit recovery and current queue roots](v123-memory-guard-recovery.md)
 preserve completed work, all original failed receipts and remaining deadlines.
-V123 has now completed20k; V122/V123 predictions are collecting after correcting
-a legacy91-versus96-tensor identity assertion that stopped before any neural call.
+V123 completed20k and V122/V123 endpoint review is published after correcting
+the legacy91-versus96-tensor identity assertion that stopped before any neural call.
 The [repair receipt](results/v123-frequency-quality-identity-repair-v1.json) records
 the current roots and adopted checks.
 V120/V121 training, endpoint predictions and independent numerical
 audits, four saved/local-detail contrasts and selected native review are
 complete. V120/V121 mesh checks have no clear lattice-recovery gain over
-V115/V119. V122–V125 endpoint quality remains unmeasured. The queues check
+V115/V119. V122/V123 endpoint review is now published; V124/V125 quality remains
+unmeasured. The queues check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 
@@ -166,7 +168,8 @@ establishing full-frame mesh behavior or runtime.
 The retained-control preflight forbids neural module calls. It reproduces four
 existing V115/V119 native boards byte-for-byte and prepares four triplets with
 zero neural calls, RAW decodes or new noise. Actual viewing and pixel checks of
-V122/V123 endpoint outputs remain pending; V121's completed review is linked above.
+V122/V123 endpoint native viewing and pixel checks are now
+[complete](v122-v123-quality.md); V121's completed review is linked above.
 A second preflight exercises the
 actual frozen V120 adoption path with model construction and all neural calls
 forbidden. Both +2EV boards, both +4EV boards and both triplets are byte-identical

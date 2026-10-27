@@ -1,7 +1,8 @@
 # Independent-noise mean-loss training
 
-**Both V124/V125 CPU/CUDA checks passed; fresh full training is queued and
-quality is unmeasured. V120 remains the current general recommendation.** This experiment
+**Both V124/V125 CPU/CUDA checks passed; V124's fresh full control training is
+running and V125 follows. Quality is unmeasured; V120 remains the general
+recommendation.** This experiment
 follows the [conditional-noise diagnostic](conditional-noise-response.md):
 weak fur/wood detail remains soft across independent noise observations.
 
@@ -61,7 +62,9 @@ finishes successfully. The V123 memory guard stopped its original owner and
 propagated failure through the waiting dependents. An
 [explicit recovery](v123-memory-guard-recovery.md) rebinds their owners while
 retaining original failed receipts, source bytes, inputs and deadlines.
-All four completed checks are reused; no V124/V125 production update had started.
+All four completed checks are reused. The original frequency quality/audit/
+comparison/mesh owners completed; V124's fresh production has started without
+repeating checks. [Completed frequency results](v122-v123-quality.md).
 Each production worker has a prospective 48-hour limit, 24 GiB CUDA allocator cap,
 64 GiB production launch headroom (56 GiB for CUDA checks) and a 32 GB runtime
 available-memory floor. Internal/external
@@ -95,7 +98,9 @@ Independent NumPy audits inspected301,396,702 retained array values and verified
 36,208,640 variance values exactly, without Torch, new noise or neural calls.
 The implementation, regression and adoption suites passed175 tests.
 [Frozen plans, actual counts, source hashes and live follow-up owners](results/independent-noise-mean-training-setup-v1.json).
-Full training has not started; both20,000-update runs wait for the original chain.
+V124's20,000-update control is running; V125 retains its original subsequent
+20,000-update budget. Actual progress is recorded by the exact owner below.
+[Verified live worker and training-start snapshot](results/v124-control-training-start-v1.json).
 
 The [retained-output loss-gradient diagnostic](conditional-loss-gradients.md)
 replays the entire objective without new neural execution. Mean weight.25

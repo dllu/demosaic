@@ -156,10 +156,10 @@ data. Pair only simulated-noise Commons/native targets; keep real paired input
 steps on their existing single-observation path. Avoid loading examples that
 the paired-view layout would discard. Preserve the current zero-blur recipe,
 and compare noise, camera color and real weak detail alongside photo PSNR.
-The [V124/V125 implementation and queued comparison](conditional-mean-training.md)
-now implement this experiment; quality is unmeasured. Both arms load16 unique
-targets once and create32 simulated observations. The active V123 run and
-original endpoint-review chain remain unchanged; no model choice, noise
+The [V124/V125 implementation and training](conditional-mean-training.md)
+now implement this experiment; V124 is running and quality is unmeasured.
+Both arms load16 unique targets once and create32 simulated observations.
+The completed V123 run and original review evidence remain unchanged; no model choice, noise
 estimator or inference strength changes from this diagnostic.
 
 The [complete loss-gradient replay](conditional-loss-gradients.md) now checks

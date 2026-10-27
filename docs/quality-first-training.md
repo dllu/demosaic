@@ -3,9 +3,10 @@
 **V122 and V123 completed their original20,000-update training budgets.**
 Both retain their fixed V115 Small parent and90786/fourteen-region cohort for
 the controlled scope comparison. V122's91 common model/EMA tensors remain
-exactly equal to V115, with five finite AdamW states at step20,000. Image quality
-is still unmeasured; endpoint predictions are collecting after a zero-forward
-checkpoint-identity repair. The GPU
+exactly equal to V115, with five finite AdamW states at step20,000. Their
+[completed quality review](v122-v123-quality.md) finds a0.05493dB photo gain
+from joint training against adapter-only training, with lower unseen-camera
+mean, a large ADC tail and little natural weak-detail recovery. The GPU
 coordinator preserved V122's same in-memory worker through its temporary yield.
 [Current training, checks and queued review](learned-raw-frequency-training.md).
 
@@ -21,8 +22,9 @@ while strong bark is mainly variance-limited. It motivates a controlled
 two-view conditional-mean loss on the prepared90784/twenty-region data.
 [V124/V125 implement the matched comparison](conditional-mean-training.md):
 both use16 unique targets and32 simulated observations, with mean-loss weights
-0/.25. Discarded checks precede fresh full training after the original V122/V123
-review chain; quality is unmeasured and the active runs remain unchanged.
+0/.25. All four discarded checks are reused. V124's fresh20k control is now
+running after the original frequency review chain; V125 follows. Quality is
+unmeasured and the frozen recipes remain unchanged.
 
 V119 completed a full 20,000-update continuation from **V115 Small** on the
 cleaned Commons corpus and expanded paired data. Both discarded 16-step CPU/CUDA

@@ -20,13 +20,37 @@ The [V120–V125 endpoint review queues](endpoint-quality-review.md) include bot
 fixed noise profiles and both native160 regions, reusing saved controls.
 V120/V121 mesh review is complete below, with no clear V121 lattice-recovery
 gain. V120's two saved predictions were adopted without rerunning it. V122/V123
-final mesh predictions remain pending. A separate
+final mesh review is complete below. A separate
 [V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
-V124/V125 are queued after that original chain.
+V124's original control training has started; V125 follows.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V122/V123 completed frequency trial
+
+The [completed20k trial](v122-v123-quality.md) leaves the fine lattice mostly
+erased under nominal conditioning. The nearby3879 profile retains weak irregular
+directional texture, without a clear new recovery. Both regions and profiles
+were actually viewed. Four new endpoint root/encoder forwards used the existing
+cached inputs; five control predictions were reused. No RAW decoding, noise
+generation or profile fitting occurred.
+
+Columns: ISO6400 camera JPEG → noisy Malvar → nominal prediction → nearby-profile
+prediction → independent **DSCF3835 ISO100/AHD, not GT** → ISO100 camera JPEG.
+Native160px cells share768px contexts,+4EV and WB/matrix. Aperture, exposure time
+and moving subjects differ. The main DSCF3879/3880 pair remains in use.
+
+![V122 fine mesh under both profiles](images/v122-v123-quality-v1/V122-fine-green-mesh-right.png)
+
+![V123 fine mesh under both profiles](images/v122-v123-quality-v1/V123-fine-green-mesh-right.png)
+
+Left regions: [V122](images/v122-v123-quality-v1/V122-fine-green-mesh-left.png) ·
+[V123](images/v122-v123-quality-v1/V123-fine-green-mesh-left.png).
+Independent float64 display auditing checks1,843,200 RGB channels; only four
+differ by one DN8 at FP32 rounding boundaries. No real-reference PSNR is used.
+[Source/ROI/checkpoint/profile/display metadata](images/v122-v123-quality-v1/manifest.json).
 
 ## V130 FP32 training pilot
 
@@ -117,7 +141,8 @@ The two fixed priors and ROI coordinates remain those documented below.
 profile.** Both native160 regions were viewed, using two new768px contexts and
 saved V115/V119/V120 controls. Nominal conditioning largely erases the mesh;
 the nearby-DSCF3879 profile reveals more diagonal texture but leaves the fine
-lattice weak and irregular. The blue point remains. Full20k results are pending.
+lattice weak and irregular. The blue point remains. Full20k results are now
+[published](v122-v123-quality.md).
 
 Right mesh: noisy → V115 → V119 → V120 → V1239k EMA → independent DSCF3835
 ISO100 AHD reference, **not GT**. Display +4EV (×16), shared WB/matrix, fixed

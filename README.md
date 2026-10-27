@@ -42,18 +42,14 @@ comparisons and selected native review are complete; the
 shows no clear lattice-recovery gain over V115/V119.
 The new [fixed-Haar main-GFX comparison](docs/v120-v121-primary.md#matched-profile-full-frame-gfx)
 matches older inputs exactly; original nominal-profile outputs are also preserved.
-The [V122/V123 frequency-feature trial](docs/learned-raw-frequency-training.md)
-now compares training the new input adapter alone with adapting the full
-restoration path on the same cleaned corpus. A
-[V1239k midpoint review](docs/v123-midpoint-quality.md) shows no clear fine-detail
-gain on retained materials and both GFX scenes; full endpoint results remain pending.
-V123's [bounded continuation completed20k](docs/v123-memory-guard-recovery.md),
-preserving all12,249 prefix updates and adding exactly7,751. Full endpoint
-inference, independent primary audit and saved-output comparisons are complete
-after the zero-forward identity repair. Remaining native comparison and extra-mesh
-review is in progress; dependent trials reuse completed checks and saved controls.
-[V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
-the cleaned90,784-source/twenty-region corpus after that review chain.
+The [completed V122/V123 frequency-feature trial](docs/v122-v123-quality.md)
+finds a+0.05493dB photo gain from joint training over adapter-only training,
+with lower unseen-camera PSNR and a large ADC color-tail regression. Weak natural
+detail and the corrected3842/3835 fine mesh remain soft. Full numerical/native
+review and two exact-GT triplets per model are published. Both original20k
+budgets completed, including V123's preserved12,249+7,751 continuation.
+[V124/V125 mean-loss training](docs/conditional-mean-training.md) has now started
+V124's two-noise-view control on the fixed90,784-source/twenty-region corpus.
 The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.md)
 uses90,783 sources/23 regions and shows no useful quality gain; native material
 and both train-scene comparisons are published. The shadow policy stays off by default.
