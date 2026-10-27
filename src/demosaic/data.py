@@ -13,6 +13,7 @@ from torch.utils.data import Dataset
 
 from .cfa import PATTERNS, color_indices, mosaic
 from .noise import add_noise, sample_coefficients, variance_map
+from .photo_epoch_order import PhotoEpochOrder, reader_policy
 from .photo_sampling import PhotoSamplingReference
 from .precision import ieee_fp32
 from .reviewed_rois import ReviewedPhotoROIs, validate_roi_fraction
@@ -126,6 +127,8 @@ class CleanDataset(Dataset):
         photo_sampling_reference_manifest=None,
         photo_sampling_reference_sha256=None,
         trace_sources=False,
+        photo_epoch_order=None,
+        photo_epoch_order_sha256=None,
     ):
         if type(trace_sources) is not bool:
             raise ValueError("Source tracing must be a boolean")
@@ -208,6 +211,19 @@ class CleanDataset(Dataset):
             if self.reviewed_roi_fraction
             else None
         )
+        if photo_epoch_order is not None and split != "train":
+            raise ValueError("Photographic epoch order is only for training")
+        if photo_epoch_order is None and photo_epoch_order_sha256 is not None:
+            raise ValueError("Photographic epoch order hash requires its header")
+        self.photo_epoch_order = (
+            PhotoEpochOrder(
+                photo_epoch_order, self.manifest, self.rows,
+                reader_policy(seed, self.flat_fraction, self.synthetic_fraction,
+                              self.reviewed_roi_fraction,
+                              self.reviewed_rois.sha256 if self.reviewed_rois else None),
+                expected_sha256=photo_epoch_order_sha256,
+            ) if photo_epoch_order is not None else None
+        )
 
     def __len__(self):
         return len(self.rows)
@@ -261,6 +277,8 @@ class CleanDataset(Dataset):
             region = self.reviewed_roi_for_index(index)
             if region is not None:
                 record = region.record
+            elif self.photo_epoch_order is not None:
+                record = self.photo_epoch_order.ordinary(index)
             elif self.photo_sampling_reference is not None:
                 record = self.photo_sampling_reference.eligible(record, rng)
             array = np.load(self.manifest.parent / record["cache"], mmap_mode="r")
@@ -284,6 +302,8 @@ class CleanDataset(Dataset):
                     cache_xywh=[x, y, crop_w, crop_h],
                     reviewed_roi_xywh=list(region.xywh) if region is not None else None,
                 )
+                if self.photo_epoch_order is not None:
+                    provenance["photo_epoch_order_sha256"] = self.photo_epoch_order.sha256
             rgb = (
                 torch.from_numpy(
                     array[y : y + crop_h, x : x + crop_w].copy().astype(np.float32)

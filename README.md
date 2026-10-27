@@ -20,6 +20,8 @@ Training uses geometry before final downsampling and zero optical blur. The
 [latest source review](docs/v124-second-source-review.md) prepares 90,778 photos/
 33 regions, adding fine wing mesh and subtle pitted stone. Existing jobs retain
 their declared data. [Data pipeline](docs/training-pipeline.md).
+An optional [photographic epoch order](docs/photographic-epoch-order.md) covers
+all prepared photos within 20k steps; its trained quality remains unmeasured.
 
 | Current quality work | Evidence and next comparison |
 | --- | --- |

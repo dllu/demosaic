@@ -30,6 +30,10 @@ reviewed source IDs. Quality work uses zero optical PSF augmentation and
 geometry before final downsampling, with reviewed material regions and corrected
 paired-reference masks. [Training pipeline](training-pipeline.md) ·
 [Actual target contrast coverage](training-target-contrast-coverage.md).
+The optional [photographic epoch order](photographic-epoch-order.md) addresses
+replacement-sampling omissions: actual reader paths confirm full prepared-corpus
+visitation within20k, with unchanged family/domain choices. This is a data
+coverage result; its trained reconstruction quality remains unmeasured.
 The [second V124 forty-source review](v124-second-source-review.md) retains38 and
 withholds two display/artwork-dominated frames from a future90,778-source/33-region
 cohort. It adds fine wing mesh and subtle pitted stone while preserving all31

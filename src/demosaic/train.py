@@ -40,6 +40,7 @@ from .noise_pairs import (
 )
 from .optimizer_batches import backward_groups, batch_layout, optimizer_batches
 from .paired_training import PairedDataset, paired_reconstruction_loss, paired_step
+from .photo_epoch_order import bind_photo_epoch_order, require_resume_photo_epoch_order
 from .photo_sampling import require_resume_photo_sampling
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
@@ -628,6 +629,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     manifest_hash = hashlib.sha256(manifest_payload).hexdigest()
     records = [json.loads(line) for line in manifest_payload.splitlines()]
     config["manifest_sha256"] = manifest_hash
+    photo_epoch_order = bind_photo_epoch_order(config, records)
     photo_reference_payload = None
     if config.get("photo_sampling_reference_manifest") is not None:
         photo_reference_payload = Path(config["photo_sampling_reference_manifest"]).read_bytes()
@@ -670,6 +672,11 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     payloads["validation-manifest.jsonl"] = validation_payload
     if photo_reference_payload is not None:
         payloads["photo-sampling-reference.jsonl"] = photo_reference_payload
+    if photo_epoch_order is not None:
+        payloads["photo-epoch-order.json"] = photo_epoch_order.path.read_bytes()
+        payloads[photo_epoch_order.header["order"]["path"]] = (
+            photo_epoch_order.path.parent / photo_epoch_order.header["order"]["path"]
+        ).read_bytes()
     if roi_catalogue_payload is not None:
         payloads["reviewed-photo-rois.json"] = roi_catalogue_payload
     if config.get("validation_protocol"):
@@ -702,6 +709,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
+        require_resume_photo_epoch_order(resume_state["config"], config)
         require_resume_features(resume_state["config"], config)
         require_resume_noise_pairs(resume_state["config"], config)
         require_resume_reviewed_shadows(resume_state["config"], config)
@@ -988,6 +996,8 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         reviewed_roi_catalogue_sha256=config.get("reviewed_roi_catalogue_sha256"),
         photo_sampling_reference_manifest=config.get("photo_sampling_reference_manifest"),
         photo_sampling_reference_sha256=config.get("photo_sampling_reference_sha256"),
+        photo_epoch_order=config.get("photo_epoch_order"),
+        photo_epoch_order_sha256=config.get("photo_epoch_order_sha256"),
         records=records,
         trace_sources=source_loss_every > 0 or config["reviewed_shadow_fraction"] > 0,
     )

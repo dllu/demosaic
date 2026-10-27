@@ -24,6 +24,11 @@ metadata only. This supports testing the quota at fixed architecture/data;
 restoration quality under that change is unmeasured. V133 now queues that
 quota-only20k comparison, reusing V131 and preserving the original trials.
 
+An optional [ordinary-photo epoch order](photographic-epoch-order.md) now has a
+full actual-reader audit on the prepared 90,778/33 set. At the same seed70/20k/B16
+and 5% quota it visits all photos, versus 69.26% with replacement. Current jobs
+keep replacement sampling; the new order has no trained-quality result.
+
 ## Augmentation before the final reduction
 
 The current `augmentation_downsample: 2` path is:

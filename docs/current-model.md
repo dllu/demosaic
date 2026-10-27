@@ -55,6 +55,9 @@ The newest prepared dataset has 90,778 photos/33 reviewed regions; active and
 queued comparisons retain their declared cohorts. A
 [full source-schedule audit](training-source-schedule-coverage.md) distinguishes
 corpus size from the identities actually selected in 20k planned updates.
+The optional [photographic epoch order](photographic-epoch-order.md) achieves
+full source visitation on the prepared set at that budget; trained quality
+under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |

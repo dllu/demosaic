@@ -38,6 +38,8 @@ two rows from the preceding 90,780-photo future set, preserving remaining line
 bytes/order and validation/test counts of 2,303/2,255. Earlier
 [plaster and butterfly additions](v124-first-source-review.md) remain available.
 Neither new membership nor new annotations replace active or queued inputs.
+An optional [ordinary-photo epoch order](photographic-epoch-order.md) visits
+all prepared photos within the audited 20k schedule; its quality is unmeasured.
 
 ## Latest inspection and detail support
 
