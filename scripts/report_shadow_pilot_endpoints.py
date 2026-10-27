@@ -58,12 +58,16 @@ def analyze(queue_path):
             matched["observations"],
             binding,
         )
+        control_label = queue.get("matched_control_label", "V126 1k EMA")
+        if control_execution.get("model_label", control_label) != control_label:
+            raise ValueError("Saved matched-control label differs")
     else:
         control_observations, control_rows, _, control_binding = methods["V126"]
         control_observations, control_rows = (
             control_observations["observations"],
             control_rows["observations"],
         )
+        control_label = "V126 1k EMA"
     expected_inputs = [(o["id"], o["input_fingerprints"]) for o in control_observations]
     for execution, _, _, _ in methods.values():
         if [
@@ -101,7 +105,7 @@ def analyze(queue_path):
             if arm != "V126":
                 selected.append(
                     {
-                        "model": {"label": "V126 1k EMA"},
+                        "model": {"label": control_label},
                         "prediction": controls[observed["id"]]["prediction"],
                     }
                 )
@@ -117,7 +121,7 @@ def analyze(queue_path):
             "inputs": [*execution["inputs"], *extra],
             "scope": (
                 execution["scope"] + " Report-only metadata derives from the original86-call "
-                "collection; controls are retained V120 and matched V126 when distinct. "
+                f"collection; controls are retained V120 and matched {control_label} when distinct. "
                 "Material scores apply the fixed display exposure before reduction, so "
                 "camera/sRGB PSNR and band errors use exposure-normalized units. "
                 "Same-source conditions/CFAs are not independent photographs. No new inference."

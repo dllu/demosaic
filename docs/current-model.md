@@ -123,8 +123,12 @@ now match older V115/V119 inputs exactly, with no clear large detail recovery.
 The [completed V128 early-feature pilot](v128-feature-pilot-quality.md) finds no
 useful gain against V126 after1,000 matched updates. Independent scoring and
 all28 native boards, including both GFX pairs, are complete. The feature term
-stays off by default. [V129 tests the curated27-region data](reviewed-detail-training-pilot.md)
-with the original reconstruction loss. V120 remains the general recommendation.
+stays off by default. The [completed V129 curated27-region pilot](reviewed-detail-training-pilot.md)
+also shows no useful visible recovery at1k, with+.00093dB ordinary/+.00042dB shadow
+sRGB changes versus V126. All28 native boards are reviewed. The
+[audited precision-gradient diagnostic](training-precision-gradients.md) motivates
+[V130 matched FP32 training](training-precision-pilot.md) against saved V129 BF16;
+quality is unmeasured. V120 remains the general recommendation.
 
 The [independent-noise diagnostic](conditional-noise-response.md) separates
 persistent error from output variance on four fixed targets. Faint fur/wood

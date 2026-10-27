@@ -1,0 +1,451 @@
+{
+  "status": "audited-fixed-weight-precision-diagnostic-not-trained-quality",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/plan-v1.json",
+    "sha256": "7f233f018c9034f23419fac969e0ae7545f9bfc3ed97c3e31efa52181898528d"
+  },
+  "collection": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/collection-v1.json",
+    "sha256": "881ab553bf4fea1827ad9bd86fcc43fa6dc39eb71437a154b652556f3fb21b9b"
+  },
+  "audit": {
+    "status": "passed-independent-native-band-and-retained-parameter-gradient-audit",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/plan-v1.json",
+      "sha256": "7f233f018c9034f23419fac969e0ae7545f9bfc3ed97c3e31efa52181898528d"
+    },
+    "collection": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/collection-v1.json",
+      "sha256": "881ab553bf4fea1827ad9bd86fcc43fa6dc39eb71437a154b652556f3fb21b9b"
+    },
+    "auditor": {
+      "path": "/home/dllu/proj/demosaic/scripts/audit_parameter_precision.py",
+      "sha256": "0c83640227078e42449eb2c1c3685a768f59ea70333b195d571fb0ab087bba70"
+    },
+    "native_band_values_checked": 16,
+    "streamed_layer_records_checked": 712,
+    "summary_fields_checked": 56,
+    "retained_gradient_cases": [
+      0,
+      4
+    ],
+    "retained_gradient_FP32_values_reopened": 197428224,
+    "independent_retained_Gram_fields": 1068,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "optimizer_updates": 0,
+    "Torch_imported": false,
+    "scope": "Independent FFT band values/masks, fsum aggregation, summary geometry and chunked FP64 dot products for retained two faint ADC cases. Other raw gradient arrays were not retained; their two live reductions/hashes remain recorded. No independent differentiation through the neural model or trained-quality conclusion."
+  },
+  "model": {
+    "label": "V120",
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+    },
+    "expected_lineage": {
+      "step": 20000,
+      "initialized_from": {
+        "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+        "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+        "step": 20000
+      }
+    },
+    "expected_backbone": {
+      "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+      "revision": "421020015aa4266363db803b6049a529999afb1e",
+      "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+    },
+    "expected_full_model_sha256": "8816512ccbf637001d15b059f461378331c2bb766877c29b1674d005993d07a4"
+  },
+  "counts": {
+    "root": 16,
+    "encoder": 16,
+    "training_gradients": 16,
+    "band_gradients": 8
+  },
+  "CUDA_peak_allocated_bytes": 1338443776,
+  "model_backbone_config_and_rng_unchanged": true,
+  "rows": [
+    {
+      "case_index": 0,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "stratum": "new-photo",
+      "contrast": 0.025,
+      "condition": "adc-only",
+      "eligible_blocks": 98,
+      "gradient_cosine_BF16_FP32": 0.9955593503531884,
+      "BF16_gradient_relative_L2_difference": 0.10436343960562669,
+      "gradient_norm_BF16_over_FP32": 1.0406165096287134,
+      "FP32_training_band_gradient_cosine": 0.07748877096241184,
+      "BF16_training_FP32_band_gradient_cosine": 0.07971851933327755,
+      "FP32_unit_step_band_error_derivative": -5.026977974150631,
+      "BF16_unit_step_band_error_derivative": -5.1716298483386645,
+      "loss_BF16_over_FP32": 1.0224450326966807
+    },
+    {
+      "case_index": 1,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "stratum": "new-photo",
+      "contrast": 0.025,
+      "condition": "iso12800-prior",
+      "eligible_blocks": 98,
+      "gradient_cosine_BF16_FP32": 0.9985117157517566,
+      "BF16_gradient_relative_L2_difference": 0.05759378539313505,
+      "gradient_norm_BF16_over_FP32": 0.9799998112190674,
+      "FP32_training_band_gradient_cosine": -0.10748554700297266,
+      "BF16_training_FP32_band_gradient_cosine": -0.1136195832003155,
+      "FP32_unit_step_band_error_derivative": 6.199786199714397,
+      "BF16_unit_step_band_error_derivative": 6.55359854030548,
+      "loss_BF16_over_FP32": 1.0105998250808004
+    },
+    {
+      "case_index": 2,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "stratum": "new-photo",
+      "contrast": 1.0,
+      "condition": "adc-only",
+      "eligible_blocks": 100,
+      "gradient_cosine_BF16_FP32": 0.9982625706655435,
+      "BF16_gradient_relative_L2_difference": 0.12009443011631227,
+      "gradient_norm_BF16_over_FP32": 1.1029087943754357,
+      "FP32_training_band_gradient_cosine": 0.19733484761083428,
+      "BF16_training_FP32_band_gradient_cosine": 0.18880169602141247,
+      "FP32_unit_step_band_error_derivative": -0.1366760433452484,
+      "BF16_unit_step_band_error_derivative": -0.13076589918861461,
+      "loss_BF16_over_FP32": 1.001784904915865
+    },
+    {
+      "case_index": 3,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "stratum": "new-photo",
+      "contrast": 1.0,
+      "condition": "iso12800-prior",
+      "eligible_blocks": 100,
+      "gradient_cosine_BF16_FP32": 0.9978017215894929,
+      "BF16_gradient_relative_L2_difference": 0.06792256944246333,
+      "gradient_norm_BF16_over_FP32": 0.9829104138355543,
+      "FP32_training_band_gradient_cosine": 0.09564819123062646,
+      "BF16_training_FP32_band_gradient_cosine": 0.10907592025000246,
+      "FP32_unit_step_band_error_derivative": -0.12483789949116285,
+      "BF16_unit_step_band_error_derivative": -0.1423634738292449,
+      "loss_BF16_over_FP32": 0.9993243043853629
+    },
+    {
+      "case_index": 4,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "stratum": "reviewed-ROI",
+      "contrast": 0.025,
+      "condition": "adc-only",
+      "eligible_blocks": 100,
+      "gradient_cosine_BF16_FP32": 0.9612348782805403,
+      "BF16_gradient_relative_L2_difference": 0.39591469511619526,
+      "gradient_norm_BF16_over_FP32": 1.2453491810390516,
+      "FP32_training_band_gradient_cosine": 0.35936047968996476,
+      "BF16_training_FP32_band_gradient_cosine": 0.30951691371761597,
+      "FP32_unit_step_band_error_derivative": -25.886473652351263,
+      "BF16_unit_step_band_error_derivative": -22.296000491820053,
+      "loss_BF16_over_FP32": 1.0050322998457168
+    },
+    {
+      "case_index": 5,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "stratum": "reviewed-ROI",
+      "contrast": 0.025,
+      "condition": "iso12800-prior",
+      "eligible_blocks": 100,
+      "gradient_cosine_BF16_FP32": 0.9992355651099248,
+      "BF16_gradient_relative_L2_difference": 0.04184528724454415,
+      "gradient_norm_BF16_over_FP32": 0.9843109999528118,
+      "FP32_training_band_gradient_cosine": 0.5159336849051306,
+      "BF16_training_FP32_band_gradient_cosine": 0.4952572687570527,
+      "FP32_unit_step_band_error_derivative": -319.09740656574854,
+      "BF16_unit_step_band_error_derivative": -306.30934685389036,
+      "loss_BF16_over_FP32": 0.9967903150265405
+    },
+    {
+      "case_index": 6,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "stratum": "reviewed-ROI",
+      "contrast": 1.0,
+      "condition": "adc-only",
+      "eligible_blocks": 100,
+      "gradient_cosine_BF16_FP32": 0.9898676130225168,
+      "BF16_gradient_relative_L2_difference": 0.155216167037604,
+      "gradient_norm_BF16_over_FP32": 0.927178301168417,
+      "FP32_training_band_gradient_cosine": 0.04466419220048848,
+      "BF16_training_FP32_band_gradient_cosine": 0.063324935897214,
+      "FP32_unit_step_band_error_derivative": -0.01677180692194584,
+      "BF16_unit_step_band_error_derivative": -0.023779084449691543,
+      "loss_BF16_over_FP32": 1.0018455997544895
+    },
+    {
+      "case_index": 7,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "stratum": "reviewed-ROI",
+      "contrast": 1.0,
+      "condition": "iso12800-prior",
+      "eligible_blocks": 100,
+      "gradient_cosine_BF16_FP32": 0.9996575805242514,
+      "BF16_gradient_relative_L2_difference": 0.03057088815901689,
+      "gradient_norm_BF16_over_FP32": 0.983850699034494,
+      "FP32_training_band_gradient_cosine": 0.7949119038098204,
+      "BF16_training_FP32_band_gradient_cosine": 0.7941989280469101,
+      "FP32_unit_step_band_error_derivative": -4.18118527756078,
+      "BF16_unit_step_band_error_derivative": -4.1774350710928045,
+      "loss_BF16_over_FP32": 1.000049492680779
+    }
+  ],
+  "case_bindings": [
+    {
+      "index": 0,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "contrast": 0.025,
+      "condition": "adc-only",
+      "noise": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-00.npz",
+        "sha256": "57efeb4981b02c77f1d4682829f0acbc756234066c9ddbf2c98d061fe6703ac3"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v4/342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf-0.025-adc-only.npz",
+        "sha256": "2295ec552330d129043e644b9fcf051b78cdb0c5ddd7471b85d3de6d5d784039"
+      },
+      "input_hashes": {
+        "packed": "d8bc608e1c5d87b1bd4d09dbcce5b8ea152410be65e62801d5767658b5eff0fd",
+        "variance": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 98,
+      "precision_order": [
+        "float32",
+        "bfloat16"
+      ]
+    },
+    {
+      "index": 1,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "contrast": 0.025,
+      "condition": "iso12800-prior",
+      "noise": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-01.npz",
+        "sha256": "c55056ac1f65f726ac05a64f62050a38e8e2c2c1565b77f346d5e54a2939c561"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v4/342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf-0.025-iso12800-prior.npz",
+        "sha256": "c3753d710ea9ccb278fff1c811be83a0e5a4b551defd8a2fdf840c8a495762cd"
+      },
+      "input_hashes": {
+        "packed": "467b08a35329265f256a9bfe85ff0e46664ecac3869993ff64bed0a757cdb9c6",
+        "variance": "da593668fbe98f22b068e702ec4fc65446bbca157b67617469a05640a03e3a23",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 98,
+      "precision_order": [
+        "bfloat16",
+        "float32"
+      ]
+    },
+    {
+      "index": 2,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "contrast": 1.0,
+      "condition": "adc-only",
+      "noise": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-02.npz",
+        "sha256": "82db466017f6ebf163765cd573485e4f0e65888cc058f29876cee2130fbb6fe2"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v3/342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf-1.0-adc-only.npz",
+        "sha256": "ae1ab7c54573497842b5886c74a013fbf4193ab00e895a75c7e91dfb26baca38"
+      },
+      "input_hashes": {
+        "packed": "8580a64b8fb9eb0ffa56158f03d8cf25a99511aa3ef1ed65bdb87e8e30bc64c1",
+        "variance": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 100,
+      "precision_order": [
+        "float32",
+        "bfloat16"
+      ]
+    },
+    {
+      "index": 3,
+      "source_id": "342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf",
+      "contrast": 1.0,
+      "condition": "iso12800-prior",
+      "noise": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-03.npz",
+        "sha256": "99d1b11f5f538b8da113a789f70acaa6b56c0c721059b50de83da604ba992848"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v3/342f3fc4b715a86230c76c6493e1ab3aaa7ba0bf-1.0-iso12800-prior.npz",
+        "sha256": "8f91bdf3667f890e8f26a931941d40c8e75fb133699837f9a5c32a9958c8c8bb"
+      },
+      "input_hashes": {
+        "packed": "2bfe8ee997a51012f2660268229860d25f61a2faf5c94a519397f3b007eb8863",
+        "variance": "bc7d20f54fd98c77e1e0287d681f63689d0ecd11dceb1444f7e96859c40873bf",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 100,
+      "precision_order": [
+        "bfloat16",
+        "float32"
+      ]
+    },
+    {
+      "index": 4,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "contrast": 0.025,
+      "condition": "adc-only",
+      "noise": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-04.npz",
+        "sha256": "83b6fd2f613dcd5b800d394595aa51af1f83d3a87f32827647020b61dd1d2660"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v4/423c08bacc74f7569806786d83446992a4f568d3-0.025-adc-only.npz",
+        "sha256": "590410f14912de401c062e5bff70ac095d9763b9bfe77a8b01dc075a38cc222b"
+      },
+      "input_hashes": {
+        "packed": "2fc0f7ccd16d2bf007652d4f70d93976c9b7a0f66795d9db2fe38f1c2193ffcb",
+        "variance": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 100,
+      "precision_order": [
+        "float32",
+        "bfloat16"
+      ]
+    },
+    {
+      "index": 5,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "contrast": 0.025,
+      "condition": "iso12800-prior",
+      "noise": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-05.npz",
+        "sha256": "95bb2a78b67e3b6e8086b199fb1a02a5cd510dd2839d05bc0b3bff4103180e5b"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v4/423c08bacc74f7569806786d83446992a4f568d3-0.025-iso12800-prior.npz",
+        "sha256": "bef300de19e7c39c64fa953e14e72a4ebe0dd42bb056b4bf749cb9d3f14442c3"
+      },
+      "input_hashes": {
+        "packed": "8a1cc6d744cf6f1e3c21cbdb15d474a6e406ccfa98732bd5723935528c06b42c",
+        "variance": "c9fb0c2cded8a6c0a0c44347b62b2a8dc1e5115e57a00b7d93022bf5c915b006",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 100,
+      "precision_order": [
+        "bfloat16",
+        "float32"
+      ]
+    },
+    {
+      "index": 6,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "contrast": 1.0,
+      "condition": "adc-only",
+      "noise": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-06.npz",
+        "sha256": "6cc827860ff42291ee303309a5b97806c57692a5b8f6c9398f7a720b234da90c"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v3/423c08bacc74f7569806786d83446992a4f568d3-1.0-adc-only.npz",
+        "sha256": "857735003f03031387982b89ff12253155bfbb29b7a4c1ac446d77f6b98c9ae3"
+      },
+      "input_hashes": {
+        "packed": "f15878466520160c093c5758e2a083e9dcb740308f11f5eaa5e4a3501b0ceddc",
+        "variance": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 100,
+      "precision_order": [
+        "float32",
+        "bfloat16"
+      ]
+    },
+    {
+      "index": 7,
+      "source_id": "423c08bacc74f7569806786d83446992a4f568d3",
+      "contrast": 1.0,
+      "condition": "iso12800-prior",
+      "noise": {
+        "shot": 0.00256,
+        "read": 2.62144e-05
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/training-precision-gradients-v2/work/artifacts/prepared/case-07.npz",
+        "sha256": "8a9cd788977701a43cda0ea9109e5c555f5a0c544a6121b1acb7501246d83d98"
+      },
+      "original_arrays": {
+        "path": "/mnt/external/demosaic/charbonnier-detail-audit-20261023-v3/423c08bacc74f7569806786d83446992a4f568d3-1.0-iso12800-prior.npz",
+        "sha256": "f2bf2baab1f04d5f29339b9756afb2456260453ad816245b961d37246ed7de6f"
+      },
+      "input_hashes": {
+        "packed": "70271b4d1e254b6119acd90304f2f8e63db57b19ff287ce10d6521c2a103ce12",
+        "variance": "f9227239f1c15da1166a0fec864c077ef0d5cc5c959bfd74cf975cab6d8660b5",
+        "colors": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1",
+        "wb": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4",
+        "matrix": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      },
+      "blocks": 100,
+      "precision_order": [
+        "bfloat16",
+        "float32"
+      ]
+    }
+  ],
+  "report_source": {
+    "path": "/home/dllu/proj/demosaic/scripts/report_parameter_precision.py",
+    "sha256": "f8a7007730eb0b0ad3689464bfab4f5730ad8dbf6a95aa50a5f63f77dad099d0"
+  },
+  "scope": "16 new differentiable native256/B1 V120 forward calls, not ordinary inference replay. Eight retained training observations:2 sources x contrasts.025/1 x ADC/ISO12800, no new noise/RAW. Compare actual current Charbonnier.0003 gradients in BF16/IEEE FP32; use FP32 normalized DCT16 band-error gradient as a common local direction.24 autograd evaluations, zero optimizer updates/weight changes. No speed, trained-quality, Adam-step or broad precision claim. Preserve existing jobs and outputs; no automatic retry.",
+  "new_neural_forwards_in_report": 0,
+  "optimizer_updates": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0
+}

@@ -28,6 +28,27 @@ V124/V125 are queued after that original chain.
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
+## V129 curated-data pilot
+
+The [completed1,000-update data pilot](reviewed-detail-training-pilot.md) still
+mostly erases the fine lattice under the nominal profile. The nearby3879 profile
+retains weak, irregular directional texture without a clear improvement over
+V126. Both regions/profiles were actually inspected. Native160px columns:
+noisy → V120 → V126 → V129 → independent **DSCF3835 ISO100 reference, not GT**.
+Shared768px contexts, WB/matrix,+4EV and fixed profile; no pixel resizing.
+
+![V129 nominal left mesh](images/v129-data-pilot-quality-v1/mesh-nominal-fine-green-mesh-left-comparison.png)
+
+![V129 nominal right mesh](images/v129-data-pilot-quality-v1/mesh-nominal-fine-green-mesh-right-comparison.png)
+
+![V129 nearby-profile left mesh](images/v129-data-pilot-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png)
+
+![V129 nearby-profile right mesh](images/v129-data-pilot-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+[Source/ROI/checkpoint/noise/display metadata](images/v129-data-pilot-quality-v1/manifest.json).
+The [FP32 training trial](training-precision-pilot.md) will reuse these saved
+BF16-control predictions. The ISO100 aperture/exposure and moving subjects differ.
+
 ## V128 feature-loss pilot
 
 The [completed1,000-update feature-loss pilot](v128-feature-pilot-quality.md)

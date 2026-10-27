@@ -16,12 +16,12 @@ import report_shadow_pilot_endpoints as reports
 from train_directional_bank_trial import ref, save
 
 
-def fixture(tmp_path, monkeypatch, *, mismatch=False):
+def fixture(tmp_path, monkeypatch, *, mismatch=False, control_arm="V126", legacy=False):
     monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "")
     root = tmp_path / "new-candidate-only"
     root.mkdir()
     predictions = {}
-    for label in ("V120", "V126", "V128"):
+    for label in ("V120", control_arm, "V128"):
         path = tmp_path / (label + "-protocol-only.txt")
         path.write_text("Fixture marker; no neural weights or predictions")
         predictions[label] = ref(path)
@@ -44,16 +44,24 @@ def fixture(tmp_path, monkeypatch, *, mismatch=False):
             ],
         },
     )
-    control_plan = tmp_path / "saved-V126-plan.json"
-    save(control_plan, {"observations": observations, "inputs": [], "frozen_files": {}})
-    control_path = tmp_path / "saved-V126-collection.json"
+    control_plan = tmp_path / f"saved-{control_arm}-plan.json"
+    control_config = {
+        "observations": observations,
+        "model_label": f"{control_arm} 1k EMA",
+        "inputs": [],
+        "frozen_files": {},
+    }
+    if legacy:
+        control_config.pop("model_label")
+    save(control_plan, control_config)
+    control_path = tmp_path / f"saved-{control_arm}-collection.json"
     save(
         control_path,
         {
             "plan": ref(control_plan),
             "counts": {"root": 86, "encoder": 86},
             "observations": [
-                {"id": r["id"], "prediction": predictions["V126"]} for r in observations
+                {"id": r["id"], "prediction": predictions[control_arm]} for r in observations
             ],
         },
     )
@@ -93,6 +101,7 @@ def fixture(tmp_path, monkeypatch, *, mismatch=False):
             "arms": ["V128"],
             "baseline_collection": ref(baseline_path),
             "matched_control_collection": ref(control_path),
+            "matched_control_label": f"{control_arm} 1k EMA",
             "inputs": [],
             "frozen_files": {},
         },
@@ -118,9 +127,9 @@ def fixture(tmp_path, monkeypatch, *, mismatch=False):
             "    assert p['model_label']=='V128 1k EMA'\n"
             "    assert len(p['observations'])==86\n"
             "    for row in p['observations']:\n"
-            "        assert [c['model']['label'] for c in row['controls']]==['V120','V126 1k EMA']\n"
+            f"        assert [c['model']['label'] for c in row['controls']]==['V120','{control_arm} 1k EMA']\n"
             "        assert Path(row['controls'][0]['prediction']['path']).name.startswith('V120-')\n"
-            "        assert Path(row['controls'][1]['prediction']['path']).name.startswith('V126-')\n"
+            f"        assert Path(row['controls'][1]['prediction']['path']).name.startswith('{control_arm}-')\n"
             "    c=json.loads(Path(collection).read_text())\n"
             "    assert all(Path(row['prediction']['path']).name.startswith('V128-') for row in c['observations'])\n"
             "    out=Path(p['root'])/'report-v1'\n"
@@ -133,12 +142,14 @@ def fixture(tmp_path, monkeypatch, *, mismatch=False):
     return queue
 
 
+@pytest.mark.parametrize("control_arm", ["V126", "V129"])
+@pytest.mark.parametrize("legacy", [False, True])
 def test_single_new_endpoint_reuses_saved_control_without_new_control_directory(
-    tmp_path, monkeypatch
+    tmp_path, monkeypatch, control_arm, legacy
 ):
-    path = fixture(tmp_path, monkeypatch)
+    path = fixture(tmp_path, monkeypatch, control_arm=control_arm, legacy=legacy)
     reports.analyze(path)
-    assert not (path.parent / "V126").exists()
+    assert not (path.parent / control_arm).exists()
     output = json.loads((path.parent / "retained-analysis-v1.json").read_text())
     assert set(output["reports"]) == {"V128"} and output["new_neural_forwards"] == 0
     with pytest.raises(FileExistsError):

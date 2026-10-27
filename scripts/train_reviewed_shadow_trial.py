@@ -128,7 +128,7 @@ def worker(path, phase, arm):
     if control_binding:
         assert ref(control_binding["path"]) == control_binding
         control = read(control_binding["path"])
-        assert control["phase"] == phase and control["arm"] == "V126"
+        assert control["phase"] == phase and control["arm"] == plan.get("saved_control_arm", "V126")
         assert control["updates"] == (plan["train_updates"] if phase == "train" else 18)
     else:
         control = read(root / f"{phase}-V126-result.json") if arm == "V127" else None

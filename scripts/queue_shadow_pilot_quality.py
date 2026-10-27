@@ -13,7 +13,14 @@ from train_directional_bank_trial import guard, read, ref, save
 from train_v43_quality_trial import live
 
 
-def prepare(root, inputs_path, training_path, arms=None, matched_control_collection=None):
+def prepare(
+    root,
+    inputs_path,
+    training_path,
+    arms=None,
+    matched_control_collection=None,
+    matched_control_label="V126 1k EMA",
+):
     inputs, training = read(inputs_path), read(training_path)
     arms = list(arms or ("V126", "V127"))
     assert arms and len(arms) == len(set(arms)) and set(arms) <= set(training["arms"])
@@ -69,11 +76,16 @@ def prepare(root, inputs_path, training_path, arms=None, matched_control_collect
         control = read(binding["path"])
         assert control["counts"] == {"root": 86, "encoder": 86}
         assert len(control["observations"]) == 86
+        control_execution = read(control["plan"]["path"])
+        assert ref(control["plan"]["path"]) == control["plan"]
+        control_label = matched_control_label
+        assert control_execution.get("model_label", control_label) == control_label
+        plan["matched_control_label"] = control_label
         plan["matched_control_collection"] = binding
         plan["inputs"].append(binding)
         plan["scope"] = (
             f"Only new candidate endpoints {arms}:86 new calls each on the64 retained shadow "
-            "and22 material/GFX inputs. Reuse completed V1261000-update control predictions "
+            f"and22 material/GFX inputs. Reuse completed {control_label} control predictions "
             "and V120 baseline predictions. Zero new noise/RAW/reference/optimizer work. "
             "No repeated control inference; independent metrics and actual native review "
             "follow collection. A1000-update pilot is not a completed20k quality result."
@@ -145,6 +157,7 @@ def controller(path):
                 "root": str(endpoint),
                 "work": str(work),
                 "step": 1000,
+                "model_label": f"{arm} 1k EMA",
                 "checkpoint": result["checkpoint"],
                 "EMA_tensors": 91,
                 "raw_frequency_features": False,
@@ -217,6 +230,7 @@ if __name__ == "__main__":
     parser.add_argument("--training-plan", type=Path)
     parser.add_argument("--arms", nargs="+")
     parser.add_argument("--matched-control-collection", type=Path)
+    parser.add_argument("--matched-control-label", default="V126 1k EMA")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -226,6 +240,7 @@ if __name__ == "__main__":
                 args.training_plan.resolve(),
                 args.arms,
                 args.matched_control_collection,
+                args.matched_control_label,
             )
         )
     else:

@@ -23,6 +23,22 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V129 curated-data pilot
+
+The [completed1,000-update data pilot](reviewed-detail-training-pilot.md) shows
+no useful visible recovery after adding the reviewed27-region data. Native160px
+columns: noisy → V120 → V126 control → V129 → separate DSCF3880 ISO100 reference,
+**not GT**. All methods share512px contexts, WB/matrix, noise profile and+2EV.
+
+![V129 foliage comparison](images/v129-data-pilot-quality-v1/main-foliage-comparison.png)
+
+![V129 chain-link comparison](images/v129-data-pilot-quality-v1/main-chain-link-fence-comparison.png)
+
+Foliage remains painterly; the larger fence is coherent without a clear new
+detail gain. Both corrected3842/3835 fine-mesh regions were also inspected under
+[both fixed profiles](gfx-green-mesh.md#v129-curated-data-pilot). Exact source,
+ROI, checkpoint and display settings are in the [manifest](images/v129-data-pilot-quality-v1/manifest.json).
+
 ## V128 completed feature-loss pilot
 
 The [completed1,000-update feature-loss trial](v128-feature-pilot-quality.md)

@@ -4,7 +4,8 @@
 poster-dominated image from a future cohort.** The deduplicated review ledger
 has1,799 IDs. Four additional inspected physical-detail contexts extend the
 future bank to27 regions on90,782 training sources. Earlier experiments keep
-their frozen data; [V129 now tests the new cohort](reviewed-detail-training-pilot.md).
+their frozen data; [V129 completed its new-cohort pilot](reviewed-detail-training-pilot.md)
+and [V130 tests FP32 on those inputs](training-precision-pilot.md).
 Source cleanup alone does not prove quality gains.
 
 [Latest inspection and native views](v123-source-review-through15800.md) ·
@@ -18,7 +19,7 @@ Source cleanup alone does not prove quality gains.
 | V122/V123 frequency comparison |90,786 /14 | V12220k complete; V123 saved-state continuation running |
 | V124/V125 mean-loss comparison |90,784 /20 | Four checks reused; production queued after frequency review |
 | Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k; complete native review |
-| V129 curated-data pilot |90,782 /27 | One graphic-dominated source withheld; four physical-detail fields added; actual reader checks pass; learned quality pending |
+| V129 data pilot / V130 precision trial |90,782 /27 | V1291k complete: no useful visible gain; V130 tests FP32 on the same inputs |
 
 [V123 continuation](v123-memory-guard-recovery.md) ·
 [Mean-loss trial](conditional-mean-training.md) ·

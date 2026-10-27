@@ -54,8 +54,11 @@ The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.m
 uses90,783 sources/23 regions and shows no useful quality gain; native material
 and both train-scene comparisons are published. The shadow policy stays off by default.
 The [completed V128 feature-loss pilot](docs/v128-feature-pilot-quality.md) also
-shows no useful gain. [V129 now tests the curated27-region data](docs/reviewed-detail-training-pilot.md)
-with the feature/shadow terms off, reusing V126's completed control.
+shows no useful gain. The [completed V129 curated-data pilot](docs/reviewed-detail-training-pilot.md)
+also shows no useful visible recovery at1k; its native material/GFX crops are published.
+An [audited gradient probe](docs/training-precision-gradients.md) motivates the
+[V130 matched FP32 training trial](docs/training-precision-pilot.md), using V129's
+saved BF16 control. Quality remains unmeasured.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and
