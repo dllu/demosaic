@@ -45,8 +45,8 @@ now compares training the new input adapter alone with adapting the full
 restoration path on the same cleaned corpus. A
 [V1239k midpoint review](docs/v123-midpoint-quality.md) shows no clear fine-detail
 gain on retained materials and both GFX scenes; full endpoint results remain pending.
-V123's memory guard saved all12,249 completed updates; a
-[bounded continuation](docs/v123-memory-guard-recovery.md) retains the original
+V123's memory guard saved all12,249 completed updates; its
+[bounded continuation is running](docs/v123-memory-guard-recovery.md) within the original
 budget and deadline. Dependent reviews reuse completed checks and saved controls.
 [V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
 the cleaned90,784-source/twenty-region corpus after that review chain.

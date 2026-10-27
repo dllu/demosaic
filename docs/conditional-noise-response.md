@@ -38,7 +38,10 @@ inference AST unchanged when disabled; the collector checks that condition.
 [Queue/checkpoint/reporter/native-pixel evidence](results/conditional-response-queue-setup-v1.json) ·
 [Deferred collector](../scripts/queue_conditional_noise_response.py) ·
 [NumPy reporter](../scripts/report_conditional_noise_response.py).
-The live queue is .cache/current-quality-20261023-v1/V124-V125-conditional-response-v1.
+The current live queue is
+`.cache/current-quality-20261023-v1/V124-V125-conditional-response-recovery-v3`.
+Its [rebound dependencies](v123-memory-guard-recovery.md) retain the original
+inputs, forward budget and deadline; prior failed-owner receipts remain preserved.
 V124/V125 quality remains unmeasured.
 
 ## What the decomposition measures

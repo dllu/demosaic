@@ -78,11 +78,11 @@ must precede a quality claim.
 
 Local execution roots are under ".cache/current-quality-20261023-v1":
 
-- conditional-mean-training-recovery-v3/run (controller; original worker artifacts stay in v1/run)
-- V124-V125-independent-noise-quality-recovery-v2
-- V124-V125-independent-noise-independent-audit-recovery-v2
-- V124-V125-independent-noise-matched-review-recovery-v2
-- V124-V125-green-mesh-review-recovery-v2
+- conditional-mean-training-recovery-v4/run (controller; original worker artifacts stay in v1/run)
+- V124-V125-independent-noise-quality-recovery-v3
+- V124-V125-independent-noise-independent-audit-recovery-v3
+- V124-V125-independent-noise-matched-review-recovery-v3
+- V124-V125-green-mesh-review-recovery-v3
 
 All four discarded checks completed 16 fresh updates plus two valid resumed
 updates. The arms' first18 prepared inputs match on each device, and eight

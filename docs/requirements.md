@@ -15,8 +15,8 @@ the GFX gallery do not establish broad real-camera superiority. Quality precedes
 The [V120/V121 data trials](paired32-weak-detail-training.md) completed their
 original20k updates, numerical/native review and matched-profile complete-frame
 comparisons. In the [V122/V123 frequency trial](learned-raw-frequency-training.md),
-V122 completed20k and V123 has a saved12,249-update state on90,786 sources/fourteen
-regions, with an [explicit bounded continuation](v123-memory-guard-recovery.md); its
+V122 completed20k and V123 is continuing from its saved12,249-update state on90,786
+sources/fourteen regions within the [original bounded budget](v123-memory-guard-recovery.md); its
 [9k midpoint](v123-midpoint-quality.md) shows no clear detail gain. The
 [V124/V125 mean-loss trial](conditional-mean-training.md) is queued with frozen
 90,784-source/twenty-region inputs. Successful implementation checks and source
