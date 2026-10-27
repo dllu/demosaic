@@ -34,6 +34,9 @@ The optional [photographic epoch order](photographic-epoch-order.md) addresses
 replacement-sampling omissions: actual reader paths confirm full prepared-corpus
 visitation within20k, with unchanged family/domain choices. This is a data
 coverage result; its trained reconstruction quality remains unmeasured.
+The matched [V134/V135 training comparison](photo-epoch-training.md) now has all
+four real CPU/CUDA16+2 checks complete and queues20k per arm on90778/33, followed
+by complete numerical/native/GFX review with saved controls reused.
 The [second V124 forty-source review](v124-second-source-review.md) retains38 and
 withholds two display/artwork-dominated frames from a future90,778-source/33-region
 cohort. It adds fine wing mesh and subtle pitted stone while preserving all31

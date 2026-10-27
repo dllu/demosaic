@@ -320,7 +320,9 @@ def controller(path):
                         assert time.monotonic() - began < 7200
                     enough = (
                         psutil.virtual_memory().available
-                        >= plan.get("launch_available_RAM_GiB", 48) * 2**30
+                        >= plan.get("launch_available_RAM_GiB_by_phase", {}).get(
+                            phase, plan.get("launch_available_RAM_GiB", 48)
+                        ) * 2**30
                         and shutil.disk_usage(root).free
                         >= plan.get("phase_start_internal_free_GiB", 32) * 2**30
                         and shutil.disk_usage("/mnt/external").free

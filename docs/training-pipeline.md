@@ -7,14 +7,15 @@ camera-linear targets and registered paired RAW supply complementary supervision
 [Current model](current-model.md) · [Source review](current-source-loss-review.md).
 
 The newest prepared dataset has 90,778 training photos and 33 reviewed regions.
-It is reader-verified and untrained. Existing trials retain their frozen inputs:
+Its V134/V135 CPU/CUDA checks pass; completed production quality is still
+unmeasured. Existing trials retain their frozen inputs:
 
 | Trial | Commons sources / regions | Reviewed fraction within photographs |
 | --- | --- | ---: |
 | Running [V124/V125 mean-loss comparison](conditional-mean-training.md) |90,784 /20 |5% |
 | Queued [V131/V132 spatial comparison](raw-spatial-training.md) |90,781 /29 |50% |
 | Queued [V133 quota comparison](reviewed-quota-training.md) |90,781 /29 |5% |
-| [Newest prepared future dataset](v124-second-source-review.md) |90,778 /33 |Not a trained recipe |
+| Queued [V134/V135 cleaned data/order comparison](photo-epoch-training.md) |90,778 /33 |5%, with replacement versus epochs |
 
 Corpus size is distinct from scheduled source diversity. The
 [full 20k source audit](training-source-schedule-coverage.md) finds that the spatial
@@ -27,7 +28,9 @@ quota-only20k comparison, reusing V131 and preserving the original trials.
 An optional [ordinary-photo epoch order](photographic-epoch-order.md) now has a
 full actual-reader audit on the prepared 90,778/33 set. At the same seed70/20k/B16
 and 5% quota it visits all photos, versus 69.26% with replacement. Current jobs
-keep replacement sampling; the new order has no trained-quality result.
+keep their original sampling; the new order has no trained-quality result.
+The [V134/V135 runner](photo-epoch-training.md) has four actual16+2 checks
+complete and queues its 20k comparison and full endpoint/native reviews.
 
 ## Augmentation before the final reduction
 

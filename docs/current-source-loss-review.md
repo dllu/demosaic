@@ -21,7 +21,7 @@ result and does not certify every retained photo pristine.
 | V129 data / V130 precision pilots | 90,782 / 27 | Both 1k reviews complete; small mixed detail changes |
 | V131/V132 spatial trial | 90,781 / 29 | CPU/CUDA checks pass; full 20k and progress reviews queued; quality unmeasured |
 | V133 quota trial | 90,781 / 29 | CPU/CUDA checks pass; 5% quota against original V131 50% control; full/progress reviews queued |
-| New prepared future cohort | **90,778 / 33** | Actual reader visits all 33 regions; untrained |
+| V134/V135 cleaned-data cohort | **90,778 / 33** | Four discarded CPU/CUDA checks complete; full 20k and endpoint reviews queued; quality unmeasured |
 
 [Mean-loss trial](conditional-mean-training.md) · [Spatial trial](raw-spatial-training.md) ·
 [Quota trial](reviewed-quota-training.md) · [FP32 pilot](training-precision-pilot.md).
@@ -40,6 +40,8 @@ bytes/order and validation/test counts of 2,303/2,255. Earlier
 Neither new membership nor new annotations replace active or queued inputs.
 An optional [ordinary-photo epoch order](photographic-epoch-order.md) visits
 all prepared photos within the audited 20k schedule; its quality is unmeasured.
+The [V134/V135 comparison](photo-epoch-training.md) now queues its controlled
+training test on this cohort after four real implementation checks.
 
 ## Latest inspection and detail support
 

@@ -4,8 +4,9 @@
 photos within 20,000 updates, versus 62,873 (69.26%) with replacement.** It
 changes ordinary photographic identities while retaining the same domain,
 procedural and reviewed-region choices. This is a verified data-pipeline option;
-its restoration-quality effect is unmeasured. Current and queued trials keep
-their existing replacement sampling and frozen inputs.
+its restoration-quality effect is unmeasured. Earlier trials keep their frozen
+inputs. The new [V134/V135 comparison](photo-epoch-training.md) has all four real
+CPU/CUDA checks complete and queues matched 20k replacement/epoch training.
 
 [Full actual-reader audit, source bindings and tests](results/photo-epoch-order-v1.json) ·
 [Cumulative source coverage](results/photo-epoch-order-coverage-v1.csv) ·
@@ -67,9 +68,10 @@ Checkpoints preserve the header and payload in their source snapshot. Workers
 and resumed loaders use the same stateless global-index lookup.
 
 Each discarded CPU/CUDA check needs its own order matching its exact recipe;
-a production B16 order cannot be reused with a B1 check. Existing experiment
-runners and queues have not been changed or launched with this policy. A
-controlled trained comparison is the next quality test after the current trials.
+a production B16 order cannot be reused with a B1 check. The
+[matched training runner](photo-epoch-training.md) prepares separate CPU orders
+and queues production after V133's original training and automated review exit.
+No existing trial's source inputs or budget are changed.
 
 ## Verification
 
@@ -88,7 +90,7 @@ remain unchanged and CUDA stays uninitialized. This audit performs no neural,
 sensor-noise, RAW or optimizer work; it does not visually certify every corpus
 source. The existing source-review ledger remains at 1,919 inspected IDs.
 
-The focused suite passes **83 tests**, including an actual tiny-model
+The original focused suite passed **83 tests**, including an actual tiny-model
 uninterrupted/resumed training comparison, source-snapshot payload equality and
 changed-order rejection before construction. These unit tests use their own
 small fixtures; no production model is trained or re-evaluated. Ruff passes.

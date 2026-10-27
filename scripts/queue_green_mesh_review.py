@@ -134,6 +134,14 @@ def retained_profile_controls(result, inputs, arrays, source_arms, wanted_arms, 
     return retained
 
 
+def deferred_mesh_arms(available, requested=None):
+    """Keep the legacy V131 default and bind newer retained controls explicitly."""
+    arms = ["V131"] if requested is None else list(requested)
+    if not arms or len(set(arms)) != len(arms) or not set(arms) <= set(available):
+        raise ValueError("Deferred mesh controls must name distinct original endpoint arms")
+    return arms
+
+
 def prepare(
     root,
     comparison_plan,
@@ -144,6 +152,7 @@ def prepare(
     adopted=None,
     retained_endpoint_results=None,
     deferred_endpoint_plan=None,
+    deferred_endpoint_arms=None,
     render_models=None,
     maximum_wait_seconds=432000,
 ):
@@ -251,14 +260,14 @@ def prepare(
     if deferred_endpoint_plan is not None:
         previous = read(deferred_endpoint_plan)
         guard(previous)
+        retained_arms = deferred_mesh_arms(previous["new_arms"], deferred_endpoint_arms)
         previous_state_path = Path(previous["root"]) / "status.json"
         previous_state = read(previous_state_path)
         if (
             previous_state["plan"] != binding(deferred_endpoint_plan)
             or previous_state["status"].startswith("failed")
-            or "V131" not in previous["new_arms"]
         ):
-            raise ValueError("Expected original V131 mesh-control queue")
+            raise ValueError("Expected original mesh-control queue")
         if (
             not live(previous_state["owner"])
             and previous_state["status"] != "completed-new-mesh-predictions-native-viewing-pending"
@@ -272,7 +281,7 @@ def prepare(
             "plan": binding(deferred_endpoint_plan),
             "status": str(previous_state_path),
             "owner": previous_state["owner"],
-            "arms": ["V131"],
+            "arms": retained_arms,
         }
         inputs.append(binding(deferred_endpoint_plan))
     rendered_models = list(render_models or comparison["new_arms"])

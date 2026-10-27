@@ -48,6 +48,11 @@ def function_ast(path, name):
 
 
 def execution_arms(execution, binding, training_format):
+    if training_format == "matched-photographic-epoch-v1":
+        assert list(execution["arms"]) == ["V134", "V135"]
+        assert execution["restoration_tensors_by_arm"] == {"V134": 91, "V135": 91}
+        assert execution["paired_control_arm"] == "V134"
+        return [{"arm": arm, "training_plan": binding} for arm in execution["arms"]]
     if training_format == "reviewed-photographic-quota-v1":
         assert list(execution["arms"]) == ["V133"]
         assert execution["restoration_tensors_by_arm"] == {"V133": 91}
@@ -210,6 +215,38 @@ def verify_quota_training_state(actual, snapshot, comparison, expected_config=No
     assert counts["exact_unaffected_prepared_values"] > 0
 
 
+def verify_photo_epoch_training_state(actual, snapshot, comparison, expected_config):
+    """Require full endpoints, the frozen order policy and its input proof."""
+    verify_spatial_training_state(
+        actual, snapshot, False, expected_status="completed-photo-epoch-training-phase"
+    )
+    arm, config = actual["arm"], snapshot["config"]
+    assert arm in {"V134", "V135"}
+    assert config["seed"] == 70 and config["reviewed_roi_fraction"] == 0.05
+    assert config["noise_pair_draws"] == 1 and config["conditional_mean_weight"] == 0
+    assert config["reviewed_shadow_fraction"] == config["normalized_band_weight"] == 0
+    ignored = {"run", "experiment_notes", "validation_protocol"}
+    assert all(config.get(k) == v for k, v in expected_config.items() if k not in ignored)
+    if "validation_protocol" in expected_config:
+        assert (
+            config["validation_protocol_sha256"]
+            == ref(expected_config["validation_protocol"])["sha256"]
+        )
+    assert bool(config.get("photo_epoch_order")) == (arm == "V135")
+    if arm == "V134":
+        assert comparison is None and actual["matched_control_result"] is None
+        assert config.get("photo_epoch_order_sha256") is None
+    else:
+        assert config["photo_epoch_order_sha256"]
+        assert comparison["status"] == "passed-photo-epoch-unaffected-input-proof"
+        assert comparison["control"] == actual["matched_control_result"]
+        counts = comparison["counts"]
+        assert counts["checked_batches_before_model_forward"] == 18
+        assert counts["unaffected_first18_examples"] > 0
+        assert counts["exact_unaffected_prepared_values"] > 0
+        assert counts["exact_native_paired_whole_batches"] == 9954
+
+
 def training_execution_binding(training_root, status):
     """Follow the exact live controller's receipt, including nondefault filenames."""
     shared = "execution_plan" not in status and "plan" in status
@@ -324,7 +361,12 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
         "training_status": str(training_root / "status.json"),
         "training_format": training_format,
         "full_gfx_common_grid_alignment": 32
-        if training_format in {"matched-raw-spatial-v1", "reviewed-photographic-quota-v1"}
+        if training_format
+        in {
+            "matched-raw-spatial-v1",
+            "reviewed-photographic-quota-v1",
+            "matched-photographic-epoch-v1",
+        }
         else None,
         "training_owner_field": owner_field,
         "training_execution_field": execution_field,
@@ -355,7 +397,8 @@ def prepare(root, artifacts, training_root, witness_plan, gfx_selections, contro
         "controller_source": ref(work / "scripts/queue_matched_quality_predictions.py"),
         "maximum_training_wait_seconds": (
             691200
-            if training_format == "reviewed-photographic-quota-v1"
+            if training_format
+            in {"reviewed-photographic-quota-v1", "matched-photographic-epoch-v1"}
             else 432000
             if training_format == "matched-raw-spatial-v1"
             else 259200
@@ -429,6 +472,17 @@ def endpoint_plan(plan, state):
             expected_config = yaml.safe_load(Path(training["arms"][name]["train"]).read_text())
             verify_quota_training_state(actual, snapshot, comparison, expected_config)
             inputs.append(ref(comparison_path))
+        if training_format == "matched-photographic-epoch-v1":
+            import yaml
+
+            comparison = None
+            if name == "V135":
+                comparison_path = Path(training["root"]) / "train-V135-input-comparison-v1.json"
+                comparison = read(comparison_path)
+                assert comparison["candidate"] == accounting
+                inputs.append(ref(comparison_path))
+            expected_config = yaml.safe_load(Path(training["arms"][name]["train"]).read_text())
+            verify_photo_epoch_training_state(actual, snapshot, comparison, expected_config)
         lineage = {**training["parent"], "step": 20000}
         assert snapshot["step"] == 20000 and snapshot["config"]["initialized_from"] == lineage
         checkpoints.append(
