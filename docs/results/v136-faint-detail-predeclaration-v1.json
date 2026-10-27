@@ -1,0 +1,104 @@
+{
+  "status": "analysis-frozen-and-retained-control-math-checked-before-candidate-quality",
+  "recorded_local": "2026-10-27T13:59:24.223776-07:00",
+  "analysis_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-faint-detail-supplement-v1/analysis-plan-v1.json",
+    "sha256": "9fa5b74fb524f3060ed8aa8036719bbc0842be742e50abab68b36da30b24e849"
+  },
+  "prospective_readiness": {
+    "created_unix": 1793134466.4596434,
+    "created_local": "2026-10-27T13:54:26.459950-07:00",
+    "training_owner": {
+      "pid": 2690337,
+      "created": 1793132297.96
+    },
+    "quality_owner": {
+      "pid": 2692509,
+      "created": 1793132639.7
+    },
+    "training_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-pilot-v1/run/plan.json",
+      "sha256": "eb9cddbd504505c3bf68319ad20d869ef90b7d514aeed98004008e5cbd12c654"
+    },
+    "quality_queue_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-attention-quality-v1/queue-plan-v1.json",
+      "sha256": "002979788e3ac6139a98a6b65735f12e6c868af61968c97408cc0117d306a738"
+    },
+    "latest_observed_training_event": {
+      "event": "train",
+      "step": 650,
+      "loss": 0.0024598927702754736,
+      "lr": 3.960909355034491e-06,
+      "grad_norm": 0.06769715249538422,
+      "seconds_per_step": 2.6757339158210045,
+      "cuda_gb": 8.502644224,
+      "domain": "paired-RAW",
+      "paired_sensor": 0.0011413374450057745,
+      "paired_coarse_rendered": 0.0024052041117101908,
+      "paired_auxiliary": 0.0011595316464081407,
+      "batch_sha256": "1aa09d39b24ebe01f635029fc7481760eba036b5c874c42086fc7630e1db8ca2"
+    },
+    "V136_quality_collection_exists": false,
+    "V136_quality_plan_exists": false,
+    "scope": "Analysis source and rules fixed before V136 completed1000 updates and before any of its queued quality predictions existed."
+  },
+  "retained_control_check": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-faint-detail-supplement-v1/retained-control-check-v1.json",
+    "sha256": "841548da39ef4c865b5296d3aefb27941daca54351fbbb215444b976254a4eee"
+  },
+  "retained_control_check_result": {
+    "status": "passed-retained-control-analysis-math-without-candidate-predictions",
+    "operator": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-faint-detail-supplement-v1/check-retained-controls-v1.py",
+      "sha256": "d5108fa94eecc1922068b4aecaf1719c336a1e1edded9dbae0481ca82727b25a"
+    },
+    "prospective_analysis": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-faint-detail-supplement-v1/analysis-plan-v1.json",
+      "sha256": "9fa5b74fb524f3060ed8aa8036719bbc0842be742e50abab68b36da30b24e849"
+    },
+    "already_saved_methods": [
+      "V120",
+      "V129 1k EMA"
+    ],
+    "stratum_rows": 120,
+    "decomposition_rows": 64,
+    "scalar_fields_checked": 496,
+    "display_channels_exact": 2457600,
+    "max_FFT_strata_difference": 5.96189764223709e-14,
+    "V136_quality_collection_exists": false,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "optimizer_updates": 0,
+    "Torch_imported": false
+  },
+  "source": [
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/analyze_retained_faint_detail.py",
+      "sha256": "bfc7ab8f3eb42bb396d31c911293770e8f4de79dde44423f9a63ad9925d71ad9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/scripts/audit_retained_faint_detail.py",
+      "sha256": "25f8354d098572ff71e5e0eb88bfa7c61b2d7bebcf98ecb5e6d0e514e7a2310c"
+    }
+  ],
+  "analytic_tests": {
+    "path": "/home/dllu/proj/demosaic/tests/test_retained_faint_detail.py",
+    "sha256": "e3e580d6b6e4b3491f056d6a6fb39a4516ced680d034494f44948d6e6f419a8a"
+  },
+  "test_log": {
+    "path": "/home/dllu/proj/demosaic/.cache/raw-global-faint-analysis-tests-v3.log",
+    "sha256": "ebd938888ffaa2af3581cec946b9b58fbc84d3d34af429b416dd4a0ad79f1a12"
+  },
+  "tests_passed": 4,
+  "initial_test_failure_preserved": {
+    "path": "/home/dllu/proj/demosaic/.cache/raw-global-faint-analysis-tests-v1.log",
+    "sha256": "f11063787d0455fb259c137a437e2cea58704b16efc096b52679112690438601"
+  },
+  "initial_failure_explanation": "An exact equality assertion for a floating mean-error fraction observed1.0000000000000002. Corrected only the analytic test to use1e-14 tolerance; operator arithmetic unchanged.",
+  "new_neural_forwards": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "optimizer_updates": 0,
+  "scope": "Prospectively frozen descriptive supplement to the already-declared102-call V136 full-original1000 endpoint review. Sixteen retained faintADC observations/four contexts, all4CFAs, no extra data/model/noise/RAW/optimizer execution, no global ranking claim. Original-source masks and shared40x display follow the prior faint precision definition; independent mirroredFFT/channelwise-display/long-double audit follows."
+}

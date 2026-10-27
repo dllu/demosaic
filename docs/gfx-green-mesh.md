@@ -33,6 +33,32 @@ V124's [14k progress review](#v124-at-14000-updates) is complete; its original
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
+## V136 global-attention pilot
+
+The [completed matched1k review](v136-global-attention-quality.md) shows no clear
+new lattice recovery. Nominal conditioning still largely erases the fine mesh;
+the fixed nearby3879 profile retains weak irregular diagonal texture in all
+three methods. Both regions/profiles were actually viewed; the left blue point
+persists.
+
+Columns: noisy → V120 → V1291k → V1361k → independent **DSCF3835 ISO100/AHD
+reference, not GT**. Native160px cells share768px contexts, WB/matrix and+4EV.
+The corrected ISO100 exposure is46 seconds before DSCF3842 ISO6400, with different
+aperture, exposure time and moving subjects. The main3879/3880 pair remains in use.
+
+![V136 nominal fine mesh](images/v136-global-attention-quality-v1/mesh-nominal-fine-green-mesh-right-comparison.png)
+
+![V136 fixed nearby-profile fine mesh](images/v136-global-attention-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+Left regions: [nominal](images/v136-global-attention-quality-v1/mesh-nominal-fine-green-mesh-left-comparison.png) ·
+[nearby profile](images/v136-global-attention-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png).
+Nominal shot/read are`.00128`/`6.5536e−6`; nearby are
+`.0014635775921166604`/`1.0715704128646712e−6`.
+Exactly two new root/DINO forwards within the102-input review reuse both fixed
+inputs and all old predictions. No RAW decoding, conditioning sweep or reference
+fitting occurs. Both camera JPEGs remain available in the standing comparison
+below. [Source/ROI/checkpoint/profile/display metadata](images/v136-global-attention-quality-v1/manifest.json).
+
 ## V124 at 14,000 updates
 
 The [actual14k checkpoint review](v124-progress14000.md) leaves the lattice

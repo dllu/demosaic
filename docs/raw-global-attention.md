@@ -1,7 +1,10 @@
 # Global attention over RAW detail
 
-**V136's genuine CPU/CUDA16+2 checks pass and its matched1,000-update pilot is
-running. Quality is unmeasured; V120 remains the general recommendation.**
+**V136's matched1,000-update pilot and102-input quality review are complete.**
+Against saved V129, mean gains are+.0003dB ordinary,+.0007–.0026dB shadow and
++.0131dB faint ADC, with mixed local detail and no clear new mesh recovery.
+V120 remains the general recommendation.
+[Measured results, native triplets and both GFX scenes](v136-global-attention-quality.md).
 This optional18,272-parameter branch summarizes signed RAW detail over a whole
 tile and returns context to individual packed pixels. It complements the
 existing official frozen DINOv3 Small pyramid and DRUNet restoration path.
@@ -76,7 +79,7 @@ After erasing only the disabled option, guards and assignments, the complete
 `model.py`/`pretrained_rgb.py` ASTs match the prior frozen production-compatible
 source. Existing numerical operators are unchanged. Early resume checks reject
 disabled or nonboolean global settings before constructing a model. Actual
-portable inference will be checked by the queued endpoint collection.
+portable inference passes in the completed endpoint collection.
 
 V136 starts freshly from V120's completed20k Small EMA, SHA256
 `a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb`.
@@ -90,7 +93,7 @@ The newer90,778/34 prepared bank is separate; this architectural comparison
 does not silently substitute its data. V134/V135 keep their own33-region inputs.
 There is no new20k global-attention run queued by this pilot.
 
-## Actual checks and pending quality
+## Actual checks and completed1k quality
 
 CPU128/B1/FP32 and CUDA256/B16/BF16 each complete16 updates plus a real two-update
 resume, preserving the16-step files. All109 model/EMA tensors and107 Adam states
@@ -108,22 +111,30 @@ first18 batches on each device. No neural/noise/RAW/optimizer work occurs in
 that audit; CUDA remains uninitialized. The focused suites pass93 tests, plus
 29 legacy RGB/loading, adoption and inference-alignment regressions.
 
-Fresh production has an original1,000-update horizon,64 validation calls and
-16,000 training contexts. CPU admission is40GiB; CUDA/production52GiB, with a
+Production completes its original1,000-update horizon,64 validation calls and
+16,000 training contexts. All1,000 clean/noisy hashes match saved V129.
+CPU admission is40GiB; CUDA/production52GiB, with a
 16GiB allocator cap and32GB runtime floor. Limits are30min per check and8h for
 production, with no automatic retry, prefix replay or schedule reset. Existing
 V124/V125 and all other controllers remain unchanged.
 
-A live dependent review declares **102 new root/DINO calls** on64 retained
+The completed dependent review uses **102 new root/DINO calls** on64 retained
 shadow inputs,16 ordinary material inputs,16 faint ADC inputs, four main-GFX512
 contexts and two extra-mesh768 fixed profiles. All V120/V129 predictions are
 reused after exact five-tensor fingerprint checks. Full original1k state,
-lineage,109 EMA/107 Adam and all1,000 training-input matches are required before
+lineage,109 EMA/107 Adam and all1,000 training-input matches are verified before
 inference. Collection uses52GiB admission,12GiB CUDA cap and32GiB runtime floor.
 
-NumPy scoring, independent FFT/native-PNG auditing and actual viewing follow.
-Reports include native noisy/restored/exact synthetic GT triplets and accurately
-labeled approximate references. Both main DSCF3879/3880 and corrected extra
-DSCF3842/DSCF3835 scenes, JPEGs and siblings stay held out. This finite pilot
-does not establish complete20k, full427 photo/camera/color/frame quality,
-convergence or speed. No recommendation changes before measured evidence.
+Independent FFT/display auditing checks288 metric rows,72 summaries and all64
+native PNGs,19,660,800 exact RGB channels. The prospectively frozen faint
+supplement checks180 original-source strata,96 mean/spatial error decompositions
+and1,536,000 exact PNG channels. All32 primary comparison boards, two exact-GT
+triplets and four enhanced boards were actually viewed.
+
+The [quality report](v136-global-attention-quality.md) records tiny mean gains
+over V129 alongside mixed local errors and no clear new fine-mesh recovery.
+Memory-path gradients are very small despite being nonzero; this is an
+optimization concern, without a causal ablation. No20k global run is queued.
+Both main DSCF3879/3880 and corrected extra DSCF3842/DSCF3835 scenes, JPEGs and
+siblings stay held out. This finite pilot does not establish complete20k,
+full427 photo/camera/color/frame quality, convergence or speed.

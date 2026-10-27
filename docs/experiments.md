@@ -51,6 +51,13 @@ with mean-loss weights0/.25. [V12414k progress](v124-progress14000.md) finds
 noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB and no clear fine-mesh recovery.
 Full endpoint and repeated-noise mean-loss comparison remain pending.
 
+The [completed V136 global-attention pilot](v136-global-attention-quality.md)
+matches all1,000 clean/noisy batches to saved V129 and adds exactly102 quality
+forwards. Ordinary/shadow/faint means rise slightly over V129, but local detail
+changes are mixed and no clear new fine-mesh recovery is visible. Native
+triplets, both corrected GFX scenes and independent score/pixel audits are
+published. V120 remains the general recommendation; no20k global run is queued.
+
 The [V1239k frequency-feature midpoint](v123-midpoint-quality.md) now includes
 16 material predictions and six GFX contexts, reusing47 saved controls. Selected
 PSNR changes are tiny, and fine mesh/foliage remains weak. Its

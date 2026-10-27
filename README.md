@@ -30,7 +30,7 @@ all prepared photos within 20k steps; its trained quality remains unmeasured.
 | [V131/V132 spatial attention](docs/raw-spatial-training.md) | Four genuine CPU/CUDA checks pass;20k per arm queued on90,781/29 after V125's admission. An early102-input comparison waits for their retained1k progress snapshots |
 | [V133 photographic quota](docs/reviewed-quota-training.md) | CPU/CUDA checks pass; 5% versus V131's 50% is queued at the same 20k budget. Early and full photo/camera/color/GFX reviews are queued with saved controls reused; quality remains unmeasured |
 | [V134/V135 cleaned data and photo epochs](docs/photo-epoch-training.md) | All four real 16+2 checks pass on 90,778/33. Matched 20k replacement/epoch runs and full native/GFX reviews are queued after V133's automated review; quality is unmeasured |
-| [V136 global RAW attention](docs/raw-global-attention.md) | Genuine CPU/CUDA16+2 checks pass; matched1k pilot runs against saved V129, with102-input native/GFX review queued. Quality is unmeasured |
+| [V136 global RAW attention](docs/v136-global-attention-quality.md) | Matched1k review complete: +.0003dB ordinary, +.0007–.0026dB shadow and +.0131dB faint ADC over V129; mixed local detail and no clear new fine-mesh recovery. Native crops and independent audits published |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
