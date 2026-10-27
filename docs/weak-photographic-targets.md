@@ -23,8 +23,9 @@ passes actual source/crop/target and sampler checks. V121 keeps its original
 90,787-source binding. The [V122/V123 architectural trials](learned-raw-frequency-training.md)
 now use the90,786-source/fourteen-region binding.
 
-An **optional20-region bank on90,784 sources** is now prepared for a future
-trial. It preserves all fourteen example objects and adds six actually inspected
+The **20-region bank on90,784 sources** is prepared and queued for the
+[V124/V125 trials](conditional-mean-training.md). It preserves all fourteen
+example objects and adds six actually inspected
 weak material fields. Two separately inspected sources—a painting reproduction
 and a thermographic display—are withheld only from that future cohort.
 The real reader validates all twenty regions and exercises the six additions.
@@ -32,6 +33,15 @@ No active recipe, quota or training input changes; its quality effect is unknown
 [New catalogue](../configs/low-contrast-training-rois-cleaned90784-v1.json) ·
 [Actual review, reconstruction and reader evidence](results/thin-photographic-materials-v1.json).
 [Preserved verification correction](results/thin-photographic-materials-publication-v1.json).
+
+The [latest V123 source review](current-source-loss-review.md) prepares a separate
+**90,783-source binding with the same twenty region objects**, withholding one
+additional painting-dominated source. The actual reader reproduces all twenty
+region targets and eight ordinary/procedural controls exactly, and exercises the
+excluded-source retry. This alternative is untrained; queued V124/V125 inputs
+remain unchanged.
+[Rebound catalogue](../configs/low-contrast-training-rois-cleaned90783-v1.json) ·
+[Source decisions and independent checks](results/v123-source-loss-through5400-review-v1.json).
 
 [Catalogue](../configs/low-contrast-training-rois-cleaned90787-v1.json) ·
 [Actual visual decisions](results/weak-photographic-targets-review-v1.json) ·

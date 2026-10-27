@@ -1,18 +1,105 @@
 # Current Small-model source review
 
-**The latest16-source review prepares a90,784-source future cohort and six new
-material regions.** It withholds one framed painting reproduction and one
-photographed thermographic display from the next visible-light photographic
-cohort. Fourteen sources remain eligible; six receive inspected weak-detail
-regions in an optional20-region bank. This is curation/readiness evidence,
-with trained-quality effects unmeasured. Active V122/V123 still use90,786 sources
-and fourteen regions; V120/V121 retain their original inputs.
+**The latest V123 loss-ranked review retains19 of20 photographs and prepares a
+90,783-source future cohort.** One painting-dominated source is withheld;
+fine feathers, foliage, insect hairs and physical glazed tiles remain eligible.
+All twenty weak-detail region objects are preserved. Trained-quality effects
+are unmeasured. Active V122/V123 keep90,786 sources/fourteen regions; queued
+V124/V125 keep their frozen90,784-source/twenty-region inputs.
 
-[Latest decisions, pixel reconstruction and actual reader](results/thin-photographic-materials-v1.json) ·
+[Latest20 decisions and independent checks](results/v123-source-loss-through5400-review-v1.json) ·
+[Decisions and source credits, CSV](results/v123-source-loss-through5400-decisions-v1.csv) ·
+[Native image metadata](images/v123-source-loss-through5400-v1/manifest.json).
+
+## V123 high-loss source inspection
+
+The frozen trace prefix through update5,400 contains448 diagnostic draws,
+including326 photographic-branch draws. Skipping49 draws already covered by the
+1,659-ID review ledger leaves277 distinct eligible sources. Nomination selects
+four highest singleton losses per noise group, then four remaining highest
+gradient errors. All twenty IDs are new to that ledger.
+
+| Training noise group | Eligible draws/IDs | Selected |
+| --- | ---: | ---: |
+| ADC-only: shot/read both zero | 25 | 4 |
+| Positive sigma18 ≤ .005 | 112 | 4 |
+| .005 < sigma18 ≤ .02 | 116 | 4 |
+| sigma18 > .02 | 24 | 4 |
+| Remaining highest gradient error | Same eligible pool | 4 |
+
+Here sigma18 = `sqrt(.18 × shot + read)` uses training coefficients. Evolving
+weights, exposure, camera transforms and noise confound these scores; they
+nominate source inspection and are not endpoint quality measurements.
+All four sheets were actually viewed:20 source thumbnails and40 native256
+source/area8-target cells. Three ambiguous or weak-detail cases received native1024
+source views. No scored augmentation or noise realization is replayed.
+
+The ceiling photograph below is dominated by painted figures and a painted
+portrait. The larger view confirms that target content. Consistent with the
+earlier painting-reproduction decision, this exact source is omitted from a
+separate future photographic-target cohort. This is a domain choice, not a
+claim that the photograph is technically defective.
+
+![Painting-dominated ceiling: source context, native source and area8 target](images/v123-source-loss-through5400-v1/withheld-ceiling-painting.png)
+
+Source: [Friedrich Haag, Münsing-Holzhausen ceiling](https://commons.wikimedia.org/wiki/File:M%C3%BCnsing-Holzhausen_Kirchbergstra%C3%9Fe_10_024_2023_04_25.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+The tiled mural remains eligible. Its
+[native1024 view](images/v123-source-loss-through5400-v1/native1024-physical-mosaic.png)
+resolves grout seams, uneven reflections, pits and glaze texture. Those are
+physical surface features worth learning, despite the artistic subject.
+
+![Retained physical glazed tiles](images/v123-source-loss-through5400-v1/retained-physical-mosaic.png)
+
+Source: [Zofo, Badaev house tiled panel](https://commons.wikimedia.org/wiki/File:%D0%94%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D1%8B%D0%B9_%D0%B4%D0%BE%D0%BC_%D0%91%D0%B0%D0%B4%D0%B0%D0%B5%D0%B2%D0%B0_%D0%BD%D0%B0_%D1%83%D0%BB._%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%B8%D1%8F_-_%D1%86%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%B0%D1%80%D0%B0%D0%B4%D0%BD%D0%B0%D1%8F,_%D0%BC%D0%B0%D0%BB%D0%BE%D0%B5_%D0%BF%D0%B0%D0%BD%D0%BD%D0%BE_2.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+Faint owl feather filaments and overlapping white/gray edges are retained after
+[larger native inspection](images/v123-source-loss-through5400-v1/native1024-weak-feathers.png).
+The photograph is not proven noiseless or unprocessed; high loss does not make
+coherent weak plumage a reason for exclusion.
+
+![Retained weak owl plumage](images/v123-source-loss-through5400-v1/retained-weak-feathers.png)
+
+Source: [H. Zell, snowy owl at Karlsruhe Zoo](https://commons.wikimedia.org/wiki/File:Bubo_scandiacus_-_Karlsruhe_Zoo.jpg),
+[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+
+The railway hillside also stays eligible: fine fences, wires, roofs and foliage
+remain coherent in the area8 target despite some native softness and grain.
+
+![Retained railway, fine infrastructure and foliage](images/v123-source-loss-through5400-v1/retained-railway-foliage.png)
+
+Source: [MaedaAkihiko, N700A near Odawara and Atami](https://commons.wikimedia.org/wiki/File:N700A-Odawara-Atami.jpg),
+[CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+All examples above are modified by cropping, binning and ICC/display conversion;
+only full-source thumbnails resize. The source256 cell is centered within the
+larger field covered by the target256 cell. Display exposure is ×1. These are
+source/target inspections, without restored predictions.
+
+The future4×/8× manifests remove exactly
+`76ab25e4e51fdfe4981f4d42739153da1db2d812` from the earlier90,784-source cohort.
+Every other literal row and all2,303/2,255 validation/test rows remain identical
+and ordered. The [rebound20-region catalogue](../configs/low-contrast-training-rois-cleaned90783-v1.json)
+preserves all twenty example objects and changes their manifest binding only.
+The actual frozen reader validates all20 regions, reproduces20 augmented region
+targets plus four ordinary and four procedural controls exactly across the
+90784/90783 bindings:5,505,024 FP32 values. Replaying the nominated source draw
+opens only its eligible replacement, without opening the withheld source cache.
+This is readiness evidence; no training run uses the new cohort yet.
+
+Independent checks reproduce the20-source selection, verify original JPEG SHA1
+and cache SHA256 bindings, and compare3,932,160 native-source channels exactly.
+Among3,932,160 target-preview channels,13 differ by one DN8 at FP32/FP64 rounding;
+all others match. The three larger views overlap prior crops at589,824 exact
+channels. Six published PNGs are byte-identical to the actually viewed originals.
+No neural inference, new noise, RAW decode or optimizer work is added.
+
+## Earlier material/domain extension
+
+[Sixteen decisions, pixel reconstruction and actual reader](results/thin-photographic-materials-v1.json) ·
 [Sixteen decisions and source credits, CSV](results/thin-photographic-materials-decisions-v1.csv) ·
 [Prepared20-region targets](weak-photographic-targets.md#prepared20-region-material-extension).
-
-## Latest photographic-domain decisions
 
 These nominees come from an existing historical ADC-only target-statistic query,
 not the live V121 loss stream. All sixteen full-source thumbnails and32 native256
@@ -142,7 +229,8 @@ targets remain coherent under the current strategy.
 | Updates 801–5,000 | 28 | 27 | 1 |
 | Updates 5,001–18,000 | 28 | 28 | 0 |
 | New material/domain nomination | 16 | 14 | 2 |
-| Total across these distinct recent scopes | 100 | 97 | 3 |
+| V123 through5,400 | 20 | 19 | 1 |
+| Total across these distinct recent scopes | 120 | 116 | 4 |
 
 The earlier standalone roofing advertisement remains withheld from the 90,786
 cohort: `e264392bcea19447f69f7d4599945de78f7e0c7c`.
@@ -150,9 +238,10 @@ cohort: `e264392bcea19447f69f7d4599945de78f7e0c7c`.
 are preserved, along with the [first800 decisions](results/v120-current-source-loss-review-v1.json).
 V120/V121 retain their original 90,791/90,787-source bindings. V122/V123 use the
 90,786-source cohort and [unchanged fourteen-region catalogue](../configs/low-contrast-training-rois-cleaned90786-v1.json).
-That loss-ranked pass changed no source, manifest or catalogue. The new
-material/domain pass prepares the90784/20-region alternative above while
-preserving all active training inputs.
+The earlier material/domain pass produced the90784/20-region inputs now frozen
+for queued V124/V125. The latest V123 source review prepares the separate
+90783/20-region alternative above. Neither active nor queued training inputs
+are changed by this latest review.
 
 For the V120 through18,000 pass, independent checks verify all28 original JPEG
 SHA1 and whole-cache SHA256
@@ -162,7 +251,7 @@ all others match. Four native1024 views overlap the previous native256 crops at
 786,432 exact channels. Sheet/individual-strip pixels and five published PNGs
 match their actually viewed originals.
 
-The de-duplication ledger now contains **1,659 IDs** across explicit prior
+The de-duplication ledger now contains **1,679 IDs** across explicit prior
 scopes. It is not a membership/exclusion list or a uniform corpus audit.
 Whole-corpus cleanliness and trained-quality effects remain unproven. No neural
 call, new noise, RAW decode, optimizer update or sampling-policy change is added

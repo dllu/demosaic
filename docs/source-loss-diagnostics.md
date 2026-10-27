@@ -9,16 +9,19 @@ forbid neural Module calls and verify unchanged Python/NumPy/Torch CPU/CUDA RNG
 states; both V120/V121 production runs completed20k and independent numerical audits.
 [Current controlled trials and launch evidence](paired32-weak-detail-training.md).
 
-The [current Small-model source review](current-source-loss-review.md) has three
-completed passes:83 of84 inspected sources are retained, with one standalone
-digital advertisement withheld. The newest28-source inspection through18000
-retains all28 after larger native checks. V122/V123 use the90,786-source cohort
-with all fourteen regions intact.
+The [current Small-model source review](current-source-loss-review.md) now
+includes20 fresh V123 sources through update5,400:19 retained and one
+painting-dominated source withheld only from a separate future90,783-source
+cohort. All twenty weak-detail region objects are preserved, with actual reader
+and native pixel checks. Active V122/V123 keep90,786 sources/fourteen regions;
+queued V124/V125 keep their frozen90,784-source/twenty-region inputs.
+The earlier three V120 loss-ranked passes retain83 of84 inspected sources,
+with one standalone digital advertisement withheld. Their receipts remain intact.
 An additional16-source material/domain review uses historical ADC-only target
-statistics, separately from these live losses. It prepares a future90,784-source
+statistics, separately from these live losses. It prepared the90,784-source
 cohort after two specific withholds and a20-region bank with six inspected weak
-fields. Actual source reconstruction and the clean reader pass; no active
-cohort changes. [Latest source decisions and boundaries](current-source-loss-review.md).
+fields now queued for V124/V125. Actual source reconstruction and the clean
+reader pass; no active cohort changes. [Latest source decisions and boundaries](current-source-loss-review.md).
 Losses nominate inspection rather than label bad photos automatically. The
 active V120/V121 cohorts retain their original frozen membership.
 
