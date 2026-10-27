@@ -1,6 +1,9 @@
 # Learned RAW frequency features: V122/V123 training
 
-**V122 completed its original20,000 updates; V123 joint adaptation is running.**
+**V122 completed its original20,000 updates; V123 saved12,249 updates after a
+memory-guard stop.** The [explicit saved-state continuation](v123-memory-guard-recovery.md)
+waits for the shadow pilot to release memory, then spends only the remaining7,751
+updates within the original deadline. Original failed receipts remain preserved.
 The original controller advanced to V123 after the same V122 worker completed.
 V122's temporary GPU yield preserved the in-memory training state, without a
 restart or checkpoint reload.
@@ -21,7 +24,7 @@ training forwards and optimizer updates, plus640 validation forwards and20,640
 encoder calls. Domains match the prospectively declared9,900 Commons/procedural,4,979
 paired/5,121 native batches. The CPU verification constructs no model, adds no
 forwards and leaves CUDA uninitialized; it does not reconstruct every training
-input or establish image quality. The original evaluator waits for both full runs.
+input or establish image quality. The rebound evaluator waits for both full runs.
 
 [Launch and implementation evidence](results/v122-v123-frequency-training-start-v1.json) ·
 [V122 recipe](../configs/quality-v115-learned-frequency-only-v122.yaml) ·

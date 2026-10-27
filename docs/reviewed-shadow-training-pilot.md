@@ -5,6 +5,8 @@ Learned-quality results are pending.** Both arms start from completed V120 Small
 EMA on90,783 sources and23 reviewed regions. V120 remains the current general
 recommendation. Original V122/V123 and queued V124/V125 inputs, parents and
 budgets are unchanged.
+V123's separate memory-guard stop and [saved-state recovery](v123-memory-guard-recovery.md)
+wait for this pilot's evaluation to release memory; no pilot training is restarted.
 
 [Execution and independent checks](results/reviewed-shadow-training-pilot-setup-v1.json) ·
 [Publication/live-owner verification](results/reviewed-shadow-training-pilot-publication-v1.json) ·

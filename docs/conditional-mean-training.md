@@ -56,8 +56,12 @@ before constructing a model, and verify the exact common parent, official
 encoder, finite 91 model/EMA tensors and 89 AdamW states.
 
 Full runs start freshly from V120 after those checks and after the exact original
-V122/V123 training, quality, independent-audit, report and green-mesh owners
-finish successfully. Those existing jobs and frozen sources are unchanged.
+V122/V123 training, quality, independent-audit, report and green-mesh sequence
+finishes successfully. The V123 memory guard stopped its original owner and
+propagated failure through the waiting dependents. An
+[explicit recovery](v123-memory-guard-recovery.md) rebinds their owners while
+retaining original failed receipts, source bytes, inputs and deadlines.
+All four completed checks are reused; no V124/V125 production update had started.
 Each production worker has a prospective 48-hour limit, 24 GiB CUDA allocator cap,
 64 GiB production launch headroom (56 GiB for CUDA checks) and a 32 GB runtime
 available-memory floor. Internal/external
@@ -74,11 +78,11 @@ must precede a quality claim.
 
 Local execution roots are under ".cache/current-quality-20261023-v1":
 
-- conditional-mean-training-v2/run (controller; original worker artifacts stay in v1/run)
-- V124-V125-independent-noise-quality-v2
-- V124-V125-independent-noise-independent-audit-v2
-- V124-V125-independent-noise-matched-review-v2
-- V124-V125-green-mesh-review-v2
+- conditional-mean-training-recovery-v3/run (controller; original worker artifacts stay in v1/run)
+- V124-V125-independent-noise-quality-recovery-v2
+- V124-V125-independent-noise-independent-audit-recovery-v2
+- V124-V125-independent-noise-matched-review-recovery-v2
+- V124-V125-green-mesh-review-recovery-v2
 
 All four discarded checks completed 16 fresh updates plus two valid resumed
 updates. The arms' first18 prepared inputs match on each device, and eight
