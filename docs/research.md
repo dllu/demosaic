@@ -17,18 +17,20 @@ unresolved; broad state-of-the-art quality is unproven.
 | --- | --- |
 | Can a frozen foundation encoder supply useful detail supervision? | [Completed V128 pilot](v128-feature-pilot-quality.md): the26-call gradient diagnostic passes, but weight.1 gives no useful gain at1,000 matched updates. Independent scores and all28 native boards are complete; the term stays off by default |
 | Can RAW phase/frequency features preserve thin structures? | [Completed V122/V123 trial](v122-v123-quality.md): V122 slightly improves weak eight-pixel carrier response; V123 gains0.05493dB photo PSNR against it but lowers unseen-camera PSNR and greatly worsens the ADC tail. Weak natural detail/mesh remain soft; full numerical/selected native review is published |
-| Can local attention use spatial repetition more effectively? | [Optional RAW spatial branch](raw-spatial-features.md) adds22,664 parameters and preserves constant features. The [V131/V13220k trial](raw-spatial-training.md) has four exact-recipe CPU/CUDA16+2 checks complete on90,781 photos/29 regions. Production waits for V125's admission; quality remains unmeasured |
+| Can local attention use spatial repetition more effectively? | [Optional RAW spatial branch](raw-spatial-features.md) adds22,664 parameters and preserves constant features. The [V131/V13220k trial](raw-spatial-training.md) has four exact-recipe CPU/CUDA16+2 checks complete on90,781 photos/29 regions. V131 original20k control now runs and V132 follows; quality remains unmeasured |
 | Can whole-tile matching preserve repeated weak detail? | [Completed V1361k](v136-global-attention-quality.md) has tiny mean gains and weak mesh recovery. [Completed normalized V1371k](v137-global-conditioned-quality.md) gives stronger query/key adaptation and faint ADC+.0334dB over V136, with ordinary/shadows−.0005–.0044dB, mixed local detail and no clear new lattice recovery. State, pixel and actual native review are complete; better-conditioned learning alone has not solved quality |
 | Can a larger update to the new branch help without moving the trained parent? | [V138](raw-global-only-training.md) freezes91 parent model/EMA tensors and trains18 normalized global tensors at LR1e−3. Genuine CPU/CUDA16+2 checks pass; the original1k run and native/GFX review wait for V125 completion. Combined scope/LR intervention; quality remains unmeasured |
 | Does training precision limit faint detail? | [Completed V130](training-precision-pilot.md) changes only BF16→FP32 training against saved V129. Selected weak fur/grass/wood [faint-ADC bands](faint-adc-precision.md) improve slightly in gain/error while global PSNR falls0.01720dB. Native changes are subtle; noisy material and real mesh remain weak |
-| Is weak detail lost through persistent conditional bias? | [Independent-noise diagnosis](conditional-noise-response.md) finds persistent faint fur/wood error after diagnostic multi-observation averaging. [V12414k progress](v124-progress14000.md) gives small noisy/shadow gains but worse faint ADC and no clear mesh recovery. Original20k control is complete; [V125](conditional-mean-training.md) awaits declared launch headroom before the added mean loss and repeated-noise endpoint comparison |
+| Is weak detail lost through persistent conditional bias? | [Independent-noise diagnosis](conditional-noise-response.md) finds persistent faint fur/wood error after diagnostic multi-observation averaging. [V12414k progress](v124-progress14000.md) gives small noisy/shadow gains but worse faint ADC and no clear mesh recovery. Original20k control is complete; [V125](conditional-mean-training.md) now trains with the added mean loss before the repeated-noise endpoint comparison |
 | Does adding more realistic reviewed shadow detail help? | [Completed V126/V1271000-update pilot](reviewed-shadow-pilot-quality.md) finds no useful gain on its retained material/shadow/GFX support. Shadow policy stays off by default; the23-region reviewed bank remains available |
 | Does fine-detail loss reweighting suffice? | [Completed V117/V11820k comparison](v117-v118-quality.md) finds lower weak natural-detail response and a worse ADC color tail with the normalized band term. Keep it off; improved local output-gradient alignment did not predict trained quality |
 | Does encoder size alone fix weak contrast? | [Full Tiny/Small diagnosis](local-material-detail.md) finds nearly unchanged weakest-stratum gain on427 photos. Small's camera/detail tradeoffs remain useful; no size-only explanation is established |
 | How much of the bigger corpus does a run visit? | [Full20k source audit](training-source-schedule-coverage.md) finds46.36% visitation at the spatial trial's50% reviewed quota versus69.26% at5%. [V133](reviewed-quota-training.md) now queues that quota-only20k comparison against V131; CPU/CUDA16+2 and independent saved-state checks pass. Quality remains unmeasured |
 
-The latest [source inspection](current-source-loss-review.md) has1,923 unique
-reviewed source IDs and a future34-region bank. Quality work uses zero optical PSF augmentation and
+The latest [source inspection](v124-final-source-review.md) has1,963 unique
+reviewed source IDs and a future90,776-photo/35-region bank. It withholds two
+grainy/artwork-heavy photos and admits one mixed-contrast leaf context; three
+stronger down/fibre/rock proposals stay ordinary photos. Quality work uses zero optical PSF augmentation and
 geometry before final downsampling, with reviewed material regions and corrected
 paired-reference masks. [Training pipeline](training-pipeline.md) ·
 [Actual target contrast coverage](training-target-contrast-coverage.md).
@@ -44,7 +46,7 @@ withholds two display/artwork-dominated frames from a future90,778-source/33-reg
 cohort. It adds fine wing mesh and subtle pitted stone while preserving all31
 prior region objects. Native annotations and actual saved full-context reader
 draws distinguish intrinsic source contrast from augmentation. Existing training
-inputs stay fixed: V131/V132 use90,781/29 and have full20k production queued;
+inputs stay fixed: V131/V132 use90,781/29, with V13120k running and V132 next;
 their quality is unmeasured. The completed [V129](reviewed-detail-training-pilot.md)
 27-region pilot has small mixed changes without clear large visible recovery.
 The [new texture review](repetitive-material-source-review.md) adds one qualified

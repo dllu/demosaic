@@ -1,9 +1,9 @@
 # V131/V132: full-budget spatial-detail trial
 
-**The matched20k comparison is queued; all four new CPU/CUDA checks passed.**
+**V131's original20k control is running; V132 follows. All four CPU/CUDA checks passed.**
 V131 continues V120's architecture and V132 adds the optional
 [RAW spatial branch](raw-spatial-features.md). Both use the cleaned90,781-photo
-cohort with29 reviewed regions. Production waits for V125's memory admission.
+cohort with29 reviewed regions. V131 started after V125's original memory admission.
 Quality is unmeasured; V120 remains the general recommendation.
 
 [Control recipe](../configs/quality-v120-raw-spatial-v131.yaml) ·

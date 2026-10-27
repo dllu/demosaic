@@ -46,7 +46,7 @@ RawNIND; V117 retains higher condition means and V121's changes are tiny.
 The [V124/V125 mean-loss trial](conditional-mean-training.md) uses V120's
 architecture and parent on the cleaned90,784-source/twenty-region corpus.
 All four CPU/CUDA16+2 checks pass; V124's original20k control is complete and
-V125 awaits its declared launch headroom. Both arms use16 unique targets and32 simulated observations,
+V125's original20k training is running. Both arms use16 unique targets and32 simulated observations,
 with mean-loss weights0/.25. [V12414k progress](v124-progress14000.md) finds
 noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB and no clear fine-mesh recovery.
 Full endpoint and repeated-noise mean-loss comparison remain pending.
@@ -163,9 +163,12 @@ V114 as its matched Tiny control. Native256 mask-path/source/loss and actual
 CUDA checks, complete evaluation, independent metrics and native review pass;
 its analytic gain does not establish better natural-detail quality.
 
-The source scan covers88,508 training images, with570 actually reviewed and 31
-withheld/excluded. Completed runs used the earlier 24 exclusions; seven more and
-a32-region detail catalogue are used by V102/V103 on the separate 88,477-source cohort.
+The latest [high-loss source review](v124-final-source-review.md) inspects40 new
+IDs, retaining38 and withholding two grainy/artwork-heavy photos from a separate
+future90,776-photo/35-region bank. One mixed-contrast leaf context is admitted;
+down/fibre/rock proposals remain ordinary photos without specialized weak
+annotations. The ledger has1,963 inspected IDs; this is targeted review rather
+than uniform corpus-quality coverage. Existing trained/queued cohorts stay fixed.
 The [illustrated source review](corpus-source-review.md) explains why
 processing defects/nonphotographic targets are removed while difficult foliage,
 textiles and weak real detail remain. Originals and historical manifests stay

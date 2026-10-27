@@ -2,8 +2,8 @@
 
 **V124's [14k progress review](v124-progress14000.md) finds small noisy/shadow
 PSNR gains, a0.350dB faint-ADC regression and no clear large fine-detail recovery.**
-Its original20k control training is complete; V125 awaits its declared launch
-headroom before training with the added mean loss. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
+Its original20k control training is complete; V125 now trains with the added
+mean loss after passing its original launch headroom. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
 comparison remain pending; V120 remains the general recommendation. This experiment
 follows the [conditional-noise diagnostic](conditional-noise-response.md):
 weak fur/wood detail remains soft across independent noise observations.
@@ -55,8 +55,8 @@ V124's original worker completed20,000 optimizer updates,320,000 unique target
 contexts,560,480 sensor observations and640 validation forwards. Its endpoint
 SHA256 is`d562ae2fc4e9bf903501a3db1f2192b93e465a48f150eec6de5f232d510f0cc6`.
 The worker verifies finite91 model/EMA tensors and89 Adam states at20k.
-The controller remains live while V125 waits for the original64GiB launch
-threshold; its budget, source and data are unchanged. Full endpoint quality
+The controller admitted V125 after its original64GiB launch threshold; its
+20k worker is live, with budget, source and data unchanged. Full endpoint quality
 still waits for the matched pair; the earlier14k measurements below are not
 20k scores. [Current execution receipt](results/raw-global-only-pilot-setup-v1.json).
 
@@ -116,9 +116,10 @@ Independent NumPy audits inspected301,396,702 retained array values and verified
 36,208,640 variance values exactly, without Torch, new noise or neural calls.
 The implementation, regression and adoption suites passed175 tests.
 [Frozen plans, actual counts, source hashes and live follow-up owners](results/independent-noise-mean-training-setup-v1.json).
-V124's20,000-update control is running; V125 retains its original subsequent
-20,000-update budget. Actual progress is recorded by the exact owner below.
-[Verified live worker and training-start snapshot](results/v124-control-training-start-v1.json).
+V124's20,000-update control is complete and V125's original20,000-update
+worker is running. The [V124 training-start snapshot](results/v124-control-training-start-v1.json)
+remains historical; [current live-owner evidence](results/v124-final-source-publication-v1.json)
+records both V125 and the admitted V131 control without changing their plans.
 
 The [retained-output loss-gradient diagnostic](conditional-loss-gradients.md)
 replays the entire objective without new neural execution. Mean weight.25

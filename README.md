@@ -17,8 +17,9 @@ mottling still need work. [Current choices](docs/current-model.md) ·
 [GFX gallery](docs/gfx-qualitative.md) · [Camera comparisons](docs/native-camera-development.md).
 
 Training uses geometry before final downsampling and zero optical blur. The
-[latest source review](docs/repetitive-material-source-review.md) prepares90,778
-photos/34 regions, including faint feather barbs. V134/V135 keep their33-region
+[latest source review](docs/v124-final-source-review.md) prepares90,776
+photos/35 regions, including mixed-contrast leaf veins and faint feather barbs.
+V134/V135 keep their33-region
 data; all existing jobs retain declared inputs. [Data pipeline](docs/training-pipeline.md).
 An optional [photographic epoch order](docs/photographic-epoch-order.md) covers
 all prepared photos within 20k steps; its trained quality remains unmeasured.
@@ -26,8 +27,8 @@ all prepared photos within 20k steps; its trained quality remains unmeasured.
 | Current quality work | Evidence and next comparison |
 | --- | --- |
 | [V122/V123 frequency features](docs/v122-v123-quality.md) | Both20k reviews complete: joint training gains0.05493dB photo PSNR over adapter-only, with lower unseen-camera PSNR, a worse ADC tail and little weak-detail recovery |
-| [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | V124's original20k control is complete; V125 awaits its declared headroom on90,784/twenty regions. Full quality comparison is pending. [14k progress](docs/v124-progress14000.md) has small noisy/shadow gains, worse faint ADC and no clear mesh recovery |
-| [V131/V132 spatial attention](docs/raw-spatial-training.md) | Four genuine CPU/CUDA checks pass;20k per arm queued on90,781/29 after V125's admission. An early102-input comparison waits for their retained1k progress snapshots |
+| [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | V124's original20k control is complete; V125 now trains on90,784/twenty regions. Full quality comparison is pending. [14k progress](docs/v124-progress14000.md) has small noisy/shadow gains, worse faint ADC and no clear mesh recovery |
+| [V131/V132 spatial attention](docs/raw-spatial-training.md) | Four genuine CPU/CUDA checks pass; V131's original20k control runs on90,781/29 and V132 follows. An early102-input comparison waits for their retained1k progress snapshots |
 | [V133 photographic quota](docs/reviewed-quota-training.md) | CPU/CUDA checks pass; 5% versus V131's 50% is queued at the same 20k budget. Early and full photo/camera/color/GFX reviews are queued with saved controls reused; quality remains unmeasured |
 | [V134/V135 cleaned data and photo epochs](docs/photo-epoch-training.md) | All four real 16+2 checks pass on 90,778/33. Matched 20k replacement/epoch runs and full native/GFX reviews are queued after V133's automated review; quality is unmeasured |
 | [V136 global RAW attention](docs/v136-global-attention-quality.md) | Matched1k review complete: +.0003dB ordinary, +.0007–.0026dB shadow and +.0131dB faint ADC over V129; mixed local detail and no clear new fine-mesh recovery. Native crops and independent audits published |

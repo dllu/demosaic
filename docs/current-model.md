@@ -51,8 +51,8 @@ not silently change an existing run's parent, schedule or input snapshots.
 
 The current [training pipeline](training-pipeline.md) uses native 256/B16,
 geometry before final area reduction and zero optical PSF augmentation.
-The newest prepared dataset has90,778 photos/34 reviewed regions, including
-[pale feather detail](repetitive-material-source-review.md). V134/V135 retain
+The newest prepared dataset has90,776 photos/35 reviewed regions, including
+[mixed-contrast leaf veins](v124-final-source-review.md) and pale feather detail. V134/V135 retain
 their33-region bank; active and queued comparisons keep declared cohorts. A
 [full source-schedule audit](training-source-schedule-coverage.md) distinguishes
 corpus size from the identities actually selected in 20k planned updates.
@@ -62,8 +62,8 @@ under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |
-| Persistent detail bias | V124's original20k control is complete; [V125 mean-loss training](conditional-mean-training.md) awaits declared headroom on the same90784/twenty-region inputs. Full endpoint/bias comparison is pending. [14k progress](v124-progress14000.md) shows small noisy/shadow gains, worse faint ADC and no clear real-mesh recovery |
-| Spatial RAW detail | [V131/V132](raw-spatial-training.md) tests a 22,664-parameter local-attention branch on 90781/29. Four exact-recipe CPU/CUDA16+2 checks pass; full 20k production waits for V125's admission. Retained1k and full-endpoint comparisons are queued; quality is unmeasured |
+| Persistent detail bias | V124's original20k control is complete; [V125 mean-loss training](conditional-mean-training.md) now trains on the same90784/twenty-region inputs. Full endpoint/bias comparison is pending. [14k progress](v124-progress14000.md) shows small noisy/shadow gains, worse faint ADC and no clear real-mesh recovery |
+| Spatial RAW detail | [V131/V132](raw-spatial-training.md) tests a 22,664-parameter local-attention branch on 90781/29. Four exact-recipe CPU/CUDA16+2 checks pass; V131's original20k control now runs and V132 follows. Retained1k and full-endpoint comparisons are queued; quality is unmeasured |
 | Global RAW repetition | [Completed V1361k](v136-global-attention-quality.md) adds18,272 parameters for two-pass global attention. Against matched V129: ordinary+.0003dB, shadows+.0007–.0026dB, faint ADC+.0131dB; local gains/errors are mixed and real mesh remains weak. Full native comparison and independent audits published |
 | Conditioning global matching | [Completed V1371k](v137-global-conditioned-quality.md) keeps the same18 tensors with normalized matching. Faint ADC rises.0334dB over V136 with lower pooled spatial error; ordinary/shadow means fall.0005–.0044dB. Query/key adaptation is stronger, but local detail remains mixed and real fine mesh weak |
 | Adapting only the global branch | [V138](raw-global-only-training.md) freezes91 parent model/EMA tensors and trains18 branch tensors at LR1e−3. Genuine CPU/CUDA16+2 checks pass; original1k production and102-input review are queued after V125 completes. Quality is unmeasured |

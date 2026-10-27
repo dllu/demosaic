@@ -6,15 +6,16 @@ Commons targets come from the completed, reviewed Quality Images corpus;
 camera-linear targets and registered paired RAW supply complementary supervision.
 [Current model](current-model.md) · [Source review](current-source-loss-review.md).
 
-The newest prepared bank has90,778 training photos and34 reviewed regions,
-including a [qualified pale-feather context](repetitive-material-source-review.md).
+The newest prepared bank has90,776 training photos and35 reviewed regions,
+including [mixed-contrast leaf veins](v124-final-source-review.md) and the
+qualified pale-feather context. The latest review withheld two grainy/artwork-heavy photos.
 V134/V135 retain their33-region catalogue; CPU/CUDA checks pass and completed
 production quality is unmeasured. Existing trials retain their frozen inputs:
 
 | Trial | Commons sources / regions | Reviewed fraction within photographs |
 | --- | --- | ---: |
-| Running [V124/V125 mean-loss comparison](conditional-mean-training.md) |90,784 /20 |5% |
-| Queued [V131/V132 spatial comparison](raw-spatial-training.md) |90,781 /29 |50% |
+| [V124/V125 mean-loss comparison](conditional-mean-training.md): control20k complete, V125 running |90,784 /20 |5% |
+| [V131/V132 spatial comparison](raw-spatial-training.md): V131 running, V132 next |90,781 /29 |50% |
 | Queued [V133 quota comparison](reviewed-quota-training.md) |90,781 /29 |5% |
 | Queued [V134/V135 cleaned data/order comparison](photo-epoch-training.md) |90,778 /33 |5%, with replacement versus epochs |
 
@@ -76,11 +77,13 @@ stream preserves untreated source and geometry draws. A fixed ordered
 `photo_sampling_reference_manifest` uses rejection sampling for future exclusions
 without changing unaffected identities. [Implementation](../src/demosaic/photo_sampling.py).
 
-The [34-region future catalogue](../configs/low-contrast-training-rois-cleaned90778-v2.json)
-preserves all33 prior example objects and adds pale swan-feather barbs. The actual
-reader visits all34 regions in83 reads, preserving8,060,928 controlled common
-target values exactly. Its [native inspection and limits](repetitive-material-source-review.md)
+The [35-region future catalogue](../configs/low-contrast-training-rois-cleaned90776-v1.json)
+preserves all34 prior example objects and adds one mixed-contrast leaf context.
+The actual reader visits all35 regions in85 reads, preserving8,257,536 controlled
+common target values exactly. Its [native inspection and limits](v124-final-source-review.md)
 distinguish source contrast, augmented contrast and technical-quality concerns.
+The parent34 catalogue is rebound to the same future90776 manifest only for the
+reader control; exclusions and bank expansion intentionally can change identities.
 V134/V135 keep the preceding wing-mesh/pitted-stone33-region bank and its source
 order policy. These checks prove executable data binding, without a model-quality
 gain or uniformly pristine source claim.
