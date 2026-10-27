@@ -43,6 +43,12 @@ remain unchanged.
 [Rebound catalogue](../configs/low-contrast-training-rois-cleaned90783-v1.json) ·
 [Source decisions and independent checks](results/v123-source-loss-through5400-review-v1.json).
 
+The optional [shadow-exposure extension](reviewed-shadow-exposure.md) can place
+selected reviewed material crops in a darker sensor range without changing
+their pixels' geometry or relative color. Actual twenty-region CPU/CUDA checks
+pass. It is disabled by default and untrained; the queued source bank and
+recipes remain unchanged.
+
 [Catalogue](../configs/low-contrast-training-rois-cleaned90787-v1.json) ·
 [Actual visual decisions](results/weak-photographic-targets-review-v1.json) ·
 [Preparation and source reconstruction](results/weak-photographic-targets-preparation-v1.json) ·

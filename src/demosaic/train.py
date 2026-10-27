@@ -44,6 +44,11 @@ from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
 from .reviewed_rois import require_resume_rois, validate_roi_fraction
 from .safety import writable_path
+from .shadow_exposure import (
+    require_resume_reviewed_shadows,
+    reviewed_shadow_levels,
+    reviewed_shadow_options,
+)
 from .source_loss import SourceLossTrace, validate_source_loss_every
 from .training_context import TrainingContext, require_resume_context
 
@@ -397,6 +402,11 @@ def prepare_training_batch(data_step, domain, clean, *, model, device, config, s
                 **noise_options,
             )
         elif domain == "commons":
+            shadow_fraction, _ = reviewed_shadow_options(config)
+            if shadow_fraction:
+                noise_options["shadow_green_levels"] = reviewed_shadow_levels(
+                    clean, fraction=shadow_fraction, seed=seed, step=data_step, device=device
+                )
             batch = degrade(
                 clean["rgb"].to(device),
                 reconstruct_highlights=config.get("reconstruct_highlights", False),
@@ -549,6 +559,11 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     config["reviewed_roi_fraction"] = validate_roi_fraction(
         config.get("reviewed_roi_fraction", 0.0)
     )
+    config["reviewed_shadow_fraction"], config["reviewed_shadow_policy"] = reviewed_shadow_options(
+        config
+    )
+    if config["reviewed_shadow_fraction"] and not config["reviewed_roi_fraction"]:
+        raise ValueError("Reviewed shadow exposure requires a positive reviewed ROI fraction")
     roi_catalogue_payload = None
     config.pop("reviewed_roi_catalogue_sha256", None)
     if config["reviewed_roi_fraction"] and (
@@ -685,6 +700,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
         require_resume_noise_pairs(resume_state["config"], config)
+        require_resume_reviewed_shadows(resume_state["config"], config)
         if validate_late_rgb_only(resume_state["config"]) != late_only:
             raise ValueError("Resume late RGB training scope differs; initialize a new run")
         if validate_raw_frequency_only(resume_state["config"]) != frequency_only:
@@ -968,7 +984,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         photo_sampling_reference_manifest=config.get("photo_sampling_reference_manifest"),
         photo_sampling_reference_sha256=config.get("photo_sampling_reference_sha256"),
         records=records,
-        trace_sources=source_loss_every > 0,
+        trace_sources=source_loss_every > 0 or config["reviewed_shadow_fraction"] > 0,
     )
     workers = config.get("workers", 2)
     worker_start_method = config.get("worker_start_method")

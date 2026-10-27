@@ -8,6 +8,11 @@ batches. It does not establish adequate material diversity or full-corpus
 coverage: flat surfaces, soft backgrounds and smooth gradients can also
 contribute to those counts.
 
+The [sensor-domain extension below](#shadow-brightness-and-sensor-noise) finds
+that dark/noisy conditions need separate inspection. A future
+[reviewed-material shadow augmentation](reviewed-shadow-exposure.md) is now
+implemented and checked on actual CPU/CUDA inputs, with trained quality unmeasured.
+
 Keep the queued [V124/V125 training recipes](conditional-mean-training.md)
 unchanged. They test conditional bias with the same data, while the active
 [V122/V123 comparison](learned-raw-frequency-training.md) tests the input adapter.
@@ -127,3 +132,82 @@ coverage, calibrated source noise, a sufficient bank or a learned-quality gain.
 
 Implementation: [NumPy analyzer](../scripts/analyze_training_target_coverage.py) ·
 [Plotter](../scripts/plot_training_target_coverage.py).
+
+## Shadow brightness and sensor noise
+
+The earlier .02 luma cutoff excluded1,064 ordinary-photo blocks and2,472 native
+blocks. This extension reuses the same actual targets, now measuring clean
+**measured-green sensor samples** separately from rendered-luma fine contrast.
+It covers272 simulated target slots, which retain the exact arrays supplied to
+the noise generator. The sixteen real-paired slots do not have those latent
+input signals. Native simulated targets still retain source noise/optics.
+
+Within each native16 block, the128 physically sampled green sites give a mean
+intensity and pre-ADC **pixel-noise** RMS:
+
+```text
+mean_green = mean(green samples)
+pixel_noise_RMS = sqrt(mean(shot * max(green samples, 0) + read))
+relative_pixel_noise_RMS = pixel_noise_RMS / mean_green
+```
+
+This is neither the noise of a block mean nor a luma-band SNR. Validity requires
+positive green mean, all true green sites in[0,.98), and rendered target RGB
+within[0,1]. The fine-band definition remains DCT16/1⁄8–1⁄3 cycles per pixel,
+relative RMS below5%, absolute RMS at least1e−5 and positive rendered mean.
+No lower .02 rendered-luma cutoff is applied here; shadow means below.02.
+
+| Retained target family | Valid blocks | Valid shadow blocks | Weak shadow blocks |
+| --- | ---: | ---: | ---: |
+| Ordinary Commons-photo branch | 7,939 | 937 | 240 |
+| Reviewed material regions | 678 | 63 | 13 |
+| Procedural weak texture | 3,000 | 1,500 | 847 |
+| Other procedural shapes | 396 | 0 | 0 |
+| Smooth-field controls | 2,300 | 1,575 | 75 |
+| Native-camera targets | 8,617 | 2,305 | 173 |
+
+The changed validity rule and shadow support mean these denominators differ
+from the earlier midtone table. ADC-only draws remain separate recorded
+conditions, without inventing a noise floor. Counts can include smooth or
+source-noisy structure; they do not admit material automatically.
+
+![Weak-target sensor conditioning and existing GFX input-proxy cell](images/shadow-training-readiness-v1/shadow-conditioning.png)
+
+The two DSCF3842 native160 mesh regions have observed-green means
+.005871/.006489. Their existing nominal prior gives relative pixel-noise proxies
+.6401/.5949; the fixed nearby3879 prior gives.5312/.5022. These are unchanged
+supplied profiles applied to signed observed samples, **not calibrated camera
+noise, clean brightness, real band SNR or GT**. No RAW is decoded and no model
+output is consulted.
+
+All four proxies fall in the predeclared coarse cell:
+green mean[2⁻⁸,2⁻⁶), relative pixel-noise RMS[.5,1). In this short prefix:
+
+| Family | Valid blocks in that cell | Weak blocks | Context slots represented |
+| --- | ---: | ---: | ---: |
+| Ordinary Commons photos | 60 | 6 | 11 |
+| Reviewed material regions | 0 | 0 | 0 |
+| Native-camera targets | 291 | 22 | 12 |
+
+This sparse same-cell result is sensitive to boundaries. The right nearby-profile
+proxy is only.0022 above the.5 boundary, without a calibrated uncertainty
+estimate. Including the immediate3×3 neighboring cells gives161 ordinary-photo
+weak blocks,174 native weak blocks and400 weak-procedural blocks; the reviewed
+draws have25 valid neighboring blocks with none meeting the weak criterion.
+These counts support exploring dark material exposures without establishing
+a global distribution gap or a definitive source of the mesh failure.
+
+Independent native-pixel masks verify all27,200 blocks: green means match exactly,
+maximum pixel-variance difference is4.34e−19 and maximum valid relative-noise
+difference is1.43e−14. All validity/condition bins and the four GFX ROI/profile
+combinations match. This extension reads retained target/GFX arrays only, with
+no new neural calls, noise observations, original-photo reads, RAW decodes or
+optimizer updates.
+
+[Complete measurement, neighboring-cell sensitivity and independent checks](results/shadow-sensor-coverage-v1.json) ·
+[Family counts, CSV](results/shadow-sensor-coverage-summary-v1.csv) ·
+[Analyzer](../scripts/analyze_shadow_target_coverage.py).
+The [new shadow-exposure policy](reviewed-shadow-exposure.md) preserves material
+geometry and current noise priors, with an actual old/default/preparation
+comparison. All active and queued training recipes stay fixed; its trained
+effect needs a later matched comparison.

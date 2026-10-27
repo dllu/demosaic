@@ -92,6 +92,16 @@ class SourceLossTrace:
                     records[-1]["source_trace_noise_view"] = int(
                         sample["noise_view"].reshape(-1)[0]
                     )
+                if "shadow_exposure_selected" in sample:
+                    records[-1]["reviewed_shadow_exposure"] = {
+                        "selected": bool(sample["shadow_exposure_selected"].reshape(-1)[0]),
+                        "requested_green_mean": float(
+                            sample["shadow_requested_green"].reshape(-1)[0]
+                        ),
+                        "actual_exposure_gain": float(
+                            sample["shadow_exposure_scale"].reshape(-1)[0]
+                        ),
+                    }
         # Finish all diagnostics before appending; don't leave a partial batch.
         with self.path.open("a") as stream:
             for record in records:

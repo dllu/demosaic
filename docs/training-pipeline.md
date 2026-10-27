@@ -23,6 +23,12 @@ crops. This bounded18-step prefix does not qualify a whole-corpus distribution
 or justify replacing material inspection with a contrast-count admission rule.
 All current and queued recipes remain fixed.
 
+An optional [reviewed-material shadow exposure](reviewed-shadow-exposure.md)
+is now implemented for a later trial. It uses one bounded scalar exposure,
+preserving material geometry and current camera/noise draws, with old/default
+preparation parity verified on CPU/CUDA. It remains off in every current and
+queued recipe; trained quality is unmeasured.
+
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;
 and repeated throughput sweeps retain batch16. The matched geometry comparison

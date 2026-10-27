@@ -16,6 +16,7 @@ from .noise import add_noise, sample_coefficients, variance_map
 from .photo_sampling import PhotoSamplingReference
 from .precision import ieee_fp32
 from .reviewed_rois import ReviewedPhotoROIs, validate_roi_fraction
+from .shadow_exposure import apply_shadow_exposure, validate_shadow_levels
 from .textures import weak_texture
 
 
@@ -450,6 +451,7 @@ def degrade(
     broad_camera=False,
     retain_sensor_target=False,
     retain_noise_settings=False,
+    shadow_green_levels=None,
 ):
     """Convert clean linear sRGB to randomized camera RGB, then mosaic/noise.
 
@@ -458,6 +460,7 @@ def degrade(
     """
     batch, _, _, _ = rgb.shape
     device = rgb.device
+    validate_shadow_levels(shadow_green_levels, rgb, training=training)
     if not 0 <= noise_free_fraction <= 1:
         raise ValueError("Noise-free fraction must be in [0,1]")
     if type(retain_sensor_target) is not bool:
@@ -490,6 +493,8 @@ def degrade(
         exposure = 1
         colors = color_indices("RGGB", device=device)[None].expand(batch, -1)
         shot, read = rgb.new_full((batch, 1, 1, 1), 0.001), rgb.new_full((batch, 1, 1, 1), 1e-6)
+    if shadow_green_levels is not None:
+        exposure = apply_shadow_exposure(rgb, inverse, wb, exposure, shadow_green_levels)
     clean, target = camera_pair(
         rgb * exposure,
         inverse,
@@ -522,4 +527,8 @@ def degrade(
             .clone()
         )
         result["adc_bit_depth"] = torch.full((batch, 1, 1, 1), 16, device=device, dtype=torch.long)
+    if shadow_green_levels is not None:
+        result["shadow_exposure_selected"] = shadow_green_levels > 0
+        result["shadow_requested_green"] = shadow_green_levels
+        result["shadow_exposure_scale"] = exposure.reshape(batch)
     return result
