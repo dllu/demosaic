@@ -318,6 +318,7 @@ def endpoint_plan(plan, state):
         checkpoints.append(
             {
                 "arm": name,
+                "EMA_tensors": len(snapshot["ema"]),
                 **ref(path),
                 "expected_lineage": {"step": 20000, "initialized_from": lineage},
                 "expected_backbone": training["backbones"][name],
@@ -387,6 +388,8 @@ def controller(path):
             record("waiting-for-quality-headroom", stage=stage, child=None)
             began, stable = time.monotonic(), None
             while True:
+                if deadline := plan.get("absolute_stage_headroom_deadlines", {}).get(stage):
+                    assert time.time() < deadline
                 enough = (
                     psutil.virtual_memory().available >= 48 * 2**30
                     and shutil.disk_usage(root).free
@@ -435,6 +438,8 @@ def controller(path):
                 record("running-frozen-endpoint-quality-stage", stage=stage, child=child_owner)
                 began = time.monotonic()
                 while child.poll() is None:
+                    if deadline := plan.get("absolute_stage_deadlines", {}).get(stage):
+                        assert time.time() < deadline
                     assert time.monotonic() - began < 43200
                     assert psutil.virtual_memory().available >= 24 * 2**30
                     assert (

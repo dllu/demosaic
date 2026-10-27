@@ -45,9 +45,10 @@ now compares training the new input adapter alone with adapting the full
 restoration path on the same cleaned corpus. A
 [V1239k midpoint review](docs/v123-midpoint-quality.md) shows no clear fine-detail
 gain on retained materials and both GFX scenes; full endpoint results remain pending.
-V123's memory guard saved all12,249 completed updates; its
-[bounded continuation is running](docs/v123-memory-guard-recovery.md) within the original
-budget and deadline. Dependent reviews reuse completed checks and saved controls.
+V123's [bounded continuation completed20k](docs/v123-memory-guard-recovery.md),
+preserving all12,249 prefix updates and adding exactly7,751. Full endpoint
+evaluation is running after a zero-forward checkpoint-identity repair; dependent
+reviews reuse completed checks and saved controls.
 [V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
 the cleaned90,784-source/twenty-region corpus after that review chain.
 The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.md)
@@ -58,7 +59,8 @@ shows no useful gain. The [completed V129 curated-data pilot](docs/reviewed-deta
 also shows no useful visible recovery at1k; its native material/GFX crops are published.
 An [audited gradient probe](docs/training-precision-gradients.md) motivates the
 [V130 matched FP32 training trial](docs/training-precision-pilot.md), using V129's
-saved BF16 control. Quality remains unmeasured.
+saved BF16 control. Its [faint ADC panel](docs/faint-adc-precision.md) has completed
+V120/V129 controls and shows small mixed fur/grass changes; V130 quality is pending.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

@@ -42,7 +42,10 @@ Training plan/status:
 Quality queue:
 `.cache/current-quality-20261023-v1/fp32-quality-pilot-v1/queue-v2/`.
 The86-call retained-input quality panel covers ordinary/shadow high-noise
-materials and both real GFX scenes, with saved V129/V120 controls. It does not
-cover ADC-only detail. A separate sensor-floor evaluation is needed before
-drawing a precision-quality conclusion from the training diagnostic. Native
-review and independent reductions remain required for interpreting this trial.
+materials and both real GFX scenes, with saved V129/V120 controls. The separate
+[faint photographic ADC panel](faint-adc-precision.md) now has32 of48 declared
+predictions:16 each for V120/V129, with V130's16 queued on the same inputs.
+Preparation, baseline scoring, source strata and native/display audits pass;
+V129 has small mixed changes. Neither panel establishes FP32-trained quality
+before the actual V130 endpoint. Native review and independent reductions remain
+required for interpreting that result.

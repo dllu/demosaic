@@ -16,6 +16,12 @@ gain. V129 retains V120's architecture and reconstruction loss, with the optiona
 feature and shadow terms off. The next [precision-only trial](training-precision-pilot.md)
 uses V129 as its saved BF16 control.
 
+The supplementary [faint photographic ADC test](faint-adc-precision.md) finds
+slightly stronger selected-fur response and lower2–5% fur-band error, alongside
+weaker grass response and slightly lower overall PSNR. Native changes are small.
+Those gains and remaining weaknesses are documented directly; the original
+high-noise/GFX pilot and this separate16-call panel retain their own receipts.
+
 [Recipe](../configs/quality-v120-reviewed-detail-pilot-v129.yaml) ·
 [Source decisions/native views](v123-source-review-through15800.md) ·
 [27-region catalogue](../configs/low-contrast-training-rois-cleaned90782-v1.json).

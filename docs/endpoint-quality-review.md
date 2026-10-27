@@ -5,6 +5,10 @@ queues.** [V124/V125 mean-loss training](conditional-mean-training.md) waits for
 the V122/V123 chain after discarded implementation checks. The original owners
 exited after V123's memory guard; [explicit recovery and current queue roots](v123-memory-guard-recovery.md)
 preserve completed work, all original failed receipts and remaining deadlines.
+V123 has now completed20k; V122/V123 predictions are collecting after correcting
+a legacy91-versus96-tensor identity assertion that stopped before any neural call.
+The [repair receipt](results/v123-frequency-quality-identity-repair-v1.json) records
+the current roots and adopted checks.
 V120/V121 training, endpoint predictions and independent numerical
 audits, four saved/local-detail contrasts and selected native review are
 complete. V120/V121 mesh checks have no clear lattice-recovery gain over

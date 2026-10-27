@@ -1,96 +1,82 @@
-# V123 saved-state continuation
+# V123 completed saved-state continuation
 
-**V123's saved-state continuation is running, starting at update12,250.**
-The emergency checkpoint retained all12,249 updates after a22.9GB memory-guard
-stop. The continuation spends only the remaining7,751 updates within the
-original20k horizon and worker deadline. The
-[shadow pilot and fixed-input review](reviewed-shadow-pilot-quality.md) are complete.
-V120 remains the general recommendation; there is no new endpoint-quality claim.
+**V123 completed its original20,000 updates, and V122/V123 endpoint predictions
+are collecting.** The saved12,249-update prefix was retained exactly; the
+continuation performed only7,751 more updates. All96 model/EMA tensors and94
+AdamW states are finite at20,000. Image quality remains unmeasured;
+V120 remains the general recommendation.
 
-[Actual resumption and current queue verification](results/v123-admission-resumption-v2.json) ·
-[Verified durable13,000-update checkpoint](results/v123-resumed-step13000-v1.json) ·
-[Original saved-state audit](results/v123-memory-guard-recovery-v1.json) ·
-[Saved-state continuation runner](../scripts/resume_frequency_training.py) ·
-[Dependency repair](../scripts/rebind_unstarted_quality_queue.py).
+[Completed training/final-state verification](results/v123-frequency-training-complete-v1.json) ·
+[Quality-identity repair and current owners](results/v123-frequency-quality-identity-repair-v1.json) ·
+[Original resumption evidence](results/v123-admission-resumption-v2.json) ·
+[Preserved13,000-step checkpoint](results/v123-resumed-step13000-v1.json) ·
+[Original emergency-state audit](results/v123-memory-guard-recovery-v1.json).
 
-## Retained training state
+## Completed training and retained invariants
 
-The failed original controller and worker have exited. Its failure receipt counts
-12,249 prepared batches, training forwards and AdamW updates,384 validation
-forwards and12,633 encoder calls. The emergency `last.pt` has step12,249,
-96 finite restoration/EMA tensors in each state,94 finite AdamW states all at
-12,249, and saved Python, CPU-Torch and CUDA RNG states. Its SHA256 is
+The original memory guard saved12,249 updates after available RAM fell to22.9GB.
+Its checkpoint remains unchanged, SHA256
 `6a07072c67822a8f546df096187e604b4dde8de054c2e3f7bdbf86bbac68d3d4`.
-The last fixed eight-source validation panel is at12,000; it is not a full427-photo
-endpoint evaluation.
+Before the continuation's first actual batch12,250, saved RNG states matched;
+before its first forward, all96 model tensors and94 Adam states matched exactly.
+Source, parent, EMA, LR horizon, seed66, native256/B16/BF16,90,786-source/fourteen-
+region data and losses retained their frozen values. No prefix/check was repeated.
 
-The continuation uses the original frozen source, parent lineage,90,786-source/
-fourteen-region cohort, seed66, batch16/native256/BF16, learning-rate horizon,
-EMA and losses. Its first actual batch must be12,250. Before that batch's sensor
-preparation, saved RNG states must match; before its first model forward,
-all96 restoration tensors and94 AdamW states must match the checkpoint exactly.
-The original source digest and official frozen Small encoder are checked again
-at completion. Final counters combine the original prefix with the observed
-continuation, requiring exactly20,000 optimizer updates and640 validation calls.
+Final checkpoint SHA256:
+`4e9f1165c57ee7b3955ffd1dba1dfc13df2b192fcc28f7b86b17a2c1ae8c1c8a`.
+Totals are20,000 prepared/training/optimizer calls,640 validation calls and20,640
+encoder calls. Domains are9,900 Commons/procedural,5,121 native and4,979 paired.
+The continuation alone made7,751 training and256 validation calls. Official Small
+encoder/source identity checks pass. The final state was independently reopened
+on CPU without a model forward. The immutable13k snapshot and original failed
+plans/logs/checkpoints remain preserved.
 
-The actual13,000-update checkpoint is now preserved as an immutable hardlink.
-All96 model/EMA tensors and94 AdamW states are finite, every AdamW counter is
-13,000, and parent lineage/source digest still match. It contains751 new updates
-beyond the emergency checkpoint. The worker continued afterward; this
-saved-state check added no neural/noise/RAW/optimizer work and supplies no
-new image-quality claim.
+The completed worker retained its original start+24h deadline, including the
+interruption. Actual admission was52GiB with16GiB CUDA cap and32GB runtime floor.
+Peak allocated/reserved CUDA bytes were8,625,714,688/10,374,610,944. This is resource
+accounting, not a speed comparison. [Continuation runner](../scripts/resume_frequency_training.py).
 
-The original checkpoint, logs, failure and frozen plans remain unchanged.
-Continuation outputs use a separate directory under the original frozen
-workspace. V122's completed20k endpoint and all implementation checks are reused.
-No completed training prefix or old prediction is rerun.
+## Current endpoint review and dependent work
 
-## Scheduling and dependent work
+The first rebound photo collector stopped while loading a96-tensor frequency
+checkpoint because its legacy identity assertion required91 tensors. Its archive
+contains zero records/predictions and no root/encoder forward occurred. The
+corrected collector takes each verified checkpoint's declared tensor count and
+still requires exact EMA keys/values and the official encoder identity.
+All frozen inference mathematics, inputs, checkpoints and stage counts remain
+unchanged. The original first photo worker's12h absolute deadline is retained.
 
-An explicit admission handoff changed the launch threshold from56 to52GiB:
-16GiB allocator allowance +4GiB host overhead +32GiB planning reserve. The actual
-V123 implementation check peaked at8,624,142,848 allocated bytes and
-10,095,689,728 reserved bytes. The16GiB allocator cap and32GB runtime floor
-remain. Before replacing it, the exact old waiter was stopped and verified to
-have no child or continuation claim. Its retirement receipt is preserved.
+The corrected evaluator has progressed past loading and is writing new V122/V123
+predictions. Nine downstream controllers have new exact owner/plan bindings;
+all retain their original absolute dependency deadlines. V124/V125 reuse all
+four completed16+2 CPU/CUDA checks and their original20k production budgets.
+They wait for the original quality/audit/comparison/mesh chain; no production
+update has started.
 
-The new worker passed the saved RNG/model/AdamW/encoder assertions before its
-first actual forward and completed update12,250, with later updates observed.
-The frozen controller/worker source bytes are identical to the preceding
-continuation plan. Only launch admission and owner bindings changed.
-The continuation's deadline is the original V123 worker start plus24h,
-**including the interruption**; it receives no fresh24h allowance. Failure ends
-this explicit attempt without an automatic retry. The original absolute
-headroom-wait deadline is also retained.
+A second-generation rebind preparation exposed a receipt-name collision before
+launch. The helper now preserves prior declarations/helpers under their original
+names and writes a new numbered receipt/helper. Its regression test verifies
+both generations' bytes and the identical absolute deadline. That partial
+preparation remains preserved, with zero neural work.
+[Identity/dependency repair source](../scripts/repair_frequency_quality_identity.py) ·
+[Unstarted dependency rebinding](../scripts/rebind_unstarted_quality_queue.py).
 
-All ten original downstream controllers also exited after the producer failed.
-Their old receipts are preserved. Fresh dependency bindings retain frozen code,
-inputs, comparisons and worker limits. Every original dependency observation
-deadline is reduced by elapsed time rather than reset. No downstream quality
-inference or V124/V125 production had started. Both arms reuse their four
-completed16+2 CPU/CUDA checks, and retain their original20k production budgets.
-
-Current local roots beneath `.cache/current-quality-20261023-v1/`:
+Current roots beneath `.cache/current-quality-20261023-v1/`:
 
 | Work | Current root |
 | --- | --- |
-| V123 continuation | `learned-frequency-training-recovery-v2/run` |
-| V122/V123 evaluation | `V122-V123-learned-frequency-quality-recovery-v2` |
-| Independent audit | `V122-V123-learned-frequency-independent-audit-recovery-v2` |
-| Saved comparisons | `V122-V123-learned-frequency-matched-review-recovery-v2` |
-| Both green-mesh profiles | `V122-V123-green-mesh-review-recovery-v2` |
-| V124/V125 training controller | `conditional-mean-training-recovery-v4/run` |
-| V124/V125 evaluation | `V124-V125-independent-noise-quality-recovery-v3` |
-| Independent audit | `V124-V125-independent-noise-independent-audit-recovery-v3` |
-| Saved comparisons | `V124-V125-independent-noise-matched-review-recovery-v3` |
-| Both green-mesh profiles | `V124-V125-green-mesh-review-recovery-v3` |
-| Repeated-noise supplement | `V124-V125-conditional-response-recovery-v3` |
+| Completed V123 continuation | `learned-frequency-training-recovery-v2/run` |
+| V122/V123 evaluation | `V122-V123-learned-frequency-quality-recovery-v3` |
+| Independent audit | `V122-V123-learned-frequency-independent-audit-recovery-v4` |
+| Saved comparisons | `V122-V123-learned-frequency-matched-review-recovery-v3` |
+| Both green-mesh profiles | `V122-V123-green-mesh-review-recovery-v3` |
+| V124/V125 training controller | `conditional-mean-training-recovery-v5/run` |
+| V124/V125 evaluation | `V124-V125-independent-noise-quality-recovery-v4` |
+| Independent audit | `V124-V125-independent-noise-independent-audit-recovery-v4` |
+| Saved comparisons | `V124-V125-independent-noise-matched-review-recovery-v4` |
+| Both green-mesh profiles | `V124-V125-green-mesh-review-recovery-v4` |
+| Repeated-noise supplement | `V124-V125-conditional-response-recovery-v4` |
 
-An initial dependency-repair preparation missed a bound historical input and
-failed before launch. A subsequent attempt selected the worker entrypoint in
-place of the adoption-aware controller. It was retired while still waiting for
-headroom, with no child or repeated model work. These partial attempts and their
-receipts remain preserved. The corrected runner copies bound historical inputs,
-selects the original controller entrypoint and verifies actual owner identity.
-Twelve focused tests include owned subprocess launches, failure without retry,
-expired deadlines, immutable inputs and rejection of already-started stages.
+Historical recovery decisions are in the [local-time diary](../diary/2026-10-27-03-27-31-v123-complete-frequency-review.md).
+The repair changes execution bookkeeping; it establishes no quality gain or
+architectural recommendation.

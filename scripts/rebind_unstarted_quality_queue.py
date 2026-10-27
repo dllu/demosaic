@@ -45,7 +45,7 @@ def replace_dependencies(value, replacements, own_root, new_root):
     return value
 
 
-def rebind(original_path, root, replacements):
+def rebind(original_path, root, replacements, reason="producer memory-guard failure"):
     original_path, root = original_path.resolve(), root.resolve()
     assert root.is_relative_to(REPO / ".cache")
     original = read(original_path)
@@ -77,8 +77,6 @@ def rebind(original_path, root, replacements):
         assert observed.get("queue_plan", observed.get("plan")) == item["new_plan"]
         assert live(item["new_owner"]) and not observed["status"].startswith("failed")
     root.mkdir(parents=True, exist_ok=False)
-    helper = root / "rebind-helper.py"
-    shutil.copyfile(__file__, helper)
     copied_files = dict(original["frozen_files"])
     copied_files.update({item["path"]: item["sha256"] for item in original["inputs"]})
     for path, digest in copied_files.items():
@@ -88,17 +86,30 @@ def rebind(original_path, root, replacements):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
             assert ref(target)["sha256"] == digest
+    helper = root / "rebind-helper.py"
+    version = 2
+    while helper.exists():
+        helper = root / f"rebind-helper-v{version}.py"
+        version += 1
+    shutil.copyfile(__file__, helper)
     plan = replace_dependencies(original, replacements, str(old_root), str(root))
     elapsed = time.time() - owner["created"]
     deadlines = {}
+    previous_deadlines = dict(original.get("absolute_dependency_wait_deadlines", {}))
+    if previous := original.get("rebind_declaration"):
+        for field, deadline in (
+            read(previous["path"]).get("original_absolute_wait_deadlines", {}).items()
+        ):
+            previous_deadlines.setdefault(field, deadline)
     for field in WAIT_FIELDS:
         if field in original:
-            deadlines[field] = owner["created"] + original[field]
+            deadlines[field] = previous_deadlines.get(field, owner["created"] + original[field])
             plan[field] = deadlines[field] - time.time()
             assert plan[field] > 0, "Original dependency observation deadline has expired"
     if "arm_weights" in original:
         plan["adopted_phase_results"] = completed
         plan["replaced_controller"] = owner
+    plan["absolute_dependency_wait_deadlines"] = deadlines
     declaration = {
         "rebind_source": ref(helper),
         "original_plan": ref(original_path),
@@ -111,15 +122,21 @@ def rebind(original_path, root, replacements):
         "original_absolute_wait_deadlines": deadlines,
         "replacements": replacements,
         "created_unix": time.time(),
-        "scope": "Explicit dependency repair after producer memory-guard failure. Frozen source bytes, all actual inputs, parent/configuration/step budgets and worker limits retained. No neural work repeated. Original failed receipts and observations remain unchanged; original dependency deadlines are not reset.",
+        "reason": reason,
+        "scope": f"Explicit dependency repair after {reason}. Frozen source bytes, all actual inputs, parent/configuration/step budgets and worker limits retained. No neural work repeated. Original failed receipts and observations remain unchanged; original dependency deadlines are not reset.",
     }
-    save(root / "rebind-declaration-v1.json", declaration)
+    declaration_path = root / "rebind-declaration-v1.json"
+    version = 2
+    while declaration_path.exists():
+        declaration_path = root / f"rebind-declaration-v{version}.json"
+        version += 1
+    save(declaration_path, declaration)
     plan["inputs"] += [
         ref(original_path),
         ref(status_path),
-        ref(root / "rebind-declaration-v1.json"),
+        ref(declaration_path),
     ]
-    plan["rebind_declaration"] = ref(root / "rebind-declaration-v1.json")
+    plan["rebind_declaration"] = ref(declaration_path)
     plan["frozen_files"][str(helper)] = ref(helper)["sha256"]
     path = root / original_path.name
     save(path, plan)

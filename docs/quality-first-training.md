@@ -1,10 +1,11 @@
 # Current quality training
 
-**V122 completed20,000 adapter-only updates; V123 joint adaptation is running.**
+**V122 and V123 completed their original20,000-update training budgets.**
 Both retain their fixed V115 Small parent and90786/fourteen-region cohort for
 the controlled scope comparison. V122's91 common model/EMA tensors remain
 exactly equal to V115, with five finite AdamW states at step20,000. Image quality
-is still unmeasured; the original evaluator waits for both full runs. The GPU
+is still unmeasured; endpoint predictions are collecting after a zero-forward
+checkpoint-identity repair. The GPU
 coordinator preserved V122's same in-memory worker through its temporary yield.
 [Current training, checks and queued review](learned-raw-frequency-training.md).
 

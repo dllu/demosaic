@@ -70,6 +70,19 @@ def verify_forward_witness(witness, index, actual):
             raise ValueError(f"Input witness shape/dtype differs before forward {index}")
 
 
+def verify_restoration_state(model, state, checkpoint):
+    """Verify the declared restoration state before registering any forward hooks."""
+    expected = checkpoint.get("EMA_tensors", 91)
+    if type(expected) is not int or expected < 1:
+        raise ValueError("Declare a positive integer restoration tensor count")
+    actual = model.restoration_state_dict()
+    if len(actual) != expected or len(state["ema"]) != expected or actual.keys() != state["ema"].keys():
+        raise ValueError(f"Restoration state differs from declared {expected}-tensor EMA")
+    if not all(torch.equal(value.cpu(), state["ema"][key]) for key, value in actual.items()):
+        raise ValueError("Restoration state differs from the exact checkpoint EMA")
+    return expected
+
+
 @torch.inference_mode()
 def collect(plan_path, stage):
     plan = read(plan_path)
@@ -137,8 +150,7 @@ def collect(plan_path, stage):
             strict_float32()
             checkpoint = next(c for c in plan["checkpoints"] if c["sha256"] == state["loaded_sha256"])
             assert state["step"] == 20000 and state["config"]["initialized_from"] == checkpoint["expected_lineage"]["initialized_from"]
-            assert len(model.restoration_state_dict()) == 91
-            assert all(torch.equal(v.cpu(), state["ema"][k]) for k, v in model.restoration_state_dict().items())
+            verify_restoration_state(model, state, checkpoint)
             verify_recorded_backbone(model, checkpoint)
             record = {"model": model, "checkpoint": checkpoint, "before": model_hash(model),
                       "calls": 0, "observations": 0, "encoder_calls": 0, "input_sequence": [], "output_hashes": []}

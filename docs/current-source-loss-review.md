@@ -16,7 +16,7 @@ Source cleanup alone does not prove quality gains.
 
 | Use | Commons train sources / reviewed regions | State |
 | --- | --- | --- |
-| V122/V123 frequency comparison |90,786 /14 | V12220k complete; V123 saved-state continuation running |
+| V122/V123 frequency comparison |90,786 /14 | Both20k complete; full endpoint evaluation collecting |
 | V124/V125 mean-loss comparison |90,784 /20 | Four checks reused; production queued after frequency review |
 | Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k; complete native review |
 | V129 data pilot / V130 precision trial |90,782 /27 | V1291k complete: no useful visible gain; V130 tests FP32 on the same inputs |

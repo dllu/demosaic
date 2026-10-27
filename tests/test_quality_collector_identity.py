@@ -6,7 +6,11 @@ import pytest
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from collect_quality_predictions import verify_forward_witness, verify_recorded_backbone
+from collect_quality_predictions import (
+    verify_forward_witness,
+    verify_recorded_backbone,
+    verify_restoration_state,
+)
 from profile_raw_kernel_inference import model_hash
 
 
@@ -62,3 +66,30 @@ def test_forward_witness_requires_all_arguments_before_neural_work():
     for index in (-1, 1):
         with pytest.raises(ValueError, match="does not cover"):
             verify_forward_witness([old], index, actual)
+
+
+@pytest.mark.parametrize("count", [91, 96])
+def test_declared_restoration_EMA_is_checked_without_neural_calls(monkeypatch, count):
+    values = {f"tensor-{i}": torch.tensor([float(i)]) for i in range(count)}
+    model = SimpleNamespace(restoration_state_dict=lambda: values)
+    state = {"ema": {k: v.clone() for k, v in values.items()}}
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("EMA validation must not execute a neural module")
+
+    monkeypatch.setattr(torch.nn.Module, "_call_impl", forbidden)
+    assert verify_restoration_state(model, state, {"EMA_tensors": count}) == count
+    if count == 91:
+        assert verify_restoration_state(model, state, {}) == 91
+    else:
+        with pytest.raises(ValueError, match="91-tensor"):
+            verify_restoration_state(model, state, {})
+    state["ema"]["tensor-0"].add_(1)
+    with pytest.raises(ValueError, match="exact checkpoint EMA"):
+        verify_restoration_state(model, state, {"EMA_tensors": count})
+    state["ema"]["unexpected-key"] = state["ema"].pop("tensor-0")
+    with pytest.raises(ValueError, match="declared"):
+        verify_restoration_state(model, state, {"EMA_tensors": count})
+    for invalid in (True, 0, -1, "96"):
+        with pytest.raises(ValueError, match="positive integer"):
+            verify_restoration_state(model, state, {"EMA_tensors": invalid})

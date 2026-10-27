@@ -1,10 +1,12 @@
 # Learned RAW frequency features: V122/V123 training
 
-**V122 completed its original20,000 updates; V123's saved-state continuation is
-running.** It resumed at12,250 after a memory guard saved all12,249 updates.
-The [explicit continuation](v123-memory-guard-recovery.md) spends only7,751
-remaining updates within the original deadline. Its52GiB admission budget
-retains the16GiB CUDA cap and32GB runtime floor. Original failed receipts remain preserved.
+**Both V122 and V123 completed their original20,000 updates; full endpoint
+predictions are collecting.** V123's [exact saved-state continuation](v123-memory-guard-recovery.md)
+retained12,249 updates and performed only7,751 more within the original deadline.
+Its96 model/EMA tensors and94 Adam states are finite at20k. A legacy91-tensor
+assertion stopped the first photo collector before any neural forward; explicit
+per-checkpoint counts now allow the96-tensor models, with all inputs/weights and
+the original first-stage deadline retained. Failed receipts remain preserved.
 The original controller advanced to V123 after the same V122 worker completed.
 V122's temporary GPU yield preserved the in-memory training state, without a
 restart or checkpoint reload.
@@ -25,7 +27,10 @@ training forwards and optimizer updates, plus640 validation forwards and20,640
 encoder calls. Domains match the prospectively declared9,900 Commons/procedural,4,979
 paired/5,121 native batches. The CPU verification constructs no model, adds no
 forwards and leaves CUDA uninitialized; it does not reconstruct every training
-input or establish image quality. The rebound evaluator waits for both full runs.
+input or establish image quality. The corrected evaluator is collecting both full runs.
+
+[Completed V123 training and final-state verification](results/v123-frequency-training-complete-v1.json) ·
+[Zero-forward identity repair and current dependent owners](results/v123-frequency-quality-identity-repair-v1.json).
 
 [Launch and implementation evidence](results/v122-v123-frequency-training-start-v1.json) ·
 [V122 recipe](../configs/quality-v115-learned-frequency-only-v122.yaml) ·

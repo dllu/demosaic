@@ -10,7 +10,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import rebind_unstarted_quality_queue as repair
 from rebind_unstarted_quality_queue import replace_dependencies
-from train_directional_bank_trial import ref, save
+from train_directional_bank_trial import guard, read, ref, save
 
 
 def test_rebind_updates_hashes_owners_and_output_paths_together():
@@ -100,3 +100,62 @@ def test_actual_frozen_stub_is_rebound_once_or_started_work_is_rejected(
     derived = json.loads((new / "queue-plan.json").read_text())
     assert 240 < derived["maximum_wait_seconds"] < 250
     assert result["old_owner"] == old_owner and result["new_owner"]["pid"] != old_owner["pid"]
+
+
+def test_second_rebind_preserves_prior_receipts_helpers_and_absolute_deadline(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setattr(repair, "REPO", tmp_path)
+    original = tmp_path / ".cache/original"
+    scripts = original / "work/scripts"
+    scripts.mkdir(parents=True)
+    controller = scripts / "stub.py"
+    controller.write_text(
+        "import json,os,pathlib,sys,psutil\n"
+        "p=json.loads(pathlib.Path(sys.argv[2]).read_text());r=pathlib.Path(p['root'])\n"
+        "(r/'controller.claim').open('x').close()\n"
+        "(r/'status.json').write_text(json.dumps({'owner':{'pid':os.getpid(),'created':psutil.Process().create_time()},'status':'waiting-fixture','completed':{}}))\n"
+    )
+    (original / "controller.claim").touch()
+    old_owner = {"pid": 99999999, "created": time.time() - 10}
+    save(
+        original / "status.json", {"owner": old_owner, "status": "failed-fixture", "completed": {}}
+    )
+    path = original / "plan.json"
+    save(
+        path,
+        {
+            "root": str(original),
+            "work": str(original / "work"),
+            "controller_source": ref(controller),
+            "python": sys.executable,
+            "inputs": [],
+            "frozen_files": {str(controller): ref(controller)["sha256"]},
+            "maximum_wait_seconds": 300,
+        },
+    )
+    first = tmp_path / ".cache/first"
+    first_result = repair.rebind(path, first, [])
+    first_plan = read(first / "plan.json")
+    receipt, helper = first / "rebind-declaration-v1.json", first / "rebind-helper.py"
+    receipt_bytes, helper_bytes = receipt.read_bytes(), helper.read_bytes()
+    until = time.monotonic() + 5
+    while repair.live(first_result["new_owner"]):
+        assert time.monotonic() < until
+        time.sleep(0.01)
+    state = read(first / "status.json")
+    state["status"] = "failed-fixture"
+    save(first / "status.json", state)
+    second = tmp_path / ".cache/second"
+    repair.rebind(first / "plan.json", second, [], reason="protocol fixture")
+    second_plan = read(second / "plan.json")
+    guard(first_plan)
+    guard(second_plan)
+    assert (second / receipt.name).read_bytes() == receipt_bytes
+    assert (second / helper.name).read_bytes() == helper_bytes
+    assert (second / "rebind-declaration-v2.json").exists()
+    assert (second / "rebind-helper-v2.py").exists()
+    assert (
+        second_plan["absolute_dependency_wait_deadlines"]
+        == first_plan["absolute_dependency_wait_deadlines"]
+    )

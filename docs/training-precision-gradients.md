@@ -7,6 +7,10 @@ alignment with the selected detail correction in BF16. Most other gradients
 are close in direction. The [V130 trial](training-precision-pilot.md) tests the
 training consequence against the saved V129 BF16 control.
 
+The new [heldout faint-ADC baseline comparison](faint-adc-precision.md) retains
+substantial V120/V129 response, with mixed selected-fur/grass changes. That
+limits a universal precision-ceiling interpretation. V130's trained result is pending.
+
 ![Fixed-weight V120 precision-gradient diagnostic](results/training-precision-gradients-v1/parameter-gradient-precision.png)
 
 [Standalone SVG](results/training-precision-gradients-v1/parameter-gradient-precision.svg) ·

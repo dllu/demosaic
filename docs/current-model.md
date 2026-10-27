@@ -130,6 +130,12 @@ sRGB changes versus V126. All28 native boards are reviewed. The
 [V130 matched FP32 training](training-precision-pilot.md) against saved V129 BF16;
 quality is unmeasured. V120 remains the general recommendation.
 
+The separate [faint ADC comparison](faint-adc-precision.md) shows V129's stronger
+selected-fur response with mixed band errors and weaker grass response. Native
+and fixed40× display comparisons are published; V130 predictions remain pending.
+V123 has completed its original20k updates and its [full quality review](v123-memory-guard-recovery.md)
+is collecting after a zero-forward checkpoint-identity repair.
+
 The [independent-noise diagnostic](conditional-noise-response.md) separates
 persistent error from output variance on four fixed targets. Faint fur/wood
 remain biased after averaging independent V120/V117 restorations; strong bark
