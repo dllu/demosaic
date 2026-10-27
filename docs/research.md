@@ -25,8 +25,8 @@ unresolved; broad state-of-the-art quality is unproven.
 | Does encoder size alone fix weak contrast? | [Full Tiny/Small diagnosis](local-material-detail.md) finds nearly unchanged weakest-stratum gain on427 photos. Small's camera/detail tradeoffs remain useful; no size-only explanation is established |
 | How much of the bigger corpus does a run visit? | [Full20k source audit](training-source-schedule-coverage.md) finds46.36% visitation at the spatial trial's50% reviewed quota versus69.26% at5%. [V133](reviewed-quota-training.md) now queues that quota-only20k comparison against V131; CPU/CUDA16+2 and independent saved-state checks pass. Quality remains unmeasured |
 
-The latest [source inspection](current-source-loss-review.md) has1,919 unique
-reviewed source IDs. Quality work uses zero optical PSF augmentation and
+The latest [source inspection](current-source-loss-review.md) has1,923 unique
+reviewed source IDs and a future34-region bank. Quality work uses zero optical PSF augmentation and
 geometry before final downsampling, with reviewed material regions and corrected
 paired-reference masks. [Training pipeline](training-pipeline.md) ·
 [Actual target contrast coverage](training-target-contrast-coverage.md).
@@ -45,6 +45,10 @@ draws distinguish intrinsic source contrast from augmentation. Existing training
 inputs stay fixed: V131/V132 use90,781/29 and have full20k production queued;
 their quality is unmeasured. The completed [V129](reviewed-detail-training-pilot.md)
 27-region pilot has small mixed changes without clear large visible recovery.
+The [new texture review](repetitive-material-source-review.md) adds one qualified
+pale-feather context, preserving all33 earlier regions and the same90778 manifest.
+Net-shop alias/moire and the grass-feather proposal's stronger contrast prevent
+their specialized weak-detail admission. Existing trials and order policies stay fixed.
 
 ## Foundation features and the new objective
 

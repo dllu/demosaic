@@ -17,9 +17,9 @@ mottling still need work. [Current choices](docs/current-model.md) ·
 [GFX gallery](docs/gfx-qualitative.md) · [Camera comparisons](docs/native-camera-development.md).
 
 Training uses geometry before final downsampling and zero optical blur. The
-[latest source review](docs/v124-second-source-review.md) prepares 90,778 photos/
-33 regions, adding fine wing mesh and subtle pitted stone. Existing jobs retain
-their declared data. [Data pipeline](docs/training-pipeline.md).
+[latest source review](docs/repetitive-material-source-review.md) prepares90,778
+photos/34 regions, including faint feather barbs. V134/V135 keep their33-region
+data; all existing jobs retain declared inputs. [Data pipeline](docs/training-pipeline.md).
 An optional [photographic epoch order](docs/photographic-epoch-order.md) covers
 all prepared photos within 20k steps; its trained quality remains unmeasured.
 

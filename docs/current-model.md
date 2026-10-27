@@ -51,8 +51,9 @@ not silently change an existing run's parent, schedule or input snapshots.
 
 The current [training pipeline](training-pipeline.md) uses native 256/B16,
 geometry before final area reduction and zero optical PSF augmentation.
-The newest prepared dataset has 90,778 photos/33 reviewed regions; active and
-queued comparisons retain their declared cohorts. A
+The newest prepared dataset has90,778 photos/34 reviewed regions, including
+[pale feather detail](repetitive-material-source-review.md). V134/V135 retain
+their33-region bank; active and queued comparisons keep declared cohorts. A
 [full source-schedule audit](training-source-schedule-coverage.md) distinguishes
 corpus size from the identities actually selected in 20k planned updates.
 The optional [photographic epoch order](photographic-epoch-order.md) achieves

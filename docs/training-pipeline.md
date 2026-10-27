@@ -6,9 +6,10 @@ Commons targets come from the completed, reviewed Quality Images corpus;
 camera-linear targets and registered paired RAW supply complementary supervision.
 [Current model](current-model.md) · [Source review](current-source-loss-review.md).
 
-The newest prepared dataset has 90,778 training photos and 33 reviewed regions.
-Its V134/V135 CPU/CUDA checks pass; completed production quality is still
-unmeasured. Existing trials retain their frozen inputs:
+The newest prepared bank has90,778 training photos and34 reviewed regions,
+including a [qualified pale-feather context](repetitive-material-source-review.md).
+V134/V135 retain their33-region catalogue; CPU/CUDA checks pass and completed
+production quality is unmeasured. Existing trials retain their frozen inputs:
 
 | Trial | Commons sources / regions | Reviewed fraction within photographs |
 | --- | --- | ---: |
@@ -75,12 +76,14 @@ stream preserves untreated source and geometry draws. A fixed ordered
 `photo_sampling_reference_manifest` uses rejection sampling for future exclusions
 without changing unaffected identities. [Implementation](../src/demosaic/photo_sampling.py).
 
-The [33-region future catalogue](../configs/low-contrast-training-rois-cleaned90778-v1.json)
-preserves all 31 prior example objects. It adds fine dragonfly-wing mesh and
-subtle pitted stone, with native views and descriptive local contrast. The actual
-reader visits all 33 regions in its 80-read verification. These checks
-prove executable data binding, not improved model quality or uniformly pristine
-source texture. [Native examples and limits](v124-second-source-review.md).
+The [34-region future catalogue](../configs/low-contrast-training-rois-cleaned90778-v2.json)
+preserves all33 prior example objects and adds pale swan-feather barbs. The actual
+reader visits all34 regions in83 reads, preserving8,060,928 controlled common
+target values exactly. Its [native inspection and limits](repetitive-material-source-review.md)
+distinguish source contrast, augmented contrast and technical-quality concerns.
+V134/V135 keep the preceding wing-mesh/pitted-stone33-region bank and its source
+order policy. These checks prove executable data binding, without a model-quality
+gain or uniformly pristine source claim.
 
 ## Current recipe sampling and targets
 
