@@ -26,12 +26,13 @@ all prepared photos within 20k steps; its trained quality remains unmeasured.
 | Current quality work | Evidence and next comparison |
 | --- | --- |
 | [V122/V123 frequency features](docs/v122-v123-quality.md) | Both20k reviews complete: joint training gains0.05493dB photo PSNR over adapter-only, with lower unseen-camera PSNR, a worse ADC tail and little weak-detail recovery |
-| [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | [V12414k progress](docs/v124-progress14000.md): noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB, no clear fine-mesh recovery. Original20k control continues; V125 follows on90,784/twenty regions |
+| [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | V124's original20k control is complete; V125 awaits its declared headroom on90,784/twenty regions. Full quality comparison is pending. [14k progress](docs/v124-progress14000.md) has small noisy/shadow gains, worse faint ADC and no clear mesh recovery |
 | [V131/V132 spatial attention](docs/raw-spatial-training.md) | Four genuine CPU/CUDA checks pass;20k per arm queued on90,781/29 after V125's admission. An early102-input comparison waits for their retained1k progress snapshots |
 | [V133 photographic quota](docs/reviewed-quota-training.md) | CPU/CUDA checks pass; 5% versus V131's 50% is queued at the same 20k budget. Early and full photo/camera/color/GFX reviews are queued with saved controls reused; quality remains unmeasured |
 | [V134/V135 cleaned data and photo epochs](docs/photo-epoch-training.md) | All four real 16+2 checks pass on 90,778/33. Matched 20k replacement/epoch runs and full native/GFX reviews are queued after V133's automated review; quality is unmeasured |
 | [V136 global RAW attention](docs/v136-global-attention-quality.md) | Matched1k review complete: +.0003dB ordinary, +.0007–.0026dB shadow and +.0131dB faint ADC over V129; mixed local detail and no clear new fine-mesh recovery. Native crops and independent audits published |
 | [V137 conditioned global attention](docs/v137-global-conditioned-quality.md) | Matched1k review complete: faint ADC+.0334dB versus V136, ordinary/shadows−.0005–.0044dB. Memory adapts more strongly, but local detail is mixed and no clear new fine-mesh recovery is visible |
+| [V138 frozen-parent global branch](docs/raw-global-only-training.md) | Genuine CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR1e−3 and1k review are queued after V125 completes; quality is unmeasured |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected

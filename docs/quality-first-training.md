@@ -7,12 +7,13 @@ unresolved. [Current choices](current-model.md) · [Completed results](v120-v121
 
 | Comparison | Data and hypothesis | Current state |
 | --- | --- | --- |
-| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 sources/twenty regions;16 unique targets and two noise views, mean-loss weights0/.25 | [V12414k progress](v124-progress14000.md): small noisy/shadow gains, faint ADC−.350dB, weak real detail unresolved. Original20k control continues; V125 follows |
+| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 sources/twenty regions;16 unique targets and two noise views, mean-loss weights0/.25 | V12420k control complete; V125 awaits original launch headroom. Full quality pending; [14k progress](v124-progress14000.md) has small noisy/shadow gains, worse faint ADC and weak real detail unresolved |
 | [V131/V132 spatial attention](raw-spatial-training.md) |90,781 sources/29 reviewed regions; same V120 parent, seed, inputs, single-view loss and20k schedule; spatial branch off/on | Four CPU/CUDA16+2 checks complete; production waits for V125's admission |
 | [V133 reviewed quota](reviewed-quota-training.md) | Same90,781/29 and20k as V131,5% versus50% reviewed sampling | CPU/CUDA checks pass; early/full reviews queued; trained quality pending |
 | [V134/V135 photo epochs](photo-epoch-training.md) | Cleaned90,778/33, same20k replacement/epoch comparison | Four CPU/CUDA checks pass; production and full reviews queued after V133's automated review |
 | [V136 global RAW attention](v136-global-attention-quality.md) | Same90,782/27 and1k as saved V129; only18,272-parameter branch differs | Complete102-input review: tiny panel-mean gains, mixed local detail, no clear new mesh recovery;38 boards actually viewed and both audits pass. No20k global run queued |
 | [V137 global conditioning](v137-global-conditioned-quality.md) | Same90,782/27,18 tensors and1k as V136; only matching/value normalization changes | Complete102-input four-method review: faint ADC+.0334dB, ordinary/shadows−.0005–.0044dB; stronger adaptation, mixed local detail and no clear new fine-mesh recovery. Independent audits and38 actual native views complete |
+| [V138 frozen-parent global branch](raw-global-only-training.md) | Same90,782/27 and1k as V137; freeze91 parent tensors and train18 branch tensors at LR1e−3 | Genuine CPU/CUDA16+2 checks pass with exact parent model/EMA. Production and102-input review wait for V125 completion; quality is unmeasured |
 
 The spatial trial's live early-review queue uses immutable step1,000 snapshots
 within the original20k workers. Each gets102 retained material/shadow/faint-ADC

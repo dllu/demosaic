@@ -45,6 +45,7 @@ from .photo_sampling import require_resume_photo_sampling
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
 from .raw_global_features import require_resume_global_features
+from .raw_global_training import require_resume_raw_global_scope, validate_raw_global_only
 from .reviewed_rois import require_resume_rois, validate_roi_fraction
 from .safety import writable_path
 from .shadow_exposure import (
@@ -153,10 +154,13 @@ def make_optimizer(model, config):
     """Select optional RAW-head warmup or packed-phase learning-rate groups."""
     late_only = validate_late_rgb_only(config)
     frequency_only = validate_raw_frequency_only(config)
+    global_only = validate_raw_global_only(config)
     if late_only and model.config.late_rgb_refinement == "none":
         raise ValueError("Late RGB-only training requires late RGB refinement")
     if frequency_only and not model.config.raw_frequency_features:
         raise ValueError("RAW frequency-only training requires RAW frequency features")
+    if global_only and not model.config.raw_global_features:
+        raise ValueError("RAW global-only training requires RAW global features")
     raw_kernel_only = config.get("raw_kernel_only", False)
     if type(raw_kernel_only) is not bool:
         raise ValueError("RAW kernel-only training must be a boolean")
@@ -214,6 +218,9 @@ def make_optimizer(model, config):
     if frequency_only:
         model.requires_grad_(False)
         model.pretrained_rgb.raw_frequency.requires_grad_(True)
+    if global_only:
+        model.requires_grad_(False)
+        model.pretrained_rgb.raw_global.requires_grad_(True)
     parameters = [p for p in model.parameters() if p.requires_grad]
     if multiplier != 1:
         phase = [
@@ -500,6 +507,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     source_loss_every = validate_source_loss_every(config.get("source_loss_every", 0))
     late_only = validate_late_rgb_only(config)
     frequency_only = validate_raw_frequency_only(config)
+    global_only = validate_raw_global_only(config)
     training_context = TrainingContext.from_config(config)
     noise_draws, mean_weight = noise_pair_options(config)
     config.update(
@@ -711,6 +719,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
         require_resume_global_features(resume_state["config"], config)
+        require_resume_raw_global_scope(resume_state["config"], config)
         require_resume_photo_epoch_order(resume_state["config"], config)
         require_resume_features(resume_state["config"], config)
         require_resume_noise_pairs(resume_state["config"], config)
@@ -1247,7 +1256,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             model,
             ema,
             min(config.get("ema_decay", 0.999), (1 + step) / (10 + step)),
-            trainable_only=late_only or frequency_only,
+            trainable_only=late_only or frequency_only or global_only,
         )
         if log_step:
             metrics = {

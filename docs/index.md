@@ -20,8 +20,9 @@ The [completed V122/V12320k review](v122-v123-quality.md) records a small
 joint-training photo gain over adapter-only training, with camera/color costs
 and little weak-detail recovery. The [V12414k progress review](v124-progress14000.md)
 adds noisy/shadow gains of.008–.033dB, faint ADC−.350dB and native material/GFX
-crops without clear mesh recovery. Its original20k control and V125 comparison
-continue; V120 remains the general choice.
+crops without clear mesh recovery. Its original20k control is complete; V125
+awaits its declared headroom and full endpoint quality is pending. V120 remains
+the general choice.
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
 weak-carrier gain, but does not improve broad weak natural detail and worsens
@@ -53,6 +54,7 @@ updates the current guides without an old promotion gate.
 | Method research | [Current research](research.md), [RAW spatial features](raw-spatial-features.md), [learned RAW frequency prototype](learned-raw-frequency-features.md), [measured green-phase mesh diagnostic](green-phase-spectrum.md) |
 | Completed global-attention pilot | [V136 matched1k quality and native crops](v136-global-attention-quality.md): tiny gains over V129, mixed local detail, no clear new mesh recovery. [Operator and genuine checks](raw-global-attention.md); V120 remains the general choice |
 | Completed global-conditioning pilot | [V137 measured quality, native triplets and both GFX pairs](v137-global-conditioned-quality.md): stronger memory adaptation, faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and no clear new fine-mesh recovery. [Operator and mechanism](raw-global-conditioning.md) |
+| Global-branch training | [V138 frozen-parent pilot](raw-global-only-training.md): CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR and1k quality review are queued after V125 completes; quality is unmeasured |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 
 Per-experiment reports contain numerical evidence, source/ROI metadata,

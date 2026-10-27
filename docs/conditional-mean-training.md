@@ -2,8 +2,8 @@
 
 **V124's [14k progress review](v124-progress14000.md) finds small noisy/shadow
 PSNR gains, a0.350dB faint-ADC regression and no clear large fine-detail recovery.**
-Its original20k control training continues; V125 follows with the added mean
-loss. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
+Its original20k control training is complete; V125 awaits its declared launch
+headroom before training with the added mean loss. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
 comparison remain pending; V120 remains the general recommendation. This experiment
 follows the [conditional-noise diagnostic](conditional-noise-response.md):
 weak fur/wood detail remains soft across independent noise observations.
@@ -51,6 +51,15 @@ recipes stay unchanged while their trained bias/noise comparison remains pending
 
 ## Execution and review
 
+V124's original worker completed20,000 optimizer updates,320,000 unique target
+contexts,560,480 sensor observations and640 validation forwards. Its endpoint
+SHA256 is`d562ae2fc4e9bf903501a3db1f2192b93e465a48f150eec6de5f232d510f0cc6`.
+The worker verifies finite91 model/EMA tensors and89 Adam states at20k.
+The controller remains live while V125 waits for the original64GiB launch
+threshold; its budget, source and data are unchanged. Full endpoint quality
+still waits for the matched pair; the earlier14k measurements below are not
+20k scores. [Current execution receipt](results/raw-global-only-pilot-setup-v1.json).
+
 The completed102-input progress review reuses all V120 controls and existing
 noise/RAW inputs. It includes two exact-GT native triplets, four main GFX contexts
 and both corrected DSCF3842/DSCF3835 mesh regions/profiles. The measured tradeoff
@@ -72,7 +81,7 @@ propagated failure through the waiting dependents. An
 [explicit recovery](v123-memory-guard-recovery.md) rebinds their owners while
 retaining original failed receipts, source bytes, inputs and deadlines.
 All four completed checks are reused. The original frequency quality/audit/
-comparison/mesh owners completed; V124's fresh production has started without
+comparison/mesh owners completed; V124's fresh production completed without
 repeating checks. [Completed frequency results](v122-v123-quality.md).
 Each production worker has a prospective 48-hour limit, 24 GiB CUDA allocator cap,
 64 GiB production launch headroom (56 GiB for CUDA checks) and a 32 GB runtime

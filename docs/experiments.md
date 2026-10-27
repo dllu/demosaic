@@ -45,8 +45,8 @@ RawNIND; V117 retains higher condition means and V121's changes are tiny.
 
 The [V124/V125 mean-loss trial](conditional-mean-training.md) uses V120's
 architecture and parent on the cleaned90,784-source/twenty-region corpus.
-All four CPU/CUDA16+2 checks pass; V124's original20k control is running and
-V125 follows. Both arms use16 unique targets and32 simulated observations,
+All four CPU/CUDA16+2 checks pass; V124's original20k control is complete and
+V125 awaits its declared launch headroom. Both arms use16 unique targets and32 simulated observations,
 with mean-loss weights0/.25. [V12414k progress](v124-progress14000.md) finds
 noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB and no clear fine-mesh recovery.
 Full endpoint and repeated-noise mean-loss comparison remain pending.
@@ -64,6 +64,12 @@ stronger query/key adaptation and faint ADC+.0334dB over V136, with ordinary/
 shadows−.0005–.0044dB and mixed local detail. All102 new predictions, independent
 audits and38 actual native views are complete. No clear new fine-mesh recovery
 is visible; V120 remains the general recommendation. [Operator/mechanism](raw-global-conditioning.md).
+
+The [V138 branch-only pilot](raw-global-only-training.md) freezes all91 V120
+model/EMA tensors and trains the same18 global tensors at LR1e−3. Genuine
+CPU/CUDA16+2 checks and independent state/input verification pass. Its original
+1k production and102-input native/GFX review are queued after V125 completes.
+The combined freezing/LR intervention has no measured quality result yet.
 
 The [V1239k frequency-feature midpoint](v123-midpoint-quality.md) now includes
 16 material predictions and six GFX contexts, reusing47 saved controls. Selected

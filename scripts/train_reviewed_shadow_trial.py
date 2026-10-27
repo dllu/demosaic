@@ -160,10 +160,14 @@ def worker(path, phase, arm):
     config = yaml.safe_load(Path(plan["arms"][arm][phase]).read_text())
     spatial = config["model"].get("raw_spatial_features", False)
     global_features = config["model"].get("raw_global_features", False)
+    global_only = training.validate_raw_global_only(config)
     assert not (spatial and global_features)
     expected_tensors, expected_states = (
         (109, 107) if global_features else ((114, 112) if spatial else (91, 89))
     )
+    if global_only:
+        assert global_features
+        expected_states = 18
     declared = plan.get("restoration_tensors_by_arm", {}).get(arm, 91)
     assert expected_tensors == declared
     fractions = plan.get("arm_fractions", FRACTIONS)
@@ -351,6 +355,12 @@ def worker(path, phase, arm):
 
         def before_step(*args):
             step = counts["optimizer_steps"] + 1
+            if global_only:
+                assert all(
+                    not parameter.requires_grad and parameter.grad is None
+                    for name, parameter in model.named_parameters()
+                    if not name.startswith("pretrained_rgb.raw_global.")
+                )
             declared_steps = plan.get("gradient_observation_steps")
             if phase != "train" or (
                 step <= 16 if declared_steps is None else step in declared_steps
@@ -421,6 +431,9 @@ def worker(path, phase, arm):
         assert all(
             torch.isfinite(v).all() for field in ("model", "ema") for v in state[field].values()
         )
+        if global_only:
+            for field in ("model", "ema"):
+                assert all(torch.equal(state[field][k], v) for k, v in parent["ema"].items())
         assert all(
             torch.isfinite(v).all()
             for s in state["optimizer"]["state"].values()
@@ -496,6 +509,8 @@ def worker(path, phase, arm):
                 "all_AdamW_steps": expected,
                 "optimizer_state_count": expected_states,
                 "model_EMA_tensor_count": expected_tensors,
+                "raw_global_only": global_only,
+                "frozen_parent91_model_and_EMA_exact": True if global_only else None,
                 "initial_global_offsets": global_initial_offsets,
                 "matched_control_result": control_binding,
                 "first_outputs": ref(destination / "first-outputs.npz")

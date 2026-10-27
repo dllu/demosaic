@@ -6,6 +6,9 @@ Query/key adaptation is stronger, but local detail remains mixed and no clear
 new fine-mesh recovery is visible. V120 remains the general recommendation.
 [Measured results, native triplets and both GFX pairs](v137-global-conditioned-quality.md).
 The explicit operator normalizes attention matching while retaining value amplitude.
+The [V138 follow-up](raw-global-only-training.md) freezes the parent and trains
+this same branch at a larger learning rate. Genuine checks pass; production and
+quality review are queued after V125 completes, with no quality claim yet.
 
 [Implementation](../src/demosaic/raw_global_conditioned_features.py) ·
 [Recipe](../configs/quality-v120-raw-global-conditioned-pilot-v137.yaml) ·
