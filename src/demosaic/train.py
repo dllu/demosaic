@@ -17,6 +17,7 @@ from torch.utils.data import DataLoader
 from .cfa import bilinear
 from .color import render
 from .data import CleanDataset, degrade, validate_flat_chroma_stops
+from .dino_supervision import feature_options, require_resume_features, spatial_feature_loss
 from .execution import require_resume_execution, training_execution, validate_training_execution
 from .losses import (
     DEFAULT_RECONSTRUCTION_EPSILON,
@@ -492,6 +493,8 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
 
 
 def _train(config, *, resume=None, initialize=None, stop_after=None):
+    feature_weight, feature_policy = feature_options(config)
+    config.update(dino_feature_weight=feature_weight, dino_feature_policy=feature_policy)
     source_loss_every = validate_source_loss_every(config.get("source_loss_every", 0))
     late_only = validate_late_rgb_only(config)
     frequency_only = validate_raw_frequency_only(config)
@@ -699,6 +702,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
+        require_resume_features(resume_state["config"], config)
         require_resume_noise_pairs(resume_state["config"], config)
         require_resume_reviewed_shadows(resume_state["config"], config)
         if validate_late_rgb_only(resume_state["config"]) != late_only:
@@ -1191,6 +1195,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                         normalized_band_weight=band_weight,
                         **mean_options,
                     )
+            if feature_weight and not use_pair:
+                feature_term = spatial_feature_loss(model, prediction, loss_batch)
+                loss = loss + feature_weight * feature_term
+                terms = {**terms, "dino_feature": feature_term}
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Nonfinite loss at step {step}; last checkpoint retained")
             if source_observer is not None:

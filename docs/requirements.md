@@ -24,6 +24,10 @@ cleanup alone do not establish trained quality gains.
 The [completed V126/V127 shadow-data pilot](reviewed-shadow-pilot-quality.md)
 shows no useful gain after1,000 matched updates; fixed-input metrics and native
 comparisons are independently checked. Shadow exposure stays off by default.
+The [V128 feature-supervision pilot](dino-feature-supervision.md) now tests an
+additional early DINO spatial loss against the saved V126 control. Independent
+output-gradient checks and actual CPU/CUDA resume checks pass; its fresh1000-update
+quality remains unproven. Candidate-only heldout/GFX collection is queued.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
@@ -32,7 +36,7 @@ comparisons are independently checked. Shadow exposure stays off by default.
 | 16-bit/full-resolution output | V120/V121 complete101.996MP FP32 outputs and linear/sRGB RGB16 exports verified, including matched-Haar full-frame comparisons | Preserve per-checkpoint precision/quality evidence |
 | 100MP within10s on GB10 | Ordered Tiny/Small FP32 observations116.57/101.66s, not a controlled speed ranking | Target open; improve quality before speed work |
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
-| Diverse clean targets and binning | Active90,786/fourteen regions, queued90,784/twenty; separate90,783/23-region shadow pilot;4×→geometry→area2, zero optical blur; actual reader and CPU/CUDA model checks | Measure trained data changes; faint-shadow coverage and broad weak-detail recovery remain incomplete |
+| Diverse clean targets and binning | Active90,786/fourteen regions, queued90,784/twenty;90,783/23-region shadow/feature pilots;4×→geometry→area2, zero optical blur; actual reader and CPU/CUDA model checks | Measure trained data changes; faint-shadow coverage and broad weak-detail recovery remain incomplete |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; V120 ADC max55.52DN16, Tiny alternative51.73DN16 | Spatial dark-field/weak-detail failures and real-noise calibration limits remain |
 | Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V120/V121 numerical/native/full-frame review complete; V123 midpoint measured | Finish current trained comparisons and improve real-photo/detail quality |
 | Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |

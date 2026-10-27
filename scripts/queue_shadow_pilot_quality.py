@@ -13,8 +13,10 @@ from train_directional_bank_trial import guard, read, ref, save
 from train_v43_quality_trial import live
 
 
-def prepare(root, inputs_path, training_path):
+def prepare(root, inputs_path, training_path, arms=None, matched_control_collection=None):
     inputs, training = read(inputs_path), read(training_path)
+    arms = list(arms or ("V126", "V127"))
+    assert arms and len(arms) == len(set(arms)) and set(arms) <= set(training["arms"])
     guard(inputs)
     guard(training)
     status = read(Path(training["root"]) / "status.json")
@@ -30,7 +32,7 @@ def prepare(root, inputs_path, training_path):
     for helper in ("train_directional_bank_trial.py", "train_v43_quality_trial.py"):
         shutil.copyfile(Path(__file__).with_name(helper), root / helper)
     source = Path(inputs["work"])
-    for arm in ("V126", "V127"):
+    for arm in arms:
         work = root / arm / "work"
         for name in ("src", "scripts", "third_party"):
             shutil.copytree(source / name, work / name)
@@ -39,6 +41,7 @@ def prepare(root, inputs_path, training_path):
         "input_plan": ref(inputs_path),
         "training_plan": ref(training_path),
         "training_owner": status["controller"],
+        "arms": arms,
         "baseline_collection": ref(baseline_path),
         "controller": ref(controller),
         "python": training["python"],
@@ -58,6 +61,20 @@ def prepare(root, inputs_path, training_path):
         },
         "scope": "Both fresh1000 endpoints only:86 new calls each on64 fixed new shadow observations plus22 retained material/GFX inputs. Existing V120 shadow64 already complete; all old material/GFX controls reused. Total236 calls across3 models,64 new noise observations, zero RAW/reference/optimizer work. Independent metrics and actual native review follow collection.",
     }
+    if matched_control_collection is not None:
+        binding = ref(matched_control_collection)
+        control = read(binding["path"])
+        assert control["counts"] == {"root": 86, "encoder": 86}
+        assert len(control["observations"]) == 86
+        plan["matched_control_collection"] = binding
+        plan["inputs"].append(binding)
+        plan["scope"] = (
+            f"Only new candidate endpoints {arms}:86 new calls each on the64 retained shadow "
+            "and22 material/GFX inputs. Reuse completed V1261000-update control predictions "
+            "and V120 baseline predictions. Zero new noise/RAW/reference/optimizer work. "
+            "No repeated control inference; independent metrics and actual native review "
+            "follow collection. A1000-update pilot is not a completed20k quality result."
+        )
     save(root / "queue-plan-v1.json", plan)
     guard(plan)
     return root / "queue-plan-v1.json"
@@ -97,7 +114,7 @@ def controller(path):
                 break
             time.sleep(15)
         inputs = read(plan["input_plan"]["path"])
-        for arm in ("V126", "V127"):
+        for arm in plan.get("arms", ("V126", "V127")):
             result_binding = status["completed"][f"train-{arm}"]
             assert ref(result_binding["path"]) == result_binding
             result = read(result_binding["path"])
@@ -193,8 +210,18 @@ if __name__ == "__main__":
     parser.add_argument("path", type=Path)
     parser.add_argument("--input-plan", type=Path)
     parser.add_argument("--training-plan", type=Path)
+    parser.add_argument("--arms", nargs="+")
+    parser.add_argument("--matched-control-collection", type=Path)
     args = parser.parse_args()
     if args.mode == "prepare":
-        print(prepare(args.path.resolve(), args.input_plan.resolve(), args.training_plan.resolve()))
+        print(
+            prepare(
+                args.path.resolve(),
+                args.input_plan.resolve(),
+                args.training_plan.resolve(),
+                args.arms,
+                args.matched_control_collection,
+            )
+        )
     else:
         controller(args.path.resolve())

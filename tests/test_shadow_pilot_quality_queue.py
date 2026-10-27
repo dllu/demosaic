@@ -123,6 +123,21 @@ def test_completed_training_collects_each_new_endpoint_once(tmp_path, monkeypatc
         queue.controller(path)
 
 
+def test_one_new_candidate_collects_without_repeating_retained_control(tmp_path, monkeypatch):
+    path, _ = fixture(tmp_path)
+    plan = json.loads(path.read_text())
+    plan["arms"] = ["V127"]
+    save(path, plan)
+    monkeypatch.setattr(
+        queue.psutil, "virtual_memory", lambda: SimpleNamespace(available=80 * 2**30)
+    )
+    queue.controller(path)
+    state = json.loads((path.parent / "status.json").read_text())
+    assert set(state["completed"]) == {"V127"}
+    assert (path.parent / "V127/actual-fixture-call").exists()
+    assert not (path.parent / "V126/actual-fixture-call").exists()
+
+
 @pytest.mark.parametrize("status", ["failed-fixture", "running-quality-training"])
 def test_failed_or_prematurely_exited_training_never_collects(tmp_path, status):
     path, _ = fixture(tmp_path, status)

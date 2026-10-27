@@ -101,8 +101,9 @@ full-suite metrics replay exactly from the original V54 first gate.
 [Hybrid texture-acutance training research](https://arxiv.org/html/2404.07212v1)
 motivates separate texture checks; this code does not reproduce its dead-leaves
 generator, acutance loss or reported scores. The broader
-[research record](research.md#texture-retention-and-training-scale-follow-up)
-records the scope and recent RAW training context.
+[original research discussion](../diary/2026-10-27-00-42-21-dino-feature-supervision.md#exact-previous-research-page)
+preserves that historical context; the [current research map](research.md)
+describes the latest measured hypotheses.
 
 ```bash
 source scripts/env.sh

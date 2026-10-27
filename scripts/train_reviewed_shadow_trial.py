@@ -98,7 +98,7 @@ def worker(path, phase, arm):
     guard(plan)
     root, work = Path(plan["root"]), Path(plan["work"])
     assert Path(training.__file__).resolve().is_relative_to(work / "src")
-    assert ref(__file__) == plan["worker_script"]
+    assert ref(__file__) == plan.get("core_worker_script", plan["worker_script"])
     assert os.environ["CUDA_VISIBLE_DEVICES"] == ("" if phase == "CPU" else "0")
     (root / f"{phase}-{arm}.claim").open("x").close()
     os.nice(10)
@@ -110,7 +110,8 @@ def worker(path, phase, arm):
             / torch.cuda.get_device_properties(0).total_memory
         )
     config = yaml.safe_load(Path(plan["arms"][arm][phase]).read_text())
-    assert config["reviewed_shadow_fraction"] == FRACTIONS[arm]
+    fractions = plan.get("arm_fractions", FRACTIONS)
+    assert config["reviewed_shadow_fraction"] == fractions[arm]
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
     assert parent["step"] == 20000 and len(parent["ema"]) == 91
     counts, domains = Counter(), Counter()
@@ -123,7 +124,14 @@ def worker(path, phase, arm):
     )
     destination = root / "retained" / phase / arm
     destination.mkdir(parents=True, exist_ok=False)
-    control = read(root / f"{phase}-V126-result.json") if arm == "V127" else None
+    control_binding = plan.get("matched_control_results", {}).get(phase)
+    if control_binding:
+        assert ref(control_binding["path"]) == control_binding
+        control = read(control_binding["path"])
+        assert control["phase"] == phase and control["arm"] == "V126"
+        assert control["updates"] == (plan["train_updates"] if phase == "train" else 18)
+    else:
+        control = read(root / f"{phase}-V126-result.json") if arm == "V127" else None
     prior_inputs = {r["step"]: r for r in control["observed_inputs"]} if control else {}
     smoke = read(root / f"CUDA-{arm}-result.json") if phase == "train" else None
     smoke_inputs = {r["step"]: r for r in smoke["observed_inputs"]} if smoke else {}
@@ -160,6 +168,10 @@ def worker(path, phase, arm):
         model.context.backbone.register_forward_hook(
             lambda *args: counts.update(encoder_forwards=1)
         )
+        if config.get("dino_feature_weight", 0):
+            model.context.backbone.stages[0].register_forward_hook(
+                lambda *args: counts.update(stage0_forwards=1)
+            )
         return model
 
     def batch(step, domain, clean, **kwargs):
@@ -174,9 +186,9 @@ def worker(path, phase, arm):
         selected = value.get("shadow_exposure_selected")
         n = int(selected.sum()) if selected is not None else 0
         counts["shadow_selected_targets"] += n
-        if domain == "commons" and FRACTIONS[arm]:
+        if domain == "commons" and fractions[arm]:
             expected = reviewed_shadow_levels(
-                clean, fraction=FRACTIONS[arm], seed=70, step=step, device=value["packed"].device
+                clean, fraction=fractions[arm], seed=70, step=step, device=value["packed"].device
             )
             assert torch.equal(selected, expected > 0)
         else:
@@ -192,6 +204,8 @@ def worker(path, phase, arm):
         if step in prior_inputs:
             assert clean_hash == prior_inputs[step]["clean_sha256"]
             assert domain == prior_inputs[step]["domain"]
+            if plan.get("require_matched_noisy_inputs", False):
+                assert digest == prior_inputs[step]["batch_sha256"]
         if step in smoke_inputs:
             assert digest == smoke_inputs[step]["batch_sha256"]
         if step <= 18:
@@ -247,7 +261,7 @@ def worker(path, phase, arm):
             )
             assert preserved_state["step"] == 16
             current = "rejected-resume"
-            for change in ("fraction", "policy"):
+            for change in plan.get("resume_rejection_changes", ("fraction", "policy")):
                 before = dict(counts)
                 try:
                     training.train(
@@ -256,7 +270,9 @@ def worker(path, phase, arm):
                         stop_after=1,
                     )
                 except ValueError as error:
-                    assert "shadow" in str(error).lower()
+                    assert (
+                        plan.get("resume_rejection_error_keyword", "shadow") in str(error).lower()
+                    )
                     rejected[change] = str(error)
                 else:
                     raise AssertionError("Changed shadow setting accepted on resume")
@@ -289,16 +305,23 @@ def worker(path, phase, arm):
             counts["encoder_forwards"]
             == counts["training_forwards"] + counts["validation_forwards"]
         )
+        if config.get("dino_feature_weight", 0):
+            assert counts["stage0_forwards"] == counts["encoder_forwards"] + 2 * (
+                domains["commons"] + domains["native"]
+            )
         assert model_hash(captured["model"].context.backbone) == config["expected_dino_sha256"]
         if phase == "train":
             assert dict(domains) == plan["prospective_domain_batches"]
-            if FRACTIONS[arm]:
+            if fractions[arm]:
                 assert counts["shadow_selected_targets"] > 0
+        if plan.get("require_matched_noisy_inputs", False):
+            assert control_binding and len(inputs) == len(control["observed_inputs"])
+            assert [r["step"] for r in inputs] == [r["step"] for r in control["observed_inputs"]]
         guard(plan)
         save(
             root / f"{phase}-{arm}-result.json",
             {
-                "status": "completed-shadow-training-phase",
+                "status": plan.get("phase_result_status", "completed-shadow-training-phase"),
                 "phase": phase,
                 "arm": arm,
                 "owner": {"pid": os.getpid(), "created": psutil.Process().create_time()},
@@ -309,10 +332,13 @@ def worker(path, phase, arm):
                 "initial_checks": initials,
                 "observed_inputs": inputs,
                 "gradient_maxima": gradients,
-                "changed_shadow_resume_rejections": rejected,
+                plan.get("rejection_result_key", "changed_shadow_resume_rejections"): rejected,
                 "model_EMA_Adam_finite": True,
                 "all_AdamW_steps": expected,
                 "optimizer_state_count": 89,
+                "dino_feature_weight": config.get("dino_feature_weight", 0),
+                "dino_feature_policy": config.get("dino_feature_policy"),
+                "all_observed_inputs_match_saved_control": bool(control_binding),
                 "CUDA_peak_allocated_bytes": torch.cuda.max_memory_allocated()
                 if phase != "CPU"
                 else 0,

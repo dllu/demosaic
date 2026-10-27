@@ -28,7 +28,8 @@ def analyze(queue_path):
         raise ValueError("Unexpected completed V120 shadow baseline")
     baseline_rows = {r["id"]: r for r in baseline["observations"]}
     methods = {}
-    for arm in ("V126", "V127"):
+    arms = queue.get("arms", ("V126", "V127"))
+    for arm in arms:
         binding = status["completed"][arm]
         if ref(binding["path"]) != binding:
             raise ValueError("Endpoint collection changed")
@@ -42,21 +43,43 @@ def analyze(queue_path):
         }:
             raise ValueError("Unexpected pilot endpoint identity/count")
         methods[arm] = execution, collection, execution_path, binding
-    a, b = [methods[arm][0]["observations"] for arm in ("V126", "V127")]
-    if [(o["id"], o["input_fingerprints"]) for o in a] != [
-        (o["id"], o["input_fingerprints"]) for o in b
-    ]:
-        raise ValueError("Pilot endpoints did not share identical observations")
-    controls = {r["id"]: r for r in methods["V126"][1]["observations"]}
+    if binding := queue.get("matched_control_collection"):
+        if ref(binding["path"]) != binding:
+            raise ValueError("Saved matched control changed")
+        matched = read(binding["path"])
+        control_execution = read(matched["plan"]["path"])
+        if ref(matched["plan"]["path"]) != matched["plan"]:
+            raise ValueError("Saved matched-control execution changed")
+        guard(control_execution)
+        if matched["counts"] != {"root": 86, "encoder": 86}:
+            raise ValueError("Saved matched-control call count differs")
+        control_observations, control_rows, control_binding = (
+            control_execution["observations"],
+            matched["observations"],
+            binding,
+        )
+    else:
+        control_observations, control_rows, _, control_binding = methods["V126"]
+        control_observations, control_rows = (
+            control_observations["observations"],
+            control_rows["observations"],
+        )
+    expected_inputs = [(o["id"], o["input_fingerprints"]) for o in control_observations]
+    for execution, _, _, _ in methods.values():
+        if [
+            (o["id"], o["input_fingerprints"]) for o in execution["observations"]
+        ] != expected_inputs:
+            raise ValueError("Pilot endpoints did not share identical observations")
+    controls = {r["id"]: r for r in control_rows}
     outputs = {}
-    for arm in ("V126", "V127"):
+    for arm in arms:
         execution, collection, execution_path, binding = methods[arm]
         destination = root / f"analysis-{arm}-v1"
         destination.mkdir(exist_ok=False)
         observations = []
         extra = [
             queue["baseline_collection"],
-            methods["V126"][3],
+            control_binding,
             binding,
             ref(execution_path),
             ref(queue_path),
@@ -75,7 +98,7 @@ def analyze(queue_path):
                 ]
                 if len(selected) != 1:
                     raise ValueError("Exactly one matched retained V120 control is required")
-            if arm == "V127":
+            if arm != "V126":
                 selected.append(
                     {
                         "model": {"label": "V126 1k EMA"},
@@ -94,7 +117,7 @@ def analyze(queue_path):
             "inputs": [*execution["inputs"], *extra],
             "scope": (
                 execution["scope"] + " Report-only metadata derives from the original86-call "
-                "collection; controls are retained V120 and, for V127, matched V126. "
+                "collection; controls are retained V120 and matched V126 when distinct. "
                 "Material scores apply the fixed display exposure before reduction, so "
                 "camera/sRGB PSNR and band errors use exposure-normalized units. "
                 "Same-source conditions/CFAs are not independent photographs. No new inference."

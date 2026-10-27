@@ -120,6 +120,12 @@ now match older V115/V119 inputs exactly, with no clear large detail recovery.
 
 ## Quality and remaining work
 
+The [V128 early-feature pilot](dino-feature-supervision.md) adds a small frozen
+DINO spatial loss to the completed V126 control recipe. Its retained-output
+gradient audit and actual CPU/CUDA resume checks pass; trained quality is
+unproven. The queued review includes both main-GFX and corrected3842/3835 mesh
+inputs, reusing saved controls. V120 remains the general recommendation.
+
 The [independent-noise diagnostic](conditional-noise-response.md) separates
 persistent error from output variance on four fixed targets. Faint fur/wood
 remain biased after averaging independent V120/V117 restorations; strong bark

@@ -30,9 +30,17 @@ An optional [reviewed-material shadow exposure](reviewed-shadow-exposure.md)
 is now implemented for a later trial. It uses one bounded scalar exposure,
 preserving material geometry and current camera/noise draws, with old/default
 preparation parity verified on CPU/CUDA. The new
-[V126/V127 short pilot](reviewed-shadow-training-pilot.md) tests it from V120
-with a shared.5 reviewed-region quota. Original V122/V123 and queued V124/V125
-keep it off; learned quality is unmeasured.
+[completed V126/V127 short pilot](reviewed-shadow-pilot-quality.md) tested it
+from V120 with a shared.5 reviewed-region quota and found no useful gain.
+Shadow exposure stays off by default and in original V122/V123 and queued V124/V125.
+
+The [V128 feature-loss pilot](dino-feature-supervision.md) reuses completed V126
+as its matched control on90,783 sources/23 regions. It adds a default-off spatial
+loss through the shared frozen DINO first stage on Commons/native targets;
+paired RAW and validation keep the existing loss. CPU/CUDA16+2 resume checks
+pass with identical data/noise hashes. Production is a fresh1000-update pilot;
+trained quality remains unproven. Per-source traces retain base reconstruction
+loss while training logs separately include the feature term.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;
