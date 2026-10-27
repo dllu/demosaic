@@ -23,6 +23,7 @@ unresolved; broad state-of-the-art quality is unproven.
 | Does adding more realistic reviewed shadow detail help? | [Completed V126/V1271000-update pilot](reviewed-shadow-pilot-quality.md) finds no useful gain on its retained material/shadow/GFX support. Shadow policy stays off by default; the23-region reviewed bank remains available |
 | Does fine-detail loss reweighting suffice? | [Completed V117/V11820k comparison](v117-v118-quality.md) finds lower weak natural-detail response and a worse ADC color tail with the normalized band term. Keep it off; improved local output-gradient alignment did not predict trained quality |
 | Does encoder size alone fix weak contrast? | [Full Tiny/Small diagnosis](local-material-detail.md) finds nearly unchanged weakest-stratum gain on427 photos. Small's camera/detail tradeoffs remain useful; no size-only explanation is established |
+| How much of the bigger corpus does a run visit? | [Full20k source audit](training-source-schedule-coverage.md) checks319,824 real-reader metadata stops. The spatial trial's50% reviewed quota visits46.36% of its corpus; the same schedule at5% would visit69.26%. Test the quota at fixed architecture/data; these source counts do not establish trained quality |
 
 The latest [source inspection](current-source-loss-review.md) has1,879 unique
 reviewed source IDs. Quality work uses zero optical PSF augmentation and

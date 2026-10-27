@@ -14,12 +14,17 @@ that dark/noisy conditions need separate inspection. The optional
 CPU/CUDA checks, but its [completed1k pilot](reviewed-shadow-pilot-quality.md)
 shows no useful quality gain. It stays off by default.
 
-Keep the queued [V124/V125 training recipes](conditional-mean-training.md)
-unchanged. They test conditional bias with the same data, while the active
-[V122/V123 comparison](learned-raw-frequency-training.md) tests the input adapter.
+The [V124/V125 training recipes](conditional-mean-training.md) test conditional
+bias with frozen inputs; V124 control is running and V125 follows. The
+[completed V122/V123 comparison](v122-v123-quality.md) finds little weak natural
+detail recovery from its frequency input adapter. The new
+[full source-schedule audit](training-source-schedule-coverage.md) separately
+identifies quota-dependent source concentration, without measuring target pixels
+or restored quality.
 Future material additions should pass native visual inspection rather than
 maximize a weak-band count or increase the procedural quota on this evidence.
-No trained quality, checkpoint selection or inference policy changes here.
+These coverage measurements do not change checkpoint selection, inference
+policy or the inputs of current trials.
 
 ![Fine-band contrast by actual prepared-target family and fixed diagnostic reference](images/training-target-coverage-v1/training-target-contrast.png)
 

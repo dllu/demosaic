@@ -27,6 +27,12 @@ model-quality gains or certify every remaining photo pristine.
 [Spatial trial and progress review](raw-spatial-training.md) ·
 [Completed FP32 comparison](training-precision-pilot.md).
 
+The [full20k source-schedule audit](training-source-schedule-coverage.md)
+separately measures visitation: the spatial trial's50% reviewed quota visits
+46.36% of its available photos; the same seed/cohort at5% would visit69.26%.
+Catalogue expansion and corpus size alone do not establish training diversity
+or quality. The counterfactual is metadata only; current recipes remain fixed.
+
 The [31-region catalogue](../configs/low-contrast-training-rois-cleaned90780-v1.json)
 preserves all29 preceding example objects. The new manifest removes exactly one
 training row from90,781 and retains every other line's bytes/order; validation/

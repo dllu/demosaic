@@ -26,6 +26,7 @@ their declared data. [Data pipeline](docs/training-pipeline.md).
 | [V122/V123 frequency features](docs/v122-v123-quality.md) | Both20k reviews complete: joint training gains0.05493dB photo PSNR over adapter-only, with lower unseen-camera PSNR, a worse ADC tail and little weak-detail recovery |
 | [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | V124's two-view control is training; V125 follows on the same90,784-source/twenty-region data |
 | [V131/V132 spatial attention](docs/raw-spatial-training.md) | Four genuine CPU/CUDA checks pass;20k per arm queued on90,781/29 after V125's admission. An early102-input comparison waits for their retained1k progress snapshots |
+| [Photographic source coverage](docs/training-source-schedule-coverage.md) | The spatial trial's 50% reviewed quota visits 46.36% of its corpus in the planned 20k schedule. A lower quota merits a fixed-data quality comparison; current trials stay unchanged |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
