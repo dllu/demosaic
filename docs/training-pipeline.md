@@ -29,8 +29,10 @@ All current and queued recipes remain fixed.
 An optional [reviewed-material shadow exposure](reviewed-shadow-exposure.md)
 is now implemented for a later trial. It uses one bounded scalar exposure,
 preserving material geometry and current camera/noise draws, with old/default
-preparation parity verified on CPU/CUDA. It remains off in every current and
-queued recipe; trained quality is unmeasured.
+preparation parity verified on CPU/CUDA. The new
+[V126/V127 short pilot](reviewed-shadow-training-pilot.md) tests it from V120
+with a shared.5 reviewed-region quota. Original V122/V123 and queued V124/V125
+keep it off; learned quality is unmeasured.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;

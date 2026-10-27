@@ -72,10 +72,11 @@ def collect(path):
             state["loaded_sha256"] != plan["checkpoint"]["sha256"]
             or state["step"] != plan["step"]
             or state["config"]["initialized_from"] != plan["expected_lineage"]
-            or not model.config.raw_frequency_features
-            or model.pretrained_rgb.raw_frequency is None
+            or model.config.raw_frequency_features != plan.get("raw_frequency_features", True)
+            or (model.pretrained_rgb.raw_frequency is not None)
+            != plan.get("raw_frequency_features", True)
         ):
-            raise ValueError("Loaded midpoint identity or active frequency adapter differs")
+            raise ValueError("Loaded checkpoint identity or frequency-adapter setting differs")
         actual = model.restoration_state_dict()
         if len(actual) != plan["EMA_tensors"] or any(
             not torch.equal(v.cpu(), state["ema"][k]) for k, v in actual.items()
@@ -90,6 +91,8 @@ def collect(path):
         del actual, state
         model.eval().to(memory_format=torch.channels_last)
         before = model_hash(model)
+        if plan.get("expected_full_model_sha256", before) != before:
+            raise ValueError("Loaded model differs from its retained identity")
         save(root / "loaded-model-v1.json", {
             "plan": ref(path), "full_model_sha256": before,
             "backbone_sha256": backbone_before, "new_forwards_so_far": 0,
@@ -158,7 +161,7 @@ def collect(path):
     if counts != {"root": len(observations), "encoder": len(observations)}:
         raise ValueError("Actual forward counts differ")
     save(root / "collection-v1.json", {
-        "status": "completed-new-midpoint-only-retained-input-pilot",
+        "status": "completed-declared-checkpoint-retained-input-pilot",
         "plan": ref(path), "predictions": ref(journal), "counts": counts,
         "full_model_before": before, "full_model_after": after,
         "backbone_before": backbone_before, "backbone_after": backbone_after,

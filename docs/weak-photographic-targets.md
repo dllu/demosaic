@@ -13,7 +13,7 @@ The [completed V121 comparison](v120-v121-primary.md) has a+.00149dB photo chang
 from V120 (paired-source95% interval[−.00080,+.00401]), a tiny weak-detail gain
 change and no clear fine-mesh recovery gain. A large ADC outlier remains. This
 combined cleanup/fourteen-region intervention has not solved weak-detail loss;
-the prepared20- and23-region options below have not been trained.
+the20-region full trial is queued and the23-region shadow-data pilot below is running.
 
 A [90,786-source snapshot](current-source-loss-review.md) removes one
 separately inspected nonphotographic advertisement while preserving all fourteen
@@ -48,15 +48,16 @@ new IDs and adds three physical fine-detail contexts to a separate
 **23-region catalogue on the same90,783-source manifest**. Pale animal hair,
 gray feathers and whitewashed brick supplement the previous20 objects exactly.
 All23 pass actual-reader sampling and controlled common-target checks. These
-are mixed-contrast contexts, not uniformly faint targets; the option remains
-untrained and does not change the queued20-region recipes.
+are mixed-contrast contexts, not uniformly faint targets; the option is now used
+in the [bounded V126/V127 pilot](reviewed-shadow-training-pilot.md), with
+learned-quality results pending. It does not change the queued20-region recipes.
 [Future23-region catalogue](../configs/low-contrast-training-rois-cleaned90783-v2.json).
 
 The optional [shadow-exposure extension](reviewed-shadow-exposure.md) can place
 selected reviewed material crops in a darker sensor range without changing
 their pixels' geometry or relative color. Actual twenty-region CPU/CUDA checks
-pass. It is disabled by default and untrained; the queued source bank and
-recipes remain unchanged.
+pass. It is disabled by default and enabled in the new V127 pilot; trained
+quality is unmeasured. Queued V124/V125 source banks and recipes remain unchanged.
 
 [Catalogue](../configs/low-contrast-training-rois-cleaned90787-v1.json) ·
 [Actual visual decisions](results/weak-photographic-targets-review-v1.json) ·

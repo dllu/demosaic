@@ -262,7 +262,7 @@ def controller(path):
     state = {
         "plan": ref(path),
         "controller": {"pid": os.getpid(), "created": psutil.Process().create_time()},
-        "completed": {},
+        "completed": dict(plan.get("adopted_phase_results", {})),
     }
     child = owner = None
 
@@ -271,6 +271,8 @@ def controller(path):
         save(root / "status.json", state)
 
     try:
+        if plan.get("replaced_controller"):
+            assert not live(plan["replaced_controller"])
         if dependency := plan.get("after_run"):
             record("waiting-for-owned-fullframe-export", dependency=dependency)
             started = time.monotonic()
@@ -293,12 +295,22 @@ def controller(path):
         for phase in ("CPU", "CUDA", "train"):
             for arm in plan["arms"]:
                 guard(plan)
+                if binding := state["completed"].get(f"{phase}-{arm}"):
+                    assert ref(binding["path"]) == binding
+                    assert not live(read(binding["path"])["owner"])
+                    record("adopted-completed-quality-check", phase=phase, arm=arm)
+                    continue
                 record("waiting-for-training-headroom", phase=phase, arm=arm)
                 began, stable = time.monotonic(), None
                 while True:
-                    assert time.monotonic() - began < 7200
+                    deadline = plan.get("adopted_headroom_deadline", {})
+                    if (phase, arm) == (deadline.get("phase"), deadline.get("arm")):
+                        assert time.time() < deadline["unix"]
+                    else:
+                        assert time.monotonic() - began < 7200
                     enough = (
-                        psutil.virtual_memory().available >= 48 * 2**30
+                        psutil.virtual_memory().available
+                        >= plan.get("launch_available_RAM_GiB", 48) * 2**30
                         and shutil.disk_usage(root).free
                         >= plan.get("phase_start_internal_free_GiB", 32) * 2**30
                         and shutil.disk_usage("/mnt/external").free
@@ -324,9 +336,11 @@ def controller(path):
                         [
                             plan["python"],
                             "-P",
-                            str(work / "scripts/train_quality_recipes.py"),
+                            plan.get("worker_script", {}).get(
+                                "path", str(work / "scripts/train_quality_recipes.py")
+                            ),
                             "worker",
-                            str(path),
+                            plan.get("adopted_worker_plan", {"path": str(path)})["path"],
                             "--phase",
                             phase,
                             "--arm",
@@ -343,7 +357,12 @@ def controller(path):
                     record("running-quality-training", phase=phase, arm=arm, child=owner)
                     started = time.monotonic()
                     while child.poll() is None:
-                        assert time.monotonic() - started < (43200 if phase == "train" else 1200)
+                        assert time.monotonic() - started < plan.get(
+                            "maximum_train_worker_seconds"
+                            if phase == "train"
+                            else "maximum_smoke_worker_seconds",
+                            43200 if phase == "train" else 1200,
+                        )
                         assert (
                             shutil.disk_usage(root).free
                             > plan.get("runtime_internal_reserve_GiB", 16) * 2**30
@@ -354,7 +373,7 @@ def controller(path):
                         )
                         time.sleep(2)
                     assert child.wait() == 0, (phase, arm, child.returncode)
-                result = root / f"{phase}-{arm}-result.json"
+                result = Path(plan.get("output_worker_root", root)) / f"{phase}-{arm}-result.json"
                 assert read(result)["owner"] == owner and not live(owner)
                 state["completed"][f"{phase}-{arm}"] = ref(result)
                 record("completed-quality-training-phase")

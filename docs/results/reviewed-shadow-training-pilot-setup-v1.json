@@ -1,0 +1,1055 @@
+{
+  "status": "four-full-model-checks-passed-fresh1000-pilot-running",
+  "recorded_local": "2026-10-26T22:13:46.925302-07:00",
+  "training_controller": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v2/run/plan.json",
+      "sha256": "b05817c9bdc6a03f4e6e792e0d9157ae423cd8bf69d0c7e4bc0e780d7ec3ff7a"
+    },
+    "owner": {
+      "pid": 1540887,
+      "created": 1793077010.23
+    },
+    "observed_status": "running-quality-training",
+    "phase": "train",
+    "arm": "V126",
+    "child": {
+      "pid": 1547682,
+      "created": 1793077267.66
+    }
+  },
+  "original_worker_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/plan.json",
+    "sha256": "975d21939d932b8fc5082355117d57cd5b016cb0332613783898fcc6ed10b426"
+  },
+  "data_catalogue": {
+    "path": "/home/dllu/proj/demosaic/configs/low-contrast-training-rois-cleaned90783-v2.json",
+    "sha256": "f52cffbe2712582575752aa683970442c57de1ffc4af6073dab6fe3155ba84bb"
+  },
+  "recipes": {
+    "V126": {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v120-reviewed-shadow-pilot-v126.yaml",
+      "sha256": "ebfb8377c150a4e1d735902a9e77ffd1bd0a0107672182bed9f7da09473c4e95"
+    },
+    "V127": {
+      "path": "/home/dllu/proj/demosaic/configs/quality-v120-reviewed-shadow-pilot-v127.yaml",
+      "sha256": "aa9246ccb52798a0d1b648ee4a6703e5624179a692a0684bbb7d481c28a859d0"
+    }
+  },
+  "completed_implementation_checks": {
+    "CPU-V126": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CPU-V126-result.json",
+        "sha256": "ec54749fc813a5c85b17227238dafd38499ec8cf4121521cfdc06cfb83d1493b"
+      },
+      "owner": {
+        "pid": 1472481,
+        "created": 1793075616.64
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 18,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "model_EMA_Adam_finite": true,
+      "all_AdamW_steps": 18,
+      "optimizer_state_count": 89,
+      "CUDA_peak_allocated_bytes": 0
+    },
+    "CPU-V127": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CPU-V127-result.json",
+        "sha256": "f8b58c12f434f29a7f79efde69afa622ed5a45502e0b44a043c7b185f8690c65"
+      },
+      "owner": {
+        "pid": 1472917,
+        "created": 1793075755.26
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 18,
+        "shadow_selected_targets": 2,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "model_EMA_Adam_finite": true,
+      "all_AdamW_steps": 18,
+      "optimizer_state_count": 89,
+      "CUDA_peak_allocated_bytes": 0
+    },
+    "CUDA-V126": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CUDA-V126-result.json",
+        "sha256": "1fa32894abe82f1eeb6d6d1c09f51e81b12e9df03716d90dc42fbe22f308f31f"
+      },
+      "owner": {
+        "pid": 1473591,
+        "created": 1793075895.96
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 288,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "model_EMA_Adam_finite": true,
+      "all_AdamW_steps": 18,
+      "optimizer_state_count": 89,
+      "CUDA_peak_allocated_bytes": 7041804800
+    },
+    "CUDA-V127": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CUDA-V127-result.json",
+        "sha256": "6036e732c84d34fffa0bbd2f12bd0136aeb9644aee3b06cc4ec813701df2c05b"
+      },
+      "owner": {
+        "pid": 1545569,
+        "created": 1793077137.0
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 288,
+        "shadow_selected_targets": 28,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_counts": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "initial_checks": [
+        {
+          "phase": "fresh",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        },
+        {
+          "phase": "resume",
+          "91_parent_or_resume_tensors_exact": true,
+          "official_encoder_exact": true
+        }
+      ],
+      "changed_shadow_resume_rejections": {
+        "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+        "policy": "Unknown or inactive reviewed shadow exposure policy"
+      },
+      "model_EMA_Adam_finite": true,
+      "all_AdamW_steps": 18,
+      "optimizer_state_count": 89,
+      "CUDA_peak_allocated_bytes": 7043878912
+    }
+  },
+  "independent_check_audit": {
+    "status": "passed-actual-matched-preparation-and-saved18-update-audit",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v2/check-audit-plan-v1.json",
+      "sha256": "8ecaf3de82be28634fa451ba21ebd67697da7d9ffee7e018e897fd67912d146c"
+    },
+    "phase_results": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CPU-V126-result.json",
+        "sha256": "ec54749fc813a5c85b17227238dafd38499ec8cf4121521cfdc06cfb83d1493b"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CPU-V127-result.json",
+        "sha256": "f8b58c12f434f29a7f79efde69afa622ed5a45502e0b44a043c7b185f8690c65"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CUDA-V126-result.json",
+        "sha256": "1fa32894abe82f1eeb6d6d1c09f51e81b12e9df03716d90dc42fbe22f308f31f"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/CUDA-V127-result.json",
+        "sha256": "6036e732c84d34fffa0bbd2f12bd0136aeb9644aee3b06cc4ec813701df2c05b"
+      }
+    ],
+    "saved_states": [
+      {
+        "phase": "CPU",
+        "arm": "V126",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/work/artifacts/CPU/V126/last.pt",
+          "sha256": "382ab65ff81e99aeaa25bdafbe31b92166314395f680c2e22f8ced3a6fb3e98f"
+        },
+        "step": 18,
+        "model_EMA_tensors": 91,
+        "finite_Adam_states": 89,
+        "changed_fraction_and_policy_resumes_rejected": {
+          "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+          "policy": "Unknown or inactive reviewed shadow exposure policy"
+        }
+      },
+      {
+        "phase": "CPU",
+        "arm": "V127",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/work/artifacts/CPU/V127/last.pt",
+          "sha256": "458ff6d4e60efd50c20d849fca20abbbc19221a7878094a9d5dc4f6ffdd536ca"
+        },
+        "step": 18,
+        "model_EMA_tensors": 91,
+        "finite_Adam_states": 89,
+        "changed_fraction_and_policy_resumes_rejected": {
+          "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+          "policy": "Unknown or inactive reviewed shadow exposure policy"
+        }
+      },
+      {
+        "phase": "CUDA",
+        "arm": "V126",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/work/artifacts/CUDA/V126/last.pt",
+          "sha256": "037550431fe3af3e011b4f90839d1c3d8ec88c62ed73f7b05c4958b586f9e355"
+        },
+        "step": 18,
+        "model_EMA_tensors": 91,
+        "finite_Adam_states": 89,
+        "changed_fraction_and_policy_resumes_rejected": {
+          "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+          "policy": "Unknown or inactive reviewed shadow exposure policy"
+        }
+      },
+      {
+        "phase": "CUDA",
+        "arm": "V127",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v1/run/work/artifacts/CUDA/V127/last.pt",
+          "sha256": "f8b9a20a8c446bd9404d3e0fb7cb08cf8e1e5e700633744b301141f6a6a00f52"
+        },
+        "step": 18,
+        "model_EMA_tensors": 91,
+        "finite_Adam_states": 89,
+        "changed_fraction_and_policy_resumes_rejected": {
+          "fraction": "Resume reviewed shadow exposure differs; initialize a new run",
+          "policy": "Unknown or inactive reviewed shadow exposure policy"
+        }
+      }
+    ],
+    "unique_target_contexts": 612,
+    "simulated_sensor_observations": 510,
+    "real_paired_observations": 102,
+    "selected_shadow_targets": 30,
+    "selected_sensor_target_values": 5603328,
+    "matched_camera_noise_parameter_values": 2754,
+    "unselected_target_values_exact": 46301184,
+    "native_paired_bypass_values_exact": 86264514,
+    "variance_values_exact": 31948800,
+    "maximum_scalar_transport_error": 3.0371845732846126e-08,
+    "maximum_gain_oracle_error": 8.693707098661463e-08,
+    "global_Torch_RNG_unchanged": true,
+    "CUDA_initialized": false,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "scope": "Actual18-update CPU/CUDA implementation checks only; no trained quality conclusion. Scalar transport uses measured control/shadow camera-green ratio; earlier unexposed-source preparation proof remains separate."
+  },
+  "controller_adoption": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v2/run/adoption-declaration-v2.json",
+    "sha256": "bb09200b02a4ae72e76566a0e6d8c19cf05a96a2a7b60f168911ed76f9308833"
+  },
+  "input_preparation": {
+    "inputs_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/inputs-plan-v1.json",
+      "sha256": "c7311f66443ce905c8a11f933f84535896aabb9bdf8076fc81cba70232f5baa8"
+    },
+    "new_noise_observations": 64,
+    "adopted_noise_observations": 32,
+    "new_noise_observations_this_execution": 32,
+    "new_neural_forwards": 0,
+    "RAW_decodes": 0,
+    "variance_values_exact": 4194304,
+    "Torch_RNG_unchanged": true,
+    "CUDA_initialized": false,
+    "original_target_values_scaled_exactly": 1572864,
+    "heldout_source_checks": true,
+    "baseline_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/baseline-V120/plan-v1.json",
+      "sha256": "f12ee6effa7cb6d045172de712063f7a18413bc3cc25dc423a6c1934400bd764"
+    },
+    "new_inputs_never_used_by_training": true
+  },
+  "independent_input_audit": {
+    "status": "passed-independent-target-ADC-and-variance-audit",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/input-audit-plan-v1.json",
+      "sha256": "eefbd179a6d0b9618206a5f84ceb1d9f056e139b58b94222bac021e00320febe"
+    },
+    "target_scale_values_exact": 1572864,
+    "inverse_display_exposure_values_exact": 1572864,
+    "variance_values_exact": 4194304,
+    "ADC_grid_values_verified": 4194304,
+    "maximum_ADC_reconstruction_difference": 0.0,
+    "signed_negative_measurements_preserved": 723154,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "no_noise_resampling": true
+  },
+  "V120_baseline_collection": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/baseline-V120/collection-v1.json",
+    "sha256": "0588f8209b0fec906c86f128ce493a0df13ae24c69531259ddae538d4a2dce81"
+  },
+  "independent_baseline_audit": {
+    "status": "passed-independent64-row-metric-and-native-PNG-audit",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/baseline-audit-plan-v1.json",
+      "sha256": "3277dafe78defe32a3353d2b990d4f6e32f5987a4e067826f9cc1c1b51c85916"
+    },
+    "metric_rows": 64,
+    "scalar_fields": 848,
+    "maximum_absolute_errors": {
+      "PSNR_dB": 7.105427357601002e-15,
+      "gain": 3.858025010572419e-15,
+      "band_error_RMS": 4.163336342344337e-17,
+      "orthogonal_residual_RMS": 3.469446951953614e-17
+    },
+    "PNG_images": 32,
+    "PNG_channel_values_exact": 7372800,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "scope": "V120 on new fixed shadow test only. No trained V126/V127 quality result yet; native-camera target estimates are not exact GT."
+  },
+  "V120_baseline_summaries": [
+    {
+      "case": "bark-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 27.866127281170847,
+      "sRGB_PSNR": 25.4556864651913,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.784794467674993,
+          "band_error_RMS": 0.03436125624703824,
+          "orthogonal_residual_RMS": 0.031229701432656985
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.8663485795722797,
+          "band_error_RMS": 0.03324310099462526,
+          "orthogonal_residual_RMS": 0.031105385197709223
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 25.817665895886712,
+      "sRGB_PSNR": 23.294294861080573,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.6686513389155486,
+          "band_error_RMS": 0.043454866487283514,
+          "orthogonal_residual_RMS": 0.03744457334913808
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.7610811475269067,
+          "band_error_RMS": 0.044231532054894336,
+          "orthogonal_residual_RMS": 0.038960408323619876
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 23.97514905412628,
+      "sRGB_PSNR": 21.245113283721935,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.4842848147327274,
+          "band_error_RMS": 0.05381713689805261,
+          "orthogonal_residual_RMS": 0.04125434436075649
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.5844227783086163,
+          "band_error_RMS": 0.05700453226855514,
+          "orthogonal_residual_RMS": 0.04383369125415577
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 22.2818312580459,
+      "sRGB_PSNR": 19.40424788844146,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.29920678000385986,
+          "band_error_RMS": 0.05985839523143553,
+          "orthogonal_residual_RMS": 0.037318858541123684
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.3407471332085905,
+          "band_error_RMS": 0.07102179310631447,
+          "orthogonal_residual_RMS": 0.04127781783019052
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 37.749579860505456,
+      "sRGB_PSNR": 29.98175122980224,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.2093648302986967,
+          "band_error_RMS": 0.004142589783605722,
+          "orthogonal_residual_RMS": 0.0021147954995120906
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.3676075667687922,
+          "band_error_RMS": 0.005863447968720403,
+          "orthogonal_residual_RMS": 0.003827801839239772
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.6309597433777744,
+          "band_error_RMS": 0.011007409691965096,
+          "orthogonal_residual_RMS": 0.008701878581930477
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.6783887584701338,
+          "band_error_RMS": 0.01650056618335216,
+          "orthogonal_residual_RMS": 0.013395316687514609
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.7518082235231995,
+          "band_error_RMS": 0.014936329054910479,
+          "orthogonal_residual_RMS": 0.012640703760852799
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 35.778382608430434,
+      "sRGB_PSNR": 28.015152820008513,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.18713055575625312,
+          "band_error_RMS": 0.0042089317184436734,
+          "orthogonal_residual_RMS": 0.002070364045350665
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.32447870393629386,
+          "band_error_RMS": 0.006209138037726174,
+          "orthogonal_residual_RMS": 0.004015128134661389
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.5028305029135183,
+          "band_error_RMS": 0.0124852141199111,
+          "orthogonal_residual_RMS": 0.00858486069561852
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.5365757044756866,
+          "band_error_RMS": 0.020416427036490353,
+          "orthogonal_residual_RMS": 0.014958930599621322
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.6152736008587745,
+          "band_error_RMS": 0.01910051781904866,
+          "orthogonal_residual_RMS": 0.01456954613984786
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 33.54177853165436,
+      "sRGB_PSNR": 25.872076055199116,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.19373858763015056,
+          "band_error_RMS": 0.0044618207578742625,
+          "orthogonal_residual_RMS": 0.0025039484403434863
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.22984739222336154,
+          "band_error_RMS": 0.006672962563830662,
+          "orthogonal_residual_RMS": 0.003922424527702651
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.37544355397550616,
+          "band_error_RMS": 0.01447202452372793,
+          "orthogonal_residual_RMS": 0.008820900221268437
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.3875110911104508,
+          "band_error_RMS": 0.023481594571072614,
+          "orthogonal_residual_RMS": 0.014600730073239053
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.41344477511733396,
+          "band_error_RMS": 0.02386896942202173,
+          "orthogonal_residual_RMS": 0.014626387143465749
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 31.63599159102757,
+      "sRGB_PSNR": 24.2836828563664,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.10636521633242267,
+          "band_error_RMS": 0.004689475839735807,
+          "orthogonal_residual_RMS": 0.0023721307203288305
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.2562759219414177,
+          "band_error_RMS": 0.006646982386309258,
+          "orthogonal_residual_RMS": 0.0041203428418358935
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.2532878520813329,
+          "band_error_RMS": 0.015879974546015592,
+          "orthogonal_residual_RMS": 0.0080542848991849
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.2343095709352762,
+          "band_error_RMS": 0.02662118667558756,
+          "orthogonal_residual_RMS": 0.013353948611096607
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.21504587196278302,
+          "band_error_RMS": 0.028021510103762214,
+          "orthogonal_residual_RMS": 0.012213627003884444
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.965039042591805,
+      "sRGB_PSNR": 28.58854501836764,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.4215774208738734,
+          "band_error_RMS": 0.007315753680559898,
+          "orthogonal_residual_RMS": 0.0057833757908602994
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.316369340082169,
+          "band_error_RMS": 0.009829370969340518,
+          "orthogonal_residual_RMS": 0.006167111993676602
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.4579881361753788,
+          "band_error_RMS": 0.01650962034670766,
+          "orthogonal_residual_RMS": 0.01163604680257676
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.5901494628456085,
+          "band_error_RMS": 0.01764814544500491,
+          "orthogonal_residual_RMS": 0.013358885759608346
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 34.50019770022052,
+      "sRGB_PSNR": 27.35055927037122,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.20705508357856683,
+          "band_error_RMS": 0.007428827907742886,
+          "orthogonal_residual_RMS": 0.004238643795734955
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.17216923854977348,
+          "band_error_RMS": 0.010536864622438035,
+          "orthogonal_residual_RMS": 0.004959613613583766
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.2681533235193038,
+          "band_error_RMS": 0.018983934275913363,
+          "orthogonal_residual_RMS": 0.010525191087004494
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.37447408687973865,
+          "band_error_RMS": 0.0216160007227077,
+          "orthogonal_residual_RMS": 0.01256391285085372
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.198303199125164,
+      "sRGB_PSNR": 26.110692747876925,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.19423320038142364,
+          "band_error_RMS": 0.008754423351091703,
+          "orthogonal_residual_RMS": 0.006049314262412968
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.07649188207757911,
+          "band_error_RMS": 0.011172535697799638,
+          "orthogonal_residual_RMS": 0.0042131287893055905
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.11818959702444715,
+          "band_error_RMS": 0.020466772762678845,
+          "orthogonal_residual_RMS": 0.007503413651622539
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.1663147487722113,
+          "band_error_RMS": 0.025241615826711864,
+          "orthogonal_residual_RMS": 0.009308667549403736
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 32.053229020435296,
+      "sRGB_PSNR": 25.01264195540432,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.08029751879791211,
+          "band_error_RMS": 0.007941442732509268,
+          "orthogonal_residual_RMS": 0.0034695074863057137
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.0203304102493014,
+          "band_error_RMS": 0.011354276226312018,
+          "orthogonal_residual_RMS": 0.0028785615932678033
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.02516801729337796,
+          "band_error_RMS": 0.021355351302262966,
+          "orthogonal_residual_RMS": 0.0035802607885499034
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.03361900209332319,
+          "band_error_RMS": 0.02748135570802484,
+          "orthogonal_residual_RMS": 0.004095571949362553
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 38.48219312661166,
+      "sRGB_PSNR": 30.219282780726754,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.4707119942734729,
+          "band_error_RMS": 0.002883934448208679,
+          "orthogonal_residual_RMS": 0.0020577923200516637
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.2712896072067977,
+          "band_error_RMS": 0.00387162822506621,
+          "orthogonal_residual_RMS": 0.0026022843831597334
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.5332771636654021,
+          "band_error_RMS": 0.010157218351821158,
+          "orthogonal_residual_RMS": 0.007674495243835211
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.6743481440070053,
+          "band_error_RMS": 0.012788505241009938,
+          "orthogonal_residual_RMS": 0.010283127457192705
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 36.77260034096237,
+      "sRGB_PSNR": 28.44899046907073,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.3594371945859569,
+          "band_error_RMS": 0.003514460871872572,
+          "orthogonal_residual_RMS": 0.002586870817886485
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.17389714721362978,
+          "band_error_RMS": 0.004081216223976739,
+          "orthogonal_residual_RMS": 0.0024979348908880255
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.3544257226572511,
+          "band_error_RMS": 0.011779307412382986,
+          "orthogonal_residual_RMS": 0.0073543528579740735
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.5208651841615662,
+          "band_error_RMS": 0.015955565583801526,
+          "orthogonal_residual_RMS": 0.011334204889543318
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.17740882202293,
+      "sRGB_PSNR": 26.805149699917592,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.13006355919164111,
+          "band_error_RMS": 0.003949751623222799,
+          "orthogonal_residual_RMS": 0.0023604390969958105
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.11902626139417714,
+          "band_error_RMS": 0.00385538918661871,
+          "orthogonal_residual_RMS": 0.0017504011337133197
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.16733795935418244,
+          "band_error_RMS": 0.0132161494255615,
+          "orthogonal_residual_RMS": 0.005801041406700919
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.2822594489179834,
+          "band_error_RMS": 0.019103533828160466,
+          "orthogonal_residual_RMS": 0.009038075202500386
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.500117609669275,
+      "sRGB_PSNR": 24.343674585526596,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.04433489182136751,
+          "band_error_RMS": 0.0038882293522854937,
+          "orthogonal_residual_RMS": 0.001716262520631757
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.03725242570697013,
+          "band_error_RMS": 0.004104477458401545,
+          "orthogonal_residual_RMS": 0.0016675287965843156
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.04450595489652069,
+          "band_error_RMS": 0.014137426017686217,
+          "orthogonal_residual_RMS": 0.003812625964739311
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.07107781768946894,
+          "band_error_RMS": 0.0221448968479757,
+          "orthogonal_residual_RMS": 0.004481159316163529
+        }
+      ]
+    }
+  ],
+  "baseline_table": {
+    "path": "/home/dllu/proj/demosaic/docs/results/reviewed-shadow-pilot-V120-baseline-v1.csv",
+    "sha256": "53177cd0e79ff565c738dbaddabf8803153675c2d63887628bb7784407a0d7f1"
+  },
+  "baseline_native_images": {
+    "path": "/home/dllu/proj/demosaic/docs/images/reviewed-shadow-pilot-v1/manifest.json",
+    "sha256": "f90d084f3f4d1b5cfaa0e316bf9b2666ead2f1f334836c2cabfb1a8f3fb55214"
+  },
+  "quality_queue": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/queue-v3/queue-plan-v1.json",
+      "sha256": "bcc155ac44bd78d3e99918eff9df7bf41e19c0861c3eafba3853ab8f370bcb7b"
+    },
+    "launch": {
+      "owner": {
+        "pid": 1541375,
+        "created": 1793077073.03
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/queue-v3/queue-plan-v1.json",
+        "sha256": "bcc155ac44bd78d3e99918eff9df7bf41e19c0861c3eafba3853ab8f370bcb7b"
+      }
+    }
+  },
+  "report_compatibility": {
+    "status": "all-old-metrics-and-PNG-bytes-exact",
+    "old_report": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/report-v1/report.json",
+      "sha256": "98b22bcc1e914b631798864b88260238e3cbf32f79bc9aa70c5a4c955b019bc4"
+    },
+    "new_report": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/report-compatibility-v1/report-v1/report.json",
+      "sha256": "bf6607f64c722213a3a76e75d9f43b7e87bd7a035dcbbb88538545e4826cecaa"
+    },
+    "metric_rows_exact": 48,
+    "summaries_exact": 12,
+    "PNG_images_byte_exact": 24,
+    "new_neural_forwards": 0
+  },
+  "new_noise_observations_in_fixed_evaluation": 64,
+  "completed_check_root_encoder_optimizer_updates": 72,
+  "completed_new_V120_shadow_forwards": 64,
+  "remaining_prospective_new_endpoint_forwards": 172,
+  "RAW_decodes_in_setup_and_review": 0,
+  "old_control_inference_repeats": 0,
+  "resource_policy": "52GiB launch=16GiB allocator+4GiB host+32GiB planning reserve; actual32GB runtime floor;8h/1000worker,30min/check. Original pendingCUDAwaitdeadline preserved and all budgets unchanged.",
+  "scope": "Separate bounded1000-step exposure pilot from completedV120 on90783/23ROIs, sharedROIquota.5/singleview. No completed-V126/V127 quality result or general recommendation change. CurrentV122/V123 and queuedV124/V125 frozen inputs/budgets unchanged.",
+  "source_receipts": {
+    "input_preparer": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/prepare-inputs-v2.py",
+      "sha256": "58d595ca4525b0040b74a80b3f91c10ea6b5dd8d33ea5c101acabd48618e7acf"
+    },
+    "input_auditor": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/audit-inputs-v1.py",
+      "sha256": "12556a113d80cb1da33f75212422d14bd5ee38dcfce06d6cec62c4acc676d47a"
+    },
+    "baseline_auditor": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-quality-pilot-v1/audit-baseline-v1.py",
+      "sha256": "9a31f6dc2b5d53684491400af672a1f6b91230c2ff0871afe2a0007c10a57ac3"
+    },
+    "check_auditor": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v2/audit-checks-v1.py",
+      "sha256": "591939e712a3e8c2b64238c1cc7bfee8a3ec0ebe47de2de95dfb4f545a9dc51d"
+    },
+    "adoption_driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-shadow-training-pilot-v2/adopt-v2.py",
+      "sha256": "7c464dae1753e3a63b66d2dc74ea72565d38efb8adbf632b756982a59129b8ff"
+    }
+  }
+}

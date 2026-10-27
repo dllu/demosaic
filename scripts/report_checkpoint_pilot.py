@@ -81,13 +81,18 @@ def statistics(prediction, target, arrays):
     }
 
 
-def report(plan_path, collection_path):
+def report(plan_path, collection_path, *, model_label=None):
     os.nice(10)
     os.sched_setaffinity(0, sorted(os.sched_getaffinity(0))[:2])
     plan, collection = read(plan_path), read(collection_path)
     guard(plan)
-    if collection["plan"] != ref(plan_path) or collection["counts"] != {"root": 22, "encoder": 22}:
+    expected = len(plan["observations"])
+    if collection["plan"] != ref(plan_path) or collection["counts"] != {
+        "root": expected,
+        "encoder": expected,
+    }:
         raise ValueError("Unexpected pilot collection")
+    model_label = model_label or plan.get("model_label", "V123 9k EMA")
     root = Path(plan["root"])
     with (root / "report.claim").open("x") as stream:
         stream.write(str(os.getpid()))
@@ -123,7 +128,7 @@ def report(plan_path, collection_path):
         with np.load(checked(observation["arrays"]), allow_pickle=False) as archive:
             arrays = {k: archive[k] for k in archive.files}
         new = np.load(checked(rows[observation["id"]]["prediction"]), allow_pickle=False)
-        controls = observation["controls"]
+        controls = observation.get("controls", [])
         predictions = [
             (
                 c.get("label", c.get("model", {}).get("label")),
@@ -131,7 +136,7 @@ def report(plan_path, collection_path):
             )
             for c in controls
         ]
-        predictions.append(("V123 9k EMA", new))
+        predictions.append((model_label, new))
         metadata = {
             "observation_id": observation["id"],
             "checkpoint": plan["checkpoint"],
@@ -142,18 +147,26 @@ def report(plan_path, collection_path):
             "reference_role": observation["reference_role"],
             "no_resize": True,
         }
-        if observation["kind"] == "material":
+        if observation["kind"] in {"material", "shadow-material"}:
             with np.load(checked(observation["target"])) as data:
                 target = data["target"]
+            exposure = observation["display_exposure"]
+            case_id = observation["case_id"]
+            if observation["kind"] == "shadow-material":
+                case_id += "-" + observation["noise"]["name"]
             for label, prediction in predictions:
                 metrics.append(
                     {
-                        "case": observation["case_id"],
+                        "case": case_id,
                         "method": label,
                         "pattern": observation["pattern"],
                         "draw": 0,
                         "reference_role": observation["reference_role"],
-                        **statistics(prediction, target, arrays),
+                        **statistics(
+                            prediction.astype(np.float64) * exposure,
+                            target.astype(np.float64) * exposure,
+                            arrays,
+                        ),
                     }
                 )
             if observation["pattern"] != "RGGB":
@@ -161,23 +174,24 @@ def report(plan_path, collection_path):
             roi = observation["ROI_xywh"]
             gtlabel = (
                 "GT (synthetic)"
-                if observation["case_id"] in ("bark", "raccoon-fur")
+                if observation.get("original_case_id", observation["case_id"])
+                in ("bark", "raccoon-fur")
                 else "Binned ref (not GT)"
             )
-            noisy = pixels(noisy_malvar(arrays), arrays, roi, 1)
-            truth = pixels(target, arrays, roi, 1)
-            denoised = pixels(new, arrays, roi, 1)
+            noisy = pixels(noisy_malvar(arrays), arrays, roi, exposure)
+            truth = pixels(target, arrays, roi, exposure)
+            denoised = pixels(new, arrays, roi, exposure)
             metadata.update({"case": observation["case"], "ROI_xywh": roi})
             board(
-                observation["case_id"] + "-comparison",
+                case_id + "-comparison",
                 [("Noisy draw0", noisy)]
-                + [(label, pixels(p, arrays, roi, 1)) for label, p in predictions]
+                + [(label, pixels(p, arrays, roi, exposure)) for label, p in predictions]
                 + [(gtlabel, truth)],
                 metadata,
             )
             board(
-                observation["case_id"] + "-triplet",
-                [("Noisy draw0", noisy), ("V123 9k EMA", denoised), (gtlabel, truth)],
+                case_id + "-triplet",
+                [("Noisy draw0", noisy), (model_label, denoised), (gtlabel, truth)],
                 metadata,
             )
         elif observation["kind"] == "gfx":
@@ -198,7 +212,7 @@ def report(plan_path, collection_path):
                 observation["id"] + "-triplet",
                 [
                     ("Noisy Malvar", noisy),
-                    ("V123 9k EMA", pixels(new, arrays, roi, exposure)),
+                    (model_label, pixels(new, arrays, roi, exposure)),
                     ("ISO100 ref (not GT)", truth),
                 ],
                 metadata,
@@ -224,7 +238,7 @@ def report(plan_path, collection_path):
                     observation["id"] + "-" + case["name"] + "-triplet",
                     [
                         ("Noisy Malvar", noisy),
-                        ("V123 9k EMA", pixels(new, arrays, roi, exposure)),
+                        (model_label, pixels(new, arrays, roi, exposure)),
                         ("ISO100 ref (not GT)", truth),
                     ],
                     metadata_case,
@@ -285,6 +299,7 @@ def report(plan_path, collection_path):
             "plan": ref(plan_path),
             "collection": ref(collection_path),
             "reporter": ref(__file__),
+            "model_label": model_label,
             "metrics": metrics,
             "summaries": summaries,
             "images": images,
@@ -301,5 +316,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("plan", type=Path)
     parser.add_argument("collection", type=Path)
+    parser.add_argument("--model-label")
     args = parser.parse_args()
-    report(args.plan, args.collection)
+    report(args.plan, args.collection, model_label=args.model_label)

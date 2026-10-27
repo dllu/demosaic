@@ -2,8 +2,10 @@
 
 **An optional training augmentation now places reviewed material crops in a
 dark sensor range while preserving their geometry and color ratios.** It is
-disabled by default, passes actual CPU/CUDA preparation checks, and is ready
-for a future matched training trial. Its learned-quality effect is unmeasured.
+disabled by default and passes actual CPU/CUDA preparation checks. A
+[matched V126/V127 pilot](reviewed-shadow-training-pilot.md) now has four successful
+full-model checks and fresh1,000-update training underway. Its learned-quality
+effect is unmeasured.
 V120 remains the current recommendation. Active V122/V123 and queued V124/V125
 retain their original sources, recipes and budgets.
 
@@ -27,7 +29,8 @@ data_seed_per_step: true
 
 The fraction is conditional on a selected reviewed photographic ROI; the
 existing reviewed-ROI quota remains separate. This example is an experimental
-setting, without a selected or queued model. A positive fraction requires the
+setting; the new pilot uses the23-region bank and a shared.5 reviewed quota.
+A positive fraction requires the
 existing reviewed catalogue and ROI fraction. Missing settings mean zero.
 
 For selected crops, the policy samples a requested **dense camera-green mean**
@@ -115,15 +118,14 @@ Implementation: [policy](../src/demosaic/shadow_exposure.py),
 [training integration](../src/demosaic/train.py), and
 [source diagnostics](../src/demosaic/source_loss.py).
 
-A future comparison should initialize from the best useful completed
-architectural baseline after the current trials, with matched data, seed,
-budget and evaluation observations. It should compare shadow-detail retention,
-grain, ADC/color behavior, camera scores and the standing GFX scenes, including
-native noisy/restored/GT triplets and correctly labeled independent references.
-No training run is started or queued by this readiness change. Both private
-train/platform pairs and their siblings remain outside training.
+The [current bounded pilot](reviewed-shadow-training-pilot.md) initializes from
+completed V120, matching data, seed, budget and observations across both arms.
+It compares shadow detail/grain and the standing GFX scenes, with native
+triplets and accurate reference labels. Broader ADC/color/camera/full-frame
+evidence remains separate from this short test. Both private train/platform
+pairs and their siblings remain outside training.
 
 A later [23-region future bank](v123-source-review-through9800.md) preserves the
 twenty objects tested above and adds three inspected physical-detail contexts.
-Its actual clean-reader checks pass; the CPU/CUDA shadow-preparation evidence
-on this page remains bound to the original twenty-region bank.
+Its clean-reader checks and the new pilot's full-model CPU/CUDA checks pass;
+the preparation evidence on this page remains bound to the original twenty-region bank.

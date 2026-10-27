@@ -47,6 +47,8 @@ restoration path on the same cleaned corpus. A
 gain on retained materials and both GFX scenes; full endpoint results remain pending.
 [V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
 the cleaned90,784-source/twenty-region corpus after that review chain.
+The separate [V126/V127 shadow-data pilot](docs/reviewed-shadow-training-pilot.md)
+is running from V120 on90,783 sources/23 regions; learned-quality results are pending.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

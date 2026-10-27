@@ -6,7 +6,9 @@ feathers and whitewashed brick add physical fine-detail contexts. The earlier
 90,783-source future manifest is unchanged, including its existing exclusions;
 all twenty prior region objects remain exact. Trained-quality effects are
 unmeasured. Active V122/V123 keep90,786/fourteen; queued V124/V125 keep their
-frozen90,784-source/twenty-region inputs.
+frozen90,784-source/twenty-region inputs. The separate
+[V126/V127 pilot](reviewed-shadow-training-pilot.md) now uses the23-region bank;
+its learned-quality effect remains pending.
 
 [Latest40 decisions, native fields and actual23-region reader checks](v123-source-review-through9800.md) ·
 [All40 decisions and credits](results/v123-source-loss-through9800-decisions-v1.csv) ·

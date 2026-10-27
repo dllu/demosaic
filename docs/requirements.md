@@ -20,6 +20,8 @@ V122 completed20k and V123 is running on90,786 sources/fourteen regions; its
 [V124/V125 mean-loss trial](conditional-mean-training.md) is queued with frozen
 90,784-source/twenty-region inputs. Successful implementation checks and source
 cleanup alone do not establish trained quality gains.
+The separate [V126/V127 shadow-data pilot](reviewed-shadow-training-pilot.md)
+has four successful full-model checks and fresh1,000-update training underway.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |
@@ -28,7 +30,7 @@ cleanup alone do not establish trained quality gains.
 | 16-bit/full-resolution output | V120/V121 complete101.996MP FP32 outputs and linear/sRGB RGB16 exports verified, including matched-Haar full-frame comparisons | Preserve per-checkpoint precision/quality evidence |
 | 100MP within10s on GB10 | Ordered Tiny/Small FP32 observations116.57/101.66s, not a controlled speed ranking | Target open; improve quality before speed work |
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
-| Diverse clean targets and binning | Active90,786/fourteen regions, queued90,784/twenty; separate future90,783/23-region option with actual-reader checks;4×→geometry→area2, zero optical blur; shadow policy passes CPU/CUDA preparation on its20-region bank | Train/evaluate useful data changes; faint-shadow coverage and broad weak-detail recovery remain incomplete |
+| Diverse clean targets and binning | Active90,786/fourteen regions, queued90,784/twenty; separate90,783/23-region shadow pilot;4×→geometry→area2, zero optical blur; actual reader and CPU/CUDA model checks | Measure trained data changes; faint-shadow coverage and broad weak-detail recovery remain incomplete |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; V120 ADC max55.52DN16, Tiny alternative51.73DN16 | Spatial dark-field/weak-detail failures and real-noise calibration limits remain |
 | Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V120/V121 numerical/native/full-frame review complete; V123 midpoint measured | Finish current trained comparisons and improve real-photo/detail quality |
 | Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
