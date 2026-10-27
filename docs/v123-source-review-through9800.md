@@ -112,8 +112,8 @@ values match exactly. Six published PNGs are byte-identical to the viewed files.
 No source is removed, so the90,783/2,303/2,255 train/validation/test membership
 and literal manifest bytes remain unchanged. The deduplication ledger now has
 1,719 inspected IDs; it is not an exclusion list or uniform corpus audit.
-The23-region option is now used by the [bounded V126/V127 pilot](reviewed-shadow-training-pilot.md),
-with learned quality pending. Active V122/V123 keep90,786/fourteen;
+The23-region option was used by the [completed V126/V127 pilot](reviewed-shadow-pilot-quality.md),
+with no useful gain from its shadow policy after1,000 matched updates. V122/V123 keep90,786/fourteen;
 queued V124/V125 keep90,784/twenty. The
 [shadow-preparation proof](reviewed-shadow-exposure.md) remains bound to its
 original twenty-region bank; this addition verifies clean-reader readiness.

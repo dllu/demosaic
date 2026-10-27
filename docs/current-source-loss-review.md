@@ -4,11 +4,12 @@
 separate future material bank from20 to23 regions.** Pale animal hair, gray
 feathers and whitewashed brick add physical fine-detail contexts. The earlier
 90,783-source future manifest is unchanged, including its existing exclusions;
-all twenty prior region objects remain exact. Trained-quality effects are
-unmeasured. Active V122/V123 keep90,786/fourteen; queued V124/V125 keep their
+all twenty prior region objects remain exact. V122/V123 keep90,786/fourteen;
+queued V124/V125 keep their
 frozen90,784-source/twenty-region inputs. The separate
-[V126/V127 pilot](reviewed-shadow-training-pilot.md) now uses the23-region bank;
-its learned-quality effect remains pending.
+[completed V126/V127 pilot](reviewed-shadow-pilot-quality.md) uses the23-region
+bank and shows no useful shadow-policy gain after1,000 matched updates. It does
+not isolate the new bank's effect from quota and continuation changes versus V120.
 
 [Latest40 decisions, native fields and actual23-region reader checks](v123-source-review-through9800.md) ·
 [All40 decisions and credits](results/v123-source-loss-through9800-decisions-v1.csv) ·

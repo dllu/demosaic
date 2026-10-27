@@ -3,10 +3,10 @@
 **An optional training augmentation now places reviewed material crops in a
 dark sensor range while preserving their geometry and color ratios.** It is
 disabled by default and passes actual CPU/CUDA preparation checks. A
-[matched V126/V127 pilot](reviewed-shadow-training-pilot.md) now has four successful
-full-model checks and fresh1,000-update training underway. Its learned-quality
-effect is unmeasured.
-V120 remains the current recommendation. Active V122/V123 and queued V124/V125
+[completed V126/V127 pilot](reviewed-shadow-pilot-quality.md) finds no useful
+quality gain after1,000 matched updates, including actual native material and
+GFX inspection. The default remains off.
+V120 remains the current recommendation. V122/V123 and queued V124/V125
 retain their original sources, recipes and budgets.
 
 The [sensor-condition coverage check](training-target-contrast-coverage.md#shadow-brightness-and-sensor-noise)
@@ -118,7 +118,7 @@ Implementation: [policy](../src/demosaic/shadow_exposure.py),
 [training integration](../src/demosaic/train.py), and
 [source diagnostics](../src/demosaic/source_loss.py).
 
-The [current bounded pilot](reviewed-shadow-training-pilot.md) initializes from
+The [completed bounded pilot](reviewed-shadow-pilot-quality.md) initialized from
 completed V120, matching data, seed, budget and observations across both arms.
 It compares shadow detail/grain and the standing GFX scenes, with native
 triplets and accurate reference labels. Broader ADC/color/camera/full-frame

@@ -50,8 +50,9 @@ V123's memory guard saved all12,249 completed updates; a
 budget and deadline. Dependent reviews reuse completed checks and saved controls.
 [V124/V125 mean-loss training](docs/conditional-mean-training.md) is queued on
 the cleaned90,784-source/twenty-region corpus after that review chain.
-The separate [V126/V127 shadow-data pilot](docs/reviewed-shadow-training-pilot.md)
-is running from V120 on90,783 sources/23 regions; learned-quality results are pending.
+The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.md)
+uses90,783 sources/23 regions and shows no useful quality gain; native material
+and both train-scene comparisons are published. The shadow policy stays off by default.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

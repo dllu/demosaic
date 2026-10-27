@@ -23,6 +23,23 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V126/V127 completed shadow pilot
+
+The [completed1,000-update matched pilot](reviewed-shadow-pilot-quality.md)
+shows no clear useful foliage/fence improvement. Columns: noisy → V120 → V126
+control → V127 shadow arm → independent DSCF3880 ISO100 reference, **not GT**.
+These use the same nominal-profile512px contexts, native160 cells and +2EV
+display. Shot/read are`.00128/6.5536e−6`; WB/matrix and pixels are shared.
+
+![Completed V126/V127 foliage comparison](images/reviewed-shadow-pilot-quality-v1/V127-main-foliage-comparison.png)
+
+![Completed V126/V127 chain-link-fence comparison](images/reviewed-shadow-pilot-quality-v1/V127-main-chain-link-fence-comparison.png)
+
+Fine foliage stays painterly. The additional
+[DSCF3842/DSCF3835 fine mesh](gfx-green-mesh.md#v126v127-shadow-data-pilot)
+also remains weak under both fixed profiles. V120 remains the general recommendation.
+[Checkpoint/source/ROI/profile/display metadata](images/reviewed-shadow-pilot-quality-v1/manifest.json).
+
 ## V123 midpoint: retained nominal-profile contexts
 
 The [9,000-update V123 review](v123-midpoint-quality.md) adds four512px contexts

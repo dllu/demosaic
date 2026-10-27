@@ -2,8 +2,9 @@
 
 **V123 stopped safely at update12,249 after available system memory fell to
 22.9GB. Its emergency checkpoint retains every completed update.** A separate,
-explicit continuation waits for the V126/V127 pilot and its fixed-input
-evaluation to release memory, then runs only the remaining7,751 updates.
+explicit continuation will run only the remaining7,751 updates. The
+[shadow pilot and fixed-input review](reviewed-shadow-pilot-quality.md) are now
+complete; the continuation is waiting for its original56GiB launch headroom.
 V120 remains the general recommendation; there is no new endpoint-quality claim.
 
 [Recovery and queue verification](results/v123-memory-guard-recovery-v1.json) ·

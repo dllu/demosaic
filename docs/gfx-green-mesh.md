@@ -28,6 +28,27 @@ V124/V125 are queued after that original chain.
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
+## V126/V127 shadow-data pilot
+
+**The completed matched1,000-update shadow pilot does not clearly recover the
+fine green lattice.** Both regions were actually viewed under both fixed
+profiles. Columns: noisy → V120 → V126 control → V127 shadow arm → independent
+DSCF3835 ISO100 AHD reference, **not GT**. The native160px cells share +4EV (×16)
+display, coordinates, WB/matrix and768px context. Original cached RAFs and both
+camera JPEGs remain unchanged and outside training.
+
+![V126/V127 right mesh at the fixed nominal profile](images/reviewed-shadow-pilot-quality-v1/V127-mesh-nominal-fine-green-mesh-right-comparison.png)
+
+![V126/V127 right mesh at the fixed nearby-DSCF3879 profile](images/reviewed-shadow-pilot-quality-v1/V127-mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+Nominal conditioning still largely erases the lattice; the nearby profile leaves
+weak, irregular diagonal texture. The left blue point remains. Left-region
+boards: [nominal](images/reviewed-shadow-pilot-quality-v1/V127-mesh-nominal-fine-green-mesh-left-comparison.png) ·
+[nearby profile](images/reviewed-shadow-pilot-quality-v1/V127-mesh-profile3879-fine-green-mesh-left-comparison.png).
+The two fixed priors and ROI coordinates remain those documented below.
+[Completed metrics, material GT triplets and independent checks](reviewed-shadow-pilot-quality.md) ·
+[Exact checkpoint/source/ROI/noise/display metadata](images/reviewed-shadow-pilot-quality-v1/manifest.json).
+
 ## V123 at 9,000 updates
 
 **The V1239k EMA shows no clear fine-lattice recovery gain under either fixed

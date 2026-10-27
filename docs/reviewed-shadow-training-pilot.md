@@ -1,7 +1,8 @@
 # Matched shadow-data pilot: V126/V127
 
-**Four full-model CPU/CUDA checks passed; fresh1,000-update training is running.
-Learned-quality results are pending.** Both arms start from completed V120 Small
+**Both1,000-update arms and their fixed-input evaluation are complete.
+No useful quality gain is visible.** The [completed comparison](reviewed-shadow-pilot-quality.md)
+includes independently checked metrics and native100% crops. Both arms start from completed V120 Small
 EMA on90,783 sources and23 reviewed regions. V120 remains the current general
 recommendation. Original V122/V123 and queued V124/V125 inputs, parents and
 budgets are unchanged.
@@ -112,10 +113,10 @@ channel values across32 PNGs; maximum PSNR difference7.11e−15dB. The reporting
 update also reproduces the prior V123 report's48 rows,12 summaries and24 PNG
 bytes exactly without inference.
 
-The live queue adds86 calls per new model after both endpoints finish:64 shadow,
+The completed queue added86 calls per new model after both endpoints finished:64 shadow,
 16 retained ordinary-material, four main-GFX512 and two extra-mesh768 contexts
-under both fixed profiles. Planned evaluation totals236 calls including V120's
+under both fixed profiles. Evaluation totals236 calls including V120's
 completed64. Old controls are reused. Independent metrics and actual native
-inspection follow; full427/all-camera/color/full-frame scope is not in this pilot.
+inspection are complete; full427/all-camera/color/full-frame scope is not in this pilot.
 [Queue](../scripts/queue_shadow_pilot_quality.py) ·
 [Saved-output reporting](../scripts/report_shadow_pilot_endpoints.py).

@@ -21,8 +21,9 @@ regions, with an [explicit bounded continuation](v123-memory-guard-recovery.md);
 [V124/V125 mean-loss trial](conditional-mean-training.md) is queued with frozen
 90,784-source/twenty-region inputs. Successful implementation checks and source
 cleanup alone do not establish trained quality gains.
-The separate [V126/V127 shadow-data pilot](reviewed-shadow-training-pilot.md)
-has four successful full-model checks and fresh1,000-update training underway.
+The [completed V126/V127 shadow-data pilot](reviewed-shadow-pilot-quality.md)
+shows no useful gain after1,000 matched updates; fixed-input metrics and native
+comparisons are independently checked. Shadow exposure stays off by default.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |

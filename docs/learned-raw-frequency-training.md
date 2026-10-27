@@ -2,7 +2,7 @@
 
 **V122 completed its original20,000 updates; V123 saved12,249 updates after a
 memory-guard stop.** The [explicit saved-state continuation](v123-memory-guard-recovery.md)
-waits for the shadow pilot to release memory, then spends only the remaining7,751
+waits for its original56GiB launch headroom, then spends only the remaining7,751
 updates within the original deadline. Original failed receipts remain preserved.
 The original controller advanced to V123 after the same V122 worker completed.
 V122's temporary GPU yield preserved the in-memory training state, without a

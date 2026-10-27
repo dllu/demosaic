@@ -9,9 +9,10 @@ coverage: flat surfaces, soft backgrounds and smooth gradients can also
 contribute to those counts.
 
 The [sensor-domain extension below](#shadow-brightness-and-sensor-noise) finds
-that dark/noisy conditions need separate inspection. A future
-[reviewed-material shadow augmentation](reviewed-shadow-exposure.md) is now
-implemented and checked on actual CPU/CUDA inputs, with trained quality unmeasured.
+that dark/noisy conditions need separate inspection. The optional
+[reviewed-material shadow augmentation](reviewed-shadow-exposure.md) passes
+CPU/CUDA checks, but its [completed1k pilot](reviewed-shadow-pilot-quality.md)
+shows no useful quality gain. It stays off by default.
 
 Keep the queued [V124/V125 training recipes](conditional-mean-training.md)
 unchanged. They test conditional bias with the same data, while the active
