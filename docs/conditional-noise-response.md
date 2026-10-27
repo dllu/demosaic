@@ -12,6 +12,35 @@ This is a new diagnostic with128 new shared observations and256 root/encoder
 forwards, with no reference-network call, RAW decode or training. Existing
 primary, camera, GFX and mesh results are preserved.
 
+## Queued trained-endpoint comparison
+
+The [V124/V125 mean-loss trial](conditional-mean-training.md) now has a
+supplemental response queue. After the exact new-endpoint quality and green-mesh
+owners finish successfully, it will run **only V124 and V125** on these same
+128 stored observations per model. All 256 existing V120/V117 predictions are
+reused. There are 256 planned new root/encoder calls, with no new noise,
+reference-network execution, RAW decode or optimizer update.
+
+The report separates conditional bias and variance, preserves four independent
+CFA groups, and includes all reference-selected contrast bins. It prepares eight
+native single/mean8 boards and two native noisy/denoised/exact-synthetic-GT
+triplets per new endpoint. Native low-noise camera references remain estimates,
+not GT; mean8 remains a multiple-observation diagnostic. Actual viewing follows.
+This supplement does **not** gate documenting useful primary quality gains.
+
+The queue and checkpoint contract passed 24 tests. A real completed-checkpoint
+handoff resolved V121 without constructing a model. The reporter reproduced
+all 32 original V120/V117 group dictionaries and eight CFA averages exactly,
+plus 2,918,400 native image channels. No control was rerun.
+Source comparison also proves the added RAW-frequency support leaves the
+inference AST unchanged when disabled; the collector checks that condition.
+
+[Queue/checkpoint/reporter/native-pixel evidence](results/conditional-response-queue-setup-v1.json) ·
+[Deferred collector](../scripts/queue_conditional_noise_response.py) ·
+[NumPy reporter](../scripts/report_conditional_noise_response.py).
+The live queue is .cache/current-quality-20261023-v1/V124-V125-conditional-response-v1.
+V124/V125 quality remains unmeasured.
+
 ## What the decomposition measures
 
 For one fixed target and CFA, let `e[k] = prediction[k] - target`, with eight

@@ -1,0 +1,185 @@
+{
+  "recorded_local": "2026-10-26T18:27:01.382787-07:00",
+  "status": "queued-completed-endpoint-conditional-response-new-models-only",
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-conditional-response-v1/queue-plan-v1.json",
+    "sha256": "b4336694b606ed3a1b8d97b39c92660374140861709f7a170c8b1d6d9d7c6f76"
+  },
+  "controller_owner": {
+    "pid": 1228088,
+    "created": 1793064204.15
+  },
+  "dependencies": [
+    {
+      "status": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-green-mesh-review-v2/status.json",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-green-mesh-review-v2/queue-plan-v1.json",
+        "sha256": "914a02afa4299e16294d8d66c24ea1a8cc47f869b139c992f57451f43ba094a1"
+      },
+      "plan_field": "plan",
+      "owner": {
+        "pid": 1135940,
+        "created": 1793058759.98
+      },
+      "terminal": "completed-new-mesh-predictions-native-viewing-pending"
+    },
+    {
+      "status": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-independent-noise-quality-v2/status.json",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-independent-noise-quality-v2/queue-plan-v1.json",
+        "sha256": "7b38bcd90dabea03f642c1fc7ede22f208c47969f57f8c9a055a5332fb8a6d1f"
+      },
+      "plan_field": "queue_plan",
+      "owner": {
+        "pid": 1135923,
+        "created": 1793058754.19
+      },
+      "terminal": "completed-matched-endpoint-evaluation-awaiting-independent-and-native-review"
+    }
+  ],
+  "new_arms": [
+    "V124",
+    "V125"
+  ],
+  "source_panel": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-noise-response-v1/plan-v1.json",
+    "sha256": "abee2a2be5f60c4bd048dc3cf6ac6b0af79d7459080d3a8e6a017b1f43646093"
+  },
+  "retained_archive": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-noise-response-v1/work/artifacts/predictions/records.jsonl",
+    "sha256": "7e2cef7cccb572da8f82eb99bb615e17ca361cb239915d6940040c11dcb5bce5"
+  },
+  "retained_methods": [
+    {
+      "label": "V120",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "expected_lineage": {
+        "step": 20000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/V112-continuations-quality-20261024-v3/weights/weights-fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84.pt",
+          "sha256": "fee5d05c599cb32f5a1e587c31979f040a06152c8e14676481eee83a4ce04d84",
+          "step": 20000
+        }
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+        "revision": "421020015aa4266363db803b6049a529999afb1e",
+        "sha256": "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
+      },
+      "expected_full_model_sha256": "8816512ccbf637001d15b059f461378331c2bb766877c29b1674d005993d07a4"
+    },
+    {
+      "label": "V117",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V117-V118-band-quality-v1/work/artifacts/weights/weights-f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0.pt",
+        "sha256": "f69452432a852ac4c5ffdcbf7d6fe6837a3ab46adbc8a7fdae073111220b8ab0"
+      },
+      "expected_lineage": {
+        "step": 20000,
+        "initialized_from": {
+          "path": "/mnt/external/demosaic/models/v114-final20000.pt",
+          "sha256": "2285c84b7015bcf122e71b890723f80aaf216bde849256c77f070c2493f9d2d2",
+          "step": 20000
+        }
+      },
+      "expected_backbone": {
+        "model": "facebook/dinov3-convnext-tiny-pretrain-lvd1689m",
+        "revision": "10d30274b4d445111e2d5bf75ac93bbd94db274b",
+        "sha256": "370a84c2d9e1d216757422c0a25ceb82a0a106083ba8ca545d9b267e704540fd"
+      },
+      "expected_full_model_sha256": "776d69dbbaae3e882e6d4bd65a7c4f21e14ca6786050714d14dc72168ffbb026"
+    }
+  ],
+  "observations_per_model": 128,
+  "planned_new_root_forwards": 256,
+  "planned_new_encoder_forwards": 256,
+  "retained_control_predictions_reused": 256,
+  "planned_new_exact_GT_triplets": 4,
+  "planned_native_comparison_boards": 8,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "reference_neural_forwards": 0,
+  "optimizer_updates": 0,
+  "current_neural_forwards_executed": 0,
+  "model_source": "Exact frozen new-endpoint quality source; original numerical modules identical except disabled RAW-frequency support. Specialized model/pretrained_RGB ASTs match original control inference; runtime requires the feature disabled and exactly91 EMA tensors.",
+  "inference_compatibility": [
+    {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-noise-response-v1/work/src/demosaic/model.py",
+        "sha256": "5a25a8ba8bb73bcff49901047ef6937422f2a45e5040640a295487925d65bf6e"
+      },
+      "current": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-independent-noise-quality-v2/work/src/demosaic/model.py",
+        "sha256": "95c53615fbcd3fed5d49eadb8b1312054220819894ba33e1c0f494548d09edf7"
+      },
+      "disabled_frequency_specialized_AST_sha256": "fc534d3b3fb143c6de80bca282001af4dcc615e20ee1f03fa17da218b12bd9ab"
+    },
+    {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-noise-response-v1/work/src/demosaic/pretrained_rgb.py",
+        "sha256": "8e13f141e5446f19bf7068fbc33c56740cfbc851da22d780dc5097f6460bd596"
+      },
+      "current": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-independent-noise-quality-v2/work/src/demosaic/pretrained_rgb.py",
+        "sha256": "8befef9266d000dc46a1e3de7755f76eea2ed51d2a9092fc92b9945326fd7b70"
+      },
+      "disabled_frequency_specialized_AST_sha256": "b07c311dfbedb644273da7edd96dbdf2bf8bf448a39b979bde03493b8088d445"
+    }
+  ],
+  "actual_completed_checkpoint_handoff_proof": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-response-queue-proof-v2/execution-plan-v1.json",
+    "sha256": "6d7aa42041153050a8581389e28c9bdd8fcc22333c5bc079ecf31ca0acd909eb"
+  },
+  "actual_completed_proof_checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/weights/weights-40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077.pt",
+    "sha256": "40fb6369064aaf82d513728110a6823ed72be50e79394988303c392b3a02f077"
+  },
+  "handoff_proof_collector_never_launched": true,
+  "retained_reporter_verification": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-response-queue-proof-v2/verification-v1.json",
+    "sha256": "8bb3b6e63fae09a8b9f23ff57f695501796c564156fab64b7d843b431c604104"
+  },
+  "canonical_result_dictionaries_reproduced": 32,
+  "canonical_CFA_average_dictionaries_reproduced": 8,
+  "native_channels_exact_to_original_outputs": 2918400,
+  "proof_boards": 8,
+  "proof_native_triplets": 2,
+  "actual_native_review": {
+    "images": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-response-queue-proof-v2/work/artifacts/analysis/V120-bark-single-triplet.png",
+        "sha256": "2169fe6274c16deca1772d34f38dfb0e3b4af2fb89804ce6f93e804ef4605fd8"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-response-queue-proof-v2/work/artifacts/analysis/V120-raccoon-fur-single-triplet.png",
+        "sha256": "09bd9f16e5b35c84f13a9fa16599eecc3a2b385016f27907662d47ed1a1b9c07"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-response-queue-proof-v2/work/artifacts/analysis/pixls-5002-fine-single.png",
+        "sha256": "516e3ddc847893925c1b090b162faa635621e94d1883d3fa0262e10f3b905140"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-response-queue-proof-v2/work/artifacts/analysis/raccoon-fur-mean8-diagnostic.png",
+        "sha256": "56b18017e574539ae2654ea0727bb19270634abc80a4b95a5cc391ca75172335"
+      }
+    ],
+    "notes": "Viewed both exact synthetic-GT triplets, native low-noise-reference grass board and mean8 fur board. Native160 cells preserve original pixels; approximate reference and multiple-observation mean labels are explicit."
+  },
+  "tests_passed": 24,
+  "test_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-V125-conditional-response-v1/unit-test-source-v1.py",
+    "sha256": "174a5e1f96052c003d5eb8bda4499b790faa294d939924a8708f04f1d734d96f"
+  },
+  "failed_first_reporter_proof_preserved": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/conditional-response-queue-proof-v1/reporter-proof-v1.log",
+    "sha256": "3d4b4346eeaea0cbe1802c17b209303c546de5b6369915329ea4eb20b7469c34"
+  },
+  "first_failure_scope": "Standalone NumPy reporter had no parent output directory; fixed parents=True before preparing the production queue. No neural collector was invoked.",
+  "current_recommendation": "V120; V124/V125 trained quality unmeasured",
+  "automatic_retries": 0,
+  "promotion_gate": false,
+  "scope": "Supplemental completed-endpoint bias/variance comparison after exact full quality/mesh owners exit successfully. Only new models run on128 already stored observations each;256 V120/V117 controls are reused without neural reruns. Four targets, four CFAs, eight draws; original noise/input/display/target protocol. Two native exact-synthetic-GT triplets per new endpoint and single/mean8 diagnostic boards. No reference NN, new noise, RAW, optimizer, automatic retry or promotion. Primary gains can be documented independently; this supplement is not a promotion gate."
+}

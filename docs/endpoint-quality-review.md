@@ -26,12 +26,20 @@ flowchart LR
     C --> D[Matched metrics, native crops and local detail]
     D --> E[Two fixed-profile fine green mesh comparisons]
     E --> F[Actual image viewing and current documentation]
+    E -. Supplemental V124/V125 test .-> G[Repeated-noise bias and variance]
 ```
 
 Each dependency binds the exact original process identity and plan. A terminal
 status cannot release work while its owner is still live, and an expired
 observation window does not trigger a replacement training run. Partial outputs,
 failed checks and executed source snapshots remain preserved.
+
+The [V124/V125 conditional-response supplement](conditional-noise-response.md#queued-trained-endpoint-comparison)
+waits for the exact completed quality/mesh owners and evaluates only the new
+checkpoints. It reuses all V120/V117 controls on the stored noise draws. Two
+native exact-GT triplets per endpoint and separate single/mean8 boards accompany
+the bias/variance statistics. This independent queue does not gate documenting
+primary gains or change any existing job.
 
 ## Material selection and GFX conditioning
 

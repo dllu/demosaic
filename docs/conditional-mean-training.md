@@ -92,3 +92,9 @@ modestly raises weak-detail bias-correcting projection and lowers its
 noise-associated projection. All tested camera/display/edge/CFA band
 projections already support correction. The predeclared training settings
 remain unchanged; the full trained comparison must establish the result.
+
+The [post-training conditional-response queue](conditional-noise-response.md#queued-trained-endpoint-comparison)
+will measure the actual bias/noise change using the same 128 stored observations
+per endpoint, reusing V120/V117 controls. It adds 256 new endpoint calls and
+four native exact-GT triplets after the original quality/mesh owners exit.
+It is a supplemental diagnostic; primary improvements can be documented first.
