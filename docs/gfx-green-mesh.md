@@ -26,11 +26,38 @@ V120/V121 mesh review is complete below, with no clear V121 lattice-recovery
 gain. V120's two saved predictions were adopted without rerunning it. V122/V123
 final mesh review is complete below. A separate
 [V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
-V124's original control training has started; V125 follows.
+V124's [14k progress review](#v124-at-14000-updates) is complete; its original
+20k control continues and V125 follows.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V124 at 14,000 updates
+
+The [actual14k checkpoint review](v124-progress14000.md) leaves the lattice
+largely erased under nominal conditioning. The fixed nearby3879 profile retains
+weak irregular diagonal texture, without a clear correct-lattice recovery over
+V120. Both regions/profiles were actually viewed; the left blue point persists.
+
+Columns: noisy → V120 → V12414k EMA → independent **DSCF3835 ISO100/AHD reference,
+not GT**. Native160px cells share768px contexts, WB/matrix and+4EV. The corrected
+ISO100 capture is46 seconds before DSCF3842 ISO6400, with different aperture,
+exposure time and moving subjects. The main3879/3880 pair remains in use.
+
+![V12414k nominal left mesh](images/v124-progress14000-v1/mesh-nominal-fine-green-mesh-left-comparison.png)
+
+![V12414k nominal right mesh](images/v124-progress14000-v1/mesh-nominal-fine-green-mesh-right-comparison.png)
+
+![V12414k nearby-profile left mesh](images/v124-progress14000-v1/mesh-profile3879-fine-green-mesh-left-comparison.png)
+
+![V12414k nearby-profile right mesh](images/v124-progress14000-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+Exactly two new root/DINO forwards reused the two fixed profile inputs and
+V120 predictions, without a noise sweep, RAW decoding or reference fitting.
+The partial checkpoint is not a full endpoint; these tradeoffs do not change the
+V120 recommendation. Both camera JPEGs and the original standing comparisons
+remain available below. [Source/ROI/checkpoint/profile/display metadata](images/v124-progress14000-v1/manifest.json).
 
 ## V122/V123 completed frequency trial
 

@@ -1,8 +1,10 @@
 # Independent-noise mean-loss training
 
-**Both V124/V125 CPU/CUDA checks passed; V124's fresh full control training is
-running and V125 follows. Quality is unmeasured; V120 remains the general
-recommendation.** This experiment
+**V124's [14k progress review](v124-progress14000.md) finds small noisy/shadow
+PSNR gains, a0.350dB faint-ADC regression and no clear large fine-detail recovery.**
+Its original20k control training continues; V125 follows with the added mean
+loss. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
+comparison remain pending; V120 remains the general recommendation. This experiment
 follows the [conditional-noise diagnostic](conditional-noise-response.md):
 weak fur/wood detail remains soft across independent noise observations.
 
@@ -48,6 +50,13 @@ not qualify corpus coverage or a new sampling policy. The frozen training
 recipes stay unchanged while their trained bias/noise comparison remains pending.
 
 ## Execution and review
+
+The completed102-input progress review reuses all V120 controls and existing
+noise/RAW inputs. It includes two exact-GT native triplets, four main GFX contexts
+and both corrected DSCF3842/DSCF3835 mesh regions/profiles. The measured tradeoff
+is documented now; the partial checkpoint does not replace the planned endpoints
+or establish the effect of the mean-loss term, which V124 does not use.
+[Audited progress measurements and actual native review](v124-progress14000.md).
 
 [Training runner](../scripts/train_noise_pair_trial.py) freezes all sources,
 recipes and input manifests. Discarded CPU 128×128/B1/FP32 and CUDA 256×256/B16/BF16 checks

@@ -20,6 +20,8 @@ with lower unseen-camera mean, a large ADC tail and little weak-detail recovery.
 Both original20k budgets and numerical/selected native review are complete.
 The [V124/V125 mean-loss trial](conditional-mean-training.md) has started V124's
 two-noise-view control with frozen90,784-source/twenty-region inputs; V125 follows.
+The [actual14k progress review](v124-progress14000.md) finds small noisy/shadow
+score gains alongside worse faint ADC and unresolved weak real detail.
 Successful implementation checks and source
 cleanup alone do not establish trained quality gains.
 The [completed V126/V127 shadow-data pilot](reviewed-shadow-pilot-quality.md)

@@ -112,7 +112,8 @@ def collect(path):
             != plan.get("raw_frequency_features", True)
             or (
                 "raw_spatial_features" in plan
-                and model.config.raw_spatial_features is not plan["raw_spatial_features"]
+                and getattr(model.config, "raw_spatial_features", False)
+                is not plan["raw_spatial_features"]
             )
         ):
             raise ValueError("Loaded checkpoint identity or frequency-adapter setting differs")

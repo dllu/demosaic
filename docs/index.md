@@ -16,8 +16,12 @@ review, matched-profile GFX comparisons and complete102MP RGB16 exports are
 finished. Fine foliage,
 neon detail and camera mottling remain weak; broad real-camera superiority
 and100MP/10s remain goals. [GFX gallery](gfx-qualitative.md).
-The [V1239k midpoint](v123-midpoint-quality.md) adds measured material and
-matched GFX context crops, with no clear fine-detail gain; final20k review is pending.
+The [completed V122/V12320k review](v122-v123-quality.md) records a small
+joint-training photo gain over adapter-only training, with camera/color costs
+and little weak-detail recovery. The [V12414k progress review](v124-progress14000.md)
+adds noisy/shadow gains of.008–.033dB, faint ADC−.350dB and native material/GFX
+crops without clear mesh recovery. Its original20k control and V125 comparison
+continue; V120 remains the general choice.
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
 weak-carrier gain, but does not improve broad weak natural detail and worsens

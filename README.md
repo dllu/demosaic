@@ -26,7 +26,7 @@ all prepared photos within 20k steps; its trained quality remains unmeasured.
 | Current quality work | Evidence and next comparison |
 | --- | --- |
 | [V122/V123 frequency features](docs/v122-v123-quality.md) | Both20k reviews complete: joint training gains0.05493dB photo PSNR over adapter-only, with lower unseen-camera PSNR, a worse ADC tail and little weak-detail recovery |
-| [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | V124's two-view control is training; V125 follows on the same90,784-source/twenty-region data |
+| [V124/V125 conditional-mean loss](docs/conditional-mean-training.md) | [V12414k progress](docs/v124-progress14000.md): noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB, no clear fine-mesh recovery. Original20k control continues; V125 follows on90,784/twenty regions |
 | [V131/V132 spatial attention](docs/raw-spatial-training.md) | Four genuine CPU/CUDA checks pass;20k per arm queued on90,781/29 after V125's admission. An early102-input comparison waits for their retained1k progress snapshots |
 | [V133 photographic quota](docs/reviewed-quota-training.md) | CPU/CUDA checks pass; 5% versus V131's 50% is queued at the same 20k budget. Early and full photo/camera/color/GFX reviews are queued with saved controls reused; quality remains unmeasured |
 | [V134/V135 cleaned data and photo epochs](docs/photo-epoch-training.md) | All four real 16+2 checks pass on 90,778/33. Matched 20k replacement/epoch runs and full native/GFX reviews are queued after V133's automated review; quality is unmeasured |

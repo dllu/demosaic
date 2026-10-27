@@ -45,15 +45,17 @@ RawNIND; V117 retains higher condition means and V121's changes are tiny.
 
 The [V124/V125 mean-loss trial](conditional-mean-training.md) uses V120's
 architecture and parent on the cleaned90,784-source/twenty-region corpus.
-All four CPU/CUDA16+2 checks pass; fresh20k runs and complete endpoint/crop
-review are queued after the original V122/V123 chain. Both arms use16 unique
-targets and32 simulated observations, with mean-loss weights0/.25.
-Quality is unmeasured.
+All four CPU/CUDA16+2 checks pass; V124's original20k control is running and
+V125 follows. Both arms use16 unique targets and32 simulated observations,
+with mean-loss weights0/.25. [V12414k progress](v124-progress14000.md) finds
+noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB and no clear fine-mesh recovery.
+Full endpoint and repeated-noise mean-loss comparison remain pending.
 
 The [V1239k frequency-feature midpoint](v123-midpoint-quality.md) now includes
 16 material predictions and six GFX contexts, reusing47 saved controls. Selected
-PSNR changes are tiny, and fine mesh/foliage remains weak. The original20k run
-and final endpoint review continue; this midpoint does not establish a quality gain.
+PSNR changes are tiny, and fine mesh/foliage remains weak. Its
+[completed20k endpoint review](v122-v123-quality.md) now supersedes that progress
+snapshot, with a small joint-arm photo gain and camera/color tradeoffs.
 
 The [current V114 eight-view pilot](v114-eight-view.md) improves all12 fixed
 material cases and both selected camera crops, with a small selected color-bias

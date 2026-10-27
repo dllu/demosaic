@@ -42,7 +42,9 @@ The current live queue is
 `.cache/current-quality-20261023-v1/V124-V125-conditional-response-recovery-v3`.
 Its [rebound dependencies](v123-memory-guard-recovery.md) retain the original
 inputs, forward budget and deadline; prior failed-owner receipts remain preserved.
-V124/V125 quality remains unmeasured.
+[V12414k progress](v124-progress14000.md) is measured on102 retained inputs,
+with small noisy/shadow gains but worse faint ADC and no clear mesh recovery.
+The repeated-noise V124/V125 endpoint bias comparison remains unmeasured.
 
 ## What the decomposition measures
 
@@ -157,7 +159,9 @@ steps on their existing single-observation path. Avoid loading examples that
 the paired-view layout would discard. Preserve the current zero-blur recipe,
 and compare noise, camera color and real weak detail alongside photo PSNR.
 The [V124/V125 implementation and training](conditional-mean-training.md)
-now implement this experiment; V124 is running and quality is unmeasured.
+now implement this experiment; V124 is running with the
+[partial14k quality review](v124-progress14000.md) complete. The trained
+conditional-bias comparison remains pending.
 Both arms load16 unique targets once and create32 simulated observations.
 The completed V123 run and original review evidence remain unchanged; no model choice, noise
 estimator or inference strength changes from this diagnostic.

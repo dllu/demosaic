@@ -7,8 +7,10 @@ unresolved. [Current choices](current-model.md) · [Completed results](v120-v121
 
 | Active comparison | Data and hypothesis | Current state |
 | --- | --- | --- |
-| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 sources/twenty regions;16 unique targets and two noise views, mean-loss weights0/.25 | V124 control training; V125 follows; quality unmeasured |
+| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 sources/twenty regions;16 unique targets and two noise views, mean-loss weights0/.25 | [V12414k progress](v124-progress14000.md): small noisy/shadow gains, faint ADC−.350dB, weak real detail unresolved. Original20k control continues; V125 follows |
 | [V131/V132 spatial attention](raw-spatial-training.md) |90,781 sources/29 reviewed regions; same V120 parent, seed, inputs, single-view loss and20k schedule; spatial branch off/on | Four CPU/CUDA16+2 checks complete; production waits for V125's admission |
+| [V133 reviewed quota](reviewed-quota-training.md) | Same90,781/29 and20k as V131,5% versus50% reviewed sampling | CPU/CUDA checks pass; early/full reviews queued; trained quality pending |
+| [V134/V135 photo epochs](photo-epoch-training.md) | Cleaned90,778/33, same20k replacement/epoch comparison | Four CPU/CUDA checks pass; production and full reviews queued after V133's automated review |
 
 The spatial trial's live early-review queue uses immutable step1,000 snapshots
 within the original20k workers. Each gets102 retained material/shadow/faint-ADC

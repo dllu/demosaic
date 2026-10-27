@@ -18,8 +18,9 @@ the current roots and adopted checks.
 V120/V121 training, endpoint predictions and independent numerical
 audits, four saved/local-detail contrasts and selected native review are
 complete. V120/V121 mesh checks have no clear lattice-recovery gain over
-V115/V119. V122/V123 endpoint review is now published; V124/V125 quality remains
-unmeasured. The queues check
+V115/V119. V122/V123 endpoint review is published. [V12414k progress](v124-progress14000.md)
+is measured on102 retained inputs; complete V124/V125 endpoint quality remains
+pending. The queues check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 

@@ -61,7 +61,7 @@ under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |
-| Persistent detail bias | [V124/V125](conditional-mean-training.md) tests an added conditional-mean loss with matched two-noise-view training. V124 control is running; V125 follows. Their90784-photo/twenty-region inputs remain fixed; trained quality is pending |
+| Persistent detail bias | [V12414k progress](v124-progress14000.md) gives noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB and lower selected weak-band gains, without clear real-mesh recovery. Original20k control continues; [V125 mean-loss training](conditional-mean-training.md) follows on the same90784/twenty-region inputs. Full endpoint/bias comparison is pending |
 | Spatial RAW detail | [V131/V132](raw-spatial-training.md) tests a 22,664-parameter local-attention branch on 90781/29. Four exact-recipe CPU/CUDA16+2 checks pass; full 20k production waits for V125's admission. Retained1k and full-endpoint comparisons are queued; quality is unmeasured |
 | Photographic variety at fixed budget | [V133](reviewed-quota-training.md) lowers V131's reviewed quota from50% to5% with the same parent/data/20k horizon. CPU/CUDA16+2 checks pass; early and full numerical/native reviews are queued. Production waits for both spatial arms to finish |
 | Cleaned corpus and source visitation | [V134/V135](photo-epoch-training.md) compares replacement/epoch ordering on identical90,778/33 data. All four CPU/CUDA16+2 checks pass; 20k production and full reviews are queued after V133's automated review |
