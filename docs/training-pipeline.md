@@ -2,19 +2,26 @@
 
 Optional [per-source loss diagnostics](source-loss-diagnostics.md) trace
 high-loss Commons examples to their actual source and crop without an additional
-neural forward. They are disabled by default and active in V120/V121;
-V119's frozen run is unchanged.
+neural forward. They are disabled by default and enabled in V120–V123 recipes
+and queued V124/V125; V119's frozen run is unchanged.
 
-The [current source inspection](current-source-loss-review.md) prepares a future
-90,784-source cohort and optional20-region bank: two source-specific withholds
-and six weak material additions, with exact source/target reconstruction and
-actual reader checks. V122/V123 still use90,786/fourteen regions; V120/V121
-retain their original frozen input plans. No sampling quota, blur policy or
-active V122/V123 change results from that preparation. The queued
-[V124/V125 independent-noise trial](conditional-mean-training.md) uses this new
-cohort and region bank. It loads16 unique targets once and draws32 simulated
-observations after augmentation; real paired data stays16. This is a controlled
-quality experiment, with no new throughput claim.
+The [current source inspection](current-source-loss-review.md) prepares a separate
+90,783-source cohort preserving all twenty weak-material regions. The preceding
+90,784-source/twenty-region snapshot remains frozen for queued
+[V124/V125 independent-noise training](conditional-mean-training.md).
+V122/V123 keep90,786/fourteen regions; V120/V121 retain their original inputs.
+No sampling quota, blur policy or active/queued cohort changes from the latest
+review. V124/V125 load16 unique targets once and draw32 simulated observations
+after augmentation; real paired data stays16. This is a controlled quality
+experiment, with no new throughput claim.
+
+The [actual retained-target coverage check](training-target-contrast-coverage.md)
+finds faint-band content in these training-check batches: 31.2% of eligible
+ordinary-photo blocks and44.9% of reviewed-region blocks lie below5% contrast.
+Native inspection also shows flat surfaces and soft backgrounds among high-count
+crops. This bounded18-step prefix does not qualify a whole-corpus distribution
+or justify replacing material inspection with a contrast-count admission rule.
+All current and queued recipes remain fixed.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;
@@ -24,8 +31,10 @@ batch32 is only1.3% faster than16 while using roughly twice the CUDA allocation.
 Details and limitations are recorded below.
 
 The [completed V111/V112 quality trial](v112-quality.md) uses90,864 reviewed
-sources. The [completed Tiny/Small continuations](v114-v115-quality.md) now
-select V114 as the general baseline. This recipe retains native128/paired32,
+sources. The [completed Tiny/Small continuations](v114-v115-quality.md)
+establish V114 as a useful Tiny alternative; the newer
+[V120 Small continuation](v120-v121-primary.md) is the current general recommendation.
+This recipe retains native128/paired32,
 zero optical PSFs, weak textures, photographic contrast attenuation and six
 reviewed regions. The [Small rebase](small-aligned-training.md) reuses cached
 training features/previews before a new V112-derived initializer and budget.

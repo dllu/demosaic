@@ -84,7 +84,7 @@ fine raccoon fur remains softer than GT.
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
 [Korall](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
-[CC BY-SA3.0](https://creativecommons.org/licenses/by-sa/3.0/), modified by binning,
+[CC BY3.0](https://creativecommons.org/licenses/by/3.0/), modified by binning,
 cropping, simulated noise and restoration.
 
 Real GFX100S: DSCF3879 ISO6400 → **V120 Small, fixed historical Haar profile** → DSCF3880 ISO100 f/5.6.

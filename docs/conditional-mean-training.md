@@ -39,6 +39,13 @@ weight 0. Reconstruction epsilons remain .0003/.0001 for simulated/paired data.
 Source-loss diagnostics record the original view once per unique source,
 rather than treating duplicated targets as additional inspected photographs.
 
+The [retained-target coverage check](training-target-contrast-coverage.md)
+finds faint-band content in these actual discarded-check batches: 31.2% of
+eligible ordinary-photo blocks and44.9% of reviewed-region blocks lie below5%
+contrast. Some high-count targets are flat or soft, so this short prefix does
+not qualify corpus coverage or a new sampling policy. The frozen training
+recipes stay unchanged while their trained bias/noise comparison remains pending.
+
 ## Execution and review
 
 [Training runner](../scripts/train_noise_pair_trial.py) freezes all sources,

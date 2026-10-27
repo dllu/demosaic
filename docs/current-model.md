@@ -158,7 +158,7 @@ small eight-pixel carrier gain. Complete metrics, native material/GFX comparison
 and RGB16 checks are published. Keep the term off for further quality work;
 architecture and parent remain choices guided by their measured tradeoffs.
 
-[PSNR history](performance-history.md) includes V119 and all earlier reviewed endpoints.
+[PSNR history](performance-history.md) includes V120/V121 and earlier reviewed endpoints.
 The [fixed V115/V117 output mean](fixed-tiny-small-mean.md) gives an intermediate
 tradeoff: photo 37.02408dB and camera 54.31387/54.00195dB. It loses photo score
 to V117 and camera means to V115, with unchanged visible GFX fine-detail loss.

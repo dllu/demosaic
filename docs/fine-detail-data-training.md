@@ -3,7 +3,8 @@
 **V116's original20,000 updates and complete quality/native review are finished.**
 Its tested eight-pixel weak-carrier gain improves, but broad weak natural-detail
 gain does not, photo/unseen-CFA means fall slightly and ADC color tails worsen.
-V114 retains the better general balance. [Complete results and native comparisons](v116-quality.md).
+V114 retains the better balance in this matched Tiny comparison.
+[Complete results and native comparisons](v116-quality.md).
 The exact original owner and worker exited successfully, with20,000 prepared
 batches, training/encoder calls and optimizer steps, plus640 validation calls.
 [Completed training audit](results/v116-training-complete-v1.json) ·
@@ -12,7 +13,8 @@ weak-texture sources and reviewed paired-reference masks with the same V112
 Tiny architecture, parent, seed, schedule and 20,000-update budget as completed
 V114. V114's completed evaluation supplies retained control outputs; its training
 and evaluation were not repeated for V116.
-V114 is the current general baseline after [complete Tiny/Small review](v114-v115-quality.md).
+V114 remains a useful Tiny alternative after [complete Tiny/Small review](v114-v115-quality.md);
+[V120 Small](v120-v121-primary.md) is the current general recommendation.
 V116 retains its original explicit V112 parent and matched control.
 
 [Recipe](../configs/quality-v112-fine-reviewed-v116.yaml) ·

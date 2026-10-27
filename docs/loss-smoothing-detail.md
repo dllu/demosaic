@@ -1,20 +1,22 @@
 # Loss smoothing and faint detail
 
-**Current V114 retains Charbonnier epsilon .0003.** The
+**Current V120 Small retains Charbonnier epsilon .0003.** The
 [completed V111/V112 comparison](loss-scale-training.md) established this scale
 on the cleaned corpus, with36.90238dB for V112 and lower tested color tails.
-The [completed Tiny/Small continuations](v114-v115-quality.md) keep the scale;
-V114 is now the general learned baseline.
+The [completed Tiny/Small continuations](v114-v115-quality.md) and the
+[current V120 recommendation](v120-v121-primary.md) keep the same scale.
 
 The fixed-V102 diagnosis below motivated that comparison: smaller epsilon
 strengthens faint low-noise supervision while increasing the overall output
 gradient more. It measures output-space sensitivity, independently of the later
 trained-quality results.
 
-The [new contrast-normalized band diagnosis](contrast-normalized-band-supervision.md)
-reuses all 108 saved predictions with the .0003 baseline. Its faint-detail
-correction slope grows more than total gradient magnitude; this is a candidate
-for later training, with no new restored-quality result.
+The [contrast-normalized band diagnosis](contrast-normalized-band-supervision.md)
+reused all108 saved predictions with the .0003 baseline. Its output-gradient
+change motivated the [completed V117/V118 training comparison](v117-v118-quality.md).
+The trained band term lowered weak natural-detail response and worsened the
+ADC color tail, so it remains off. Output-space diagnostics alone do not
+establish a better trained model.
 
 The library default remains `sqrt(error² + 1e-6)`, with epsilon **0.001**;
 V112 and its current continuation recipes explicitly select **0.0003**.
