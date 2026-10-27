@@ -157,6 +157,16 @@ def test_replaced_training_owner_is_rejected(tmp_path):
     assert not list(path.parent.glob("*/actual-fixture-call"))
 
 
+def test_rebound_queue_keeps_original_absolute_wait_deadline(tmp_path):
+    path, _ = fixture(tmp_path)
+    plan = json.loads(path.read_text())
+    plan["absolute_training_wait_deadline_unix"] = time.time() - 1
+    save(path, plan)
+    with pytest.raises(AssertionError):
+        queue.controller(path)
+    assert not list(path.parent.glob("*/actual-fixture-call"))
+
+
 def test_frozen_entrypoint_runs_with_only_declared_helpers(tmp_path):
     path, _ = fixture(tmp_path)
     for name in (

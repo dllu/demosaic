@@ -22,13 +22,13 @@ unresolved; broad state-of-the-art quality is unproven.
 | Does fine-detail loss reweighting suffice? | [Completed V117/V11820k comparison](v117-v118-quality.md) finds lower weak natural-detail response and a worse ADC color tail with the normalized band term. Keep it off; improved local output-gradient alignment did not predict trained quality |
 | Does encoder size alone fix weak contrast? | [Full Tiny/Small diagnosis](local-material-detail.md) finds nearly unchanged weakest-stratum gain on427 photos. Small's camera/detail tradeoffs remain useful; no size-only explanation is established |
 
-The latest [source inspection](current-source-loss-review.md) has1,759 unique
+The latest [source inspection](current-source-loss-review.md) has1,799 unique
 reviewed source IDs. Quality work uses zero optical PSF augmentation and
 geometry before final downsampling, with reviewed material regions and corrected
 paired-reference masks. [Training pipeline](training-pipeline.md) ·
 [Actual target contrast coverage](training-target-contrast-coverage.md).
-The most recent forty-source review retained all forty sources, without changing
-already-running cohorts.
+The most recent forty-source review retains39 and withholds one poster-dominated
+image from a future90,782-source/27-region cohort. Existing training inputs remain fixed.
 
 ## Foundation features and the new objective
 

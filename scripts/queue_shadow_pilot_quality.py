@@ -102,6 +102,8 @@ def controller(path):
         training = read(plan["training_plan"]["path"])
         while True:
             assert time.monotonic() - began < plan["maximum_training_wait_seconds"]
+            if deadline := plan.get("absolute_training_wait_deadline_unix"):
+                assert time.time() < deadline
             guard(plan)
             status = read(Path(training["root"]) / "status.json")
             assert status["plan"] == plan["training_plan"]
