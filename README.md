@@ -53,8 +53,9 @@ the cleaned90,784-source/twenty-region corpus after that review chain.
 The [completed V126/V127 shadow-data pilot](docs/reviewed-shadow-pilot-quality.md)
 uses90,783 sources/23 regions and shows no useful quality gain; native material
 and both train-scene comparisons are published. The shadow policy stays off by default.
-The new [V128 feature-supervision pilot](docs/dino-feature-supervision.md) tests
-frozen early DINO features against the saved V126 control; quality is unproven.
+The [completed V128 feature-loss pilot](docs/v128-feature-pilot-quality.md) also
+shows no useful gain. [V129 now tests the curated27-region data](docs/reviewed-detail-training-pilot.md)
+with the feature/shadow terms off, reusing V126's completed control.
 
 **V117 is a useful single-view photo-score option:**37.04408dB, +.06435 over
 V114 with421/427 source means rising. Its camera means are slightly lower and

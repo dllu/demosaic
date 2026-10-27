@@ -3,8 +3,9 @@
 **The latest pass retains39 newly inspected sources and withholds one
 poster-dominated image from a future cohort.** The deduplicated review ledger
 has1,799 IDs. Four additional inspected physical-detail contexts extend the
-future bank to27 regions on90,782 training sources. Current experiments keep
-their frozen data; prepared data and source cleanup alone do not prove quality gains.
+future bank to27 regions on90,782 training sources. Earlier experiments keep
+their frozen data; [V129 now tests the new cohort](reviewed-detail-training-pilot.md).
+Source cleanup alone does not prove quality gains.
 
 [Latest inspection and native views](v123-source-review-through15800.md) ·
 [All40 decisions/credits](results/v123-source-loss-through15800-decisions-v1.csv) ·
@@ -16,14 +17,16 @@ their frozen data; prepared data and source cleanup alone do not prove quality g
 | --- | --- | --- |
 | V122/V123 frequency comparison |90,786 /14 | V12220k complete; V123 saved-state continuation running |
 | V124/V125 mean-loss comparison |90,784 /20 | Four checks reused; production queued after frequency review |
-| Completed V126/V127 and active V128 pilot |90,783 /23 | Shadow pilot shows no useful gain; feature-loss pilot continues from saved399 updates |
-| Latest prepared future cohort |90,782 /27 | One graphic-dominated training source withheld; four physical-detail fields added; actual reader checks pass; untrained |
+| Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k; complete native review |
+| V129 curated-data pilot |90,782 /27 | One graphic-dominated source withheld; four physical-detail fields added; actual reader checks pass; learned quality pending |
 
 [V123 continuation](v123-memory-guard-recovery.md) ·
 [Mean-loss trial](conditional-mean-training.md) ·
 [Shadow-pilot results](reviewed-shadow-pilot-quality.md) ·
-[V128 feature supervision and resumption](dino-feature-supervision.md).
-The latest review changes none of their memberships, recipes, quotas or blur policies.
+[Completed V128 feature pilot](v128-feature-pilot-quality.md) ·
+[V129 curated-data trial](reviewed-detail-training-pilot.md).
+Earlier frozen memberships, recipes, quotas and blur policies remain intact;
+V129 declares its new cohort as a separate experiment.
 
 The [27-region catalogue](../configs/low-contrast-training-rois-cleaned90782-v1.json)
 preserves all23 previous example objects, adding fox fur, quail feather, thin

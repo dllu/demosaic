@@ -28,6 +28,24 @@ V124/V125 are queued after that original chain.
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
+## V128 feature-loss pilot
+
+The [completed1,000-update feature-loss pilot](v128-feature-pilot-quality.md)
+shows no useful new fine-lattice recovery. Both regions were actually inspected
+under both profiles. Columns: noisy → V120 → V126 control → V128 → independent
+**DSCF3835 ISO100 reference, not GT**. Native160 pixels share +4EV,768px contexts,
+WB/matrix and fixed conditioning. The originals and camera JPEGs stay unchanged.
+
+![V128 right mesh at the nominal profile](images/v128-feature-pilot-quality-v1/mesh-nominal-fine-green-mesh-right-comparison.png)
+
+![V128 right mesh at the fixed nearby profile](images/v128-feature-pilot-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
+
+Nominal conditioning still mostly erases the mesh; the nearby profile leaves
+weak/irregular diagonal texture. Left-region views:
+[nominal](images/v128-feature-pilot-quality-v1/mesh-nominal-fine-green-mesh-left-comparison.png) ·
+[nearby profile](images/v128-feature-pilot-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png).
+[Source/ROI/checkpoint/profile/display metadata](images/v128-feature-pilot-quality-v1/manifest.json).
+
 ## V126/V127 shadow-data pilot
 
 **The completed matched1,000-update shadow pilot does not clearly recover the

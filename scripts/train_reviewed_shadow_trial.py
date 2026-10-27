@@ -202,9 +202,12 @@ def worker(path, phase, arm):
             "selected_shadow_targets": n,
         }
         if step in prior_inputs:
-            assert clean_hash == prior_inputs[step]["clean_sha256"]
             assert domain == prior_inputs[step]["domain"]
-            if plan.get("require_matched_noisy_inputs", False):
+            if plan.get("require_matched_clean_inputs", True) or domain != "commons":
+                assert clean_hash == prior_inputs[step]["clean_sha256"]
+            if plan.get("require_matched_noisy_inputs", False) or (
+                plan.get("require_unchanged_noncommons_inputs", False) and domain != "commons"
+            ):
                 assert digest == prior_inputs[step]["batch_sha256"]
         if step in smoke_inputs:
             assert digest == smoke_inputs[step]["batch_sha256"]
@@ -338,7 +341,15 @@ def worker(path, phase, arm):
                 "optimizer_state_count": 89,
                 "dino_feature_weight": config.get("dino_feature_weight", 0),
                 "dino_feature_policy": config.get("dino_feature_policy"),
-                "all_observed_inputs_match_saved_control": bool(control_binding),
+                "all_observed_inputs_match_saved_control": control is not None
+                and len(inputs) == len(control["observed_inputs"])
+                and all(
+                    all(
+                        row[k] == prior_inputs[row["step"]][k]
+                        for k in ("domain", "clean_sha256", "batch_sha256")
+                    )
+                    for row in inputs
+                ),
                 "CUDA_peak_allocated_bytes": torch.cuda.max_memory_allocated()
                 if phase != "CPU"
                 else 0,

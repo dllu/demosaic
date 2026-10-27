@@ -1,7 +1,9 @@
 # Frozen early DINO feature supervision
 
-**V128 is continuing its bounded training pilot; improved restoration quality is unproven.**
-It tests an additional spatial feature loss against the completed V126 control.
+**The completed V1281,000-update pilot finds no useful gain at weight.1.**
+Mean shadow/ordinary sRGB changes are−.00040/−.00014dB against V126, with no
+clear new detail recovery in actually viewed native/GFX comparisons.
+[Completed results, triplets and remaining weaknesses](v128-feature-pilot-quality.md).
 The [current general model remains V120 Small](current-model.md).
 
 [GramSR, April2026](https://arxiv.org/abs/2604.25457) uses DINOv3 visual
@@ -99,17 +101,17 @@ two-update resume, including rejected changed-weight/policy resumes,
 checks, frozen official DINO identity and all18 matching input hashes.
 Each check made18 full encoder and48 first-stage calls; the extra30 are the
 two feature evaluations on15 non-paired batches. CUDA peak was7.04GB.
-The1000-update production run started freshly from V120 after these checks.
+The1000-update production run completed after starting freshly from V120.
 
 A later shared-memory drop triggered the32GB runtime guard after399 updates.
 The emergency checkpoint contains all399 model/EMA/Adam updates. The explicit
-continuation resumes at400, with91 model tensors,89 Adam states, frozen encoder
-and CPU/CUDA/Python RNG checked before the first new forward. It performs only
+continuation resumed at400, with91 model tensors,89 Adam states, frozen encoder
+and CPU/CUDA/Python RNG checked before the first new forward. It performed only
 the remaining601 updates under the original8h absolute deadline; discarded
 checks and the original prefix are reused. All original failures/checkpoints
 remain preserved. [Actual resumption receipt](results/v128-memory-guard-resumption-v1.json).
 
-Prospective production counts are477 Commons,262 native and261 paired batches,
+Verified production counts are477 Commons,262 native and261 paired batches,
 1000 optimizer updates plus64 validation forwards,1064 full encoder calls and
 1478 additional first-stage calls. Budgets are36 discarded check updates plus
 1000 production updates,30minutes per check and8hours production, without
@@ -118,14 +120,13 @@ automatic retries or budget resets. The launch floor is52GiB:
 
 Training plan/status:
 `.cache/current-quality-20261023-v1/dino-feature-training-recovery-v1/run/`.
-The candidate-only quality queue is
-`.cache/current-quality-20261023-v1/dino-feature-quality-pilot-v1/queue-v2/`.
-Its original absolute wait deadline remains fixed; the first queue exited with
-zero candidate restorations when training stopped.
-It waits for this exact1000-update endpoint, then makes86 new restorations on
+The successful candidate-only quality queue is
+`.cache/current-quality-20261023-v1/dino-feature-quality-pilot-v1/queue-v3/`.
+It retained the original absolute wait deadline; two earlier queues exited with
+zero candidate restorations. Its86 new restorations cover
 64 retained shadow conditions,16 ordinary material inputs,4 main-GFX contexts
-and2 extra-mesh profiles. It reuses completed V126/V120 predictions, with no
-new noise/RAW work. Independent scoring and actual native inspection follow.
+and2 extra-mesh profiles. It reused completed V126/V120 predictions, with no
+new noise/RAW work. Independent scoring and actual native inspection are complete.
 The extra fence uses **DSCF3842 ISO6400 / DSCF3835 ISO100 f/5.6**, including
 both camera JPEGs; the main platform scene remains DSCF3879/3880.
 Those real references differ in capture conditions and are not exact GT.

@@ -35,13 +35,14 @@ preparation parity verified on CPU/CUDA. The new
 from V120 with a shared.5 reviewed-region quota and found no useful gain.
 Shadow exposure stays off by default and in original V122/V123 and queued V124/V125.
 
-The [V128 feature-loss pilot](dino-feature-supervision.md) reuses completed V126
+The [completed V128 feature-loss pilot](v128-feature-pilot-quality.md) reuses completed V126
 as its matched control on90,783 sources/23 regions. It adds a default-off spatial
 loss through the shared frozen DINO first stage on Commons/native targets;
 paired RAW and validation keep the existing loss. CPU/CUDA16+2 resume checks
-pass with identical data/noise hashes. Production is a fresh1000-update pilot;
-trained quality remains unproven. Per-source traces retain base reconstruction
-loss while training logs separately include the feature term.
+pass with identical data/noise hashes. Its1,000-update pilot shows no useful gain.
+Per-source traces retain base reconstruction loss while training logs separately
+include the feature term. [V129 now tests the curated27-region cohort](reviewed-detail-training-pilot.md)
+with feature/shadow terms off, preserving native/paired control input hashes.
 
 The three requested changes are implemented and measured: geometry/PSF runs
 between4× binning and the final2× reduction; only the selected domain is loaded;

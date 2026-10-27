@@ -24,10 +24,10 @@ cleanup alone do not establish trained quality gains.
 The [completed V126/V127 shadow-data pilot](reviewed-shadow-pilot-quality.md)
 shows no useful gain after1,000 matched updates; fixed-input metrics and native
 comparisons are independently checked. Shadow exposure stays off by default.
-The [V128 feature-supervision pilot](dino-feature-supervision.md) now tests an
-additional early DINO spatial loss against the saved V126 control. Independent
-output-gradient checks and actual CPU/CUDA resume checks pass; its fresh1000-update
-quality remains unproven. Candidate-only heldout/GFX collection is queued.
+The [completed V128 feature-loss pilot](v128-feature-pilot-quality.md) finds no
+useful gain at1,000 matched updates, with independently audited native/GFX views.
+[V129 now tests the curated27-region data](reviewed-detail-training-pilot.md)
+using the original loss; trained quality remains unmeasured.
 
 | Goal | Current evidence | Remaining work |
 | --- | --- | --- |

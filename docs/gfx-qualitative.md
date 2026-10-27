@@ -23,6 +23,23 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V128 completed feature-loss pilot
+
+The [completed1,000-update feature-loss trial](v128-feature-pilot-quality.md)
+shows no useful new foliage/fence recovery. Columns: noisy → V120 → V126 control
+→ V128 → separate DSCF3880 ISO100 reference, **not GT**. Native160 crops share
+the fixed nominal-profile512px contexts, +2EV, WB/matrix and noise inputs.
+
+![Completed V128 foliage comparison](images/v128-feature-pilot-quality-v1/main-foliage-comparison.png)
+
+![Completed V128 chain-link-fence comparison](images/v128-feature-pilot-quality-v1/main-chain-link-fence-comparison.png)
+
+Fine foliage remains painterly; the larger fence pattern stays coherent. The
+[corrected3842/3835 fine mesh](gfx-green-mesh.md#v128-feature-loss-pilot) also
+remains weak under both fixed profiles. All28 comparison boards were actually
+viewed, and every published native cell passes independent pixel checks.
+[Checkpoint/source/ROI/conditioning/display metadata](images/v128-feature-pilot-quality-v1/manifest.json).
+
 ## V126/V127 completed shadow pilot
 
 The [completed1,000-update matched pilot](reviewed-shadow-pilot-quality.md)

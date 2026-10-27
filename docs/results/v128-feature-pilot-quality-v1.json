@@ -1,0 +1,2364 @@
+{
+  "status": "completed-1000-update-feature-pilot-no-useful-quality-gain",
+  "training_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/dino-feature-training-recovery-v1/run/train-V128-result.json",
+    "sha256": "e855c945ba08a92423367278f46e18d03b121b119e687a8a5efe8c82519e9f72"
+  },
+  "training": {
+    "updates": 1000,
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/dino-feature-training-pilot-v1/run/work/artifacts/recovery-V128-v1/last.pt",
+      "sha256": "f5fc058bc4236b18895fe489bb1a73d6df6816939bcb5e209a4b6b6c54f7ee32"
+    },
+    "counts": {
+      "prepared_training_batches": 1000,
+      "target_contexts": 16000,
+      "training_forwards": 1000,
+      "stage0_forwards": 2542,
+      "encoder_forwards": 1064,
+      "optimizer_steps": 1000,
+      "validation_forwards": 64
+    },
+    "domain_counts": {
+      "commons": 477,
+      "native": 262,
+      "paired": 261
+    },
+    "continuation_counts": {
+      "prepared_training_batches": 601,
+      "target_contexts": 9616,
+      "training_forwards": 601,
+      "stage0_forwards": 1517,
+      "encoder_forwards": 665,
+      "optimizer_steps": 601,
+      "validation_forwards": 64
+    },
+    "original_checkpoint_step": 399,
+    "all_AdamW_steps": 1000,
+    "optimizer_state_count": 89,
+    "all_observed_inputs_match_saved_control": true,
+    "model_EMA_Adam_finite": true,
+    "CUDA_peak_allocated_bytes": 7041804288
+  },
+  "queue_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/dino-feature-quality-pilot-v1/queue-v3/queue-plan-v1.json",
+    "sha256": "851053dfacfcf3d40bee5fdc58c2c3968554f9f6146c355c97b3b85582e390ea"
+  },
+  "collection": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/dino-feature-quality-pilot-v1/queue-v3/V128/collection-v1.json",
+    "sha256": "21c229ff2e7b6bd48f2eea78cb0f8f604d379e2017bdd27f01f161dbeebf31b6"
+  },
+  "report": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/dino-feature-quality-pilot-v1/queue-v3/analysis-V128-v1/report-v1/report.json",
+    "sha256": "1278484425e5fdfea3a42f637feb3b597f91d86e59454c54d1687edc9b50784e"
+  },
+  "audit": {
+    "status": "passed-independent-FFT-metric-and-native-pixel-audit",
+    "audit_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/dino-feature-quality-pilot-v1/queue-v3/analysis-V128-v1/independent-audit-plan-v1.json",
+      "sha256": "6dc456630961a401a9b50357204eb34cdfb4d191a52dc98ff9e3365542163f39"
+    },
+    "maximum_absolute_errors": {
+      "score_dB": 7.105427357601002e-15,
+      "gain": 3.858025010572419e-15,
+      "band_error_RMS": 4.163336342344337e-17,
+      "orthogonal_residual_RMS": 3.8163916471489756e-17
+    },
+    "metric_fields": 3975,
+    "metric_rows": 240,
+    "summary_groups": 60,
+    "PNG_channels_exact": 17203200,
+    "PNG_images": 56,
+    "root_forwards": 0,
+    "encoder_forwards": 0,
+    "RAW_decodes": 0,
+    "new_noise_observations": 0,
+    "optimizer_updates": 0,
+    "Torch_imported": false,
+    "scope": "All retained material methods/CFAs and published native cells, independently recomputed. Real low-ISO and native-binned references remain approximate; no real-reference PSNR or model recommendation."
+  },
+  "actual_native_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/dino-feature-quality-pilot-v1/queue-v3/analysis-V128-v1/actual-native-review-v1.json",
+    "sha256": "b64c5b66e836f640000a4889234a5499361a03b1eb8b67998a982a35488a46e4"
+  },
+  "means": {
+    "shadow": {
+      "V120": {
+        "camera_RGB_PSNR": 32.39347468390541,
+        "sRGB_PSNR": 25.90197137419208
+      },
+      "V126 1k EMA": {
+        "camera_RGB_PSNR": 32.40036021438749,
+        "sRGB_PSNR": 25.89620365743514
+      },
+      "V128 1k EMA": {
+        "camera_RGB_PSNR": 32.40194732586423,
+        "sRGB_PSNR": 25.895802266372492
+      },
+      "V128_minus_V126_camera_RGB_PSNR": 0.0015871114767378458,
+      "V128_minus_V126_sRGB_PSNR": -0.0004013910626490258
+    },
+    "ordinary": {
+      "V120": {
+        "camera_RGB_PSNR": 38.937401389880264,
+        "sRGB_PSNR": 32.30426336315668
+      },
+      "V126 1k EMA": {
+        "camera_RGB_PSNR": 38.939417750700656,
+        "sRGB_PSNR": 32.30861456923262
+      },
+      "V128 1k EMA": {
+        "camera_RGB_PSNR": 38.938915772388995,
+        "sRGB_PSNR": 32.30847201321909
+      },
+      "V128_minus_V126_camera_RGB_PSNR": -0.0005019783116608778,
+      "V128_minus_V126_sRGB_PSNR": -0.0001425560135288606
+    }
+  },
+  "summaries": [
+    {
+      "case": "bark-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 27.866127281170847,
+      "sRGB_PSNR": 25.4556864651913,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.784794467674993,
+          "band_error_RMS": 0.03436125624703824,
+          "orthogonal_residual_RMS": 0.031229701432656985
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.8663485795722797,
+          "band_error_RMS": 0.03324310099462526,
+          "orthogonal_residual_RMS": 0.031105385197709223
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over8-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 27.86903542573985,
+      "sRGB_PSNR": 25.45571546383808,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.7823393337452369,
+          "band_error_RMS": 0.034384005730988425,
+          "orthogonal_residual_RMS": 0.031179680868585007
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.8654175173285357,
+          "band_error_RMS": 0.03324439315110311,
+          "orthogonal_residual_RMS": 0.031076601449038586
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over8-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 27.870952554107543,
+      "sRGB_PSNR": 25.4568404347741,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.7813090482383045,
+          "band_error_RMS": 0.03437235951655458,
+          "orthogonal_residual_RMS": 0.031135205933052173
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.8645297931796652,
+          "band_error_RMS": 0.03324123546836856,
+          "orthogonal_residual_RMS": 0.031043532862221897
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 25.817665895886712,
+      "sRGB_PSNR": 23.294294861080573,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.6686513389155486,
+          "band_error_RMS": 0.043454866487283514,
+          "orthogonal_residual_RMS": 0.03744457334913808
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.7610811475269067,
+          "band_error_RMS": 0.044231532054894336,
+          "orthogonal_residual_RMS": 0.038960408323619876
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over8-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 25.81947826527076,
+      "sRGB_PSNR": 23.286308153122462,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.6623297562822398,
+          "band_error_RMS": 0.04338344707369732,
+          "orthogonal_residual_RMS": 0.037105870752726824
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.7579913736295902,
+          "band_error_RMS": 0.044224302170064456,
+          "orthogonal_residual_RMS": 0.03880571630235755
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over8-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 25.821777946182273,
+      "sRGB_PSNR": 23.287852666252075,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.661547757798642,
+          "band_error_RMS": 0.043355664279588764,
+          "orthogonal_residual_RMS": 0.03704265337752094
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.7567107099406882,
+          "band_error_RMS": 0.04421788175148093,
+          "orthogonal_residual_RMS": 0.03873685728827738
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 23.97514905412628,
+      "sRGB_PSNR": 21.245113283721935,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.4842848147327274,
+          "band_error_RMS": 0.05381713689805261,
+          "orthogonal_residual_RMS": 0.04125434436075649
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.5844227783086163,
+          "band_error_RMS": 0.05700453226855514,
+          "orthogonal_residual_RMS": 0.04383369125415577
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 23.97398603571472,
+      "sRGB_PSNR": 21.221376514764017,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.4788135818160374,
+          "band_error_RMS": 0.05374047075626556,
+          "orthogonal_residual_RMS": 0.04085848217265774
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.5820822176673208,
+          "band_error_RMS": 0.05701453960739836,
+          "orthogonal_residual_RMS": 0.043675493171600625
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 23.978854282683802,
+      "sRGB_PSNR": 21.22427716317349,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.47928800974140146,
+          "band_error_RMS": 0.053727325983718724,
+          "orthogonal_residual_RMS": 0.04086888052806675
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.5818127636619932,
+          "band_error_RMS": 0.0569908588316145,
+          "orthogonal_residual_RMS": 0.043625076782437926
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 22.2818312580459,
+      "sRGB_PSNR": 19.40424788844146,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.29920678000385986,
+          "band_error_RMS": 0.05985839523143553,
+          "orthogonal_residual_RMS": 0.037318858541123684
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.3407471332085905,
+          "band_error_RMS": 0.07102179310631447,
+          "orthogonal_residual_RMS": 0.04127781783019052
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 22.282399233289333,
+      "sRGB_PSNR": 19.394058732825727,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.296168979535958,
+          "band_error_RMS": 0.05977047304556399,
+          "orthogonal_residual_RMS": 0.03690245954943978
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.3417014227650773,
+          "band_error_RMS": 0.07106247656930226,
+          "orthogonal_residual_RMS": 0.04145663343643664
+        }
+      ]
+    },
+    {
+      "case": "bark-gain1over32-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 22.287378861237556,
+      "sRGB_PSNR": 19.39498638285118,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.2991777962947867,
+          "band_error_RMS": 0.059826644830895864,
+          "orthogonal_residual_RMS": 0.037259032501016066
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.3443664881333361,
+          "band_error_RMS": 0.07100147483785167,
+          "orthogonal_residual_RMS": 0.04167769549101623
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 37.749579860505456,
+      "sRGB_PSNR": 29.98175122980224,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.2093648302986967,
+          "band_error_RMS": 0.004142589783605722,
+          "orthogonal_residual_RMS": 0.0021147954995120906
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.3676075667687922,
+          "band_error_RMS": 0.005863447968720403,
+          "orthogonal_residual_RMS": 0.003827801839239772
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.6309597433777744,
+          "band_error_RMS": 0.011007409691965096,
+          "orthogonal_residual_RMS": 0.008701878581930477
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.6783887584701338,
+          "band_error_RMS": 0.01650056618335216,
+          "orthogonal_residual_RMS": 0.013395316687514609
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.7518082235231995,
+          "band_error_RMS": 0.014936329054910479,
+          "orthogonal_residual_RMS": 0.012640703760852799
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 37.751750771812425,
+      "sRGB_PSNR": 29.986583895026534,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.21276135374694594,
+          "band_error_RMS": 0.00414757023557916,
+          "orthogonal_residual_RMS": 0.0021501364246163195
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.3722865709422001,
+          "band_error_RMS": 0.005850566824833776,
+          "orthogonal_residual_RMS": 0.0038449931392071455
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.6289164563693028,
+          "band_error_RMS": 0.01100820475460003,
+          "orthogonal_residual_RMS": 0.008674315817721769
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.6770689865930122,
+          "band_error_RMS": 0.016496714328384177,
+          "orthogonal_residual_RMS": 0.013361009254413109
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.7496129478825697,
+          "band_error_RMS": 0.014939496120911508,
+          "orthogonal_residual_RMS": 0.012599811421188168
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 37.753695228096866,
+      "sRGB_PSNR": 29.990351094980994,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.2120743121720447,
+          "band_error_RMS": 0.004148522933190641,
+          "orthogonal_residual_RMS": 0.0021468264702485486
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.3736477783282422,
+          "band_error_RMS": 0.0058492321864110535,
+          "orthogonal_residual_RMS": 0.0038534495004096973
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.6295961584010734,
+          "band_error_RMS": 0.011002094879614593,
+          "orthogonal_residual_RMS": 0.008676514172487274
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.6772175923166386,
+          "band_error_RMS": 0.01649361441305457,
+          "orthogonal_residual_RMS": 0.013360564439941627
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.7494868795180026,
+          "band_error_RMS": 0.014929758419173086,
+          "orthogonal_residual_RMS": 0.012585706006581234
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 35.778382608430434,
+      "sRGB_PSNR": 28.015152820008513,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.18713055575625312,
+          "band_error_RMS": 0.0042089317184436734,
+          "orthogonal_residual_RMS": 0.002070364045350665
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.32447870393629386,
+          "band_error_RMS": 0.006209138037726174,
+          "orthogonal_residual_RMS": 0.004015128134661389
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.5028305029135183,
+          "band_error_RMS": 0.0124852141199111,
+          "orthogonal_residual_RMS": 0.00858486069561852
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.5365757044756866,
+          "band_error_RMS": 0.020416427036490353,
+          "orthogonal_residual_RMS": 0.014958930599621322
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.6152736008587745,
+          "band_error_RMS": 0.01910051781904866,
+          "orthogonal_residual_RMS": 0.01456954613984786
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 35.77388551378767,
+      "sRGB_PSNR": 28.016821198027316,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.18932642572438102,
+          "band_error_RMS": 0.0042181138690616776,
+          "orthogonal_residual_RMS": 0.002105910185059011
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.32444694583045025,
+          "band_error_RMS": 0.006207021316319445,
+          "orthogonal_residual_RMS": 0.004012195577959073
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.5021616722138074,
+          "band_error_RMS": 0.012478619892985784,
+          "orthogonal_residual_RMS": 0.00855791167832605
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.534954940634789,
+          "band_error_RMS": 0.020426199821078413,
+          "orthogonal_residual_RMS": 0.01492801567088669
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.6115210582442159,
+          "band_error_RMS": 0.019123872087823568,
+          "orthogonal_residual_RMS": 0.014496962218170015
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over8-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 35.77670920993766,
+      "sRGB_PSNR": 28.018940738517962,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.18838253890927284,
+          "band_error_RMS": 0.004220140592883738,
+          "orthogonal_residual_RMS": 0.002102476753632972
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.3247087448263913,
+          "band_error_RMS": 0.006208223006760472,
+          "orthogonal_residual_RMS": 0.004016265729171817
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.503684520070121,
+          "band_error_RMS": 0.01247928098968018,
+          "orthogonal_residual_RMS": 0.008588505946823635
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.5362301147742089,
+          "band_error_RMS": 0.020413926247227855,
+          "orthogonal_residual_RMS": 0.014946762821531569
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.6122913290931482,
+          "band_error_RMS": 0.019108616777557617,
+          "orthogonal_residual_RMS": 0.014498346211205305
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 33.54177853165436,
+      "sRGB_PSNR": 25.872076055199116,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.19373858763015056,
+          "band_error_RMS": 0.0044618207578742625,
+          "orthogonal_residual_RMS": 0.0025039484403434863
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.22984739222336154,
+          "band_error_RMS": 0.006672962563830662,
+          "orthogonal_residual_RMS": 0.003922424527702651
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.37544355397550616,
+          "band_error_RMS": 0.01447202452372793,
+          "orthogonal_residual_RMS": 0.008820900221268437
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.3875110911104508,
+          "band_error_RMS": 0.023481594571072614,
+          "orthogonal_residual_RMS": 0.014600730073239053
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.41344477511733396,
+          "band_error_RMS": 0.02386896942202173,
+          "orthogonal_residual_RMS": 0.014626387143465749
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 33.55073284225537,
+      "sRGB_PSNR": 25.871535541240426,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.19606250380559295,
+          "band_error_RMS": 0.004465072249425607,
+          "orthogonal_residual_RMS": 0.0025277402619313088
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.2282943312625725,
+          "band_error_RMS": 0.006668540663546508,
+          "orthogonal_residual_RMS": 0.0039018338911233513
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.37429930880721884,
+          "band_error_RMS": 0.014482949987541693,
+          "orthogonal_residual_RMS": 0.00881967228163661
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.38738992571282216,
+          "band_error_RMS": 0.02350061668551612,
+          "orthogonal_residual_RMS": 0.014627166022540973
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.41251737885985834,
+          "band_error_RMS": 0.023862798129535002,
+          "orthogonal_residual_RMS": 0.014574786732627893
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 33.554331182906765,
+      "sRGB_PSNR": 25.867569649006608,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.19541432455933427,
+          "band_error_RMS": 0.00447685603219106,
+          "orthogonal_residual_RMS": 0.0025405400800678733
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.228259923227757,
+          "band_error_RMS": 0.006682739708543086,
+          "orthogonal_residual_RMS": 0.003926194576721922
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.37651438101029755,
+          "band_error_RMS": 0.01447137687209387,
+          "orthogonal_residual_RMS": 0.008851378641950422
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.3901378473415715,
+          "band_error_RMS": 0.02349560661320892,
+          "orthogonal_residual_RMS": 0.014722481370218156
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.4153005663401234,
+          "band_error_RMS": 0.02383088172950454,
+          "orthogonal_residual_RMS": 0.014636552828106546
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 31.63599159102757,
+      "sRGB_PSNR": 24.2836828563664,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.10636521633242267,
+          "band_error_RMS": 0.004689475839735807,
+          "orthogonal_residual_RMS": 0.0023721307203288305
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.2562759219414177,
+          "band_error_RMS": 0.006646982386309258,
+          "orthogonal_residual_RMS": 0.0041203428418358935
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.2532878520813329,
+          "band_error_RMS": 0.015879974546015592,
+          "orthogonal_residual_RMS": 0.0080542848991849
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.2343095709352762,
+          "band_error_RMS": 0.02662118667558756,
+          "orthogonal_residual_RMS": 0.013353948611096607
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.21504587196278302,
+          "band_error_RMS": 0.028021510103762214,
+          "orthogonal_residual_RMS": 0.012213627003884444
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 31.62864101110845,
+      "sRGB_PSNR": 24.195214737748277,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.11534475158170748,
+          "band_error_RMS": 0.004696139274483884,
+          "orthogonal_residual_RMS": 0.0024501303282227203
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.2568416007428913,
+          "band_error_RMS": 0.006661061181108497,
+          "orthogonal_residual_RMS": 0.004142604272387636
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.25045783193447757,
+          "band_error_RMS": 0.01588431135735326,
+          "orthogonal_residual_RMS": 0.007988731032525585
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.2282439330594969,
+          "band_error_RMS": 0.026625857078572155,
+          "orthogonal_residual_RMS": 0.013083565987864896
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.2101764583894004,
+          "band_error_RMS": 0.02809328537504646,
+          "orthogonal_residual_RMS": 0.012067851100675016
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur-gain1over32-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 31.62942922816744,
+      "sRGB_PSNR": 24.189572846450826,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.11431077591976721,
+          "band_error_RMS": 0.004706092573095647,
+          "orthogonal_residual_RMS": 0.002462748534672839
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.25743831908296544,
+          "band_error_RMS": 0.0066757094970202185,
+          "orthogonal_residual_RMS": 0.004170606333303789
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.2530489043544115,
+          "band_error_RMS": 0.015894238393361404,
+          "orthogonal_residual_RMS": 0.008080133485662225
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.23112757451524574,
+          "band_error_RMS": 0.026631464416547006,
+          "orthogonal_residual_RMS": 0.013244748150045378
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.21353334831317025,
+          "band_error_RMS": 0.02805501890346645,
+          "orthogonal_residual_RMS": 0.012197977276362636
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.965039042591805,
+      "sRGB_PSNR": 28.58854501836764,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.4215774208738734,
+          "band_error_RMS": 0.007315753680559898,
+          "orthogonal_residual_RMS": 0.0057833757908602994
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.316369340082169,
+          "band_error_RMS": 0.009829370969340518,
+          "orthogonal_residual_RMS": 0.006167111993676602
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.4579881361753788,
+          "band_error_RMS": 0.01650962034670766,
+          "orthogonal_residual_RMS": 0.01163604680257676
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.5901494628456085,
+          "band_error_RMS": 0.01764814544500491,
+          "orthogonal_residual_RMS": 0.013358885759608346
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.96948869388236,
+      "sRGB_PSNR": 28.590166787224597,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.41658852817443953,
+          "band_error_RMS": 0.007320093424778465,
+          "orthogonal_residual_RMS": 0.005760685938191678
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.31579317315311467,
+          "band_error_RMS": 0.009826928282716148,
+          "orthogonal_residual_RMS": 0.006154104529164381
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.45757453470479453,
+          "band_error_RMS": 0.016500386122719972,
+          "orthogonal_residual_RMS": 0.011615200175196742
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.5908088204095969,
+          "band_error_RMS": 0.017641086826789693,
+          "orthogonal_residual_RMS": 0.01336731655789204
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.97046414577755,
+      "sRGB_PSNR": 28.591829476378702,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.41855536214595107,
+          "band_error_RMS": 0.007412592779583585,
+          "orthogonal_residual_RMS": 0.005887345061371602
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.3202306472013098,
+          "band_error_RMS": 0.009842915997988975,
+          "orthogonal_residual_RMS": 0.006239918481977731
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.4586430124710532,
+          "band_error_RMS": 0.016496532319096605,
+          "orthogonal_residual_RMS": 0.011632991638802145
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.5900853062321225,
+          "band_error_RMS": 0.017640413501304703,
+          "orthogonal_residual_RMS": 0.013349043894976579
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 34.50019770022052,
+      "sRGB_PSNR": 27.35055927037122,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.20705508357856683,
+          "band_error_RMS": 0.007428827907742886,
+          "orthogonal_residual_RMS": 0.004238643795734955
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.17216923854977348,
+          "band_error_RMS": 0.010536864622438035,
+          "orthogonal_residual_RMS": 0.004959613613583766
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.2681533235193038,
+          "band_error_RMS": 0.018983934275913363,
+          "orthogonal_residual_RMS": 0.010525191087004494
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.37447408687973865,
+          "band_error_RMS": 0.0216160007227077,
+          "orthogonal_residual_RMS": 0.01256391285085372
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 34.50291830004595,
+      "sRGB_PSNR": 27.353739612510523,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.2009063249988848,
+          "band_error_RMS": 0.007398036492994432,
+          "orthogonal_residual_RMS": 0.004137106276448624
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.1706895642635056,
+          "band_error_RMS": 0.010528567676030727,
+          "orthogonal_residual_RMS": 0.004919186537530731
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.265167355649305,
+          "band_error_RMS": 0.018982247501174998,
+          "orthogonal_residual_RMS": 0.010427644851410702
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.3729943989314265,
+          "band_error_RMS": 0.021611386173007882,
+          "orthogonal_residual_RMS": 0.012496681796031112
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over8-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 34.50432187419433,
+      "sRGB_PSNR": 27.355536133474416,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.20397786635850246,
+          "band_error_RMS": 0.007461654861508716,
+          "orthogonal_residual_RMS": 0.004267985332087288
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.17519872578742832,
+          "band_error_RMS": 0.010552481096801385,
+          "orthogonal_residual_RMS": 0.005058017152462157
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.26891098352026666,
+          "band_error_RMS": 0.018977689023378007,
+          "orthogonal_residual_RMS": 0.01054131754803285
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.3747432226184172,
+          "band_error_RMS": 0.02159952060399845,
+          "orthogonal_residual_RMS": 0.012546470745219467
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.198303199125164,
+      "sRGB_PSNR": 26.110692747876925,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.19423320038142364,
+          "band_error_RMS": 0.008754423351091703,
+          "orthogonal_residual_RMS": 0.006049314262412968
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.07649188207757911,
+          "band_error_RMS": 0.011172535697799638,
+          "orthogonal_residual_RMS": 0.0042131287893055905
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.11818959702444715,
+          "band_error_RMS": 0.020466772762678845,
+          "orthogonal_residual_RMS": 0.007503413651622539
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.1663147487722113,
+          "band_error_RMS": 0.025241615826711864,
+          "orthogonal_residual_RMS": 0.009308667549403736
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.19996173765387,
+      "sRGB_PSNR": 26.103842205060054,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.18770306490047964,
+          "band_error_RMS": 0.008627424332580182,
+          "orthogonal_residual_RMS": 0.005830146552759666
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.07455464952147463,
+          "band_error_RMS": 0.011162954364426018,
+          "orthogonal_residual_RMS": 0.004134615232485994
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.11617770808645916,
+          "band_error_RMS": 0.020459673363775004,
+          "orthogonal_residual_RMS": 0.0073777964706787874
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.16491802230586863,
+          "band_error_RMS": 0.025250191972065423,
+          "orthogonal_residual_RMS": 0.009238023131096723
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.20112547243096,
+      "sRGB_PSNR": 26.104443680396024,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.19264775127252268,
+          "band_error_RMS": 0.008765902092244374,
+          "orthogonal_residual_RMS": 0.006059085457708586
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.07790575694187601,
+          "band_error_RMS": 0.011200737217157808,
+          "orthogonal_residual_RMS": 0.004321091259343933
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.12104029044382586,
+          "band_error_RMS": 0.02046420319242818,
+          "orthogonal_residual_RMS": 0.00765372778368878
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.16902033727476867,
+          "band_error_RMS": 0.025218313844168474,
+          "orthogonal_residual_RMS": 0.009449445281481167
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 32.053229020435296,
+      "sRGB_PSNR": 25.01264195540432,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.08029751879791211,
+          "band_error_RMS": 0.007941442732509268,
+          "orthogonal_residual_RMS": 0.0034695074863057137
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.0203304102493014,
+          "band_error_RMS": 0.011354276226312018,
+          "orthogonal_residual_RMS": 0.0028785615932678033
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.02516801729337796,
+          "band_error_RMS": 0.021355351302262966,
+          "orthogonal_residual_RMS": 0.0035802607885499034
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.03361900209332319,
+          "band_error_RMS": 0.02748135570802484,
+          "orthogonal_residual_RMS": 0.004095571949362553
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 32.05737123289726,
+      "sRGB_PSNR": 24.956213937700973,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.0753736434430434,
+          "band_error_RMS": 0.007835289597328175,
+          "orthogonal_residual_RMS": 0.003203988640548295
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.018040296753828552,
+          "band_error_RMS": 0.011360344942190733,
+          "orthogonal_residual_RMS": 0.0027833241675779643
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.02149859710062678,
+          "band_error_RMS": 0.02136993660746481,
+          "orthogonal_residual_RMS": 0.0032258088155491644
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.030059241314898778,
+          "band_error_RMS": 0.027520137011100565,
+          "orthogonal_residual_RMS": 0.003741017997388691
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine-gain1over32-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 32.05806472308292,
+      "sRGB_PSNR": 24.952529155594068,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.076554671558397,
+          "band_error_RMS": 0.007895272130973501,
+          "orthogonal_residual_RMS": 0.0033429525771870015
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.018287358801447405,
+          "band_error_RMS": 0.011387582480032826,
+          "orthogonal_residual_RMS": 0.0028965780025665545
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.022508915247149944,
+          "band_error_RMS": 0.02136908712839685,
+          "orthogonal_residual_RMS": 0.0033571384685334524
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.03130077262874237,
+          "band_error_RMS": 0.027503144378898836,
+          "orthogonal_residual_RMS": 0.003859705691756316
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 38.48219312661166,
+      "sRGB_PSNR": 30.219282780726754,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.4707119942734729,
+          "band_error_RMS": 0.002883934448208679,
+          "orthogonal_residual_RMS": 0.0020577923200516637
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.2712896072067977,
+          "band_error_RMS": 0.00387162822506621,
+          "orthogonal_residual_RMS": 0.0026022843831597334
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.5332771636654021,
+          "band_error_RMS": 0.010157218351821158,
+          "orthogonal_residual_RMS": 0.007674495243835211
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.6743481440070053,
+          "band_error_RMS": 0.012788505241009938,
+          "orthogonal_residual_RMS": 0.010283127457192705
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 38.49436342744403,
+      "sRGB_PSNR": 30.229468370221923,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.4547793893784653,
+          "band_error_RMS": 0.0029002528891983095,
+          "orthogonal_residual_RMS": 0.002033222820269843
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.2673398404489944,
+          "band_error_RMS": 0.0038763462612664405,
+          "orthogonal_residual_RMS": 0.002594721732827453
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.5337086704620019,
+          "band_error_RMS": 0.010156444404980277,
+          "orthogonal_residual_RMS": 0.007678714336363131
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.67498601504404,
+          "band_error_RMS": 0.012783270736463737,
+          "orthogonal_residual_RMS": 0.0102881031414233
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 38.49324910197895,
+      "sRGB_PSNR": 30.226217452292374,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.45707352285320124,
+          "band_error_RMS": 0.002925893030964619,
+          "orthogonal_residual_RMS": 0.0020765610316596946
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.27038867828947233,
+          "band_error_RMS": 0.0038999588880530706,
+          "orthogonal_residual_RMS": 0.0026427154746112833
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.5338776711530969,
+          "band_error_RMS": 0.010157226295936779,
+          "orthogonal_residual_RMS": 0.007681735765650587
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.6745083511445696,
+          "band_error_RMS": 0.012789237643371504,
+          "orthogonal_residual_RMS": 0.010287368328377094
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 36.77260034096237,
+      "sRGB_PSNR": 28.44899046907073,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.3594371945859569,
+          "band_error_RMS": 0.003514460871872572,
+          "orthogonal_residual_RMS": 0.002586870817886485
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.17389714721362978,
+          "band_error_RMS": 0.004081216223976739,
+          "orthogonal_residual_RMS": 0.0024979348908880255
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.3544257226572511,
+          "band_error_RMS": 0.011779307412382986,
+          "orthogonal_residual_RMS": 0.0073543528579740735
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.5208651841615662,
+          "band_error_RMS": 0.015955565583801526,
+          "orthogonal_residual_RMS": 0.011334204889543318
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 36.78448959193104,
+      "sRGB_PSNR": 28.454784618686105,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.35312643797153714,
+          "band_error_RMS": 0.0035075812470044022,
+          "orthogonal_residual_RMS": 0.0025643488030303294
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.16608854213562252,
+          "band_error_RMS": 0.0040646881298319545,
+          "orthogonal_residual_RMS": 0.0024377497293888817
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.35603650066418757,
+          "band_error_RMS": 0.011774214476178818,
+          "orthogonal_residual_RMS": 0.0073758163105170915
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.5228171701212909,
+          "band_error_RMS": 0.01595325752914277,
+          "orthogonal_residual_RMS": 0.01137635183833325
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over8-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 36.782949671058844,
+      "sRGB_PSNR": 28.450912978664753,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.35592951773187215,
+          "band_error_RMS": 0.0035466269636180475,
+          "orthogonal_residual_RMS": 0.0026263229006835724
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.16756020438074992,
+          "band_error_RMS": 0.0040920719727463055,
+          "orthogonal_residual_RMS": 0.0024907783273386353
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.3583495732234711,
+          "band_error_RMS": 0.011781965197113749,
+          "orthogonal_residual_RMS": 0.007428983642591215
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.5234536567542035,
+          "band_error_RMS": 0.015966927287613737,
+          "orthogonal_residual_RMS": 0.011410503991493152
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso6400-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.17740882202293,
+      "sRGB_PSNR": 26.805149699917592,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.13006355919164111,
+          "band_error_RMS": 0.003949751623222799,
+          "orthogonal_residual_RMS": 0.0023604390969958105
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.11902626139417714,
+          "band_error_RMS": 0.00385538918661871,
+          "orthogonal_residual_RMS": 0.0017504011337133197
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.16733795935418244,
+          "band_error_RMS": 0.0132161494255615,
+          "orthogonal_residual_RMS": 0.005801041406700919
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.2822594489179834,
+          "band_error_RMS": 0.019103533828160466,
+          "orthogonal_residual_RMS": 0.009038075202500386
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso6400-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.20598755272889,
+      "sRGB_PSNR": 26.80943522325093,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.13516479867522435,
+          "band_error_RMS": 0.003965868680011424,
+          "orthogonal_residual_RMS": 0.002413890312967408
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.11983409906128342,
+          "band_error_RMS": 0.003875240222507453,
+          "orthogonal_residual_RMS": 0.0017960801229802707
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.17321344618451132,
+          "band_error_RMS": 0.013194715947093146,
+          "orthogonal_residual_RMS": 0.005917814835554187
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.28822194896417663,
+          "band_error_RMS": 0.0190420917213202,
+          "orthogonal_residual_RMS": 0.00914512907452626
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso6400-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 35.208301896115245,
+      "sRGB_PSNR": 26.814892319399057,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.13694357266606133,
+          "band_error_RMS": 0.003991398162475131,
+          "orthogonal_residual_RMS": 0.0024630300592253665
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.12145735520535465,
+          "band_error_RMS": 0.003889036377022561,
+          "orthogonal_residual_RMS": 0.0018348881933903923
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.17617554664008178,
+          "band_error_RMS": 0.013194852091389767,
+          "orthogonal_residual_RMS": 0.006001933167059709
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.29015366329639247,
+          "band_error_RMS": 0.019035896080252745,
+          "orthogonal_residual_RMS": 0.009216164643311408
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso12800-prior",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.500117609669275,
+      "sRGB_PSNR": 24.343674585526596,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.04433489182136751,
+          "band_error_RMS": 0.0038882293522854937,
+          "orthogonal_residual_RMS": 0.001716262520631757
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.03725242570697013,
+          "band_error_RMS": 0.004104477458401545,
+          "orthogonal_residual_RMS": 0.0016675287965843156
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.04450595489652069,
+          "band_error_RMS": 0.014137426017686217,
+          "orthogonal_residual_RMS": 0.003812625964739311
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.07107781768946894,
+          "band_error_RMS": 0.0221448968479757,
+          "orthogonal_residual_RMS": 0.004481159316163529
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso12800-prior",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.541273794637846,
+      "sRGB_PSNR": 24.413993527714318,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.04391519535471523,
+          "band_error_RMS": 0.003902521784871754,
+          "orthogonal_residual_RMS": 0.0017519791790341012
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.03818494920819418,
+          "band_error_RMS": 0.004112617242508942,
+          "orthogonal_residual_RMS": 0.0016951122832509153
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.04553134049888121,
+          "band_error_RMS": 0.014134592428519992,
+          "orthogonal_residual_RMS": 0.003847600614443913
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.0752102546613957,
+          "band_error_RMS": 0.022080121646885578,
+          "orthogonal_residual_RMS": 0.00462736956347363
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field-gain1over32-iso12800-prior",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 33.539551835868956,
+      "sRGB_PSNR": 24.406084089753193,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.043064181137037034,
+          "band_error_RMS": 0.003925522448097409,
+          "orthogonal_residual_RMS": 0.0017950108282321262
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.03764921228379596,
+          "band_error_RMS": 0.00412578094290816,
+          "orthogonal_residual_RMS": 0.0017214305912253158
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.04648545263855755,
+          "band_error_RMS": 0.014140311520692483,
+          "orthogonal_residual_RMS": 0.003913670440087988
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.0768606935803748,
+          "band_error_RMS": 0.022066390985016435,
+          "orthogonal_residual_RMS": 0.004734884473374291
+        }
+      ]
+    },
+    {
+      "case": "bark",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 32.33518104282042,
+      "sRGB_PSNR": 30.029878441836324,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.9412196318576405,
+          "band_error_RMS": 0.019661650509304063,
+          "orthogonal_residual_RMS": 0.019246533824499094
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.9695965997179044,
+          "band_error_RMS": 0.018222279396556944,
+          "orthogonal_residual_RMS": 0.01802619392303556
+        }
+      ]
+    },
+    {
+      "case": "bark",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 32.33618648577492,
+      "sRGB_PSNR": 30.03049490292066,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.9407219139681384,
+          "band_error_RMS": 0.01965535385408447,
+          "orthogonal_residual_RMS": 0.019233623943224365
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.9694084690975149,
+          "band_error_RMS": 0.018223407806961696,
+          "orthogonal_residual_RMS": 0.018024952544296275
+        }
+      ]
+    },
+    {
+      "case": "bark",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 32.33650819548369,
+      "sRGB_PSNR": 30.030610598894413,
+      "bands": [
+        {
+          "bin": 3,
+          "blocks": 4,
+          "gain": 0.94030432948136,
+          "band_error_RMS": 0.01965222566987135,
+          "orthogonal_residual_RMS": 0.019224687422026505
+        },
+        {
+          "bin": 4,
+          "blocks": 96,
+          "gain": 0.9691425598185737,
+          "band_error_RMS": 0.01822219472130234,
+          "orthogonal_residual_RMS": 0.018020233889330863
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 41.70268155941531,
+      "sRGB_PSNR": 33.975222740100605,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.3248418765197911,
+          "band_error_RMS": 0.0038047492626457785,
+          "orthogonal_residual_RMS": 0.002284442504630978
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.5945926784485918,
+          "band_error_RMS": 0.004970838767463244,
+          "orthogonal_residual_RMS": 0.004081799380780761
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.8180653622209018,
+          "band_error_RMS": 0.0072743575601356475,
+          "orthogonal_residual_RMS": 0.006476551339012363
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.8742042618022013,
+          "band_error_RMS": 0.010183751164002663,
+          "orthogonal_residual_RMS": 0.009457206375582079
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.9171403346753977,
+          "band_error_RMS": 0.008630773628439083,
+          "orthogonal_residual_RMS": 0.008208686658077185
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 41.69780817916812,
+      "sRGB_PSNR": 33.971875411260214,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.32853174999600365,
+          "band_error_RMS": 0.003803951636601638,
+          "orthogonal_residual_RMS": 0.002304521638094543
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.6025537680967403,
+          "band_error_RMS": 0.0049644862055507,
+          "orthogonal_residual_RMS": 0.00411221463536718
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.8179590350124222,
+          "band_error_RMS": 0.007286485736442233,
+          "orthogonal_residual_RMS": 0.0064885754747882555
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.8732759216466472,
+          "band_error_RMS": 0.010177180661423074,
+          "orthogonal_residual_RMS": 0.00943966330247266
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.9152427442954374,
+          "band_error_RMS": 0.008639117030192045,
+          "orthogonal_residual_RMS": 0.008197365367694307
+        }
+      ]
+    },
+    {
+      "case": "raccoon-fur",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Exact synthetic target retained by original Commons evaluation; processed/binned photographic source",
+      "camera_RGB_PSNR": 41.69641264852497,
+      "sRGB_PSNR": 33.971919408876225,
+      "bands": [
+        {
+          "bin": 0,
+          "blocks": 7,
+          "gain": 0.3280066171516908,
+          "band_error_RMS": 0.003805020573517302,
+          "orthogonal_residual_RMS": 0.00230308154608592
+        },
+        {
+          "bin": 1,
+          "blocks": 5,
+          "gain": 0.6038875953619044,
+          "band_error_RMS": 0.004966718241703439,
+          "orthogonal_residual_RMS": 0.004121131069319449
+        },
+        {
+          "bin": 2,
+          "blocks": 11,
+          "gain": 0.8179090194167216,
+          "band_error_RMS": 0.00728814541344419,
+          "orthogonal_residual_RMS": 0.006489971486210359
+        },
+        {
+          "bin": 3,
+          "blocks": 13,
+          "gain": 0.8729665408640674,
+          "band_error_RMS": 0.010178237411032996,
+          "orthogonal_residual_RMS": 0.009437057510596628
+        },
+        {
+          "bin": 4,
+          "blocks": 44,
+          "gain": 0.9148973185181534,
+          "band_error_RMS": 0.008639421023834696,
+          "orthogonal_residual_RMS": 0.008194002683042028
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 39.39540462186558,
+      "sRGB_PSNR": 31.434981360890582,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.6914806136447271,
+          "band_error_RMS": 0.005756408302093518,
+          "orthogonal_residual_RMS": 0.005242024878586804
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.5901444207253532,
+          "band_error_RMS": 0.00735677252425374,
+          "orthogonal_residual_RMS": 0.005730948465404727
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.7703324510818194,
+          "band_error_RMS": 0.01090797259006777,
+          "orthogonal_residual_RMS": 0.009707686352106431
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.8644223285189023,
+          "band_error_RMS": 0.010722843244930558,
+          "orthogonal_residual_RMS": 0.010022304308508164
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 39.40044997439635,
+      "sRGB_PSNR": 31.44183077330193,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.6808223351028811,
+          "band_error_RMS": 0.005691322505782288,
+          "orthogonal_residual_RMS": 0.005132552701431682
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.5873159599333497,
+          "band_error_RMS": 0.007357595985455975,
+          "orthogonal_residual_RMS": 0.005705358763836203
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.7688488325970555,
+          "band_error_RMS": 0.010905784884872446,
+          "orthogonal_residual_RMS": 0.009689838557820128
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.8639485766533951,
+          "band_error_RMS": 0.01072253526089992,
+          "orthogonal_residual_RMS": 0.010017393422873085
+        }
+      ]
+    },
+    {
+      "case": "pixls-5002-fine",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 39.400059983520386,
+      "sRGB_PSNR": 31.441661047663466,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 3,
+          "gain": 0.682906027913375,
+          "band_error_RMS": 0.005717620043995347,
+          "orthogonal_residual_RMS": 0.005168672668181468
+        },
+        {
+          "bin": 2,
+          "blocks": 22,
+          "gain": 0.588067098565189,
+          "band_error_RMS": 0.007360931810998556,
+          "orthogonal_residual_RMS": 0.00571659035806727
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.7681427063017647,
+          "band_error_RMS": 0.010904562488140625,
+          "orthogonal_residual_RMS": 0.009680659638438522
+        },
+        {
+          "bin": 4,
+          "blocks": 27,
+          "gain": 0.8631876162738342,
+          "band_error_RMS": 0.01072274312250453,
+          "orthogonal_residual_RMS": 0.010009464829015213
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field",
+      "method": "V120",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 42.31633833541975,
+      "sRGB_PSNR": 33.776970909799196,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.6573247696303274,
+          "band_error_RMS": 0.0022114829969920235,
+          "orthogonal_residual_RMS": 0.0018200811268811986
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.5346800713843458,
+          "band_error_RMS": 0.0029267683978712296,
+          "orthogonal_residual_RMS": 0.00230086171474384
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.80977977690467,
+          "band_error_RMS": 0.00660944318222047,
+          "orthogonal_residual_RMS": 0.006027133724652142
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.8830480125998837,
+          "band_error_RMS": 0.00787427295616288,
+          "orthogonal_residual_RMS": 0.007384923570487463
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field",
+      "method": "V126 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 42.323226363463235,
+      "sRGB_PSNR": 33.79025718944768,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.6434139419818067,
+          "band_error_RMS": 0.002215712048803765,
+          "orthogonal_residual_RMS": 0.0017896650383031054
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.5318298064829717,
+          "band_error_RMS": 0.002927589382595119,
+          "orthogonal_residual_RMS": 0.002292874465177567
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.8078276228271905,
+          "band_error_RMS": 0.0066043020127025814,
+          "orthogonal_residual_RMS": 0.006008833505631424
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.8814520751311924,
+          "band_error_RMS": 0.007876763644245537,
+          "orthogonal_residual_RMS": 0.0073734917592680254
+        }
+      ]
+    },
+    {
+      "case": "pixls-1951-field",
+      "method": "V128 1k EMA",
+      "CFA_patterns": 4,
+      "draws_per_CFA": 1,
+      "reference_role": "Binned low-noise camera-RGB reference estimate, not exact noiseless GT",
+      "camera_RGB_PSNR": 42.32268226202696,
+      "sRGB_PSNR": 33.78969699744225,
+      "bands": [
+        {
+          "bin": 1,
+          "blocks": 9,
+          "gain": 0.6451092121770495,
+          "band_error_RMS": 0.0022216541962550196,
+          "orthogonal_residual_RMS": 0.0018014700361691526
+        },
+        {
+          "bin": 2,
+          "blocks": 8,
+          "gain": 0.5340016305480169,
+          "band_error_RMS": 0.0029340561411702686,
+          "orthogonal_residual_RMS": 0.0023077409831889378
+        },
+        {
+          "bin": 3,
+          "blocks": 48,
+          "gain": 0.8073796618033111,
+          "band_error_RMS": 0.006603012822109079,
+          "orthogonal_residual_RMS": 0.006004501750079895
+        },
+        {
+          "bin": 4,
+          "blocks": 33,
+          "gain": 0.881083674014284,
+          "band_error_RMS": 0.007876667585538642,
+          "orthogonal_residual_RMS": 0.007370175251952556
+        }
+      ]
+    }
+  ],
+  "images_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v128-feature-pilot-quality-v1/manifest.json",
+    "sha256": "ad5d802ed48d664431d462916c8b293ad4edc7f137ee03c02430ffc838b9039d"
+  },
+  "new_candidate_inference_forwards": 86,
+  "repeated_control_inference_forwards": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "scope": "Single weight.1 feature-loss pilot, fresh1000 updates fromV120 including399+601 exact continuation. Four heldout material sources,20 target/noise groups; not427 photos/all-camera or general architecture conclusion."
+}

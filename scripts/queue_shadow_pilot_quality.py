@@ -20,7 +20,10 @@ def prepare(root, inputs_path, training_path, arms=None, matched_control_collect
     guard(inputs)
     guard(training)
     status = read(Path(training["root"]) / "status.json")
-    assert status["plan"] == ref(training_path) and live(status["controller"])
+    assert status["plan"] == ref(training_path)
+    if not live(status["controller"]):
+        assert status["status"] == "completed-training-awaiting-model-comparisons"
+        assert status.get("child") is None or not live(status["child"])
     assert len(inputs["shadow_observations"]) == 64
     assert len(inputs["retained_observations"]) == 22
     baseline_path = Path(inputs["root"]) / "baseline-V120/collection-v1.json"
@@ -112,7 +115,7 @@ def controller(path):
                 raise RuntimeError("Original pilot training failed; preserve all work")
             if not live(plan["training_owner"]):
                 assert status["status"] == "completed-training-awaiting-model-comparisons"
-                assert not live(status["child"])
+                assert status.get("child") is None or not live(status["child"])
                 break
             time.sleep(15)
         inputs = read(plan["input_plan"]["path"])

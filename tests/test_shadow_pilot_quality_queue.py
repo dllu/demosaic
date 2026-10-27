@@ -138,6 +138,21 @@ def test_one_new_candidate_collects_without_repeating_retained_control(tmp_path,
     assert not (path.parent / "V126/actual-fixture-call").exists()
 
 
+def test_completed_continuation_without_child_record_collects_once(tmp_path, monkeypatch):
+    path, training = fixture(tmp_path)
+    status_path = training / "status.json"
+    status = json.loads(status_path.read_text())
+    status["child"] = None
+    save(status_path, status)
+    monkeypatch.setattr(
+        queue.psutil, "virtual_memory", lambda: SimpleNamespace(available=80 * 2**30)
+    )
+    queue.controller(path)
+    state = json.loads((path.parent / "status.json").read_text())
+    assert set(state["completed"]) == {"V126", "V127"}
+    assert len(list(path.parent.glob("*/actual-fixture-call"))) == 2
+
+
 @pytest.mark.parametrize("status", ["failed-fixture", "running-quality-training"])
 def test_failed_or_prematurely_exited_training_never_collects(tmp_path, status):
     path, _ = fixture(tmp_path, status)

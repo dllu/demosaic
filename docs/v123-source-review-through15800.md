@@ -127,5 +127,7 @@ Curation and reader work generate no noise, RAW decode or optimizer update.
 
 The retained cache root is
 `.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/`.
-The future cohort is prepared and untrained. Current training recipes, loss
-weights, sampler quotas and frozen machine receipts are unchanged.
+[V129 now tests this prepared cohort](reviewed-detail-training-pilot.md), with
+learned quality unmeasured. Earlier experiment recipes and frozen receipts remain
+unchanged. The catalogue retains its original preparation-status text because
+the V129 plan binds those bytes; actual pilot status is documented separately.
