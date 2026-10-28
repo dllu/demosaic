@@ -57,6 +57,7 @@ updates the current guides without an old promotion gate.
 | Spatial-trial control progress | [V131 retained1k/20k review](v131-progress1000-quality.md): tiny ordinary gain, deeper-shadow/faint regressions and no clear new mesh recovery; native triplets, both GFX pairs and corrected DSCF3835 camera-JPEG comparisons. Original20k training continues; V132 follows |
 | Completed global-conditioning pilot | [V137 measured quality, native triplets and both GFX pairs](v137-global-conditioned-quality.md): stronger memory adaptation, faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and no clear new fine-mesh recovery. [Operator and mechanism](raw-global-conditioning.md) |
 | Global-branch training | [V138 frozen-parent pilot](raw-global-only-training.md): CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR and1k quality review are queued after V125 completes; quality is unmeasured |
+| Trained global-memory contribution | [V137 feature-level ablation](global-memory-contribution.md): removing memory write changes0.83–1.39% of branch-offset RMS on six contexts. Independent attention/array audit complete; same-input V138 companion queued after its original quality/faint reviews |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 
 Per-experiment reports contain numerical evidence, source/ROI metadata,

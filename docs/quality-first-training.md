@@ -20,6 +20,12 @@ retain their declared cohorts.
 | [V137 global conditioning](v137-global-conditioned-quality.md) | Same90,782/27,18 tensors and1k as V136; only matching/value normalization changes | Complete102-input four-method review: faint ADC+.0334dB, ordinary/shadows−.0005–.0044dB; stronger adaptation, mixed local detail and no clear new fine-mesh recovery. Independent audits and38 actual native views complete |
 | [V138 frozen-parent global branch](raw-global-only-training.md) | Same90,782/27 and1k as V137; freeze91 parent tensors and train18 branch tensors at LR1e−3 | Genuine CPU/CUDA16+2 checks pass with exact parent model/EMA. Production and102-input review wait for V125 completion; quality is unmeasured |
 
+The [trained V137 memory-write diagnostic](global-memory-contribution.md) finds
+only0.83–1.39% change in added branch-offset RMS when memory is removed on six
+retained contexts. This is a feature intervention, not final-RGB quality. A
+bounded V138 companion will check the same mechanism after its existing primary/
+faint reviews, reusing V137 controls and adding no full-model/DINO calls or training.
+
 The spatial trial's live early-review queue uses immutable step1,000 snapshots
 within the original20k workers. Each gets102 retained material/shadow/faint-ADC
 and real-scene inputs, with saved V120 controls reused. A separate full-endpoint

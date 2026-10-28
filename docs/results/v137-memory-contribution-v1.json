@@ -1,0 +1,245 @@
+{
+  "status": "completed-V137-trained-memory-feature-diagnostic-V138-comparison-queued",
+  "recorded_local": "2026-10-27T18:08:11.056751-07:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/plan-v1.json",
+    "sha256": "c8ca530d3e33fb21db1ca22ad7428eb7cca9631f390ae3a5cde64cade3aeaeb6"
+  },
+  "measured_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/result-v1.json",
+    "sha256": "241a66611845a3b97890f81bcd8b112f52a4f10265072946a706b7f93a0a0950"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-conditioned-quality-v1/V137-step1000-inference.pt",
+    "sha256": "5f7473dbd040326cdfb1a9cd326571388863024d789651cdc5194cb9d33229dd"
+  },
+  "training_step": 1000,
+  "training_horizon": 1000,
+  "weights": "EMA",
+  "actual_counts": {
+    "branch_forwards": 12,
+    "branch_backwards": 12,
+    "attention_softmaxes": 24
+  },
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/audit-v2.json",
+    "sha256": "7fe2343b6e32be1d19e9e40551002393134e894fc44d4b61cfd57709806d0940"
+  },
+  "independent_audit_summary": {
+    "status": "passed-independent-V137-trained-memory-mechanism-audit",
+    "audit_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/audit-plan-v2.json",
+      "sha256": "8fe2b75a0204fefcb3d4bef84b959e4096042f61c5710f0f2be0c8c5d3ee94c5"
+    },
+    "result": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/result-v1.json",
+      "sha256": "241a66611845a3b97890f81bcd8b112f52a4f10265072946a706b7f93a0a0950"
+    },
+    "trained_branch_state_values_exact": 18272,
+    "independent_scalar_fields": 354,
+    "maximum_saved_scalar_reduction_difference": 2.9366191691825123e-15,
+    "independently_checked_attention_weights": 50331648,
+    "independently_checked_attention_output_values": 3158016,
+    "maximum_attention_weight_absolute_error": 9.186307195485632e-08,
+    "maximum_attention_output_absolute_error": 3.159368789140693e-06,
+    "maximum_weighted_dot_error_fraction_of_analytic_bound": 0.06452171377724526,
+    "preserved_first_audit_failure": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/audit-correction-v1.json",
+      "sha256": "efe4bdc8fe7f04c786a59f7aa3c43d0a129368d0ccd60ca9a0da34572155d62b"
+    },
+    "maximum_attention_statistic_formula_difference": 7.019100289884506e-07,
+    "retained_gradient_values_reduced": 219264,
+    "retained_offset_values_reduced": 50331648,
+    "ablated12_memory_parameter_gradients_zero_all6": true,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "optimizer_updates": 0,
+    "CUDA_initialized": false,
+    "scope": "Independent NumPy FP64 cosine softmax/weighted values, all saved weight arrays, scalar offset/ablation/probe/context/gradient reductions; Torch only reads18 trained EMA tensors. No new neural work or RGB quality evidence. Does not independently differentiate the complete backward graph."
+  },
+  "preserved_first_audit_failure_and_bound_derivation": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/audit-correction-v1.json",
+    "sha256": "efe4bdc8fe7f04c786a59f7aa3c43d0a129368d0ccd60ca9a0da34572155d62b"
+  },
+  "numeric_table": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v137-memory-contribution-v1.csv",
+    "sha256": "1c412d0e74b5bdfee88b7fc13f73ec08184aae5a620e9242491b56fe62318dad"
+  },
+  "probe_gradients_table": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v137-memory-probe-gradients-v1.csv",
+    "sha256": "5315beea1fb7c8e3dc0a0788039c74745da4bbccdb0ac543aaab015be883a707"
+  },
+  "rows": [
+    {
+      "sample": "commons-step1-index0",
+      "domain": "commons",
+      "step": 1,
+      "batch_index": 0,
+      "full_branch_offset_RMS": 1.3268162668668382e-05,
+      "memory_write_effect_RMS": 1.1015302672666067e-07,
+      "memory_write_effect_centered_spatial_RMS": 1.0698575941848706e-07,
+      "effect_RMS_over_full_offset_RMS": 0.008302055791551117,
+      "read_entropy_over_logN": 0.9656176339831485,
+      "write_entropy_over_logN": 0.903496578860724,
+      "full_and_ablated_offset_cosine": 0.9999656595894615
+    },
+    {
+      "sample": "commons-step1-index1",
+      "domain": "commons",
+      "step": 1,
+      "batch_index": 1,
+      "full_branch_offset_RMS": 1.9113132025433187e-05,
+      "memory_write_effect_RMS": 2.215601233133921e-07,
+      "memory_write_effect_centered_spatial_RMS": 2.1689642998106247e-07,
+      "effect_RMS_over_full_offset_RMS": 0.011592036460511532,
+      "read_entropy_over_logN": 0.9657843186023303,
+      "write_entropy_over_logN": 0.9045865714197971,
+      "full_and_ablated_offset_cosine": 0.9999333239493443
+    },
+    {
+      "sample": "native-step2-index0",
+      "domain": "native",
+      "step": 2,
+      "batch_index": 0,
+      "full_branch_offset_RMS": 5.4942258453929135e-06,
+      "memory_write_effect_RMS": 7.639625915625903e-08,
+      "memory_write_effect_centered_spatial_RMS": 7.13236727631756e-08,
+      "effect_RMS_over_full_offset_RMS": 0.013904826868433114,
+      "read_entropy_over_logN": 0.975695792697149,
+      "write_entropy_over_logN": 0.8926821170847117,
+      "full_and_ablated_offset_cosine": 0.9999034233582524
+    },
+    {
+      "sample": "native-step2-index1",
+      "domain": "native",
+      "step": 2,
+      "batch_index": 1,
+      "full_branch_offset_RMS": 4.6391855706793835e-06,
+      "memory_write_effect_RMS": 5.0014815283954e-08,
+      "memory_write_effect_centered_spatial_RMS": 4.4709439358433305e-08,
+      "effect_RMS_over_full_offset_RMS": 0.01078094732835393,
+      "read_entropy_over_logN": 0.9805185076260831,
+      "write_entropy_over_logN": 0.9147017290623063,
+      "full_and_ablated_offset_cosine": 0.9999418895209201
+    },
+    {
+      "sample": "paired-step5-index0",
+      "domain": "paired",
+      "step": 5,
+      "batch_index": 0,
+      "full_branch_offset_RMS": 7.190268844915324e-06,
+      "memory_write_effect_RMS": 9.008158791685068e-08,
+      "memory_write_effect_centered_spatial_RMS": 8.648769304347128e-08,
+      "effect_RMS_over_full_offset_RMS": 0.012528264222074651,
+      "read_entropy_over_logN": 0.9662003656816163,
+      "write_entropy_over_logN": 0.9062977111798032,
+      "full_and_ablated_offset_cosine": 0.9999229644516053
+    },
+    {
+      "sample": "paired-step5-index1",
+      "domain": "paired",
+      "step": 5,
+      "batch_index": 1,
+      "full_branch_offset_RMS": 9.887070397207187e-06,
+      "memory_write_effect_RMS": 1.3747323392997312e-07,
+      "memory_write_effect_centered_spatial_RMS": 1.3182709392289528e-07,
+      "effect_RMS_over_full_offset_RMS": 0.013904344604323375,
+      "read_entropy_over_logN": 0.9653557161049446,
+      "write_entropy_over_logN": 0.9110094443648724,
+      "full_and_ablated_offset_cosine": 0.9999046939537928
+    }
+  ],
+  "branch_weights_unchanged": true,
+  "Python_NumPy_Torch_RNG_unchanged": true,
+  "CUDA_initialized": false,
+  "exact_trained_branch_sources": [
+    {
+      "trained": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-conditioned-pilot-v1/run/work/src/demosaic/__init__.py",
+        "sha256": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d"
+      },
+      "diagnostic": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/work/src/demosaic/__init__.py",
+        "sha256": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d"
+      }
+    },
+    {
+      "trained": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-conditioned-pilot-v1/run/work/src/demosaic/precision.py",
+        "sha256": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4"
+      },
+      "diagnostic": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/work/src/demosaic/precision.py",
+        "sha256": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4"
+      }
+    },
+    {
+      "trained": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-conditioned-pilot-v1/run/work/src/demosaic/raw_global_features.py",
+        "sha256": "e0795f965bbe0bcfe19abc89dce732994b4c12a164cafa49e381d25a065315ea"
+      },
+      "diagnostic": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/work/src/demosaic/raw_global_features.py",
+        "sha256": "e0795f965bbe0bcfe19abc89dce732994b4c12a164cafa49e381d25a065315ea"
+      }
+    },
+    {
+      "trained": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-conditioned-pilot-v1/run/work/src/demosaic/raw_global_conditioned_features.py",
+        "sha256": "64dbb55240c6d31b54cc1a01d6260549d95e25ad71a78168a1c26679aea78059"
+      },
+      "diagnostic": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V137-trained-memory-mechanism-v1/work/src/demosaic/raw_global_conditioned_features.py",
+        "sha256": "64dbb55240c6d31b54cc1a01d6260549d95e25ad71a78168a1c26679aea78059"
+      }
+    }
+  ],
+  "distinct_training_contexts": 6,
+  "training_domains": {
+    "commons": 2,
+    "native": 2,
+    "paired": 2
+  },
+  "attention_comparison": "Read/write arguments, weights and attention outputs are exactly identical between full and ablated branches; only write_out output becomes zero before local residual/FF. Twelve saved memory-parameter gradients become zero in all six ablations; retained gradients are independently reduced, not an independent complete backprop derivation.",
+  "future_V138_policy": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V138-trained-memory-mechanism-v1/queue-policy-v1.json",
+    "sha256": "d47b275d56adfafff73e13057233225669ced675cc857578ac0b0b022d0b7b04"
+  },
+  "future_V138_preflight": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V138-trained-memory-mechanism-v1/prospective-preflight-v1.json",
+    "sha256": "8d342471355174f715e3f1e1382ee75b0443c1855b5a636412c3a0b0a6e49377"
+  },
+  "future_V138_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V138-trained-memory-mechanism-v1/launch-v1.json",
+    "sha256": "3399c68a2276898cf0423dc7e70a025a0ad09609698482a1bc89a5be1fc28ad0"
+  },
+  "future_V138_owner": {
+    "pid": 3044042,
+    "created": 1793149563.82
+  },
+  "future_V138_prospective_counts": {
+    "branch_forwards": 12,
+    "branch_backwards": 12,
+    "attention_softmaxes": 24,
+    "root_forwards": 0,
+    "encoder_forwards": 0,
+    "VST_calls": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "optimizer_updates": 0
+  },
+  "future_V138_unchanged_absolute_deadline_unix": 1793761357.0,
+  "source_availability_check": {
+    "path": "/home/dllu/proj/demosaic/docs/results/sg-jdd-availability-20261027-v1.json",
+    "sha256": "4162bb3012ac1cda20677560af1ac9f16529bad711adb5e6b22bfd2e9c0e1098"
+  },
+  "new_root_forwards": 0,
+  "new_encoder_forwards": 0,
+  "VST_calls": 0,
+  "target_arrays_read": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "optimizer_updates": 0,
+  "scope": "Six deliberate retained training-domain branch contexts, fixed V1371k EMA and exact4-module trained branch source. Twelve new branch forwards/backwards and24 attention softmaxes are diagnostic-only, with no root/CNN/DINO/VST, target, noise, RAW or optimizer work. Removing memory write changes branch-feature offset RMS by0.83-1.39%; this is neither a nonlocal energy fraction nor an effect on final RGB/PSNR/real mesh. Independent50,331,648 weights/3,158,016 weighted outputs,354 scalar fields and18,272 trained state values. Initial strict near-cancellation audit failure and corrected analytical FP32 accumulation bound preserved. V138 future12-call mechanism comparison waits original primary/faint quality completion/exit, reuses all V137 controls, preserves original deadline and all existing training/full-quality budgets. V120 general recommendation unchanged."
+}

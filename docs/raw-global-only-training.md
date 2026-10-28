@@ -104,3 +104,19 @@ zero-neural analysis budget with the original absolute deadline.
 
 These checks establish an executable experiment, not improved image quality,
 full427/camera/color/frame performance, broad RawNIND superiority or speed.
+
+## Actual memory contribution
+
+The [completed V137 branch diagnostic](global-memory-contribution.md) finds that
+removing its trained memory write changes only0.83–1.39% of the added feature
+offset RMS on six retained training contexts. That does not quantify final RGB
+impact, but distinguishes varied attention from its actual feature contribution.
+
+A separate live CPU companion waits for this V138 pilot's original primary/faint
+reviews to finish and their owners to exit. It reuses the verified endpoint and
+the same six target-free branch inputs/probes, with12 new branch forwards/
+backwards and24 attention softmaxes; all V137 controls are reused. It adds no
+full-model/DINO calls, noise, RAW decoding or training. CPU admission is40GiB,
+runtime floor32GiB and the original faint-review absolute deadline remains fixed.
+No existing training or102-input quality budget changes. Both image quality
+and the larger-update memory effect remain unmeasured for V138.

@@ -6,6 +6,11 @@ Query/key adaptation is stronger, but local detail remains mixed and no clear
 new fine-mesh recovery is visible. V120 remains the general recommendation.
 [Measured results, native triplets and both GFX pairs](v137-global-conditioned-quality.md).
 The explicit operator normalizes attention matching while retaining value amplitude.
+The [trained V137 memory-write check](global-memory-contribution.md) now removes
+that path causally on six retained branch inputs. The feature-offset change is
+only0.83–1.39% of the full branch RMS despite varied attention; final RGB impact
+is unmeasured by this diagnostic. All12 branch forward/backward calls and the
+independent attention/array audit are complete.
 The [V138 follow-up](raw-global-only-training.md) freezes the parent and trains
 this same branch at a larger learning rate. Genuine checks pass; production and
 quality review are queued after V125 completes, with no quality claim yet.

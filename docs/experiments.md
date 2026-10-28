@@ -78,6 +78,13 @@ model/EMA tensors and trains the same18 global tensors at LR1e−3. Genuine
 CPU/CUDA16+2 checks and independent state/input verification pass. Its original
 1k production and102-input native/GFX review are queued after V125 completes.
 The combined freezing/LR intervention has no measured quality result yet.
+The [trained-memory diagnostic](global-memory-contribution.md) now finds that
+V137's local path dominates its added feature offset on six fixed training
+contexts: removing memory write changes0.83–1.39% of branch RMS. Twelve branch
+forward/backward calls and an independent50.3M-attention-weight audit are
+complete, with no full-model/DINO work or final-RGB claim. A live companion
+will compare V138 at the same input/probe hashes after its original reviews;
+V137 controls and every existing training/full-quality budget remain unchanged.
 
 The [V1239k frequency-feature midpoint](v123-midpoint-quality.md) now includes
 16 material predictions and six GFX contexts, reusing47 saved controls. Selected
