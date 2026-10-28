@@ -8,7 +8,10 @@ camera-linear targets and registered paired RAW supply complementary supervision
 
 The newest prepared bank has90,774 training photos and36 reviewed regions,
 including [mixed white plumage](v131-source-review.md), leaf veins and the
-qualified pale-feather context. The latest review withheld a painting reproduction
+qualified pale-feather context. The [latest40-source review](v125-v131-source-review.md)
+retains all40 and declines four specialized weak annotations; data bytes remain
+unchanged and the inspection ledger reaches2,043 IDs. The
+[preceding review](v131-source-review.md) withheld a painting reproduction
 and an architectural source with coarse processed-looking texture.
 V134/V135 retain their33-region catalogue; CPU/CUDA checks pass and completed
 production quality is unmeasured. Existing trials retain their frozen inputs:
