@@ -29,7 +29,7 @@ def options(enabled=True, mode="cosine-rms-v2", only=True):
 
 
 @pytest.mark.parametrize("amp", [False, True])
-@pytest.mark.parametrize("mode", ["legacy-v1", "cosine-rms-v2"])
+@pytest.mark.parametrize("mode", ["legacy-v1", "cosine-rms-v2", "memory-only-v3"])
 def test_branch_training_changes_detail_preserves_parent_ema_and_flat_function(amp, mode):
     torch.manual_seed(138)
     cfg = options(mode=mode)
@@ -38,7 +38,7 @@ def test_branch_training_changes_detail_preserves_parent_ema_and_flat_function(a
     optimizer = make_optimizer(model, cfg)
     branch = model.pretrained_rgb.raw_global
     selected = {id(p) for p in branch.parameters()}
-    assert len(selected) == 18
+    assert len(selected) == (15 if mode == "memory-only-v3" else 18)
     assert {id(p) for p in model.parameters() if p.requires_grad} == selected
     assert {id(p) for g in optimizer.param_groups for p in g["params"]} == selected
     common = {
@@ -68,7 +68,7 @@ def test_branch_training_changes_detail_preserves_parent_ema_and_flat_function(a
         assert all(p.grad is None for p in model.parameters() if id(p) not in selected)
         optimizer.step()
         update_ema(model, ema, 0.9, trainable_only=True)
-    assert len(optimizer.state) == 18
+    assert len(optimizer.state) == len(selected)
     for key, value in common.items():
         assert torch.equal(model.restoration_state_dict()[key], value), key
         assert torch.equal(ema[key], value), key

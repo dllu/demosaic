@@ -15,17 +15,20 @@ from train_quality_recipes import prepare as prepare_recipes
 FRACTIONS = {"V126": 0.0, "V127": 0.5}
 
 
-def verify_initial_restoration(actual, expected, *, spatial, fresh, global_features=False):
+def verify_initial_restoration(
+    actual, expected, *, spatial, fresh, global_features=False, global_tensors=18
+):
     """Check the complete common state and the explicitly declared new branch."""
     import torch
 
-    count = 109 if global_features else (114 if spatial else 91)
+    assert global_tensors in (15, 18)
+    count = 91 + global_tensors if global_features else (114 if spatial else 91)
     assert len(actual) == count
     if fresh and (spatial or global_features):
         assert len(expected) == 91 and expected.keys() <= actual.keys()
         extra = actual.keys() - expected.keys()
         prefix = "pretrained_rgb.raw_global." if global_features else "pretrained_rgb.raw_spatial."
-        assert len(extra) == (18 if global_features else 23)
+        assert len(extra) == (global_tensors if global_features else 23)
         assert all(k.startswith(prefix) for k in extra)
         assert actual[prefix + "project.weight"].count_nonzero() == 0
     else:
@@ -161,13 +164,18 @@ def worker(path, phase, arm):
     spatial = config["model"].get("raw_spatial_features", False)
     global_features = config["model"].get("raw_global_features", False)
     global_only = training.validate_raw_global_only(config)
+    global_tensors = (
+        15 if config["model"].get("raw_global_conditioning") == "memory-only-v3" else 18
+    )
     assert not (spatial and global_features)
     expected_tensors, expected_states = (
-        (109, 107) if global_features else ((114, 112) if spatial else (91, 89))
+        (91 + global_tensors, 89 + global_tensors)
+        if global_features
+        else ((114, 112) if spatial else (91, 89))
     )
     if global_only:
         assert global_features
-        expected_states = 18
+        expected_states = global_tensors
     declared = plan.get("restoration_tensors_by_arm", {}).get(arm, 91)
     assert expected_tensors == declared
     fractions = plan.get("arm_fractions", FRACTIONS)
@@ -225,6 +233,7 @@ def worker(path, phase, arm):
                 spatial=spatial,
                 fresh=current == "fresh",
                 global_features=global_features,
+                global_tensors=global_tensors,
             )
             assert model_hash(module.context.backbone) == config["expected_dino_sha256"]
             assert all(
@@ -451,7 +460,7 @@ def worker(path, phase, arm):
                 "model"
             ].get("raw_global_conditioning", "legacy-v1")
             branch = [v for k, v in gradients.items() if k.startswith("pretrained_rgb.raw_global.")]
-            assert len(branch) == 18 and all(v > 0 for v in branch)
+            assert len(branch) == global_tensors and all(v > 0 for v in branch)
             assert len(global_initial_offsets) == 1 and global_initial_offsets[0]["all_zero"]
         assert (
             counts["training_forwards"]

@@ -108,6 +108,16 @@ wider absolute threshold. The largest observed error is 6.46% of that bound.
 The original numerical criterion is not claimed passed, and no measured branch
 forward, backward or old control was replayed.
 
+## Memory-only prototype
+
+The [V139 memory-only variant](raw-global-memory-only.md) removes the direct
+content residual and local feed-forward path while retaining normalized global
+matching. Its15 tensors/14,144 parameters pass genuine CPU/CUDA16+2 checks with
+the91 V120 parent model/EMA tensors exact. This addresses a hypothesis suggested
+by the small measured memory effect; it does not establish why V137's images
+remain soft. V139 production and trained quality are unmeasured. The original
+V138 pilot and its bounded trained-memory companion remain unchanged.
+
 ## Prospective V138 comparison
 
 [V138](raw-global-only-training.md) already queues the same normalized branch

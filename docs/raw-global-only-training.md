@@ -24,6 +24,13 @@ per-phase spatial constants after adaptation. Freezing the parent therefore
 preserves its response for that input class. This does not establish color
 accuracy on arbitrary images or a photographic detail gain.
 
+The separate [V139 memory-only prototype](raw-global-memory-only.md) removes the
+direct local residual/MLP shortcut. It passes genuine CPU/CUDA16+2 checks with
+15 branch tensors and the same91 frozen parent tensors. Its future operator
+comparison uses V138's LR, scope, data and seed; production and trained quality
+are unmeasured. V138's original training and review queues retain their declared
+architecture, source and budgets.
+
 ## Training and compatibility
 
 Set `raw_global_only: true` alongside `model.raw_global_features: true`.
@@ -31,7 +38,8 @@ Missing scope defaults to the existing joint training. The scope must be a
 boolean and cannot combine with another head-only mode. Resume rejects a
 changed scope before constructing a model; attention-mode guards remain in
 force. EMA updates only trainable branch tensors, leaving frozen parameters
-and buffers exact. There are 109 model/EMA tensors and 18 Adam states.
+and buffers exact. V138's operator has109 model/EMA tensors and18 Adam states;
+the memory-only variant has106/15.
 
 V138 starts freshly from V120's 20k Small EMA, SHA256
 `a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb`.

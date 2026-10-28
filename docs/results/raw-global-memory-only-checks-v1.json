@@ -1,0 +1,217 @@
+{
+  "status": "implemented-and-genuine-CPU-CUDA-checked-memory-only-global-branch-quality-unmeasured",
+  "recorded_local": "2026-10-27T19:18:29.034335-07:00",
+  "recipe": {
+    "path": "/home/dllu/proj/demosaic/configs/quality-v120-raw-global-memory-only-pilot-v139.yaml",
+    "sha256": "e6c9b27a93082dc2234d0e3551ddf12fcb556964d853ade3b87b1f21fd6cfa18"
+  },
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/check_global_memory_only_pilot.py",
+    "sha256": "fecaabef023b4d0b22083b3e28a9ea845236cd27c526ca3b14d63cfc158e2982"
+  },
+  "frozen_execution_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/plan.json",
+    "sha256": "4cadcac5afb27c520438482cdb597b33ec186666f41c4ae6b234386e01889486"
+  },
+  "exact_frozen_driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/work/scripts/check_global_memory_only_pilot.py",
+    "sha256": "78bf2453b18ef11a8453ac32a436f6ec1646da6180d527ff0873dfa329a9798f"
+  },
+  "frozen_driver_note": "Repository driver import spacing was lint-corrected after preparation. Executed frozen driver preserves its own bytes; function ASTs are unchanged. All68 neural source modules match their trained snapshots exactly.",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/raw_global_memory_features.py",
+    "sha256": "33609837af230af7d052bca955d74715513239ad3bf29c4fed3ba615d342bf8d"
+  },
+  "tests": {
+    "path": "/home/dllu/proj/demosaic/tests/test_raw_global_memory_features.py",
+    "sha256": "04b9531dc06ffa82475b8bc7fd0228d276efa7f12578e03572a8cf5f37058d6d"
+  },
+  "focused_test_command": "CUDA_VISIBLE_DEVICES= HF_HUB_OFFLINE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=src:scripts .venv/bin/python -B -m pytest -q tests/test_raw_global_memory_features.py tests/test_raw_global_conditioned_features.py tests/test_raw_global_features.py tests/test_raw_global_training_scope.py tests/test_raw_spatial_trial.py",
+  "focused_tests_passed": 78,
+  "fixture_correction": "Initial independent NumPy test mistakenly assumed16 memory slots; corrected to the existing64 slots. The final78-test suite passes. This was a test fixture shape error, not a changed model/threshold or a quality experiment retry.",
+  "branch_tensors": 15,
+  "branch_parameters": 14144,
+  "removed_tensors": [
+    "up.weight",
+    "down.weight",
+    "ff_gain"
+  ],
+  "frozen_parent_tensors_each_model_EMA": 91,
+  "model_EMA_tensors": 106,
+  "optimizer_states": 15,
+  "declared_future_horizon": 1000,
+  "production_launched": false,
+  "quality_collected": false,
+  "parent": {
+    "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+    "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+  },
+  "genuine_checks": {
+    "CPU": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/CPU-V139-result.json",
+        "sha256": "a6a1d841ef3aebed16ac2cb2f1cd8895fe2fe5e342aee66ab51df2aeae6c4988"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/work/artifacts/CPU/V139/last.pt",
+        "sha256": "b2464f2f511caa99ba067e166bde1dc962bc9ddc6380021205931f5ecd6be14a"
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 18,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_batches": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "changed_resume_rejections": {
+        "disabled": "RAW global-only training requires RAW global features",
+        "nonboolean": "RAW global-only training requires RAW global features",
+        "legacy": "Resume RAW global conditioning differs; initialize a new run",
+        "conditioned": "Resume RAW global conditioning differs; initialize a new run",
+        "invalid_mode": "Resume RAW global conditioning is invalid",
+        "scope": "Resume RAW global training scope differs; initialize a new run",
+        "nonboolean_scope": "RAW global-only training must be a boolean"
+      },
+      "all_logged_clean_noisy_hashes_match": true,
+      "initial_offsets_exactly_zero": [
+        {
+          "shape": [
+            1,
+            64,
+            128,
+            128
+          ],
+          "values": 1048576,
+          "all_zero": true
+        }
+      ],
+      "first_RGB_auxiliary_values_exact": 65536,
+      "prepared_array_values_exact": 2507076,
+      "batch_hashes_independently_recomputed": 18,
+      "finite_saved_state_values": 131732022,
+      "gradient_metadata_fields_checked": 270,
+      "CUDA_peak_allocated_bytes": 0,
+      "frozen_parent91_model_and_EMA_exact": true,
+      "all_15_branch_gradient_maxima_positive": true
+    },
+    "CUDA": {
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/CUDA-V139-result.json",
+        "sha256": "a735ccac103d63446fa10bfebc1baf3e4f25df4bad5aa2a1ef97e9caf4cc1e95"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/work/artifacts/CUDA/V139/last.pt",
+        "sha256": "ba81fd30722b18c30fe65de339ab29b8fe32315ef9676899474ab3ff556ea85b"
+      },
+      "updates": 18,
+      "counts": {
+        "prepared_training_batches": 18,
+        "target_contexts": 288,
+        "shadow_selected_targets": 0,
+        "training_forwards": 18,
+        "encoder_forwards": 18,
+        "optimizer_steps": 18
+      },
+      "domain_batches": {
+        "commons": 9,
+        "native": 6,
+        "paired": 3
+      },
+      "changed_resume_rejections": {
+        "disabled": "RAW global-only training requires RAW global features",
+        "nonboolean": "RAW global-only training requires RAW global features",
+        "legacy": "Resume RAW global conditioning differs; initialize a new run",
+        "conditioned": "Resume RAW global conditioning differs; initialize a new run",
+        "invalid_mode": "Resume RAW global conditioning is invalid",
+        "scope": "Resume RAW global training scope differs; initialize a new run",
+        "nonboolean_scope": "RAW global-only training must be a boolean"
+      },
+      "all_logged_clean_noisy_hashes_match": true,
+      "initial_offsets_exactly_zero": [
+        {
+          "shape": [
+            16,
+            64,
+            256,
+            256
+          ],
+          "values": 67108864,
+          "all_zero": true
+        }
+      ],
+      "first_RGB_auxiliary_values_exact": 4194304,
+      "prepared_array_values_exact": 160437312,
+      "batch_hashes_independently_recomputed": 18,
+      "finite_saved_state_values": 131732022,
+      "gradient_metadata_fields_checked": 270,
+      "CUDA_peak_allocated_bytes": 7929051648,
+      "frozen_parent91_model_and_EMA_exact": true,
+      "all_15_branch_gradient_maxima_positive": true
+    }
+  },
+  "independent_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/independent-audit-v1.json",
+    "sha256": "119b42daa82c58f324bc69f59e45c3f4c013e8925ce85d7b545dfa1fe597aec9"
+  },
+  "independent_summary": {
+    "legacy_modules_byte_identical": 64,
+    "legacy_module_AST_changes_restricted": [
+      {
+        "module": "raw_global_features.py",
+        "only_changed_function_bodies": [
+          "require_resume_global_features"
+        ],
+        "old": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-only-pilot-v1/run/work/src/demosaic/raw_global_features.py",
+          "sha256": "e0795f965bbe0bcfe19abc89dce732994b4c12a164cafa49e381d25a065315ea"
+        },
+        "new": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/work/src/demosaic/raw_global_features.py",
+          "sha256": "5b3770549dd96b395161c0e086330d1adc3e2bc3a19fca4ecf5a941f986708f7"
+        }
+      },
+      {
+        "module": "model.py",
+        "only_changed_function_bodies": [
+          "JointDemosaic.__init__"
+        ],
+        "old": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-only-pilot-v1/run/work/src/demosaic/model.py",
+          "sha256": "e43a08a284500d4a3eeb796189498f9389aa5fd4914a784652a1a90961806ef2"
+        },
+        "new": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/work/src/demosaic/model.py",
+          "sha256": "ff655593566e28aec98ecb7804db275c27e4b973b80b9dee7a0d21e91832c893"
+        }
+      },
+      {
+        "module": "pretrained_rgb.py",
+        "only_changed_function_bodies": [
+          "PretrainedRgbDemosaic.__init__"
+        ],
+        "old": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-only-pilot-v1/run/work/src/demosaic/pretrained_rgb.py",
+          "sha256": "7abd889a3c4efc8cca43d63111a981013d72026caa09dc5f350eb25d471418bb"
+        },
+        "new": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-pilot-v1/run/work/src/demosaic/pretrained_rgb.py",
+          "sha256": "3959b0bab8956e29cb34fca6c2d8e08989846531caa7f0afeb226f1d62d57da3"
+        }
+      }
+    ],
+    "new_neural_module_forwards": 0,
+    "CUDA_initialized": false
+  },
+  "current_selector_unchanged": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "d2519511945bfeeee0c89154aba872726b3b5922a7dc98279e6b868d115ec41e"
+  },
+  "scope": "Explicit memory-only-v3 operator removes direct local content/MLP bypass while preserving old modes/defaults. Genuine discarded16+2 checks onCPU128B1FP32 andCUDA256B16BF16 use original1000 horizon and matching savedV137 input streams/initial zero-projection outputs. Future quality comparator isV138 atsameLR1e-3/frozen-parent/data/seed/horizon; production and restored-image review are not launched here. No real-camera, PSNR or speed gain is established."
+}
