@@ -1,11 +1,11 @@
 # Independent-noise mean-loss training
 
-**V125's [6k progress review](v125-progress6000-quality.md) improves the retained
-faint-ADC mean by0.136dB from4k but remains1.009dB below V120, with ordinary mean
-nearly unchanged.** Fur/grass/wood fine-band response partly recovers; spatial
-faint sRGB MSE remains23.1% higher than V120 and real mesh has no clear new
-recovery. The separate matched eight-photo monitor gains0.0165dB over V1246k.
-These supports do not isolate a broad mean-loss quality effect.
+**V124's [completed20k native check](v124-final20000-native.md) gains0.0095dB on
+ordinary contexts and remains0.0856dB lower on faint ADC than V120.** Faint PSNR
+recovers0.411dB from14k; spatial MSE nearly returns to V120, without clear new
+real-mesh detail. [V1256k](v125-progress6000-quality.md) is still1.009dB below V120
+on faint contexts, despite0.136dB recovery from4k. These limited, unequal-budget
+supports do not isolate a broad mean-loss quality effect.
 [Earlier4k review](v125-progress4000-quality.md) ·
 [Earlier2k review](v125-progress2000-quality.md).
 
@@ -64,8 +64,9 @@ SHA256 is`d562ae2fc4e9bf903501a3db1f2192b93e465a48f150eec6de5f232d510f0cc6`.
 The worker verifies finite91 model/EMA tensors and89 Adam states at20k.
 The controller admitted V125 after its original64GiB launch threshold; its
 20k worker is live, with budget, source and data unchanged. Full endpoint quality
-still waits for the matched pair; the earlier14k measurements below are not
-20k scores. [Current execution receipt](results/raw-global-only-pilot-setup-v1.json).
+still waits for the matched pair. The [completed20k native check](v124-final20000-native.md)
+now measures14 fixed inputs against saved V120/V12414k/V1256k outputs. It is
+separate from the earlier102-input14k study and the full queued endpoint suite. [Current execution receipt](results/raw-global-only-pilot-setup-v1.json).
 
 The completed102-input progress review reuses all V120 controls and existing
 noise/RAW inputs. It includes two exact-GT native triplets, four main GFX contexts

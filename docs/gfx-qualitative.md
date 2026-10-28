@@ -34,6 +34,27 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V124 at20k
+
+The [completed control's native check](v124-final20000-native.md) compares noisy
+→ V120 → V12414k → V1256k → V12420k → separate DSCF3880 ISO100/AHD reference,
+**not GT**. Native160px cells share512px contexts,+2EV, WB/matrix and nominal
+shot0.00128/read6.5536e−6. All four contexts were actually viewed. Foliage stays
+painterly, fence diamonds coherent, building detail soft and sky quiet; no clear
+new fine-detail recovery appears.
+
+![V12420k foliage and saved controls](images/v124-final20000-native-v1/main-foliage-comparison.png)
+
+![V12420k coarse chain-link fence](images/v124-final20000-native-v1/main-chain-link-fence-comparison.png)
+
+[Sky](images/v124-final20000-native-v1/main-overcast-sky-comparison.png) ·
+[Building](images/v124-final20000-native-v1/main-building-detail-comparison.png) ·
+[Extra mesh and both JPEGs](gfx-green-mesh.md#v124-at20k) ·
+[Checkpoint/source/ROI/noise/display metadata](images/v124-final20000-native-v1/manifest-v1.json).
+This is a complete training checkpoint with limited native support. Full photo/
+camera/color/full-frame qualification and matched V12520k comparison remain
+queued; unequal budgets/backends do not isolate mean-loss quality.
+
 ## V125 at6k
 
 The [latest progress review](v125-progress6000-quality.md) compares noisy → V120
@@ -142,26 +163,10 @@ also remains weak. The pilot has tiny mean gains over matched V129, with mixed
 local detail; V120 remains the general recommendation. This is not a new
 complete-frame result. [Source/ROI/checkpoint/noise/display metadata](images/v136-global-attention-quality-v1/manifest.json).
 
-## V124 at 14,000 updates
-
-The [actual14k progress checkpoint](v124-progress14000.md) gives no clear large
-foliage/fence recovery over V120. Columns: noisy → V120 → V12414k EMA → separate
-DSCF3880 ISO100/AHD reference, **not GT**. Native160px cells share512px contexts,
-+2EV, WB/matrix and nominal shot`.00128`/read`6.5536e−6`. This context review
-uses a different profile from the fixed-Haar full-frame comparison above.
-
-![V12414k foliage with matched V120 inputs](images/v124-progress14000-v1/main-foliage-comparison.png)
-
-![V12414k coarse chain-link fence](images/v124-progress14000-v1/main-chain-link-fence-comparison.png)
-
-All four contexts were actually viewed, including
-[sky](images/v124-progress14000-v1/main-overcast-sky-comparison.png) and
-[building](images/v124-progress14000-v1/main-building-detail-comparison.png).
-Foliage stays soft/painterly, sky quiet and larger geometry coherent. This is
-partial training evidence, without a new full-frame result. The
-[corrected extra mesh pair](gfx-green-mesh.md#v124-at-14000-updates) remains
-weak under both fixed profiles. V120 remains the general recommendation.
-[Checkpoint/source/ROI/noise/display metadata](images/v124-progress14000-v1/manifest.json).
+<a id="v124-at-14000-updates"></a>
+The [earlier14k progress comparison](v124-progress14000.md) and original images/
+receipts remain preserved; its full four-CFA scores differ from the RGGB subset
+in the newer20k native check.
 
 ## V122/V123 completed frequency trial
 

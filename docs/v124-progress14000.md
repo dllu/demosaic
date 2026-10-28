@@ -3,8 +3,12 @@
 **V124's two-view control shows small noisy/shadow PSNR gains over V120, with
 worse faint-ADC scores and no clear large recovery of fine photographic detail.**
 This is the retained 14k checkpoint within its original 20k training run.
-V125's conditional-mean loss is still pending. V120 Small remains the general
+The matched full20k mean-loss comparison remains pending; [V1256k progress](v125-progress6000-quality.md) is available. V120 Small remains the general
 recommendation on the measured balance of quality.
+
+The [completed20k control native check](v124-final20000-native.md) now documents
+late faint recovery on the same saved RGGB inputs. Its four-context means differ
+from the four-CFA means in this14k study. Original14k evidence remains preserved.
 
 [Measurements and execution receipt](results/v124-progress14000-v1.json) ·
 [Per-CFA scores](results/v124-progress14000-metrics-v1.csv) ·

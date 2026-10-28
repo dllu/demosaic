@@ -13,6 +13,10 @@ progress measurements, without an endpoint or broad mean-loss quality claim.
 [Matched training](conditional-mean-training.md) ·
 [Earlier4k review](v125-progress4000-quality.md).
 
+The [completed V12420k native comparison](v124-final20000-native.md) also includes
+these saved6k outputs without replay. Its different training budget prevents a
+causal mean-loss endpoint comparison.
+
 ## Fixed inputs and actual execution
 
 V125 continues from V12020k on90,784 photos/20 reviewed regions, seed67, with

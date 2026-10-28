@@ -35,12 +35,35 @@ final mesh review is complete below. A separate
 [V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
 V124's [14k progress review](#v124-at-14000-updates) is complete; its original
 20k control has completed and V125's original20k worker is running.
-The newer [V1252k review](#v125-at2k) also finds no clear new lattice recovery,
-despite a highlight-dominated training-monitor gain.
+The [completed V12420k native check](#v124-at20k) and [V1256k progress](#v125-at6k)
+are now measured; neither shows clear new lattice recovery.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V124 at20k
+
+The [completed control's native check](v124-final20000-native.md) compares noisy
+RAW/Malvar → V120 → V12414k → V1256k → V12420k → DSCF3842 ISO6400 JPEG →
+corrected **DSCF3835 ISO100/AHD** → ISO100 JPEG. Native160px cells retain768px
+contexts, shared+4EV and the same fixed inverse-sRGB/16×/sRGB JPEG display rule.
+
+![V12420k left fine mesh with both camera JPEGs](images/v124-final20000-native-v1/fine-green-mesh-left-JPEG-plus4EV-comparison.png)
+
+![V12420k right fine mesh with both camera JPEGs](images/v124-final20000-native-v1/fine-green-mesh-right-JPEG-plus4EV-comparison.png)
+
+Nominal conditioning largely erases the mesh; the fixed nearby3879 profile
+retains weak diagonals without clear new20k recovery:
+[left](images/v124-final20000-native-v1/mesh-profile3879-fine-green-mesh-left-comparison.png),
+[right](images/v124-final20000-native-v1/mesh-profile3879-fine-green-mesh-right-comparison.png).
+Both profiles and regions are actually viewed. The nearby read variance is
+1.0715704128646712e−6, matching the bound inputs. Separate ISO100/AHD/JPEGs
+remain qualitative references, **not exact GT**; aperture/shutter/moving subjects
+and camera processing differ. Originals/caches/holdouts remain preserved.
+[Checkpoint/source/ROI/noise/display metadata](images/v124-final20000-native-v1/manifest-v1.json).
+Completed training does not make this a full photo/camera/color/full-frame review;
+the original matched endpoint pipeline remains queued.
 
 ## V125 at6k
 
@@ -180,31 +203,10 @@ inputs and all old predictions. No RAW decoding, conditioning sweep or reference
 fitting occurs. Both camera JPEGs remain available in the standing comparison
 below. [Source/ROI/checkpoint/profile/display metadata](images/v136-global-attention-quality-v1/manifest.json).
 
-## V124 at 14,000 updates
-
-The [actual14k checkpoint review](v124-progress14000.md) leaves the lattice
-largely erased under nominal conditioning. The fixed nearby3879 profile retains
-weak irregular diagonal texture, without a clear correct-lattice recovery over
-V120. Both regions/profiles were actually viewed; the left blue point persists.
-
-Columns: noisy → V120 → V12414k EMA → independent **DSCF3835 ISO100/AHD reference,
-not GT**. Native160px cells share768px contexts, WB/matrix and+4EV. The corrected
-ISO100 capture is46 seconds before DSCF3842 ISO6400, with different aperture,
-exposure time and moving subjects. The main3879/3880 pair remains in use.
-
-![V12414k nominal left mesh](images/v124-progress14000-v1/mesh-nominal-fine-green-mesh-left-comparison.png)
-
-![V12414k nominal right mesh](images/v124-progress14000-v1/mesh-nominal-fine-green-mesh-right-comparison.png)
-
-![V12414k nearby-profile left mesh](images/v124-progress14000-v1/mesh-profile3879-fine-green-mesh-left-comparison.png)
-
-![V12414k nearby-profile right mesh](images/v124-progress14000-v1/mesh-profile3879-fine-green-mesh-right-comparison.png)
-
-Exactly two new root/DINO forwards reused the two fixed profile inputs and
-V120 predictions, without a noise sweep, RAW decoding or reference fitting.
-The partial checkpoint is not a full endpoint; these tradeoffs do not change the
-V120 recommendation. Both camera JPEGs and the original standing comparisons
-remain available below. [Source/ROI/checkpoint/profile/display metadata](images/v124-progress14000-v1/manifest.json).
+<a id="v124-at-14000-updates"></a>
+The [earlier14k progress comparison](v124-progress14000.md) and original images/
+receipts remain preserved; its full four-CFA scores differ from the RGGB subset
+in the newer20k native check.
 
 ## V122/V123 completed frequency trial
 

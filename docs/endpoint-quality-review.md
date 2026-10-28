@@ -19,8 +19,10 @@ V120/V121 training, endpoint predictions and independent numerical
 audits, four saved/local-detail contrasts and selected native review are
 complete. V120/V121 mesh checks have no clear lattice-recovery gain over
 V115/V119. V122/V123 endpoint review is published. [V12414k progress](v124-progress14000.md)
-is measured on102 retained inputs; complete V124/V125 endpoint quality remains
-pending. The queues check
+is measured on102 retained inputs. The [completed V12420k native check](v124-final20000-native.md)
+adds14 fixed-input comparisons with saved V120/V12414k/V1256k outputs, including
+both correctedGFX pairs/JPEGs; complete V124/V125 endpoint quality remains
+pending. The original queues are unchanged. They check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 

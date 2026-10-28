@@ -147,7 +147,7 @@ independent DSCF3835 ISO100/AHD → DSCF3835 camera JPEG. All RAW cells share
 fixed +4EV/×16; both camera JPEGs receive the same fixed inverse-sRGB/×16/sRGB
 display transform, without fitting. Each cell is native160 within768px contexts.
 Nominal shot/read0.00128/0.0000065536; the nearby profile is
-0.0014635775921166604/0.000010715704128646712. Profiles are supplied priors,
+0.0014635775921166604/1.0715704128646712e−6. Profiles are supplied priors,
 not calibrated noise or an output-selected strength sweep.
 
 ![Extra green mesh left with both camera JPEGs](images/v125-progress4000-quality-v1/fine-green-mesh-left-JPEG-plus4EV-comparison.png)

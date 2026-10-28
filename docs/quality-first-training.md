@@ -17,7 +17,7 @@ within10s remain unproven. Quality takes priority over speed.
 
 | Comparison | Fixed intervention | Present evidence |
 | --- | --- | --- |
-| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 photos/20 regions; V120/seed67/20k; two noise views, mean-loss weights0/.25 | V12420k complete; V12520k running. [6k progress](v125-progress6000-quality.md) separates monitoring from native detail. Matched endpoints and repeated-noise bias pending |
+| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 photos/20 regions; V120/seed67/20k; two noise views, mean-loss weights0/.25 | [V12420k native check](v124-final20000-native.md): tiny ordinary gain/near-parent faint quality after late recovery, no new mesh detail. V125 runs; [6k progress](v125-progress6000-quality.md) remains weaker on faint contexts. Full matched endpoint/bias review pending |
 | [V131/V132 spatial attention](raw-spatial-training.md) |90,781/29; V120/seed70/20k;22,664-parameter local branch off/on | V131 runs, V132 follows. [Control1k](v131-progress1000-quality.md) has tiny ordinary gains, shadow/faint regressions and no clear mesh recovery |
 | [V133 photographic quota](reviewed-quota-training.md) | Same cohort/parent/seed/20k as V131;5% rather than50% reviewed sampling | CPU/CUDA16+2 pass; production/progress/full reviews queued after both spatial arms |
 | [V134/V135 cleaned data and epochs](photo-epoch-training.md) |90,778/33; matched20k replacement/epoch sampling | All four CPU/CUDA16+2 checks pass; production/full reviews queued after V133's review |
