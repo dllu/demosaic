@@ -18,7 +18,9 @@ The existing DSCF3879/3880 standing scene and its six regions remain in use.
 
 The [V131/V132 spatial-detail trial](raw-spatial-training.md) queues both fixed
 mesh profiles and both native160 regions, with this corrected DSCF3835 reference
-and both camera JPEGs. Model quality and actual viewing are pending.
+and both camera JPEGs. [V1311k progress](v131-progress1000-quality.md) is now
+actually viewed and measured below, with no clear new lattice recovery;
+V132 and the full endpoints remain pending.
 
 The [V137 conditioned-global review](v137-global-conditioned-quality.md) is
 complete on these two profiles/regions with corrected DSCF3835 and all three
@@ -32,11 +34,50 @@ gain. V120's two saved predictions were adopted without rerunning it. V122/V123
 final mesh review is complete below. A separate
 [V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
 V124's [14k progress review](#v124-at-14000-updates) is complete; its original
-20k control continues and V125 follows.
+20k control has completed and V125's original20k worker is running.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V131 retained1k progress
+
+The [completed progress review](v131-progress1000-quality.md) uses
+**DSCF3842 ISO6400 and corrected DSCF3835 ISO100 f/5.6**, with both camera JPEGs.
+The ISO100 filename is
+`2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce`.
+It is46 seconds earlier and differs in aperture/exposure time/moving subjects;
+the separate reference is **not exact GT**. The main DSCF3879/3880 scene remains
+in use, and all captures/JPEGs/siblings stay outside training.
+
+Columns: noisy RAW/Malvar → V120 nominal → V131 progress1k/20k nominal →
+ISO6400 camera JPEG → ISO100 AHD → ISO100 camera JPEG. Cells contain native160px
+pixels without resizing. RAW cells share the established+4EV, WB/matrix and
+nominal shot`.00128`/read`6.5536e−6`; both JPEGs receive fixed+4EV through
+inverse sRGB →16× linear exposure → sRGB. Camera WB, tone and sharpening still
+differ, with no fitted exposure or pixelwise scoring.
+
+![V131 left fine mesh and both camera JPEGs](images/v131-progress1000-quality-v1/fine-green-mesh-left-JPEG-plus4EV.png)
+
+![V131 right fine mesh and both camera JPEGs](images/v131-progress1000-quality-v1/fine-green-mesh-right-JPEG-plus4EV.png)
+
+Actual viewing finds faint mesh amid grain in the ISO6400 JPEG, while nominal
+restoration largely erases it. Both restored methods retain weak irregular
+diagonals with fixed nearby3879 shot`.0014635775921166604` and
+read`1.0715704128646712e−6`, without clear new correct-lattice recovery. The
+left blue point persists. Nearby comparisons:
+[left](images/v131-progress1000-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png),
+[right](images/v131-progress1000-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png).
+
+The original unboosted JPEG boards remain
+[left](images/v131-progress1000-quality-v1/fine-green-mesh-left-nativeJPEG.png) and
+[right](images/v131-progress1000-quality-v1/fine-green-mesh-right-nativeJPEG.png).
+Their dark ISO6400 cells do not substantiate a clear visibility judgment; the
+fixed+4EV viewing receipt corrects that initial impression. Both variants are
+preserved, with independently exact pixel checks and no new neural calls.
+Two new RAW model forwards were already included in the original102-input
+review. V131's original20k training continues; V120 remains the general choice.
+[Source/ROI/all checkpoint hashes/profile/display metadata](images/v131-progress1000-quality-v1/manifest-v2.json).
 
 ## V137 conditioned-global pilot
 

@@ -35,8 +35,11 @@ finds small mixed changes without clear noisy/GFX recovery. The matched
 [V130 FP32 pilot](training-precision-pilot.md) slightly improves selected faint-ADC
 bands, with subtle native changes. The [V131/V132 spatial trial](raw-spatial-training.md)
 has four exact-recipe CPU/CUDA checks complete on90781/29. Its original V13120k
-control now runs after V125's admission; V132 follows. A102-input progress comparison is also queued;
-trained quality remains unmeasured.
+control now runs after V125's admission; V132 follows. The
+[V1311k progress review](v131-progress1000-quality.md) is complete: ordinary
++.0016dB, deepest shadows−.0237–.0342dB and faint ADC−.2734dB versus V120,
+with mixed local detail and no clear mesh recovery. V132's branch quality and
+both full endpoints remain unmeasured.
 
 The [V133 quota comparison](reviewed-quota-training.md) has completed both
 device checks and queues20k updates against the original V131 control, changing
@@ -51,7 +54,7 @@ quality remain separate measurements. Actual quality is pending.
 | 16-bit/full-resolution output | V120/V121 complete101.996MP FP32 outputs and linear/sRGB RGB16 exports verified, including matched-Haar full-frame comparisons | Preserve per-checkpoint precision/quality evidence |
 | 100MP within10s on GB10 | Ordered Tiny/Small FP32 observations116.57/101.66s, not a controlled speed ranking | Target open; improve quality before speed work |
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
-| Diverse clean targets and binning | V12420k control complete on90,784/twenty regions, matched V125 pending; V131/V132 queued on90,781/29; [V134/V135](photo-epoch-training.md) passes four CPU/CUDA checks on90,778/33 and queues20k replacement/epoch training plus full reviews;4×→geometry→area2, zero optical blur | Finish/assess the newest cohort and source-order/quota training; broad weak-detail recovery remains incomplete |
+| Diverse clean targets and binning | V12420k control complete on90,784/twenty regions, matched V125 pending; V13120k runs on90,781/29 with mixed1k progress and V132 follows; [V134/V135](photo-epoch-training.md) passes four CPU/CUDA checks on90,778/33 and queues20k replacement/epoch training plus full reviews;4×→geometry→area2, zero optical blur | Finish/assess the newest cohort and source-order/quota training; broad weak-detail recovery remains incomplete |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; V120 ADC max55.52DN16, Tiny alternative51.73DN16 | Spatial dark-field/weak-detail failures and real-noise calibration limits remain |
 | Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V122/V123 full evaluation and selected native review complete; V12420k training complete and V125/V131 original workers running; [V138](raw-global-only-training.md) passes genuine checks and queues1k after V125 completion | Finish conditional-mean training/comparison and improve real-photo/detail quality |
 | Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |

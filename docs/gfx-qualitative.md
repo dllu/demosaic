@@ -12,6 +12,8 @@ The [V131/V132 spatial trial](raw-spatial-training.md) queues this six-region
 scene and full-frame output, plus the additional DSCF3842/**DSCF3835** green
 mesh. Both new full-frame methods use identical32px tile grids; older saved
 pipelines retain their recorded grids/profiles with differences labeled.
+The [V1311k context review](v131-progress1000-quality.md) is now complete,
+with native comparisons below; its original20k training continues.
 
 The [V137 conditioned-global review](v137-global-conditioned-quality.md) is
 complete on the four established512px contexts and corrected extra mesh pair,
@@ -31,6 +33,27 @@ comparison convention, not newly verified camera calibration; current automatic
 estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
+
+## V131 retained1k progress
+
+The [completed progress review](v131-progress1000-quality.md) shows no clear
+new foliage/fence recovery. Columns: noisy → V120 → V131 progress1k/20k →
+independent DSCF3880 ISO100/AHD reference, **not GT**. Native160px cells share
+512px contexts,+2EV, WB/matrix and nominal shot`.00128`/read`6.5536e−6`.
+This profile differs from the fixed-Haar full-frame comparison above.
+
+![V131 main GFX foliage](images/v131-progress1000-quality-v1/main-foliage-comparison.png)
+
+![V131 main chain-link fence](images/v131-progress1000-quality-v1/main-chain-link-fence-comparison.png)
+
+All four contexts were actually viewed, including
+[sky](images/v131-progress1000-quality-v1/main-overcast-sky-comparison.png) and
+[building](images/v131-progress1000-quality-v1/main-building-detail-comparison.png).
+Foliage remains painterly, larger geometry coherent and sky quiet. The
+[corrected DSCF3842/DSCF3835 mesh with both camera JPEGs](gfx-green-mesh.md#v131-retained1k-progress)
+also shows no clear new lattice recovery. V131 retains V120's architecture;
+V132's added branch and full-endpoint quality remain pending.
+[Source/ROI/checkpoint/noise/display metadata](images/v131-progress1000-quality-v1/manifest-v2.json).
 
 ## V137 conditioned-global pilot
 

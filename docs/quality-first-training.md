@@ -13,7 +13,7 @@ retain their declared cohorts.
 | Comparison | Data and hypothesis | Current state |
 | --- | --- | --- |
 | [V124/V125 conditional mean](conditional-mean-training.md) |90,784 sources/twenty regions;16 unique targets and two noise views, mean-loss weights0/.25 | V12420k control complete; V125's original20k training runs. Full quality pending; [14k progress](v124-progress14000.md) has small noisy/shadow gains, worse faint ADC and weak real detail unresolved |
-| [V131/V132 spatial attention](raw-spatial-training.md) |90,781 sources/29 reviewed regions; same V120 parent, seed, inputs, single-view loss and20k schedule; spatial branch off/on | Four CPU/CUDA16+2 checks complete; V131 original20k control runs and V132 follows |
+| [V131/V132 spatial attention](raw-spatial-training.md) |90,781 sources/29 reviewed regions; same V120 parent, seed, inputs, single-view loss and20k schedule; spatial branch off/on | [V131 control1k review](v131-progress1000-quality.md) complete: ordinary+.0016dB, deepest shadows−.0237–.0342dB, faint ADC−.2734dB versus V120; mixed local detail and no clear mesh recovery. Original20k control continues; V132 follows |
 | [V133 reviewed quota](reviewed-quota-training.md) | Same90,781/29 and20k as V131,5% versus50% reviewed sampling | CPU/CUDA checks pass; early/full reviews queued; trained quality pending |
 | [V134/V135 photo epochs](photo-epoch-training.md) | Cleaned90,778/33, same20k replacement/epoch comparison | Four CPU/CUDA checks pass; production and full reviews queued after V133's automated review |
 | [V136 global RAW attention](v136-global-attention-quality.md) | Same90,782/27 and1k as saved V129; only18,272-parameter branch differs | Complete102-input review: tiny panel-mean gains, mixed local detail, no clear new mesh recovery;38 boards actually viewed and both audits pass. No20k global run queued |
@@ -24,8 +24,9 @@ The spatial trial's live early-review queue uses immutable step1,000 snapshots
 within the original20k workers. Each gets102 retained material/shadow/faint-ADC
 and real-scene inputs, with saved V120 controls reused. A separate full-endpoint
 chain covers the full photo/camera/analytic panels, native images and RGB16 output.
-Early snapshots do not stop training or become completed endpoints. Quality
-and actual viewing are pending.
+Early snapshots do not stop training or become completed endpoints. V131's
+102-input review, independent audits and42 actual native views are complete;
+V132 and both full-endpoint reviews remain pending.
 
 The [completed V122/V123 frequency trial](v122-v123-quality.md) gains0.05493dB
 photo PSNR from joint training against adapter-only training, with lower unseen-

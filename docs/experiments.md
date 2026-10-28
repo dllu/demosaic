@@ -51,6 +51,14 @@ with mean-loss weights0/.25. [V12414k progress](v124-progress14000.md) finds
 noisy/shadow PSNR+.008–.033dB, faint ADC−.350dB and no clear fine-mesh recovery.
 Full endpoint and repeated-noise mean-loss comparison remain pending.
 
+The [V1311k progress review](v131-progress1000-quality.md) compares the unchanged
+V120 architecture on90,781/29 while its original20k training continues.
+Ordinary PSNR rises.0016dB, deepest shadows fall.0237–.0342dB and faint ADC
+falls.2734dB. Local detail is mixed, with no clear new fine-mesh recovery.
+All102 predictions, independent score/pixel/faint audits and42 actual native
+views are complete, including the corrected DSCF3835 and both camera JPEGs.
+V132's branch/full-endpoint comparisons remain pending.
+
 The [completed V136 global-attention pilot](v136-global-attention-quality.md)
 matches all1,000 clean/noisy batches to saved V129 and adds exactly102 quality
 forwards. Ordinary/shadow/faint means rise slightly over V129, but local detail

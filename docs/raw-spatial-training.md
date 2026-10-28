@@ -4,7 +4,11 @@
 V131 continues V120's architecture and V132 adds the optional
 [RAW spatial branch](raw-spatial-features.md). Both use the cleaned90,781-photo
 cohort with29 reviewed regions. V131 started after V125's original memory admission.
-Quality is unmeasured; V120 remains the general recommendation.
+The [V1311k progress review](v131-progress1000-quality.md) is complete: ordinary
+PSNR+.0016dB over V120, deepest shadows−.0237–.0342dB and faint ADC−.2734dB,
+with mixed local response and no clear new mesh recovery. This is the unchanged
+architecture control within its original20k horizon; the added branch and full
+endpoints remain unmeasured. V120 remains the general recommendation.
 
 [Control recipe](../configs/quality-v120-raw-spatial-v131.yaml) ·
 [Spatial recipe](../configs/quality-v120-raw-spatial-v132.yaml) ·
@@ -32,7 +36,8 @@ Every source/domain, clean-batch and noisy-batch hash must match the control,
 including the first18 exact-recipe CUDA check inputs. A hardlinked step1,000
 progress checkpoint is retained within the same live worker and original20k
 schedule, after validation. Atomic replacement of `last.pt` preserves it.
-It is not a completed endpoint. The early comparison below is now queued.
+It is not a completed endpoint. The early V131 comparison below is complete;
+V132's comparison waits for its original training.
 
 ## Early retained-input comparison
 
@@ -52,8 +57,11 @@ not pause training, restart a schedule or repeat an old model. It uses52GiB
 admission,12GiB CUDA cap and32GiB runtime floor, waiting up to48h for headroom
 within its original absolute observation deadline. CPU reporting and independent
 FFT/native-pixel audits follow automatically, including exact synthetic-GT
-triplets and accurately labeled approximate real references. Actual viewing and
-quality outcomes remain pending. Four material sources do not become independent
+triplets and accurately labeled approximate real references. V131's102-input
+collection, independent score/pixel/faint audits and42 actual native views are
+complete, including both corrected GFX pairs and camera JPEGs.
+[Measured progress and native comparisons](v131-progress1000-quality.md).
+V132's collection and viewing remain pending. Four material sources do not become independent
 photographs through different noise/CFA conditions. The full endpoint chain below
 keeps its original source and call budgets.
 

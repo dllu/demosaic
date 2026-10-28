@@ -4,8 +4,10 @@
 windows before the pretrained RGB trunk.** Both discarded genuine-V120 CPU16+2
 and CUDA256/B16 checks pass. Model quality is
 unmeasured. The [V131/V132 full-budget trial](raw-spatial-training.md) has four new
-matched CPU/CUDA checks complete and production queued after V125's memory
-admission. V120 remains the general recommendation; the original mean-loss trial
+matched CPU/CUDA checks complete. V131's original20k control runs after V125's
+memory admission; its [1k progress review](v131-progress1000-quality.md) has
+mixed detail changes and no clear mesh recovery. V132's branch remains unmeasured.
+V120 remains the general recommendation; the original mean-loss trial
 keeps its frozen inputs and schedule.
 
 [Implementation](../src/demosaic/raw_spatial_features.py) ·
