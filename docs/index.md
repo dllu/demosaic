@@ -61,7 +61,7 @@ updates the current guides without an old promotion gate.
 | Global-branch training | [V138 frozen-parent pilot](raw-global-only-training.md): CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR and1k quality review are queued after V125 completes; quality is unmeasured |
 | Trained global-memory contribution | [V137 feature-level ablation](global-memory-contribution.md): removing memory write changes0.83–1.39% of branch-offset RMS on six contexts. Independent attention/array audit complete; same-input V138 companion queued after its original quality/faint reviews |
 | Mean-loss progress | [V125 at2k](v125-progress2000-quality.md): highlight-dominated eight-photo monitor gain over V1242k, weaker faint texture versus V120, and no clear new mesh recovery. Native GT triplets, both GFX pairs and corrected DSCF3835 camera JPEGs published; original20k comparison continues |
-| Memory-only global prototype | [V139 implementation and genuine checks](raw-global-memory-only.md): the branch output passes through global memory without a direct local/MLP shortcut; CPU/CUDA16+2 and independent audits pass. Production and image quality are unmeasured |
+| Memory-only global branch | [V139 implementation and queued pilot](raw-global-memory-only.md): CPU/CUDA16+2 checks pass; original1k training and matched native/faint/GFX review are queued after V138's existing chain, with510 controls reused. Image quality remains unmeasured |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 
 Per-experiment reports contain numerical evidence, source/ROI metadata,

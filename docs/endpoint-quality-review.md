@@ -24,6 +24,14 @@ pending. The queues check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 
+The separate [V139 memory-only1k pilot](raw-global-memory-only.md) now queues
+fresh training after V138's existing review chain, adopting its own completed
+CPU/CUDA checks. Its102-input native/faint/GFX review reuses510 control
+predictions, including the actual V138 endpoint, with independent audits and
+both corrected GFX pairs/camera JPEGs. This local pilot does not add a full427,
+measured-camera/color or full-frame result. Actual viewing/publication follows
+execution; trained quality remains unmeasured.
+
 [Verified setup and repair evidence](results/endpoint-review-queues-v1.json) ·
 [Saved-output comparison runner](../scripts/queue_quality_comparisons.py) ·
 [RGB16 verifier](../scripts/verify_rgb16_exports.py) ·

@@ -1,17 +1,19 @@
 # Memory-only global RAW features
 
 **V139's experimental memory-only branch passes genuine CPU/CUDA16+2 checks;
-trained reconstruction quality remains unmeasured.** It removes the direct
-local content/MLP bypass from the normalized global branch. V120 remains the
-general recommendation. No V139 production controller or image-quality
-collection has been launched.
+trained reconstruction quality remains unmeasured.** Its original1k production
+and matched native-quality review are now queued after V138's existing review
+chain. The variant removes the direct local content/MLP bypass from the normalized
+global branch. V120 remains the general recommendation.
 
 [Implementation](../src/demosaic/raw_global_memory_features.py) ·
 [Tests](../tests/test_raw_global_memory_features.py) ·
-[Future1k recipe](../configs/quality-v120-raw-global-memory-only-pilot-v139.yaml) ·
+[1k recipe](../configs/quality-v120-raw-global-memory-only-pilot-v139.yaml) ·
 [Implementation-check driver](../scripts/check_global_memory_only_pilot.py) ·
 [Measured checks and independent audit](results/raw-global-memory-only-checks-v1.json) ·
-[Publication verification](results/raw-global-memory-only-publication-v1.json).
+[Check publication](results/raw-global-memory-only-publication-v1.json) ·
+[Training/review queue](results/raw-global-memory-only-queue-v1.json) ·
+[Queue verification](results/raw-global-memory-only-queue-publication-v1.json).
 
 ## Why remove the shortcut
 
@@ -100,17 +102,57 @@ resource observations, not speed benchmarks. The focused78-test suite covers
 independent attention mathematics, no local bypass, all-CFA constants, batch
 isolation, gradients, portable branch reload, parent/EMA freezing and mode guards.
 
-## Quality comparison still required
+## Queued training and quality comparison
 
-The declared future1k recipe changes only the operator against V138: same
+The original1k recipe changes only the operator against V138: same
 90,782 photos/27 reviewed regions, seed70,50% reviewed quota, corrected paired32
 and native128 catalogues, single-view loss, zero optical blur, LR1e−3 and100-step
 warmup. The newer90,774/36 bank remains available separately. The checks end
 during warmup and do not prove stability at peak LR or convergence.
 
-A longer trial needs the matched V138 result and retained native/photo/camera/
-color comparisons. Its report must include two exact-GT native triplets,
-ordinary/faint/shadow detail, DSCF3879/3880 foliage/fence/sky/building and the
-corrected DSCF3842/DSCF3835 mesh with both camera JPEGs. Real ISO100 and native
-binned references retain their approximate roles. Tiled seams/full frames and
-broad real-camera superiority also remain unmeasured for this variant.
+The [production driver](../scripts/train_memory_only_pilot.py) adopts exact
+copies of the completed CPU/CUDA16+2 receipts. It runs no additional checks and
+starts production freshly from V120, rather than resuming either discarded
+prefix. The original1,000-update cosine horizon remains fixed. The controller
+waits for the existing V138 primary/faint/memory chain and its exact memory
+owner to finish within that dependency's original deadline. It then requires
+52GiB available RAM and128/208GiB internal/external free space for15s, with a
+2h headroom limit,16GiB CUDA cap,32GB runtime floor and8h worker limit.
+No score threshold or human publication gate controls this admission.
+
+The fresh run adds1,000 optimizer/forward calls,64 validation calls and1,064
+encoder calls over16,000 target slots. Every clean/noisy batch matches saved
+V137 before candidate inference; endpoint binding additionally compares all
+1,000 actual V138 clean/noisy hashes. It requires106 finite model/EMA tensors,
+15 Adam states at1k, all91 frozen parent tensors exact and all68 trained neural
+source files equal to the inference snapshot.
+
+The separately live review queue declares **102 new candidate root/encoder
+calls**:64 shadow,16 ordinary,16 faint ADC, four main-GFX512 contexts and two
+extra-mesh768 fixed profiles. It reuses510 V120/V129/V136/V137/V138 predictions,
+checking the actual V138 observation records before adopting its102 outputs.
+There is no control-model replay, new noise, RAW decode, fitted exposure or
+conditioning sweep. Collection uses IEEE FP32,52GiB admission,12GiB CUDA cap
+and32GiB runtime floor. CPU stages require40GiB; each headroom wait is bounded.
+The new quality deadline is the original V138 memory deadline plus24h; no
+original deadline changes.
+
+The prospective report has576 metric rows/144 groups and64 primary native PNGs,
+including two exact-GT triplets, ordinary/faint/shadow detail, DSCF3879/3880
+foliage/fence/sky/building and corrected DSCF3842/DSCF3835 mesh. A six-method
+faint supplement uses the same source-defined masks, DC/spatial errors and40×
+display. Four mesh boards include both camera JPEGs with a common+4EV scalar-LUT
+check. Independent FFT/native-pixel audits follow; actual native viewing and
+publication remain required after execution. Real ISO100 and native binned
+references retain their approximate roles, and all protected captures/siblings
+remain outside training.
+
+Sixteen new handoff tests pass. A zero-forward preflight verifies the adopted
+checks,68 source modules,102 unchanged observations, unchanged scoring helpers
+and derived report budgets. Invoking the actual endpoint binder against live,
+incomplete training rejects before any checkpoint or neural load.
+
+This is a1k development pilot, not the full427-photo or measured-camera/color
+panel. Those broader comparisons, tiled seams/full frames, speed and broad
+real-camera superiority remain unmeasured. The original checkpoints, receipts,
+source bytes, schedules and other training/review owners remain intact.

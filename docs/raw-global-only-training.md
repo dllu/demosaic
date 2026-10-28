@@ -27,9 +27,11 @@ accuracy on arbitrary images or a photographic detail gain.
 The separate [V139 memory-only prototype](raw-global-memory-only.md) removes the
 direct local residual/MLP shortcut. It passes genuine CPU/CUDA16+2 checks with
 15 branch tensors and the same91 frozen parent tensors. Its future operator
-comparison uses V138's LR, scope, data and seed; production and trained quality
-are unmeasured. V138's original training and review queues retain their declared
-architecture, source and budgets.
+comparison uses V138's LR, scope, data and seed. Its original1k training and
+matched native-quality review are queued after V138's existing reviews, adopting
+completed checks and saved predictions. Trained quality is unmeasured. V138's
+original training and review queues retain their declared architecture, source
+and budgets.
 
 ## Training and compatibility
 

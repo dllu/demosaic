@@ -115,8 +115,10 @@ content residual and local feed-forward path while retaining normalized global
 matching. Its15 tensors/14,144 parameters pass genuine CPU/CUDA16+2 checks with
 the91 V120 parent model/EMA tensors exact. This addresses a hypothesis suggested
 by the small measured memory effect; it does not establish why V137's images
-remain soft. V139 production and trained quality are unmeasured. The original
-V138 pilot and its bounded trained-memory companion remain unchanged.
+remain soft. Original1k V139 training and matched native/faint/GFX review are
+now queued after the existing V138 review chain, adopting both completed checks
+and reusing510 saved controls. Trained quality is unmeasured. The original V138
+pilot and its bounded trained-memory companion remain unchanged.
 
 ## Prospective V138 comparison
 
