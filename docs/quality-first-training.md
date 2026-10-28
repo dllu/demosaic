@@ -23,7 +23,7 @@ within10s remain unproven. Quality takes priority over speed.
 | [V134/V135 cleaned data and epochs](photo-epoch-training.md) |90,778/33; matched20k replacement/epoch sampling | All four CPU/CUDA16+2 checks pass; production/full reviews queued after V133's review |
 | [V138 frozen-parent global branch](raw-global-only-training.md) |90,782/27;1k; freeze91 V120 tensors, train18 global tensors at LR1e−3 | CPU/CUDA16+2 pass; original1k/native/faint/GFX review queued after V125 completes |
 | [V139 memory-only branch](raw-global-memory-only.md) | Same1k/data/parent/inputs as V138; remove direct local residual/MLP shortcut | CPU/CUDA16+2 pass;1k and102-input review queued after V138's review chain;510 saved predictions reused |
-| [V140 neighboring-gradient memory](raw-patch-memory.md) | Same1k/data/parent/inputs as V139; add2,048 descriptor parameters before memory | CPU/CUDA16+2 pass; fresh1k queues after V139's review. Native support declared; dedicated review automation next; quality unmeasured |
+| [V140 neighboring-gradient memory](raw-patch-memory.md) | Same1k/data/parent/inputs as V139; add2,048 descriptor parameters before memory | CPU/CUDA16+2 pass; fresh1k waits for V139's review. Matched102-input/native/faint/GFX review queued with612 reused predictions; quality unmeasured |
 
 Jobs retain original sources, parents, data, budgets and dependency/resource
 policies. Progress capture does not restart or stop a20k worker. Implementation

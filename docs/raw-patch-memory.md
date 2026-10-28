@@ -4,14 +4,17 @@
 Genuine CPU/CUDA16+2 checks pass, with91 parent tensors exact in model and EMA.
 A fresh1,000-update run waits for V139's original numeric/native/faint/JPEG
 review. Restoration quality remains unmeasured; V120 stays the general choice.
-The102-input review support is fixed; dedicated review automation remains next work.
+Its matched102-input native/faint/GFX review is queued after that training.
 
 [Implementation](../src/demosaic/raw_patch_memory_features.py) ·
 [Tests](../tests/test_raw_patch_memory_features.py) ·
 [Recipe](../configs/quality-v120-raw-patch-memory-pilot-v140.yaml) ·
 [Check driver](../scripts/check_raw_patch_memory_pilot.py) ·
 [Training queue](../scripts/train_patch_memory_pilot.py) ·
-[Checks, audit and queue evidence](results/raw-patch-memory-checks-v1.json).
+[Checks and training evidence](results/raw-patch-memory-checks-v1.json) ·
+[Review controller](../scripts/review_patch_memory_pilot.py) ·
+[Endpoint/control binder](../scripts/bind_patch_memory_review.py) ·
+[Review queue and preflight evidence](results/raw-patch-memory-review-queue-v1.json).
 
 ## The hypothesis and operator
 
@@ -118,17 +121,43 @@ original job, data, budget or deadline changes; no automatic retry/horizon reset
 The run plans1,000 root/optimizer plus64 validation and1,064 encoder calls over
 16,000 target slots. All input hashes must match saved V137.
 
-The fixed review declaration covers102 future calls:64 shadow,16 ordinary,
-16 faint ADC, four main-GFX512 contexts and two extra-mesh768 profiles. It plans
-to adopt612 predictions from six old methods, including V139 and its inherited
-V138 controls. Before inference, bind the actual1k state/source and compare all
-1,000 V139 clean/noisy hashes. Preserve ROIs, exposures, source-defined masks
-and both camera JPEGs. Expected primary support:672 rows/168 groups/64 native
-PNGs; faint420 strata/224 decompositions and both mesh profiles/regions with JPEGs.
+The dedicated review controller is live and waiting for the original V140
+training owner to finish. It keeps the fixed102 future calls:64 shadow,16 ordinary,
+16 faint ADC, four main-GFX512 contexts and two extra-mesh768 profiles. It adopts
+612 predictions from six old methods, including V139 and its inherited V138
+controls. Before inference, it checks the actual1k state/source and all1,000
+V139 clean/noisy hashes, as well as saved V137 hashes. The V139 final primary,
+faint and JPEG review must be complete with its exact owner exited.
 
-This is a **support declaration, not a live review controller**. Dedicated
-binder/collection/report/audit automation remains next work, followed by actual
-native viewing/publication. Native100% noisy/denoised/GT triplets, both protected
-GFX pairs and accurate approximate-reference labels are required. These checks
-do not establish restoration gains, full427-photo/camera/color quality, tiled
-seams/full frames, speed or broad superiority.
+The binder preserves all observation fields and the original four-control prefix,
+adopts V138 from V139's executed plan, then adds V139 predictions. This matters
+because V139's prospective queue has four controls while its executed plan will
+have five. The first preflight caught V120's legacy mesh label/checkpoint format
+before any Torch import. A corrected binder also accepts that exact saved format
+and nearby-profile suffix; it does not rewrite the old controls. The first
+unlaunched queue/binder and failed preflight remain preserved. The live queue is
+`queue-plan-v2.json`; no completed inference or controller was restarted.
+
+All69 neural modules equal the training snapshot; collector, reporter, independent
+auditor and both faint operators are unchanged. The corrected preflight verifies
+all102 records and408 existing predictions, exercises204 explicitly simulated
+future bindings, and rejects the live incomplete training before importing Torch.
+It is wiring evidence, not proof of future predictions or rendering. The38 new
+review-handoff tests plus21 original training-handoff tests pass.
+
+Primary support is672 metric rows/168 groups/64 native PNGs with29,491,200 RGB
+channels. The seven-method faint supplement covers420 strata/224 decompositions
+and four nine-cell boards. Four additional mesh boards compare noisy/V120/V139/
+V140 with both camera JPEGs and corrected DSCF3835 ISO100/AHD. Source-defined masks,
+ROIs, noise and display exposure stay fixed. Exact synthetic targets receive
+native100% noisy/denoised/GT triplets; binned and independently captured references
+retain their approximate labels. Both protected GFX pairs and both mesh profiles
+are included without new RAW decoding or noise generation.
+
+New review admission is50GiB for CUDA and40GiB for CPU, with12GiB CUDA allocation
+and32GiB runtime RAM reserve. Each stage has a2h headroom wait, collection has1h,
+and CPU stages have30min. Its new absolute deadline is V139's original quality
+deadline plus24h. All earlier plans/deadlines and V140's1k training queue remain
+unchanged. Numeric/native-pixel audits and actual viewing/publication are still
+required; the queue establishes no restoration gains, full427-photo/camera/color
+quality, tiled seams/full frames, speed or broad superiority.

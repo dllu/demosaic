@@ -36,7 +36,7 @@ all prepared photos within 20k steps; its trained quality remains unmeasured.
 | [V137 conditioned global attention](docs/v137-global-conditioned-quality.md) | Matched1k review complete: faint ADC+.0334dB versus V136, tiny ordinary/shadow regressions and no clear new mesh recovery. A [trained-memory check](docs/global-memory-contribution.md) finds the local feature path still dominates on six contexts |
 | [V138 frozen-parent global branch](docs/raw-global-only-training.md) | Genuine CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR1e−3 and1k review are queued after V125 completes; quality is unmeasured |
 | [V139 memory-only branch](docs/raw-global-memory-only.md) | Removes the direct local/MLP shortcut. Genuine CPU/CUDA16+2 checks pass; original1k training and matched native/faint/GFX review are queued after V138's existing reviews, reusing510 controls. Image quality is unmeasured |
-| [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. Genuine CPU/CUDA checks pass; fresh1k waits for V139's review. Native-review support declared, automation next; quality unmeasured |
+| [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. Genuine CPU/CUDA checks pass; fresh1k waits for V139's review. Matched102-input/native/faint/GFX review is queued, reusing612 controls; quality unmeasured |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
