@@ -39,7 +39,7 @@ It keeps V137's seed70, 90,782 photos/27 reviewed regions, 50% reviewed quota,
 native256/B16/BF16, single noise view, zero optical blur, paired32/native128,
 losses, 100-step warmup and original 1,000-step horizon. Every clean/noisy batch
 must match saved V137 before candidate inference; initial executed outputs must
-also match. The newer 90,778/34 bank stays separate, and V134/V135 retain their
+also match. The newest90,774/36 bank stays separate, and V134/V135 retain their
 original 33-region cohort.
 
 The learning-rate schedule reaches LR1e−3 after warmup. The short checks end

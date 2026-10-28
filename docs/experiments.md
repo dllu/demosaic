@@ -171,11 +171,11 @@ V114 as its matched Tiny control. Native256 mask-path/source/loss and actual
 CUDA checks, complete evaluation, independent metrics and native review pass;
 its analytic gain does not establish better natural-detail quality.
 
-The latest [high-loss source review](v124-final-source-review.md) inspects40 new
-IDs, retaining38 and withholding two grainy/artwork-heavy photos from a separate
-future90,776-photo/35-region bank. One mixed-contrast leaf context is admitted;
-down/fibre/rock proposals remain ordinary photos without specialized weak
-annotations. The ledger has1,963 inspected IDs; this is targeted review rather
+The latest [high-loss source review](v131-source-review.md) inspects40 new
+IDs, retaining38 and withholding a painting reproduction and processed-looking
+arch photo from a separate future90,774-photo/36-region bank. One mixed white-
+plumage context is admitted; stronger rice-husk/wing/green-feather proposals stay
+ordinary photos without specialized weak annotations. The ledger has2,003 inspected IDs; this is targeted review rather
 than uniform corpus-quality coverage. Existing trained/queued cohorts stay fixed.
 The [illustrated source review](corpus-source-review.md) explains why
 processing defects/nonphotographic targets are removed while difficult foliage,

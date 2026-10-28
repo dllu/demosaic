@@ -1,15 +1,16 @@
 # Current photographic-source review
 
-**The prepared future dataset contains90,776 training photos and35 reviewed
-regions.** The final V124 high-loss review inspected40 new sources, retained38,
-withheld two grainy/artwork-heavy photographs and added one mixed-contrast leaf
-context. The ledger has1,963 unique inspected IDs. These data changes have no
-measured restoration-quality result or source-wide pristine guarantee.
+**The prepared future dataset contains90,774 training photos and36 reviewed
+regions.** The latest V131 high-loss review inspected40 new sources, retained38,
+withheld a painting reproduction and a processed-looking architectural source,
+and added one mixed-contrast white-plumage context. The ledger has2,003 unique
+inspected IDs. These data changes have no measured restoration-quality result
+or source-wide pristine guarantee.
 
-[Latest high-loss review and native examples](v124-final-source-review.md) ·
-[All40 decisions and credits](results/v124-final-source-decisions-v1.csv) ·
-[Selection, pixels and reader evidence](results/v124-final-source-review-v1.json) ·
-[35-region catalogue](../configs/low-contrast-training-rois-cleaned90776-v1.json).
+[Latest inspection and native examples](v131-source-review.md) ·
+[All40 decisions and credits](results/v131-source-decisions-v1.csv) ·
+[Selection, pixels and reader evidence](results/v131-source-review-v2.json) ·
+[36-region catalogue](../configs/low-contrast-training-rois-cleaned90774-v1.json).
 
 ## Data used and prepared
 
@@ -20,10 +21,10 @@ measured restoration-quality result or source-wide pristine guarantee.
 | Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k |
 | V129/V130 and V136/V137 pilots |90,782 /27 | Completed1k reviews show small mixed changes without clear fine-mesh recovery |
 | V138 frozen-parent branch |90,782 /27 | CPU/CUDA16+2 checks pass; original1k and native review queued after V125 completion |
-| V131/V132 spatial trial |90,781 /29 | CPU/CUDA checks pass; V13120k runs, V132 follows; full/progress reviews queued |
+| V131/V132 spatial trial |90,781 /29 | [V1311k progress](v131-progress1000-quality.md) has mixed changes and no clear mesh recovery; original20k continues, V132 follows |
 | V133 quota trial |90,781 /29 | CPU/CUDA checks pass;5% versus V131's50% quota; full/progress reviews queued |
 | V134/V135 cleaned-data cohort |90,778 /33 | Four checks complete; matched20k/full reviews queued; quality unmeasured |
-| Latest prepared future bank | **90,776 /35** | Two future-only exclusions and one leaf region; actual reader/pixel checks pass; no training-quality claim |
+| Latest prepared future bank | **90,774 /36** | Two future-only exclusions and one mixed white-plumage region; actual reader/pixel checks pass; no training-quality claim |
 
 Existing recipes, source-order headers, source cohorts and budgets remain
 unchanged. The optional [photographic epoch order](photographic-epoch-order.md)
@@ -35,55 +36,57 @@ changes do not imply training convergence or improved reconstruction.
 
 ## Latest inspection
 
-The complete V124 diagnostic trace contains1,344 first-view draws from84 traced
-Commons batches through19,800, within its completed20k training. The new
-11,200<step≤20,000 window has452 photographic draws. Prior-review/cohort
-filtering leaves385 draws/383 IDs. Eight distinct highest-loss sources per
-noise group plus eight remaining high-gradient sources nominate40 inspections.
-Changing weights, camera transforms, exposure and noise confound these losses;
-there is no automatic quality label or replay of scored augmentations.
+The immutable sparse V131 source-loss prefix through1,900 contains160 draws
+from ten traced Commons batches:114 photographic draws/82 IDs. Filtering against
+1,963 inspected IDs and the previous prepared cohort leaves46 draws/46 IDs.
+Up to eight highest distinct losses per noise group, then remaining highest
+gradient losses, nominate40 inspections. Changing weights, camera, exposure and
+noise confound scores; no automatic quality label or scored augmentation replay
+is introduced.
 
-Actual viewing covers seven sheets,40 thumbnails/80 native256 cells, sixteen
-native1024 follow-ups, five whole native-bin4 views, four native source/target
-proposal boards and the saved clean-reader leaf draw. The noisy concert photo
-and painting-dominated altar are withheld only from a future cohort. Original
-photos/caches remain intact. Real sculptures, specimens, natural bokeh,
-specular water and saturated flowers remain ordinary photography. Softness,
-native grain and uncertain processing are recorded without a pristine-source
-claim. [Images, exact decisions and limits](v124-final-source-review.md).
+Actual viewing covers seven sheets with40 thumbnails/80 native256 cells, eight
+native1024 follow-ups, six whole native-bin4 views, four source/target proposal
+boards and four further native1024 material views, plus the saved reader draw.
+A framed painting reproduction and processed-looking arch/cloud/foliage source
+are withheld only from a future cohort. The latter is real photography; coarse
+posterized-looking texture and strong outlines motivate target-quality caution,
+without identifying its processing cause. Original/cache files remain intact.
 
-The leaf annotation has4/16 eligible local fine-band blocks below5% contrast
-before attenuation, alongside stronger veins, droplets, boundaries and soil.
-The proposed down, spider-adjacent fibres and rock fields have0/16,1/16 and0/16;
-they stay ordinary photos without specialized weak annotations. Quiet or soft
-background does not itself qualify a fine-detail region. The earlier
-[pale-feather admission](repetitive-material-source-review.md),
+Mixed white plumage adds coherent feather barbs:3/16 local eligible fine-band
+blocks below5% contrast, alongside stronger feather boundaries, grass and
+background. Rice-husk, brown-wing and green-feather proposals have0/16 each;
+they remain ordinary photos without specialized weak annotations. Fixed ROIs
+were not retuned after statistics. Quiet background alone does not qualify
+fine material. [Native images, exact decisions and limits](v131-source-review.md).
+
+Earlier [mixed leaf veins](v124-final-source-review.md),
+[pale feather barbs](repetitive-material-source-review.md),
 [wing mesh/pitted stone](v124-second-source-review.md) and
 [plaster/butterfly regions](v124-first-source-review.md) remain preserved.
 
 ## Executable verification
 
-Independent heap ranking reproduces all40 nominations. Source/cache hashes,
-original native pixels and sheet cells verify. Independent UINT32 area2/FP64
-display checks8,696,880 target channels;29 differ by1 DN8 from primary FP32.
-Mirrored-FFT DCT checks1,344 source/augmented blocks with maximum error7.78e−16.
+Independent heap nomination reproduces all40 choices. Source/cache/native
+pixels and sheets verify. UINT32 area2/FP64 display checks7,864,320 strip-target
+channels, with26 one-DN8 rounding differences;832,560 proposal-target channels
+match exactly. Mirrored-FFT DCT checks1,344 source/augmented blocks within6.67e−16.
 
-Actual35-region sampling visits every region over85 reads and matches8,257,536
-common FP32 values across34 fixed-identity regions and four ordinary/four
+Actual36-region sampling visits every region over87 reads and matches8,454,144
+common FP32 values across35 fixed-identity regions and four ordinary/four
 procedural controls. The old catalogue is rebound to the same future manifest
-only for this control. Source exclusions and bank expansion intentionally can
-change sampled identities. Python/NumPy/Torch RNG stays unchanged, CUDA remains
-uninitialized and neural/noise/RAW/optimizer calls are zero.
+only for this comparison. Exclusions/bank expansion can change selected IDs;
+global sampler identity equality is not claimed. Python/NumPy/Torch RNG stays
+unchanged, CUDA remains uninitialized and neural/noise/RAW/optimizer calls are zero.
 
-The saved leaf draw is index796/seed866, not contrast-attenuated, with12/256
-eligible fine-band blocks below5%. The configured25% attenuation policy stays
-unchanged; one draw does not establish training-wide weak-detail coverage.
-The source manifest drops exactly two train rows while preserving every other
-line's bytes/order, all34 previous region objects and validation/test at2,303/
-2,255. [Training pipeline](training-pipeline.md).
+The saved white-plumage draw is index1,599/seed1,669, not contrast-attenuated,
+with105/256 eligible fine-band blocks below5%, including background. The25%
+attenuation policy remains unchanged. One draw does not establish training-wide
+weak-detail coverage. The manifest drops exactly two train rows and preserves
+all other line bytes/order, all35 prior region objects and validation/test at
+2,303/2,255. [Training pipeline](training-pipeline.md).
 
-The1,963-ID ledger supports deduplication rather than exclusions or uniform
-corpus coverage. Historical snapshots, traces and machine receipts preserve
-their bytes; the [local-time diary](../diary/2026-10-27-16-35-35-v124-final-source-curation.md)
-records this update. Both GFX pairs, camera JPEGs and siblings stay outside
-training, with originals read-only. Trained quality on the new data is unmeasured.
+The2,003-ID ledger supports deduplication, not exclusions or uniform corpus
+coverage. Historical snapshots/traces/machine receipts preserve their bytes;
+the [local-time diary](../diary/2026-10-27-17-40-27-v131-source-curation.md)
+records this update. Both GFX pairs, camera JPEGs and siblings remain held out,
+with originals read-only. Trained quality on the new data is unmeasured.

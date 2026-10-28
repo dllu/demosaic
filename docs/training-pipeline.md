@@ -6,9 +6,10 @@ Commons targets come from the completed, reviewed Quality Images corpus;
 camera-linear targets and registered paired RAW supply complementary supervision.
 [Current model](current-model.md) · [Source review](current-source-loss-review.md).
 
-The newest prepared bank has90,776 training photos and35 reviewed regions,
-including [mixed-contrast leaf veins](v124-final-source-review.md) and the
-qualified pale-feather context. The latest review withheld two grainy/artwork-heavy photos.
+The newest prepared bank has90,774 training photos and36 reviewed regions,
+including [mixed white plumage](v131-source-review.md), leaf veins and the
+qualified pale-feather context. The latest review withheld a painting reproduction
+and an architectural source with coarse processed-looking texture.
 V134/V135 retain their33-region catalogue; CPU/CUDA checks pass and completed
 production quality is unmeasured. Existing trials retain their frozen inputs:
 
@@ -77,12 +78,12 @@ stream preserves untreated source and geometry draws. A fixed ordered
 `photo_sampling_reference_manifest` uses rejection sampling for future exclusions
 without changing unaffected identities. [Implementation](../src/demosaic/photo_sampling.py).
 
-The [35-region future catalogue](../configs/low-contrast-training-rois-cleaned90776-v1.json)
-preserves all34 prior example objects and adds one mixed-contrast leaf context.
-The actual reader visits all35 regions in85 reads, preserving8,257,536 controlled
-common target values exactly. Its [native inspection and limits](v124-final-source-review.md)
+The [36-region future catalogue](../configs/low-contrast-training-rois-cleaned90774-v1.json)
+preserves all35 prior example objects and adds one mixed white-plumage context.
+The actual reader visits all36 regions in87 reads, preserving8,454,144 controlled
+common target values exactly. Its [native inspection and limits](v131-source-review.md)
 distinguish source contrast, augmented contrast and technical-quality concerns.
-The parent34 catalogue is rebound to the same future90776 manifest only for the
+The parent35 catalogue is rebound to the same future90774 manifest only for the
 reader control; exclusions and bank expansion intentionally can change identities.
 V134/V135 keep the preceding wing-mesh/pitted-stone33-region bank and its source
 order policy. These checks prove executable data binding, without a model-quality

@@ -5,8 +5,8 @@ parent.** Its full numerical/native review and complete102MP RGB16 outputs
 are verified. Fine photographic detail, green mesh and dark-field mottling remain
 unresolved. [Current choices](current-model.md) · [Completed results](v120-v121-primary.md).
 
-The [newest prepared data](v124-final-source-review.md) contains90,776 photos/35
-regions after two future-only exclusions and one mixed-contrast leaf admission.
+The [newest prepared data](v131-source-review.md) contains90,774 photos/36
+regions after two future-only exclusions and one mixed white-plumage admission.
 Reader/pixel checks pass, with no trained-quality result; all comparisons below
 retain their declared cohorts.
 

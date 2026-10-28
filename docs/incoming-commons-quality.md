@@ -31,10 +31,12 @@ not automatic labels or proven model-quality gains.
 | V120 paired32 control | **90,791** | [Primary/native review](v120-v121-primary.md): photo37.04008, known/unseen54.31272/54.00872dB, ADC maximum55.52DN16; main-GFX profile limits explicit |
 | V121 reviewed weak-detail arm | **90,787** | [Primary/native review](v120-v121-primary.md): photo37.04157dB; small local-detail change and no clear mesh gain; large ADC outlier remains |
 | V122/V123 frequency-feature cohort | **90,786** | Fourteen regions; [completed full-budget comparison](v122-v123-quality.md) finds small weak-detail changes and a joint-arm ADC regression |
-| V124/V125 mean-loss cohort | **90,784** | [Twenty-region bank](weak-photographic-targets.md); actual reader verified; V124 control training, V125 follows |
+| V124/V125 mean-loss cohort | **90,784** | [Twenty-region bank](weak-photographic-targets.md); V12420k complete, V125's original20k training runs |
 | Completed V126–V128 pilots | **90,783** | Twenty-three regions; shadow/feature terms show no useful1k gain; full native review complete |
 | Completed V129/V130 pilots | **90,782** | Twenty-seven regions; [matched FP32 trial](training-precision-pilot.md) has small selected faint-ADC gains without clear noisy/GFX recovery |
-| Prepared future photographic cohort | **90,781** | [Final V123 source review](v123-final-source-review.md); twenty-nine regions with weak petal veins and sharp mesh; reader and discarded spatial-branch checks pass, no production quality result |
+| V131/V132/V133 spatial/quota cohort | **90,781** | Twenty-nine regions; [V1311k progress](v131-progress1000-quality.md) has mixed detail changes and no clear mesh recovery; original20k continues, V132/V133 follow |
+| V134/V135 data/order cohort | **90,778** | Thirty-three regions; four CPU/CUDA checks pass, matched20k/full reviews queued |
+| Prepared future photographic cohort | **90,774** | [Latest source review](v131-source-review.md); thirty-six regions including mixed white plumage; actual reader/pixel checks pass, trained quality unmeasured |
 
 The completed-model 90,864-source cohort applies **eight additional training-source
 withholds relative to V104**: the three previously inspected photo-quality cases and five printed

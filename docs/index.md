@@ -45,7 +45,7 @@ updates the current guides without an old promotion gate.
 | --- | --- |
 | Current work | [V129 curated-detail data trial](reviewed-detail-training-pilot.md) · [Completed V128 feature pilot](v128-feature-pilot-quality.md) · [Completed V126/V127 shadow pilot](reviewed-shadow-pilot-quality.md) · [V123 saved-state recovery](v123-memory-guard-recovery.md) · [V124/V125 conditional-mean training](conditional-mean-training.md) · [V122/V123 learned frequency trials](learned-raw-frequency-training.md) · [Native-camera comparison](native-camera-development.md) · [Current model choices](current-model.md) |
 | Results | [Experiment index](experiments.md), [PSNR history](performance-history.md) |
-| Latest source review | [V124 final high-loss inspection](v124-final-source-review.md):40 new sources, two future-only exclusions, one mixed-contrast leaf region; prepared90,776/35, trained quality unmeasured |
+| Latest source review | [V131 high-loss inspection](v131-source-review.md):40 new sources, two future-only exclusions and one mixed white-plumage context; prepared90,774/36, trained quality unmeasured |
 | Older work | [Chronological archive](experiment-archive.md), [local-time diary](../diary/index.md) |
 | Current model | [V120 and useful alternatives](current-model.md) · [Real-camera metrics](real-camera-quality.md) · [GFX comparisons](gfx-qualitative.md) · [Q2/Sony/GFX50R](cross-camera-qualitative.md) |
 | Usage | [Commands and data conventions](usage.md) · [Linear DNG/JPEG export](dng-export.md) |

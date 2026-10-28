@@ -17,8 +17,8 @@ mottling still need work. [Current choices](docs/current-model.md) ·
 [GFX gallery](docs/gfx-qualitative.md) · [Camera comparisons](docs/native-camera-development.md).
 
 Training uses geometry before final downsampling and zero optical blur. The
-[latest source review](docs/v124-final-source-review.md) prepares90,776
-photos/35 regions, including mixed-contrast leaf veins and faint feather barbs.
+[latest source review](docs/v131-source-review.md) prepares90,774
+photos/36 regions, including mixed white plumage, leaf veins and fine feather barbs.
 V134/V135 keep their33-region
 data; all existing jobs retain declared inputs. [Data pipeline](docs/training-pipeline.md).
 An optional [photographic epoch order](docs/photographic-epoch-order.md) covers

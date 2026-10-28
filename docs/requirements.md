@@ -60,9 +60,9 @@ quality remain separate measurements. Actual quality is pending.
 | Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
 | Current documentation |56 completed primary endpoints in plot; native triplets, latest GFX comparisons and explicit profiles/checkpoints; local-time diary | Update useful results without promotion freezes |
 
-The latest [future source preparation](v124-final-source-review.md) contains
-90,776 photos/35 regions and1,963 inspected IDs, with two additional exclusions
-and one mixed-contrast leaf context. Actual reader/pixel checks pass; trained
+The latest [future source preparation](v131-source-review.md) contains
+90,774 photos/36 regions and2,003 inspected IDs, with two additional exclusions
+and one mixed white-plumage context. Actual reader/pixel checks pass; trained
 quality is unmeasured and existing cohorts remain fixed.
 
 The [V116 data review](v116-quality.md) is complete at its original20k endpoint.
