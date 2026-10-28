@@ -386,6 +386,7 @@ class PretrainedRgbDemosaic(nn.Module):
             "legacy-v1",
             "cosine-rms-v2",
             "memory-only-v3",
+            "patch-memory-v4",
         ):
             raise ValueError("Unknown RAW global conditioning mode")
         if raw_global_conditioning != "legacy-v1" and not raw_global_features:
@@ -457,7 +458,11 @@ class PretrainedRgbDemosaic(nn.Module):
 
             self.raw_spatial = RawSpatialFeatures()
         if raw_global_features:
-            if raw_global_conditioning == "memory-only-v3":
+            if raw_global_conditioning == "patch-memory-v4":
+                from .raw_patch_memory_features import PatchMemoryRawGlobalFeatures
+
+                self.raw_global = PatchMemoryRawGlobalFeatures()
+            elif raw_global_conditioning == "memory-only-v3":
                 from .raw_global_memory_features import MemoryOnlyRawGlobalFeatures
 
                 self.raw_global = MemoryOnlyRawGlobalFeatures()

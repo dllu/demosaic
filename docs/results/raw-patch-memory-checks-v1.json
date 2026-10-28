@@ -1,0 +1,287 @@
+{
+  "status": "genuine-patch-memory-checks-complete-fresh1000-training-queued-quality-unmeasured",
+  "recorded_local": "2026-10-27T21:55:32.928992-07:00",
+  "prototype_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-prototype-v1/prototype-plan-v1.json",
+    "sha256": "16c26dc3dbdca249f4eb2af776140d3227edd6cac780539189b85cb619012f97"
+  },
+  "implementation": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/raw_patch_memory_features.py",
+    "sha256": "3afce3ac5a5f98addf3129f4ce2a7c700a70a0c6e95a98d489e80124deb896d7"
+  },
+  "check_driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/check_raw_patch_memory_pilot.py",
+    "sha256": "3c248dc6f86cf3f4a32e2bdd17a8d66cf22227e49eaaae9f1eb87078d526328a"
+  },
+  "training_driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/train_patch_memory_pilot.py",
+    "sha256": "f9d7f255d7621a668489cb0b25658839614b3ac41d33ce8597884d9f6c2dfb84"
+  },
+  "recipe": {
+    "path": "/home/dllu/proj/demosaic/configs/quality-v120-raw-patch-memory-pilot-v140.yaml",
+    "sha256": "fdf60d57af9ab275a5aa4b15bd87a99a4a2e0504e712b0aa8984ffd299970b5f"
+  },
+  "check_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/plan.json",
+    "sha256": "58db6ca918e51c9d0d1af4e775b1aac81442c280559937b6a218b7c4cde6992f"
+  },
+  "CPU_check": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/CPU-V140-result.json",
+    "sha256": "7b596f5ee86dc93661e0f688aa080a44c3c7eaede6e2c36095990688259b5552"
+  },
+  "CUDA_check": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/CUDA-V140-result.json",
+    "sha256": "8184ac4b27138afb5a9879eddc2ec77f342487e1e98c9129709a5e4215239646"
+  },
+  "independent_state_input_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/independent-audit-v1.json",
+    "sha256": "7b5d4f33c9f78d06185f840eaa075a7cfa6fec92b5b8172a1725ba6529ee6ae7"
+  },
+  "independent_audit_summary": {
+    "status": "passed-independent-patch-memory-check-state-input-and-source-audit",
+    "audit_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/independent-audit-plan-v1.json",
+      "sha256": "65b5f38498fb004a3ac1952a153bc669b290b36bfa81b9168cedae36c22e00cd"
+    },
+    "auditor": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/audit-checks-v1.py",
+      "sha256": "f2e0882e20cbb05e4c7801adc23a10cffa98f618fc15ddced557a2782881ec01"
+    },
+    "phases": [
+      {
+        "phase": "CPU",
+        "result": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/CPU-V140-result.json",
+          "sha256": "7b596f5ee86dc93661e0f688aa080a44c3c7eaede6e2c36095990688259b5552"
+        },
+        "saved_states": [
+          {
+            "patch_weights_nonzero": 2048,
+            "step": 16,
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/CPU-V140-step16.pt",
+              "sha256": "bf5b95d560bac7a22e7745372e39a137a8a004af6488d3dbdfa16c0f5aa6c95f"
+            },
+            "model_EMA_tensors": 107,
+            "Adam_states": 16,
+            "frozen_parent_model_EMA_tensors_each": 91,
+            "trained_source_modules": 69
+          },
+          {
+            "patch_weights_nonzero": 2048,
+            "step": 18,
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/work/artifacts/CPU/V140/last.pt",
+              "sha256": "53d5e692653c2a99fd566821f67a2dc74abb9a968b4cdfbae755eefbb9c605bf"
+            },
+            "model_EMA_tensors": 107,
+            "Adam_states": 16,
+            "frozen_parent_model_EMA_tensors_each": 91,
+            "trained_source_modules": 69
+          }
+        ],
+        "finite_state_values": 131748408,
+        "prepared_values_exact": 2507076,
+        "batch_hashes_independently_recomputed": 18,
+        "first_output_values_exact": 65536,
+        "gradient_metadata_fields_checked": 288,
+        "changed_resume_rejections": 8,
+        "worker_counts": {
+          "prepared_training_batches": 18,
+          "target_contexts": 18,
+          "shadow_selected_targets": 0,
+          "training_forwards": 18,
+          "encoder_forwards": 18,
+          "optimizer_steps": 18
+        }
+      },
+      {
+        "phase": "CUDA",
+        "result": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/CUDA-V140-result.json",
+          "sha256": "8184ac4b27138afb5a9879eddc2ec77f342487e1e98c9129709a5e4215239646"
+        },
+        "saved_states": [
+          {
+            "patch_weights_nonzero": 2048,
+            "step": 16,
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/CUDA-V140-step16.pt",
+              "sha256": "cabb77f437a5bccbf647c8030791d9400740dfdd238f14fcadc604b0def7dc55"
+            },
+            "model_EMA_tensors": 107,
+            "Adam_states": 16,
+            "frozen_parent_model_EMA_tensors_each": 91,
+            "trained_source_modules": 69
+          },
+          {
+            "patch_weights_nonzero": 2048,
+            "step": 18,
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/work/artifacts/CUDA/V140/last.pt",
+              "sha256": "badf77fbb2ebb0895ce2280987297aef303dbdb2fc86f350c7b816679b3ee353"
+            },
+            "model_EMA_tensors": 107,
+            "Adam_states": 16,
+            "frozen_parent_model_EMA_tensors_each": 91,
+            "trained_source_modules": 69
+          }
+        ],
+        "finite_state_values": 131748408,
+        "prepared_values_exact": 160437312,
+        "batch_hashes_independently_recomputed": 18,
+        "first_output_values_exact": 4194304,
+        "gradient_metadata_fields_checked": 288,
+        "changed_resume_rejections": 8,
+        "worker_counts": {
+          "prepared_training_batches": 18,
+          "target_contexts": 288,
+          "shadow_selected_targets": 0,
+          "training_forwards": 18,
+          "encoder_forwards": 18,
+          "optimizer_steps": 18
+        }
+      }
+    ],
+    "source_audit": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-prototype-v1/source-audit-v1.json",
+      "sha256": "e4a30e19639c212a6e23af8a238ab95e16c9c3d02b9dfeec479d89226710828a"
+    },
+    "legacy_modules_byte_identical": 65,
+    "existing_global_forward_AST_exact_after_point_hook_inline": true,
+    "new_neural_module_forwards": 0,
+    "new_encoder_forwards": 0,
+    "new_noise_draws": 0,
+    "RAW_decodes": 0,
+    "optimizer_updates": 0,
+    "CUDA_initialized": false,
+    "scope": "Saved16/18 checkpoints, exact91 parent model/EMA, all36 prepared batches and initial RGB/auxiliary arrays against savedV137, finite state and gradient metadata. No model construction/call, sensor draw, independent backward derivation or trained restoration-quality claim."
+  },
+  "source_inline_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-prototype-v1/source-audit-v1.json",
+    "sha256": "e4a30e19639c212a6e23af8a238ab95e16c9c3d02b9dfeec479d89226710828a"
+  },
+  "source_audit_summary": {
+    "baseline_modules": 68,
+    "current_modules": 69,
+    "unchanged_existing_module_bytes": 65,
+    "global_forward_AST_exact_after_single_point_hook_inline": true,
+    "global_other_methods_exact_except_explicit_mode_validator": true
+  },
+  "feature_scope_tests": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-prototype-v1/tests-v1.log",
+    "sha256": "2664b38a9ecfa4c925901b6c631efc1e69f6c76aadf0007ed294bb42d356cbf2"
+  },
+  "feature_scope_tests_passed": 99,
+  "handoff_tests": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-prototype-v1/handoff-tests-v1.log",
+    "sha256": "f6c3428a72259cde0f5f3829b656f4ac62e77102cc8c0127acfed6e353f210ee"
+  },
+  "handoff_tests_passed": 21,
+  "preserved_zero_test_collection_error": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-prototype-v1/test-collection-v1.log",
+    "sha256": "3656448af2f2be8ae009cfca9daeef5176a9972e06ca7a5b7b6bba29fe3cbed2"
+  },
+  "preserved_static_audit_metadata_error_operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-prototype-v1/audit-source-v1.py",
+    "sha256": "3945e1cd0f53e801c00cc7e694ee167e599a259e0a68cbbbd119705346252852"
+  },
+  "branch_tensors": 16,
+  "branch_parameters": 16192,
+  "additional_neighbor_parameters": 2048,
+  "model_EMA_tensors": 107,
+  "Adam_states": 16,
+  "exact_parent_tensors_each_model_EMA": 91,
+  "checked_saved_values_finite": 263496816,
+  "prepared_array_values_exact_against_saved_control": 162944388,
+  "independently_rehashed_batches": 36,
+  "initial_output_values_exact": 4259840,
+  "gradient_metadata_fields": 576,
+  "changed_resume_rejections": 16,
+  "genuine_check_root_encoder_optimizer_calls_each": 36,
+  "prepared_target_slots": 306,
+  "new_control_model_forwards": 0,
+  "initial_zero_offset_values": 68157440,
+  "CUDA_peak_allocated_bytes": 7995275776,
+  "new_CUDA_admission_GiB": 50,
+  "new_CUDA_allocator_cap_GiB": 12,
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/plan.json",
+    "sha256": "5054b05186eb65c78b650770df754e0484ac58cbbbf36a2fb5ce93314d01f99a"
+  },
+  "training_launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/launch-v1.json",
+    "sha256": "aace5296ad37f151a54897a191879034a615ddd38670a06e1d16b7ef10cb233e"
+  },
+  "training_owner": {
+    "pid": 3278427,
+    "created": 1793162937.3
+  },
+  "training_status_at_publication": {
+    "controller": {
+      "pid": 3278427,
+      "created": 1793162937.3
+    },
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/plan.json",
+      "sha256": "5054b05186eb65c78b650770df754e0484ac58cbbbf36a2fb5ce93314d01f99a"
+    },
+    "completed": {
+      "CPU-V140": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/CPU-V140-result.json",
+        "sha256": "7b596f5ee86dc93661e0f688aa080a44c3c7eaede6e2c36095990688259b5552"
+      },
+      "CUDA-V140": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/CUDA-V140-result.json",
+        "sha256": "8184ac4b27138afb5a9879eddc2ec77f342487e1e98c9129709a5e4215239646"
+      }
+    },
+    "status": "waiting-for-original-V139-native-review",
+    "updated_unix": 1793162938.2045708,
+    "child": null
+  },
+  "training_budget": {
+    "optimizer_root_calls_each": 1000,
+    "validation_forwards": 64,
+    "encoder_forwards": 1064,
+    "target_slots": 16000,
+    "horizon": 1000
+  },
+  "quality_dependency": {
+    "status": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-quality-v1/status.json",
+    "owner": {
+      "pid": 3129528,
+      "created": 1793155748.91
+    },
+    "queue": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-global-memory-only-quality-v1/queue-plan-v1.json",
+      "sha256": "c3799666c5a61fc454543f0d910551a6a172be34d2c9fc7ec4401ed633ed5b66"
+    },
+    "absolute_deadline_unix": 1793847757.0
+  },
+  "adopted_checks": {
+    "CPU-V140": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/CPU-V140-result.json",
+      "sha256": "7b596f5ee86dc93661e0f688aa080a44c3c7eaede6e2c36095990688259b5552"
+    },
+    "CUDA-V140": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/CUDA-V140-result.json",
+      "sha256": "8184ac4b27138afb5a9879eddc2ec77f342487e1e98c9129709a5e4215239646"
+    }
+  },
+  "prospective_native_review_support": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-training-v1/run/native-review-support-v1.json",
+    "sha256": "9f6182a8044c63caf17c4b1e019d2439ee0c853f2a074aa28a1744fe07cababa"
+  },
+  "prospective_review_candidate_calls": 102,
+  "prospective_reused_predictions": 612,
+  "review_execution_automation_launched": false,
+  "next_work": "Prepare dedicated102-input endpoint binder/collector/report/audit/faint/JPEG controller without changing this fixed support or any original queue. Later actual native review and publication remain required.",
+  "quality_collection_calls_so_far": 0,
+  "RAW_decodes": 0,
+  "current_selector": {
+    "path": "/home/dllu/proj/demosaic/configs/current-model.json",
+    "sha256": "d2519511945bfeeee0c89154aba872726b3b5922a7dc98279e6b868d115ec41e"
+  },
+  "scope": "V140 architecture/check and queued fresh1k evidence, not improved-restoration or complete endpoint quality. Deterministically recreated training inputs match old saved controls; no old-model inference replay. Only new16-tensor branch trains, all91 parent model/EMA stay exact. Existing source cohorts/owners/plans/budgets/deadlines remain unchanged. Fine-mesh recovery, broad SOTA/real-camera superiority and100MP/10s unproven."
+}

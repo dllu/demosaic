@@ -21,7 +21,7 @@ def verify_initial_restoration(
     """Check the complete common state and the explicitly declared new branch."""
     import torch
 
-    assert global_tensors in (15, 18)
+    assert global_tensors in (15, 16, 18)
     count = 91 + global_tensors if global_features else (114 if spatial else 91)
     assert len(actual) == count
     if fresh and (spatial or global_features):
@@ -164,8 +164,8 @@ def worker(path, phase, arm):
     spatial = config["model"].get("raw_spatial_features", False)
     global_features = config["model"].get("raw_global_features", False)
     global_only = training.validate_raw_global_only(config)
-    global_tensors = (
-        15 if config["model"].get("raw_global_conditioning") == "memory-only-v3" else 18
+    global_tensors = {"memory-only-v3": 15, "patch-memory-v4": 16}.get(
+        config["model"].get("raw_global_conditioning"), 18
     )
     assert not (spatial and global_features)
     expected_tensors, expected_states = (

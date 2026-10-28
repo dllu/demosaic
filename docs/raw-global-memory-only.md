@@ -104,6 +104,11 @@ isolation, gradients, portable branch reload, parent/EMA freezing and mode guard
 
 ## Queued training and quality comparison
 
+The [V140 descriptor prototype](raw-patch-memory.md) adds neighboring gradient
+arrangements before this same memory-only path. Genuine checks pass and a fresh
+1k run waits for V139's original review. Existing V139 mathematics/source
+snapshots remain unchanged; this is a separate unmeasured architecture comparison.
+
 The original1k recipe changes only the operator against V138: same
 90,782 photos/27 reviewed regions, seed70,50% reviewed quota, corrected paired32
 and native128 catalogues, single-view loss, zero optical blur, LR1e−3 and100-step

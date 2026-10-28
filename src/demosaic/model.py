@@ -430,6 +430,7 @@ class JointDemosaic(nn.Module):
             "legacy-v1",
             "cosine-rms-v2",
             "memory-only-v3",
+            "patch-memory-v4",
         ):
             raise ValueError("Unknown RAW global conditioning mode")
         if cfg.raw_global_conditioning != "legacy-v1" and not cfg.raw_global_features:

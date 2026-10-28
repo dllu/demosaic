@@ -33,7 +33,8 @@ def require_resume_global_features(previous, current):
         for config in (previous, current)
     ]
     if any(
-        type(mode) is not str or mode not in ("legacy-v1", "cosine-rms-v2", "memory-only-v3")
+        type(mode) is not str
+        or mode not in ("legacy-v1", "cosine-rms-v2", "memory-only-v3", "patch-memory-v4")
         for mode in modes
     ):
         raise ValueError("Resume RAW global conditioning is invalid")
@@ -93,6 +94,10 @@ class RawGlobalFeatures(nn.Module):
         normalized, scale = self.normalize(content, self.ff_gain)
         return content + self.down(F.gelu(self.up(normalized))) * scale
 
+    def embed_content(self, content):
+        """Point embedding; optional variants can add spatial descriptors here."""
+        return self.embed(content.flatten(2).transpose(1, 2))
+
     def forward(self, packed, variance, colors, span=None):
         if packed.ndim != 4 or packed.shape[1] != 4 or variance.shape != packed.shape:
             raise ValueError("Global features require matching four-phase RAW and variance")
@@ -116,7 +121,7 @@ class RawGlobalFeatures(nn.Module):
             placement = F.one_hot(colors, 3).flatten(1).to(packed.dtype)
             placement = placement[:, :, None, None].expand(-1, -1, height, width)
             condition = torch.cat((noise, placement), 1).flatten(2).transpose(1, 2)
-            features = self.embed(content.flatten(2).transpose(1, 2))
+            features = self.embed_content(content)
             features = self.mix(features, condition)
             latent = self.expand(features).transpose(1, 2).reshape(batch, 64, height, width)
             return self.project(F.pixel_shuffle(latent, 2))
