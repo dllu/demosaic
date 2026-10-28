@@ -29,12 +29,13 @@ unresolved; broad state-of-the-art quality is unproven.
 | Does encoder size alone fix weak contrast? | [Full Tiny/Small diagnosis](local-material-detail.md) finds nearly unchanged weakest-stratum gain on427 photos. Small's camera/detail tradeoffs remain useful; no size-only explanation is established |
 | How much of the bigger corpus does a run visit? | [Full20k source audit](training-source-schedule-coverage.md) finds46.36% visitation at the spatial trial's50% reviewed quota versus69.26% at5%. [V133](reviewed-quota-training.md) now queues that quota-only20k comparison against V131; CPU/CUDA16+2 and independent saved-state checks pass. Quality remains unmeasured |
 
-The latest [source inspection](v125-v131-source-review.md) brings the ledger to
-2,043 unique reviewed IDs and preserves the future90,774-photo/36-region bank.
-All40 new V125/V131 sources are retained; fixed fur, marble, leaf-vein and
-wood-grain proposals stay ordinary photos, without specialized weak annotations.
-The [preceding review](v131-source-review.md) withheld a painting reproduction
-and processed-looking arch source and admitted one mixed white-plumage context.
+The latest [source inspection](v125-v131-source-review-5600-9800.md) brings the
+ledger to 2,083 unique reviewed IDs and prepares 90,773 photos/37 regions. It
+withholds one grainy coastal source and adds mixed leaf detail, preserving all
+36 prior region objects. The actual reader visits all 37 regions; a saved
+contrast-attenuated leaf sample has 254/256 eligible blocks below 5%, including
+quiet areas. Strong grey plumage, mostly smooth stone and snow/sky annotations
+remain ordinary photos; low contrast alone does not establish useful fine detail.
 Quality work uses zero optical PSF augmentation and
 geometry before final downsampling, with reviewed material regions and corrected
 paired-reference masks. [Training pipeline](training-pipeline.md) ·

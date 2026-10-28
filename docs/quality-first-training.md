@@ -40,13 +40,13 @@ PSF augmentation. Commons targets use4× binning → higher-resolution geometry
 → area2 reduction. Only the selected data domain is loaded/augmented.
 [Augmentation, domain scheduling and batch evidence](training-pipeline.md).
 
-The prepared future bank has **90,774 photos/36 reviewed regions**;
-validation/test remain2,303/2,255. The [latest source inspection](v125-v131-source-review.md)
-brings the ledger to2,043 IDs, retains all40 new sources and declines four
-specialized weak annotations. It changes no manifest/catalogue bytes. Previous
-exclusions and mixed white-plumage/leaf/feather additions remain preserved.
-Prepared data and reader checks do not establish trained quality.
-[Current source review](current-source-loss-review.md).
+The prepared future bank has **90,773 photos/37 reviewed regions**;
+validation/test remain 2,303/2,255. The [latest source inspection](v125-v131-source-review-5600-9800.md)
+brings the ledger to 2,083 IDs, withholds one grainy coastal source and adds one
+mixed-contrast leaf region. All 36 prior region objects and remaining manifest
+line bytes/order are preserved. The actual reader visits all 37 regions and
+matches 8,650,752 common target values over 89 reads. Prepared data/reader checks
+do not establish trained quality. [Current source review](current-source-loss-review.md).
 
 Corpus availability differs from actual visitation. The [20k schedule audit](training-source-schedule-coverage.md)
 finds46.36% visitation at50% reviewed quota versus69.26% at5% on its fixed cohort.

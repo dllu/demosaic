@@ -51,9 +51,11 @@ not silently change an existing run's parent, schedule or input snapshots.
 
 The current [training pipeline](training-pipeline.md) uses native 256/B16,
 geometry before final area reduction and zero optical PSF augmentation.
-The newest prepared dataset has90,774 photos/36 reviewed regions, including
-[mixed white plumage](v131-source-review.md), leaf veins and pale feather detail. V134/V135 retain
-their33-region bank; active and queued comparisons keep declared cohorts. A
+The newest prepared dataset has 90,773 photos/37 reviewed regions. The
+[latest source inspection](v125-v131-source-review-5600-9800.md) withholds one
+grainy coastal source and adds mixed leaf detail while preserving all 36 prior
+region objects. V134/V135 retain their 33-region bank; active and queued
+comparisons keep declared cohorts. A
 [full source-schedule audit](training-source-schedule-coverage.md) distinguishes
 corpus size from the identities actually selected in 20k planned updates.
 The optional [photographic epoch order](photographic-epoch-order.md) achieves

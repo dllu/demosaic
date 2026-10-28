@@ -17,11 +17,11 @@ mottling still need work. [Current choices](docs/current-model.md) ·
 [GFX gallery](docs/gfx-qualitative.md) · [Camera comparisons](docs/native-camera-development.md).
 
 Training uses geometry before final downsampling and zero optical blur. The
-[current source review](docs/current-source-loss-review.md) covers2,043 inspected
-IDs; the prepared bank has90,774 photos/36 regions, including mixed white
-plumage, leaf veins and fine feather barbs. The latest40 sources are retained;
-four material proposals remain ordinary photos. V134/V135 keep their33-region
-data; all existing jobs retain declared inputs. [Data pipeline](docs/training-pipeline.md).
+[current source review](docs/current-source-loss-review.md) covers 2,083 inspected
+IDs; the prepared bank has 90,773 photos/37 regions. The latest inspection
+withholds one grainy coastal source and adds a mixed-contrast leaf region.
+V134/V135 keep their 33-region data; existing jobs retain declared inputs.
+[Data pipeline](docs/training-pipeline.md).
 An optional [photographic epoch order](docs/photographic-epoch-order.md) covers
 all prepared photos within 20k steps; its trained quality remains unmeasured.
 

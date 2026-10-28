@@ -6,13 +6,12 @@ Commons targets come from the completed, reviewed Quality Images corpus;
 camera-linear targets and registered paired RAW supply complementary supervision.
 [Current model](current-model.md) · [Source review](current-source-loss-review.md).
 
-The newest prepared bank has90,774 training photos and36 reviewed regions,
-including [mixed white plumage](v131-source-review.md), leaf veins and the
-qualified pale-feather context. The [latest40-source review](v125-v131-source-review.md)
-retains all40 and declines four specialized weak annotations; data bytes remain
-unchanged and the inspection ledger reaches2,043 IDs. The
-[preceding review](v131-source-review.md) withheld a painting reproduction
-and an architectural source with coarse processed-looking texture.
+The newest prepared bank has 90,773 training photos and 37 reviewed regions,
+including mixed white plumage, leaf veins and pale feather detail. The
+[latest 40-source review](v125-v131-source-review-5600-9800.md) withholds one grainy
+coastal source and adds one mixed-contrast leaf region, preserving all 36 prior
+region objects. The inspection ledger reaches 2,083 IDs. Earlier painting and
+processed-looking architectural exclusions remain preserved.
 V134/V135 retain their33-region catalogue; CPU/CUDA checks pass and completed
 production quality is unmeasured. Existing trials retain their frozen inputs:
 
@@ -81,13 +80,16 @@ stream preserves untreated source and geometry draws. A fixed ordered
 `photo_sampling_reference_manifest` uses rejection sampling for future exclusions
 without changing unaffected identities. [Implementation](../src/demosaic/photo_sampling.py).
 
-The [36-region future catalogue](../configs/low-contrast-training-rois-cleaned90774-v1.json)
-preserves all35 prior example objects and adds one mixed white-plumage context.
-The actual reader visits all36 regions in87 reads, preserving8,454,144 controlled
-common target values exactly. Its [native inspection and limits](v131-source-review.md)
+The [37-region future catalogue](../configs/low-contrast-training-rois-cleaned90773-v1.json)
+preserves all 36 prior example objects and adds one mixed-contrast leaf context.
+The actual reader visits all 37 regions in 89 reads, preserving 8,650,752 common
+target values exactly. Its [native inspection and limits](v125-v131-source-review-5600-9800.md)
 distinguish source contrast, augmented contrast and technical-quality concerns.
-The parent35 catalogue is rebound to the same future90774 manifest only for the
-reader control; exclusions and bank expansion intentionally can change identities.
+The parent 36-region catalogue is rebound to the same future 90,773 manifest only
+for the reader control; exclusions and bank expansion can change identities.
+The saved leaf draw at index617/seed687 is actually contrast-attenuated, with
+254/256 eligible blocks below 5% fine-band contrast, including quiet areas. This
+single sample does not establish training-wide weak-detail coverage.
 V134/V135 keep the preceding wing-mesh/pitted-stone33-region bank and its source
 order policy. These checks prove executable data binding, without a model-quality
 gain or uniformly pristine source claim.
