@@ -117,6 +117,7 @@ implementation. The CUDA check executes the current model-source bytes.
 
 These are discarded implementation states. The separate
 [V131/V132 trial](raw-spatial-training.md) uses seed70 and full20k horizons on both
-arms, with four newly executed exact-recipe checks. Production is queued; a
-matched architectural comparison and native photographic/GFX recovery remain
+arms, with four newly executed exact-recipe checks. V131's original20k control
+runs and V132 follows. The completed [control1k progress review](v131-progress1000-quality.md)
+has mixed changes; the matched architecture/full-endpoint comparison remains
 to be measured. Both real train scenes and siblings stay outside training.

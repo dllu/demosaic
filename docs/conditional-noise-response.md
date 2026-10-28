@@ -159,8 +159,10 @@ steps on their existing single-observation path. Avoid loading examples that
 the paired-view layout would discard. Preserve the current zero-blur recipe,
 and compare noise, camera color and real weak detail alongside photo PSNR.
 The [V124/V125 implementation and training](conditional-mean-training.md)
-now implement this experiment; V124 is running with the
-[partial14k quality review](v124-progress14000.md) complete. The trained
+now implement this experiment; V124's original20k control is complete and V125
+runs. The [partial14k quality review](v124-progress14000.md) and
+[V125 progress/native trends](v125-progress4000-quality.md) remain separate from
+the pending full endpoint comparison. The trained
 conditional-bias comparison remains pending.
 Both arms load16 unique targets once and create32 simulated observations.
 The completed V123 run and original review evidence remain unchanged; no model choice, noise

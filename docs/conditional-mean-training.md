@@ -1,10 +1,11 @@
 # Independent-noise mean-loss training
 
-**V125's [2k progress review](v125-progress2000-quality.md) improves the eight-photo
-monitor by0.064dB over V124 at2k, mainly from highlights, but does not recover
-weak fine detail.** Four RGGB faint-ADC contexts lose1.248dB against V120, with
-spatial sRGB MSE rising32.7% and no clear new real-mesh recovery. This is separate
-support from the monitor and does not isolate the mean-loss effect.
+**V125's [4k progress review](v125-progress4000-quality.md) nearly recovers V120's
+ordinary four-context mean but remains1.144dB lower on faint ADC, without clear
+new real-mesh recovery.** The matched eight-photo monitor is+0.019dB over V124
+at4k, after a highlight-dominated+0.064dB at2k. Faint spatial sRGB MSE remains
+24.9% above V120. Monitoring/native supports differ; neither isolates a broad
+mean-loss quality effect. [Earlier2k native review](v125-progress2000-quality.md).
 V124's original20k control training is complete; V125 continues its original20k
 run. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
 comparison remain pending; V120 remains the general recommendation. This experiment

@@ -15,7 +15,7 @@ CPU/CUDA checks, but its [completed1k pilot](reviewed-shadow-pilot-quality.md)
 shows no useful quality gain. It stays off by default.
 
 The [V124/V125 training recipes](conditional-mean-training.md) test conditional
-bias with frozen inputs; V124 control is running and V125 follows. The
+bias with frozen inputs; V124's original20k control is complete and V125 runs. The
 [completed V122/V123 comparison](v122-v123-quality.md) finds little weak natural
 detail recovery from its frequency input adapter. The new
 [full source-schedule audit](training-source-schedule-coverage.md) separately

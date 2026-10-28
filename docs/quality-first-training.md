@@ -1,180 +1,85 @@
 # Current quality training
 
-**V120 Small is the current general recommendation and quality-development
-parent.** Its full numerical/native review and complete102MP RGB16 outputs
-are verified. Fine photographic detail, green mesh and dark-field mottling remain
-unresolved. [Current choices](current-model.md) · [Completed results](v120-v121-primary.md).
+**V120 Small is the general recommendation and quality-development parent.**
+It keeps the V84-family pretrained DRUNet RGB trunk, physical noise/camera
+conditioning and official frozen DINOv3 ConvNeXt-Small pyramid. Full427-photo,
+camera/color, native-image and102MP RGB16 reviews are complete. Fine foliage,
+weak texture, green mesh and dark-camera mottling remain unresolved.
+[Current choices](current-model.md) · [Full results](v120-v121-primary.md).
 
-The [newest prepared data](v131-source-review.md) contains90,774 photos/36
-regions after two future-only exclusions and one mixed white-plumage admission.
-Reader/pixel checks pass, with no trained-quality result; all comparisons below
-retain their declared cohorts.
+Useful measured gains and native images determine the baseline; historical
+promotion thresholds do not freeze the architecture. V117 Tiny has a slightly
+higher photo mean; V114 Tiny has lower tested ADC maximum color bias. Broad
+state-of-the-art quality, large real-camera superiority over RawNIND and100MP
+within10s remain unproven. Quality takes priority over speed.
 
-| Comparison | Data and hypothesis | Current state |
+## Active quality questions
+
+| Comparison | Fixed intervention | Present evidence |
 | --- | --- | --- |
-| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 sources/twenty regions;16 unique targets and two noise views, mean-loss weights0/.25 | V12420k control complete; V125's original20k training runs. Full quality pending; [14k progress](v124-progress14000.md) has small noisy/shadow gains, worse faint ADC and weak real detail unresolved |
-| [V131/V132 spatial attention](raw-spatial-training.md) |90,781 sources/29 reviewed regions; same V120 parent, seed, inputs, single-view loss and20k schedule; spatial branch off/on | [V131 control1k review](v131-progress1000-quality.md) complete: ordinary+.0016dB, deepest shadows−.0237–.0342dB, faint ADC−.2734dB versus V120; mixed local detail and no clear mesh recovery. Original20k control continues; V132 follows |
-| [V133 reviewed quota](reviewed-quota-training.md) | Same90,781/29 and20k as V131,5% versus50% reviewed sampling | CPU/CUDA checks pass; early/full reviews queued; trained quality pending |
-| [V134/V135 photo epochs](photo-epoch-training.md) | Cleaned90,778/33, same20k replacement/epoch comparison | Four CPU/CUDA checks pass; production and full reviews queued after V133's automated review |
-| [V136 global RAW attention](v136-global-attention-quality.md) | Same90,782/27 and1k as saved V129; only18,272-parameter branch differs | Complete102-input review: tiny panel-mean gains, mixed local detail, no clear new mesh recovery;38 boards actually viewed and both audits pass. No20k global run queued |
-| [V137 global conditioning](v137-global-conditioned-quality.md) | Same90,782/27,18 tensors and1k as V136; only matching/value normalization changes | Complete102-input four-method review: faint ADC+.0334dB, ordinary/shadows−.0005–.0044dB; stronger adaptation, mixed local detail and no clear new fine-mesh recovery. Independent audits and38 actual native views complete |
-| [V138 frozen-parent global branch](raw-global-only-training.md) | Same90,782/27 and1k as V137; freeze91 parent tensors and train18 branch tensors at LR1e−3 | Genuine CPU/CUDA16+2 checks pass with exact parent model/EMA. Production and102-input review wait for V125 completion; quality is unmeasured |
+| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 photos/20 regions; V120/seed67/20k; two noise views, mean-loss weights0/.25 | V12420k complete; V12520k running. [4k progress](v125-progress4000-quality.md) separates monitoring from native detail. Matched endpoints and repeated-noise bias pending |
+| [V131/V132 spatial attention](raw-spatial-training.md) |90,781/29; V120/seed70/20k;22,664-parameter local branch off/on | V131 runs, V132 follows. [Control1k](v131-progress1000-quality.md) has tiny ordinary gains, shadow/faint regressions and no clear mesh recovery |
+| [V133 photographic quota](reviewed-quota-training.md) | Same cohort/parent/seed/20k as V131;5% rather than50% reviewed sampling | CPU/CUDA16+2 pass; production/progress/full reviews queued after both spatial arms |
+| [V134/V135 cleaned data and epochs](photo-epoch-training.md) |90,778/33; matched20k replacement/epoch sampling | All four CPU/CUDA16+2 checks pass; production/full reviews queued after V133's review |
+| [V138 frozen-parent global branch](raw-global-only-training.md) |90,782/27;1k; freeze91 V120 tensors, train18 global tensors at LR1e−3 | CPU/CUDA16+2 pass; original1k/native/faint/GFX review queued after V125 completes |
+| [V139 memory-only branch](raw-global-memory-only.md) | Same1k/data/parent/inputs as V138; remove direct local residual/MLP shortcut | CPU/CUDA16+2 pass;1k and102-input review queued after V138's review chain;510 saved predictions reused |
 
-The [trained V137 memory-write diagnostic](global-memory-contribution.md) finds
-only0.83–1.39% change in added branch-offset RMS when memory is removed on six
-retained contexts. This is a feature intervention, not final-RGB quality. A
-bounded V138 companion will check the same mechanism after its existing primary/
-faint reviews, reusing V137 controls and adding no full-model/DINO calls or training.
+Jobs retain original sources, parents, data, budgets and dependency/resource
+policies. Progress capture does not restart or stop a20k worker. Implementation
+checks establish execution integrity; native/full endpoint comparisons establish
+quality. The [saved monitor curves](v125-progress4000-quality.md) cover eight
+photos/seven conditions/four CFAs and do not measure real mesh or replace full
+photo/camera/color review.
 
-The spatial trial's live early-review queue uses immutable step1,000 snapshots
-within the original20k workers. Each gets102 retained material/shadow/faint-ADC
-and real-scene inputs, with saved V120 controls reused. A separate full-endpoint
-chain covers the full photo/camera/analytic panels, native images and RGB16 output.
-Early snapshots do not stop training or become completed endpoints. V131's
-102-input review, independent audits and42 actual native views are complete;
-V132 and both full-endpoint reviews remain pending.
+## Current pipeline and prepared data
 
-The [completed V122/V123 frequency trial](v122-v123-quality.md) gains0.05493dB
-photo PSNR from joint training against adapter-only training, with lower unseen-
-camera PSNR, a large ADC tail and little weak-detail recovery. The
-[FP32 pilot](training-precision-pilot.md) gives small mixed faint-ADC changes.
-Shadow/feature/data pilot outcomes and their native images remain linked from
-the [current research page](research.md). New recipes use zero optical PSF and
-geometry before final downsampling; existing trial inputs/budgets remain fixed.
+Current recipes use native256/B16, physical Poisson/read/ADC noise, all Bayer
+layouts, camera/WB conditioning, geometry before final reduction and zero optical
+PSF augmentation. Commons targets use4× binning → higher-resolution geometry
+→ area2 reduction. Only the selected data domain is loaded/augmented.
+[Augmentation, domain scheduling and batch evidence](training-pipeline.md).
 
-## Useful completed models
+The prepared future bank has **90,774 photos/36 reviewed regions**;
+validation/test remain2,303/2,255. The [latest source inspection](v125-v131-source-review.md)
+brings the ledger to2,043 IDs, retains all40 new sources and declines four
+specialized weak annotations. It changes no manifest/catalogue bytes. Previous
+exclusions and mixed white-plumage/leaf/feather additions remain preserved.
+Prepared data and reader checks do not establish trained quality.
+[Current source review](current-source-loss-review.md).
 
-These are measured alternatives, with strengths and remaining weaknesses.
-Their complete panels, native crops and RGB16 checks are published.
+Corpus availability differs from actual visitation. The [20k schedule audit](training-source-schedule-coverage.md)
+finds46.36% visitation at50% reviewed quota versus69.26% at5% on its fixed cohort.
+The [optional epoch order](photographic-epoch-order.md) visits the whole prepared
+cohort at the audited budget. V133 and V134/V135 test quality under these changes.
+[Actual contrast coverage](training-target-contrast-coverage.md) distinguishes
+weak material from flat backgrounds and source noise.
 
-| Model | Architecture | Full-photo PSNR | Known / unseen measured-CFA PSNR | Useful strength and remaining weakness |
-| --- | --- | ---: | ---: | --- |
-| V120 | DINOv3 ConvNeXt-Small + DRUNet, corrected paired32 continuation | 37.04008 dB | 54.31272 / 54.00872 dB | Current balanced recommendation, ADC maximum55.52DN16; matched-profile GFX review complete, fine foliage/neon/mesh remain weak |
-| V121 | Same Small, cleaner90787/fourteen-region continuation | 37.04157 dB | 54.32184 / 53.98947 dB | Tiny photo change; ADC maximum1645.36DN16 and no clear fine-mesh gain |
-| V114 | Frozen DINOv3 ConvNeXt-Tiny + pretrained DRUNet RGB trunk | 36.97973 dB | 54.28627 / 54.00290 dB | General camera/color balance; faint foliage and neon remain soft |
-| V115 | Frozen DINOv3 ConvNeXt-Small + the same restoration family | 36.97700 dB | 54.32405 / 54.00417 dB | Stronger known-camera mean and eight-pixel weak response; higher tested color bias |
-| V117 | V114 architecture, further 20k continuation | 37.04408 dB | 54.27303 / 53.97339 dB | Higher photo score, 421/427 source means up; slight camera regressions |
-| V119 | V115 Small, cleaned90791/paired83 continuation | 37.03831 dB | 54.10063 / 54.00742 dB | Photo gain over V115; known-camera and ADC-color regressions, unresolved fine mesh |
+## Completed lessons and review practice
 
-[Current selection and inference](current-model.md) ·
-[Tiny/Small comparison](v114-v115-quality.md) ·
-[V117 and the negative V118 band-loss result](v117-v118-quality.md).
-V115 is the fixed parent for completed V119–V123 trials.
-The current V120 inference recommendation leaves those original comparisons
-unchanged. Useful Small/V117/V114 tradeoffs remain explicit. Study-specific promotion/significance
-criteria do not replace direct comparison of overall metrics and actual images.
+[V122/V123 frequency features](v122-v123-quality.md) give a small matched photo
+gain with worse camera/color behavior and little weak-detail recovery.
+[V136](v136-global-attention-quality.md) and [V137](v137-global-conditioned-quality.md)
+give small mixed1k changes without clear new mesh recovery. The [trained-memory
+diagnostic](global-memory-contribution.md) finds V137's local bypass dominates
+its added feature offset on six contexts; V138/V139 test related interventions.
+Band-loss, shadow-exposure, feature-loss and precision results retain their
+strengths/failures in the [research index](research.md).
 
-Broad weak natural-detail response is nearly unchanged between Tiny and Small
-on the same 427 photos/5,124 cases. Their weakest ISO12800 gain is .36334/.36422,
-despite Small's stronger eight-pixel analytic response. Both still smooth fine
-foliage/neon and show dark-camera mottling. The stronger released RawNIND model
-wins four of nine camera scene means. Broad real-photo superiority, state of
-the art and 100MP within 10 seconds remain unmet goals.
-[Local natural detail](local-material-detail.md) · [Real-photo comparisons](gfx-qualitative.md).
+Improved-model reports include at least two native100% noisy/denoised/GT
+triplets with identical coordinates/transforms and no resized crop pixels.
+Record source/ROI, checkpoint hash, noise and exposure. Include the cached main
+DSCF3879/3880 foliage/fence/building/sky scene and extra DSCF3842/DSCF3835 green
+mesh with both JPEGs. Independent ISO100/AHD and native-binned references are
+labeled accurately; they are not exact GT or real-reference PSNR targets.
+Both pairs, JPEGs and siblings stay out of training.
+[GFX gallery](gfx-qualitative.md) · [Fine mesh](gfx-green-mesh.md).
 
-## Completed recipe and prepared data
-
-V119 retains V115's fitted encoder/laterals and restoration weights, with fresh
-AdamW/EMA, seed 65, B16/native 256px/BF16, LR 1e-5 and 200 warmup steps. No feature
-fit is repeated. Commons and native targets retain 4× binning → geometry → final
-area2 downsampling, zero optical PSFs, photographic contrast attenuation and
-legacy weak textures. Reconstruction epsilon is .0003, paired epsilon .0001,
-fine-texture quota zero and band-loss weight zero.
-
-The reviewed Commons cohort has **90,791 training sources**, with unchanged
-2,303 validation and 2,255 test memberships. Source-preserving sampling keeps
-unaffected source draws tied to the original 90,864-source reference. The six
-reviewed fine-detail ROIs retain their 5% conditional-photo sampling probability.
-High loss and metadata select review candidates; visual native/binned inspection
-determines exclusions. Useful hard foliage, nets, textiles and fog stay eligible.
-This is targeted quality review, not exhaustive manual inspection of the corpus.
-[Corpus review](incoming-commons-quality.md) ·
-[Actual cleaned-reader proof](results/cleaned90791-source-reader-preflight-v1.json).
-
-Further native review retains 332 of 336 additional sources and prepares a
-**90,787-source future cohort**, withholding two unreliable fine-texture photos
-and two flat map/document layouts. Its coupled manifests and targeted actual
-reader checks pass. It is selected for the queued V121 full run; its endpoint
-quality effect remains unmeasured. V119 retains its original90,791 sources.
-[Latest source decisions, native examples and reader scope](next-source-tail-review.md).
-
-An optional [14-region material bank](weak-photographic-targets.md) preserves
-the six original examples and adds eight measured weak photographic contexts,
-including brick joints, plaster cracks, wavelets and sand ripples. Its actual
-reader checks pass. It is prepared for the future cohort; its quality effect
-is unmeasured; V121 selects it after passing implementation checks, while
-V119/V120 retain their six-region recipes.
-
-The paired set has **83 publisher IDs / 71 groups / 166 cases / 1,492 cached
-crops**, preserving all four corrected legacy masks and every registered new
-case. Camera probabilities remain Sony 75%, Canon 6D 12.5%, Nikon Z6 9.375% and
-Nikon D40 3.125%, rather than increasing Sony simply because more of its groups
-were added. The native clean 128-ID corpus is unchanged.
-[Admission and sampler](paired-camera-sampling.md) ·
-[Reference-mask review](paired-reference-quality.md).
-
-Domain probabilities remain 50% Commons/procedural, 25% paired and 25% native.
-Only the selected domain is loaded and augmented. Batch16 retains the measured
-throughput/memory balance; quality takes priority over another speed sweep.
-[Data order, sampling denominators and batch measurements](training-pipeline.md).
-GFX3879/3880, their siblings and all protected captures stay outside training.
-Originals are read-only; training and qualitative work use cached sources.
-
-The new recipe combines data changes and extra optimization. Its comparison
-to V115 does not isolate corpus size, camera weighting, masks or additional
-training as separate causes. Full source/manifest/optimizer receipts and bounded
-resource checks are recorded in the [V119 guide](cleaned-diverse-small-training.md).
-
-## Review and documentation
-
-Review the full endpoint after its declared budget. V119 completed eight FP32
-stages: full 427-photo/seven-condition/four-CFA, known/unseen cameras, weak
-carriers, color, standing GFX, highlights and complete 101.996MP GFX output.
-Independent NumPy64 checks operate on retained predictions/targets. Matched
-comparisons reuse saved V115, V114 and V117 controls without new control inference.
-Its [11-capture native development comparison](native-camera-development.md)
-also completed: clearer texture than RawNIND under added noise, small gains
-over V115 and lower means than V117. The90,787-source/14-region bank is selected
-for the queued V121 full run; [per-source loss tracing](source-loss-diagnostics.md)
-is active in V120/V121. The matched paired32 control investigates the camera/color
-regressions before treating the combined V119 recipe as the next baseline.
-
-Improved-model reports include at least two native noisy/denoised/exact-GT
-triplets with identical coordinates and display transforms, without resized
-pixels. Record source/ROI, checkpoint hash, noise and display exposure. Include
-all six GFX regions, especially foliage and chain-link fence. Its independent
-ISO100 exposure and AHD camera references are approximate references, not exact
-GT or pixelwise GFX scoring targets. Verify both RGB16 exports and native crops.
-[Standing GFX test](gfx-qualitative.md) · [Performance history](performance-history.md).
-
-Update the README and current guides when useful progress is established,
-showing gains and adverse cases directly. Preserve machine receipts and original
-experiment sources. The timestamped [diary](../diary/index.md) records historical
-decisions; it does not constrain which useful architecture can be tried next.
-
-## Completed evidence and retained preparations
-
-These dedicated reports retain the historical comparisons and exact receipts.
-They inform the current recipe; old launch/pending receipts are not live status.
-
-| Study | Completed result or present status |
-| --- | --- |
-| [V117/V118](v117-v118-quality.md) | Extra-training control improves photo PSNR; added band term lowers weak natural response and worsens ADC tails; keep band off |
-| [V116](v116-quality.md) | Fine weak-source profile plus corrected masks improves an eight-pixel carrier, with nearly unchanged broad weak detail and worse ADC tail |
-| [V114/V115](v114-v115-quality.md) | Full fitted Tiny/Small comparison; useful camera/detail tradeoffs, no capacity-only causal claim |
-| [V111/V112](loss-scale-training.md) | Smaller reconstruction epsilon supplies a useful quality continuation; V112 initialized the later Tiny/Small trials |
-| [V104](v104-reviewed-corpus-quality.md) | Completed 20k cleaned-corpus continuation; all panels, native review and full RGB16 output complete |
-| [V102/V103](v102-v103-quality-review.md) | Six versus 32 reviewed ROIs has a tiny matched photo effect; six retained |
-| [V100/V101](v84-curated-quality-review.md) | Zero optical blur/weak-source/contrast/ROI package improves the V84 family; components not individually isolated |
-| [V84/V85](native-data-original20k-review.md) | Extra native captures have little matched effect; the restoration family remains a useful baseline |
-| [V93–V95](v43-curated-original20k-review.md) | Older ViT-S cleaned-data trials retain their original budgets and color/detail tradeoffs |
-| [V96/V97](v95-flat-palette-quality-review.md), [V98/V99](v95-adc-training-quality-review.md) | Completed palette/ADC tradeoffs; no reason to freeze the baseline at V43 |
-| [Earlier common-function Small preparation](convnext-small-capacity.md) | V109/V110 discarded checks complete; no production run; superseded as the active choice by fitted V115/V119 |
+Keep README/current guides aligned with useful implementations and comparisons.
+The [56-point version plot](performance-history.md) contains completed primary
+endpoints; progress monitors stay separate. Historical launch decisions and the
+exact previous guide are preserved in the [local-time diary](../diary/2026-10-27-20-54-44-v125-4k-quality-guide.md).
+Original machine receipts, frozen plans, failures and checkpoints retain their
+evidence. [Historical experiments](experiment-archive.md).
 
 <a id="active-v104-cleaned-corpus-continuation"></a>
 <a id="current-matched-comparison-v102v103"></a>
-
-Older links to the V104 and V102/V103 sections resolve here. Their completed
-reports above retain the full results, original recipes, source exposure and
-receipts. Earlier unlaunched V107/V108/V109/V110 and V104-derived V113
-preparations remain preserved, with no trained endpoint or live launch implied.
