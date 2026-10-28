@@ -34,24 +34,28 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
-## V125 at4k
+## V125 at6k
 
-The [new progress review](v125-progress4000-quality.md) compares noisy → V120
-→ saved V1252k → V1254k → independent DSCF3880 ISO100/AHD, **not GT**.
+The [latest progress review](v125-progress6000-quality.md) compares noisy → V120
+→ saved V1252k → V1254k → V1256k → independent DSCF3880 ISO100/AHD, **not GT**.
 All cells retain native160 pixels,512px contexts,+2EV and the same nominal
 shot0.00128/read0.0000065536. All four contexts are viewed: foliage remains
 painterly, coarse fence geometry coherent, building edges soft and sky quiet.
 There is no clear new fine-detail recovery.
 
-![V1254k foliage with saved controls](images/v125-progress4000-quality-v1/main-foliage-comparison.png)
+![V1256k foliage with saved controls](images/v125-progress6000-quality-v1/main-foliage-comparison.png)
 
-![V1254k chain-link fence with saved controls](images/v125-progress4000-quality-v1/main-chain-link-fence-comparison.png)
+![V1256k chain-link fence with saved controls](images/v125-progress6000-quality-v1/main-chain-link-fence-comparison.png)
 
-[Sky](images/v125-progress4000-quality-v1/main-overcast-sky-comparison.png) ·
-[Building](images/v125-progress4000-quality-v1/main-building-detail-comparison.png) ·
-[Extra mesh and both camera JPEGs](gfx-green-mesh.md#v125-at4k) ·
-[Checkpoint/ROI/noise/display metadata](images/v125-progress4000-quality-v1/manifest-v1.json).
+[Sky](images/v125-progress6000-quality-v1/main-overcast-sky-comparison.png) ·
+[Building](images/v125-progress6000-quality-v1/main-building-detail-comparison.png) ·
+[Extra mesh and both camera JPEGs](gfx-green-mesh.md#v125-at6k) ·
+[Checkpoint/ROI/noise/display metadata](images/v125-progress6000-quality-v1/manifest-v1.json).
 V120 remains selected; V125's original20k training continues.
+
+<a id="v125-at4k"></a>
+The [earlier4k comparison](v125-progress4000-quality.md#real-gfx-detail) and its
+original images/receipts remain preserved.
 
 ## V125 at2k
 

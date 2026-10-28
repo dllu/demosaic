@@ -12,6 +12,11 @@ this is a progress inspection, without an endpoint or mean-loss quality claim.
 [Source/ROI/noise/exposure and native images](images/v125-progress4000-quality-v1/manifest-v1.json) ·
 [Original matched training](conditional-mean-training.md) · [Earlier2k review](v125-progress2000-quality.md).
 
+The original machine receipt's `training_horizon: 40000` is a publisher typo;
+the actual checkpoint, executed collection and plan all use **20,000** updates.
+[Correction record](results/v125-progress4000-receipt-correction-v1.json) preserves
+the original receipt bytes and supplies the corrected metadata.
+
 ## Saved monitoring over training
 
 ![Existing eight-photo training monitor curves and condition contributions](images/v125-progress4000-quality-v1/training-monitor-progress.png)

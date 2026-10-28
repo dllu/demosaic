@@ -42,26 +42,30 @@ despite a highlight-dominated training-monitor gain.
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
 
-## V125 at4k
+## V125 at6k
 
-The [new progress review](v125-progress4000-quality.md) adds4k while reusing
-V120 and V1252k predictions. Columns: noisy RAW/Malvar → V120 → V1252k →
-V1254k → ISO6400 camera JPEG → corrected **DSCF3835 ISO100/AHD** → ISO100
-camera JPEG. Native160px cells retain fixed+4EV and768px contexts; both JPEGs
-use the same inverse-sRGB/16×/sRGB display rule, without fitting.
+The [latest progress review](v125-progress6000-quality.md) adds6k while reusing
+V120 and V1252k/4k predictions. Columns: noisy RAW/Malvar → V120 → V1252k →
+V1254k → V1256k → ISO6400 camera JPEG → corrected **DSCF3835 ISO100/AHD** →
+ISO100 camera JPEG. Native160px cells retain fixed+4EV and768px contexts; both
+JPEGs use the same inverse-sRGB/16×/sRGB display rule, without fitting.
 
-![V1254k left mesh and both JPEGs](images/v125-progress4000-quality-v1/fine-green-mesh-left-JPEG-plus4EV-comparison.png)
+![V1256k left mesh and both JPEGs](images/v125-progress6000-quality-v1/fine-green-mesh-left-JPEG-plus4EV-comparison.png)
 
-![V1254k right mesh and both JPEGs](images/v125-progress4000-quality-v1/fine-green-mesh-right-JPEG-plus4EV-comparison.png)
+![V1256k right mesh and both JPEGs](images/v125-progress6000-quality-v1/fine-green-mesh-right-JPEG-plus4EV-comparison.png)
 
 Both nominal regions remain strongly softened. Nearby3879 conditioning reveals
-weak diagonal lattice, without clear additional4k recovery:
-[left](images/v125-progress4000-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png),
-[right](images/v125-progress4000-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png).
+weak diagonal lattice, without clear additional6k recovery:
+[left](images/v125-progress6000-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png),
+[right](images/v125-progress6000-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png).
 Both profiles/regions are actually viewed. ISO100 differs in aperture, shutter
 time and moving subjects; AHD and camera JPEGs are qualitative comparators,
 **not exact GT**. The originals/caches and training holdouts are preserved.
-[Checkpoint/source/ROI/noise/display metadata](images/v125-progress4000-quality-v1/manifest-v1.json).
+[Checkpoint/source/ROI/noise/display metadata](images/v125-progress6000-quality-v1/manifest-v1.json).
+
+<a id="v125-at4k"></a>
+The [earlier4k comparison](v125-progress4000-quality.md#real-gfx-detail) and its
+original images/receipts remain preserved.
 
 ## V125 at2k
 

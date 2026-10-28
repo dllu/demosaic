@@ -1,16 +1,19 @@
 # Independent-noise mean-loss training
 
-**V125's [4k progress review](v125-progress4000-quality.md) nearly recovers V120's
-ordinary four-context mean but remains1.144dB lower on faint ADC, without clear
-new real-mesh recovery.** The matched eight-photo monitor is+0.019dB over V124
-at4k, after a highlight-dominated+0.064dB at2k. Faint spatial sRGB MSE remains
-24.9% above V120. Monitoring/native supports differ; neither isolates a broad
-mean-loss quality effect. [Earlier2k native review](v125-progress2000-quality.md).
-V124's original20k control training is complete; V125 continues its original20k
-run. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
-comparison remain pending; V120 remains the general recommendation. This experiment
-follows the [conditional-noise diagnostic](conditional-noise-response.md):
-weak fur/wood detail remains soft across independent noise observations.
+**V125's [6k progress review](v125-progress6000-quality.md) improves the retained
+faint-ADC mean by0.136dB from4k but remains1.009dB below V120, with ordinary mean
+nearly unchanged.** Fur/grass/wood fine-band response partly recovers; spatial
+faint sRGB MSE remains23.1% higher than V120 and real mesh has no clear new
+recovery. The separate matched eight-photo monitor gains0.0165dB over V1246k.
+These supports do not isolate a broad mean-loss quality effect.
+[Earlier4k review](v125-progress4000-quality.md) ·
+[Earlier2k review](v125-progress2000-quality.md).
+
+V124's original20k control is complete; V125's original20k run continues.
+Both arms' CPU/CUDA checks passed. Endpoint and repeated-noise bias comparison
+remain pending; V120 remains the general choice. The experiment follows the
+[conditional-noise diagnosis](conditional-noise-response.md) of persistent weak
+fur/wood error across independent noise observations.
 
 Both arms start freshly from the same V120 Small EMA checkpoint
 SHA256 a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.
