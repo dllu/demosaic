@@ -21,7 +21,9 @@ joint-training photo gain over adapter-only training, with camera/color costs
 and little weak-detail recovery. The [V12414k progress review](v124-progress14000.md)
 adds noisy/shadow gains of.008–.033dB, faint ADC−.350dB and native material/GFX
 crops without clear mesh recovery. Its original20k control is complete; V125
-is training and full endpoint quality is pending. V120 remains
+is training. The [V1252k review](v125-progress2000-quality.md) records a better
+eight-photo monitor, mainly highlights, with weaker faint texture on separate
+support and no clear new mesh recovery. Full endpoint quality is pending. V120 remains
 the general choice.
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
@@ -58,6 +60,7 @@ updates the current guides without an old promotion gate.
 | Completed global-conditioning pilot | [V137 measured quality, native triplets and both GFX pairs](v137-global-conditioned-quality.md): stronger memory adaptation, faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and no clear new fine-mesh recovery. [Operator and mechanism](raw-global-conditioning.md) |
 | Global-branch training | [V138 frozen-parent pilot](raw-global-only-training.md): CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR and1k quality review are queued after V125 completes; quality is unmeasured |
 | Trained global-memory contribution | [V137 feature-level ablation](global-memory-contribution.md): removing memory write changes0.83–1.39% of branch-offset RMS on six contexts. Independent attention/array audit complete; same-input V138 companion queued after its original quality/faint reviews |
+| Mean-loss progress | [V125 at2k](v125-progress2000-quality.md): highlight-dominated eight-photo monitor gain over V1242k, weaker faint texture versus V120, and no clear new mesh recovery. Native GT triplets, both GFX pairs and corrected DSCF3835 camera JPEGs published; original20k comparison continues |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 
 Per-experiment reports contain numerical evidence, source/ROI metadata,

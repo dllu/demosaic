@@ -136,3 +136,8 @@ online DINOv3 branch with a conditioned SwinIR restoration stream. Its linked
 web and connected GitHub metadata access. No code or checkpoint was acquired;
 this dated observation does not establish permanent unavailability.
 [Saved metadata response](results/sg-jdd-availability-20261027-v1.json).
+The [versioned arXiv source archive](https://arxiv.org/src/2608.09995v1) was also
+downloaded and inventoried:231 members, containing TeX, styles, bibliography and
+figures, with no runnable model or trained weights found. Nothing was extracted
+or executed. A separate submission supplement or another URL remains outside
+this check. [Archive inventory receipt](results/sg-jdd-source-availability-20261027-v2.json).

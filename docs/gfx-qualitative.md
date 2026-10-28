@@ -34,6 +34,27 @@ estimation and original nominal outputs remain preserved.
 [All comparisons and four triplets](results/v120-v121-fixed-Haar-GFX-v1.json) ·
 [Source/ROI/checkpoint/profile/display and actual-viewing receipt](images/v120-v121-fixed-Haar-GFX-v1/manifest.json).
 
+## V125 at2k
+
+The [V125 progress review](v125-progress2000-quality.md) adds native comparisons
+of all four established512px contexts. Columns: noisy → V120 → V1252k/20k EMA
+→ independent DSCF3880 ISO100/AHD reference, **not GT**. Native160px cells share
++2EV, WB/matrix and nominal shot`.00128`/read`6.5536e−6`; this differs from the
+fixed-Haar full-frame profile above.
+
+![V125 main GFX foliage](images/v125-progress2000-quality-v1/main-foliage-comparison.png)
+
+![V125 main GFX chain-link fence](images/v125-progress2000-quality-v1/main-chain-link-fence-comparison.png)
+
+Actual viewing finds no clear new foliage/fence recovery: foliage stays
+painterly, larger geometry coherent and sky smooth.
+[Sky](images/v125-progress2000-quality-v1/main-overcast-sky-comparison.png) ·
+[Building](images/v125-progress2000-quality-v1/main-building-detail-comparison.png) ·
+[Corrected DSCF3842/DSCF3835 fine mesh and both camera JPEGs](gfx-green-mesh.md#v125-at2k) ·
+[Source/ROI/checkpoint/noise/display metadata](images/v125-progress2000-quality-v1/manifest-v1.json).
+The eight-photo training-monitor gain is mainly highlights; faint texture
+regresses on separate retained contexts. V125's original20k run continues.
+
 ## V131 retained1k progress
 
 The [completed progress review](v131-progress1000-quality.md) shows no clear

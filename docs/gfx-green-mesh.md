@@ -35,10 +35,35 @@ final mesh review is complete below. A separate
 [V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
 V124's [14k progress review](#v124-at-14000-updates) is complete; its original
 20k control has completed and V125's original20k worker is running.
+The newer [V1252k review](#v125-at2k) also finds no clear new lattice recovery,
+despite a highlight-dominated training-monitor gain.
 
 [Fixed sources and coordinates](../configs/gfx-green-mesh-20231231.json) ·
 [Native image metadata](images/gfx-green-mesh-20231231-v1/manifest.json) ·
 [Completed native review and data checks](results/gfx-green-mesh-v1.json).
+
+## V125 at2k
+
+The [V125 progress review](v125-progress2000-quality.md) uses the corrected
+DSCF3842 ISO6400 / **DSCF3835 ISO100 f/5.6** pair and both camera JPEGs.
+Columns: noisy RAW/Malvar → V120 nominal → V1252k/20k EMA nominal → ISO6400
+camera JPEG → ISO100 AHD → ISO100 camera JPEG. Native160px cells share +4EV;
+both JPEGs receive inverse sRGB →16× linear exposure →sRGB, with camera tone,
+WB and sharpening retained. These are separate qualitative renderings, **not GT**.
+
+![V125 left mesh and corrected ISO100 reference](images/v125-progress2000-quality-v1/fine-green-mesh-left-JPEG-plus4EV-comparison.png)
+
+![V125 right mesh and corrected ISO100 reference](images/v125-progress2000-quality-v1/fine-green-mesh-right-JPEG-plus4EV-comparison.png)
+
+Both nominal and fixed nearby3879 profiles were actually viewed. Nominal
+restoration largely erases the lattice; nearby conditioning retains weak
+irregular diagonals without clear new recovery:
+[left](images/v125-progress2000-quality-v1/mesh-profile3879-fine-green-mesh-left-comparison.png),
+[right](images/v125-progress2000-quality-v1/mesh-profile3879-fine-green-mesh-right-comparison.png).
+The left blue point persists. ISO100 is46s earlier, with different aperture,
+exposure time and moving subjects. Originals remain read-only, local caches
+were reused and captures/JPEGs/siblings remain outside training.
+[Source/ROI/checkpoint/noise/display metadata](images/v125-progress2000-quality-v1/manifest-v1.json).
 
 ## V131 retained1k progress
 

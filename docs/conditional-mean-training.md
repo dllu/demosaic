@@ -1,9 +1,12 @@
 # Independent-noise mean-loss training
 
-**V124's [14k progress review](v124-progress14000.md) finds small noisy/shadow
-PSNR gains, a0.350dB faint-ADC regression and no clear large fine-detail recovery.**
-Its original20k control training is complete; V125 now trains with the added
-mean loss after passing its original launch headroom. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
+**V125's [2k progress review](v125-progress2000-quality.md) improves the eight-photo
+monitor by0.064dB over V124 at2k, mainly from highlights, but does not recover
+weak fine detail.** Four RGGB faint-ADC contexts lose1.248dB against V120, with
+spatial sRGB MSE rising32.7% and no clear new real-mesh recovery. This is separate
+support from the monitor and does not isolate the mean-loss effect.
+V124's original20k control training is complete; V125 continues its original20k
+run. Both arms' CPU/CUDA checks passed. Full endpoint and repeated-noise bias
 comparison remain pending; V120 remains the general recommendation. This experiment
 follows the [conditional-noise diagnostic](conditional-noise-response.md):
 weak fur/wood detail remains soft across independent noise observations.
@@ -66,6 +69,14 @@ and both corrected DSCF3842/DSCF3835 mesh regions/profiles. The measured tradeof
 is documented now; the partial checkpoint does not replace the planned endpoints
 or establish the effect of the mean-loss term, which V124 does not use.
 [Audited progress measurements and actual native review](v124-progress14000.md).
+
+The newer [V1252k review](v125-progress2000-quality.md) adds14 CPU FP32 calls on
+retained material, main-GFX and both corrected DSCF3835 mesh profiles, reusing all
+V120 controls. It publishes two exact-GT native triplets, common40× faint displays
+and both camera JPEGs. Same-budget monitoring recipes/source and81 logged training
+batch hashes match between V124/V125 through2k; all2,000 input bytes were not
+retained. The positive monitor triggered this review after observation. The
+early V125 state remains distinct from the original endpoint comparison.
 
 [Training runner](../scripts/train_noise_pair_trial.py) freezes all sources,
 recipes and input manifests. Discarded CPU 128×128/B1/FP32 and CUDA 256×256/B16/BF16 checks
