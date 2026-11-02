@@ -46,6 +46,33 @@ All six examples were viewed, including faint positive/negative and chromatic
 patterns. The data inspection establishes sensible generated targets, not that
 a trained model will recover real mesh or avoid false texture.
 
+## What the actual V142 schedule contains
+
+The1k schedule contains7,632 Commons slots, including773 crossed-line source
+reads:397 present and376 absent, out of16,000 total target slots. A replay
+through the frozen actual reader matches all12 logged crossed-line source
+recipes in its saved trace prefix. Every absent read matches its empty
+counterfactual exactly. These are scheduled counts; the original live training
+must still complete all updates.
+
+For present examples after geometry/area2, median exact-empty area is61.59%
+(interquartile50.73–69.39%). Median detail RGB RMS divided by the sampled
+brightness is.526%, with interquartile.185–1.340%. Sampled brightness median
+is.02637, range.000979–.49661. The new fine structure therefore occupies a small
+part of the overall training support. This audit does not show that its weight
+is sufficient or that a model can recover it under noise. Values precede
+camera transport and random training exposure.
+[All773 reads, counterfactual statistics and exact trace bindings](results/v142-crossed-line-source-coverage-v1.json).
+
+A separate [prepared mesh-power supplement](results/v142-mesh-peaks-setup-v1.json)
+keeps the two windows and all10 noisy-input-only peaks from the earlier
+[measured-green diagnostic](green-phase-spectrum.md). It will compare saved
+V120/V129/V141/V142 outputs without further inference or RAW/noise generation.
+The explicit-DFT preflight checks540 complex coefficients on saved controls,
+maximum power difference3.02e−14. Saved-output/noisy-input power ratios are
+**descriptive, not correct-detail gains or quality scores**; actual native
+comparison and exact-flat error remain necessary.
+
 ## Reader and compatibility
 
 ```yaml

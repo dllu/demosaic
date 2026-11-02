@@ -1,0 +1,363 @@
+{
+  "timestamp_UTC": "2026-11-02T18:51:22.528209+00:00",
+  "status": "fixed-historical-peak-extension-prepared-candidate-quality-pending",
+  "previous_goal_turn_classification": "progress: 9def8bc publishes V141 completed review and launches checked V142 production; no restart",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-mesh-peaks-v1/plan-v1.json",
+    "sha256": "404e5ccf2ce272c709bc14f0b74355faf396f14266b34b33dee213a7c9a499ca"
+  },
+  "prospective_plan": {
+    "primary_queue": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/queue-plan-v1.json",
+      "sha256": "34700e62ab3e5cb1742acfc29f9659a8c21ab106ae38108b13171f3ddfce9fd0"
+    },
+    "primary_root": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1",
+    "old_input_selection_and_results": {
+      "path": "/home/dllu/proj/demosaic/docs/results/green-phase-cross-spectrum-v1.json",
+      "sha256": "58eda66b0b3767a538303bf6bfc9a8ecdc88806b7cd2e325622b04330ae394f2"
+    },
+    "arrays": {
+      "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+      "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+    },
+    "methods": [
+      {
+        "label": "V120",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/profile3879/V120-profile3879-RGB-f32.npy",
+          "sha256": "6351c4ff5444f5773db59302fde58b4048b445426a2361d10402e4ab68f234dc"
+        }
+      },
+      {
+        "label": "V129 1k EMA",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-training-pilot-v1/run/work/artifacts/train/V129/last.pt",
+          "sha256": "5f17520fd68aed7865cd3094d77ec4368492cb67413df37a2787724ad19509c0"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-085.npy",
+          "sha256": "b018154ca642301a1f6e1002e65ba5dba92fa4426527864d4ad5a14df163e567"
+        }
+      },
+      {
+        "label": "V141 1k EMA",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/V141-step1000-inference.pt",
+          "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+        },
+        "prediction": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-085.npy",
+          "sha256": "b6177fb175fd58097e760cbd0a2a7ef44236437ae77a6d0871049f367fa5f78c"
+        }
+      }
+    ],
+    "candidate_label": "V142 1k EMA",
+    "windows_and_fixed_peaks": [
+      {
+        "name": "left",
+        "context_xywh": [
+          158,
+          180,
+          256,
+          256
+        ],
+        "global_xywh": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "fixed_native_ROI_global_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "peaks": [
+          {
+            "bin_yx": [
+              19,
+              30
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.1171875,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 20.122911570000607,
+            "conditional_noise_units_phase_power": 20.871314657255056,
+            "signed_coherence": 0.9641604127799426,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.03064206444751625,
+              "V119": 0.034303370352812265
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.1489351155576157
+          },
+          {
+            "bin_yx": [
+              18,
+              105
+            ],
+            "selected_by": [
+              "absolute_cross"
+            ],
+            "native_frequency_xy": [
+              -0.08984375,
+              0.0703125
+            ],
+            "conditional_noise_units_cross": 10.479319930959198,
+            "conditional_noise_units_phase_power": 11.256071285333075,
+            "signed_coherence": 0.9332655362026818,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.052356000897217335,
+              "V119": 0.03711783421078325
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 1.7979978351770367
+          },
+          {
+            "bin_yx": [
+              1,
+              100
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.109375,
+              0.00390625
+            ],
+            "conditional_noise_units_cross": 9.46049552375465,
+            "conditional_noise_units_phase_power": 10.66617558681179,
+            "signed_coherence": 0.8994450348146736,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.67943572866085,
+              "V119": 0.6719461424795174
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 0.9416662393133186
+          },
+          {
+            "bin_yx": [
+              1,
+              104
+            ],
+            "selected_by": [
+              "absolute_cross"
+            ],
+            "native_frequency_xy": [
+              -0.09375,
+              0.00390625
+            ],
+            "conditional_noise_units_cross": 9.29872121686382,
+            "conditional_noise_units_phase_power": 10.189433899941015,
+            "signed_coherence": 0.912611864107145,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.7361814140284383,
+              "V119": 0.7249439544335243
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 0.7831595755524882
+          },
+          {
+            "bin_yx": [
+              18,
+              106
+            ],
+            "selected_by": [
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.0859375,
+              0.0703125
+            ],
+            "conditional_noise_units_cross": 10.442488679182146,
+            "conditional_noise_units_phase_power": 11.733612891479362,
+            "signed_coherence": 0.8912189311287426,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.051356897469887905,
+              "V119": 0.03544097647520413
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 1.7319795179719835
+          },
+          {
+            "bin_yx": [
+              1,
+              105
+            ],
+            "selected_by": [
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.08984375,
+              0.00390625
+            ],
+            "conditional_noise_units_cross": 9.203487073824363,
+            "conditional_noise_units_phase_power": 10.925436897738763,
+            "signed_coherence": 0.8558048087814301,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.6403160380561406,
+              "V119": 0.6286338833092135
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 0.6310630720893093
+          }
+        ]
+      },
+      {
+        "name": "right",
+        "context_xywh": [
+          378,
+          140,
+          256,
+          256
+        ],
+        "global_xywh": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "fixed_native_ROI_global_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "peaks": [
+          {
+            "bin_yx": [
+              19,
+              30
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.1171875,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 49.97981100361049,
+            "conditional_noise_units_phase_power": 50.567514867870216,
+            "signed_coherence": 0.9884084255591915,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.1764572664505969,
+              "V119": 0.1788518747847596
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.599906966246173
+          },
+          {
+            "bin_yx": [
+              19,
+              105
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              -0.08984375,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 24.566861303342314,
+            "conditional_noise_units_phase_power": 25.67906172771295,
+            "signed_coherence": 0.9781766768159984,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.13281422017406208,
+              "V119": 0.11920486358064207
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.247740625380759
+          },
+          {
+            "bin_yx": [
+              17,
+              30
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.1171875,
+              0.06640625
+            ],
+            "conditional_noise_units_cross": 16.113120627858713,
+            "conditional_noise_units_phase_power": 16.838030610661384,
+            "signed_coherence": 0.9616435422910328,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.17722529982541055,
+              "V119": 0.17967587053178205
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.765322678360118
+          },
+          {
+            "bin_yx": [
+              19,
+              28
+            ],
+            "selected_by": [
+              "absolute_cross",
+              "phase_power"
+            ],
+            "native_frequency_xy": [
+              0.109375,
+              0.07421875
+            ],
+            "conditional_noise_units_cross": 12.53048436626357,
+            "conditional_noise_units_phase_power": 13.547882071460284,
+            "signed_coherence": 0.9262194536373332,
+            "saved_model_power_over_observed_power": {
+              "V115": 0.20519934305999796,
+              "V119": 0.20129004636742975
+            },
+            "reference_shape_power_over_observed_power_own_mean_normalized": 2.3643325454507376
+          }
+        ]
+      }
+    ],
+    "operator": {
+      "path": "/home/dllu/proj/demosaic/scripts/compare_retained_mesh_peaks.py",
+      "sha256": "37b66f38e851e2db7f912f28098bec7d113a39ede5fda8c250d4b015302d36b6"
+    },
+    "spectral_operator": {
+      "path": "/home/dllu/proj/demosaic/scripts/green_phase_spectrum.py",
+      "sha256": "1880258616df1b589dc71953f3740cea3cb7c5e55c983a441067df770d7040b4"
+    },
+    "scope": "Same two256px windows and all10 input-only peaks fixed Oct25; no new selection/window/profile/threshold or inference. Descriptive saved green-power/noisy green-power ratio includes observed noise; not signal transfer, correct mesh recovery, quality, significance or proof against hallucinations. IndependentISO100 differs in aperture/time and is notGT; not used in this extension."
+  },
+  "control_DFT_preflight": {
+    "status": "passed-saved-control-explicit-DFT-preflight",
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-mesh-peaks-v1/plan-v1.json",
+      "sha256": "404e5ccf2ce272c709bc14f0b74355faf396f14266b34b33dee213a7c9a499ca"
+    },
+    "model_window_peak_rows": 30,
+    "complex_coefficients_checked": 540,
+    "maximum_power_difference": 3.019806626980426e-14,
+    "neural_forwards": 0,
+    "noise_observations": 0,
+    "RAW_decodes": 0
+  },
+  "source_coverage_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-source-coverage-v1/result-v1.json",
+    "sha256": "54586d12368b2c555c993c5a5b155b8e0efcb570dcbd48554b5fc3e9a417fd0b"
+  },
+  "controller": {
+    "pid": 980459,
+    "created": 1793644424.8
+  },
+  "production_worker": {
+    "pid": 1003647,
+    "created": 1793644715.97
+  },
+  "controller_and_worker_live_now": true,
+  "planned_model_window_peak_rows": 40,
+  "planned_independent_complex_coefficients": 720,
+  "new_inference_noise_RAW_calls": 0,
+  "scope": "Supplement reuses the exact two windows and all10 Oct25 noisy-input-only peak selections after primary V142 quality collection. V120/V129/V141 saved controls; V142 predictions pending. Power ratios are descriptive, not correct-detail gains, significance, GT errors or hallucination safety. No added model inference/noise/RAW and no trained gain claimed."
+}
