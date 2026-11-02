@@ -47,6 +47,7 @@ Original evidence remains preserved.
 | [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all1,000 training batches match V137 |
 | [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.01528dB over V129, mixed local detail, no new mesh recovery. Noisy-flat coarse error near V129 and5.75% above V120; defaults unchanged |
 | [V142 crossed-line/empty data](docs/v142-crossed-line-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.05212dB and noisy-flat spatial RMS−4.55% versus V129. Coarse error remains5.08% above V120; ADC-only DC bias worsens. Selected weak grass/wood gains, no clear new mesh recovery |
+| [V143 combined data/gradient5k](docs/v143-crossed-gradient5000.md) | Fresh5k from V120 with V142 data and gradient epsilon3e−5; CPU/CUDA16+2 inputs and initial outputs match V142. Production running; fixed1k/2.5k/5k native/GFX/flat reviews queued. Quality unmeasured |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected

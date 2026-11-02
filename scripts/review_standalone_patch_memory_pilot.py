@@ -16,7 +16,79 @@ BASE = REPO / ".cache/current-quality-20261023-v1"
 METHODS = ["V120", "V129 1k EMA", "V136 1k EMA", "V137 1k EMA", "V140 1k EMA"]
 
 
-def prepare(root, training_path, *, camera_control="V137", comparison_scope=None):
+def review_step_spec(horizon, step):
+    """Require explicit selection for longer runs; preserve the original1k default."""
+    if type(horizon) is not int or horizon < 8:
+        raise ValueError("Need an integer training horizon >=8")
+    if step is None:
+        if horizon != 1000:
+            raise ValueError("Select the review step explicitly for a longer training run")
+        step = horizon
+    if type(step) is not int or not 0 < step <= horizon:
+        raise ValueError("Review step must lie inside the declared training horizon")
+    return step, step < horizon
+
+
+def append_retained_control(observations, previous, collection, *, checked=ref):
+    """Adopt a saved method only on exactly the same declared observations."""
+    result = deepcopy(observations)
+    assert len(result) == len(previous["observations"]) == len(collection["observations"])
+    ids = [o["id"] for o in result]
+    assert len(set(ids)) == len(ids)
+    assert ids == [o["id"] for o in previous["observations"]]
+    assert ids == [o["id"] for o in collection["observations"]]
+    label = previous["model_label"]
+    for current, old, prediction in zip(
+        result, previous["observations"], collection["observations"], strict=True
+    ):
+        assert {k: v for k, v in current.items() if k != "controls"} == {
+            k: v for k, v in old.items() if k != "controls"
+        }
+        assert label not in {
+            c.get("model", {}).get("label", c.get("label")) for c in current["controls"]
+        }
+        binding = prediction["prediction"]
+        assert checked(binding["path"]) == binding
+        current["controls"].append(
+            {
+                "model": {
+                    "label": label,
+                    "step": previous["step"],
+                    "sha256": previous["checkpoint"]["sha256"],
+                },
+                "prediction": deepcopy(binding),
+            }
+        )
+    return result
+
+
+def select_control_methods(observations, labels):
+    """Select and order explicitly named saved controls, preserving prediction bindings."""
+    assert len(labels) == len(set(labels)) and labels
+    result = deepcopy(observations)
+    for observation in result:
+        available = {}
+        for control in observation["controls"]:
+            label = control.get("model", {}).get("label", control.get("label"))
+            if label == "V120-profile3879":
+                label = "V120"
+            assert label not in available
+            available[label] = control
+        assert all(label in available for label in labels)
+        observation["controls"] = [available[label] for label in labels]
+    return result
+
+
+def prepare(
+    root,
+    training_path,
+    *,
+    camera_control="V137",
+    comparison_scope=None,
+    step=None,
+    additional_control_roots=(),
+    retained_control_labels=None,
+):
     import yaml
 
     training = read(training_path)
@@ -24,8 +96,12 @@ def prepare(root, training_path, *, camera_control="V137", comparison_scope=None
     assert len(training["arms"]) == 1
     arm = next(iter(training["arms"]))
     recipe = yaml.safe_load(Path(training["arms"][arm]["train"]).read_text())
-    assert recipe["steps"] == 1000
-    model_label = arm + " 1k EMA"
+    step, progress = review_step_spec(recipe["steps"], step)
+    model_label = (
+        arm + " 1k EMA"
+        if recipe["steps"] == step == 1000
+        else f"{arm} {step}of{recipe['steps']} EMA"
+    )
     global_features = recipe["model"].get("raw_global_features", False)
     global_mode = recipe["model"].get("raw_global_conditioning", "legacy-v1")
     assert not global_features or global_mode == "patch-memory-v4"
@@ -71,9 +147,29 @@ def prepare(root, training_path, *, camera_control="V137", comparison_scope=None
                 "prediction": row["prediction"],
             }
         )
+    extra_labels, extra_inputs = [], []
+    for control_root in additional_control_roots:
+        control_root = Path(control_root)
+        control_path = control_root / "plan-v1.json"
+        control = read(control_path)
+        guard(control)
+        saved = read(control_root / "collection-v1.json")
+        assert saved["plan"] == ref(control_path)
+        assert saved["counts"] == {"root": 102, "encoder": 102}
+        observations = append_retained_control(observations, control, saved)
+        extra_labels.append(control["model_label"])
+        extra_inputs += [ref(control_path), ref(control_root / "collection-v1.json")]
+    control_methods = [*METHODS[:-1], *extra_labels]
+    if retained_control_labels is not None:
+        observations = select_control_methods(observations, retained_control_labels)
+        control_methods = list(retained_control_labels)
     camera_source = (BASE / "raw-patch-memory-quality-v1/render-mesh-JPEG-v1.py").read_text()
     camera = root / "render-mesh-JPEG-v1.py"
-    camera.write_text(camera_source.replace("V139", camera_control).replace("V140", arm))
+    camera.write_text(
+        camera_source.replace("V139", camera_control)
+        .replace("V140 1k EMA", model_label)
+        .replace("V140", arm)
+    )
     scope = (
         f"Standalone {arm} complete1k pilot, four saved controls and102 fixed inputs: "
         "64 shadow/16 ordinary/16 faintADC/four mainGFX512/two mesh768 profiles. "
@@ -93,6 +189,9 @@ def prepare(root, training_path, *, camera_control="V137", comparison_scope=None
         "training_plan": ref(training_path),
         "observations": observations,
         "model_label": model_label,
+        "step": step,
+        "training_horizon": recipe["steps"],
+        "progress_checkpoint": progress,
         "EMA_tensors": 107 if global_features else 91,
         "raw_global_features": global_features,
         "raw_global_conditioning": global_mode,
@@ -105,6 +204,7 @@ def prepare(root, training_path, *, camera_control="V137", comparison_scope=None
             ref(training_path),
             ref(previous / "plan-v1.json"),
             ref(previous / "collection-v1.json"),
+            *extra_inputs,
         ],
         "frozen_files": {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()},
     }
@@ -119,7 +219,7 @@ def prepare(root, training_path, *, camera_control="V137", comparison_scope=None
         quality_root=str(root),
         quality_owner=None,
         output=str(root / "faint-detail-v1"),
-        methods=[*METHODS[:-1], model_label],
+        methods=[*control_methods, model_label],
         primary_complete_status=queue["primary_complete_status"],
         operator=ref(work / "scripts/analyze_retained_faint_detail.py"),
         auditor=ref(work / "scripts/audit_retained_faint_detail.py"),

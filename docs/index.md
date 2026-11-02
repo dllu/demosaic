@@ -39,6 +39,10 @@ quality trials. Real mesh shows no clear new recovery; coarse noisy-flat error
 is5.08% above V120 and selected ADC-only color bias worsens. Native triplets,
 both GFX pairs, exact flats and fixed input-selected mesh peaks are published.
 
+The [V143 combined data/gradient5k candidate](v143-crossed-gradient5000.md) is
+training freshly from V120 after exact CPU/CUDA16+2 checks. Fixed1k/2.5k/5k
+native/faint/GFX/48-flat reviews include direct V142 controls. Quality is unmeasured.
+
 The [completed V141 small-gradient-loss pilot](v141-gradient-epsilon-pilot.md)
 recovers.01528dB faint ADC PSNR over matched V129, with mixed local-band changes
 and no new real-mesh recovery. Its48 exact-flat observations and added V129

@@ -33,6 +33,12 @@ Selected weak grass/wood response improves; mesh still lacks clear new recovery.
 Coarse noisy-flat error remains5.08% above V120, with worse selected ADC-only
 DC bias. Retain the useful data source in further quality trials and track both costs.
 
+The [V143 combined data/gradient5k trial](v143-crossed-gradient5000.md) now gives
+that distribution more learning with gradient epsilon3e−5. Actual CPU/CUDA16+2
+inputs and initial outputs exactly match V142; fresh5k production is running.
+Its predeclared1k/2.5k/5k reviews use the same native/faint/GFX/flat support and
+direct V142 controls. Horizon and gradient both change; quality remains unmeasured.
+
 ## Active quality questions
 
 | Comparison | Fixed intervention | Present evidence |

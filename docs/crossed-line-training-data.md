@@ -119,3 +119,7 @@ their JPEGs and siblings remain out of training.
 [Generator](../src/demosaic/textures.py) · [Reader](../src/demosaic/data.py) ·
 [Tests](../tests/test_crossed_line_textures.py) ·
 [Gallery driver](../scripts/report_crossed_line_training_examples.py).
+
+The [V143 follow-up](v143-crossed-gradient5000.md) is now training freshly from
+V120 for5k with this data and smaller gradient epsilon. Actual CPU/CUDA checks
+pass; fixed1k/2.5k/5k quality reviews are queued. Its quality is unmeasured.
