@@ -179,4 +179,6 @@ Half are absent; compact masks also leave empty regions in positive samples.
 Continuous FP32 targets use the same2x geometry/area2 path. The44-test
 reader/data/regression suite and an actual selected-target optimizer update
 pass. This is prepared data, not a trained-quality gain; V141's frozen source
-is unchanged and the V142 production recipe remains unstarted.
+is unchanged. [Completed V142 quality](v142-crossed-line-pilot.md) finds modest
+faint/weak-band and noisy-flat spatial gains, with selected ADC-only DC bias
+and coarse-noise costs; fine real mesh remains unresolved.

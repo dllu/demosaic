@@ -2,9 +2,11 @@
 
 **An optional procedural source now supplies weak crossed lines and empty
 backgrounds.** It is implemented in the actual training reader and remains off
-by default. V142's CPU/CUDA16+2 checks pass and fresh1k data-only production
-is running; matched restoration-quality review follows. No trained gain
-is claimed. V141's frozen loss trial is unchanged.
+by default. The [completed V1421k review](v142-crossed-line-pilot.md) gains
+.05212dB faint ADC PSNR and lowers noisy-flat spatial RMS4.55% versus V129.
+Selected weak grass/wood bands improve, but mesh remains weak; coarse noisy
+error stays5.08% above V120 and selected ADC-only DC bias worsens. Retain this
+useful source for further quality trials. V141's frozen loss trial is unchanged.
 [Sources, tests and target inspection](results/crossed-line-training-data-v1.json) ·
 [Actual V142 setup and fixed review](results/v142-crossed-line-setup-v1.json).
 
@@ -52,8 +54,9 @@ The1k schedule contains7,632 Commons slots, including773 crossed-line source
 reads:397 present and376 absent, out of16,000 total target slots. A replay
 through the frozen actual reader matches all12 logged crossed-line source
 recipes in its saved trace prefix. Every absent read matches its empty
-counterfactual exactly. These are scheduled counts; the original live training
-must still complete all updates.
+counterfactual exactly. [Completed production](results/v142-completed-reader-trace-v1.json)
+now verifies all1,000 updates and all30 final logged mesh recipes; the source
+audit retains its earlier scheduled-count observation unchanged.
 
 For present examples after geometry/area2, median exact-empty area is61.59%
 (interquartile50.73–69.39%). Median detail RGB RMS divided by the sampled
@@ -64,12 +67,12 @@ is sufficient or that a model can recover it under noise. Values precede
 camera transport and random training exposure.
 [All773 reads, counterfactual statistics and exact trace bindings](results/v142-crossed-line-source-coverage-v1.json).
 
-A separate [prepared mesh-power supplement](results/v142-mesh-peaks-setup-v1.json)
-keeps the two windows and all10 noisy-input-only peaks from the earlier
-[measured-green diagnostic](green-phase-spectrum.md). It will compare saved
+The [completed mesh-power supplement](results/v142-mesh-peaks-v1.json) keeps
+the two windows and all10 noisy-input-only peaks from the earlier
+[measured-green diagnostic](green-phase-spectrum.md). It compares saved
 V120/V129/V141/V142 outputs without further inference or RAW/noise generation.
-The explicit-DFT preflight checks540 complex coefficients on saved controls,
-maximum power difference3.02e−14. Saved-output/noisy-input power ratios are
+Explicit DFT checks720 complex coefficients across40 rows, maximum power
+difference3.02e−14; the original control-only preflight remains preserved. Saved-output/noisy-input power ratios are
 **descriptive, not correct-detail gains or quality scores**; actual native
 comparison and exact-flat error remain necessary.
 
@@ -106,8 +109,8 @@ keeps V129's V120 parent,cohort,seed70,quota.5,zeroPSF,B16/native256/BF16,
 LR1e−5,warm100 and1k budget. It keeps pixel/gradient epsilon.0003, independently
 of V141's tested loss change. CPU/CUDA16+2 pass, including exact native/paired
 clean/noisy hashes versus V129 and genuine changed-fraction resume rejection.
-Fresh1k production is running. Fixed102-input native/faint/GFX and48-flat review
-queues are prepared; actual matched quality remains required. The endpoint
+Fresh1k production and fixed102-input native/faint/GFX/48-flat reviews are
+complete, with84 published native boards and independent checks. The endpoint
 binder requires complete finite training state, exact frozen source and matched
 non-Commons inputs, with10 tests rejecting substituted inputs/schedules.
 V129's newly retained48 flat controls can be reused. Both protected GFX pairs,

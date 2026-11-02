@@ -25,11 +25,11 @@ V134/V135 keep their 33-region data; existing jobs retain declared inputs.
 An optional [photographic epoch order](docs/photographic-epoch-order.md) covers
 all prepared photos within 20k steps; its trained quality remains unmeasured.
 
-The [completed V141 gradient-loss review](docs/v141-gradient-epsilon-pilot.md)
-recovers .01528dB faint ADC PSNR against matched V129, with mixed local detail
-and no new fine-mesh recovery. Both continuations have about5.8% more coarse
-noisy-flat error than V120. The next data-only trial adds
-[weak crossed lines and empty backgrounds](docs/crossed-line-training-data.md).
+The [completed V142 data-only review](docs/v142-crossed-line-pilot.md) recovers
+.05212dB faint ADC PSNR and lowers noisy-flat spatial RMS4.55% versus V129.
+The new [crossed-line/empty targets](docs/crossed-line-training-data.md) are
+useful for further training. Fine mesh still lacks clear recovery, coarse
+noisy-flat error remains5.08% above V120 and selected ADC-only color bias worsens.
 V125/V131 stopped at the memory reserve; their dependent October queues exited.
 Original evidence remains preserved.
 
@@ -46,7 +46,7 @@ Original evidence remains preserved.
 | [V139 memory-only branch](docs/raw-global-memory-only.md) | Removes the direct local/MLP shortcut. Genuine CPU/CUDA16+2 checks pass; original1k training remains unstarted after dependency failure. Image quality is unmeasured |
 | [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all1,000 training batches match V137 |
 | [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.01528dB over V129, mixed local detail, no new mesh recovery. Noisy-flat coarse error near V129 and5.75% above V120; defaults unchanged |
-| [V142 crossed-line/empty data](docs/crossed-line-training-data.md) | Data-only1k recipe replaces.10 of the existing.15 weak quota; half of new draws have no lines. Reader/resume tests and CPU/CUDA16+2 pass; fresh1k production running. Trained quality unmeasured |
+| [V142 crossed-line/empty data](docs/v142-crossed-line-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.05212dB and noisy-flat spatial RMS−4.55% versus V129. Coarse error remains5.08% above V120; ADC-only DC bias worsens. Selected weak grass/wood gains, no clear new mesh recovery |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
@@ -70,14 +70,15 @@ isolated architecture ablation.
 
 Photo cells are unchanged160×160 crops at the8×-binned evaluation resolution,
 with shared coordinates/transforms. ISO12800-prior noisy observation →
-**V120 Small, single view** → exact synthetic GT. Bark remains coherent;
-fine raccoon fur remains softer than GT.
-[Audited results and current review limits](docs/v120-v121-primary.md) ·
-[Source/ROI/checkpoint/noise/display metadata](docs/images/v120-v121-primary-v1/manifest.json).
+**V142 Small data pilot, single view** → exact synthetic GT. Bark remains
+coherent; fine fur remains soft. Its modest faint/flat spatial gains and
+selected color-bias cost leave V120 as the general recommendation.
+[Audited V142 results and limits](docs/v142-crossed-line-pilot.md) ·
+[Source/ROI/checkpoint/noise/display metadata](docs/images/v142-crossed-line-v1/manifest.json).
 
-![V120 bark: noisy, restored and exact synthetic GT](docs/images/v120-v121-primary-v1/crop-801b668c1c29105a.png)
+![V142 bark: noisy, restored and exact synthetic GT](docs/images/v142-crossed-line-v1/bark-triplet.png)
 
-![V120 raccoon fur: noisy, restored and exact synthetic GT](docs/images/v120-v121-primary-v1/crop-881399e7a68af49a.png)
+![V142 raccoon fur: noisy, restored and exact synthetic GT](docs/images/v142-crossed-line-v1/raccoon-fur-triplet.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
@@ -97,22 +98,18 @@ The independent ISO100 exposure is an approximate qualitative reference,
 ![V120 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
 The additional **fine green mesh beside the red train's cab** remains difficult:
-the nominal ISO6400 prior largely erases its lattice. A fixed nearby-capture
-profile makes more diagonal texture visible, with substantial fine detail still
-missing in V120. Below: DSCF3842 camera JPEG → noisy Malvar → V120 nominal
-→ V120 nearby profile → DSCF3835 ISO100 AHD → ISO100 camera JPEG. Both ISO100
-references are **not GT**. Native160px cells share +4EV display; camera
-processing/aperture differ. [Matched comparison and limits](docs/gfx-green-mesh.md).
-The [matched V115/V119/V120 mesh check](docs/gfx-green-mesh.md#v120-after-correcting-the-paired-data-mix)
-shows no clear V120 lattice-recovery gain at the same conditioning. The
-[V119 report](docs/v119-quality.md) adds native material triplets and matched
-foliage/fence comparisons alongside its measured gains and regressions.
-The [RAW green-phase diagnostic](docs/green-phase-spectrum.md) finds matching
-diagonal frequency peaks that remain strongly attenuated in the saved outputs.
+the nominal ISO6400 prior largely erases its lattice. The fixed nearby3879
+profile retains weak diagonals, without clear new lattice recovery in V142.
+Below: noisy Malvar → V120 → V129 → V142 → DSCF3842 camera JPEG → independent
+DSCF3835 ISO100 AHD → ISO100 camera JPEG, at the same nearby profile. Native160px
+cells share+4EV. Both ISO100 comparators are **not GT**; processing and capture
+aperture/exposure differ. [Both priors and source metadata](docs/gfx-green-mesh.md).
+The [fixed green-phase peak extension](docs/v142-crossed-line-pilot.md#both-heldout-gfx-scenes)
+finds mixed frequency-power changes; these are descriptive ratios, not quality scores.
 
-![V120 fine green mesh, left native crop](docs/images/v120-green-mesh-v1/V120-fine-green-mesh-left-4EV.png)
+![V142 fine green mesh, left native crop](docs/images/v142-crossed-line-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-left-JPEG-plus4EV.png)
 
-![V120 fine green mesh, right native crop](docs/images/v120-green-mesh-v1/V120-fine-green-mesh-right-4EV.png)
+![V142 fine green mesh, right native crop](docs/images/v142-crossed-line-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-right-JPEG-plus4EV.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)

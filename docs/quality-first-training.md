@@ -26,10 +26,12 @@ and no new mesh recovery. Both continuations have about5.8% more coarse
 noisy-flat error than V120. Native triplets, both GFX pairs and48 exact-flat
 observations with added V129 controls are published.
 
-The [V142 data-only pilot](crossed-line-training-data.md) adds weak crossed
-lines and empty backgrounds inside the existing procedural quota, keeping the
-original loss. Its44-test reader/resume suite and CPU/CUDA16+2 checks pass;
-fresh1k production is running under the resource-aware controller. Quality remains unmeasured.
+The [completed V142 data-only pilot](v142-crossed-line-pilot.md) adds weak
+crossed lines and empty backgrounds while keeping the original loss. Faint
+ADC PSNR gains.05212dB and noisy-flat spatial RMS falls4.55% versus V129.
+Selected weak grass/wood response improves; mesh still lacks clear new recovery.
+Coarse noisy-flat error remains5.08% above V120, with worse selected ADC-only
+DC bias. Retain the useful data source in further quality trials and track both costs.
 
 ## Active quality questions
 

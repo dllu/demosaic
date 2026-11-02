@@ -4,8 +4,10 @@ The [completed V1411k gradient-loss review](v141-gradient-epsilon-pilot.md)
 recovers.01528dB faint ADC PSNR over matched V129, but has mixed local-band
 changes and no new fine-mesh recovery. Added matched V129 flat controls show
 about5.8% more coarse noisy-flat error than V120 in both continuations.
-The next [crossed-line/empty data trial](crossed-line-training-data.md) supplies
-weak repeated structure with explicit absence controls; trained quality is unmeasured.
+The [completed crossed-line/empty trial V142](v142-crossed-line-pilot.md)
+recovers.05212dB faint ADC and lowers noisy-flat spatial RMS4.55% over V129.
+Selected weak grass/wood response improves, with mixed fur bands, no clear new
+mesh recovery, coarse noisy error5.08% above V120 and worse selected ADC-only DC bias.
 
 **[V120 Small](current-model.md) is the current general baseline.** It keeps
 V84's pretrained DRUNet RGB restoration trunk with physical noise/camera
@@ -30,7 +32,7 @@ unresolved; broad state-of-the-art quality is unproven.
 | Can global matching learn without the local shortcut? | [V139 memory-only branch](raw-global-memory-only.md) retains15 tensors/14,144 parameters and a frozen V120 parent. Genuine CPU/CUDA16+2 checks pass. Original1k training and matched102-input native/faint/GFX review remain prepared after the dependency queue exited;510 predictions are reusable. Trained quality remains unmeasured |
 | Can local arrangements improve memory matching? | [Completed standalone V140](v140-standalone-pilot.md) stays near V120 at1k, with no new mesh recovery and near-parent flat/sky variation. The original dependency queue exited. Its [branch diagnostic](results/v140-memory-amplitude-v1.json) measures memory returns at.97–1.60% of combined token RMS on six contexts; this is not an RGB quality measurement |
 | Does stronger supervision of small gradient errors help? | [V141](v141-gradient-epsilon-pilot.md) isolates gradient epsilon3e−5 versus V1293e−4. Faint ADC+.01528dB, mixed local detail, no mesh recovery; noisy-flat coarse error near V129 and5.75% above V120. Defaults remain unchanged |
-| Can explicit thin lines and absence improve the data prior? | [Crossed-line/empty targets / V142](crossed-line-training-data.md) vary level, contrast, wire geometry, color and visibility, with half absent. Actual reader/resume tests pass; data-only1k controller active, trained quality unmeasured |
+| Can explicit thin lines and absence improve the data prior? | [Completed V142](v142-crossed-line-pilot.md): faint ADC+.05212dB and noisy-flat spatial RMS−4.55% over V129. Selected grass/wood gain/error improve; fur is mixed and real mesh lacks clear new recovery. Coarse noisy error remains5.08% above V120; selected ADC-only DC bias worsens. Keep the useful data source for further trials |
 | Does training precision limit faint detail? | [Completed V130](training-precision-pilot.md) changes only BF16→FP32 training against saved V129. Selected weak fur/grass/wood [faint-ADC bands](faint-adc-precision.md) improve slightly in gain/error while global PSNR falls0.01720dB. Native changes are subtle; noisy material and real mesh remain weak |
 | Is weak detail lost through persistent conditional bias? | [Independent-noise diagnosis](conditional-noise-response.md) finds persistent faint fur/wood error. [V12420k native check](v124-final20000-native.md) gains.411dB faint PSNR from14k but remains.0856dB below V120; ordinary gains.0095dB and real mesh stays weak. [V1256k](v125-progress6000-quality.md) remains1.009dB below V120 on faint contexts. Unequal budgets/backends prevent a causal mean-loss conclusion; full matched review remains incomplete after the memory-reserve stop |
 | Does adding more realistic reviewed shadow detail help? | [Completed V126/V1271000-update pilot](reviewed-shadow-pilot-quality.md) finds no useful gain on its retained material/shadow/GFX support. Shadow policy stays off by default; the23-region reviewed bank remains available |

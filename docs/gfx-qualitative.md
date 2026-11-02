@@ -1,5 +1,24 @@
 # GFX100S qualitative comparisons
 
+## V142 crossed-line data1k: modest numerical gains, soft real detail
+
+The [completed V142 data/native/flat report](v142-crossed-line-pilot.md) gains
+faint PSNR and lowers noisy-flat spatial error versus V129. Main foliage
+remains painterly, larger fence geometry coherent and sky visually quiet;
+there is no clear new fine-detail recovery. DSCF3879 ISO6400 → V142 → independent
+DSCF3880 ISO100 f/5.6, **not GT**. These retained512px-context native160 sensor-pixel
+crops share+2EV display.
+[Source/ROI/checkpoint/conditioning/display metadata](images/v142-crossed-line-v1/manifest.json).
+
+![V142 main foliage native triplet](images/v142-crossed-line-v1/main-foliage-triplet.png)
+
+![V142 main fence native triplet](images/v142-crossed-line-v1/main-chain-link-fence-triplet.png)
+
+Sky32px-block detrended variation is2.7126DN16, below V1203.0905/V1292.8315.
+This is descriptive variation, not exact-GT sky error. Noisy-flat spatial RMS
+improves, while coarse noisy-flat error stays5.08% above V120 and selected
+ADC-only DC bias worsens. V120 remains the general inference recommendation.
+
 ## V141 gradient-loss1k: no new visible mesh recovery
 
 The [completed V141 loss/native/flat report](v141-gradient-epsilon-pilot.md)

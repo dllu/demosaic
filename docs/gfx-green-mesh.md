@@ -1,5 +1,25 @@
 # Fine green fence beside the red train
 
+## V142 crossed-line data1k: fine lattice remains unresolved
+
+The [completed V142/native/48-flat report](v142-crossed-line-pilot.md) finds
+modest faint/weak-band and noisy-flat spatial gains against matched V129,
+without clear new real-lattice recovery. The nominal prior largely erases the
+mesh; the unchanged nearby3879 prior retains weak diagonals. Fixed-frequency
+output powers change in mixed directions, without establishing correct mesh
+recovery. Coarse noisy-flat error remains5.08% above V120 and selected ADC-only
+DC bias worsens.
+
+Below: noisy Malvar → V120 → V129 → V142 → DSCF3842 ISO6400 camera JPEG →
+independent DSCF3835 ISO100 AHD → ISO100 camera JPEG. Native160px cells share+4EV;
+aperture, exposure time and camera processing differ. Both ISO100 comparators
+are **not exact GT**. Both fixed priors are included in the
+[complete four-board metadata](images/v142-crossed-line-v1/camera-JPEG/manifest.json).
+
+![V142 left native fine mesh and camera JPEGs](images/v142-crossed-line-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-left-JPEG-plus4EV.png)
+
+![V142 right native fine mesh and camera JPEGs](images/v142-crossed-line-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-right-JPEG-plus4EV.png)
+
 ## V141 gradient-loss1k: lattice remains weak
 
 The [completed V141/native/48-flat report](v141-gradient-epsilon-pilot.md) finds

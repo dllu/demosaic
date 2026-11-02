@@ -32,10 +32,12 @@ matched native/GFX review and48 exact-flat checks find near-V120 quality,
 without clear new mesh recovery. Old failure receipts and partial checkpoints remain
 intact.
 
-The [optional crossed-line/empty training source](crossed-line-training-data.md)
-adds broad fine structure with explicit absence controls inside the existing
-procedural quota. Its44-test suite and CPU/CUDA16+2 checks pass; data-only V142
-production is running, with trained quality still unmeasured.
+The [completed V142 data-only review](v142-crossed-line-pilot.md) adds.05212dB
+faint ADC PSNR and4.55% lower noisy-flat spatial RMS versus matched V129. Its
+[crossed-line/empty data](crossed-line-training-data.md) stays useful for further
+quality trials. Real mesh shows no clear new recovery; coarse noisy-flat error
+is5.08% above V120 and selected ADC-only color bias worsens. Native triplets,
+both GFX pairs, exact flats and fixed input-selected mesh peaks are published.
 
 The [completed V141 small-gradient-loss pilot](v141-gradient-epsilon-pilot.md)
 recovers.01528dB faint ADC PSNR over matched V129, with mixed local-band changes
