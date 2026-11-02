@@ -29,7 +29,16 @@ def matching_prefix(observed, control, step):
     return 1000
 
 
-def prepare(root, training_path):
+def selected_steps(from_step):
+    if type(from_step) is not int or from_step not in STEPS:
+        raise ValueError("Review must start at a declared checkpoint")
+    return tuple(step for step in STEPS if step >= from_step)
+
+
+def prepare(root, training_path, *, from_step=1000, collector_cpu_threads=2):
+    review_steps = selected_steps(from_step)
+    if type(collector_cpu_threads) is not int or collector_cpu_threads not in (1, 2):
+        raise ValueError("Collector CPU threads must be1 or2")
     training = read(training_path)
     guard(training)
     status = read(Path(training["root"]) / "status.json")
@@ -52,7 +61,7 @@ def prepare(root, training_path):
         )
     ]
     points = {}
-    for step in STEPS:
+    for step in review_steps:
         point = root / f"step{step}"
         scope = f"V143 {step}of5000: fresh V120 parent, V142 crossed-line/empty data, gradient epsilon3e-5, "
         scope += "pixel3e-4/native256B16BF16/90782/27/seed70/quota.5/zeroPSF/LR1e-5/warm100. "
@@ -69,6 +78,7 @@ def prepare(root, training_path):
             step=step,
             additional_control_roots=[V141, V142],
             retained_control_labels=["V120", "V129 1k EMA", "V141 1k EMA", "V142 1k EMA"],
+            collector_cpu_threads=collector_cpu_threads,
         )
         queue = read(point / "queue-plan-v1.json")
         assert queue["training_horizon"] == 5000 and queue["step"] == step
@@ -161,11 +171,12 @@ def prepare(root, training_path):
         "points": points,
         "prefix_control": training["prefix_control_result"],
         "flat_control": ref(FLAT_CONTROL / "collection-v1.json"),
-        "new_candidate_forwards_planned": 450,
+        "new_candidate_forwards_planned": 150 * len(review_steps),
+        "collector_cpu_threads": collector_cpu_threads,
         "reused_control_predictions_per_point": 504,
         "new_noise_observations": 0,
         "RAW_decodes": 0,
-        "scope": "Predeclared1000/2500/5000 fixed native/faint/GFX/flat/mesh-peak reviews. Each150 candidate root/DINO calls; no control reruns. Numeric/pixel audits precede actual native viewing. Original5k training budget/owner unchanged.",
+        "scope": f"Declared checkpoint subset{list(review_steps)} fixed native/faint/GFX/flat/mesh-peak reviews. Each150 candidate root/DINO calls; no control reruns. Numeric/pixel audits precede actual native viewing. Original5k training budget/owner unchanged.",
     }
     save(root / "plan-v1.json", plan)
 
@@ -214,7 +225,7 @@ def bind(root, step):
     )
     import torch
 
-    torch.set_num_threads(2)
+    torch.set_num_threads(master.get("collector_cpu_threads", 2))
     checkpoint = actual["checkpoint"]
     assert ref(checkpoint["path"]) == checkpoint
     saved = torch.load(checkpoint["path"], weights_only=True, map_location="cpu", mmap=True)
@@ -325,7 +336,7 @@ def watch(root):
 
     began = time.monotonic()
     try:
-        for step in STEPS:
+        for step in sorted(map(int, master["points"])):
             path = Path(training["root"]) / (
                 f"train-V143-progress{step}.json" if step < 5000 else "train-V143-result.json"
             )
@@ -364,7 +375,7 @@ def watch(root):
                 "flat_audit": ref(flat / "independent-flat-audit-v1.json"),
             }
             record("completed-numeric-checkpoint-review-awaiting-actual-viewing", step=step)
-        record("completed-all-three-reviews-awaiting-actual-native-viewing")
+        record("completed-declared-reviews-awaiting-actual-native-viewing")
     except BaseException as error:
         record("failed-review-preserved-no-automatic-retry", error=repr(error))
         raise
@@ -376,9 +387,16 @@ if __name__ == "__main__":
     p.add_argument("root", type=Path)
     p.add_argument("--training-plan", type=Path)
     p.add_argument("--step", type=int, choices=STEPS)
+    p.add_argument("--from-step", type=int, choices=STEPS, default=1000)
+    p.add_argument("--cpu-threads", type=int, choices=(1, 2), default=2)
     args = p.parse_args()
     if args.mode == "prepare":
-        prepare(args.root.resolve(), args.training_plan.resolve())
+        prepare(
+            args.root.resolve(),
+            args.training_plan.resolve(),
+            from_step=args.from_step,
+            collector_cpu_threads=args.cpu_threads,
+        )
     elif args.mode == "bind":
         bind(args.root.resolve(), args.step)
     elif args.mode == "watch":

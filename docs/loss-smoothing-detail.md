@@ -159,3 +159,9 @@ and the real fine mesh shows no clear new recovery. Coarse noisy-flat error
 is near V129 and5.75% above V120; the option stays off by default. A smaller
 error-smoothing scale is not a clean-target edge mask or a guarantee of
 restored detail/flat-region safety.
+
+The [actual V143 first mixed batch](crossed-line-loss-gradients.md) now has a
+complete output-loss-gradient replay and independent NumPy derivative check.
+On its selected dark noisy mesh, smaller epsilon raises the weighted gradient
+term3.389×, but total output-gradient norm only8.25% and the corrective band
+slope7.55%. This initial-batch observation is not a trained-quality explanation.

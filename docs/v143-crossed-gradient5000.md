@@ -1,8 +1,12 @@
 # V143: more learning on weak lines with smaller gradient smoothing
 
-**Fresh5,000-update training from V120 is running. Quality is unmeasured.**
+**Fresh5,000-update training from V120 is running. The first 1,000-update
+review finds no clear mesh recovery and weaker faint scores.**
 It combines V142's crossed-line/empty data with V141's smaller gradient-error
 smoothing and retains1,000/2,500-update checkpoints for early comparisons.
+[Native/GFX/flat progress report](v143-progress1000-quality.md) includes two
+exact synthetic-GT triplets, both protected scenes and the verified flat review.
+V120 remains recommended. The endpoint and 2.5k quality are still unmeasured.
 [V142's completed review](v142-crossed-line-pilot.md) motivates keeping the data:
 modest faint/weak-band and noisy-flat spatial gains, with unresolved mesh,
 coarse noisy error and selected ADC-only color bias.
@@ -48,8 +52,14 @@ Each point also receives the same48 exact analytic uniform fields, reusing
 V120/V142 controls, and the original two-window/ten-peak mesh-power diagnostic.
 The peak extension reuses its primary outputs and adds no inference. Each point
 therefore uses150 candidate root/DINO calls and504 cached control predictions;
-450 candidate calls are planned across all three points. There are no new
+450 candidate calls were originally planned across all three points. There are no new
 noise observations, RAW decodes or control-model calls in these reviews.
+The first flat collector timed out after saving48 predictions but before final
+integrity checks. A separately recorded one-call probe and48-call recollection
+with one CPU thread passed the complete checks. The first review therefore
+used199 actual calls,49 extra; projected total is499 if the remaining reviews
+complete. All flat quality uses the fully verified recollection, while the
+original failure and outputs remain preserved.
 
 Before collection, binding checks the original producer identity, declared
 step/horizon,lineage, all finite91 model/EMA tensors and89 Adam states, exact69
@@ -78,7 +88,7 @@ Training and review status files are:
 
 ```text
 .cache/quality-20261102/V143-crossed-gradient5000-v1/status.json
-.cache/quality-20261102/V143-fixed-reviews-v2/status.json
+.cache/quality-20261102/V143-fixed-reviews-v3/status.json
 ```
 
 The initial prospective review queue was superseded before any controller or
@@ -88,6 +98,18 @@ and control paths were executed and verified before starting the watcher.
 The frozen training wrapper differs from its formatted public copy only in
 import spacing; their complete ASTs match, and actual checks use frozen bytes.
 
-No trained-quality conclusion is available yet. Track faint response, correct
+The v2 watcher stopped on that collection failure. The v3 watcher processes only
+the remaining2.5k/5k points with one CPU thread, preserving every original queue.
+It does not repeat the1k primary review or change the training worker/budget.
+[Recovery evidence](results/v143-progress1000-flat-recovery-v1.json) records
+small FP32 differences between original and recollected outputs; the successful
+workaround does not establish the timeout's cause.
+
+The [actual first-batch loss diagnostic](crossed-line-loss-gradients.md) finds
+that smaller epsilon increases the gradient-loss term more strongly than the
+complete corrective output gradient on one dark noisy mesh. This is a selected
+initial-batch observation, not learned quality or the cause of regression.
+
+The1k progress conclusion is provisional. Track faint response, correct
 mesh structure, coarse flat variation and color bias together. Full427-photo,
 camera/color/full-frame quality and useful real fine-mesh recovery remain open.

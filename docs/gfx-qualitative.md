@@ -1,5 +1,14 @@
 # GFX100S qualitative comparisons
 
+## V143 at1,000 of5,000: no clear new mesh recovery
+
+The [audited progress report](v143-progress1000-quality.md) includes native
+foliage, larger fence, sky and building crops from DSCF3879/3880, plus both
+fine-mesh ROIs/priors and both camera JPEGs from DSCF3842/3835. ISO100/AHD/JPEG
+references are qualitative comparators, **not exact GT**. The nominal mesh
+remains mostly erased, with weak nearby-prior diagonals and no clear new
+lattice recovery. The original5k training continues; V120 remains recommended.
+
 ## V142 crossed-line data1k: modest numerical gains, soft real detail
 
 The [completed V142 data/native/flat report](v142-crossed-line-pilot.md) gains

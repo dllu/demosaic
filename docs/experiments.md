@@ -1,5 +1,12 @@
 # Experiment index
 
+The [V143 1000of5000 progress report](v143-progress1000-quality.md) adds audited
+native/GFX/flat comparisons: faint ADC−0.16813dB versus V142 and no clear new
+mesh recovery. Original5k training continues. The [mixed-batch loss-gradient
+diagnostic](crossed-line-loss-gradients.md) measures the actual initial output
+objective without neural calls; it does not explain trained quality. V120
+remains recommended.
+
 **V120 Small is the current general recommendation in V84's architectural family.**
 Its photo/known/unseen means are37.04008/54.31272/54.00872dB, with ADC maximum55.52DN16.
 [Completed primary/local/native results](v120-v121-primary.md) document the gains,

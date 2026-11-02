@@ -3,7 +3,7 @@
 from copy import deepcopy
 
 import pytest
-from review_crossed_gradient5000 import matching_prefix
+from review_crossed_gradient5000 import matching_prefix, selected_steps
 from review_standalone_patch_memory_pilot import (
     append_retained_control,
     review_step_spec,
@@ -16,6 +16,18 @@ def test_old_default_and_explicit_progress_and_endpoint():
     assert review_step_spec(5000, 1000) == (1000, True)
     assert review_step_spec(5000, 2500) == (2500, True)
     assert review_step_spec(5000, 5000) == (5000, False)
+
+
+def test_remaining_review_subset_does_not_repeat_completed_prefix():
+    assert selected_steps(1000) == (1000, 2500, 5000)
+    assert selected_steps(2500) == (2500, 5000)
+    assert selected_steps(5000) == (5000,)
+
+
+@pytest.mark.parametrize("step", [True, 2500.0, 0, 1001, None])
+def test_reject_undeclared_review_start(step):
+    with pytest.raises(ValueError):
+        selected_steps(step)
 
 
 @pytest.mark.parametrize(

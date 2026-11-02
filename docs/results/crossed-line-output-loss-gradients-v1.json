@@ -1,0 +1,772 @@
+{
+  "status": "completed-actual-first-batch-output-loss-gradient-replay",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/scripts/diagnose_crossed_line_loss_gradients.py",
+    "sha256": "18b420fb12d16929776f32fd62d792d23c8a49b165268352f7ac3ce10e59c838"
+  },
+  "inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-crossed-gradient5000-v1/retained/train/V143/step-01.npz",
+    "sha256": "5815190b41515e2037311760b370814baf90349dd3b3197a624cf54d5f18823a"
+  },
+  "saved_model_outputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-crossed-gradient5000-v1/retained/train/V143/first-outputs.npz",
+    "sha256": "a492e964ee6890d07d3fc9ac9860929011f1adfd0eb13c730070f1705a5af3d1"
+  },
+  "source_trace_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-first-batch-loss-gradients-v2/source-loss-first16-v1.json",
+    "sha256": "f42a1804250b31c6257b5fb0f1ab7a9ae77801c2a0d34b1a6084e5ae0b889819"
+  },
+  "actual_source_modules_exact": 69,
+  "GPU_full_batch_loss_term_scalars_replayed": 12,
+  "independent_gradient_RGB_values_checked": 6291456,
+  "option_checks": {
+    "pixel3e-4-gradient3e-4": {
+      "manual_gradient_max_abs": 1.7943156154307937e-12,
+      "manual_gradient_relative_L2": 1.775248765736241e-07,
+      "loss": 0.007439162582159042
+    },
+    "pixel3e-4-gradient3e-5": {
+      "manual_gradient_max_abs": 1.8383032616148677e-12,
+      "manual_gradient_relative_L2": 1.527952729160154e-07,
+      "loss": 0.007429993711411953
+    }
+  },
+  "only_gradient_term_changes_max_abs": 4.547473508864641e-12,
+  "auxiliary_gradients_exact": true,
+  "rows": [
+    {
+      "index": 0,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/f7/f74ccfc5cc0e13bfbcbbca8882659f1e24c76455.npy",
+        "cache_sha256": "466f1443876f8e8112038e64ec969ff2ab27fe2ea41279f261f9e7ad9f7362be",
+        "cache_xywh": [
+          69,
+          7,
+          629,
+          601
+        ],
+        "draw_index": 0,
+        "draw_seed": 70,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": null,
+        "source_id": "f74ccfc5cc0e13bfbcbbca8882659f1e24c76455"
+      },
+      "noise": {
+        "shot": 0.0019190910970792174,
+        "read": 7.744715730950702e-06
+      },
+      "target_camera_band_RMS": 0.1196527010267905,
+      "missing_target_band_coefficient": 0.5955803017709309,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0004873781067747249,
+          "weighted_gradient_term_L2": 7.599285695551115e-05,
+          "target_band_corrective_directional_derivative": -0.00011472756932169528
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.00048759499526870284,
+          "weighted_gradient_term_L2": 7.712670595777181e-05,
+          "target_band_corrective_directional_derivative": -0.00011471379825930645
+        }
+      }
+    },
+    {
+      "index": 1,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-incoming-20261017-v5-quarantine/extension4/prepared4/images/9c/9c73fdb2e0e7f15a82e51a9220acfe07276a6d38.npy",
+        "cache_sha256": "58bd6a0e5d502aefc958da06170ca1948de60bee3b69ddae29b613346a5cff0b",
+        "cache_xywh": [
+          79,
+          33,
+          514,
+          716
+        ],
+        "draw_index": 1,
+        "draw_seed": 71,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": null,
+        "source_id": "9c73fdb2e0e7f15a82e51a9220acfe07276a6d38"
+      },
+      "noise": {
+        "shot": 0.000850988959427923,
+        "read": 5.272266889733146e-07
+      },
+      "target_camera_band_RMS": 0.11702252576153215,
+      "missing_target_band_coefficient": 0.11000515566549682,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.00048334802384436575,
+          "weighted_gradient_term_L2": 3.218723723978813e-05,
+          "target_band_corrective_directional_derivative": -6.593958085855718e-05
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.00048337432704031525,
+          "weighted_gradient_term_L2": 3.2359423363761284e-05,
+          "target_band_corrective_directional_derivative": -6.594873781624849e-05
+        }
+      }
+    },
+    {
+      "index": 2,
+      "source": {
+        "augmentation_downsample": 2,
+        "draw_index": 2,
+        "draw_seed": 72,
+        "kind": "smooth-field",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl"
+      },
+      "noise": {
+        "shot": 0.0013401659671217203,
+        "read": 1.4172719602356665e-06
+      },
+      "target_camera_band_RMS": 5.641565650870363e-09,
+      "missing_target_band_coefficient": 1595.4649000263362,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0007911445697120227,
+          "weighted_gradient_term_L2": 0.00011075212961360326,
+          "target_band_corrective_directional_derivative": -7.956230090857932e-07
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0008252809240267686,
+          "weighted_gradient_term_L2": 0.00019682451759545422,
+          "target_band_corrective_directional_derivative": -7.95558570974565e-07
+        }
+      }
+    },
+    {
+      "index": 3,
+      "source": {
+        "augmentation_downsample": 2,
+        "draw_index": 3,
+        "draw_seed": 73,
+        "kind": "procedural",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl"
+      },
+      "noise": {
+        "shot": 0.00011568497575353831,
+        "read": 6.124437845755892e-08
+      },
+      "target_camera_band_RMS": 0.00599447340356514,
+      "missing_target_band_coefficient": 0.011470472432341143,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0007110483236528694,
+          "weighted_gradient_term_L2": 0.00014046902073715852,
+          "target_band_corrective_directional_derivative": -4.40702187522562e-07
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0007120329760808531,
+          "weighted_gradient_term_L2": 0.00014342722432432708,
+          "target_band_corrective_directional_derivative": -4.401711428476232e-07
+        }
+      }
+    },
+    {
+      "index": 4,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/prepared4/images/9b/9b4e6f950b1d9b51b917392412f3d48e8931f7f3.npy",
+        "cache_sha256": "32b4eb8e9055092c319eca904e0672269e7db745fc4c1ac99e0e2bd2b79ffc38",
+        "cache_xywh": [
+          384,
+          128,
+          512,
+          512
+        ],
+        "draw_index": 4,
+        "draw_seed": 74,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": [
+          384,
+          128,
+          512,
+          512
+        ],
+        "source_id": "9b4e6f950b1d9b51b917392412f3d48e8931f7f3"
+      },
+      "noise": {
+        "shot": 0.00019343091116752476,
+        "read": 7.879239660724124e-08
+      },
+      "target_camera_band_RMS": 0.008809997121552133,
+      "missing_target_band_coefficient": 0.032177796154265,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0009804001570811864,
+          "weighted_gradient_term_L2": 0.00018683196413675436,
+          "target_band_corrective_directional_derivative": -2.562008230039862e-06
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0009812455402737998,
+          "weighted_gradient_term_L2": 0.00019036528259373317,
+          "target_band_corrective_directional_derivative": -2.5623082681608002e-06
+        }
+      }
+    },
+    {
+      "index": 5,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/b1/b13802010f1c2107deb9504bd6246fc01408604d.npy",
+        "cache_sha256": "5ae62fe0fc68b1f01e2095f6525681454be7463058a0ce7275d38e7c6802a1bb",
+        "cache_xywh": [
+          230,
+          86,
+          512,
+          512
+        ],
+        "draw_index": 5,
+        "draw_seed": 75,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": [
+          230,
+          86,
+          512,
+          512
+        ],
+        "source_id": "b13802010f1c2107deb9504bd6246fc01408604d"
+      },
+      "noise": {
+        "shot": 2.5332907171105035e-05,
+        "read": 3.53353540871737e-10
+      },
+      "target_camera_band_RMS": 0.002239173113160867,
+      "missing_target_band_coefficient": 0.02105616169066806,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.000839315501695883,
+          "weighted_gradient_term_L2": 0.0001671365530355536,
+          "target_band_corrective_directional_derivative": -3.5817818605010367e-07
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0008425683633956487,
+          "weighted_gradient_term_L2": 0.00017564964347269223,
+          "target_band_corrective_directional_derivative": -3.5846980939374396e-07
+        }
+      }
+    },
+    {
+      "index": 6,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/94/9494946eff868632ba002d7fa9ad0739d4f6d185.npy",
+        "cache_sha256": "a67aa4be97ebeae42c62ad3b9d55c8f9f4de182b84795c7f6eda7217a6e91896",
+        "cache_xywh": [
+          304,
+          6,
+          512,
+          512
+        ],
+        "draw_index": 6,
+        "draw_seed": 76,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "photographic_contrast_attenuated": true,
+        "reviewed_roi_xywh": [
+          304,
+          6,
+          512,
+          512
+        ],
+        "source_id": "9494946eff868632ba002d7fa9ad0739d4f6d185"
+      },
+      "noise": {
+        "shot": 0.00022995015024207532,
+        "read": 1.1226685501242173e-06
+      },
+      "target_camera_band_RMS": 0.0019550396212307582,
+      "missing_target_band_coefficient": 0.18758103936444184,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.00045270336274151667,
+          "weighted_gradient_term_L2": 7.36832608024298e-05,
+          "target_band_corrective_directional_derivative": -8.439055453860393e-06
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0004532172285249018,
+          "weighted_gradient_term_L2": 7.557875192050577e-05,
+          "target_band_corrective_directional_derivative": -8.440173901810145e-06
+        }
+      }
+    },
+    {
+      "index": 7,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-extension-20261016-bin4-v1/prepared4/images/e9/e97e5f43e7a1ec016c21e0205e3b5ca630aaf609.npy",
+        "cache_sha256": "16325aa648c0d19497f8993ca40fd461d36297e9c2264557be06d10db1e69960",
+        "cache_xywh": [
+          468,
+          228,
+          512,
+          512
+        ],
+        "draw_index": 7,
+        "draw_seed": 77,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "photographic_contrast_attenuated": true,
+        "reviewed_roi_xywh": [
+          468,
+          228,
+          512,
+          512
+        ],
+        "source_id": "e97e5f43e7a1ec016c21e0205e3b5ca630aaf609"
+      },
+      "noise": {
+        "shot": 0.00039275948074646294,
+        "read": 1.2727258535960573e-07
+      },
+      "target_camera_band_RMS": 0.0009511571667727156,
+      "missing_target_band_coefficient": 0.13808639004799822,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0014034706281128785,
+          "weighted_gradient_term_L2": 0.0002633298448121822,
+          "target_band_corrective_directional_derivative": -5.26881196501741e-06
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0014101481602754454,
+          "weighted_gradient_term_L2": 0.0002864611847566625,
+          "target_band_corrective_directional_derivative": -5.271209097297581e-06
+        }
+      }
+    },
+    {
+      "index": 8,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/50/50883d6a959c9949920d068d9e9da0cfd719be35.npy",
+        "cache_sha256": "35f582eaffda936292e104dba9227c613af900ca39d6b32e537d5629ce382388",
+        "cache_xywh": [
+          437,
+          131,
+          682,
+          588
+        ],
+        "draw_index": 8,
+        "draw_seed": 78,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": null,
+        "source_id": "50883d6a959c9949920d068d9e9da0cfd719be35"
+      },
+      "noise": {
+        "shot": 0.0007688988698646426,
+        "read": 2.692565203687991e-06
+      },
+      "target_camera_band_RMS": 0.008503779012900286,
+      "missing_target_band_coefficient": 0.029426747927362603,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0017187468700783075,
+          "weighted_gradient_term_L2": 0.0003151018786146253,
+          "target_band_corrective_directional_derivative": -4.6407508777638925e-06
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0017201171815535794,
+          "weighted_gradient_term_L2": 0.00032147012603930017,
+          "target_band_corrective_directional_derivative": -4.640408796960258e-06
+        }
+      }
+    },
+    {
+      "index": 9,
+      "source": {
+        "augmentation_downsample": 2,
+        "draw_index": 9,
+        "draw_seed": 79,
+        "kind": "crossed-lines",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "texture_recipe": {
+          "absence_probability": 0.5,
+          "angles_radians": [
+            3.107915850820956,
+            5.215282820160841
+          ],
+          "background_slope": [
+            -0.009718181432090665,
+            -0.018727859051334016
+          ],
+          "contrast_direction": [
+            1.0,
+            0.9629825949668884,
+            0.6365247964859009
+          ],
+          "kind": "crossed-lines",
+          "level": 0.04317701934288183,
+          "mask_center_final_pixels": [
+            155.86952032251003,
+            157.6727450430725
+          ],
+          "mask_radii_final_pixels": [
+            77.61946877898481,
+            99.29851265807315
+          ],
+          "peak_relative_contrast": 0.12661119002375254,
+          "periods_final_pixels": [
+            11.01493402739599,
+            18.503872415651355
+          ],
+          "phases_cycles": [
+            0.0685892773926835,
+            0.7102431187376583
+          ],
+          "pixel_scale": 2,
+          "present": true,
+          "requested_peak_relative_contrast": 0.12661119002375254,
+          "rms_relative_contrast": 0.02277531807714516,
+          "seed": 5495805673465287121,
+          "size": 512,
+          "space": "scene-linear-sRGB",
+          "tint": [
+            1.0,
+            0.9629825949668884,
+            0.6365247964859009
+          ],
+          "wire_sigma_final_pixels": [
+            0.9100947941505794,
+            0.5887316954031968
+          ]
+        }
+      },
+      "noise": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "target_camera_band_RMS": 9.749512851931662e-05,
+      "missing_target_band_coefficient": -0.005314443663858128,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0003491799786599191,
+          "weighted_gradient_term_L2": 5.126652243871253e-05,
+          "target_band_corrective_directional_derivative": -3.5276021607506364e-10
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.00040838261253546473,
+          "weighted_gradient_term_L2": 0.00015066803124325163,
+          "target_band_corrective_directional_derivative": -2.77490713072682e-10
+        }
+      }
+    },
+    {
+      "index": 10,
+      "source": {
+        "augmentation_downsample": 2,
+        "draw_index": 10,
+        "draw_seed": 80,
+        "kind": "procedural",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl"
+      },
+      "noise": {
+        "shot": 3.8330072129610926e-05,
+        "read": 1.5062486813377518e-09
+      },
+      "target_camera_band_RMS": 0.033151785857615045,
+      "missing_target_band_coefficient": 0.0008672420994624692,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0003693507515845473,
+          "weighted_gradient_term_L2": 2.8668211480998136e-05,
+          "target_band_corrective_directional_derivative": 2.2644044801859838e-08
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0003700683390187044,
+          "weighted_gradient_term_L2": 3.164729909932281e-05,
+          "target_band_corrective_directional_derivative": 2.2622927694991688e-08
+        }
+      }
+    },
+    {
+      "index": 11,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/prepared4/images/7e/7e0fb6db4049b399167b93e29d8c19370cdcbf3b.npy",
+        "cache_sha256": "5de87a8439bd1d79545c1cec247b11d24fd6c8c5415afdc58abefc971b1ff90b",
+        "cache_xywh": [
+          393,
+          136,
+          654,
+          598
+        ],
+        "draw_index": 11,
+        "draw_seed": 81,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": null,
+        "source_id": "7e0fb6db4049b399167b93e29d8c19370cdcbf3b"
+      },
+      "noise": {
+        "shot": 2.5108700356213376e-05,
+        "read": 3.0718141363905715e-09
+      },
+      "target_camera_band_RMS": 0.004636053808694225,
+      "missing_target_band_coefficient": 0.007610053000719205,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0009260543079360435,
+          "weighted_gradient_term_L2": 0.00018078753896148993,
+          "target_band_corrective_directional_derivative": -1.921983936270943e-07
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.000927576638777795,
+          "weighted_gradient_term_L2": 0.0001853279687926349,
+          "target_band_corrective_directional_derivative": -1.9230353843637927e-07
+        }
+      }
+    },
+    {
+      "index": 12,
+      "source": {
+        "augmentation_downsample": 2,
+        "draw_index": 12,
+        "draw_seed": 82,
+        "kind": "crossed-lines",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "texture_recipe": {
+          "absence_probability": 0.5,
+          "angles_radians": [
+            1.6911838432009245,
+            3.231767114144432
+          ],
+          "background_slope": [
+            -0.024848761728526222,
+            -0.028835187094974093
+          ],
+          "contrast_direction": [
+            1.0,
+            0.5987291932106018,
+            0.7081243991851807
+          ],
+          "kind": "crossed-lines",
+          "level": 0.0009944969919149851,
+          "mask_center_final_pixels": [
+            143.0197185133352,
+            148.06908958543835
+          ],
+          "mask_radii_final_pixels": [
+            93.35913616928156,
+            113.20931592011915
+          ],
+          "peak_relative_contrast": 0.018485536153252765,
+          "periods_final_pixels": [
+            22.46696664543313,
+            22.721432826065993
+          ],
+          "phases_cycles": [
+            0.7289149883757167,
+            0.08223362589455074
+          ],
+          "pixel_scale": 2,
+          "present": true,
+          "requested_peak_relative_contrast": 0.018485536153252765,
+          "rms_relative_contrast": 0.0032060599448143923,
+          "seed": 9070486888441833784,
+          "size": 512,
+          "space": "scene-linear-sRGB",
+          "tint": [
+            1.0,
+            0.5987291932106018,
+            0.7081243991851807
+          ],
+          "wire_sigma_final_pixels": [
+            0.9131842310360704,
+            0.9188191229778592
+          ]
+        }
+      },
+      "noise": {
+        "shot": 1.5495665138587356e-05,
+        "read": 3.2430800267491122e-09
+      },
+      "target_camera_band_RMS": 2.994526992100734e-06,
+      "missing_target_band_coefficient": 1.373937042348951,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0018472263872079291,
+          "weighted_gradient_term_L2": 0.00016236982629140562,
+          "target_band_corrective_directional_derivative": -4.3984497283325287e-07
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.001999648557462094,
+          "weighted_gradient_term_L2": 0.0005502773274417037,
+          "target_band_corrective_directional_derivative": -4.730597763491116e-07
+        }
+      }
+    },
+    {
+      "index": 13,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/prepared4/images/8d/8dc759288bd68dc91eb0f0bc3d114da03ea72b7a.npy",
+        "cache_sha256": "5f77935e3b141a5a44deb9f768fc12616a6999f96c6670a6e7674df9af818002",
+        "cache_xywh": [
+          35,
+          96,
+          544,
+          534
+        ],
+        "draw_index": 13,
+        "draw_seed": 83,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "photographic_contrast_attenuated": true,
+        "reviewed_roi_xywh": null,
+        "source_id": "8dc759288bd68dc91eb0f0bc3d114da03ea72b7a"
+      },
+      "noise": {
+        "shot": 3.237647615605965e-05,
+        "read": 1.2845452701526483e-08
+      },
+      "target_camera_band_RMS": 0.019625919564589343,
+      "missing_target_band_coefficient": 0.030806330139909202,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0002948564957388594,
+          "weighted_gradient_term_L2": 3.736341323430534e-05,
+          "target_band_corrective_directional_derivative": -3.168713779753563e-06
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.00029510061378516236,
+          "weighted_gradient_term_L2": 3.826791180398727e-05,
+          "target_band_corrective_directional_derivative": -3.168379681266227e-06
+        }
+      }
+    },
+    {
+      "index": 14,
+      "source": {
+        "augmentation_downsample": 2,
+        "cache": "/mnt/external/demosaic/commons-incoming-20261017-v5-quarantine/extension4/prepared4/images/cb/cb7bb84fcbb8948806b41d0667693a7852db1126.npy",
+        "cache_sha256": "47d91e54ca5a07f62b411624863401fd411eeabc2d250bd698ff23128965a06b",
+        "cache_xywh": [
+          392,
+          108,
+          512,
+          512
+        ],
+        "draw_index": 14,
+        "draw_seed": 84,
+        "kind": "photographic",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "reviewed_roi_xywh": [
+          392,
+          108,
+          512,
+          512
+        ],
+        "source_id": "cb7bb84fcbb8948806b41d0667693a7852db1126"
+      },
+      "noise": {
+        "shot": 6.342575215967372e-05,
+        "read": 2.058141390648416e-08
+      },
+      "target_camera_band_RMS": 0.008594873080421228,
+      "missing_target_band_coefficient": 0.01824265942414635,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0004401991790282463,
+          "weighted_gradient_term_L2": 6.981216395590239e-05,
+          "target_band_corrective_directional_derivative": -1.8077383972154813e-06
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.0004405394345187135,
+          "weighted_gradient_term_L2": 7.107625930785554e-05,
+          "target_band_corrective_directional_derivative": -1.807225649418035e-06
+        }
+      }
+    },
+    {
+      "index": 15,
+      "source": {
+        "augmentation_downsample": 2,
+        "draw_index": 15,
+        "draw_seed": 85,
+        "kind": "crossed-lines",
+        "manifest": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl",
+        "texture_recipe": {
+          "absence_probability": 0.5,
+          "angles_radians": [
+            0.62774508448001,
+            1.621456534167502
+          ],
+          "background_slope": [
+            0.018076458476606584,
+            -0.007542177719803981
+          ],
+          "contrast_direction": [
+            0.6835847496986389,
+            0.8942338824272156,
+            1.0
+          ],
+          "kind": "crossed-lines",
+          "level": 0.00648891912549906,
+          "mask_center_final_pixels": [
+            138.31424973120664,
+            147.6846579651316
+          ],
+          "mask_radii_final_pixels": [
+            90.15193345691607,
+            122.26950745804366
+          ],
+          "peak_relative_contrast": 0.05906714354367553,
+          "periods_final_pixels": [
+            26.521356016228985,
+            18.985519971676755
+          ],
+          "phases_cycles": [
+            0.3127991131042407,
+            0.12205288920173307
+          ],
+          "pixel_scale": 2,
+          "present": true,
+          "requested_peak_relative_contrast": 0.05906714354367553,
+          "rms_relative_contrast": 0.010358232229556391,
+          "seed": 7564276080571586118,
+          "size": 512,
+          "space": "scene-linear-sRGB",
+          "tint": [
+            0.6835847496986389,
+            0.8942338824272156,
+            1.0
+          ],
+          "wire_sigma_final_pixels": [
+            1.0218881171573033,
+            0.7797264902425962
+          ]
+        }
+      },
+      "noise": {
+        "shot": 0.0,
+        "read": 0.0
+      },
+      "target_camera_band_RMS": 0.00010180629909632161,
+      "missing_target_band_coefficient": 0.004663320298934694,
+      "options": {
+        "pixel3e-4-gradient3e-4": {
+          "RGB_output_gradient_L2": 0.0002679577676059652,
+          "weighted_gradient_term_L2": 3.522493785899404e-05,
+          "target_band_corrective_directional_derivative": -2.1838333287469703e-11
+        },
+        "pixel3e-4-gradient3e-5": {
+          "RGB_output_gradient_L2": 0.00031433840287160527,
+          "weighted_gradient_term_L2": 0.0001163587760042492,
+          "target_band_corrective_directional_derivative": -8.675396520509976e-11
+        }
+      }
+    }
+  ],
+  "new_neural_forwards": 0,
+  "new_noise_observations": 0,
+  "RAW_decodes": 0,
+  "optimizer_updates": 0,
+  "scope": "Actual firstB16 training inputs and outputs, two loss-gradient backwards in CPU FP32/one thread. Three crossed-line examples are all present, two ADC-only and one noisy; no absent mesh in this selected batch. Full actualB16 reduction retains valid-mask/batch denominators. Output gradients and fixed target-band directions are not network-parameter gradients, optimizer contributions after clipping, learned-quality evidence or flat-safety proof. Independent NumPy64 VJP uses actual FP32 rendered/linear intermediates. No model execution or data regeneration."
+}

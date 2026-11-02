@@ -88,9 +88,12 @@ def prepare(
     step=None,
     additional_control_roots=(),
     retained_control_labels=None,
+    collector_cpu_threads=2,
 ):
     import yaml
 
+    if type(collector_cpu_threads) is not int or collector_cpu_threads not in (1, 2):
+        raise ValueError("Collector CPU threads must be1 or2")
     training = read(training_path)
     guard(training)
     assert len(training["arms"]) == 1
@@ -129,6 +132,13 @@ def prepare(
         REPO / "scripts/analyze_retained_faint_detail.py",
         work / "scripts/analyze_retained_faint_detail.py",
     )
+    if collector_cpu_threads == 1:
+        collector = work / "scripts/collect_retained_checkpoint_pilot.py"
+        original = collector.read_text()
+        assert original.count("torch.set_num_threads(2)") == 1
+        collector.write_text(
+            original.replace("torch.set_num_threads(2)", "torch.set_num_threads(1)")
+        )
     (work / "configs").mkdir()
     shutil.copyfile(
         REPO / "configs/gfx-green-mesh-20231231.json", work / "configs/gfx-green-mesh-20231231.json"
