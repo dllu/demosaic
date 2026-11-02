@@ -42,6 +42,7 @@ October queues exited. Original evidence remains preserved.
 | [V138 frozen-parent global branch](docs/raw-global-only-training.md) | Genuine CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR1e−3/1k recipe remains unstarted after the V125 dependency failure; quality is unmeasured |
 | [V139 memory-only branch](docs/raw-global-memory-only.md) | Removes the direct local/MLP shortcut. Genuine CPU/CUDA16+2 checks pass; original1k training remains unstarted after dependency failure. Image quality is unmeasured |
 | [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all1,000 training batches match V137 |
+| [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | CPU/CUDA16+2 checks pass; matched1k training from V120 is running. Only gradient-error epsilon changes3e−4→3e−5 against saved V129; fixed102-input/native/GFX and48-flat reviews follow. Quality unmeasured |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected

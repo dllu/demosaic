@@ -23,6 +23,7 @@ from .losses import (
     DEFAULT_RECONSTRUCTION_EPSILON,
     psnr,
     reconstruction_loss,
+    resolve_gradient_epsilon,
     validate_camera_supervision,
     validate_normalized_band_weight,
     validate_reconstruction_epsilon,
@@ -523,6 +524,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         config.get("reconstruction_charbonnier_epsilon", DEFAULT_RECONSTRUCTION_EPSILON)
     )
     config["reconstruction_charbonnier_epsilon"] = reconstruction_epsilon
+    gradient_epsilon = resolve_gradient_epsilon(
+        config.get("gradient_charbonnier_epsilon"), reconstruction_epsilon
+    )
+    config["gradient_charbonnier_epsilon"] = gradient_epsilon
     camera_supervision = validate_camera_supervision(
         config.get("camera_supervision", "reference-white-v1")
     )
@@ -718,6 +723,20 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     torch.manual_seed(seed)
     resume_state = torch.load(resume, map_location="cpu", weights_only=True) if resume else None
     if resume_state:
+        old_epsilon = validate_reconstruction_epsilon(
+            resume_state["config"].get(
+                "reconstruction_charbonnier_epsilon", DEFAULT_RECONSTRUCTION_EPSILON
+            )
+        )
+        if old_epsilon != reconstruction_epsilon:
+            raise ValueError("Resume reconstruction epsilon differs; initialize a new run")
+        if (
+            resolve_gradient_epsilon(
+                resume_state["config"].get("gradient_charbonnier_epsilon"), old_epsilon
+            )
+            != gradient_epsilon
+        ):
+            raise ValueError("Resume gradient epsilon differs; initialize a new run")
         require_resume_global_features(resume_state["config"], config)
         require_resume_raw_global_scope(resume_state["config"], config)
         require_resume_photo_epoch_order(resume_state["config"], config)
@@ -920,15 +939,6 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume multiscale loss differs; initialize a new run")
         if state["config"].get("reconstruction_objective", "charbonnier-v1") != objective:
             raise ValueError("Resume reconstruction objective differs; initialize a new run")
-        if (
-            float(
-                state["config"].get(
-                    "reconstruction_charbonnier_epsilon", DEFAULT_RECONSTRUCTION_EPSILON
-                )
-            )
-            != reconstruction_epsilon
-        ):
-            raise ValueError("Resume reconstruction epsilon differs; initialize a new run")
         if state["config"].get("camera_supervision", "reference-white-v1") != camera_supervision:
             raise ValueError("Resume camera supervision differs; initialize a new run")
         if float(state["config"].get("reference_interval_weight", 0.0)) != interval_weight:
@@ -1215,6 +1225,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
                         camera_supervision=camera_supervision,
                         reference_interval_weight=interval_weight,
                         reconstruction_charbonnier_epsilon=reconstruction_epsilon,
+                        gradient_charbonnier_epsilon=gradient_epsilon,
                         normalized_band_weight=band_weight,
                         **mean_options,
                     )

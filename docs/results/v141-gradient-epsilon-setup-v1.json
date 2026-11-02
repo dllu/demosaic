@@ -1,0 +1,79 @@
+{
+  "timestamp_UTC": "2026-11-02T17:44:43.415083+00:00",
+  "status": "checked-and-started-V141-small-gradient-epsilon-pilot",
+  "previous_goal_turn_classification": "progress",
+  "previous_progress_commit": "3abb59f",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-gradient-epsilon-v1/plan.json",
+    "sha256": "cd745e0a75208eb5751efbb677a99fd6ee16e3c00bcf3b8496304d3446e621e8"
+  },
+  "completed_checks": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-gradient-epsilon-v1/CPU-V141-result.json",
+      "sha256": "2c23bd431480f3575dff0f1f639d12d9e3c536cbff2e269543f9e187f91a493e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-gradient-epsilon-v1/CUDA-V141-result.json",
+      "sha256": "94a13d81a9df8fe5051e66a8ce39e46f0a82abc7f8efebbc99608facf8836052"
+    }
+  ],
+  "exact_initial_output_matches": [
+    {
+      "phase": "CPU",
+      "V141": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-gradient-epsilon-v1/retained/CPU/V141/first-outputs.npz",
+        "sha256": "166fa55f338becb941662086ce534d6d21dc029c3d2117ef74ae1249c70d2f76"
+      },
+      "saved_zero-offset_V140": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/retained/CPU/V140/first-outputs.npz",
+        "sha256": "166fa55f338becb941662086ce534d6d21dc029c3d2117ef74ae1249c70d2f76"
+      },
+      "exact_output_values": 65536
+    },
+    {
+      "phase": "CUDA",
+      "V141": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-gradient-epsilon-v1/retained/CUDA/V141/first-outputs.npz",
+        "sha256": "225e966a557cdb5f5dec6289c67cc5710b94c8c6aae068e68c6107be5916d49d"
+      },
+      "saved_zero-offset_V140": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/raw-patch-memory-pilot-v1/run/retained/CUDA/V140/first-outputs.npz",
+        "sha256": "225e966a557cdb5f5dec6289c67cc5710b94c8c6aae068e68c6107be5916d49d"
+      },
+      "exact_output_values": 4194304
+    }
+  ],
+  "preflight": {
+    "observations": 150,
+    "reused_predictions": 456,
+    "finite_prediction_values": 111673344
+  },
+  "primary_review_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/queue-plan-v1.json",
+    "sha256": "df90f3c276295f215eaf66f0bab0ffc7a0f8929f1b4dc04bff16b723970b7579"
+  },
+  "flat_review_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-flat-safety-v1/queue-plan-v1.json",
+    "sha256": "79b43e6476a9b5e61673bbf065a11c0ef2bc8670825722a5d776a6c10ed9bc6a"
+  },
+  "controller": {
+    "pid": 910444,
+    "created": 1793641168.14
+  },
+  "worker": {
+    "pid": 912130,
+    "created": 1793641400.99
+  },
+  "controller_live_now": true,
+  "worker_live_now": true,
+  "observed_phase": "train",
+  "available_RAM_GiB": 67.88176727294922,
+  "tests": {
+    "passed": 70,
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/gradient-epsilon-tests-v1.log",
+      "sha256": "3bee5a1892f77d7fc8565c4522e2606a3b0d7778dbd0e24daca22b8cf6f4f6b9"
+    }
+  },
+  "scope": "Only spatial-gradient Charbonnier epsilon3e-4\u21923e-5 against saved actualV1291000. Same architecture/data/noise/seed/schedule. Quality unmeasured until trained/numeric/native/flat review; no new noise/RAW or old-model inference in review."
+}

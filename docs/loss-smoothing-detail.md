@@ -139,3 +139,19 @@ at native256/B16/configured BF16. Initial EMA and official frozen Tiny identity
 match, with all91 model/EMA tensors and89 Adam states finite. All three data
 domains execute. [Actual CUDA preflight](results/reconstruction-epsilon-CUDA-v1.json).
 The fixture overlaps V104 and is not a throughput or quality measurement.
+
+## Separate spatial-gradient scale
+
+An optional`gradient_charbonnier_epsilon` now controls only the existing
+rendered horizontal/vertical gradient-error term. Missing/None inherits
+`reconstruction_charbonnier_epsilon` exactly. Pixel, auxiliary, highlight and
+paired objectives keep their existing scales and coefficients. The effective
+value is serialized; changed pixel/gradient scales reject before constructing
+a resumed model. Direct/grouped/conditional-mean paths and source diagnostics
+share the setting.
+
+The [V141 pilot](v141-gradient-epsilon-pilot.md) isolates.00003 gradient epsilon
+against savedV129's.0003 at the same1k/data/seed/parent, retaining.0003 pixels.
+The70-test suite and real CPU/CUDA16+2 checks pass. Its full training is running;
+trained quality remains unmeasured. A smaller error-smoothing scale is not a
+clean-target edge mask or a guarantee of restored detail/flat-region safety.

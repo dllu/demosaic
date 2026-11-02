@@ -83,7 +83,9 @@ def analyze(path):
     quality_root = Path(policy["quality_root"])
     status = read(quality_root / "status.json")
     assert status["owner"] == policy["quality_owner"]
-    assert status["status"] == "completed-global1000-review-awaiting-actual-native-viewing"
+    assert status["status"] == policy.get(
+        "primary_complete_status", "completed-global1000-review-awaiting-actual-native-viewing"
+    )
     execution = read(quality_root / "plan-v1.json")
     guard(execution)
     collection = read(quality_root / "collection-v1.json")

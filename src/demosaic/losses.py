@@ -35,6 +35,11 @@ def charbonnier(error, *, epsilon=DEFAULT_RECONSTRUCTION_EPSILON):
     return (error.square() + epsilon**2).sqrt().mean()
 
 
+def resolve_gradient_epsilon(value, reconstruction_epsilon=DEFAULT_RECONSTRUCTION_EPSILON):
+    """Missing/None keeps the historical pixel epsilon for spatial derivatives."""
+    return validate_reconstruction_epsilon(reconstruction_epsilon if value is None else value)
+
+
 def validate_reconstruction_objective(value):
     if value not in ("charbonnier-v1", "image-log-mse-v1"):
         raise ValueError("Unknown reconstruction objective")
@@ -166,16 +171,20 @@ def reconstruction_loss(
     camera_supervision="reference-white-v1",
     reference_interval_weight=0.0,
     reconstruction_charbonnier_epsilon=DEFAULT_RECONSTRUCTION_EPSILON,
+    gradient_charbonnier_epsilon=None,
     normalized_band_weight=0.0,
 ):
     validate_reconstruction_objective(objective)
     epsilon = validate_reconstruction_epsilon(reconstruction_charbonnier_epsilon)
+    gradient_epsilon = resolve_gradient_epsilon(gradient_charbonnier_epsilon, epsilon)
     validate_camera_supervision(camera_supervision)
     band_weight = validate_normalized_band_weight(normalized_band_weight)
     if band_weight and camera_supervision != "sensor-valid-v1":
         raise ValueError("Normalized band supervision requires sensor-valid clean camera targets")
     if band_weight and "sensor_reference" in batch:
-        raise ValueError("Normalized band supervision requires exact synthetic targets, not paired references")
+        raise ValueError(
+            "Normalized band supervision requires exact synthetic targets, not paired references"
+        )
     if not math.isfinite(reference_interval_weight) or reference_interval_weight < 0:
         raise ValueError("Reference interval weight must be finite and nonnegative")
     if reference_interval_weight and camera_supervision != "sensor-valid-v1":
@@ -207,7 +216,9 @@ def reconstruction_loss(
     rendered = penalty(display - truth)
     gradient = (
         sum(
-            charbonnier(torch.diff(display, dim=d) - torch.diff(truth, dim=d), epsilon=epsilon)
+            charbonnier(
+                torch.diff(display, dim=d) - torch.diff(truth, dim=d), epsilon=gradient_epsilon
+            )
             for d in (-1, -2)
         )
         / 2

@@ -16,9 +16,19 @@ BASE = REPO / ".cache/current-quality-20261023-v1"
 METHODS = ["V120", "V129 1k EMA", "V136 1k EMA", "V137 1k EMA", "V140 1k EMA"]
 
 
-def prepare(root, training_path):
+def prepare(root, training_path, *, camera_control="V137", comparison_scope=None):
+    import yaml
+
     training = read(training_path)
     guard(training)
+    assert len(training["arms"]) == 1
+    arm = next(iter(training["arms"]))
+    recipe = yaml.safe_load(Path(training["arms"][arm]["train"]).read_text())
+    assert recipe["steps"] == 1000
+    model_label = arm + " 1k EMA"
+    global_features = recipe["model"].get("raw_global_features", False)
+    global_mode = recipe["model"].get("raw_global_conditioning", "legacy-v1")
+    assert not global_features or global_mode == "patch-memory-v4"
     previous = BASE / "raw-global-conditioned-quality-v1"
     old = read(previous / "plan-v1.json")
     guard(old)
@@ -38,6 +48,10 @@ def prepare(root, training_path):
         work / "scripts",
         dirs_exist_ok=True,
         ignore=shutil.ignore_patterns("__pycache__"),
+    )
+    shutil.copyfile(
+        REPO / "scripts/analyze_retained_faint_detail.py",
+        work / "scripts/analyze_retained_faint_detail.py",
     )
     (work / "configs").mkdir()
     shutil.copyfile(
@@ -59,9 +73,9 @@ def prepare(root, training_path):
         )
     camera_source = (BASE / "raw-patch-memory-quality-v1/render-mesh-JPEG-v1.py").read_text()
     camera = root / "render-mesh-JPEG-v1.py"
-    camera.write_text(camera_source.replace("V139", "V137"))
+    camera.write_text(camera_source.replace("V139", camera_control).replace("V140", arm))
     scope = (
-        "Standalone V140 complete1k pilot, four saved controls and102 fixed inputs: "
+        f"Standalone {arm} complete1k pilot, four saved controls and102 fixed inputs: "
         "64 shadow/16 ordinary/16 faintADC/four mainGFX512/two mesh768 profiles. "
         "All ROIs/noise/display/source masks fixed;408 control predictions reused. "
         "Matched actualV137 training batches, but scope/LR/operator differ, so this "
@@ -70,15 +84,19 @@ def prepare(root, training_path):
         "triplets, faint40x displays, both corrected GFX pairs and both cameraJPEGs. "
         "No new noise/RAW/reference-model calls. Not full427/camera/color/fullframe quality."
     )
+    if comparison_scope is not None:
+        scope = comparison_scope
     queue = {
         **old,
         "root": str(root),
         "work": str(work),
         "training_plan": ref(training_path),
         "observations": observations,
-        "model_label": METHODS[-1],
-        "EMA_tensors": 107,
-        "raw_global_conditioning": "patch-memory-v4",
+        "model_label": model_label,
+        "EMA_tensors": 107 if global_features else 91,
+        "raw_global_features": global_features,
+        "raw_global_conditioning": global_mode,
+        "primary_complete_status": "completed-primary-numeric-review-awaiting-native-viewing",
         "scope": scope,
         "collector": ref(work / "scripts/collect_retained_checkpoint_pilot.py"),
         "reporter": ref(work / "scripts/report_checkpoint_pilot.py"),
@@ -101,7 +119,8 @@ def prepare(root, training_path):
         quality_root=str(root),
         quality_owner=None,
         output=str(root / "faint-detail-v1"),
-        methods=METHODS,
+        methods=[*METHODS[:-1], model_label],
+        primary_complete_status=queue["primary_complete_status"],
         operator=ref(work / "scripts/analyze_retained_faint_detail.py"),
         auditor=ref(work / "scripts/audit_retained_faint_detail.py"),
         PYTHONPATH=f"{work / 'src'}:{work / 'scripts'}",
@@ -247,10 +266,13 @@ def run(root):
                 root / "status.json",
                 {
                     "owner": None,
-                    "status": "completed-global1000-review-awaiting-actual-native-viewing",
+                    "status": plan.get(
+                        "primary_complete_status",
+                        "completed-global1000-review-awaiting-actual-native-viewing",
+                    ),
                     "plan": ref(root / "plan-v1.json"),
                     "primary_audit": ref(root / "independent-audit-v1.json"),
-                    "scope": "Standalone V140 primary stages completed by this runner; no dependency owner.",
+                    "scope": f"{plan['model_label']} primary stages completed by this runner; no dependency owner.",
                 },
             )
 

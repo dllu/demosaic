@@ -20,6 +20,11 @@ has completed its checked1k recipe and matched native/GFX/48-flat reviews.
 It stays near V120 with no clear new mesh recovery. Historical queue descriptions below describe their
 original plans, not currently live workers.
 
+The [V141 loss pilot](v141-gradient-epsilon-pilot.md) is now training a matched
+1k run against saved V129. It changes only spatial-gradient error smoothing,
+with70 tests and genuine CPU/CUDA16+2 checks passed. Native/GFX and48 exact-flat
+reviews are fixed before output collection; quality remains unmeasured.
+
 ## Active quality questions
 
 | Comparison | Fixed intervention | Present evidence |

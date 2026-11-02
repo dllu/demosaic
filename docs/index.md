@@ -32,6 +32,10 @@ matched native/GFX review and48 exact-flat checks find near-V120 quality,
 without clear new mesh recovery. Old failure receipts and partial checkpoints remain
 intact.
 
+The [V141 small-gradient-loss pilot](v141-gradient-epsilon-pilot.md) is training
+its checked1k recipe against saved V129, with matched native/GFX and uniform-field
+reviews prepared. It has no trained-quality conclusion yet.
+
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
 weak-carrier gain, but does not improve broad weak natural detail and worsens
 the ADC color tail. Complete metrics, native triplets, six GFX regions and RGB16
