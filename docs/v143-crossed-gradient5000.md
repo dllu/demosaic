@@ -1,126 +1,87 @@
-# V143: more learning on weak lines with smaller gradient smoothing
+# V143: completed5k with crossed-line data and smaller gradient smoothing
 
-**The original5,000-update worker is running under replacement supervision.
-At2,500, faint scores recover near V120; fine mesh still lacks clear new recovery.**
-It combines V142's crossed-line/empty data with V141's smaller gradient-error
-smoothing and retains1,000/2,500-update checkpoints for early comparisons.
-[Native/GFX/flat2.5k report](v143-progress2500-quality.md) includes two
-exact synthetic-GT triplets, both protected scenes and the verified flat review.
-V120 remains recommended. Endpoint quality is still unmeasured.
-[V142's completed review](v142-crossed-line-pilot.md) motivates keeping the data:
-modest faint/weak-band and noisy-flat spatial gains, with unresolved mesh,
-coarse noisy error and selected ADC-only color bias.
+**The original5,000-update run and all three fixed reviews are complete.**
+The [final report](v143-final5000-quality.md) gains0.26493dB faint ADC PSNR and
+4.64% lower noisy-flat spatial RMS overV120, with coarse/ADC costs and no clear
+new real-mesh recovery from training alone. The result is useful for further
+faint-detail work; V120 remains the general recommendation.
 
-[Actual checks, process identities and fixed review plans](results/v143-crossed-gradient5000-setup-v1.json) ·
-[Recipe](../configs/quality-v120-crossed-gradient5000-v143.yaml).
+[Recipe](../configs/quality-v120-crossed-gradient5000-v143.yaml) ·
+[Setup checks](results/v143-crossed-gradient5000-setup-v1.json) ·
+[Actual final boundary](results/v143-final5000-boundary-v1.json) ·
+[Complete quality receipt](results/v143-final5000-quality-v2.json).
 
-## The candidate and its limits
+## Candidate and comparison scope
 
-V143 starts freshly from V12020k EMA. It keeps90,782 photos/27 reviewed regions,
-seed70,50% reviewed quota,native256/B16/BF16,zero optical PSF,LR1e−5 and100 warmup
-updates. Mesh/empty sources occupy.10 of the existing.15 weak procedural quota,
-with half absent. Pixel Charbonnier epsilon stays.0003; rendered-gradient error
-epsilon becomes.00003. All loss coefficients and the paired objective stay fixed.
-The official DINOv3 Small encoder remains frozen.
+Fresh V12020k EMA initialization;90,782 photos/27 reviewed regions,seed70,
+50% reviewed quota,native256/B16/BF16,zero optical PSF,LR1e−5,warmup100.
+V142's crossed-line/empty sources occupy.10 of the existing.15 weak quota,
+with half absent. Pixel Charbonnier epsilon stays.0003; gradient-error epsilon
+becomes.00003. Loss coefficients and paired objective stay fixed. The official
+DINOv3 ConvNeXt-Small encoder remains frozen.
 
-The original cosine horizon is5,000, with checkpoints every500 and immutable
-progress captures at1,000/2,500. The same worker continues to5,000. These retain
-weights without extra model calls or optimizer updates. Compared with V1421k,
-this changes both gradient smoothing and learning horizon; the post-warmup LR
-curve differs. It cannot isolate either cause or provide an equal-budget claim.
-A longer run tests whether the useful new data can teach more detail; it does
-not guarantee fence recovery or flat-region safety.
+The cosine horizon is5,000, with immutable1k/2.5k captures from the same worker.
+Compared with V1421k, both gradient smoothing and LR horizon change. This is
+not an isolated or equal-budget loss comparison. CPU128/B1 and CUDA256/B16
+checks execute16 fresh+2 resumed updates, match all18 V142 clean/noisy inputs
+and4,259,840 initial output values, and reject inherited/invalid epsilon before
+constructing a resumed model. Production matches its genuine CUDA prefix.
 
-CPU128/B1 and CUDA256/B16 execute16 fresh+2 resumed updates. Both preserve all91
-parent/resumed tensors and official encoder identity, with91 model/EMA tensors
-and89 Adam states finite. All18 clean/noisy input hashes match saved V142 in
-each check, and4,259,840 initial output values match exactly. Inherited or
-invalid gradient epsilon rejects before constructing a resumed model. Production
-also checks its first18 inputs against its genuine CUDA check.
+## Completed fixed reviews
 
-## Predeclared quality review
+Each1k/2.5k/5k point uses the same102 IEEE-FP32 observations:64 shadow,16
+ordinary,16 faint ADC,four main GFX512 contexts and two extra-mesh768 contexts.
+V120/V129/V141/V142 predictions are reused, preserving source masks, ROIs,
+CFAs, noise draws and displays. Both protected GFX pairs, foliage/fence/sky/
+building, both mesh priors and camera JPEGs remain included. Independent
+ISO100/AHD/JPEG and approximate binned references retain **not exactGT** roles.
 
-Each1,000/2,500/5,000 checkpoint receives the same102 IEEE-FP32 observations:
-64 shadow,16 ordinary,16 faint ADC,four main GFX512 contexts and two additional
-mesh768 contexts. Reuse V120,V129,V141 andV142 predictions, with unchanged
-source masks, ROIs, CFA layouts, noise draws and display transforms. Both
-protected GFX pairs, foliage/fence/sky/building regions, both extra-mesh priors
-and camera JPEGs remain included. Independent ISO100/AHD/JPEG references are
-qualitative comparators, **not exact GT**.
+Each point also uses48 analytic uniform fields, with V120/V142 controls and
+fixed two-window/ten-peak mesh-power diagnostics. Each reuses504 control
+predictions with no new review noise, RAW decodes or control-model calls.
+Actual native viewing follows independent numeric/pixel audits, including at
+least two native noisy/restored/exact-synthetic-GT triplets.
 
-Each point also receives the same48 exact analytic uniform fields, reusing
-V120/V142 controls, and the original two-window/ten-peak mesh-power diagnostic.
-The peak extension reuses its primary outputs and adds no inference. Each point
-therefore uses150 candidate root/DINO calls and504 cached control predictions;
-450 candidate calls were originally planned across all three points. There are no new
-noise observations, RAW decodes or control-model calls in these reviews.
-The first flat collector timed out after saving48 predictions but before final
-integrity checks. A separately recorded one-call probe and48-call recollection
-with one CPU thread passed the complete checks. The first review therefore
-used199 actual calls,49 extra; projected total is499 if the remaining reviews
-complete. All flat quality uses the fully verified recollection, while the
-original failure and outputs remain preserved.
+- [1k progress](v143-progress1000-quality.md): faint regression and no mesh gain.
+- [2.5k progress](v143-progress2500-quality.md): faint recovery nearV120.
+- [Completed5k](v143-final5000-quality.md): useful faint/shadow/noisy-flat gains,
+  with explicit coarse/ADC costs and real mesh still weak.
 
-Before collection, binding checks the original producer identity, declared
-step/horizon,lineage, all finite91 model/EMA tensors and89 Adam states, exact69
-trained-source modules and all first1,000 clean/noisy hashes against V142.
-Only that shared prefix is asserted matched; V142 has no later training inputs.
-Progress labels preserve the5k horizon and differ from a completed endpoint.
-Independent numeric/pixel audits precede actual native viewing and publication,
-including at least two noisy/restored/exact-synthetic-GT triplets.
+Binding verifies original worker identity, step/horizon/lineage, finite91
+model/EMA tensors and89 Adam states, exact69 trained modules and every first
+1,000 input hash against V142. V142 has no later inputs to match. The78-test
+review suite covers contracts, retained analyses and adoption identity/deadline
+rejection. A [legacy-default replay](results/v143-review-backcompat-v1.json)
+checked85 frozen files and normalized primary/faint plans against archived
+preparer bytes; original receipts and operators remain preserved.
 
-The66-test review suite checks explicit horizon selection, exact saved-control
-observation matching, safe method selection/order, every shared-prefix hash,
-progress checkpoint contracts, existing queue protocols and retained analyses.
-A real [legacy-default replay](results/v143-review-backcompat-v1.json) compares
-the archived and expanded preparers on completed V142 inputs:85 frozen files
-are byte-identical, and both primary/faint plans match after normalizing output
-root paths and independently verifying their derived document hashes. Original
-machine receipts and operator bytes remain preserved.
+## Preserved failures and genuine completion
 
-## Live execution
+The original1k flat collector saved48 predictions but timed out before final
+state/RNG verification. Those outputs remain unverified. A separately recorded
+one-call probe and48-call one-thread recollection passed all complete checks;
+only the latter outputs enter flat quality. [Recovery evidence](results/v143-progress1000-flat-recovery-v1.json)
+records small FP32 differences without claiming bitwise parity or root cause.
+This adds49 calls: actual three-point total499 instead of the original450.
 
-The original worker retains its12GiB CUDA cap and32GB available RAM floor;
-the replacement supervisor keeps the original8h deadline. Review waits for the
-original checkpoint producer and50GiB available RAM, then processes each fixed
-point once. It does not restart training or retry a collection automatically.
-Training and review status files are:
+The original training controller later disappeared; its tool session returned143,
+with cause unestablished. The same original worker remained alive. A separate
+[supervisor](results/v143-original-worker-adoption-v1.json) adopted that exact
+PID/creation time, frozen command/plan and original8h deadline. No training
+restart, checkpoint resume, budget reset or original-status rewrite occurred.
+The worker retained its12GiB CUDA cap and32GB RAM floor. Its genuine5k receipt
+and dead owner were verified before endpoint inference.
 
-```text
-.cache/quality-20261102/V143-crossed-gradient5000-v1/status.json
-.cache/quality-20261102/V143-fixed-reviews-v4/status.json
-```
+The original stale status and both failed review watchers remain preserved.
+The completed endpoint supervisor's status is retained at
+`.cache/quality-20261102/V143-fixed-reviews-v4/status.json`.
+Canonical read-only checkpoint:
+`/mnt/external/demosaic/models/v143-final5000.pt`, SHA256
+`96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4`.
 
-The original controller status is preserved and no longer updates. The v4
-status tracks current supervision of the still-live original worker.
-
-The initial prospective review queue was superseded before any controller or
-collector ran, to make the frozen controller's repository root explicit after
-relocation. Its bytes remain preserved. The actual frozen v2 module's repository
-and control paths were executed and verified before starting the watcher.
-The frozen training wrapper differs from its formatted public copy only in
-import spacing; their complete ASTs match, and actual checks use frozen bytes.
-
-The v2 watcher stopped on that collection failure. The v3 watcher selected only
-the remaining2.5k/5k points with one CPU thread, preserving every original queue.
-It did not repeat the1k primary review or change the training worker/budget.
-[Recovery evidence](results/v143-progress1000-flat-recovery-v1.json) records
-small FP32 differences between original and recollected outputs; the successful
-workaround does not establish the timeout's cause.
-
-The [actual first-batch loss diagnostic](crossed-line-loss-gradients.md) finds
-that smaller epsilon increases the gradient-loss term more strongly than the
-complete corrective output gradient on one dark noisy mesh. This is a selected
-initial-batch observation, not learned quality or the cause of regression.
-
-The v3 watcher completed2.5k numeric/flat audits, then stopped on the original
-training controller’s disappearance. The tool session returned143; its cause is
-unestablished. The same worker remained live. The v4 supervisor binds that exact
-worker identity, frozen command/plan and original8h deadline, without resetting
-training or rewriting the original status. It waits for the actual complete
-worker result and termination before endpoint binding. [Adoption receipt](results/v143-original-worker-adoption-v1.json).
-The78-test suite includes original-worker identity/deadline rejection cases.
-
-The2.5k progress conclusion is provisional. Track faint response, correct
-mesh structure, coarse flat variation and color bias together. Full427-photo,
-camera/color/full-frame quality and useful real fine-mesh recovery remain open.
+The [first-batch loss diagnostic](crossed-line-loss-gradients.md) and
+[procedural response test](crossed-line-response.md) are separate measurements;
+neither attributes final quality. The [phase-aware harmonic patch](phase-harmonic-patch.md)
+shows stronger mesh on savedV120 outputs, with a localization cost; it is not
+part of the trained V143 result, and their combination remains unmeasured.
+Full427-photo, camera/color, full-frame and speed results forV143 remain open.

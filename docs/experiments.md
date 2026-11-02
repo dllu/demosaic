@@ -1,11 +1,10 @@
 # Experiment index
 
-The [V143 2500of5000 progress report](v143-progress2500-quality.md) recovers
-faint scores near V120 after its1k regression. Fine mesh still lacks clear new
-recovery; noisy-flat spatial RMS improves while coarse error and ADC-only
-variation remain costs. The same original worker continues under replacement
-supervision. [Mixed-batch loss derivatives](crossed-line-loss-gradients.md) are
-measured separately; V120 remains recommended.
+The [completed V1435k report](v143-final5000-quality.md) gains0.26493dB faint
+ADC PSNR and4.64% lower noisy-flat spatial RMS versus V120, with coarse/ADC
+costs and no clear new real-mesh recovery. The [phase-aware harmonic patch](phase-harmonic-patch.md)
+gives visibly stronger mesh on savedV120 patches, with periodic overextension
+into blank parts of textured patches. Both useful gains and limits are retained.
 
 **V120 Small is the current general recommendation in V84's architectural family.**
 Its photo/known/unseen means are37.04008/54.31272/54.00872dB, with ADC maximum55.52DN16.

@@ -10,15 +10,15 @@ operator can extend periodic structure into blank parts of textured patches.
 It is an experimental native256 option on savedV120, without full-frame support.
 
 
-## V143 at2,500 of5,000: no clear new mesh recovery
+## V143 completed5,000: faint gains, real mesh still weak
 
-The [audited progress report](v143-progress2500-quality.md) includes native
+The [completed trained report](v143-final5000-quality.md) includes native
 foliage, larger fence, sky and building crops from DSCF3879/3880, plus both
 fine-mesh ROIs/priors and both camera JPEGs from DSCF3842/3835. ISO100/AHD/JPEG
 references are qualitative comparators, **not exact GT**. The nominal mesh
 remains mostly erased, with weak nearby-prior diagonals and no clear new
-lattice recovery. The original5k training and numeric reviews are complete; endpoint native
-viewing remains. V120 remains recommended.
+lattice recovery. All original5k training, numeric and native reviews are complete. V143 gains
+faint/shadow scores and noisy-flat spatial error; V120 remains the general recommendation.
 
 ## V142 crossed-line data1k: modest numerical gains, soft real detail
 

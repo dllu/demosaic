@@ -50,7 +50,7 @@ in its two clearest cases.
 | [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all1,000 training batches match V137 |
 | [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.01528dB over V129, mixed local detail, no new mesh recovery. Noisy-flat coarse error near V129 and5.75% above V120; defaults unchanged |
 | [V142 crossed-line/empty data](docs/v142-crossed-line-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.05212dB and noisy-flat spatial RMS−4.55% versus V129. Coarse error remains5.08% above V120; ADC-only DC bias worsens. Selected weak grass/wood gains, no clear new mesh recovery |
-| [V143 combined data/gradient5k](docs/v143-crossed-gradient5000.md) | [Audited2.5k progress](docs/v143-progress2500-quality.md): faint ADC recovers near V120, with no clear new mesh recovery. Noisy-flat spatial RMS−2.12% versus V120, coarse error+5.89%, ADC-only spatial RMS+32.39%. Original5k training and numeric reviews complete; endpoint native viewing remains. [Mixed-batch loss diagnostic](docs/crossed-line-loss-gradients.md) |
+| [V143 combined data/gradient5k](docs/v143-crossed-gradient5000.md) | [Completed5k review](docs/v143-final5000-quality.md): faint ADC+.26493dB and noisy-flat spatial RMS−4.64% versus V120. Coarse error+2.63%, ADC-only spatial RMS+12.85%; training alone still lacks clear new mesh recovery. All native/GFX/flat audits and canonical checkpoint complete |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
@@ -72,23 +72,23 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Photo cells are unchanged160×160 crops at the8×-binned evaluation resolution,
-with shared coordinates/transforms. ISO12800-prior noisy observation →
-**V142 Small data pilot, single view** → exact synthetic GT. Bark remains
-coherent; fine fur remains soft. Its modest faint/flat spatial gains and
-selected color-bias cost leave V120 as the general recommendation.
-[Audited V142 results and limits](docs/v142-crossed-line-pilot.md) ·
-[Source/ROI/checkpoint/noise/display metadata](docs/images/v142-crossed-line-v1/manifest.json).
+Photo cells are unchanged160×160 crops at the8×-binned evaluation resolution.
+The [completed V1435k model](docs/v143-final5000-quality.md) improves faint ADC
+PSNR by.26493dB and noisy-flat spatial RMS4.64% over V120, with coarse/ADC costs.
+Below: ADC observation → **V1435k EMA** → exact synthetic GT, contrast0.025.
+A shared40× camera-linear contrast display uses the same original target channel
+means, WB/matrix and+0EV exposure across methods; no pixels are resized.
+[Source/ROI/checkpoint/noise/display metadata](docs/images/v143-progress5000-v1/faint-triplet-manifest.json).
 
-![V142 bark: noisy, restored and exact synthetic GT](docs/images/v142-crossed-line-v1/bark-triplet.png)
+![V143 faint bark: ADC observation, restored and exact synthetic GT](docs/images/v143-progress5000-v1/bark-contrast0p025-adc-RGGB-contrast40-triplet.png)
 
-![V142 raccoon fur: noisy, restored and exact synthetic GT](docs/images/v142-crossed-line-v1/raccoon-fur-triplet.png)
+![V143 faint fur: ADC observation, restored and exact synthetic GT](docs/images/v143-progress5000-v1/raccoon-fur-contrast0p025-adc-RGGB-contrast40-triplet.png)
 
 Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
 [CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
 [Korall](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
 [CC BY3.0](https://creativecommons.org/licenses/by/3.0/), modified by binning,
-cropping, simulated noise and restoration.
+cropping, contrast attenuation, synthetic sensor/ADC sampling and restoration.
 
 Real GFX100S: DSCF3879 ISO6400 → **V120 Small, fixed historical Haar profile** → DSCF3880 ISO100 f/5.6.
 Native160×160 sensor-pixel crops from complete102MP outputs share +2EV display.

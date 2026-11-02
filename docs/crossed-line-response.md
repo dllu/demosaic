@@ -113,5 +113,6 @@ phase-plane nuisance rejection and variance/uncertainty scaling.
 The [V1432.5k photographic report](v143-progress2500-quality.md) includes both
 protected GFX scenes, main foliage/fence/sky/building, both extra-mesh priors
 and both camera JPEGs, with independent ISO100 references labeled **not exact
-GT**. It also finds no clear new real-mesh recovery. The original5k worker
-continues; its endpoint and broader camera/full-photo evaluations remain open.
+GT**. It also finds no clear new real-mesh recovery. The [completed5k endpoint](v143-final5000-quality.md) improves faint and noisy-flat
+scores; this procedural test still refers to the2.5k checkpoint. Broader camera/full-photo
+evaluations remain open.

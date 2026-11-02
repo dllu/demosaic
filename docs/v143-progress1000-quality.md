@@ -1,5 +1,9 @@
 # V143 at 1,000 of 5,000 updates
 
+The [completed5k endpoint](v143-final5000-quality.md) supersedes this historical
+progress state: faint ADC+.26493dB and noisy-flat spatial RMS−4.64% versusV120,
+with explicit coarse/ADC costs and real mesh still weak.
+
 **No clear green-mesh recovery; faint-detail scores regress.** V120 remains the
 general inference recommendation. The [later2.5k review](v143-progress2500-quality.md)
 recovers faint scores near V120, with mesh still weak. The original V143 worker continues toward

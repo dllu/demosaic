@@ -1,5 +1,9 @@
 # V143 at 2,500 of 5,000 updates
 
+The [completed5k endpoint](v143-final5000-quality.md) supersedes this historical
+progress state: faint ADC+.26493dB and noisy-flat spatial RMS−4.64% versusV120,
+with explicit coarse/ADC costs and real mesh still weak.
+
 **Faint scores recover to near V120; fine green mesh still lacks clear new
 recovery.** Noisy-flat spatial error decreases, while coarse error and selected
 ADC-only bias remain worse than V120. V120 stays the general recommendation.

@@ -120,12 +120,10 @@ their JPEGs and siblings remain out of training.
 [Tests](../tests/test_crossed_line_textures.py) ·
 [Gallery driver](../scripts/report_crossed_line_training_examples.py).
 
-The [V143 follow-up](v143-crossed-gradient5000.md) is now training freshly from
-V120 for5k with this data and smaller gradient epsilon. Actual CPU/CUDA checks
-pass. The [completed2.5k progress review](v143-progress2500-quality.md) recovers
-faint scores near V120 after the1k regression; real mesh still lacks clear new
-recovery. Its changed horizon prevents an equal-budget loss comparison; the
-original worker continues toward5k under replacement supervision.
+The [V143 follow-up](v143-final5000-quality.md) completed5k freshly fromV120
+with this data and smaller gradient epsilon. Faint ADC improves0.26493dB and
+noisy-flat spatial RMS4.64% overV120; coarse/ADC costs and weak real mesh remain.
+Its changed horizon prevents an equal-budget loss comparison.
 
 The [controlled response diagnostic](crossed-line-response.md) now measures four
 new present/empty recipes acrossADC/ISO6400 and allCFAs. V120/V142/V1432.5k
