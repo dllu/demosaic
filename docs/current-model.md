@@ -1,10 +1,10 @@
 # Current model choices
 
-The [V143 1000of5000 review](v143-progress1000-quality.md) finds weaker faint
-ADC scores (−0.16813dB versus V142), no clear new mesh recovery and coarse
-noisy-flat error7.08% above V120, despite slightly lower spatial noise. Its
-original5k worker continues; this is a progress result with a different LR
-horizon, not an equal-budget loss ablation. V120 remains recommended.
+The [V143 2500of5000 review](v143-progress2500-quality.md) recovers faint ADC
+scores to0.00763dB below V120 after its1k regression, with no clear new mesh
+recovery. Noisy-flat spatial RMS is2.12% lower, coarse error5.89% higher and
+ADC-only spatial RMS32.39% higher than V120. The same original worker continues
+to5k under replacement supervision; V120 remains recommended.
 
 The [completed V1411k loss comparison](v141-gradient-epsilon-pilot.md) gains
 .01528dB faint ADC PSNR over matched V129, with mixed weak-band changes and no

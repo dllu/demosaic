@@ -1,10 +1,11 @@
 # Current method research
 
-The [V143 1000of5000 review](v143-progress1000-quality.md) has no clear new mesh
-recovery, faint ADC−0.16813dB versus V142 and coarse noisy-flat error7.08% above
-V120. The original5k worker continues. An [actual mixed-batch loss diagnostic](crossed-line-loss-gradients.md)
-finds the stronger gradient term has a smaller effect on the complete corrective
-output gradient of one dark noisy mesh; this does not attribute trained quality.
+The [V143 2500of5000 review](v143-progress2500-quality.md) recovers faint PSNR
+near V120 after its1k regression, with no clear new mesh recovery. Noisy-flat
+spatial RMS is2.12% below V120, coarse error5.89% higher and ADC-only spatial
+RMS32.39% higher. The original worker continues under replacement supervision.
+The [actual mixed-batch loss diagnostic](crossed-line-loss-gradients.md) measures
+output derivatives; it does not attribute trained quality.
 
 The [completed V1411k gradient-loss review](v141-gradient-epsilon-pilot.md)
 recovers.01528dB faint ADC PSNR over matched V129, but has mixed local-band
@@ -39,7 +40,7 @@ unresolved; broad state-of-the-art quality is unproven.
 | Can local arrangements improve memory matching? | [Completed standalone V140](v140-standalone-pilot.md) stays near V120 at1k, with no new mesh recovery and near-parent flat/sky variation. The original dependency queue exited. Its [branch diagnostic](results/v140-memory-amplitude-v1.json) measures memory returns at.97–1.60% of combined token RMS on six contexts; this is not an RGB quality measurement |
 | Does stronger supervision of small gradient errors help? | [V141](v141-gradient-epsilon-pilot.md) isolates gradient epsilon3e−5 versus V1293e−4. Faint ADC+.01528dB, mixed local detail, no mesh recovery; noisy-flat coarse error near V129 and5.75% above V120. Defaults remain unchanged |
 | Can explicit thin lines and absence improve the data prior? | [Completed V142](v142-crossed-line-pilot.md): faint ADC+.05212dB and noisy-flat spatial RMS−4.55% over V129. Selected grass/wood gain/error improve; fur is mixed and real mesh lacks clear new recovery. Coarse noisy error remains5.08% above V120; selected ADC-only DC bias worsens. Keep the useful data source for further trials |
-| Can more learning combine the useful data and smaller-gradient changes? | [V143 fresh5k](v143-crossed-gradient5000.md) keeps V142 mesh/empty data with gradient epsilon3e−5. [Audited1k progress](v143-progress1000-quality.md) has faint ADC−.16813dB versus V142 and no clear new mesh recovery. Original5k training continues;2.5k/5k fixed reviews remain pending. Combined horizon/loss intervention, not equal-budget causality |
+| Can more learning combine the useful data and smaller-gradient changes? | [V143 fresh5k](v143-crossed-gradient5000.md) keeps V142 mesh/empty data with gradient epsilon3e−5. [Audited2.5k progress](v143-progress2500-quality.md) recovers faint PSNR near V120, with no clear new mesh recovery. Noisy-flat spatial RMS−2.12%, coarse error+5.89%, ADC-only spatial RMS+32.39% versus V120. Original worker continues toward5k; combined horizon/loss intervention, not equal-budget causality |
 | Does training precision limit faint detail? | [Completed V130](training-precision-pilot.md) changes only BF16→FP32 training against saved V129. Selected weak fur/grass/wood [faint-ADC bands](faint-adc-precision.md) improve slightly in gain/error while global PSNR falls0.01720dB. Native changes are subtle; noisy material and real mesh remain weak |
 | Is weak detail lost through persistent conditional bias? | [Independent-noise diagnosis](conditional-noise-response.md) finds persistent faint fur/wood error. [V12420k native check](v124-final20000-native.md) gains.411dB faint PSNR from14k but remains.0856dB below V120; ordinary gains.0095dB and real mesh stays weak. [V1256k](v125-progress6000-quality.md) remains1.009dB below V120 on faint contexts. Unequal budgets/backends prevent a causal mean-loss conclusion; full matched review remains incomplete after the memory-reserve stop |
 | Does adding more realistic reviewed shadow detail help? | [Completed V126/V1271000-update pilot](reviewed-shadow-pilot-quality.md) finds no useful gain on its retained material/shadow/GFX support. Shadow policy stays off by default; the23-region reviewed bank remains available |

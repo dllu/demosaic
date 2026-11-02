@@ -3,7 +3,7 @@
 from copy import deepcopy
 
 import pytest
-from review_crossed_gradient5000 import matching_prefix, selected_steps
+from review_crossed_gradient5000 import adopted_producer_matches, matching_prefix, selected_steps
 from review_standalone_patch_memory_pilot import (
     append_retained_control,
     review_step_spec,
@@ -28,6 +28,36 @@ def test_remaining_review_subset_does_not_repeat_completed_prefix():
 def test_reject_undeclared_review_start(step):
     with pytest.raises(ValueError):
         selected_steps(step)
+
+
+@pytest.mark.parametrize("change", [None, "worker", "controller", "plan", "status", "deadline"])
+def test_detached_adoption_binds_original_identity_and_deadline(change):
+    worker = {"pid": 10, "created": 200.0}
+    controller = {"pid": 9, "created": 100.0}
+    master = {
+        "training_controller": controller,
+        "training_plan": "plan-sha",
+        "adopted_original_worker": {
+            "worker": worker,
+            "controller": controller,
+            "deadline_unix": 29000.0,
+        },
+    }
+    state = {
+        "controller": controller,
+        "child": worker,
+        "plan": "plan-sha",
+        "status": "running-quality-training",
+    }
+    if change is None:
+        adopted_producer_matches(master, state)
+        return
+    if change == "deadline":
+        master["adopted_original_worker"]["deadline_unix"] += 1
+    else:
+        state[{"worker": "child"}.get(change, change)] = "changed"
+    with pytest.raises(AssertionError):
+        adopted_producer_matches(master, state)
 
 
 @pytest.mark.parametrize(

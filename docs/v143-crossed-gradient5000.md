@@ -1,12 +1,12 @@
 # V143: more learning on weak lines with smaller gradient smoothing
 
-**Fresh5,000-update training from V120 is running. The first 1,000-update
-review finds no clear mesh recovery and weaker faint scores.**
+**The original5,000-update worker is running under replacement supervision.
+At2,500, faint scores recover near V120; fine mesh still lacks clear new recovery.**
 It combines V142's crossed-line/empty data with V141's smaller gradient-error
 smoothing and retains1,000/2,500-update checkpoints for early comparisons.
-[Native/GFX/flat progress report](v143-progress1000-quality.md) includes two
+[Native/GFX/flat2.5k report](v143-progress2500-quality.md) includes two
 exact synthetic-GT triplets, both protected scenes and the verified flat review.
-V120 remains recommended. The endpoint and 2.5k quality are still unmeasured.
+V120 remains recommended. Endpoint quality is still unmeasured.
 [V142's completed review](v142-crossed-line-pilot.md) motivates keeping the data:
 modest faint/weak-band and noisy-flat spatial gains, with unresolved mesh,
 coarse noisy error and selected ADC-only color bias.
@@ -80,16 +80,19 @@ machine receipts and operator bytes remain preserved.
 
 ## Live execution
 
-The resource-aware training controller retains a12GiB CUDA cap,32GB available
-RAM floor and original8h production bound. The review watcher waits for the
+The original worker retains its12GiB CUDA cap and32GB available RAM floor;
+the replacement supervisor keeps the original8h deadline. Review waits for the
 original checkpoint producer and50GiB available RAM, then processes each fixed
 point once. It does not restart training or retry a collection automatically.
 Training and review status files are:
 
 ```text
 .cache/quality-20261102/V143-crossed-gradient5000-v1/status.json
-.cache/quality-20261102/V143-fixed-reviews-v3/status.json
+.cache/quality-20261102/V143-fixed-reviews-v4/status.json
 ```
+
+The original controller status is preserved and no longer updates. The v4
+status tracks current supervision of the still-live original worker.
 
 The initial prospective review queue was superseded before any controller or
 collector ran, to make the frozen controller's repository root explicit after
@@ -98,9 +101,9 @@ and control paths were executed and verified before starting the watcher.
 The frozen training wrapper differs from its formatted public copy only in
 import spacing; their complete ASTs match, and actual checks use frozen bytes.
 
-The v2 watcher stopped on that collection failure. The v3 watcher processes only
+The v2 watcher stopped on that collection failure. The v3 watcher selected only
 the remaining2.5k/5k points with one CPU thread, preserving every original queue.
-It does not repeat the1k primary review or change the training worker/budget.
+It did not repeat the1k primary review or change the training worker/budget.
 [Recovery evidence](results/v143-progress1000-flat-recovery-v1.json) records
 small FP32 differences between original and recollected outputs; the successful
 workaround does not establish the timeout's cause.
@@ -110,6 +113,14 @@ that smaller epsilon increases the gradient-loss term more strongly than the
 complete corrective output gradient on one dark noisy mesh. This is a selected
 initial-batch observation, not learned quality or the cause of regression.
 
-The1k progress conclusion is provisional. Track faint response, correct
+The v3 watcher completed2.5k numeric/flat audits, then stopped on the original
+training controller’s disappearance. The tool session returned143; its cause is
+unestablished. The same worker remained live. The v4 supervisor binds that exact
+worker identity, frozen command/plan and original8h deadline, without resetting
+training or rewriting the original status. It waits for the actual complete
+worker result and termination before endpoint binding. [Adoption receipt](results/v143-original-worker-adoption-v1.json).
+The78-test suite includes original-worker identity/deadline rejection cases.
+
+The2.5k progress conclusion is provisional. Track faint response, correct
 mesh structure, coarse flat variation and color bias together. Full427-photo,
 camera/color/full-frame quality and useful real fine-mesh recovery remain open.

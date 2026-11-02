@@ -1,7 +1,8 @@
 # V143 at 1,000 of 5,000 updates
 
 **No clear green-mesh recovery; faint-detail scores regress.** V120 remains the
-general inference recommendation. The original V143 worker continues toward
+general inference recommendation. The [later2.5k review](v143-progress2500-quality.md)
+recovers faint scores near V120, with mesh still weak. The original V143 worker continues toward
 5,000 updates. This checkpoint combines crossed-line/empty data, smaller
 gradient smoothing and a longer learning-rate horizon; comparison with V142's
 completed 1k run does not isolate a loss change.
@@ -140,8 +141,10 @@ flat + 1 diagnostic + 48 verified flat. This is 49 beyond the planned 150.
 There are no new noise observations, RAW decodes or control-model calls;
 504 retained control predictions are reused. Independent audits pass before
 actual native viewing of 48 boards and publication of 84 PNGs. All crop pixels
-remain unresized. The remaining 2.5k/5k reviews have a separate explicit watcher
-using one CPU thread; the failed watcher is not restarted.
+remain unresized. A separate one-thread watcher completed the2.5k audits, then stopped on the
+original training controller’s disappearance. The [current endpoint supervisor](v143-progress2500-quality.md)
+follows the same still-live worker and original deadline; neither failed watcher
+is restarted.
 
 Full 427-photo, camera/color, full-frame and speed evaluations remain unmeasured
 for V143. The current checkpoint gives no reason to change the recommendation.

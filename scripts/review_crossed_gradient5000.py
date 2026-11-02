@@ -35,14 +35,43 @@ def selected_steps(from_step):
     return tuple(step for step in STEPS if step >= from_step)
 
 
-def prepare(root, training_path, *, from_step=1000, collector_cpu_threads=2):
+def adopted_producer_matches(master, producer):
+    adoption = master["adopted_original_worker"]
+    assert producer["controller"] == adoption["controller"] == master["training_controller"]
+    assert producer["child"] == adoption["worker"]
+    assert producer["plan"] == master["training_plan"]
+    assert producer["status"] == "running-quality-training"
+    assert adoption["deadline_unix"] == adoption["worker"]["created"] + 28800
+
+
+def prepare(
+    root, training_path, *, from_step=1000, collector_cpu_threads=2, adopt_live_worker=False
+):
     review_steps = selected_steps(from_step)
     if type(collector_cpu_threads) is not int or collector_cpu_threads not in (1, 2):
         raise ValueError("Collector CPU threads must be1 or2")
     training = read(training_path)
     guard(training)
     status = read(Path(training["root"]) / "status.json")
-    assert status["plan"] == ref(training_path) and live(status["controller"])
+    assert status["plan"] == ref(training_path)
+    adoption = None
+    if adopt_live_worker:
+        assert from_step == 5000 and not live(status["controller"]) and live(status["child"])
+        process = psutil.Process(status["child"]["pid"])
+        assert str(training_path) in process.cmdline()
+        assert training["maximum_train_worker_seconds"] == 28800
+        adoption = {
+            "controller": status["controller"],
+            "worker": status["child"],
+            "deadline_unix": status["child"]["created"] + 28800,
+            "original_status": ref(Path(training["root"]) / "status.json"),
+            "observed_parent_pid": process.ppid(),
+            "worker_command": process.cmdline(),
+            "scope": "Original controller is gone; adopt only the existing worker identity and original8h deadline. No new training, checkpoint resume, budget reset or original-status rewrite.",
+        }
+        assert time.time() < adoption["deadline_unix"]
+    else:
+        assert live(status["controller"])
     assert training["train_updates"] == 5000 and training["progress_steps"] == [1000, 2500]
     root.mkdir(parents=True, exist_ok=False)
     operator = root / "review-controller.py"
@@ -178,6 +207,9 @@ def prepare(root, training_path, *, from_step=1000, collector_cpu_threads=2):
         "RAW_decodes": 0,
         "scope": f"Declared checkpoint subset{list(review_steps)} fixed native/faint/GFX/flat/mesh-peak reviews. Each150 candidate root/DINO calls; no control reruns. Numeric/pixel audits precede actual native viewing. Original5k training budget/owner unchanged.",
     }
+    if adoption is not None:
+        plan["adopted_original_worker"] = adoption
+        adopted_producer_matches(plan, status)
     save(root / "plan-v1.json", plan)
 
 
@@ -202,10 +234,15 @@ def bind(root, step):
         assert actual["step"] == step and actual["declared_training_horizon"] == 5000
         counts = actual["counts_at_checkpoint"]
     else:
-        assert state["status"] == "completed-training-awaiting-model-comparisons" and not live(
-            state["controller"]
-        )
-        binding = state["completed"]["train-V143"]
+        if "adopted_original_worker" in master:
+            adopted_producer_matches(master, state)
+            assert not live(state["controller"]) and not live(state["child"])
+            binding = ref(Path(training["root"]) / "train-V143-result.json")
+        else:
+            assert state["status"] == "completed-training-awaiting-model-comparisons" and not live(
+                state["controller"]
+            )
+            binding = state["completed"]["train-V143"]
         assert ref(binding["path"]) == binding
         actual = read(binding["path"])
         assert actual["status"] == "completed-crossed-gradient5000-training-phase"
@@ -345,20 +382,33 @@ def watch(root):
                 producer = read(Path(training["root"]) / "status.json")
                 assert producer["plan"] == master["training_plan"]
                 assert producer["controller"] == master["training_controller"]
+                adopted = "adopted_original_worker" in master
+                if adopted:
+                    adopted_producer_matches(master, producer)
+                    assert not live(producer["controller"])
+                    if time.time() >= master["adopted_original_worker"]["deadline_unix"]:
+                        if live(producer["child"]):
+                            psutil.Process(producer["child"]["pid"]).terminate()
+                        raise TimeoutError("Original worker reached its original8h deadline")
                 ready = False
                 if path.exists():
                     try:
                         read(path)
-                        ready = step < 5000 or (
-                            producer["status"] == "completed-training-awaiting-model-comparisons"
-                            and not live(producer["controller"])
+                        ready = (
+                            (adopted and not live(producer["child"]))
+                            or step < 5000
+                            or (
+                                producer["status"]
+                                == "completed-training-awaiting-model-comparisons"
+                                and not live(producer["controller"])
+                            )
                         )
                     except json.JSONDecodeError:
                         pass  # Re-poll the same owned producer during a receipt write.
                 if ready:
                     break
                 assert not producer["status"].startswith("failed"), producer
-                assert live(producer["controller"]), producer
+                assert live(producer["child"] if adopted else producer["controller"]), producer
                 assert time.monotonic() - began < 10 * 3600
                 time.sleep(10)
             record("waiting-for-review-headroom", step=step)
@@ -389,6 +439,7 @@ if __name__ == "__main__":
     p.add_argument("--step", type=int, choices=STEPS)
     p.add_argument("--from-step", type=int, choices=STEPS, default=1000)
     p.add_argument("--cpu-threads", type=int, choices=(1, 2), default=2)
+    p.add_argument("--adopt-live-worker", action="store_true")
     args = p.parse_args()
     if args.mode == "prepare":
         prepare(
@@ -396,6 +447,7 @@ if __name__ == "__main__":
             args.training_plan.resolve(),
             from_step=args.from_step,
             collector_cpu_threads=args.cpu_threads,
+            adopt_live_worker=args.adopt_live_worker,
         )
     elif args.mode == "bind":
         bind(args.root.resolve(), args.step)

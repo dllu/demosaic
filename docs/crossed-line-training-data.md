@@ -122,6 +122,7 @@ their JPEGs and siblings remain out of training.
 
 The [V143 follow-up](v143-crossed-gradient5000.md) is now training freshly from
 V120 for5k with this data and smaller gradient epsilon. Actual CPU/CUDA checks
-pass. The [completed1k progress review](v143-progress1000-quality.md) regresses
-faint scores versus V142 and finds no clear new mesh recovery;2.5k/5k remain
-pending. Its changed horizon prevents an equal-budget loss comparison.
+pass. The [completed2.5k progress review](v143-progress2500-quality.md) recovers
+faint scores near V120 after the1k regression; real mesh still lacks clear new
+recovery. Its changed horizon prevents an equal-budget loss comparison; the
+original worker continues toward5k under replacement supervision.
