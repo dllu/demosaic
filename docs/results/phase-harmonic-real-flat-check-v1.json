@@ -1,0 +1,3915 @@
+{
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/check-real-flat-v1.py",
+    "sha256": "480729bf000410fe90f60478624288f4ea3bf10baea7eb59732c18f11fe5c3f1"
+  },
+  "corrector": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/operator-v1.py",
+    "sha256": "33c08d2fbda5fdae6d6d6afba52a763f183715452e1ffddfac097868c314c424"
+  },
+  "real": [
+    {
+      "id": "main-overcast-sky",
+      "source_observation": {
+        "id": "main-overcast-sky",
+        "kind": "gfx",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "d08ecda9a5804a542b2546d3789f002dad40f1bbbf79bec9476fd027599d34fa"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "ba5c353221b680ef7ea497e145e7d02ee63b0638332284f0d008ec7b9cb272d7"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "metadata": {
+          "image": "crop-b653aded9f77a9e7.png",
+          "caption": "overcast-sky / 0:V120:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "c9b30bd622ec404b7a5104bc9d5ccf070f50c8a923624b3f051d62c82afebfbe",
+          "region": {
+            "name": "overcast-sky",
+            "noisy_xy": [
+              5800,
+              1400
+            ],
+            "reference_xy": [
+              5800,
+              1400
+            ],
+            "size": 160,
+            "selection_method": "Same sensor coordinates; sky has no fixed registration landmarks",
+            "context_green_correlation": null
+          },
+          "model_label": "0:V120:step-20000",
+          "checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+          "compute_precision": "float32",
+          "device": "cuda",
+          "conditioning": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "context_xywh": [
+            5624,
+            1224,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "controls": [
+          {
+            "model": {
+              "label": "V120"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/overcast-sky-method-0-rgb-f32.npy",
+              "sha256": "3d4e299b19d212546c5bc72f832c6a8ba36da57aa6d4a204309e7b4d89dd18db"
+            }
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-080.npy",
+              "sha256": "b1f8273385e5436474d344caada52172296423cb17cea90557a76e7922d8c8a0"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-080.npy",
+              "sha256": "d32d901e0ad1a81cdbd6fb75a2a531be35cc42c9cd7dd8b406746e862843c391"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-080.npy",
+              "sha256": "f724cc8aa0265eff7db6ed2be04ec67a6340204064239c31bbf6a8118da258bc"
+            }
+          }
+        ],
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/overcast-sky-reference-rgb-f32.npy",
+          "sha256": "a566b9ebfa173e706b820988dd1f47302f9d2e6521de7873dddd18f5a0ee6c49"
+        },
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/main-overcast-sky-comparison.png",
+        "sha256": "f4e8751d59fcfd71d98420fad52c6b4177f83be0a5a84e842f2b1f90d6751b91"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-overcast-sky.png",
+        "sha256": "c537e0dd1ea1f09d43674da9e8010ed88888d770060da32deefd4a2d0a5f8de4"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-overcast-sky.npy",
+        "sha256": "108f35a114ccaaca31ad93b055bc238790b1b6b2ecb79c20bb07dfab75f37e30"
+      },
+      "diagnostic": {
+        "peaks": []
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    },
+    {
+      "id": "main-building-detail",
+      "source_observation": {
+        "id": "main-building-detail",
+        "kind": "gfx",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "5f556c8eaf860660a1ecee803c9f7222903256b8d444e5e5b8b97193d1e2e1b4"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "e4f3f932cbcbcc4899504c8d7e4f268a61664e1e59fbe21a5d7612bd2a281c7e"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "metadata": {
+          "image": "crop-99febd7edaf4b0c5.png",
+          "caption": "building-detail / 0:V120:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "b8469308c9a01207bf5f9c41b15dbf3fc2569d74a935cd542c6074ee98fd2d82",
+          "region": {
+            "name": "building-detail",
+            "noisy_xy": [
+              5790,
+              2690
+            ],
+            "reference_xy": [
+              5791,
+              2690
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.6824449896812439
+          },
+          "model_label": "0:V120:step-20000",
+          "checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+          "compute_precision": "float32",
+          "device": "cuda",
+          "conditioning": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "context_xywh": [
+            5614,
+            2514,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "controls": [
+          {
+            "model": {
+              "label": "V120"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/building-detail-method-0-rgb-f32.npy",
+              "sha256": "5a5ac0205eead9d91888b1bb719dba04b28b5263cd15e2f6af4f6048e013c507"
+            }
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-081.npy",
+              "sha256": "c0c94b50952c56dc52c38c8b335708024e48349de09789f27a15105d6fd493f5"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-081.npy",
+              "sha256": "04023a4e429eaf1d43856a66e57cc28cbe7caf4e12c2627fcd9f47cf6fc01017"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-081.npy",
+              "sha256": "f6f3a9e7f9ea6a2cccd65fb8eb7da2996682d092fe03bd0ce8520c05c9c504bf"
+            }
+          }
+        ],
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/building-detail-reference-rgb-f32.npy",
+          "sha256": "d4ce7ad0a632979efcb19e8153e0585167771a846923ea71c8c0e75ab7ad216c"
+        },
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/main-building-detail-comparison.png",
+        "sha256": "789545852d46628c4511b0138dea7d509e6a378b17bb3ccf8948a43b0311cc45"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-building-detail.png",
+        "sha256": "75810529e7a0a3b1a3faab87729655a6b3d62471dfc1b20bfec9c1a7d5994633"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-building-detail.npy",
+        "sha256": "5e447ef923503a432e3c404852bf51bb29cf3ee5f553a1c65103bcf63a8e3a53"
+      },
+      "diagnostic": {
+        "peaks": [
+          [
+            0.04296875,
+            0.00390625,
+            495.2987928491562
+          ],
+          [
+            -0.03515625,
+            0.00390625,
+            477.0122390830404
+          ],
+          [
+            -0.0546875,
+            0.00390625,
+            330.0131013541352
+          ],
+          [
+            0.0703125,
+            0.00390625,
+            308.47769083784914
+          ]
+        ],
+        "gates": [
+          {
+            "power": 0.12529958392462645,
+            "gate": 0
+          },
+          {
+            "power": 1.072424435144115,
+            "gate": 0
+          },
+          {
+            "power": 1.8041978673073098,
+            "gate": 0
+          },
+          {
+            "power": 0.5941526094358112,
+            "gate": 0
+          }
+        ],
+        "field_RMS": 0.0
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    },
+    {
+      "id": "main-foliage",
+      "source_observation": {
+        "id": "main-foliage",
+        "kind": "gfx",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "8cf107fdd1ea6739e6bac90bb804506a378460ff3aa0084c4cd67ae3ff38933b"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "025f6dcec42a02bcfd52d435b18bbf35661d807697d069d3e87869085f201b3a"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "metadata": {
+          "image": "crop-845893cf3537fb76.png",
+          "caption": "foliage / 0:V120:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "1e5970c6232202e1545ffacb2e1c1393fbcc9efa5c0adced911455d490fc6dc8",
+          "region": {
+            "name": "foliage",
+            "noisy_xy": [
+              8890,
+              5570
+            ],
+            "reference_xy": [
+              8890,
+              5570
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9597686529159546
+          },
+          "model_label": "0:V120:step-20000",
+          "checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+          "compute_precision": "float32",
+          "device": "cuda",
+          "conditioning": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "context_xywh": [
+            8714,
+            5394,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "controls": [
+          {
+            "model": {
+              "label": "V120"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/foliage-method-0-rgb-f32.npy",
+              "sha256": "b2ed4b0799ac79d97ca6ec6cbbc94c87cd0e8fb3a1c671180f905cc079765e91"
+            }
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-082.npy",
+              "sha256": "95bb94d953e9174008c3e7439ab52416a610ada1a250b911dc9c20e7d5942da1"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-082.npy",
+              "sha256": "01ed346cfc6181c1402beed4b787dbffca84179dbd8f3f0f9a52637572a4a081"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-082.npy",
+              "sha256": "1b86df79363d2658159468411c7fd99dd2e617d635ac5878fff3b90ccba4b267"
+            }
+          }
+        ],
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/foliage-reference-rgb-f32.npy",
+          "sha256": "35a77f7035e67561ffde8d214a0275b3f174a2859e6981f968a49a63d535670a"
+        },
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/main-foliage-comparison.png",
+        "sha256": "6ae2f257434f16a14091d34ec4031cf0c195365808cca3ebb93da240aa784221"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-foliage.png",
+        "sha256": "983a1c343da45ff0efa9685014d2d72e8d272c43f3ba01348ba349594ac10b03"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-foliage.npy",
+        "sha256": "819e7e70e58a9283f8ef2ec4aeb15b7f2b5e3fea5034639dfb63af0e7383ae1c"
+      },
+      "diagnostic": {
+        "peaks": [
+          [
+            0.01953125,
+            0.0234375,
+            300.15474853040115
+          ],
+          [
+            0.05859375,
+            0.04296875,
+            178.51650255412244
+          ],
+          [
+            0.03125,
+            0.01171875,
+            173.99150307336328
+          ],
+          [
+            0.046875,
+            0.0234375,
+            165.142711971446
+          ]
+        ],
+        "gates": [
+          {
+            "power": 0.0036547318091225255,
+            "gate": 0
+          },
+          {
+            "power": 0.02534777057303999,
+            "gate": 0
+          },
+          {
+            "power": 0.1164769140311078,
+            "gate": 0
+          },
+          {
+            "power": 0.02747972215399045,
+            "gate": 0
+          }
+        ],
+        "field_RMS": 0.0
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    },
+    {
+      "id": "main-chain-link-fence",
+      "source_observation": {
+        "id": "main-chain-link-fence",
+        "kind": "gfx",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "09651dea5d70239a6510a7517093698ec465569ab6b35778aef6c2dbfc919adb"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "f538f041faf47ede2d251f0cdad6c247897d9a856983a46cc8d7f3e596510072"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "metadata": {
+          "image": "crop-371ca6b813002a2b.png",
+          "caption": "chain-link-fence / 0:V120:step-20000",
+          "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+          "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Denoised",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 ref (not GT)",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "png_sha256": "fc205f20454f2452fd9bb7d4a0a7261363bbfb8f20a20fffba3e3b608a7f2250",
+          "region": {
+            "name": "chain-link-fence",
+            "noisy_xy": [
+              2240,
+              6000
+            ],
+            "reference_xy": [
+              2241,
+              6000
+            ],
+            "size": 160,
+            "selection_method": "Maximum normalized green correlation in input/reference 512px contexts; integer offsets only, no output-dependent selection",
+            "context_green_correlation": 0.9550720453262329
+          },
+          "model_label": "0:V120:step-20000",
+          "checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+          "compute_precision": "float32",
+          "device": "cuda",
+          "conditioning": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "context_xywh": [
+            2064,
+            5824,
+            512,
+            512
+          ],
+          "full_frame": false,
+          "display_exposure": 4.0,
+          "shared_wb": [
+            1.5132450331125828,
+            1.0,
+            2.2152317880794703
+          ],
+          "shared_matrix": [
+            [
+              1.0725188393098881,
+              0.17123593128834644,
+              -0.24375477059823436
+            ],
+            [
+              -0.1267191317089774,
+              1.4310509369654432,
+              -0.3043318052564657
+            ],
+            [
+              -0.009697676902906037,
+              -0.29348063283422965,
+              1.3031783097371357
+            ]
+          ],
+          "reference": "Separately framed low-ISO exposure; not exact GT; no resampling/warping"
+        },
+        "controls": [
+          {
+            "model": {
+              "label": "V120"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/chain-link-fence-method-0-rgb-f32.npy",
+              "sha256": "3b217fc9164b0cca98174dfef72e56cdb5cdb1b97843d3cef73521bc20955c04"
+            }
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-083.npy",
+              "sha256": "934194f97eda635bbc1396f7925f31d0bc0c4e811e59bb568cd92e1ae30c46fe"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-083.npy",
+              "sha256": "e5152b6e63d434fb63e4b1a65a65441e237ca049c367b02f85b505c01120d61a"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-083.npy",
+              "sha256": "cc0f4f08ad54060c08008b59548578881a6bb5added7f65bb189b6931a2c436a"
+            }
+          }
+        ],
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-V121-paired32-weak-detail-quality-v1/work/artifacts/gfx/report/chain-link-fence-reference-rgb-f32.npy",
+          "sha256": "07b02153c74b8d92052f0fc15ce417f64e54f551433ab87a6006eee44eeafe6a"
+        },
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/main-chain-link-fence-comparison.png",
+        "sha256": "a22a38b57a09e7ab687709c5fecbfb52220e337a35de83283bd2b0ee7c284859"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-chain-link-fence.png",
+        "sha256": "08ad5ce7475b271c9019643fd2be62dcd95610aab7188fe97d2a8dbadef28a6d"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/main-chain-link-fence.npy",
+        "sha256": "c58dde43ec7186422c17df93fe71707cd38e7d55ae70461c916d29921a81c55e"
+      },
+      "diagnostic": {
+        "peaks": [
+          [
+            -0.10546875,
+            0.04296875,
+            465.4377616732062
+          ],
+          [
+            0.109375,
+            0.04296875,
+            246.0612073201832
+          ],
+          [
+            0.00390625,
+            0.0859375,
+            36.32887553284976
+          ],
+          [
+            -0.10546875,
+            0.12890625,
+            25.987115799394658
+          ]
+        ],
+        "gates": [
+          {
+            "power": 7.310564080179873,
+            "gate": 0
+          },
+          {
+            "power": 2.668261091464136,
+            "gate": 0
+          },
+          {
+            "power": 10.790871085143868,
+            "gate": 0.1659616791835663
+          },
+          {
+            "power": 25.17564831831426,
+            "gate": 0.6425116888269817
+          }
+        ],
+        "field_RMS": 0.00016748069599214563
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-left",
+      "source_observation": {
+        "id": "mesh-nominal",
+        "kind": "mesh",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "source": {
+          "status": "prepared-new-DSCF3842-3835-green-mesh-inputs-no-model-work",
+          "selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/selection-plan-v2.json",
+            "sha256": "3aa63044d41db7db01b3c7baf0c3d5a306d2c2be1b4ca399a329b38e70163b95"
+          },
+          "derived_selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/selection-derived-v1.json",
+            "sha256": "c998ceade0eeb509a11af97806161dbddaaa4bbc5e16cefff14884f6c9d5369f"
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "context_shape": [
+            1,
+            3,
+            768,
+            768
+          ],
+          "conditioning": {
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+          },
+          "display_exposure": 4.0,
+          "cases": [
+            {
+              "name": "fine-green-mesh-left",
+              "ROI_xywh": [
+                206,
+                229,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                806,
+                6489,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                805,
+                6489,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                    "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                  },
+                  "xywh": [
+                    760,
+                    6500,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                    "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                  },
+                  "xywh": [
+                    759,
+                    6501,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            },
+            {
+              "name": "fine-green-mesh-right",
+              "ROI_xywh": [
+                426,
+                189,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                1026,
+                6449,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                1025,
+                6449,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                    "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                  },
+                  "xywh": [
+                    980,
+                    6460,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                    "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                  },
+                  "xywh": [
+                    979,
+                    6461,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            }
+          ],
+          "registrations": {
+            "reference_RAW_minus_noisy_RAW_xy": [
+              -1,
+              0
+            ],
+            "reference_RAW_green_NCC": 0.837847600812493,
+            "noisy_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -46,
+                11
+              ],
+              "JPEG_context_origin_xy": [
+                554,
+                6271
+              ],
+              "green_NCC": 0.6291292238228455,
+              "coarse_area8_green_NCC": 0.8510609005601808,
+              "raw_anchor_xy": [
+                600,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            },
+            "reference_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -47,
+                12
+              ],
+              "JPEG_context_origin_xy": [
+                553,
+                6272
+              ],
+              "green_NCC": 0.7344555012623493,
+              "coarse_area8_green_NCC": 0.8712051485619063,
+              "raw_anchor_xy": [
+                599,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            }
+          },
+          "source_bindings": {
+            "noisy": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+              "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+            },
+            "reference": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+              "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+            },
+            "noisy_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+              "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+            },
+            "reference_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+              "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+            }
+          },
+          "new_neural_forwards": 0,
+          "new_noise_observations": 0,
+          "RAW_decoder_opens": 3,
+          "optimizer_updates": 0,
+          "CUDA_initialized": false,
+          "scope": "New768 context and two native160 ROIs fixed from source/camera JPEGs only. ISO100 AHD and cameraJPEGs are qualitative comparators, not GT. Same noisy WB/matrix used for raw-method displays. Standing3879/3880 and all training unchanged."
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "controls": [
+          {
+            "label": "V120",
+            "kind": "checkpoint",
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/nominal/V120-RGB-f32.npy",
+              "sha256": "fe96564033fcd3ce231ca17639ca92857e41c7124ad18bf9d0b76aa1827a77cb"
+            },
+            "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+            "step": 20000
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-084.npy",
+              "sha256": "864c012a9e0e83ea20fbf7392feb56cd1d0b84b9e394dda4beeeb7ed12d33916"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-084.npy",
+              "sha256": "b8ff1b038afc60a96c59129578f4cb8a3e077e80b640f761b20bc22329e18d96"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-084.npy",
+              "sha256": "18fd162f2c2260c81b50f8675805ce2e8274eb4b4879ca5e2635b0670c5791b9"
+            }
+          }
+        ],
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "511cc9a2ca48cc87c1fc5cc5050256467ae6e6bd3840c9ff838dd1bc9ff2dde5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "output_shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "cases": [
+          {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          },
+          {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          }
+        ],
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        158,
+        180,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/mesh-nominal-fine-green-mesh-left-comparison.png",
+        "sha256": "8b0796927bd0596172fd85e615193b9f379f11525c392f0cd1552fe48ec16157"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-nominal-fine-green-mesh-left.png",
+        "sha256": "7f9548c68691e114ab415edfa4bf6871896040ccf33162d8db20b93035af21b5"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-nominal-fine-green-mesh-left.npy",
+        "sha256": "6d05db3d3553d4a2d5f31cb82b01c8945b017218e94cf44388389277dada8ec6"
+      },
+      "diagnostic": {
+        "peaks": [
+          [
+            -0.03125,
+            0.00390625,
+            34.82981756838301
+          ],
+          [
+            0.03125,
+            0.00390625,
+            25.473641530417968
+          ],
+          [
+            0.1171875,
+            0.07421875,
+            13.567539933557384
+          ],
+          [
+            -0.08984375,
+            0.0703125,
+            7.065507948251666
+          ]
+        ],
+        "gates": [
+          {
+            "power": 1.143399091066347,
+            "gate": 0
+          },
+          {
+            "power": 0.45280027025055686,
+            "gate": 0
+          },
+          {
+            "power": 41.22908344550645,
+            "gate": 0.781707492675758
+          },
+          {
+            "power": 29.309814851327026,
+            "gate": 0.692935624272887
+          }
+        ],
+        "field_RMS": 0.0002146554255241805
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-right",
+      "source_observation": {
+        "id": "mesh-nominal",
+        "kind": "mesh",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "source": {
+          "status": "prepared-new-DSCF3842-3835-green-mesh-inputs-no-model-work",
+          "selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/selection-plan-v2.json",
+            "sha256": "3aa63044d41db7db01b3c7baf0c3d5a306d2c2be1b4ca399a329b38e70163b95"
+          },
+          "derived_selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/selection-derived-v1.json",
+            "sha256": "c998ceade0eeb509a11af97806161dbddaaa4bbc5e16cefff14884f6c9d5369f"
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "context_shape": [
+            1,
+            3,
+            768,
+            768
+          ],
+          "conditioning": {
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+          },
+          "display_exposure": 4.0,
+          "cases": [
+            {
+              "name": "fine-green-mesh-left",
+              "ROI_xywh": [
+                206,
+                229,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                806,
+                6489,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                805,
+                6489,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                    "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                  },
+                  "xywh": [
+                    760,
+                    6500,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                    "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                  },
+                  "xywh": [
+                    759,
+                    6501,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            },
+            {
+              "name": "fine-green-mesh-right",
+              "ROI_xywh": [
+                426,
+                189,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                1026,
+                6449,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                1025,
+                6449,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                    "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                  },
+                  "xywh": [
+                    980,
+                    6460,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                    "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                  },
+                  "xywh": [
+                    979,
+                    6461,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            }
+          ],
+          "registrations": {
+            "reference_RAW_minus_noisy_RAW_xy": [
+              -1,
+              0
+            ],
+            "reference_RAW_green_NCC": 0.837847600812493,
+            "noisy_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -46,
+                11
+              ],
+              "JPEG_context_origin_xy": [
+                554,
+                6271
+              ],
+              "green_NCC": 0.6291292238228455,
+              "coarse_area8_green_NCC": 0.8510609005601808,
+              "raw_anchor_xy": [
+                600,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            },
+            "reference_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -47,
+                12
+              ],
+              "JPEG_context_origin_xy": [
+                553,
+                6272
+              ],
+              "green_NCC": 0.7344555012623493,
+              "coarse_area8_green_NCC": 0.8712051485619063,
+              "raw_anchor_xy": [
+                599,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            }
+          },
+          "source_bindings": {
+            "noisy": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+              "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+            },
+            "reference": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+              "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+            },
+            "noisy_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+              "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+            },
+            "reference_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+              "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+            }
+          },
+          "new_neural_forwards": 0,
+          "new_noise_observations": 0,
+          "RAW_decoder_opens": 3,
+          "optimizer_updates": 0,
+          "CUDA_initialized": false,
+          "scope": "New768 context and two native160 ROIs fixed from source/camera JPEGs only. ISO100 AHD and cameraJPEGs are qualitative comparators, not GT. Same noisy WB/matrix used for raw-method displays. Standing3879/3880 and all training unchanged."
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "controls": [
+          {
+            "label": "V120",
+            "kind": "checkpoint",
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/nominal/V120-RGB-f32.npy",
+              "sha256": "fe96564033fcd3ce231ca17639ca92857e41c7124ad18bf9d0b76aa1827a77cb"
+            },
+            "source_inputs_sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4",
+            "step": 20000
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-084.npy",
+              "sha256": "864c012a9e0e83ea20fbf7392feb56cd1d0b84b9e394dda4beeeb7ed12d33916"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-084.npy",
+              "sha256": "b8ff1b038afc60a96c59129578f4cb8a3e077e80b640f761b20bc22329e18d96"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-084.npy",
+              "sha256": "18fd162f2c2260c81b50f8675805ce2e8274eb4b4879ca5e2635b0670c5791b9"
+            }
+          }
+        ],
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "511cc9a2ca48cc87c1fc5cc5050256467ae6e6bd3840c9ff838dd1bc9ff2dde5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "output_shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "cases": [
+          {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          },
+          {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          }
+        ],
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        378,
+        140,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/mesh-nominal-fine-green-mesh-right-comparison.png",
+        "sha256": "32e582b29f3d87e7b0c46c4ab0e669ffd8861d062df1f49c9c0ee22d998834d7"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-nominal-fine-green-mesh-right.png",
+        "sha256": "9b532dc9375d4e77560899cf66b8f7f0cafc32a3aa2ce8026e0b2a2fc6e8ccad"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-nominal-fine-green-mesh-right.npy",
+        "sha256": "357232e258da5dc969a78c51813cff128e5c03e2efedcbfbb22170bb3008ee0b"
+      },
+      "diagnostic": {
+        "peaks": [
+          [
+            0.1171875,
+            0.07421875,
+            36.00346078106499
+          ],
+          [
+            -0.08984375,
+            0.07421875,
+            17.696986236789268
+          ],
+          [
+            0.02734375,
+            0.14453125,
+            8.522555608305483
+          ]
+        ],
+        "gates": [
+          {
+            "power": 126.57256673843537,
+            "gate": 0.9288945445927579
+          },
+          {
+            "power": 54.38299138335694,
+            "gate": 0.834507080779041
+          },
+          {
+            "power": 24.638337583904594,
+            "gate": 0.6347156146655203
+          }
+        ],
+        "field_RMS": 0.000453305475398549
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-left",
+      "source_observation": {
+        "id": "mesh-profile3879",
+        "kind": "mesh",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "source": {
+          "status": "prepared-fixed-profile3879-transfer-mesh-inputs",
+          "selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/selection-plan-v2.json",
+            "sha256": "3aa63044d41db7db01b3c7baf0c3d5a306d2c2be1b4ca399a329b38e70163b95"
+          },
+          "derived_selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/selection-v1.json",
+            "sha256": "26040a9af3e203cab3140677762b54e403e85493351057123dcc03bf27f049d1"
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "context_shape": [
+            1,
+            3,
+            768,
+            768
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit",
+            "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+          },
+          "display_exposure": 4.0,
+          "cases": [
+            {
+              "name": "fine-green-mesh-left",
+              "ROI_xywh": [
+                206,
+                229,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                806,
+                6489,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                805,
+                6489,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                    "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                  },
+                  "xywh": [
+                    760,
+                    6500,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                    "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                  },
+                  "xywh": [
+                    759,
+                    6501,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            },
+            {
+              "name": "fine-green-mesh-right",
+              "ROI_xywh": [
+                426,
+                189,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                1026,
+                6449,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                1025,
+                6449,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                    "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                  },
+                  "xywh": [
+                    980,
+                    6460,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                    "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                  },
+                  "xywh": [
+                    979,
+                    6461,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            }
+          ],
+          "registrations": {
+            "reference_RAW_minus_noisy_RAW_xy": [
+              -1,
+              0
+            ],
+            "reference_RAW_green_NCC": 0.837847600812493,
+            "noisy_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -46,
+                11
+              ],
+              "JPEG_context_origin_xy": [
+                554,
+                6271
+              ],
+              "green_NCC": 0.6291292238228455,
+              "coarse_area8_green_NCC": 0.8510609005601808,
+              "raw_anchor_xy": [
+                600,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            },
+            "reference_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -47,
+                12
+              ],
+              "JPEG_context_origin_xy": [
+                553,
+                6272
+              ],
+              "green_NCC": 0.7344555012623493,
+              "coarse_area8_green_NCC": 0.8712051485619063,
+              "raw_anchor_xy": [
+                599,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            }
+          },
+          "source_bindings": {
+            "noisy": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+              "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+            },
+            "reference": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+              "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+            },
+            "noisy_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+              "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+            },
+            "reference_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+              "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+            }
+          },
+          "new_neural_forwards": 0,
+          "new_noise_observations": 0,
+          "RAW_decoder_opens": 3,
+          "optimizer_updates": 0,
+          "CUDA_initialized": false,
+          "scope": "SameobservedRAW,WB,matrix,CFAs,ROIs,JPEGs and independentreference asnominal3842case. Onlyfixedshot/read andtheirvariance mapchange. No coefficient/output fit, newnoise, RAWdecode, training orcontrolNN.",
+          "original_nominal_input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/result-v1.json",
+            "sha256": "6b4afa65727e4ee792e4bbadcb96c3fc63ea8bbaf82bf3b18d7556efa839dcaa"
+          },
+          "profile_transfer_source": {
+            "path": "/mnt/external/demosaic/v104-loss-scale-fullframe-20261023-v2/report.json",
+            "sha256": "66bb77c7a8cddec903f07baecfb5d27d18fd756fbae1a80ae6c4760117aa6edc"
+          },
+          "new_RAW_decodes": 0
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "controls": [
+          {
+            "label": "V120-profile3879",
+            "kind": "checkpoint",
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/profile3879/V120-profile3879-RGB-f32.npy",
+              "sha256": "6351c4ff5444f5773db59302fde58b4048b445426a2361d10402e4ab68f234dc"
+            },
+            "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+            "step": 20000
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-085.npy",
+              "sha256": "b018154ca642301a1f6e1002e65ba5dba92fa4426527864d4ad5a14df163e567"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-085.npy",
+              "sha256": "b6177fb175fd58097e760cbd0a2a7ef44236437ae77a6d0871049f367fa5f78c"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-085.npy",
+              "sha256": "cad53d1636f57462d3cc9f699f29cbeeb1626d64270732ef4235af8e1dfcb2b4"
+            }
+          }
+        ],
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "db217f5e774c6b4f1665be9c9a9b3e10f45d023290a52c0b0df5f802d5ecb129"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "output_shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "cases": [
+          {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          },
+          {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          }
+        ],
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        158,
+        180,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/mesh-profile3879-fine-green-mesh-left-comparison.png",
+        "sha256": "e66950ad7e662376eaa960a26646795a3c04d4e94df3c70930399beade1c36ed"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-profile3879-fine-green-mesh-left.png",
+        "sha256": "44c79d98548443bdcc21e379eb818b9c13c9691821164d77392ce1ec99f2a494"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-profile3879-fine-green-mesh-left.npy",
+        "sha256": "c0929ff7aa85b5c5716fd2e3ba22b60cb1908c5c496348639adf41e6369aa8b9"
+      },
+      "diagnostic": {
+        "peaks": [
+          [
+            -0.03125,
+            0.00390625,
+            51.657294334858825
+          ],
+          [
+            0.03125,
+            0.00390625,
+            37.78089595631217
+          ],
+          [
+            0.1171875,
+            0.07421875,
+            20.122911570000607
+          ],
+          [
+            -0.08984375,
+            0.0703125,
+            10.479319930959198
+          ]
+        ],
+        "gates": [
+          {
+            "power": 4.634595763486807,
+            "gate": 0
+          },
+          {
+            "power": 8.959219531044502,
+            "gate": 0
+          },
+          {
+            "power": 39.62028844320327,
+            "gate": 0.7728436527436761
+          },
+          {
+            "power": 66.6303826207356,
+            "gate": 0.8649264847955538
+          }
+        ],
+        "field_RMS": 0.00018783630050066326
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-right",
+      "source_observation": {
+        "id": "mesh-profile3879",
+        "kind": "mesh",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "source": {
+          "status": "prepared-fixed-profile3879-transfer-mesh-inputs",
+          "selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/selection-plan-v2.json",
+            "sha256": "3aa63044d41db7db01b3c7baf0c3d5a306d2c2be1b4ca399a329b38e70163b95"
+          },
+          "derived_selection": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/selection-v1.json",
+            "sha256": "26040a9af3e203cab3140677762b54e403e85493351057123dcc03bf27f049d1"
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "context_shape": [
+            1,
+            3,
+            768,
+            768
+          ],
+          "conditioning": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit",
+            "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+          },
+          "display_exposure": 4.0,
+          "cases": [
+            {
+              "name": "fine-green-mesh-left",
+              "ROI_xywh": [
+                206,
+                229,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                806,
+                6489,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                805,
+                6489,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                    "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                  },
+                  "xywh": [
+                    760,
+                    6500,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                    "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                  },
+                  "xywh": [
+                    759,
+                    6501,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            },
+            {
+              "name": "fine-green-mesh-right",
+              "ROI_xywh": [
+                426,
+                189,
+                160,
+                160
+              ],
+              "noisy_raw_xywh": [
+                1026,
+                6449,
+                160,
+                160
+              ],
+              "reference_raw_xywh": [
+                1025,
+                6449,
+                160,
+                160
+              ],
+              "camera_JPEGs": {
+                "noisy_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                    "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                  },
+                  "xywh": [
+                    980,
+                    6460,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                },
+                "reference_camera_jpeg": {
+                  "pixels": {
+                    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                    "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                  },
+                  "xywh": [
+                    979,
+                    6461,
+                    160,
+                    160
+                  ],
+                  "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+                }
+              }
+            }
+          ],
+          "registrations": {
+            "reference_RAW_minus_noisy_RAW_xy": [
+              -1,
+              0
+            ],
+            "reference_RAW_green_NCC": 0.837847600812493,
+            "noisy_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -46,
+                11
+              ],
+              "JPEG_context_origin_xy": [
+                554,
+                6271
+              ],
+              "green_NCC": 0.6291292238228455,
+              "coarse_area8_green_NCC": 0.8510609005601808,
+              "raw_anchor_xy": [
+                600,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            },
+            "reference_camera_jpeg": {
+              "JPEG_context_minus_noisy_context_xy": [
+                -47,
+                12
+              ],
+              "JPEG_context_origin_xy": [
+                553,
+                6272
+              ],
+              "green_NCC": 0.7344555012623493,
+              "coarse_area8_green_NCC": 0.8712051485619063,
+              "raw_anchor_xy": [
+                599,
+                6260
+              ],
+              "note": "Integer coordinates only. Residual lens/camera-pipeline geometry and radiometry differences remain."
+            }
+          },
+          "source_bindings": {
+            "noisy": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+              "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+            },
+            "reference": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.raf",
+              "sha256": "89be15b298e32844de067700a277996119cb5c8ad25fc2c4cb03556485d1a7e9"
+            },
+            "noisy_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.jpg",
+              "sha256": "517bf4a00898061570cbd727150a993b893bb7fef6ad17a01f34f6dd505657de"
+            },
+            "reference_camera_jpeg": {
+              "path": "/home/dllu/proj/demosaic/.cache/gfx-green-mesh-20231231/2023-12-31-17-07-10_DSCF3835_51f913c3376f7335d5b5f8dede720c5c73ff15ce.jpg",
+              "sha256": "893146ad29c3e1128b3331f2c7c24cfc6db4b15f802cde7d06c46285e36151c3"
+            }
+          },
+          "new_neural_forwards": 0,
+          "new_noise_observations": 0,
+          "RAW_decoder_opens": 3,
+          "optimizer_updates": 0,
+          "CUDA_initialized": false,
+          "scope": "SameobservedRAW,WB,matrix,CFAs,ROIs,JPEGs and independentreference asnominal3842case. Onlyfixedshot/read andtheirvariance mapchange. No coefficient/output fit, newnoise, RAWdecode, training orcontrolNN.",
+          "original_nominal_input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/result-v1.json",
+            "sha256": "6b4afa65727e4ee792e4bbadcb96c3fc63ea8bbaf82bf3b18d7556efa839dcaa"
+          },
+          "profile_transfer_source": {
+            "path": "/mnt/external/demosaic/v104-loss-scale-fullframe-20261023-v2/report.json",
+            "sha256": "66bb77c7a8cddec903f07baecfb5d27d18fd756fbae1a80ae6c4760117aa6edc"
+          },
+          "new_RAW_decodes": 0
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "controls": [
+          {
+            "label": "V120-profile3879",
+            "kind": "checkpoint",
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/weights/weights-a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb.pt",
+              "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V120-green-mesh-early-v1/work/artifacts/profile3879/V120-profile3879-RGB-f32.npy",
+              "sha256": "6351c4ff5444f5773db59302fde58b4048b445426a2361d10402e4ab68f234dc"
+            },
+            "source_inputs_sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64",
+            "step": 20000
+          },
+          {
+            "model": {
+              "label": "V129 1k EMA"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/reviewed-detail-quality-pilot-v1/queue-v1/V129/work/artifacts/predictions/prediction-085.npy",
+              "sha256": "b018154ca642301a1f6e1002e65ba5dba92fa4426527864d4ad5a14df163e567"
+            }
+          },
+          {
+            "model": {
+              "label": "V141 1k EMA",
+              "step": 1000,
+              "sha256": "2a4092dde697ba68d0fadefb73bfe5ac577e3759590e8535791273c008a87a8d"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V141-native-v1/work/artifacts/predictions/prediction-085.npy",
+              "sha256": "b6177fb175fd58097e760cbd0a2a7ef44236437ae77a6d0871049f367fa5f78c"
+            }
+          },
+          {
+            "model": {
+              "label": "V142 1k EMA",
+              "step": 1000,
+              "sha256": "01b39e46602983455c362619fa93378dc7e366e5c9ab3fc67e73120aa045fc18"
+            },
+            "prediction": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/work/artifacts/predictions/prediction-085.npy",
+              "sha256": "cad53d1636f57462d3cc9f699f29cbeeb1626d64270732ef4235af8e1dfcb2b4"
+            }
+          }
+        ],
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "db217f5e774c6b4f1665be9c9a9b3e10f45d023290a52c0b0df5f802d5ecb129"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "c6c91b46339b36d3939a0a4f39f2b98824beb282571cb63fd87982509caade0f"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "abf31aebdaf0b0ca88ece28648db77b5600beca0b045e3c515bcd7e0b8d96311"
+          }
+        },
+        "output_shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "cases": [
+          {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          },
+          {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            }
+          }
+        ],
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+      },
+      "window_xywh": [
+        378,
+        140,
+        256,
+        256
+      ],
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v3/step2500/report-v1/mesh-profile3879-fine-green-mesh-right-comparison.png",
+        "sha256": "ed30fd45f0b0dce74da35ba4fcbcbb3a0568f9c2963cb3a296db25611f13c7ed"
+      },
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-profile3879-fine-green-mesh-right.png",
+        "sha256": "bc674bfcfe585c79ddbe23c99d8473ac96368cdaa800040ee2f5d93a1eda63b7"
+      },
+      "prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-probe-v1/real/mesh-profile3879-fine-green-mesh-right.npy",
+        "sha256": "48a23ef93e3e1b677d27e114fc9778d029cd84cea15f8d8e11ffc5ed8391a13f"
+      },
+      "diagnostic": {
+        "peaks": [
+          [
+            0.1171875,
+            0.07421875,
+            49.97981100361049
+          ],
+          [
+            -0.08984375,
+            0.07421875,
+            24.566861303342314
+          ],
+          [
+            0.02734375,
+            0.14453125,
+            11.830965949516877
+          ],
+          [
+            0.0078125,
+            0.0390625,
+            5.665179692617541
+          ]
+        ],
+        "gates": [
+          {
+            "power": 112.1159397719753,
+            "gate": 0.9197259549507013
+          },
+          {
+            "power": 53.583136147397845,
+            "gate": 0.8320367069362538
+          },
+          {
+            "power": 37.878553631180196,
+            "gate": 0.7623985306399994
+          },
+          {
+            "power": 7.030766863166226,
+            "gate": 0
+          }
+        ],
+        "field_RMS": 0.0003101417333762887
+      },
+      "reference_role": "Independent ISO100/AHD reference, not exactGT",
+      "no_resize": true
+    }
+  ],
+  "flat": [
+    {
+      "id": "gray-l0.02-iso12800-prior-RGGB",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -6.550719393999316e-05,
+          3.253864437283483e-05,
+          4.083262683707289e-06
+        ],
+        "MSE": 1.0926486624996385e-08,
+        "DC_MSE": 1.7888762898859493e-09,
+        "spatial_MSE": 9.137610335110436e-09,
+        "block_RMS": {
+          "1": 9.55908485949907e-05,
+          "4": 8.752795030819359e-05,
+          "16": 7.330568127396461e-05,
+          "32": 6.28890535577482e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -6.550719393999316e-05,
+          3.253864437283483e-05,
+          4.083262683707289e-06
+        ],
+        "MSE": 1.0926486624996385e-08,
+        "DC_MSE": 1.7888762898859493e-09,
+        "spatial_MSE": 9.137610335110436e-09,
+        "block_RMS": {
+          "1": 9.55908485949907e-05,
+          "4": 8.752795030819359e-05,
+          "16": 7.330568127396461e-05,
+          "32": 6.28890535577482e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-BGGR",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          1.3725179851462599e-05,
+          -5.2999512481619606e-05,
+          -6.52244999218965e-05
+        ],
+        "MSE": 1.781397742010123e-08,
+        "DC_MSE": 2.4171880917686077e-09,
+        "spatial_MSE": 1.5396789328332623e-08,
+        "block_RMS": {
+          "1": 0.00012408379962079103,
+          "4": 0.00011763320191768895,
+          "16": 0.0001068744747348627,
+          "32": 9.831856436172993e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          1.3725179851462599e-05,
+          -5.2999512481619606e-05,
+          -6.52244999218965e-05
+        ],
+        "MSE": 1.781397742010123e-08,
+        "DC_MSE": 2.4171880917686077e-09,
+        "spatial_MSE": 1.5396789328332623e-08,
+        "block_RMS": {
+          "1": 0.00012408379962079103,
+          "4": 0.00011763320191768895,
+          "16": 0.0001068744747348627,
+          "32": 9.831856436172993e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-GRBG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -7.003844952123473e-05,
+          -3.478820217424072e-06,
+          2.8300496414885855e-05
+        ],
+        "MSE": 1.3984979228399371e-08,
+        "DC_MSE": 1.90613489959089e-09,
+        "spatial_MSE": 1.207884432880848e-08,
+        "block_RMS": {
+          "1": 0.00010990379578890112,
+          "4": 0.00010319084977864703,
+          "16": 9.333409186515773e-05,
+          "32": 8.531420423917393e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -7.003844952123473e-05,
+          -3.478820217424072e-06,
+          2.8300496414885855e-05
+        ],
+        "MSE": 1.3984979228399371e-08,
+        "DC_MSE": 1.90613489959089e-09,
+        "spatial_MSE": 1.207884432880848e-08,
+        "block_RMS": {
+          "1": 0.00010990379578890112,
+          "4": 0.00010319084977864703,
+          "16": 9.333409186515773e-05,
+          "32": 8.531420423917393e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-GBRG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -7.661236020794604e-05,
+          -0.00015268178591213655,
+          4.190175786789041e-05
+        ],
+        "MSE": 2.423960437230445e-08,
+        "DC_MSE": 1.0312312932790295e-08,
+        "spatial_MSE": 1.3927291439514155e-08,
+        "block_RMS": {
+          "1": 0.0001180139459534938,
+          "4": 0.00011162582984018901,
+          "16": 0.00010215859846177033,
+          "32": 9.431095853372532e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -7.661236020794604e-05,
+          -0.00015268178591213655,
+          4.190175786789041e-05
+        ],
+        "MSE": 2.423960437230445e-08,
+        "DC_MSE": 1.0312312932790295e-08,
+        "spatial_MSE": 1.3927291439514155e-08,
+        "block_RMS": {
+          "1": 0.0001180139459534938,
+          "4": 0.00011162582984018901,
+          "16": 0.00010215859846177033,
+          "32": 9.431095853372532e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h120-s0.50-l0.02-iso12800-prior-RGGB",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -2.6821993742487393e-05,
+          -3.092491926508956e-05,
+          -3.7627116580551958e-06
+        ],
+        "MSE": 1.1237414239973549e-08,
+        "DC_MSE": 5.633093262986682e-10,
+        "spatial_MSE": 1.067410491367488e-08,
+        "block_RMS": {
+          "1": 0.00010331555988172778,
+          "4": 9.616074492409127e-05,
+          "16": 8.458597491508614e-05,
+          "32": 7.538322884713229e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -2.6821993742487393e-05,
+          -3.092491926508956e-05,
+          -3.7627116580551958e-06
+        ],
+        "MSE": 1.1237414239973549e-08,
+        "DC_MSE": 5.633093262986682e-10,
+        "spatial_MSE": 1.067410491367488e-08,
+        "block_RMS": {
+          "1": 0.00010331555988172778,
+          "4": 9.616074492409127e-05,
+          "16": 8.458597491508614e-05,
+          "32": 7.538322884713229e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h120-s0.50-l0.02-iso12800-prior-BGGR",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -1.0752147791208699e-05,
+          -1.1620513250818476e-05,
+          -6.246631630347111e-05
+        ],
+        "MSE": 9.366414693178386e-09,
+        "DC_MSE": 1.384228560953914e-09,
+        "spatial_MSE": 7.982186132224475e-09,
+        "block_RMS": {
+          "1": 8.934308105401601e-05,
+          "4": 8.07345472788568e-05,
+          "16": 6.513611132112848e-05,
+          "32": 5.3941958575904394e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -1.0752147791208699e-05,
+          -1.1620513250818476e-05,
+          -6.246631630347111e-05
+        ],
+        "MSE": 9.366414693178386e-09,
+        "DC_MSE": 1.384228560953914e-09,
+        "spatial_MSE": 7.982186132224475e-09,
+        "block_RMS": {
+          "1": 8.934308105401601e-05,
+          "4": 8.07345472788568e-05,
+          "16": 6.513611132112848e-05,
+          "32": 5.3941958575904394e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h120-s0.50-l0.02-iso12800-prior-GRBG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -0.0001195104838552652,
+          4.210975479509216e-05,
+          -3.361333370776265e-05
+        ],
+        "MSE": 1.6029903515815765e-08,
+        "DC_MSE": 5.728614467723934e-09,
+        "spatial_MSE": 1.0301289048091831e-08,
+        "block_RMS": {
+          "1": 0.00010149526613636634,
+          "4": 9.478658650760821e-05,
+          "16": 8.46410254420132e-05,
+          "32": 7.634032001408593e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -0.0001195104838552652,
+          4.210975479509216e-05,
+          -3.361333370776265e-05
+        ],
+        "MSE": 1.6029903515815765e-08,
+        "DC_MSE": 5.728614467723934e-09,
+        "spatial_MSE": 1.0301289048091831e-08,
+        "block_RMS": {
+          "1": 0.00010149526613636634,
+          "4": 9.478658650760821e-05,
+          "16": 8.46410254420132e-05,
+          "32": 7.634032001408593e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h120-s0.50-l0.02-iso12800-prior-GBRG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -0.00010480083952643326,
+          7.40628569474211e-05,
+          -3.1110616164369275e-05
+        ],
+        "MSE": 1.509696195768952e-08,
+        "DC_MSE": 5.812131060928697e-09,
+        "spatial_MSE": 9.284830896760821e-09,
+        "block_RMS": {
+          "1": 9.635782737671507e-05,
+          "4": 8.947400640973019e-05,
+          "16": 7.991287546580946e-05,
+          "32": 7.285140316852992e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -0.00010480083952643326,
+          7.40628569474211e-05,
+          -3.1110616164369275e-05
+        ],
+        "MSE": 1.509696195768952e-08,
+        "DC_MSE": 5.812131060928697e-09,
+        "spatial_MSE": 9.284830896760821e-09,
+        "block_RMS": {
+          "1": 9.635782737671507e-05,
+          "4": 8.947400640973019e-05,
+          "16": 7.991287546580946e-05,
+          "32": 7.285140316852992e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.02-iso12800-prior-RGGB",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -2.47812588531815e-05,
+          4.3534768010431436e-05,
+          -1.933586932864273e-05
+        ],
+        "MSE": 8.259222850174335e-09,
+        "DC_MSE": 9.610875529216055e-10,
+        "spatial_MSE": 7.29813529725273e-09,
+        "block_RMS": {
+          "1": 8.542912440879124e-05,
+          "4": 7.764716470523546e-05,
+          "16": 6.318285005488348e-05,
+          "32": 5.4278921693746354e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -2.47812588531815e-05,
+          4.3534768010431436e-05,
+          -1.933586932864273e-05
+        ],
+        "MSE": 8.259222850174335e-09,
+        "DC_MSE": 9.610875529216055e-10,
+        "spatial_MSE": 7.29813529725273e-09,
+        "block_RMS": {
+          "1": 8.542912440879124e-05,
+          "4": 7.764716470523546e-05,
+          "16": 6.318285005488348e-05,
+          "32": 5.4278921693746354e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.02-iso12800-prior-BGGR",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -6.056546864783741e-05,
+          -3.572116511350032e-06,
+          -3.9295519054576286e-05
+        ],
+        "MSE": 1.0849673441325493e-08,
+        "DC_MSE": 1.7416912755571347e-09,
+        "spatial_MSE": 9.107982165768358e-09,
+        "block_RMS": {
+          "1": 9.543574888776405e-05,
+          "4": 8.850829260105932e-05,
+          "16": 7.714735333367972e-05,
+          "32": 6.618544613178961e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -6.056546864783741e-05,
+          -3.572116511350032e-06,
+          -3.9295519054576286e-05
+        ],
+        "MSE": 1.0849673441325493e-08,
+        "DC_MSE": 1.7416912755571347e-09,
+        "spatial_MSE": 9.107982165768358e-09,
+        "block_RMS": {
+          "1": 9.543574888776405e-05,
+          "4": 8.850829260105932e-05,
+          "16": 7.714735333367972e-05,
+          "32": 6.618544613178961e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.02-iso12800-prior-GRBG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -1.6044856020016597e-05,
+          -8.634974648884963e-05,
+          -7.144513583625667e-06
+        ],
+        "MSE": 1.552507341881269e-08,
+        "DC_MSE": 2.588253399246091e-09,
+        "spatial_MSE": 1.2936820019566596e-08,
+        "block_RMS": {
+          "1": 0.00011374014251602904,
+          "4": 0.00010794410686442707,
+          "16": 9.94374731989267e-05,
+          "32": 9.255346448954061e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -1.6044856020016597e-05,
+          -8.634974648884963e-05,
+          -7.144513583625667e-06
+        ],
+        "MSE": 1.552507341881269e-08,
+        "DC_MSE": 2.588253399246091e-09,
+        "spatial_MSE": 1.2936820019566596e-08,
+        "block_RMS": {
+          "1": 0.00011374014251602904,
+          "4": 0.00010794410686442707,
+          "16": 9.94374731989267e-05,
+          "32": 9.255346448954061e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.02-iso12800-prior-GBRG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -7.106014614691957e-05,
+          -6.28624650198617e-05,
+          2.0859013129665982e-05
+        ],
+        "MSE": 1.1789630353473496e-08,
+        "DC_MSE": 3.1454441025128274e-09,
+        "spatial_MSE": 8.644186250960666e-09,
+        "block_RMS": {
+          "1": 9.29741160267774e-05,
+          "4": 8.524049660615533e-05,
+          "16": 7.3460694119181e-05,
+          "32": 6.376186864387238e-05
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -7.106014614691957e-05,
+          -6.28624650198617e-05,
+          2.0859013129665982e-05
+        ],
+        "MSE": 1.1789630353473496e-08,
+        "DC_MSE": 3.1454441025128274e-09,
+        "spatial_MSE": 8.644186250960666e-09,
+        "block_RMS": {
+          "1": 9.29741160267774e-05,
+          "4": 8.524049660615533e-05,
+          "16": 7.3460694119181e-05,
+          "32": 6.376186864387238e-05
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.18-iso12800-prior-RGGB",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          0.0002730440284358338,
+          -9.88717272412032e-05,
+          9.233680088073015e-05
+        ],
+        "MSE": 1.6115922063258207e-07,
+        "DC_MSE": 3.095158156967163e-08,
+        "spatial_MSE": 1.3020763906291045e-07,
+        "block_RMS": {
+          "1": 0.0003608429562329164,
+          "4": 0.0003244549024645991,
+          "16": 0.00021481910910290208,
+          "32": 0.00016269086883536916
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          0.0002730440284358338,
+          -9.88717272412032e-05,
+          9.233680088073015e-05
+        ],
+        "MSE": 1.6115922063258207e-07,
+        "DC_MSE": 3.095158156967163e-08,
+        "spatial_MSE": 1.3020763906291045e-07,
+        "block_RMS": {
+          "1": 0.0003608429562329164,
+          "4": 0.0003244549024645991,
+          "16": 0.00021481910910290208,
+          "32": 0.00016269086883536916
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.18-iso12800-prior-BGGR",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          0.0001332296841428615,
+          0.0002578901837114245,
+          0.00011637896270258352
+        ],
+        "MSE": 1.8274053599467295e-07,
+        "DC_MSE": 3.260051951708275e-08,
+        "spatial_MSE": 1.501400164775902e-07,
+        "block_RMS": {
+          "1": 0.0003874790529533051,
+          "4": 0.0003496779223932389,
+          "16": 0.00026647520167370206,
+          "32": 0.00023481896475641834
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          0.0001332296841428615,
+          0.0002578901837114245,
+          0.00011637896270258352
+        ],
+        "MSE": 1.8274053599467295e-07,
+        "DC_MSE": 3.260051951708275e-08,
+        "spatial_MSE": 1.501400164775902e-07,
+        "block_RMS": {
+          "1": 0.0003874790529533051,
+          "4": 0.0003496779223932389,
+          "16": 0.00026647520167370206,
+          "32": 0.00023481896475641834
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.18-iso12800-prior-GRBG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          8.035802864469587e-05,
+          -0.0002019356214441359,
+          -8.358847378985956e-05
+        ],
+        "MSE": 1.7986953116377634e-07,
+        "DC_MSE": 1.8074146975403054e-08,
+        "spatial_MSE": 1.617953841883733e-07,
+        "block_RMS": {
+          "1": 0.00040223796960055035,
+          "4": 0.00036441566000618527,
+          "16": 0.0002794413117711114,
+          "32": 0.00024638518921758215
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          8.035802864469587e-05,
+          -0.0002019356214441359,
+          -8.358847378985956e-05
+        ],
+        "MSE": 1.7986953116377634e-07,
+        "DC_MSE": 1.8074146975403054e-08,
+        "spatial_MSE": 1.617953841883733e-07,
+        "block_RMS": {
+          "1": 0.00040223796960055035,
+          "4": 0.00036441566000618527,
+          "16": 0.0002794413117711114,
+          "32": 0.00024638518921758215
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.18-iso12800-prior-GBRG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          0.00023338801023783161,
+          0.00011318156262859702,
+          0.00014879022492095829
+        ],
+        "MSE": 1.9413775809806324e-07,
+        "DC_MSE": 2.9806186824618194e-08,
+        "spatial_MSE": 1.6433157127344502e-07,
+        "block_RMS": {
+          "1": 0.0004053783063675769,
+          "4": 0.0003595482334590007,
+          "16": 0.0002116102603631483,
+          "32": 0.00015523450265333722
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          0.00023338801023783161,
+          0.00011318156262859702,
+          0.00014879022492095829
+        ],
+        "MSE": 1.9413775809806324e-07,
+        "DC_MSE": 2.9806186824618194e-08,
+        "spatial_MSE": 1.6433157127344502e-07,
+        "block_RMS": {
+          "1": 0.0004053783063675769,
+          "4": 0.0003595482334590007,
+          "16": 0.0002116102603631483,
+          "32": 0.00015523450265333722
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.18-iso12800-prior-RGGB",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -7.789578448864631e-05,
+          2.5352417142130436e-05,
+          -0.0002798378391889855
+        ],
+        "MSE": 1.2473605557551646e-07,
+        "DC_MSE": 2.8339904846003577e-08,
+        "spatial_MSE": 9.639615072951288e-08,
+        "block_RMS": {
+          "1": 0.0003104772950305914,
+          "4": 0.00029437979661387095,
+          "16": 0.0002589001772443889,
+          "32": 0.00023728681094118784
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -7.789578448864631e-05,
+          2.5352417142130436e-05,
+          -0.0002798378391889855
+        ],
+        "MSE": 1.2473605557551646e-07,
+        "DC_MSE": 2.8339904846003577e-08,
+        "spatial_MSE": 9.639615072951288e-08,
+        "block_RMS": {
+          "1": 0.0003104772950305914,
+          "4": 0.00029437979661387095,
+          "16": 0.0002589001772443889,
+          "32": 0.00023728681094118784
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.18-iso12800-prior-BGGR",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          0.00020191555740893817,
+          2.8130990685895085e-05,
+          0.00024700911599211394
+        ],
+        "MSE": 1.008608887420121e-07,
+        "DC_MSE": 3.419158278131257e-08,
+        "spatial_MSE": 6.666930596069952e-08,
+        "block_RMS": {
+          "1": 0.00025820400066749454,
+          "4": 0.0002394175069237941,
+          "16": 0.00019693093585055574,
+          "32": 0.00017540864283180675
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          0.00020191555740893817,
+          2.8130990685895085e-05,
+          0.00024700911599211394
+        ],
+        "MSE": 1.008608887420121e-07,
+        "DC_MSE": 3.419158278131257e-08,
+        "spatial_MSE": 6.666930596069952e-08,
+        "block_RMS": {
+          "1": 0.00025820400066749454,
+          "4": 0.0002394175069237941,
+          "16": 0.00019693093585055574,
+          "32": 0.00017540864283180675
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.18-iso12800-prior-GRBG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          5.142795474966988e-05,
+          5.940498667769134e-06,
+          0.00024090245249681175
+        ],
+        "MSE": 1.2120734328704518e-07,
+        "DC_MSE": 2.02380385577115e-08,
+        "spatial_MSE": 1.0096930472933368e-07,
+        "block_RMS": {
+          "1": 0.00031775667534976145,
+          "4": 0.0002960083651731629,
+          "16": 0.0002150052191716292,
+          "32": 0.00017623073787207286
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          5.142795474966988e-05,
+          5.940498667769134e-06,
+          0.00024090245249681175
+        ],
+        "MSE": 1.2120734328704518e-07,
+        "DC_MSE": 2.02380385577115e-08,
+        "spatial_MSE": 1.0096930472933368e-07,
+        "block_RMS": {
+          "1": 0.00031775667534976145,
+          "4": 0.0002960083651731629,
+          "16": 0.0002150052191716292,
+          "32": 0.00017623073787207286
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "h210-s0.50-l0.18-iso12800-prior-GBRG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          4.756648297188803e-05,
+          0.00015591209812555463,
+          -5.361637275200337e-05
+        ],
+        "MSE": 7.278648087994397e-08,
+        "DC_MSE": 9.815289357103087e-09,
+        "spatial_MSE": 6.297119152284089e-08,
+        "block_RMS": {
+          "1": 0.00025094061353802595,
+          "4": 0.00022932842217566256,
+          "16": 0.00018550543938888848,
+          "32": 0.0001623997274770671
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          4.756648297188803e-05,
+          0.00015591209812555463,
+          -5.361637275200337e-05
+        ],
+        "MSE": 7.278648087994397e-08,
+        "DC_MSE": 9.815289357103087e-09,
+        "spatial_MSE": 6.297119152284089e-08,
+        "block_RMS": {
+          "1": 0.00025094061353802595,
+          "4": 0.00022932842217566256,
+          "16": 0.00018550543938888848,
+          "32": 0.0001623997274770671
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.90-iso12800-prior-RGGB",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          0.0004073018650524318,
+          0.0003124847263097763,
+          -0.0001269504800438881
+        ],
+        "MSE": 9.105244288787571e-07,
+        "DC_MSE": 9.32193126118196e-08,
+        "spatial_MSE": 8.173051162669376e-07,
+        "block_RMS": {
+          "1": 0.0009040492886269739,
+          "4": 0.0008384904536237292,
+          "16": 0.0006710831763759528,
+          "32": 0.0005088478979623269
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          0.0004073018650524318,
+          0.0003124847263097763,
+          -0.0001269504800438881
+        ],
+        "MSE": 9.105244288787571e-07,
+        "DC_MSE": 9.32193126118196e-08,
+        "spatial_MSE": 8.173051162669376e-07,
+        "block_RMS": {
+          "1": 0.0009040492886269739,
+          "4": 0.0008384904536237292,
+          "16": 0.0006710831763759528,
+          "32": 0.0005088478979623269
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.90-iso12800-prior-BGGR",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -7.333697052672506e-05,
+          0.00013594442512840032,
+          0.0005580077110789717
+        ],
+        "MSE": 1.0231982822309314e-06,
+        "DC_MSE": 1.117439345310407e-07,
+        "spatial_MSE": 9.114543476998907e-07,
+        "block_RMS": {
+          "1": 0.000954701182412534,
+          "4": 0.0008966397182004817,
+          "16": 0.000757442369245361,
+          "32": 0.0006350008408142043
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -7.333697052672506e-05,
+          0.00013594442512840032,
+          0.0005580077110789717
+        ],
+        "MSE": 1.0231982822309314e-06,
+        "DC_MSE": 1.117439345310407e-07,
+        "spatial_MSE": 9.114543476998907e-07,
+        "block_RMS": {
+          "1": 0.000954701182412534,
+          "4": 0.0008966397182004817,
+          "16": 0.000757442369245361,
+          "32": 0.0006350008408142043
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.90-iso12800-prior-GRBG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -0.00036395092261955143,
+          7.672864012420177e-05,
+          -0.00019874876365065573
+        ],
+        "MSE": 8.854585582656014e-07,
+        "DC_MSE": 5.92828764478654e-08,
+        "spatial_MSE": 8.26175681817736e-07,
+        "block_RMS": {
+          "1": 0.000908942067360586,
+          "4": 0.0008308087370382574,
+          "16": 0.0006346334135807645,
+          "32": 0.000518924968784924
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -0.00036395092261955143,
+          7.672864012420177e-05,
+          -0.00019874876365065573
+        ],
+        "MSE": 8.854585582656014e-07,
+        "DC_MSE": 5.92828764478654e-08,
+        "spatial_MSE": 8.26175681817736e-07,
+        "block_RMS": {
+          "1": 0.000908942067360586,
+          "4": 0.0008308087370382574,
+          "16": 0.0006346334135807645,
+          "32": 0.000518924968784924
+        }
+      },
+      "values_unchanged": true
+    },
+    {
+      "id": "gray-l0.90-iso12800-prior-GBRG",
+      "diagnostic": {
+        "peaks": []
+      },
+      "base": {
+        "DC_RGB": [
+          -0.0001937097928021103,
+          -0.0005230573238804937,
+          -4.606417380273342e-05
+        ],
+        "MSE": 1.0741055161246279e-06,
+        "DC_MSE": 1.0441145200019619e-07,
+        "spatial_MSE": 9.696940641244318e-07,
+        "block_RMS": {
+          "1": 0.0009847304525221264,
+          "4": 0.0009297387317858644,
+          "16": 0.0008211184501561349,
+          "32": 0.0007336349767215969
+        }
+      },
+      "candidate": {
+        "DC_RGB": [
+          -0.0001937097928021103,
+          -0.0005230573238804937,
+          -4.606417380273342e-05
+        ],
+        "MSE": 1.0741055161246279e-06,
+        "DC_MSE": 1.0441145200019619e-07,
+        "spatial_MSE": 9.696940641244318e-07,
+        "block_RMS": {
+          "1": 0.0009847304525221264,
+          "4": 0.0009297387317858644,
+          "16": 0.0008211184501561349,
+          "32": 0.0007336349767215969
+        }
+      },
+      "values_unchanged": true
+    }
+  ],
+  "new_model_calls": 0,
+  "new_noise": 0,
+  "RAW_decodes": 0,
+  "scope": "Exploratory fixed parameters from initial synthetic probe, unchanged before these8 real regions and24 noisy exactflat checks. ADC bypass planned; no default change, wholeframe test or GT-based correction. Original cached arrays/outputs unchanged. Real reference not exactGT."
+}

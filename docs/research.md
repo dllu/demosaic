@@ -33,6 +33,13 @@ ISO6400-prior gain nearzero. Oracle RAW fits find coherent evidence in the two
 clearest recipes; this is not blind recoverability or natural-texture quality.
 The noisy failure occurs within the generator family as well as real photos.
 
+A [phase-aware harmonic patch](phase-harmonic-patch.md) now uses that input
+coherence directly, with RAW harmonic innovation and physical CFA coordinates.
+Fine real mesh becomes visibly stronger; the clearest procedural recipe improves
+from.004 to.298 gain. All96 photo outputs and48 uniform fields retain parent
+values. Periodic overextension into blank parts of textured patches is a measured
+cost, so this remains an experimental patch option, not a fullframe method.
+
 ## Current hypotheses and evidence
 
 | Question | Evidence and current action |

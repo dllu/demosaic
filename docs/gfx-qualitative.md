@@ -1,5 +1,15 @@
 # GFX100S qualitative comparisons
 
+## Phase-aware harmonic patch: visibly stronger fine mesh
+
+The [new patch report](phase-harmonic-patch.md) shows a clearer soft lattice in
+both extra-mesh windows and both fixed priors, plus both cameraJPEGs and the
+main foliage/fence/sky/building crops. Independent ISO100 references remain
+**not exactGT**. Sky and48 exactflat outputs retain parent values, while the
+operator can extend periodic structure into blank parts of textured patches.
+It is an experimental native256 option on savedV120, without full-frame support.
+
+
 ## V143 at2,500 of5,000: no clear new mesh recovery
 
 The [audited progress report](v143-progress2500-quality.md) includes native
@@ -7,7 +17,8 @@ foliage, larger fence, sky and building crops from DSCF3879/3880, plus both
 fine-mesh ROIs/priors and both camera JPEGs from DSCF3842/3835. ISO100/AHD/JPEG
 references are qualitative comparators, **not exact GT**. The nominal mesh
 remains mostly erased, with weak nearby-prior diagonals and no clear new
-lattice recovery. The original5k training continues; V120 remains recommended.
+lattice recovery. The original5k training and numeric reviews are complete; endpoint native
+viewing remains. V120 remains recommended.
 
 ## V142 crossed-line data1k: modest numerical gains, soft real detail
 

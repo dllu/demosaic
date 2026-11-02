@@ -1,10 +1,16 @@
 # Current model choices
 
+The new [phase-aware harmonic patch](phase-harmonic-patch.md) gives visibly
+stronger fine green mesh in both windows/priors on savedV120 outputs. All48
+uniform fields and96 photo outputs retain their parent values; partial-texture
+blank regions can worsen. It is a useful experimental native256 patch option,
+with no full-frame implementation; V120 remains the general recommendation.
+
 The [V143 2500of5000 review](v143-progress2500-quality.md) recovers faint ADC
 scores to0.00763dB below V120 after its1k regression, with no clear new mesh
 recovery. Noisy-flat spatial RMS is2.12% lower, coarse error5.89% higher and
-ADC-only spatial RMS32.39% higher than V120. The same original worker continues
-to5k under replacement supervision; V120 remains recommended.
+ADC-only spatial RMS32.39% higher than V120. The original worker has completed5k and its numeric reviews; endpoint native
+viewing remains. V120 remains recommended.
 
 The [completed V1411k loss comparison](v141-gradient-epsilon-pilot.md) gains
 .01528dB faint ADC PSNR over matched V129, with mixed weak-band changes and no

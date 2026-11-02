@@ -50,7 +50,7 @@ in its two clearest cases.
 | [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all1,000 training batches match V137 |
 | [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.01528dB over V129, mixed local detail, no new mesh recovery. Noisy-flat coarse error near V129 and5.75% above V120; defaults unchanged |
 | [V142 crossed-line/empty data](docs/v142-crossed-line-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.05212dB and noisy-flat spatial RMS−4.55% versus V129. Coarse error remains5.08% above V120; ADC-only DC bias worsens. Selected weak grass/wood gains, no clear new mesh recovery |
-| [V143 combined data/gradient5k](docs/v143-crossed-gradient5000.md) | [Audited2.5k progress](docs/v143-progress2500-quality.md): faint ADC recovers near V120, with no clear new mesh recovery. Noisy-flat spatial RMS−2.12% versus V120, coarse error+5.89%, ADC-only spatial RMS+32.39%. Original worker continues to5k under replacement supervision. [Mixed-batch loss diagnostic](docs/crossed-line-loss-gradients.md) |
+| [V143 combined data/gradient5k](docs/v143-crossed-gradient5000.md) | [Audited2.5k progress](docs/v143-progress2500-quality.md): faint ADC recovers near V120, with no clear new mesh recovery. Noisy-flat spatial RMS−2.12% versus V120, coarse error+5.89%, ADC-only spatial RMS+32.39%. Original5k training and numeric reviews complete; endpoint native viewing remains. [Mixed-batch loss diagnostic](docs/crossed-line-loss-gradients.md) |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
@@ -101,19 +101,22 @@ The independent ISO100 exposure is an approximate qualitative reference,
 
 ![V120 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
-The additional **fine green mesh beside the red train's cab** remains difficult:
-the nominal ISO6400 prior largely erases its lattice. The fixed nearby3879
-profile retains weak diagonals, without clear new lattice recovery in V142.
-Below: noisy Malvar → V120 → V129 → V142 → DSCF3842 camera JPEG → independent
-DSCF3835 ISO100 AHD → ISO100 camera JPEG, at the same nearby profile. Native160px
-cells share+4EV. Both ISO100 comparators are **not GT**; processing and capture
-aperture/exposure differ. [Both priors and source metadata](docs/gfx-green-mesh.md).
-The [fixed green-phase peak extension](docs/v142-crossed-line-pilot.md#both-heldout-gfx-scenes)
-finds mixed frequency-power changes; these are descriptive ratios, not quality scores.
+The additional **fine green mesh beside the red train's cab** is visibly stronger
+with the new [phase-aware harmonic patch](docs/phase-harmonic-patch.md), under
+both fixed priors. It refines saved V120 patches from input RAW evidence. The
+lattice remains soft, and periodic correction can extend into blank parts of
+textured patches; this is an experimental patch option with no full-frame path.
+All48 tested uniform fields and96 photographic outputs retain parent pixel values.
 
-![V142 fine green mesh, left native crop](docs/images/v142-crossed-line-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-left-JPEG-plus4EV.png)
+Below: noisy Malvar → V120 → harmonic patch → DSCF3842 camera JPEG → independent
+DSCF3835 ISO100 AHD → ISO100 camera JPEG, using the fixed nearby prior.
+Native160px cells share+4EV. Both ISO100 comparators are **not GT**; aperture,
+exposure time and processing differ. [Both priors, tests and limits](docs/phase-harmonic-patch.md) ·
+[Source/ROI/checkpoint/conditioning/display metadata](docs/images/phase-harmonic-v1/manifest.json).
 
-![V142 fine green mesh, right native crop](docs/images/v142-crossed-line-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-right-JPEG-plus4EV.png)
+![Phase-aware fine green mesh, left native crop](docs/images/phase-harmonic-v1/mesh-profile3879-fine-green-mesh-left-JPEG.png)
+
+![Phase-aware fine green mesh, right native crop](docs/images/phase-harmonic-v1/mesh-profile3879-fine-green-mesh-right-JPEG.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)
