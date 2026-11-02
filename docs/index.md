@@ -11,6 +11,12 @@ The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
 adds material/camera gains and native examples, with selected color-bias tradeoffs
 and unmeasured complete-panel/frame scope.
 
+The experimental [local harmonic correction](local-phase-harmonic-patch.md)
+retains more fine mesh with less partial-texture spill than its first version.
+Its [optional full-image CLI path](phase-harmonic-inference.md) now runs complete
+102MP RGB16 outputs, with window-dependent gains, additional CPU cost and
+unchanged pixels in the tested wider sky region.
+
 V120's primary/analytic panels, independent saved-output checks, selected native
 review, matched-profile GFX comparisons and complete102MP RGB16 exports are
 finished. Fine foliage,

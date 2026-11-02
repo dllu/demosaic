@@ -2,14 +2,17 @@
 
 The [local version](local-phase-harmonic-patch.md) supersedes this experimental
 patch option: stronger response with less spill on new validation, now tested
-with V1435k and both standing scenes. The original implementation and evidence
+with V1435k and both standing scenes. Its
+[optional full-image path](phase-harmonic-inference.md) now exports102MP RGB16.
+The original implementation and evidence
 below remain preserved.
 
 **A new input-only correction makes the fine green lattice visibly stronger in
 both fixed GFX mesh windows and both noise priors.** It is a useful experimental
 native256 patch option on saved V120 outputs. It also exposes a localization
 cost: a fitted periodic field can extend into blank parts of a textured patch.
-V120 remains the general inference recommendation; full-frame use is unimplemented.
+V120 remains the general inference recommendation. This original global
+operator remains a saved-patch experiment.
 
 [Operator](../scripts/phase_harmonic_patch.py) ·
 [Results and execution](results/phase-harmonic-publication-v1.json) ·

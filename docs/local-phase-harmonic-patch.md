@@ -4,7 +4,10 @@
 stays visible, while added structure in blank areas falls substantially.**
 The correction now works with the completed V1435k parent, preserving its
 measured faint-detail gains. It remains an experimental native256 patch option.
-Blank-region spill is reduced, not eliminated; full-frame use is unimplemented.
+Blank-region spill is reduced, not eliminated. A subsequent
+[optional full-image implementation](phase-harmonic-inference.md) now covers
+complete102MP RGB16 outputs, with weaker/window-dependent recovery and added CPU
+cost. This report retains the original centred-patch comparisons and evidence.
 
 [Operator](../scripts/local_phase_harmonic_patch.py) ·
 [Publication and actual execution](results/local-phase-publication-v1.json) ·
@@ -169,7 +172,9 @@ queues reuse all256 original input arrays after sourcing the cache environment;
 all512 actual calls pass complete model/backbone/input/RNG checks. No extra
 noise is generated in recovery, and no RAW is decoded anywhere in this study.
 
-Remaining spill, weak recipes, color/highlight behavior, tile-origin sensitivity,
-full-image seams, performance and broader photo/camera support remain open.
+The subsequent [tiled inference report](phase-harmonic-inference.md) adds
+complete102MP exports, seam/odd-boundary tests, actual CPU timing and a wider sky
+check. Remaining spill, weak recipes, color/highlight behavior, tile-origin
+sensitivity and broader photo/camera support remain open.
 V120 stays the validated general recommendation; V143 plus local correction
 is the current useful experimental patch option for the tested fine mesh.

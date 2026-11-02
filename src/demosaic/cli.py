@@ -71,6 +71,17 @@ def parser():
     infer.add_argument("--batch-size", type=int, default=4)
     infer.add_argument("--device", default="cuda")
     infer.add_argument(
+        "--phase-harmonic",
+        action="store_true",
+        help="Experimental RAW-supported periodic-detail refinement after neural inference",
+    )
+    infer.add_argument(
+        "--phase-harmonic-stride",
+        type=int,
+        default=128,
+        help="Even native stride2..192 for optional fixed256-pixel harmonic patches",
+    )
+    infer.add_argument(
         "--cudnn-benchmark",
         action="store_true",
         help="Autotune CUDA FP32 tiles (adds startup time;16GiB allocator cap)",
@@ -211,6 +222,10 @@ def main(argv=None):
             },
         )
     elif args.command == "infer":
+        if args.phase_harmonic and (
+            args.phase_harmonic_stride % 2 or not 2 <= args.phase_harmonic_stride <= 192
+        ):
+            raise ValueError("Phase-harmonic stride must be even and between2 and192")
         end_to_end_started = time.perf_counter()
         if args.cudnn_benchmark and (
             torch.device(args.device).type != "cuda"
@@ -307,6 +322,19 @@ def main(argv=None):
                 self_ensemble=args.self_ensemble,
             )
         stats["cudnn_autotune"] = backend_policy
+        stats["phase_harmonic"] = {"enabled": False}
+        if args.phase_harmonic:
+            from .phase_harmonic import refine_phase_harmonics
+
+            corrected, stats["phase_harmonic"] = refine_phase_harmonics(
+                raw,
+                color_indices(pattern),
+                rgb.numpy(),
+                shot=args.shot,
+                read=args.read,
+                stride=args.phase_harmonic_stride,
+            )
+            rgb = torch.from_numpy(corrected)
         write_rgb16(output, rgb.permute(1, 2, 0).numpy(), metadata=metadata, flip=flip)
         if args.preview:
             preview = render(

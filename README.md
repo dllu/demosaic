@@ -106,18 +106,20 @@ with [local phase-aware correction](docs/local-phase-harmonic-patch.md) on V1435
 patches, under both fixed priors. Local RAW evidence reduces added structure in
 blank parts of the active new validation recipe by62%, while retaining more mesh
 response than the first harmonic correction. Spill remains measurable. This is
-an experimental256px patch option; full-frame use is unimplemented. Tested96-photo
-and48-uniform-field outputs retain their V143 parent values.
+an experimental option. [Overlapping full-image inference](docs/phase-harmonic-inference.md)
+is now available with `infer --phase-harmonic`; window placement weakens some mesh
+gains and CPU refinement adds substantial time. Tested96-photo/48-uniform-field
+patch outputs retain their V143 parent values.
 
-Below: noisy Malvar → V1435k → local correction → DSCF3842 camera JPEG → independent
+Below: noisy Malvar → full-frame V1435k → local correction → DSCF3842 camera JPEG → independent
 DSCF3835 ISO100 AHD → ISO100 camera JPEG, using the fixed nearby prior.
 Native160px cells share+4EV. Both ISO100 comparators are **not GT**; aperture,
-exposure time and processing differ. [Both priors, new validation and limits](docs/local-phase-harmonic-patch.md) ·
-[Source/ROI/checkpoint/conditioning/display metadata](docs/images/local-phase-harmonic-v1/manifest.json).
+exposure time and processing differ. [Both full-frame priors and limits](docs/phase-harmonic-inference.md) ·
+[Source/ROI/checkpoint/conditioning/display metadata](docs/images/phase-harmonic-inference-v1/manifest.json).
 
-![Local phase-aware fine mesh, left native crop](docs/images/local-phase-harmonic-v1/mesh-profile3879-fine-green-mesh-left-JPEG.png)
+![Full-frame local phase-aware fine mesh, left native crop](docs/images/phase-harmonic-inference-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-left-JPEG.png)
 
-![Local phase-aware fine mesh, right native crop](docs/images/local-phase-harmonic-v1/mesh-profile3879-fine-green-mesh-right-JPEG.png)
+![Full-frame local phase-aware fine mesh, right native crop](docs/images/phase-harmonic-inference-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-right-JPEG.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)
@@ -140,6 +142,8 @@ PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
 Noise values are examples; use suitable camera/input priors.
+Optional `--phase-harmonic` adds local periodic-detail refinement; see its
+[complete-frame comparisons and limitations](docs/phase-harmonic-inference.md).
 [Linear DNG + full-resolution JPEG batch export](docs/dng-export.md) preserves
 camera RGB and adapts existing darktable XMP edits. Add `--hot-pixels` to repair
 isolated Bayer defects before restoration.

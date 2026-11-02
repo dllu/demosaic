@@ -149,6 +149,9 @@ unresized crop pixels. Across all three reviews, actual cost is499 calls,
 including the explicitly documented49 first-point recovery calls. No new
 review noise, RAW decodes or control-model inference is added.
 
-Full427-photo, camera/color, full-frame and speed results for V143 remain open.
+The subsequent [full-frame report](phase-harmonic-inference.md) now runs V143 on
+the complete main GFX scene and both fine-mesh priors, with optional local
+correction, actual timing and verified RGB16 exports. Full427-photo, camera/color
+quality and a dedicated speed benchmark remain open.
 Its measured faint/shadow gains are useful for further quality work; they do
 not establish a general replacement for V120's completed broader evaluations.

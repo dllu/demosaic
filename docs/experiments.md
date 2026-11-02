@@ -4,7 +4,8 @@ The [completed V1435k report](v143-final5000-quality.md) gains0.26493dB faint
 ADC PSNR and4.64% lower noisy-flat spatial RMS versus V120, with coarse/ADC
 costs and no clear new real-mesh recovery. The [local phase-aware correction](local-phase-harmonic-patch.md) now gives
 stronger mesh on V143 patches with less blank-region spill in new validation.
-Spill remains measurable; full-frame support remains unimplemented.
+Spill remains measurable. [Optional full-image tiling](phase-harmonic-inference.md)
+now produces complete102MP RGB16 outputs; window sensitivity and CPU cost remain.
 
 **V120 Small is the current general recommendation in V84's architectural family.**
 Its photo/known/unseen means are37.04008/54.31272/54.00872dB, with ADC maximum55.52DN16.

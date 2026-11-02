@@ -1,5 +1,12 @@
 # Current method research
 
+The [local phase-aware correction](local-phase-harmonic-patch.md) makes fine
+mesh more visible on V143 while reducing the original harmonic correction's
+partial-texture spill. The [optional full-image implementation](phase-harmonic-inference.md)
+now runs actual102MP RGB16 outputs under both mesh priors. Soft diagonals improve;
+the crossing family remains weak, window positions matter and CPU refinement
+adds substantial time. The wider tested sky retains every parent pixel.
+
 The [completed V1435k review](v143-final5000-quality.md) improves faint ADC
 PSNR0.26493dB and noisy-flat spatial RMS4.64% versus V120. Coarse error remains
 2.63% higher and ADC-only spatial RMS12.85% higher. No clear new real mesh

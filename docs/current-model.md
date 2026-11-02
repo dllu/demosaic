@@ -5,15 +5,18 @@ patches gives stronger fine diagonals in both mesh windows/priors. In the active
 new validation recipe, added structure in complete-patch blank regions falls62%
 versus the first harmonic correction, with stronger response and lower error.
 Spill remains measurable; tested96-photo/48-flat parent values are unchanged.
-This is the current experimental native256 patch option; full-frame support
-remains unimplemented. V120 stays the validated general recommendation.
+The [optional tiled inference path](phase-harmonic-inference.md) now processes
+complete102MP RGB16 outputs. Regular window placement can weaken the centred-patch
+gain, and CPU correction is slow. V120 stays the validated general recommendation.
 
 The [completed V1435k review](v143-final5000-quality.md) gains0.26493dB faint
 ADC PSNR and4.64% lower noisy-flat spatial RMS over V120 on fixed support.
 Coarse noisy error remains2.63% higher and ADC-only spatial RMS12.85% higher;
 training alone still lacks clear new mesh recovery. The read-only endpoint is
 `/mnt/external/demosaic/models/v143-final5000.pt`. Its faint/shadow gains are
-useful for further quality work; full427/camera/full-frame evaluation remains open.
+useful for further quality work. [Complete-frame GFX inference](phase-harmonic-inference.md)
+now covers the main scene and both fine-mesh priors; full427/camera evaluation
+remains open.
 
 The [completed V1411k loss comparison](v141-gradient-epsilon-pilot.md) gains
 .01528dB faint ADC PSNR over matched V129, with mixed weak-band changes and no

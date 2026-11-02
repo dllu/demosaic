@@ -8,7 +8,10 @@ both fixed priors, with both camera JPEGs and the main foliage/fence/sky/buildin
 Independent ISO100 references remain **not exactGT**. The soft lattice remains
 visible and often stronger, while new synthetic validation shows less spill into
 blank regions. Spill is reduced, not eliminated. Sky, building and foliage
-retain parent values. Full-frame use remains unimplemented.
+retain parent values in those centred windows. The
+[complete-frame tiled comparison](phase-harmonic-inference.md) now covers the
+main scene and both fine-mesh priors, with RGB16 verification and a wider sky
+check. Window placement changes the correction strength.
 
 ## V143 completed5,000: faint gains, real mesh still weak
 
