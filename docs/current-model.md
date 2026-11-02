@@ -1,10 +1,12 @@
 # Current model choices
 
-The [complete standalone V1401k native/flat review](v140-standalone-pilot.md)
-adds no useful fine-mesh recovery over V120: ordinary/faint changes are
-+.00003/−.00015dB, with near-parent flat/sky variation. V120 remains the general
-choice. The October V125/V131 workers and their dependents have stopped; see
-the execution audit in that report.
+The [completed V1411k loss comparison](v141-gradient-epsilon-pilot.md) gains
+.01528dB faint ADC PSNR over matched V129, with mixed weak-band changes and no
+new fine-mesh recovery. Both continuations have about5.8% more coarse noisy-flat
+error than V120, which remains the general choice. The next
+[crossed-line/empty data trial](crossed-line-training-data.md) has no trained
+quality result yet. The October V125/V131 workers and their dependents stopped;
+the [V140 execution audit](v140-standalone-pilot.md) preserves their receipts.
 
 **V120 Small is the general restoration and quality-development recommendation.**
 Its completed 427-source photo mean is 37.04008 dB, known/unseen measured-CFA means
@@ -76,6 +78,8 @@ under this new ordering remains unmeasured.
 | Conditioning global matching | [Completed V1371k](v137-global-conditioned-quality.md) gives faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and weak real mesh. A [trained-memory ablation](global-memory-contribution.md) finds only0.83–1.39% feature-offset change on six contexts despite varied attention; it does not measure final RGB influence |
 | Adapting only the global branch | [V138](raw-global-only-training.md) freezes91 parent model/EMA tensors and trains18 branch tensors at LR1e−3. Genuine CPU/CUDA16+2 checks pass; original1k production remains unstarted after the V125 dependency failure. Quality is unmeasured |
 | Removing the global branch's local bypass | [V139](raw-global-memory-only.md) retains15 memory-path tensors with the V120 parent frozen. CPU/CUDA16+2 checks pass; original1k remains unstarted after the V138 dependency failure. Quality is unmeasured |
+| Separate gradient-error smoothing | [V141](v141-gradient-epsilon-pilot.md) changes only gradient epsilon3e−4→3e−5: faint ADC+.01528dB versus V129, mixed local detail and no new mesh recovery; noisy-flat coarse error near V129 and5.75% above V120. Default remains inherited pixel epsilon |
+| Crossed-line and empty training targets | [Optional data source / V142](crossed-line-training-data.md) adds broad thin-line geometry and explicit absence within the existing weak quota. Reader/resume checks pass; trained quality unmeasured |
 | Comparing neighboring gradients before memory | [V140](raw-patch-memory.md) adds2,048 zero-initialized descriptor parameters. Standalone1k/102-input native/faint/GFX and48-flat reviews complete: ordinary+.00003dB/faint−.00015dB over V120, no clear mesh recovery, near-parent flat/sky variation |
 | Photographic variety at fixed budget | [V133](reviewed-quota-training.md) lowers V131's reviewed quota from50% to5% with the same parent/data/20k horizon. CPU/CUDA16+2 checks pass; original production/review dependency queues exited; trained quality remains unmeasured |
 | Cleaned corpus and source visitation | [V134/V135](photo-epoch-training.md) compares replacement/epoch ordering on identical90,778/33 data. All four CPU/CUDA16+2 checks pass; original20k production/full-review dependency queues exited; trained quality remains unmeasured |

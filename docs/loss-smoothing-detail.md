@@ -152,6 +152,10 @@ share the setting.
 
 The [V141 pilot](v141-gradient-epsilon-pilot.md) isolates.00003 gradient epsilon
 against savedV129's.0003 at the same1k/data/seed/parent, retaining.0003 pixels.
-The70-test suite and real CPU/CUDA16+2 checks pass. Its full training is running;
-trained quality remains unmeasured. A smaller error-smoothing scale is not a
-clean-target edge mask or a guarantee of restored detail/flat-region safety.
+The104 targeted loss/noise-pair/faint-path tests and real CPU/CUDA16+2 checks
+pass. Full1k and matched102-input/native/GFX/48-flat reviews are complete:
+faint ADC PSNR recovers.01528dB versus V129, but weak-band changes are mixed
+and the real fine mesh shows no clear new recovery. Coarse noisy-flat error
+is near V129 and5.75% above V120; the option stays off by default. A smaller
+error-smoothing scale is not a clean-target edge mask or a guarantee of
+restored detail/flat-region safety.

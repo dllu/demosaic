@@ -132,6 +132,7 @@ def test_actual_training_uses_mesh_data_and_changed_fraction_rejects_before_mode
         "workers": 0,
         "cpu_threads": 2,
         "amp": False,
+        "data_seed_per_step": True,
         "checkpoint_every": 2,
         "min_available_gb": 0,
         "augmentation_downsample": 2,
@@ -152,30 +153,46 @@ def test_actual_training_uses_mesh_data_and_changed_fraction_rejects_before_mode
     # Choose the training index by the actual reader rule, without changing the target.
     index = next(i for i in range(100) if 0.1 <= random.Random(52 + i).random() < 0.15)
     recipe["seed"] = 52 + index  # First DataLoader item is index0.
-    expected = dataset(
+    expected_data = dataset(
         tmp_path,
         weak_texture_fraction=0.15,
         mesh_texture_fraction=0.05,
         optical_blur_probability=0,
         seed=recipe["seed"],
-    )[0]["rgb"]
+    )
+    expected = [expected_data[i]["rgb"] for i in range(2)]
     import demosaic.train as training
 
     prepare = training.prepare_training_batch
     observed = []
 
     def check_target(step, domain, clean, **kwargs):
-        assert step == 1 and domain == "commons" and torch.equal(clean["rgb"][0], expected)
+        assert (
+            step in (1, 2)
+            and domain == "commons"
+            and torch.equal(clean["rgb"][0], expected[step - 1])
+        )
         observed.append(step)
         return prepare(step, domain, clean, **kwargs)
 
     monkeypatch.setattr(training, "prepare_training_batch", check_target)
     path = tmp_path / "train.yaml"
+    recipe["run"] = str(tmp_path / "full")
+    path.write_text(yaml.safe_dump(recipe))
+    full = torch.load(train(path), weights_only=True)
+    recipe["run"] = str(tmp_path / "train")
     path.write_text(yaml.safe_dump(recipe))
     checkpoint = train(path, stop_after=1)
     state = torch.load(checkpoint, weights_only=True)
     assert state["step"] == 1 and state["config"]["mesh_texture_fraction"] == 0.05
-    assert observed == [1]
+    resumed = torch.load(train(path, resume=checkpoint), weights_only=True)
+    assert observed == [1, 2, 1, 2]
+    for field in ("model", "ema"):
+        assert all(torch.equal(v, resumed[field][k]) for k, v in full[field].items())
+    for k, values in full["optimizer"]["state"].items():
+        assert all(
+            torch.equal(v, resumed["optimizer"]["state"][k][name]) for name, v in values.items()
+        )
     recipe["mesh_texture_fraction"] = 0.04
     path.write_text(yaml.safe_dump(recipe))
     monkeypatch.setattr("demosaic.train.JointDemosaic", lambda *_: pytest.fail("constructed model"))

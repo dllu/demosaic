@@ -25,10 +25,13 @@ V134/V135 keep their 33-region data; existing jobs retain declared inputs.
 An optional [photographic epoch order](docs/photographic-epoch-order.md) covers
 all prepared photos within 20k steps; its trained quality remains unmeasured.
 
-The [completed V1401k native/flat review](docs/v140-standalone-pilot.md) finds
-near-V120 quality and no new fine-mesh recovery. The 48-input exact-flat check
-also remains near V120. V125/V131 stopped at the memory reserve; their dependent
-October queues exited. Original evidence remains preserved.
+The [completed V141 gradient-loss review](docs/v141-gradient-epsilon-pilot.md)
+recovers .01528dB faint ADC PSNR against matched V129, with mixed local detail
+and no new fine-mesh recovery. Both continuations have about5.8% more coarse
+noisy-flat error than V120. The next data-only trial adds
+[weak crossed lines and empty backgrounds](docs/crossed-line-training-data.md).
+V125/V131 stopped at the memory reserve; their dependent October queues exited.
+Original evidence remains preserved.
 
 | Current quality work | Evidence and next comparison |
 | --- | --- |
@@ -42,7 +45,8 @@ October queues exited. Original evidence remains preserved.
 | [V138 frozen-parent global branch](docs/raw-global-only-training.md) | Genuine CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR1e−3/1k recipe remains unstarted after the V125 dependency failure; quality is unmeasured |
 | [V139 memory-only branch](docs/raw-global-memory-only.md) | Removes the direct local/MLP shortcut. Genuine CPU/CUDA16+2 checks pass; original1k training remains unstarted after dependency failure. Image quality is unmeasured |
 | [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all1,000 training batches match V137 |
-| [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | CPU/CUDA16+2 checks pass; matched1k training from V120 is running. Only gradient-error epsilon changes3e−4→3e−5 against saved V129; fixed102-input/native/GFX and48-flat reviews follow. Quality unmeasured |
+| [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.01528dB over V129, mixed local detail, no new mesh recovery. Noisy-flat coarse error near V129 and5.75% above V120; defaults unchanged |
+| [V142 crossed-line/empty data](docs/crossed-line-training-data.md) | Data-only1k recipe replaces.10 of the existing.15 weak quota; half of new draws have no lines. Reader/resume tests and CPU/CUDA16+2 pass; fresh1k production running. Trained quality unmeasured |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected

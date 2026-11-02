@@ -1,5 +1,23 @@
 # Fine green fence beside the red train
 
+## V141 gradient-loss1k: lattice remains weak
+
+The [completed V141/native/48-flat report](v141-gradient-epsilon-pilot.md) finds
+no clear new lattice recovery at either fixed conditioning. The nominal ISO6400
+prior largely erases it; the unchanged nearby3879 profile retains weak diagonals.
+The small faint-score recovery over matched V129 does not establish real-mesh
+recovery. Noisy-flat coarse error stays near V129 and5.75% above V120.
+
+Below: noisy Malvar → V120 → V129 → V141 → DSCF3842 camera JPEG → independent
+DSCF3835 ISO100 AHD → ISO100 camera JPEG. All cells retain native160 pixels with
+shared+4EV display. Camera processing, aperture and exposure differ; both
+ISO100 comparators are **not exact GT**. Both profiles are included in the
+[complete four-board metadata](images/v141-gradient-epsilon-v1/camera-JPEG/manifest.json).
+
+![V141 left native fine mesh and camera JPEGs](images/v141-gradient-epsilon-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-left-JPEG-plus4EV.png)
+
+![V141 right native fine mesh and camera JPEGs](images/v141-gradient-epsilon-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-right-JPEG-plus4EV.png)
+
 ## V140 standalone1k: still missing the fine lattice
 
 The [completed V140/native/48-flat report](v140-standalone-pilot.md) shows no
@@ -52,7 +70,7 @@ gain. V120's two saved predictions were adopted without rerunning it. V122/V123
 final mesh review is complete below. A separate
 [V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
 V124's [14k progress review](#v124-at-14000-updates) is complete; its original
-20k control has completed and V125's original20k worker is running.
+20k control has completed and V125's original20k worker stopped at the memory reserve.
 The [completed V12420k native check](#v124-at20k) and [V1256k progress](#v125-at6k)
 are now measured; neither shows clear new lattice recovery.
 

@@ -34,11 +34,14 @@ intact.
 
 The [optional crossed-line/empty training source](crossed-line-training-data.md)
 adds broad fine structure with explicit absence controls inside the existing
-procedural quota. Its44-test suite passes; trained quality is still unmeasured.
+procedural quota. Its44-test suite and CPU/CUDA16+2 checks pass; data-only V142
+production is running, with trained quality still unmeasured.
 
-The [V141 small-gradient-loss pilot](v141-gradient-epsilon-pilot.md) is training
-its checked1k recipe against saved V129, with matched native/GFX and uniform-field
-reviews prepared. It has no trained-quality conclusion yet.
+The [completed V141 small-gradient-loss pilot](v141-gradient-epsilon-pilot.md)
+recovers.01528dB faint ADC PSNR over matched V129, with mixed local-band changes
+and no new real-mesh recovery. Its48 exact-flat observations and added V129
+controls show about5.8% more coarse noisy-flat error than V120 in both
+continuations. Native triplets, both GFX pairs and independent audits are published.
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
 weak-carrier gain, but does not improve broad weak natural detail and worsens
@@ -70,12 +73,12 @@ updates the current guides without an old promotion gate.
 | Evaluation | [Current endpoint review queues](endpoint-quality-review.md), [quality/noise diagnostics](evaluation.md), [natural fine detail](heldout-detail.md), [conditional-noise bias](conditional-noise-response.md), [loss-gradient replay](conditional-loss-gradients.md), [RawNIND variants](rawnind-variants.md), [noise/detail tradeoff](noise-conditioning.md), [ADC-only consistency](adc-consistency.md), [V104 color/texture projection diagnostics](v104-adc-color-projection.md), [GFX test](gfx-qualitative.md), [prepared test reserve](paired-reserved-test.md) |
 | Method research | [Current research](research.md), [RAW spatial features](raw-spatial-features.md), [learned RAW frequency prototype](learned-raw-frequency-features.md), [measured green-phase mesh diagnostic](green-phase-spectrum.md) |
 | Completed global-attention pilot | [V136 matched1k quality and native crops](v136-global-attention-quality.md): tiny gains over V129, mixed local detail, no clear new mesh recovery. [Operator and genuine checks](raw-global-attention.md); V120 remains the general choice |
-| Spatial-trial control progress | [V131 retained1k/20k review](v131-progress1000-quality.md): tiny ordinary gain, deeper-shadow/faint regressions and no clear new mesh recovery; native triplets, both GFX pairs and corrected DSCF3835 camera-JPEG comparisons. Original20k training continues; V132 follows |
+| Spatial-trial control progress | [V131 retained1k/20k review](v131-progress1000-quality.md): tiny ordinary gain, deeper-shadow/faint regressions and no clear new mesh recovery; native triplets, both GFX pairs and corrected DSCF3835 camera-JPEG comparisons. Original20k worker stopped at the memory reserve; V132 production unstarted |
 | Completed global-conditioning pilot | [V137 measured quality, native triplets and both GFX pairs](v137-global-conditioned-quality.md): stronger memory adaptation, faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and no clear new fine-mesh recovery. [Operator and mechanism](raw-global-conditioning.md) |
-| Global-branch training | [V138 frozen-parent pilot](raw-global-only-training.md): CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR and1k quality review are queued after V125 completes; quality is unmeasured |
+| Global-branch training | [V138 frozen-parent pilot](raw-global-only-training.md): CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR and1k quality recipe remain prepared after the original V125 dependency queue exited; quality is unmeasured |
 | Trained global-memory contribution | [V137 feature-level ablation](global-memory-contribution.md): removing memory write changes0.83–1.39% of branch-offset RMS on six contexts. Independent attention/array audit complete; same-input V138 companion queued after its original quality/faint reviews |
-| Mean-loss progress | [V125 at2k](v125-progress2000-quality.md): highlight-dominated eight-photo monitor gain over V1242k, weaker faint texture versus V120, and no clear new mesh recovery. Native GT triplets, both GFX pairs and corrected DSCF3835 camera JPEGs published; original20k comparison continues |
-| Memory-only global branch | [V139 implementation and queued pilot](raw-global-memory-only.md): CPU/CUDA16+2 checks pass; original1k training and matched native/faint/GFX review are queued after V138's existing chain, with510 controls reused. Image quality remains unmeasured |
+| Mean-loss progress | [V125 at2k](v125-progress2000-quality.md): highlight-dominated eight-photo monitor gain over V1242k, weaker faint texture versus V120, and no clear new mesh recovery. Native GT triplets, both GFX pairs and corrected DSCF3835 camera JPEGs published; original20k comparison remains incomplete after the memory-reserve stop |
+| Memory-only global branch | [V139 implementation and queued pilot](raw-global-memory-only.md): CPU/CUDA16+2 checks pass; original dependency queue exited;1k training and matched native/faint/GFX review remain prepared, with510 controls reusable. Image quality remains unmeasured |
 | Remaining requirements | [Current completion checklist](requirements.md), [historical progress log](requirements-archive.md) |
 
 Per-experiment reports contain numerical evidence, source/ROI metadata,

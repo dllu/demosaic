@@ -1,5 +1,23 @@
 # GFX100S qualitative comparisons
 
+## V141 gradient-loss1k: no new visible mesh recovery
+
+The [completed V141 loss/native/flat report](v141-gradient-epsilon-pilot.md)
+finds mixed weak-band changes without clear new real-mesh recovery. Foliage
+remains painterly, larger fence geometry coherent and sky quiet. These
+retained512px-context native160 sensor-pixel crops share+2EV display.
+DSCF3879 ISO6400 → V141 → independent DSCF3880 ISO100 f/5.6, **not GT**.
+[Source/ROI/checkpoint/conditioning/display metadata](images/v141-gradient-epsilon-v1/manifest.json).
+
+![V141 main foliage native triplet](images/v141-gradient-epsilon-v1/main-foliage-triplet.png)
+
+![V141 main fence native triplet](images/v141-gradient-epsilon-v1/main-chain-link-fence-triplet.png)
+
+Sky32px-block variation is6.85% below V120 and1.67% above matched V129; this is
+a descriptive real-image statistic, not exact-GT error. Exact noisy flats have
+coarse error near V129 and5.75% above V120. V120 remains the general choice.
+No full-frame or broad-camera V141 quality result is claimed.
+
 ## V140 standalone1k: near-parent real-photo output
 
 The [completed V140 native/flat review](v140-standalone-pilot.md) finds no clear
@@ -29,7 +47,7 @@ scene and full-frame output, plus the additional DSCF3842/**DSCF3835** green
 mesh. Both new full-frame methods use identical32px tile grids; older saved
 pipelines retain their recorded grids/profiles with differences labeled.
 The [V1311k context review](v131-progress1000-quality.md) is now complete,
-with native comparisons below; its original20k training continues.
+with native comparisons below; its original20k worker stopped at the memory reserve.
 
 The [V137 conditioned-global review](v137-global-conditioned-quality.md) is
 complete on the four established512px contexts and corrected extra mesh pair,

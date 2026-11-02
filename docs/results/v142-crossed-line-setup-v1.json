@@ -1,0 +1,123 @@
+{
+  "timestamp_UTC": "2026-11-02T18:40:40.868467+00:00",
+  "status": "CPU-CUDA16plus2-pass-production1000-running-quality-unmeasured",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-crossed-line-v1/plan.json",
+    "sha256": "3ffa9f6b1c65978f1f4455808f786a7389a577b7e45f19f05c863988b2e9d8fe"
+  },
+  "controller": {
+    "pid": 980459,
+    "created": 1793644424.8
+  },
+  "production_worker": {
+    "pid": 1003647,
+    "created": 1793644715.97
+  },
+  "controller_and_worker_live_at_receipt": true,
+  "completed_checks": [
+    {
+      "phase": "CPU",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-crossed-line-v1/CPU-V142-result.json",
+        "sha256": "1d5589725154dd78fd5c098d72f8835415e410557febb0ee6a3133b60050bb3c"
+      },
+      "updates": 18,
+      "parent91_and_official_encoder_exact": true,
+      "input_comparison": {
+        "domain_batches": {
+          "commons": 9,
+          "native": 6,
+          "paired": 3
+        },
+        "changed_input_batches": {
+          "commons": 2
+        },
+        "all_native_paired_clean_and_noisy_match": true
+      },
+      "resume_rejections": {
+        "disabled": "Resume mesh texture fraction differs; initialize a new run",
+        "invalid": "Mesh texture fraction must be finite and within [0,1]"
+      },
+      "CUDA_peak_allocated_bytes": 0
+    },
+    {
+      "phase": "CUDA",
+      "result": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-crossed-line-v1/CUDA-V142-result.json",
+        "sha256": "e6870c7f0e281d923ad2ffaafdcfda658f6798bd43ed61c6f3fc91dafa1ff2aa"
+      },
+      "updates": 18,
+      "parent91_and_official_encoder_exact": true,
+      "input_comparison": {
+        "domain_batches": {
+          "commons": 9,
+          "native": 6,
+          "paired": 3
+        },
+        "changed_input_batches": {
+          "commons": 7
+        },
+        "all_native_paired_clean_and_noisy_match": true
+      },
+      "resume_rejections": {
+        "disabled": "Resume mesh texture fraction differs; initialize a new run",
+        "invalid": "Mesh texture fraction must be finite and within [0,1]"
+      },
+      "CUDA_peak_allocated_bytes": 7041804800
+    }
+  ],
+  "actual_reader_resume_tests": {
+    "count": 44,
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/crossed-lines-tests-v4.log",
+      "sha256": "5eaab491232706564316e2a01d80a6b966675cdb5b6d7a38fa137fdac394af26"
+    },
+    "scope": "Actual selected targets and exact full2 versus1+1 resumed model/EMA/Adam; includes12 gradient tests also reported in V141104 count"
+  },
+  "review_binding_tests": {
+    "count": 10,
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/crossed-line-review-binding-tests-v1.log",
+      "sha256": "06cdf8bcb89efbe1e002f486792f1f4e5041790a94a9ede6adf87e5214f877f9"
+    }
+  },
+  "primary_review_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/queue-plan-v1.json",
+    "sha256": "34700e62ab3e5cb1742acfc29f9659a8c21ab106ae38108b13171f3ddfce9fd0"
+  },
+  "faint_analysis_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/faint-analysis-plan-v1.json",
+    "sha256": "b6581b66f0b9766169d4d17f2ec7774e5b44c72354df83c8ddff30565c57b675"
+  },
+  "flat_review_queue": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-flat-safety-v1/queue-plan-v1.json",
+    "sha256": "3101bf9a6a255818110847e0d32a26952fe1bf3749d29b10a9f5e9e01e9e3ece"
+  },
+  "flat_operator_bindings": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V142-native-v1/flat-operator-bindings-v1.json",
+    "sha256": "277d8a95bc4599d0c925884b124e1d3ed018ae0768cde3854e06345e182587cf"
+  },
+  "endpoint_binder_and_review": {
+    "path": "/home/dllu/proj/demosaic/scripts/review_crossed_line_pilot.py",
+    "sha256": "d1da02ac967c5dbd913c494edceb26db9cb927d554bef11270b94c08bac912ab"
+  },
+  "flat_three_method_reporter": {
+    "path": "/home/dllu/proj/demosaic/scripts/compare_pilot_flat_controls.py",
+    "sha256": "1590a36186507274047b3d4efa93758f776228cda552028273ccb94140608350"
+  },
+  "reusable_V129_flat_control_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V129-flat-control-v1/plan-v1.json",
+    "sha256": "00c87a979ae94618457931b3e47527f5722123dbc21f83f6be53135614f4c08a"
+  },
+  "reusable_V129_flat_collection": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V129-flat-control-v1/collection-v1.json",
+    "sha256": "b32a2a82a4e01a643c27d7cf40c0de0e86c641a296d4b120547afafdb4d133f0"
+  },
+  "new_production_forward_plan": 1000,
+  "native_candidate_calls_planned": 102,
+  "flat_candidate_calls_planned": 48,
+  "reused_control_predictions_planned": 504,
+  "review_started": false,
+  "available_RAM_GiB_at_receipt": 68.26448059082031,
+  "scope": "V142 data-only1k from V120: sameV129 recipe except.10 of existing.15 weak quota replaced by crossed-line/empty sources; half absent. Pixel/gradient epsilon.0003. All native/paired clean/noisy inputs match; Commons intentionally changes. Fixed102native/faint/GFX+48flat review, both mesh priors/cameraJPEGs. No quality gain claimed; production continues with original8h bound and32GB memory floor. No new noise/RAW planned in review; no unavailable dataz access."
+}

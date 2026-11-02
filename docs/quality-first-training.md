@@ -20,10 +20,16 @@ has completed its checked1k recipe and matched native/GFX/48-flat reviews.
 It stays near V120 with no clear new mesh recovery. Historical queue descriptions below describe their
 original plans, not currently live workers.
 
-The [V141 loss pilot](v141-gradient-epsilon-pilot.md) is now training a matched
-1k run against saved V129. It changes only spatial-gradient error smoothing,
-with70 tests and genuine CPU/CUDA16+2 checks passed. Native/GFX and48 exact-flat
-reviews are fixed before output collection; quality remains unmeasured.
+The [completed V141 loss pilot](v141-gradient-epsilon-pilot.md) changes only
+spatial-gradient error smoothing: faint ADC+.01528dB over V129, mixed local detail
+and no new mesh recovery. Both continuations have about5.8% more coarse
+noisy-flat error than V120. Native triplets, both GFX pairs and48 exact-flat
+observations with added V129 controls are published.
+
+The [V142 data-only pilot](crossed-line-training-data.md) adds weak crossed
+lines and empty backgrounds inside the existing procedural quota, keeping the
+original loss. Its44-test reader/resume suite and CPU/CUDA16+2 checks pass;
+fresh1k production is running under the resource-aware controller. Quality remains unmeasured.
 
 ## Active quality questions
 

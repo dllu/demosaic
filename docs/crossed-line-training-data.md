@@ -2,15 +2,18 @@
 
 **An optional procedural source now supplies weak crossed lines and empty
 backgrounds.** It is implemented in the actual training reader and remains off
-by default. The prepared V142 data-only recipe has not started production and
-has no restoration-quality result. V141's frozen loss trial is unchanged.
-[Sources, tests, targets and prepared recipe](results/crossed-line-training-data-v1.json).
+by default. V142's CPU/CUDA16+2 checks pass and fresh1k data-only production
+is running; matched restoration-quality review follows. No trained gain
+is claimed. V141's frozen loss trial is unchanged.
+[Sources, tests and target inspection](results/crossed-line-training-data-v1.json) ·
+[Actual V142 setup and fixed review](results/v142-crossed-line-setup-v1.json).
 
 The previous weak generator provides band-limited fields and curved fibers.
 This source adds two crossing families of thin wires, without copying any test
 capture or fitting its geometry. Periods span6–32 final sensor pixels, wire
 sigma.4–1.2px and family separation35–145°. Level spans2⁻¹⁰–2⁻¹ and requested
-peak relative contrast.005–.2. Neutral and chromatic positive/negative line
+peak relative contrast.005–.2,relative to the sampled level; channel tint changes per-channel
+contrast. Neutral and chromatic positive/negative line
 contrasts vary independently of presence. Backgrounds are constant or gently
 affine, with random colors.
 
@@ -65,16 +68,21 @@ from the same parent remains supported.
 The44-test data/regression suite checks independent NumPy64 construction,
 background/mean/presence behavior, continuous precision and RNG preservation,
 exact unchanged routing outside the replaced subquota, validation exclusion,
-quota bounds and an actual optimizer update on an asserted crossed-line reader
-target. Changed-fraction resume rejects before model construction. Some tests
+quota bounds and actual training with an asserted crossed-line reader target. A
+two-step run exactly matches1+1 resumed model/EMA/Adam states; changed-fraction
+resume rejects before model construction. Some tests
 overlap the gradient-loss suite;44 is this suite's count, not additional unique
 loss tests.
 
 The [prepared V142 recipe](../configs/quality-v120-crossed-line-pilot-v142.yaml)
 keeps V129's V120 parent,cohort,seed70,quota.5,zeroPSF,B16/native256/BF16,
 LR1e−5,warm100 and1k budget. It keeps pixel/gradient epsilon.0003, independently
-of V141's tested loss change. Actual CPU/CUDA checks, non-Commons noise/input
-comparisons and matched material/GFX/uniform-field review remain required.
+of V141's tested loss change. CPU/CUDA16+2 pass, including exact native/paired
+clean/noisy hashes versus V129 and genuine changed-fraction resume rejection.
+Fresh1k production is running. Fixed102-input native/faint/GFX and48-flat review
+queues are prepared; actual matched quality remains required. The endpoint
+binder requires complete finite training state, exact frozen source and matched
+non-Commons inputs, with10 tests rejecting substituted inputs/schedules.
 V129's newly retained48 flat controls can be reused. Both protected GFX pairs,
 their JPEGs and siblings remain out of training.
 
