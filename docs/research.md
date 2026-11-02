@@ -1,5 +1,10 @@
 # Current method research
 
+The [completed V1401k standalone/native/48-flat review](v140-standalone-pilot.md)
+finds that the frozen-parent patch-memory recipe stays near V120 without new
+fine-mesh recovery. It adds independently audited coarse flat-error and
+real-sky variation measurements for future detail work.
+
 **[V120 Small](current-model.md) is the current general baseline.** It keeps
 V84's pretrained DRUNet RGB restoration trunk with physical noise/camera
 conditioning and official frozen DINOv3 ConvNeXt-Small spatial features.

@@ -1,71 +1,178 @@
-# Standalone V140 patch-memory pilot
+# V140 patch-memory endpoint: stable flats, no new mesh recovery
 
-**V140 is now being trained on its checked 1,000-update recipe. Quality remains
-unmeasured; V120 Small stays the general recommendation.** The new execution
-separates this previously unstarted pilot from the failed October dependency
-chain. [Execution audit and frozen plans](results/v140-standalone-setup-v1.json).
+**The complete1,000-update V140 pilot stays essentially at V120 image quality.**
+It does not visibly recover the difficult fine green lattice, and the flat/sky
+checks show no obvious new splotches. V120 Small remains the general recommendation.
+The RAW-memory path needs a more effective contribution; this recipe provides
+no useful restored-quality gain.
 
-The earlier V125 and V131 workers both stopped at the 32 GB available-memory
-floor, and their dependent controllers exited. They are not still running.
-Their saved steps are8,799/14,549 of20k. Partial checkpoints, original plans, logs, failed receipts and completed
-checks remain intact. This is a new, explicit run of V140, rather than a restart
-of either long worker or an extension of their training budgets.
+[Measurements and execution](results/v140-standalone-quality-v1.json) ·
+[Per-CFA scores](results/v140-standalone-metrics-v1.csv) ·
+[Native source/ROI/checkpoint/noise/display metadata](images/v140-standalone-v1/manifest.json) ·
+[Architecture](raw-patch-memory.md).
 
-V140's hypothesis is that neighboring RAW-gradient arrangements help match
-repeated faint structure. The implementation adds a learned neighborhood
-descriptor before memory attention. Every output feature passes through memory;
-the direct local shortcut used in V137 is absent. The architecture remains
-[the already checked patch-memory operator](raw-patch-memory.md).
+## What was actually trained
 
-The recipe starts freshly from V120's 20k EMA, with the original frozen 69-module
-training source, 90,782 photos/27 reviewed regions, seed70, 50% reviewed-region
-quota, native256/B16/BF16, zero optical PSF, LR.001 and100 warmup updates.
-Only16 branch tensors/16,192 parameters train. All91 parent model/EMA tensors
-must remain exact. Each of1,000 clean/noisy training batches must match saved
-V137 witnesses. Existing CPU/CUDA16+2 checks are adopted without replay.
+V140 starts freshly from V120's20k EMA, using the original frozen69-module
+training source,90,782 photos/27 reviewed regions,seed70,50% reviewed-region
+quota,native256/B16/BF16,zero optical PSF,LR.001 and100 warmup updates.
+Only16 RAW-memory tensors/16,192 parameters train. All91 parent tensors remain
+exact in model and EMA after1,000 updates. Each of1,000 clean and noisy batches
+matches the saved V137 training witnesses. There are1,000 optimizer/root calls,
+64 validation and1,064 encoder calls over16,000 target slots. All107 model/EMA
+tensors and16 Adam states are finite at1,000; the official encoder is unchanged.
+Peak allocated CUDA memory is7,998,901,760 bytes.
 
-This run can establish whether the full branch provides useful quality, but
-comparison with V137 changes operator, training scope and branch learning rate.
-It does not isolate the neighborhood descriptor against V139, whose production
-run remains unstarted. No architecture promotion depends on completing that
-historical execution chain.
+Checkpoint SHA256:
+`882a6ebaeb048679ec62cd8160cd146b631172eb913a08efcfca208908131b49`.
 
-The standalone source package includes dependency and third-party license files
-required by the trainer's source snapshot. Two earlier startup attempts exposed
-missing assets before model construction; their logs are preserved. The corrected
-worker has executed real updates with matched input witnesses. The12GiB CUDA
-cap,50GiB launch RAM,32GB runtime floor and original8h worker timeout remain.
-No `/mnt/dataz` access is needed. The targeted feature/scope/analytic-metric
-suite passes38 tests. An initial invocation named a nonexistent test file; the
-first collected run then found an overly tight FP64 plane-fit tolerance in the
-new test. Correcting that tolerance leaves the metric code unchanged.
+The operator adds neighboring gradient descriptors before memory matching and
+removes V137's direct local/MLP shortcut. Against V137, operator, training scope
+and branch learning rate differ. This is not an isolated descriptor comparison
+with V139, whose production remains unstarted. Implementation checks alone did
+not establish quality; the actual trained numeric/native results below do.
 
-## Fixed review support
+The earlier V125/V131 workers stopped at the32GB memory reserve, preserving
+steps8,799/14,549 of20k; their dependent October controllers exited. This new
+standalone run executes the previously unstarted checked V140 recipe without
+changing their budgets, sources or receipts. Existing CPU/CUDA16+2 checks are
+adopted without replay. Dependency/license packaging fixes occurred before learned
+execution. [Historical setup receipt](results/v140-standalone-setup-v1.json) ·
+[November2 diary](../diary/2026-11-02-09-07-11-v140-standalone-pilot.md).
 
-The review declares102 new IEEE-FP32 neural calls on64 shadow,16 ordinary,
-16 faint-ADC, four main DSCF3879/3880 contexts and two DSCF3842/DSCF3835 mesh
-profiles. It reuses408 predictions from V120/V129/V136/V137. Sources, coordinates,
-input bytes, conditioning, display exposure and source-defined masks stay fixed.
-Exact synthetic targets receive native160px noisy/restored/GT triplets; binned
-references and independent ISO100 captures retain their approximate labels.
-Both protected GFX scenes, foliage, fences, sky and building detail are included.
-Both camera JPEGs accompany the extra mesh. Numeric and actual native-image
-review are required before a quality claim.
+## Matched material results
 
-A separate48-input flat check was fixed before seeing the trained results:
-neutral levels.02/.18/.90, dark/mid blue and dark green, ADC-only/ISO12800 priors,
-all four Bayer layouts and one existing observation per case. All V120 outputs
-are reused. Exact analytic targets support DC color error, centered spatial MSE
-and4/16/32px block-average error. Broad splotches remain visible in the coarse
-terms. The real sky receives affine-detrended spatial measurements; these are
-descriptive variation, not false-detail error against exact GT.
+Exactly102 candidate IEEE-FP32 root/DINO calls use64 retained shadow,16 ordinary,
+16 faint-ADC,four main-GFX512 and two mesh768 inputs. All408 old predictions from
+V120/V129/V136/V137 are reused. No new noise, RAW decoding or reference-model
+inference is used. Each row below averages16 observations: four material contexts,
+four Bayer layouts, one draw per CFA. These are four contexts, not16 independent
+photographs. Camera RGB is rendered and scored using the shared original transforms.
 
-The faint supplement uses the existing original-source DCT strata and camera/
-sRGB DC/spatial decomposition. Its common40× contrast display is never scored.
-The support remains four material contexts, one draw per CFA, and a small color
-subset. It does not establish full427-photo/camera/color quality, full-frame
-seams, speed, conditional bias or broad real-camera superiority.
+| Condition | V120 | V1371k | V1401k | V140−V120,dB |
+| --- | ---: | ---: | ---: | ---: |
+| Ordinary ISO12800 |32.304263|32.309294|32.304297|+0.000034|
+| Target gain1/8,ISO6400 |28.561316|28.566605|28.561479|+0.000162|
+| Target gain1/8,ISO12800 |26.777249|26.780387|26.777484|+0.000235|
+| Target gain1/32,ISO6400 |25.008258|25.004597|25.008099|-0.000159|
+| Target gain1/32,ISO12800 |23.261062|23.232306|23.261517|+0.000455|
+| Contrast.025,ADC only |67.480668|67.463704|67.480521|-0.000147|
 
-Runners: [training](../scripts/run_standalone_patch_memory_pilot.py),
-[matched review](../scripts/review_standalone_patch_memory_pilot.py),
-[flat safety](../scripts/report_pilot_flat_safety.py).
+The largest absolute condition-mean change from V120 is.00046dB. V140 avoids
+V137's larger deepest-shadow/faint regressions on this support while adding
+virtually no benefit over its frozen parent. Such tiny changes do not establish
+useful recovery or a broad quality advantage.
+
+Ordinary ISO12800 conditioning is shot`.00256`,read variance`2.62144e−5`;
+shadow ISO6400 is`.00128`/`6.5536e−6`. Faint ADC has shot/read0 with the retained
+16-bit quantization. All use draw0 and unchanged WB/matrix. Shadows receive
+8×/32× display/scoring compensation; ordinary and faint inputs receive1×.
+
+Native160×160 exact-GT triplets below use ROI`[48,48,160,160]` at the processed
+8×-binned evaluation resolution, shared+0EV: noisy Malvar → V140 → exact
+synthetic target. Pixels are never resized. Bark remains coherent; individual
+raccoon hairs remain softer than GT.
+
+![V140 bark: noisy, restored, exact synthetic GT](images/v140-standalone-v1/bark-triplet.png)
+
+![V140 raccoon fur: noisy, restored, exact synthetic GT](images/v140-standalone-v1/raccoon-fur-triplet.png)
+
+Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
+[CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
+[Korall](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
+[CC BY3.0](https://creativecommons.org/licenses/by/3.0/), modified by processing,
+noise simulation and restoration. Native-camera grass/wood references are
+binned approximate references, **not exact GT**.
+
+The faint supplement retains the same original-source DCT16 masks and camera/
+sRGB DC/spatial decomposition. All four common40× contrast boards were viewed;
+V140 remains visually close to V120. Enhancement is never used for scoring.
+[Faint metadata and all160 decompositions](images/v140-standalone-v1/faint/manifest.json).
+
+## Both protected real GFX scenes
+
+The main DSCF3879 ISO6400/DSCF3880 ISO100 f/5.6 crops stay native160 sensor
+pixels at+2EV. Separate ISO100 exposures are qualitative references, **not GT**.
+Main fence geometry remains coherent, foliage painterly, building detail soft
+and sky quiet. No clear new V140 detail recovery is visible.
+
+![V140 main foliage: noisy, restored and independent reference](images/v140-standalone-v1/main-foliage-triplet.png)
+
+![V140 main fence: noisy, restored and independent reference](images/v140-standalone-v1/main-chain-link-fence-triplet.png)
+
+The extra DSCF3842 ISO6400/DSCF3835 ISO100 f/5.6 mesh uses the unchanged768px
+context and both fixed priors: nominal shot`.00128`/read`6.5536e−6`, nearby3879
+shot`.0014635775921166604`/read`1.0715704128646712e−6`. The nominal prior largely
+erases the lattice; the nearby profile retains weak diagonal texture. V140 shows
+no clear new lattice recovery on either side under either prior. Across the
+entire768px nearby-profile context, V140 differs from V120 by only.04281DN16
+camera-RGB RMS. That is output change, not a GT error or signal-transfer gain.
+
+Left/right noisy RAW ROIs are`[806,6489,160,160]`/`[1026,6449,160,160]`, with
+independent RAW-reference origins one pixel left. Camera JPEG crops keep their
+separately recorded native coordinates. The boards below contain noisy Malvar,
+V120,V137,V140,ISO6400 camera JPEG,independent ISO100 AHD,ISO100 camera JPEG.
+All cells are native160px with shared+4EV display. JPEG tone processing, capture
+exposure and aperture differ; neither ISO100 comparator is exact GT.
+
+![V140 left fine mesh and both camera JPEGs](images/v140-standalone-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-left-JPEG-plus4EV.png)
+
+![V140 right fine mesh and both camera JPEGs](images/v140-standalone-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-right-JPEG-plus4EV.png)
+
+[All four nominal/nearby mesh boards and source metadata](images/v140-standalone-v1/camera-JPEG/manifest.json) ·
+[All primary regions, source ROIs, conditioning and display](images/v140-standalone-v1/manifest.json).
+Both pairs, JPEGs and siblings remain held out. Only cached media/arrays were
+used; `/mnt/dataz` and read-only originals were not accessed.
+
+## Actual flat-region safety
+
+A separate48 candidate IEEE-FP32 calls reuse48 V120 outputs on six predeclared
+analytic uniform colors: neutral levels.02/.18/.90,dark/mid blue and dark green;
+ADC-only/ISO12800,all four CFAs,one existing draw each. These have **exact analytic
+GT**, permitting DC/spatial error measurements that an independent sky capture
+cannot support. All use native160 ROI`[48,48,160,160]`,shared+0EV and no resizing.
+
+| Condition / statistic | V120 | V1401k |
+| --- | ---: | ---: |
+| ADC-only mean centered spatial RMS,DN16 |1.237517|1.237518|
+| ADC-only mean32px-block RMS,DN16 |.198065|.198065|
+| ISO12800 mean centered spatial RMS,DN16 |20.947780|20.951916|
+| ISO12800 mean32px-block RMS,DN16 |13.224399|13.223424|
+| ISO12800 worst absolute channel DC,DN16 |36.569035|36.346196|
+
+The noisy spatial RMS rises.0197%,while32px block RMS falls.0074%; neither is
+a meaningful visible change. No obvious new splotches appear in the six viewed
+flat boards. This is limited support, not proof of flat-region safety for all
+images, cameras, noise levels or observations.
+
+![V140 exact dark-blue flat: noisy, V120, V140 and GT](images/v140-standalone-v1/flat/h210-s0.50-l0.02-flat-comparison.png)
+
+The real main sky is affine-detrended per camera channel before measuring
+spatial variation. V120/V14032px-block RMS is3.090480/3.091549DN16,about+.035%.
+The sky appears quiet in both. These are descriptive variations, **not false-detail
+error against an exact photographic GT**.
+[All96 flat metric rows, source conditioning and sky values](images/v140-standalone-v1/flat/manifest.json).
+
+## Verification and remaining work
+
+The independent primary audit checks480 metric rows,120 groups,all64 native
+PNGs/24,576,000 RGB channels. The faint audit checks300 strata,160 decompositions
+and2,150,400 PNG channels. The flat audit independently recomputes96 metric rows,
+five sky methods and1,843,200 PNG channels; maximum metric difference is6.64e−17.
+Both camera-JPEG boards per profile have another2,150,400 exact native channels.
+All32 primary comparison boards,two exact-GT triplets,four faint40× boards,
+four JPEG boards and six flat boards were actually viewed without pixel resizing.
+
+[Native audit](results/v140-standalone-native-audit-v1.json) ·
+[Faint audit](results/v140-standalone-faint-audit-v1.json) ·
+[Flat audit](results/v140-standalone-flat-audit-v1.json).
+The targeted feature/scope/analytic-metric suite passes38 tests. A missing-file
+test invocation and an overly tight FP64 fixture tolerance were corrected before
+that run; the measured reductions did not change.
+
+This is a complete1k pilot on limited support. Full427-photo/known-unseen-camera/
+color panels,full-frame seams,speed and a matched V139 descriptor ablation remain
+unmeasured. Fine-mesh recovery and broad superiority remain unresolved. The
+result argues against treating this weak memory-only contribution as a finished
+solution; it does not rule out stronger RAW matching,joint adaptation or further
+loss/data changes evaluated against the same detail and flat controls.

@@ -91,6 +91,8 @@ def prepare(root, training_path):
         "frozen_files": {str(p): ref(p)["sha256"] for p in work.rglob("*") if p.is_file()},
     }
     del queue["checkpoint"]
+    for key in ("training_owner", "controller", "endpoint_binder", "maximum_training_wait_seconds"):
+        queue.pop(key, None)  # Unused ownership fields from the historical V137 template.
     queue["frozen_files"][str(camera)] = ref(camera)["sha256"]
     save(root / "queue-plan-v1.json", queue)
     faint = read(BASE / "raw-global-conditioned-faint-detail-v1/analysis-plan-v1.json")

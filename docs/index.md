@@ -26,10 +26,10 @@ eight-photo monitor, mainly highlights, with weaker faint texture on separate
 support and no clear new mesh recovery. Full endpoint quality is pending. V120 remains
 the general choice.
 
-The [November2 standalone V140 pilot](v140-standalone-pilot.md) executes the
-checked patch-memory recipe after the original dependency chain exited. Its
-102-input matched native/GFX review and48 exact-flat checks are fixed in advance;
-quality remains unmeasured. Old failure receipts and partial checkpoints remain
+The [complete V1401k review](v140-standalone-pilot.md) executes the checked
+patch-memory recipe after the original dependency chain exited. Its102-input
+matched native/GFX review and48 exact-flat checks find near-V120 quality,
+without clear new mesh recovery. Old failure receipts and partial checkpoints remain
 intact.
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel

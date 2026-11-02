@@ -1,5 +1,21 @@
 # GFX100S qualitative comparisons
 
+## V140 standalone1k: near-parent real-photo output
+
+The [completed V140 native/flat review](v140-standalone-pilot.md) finds no clear
+new mesh or foliage recovery. Main fence geometry remains coherent and sky
+quiet. These retained512px-context native160 sensor-pixel crops share+2EV.
+DSCF3879 ISO6400 → V140 → independent DSCF3880 ISO100 f/5.6, **not GT**.
+[Source/ROI/checkpoint/conditioning/display metadata](images/v140-standalone-v1/manifest.json).
+
+![V140 main foliage native triplet](images/v140-standalone-v1/main-foliage-triplet.png)
+
+![V140 main fence native triplet](images/v140-standalone-v1/main-chain-link-fence-triplet.png)
+
+The exact-flat and descriptive real-sky checks also remain near V120. No
+full-frame, full-camera or broad quality gain is claimed. Existing complete
+102MP and other version comparisons below remain intact.
+
 **V120 Small is the current general recommendation.** The completed
 [fixed-Haar full-frame comparison](v120-v121-primary.md#matched-profile-full-frame-gfx)
 now matches older V115/V119 inputs exactly, including all130 variance/CFA/WB/

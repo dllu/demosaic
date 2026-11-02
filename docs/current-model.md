@@ -1,5 +1,11 @@
 # Current model choices
 
+The [complete standalone V1401k native/flat review](v140-standalone-pilot.md)
+adds no useful fine-mesh recovery over V120: ordinary/faint changes are
++.00003/−.00015dB, with near-parent flat/sky variation. V120 remains the general
+choice. The October V125/V131 workers and their dependents have stopped; see
+the execution audit in that report.
+
 **V120 Small is the general restoration and quality-development recommendation.**
 Its completed 427-source photo mean is 37.04008 dB, known/unseen measured-CFA means
 are 54.31272/54.00872 dB, and tested ADC maximum color bias is 55.52 DN16.
@@ -65,14 +71,14 @@ under this new ordering remains unmeasured.
 | Quality question | Current evidence and action |
 | --- | --- |
 | Persistent detail bias | [V12420k native check](v124-final20000-native.md) gives ordinary+.0095dB/faint−.0856dB versus V120; faint spatial MSE is only0.39% higher after late recovery from14k. Real mesh remains weak. [V1256k](v125-progress6000-quality.md) is still1.009dB below V120 on faint contexts. Limited and unequal-budget supports; original matched full endpoint/bias review remains pending |
-| Spatial RAW detail | [V131/V132](raw-spatial-training.md) tests a22,664-parameter branch on90781/29. [V131 control at1k](v131-progress1000-quality.md) gives ordinary+.0016dB, deepest shadows−.0237–.0342dB and faint ADC−.2734dB versus V120, with mixed local detail and no clear mesh recovery. Original20k control continues; V132 branch/full endpoints remain unmeasured |
+| Spatial RAW detail | [V131/V132](raw-spatial-training.md) tests a22,664-parameter branch on90781/29. [V131 control at1k](v131-progress1000-quality.md) gives ordinary+.0016dB, deepest shadows−.0237–.0342dB and faint ADC−.2734dB versus V120, with mixed local detail and no clear mesh recovery. V131 stopped at step14,549; V132 production/full endpoints remain unmeasured |
 | Global RAW repetition | [Completed V1361k](v136-global-attention-quality.md) adds18,272 parameters for two-pass global attention. Against matched V129: ordinary+.0003dB, shadows+.0007–.0026dB, faint ADC+.0131dB; local gains/errors are mixed and real mesh remains weak. Full native comparison and independent audits published |
 | Conditioning global matching | [Completed V1371k](v137-global-conditioned-quality.md) gives faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and weak real mesh. A [trained-memory ablation](global-memory-contribution.md) finds only0.83–1.39% feature-offset change on six contexts despite varied attention; it does not measure final RGB influence |
-| Adapting only the global branch | [V138](raw-global-only-training.md) freezes91 parent model/EMA tensors and trains18 branch tensors at LR1e−3. Genuine CPU/CUDA16+2 checks pass; original1k production and102-input review are queued after V125 completes. Quality is unmeasured |
-| Removing the global branch's local bypass | [V139](raw-global-memory-only.md) retains15 memory-path tensors with the V120 parent frozen. CPU/CUDA16+2 checks pass; original1k and matched102-input/native/faint/GFX review follow V138's existing review chain. Quality is unmeasured |
-| Comparing neighboring gradients before memory | [V140](raw-patch-memory.md) adds2,048 zero-initialized descriptor parameters. Genuine CPU/CUDA checks pass; fresh1k waits for V139's review. Matched102-input/native/faint/GFX review is queued with612 reused predictions; trained quality remains unmeasured |
-| Photographic variety at fixed budget | [V133](reviewed-quota-training.md) lowers V131's reviewed quota from50% to5% with the same parent/data/20k horizon. CPU/CUDA16+2 checks pass; early and full numerical/native reviews are queued. Production waits for both spatial arms to finish |
-| Cleaned corpus and source visitation | [V134/V135](photo-epoch-training.md) compares replacement/epoch ordering on identical90,778/33 data. All four CPU/CUDA16+2 checks pass; 20k production and full reviews are queued after V133's automated review |
+| Adapting only the global branch | [V138](raw-global-only-training.md) freezes91 parent model/EMA tensors and trains18 branch tensors at LR1e−3. Genuine CPU/CUDA16+2 checks pass; original1k production remains unstarted after the V125 dependency failure. Quality is unmeasured |
+| Removing the global branch's local bypass | [V139](raw-global-memory-only.md) retains15 memory-path tensors with the V120 parent frozen. CPU/CUDA16+2 checks pass; original1k remains unstarted after the V138 dependency failure. Quality is unmeasured |
+| Comparing neighboring gradients before memory | [V140](raw-patch-memory.md) adds2,048 zero-initialized descriptor parameters. Standalone1k/102-input native/faint/GFX and48-flat reviews complete: ordinary+.00003dB/faint−.00015dB over V120, no clear mesh recovery, near-parent flat/sky variation |
+| Photographic variety at fixed budget | [V133](reviewed-quota-training.md) lowers V131's reviewed quota from50% to5% with the same parent/data/20k horizon. CPU/CUDA16+2 checks pass; original production/review dependency queues exited; trained quality remains unmeasured |
+| Cleaned corpus and source visitation | [V134/V135](photo-epoch-training.md) compares replacement/epoch ordering on identical90,778/33 data. All four CPU/CUDA16+2 checks pass; original20k production/full-review dependency queues exited; trained quality remains unmeasured |
 | RAW frequency features | [Completed V122/V12320k trial](v122-v123-quality.md): joint-arm photo gain+.05493 dB over adapter-only, with lower unseen-camera mean, ADC maximum4190.02 DN16 and little weak natural-detail or real-mesh recovery |
 | Loss or shadow reweighting | [V117/V118](v117-v118-quality.md), [V126/V127](reviewed-shadow-pilot-quality.md) and [V128](v128-feature-pilot-quality.md) find no useful broad weak-detail gain from their tested band, shadow or DINO feature additions. These terms stay off by default |
 | More reviewed sources / training precision | [V129](reviewed-detail-training-pilot.md) and [V130](training-precision-pilot.md) show small mixed1k changes without clear noisy/GFX recovery. FP32 improves selected [faint-ADC bands](faint-adc-precision.md), with global PSNR−.01720 dB and subtle native changes |

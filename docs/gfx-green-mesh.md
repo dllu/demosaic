@@ -1,5 +1,23 @@
 # Fine green fence beside the red train
 
+## V140 standalone1k: still missing the fine lattice
+
+The [completed V140/native/48-flat report](v140-standalone-pilot.md) shows no
+clear new lattice recovery at either fixed conditioning. V140 stays visually
+near V120; the nominal prior largely erases the mesh, and the unchanged nearby3879
+profile retains weak diagonal texture. No obvious new flat-region splotches
+appear on the measured support, with nearly unchanged coarse flat/sky variation.
+
+Below: noisy Malvar → V120 → V137 → V140 → DSCF3842 camera JPEG → independent
+DSCF3835 ISO100 AHD → ISO100 camera JPEG. All cells retain native160 pixels with
+shared+4EV display; camera processing and capture aperture/exposure differ.
+Both ISO100 comparators are **not exact GT**.
+[All four boards/source ROIs/checkpoint/noise/display metadata](images/v140-standalone-v1/camera-JPEG/manifest.json).
+
+![V140 left native fine mesh and camera JPEGs](images/v140-standalone-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-left-JPEG-plus4EV.png)
+
+![V140 right native fine mesh and camera JPEGs](images/v140-standalone-v1/camera-JPEG/mesh-profile3879-fine-green-mesh-right-JPEG-plus4EV.png)
+
 **This additional real-capture case exposes missing weak detail and sensitivity
 to noise conditioning.** With the nominal ISO6400 prior, V112, V114, V115 Small
 and V117 largely erase the fine green lattice while retaining broad rails.

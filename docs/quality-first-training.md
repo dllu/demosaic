@@ -16,21 +16,21 @@ within10s remain unproven. Quality takes priority over speed.
 **November2 execution update:** V125 and V131 stopped at their available-memory
 floors; the dependent October controllers exited. Their recipes, partial states
 and receipts are preserved. The [standalone V140 pilot](v140-standalone-pilot.md)
-is now running its checked1k recipe, with matched native/GFX and exact-flat
-reviews fixed in advance. Historical queue descriptions below describe their
+has completed its checked1k recipe and matched native/GFX/48-flat reviews.
+It stays near V120 with no clear new mesh recovery. Historical queue descriptions below describe their
 original plans, not currently live workers.
 
 ## Active quality questions
 
 | Comparison | Fixed intervention | Present evidence |
 | --- | --- | --- |
-| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 photos/20 regions; V120/seed67/20k; two noise views, mean-loss weights0/.25 | [V12420k native check](v124-final20000-native.md): tiny ordinary gain/near-parent faint quality after late recovery, no new mesh detail. V125 runs; [6k progress](v125-progress6000-quality.md) remains weaker on faint contexts. Full matched endpoint/bias review pending |
-| [V131/V132 spatial attention](raw-spatial-training.md) |90,781/29; V120/seed70/20k;22,664-parameter local branch off/on | V131 runs, V132 follows. [Control1k](v131-progress1000-quality.md) has tiny ordinary gains, shadow/faint regressions and no clear mesh recovery |
-| [V133 photographic quota](reviewed-quota-training.md) | Same cohort/parent/seed/20k as V131;5% rather than50% reviewed sampling | CPU/CUDA16+2 pass; production/progress/full reviews queued after both spatial arms |
-| [V134/V135 cleaned data and epochs](photo-epoch-training.md) |90,778/33; matched20k replacement/epoch sampling | All four CPU/CUDA16+2 checks pass; production/full reviews queued after V133's review |
-| [V138 frozen-parent global branch](raw-global-only-training.md) |90,782/27;1k; freeze91 V120 tensors, train18 global tensors at LR1e−3 | CPU/CUDA16+2 pass; original1k/native/faint/GFX review queued after V125 completes |
-| [V139 memory-only branch](raw-global-memory-only.md) | Same1k/data/parent/inputs as V138; remove direct local residual/MLP shortcut | CPU/CUDA16+2 pass;1k and102-input review queued after V138's review chain;510 saved predictions reused |
-| [V140 neighboring-gradient memory](raw-patch-memory.md) | Same1k/data/parent/inputs as V139; add2,048 descriptor parameters before memory | CPU/CUDA16+2 pass; fresh1k waits for V139's review. Matched102-input/native/faint/GFX review queued with612 reused predictions; quality unmeasured |
+| [V124/V125 conditional mean](conditional-mean-training.md) |90,784 photos/20 regions; V120/seed67/20k; two noise views, mean-loss weights0/.25 | [V12420k native check](v124-final20000-native.md): tiny ordinary gain/near-parent faint quality after late recovery, no new mesh detail. V125 stopped at step8,799; [6k progress](v125-progress6000-quality.md) remains weaker on faint contexts. Full matched endpoint/bias review pending |
+| [V131/V132 spatial attention](raw-spatial-training.md) |90,781/29; V120/seed70/20k;22,664-parameter local branch off/on | V131 stopped at step14,549; V132 production remains unstarted. [Control1k](v131-progress1000-quality.md) has tiny ordinary gains, shadow/faint regressions and no clear mesh recovery |
+| [V133 photographic quota](reviewed-quota-training.md) | Same cohort/parent/seed/20k as V131;5% rather than50% reviewed sampling | CPU/CUDA16+2 pass; original production/progress/full dependency queues exited |
+| [V134/V135 cleaned data and epochs](photo-epoch-training.md) |90,778/33; matched20k replacement/epoch sampling | All four CPU/CUDA16+2 checks pass; original production/full dependency queues exited |
+| [V138 frozen-parent global branch](raw-global-only-training.md) |90,782/27;1k; freeze91 V120 tensors, train18 global tensors at LR1e−3 | CPU/CUDA16+2 pass; original1k remains unstarted after the V125 dependency failure |
+| [V139 memory-only branch](raw-global-memory-only.md) | Same1k/data/parent/inputs as V138; remove direct local residual/MLP shortcut | CPU/CUDA16+2 pass;original1k remains unstarted after the V138 dependency failure |
+| [V140 neighboring-gradient memory](raw-patch-memory.md) | Same1k/data/parent/inputs as V139; add2,048 descriptor parameters before memory | Standalone1k and matched102-input/native/faint/GFX/48-flat reviews complete: near V120 quality, no clear new mesh recovery. Original dependent queue stays failed |
 
 Jobs retain original sources, parents, data, budgets and dependency/resource
 policies. Progress capture does not restart or stop a20k worker. Implementation

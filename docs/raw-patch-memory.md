@@ -1,14 +1,16 @@
 # Neighboring gradient descriptors before global memory
 
-**The [standalone V140 pilot](v140-standalone-pilot.md) is now running its checked1k
-recipe independently of the failed October dependency chain.** Original plans
-and failures remain intact. The queue descriptions below are historical.
+**The [complete standalone V1401k/native/flat review](v140-standalone-pilot.md)
+finds near-V120 quality without clear new mesh recovery.** Ordinary/faint means
+differ by+.00003/−.00015dB; exact-flat and sky variation remain near parent.
+All1,000 batches match V137, with91 parent model/EMA tensors exact. The original
+October dependent queue stays failed; its descriptions below are historical.
 
 **V140 adds a learned neighborhood descriptor to the memory-only RAW branch.**
 Genuine CPU/CUDA16+2 checks pass, with91 parent tensors exact in model and EMA.
-A fresh1,000-update run waits for V139's original numeric/native/faint/JPEG
-review. Restoration quality remains unmeasured; V120 stays the general choice.
-Its matched102-input native/faint/GFX review is queued after that training.
+The original queue waited for V139's numeric/native/faint/JPEG review and later
+exited after dependency failure. The [new standalone endpoint and native/flat
+review](v140-standalone-pilot.md) are complete; V120 stays the general choice.
 
 [Implementation](../src/demosaic/raw_patch_memory_features.py) ·
 [Tests](../tests/test_raw_patch_memory_features.py) ·
@@ -125,8 +127,8 @@ original job, data, budget or deadline changes; no automatic retry/horizon reset
 The run plans1,000 root/optimizer plus64 validation and1,064 encoder calls over
 16,000 target slots. All input hashes must match saved V137.
 
-The dedicated review controller is live and waiting for the original V140
-training owner to finish. It keeps the fixed102 future calls:64 shadow,16 ordinary,
+The original dedicated review controller waited for V140 training and later
+exited after dependency failure. Its preserved plan keeps the fixed102 future calls:64 shadow,16 ordinary,
 16 faint ADC, four main-GFX512 contexts and two extra-mesh768 profiles. It adopts
 612 predictions from six old methods, including V139 and its inherited V138
 controls. Before inference, it checks the actual1k state/source and all1,000
