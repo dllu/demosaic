@@ -137,3 +137,8 @@ deadline rejection cases.
 
 The endpoint, full 427-photo panel, camera/color, full-frame quality and speed
 remain unmeasured. V120 stays recommended.
+
+A separate [64-input procedural response test](crossed-line-response.md) reproduces
+near-total ISO6400-prior mesh erasure in V120/V142/V1432.5k. It is a new192-call
+diagnostic, outside this fixed-photo review ledger; its oracle RAW fit is not
+an inference calibration or blind-recoverability guarantee.

@@ -1,0 +1,11 @@
+# Controlled mesh response and saved RAW evidence
+
+Recorded: 2026-11-02T12:51:32-08:00 (America/Los_Angeles).
+
+A separate [controlled mesh/empty response test](../docs/crossed-line-response.md) reuses the actual512→geometry→area2 generator at four fixed new seeds2026110201–04, with scene level normalized.02.64 new observations: present/absent×ADC/ISO6400×4CFAs×4recipes, one draw each. V120/V142/V1432500 see identical arrays in IEEE FP32/one CPU thread; fullmodel/backbone/input/RNG checks pass.192 additional root/DINO calls,128 of them new V120/V142 control calls, explicitly separate from original fixed-photo review ledger. No RAW or training updates.
+
+All retain about.90 ADC mesh gain but nearlyzero noisy gain. The failure appears on the generator family too, so real-photo domain transfer is not the only issue. No useful noisy-template recovery ranking can be inferred from gains around.001. Spatial and unrelated variation are reported separately; absent nearzero projection does not establish broad flat safety.16 native five-way boards actually viewed through4 unresized sheets, plus2 noisy/V143/exact-procedural-GT triplets directly.
+
+Independent joint10-column fits check256 metric rows; max gain difference1.49e−14. All6,144,000 native PNG channels match a direct matrix/gamma renderer. A model-free RAW companion uses the same32 noisy inputs: exact-template WLS with12 phase-affine nuisances, independently checked QR/jointfit/inverse covariance. Approx known-template SNRs12.51/6.65/2.39/1.97; fitted present gains.992/1.138/1.019/.902. The two clearest recipes have coherent exact-template evidence but learned gains<.004. This motivates spatial-evidence learning tests, not a blind-recoverability/real-detail guarantee. Exacttemplate/background/variance are oracle information; Poisson/ADC covariance is approximate.
+
+Seven metric/observability tests pass. Initial lint failures occurred before preparation/inference because commands use set−e; no hidden model attempts. V143 original worker and endpoint supervisor remain live. No new training recipe, network update or restart is made by this diagnostic. V120 remains the general recommendation; earlier V142 faint/flat gains remain documented.

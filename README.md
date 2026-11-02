@@ -31,7 +31,10 @@ The new [crossed-line/empty targets](docs/crossed-line-training-data.md) are
 useful for further training. Fine mesh still lacks clear recovery, coarse
 noisy-flat error remains5.08% above V120 and selected ADC-only color bias worsens.
 V125/V131 stopped at the memory reserve; their dependent October queues exited.
-Original evidence remains preserved.
+Original evidence remains preserved. A [controlled mesh/empty test](docs/crossed-line-response.md)
+reproduces near-total ISO6400-prior mesh erasure across V120/V142/V1432.5k,
+even on the procedural family; an exact-template RAW fit finds coherent evidence
+in its two clearest cases.
 
 | Current quality work | Evidence and next comparison |
 | --- | --- |

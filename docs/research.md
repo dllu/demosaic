@@ -27,6 +27,12 @@ ADC maximum. Architectural choices follow their measured strengths rather than
 historical promotion gates. Fine natural detail and real-camera blotches remain
 unresolved; broad state-of-the-art quality is unproven.
 
+The [controlled mesh/empty response test](crossed-line-response.md) adds64 fixed
+procedural inputs shared acrossV120/V142/V1432.5k. ADC mesh gain stays near.90,
+ISO6400-prior gain nearzero. Oracle RAW fits find coherent evidence in the two
+clearest recipes; this is not blind recoverability or natural-texture quality.
+The noisy failure occurs within the generator family as well as real photos.
+
 ## Current hypotheses and evidence
 
 | Question | Evidence and current action |

@@ -126,3 +126,10 @@ pass. The [completed2.5k progress review](v143-progress2500-quality.md) recovers
 faint scores near V120 after the1k regression; real mesh still lacks clear new
 recovery. Its changed horizon prevents an equal-budget loss comparison; the
 original worker continues toward5k under replacement supervision.
+
+The [controlled response diagnostic](crossed-line-response.md) now measures four
+new present/empty recipes acrossADC/ISO6400 and allCFAs. V120/V142/V1432.5k
+retain about.90 ADC gain but almost no noisy mesh response. The useful earlier
+faint/flat gains therefore do not show recovery of noisy mesh even within this
+procedural family. Oracle RAW-template evidence is analyzed separately from
+blind inference and real-photo transfer.
