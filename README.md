@@ -102,21 +102,22 @@ The independent ISO100 exposure is an approximate qualitative reference,
 ![V120 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
 The additional **fine green mesh beside the red train's cab** is visibly stronger
-with the new [phase-aware harmonic patch](docs/phase-harmonic-patch.md), under
-both fixed priors. It refines saved V120 patches from input RAW evidence. The
-lattice remains soft, and periodic correction can extend into blank parts of
-textured patches; this is an experimental patch option with no full-frame path.
-All48 tested uniform fields and96 photographic outputs retain parent pixel values.
+with [local phase-aware correction](docs/local-phase-harmonic-patch.md) on V1435k
+patches, under both fixed priors. Local RAW evidence reduces added structure in
+blank parts of the active new validation recipe by62%, while retaining more mesh
+response than the first harmonic correction. Spill remains measurable. This is
+an experimental256px patch option; full-frame use is unimplemented. Tested96-photo
+and48-uniform-field outputs retain their V143 parent values.
 
-Below: noisy Malvar → V120 → harmonic patch → DSCF3842 camera JPEG → independent
+Below: noisy Malvar → V1435k → local correction → DSCF3842 camera JPEG → independent
 DSCF3835 ISO100 AHD → ISO100 camera JPEG, using the fixed nearby prior.
 Native160px cells share+4EV. Both ISO100 comparators are **not GT**; aperture,
-exposure time and processing differ. [Both priors, tests and limits](docs/phase-harmonic-patch.md) ·
-[Source/ROI/checkpoint/conditioning/display metadata](docs/images/phase-harmonic-v1/manifest.json).
+exposure time and processing differ. [Both priors, new validation and limits](docs/local-phase-harmonic-patch.md) ·
+[Source/ROI/checkpoint/conditioning/display metadata](docs/images/local-phase-harmonic-v1/manifest.json).
 
-![Phase-aware fine green mesh, left native crop](docs/images/phase-harmonic-v1/mesh-profile3879-fine-green-mesh-left-JPEG.png)
+![Local phase-aware fine mesh, left native crop](docs/images/local-phase-harmonic-v1/mesh-profile3879-fine-green-mesh-left-JPEG.png)
 
-![Phase-aware fine green mesh, right native crop](docs/images/phase-harmonic-v1/mesh-profile3879-fine-green-mesh-right-JPEG.png)
+![Local phase-aware fine mesh, right native crop](docs/images/local-phase-harmonic-v1/mesh-profile3879-fine-green-mesh-right-JPEG.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)

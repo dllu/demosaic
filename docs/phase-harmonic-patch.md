@@ -1,5 +1,10 @@
 # Clearer fine mesh from a phase-aware harmonic patch
 
+The [local version](local-phase-harmonic-patch.md) supersedes this experimental
+patch option: stronger response with less spill on new validation, now tested
+with V1435k and both standing scenes. The original implementation and evidence
+below remain preserved.
+
 **A new input-only correction makes the fine green lattice visibly stronger in
 both fixed GFX mesh windows and both noise priors.** It is a useful experimental
 native256 patch option on saved V120 outputs. It also exposes a localization

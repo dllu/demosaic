@@ -81,7 +81,7 @@ Canonical read-only checkpoint:
 
 The [first-batch loss diagnostic](crossed-line-loss-gradients.md) and
 [procedural response test](crossed-line-response.md) are separate measurements;
-neither attributes final quality. The [phase-aware harmonic patch](phase-harmonic-patch.md)
-shows stronger mesh on savedV120 outputs, with a localization cost; it is not
-part of the trained V143 result, and their combination remains unmeasured.
+neither attributes final quality. The [local phase-aware correction](local-phase-harmonic-patch.md) now tests
+V143 with stronger mesh and reduced but remaining localization cost. It is not
+part of the checkpoint; tested96-photo/48-flat parent values are unchanged.
 Full427-photo, camera/color, full-frame and speed results forV143 remain open.

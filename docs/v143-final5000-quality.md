@@ -103,9 +103,10 @@ retain weak traces without clear new recovery. [Both camera-JPEG comparators](im
 and [fixed input-only peak results](results/v143-progress5000-mesh-peaks-v1.json)
 remain included. Power ratios alone are not reconstruction quality.
 
-The separate [phase-aware harmonic patch](phase-harmonic-patch.md) has visibly
-stronger mesh on **V120** outputs, with a measured localization cost. It is
-not part of this trained V143 result; their combination remains unmeasured.
+The separate [local phase-aware correction](local-phase-harmonic-patch.md) now
+tests V143 plus both harmonic variants. It gives stronger mesh with reduced but
+remaining spill, and preserves the tested96-photo/48-flat parent values. This
+postprocessing is not part of the trained checkpoint or this training comparison.
 
 ## Flat and sky tradeoffs
 

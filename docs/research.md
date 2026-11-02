@@ -33,12 +33,13 @@ ISO6400-prior gain nearzero. Oracle RAW fits find coherent evidence in the two
 clearest recipes; this is not blind recoverability or natural-texture quality.
 The noisy failure occurs within the generator family as well as real photos.
 
-A [phase-aware harmonic patch](phase-harmonic-patch.md) now uses that input
-coherence directly, with RAW harmonic innovation and physical CFA coordinates.
-Fine real mesh becomes visibly stronger; the clearest procedural recipe improves
-from.004 to.298 gain. All96 photo outputs and48 uniform fields retain parent
-values. Periodic overextension into blank parts of textured patches is a measured
-cost, so this remains an experimental patch option, not a fullframe method.
+The [local phase-aware correction](local-phase-harmonic-patch.md) retains the
+input-only frequency/CFA fit but estimates support from local green-phase evidence.
+It improves the new active recipe's response and full-patch error while reducing
+added field in blank regions62% versus the first harmonic correction. Only one
+of16 new recipes activates; all absent inputs remain unchanged. Both standing
+GFX scenes/priors/JPEGs are reviewed on actualV1435k, preserving its96-photo/48-flat
+values. Remaining spill and missing full-frame support keep this experimental.
 
 ## Current hypotheses and evidence
 

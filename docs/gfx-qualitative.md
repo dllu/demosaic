@@ -1,14 +1,14 @@
 # GFX100S qualitative comparisons
 
-## Phase-aware harmonic patch: visibly stronger fine mesh
+## Local phase-aware correction: stronger mesh with less spill
 
-The [new patch report](phase-harmonic-patch.md) shows a clearer soft lattice in
-both extra-mesh windows and both fixed priors, plus both cameraJPEGs and the
-main foliage/fence/sky/building crops. Independent ISO100 references remain
-**not exactGT**. Sky and48 exactflat outputs retain parent values, while the
-operator can extend periodic structure into blank parts of textured patches.
-It is an experimental native256 option on savedV120, without full-frame support.
-
+The [new local patch report](local-phase-harmonic-patch.md) compares V1435k,
+the global harmonic correction and local RAW evidence at both mesh windows and
+both fixed priors, with both camera JPEGs and the main foliage/fence/sky/building.
+Independent ISO100 references remain **not exactGT**. The soft lattice remains
+visible and often stronger, while new synthetic validation shows less spill into
+blank regions. Spill is reduced, not eliminated. Sky, building and foliage
+retain parent values. Full-frame use remains unimplemented.
 
 ## V143 completed5,000: faint gains, real mesh still weak
 

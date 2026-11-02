@@ -1,10 +1,12 @@
 # Current model choices
 
-The new [phase-aware harmonic patch](phase-harmonic-patch.md) gives visibly
-stronger fine green mesh in both windows/priors on savedV120 outputs. All48
-uniform fields and96 photo outputs retain their parent values; partial-texture
-blank regions can worsen. It is a useful experimental native256 patch option,
-with no full-frame implementation; V120 remains the general recommendation.
+The [local phase-aware correction](local-phase-harmonic-patch.md) on V1435k
+patches gives stronger fine diagonals in both mesh windows/priors. In the active
+new validation recipe, added structure in complete-patch blank regions falls62%
+versus the first harmonic correction, with stronger response and lower error.
+Spill remains measurable; tested96-photo/48-flat parent values are unchanged.
+This is the current experimental native256 patch option; full-frame support
+remains unimplemented. V120 stays the validated general recommendation.
 
 The [completed V1435k review](v143-final5000-quality.md) gains0.26493dB faint
 ADC PSNR and4.64% lower noisy-flat spatial RMS over V120 on fixed support.
