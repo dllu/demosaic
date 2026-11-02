@@ -1,5 +1,10 @@
 # V131/V132: full-budget spatial-detail trial
 
+**November2 execution update:** V131 stopped at the32GB memory reserve,
+preserving step14,549 of20k. V132 production remains unstarted; the original
+dependent queues exited. Historical plans and receipts below remain intact.
+[Audit and separate V140 work](v140-standalone-pilot.md).
+
 **V131's original20k control is running; V132 follows. All four CPU/CUDA checks passed.**
 V131 continues V120's architecture and V132 adds the optional
 [RAW spatial branch](raw-spatial-features.md). Both use the cleaned90,781-photo

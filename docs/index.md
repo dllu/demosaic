@@ -21,10 +21,16 @@ joint-training photo gain over adapter-only training, with camera/color costs
 and little weak-detail recovery. The [V12414k progress review](v124-progress14000.md)
 adds noisy/shadow gains of.008–.033dB, faint ADC−.350dB and native material/GFX
 crops without clear mesh recovery. Its original20k control is complete; V125
-is training. The [V1252k review](v125-progress2000-quality.md) records a better
+stopped at the memory reserve. The [V1252k review](v125-progress2000-quality.md) records a better
 eight-photo monitor, mainly highlights, with weaker faint texture on separate
 support and no clear new mesh recovery. Full endpoint quality is pending. V120 remains
 the general choice.
+
+The [November2 standalone V140 pilot](v140-standalone-pilot.md) executes the
+checked patch-memory recipe after the original dependency chain exited. Its
+102-input matched native/GFX review and48 exact-flat checks are fixed in advance;
+quality remains unmeasured. Old failure receipts and partial checkpoints remain
+intact.
 
 The [completed V116 data comparison](v116-quality.md) raises tested eight-pixel
 weak-carrier gain, but does not improve broad weak natural detail and worsens

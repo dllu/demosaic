@@ -1,5 +1,9 @@
 # Neighboring gradient descriptors before global memory
 
+**The [standalone V140 pilot](v140-standalone-pilot.md) is now running its checked1k
+recipe independently of the failed October dependency chain.** Original plans
+and failures remain intact. The queue descriptions below are historical.
+
 **V140 adds a learned neighborhood descriptor to the memory-only RAW branch.**
 Genuine CPU/CUDA16+2 checks pass, with91 parent tensors exact in model and EMA.
 A fresh1,000-update run waits for V139's original numeric/native/faint/JPEG

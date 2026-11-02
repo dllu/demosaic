@@ -13,6 +13,13 @@ higher photo mean; V114 Tiny has lower tested ADC maximum color bias. Broad
 state-of-the-art quality, large real-camera superiority over RawNIND and100MP
 within10s remain unproven. Quality takes priority over speed.
 
+**November2 execution update:** V125 and V131 stopped at their available-memory
+floors; the dependent October controllers exited. Their recipes, partial states
+and receipts are preserved. The [standalone V140 pilot](v140-standalone-pilot.md)
+is now running its checked1k recipe, with matched native/GFX and exact-flat
+reviews fixed in advance. Historical queue descriptions below describe their
+original plans, not currently live workers.
+
 ## Active quality questions
 
 | Comparison | Fixed intervention | Present evidence |

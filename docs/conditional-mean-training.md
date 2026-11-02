@@ -9,7 +9,10 @@ supports do not isolate a broad mean-loss quality effect.
 [Earlier4k review](v125-progress4000-quality.md) ·
 [Earlier2k review](v125-progress2000-quality.md).
 
-V124's original20k control is complete; V125's original20k run continues.
+V124's original20k control is complete. **The November2 execution audit finds
+V125 stopped at its memory reserve, with a saved8,799-step checkpoint; it is
+not currently running.** The original endpoint review remains pending.
+[Execution audit and separate V140 work](v140-standalone-pilot.md).
 Both arms' CPU/CUDA checks passed. Endpoint and repeated-noise bias comparison
 remain pending; V120 remains the general choice. The experiment follows the
 [conditional-noise diagnosis](conditional-noise-response.md) of persistent weak
@@ -63,7 +66,7 @@ contexts,560,480 sensor observations and640 validation forwards. Its endpoint
 SHA256 is`d562ae2fc4e9bf903501a3db1f2192b93e465a48f150eec6de5f232d510f0cc6`.
 The worker verifies finite91 model/EMA tensors and89 Adam states at20k.
 The controller admitted V125 after its original64GiB launch threshold; its
-20k worker is live, with budget, source and data unchanged. Full endpoint quality
+20k worker later stopped at the memory reserve; budget, source and data remain unchanged. Full endpoint quality
 still waits for the matched pair. The [completed20k native check](v124-final20000-native.md)
 now measures14 fixed inputs against saved V120/V12414k/V1256k outputs. It is
 separate from the earlier102-input14k study and the full queued endpoint suite. [Current execution receipt](results/raw-global-only-pilot-setup-v1.json).
@@ -133,7 +136,7 @@ Independent NumPy audits inspected301,396,702 retained array values and verified
 The implementation, regression and adoption suites passed175 tests.
 [Frozen plans, actual counts, source hashes and live follow-up owners](results/independent-noise-mean-training-setup-v1.json).
 V124's20,000-update control is complete and V125's original20,000-update
-worker is running. The [V124 training-start snapshot](results/v124-control-training-start-v1.json)
+worker has stopped, preserving its8,799-step state. The [V124 training-start snapshot](results/v124-control-training-start-v1.json)
 remains historical; [current live-owner evidence](results/v124-final-source-publication-v1.json)
 records both V125 and the admitted V131 control without changing their plans.
 
