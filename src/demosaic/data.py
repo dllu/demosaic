@@ -18,7 +18,7 @@ from .photo_sampling import PhotoSamplingReference
 from .precision import ieee_fp32
 from .reviewed_rois import ReviewedPhotoROIs, validate_roi_fraction
 from .shadow_exposure import apply_shadow_exposure, validate_shadow_levels
-from .textures import weak_texture
+from .textures import crossed_line_texture, weak_texture
 
 
 def synthetic(size: int, rng: random.Random) -> torch.Tensor:
@@ -124,6 +124,7 @@ class CleanDataset(Dataset):
         reviewed_roi_fraction=0.0,
         reviewed_roi_catalogue_sha256=None,
         fine_weak_texture_fraction=0.0,
+        mesh_texture_fraction=0.0,
         photo_sampling_reference_manifest=None,
         photo_sampling_reference_sha256=None,
         trace_sources=False,
@@ -188,6 +189,12 @@ class CleanDataset(Dataset):
         if fine_fraction > weak_texture_fraction:
             raise ValueError("Fine weak texture fraction must fit inside the weak texture quota")
         self.fine_weak_texture_fraction = fine_fraction if split == "train" else 0
+        mesh_fraction = validate_probability(mesh_texture_fraction, "Mesh texture fraction")
+        if fine_fraction + mesh_fraction > weak_texture_fraction + 1e-12:
+            raise ValueError(
+                "Mesh and fine texture fractions must fit inside the weak texture quota"
+            )
+        self.mesh_texture_fraction = mesh_fraction if split == "train" else 0
         if self.weak_texture_fraction and augmentation_downsample != 2:
             raise ValueError("Weak texture training requires augmentation before final downsample2")
         self.native_crop = native_crop
@@ -217,12 +224,20 @@ class CleanDataset(Dataset):
             raise ValueError("Photographic epoch order hash requires its header")
         self.photo_epoch_order = (
             PhotoEpochOrder(
-                photo_epoch_order, self.manifest, self.rows,
-                reader_policy(seed, self.flat_fraction, self.synthetic_fraction,
-                              self.reviewed_roi_fraction,
-                              self.reviewed_rois.sha256 if self.reviewed_rois else None),
+                photo_epoch_order,
+                self.manifest,
+                self.rows,
+                reader_policy(
+                    seed,
+                    self.flat_fraction,
+                    self.synthetic_fraction,
+                    self.reviewed_roi_fraction,
+                    self.reviewed_rois.sha256 if self.reviewed_rois else None,
+                ),
                 expected_sha256=photo_epoch_order_sha256,
-            ) if photo_epoch_order is not None else None
+            )
+            if photo_epoch_order is not None
+            else None
         )
 
     def __len__(self):
@@ -258,6 +273,17 @@ class CleanDataset(Dataset):
                         pixel_scale=self.augmentation_downsample,
                         frequency_profile="fine-v1",
                     )
+                elif (
+                    draw
+                    < self.flat_fraction
+                    + self.fine_weak_texture_fraction
+                    + self.mesh_texture_fraction
+                ):
+                    rgb, recipe = crossed_line_texture(
+                        size, rng, pixel_scale=self.augmentation_downsample
+                    )
+                    if provenance is not None:
+                        provenance.update(kind="crossed-lines", texture_recipe=recipe)
                 else:
                     if provenance is not None:
                         provenance["kind"] = "weak-texture"

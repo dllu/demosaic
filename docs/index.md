@@ -32,6 +32,10 @@ matched native/GFX review and48 exact-flat checks find near-V120 quality,
 without clear new mesh recovery. Old failure receipts and partial checkpoints remain
 intact.
 
+The [optional crossed-line/empty training source](crossed-line-training-data.md)
+adds broad fine structure with explicit absence controls inside the existing
+procedural quota. Its44-test suite passes; trained quality is still unmeasured.
+
 The [V141 small-gradient-loss pilot](v141-gradient-epsilon-pilot.md) is training
 its checked1k recipe against saved V129, with matched native/GFX and uniform-field
 reviews prepared. It has no trained-quality conclusion yet.

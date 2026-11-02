@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader
 
 from .cfa import bilinear
 from .color import render
-from .data import CleanDataset, degrade, validate_flat_chroma_stops
+from .data import CleanDataset, degrade, validate_flat_chroma_stops, validate_probability
 from .dino_supervision import feature_options, require_resume_features, spatial_feature_loss
 from .execution import require_resume_execution, training_execution, validate_training_execution
 from .losses import (
@@ -506,6 +506,10 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
     feature_weight, feature_policy = feature_options(config)
     config.update(dino_feature_weight=feature_weight, dino_feature_policy=feature_policy)
     source_loss_every = validate_source_loss_every(config.get("source_loss_every", 0))
+    mesh_fraction = validate_probability(
+        config.get("mesh_texture_fraction", 0.0), "Mesh texture fraction"
+    )
+    config["mesh_texture_fraction"] = mesh_fraction
     late_only = validate_late_rgb_only(config)
     frequency_only = validate_raw_frequency_only(config)
     global_only = validate_raw_global_only(config)
@@ -737,6 +741,13 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             != gradient_epsilon
         ):
             raise ValueError("Resume gradient epsilon differs; initialize a new run")
+        if (
+            validate_probability(
+                resume_state["config"].get("mesh_texture_fraction", 0.0), "Mesh texture fraction"
+            )
+            != mesh_fraction
+        ):
+            raise ValueError("Resume mesh texture fraction differs; initialize a new run")
         require_resume_global_features(resume_state["config"], config)
         require_resume_raw_global_scope(resume_state["config"], config)
         require_resume_photo_epoch_order(resume_state["config"], config)
@@ -1010,6 +1021,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         augmentation_downsample=config.get("augmentation_downsample", 1),
         weak_texture_fraction=config.get("weak_texture_fraction", 0.0),
         fine_weak_texture_fraction=config.get("fine_weak_texture_fraction", 0.0),
+        mesh_texture_fraction=config.get("mesh_texture_fraction", 0.0),
         flat_chroma_stops=config["flat_chroma_stops"],
         optical_blur_probability=config.get("optical_blur_probability", 0.25),
         photographic_low_contrast_fraction=config.get("photographic_low_contrast_fraction", 0.0),

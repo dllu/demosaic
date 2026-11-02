@@ -6,7 +6,100 @@ import random
 import torch
 
 
-def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None, frequency_profile="legacy"):
+def crossed_line_texture(size: int, rng: random.Random, *, pixel_scale=1, present=None):
+    """Continuous weak crossed wires with matched empty backgrounds.
+
+    Final-pixel periods/widths are evaluated on the caller's2x canvas, then
+    receive the ordinary geometry/area reduction. A compact visibility mask
+    leaves exactly empty regions inside a present sample. No photograph, noise,
+    quantization, display transform or global RNG is used here.
+    """
+    if (
+        type(size) is not int
+        or size < 32
+        or type(pixel_scale) is not int
+        or pixel_scale not in (1, 2)
+    ):
+        raise ValueError("Crossed lines need size>=32 and pixel scale1 or2")
+    if present is not None and type(present) is not bool:
+        raise ValueError("Crossed-line presence must be boolean or None")
+    seed = rng.getrandbits(63)
+    chooser = random.Random(seed)
+    sampled_presence = chooser.random() < 0.5
+    present = sampled_presence if present is None else present
+    level = 2 ** chooser.uniform(-10, -1)
+    contrast = 2 ** chooser.uniform(math.log2(0.005), math.log2(0.2))
+    tint = torch.tensor([chooser.uniform(0.45, 1) for _ in range(3)], dtype=torch.float32)
+    tint /= tint.max()
+    direction = tint * chooser.choice((-1, 1))
+    if chooser.random() < 0.35:
+        direction = torch.tensor([chooser.uniform(-1, 1) for _ in range(3)], dtype=torch.float32)
+        direction /= direction.abs().max().clamp_min(1e-6)
+    slope = (
+        [chooser.uniform(-0.03, 0.03) for _ in range(2)] if chooser.random() < 0.5 else [0.0, 0.0]
+    )
+    angle = chooser.uniform(0, math.pi)
+    angles = [angle, angle + chooser.uniform(math.pi * 35 / 180, math.pi * 145 / 180)]
+    periods = [2 ** chooser.uniform(math.log2(6), math.log2(32)) for _ in range(2)]
+    widths = [chooser.uniform(0.4, 1.2) for _ in range(2)]
+    phases = [chooser.uniform(0, 1) for _ in range(2)]
+    extent = size / pixel_scale
+    center = [chooser.uniform(0.3, 0.7) * extent for _ in range(2)]
+    radii = [chooser.uniform(0.2, 0.5) * extent for _ in range(2)]
+    coordinates = (torch.arange(size, dtype=torch.float32) + 0.5) / pixel_scale
+    y, x = torch.meshgrid(coordinates, coordinates, indexing="ij")
+    background = (
+        level
+        * tint[:, None, None]
+        * (1 + slope[0] * (x / extent - 0.5) + slope[1] * (y / extent - 0.5))
+    )
+    wires = []
+    for angle, period, width, phase in zip(angles, periods, widths, phases, strict=True):
+        distance = (
+            torch.remainder(
+                x * math.cos(angle) + y * math.sin(angle) + phase * period + period / 2, period
+            )
+            - period / 2
+        )
+        wires.append(torch.exp(-0.5 * (distance / width) ** 2))
+    lattice = 1 - (1 - wires[0]) * (1 - wires[1])
+    radius = ((x - center[0]) / radii[0]).square() + ((y - center[1]) / radii[1]).square()
+    mask = torch.where(radius < 1, 0.5 * (1 + torch.cos(math.pi * radius.clamp_max(1))), 0)
+    mean = (lattice * mask).sum() / mask.sum().clamp_min(1)
+    field = mask * (lattice - mean)
+    # Do not amplify negligible Gaussian tails when no wire crosses a small mask.
+    field /= field.abs().max().clamp_min(0.1)
+    if not present:
+        field = torch.zeros_like(field)
+    rgb = background + level * contrast * direction[:, None, None] * field
+    recipe = {
+        "kind": "crossed-lines",
+        "present": present,
+        "seed": seed,
+        "size": size,
+        "pixel_scale": pixel_scale,
+        "level": level,
+        "requested_peak_relative_contrast": contrast,
+        "peak_relative_contrast": float(field.abs().max()) * contrast,
+        "tint": tint.tolist(),
+        "contrast_direction": direction.tolist(),
+        "background_slope": slope,
+        "angles_radians": angles,
+        "periods_final_pixels": periods,
+        "wire_sigma_final_pixels": widths,
+        "phases_cycles": phases,
+        "mask_center_final_pixels": center,
+        "mask_radii_final_pixels": radii,
+        "rms_relative_contrast": float(field.square().mean().sqrt()) * contrast,
+        "space": "scene-linear-sRGB",
+        "absence_probability": 0.5,
+    }
+    return rgb, recipe
+
+
+def weak_texture(
+    size: int, rng: random.Random, *, pixel_scale=1, kind=None, frequency_profile="legacy"
+):
     """Return a bounded scene-linear RGB texture and its generation recipe.
 
     Coordinates/frequencies use final sensor-pixel units. A caller preparing a
@@ -47,8 +140,11 @@ def weak_texture(size: int, rng: random.Random, *, pixel_scale=1, kind=None, fre
         recipe["frequency_profile"] = frequency_profile
     if kind == "bandlimited":
         # Low/high limits are safely below final Nyquist even on the 2x canvas.
-        low, high = ((1 / 6, rng.uniform(.34, .40)) if frequency_profile == "fine-v1"
-                     else (1 / 48, rng.uniform(1 / 8, 0.22)))
+        low, high = (
+            (1 / 6, rng.uniform(0.34, 0.40))
+            if frequency_profile == "fine-v1"
+            else (1 / 48, rng.uniform(1 / 8, 0.22))
+        )
         exponent = rng.uniform(0, 1.5)
         fy = torch.fft.fftfreq(size, d=1 / pixel_scale)[:, None]
         fx = torch.fft.rfftfreq(size, d=1 / pixel_scale)[None]

@@ -170,3 +170,13 @@ the exact historic cohorts, schedules and speed observations remain in that repo
 Earlier readiness claims, trial chronology and the exact previous pipeline page
 are preserved in the [local-time diary](../diary/2026-10-27-08-52-27-source-schedule-coverage.md).
 Original machine receipts and experiment evidence retain their bytes.
+
+## Optional crossed-line and empty targets
+
+The [default-off crossed-line source](crossed-line-training-data.md) replaces
+part of the existing weak-texture quota with broad thin-line/empty fields.
+Half are absent; compact masks also leave empty regions in positive samples.
+Continuous FP32 targets use the same2x geometry/area2 path. The44-test
+reader/data/regression suite and an actual selected-target optimizer update
+pass. This is prepared data, not a trained-quality gain; V141's frozen source
+is unchanged and the V142 production recipe remains unstarted.
