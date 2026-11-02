@@ -1,5 +1,9 @@
 # Stronger mesh with less spill into blank regions
 
+The later [local complex phase fit](complex-phase-envelope.md) makes both mesh
+directions more visible on complete frames, with measured nonuniform tradeoffs.
+This report retains the original scalar patch policy, results and receipts.
+
 **Local RAW evidence improves the harmonic patch correction: the tested fence
 stays visible, while added structure in blank areas falls substantially.**
 The correction now works with the completed V1435k parent, preserving its

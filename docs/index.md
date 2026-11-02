@@ -11,11 +11,11 @@ The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
 adds material/camera gains and native examples, with selected color-bias tradeoffs
 and unmeasured complete-panel/frame scope.
 
-The experimental [local harmonic correction](local-phase-harmonic-patch.md)
-retains more fine mesh with less partial-texture spill than its first version.
-Its [optional full-image CLI path](phase-harmonic-inference.md) now runs complete
-102MP RGB16 outputs, with window-dependent gains, additional CPU cost and
-unchanged pixels in the tested wider sky region.
+The experimental [local phase fit](complex-phase-envelope.md) now makes more
+crossing mesh visible on complete102MP RGB16 outputs. The wider tested sky
+retains every parent pixel. Fresh dark recipes show lower average blank spill,
+slightly weaker texture recovery and one blank-region regression; CPU cost and
+window sensitivity remain. [Earlier scalar implementation](phase-harmonic-inference.md).
 
 V120's primary/analytic panels, independent saved-output checks, selected native
 review, matched-profile GFX comparisons and complete102MP RGB16 exports are

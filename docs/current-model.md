@@ -1,6 +1,13 @@
 # Current model choices
 
-The [local phase-aware correction](local-phase-harmonic-patch.md) on V1435k
+The [local complex phase fit](complex-phase-envelope.md) is now the default
+envelope within optional `--phase-harmonic`: more visible crossing mesh on
+complete V143 frames and unchanged wider sky. Fresh64-recipe validation finds
+lower average added blank structure, slightly weaker texture recovery and one
+blank-region regression. The scalar mode remains explicitly available. General
+inference still disables correction by default; weights are unchanged.
+
+The earlier [scalar phase-aware correction](local-phase-harmonic-patch.md) on V1435k
 patches gives stronger fine diagonals in both mesh windows/priors. In the active
 new validation recipe, added structure in complete-patch blank regions falls62%
 versus the first harmonic correction, with stronger response and lower error.

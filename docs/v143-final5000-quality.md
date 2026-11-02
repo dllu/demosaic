@@ -1,5 +1,10 @@
 # V143 completes5,000: useful faint and noisy-flat gains
 
+The later [local complex phase fit](complex-phase-envelope.md) now compares
+amplitude-only and locally varying phase correction on these same V143 parents,
+with complete-frame mesh gains and measured nonuniform blank/texture tradeoffs.
+The trained endpoint, original review and machine receipts below are unchanged.
+
 **V143 gains0.26493dB faint ADC PSNR over V120 on the fixed panel and lowers
 noisy-flat spatial RMS4.64%.** Ordinary/shadow means also improve slightly.
 Coarse noisy-flat error remains2.63% higher and ADC-only spatial RMS12.85%

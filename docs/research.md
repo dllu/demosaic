@@ -1,5 +1,11 @@
 # Current method research
 
+The [local complex envelope](complex-phase-envelope.md) extends amplitude-only
+correction to slowly varying phase, making both real mesh families more visible
+without lowering the frequency threshold. The wider sky stays unchanged; fresh
+dark recipes show a nonuniform blank/texture tradeoff. Both inference modes remain
+available, with complex the current optional-stage default.
+
 The [local phase-aware correction](local-phase-harmonic-patch.md) makes fine
 mesh more visible on V143 while reducing the original harmonic correction's
 partial-texture spill. The [optional full-image implementation](phase-harmonic-inference.md)

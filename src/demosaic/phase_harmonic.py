@@ -324,12 +324,13 @@ def _origins(length, stride):
     return starts
 
 
-def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128):
+def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128, envelope="complex"):
     """Return CPU float32 camera RGB and diagnostics for an arbitrary Bayer image.
 
     Fixed native256 patches overlap on even sensor coordinates. Normalize their
     tapered corrections, including inactive patches, and retain the outer-image
     fade. Only incomplete CFA cells/small images need phase-preserving extension.
+    Local complex envelopes carry amplitude/phase; ``scalar`` reproduces v1.
     Large accumulators are float32; spectral selection/fits remain float64.
     No clipping, color conversion, reference image, RNG or neural calls occur.
     """
@@ -344,6 +345,14 @@ def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128):
         raise ValueError("Require finite nonnegative shot/read variance coefficients")
     if not isinstance(stride, (int, np.integer)) or stride % 2 or not 2 <= stride <= 192:
         raise ValueError("Stride must be even and between 2 and 192 native pixels")
+    if envelope not in ("scalar", "complex"):
+        raise ValueError("Envelope must be scalar or complex")
+    if envelope == "complex":
+        from .phase_envelope import correct_complex_patch
+
+        corrector = correct_complex_patch
+    else:
+        corrector = correct_local_patch
     if (
         colors.shape != (4,)
         or not np.issubdtype(colors.dtype, np.integer)
@@ -352,7 +361,8 @@ def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128):
         raise ValueError("Require a standard integer Bayer phase layout")
     result = np.array(base, dtype=np.float32, copy=True)
     metadata = {
-        "method": "local-phase-harmonic-v1",
+        "method": "local-phase-harmonic-v2" if envelope == "complex" else "local-phase-harmonic-v1",
+        "envelope": envelope,
         "enabled": True,
         "stride_native": int(stride),
         "tile_native": 256,
@@ -387,7 +397,7 @@ def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128):
             packed = np.stack([mosaic[p // 2 :: 2, p % 2 :: 2] for p in range(4)])
             variance = np.maximum(packed, 0) * shot + read
             parent = base[:, tile_rows[:, None], tile_cols]
-            corrected, diagnostic = correct_local_patch(packed, variance, colors, parent)
+            corrected, diagnostic = corrector(packed, variance, colors, parent)
             delta = corrected - parent
             h, w = min(256, height - y), min(256, width - x)
             add[:, y : y + h, x : x + w] += delta[:, :h, :w]

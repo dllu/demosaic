@@ -1,5 +1,11 @@
 # Experiment index
 
+The [local complex phase fit](complex-phase-envelope.md) improves the visible
+crossing mesh on complete V143 frames. A locked64-fresh-recipe review adds512
+actual root/DINO calls: only two recipes activate, with lower average blank spill,
+slightly higher texture error than scalar and a per-recipe blank regression.
+The tested wider sky and fixed photo/uniform outputs retain parent values.
+
 The [completed V1435k report](v143-final5000-quality.md) gains0.26493dB faint
 ADC PSNR and4.64% lower noisy-flat spatial RMS versus V120, with coarse/ADC
 costs and no clear new real-mesh recovery. The [local phase-aware correction](local-phase-harmonic-patch.md) now gives

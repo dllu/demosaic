@@ -1,5 +1,14 @@
 # GFX100S qualitative comparisons
 
+## Local phase fitting: more visible crossing mesh
+
+The [new complete-frame comparison](complex-phase-envelope.md) adds locally
+varying sine/cosine phase to the same V143 parents and RAW inputs. Both mesh
+directions are more visible under both priors, with both camera JPEGs retained.
+The wider2.88MP sky stays unchanged. Recovery remains soft and patchy; stronger
+bright-sign changes and a fresh procedural blank-region regression are disclosed.
+The earlier scalar correction remains an explicit inference option.
+
 ## Local phase-aware correction: stronger mesh with less spill
 
 The [new local patch report](local-phase-harmonic-patch.md) compares V1435k,

@@ -24,8 +24,10 @@ Add `--phase-harmonic` to `infer` for the experimental local periodic-detail
 correction. It runs after neural restoration and before linear/sRGB RGB16 export,
 using the same observed RAW and noise conditioning. Fixed256-pixel windows
 overlap at native stride128 by default; `--phase-harmonic-stride` accepts even
-values2–192. It adds CPU time and does not eliminate partial-texture spill.
-[Complete102MP results, native comparisons, wider sky and exact-flat checks](phase-harmonic-inference.md).
+values2–192. Local amplitude/phase fitting is the default;
+`--phase-harmonic-envelope scalar` reproduces the earlier amplitude-only mode.
+It adds CPU time and does not eliminate partial-texture spill.
+[Complete102MP results, native comparisons, wider sky and exact-flat checks](complex-phase-envelope.md).
 This option is currently exposed by `infer`, not the DNG batch exporter.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality

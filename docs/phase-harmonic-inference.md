@@ -1,5 +1,10 @@
 # Local harmonic refinement on complete GFX frames
 
+This report preserves the original **scalar amplitude-only v1** execution.
+The [new local phase fit](complex-phase-envelope.md) is now the optional stage's
+default and shows more crossing mesh, with measured tradeoffs. Add
+`--phase-harmonic-envelope scalar` to reproduce the implementation below.
+
 The experimental local correction now runs through `demosaic infer` on complete
 102MP images and exports linear and sRGB RGB16 TIFFs. It uses measured RAW
 evidence to add periodic detail after neural restoration. Window positions affect
@@ -21,7 +26,7 @@ uv run demosaic infer /mnt/external/demosaic/models/v143-final5000.pt photo.raf 
   --preview /mnt/external/demosaic/output/photo-local-srgb.tiff \
   --shot 0.00128 --read 0.0000065536 \
   --tile 512 --overlap 64 --batch-size 4 --precision float32 \
-  --phase-harmonic --phase-harmonic-stride 128
+  --phase-harmonic --phase-harmonic-stride 128 --phase-harmonic-envelope scalar
 ```
 
 Noise values above are the tested nominal GFX prior, not calibrated coefficients
