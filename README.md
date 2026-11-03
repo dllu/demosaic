@@ -28,6 +28,8 @@ Recent [local attention](docs/v144-v145-quality.md) and
 The [V146 frequency and mesh pilot](docs/v146-coherent-frequency.md) completes
 500 updates and both raw/EMA reviews: mesh response rises less than .7% relative while
 mesh/photo error grows, with no useful new native detail. The
+[matched window-transfer review](docs/v146-window-transfer.md) also finds no
+useful gain from 512-pixel Fourier support, including 72 fresh512 flat controls. The
 [patch-filter comparison](docs/collaborative-detail.md) records a separate failure:
 uniform flats stay unchanged but building color blocks appear.
 

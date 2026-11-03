@@ -5,6 +5,9 @@ The [V146 Fourier and mesh pilot](v146-coherent-frequency.md) completes
 inputs each. Mesh response grows less than .7% relative while mesh/photo errors rise; 22 inspected
 native figures show no useful new lattice. Small flat/sky gains do not change
 the useful baselines. Window metadata and resume checks now preserve geometry.
+Its [matched inference-window follow-up](v146-window-transfer.md) also finds no
+useful recovery at native512 support with the same weights. 32 native figures and
+72 fresh512 flat fields are complete; smaller-context bypasses are explicit.
 
 The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
 original positive global gate as selection and restores contrast only inside

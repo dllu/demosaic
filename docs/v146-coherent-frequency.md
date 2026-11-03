@@ -174,8 +174,9 @@ same predeclared observations/endpoints, with no training restart or replay.
 
 This is one 500-update feasibility seed, not a full-budget architecture verdict.
 The larger window, faster branch LR and sixfold nominal mesh quota do not solve
-the detail loss here. A separate window-only inference transfer is a possible
-next diagnostic, **not an executed result**. Native512 training with unchanged
+the detail loss here. The subsequent [window-only inference transfer](v146-window-transfer.md)
+now completes both saved weight sets at native512 support, also without useful
+new recovery. It adds no training. Native512 training with unchanged
 bin4→geometry→area2 would shrink this photographic pool from 90,782 to 1,759 and
 leave zero of the current 27 reviewed ROIs eligible; it needs an explicit new
 cohort/ROI plan. [Metadata-only eligibility evidence](results/v146-coherent-frequency-larger-context-eligibility-v1.json).

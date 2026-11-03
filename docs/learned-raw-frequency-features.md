@@ -57,6 +57,9 @@ detect a changed Fourier geometry. The [V146 recipe](../configs/quality-v143-coh
 tests 128 packed pixels / 256 native pixels with mesh-rich training from V143.
 Its [completed 500-update raw/EMA review](v146-coherent-frequency.md) finds tiny
 response/flat gains with worse mesh/photo errors and no useful new native detail.
+The [matched inference-window transfer](v146-window-transfer.md) subsequently
+tests native512 support with identical weights and 72 fresh512 flat fields; it
+also yields no useful new mesh recovery. Smaller-context bypasses are labeled.
 Larger windows do not establish better recovery or tile-boundary behavior.
 
 Within each frame, remove a weighted affine fit, apply a sine-product analysis
