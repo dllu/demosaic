@@ -4,8 +4,9 @@
 this new diagnostic.** Mean 3–8px-band response is .151 for faint organic photos
 and .399 for dark photos, with ideal response1. Feathers, moth scales, grass
 and bark remain soft; selected outputs contain blurred islands and false color.
-The V144/V145 endpoint comparisons are pending. This is a measured baseline,
-not an improvement or a universal photo-quality result.
+The [completed V144/V145 endpoint comparison](v144-v145-quality.md) finds
+near-parent outputs, without useful new fine detail. This section preserves
+the measured baseline, not an improvement or a universal photo-quality result.
 
 [Actual baseline results](results/spatial-photo-supplement-parent-baseline-v1.json) ·
 [Independent metric/target/PNG audit](results/spatial-photo-supplement-parent-audit-v2.json) ·
@@ -82,11 +83,11 @@ source/target linear colors differ by at most1.12e−8. The separate input audit
 also checks every input fingerprint and the16-bit ADC lattice.
 [Input audit](results/spatial-photo-supplement-input-audit-v1.json).
 
-## Endpoint comparison still running
+## Completed endpoint comparison
 
 This supplement leaves the original150-input reviews and training schedules
 unchanged. It reuses64 V143 predictions and adds64 actual V143 parent forwards;
-each future endpoint gets128 forwards, for320 new model forwards and320 encoder
+each endpoint uses 128 forwards, for 320 new model forwards and 320 encoder
 forwards in total.
 Only64 new noisy observations are generated. No training, RAW decodes or
 source-drive opens are added. `/mnt/dataz` remains unused. The original main
@@ -99,10 +100,15 @@ because it looked for the flat audit under the wrong filename. The replacement
 adopts all150 completed V144 outputs; the replacement supplement adopts its64
 parent outputs. Original failures and receipts remain preserved, with no
 inference/noise replay, training restart or reset of the conservative deadlines.
-The supplement waits for both primary reviews and the replacement owner to
-exit before collecting V144/V145. Its report and independent auditor remain
-frozen with the input plan. Flat-region quality must
-be assessed from the analytic fields and real sky alongside photographic gains.
+After both primary reviews and replacement-owner exit, the supplement completed
+both 128-input collections. Model/backbone/input/RNG checks pass. All 384 metric
+rows and 20,275,200 PNG panel channels pass independent checks; all 56 boards
+were viewed in 14 unresized sheets. The [paired report](v144-v145-quality.md)
+compares the tiny photo changes with flat/sky costs. V145 organic full-context
+error decreases only .013%/.009% for faint/dark cases versus V144, with slightly
+worse relative detail-band error in both conditions. No clear new feather,
+moth-scale, grass or mesh recovery appears. The original baseline and all
+source/data/failed-recovery receipts remain unchanged.
 [Supplement plan](results/spatial-photo-supplement-plan-v1.json) ·
 [Active recovery plan](results/spatial-photo-supplement-recovery-plan-v2.json) ·
 [Preserved recovery evidence](results/spatial-photo-review-recovery-publication-v2.json) ·

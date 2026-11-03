@@ -1,11 +1,12 @@
 # Experiment index
 
-The [V144/V145 spatial pilot](v143-spatial-attention-trial.md) is running fresh
-matched continuations from V143, with local RAW attention and a larger rate for
-its new branch in V145. Genuine CPU/CUDA16+2 checks and independent state audits
-pass. V144's1k control and numeric reviews are complete; V145 training and the
-paired quality comparison remain in progress. The [organic-photo supplement](spatial-photo-supplement.md)
-publishes24 audited V143 baseline triplets. Defaults are unchanged.
+The completed [V144/V145 spatial pilot](v144-v145-quality.md) finds no useful
+fine-detail gain at 1k: faint ADC −.00813 dB and noisy-flat spatial RMS +1.11% versus
+the matched continuation. All 620 inference calls, independent audits and 154
+native-board views are complete. Twenty-four new figures include exact
+constructed-GT triplets, both protected real scenes/JPEGs, flats and organic
+photos. The [photographic supplement](spatial-photo-supplement.md) is complete.
+V143 remains the faint-detail study parent; V120 remains the general choice.
 
 The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
 original positive global gate as selection and restores contrast only inside

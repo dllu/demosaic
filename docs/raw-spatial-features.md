@@ -1,15 +1,16 @@
 # Local spatial attention for RAW detail
 
-**An optional 22,664-parameter branch now mixes signed RAW detail across local
-windows before the pretrained RGB trunk.** Both discarded genuine-V120 CPU16+2
-and CUDA256/B16 checks pass. Model quality is
-unmeasured. The [V131/V132 full-budget trial](raw-spatial-training.md) has four new
+**The optional 22,664-parameter branch mixes signed RAW detail across local
+windows before the pretrained RGB trunk.** The completed
+[V144/V145 1k comparison](v144-v145-quality.md) finds no useful new fine-detail
+recovery: faint ADC PSNR −.00813 dB and noisy-flat spatial RMS +1.11% versus the
+matched continuation. Native mesh/organic detail remains weak. Genuine CPU/CUDA
+implementation checks pass. The [V131/V132 full-budget trial](raw-spatial-training.md) has four
 matched CPU/CUDA checks complete. V131's original20k control stopped at the32GB
 reserve, preserving step14,549; its [1k progress review](v131-progress1000-quality.md)
 has mixed detail changes and no clear mesh recovery. V132 production remains
-unstarted. The new [V144/V145 pilot](v143-spatial-attention-trial.md) starts
-from V143 with a separate branch learning rate and a matched continuation control;
-its image quality is unmeasured.
+unstarted. The [V144/V145 pilot](v143-spatial-attention-trial.md) is a separate
+completed run from V143, with a larger branch learning rate and matched control.
 V120 remains the general recommendation; the original mean-loss trial
 keeps its frozen inputs and schedule.
 
@@ -123,6 +124,7 @@ These are discarded implementation states. The separate
 arms, with four executed exact-recipe checks. V131 stopped at14,549 and V132
 production remains unstarted. The completed [control1k progress review](v131-progress1000-quality.md)
 has mixed changes; the matched architecture/full-endpoint comparison remains
-unmeasured. The new [V144/V145 pilot](v143-spatial-attention-trial.md) uses V143
-and a separate branch learning rate. Both real train scenes and siblings stay
+unmeasured. The completed [V144/V145 pilot](v144-v145-quality.md) uses V143
+and a separate branch learning rate, without useful detail gains at 1k.
+Both real train scenes and siblings stay
 outside training.

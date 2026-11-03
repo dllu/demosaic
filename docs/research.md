@@ -108,21 +108,22 @@ values. Remaining spill and missing full-frame support keep this experimental.
 
 ## Current hypotheses and evidence
 
-The new [V144/V145 pilot](v143-spatial-attention-trial.md) tests the implemented
-local RAW attention branch from V143 with a separate, larger branch learning
-rate, against a matched continuation control. Image quality remains unmeasured;
-it does not resume or relabel the unstarted V132 experiment.
-The [new organic-photo supplement](spatial-photo-supplement.md) exposes the
-remaining V143 gap on feathers, moth scales and grass: faint/dark mean native
-DCT response .151/.399, with ideal1. Its24 inspected baseline triplets and
-independent128-row/5.53M-channel audit are complete; endpoint comparisons wait
-for the original matched runs and primary reviews.
+The completed [V144/V145 pilot](v144-v145-quality.md) tests local RAW attention
+from V143 with a larger branch rate and matched continuation. At 1k it gives
+faint ADC −.00813 dB, noisy-flat spatial RMS +1.11% and no clear new mesh/organic
+detail. The [photographic supplement](spatial-photo-supplement.md) confirms
+near-parent outputs on 128 observations from 16 sources. All primary/flat/photo
+audits and 154 native-board views are complete. This does not resume or relabel
+the unstarted V132 experiment. A subsequent
+[fixed whole-patch probe](cross-phase-patch-return.md) also adds noise without
+useful detail. Further matching work needs explicit rejection of unsupported
+noisy patches; V120/V143 recommendations are unchanged.
 
 | Question | Evidence and current action |
 | --- | --- |
 | Can a frozen foundation encoder supply useful detail supervision? | [Completed V128 pilot](v128-feature-pilot-quality.md): the26-call gradient diagnostic passes, but weight.1 gives no useful gain at1,000 matched updates. Independent scores and all28 native boards are complete; the term stays off by default |
 | Can RAW phase/frequency features preserve thin structures? | [Completed V122/V123 trial](v122-v123-quality.md): V122 slightly improves weak eight-pixel carrier response; V123 gains0.05493dB photo PSNR against it but lowers unseen-camera PSNR and greatly worsens the ADC tail. Weak natural detail/mesh remain soft; full numerical/selected native review is published |
-| Can local attention use spatial repetition more effectively? | [Optional RAW spatial branch](raw-spatial-features.md) adds22,664 parameters and preserves constant features. [V131's unchanged-architecture control at1k](v131-progress1000-quality.md) has tiny ordinary gains, deeper-shadow/faint regressions, mixed local response and no clear new mesh recovery. V131 stopped at the memory reserve on90,781/29; V132's branch and full-endpoint quality remain unmeasured |
+| Can local attention use spatial repetition more effectively? | [Completed V144/V145 1k](v144-v145-quality.md): ordinary +.00036 dB but faint ADC −.00813 dB and noisy-flat spatial RMS +1.11% versus matched continuation. No clear new mesh/organic detail across 154 native boards. The older [V131/V132 trial](raw-spatial-training.md) remains distinct: V131 stopped at 14,549 and V132 production never started |
 | Can whole-tile matching preserve repeated weak detail? | [Completed normalized V1371k](v137-global-conditioned-quality.md) gives faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and no clear new lattice recovery. [Actual trained-memory removal](global-memory-contribution.md) changes0.83–1.39% of branch-offset RMS on six contexts; the local feature path dominates there despite varied attention. This is not a measured final-RGB effect |
 | Can a larger update to the new branch help without moving the trained parent? | [V138](raw-global-only-training.md) freezes91 parent model/EMA tensors and trains18 normalized global tensors at LR1e−3. Genuine CPU/CUDA16+2 checks pass; original1k production and native/GFX review remain unstarted after the V125 dependency queue exited. A bounded companion will compare trained-memory contribution with saved V137 after its reviews finish. Combined scope/LR intervention; quality remains unmeasured |
 | Can global matching learn without the local shortcut? | [V139 memory-only branch](raw-global-memory-only.md) retains15 tensors/14,144 parameters and a frozen V120 parent. Genuine CPU/CUDA16+2 checks pass. Original1k training and matched102-input native/faint/GFX review remain prepared after the dependency queue exited;510 predictions are reusable. Trained quality remains unmeasured |
