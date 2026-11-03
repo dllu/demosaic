@@ -1,13 +1,15 @@
 # GFX100S qualitative comparisons
 
-## Local phase fitting: more visible crossing mesh
+## TV phase fitting: clearer crossing mesh
 
-The [new complete-frame comparison](complex-phase-envelope.md) adds locally
-varying sine/cosine phase to the same V143 parents and RAW inputs. Both mesh
-directions are more visible under both priors, with both camera JPEGs retained.
-The wider2.88MP sky stays unchanged. Recovery remains soft and patchy; stronger
-bright-sign changes and a fresh procedural blank-region regression are disclosed.
-The earlier scalar correction remains an explicit inference option.
+The [new complete-frame comparison](edge-phase-envelope.md) smooths local wave
+coefficients with TV on the same V143 parents and RAW inputs. The crossing mesh
+is clearer under both priors, with both camera JPEGs retained. The wider 2.88MP
+sky stays unchanged. Recovery remains soft and patchy; stronger bright-sign
+changes include new independent ISO100 controls and measured-CFA diagnostics.
+Fresh procedural checks find 48.8% less mean blank spill than Gaussian phase
+fitting, with some regressions and slightly higher texture error. Earlier
+`complex` and `scalar` modes remain explicit inference options.
 
 ## Local phase-aware correction: stronger mesh with less spill
 

@@ -1,10 +1,11 @@
 # Experiment index
 
-The [local complex phase fit](complex-phase-envelope.md) improves the visible
-crossing mesh on complete V143 frames. A locked64-fresh-recipe review adds512
-actual root/DINO calls: only two recipes activate, with lower average blank spill,
-slightly higher texture error than scalar and a per-recipe blank regression.
-The tested wider sky and fixed photo/uniform outputs retain parent values.
+The [TV phase fit](edge-phase-envelope.md) gives clearer crossing mesh on complete
+V143 frames. A locked 64-fresh-recipe review adds 512 actual root/DINO calls:
+16 recipes activate, with 48.8% less mean blank spill than Gaussian phase fitting,
+slightly higher texture error and some blank regressions. Tested wider sky and
+fixed photo/uniform outputs retain parent values. Highlight changes, incomplete
+solver convergence and speed remain limitations. [Earlier complex fit](complex-phase-envelope.md).
 
 The [completed V1435k report](v143-final5000-quality.md) gains0.26493dB faint
 ADC PSNR and4.64% lower noisy-flat spatial RMS versus V120, with coarse/ADC

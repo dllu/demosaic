@@ -117,7 +117,7 @@ def test_cli_selects_envelope_before_RGB16_export(tmp_path, monkeypatch):
         lambda *a, **k: (torch.from_numpy(base.copy()), {"seconds": 0, "test_stub": True}),
     )
     errors = {}
-    for mode in ["scalar", "complex"]:
+    for mode in ["scalar", "complex", "edge"]:
         output = tmp_path / f"{mode}.tiff"
         main(
             [
@@ -146,4 +146,8 @@ def test_cli_selects_envelope_before_RGB16_export(tmp_path, monkeypatch):
         metadata = json.loads(output.with_suffix(".json").read_text())
         assert metadata["phase_harmonic"]["envelope"] == mode
         assert metadata["phase_harmonic"]["new_model_calls"] == 0
+        if mode == "edge":
+            assert metadata["phase_harmonic"]["TV"]["device"] == "cpu"
+            assert metadata["phase_harmonic"]["TV"]["solves"] > 0
     assert errors["complex"] < 0.4 * errors["scalar"]
+    assert errors["edge"] < np.mean((base[:, 48:208, 48:208] - target[:, 48:208, 48:208]) ** 2)

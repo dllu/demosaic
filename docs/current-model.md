@@ -1,11 +1,12 @@
 # Current model choices
 
-The [local complex phase fit](complex-phase-envelope.md) is now the default
-envelope within optional `--phase-harmonic`: more visible crossing mesh on
-complete V143 frames and unchanged wider sky. Fresh64-recipe validation finds
-lower average added blank structure, slightly weaker texture recovery and one
-blank-region regression. The scalar mode remains explicitly available. General
-inference still disables correction by default; weights are unchanged.
+The [TV phase fit](edge-phase-envelope.md) is now the default envelope within
+optional `--phase-harmonic`: clearer crossing mesh on complete V143 frames and
+unchanged wider sky. Fresh 64-recipe validation finds 48.8% less mean added blank
+structure versus the Gaussian complex envelope, slightly higher texture error
+and some blank regressions. Highlight color and runtime remain limitations.
+Both `complex` and `scalar` remain available. General inference still disables
+correction by default; weights are unchanged.
 
 The earlier [scalar phase-aware correction](local-phase-harmonic-patch.md) on V1435k
 patches gives stronger fine diagonals in both mesh windows/priors. In the active

@@ -101,24 +101,24 @@ The independent ISO100 exposure is an approximate qualitative reference,
 
 ![V120 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
-The additional **fine green mesh beside the red train's cab** now shows more of
-both crossing directions with [local phase fitting](docs/complex-phase-envelope.md)
-on complete V1435k outputs, under both fixed priors. Recovery stays soft and uneven;
-the tested2.88MP sky retains every parent pixel. New dark procedural checks find
-less average blank-region spill than amplitude-only correction, with slightly
-weaker texture recovery and a blank regression in one active recipe.
-Use `infer --phase-harmonic`; the older mode remains available with
-`--phase-harmonic-envelope scalar`. CPU correction adds substantial time.
+The additional **fine green mesh beside the red train's cab** is clearer with
+[TV phase fitting](docs/edge-phase-envelope.md) on complete V1435k outputs under
+both fixed priors. Recovery stays soft and uneven; the tested 2.88MP sky retains
+every parent pixel. On 64 fresh dark recipes, TV cuts mean added structure in
+blank regions **48.8% versus Gaussian phase fitting**, with slightly higher
+texture error and some blank-region regressions. Highlight color changes remain
+unverified. Use `infer --phase-harmonic`; `complex` and `scalar` remain available
+with `--phase-harmonic-envelope`. Refinement still adds substantial time.
 
-Below: noisy Malvar → full-frame V1435k → local correction → DSCF3842 camera JPEG → independent
+Below: noisy Malvar → full-frame V1435k → TV correction → DSCF3842 camera JPEG → independent
 DSCF3835 ISO100 AHD → ISO100 camera JPEG, using the fixed nearby prior.
 Native160px cells share+4EV. Both ISO100 comparators are **not GT**; aperture,
-exposure time and processing differ. [Both full-frame priors and limits](docs/complex-phase-envelope.md) ·
-[Source/ROI/checkpoint/conditioning/display metadata](docs/images/complex-phase-envelope-v1/manifest.json).
+exposure time and processing differ. [Both full-frame priors and limits](docs/edge-phase-envelope.md) ·
+[Source/ROI/checkpoint/conditioning/display metadata](docs/images/edge-phase-envelope-v1/manifest.json).
 
-![Full-frame local phase fitting, left native mesh crop](docs/images/complex-phase-envelope-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-left-JPEG.png)
+![Full-frame TV phase fitting, left native mesh crop](docs/images/edge-phase-envelope-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-left-JPEG.png)
 
-![Full-frame local phase fitting, right native mesh crop](docs/images/complex-phase-envelope-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-right-JPEG.png)
+![Full-frame TV phase fitting, right native mesh crop](docs/images/edge-phase-envelope-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-right-JPEG.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)
@@ -142,7 +142,7 @@ PYTHONPATH=.:src:scripts uv run pytest -q
 
 Noise values are examples; use suitable camera/input priors.
 Optional `--phase-harmonic` adds local periodic-detail refinement; see its
-[complete-frame comparisons and limitations](docs/complex-phase-envelope.md).
+[complete-frame comparisons and limitations](docs/edge-phase-envelope.md).
 [Linear DNG + full-resolution JPEG batch export](docs/dng-export.md) preserves
 camera RGB and adapts existing darktable XMP edits. Add `--hot-pixels` to repair
 isolated Bayer defects before restoration.

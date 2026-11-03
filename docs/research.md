@@ -1,10 +1,12 @@
 # Current method research
 
-The [local complex envelope](complex-phase-envelope.md) extends amplitude-only
-correction to slowly varying phase, making both real mesh families more visible
-without lowering the frequency threshold. The wider sky stays unchanged; fresh
-dark recipes show a nonuniform blank/texture tradeoff. Both inference modes remain
-available, with complex the current optional-stage default.
+The [TV phase envelope](edge-phase-envelope.md) smooths local sine/cosine
+coefficients while allowing sharper support changes. Both real mesh families are
+clearer without lowering the frequency threshold. Fresh dark recipes show 48.8%
+less mean added blank structure than the Gaussian complex fit, with slightly
+higher texture error and some blank regressions. The wider sky stays unchanged;
+highlight color, bounded-solver accuracy and speed remain open. `edge` is now the
+optional-stage default; earlier `complex` and `scalar` modes remain available.
 
 The [local phase-aware correction](local-phase-harmonic-patch.md) makes fine
 mesh more visible on V143 while reducing the original harmonic correction's

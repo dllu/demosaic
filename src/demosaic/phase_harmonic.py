@@ -324,13 +324,17 @@ def _origins(length, stride):
     return starts
 
 
-def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128, envelope="complex"):
+def refine_phase_harmonics(
+    raw, colors, base, *, shot, read, stride=128, envelope="edge", tv_device="cpu"
+):
     """Return CPU float32 camera RGB and diagnostics for an arbitrary Bayer image.
 
     Fixed native256 patches overlap on even sensor coordinates. Normalize their
     tapered corrections, including inactive patches, and retain the outer-image
     fade. Only incomplete CFA cells/small images need phase-preserving extension.
-    Local complex envelopes carry amplitude/phase; ``scalar`` reproduces v1.
+    Edge-preserving complex envelopes are current; ``complex``/``scalar`` retain
+    earlier Gaussian-envelope modes. The optional TV solver uses local CUDA
+    buffers when requested; complete image accumulators remain on the CPU.
     Large accumulators are float32; spectral selection/fits remain float64.
     No clipping, color conversion, reference image, RNG or neural calls occur.
     """
@@ -345,9 +349,15 @@ def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128, envelop
         raise ValueError("Require finite nonnegative shot/read variance coefficients")
     if not isinstance(stride, (int, np.integer)) or stride % 2 or not 2 <= stride <= 192:
         raise ValueError("Stride must be even and between 2 and 192 native pixels")
-    if envelope not in ("scalar", "complex"):
-        raise ValueError("Envelope must be scalar or complex")
-    if envelope == "complex":
+    if envelope not in ("scalar", "complex", "edge"):
+        raise ValueError("Envelope must be scalar, complex or edge")
+    if envelope == "edge":
+        from functools import partial
+
+        from .phase_tv import correct_edge_phase_patch
+
+        corrector = partial(correct_edge_phase_patch, device=tv_device)
+    elif envelope == "complex":
         from .phase_envelope import correct_complex_patch
 
         corrector = correct_complex_patch
@@ -361,7 +371,11 @@ def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128, envelop
         raise ValueError("Require a standard integer Bayer phase layout")
     result = np.array(base, dtype=np.float32, copy=True)
     metadata = {
-        "method": "local-phase-harmonic-v2" if envelope == "complex" else "local-phase-harmonic-v1",
+        "method": {
+            "scalar": "local-phase-harmonic-v1",
+            "complex": "local-phase-harmonic-v2",
+            "edge": "local-phase-harmonic-v3",
+        }[envelope],
         "envelope": envelope,
         "enabled": True,
         "stride_native": int(stride),
@@ -375,6 +389,14 @@ def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128, envelop
         "selected_frequencies": 0,
         "new_model_calls": 0,
     }
+    if envelope == "edge":
+        metadata["TV"] = {
+            "device": str(tv_device),
+            "solves": 0,
+            "iterations": 0,
+            "capped": 0,
+            "maximum_relative_primal_dual_gap": 0.0,
+        }
     if shot == read == 0:
         metadata.update(ADC_only_bypass=True, seconds=time.perf_counter() - started)
         return result, metadata
@@ -406,6 +428,17 @@ def refine_phase_harmonics(raw, colors, base, *, shot, read, stride=128, envelop
             metadata["selected_patches"] += bool(diagnostic.get("peaks"))
             metadata["active_patches"] += bool(np.any(delta))
             metadata["selected_frequencies"] += len(diagnostic.get("peaks", []))
+            if envelope == "edge":
+                for local in diagnostic.get("local", []):
+                    solver = local.get("solver", {}).get("edge")
+                    if solver:
+                        metadata["TV"]["solves"] += 1
+                        metadata["TV"]["iterations"] += solver["iterations"]
+                        metadata["TV"]["capped"] += not solver["converged"]
+                        metadata["TV"]["maximum_relative_primal_dual_gap"] = max(
+                            metadata["TV"]["maximum_relative_primal_dual_gap"],
+                            solver["relative_primal_dual_gap"],
+                        )
     np.maximum(weights, 1, out=weights)
     np.divide(add, weights[None], out=add)
     result += add

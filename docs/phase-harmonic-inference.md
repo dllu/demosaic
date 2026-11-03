@@ -1,7 +1,7 @@
 # Local harmonic refinement on complete GFX frames
 
 This report preserves the original **scalar amplitude-only v1** execution.
-The [new local phase fit](complex-phase-envelope.md) is now the optional stage's
+The [new TV phase fit](edge-phase-envelope.md) is now the optional stage's
 default and shows more crossing mesh, with measured tradeoffs. Add
 `--phase-harmonic-envelope scalar` to reproduce the implementation below.
 

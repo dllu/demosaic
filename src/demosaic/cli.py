@@ -83,9 +83,13 @@ def parser():
     )
     infer.add_argument(
         "--phase-harmonic-envelope",
-        choices=("complex", "scalar"),
-        default="complex",
-        help="Local amplitude/phase fit; scalar reproduces the original amplitude-only mode",
+        choices=("edge", "complex", "scalar"),
+        default="edge",
+        help="Edge-preserving phase fit; complex/scalar retain earlier envelope modes",
+    )
+    infer.add_argument(
+        "--phase-harmonic-device",
+        help="TV solver device; defaults to the neural device (cpu selects the reference)",
     )
     infer.add_argument(
         "--cudnn-benchmark",
@@ -340,6 +344,7 @@ def main(argv=None):
                 read=args.read,
                 stride=args.phase_harmonic_stride,
                 envelope=args.phase_harmonic_envelope,
+                tv_device=args.phase_harmonic_device or args.device,
             )
             rgb = torch.from_numpy(corrected)
         write_rgb16(output, rgb.permute(1, 2, 0).numpy(), metadata=metadata, flip=flip)

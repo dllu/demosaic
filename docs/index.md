@@ -11,11 +11,12 @@ The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
 adds material/camera gains and native examples, with selected color-bias tradeoffs
 and unmeasured complete-panel/frame scope.
 
-The experimental [local phase fit](complex-phase-envelope.md) now makes more
-crossing mesh visible on complete102MP RGB16 outputs. The wider tested sky
-retains every parent pixel. Fresh dark recipes show lower average blank spill,
-slightly weaker texture recovery and one blank-region regression; CPU cost and
-window sensitivity remain. [Earlier scalar implementation](phase-harmonic-inference.md).
+The experimental [TV phase fit](edge-phase-envelope.md) makes the crossing mesh
+clearer on complete 102MP RGB16 outputs. The wider tested sky retains every
+parent pixel. On 64 fresh dark recipes, average added blank structure falls
+48.8% versus Gaussian phase fitting, with slightly higher texture error and some
+blank regressions. Highlight color, window sensitivity and speed remain open.
+[Earlier complex fit](complex-phase-envelope.md) · [Scalar implementation](phase-harmonic-inference.md).
 
 V120's primary/analytic panels, independent saved-output checks, selected native
 review, matched-profile GFX comparisons and complete102MP RGB16 exports are
@@ -45,9 +46,10 @@ quality trials. Real mesh shows no clear new recovery; coarse noisy-flat error
 is5.08% above V120 and selected ADC-only color bias worsens. Native triplets,
 both GFX pairs, exact flats and fixed input-selected mesh peaks are published.
 
-The [V143 combined data/gradient5k candidate](v143-crossed-gradient5000.md) is
-training freshly from V120 after exact CPU/CUDA16+2 checks. Fixed1k/2.5k/5k
-native/faint/GFX/48-flat reviews include direct V142 controls. Quality is unmeasured.
+The [V143 combined data/gradient5k candidate](v143-crossed-gradient5000.md) has
+[completed its 5k native/faint/GFX/48-flat review](v143-final5000-quality.md):
+faint ADC gains .26493dB versus V120 with coarse-noise and ADC-flat costs.
+Full427/camera quality remains unmeasured; V120 stays the general recommendation.
 
 The [completed V141 small-gradient-loss pilot](v141-gradient-epsilon-pilot.md)
 recovers.01528dB faint ADC PSNR over matched V129, with mixed local-band changes

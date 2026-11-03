@@ -1,8 +1,12 @@
 # Local phase fitting makes the crossing mesh more visible
 
+The later [TV phase envelope](edge-phase-envelope.md) gives clearer real mesh and
+less average blank spill, with texture/highlight costs. It is now the optional
+stage's default; use `--phase-harmonic-envelope complex` to reproduce this report.
+
 **Letting wave phase vary locally improves the real fine-mesh lattice while
 preserving every pixel in the tested wider sky.** This is the current experimental
-`--phase-harmonic` mode, with the earlier scalar mode retained explicitly.
+`--phase-harmonic-envelope complex` mode, with scalar and TV retained explicitly.
 Recovery stays soft and incomplete. Fresh procedural results show less average
 blank-region spill, slightly weaker texture recovery, and a blank-region
 regression in one of the two active recipes.
@@ -52,7 +56,7 @@ uv run demosaic infer /mnt/external/demosaic/models/v143-final5000.pt photo.raf 
   --phase-harmonic --phase-harmonic-envelope complex
 ```
 
-The optional stage now defaults to `complex`; use
+Select `--phase-harmonic-envelope complex` for this version; use
 `--phase-harmonic-envelope scalar` to reproduce the earlier amplitude-only
 correction. Ordinary inference keeps the stage disabled. Noise coefficients above
 are the tested nominal prior, not universal camera calibration. The sidecar

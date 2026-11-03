@@ -60,7 +60,7 @@ def test_invalid_stride_rejected(stride):
 def test_cli_refinement_is_explicit():
     args = parser().parse_args(["infer", "model.pt", "input.npy", "output.tiff"])
     assert not args.phase_harmonic and args.phase_harmonic_stride == 128
-    assert args.phase_harmonic_envelope == "complex"
+    assert args.phase_harmonic_envelope == "edge"
     args = parser().parse_args(
         [
             "infer",
