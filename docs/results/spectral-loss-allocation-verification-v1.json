@@ -1,0 +1,38 @@
+{
+  "status": "pass",
+  "recorded_unix_UTC": 1793746339.7227306,
+  "evidence": {
+    "path": "/home/dllu/proj/demosaic/docs/results/spectral-loss-allocation-v1.json",
+    "sha256": "ee448510cfe686d44de035b0e580fdddeef1d98a3dfac47dc38709b4f43b1b6c"
+  },
+  "byte_exact_receipt_and_array_copies": 10,
+  "current_and_frozen_neural_hashes_unchanged": 85,
+  "complete_table_rows_independently_checked": 11,
+  "document_links_checked": 295,
+  "terminal_diagnostic_owners": 2,
+  "live_matching_jobs": [],
+  "gradient_parameter_array_shape": [
+    100,
+    13,
+    1040
+  ],
+  "figures": {
+    "path": "/home/dllu/proj/demosaic/docs/images/spectral-loss-allocation-v1/manifest-v1.json",
+    "sha256": "314fb0f7a664f41fddcd76b84940b2bf82b8db34e9088bf760005cef343db6a4"
+  },
+  "full1000_training_trace_audit": {
+    "path": "/home/dllu/proj/demosaic/docs/results/spectral-loss-training-trace-v1.json",
+    "sha256": "2586072dfbaccec9f5f4fc8b8c9accdea450e02e9c73d77fc8265684ce71383a"
+  },
+  "new_parent_DINO_calls": 0,
+  "new_noise_draws": 0,
+  "optimizer_updates": 0,
+  "full_fresh_head_forwards": 20,
+  "additional_hidden_convolution_evaluations": 100,
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-spectral-loss-allocation-publication.py",
+    "sha256": "8f448bea12c5a0e5f8e2b6f529f329dd8065f2f929c1b499e88b6e3c30e44feb",
+    "text": "import json\nimport math\nimport re\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom PIL import Image\nfrom train_directional_bank_trial import read, ref, save\n\nrepo = Path('/home/dllu/proj/demosaic')\nevidence = repo / 'docs/results/spectral-loss-allocation-v1.json'\nindex = read(evidence)\nassert len(index['copies']) == 10\nfor item in index['copies'].values():\n    assert ref(item['original']['path']) == item['original']\n    assert ref(item['public']['path']) == item['public']\n    assert item['original']['sha256'] == item['public']['sha256']\n    assert Path(item['original']['path']).read_bytes() == Path(item['public']['path']).read_bytes()\nsource = read(index['sources']['path'])\nassert ref(index['sources']['path']) == index['sources']\nassert len(source['frozen_neural_hashes_by_filename']) == 85\nfor name, digest in source['frozen_neural_hashes_by_filename'].items():\n    assert ref(repo/'src/demosaic'/name)['sha256'] == digest\nfor script in source['sources']:\n    assert ref(script['path'])['sha256'] == script['sha256']\n    assert Path(script['path']).read_text() == script['text']\nsummary = read(index['summary']['path'])\nassert ref(index['summary']['path']) == index['summary']\nassert summary['status'].startswith('pass') and summary['scalar_checks'] == 36500\nassert summary['Decimal_reductions'] == 78\ngroups={(g['domain'],g['ADC_only']):g for g in summary['groups']}\nreport=(repo/'docs/spectral-loss-allocation.md').read_text()\ntables=[]\nfor key, label in [('legacy_total','Current 2 DN'),('post_total','Post-output 2 DN'),('focused_post_total','Peak-weighted post 2 DN'),('floor16_total','Current 16 DN')]:\n    a,n=[groups['all-balanced-domains',adc]['parameter_gradient_squared_norm_sum'][key] for adc in [True,False]]\n    tables.append(f'|{label}|{math.sqrt(a):.7f}|{math.sqrt(n):.7f}|{100*a/(a+n):.4f}%|')\nfor domain in ['mesh','weak','flat','mixed','photo']:\n    a,n=groups[domain,True],groups[domain,False]\n    line=f'|{domain}|{a[\"batches\"]}/{n[\"batches\"]}|'+ '|'.join(f'{math.sqrt(g[\"parameter_gradient_squared_norm_sum\"][key]):.7f}' for key,g in [('legacy_total',a),('legacy_total',n),('floor16_total',a),('floor16_total',n)])+'|'\n    tables.append(line)\nfulltrace=read(repo/'docs/results/spectral-loss-training-trace-v1.json')\nassert ref(fulltrace['auditor']['path'])['sha256']==fulltrace['auditor']['sha256']\nassert Path(fulltrace['auditor']['path']).read_text()==fulltrace['auditor']['text']\nfor field in ['training','cache','training_audit']:\n    assert ref(fulltrace[field]['path'])==fulltrace[field]\nfor g in fulltrace['groups']:\n    if g['arm']=='native-matrix' and g['domain']=='all1000':\n        label='ADC-only' if g['ADC_only'] else 'Noisy'\n        tables.append(f'|{label}|{g[\"batches\"]}|{g[\"median_logged_preclip_norm\"]:.6f}|{g[\"mean_logged_preclip_norm\"]:.6f}|{g[\"p90_logged_preclip_norm\"]:.6f}|{g[\"maximum_logged_preclip_norm\"]:.6f}|{g[\"norm_exceeds_one\"]}|')\nassert len(tables)==11 and all(line in report for line in tables)\nroots=[repo/f'.cache/quality-20261103/V149-loss-allocation-v{i}' for i in [1,2]]\nfor root in roots:\n    owner=read(root/'result-v1.json')['owner']\n    try:\n        p=psutil.Process(owner['pid'])\n        assert abs(p.create_time()-owner['created'])>.01 or p.status() in ['zombie','dead']\n    except psutil.NoSuchProcess:\n        pass\nexcluded={psutil.Process().pid,*[p.pid for p in psutil.Process().parents()]}\nlive=[]\nfor p in psutil.process_iter(['pid','cmdline','status']):\n    try:\n        if p.pid not in excluded and p.info['status'] not in ['zombie','dead'] and any(str(root) in arg or str(root.relative_to(repo))==arg for root in roots for arg in p.info['cmdline'] or []):live.append(p.info)\n    except (psutil.NoSuchProcess,psutil.AccessDenied):pass\nassert not live,live\nassets=repo/'docs/images/spectral-loss-allocation-v1'\nimage=Image.open(assets/'initial-parameter-allocation.png')\nassert image.size==(1680,560)\ngenerator=repo/'.cache/plot-spectral-loss-allocation-v1.py'\nsave(assets/'manifest-v1.json',{'recorded_unix_UTC':time.time(),'images':[ref(assets/n) for n in ['initial-parameter-allocation.png','initial-parameter-allocation.svg']],'source_data':index['summary'],'generator':dict(ref(generator),text=generator.read_text()),'actual_viewing':'Final PNG viewed at original detail after legend/axis-label cleanup. Two-panel scientific diagnostic, not crop pixels or model quality. SVG is the same standalone Matplotlib figure.','no_new_model_quality_claim':True})\ndocs=['README.md','docs/index.md','docs/research.md','docs/current-model.md','docs/spectral-loss-allocation.md','diary/2026-11-03-14-43-40-spectral-loss-allocation.md']\nlinks=0\nfor name in docs:\n    p=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (p.parent/link.split('#')[0]).is_file(),(name,link)\n        links+=1\nsave(repo/'docs/results/spectral-loss-allocation-verification-v1.json',{'status':'pass','recorded_unix_UTC':time.time(),'evidence':ref(evidence),'byte_exact_receipt_and_array_copies':10,'current_and_frozen_neural_hashes_unchanged':85,'complete_table_rows_independently_checked':len(tables),'document_links_checked':links,'terminal_diagnostic_owners':2,'live_matching_jobs':live,'gradient_parameter_array_shape':[100,13,1040],'figures':ref(assets/'manifest-v1.json'),'full1000_training_trace_audit':ref(repo/'docs/results/spectral-loss-training-trace-v1.json'),'new_parent_DINO_calls':0,'new_noise_draws':0,'optimizer_updates':0,'full_fresh_head_forwards':20,'additional_hidden_convolution_evaluations':100,'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'scope':'Publication verification of completed exploratory loss diagnostics; no trained quality gain claimed. Existing neural/inference code, model recommendations and all scientific source receipts are preserved.'})\nprint('PASS10 byte-exact copies,85 neural hashes,11 table rows,',links,'links,2 terminal owners')\n"
+  },
+  "scope": "Publication verification of completed exploratory loss diagnostics; no trained quality gain claimed. Existing neural/inference code, model recommendations and all scientific source receipts are preserved."
+}

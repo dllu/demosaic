@@ -47,6 +47,8 @@ The [completed V149 coherent-CFA trial](docs/coherent-phase-estimator.md) finds
 no useful new fine mesh from phase alignment/local green evidence. Small
 strong-edge gains coexist with worse quiet regions and noisy flats; all six
 fixed endpoints and 66 native comparisons are audited.
+The [loss-allocation diagnostic](docs/spectral-loss-allocation.md) finds large
+ADC gradient pressure; a higher training floor is the next matched test.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

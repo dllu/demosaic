@@ -1,0 +1,24 @@
+{
+  "recorded_unix_UTC": 1793746339.7202573,
+  "images": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/spectral-loss-allocation-v1/initial-parameter-allocation.png",
+      "sha256": "a30252d2aedef99f8c4146c6e2dc54bffb3cb0cc7478ac3b7850a3c0fc88c1f6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/spectral-loss-allocation-v1/initial-parameter-allocation.svg",
+      "sha256": "da11df0b4628af4af49772866eaf9f59ea98f713b289f9d59244ff4a8f9ffc21"
+    }
+  ],
+  "source_data": {
+    "path": "/home/dllu/proj/demosaic/docs/results/spectral-loss-allocation-v1/summary.json",
+    "sha256": "f6272012d094706f09d0460f4196df7732f0465aa104bb73360d6bdc659fd977"
+  },
+  "generator": {
+    "path": "/home/dllu/proj/demosaic/.cache/plot-spectral-loss-allocation-v1.py",
+    "sha256": "166850f12d2b1de5d415c1e5f90d189305f23fc51276a5b654c4581c316b70b8",
+    "text": "import json\nimport math\nfrom pathlib import Path\n\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nrepo = Path('/home/dllu/proj/demosaic')\ndata = json.loads((repo / 'docs/results/spectral-loss-allocation-v1/summary.json').read_text())\ntraces = json.loads((repo / 'docs/results/spectral-loss-training-trace-v1.json').read_text())\ndest = repo / 'docs/images/spectral-loss-allocation-v1'\ndest.mkdir(exist_ok=True)\ngroups = {(x['domain'],x['ADC_only']):x for x in data['groups']}\nall_adc = groups['all-balanced-domains',True]['parameter_gradient_squared_norm_sum']\nall_noisy = groups['all-balanced-domains',False]['parameter_gradient_squared_norm_sum']\nmethods = ['legacy_total','post_total','focused_post_total','floor16_total']\nlabels = ['Current 2 DN','Post-output 2 DN','Peak-weighted post 2 DN','Current 16 DN']\nadc_share = np.array([all_adc[k]/(all_adc[k]+all_noisy[k])*100 for k in methods])\nparams = np.load(repo / 'docs/results/spectral-loss-allocation-v1/parameter-gradients-v1.npz')['gradients'].astype('float64')\nnames = json.loads((repo / 'docs/results/spectral-loss-allocation-v1/parameter-result-v1.json').read_text())['parameter_vector_names']\nrows = json.loads((repo / 'docs/results/spectral-loss-allocation-v1/parameter-result-v1.json').read_text())['parameter_rows']\nnoisy_mask = np.array([not (x['noise']['shot']==x['noise']['read']==0) for x in rows])\nbase = params[:,names.index('legacy_total')]\nfloor16 = params[:,names.index('floor16_total')]\nrel = np.linalg.norm(base-floor16,axis=1)/np.maximum(np.linalg.norm(base,axis=1),1e-30)\nfig,axes = plt.subplots(1,2,figsize=(12,4),layout='constrained')\nx=np.arange(4)\naxes[0].bar(x,adc_share,color='#aa5b47',label='ADC-only (15 batches)')\naxes[0].bar(x,100-adc_share,bottom=adc_share,color='#3e7f96',label='Noisy (85 batches)')\naxes[0].set_xticks(x,labels,rotation=20,ha='right')\naxes[0].set_ylim(0,125);axes[0].set_ylabel('Share of squared initial\\nparameter-gradient norms (%)')\naxes[0].legend(loc='upper right',fontsize=8);axes[0].set_title('Same 100 cached training batches; zero head')\nfor i,v in enumerate(adc_share):axes[0].text(i,v/2,f'{v:.3f}%',ha='center',va='center',color='white',fontsize=9)\nds=['mesh','weak','flat','mixed','photo']\nfor delta,method,color,label in [(-.19,'legacy_total','#7b588c','Current 2 DN'),(.19,'floor16_total','#3e7f96','Current 16 DN')]:\n vals=[math.sqrt(groups[d,True]['parameter_gradient_squared_norm_sum'][method]) for d in ds]\n axes[1].bar(np.arange(5)+delta,vals,width=.38,color=color,label=label)\naxes[1].set_xticks(np.arange(5),ds);axes[1].set_yscale('log');axes[1].set_ylabel('ADC aggregate gradient norm\\n[sqrt(sum of squared batch norms)]')\naxes[1].set_title('Largest change is ADC flat/photo supervision');axes[1].legend(fontsize=8)\nfor ax in axes:ax.spines[['top','right']].set_visible(False)\nfig.savefig(dest/'initial-parameter-allocation.svg')\nfig.savefig(dest/'initial-parameter-allocation.png',dpi=140)\nplt.close(fig)\n\n"
+  },
+  "actual_viewing": "Final PNG viewed at original detail after legend/axis-label cleanup. Two-panel scientific diagnostic, not crop pixels or model quality. SVG is the same standalone Matplotlib figure.",
+  "no_new_model_quality_claim": true
+}

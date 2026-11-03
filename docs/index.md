@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [spectral loss-allocation diagnostic](spectral-loss-allocation.md) finds
+ADC-only pressure in both actual initial parameter gradients and all 1,000
+logged V149 updates. A 16 DN loss floor sharply reduces that pressure while
+leaving 84 of 85 noisy-batch gradients exact in the fixed probe. Both diagnostic
+runs and independent audits are complete; trained quality under this loss
+change remains unmeasured.
+
 The [completed V149 coherent CFA trial](coherent-phase-estimator.md) finds no
 useful new weak texture from known phase alignment or nine green-coherence
 features. Mesh response improves 2–3% over the native control but remains 6–7%
