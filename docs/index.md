@@ -11,6 +11,14 @@ The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
 adds material/camera gains and native examples, with selected color-bias tradeoffs
 and unmeasured complete-panel/frame scope.
 
+The [guarded wider-context option](wide-phase-context.md) adds stronger measured
+lattice detail on complete V143 frames. Fresh response improves 14.4% and image
+RMS 1.2% versus sparse support; mean blank spill rises 17.3% and its worst case
+falls 17.4%. The tested sky, 256 absent neural cases and 5,120 matched/mismatch flat
+executions retain all parent pixels. The amplified tail still has a detached
+false stripe patch. The explicit `wide` mode includes 31 viewed native boards,
+fresh GT triplets, failure controls and complete RGB16 audits.
+
 The additional [connected support/refit mode](sparse-phase-support.md) strengthens
 the real lattice on complete V143 frames. Final fresh validation gives 12.8% more
 response and 34.0% less mean added blank RMS versus refined TV, with 39.2% higher

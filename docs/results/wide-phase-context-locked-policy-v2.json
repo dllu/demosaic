@@ -1,0 +1,179 @@
+{
+  "created_UTC": "2026-11-03T05:07:40.439695+00:00",
+  "parent_policy": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/locked-policy-v1.json",
+    "sha256": "bc958e120bb8eaa2fd7285aa99844d2be9cd4edb9e8066d3ef0bf5cd841b841a"
+  },
+  "guarded_reference": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/guarded-tiled-v1.py",
+    "sha256": "c2949ae4ade8ba89e7bdfa291c57b19ed7b4611bff7e6df65fe0ff46e0123034"
+  },
+  "unfloored_local_reference": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prototype-v5.py",
+    "sha256": "78ca017b4580e29b53a6be9a06d02a6fc424481422b39ae01c7e7b2128eac99b"
+  },
+  "floor_reference": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/noise-floor-v1.py",
+    "sha256": "9368d209c77fe2085c4a8d8b25af651a0601add8144bca2127efb66fefb15e53"
+  },
+  "frequency": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/frequency-v2.py",
+    "sha256": "3c1dba54e12d16f5c73f62a4ebb03201d75ae6ebf42c6598b223e46aa22cf3fc"
+  },
+  "selection": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/peaks-v2.py",
+    "sha256": "1470a1d3c234fe3ac4684c0aaa3734b0a536fb466aadeab44c3d3595aa9e0e0e"
+  },
+  "generator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-operator-v2.py",
+    "sha256": "dc10cfa69dceceac3998a07e25b09b75abf77a2dc2f5784cd3e8473932cc79ea"
+  },
+  "frozen_baseline_helpers": {
+    "phase_harmonic.py": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v1/V143-5000/work/src/demosaic/phase_harmonic.py",
+      "sha256": "d71c01edc4c67997d1086874b02dfe13d6966fa4694bc96b775d8466e940ead6"
+    },
+    "phase_frequency.py": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v1/V143-5000/work/src/demosaic/phase_frequency.py",
+      "sha256": "6ff3feace59a44237258168adbd89a30f9b355b57f4c806be9539ff09aa4a8c9"
+    },
+    "phase_envelope.py": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v1/V143-5000/work/src/demosaic/phase_envelope.py",
+      "sha256": "ce53cfa8f4ef5f293a18636393913f4e3ac6008901e1662a35fdda83a46e9d75"
+    },
+    "phase_tv.py": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v1/V143-5000/work/src/demosaic/phase_tv.py",
+      "sha256": "aba26709d1a549b629956ef03729890931828d895e645701ecd7148e33aa7aeb"
+    },
+    "phase_tv_cuda.py": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v1/V143-5000/work/src/demosaic/phase_tv_cuda.py",
+      "sha256": "07ff40092f973969bece64fa8db7b17af4971a57f0951051a6e3af75ef880e91"
+    },
+    "phase_sparse.py": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v1/V143-5000/work/src/demosaic/phase_sparse.py",
+      "sha256": "25287c58361d0d177ed447b4c7a3d709a913cf4129eaa56def4893bbc1eef7d4"
+    },
+    "phase_sparse_cuda.py": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v1/V143-5000/work/src/demosaic/phase_sparse_cuda.py",
+      "sha256": "41e4cf8f85a4ce73a4df06b29db26a6ce17312ae45923c9eec48c37e7ec0790f"
+    }
+  },
+  "settings": {
+    "context_native": 512,
+    "context_annuli": [
+      [
+        0.03,
+        0.22
+      ],
+      [
+        0.22,
+        0.34
+      ]
+    ],
+    "context_peaks_per_band": 4,
+    "physical_component_bound_strict": 0.25,
+    "coherence": 0.8,
+    "signed_cross_threshold": 5,
+    "frequency_policy": "sameguardedcontextandaddedlocalrefinementasparentpolicy",
+    "variance_floor_probe_annulus": [
+      0.1,
+      0.34
+    ],
+    "variance_floor_positive_fy_only": true,
+    "variance_floor_units": "normalizedsensorpixelvariance",
+    "variance_floor_rule": "For eachgreen: median(power/unit_noise_variance)/ln2 minus median(declared_coefficient_noise/unit_noise_variance); max(0,max_across_greens). Unit variance propagates through the exact fixed affine/Hann operator. Add this scalar to all4phase variances for selection,localfitting andregularization. Never reduce declared variance.",
+    "floor_is_calibrated_read_noise": false,
+    "floor_is_uncertainty_confidence": false,
+    "floor_clipping_policy": "ignore addedfloor onobservedclippedlocalwindows;retain exact original gridTV fallback",
+    "small_image_policy": "exactlegacySparsefallbackifanydimension<512,no repeatedspectralevidence",
+    "support_synthesis": "unchangedSparse16/group.5/power9/minarea805/refit4/postpower9/cap3/globalgate9/apron32/stride128",
+    "full_context_grid": "256floor(localstart/256)-64,clampedtoe ven-originactual512window"
+  },
+  "development_evidence": {
+    "prior_mismatch": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/mismatch-output-v1.json",
+      "sha256": "c07ea5f640b84f9faac8665bd9c74e4ea2b95112a84929385be0a11ea9031b42"
+    },
+    "guard_control": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/guard-mismatch-v1.json",
+      "sha256": "c1b1359df78d2f0d884a1b697c34678cb6ed1edc1873c285402c1fcf0f0f1a4c"
+    },
+    "real_input_only_floor_diagnostic": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/noise-floor-real-diagnostic-v1.json",
+      "sha256": "b08b547998965612962f99523d3e3e18585f10178eb8bbcdcd9f7870173e8ec7"
+    }
+  },
+  "development_decision": "Unflooredv6 addedfalsefieldsin46flatcaseswherecurrentSparseunchangedunderstandingHaarprior/nominaltrue-noisemismatch. Newadditivefloorleavesall137selectedmismatchcasesunchanged. Formula fixedfromunitvariancepropagationandGaussianPSDmedian,notGT/readoracle. Original1024modeltrial ishistorical/developmentfornewguard; fresh512newseeds independentlyvalidatetheguardedmethod. Alloldoutputs/receiptsretained.",
+  "validation_seeds": [
+    2026111900,
+    2026111901,
+    2026111902,
+    2026111903,
+    2026111904,
+    2026111905,
+    2026111906,
+    2026111907,
+    2026111908,
+    2026111909,
+    2026111910,
+    2026111911,
+    2026111912,
+    2026111913,
+    2026111914,
+    2026111915,
+    2026111916,
+    2026111917,
+    2026111918,
+    2026111919,
+    2026111920,
+    2026111921,
+    2026111922,
+    2026111923,
+    2026111924,
+    2026111925,
+    2026111926,
+    2026111927,
+    2026111928,
+    2026111929,
+    2026111930,
+    2026111931,
+    2026111932,
+    2026111933,
+    2026111934,
+    2026111935,
+    2026111936,
+    2026111937,
+    2026111938,
+    2026111939,
+    2026111940,
+    2026111941,
+    2026111942,
+    2026111943,
+    2026111944,
+    2026111945,
+    2026111946,
+    2026111947,
+    2026111948,
+    2026111949,
+    2026111950,
+    2026111951,
+    2026111952,
+    2026111953,
+    2026111954,
+    2026111955,
+    2026111956,
+    2026111957,
+    2026111958,
+    2026111959,
+    2026111960,
+    2026111961,
+    2026111962,
+    2026111963
+  ],
+  "planned_new_actual_root_DINO_calls": 512,
+  "planned_new_sensor_noise_observations": 512,
+  "new_V120_calls": 0,
+  "training_updates": 0,
+  "RAW_opens": 0,
+  "scope": "Guardedpolicyfixedbeforefresh64inputgeneration,512actualV143parents;newmatchednoisevalidationplusseparatematched/mismatchflatandfullrealrechecks. Goalnotcomplete."
+}

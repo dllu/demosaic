@@ -123,6 +123,13 @@ def correct_edge_phase_patch(
         fitted = fit_refined(packed, variance, colors, base)
     else:
         fitted = fit_patch_harmonics(packed, variance, colors, base)
+    return _correct_fitted_patch(
+        fitted, device=device, refine_frequency=refine_frequency, sparse_support=sparse_support
+    )
+
+
+def _correct_fitted_patch(fitted, *, device="cpu", refine_frequency=False, sparse_support=False):
+    """Synthesize a validated joint fit with the original local TV policy."""
     base = fitted["base"]
     peaks = fitted["peaks"]
     if not peaks:

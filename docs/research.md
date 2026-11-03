@@ -1,5 +1,14 @@
 # Current method research
 
+The [guarded wider-context option](wide-phase-context.md) uses actual 512-pixel RAW
+contexts and measured higher harmonics on V143. Fresh 64-recipe response rises 14.4%
+versus sparse support and image RMS falls 1.2%; mean added blank RMS rises 17.3%,
+with a 17.4% lower worst case. All 256 absent neural cases and 5,120 ideal-flat
+matched/mismatch executions retain parent values. The first unguarded version
+failed the mismatch control and is archived. The explicit `wide` mode adds a
+conservative variance floor; detached tail stripes, boundary leakage and very
+weak recovery remain.
+
 The [direct RAW refit study](raw-phase-refit.md) tests whether fitting physical
 measurements can reduce blurred-support leakage. Eleven development settings and
 a new 64-recipe/512-forward validation find a small tradeoff: 7.7% less mean blank

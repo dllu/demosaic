@@ -39,7 +39,15 @@ Select `--phase-harmonic-envelope sparse` for [connected support and refitting](
 which automatically includes guarded frequency refinement. It gives stronger
 average response and lower mean blank spill, with worse tail cases; it remains
 explicit. Sidecars record the support/refit parameters and both solvers' caps.
-This option is currently exposed by `infer`, not the DNG batch exporter.
+Select `--phase-harmonic-envelope wide` for [larger measured RAW contexts](wide-phase-context.md)
+and a second frequency band, with an additive correction-variance floor. On fresh
+dark recipes it raises response 14.4% over sparse support, lowers image RMS 1.2%
+and raises mean added blank RMS 17.3%, with a 17.4% lower worst case. All 256 absent
+neural cases and 5,120 ideal-flat matched/mismatched executions stay unchanged.
+The floor can suppress useful texture; it is not calibrated uncertainty. Actual
+512-pixel contexts feed the same 256-pixel local fit; smaller images retain sparse
+behavior. Observed-clipped windows retain the earlier grid-TV correction.
+These phase options are exposed by `infer`, not the DNG batch exporter.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality
 inference. It preserves Bayer geometry and averages camera-RGB predictions

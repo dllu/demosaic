@@ -1,5 +1,9 @@
 # Direct RAW fitting trades a little detail for less spill
 
+The later [guarded wider-context option](wide-phase-context.md) tests additional
+measured frequencies, with fresh quality/flat controls and complete-frame native
+comparisons. This report retains its original method and evidence.
+
 **A direct RAW refit lowers fresh mean blank-region spill 7.7%, with 0.5% lower
 mesh response and slightly higher image error than the current sparse method.**
 It does not solve the missing lattice or false boundary continuation. The centred

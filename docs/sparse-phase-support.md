@@ -1,5 +1,9 @@
 # Selecting connected wave support strengthens the mesh
 
+The later [guarded wider-context option](wide-phase-context.md) tests additional
+measured frequencies, with fresh quality/flat controls and complete-frame native
+comparisons. This report retains its original method and evidence.
+
 **Refitting waves inside estimated support raises fresh dark-mesh response 12.8%
 and lowers mean added blank-region RMS 34.0% versus refined TV.** The real lattice
 has stronger contrast under both priors, while recovery remains soft and uneven.

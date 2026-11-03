@@ -1,5 +1,14 @@
 # GFX100S qualitative comparisons
 
+## Larger measured RAW contexts
+
+The [guarded wider-context comparison](wide-phase-context.md) includes complete
+V143 outputs for DSCF3879 and both DSCF3842 priors, main sky/building/foliage/fence,
+fine mesh, both JPEGs, independent ISO100 references and strongest-change controls.
+The explicit `wide` option includes a conservative correction-variance floor.
+Fresh response/image-error gains accompany more mean blank spill and a smaller
+worst tail. All matched and prior-mismatch flat controls retain their parents.
+
 ## Connected support and refitting: stronger lattice contrast
 
 The [new complete-frame comparison](sparse-phase-support.md) selects sufficiently

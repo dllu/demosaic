@@ -83,9 +83,9 @@ def parser():
     )
     infer.add_argument(
         "--phase-harmonic-envelope",
-        choices=("sparse", "edge", "complex", "scalar"),
+        choices=("wide", "sparse", "edge", "complex", "scalar"),
         default="edge",
-        help="Sparse support/refit or edge-preserving phase fit; complex/scalar retain earlier modes",
+        help="Wider RAW context, sparse support/refit or edge phase fit; complex/scalar retain earlier modes",
     )
     infer.add_argument(
         "--phase-harmonic-device",
@@ -94,7 +94,7 @@ def parser():
     infer.add_argument(
         "--phase-harmonic-refine-frequency",
         action="store_true",
-        help="Refine active wave frequencies between FFT bins (automatic with sparse)",
+        help="Refine active wave frequencies between FFT bins (automatic with sparse/wide)",
     )
     infer.add_argument(
         "--cudnn-benchmark",

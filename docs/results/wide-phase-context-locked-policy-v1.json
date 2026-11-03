@@ -1,0 +1,157 @@
+{
+  "created_UTC": "2026-11-03T04:00:48.266847+00:00",
+  "prototype": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prototype-v5.py",
+    "sha256": "78ca017b4580e29b53a6be9a06d02a6fc424481422b39ae01c7e7b2128eac99b"
+  },
+  "whole512_reconstruction": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/tiled-v3.py",
+    "sha256": "0b56e33350f0bd3e61e5a9a59f338fbae5b37f7cc5addb6c587e427111e8a725"
+  },
+  "selection": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/peaks-v2.py",
+    "sha256": "1470a1d3c234fe3ac4684c0aaa3734b0a536fb466aadeab44c3d3595aa9e0e0e"
+  },
+  "frequency": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/frequency-v2.py",
+    "sha256": "3c1dba54e12d16f5c73f62a4ebb03201d75ae6ebf42c6598b223e46aa22cf3fc"
+  },
+  "generator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-operator-v1.py",
+    "sha256": "f100e0378123e0e8432a419773403ecbd8dda712590ff92cc3bc48650d195ff6"
+  },
+  "helpers": {
+    "phase_harmonic.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_harmonic.py",
+      "sha256": "d71c01edc4c67997d1086874b02dfe13d6966fa4694bc96b775d8466e940ead6"
+    },
+    "phase_frequency.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_frequency.py",
+      "sha256": "6ff3feace59a44237258168adbd89a30f9b355b57f4c806be9539ff09aa4a8c9"
+    },
+    "phase_envelope.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_envelope.py",
+      "sha256": "ce53cfa8f4ef5f293a18636393913f4e3ac6008901e1662a35fdda83a46e9d75"
+    },
+    "phase_tv.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_tv.py",
+      "sha256": "aba26709d1a549b629956ef03729890931828d895e645701ecd7148e33aa7aeb"
+    },
+    "phase_tv_cuda.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_tv_cuda.py",
+      "sha256": "07ff40092f973969bece64fa8db7b17af4971a57f0951051a6e3af75ef880e91"
+    },
+    "phase_sparse.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_sparse.py",
+      "sha256": "25287c58361d0d177ed447b4c7a3d709a913cf4129eaa56def4893bbc1eef7d4"
+    },
+    "phase_sparse_cuda.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_sparse_cuda.py",
+      "sha256": "41e4cf8f85a4ce73a4df06b29db26a6ce17312ae45923c9eec48c37e7ec0790f"
+    }
+  },
+  "settings": {
+    "context_native": 512,
+    "context_low_annulus": [
+      0.03,
+      0.22
+    ],
+    "context_high_annulus": [
+      0.22,
+      0.34
+    ],
+    "maximum_abs_frequency_component": 0.25,
+    "strict_component_bound": true,
+    "coherence_threshold": 0.8,
+    "signed_cross_threshold": 5,
+    "peaks_per_band": 4,
+    "physical_peak_suppression": 0.015625,
+    "context_frequency_refinement": "same bounded signed crossDFT scaled to actual nativecontext;\u00b11.5contextbins,3x3init,12Newton,.5stepcap",
+    "local_native": 256,
+    "local_stride": 128,
+    "local_frequencies": "preserve original refinedlocalpeaks andoriginalinactivegates; add contextual peaks separated2/256, newlocalpower>9 gate then\u00b11.5localbins refinement with collisionfallback",
+    "maximum_local_peaks": 12,
+    "input_fit_precision": "explicitfloat64 packed/variance/base before jointWLS, matching original fitter convention",
+    "synthesis": "exact existing sparseTV16/group.5/supportpower9/minarea805/refitTV4,postpower9/cap3/globalgate9/apron32",
+    "clipped_window_policy": "exact earlier gridTV fallback; no newwidefit",
+    "full_image_context_grid": "stride256, origin256*floor(local_start/256)-64, clamped to actual even-origin512window; no repeated data for spectral detection",
+    "short_image_policy": "if either actualdimension<512 use exactexistingSparse stage, never enlarge noise evidence by replication",
+    "confidence_calibrated": false
+  },
+  "development": "8centredrealROIs/2priors plus32native512recipes/256actualV143parents. Lowcontext nearly doubles meanresponse on theseweakrecipes with highermean/peakadjacentblankspill. Highband observed in realfence but inactive in originalcontrastdevelopment. Initial standalone relativeimport failure preserved. Early wider-local fit used FP32 residual subtraction; corrected to explicitFP64 before thislock and rerunon sameparents. No higher-SNR recipe selected after newoutcomes.",
+  "prospective_seeds": [
+    2026111500,
+    2026111501,
+    2026111502,
+    2026111503,
+    2026111504,
+    2026111505,
+    2026111506,
+    2026111507,
+    2026111508,
+    2026111509,
+    2026111510,
+    2026111511,
+    2026111512,
+    2026111513,
+    2026111514,
+    2026111515,
+    2026111516,
+    2026111517,
+    2026111518,
+    2026111519,
+    2026111520,
+    2026111521,
+    2026111522,
+    2026111523,
+    2026111524,
+    2026111525,
+    2026111526,
+    2026111527,
+    2026111528,
+    2026111529,
+    2026111530,
+    2026111531,
+    2026111532,
+    2026111533,
+    2026111534,
+    2026111535,
+    2026111536,
+    2026111537,
+    2026111538,
+    2026111539,
+    2026111540,
+    2026111541,
+    2026111542,
+    2026111543,
+    2026111544,
+    2026111545,
+    2026111546,
+    2026111547,
+    2026111548,
+    2026111549,
+    2026111550,
+    2026111551,
+    2026111552,
+    2026111553,
+    2026111554,
+    2026111555,
+    2026111556,
+    2026111557,
+    2026111558,
+    2026111559,
+    2026111560,
+    2026111561,
+    2026111562,
+    2026111563
+  ],
+  "contrast_multipliers": [
+    1,
+    2
+  ],
+  "planned_actual_root_DINO_calls": 1024,
+  "planned_new_V120_calls": 0,
+  "training_updates": 0,
+  "RAW_opens": 0,
+  "scope": "Independent final validation perstrength,64recipes,1024actualnative512parents. Primary originalcontrast,secondary strongerperiodicdetail;GTonlyscoring. Preserveworstblank/nativeGT/standingreal/JPEG/fullimagecomparisons. Do not inferwholegoalcompletion."
+}

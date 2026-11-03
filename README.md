@@ -26,7 +26,7 @@ An optional [photographic epoch order](docs/photographic-epoch-order.md) covers
 all prepared photos within 20k steps; its trained quality remains unmeasured.
 
 The [completed V142 data-only review](docs/v142-crossed-line-pilot.md) recovers
-.05212dB faint ADC PSNR and lowers noisy-flat spatial RMS4.55% versus V129.
+.05212dB faint ADC PSNR and lowers noisy-flat spatial RMS 4.55% versus V129.
 The new [crossed-line/empty targets](docs/crossed-line-training-data.md) are
 useful for further training. Fine mesh still lacks clear recovery, coarse
 noisy-flat error remains5.08% above V120 and selected ADC-only color bias worsens.
@@ -47,14 +47,14 @@ in its two clearest cases.
 | [V137 conditioned global attention](docs/v137-global-conditioned-quality.md) | Matched1k review complete: faint ADC+.0334dB versus V136, tiny ordinary/shadow regressions and no clear new mesh recovery. A [trained-memory check](docs/global-memory-contribution.md) finds the local feature path still dominates on six contexts |
 | [V138 frozen-parent global branch](docs/raw-global-only-training.md) | Genuine CPU/CUDA16+2 checks pass with91 parent model/EMA tensors exact. Larger branch LR1e−3/1k recipe remains unstarted after the V125 dependency failure; quality is unmeasured |
 | [V139 memory-only branch](docs/raw-global-memory-only.md) | Removes the direct local/MLP shortcut. Genuine CPU/CUDA16+2 checks pass; original1k training remains unstarted after dependency failure. Image quality is unmeasured |
-| [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all1,000 training batches match V137 |
-| [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.01528dB over V129, mixed local detail, no new mesh recovery. Noisy-flat coarse error near V129 and5.75% above V120; defaults unchanged |
+| [V140 neighboring-gradient memory](docs/raw-patch-memory.md) | Adds2,048 descriptor parameters before memory matching. [Complete1k/native/flat review](docs/v140-standalone-pilot.md): ordinary+.00003dB/faint−.00015dB versus V120, no clear mesh gain. Exact-flat/sky variation remains near parent; all 1,000 training batches match V137 |
+| [V141 small-gradient loss](docs/v141-gradient-epsilon-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.01528dB over V129, mixed local detail, no new mesh recovery. Noisy-flat coarse error near V129 and 5.75% above V120; defaults unchanged |
 | [V142 crossed-line/empty data](docs/v142-crossed-line-pilot.md) | Complete1k/native/GFX/48-flat review: faint ADC+.05212dB and noisy-flat spatial RMS−4.55% versus V129. Coarse error remains5.08% above V120; ADC-only DC bias worsens. Selected weak grass/wood gains, no clear new mesh recovery |
 | [V143 combined data/gradient5k](docs/v143-crossed-gradient5000.md) | [Completed5k review](docs/v143-final5000-quality.md): faint ADC+.26493dB and noisy-flat spatial RMS−4.64% versus V120. Coarse error+2.63%, ADC-only spatial RMS+12.85%; training alone still lacks clear new mesh recovery. All native/GFX/flat audits and canonical checkpoint complete |
 
 Shadow, feature-loss and curated-data pilots show no useful large recovery.
 The [FP32 pilot](docs/training-precision-pilot.md) slightly improves selected
-weak fur/grass/wood [faint-ADC bands](docs/faint-adc-precision.md), with a0.01720dB
+weak fur/grass/wood [faint-ADC bands](docs/faint-adc-precision.md), with a 0.01720dB
 lower panel mean and no clear large real-mesh gain. Measured strengths and
 weaknesses guide the baseline. [Research and complete studies](docs/research.md) ·
 [Historical diary](diary/index.md).
@@ -72,26 +72,25 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-Photo cells are unchanged160×160 crops at the8×-binned evaluation resolution.
-The [completed V1435k model](docs/v143-final5000-quality.md) improves faint ADC
-PSNR by.26493dB and noisy-flat spatial RMS4.64% over V120, with coarse/ADC costs.
-Below: ADC observation → **V1435k EMA** → exact synthetic GT, contrast0.025.
-A shared40× camera-linear contrast display uses the same original target channel
-means, WB/matrix and+0EV exposure across methods; no pixels are resized.
-[Source/ROI/checkpoint/noise/display metadata](docs/images/v143-progress5000-v1/faint-triplet-manifest.json).
+The optional [guarded wider-context correction](docs/wide-phase-context.md)
+uses actual 512-pixel RAW windows to propose measured detail for local support
+fitting. On 64 fresh dark recipes, response rises **14.4%** and image RMS falls
+**1.2% versus sparse support**. Mean added blank RMS rises 17.3%, with a 17.4% lower
+worst case. All 256 absent neural cases and 5,120 ideal-flat matched/mismatch
+executions retain parent pixels. The amplified tail still shows a detached false
+stripe patch beside real texture. Average response remains only 5.54% of exact GT.
 
-![V143 faint bark: ADC observation, restored and exact synthetic GT](docs/images/v143-progress5000-v1/bark-contrast0p025-adc-RGGB-contrast40-triplet.png)
+Below: noisy Malvar → guarded correction on V1435k → exact procedural GT.
+Two native 160×160 central crops from actual 512 predictions share WB/matrix/+3EV;
+no pixels are resized. These are the first two active recipe seeds, selected
+after evaluation. [All cases, tail controls and source/ROI/checkpoint/noise/display](docs/images/wide-phase-context-v1/manifest.json).
 
-![V143 faint fur: ADC observation, restored and exact synthetic GT](docs/images/v143-progress5000-v1/raccoon-fur-contrast0p025-adc-RGGB-contrast40-triplet.png)
+![Native noisy, guarded restoration and exact procedural GT](docs/images/wide-phase-context-v1/mesh-seed2026111905-present-iso6400-prior-RGGB-triplet.png)
 
-Sources: [Derek Ramsey](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg),
-[CC BY-SA2.5](https://creativecommons.org/licenses/by-sa/2.5/), and
-[Korall](https://commons.wikimedia.org/wiki/File:Racoon_clinging_to_a_tree.JPG),
-[CC BY3.0](https://creativecommons.org/licenses/by/3.0/), modified by binning,
-cropping, contrast attenuation, synthetic sensor/ADC sampling and restoration.
+![Native noisy, guarded restoration and exact procedural GT](docs/images/wide-phase-context-v1/mesh-seed2026111907-present-iso6400-prior-RGGB-triplet.png)
 
 Real GFX100S: DSCF3879 ISO6400 → **V120 Small, fixed historical Haar profile** → DSCF3880 ISO100 f/5.6.
-Native160×160 sensor-pixel crops from complete102MP outputs share +2EV display.
+Native 160×160 sensor-pixel crops from complete 102MP outputs share +2EV display.
 The independent ISO100 exposure is an approximate qualitative reference,
 **not GT**. Fine foliage remains painterly; fence geometry is coherent.
 [All six regions and other useful models](docs/gfx-qualitative.md) ·
@@ -101,29 +100,23 @@ The independent ISO100 exposure is an approximate qualitative reference,
 
 ![V120 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
-The additional **fine green mesh beside the red train's cab** has stronger lattice
-contrast with [connected support and refitting](docs/sparse-phase-support.md) on
-complete V1435k outputs under both fixed priors. Recovery stays soft and uneven;
-the tested 2.88MP sky retains every parent pixel. On 64 fresh dark recipes,
-response rises **12.8%** and mean added blank RMS falls **34.0% versus refined TV**,
-with **39.2% higher worst-case blank RMS**. All 256 absent inputs bypass correction.
-A small false stripe island is removed; boundary leakage remains. This option
-stays explicit: `infer --phase-harmonic --phase-harmonic-envelope sparse`.
-[Fixed-bin TV](docs/edge-phase-envelope.md) remains the stage's default. Clipped
-windows retain its earlier result; highlight color and runtime remain limitations.
-The later [direct RAW refit study](docs/raw-phase-refit.md) reduces mean blank spill
-7.7% with 0.5% lower response; it remains a research tool because boundary leakage,
-uneven recovery and numerical convergence remain unresolved.
+The additional **fine green mesh beside the red train’s cab** has stronger
+crossing contrast with the [guarded wider-context option](docs/wide-phase-context.md)
+on full V1435k outputs under both priors. Recovery stays soft and uneven; the
+tested 2.88MP sky retains every parent pixel. Use
+`infer --phase-harmonic --phase-harmonic-envelope wide`.
+The stage remains explicit, with `edge` its default. Boundary spill, highlight
+color and speed remain unresolved. The earlier [sparse support](docs/sparse-phase-support.md)
+and research-only [direct RAW refit](docs/raw-phase-refit.md) comparisons remain available.
 
-Below: noisy Malvar → full-frame V1435k → connected support/refit → DSCF3842 camera JPEG → independent
-DSCF3835 ISO100 AHD → ISO100 camera JPEG, using the fixed nearby prior.
-Native160px cells share+4EV. Both ISO100 comparators are **not GT**; aperture,
-exposure time and processing differ. [Both full-frame priors and limits](docs/sparse-phase-support.md) ·
-[Source/ROI/checkpoint/conditioning/display metadata](docs/images/sparse-phase-support-v1/manifest.json).
+Below: noisy → V1435k → sparse → guarded wider context → ISO6400 JPEG →
+independent ISO100 AHD → ISO100 JPEG, using the fixed nearby prior. Native 160px
+cells share +4EV. Both ISO100 comparators are **not GT**; aperture, exposure time
+and processing differ. [Both priors and all controls](docs/wide-phase-context.md).
 
-![Full-frame connected support/refit, left native mesh crop](docs/images/sparse-phase-support-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-left-JPEG.png)
+![Full-frame guarded wider-context correction, native fine-mesh crop](docs/images/wide-phase-context-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-left-JPEG.png)
 
-![Full-frame connected support/refit, right native mesh crop](docs/images/sparse-phase-support-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-right-JPEG.png)
+![Full-frame guarded wider-context correction, native fine-mesh crop](docs/images/wide-phase-context-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-right-JPEG.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)
@@ -152,6 +145,8 @@ Add `--phase-harmonic-refine-frequency` for clearer mesh with a measured
 [texture/blank-region tradeoff](docs/offgrid-phase.md).
 `--phase-harmonic-envelope sparse` adds the [connected support/refit option](docs/sparse-phase-support.md),
 with stronger average response and remaining blank-region tail regressions.
+`--phase-harmonic-envelope wide` adds [larger RAW contexts and a variance floor](docs/wide-phase-context.md),
+with stronger mesh recovery, increased mean spill and a lower tested worst tail.
 [Linear DNG + full-resolution JPEG batch export](docs/dng-export.md) preserves
 camera RGB and adapts existing darktable XMP edits. Add `--hot-pixels` to repair
 isolated Bayer defects before restoration.
