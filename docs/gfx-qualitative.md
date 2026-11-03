@@ -1,5 +1,14 @@
 # GFX100S qualitative comparisons
 
+## Connected support and refitting: stronger lattice contrast
+
+The [new complete-frame comparison](sparse-phase-support.md) selects sufficiently
+large connected coefficient regions, then refits waves inside them. Both priors
+retain main sky/building/foliage/fence, the fine mesh, both camera JPEGs and
+independent ISO100 controls. Mesh contrast is stronger but recovery stays soft
+and uneven. Wider sky and clipped-highlight maxima remain unchanged. Fresh mean
+response/spill improve, with a worse blank-region tail shown explicitly.
+
 ## Continuous frequency fitting: clearer fine mesh
 
 The [new full-frame comparison](offgrid-phase.md) refits active waves between FFT

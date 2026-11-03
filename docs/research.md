@@ -1,5 +1,13 @@
 # Current method research
 
+The [connected wave-support experiment](sparse-phase-support.md) adds group-sparse
+selection, removes small components and refits coefficients without the group
+penalty. An initial 96-recipe holdout exposed a false stripe island and became
+development data. The final independent 64-recipe review adds 512 further neural
+calls: response +12.8%, mean added blank RMS −34.0% versus refined TV, with worse
+worst-case spill. Native amplified failure/tail controls show both the fixed
+island and remaining boundary leakage. The `sparse` mode is opt-in.
+
 The [continuous frequency fit](offgrid-phase.md) addresses FFT-bin mismatch before
 TV smoothing. Active measured-green waves get a bounded search; the detector and
 original inactive gates are preserved. A locked 64-recipe review adds 512 neural

@@ -35,6 +35,10 @@ Add `--phase-harmonic-refine-frequency` with the `edge` envelope to fit active
 waves between FFT bins. [Matched full-frame/fresh validation](offgrid-phase.md)
 shows clearer mesh and slightly lower texture error, with increased blank spill.
 Without that flag, the original fixed-bin TV policy is preserved.
+Select `--phase-harmonic-envelope sparse` for [connected support and refitting](sparse-phase-support.md),
+which automatically includes guarded frequency refinement. It gives stronger
+average response and lower mean blank spill, with worse tail cases; it remains
+explicit. Sidecars record the support/refit parameters and both solvers' caps.
 This option is currently exposed by `infer`, not the DNG batch exporter.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality

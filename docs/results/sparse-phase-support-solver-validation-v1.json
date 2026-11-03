@@ -1,0 +1,131 @@
+{
+  "status": "passed",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/validate-solvers-v1.py",
+    "sha256": "a24980cfd4a9d7d06335536aa567ab45a58a374ca073ca90170ff3580a4f5ca7"
+  },
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/solver-v1.py",
+      "sha256": "28a769f94fc0510924c2a936a6e6095b2a0385f343ffcd6d25a8587bc9247149"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/solver_cuda_v1.py",
+      "sha256": "5fefcd963da299b685aaf15bec50e9fb30286f08cea7baac84823e50cf4b7060"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/masked_solver_v1.py",
+      "sha256": "9b021905d5bf364ee19f65684f0c6ac3b469acd52879b8df3a2512350dff7fd8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/masked_cuda_v1.py",
+      "sha256": "e111430a9b03247d12e3ad2c639582d5d4ba40c36e5942ee53ae6c4ac74f0838"
+    }
+  ],
+  "checks": [
+    {
+      "kind": "two-pixel-TV-L1-analytic",
+      "weight": 0.001,
+      "alpha": 0.0005,
+      "squared_error_half": 2.9698071089619943e-10,
+      "iterations": 136,
+      "relative_primal_dual_gap": 8.136457833126414e-06,
+      "absolute_primal_dual_gap": 2.969807109091141e-10,
+      "gap_scale": 3.65e-05,
+      "converged": true,
+      "zero_coefficients_fraction": 0.0
+    },
+    {
+      "kind": "two-pixel-TV-L1-analytic",
+      "weight": 0.001,
+      "alpha": 0.01,
+      "squared_error_half": 0.0,
+      "iterations": 40,
+      "relative_primal_dual_gap": 7.59684124967583e-13,
+      "absolute_primal_dual_gap": 2.7728470561316776e-17,
+      "gap_scale": 3.65e-05,
+      "converged": true,
+      "zero_coefficients_fraction": 1.0
+    },
+    {
+      "kind": "two-pixel-TV-L1-analytic",
+      "weight": 0.004,
+      "alpha": 0.0005,
+      "squared_error_half": 4.237651966525529e-20,
+      "iterations": 40,
+      "relative_primal_dual_gap": 7.331917019705996e-08,
+      "absolute_primal_dual_gap": 2.6761497121926886e-12,
+      "gap_scale": 3.65e-05,
+      "converged": true,
+      "zero_coefficients_fraction": 0.0
+    },
+    {
+      "kind": "two-pixel-TV-L1-analytic",
+      "weight": 0.004,
+      "alpha": 0.01,
+      "squared_error_half": 0.0,
+      "iterations": 16,
+      "relative_primal_dual_gap": 4.269974309446336e-15,
+      "absolute_primal_dual_gap": 1.5585406229479126e-19,
+      "gap_scale": 3.65e-05,
+      "converged": true,
+      "zero_coefficients_fraction": 1.0
+    },
+    {
+      "kind": "masked-single-free-pixel-analytic",
+      "squared_error_half": 8.121755639670183e-11,
+      "iterations": 120,
+      "relative_primal_dual_gap": 8.129308124713445e-06,
+      "absolute_primal_dual_gap": 1.219396218707017e-10,
+      "gap_scale": 1.5e-05,
+      "converged": true,
+      "support_fraction": 0.3333333333333333
+    },
+    {
+      "kind": "sparse-CPU-CUDA-parity",
+      "max_abs_difference": 1.0299920638612292e-18,
+      "CPU": {
+        "iterations": 256,
+        "relative_primal_dual_gap": 9.030615845838194e-06,
+        "absolute_primal_dual_gap": 1.9663043702761087e-09,
+        "gap_scale": 0.00021773757225896062,
+        "converged": true,
+        "zero_coefficients_fraction": 0.4751131221719457
+      },
+      "CUDA": {
+        "iterations": 256,
+        "relative_primal_dual_gap": 9.030615845838194e-06,
+        "absolute_primal_dual_gap": 1.9663043702761087e-09,
+        "gap_scale": 0.00021773757225896062,
+        "converged": true,
+        "zero_coefficients_fraction": 0.4751131221719457,
+        "backend": "CUDA-float64-graph8"
+      }
+    },
+    {
+      "kind": "masked-CPU-CUDA-parity",
+      "max_abs_difference": 2.202285662861181e-18,
+      "CPU": {
+        "iterations": 336,
+        "relative_primal_dual_gap": 9.79544415665108e-06,
+        "absolute_primal_dual_gap": 2.132836229867428e-09,
+        "gap_scale": 0.00021773757225896062,
+        "converged": true,
+        "support_fraction": 0.665158371040724
+      },
+      "CUDA": {
+        "iterations": 336,
+        "relative_primal_dual_gap": 9.795444156775564e-06,
+        "absolute_primal_dual_gap": 2.132836229894533e-09,
+        "gap_scale": 0.00021773757225896062,
+        "converged": true,
+        "zero_coefficients_fraction": 0.334841628959276,
+        "backend": "CUDA-float64-graph8"
+      }
+    }
+  ],
+  "global_CPU_RNG_unchanged": true,
+  "new_model_calls": 0,
+  "RAW_decodes": 0,
+  "scope": "Independent analytic two-pixel TV/group-L1 and single-free-pixel masked-TV bounds; CPU/CUDA float64 parity and stopping checks. No model or real image input; not calibration of data-adaptive support."
+}

@@ -1,0 +1,144 @@
+{
+  "created_UTC": "2026-11-03T02:10:44.950548+00:00",
+  "prototype": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/prototype-v6.py",
+    "sha256": "19757a522f2f7f9efb682dcb30cac8065878c432d7f87115f2beda036d4e9528"
+  },
+  "sparse_CPU": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/solver-v1.py",
+    "sha256": "28a769f94fc0510924c2a936a6e6095b2a0385f343ffcd6d25a8587bc9247149"
+  },
+  "sparse_CUDA": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/solver_cuda_v1.py",
+    "sha256": "5fefcd963da299b685aaf15bec50e9fb30286f08cea7baac84823e50cf4b7060"
+  },
+  "masked_CPU": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/masked_solver_v1.py",
+    "sha256": "9b021905d5bf364ee19f65684f0c6ac3b469acd52879b8df3a2512350dff7fd8"
+  },
+  "masked_CUDA": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/masked_cuda_v1.py",
+    "sha256": "e111430a9b03247d12e3ad2c639582d5d4ba40c36e5942ee53ae6c4ac74f0838"
+  },
+  "global_frequency": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/phase_frequency.py",
+    "sha256": "6ff3feace59a44237258168adbd89a30f9b355b57f4c806be9539ff09aa4a8c9"
+  },
+  "global_fitter": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/phase_harmonic.py",
+    "sha256": "339316b45e7c530169846387d61654d2fcde3b4e61474c63967b95e48684ba80"
+  },
+  "prior_TV": {
+    "path": "/home/dllu/proj/demosaic/src/demosaic/phase_tv.py",
+    "sha256": "8c03a05246691587dd05918296eb51931248dd556d05912395c985bfd5654d13"
+  },
+  "generator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/prospective-operator-v2.py",
+    "sha256": "3a6efd8bbd3e4b962f8b3d2c20ded8d9e98a71ae39c0db07a0ee471b7c1a1c36"
+  },
+  "settings": {
+    "sigma_native": 16,
+    "support_TV_noise_multiplier": 16,
+    "support_group_L1_noise_multiplier": 0.5,
+    "support_power_threshold": 9,
+    "support_noise_proxy": "Gaussian32covariance,heuristicnotSparseTVcovariance",
+    "masked_refit_TV_noise_multiplier": 4,
+    "each_solver_iteration_cap": 1024,
+    "each_solver_relative_gap_goal": 1e-05,
+    "ADMM_gradient_rho": 16,
+    "ADMM_group_or_mask_rho": 1,
+    "gap_check_every": 8,
+    "post_refit_power_shrink": 9,
+    "magnitude_cap": 3,
+    "global_gate": 9,
+    "apron_native": 32,
+    "frequency_policy": "Unchanged guarded continuous search, with original inactive gates preserved",
+    "clipped_window_policy": "Exact original grid-TV result, no sparse estimate",
+    "support_components": {
+      "connectivity": 4,
+      "minimum_packed_area": 805,
+      "derivation": "ceil(4*pi*(sigma_native/2)^2), sigma_native16; heuristic, not calibrated false-positive control"
+    }
+  },
+  "selection_support": "224 development recipes/1792 observations: previous128 and first failed96-recipe support/refit holdout. Component202 vs805 evaluated. Choose805=ceil(4pi*(16/2)^2), one Gaussian coefficient-noise correlation area on packed grid. Removes229-cell false support island; other strong components retained. Development mean gain essentially retained, blank error/field lower. First96 holdout is now development for this final policy; it is not final validation.",
+  "prospective_seeds": [
+    2026110900,
+    2026110901,
+    2026110902,
+    2026110903,
+    2026110904,
+    2026110905,
+    2026110906,
+    2026110907,
+    2026110908,
+    2026110909,
+    2026110910,
+    2026110911,
+    2026110912,
+    2026110913,
+    2026110914,
+    2026110915,
+    2026110916,
+    2026110917,
+    2026110918,
+    2026110919,
+    2026110920,
+    2026110921,
+    2026110922,
+    2026110923,
+    2026110924,
+    2026110925,
+    2026110926,
+    2026110927,
+    2026110928,
+    2026110929,
+    2026110930,
+    2026110931,
+    2026110932,
+    2026110933,
+    2026110934,
+    2026110935,
+    2026110936,
+    2026110937,
+    2026110938,
+    2026110939,
+    2026110940,
+    2026110941,
+    2026110942,
+    2026110943,
+    2026110944,
+    2026110945,
+    2026110946,
+    2026110947,
+    2026110948,
+    2026110949,
+    2026110950,
+    2026110951,
+    2026110952,
+    2026110953,
+    2026110954,
+    2026110955,
+    2026110956,
+    2026110957,
+    2026110958,
+    2026110959,
+    2026110960,
+    2026110961,
+    2026110962,
+    2026110963
+  ],
+  "planned_model_observations": 512,
+  "scope": "New64-recipe/512-observation independent validation fixed before generation. Same original dark/noise/ADC regime; GT/reference only scoring. Original96 failed holdout retained as development and failure evidence. All means, worst tails, native GT/real crops and full frame must be reported. Learned V143 weights unchanged.",
+  "components": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/components-v1.py",
+    "sha256": "de450b50d525918c788e4c050435f88669d1758b13a4fa894ed4d99084abbc10"
+  },
+  "prior_failed_policy": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/locked-policy-v1.json",
+    "sha256": "1548cd8de4ec81341e9fa0f5b613094c33cb53ae61bcd8f6023ae5b1f8726157"
+  },
+  "prior_failed_validation": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/prospective-evaluation-v1/result-v1.json",
+    "sha256": "fb93003192553e7296e9415140db57b3700628f915c833272921d0a5c1c2d748"
+  }
+}

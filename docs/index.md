@@ -11,7 +11,14 @@ The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
 adds material/camera gains and native examples, with selected color-bias tradeoffs
 and unmeasured complete-panel/frame scope.
 
-The experimental [continuous-frequency TV fit](offgrid-phase.md) gives modest,
+The additional [connected support/refit mode](sparse-phase-support.md) strengthens
+the real lattice on complete V143 frames. Final fresh validation gives 12.8% more
+response and 34.0% less mean added blank RMS versus refined TV, with 39.2% higher
+worst-case blank RMS. The known isolated stripe island is removed; connected
+boundary leakage remains. Wider sky and all 256 final absent inputs stay unchanged.
+This remains opt-in, with grid-TV the default inside the optional stage.
+
+The earlier [continuous-frequency TV fit](offgrid-phase.md) gives modest,
 placement-sensitive mesh changes on complete 102MP RGB16 outputs. Fresh 64-recipe validation
 finds 3.7% more response and slightly lower texture error versus fixed-bin TV,
 with 8.5% higher added blank RMS. Wider sky, all 256 absent inputs and 4,096 fresh

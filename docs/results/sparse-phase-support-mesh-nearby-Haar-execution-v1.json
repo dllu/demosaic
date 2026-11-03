@@ -1,0 +1,275 @@
+{
+  "case": "mesh-nearby-Haar",
+  "input_raw": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-inference-v1/work/artifacts/mesh-nearby-Haar/normalized-raw.npy",
+    "sha256": "e50b0fcf7a7f4bfa1b0c718f8e3779dd24014edbee34d9b2ec57e43841de86ef"
+  },
+  "parent_prediction": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-inference-v1/work/artifacts/mesh-nearby-Haar/parent-rgb-f32.npy",
+    "sha256": "1aee4ca1ea1adf907767af5004339b68bf022f71b4e3c36c9a79ab8a12ffb595"
+  },
+  "refined_prediction": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/offgrid-phase-v1/work-v2/artifacts/mesh-nearby-Haar/corrected-rgb-f32.npy",
+    "sha256": "c31f61f02560d49434609ef1bbe3b7ef806e2d808f3d5c3253b8fdc2ee3767bb"
+  },
+  "edge_prediction": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/green-agreement-v1/work/artifacts/mesh-nearby-Haar/corrected-rgb-f32.npy",
+    "sha256": "64e0ec6d1ee245e8b93c6492975df83a8cbdd081b67fb50124376679c5db3b86"
+  },
+  "complex_prediction": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/harmonic-frequency-refinement-v1/work/artifacts/mesh-nearby-Haar/corrected-rgb-f32.npy",
+    "sha256": "b7793691877147a54039e8ba8c0368ca77e04df7d3e34c46b72d931cdfff066c"
+  },
+  "scalar_prediction": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/phase-harmonic-inference-v1/work/artifacts/mesh-nearby-Haar/corrected-rgb-f32.npy",
+    "sha256": "fb7e3d1d0443e942e473f6a61c7c2670c9954b39081801fb01e7ac258babeb71"
+  },
+  "corrected_prediction": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/work/artifacts/mesh-nearby-Haar/corrected-rgb-f32.npy",
+    "sha256": "efcb86718c87da7f04ee5673ece71373dcfece13d8c057e727f8a6e9a21b6b2f"
+  },
+  "linear_RGB16": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/work/artifacts/mesh-nearby-Haar/linear-rgb16.tiff",
+    "sha256": "819dd18463d046e8564bfd970c5edcbe7481b07386a17f6aa57b6d8fc27f8509"
+  },
+  "sRGB16": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/work/artifacts/mesh-nearby-Haar/srgb16.tiff",
+    "sha256": "678bf28fa9dab0a245fe394688b2a01aa5a5e7a4f9474ac00b1f27f447feda74"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v4/step5000/V143-step5000-inference.pt",
+    "sha256": "96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4"
+  },
+  "parent_invocation_metadata": {
+    "input": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+    "checkpoint": "/mnt/external/demosaic/models/v143-final5000.pt",
+    "step": 5000,
+    "checkpoint_sha256": "96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4",
+    "model_config": {
+      "restoration_backbone": "pretrained-rgb",
+      "width": 64,
+      "encoder_blocks": [
+        2,
+        2,
+        4
+      ],
+      "middle_blocks": 6,
+      "decoder_blocks": [
+        2,
+        2,
+        2
+      ],
+      "attention": true,
+      "dino": true,
+      "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+      "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+      "dino_lora_rank": 0,
+      "dino_input_adapter": false,
+      "dino_feature_fusion": "convnext-pyramid",
+      "camera_conditioning": true,
+      "noise_modulation": false,
+      "physical_fp32": true,
+      "baseline": "bilinear",
+      "prior_window": 7,
+      "standardized_noise": false,
+      "noise_refinement": false,
+      "refinement_width": 24,
+      "refinement_blocks": 4,
+      "refinement_window": 63,
+      "coarse_refinement_factor": 0,
+      "coarse_refinement_width": 24,
+      "coarse_refinement_blocks": 4,
+      "coarse_refinement_window": 31,
+      "pyramid_refinement": false,
+      "pyramid_measurements": true,
+      "pyramid_width": 24,
+      "pyramid_blocks": 2,
+      "variance_stabilization": true,
+      "physical_anchors": true,
+      "rgb_processing_scale": 1,
+      "packed_detail_prior": false,
+      "rgb_hidden_autocast": false,
+      "rgb_center_camera_matrix": false,
+      "rgb_middle_skip_fp32": true,
+      "adc_cfa_projection": false,
+      "adc_cfa_projection_mode": "malvar",
+      "raw_kernel_reconstruction": false,
+      "raw_kernel_windows": [
+        1,
+        5,
+        17
+      ],
+      "raw_kernel_phase_conditioning": false,
+      "raw_directional_residual": false,
+      "raw_directional_bank_context": false,
+      "raw_directional_bank_detach_input": false,
+      "raw_spectral_residual": false,
+      "raw_frequency_features": false,
+      "raw_spatial_features": false,
+      "raw_global_features": false,
+      "raw_global_conditioning": "legacy-v1",
+      "late_rgb_refinement": "none",
+      "isotropic_groups": 6,
+      "isotropic_blocks": 8,
+      "isotropic_local_width": 32,
+      "isotropic_raw_gain": 1.0,
+      "isotropic_residual_scale": 1.0
+    },
+    "shot": 0.0014635775921166604,
+    "read": 1.0715704128646712e-06,
+    "pattern": "RGGB",
+    "raw_metadata": {
+      "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+      "camera": "GFX100S",
+      "pattern": "RGGB",
+      "black_levels": [
+        4098.0,
+        4097.0,
+        4104.0,
+        4104.0
+      ],
+      "white_levels": [
+        65535.0,
+        65535.0,
+        65535.0,
+        65535.0
+      ],
+      "white_balance": [
+        1.5132450331125828,
+        1.0,
+        2.2152317880794703
+      ],
+      "camera_to_srgb": [
+        [
+          1.0725188393098881,
+          0.17123593128834644,
+          -0.24375477059823436
+        ],
+        [
+          -0.1267191317089774,
+          1.4310509369654432,
+          -0.3043318052564657
+        ],
+        [
+          -0.009697676902906037,
+          -0.29348063283422965,
+          1.3031783097371357
+        ]
+      ],
+      "flip": 0,
+      "iso": 6400,
+      "adc_white_level": 65535.0,
+      "make": "FUJIFILM",
+      "xyz_to_camera": [
+        [
+          1.6211999654769897,
+          -0.8422999978065491,
+          -0.1582999974489212
+        ],
+        [
+          -0.4336000084877014,
+          1.2582999467849731,
+          0.19370000064373016
+        ],
+        [
+          -0.019500000402331352,
+          0.07259999960660934,
+          0.6198999881744385
+        ]
+      ]
+    },
+    "noise_profile": null,
+    "end_to_end_seconds": 309.9514789810055,
+    "seconds": 165.59008673601784,
+    "tile_seconds": 165.538244396972,
+    "compute_transfer_seconds": 165.0225054945331,
+    "blend_seconds": 0.4796742925536819,
+    "megapixels": 101.995852,
+    "tiles": 520,
+    "tile": 512,
+    "overlap": 64,
+    "tile_grid_alignment": 2,
+    "tile_stride": 448,
+    "batch_size": 4,
+    "self_ensemble": "none",
+    "model_views_per_tile": 1,
+    "compute_precision": "float32",
+    "refinement_compute_precision": "float32",
+    "memory_format": "channels_last",
+    "peak_cuda_gb": 3.16407808,
+    "cudnn_autotune": {
+      "enabled": false
+    },
+    "phase_harmonic": {
+      "method": "local-phase-harmonic-v1",
+      "enabled": true,
+      "stride_native": 128,
+      "tile_native": 256,
+      "working_precision": "float64 fits; float32 full-image accumulation/output",
+      "noise": "max(observed RAW,0)*shot+read; same convention as neural inference",
+      "confidence_calibrated": false,
+      "patches": 6188,
+      "selected_patches": 4246,
+      "active_patches": 1111,
+      "selected_frequencies": 15065,
+      "new_model_calls": 0,
+      "seconds": 107.94786357000703,
+      "extension": "Repeat complete Bayer cells only beyond odd/small image boundaries",
+      "blend": "sum tapered deltas / max(sum tapers,1), including inactive patches",
+      "added_field_rms_DN16": 23.50361839795799,
+      "max_abs_added_field_DN16": 5644.49853515625
+    }
+  },
+  "refinement": {
+    "method": "local-phase-harmonic-v5",
+    "envelope": "sparse",
+    "enabled": true,
+    "refine_frequency": true,
+    "stride_native": 128,
+    "tile_native": 256,
+    "working_precision": "float64 fits; float32 full-image accumulation/output",
+    "noise": "max(observed RAW,0)*shot+read; same convention as neural inference",
+    "confidence_calibrated": false,
+    "patches": 6188,
+    "selected_patches": 4246,
+    "active_patches": 821,
+    "selected_frequencies": 15065,
+    "new_model_calls": 0,
+    "TV": {
+      "device": "cuda",
+      "solves": 1150,
+      "iterations": 220552,
+      "capped": 77,
+      "maximum_relative_primal_dual_gap": 8.534565939365282e-05
+    },
+    "support_TV": {
+      "device": "cuda",
+      "solves": 702,
+      "iterations": 583992,
+      "capped": 401,
+      "maximum_relative_primal_dual_gap": 0.0010842391244094477
+    },
+    "frequency_search": {
+      "solves": 1093,
+      "evaluations": 17689,
+      "collision_fallbacks": 2,
+      "clipped_windows": 554,
+      "maximum_abs_delta_bins": 1.5,
+      "confidence_calibrated": false
+    },
+    "seconds": 531.6800869979779,
+    "extension": "Repeat complete Bayer cells only beyond odd/small image boundaries",
+    "blend": "sum tapered deltas / max(sum tapers,1), including inactive patches",
+    "added_field_rms_DN16": 61.37741698444108,
+    "max_abs_added_field_DN16": 12083.3857421875
+  },
+  "wall_seconds_including_witnesses_exports": 540.7488802309963,
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/sparse-phase-v1/full-refine-v1.py",
+    "sha256": "4070a83d516ed38b3eab143915a7556f74fe1ca0e06197d88b4aece6f6841913"
+  },
+  "new_model_calls": 0,
+  "RAW_decodes": 0,
+  "noise_draws": 0,
+  "scope": "ThreeCPUthreads,singlelockedfloat64CUDAgraphsolver;cachedcompleteV143parents/raw,complexbaselineexact. SparseTV16/group0.5support,power9mask,TV4maskedrefit;clippedwindowsretainoriginalgridTV. Parentinvocationmetadataishistorical;activecorrectionstatsareseparate. No referencesincorrection."
+}

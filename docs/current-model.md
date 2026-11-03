@@ -1,5 +1,12 @@
 # Current model choices
 
+The [connected support/refit option](sparse-phase-support.md) gives stronger mesh
+contrast on V143 and 12.8% higher fresh response with 34.0% lower mean blank spill
+than refined TV. Worst-case blank RMS rises 39.2%; a known isolated stripe failure
+is removed, while boundary leakage remains. Use the explicit `sparse` envelope;
+grid-TV remains the optional-stage default. The wider sky, final absent inputs
+and fixed photo/uniform checks retain parent values. Learned weights are unchanged.
+
 The additional [continuous frequency option](offgrid-phase.md) gives modest,
 placement-sensitive mesh changes on the same V143 parents. Fresh 64-recipe response rises 3.7% versus
 fixed-bin TV with slightly lower texture error and 8.5% higher added blank RMS.

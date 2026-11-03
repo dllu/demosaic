@@ -109,13 +109,14 @@ def denoise_complex_tv(values, weight, iterations=1024, *, device="cpu"):
 
 
 def correct_edge_phase_patch(
-    packed, variance, colors, base, *, device="cpu", refine_frequency=False
+    packed, variance, colors, base, *, device="cpu", refine_frequency=False, sparse_support=False
 ):
     """Fixed sigma16 phasors, noise-scaled vectorial TV, and the original gates.
 
     The Gaussian32 covariance sets a heuristic post-filter power threshold.
     It is not the covariance/confidence of the nonlinear TV result.
     """
+    refine_frequency = refine_frequency or sparse_support
     if refine_frequency:
         from .phase_frequency import fit_refined
 
@@ -126,6 +127,9 @@ def correct_edge_phase_patch(
     peaks = fitted["peaks"]
     if not peaks:
         return base.copy(), {"peaks": []}
+    use_sparse = sparse_support and not any(
+        s.get("clipped_window_fallback") for s in fitted.get("searches", [])
+    )
     beta, cov = fitted["beta"], fitted["covariance"]
     planes = np.stack(
         [(fitted["plane"] @ beta[3 * p : 3 * p + 3]).reshape(128, 128) for p in range(4)]
@@ -154,7 +158,16 @@ def correct_edge_phase_patch(
         noise = np.sqrt((local["covariance"][0] + local["covariance"][2]) / 2)
         item = {"gate": gate, "solver": {}}
         for key, multiplier in {"edge": 16}.items():
-            coeff, solver = denoise_complex_tv(small, noise * multiplier, device=device)
+            if use_sparse:
+                from .phase_sparse import sparse_support_refit
+
+                coeff, solver, support_solver = sparse_support_refit(
+                    small, noise, coarse["covariance"], device=device
+                )
+                multiplier = 4
+                item["solver"]["support"] = support_solver
+            else:
+                coeff, solver = denoise_complex_tv(small, noise * multiplier, device=device)
             lp = np.maximum(
                 0, (d * coeff[0] ** 2 - 2 * b * coeff[0] * coeff[1] + a * coeff[1] ** 2) / det
             )
@@ -186,10 +199,21 @@ def correct_edge_phase_patch(
         "peaks": peaks,
         "local": detail,
         "local_sigma_native": 16,
-        "TV_noise_multiplier": 16,
+        "TV_noise_multiplier": 4 if use_sparse else 16,
         "post_filter_power_shrink": 9,
         "post_filter_noise_proxy": "FixedGaussian32covariance,notTVuncertainty",
     }
     if refine_frequency:
         diagnostic["frequency_searches"] = fitted["searches"]
+    if sparse_support:
+        diagnostic["sparse_support"] = {
+            "enabled": use_sparse,
+            "clipped_window_grid_TV_fallback": not use_sparse,
+            "support_TV_noise_multiplier": 16,
+            "support_group_noise_multiplier": 0.5,
+            "support_power_threshold": 9,
+            "minimum_connected_packed_area": 805,
+            "connectivity": 4,
+            "masked_refit_TV_noise_multiplier": 4,
+        }
     return base + fields["edge"] * taper[None], diagnostic

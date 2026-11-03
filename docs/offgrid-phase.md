@@ -1,5 +1,9 @@
 # Fitting frequencies between FFT bins clarifies the mesh
 
+The later [connected support/refit option](sparse-phase-support.md) raises average
+response and reduces mean blank spill, with a worse worst-case tail. It is an
+explicit `sparse` envelope; this earlier refined-TV mode remains available.
+
 Small continuous frequency updates give modest, placement-sensitive changes in
 the real crossing mesh on the same V143 parent. Fresh dark procedural validation shows **3.7% higher template
 response and slightly lower texture error**, with **8.5% higher added-field RMS

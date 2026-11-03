@@ -1,5 +1,11 @@
 # Experiment index
 
+The [connected support/refit experiment](sparse-phase-support.md) adds stronger
+fine-mesh contrast, 12.8% higher final held-out response and 34.0% lower mean added
+blank RMS versus refined TV. Worst blank RMS rises 39.2%. The first failed trial,
+removed isolated stripe, new independent validation, remaining amplified tail,
+both complete-frame priors and RGB16 audits are preserved. The mode stays opt-in.
+
 The [continuous frequency option](offgrid-phase.md) tests bounded updates to
 fixed-bin TV, with modest real changes. Locked 64-recipe validation gives 3.7% higher response and slightly
 lower texture error, with added blank RMS up 8.5%. All 256 absent observations,

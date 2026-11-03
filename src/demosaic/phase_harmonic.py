@@ -363,17 +363,21 @@ def refine_phase_harmonics(
         raise ValueError("Require finite nonnegative shot/read variance coefficients")
     if not isinstance(stride, (int, np.integer)) or stride % 2 or not 2 <= stride <= 192:
         raise ValueError("Stride must be even and between 2 and 192 native pixels")
-    if envelope not in ("scalar", "complex", "edge"):
-        raise ValueError("Envelope must be scalar, complex or edge")
-    if refine_frequency and envelope != "edge":
-        raise ValueError("Frequency refinement requires the edge TV envelope")
-    if envelope == "edge":
+    if envelope not in ("scalar", "complex", "edge", "sparse"):
+        raise ValueError("Envelope must be scalar, complex, edge or sparse")
+    refine_frequency = refine_frequency or envelope == "sparse"
+    if refine_frequency and envelope not in ("edge", "sparse"):
+        raise ValueError("Frequency refinement requires the edge or sparse TV envelope")
+    if envelope in ("edge", "sparse"):
         from functools import partial
 
         from .phase_tv import correct_edge_phase_patch
 
         corrector = partial(
-            correct_edge_phase_patch, device=tv_device, refine_frequency=refine_frequency
+            correct_edge_phase_patch,
+            device=tv_device,
+            refine_frequency=refine_frequency,
+            sparse_support=envelope == "sparse",
         )
     elif envelope == "complex":
         from .phase_envelope import correct_complex_patch
@@ -393,6 +397,7 @@ def refine_phase_harmonics(
             "scalar": "local-phase-harmonic-v1",
             "complex": "local-phase-harmonic-v2",
             "edge": "local-phase-harmonic-v3",
+            "sparse": "local-phase-harmonic-v5",
         }[envelope],
         "envelope": envelope,
         "enabled": True,
@@ -408,7 +413,7 @@ def refine_phase_harmonics(
         "selected_frequencies": 0,
         "new_model_calls": 0,
     }
-    if envelope == "edge":
+    if envelope in ("edge", "sparse"):
         metadata["TV"] = {
             "device": str(tv_device),
             "solves": 0,
@@ -416,8 +421,27 @@ def refine_phase_harmonics(
             "capped": 0,
             "maximum_relative_primal_dual_gap": 0.0,
         }
+    if envelope == "sparse":
+        metadata["sparse_support"] = {
+            "support_TV_noise_multiplier": 16,
+            "group_noise_multiplier": 0.5,
+            "support_power_threshold": 9,
+            "minimum_connected_packed_area": 805,
+            "connectivity": 4,
+            "masked_refit_TV_noise_multiplier": 4,
+            "confidence_calibrated": False,
+        }
+        metadata["support_TV"] = {
+            "device": str(tv_device),
+            "solves": 0,
+            "iterations": 0,
+            "capped": 0,
+            "maximum_relative_primal_dual_gap": 0.0,
+        }
     if refine_frequency:
-        metadata["method"] = "local-phase-harmonic-v4"
+        metadata["method"] = (
+            "local-phase-harmonic-v5" if envelope == "sparse" else "local-phase-harmonic-v4"
+        )
         metadata["frequency_search"] = {
             "solves": 0,
             "evaluations": 0,
@@ -474,17 +498,18 @@ def refine_phase_harmonics(
                         metadata["frequency_search"]["maximum_abs_delta_bins"],
                         float(np.max(np.abs(search["delta_bins_xy"]))),
                     )
-            if envelope == "edge":
+            if envelope in ("edge", "sparse"):
                 for local in diagnostic.get("local", []):
-                    solver = local.get("solver", {}).get("edge")
-                    if solver:
-                        metadata["TV"]["solves"] += 1
-                        metadata["TV"]["iterations"] += solver["iterations"]
-                        metadata["TV"]["capped"] += not solver["converged"]
-                        metadata["TV"]["maximum_relative_primal_dual_gap"] = max(
-                            metadata["TV"]["maximum_relative_primal_dual_gap"],
-                            solver["relative_primal_dual_gap"],
-                        )
+                    for key, block in [("edge", "TV"), ("support", "support_TV")]:
+                        solver = local.get("solver", {}).get(key)
+                        if solver:
+                            metadata[block]["solves"] += 1
+                            metadata[block]["iterations"] += solver["iterations"]
+                            metadata[block]["capped"] += not solver["converged"]
+                            metadata[block]["maximum_relative_primal_dual_gap"] = max(
+                                metadata[block]["maximum_relative_primal_dual_gap"],
+                                solver["relative_primal_dual_gap"],
+                            )
     np.maximum(weights, 1, out=weights)
     np.divide(add, weights[None], out=add)
     result += add
