@@ -33,6 +33,10 @@ useful gain from 512-pixel Fourier support, including 72 fresh512 flat controls.
 [patch-filter comparison](docs/collaborative-detail.md) records a separate failure:
 uniform flats stay unchanged but building color blocks appear.
 
+The [late spectral pilot](docs/late-spectral-detail.md) is training a direct
+RAW-innovation correction after V143, with noise-scaled gradient supervision
+and explicit quiet-region controls. CUDA/resume checks pass; quality review is pending.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

@@ -1,0 +1,113 @@
+{
+  "root": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2",
+  "work": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts",
+  "runner": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/complete_late_spectral_review.py",
+    "sha256": "1699fc29c26b9db79339080662efc6975837288df3a6a1746e989fb474dc27f9"
+  },
+  "python": "/home/dllu/proj/demosaic/.venv/bin/python",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/plan-v1.json",
+    "sha256": "f071932c74d523d3baa3cc154bbf231d4c6223f0202157ecddcee8b37e092bf9"
+  },
+  "stages": [
+    {
+      "name": "review",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/review-source-v1.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/review-result-v1.json"
+    },
+    {
+      "name": "scores",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/score_late_spectral_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/scores-v1.json"
+    },
+    {
+      "name": "metric-audit",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/audit_late_spectral_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/independent-metrics-audit-v1.json"
+    },
+    {
+      "name": "render",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/render_late_spectral_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/figures-v1.json"
+    },
+    {
+      "name": "pixel-audit",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/audit_late_spectral_figures.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/independent-figures-audit-v1.json"
+    },
+    {
+      "name": "mixed-controls",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/mixed-quiet-v1/operator-v1.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/mixed-quiet-v1/result-v1.json"
+    },
+    {
+      "name": "mixed-report",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/report_late_spectral_mixed_quiet.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/mixed-quiet-v1/report-v1.json"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/plan-v1.json",
+      "sha256": "f071932c74d523d3baa3cc154bbf231d4c6223f0202157ecddcee8b37e092bf9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/review-plan-v1.json",
+      "sha256": "16405c0e080603f9458c72e90b337fcb7d6fbcb11d5f7e193cf7e6912a272da6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/mixed-quiet-v1/plan-v1.json",
+      "sha256": "ea54c3bfe956d34344516d0670fee8a55bab46e7486c5a8087aaf01b259272b1"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/mixed-quiet-v1/scope-clarification-v1.json",
+      "sha256": "36e1512a72d65976db5914b5bf70e601f6c2d442a2bcd196c63207b6e6eb2405"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/review-source-v1.py",
+      "sha256": "586a3e049145103c5f014a0233e4da1c8a4437386063f65956b1949b8c9f07ba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/mixed-quiet-v1/operator-v1.py",
+      "sha256": "e2938e4071e68a940ae209bb799cf5fc5216a7f55a7d391ce5f647746ea79745"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/audit_late_spectral_figures.py": "a748ff6cba3047c2dcdbaba0ccad4007a34465b4c467358824f4dfee0057ab85",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/review_v146_window_transfer.py": "baf8302f75ede9733e033d86fdeba217edae5b6ca35305cecad0605d001f6285",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/score_late_spectral_trial.py": "93bd545376b0dbd9bc74289146be0e0f009edefd403e754278b14e05bca17f9d",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/complete_late_spectral_review.py": "1699fc29c26b9db79339080662efc6975837288df3a6a1746e989fb474dc27f9",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/render_late_spectral_trial.py": "4901bc5ebee7bb4bcdcf1f02833ed58d19ae2e4dc514475eac92d42d922418e3",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/postprocess-v1/scripts/audit_late_spectral_trial.py": "91e4feddfeac46257f232048018f436b5a2915c71713ed5f7379fd5121cb1f47"
+  },
+  "new_parent_DINO_forwards": 32,
+  "new_module_forwards": 1596,
+  "new_noise_draws_in_postprocess": 0,
+  "scope": "Wait for fixed1000; execute both endpoints, audits, native figures and32 prepared mixed controls. No retraining, endpoint selection or automatic retries. Actual human native viewing and interpretation remain required after completion."
+}

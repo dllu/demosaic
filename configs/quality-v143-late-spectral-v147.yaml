@@ -1,0 +1,57 @@
+version: V147
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+  step: 5000
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+module: LateSpectralDetail
+max_window: 256
+seed: 147
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+domains:
+  mesh: 0.35
+  weak: 0.10
+  flat: 0.15
+  mixed: 0.15
+  photo: 0.25
+domain_sizes:
+  mesh: 512
+  weak: 512
+  flat: 512
+  mixed: 512
+  photo: 256
+domain_loss_weights:
+  mesh: 4.0
+  weak: 4.0
+  flat: 1.0
+  mixed: 1.0
+  photo: 1.0
+first_ten_domains: [mesh, photo, flat, mixed, weak, mesh, photo, flat, mixed, weak]
+pixel_epsilon_in_noise_units: 0.01
+gradient_epsilon_in_noise_units: 0.003
+gradient_weight: 0.25
+spectral_weight: 0.25
+noise_unit_floor_DN16: 2
+manifest: /home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl
+photo_sampling_reference_manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl
+photo_sampling_reference_sha256: 4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e
+reviewed_roi_catalogue: /home/dllu/proj/demosaic/configs/low-contrast-training-rois-cleaned90782-v1.json
+reviewed_roi_fraction: 0.5
+scope: >-
+  Single1000-update feasibility pilot, frozen V143/DINO parent. Learned soft
+  spectral innovation plus local support applied directly after RGB restoration.
+  Source/loss/architecture intervention, not isolated against old V146.
+  Procedural512/photographic256 contexts preserve source geometry and effective
+  bin8; no stretching/tiling of photographs to fake512 support. Mesh and weak
+  terms receive4x source weight; pixel/gradient errors use input-noise units.
+  Ten discarded CUDA updates include a genuine8+2 resume, all source types,
+  native512/B4 peak check and exact initial parent preservation. Production starts
+  fresh and adopts those10 already prepared input/parent batches; no noise or
+  parent-forward replay. Raw/EMA endpoints prospectively reviewed, never selected
+  by training-monitor quality. Cached mainGFX and extra green mesh, both priors,
+  JPEGs, all source siblings remain outside training. No dataz or RAW decoding.

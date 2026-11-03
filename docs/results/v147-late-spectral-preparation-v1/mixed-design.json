@@ -1,0 +1,50 @@
+{
+  "seed": 2026110309,
+  "templates": [
+    "vertical-step",
+    "narrow-bar",
+    "slanted-step",
+    "striped-patch"
+  ],
+  "conditions": [
+    {
+      "name": "iso6400-prior",
+      "shot": 0.00128,
+      "read": 6.5536e-06,
+      "exposure": 1.0
+    },
+    {
+      "name": "iso12800-prior",
+      "shot": 0.00256,
+      "read": 2.62144e-05,
+      "exposure": 1.0
+    }
+  ],
+  "patterns": [
+    "RGGB",
+    "BGGR",
+    "GRBG",
+    "GBRG"
+  ],
+  "quiet_ROI_xywh": [
+    80,
+    176,
+    160,
+    160
+  ],
+  "edge_ROI_xywh": [
+    240,
+    176,
+    160,
+    160
+  ],
+  "endpoints": [
+    "parent",
+    "raw-step1000",
+    "EMA-step1000"
+  ],
+  "planned_noise_draws": 32,
+  "planned_parent_DINO_forwards": 32,
+  "planned_module_forwards": 64,
+  "scope": "Fresh512 analytic scenes; exact quiet background left of x250, strong colored edges/stripes start beyond x264. Not an independent natural-photo test. Both final endpoints. Compare quiet error and spatial variation, not just correction power. No training/RAW access."
+}
