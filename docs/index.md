@@ -1,9 +1,11 @@
 # Documentation guide
 
-The [late spectral innovation pilot](late-spectral-detail.md) has passed its
-CUDA/resume smoke checks and is training for a fixed1,000 updates. Both raw/EMA
-endpoints, 766 cached cases and32 new controls with quiet patches beside edges are prospectively
-bound. Quality, native viewing and inference integration remain pending.
+The [completed V147 late spectral pilot](late-spectral-detail.md) lowers weak-mesh
+response about 8% and raises noisy-flat error. Whole strong-edge images improve
+.31–.42% while exact quiet patches regress. Both fixed 1k endpoints, 32 new mixed
+controls, independent audits and 64 native figures are complete. Opening local
+support makes the frequency proposal worse; the next change belongs in estimation
+or supervision rather than a more permissive gate.
 
 The [V146 Fourier and mesh pilot](v146-coherent-frequency.md) completes
 500 updates with the V143 parent frozen, followed by both raw and EMA reviews on 694

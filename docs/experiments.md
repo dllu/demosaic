@@ -1,10 +1,11 @@
 # Experiment index
 
-The [V147 late spectral pilot](late-spectral-detail.md) trains a direct learned
-RAW-innovation correction after frozen V143. Component/CUDA-resume checks pass;
-the fixed1,000-update run and both final reviews are running/queued. The review
-includes766 cached cases and32 fresh controls with exact quiet regions beside
-strong edges. Quality and native viewing remain pending.
+The [completed V147 late spectral pilot](late-spectral-detail.md) adds a learned
+RAW-innovation correction after frozen V143. Both fixed 1k endpoints reduce mesh
+response about 8% and slightly worsen noisy flats. The 32 new mixed controls show
+small whole-scene gains with worse quiet regions. All 64 native figures and audits
+are complete. A 766-case post-hoc support intervention exposes a worse frequency
+proposal, rather than hidden useful recovery.
 
 The [noise-scaled collaborative RAW probe](collaborative-detail.md) completes
 694 cached comparisons: all 48 analytic flats stay unchanged, but weak mesh

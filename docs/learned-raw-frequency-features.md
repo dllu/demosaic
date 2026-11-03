@@ -62,6 +62,13 @@ tests native512 support with identical weights and 72 fresh512 flat fields; it
 also yields no useful new mesh recovery. Smaller-context bypasses are labeled.
 Larger windows do not establish better recovery or tile-boundary behavior.
 
+The separate [V147 late spectral correction](late-spectral-detail.md) moves learned
+RAW innovation directly after frozen V143, with a local support CNN and additional
+noise-scaled supervision. Both 1k endpoints lose about8% mesh response and slightly
+worsen noisy flats. Its 64 native comparisons include a full-support intervention:
+the local gate limits a worse frequency proposal. The next estimator should
+improve phase combination or supervision before opening support further.
+
 Within each frame, remove a weighted affine fit, apply a sine-product analysis
 window and take an orthonormal full complex FFT. The descriptor contains 16
 real components of the four-phase Hermitian Gram representation: four powers
