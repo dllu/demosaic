@@ -122,14 +122,16 @@ forward calls plus 100 extra frequency-hidden convolutions, zero optimizer
 updates, zero new parent/DINO calls and zero new noise draws. Peak allocated
 CUDA is 5.84/7.36 GiB in the coefficient/parameter runs.
 
-The [V150 trial](objective-floor-training.md) now compares fresh identical native
-heads with 2/16 DN floors, matched to the old
+The [completed V150 trial](objective-floor-training.md) compares fresh identical
+native heads with 2/16 DN floors, matched to the old
 4,000 cached observations, 1,000-step horizon, seed, schedule, clipping and EMA.
 Review every fixed raw/EMA endpoint against actual blank/quiet errors and the
 standing GFX scenes under both mesh priors/windows/JPEGs. The review includes
 held-out sloped ADC and faint-photo ADC controls before treating any noisy-detail
 gain as a useful replacement. Constant ADC flat preservation alone cannot establish that
-tradeoff. Current [model recommendations](current-model.md) and the [66 native
+tradeoff. It finds small actual noisy-flat/ADC photo gains, still missing noisy
+fine texture and real cab wires. All four endpoints and 72 native views are
+complete. Current [model recommendations](current-model.md) and the [66 native
 V149 comparisons](coherent-phase-estimator.md) retain their measured evidence.
 
 See the [local-time diary](../diary/2026-11-03-14-43-40-spectral-loss-allocation.md).

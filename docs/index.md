@@ -1,18 +1,19 @@
 # Documentation guide
 
-The [V150 matched loss-floor trial](objective-floor-training.md) trains identical
-fresh native heads at2/16 DN floors on the same 4,000 cached observations. Both
-CUDA8+2 checks pass; checkpoint250 states are finite and the native control
-raw/EMA/Adam state matches V149 exactly. Four final endpoints cover822 cases and
-72 native figures, with added held-out ADC photo/sloped controls. Quality and
-native viewing remain pending.
+The [completed V150 loss-floor trial](objective-floor-training.md) lowers
+native512 noisy-flat RMS about .045–.047% versus V143, and ADC photo RMS about
+3.06% on two held-out sources. Weak noisy bands and real cab wires remain missing;
+quiet errors and ADC coarse sloped-field error still rise. All four fixed
+endpoints/822 cases, 72 actual native views and independent audits are complete;
+the native control reproduces all 1,596 archived predictions exactly. The tested
+16 DN loss is the next noisy-head training control, with ADC tradeoffs retained.
 
 The [spectral loss-allocation diagnostic](spectral-loss-allocation.md) finds
 ADC-only pressure in both actual initial parameter gradients and all 1,000
 logged V149 updates. A 16 DN loss floor sharply reduces that pressure while
 leaving 84 of 85 noisy-batch gradients exact in the fixed probe. Both diagnostic
-runs and independent audits are complete; trained quality under this loss
-change remains unmeasured.
+runs and independent audits are complete; the subsequent trained comparison is
+reported in V150 above.
 
 The [completed V149 coherent CFA trial](coherent-phase-estimator.md) finds no
 useful new weak texture from known phase alignment or nine green-coherence
