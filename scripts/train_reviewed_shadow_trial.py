@@ -181,7 +181,7 @@ def worker(path, phase, arm):
     fractions = plan.get("arm_fractions", FRACTIONS)
     assert config["reviewed_shadow_fraction"] == fractions[arm]
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
-    assert parent["step"] == 20000 and len(parent["ema"]) == 91
+    assert parent["step"] == plan.get("parent_step", 20000) and len(parent["ema"]) == 91
     counts, domains = Counter(), Counter()
     initials, inputs, gradients = [], [], {}
     gradient_steps, global_gradient_snapshots = [], []
@@ -304,7 +304,7 @@ def worker(path, phase, arm):
                 inputs=inputs,
                 tensor_count=expected_tensors,
             )
-        assert domain == training.training_domain(step, 70, 0.25, 0.25)
+        assert domain == training.training_domain(step, config["seed"], 0.25, 0.25)
         clean_hash = training.batch_fingerprint(
             {k: v for k, v in clean.items() if isinstance(v, torch.Tensor)}
         )
@@ -317,7 +317,11 @@ def worker(path, phase, arm):
         counts["shadow_selected_targets"] += n
         if domain == "commons" and fractions[arm]:
             expected = reviewed_shadow_levels(
-                clean, fraction=fractions[arm], seed=70, step=step, device=value["packed"].device
+                clean,
+                fraction=fractions[arm],
+                seed=config["seed"],
+                step=step,
+                device=value["packed"].device,
             )
             assert torch.equal(selected, expected > 0)
         else:

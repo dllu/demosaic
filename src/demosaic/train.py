@@ -47,6 +47,7 @@ from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
 from .raw_global_features import require_resume_global_features
 from .raw_global_training import require_resume_raw_global_scope, validate_raw_global_only
+from .raw_spatial_training import require_resume_spatial_lr, spatial_lr_multiplier
 from .reviewed_rois import require_resume_rois, validate_roi_fraction
 from .safety import writable_path
 from .shadow_exposure import (
@@ -156,6 +157,9 @@ def make_optimizer(model, config):
     late_only = validate_late_rgb_only(config)
     frequency_only = validate_raw_frequency_only(config)
     global_only = validate_raw_global_only(config)
+    spatial_multiplier = spatial_lr_multiplier(config)
+    if spatial_multiplier != 1 and not model.config.raw_spatial_features:
+        raise ValueError("Spatial learning-rate multiplier requires RAW spatial features")
     if late_only and model.config.late_rgb_refinement == "none":
         raise ValueError("Late RGB-only training requires late RGB refinement")
     if frequency_only and not model.config.raw_frequency_features:
@@ -311,6 +315,23 @@ def make_optimizer(model, config):
                 "params": frequency,
                 "lr_multiplier": frequency_multiplier,
                 "lr": config.get("lr", 2e-4) * frequency_multiplier,
+            },
+        ]
+    if spatial_multiplier != 1:
+        spatial = [
+            p
+            for name, p in model.named_parameters()
+            if p.requires_grad and name.startswith("pretrained_rgb.raw_spatial.")
+        ]
+        if not spatial:
+            raise ValueError("Spatial learning-rate multiplier needs trainable branch parameters")
+        ids = {id(p) for p in spatial}
+        parameters = [
+            {"params": [p for p in parameters if id(p) not in ids], "lr_multiplier": 1.0},
+            {
+                "params": spatial,
+                "lr_multiplier": spatial_multiplier,
+                "lr": config.get("lr", 2e-4) * spatial_multiplier,
             },
         ]
     return torch.optim.AdamW(parameters, lr=config.get("lr", 2e-4), weight_decay=0.01)
@@ -503,6 +524,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
 
 
 def _train(config, *, resume=None, initialize=None, stop_after=None):
+    spatial_lr_multiplier(config)
     feature_weight, feature_policy = feature_options(config)
     config.update(dino_feature_weight=feature_weight, dino_feature_policy=feature_policy)
     source_loss_every = validate_source_loss_every(config.get("source_loss_every", 0))
@@ -750,6 +772,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             raise ValueError("Resume mesh texture fraction differs; initialize a new run")
         require_resume_global_features(resume_state["config"], config)
         require_resume_raw_global_scope(resume_state["config"], config)
+        require_resume_spatial_lr(resume_state["config"], config)
         require_resume_photo_epoch_order(resume_state["config"], config)
         require_resume_features(resume_state["config"], config)
         require_resume_noise_pairs(resume_state["config"], config)

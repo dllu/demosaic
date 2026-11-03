@@ -179,7 +179,10 @@ def report(root):
         assert np.array_equal(target, np.broadcast_to(target[..., :1, :1], target.shape))
         values = [
             ("V120", np.load(checked(observation["control"]), allow_pickle=False)),
-            ("V140 1k EMA", np.load(checked(predictions[observation["id"]]), allow_pickle=False)),
+            (
+                plan["model_label"],
+                np.load(checked(predictions[observation["id"]]), allow_pickle=False),
+            ),
         ]
         for label, value in values:
             rows.append(

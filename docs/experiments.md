@@ -1,5 +1,11 @@
 # Experiment index
 
+The [V144/V145 spatial pilot](v143-spatial-attention-trial.md) is running fresh
+matched continuations from V143, with local RAW attention and a larger rate for
+its new branch in V145. Genuine CPU/CUDA16+2 checks and independent state audits
+pass; fresh production and fixed native/flat reviews follow. Image quality is
+unmeasured and defaults are unchanged.
+
 The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
 original positive global gate as selection and restores contrast only inside
 unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS

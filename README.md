@@ -23,6 +23,8 @@ keeps the stage off. The same-data comparison to the earlier `edge` default give
 53% higher mesh response and 93% lower mean added blank RMS; `edge` stays explicit.
 Average response remains only **7.1% of exact procedural GT**. All 64 new natural
 photo controls remain unchanged, so nonperiodic detail is still weak.
+The [V144/V145 pilot](docs/v143-spatial-attention-trial.md) now tests local RAW
+attention from V143 against matched continuation training; quality is unmeasured.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

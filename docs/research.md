@@ -108,6 +108,11 @@ values. Remaining spill and missing full-frame support keep this experimental.
 
 ## Current hypotheses and evidence
 
+The new [V144/V145 pilot](v143-spatial-attention-trial.md) tests the implemented
+local RAW attention branch from V143 with a separate, larger branch learning
+rate, against a matched continuation control. Image quality remains unmeasured;
+it does not resume or relabel the unstarted V132 experiment.
+
 | Question | Evidence and current action |
 | --- | --- |
 | Can a frozen foundation encoder supply useful detail supervision? | [Completed V128 pilot](v128-feature-pilot-quality.md): the26-call gradient diagnostic passes, but weight.1 gives no useful gain at1,000 matched updates. Independent scores and all28 native boards are complete; the term stays off by default |

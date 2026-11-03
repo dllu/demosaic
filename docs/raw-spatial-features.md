@@ -4,9 +4,12 @@
 windows before the pretrained RGB trunk.** Both discarded genuine-V120 CPU16+2
 and CUDA256/B16 checks pass. Model quality is
 unmeasured. The [V131/V132 full-budget trial](raw-spatial-training.md) has four new
-matched CPU/CUDA checks complete. V131's original20k control runs after V125's
-memory admission; its [1k progress review](v131-progress1000-quality.md) has
-mixed detail changes and no clear mesh recovery. V132's branch remains unmeasured.
+matched CPU/CUDA checks complete. V131's original20k control stopped at the32GB
+reserve, preserving step14,549; its [1k progress review](v131-progress1000-quality.md)
+has mixed detail changes and no clear mesh recovery. V132 production remains
+unstarted. The new [V144/V145 pilot](v143-spatial-attention-trial.md) starts
+from V143 with a separate branch learning rate and a matched continuation control;
+its image quality is unmeasured.
 V120 remains the general recommendation; the original mean-loss trial
 keeps its frozen inputs and schedule.
 
@@ -116,8 +119,10 @@ all direct training/model mathematics and portable-loader ASTs match the current
 implementation. The CUDA check executes the current model-source bytes.
 
 These are discarded implementation states. The separate
-[V131/V132 trial](raw-spatial-training.md) uses seed70 and full20k horizons on both
-arms, with four newly executed exact-recipe checks. V131's original20k control
-runs and V132 follows. The completed [control1k progress review](v131-progress1000-quality.md)
+[V131/V132 trial](raw-spatial-training.md) declares seed70 and full20k horizons on both
+arms, with four executed exact-recipe checks. V131 stopped at14,549 and V132
+production remains unstarted. The completed [control1k progress review](v131-progress1000-quality.md)
 has mixed changes; the matched architecture/full-endpoint comparison remains
-to be measured. Both real train scenes and siblings stay outside training.
+unmeasured. The new [V144/V145 pilot](v143-spatial-attention-trial.md) uses V143
+and a separate branch learning rate. Both real train scenes and siblings stay
+outside training.

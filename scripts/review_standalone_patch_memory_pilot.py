@@ -89,6 +89,8 @@ def prepare(
     additional_control_roots=(),
     retained_control_labels=None,
     collector_cpu_threads=2,
+    arm=None,
+    camera_control_label=None,
 ):
     import yaml
 
@@ -96,8 +98,10 @@ def prepare(
         raise ValueError("Collector CPU threads must be1 or2")
     training = read(training_path)
     guard(training)
-    assert len(training["arms"]) == 1
-    arm = next(iter(training["arms"]))
+    if arm is None:
+        assert len(training["arms"]) == 1
+        arm = next(iter(training["arms"]))
+    assert arm in training["arms"]
     recipe = yaml.safe_load(Path(training["arms"][arm]["train"]).read_text())
     step, progress = review_step_spec(recipe["steps"], step)
     model_label = (
@@ -174,6 +178,8 @@ def prepare(
         observations = select_control_methods(observations, retained_control_labels)
         control_methods = list(retained_control_labels)
     camera_source = (BASE / "raw-patch-memory-quality-v1/render-mesh-JPEG-v1.py").read_text()
+    if camera_control_label is not None:
+        camera_source = camera_source.replace("V139 1k EMA", camera_control_label)
     camera = root / "render-mesh-JPEG-v1.py"
     camera.write_text(
         camera_source.replace("V139", camera_control)
@@ -202,7 +208,11 @@ def prepare(
         "step": step,
         "training_horizon": recipe["steps"],
         "progress_checkpoint": progress,
-        "EMA_tensors": 107 if global_features else 91,
+        "EMA_tensors": 107
+        if global_features
+        else (114 if recipe["model"].get("raw_spatial_features", False) else 91),
+        "raw_spatial_features": recipe["model"].get("raw_spatial_features", False),
+        "expected_lineage": {**training["parent"], "step": training["parent_step"]},
         "raw_global_features": global_features,
         "raw_global_conditioning": global_mode,
         "primary_complete_status": "completed-primary-numeric-review-awaiting-native-viewing",
