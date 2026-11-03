@@ -105,6 +105,16 @@ The [public evidence index](results/v147-late-spectral-preparation-v1.json)
 records the preparation and smoke result. Quality results, native viewing and
 integration remain pending; no gain or safe default is claimed.
 
+The user paused the run near update 550. The worker and both controllers were
+suspended with exact PID/create-time checks. On explicit resume, the original
+worker continued in memory; only its two waiting controllers were replaced to
+reset wall-clock deadlines. No checkpoint reload, noise redraw, new training
+worker or recipe change occurred. The
+[resume evidence](results/v147-resume-v1.json) preserves the original status
+bytes and verifies all 83 frozen neural sources and every review-stage argument
+unchanged. `postprocess-plan-v2.json` carries the replacement controller; the
+original plan and source remain preserved.
+
 An initial preparation in the separate `V147-late-spectral-v1/` cache stopped
 before noise construction or training because its exclusion assertion also
 rejected validation membership. The corrected check tests training membership;
