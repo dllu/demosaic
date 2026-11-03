@@ -112,6 +112,11 @@ The new [V144/V145 pilot](v143-spatial-attention-trial.md) tests the implemented
 local RAW attention branch from V143 with a separate, larger branch learning
 rate, against a matched continuation control. Image quality remains unmeasured;
 it does not resume or relabel the unstarted V132 experiment.
+The [new organic-photo supplement](spatial-photo-supplement.md) exposes the
+remaining V143 gap on feathers, moth scales and grass: faint/dark mean native
+DCT response .151/.399, with ideal1. Its24 inspected baseline triplets and
+independent128-row/5.53M-channel audit are complete; endpoint comparisons wait
+for the original matched runs and primary reviews.
 
 | Question | Evidence and current action |
 | --- | --- |

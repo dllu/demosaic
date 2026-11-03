@@ -1,6 +1,7 @@
 # Local RAW attention from the V143 parent
 
-**V144/V145 are a new matched 1,000-update pilot; image quality is unmeasured.**
+**V144's control is complete; V145's attention training and the paired quality
+comparison remain in progress.** Both arms have1,000-update horizons.
 V144 continues the V1435k EMA with its existing architecture. V145 adds the
 implemented [local RAW attention branch](raw-spatial-features.md), with a
 separate learning rate for its new weights. This tests a direct spatial path
@@ -45,9 +46,15 @@ review/optimizer compatibility run passes158 cases, overlapping15 new tests:
 317 distinct cases verified after correction. [Checks, byte-preserved logs and
 independent audits](results/v144-v145-spatial-setup-v1.json).
 
-Fresh V144 production has started; V145 follows. The source-frozen review
-controller has prepared V144's102 native inputs and48 flat fields and waits for
-the genuine completed endpoint and worker exit. Production quality is pending.
+V144 completed its1,000 updates and64 validation forwards, preserving its
+finite91-tensor model/EMA and89 Adam states. Its102-input primary numeric/pixel
+audits and all faint/flat/JPEG stages pass. The original review controller then
+stopped on a completion-record filename error: the flat auditor writes
+`independent-flat-audit-v1.json`. A separately frozen replacement adopts the
+completed150-input V144 review without replay and prepares V145 once. Original
+failure/status/source bytes remain preserved; training continues unchanged.
+[Recovery plan](results/v144-v145-review-recovery-plan-v2.json).
+Fresh V145 production is running. The paired endpoint quality comparison is pending.
 
 Each endpoint has a fixed review of102 retained inputs and48 exact analytic
 flats. It reuses V120/V143 predictions; V145 also reuses V144. The review includes
@@ -63,3 +70,12 @@ Both protected scene families and siblings remain excluded from training;
 `/mnt/dataz` is unavailable and is not used. Full427-photo, camera/color,
 full-frame and speed qualification remain outside this pilot. V120 remains the
 general recommendation; this experiment does not change inference defaults.
+
+The separate [photographic supplement](spatial-photo-supplement.md) adds128
+photo contexts from16 validation sources, including eight new organic-detail
+images. Its measured V143 baseline has mean faint/dark organic DCT response
+.151/.399, with visibly missing fine texture. All24 native baseline triplets
+and independent metric/pixel checks are published. The supplement reuses64
+parent predictions and declares320 additional root/DINO calls;64 parent calls
+are complete. V144/V145 follow after both primary reviews. It adds64 new noise
+observations without changing the original150-input reviews or training.

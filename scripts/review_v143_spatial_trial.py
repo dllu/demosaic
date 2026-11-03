@@ -135,6 +135,71 @@ def bind(point, training, arm):
     )
 
 
+def completed_review_bindings(root, arm):
+    """Adopt numeric results only after every original review stage completed."""
+    point, flat = root / arm, root / (arm + "-flat")
+    bindings = {
+        "primary_audit": ref(point / "independent-audit-v1.json"),
+        "flat_audit": ref(flat / "independent-flat-audit-v1.json"),
+        "faint_audit": ref(point / "faint-detail-v1/independent-audit-v1.json"),
+        "camera_JPEGs": ref(point / "camera-JPEG-v1/manifest-v1.json"),
+        "flat_comparison": ref(root / (arm + "-flat-vs-V143") / "result-v1.json"),
+    }
+    for key in ("primary_audit", "flat_audit", "faint_audit"):
+        assert read(bindings[key]["path"])["status"].startswith("passed-independent")
+    for directory, count in ((point, 102), (flat, 48)):
+        actual = read(directory / "collection-v1.json")
+        assert actual["plan"] == ref(directory / "plan-v1.json")
+        assert actual["counts"] == {"root": count, "encoder": count}
+        assert actual["RNG_unchanged"]
+        assert actual["full_model_before"] == actual["full_model_after"]
+        assert actual["backbone_before"] == actual["backbone_after"]
+    return bindings
+
+
+def prepare_recovery(path):
+    """Preserve the failed controller and adopt its completed V144 without replay."""
+    old = read(path)
+    guard(old)
+    root = Path(old["root"])
+    failed = read(root / "review-status.json")
+    assert failed["status"] == "failed-fixed-review-preserved" and not live(failed["owner"])
+    assert failed["arm"] == "V144" and "FileNotFoundError" in failed["error"]
+    assert not (root / "V145").exists()
+    completed = completed_review_bindings(root, "V144")
+    operator = root / "review-controller-v2.py"
+    assert not operator.exists()
+    operator.write_text(
+        Path(__file__)
+        .read_text()
+        .replace("REPO = Path(__file__).resolve().parents[1]", f"REPO = Path({str(REPO)!r})")
+    )
+    plan = {
+        **old,
+        "operator": ref(operator),
+        "status_path": str(root / "review-recovery-status-v2.json"),
+        "claim_path": str(root / "review-recovery-v2.claim"),
+        "adopted_completions": {"V144": completed},
+        "absolute_deadline_unix": failed["owner"]["created"] + 72000,
+        "inputs": [
+            *old["inputs"],
+            ref(path),
+            ref(root / "review-status.json"),
+            *completed.values(),
+        ],
+        "frozen_files": {**old["frozen_files"], str(operator): ref(operator)["sha256"]},
+        "recovery_scope": "Wrong flat-audit receipt filename after all V144 stages completed. "
+        "Adopt verified102+48 outputs/audits/faint/JPEG/comparison without replay. Prepare V145 "
+        "once under original budgets. Original failure/status/source preserved; no training "
+        "restart, old inference, new noise or rewritten result.",
+    }
+    target = root / "review-recovery-plan-v2.json"
+    assert not target.exists()
+    guard(plan)
+    save(target, plan)
+    return target
+
+
 def run(path):
     from compare_pilot_flat_controls import compare
     from review_standalone_patch_memory_pilot import prepare as prepare_native
@@ -145,19 +210,23 @@ def run(path):
     training = read(plan["training_plan"]["path"])
     guard(training)
     root = Path(plan["root"])
-    (root / "review.claim").open("x").close()
+    Path(plan.get("claim_path", root / "review.claim")).open("x").close()
     state = {
         "owner": {"pid": os.getpid(), "created": psutil.Process().create_time()},
         "plan": ref(path),
-        "completed": {},
+        "completed": dict(plan.get("adopted_completions", {})),
     }
 
     def record(status, **extra):
         state.update(status=status, updated_unix=time.time(), **extra)
-        save(root / "review-status.json", state)
+        save(Path(plan.get("status_path", root / "review-status.json")), state)
 
     try:
         for arm in ("V144", "V145"):
+            if arm in state["completed"]:
+                assert completed_review_bindings(root, arm) == state["completed"][arm]
+                record("adopted-completed-fixed-review-without-replay", arm=arm)
+                continue
             point = root / arm
             controls = [PARENT_NATIVE] + ([root / "V144"] if arm == "V145" else [])
             labels = ["V120", PARENT_LABEL] + (["V144 1k EMA"] if arm == "V145" else [])
@@ -198,7 +267,7 @@ def run(path):
                     )
 
             command(operator, ["prepare", flat, "--primary", point], "flat-prepare")
-            deadline = time.time() + 36000
+            deadline = min(time.time() + 36000, plan.get("absolute_deadline_unix", float("inf")))
             result = Path(training["root"]) / f"train-{arm}-result.json"
             record("waiting-for-declared-training-endpoint", arm=arm)
             while not result.exists() or live(read(result)["owner"]):
@@ -215,10 +284,7 @@ def run(path):
             compare(flat, PARENT_FLAT, root / (arm + "-flat-vs-V143"))
             if arm == "V145":
                 compare(flat, root / "V144-flat", root / "V145-flat-vs-V144")
-            state["completed"][arm] = {
-                "primary_audit": ref(point / "independent-audit-v1.json"),
-                "flat_audit": ref(flat / "independent-audit-v1.json"),
-            }
+            state["completed"][arm] = completed_review_bindings(root, arm)
             record("completed-fixed-numeric-review", arm=arm)
         record("completed-both-pilots-awaiting-native-viewing")
     except BaseException as error:
@@ -228,11 +294,13 @@ def run(path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("prepare", "run"))
+    parser.add_argument("mode", choices=("prepare", "recover", "run"))
     parser.add_argument("path", type=Path)
     parser.add_argument("--training-plan", type=Path)
     args = parser.parse_args()
     if args.mode == "prepare":
         print(prepare(args.path.resolve(), args.training_plan.resolve()))
+    elif args.mode == "recover":
+        print(prepare_recovery(args.path.resolve()))
     else:
         run(args.path.resolve())

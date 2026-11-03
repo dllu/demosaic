@@ -24,7 +24,8 @@ keeps the stage off. The same-data comparison to the earlier `edge` default give
 Average response remains only **7.1% of exact procedural GT**. All 64 new natural
 photo controls remain unchanged, so nonperiodic detail is still weak.
 The [V144/V145 pilot](docs/v143-spatial-attention-trial.md) now tests local RAW
-attention from V143 against matched continuation training; quality is unmeasured.
+attention from V143 against matched continuation training; the paired quality
+comparison is pending.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -34,15 +35,23 @@ optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 
 ## Current 100% crops
 
-Noisy → V1435k with `detail` → exact procedural GT. These native 160×160 crops
-use the first two active sources and largest added RMS on a fixed 160 grid,
+Noisy → V1435k with `detail` → exact procedural GT. This native 160×160 crop
+uses the first active source and largest added RMS on a fixed 160 grid,
 chosen after evaluation. All columns share 8× camera-linear contrast about the
 exact empty field, then WB/matrix/+3EV. Pixels are not resized.
 [Central diagnostics, failure views and complete metadata](docs/images/supported-wave-amplitude-v1/manifest.json).
 
 ![Native noisy, detail amplitude and exact GT with shared eightfold contrast](docs/images/supported-wave-amplitude-v1/mesh-seed2026112302-present-iso6400-prior-RGGB-retained-contrast8-triplet.png)
 
-![Native noisy, detail amplitude and exact GT with shared eightfold contrast](docs/images/supported-wave-amplitude-v1/mesh-seed2026112309-present-iso6400-prior-RGGB-retained-contrast8-triplet.png)
+Fine organic texture remains a separate weakness. Noisy → V143 → **constructed
+GT** from native bin8 Commons photos,160×160 pixels. The faint feather example
+uses common exposure14.38835× and8× display contrast; dark grass uses64.04909×
+and contrast1. These are exact synthetic targets, not physical-scene GT.
+[All24 native views, licensing and metadata](docs/spatial-photo-supplement.md).
+
+![Faint feathers remain soft: noisy V143 and constructed GT](docs/images/spatial-photo-parent-v1/organic-02a76fd33b5e1414a0504f0b3f0aeb03a569b6f4-photo-faint-RGGB-contrast8-triplet.png)
+
+![Dark grass and bark: noisy V143 and constructed GT](docs/images/spatial-photo-parent-v1/organic-6b3920bceba82d95ecf9351d47f6f94267694bd0-photo-dark-RGGB-contrast1-triplet.png)
 
 Standing real GFX100S scene: DSCF3879 ISO6400 → **V120 Small, historical Haar
 prior** → DSCF3880 ISO100 f/5.6. Complete 102MP outputs, native 160px cells, common

@@ -1,0 +1,23 @@
+collect completed
+report completed
+audit completed
+faint-analyze completed
+faint-audit completed
+camera-JPEG completed
+[{'method': 'V120', 'condition': 'adc-only', 'mean_spatial_RMS_DN16': 1.23751730591838, 'mean_block32_RMS_DN16': 0.1980646617088682, 'max_abs_DC_DN16': 7.309712984855286}, {'method': 'V143 5000of5000 EMA', 'condition': 'adc-only', 'mean_spatial_RMS_DN16': 1.3965764816907715, 'mean_block32_RMS_DN16': 0.1890402777688416, 'max_abs_DC_DN16': 9.006959883158562}, {'method': 'V144 1k EMA', 'condition': 'adc-only', 'mean_spatial_RMS_DN16': 1.1952223799712078, 'mean_block32_RMS_DN16': 0.15839988328613835, 'max_abs_DC_DN16': 12.062918958999218}, {'method': 'V120', 'condition': 'iso12800-prior', 'mean_spatial_RMS_DN16': 20.947779748609108, 'mean_block32_RMS_DN16': 13.224399183621605, 'max_abs_DC_DN16': 36.56903534556041}, {'method': 'V143 5000of5000 EMA', 'condition': 'iso12800-prior', 'mean_spatial_RMS_DN16': 19.97559600277584, 'mean_block32_RMS_DN16': 13.572857631052315, 'max_abs_DC_DN16': 34.47081296785036}, {'method': 'V144 1k EMA', 'condition': 'iso12800-prior', 'mean_spatial_RMS_DN16': 20.923557957042544, 'mean_block32_RMS_DN16': 13.956585267515528, 'max_abs_DC_DN16': 32.048611769091806}]
+Traceback (most recent call last):
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-review-v1/review-controller.py", line 238, in <module>
+    run(args.path.resolve())
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-review-v1/review-controller.py", line 220, in run
+    "flat_audit": ref(flat / "independent-audit-v1.json"),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-review-v1/helpers/train_directional_bank_trial.py", line 25, in ref
+    return {"path": str(Path(path).absolute()), "sha256": sha(path)}
+                                                          ^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-review-v1/helpers/train_directional_bank_trial.py", line 20, in sha
+    with Path(path).open("rb") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-review-v1/V144-flat/independent-audit-v1.json'
