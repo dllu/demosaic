@@ -1,5 +1,11 @@
 # Documentation guide
 
+The [V146 Fourier and mesh pilot](v146-coherent-frequency.md) completes
+500 updates with the V143 parent frozen, followed by both raw and EMA reviews on 694
+inputs each. Mesh response grows less than .7% relative while mesh/photo errors rise; 22 inspected
+native figures show no useful new lattice. Small flat/sky gains do not change
+the useful baselines. Window metadata and resume checks now preserve geometry.
+
 The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
 original positive global gate as selection and restores contrast only inside
 unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS

@@ -93,9 +93,10 @@ def worker(path, phase, arm):
     plan = read(path)
     guard(plan)
     root, work = Path(plan["root"]), Path(plan["work"])
-    assert arm in ARM_SCOPES and phase in ("CPU", "CUDA", "train")
+    scopes = plan.get("arm_scopes", ARM_SCOPES)
+    assert arm in scopes and phase in ("CPU", "CUDA", "train")
     assert Path(training.__file__).absolute().is_relative_to(work / "src")
-    assert ref(__file__) == plan["worker_script"]
+    assert ref(__file__) == plan.get("core_worker_script", plan["worker_script"])
     assert os.environ["CUDA_VISIBLE_DEVICES"] == ("" if phase == "CPU" else "0")
     (root / f"{phase}-{arm}.claim").open("x").close()
     if phase == "CPU":
@@ -108,11 +109,11 @@ def worker(path, phase, arm):
             / torch.cuda.get_device_properties(0).total_memory
         )
     config = yaml.safe_load(Path(plan["arms"][arm][phase]).read_text())
-    only = ARM_SCOPES[arm]
+    only = scopes[arm]
     assert config["raw_frequency_only"] is only
     assert config["min_available_gb"] == plan["runtime_available_RAM_GB"]
     parent = torch.load(plan["parent"]["path"], map_location="cpu", weights_only=True, mmap=True)
-    assert parent["step"] == 20000 and len(parent["ema"]) == 91
+    assert parent["step"] == plan.get("parent_step", 20000) and len(parent["ema"]) == 91
     expected_states = 5 if only else 94
     counts, domains, inputs, initials, gradients = Counter(), Counter(), [], [], {}
     captured, current, step16 = {}, "fresh", None
@@ -190,11 +191,12 @@ def worker(path, phase, arm):
 
     def batch(step, domain, clean, **kwargs):
         assert current != "rejected-resume"
-        assert domain == training.training_domain(step, 66, 0.25, 0.25)
+        assert domain == training.training_domain(step, config["seed"], 0.25, 0.25)
         value = batch_factory(step, domain, clean, **kwargs)
         counts["prepared_training_batches"] += 1
+        counts["target_contexts"] += len(value["packed"])
         domains[domain] += 1
-        if step <= 18:
+        if step <= 18 or plan.get("trace_all_batches", False):
             digest = training.batch_fingerprint(value)
             if step in expected_inputs:
                 assert digest == expected_inputs[step], (phase, arm, step)
@@ -224,7 +226,7 @@ def worker(path, phase, arm):
             for g in result.param_groups
             if any(p is model.pretrained_rgb.raw_frequency.project.weight for p in g["params"])
         )
-        assert branch_group["lr"] == 2e-4
+        assert branch_group["lr"] == config["lr"] * config.get("raw_frequency_lr_multiplier", 1)
 
         def before_step(*args):
             assert current != "rejected-resume"
@@ -256,6 +258,7 @@ def worker(path, phase, arm):
             )
         )
         rejected = None
+        rejected_window = None
         if phase != "train":
             preserved = root / f"{phase}-{arm}-step16.pt"
             os.link(last, preserved)
@@ -273,6 +276,15 @@ def worker(path, phase, arm):
             else:
                 raise AssertionError("Changed trainable scope accepted on resume")
             assert dict(counts) == before_counts
+            if rejected_config := plan["arms"][arm].get(phase + "_rejected_window"):
+                try:
+                    training.train(rejected_config, resume=preserved, stop_after=1)
+                except ValueError as error:
+                    assert "Resume RAW frequency window differs" in str(error)
+                    rejected_window = str(error)
+                else:
+                    raise AssertionError("Changed frequency window accepted on resume")
+                assert dict(counts) == before_counts
             current = "resume"
             last = Path(training.train(plan["arms"][arm][phase], resume=preserved, stop_after=2))
             expected += 2
@@ -299,7 +311,9 @@ def worker(path, phase, arm):
             == counts["prepared_training_batches"]
             == expected
         )
-        assert counts["validation_forwards"] == (640 if phase == "train" else 0)
+        assert counts["validation_forwards"] == (
+            plan.get("expected_train_validation_forwards", 640) if phase == "train" else 0
+        )
         assert (
             counts["encoder_forwards"]
             == counts["training_forwards"] + counts["validation_forwards"]
@@ -337,6 +351,7 @@ def worker(path, phase, arm):
                 "new_parameter_maximum_absolute_gradients": gradients,
                 "common91_model_and_EMA_exact_to_parent": only,
                 "changed_scope_resume_rejection": rejected,
+                "changed_window_resume_rejection": rejected_window,
                 "optimizer_state_count": expected_states,
                 "CUDA_peak_allocated_bytes": torch.cuda.max_memory_allocated()
                 if phase != "CPU"

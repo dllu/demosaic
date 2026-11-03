@@ -15,6 +15,22 @@ from torch.nn import functional as F
 from .precision import ieee_fp32
 
 
+def validate_frequency_window(value):
+    if type(value) is not int or value < 4 or value > 256 or value & (value - 1):
+        raise ValueError("RAW frequency window must be a power of two from4 through256")
+    return value
+
+
+def require_resume_frequency_window(previous, current):
+    """Frame geometry changes the function without changing any weight shapes."""
+    old, new = [
+        validate_frequency_window(config.get("model", {}).get("raw_frequency_window", 64))
+        for config in (previous, current)
+    ]
+    if old != new:
+        raise ValueError("Resume RAW frequency window differs; initialize a new run")
+
+
 def hermitian_projection(values):
     """Project a full square spectrum onto the real-image Fourier subspace."""
     size = values.shape[-1]
@@ -85,9 +101,7 @@ class RawFrequencyFeatures(nn.Module):
 
     def __init__(self, max_window=64):
         super().__init__()
-        if type(max_window) is not int or max_window < 4 or max_window & (max_window - 1):
-            raise ValueError("Maximum frequency frame must be a power of two at least4")
-        self.max_window = max_window
+        self.max_window = validate_frequency_window(max_window)
         # Preserve the common model's initialization and global RNG state.
         with torch.random.fork_rng(devices=[]):
             # torch.manual_seed also seeds CUDA; only replace CPU RNG here.

@@ -62,6 +62,7 @@ class ModelConfig:
     raw_directional_bank_detach_input: bool = False
     raw_spectral_residual: bool = False
     raw_frequency_features: bool = False
+    raw_frequency_window: int = 64
     raw_spatial_features: bool = False
     raw_global_features: bool = False
     raw_global_conditioning: str = "legacy-v1"
@@ -422,6 +423,11 @@ class JointDemosaic(nn.Module):
             raise ValueError("RAW spectral residual must be a boolean")
         if type(cfg.raw_frequency_features) is not bool:
             raise ValueError("RAW frequency features must be a boolean")
+        from .raw_frequency_features import validate_frequency_window
+
+        validate_frequency_window(cfg.raw_frequency_window)
+        if not cfg.raw_frequency_features and cfg.raw_frequency_window != 64:
+            raise ValueError("Nondefault RAW frequency window requires frequency features")
         if type(cfg.raw_spatial_features) is not bool:
             raise ValueError("RAW spatial features must be a boolean")
         if type(cfg.raw_global_features) is not bool:
@@ -648,6 +654,7 @@ class JointDemosaic(nn.Module):
                 raw_directional_bank_detach_input=cfg.raw_directional_bank_detach_input,
                 raw_spectral_residual=cfg.raw_spectral_residual,
                 raw_frequency_features=cfg.raw_frequency_features,
+                raw_frequency_window=cfg.raw_frequency_window,
                 raw_spatial_features=cfg.raw_spatial_features,
                 raw_global_features=cfg.raw_global_features,
                 raw_global_conditioning=cfg.raw_global_conditioning,

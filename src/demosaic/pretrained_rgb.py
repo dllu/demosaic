@@ -309,6 +309,7 @@ class PretrainedRgbDemosaic(nn.Module):
         raw_directional_bank_detach_input=False,
         raw_spectral_residual=False,
         raw_frequency_features=False,
+        raw_frequency_window=64,
         raw_spatial_features=False,
         raw_global_features=False,
         raw_global_conditioning="legacy-v1",
@@ -452,7 +453,7 @@ class PretrainedRgbDemosaic(nn.Module):
         if raw_frequency_features:
             from .raw_frequency_features import RawFrequencyFeatures
 
-            self.raw_frequency = RawFrequencyFeatures()
+            self.raw_frequency = RawFrequencyFeatures(max_window=raw_frequency_window)
         if raw_spatial_features:
             from .raw_spatial_features import RawSpatialFeatures
 

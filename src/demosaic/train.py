@@ -45,6 +45,7 @@ from .photo_epoch_order import bind_photo_epoch_order, require_resume_photo_epoc
 from .photo_sampling import require_resume_photo_sampling
 from .precision import amp_context, ieee_fp32
 from .raw_clean import RawCleanDataset, degrade_raw_clean, raw_clean_step
+from .raw_frequency_features import require_resume_frequency_window
 from .raw_global_features import require_resume_global_features
 from .raw_global_training import require_resume_raw_global_scope, validate_raw_global_only
 from .raw_spatial_training import require_resume_spatial_lr, spatial_lr_multiplier
@@ -771,6 +772,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         ):
             raise ValueError("Resume mesh texture fraction differs; initialize a new run")
         require_resume_global_features(resume_state["config"], config)
+        require_resume_frequency_window(resume_state["config"], config)
         require_resume_raw_global_scope(resume_state["config"], config)
         require_resume_spatial_lr(resume_state["config"], config)
         require_resume_photo_epoch_order(resume_state["config"], config)

@@ -10,7 +10,7 @@ selected retained material and GFX inputs. The subsequent
 weak-detail changes and a large joint-arm ADC color tail, without clear mesh
 recovery. Frequency features remain optional; V120 stays the general choice.
 A separate [spatial-attention prototype](raw-spatial-features.md) tests a different
-mixing operator; its trained quality is unmeasured.
+mixing operator; its [V145 pilot](v144-v145-quality.md) finds no useful mesh gain.
 
 [Execution, retained arrays and independent state audits](results/raw-frequency-features-engineering-v1.json) ·
 [Implementation](../src/demosaic/raw_frequency_features.py) ·
@@ -49,6 +49,16 @@ Its default frame is 64 packed pixels, or 128 native pixels, at 50% overlap.
 Smaller inputs use the largest fitting power-of-two frame, down to 4. There are
 no resolution-specific learned weights.
 
+`raw_frequency_window` now serializes the maximum packed frame size. It accepts
+powers of two from 4 through 256 and defaults to 64 for historical checkpoints.
+A nondefault value requires the frequency branch. Changing this value on resume
+is rejected before constructing a neural model: weight shapes alone cannot
+detect a changed Fourier geometry. The [V146 recipe](../configs/quality-v143-coherent-frequency-v146.yaml)
+tests 128 packed pixels / 256 native pixels with mesh-rich training from V143.
+Its [completed 500-update raw/EMA review](v146-coherent-frequency.md) finds tiny
+response/flat gains with worse mesh/photo errors and no useful new native detail.
+Larger windows do not establish better recovery or tile-boundary behavior.
+
 Within each frame, remove a weighted affine fit, apply a sine-product analysis
 window and take an orthonormal full complex FFT. The descriptor contains 16
 real components of the four-phase Hermitian Gram representation: four powers
@@ -82,6 +92,7 @@ stabilized, physically anchored pretrained-RGB experiment:
 model:
   # Keep the compatible parent's other model settings.
   raw_frequency_features: true
+  raw_frequency_window: 64
 raw_frequency_lr_multiplier: 20
 ```
 
