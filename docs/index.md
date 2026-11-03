@@ -1,5 +1,10 @@
 # Documentation guide
 
+The [V148 phase-mixing trial](phase-matrix-detail.md) has passed component,
+legacy-embedding and CUDA/resume checks. Its full shared replay cache matches
+V147's inputs/targets, and both matched heads completed1k updates. Four fixed final
+endpoints cover798 retained cases; quality and native review remain pending.
+
 The [completed V147 late spectral pilot](late-spectral-detail.md) lowers weak-mesh
 response about 8% and raises noisy-flat error. Whole strong-edge images improve
 .31–.42% while exact quiet patches regress. Both fixed 1k endpoints, 32 new mixed

@@ -115,6 +115,10 @@ class LateSpectralDetail(nn.Module):
         selected = (..., slice(hop, hop + height), slice(hop, hop + width))
         return numerator[selected] / denominator[selected]
 
+    def apply_frequency_gain(self, gain, innovation):
+        """Shared scalar innovation operator; subclasses may mix CFA phases."""
+        return gain * innovation
+
     def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):
         if packed.ndim != 4 or packed.shape[1] != 4 or packed.shape != variance.shape:
             raise ValueError("Late spectral detail needs matching four-phase RAW and variance")
@@ -137,7 +141,7 @@ class LateSpectralDetail(nn.Module):
             layouts = colors[:, None].expand(-1, count, -1).reshape(batch * count, 4)
             innovation = observed - parent_spectrum
             gain = self.frequency_gain(observed, innovation, noise, layouts)
-            spectral_delta = gain * innovation
+            spectral_delta = self.apply_frequency_gain(gain, innovation)
             proposal = self.synthesis(spectral_delta, geometry)
             sigma = _box(variance.clamp_min(0)).sqrt().clamp_min(1 / 65535)
             placement = F.one_hot(colors, 3).flatten(1).to(packed.dtype)

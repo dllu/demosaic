@@ -1,0 +1,42 @@
+version: V148
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  scalar-control:
+    class: LateSpectralDetail
+    parameters: 30402
+  phase-matrix:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+cache_launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Matched fresh scalar/control and bounded complex phase-matrix heads after the
+  same frozen V143/DINO parent. Ten common tensors initialize identically;
+  both output operators start zero. Only the frequency-operator family changes.
+  Preserve the V147 loss, source distribution, seed, geometry and1000-update
+  horizon. Replay the same4000 old observation IDs, asserting all input/target
+  fingerprints against the original trace. First10 cached input/parent batches
+  are adopted, not redrawn; remaining990 batches and parent predictions are
+  constructed once and cached for both arms. These are reused noise/source
+  realizations, not fresh validation. Ten discarded CUDA updates per arm include
+  genuine8+2 resume and native512/B4 memory checks before full cache construction.
+  Both final raw/EMA endpoints on all798 retained main/mixed observations are
+  prospectively fixed. No endpoint selection or unmeasured quality claim.
+  All standing GFX media/siblings stay excluded; no RAW decode or dataz access.

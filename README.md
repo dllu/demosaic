@@ -37,6 +37,8 @@ The [completed V147 late spectral pilot](docs/late-spectral-detail.md) lowers me
 response about 8% and slightly worsens noisy flats. Small strong-edge image gains
 come with worse quiet patches. Its 64 native comparisons include a support-gate
 diagnostic: opening the gate exposes false fine texture rather than useful detail.
+The matched [phase-mixing trial](docs/phase-matrix-detail.md) completed both fresh
+heads at 1k updates; its fixed quality and native-crop review is underway.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
