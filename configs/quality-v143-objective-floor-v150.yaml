@@ -1,0 +1,51 @@
+version: V150
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1
+ADC_controls: /home/dllu/proj/demosaic/.cache/quality-20261103/V150-ADC-controls-v1/result-v1.json
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  native-matrix:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+    loss_floor_DN16: 2
+  floor16-matrix:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+    loss_floor_DN16: 16
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Two identical fresh native matrix heads, all12 initial tensors equal, on the
+  same1000 cached batches/4000 old training observations. Change only the common
+  loss floor: RGB standard deviation2 to16 DN and spectral variance(2/65535)^2
+  to(16/65535)^2. Current pre-gate spectral objective, all physical inputs, data,
+  geometry, source weights, initialization, horizon, seed/schedule, clipping and
+  EMA otherwise fixed. Native2DN control must reproduce V148/V149 exactly.
+  Both discarded10-update smokes include genuine8+2 optimizer reload; production
+  restarts fresh. All4 final raw/EMA step1000 endpoints cover822 fixed cases:
+  retained798 plus8 exact constructed photographic ADC observations and16 new
+  analytic sloped-plane ADC observations. The24 new V143 parent/DINO contexts
+  are cached before training; no new parent/DINO/noise call during head training
+  or endpoint review. All actual blank/quiet errors and both standing GFX
+  scenes/priors/windows/JPEGs retained; real references qualitative, not exactGT.
+  Fixed72 native figures, including24 repeated triplets, identical ROI/display
+  per method and no pixel resize. No early endpoint choice, input references,
+  original-media lookup, RAW decoding or dataz access. Protected scenes/siblings
+  and held-out photographic source IDs remain out of training. Adaptive retained
+  validation, not fresh independent evidence. Loss allocation is a hypothesis,
+  not a guarantee of better detail or ADC/sky quality.

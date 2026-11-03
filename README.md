@@ -48,7 +48,8 @@ no useful new fine mesh from phase alignment/local green evidence. Small
 strong-edge gains coexist with worse quiet regions and noisy flats; all six
 fixed endpoints and 66 native comparisons are audited.
 The [loss-allocation diagnostic](docs/spectral-loss-allocation.md) finds large
-ADC gradient pressure; a higher training floor is the next matched test.
+ADC gradient pressure. [V150's matched 2/16 DN trial](docs/objective-floor-training.md)
+is active, with ADC photo/sloped controls added; trained quality is pending.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

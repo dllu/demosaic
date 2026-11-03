@@ -1,0 +1,45 @@
+{
+  "status": "pass-active-preparation-and-document-publication",
+  "recorded_unix_UTC": 1793747450.2746837,
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v150-objective-floor-preparation-v1.json",
+    "sha256": "7faa6ee6ce42e44d2c4f2803ff3e273d93a111542827dea73c3bf8b4ad611709"
+  },
+  "byte_exact_receipt_copies": 13,
+  "frozen_and_current_neural_hashes_unchanged": 85,
+  "source_texts_checked": 14,
+  "case_count": 822,
+  "ADC_controls": 24,
+  "planned_endpoints": 4,
+  "planned_native_primary_figures": 72,
+  "document_links_checked": 305,
+  "live_owners": {
+    "training-controller": {
+      "owner": {
+        "pid": 2870938,
+        "created": 1793746836.78
+      },
+      "status": "sleeping"
+    },
+    "training-worker": {
+      "owner": {
+        "pid": 2871063,
+        "created": 1793746861.65
+      },
+      "status": "running"
+    },
+    "postprocess-controller": {
+      "owner": {
+        "pid": 2871778,
+        "created": 1793746982.49
+      },
+      "status": "sleeping"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v150-preparation-v1.py",
+    "sha256": "0fbfe1038a1d5c030c756d4bd7ce6f36ecb6dea543b9dbc1c17fc033e9c41fb9",
+    "text": "import time\nimport re\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import read,ref,save,guard\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V150-objective-floor-v1'\np=read(repo/'docs/results/v150-objective-floor-preparation-v1.json')\nassert len(p['copies'])==13\nfor x in p['copies'].values():\n    assert ref(x['original']['path'])==x['original']\n    assert ref(x['public']['path'])==x['public']\n    assert Path(x['original']['path']).read_bytes()==Path(x['public']['path']).read_bytes()\nsource=read(p['sources']['path']);assert ref(p['sources']['path'])==p['sources']\nassert len(source['frozen_neural_hashes'])==85\nfor path,sha in source['frozen_neural_hashes'].items():\n    assert ref(path)['sha256']==sha\n    assert ref(repo/'src/demosaic'/Path(path).name)['sha256']==sha\nfor x in source['sources']:\n    assert ref(x['path'])['sha256']==x['sha256'] and Path(x['path']).read_text()==x['text']\nplan=read(root/'plan-v1.json');guard(plan);guard(read(root/'postprocess-plan-v1.json'))\ndesign=read(root/'quality-design-v1.json');assert len(design['observations'])==822 and len(design['endpoints'])==4\nadc=[c for c in design['observations'] if c.get('cohort') in ['adc-photo256','adc-sloped512']]\nassert len(adc)==24 and len([x for x in adc if x['kind']=='photo'])==8\nassert all(x['reference_role'].startswith('Exact ') for x in adc)\nfor c in adc:\n    assert ref(c['arrays']['path'])==c['arrays'] and ref(c['parent']['path'])==c['parent']\nassert read(root/'postprocess-preflight-v1.json')['planned_primary_native_figures']==72\nassert read(root/'checkpoint250-audit-v1.json')['finite_Adam_states']==24\nsnap=read(root/'preparation-snapshot-v1.json');assert snap['completed_native_trace_rows_exact_V149']==423\nowners={**snap['owners_confirmed_live']}\nlive={}\nfor name,owner in owners.items():\n    process=psutil.Process(owner['pid']);assert abs(process.create_time()-owner['created'])<.01\n    assert process.is_running() and process.status() not in ['zombie','dead']\n    live[name]={'owner':owner,'status':process.status()}\ndocs=['README.md','docs/index.md','docs/research.md','docs/current-model.md','docs/spectral-loss-allocation.md','docs/objective-floor-training.md','diary/2026-11-03-15-03-40-v150-objective-floor-trial.md']\nlinks=0\nfor name in docs:\n    path=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',path.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (path.parent/link.split('#')[0]).is_file(),(name,link)\n        links+=1\nsave(repo/'docs/results/v150-objective-floor-preparation-verification-v1.json',{'status':'pass-active-preparation-and-document-publication','recorded_unix_UTC':time.time(),'preparation':ref(repo/'docs/results/v150-objective-floor-preparation-v1.json'),'byte_exact_receipt_copies':13,'frozen_and_current_neural_hashes_unchanged':85,'source_texts_checked':len(source['sources']),'case_count':822,'ADC_controls':24,'planned_endpoints':4,'planned_native_primary_figures':72,'document_links_checked':links,'live_owners':live,'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'scope':'Current active-state verification only; final trained quality remains unmeasured. Historical preparation snapshot423 and checkpoint250 audit preserve their original bytes. No additional neural/noise calls.'})\nprint('PASS13 copies,85 neural hashes,822 cases,',links,'links and3 live owners')\n"
+  },
+  "scope": "Current active-state verification only; final trained quality remains unmeasured. Historical preparation snapshot423 and checkpoint250 audit preserve their original bytes. No additional neural/noise calls."
+}

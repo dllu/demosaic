@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [V150 matched loss-floor trial](objective-floor-training.md) trains identical
+fresh native heads at2/16 DN floors on the same 4,000 cached observations. Both
+CUDA8+2 checks pass; checkpoint250 states are finite and the native control
+raw/EMA/Adam state matches V149 exactly. Four final endpoints cover822 cases and
+72 native figures, with added held-out ADC photo/sloped controls. Quality and
+native viewing remain pending.
+
 The [spectral loss-allocation diagnostic](spectral-loss-allocation.md) finds
 ADC-only pressure in both actual initial parameter gradients and all 1,000
 logged V149 updates. A 16 DN loss floor sharply reduces that pressure while
