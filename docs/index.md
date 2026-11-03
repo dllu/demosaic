@@ -11,11 +11,12 @@ The optional [V114 eight-view fixed24 comparison](v114-eight-view.md)
 adds material/camera gains and native examples, with selected color-bias tradeoffs
 and unmeasured complete-panel/frame scope.
 
-The experimental [TV phase fit](edge-phase-envelope.md) makes the crossing mesh
-clearer on complete 102MP RGB16 outputs. The wider tested sky retains every
-parent pixel. On 64 fresh dark recipes, average added blank structure falls
-48.8% versus Gaussian phase fitting, with slightly higher texture error and some
-blank regressions. Highlight color, window sensitivity and speed remain open.
+The experimental [continuous-frequency TV fit](offgrid-phase.md) gives modest,
+placement-sensitive mesh changes on complete 102MP RGB16 outputs. Fresh 64-recipe validation
+finds 3.7% more response and slightly lower texture error versus fixed-bin TV,
+with 8.5% higher added blank RMS. Wider sky, all 256 absent inputs and 4,096 fresh
+flat-selector cases bypass. Highlight color, spill, window sensitivity and speed
+remain open. [Fixed-bin TV](edge-phase-envelope.md) remains explicitly available.
 [Earlier complex fit](complex-phase-envelope.md) · [Scalar implementation](phase-harmonic-inference.md).
 
 V120's primary/analytic panels, independent saved-output checks, selected native

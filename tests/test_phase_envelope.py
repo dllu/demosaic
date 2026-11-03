@@ -117,8 +117,13 @@ def test_cli_selects_envelope_before_RGB16_export(tmp_path, monkeypatch):
         lambda *a, **k: (torch.from_numpy(base.copy()), {"seconds": 0, "test_stub": True}),
     )
     errors = {}
-    for mode in ["scalar", "complex", "edge"]:
-        output = tmp_path / f"{mode}.tiff"
+    for name, mode, refined in [
+        ("scalar", "scalar", False),
+        ("complex", "complex", False),
+        ("edge", "edge", False),
+        ("refined", "edge", True),
+    ]:
+        output = tmp_path / f"{name}.tiff"
         main(
             [
                 "infer",
@@ -137,15 +142,19 @@ def test_cli_selects_envelope_before_RGB16_export(tmp_path, monkeypatch):
                 "--phase-harmonic-envelope",
                 mode,
             ]
+            + (["--phase-harmonic-refine-frequency"] if refined else [])
         )
         image = tifffile.imread(output)
         assert image.dtype == np.uint16
-        errors[mode] = np.mean(
+        errors[name] = np.mean(
             (image[48:208, 48:208] / 65535 - target[:, 48:208, 48:208].transpose(1, 2, 0)) ** 2
         )
         metadata = json.loads(output.with_suffix(".json").read_text())
         assert metadata["phase_harmonic"]["envelope"] == mode
         assert metadata["phase_harmonic"]["new_model_calls"] == 0
+        assert metadata["phase_harmonic"]["refine_frequency"] == refined
+        if refined:
+            assert metadata["phase_harmonic"]["frequency_search"]["solves"] > 0
         if mode == "edge":
             assert metadata["phase_harmonic"]["TV"]["device"] == "cpu"
             assert metadata["phase_harmonic"]["TV"]["solves"] > 0

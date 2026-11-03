@@ -171,6 +171,11 @@ def fit_patch_harmonics(packed, variance, colors, base):
         score[dx * dx + dy * dy <= 16] = -np.inf
     if not peaks:
         return {"base": base, "peaks": []}
+    return _fit_selected_harmonics(packed, variance, colors, base, peaks)
+
+
+def _fit_selected_harmonics(packed, variance, colors, base, peaks):
+    """WLS for validated inputs and a supplied set of physical frequencies."""
     yy, xx = np.mgrid[:128, :128]
     plane = np.stack([np.ones_like(xx), xx / 127, yy / 127], -1).reshape(-1, 3)
     cols = 12 + 6 * len(peaks)
@@ -325,7 +330,16 @@ def _origins(length, stride):
 
 
 def refine_phase_harmonics(
-    raw, colors, base, *, shot, read, stride=128, envelope="edge", tv_device="cpu"
+    raw,
+    colors,
+    base,
+    *,
+    shot,
+    read,
+    stride=128,
+    envelope="edge",
+    tv_device="cpu",
+    refine_frequency=False,
 ):
     """Return CPU float32 camera RGB and diagnostics for an arbitrary Bayer image.
 
@@ -351,12 +365,16 @@ def refine_phase_harmonics(
         raise ValueError("Stride must be even and between 2 and 192 native pixels")
     if envelope not in ("scalar", "complex", "edge"):
         raise ValueError("Envelope must be scalar, complex or edge")
+    if refine_frequency and envelope != "edge":
+        raise ValueError("Frequency refinement requires the edge TV envelope")
     if envelope == "edge":
         from functools import partial
 
         from .phase_tv import correct_edge_phase_patch
 
-        corrector = partial(correct_edge_phase_patch, device=tv_device)
+        corrector = partial(
+            correct_edge_phase_patch, device=tv_device, refine_frequency=refine_frequency
+        )
     elif envelope == "complex":
         from .phase_envelope import correct_complex_patch
 
@@ -378,6 +396,7 @@ def refine_phase_harmonics(
         }[envelope],
         "envelope": envelope,
         "enabled": True,
+        "refine_frequency": bool(refine_frequency),
         "stride_native": int(stride),
         "tile_native": 256,
         "working_precision": "float64 fits; float32 full-image accumulation/output",
@@ -396,6 +415,16 @@ def refine_phase_harmonics(
             "iterations": 0,
             "capped": 0,
             "maximum_relative_primal_dual_gap": 0.0,
+        }
+    if refine_frequency:
+        metadata["method"] = "local-phase-harmonic-v4"
+        metadata["frequency_search"] = {
+            "solves": 0,
+            "evaluations": 0,
+            "collision_fallbacks": 0,
+            "clipped_windows": 0,
+            "maximum_abs_delta_bins": 0.0,
+            "confidence_calibrated": False,
         }
     if shot == read == 0:
         metadata.update(ADC_only_bypass=True, seconds=time.perf_counter() - started)
@@ -428,6 +457,23 @@ def refine_phase_harmonics(
             metadata["selected_patches"] += bool(diagnostic.get("peaks"))
             metadata["active_patches"] += bool(np.any(delta))
             metadata["selected_frequencies"] += len(diagnostic.get("peaks", []))
+            if refine_frequency:
+                metadata["frequency_search"]["clipped_windows"] += any(
+                    s.get("clipped_window_fallback", False)
+                    for s in diagnostic.get("frequency_searches", [])
+                )
+                for search in diagnostic.get("frequency_searches", []):
+                    if "evaluations" not in search:
+                        continue
+                    metadata["frequency_search"]["solves"] += 1
+                    metadata["frequency_search"]["evaluations"] += search["evaluations"]
+                    metadata["frequency_search"]["collision_fallbacks"] += bool(
+                        search.get("collision_fallback")
+                    )
+                    metadata["frequency_search"]["maximum_abs_delta_bins"] = max(
+                        metadata["frequency_search"]["maximum_abs_delta_bins"],
+                        float(np.max(np.abs(search["delta_bins_xy"]))),
+                    )
             if envelope == "edge":
                 for local in diagnostic.get("local", []):
                     solver = local.get("solver", {}).get("edge")

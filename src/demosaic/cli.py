@@ -92,6 +92,11 @@ def parser():
         help="TV solver device; defaults to the neural device (cpu selects the reference)",
     )
     infer.add_argument(
+        "--phase-harmonic-refine-frequency",
+        action="store_true",
+        help="Refine active wave frequencies between FFT bins (requires the edge TV envelope)",
+    )
+    infer.add_argument(
         "--cudnn-benchmark",
         action="store_true",
         help="Autotune CUDA FP32 tiles (adds startup time;16GiB allocator cap)",
@@ -345,6 +350,7 @@ def main(argv=None):
                 stride=args.phase_harmonic_stride,
                 envelope=args.phase_harmonic_envelope,
                 tv_device=args.phase_harmonic_device or args.device,
+                refine_frequency=args.phase_harmonic_refine_frequency,
             )
             rgb = torch.from_numpy(corrected)
         write_rgb16(output, rgb.permute(1, 2, 0).numpy(), metadata=metadata, flip=flip)

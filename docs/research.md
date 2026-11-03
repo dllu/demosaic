@@ -1,5 +1,13 @@
 # Current method research
 
+The [continuous frequency fit](offgrid-phase.md) addresses FFT-bin mismatch before
+TV smoothing. Active measured-green waves get a bounded search; the detector and
+original inactive gates are preserved. A locked 64-recipe review adds 512 neural
+calls, with 3.7% higher template response, slightly lower texture error and 8.5%
+higher adjacent-blank RMS. All absent cases and 4,096 extra flat-noise selector
+draws bypass. Centred mesh changes are clearer; full-grid gains are smaller.
+Unverified highlights and runtime remain.
+
 The [TV phase envelope](edge-phase-envelope.md) smooths local sine/cosine
 coefficients while allowing sharper support changes. Both real mesh families are
 clearer without lowering the frequency threshold. Fresh dark recipes show 48.8%

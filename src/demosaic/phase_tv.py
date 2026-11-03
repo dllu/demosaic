@@ -108,13 +108,20 @@ def denoise_complex_tv(values, weight, iterations=1024, *, device="cpu"):
     }
 
 
-def correct_edge_phase_patch(packed, variance, colors, base, *, device="cpu"):
+def correct_edge_phase_patch(
+    packed, variance, colors, base, *, device="cpu", refine_frequency=False
+):
     """Fixed sigma16 phasors, noise-scaled vectorial TV, and the original gates.
 
     The Gaussian32 covariance sets a heuristic post-filter power threshold.
     It is not the covariance/confidence of the nonlinear TV result.
     """
-    fitted = fit_patch_harmonics(packed, variance, colors, base)
+    if refine_frequency:
+        from .phase_frequency import fit_refined
+
+        fitted = fit_refined(packed, variance, colors, base)
+    else:
+        fitted = fit_patch_harmonics(packed, variance, colors, base)
     base = fitted["base"]
     peaks = fitted["peaks"]
     if not peaks:
@@ -131,6 +138,8 @@ def correct_edge_phase_patch(packed, variance, colors, base, *, device="cpu"):
         g = beta[ids]
         power = float(g @ np.linalg.solve(cov[np.ix_(ids, ids)], g))
         gate = max(0, 1 - 9 / max(power, 1e-12))
+        if refine_frequency:
+            gate = min(fitted["gate_limits"][k], gate)
         if gate == 0:
             detail.append({"gate": 0})
             continue
@@ -173,7 +182,7 @@ def correct_edge_phase_patch(packed, variance, colors, base, *, device="cpu"):
     one = np.ones(256)
     one[:32], one[-32:] = apron, apron[::-1]
     taper = one[:, None] * one[None, :]
-    return base + fields["edge"] * taper[None], {
+    diagnostic = {
         "peaks": peaks,
         "local": detail,
         "local_sigma_native": 16,
@@ -181,3 +190,6 @@ def correct_edge_phase_patch(packed, variance, colors, base, *, device="cpu"):
         "post_filter_power_shrink": 9,
         "post_filter_noise_proxy": "FixedGaussian32covariance,notTVuncertainty",
     }
+    if refine_frequency:
+        diagnostic["frequency_searches"] = fitted["searches"]
+    return base + fields["edge"] * taper[None], diagnostic

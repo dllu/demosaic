@@ -1,5 +1,15 @@
 # GFX100S qualitative comparisons
 
+## Continuous frequency fitting: clearer fine mesh
+
+The [new full-frame comparison](offgrid-phase.md) refits active waves between FFT
+bins before applying the same TV envelope. Both priors retain the standing main
+sky/building/foliage/fence, fine mesh, both JPEGs and independent ISO100 controls.
+Centred lattice changes are clearer; full-grid changes are smaller and uneven.
+The wider sky stays unchanged;
+fresh procedural checks show a small texture gain and increased adjacent-blank
+spill. This additional explicit option preserves the earlier fixed-bin TV mode.
+
 ## TV phase fitting: clearer crossing mesh
 
 The [new complete-frame comparison](edge-phase-envelope.md) smooths local wave

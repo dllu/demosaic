@@ -31,6 +31,10 @@ neural device; `--phase-harmonic-device cpu` selects the NumPy reference.
 It adds substantial runtime and does not eliminate partial-texture spill or
 unverified highlight changes.
 [Complete102MP results, native comparisons, wider sky and exact-flat checks](edge-phase-envelope.md).
+Add `--phase-harmonic-refine-frequency` with the `edge` envelope to fit active
+waves between FFT bins. [Matched full-frame/fresh validation](offgrid-phase.md)
+shows clearer mesh and slightly lower texture error, with increased blank spill.
+Without that flag, the original fixed-bin TV policy is preserved.
 This option is currently exposed by `infer`, not the DNG batch exporter.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality

@@ -1,5 +1,11 @@
 # Experiment index
 
+The [continuous frequency option](offgrid-phase.md) tests bounded updates to
+fixed-bin TV, with modest real changes. Locked 64-recipe validation gives 3.7% higher response and slightly
+lower texture error, with added blank RMS up 8.5%. All 256 absent observations,
+4,096 extra flat-noise selector draws and wider tested sky bypass. New full-frame
+native/GT/JPEG comparisons, solver diagnostics and compatibility audits are linked.
+
 The [TV phase fit](edge-phase-envelope.md) gives clearer crossing mesh on complete
 V143 frames. A locked 64-fresh-recipe review adds 512 actual root/DINO calls:
 16 recipes activate, with 48.8% less mean blank spill than Gaussian phase fitting,

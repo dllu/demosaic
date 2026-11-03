@@ -1,0 +1,17 @@
+{
+  "created_UTC": "2026-11-03T01:02:53.446703+00:00",
+  "base_locked_policy": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/offgrid-phase-v1/locked-policy-v1.json",
+    "sha256": "582fffeef7665dafa33f189898d6824fb609814bbb92274de75820358a8a2dbb"
+  },
+  "guard": "If any observed normalized sample in a selected native256 window is >=1-1e-7, retain the original grid frequencies, gates and TV result for that window. Otherwise use the unchanged locked frequency-search policy. No GT/reference in guard.",
+  "reason": "First complete real execution has very large new highlight changes, including main max29572DN16. Linear sinusoidal frequency likelihood is unsuitable around observed clipping. Preserve prior TV for these windows.",
+  "selection_timing": "Chosen AFTER unguarded fresh scoring and first complete real-frame inspection. The base frequency policy was prospective; this saturation fallback is a later real-development fix, not prospectively selected.",
+  "fresh512_clipped_inputs": 0,
+  "fresh512_expected_effect": "No change: guard predicate false for all512 original fresh observations, verified directly before guarded execution. This does not validate saturated-window quality.",
+  "original_full_evidence": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/offgrid-phase-v1/full-completion-v1.json",
+    "sha256": "37f36ec2ba9b78d636ee6a16c09c916345c333643129256f7fb4086d75b738a1"
+  },
+  "scope": "Preserve original unguarded snapshots, outputs, reports and policy receipts. New guarded full execution needs new source snapshot/receipts; report both failure and final policy explicitly."
+}

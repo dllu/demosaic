@@ -1,5 +1,9 @@
 # TV phase fitting recovers more of the fine mesh
 
+The later [continuous frequency option](offgrid-phase.md) gives clearer real mesh
+and slightly lower procedural texture error, with higher adjacent-blank spill.
+It is an additional flag; this fixed-bin TV policy remains available unchanged.
+
 **Edge-preserving smoothing of local wave coefficients makes the real crossing
 mesh clearer and reduces average procedural blank-region spill by 48.8% versus
 Gaussian phase fitting.** Recovery remains soft and incomplete. Texture error is

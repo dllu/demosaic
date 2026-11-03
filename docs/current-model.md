@@ -1,5 +1,13 @@
 # Current model choices
 
+The additional [continuous frequency option](offgrid-phase.md) gives modest,
+placement-sensitive mesh changes on the same V143 parents. Fresh 64-recipe response rises 3.7% versus
+fixed-bin TV with slightly lower texture error and 8.5% higher added blank RMS.
+The tested wider sky and all 256 absent inputs stay unchanged; 4,096 new pure-flat
+noise draws select no waves. Add `--phase-harmonic-refine-frequency` to the optional
+TV stage; fixed-bin TV remains the default without that extra flag. Highlight
+changes, partial spill, window sensitivity and runtime remain limitations.
+
 The [TV phase fit](edge-phase-envelope.md) is now the default envelope within
 optional `--phase-harmonic`: clearer crossing mesh on complete V143 frames and
 unchanged wider sky. Fresh 64-recipe validation finds 48.8% less mean added blank
