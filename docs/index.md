@@ -1,5 +1,10 @@
 # Documentation guide
 
+The [V149 coherent CFA trial](coherent-phase-estimator.md) has passed53 component
+tests,28 exact legacy/control replays and three CUDA8+2 checks. Three fresh heads
+share the existing4000-observation cache, with all6 final endpoints/798 cases and
+66 native figures fixed. Trained quality remains pending.
+
 The [V148 target-informed capacity diagnostic](spectral-capacity-oracle.md)
 finds much stronger per-bin matrix corrections within the same norm budget,
 while its frozen gate suppresses them. Full support also creates a false lattice

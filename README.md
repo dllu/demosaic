@@ -43,6 +43,8 @@ image gains come with worse quiet patches. All 58 native comparisons are audited
 The [target-informed capacity diagnostic](docs/spectral-capacity-oracle.md) finds
 substantial spectral headroom and a false-lattice quiet-region counterexample;
 its GT-using outputs are diagnostic, unavailable at inference.
+The [V149 coherent-CFA trial](docs/coherent-phase-estimator.md) is testing phase
+alignment and local green evidence with three matched heads; quality is pending.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

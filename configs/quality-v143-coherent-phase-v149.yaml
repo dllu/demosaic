@@ -1,0 +1,48 @@
+version: V149
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  native-matrix:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+  aligned-matrix:
+    class: LateSpectralAlignedMatrixDetail
+    parameters: 31409
+  coherent-context:
+    class: LateSpectralCoherentDetail
+    parameters: 33353
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Three matched fresh heads consume the existing V148 cache of4000 old
+  observation/parent/target arrays, without new noise construction or any
+  parent/DINO call. Native matrix control, explicit known-CFA phase transport
+  with R/Gsum/Gdiff/B matrix estimation, and alignment plus9 raw-only local
+  coherence features at packed scales9/33/129. The same per-bin matrix bound is
+  imposed after transport into native CFA coordinates. All12 initial native/
+  aligned tensors match; context copies all existing weights and appends zero
+  local-input columns. No claim of noise whitening or flat safety. Loss, data,
+  geometry, schedule, clipping, EMA and fixed1k horizon remain V147/V148's.
+  Discarded CUDA10 per arm includes genuine8+2 optimizer reload, all12 gradients
+  and explicit extra-context-column gradients. Final6 raw/EMA endpoints cover
+  all798 retained cases, including exact quiet regions and both standing GFX
+  scenes/priors/windows/JPEGs. Actual blank errors accompany change energy.
+  Adaptive retained cohort, not fresh independent validation. No endpoint
+  selection, short-context bypass, target/reference in forward, RAW decoding
+  or dataz access. Protected captures/siblings remain excluded from training.

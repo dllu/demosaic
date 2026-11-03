@@ -119,6 +119,15 @@ class LateSpectralDetail(nn.Module):
         """Shared scalar innovation operator; subclasses may mix CFA phases."""
         return gain * innovation
 
+    def local_features(self, packed, parent, variance, proposal, colors, observed, noise, geometry):
+        """Original local support inputs; subclasses may append input evidence."""
+        _, _, height, width = packed.shape
+        sigma = _box(variance.clamp_min(0)).sqrt().clamp_min(1 / 65535)
+        placement = F.one_hot(colors, 3).flatten(1).to(packed.dtype)
+        placement = placement[:, :, None, None].expand(-1, -1, height, width)
+        return torch.cat(((packed - _box(packed)) / sigma, (parent - _box(parent)) / sigma,
+                          proposal / sigma, torch.log1p(variance.clamp_min(0) / sigma.square()), placement), 1)
+
     def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):
         if packed.ndim != 4 or packed.shape[1] != 4 or packed.shape != variance.shape:
             raise ValueError("Late spectral detail needs matching four-phase RAW and variance")
@@ -143,11 +152,7 @@ class LateSpectralDetail(nn.Module):
             gain = self.frequency_gain(observed, innovation, noise, layouts)
             spectral_delta = self.apply_frequency_gain(gain, innovation)
             proposal = self.synthesis(spectral_delta, geometry)
-            sigma = _box(variance.clamp_min(0)).sqrt().clamp_min(1 / 65535)
-            placement = F.one_hot(colors, 3).flatten(1).to(packed.dtype)
-            placement = placement[:, :, None, None].expand(-1, -1, height, width)
-            local = torch.cat(((packed - _box(packed)) / sigma, (parent - _box(parent)) / sigma,
-                               proposal / sigma, torch.log1p(variance.clamp_min(0) / sigma.square()), placement), 1)
+            local = self.local_features(packed, parent, variance, proposal, colors, observed, noise, geometry)
             local = F.silu(self.local_in(local))
             local = F.silu(self.local_middle(local))
             local = F.silu(self.local_wide(local))
