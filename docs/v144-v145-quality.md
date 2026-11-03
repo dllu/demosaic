@@ -113,7 +113,8 @@ at this display. There is no clear new recovery versus the control or parent.
 [Sky](images/v144-v145-quality-v1/main-main-overcast-sky-comparison.png).
 
 Fine green mesh retains DSCF3842/3835, both camera JPEGs and native 160 crops in
-768 contexts. RAW panels share +4EV; JPEGs keep their native camera rendering.
+768 contexts. RAW panels share +4EV; camera JPEGs also receive +4EV through
+inverse-sRGB → exposure ×16 → sRGB, without resizing the crops.
 Nominal shot/read are .00128/6.5536e−6; nearby-prior
 values are .0014635775921166604/1.0715704128646712e−6. Aperture, exposure time
 and moving subjects differ. ISO100/AHD/JPEG comparisons are **not exact GT**.

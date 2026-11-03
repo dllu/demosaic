@@ -122,14 +122,15 @@ pilot and its bounded trained-memory companion remain unchanged.
 
 ## Prospective V138 comparison
 
-[V138](raw-global-only-training.md) already queues the same normalized branch
-with the parent frozen and LR1e−3. Its 1,000-update training and image-quality
-review remain pending after V125. The new bounded mechanism companion will
-check whether that intervention increases the actual memory-write effect,
-using the **same six input/probe hashes** and all saved V137 controls.
+[V138](v138-quality.md) has completed its original 1,000 updates and 150-input
+image review with the parent frozen and LR1e−3. It gives tiny faint/flat gains
+over V120 without clear new mesh recovery. Its separate original mechanism
+companion remains unmeasured; the prepared protocol uses the **same six
+input/probe hashes** and all saved V137 controls to test the memory-write effect.
 
-The live companion waits for V138's original primary and faint reviews to
-complete and their exact owners to exit. It reuses the verified endpoint,
+The original companion was prepared to wait for the original primary/faint
+owners. Its dependency protocol remains preserved; the explicit image-review
+recovery does not run this mechanism budget. The planned check would reuse the verified endpoint,
 requires the four trained branch source modules to match, and then permits
 12 new branch forwards/backwards and 24 softmaxes. It adds no full-model/DINO
 calls or training. CPU admission is 40 GiB with a 32 GiB runtime floor; its
@@ -138,7 +139,7 @@ no automatic retry or schedule reset. No existing training or 102-input image
 review budget changes. Between-model differences also combine freezing and LR,
 so neither intervention is isolated by this comparison.
 
-The mechanism result will be read alongside V138's actual native/GFX quality.
+Any future mechanism result must be read alongside V138's completed native/GFX quality.
 An increased memory effect alone will not establish improved images.
 
 As a separate source check on 2026-10-27, the recent

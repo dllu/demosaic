@@ -1,5 +1,15 @@
 # Experiment index
 
+The [noise-scaled collaborative RAW probe](collaborative-detail.md) completes
+694 cached comparisons: all 48 analytic flats stay unchanged, but weak mesh
+remains missing and native building crops show new color blocks. Independent
+metric/pixel audits and 17 published transfer figures are complete. It remains
+outside inference. The completed [V138 frozen-parent trial](v138-quality.md)
+has faint ADC +.00406 dB and noisy-flat spatial RMS −.15% against V120, with
+no clear new mesh recovery. Its original 1,000 updates, all 150 quality inputs,
+independent audits and 46 native-board views are complete. Baselines stay V120
+for general use and V143 for faint/periodic research.
+
 The completed [V144/V145 spatial pilot](v144-v145-quality.md) finds no useful
 fine-detail gain at 1k: faint ADC −.00813 dB and noisy-flat spatial RMS +1.11% versus
 the matched continuation. All 620 inference calls, independent audits and 154
@@ -139,18 +149,18 @@ shadows−.0005–.0044dB and mixed local detail. All102 new predictions, indepe
 audits and38 actual native views are complete. No clear new fine-mesh recovery
 is visible; V120 remains the general recommendation. [Operator/mechanism](raw-global-conditioning.md).
 
-The [V138 branch-only pilot](raw-global-only-training.md) freezes all91 V120
-model/EMA tensors and trains the same18 global tensors at LR1e−3. Genuine
-CPU/CUDA16+2 checks and independent state/input verification pass. Its original
-1k production and102-input native/GFX review are queued after V125 completes.
-The combined freezing/LR intervention has no measured quality result yet.
+The [completed V138 branch-only pilot](v138-quality.md) freezes all 91 V120
+model/EMA tensors and trains the same 18 global tensors at LR1e−3. Its original
+1k and 150-input quality review give tiny faint/flat gains over V120, without
+clear new mesh recovery. All state/input/audit/native checks are complete. This
+combines freezing and learning-rate changes.
 The [trained-memory diagnostic](global-memory-contribution.md) now finds that
 V137's local path dominates its added feature offset on six fixed training
 contexts: removing memory write changes0.83–1.39% of branch RMS. Twelve branch
 forward/backward calls and an independent50.3M-attention-weight audit are
-complete, with no full-model/DINO work or final-RGB claim. A live companion
-will compare V138 at the same input/probe hashes after its original reviews;
-V137 controls and every existing training/full-quality budget remain unchanged.
+complete, with no full-model/DINO work or final-RGB claim. The original V138
+mechanism companion remains unmeasured; its image review is now complete.
+V137 controls and existing training/full-quality budgets remain preserved.
 
 The [V1239k frequency-feature midpoint](v123-midpoint-quality.md) now includes
 16 material predictions and six GFX contexts, reusing47 saved controls. Selected

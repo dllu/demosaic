@@ -47,8 +47,8 @@ direct V142 controls. Horizon and gradient both change; quality remains unmeasur
 | [V131/V132 spatial attention](raw-spatial-training.md) |90,781/29; V120/seed70/20k;22,664-parameter local branch off/on | V131 stopped at step14,549; V132 production remains unstarted. [Control1k](v131-progress1000-quality.md) has tiny ordinary gains, shadow/faint regressions and no clear mesh recovery |
 | [V133 photographic quota](reviewed-quota-training.md) | Same cohort/parent/seed/20k as V131;5% rather than50% reviewed sampling | CPU/CUDA16+2 pass; original production/progress/full dependency queues exited |
 | [V134/V135 cleaned data and epochs](photo-epoch-training.md) |90,778/33; matched20k replacement/epoch sampling | All four CPU/CUDA16+2 checks pass; original production/full dependency queues exited |
-| [V138 frozen-parent global branch](raw-global-only-training.md) |90,782/27;1k; freeze91 V120 tensors, train18 global tensors at LR1e−3 | CPU/CUDA16+2 pass; original1k remains unstarted after the V125 dependency failure |
-| [V139 memory-only branch](raw-global-memory-only.md) | Same1k/data/parent/inputs as V138; remove direct local residual/MLP shortcut | CPU/CUDA16+2 pass;original1k remains unstarted after the V138 dependency failure |
+| [V138 frozen-parent global branch](v138-quality.md) |90,782/27;1k; freeze91 V120 tensors, train18 global tensors at LR1e−3 | Completed original1k and all150 review inputs/audits/native viewing; tiny faint/flat gains over V120, no new mesh recovery |
+| [V139 memory-only branch](raw-global-memory-only.md) | Same1k/data/parent/inputs as V138; remove direct local residual/MLP shortcut | CPU/CUDA16+2 pass;original1k remains unstarted after the original dependency failure; V138 recovery does not launch it |
 | [V140 neighboring-gradient memory](raw-patch-memory.md) | Same1k/data/parent/inputs as V139; add2,048 descriptor parameters before memory | Standalone1k and matched102-input/native/faint/GFX/48-flat reviews complete: near V120 quality, no clear new mesh recovery. Original dependent queue stays failed |
 
 Jobs retain original sources, parents, data, budgets and dependency/resource

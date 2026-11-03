@@ -1,7 +1,12 @@
 # Training only the global RAW branch
 
-**V138 passes genuine CPU/CUDA 16+2 training checks. Its original 1,000-step
-production run is queued after V125 completes; image quality is unmeasured.**
+**V138's original 1,000-step production and 150-input quality review are complete.**
+The [completed report](v138-quality.md) finds tiny faint/flat gains against V120,
+with no clear new mesh recovery. The completed
+genuine CPU/CUDA 16+2 checks are adopted without replay. An explicit recovery
+follows the terminal failure of its unrelated V125 admission dependency;
+the training recipe, frozen source, parent and schedule remain unchanged.
+All primary/faint/GFX/JPEG/flat audits and 46 native-board views are complete.
 V120 Small remains the general recommendation.
 
 [Recipe](../configs/quality-v120-raw-global-only-pilot-v138.yaml) ·
@@ -28,10 +33,9 @@ The separate [V139 memory-only prototype](raw-global-memory-only.md) removes the
 direct local residual/MLP shortcut. It passes genuine CPU/CUDA16+2 checks with
 15 branch tensors and the same91 frozen parent tensors. Its future operator
 comparison uses V138's LR, scope, data and seed. Its original1k training and
-matched native-quality review are queued after V138's existing reviews, adopting
-completed checks and saved predictions. Trained quality is unmeasured. V138's
-original training and review queues retain their declared architecture, source
-and budgets.
+matched native-quality review remain unstarted after the earlier dependency
+queue exited. V138's explicit recovery does not launch V139. Completed checks,
+saved predictions and the original architecture/source/budgets remain preserved.
 
 ## Training and compatibility
 
@@ -80,21 +84,27 @@ The first test run had one incorrect fixture assumption: a model without DINO
 was assigned the production model's parameter count. The corrected test checks
 actual parameter identities; the original failure log is preserved.
 
-## Prospective quality review
+## Completed quality review
 
-The queued review uses exactly 102 new root/DINO calls: 64 shadow, 16 ordinary,
+The primary review uses exactly 102 new root/DINO calls: 64 shadow, 16 ordinary,
 16 faint-ADC, four main-GFX512 and two extra-mesh768 inputs. All 408 saved
 V120/V129/V136/V137 predictions are reused. It verifies the actual completed
 1k endpoint, exact67-module trained source, frozen parent, 18 finite Adam states
 and all1,000 batch matches before inference.
 
-Expected outputs are 480 metric rows, 120 summaries and 64 native PNGs,
+Actual outputs are 480 metric rows, 120 summaries and 64 native PNGs,
 including noisy/restored/exact synthetic-GT triplets. An independent audit
 checks every cell, 24,576,000 RGB channels. A prospectively frozen CPU-only
 supplement adds original-source faint-detail strata, mean/spatial error
-decomposition and four shared40× native displays: expected300 strata,
+decomposition and four shared40× native displays: 300 strata,
 160 decompositions and2,150,400 exact PNG channels. Enhanced displays are never
-used for scoring. Actual native viewing remains required after these finish.
+used for scoring. All 46 comparison/faint/JPEG/flat boards were viewed in 12
+unresized sheets; the separately audited triplets repeat the comparison pixels.
+
+The recovery also completes 48 retained analytic flats, without new noise or
+old-control inference, for 150 endpoint root/DINO calls in total. It preserves
+the primary/faint protocol and adds independent flat/sky reductions and both
+camera-JPEG comparisons. All checks and actual native viewing are complete.
 
 Both main DSCF3879/3880 and corrected extra DSCF3842/DSCF3835 scenes remain in
 the review, including foliage and both fine green mesh regions/profiles.
@@ -104,7 +114,10 @@ JPEGs and siblings stay outside training; cached originals remain read-only.
 
 CPU admission is40GiB, CUDA/production52GiB, allocator cap16GiB and runtime
 floor32GB. Limits are30minutes per check and8hours for production. The original
-V125 completion dependency protects existing training startup. No automatic
+V125 admission dependency ended in failure before V138 production started.
+November 3 recovery verifies both original owners dead, adopts successful checks
+and runs the original production worker/config once. It preserves the 16GiB
+allocator cap, 52GiB admission, 32GB runtime floor and disk reserves. No automatic
 retries, schedule resets, old control forwards or new20k run are part of this
 pilot. Preparation stopped once for a missing analysis helper before any
 review launch; missing helpers were then copied from the frozen V137 review.
@@ -112,8 +125,9 @@ A CPU report watcher also raced the first status write. Its failed owner,
 source and receipt remain preserved; an explicit replacement finishes the same
 zero-neural analysis budget with the original absolute deadline.
 
-These checks establish an executable experiment, not improved image quality,
-full427/camera/color/frame performance, broad RawNIND superiority or speed.
+The engineering checks establish executable training. The completed review
+measures small quality gains and the remaining detail failures; full427/camera/
+color/frame performance, broad RawNIND superiority and speed remain unproven.
 
 ## Actual memory contribution
 
@@ -122,11 +136,13 @@ removing its trained memory write changes only0.83–1.39% of the added feature
 offset RMS on six retained training contexts. That does not quantify final RGB
 impact, but distinguishes varied attention from its actual feature contribution.
 
-A separate live CPU companion waits for this V138 pilot's original primary/faint
-reviews to finish and their owners to exit. It reuses the verified endpoint and
+A separate original CPU companion was prepared to run after this V138 pilot's
+primary/faint reviews and owner exits. It would reuse the verified endpoint and
 the same six target-free branch inputs/probes, with12 new branch forwards/
 backwards and24 attention softmaxes; all V137 controls are reused. It adds no
-full-model/DINO calls, noise, RAW decoding or training. CPU admission is40GiB,
+full-model/DINO calls, noise, RAW decoding or training in its declared budget.
+CPU admission is40GiB,
 runtime floor32GiB and the original faint-review absolute deadline remains fixed.
-No existing training or102-input quality budget changes. Both image quality
-and the larger-update memory effect remain unmeasured for V138.
+Its original dependency protocol remains preserved. The explicit recovery has
+completed training and primary/faint/JPEG/flat review. Image quality is measured
+in the completed report; the larger-update memory contribution remains unmeasured.

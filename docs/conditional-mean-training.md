@@ -69,7 +69,8 @@ The controller admitted V125 after its original64GiB launch threshold; its
 20k worker later stopped at the memory reserve; budget, source and data remain unchanged. Full endpoint quality
 still waits for the matched pair. The [completed20k native check](v124-final20000-native.md)
 now measures14 fixed inputs against saved V120/V12414k/V1256k outputs. It is
-separate from the earlier102-input14k study and the full queued endpoint suite. [Current execution receipt](results/raw-global-only-pilot-setup-v1.json).
+separate from the earlier102-input14k study and the full queued endpoint suite. [Historical setup receipt](results/raw-global-only-pilot-setup-v1.json). The separate
+[V1381k recovery and quality review](v138-quality.md) is now complete.
 
 The completed102-input progress review reuses all V120 controls and existing
 noise/RAW inputs. It includes two exact-GT native triplets, four main GFX contexts

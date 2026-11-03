@@ -26,6 +26,10 @@ photo controls remain unchanged, so nonperiodic detail is still weak.
 The completed [V144/V145 local-attention pilot](docs/v144-v145-quality.md) adds no
 useful fine-detail gain at 1k; noisy-flat spatial error rises 1.1% against its
 matched control. V143 remains the detail-study parent.
+The [noise-scaled patch probe](docs/collaborative-detail.md) also fails: uniform
+flats stay unchanged, but weak mesh remains missing and building color blocks
+appear. The completed [V138 frozen-parent trial](docs/v138-quality.md) has tiny
+faint/flat gains and no clear new mesh recovery; the baselines remain unchanged.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

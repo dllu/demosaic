@@ -2,8 +2,9 @@
 
 **V139's experimental memory-only branch passes genuine CPU/CUDA16+2 checks;
 trained reconstruction quality remains unmeasured.** Its original1k production
-and matched native-quality review are now queued after V138's existing review
-chain. The variant removes the direct local content/MLP bypass from the normalized
+and matched native-quality review remain unstarted after the original dependency
+queue failed. The [completed V138 review](v138-quality.md) does not automatically
+launch V139; its original checks, plans and budgets remain preserved. The variant removes the direct local content/MLP bypass from the normalized
 global branch. V120 remains the general recommendation.
 
 [Implementation](../src/demosaic/raw_global_memory_features.py) ·
@@ -20,7 +21,7 @@ global branch. V120 remains the general recommendation.
 The [trained V137 intervention](global-memory-contribution.md) finds that memory
 write contributes only0.83–1.39% of the branch-offset RMS on six retained
 contexts. Spatially varied attention alone did not produce clear fine-mesh
-recovery. [V138](raw-global-only-training.md) already queues the normalized
+recovery. [V138](v138-quality.md) completed the normalized
 branch with a frozen parent and larger branch LR; its quality remains pending.
 
 V139 tests a separate architectural hypothesis: direct local content and its

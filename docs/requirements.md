@@ -54,21 +54,22 @@ quality remain separate measurements. Actual quality is pending.
 | 16-bit/full-resolution output | V120/V121 complete101.996MP FP32 outputs and linear/sRGB RGB16 exports verified, including matched-Haar full-frame comparisons | Preserve per-checkpoint precision/quality evidence |
 | 100MP within10s on GB10 | Ordered Tiny/Small FP32 observations116.57/101.66s, not a controlled speed ranking | Target open; improve quality before speed work |
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
-| Diverse clean targets and binning | V12420k control complete on90,784/twenty regions, matched V125 pending; V13120k runs on90,781/29 with mixed1k progress and V132 follows; [V134/V135](photo-epoch-training.md) passes four CPU/CUDA checks on90,778/33 and queues20k replacement/epoch training plus full reviews;4×→geometry→area2, zero optical blur | Finish/assess the newest cohort and source-order/quota training; broad weak-detail recovery remains incomplete |
+| Diverse clean targets and binning | Newest prepared bank90,773/37 regions; V12420k complete, V125 original controller failed, V131 stopped14,549 and V132 unstarted. [V134/V135](photo-epoch-training.md) retains its prepared source-order comparison after the old dependency queues exited;4×→geometry→area2, zero optical blur | Assess useful new cohorts without changing existing study bytes; broad weak-detail recovery remains incomplete |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; V120 ADC max55.52DN16, Tiny alternative51.73DN16 | Spatial dark-field/weak-detail failures and real-noise calibration limits remain |
-| Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V122/V123 full evaluation and selected native review complete; V12420k training complete and V125/V131 original workers running; [V138](raw-global-only-training.md) passes genuine checks and queues1k after V125 completion | Finish conditional-mean training/comparison and improve real-photo/detail quality |
+| Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V12420k complete; original V125 failed and V131 stopped at its memory reserve; [V1381k/150-input review](v138-quality.md) is complete with tiny faint/flat gains and no new mesh recovery | Preserve executed work and improve real-photo/detail quality |
 | Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
 | Current documentation |56 completed primary endpoints in plot; native triplets, latest GFX comparisons and explicit profiles/checkpoints; local-time diary | Update useful results without promotion freezes |
 
-The prepared future bank contains90,774 photos/36 regions. The latest
-[source inspection](v125-v131-source-review.md) brings the ledger to2,043 IDs,
-retains all40 new sources and leaves data bytes unchanged. Previous exclusions
-and mixed white-plumage addition remain preserved. Reader/pixel checks pass;
-trained quality on this bank is unmeasured and existing cohorts remain fixed.
+The newest prepared bank contains90,773 photos/37 regions. The latest
+[source inspection](v125-v131-source-review-5600-9800.md) brings the ledger to
+2,083 reviewed IDs, withholds one grainy coastal source and adds a mixed leaf
+context while preserving all36 prior region objects. Reader/pixel checks pass;
+trained quality on this newest bank remains unmeasured. Existing study cohorts
+and protected scene exclusions remain fixed.
 
 [V139 memory-only global matching](raw-global-memory-only.md) passes genuine
-CPU/CUDA16+2 checks and queues its original1k plus matched102-input native review
-after V138's review chain. The [saved monitor trends](v125-progress4000-quality.md)
+CPU/CUDA16+2 checks; its original1k/native review remain unstarted after the
+original dependency failure. The completed V138 recovery does not launch V139. The [saved monitor trends](v125-progress4000-quality.md)
 keep partial training scores separate from full endpoint and real-detail evidence.
 
 The [V116 data review](v116-quality.md) is complete at its original20k endpoint.

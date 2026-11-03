@@ -11,9 +11,11 @@ that path causally on six retained branch inputs. The feature-offset change is
 only0.83–1.39% of the full branch RMS despite varied attention; final RGB impact
 is unmeasured by this diagnostic. All12 branch forward/backward calls and the
 independent attention/array audit are complete.
-The [V138 follow-up](raw-global-only-training.md) freezes the parent and trains
-this same branch at a larger learning rate. Genuine checks pass; production and
-quality review are queued after V125 completes, with no quality claim yet.
+The completed [V138 follow-up](v138-quality.md) freezes the parent and trains
+this same branch at a larger learning rate. Its original1k and150-input review
+find tiny faint/flat gains over V120, without clear new mesh recovery. All
+audits and46 native-board views are complete; the memory contribution remains
+a separate unmeasured mechanism question.
 
 [Implementation](../src/demosaic/raw_global_conditioned_features.py) ·
 [Recipe](../configs/quality-v120-raw-global-conditioned-pilot-v137.yaml) ·

@@ -26,9 +26,10 @@ pending. The original queues are unchanged. They check
 artifact correctness and prepare comparisons; they do not require positive
 score changes or select a model automatically.
 
-The separate [V139 memory-only1k pilot](raw-global-memory-only.md) now queues
-fresh training after V138's existing review chain, adopting its own completed
-CPU/CUDA checks. Its102-input native/faint/GFX review reuses510 control
+The separate [V139 memory-only1k pilot](raw-global-memory-only.md) remains
+unstarted after its original dependency chain failed. The completed
+[V138 review](v138-quality.md) is now available; V139 requires a separate recovery
+to adopt its passed CPU/CUDA checks and original budgets. Its102-input native/faint/GFX review reuses510 control
 predictions, including the actual V138 endpoint, with independent audits and
 both corrected GFX pairs/camera JPEGs. This local pilot does not add a full427,
 measured-camera/color or full-frame result. Actual viewing/publication follows

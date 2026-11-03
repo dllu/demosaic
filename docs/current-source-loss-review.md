@@ -20,8 +20,8 @@ or source-wide pristine guarantee.
 | V124/V125 mean-loss comparison |90,784 /20 | V124 original20k training complete; V125 training runs; full endpoint quality pending |
 | Completed V126–V128 pilots |90,783 /23 | Shadow/feature terms show no useful gain at1k |
 | V129/V130 and V136/V137 pilots |90,782 /27 | Completed1k reviews show small mixed changes without clear fine-mesh recovery |
-| V138 frozen-parent branch |90,782 /27 | CPU/CUDA16+2 checks pass; original1k and native review queued after V125 completion |
-| V139 memory-only branch |90,782 /27 | CPU/CUDA16+2 checks pass; original1k and matched102-input review queued after the V138 review chain |
+| V138 frozen-parent branch |90,782 /27 | [Completed1k/150-input review](v138-quality.md): tiny faint/flat gains versus V120; no clear new real mesh recovery |
+| V139 memory-only branch |90,782 /27 | CPU/CUDA16+2 checks pass; original1k/review remain unstarted after the original dependency failure; V138 recovery does not launch V139 |
 | V140 neighboring-gradient memory |90,782 /27 | CPU/CUDA16+2 pass; fresh1k and matched102-input review queued, reusing612 predictions |
 | V131/V132 spatial trial |90,781 /29 | [V1311k progress](v131-progress1000-quality.md) has mixed changes and no clear mesh recovery; original20k continues, V132 follows |
 | V133 quota trial |90,781 /29 | CPU/CUDA checks pass;5% versus V131's50% quota; full/progress reviews queued |
