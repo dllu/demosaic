@@ -72,22 +72,22 @@ isolated architecture ablation.
 
 ## Current 100% crops
 
-The optional [guarded wider-context correction](docs/wide-phase-context.md)
-uses actual 512-pixel RAW windows to propose measured detail for local support
-fitting. On 64 fresh dark recipes, response rises **14.4%** and image RMS falls
-**1.2% versus sparse support**. Mean added blank RMS rises 17.3%, with a 17.4% lower
-worst case. All 256 absent neural cases and 5,120 ideal-flat matched/mismatch
-executions retain parent pixels. The amplified tail still shows a detached false
-stripe patch beside real texture. Average response remains only 5.54% of exact GT.
+The new [reciprocal green support option](docs/cross-phase-support.md) reduces
+fresh mean added blank-region RMS **89%** and its worst case **92%** versus wider
+context. It trades **9.5% lower mesh response** and **0.8% higher image RMS** for
+stricter support. All 256 fresh absent neural cases retain their parents. The
+known detached false patch is removed; weak texture loss and boundary spill
+remain. Average response is only 4.4% of exact procedural GT.
 
-Below: noisy Malvar → guarded correction on V1435k → exact procedural GT.
-Two native 160×160 central crops from actual 512 predictions share WB/matrix/+3EV;
-no pixels are resized. These are the first two active recipe seeds, selected
-after evaluation. [All cases, tail controls and source/ROI/checkpoint/noise/display](docs/images/wide-phase-context-v1/manifest.json).
+Below: noisy → reciprocal support on V1435k → exact procedural GT. These native
+160×160 crops use the first two active sources and largest retained correction
+on a fixed 160 grid, chosen after evaluation. All columns share 8× camera-linear
+contrast about the exact empty field, then WB/matrix/+3EV. No pixels resize.
+[Central crops, rejected texture, tails and metadata](docs/images/cross-phase-support-v1/manifest.json).
 
-![Native noisy, guarded restoration and exact procedural GT](docs/images/wide-phase-context-v1/mesh-seed2026111905-present-iso6400-prior-RGGB-triplet.png)
+![Native noisy, reciprocal support and exact GT with common eightfold contrast](docs/images/cross-phase-support-v1/mesh-seed2026112114-present-iso6400-prior-RGGB-retained-contrast8-triplet.png)
 
-![Native noisy, guarded restoration and exact procedural GT](docs/images/wide-phase-context-v1/mesh-seed2026111907-present-iso6400-prior-RGGB-triplet.png)
+![Native noisy, reciprocal support and exact GT with common eightfold contrast](docs/images/cross-phase-support-v1/mesh-seed2026112121-present-iso6400-prior-GBRG-retained-contrast8-triplet.png)
 
 Real GFX100S: DSCF3879 ISO6400 → **V120 Small, fixed historical Haar profile** → DSCF3880 ISO100 f/5.6.
 Native 160×160 sensor-pixel crops from complete 102MP outputs share +2EV display.
@@ -100,23 +100,23 @@ The independent ISO100 exposure is an approximate qualitative reference,
 
 ![V120 GFX fence: noisy, restored and separate ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
-The additional **fine green mesh beside the red train’s cab** has stronger
-crossing contrast with the [guarded wider-context option](docs/wide-phase-context.md)
-on full V1435k outputs under both priors. Recovery stays soft and uneven; the
-tested 2.88MP sky retains every parent pixel. Use
-`infer --phase-harmonic --phase-harmonic-envelope wide`.
-The stage remains explicit, with `edge` its default. Boundary spill, highlight
-color and speed remain unresolved. The earlier [sparse support](docs/sparse-phase-support.md)
-and research-only [direct RAW refit](docs/raw-phase-refit.md) comparisons remain available.
+The additional **fine green mesh beside the red train’s cab** retains much of
+the stronger crossing lattice with [reciprocal support](docs/cross-phase-support.md),
+under both fixed priors on complete V1435k outputs. It remains soft and uneven,
+with some weakening versus [wide context](docs/wide-phase-context.md). The tested
+2.88MP sky retains every parent pixel. Add
+`--phase-harmonic --phase-harmonic-envelope cross` for stricter support; use
+`wide` for higher measured response. The stage stays explicit, with `edge` its
+default. Highlight color, weak-detail loss and speed remain unresolved.
 
-Below: noisy → V1435k → sparse → guarded wider context → ISO6400 JPEG →
-independent ISO100 AHD → ISO100 JPEG, using the fixed nearby prior. Native 160px
-cells share +4EV. Both ISO100 comparators are **not GT**; aperture, exposure time
-and processing differ. [Both priors and all controls](docs/wide-phase-context.md).
+Below: noisy → V143 → sparse → wide context → reciprocal support → ISO6400 JPEG →
+independent ISO100 AHD → ISO100 JPEG, using the nearby prior. Native 160px cells
+share +4EV. Both ISO100 comparators are **not GT**; aperture, exposure time and
+processing differ. [All priors and failure controls](docs/cross-phase-support.md).
 
-![Full-frame guarded wider-context correction, native fine-mesh crop](docs/images/wide-phase-context-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-left-JPEG.png)
+![Full-frame reciprocal support, native fine green mesh crop](docs/images/cross-phase-support-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-left-JPEG.png)
 
-![Full-frame guarded wider-context correction, native fine-mesh crop](docs/images/wide-phase-context-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-right-JPEG.png)
+![Full-frame reciprocal support, native fine green mesh crop](docs/images/cross-phase-support-v1/mesh-nearby-Haar-mesh-profile3879-fine-green-mesh-right-JPEG.png)
 
 The [stronger RawNIND full-frame reference](docs/rawnind-fullframe.md) and
 [current Tiny/Small Q2/Sony/GFX50R comparisons](docs/cross-camera-qualitative.md)
@@ -147,6 +147,8 @@ Add `--phase-harmonic-refine-frequency` for clearer mesh with a measured
 with stronger average response and remaining blank-region tail regressions.
 `--phase-harmonic-envelope wide` adds [larger RAW contexts and a variance floor](docs/wide-phase-context.md),
 with stronger mesh recovery, increased mean spill and a lower tested worst tail.
+`--phase-harmonic-envelope cross` adds [reciprocal green support](docs/cross-phase-support.md),
+with much lower added blank structure and some loss of true detail.
 [Linear DNG + full-resolution JPEG batch export](docs/dng-export.md) preserves
 camera RGB and adapts existing darktable XMP edits. Add `--hot-pixels` to repair
 isolated Bayer defects before restoration.

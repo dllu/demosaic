@@ -1,5 +1,10 @@
 # Wider RAW context recovers more measured lattice detail
 
+The later [reciprocal support option](cross-phase-support.md) removes the known
+detached false patch and greatly reduces fresh blank spill, with lower response
+and some true-detail loss. Both modes and their matched comparisons remain
+available; this report preserves the wider-context method and evidence.
+
 **The guarded wider-context option raises fresh dark-mesh response 14.4% and
 lowers image RMS error 1.2% versus sparse support.** Mean added blank-region RMS
 rises 17.3%; its worst case falls 17.4%. All 256 absent neural cases and 5,120 matched/

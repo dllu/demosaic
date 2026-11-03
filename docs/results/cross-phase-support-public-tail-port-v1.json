@@ -1,0 +1,422 @@
+{
+  "status": "passed",
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/compact-raw-support-v1/public-tail-port-v1.py",
+    "sha256": "75098af096d841dbd3696c63f9c68bbeeb8ce71864c0d2f7fa979eecd4bc591e"
+  },
+  "values_exact": 1572864,
+  "metadata": {
+    "wide": {
+      "method": "local-phase-harmonic-v7",
+      "envelope": "wide",
+      "enabled": true,
+      "refine_frequency": true,
+      "stride_native": 128,
+      "tile_native": 256,
+      "working_precision": "float64 fits;float32 full-image accumulation/output",
+      "noise": "max(observed RAW,0)*shot+read;same convention as neural inference",
+      "confidence_calibrated": false,
+      "context": {
+        "native": 512,
+        "grid_stride_native": 256,
+        "grid_offset_native": -64,
+        "annuli": [
+          [
+            0.03,
+            0.22
+          ],
+          [
+            0.22,
+            0.34
+          ]
+        ],
+        "peaks_per_band": 4,
+        "signed_coherence_threshold": 0.8,
+        "signed_cross_noise_threshold": 5,
+        "strict_abs_component_bound": 0.25,
+        "physical_peak_suppression": 0.015625,
+        "maximum_local_peaks": 12,
+        "windows": 1,
+        "selected_windows": 1,
+        "frequencies": 4,
+        "frequency_evaluations": 71,
+        "collision_fallbacks": 0,
+        "maximum_abs_delta_bins": 0.5287585624624888,
+        "variance_floor_positive_windows": 1,
+        "maximum_added_pixel_variance": 5.02645258318507e-07,
+        "variance_floor_windows": [
+          {
+            "native_xywh": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "added_pixel_variance": 5.02645258318507e-07,
+            "empirical_spectral_proxy_per_green": [
+              3.220634936293916e-05,
+              3.167732945159866e-05
+            ],
+            "declared_noise_proxy_per_green": [
+              3.1703704104620655e-05,
+              3.167916338920703e-05
+            ],
+            "probe_bins_per_green": 28242,
+            "probe_annulus": [
+              0.1,
+              0.34
+            ],
+            "positive_fy_only": true,
+            "confidence_calibrated": false
+          }
+        ],
+        "variance_floor_probe_annulus": [
+          0.1,
+          0.34
+        ],
+        "variance_floor_rule": "max(0,max_green(median(PSD/unit)/ln2-median(declared_noise/unit)))",
+        "confidence_calibrated": false
+      },
+      "patches": 9,
+      "selected_patches": 9,
+      "active_patches": 4,
+      "selected_frequencies": 36,
+      "context_added_frequencies": 27,
+      "new_model_calls": 0,
+      "TV": {
+        "device": "cuda",
+        "solves": 16,
+        "iterations": 1344,
+        "capped": 0,
+        "maximum_relative_primal_dual_gap": 9.402376748777421e-06
+      },
+      "support_TV": {
+        "device": "cuda",
+        "solves": 16,
+        "iterations": 16384,
+        "capped": 16,
+        "maximum_relative_primal_dual_gap": 5.45348199835199e-05
+      },
+      "sparse_support": {
+        "support_TV_noise_multiplier": 16,
+        "group_noise_multiplier": 0.5,
+        "support_power_threshold": 9,
+        "minimum_connected_packed_area": 805,
+        "connectivity": 4,
+        "masked_refit_TV_noise_multiplier": 4,
+        "post_filter_power_shrink": 9,
+        "magnitude_cap": 3,
+        "global_gate": 9,
+        "apron_native": 32,
+        "confidence_calibrated": false
+      },
+      "frequency_search": {
+        "solves": 16,
+        "evaluations": 298,
+        "collision_fallbacks": 0,
+        "clipped_windows": 0,
+        "maximum_abs_delta_bins": 0.5140425297804244,
+        "confidence_calibrated": false
+      },
+      "seconds": 22.286170737002976,
+      "extension": "Actual512 contexts;repeat complete Bayer cells only for legacy odd local boundaries",
+      "blend": "sum tapered deltas/max(sum tapers,1),including inactive patches",
+      "added_field_rms_DN16": 7.174806771355486,
+      "max_abs_added_field_DN16": 94.384033203125
+    },
+    "cross": {
+      "method": "local-phase-harmonic-v8",
+      "envelope": "cross",
+      "enabled": true,
+      "refine_frequency": true,
+      "stride_native": 128,
+      "tile_native": 256,
+      "working_precision": "float64 fits;float32 full-image accumulation/output",
+      "noise": "max(observed RAW,0)*shot+read;same convention as neural inference",
+      "confidence_calibrated": false,
+      "context": {
+        "native": 512,
+        "grid_stride_native": 256,
+        "grid_offset_native": -64,
+        "annuli": [
+          [
+            0.03,
+            0.22
+          ],
+          [
+            0.22,
+            0.34
+          ]
+        ],
+        "peaks_per_band": 4,
+        "signed_coherence_threshold": 0.8,
+        "signed_cross_noise_threshold": 5,
+        "strict_abs_component_bound": 0.25,
+        "physical_peak_suppression": 0.015625,
+        "maximum_local_peaks": 12,
+        "windows": 1,
+        "selected_windows": 1,
+        "frequencies": 4,
+        "frequency_evaluations": 71,
+        "collision_fallbacks": 0,
+        "maximum_abs_delta_bins": 0.5287585624624888,
+        "variance_floor_positive_windows": 1,
+        "maximum_added_pixel_variance": 5.02645258318507e-07,
+        "variance_floor_windows": [
+          {
+            "native_xywh": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "added_pixel_variance": 5.02645258318507e-07,
+            "empirical_spectral_proxy_per_green": [
+              3.220634936293916e-05,
+              3.167732945159866e-05
+            ],
+            "declared_noise_proxy_per_green": [
+              3.1703704104620655e-05,
+              3.167916338920703e-05
+            ],
+            "probe_bins_per_green": 28242,
+            "probe_annulus": [
+              0.1,
+              0.34
+            ],
+            "positive_fy_only": true,
+            "confidence_calibrated": false
+          }
+        ],
+        "variance_floor_probe_annulus": [
+          0.1,
+          0.34
+        ],
+        "variance_floor_rule": "max(0,max_green(median(PSD/unit)/ln2-median(declared_noise/unit)))",
+        "confidence_calibrated": false
+      },
+      "patches": 9,
+      "selected_patches": 9,
+      "active_patches": 4,
+      "selected_frequencies": 36,
+      "context_added_frequencies": 27,
+      "new_model_calls": 0,
+      "TV": {
+        "device": "cuda",
+        "solves": 16,
+        "iterations": 1344,
+        "capped": 0,
+        "maximum_relative_primal_dual_gap": 9.402376748777421e-06
+      },
+      "support_TV": {
+        "device": "cuda",
+        "solves": 16,
+        "iterations": 16384,
+        "capped": 16,
+        "maximum_relative_primal_dual_gap": 5.45348199835199e-05
+      },
+      "sparse_support": {
+        "support_TV_noise_multiplier": 16,
+        "group_noise_multiplier": 0.5,
+        "support_power_threshold": 9,
+        "minimum_connected_packed_area": 805,
+        "connectivity": 4,
+        "masked_refit_TV_noise_multiplier": 4,
+        "post_filter_power_shrink": 9,
+        "magnitude_cap": 3,
+        "global_gate": 9,
+        "apron_native": 32,
+        "confidence_calibrated": false
+      },
+      "frequency_search": {
+        "solves": 16,
+        "evaluations": 298,
+        "collision_fallbacks": 0,
+        "clipped_windows": 0,
+        "maximum_abs_delta_bins": 0.5140425297804244,
+        "confidence_calibrated": false
+      },
+      "cross_phase_support": {
+        "enabled": true,
+        "mask_grid": [
+          32,
+          32
+        ],
+        "mask_node_spacing_native": 8,
+        "raw_phasor_sigma_native": 32,
+        "TV_weight_coarse": 0.5,
+        "area_weight_native": 0.0006211180124223603,
+        "support_threshold": 0.5,
+        "solves": 4,
+        "capped": 4,
+        "iterations": 32768,
+        "maximum_relative_gap": 4.091198506206017e-06,
+        "maximum_absolute_gap": 0.0017161976757051889,
+        "confidence_calibrated": false
+      },
+      "seconds": 59.973460047040135,
+      "extension": "Actual512 contexts;repeat complete Bayer cells only for legacy odd local boundaries",
+      "blend": "sum tapered deltas/max(sum tapers,1),including inactive patches",
+      "added_field_rms_DN16": 6.90396892513951,
+      "max_abs_added_field_DN16": 94.384033203125
+    }
+  },
+  "source": {
+    "id": "mesh-seed2026111938-present-iso6400-prior-GRBG",
+    "arrays": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/large-context-phase-v1/prospective-v2/inputs/mesh-seed2026111938-present-iso6400-prior-GRBG.npz",
+      "sha256": "a0eb90ac61c64c78b82a05ed7eda0a8dd8c226dfe3dac9c0513b98953270bea3"
+    },
+    "present": true,
+    "seed": 2026111938,
+    "source": {
+      "recipe": {
+        "kind": "crossed-lines",
+        "present": true,
+        "seed": 3049577105287552444,
+        "size": 1024,
+        "pixel_scale": 2,
+        "level": 0.03189275339226682,
+        "requested_peak_relative_contrast": 0.15935801791966134,
+        "peak_relative_contrast": 0.15935801791966134,
+        "tint": [
+          0.6883561611175537,
+          1.0,
+          0.9218735098838806
+        ],
+        "contrast_direction": [
+          -0.08963266760110855,
+          1.0,
+          0.4336024224758148
+        ],
+        "background_slope": [
+          -0.005148697609977083,
+          0.009130519326123465
+        ],
+        "angles_radians": [
+          2.4480134805677802,
+          3.6461671332317427
+        ],
+        "periods_final_pixels": [
+          12.403857291369654,
+          17.768213475866347
+        ],
+        "wire_sigma_final_pixels": [
+          0.9778140944310297,
+          1.1021660823859074
+        ],
+        "phases_cycles": [
+          0.5915213758643094,
+          0.59837184793235
+        ],
+        "mask_center_final_pixels": [
+          312.7411775400441,
+          194.14561602329914
+        ],
+        "mask_radii_final_pixels": [
+          123.45141194752966,
+          240.77820512655975
+        ],
+        "rms_relative_contrast": 0.03163860876690399,
+        "space": "scene-linear-sRGB",
+        "absence_probability": 0.5
+      },
+      "geometry_final_rng_state": "(3, (1417593873, 204282107, 2167261866, 1779362574, 1028548147, 4131504804, 4159255595, 2472283312, 2125714290, 569740246, 2716782024, 2514839385, 237451516, 4029955195, 3270092741, 660705788, 3730666634, 1226883266, 1634448369, 1613242478, 4093147491, 1490354390, 3359994595, 1633118345, 2225468095, 846988113, 454817086, 2857530070, 3404339273, 1344607070, 2804490467, 4108954516, 1125731255, 981365975, 97869254, 2876807117, 1936793254, 1752935037, 715890768, 4224219719, 2831333601, 4088665696, 3062728498, 1831792546, 668552268, 3409453204, 1852464177, 391663019, 154657807, 2652004150, 3071587722, 3620006486, 433940730, 1863792498, 2672166879, 4037355605, 3804901468, 3505049061, 1334932105, 3811966956, 2848541084, 116120724, 717245742, 2808743739, 507772152, 159570455, 542535912, 3885951443, 2864036610, 3685509243, 1078181497, 3689465689, 1631640796, 3474246339, 318646161, 744646684, 4092027702, 3105447184, 882273040, 2684349696, 1622354969, 1483398897, 2008445292, 3498899155, 1866002804, 581496020, 3871582532, 3204113521, 2462582429, 3881243271, 1021525033, 1055960715, 2878151193, 2726359056, 2971010194, 1558416690, 279957011, 2660135574, 2465012721, 1372230228, 1642990018, 1734293114, 682164256, 2256483305, 2512504999, 2524564264, 112550069, 685520306, 613573253, 2536688587, 1414096293, 1406059163, 2861610955, 1953818815, 1357382241, 2627903193, 709215492, 3986792286, 572918645, 1752659668, 4010214690, 1906418722, 1638137705, 530543396, 3919744241, 1185266994, 4122973678, 315084088, 3363801444, 1240227516, 1504589824, 77812323, 1401031570, 3607453078, 115423521, 259647970, 1994013441, 3891413100, 2320868881, 2599067901, 730654611, 3215415688, 1649054151, 3621942086, 38446356, 2248920606, 4231876172, 4217440119, 3708347723, 43355064, 3495776438, 2961664676, 2843390307, 3885705786, 3974424446, 2717912010, 3968650363, 1934537791, 2992649709, 4215073138, 3874664834, 3438829422, 1773188651, 2758891324, 3959302123, 397005596, 2906208326, 1266558817, 2106061653, 3107893568, 2328227031, 907924747, 696440115, 347811209, 4019109001, 3663097354, 3534361649, 3329100520, 440484426, 2924417961, 3248927610, 3587166675, 3945705960, 4159757761, 2100947437, 1934781852, 500636606, 3164969782, 3920300066, 887911501, 3099251199, 1282226684, 1128959988, 757646464, 3707856264, 1920983392, 3972800810, 1867504768, 2632970348, 493951481, 3114679154, 3713498110, 1419666244, 1391497797, 3132871824, 2426811748, 1247898860, 3740600609, 2479935954, 3219540044, 2652575494, 2473241137, 2418815176, 288280077, 2503258172, 796113785, 2740250315, 1013379505, 934242873, 3357431798, 966319211, 1883108020, 2104955741, 1743884339, 1219265315, 3069175040, 2728654863, 2217899285, 30982923, 2012533260, 2269240421, 2800719540, 1538321549, 1558772497, 3881143607, 2428229384, 4293613556, 1512010196, 126499268, 2400570990, 2353238269, 2630502370, 1810220969, 3575798505, 179400919, 989577173, 3046288068, 630972947, 1096268426, 780057301, 2466314133, 1423438129, 3098797918, 577393893, 4098716046, 396296825, 768416748, 3402228738, 2453761140, 2478158880, 258446623, 4219718150, 915185322, 2437901914, 2572350605, 2319446755, 3671531137, 3542137924, 4003861230, 466406033, 1411146778, 1196639762, 2996018002, 3122404139, 1443597836, 3751043213, 2441559015, 2666500067, 3171282221, 1586622742, 9081534, 3650322521, 2830708047, 1130166350, 369082595, 1168483737, 1526382055, 1307266761, 3426201681, 262300222, 4095573515, 2825400212, 274681426, 207705146, 2131256754, 1449554861, 4272415860, 1433241365, 3583613677, 1796769221, 2775061909, 1961987711, 665766517, 3407441497, 3101328982, 687836955, 3769137139, 640052789, 2437756701, 2792972518, 2920504171, 1211229974, 583829096, 1450853422, 1072316386, 3668780454, 2178342583, 3538147826, 678403060, 3737272758, 505009560, 3512898365, 3658037501, 1752542237, 118605701, 4110097493, 562131479, 1044314664, 2283157392, 2216584635, 1272568680, 3437154932, 3659654735, 1588003382, 427107762, 2609494545, 3565092141, 1541219994, 1992658307, 172537324, 3434638105, 618182470, 436619391, 3871255575, 621364034, 433899743, 3578131279, 1390428499, 2595599715, 3184447023, 2544754700, 4177443911, 1477330080, 960032367, 3983162043, 1728914420, 1031641478, 696702899, 3889292090, 319400238, 1570931290, 3201802800, 1841548271, 370280336, 1013822942, 2769285253, 219434695, 966721000, 1064912006, 925457261, 126087015, 2926466804, 959361097, 2698805329, 2238432975, 871778860, 2724823039, 710967367, 2035422268, 925979945, 1618768624, 1486293626, 291142486, 3141126531, 1545738449, 2361413957, 963264723, 1189675771, 4223920803, 3726902717, 2720538310, 904034209, 3291028129, 1620962016, 1563887978, 1152339911, 2918223748, 2097952592, 3648577560, 2800987242, 4055698567, 1045763466, 336007176, 2465389372, 4008608024, 13571272, 3373216560, 1046503464, 461653910, 2550215674, 1936747266, 2693458710, 6901476, 2987771922, 2440177483, 1230223470, 3659784281, 4012154329, 1563746098, 3404025092, 3658204780, 554222828, 689536143, 3142400984, 1955253496, 2645365695, 1840294226, 4175975190, 1019584003, 3259713230, 179599616, 1467582420, 3629976710, 2498219877, 2035195982, 2296293860, 1242375652, 816285990, 2068941397, 792428180, 1152367891, 1559612527, 905439915, 3829206621, 1689936699, 3213848442, 2039440276, 205197113, 1750767618, 4215163167, 3353015107, 1697020602, 2161354410, 2430107198, 2097577521, 3926897546, 2299539061, 3984234269, 2302844241, 375724858, 3298783414, 1048403601, 2676697496, 2852583416, 4204090995, 4288190355, 1971785419, 1896121606, 1901543228, 2351816261, 2233859104, 1021981675, 4091928641, 4265046165, 3486983219, 3356807394, 1106630677, 3288237103, 2391764155, 4106433752, 1644590404, 3669066583, 1477792925, 2800553314, 3247697874, 826636175, 1374714475, 2562707183, 1401373819, 792229346, 2346717853, 3225850084, 758765676, 479703596, 3797380721, 1391458234, 1325761193, 1242134850, 2892531953, 2218379153, 3677659244, 4115025034, 3945932747, 2142100952, 1792068945, 3638375132, 184848699, 3355535359, 3186060915, 2356513696, 4056343625, 961413381, 3299527196, 2353220987, 361826564, 3804089799, 941442389, 41051696, 581813472, 1002334951, 4220932816, 3898087976, 1372486153, 237217043, 1101832447, 653851415, 1893514043, 932761413, 3086165631, 1248912798, 2678520734, 1884240255, 1562639642, 762557894, 468455511, 283092245, 3518955459, 661659000, 3423189918, 1660594544, 2313326385, 1072018996, 2567944442, 238705937, 2792555401, 3168982427, 537674224, 717141073, 3887517095, 1682276651, 4167200313, 1803479457, 2812628742, 2486196418, 2509078730, 2723310338, 3374509764, 2573835276, 3660485068, 1577672732, 3552196826, 2771418263, 217779087, 1136973860, 486948636, 1673019520, 3975125972, 3387891263, 3004384946, 432983174, 728058534, 1862802281, 2017072828, 1206515842, 1518592397, 1924640483, 4257063504, 1207736782, 275805886, 141722312, 707528156, 305421311, 2545872460, 2039317014, 802394060, 2151374766, 1637041357, 729150310, 2979689067, 4158767680, 2401047987, 2244530867, 1634385537, 615951374, 991882771, 783009259, 1681406872, 3268507237, 2276004675, 845158912, 968973244, 961933542, 3773293552, 1100979823, 3378893588, 2286766795, 823035672, 2570354005, 52680057, 119417538, 232098647, 1960478975, 1725214200, 2279697618, 4138759131, 735913349, 267989562, 1846282914, 13935263, 1117289205, 1387356929, 138400249, 3127122447, 516382035, 11), None)"
+    },
+    "noise": {
+      "name": "iso6400-prior",
+      "shot": 0.00128,
+      "read": 6.5536e-06,
+      "exposure": 1.0,
+      "contrast_multiplier": 1
+    },
+    "pattern": "GRBG",
+    "scene_level_before_camera": 0.02,
+    "input_fingerprints": {
+      "packed": {
+        "shape": [
+          1,
+          4,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "3d8fba334c6cf30ce5fee8cf954498b897e1bd38b3274e4bbc82091dbc905893"
+      },
+      "variance": {
+        "shape": [
+          1,
+          4,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "6f92f9ab20232035056d93f48c52c865ecd8e1157895346db7196186e2989ba5"
+      },
+      "colors": {
+        "shape": [
+          1,
+          4
+        ],
+        "dtype": "<i8",
+        "sha256": "61cf0779682923ad84576de9bd059eff1ff0ae3a5f60b3d8d65e9bb777c5c938"
+      },
+      "wb": {
+        "shape": [
+          1,
+          3
+        ],
+        "dtype": "<f4",
+        "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+      },
+      "matrix": {
+        "shape": [
+          1,
+          3,
+          3
+        ],
+        "dtype": "<f4",
+        "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+      }
+    },
+    "output_shape": [
+      1,
+      3,
+      512,
+      512
+    ],
+    "ROI_xywh": [
+      176,
+      176,
+      160,
+      160
+    ],
+    "display_exposure": 8,
+    "reference_role": "Exact procedural mesh or empty GT; hypothetical present template used only for diagnostic metrics"
+  },
+  "source_modules": {
+    "phase_tv.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_tv.py",
+      "sha256": "02875125bf7d5969e2b5339cb46c65165f6015771a8014e162466e9c00fac44b"
+    },
+    "phase_context.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_context.py",
+      "sha256": "4ccdd6adcf77b19384feb54a5926239b817069c4b125ea4246e6ec66d1373cf2"
+    },
+    "phase_cross.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_cross.py",
+      "sha256": "c3eae14d6a34426baa0cabd2b2bf637d117b70f560dac621f06e4b0ca9752e35"
+    },
+    "phase_harmonic.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_harmonic.py",
+      "sha256": "cad86b4992d58454dcc3df57f6242cb29f3ffa14bf4479f341183175c54639b7"
+    },
+    "cli.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/cli.py",
+      "sha256": "f37cf6d22572dceca6dbd2abcb6ae6a4143cf2736ea6a11cfd7d75f83ce17379"
+    }
+  },
+  "new_model_calls": 0,
+  "RAW_opens": 0,
+  "scope": "One development worst complete512case; publicwide exactoldv7 andpubliccross exactprivateprototype4crossstrongbinary. Broadportandfreshqualitypending."
+}

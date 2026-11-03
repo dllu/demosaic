@@ -71,7 +71,15 @@ def context_frequencies(packed, variance, colors, *, return_noise_floor=False):
 
 
 def correct_context_patch(
-    packed, variance, colors, base, peaks, *, device="cpu", variance_floor=0.0
+    packed,
+    variance,
+    colors,
+    base,
+    peaks,
+    *,
+    device="cpu",
+    variance_floor=0.0,
+    cross_phase_support=False,
 ):
     """Use effective local variances and add separated measured frequencies."""
     packed, variance, base = [np.asarray(v, np.float64) for v in (packed, variance, base)]
@@ -83,7 +91,11 @@ def correct_context_patch(
     original = fit_refined(packed, variance, colors, base)
     if clipped or not peaks:
         value, info = _correct_fitted_patch(
-            original, device=device, refine_frequency=True, sparse_support=True
+            original,
+            device=device,
+            refine_frequency=True,
+            sparse_support=True,
+            cross_phase_support=cross_phase_support,
         )
         info["context_clipped_local_fallback"] = clipped
         info["context_variance_floor"] = 0.0 if clipped else float(variance_floor)
@@ -95,7 +107,11 @@ def correct_context_patch(
             selected.append(p)
     if len(selected) == count:
         return _correct_fitted_patch(
-            original, device=device, refine_frequency=True, sparse_support=True
+            original,
+            device=device,
+            refine_frequency=True,
+            sparse_support=True,
+            cross_phase_support=cross_phase_support,
         )
     fitted = _fit_selected_harmonics(packed, variance, colors, base, selected)
     limits, searches, refined = [], [], []
@@ -119,7 +135,11 @@ def correct_context_patch(
     fitted = _fit_selected_harmonics(packed, variance, colors, base, refined)
     fitted["gate_limits"], fitted["searches"] = limits, searches
     value, info = _correct_fitted_patch(
-        fitted, device=device, refine_frequency=True, sparse_support=True
+        fitted,
+        device=device,
+        refine_frequency=True,
+        sparse_support=True,
+        cross_phase_support=cross_phase_support,
     )
     info["context_added_frequencies"] = len(selected) - count
     info["original_frequency_searches"] = original.get("searches", [])
@@ -143,7 +163,9 @@ def _solver_stats(device):
     }
 
 
-def refine_context_harmonics(raw, colors, base, *, shot, read, stride=128, tv_device="cpu"):
+def refine_context_harmonics(
+    raw, colors, base, *, shot, read, stride=128, tv_device="cpu", cross_phase_support=False
+):
     """Use cached actual 512-pixel contexts and the original 256-pixel fit/blend.
 
     Inputs shorter than 512 in either dimension retain the exact sparse stage.
@@ -153,6 +175,8 @@ def refine_context_harmonics(raw, colors, base, *, shot, read, stride=128, tv_de
     from .phase_harmonic import refine_phase_harmonics
 
     started = time.perf_counter()
+    envelope = "cross" if cross_phase_support else "wide"
+    method = "local-phase-harmonic-v8" if cross_phase_support else "local-phase-harmonic-v7"
     raw, base, colors = np.asarray(raw), np.asarray(base), np.asarray(colors)
     if raw.ndim != 2 or min(raw.shape) < 2 or base.shape != (3, *raw.shape):
         raise ValueError("Require a >=2x2 Bayer image and matching 3xHxW RGB")
@@ -204,18 +228,20 @@ def refine_context_harmonics(raw, colors, base, *, shot, read, stride=128, tv_de
             tv_device=tv_device,
         )
         info.update(
-            method="local-phase-harmonic-v7",
-            envelope="wide",
+            method=method,
+            envelope=envelope,
             context=context,
             context_small_image_fallback=True,
             effective_envelope="sparse",
             seconds=time.perf_counter() - started,
         )
+        if cross_phase_support:
+            info["cross_phase_support"] = {"enabled": False, "small_image_fallback": True}
         return value, info
     result = np.array(base, dtype=np.float32, copy=True)
     info = {
-        "method": "local-phase-harmonic-v7",
-        "envelope": "wide",
+        "method": method,
+        "envelope": envelope,
         "enabled": True,
         "refine_frequency": True,
         "stride_native": int(stride),
@@ -254,6 +280,22 @@ def refine_context_harmonics(raw, colors, base, *, shot, read, stride=128, tv_de
             "confidence_calibrated": False,
         },
     }
+    if cross_phase_support:
+        info["cross_phase_support"] = {
+            "enabled": True,
+            "mask_grid": [32, 32],
+            "mask_node_spacing_native": 8,
+            "raw_phasor_sigma_native": 32,
+            "TV_weight_coarse": 0.5,
+            "area_weight_native": 1 / 1610,
+            "support_threshold": 0.5,
+            "solves": 0,
+            "capped": 0,
+            "iterations": 0,
+            "maximum_relative_gap": 0.0,
+            "maximum_absolute_gap": 0.0,
+            "confidence_calibrated": False,
+        }
     if shot == read == 0:
         info.update(ADC_only_bypass=True, seconds=time.perf_counter() - started)
         return result, info
@@ -308,6 +350,7 @@ def refine_context_harmonics(raw, colors, base, *, shot, read, stride=128, tv_de
                 cache[cy, cx][0],
                 device=tv_device,
                 variance_floor=cache[cy, cx][1],
+                cross_phase_support=cross_phase_support,
             )
             delta = value - parent
             h, w = min(256, height - y), min(256, width - x)
@@ -318,6 +361,15 @@ def refine_context_harmonics(raw, colors, base, *, shot, read, stride=128, tv_de
             info["selected_frequencies"] += len(diagnostic.get("peaks", []))
             info["active_patches"] += bool(np.any(delta))
             info["context_added_frequencies"] += diagnostic.get("context_added_frequencies", 0)
+            cross = diagnostic.get("cross_phase_support", {})
+            if cross.get("applied"):
+                solver = cross["solver"]
+                stats = info["cross_phase_support"]
+                stats["solves"] += 1
+                stats["capped"] += not solver["converged"]
+                stats["iterations"] += solver["iterations"]
+                for key in ("relative_gap", "absolute_gap"):
+                    stats["maximum_" + key] = max(stats["maximum_" + key], solver[key])
             searches = diagnostic.get("frequency_searches", []) + diagnostic.get(
                 "original_frequency_searches", []
             )

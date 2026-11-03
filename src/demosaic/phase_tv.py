@@ -128,7 +128,9 @@ def correct_edge_phase_patch(
     )
 
 
-def _correct_fitted_patch(fitted, *, device="cpu", refine_frequency=False, sparse_support=False):
+def _correct_fitted_patch(
+    fitted, *, device="cpu", refine_frequency=False, sparse_support=False, cross_phase_support=False
+):
     """Synthesize a validated joint fit with the original local TV policy."""
     base = fitted["base"]
     peaks = fitted["peaks"]
@@ -144,6 +146,7 @@ def _correct_fitted_patch(fitted, *, device="cpu", refine_frequency=False, spars
     fields = {"edge": np.zeros_like(base)}
     yy, xx = np.mgrid[:256, :256]
     detail = []
+    waves, wave_frequencies = [], []
     for k, (fx, fy, score) in enumerate(peaks):
         ids = [12 + 6 * k + 2, 12 + 6 * k + 3]
         g = beta[ids]
@@ -186,12 +189,19 @@ def _correct_fitted_patch(fitted, *, device="cpu", refine_frequency=False, spars
             r = native_envelope(re * scale)
             i = native_envelope(im * scale)
             angle = 2 * np.pi * (fx * xx + fy * yy)
+            wave = np.zeros_like(base) if cross_phase_support else None
             for c in range(3):
                 j = 12 + 6 * k + 2 * c
-                fields[key][c] += gate * (
+                component = gate * (
                     (beta[j] * r + beta[j + 1] * i) * np.cos(angle)
                     + (beta[j + 1] * r - beta[j] * i) * np.sin(angle)
                 )
+                fields[key][c] += component
+                if wave is not None:
+                    wave[c] = component
+            if wave is not None:
+                waves.append(wave)
+                wave_frequencies.append((fx, fy))
             item["solver"][key] = {
                 "mean_weight": float(np.mean(noise * multiplier)),
                 "mean_active": float(np.mean(scale > 0)),
@@ -223,4 +233,18 @@ def _correct_fitted_patch(fitted, *, device="cpu", refine_frequency=False, spars
             "connectivity": 4,
             "masked_refit_TV_noise_multiplier": 4,
         }
+    if cross_phase_support:
+        if waves and use_sparse:
+            from .phase_cross import cross_phase_masks
+
+            masks, cross_info = cross_phase_masks(fitted, wave_frequencies, device=device)
+            fields["edge"].fill(0)
+            for wave, mask in zip(waves, masks):
+                fields["edge"] += wave * mask[None]
+            diagnostic["cross_phase_support"] = {"applied": True, **cross_info}
+        else:
+            diagnostic["cross_phase_support"] = {
+                "applied": False,
+                "clipped_window_fallback": not use_sparse,
+            }
     return base + fields["edge"] * taper[None], diagnostic

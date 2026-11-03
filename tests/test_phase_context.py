@@ -50,21 +50,28 @@ def test_pure_fundamental_does_not_propose_absent_high_harmonics():
 
 
 @pytest.mark.parametrize("colors", PATTERNS)
-def test_small_image_and_clipped_window_retain_exact_sparse_or_grid_result(colors):
+@pytest.mark.parametrize("mode", ["wide", "cross"])
+def test_small_image_and_clipped_window_retain_exact_sparse_or_grid_result(colors, mode):
     base, _, packed = _wave(256, (-0.0713, 0.0532), colors)
     raw = np.empty((256, 256))
     for p in range(4):
         raw[p // 2 :: 2, p % 2 :: 2] = packed[p]
     expected, _ = refine_phase_harmonics(raw, colors, base, shot=0, read=1e-7, envelope="sparse")
-    value, info = refine_phase_harmonics(raw, colors, base, shot=0, read=1e-7, envelope="wide")
+    value, info = refine_phase_harmonics(raw, colors, base, shot=0, read=1e-7, envelope=mode)
     np.testing.assert_array_equal(value, expected)
-    assert info["envelope"] == "wide" and info["effective_envelope"] == "sparse"
+    assert info["envelope"] == mode and info["effective_envelope"] == "sparse"
     assert info["context_small_image_fallback"] and info["context"]["windows"] == 0
     packed[0, 40, 50] = 1
     variance = np.full_like(packed, 1e-7)
     expected, _ = correct_edge_phase_patch(packed, variance, colors, base)
     actual, info = correct_context_patch(
-        packed, variance, colors, base, [(0.2343, 0.1482, 10)], variance_floor=1e-3
+        packed,
+        variance,
+        colors,
+        base,
+        [(0.2343, 0.1482, 10)],
+        variance_floor=1e-3,
+        cross_phase_support=mode == "cross",
     )
     np.testing.assert_array_equal(actual, expected)
     assert info["context_clipped_local_fallback"]

@@ -363,13 +363,20 @@ def refine_phase_harmonics(
         raise ValueError("Require finite nonnegative shot/read variance coefficients")
     if not isinstance(stride, (int, np.integer)) or stride % 2 or not 2 <= stride <= 192:
         raise ValueError("Stride must be even and between 2 and 192 native pixels")
-    if envelope not in ("scalar", "complex", "edge", "sparse", "wide"):
-        raise ValueError("Envelope must be scalar, complex, edge, sparse or wide")
-    if envelope == "wide":
+    if envelope not in ("scalar", "complex", "edge", "sparse", "wide", "cross"):
+        raise ValueError("Envelope must be scalar, complex, edge, sparse, wide or cross")
+    if envelope in ("wide", "cross"):
         from .phase_context import refine_context_harmonics
 
         return refine_context_harmonics(
-            raw, colors, base, shot=shot, read=read, stride=stride, tv_device=tv_device
+            raw,
+            colors,
+            base,
+            shot=shot,
+            read=read,
+            stride=stride,
+            tv_device=tv_device,
+            cross_phase_support=envelope == "cross",
         )
     refine_frequency = refine_frequency or envelope == "sparse"
     if refine_frequency and envelope not in ("edge", "sparse"):

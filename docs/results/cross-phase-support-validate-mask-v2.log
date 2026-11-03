@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/home/dllu/proj/demosaic/.cache/quality-20261102/compact-raw-support-v1/validate-mask-v2.py", line 16, in <module>
+    opt=primal(u);cpu_solver=m.solver(t.shape,coarse,'cpu');ts=torch.from_numpy(t);qs=torch.from_numpy(q.reshape(fine,fine));np.testing.assert_allclose(cpu_solver.transpose(qs).numpy().ravel(),A.T@q,rtol=0,atol=2e-15);np.testing.assert_allclose(cpu_solver.expand(torch.from_numpy(u)).numpy().reshape(waves,-1),u.reshape(waves,-1)@P.T,rtol=0,atol=4e-16)
+                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.venv/lib/python3.12/site-packages/numpy/testing/_private/utils.py", line 1780, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+  File "/home/dllu/proj/demosaic/.venv/lib/python3.12/site-packages/numpy/testing/_private/utils.py", line 988, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=0, atol=2e-15
+
+Mismatched elements: 9 / 9 (100%)
+First 5 mismatches are at indices:
+ [0]: 0.0 (ACTUAL), 0.039572953769827744 (DESIRED)
+ [1]: 0.0 (ACTUAL), 0.2002241761717212 (DESIRED)
+ [2]: 0.0 (ACTUAL), -0.22288657146746735 (DESIRED)
+ [3]: 0.0 (ACTUAL), -0.2554618360371681 (DESIRED)
+ [4]: 0.0 (ACTUAL), -0.33780762337055253 (DESIRED)
+Max absolute difference among violations: 0.34628805
+Max relative difference among violations: 1.
+ ACTUAL: array([0., 0., 0., 0., 0., 0., 0., 0., 0.])
+ DESIRED: array([ 0.039573,  0.200224, -0.222887, -0.255462, -0.337808,  0.346288,
+        0.229784,  0.032842, -0.288556])

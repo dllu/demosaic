@@ -124,6 +124,7 @@ def test_cli_selects_envelope_before_RGB16_export(tmp_path, monkeypatch):
         ("refined", "edge", True),
         ("sparse", "sparse", False),
         ("wide", "wide", False),
+        ("cross", "cross", False),
     ]:
         output = tmp_path / f"{name}.tiff"
         main(
@@ -155,19 +156,19 @@ def test_cli_selects_envelope_before_RGB16_export(tmp_path, monkeypatch):
         assert metadata["phase_harmonic"]["envelope"] == mode
         assert metadata["phase_harmonic"]["new_model_calls"] == 0
         assert metadata["phase_harmonic"]["refine_frequency"] == (
-            refined or mode in ("sparse", "wide")
+            refined or mode in ("sparse", "wide", "cross")
         )
-        if refined or mode in ("sparse", "wide"):
+        if refined or mode in ("sparse", "wide", "cross"):
             assert metadata["phase_harmonic"]["frequency_search"]["solves"] > 0
-        if mode in ("edge", "sparse", "wide"):
+        if mode in ("edge", "sparse", "wide", "cross"):
             assert metadata["phase_harmonic"]["TV"]["device"] == "cpu"
             assert metadata["phase_harmonic"]["TV"]["solves"] > 0
-        if mode in ("sparse", "wide"):
+        if mode in ("sparse", "wide", "cross"):
             assert metadata["phase_harmonic"]["support_TV"]["solves"] > 0
             assert (
                 metadata["phase_harmonic"]["sparse_support"]["minimum_connected_packed_area"] == 805
             )
-        if mode == "wide":
+        if mode in ("wide", "cross"):
             assert metadata["phase_harmonic"]["context_small_image_fallback"]
     assert errors["complex"] < 0.4 * errors["scalar"]
     assert errors["edge"] < np.mean((base[:, 48:208, 48:208] - target[:, 48:208, 48:208]) ** 2)

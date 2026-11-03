@@ -1,5 +1,15 @@
 # GFX100S qualitative comparisons
 
+## Reciprocal green support
+
+The [reciprocal green-support option](cross-phase-support.md) cuts fresh mean
+added blank RMS 89% and its worst case 92% versus wide context, with 9.5% lower
+response and 0.8% higher image RMS. Both full-frame mesh priors retain much of the
+lattice. The known detached false patch is removed; weak/partial detail and
+boundary spill remain. All 256 fresh absent neural cases retain parent values.
+The explicit `cross` mode has 37 viewed native comparisons and complete RGB16
+audits; it is a stricter support option, not a broad model-quality claim.
+
 ## Larger measured RAW contexts
 
 The [guarded wider-context comparison](wide-phase-context.md) includes complete

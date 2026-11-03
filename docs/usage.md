@@ -47,7 +47,13 @@ neural cases and 5,120 ideal-flat matched/mismatched executions stay unchanged.
 The floor can suppress useful texture; it is not calibrated uncertainty. Actual
 512-pixel contexts feed the same 256-pixel local fit; smaller images retain sparse
 behavior. Observed-clipped windows retain the earlier grid-TV correction.
-These phase options are exposed by `infer`, not the DNG batch exporter.
+Select `--phase-harmonic-envelope cross` for [reciprocal green support](cross-phase-support.md)
+on the wider-context waves. It removes unsupported regions with a binary mask;
+measured fresh blank spill drops 89% on average and 92% in the worst case, with
+9.5% lower template response and 0.8% higher image RMS than `wide`. It can remove
+true weak detail and most actual mask solves hit the 8192-step cap; metadata
+records gaps/caps. Clipped windows and small-image fallbacks retain their earlier
+behavior. These phase options are exposed by `infer`, not the DNG batch exporter.
 
 Add `--self-ensemble dihedral8` to `infer` for optional eight-view quality
 inference. It preserves Bayer geometry and averages camera-RGB predictions
