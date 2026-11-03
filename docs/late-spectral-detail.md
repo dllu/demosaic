@@ -87,6 +87,15 @@ hashes; mixed controls require32 new parent/DINO calls. There are32 new noise
 constructions for the mixed controls, completed during preparation. These
 evaluation counts exclude training and unit tests.
 
+The [independent input audit](results/v147-mixed-input-audit-v1.json) reconstructs
+all32 mixed targets with Float64 closed-form scenes and area averaging, without
+Torch or new noise draws. Maximum target discrepancy is0.02589 DN16 from FP32
+trigonometry/pooling. All quiet patches are exactly constant, CFA/WB/matrix
+bindings match, variance maps are bit-exact, and measurements lie on the16-bit
+ADC grid. Maximum noise mean/second-moment deviations are3.10/2.66 standard
+errors. These finite-sample noise checks validate the prepared controls; they
+do not establish camera calibration or trained-model safety.
+
 ## Evidence and execution state
 
 The active cache is `.cache/quality-20261103/V147-late-spectral-v2/`.

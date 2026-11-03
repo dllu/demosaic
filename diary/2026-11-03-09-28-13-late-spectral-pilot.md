@@ -61,3 +61,14 @@ See the [component and fixed-review documentation](../docs/late-spectral-detail.
 All data access uses repository/external caches; no `/mnt/dataz`, original media,
 or RAW decoding. Active jobs retain exact PID/create-time ownership, a 12 GiB CUDA
 cap and host/disk reserves. The overall fine-detail/clean-sky goal remains active.
+
+Continuation: independently reconstructed the32 mixed targets in NumPy Float64
+and checked CFA placement, WB/matrix, exact quiet rectangles, ADC grid, bit-exact
+variance maps and Poisson/Gaussian moments. Maximum target discrepancy is
+0.02588333 DN16; maximum mean/second-moment deviations are3.0951/2.6588 standard
+errors. No noise was redrawn and no network executed. The
+[audit](../docs/results/v147-mixed-input-audit-v1.json) and
+[byte-copy provenance](../docs/results/v147-mixed-input-audit-provenance-v1.json)
+are public. These controls are valid for their declared synthetic purpose;
+they do not prove trained quality. Training passed500 updates with the exact
+PID/create-time owners rechecked live; the full1k review remains queued.
