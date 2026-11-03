@@ -2,7 +2,7 @@
 
 V149 tests explicit CFA phase transport and green common/difference evidence
 against a fresh native-matrix control. **Trained quality remains unmeasured.**
-All three fresh heads train for a fixed 1,000 updates on the existing V148 cache.
+All three fresh heads completed the fixed 1,000 updates on the existing V148 cache.
 Six final raw/EMA endpoints have a fixed review on all 798 retained cases,
 including actual blank errors, the mixed quiet controls and both standing GFX
 scenes/priors/windows/JPEGs. This is an adaptive reused cohort, not fresh
@@ -94,6 +94,13 @@ preparer assumed an optional `output_shape` metadata field; it stopped before
 creating the trial or doing GPU work. The corrected preparer reads cached NPY
 headers for the storage estimate; the failed source/receipt are preserved.
 The model/data/scientific design did not change.
+
+The [completed-state audit](results/v149-coherent-phase-training-state-v1.json)
+checks all36 finite Adam states at step1,000. The native control reproduces
+V148's entire1k loss/gradient/LR trace, raw/EMA weights and Adam state exactly.
+The new context columns have learned nonzero weights. All six fixed quality
+endpoints are now being collected; their metrics and native review remain
+pending. The preparation snapshot retains its original active step380 state.
 
 The broader fine-detail/clean-sky goal remains active. Current
 [model recommendations](current-model.md) retain their existing quality evidence.

@@ -62,3 +62,13 @@ pass engineering checks. The broad objective remains active and unmet.
 
 [Component/protocol](../docs/coherent-phase-estimator.md) ·
 [Preparation evidence](../docs/results/v149-coherent-phase-preparation-v1.json).
+
+All three heads subsequently completed1,000 updates. The independent CPU state
+audit verifies all36 Adam states finite at1k and nonzero learned context columns.
+Native control's complete loss/gradient/LR trace, raw/EMA and Adam states match
+V148 exactly. This is an engineering/control result, not a quality improvement.
+All6 fixed quality endpoints are now being collected. The original step380
+preparation snapshot is retained unchanged. Prepared the complete pixel-replay
+auditor and publication driver; actual native viewing remains required.
+
+[Completed state audit](../docs/results/v149-coherent-phase-training-state-v1.json).
