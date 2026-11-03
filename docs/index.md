@@ -1,10 +1,12 @@
 # Documentation guide
 
-The [V149 coherent CFA trial](coherent-phase-estimator.md) has passed53 component
-tests,28 exact legacy/control replays and three CUDA8+2 checks. Three fresh heads
-share the existing4000-observation cache, with all6 final endpoints/798 cases and
-66 native figures fixed. All3 heads completed1k updates; native control trace,
-raw/EMA/Adam states reproduce V148 exactly. Trained quality remains pending.
+The [completed V149 coherent CFA trial](coherent-phase-estimator.md) finds no
+useful new weak texture from known phase alignment or nine green-coherence
+features. Mesh response improves 2–3% over the native control but remains 6–7%
+below V143. Strong-edge whole-image RMS improves .45–.74%, with worse quiet
+regions and native512 noisy flats. All six final endpoints, 66 native figures
+and independent audits are complete; all 1,596 native control predictions
+exactly reproduce V148.
 
 The [V148 target-informed capacity diagnostic](spectral-capacity-oracle.md)
 finds much stronger per-bin matrix corrections within the same norm budget,

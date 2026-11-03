@@ -72,3 +72,42 @@ preparation snapshot is retained unchanged. Prepared the complete pixel-replay
 auditor and publication driver; actual native viewing remains required.
 
 [Completed state audit](../docs/results/v149-coherent-phase-training-state-v1.json).
+
+All six final endpoints subsequently completed the full798-case review:4,788
+component calls, zero new parent/DINO/noise evaluations. The independent full
+training audit passes all1,000 batch/domain/trace bindings,36 finite Adam states,
+exact native raw/EMA/optimizer and all1,596 native-control predictions versus
+V148. All1,944 new context-input weights become nonzero. Independent metrics pass
+52,902 scalar checks and579 Decimal reductions, maximum5.12e-13. Rendering checks
+35,558,400 RGB channels. Actually viewed all66 figures at original detail in17
+unscaled sheets, with notes recorded after each viewed group. All nine primary
+owners are absent after completion; no experiment jobs remain live.
+
+Alignment raises mesh response2.05–2.68% versus native control, yet all four new
+raw/EMA endpoints remain6.03–6.88% below V143. Added context does not improve
+alignment's response and worsens actual blank error. Present full-image and
+blank/spatial errors remain above V143. Native512 noisy-flat RMS rises
+.153–.301%. Small native256 ISO12800 gains and tiny dark-photo full-image gains
+are real but do not transfer to512 or reverse photographic band regressions.
+Strong-edge whole-scene RMS improves .449–.735% versus V143, while exact quiet
+RMS/spatial errors worsen. Alignment slightly improves quiet errors versus the
+native control; context largely gives that back. All48 ADC-only cases stay exact
+parent under all6 endpoints, without proving noisy-flat safety.
+
+The real cab mesh remains weak under both priors/windows/JPEG comparisons; no
+convincing new fine crossings, feathers, moth, grass or bark detail appears.
+Quiet colored mottle persists with subtle added fine grain at contrast40; main
+sky stays near parent. The standing ISO100/AHD/JPEG references remain qualitative,
+not exactGT, and are never scored. All existing originals/caches/receipts and
+the initial active preparation snapshot are preserved byte-exact.
+
+Published16 receipt copies and66 native PNGs, including24 repeated-cell triplets.
+The current report, README and research/model guide now state both modest
+relative gains and remaining weaknesses directly. No inference integration.
+Coordinate alignment and these nine coherence summaries alone do not solve the
+estimator. Next examine how supervision allocates gradient to rare weak detail
+while retaining actual blank/quiet errors; no causal loss diagnosis is claimed
+yet. The broader fine-detail/clean-sky objective remains active and unmet.
+
+[Completed report](../docs/coherent-phase-estimator.md) ·
+[Final evidence](../docs/results/v149-coherent-phase-final-v1.json).
