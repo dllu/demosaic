@@ -194,8 +194,9 @@ matrix EMA:
 All four export hashes and parent bindings are in the manifest.
 
 This finite1k result argues against opening support or merely widening this
-matrix head. A target-using constrained spectral diagnostic could next separate
-operator/support limitations from estimation/training limitations; that would
-be an explicitly labeled oracle diagnostic, not an inference result. The broader
+matrix head. The subsequent [target-informed capacity diagnostic](spectral-capacity-oracle.md)
+finds substantial per-bin amplitude headroom, but also an exact-quiet false-lattice
+counterexample under full support. It uses GT and relaxes the shared network;
+it does not establish an inference improvement. The broader
 fine-detail/clean-sky goal remains unmet. See the
 [final diary](../diary/2026-11-03-12-44-17-v148-final-phase-mixing.md).

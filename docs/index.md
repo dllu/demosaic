@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [V148 target-informed capacity diagnostic](spectral-capacity-oracle.md)
+finds much stronger per-bin matrix corrections within the same norm budget,
+while its frozen gate suppresses them. Full support also creates a false lattice
+inside an exact quiet region beside stripes. All792 constructed-target cases,
+independent audits and48 native figures are complete. These GT-using outputs
+are diagnostic; they are not an improved inference model.
+
 The [completed V148 phase-mixing comparison](phase-matrix-detail.md) finds no
 useful weak-detail gain from a learned complex4×4 operator. Matrix mesh response
 falls8–9% and native512 noisy-flat error rises .13–.24% against V143. Small

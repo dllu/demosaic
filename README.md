@@ -40,6 +40,9 @@ diagnostic: opening the gate exposes false fine texture rather than useful detai
 The completed [phase-mixing comparison](docs/phase-matrix-detail.md) also finds no
 useful new weak detail: matrix mesh response falls 8–9%, and small strong-edge
 image gains come with worse quiet patches. All 58 native comparisons are audited.
+The [target-informed capacity diagnostic](docs/spectral-capacity-oracle.md) finds
+substantial spectral headroom and a false-lattice quiet-region counterexample;
+its GT-using outputs are diagnostic, unavailable at inference.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
