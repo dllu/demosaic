@@ -1,6 +1,16 @@
 # Current method research
 
-The [reciprocal green-support option](cross-phase-support.md) cuts fresh mean
+The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
+original positive global gate as selection and restores contrast only inside
+unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS
+falls 1.0% versus cross; mean/worst added blank RMS rise 42.1%/28.4%. All 256 absent
+cases and 64 new photographic controls retain their parents. Full GFX mesh
+contrast improves under both priors; nonperiodic texture, support seams, boundary
+spill and highlight color remain unresolved. The explicit `detail` mode has
+53 inspected native comparisons and complete RGB16 checks. V120 remains the general model recommendation. Detail is now the default
+inside the explicitly enabled periodic stage.
+
+The earlier [reciprocal green-support review](cross-phase-support.md) cuts fresh mean
 added blank RMS 89% and its worst case 92% versus wide context, with 9.5% lower
 response and 0.8% higher image RMS. Both full-frame mesh priors retain much of the
 lattice. The known detached false patch is removed; weak/partial detail and
@@ -45,8 +55,8 @@ coefficients while allowing sharper support changes. Both real mesh families are
 clearer without lowering the frequency threshold. Fresh dark recipes show 48.8%
 less mean added blank structure than the Gaussian complex fit, with slightly
 higher texture error and some blank regressions. The wider sky stays unchanged;
-highlight color, bounded-solver accuracy and speed remain open. `edge` is now the
-optional-stage default; earlier `complex` and `scalar` modes remain available.
+highlight color, bounded-solver accuracy and speed remain open. `edge` is retained explicitly; `detail` is the
+current optional-stage default; earlier `complex` and `scalar` modes remain available.
 
 The [local phase-aware correction](local-phase-harmonic-patch.md) makes fine
 mesh more visible on V143 while reducing the original harmonic correction's
@@ -190,3 +200,7 @@ The previous chronological design/access/release catalogue is preserved exactly
 in the [timestamped diary](../diary/2026-10-27-00-42-21-dino-feature-supervision.md#exact-previous-research-page),
 with its file hash and an independent byte copy. Frozen plans and original
 machine receipts retain their bytes and explicitly labeled UTC times.
+
+Earlier training and feature comparisons include [conditional-mean loss](conditional-mean-training.md),
+[spatial attention](raw-spatial-training.md), [global RAW attention](v136-global-attention-quality.md)
+and [neighboring-gradient memory](raw-patch-memory.md). Their original evidence remains available.

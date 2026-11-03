@@ -1,6 +1,16 @@
 # Documentation guide
 
-The [reciprocal green-support option](cross-phase-support.md) cuts fresh mean
+The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
+original positive global gate as selection and restores contrast only inside
+unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS
+falls 1.0% versus cross; mean/worst added blank RMS rise 42.1%/28.4%. All 256 absent
+cases and 64 new photographic controls retain their parents. Full GFX mesh
+contrast improves under both priors; nonperiodic texture, support seams, boundary
+spill and highlight color remain unresolved. The explicit `detail` mode has
+53 inspected native comparisons and complete RGB16 checks. V120 remains the general model recommendation. Detail is now the default
+inside the explicitly enabled periodic stage.
+
+The earlier [reciprocal green-support review](cross-phase-support.md) cuts fresh mean
 added blank RMS 89% and its worst case 92% versus wide context, with 9.5% lower
 response and 0.8% higher image RMS. Both full-frame mesh priors retain much of the
 lattice. The known detached false patch is removed; weak/partial detail and
@@ -32,7 +42,7 @@ the real lattice on complete V143 frames. Final fresh validation gives 12.8% mor
 response and 34.0% less mean added blank RMS versus refined TV, with 39.2% higher
 worst-case blank RMS. The known isolated stripe island is removed; connected
 boundary leakage remains. Wider sky and all 256 final absent inputs stay unchanged.
-This remains opt-in, with grid-TV the default inside the optional stage.
+This remains opt-in; Detail is the current default inside the enabled stage.
 
 The later [direct RAW refit study](raw-phase-refit.md) finds a small spill/detail
 tradeoff on another 64 fresh recipes: 7.7% less mean blank spill, 0.5% lower

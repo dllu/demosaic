@@ -1,6 +1,16 @@
 # Current model choices
 
-The [reciprocal green-support option](cross-phase-support.md) cuts fresh mean
+The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
+original positive global gate as selection and restores contrast only inside
+unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS
+falls 1.0% versus cross; mean/worst added blank RMS rise 42.1%/28.4%. All 256 absent
+cases and 64 new photographic controls retain their parents. Full GFX mesh
+contrast improves under both priors; nonperiodic texture, support seams, boundary
+spill and highlight color remain unresolved. The explicit `detail` mode has
+53 inspected native comparisons and complete RGB16 checks. V120 remains the general model recommendation. Detail is now the default
+inside the explicitly enabled periodic stage.
+
+The earlier [reciprocal green-support review](cross-phase-support.md) cuts fresh mean
 added blank RMS 89% and its worst case 92% versus wide context, with 9.5% lower
 response and 0.8% higher image RMS. Both full-frame mesh priors retain much of the
 lattice. The known detached false patch is removed; weak/partial detail and
@@ -21,7 +31,7 @@ The [connected support/refit option](sparse-phase-support.md) gives stronger mes
 contrast on V143 and 12.8% higher fresh response with 34.0% lower mean blank spill
 than refined TV. Worst-case blank RMS rises 39.2%; a known isolated stripe failure
 is removed, while boundary leakage remains. Use the explicit `sparse` envelope;
-grid-TV remains the optional-stage default. The wider sky, final absent inputs
+Grid-TV is retained explicitly; Detail is the current optional-stage default. The wider sky, final absent inputs
 and fixed photo/uniform checks retain parent values. Learned weights are unchanged.
 
 The additional [continuous frequency option](offgrid-phase.md) gives modest,
@@ -32,8 +42,8 @@ noise draws select no waves. Add `--phase-harmonic-refine-frequency` to the opti
 TV stage; fixed-bin TV remains the default without that extra flag. Highlight
 changes, partial spill, window sensitivity and runtime remain limitations.
 
-The [TV phase fit](edge-phase-envelope.md) is now the default envelope within
-optional `--phase-harmonic`: clearer crossing mesh on complete V143 frames and
+The earlier [TV phase fit](edge-phase-envelope.md), available as explicit
+`edge`, gives clearer crossing mesh on complete V143 frames and
 unchanged wider sky. Fresh 64-recipe validation finds 48.8% less mean added blank
 structure versus the Gaussian complex envelope, slightly higher texture error
 and some blank regressions. Highlight color and runtime remain limitations.

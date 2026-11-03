@@ -1,5 +1,9 @@
 # Wider RAW context recovers more measured lattice detail
 
+The later [supported-amplitude option](supported-wave-amplitude.md) recovers
+more contrast inside reciprocal support, with higher added boundary spill than
+`cross`. Its fresh/complete-frame comparison retains this earlier method and evidence.
+
 The later [reciprocal support option](cross-phase-support.md) removes the known
 detached false patch and greatly reduces fresh blank spill, with lower response
 and some true-detail loss. Both modes and their matched comparisons remain
@@ -227,7 +231,7 @@ With the usual `infer` input/output arguments, add:
 The correction follows the neural device; `--phase-harmonic-device cpu` selects
 the reference solver. Metadata records the context bands, floor for every
 context, support policy and both solvers' iteration caps. The phase stage remains
-explicit; `edge` remains its default. V120 remains the broadly measured general
+explicit; the current default is [Detail](supported-wave-amplitude.md). V120 remains the broadly measured general
 model. This targeted V143 option does not establish broad camera/photo superiority.
 Very faint detail, leakage at texture boundaries, highlight color, uncertainty
 calibration and the 100MP/10s speed target remain unresolved.

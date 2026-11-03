@@ -24,17 +24,18 @@ Add `--phase-harmonic` to `infer` for the experimental local periodic-detail
 correction. It runs after neural restoration and before linear/sRGB RGB16 export,
 using the same observed RAW and noise conditioning. Fixed256-pixel windows
 overlap at native stride128 by default; `--phase-harmonic-stride` accepts even
-values2–192. Edge-preserving TV phase fitting (`edge`) is the default;
+values 2–192. Supported-amplitude fitting (`detail`) is the default;
+`edge` retains the earlier TV envelope;
 `--phase-harmonic-envelope complex` selects the earlier Gaussian phase envelope,
 and `scalar` reproduces amplitude-only correction. The TV solver follows the
-neural device; `--phase-harmonic-device cpu` selects the NumPy reference.
+neural device; `--phase-harmonic-device cpu` selects the CPU reference solvers.
 It adds substantial runtime and does not eliminate partial-texture spill or
 unverified highlight changes.
 [Complete102MP results, native comparisons, wider sky and exact-flat checks](edge-phase-envelope.md).
 Add `--phase-harmonic-refine-frequency` with the `edge` envelope to fit active
 waves between FFT bins. [Matched full-frame/fresh validation](offgrid-phase.md)
 shows clearer mesh and slightly lower texture error, with increased blank spill.
-Without that flag, the original fixed-bin TV policy is preserved.
+With explicit `edge`, omitting that flag preserves its original fixed-bin policy.
 Select `--phase-harmonic-envelope sparse` for [connected support and refitting](sparse-phase-support.md),
 which automatically includes guarded frequency refinement. It gives stronger
 average response and lower mean blank spill, with worse tail cases; it remains
@@ -47,6 +48,11 @@ neural cases and 5,120 ideal-flat matched/mismatched executions stay unchanged.
 The floor can suppress useful texture; it is not calibrated uncertainty. Actual
 512-pixel contexts feed the same 256-pixel local fit; smaller images retain sparse
 behavior. Observed-clipped windows retain the earlier grid-TV correction.
+`--phase-harmonic --phase-harmonic-envelope detail` uses reciprocal support
+with the global gate applied only as selection. It improves periodic response
+with higher boundary spill than `cross`; small images and observed-clipped
+windows retain their documented fallbacks. [Measured quality, native crops and limits](supported-wave-amplitude.md).
+
 Select `--phase-harmonic-envelope cross` for [reciprocal green support](cross-phase-support.md)
 on the wider-context waves. It removes unsupported regions with a binary mask;
 measured fresh blank spill drops 89% on average and 92% in the worst case, with

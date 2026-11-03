@@ -1,0 +1,96 @@
+........................................................................ [ 48%]
+......F................................................................. [ 96%]
+.....                                                                    [100%]
+=================================== FAILURES ===================================
+________________ test_cli_selects_envelope_before_RGB16_export _________________
+
+tmp_path = PosixPath('/home/dllu/proj/demosaic/.cache/pytest/test_cli_selects_envelope_befo0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0xff83fa2af1d0>
+
+    def test_cli_selects_envelope_before_RGB16_export(tmp_path, monkeypatch):
+        import json
+        from types import SimpleNamespace
+    
+        import tifffile
+        import torch
+    
+        from demosaic import inference
+        from demosaic.cli import main
+    
+        yy, xx = np.mgrid[:256, :256]
+        base = np.full((3, 256, 256), 0.02, dtype=np.float32)
+        angle = 2 * np.pi * (0.0625 * xx + 0.09375 * yy) + 1.5 * np.sin(2 * np.pi * xx / 512)
+        target = base + np.array([0.0015, 0.002, 0.001])[:, None, None] * np.cos(angle)
+        colors = [0, 1, 1, 2]
+        raw = np.empty((256, 256), dtype=np.float32)
+        for p, c in enumerate(colors):
+            raw[p // 2 :: 2, p % 2 :: 2] = target[c, p // 2 :: 2, p % 2 :: 2]
+        input_path = tmp_path / "wave.npy"
+        np.save(input_path, raw)
+        # Exercise actual CLI normalization, correction dispatch and serialized RGB16.
+        # A declared stub replaces only the independently tested neural loading/pass.
+        model = SimpleNamespace(config=SimpleNamespace(to_dict=lambda: {"test_stub": True}))
+        monkeypatch.setattr(
+            inference,
+            "load_checkpoint",
+            lambda *a, **k: (model, {"step": 0, "loaded_sha256": "0" * 64}),
+        )
+        monkeypatch.setattr(
+            inference,
+            "restore_tiled",
+            lambda *a, **k: (torch.from_numpy(base.copy()), {"seconds": 0, "test_stub": True}),
+        )
+        errors = {}
+        for name, mode, refined in [
+            ("scalar", "scalar", False),
+            ("complex", "complex", False),
+            ("edge", "edge", False),
+            ("refined", "edge", True),
+            ("sparse", "sparse", False),
+            ("wide", "wide", False),
+            ("cross", "cross", False),
+            ("detail", "detail", False),
+            ("default", None, False),
+        ]:
+            output = tmp_path / f"{name}.tiff"
+>           main(
+                [
+                    "infer",
+                    str(tmp_path / "stub.pt"),
+                    str(input_path),
+                    str(output),
+                    "--device",
+                    "cpu",
+                    "--white",
+                    "1",
+                    "--shot",
+                    "0",
+                    "--read",
+                    "1e-7",
+                    "--phase-harmonic",
+                ]
+                + (["--phase-harmonic-envelope", mode] if mode else [])
+                + (["--phase-harmonic-refine-frequency"] if refined else [])
+            )
+
+tests/test_phase_envelope.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.cache/quality-20261103/supported-amplitude-v1/release-v1/src/demosaic/cli.py:261: in main
+    output = writable_path(args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/dllu/proj/demosaic/.cache/pytest/test_cli_selects_envelope_befo0/scalar.tiff')
+
+    def writable_path(path) -> Path:
+        path = Path(path).expanduser().resolve()
+        if not any(
+            path == root or root in path.parents for root in (REPOSITORY, Path("/mnt/external"))
+        ):
+>           raise ValueError(f"Output must be inside {REPOSITORY} or /mnt/external: {path}")
+E           ValueError: Output must be inside /home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/release-v1 or /mnt/external: /home/dllu/proj/demosaic/.cache/pytest/test_cli_selects_envelope_befo0/scalar.tiff
+
+.cache/quality-20261103/supported-amplitude-v1/release-v1/src/demosaic/safety.py:13: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_phase_envelope.py::test_cli_selects_envelope_before_RGB16_export
+1 failed, 148 passed in 21.26s

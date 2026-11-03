@@ -1,0 +1,45 @@
+completed 0 elapsed 0.5500963649828918
+completed 16 elapsed 2.8781570379505865
+completed 32 elapsed 5.247296179994009
+completed 48 elapsed 8.042062344960868
+completed 64 elapsed 10.81972929998301
+completed 80 elapsed 13.268317137961276
+completed 96 elapsed 15.83492941496661
+Traceback (most recent call last):
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/evaluate-development-v1.py", line 79, in <module>
+    for i,result in enumerate(pool.map(process,plan['observations'])):
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/evaluate-development-v1.py", line 51, in process
+    values,info = operator.whole(data['packed'][0],data['variance'][0],data['colors'][0],base)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/operator-v1.py", line 19, in whole
+    p=packed[:,y//2:y//2+128,x//2:x//2+128];v=variance[:,y//2:y//2+128,x//2:x//2+128];parent=base[:,y:y+256,x:x+256];values,info=patch(p,v,colors,parent,peaks,floor['added_pixel_variance'])
+                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/operator-v1.py", line 13, in patch
+    _,info=phase_context.correct_context_patch(packed,variance,colors,base,peaks,variance_floor=floor,device='cuda',cross_phase_support=True);return state.values,info
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/src/demosaic/phase_context.py", line 137, in correct_context_patch
+    value, info = _correct_fitted_patch(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/operator-v1.py", line 9, in wrapper
+    values,info=m.correct_fitted(*args,**kwargs);state.values=values;return values['cross'],info
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prototype-v1.py", line 263, in correct_fitted
+    gains, refit_info=amplitude_refit(fitted,masked)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prototype-v1.py", line 278, in amplitude_refit
+    from scipy.optimize import lsq_linear
+ModuleNotFoundError: No module named 'scipy'

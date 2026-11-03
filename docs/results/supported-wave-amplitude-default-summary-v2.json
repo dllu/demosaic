@@ -1,0 +1,75 @@
+{
+  "status": "complete-default-decision-evidence",
+  "edge": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/default-comparison-v1/result-v1.json",
+    "sha256": "2a532b09c836e6349fbf10893551c7a30fe09a10eec9983b977b99b9a7dd9f82"
+  },
+  "detail": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-evaluation-v1/result-v1.json",
+    "sha256": "b9824e958728412bdc19154e5b5bc6f66c7e77c51d6c3f26afa44f444f05f31e"
+  },
+  "detail_percent_change_from_edge": {
+    "full512_template_gain": 52.977642239859435,
+    "full512_error_RMS_DN16": -1.9668614202585588,
+    "central160_spatial_RMS_DN16": -3.4289307004521707,
+    "blank_added_RMS_DN16": -92.89523819471768,
+    "worst_blank_added_RMS_DN16": -70.53829192135812
+  },
+  "paired_present": {
+    "full512_template_gain": {
+      "less": 0,
+      "equal": 201,
+      "more": 55,
+      "minimum": 0.0,
+      "maximum": 0.30205314326474786
+    },
+    "full512_error_RMS_DN16": {
+      "less": 55,
+      "equal": 201,
+      "more": 0,
+      "minimum": -1.9444384848229763,
+      "maximum": 0.0
+    },
+    "full_blank_added_RMS_DN16": {
+      "less": 31,
+      "equal": 224,
+      "more": 1,
+      "minimum": -0.3238393700247689,
+      "maximum": 0.0004902636523943643
+    }
+  },
+  "recommendation": "Promote Detail as default only within explicitly enabled periodic stage; retain Edge explicitly. No universal quality claim; higher runtime, support seams/stripecontinuation and uncorrected nonperiodicdetail remain. Same frozen numerical Detail policy, no tuning/newforwards/noisedraws.",
+  "scope": "Post-lock default selection from the same576observations; not a separate independentholdout.",
+  "summary_rows_used": {
+    "edge": {
+      "kind": "mesh",
+      "condition": true,
+      "method": "edge",
+      "cases": 256,
+      "changed": 44,
+      "full512_error_RMS_DN16": 8.75839143124001,
+      "central160_spatial_RMS_DN16": 12.619891301553348,
+      "full512_template_gain": 0.04634503975047216,
+      "blank_added_RMS_DN16": 0.00894567845235503,
+      "worst_blank_added_RMS_DN16": 0.45909726646884447
+    },
+    "detail": {
+      "kind": "mesh",
+      "condition": true,
+      "method": "detail",
+      "cases": 256,
+      "changed": 55,
+      "full512_error_RMS_DN16": 8.586126009143719,
+      "central160_spatial_RMS_DN16": 12.187163974350693,
+      "full512_template_gain": 0.07089754910539794,
+      "blank_added_RMS_DN16": 0.0006355691459062906,
+      "blank_error_RMS_DN16": 5.523327842528197,
+      "worst_blank_added_RMS_DN16": 0.13525789644407557
+    }
+  },
+  "supersedes_incorrect_percent_summary": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/default-summary-v1.json",
+    "sha256": "afdd90eddb0d0efd00d50352c67428627830da7a8ecc7c0161e0d903b74ba439"
+  },
+  "correction": "v1selectedthefirstpresent-meshsummary(parent)insteadofmethodDetail;onlyaggregatepercentfieldswrong. Rawpredictions/per-casepairedcomparisonsandindependentauditunchanged. Correctv2explicitlyfiltersmethod."
+}

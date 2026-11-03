@@ -337,7 +337,7 @@ def refine_phase_harmonics(
     shot,
     read,
     stride=128,
-    envelope="edge",
+    envelope="detail",
     tv_device="cpu",
     refine_frequency=False,
 ):
@@ -346,8 +346,8 @@ def refine_phase_harmonics(
     Fixed native256 patches overlap on even sensor coordinates. Normalize their
     tapered corrections, including inactive patches, and retain the outer-image
     fade. Only incomplete CFA cells/small images need phase-preserving extension.
-    Edge-preserving complex envelopes are current; ``complex``/``scalar`` retain
-    earlier Gaussian-envelope modes. The optional TV solver uses local CUDA
+    Measured support selects the default periodic detail; explicit ``edge``,
+    ``complex`` and ``scalar`` retain earlier modes. The optional TV solver uses local CUDA
     buffers when requested; complete image accumulators remain on the CPU.
     Large accumulators are float32; spectral selection/fits remain float64.
     No clipping, color conversion, reference image, RNG or neural calls occur.
@@ -363,9 +363,9 @@ def refine_phase_harmonics(
         raise ValueError("Require finite nonnegative shot/read variance coefficients")
     if not isinstance(stride, (int, np.integer)) or stride % 2 or not 2 <= stride <= 192:
         raise ValueError("Stride must be even and between 2 and 192 native pixels")
-    if envelope not in ("scalar", "complex", "edge", "sparse", "wide", "cross"):
-        raise ValueError("Envelope must be scalar, complex, edge, sparse, wide or cross")
-    if envelope in ("wide", "cross"):
+    if envelope not in ("scalar", "complex", "edge", "sparse", "wide", "cross", "detail"):
+        raise ValueError("Envelope must be scalar, complex, edge, sparse, wide, cross or detail")
+    if envelope in ("wide", "cross", "detail"):
         from .phase_context import refine_context_harmonics
 
         return refine_context_harmonics(
@@ -376,7 +376,8 @@ def refine_phase_harmonics(
             read=read,
             stride=stride,
             tv_device=tv_device,
-            cross_phase_support=envelope == "cross",
+            cross_phase_support=envelope in ("cross", "detail"),
+            selection_only_gate=envelope == "detail",
         )
     refine_frequency = refine_frequency or envelope == "sparse"
     if refine_frequency and envelope not in ("edge", "sparse"):

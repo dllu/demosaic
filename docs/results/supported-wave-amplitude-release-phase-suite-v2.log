@@ -1,0 +1,21 @@
+........................................................................ [ 48%]
+......E................................................................. [ 96%]
+.....                                                                    [100%]
+==================================== ERRORS ====================================
+_______ ERROR at setup of test_cli_selects_envelope_before_RGB16_export ________
+
+self = PosixPath('/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/release-v1/.cache/pytest')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/release-v1/.cache/pytest'
+
+/usr/lib/python3.12/pathlib.py:1313: FileNotFoundError
+=========================== short test summary info ============================
+ERROR tests/test_phase_envelope.py::test_cli_selects_envelope_before_RGB16_export
+148 passed, 1 error in 20.74s

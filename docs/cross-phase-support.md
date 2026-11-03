@@ -1,5 +1,9 @@
 # Reciprocal green prediction removes unsupported wave regions
 
+The later [supported-amplitude option](supported-wave-amplitude.md) recovers
+more contrast inside reciprocal support, with higher added boundary spill than
+`cross`. Its fresh/complete-frame comparison retains this earlier method and evidence.
+
 **Reciprocal green support reduces fresh mean added blank-region RMS 89.0% and
 its worst case 91.9% versus wider-context fitting.** The cost is 9.5% lower mesh
 response and 0.8% higher image RMS. Complete GFX crops retain much of the crossing
@@ -240,7 +244,8 @@ Add to the usual `infer` input/output arguments:
 --phase-harmonic --phase-harmonic-envelope cross
 ```
 
-The optional stage still defaults to `edge`; `wide` remains available for its
+The current optional-stage default is [Detail](supported-wave-amplitude.md).
+`cross` is retained explicitly, and `wide` remains available for its
 higher measured response. This additional option favors stricter support and
 can remove weak real texture. The default general model remains V120, whose
 broad camera/photo panels are measured. Very weak/nonperiodic detail, partial

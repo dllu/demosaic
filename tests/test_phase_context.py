@@ -50,7 +50,7 @@ def test_pure_fundamental_does_not_propose_absent_high_harmonics():
 
 
 @pytest.mark.parametrize("colors", PATTERNS)
-@pytest.mark.parametrize("mode", ["wide", "cross"])
+@pytest.mark.parametrize("mode", ["wide", "cross", "detail"])
 def test_small_image_and_clipped_window_retain_exact_sparse_or_grid_result(colors, mode):
     base, _, packed = _wave(256, (-0.0713, 0.0532), colors)
     raw = np.empty((256, 256))
@@ -71,7 +71,8 @@ def test_small_image_and_clipped_window_retain_exact_sparse_or_grid_result(color
         base,
         [(0.2343, 0.1482, 10)],
         variance_floor=1e-3,
-        cross_phase_support=mode == "cross",
+        cross_phase_support=mode in ("cross", "detail"),
+        selection_only_gate=mode == "detail",
     )
     np.testing.assert_array_equal(actual, expected)
     assert info["context_clipped_local_fallback"]

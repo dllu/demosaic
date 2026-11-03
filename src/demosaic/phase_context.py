@@ -80,6 +80,7 @@ def correct_context_patch(
     device="cpu",
     variance_floor=0.0,
     cross_phase_support=False,
+    selection_only_gate=False,
 ):
     """Use effective local variances and add separated measured frequencies."""
     packed, variance, base = [np.asarray(v, np.float64) for v in (packed, variance, base)]
@@ -96,6 +97,7 @@ def correct_context_patch(
             refine_frequency=True,
             sparse_support=True,
             cross_phase_support=cross_phase_support,
+            selection_only_gate=selection_only_gate,
         )
         info["context_clipped_local_fallback"] = clipped
         info["context_variance_floor"] = 0.0 if clipped else float(variance_floor)
@@ -112,6 +114,7 @@ def correct_context_patch(
             refine_frequency=True,
             sparse_support=True,
             cross_phase_support=cross_phase_support,
+            selection_only_gate=selection_only_gate,
         )
     fitted = _fit_selected_harmonics(packed, variance, colors, base, selected)
     limits, searches, refined = [], [], []
@@ -140,6 +143,7 @@ def correct_context_patch(
         refine_frequency=True,
         sparse_support=True,
         cross_phase_support=cross_phase_support,
+        selection_only_gate=selection_only_gate,
     )
     info["context_added_frequencies"] = len(selected) - count
     info["original_frequency_searches"] = original.get("searches", [])
@@ -164,7 +168,16 @@ def _solver_stats(device):
 
 
 def refine_context_harmonics(
-    raw, colors, base, *, shot, read, stride=128, tv_device="cpu", cross_phase_support=False
+    raw,
+    colors,
+    base,
+    *,
+    shot,
+    read,
+    stride=128,
+    tv_device="cpu",
+    cross_phase_support=False,
+    selection_only_gate=False,
 ):
     """Use cached actual 512-pixel contexts and the original 256-pixel fit/blend.
 
@@ -175,8 +188,16 @@ def refine_context_harmonics(
     from .phase_harmonic import refine_phase_harmonics
 
     started = time.perf_counter()
-    envelope = "cross" if cross_phase_support else "wide"
-    method = "local-phase-harmonic-v8" if cross_phase_support else "local-phase-harmonic-v7"
+    if selection_only_gate and not cross_phase_support:
+        raise ValueError("Selection-only global gates require reciprocal support")
+    envelope = "detail" if selection_only_gate else "cross" if cross_phase_support else "wide"
+    method = (
+        "local-phase-harmonic-v9"
+        if selection_only_gate
+        else "local-phase-harmonic-v8"
+        if cross_phase_support
+        else "local-phase-harmonic-v7"
+    )
     raw, base, colors = np.asarray(raw), np.asarray(base), np.asarray(colors)
     if raw.ndim != 2 or min(raw.shape) < 2 or base.shape != (3, *raw.shape):
         raise ValueError("Require a >=2x2 Bayer image and matching 3xHxW RGB")
@@ -296,6 +317,15 @@ def refine_context_harmonics(
             "maximum_absolute_gap": 0.0,
             "confidence_calibrated": False,
         }
+    if selection_only_gate:
+        info["global_gate"] = {
+            "mode": "selection only inside reciprocal support",
+            "positive_original_gate_required": True,
+            "local_power_shrink": 9,
+            "local_magnitude_cap": 3,
+            "clipped_window_fallback": "original amplitude shrink",
+            "confidence_calibrated": False,
+        }
     if shot == read == 0:
         info.update(ADC_only_bypass=True, seconds=time.perf_counter() - started)
         return result, info
@@ -351,6 +381,7 @@ def refine_context_harmonics(
                 device=tv_device,
                 variance_floor=cache[cy, cx][1],
                 cross_phase_support=cross_phase_support,
+                selection_only_gate=selection_only_gate,
             )
             delta = value - parent
             h, w = min(256, height - y), min(256, width - x)

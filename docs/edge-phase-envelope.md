@@ -59,7 +59,8 @@ uv run demosaic infer /mnt/external/demosaic/models/v143-final5000.pt photo.raf 
   --phase-harmonic --phase-harmonic-envelope edge
 ```
 
-The optional stage defaults to `edge`. Select `complex` for the previous Gaussian
+This report preserves the earlier `edge` stage; the current optional-stage
+default is [Detail](supported-wave-amplitude.md). Select `complex` for the previous Gaussian
 phase envelope or `scalar` for amplitude-only correction. The TV solver follows
 the neural device by default; `--phase-harmonic-device cpu` selects the NumPy
 reference. CUDA uses float64 FFTs and an eight-step CUDA graph; complete-frame

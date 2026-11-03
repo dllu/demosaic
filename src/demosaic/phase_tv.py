@@ -129,9 +129,17 @@ def correct_edge_phase_patch(
 
 
 def _correct_fitted_patch(
-    fitted, *, device="cpu", refine_frequency=False, sparse_support=False, cross_phase_support=False
+    fitted,
+    *,
+    device="cpu",
+    refine_frequency=False,
+    sparse_support=False,
+    cross_phase_support=False,
+    selection_only_gate=False,
 ):
     """Synthesize a validated joint fit with the original local TV policy."""
+    if selection_only_gate and not cross_phase_support:
+        raise ValueError("Selection-only global gates require reciprocal support")
     base = fitted["base"]
     peaks = fitted["peaks"]
     if not peaks:
@@ -146,7 +154,7 @@ def _correct_fitted_patch(
     fields = {"edge": np.zeros_like(base)}
     yy, xx = np.mgrid[:256, :256]
     detail = []
-    waves, wave_frequencies = [], []
+    waves, wave_frequencies, wave_gates = [], [], []
     for k, (fx, fy, score) in enumerate(peaks):
         ids = [12 + 6 * k + 2, 12 + 6 * k + 3]
         g = beta[ids]
@@ -167,6 +175,8 @@ def _correct_fitted_patch(
         det = np.maximum(a * d - b * b, 1e-32)
         noise = np.sqrt((local["covariance"][0] + local["covariance"][2]) / 2)
         item = {"gate": gate, "solver": {}}
+        if selection_only_gate:
+            item["applied_gate"] = 1.0 if use_sparse else gate
         for key, multiplier in {"edge": 16}.items():
             if use_sparse:
                 from .phase_sparse import sparse_support_refit
@@ -202,6 +212,7 @@ def _correct_fitted_patch(
             if wave is not None:
                 waves.append(wave)
                 wave_frequencies.append((fx, fy))
+                wave_gates.append(gate)
             item["solver"][key] = {
                 "mean_weight": float(np.mean(noise * multiplier)),
                 "mean_active": float(np.mean(scale > 0)),
@@ -239,9 +250,13 @@ def _correct_fitted_patch(
 
             masks, cross_info = cross_phase_masks(fitted, wave_frequencies, device=device)
             fields["edge"].fill(0)
-            for wave, mask in zip(waves, masks):
+            for wave, gate, mask in zip(waves, wave_gates, masks):
+                if selection_only_gate:
+                    wave = wave / gate
                 fields["edge"] += wave * mask[None]
             diagnostic["cross_phase_support"] = {"applied": True, **cross_info}
+            if selection_only_gate:
+                diagnostic["cross_phase_support"]["global_gate"] = "selection only"
         else:
             diagnostic["cross_phase_support"] = {
                 "applied": False,

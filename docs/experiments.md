@@ -1,6 +1,16 @@
 # Experiment index
 
-The [reciprocal green-support option](cross-phase-support.md) cuts fresh mean
+The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
+original positive global gate as selection and restores contrast only inside
+unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS
+falls 1.0% versus cross; mean/worst added blank RMS rise 42.1%/28.4%. All 256 absent
+cases and 64 new photographic controls retain their parents. Full GFX mesh
+contrast improves under both priors; nonperiodic texture, support seams, boundary
+spill and highlight color remain unresolved. The explicit `detail` mode has
+53 inspected native comparisons and complete RGB16 checks. V120 remains the general model recommendation. Detail is now the default
+inside the explicitly enabled periodic stage.
+
+The earlier [reciprocal green-support review](cross-phase-support.md) cuts fresh mean
 added blank RMS 89% and its worst case 92% versus wide context, with 9.5% lower
 response and 0.8% higher image RMS. Both full-frame mesh priors retain much of the
 lattice. The known detached false patch is removed; weak/partial detail and

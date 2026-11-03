@@ -59,7 +59,7 @@ def test_refined_wave_improves_native_error_and_reports_actual_search():
     for p in range(4):
         raw[p // 2 :: 2, p % 2 :: 2] = packed[p]
     restored, metadata = refine_phase_harmonics(
-        raw, colors, base, shot=0, read=1e-7, refine_frequency=True
+        raw, colors, base, shot=0, read=1e-7, envelope="edge", refine_frequency=True
     )
     assert restored.dtype == np.float32
     assert metadata["method"] == "local-phase-harmonic-v4"

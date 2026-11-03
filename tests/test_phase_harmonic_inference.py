@@ -60,7 +60,7 @@ def test_invalid_stride_rejected(stride):
 def test_cli_refinement_is_explicit():
     args = parser().parse_args(["infer", "model.pt", "input.npy", "output.tiff"])
     assert not args.phase_harmonic and args.phase_harmonic_stride == 128
-    assert args.phase_harmonic_envelope == "edge"
+    assert args.phase_harmonic_envelope == "detail"
     assert not args.phase_harmonic_refine_frequency
     args = parser().parse_args(
         [
@@ -74,3 +74,12 @@ def test_cli_refinement_is_explicit():
         ]
     )
     assert args.phase_harmonic and args.phase_harmonic_stride == 192
+
+
+def test_default_uses_measured_context_and_preserves_an_exact_flat():
+    base = np.full((3, 512, 512), 0.02, dtype=np.float32)
+    actual, stats = refine_phase_harmonics(base[1].copy(), [0, 1, 1, 2], base, shot=0, read=1e-7)
+    np.testing.assert_array_equal(actual, base)
+    assert stats["envelope"] == "detail" and stats["method"] == "local-phase-harmonic-v9"
+    assert stats["context"]["windows"] == 1 and stats["cross_phase_support"]["enabled"]
+    assert stats["cross_phase_support"]["solves"] == 0
