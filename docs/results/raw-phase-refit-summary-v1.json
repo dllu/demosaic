@@ -1,0 +1,962 @@
+{
+  "created_UTC": "2026-11-03T03:28:45.756079+00:00",
+  "decision": "Unadopted small spill/detail tradeoff; research tool only, no core inference/default or learned-weight change",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v4/step5000/V143-step5000-inference.pt",
+    "sha256": "96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4"
+  },
+  "final_summary": [
+    {
+      "method": "parent",
+      "present": true,
+      "cases": 256,
+      "changed": 0,
+      "gain": 0.016727117132182612,
+      "spatial_RMS_DN16": 12.156372889449514,
+      "full_error_RMS_DN16": 10.241447525929406,
+      "blank_added_RMS_DN16": 0.0,
+      "blank_error_RMS_DN16": 6.370126853674709,
+      "worst_blank_added_RMS_DN16": 0.0
+    },
+    {
+      "method": "edge",
+      "present": true,
+      "cases": 256,
+      "changed": 30,
+      "gain": 0.03473128346786891,
+      "spatial_RMS_DN16": 11.669031739982199,
+      "full_error_RMS_DN16": 9.934704393307262,
+      "blank_added_RMS_DN16": 0.060324413436601075,
+      "blank_error_RMS_DN16": 6.374415291718216,
+      "worst_blank_added_RMS_DN16": 1.5231293674377504
+    },
+    {
+      "method": "refined",
+      "present": true,
+      "cases": 256,
+      "changed": 30,
+      "gain": 0.03640602900540906,
+      "spatial_RMS_DN16": 11.625887762748349,
+      "full_error_RMS_DN16": 9.905747206414924,
+      "blank_added_RMS_DN16": 0.06435888456387699,
+      "blank_error_RMS_DN16": 6.375162573284724,
+      "worst_blank_added_RMS_DN16": 1.746777132872861
+    },
+    {
+      "method": "sparse",
+      "present": true,
+      "cases": 256,
+      "changed": 30,
+      "gain": 0.041743114442727366,
+      "spatial_RMS_DN16": 11.556148848354216,
+      "full_error_RMS_DN16": 9.865455785710726,
+      "blank_added_RMS_DN16": 0.05535823927416952,
+      "blank_error_RMS_DN16": 6.37591844960681,
+      "worst_blank_added_RMS_DN16": 1.9885924664549308
+    },
+    {
+      "method": "raw",
+      "present": true,
+      "cases": 256,
+      "changed": 30,
+      "gain": 0.04152443403060119,
+      "spatial_RMS_DN16": 11.564464544180733,
+      "full_error_RMS_DN16": 9.872069324841874,
+      "blank_added_RMS_DN16": 0.05110677113120139,
+      "blank_error_RMS_DN16": 6.375354614775286,
+      "worst_blank_added_RMS_DN16": 1.9065007287480331
+    },
+    {
+      "method": "parent",
+      "present": false,
+      "cases": 256,
+      "changed": 0,
+      "gain": 0.0006512657310161891,
+      "spatial_RMS_DN16": 4.028973559745757,
+      "full_error_RMS_DN16": 5.861778347925523,
+      "blank_added_RMS_DN16": 0.0,
+      "blank_error_RMS_DN16": 5.861778347925523,
+      "worst_blank_added_RMS_DN16": 0.0
+    },
+    {
+      "method": "edge",
+      "present": false,
+      "cases": 256,
+      "changed": 0,
+      "gain": 0.0006512657310161891,
+      "spatial_RMS_DN16": 4.028973559745757,
+      "full_error_RMS_DN16": 5.861778347925523,
+      "blank_added_RMS_DN16": 0.0,
+      "blank_error_RMS_DN16": 5.861778347925523,
+      "worst_blank_added_RMS_DN16": 0.0
+    },
+    {
+      "method": "refined",
+      "present": false,
+      "cases": 256,
+      "changed": 0,
+      "gain": 0.0006512657310161891,
+      "spatial_RMS_DN16": 4.028973559745757,
+      "full_error_RMS_DN16": 5.861778347925523,
+      "blank_added_RMS_DN16": 0.0,
+      "blank_error_RMS_DN16": 5.861778347925523,
+      "worst_blank_added_RMS_DN16": 0.0
+    },
+    {
+      "method": "sparse",
+      "present": false,
+      "cases": 256,
+      "changed": 0,
+      "gain": 0.0006512657310161891,
+      "spatial_RMS_DN16": 4.028973559745757,
+      "full_error_RMS_DN16": 5.861778347925523,
+      "blank_added_RMS_DN16": 0.0,
+      "blank_error_RMS_DN16": 5.861778347925523,
+      "worst_blank_added_RMS_DN16": 0.0
+    },
+    {
+      "method": "raw",
+      "present": false,
+      "cases": 256,
+      "changed": 0,
+      "gain": 0.0006512657310161891,
+      "spatial_RMS_DN16": 4.028973559745757,
+      "full_error_RMS_DN16": 5.861778347925523,
+      "blank_added_RMS_DN16": 0.0,
+      "blank_error_RMS_DN16": 5.861778347925523,
+      "worst_blank_added_RMS_DN16": 0.0
+    }
+  ],
+  "paired_raw_vs_sparse": {
+    "gain_regressions": 13,
+    "blank_error_regressions": 7,
+    "added_blank_regressions": 7,
+    "maximum_blank_error_increase": 0.07113958721532843,
+    "maximum_blank_error_increase_id": "mesh-seed2026111151-present-iso6400-prior-GBRG"
+  },
+  "solvers": {
+    "joint_RAW_solves": 30,
+    "capped": 30,
+    "maximum_relative_gap": 1.5797044553672615,
+    "median_relative_gap": 0.610673456930723
+  },
+  "development": [
+    {
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v1/result-v1.json",
+        "sha256": "a395b6caee8b52f8aa3ec4d9a3c46f69e794277e69128c915a9e61ac02c267e7"
+      },
+      "summary": [
+        {
+          "present": true,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": 0.023815288489743777,
+          "full_error": 11.913869518608365,
+          "spatial_error": 14.489273984347646,
+          "blank_added": 0.0,
+          "blank_error": 6.426977835502129,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": true,
+          "method": "refined",
+          "cases": 256,
+          "changed": 42,
+          "gain": 0.0655286853382902,
+          "full_error": 11.05769774944083,
+          "spatial_error": 13.19707768462284,
+          "blank_added": 0.062068224387759774,
+          "blank_error": 6.431159239341926,
+          "worst_blank_added": 1.4344387666719078
+        },
+        {
+          "present": true,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07389911284809658,
+          "full_error": 10.989279924889859,
+          "spatial_error": 13.079336752676534,
+          "blank_added": 0.04098855621129173,
+          "blank_error": 6.430213115240323,
+          "worst_blank_added": 1.9973866231382926
+        },
+        {
+          "present": true,
+          "method": "raw-TV.25",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.06490708069319531,
+          "full_error": 12.84473634834599,
+          "spatial_error": 15.700156298878897,
+          "blank_added": 0.2009812939316437,
+          "blank_error": 6.483427896094556,
+          "worst_blank_added": 7.244450233480793
+        },
+        {
+          "present": true,
+          "method": "raw-TV.5",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07550299339836491,
+          "full_error": 12.161754333467961,
+          "spatial_error": 14.764206294020822,
+          "blank_added": 0.15879343012947583,
+          "blank_error": 6.46497433234549,
+          "worst_blank_added": 6.192218045042058
+        },
+        {
+          "present": true,
+          "method": "raw-TV1",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07338241872648987,
+          "full_error": 11.181374285906584,
+          "spatial_error": 13.361879802736766,
+          "blank_added": 0.0603888016076481,
+          "blank_error": 6.4346937509394495,
+          "worst_blank_added": 3.127589421748876
+        },
+        {
+          "present": false,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "refined",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-TV.25",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-TV.5",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-TV1",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v2/result-v1.json",
+        "sha256": "7bf9abf9142da783d5cd8c966148ea818f5edfdd4afa00fc471ce37e5e414514"
+      },
+      "summary": [
+        {
+          "present": true,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": 0.023815288489743777,
+          "full_error": 11.913869518608365,
+          "spatial_error": 14.489273984347646,
+          "blank_added": 0.0,
+          "blank_error": 6.426977835502129,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": true,
+          "method": "refined",
+          "cases": 256,
+          "changed": 42,
+          "gain": 0.0655286853382902,
+          "full_error": 11.05769774944083,
+          "spatial_error": 13.19707768462284,
+          "blank_added": 0.062068224387759774,
+          "blank_error": 6.431159239341926,
+          "worst_blank_added": 1.4344387666719078
+        },
+        {
+          "present": true,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07389911284809658,
+          "full_error": 10.989279924889859,
+          "spatial_error": 13.079336752676534,
+          "blank_added": 0.04098855621129173,
+          "blank_error": 6.430213115240323,
+          "worst_blank_added": 1.9973866231382926
+        },
+        {
+          "present": true,
+          "method": "raw-coarse-TV2",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.08104726230444263,
+          "full_error": 11.161719911916077,
+          "spatial_error": 13.3417471844784,
+          "blank_added": 0.0996405371833707,
+          "blank_error": 6.444069602032416,
+          "worst_blank_added": 3.786082443236034
+        },
+        {
+          "present": true,
+          "method": "raw-coarse-TV4",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07822600618826962,
+          "full_error": 10.959666470152015,
+          "spatial_error": 13.043095940942283,
+          "blank_added": 0.08353632327592624,
+          "blank_error": 6.43830257306674,
+          "worst_blank_added": 2.97358431558609
+        },
+        {
+          "present": true,
+          "method": "raw-coarse-TV8",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07684072196327357,
+          "full_error": 10.966040274062923,
+          "spatial_error": 13.055721069319295,
+          "blank_added": 0.08684637146719638,
+          "blank_error": 6.438978962468532,
+          "worst_blank_added": 2.9133329546218683
+        },
+        {
+          "present": false,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "refined",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-coarse-TV2",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-coarse-TV4",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-coarse-TV8",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v3/result-v1.json",
+        "sha256": "33bc63a1de3bb3c1e6af4ff6b1a7794a6bcd5d38335eaaf2469de7855074c889"
+      },
+      "summary": [
+        {
+          "present": true,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": 0.023815288489743777,
+          "full_error": 11.913869518608365,
+          "spatial_error": 14.489273984347646,
+          "blank_added": 0.0,
+          "blank_error": 6.426977835502129,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": true,
+          "method": "refined",
+          "cases": 256,
+          "changed": 42,
+          "gain": 0.0655286853382902,
+          "full_error": 11.05769774944083,
+          "spatial_error": 13.19707768462284,
+          "blank_added": 0.062068224387759774,
+          "blank_error": 6.431159239341926,
+          "worst_blank_added": 1.4344387666719078
+        },
+        {
+          "present": true,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07389911284809658,
+          "full_error": 10.989279924889859,
+          "spatial_error": 13.079336752676534,
+          "blank_added": 0.04098855621129173,
+          "blank_error": 6.430213115240323,
+          "worst_blank_added": 1.9973866231382926
+        },
+        {
+          "present": true,
+          "method": "raw-RGB-TV4",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07824982955786738,
+          "full_error": 10.962027564528478,
+          "spatial_error": 13.04417574897531,
+          "blank_added": 0.06258428633848095,
+          "blank_error": 6.43360124982542,
+          "worst_blank_added": 2.4407937398890733
+        },
+        {
+          "present": true,
+          "method": "raw-RGB-TV8",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07666497287181136,
+          "full_error": 10.957982437680096,
+          "spatial_error": 13.040747955417537,
+          "blank_added": 0.0644383886358537,
+          "blank_error": 6.434028530430749,
+          "worst_blank_added": 2.4329766120197713
+        },
+        {
+          "present": false,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "refined",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-RGB-TV4",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-RGB-TV8",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v4/result-v1.json",
+        "sha256": "cc656acf6da358b39469835fa833ef1e366f9534f4a3610a1c930451dd5c8011"
+      },
+      "summary": [
+        {
+          "present": true,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": 0.023815288489743777,
+          "full_error": 11.913869518608365,
+          "spatial_error": 14.489273984347646,
+          "blank_added": 0.0,
+          "blank_error": 6.426977835502129,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": true,
+          "method": "refined",
+          "cases": 256,
+          "changed": 42,
+          "gain": 0.0655286853382902,
+          "full_error": 11.05769774944083,
+          "spatial_error": 13.19707768462284,
+          "blank_added": 0.062068224387759774,
+          "blank_error": 6.431159239341926,
+          "worst_blank_added": 1.4344387666719078
+        },
+        {
+          "present": true,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07389911284809658,
+          "full_error": 10.989279924889859,
+          "spatial_error": 13.079336752676534,
+          "blank_added": 0.04098855621129173,
+          "blank_error": 6.430213115240323,
+          "worst_blank_added": 1.9973866231382926
+        },
+        {
+          "present": true,
+          "method": "raw-RGB-group.125",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.0737614157632181,
+          "full_error": 10.99412264500086,
+          "spatial_error": 13.092051338570354,
+          "blank_added": 0.03694807403492659,
+          "blank_error": 6.429507777504428,
+          "worst_blank_added": 1.6857546017718978
+        },
+        {
+          "present": true,
+          "method": "raw-RGB-group.25",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07103941819007413,
+          "full_error": 11.029011952592006,
+          "spatial_error": 13.14183113221735,
+          "blank_added": 0.024411170240292695,
+          "blank_error": 6.428316882225003,
+          "worst_blank_added": 1.34172702691355
+        },
+        {
+          "present": true,
+          "method": "raw-RGB-group.5",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.06681443050207425,
+          "full_error": 11.09224126137837,
+          "spatial_error": 13.22819194786075,
+          "blank_added": 0.013343246485181984,
+          "blank_error": 6.4276118910408115,
+          "worst_blank_added": 0.9806341589560521
+        },
+        {
+          "present": false,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "refined",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-RGB-group.125",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-RGB-group.25",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-RGB-group.5",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v5/result-v1.json",
+        "sha256": "e5d39853ec78bc5a8e0cc3d00843bab2cd9012364df270e0772d797e2a072699"
+      },
+      "summary": [
+        {
+          "present": true,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": 0.023815288489743777,
+          "full_error": 11.913869518608365,
+          "spatial_error": 14.489273984347646,
+          "blank_added": 0.0,
+          "blank_error": 6.426977835502129,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": true,
+          "method": "refined",
+          "cases": 256,
+          "changed": 42,
+          "gain": 0.0655286853382902,
+          "full_error": 11.05769774944083,
+          "spatial_error": 13.19707768462284,
+          "blank_added": 0.062068224387759774,
+          "blank_error": 6.431159239341926,
+          "worst_blank_added": 1.4344387666719078
+        },
+        {
+          "present": true,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07389911284809658,
+          "full_error": 10.989279924889859,
+          "spatial_error": 13.079336752676534,
+          "blank_added": 0.04098855621129173,
+          "blank_error": 6.430213115240323,
+          "worst_blank_added": 1.9973866231382926
+        },
+        {
+          "present": true,
+          "method": "raw-RGB-group.125",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07241386084057255,
+          "full_error": 11.003148233783804,
+          "spatial_error": 13.10866390392086,
+          "blank_added": 0.03696911895076592,
+          "blank_error": 6.429506149568715,
+          "worst_blank_added": 1.847644002540951
+        },
+        {
+          "present": false,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "refined",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-RGB-group.125",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v6/result-v1.json",
+        "sha256": "1109f8dd25df3d28dbbab45560cfa5f3854d74f7159fbd9176571e9fe7901cd5"
+      },
+      "summary": [
+        {
+          "present": true,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": 0.023815288489743777,
+          "full_error": 11.913869518608365,
+          "spatial_error": 14.489273984347646,
+          "blank_added": 0.0,
+          "blank_error": 6.426977835502129,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": true,
+          "method": "refined",
+          "cases": 256,
+          "changed": 42,
+          "gain": 0.0655286853382902,
+          "full_error": 11.05769774944083,
+          "spatial_error": 13.19707768462284,
+          "blank_added": 0.062068224387759774,
+          "blank_error": 6.431159239341926,
+          "worst_blank_added": 1.4344387666719078
+        },
+        {
+          "present": true,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07389911284809658,
+          "full_error": 10.989279924889859,
+          "spatial_error": 13.079336752676534,
+          "blank_added": 0.04098855621129173,
+          "blank_error": 6.430213115240323,
+          "worst_blank_added": 1.9973866231382926
+        },
+        {
+          "present": true,
+          "method": "raw-RGB-group.125",
+          "cases": 256,
+          "changed": 41,
+          "gain": 0.07221944031550154,
+          "full_error": 11.005605372907867,
+          "spatial_error": 13.11127676460018,
+          "blank_added": 0.03843200533140226,
+          "blank_error": 6.429741138731149,
+          "worst_blank_added": 1.861238853838524
+        },
+        {
+          "present": false,
+          "method": "parent",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "refined",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "sparse",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        },
+        {
+          "present": false,
+          "method": "raw-RGB-group.125",
+          "cases": 256,
+          "changed": 0,
+          "gain": -0.00037286707931771486,
+          "full_error": 5.931853751401442,
+          "spatial_error": 4.004106115588833,
+          "blank_added": 0.0,
+          "blank_error": 5.931853751401442,
+          "worst_blank_added": 0.0
+        }
+      ]
+    }
+  ],
+  "development_optimizer_studies": "v5acceleratedandv6absolute-row-columnpreconditioned solvers evaluated only on the old64 development recipes. These numerical extensions are not used in the new final validation; original locked2048-step estimator retained. Most caps persist. No new settings were selected using final results.",
+  "actual_new_root_DINO_calls": 512,
+  "actual_new_V120_calls": 0,
+  "new_sensor_noise_observations": 512,
+  "training_updates": 0,
+  "RAW_opens": 0,
+  "postprocess_neural_calls": 0,
+  "source_package_modules_unchanged": 76,
+  "actually_viewed_native_boards": 22,
+  "PNG_channels_exact": 8755200,
+  "independent_fresh_metric_rows": 2560,
+  "CPU_GPU_values_checked": 100663296,
+  "maximum_CPU_GPU_difference": 3.469446951953614e-18,
+  "research_script_values_exact": 100663296,
+  "research_script": {
+    "path": "/home/dllu/proj/demosaic/scripts/experimental_raw_phase_refit.py",
+    "sha256": "e3fb181525ba07d1d442d2272e47542242e9933417ddeca5186d24848193630d"
+  },
+  "tests": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/research-tests-v3.log",
+    "sha256": "a22006ea6e2852626dcc10949fa9db7b5658d2cf4c209d45bbeb350e6491c396"
+  },
+  "tests_unique_passed": 11,
+  "no_new_full_frame_inference": true,
+  "goal_status": "active; incomplete fine detail, false boundary continuation, uncalibrated confidence, highlights, placement and speed unresolved"
+}

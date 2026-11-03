@@ -111,6 +111,9 @@ A small false stripe island is removed; boundary leakage remains. This option
 stays explicit: `infer --phase-harmonic --phase-harmonic-envelope sparse`.
 [Fixed-bin TV](docs/edge-phase-envelope.md) remains the stage's default. Clipped
 windows retain its earlier result; highlight color and runtime remain limitations.
+The later [direct RAW refit study](docs/raw-phase-refit.md) reduces mean blank spill
+7.7% with 0.5% lower response; it remains a research tool because boundary leakage,
+uneven recovery and numerical convergence remain unresolved.
 
 Below: noisy Malvar → full-frame V1435k → connected support/refit → DSCF3842 camera JPEG → independent
 DSCF3835 ISO100 AHD → ISO100 camera JPEG, using the fixed nearby prior.

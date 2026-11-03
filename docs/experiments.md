@@ -1,5 +1,10 @@
 # Experiment index
 
+The [direct RAW refit experiment](raw-phase-refit.md) preserves eleven development
+settings, an independent 64-recipe validation, solver limitations and 22 native
+boards. It yields a small spill/detail tradeoff and remains a research tool;
+the current inference recommendation is unchanged.
+
 The [connected support/refit experiment](sparse-phase-support.md) adds stronger
 fine-mesh contrast, 12.8% higher final held-out response and 34.0% lower mean added
 blank RMS versus refined TV. Worst blank RMS rises 39.2%. The first failed trial,

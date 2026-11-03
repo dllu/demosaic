@@ -1,5 +1,12 @@
 # Current method research
 
+The [direct RAW refit study](raw-phase-refit.md) tests whether fitting physical
+measurements can reduce blurred-support leakage. Eleven development settings and
+a new 64-recipe/512-forward validation find a small tradeoff: 7.7% less mean blank
+spill with 0.5% lower response and slightly higher image error. The native tail
+still leaks; coarse solves cap. A reproducible research script and all comparisons
+are retained, with no ordinary inference or learned-weight change.
+
 The [connected wave-support experiment](sparse-phase-support.md) adds group-sparse
 selection, removes small components and refits coefficients without the group
 penalty. An initial 96-recipe holdout exposed a false stripe island and became

@@ -7,6 +7,10 @@ The worst fresh blank RMS is 39.2% higher. This is an additional `sparse` option
 fixed-bin `edge` remains the optional stage's default. Flat-region safety and
 broad superiority are unproven.
 
+The later [direct RAW refit study](raw-phase-refit.md) tests the smoothed-fidelity
+limitation. Its small spill/detail tradeoff and remaining leakage do not replace
+this option; all new measurements and native comparisons are documented.
+
 [Implementation](../src/demosaic/phase_sparse.py) ·
 [CUDA implementation](../src/demosaic/phase_sparse_cuda.py) ·
 [Execution and validation](results/sparse-phase-support-publication-v1.json) ·

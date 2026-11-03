@@ -1,0 +1,172 @@
+{
+  "created_UTC": "2026-11-03T03:08:03.149781+00:00",
+  "prototype": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/prototype-v5.py",
+    "sha256": "a07a62481e96d8cd77f1c188acf5707adbd74a50157b2d582f52ef0bec70a1d2"
+  },
+  "solver": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/solver-v4.py",
+    "sha256": "f35a44173e03635cff6ed36fddd1799c4022d8d2381e6f0e340a7d130ddce524"
+  },
+  "generator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/prospective-operator-v1.py",
+    "sha256": "af0eee4f458e56e025402d98d8d1c2ed3a9ddae88e465127b3a470170642d167"
+  },
+  "helpers": {
+    "phase_frequency.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_frequency.py",
+      "sha256": "6ff3feace59a44237258168adbd89a30f9b355b57f4c806be9539ff09aa4a8c9"
+    },
+    "phase_harmonic.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_harmonic.py",
+      "sha256": "d71c01edc4c67997d1086874b02dfe13d6966fa4694bc96b775d8466e940ead6"
+    },
+    "phase_envelope.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_envelope.py",
+      "sha256": "ce53cfa8f4ef5f293a18636393913f4e3ac6008901e1662a35fdda83a46e9d75"
+    },
+    "phase_sparse.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_sparse.py",
+      "sha256": "25287c58361d0d177ed447b4c7a3d709a913cf4129eaa56def4893bbc1eef7d4"
+    },
+    "phase_sparse_cuda.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_sparse_cuda.py",
+      "sha256": "41e4cf8f85a4ce73a4df06b29db26a6ce17312ae45923c9eec48c37e7ec0790f"
+    },
+    "phase_tv.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_tv.py",
+      "sha256": "aba26709d1a549b629956ef03729890931828d895e645701ecd7148e33aa7aeb"
+    },
+    "phase_tv_cuda.py": {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/phase_tv_cuda.py",
+      "sha256": "07ff40092f973969bece64fa8db7b17af4971a57f0951051a6e3af75ef880e91"
+    }
+  },
+  "settings": {
+    "green_peak_selector": "unchanged",
+    "frequency_search": "unchanged guarded refinement, original inactive gates",
+    "support_sigma_native": 16,
+    "support_TV_noise_multiplier": 16,
+    "support_group_noise_multiplier": 0.5,
+    "support_power_threshold": 9,
+    "minimum_connected_packed_area": 805,
+    "connectivity": 4,
+    "coefficient_grid": [
+      32,
+      32
+    ],
+    "coefficient_spacing_native": 8,
+    "coefficient_interpolation": "clamped bilinear, physical cell centers",
+    "forward": "all4physicalBayerphases, original fitted RGB/green complex ratios, joint selected frequencies",
+    "fidelity": "observed-variance-whitened RAW residual after parent and fixed per-phase affine planes",
+    "unit": "median green RAW standard deviation",
+    "TV_multiplier": 4.0,
+    "group_L1_multiplier": 0.125,
+    "ridge_multiplier": 0.05,
+    "iteration_cap": 2048,
+    "relative_gap_target": 1e-05,
+    "gap_scale": "max(.5*sum((A*initial_coarse_coefficients)^2),1), not total noisy data energy",
+    "primal_dual_step": ".95/sqrt(8+16*1.5625*sum_phase(max(sum_wave_component(t^2))))",
+    "post_power_shrink": 9,
+    "power_proxy": "earlier Gaussian32 covariance, heuristic not uncertainty of RAW refit",
+    "magnitude_cap": 3,
+    "global_gate": 9,
+    "apron_native": 32,
+    "stride_native": 128,
+    "clipped_selected_windows": "exact earlier grid-TV result"
+  },
+  "development": "Previous64 final sparse recipes/512 observations, now development. 11 settings: dense greenTV .25/.5/1; native8-spaced green TV2/4/8; allRGB TV4/8; allRGB TV4 group .125/.25/.5. Choose group.125 for essentially retained response and lower mean/worst blank spill. No new model calls or noise draws in development. No GT/reference enters correction.",
+  "development_results": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v1/result-v1.json",
+      "sha256": "a395b6caee8b52f8aa3ec4d9a3c46f69e794277e69128c915a9e61ac02c267e7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v2/result-v1.json",
+      "sha256": "7bf9abf9142da783d5cd8c966148ea818f5edfdd4afa00fc471ce37e5e414514"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v3/result-v1.json",
+      "sha256": "33bc63a1de3bb3c1e6af4ff6b1a7794a6bcd5d38335eaaf2469de7855074c889"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/development-v4/result-v1.json",
+      "sha256": "cc656acf6da358b39469835fa833ef1e366f9534f4a3610a1c930451dd5c8011"
+    }
+  ],
+  "validation": {
+    "seeds": [
+      2026111100,
+      2026111101,
+      2026111102,
+      2026111103,
+      2026111104,
+      2026111105,
+      2026111106,
+      2026111107,
+      2026111108,
+      2026111109,
+      2026111110,
+      2026111111,
+      2026111112,
+      2026111113,
+      2026111114,
+      2026111115,
+      2026111116,
+      2026111117,
+      2026111118,
+      2026111119,
+      2026111120,
+      2026111121,
+      2026111122,
+      2026111123,
+      2026111124,
+      2026111125,
+      2026111126,
+      2026111127,
+      2026111128,
+      2026111129,
+      2026111130,
+      2026111131,
+      2026111132,
+      2026111133,
+      2026111134,
+      2026111135,
+      2026111136,
+      2026111137,
+      2026111138,
+      2026111139,
+      2026111140,
+      2026111141,
+      2026111142,
+      2026111143,
+      2026111144,
+      2026111145,
+      2026111146,
+      2026111147,
+      2026111148,
+      2026111149,
+      2026111150,
+      2026111151,
+      2026111152,
+      2026111153,
+      2026111154,
+      2026111155,
+      2026111156,
+      2026111157,
+      2026111158,
+      2026111159,
+      2026111160,
+      2026111161,
+      2026111162,
+      2026111163
+    ],
+    "new_recipes": 64,
+    "conditions": "same native256 present/absent,4CFA,scene.02,nominalISO6400,one draw",
+    "planned_actual_V143_root_DINO_calls": 512,
+    "planned_new_V120_calls": 0,
+    "training_updates": 0,
+    "RAW_opens": 0
+  },
+  "scope": "New final validation independent for locked direct-RAW candidate; previous sparse64 is development, not heldout for new method. Preserve worst tails/means and native exactGT/real comparisons. No default or baseline change before evidence."
+}

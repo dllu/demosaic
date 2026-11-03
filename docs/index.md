@@ -18,6 +18,11 @@ worst-case blank RMS. The known isolated stripe island is removed; connected
 boundary leakage remains. Wider sky and all 256 final absent inputs stay unchanged.
 This remains opt-in, with grid-TV the default inside the optional stage.
 
+The later [direct RAW refit study](raw-phase-refit.md) finds a small spill/detail
+tradeoff on another 64 fresh recipes: 7.7% less mean blank spill, 0.5% lower
+response and slightly higher image error. Boundary continuation and coarse-solver
+caps remain. It is retained as a research tool with matched native comparisons.
+
 The earlier [continuous-frequency TV fit](offgrid-phase.md) gives modest,
 placement-sensitive mesh changes on complete 102MP RGB16 outputs. Fresh 64-recipe validation
 finds 3.7% more response and slightly lower texture error versus fixed-bin TV,

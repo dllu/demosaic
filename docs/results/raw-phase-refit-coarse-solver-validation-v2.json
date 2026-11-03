@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "rows": [
+    {
+      "case": "independent dense masked ridge",
+      "device": "cpu",
+      "adjoint_error": 5.684341886080802e-14,
+      "latent_CG_error": 0.015515304663392014,
+      "gap_implied_bound": 0.018985639452646252,
+      "solver": {
+        "iterations": 880,
+        "relative_gap": 9.011362635646947e-06,
+        "scale": 1.0,
+        "primal": 15526.587325727423,
+        "dual": 15526.58731671606,
+        "converged": true,
+        "lambda": 1e-16,
+        "ridge": 0.05,
+        "latent_grid": [
+          32,
+          32
+        ],
+        "latent_node_spacing_native": 8,
+        "step": 0.12474111121673642,
+        "operator_norm_squared_bound": 58.0
+      }
+    },
+    {
+      "case": "independent dense masked ridge",
+      "device": "cuda",
+      "adjoint_error": 1.4210854715202004e-14,
+      "latent_CG_error": 0.015515304663392014,
+      "gap_implied_bound": 0.018985639452646252,
+      "solver": {
+        "iterations": 880,
+        "relative_gap": 9.011362635646947e-06,
+        "scale": 1.0,
+        "primal": 15526.587325727423,
+        "dual": 15526.58731671606,
+        "converged": true,
+        "lambda": 1e-16,
+        "ridge": 0.05,
+        "latent_grid": [
+          32,
+          32
+        ],
+        "latent_node_spacing_native": 8,
+        "step": 0.12474111121673642,
+        "operator_norm_squared_bound": 58.0
+      }
+    },
+    {
+      "case": "positive TV exact constant",
+      "device": "cpu",
+      "analytic_error": 1.0383583596706746e-05,
+      "gap_implied_bound": 0.08419410006061095,
+      "solver": {
+        "iterations": 2048,
+        "relative_gap": 0.00017721616212540425,
+        "scale": 1.0,
+        "primal": 4.758690787933653,
+        "dual": 4.758513571771528,
+        "converged": false,
+        "lambda": 2.0,
+        "ridge": 0.05,
+        "latent_grid": [
+          32,
+          32
+        ],
+        "latent_node_spacing_native": 8,
+        "step": 0.12474111121673642,
+        "operator_norm_squared_bound": 58.0
+      }
+    },
+    {
+      "case": "positive TV exact constant",
+      "device": "cuda",
+      "analytic_error": 1.0383583596706746e-05,
+      "gap_implied_bound": 0.0841941000612439,
+      "solver": {
+        "iterations": 2048,
+        "relative_gap": 0.0001772161621280688,
+        "scale": 1.0,
+        "primal": 4.758690787933653,
+        "dual": 4.758513571771525,
+        "converged": false,
+        "lambda": 2.0,
+        "ridge": 0.05,
+        "latent_grid": [
+          32,
+          32
+        ],
+        "latent_node_spacing_native": 8,
+        "step": 0.12474111121673642,
+        "operator_norm_squared_bound": 58.0
+      }
+    }
+  ],
+  "operator": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/validate-coarse-v2.py",
+    "sha256": "cf7ac47e33ba7234d0c3192d3b9cbd073f88feb31744127e5c58611e92875ab7"
+  },
+  "solver": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/raw-phase-refit-v1/solver-v2.py",
+    "sha256": "2f0734c1d5e8361913784cb58c742e10e3aa499f38ed3b0ab931ddcee7cb867b"
+  },
+  "CPU_CUDA_max_difference": 0.0,
+  "CPU_CUDA_RNG_unchanged": true,
+  "scope": "Independent np.interp matrix construction, physical linear adjoints, masked ridge against independent NumPy CG, known exact positive-TV optimum, exact support, gap-implied errors, CPU/CUDA comparison and RNG checks. The positive-TV case reaches its2048 cap; report its achieved gap and analytic error without claiming convergence. No image references or neural calls."
+}
