@@ -1,0 +1,91 @@
+{
+  "status": "passed-paired-bindings-finite-states-and-complete-scalar-replay",
+  "auditor": {
+    "path": "/home/dllu/proj/demosaic/scripts/audit_phase_matrix_training.py",
+    "sha256": "ea1085d0e53c97ae41712ae46622c4de2dd149c4b0f70616a3483bddb5ccb2eb"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/plan-v1.json",
+    "sha256": "bde8f4ec7ed8a6695e9f03baeba4581f67773ada58f636c3d9087ee49beef26c"
+  },
+  "training_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/train-result-v1.json",
+    "sha256": "5ac426c7f133e795f1928deea290b4a8b4e9124704fd59e716ecc9688259cbaf"
+  },
+  "training_trace": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/train-trace-v1.jsonl",
+    "sha256": "a1af0b834c364cadffd651b12910bff00973ef1777a6f15b75743137f8e44f40"
+  },
+  "cache_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/cache-result-v1.json",
+    "sha256": "81c9533b7afbd1f1e93dd53f55c660c1e951d719bb84dafade5b17aeaee1314a"
+  },
+  "cache_trace": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/cache-trace-v1.jsonl",
+    "sha256": "1c7675a9b02bf6862f45a96fc46b78cf6d570ec335db186467ad7f33d12e463f"
+  },
+  "original_training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/train-result-v1.json",
+    "sha256": "39ed8ca73b089feba0983b6aa0c73ecdf12ffade3cf19504c789f9d2e6df373b"
+  },
+  "review": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/review-result-v1.json",
+    "sha256": "c49df97d3782f520147207a612ddc08a4f9d193457018f28b488047db01bd884"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/checkpoints/train-step1000.pt",
+    "sha256": "bf32e14a6f80c82e4369e9d32c75aa4edab75fac77d5e866087c0bd8cffcc576"
+  },
+  "matched_steps_per_arm": 1000,
+  "cached_observations": 4000,
+  "all_input_target_fingerprints_and_metadata_match_original": true,
+  "scalar_trace_differences": {
+    "loss": {
+      "nonexact_steps": 251,
+      "maximum_abs": 1.9073486328125e-06
+    },
+    "pixel": {
+      "nonexact_steps": 260,
+      "maximum_abs": 9.5367431640625e-07
+    },
+    "gradient": {
+      "nonexact_steps": 249,
+      "maximum_abs": 1.9073486328125e-06
+    },
+    "spectral": {
+      "nonexact_steps": 0,
+      "maximum_abs": 0.0
+    },
+    "gradient_norm": {
+      "nonexact_steps": 0,
+      "maximum_abs": 0.0
+    },
+    "lr": {
+      "nonexact_steps": 0,
+      "maximum_abs": 0.0
+    }
+  },
+  "scalar_reported_loss_comparison_tolerance": {
+    "rtol": 2e-06,
+    "atol": 1e-07
+  },
+  "scalar_raw_and_EMA_weights_exact_original": true,
+  "scalar_predictions_exact_original": 1596,
+  "finite_Adam_states_at1000_per_arm": 12,
+  "all12_tensors_nonzero_finite_gradient_each_arm": true,
+  "batch_domains": {
+    "mesh": 357,
+    "photo": 215,
+    "flat": 158,
+    "mixed": 164,
+    "weak": 106
+  },
+  "parent_and_DINO_hashes_unchanged_during_cache": true,
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "prior_audit_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/training-audit-failure-v1.json",
+    "sha256": "f0b98a2e4c2ed119cf4637b0ddd098f841f4def60b5d5b91b9aab6528eb09473"
+  },
+  "scope": "Posthoc array/state audit. The initial bitexact assertion on reported scalar loss reductions was too strong and is preserved with its source. Pixel/gradient/total loss reductions differ by at most1.91e-6; spectral loss, gradient norm, LR, both final weight sets and all1596 endpoint predictions reproduce V147 exactly. No training/input change. This does not establish matrix quality or independent validation."
+}

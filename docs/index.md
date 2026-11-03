@@ -1,9 +1,11 @@
 # Documentation guide
 
-The [V148 phase-mixing trial](phase-matrix-detail.md) has passed component,
-legacy-embedding and CUDA/resume checks. Its full shared replay cache matches
-V147's inputs/targets, and both matched heads completed1k updates. Four fixed final
-endpoints cover798 retained cases; quality and native review remain pending.
+The [completed V148 phase-mixing comparison](phase-matrix-detail.md) finds no
+useful weak-detail gain from a learned complex4×4 operator. Matrix mesh response
+falls8–9% and native512 noisy-flat error rises .13–.24% against V143. Small
+strong-edge whole-image gains coexist with worse exact quiet regions. All four
+fixed endpoints, independent audits and58 native figures are complete; the fresh
+scalar control exactly reproduces all1,596 V147 predictions.
 
 The [completed V147 late spectral pilot](late-spectral-detail.md) lowers weak-mesh
 response about 8% and raises noisy-flat error. Whole strong-edge images improve
