@@ -1,5 +1,13 @@
 # Experiment index
 
+The [active V156 local-excess trial](local-excess-risk.md) tests a local RGB-RMS
+regret hinge against exact delivered-RGB MSE control. It penalizes worsening
+boxes without penalizing improving ones; no target enters forward.36 independent
+objective tests,28 compatibility contexts,genuine8+2 CUDA restoration and a
+step500 exact-control/finite-state audit pass. Both1k heads are fixed, followed
+by four endpoints/822 cases,independent metrics and72 native figures. No quality
+or flat-safety gain has been established yet.
+
 The [completed V155 parent comparison](matched-parent-comparison.md) runs V143 and
 V120 afresh on all 822 identical inputs, with zero training/noise draws. V120 has
 lower coarse noisy-flat error but higher total noisy error and much worse ADC

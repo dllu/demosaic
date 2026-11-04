@@ -128,6 +128,7 @@ spatial RMS −.15% against V120, with no clear new mesh recovery. The original
 
 | Question | Evidence and current action |
 | --- | --- |
+| Can local error control protect quiet neighbors while learning weak detail? | [Active V156](local-excess-risk.md): local32px/hop16 smoothed RGB RMS error excess over frozen parent,with a C1 hinge/weight1. Improving boxes receive no penalty;target only enters loss. Architecture/data/base delivered-RGB objective unchanged.36 objective/adjoint tests,28 compatibility contexts,genuine8+2 CUDA and immutable step500 control/raw/EMA/Adam checks pass. Both1k heads/four endpoints/822 cases/72 native views fixed;quality pending. Soft local loss and noisy-scale proxies are not a flat-safety guarantee |
 | Does a cleaner parent remove the quiet/detail tradeoff? | [Completed V155](matched-parent-comparison.md): fresh V120 and V143 under one deterministic FP32 policy, 822 cases each. V120 coarse noisy-flat RMS improves 1.59–2.36% while total RMS worsens 2.31–5.11%. Quiet RMS improves 0.39–0.91% but ISO6400 quiet spatial error rises; ADC slope full/coarse error worsens 33.26/112.65%. No convincing new real cab wires or clean native field. All 1,644 outputs,64 native figures and independent audits complete. Neither old parent array is adopted after the initial exact-replay failure. Retain explicit parent strengths; next investigate local spatial/coarse control together with weak-detail supervision |
 | Does quadratic delivered error underweight weak coefficients? | [Completed V154](robust-spectral-objective.md): stable Charbonnier .01/.003 gives weak band errors more relative gradient pressure. Native512 noisy-flat RMS improves 0.45–0.50% versus V143, with lower actual mesh-blank errors than matched RGB MSE, but weaker mesh/natural response and mixed quiet RMS 1.51–2.27% worse than V143. Average support opens while proposal energy falls; neither proves selective recovery. All six endpoints/822 cases/96 actual native figures and audits complete; exact MSE control reproduces all 1,644 V153 RGB arrays. Same .25 coefficient changes gradient strength, not equal-norm objectives. Next examine cleaner parent and local supervision; band-only reweighting cannot remove parent coarse mottle |
 | Does the spectral term supervise the correction that reaches the image? | [Completed V153](delivered-spectral-objective.md): delivered mosaic/RGB spectral loss raises mesh response6.04–7.97% over matched pre-support control, reaching2.45–2.59% of GT. Actual blank errors and natural-band attenuation worsen; ADC photo gains are lost. Quiet results are mixed, and mosaic coarse slope error improves with a DC tradeoff. No convincing new real crossings/organic texture. All three1k heads/six endpoints/822 cases/84 native views/audits complete; all1,644 control arrays reproduce V152 exactly. Stronger response prototype,not a broad solution. Next compare smooth robust delivered penalties for weak errors; RGB scales remain training proxies. Preclaim12-vs13 reviewer assertion/failure artifacts and corrected revision are preserved; training never restarted |
@@ -206,6 +207,19 @@ DINO feature supervision. Our [early spatial-MSE experiment](dino-feature-superv
 uses corresponding feature locations, native camera-RGB rendering and the
 existing frozen encoder instance. Its diagnostic and pilot distinguish measured
 output gradients from trained quality; no GramSR reproduction is claimed.
+
+Two additional2026 preprints were reviewed on2026-11-03.
+[SegDem](https://arxiv.org/html/2608.09995v1) combines frozen DINOv3 ViT-S/16,
+CFA/noise-conditioned SwinIR,feature adaptation/residual fusion and an auxiliary
+mosaic head. Its stated decoded-sRGB/Gaussian/fixed-RGGB scope and224px structural
+input differ from our sensor-linear conditions. The listed GitHub URL returned404
+during this check; release/license availability was not assumed.
+[PixIE](https://arxiv.org/html/2605.23531v1) studies cross-scale denoising with
+multidepth DINOv3 features and spatially continuous per-pixel modulation,using
+neighborhood-aware embedding and compact attention. It is a low-light enhancement
+study rather than our validated16-bit JDD comparison. Our inference is that
+native-grid structural fusion deserves further controlled work; no source,
+weights,data or reported gains were adopted into the running trial.
 
 The heldout review includes the main DSCF3879/3880 platform scene and the
 additional DSCF3842 ISO6400 / **DSCF3835 ISO100 f/5.6** fine green mesh, with

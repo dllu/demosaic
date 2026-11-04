@@ -1,0 +1,70 @@
+version: V156
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  mse-control:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 0
+  local-risk:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+local_risk_window_native: 32
+local_risk_hop_native: 16
+local_risk_RMS_rounding_DN16: 1
+local_risk_transition_noise_units: 0.0001
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+projection_margin_GiB: 0.5
+external_quality_root: /mnt/external/demosaic/quality-20261103/V156-local-risk-v1
+scope: >-
+  Two fresh identical33713-parameter/13-tensor relative heads share1000 cached V148
+  batches/4000 old observations and frozen V143/DINO parents. Only local-risk adds
+  weight1 times the C1 hinge of local noise-normalized smoothed RGB RMS error excess
+  over the supplied parent. Native32 boxes/hop16,replicate edge grid,1DN16 RMS rounding,
+  transition1e-4 in noise-normalized RMS units. Stable squared-error-difference divided
+  by summed RMS norms avoids cancellation. Improvements are unpenalized;no clean-target
+  power mask. Parent/target/units detached in this training-only term;targets never
+  enter forward. No local risk guarantee follows from this loss. Base delivered-RGB
+  spectral MSE .25,pixel/gradient terms,data/domain weights,geometry,architecture,
+  physical conditioning,initialization,optimizer/LR/clipping/EMA remain fixed.
+  All86 neural files unchanged. MSE control must exactly reproduce V154 trace/raw/EMA/
+  Adam and replay all1644 archived control outputs bitwise. One local-risk coefficient,
+  no quality-driven coefficient or endpoint selection.882 supervised/118 zero-ADC
+  gradient batches,all1000 optimizer/EMA clocks. Genuine8+2 discarded smoke;production
+  fresh. Four fixed raw/EMA endpoints on822 cases:3288 actual review head calls.
+  Control arrays replayed but adopted without duplicate files;new local raw outputs
+  local and EMA external,2.211GiB each,96/208GiB reserves plus0.5GiB projected margin.
+  Actual blank/quiet/noisy-flat/photo/ADC errors and both protected real scenes/windows/
+  priors/JPEGs retained. Real references qualitative,not exactGT,never pixelwise scored.
+  Adaptive reused cohort,not blind validation. No new parent/DINO/noise/original lookup,
+  RAW decode or dataz access;all protected captures/JPEGs/siblings remain excluded.

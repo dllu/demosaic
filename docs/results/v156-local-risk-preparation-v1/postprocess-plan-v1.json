@@ -1,0 +1,47 @@
+{
+  "root": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/plan-v1.json",
+    "sha256": "bf773250eb6aa659b2e68509aa38682d0ae197a0f45be00bc8b4b783f271ea55"
+  },
+  "design": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/quality-design-v1.json",
+    "sha256": "b003f557d4f7994c79565e6f556c0b51816331ed6199529fb82c13b8475f7fab"
+  },
+  "expected_training_owner": {
+    "pid": 3201667,
+    "created": 1793766449.04
+  },
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/plan-v1.json",
+      "sha256": "bf773250eb6aa659b2e68509aa38682d0ae197a0f45be00bc8b4b783f271ea55"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/quality-design-v1.json",
+      "sha256": "b003f557d4f7994c79565e6f556c0b51816331ed6199529fb82c13b8475f7fab"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/audit_local_risk_trial.py": "9f18b10b1241fdf468c720eed1078b301669addcba0bb11624259b9fc3f39727",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/train_directional_bank_trial.py": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/render_local_risk_trial.py": "51baec6ca45a5c053157b99c53cfcfc7d4463f032720aa8ef27392519a2cfc7b",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/profile_raw_kernel_inference.py": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/score_local_risk_trial.py": "6e3a5ec23b93e4a9671c357e53652b0b5ce485ea260aee99d35c530a703719d9",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/review_local_risk_trial.py": "247541049f30d03ed89639dcddef8872a160c1fe42f32be57f64934853920931",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-v1/scripts/train_v43_quality_trial.py": "a408a8138c1b4df63acb9414aeb270d35c8fc48a8660ab9a45549bd0d61621e6"
+  },
+  "controller": {
+    "path": "/home/dllu/proj/demosaic/.cache/queue-v156-review-v1.py",
+    "sha256": "6a5430a9df75ca58f65b845421b7da27604d8136da1bd2c08605ddd9214c2862",
+    "text": "\"\"\"Observe the original V156 controller, then validate, replay, score and render.\"\"\"\n\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V156-local-risk-v1'\ntraining=read(root/'plan-v1.json')\nguard(training)\npost=root/'postprocess-v1'\nenv=os.environ.copy()\nenv['PYTHONPATH']=':'.join(str(p) for p in [post/'scripts',Path(training['work'])/'scripts',Path(training['work'])/'src'])\nenv['OPENBLAS_NUM_THREADS']=env['OMP_NUM_THREADS']='1'\nenv['HF_HUB_OFFLINE']=env['TRANSFORMERS_OFFLINE']='1'\nenv['CUBLAS_WORKSPACE_CONFIG']=':4096:8'\n# Import the actual dynamically selected metric modules before queuing work.\ncommand='from pathlib import Path;from score_local_risk_trial import load_module;'\ncommand+='r=Path(\"/home/dllu/proj/demosaic/.cache/quality-20261103\");'\ncommand+='load_module(r/\"collaborative-detail-v1/transfer-v1.py\",\"errors\");'\ncommand+='load_module(r/\"V144-V145-photo-supplement-v1/operator-v2.py\",\"photos\");'\ncommand+='import audit_local_risk_trial,render_local_risk_trial,review_local_risk_trial;'\ncommand+='print(\"PASS all actual dynamic metric/reviewer/renderer imports\")'\npreflight=subprocess.run([str(repo/'.venv/bin/python'),'-c',command],cwd=repo,env=env,capture_output=True,text=True)\nassert preflight.returncode==0,(preflight.stdout,preflight.stderr)\nowner=read(root/'status-v1.json')['owner']\nplan={\n    'root':str(root),'training_plan':ref(root/'plan-v1.json'),\n    'design':ref(root/'quality-design-v1.json'),'expected_training_owner':owner,\n    'inputs':[ref(root/'plan-v1.json'),ref(root/'quality-design-v1.json')],\n    'frozen_files':{str(p):ref(p)['sha256'] for p in post.rglob('*.py')},\n    'controller':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'import_preflight':{'returncode':preflight.returncode,'stdout':preflight.stdout,'stderr':preflight.stderr},\n    'scope':'No parent/DINO/noise/training calls here. Wait on exact original training PID/create-time;do not restart. Mandatory strict CPU validation of final states/26 Adam states/control trace/raw/EMA/Adam,then3288 actual head calls including1644 bit-exact archived control replays with no duplicate array writes. New local raw/EMA arrays split local/external.4686 metric rows/30 real rows unscored,independent audit,72 native figures/24 triplets;actual human native viewing remains required.'}\nassert not (root/'postprocess-plan-v1.json').exists()\nsave(root/'postprocess-plan-v1.json',plan)\n(root/'postprocess-controller.claim').open('x').close()\nstatus={'status':'waiting-for-original-training-owner',\n        'owner':{'pid':os.getpid(),'created':psutil.Process().create_time()},'completed':{}}\nsave(root/'postprocess-status-v1.json',status)\nwhile True:\n    current=read(root/'status-v1.json')\n    assert current['owner']==owner\n    if current['status']=='completed-matched-training-awaiting-fixed-quality-review':\n        assert set(current['completed'])=={'parity','smoke','train'}\n        break\n    assert current['status'] in ['running-declared-phase','waiting-for-headroom'],current\n    p=psutil.Process(owner['pid'])\n    assert abs(p.create_time()-owner['created'])<.01 and p.status() not in ['dead','zombie']\n    time.sleep(10)\nstages=[\n    ('checkpoint-validation','review_local_risk_trial.py',['--validate-only']),\n    ('review','review_local_risk_trial.py',[]),\n    ('scores','score_local_risk_trial.py',[]),\n    ('metric-audit','audit_local_risk_trial.py',[]),\n    ('render','render_local_risk_trial.py',[])]\nfor stage,name,extra in stages:\n    guard(training);guard(plan)\n    with (root/('postprocess-'+stage+'-v1.log')).open('x') as log:\n        child=subprocess.Popen([str(repo/'.venv/bin/python'),str(post/'scripts'/name),str(root),*extra],cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT)\n        childowner={'pid':child.pid,'created':psutil.Process(child.pid).create_time()}\n        status.update(status='running-'+stage,stage=stage,child_owner=childowner)\n        save(root/'postprocess-status-v1.json',status)\n        code=child.wait()\n    status['completed'][stage]={'owner':childowner,'returncode':code}\n    if code:\n        status['status']='failed-'+stage+'-preserve-evidence-no-restart'\n        save(root/'postprocess-status-v1.json',status)\n        raise RuntimeError(status['status'])\nstatus['status']='completed-four-endpoint-audits-and-rendering-awaiting-actual-native-viewing'\nsave(root/'postprocess-status-v1.json',status)\nprint(status['status'],flush=True)\n"
+  },
+  "import_preflight": {
+    "returncode": 0,
+    "stdout": "PASS all actual dynamic metric/reviewer/renderer imports\n",
+    "stderr": ""
+  },
+  "scope": "No parent/DINO/noise/training calls here. Wait on exact original training PID/create-time;do not restart. Mandatory strict CPU validation of final states/26 Adam states/control trace/raw/EMA/Adam,then3288 actual head calls including1644 bit-exact archived control replays with no duplicate array writes. New local raw/EMA arrays split local/external.4686 metric rows/30 real rows unscored,independent audit,72 native figures/24 triplets;actual human native viewing remains required."
+}

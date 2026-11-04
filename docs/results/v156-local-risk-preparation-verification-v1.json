@@ -1,0 +1,55 @@
+{
+  "status": "pass-preparation-bytes-sources-and-documents-quality-pending",
+  "recorded_unix_UTC": 1793767538.1787932,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v156-local-risk-preparation-v1.json",
+    "sha256": "ada4a61ddead414bce3094dc8b5b608a15261a2c519e1bc8f1879b09f7de387a"
+  },
+  "byte_exact_receipts": 12,
+  "source_texts": 28,
+  "unchanged_neural_sources": 86,
+  "tests": 36,
+  "compatibility_head_calls": 56,
+  "discarded_smoke_head_calls": 20,
+  "finite_Adam_states_at500": 26,
+  "historical_live_prefix_rows": 808,
+  "document_links_checked": 428,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "a52d1ba54847e632e43683e49ae8c0e0cd55df19bc5c3917f7de49aba96384f1"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "933fde61228584aa9438653c2e40f0458ae2bd247eb4d14c44fe3158f9701375"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "acd3ec9a213e1fa29e8263b98187eb89a2fcf603e457246b4c946ece9013e016"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "857eabd319008aed9a77abfd8737a509f6bfafd73a1fd15b6ef7c0c8820bb5ab"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "149f4ceccd2e1f17df2981cb154ad4686619c4c31b6e657cdfe3ad4f48205b33"
+    },
+    "docs/local-excess-risk.md": {
+      "path": "/home/dllu/proj/demosaic/docs/local-excess-risk.md",
+      "sha256": "bc09748e5ec72eff7c053442b083c86aea7c5cb626aa1634d6c98a310b22ada1"
+    },
+    "diary/2026-11-03-20-27-30-v156-local-excess-risk.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-03-20-27-30-v156-local-excess-risk.md",
+      "sha256": "4a5bdccfd535863e121916002d1ce52a89ed12f632f42091642d6ab511bd1019"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v156-preparation-v1.py",
+    "sha256": "c3f8a232910929696dfb76da637060520807e66ce450f7fdead8250eb1de6f48",
+    "text": "\"\"\"Check V156 readiness bytes,sources,live prefix and current document links.\"\"\"\n\nimport re\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V156-local-risk-v1'\nindex=repo/'docs/results/v156-local-risk-preparation-v1.json'\noutput=repo/'docs/results/v156-local-risk-preparation-verification-v1.json'\nassert not output.exists()\npublication=read(index)\nassert len(publication['copies'])==12\nfor item in publication['copies'].values():\n    assert ref(item['original']['path'])==item['original']\n    assert ref(item['public']['path'])==item['public']\n    assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan)\npost=read(root/'postprocess-plan-v1.json');guard(post)\nsources=read(publication['sources']['path'])\nassert ref(publication['sources']['path'])==publication['sources']\nassert len(sources['frozen_neural_hashes'])==86 and len(sources['source_texts'])==28\nfor p,h in sources['frozen_neural_hashes'].items():\n    assert ref(p)['sha256']==ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\nfor item in sources['source_texts']+[sources['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256']\n    assert Path(item['path']).read_text()==item['text']\nfor item in sources['metric_sources']:\n    assert ref(item['path'])==item\nassert read(root/'objective-tests-v1.json')['tests']==36\nsmoke=read(root/'smoke-result-v1.json')\nassert smoke['counts']=={'mse-control':10,'local-risk':10}\nassert all(min(v.values())>0 and len(v)==13 for v in smoke['parameter_maximum_gradients'].values())\nassert read(root/'parity-result-v1.json')['component_forward_evaluations']==56\naudit=read(root/'checkpoint500-audit-v1.json')\nassert audit['control_raw_EMA_Adam_exact'] and audit['finite_Adam_states_at500']==26\nassert not audit['CUDA_initialized']\nsnapshot=read(root/'live-readiness-v1.json')\nassert snapshot['completed_training_prefix_rows']==808\nassert (root/'train-trace-v1.jsonl').read_bytes().startswith(Path(snapshot['captured_journal_prefix']['path']).read_bytes())\nfor key in ['captured_status','captured_progress','captured_journal_prefix']:\n    assert ref(snapshot[key]['path'])==snapshot[key]\nassert read(root/'quality-design-v1.json')['new_component_forwards']==3288\nassert len(read(root/'quality-design-v1.json')['endpoints'])==4\nassert post['import_preflight']['returncode']==0\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n      'docs/local-excess-risk.md','diary/2026-11-03-20-27-30-v156-local-excess-risk.md']\nlinks=0\nfor name in docs:\n    p=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (p.parent/link.split('#')[0]).is_file(),(name,link)\n        links+=1\nsave(output,{\n    'status':'pass-preparation-bytes-sources-and-documents-quality-pending',\n    'recorded_unix_UTC':time.time(),'publication':ref(index),'byte_exact_receipts':12,\n    'source_texts':28,'unchanged_neural_sources':86,'tests':36,'compatibility_head_calls':56,\n    'discarded_smoke_head_calls':20,'finite_Adam_states_at500':26,'historical_live_prefix_rows':808,\n    'document_links_checked':links,'documents':{p:ref(repo/p) for p in docs},\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_neural_calls':0,'new_noise_draws':0,\n    'scope':'Exact12 copied receipt bytes,28 source texts,86 unchanged neural hashes,real compatibility/smoke/step500 proof and historical live prefix. Does not imply final quality,local safety,completed production or actual new native viewing.'})\nprint('PASS:12 byte-exact readiness copies,28 source texts,86 neural hashes,36 tests,808-row prefix,',links,'links;quality pending')\n"
+  },
+  "new_neural_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Exact12 copied receipt bytes,28 source texts,86 unchanged neural hashes,real compatibility/smoke/step500 proof and historical live prefix. Does not imply final quality,local safety,completed production or actual new native viewing."
+}

@@ -1,0 +1,24 @@
+{
+  "status": "pass-finite-two-head-state-and-exact-MSE-control-at500",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/checkpoints/train-step0500.pt",
+    "sha256": "364821eae3002b75df3689c8d1a730603eb12284cfb9d53c81b12ceeb1a0b023"
+  },
+  "previous": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/checkpoints/train-step0500.pt",
+    "sha256": "df9ad5349e6d51596c872e7e039ed0d4459de7362f2ea9df1256f03e4a7ab88e"
+  },
+  "steps": 500,
+  "parameters_per_head": 33713,
+  "finite_Adam_states_at500": 26,
+  "control_raw_EMA_Adam_exact": true,
+  "CUDA_initialized": false,
+  "new_neural_calls": 0,
+  "new_parent_DINO_noise": 0,
+  "auditor": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v156-checkpoint500-v1.py",
+    "sha256": "bbf2e06dbbc68fddf9bab4373feb44e66d187a61831a1763ee24ef528fdcd5d0",
+    "text": "\"\"\"Independently inspect immutable V156 step500 without a neural call.\"\"\"\n\nfrom pathlib import Path\n\nimport torch\nfrom review_local_risk_trial import equal_tree\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V156-local-risk-v1'\nplan=read(root/'plan-v1.json');guard(plan)\nassert read(root/'train-progress-v1.json')['step']>500\ncheckpoint=root/'checkpoints/train-step0500.pt'\nprevious=Path(plan['previous'])/'checkpoints/train-step0500.pt'\nstate=torch.load(checkpoint,map_location='cpu',weights_only=True)\nold=torch.load(previous,map_location='cpu',weights_only=True)\nassert state['step']==old['step']==500\nassert state['counts']==state['updates']=={'mse-control':500,'local-risk':500}\nassert state['parent']==plan['parent']==old['parent']\nassert set(state['models'])==set(state['emas'])==set(state['optimizers'])=={'mse-control','local-risk'}\nfor arm in state['models']:\n    assert len(state['models'][arm])==len(state['emas'][arm])==len(state['optimizers'][arm]['state'])==13\n    assert sum(v.numel() for v in state['models'][arm].values())==33713\n    assert all(torch.isfinite(v).all() for k in ['models','emas'] for v in state[k][arm].values())\n    assert all(float(s['step'])==500 for s in state['optimizers'][arm]['state'].values())\n    assert all(torch.isfinite(v).all() for s in state['optimizers'][arm]['state'].values() for v in s.values())\nfor key in ['models','emas','optimizers']:\n    assert equal_tree(state[key]['mse-control'],old[key]['mse-control']),key\nassert not torch.cuda.is_initialized()\nassert not (root/'checkpoint500-audit-v1.json').exists()\nsave(root/'checkpoint500-audit-v1.json',{\n    'status':'pass-finite-two-head-state-and-exact-MSE-control-at500',\n    'checkpoint':ref(checkpoint),'previous':ref(previous),'steps':500,\n    'parameters_per_head':33713,'finite_Adam_states_at500':26,'control_raw_EMA_Adam_exact':True,\n    'CUDA_initialized':False,'new_neural_calls':0,'new_parent_DINO_noise':0,\n    'auditor':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Immutable step500 engineering/state evidence only. Current production continues;final endpoint quality/native viewing remain unmeasured. Exact controls do not prove local-risk benefit or flat safety.'})\nprint('PASS step500:26 finite Adam states;MSE raw/EMA/Adam bit-exact V154;zero neural calls')\n"
+  },
+  "scope": "Immutable step500 engineering/state evidence only. Current production continues;final endpoint quality/native viewing remain unmeasured. Exact controls do not prove local-risk benefit or flat safety."
+}

@@ -41,6 +41,10 @@ V120's coarse noisy-flat error1.59–2.36% lower than V143, but total noisy-flat
 RMS2.31–5.11% higher and worse ADC slopes. Neither restores the fine cab fence.
 All1,644 fresh paired outputs,64 native figures and independent audits are complete.
 
+The [active V156 trial](docs/local-excess-risk.md) penalizes local RGB error
+increases relative to the frozen parent, aiming to protect quiet neighbors while
+learning weak detail. Readiness checks pass; restoration gains remain unmeasured.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

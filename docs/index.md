@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [active V156 local-regret trial](local-excess-risk.md) adds a smooth penalty
+for32px regions getting worse than their frozen parent. Two identical fresh
+heads retain the base delivered-RGB objective/data/schedule. Independent values
+and output-adjoint tests, exact compatibility, genuine8+2 CUDA checks and a
+step500 state audit pass. The fixed four-endpoint quality review is queued;
+restoration quality and actual native viewing remain pending.
+
 The [completed V155 matched-parent audit](matched-parent-comparison.md) evaluates
 V143 and V120 afresh under one deterministic FP32 policy. V120 lowers coarse
 noisy-flat RMS 1.59–2.36% but raises total RMS 2.31–5.11%; quiet results are mixed

@@ -1,0 +1,360 @@
+{
+  "status": "completed-matched-head-phase",
+  "phase": "smoke",
+  "steps": 10,
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/plan-v1.json",
+    "sha256": "bf773250eb6aa659b2e68509aa38682d0ae197a0f45be00bc8b4b783f271ea55"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/checkpoints/smoke-step0010.pt",
+    "sha256": "1a2fe4029581229abdc6b49597665b626c7441282bc9d3108bebea54d055b4f9"
+  },
+  "counts": {
+    "mse-control": 10,
+    "local-risk": 10
+  },
+  "updates": {
+    "mse-control": 10,
+    "local-risk": 10
+  },
+  "supervised_batches": {
+    "mse-control": 7,
+    "local-risk": 7
+  },
+  "zero_ADC_gradient_batches": {
+    "mse-control": 3,
+    "local-risk": 3
+  },
+  "peak_weight_evaluations": {
+    "mse-control": 0,
+    "local-risk": 0
+  },
+  "parameter_maximum_gradients": {
+    "mse-control": {
+      "frequency_real_bias": 0.013266587629914284,
+      "frequency_in.weight": 4.553196504275547e-06,
+      "frequency_in.bias": 3.004792006322532e-06,
+      "frequency_out.weight": 0.0012297533685341477,
+      "local_in.weight": 1.0248150938974021e-10,
+      "local_in.bias": 1.4596390762733336e-10,
+      "local_middle.weight": 9.735419415068947e-11,
+      "local_middle.bias": 3.3924649200933743e-10,
+      "local_wide.weight": 4.064289876870575e-11,
+      "local_wide.bias": 7.139460134197861e-10,
+      "local_out.weight": 1.609555084769454e-07,
+      "local_out.bias": 4.430842636793386e-06,
+      "relative_in.weight": 5.014680368731206e-07
+    },
+    "local-risk": {
+      "frequency_real_bias": 0.013266587629914284,
+      "frequency_in.weight": 4.61970194010064e-06,
+      "frequency_in.bias": 2.7153264454682358e-06,
+      "frequency_out.weight": 0.0012297533685341477,
+      "local_in.weight": 6.533944912900935e-11,
+      "local_in.bias": 8.479845992059865e-11,
+      "local_middle.weight": 6.457240298018974e-11,
+      "local_middle.bias": 2.011868449613985e-10,
+      "local_wide.weight": 2.6313439274727735e-11,
+      "local_wide.bias": 2.1660401250400696e-10,
+      "local_out.weight": 7.090091003192356e-08,
+      "local_out.bias": 1.93647360902105e-06,
+      "relative_in.weight": 4.997263545192254e-07
+    }
+  },
+  "loss_floors_DN16": {
+    "mse-control": 16,
+    "local-risk": 16
+  },
+  "initial_outputs_exact_parent": true,
+  "trace": [
+    {
+      "step": 1,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-01.npz",
+        "sha256": "42532e49f7abff487d5ca8f93797f6c3596bee656132c67c68a61deb922856bb"
+      },
+      "domain": "mesh",
+      "arms": {
+        "mse-control": {
+          "loss": 0.0809515118598938,
+          "pixel": 0.018745463341474533,
+          "gradient": 0.005637601017951965,
+          "spectral": 0.0003320594260003418,
+          "gradient_norm": 0.022594571113586426,
+          "lr": 2e-05,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.0809515118598938,
+          "pixel": 0.018745463341474533,
+          "gradient": 0.005637601017951965,
+          "spectral": 0.0003320594260003418,
+          "gradient_norm": 0.022594571113586426,
+          "lr": 2e-05,
+          "local_excess_risk": 0.0
+        }
+      }
+    },
+    {
+      "step": 2,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-02.npz",
+        "sha256": "92da4dd179c1b55b04e4f0bfdc5b7baaf410fe370627c9919dc620cd590d00a3"
+      },
+      "domain": "photo",
+      "arms": {
+        "mse-control": {
+          "loss": 0.07941316813230515,
+          "pixel": 0.0661054477095604,
+          "gradient": 0.041137732565402985,
+          "spectral": 0.012093156576156616,
+          "gradient_norm": 0.0021072225645184517,
+          "lr": 4e-05,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.07941317558288574,
+          "pixel": 0.0661054477095604,
+          "gradient": 0.041137732565402985,
+          "spectral": 0.012093156576156616,
+          "gradient_norm": 0.00215135863982141,
+          "lr": 4e-05,
+          "local_excess_risk": 4.4716288449819785e-09
+        }
+      }
+    },
+    {
+      "step": 3,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-03.npz",
+        "sha256": "d5cebc712689291cb93a9edeb626f1e90129c47b7e8358d36548ddf2da1bd96c"
+      },
+      "domain": "flat",
+      "arms": {
+        "mse-control": {
+          "loss": 0.0,
+          "pixel": 0.1580272614955902,
+          "gradient": 0.07299979776144028,
+          "spectral": 0.15419034659862518,
+          "gradient_norm": 0.0,
+          "lr": 6e-05,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.0,
+          "pixel": 0.15802723169326782,
+          "gradient": 0.07299979031085968,
+          "spectral": 0.1541903167963028,
+          "gradient_norm": 0.0,
+          "lr": 6e-05,
+          "local_excess_risk": 1.0631709983499604e-06
+        }
+      }
+    },
+    {
+      "step": 4,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-04.npz",
+        "sha256": "29365de3221c9a2f9d3fc3488ba23c4405530bedcecab1f274bd1f2bd8fa0305"
+      },
+      "domain": "mixed",
+      "arms": {
+        "mse-control": {
+          "loss": 0.028310194611549377,
+          "pixel": 0.025239653885364532,
+          "gradient": 0.009548524394631386,
+          "spectral": 0.0027336429338902235,
+          "gradient_norm": 0.004176043905317783,
+          "lr": 8e-05,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.028310224413871765,
+          "pixel": 0.025239666923880577,
+          "gradient": 0.009548526257276535,
+          "spectral": 0.00273364526219666,
+          "gradient_norm": 0.0041371677070856094,
+          "lr": 8e-05,
+          "local_excess_risk": 1.5341449000061402e-08
+        }
+      }
+    },
+    {
+      "step": 5,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-05.npz",
+        "sha256": "458a098ad56289b80c9b77866de06686f5fc45288c4f5f82d3388e129f517a7b"
+      },
+      "domain": "weak",
+      "arms": {
+        "mse-control": {
+          "loss": 0.09158875048160553,
+          "pixel": 0.021159861236810684,
+          "gradient": 0.006367724388837814,
+          "spectral": 0.00058157549938187,
+          "gradient_norm": 0.00994317326694727,
+          "lr": 0.0001,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.09158905595541,
+          "pixel": 0.021159855648875237,
+          "gradient": 0.006367718335241079,
+          "spectral": 0.0005815774784423411,
+          "gradient_norm": 0.010036650113761425,
+          "lr": 0.0001,
+          "local_excess_risk": 8.373140047979177e-08
+        }
+      }
+    },
+    {
+      "step": 6,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-06.npz",
+        "sha256": "ebb061f00e4a2be5fe01c845691f31d4b14f82ea5749c18549783e4071eb8411"
+      },
+      "domain": "mesh",
+      "arms": {
+        "mse-control": {
+          "loss": 0.0,
+          "pixel": 0.02327577769756317,
+          "gradient": 0.006229785270988941,
+          "spectral": 0.00021110795205459,
+          "gradient_norm": 0.0,
+          "lr": 0.00012,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.0,
+          "pixel": 0.02327577769756317,
+          "gradient": 0.006229784339666367,
+          "spectral": 0.0002111079083988443,
+          "gradient_norm": 0.0,
+          "lr": 0.00012,
+          "local_excess_risk": 5.492286486719067e-11
+        }
+      }
+    },
+    {
+      "step": 7,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-07.npz",
+        "sha256": "c901d72ca0524ff32f518690448ab12f392f9799315080814b6d75d73acbc885"
+      },
+      "domain": "photo",
+      "arms": {
+        "mse-control": {
+          "loss": 0.0907442569732666,
+          "pixel": 0.07517523318529129,
+          "gradient": 0.04766581952571869,
+          "spectral": 0.014610298909246922,
+          "gradient_norm": 0.002761310199275613,
+          "lr": 0.00014000000000000001,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.09074486047029495,
+          "pixel": 0.07517518103122711,
+          "gradient": 0.047665826976299286,
+          "spectral": 0.014610151760280132,
+          "gradient_norm": 0.003700992790982127,
+          "lr": 0.00014000000000000001,
+          "local_excess_risk": 6.889134169796307e-07
+        }
+      }
+    },
+    {
+      "step": 8,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-08.npz",
+        "sha256": "1e6249664c8313b2bdbac6e3181e4d4c58865bbc234566b504509465ac2ffa95"
+      },
+      "domain": "flat",
+      "arms": {
+        "mse-control": {
+          "loss": 0.0,
+          "pixel": 0.24426820874214172,
+          "gradient": 0.1649303436279297,
+          "spectral": 0.3070078194141388,
+          "gradient_norm": 0.0,
+          "lr": 0.00016,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.0,
+          "pixel": 0.24426791071891785,
+          "gradient": 0.16493022441864014,
+          "spectral": 0.3070027828216553,
+          "gradient_norm": 0.0,
+          "lr": 0.00016,
+          "local_excess_risk": 1.0030099701907602e-06
+        }
+      }
+    },
+    {
+      "step": 9,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-09.npz",
+        "sha256": "8070e21b0d28245d33adb52ae81e92b1f2b3adc8e23bfee5e69c8f76adb0cf12"
+      },
+      "domain": "mixed",
+      "arms": {
+        "mse-control": {
+          "loss": 0.027209578081965446,
+          "pixel": 0.024695340543985367,
+          "gradient": 0.008632466197013855,
+          "spectral": 0.0014244859339669347,
+          "gradient_norm": 0.004775095731019974,
+          "lr": 0.00017999999999999998,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.027210529893636703,
+          "pixel": 0.02469589374959469,
+          "gradient": 0.00863276794552803,
+          "spectral": 0.001424623653292656,
+          "gradient_norm": 0.004883625544607639,
+          "lr": 0.00017999999999999998,
+          "local_excess_risk": 2.867581940790842e-07
+        }
+      }
+    },
+    {
+      "step": 10,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-10.npz",
+        "sha256": "c4aa901f58ffe000142709d77e40333053e625701f675450f4bd5f90279c4f31"
+      },
+      "domain": "weak",
+      "arms": {
+        "mse-control": {
+          "loss": 0.08232621848583221,
+          "pixel": 0.019053395837545395,
+          "gradient": 0.0057401712983846664,
+          "spectral": 0.0003724627604242414,
+          "gradient_norm": 0.010055012069642544,
+          "lr": 0.0002,
+          "local_excess_risk": 0.0
+        },
+        "local-risk": {
+          "loss": 0.08232947438955307,
+          "pixel": 0.019053390249609947,
+          "gradient": 0.005740059539675713,
+          "spectral": 0.0003724858397617936,
+          "gradient_norm": 0.009709032252430916,
+          "lr": 0.0002,
+          "local_excess_risk": 8.420781796303345e-07
+        }
+      }
+    }
+  ],
+  "new_parent_DINO_forwards": 0,
+  "new_noise_draws": 0,
+  "CUDA_peak_allocated_bytes": 4451673600,
+  "owner": {
+    "pid": 3201719,
+    "created": 1793766457.65
+  },
+  "scope": "Two identical fresh33713-parameter/13-tensor heads share4000 cached observations,noisy-only16DN routing. Local-risk adds weight1 local RGB RMS-excess hinge;32px boxes/hop16,1DN16 rounding,transition1e-4 training-noise units. All base terms/schedule/architecture unchanged. Target only enters training losses,no forward risk gate or flat-safety guarantee. MSE control exactly replays V154 MSE trace at every step.882 supervised/118 zero-ADC-gradient batches,all1000 AdamW/EMA clocks;smoke discarded. All86 neural sources unchanged. No new parent/DINO/noise/original/dataz access."
+}

@@ -1,0 +1,24 @@
+{
+  "recorded_unix_UTC": 1793767036.1604564,
+  "sources": [
+    {
+      "title": "Structural Guidance for Unified Joint Demosaicing and Denoising",
+      "version": "2608.09995v1",
+      "published": "2026-08-07",
+      "url": "https://arxiv.org/html/2608.09995v1",
+      "observed_code_url": "https://github.com/Calista-pedi/SG-for-JDD",
+      "observed_fetch": "404 Not Found",
+      "summary": "Authors use frozen DINOv3 ViT-S/16 with a CFA/noise-conditioned SwinIR stream,trainable feature adaptation/residual fusion and auxiliary clean-mosaic output. Their stated scope uses decoded-sRGB synthetic mosaics,independent Gaussian noise,fixedRGGB and224px structural inputs;not a matched sensor-linear highISO/no-hallucination result."
+    },
+    {
+      "title": "PixIE: Prompted Pixel-Space Low-Light Image Enhancement",
+      "version": "2605.23531v1",
+      "published": "2026-05-22",
+      "url": "https://arxiv.org/html/2605.23531v1",
+      "summary": "Authors combine cross-scale denoising with multidepth DINOv3 features and spatially continuous per-pixel modulation;neighborhood-aware embedding and compact attention limit cost. It is a low-light enhancement study,not our validated16-bit camera-RGB JDD comparison."
+    }
+  ],
+  "our_inference": "Native-grid foundation-feature fusion and spatial adaptation deserve further controlled architecture work. Existing late head already has3x3 frequency neighbors;missing peak-neighborhood access is not established. V156 isolates local supervision first;no source code/weights/data adopted or quality gain inferred from papers.",
+  "new_parent_DINO_calls": 0,
+  "new_noise_draws": 0
+}
