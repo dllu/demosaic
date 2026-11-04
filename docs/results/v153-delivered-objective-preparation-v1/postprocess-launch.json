@@ -1,0 +1,23 @@
+{
+  "owner": {
+    "pid": 3062275,
+    "created": 1793757908.48
+  },
+  "argv": [
+    "/home/dllu/proj/demosaic/.venv/bin/python",
+    "-P",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/postprocess-v1/scripts/complete_delivered_objective_review.py",
+    "controller",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1"
+  ],
+  "recorded_unix_UTC": 1793757908.5295498,
+  "readiness": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/review-readiness-v1.json",
+    "sha256": "8cc20847fb23b1f30ed590c345821a355dde09d85a62c42a29c6675b213078f2"
+  },
+  "launcher": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v153-review-v1.py",
+    "sha256": "1cb171688946f91667ab1bdd133f500f69218e7c07d2ad19fb4f4bd4be8f5cfa",
+    "text": "\"\"\"Preflight every frozen postprocessing import, then wait on the live training owner.\"\"\"\n\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo = Path('/home/dllu/proj/demosaic')\nroot = repo / '.cache/quality-20261103/V153-delivered-objective-v1'\nplan = read(root / 'postprocess-plan-v1.json')\ntraining = read(root / 'plan-v1.json')\nguard(plan)\nguard(training)\nassert not (root / 'postprocess-v1.claim').exists()\nstatus = read(root / 'status-v1.json')\nowner = status['owner']\nprocess = psutil.Process(owner['pid'])\nassert abs(process.create_time() - owner['created']) < .01\nassert process.status() not in ['zombie', 'dead']\nenv = dict(os.environ, PYTHONPATH=f\"{training['work']}/src:{plan['work']}:{training['work']}/scripts\",\n           OMP_NUM_THREADS='2', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1',\n           HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', CUDA_VISIBLE_DEVICES='0',\n           CUBLAS_WORKSPACE_CONFIG=':4096:8')\nsources = [root / 'review-source-v1.py']\nsources += [Path(stage['argv'][0]) for stage in plan['stages'] if stage['name'] != 'review']\nsources += [Path(plan['runner']['path'])]\nsources = list(dict.fromkeys(sources))\nchecks = []\nfor source in sources:\n    argv = [str(repo / '.venv/bin/python'), '-P', str(source), '--help']\n    result = subprocess.run(argv, cwd=root, env=env, capture_output=True,\n                            text=True, timeout=30, check=True)\n    checks.append({'argv': argv, 'source': ref(source), 'stdout': result.stdout})\nsave(root / 'review-readiness-v1.json', {\n    'status': 'pass-all-frozen-postprocessing-imports',\n    'plan': ref(root / 'postprocess-plan-v1.json'),\n    'training_owner_verified_live': owner, 'checks': checks,\n    'PYTHONPATH': env['PYTHONPATH'],\n    'new_neural_forwards': 0, 'new_noise_draws': 0,\n    'scope': 'Import/argument preflight only; no scored rows or quality claim. Controller waits for existing training, checks live PID/create-time, then runs state audit, all six fixed endpoints, exact-control array audit, scalar score/audit, native render. Actual native viewing remains a later explicit action.',\n})\nargv = [str(repo / '.venv/bin/python'), '-P', plan['runner']['path'], 'controller', str(root)]\nwith (root / 'postprocess-controller-v1.log').open('x') as log:\n    child = subprocess.Popen(argv, cwd=root, env=env, stdin=subprocess.DEVNULL,\n                             stdout=log, stderr=subprocess.STDOUT, start_new_session=True)\n    post_owner = {'pid': child.pid, 'created': psutil.Process(child.pid).create_time()}\nsave(root / 'postprocess-launch-v1.json', {\n    'owner': post_owner, 'argv': argv, 'recorded_unix_UTC': time.time(),\n    'readiness': ref(root / 'review-readiness-v1.json'),\n    'launcher': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n})\nprint('Launched single waiting postprocessor:', post_owner, '; imports:', len(checks))\n"
+  }
+}

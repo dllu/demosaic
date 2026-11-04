@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [active V153 objective comparison](delivered-spectral-objective.md) keeps
+the relative-phase architecture and data fixed, while moving spectral supervision
+from pre-support CFA coefficients to delivered mosaic or all-RGB error. Independent
+objective/adjoint tests, exact forward compatibility and genuine8+2 CUDA checks
+pass. Three fresh heads are training; six final endpoints, 822 cases and 84 native
+figures are fixed for review. Image quality remains unmeasured.
+
 The [completed proposal/support crossover](support-crossover.md) finds that
 the relative proposal carries most added quiet-region error under fixed maps.
 Full support now raises mesh response 16.17–17.91% over V143, reaching only

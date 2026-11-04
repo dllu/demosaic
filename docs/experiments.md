@@ -1,5 +1,12 @@
 # Experiment index
 
+The [active V153 loss comparison](delivered-spectral-objective.md) tests whether
+spectral supervision on delivered output improves the proposal/support tradeoff.
+Three identical fresh relative-phase heads share cached data and 1k schedules;
+only pre-support CFA versus delivered mosaic/all-RGB spectral error differs.
+Independent loss/adjoint tests, exact forward compatibility and genuine8+2 CUDA
+checks pass. The full six-endpoint quality review remains pending.
+
 The [completed V152 proposal/support crossover](support-crossover.md) evaluates
 six fixed compositions on 822 cases, with 84 native figures and independent
 metric, reconstruction and risk audits. Most added quiet-region MSE follows

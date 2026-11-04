@@ -71,8 +71,10 @@ The [completed proposal/support crossover](docs/support-crossover.md) attributes
 most added quiet-region error to the relative proposal in fixed-map comparisons.
 Full support raises mesh response to 2.56–2.60% of GT, but increases actual blank
 and quiet errors; real crossings remain missing. All six compositions, 822 cases,
-84 native figures and independent audits are complete. Next test the spectral
-loss on delivered output after support and demosaicing.
+84 native figures and independent audits are complete. The
+[active V153 comparison](docs/delivered-spectral-objective.md) now trains identical
+heads with spectral loss before support, on delivered CFA error, or on all
+delivered RGB error. Quality review remains pending.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

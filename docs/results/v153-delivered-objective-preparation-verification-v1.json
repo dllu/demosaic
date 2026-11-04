@@ -1,0 +1,102 @@
+{
+  "status": "pass-active-preparation-and-document-publication",
+  "recorded_unix_UTC": 1793758251.414318,
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v153-delivered-objective-preparation-v1.json",
+    "sha256": "fe1908c66f9bb2b606dae460e503fde8fa9fb2f2183e1aa5ced47f15a0c31257"
+  },
+  "byte_exact_receipt_copies": 13,
+  "frozen_and_current_neural_hashes_matching": 86,
+  "previous_neural_hashes_unchanged": 86,
+  "source_texts_checked": 18,
+  "case_count": 822,
+  "ADC_controls": 24,
+  "planned_endpoints": 6,
+  "planned_native_primary_figures": 84,
+  "current_complete_control_trace_rows_exact_V152": 306,
+  "document_links_checked": 456,
+  "live_owners": {
+    "training-controller": {
+      "owner": {
+        "pid": 3061852,
+        "created": 1793757753.67
+      },
+      "status": "sleeping",
+      "CPU_times": {
+        "user": 0.77,
+        "system": 0.26,
+        "children_user": 24.56,
+        "children_system": 3.22,
+        "iowait": 0.0
+      }
+    },
+    "training-worker": {
+      "owner": {
+        "pid": 3061970,
+        "created": 1793757784.58
+      },
+      "status": "running",
+      "CPU_times": {
+        "user": 461.46,
+        "system": 5.43,
+        "children_user": 0.0,
+        "children_system": 0.01,
+        "iowait": 0.0
+      }
+    },
+    "postprocess-controller": {
+      "owner": {
+        "pid": 3062275,
+        "created": 1793757908.48
+      },
+      "status": "sleeping",
+      "CPU_times": {
+        "user": 0.16,
+        "system": 0.15,
+        "children_user": 0.0,
+        "children_system": 0.0,
+        "iowait": 0.0
+      }
+    }
+  },
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "49d84bf5a61cd774d9e58381ff3740f58ec8a5998e0002645367a5aecb0afc4a"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "78e339dd709293efba0805f8a01b775162df0a8757b2f858e8276e7769ec460d"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "422659ac9b5346644e95b288025f8d57e9d4688ca60ed2b207c9c6fe35a7237d"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "7ebe5057504d49cf2b08790c5638730af509fa08c4de5e3fddeece7d1464aaa8"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "d964270cf7d1aacd5f1401f77ebb99f7156d7102a0e28e9255f37d5311ab494e"
+    },
+    "docs/support-crossover.md": {
+      "path": "/home/dllu/proj/demosaic/docs/support-crossover.md",
+      "sha256": "39feb0b6bd349511acb8e764e674daba9f9d7c9847b19783640ea65db75bfffc"
+    },
+    "docs/delivered-spectral-objective.md": {
+      "path": "/home/dllu/proj/demosaic/docs/delivered-spectral-objective.md",
+      "sha256": "d2653b367cc0b7586f145a8bc437e4d89508388f56f45045304684a81a5ab409"
+    },
+    "diary/2026-11-03-18-00-31-v153-delivered-spectral-objective.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-03-18-00-31-v153-delivered-spectral-objective.md",
+      "sha256": "a128f0a41e35f52d35305136f862412393f5c84a5e9b2936226d353e00676187"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v153-preparation-v1.py",
+    "sha256": "8eac9ef826c0906107346bffac52a5d8943c05fe348feb63ab3e5e4fc00ce657",
+    "text": "\"\"\"Verify actual V153 preparation bytes and current live handles, without inference.\"\"\"\n\nimport json\nimport re\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo = Path('/home/dllu/proj/demosaic')\nroot = repo / '.cache/quality-20261103/V153-delivered-objective-v1'\npublication = repo / 'docs/results/v153-delivered-objective-preparation-v1.json'\np = read(publication)\nassert len(p['copies']) == 13\nfor binding in p['copies'].values():\n    assert ref(binding['original']['path']) == binding['original']\n    assert ref(binding['public']['path']) == binding['public']\n    assert Path(binding['original']['path']).read_bytes() == Path(binding['public']['path']).read_bytes()\nsource = read(p['sources']['path'])\nassert ref(p['sources']['path']) == p['sources']\nassert len(source['frozen_neural_hashes']) == len(source['previous86_neural_hashes_unchanged']) == 86\nfor path, sha in source['frozen_neural_hashes'].items():\n    assert ref(path)['sha256'] == ref(repo / 'src/demosaic' / Path(path).name)['sha256'] == sha\n    assert source['previous86_neural_hashes_unchanged'][Path(path).name] == sha\nassert len(source['sources']) == 18\nfor binding in source['sources'] + [source['publisher']]:\n    assert ref(binding['path'])['sha256'] == binding['sha256']\n    assert Path(binding['path']).read_text() == binding['text']\nplan = read(root / 'plan-v1.json')\nguard(plan)\nguard(read(root / 'postprocess-plan-v1.json'))\ndesign = read(root / 'quality-design-v1.json')\nprevious_design = read(Path(plan['previous']) / 'quality-design-v1.json')\nassert design['observations'] == previous_design['observations']\nassert len(design['observations']) == 822 and len(design['endpoints']) == 6\nassert design['new_component_forwards'] == 4932\nadc = [c for c in design['observations'] if c.get('cohort') in ['adc-photo256', 'adc-sloped512']]\nassert len(adc) == 24 and sum(c['kind'] == 'photo' for c in adc) == 8\nassert all(c['reference_role'].startswith('Exact ') for c in adc)\nfor case in adc:\n    assert ref(case['arrays']['path']) == case['arrays']\n    assert ref(case['parent']['path']) == case['parent']\nassert read(root / 'checkpoint250-audit-v1.json')['finite_Adam_states'] == 39\nparity = read(root / 'parity-result-v1.json')\nassert len(parity['rows']) == 28 and parity['component_forward_evaluations'] == 56\nsmoke = read(root / 'smoke-result-v1.json')\narms = ['pre-control', 'delivered-mosaic', 'delivered-RGB']\nassert smoke['counts'] == smoke['updates'] == dict.fromkeys(arms, 10)\nassert smoke['supervised_batches'] == dict.fromkeys(arms, 7)\nassert smoke['zero_ADC_gradient_batches'] == dict.fromkeys(arms, 3)\nassert all(len(v) == 13 and min(v.values()) > 0 for v in smoke['parameter_maximum_gradients'].values())\nsnapshot = read(root / 'preparation-snapshot-v1.json')\nassert snapshot['completed_control_trace_rows_exact_V152'] == 261\nassert snapshot['ADC_zero_loss_and_norm_rows_per_arm'] == 30\nlive = {}\nfor name, observed in snapshot['owners_confirmed_live'].items():\n    owner = observed['owner']\n    process = psutil.Process(owner['pid'])\n    assert abs(process.create_time() - owner['created']) < .01\n    assert process.is_running() and process.status() not in ['zombie', 'dead']\n    live[name] = {'owner': owner, 'status': process.status(), 'CPU_times': process.cpu_times()._asdict()}\ntrace = [json.loads(s) for s in (root / 'train-trace-v1.jsonl').read_bytes().splitlines(keepends=True) if s.endswith(b'\\n')]\nold = read(plan['baseline_training']['path'])['trace']\nfor row, previous in zip(trace, old[:len(trace)], strict=True):\n    assert row['arms']['pre-control'] == previous['arms']['relative-phase']\n    assert row['step'] == previous['step'] and row['batch'] == previous['batch'] and row['domain'] == previous['domain']\ndocs = ['README.md', 'docs/index.md', 'docs/current-model.md', 'docs/research.md',\n        'docs/experiments.md', 'docs/support-crossover.md', 'docs/delivered-spectral-objective.md',\n        'diary/2026-11-03-18-00-31-v153-delivered-spectral-objective.md']\nlinks = 0\nfor name in docs:\n    path = repo / name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)', path.read_text()):\n        if '://' in link or link.startswith('#'):\n            continue\n        assert (path.parent / link.split('#')[0]).is_file(), (name, link)\n        links += 1\nassert not (root / 'train-result-v1.json').exists()\nsave(repo / 'docs/results/v153-delivered-objective-preparation-verification-v1.json', {\n    'status': 'pass-active-preparation-and-document-publication',\n    'recorded_unix_UTC': time.time(), 'preparation': ref(publication),\n    'byte_exact_receipt_copies': 13, 'frozen_and_current_neural_hashes_matching': 86,\n    'previous_neural_hashes_unchanged': 86, 'source_texts_checked': 18,\n    'case_count': 822, 'ADC_controls': 24,\n    'planned_endpoints': 6, 'planned_native_primary_figures': 84,\n    'current_complete_control_trace_rows_exact_V152': len(trace),\n    'document_links_checked': links, 'live_owners': live,\n    'documents': {name: ref(repo / name) for name in docs},\n    'verifier': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'scope': 'Active preparation/control verification only. Snapshot261 rows and checkpoint250 receipts remain byte-exact. Three recorded original controller/worker handles verified live now; no process restart. No final weights/quality claim,neural inference or noise calls.',\n})\nprint(f'PASS: 13 copies, 86 unchanged neural hashes, 18 source texts, {len(trace)} exact control rows, {links} links, 3 live owners')\n"
+  },
+  "scope": "Active preparation/control verification only. Snapshot261 rows and checkpoint250 receipts remain byte-exact. Three recorded original controller/worker handles verified live now; no process restart. No final weights/quality claim,neural inference or noise calls."
+}

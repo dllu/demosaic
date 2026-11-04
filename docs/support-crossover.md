@@ -315,7 +315,10 @@ delivered RGB. Compare the original spectral term with delivered mosaic error
 and all-RGB phase-packed error, keeping architecture/data/updates fixed. This
 tests whether the spectral term's evaluation point and RGB coverage help the
 proposal learn useful corrections while accounting for support and interpolation.
-It is a hypothesis, not a completed improvement. Gate-only changes are unlikely
+The [active V153 comparison](delivered-spectral-objective.md) now implements
+these three objectives with identical fresh relative-phase heads. Its objective,
+forward-compatibility and genuine8+2 CUDA checks pass; production is active and
+quality remains unmeasured. Gate-only changes are unlikely
 to address the main fixed-proposal cost by themselves.
 
 The [current model choices](current-model.md) retain V120 for general inference,

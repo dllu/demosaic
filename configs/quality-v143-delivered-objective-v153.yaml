@@ -1,0 +1,73 @@
+version: V153
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  pre-control:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    spectral_site: pre-support
+  delivered-mosaic:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    spectral_site: delivered-mosaic
+  delivered-RGB:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    spectral_site: delivered-RGB
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Three fresh identical relative-phase heads adopt all 1000 V148 batches /
+  4000 old observations and parents. Noisy-only routing, 16 DN scale floor,
+  no peak weighting, 882 supervised batches / 3528 observations, and all
+  1000 AdamW/EMA clocks match V152 relative-phase. Pre-control must exactly
+  reproduce its trace, raw/EMA/Adam states and 1644 final prediction arrays.
+  Only the spectral term's evaluation changes: pre-support four-CFA coefficient
+  error versus analysis of delivered four-CFA mosaic error versus delivered
+  all-RGB error packed into twelve C-major spatial phases. Delivered terms see
+  actual output after overlap synthesis, data-dependent local support and signed
+  Malvar interpolation. They reuse original frame size, taper, plane detrending,
+  smooth frequency band and 0.25 spectral weight. RGB repeats the four-phase
+  frame-noise proxy for each color; this defines training units, not calibrated
+  post-demosaic covariance or SNR. Channel means normalize four versus twelve
+  coefficients. Pixel/gradient terms already score delivered RGB and are unchanged.
+  Architecture, all 33713 parameters / 13 tensors, inference, input evidence,
+  band/bound, support, data/geometry/domain weights, initialization, LR/schedule,
+  clipping, EMA and 1k horizon otherwise match. All86 neural source files stay
+  byte-identical. No target/reference enters forward. Ten discarded CUDA updates
+  per arm include genuine8+2 state restoration and explicit zero-ADC gradients;
+  production restarts fresh. All six fixed raw/EMA endpoints use the same822
+  quality cases,4932 head calls,84 native figures and36 repeated-cell triplets.
+  Actual blank/quiet error, noisy flats, ADC photos/slopes and both standing real
+  scenes/priors/windows/JPEGs remain included. ISO100/AHD/JPEG references remain
+  qualitative,not exactGT. Adaptive reused cohort,not fresh independent validation.
+  No new parents/DINO,noise draws,source/original lookup,RAW decode or dataz access.
+  Protected captures,siblings,JPEGs and validation sources stay out of training.

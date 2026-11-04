@@ -1,0 +1,23 @@
+{
+  "owner": {
+    "pid": 3061852,
+    "created": 1793757753.67
+  },
+  "argv": [
+    "/home/dllu/proj/demosaic/.venv/bin/python",
+    "-P",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/work/scripts/train_delivered_objective_trial.py",
+    "controller",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/plan-v1.json"
+  ],
+  "recorded_unix_UTC": 1793757753.7226253,
+  "readiness": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/objective-readiness-v1.json",
+    "sha256": "b343c66e521c657352ef68fa659471c9c28a9681e3a72496f3900d9f2e47d53b"
+  },
+  "launcher": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v153-v1.py",
+    "sha256": "d2999a3c9d6327c1257b5b69f739d91a3f144d11c0580530b5f8725319fa300b",
+    "text": "\"\"\"Verify frozen import routing and launch the single owned V153 controller.\"\"\"\n\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo = Path('/home/dllu/proj/demosaic')\nroot = repo / '.cache/quality-20261103/V153-delivered-objective-v1'\nplan_path = root / 'plan-v1.json'\nplan = read(plan_path)\nguard(plan)\nassert not (root / 'controller.claim').exists()\nwork = Path(plan['work'])\nenv = dict(os.environ, PYTHONPATH=f'{work}/src:{work}/scripts',\n           OMP_NUM_THREADS='2', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1',\n           HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', CUDA_VISIBLE_DEVICES='0',\n           CUBLAS_WORKSPACE_CONFIG=':4096:8')\nargv = [str(repo / '.venv/bin/python'), '-P', plan['runner']['path']]\ncheck = subprocess.run(argv + ['--help'], cwd=work, env=env,\n                       capture_output=True, text=True, timeout=30, check=True)\nassert 'pre-support and delivered-output' in check.stdout\nfor name in ['delivered_spectral_objective.py', 'noisy_objective.py']:\n    assert ref(repo / 'scripts' / name)['sha256'] == ref(work / 'scripts' / name)['sha256']\nsave(root / 'objective-readiness-v1.json', {\n    'status': 'pass-frozen-controller-import-and-independent-objective-tests',\n    'plan': ref(plan_path), 'unit_tests_observed_terminal': '27 passed in0.78s',\n    'unit_tests_source': ref(repo / 'tests/test_delivered_spectral_objective.py'),\n    'objective_source': ref(repo / 'scripts/delivered_spectral_objective.py'),\n    'frozen_import_argv': argv + ['--help'], 'frozen_import_stdout': check.stdout,\n    'frozen_PYTHONPATH': env['PYTHONPATH'],\n    'launch_preflight': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'new_neural_forwards': 0, 'new_parent_DINO_forwards': 0, 'new_noise_draws': 0,\n    'scope': 'Independent dense DFT/projection values and full output adjoints for both delivered losses across four CFAs and zero/positive proxies; exact legacy pre-loss values/gradients, unsampled-color witness, delivered gradient to support and invalid-site rejection. Tests observed in terminal, not an invented stdout log. Launch uses absolute frozen paths and un-resolved repository Python executable.',\n})\nwith (root / 'controller-v1.log').open('x') as log:\n    child = subprocess.Popen(argv + ['controller', str(plan_path)], cwd=work, env=env,\n                             stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,\n                             start_new_session=True)\n    owner = {'pid': child.pid, 'created': psutil.Process(child.pid).create_time()}\nsave(root / 'controller-launch-v1.json', {\n    'owner': owner, 'argv': argv + ['controller', str(plan_path)],\n    'recorded_unix_UTC': time.time(), 'readiness': ref(root / 'objective-readiness-v1.json'),\n    'launcher': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n})\nprint('Launched once:', owner)\n"
+  }
+}
