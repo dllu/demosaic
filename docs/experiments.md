@@ -1,10 +1,12 @@
 # Experiment index
 
-The [active V154 comparison](robust-spectral-objective.md) tests robust delivered
-RGB spectral penalties to increase relative pressure on weak errors while still
-penalizing erroneous flat-target band coefficients. Three identical fresh heads
-share V153 data and schedules. Objective/adjoint tests, exact compatibility and
-genuine8+2 CUDA checks pass; the six-endpoint quality review remains pending.
+The [completed V154 comparison](robust-spectral-objective.md) tests robust delivered
+RGB spectral penalties. Native512 noisy-flat RMS falls 0.45–0.50% versus V143,
+with lower actual mesh-blank error than matched MSE. Mesh/natural response
+weakens and mixed quiet RMS rises 1.51–2.27% versus V143; broad mottle and missing
+real cab wires remain. All three 1k heads, six endpoints/822 cases/96 native views
+and audits are complete. All 1,644 MSE-control arrays reproduce V153 RGB exactly.
+Retain the narrow flat-field gain, with no general inference change.
 
 The [completed V153 loss comparison](delivered-spectral-objective.md) gains
 6.04–7.97% mesh response over its matched pre-support control, with worse actual

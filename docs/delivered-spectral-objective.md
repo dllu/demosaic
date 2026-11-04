@@ -347,10 +347,12 @@ remains a training proxy rather than calibrated RGB covariance. More pressure
 alone may worsen flat errors; actual blank/quiet metrics and both real scenes
 remain essential.
 
-The [active V154 comparison](robust-spectral-objective.md) now implements this
+The [completed V154 comparison](robust-spectral-objective.md) implements this
 test with an exact RGB-MSE control and stable Charbonnier .01/.003 variants.
-Its objective/adjoint, forward-compatibility and genuine8+2 CUDA checks pass;
-production is active and quality remains unmeasured.
+Native512 noisy-flat RMS falls 0.45–0.50% versus V143, with lower actual blank
+errors, but weaker mesh/natural response and mixed quiet RMS 1.51–2.27% worse.
+All six endpoints, 96 native figures and independent audits are complete.
+Standalone-flat gains do not establish safety beside structure.
 
 The [current model choices](current-model.md) retain V120 for general inference,
 V143 periodic detail as an explicit option, V153's narrow response gain, the

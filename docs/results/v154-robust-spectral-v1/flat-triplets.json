@@ -1,0 +1,2101 @@
+{
+  "status": "pass-all12-native-flat-triplets-equal-source-board-cells",
+  "source_manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1.json",
+    "sha256": "ca68c03e8d392c52e7626540a4c9063877edb95d3b4cda1eca7f729a859480a1"
+  },
+  "renderer": {
+    "path": "/home/dllu/proj/demosaic/.cache/render-v154-flat-triplets-v1.py",
+    "sha256": "5e6a9e4d40fffb9220f91c008e62d6a6c454052417615e8bb019441c770472c6",
+    "text": "\"\"\"Add native noisy-flat triplets from already independently checked V154 boards.\"\"\"\n\nfrom pathlib import Path\n\nimport numpy as np\nfrom PIL import Image, ImageDraw, ImageFont\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1')\nfigures = read(root / 'figures-v1.json')\nout = root / 'flat-triplets-v1'\nassert not out.exists()\nout.mkdir()\nfont = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 10)\nrecords = []\nchannels = 0\nfor prior in ['iso6400', 'iso12800']:\n    boards = [b for b in figures['images'] if b['case']['id'] == f'flat512-gray-l0.02-{prior}-prior-RGGB' and 'triplet_source_board' not in b]\n    assert len(boards) == 1\n    board = boards[0]\n    assert ref(board['image']['path']) == board['image']\n    before = np.asarray(Image.open(board['image']['path']))\n    assert board['ROI_xywh'] == [176,176,160,160] and board['contrast'] == 40 and board['exposure'] == 4\n    for i, (method, checkpoint) in enumerate(figures['checkpoints'].items()):\n        panels = [board['panels'][0], board['panels'][i+2], board['panels'][-1]]\n        triplet = Image.new('RGB', (512,212), '#eeeeee')\n        draw = ImageDraw.Draw(triplet)\n        draw.text((8,4), f'{prior} gray .02 RGGB | contrast40, RAW exposure4 | native160px', font=font, fill='black')\n        positions = []\n        for j, p in enumerate(panels):\n            x,y,w,h = p['xywh']\n            assert w == h == 160\n            cell = before[y:y+h,x:x+w]\n            xywh = [8+j*168,44,160,160]\n            triplet.paste(Image.fromarray(cell), xywh[:2])\n            draw.text((xywh[0],24), p['label'], font=font, fill='black')\n            positions.append({'label':p['label'], 'xywh':xywh, 'source_xywh':p['xywh']})\n            channels += cell.size\n        dest = out / f'flat-{prior}-{method}-triplet.png'\n        triplet.save(dest)\n        after = np.asarray(Image.open(dest))\n        for p in positions:\n            x,y,w,h=p['xywh'];sx,sy,sw,sh=p['source_xywh']\n            np.testing.assert_array_equal(after[y:y+h,x:x+w],before[sy:sy+sh,sx:sx+sw])\n        records.append({k:board[k] for k in ['case','ROI_xywh','anchor','contrast','exposure','no_resize','JPEG_display']} |\n                       {'image':ref(dest), 'panels':positions, 'triplet_source_board':board['image'],\n                        'method':method,'checkpoint':checkpoint})\nassert len(records) == 12 and channels == 2764800\nsheets=[]\nfor start in range(0,12,4):\n    sheet=Image.new('RGB',(512,848),'white')\n    indices=list(range(start,start+4))\n    for j,i in enumerate(indices):\n        sheet.paste(Image.open(records[i]['image']['path']),(0,j*212))\n    path=out / f'sheet-{start//4:02d}.png'\n    sheet.save(path)\n    pixels=np.asarray(Image.open(path))\n    for j,i in enumerate(indices):\n        np.testing.assert_array_equal(pixels[j*212:(j+1)*212],np.asarray(Image.open(records[i]['image']['path'])))\n    sheets.append({'image':ref(path),'indices':indices,'no_resize':True})\nsave(root/'flat-triplets-v1.json', {\n    'status':'pass-all12-native-flat-triplets-equal-source-board-cells',\n    'source_manifest':ref(root/'figures-v1.json'),'renderer':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'images':records,'sheets':sheets,'triplets':12,'independently_checked_RGB_channels':channels,\n    'no_resize':True,'new_forwards':0,'new_noise_draws':0,\n    'scope':'Same preexisting native512 dark-gray ISO6400/12800 boards,ROI176,176,160,160,all six fixed endpoints. Three native160px cells,noisy Malvar/restored/exact constructed GT. Same camera-space contrast40 around exact target mean,RAW exposure4 then display conversion. Small standalone-flat gain with persistent mottle; no general flat-safety claim. Actual viewing follows separately.'})\nprint('PASS:12 native flat triplets;2,764,800 RGB channels;3 unscaled sheets')\n"
+  },
+  "images": [
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso6400-prior-RGGB.npz",
+          "sha256": "2d6baa3a7efd5d3431bdf33cc49d1ba15d34ebc6db2a07b2e94449772b5ebcbb"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "08db73591c8b3be00322b9d86f9c87a9f937b631a044d4c598dc34026afb56b2"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "3ebbfe7a6e527f677c618d785f16cf39b89a8f34dc0725cd61c553ad1c63e1c5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-004.npy",
+          "sha256": "fc12224b2546344da6786eed012f89db9005d5f99f989613b599d7be0796bbb4"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso6400-mse-control-raw-step1000-triplet.png",
+        "sha256": "779fad67740523f04501467e1a3c1855860dfe122be230f0aee887fe2b7b868e"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RGB MSE raw1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            344,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-19.png",
+        "sha256": "b7b06b8d292aa080138d9b74f1c63bb42e2d37788e89ce43a76cb3ff27133e3a"
+      },
+      "method": "mse-control-raw-step1000",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-v1/mse-control-raw-step1000/module.pt",
+        "sha256": "c616610077e6c819f0844b59e12dde7c3aeb3f5fa42e2c2a139f206645ac2103"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso6400-prior-RGGB.npz",
+          "sha256": "2d6baa3a7efd5d3431bdf33cc49d1ba15d34ebc6db2a07b2e94449772b5ebcbb"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "08db73591c8b3be00322b9d86f9c87a9f937b631a044d4c598dc34026afb56b2"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "3ebbfe7a6e527f677c618d785f16cf39b89a8f34dc0725cd61c553ad1c63e1c5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-004.npy",
+          "sha256": "fc12224b2546344da6786eed012f89db9005d5f99f989613b599d7be0796bbb4"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso6400-mse-control-EMA-step1000-triplet.png",
+        "sha256": "e068c9ee12ab4f9e32b8bec8d9579c6d82df67a7ce9ed38dc4227ff4a21be241"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RGB MSE EMA1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            512,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-19.png",
+        "sha256": "b7b06b8d292aa080138d9b74f1c63bb42e2d37788e89ce43a76cb3ff27133e3a"
+      },
+      "method": "mse-control-EMA-step1000",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-v1/mse-control-EMA-step1000/module.pt",
+        "sha256": "c86189b9c36eb242ed9a7760a822d60779f7a89e1ab6954bdfc9ca8584c08195"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso6400-prior-RGGB.npz",
+          "sha256": "2d6baa3a7efd5d3431bdf33cc49d1ba15d34ebc6db2a07b2e94449772b5ebcbb"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "08db73591c8b3be00322b9d86f9c87a9f937b631a044d4c598dc34026afb56b2"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "3ebbfe7a6e527f677c618d785f16cf39b89a8f34dc0725cd61c553ad1c63e1c5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-004.npy",
+          "sha256": "fc12224b2546344da6786eed012f89db9005d5f99f989613b599d7be0796bbb4"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso6400-charb-0p01-raw-step1000-triplet.png",
+        "sha256": "072248e2b6825b669d2599711d55959cf6aed3760eb2d375835ed864a14e449f"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .01 raw1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            680,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-19.png",
+        "sha256": "b7b06b8d292aa080138d9b74f1c63bb42e2d37788e89ce43a76cb3ff27133e3a"
+      },
+      "method": "charb-0p01-raw-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p01-raw-step1000/module.pt",
+        "sha256": "e711d25b4c33ca17ab41af17cf475f8f14a4a49985d7e2111b769291a8d72268"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso6400-prior-RGGB.npz",
+          "sha256": "2d6baa3a7efd5d3431bdf33cc49d1ba15d34ebc6db2a07b2e94449772b5ebcbb"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "08db73591c8b3be00322b9d86f9c87a9f937b631a044d4c598dc34026afb56b2"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "3ebbfe7a6e527f677c618d785f16cf39b89a8f34dc0725cd61c553ad1c63e1c5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-004.npy",
+          "sha256": "fc12224b2546344da6786eed012f89db9005d5f99f989613b599d7be0796bbb4"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso6400-charb-0p01-EMA-step1000-triplet.png",
+        "sha256": "8748f89952d056d4618435c9856fd687948ec5cb412a263b58c1b0e7846b5358"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .01 EMA1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            848,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-19.png",
+        "sha256": "b7b06b8d292aa080138d9b74f1c63bb42e2d37788e89ce43a76cb3ff27133e3a"
+      },
+      "method": "charb-0p01-EMA-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p01-EMA-step1000/module.pt",
+        "sha256": "183222c9fa58fcc42dffe0f0b8cc75b1ffd89ac8ad7c83f57bc6c6ed3910b373"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso6400-prior-RGGB.npz",
+          "sha256": "2d6baa3a7efd5d3431bdf33cc49d1ba15d34ebc6db2a07b2e94449772b5ebcbb"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "08db73591c8b3be00322b9d86f9c87a9f937b631a044d4c598dc34026afb56b2"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "3ebbfe7a6e527f677c618d785f16cf39b89a8f34dc0725cd61c553ad1c63e1c5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-004.npy",
+          "sha256": "fc12224b2546344da6786eed012f89db9005d5f99f989613b599d7be0796bbb4"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso6400-charb-0p003-raw-step1000-triplet.png",
+        "sha256": "469ea7506c293eeaf4838d72bdf587c25dcd6d9d22177977ed50bb8f0508805e"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .003 raw1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1016,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-19.png",
+        "sha256": "b7b06b8d292aa080138d9b74f1c63bb42e2d37788e89ce43a76cb3ff27133e3a"
+      },
+      "method": "charb-0p003-raw-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p003-raw-step1000/module.pt",
+        "sha256": "085c437d3729ec69a3292c87b2a568044c69209e244c50cc053764fef8ef834b"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso6400-prior-RGGB.npz",
+          "sha256": "2d6baa3a7efd5d3431bdf33cc49d1ba15d34ebc6db2a07b2e94449772b5ebcbb"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "08db73591c8b3be00322b9d86f9c87a9f937b631a044d4c598dc34026afb56b2"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "3ebbfe7a6e527f677c618d785f16cf39b89a8f34dc0725cd61c553ad1c63e1c5"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-004.npy",
+          "sha256": "fc12224b2546344da6786eed012f89db9005d5f99f989613b599d7be0796bbb4"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso6400-charb-0p003-EMA-step1000-triplet.png",
+        "sha256": "5d42fec12fcdf1638a38e3445573c5d0c843174e8bb2ab362818bc659eca6ad1"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .003 EMA1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1184,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-19.png",
+        "sha256": "b7b06b8d292aa080138d9b74f1c63bb42e2d37788e89ce43a76cb3ff27133e3a"
+      },
+      "method": "charb-0p003-EMA-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p003-EMA-step1000/module.pt",
+        "sha256": "a0a884a41771c4b7f6767d5c3fe29f54bb69c1dc7f1cb828db2012de4c5aa7c3"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso12800-prior-RGGB.npz",
+          "sha256": "0dabd97fbce751a02693037c56d76b5640fcb283d3bcd51d7c872ef2cfa9cbcf"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "1283309c02bfe336329745fcd50bea57732c3f46e0e1d704046d7e20f0697fec"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "143865a4ba5a0a9f9b3cca409bd5dfa27c6a677a202b69c6ec0dbcfaa97d66fc"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-008.npy",
+          "sha256": "4fe4774edff5ccfe02390ad1b7c339099eed13fe2400d3acbf7e3699a0106ebf"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso12800-mse-control-raw-step1000-triplet.png",
+        "sha256": "4a3c0c1a402a6bc5c2933a7eb62c26b1b1fe6386aa587254053e90a1fae11061"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RGB MSE raw1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            344,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-20.png",
+        "sha256": "e3f6d209b998bb9fe6cfc1e3c9333276a4187f7f28b7c7865e2ff1c8bd93ce74"
+      },
+      "method": "mse-control-raw-step1000",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-v1/mse-control-raw-step1000/module.pt",
+        "sha256": "c616610077e6c819f0844b59e12dde7c3aeb3f5fa42e2c2a139f206645ac2103"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso12800-prior-RGGB.npz",
+          "sha256": "0dabd97fbce751a02693037c56d76b5640fcb283d3bcd51d7c872ef2cfa9cbcf"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "1283309c02bfe336329745fcd50bea57732c3f46e0e1d704046d7e20f0697fec"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "143865a4ba5a0a9f9b3cca409bd5dfa27c6a677a202b69c6ec0dbcfaa97d66fc"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-008.npy",
+          "sha256": "4fe4774edff5ccfe02390ad1b7c339099eed13fe2400d3acbf7e3699a0106ebf"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso12800-mse-control-EMA-step1000-triplet.png",
+        "sha256": "989837f12793e33dc615c2c68f35682333b22ad086ed1df5f6ed1f99548a7b3c"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "RGB MSE EMA1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            512,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-20.png",
+        "sha256": "e3f6d209b998bb9fe6cfc1e3c9333276a4187f7f28b7c7865e2ff1c8bd93ce74"
+      },
+      "method": "mse-control-EMA-step1000",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-v1/mse-control-EMA-step1000/module.pt",
+        "sha256": "c86189b9c36eb242ed9a7760a822d60779f7a89e1ab6954bdfc9ca8584c08195"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso12800-prior-RGGB.npz",
+          "sha256": "0dabd97fbce751a02693037c56d76b5640fcb283d3bcd51d7c872ef2cfa9cbcf"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "1283309c02bfe336329745fcd50bea57732c3f46e0e1d704046d7e20f0697fec"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "143865a4ba5a0a9f9b3cca409bd5dfa27c6a677a202b69c6ec0dbcfaa97d66fc"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-008.npy",
+          "sha256": "4fe4774edff5ccfe02390ad1b7c339099eed13fe2400d3acbf7e3699a0106ebf"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso12800-charb-0p01-raw-step1000-triplet.png",
+        "sha256": "2a113e6e124c4aeeb83feecf84c95ee5bd01665e942e045118ead69a0d93c0e6"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .01 raw1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            680,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-20.png",
+        "sha256": "e3f6d209b998bb9fe6cfc1e3c9333276a4187f7f28b7c7865e2ff1c8bd93ce74"
+      },
+      "method": "charb-0p01-raw-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p01-raw-step1000/module.pt",
+        "sha256": "e711d25b4c33ca17ab41af17cf475f8f14a4a49985d7e2111b769291a8d72268"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso12800-prior-RGGB.npz",
+          "sha256": "0dabd97fbce751a02693037c56d76b5640fcb283d3bcd51d7c872ef2cfa9cbcf"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "1283309c02bfe336329745fcd50bea57732c3f46e0e1d704046d7e20f0697fec"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "143865a4ba5a0a9f9b3cca409bd5dfa27c6a677a202b69c6ec0dbcfaa97d66fc"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-008.npy",
+          "sha256": "4fe4774edff5ccfe02390ad1b7c339099eed13fe2400d3acbf7e3699a0106ebf"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso12800-charb-0p01-EMA-step1000-triplet.png",
+        "sha256": "0627c3338a3f50c14af43c2de8143e8e348d828efb559c6d4755b3c96eb0d12d"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .01 EMA1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            848,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-20.png",
+        "sha256": "e3f6d209b998bb9fe6cfc1e3c9333276a4187f7f28b7c7865e2ff1c8bd93ce74"
+      },
+      "method": "charb-0p01-EMA-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p01-EMA-step1000/module.pt",
+        "sha256": "183222c9fa58fcc42dffe0f0b8cc75b1ffd89ac8ad7c83f57bc6c6ed3910b373"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso12800-prior-RGGB.npz",
+          "sha256": "0dabd97fbce751a02693037c56d76b5640fcb283d3bcd51d7c872ef2cfa9cbcf"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "1283309c02bfe336329745fcd50bea57732c3f46e0e1d704046d7e20f0697fec"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "143865a4ba5a0a9f9b3cca409bd5dfa27c6a677a202b69c6ec0dbcfaa97d66fc"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-008.npy",
+          "sha256": "4fe4774edff5ccfe02390ad1b7c339099eed13fe2400d3acbf7e3699a0106ebf"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso12800-charb-0p003-raw-step1000-triplet.png",
+        "sha256": "341c233350476a0e3fdb3d8810ca1759ed8bac7c2510b2f12cbfbf9918b65817"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .003 raw1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1016,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-20.png",
+        "sha256": "e3f6d209b998bb9fe6cfc1e3c9333276a4187f7f28b7c7865e2ff1c8bd93ce74"
+      },
+      "method": "charb-0p003-raw-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p003-raw-step1000/module.pt",
+        "sha256": "085c437d3729ec69a3292c87b2a568044c69209e244c50cc053764fef8ef834b"
+      }
+    },
+    {
+      "case": {
+        "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+        "kind": "flat",
+        "cohort": "fresh-flat512",
+        "fresh": true,
+        "source": {
+          "hue_degrees": null,
+          "id": "gray-l0.02",
+          "linear_srgb": [
+            0.02,
+            0.02,
+            0.02
+          ],
+          "peak": 0.02,
+          "saturation": 0.0
+        },
+        "noise": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/inputs/flat512-gray-l0.02-iso12800-prior-RGGB.npz",
+          "sha256": "0dabd97fbce751a02693037c56d76b5640fcb283d3bcd51d7c872ef2cfa9cbcf"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "display_exposure": 1,
+        "reference_role": "Exact analytic flat GT, independent native512 noise draw",
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "1283309c02bfe336329745fcd50bea57732c3f46e0e1d704046d7e20f0697fec"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "143865a4ba5a0a9f9b3cca409bd5dfa27c6a677a202b69c6ec0dbcfaa97d66fc"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V146-window-transfer-v1/V143/work/artifacts/predictions/prediction-008.npy",
+          "sha256": "4fe4774edff5ccfe02390ad1b7c339099eed13fe2400d3acbf7e3699a0106ebf"
+        }
+      },
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "anchor": [
+        0.010000000707805157,
+        0.020000001415610313,
+        0.013333332724869251
+      ],
+      "contrast": 40,
+      "exposure": 4,
+      "no_resize": true,
+      "JPEG_display": null,
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/flat-iso12800-charb-0p003-EMA-step1000-triplet.png",
+        "sha256": "c0bbe795cad1f7930f91995f7e15b25cd3c15dd1f4bc7157590d45567833ab44"
+      },
+      "panels": [
+        {
+          "label": "Noisy Malvar",
+          "xywh": [
+            8,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            8,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Charb .003 EMA1k",
+          "xywh": [
+            176,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1184,
+            44,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact constructed GT",
+          "xywh": [
+            344,
+            44,
+            160,
+            160
+          ],
+          "source_xywh": [
+            1352,
+            44,
+            160,
+            160
+          ]
+        }
+      ],
+      "triplet_source_board": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1/comparison-20.png",
+        "sha256": "e3f6d209b998bb9fe6cfc1e3c9333276a4187f7f28b7c7865e2ff1c8bd93ce74"
+      },
+      "method": "charb-0p003-EMA-step1000",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1/review-v1/charb-0p003-EMA-step1000/module.pt",
+        "sha256": "a0a884a41771c4b7f6767d5c3fe29f54bb69c1dc7f1cb828db2012de4c5aa7c3"
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/sheet-00.png",
+        "sha256": "797b6e0c0d45ec1dfdc2c911a1c25ac3cf0c533bb21a2a77d0f14bf42a391756"
+      },
+      "indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "no_resize": true
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/sheet-01.png",
+        "sha256": "1d97d97a5d2cafe386426923290fe73c3cd6339f72dbe702e5ccdf36b5e62abf"
+      },
+      "indices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "no_resize": true
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1/sheet-02.png",
+        "sha256": "f0b11b242339c000f7bd148b7bf0b8e0f932d4b38a3a05a55065c74161c850b0"
+      },
+      "indices": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "no_resize": true
+    }
+  ],
+  "triplets": 12,
+  "independently_checked_RGB_channels": 2764800,
+  "no_resize": true,
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Same preexisting native512 dark-gray ISO6400/12800 boards,ROI176,176,160,160,all six fixed endpoints. Three native160px cells,noisy Malvar/restored/exact constructed GT. Same camera-space contrast40 around exact target mean,RAW exposure4 then display conversion. Small standalone-flat gain with persistent mottle; no general flat-safety claim. Actual viewing follows separately."
+}

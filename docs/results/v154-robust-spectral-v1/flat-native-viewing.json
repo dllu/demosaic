@@ -1,0 +1,32 @@
+{
+  "status": "actually-viewed-all12-native-flat-triplets-at-original-detail",
+  "recorded_unix_UTC": 1793763875.7729087,
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/flat-triplets-v1.json",
+    "sha256": "aed89fc7a20f11761ccc9c27e61899edae8dcd2841dc1ca562892f1df02d2053"
+  },
+  "sheets_viewed": 3,
+  "triplets_viewed": 12,
+  "indices_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "no_resize": true,
+  "detail": "original",
+  "recorder": {
+    "path": "/home/dllu/proj/demosaic/.cache/record-v154-flat-viewing-v1.py",
+    "sha256": "9e18c93808f555940f92b6f86d1ac711f0309143952bdacb22dc87e7c4201131",
+    "text": "\"\"\"Record the three flat supplement sheets after actual original-detail viewing.\"\"\"\n\nimport time\nfrom pathlib import Path\nfrom train_directional_bank_trial import read, ref, save\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1')\nmanifest=read(root/'flat-triplets-v1.json')\nassert not (root/'flat-native-viewing-v1.json').exists()\nassert len(manifest['sheets']) == 3 and manifest['triplets'] == 12\nfor sheet in manifest['sheets']:\n    assert ref(sheet['image']['path']) == sheet['image'] and sheet['no_resize']\nsave(root/'flat-native-viewing-v1.json', {\n    'status':'actually-viewed-all12-native-flat-triplets-at-original-detail',\n    'recorded_unix_UTC':time.time(),'manifest':ref(root/'flat-triplets-v1.json'),\n    'sheets_viewed':3,'triplets_viewed':12,'indices_covered':list(range(12)),\n    'no_resize':True,'detail':'original','recorder':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'notes':'Actually seen sheets00/01 together and02 in subsequent image-tool output. ISO6400 and12800 identical dark-gray ROIs for all six endpoints retain broad green/purple/brown mottle at shared contrast40/exposure4. Robust changes small, no visually clean field; exact constructed GT constant. Tiny aggregate RMS improvement is useful evidence but not a visible broad solution.'})\nprint('Recorded actual viewing:3 sheets/12 native flat triplets')\n"
+  },
+  "notes": "Actually seen sheets00/01 together and02 in subsequent image-tool output. ISO6400 and12800 identical dark-gray ROIs for all six endpoints retain broad green/purple/brown mottle at shared contrast40/exposure4. Robust changes small, no visually clean field; exact constructed GT constant. Tiny aggregate RMS improvement is useful evidence but not a visible broad solution."
+}

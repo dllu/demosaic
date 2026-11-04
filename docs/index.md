@@ -1,10 +1,12 @@
 # Documentation guide
 
-The [active V154 robust-loss trial](robust-spectral-objective.md) compares delivered
-RGB spectral MSE with Charbonnier penalties at .01/.003 proxy units. Architecture,
-data and 1k schedules match. Independent objective/adjoint tests, exact forward
-compatibility and genuine8+2 CUDA checks pass. Three fresh heads are training;
-all six endpoints/822 cases/84 native views are fixed. Quality is unmeasured.
+The [completed V154 robust-loss trial](robust-spectral-objective.md) lowers native512
+noisy-flat RMS 0.45–0.50% versus V143 and improves actual mesh-blank errors over
+matched RGB MSE. Broad mottle remains, mesh/natural response falls, and quiet
+regions beside structure worsen 1.51–2.27% versus V143. All three 1k heads, six
+endpoints/822 cases/96 actually viewed native figures and independent audits are
+complete. The exact MSE control reproduces all 1,644 V153 RGB arrays. Retain the
+narrow flat-field gain beside stronger detail/ADC and quieter controls.
 
 The [completed V153 comparison](delivered-spectral-objective.md) moves spectral
 loss after support/demosaicing. Mesh response rises6.04–7.97% over matched

@@ -79,9 +79,11 @@ All six endpoints/822 cases/84 native figures and independent audits are complet
 Real crossings remain missing; retain its narrow response gain alongside the
 quieter controls and V150's stronger ADC restoration.
 
-The [active V154 trial](docs/robust-spectral-objective.md) compares delivered-RGB
-MSE with two robust spectral penalties to give weak errors more relative weight.
-Training and the fixed six-endpoint quality review are underway; gains are unmeasured.
+The [completed V154 trial](docs/robust-spectral-objective.md) gives weak spectral
+errors more relative pressure. Native512 noisy-flat RMS falls 0.45–0.50% versus
+V143, with slightly lower actual blank errors. Broad mottle remains, mesh and
+natural detail weaken, and quiet regions beside structure get 1.51–2.27% worse.
+All six endpoints, 96 native figures and independent audits are complete.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -110,6 +112,18 @@ no crop-pixel resizing.
 ![Mesh2302: noisy, V153 delivered-mosaic restoration, exact constructed GT](docs/images/v153-delivered-objective-v1/comparison-00-delivered-mosaic-raw-step1000-triplet.png)
 
 ![Mesh2309: noisy, V153 delivered-mosaic restoration, exact constructed GT](docs/images/v153-delivered-objective-v1/comparison-02-delivered-mosaic-raw-step1000-triplet.png)
+
+V154's small standalone-flat gain: noisy → **Charb .01 EMA** → exact constructed
+GT, ISO6400 and ISO12800 priors. Broad colored mottle remains visible and mixed
+quiet regions regress. These fixed native160×160 crops use gray level .02 in
+512px RGGB contexts, ROI `[176,176,160,160]`, common exposure4 and 40× camera-linear
+contrast about exact target means. Shot/read variance parameters are
+.00128/6.5536e-6 and .00256/2.62144e-5; crop pixels are never resized.
+[All methods, checkpoint hashes and display metadata](docs/robust-spectral-objective.md).
+
+![ISO6400 flat: noisy, V154 Charb .01 EMA, exact constructed GT](docs/images/v154-robust-spectral-v1/flat-iso6400-charb-0p01-EMA-step1000-triplet.png)
+
+![ISO12800 flat: noisy, V154 Charb .01 EMA, exact constructed GT](docs/images/v154-robust-spectral-v1/flat-iso12800-charb-0p01-EMA-step1000-triplet.png)
 
 V150's stronger ADC-only result remains useful: mean photo RMS falls 3.06% on
 two held-out sources/four CFAs. Native
