@@ -1,5 +1,21 @@
 # Experiment index
 
+The [completed V152 proposal/support crossover](support-crossover.md) evaluates
+six fixed compositions on 822 cases, with 84 native figures and independent
+metric, reconstruction and risk audits. Most added quiet-region MSE follows
+the relative proposal under fixed original maps. Full support now raises mesh
+response 16.17–17.91% over V143, reaching 2.56–2.60% of exact GT, with worse
+actual blank/quiet errors and no convincing new real crossings. The older V147
+intervention does not determine these updated proposals. Next test spectral
+supervision on delivered output after support and demosaicing.
+
+The [completed V152 relative-phase trial](relative-phase-estimator.md) improves
+mesh response and noisy-flat RMS slightly over [V151 noisy-only training](noisy-objective-training.md),
+with worse quiet errors and natural-band attenuation. Both trials' fixed
+endpoints, native views and audits are complete. Keep the relative input feature
+and quieter V151 control for further prototypes, alongside
+[V150's stronger ADC photo restoration](objective-floor-training.md).
+
 The [completed V147 late spectral pilot](late-spectral-detail.md) adds a learned
 RAW-innovation correction after frozen V143. Both fixed 1k endpoints reduce mesh
 response about 8% and slightly worsen noisy flats. The 32 new mixed controls show

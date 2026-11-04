@@ -1,0 +1,31 @@
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1
+native_endpoint: noisy-control-raw-step1000
+relative_endpoint: relative-phase-raw-step1000
+cases: 822
+learned_forwards: 1644
+derived_arrays: 3288
+native_figures: 84
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Fixed posthoc component diagnostic of the two completed raw1k endpoints.
+  Replay both heads exactly on all822 original cases, preserving parent/RAW/
+  conditioning. Keep each original spatial support map fixed after its own
+  original forward, then cross the two proposals and maps. Also report both
+  proposals at full support1. Six methods: NN,RR,RN,NR,N1,R1, where first is
+  proposal and second is original support map (N native, R relative). Crossed
+  maps are not recomputed on the alternate proposal. Two actual learned
+  forwards per case (1644 total), two additional fixed FFT synthesis calls and
+  six additional fixed Malvar compositions per case; four new output arrays
+  per case (3288), no new training or weights. All original learned outputs
+  must exactly match archived arrays. This is an input-only diagnostic but
+  crossed outputs depend on both heads; it is not a single trained checkpoint
+  or a claim about a weight-swapped gate recomputed on another proposal.
+  Targets/references never enter forward or composition. All822 adaptive
+  reused cases, real scenes/priors/windows/JPEGs, actual blank/quiet, noisy flat,
+  ADC photo and sloped controls remain. Real ISO100/AHD/JPEG references are
+  qualitative, not exact GT. No parent/DINO/noise draws, original lookup,
+  RAW decode or dataz access. All86 previous neural files remain unchanged.

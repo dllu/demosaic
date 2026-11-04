@@ -1,0 +1,55 @@
+{
+  "status": "completed-fixed-support-crossover-awaiting-audits-and-viewing",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/plan-v1.json",
+    "sha256": "1ce99f1b89ff16fe89e337ff338a0e5ca528f19e41ac6048ac19ed5c24c94f33"
+  },
+  "collections": {
+    "native-native": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/native-native-collection-v1.json",
+      "sha256": "b3a1f5ea16fce1493ab0bb3631eaced18ef263fa659530edb7e0d455d39de74a"
+    },
+    "relative-relative": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/relative-relative-collection-v1.json",
+      "sha256": "ce6d46afbe80d1e553b404ebc3d20a5d43553d2cae1545facf01dc9caad66b9f"
+    },
+    "relative-native": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/relative-native-collection-v1.json",
+      "sha256": "2d4f5ad1fd8938826c751f3595180813b29523aacb8a5975f1d1de32b6a5485e"
+    },
+    "native-relative": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/native-relative-collection-v1.json",
+      "sha256": "870821f7cd453b5fabaa87cd9f05cb2ae02c8539f551e41f84e71f22dfdc4555"
+    },
+    "native-full": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/native-full-collection-v1.json",
+      "sha256": "34578ecf3591c7606030e129ea02cb369efa348832332b4d7d27dbe51876511a"
+    },
+    "relative-full": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/relative-full-collection-v1.json",
+      "sha256": "7928647d277defba229c3554908186ff0dce4a481e4b3253798d412e3de03b7a"
+    }
+  },
+  "component_forwards": 1644,
+  "archived_predictions_exact": 1644,
+  "new_derived_output_arrays": 3288,
+  "additional_fixed_synthesis_calls": 1644,
+  "additional_fixed_Malvar_calls": 4932,
+  "new_parent_DINO_forwards": 0,
+  "new_noise_draws": 0,
+  "module_before": {
+    "native": "cb617aa16b791ec557cf43ca2354ece3df624cd165af1f76f0530a6442910fd1",
+    "relative": "d366a0b4b43dc6789558e8b80bd31e64f3f6b1fd396f360cd82403d9dbf418d7"
+  },
+  "module_after": {
+    "native": "cb617aa16b791ec557cf43ca2354ece3df624cd165af1f76f0530a6442910fd1",
+    "relative": "d366a0b4b43dc6789558e8b80bd31e64f3f6b1fd396f360cd82403d9dbf418d7"
+  },
+  "RNG_unchanged": true,
+  "CUDA_peak_allocated_bytes": 1564124672,
+  "owner": {
+    "pid": 3005966,
+    "created": 1793755740.87
+  },
+  "scope": "Fixed posthoc component diagnostic of the two completed raw1k endpoints. Replay both heads exactly on all822 original cases, preserving parent/RAW/ conditioning. Keep each original spatial support map fixed after its own original forward, then cross the two proposals and maps. Also report both proposals at full support1. Six methods: NN,RR,RN,NR,N1,R1, where first is proposal and second is original support map (N native, R relative). Crossed maps are not recomputed on the alternate proposal. Two actual learned forwards per case (1644 total), two additional fixed FFT synthesis calls and six additional fixed Malvar compositions per case; four new output arrays per case (3288), no new training or weights. All original learned outputs must exactly match archived arrays. This is an input-only diagnostic but crossed outputs depend on both heads; it is not a single trained checkpoint or a claim about a weight-swapped gate recomputed on another proposal. Targets/references never enter forward or composition. All822 adaptive reused cases, real scenes/priors/windows/JPEGs, actual blank/quiet, noisy flat, ADC photo and sloped controls remain. Real ISO100/AHD/JPEG references are qualitative, not exact GT. No parent/DINO/noise draws, original lookup, RAW decode or dataz access. All86 previous neural files remain unchanged."
+}

@@ -1,0 +1,66 @@
+{
+  "status": "all6-recorded-owners-terminal",
+  "recorded_unix_UTC": 1793756967.5500808,
+  "recorded_owner_count": 6,
+  "owners": [
+    {
+      "stage": "controller",
+      "owner": {
+        "pid": 3005963,
+        "created": 1793755740.82
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 3005966,
+        "created": 1793755740.87
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 3007042,
+        "created": 1793755884.91
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 3019666,
+        "created": 1793756012.97
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "reconstruction-audit",
+      "owner": {
+        "pid": 3053479,
+        "created": 1793756159.01
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 3053686,
+        "created": 1793756237.04
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "live_matching_root_argv": [],
+  "controller_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1/status-v1.json",
+    "sha256": "d9d2fc37e1d2727795c7bda10cce359b5580cd10c1bd1da0bb677861a28affac"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-support-crossover-execution-v1.py",
+    "sha256": "60ff461ca9e032d71b875f37e4d41b9d0ad6c67d827bdd38e20bb97a6e8ee5b0",
+    "text": "\"\"\"Record actual terminal states after every owned primary stage completes.\"\"\"\n\nimport os\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V152-support-crossover-v1')\npost = read(root / 'status-v1.json')\nassert post['status'] == 'completed-audited-diagnostic-awaiting-native-viewing'\nassert set(post['completed']) == {'review', 'scores', 'metric-audit', 'reconstruction-audit', 'render'}\nassert all(v['owner_exited'] for v in post['completed'].values())\nowners = [('controller', post['owner'])]\nowners += [(stage, binding['owner']) for stage, binding in post['completed'].items()]\nassert len(owners) == 6\nrecords = []\nfor stage, owner in owners:\n    try:\n        process = psutil.Process(owner['pid'])\n        if abs(process.create_time() - owner['created']) >= .01:\n            status = 'PID-reused-original-owner-terminal'\n        else:\n            status = process.status()\n            assert status in ['zombie', 'dead'], (stage, owner, status)\n    except psutil.NoSuchProcess:\n        status = 'absent'\n    records.append({'stage': stage, 'owner': owner, 'terminal_state': status})\nexcluded = {os.getpid()} | {p.pid for p in psutil.Process().parents()}\nmatching = []\nfor process in psutil.process_iter(['pid', 'cmdline', 'status']):\n    if process.pid in excluded or process.info['status'] in ['zombie', 'dead']:\n        continue\n    tokens = process.info['cmdline'] or []\n    if any(t == str(root) or t.startswith(str(root) + '/')\n           or t == str(root.relative_to(root.parents[2])) for t in tokens):\n        matching.append(process.info)\nassert not matching, matching\nsave(root / 'execution-completion-v1.json', {\n    'status': 'all6-recorded-owners-terminal', 'recorded_unix_UTC': time.time(),\n    'recorded_owner_count': 6, 'owners': records, 'live_matching_root_argv': matching,\n    'controller_completion': ref(root / 'status-v1.json'),\n    'verifier': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'scope': 'Exact PID/create-time terminal checks for controller and five primary workers. All primary children returned zero in controller flow. No failed bootstrap or scientific retry. Root argv scan excludes verifier and ancestors. No stop, kill or restart.'})\nprint('PASS: all six recorded owners terminal; no live root argv matches')\n"
+  },
+  "scope": "Exact PID/create-time terminal checks for controller and five primary workers. All primary children returned zero in controller flow. No failed bootstrap or scientific retry. Root argv scan excludes verifier and ancestors. No stop, kill or restart."
+}

@@ -67,6 +67,13 @@ falls further; real wires remain missing. All four endpoints and 72 native
 figures are audited. Retain the new input feature for further estimator/support
 work, with the quieter V151 control and V150's ADC strengths still compared.
 
+The [completed proposal/support crossover](docs/support-crossover.md) attributes
+most added quiet-region error to the relative proposal in fixed-map comparisons.
+Full support raises mesh response to 2.56–2.60% of GT, but increases actual blank
+and quiet errors; real crossings remain missing. All six compositions, 822 cases,
+84 native figures and independent audits are complete. Next test the spectral
+loss on delivered output after support and demosaicing.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

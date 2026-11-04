@@ -1,5 +1,14 @@
 # Documentation guide
 
+The [completed proposal/support crossover](support-crossover.md) finds that
+the relative proposal carries most added quiet-region error under fixed maps.
+Full support now raises mesh response 16.17–17.91% over V143, reaching only
+2.56–2.60% of GT, with worse actual blank/quiet errors and no convincing new
+real crossings. All six compositions / 822 cases / 84 native views and independent
+scalar, reconstruction and risk audits are complete; all 1,644 original outputs
+replay exactly. This diagnostic motivates testing spectral loss on delivered
+output after support/demosaicing. There is no new training or inference default.
+
 The [completed V152 relative-phase trial](relative-phase-estimator.md) improves
 mesh response 1.27–1.41% over the V151 noisy-only control, with slightly lower
 noisy-flat RMS. Versus V143, response rises 5.09–8.74% but remains only

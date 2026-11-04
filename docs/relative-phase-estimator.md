@@ -231,6 +231,15 @@ is available for the next estimator/support prototype, with the quieter control
 and natural-band response retained as comparators. Larger image-wide corrections
 still need protection of local quiet regions around strong structure.
 
+The [completed proposal/support crossover](support-crossover.md) now holds the
+actual maps fixed and evaluates both swap orders. Most of the added quiet MSE
+follows the relative proposal; restoring the native map removes only part.
+Full support raises the updated proposals' synthetic mesh response, with worse
+actual blank/quiet errors and no convincing new real crossings. All six
+compositions, 822 cases and 84 native views have independent metric,
+reconstruction and conditional-risk audits. Next test the spectral term on
+delivered output after support and demosaicing.
+
 ## The specific representation gap
 
 Let `O` be the observed four-phase RAW spectrum and `I = O - P` its innovation
