@@ -60,8 +60,12 @@ nearly closes support. All six endpoints, 84 native figures and audits are
 complete. Noisy-only becomes the next noisy-head training control; V150 retains
 the stronger ADC photo result.
 
-[V152](docs/relative-phase-estimator.md) now tests an input-only RAW/residual
-cross-spectrum adapter against that noisy-only control. Quality is pending.
+[Completed V152](docs/relative-phase-estimator.md) adds RAW/residual cross-spectrum
+inputs: mesh response rises another 1.27–1.41% over noisy-only, and noisy-flat
+RMS improves slightly. Quiet-region error worsens and natural-texture response
+falls further; real wires remain missing. All four endpoints and 72 native
+figures are audited. Retain the new input feature for further estimator/support
+work, with the quieter V151 control and V150's ADC strengths still compared.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -79,15 +83,16 @@ exact empty field, then WB/matrix/+3EV. Pixels are not resized.
 
 ![Native noisy, detail amplitude and exact GT with shared eightfold contrast](docs/images/supported-wave-amplitude-v1/mesh-seed2026112302-present-iso6400-prior-RGGB-retained-contrast8-triplet.png)
 
-Noisy → V143 + V151 noisy-only raw → **exact constructed GT**, two fixed mesh
-crops. Mean response rises 7.22% over V143, but crossings remain missing. Native
-160×160 cells, ROI `[176,176,160,160]` in 512px RGGB contexts, shot .00128/read
+Noisy → V143 + V152 relative-phase raw → **exact constructed GT**, two fixed mesh
+crops. Mean response rises 8.74% over V143 (1.41% over V151 control), but reaches
+only 2.39% of GT and crossings remain missing. Exact quiet-region error worsens.
+Native 160×160 cells, ROI `[176,176,160,160]` in 512px RGGB contexts, shot .00128/read
 6.5536e-6, common exposure 8 and contrast 1; no crop-pixel resizing.
-[All endpoints, checkpoint/source hashes and display metadata](docs/noisy-objective-training.md).
+[All endpoints, checkpoint/source hashes and display metadata](docs/relative-phase-estimator.md).
 
-![Mesh2302: noisy, V151 noisy-only restoration, exact constructed GT](docs/images/v151-noisy-objective-v1/comparison-00-noisy-only-raw-step1000-triplet.png)
+![Mesh2302: noisy, V152 relative-phase restoration, exact constructed GT](docs/images/v152-relative-phase-v1/comparison-00-relative-phase-raw-step1000-triplet.png)
 
-![Mesh2309: noisy, V151 noisy-only restoration, exact constructed GT](docs/images/v151-noisy-objective-v1/comparison-02-noisy-only-raw-step1000-triplet.png)
+![Mesh2309: noisy, V152 relative-phase restoration, exact constructed GT](docs/images/v152-relative-phase-v1/comparison-02-relative-phase-raw-step1000-triplet.png)
 
 V150's stronger ADC-only result remains useful: mean photo RMS falls 3.06% on
 two held-out sources/four CFAs. Native
@@ -95,7 +100,7 @@ two held-out sources/four CFAs. Native
 [fur](docs/images/v150-objective-floor-v1/comparison-43-floor16-matrix-EMA-step1000-triplet.png)
 triplets retain exact constructed GT; [noise, licensing and display details](docs/objective-floor-training.md).
 
-Noisy organic texture remains weak: [current feather/grass/bark views](docs/noisy-objective-training.md)
+Noisy organic texture remains weak: [current feather/grass/bark views](docs/relative-phase-estimator.md)
 and the [earlier native photo gallery](docs/spatial-photo-supplement.md).
 
 Standing real GFX100S scene: DSCF3879 ISO6400 → **V120 Small, historical Haar

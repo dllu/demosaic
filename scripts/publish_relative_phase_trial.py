@@ -25,13 +25,14 @@ def main(root):
     )
     assert read(root / "execution-completion-v1.json")["recorded_owner_count"] == 10
     assert read(root / "execution-completion-v1.json")["status"] == "all10-recorded-owners-terminal"
-    destination = REPO / "docs/results/v151-relative-phase-v1"
-    assets = REPO / "docs/images/v151-relative-phase-v1"
+    destination = REPO / "docs/results/v152-relative-phase-v1"
+    assets = REPO / "docs/images/v152-relative-phase-v1"
     destination.mkdir(exist_ok=False)
     assets.mkdir(exist_ok=False)
     names = {
         "training-result.json": "train-result-v1.json",
         "bootstrap-failure.json": "controller-bootstrap-failure-v1.json",
+        "publication-failure.json": "publication-failure-v1.json",
         "training-audit.json": "independent-training-audit-v1.json",
         "training-state-audit.json": "independent-training-state-audit-v1.json",
         "training-routing.json": "training-routing-summary-v1.json",
@@ -88,7 +89,7 @@ def main(root):
     save(
         destination / "source-bundle.json",
         {
-            "preparation": ref(REPO / "docs/results/v151-relative-phase-preparation-v1.json"),
+            "preparation": ref(REPO / "docs/results/v152-relative-phase-preparation-v1.json"),
             "frozen_neural_file_count": 86,
             "frozen_neural_source_hashes": neural,
             "additional_sources": [dict(ref(p), text=p.read_text()) for p in extra],
@@ -104,12 +105,12 @@ def main(root):
         },
     )
     save(
-        REPO / "docs/results/v151-relative-phase-final-v1.json",
+        REPO / "docs/results/v152-relative-phase-final-v1.json",
         {
             "status": "completed-four-fixed-endpoints-audited-and-natively-viewed",
             "recorded_unix_UTC": time.time(),
             "copies": copies,
-            "preparation": ref(REPO / "docs/results/v151-relative-phase-preparation-v1.json"),
+            "preparation": ref(REPO / "docs/results/v152-relative-phase-preparation-v1.json"),
             "source_bundle": ref(destination / "source-bundle.json"),
             "summary": ref(destination / "summary.json"),
             "figures": ref(assets / "manifest-v1.json"),

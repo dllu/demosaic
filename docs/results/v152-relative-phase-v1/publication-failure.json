@@ -1,0 +1,926 @@
+{
+  "status": "terminal-publication-path-error-before-final-index",
+  "recorded_unix_UTC": 1793754628.5852013,
+  "observed_command_exit": 1,
+  "error": "FileNotFoundError: docs/results/v151-relative-phase-preparation-v1.json; lowercase version label remained V151 in publisher paths",
+  "failed_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/publish_relative_phase_trial.py",
+    "sha256": "00c32f28e9c8ec105d8354fed83d6b8e28adcb8f6005a31085355376f857876a",
+    "text": "\"\"\"Publish byte-exact V152 receipts after independent audit and native viewing.\"\"\"\n\nimport argparse\nimport shutil\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import guard, read, ref, save\n\nREPO = Path(__file__).resolve().parents[1]\n\n\ndef main(root):\n    plan = read(root / \"plan-v1.json\")\n    guard(plan)\n    guard(read(root / \"postprocess-plan-v1.json\"))\n    figures = read(root / \"figures-v1.json\")\n    viewing = read(root / \"native-viewing-v1.json\")\n    assert viewing[\"primary_figures_covered\"] == 72 and viewing[\"sheets_viewed\"] == 18\n    assert viewing[\"no_resize\"] and viewing[\"figure_manifest\"] == ref(root / \"figures-v1.json\")\n    assert read(root / \"independent-metrics-audit-v1.json\")[\"status\"] == \"pass\"\n    assert (\n        read(root / \"independent-training-audit-v1.json\")[\"native_control_predictions_exact\"]\n        == 1644\n    )\n    assert read(root / \"execution-completion-v1.json\")[\"recorded_owner_count\"] == 10\n    assert read(root / \"execution-completion-v1.json\")[\"status\"] == \"all10-recorded-owners-terminal\"\n    destination = REPO / \"docs/results/v151-relative-phase-v1\"\n    assets = REPO / \"docs/images/v151-relative-phase-v1\"\n    destination.mkdir(exist_ok=False)\n    assets.mkdir(exist_ok=False)\n    names = {\n        \"training-result.json\": \"train-result-v1.json\",\n        \"bootstrap-failure.json\": \"controller-bootstrap-failure-v1.json\",\n        \"training-audit.json\": \"independent-training-audit-v1.json\",\n        \"training-state-audit.json\": \"independent-training-state-audit-v1.json\",\n        \"training-routing.json\": \"training-routing-summary-v1.json\",\n        \"proposal-support.json\": \"proposal-support-summary-v1.json\",\n        \"review-result.json\": \"review-result-v1.json\",\n        \"scores.json\": \"scores-v1.json\",\n        \"metric-audit.json\": \"independent-metrics-audit-v1.json\",\n        \"figures.json\": \"figures-v1.json\",\n        \"native-viewing.json\": \"native-viewing-v1.json\",\n        \"execution-completion.json\": \"execution-completion-v1.json\",\n        \"training-completion.json\": \"status-v1.json\",\n        \"postprocess-completion.json\": \"postprocess-status-v1.json\",\n    }\n    sources = {name: root / original for name, original in names.items()}\n    review = read(root / \"review-result-v1.json\")\n    assert len(review[\"collections\"]) == 4 and review[\"component_forwards\"] == 3288\n    for label, binding in review[\"collections\"].items():\n        sources[f\"{label}-collection.json\"] = Path(binding[\"path\"])\n    copies = {}\n    for name, original in sources.items():\n        public = destination / name\n        shutil.copyfile(original, public)\n        before, after = ref(original), ref(public)\n        assert before[\"sha256\"] == after[\"sha256\"]\n        copies[name] = {\"original\": before, \"public\": after}\n    images = []\n    for item in figures[\"images\"]:\n        original = Path(item[\"image\"][\"path\"])\n        assert ref(original) == item[\"image\"]\n        public = assets / original.name\n        shutil.copyfile(original, public)\n        assert ref(public)[\"sha256\"] == item[\"image\"][\"sha256\"]\n        images.append({**item, \"original_image\": item[\"image\"], \"image\": ref(public)})\n    assert len(images) == 72 and sum(\"triplet_source_board\" in item for item in images) == 24\n    save(\n        assets / \"manifest-v1.json\",\n        {\n            \"status\": \"published-byte-exact-native-comparisons-after-actual-viewing\",\n            \"source_manifest\": ref(root / \"figures-v1.json\"),\n            \"native_viewing\": ref(root / \"native-viewing-v1.json\"),\n            \"checkpoints\": figures[\"checkpoints\"],\n            \"parent\": figures[\"parent\"],\n            \"images\": images,\n            \"primary_images\": 72,\n            \"triplets\": 24,\n            \"no_resize\": True,\n            \"independently_checked_RGB_channels\": figures[\"all_RGB_channels_checked\"],\n            \"scope\": \"All four fixed final raw/EMA endpoints on 822 cases, including 24 ADC controls, with identical source arrays, ROI, noise conditioning, exposure, anchor/contrast. All 160x160 native cells, no resize. Both standing real scenes/priors/windows/JPEGs included; independent ISO100/AHD/JPEG references are qualitative, not exact GT. Triplets repeat existing comparison pixels, not observations.\",\n        },\n    )\n    neural = {p: sha for p, sha in plan[\"frozen_files\"].items() if \"/src/demosaic/\" in p}\n    assert len(neural) == 86\n    extra = [REPO / \"scripts/audit_relative_phase_training.py\", Path(__file__)]\n    save(\n        destination / \"source-bundle.json\",\n        {\n            \"preparation\": ref(REPO / \"docs/results/v151-relative-phase-preparation-v1.json\"),\n            \"frozen_neural_file_count\": 86,\n            \"frozen_neural_source_hashes\": neural,\n            \"additional_sources\": [dict(ref(p), text=p.read_text()) for p in extra],\n            \"scope\": \"Original preparation binds frozen neural,training,review and scoring/rendering sources. This adds the posthoc endpoint-state/control auditor and publication driver. No scientific operator,input,loss or endpoint changed after the fixed design.\",\n        },\n    )\n    save(\n        destination / \"summary.json\",\n        {\n            \"scores\": ref(root / \"scores-v1.json\"),\n            \"groups\": read(root / \"scores-v1.json\")[\"summary\"],\n            \"scope\": \"Mean per-observation errors on the adaptive retained cohort. Four CFA placements of a recipe are related, not independent scenes. Actual blank/DC/spatial errors accompany correction energy; real references remain unscored.\",\n        },\n    )\n    save(\n        REPO / \"docs/results/v151-relative-phase-final-v1.json\",\n        {\n            \"status\": \"completed-four-fixed-endpoints-audited-and-natively-viewed\",\n            \"recorded_unix_UTC\": time.time(),\n            \"copies\": copies,\n            \"preparation\": ref(REPO / \"docs/results/v151-relative-phase-preparation-v1.json\"),\n            \"source_bundle\": ref(destination / \"source-bundle.json\"),\n            \"summary\": ref(destination / \"summary.json\"),\n            \"figures\": ref(assets / \"manifest-v1.json\"),\n            \"checkpoint\": read(root / \"train-result-v1.json\")[\"checkpoint\"],\n            \"endpoints\": figures[\"checkpoints\"],\n            \"steps_per_arm\": 1000,\n            \"arms\": 2,\n            \"quality_component_forwards\": 3288,\n            \"training_component_forwards\": 2000,\n            \"discarded_smoke_component_forwards\": 20,\n            \"compatibility_forward_function_evaluations\": 84,\n            \"total_tracked_component_forward_function_evaluations\": 5392,\n            \"adopted_training_observations\": 4000,\n            \"new_parent_DINO_forwards_in_training_and_review\": 0,\n            \"separate_ADC_parent_forwards\": 0,\n            \"separate_ADC_DINO_forwards\": 0,\n            \"new_noise_draws\": 0,\n            \"floor16_control_predictions_exact_V150\": 1644,\n            \"native_primary_figures\": 72,\n            \"native_sheets_actually_viewed\": 18,\n            \"independently_checked_RGB_channels\": figures[\"all_RGB_channels_checked\"],\n            \"recorded_terminal_scientific_owners\": 9,\n            \"recorded_terminal_owners_including_failed_bootstrap\": 10,\n            \"scope\": \"Both fresh matched 1k arms and four prospectively fixed final endpoints are reported, without early epoch selection. Counts exclude component unit tests. The noisy-only control exactly reproduces V151 on all1644 predictions including ADC cases. All training/review arrays and parents are adopted without new noise or parent/DINO calls. One failed controller bootstrap exited before import/claim/scientific work; its source/log and exact terminal owner are preserved alongside nine terminal scientific owners. No scientific worker was restarted or replaced. This finite experiment does not complete the broader fine-detail/clean-sky objective.\",\n        },\n    )\n    print(f\"Published {len(copies)} byte-exact receipts and {len(images)} native comparisons\")\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"root\", type=Path)\n    main(parser.parse_args().root.absolute())\n"
+  },
+  "preserved_partial_artifacts": [
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/noisy-control-raw-step1000-collection.json",
+        "sha256": "899c4e42046fd2840817206b5f6b9e43b0f977078ac97d27de8c7270e59349db"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/noisy-control-raw-step1000-collection.json",
+        "sha256": "899c4e42046fd2840817206b5f6b9e43b0f977078ac97d27de8c7270e59349db"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/training-completion.json",
+        "sha256": "a79353eeb51256b99931c7b7f731be0579e557d409f7d99a2e2782d8f48f9484"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/training-completion.json",
+        "sha256": "a79353eeb51256b99931c7b7f731be0579e557d409f7d99a2e2782d8f48f9484"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/noisy-control-EMA-step1000-collection.json",
+        "sha256": "5f9128685027a6629a6a12b708720eeef636bbb36d69ab13332417226dd5e66c"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/noisy-control-EMA-step1000-collection.json",
+        "sha256": "5f9128685027a6629a6a12b708720eeef636bbb36d69ab13332417226dd5e66c"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/postprocess-completion.json",
+        "sha256": "2ec378a8f04b97d7d341dc6116384401328eb7781b5c04a4a4e3bd76e32932f6"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/postprocess-completion.json",
+        "sha256": "2ec378a8f04b97d7d341dc6116384401328eb7781b5c04a4a4e3bd76e32932f6"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/execution-completion.json",
+        "sha256": "091c132e25af8489a57c22e816da0ae3673c3569b6d032d8868e1ac5a2797910"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/execution-completion.json",
+        "sha256": "091c132e25af8489a57c22e816da0ae3673c3569b6d032d8868e1ac5a2797910"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/metric-audit.json",
+        "sha256": "f330a98d2430332a6b80cf098205384528c719e449094ad1bb1a81187206ef9c"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/metric-audit.json",
+        "sha256": "f330a98d2430332a6b80cf098205384528c719e449094ad1bb1a81187206ef9c"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/training-state-audit.json",
+        "sha256": "7016577399cb54300c5195a45cedfa0a8cb07973b30afd1d091f95ec07e4cfdc"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/training-state-audit.json",
+        "sha256": "7016577399cb54300c5195a45cedfa0a8cb07973b30afd1d091f95ec07e4cfdc"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/relative-phase-EMA-step1000-collection.json",
+        "sha256": "fee014b6d3c09fd7012b1b9e9b5313c23596432234c48955473377068595d1f8"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/relative-phase-EMA-step1000-collection.json",
+        "sha256": "fee014b6d3c09fd7012b1b9e9b5313c23596432234c48955473377068595d1f8"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/training-routing.json",
+        "sha256": "653c9c0c5fd5ebc95b7eb0a050bab6a78f8130ae0496ccc62ae4a7320c4503f7"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/training-routing.json",
+        "sha256": "653c9c0c5fd5ebc95b7eb0a050bab6a78f8130ae0496ccc62ae4a7320c4503f7"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/training-result.json",
+        "sha256": "d00a1c88ccac5f183e5afe74d0b413c3cb7e788e41f2949cd9a3a9621fb1e964"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/training-result.json",
+        "sha256": "d00a1c88ccac5f183e5afe74d0b413c3cb7e788e41f2949cd9a3a9621fb1e964"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/relative-phase-raw-step1000-collection.json",
+        "sha256": "bc2a5484914cee4bdcace57a0496d43ab85811a164bbb32d348d8e3ffb638b4b"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/relative-phase-raw-step1000-collection.json",
+        "sha256": "bc2a5484914cee4bdcace57a0496d43ab85811a164bbb32d348d8e3ffb638b4b"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/bootstrap-failure.json",
+        "sha256": "508d0700d65694311201ecc87b6816e13867eda836ecee7e227f88c57db7c151"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/bootstrap-failure.json",
+        "sha256": "508d0700d65694311201ecc87b6816e13867eda836ecee7e227f88c57db7c151"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/scores.json",
+        "sha256": "0527340f6ba260d12233ab5f6133eaac6859e9375013c9925a0183dfcd0837a9"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/scores.json",
+        "sha256": "0527340f6ba260d12233ab5f6133eaac6859e9375013c9925a0183dfcd0837a9"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/review-result.json",
+        "sha256": "981c3cf9d0229ada48a1afe27f0be1a9760f29219e9a785a53e2536ea012dbcc"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/review-result.json",
+        "sha256": "981c3cf9d0229ada48a1afe27f0be1a9760f29219e9a785a53e2536ea012dbcc"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/native-viewing.json",
+        "sha256": "1c685fbfe9816567040f9d6f2860a1ea4296ee6f2a472fbcf31e6db4ae9cebc9"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/native-viewing.json",
+        "sha256": "1c685fbfe9816567040f9d6f2860a1ea4296ee6f2a472fbcf31e6db4ae9cebc9"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/figures.json",
+        "sha256": "cfcadf6734d08eab9a9fa6bb0699c18b61c9bbb10e93666cea6a2ee789da7ec7"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/figures.json",
+        "sha256": "cfcadf6734d08eab9a9fa6bb0699c18b61c9bbb10e93666cea6a2ee789da7ec7"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/training-audit.json",
+        "sha256": "9f4a65c1adf58247a7d7801d90ee0f7d63cfb1251340caf0db018bb1cb4813d9"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/training-audit.json",
+        "sha256": "9f4a65c1adf58247a7d7801d90ee0f7d63cfb1251340caf0db018bb1cb4813d9"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v151-relative-phase-v1/proposal-support.json",
+        "sha256": "0e9d8a6873444df70f92785f13553403b0bff6336ba5a926e5a529653d8ebd29"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/receipts/proposal-support.json",
+        "sha256": "0e9d8a6873444df70f92785f13553403b0bff6336ba5a926e5a529653d8ebd29"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-31.png",
+        "sha256": "f2e1bf77d277b7fb1ee45067ab42e05c01d3cf74d4b7b895107a7d61bd38de3b"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-31.png",
+        "sha256": "f2e1bf77d277b7fb1ee45067ab42e05c01d3cf74d4b7b895107a7d61bd38de3b"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-06.png",
+        "sha256": "7b721024a5956ebb28daca2a595986a235c4f093f710ce0e2fe6536a28a89cee"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-06.png",
+        "sha256": "7b721024a5956ebb28daca2a595986a235c4f093f710ce0e2fe6536a28a89cee"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-27.png",
+        "sha256": "6e4f126e58423920dc947f7ed2b59aba5ea98b1a33c9359d28ad486f80af9f38"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-27.png",
+        "sha256": "6e4f126e58423920dc947f7ed2b59aba5ea98b1a33c9359d28ad486f80af9f38"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-30.png",
+        "sha256": "dfbe6c242c48c24e41a924e55c02cec79fed45467a523d0ab970d0d9eed18247"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-30.png",
+        "sha256": "dfbe6c242c48c24e41a924e55c02cec79fed45467a523d0ab970d0d9eed18247"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-01.png",
+        "sha256": "056cd0578b65957407b0d6332205bf68c808835d15cf1799f14c0aed8ac96967"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-01.png",
+        "sha256": "056cd0578b65957407b0d6332205bf68c808835d15cf1799f14c0aed8ac96967"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-33.png",
+        "sha256": "db0f948f52fd4c01413754ee5fb354e235e6a6df23ac4fda6654cbd9b9d9c22a"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-33.png",
+        "sha256": "db0f948f52fd4c01413754ee5fb354e235e6a6df23ac4fda6654cbd9b9d9c22a"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-37.png",
+        "sha256": "ea4d6d4bd5bbbfd63d946ddbdf8c59d8ec4728deb5b4aea0cf13d1810e5a9fec"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-37.png",
+        "sha256": "ea4d6d4bd5bbbfd63d946ddbdf8c59d8ec4728deb5b4aea0cf13d1810e5a9fec"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-43-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "9e8ccca56d773985cbe12e4d1ef3da58203ba0d0bbc233bf19a7a05c732c438a"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-43-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "9e8ccca56d773985cbe12e4d1ef3da58203ba0d0bbc233bf19a7a05c732c438a"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-45.png",
+        "sha256": "218bc3b8aacdf7cd8967e00839f289cbf761fb5c534e770f4b990000c24370cd"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-45.png",
+        "sha256": "218bc3b8aacdf7cd8967e00839f289cbf761fb5c534e770f4b990000c24370cd"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-22.png",
+        "sha256": "2b9ceb0d9f5a4db4c0c52f5128bad234fb6348c560d4f978eb1c85cc19f71916"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-22.png",
+        "sha256": "2b9ceb0d9f5a4db4c0c52f5128bad234fb6348c560d4f978eb1c85cc19f71916"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-34.png",
+        "sha256": "21cbc375296934f5b9c9f84f861eca2a6d6409b0a2ba769e8670d219f3417290"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-34.png",
+        "sha256": "21cbc375296934f5b9c9f84f861eca2a6d6409b0a2ba769e8670d219f3417290"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-13.png",
+        "sha256": "97fb7a77515effcc15c871d218ca1c9fe0eb3fe3180a7ef594cab363f9ffd704"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-13.png",
+        "sha256": "97fb7a77515effcc15c871d218ca1c9fe0eb3fe3180a7ef594cab363f9ffd704"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-41.png",
+        "sha256": "e04c36788476e675e7d8939efd1a0acea59339e03d88400935f9dca4e0a7506d"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-41.png",
+        "sha256": "e04c36788476e675e7d8939efd1a0acea59339e03d88400935f9dca4e0a7506d"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-43-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "78c2da8a822c007f24eaf0453fe38f8ea26b1cb7313163a44c0fdb1ac3464d7a"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-43-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "78c2da8a822c007f24eaf0453fe38f8ea26b1cb7313163a44c0fdb1ac3464d7a"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-24-relative-phase-raw-step1000-triplet.png",
+        "sha256": "1c387ccc0fb0247ad802387a12fa2886c495ce961e500a9d547d779aa67468f2"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-24-relative-phase-raw-step1000-triplet.png",
+        "sha256": "1c387ccc0fb0247ad802387a12fa2886c495ce961e500a9d547d779aa67468f2"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-15.png",
+        "sha256": "1db58f2df718a395b630db9eef64a9be68797fe842a1b934247f256fd0f8bed9"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-15.png",
+        "sha256": "1db58f2df718a395b630db9eef64a9be68797fe842a1b934247f256fd0f8bed9"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-46.png",
+        "sha256": "ed34f64fe1ddfe689a752e37a39f915231b0bf7d7077d53258961d3b0cb6e0ab"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-46.png",
+        "sha256": "ed34f64fe1ddfe689a752e37a39f915231b0bf7d7077d53258961d3b0cb6e0ab"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-08.png",
+        "sha256": "ced80e72e19176f2f4df6cd342155678d41449c71d7fae0e5fd7ef22a76edfee"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-08.png",
+        "sha256": "ced80e72e19176f2f4df6cd342155678d41449c71d7fae0e5fd7ef22a76edfee"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-02-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "9e20de1431e4fb4620a655774c78506556e462b07638192ae1f9536da91ba15e"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-02-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "9e20de1431e4fb4620a655774c78506556e462b07638192ae1f9536da91ba15e"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-23.png",
+        "sha256": "251e1ebba069cc8c8cc3dcf9256f081a0533d1f64c77485dc22edc2466133208"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-23.png",
+        "sha256": "251e1ebba069cc8c8cc3dcf9256f081a0533d1f64c77485dc22edc2466133208"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-07.png",
+        "sha256": "865ab53012310b090e28934834027fbdc454be2fc585e8bf0c144483ca587e81"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-07.png",
+        "sha256": "865ab53012310b090e28934834027fbdc454be2fc585e8bf0c144483ca587e81"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-00-noisy-control-raw-step1000-triplet.png",
+        "sha256": "da52cbb4c1c0654a006ba0f710a0d68cc88f8db9eb63d8756f74c1b4c2bfabd5"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-00-noisy-control-raw-step1000-triplet.png",
+        "sha256": "da52cbb4c1c0654a006ba0f710a0d68cc88f8db9eb63d8756f74c1b4c2bfabd5"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-10.png",
+        "sha256": "fe9f4462aba77917ac00db4cd07e6e7ece4b3ddd9ea28a97c64a322ecec3b8a0"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-10.png",
+        "sha256": "fe9f4462aba77917ac00db4cd07e6e7ece4b3ddd9ea28a97c64a322ecec3b8a0"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-44.png",
+        "sha256": "97ef35c7da1ba9cf4cecc8c93928bb0e4121c269fc63c2660fdeaaa75962c4f3"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-44.png",
+        "sha256": "97ef35c7da1ba9cf4cecc8c93928bb0e4121c269fc63c2660fdeaaa75962c4f3"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-24-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "d676a6e27c683b4d916f0654e30c090a006ce165cdeb3191adb712a44eb9f308"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-24-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "d676a6e27c683b4d916f0654e30c090a006ce165cdeb3191adb712a44eb9f308"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-03.png",
+        "sha256": "e087cc66a97b38c1a9df10fbf9e496cda9cc0e11fc65770a77bc26f08f60aeb0"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-03.png",
+        "sha256": "e087cc66a97b38c1a9df10fbf9e496cda9cc0e11fc65770a77bc26f08f60aeb0"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-20.png",
+        "sha256": "bef7b76edc01ab0acd8cbd00b0f03238ff2de4ea0edbc6ed5b22bb614896446e"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-20.png",
+        "sha256": "bef7b76edc01ab0acd8cbd00b0f03238ff2de4ea0edbc6ed5b22bb614896446e"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-00.png",
+        "sha256": "81e860746c42b1539642136eaae7219882fea4f034eac2b419866c2ebbc4b599"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-00.png",
+        "sha256": "81e860746c42b1539642136eaae7219882fea4f034eac2b419866c2ebbc4b599"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-04.png",
+        "sha256": "453e8f2b26706b390c99a163dabf88b1197c5d5e45a4e58f4fa4aa12da09f476"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-04.png",
+        "sha256": "453e8f2b26706b390c99a163dabf88b1197c5d5e45a4e58f4fa4aa12da09f476"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-24.png",
+        "sha256": "287c7fd1d569cb1e9d183401b58c4f71624cdd101fd11d3ed9ad63f7a9e3b180"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-24.png",
+        "sha256": "287c7fd1d569cb1e9d183401b58c4f71624cdd101fd11d3ed9ad63f7a9e3b180"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-36.png",
+        "sha256": "b50bacb27df0ee5da8af4104da22d722b2c8ad8ccee2c9be889ac5dc15d8f501"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-36.png",
+        "sha256": "b50bacb27df0ee5da8af4104da22d722b2c8ad8ccee2c9be889ac5dc15d8f501"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/manifest-v1.json",
+        "sha256": "3d72c0a5c022c79dd0b0a231a2ecdaa645aa31ba15be5ab0d48f9b467f3597cc"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/manifest-v1.json",
+        "sha256": "3d72c0a5c022c79dd0b0a231a2ecdaa645aa31ba15be5ab0d48f9b467f3597cc"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-16.png",
+        "sha256": "45e95fb2126cfb6df1198c32df1b0dc3b8938e2ff6e67f51db498c29b4143c48"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-16.png",
+        "sha256": "45e95fb2126cfb6df1198c32df1b0dc3b8938e2ff6e67f51db498c29b4143c48"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-43-relative-phase-raw-step1000-triplet.png",
+        "sha256": "eff03d9c99ec70835e5681f838a08a069059901fa95be85644d1bfb7ce2d37da"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-43-relative-phase-raw-step1000-triplet.png",
+        "sha256": "eff03d9c99ec70835e5681f838a08a069059901fa95be85644d1bfb7ce2d37da"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-25-noisy-control-raw-step1000-triplet.png",
+        "sha256": "b53e78cc72f2507eaf1bb21c0dd2b3886b0f3f45e2fafd5bcfde82347a3c1bdb"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-25-noisy-control-raw-step1000-triplet.png",
+        "sha256": "b53e78cc72f2507eaf1bb21c0dd2b3886b0f3f45e2fafd5bcfde82347a3c1bdb"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-11.png",
+        "sha256": "7c3caa6fe1f15f6541931705226ed8bda0eab4e76b7a40325ced6259f48117cd"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-11.png",
+        "sha256": "7c3caa6fe1f15f6541931705226ed8bda0eab4e76b7a40325ced6259f48117cd"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-28.png",
+        "sha256": "7cb9889aaddadcad24155bc73ba0e1ad60d09bcf644e0f889cd541858658681f"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-28.png",
+        "sha256": "7cb9889aaddadcad24155bc73ba0e1ad60d09bcf644e0f889cd541858658681f"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-35.png",
+        "sha256": "83c23f5c9a27c6071829a7263dde19dbec9f4dc0eeeb5c85947c6572b7ba5f04"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-35.png",
+        "sha256": "83c23f5c9a27c6071829a7263dde19dbec9f4dc0eeeb5c85947c6572b7ba5f04"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-02-noisy-control-raw-step1000-triplet.png",
+        "sha256": "cb17cf4e9428fb054b16e74c909e21ebee7b46b94c95f8a7e0ef5c319e4c94ca"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-02-noisy-control-raw-step1000-triplet.png",
+        "sha256": "cb17cf4e9428fb054b16e74c909e21ebee7b46b94c95f8a7e0ef5c319e4c94ca"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-18.png",
+        "sha256": "b79069ad0dca3461e584c042b4d8eac7293da67a098c4f5a6e9c04f9e2a50132"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-18.png",
+        "sha256": "b79069ad0dca3461e584c042b4d8eac7293da67a098c4f5a6e9c04f9e2a50132"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-32.png",
+        "sha256": "b195357c62ebc03872c6df82b66e274fa1e5d1989f825aff897109de2ad61065"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-32.png",
+        "sha256": "b195357c62ebc03872c6df82b66e274fa1e5d1989f825aff897109de2ad61065"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-25-relative-phase-raw-step1000-triplet.png",
+        "sha256": "2fb5f61698f927c96c79e167256e6a845d02ecfdc39d2a643174ac4fa866556c"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-25-relative-phase-raw-step1000-triplet.png",
+        "sha256": "2fb5f61698f927c96c79e167256e6a845d02ecfdc39d2a643174ac4fa866556c"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-09.png",
+        "sha256": "da5b17c2e6e1bd0dba8a917e0ff50645e344089029e6e944552770747b9e0cf2"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-09.png",
+        "sha256": "da5b17c2e6e1bd0dba8a917e0ff50645e344089029e6e944552770747b9e0cf2"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-05.png",
+        "sha256": "ac6195ef380079d521db39dd754a7b305e752c9cc7965ccb1a8742298ea53d6f"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-05.png",
+        "sha256": "ac6195ef380079d521db39dd754a7b305e752c9cc7965ccb1a8742298ea53d6f"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-43.png",
+        "sha256": "62614bb009a7a2937fd3f3655e06d40b9cde35125c79ebb2af991d00c9cb3abb"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-43.png",
+        "sha256": "62614bb009a7a2937fd3f3655e06d40b9cde35125c79ebb2af991d00c9cb3abb"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-47.png",
+        "sha256": "dcba1a1b6bdd86b2e72b82ede433f55c8e4917dc0f60099f3e4ea9c31d0d3225"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-47.png",
+        "sha256": "dcba1a1b6bdd86b2e72b82ede433f55c8e4917dc0f60099f3e4ea9c31d0d3225"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-02-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "44ab595230b4c37aa09d074332eb2873c39d61071d3eb76c825cb44c99649e37"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-02-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "44ab595230b4c37aa09d074332eb2873c39d61071d3eb76c825cb44c99649e37"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-42-noisy-control-raw-step1000-triplet.png",
+        "sha256": "14bf9d634f6be014e6950d782a96aa0b6a15add924f3d952fbb0ebfadde8f007"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-42-noisy-control-raw-step1000-triplet.png",
+        "sha256": "14bf9d634f6be014e6950d782a96aa0b6a15add924f3d952fbb0ebfadde8f007"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-40.png",
+        "sha256": "a533d5eef5e2e7b44d631fc6f7601f8e6abfdd03de08252dd415fd49f11fd429"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-40.png",
+        "sha256": "a533d5eef5e2e7b44d631fc6f7601f8e6abfdd03de08252dd415fd49f11fd429"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-42.png",
+        "sha256": "a43ff8f2ab974acc1387077c38ee49d9f62b7d5bb0f0aa8af7c2ec2c10ac616d"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-42.png",
+        "sha256": "a43ff8f2ab974acc1387077c38ee49d9f62b7d5bb0f0aa8af7c2ec2c10ac616d"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-42-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "7470fbfee88da23b9ca3a29289a6e93eb82e3782fb4a0eb832059a97eae80fb2"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-42-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "7470fbfee88da23b9ca3a29289a6e93eb82e3782fb4a0eb832059a97eae80fb2"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-19.png",
+        "sha256": "32001cfad1f0b7c566d308d2dbc2d0c52bf891707f9fdc89dbfacb44aa5dfa2b"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-19.png",
+        "sha256": "32001cfad1f0b7c566d308d2dbc2d0c52bf891707f9fdc89dbfacb44aa5dfa2b"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-00-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "e875be23d96a7ed0defaaafb079d7b61111d7553bb09ed59ce4d822722cca301"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-00-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "e875be23d96a7ed0defaaafb079d7b61111d7553bb09ed59ce4d822722cca301"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-17.png",
+        "sha256": "6cb10f64b1b833774797d80f9f194f290425490c981984f6b317b82b5a07a92f"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-17.png",
+        "sha256": "6cb10f64b1b833774797d80f9f194f290425490c981984f6b317b82b5a07a92f"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-14.png",
+        "sha256": "c55f6fadbf75ba50e3e6f88c45af11d54c7141f0e45e19fcf10fe89415e4b8f6"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-14.png",
+        "sha256": "c55f6fadbf75ba50e3e6f88c45af11d54c7141f0e45e19fcf10fe89415e4b8f6"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-25-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "78a618aac1d3950f80b0bbc5f8e1eef2427220aec7040c2cf3e1b06e18230279"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-25-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "78a618aac1d3950f80b0bbc5f8e1eef2427220aec7040c2cf3e1b06e18230279"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-25.png",
+        "sha256": "d39c03c50b9c99e9eb4adfccd1179cf87ad48beb004f4f3343ea4c7358ef7e6a"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-25.png",
+        "sha256": "d39c03c50b9c99e9eb4adfccd1179cf87ad48beb004f4f3343ea4c7358ef7e6a"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-00-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "6505ab84d1e5591e77e6b6097f5213ba6cadd76d01f78da371ed61bff6d3c9be"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-00-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "6505ab84d1e5591e77e6b6097f5213ba6cadd76d01f78da371ed61bff6d3c9be"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-39.png",
+        "sha256": "f20032c56bdaecabe1f35a4bbfe89f59aa25932fe00ee39301f42f061187fe2b"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-39.png",
+        "sha256": "f20032c56bdaecabe1f35a4bbfe89f59aa25932fe00ee39301f42f061187fe2b"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-42-relative-phase-raw-step1000-triplet.png",
+        "sha256": "98e9486a61e6e454ee20c3de79d202ce4d935fba9080101d2cd10e8f5e732b67"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-42-relative-phase-raw-step1000-triplet.png",
+        "sha256": "98e9486a61e6e454ee20c3de79d202ce4d935fba9080101d2cd10e8f5e732b67"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-42-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "a8750db18e8e252702c361795d5372b9cdff7c710b12c72355e89a5727241c82"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-42-noisy-control-EMA-step1000-triplet.png",
+        "sha256": "a8750db18e8e252702c361795d5372b9cdff7c710b12c72355e89a5727241c82"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-02.png",
+        "sha256": "9068939d85647f34b5086a085ed0d9c013f8ec1f42724c9691c222e6c310e321"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-02.png",
+        "sha256": "9068939d85647f34b5086a085ed0d9c013f8ec1f42724c9691c222e6c310e321"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-21.png",
+        "sha256": "ce9fc3fc628cb37e6bd9e80e05a061e0dd87aa6ff1c9dd248084dc27e6437468"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-21.png",
+        "sha256": "ce9fc3fc628cb37e6bd9e80e05a061e0dd87aa6ff1c9dd248084dc27e6437468"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-38.png",
+        "sha256": "14b2e571f868ba5df9ebe8cccb1fa02e945e3df4be7e8e4bbf44650e053890a6"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-38.png",
+        "sha256": "14b2e571f868ba5df9ebe8cccb1fa02e945e3df4be7e8e4bbf44650e053890a6"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-02-relative-phase-raw-step1000-triplet.png",
+        "sha256": "0134ac640b623352de973bf78f5ab949eaed9f68d2535c344848c18381e9a91c"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-02-relative-phase-raw-step1000-triplet.png",
+        "sha256": "0134ac640b623352de973bf78f5ab949eaed9f68d2535c344848c18381e9a91c"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-43-noisy-control-raw-step1000-triplet.png",
+        "sha256": "8a1d608c785cdf2d36b98582b757583bc01733876c43549c83dd675673fc0bbd"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-43-noisy-control-raw-step1000-triplet.png",
+        "sha256": "8a1d608c785cdf2d36b98582b757583bc01733876c43549c83dd675673fc0bbd"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-12.png",
+        "sha256": "4ec750143ebe753227e1dccb11bbbb27d32220556b8e948a5c48c6ca9f6d3e57"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-12.png",
+        "sha256": "4ec750143ebe753227e1dccb11bbbb27d32220556b8e948a5c48c6ca9f6d3e57"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-25-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "147fd3e256b297eb3a537646b905ab4eeda483da7a9d873637094116ee9faaca"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-25-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "147fd3e256b297eb3a537646b905ab4eeda483da7a9d873637094116ee9faaca"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-26.png",
+        "sha256": "28dd58b87ea7a67737ce18abeb21694bf840cc6eba8ce04f443440b09abed5aa"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-26.png",
+        "sha256": "28dd58b87ea7a67737ce18abeb21694bf840cc6eba8ce04f443440b09abed5aa"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-24-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "b9f22fca73242a2dbbf2b56243eacc7617aca0fd00bd6ff5212d126de5798eb4"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-24-relative-phase-EMA-step1000-triplet.png",
+        "sha256": "b9f22fca73242a2dbbf2b56243eacc7617aca0fd00bd6ff5212d126de5798eb4"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-24-noisy-control-raw-step1000-triplet.png",
+        "sha256": "627d668cca9798cc85694a7758a8600ea507f5d80cf1e85af2927adfaad08b3c"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-24-noisy-control-raw-step1000-triplet.png",
+        "sha256": "627d668cca9798cc85694a7758a8600ea507f5d80cf1e85af2927adfaad08b3c"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-00-relative-phase-raw-step1000-triplet.png",
+        "sha256": "67d0cb4b2faaafb891f479da1f80acb55cfa203618eb9bbc57a93b39e6bff6fe"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-00-relative-phase-raw-step1000-triplet.png",
+        "sha256": "67d0cb4b2faaafb891f479da1f80acb55cfa203618eb9bbc57a93b39e6bff6fe"
+      }
+    },
+    {
+      "original_binding": {
+        "path": "/home/dllu/proj/demosaic/docs/images/v151-relative-phase-v1/comparison-29.png",
+        "sha256": "d8f4cf1c65e1fbb5d4c1c523b38ba99cefc3dbba93dc023b2acea85ace08a796"
+      },
+      "preserved_binding": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/publication-failure-v1/images/comparison-29.png",
+        "sha256": "d8f4cf1c65e1fbb5d4c1c523b38ba99cefc3dbba93dc023b2acea85ace08a796"
+      }
+    }
+  ],
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "18 byte-exact receipt copies and72 PNGs plus native manifest were generated under a wrong-version directory before source-bundle/final-index writing. All partial bytes relocated to owned failure evidence without alteration. Corrected publisher uses fresh V152 destinations. No model, input, score, image pixel, frozen source, or scientific worker changed."
+}

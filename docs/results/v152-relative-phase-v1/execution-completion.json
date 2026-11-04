@@ -1,0 +1,104 @@
+{
+  "status": "all10-recorded-owners-terminal",
+  "recorded_unix_UTC": 1793754579.982466,
+  "recorded_owner_count": 10,
+  "scientific_owner_count": 9,
+  "failed_preclaim_bootstrap_count": 1,
+  "owners": [
+    {
+      "stage": "training-controller",
+      "owner": {
+        "pid": 2988016,
+        "created": 1793752973.6
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "parity",
+      "owner": {
+        "pid": 2988018,
+        "created": 1793752973.92
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "smoke",
+      "owner": {
+        "pid": 2988041,
+        "created": 1793752984.21
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "train",
+      "owner": {
+        "pid": 2988112,
+        "created": 1793753000.49
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "postprocess-controller",
+      "owner": {
+        "pid": 2988110,
+        "created": 1793752999.68
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 2993919,
+        "created": 1793753962.93
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 2994414,
+        "created": 1793754203.27
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 2994781,
+        "created": 1793754301.58
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 2995185,
+        "created": 1793754413.88
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "failed-controller-bootstrap",
+      "owner": {
+        "pid": 2987910,
+        "created": 1793752925.74
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "live_matching_root_argv": [],
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/status-v1.json",
+    "sha256": "a79353eeb51256b99931c7b7f731be0579e557d409f7d99a2e2782d8f48f9484"
+  },
+  "postprocess_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-status-v1.json",
+    "sha256": "2ec378a8f04b97d7d341dc6116384401328eb7781b5c04a4a4e3bd76e32932f6"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v152-execution-v1.py",
+    "sha256": "3d44c4a1f4c364921fa18787ca890532f2863b5af0b2e49116f8425e4744a439",
+    "text": "\"\"\"Record actual terminal states after every owned primary stage completes.\"\"\"\n\nimport os\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1')\ntraining = read(root / 'status-v1.json')\npost = read(root / 'postprocess-status-v1.json')\nassert training['status'] == 'completed-matched-training-awaiting-fixed-quality-review'\nassert post['status'] == 'completed-audited-paired-arrays-awaiting-human-native-viewing'\nassert set(post['completed']) == {'review', 'scores', 'metric-audit', 'render'}\nowners = [('training-controller', training['owner'])]\nowners += [(name, read(root / f'{name}-result-v1.json')['owner'])\n           for name in ['parity', 'smoke', 'train']]\nowners += [('postprocess-controller', post['owner'])]\nowners += [(stage, binding['owner']) for stage, binding in post['completed'].items()]\nowners.append(('failed-controller-bootstrap', read(root / 'controller-bootstrap-failure-v1.json')['owner']))\nassert len(owners) == 10\nrecords = []\nfor stage, owner in owners:\n    try:\n        process = psutil.Process(owner['pid'])\n        if abs(process.create_time() - owner['created']) >= .01:\n            status = 'PID-reused-original-owner-terminal'\n        else:\n            status = process.status()\n            assert status in ['zombie', 'dead'], (stage, owner, status)\n    except psutil.NoSuchProcess:\n        status = 'absent'\n    records.append({'stage': stage, 'owner': owner, 'terminal_state': status})\nexcluded = {os.getpid()} | {p.pid for p in psutil.Process().parents()}\nmatching = []\nfor process in psutil.process_iter(['pid', 'cmdline', 'status']):\n    if process.pid in excluded or process.info['status'] in ['zombie', 'dead']:\n        continue\n    tokens = process.info['cmdline'] or []\n    if any(t == str(root) or t.startswith(str(root) + '/')\n           or t == str(root.relative_to(root.parents[2])) for t in tokens):\n        matching.append(process.info)\nassert not matching, matching\nsave(root / 'execution-completion-v1.json', {\n    'status': 'all10-recorded-owners-terminal', 'recorded_unix_UTC': time.time(),\n    'recorded_owner_count': 10, 'scientific_owner_count': 9, 'failed_preclaim_bootstrap_count': 1, 'owners': records, 'live_matching_root_argv': matching,\n    'training_completion': ref(root / 'status-v1.json'),\n    'postprocess_completion': ref(root / 'postprocess-status-v1.json'),\n    'verifier': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'scope': 'Exact PID/create-time terminal checks for two valid controllers, seven phase workers and the failed pre-claim bootstrap. Bootstrap import failure had zero scientific work; its launch/log are preserved. Root argv scan excludes verifier and ancestors. Detached controllers were not directly waited by the assistant; completion records and frozen controller flow require every primary child return zero. No stop, kill, or restart.'})\nprint('PASS: all 10 recorded owners terminal (9 scientific + 1 failed preclaim bootstrap); no live root argv matches')\n"
+  },
+  "scope": "Exact PID/create-time terminal checks for two valid controllers, seven phase workers and the failed pre-claim bootstrap. Bootstrap import failure had zero scientific work; its launch/log are preserved. Root argv scan excludes verifier and ancestors. Detached controllers were not directly waited by the assistant; completion records and frozen controller flow require every primary child return zero. No stop, kill, or restart."
+}

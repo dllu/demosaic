@@ -1,0 +1,178 @@
+{
+  "status": "actually-viewed-all72-native-primary-figures-at-original-detail",
+  "recorded_unix_UTC": 1793754579.8329747,
+  "figure_manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/figures-v1.json",
+    "sha256": "cfcadf6734d08eab9a9fa6bb0699c18b61c9bbb10e93666cea6a2ee789da7ec7"
+  },
+  "viewing_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/native-viewing-session-v1.jsonl",
+    "sha256": "52127941fb093c08114a0a4ea127e3308a5374c192efd6fc87d0f2e40dedb242"
+  },
+  "events": [
+    {
+      "recorded_unix_UTC": 1793754462.23567,
+      "sheets": [
+        0,
+        1
+      ],
+      "detail": "original",
+      "notes": "Case2302 remains nearly flat with no recovered crossing lattice under relative raw/EMA. At40x, colored mottle remains. Case2309 keeps one oriented family but misses crossings. Relative changes from the noisy-only control are subtle; repeated triplets preserve the same native cells."
+    },
+    {
+      "recorded_unix_UTC": 1793754473.4727576,
+      "sheets": [
+        2,
+        3
+      ],
+      "detail": "original",
+      "notes": "Case2309 retains one family but misses the exact crossings under both relative endpoints. Diagnostic40x exposes residual boundary mottle. Absent mesh stays mottled. Main sky is visually close to parent/control, building remains soft and foliage painterly; no convincing useful new fine structure appears."
+    },
+    {
+      "recorded_unix_UTC": 1793754485.0521016,
+      "sheets": [
+        4,
+        5
+      ],
+      "detail": "original",
+      "notes": "Main coarse fence survives. Fine cab mesh under both priors and windows remains soft/incomplete, with no convincing new relative-phase wires. Both independentISO100 and camera JPEG references are included. Feather,moth and grass/bark texture remain soft; small method changes do not recover their exact fine texture."
+    },
+    {
+      "recorded_unix_UTC": 1793754497.2019198,
+      "sheets": [
+        6,
+        7
+      ],
+      "detail": "original",
+      "notes": "Constant ADC fields remain visually identical across methods. Noisy fields at both priors, blue tint and brighter gray levels retain broad colored variation. Relative-phase differences are subtle and do not visibly remove the large mottle, despite lower full-field RMS."
+    },
+    {
+      "recorded_unix_UTC": 1793754514.7452521,
+      "sheets": [
+        8,
+        9
+      ],
+      "detail": "original",
+      "notes": "Faint and dark bird/branch still miss exact feather/bark texture. Relative outputs remain close to the noisy-only control with small edge/color changes, without convincing new nonperiodic detail. Native triplets preserve the same source cells and show the same softness."
+    },
+    {
+      "recorded_unix_UTC": 1793754528.059409,
+      "sheets": [
+        10,
+        11
+      ],
+      "detail": "original",
+      "notes": "Dark bird remains soft. Vertical/narrow-bar whole-edge views stay close. Exact quiet patches retain colored blobs under40x, and relative outputs add visible fine grain in places without removing the broad mottle. Strong whole-image gains coexist with the measured quiet-region regression."
+    },
+    {
+      "recorded_unix_UTC": 1793754542.2369742,
+      "sheets": [
+        12,
+        13
+      ],
+      "detail": "original",
+      "notes": "Narrow/slanted/striped whole-pattern views remain close. Exact quiet patches keep broad green/magenta/dark blobs; relative outputs add fine-grain variation in places and do not clean the large blobs. No meaningful new texture recovery appears inside the strong patterns."
+    },
+    {
+      "recorded_unix_UTC": 1793754554.532035,
+      "sheets": [
+        14,
+        15
+      ],
+      "detail": "original",
+      "notes": "Striped quiet ROI stays mottled with additional fine variation under relative endpoints. ADC bark and fur keep useful fine texture; relative and control differ only subtly in color/edges at40x. The small measured ADC error gain is not a large visible new restoration. Raw/EMA bark triplets preserve native cells."
+    },
+    {
+      "recorded_unix_UTC": 1793754579.832924,
+      "sheets": [
+        16,
+        17
+      ],
+      "detail": "original",
+      "notes": "ADC fur retains fine strands with small method differences and no large new restoration. All four sloped-field central crops look smooth, with minor color/gradient differences; this does not erase the measured full-field block32 regression. All72 primary figures across18 sheets have now actually been seen at original detail."
+    }
+  ],
+  "sheets_viewed": 18,
+  "primary_figures_covered": 72,
+  "primary_indices_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71
+  ],
+  "no_resize": true,
+  "recorder": {
+    "path": "/home/dllu/proj/demosaic/.cache/record-v152-viewing-v1.py",
+    "sha256": "70222adc0892b3892777eb4acead144aacad442b979eb90c8fcd371fac4d0a6b",
+    "text": "\"\"\"Record a human viewing event only after the assistant has actually seen it.\"\"\"\n\nimport argparse\nimport json\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import read, ref, save\n\nparser = argparse.ArgumentParser(description=__doc__)\nparser.add_argument('sheets', help='Comma-separated sheet numbers actually seen')\nparser.add_argument('notes')\nargs = parser.parse_args()\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1')\nmanifest = read(root / 'figures-v1.json')\njournal = root / 'native-viewing-session-v1.jsonl'\nevents = [json.loads(line) for line in journal.read_text().splitlines()] if journal.exists() else []\nseen = {number for event in events for number in event['sheets']}\nselected = [int(number) for number in args.sheets.split(',')]\nassert not seen.intersection(selected) and len(set(selected)) == len(selected)\nassert all(0 <= number < len(manifest['sheets']) for number in selected)\nfor number in selected:\n    sheet = manifest['sheets'][number]\n    assert ref(sheet['image']['path']) == sheet['image'] and sheet['no_resize']\nevent = {'recorded_unix_UTC': time.time(), 'sheets': selected,\n         'detail': 'original', 'notes': args.notes}\nwith journal.open('a') as stream:\n    stream.write(json.dumps(event) + '\\n')\nevents.append(event)\nseen.update(selected)\nprint('Recorded actual viewing:', selected, '; total', len(seen))\nif len(seen) == 18:\n    assert seen == set(range(18)) and len(manifest['images']) == 72\n    indices = [i for n in sorted(seen) for i in manifest['sheets'][n]['indices']]\n    assert sorted(indices) == list(range(72)) and len(indices) == len(set(indices))\n    save(root / 'native-viewing-v1.json', {\n        'status': 'actually-viewed-all72-native-primary-figures-at-original-detail',\n        'recorded_unix_UTC': time.time(), 'figure_manifest': ref(root / 'figures-v1.json'),\n        'viewing_journal': ref(journal), 'events': events,\n        'sheets_viewed': 18, 'primary_figures_covered': 72,\n        'primary_indices_covered': sorted(indices), 'no_resize': True,\n        'recorder': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n        'scope': 'All four prospectively fixed final endpoints. Notes record actual original-detail viewing after image tool outputs. Quantitative mesh/flat gains are assessed beside remaining missing crossings, noisy organic texture, quiet mottle, and both real-scene references. Real ISO100/AHD/JPEG references remain qualitative, not exact GT.'})\n"
+  },
+  "scope": "All four prospectively fixed final endpoints. Notes record actual original-detail viewing after image tool outputs. Quantitative mesh/flat gains are assessed beside remaining missing crossings, noisy organic texture, quiet mottle, and both real-scene references. Real ISO100/AHD/JPEG references remain qualitative, not exact GT."
+}

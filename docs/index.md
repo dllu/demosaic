@@ -1,12 +1,14 @@
 # Documentation guide
 
-The [active V152 relative-phase trial](relative-phase-estimator.md) adds eight
-RAW/residual cross-spectrum coordinates to the frequency estimator, addressing
-an ambiguity in its separate marginal descriptors. The zero-initialized
-2,304-parameter adapter exactly embeds the tested native control. Ten tests,
-84 CUDA compatibility evaluations and both genuine 8+2 smoke checks pass.
-Four fixed endpoints / 822 cases / 72 native figures retain ADC, flat, quiet
-and both real-scene tradeoffs. Training is active; quality remains unmeasured.
+The [completed V152 relative-phase trial](relative-phase-estimator.md) improves
+mesh response 1.27–1.41% over the V151 noisy-only control, with slightly lower
+noisy-flat RMS. Versus V143, response rises 5.09–8.74% but remains only
+2.31–2.39% of constructed GT. Quiet-region RMS worsens .334–.834%, more than
+control, and natural-band response falls further. No convincing new real wires
+or organic texture appear. All four endpoints / 822 cases / 72 native views,
+independent audits and all 1,644 exact control replays are complete. The new
+input feature remains useful for further estimator/support work, with the
+quieter V151 and stronger ADC V150 results retained as comparators.
 
 The [completed V151 noisy-objective trial](noisy-objective-training.md) raises
 mean noisy-mesh response 3.76–7.22% over V143 by removing ADC-only supervision,

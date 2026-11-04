@@ -1,5 +1,11 @@
 # V151: noisy supervision helps modestly; peak weighting closes support
 
+Follow-up: [completed V152](relative-phase-estimator.md) uses this noisy-only
+control and adds RAW/residual cross-spectrum inputs. Mesh response and noisy-flat
+errors improve slightly further, but exact quiet errors worsen and natural-band
+response falls. The feature remains a useful estimator prototype; V151 retains
+its quieter matched behavior and V150 its stronger ADC photo result.
+
 Removing ADC-only supervised gradients improves the native matrix head's mean
 weak noisy-mesh response over V143: **3.76–7.22% relative**,
 with present-scene RMS lower by .19–.23%. Native 512 noisy-flat full RMS falls
