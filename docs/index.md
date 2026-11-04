@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [V151 noisy-objective trial](noisy-objective-training.md) compares the tested
+16 DN control, zero ADC supervision and zero ADC plus bounded clean-peak
+weighting. All13 tests and three CUDA8+2 checks pass. Checkpoint250's36 Adam
+states are finite; the control reproduces V150 floor16 raw/EMA/Adam exactly.
+All six final endpoints/822 cases/84 native figures are fixed. Training is
+active and quality remains unmeasured.
+
 The [completed V150 loss-floor trial](objective-floor-training.md) lowers
 native512 noisy-flat RMS about .045–.047% versus V143, and ADC photo RMS about
 3.06% on two held-out sources. Weak noisy bands and real cab wires remain missing;

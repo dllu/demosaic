@@ -1,0 +1,65 @@
+version: V151
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V150-objective-floor-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  floor16-control:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+    loss_floor_DN16: 16
+    ADC_loss_weight: 1
+    spectral_peak_bonus: 0
+  noisy-only:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+  noisy-peak8:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 7
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Three identical fresh native matrix heads consume all1000 existing V148
+  batches/4000 old observations.16DN control must reproduce V150 floor16 exactly.
+  Noisy-only sets loss0 for the118 ADC-only batches(shot=read=0), while all1000
+  forwards,AdamW/EMA updates and the original LR clock remain: ADC steps coast
+  on existing optimizer state/weight decay, rather than pause the optimizer.
+  Noisy-peak8 additionally weights pre-gate coefficient squared error by
+  1+7*r/(1+r) on noisy batches only, r=sum(clean FFT power)/sum(floored phase
+  frame-noise proxies). Weights1..8 are not renormalized; flat penalties have
+  floor1. This target-dependent training weight is not calibrated probability
+  or a flat-safety guarantee. All physical input features and inference code
+  stay unchanged; targets never enter forward. Source distribution,geometry,
+  common initialization,domain weights,1k horizon,seed/schedule,clipping andEMA
+  otherwise fixed. Both zero-ADC arms have882 supervised batches/3528 noisy
+  observations, but retain1000 optimizer updates. Ten discarded CUDA updates
+  per arm include genuine8+2 reload and explicit zero-ADC gradient checks;
+  production restarts fresh. All6 final raw/EMA endpoints cover the same822
+  retained/adopted cases,4932 head calls and84 native figures(36 repeat triplets).
+  Both standing GFX scenes,priors,windows,JPEGs and actual blank/quiet errors
+  remain, with ADC photos/slopes scored without an inference bypass. References
+  from independent ISO100/AHD/JPEG captures are qualitative,notGT. No new
+  parent/DINO/noise calls,original lookup,RAW decoding or dataz access. All
+  protected captures/siblings and validation source IDs remain excluded from
+  training. Adaptive reused cohort,not fresh independent validation. No early
+  endpoint selection or claim that removing ADC pressure guarantees detail.

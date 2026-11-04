@@ -52,6 +52,8 @@ ADC gradient pressure. [Completed V150](docs/objective-floor-training.md) slight
 lowers noisy-flat RMS and gives about 3.06% lower ADC photo RMS. Fine high-ISO
 texture remains weak; exact quiet and coarse sloped-field errors still regress.
 All four endpoints, 72 native figures and independent audits are complete.
+[V151](docs/noisy-objective-training.md) now isolates ADC supervision and bounded
+spectral emphasis with three matched fresh heads; quality review is pending.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

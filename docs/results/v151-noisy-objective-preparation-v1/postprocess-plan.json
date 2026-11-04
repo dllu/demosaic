@@ -1,0 +1,91 @@
+{
+  "root": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1",
+  "runner": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/complete_noisy_objective_review.py",
+    "sha256": "cbc7eec8db3e0204404789bcddd8fd92321679e1c04ccd9189a8e4d07a8d8b0d"
+  },
+  "work": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts",
+  "python": "/home/dllu/proj/demosaic/.venv/bin/python",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/plan-v1.json",
+    "sha256": "fd04d2f13d117dc1300a9026e776244398bb1d65f356a8e5d203abf5b27cf455"
+  },
+  "stages": [
+    {
+      "name": "review",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/review-source-v1.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/review-result-v1.json"
+    },
+    {
+      "name": "scores",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/score_noisy_objective_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/scores-v1.json"
+    },
+    {
+      "name": "metric-audit",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/audit_noisy_objective_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/independent-metrics-audit-v1.json"
+    },
+    {
+      "name": "render",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/render_noisy_objective_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/figures-v1.json"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/plan-v1.json",
+      "sha256": "fd04d2f13d117dc1300a9026e776244398bb1d65f356a8e5d203abf5b27cf455"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/review-plan-v1.json",
+      "sha256": "fba5b1f791efa5fdffe1cd653c734aec9113acdf70a47efac9789ae51956f262"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/quality-design-v1.json",
+      "sha256": "8e871525fbc51f787c104b919471eeac6164f686b01b848cbe8c2116eeca528f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/review-source-v1.py",
+      "sha256": "7ea12b62f475f81b347e258902114bcf88178f3bc06ef492ca7cb18ae37c3fc5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/collaborative-detail-v1/transfer-v1.py",
+      "sha256": "4e133f6492db7cfa3f0758410ccb1f91a50eecae18ff32018232ad373dc6beba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-photo-supplement-v1/operator-v2.py",
+      "sha256": "a8cd5a95ad45f4ebc6693666c63a911077c5c21642c695441ae996e6a0d2cefc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/collaborative-detail-v1/audit-transfer-v1.py",
+      "sha256": "58c6c7c4353da38209ec830f2f739848dd4a455f7cfc4b99ea2fc1e6355a20f6"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/complete_noisy_objective_review.py": "cbc7eec8db3e0204404789bcddd8fd92321679e1c04ccd9189a8e4d07a8d8b0d",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/review_v146_window_transfer.py": "baf8302f75ede9733e033d86fdeba217edae5b6ca35305cecad0605d001f6285",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/audit_noisy_objective_trial.py": "6d7e8f6973e71ae0d1f91d9b8568f8667a91c89ff2e4ac93783003b5779ab1a2",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/score_noisy_objective_trial.py": "b5306e047b63160d27390493d4b2fd7b3f3053e0c517cc4064d4e382a044b909",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/postprocess-v1/scripts/render_noisy_objective_trial.py": "d35e56bcdbef27e4b05387d696240c7005dd0411f95c6316672db79ef86c311c"
+  },
+  "new_component_forwards": 4932,
+  "new_parent_DINO_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Six fixed final paired endpoints; retained798 plus24 ADC controls, independent array reductions and84 native figures with independent pixel checks. Actual native viewing remains required. Observed polling-time budget caps intervals at5s so suspended controllers do not charge a whole user pause."
+}
