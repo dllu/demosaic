@@ -1,0 +1,74 @@
+version: V154
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  mse-control:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+  charb-0p01:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: charbonnier
+    spectral_epsilon: 0.01
+  charb-0p003:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: charbonnier
+    spectral_epsilon: 0.003
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Three fresh identical relative-phase heads adopt the same1000 V148 batches /4000 old observations
+  and parents. Only the delivered-RGB spectral penalty changes: existing V153 MSE control
+  versus stable Charbonnier sqrt(r^2+epsilon^2)-epsilon with epsilon0.01 or0.003 in RAW-frame-noise
+  proxy units. Rationalized r^2/(sqrt(r^2+epsilon^2)+epsilon) preserves tiny powers and finite
+  zero derivatives. r^2 is actual delivered RGB phase-packed spectral power divided by repeated
+  four-phase scales,floored at16DN; scales are training units,not calibrated RGB covariance.
+  No target-power masking; erroneous flat-target coefficients remain penalized. Band/frame/channel
+  normalization and0.25 weight match V153,not equal gradient norms. Pixel/gradient terms,all33713
+  parameters/13 tensors,inference/input evidence,band/bound/support,geometry/domain weights,initialization,LR/clipping/EMA
+  and1k horizon match. MSE control must exactly reproduce V153 delivered-RGB trace/raw/EMA/Adam/all1644
+  final arrays. All86 neural sources stay byte-identical.882 noisy supervised batches,118
+  zero-ADC gradients with1000 optimizer/EMA clocks; no peak bonus. Ten discarded updates per
+  arm include genuine8+2 restoration; production starts fresh. Six final raw/EMA endpoints
+  on822 cases require4932 head calls,84 native figures/36 repeated-cell triplets,actual blank/quiet/noisy-flat/ADC
+  controls and both standing real scenes/priors/windows/JPEGs. Real ISO100/AHD/JPEG references
+  are qualitative,not exactGT,and unscored. Adaptive reused cohort,not fresh blind validation.
+  MSE-control outputs use local SSD; four robust endpoints use the external SSD to retain96GiB/208GiB
+  reserves without deleting old evidence. No new parent/DINO/noise calls,original/source lookup,RAW
+  decode or dataz access; protected captures/JPEGs/siblings and validation sources remain
+  out of training.
+external_quality_root: /mnt/external/demosaic/quality-20261103/V154-robust-spectral-v1
+external_review_arms:
+- charb-0p01
+- charb-0p003

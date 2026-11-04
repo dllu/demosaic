@@ -1,0 +1,107 @@
+{
+  "status": "pass-active-preparation-and-document-publication",
+  "recorded_unix_UTC": 1793761739.6989,
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v154-robust-spectral-preparation-v1.json",
+    "sha256": "1edd1cb3de241c946aa60b273151aecfbe6c578332405aa9303937f88382886e"
+  },
+  "byte_exact_receipt_copies": 14,
+  "frozen_and_current_neural_hashes_matching": 86,
+  "previous_neural_hashes_unchanged": 86,
+  "source_texts_checked": 19,
+  "case_count": 822,
+  "ADC_controls": 24,
+  "planned_endpoints": 6,
+  "planned_native_primary_figures": 84,
+  "current_complete_control_trace_rows_exact_V153": 419,
+  "document_links_checked": 462,
+  "live_owners": {
+    "training-controller": {
+      "owner": {
+        "pid": 3122545,
+        "created": 1793761000.14
+      },
+      "status": "sleeping",
+      "CPU_times": {
+        "user": 0.8,
+        "system": 0.3,
+        "children_user": 26.09,
+        "children_system": 2.9,
+        "iowait": 0.0
+      }
+    },
+    "training-worker": {
+      "owner": {
+        "pid": 3122632,
+        "created": 1793761033.03
+      },
+      "status": "running",
+      "CPU_times": {
+        "user": 686.65,
+        "system": 7.36,
+        "children_user": 0.0,
+        "children_system": 0.01,
+        "iowait": 0.0
+      }
+    },
+    "postprocess-controller": {
+      "owner": {
+        "pid": 3123510,
+        "created": 1793761137.67
+      },
+      "status": "sleeping",
+      "CPU_times": {
+        "user": 0.22,
+        "system": 0.24,
+        "children_user": 0.0,
+        "children_system": 0.0,
+        "iowait": 0.0
+      }
+    }
+  },
+  "split_quality_output_GiB": [
+    4.4208984375,
+    8.841796875
+  ],
+  "actual_checkpoint_validation_mandatory_before_collection": true,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "235e3dece0ddda4c083d105ed6949a81af6e8dc3381fee72430ae82117ab0cc8"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "086039b50314ea5753a700bcc1b6770145db697ae5231989e61f1d32706af5d5"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "55739ec8f21af8bbf549d6677665016c216749e471168073b62d53bbfa9cb0c2"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "c182dd118e7a06b1101e8d4cd855e3a7df2f6311e2640d971680361e33fc2062"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "0741f59214200851d025089056f48fbc2d2675e01f1969059f5118a17748872f"
+    },
+    "docs/delivered-spectral-objective.md": {
+      "path": "/home/dllu/proj/demosaic/docs/delivered-spectral-objective.md",
+      "sha256": "f52555d948bf74b443ca31075035bddebfb74592f029c003176efd46496e9988"
+    },
+    "docs/robust-spectral-objective.md": {
+      "path": "/home/dllu/proj/demosaic/docs/robust-spectral-objective.md",
+      "sha256": "729bb4955dced69e6bc0e28be10c84d7d150586025b78fff56ad40510b0fefd1"
+    },
+    "diary/2026-11-03-18-55-27-v154-robust-spectral-objective.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-03-18-55-27-v154-robust-spectral-objective.md",
+      "sha256": "3a94f62efb891b33868b33721700d674a43a7838cc74d34bb3515d6c346581e7"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v154-preparation-v1.py",
+    "sha256": "e0b846962e7f56c41d54f80d67bc01be74a83f2fd0a58347005ffc6999d901a4",
+    "text": "\"\"\"Verify actual V154 preparation bytes and current live handles, without inference.\"\"\"\n\nimport json\nimport re\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo = Path('/home/dllu/proj/demosaic')\nroot = repo / '.cache/quality-20261103/V154-robust-spectral-v1'\npublication = repo / 'docs/results/v154-robust-spectral-preparation-v1.json'\np = read(publication)\nassert len(p['copies']) == 14\nfor binding in p['copies'].values():\n    assert ref(binding['original']['path']) == binding['original']\n    assert ref(binding['public']['path']) == binding['public']\n    assert Path(binding['original']['path']).read_bytes() == Path(binding['public']['path']).read_bytes()\nsource = read(p['sources']['path'])\nassert ref(p['sources']['path']) == p['sources']\nassert len(source['frozen_neural_hashes']) == len(source['previous86_neural_hashes_unchanged']) == 86\nfor path, sha in source['frozen_neural_hashes'].items():\n    assert ref(path)['sha256'] == ref(repo / 'src/demosaic' / Path(path).name)['sha256'] == sha\n    assert source['previous86_neural_hashes_unchanged'][Path(path).name] == sha\nassert len(source['sources']) == 19\nfor binding in source['sources'] + [source['publisher']]:\n    assert ref(binding['path'])['sha256'] == binding['sha256']\n    assert Path(binding['path']).read_text() == binding['text']\nplan = read(root / 'plan-v1.json')\nguard(plan)\nguard(read(root / 'postprocess-plan-v1.json'))\ndesign = read(root / 'quality-design-v1.json')\nprevious_design = read(Path(plan['previous']) / 'quality-design-v1.json')\nassert design['observations'] == previous_design['observations']\nassert len(design['observations']) == 822 and len(design['endpoints']) == 6\nassert design['new_component_forwards'] == 4932\nadc = [c for c in design['observations'] if c.get('cohort') in ['adc-photo256', 'adc-sloped512']]\nassert len(adc) == 24 and sum(c['kind'] == 'photo' for c in adc) == 8\nassert all(c['reference_role'].startswith('Exact ') for c in adc)\nfor case in adc:\n    assert ref(case['arrays']['path']) == case['arrays']\n    assert ref(case['parent']['path']) == case['parent']\nassert read(root / 'checkpoint250-audit-v1.json')['finite_Adam_states'] == 39\nparity = read(root / 'parity-result-v1.json')\nassert len(parity['rows']) == 28 and parity['component_forward_evaluations'] == 56\nsmoke = read(root / 'smoke-result-v1.json')\narms = ['mse-control', 'charb-0p01', 'charb-0p003']\nassert smoke['counts'] == smoke['updates'] == dict.fromkeys(arms, 10)\nassert smoke['supervised_batches'] == dict.fromkeys(arms, 7)\nassert smoke['zero_ADC_gradient_batches'] == dict.fromkeys(arms, 3)\nassert all(len(v) == 13 and min(v.values()) > 0 for v in smoke['parameter_maximum_gradients'].values())\nsnapshot = read(root / 'preparation-snapshot-v1.json')\nassert snapshot['completed_control_trace_rows_exact_V153'] == 294\nassert snapshot['ADC_zero_loss_and_norm_rows_per_arm'] == 33\nlive = {}\nfor name, observed in snapshot['owners_confirmed_live'].items():\n    owner = observed['owner']\n    process = psutil.Process(owner['pid'])\n    assert abs(process.create_time() - owner['created']) < .01\n    assert process.is_running() and process.status() not in ['zombie', 'dead']\n    live[name] = {'owner': owner, 'status': process.status(), 'CPU_times': process.cpu_times()._asdict()}\ntrace = [json.loads(s) for s in (root / 'train-trace-v1.jsonl').read_bytes().splitlines(keepends=True) if s.endswith(b'\\n')]\nold = read(plan['baseline_training']['path'])['trace']\nfor row, previous in zip(trace, old[:len(trace)], strict=True):\n    assert row['arms']['mse-control'] == previous['arms']['delivered-RGB']\n    assert row['step'] == previous['step'] and row['batch'] == previous['batch'] and row['domain'] == previous['domain']\nstorage = read(root / 'storage-readiness-v1.json')\nassert storage['local_filesystem_device'] != storage['external_filesystem_device']\nassert storage['expected_internal_GiB'] == p['expected_internal_quality_GiB']\nassert storage['expected_external_GiB'] == p['expected_external_quality_GiB']\nassert p['quality_output_roots'] == plan['quality_output_roots']\nassert storage['observed_internal_free_GiB'] - storage['expected_internal_GiB'] > 96\nassert storage['observed_external_free_GiB'] - storage['expected_external_GiB'] > 208\npost = read(root / 'postprocess-plan-v1.json')\nassert [s['name'] for s in post['stages']] == ['training-state-audit','checkpoint-validation','review','training-audit','scores','metric-audit','render']\ndocs = ['README.md','docs/index.md','docs/current-model.md','docs/research.md',\n        'docs/experiments.md','docs/delivered-spectral-objective.md','docs/robust-spectral-objective.md',\n        'diary/2026-11-03-18-55-27-v154-robust-spectral-objective.md']\nlinks = 0\nfor name in docs:\n    path = repo / name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)', path.read_text()):\n        if '://' in link or link.startswith('#'):\n            continue\n        assert (path.parent / link.split('#')[0]).is_file(), (name, link)\n        links += 1\nassert not (root / 'train-result-v1.json').exists()\nsave(repo / 'docs/results/v154-robust-spectral-preparation-verification-v1.json', {\n    'status': 'pass-active-preparation-and-document-publication',\n    'recorded_unix_UTC': time.time(), 'preparation': ref(publication),\n    'byte_exact_receipt_copies': 14, 'frozen_and_current_neural_hashes_matching': 86,\n    'previous_neural_hashes_unchanged': 86, 'source_texts_checked': 19,\n    'case_count': 822, 'ADC_controls': 24,\n    'planned_endpoints': 6, 'planned_native_primary_figures': 84,\n    'current_complete_control_trace_rows_exact_V153': len(trace),\n    'document_links_checked': links, 'live_owners': live,\n    'split_quality_output_GiB': [p['expected_internal_quality_GiB'],p['expected_external_quality_GiB']],\n    'actual_checkpoint_validation_mandatory_before_collection': True,\n    'documents': {name: ref(repo / name) for name in docs},\n    'verifier': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'scope': 'Active preparation/control verification only. Snapshot294 rows and checkpoint250 receipts remain byte-exact. Three recorded original controller/worker handles verified live now; no process restart. No final weights/quality claim,neural inference or noise calls.',\n})\nprint(f'PASS: 14 copies, 86 unchanged neural hashes, 19 source texts, {len(trace)} exact control rows, {links} links, 3 live owners')\n"
+  },
+  "scope": "Active preparation/control verification only. Snapshot294 rows and checkpoint250 receipts remain byte-exact. Three recorded original controller/worker handles verified live now; no process restart. No final weights/quality claim,neural inference or noise calls."
+}

@@ -1,0 +1,122 @@
+{
+  "root": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1",
+  "runner": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/complete_robust_spectral_review.py",
+    "sha256": "ede2973e01fe8466110271954a9f17af0d171638ff96571f5f57a653c6a7deb4"
+  },
+  "work": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts",
+  "python": "/home/dllu/proj/demosaic/.venv/bin/python",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/plan-v1.json",
+    "sha256": "f5583ba002f4700f7b01f7153db225923077ef39650d58dcf71366e158244c34"
+  },
+  "stages": [
+    {
+      "name": "training-state-audit",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/audit_robust_spectral_training.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1",
+        "--states-only"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/independent-training-state-audit-v1.json"
+    },
+    {
+      "name": "checkpoint-validation",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-source-v1.py",
+        "validate",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1",
+        "--revision",
+        "1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-checkpoint-readiness-v1.json"
+    },
+    {
+      "name": "review",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-source-v1.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1",
+        "--revision",
+        "1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-result-v1.json"
+    },
+    {
+      "name": "training-audit",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/audit_robust_spectral_training.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/independent-training-audit-v1.json"
+    },
+    {
+      "name": "scores",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/score_robust_spectral_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/scores-v1.json"
+    },
+    {
+      "name": "metric-audit",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/audit_robust_spectral_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/independent-metrics-audit-v1.json"
+    },
+    {
+      "name": "render",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/render_robust_spectral_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/figures-v1.json"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/plan-v1.json",
+      "sha256": "f5583ba002f4700f7b01f7153db225923077ef39650d58dcf71366e158244c34"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-plan-v1.json",
+      "sha256": "4e7119fbe158359dcb61271c277f6cfbe063437f38a2f2ba3487b58d10849d1d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/quality-design-v1.json",
+      "sha256": "10d7e0c4b3b1f59f6b5ea2dd2d82c2e02ec21cb4933e70b0b811fa117a8c7964"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/review-source-v1.py",
+      "sha256": "fec5e557fe48347903f0add125e11a626487773cda05158d74f148620240349a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/collaborative-detail-v1/transfer-v1.py",
+      "sha256": "4e133f6492db7cfa3f0758410ccb1f91a50eecae18ff32018232ad373dc6beba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-photo-supplement-v1/operator-v2.py",
+      "sha256": "a8cd5a95ad45f4ebc6693666c63a911077c5c21642c695441ae996e6a0d2cefc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/collaborative-detail-v1/audit-transfer-v1.py",
+      "sha256": "58c6c7c4353da38209ec830f2f739848dd4a455f7cfc4b99ea2fc1e6355a20f6"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/score_robust_spectral_trial.py": "329b3bb842e77bf4d114da6d53c0c0b47a8264611a7b06a2add01f0079f84efc",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/complete_robust_spectral_review.py": "ede2973e01fe8466110271954a9f17af0d171638ff96571f5f57a653c6a7deb4",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/render_robust_spectral_trial.py": "f16ecf2efba8e50bf9ff3242aa63ab8fdf3dbe86d8fa98485792b954f36dc017",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/review_v146_window_transfer.py": "baf8302f75ede9733e033d86fdeba217edae5b6ca35305cecad0605d001f6285",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/audit_robust_spectral_training.py": "aa7c18cb339a87d8e973fadcc0855a4e8b8cae192918e60af20bc2aa0891d7f6",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/audit_robust_spectral_trial.py": "4736b6bb7c55e998b432563e77d3f4a1c8f5aec05199535c989a0b4aafa01d05",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V154-robust-spectral-v1/postprocess-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375"
+  },
+  "new_component_forwards": 4932,
+  "new_parent_DINO_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Six fixed final paired endpoints; retained798 plus24 ADC controls, independent array reductions and84 native figures with independent pixel checks. Actual native viewing remains required. Observed polling-time budget caps intervals at5s so suspended controllers do not charge a whole user pause."
+}

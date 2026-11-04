@@ -79,6 +79,10 @@ All six endpoints/822 cases/84 native figures and independent audits are complet
 Real crossings remain missing; retain its narrow response gain alongside the
 quieter controls and V150's stronger ADC restoration.
 
+The [active V154 trial](docs/robust-spectral-objective.md) compares delivered-RGB
+MSE with two robust spectral penalties to give weak errors more relative weight.
+Training and the fixed six-endpoint quality review are underway; gains are unmeasured.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

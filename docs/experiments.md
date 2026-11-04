@@ -1,5 +1,11 @@
 # Experiment index
 
+The [active V154 comparison](robust-spectral-objective.md) tests robust delivered
+RGB spectral penalties to increase relative pressure on weak errors while still
+penalizing erroneous flat-target band coefficients. Three identical fresh heads
+share V153 data and schedules. Objective/adjoint tests, exact compatibility and
+genuine8+2 CUDA checks pass; the six-endpoint quality review remains pending.
+
 The [completed V153 loss comparison](delivered-spectral-objective.md) gains
 6.04–7.97% mesh response over its matched pre-support control, with worse actual
 blank errors, natural-band attenuation and ADC photo errors. Quiet results are

@@ -1,5 +1,11 @@
 # Documentation guide
 
+The [active V154 robust-loss trial](robust-spectral-objective.md) compares delivered
+RGB spectral MSE with Charbonnier penalties at .01/.003 proxy units. Architecture,
+data and 1k schedules match. Independent objective/adjoint tests, exact forward
+compatibility and genuine8+2 CUDA checks pass. Three fresh heads are training;
+all six endpoints/822 cases/84 native views are fixed. Quality is unmeasured.
+
 The [completed V153 comparison](delivered-spectral-objective.md) moves spectral
 loss after support/demosaicing. Mesh response rises6.04–7.97% over matched
 control, reaching2.45–2.59% of GT, with worse actual blank errors and natural-band
