@@ -1,5 +1,14 @@
 # Experiment index
 
+The [completed V155 parent comparison](matched-parent-comparison.md) runs V143 and
+V120 afresh on all 822 identical inputs, with zero training/noise draws. V120 has
+lower coarse noisy-flat error but higher total noisy error and much worse ADC
+slopes; mixed quiet gains do not remove spatial mottle or restore cab crossings.
+All 1,644 paired outputs, independent metrics and 64 native views are complete.
+The initial exact-archive assumption and two CPU reporting failures are preserved;
+both parent collections completed once. Further work needs local spatial/coarse
+error control beside weak-detail supervision.
+
 The [completed V154 comparison](robust-spectral-objective.md) tests robust delivered
 RGB spectral penalties. Native512 noisy-flat RMS falls 0.45–0.50% versus V143,
 with lower actual mesh-blank error than matched MSE. Mesh/natural response

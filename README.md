@@ -14,76 +14,32 @@ It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid
 | V1435k + optional `detail` | Stronger measured periodic detail under both GFX mesh priors | Partial orientations, support seams, boundary spill and slow correction; broad superiority unproven |
 
 The [supported-amplitude option](docs/supported-wave-amplitude.md) raises fresh
-mesh response **26.4%** and lowers image RMS **1.0%** versus `cross`. All 256 absent
-neural cases retain their parents. Added blank-region RMS rises from .000447 to
-.000636 DN16 on average, with worst .10535→.13526 DN16. Compared with `wide`,
-response is 15.3% higher and mean/worst added blank RMS is 94.5%/84.7% lower.
-It is now the default inside optional `--phase-harmonic`; ordinary inference
-keeps the stage off. The same-data comparison to the earlier `edge` default gives
-53% higher mesh response and 93% lower mean added blank RMS; `edge` stays explicit.
-Average response remains only **7.1% of exact procedural GT**. All 64 new natural
-photo controls remain unchanged, so nonperiodic detail is still weak.
-Recent [local attention](docs/v144-v145-quality.md) and
-[frozen global-branch training](docs/v138-quality.md) leave mesh recovery weak.
-The [V146 frequency and mesh pilot](docs/v146-coherent-frequency.md) completes
-500 updates and both raw/EMA reviews: mesh response rises less than .7% relative while
-mesh/photo error grows, with no useful new native detail. The
-[matched window-transfer review](docs/v146-window-transfer.md) also finds no
-useful gain from 512-pixel Fourier support, including 72 fresh512 flat controls. The
-[patch-filter comparison](docs/collaborative-detail.md) records a separate failure:
-uniform flats stay unchanged but building color blocks appear.
+mesh response **26.4%** and lowers image RMS **1.0%** versus `cross`. All256 absent
+neural cases and64 new natural photo controls retain their parents. Mean/worst
+added blank RMS rises42.1/28.4%; response reaches only **7.1% of exact procedural
+GT**. The `detail` mode is the default inside explicitly enabled `--phase-harmonic`;
+ordinary inference keeps the stage off. Partial orientations, support seams,
+boundary spill, nonperiodic texture and slow correction remain unresolved.
 
-The [completed V147 late spectral pilot](docs/late-spectral-detail.md) lowers mesh
-response about 8% and slightly worsens noisy flats. Small strong-edge image gains
-come with worse quiet patches. Its 64 native comparisons include a support-gate
-diagnostic: opening the gate exposes false fine texture rather than useful detail.
-The completed [phase-mixing comparison](docs/phase-matrix-detail.md) also finds no
-useful new weak detail: matrix mesh response falls 8–9%, and small strong-edge
-image gains come with worse quiet patches. All 58 native comparisons are audited.
-The [target-informed capacity diagnostic](docs/spectral-capacity-oracle.md) finds
-substantial spectral headroom and a false-lattice quiet-region counterexample;
-its GT-using outputs are diagnostic, unavailable at inference.
-The [completed V149 coherent-CFA trial](docs/coherent-phase-estimator.md) finds
-no useful new fine mesh from phase alignment/local green evidence. Small
-strong-edge gains coexist with worse quiet regions and noisy flats; all six
-fixed endpoints and 66 native comparisons are audited.
-The [loss-allocation diagnostic](docs/spectral-loss-allocation.md) finds large
-ADC gradient pressure. [Completed V150](docs/objective-floor-training.md) slightly
-lowers noisy-flat RMS and gives about 3.06% lower ADC photo RMS. Fine high-ISO
-texture remains weak; exact quiet and coarse sloped-field errors still regress.
-All four endpoints, 72 native figures and independent audits are complete.
-[Completed V151](docs/noisy-objective-training.md) removes ADC supervision and
-raises noisy-mesh response 3.76–7.22% over V143, with noisy-flat RMS .10–.16%
-lower. Absolute response remains only 2.28–2.36% of constructed GT, quiet patches
-still regress, and no convincing new cab wires appear. Bounded peak weighting
-nearly closes support. All six endpoints, 84 native figures and audits are
-complete. Noisy-only becomes the next noisy-head training control; V150 retains
-the stronger ADC photo result.
+[Completed V153](docs/delivered-spectral-objective.md) moves spectral loss onto
+delivered output: mesh response rises6.04–7.97% over matched control to2.45–2.59%
+of GT, with worse actual blank errors, natural response and ADC photos.
+[V151](docs/noisy-objective-training.md)/[V152](docs/relative-phase-estimator.md)
+retain quieter controls, while [V150](docs/objective-floor-training.md) gives
+about3.06% lower ADC-photo RMS. Real fine cab crossings remain missing.
+[Architecture and loss comparisons](docs/current-model.md#quality-and-remaining-work)
+retain the complete measured strengths, failures and independent evidence.
 
-[Completed V152](docs/relative-phase-estimator.md) adds RAW/residual cross-spectrum
-inputs: mesh response rises another 1.27–1.41% over noisy-only, and noisy-flat
-RMS improves slightly. Quiet-region error worsens and natural-texture response
-falls further; real wires remain missing. All four endpoints and 72 native
-figures are audited. Retain the new input feature for further estimator/support
-work, with the quieter V151 control and V150's ADC strengths still compared.
-
-The [completed proposal/support crossover](docs/support-crossover.md) attributes
-most added quiet-region error to the relative proposal in fixed-map comparisons.
-Full support raises mesh response to 2.56–2.60% of GT, but increases actual blank
-and quiet errors; real crossings remain missing. All six compositions, 822 cases,
-84 native figures and independent audits are complete. The
-[completed V153 trial](docs/delivered-spectral-objective.md) moves spectral loss
-onto delivered output: mesh response rises another6.04–7.97% over control,
-with worse actual blank errors, natural-band attenuation and ADC photo results.
-All six endpoints/822 cases/84 native figures and independent audits are complete.
-Real crossings remain missing; retain its narrow response gain alongside the
-quieter controls and V150's stronger ADC restoration.
-
-The [completed V154 trial](docs/robust-spectral-objective.md) gives weak spectral
-errors more relative pressure. Native512 noisy-flat RMS falls 0.45–0.50% versus
+[Completed V154](docs/robust-spectral-objective.md) gives weak spectral errors
+more relative pressure. Native512 noisy-flat RMS falls **0.45–0.50%** versus
 V143, with slightly lower actual blank errors. Broad mottle remains, mesh and
-natural detail weaken, and quiet regions beside structure get 1.51–2.27% worse.
-All six endpoints, 96 native figures and independent audits are complete.
+natural detail weaken, and quiet regions beside structure get **1.51–2.27% worse**.
+All six endpoints,96 native figures and independent audits are complete.
+
+The [matched V155 parent comparison](docs/matched-parent-comparison.md) finds
+V120's coarse noisy-flat error1.59–2.36% lower than V143, but total noisy-flat
+RMS2.31–5.11% higher and worse ADC slopes. Neither restores the fine cab fence.
+All1,644 fresh paired outputs,64 native figures and independent audits are complete.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

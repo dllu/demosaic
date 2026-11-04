@@ -1,0 +1,45 @@
+{
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/plan-v1.json",
+      "sha256": "d621543aa4a83ba957061c8a4f38fff3edf7ab74f0be2c6c1bc28b9d6c32fa27"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/postprocess-plan-v1.json",
+      "sha256": "083a8b3fe0f214e7cea5eceea53499bed11212e309b51a10ae647b208c913da0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/postprocess-status-v1.json",
+      "sha256": "94257a5d83cbd11cc0f5089447f7e058b765c928a7800a1222756f57461dd066"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/postprocess-scores-v1.log",
+      "sha256": "3678a9984b4cce56f22b6a126cbe0b5c3a651f12522bdbb8c5073501b102c1f7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/review-result-v1.json",
+      "sha256": "06a4bb5c91774b7bde48f6be946efbcf5c1dce0856a9e07b8582df42c37696a6"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/reporters-v1/scripts/train_directional_bank_trial.py": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/reporters-v1/scripts/score_cleaner_parent.py": "fe01b0d4f4f90dd4dd3d7a1823b797876512aae53342909b9d9dc6a5f8225673",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/reporters-v1/scripts/audit_cleaner_parent.py": "0bb17bd6f705fb993f45bdf184b0ddf3534125700446a0f1406efc10156b37e1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/train_directional_bank_trial.py": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/render_cleaner_parent.py": "b5f781b233463e7586b80c88420820983088ea965d1b58703dc0376ad8b2f4ec",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/postprocess-v2/scripts/train_v43_quality_trial.py": "a408a8138c1b4df63acb9414aeb270d35c8fc48a8660ab9a45549bd0d61621e6"
+  },
+  "controller": {
+    "path": "/home/dllu/proj/demosaic/.cache/resume-v155-parent-cpu-v2.py",
+    "sha256": "ad0f5510ef0858f039f99bcc0abbbe99cdd24e6fe68f29472a590493e0a53d85",
+    "text": "\"\"\"Resume CPU-only reporting after preserving the missing-transitive-import failure.\"\"\"\n\nimport os\nimport subprocess\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V155-parent-comparison-v2'\nplan=read(root/'plan-v1.json');guard(plan)\nold=read(root/'postprocess-plan-v1.json');guard(old)\nassert read(root/'postprocess-status-v1.json')['status']=='failed-scores-preserve-evidence'\nassert not (root/'scores-v1.json').exists()\nout=root/'postprocess-v2/scripts'\nout.mkdir(parents=True,exist_ok=False)\nhelper=out/'train_v43_quality_trial.py'\nhelper.write_bytes((repo/'scripts'/helper.name).read_bytes())\nenv=os.environ.copy()\nenv['PYTHONPATH']=':'.join(str(p) for p in [out,root/'reporters-v1/scripts',root/'renderers-v1/scripts',root/'work/src'])\nenv['OPENBLAS_NUM_THREADS']=env['OMP_NUM_THREADS']='1'\n# Exercise the scorer's actual dynamically imported primary metric modules.\ncheck=subprocess.run([str(repo/'.venv/bin/python'),'-c',\n    'from score_cleaner_parent import load_module;from pathlib import Path;'\n    'r=Path(\"/home/dllu/proj/demosaic/.cache/quality-20261103\");'\n    'load_module(r/\"collaborative-detail-v1/transfer-v1.py\",\"errors\");'\n    'load_module(r/\"V144-V145-photo-supplement-v1/operator-v2.py\",\"photos\");'\n    'import render_cleaner_parent,audit_cleaner_parent;print(\"PASS actual dynamic metric imports\")'],\n    cwd=repo,env=env,capture_output=True,text=True)\nassert check.returncode==0,(check.stdout,check.stderr)\npostplan={\n    'inputs':[ref(root/'plan-v1.json'),ref(root/'postprocess-plan-v1.json'),ref(root/'postprocess-status-v1.json'),\n              ref(root/'postprocess-scores-v1.log'),ref(root/'review-result-v1.json')],\n    'frozen_files':dict(old['frozen_files'])|{str(helper):ref(helper)['sha256']},\n    'controller':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'dynamic_import_preflight':{'returncode':check.returncode,'stdout':check.stdout,'stderr':check.stderr},\n    'scope':'v1 CPU scorer failed before any score file because dynamic photo-metric import required train_v43_quality_trial.live. Add exact helper in separate directory;original sources/status/log/claims stay unchanged. Both parent collections complete and adopted byte-exact,no neural/training/noise call. CPU preflight imports actual dynamic metrics before rerun.'}\nsave(root/'postprocess-plan-v2.json',postplan)\nstatus={'status':'running-resumed-CPU-reporting',\n        'owner':{'pid':os.getpid(),'created':psutil.Process().create_time()},'completed':{}}\nsave(root/'postprocess-status-v2.json',status)\nfor stage,directory,script in [\n    ('scores','reporters-v1','score_cleaner_parent.py'),\n    ('metric-audit','reporters-v1','audit_cleaner_parent.py'),\n    ('render','renderers-v1','render_cleaner_parent.py')]:\n    guard(plan);guard(postplan)\n    with (root/('postprocess-'+stage+'-v2.log')).open('x') as log:\n        child=subprocess.Popen([str(repo/'.venv/bin/python'),str(root/directory/'scripts'/script),str(root)],cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT)\n        owner={'pid':child.pid,'created':psutil.Process(child.pid).create_time()}\n        status.update(status='running-'+stage,stage=stage,child_owner=owner)\n        save(root/'postprocess-status-v2.json',status)\n        code=child.wait()\n    status['completed'][stage]={'owner':owner,'returncode':code}\n    if code:\n        status['status']='failed-'+stage+'-preserve-evidence'\n        save(root/'postprocess-status-v2.json',status)\n        raise RuntimeError(status['status'])\nstatus['status']='completed-paired-parent-audits-and-rendering-awaiting-actual-native-viewing'\nsave(root/'postprocess-status-v2.json',status)\nprint(status['status'],flush=True)\n"
+  },
+  "dynamic_import_preflight": {
+    "returncode": 0,
+    "stdout": "PASS actual dynamic metric imports\n",
+    "stderr": ""
+  },
+  "scope": "v1 CPU scorer failed before any score file because dynamic photo-metric import required train_v43_quality_trial.live. Add exact helper in separate directory;original sources/status/log/claims stay unchanged. Both parent collections complete and adopted byte-exact,no neural/training/noise call. CPU preflight imports actual dynamic metrics before rerun."
+}

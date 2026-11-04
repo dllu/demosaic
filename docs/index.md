@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [completed V155 matched-parent audit](matched-parent-comparison.md) evaluates
+V143 and V120 afresh under one deterministic FP32 policy. V120 lowers coarse
+noisy-flat RMS 1.59–2.36% but raises total RMS 2.31–5.11%; quiet results are mixed
+and ADC sloped fields regress. Neither recovers the fine real fence. All 1,644
+outputs, 64 native figures and independent audits are complete. V120 retains its
+broader general recommendation; V143 remains the matched noisy-detail control.
+
 The [completed V154 robust-loss trial](robust-spectral-objective.md) lowers native512
 noisy-flat RMS 0.45–0.50% versus V143 and improves actual mesh-blank errors over
 matched RGB MSE. Broad mottle remains, mesh/natural response falls, and quiet

@@ -1,0 +1,39 @@
+{
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/plan-v1.json",
+    "sha256": "d621543aa4a83ba957061c8a4f38fff3edf7ab74f0be2c6c1bc28b9d6c32fa27"
+  },
+  "expected_controller_owner": {
+    "pid": 3190612,
+    "created": 1793764483.2
+  },
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/plan-v1.json",
+      "sha256": "d621543aa4a83ba957061c8a4f38fff3edf7ab74f0be2c6c1bc28b9d6c32fa27"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/reporters-source-v1.json",
+      "sha256": "201501b2986c22893ba4d0c30aa0ad6c78cf7065b27af10efe5dfb4e45537371"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-source-v1.json",
+      "sha256": "fda1d61f0678d7959825ab9f08699310e3f8508b141801c387f9d54115efa600"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/reporters-v1/scripts/train_directional_bank_trial.py": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/reporters-v1/scripts/score_cleaner_parent.py": "fe01b0d4f4f90dd4dd3d7a1823b797876512aae53342909b9d9dc6a5f8225673",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/reporters-v1/scripts/audit_cleaner_parent.py": "0bb17bd6f705fb993f45bdf184b0ddf3534125700446a0f1406efc10156b37e1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/train_directional_bank_trial.py": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/render_cleaner_parent.py": "b5f781b233463e7586b80c88420820983088ea965d1b58703dc0376ad8b2f4ec",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V155-parent-comparison-v2/renderers-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375"
+  },
+  "controller_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v155-parent-review-v1.py",
+    "sha256": "7cd825c11bbf83cf2acdca685b72eec1a451ad750ddbf3390f7c722b517c3d1a",
+    "text": "\"\"\"Wait for the original paired-parent owner, then score, audit and render once.\"\"\"\n\nimport os\nimport shutil\nimport subprocess\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V155-parent-comparison-v2'\nplan=read(root/'plan-v1.json')\nguard(plan)\nowner=read(root/'status-v1.json')['owner']\npostplan={\n    'training_plan':ref(root/'plan-v1.json'), 'expected_controller_owner':owner,\n    'inputs':[ref(root/'plan-v1.json'), ref(root/'reporters-source-v1.json'),ref(root/'renderers-source-v1.json')],\n    'frozen_files':{str(p):ref(p)['sha256'] for directory in ['reporters-v1','renderers-v1'] for p in (root/directory).rglob('*.py')},\n    'controller_source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Observe original PID/create-time only;no restart. On both zero returns,bind actual fresh822+822 root/DINO results,then CPU scores,independent metrics,native64 rendering. Actual human native viewing still required. No training/noise/parent calls here.'}\nassert not (root/'postprocess-plan-v1.json').exists()\nsave(root/'postprocess-plan-v1.json',postplan)\n(root/'postprocess.claim').open('x').close()\nstatus={'status':'waiting-on-original-paired-parent-controller',\n        'owner':{'pid':os.getpid(),'created':psutil.Process().create_time()},'completed':{}}\nsave(root/'postprocess-status-v1.json',status)\nwhile True:\n    current=read(root/'status-v1.json')\n    assert current['owner']==owner\n    if current['status']=='completed-parent-arrays-awaiting-quality-audit-and-native-viewing':\n        assert set(current['completed'])=={'V143','V120'}\n        assert all(v['returncode']==0 for v in current['completed'].values())\n        break\n    assert current['status']=='running-fresh-V143-then-fresh-V120',current\n    p=psutil.Process(owner['pid'])\n    assert abs(p.create_time()-owner['created'])<.01 and p.status() not in ['dead','zombie']\n    time.sleep(10)\nguard(plan)\nguard(postplan)\nassert not (root/'quality-design-v1.json').exists()\nshutil.copyfile(plan['design']['path'],root/'quality-design-v1.json')\nassert ref(root/'quality-design-v1.json')['sha256']==plan['design']['sha256']\ncollections={k:ref(root/(k+'-result-v1.json')) for k in ['V143','V120']}\nfor item in collections.values():\n    c=read(item['path'])\n    assert c['counts']=={'parent':822,'DINO':822} and c['model_before']==c['model_after']\n    assert c['DINO_before']==c['DINO_after'] and c['RNG_unchanged']\nsave(root/'review-result-v1.json',{\n    'status':'completed-both-fresh-parent-collections', 'plan':ref(root/'plan-v1.json'),\n    'collections':collections,'new_parent_forwards':1644,'new_DINO_forwards':1644,\n    'new_noise_draws':0,'training_updates':0,'controller':ref(root/'status-v1.json')})\nfor stage,directory,script in [\n    ('scores','reporters-v1','score_cleaner_parent.py'),\n    ('metric-audit','reporters-v1','audit_cleaner_parent.py'),\n    ('render','renderers-v1','render_cleaner_parent.py')]:\n    guard(plan)\n    guard(postplan)\n    env=os.environ.copy()\n    env['PYTHONPATH']=str(root/directory/'scripts')+':'+str(root/'work/src')\n    env['OPENBLAS_NUM_THREADS']=env['OMP_NUM_THREADS']='1'\n    with (root/('postprocess-'+stage+'-v1.log')).open('x') as log:\n        child=subprocess.Popen([str(repo/'.venv/bin/python'),str(root/directory/'scripts'/script),str(root)],cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT)\n        childowner={'pid':child.pid,'created':psutil.Process(child.pid).create_time()}\n        status.update(status='running-'+stage,stage=stage,child_owner=childowner)\n        save(root/'postprocess-status-v1.json',status)\n        code=child.wait()\n    status['completed'][stage]={'owner':childowner,'returncode':code}\n    if code:\n        status['status']='failed-'+stage+'-preserve-evidence'\n        save(root/'postprocess-status-v1.json',status)\n        raise RuntimeError(status['status'])\nstatus['status']='completed-paired-parent-audits-and-rendering-awaiting-actual-native-viewing'\nsave(root/'postprocess-status-v1.json',status)\nprint(status['status'],flush=True)\n"
+  },
+  "scope": "Observe original PID/create-time only;no restart. On both zero returns,bind actual fresh822+822 root/DINO results,then CPU scores,independent metrics,native64 rendering. Actual human native viewing still required. No training/noise/parent calls here."
+}

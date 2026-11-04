@@ -357,6 +357,11 @@ document links. Machine receipts preserve their original UTC timestamps.
 
 ## Next quality work
 
+The [completed V155 comparison](matched-parent-comparison.md) now measures the
+cleaner-parent hypothesis directly: V120 has lower coarse noisy-flat error,
+higher total noisy error and worse ADC slopes. Neither parent repairs the fine
+real fence. Parent choice alone does not remove the quiet/detail tradeoff.
+
 Weak coefficient reweighting alone does not localize useful detail or protect
 quiet neighbors. A late band-limited head also cannot directly remove the
 parent's affine/DC or out-of-band coarse mottle. Further work should test a
