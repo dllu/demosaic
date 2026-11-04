@@ -1,12 +1,14 @@
 # Experiment index
 
-The [active V156 local-excess trial](local-excess-risk.md) tests a local RGB-RMS
-regret hinge against exact delivered-RGB MSE control. It penalizes worsening
-boxes without penalizing improving ones; no target enters forward.36 independent
-objective tests,28 compatibility contexts,genuine8+2 CUDA restoration and a
-step500 exact-control/finite-state audit pass. Both1k heads are fixed, followed
-by four endpoints/822 cases,independent metrics and72 native figures. No quality
-or flat-safety gain has been established yet.
+The [completed V156 local-regret trial](local-excess-risk.md) reduces actual
+mixed quiet RMS0.30–0.63% versus exact MSE control on every input in both
+endpoints. Mean parent-level regression falls 71–98%, but remains positive and
+many cases are still worse than V143. Response retains5.59–10.52% gain over V143
+while giving up 5.24–5.81% versus MSE. Full natural/flat/ADC results stay mixed.
+All two1k heads/four endpoints/822 cases/72 native figures and independent audits
+are complete.36 objective tests pass; control trace/raw/EMA/Adam/all 1644 replays
+are exact. Local regret is the next learned-head control, with actual coarse
+mottle and weak real crossings still unresolved.
 
 The [completed V155 parent comparison](matched-parent-comparison.md) runs V143 and
 V120 afresh on all 822 identical inputs, with zero training/noise draws. V120 has

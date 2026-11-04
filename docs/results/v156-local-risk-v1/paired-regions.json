@@ -1,0 +1,4116 @@
+{
+  "status": "completed-paired-quiet-counts-and-V151-comparison",
+  "scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/scores-v1.json",
+    "sha256": "2c297ac87dfe3e1767223fc1f85b187cf439a385655eb92d1aee40fe08053751"
+  },
+  "V151_scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/scores-v1.json",
+    "sha256": "03ab5bee1354c63b637fb926fec063cc23992574ee86eae5f097035bd124faa8"
+  },
+  "same822_input_parent_bindings": true,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/paired-v156-regions-v1.py",
+    "sha256": "375fe3885296cece48f289f92fdcbeb877fd46cb807f1600f5ef2ae32f6226f6",
+    "text": "\"\"\"Count paired region gains and remaining failures,including the quieter V151 control.\"\"\"\n\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import read, ref, save\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1')\ncurrent=read(root/'scores-v1.json')\nold_root=root.parent/'V151-noisy-objective-v1'\nprior=read(old_root/'scores-v1.json')\ncases={c['id']:c for c in read(root/'quality-design-v1.json')['observations']}\nold_cases={c['id']:c for c in read(old_root/'quality-design-v1.json')['observations']}\nassert len(cases)==len(old_cases)==822 and cases.keys()==old_cases.keys()\nassert all(cases[k]['arrays']==old_cases[k]['arrays'] and cases[k]['parent']==old_cases[k]['parent'] for k in cases)\nnow={(r['id'],r['method']):r for r in current['rows']}\nbefore={(r['id'],r['method']):r for r in prior['rows']}\ngroups=[]\nfor endpoint in ['raw','EMA']:\n    method=f'local-risk-{endpoint}-step1000'\n    for baseline,source in [('parent',now),(f'mse-control-{endpoint}-step1000',now),(f'noisy-only-{endpoint}-step1000',before)]:\n        for prior_name in ['iso6400-prior','iso12800-prior']:\n            ids=[k for k,c in cases.items() if c['kind']=='mixed-quiet' and c['noise']['name']==prior_name]\n            assert len(ids)==16\n            for field in ['quiet_error_RMS_DN16','quiet_spatial_RMS_DN16','full_error_RMS_DN16']:\n                pairs=[(k,now[k,method][field],source[k,baseline][field]) for k in ids]\n                delta=[a-b for _,a,b in pairs]\n                groups.append({\n                    'method':method,'baseline':baseline,'prior':prior_name,'field':field,'cases':16,\n                    'better':sum(d<0 for d in delta),'equal':sum(d==0 for d in delta),'worse':sum(d>0 for d in delta),\n                    'maximum_increase_DN16':max(delta),'maximum_decrease_DN16':min(delta),\n                    'worst_candidate_DN16':max(a for _,a,_ in pairs),'worst_baseline_DN16':max(b for _,_,b in pairs),\n                    'pairs':[{'id':k,'candidate':a,'baseline':b,'difference':a-b} for k,a,b in pairs]})\nsummary=[]\nfor endpoint in ['raw','EMA']:\n    method=f'local-risk-{endpoint}-step1000'\n    old=f'noisy-only-{endpoint}-step1000'\n    for key in [('mesh',True,None,'template_gain'),('mixed-quiet','iso6400-prior',None,'quiet_error_RMS_DN16'),('mixed-quiet','iso12800-prior',None,'quiet_error_RMS_DN16')]:\n        kind,condition,cohort,field=key\n        a=next(s[field] for s in current['summary'] if (s['kind'],s['condition'],s['cohort'],s['method'])==(kind,condition,cohort,method))\n        b=next(s[field] for s in prior['summary'] if (s['kind'],s['condition'],s['cohort'],s['method'])==(kind,condition,cohort,old))\n        summary.append({'method':method,'baseline':old,'kind':kind,'condition':condition,'field':field,'candidate':a,'baseline_value':b,'percent_change':100*(a/b-1)})\nsave(root/'paired-region-comparison-v1.json',{\n    'status':'completed-paired-quiet-counts-and-V151-comparison','scores':ref(root/'scores-v1.json'),\n    'V151_scores':ref(old_root/'scores-v1.json'),'same822_input_parent_bindings':True,\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'groups':groups,'summary':summary,\n    'new_forwards':0,'new_noise_draws':0,\n    'scope':'Related four-CFA placements/reused recipes,not independent scenes or significance claims. Paired quiet per-case wins/worst errors expose remaining failures despite average gains. Comparison versus matched MSE isolates added loss;comparison to V151 also changes input features/base spectral objective and is not isolated causality.'})\nfor g in groups:\n    if g['field']=='quiet_error_RMS_DN16':\n        print(g['method'],g['baseline'],g['prior'],'better/worse',g['better'],g['worse'],'max increase',g['maximum_increase_DN16'],'worst',g['worst_candidate_DN16'])\nfor s in summary:print(s)\n"
+  },
+  "groups": [
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "parent",
+      "prior": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 2,
+      "equal": 0,
+      "worse": 14,
+      "maximum_increase_DN16": 0.026384626874904615,
+      "maximum_decrease_DN16": -0.001036093134326066,
+      "worst_candidate_DN16": 5.439050115522837,
+      "worst_baseline_DN16": 5.431620411737643,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 3.1826059616364533,
+          "baseline": 3.1836420547707793,
+          "difference": -0.001036093134326066
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 4.045973286970144,
+          "baseline": 4.037150400385051,
+          "difference": 0.008822886585092782
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.8133337298579892,
+          "baseline": 3.8074790799705838,
+          "difference": 0.005854649887405472
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 3.356428169581275,
+          "baseline": 3.346590506910752,
+          "difference": 0.009837662670522995
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 5.05115873815101,
+          "baseline": 5.044432410636623,
+          "difference": 0.006726327514386732
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 4.018744448330141,
+          "baseline": 4.0087441188501085,
+          "difference": 0.010000329480032377
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.562642387543749,
+          "baseline": 3.548802462638217,
+          "difference": 0.013839924905532097
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3666023204762636,
+          "baseline": 3.358240950181343,
+          "difference": 0.008361370294920789
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 4.505412618550782,
+          "baseline": 4.5045784782285425,
+          "difference": 0.0008341403222393851
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 5.439050115522837,
+          "baseline": 5.431620411737643,
+          "difference": 0.007429703785193809
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.7521961591927178,
+          "baseline": 3.752321770499348,
+          "difference": -0.0001256113066303577
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.4242012686358394,
+          "baseline": 3.420198457125036,
+          "difference": 0.004002811510803284
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.5447583918292174,
+          "baseline": 3.528138604554412,
+          "difference": 0.016619787274805287
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.638233109184987,
+          "baseline": 3.631749102501678,
+          "difference": 0.006484006683308952
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 4.11555763676714,
+          "baseline": 4.099617436468146,
+          "difference": 0.0159402002989939
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.7046033496307698,
+          "baseline": 3.678218722755865,
+          "difference": 0.026384626874904615
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "parent",
+      "prior": "iso6400-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 1,
+      "equal": 0,
+      "worse": 15,
+      "maximum_increase_DN16": 0.027502095277503802,
+      "maximum_decrease_DN16": -0.0010578509236913725,
+      "worst_candidate_DN16": 4.083194575431123,
+      "worst_baseline_DN16": 4.075515478142738,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 2.914193674199484,
+          "baseline": 2.915251525123175,
+          "difference": -0.0010578509236913725
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 3.409730469836947,
+          "baseline": 3.3998897756131967,
+          "difference": 0.009840694223750113
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.4549399603272306,
+          "baseline": 3.4498510806270297,
+          "difference": 0.005088879700200888
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 2.8623145382579644,
+          "baseline": 2.851495432331872,
+          "difference": 0.010819105926092476
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 4.083194575431123,
+          "baseline": 4.075515478142738,
+          "difference": 0.007679097288384895
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 2.760175898981201,
+          "baseline": 2.7465996811256517,
+          "difference": 0.013576217855549189
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.2644357902688674,
+          "baseline": 3.250337336632139,
+          "difference": 0.014098453636728348
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.324452874411997,
+          "baseline": 3.315899528568473,
+          "difference": 0.008553345843524074
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 3.3562906652452824,
+          "baseline": 3.3541747187076254,
+          "difference": 0.0021159465376570097
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 3.732372382131294,
+          "baseline": 3.7214301163642918,
+          "difference": 0.01094226576700219
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.1066014587709603,
+          "baseline": 3.1061657533585882,
+          "difference": 0.00043570541237203386
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.104819729346396,
+          "baseline": 3.1006440895574556,
+          "difference": 0.004175639788940533
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.132307168398959,
+          "baseline": 3.114153565948836,
+          "difference": 0.018153602450122985
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.4259714845919294,
+          "baseline": 3.418511188819195,
+          "difference": 0.007460295772734327
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 3.169656349776912,
+          "baseline": 3.148643180947657,
+          "difference": 0.02101316882925497
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.3549741638220447,
+          "baseline": 3.327472068544541,
+          "difference": 0.027502095277503802
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "parent",
+      "prior": "iso6400-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 14,
+      "equal": 0,
+      "worse": 2,
+      "maximum_increase_DN16": 0.028101663986674907,
+      "maximum_decrease_DN16": -0.1712935903086077,
+      "worst_candidate_DN16": 59.1863431306006,
+      "worst_baseline_DN16": 59.31931684931091,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 13.572471977739779,
+          "baseline": 13.551042981669074,
+          "difference": 0.021428996070705253
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 12.047592843693309,
+          "baseline": 12.090140374205651,
+          "difference": -0.04254753051234239
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 12.88507317288379,
+          "baseline": 12.90243191077122,
+          "difference": -0.01735873788743092
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 12.456899491357438,
+          "baseline": 12.428797827370763,
+          "difference": 0.028101663986674907
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 14.423477073680756,
+          "baseline": 14.446496418664475,
+          "difference": -0.023019344983719492
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 18.371232618935608,
+          "baseline": 18.416798622274342,
+          "difference": -0.04556600333873462
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 17.038700235190575,
+          "baseline": 17.040605775048988,
+          "difference": -0.001905539858412908
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 13.528336545183283,
+          "baseline": 13.555815616662866,
+          "difference": -0.02747907147958273
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 21.8102434943057,
+          "baseline": 21.813727615753937,
+          "difference": -0.0034841214482383975
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 19.73409083669798,
+          "baseline": 19.755691446227424,
+          "difference": -0.021600609529443204
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 21.22870368317616,
+          "baseline": 21.23587521065523,
+          "difference": -0.007171527479069795
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 19.709181771563284,
+          "baseline": 19.730772853085327,
+          "difference": -0.021591081522043254
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 58.700694935834754,
+          "baseline": 58.854706528428224,
+          "difference": -0.15401159259346997
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 59.11330652701315,
+          "baseline": 59.28460011732176,
+          "difference": -0.1712935903086077
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 59.12413006241849,
+          "baseline": 59.263280815846684,
+          "difference": -0.13915075342819705
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 59.1863431306006,
+          "baseline": 59.31931684931091,
+          "difference": -0.1329737187103106
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "parent",
+      "prior": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 1,
+      "equal": 0,
+      "worse": 15,
+      "maximum_increase_DN16": 0.020846989904410584,
+      "maximum_decrease_DN16": -0.0021203045147224486,
+      "worst_candidate_DN16": 7.698526178955587,
+      "worst_baseline_DN16": 7.69427511875459,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 5.369985694242317,
+          "baseline": 5.368645977090656,
+          "difference": 0.00133971715166048
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 7.507621817964407,
+          "baseline": 7.4992832378119845,
+          "difference": 0.008338580152422281
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 6.238250470191929,
+          "baseline": 6.227495571558506,
+          "difference": 0.01075489863342316
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 6.531743256132562,
+          "baseline": 6.525363181611435,
+          "difference": 0.006380074521127099
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 7.005604100796689,
+          "baseline": 7.001891548951864,
+          "difference": 0.003712551844825107
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 6.091050677054823,
+          "baseline": 6.071243320956812,
+          "difference": 0.019807356098010764
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 5.616766249451023,
+          "baseline": 5.6110981500324355,
+          "difference": 0.005668099418587147
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.447324351688182,
+          "baseline": 4.426477361783771,
+          "difference": 0.020846989904410584
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 6.1187166436958345,
+          "baseline": 6.10881874101968,
+          "difference": 0.009897902676154757
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 7.698526178955587,
+          "baseline": 7.69427511875459,
+          "difference": 0.004251060200997081
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 5.083192717745212,
+          "baseline": 5.077805983780358,
+          "difference": 0.005386733964853896
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.191971163535593,
+          "baseline": 5.171501289722414,
+          "difference": 0.020469873813178552
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 6.949714434202926,
+          "baseline": 6.951834738717649,
+          "difference": -0.0021203045147224486
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 6.419500718399373,
+          "baseline": 6.41301588421784,
+          "difference": 0.006484834181533117
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.852468833391796,
+          "baseline": 5.833589760027054,
+          "difference": 0.018879073364741927
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 6.476030211419987,
+          "baseline": 6.4600858912057335,
+          "difference": 0.015944320214253516
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "parent",
+      "prior": "iso12800-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 0,
+      "equal": 0,
+      "worse": 16,
+      "maximum_increase_DN16": 0.02183582833349096,
+      "maximum_decrease_DN16": 0.003216768231660616,
+      "worst_candidate_DN16": 6.276985054510382,
+      "worst_baseline_DN16": 6.272675494969419,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 4.631605595993317,
+          "baseline": 4.628282467992102,
+          "difference": 0.0033231280012149256
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 5.96292554980224,
+          "baseline": 5.958751127224174,
+          "difference": 0.004174422578066661
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 5.467265937494846,
+          "baseline": 5.45553378755617,
+          "difference": 0.011732149938675995
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 5.200580736961413,
+          "baseline": 5.189975234268885,
+          "difference": 0.010605502692528468
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 5.896732475183188,
+          "baseline": 5.89146328665695,
+          "difference": 0.005269188526238366
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 5.764615377309957,
+          "baseline": 5.745689735332706,
+          "difference": 0.01892564197725033
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 4.959923640231931,
+          "baseline": 4.95463101267343,
+          "difference": 0.005292627558501017
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.3729178867421465,
+          "baseline": 4.3518867418272364,
+          "difference": 0.021031144914910094
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 5.656713937108892,
+          "baseline": 5.645943274548609,
+          "difference": 0.010770662560283029
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 6.276985054510382,
+          "baseline": 6.272675494969419,
+          "difference": 0.004309559540963015
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 4.999149973788524,
+          "baseline": 4.9935882893342045,
+          "difference": 0.005561684454319149
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.138091962029917,
+          "baseline": 5.117967749452791,
+          "difference": 0.0201242125771266
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 5.247270671510112,
+          "baseline": 5.244053903278451,
+          "difference": 0.003216768231660616
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 5.810051486065603,
+          "baseline": 5.803002223700595,
+          "difference": 0.0070492623650082464
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.4847705408580385,
+          "baseline": 5.464227786952604,
+          "difference": 0.020542753905434807
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 4.773484836636402,
+          "baseline": 4.751649008302911,
+          "difference": 0.02183582833349096
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "parent",
+      "prior": "iso12800-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 11,
+      "equal": 0,
+      "worse": 5,
+      "maximum_increase_DN16": 0.04908688981408105,
+      "maximum_decrease_DN16": -0.568331637457959,
+      "worst_candidate_DN16": 87.89020930733045,
+      "worst_baseline_DN16": 88.41457021504533,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 16.78039684695439,
+          "baseline": 16.80534315155198,
+          "difference": -0.024946304597591507
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 16.684524736283475,
+          "baseline": 16.705259291320843,
+          "difference": -0.020734555037368096
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 16.99690673296736,
+          "baseline": 17.060520568520104,
+          "difference": -0.06361383555274358
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 19.331075666838746,
+          "baseline": 19.292071961780728,
+          "difference": 0.03900370505801831
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 18.722188764455872,
+          "baseline": 18.694250276075856,
+          "difference": 0.027938488380016224
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 21.59221783076034,
+          "baseline": 21.59035775618782,
+          "difference": 0.0018600745725194656
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 19.070309309657517,
+          "baseline": 19.02957981206221,
+          "difference": 0.04072949759530786
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 18.011097788897363,
+          "baseline": 17.962010899083282,
+          "difference": 0.04908688981408105
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 25.667064092900116,
+          "baseline": 25.684371193306518,
+          "difference": -0.017307100406402043
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 22.859758180443407,
+          "baseline": 22.886433171240636,
+          "difference": -0.026674990797229015
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 24.80009441765272,
+          "baseline": 24.85520568569179,
+          "difference": -0.05511126803907018
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 23.48898438130525,
+          "baseline": 23.516918184418053,
+          "difference": -0.027933803112802025
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 86.60202268063723,
+          "baseline": 87.10782322094364,
+          "difference": -0.5058005403064101
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 82.87936659346482,
+          "baseline": 83.44769823092278,
+          "difference": -0.568331637457959
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 84.38623515618234,
+          "baseline": 84.90704163493088,
+          "difference": -0.5208064787485398
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 87.89020930733045,
+          "baseline": 88.41457021504533,
+          "difference": -0.524360907714879
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "mse-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.008980846533259701,
+      "maximum_decrease_DN16": -0.04435422017511037,
+      "worst_candidate_DN16": 5.439050115522837,
+      "worst_baseline_DN16": 5.458561827401521,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 3.1826059616364533,
+          "baseline": 3.195106369621753,
+          "difference": -0.012500407985299944
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 4.045973286970144,
+          "baseline": 4.067568580440652,
+          "difference": -0.021595293470507926
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.8133337298579892,
+          "baseline": 3.83289319654999,
+          "difference": -0.019559466692000704
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 3.356428169581275,
+          "baseline": 3.379191715642039,
+          "difference": -0.02276354606076403
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 5.05115873815101,
+          "baseline": 5.067828731470279,
+          "difference": -0.016669993319268883
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 4.018744448330141,
+          "baseline": 4.048709449712152,
+          "difference": -0.029965001382010747
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.562642387543749,
+          "baseline": 3.6040600459719885,
+          "difference": -0.04141765842823952
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3666023204762636,
+          "baseline": 3.3900599125715245,
+          "difference": -0.023457592095260882
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 4.505412618550782,
+          "baseline": 4.514393465084042,
+          "difference": -0.008980846533259701
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 5.439050115522837,
+          "baseline": 5.458561827401521,
+          "difference": -0.0195117118786845
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.7521961591927178,
+          "baseline": 3.7666424328631725,
+          "difference": -0.014446273670454701
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.4242012686358394,
+          "baseline": 3.438243344662594,
+          "difference": -0.014042076026754557
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.5447583918292174,
+          "baseline": 3.5817247221832926,
+          "difference": -0.03696633035407526
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.638233109184987,
+          "baseline": 3.668285452062642,
+          "difference": -0.030052342877655125
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 4.11555763676714,
+          "baseline": 4.159911856942251,
+          "difference": -0.04435422017511037
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.7046033496307698,
+          "baseline": 3.745238136003238,
+          "difference": -0.04063478637246831
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "mse-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.012941298871252727,
+      "maximum_decrease_DN16": -0.05622328293294698,
+      "worst_candidate_DN16": 4.083194575431123,
+      "worst_baseline_DN16": 4.1033648548862915,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 2.914193674199484,
+          "baseline": 2.9274911868120053,
+          "difference": -0.013297512612521434
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 3.409730469836947,
+          "baseline": 3.4352965491289713,
+          "difference": -0.02556607929202448
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.4549399603272306,
+          "baseline": 3.4750754157271118,
+          "difference": -0.020135455399881153
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 2.8623145382579644,
+          "baseline": 2.8880697488281477,
+          "difference": -0.025755210570183262
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 4.083194575431123,
+          "baseline": 4.1033648548862915,
+          "difference": -0.020170279455168583
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 2.760175898981201,
+          "baseline": 2.7984135635690963,
+          "difference": -0.03823766458789546
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.2644357902688674,
+          "baseline": 3.3090138511291887,
+          "difference": -0.044578060860321234
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.324452874411997,
+          "baseline": 3.3482121408617886,
+          "difference": -0.02375926644979165
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 3.3562906652452824,
+          "baseline": 3.369231964116535,
+          "difference": -0.012941298871252727
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 3.732372382131294,
+          "baseline": 3.760620448499401,
+          "difference": -0.02824806636810706
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.1066014587709603,
+          "baseline": 3.1245857455821935,
+          "difference": -0.017984286811233208
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.104819729346396,
+          "baseline": 3.1203048389490604,
+          "difference": -0.015485109602664249
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.132307168398959,
+          "baseline": 3.1734152196350673,
+          "difference": -0.04110805123610817
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.4259714845919294,
+          "baseline": 3.4581353283477054,
+          "difference": -0.03216384375577608
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 3.169656349776912,
+          "baseline": 3.225879632709859,
+          "difference": -0.05622328293294698
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.3549741638220447,
+          "baseline": 3.398620905816997,
+          "difference": -0.04364674199495244
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "mse-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 5,
+      "equal": 0,
+      "worse": 11,
+      "maximum_increase_DN16": 0.13530105312499074,
+      "maximum_decrease_DN16": -0.06494634780721498,
+      "worst_candidate_DN16": 59.1863431306006,
+      "worst_baseline_DN16": 59.1190114666488,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 13.572471977739779,
+          "baseline": 13.623567988888523,
+          "difference": -0.051096011148743514
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 12.047592843693309,
+          "baseline": 12.040109330399607,
+          "difference": 0.007483513293701449
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 12.88507317288379,
+          "baseline": 12.916165402377242,
+          "difference": -0.031092229493452805
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 12.456899491357438,
+          "baseline": 12.521845839164653,
+          "difference": -0.06494634780721498
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 14.423477073680756,
+          "baseline": 14.412433657220266,
+          "difference": 0.011043416460490008
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 18.371232618935608,
+          "baseline": 18.348535725555838,
+          "difference": 0.02269689337976999
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 17.038700235190575,
+          "baseline": 17.08128063569303,
+          "difference": -0.04258040050245526
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 13.528336545183283,
+          "baseline": 13.516116061083554,
+          "difference": 0.012220484099728424
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 21.8102434943057,
+          "baseline": 21.806953886145855,
+          "difference": 0.003289608159843027
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 19.73409083669798,
+          "baseline": 19.73041974942161,
+          "difference": 0.0036710872763698887
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 21.22870368317616,
+          "baseline": 21.23959209773134,
+          "difference": -0.010888414555179082
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 19.709181771563284,
+          "baseline": 19.707442657340092,
+          "difference": 0.0017391142231915069
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 58.700694935834754,
+          "baseline": 58.58449979425483,
+          "difference": 0.11619514157992228
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 59.11330652701315,
+          "baseline": 58.97800547388816,
+          "difference": 0.13530105312499074
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 59.12413006241849,
+          "baseline": 59.02122413689275,
+          "difference": 0.1029059255257394
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 59.1863431306006,
+          "baseline": 59.1190114666488,
+          "difference": 0.0673316639517978
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "mse-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.009740523810675583,
+      "maximum_decrease_DN16": -0.04680051302634869,
+      "worst_candidate_DN16": 7.698526178955587,
+      "worst_baseline_DN16": 7.716954371875998,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 5.369985694242317,
+          "baseline": 5.383048363888997,
+          "difference": -0.013062669646680014
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 7.507621817964407,
+          "baseline": 7.532572583606658,
+          "difference": -0.024950765642251405
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 6.238250470191929,
+          "baseline": 6.262235601201288,
+          "difference": -0.023985131009359506
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 6.531743256132562,
+          "baseline": 6.545670995293385,
+          "difference": -0.013927739160823016
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 7.005604100796689,
+          "baseline": 7.018748948971172,
+          "difference": -0.013144848174483137
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 6.091050677054823,
+          "baseline": 6.137851190081172,
+          "difference": -0.04680051302634869
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 5.616766249451023,
+          "baseline": 5.640451665867028,
+          "difference": -0.02368541641600519
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.447324351688182,
+          "baseline": 4.49065850250542,
+          "difference": -0.04333415081723846
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 6.1187166436958345,
+          "baseline": 6.128862200287089,
+          "difference": -0.01014555659125449
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 7.698526178955587,
+          "baseline": 7.716954371875998,
+          "difference": -0.018428192920410424
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 5.083192717745212,
+          "baseline": 5.104728869748789,
+          "difference": -0.021536152003577058
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.191971163535593,
+          "baseline": 5.208290089675183,
+          "difference": -0.016318926139589962
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 6.949714434202926,
+          "baseline": 6.959454958013602,
+          "difference": -0.009740523810675583
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 6.419500718399373,
+          "baseline": 6.451484557998471,
+          "difference": -0.03198383959909812
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.852468833391796,
+          "baseline": 5.895642344414977,
+          "difference": -0.043173511023181455
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 6.476030211419987,
+          "baseline": 6.504761169674845,
+          "difference": -0.028730958254858052
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "mse-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.010718748180100768,
+      "maximum_decrease_DN16": -0.04723026035763844,
+      "worst_candidate_DN16": 6.276985054510382,
+      "worst_baseline_DN16": 6.299184459489902,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 4.631605595993317,
+          "baseline": 4.649521418235847,
+          "difference": -0.017915822242529522
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 5.96292554980224,
+          "baseline": 5.986894513504808,
+          "difference": -0.023968963702567514
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 5.467265937494846,
+          "baseline": 5.494431026531769,
+          "difference": -0.027165089036923717
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 5.200580736961413,
+          "baseline": 5.219102893221135,
+          "difference": -0.018522156259721534
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 5.896732475183188,
+          "baseline": 5.913401673615106,
+          "difference": -0.016669198431918275
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 5.764615377309957,
+          "baseline": 5.811845637667595,
+          "difference": -0.04723026035763844
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 4.959923640231931,
+          "baseline": 4.986496990236468,
+          "difference": -0.026573350004536422
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.3729178867421465,
+          "baseline": 4.416974348605443,
+          "difference": -0.04405646186329637
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 5.656713937108892,
+          "baseline": 5.6674326852889925,
+          "difference": -0.010718748180100768
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 6.276985054510382,
+          "baseline": 6.299184459489902,
+          "difference": -0.022199404979519777
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 4.999149973788524,
+          "baseline": 5.021028284089748,
+          "difference": -0.02187831030122478
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.138091962029917,
+          "baseline": 5.154305438484487,
+          "difference": -0.01621347645456961
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 5.247270671510112,
+          "baseline": 5.265610144049673,
+          "difference": -0.018339472539561363
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 5.810051486065603,
+          "baseline": 5.8444947262672535,
+          "difference": -0.03444324020165013
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.4847705408580385,
+          "baseline": 5.5303881212440915,
+          "difference": -0.045617580386053014
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 4.773484836636402,
+          "baseline": 4.8136641211450675,
+          "difference": -0.0401792845086657
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "mse-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 6,
+      "equal": 0,
+      "worse": 10,
+      "maximum_increase_DN16": 0.39925872790554706,
+      "maximum_decrease_DN16": -0.09580629231504645,
+      "worst_candidate_DN16": 87.89020930733045,
+      "worst_baseline_DN16": 87.59336833855657,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 16.78039684695439,
+          "baseline": 16.768777914721603,
+          "difference": 0.01161893223278554
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 16.684524736283475,
+          "baseline": 16.69674687420144,
+          "difference": -0.012222137917966336
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 16.99690673296736,
+          "baseline": 16.992551744942016,
+          "difference": 0.004354988025344397
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 19.331075666838746,
+          "baseline": 19.403332341119533,
+          "difference": -0.07225667428078708
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 18.722188764455872,
+          "baseline": 18.79350832286309,
+          "difference": -0.07131955840721815
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 21.59221783076034,
+          "baseline": 21.64446598059804,
+          "difference": -0.05224814983769832
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 19.070309309657517,
+          "baseline": 19.166115601972564,
+          "difference": -0.09580629231504645
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 18.011097788897363,
+          "baseline": 18.105856305703767,
+          "difference": -0.09475851680640446
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 25.667064092900116,
+          "baseline": 25.65387993671217,
+          "difference": 0.013184156187946883
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 22.859758180443407,
+          "baseline": 22.85001575367831,
+          "difference": 0.009742426765097179
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 24.80009441765272,
+          "baseline": 24.76152039928787,
+          "difference": 0.03857401836484797
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 23.48898438130525,
+          "baseline": 23.4826679547189,
+          "difference": 0.006316426586352009
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 86.60202268063723,
+          "baseline": 86.25655029032316,
+          "difference": 0.34547239031407173
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 82.87936659346482,
+          "baseline": 82.48936601249632,
+          "difference": 0.3900005809685041
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 84.38623515618234,
+          "baseline": 83.98697642827679,
+          "difference": 0.39925872790554706
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 87.89020930733045,
+          "baseline": 87.59336833855657,
+          "difference": 0.29684096877387844
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 12,
+      "equal": 0,
+      "worse": 4,
+      "maximum_increase_DN16": 0.0010119806553063881,
+      "maximum_decrease_DN16": -0.022752088203857657,
+      "worst_candidate_DN16": 5.439050115522837,
+      "worst_baseline_DN16": 5.43803813486753,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 3.1826059616364533,
+          "baseline": 3.1819118453639357,
+          "difference": 0.0006941162725175865
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 4.045973286970144,
+          "baseline": 4.047433259694964,
+          "difference": -0.0014599727248203465
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.8133337298579892,
+          "baseline": 3.8212673766797263,
+          "difference": -0.007933646821737028
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 3.356428169581275,
+          "baseline": 3.360735284081671,
+          "difference": -0.004307114500396114
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 5.05115873815101,
+          "baseline": 5.063087301264805,
+          "difference": -0.011928563113795754
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 4.018744448330141,
+          "baseline": 4.02617312410605,
+          "difference": -0.007428675775908999
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.562642387543749,
+          "baseline": 3.5853944757476066,
+          "difference": -0.022752088203857657
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3666023204762636,
+          "baseline": 3.3698341807949985,
+          "difference": -0.0032318603187349026
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 4.505412618550782,
+          "baseline": 4.507057187148416,
+          "difference": -0.0016445685976345104
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 5.439050115522837,
+          "baseline": 5.43803813486753,
+          "difference": 0.0010119806553063881
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.7521961591927178,
+          "baseline": 3.7516462313345698,
+          "difference": 0.0005499278581480027
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.4242012686358394,
+          "baseline": 3.4234300616729287,
+          "difference": 0.0007712069629106644
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.5447583918292174,
+          "baseline": 3.5588734148403627,
+          "difference": -0.014115023011145311
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.638233109184987,
+          "baseline": 3.6515590403545706,
+          "difference": -0.013325931169583694
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 4.11555763676714,
+          "baseline": 4.125491230182141,
+          "difference": -0.009933593415000885
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.7046033496307698,
+          "baseline": 3.7099950206367143,
+          "difference": -0.005391671005944509
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 13,
+      "equal": 0,
+      "worse": 3,
+      "maximum_increase_DN16": 0.0021234352525176803,
+      "maximum_decrease_DN16": -0.025460269923617496,
+      "worst_candidate_DN16": 4.083194575431123,
+      "worst_baseline_DN16": 4.095956481493948,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 2.914193674199484,
+          "baseline": 2.913098382614993,
+          "difference": 0.0010952915844906208
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 3.409730469836947,
+          "baseline": 3.4127165652145015,
+          "difference": -0.002986095377554676
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.4549399603272306,
+          "baseline": 3.4615721401134114,
+          "difference": -0.006632179786180803
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 2.8623145382579644,
+          "baseline": 2.8659579774812682,
+          "difference": -0.0036434392233037904
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 4.083194575431123,
+          "baseline": 4.095956481493948,
+          "difference": -0.012761906062825012
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 2.760175898981201,
+          "baseline": 2.7695259919819284,
+          "difference": -0.009350093000727533
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.2644357902688674,
+          "baseline": 3.289896060192485,
+          "difference": -0.025460269923617496
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.324452874411997,
+          "baseline": 3.3279547453080176,
+          "difference": -0.003501870896020609
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 3.3562906652452824,
+          "baseline": 3.3586222069802143,
+          "difference": -0.0023315417349318857
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 3.732372382131294,
+          "baseline": 3.7302489468787763,
+          "difference": 0.0021234352525176803
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.1066014587709603,
+          "baseline": 3.106727331313762,
+          "difference": -0.00012587254280171933
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.104819729346396,
+          "baseline": 3.1043876232895333,
+          "difference": 0.00043210605686283543
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.132307168398959,
+          "baseline": 3.1476069567200624,
+          "difference": -0.015299788321103236
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.4259714845919294,
+          "baseline": 3.4394733327292624,
+          "difference": -0.013501848137333017
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 3.169656349776912,
+          "baseline": 3.1779935343994223,
+          "difference": -0.008337184622510208
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.3549741638220447,
+          "baseline": 3.3587758204554183,
+          "difference": -0.003801656633373618
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "prior": "iso6400-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 7,
+      "equal": 0,
+      "worse": 9,
+      "maximum_increase_DN16": 0.07402495713528623,
+      "maximum_decrease_DN16": -0.019304225656879836,
+      "worst_candidate_DN16": 59.1863431306006,
+      "worst_baseline_DN16": 59.11904046872014,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 13.572471977739779,
+          "baseline": 13.552033127861447,
+          "difference": 0.020438849878331666
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 12.047592843693309,
+          "baseline": 12.066897069350189,
+          "difference": -0.019304225656879836
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 12.88507317288379,
+          "baseline": 12.890346265321735,
+          "difference": -0.0052730924379460475
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 12.456899491357438,
+          "baseline": 12.435371523336894,
+          "difference": 0.021527968020544463
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 14.423477073680756,
+          "baseline": 14.418842661765677,
+          "difference": 0.004634411915079184
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 18.371232618935608,
+          "baseline": 18.371823044354596,
+          "difference": -0.0005904254189879055
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 17.038700235190575,
+          "baseline": 17.02260818170279,
+          "difference": 0.016092053487785307
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 13.528336545183283,
+          "baseline": 13.510819602277794,
+          "difference": 0.01751694290548933
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 21.8102434943057,
+          "baseline": 21.81514976568883,
+          "difference": -0.0049062713831311555
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 19.73409083669798,
+          "baseline": 19.74820188239471,
+          "difference": -0.014111045696729718
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 21.22870368317616,
+          "baseline": 21.234605328900816,
+          "difference": -0.00590164572465568
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 19.709181771563284,
+          "baseline": 19.726677439626037,
+          "difference": -0.017495668062753822
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 58.700694935834754,
+          "baseline": 58.63242762985315,
+          "difference": 0.0682673059816068
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 59.11330652701315,
+          "baseline": 59.08313451553575,
+          "difference": 0.030172011477404226
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 59.12413006241849,
+          "baseline": 59.0501051052832,
+          "difference": 0.07402495713528623
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 59.1863431306006,
+          "baseline": 59.11904046872014,
+          "difference": 0.0673026618804613
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 9,
+      "equal": 0,
+      "worse": 7,
+      "maximum_increase_DN16": 0.005226560233444921,
+      "maximum_decrease_DN16": -0.01291420220139372,
+      "worst_candidate_DN16": 7.698526178955587,
+      "worst_baseline_DN16": 7.700404480300103,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 5.369985694242317,
+          "baseline": 5.369616803089337,
+          "difference": 0.0003688911529797778
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 7.507621817964407,
+          "baseline": 7.502395257730962,
+          "difference": 0.005226560233444921
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 6.238250470191929,
+          "baseline": 6.239309015311863,
+          "difference": -0.0010585451199345286
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 6.531743256132562,
+          "baseline": 6.537707837369752,
+          "difference": -0.005964581237190458
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 7.005604100796689,
+          "baseline": 7.004548904210854,
+          "difference": 0.00105519658583475
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 6.091050677054823,
+          "baseline": 6.097498883730196,
+          "difference": -0.006448206675373491
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 5.616766249451023,
+          "baseline": 5.629680451652416,
+          "difference": -0.01291420220139372
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.447324351688182,
+          "baseline": 4.458868857522429,
+          "difference": -0.011544505834247154
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 6.1187166436958345,
+          "baseline": 6.115768721553135,
+          "difference": 0.002947922142699788
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 7.698526178955587,
+          "baseline": 7.700404480300103,
+          "difference": -0.0018783013445151653
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 5.083192717745212,
+          "baseline": 5.081590096578006,
+          "difference": 0.0016026211672057755
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.191971163535593,
+          "baseline": 5.187338496071915,
+          "difference": 0.004632667463678075
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 6.949714434202926,
+          "baseline": 6.951199963646251,
+          "difference": -0.0014855294433244737
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 6.419500718399373,
+          "baseline": 6.420633170803349,
+          "difference": -0.0011324524039757478
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.852468833391796,
+          "baseline": 5.855221759710239,
+          "difference": -0.0027529263184433717
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 6.476030211419987,
+          "baseline": 6.475544015895003,
+          "difference": 0.00048619552498418983
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 11,
+      "equal": 0,
+      "worse": 5,
+      "maximum_increase_DN16": 0.004638678868731816,
+      "maximum_decrease_DN16": -0.013265710458234992,
+      "worst_candidate_DN16": 6.276985054510382,
+      "worst_baseline_DN16": 6.278648090192645,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 4.631605595993317,
+          "baseline": 4.630807282291903,
+          "difference": 0.000798313701414699
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 5.96292554980224,
+          "baseline": 5.9591914049591015,
+          "difference": 0.0037341448431389423
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 5.467265937494846,
+          "baseline": 5.471268132029559,
+          "difference": -0.00400219453471351
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 5.200580736961413,
+          "baseline": 5.206690945556391,
+          "difference": -0.006110208594977351
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 5.896732475183188,
+          "baseline": 5.896816510676977,
+          "difference": -8.403549378943609e-05
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 5.764615377309957,
+          "baseline": 5.771032087196932,
+          "difference": -0.0064167098869756245
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 4.959923640231931,
+          "baseline": 4.973189350690166,
+          "difference": -0.013265710458234992
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.3729178867421465,
+          "baseline": 4.384377596624244,
+          "difference": -0.011459709882097435
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 5.656713937108892,
+          "baseline": 5.653356128202229,
+          "difference": 0.003357808906662818
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 6.276985054510382,
+          "baseline": 6.278648090192645,
+          "difference": -0.0016630356822631143
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 4.999149973788524,
+          "baseline": 4.99759141975063,
+          "difference": 0.0015585540378939555
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.138091962029917,
+          "baseline": 5.133453283161185,
+          "difference": 0.004638678868731816
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 5.247270671510112,
+          "baseline": 5.2509842602258745,
+          "difference": -0.0037135887157626613
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 5.810051486065603,
+          "baseline": 5.812508857809277,
+          "difference": -0.002457371743673775
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.4847705408580385,
+          "baseline": 5.487033836120877,
+          "difference": -0.002263295262838305
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 4.773484836636402,
+          "baseline": 4.773762080900928,
+          "difference": -0.0002772442645264661
+        }
+      ]
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "prior": "iso12800-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 7,
+      "equal": 0,
+      "worse": 9,
+      "maximum_increase_DN16": 0.09934055554941779,
+      "maximum_decrease_DN16": -0.03989733507600235,
+      "worst_candidate_DN16": 87.89020930733045,
+      "worst_baseline_DN16": 87.85076301226057,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 16.78039684695439,
+          "baseline": 16.783759576436296,
+          "difference": -0.0033627294819069675
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 16.684524736283475,
+          "baseline": 16.69105567254859,
+          "difference": -0.006530936265114917
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 16.99690673296736,
+          "baseline": 17.027951125790896,
+          "difference": -0.031044392823535105
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 19.331075666838746,
+          "baseline": 19.311900220876623,
+          "difference": 0.01917544596212295
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 18.722188764455872,
+          "baseline": 18.702639873867813,
+          "difference": 0.019548890588058754
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 21.59221783076034,
+          "baseline": 21.58327284132122,
+          "difference": 0.0089449894391187
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 19.070309309657517,
+          "baseline": 19.015984423755263,
+          "difference": 0.05432488590225404
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 18.011097788897363,
+          "baseline": 17.961453591217722,
+          "difference": 0.049644197679640456
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 25.667064092900116,
+          "baseline": 25.67714593030327,
+          "difference": -0.010081837403152605
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 22.859758180443407,
+          "baseline": 22.878574091885223,
+          "difference": -0.01881591144181627
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 24.80009441765272,
+          "baseline": 24.83999175272872,
+          "difference": -0.03989733507600235
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 23.48898438130525,
+          "baseline": 23.504281409783726,
+          "difference": -0.015297028478475028
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 86.60202268063723,
+          "baseline": 86.51871431490079,
+          "difference": 0.08330836573644262
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 82.87936659346482,
+          "baseline": 82.86886551567123,
+          "difference": 0.010501077793591662
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 84.38623515618234,
+          "baseline": 84.28689460063292,
+          "difference": 0.09934055554941779
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 87.89020930733045,
+          "baseline": 87.85076301226057,
+          "difference": 0.03944629506987951
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "parent",
+      "prior": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 10,
+      "equal": 0,
+      "worse": 6,
+      "maximum_increase_DN16": 0.01677444462969202,
+      "maximum_decrease_DN16": -0.008980722426823018,
+      "worst_candidate_DN16": 5.43070593299612,
+      "worst_baseline_DN16": 5.431620411737643,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 3.1746613323439563,
+          "baseline": 3.1836420547707793,
+          "difference": -0.008980722426823018
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 4.035159534503961,
+          "baseline": 4.037150400385051,
+          "difference": -0.001990865881089654
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.806724608431884,
+          "baseline": 3.8074790799705838,
+          "difference": -0.0007544715386997858
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 3.350310952816022,
+          "baseline": 3.346590506910752,
+          "difference": 0.0037204459052699868
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 5.043063399059171,
+          "baseline": 5.044432410636623,
+          "difference": -0.0013690115774522837
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 4.007850263402499,
+          "baseline": 4.0087441188501085,
+          "difference": -0.0008938554476092264
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.5539427492730096,
+          "baseline": 3.548802462638217,
+          "difference": 0.005140286634792712
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3595102453598495,
+          "baseline": 3.358240950181343,
+          "difference": 0.001269295178506713
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 4.500858064462955,
+          "baseline": 4.5045784782285425,
+          "difference": -0.003720413765587516
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 5.43070593299612,
+          "baseline": 5.431620411737643,
+          "difference": -0.0009144787415227285
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.748523065969108,
+          "baseline": 3.752321770499348,
+          "difference": -0.0037987045302401157
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.4186029920746006,
+          "baseline": 3.420198457125036,
+          "difference": -0.0015954650504355072
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.5287473837549763,
+          "baseline": 3.528138604554412,
+          "difference": 0.0006087792005642356
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.6266365039247193,
+          "baseline": 3.631749102501678,
+          "difference": -0.005112598576958671
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 4.106509019063334,
+          "baseline": 4.099617436468146,
+          "difference": 0.006891582595187629
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.694993167385557,
+          "baseline": 3.678218722755865,
+          "difference": 0.01677444462969202
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "parent",
+      "prior": "iso6400-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 10,
+      "equal": 0,
+      "worse": 6,
+      "maximum_increase_DN16": 0.017111084082142014,
+      "maximum_decrease_DN16": -0.00993273346571355,
+      "worst_candidate_DN16": 4.072884966162079,
+      "worst_baseline_DN16": 4.075515478142738,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 2.9053187916574617,
+          "baseline": 2.915251525123175,
+          "difference": -0.00993273346571355
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 3.3971024282551854,
+          "baseline": 3.3998897756131967,
+          "difference": -0.0027873473580113384
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.4479310577443796,
+          "baseline": 3.4498510806270297,
+          "difference": -0.0019200228826501409
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 2.855177200750727,
+          "baseline": 2.851495432331872,
+          "difference": 0.003681768418855036
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 4.072884966162079,
+          "baseline": 4.075515478142738,
+          "difference": -0.0026305119806586674
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 2.7443887265062235,
+          "baseline": 2.7465996811256517,
+          "difference": -0.002210954619428218
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.2551177548889667,
+          "baseline": 3.250337336632139,
+          "difference": 0.004780418256827623
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3172755013882167,
+          "baseline": 3.315899528568473,
+          "difference": 0.001375972819743776
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 3.349676058188652,
+          "baseline": 3.3541747187076254,
+          "difference": -0.004498660518973185
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 3.7201396689457793,
+          "baseline": 3.7214301163642918,
+          "difference": -0.0012904474185124748
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.10206845173717,
+          "baseline": 3.1061657533585882,
+          "difference": -0.004097301621418303
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.0987202176721613,
+          "baseline": 3.1006440895574556,
+          "difference": -0.0019238718852943038
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.1144183494136772,
+          "baseline": 3.114153565948836,
+          "difference": 0.0002647834648410452
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.4135279518511634,
+          "baseline": 3.418511188819195,
+          "difference": -0.004983236968031601
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 3.157863651673593,
+          "baseline": 3.148643180947657,
+          "difference": 0.009220470725936014
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.344583152626683,
+          "baseline": 3.327472068544541,
+          "difference": 0.017111084082142014
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "parent",
+      "prior": "iso6400-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 14,
+      "equal": 0,
+      "worse": 2,
+      "maximum_increase_DN16": 0.024443882771779002,
+      "maximum_decrease_DN16": -0.13913237059076522,
+      "worst_candidate_DN16": 59.20804923358812,
+      "worst_baseline_DN16": 59.31931684931091,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 13.571917905602763,
+          "baseline": 13.551042981669074,
+          "difference": 0.020874923933689615
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 12.051538721565096,
+          "baseline": 12.090140374205651,
+          "difference": -0.03860165264055482
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 12.88399074050766,
+          "baseline": 12.90243191077122,
+          "difference": -0.018441170263560736
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 12.453241710142542,
+          "baseline": 12.428797827370763,
+          "difference": 0.024443882771779002
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 14.42544132821636,
+          "baseline": 14.446496418664475,
+          "difference": -0.021055090448115266
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 18.374159824025476,
+          "baseline": 18.416798622274342,
+          "difference": -0.042638798248866294
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 17.038451222960852,
+          "baseline": 17.040605775048988,
+          "difference": -0.002154552088136086
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 13.532658379601125,
+          "baseline": 13.555815616662866,
+          "difference": -0.023157237061740332
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 21.810421852323582,
+          "baseline": 21.813727615753937,
+          "difference": -0.0033057634303546024
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 19.735026978784354,
+          "baseline": 19.755691446227424,
+          "difference": -0.020664467443069157
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 21.227611289406465,
+          "baseline": 21.23587521065523,
+          "difference": -0.008263921248765627
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 19.709245837781328,
+          "baseline": 19.730772853085327,
+          "difference": -0.02152701530399881
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 58.731873081943576,
+          "baseline": 58.854706528428224,
+          "difference": -0.12283344648464833
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 59.14546774673099,
+          "baseline": 59.28460011732176,
+          "difference": -0.13913237059076522
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 59.15058356754842,
+          "baseline": 59.263280815846684,
+          "difference": -0.11269724829826089
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 59.20804923358812,
+          "baseline": 59.31931684931091,
+          "difference": -0.1112676157227881
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "parent",
+      "prior": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 2,
+      "equal": 0,
+      "worse": 14,
+      "maximum_increase_DN16": 0.013707450763806861,
+      "maximum_decrease_DN16": -0.00243457604360664,
+      "worst_candidate_DN16": 7.696736495937873,
+      "worst_baseline_DN16": 7.69427511875459,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 5.367101857330242,
+          "baseline": 5.368645977090656,
+          "difference": -0.00154411976041402
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 7.501962215930552,
+          "baseline": 7.4992832378119845,
+          "difference": 0.0026789781185678763
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 6.234276796822327,
+          "baseline": 6.227495571558506,
+          "difference": 0.006781225263821078
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 6.526373112314916,
+          "baseline": 6.525363181611435,
+          "difference": 0.00100993070348121
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 7.004867944474512,
+          "baseline": 7.001891548951864,
+          "difference": 0.0029763955226478345
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 6.0805489150309295,
+          "baseline": 6.071243320956812,
+          "difference": 0.009305594074117352
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 5.612327249458269,
+          "baseline": 5.6110981500324355,
+          "difference": 0.0012290994258332688
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.438549803356408,
+          "baseline": 4.426477361783771,
+          "difference": 0.012072441572636983
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 6.115674550539702,
+          "baseline": 6.10881874101968,
+          "difference": 0.0068558095200224045
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 7.696736495937873,
+          "baseline": 7.69427511875459,
+          "difference": 0.0024613771832822096
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 5.080653631987677,
+          "baseline": 5.077805983780358,
+          "difference": 0.0028476482073189757
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.185208740486221,
+          "baseline": 5.171501289722414,
+          "difference": 0.013707450763806861
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 6.949400162674042,
+          "baseline": 6.951834738717649,
+          "difference": -0.00243457604360664
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 6.417015559799967,
+          "baseline": 6.41301588421784,
+          "difference": 0.003999675582127438
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.844706588370355,
+          "baseline": 5.833589760027054,
+          "difference": 0.011116828343300966
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 6.469832515444043,
+          "baseline": 6.4600858912057335,
+          "difference": 0.009746624238309742
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "parent",
+      "prior": "iso12800-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 2,
+      "equal": 0,
+      "worse": 14,
+      "maximum_increase_DN16": 0.013345947108083678,
+      "maximum_decrease_DN16": -0.0009055656207994645,
+      "worst_candidate_DN16": 6.275202304217901,
+      "worst_baseline_DN16": 6.272675494969419,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 4.628178190176451,
+          "baseline": 4.628282467992102,
+          "difference": -0.0001042778156516988
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 5.957845561603374,
+          "baseline": 5.958751127224174,
+          "difference": -0.0009055656207994645
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 5.462801414451748,
+          "baseline": 5.45553378755617,
+          "difference": 0.007267626895578694
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 5.193613229036691,
+          "baseline": 5.189975234268885,
+          "difference": 0.0036379947678062408
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 5.894896319375462,
+          "baseline": 5.89146328665695,
+          "difference": 0.0034330327185125853
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 5.753892261161242,
+          "baseline": 5.745689735332706,
+          "difference": 0.00820252582853609
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 4.9553107029872745,
+          "baseline": 4.95463101267343,
+          "difference": 0.0006796903138441834
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.364017961507126,
+          "baseline": 4.3518867418272364,
+          "difference": 0.012131219679889504
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 5.653508328942625,
+          "baseline": 5.645943274548609,
+          "difference": 0.007565054394016002
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 6.275202304217901,
+          "baseline": 6.272675494969419,
+          "difference": 0.0025268092484820315
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 4.9965742444159575,
+          "baseline": 4.9935882893342045,
+          "difference": 0.0029859550817530334
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.131313696560874,
+          "baseline": 5.117967749452791,
+          "difference": 0.013345947108083678
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 5.244605191444861,
+          "baseline": 5.244053903278451,
+          "difference": 0.0005512881664095914
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 5.8073703456527035,
+          "baseline": 5.803002223700595,
+          "difference": 0.004368121952108339
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.476465210920746,
+          "baseline": 5.464227786952604,
+          "difference": 0.012237423968142203
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 4.764461150176577,
+          "baseline": 4.751649008302911,
+          "difference": 0.012812141873665972
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "parent",
+      "prior": "iso12800-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 12,
+      "equal": 0,
+      "worse": 4,
+      "maximum_increase_DN16": 0.043556297468875016,
+      "maximum_decrease_DN16": -0.4191750476181966,
+      "worst_candidate_DN16": 87.99539516742713,
+      "worst_baseline_DN16": 88.41457021504533,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 16.7874491116949,
+          "baseline": 16.80534315155198,
+          "difference": -0.01789403985707949
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 16.683697350436713,
+          "baseline": 16.705259291320843,
+          "difference": -0.021561940884129882
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 17.00101779672829,
+          "baseline": 17.060520568520104,
+          "difference": -0.05950277179181285
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 19.32560126041129,
+          "baseline": 19.292071961780728,
+          "difference": 0.033529298630561755
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 18.71532232151811,
+          "baseline": 18.694250276075856,
+          "difference": 0.02107204544225283
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 21.587582722047596,
+          "baseline": 21.59035775618782,
+          "difference": -0.0027750341402246193
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 19.062648932217318,
+          "baseline": 19.02957981206221,
+          "difference": 0.03306912015510832
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 18.005567196552157,
+          "baseline": 17.962010899083282,
+          "difference": 0.043556297468875016
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 25.66877742179671,
+          "baseline": 25.684371193306518,
+          "difference": -0.015593771509806231
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 22.858057223743064,
+          "baseline": 22.886433171240636,
+          "difference": -0.02837594749757244
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 24.80475273661773,
+          "baseline": 24.85520568569179,
+          "difference": -0.05045294907406017
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 23.48972354893479,
+          "baseline": 23.516918184418053,
+          "difference": -0.027194635483262175
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 86.74753378724225,
+          "baseline": 87.10782322094364,
+          "difference": -0.36028943370139643
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 83.04461984158797,
+          "baseline": 83.44769823092278,
+          "difference": -0.40307838933480866
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 84.51412951024662,
+          "baseline": 84.90704163493088,
+          "difference": -0.3929121246842584
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 87.99539516742713,
+          "baseline": 88.41457021504533,
+          "difference": -0.4191750476181966
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "mse-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.005713003047183918,
+      "maximum_decrease_DN16": -0.03612206987264788,
+      "worst_candidate_DN16": 5.43070593299612,
+      "worst_baseline_DN16": 5.445173570388129,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 3.1746613323439563,
+          "baseline": 3.1820182256080525,
+          "difference": -0.007356893264096165
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 4.035159534503961,
+          "baseline": 4.0500255500642535,
+          "difference": -0.014866015560292212
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.806724608431884,
+          "baseline": 3.821588608506839,
+          "difference": -0.01486400007495492
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 3.350310952816022,
+          "baseline": 3.3696148908007744,
+          "difference": -0.019303937984752384
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 5.043063399059171,
+          "baseline": 5.05346825259869,
+          "difference": -0.010404853539519365
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 4.007850263402499,
+          "baseline": 4.0284395309828644,
+          "difference": -0.020589267580365167
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.5539427492730096,
+          "baseline": 3.586560918297475,
+          "difference": -0.03261816902446535
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3595102453598495,
+          "baseline": 3.378668122389094,
+          "difference": -0.019157877029244652
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 4.500858064462955,
+          "baseline": 4.506571067510139,
+          "difference": -0.005713003047183918
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 5.43070593299612,
+          "baseline": 5.445173570388129,
+          "difference": -0.01446763739200918
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.748523065969108,
+          "baseline": 3.759498910915953,
+          "difference": -0.010975844946845115
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.4186029920746006,
+          "baseline": 3.4303301658325536,
+          "difference": -0.011727173757952958
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.5287473837549763,
+          "baseline": 3.5541228782526693,
+          "difference": -0.02537549449769294
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.6266365039247193,
+          "baseline": 3.6457289288886643,
+          "difference": -0.01909242496394503
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 4.106509019063334,
+          "baseline": 4.142631088935982,
+          "difference": -0.03612206987264788
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.694993167385557,
+          "baseline": 3.730289377756688,
+          "difference": -0.035296210371130954
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "mse-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.007657990321709551,
+      "maximum_decrease_DN16": -0.04594039805277994,
+      "worst_candidate_DN16": 4.072884966162079,
+      "worst_baseline_DN16": 4.085305777534584,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 2.9053187916574617,
+          "baseline": 2.912976781979171,
+          "difference": -0.007657990321709551
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 3.3971024282551854,
+          "baseline": 3.4146262156145895,
+          "difference": -0.017523787359404075
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.4479310577443796,
+          "baseline": 3.4630404220621283,
+          "difference": -0.015109364317748675
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 2.855177200750727,
+          "baseline": 2.8769734724813016,
+          "difference": -0.021796271730574635
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 4.072884966162079,
+          "baseline": 4.085305777534584,
+          "difference": -0.012420811372504836
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 2.7443887265062235,
+          "baseline": 2.7699365331711157,
+          "difference": -0.025547806664892203
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.2551177548889667,
+          "baseline": 3.2901323180276716,
+          "difference": -0.03501456313870488
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3172755013882167,
+          "baseline": 3.336685537923718,
+          "difference": -0.01941003653550144
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 3.349676058188652,
+          "baseline": 3.35808821991555,
+          "difference": -0.00841216172689796
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 3.7201396689457793,
+          "baseline": 3.741106615887429,
+          "difference": -0.020966946941649578
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.10206845173717,
+          "baseline": 3.115896401452642,
+          "difference": -0.013827949715472077
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.0987202176721613,
+          "baseline": 3.111649608527518,
+          "difference": -0.012929390855356715
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.1144183494136772,
+          "baseline": 3.1425415001655606,
+          "difference": -0.02812315075188332
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.4135279518511634,
+          "baseline": 3.4340649143532924,
+          "difference": -0.020536962502128997
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 3.157863651673593,
+          "baseline": 3.203804049726373,
+          "difference": -0.04594039805277994
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.344583152626683,
+          "baseline": 3.3824019919043473,
+          "difference": -0.037818839277664384
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "mse-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 5,
+      "equal": 0,
+      "worse": 11,
+      "maximum_increase_DN16": 0.12895748350993586,
+      "maximum_decrease_DN16": -0.05991753405379008,
+      "worst_candidate_DN16": 59.20804923358812,
+      "worst_baseline_DN16": 59.14149007124819,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 13.571917905602763,
+          "baseline": 13.619564425290086,
+          "difference": -0.04764651968732281
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 12.051538721565096,
+          "baseline": 12.036578064083345,
+          "difference": 0.014960657481751127
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 12.88399074050766,
+          "baseline": 12.90617881374792,
+          "difference": -0.022188073240259953
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 12.453241710142542,
+          "baseline": 12.513159244196332,
+          "difference": -0.05991753405379008
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 14.42544132821636,
+          "baseline": 14.412558505838582,
+          "difference": 0.012882822377777714
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 18.374159824025476,
+          "baseline": 18.347398067988838,
+          "difference": 0.026761756036638218
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 17.038451222960852,
+          "baseline": 17.075253051852812,
+          "difference": -0.03680182889196004
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 13.532658379601125,
+          "baseline": 13.519807977524167,
+          "difference": 0.012850402076958645
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 21.810421852323582,
+          "baseline": 21.806399438339575,
+          "difference": 0.004022413984007045
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 19.735026978784354,
+          "baseline": 19.72623121856965,
+          "difference": 0.008795760214702852
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 21.227611289406465,
+          "baseline": 21.233879516127214,
+          "difference": -0.006268226720749226
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 19.709245837781328,
+          "baseline": 19.704993984666533,
+          "difference": 0.004251853114794812
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 58.731873081943576,
+          "baseline": 58.6230810145111,
+          "difference": 0.10879206743247494
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 59.14546774673099,
+          "baseline": 59.01651026322106,
+          "difference": 0.12895748350993586
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 59.15058356754842,
+          "baseline": 59.05332720321554,
+          "difference": 0.09725636433288543
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 59.20804923358812,
+          "baseline": 59.14149007124819,
+          "difference": 0.06655916233992798
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "mse-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.004842177838363604,
+      "maximum_decrease_DN16": -0.035176081439624696,
+      "worst_candidate_DN16": 7.696736495937873,
+      "worst_baseline_DN16": 7.71115658211768,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 5.367101857330242,
+          "baseline": 5.376017524077702,
+          "difference": -0.008915666747459916
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 7.501962215930552,
+          "baseline": 7.520527080451273,
+          "difference": -0.01856486452072037
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 6.234276796822327,
+          "baseline": 6.254661672910911,
+          "difference": -0.02038487608858386
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 6.526373112314916,
+          "baseline": 6.537040660922757,
+          "difference": -0.010667548607840693
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 7.004867944474512,
+          "baseline": 7.014159875621553,
+          "difference": -0.00929193114704141
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 6.0805489150309295,
+          "baseline": 6.115122117516717,
+          "difference": -0.03457320248578721
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 5.612327249458269,
+          "baseline": 5.629472666184381,
+          "difference": -0.017145416726112472
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.438549803356408,
+          "baseline": 4.473725328731854,
+          "difference": -0.03517552537544599
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 6.115674550539702,
+          "baseline": 6.123843219446569,
+          "difference": -0.008168668906867182
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 7.696736495937873,
+          "baseline": 7.71115658211768,
+          "difference": -0.014420086179807612
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 5.080653631987677,
+          "baseline": 5.098634766713001,
+          "difference": -0.017981134725324033
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.185208740486221,
+          "baseline": 5.199093029022132,
+          "difference": -0.013884288535910727
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 6.949400162674042,
+          "baseline": 6.954242340512406,
+          "difference": -0.004842177838363604
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 6.417015559799967,
+          "baseline": 6.440802599779934,
+          "difference": -0.02378703997996645
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.844706588370355,
+          "baseline": 5.879882669809979,
+          "difference": -0.035176081439624696
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 6.469832515444043,
+          "baseline": 6.493305638123298,
+          "difference": -0.023473122679254388
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "mse-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 16,
+      "equal": 0,
+      "worse": 0,
+      "maximum_increase_DN16": -0.008654549390463728,
+      "maximum_decrease_DN16": -0.03718862536933454,
+      "worst_candidate_DN16": 6.275202304217901,
+      "worst_baseline_DN16": 6.292511296858002,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 4.628178190176451,
+          "baseline": 4.641177376641096,
+          "difference": -0.012999186464645263
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 5.957845561603374,
+          "baseline": 5.9743835556321105,
+          "difference": -0.016537994028736236
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 5.462801414451748,
+          "baseline": 5.485790278894685,
+          "difference": -0.022988864442936574
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 5.193613229036691,
+          "baseline": 5.208113671028586,
+          "difference": -0.014500441991894597
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 5.894896319375462,
+          "baseline": 5.9066347470745315,
+          "difference": -0.011738427699069298
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 5.753892261161242,
+          "baseline": 5.788457919276245,
+          "difference": -0.03456565811500223
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 4.9553107029872745,
+          "baseline": 4.974591964627676,
+          "difference": -0.019281261640401226
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.364017961507126,
+          "baseline": 4.399796521702415,
+          "difference": -0.03577856019528891
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 5.653508328942625,
+          "baseline": 5.662162878333088,
+          "difference": -0.008654549390463728
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 6.275202304217901,
+          "baseline": 6.292511296858002,
+          "difference": -0.01730899264010155
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 4.9965742444159575,
+          "baseline": 5.014850188511871,
+          "difference": -0.018275944095913488
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.131313696560874,
+          "baseline": 5.145091028000313,
+          "difference": -0.013777331439438711
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 5.244605191444861,
+          "baseline": 5.255673256727808,
+          "difference": -0.011068065282946904
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 5.8073703456527035,
+          "baseline": 5.8329080822268065,
+          "difference": -0.025537736574102965
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.476465210920746,
+          "baseline": 5.51365383629008,
+          "difference": -0.03718862536933454
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 4.764461150176577,
+          "baseline": 4.797331840623898,
+          "difference": -0.03287069044732149
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "mse-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 6,
+      "equal": 0,
+      "worse": 10,
+      "maximum_increase_DN16": 0.3648498269144085,
+      "maximum_decrease_DN16": -0.0890866245658053,
+      "worst_candidate_DN16": 87.99539516742713,
+      "worst_baseline_DN16": 87.7012522422426,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 16.7874491116949,
+          "baseline": 16.776144576965905,
+          "difference": 0.011304534728996174
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 16.683697350436713,
+          "baseline": 16.68738334676993,
+          "difference": -0.003685996333217645
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 17.00101779672829,
+          "baseline": 16.98721099739015,
+          "difference": 0.013806799338141218
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 19.32560126041129,
+          "baseline": 19.391855439986447,
+          "difference": -0.06625417957515722
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 18.71532232151811,
+          "baseline": 18.779894668318942,
+          "difference": -0.06457234680083346
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 21.587582722047596,
+          "baseline": 21.62988972505824,
+          "difference": -0.04230700301064516
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 19.062648932217318,
+          "baseline": 19.148461854889778,
+          "difference": -0.08581292267245999
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 18.005567196552157,
+          "baseline": 18.094653821117962,
+          "difference": -0.0890866245658053
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 25.66877742179671,
+          "baseline": 25.654592706729364,
+          "difference": 0.014184715067347753
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 22.858057223743064,
+          "baseline": 22.84189178557132,
+          "difference": 0.016165438171743318
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 24.80475273661773,
+          "baseline": 24.762792297193748,
+          "difference": 0.0419604394239812
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 23.48972354893479,
+          "baseline": 23.480937558283905,
+          "difference": 0.008785990650885367
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 86.74753378724225,
+          "baseline": 86.43722617904194,
+          "difference": 0.31030760820030423
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 83.04461984158797,
+          "baseline": 82.69368733994305,
+          "difference": 0.3509325016449196
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 84.51412951024662,
+          "baseline": 84.14927968333221,
+          "difference": 0.3648498269144085
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 87.99539516742713,
+          "baseline": 87.7012522422426,
+          "difference": 0.29414292518453067
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 14,
+      "equal": 0,
+      "worse": 2,
+      "maximum_increase_DN16": 0.0006734570121276207,
+      "maximum_decrease_DN16": -0.02359346831961373,
+      "worst_candidate_DN16": 5.43070593299612,
+      "worst_baseline_DN16": 5.430032475983992,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 3.1746613323439563,
+          "baseline": 3.1743282257538534,
+          "difference": 0.0003331065901028829
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 4.035159534503961,
+          "baseline": 4.0362027296645255,
+          "difference": -0.0010431951605642809
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.806724608431884,
+          "baseline": 3.8168321182997205,
+          "difference": -0.010107509867836484
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 3.350310952816022,
+          "baseline": 3.3562971773207613,
+          "difference": -0.00598622450473929
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 5.043063399059171,
+          "baseline": 5.054255892039733,
+          "difference": -0.011192492980562463
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 4.007850263402499,
+          "baseline": 4.013966302445808,
+          "difference": -0.0061160390433085965
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.5539427492730096,
+          "baseline": 3.5775362175926233,
+          "difference": -0.02359346831961373
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3595102453598495,
+          "baseline": 3.3645874344441706,
+          "difference": -0.005077189084321088
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 4.500858064462955,
+          "baseline": 4.502833902934922,
+          "difference": -0.0019758384719672506
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 5.43070593299612,
+          "baseline": 5.430032475983992,
+          "difference": 0.0006734570121276207
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.748523065969108,
+          "baseline": 3.7492703458228873,
+          "difference": -0.0007472798537793146
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.4186029920746006,
+          "baseline": 3.42000607729057,
+          "difference": -0.001403085215969213
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.5287473837549763,
+          "baseline": 3.5422216309243435,
+          "difference": -0.013474247169367182
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.6266365039247193,
+          "baseline": 3.6383715298006014,
+          "difference": -0.011735025875882155
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 4.106509019063334,
+          "baseline": 4.11916145803195,
+          "difference": -0.01265243896861623
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.694993167385557,
+          "baseline": 3.70377375779677,
+          "difference": -0.00878059041121304
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "prior": "iso6400-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 14,
+      "equal": 0,
+      "worse": 2,
+      "maximum_increase_DN16": 0.0016820623639959287,
+      "maximum_decrease_DN16": -0.02621399056624396,
+      "worst_candidate_DN16": 4.072884966162079,
+      "worst_baseline_DN16": 4.084761001107315,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 2.9053187916574617,
+          "baseline": 2.9046439732343305,
+          "difference": 0.0006748184231311072
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 3.3971024282551854,
+          "baseline": 3.3993988759735143,
+          "difference": -0.002296447718328931
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 3.4479310577443796,
+          "baseline": 3.457010615876749,
+          "difference": -0.009079558132369492
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 2.855177200750727,
+          "baseline": 2.860883476197331,
+          "difference": -0.005706275446604181
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 4.072884966162079,
+          "baseline": 4.084761001107315,
+          "difference": -0.011876034945236036
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 2.7443887265062235,
+          "baseline": 2.752207666432961,
+          "difference": -0.007818939926737656
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 3.2551177548889667,
+          "baseline": 3.2813317454552107,
+          "difference": -0.02621399056624396
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 3.3172755013882167,
+          "baseline": 3.322643832107617,
+          "difference": -0.005368330719400127
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 3.349676058188652,
+          "baseline": 3.3525609471675755,
+          "difference": -0.00288488897892325
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 3.7201396689457793,
+          "baseline": 3.7184576065817834,
+          "difference": 0.0016820623639959287
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 3.10206845173717,
+          "baseline": 3.103825344291515,
+          "difference": -0.0017568925543449687
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 3.0987202176721613,
+          "baseline": 3.100629120289737,
+          "difference": -0.0019089026175755919
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 3.1144183494136772,
+          "baseline": 3.1290170956702084,
+          "difference": -0.014598746256531125
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 3.4135279518511634,
+          "baseline": 3.4254489718142507,
+          "difference": -0.011921019963087254
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 3.157863651673593,
+          "baseline": 3.1701435459367695,
+          "difference": -0.012279894263176327
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 3.344583152626683,
+          "baseline": 3.352095384149092,
+          "difference": -0.007512231522408985
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "prior": "iso6400-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 6,
+      "equal": 0,
+      "worse": 10,
+      "maximum_increase_DN16": 0.0798933054099038,
+      "maximum_decrease_DN16": -0.01719575735679868,
+      "worst_candidate_DN16": 59.20804923358812,
+      "worst_baseline_DN16": 59.136683976277645,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso6400-prior-RGGB",
+          "candidate": 13.571917905602763,
+          "baseline": 13.552854926765313,
+          "difference": 0.019062978837450117
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-BGGR",
+          "candidate": 12.051538721565096,
+          "baseline": 12.068734478921895,
+          "difference": -0.01719575735679868
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GRBG",
+          "candidate": 12.88399074050766,
+          "baseline": 12.88873029478452,
+          "difference": -0.004739554276859792
+        },
+        {
+          "id": "mixed-vertical-step-iso6400-prior-GBRG",
+          "candidate": 12.453241710142542,
+          "baseline": 12.434727911262314,
+          "difference": 0.018513798880228194
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+          "candidate": 14.42544132821636,
+          "baseline": 14.418576078076097,
+          "difference": 0.0068652501402635124
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+          "candidate": 18.374159824025476,
+          "baseline": 18.37239816107999,
+          "difference": 0.0017616629454870747
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+          "candidate": 17.038451222960852,
+          "baseline": 17.02376382979064,
+          "difference": 0.01468739317021317
+        },
+        {
+          "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+          "candidate": 13.532658379601125,
+          "baseline": 13.51399311985526,
+          "difference": 0.01866525974586608
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-RGGB",
+          "candidate": 21.810421852323582,
+          "baseline": 21.815627799609285,
+          "difference": -0.00520594728570245
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-BGGR",
+          "candidate": 19.735026978784354,
+          "baseline": 19.746571599470645,
+          "difference": -0.011544620686290585
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GRBG",
+          "candidate": 21.227611289406465,
+          "baseline": 21.23363061610924,
+          "difference": -0.00601932670277705
+        },
+        {
+          "id": "mixed-slanted-step-iso6400-prior-GBRG",
+          "candidate": 19.709245837781328,
+          "baseline": 19.725371999956625,
+          "difference": -0.016126162175297054
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-RGGB",
+          "candidate": 58.731873081943576,
+          "baseline": 58.65231182020676,
+          "difference": 0.07956126173681355
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-BGGR",
+          "candidate": 59.14546774673099,
+          "baseline": 59.101154494341294,
+          "difference": 0.04431325238969919
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GRBG",
+          "candidate": 59.15058356754842,
+          "baseline": 59.07069026213852,
+          "difference": 0.0798933054099038
+        },
+        {
+          "id": "mixed-striped-patch-iso6400-prior-GBRG",
+          "candidate": 59.20804923358812,
+          "baseline": 59.136683976277645,
+          "difference": 0.07136525731047527
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "cases": 16,
+      "better": 14,
+      "equal": 0,
+      "worse": 2,
+      "maximum_increase_DN16": 0.003043488940533301,
+      "maximum_decrease_DN16": -0.013951487116644401,
+      "worst_candidate_DN16": 7.696736495937873,
+      "worst_baseline_DN16": 7.700782620546392,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 5.367101857330242,
+          "baseline": 5.369577170088524,
+          "difference": -0.0024753127582819445
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 7.501962215930552,
+          "baseline": 7.498918726990019,
+          "difference": 0.003043488940533301
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 6.234276796822327,
+          "baseline": 6.236951629575532,
+          "difference": -0.002674832753204903
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 6.526373112314916,
+          "baseline": 6.535038677321532,
+          "difference": -0.008665565006616305
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 7.004867944474512,
+          "baseline": 7.006605115483736,
+          "difference": -0.0017371710092239923
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 6.0805489150309295,
+          "baseline": 6.08900193178397,
+          "difference": -0.00845301675304011
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 5.612327249458269,
+          "baseline": 5.626278736574913,
+          "difference": -0.013951487116644401
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.438549803356408,
+          "baseline": 4.452140226746129,
+          "difference": -0.013590423389721273
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 6.115674550539702,
+          "baseline": 6.116776184173675,
+          "difference": -0.001101633633973087
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 7.696736495937873,
+          "baseline": 7.700782620546392,
+          "difference": -0.004046124608519719
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 5.080653631987677,
+          "baseline": 5.081174020568506,
+          "difference": -0.0005203885808287012
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.185208740486221,
+          "baseline": 5.184271170592605,
+          "difference": 0.0009375698936162635
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 6.949400162674042,
+          "baseline": 6.952745315882071,
+          "difference": -0.0033451532080288615
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 6.417015559799967,
+          "baseline": 6.420611564080273,
+          "difference": -0.00359600428030582
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.844706588370355,
+          "baseline": 5.850431922658609,
+          "difference": -0.005725334288253947
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 6.469832515444043,
+          "baseline": 6.472581540326927,
+          "difference": -0.002749024882883866
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "prior": "iso12800-prior",
+      "field": "quiet_spatial_RMS_DN16",
+      "cases": 16,
+      "better": 14,
+      "equal": 0,
+      "worse": 2,
+      "maximum_increase_DN16": 0.0016163331980800777,
+      "maximum_decrease_DN16": -0.014366833900608,
+      "worst_candidate_DN16": 6.275202304217901,
+      "worst_baseline_DN16": 6.279601305773702,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 4.628178190176451,
+          "baseline": 4.630906608065441,
+          "difference": -0.0027284178889903643
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 5.957845561603374,
+          "baseline": 5.956229228405294,
+          "difference": 0.0016163331980800777
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 5.462801414451748,
+          "baseline": 5.468481708723266,
+          "difference": -0.0056802942715181715
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 5.193613229036691,
+          "baseline": 5.202961781567245,
+          "difference": -0.009348552530553889
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 5.894896319375462,
+          "baseline": 5.898008502350835,
+          "difference": -0.003112182975372413
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 5.753892261161242,
+          "baseline": 5.762358882531612,
+          "difference": -0.008466621370369687
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 4.9553107029872745,
+          "baseline": 4.9696775368878825,
+          "difference": -0.014366833900608
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 4.364017961507126,
+          "baseline": 4.377594978053671,
+          "difference": -0.013577016546545195
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 5.653508328942625,
+          "baseline": 5.65461703802395,
+          "difference": -0.001108709081325543
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 6.275202304217901,
+          "baseline": 6.279601305773702,
+          "difference": -0.004399001555801085
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 4.9965742444159575,
+          "baseline": 4.99717794609938,
+          "difference": -0.0006037016834223863
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 5.131313696560874,
+          "baseline": 5.130390217858217,
+          "difference": 0.0009234787026572988
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 5.244605191444861,
+          "baseline": 5.251208186551801,
+          "difference": -0.006602995106939957
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 5.8073703456527035,
+          "baseline": 5.812623823878733,
+          "difference": -0.0052534782260291735
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 5.476465210920746,
+          "baseline": 5.481972750794672,
+          "difference": -0.005507539873925715
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 4.764461150176577,
+          "baseline": 4.768678584798499,
+          "difference": -0.004217434621922145
+        }
+      ]
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "prior": "iso12800-prior",
+      "field": "full_error_RMS_DN16",
+      "cases": 16,
+      "better": 7,
+      "equal": 0,
+      "worse": 9,
+      "maximum_increase_DN16": 0.15108695620286028,
+      "maximum_decrease_DN16": -0.03524608742131363,
+      "worst_candidate_DN16": 87.99539516742713,
+      "worst_baseline_DN16": 87.91418265406206,
+      "pairs": [
+        {
+          "id": "mixed-vertical-step-iso12800-prior-RGGB",
+          "candidate": 16.7874491116949,
+          "baseline": 16.788632832467467,
+          "difference": -0.0011837207725662324
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-BGGR",
+          "candidate": 16.683697350436713,
+          "baseline": 16.69023478571394,
+          "difference": -0.006537435277227388
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GRBG",
+          "candidate": 17.00101779672829,
+          "baseline": 17.028247647518725,
+          "difference": -0.02722985079043383
+        },
+        {
+          "id": "mixed-vertical-step-iso12800-prior-GBRG",
+          "candidate": 19.32560126041129,
+          "baseline": 19.308951001161045,
+          "difference": 0.01665025925024466
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+          "candidate": 18.71532232151811,
+          "baseline": 18.700129993527074,
+          "difference": 0.015192327991034205
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+          "candidate": 21.587582722047596,
+          "baseline": 21.580814524821278,
+          "difference": 0.006768197226318051
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+          "candidate": 19.062648932217318,
+          "baseline": 19.01393782857042,
+          "difference": 0.048711103646898124
+        },
+        {
+          "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+          "candidate": 18.005567196552157,
+          "baseline": 17.9598401340557,
+          "difference": 0.045727062496457194
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-RGGB",
+          "candidate": 25.66877742179671,
+          "baseline": 25.678019855126653,
+          "difference": -0.009242433329941235
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-BGGR",
+          "candidate": 22.858057223743064,
+          "baseline": 22.874228204050738,
+          "difference": -0.016170980307673943
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GRBG",
+          "candidate": 24.80475273661773,
+          "baseline": 24.839998824039043,
+          "difference": -0.03524608742131363
+        },
+        {
+          "id": "mixed-slanted-step-iso12800-prior-GBRG",
+          "candidate": 23.48972354893479,
+          "baseline": 23.50398185375365,
+          "difference": -0.014258304818859813
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-RGGB",
+          "candidate": 86.74753378724225,
+          "baseline": 86.61534496379363,
+          "difference": 0.13218882344861527
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-BGGR",
+          "candidate": 83.04461984158797,
+          "baseline": 82.98777538221545,
+          "difference": 0.05684445937252747
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GRBG",
+          "candidate": 84.51412951024662,
+          "baseline": 84.36304255404376,
+          "difference": 0.15108695620286028
+        },
+        {
+          "id": "mixed-striped-patch-iso12800-prior-GBRG",
+          "candidate": 87.99539516742713,
+          "baseline": 87.91418265406206,
+          "difference": 0.08121251336507385
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "kind": "mesh",
+      "condition": true,
+      "field": "template_gain",
+      "candidate": 0.024336949600849363,
+      "baseline_value": 0.023611315193903536,
+      "percent_change": 3.073248571655962
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "kind": "mixed-quiet",
+      "condition": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "candidate": 3.9075938557413323,
+      "baseline_value": 3.913870448048187,
+      "percent_change": -0.16036791176838872
+    },
+    {
+      "method": "local-risk-raw-step1000",
+      "baseline": "noisy-only-raw-step1000",
+      "kind": "mixed-quiet",
+      "condition": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "candidate": 6.162404219929265,
+      "baseline_value": 6.164207919698487,
+      "percent_change": -0.029260852208745636
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "kind": "mesh",
+      "condition": true,
+      "field": "template_gain",
+      "candidate": 0.02325168560478284,
+      "baseline_value": 0.022849705336837497,
+      "percent_change": 1.7592361127619638
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "kind": "mixed-quiet",
+      "condition": "iso6400-prior",
+      "field": "quiet_error_RMS_DN16",
+      "candidate": 3.8991749509263576,
+      "baseline_value": 3.9062298297592024,
+      "percent_change": -0.18060583069378078
+    },
+    {
+      "method": "local-risk-EMA-step1000",
+      "baseline": "noisy-only-EMA-step1000",
+      "kind": "mixed-quiet",
+      "condition": "iso12800-prior",
+      "field": "quiet_error_RMS_DN16",
+      "candidate": 6.1578272587473775,
+      "baseline_value": 6.162117909587089,
+      "percent_change": -0.06962948295805571
+    }
+  ],
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Related four-CFA placements/reused recipes,not independent scenes or significance claims. Paired quiet per-case wins/worst errors expose remaining failures despite average gains. Comparison versus matched MSE isolates added loss;comparison to V151 also changes input features/base spectral objective and is not isolated causality."
+}

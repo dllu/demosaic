@@ -1,0 +1,65 @@
+{
+  "status": "completed-recorded-trace-reduction",
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/train-result-v1.json",
+    "sha256": "076c36c83aaf95942707b6fb6278b3ece8abb39b7bec69b61fe5d26b150ef488"
+  },
+  "cache": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/cache-result-v1.json",
+    "sha256": "81c9533b7afbd1f1e93dd53f55c660c1e951d719bb84dafade5b17aeaee1314a"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/route-v156-final-v1.py",
+    "sha256": "67976a0d3b8fa42783bfcdee4eae6fdae394f6d7c05d2b11e2789e3c5aa1d782",
+    "text": "\"\"\"Summarize recorded pre-clip norms; no additional training or forward calls.\"\"\"\n\nimport json\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1')\nplan = read(root / 'plan-v1.json')\ncache = read(plan['cache']['path'])\ntraining = read(root / 'train-result-v1.json')\ngroups = []\nfor arm in training['counts']:\n    for adc in [True, False]:\n        rows = [r['arms'][arm] for r, b in zip(training['trace'], cache['batches'], strict=True)\n                if (b['metadata']['noise']['shot'] == b['metadata']['noise']['read'] == 0) == adc]\n        norms = np.array([r['gradient_norm'] for r in rows], dtype=np.float64)\n        groups.append({'arm': arm, 'ADC_only': adc, 'batches': len(rows),\n                       'norm_median': float(np.median(norms)),\n                       'norm_maximum': float(norms.max()),\n                       'norms_over_one': int((norms > 1).sum()),\n                       'sum_norm_capped_at_one_squared_proxy': float((np.minimum(norms, 1)**2).sum()),\n                       'exact_zero_norms': int((norms == 0).sum()),\n                       'exact_zero_total_losses': sum(r['loss'] == 0 for r in rows)})\nsave(root / 'training-routing-summary-v1.json', {\n    'status': 'completed-recorded-trace-reduction',\n    'training': ref(root / 'train-result-v1.json'), 'cache': plan['cache'],\n    'source': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'groups': groups, 'new_forwards': 0, 'new_noise_draws': 0,\n    'scope': 'Recorded pre-clipping full-parameter gradient norms. Capping at one omits clipping epsilon; summed squared norms are a routing proxy, not Adam displacement, influence, or a causal quality result. Zero gradients retain optimizer/EMA coasting.'})\nfor row in groups:\n    print(row)\n"
+  },
+  "groups": [
+    {
+      "arm": "mse-control",
+      "ADC_only": true,
+      "batches": 118,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 118,
+      "exact_zero_total_losses": 118
+    },
+    {
+      "arm": "mse-control",
+      "ADC_only": false,
+      "batches": 882,
+      "norm_median": 0.0034212582977488637,
+      "norm_maximum": 0.11903832107782364,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.07402341873689663,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    },
+    {
+      "arm": "local-risk",
+      "ADC_only": true,
+      "batches": 118,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 118,
+      "exact_zero_total_losses": 118
+    },
+    {
+      "arm": "local-risk",
+      "ADC_only": false,
+      "batches": 882,
+      "norm_median": 0.0029855689499527216,
+      "norm_maximum": 0.0673854649066925,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.051263023425549975,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    }
+  ],
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Recorded pre-clipping full-parameter gradient norms. Capping at one omits clipping epsilon; summed squared norms are a routing proxy, not Adam displacement, influence, or a causal quality result. Zero gradients retain optimizer/EMA coasting."
+}

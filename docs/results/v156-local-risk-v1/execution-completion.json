@@ -1,0 +1,102 @@
+{
+  "status": "all10-recorded-owners-terminal",
+  "recorded_unix_UTC": 1793768224.0612147,
+  "recorded_owner_count": 10,
+  "owners": [
+    {
+      "stage": "training-controller",
+      "owner": {
+        "pid": 3201667,
+        "created": 1793766449.04
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "parity",
+      "owner": {
+        "pid": 3201669,
+        "created": 1793766449.36
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "smoke",
+      "owner": {
+        "pid": 3201719,
+        "created": 1793766457.65
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "train",
+      "owner": {
+        "pid": 3201743,
+        "created": 1793766475.94
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "postprocess-controller",
+      "owner": {
+        "pid": 3202664,
+        "created": 1793766754.96
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "checkpoint-validation",
+      "owner": {
+        "pid": 3252890,
+        "created": 1793767597.49
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 3252892,
+        "created": 1793767598.87
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 3254560,
+        "created": 1793767851.62
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 3254922,
+        "created": 1793767950.04
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 3255132,
+        "created": 1793768062.04
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "live_matching_root_argv": [],
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/status-v1.json",
+    "sha256": "f471a695bb139221a3e6bd82d7b2607619646f187b0625ec1f547fa9e2b26896"
+  },
+  "postprocess_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1/postprocess-status-v1.json",
+    "sha256": "12fbd4260ead5273235a62fbfc62f2367be25e85fafcff98c51d095ce8e3aab8"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v156-execution-v1.py",
+    "sha256": "7a552fa5144e45290aecc464b79fd74cb98471712e9d58f0205f653d56913209",
+    "text": "\"\"\"Check actual terminal states for all ten successful V156 owners.\"\"\"\n\nimport os\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1')\ntraining = read(root / 'status-v1.json')\npost = read(root / 'postprocess-status-v1.json')\nassert training['status'] == 'completed-matched-training-awaiting-fixed-quality-review'\nassert post['status'] == 'completed-four-endpoint-audits-and-rendering-awaiting-actual-native-viewing'\nassert set(post['completed']) == {'checkpoint-validation','review','scores','metric-audit','render'}\nowners = [('training-controller', training['owner'])]\nowners += [(name, read(root / f'{name}-result-v1.json')['owner']) for name in ['parity','smoke','train']]\nowners += [('postprocess-controller', post['owner'])]\nowners += [(stage, item['owner']) for stage, item in post['completed'].items()]\nassert len(owners) == 10\nrecords = []\nfor stage, owner in owners:\n    try:\n        p = psutil.Process(owner['pid'])\n        terminal = 'PID-reused-original-terminal' if abs(p.create_time()-owner['created']) >= .01 else p.status()\n        assert terminal in ['PID-reused-original-terminal','dead','zombie'], (stage,owner,terminal)\n    except psutil.NoSuchProcess:\n        terminal = 'absent'\n    records.append({'stage':stage,'owner':owner,'terminal_state':terminal})\nexcluded = {os.getpid()} | {p.pid for p in psutil.Process().parents()}\nmatching = []\nfor p in psutil.process_iter(['pid','cmdline','status']):\n    if p.pid in excluded or p.info['status'] in ['zombie','dead']:\n        continue\n    if any(t == str(root) or t.startswith(str(root)+'/') for t in p.info['cmdline'] or []):\n        matching.append(p.info)\nassert not matching, matching\nsave(root / 'execution-completion-v1.json', {\n    'status':'all10-recorded-owners-terminal','recorded_unix_UTC':time.time(),\n    'recorded_owner_count':10,'owners':records,'live_matching_root_argv':matching,\n    'training_completion':ref(root / 'status-v1.json'),\n    'postprocess_completion':ref(root / 'postprocess-status-v1.json'),\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Exact PID/create-time terminal checks for two controllers,three training workers and five postprocess workers,including mandatory CPU checkpoint validation. Frozen controllers require zero child returns. No scientific failure or restart; root scan excludes verifier and ancestors.',\n})\nprint('PASS: all10 recorded owners terminal; no live root argv matches')\n"
+  },
+  "scope": "Exact PID/create-time terminal checks for two controllers,three training workers and five postprocess workers,including mandatory CPU checkpoint validation. Frozen controllers require zero child returns. No scientific failure or restart; root scan excludes verifier and ancestors."
+}

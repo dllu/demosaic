@@ -41,9 +41,12 @@ V120's coarse noisy-flat error1.59–2.36% lower than V143, but total noisy-flat
 RMS2.31–5.11% higher and worse ADC slopes. Neither restores the fine cab fence.
 All1,644 fresh paired outputs,64 native figures and independent audits are complete.
 
-The [active V156 trial](docs/local-excess-risk.md) penalizes local RGB error
-increases relative to the frozen parent, aiming to protect quiet neighbors while
-learning weak detail. Readiness checks pass; restoration gains remain unmeasured.
+[Completed V156](docs/local-excess-risk.md) lowers mean quiet-region RMS **0.30–0.63%**
+versus matched MSE; all 32 mixed controls improve at both endpoints. It retains
+5.59–10.52% more mesh response than V143, with less response than MSE. Broad mottle
+and missing cab crossings remain. All four endpoints,72 native figures and
+independent audits are complete; local regret becomes the next learned-head
+training control, with stronger mesh/standalone-flat/ADC comparators retained.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -73,17 +76,22 @@ no crop-pixel resizing.
 
 ![Mesh2309: noisy, V153 delivered-mosaic restoration, exact constructed GT](docs/images/v153-delivered-objective-v1/comparison-02-delivered-mosaic-raw-step1000-triplet.png)
 
-V154's small standalone-flat gain: noisy → **Charb .01 EMA** → exact constructed
-GT, ISO6400 and ISO12800 priors. Broad colored mottle remains visible and mixed
-quiet regions regress. These fixed native160×160 crops use gray level .02 in
-512px RGGB contexts, ROI `[176,176,160,160]`, common exposure4 and 40× camera-linear
-contrast about exact target means. Shot/read variance parameters are
-.00128/6.5536e-6 and .00256/2.62144e-5; crop pixels are never resized.
-[All methods, checkpoint hashes and display metadata](docs/robust-spectral-objective.md).
+V156's small quiet-neighbor gain: noisy → **local-risk EMA** → exact constructed
+GT, ISO6400 and ISO12800 priors. Broad colored mottle remains; these crops do not
+show a clean-field solution. Native 160×160 cells in 512px RGGB contexts,
+ROI `[80,176,160,160]`, common exposure 8 and 40× camera-linear contrast about the
+exact quiet target. Shot/read variance parameters are .00128/6.5536e-6 and
+.00256/2.62144e-5; crop pixels are never resized.
+[All methods, checkpoint/source hashes and display metadata](docs/local-excess-risk.md).
 
-![ISO6400 flat: noisy, V154 Charb .01 EMA, exact constructed GT](docs/images/v154-robust-spectral-v1/flat-iso6400-charb-0p01-EMA-step1000-triplet.png)
+![ISO6400 quiet: noisy, V156 local-risk EMA, exact constructed GT](docs/images/v156-local-risk-v1/comparison-26-local-risk-EMA-step1000-triplet.png)
 
-![ISO12800 flat: noisy, V154 Charb .01 EMA, exact constructed GT](docs/images/v154-robust-spectral-v1/flat-iso12800-charb-0p01-EMA-step1000-triplet.png)
+![ISO12800 quiet: noisy, V156 local-risk EMA, exact constructed GT](docs/images/v156-local-risk-v1/comparison-28-local-risk-EMA-step1000-triplet.png)
+
+V154 retains the stronger standalone-flat gain:
+[ISO6400](docs/images/v154-robust-spectral-v1/flat-iso6400-charb-0p01-EMA-step1000-triplet.png)
+and [ISO12800](docs/images/v154-robust-spectral-v1/flat-iso12800-charb-0p01-EMA-step1000-triplet.png)
+native triplets use exact constructed GT; [full conditioning/display details](docs/robust-spectral-objective.md).
 
 V150's stronger ADC-only result remains useful: mean photo RMS falls 3.06% on
 two held-out sources/four CFAs. Native

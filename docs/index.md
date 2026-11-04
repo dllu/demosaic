@@ -1,11 +1,13 @@
 # Documentation guide
 
-The [active V156 local-regret trial](local-excess-risk.md) adds a smooth penalty
-for32px regions getting worse than their frozen parent. Two identical fresh
-heads retain the base delivered-RGB objective/data/schedule. Independent values
-and output-adjoint tests, exact compatibility, genuine8+2 CUDA checks and a
-step500 state audit pass. The fixed four-endpoint quality review is queued;
-restoration quality and actual native viewing remain pending.
+The [completed V156 local-regret trial](local-excess-risk.md) lowers actual quiet
+RMS0.30–0.63% versus matched MSE, improving all 32 inputs at both raw/EMA endpoints.
+Mesh response retains5.59–10.52% gain over V143, with less response than MSE.
+Against quieter V151, response improves 1.76–3.07% and mean quiet RMS0.03–0.18%,
+with remaining individual regressions. Broad mottle and missing real cab
+crossings persist. All four endpoints/822 cases/72 actual native figures and
+independent audits are complete. Local regret becomes the next learned-head
+training control; V153 response, V154 standalone-flat andV150 ADC strengths remain.
 
 The [completed V155 matched-parent audit](matched-parent-comparison.md) evaluates
 V143 and V120 afresh under one deterministic FP32 policy. V120 lowers coarse
