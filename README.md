@@ -52,8 +52,13 @@ ADC gradient pressure. [Completed V150](docs/objective-floor-training.md) slight
 lowers noisy-flat RMS and gives about 3.06% lower ADC photo RMS. Fine high-ISO
 texture remains weak; exact quiet and coarse sloped-field errors still regress.
 All four endpoints, 72 native figures and independent audits are complete.
-[V151](docs/noisy-objective-training.md) now isolates ADC supervision and bounded
-spectral emphasis with three matched fresh heads; quality review is pending.
+[Completed V151](docs/noisy-objective-training.md) removes ADC supervision and
+raises noisy-mesh response 3.76–7.22% over V143, with noisy-flat RMS .10–.16%
+lower. Absolute response remains only 2.28–2.36% of constructed GT, quiet patches
+still regress, and no convincing new cab wires appear. Bounded peak weighting
+nearly closes support. All six endpoints, 84 native figures and audits are
+complete. Noisy-only becomes the next noisy-head training control; V150 retains
+the stronger ADC photo result.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -71,18 +76,23 @@ exact empty field, then WB/matrix/+3EV. Pixels are not resized.
 
 ![Native noisy, detail amplitude and exact GT with shared eightfold contrast](docs/images/supported-wave-amplitude-v1/mesh-seed2026112302-present-iso6400-prior-RGGB-retained-contrast8-triplet.png)
 
-ADC-only faint photo detail: quantized input → V143 + V150 16 DN EMA → **exact
-constructed GT**, native 160×160 cells from binned Commons photos. The fixed
-targets have .025 contrast; display uses shared 40× contrast and exposure 1.
-Shot/read are zero, black .03, 16-bit ADC. Mean camera-RGB RMS falls 3.06% on two
-sources/four CFAs; changes are small and do not establish high-ISO recovery.
-[All endpoints, licensing, ROI/checkpoint/noise/display metadata](docs/objective-floor-training.md).
+Noisy → V143 + V151 noisy-only raw → **exact constructed GT**, two fixed mesh
+crops. Mean response rises 7.22% over V143, but crossings remain missing. Native
+160×160 cells, ROI `[176,176,160,160]` in 512px RGGB contexts, shot .00128/read
+6.5536e-6, common exposure 8 and contrast 1; no crop-pixel resizing.
+[All endpoints, checkpoint/source hashes and display metadata](docs/noisy-objective-training.md).
 
-![ADC bark: quantized input, V150 16 DN EMA restoration, exact constructed GT](docs/images/v150-objective-floor-v1/comparison-42-floor16-matrix-EMA-step1000-triplet.png)
+![Mesh2302: noisy, V151 noisy-only restoration, exact constructed GT](docs/images/v151-noisy-objective-v1/comparison-00-noisy-only-raw-step1000-triplet.png)
 
-![ADC fur: quantized input, V150 16 DN EMA restoration, exact constructed GT](docs/images/v150-objective-floor-v1/comparison-43-floor16-matrix-EMA-step1000-triplet.png)
+![Mesh2309: noisy, V151 noisy-only restoration, exact constructed GT](docs/images/v151-noisy-objective-v1/comparison-02-noisy-only-raw-step1000-triplet.png)
 
-Noisy organic texture remains weak: [current feather/grass/bark views](docs/objective-floor-training.md)
+V150's stronger ADC-only result remains useful: mean photo RMS falls 3.06% on
+two held-out sources/four CFAs. Native
+[bark](docs/images/v150-objective-floor-v1/comparison-42-floor16-matrix-EMA-step1000-triplet.png) and
+[fur](docs/images/v150-objective-floor-v1/comparison-43-floor16-matrix-EMA-step1000-triplet.png)
+triplets retain exact constructed GT; [noise, licensing and display details](docs/objective-floor-training.md).
+
+Noisy organic texture remains weak: [current feather/grass/bark views](docs/noisy-objective-training.md)
 and the [earlier native photo gallery](docs/spatial-photo-supplement.md).
 
 Standing real GFX100S scene: DSCF3879 ISO6400 → **V120 Small, historical Haar

@@ -24,6 +24,7 @@ def main(root):
         == 1644
     )
     assert read(root / "execution-completion-v1.json")["recorded_owner_count"] == 9
+    assert read(root / "execution-completion-v1.json")["status"] == "all9-primary-owners-terminal"
     destination = REPO / "docs/results/v151-noisy-objective-v1"
     assets = REPO / "docs/images/v151-noisy-objective-v1"
     destination.mkdir(exist_ok=False)
@@ -31,6 +32,9 @@ def main(root):
     names = {
         "training-result.json": "train-result-v1.json",
         "training-audit.json": "independent-training-audit-v1.json",
+        "training-state-audit.json": "independent-training-state-audit-v1.json",
+        "training-routing.json": "training-routing-summary-v1.json",
+        "proposal-support.json": "proposal-support-summary-v1.json",
         "review-result.json": "review-result-v1.json",
         "scores.json": "scores-v1.json",
         "metric-audit.json": "independent-metrics-audit-v1.json",
@@ -74,7 +78,7 @@ def main(root):
             "triplets": 36,
             "no_resize": True,
             "independently_checked_RGB_channels": figures["all_RGB_channels_checked"],
-            "scope": "All6 fixed final raw/EMA endpoints on822 cases, including24 ADC controls, with identical source arrays,ROI,noise conditioning,exposure,anchor/contrast. All160x160 native cells, no resize. Both standing real scenes/priors/windows/JPEGs included; independent ISO100/AHD/JPEG references are qualitative, not exactGT. Triplets repeat existing comparison pixels, not observations.",
+            "scope": "All six fixed final raw/EMA endpoints on 822 cases, including 24 ADC controls, with identical source arrays, ROI, noise conditioning, exposure, anchor/contrast. All 160x160 native cells, no resize. Both standing real scenes/priors/windows/JPEGs included; independent ISO100/AHD/JPEG references are qualitative, not exact GT. Triplets repeat existing comparison pixels, not observations.",
         },
     )
     neural = {p: sha for p, sha in plan["frozen_files"].items() if "/src/demosaic/" in p}
@@ -127,10 +131,10 @@ def main(root):
             "native_sheets_actually_viewed": 21,
             "independently_checked_RGB_channels": figures["all_RGB_channels_checked"],
             "recorded_terminal_primary_owners": 9,
-            "scope": "All3 fresh matched1k arms and6 prospectively fixed final endpoints are reported, with no early epoch selection. Counts exclude component unit tests. The16DN control reproduces V150 floor16 exactly on all1644 predictions,including the24 ADC cases. All training/review arrays and parents are adopted without new noise or parent/DINO calls. Human quality conclusions belong in the current report; completion of this finite experiment does not complete the user's broader fine-detail/clean-sky objective.",
+            "scope": "All three fresh matched 1k arms and six prospectively fixed final endpoints are reported, with no early epoch selection. Counts exclude component unit tests. The 16 DN control reproduces V150 floor16 exactly on all 1644 predictions, including the 24 ADC cases. All training/review arrays and parents are adopted without new noise or parent/DINO calls. Human quality conclusions belong in the current report; completion of this finite experiment does not complete the user's broader fine-detail/clean-sky objective.",
         },
     )
-    print("Published16 byte-exact receipts and84 native comparisons")
+    print(f"Published {len(copies)} byte-exact receipts and {len(images)} native comparisons")
 
 
 if __name__ == "__main__":

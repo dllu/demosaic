@@ -1,5 +1,10 @@
 # V150 loss floor: completed matched review
 
+Follow-up: [completed V151](noisy-objective-training.md) uses this exact 16 DN
+control and removes ADC supervision. It modestly improves noisy mesh/flat
+metrics, loses most ADC photo gains and leaves real wires missing. Noisy-only
+is the next noisy-training control; V150 retains its stronger ADC photo result.
+
 Raising the late-head loss floor from 2 to 16 DN reduces much of the native
 control's damage and gives small real noisy-flat gains. Native 512 full RMS falls
 about .045–.047% versus V143. On two faint ADC-only photographic targets, mean

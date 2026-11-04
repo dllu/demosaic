@@ -134,4 +134,10 @@ fine texture and real cab wires. All four endpoints and 72 native views are
 complete. Current [model recommendations](current-model.md) and the [66 native
 V149 comparisons](coherent-phase-estimator.md) retain their measured evidence.
 
+The subsequent [completed V151 ADC-isolation trial](noisy-objective-training.md)
+modestly improves noisy mesh/flat errors after removing ADC supervision, with
+smaller ADC photo gains and persistent quiet-region/real-detail failures. Peak
+weighting nearly closes support. All six endpoints and 84 native views are
+complete; noisy-only becomes the next noisy-training control.
+
 See the [local-time diary](../diary/2026-11-03-14-43-40-spectral-loss-allocation.md).

@@ -1,11 +1,15 @@
 # Documentation guide
 
-The [V151 noisy-objective trial](noisy-objective-training.md) compares the tested
-16 DN control, zero ADC supervision and zero ADC plus bounded clean-peak
-weighting. All13 tests and three CUDA8+2 checks pass. Checkpoint250's36 Adam
-states are finite; the control reproduces V150 floor16 raw/EMA/Adam exactly.
-All six final endpoints/822 cases/84 native figures are fixed. Training is
-active and quality remains unmeasured.
+The [completed V151 noisy-objective trial](noisy-objective-training.md) raises
+mean noisy-mesh response 3.76–7.22% over V143 by removing ADC-only supervision,
+with native512 noisy-flat RMS .10–.16% lower. Absolute response remains only
+2.28–2.36% of exact constructed GT. Real cab wires stay missing, quiet-region
+errors still rise, and most of V150's ADC photo gain is lost. Peak weighting
+nearly closes support and gives no useful noisy recovery. All six endpoints
+on 822 cases, 84 actually viewed native figures and independent audits are
+complete; control trace/weights/Adam and all 1,644 predictions match V150 exactly.
+Use noisy-only/16 DN/no peak bonus for the next noisy-training control, retaining
+V150 as the stronger ADC photo comparator.
 
 The [completed V150 loss-floor trial](objective-floor-training.md) lowers
 native512 noisy-flat RMS about .045–.047% versus V143, and ADC photo RMS about

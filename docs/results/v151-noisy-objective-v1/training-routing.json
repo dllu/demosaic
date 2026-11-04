@@ -1,0 +1,87 @@
+{
+  "status": "completed-recorded-trace-reduction",
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/train-result-v1.json",
+    "sha256": "2ccee492436a75cbd5af5ea1281e67143cbdf115de82504a77baf9a065cd820e"
+  },
+  "cache": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V148-phase-matrix-v1/cache-result-v1.json",
+    "sha256": "81c9533b7afbd1f1e93dd53f55c660c1e951d719bb84dafade5b17aeaee1314a"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/route-v151-final-v1.py",
+    "sha256": "122e3029c56d09b2e236e3991eb0e08803f608d92a3cd6b3d0a9a4c7e05fcea5",
+    "text": "\"\"\"Summarize recorded pre-clip norms; no additional training or forward calls.\"\"\"\n\nimport json\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1')\nplan = read(root / 'plan-v1.json')\ncache = read(plan['cache']['path'])\ntraining = read(root / 'train-result-v1.json')\ngroups = []\nfor arm in training['counts']:\n    for adc in [True, False]:\n        rows = [r['arms'][arm] for r, b in zip(training['trace'], cache['batches'], strict=True)\n                if (b['metadata']['noise']['shot'] == b['metadata']['noise']['read'] == 0) == adc]\n        norms = np.array([r['gradient_norm'] for r in rows], dtype=np.float64)\n        groups.append({'arm': arm, 'ADC_only': adc, 'batches': len(rows),\n                       'norm_median': float(np.median(norms)),\n                       'norm_maximum': float(norms.max()),\n                       'norms_over_one': int((norms > 1).sum()),\n                       'sum_norm_capped_at_one_squared_proxy': float((np.minimum(norms, 1)**2).sum()),\n                       'exact_zero_norms': int((norms == 0).sum()),\n                       'exact_zero_total_losses': sum(r['loss'] == 0 for r in rows)})\nsave(root / 'training-routing-summary-v1.json', {\n    'status': 'completed-recorded-trace-reduction',\n    'training': ref(root / 'train-result-v1.json'), 'cache': plan['cache'],\n    'source': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'groups': groups, 'new_forwards': 0, 'new_noise_draws': 0,\n    'scope': 'Recorded pre-clipping full-parameter gradient norms. Capping at one omits clipping epsilon; summed squared norms are a routing proxy, not Adam displacement, influence, or a causal quality result. Zero gradients retain optimizer/EMA coasting.'})\nfor row in groups:\n    print(row)\n"
+  },
+  "groups": [
+    {
+      "arm": "floor16-control",
+      "ADC_only": true,
+      "batches": 118,
+      "norm_median": 0.01855475641787052,
+      "norm_maximum": 8.970393180847168,
+      "norms_over_one": 4,
+      "sum_norm_capped_at_one_squared_proxy": 5.860109251204154,
+      "exact_zero_norms": 1,
+      "exact_zero_total_losses": 0
+    },
+    {
+      "arm": "floor16-control",
+      "ADC_only": false,
+      "batches": 882,
+      "norm_median": 0.006883691297844052,
+      "norm_maximum": 0.3288165032863617,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.2979217618179022,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    },
+    {
+      "arm": "noisy-only",
+      "ADC_only": true,
+      "batches": 118,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 118,
+      "exact_zero_total_losses": 118
+    },
+    {
+      "arm": "noisy-only",
+      "ADC_only": false,
+      "batches": 882,
+      "norm_median": 0.005787920672446489,
+      "norm_maximum": 0.22869564592838287,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.17339743487906906,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    },
+    {
+      "arm": "noisy-peak8",
+      "ADC_only": true,
+      "batches": 118,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 118,
+      "exact_zero_total_losses": 118
+    },
+    {
+      "arm": "noisy-peak8",
+      "ADC_only": false,
+      "batches": 882,
+      "norm_median": 0.005711663980036974,
+      "norm_maximum": 1.8747659921646118,
+      "norms_over_one": 1,
+      "sum_norm_capped_at_one_squared_proxy": 1.5370252433960836,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    }
+  ],
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Recorded pre-clipping full-parameter gradient norms. Capping at one omits clipping epsilon; summed squared norms are a routing proxy, not Adam displacement, influence, or a causal quality result. Zero gradients retain optimizer/EMA coasting."
+}
