@@ -48,6 +48,10 @@ and missing cab crossings remain. All four endpoints,72 native figures and
 independent audits are complete; local regret becomes the next learned-head
 training control, with stronger mesh/standalone-flat/ADC comparators retained.
 
+The [active V157 trial](docs/spatial-rgb-residual.md) adds a direct multiscale RGB
+path to address coarse parent mottle and missing-color detail. CPU/CUDA readiness
+passes; both fixed heads are training and restoration quality remains unmeasured.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

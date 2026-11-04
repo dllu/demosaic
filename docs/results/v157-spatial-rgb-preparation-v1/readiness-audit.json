@@ -1,0 +1,69 @@
+{
+  "status": "pass-actual-smoke-state-control-replay-and-live-prefix",
+  "recorded_unix_UTC": 1793769716.6528962,
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/plan-v1.json",
+    "sha256": "45399fc8f1d405dcaa4c1bacd65397375d4d71451235d3a5041bb63716928caa"
+  },
+  "smoke": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/smoke-result-v1.json",
+    "sha256": "7cd13756b26fa731141fe90e35dce6bda953ce9c97075cf80d4cbca0224eae16"
+  },
+  "restored_control_raw_EMA_Adam_exact_V156": true,
+  "finite_Adam_states_at10": 58,
+  "strict_raw_EMA_CPU_loads": 4,
+  "all58_parameters_have_finite_nonzero_prefix_gradients": true,
+  "live_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/readiness-training-prefix-v1.jsonl",
+    "sha256": "053b34532cbf1058055c38f39e14cf39b68d76403c600c4e810c3d26329d4315"
+  },
+  "complete_rows": 122,
+  "exact_control_trace_rows": 122,
+  "observed_live_owners": [
+    {
+      "role": "controller",
+      "pid": 3262714,
+      "created": 1793769543.05,
+      "process_status": "sleeping",
+      "argv": [
+        ".venv/bin/python",
+        "scripts/train_spatial_rgb_trial.py",
+        "controller",
+        ".cache/quality-20261103/V157-spatial-rgb-v1/plan-v1.json"
+      ]
+    },
+    {
+      "role": "train-worker",
+      "pid": 3262982,
+      "created": 1793769573.95,
+      "process_status": "running",
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/work/scripts/train_spatial_rgb_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ]
+    },
+    {
+      "role": "post-controller",
+      "pid": 3263463,
+      "created": 1793769642.96,
+      "process_status": "sleeping",
+      "argv": [
+        ".venv/bin/python",
+        ".cache/queue-v157-review-v1.py"
+      ]
+    }
+  ],
+  "CUDA_initialized": false,
+  "new_forward_calls": 0,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v157-readiness-v1.py",
+    "sha256": "4e9adf847ed11e102b3bd7788c0f596e31815b8db947a566db38043c831d4822",
+    "text": "\"\"\"Validate actual restored smoke states and an immutable live training prefix.\"\"\"\n\nimport math\nimport time\nfrom pathlib import Path\n\nimport psutil\nimport torch\nfrom review_spatial_rgb_trial import equal_tree\nfrom train_directional_bank_trial import guard, read, ref, save\nfrom train_spatial_rgb_trial import classes\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1')\nplan=read(root/'plan-v1.json');guard(plan)\nassert not (root/'readiness-audit-v1.json').exists()\nsmoke=read(root/'smoke-result-v1.json')\nassert smoke['steps']==10 and smoke['counts']==smoke['updates']=={'local-control':10,'spatial-rgb':10}\nassert ref(smoke['checkpoint']['path'])==smoke['checkpoint']\nstate=torch.load(smoke['checkpoint']['path'],map_location='cpu',weights_only=True)\nassert state['step']==10\nstates=0\nfor label,arm in state['arms'].items():\n    assert len(state['optimizers'][label]['state'])==arm['parameter_tensors']\n    assert min(smoke['parameter_maximum_gradients'][label].values())>0\n    for item in state['optimizers'][label]['state'].values():\n        assert float(item['step'])==10 and all(torch.isfinite(v).all() for v in item.values())\n        states+=1\n    for key in ['models','emas']:\n        module=classes()[label](**state['module_config'])\n        module.load_state_dict(state[key][label],strict=True)\n        assert all(torch.isfinite(v).all() for v in module.state_dict().values())\nassert states==58\nold=read(Path(plan['previous'])/'smoke-result-v1.json')\nassert ref(old['checkpoint']['path'])==old['checkpoint']\nprior=torch.load(old['checkpoint']['path'],map_location='cpu',weights_only=True)\nfor key in ['models','emas','optimizers']:\n    assert equal_tree(state[key]['local-control'],prior[key]['local-risk'])\nfor row,expected in zip(smoke['trace'],old['trace'],strict=True):\n    assert row['arms']['local-control']==expected['arms']['local-risk']\nsnapshot=root/'readiness-training-prefix-v1.jsonl'\nassert not snapshot.exists()\nraw=(root/'train-trace-v1.jsonl').read_bytes()\ncomplete=raw[:raw.rfind(b'\\n')+1]\nsnapshot.write_bytes(complete)\nimport json\nrows=[json.loads(line) for line in complete.splitlines()]\nreference=read(plan['baseline_training']['path'])['trace']\nassert len(rows)>0\nfor index,row in enumerate(rows):\n    assert row['step']==index+1 and row['batch']==reference[index]['batch']\n    assert row['arms']['local-control']==reference[index]['arms']['local-risk']\n    for arm in row['arms'].values():assert all(math.isfinite(v) for v in arm.values())\nstatus=read(root/'status-v1.json');post=read(root/'postprocess-status-v1.json')\nobserved=[]\nfor role,owner in [('controller',status['owner']),('train-worker',status['child']),('post-controller',post['owner'])]:\n    process=psutil.Process(owner['pid']);assert abs(process.create_time()-owner['created'])<.01\n    assert process.status() not in ['dead','zombie']\n    observed.append({'role':role,**owner,'process_status':process.status(),'argv':process.cmdline()})\nassert not torch.cuda.is_initialized()\nsave(root/'readiness-audit-v1.json',{\n    'status':'pass-actual-smoke-state-control-replay-and-live-prefix',\n    'recorded_unix_UTC':time.time(),'plan':ref(root/'plan-v1.json'),\n    'smoke':ref(root/'smoke-result-v1.json'),'restored_control_raw_EMA_Adam_exact_V156':True,\n    'finite_Adam_states_at10':states,'strict_raw_EMA_CPU_loads':4,\n    'all58_parameters_have_finite_nonzero_prefix_gradients':True,\n    'live_prefix':ref(snapshot),'complete_rows':len(rows),'exact_control_trace_rows':len(rows),\n    'observed_live_owners':observed,'CUDA_initialized':False,'new_forward_calls':0,\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Actual genuine8+2 restored smoke checkpoint verified on CPU,not final quality. Immutable completed live-prefix bytes and all matching V156 local-control rows. All3 owners confirmed live by PID/create-time. No completion,performance or native-viewing claim.'})\nprint('PASS four strict smoke loads,58 finite Adam states,exact V156 smoke model/EMA/Adam,',len(rows),'exact live control rows and3 actual live owners')\n"
+  },
+  "scope": "Actual genuine8+2 restored smoke checkpoint verified on CPU,not final quality. Immutable completed live-prefix bytes and all matching V156 local-control rows. All3 owners confirmed live by PID/create-time. No completion,performance or native-viewing claim."
+}

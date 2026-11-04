@@ -1,0 +1,50 @@
+{
+  "root": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/plan-v1.json",
+    "sha256": "45399fc8f1d405dcaa4c1bacd65397375d4d71451235d3a5041bb63716928caa"
+  },
+  "design": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/quality-design-v1.json",
+    "sha256": "74cad544cfe187f85819e05c2f7c4626d69177d0f18db8305e5c2bebf369442e"
+  },
+  "expected_training_owner": {
+    "pid": 3262714,
+    "created": 1793769543.05
+  },
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/plan-v1.json",
+      "sha256": "45399fc8f1d405dcaa4c1bacd65397375d4d71451235d3a5041bb63716928caa"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/quality-design-v1.json",
+      "sha256": "74cad544cfe187f85819e05c2f7c4626d69177d0f18db8305e5c2bebf369442e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-import-preflight-v1.json",
+      "sha256": "36d7787cb199ea68f590b696a94af3822d097548da1841a1036a5ac560a8003d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/objective-tests-v1.json",
+      "sha256": "015e924285e7575a41af312df79fa8652d44d70d4b8cba3a15e4f12e9eeacbef"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/render_spatial_rgb_trial.py": "5242d38c193525924889dc64c5bf151126240adf81f93c67465719edad058d63",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/train_directional_bank_trial.py": "c7ebc349434cf9f63746675640bcd7a6bef5d5dead547a7f005487750481df0e",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/score_spatial_rgb_trial.py": "2666d026ec3609f6a2a627c213cb3c5afce03ea9ca35c4a0b029bcc1dbd42cde",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/profile_raw_kernel_inference.py": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/audit_spatial_rgb_trial.py": "c5b157195686a003087f0103eb8587c798b5253b20f81a3951a4cd1d3c4dbc53",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/review_spatial_rgb_trial.py": "5bffde7911b1c2c27216aac37b78f9954083c79a83922e536aa9f994ebae629d",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-v1/scripts/train_v43_quality_trial.py": "a408a8138c1b4df63acb9414aeb270d35c8fc48a8660ab9a45549bd0d61621e6"
+  },
+  "controller": {
+    "path": "/home/dllu/proj/demosaic/.cache/queue-v157-review-v1.py",
+    "sha256": "328b1788662abbc62741308dbdd1ddacd5e43acc3e9d602d565e834e27c8bc5a",
+    "text": "\"\"\"Observe the exact V157 controller, then validate, replay, audit and render.\"\"\"\n\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V157-spatial-rgb-v1'\ntraining=read(root/'plan-v1.json');guard(training)\npost=root/'postprocess-v1'\nenv=os.environ.copy()\nenv['PYTHONPATH']=':'.join(str(p) for p in [post/'scripts',Path(training['work'])/'scripts',Path(training['work'])/'src'])\nenv['OPENBLAS_NUM_THREADS']=env['OMP_NUM_THREADS']='1'\nenv['HF_HUB_OFFLINE']=env['TRANSFORMERS_OFFLINE']='1'\nenv['CUBLAS_WORKSPACE_CONFIG']=':4096:8'\npreflight=read(root/'postprocess-import-preflight-v1.json')\nassert preflight['returncode']==0 and all(ref(p)['sha256']==h for p,h in preflight['sources'].items())\nowner=read(root/'status-v1.json')['owner']\nplan={\n    'root':str(root),'training_plan':ref(root/'plan-v1.json'),\n    'design':ref(root/'quality-design-v1.json'),'expected_training_owner':owner,\n    'inputs':[ref(root/'plan-v1.json'),ref(root/'quality-design-v1.json'),\n              ref(root/'postprocess-import-preflight-v1.json'),ref(root/'objective-tests-v1.json')],\n    'frozen_files':{str(p):ref(p)['sha256'] for p in post.rglob('*.py')},\n    'controller':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Observe exact original PID/create-time;never restart training. Strict CPU final-state validation checks all58 Adam states/four exports/exact1000-row V156 local control trace/raw/EMA/Adam before review claim. Then3288 actual calls including1644 bit-exact control replays without duplicate storage;new spatial raw/EMA arrays split local/external.4686 score rows/30 real rows unscored,independent NumPy64/Decimal audit,72 native figures/24 triplets. Both GFX scenes/priors/windows/JPEGs;actual viewing required afterward. New88/200GiB reserves;no old evidence changed.'}\nassert not (root/'postprocess-plan-v1.json').exists()\nsave(root/'postprocess-plan-v1.json',plan)\n(root/'postprocess-controller.claim').open('x').close()\nstatus={'status':'waiting-for-original-training-owner',\n        'owner':{'pid':os.getpid(),'created':psutil.Process().create_time()},'completed':{}}\nsave(root/'postprocess-status-v1.json',status)\nwhile True:\n    current=read(root/'status-v1.json');assert current['owner']==owner\n    if current['status']=='completed-matched-training-awaiting-fixed-quality-review':\n        assert set(current['completed'])=={'parity','smoke','train'}\n        break\n    assert current['status'] in ['running-declared-phase','waiting-for-headroom'],current\n    p=psutil.Process(owner['pid'])\n    assert abs(p.create_time()-owner['created'])<.01 and p.status() not in ['dead','zombie']\n    time.sleep(10)\nfor stage,name,extra in [\n    ('checkpoint-validation','review_spatial_rgb_trial.py',['--validate-only']),\n    ('review','review_spatial_rgb_trial.py',[]),\n    ('scores','score_spatial_rgb_trial.py',[]),\n    ('metric-audit','audit_spatial_rgb_trial.py',[]),\n    ('render','render_spatial_rgb_trial.py',[])]:\n    guard(training);guard(plan)\n    with (root/('postprocess-'+stage+'-v1.log')).open('x') as log:\n        child=subprocess.Popen([str(repo/'.venv/bin/python'),str(post/'scripts'/name),str(root),*extra],cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT)\n        childowner={'pid':child.pid,'created':psutil.Process(child.pid).create_time()}\n        status.update(status='running-'+stage,stage=stage,child_owner=childowner)\n        save(root/'postprocess-status-v1.json',status)\n        code=child.wait()\n    status['completed'][stage]={'owner':childowner,'returncode':code}\n    if code:\n        status['status']='failed-'+stage+'-preserve-evidence-no-restart'\n        save(root/'postprocess-status-v1.json',status)\n        raise RuntimeError(status['status'])\nstatus['status']='completed-four-endpoint-audits-and-rendering-awaiting-actual-native-viewing'\nsave(root/'postprocess-status-v1.json',status)\nprint(status['status'],flush=True)\n"
+  },
+  "scope": "Observe exact original PID/create-time;never restart training. Strict CPU final-state validation checks all58 Adam states/four exports/exact1000-row V156 local control trace/raw/EMA/Adam before review claim. Then3288 actual calls including1644 bit-exact control replays without duplicate storage;new spatial raw/EMA arrays split local/external.4686 score rows/30 real rows unscored,independent NumPy64/Decimal audit,72 native figures/24 triplets. Both GFX scenes/priors/windows/JPEGs;actual viewing required afterward. New88/200GiB reserves;no old evidence changed."
+}

@@ -1,0 +1,68 @@
+version: V157
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V156-local-risk-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  local-control:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+  spatial-rgb:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+local_risk_window_native: 32
+local_risk_hop_native: 16
+local_risk_RMS_rounding_DN16: 1
+local_risk_transition_noise_units: 0.0001
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 88
+external_reserve_GiB: 200
+projection_margin_GiB: 0.5
+external_quality_root: /mnt/external/demosaic/quality-20261103/V157-spatial-rgb-v1
+scope: Two fresh heads share the same 1000 V148 batches/4000 observations, local-regret1,
+  delivered-RGB MSE .25, pixel/gradient/domain weights and optimization clocks. Local-control
+  exactly reproduces V156 local-risk trace/raw/EMA/Adam and replays all1644 archived
+  outputs before reusing their storage. Spatial-rgb adds a zero-output four-scale
+  packed-grid RGB residual to the inherited spectral estimator; all shared spectral
+  parameters start identical and train jointly. Native RGB phases have no affine removal,
+  band restriction, support gate, Malvar-only subspace or amplitude bound. Only observed
+  RAW, supplied frozen V143 RGB and physical conditioning enter forward. Parent retains
+  official frozen DINOv3 features; zero new parent/DINO/noise/source/RAW calls. Output
+  units are image-wide shot/read RMS; the new path is exactly zero at zero variance,
+  retaining inherited ADC behavior despite noisy-only training. Features use 16DN
+  floor and asinh signal coordinates, not calibrated confidence. 882 supervised/118
+  zero-ADC batches, all1000 AdamW/EMA clocks. One fixed architecture; raw/EMA final
+  endpoints, no quality-selected width/scale/checkpoint. 86 prior neural files unchanged
+  plus one new module. Actual noisy-flat/coarse/DC, mixed quiet, mesh, natural and
+  ADC errors, both standing real scenes/priors/windows/JPEGs retained. Real ISO100
+  references qualitative,not exactGT,never scored. Adaptive reused cohort, not blind
+  generalization or no-hallucination guarantee. New output arrays2.211GiB per local/external
+  SSD, reserve88/200GiB plus0.5GiB projected margin. New study storage budgets preserve
+  all old evidence and old policies unchanged. No dataz access.

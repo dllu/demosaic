@@ -1,0 +1,57 @@
+{
+  "status": "pass-immutable-preparation-sources-prefix-and-documents",
+  "recorded_unix_UTC": 1793769947.3577857,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-preparation-v1.json",
+    "sha256": "37797db67754a9da24292e2aead4ed58f7c6015cab7190a6cbdbcda0ed83da6a"
+  },
+  "byte_exact_receipts": 10,
+  "source_texts": 30,
+  "unchanged_neural_hashes": 86,
+  "new_neural_modules": 1,
+  "actual_CPU_tests": 45,
+  "actual_CUDA_compatibility_calls": 84,
+  "restored_smoke_Adam_states": 58,
+  "exact_historical_control_trace_rows": 122,
+  "fixed_quality_cases": 822,
+  "fixed_endpoints": 4,
+  "document_links_checked": 438,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "9a3aed4222f314c097da373edf23edcca22c24c3675b9a0cb85d7f28f2aa1992"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "cf9bfb97fe74faac5f8e91b6522515e33799e8c3268e89ed6bb739e1aa9fd371"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "6c11941687df1d1f2b3339ae800c7381baea7b6321fabd7dfe3c584e0d6b36e3"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "02d6fd93e4cb49d6df4c3310166395b96e006a041c3512ca1fd6809fadbee795"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "18be4541dde96a016cc71cf54afac7272ad7130968736a52ccd9c13a60156b7a"
+    },
+    "docs/spatial-rgb-residual.md": {
+      "path": "/home/dllu/proj/demosaic/docs/spatial-rgb-residual.md",
+      "sha256": "36556be93cb929c97e5ca09b954bbcdba90a4f61eedb44df619c0b94727d557e"
+    },
+    "diary/2026-11-03-21-20-55-v157-spatial-rgb.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-03-21-20-55-v157-spatial-rgb.md",
+      "sha256": "d1d8fd7bea7b3d45f3b97c8d0e7bb7c29657346919a3beca2185df9fabfd367e"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v157-preparation-v1.py",
+    "sha256": "28d65b591e4b55650cd8bfc8deb5f86b107bef625f866f2cfba0460d08bc6799",
+    "text": "\"\"\"Check preparation bytes, frozen implementation, exact prefix and document links.\"\"\"\n\nimport json\nimport re\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261103/V157-spatial-rgb-v1'\nindex=repo/'docs/results/v157-spatial-rgb-preparation-v1.json'\noutput=repo/'docs/results/v157-spatial-rgb-preparation-verification-v1.json'\nassert not output.exists()\npublication=read(index)\nassert len(publication['copies'])==10 and publication['source_texts']==30\nfor copy in publication['copies'].values():\n    for role in ['original','public']:assert ref(copy[role]['path'])==copy[role]\n    assert Path(copy['original']['path']).read_bytes()==Path(copy['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan)\nguard(read(root/'postprocess-plan-v1.json'))\nbundle=read(publication['sources']['path'])\nassert ref(publication['sources']['path'])==publication['sources']\nassert len(bundle['source_texts'])==30 and len(bundle['unchanged_neural_hashes'])==86\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nfor p,h in bundle['unchanged_neural_hashes'].items():\n    assert ref(p)['sha256']==ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\n    assert ref(Path(plan['work'])/'src/demosaic'/Path(p).name)['sha256']==h\nassert ref(bundle['new_module']['path'])==bundle['new_module']\nassert ref(Path(plan['work'])/'src/demosaic/late_spatial_rgb.py')['sha256']==bundle['new_module']['sha256']\nready=read(root/'readiness-audit-v1.json')\nassert ready['finite_Adam_states_at10']==58 and ready['strict_raw_EMA_CPU_loads']==4\nassert ready['restored_control_raw_EMA_Adam_exact_V156'] and not ready['CUDA_initialized']\nassert ready['all58_parameters_have_finite_nonzero_prefix_gradients']\nassert ready['complete_rows']==ready['exact_control_trace_rows']==122\nassert ref(ready['live_prefix']['path'])==ready['live_prefix']\nrows=[json.loads(line) for line in Path(ready['live_prefix']['path']).read_text().splitlines()]\nreference=read(plan['baseline_training']['path'])['trace']\nassert len(rows)==122\nfor n,row in enumerate(rows):\n    assert row['step']==n+1 and row['batch']==reference[n]['batch']\n    assert row['arms']['local-control']==reference[n]['arms']['local-risk']\nassert read(root/'objective-tests-v1.json')['tests']==45\nparity=read(root/'parity-result-v1.json')\nassert parity['component_forward_evaluations']==84 and len(parity['rows'])==28\nassert all(r['exact_zero_spatial_extension'] and r['exact_frozen_relative_forward_and_archived'] for r in parity['rows'])\ndesign=read(root/'quality-design-v1.json')\nassert len(design['observations'])==822 and len(design['endpoints'])==4\nassert design['new_component_forwards']==3288\nfor item in design['observations']:\n    assert ref(item['arrays']['path'])==item['arrays'] and ref(item['parent']['path'])==item['parent']\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n      'docs/spatial-rgb-residual.md','diary/2026-11-03-21-20-55-v157-spatial-rgb.md']\nlinks=0\nfor name in docs:\n    p=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        target=(p.parent/link.split('#')[0]).resolve()\n        assert target==output or target.is_file(),(name,link)\n        links+=1\nsave(output,{\n    'status':'pass-immutable-preparation-sources-prefix-and-documents',\n    'recorded_unix_UTC':time.time(),'publication':ref(index),\n    'byte_exact_receipts':10,'source_texts':30,'unchanged_neural_hashes':86,'new_neural_modules':1,\n    'actual_CPU_tests':45,'actual_CUDA_compatibility_calls':84,'restored_smoke_Adam_states':58,\n    'exact_historical_control_trace_rows':122,'fixed_quality_cases':822,'fixed_endpoints':4,\n    'document_links_checked':links,'documents':{p:ref(repo/p) for p in docs},\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forward_calls':0,'new_noise_draws':0,\n    'scope':'Preparation bytes,actual completed compatibility/smoke/test receipts,frozen new/old neural sources,all supplied quality files and historical exact control prefix. Final training,quality and actual native viewing remain pending. No restoration gain or safety guarantee.'})\nprint('PASS10 byte-exact receipts,30 sources,86 unchanged neural hashes,122 exact control rows,822 quality inputs and',links,'document links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Preparation bytes,actual completed compatibility/smoke/test receipts,frozen new/old neural sources,all supplied quality files and historical exact control prefix. Final training,quality and actual native viewing remain pending. No restoration gain or safety guarantee."
+}
