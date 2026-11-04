@@ -60,6 +60,9 @@ nearly closes support. All six endpoints, 84 native figures and audits are
 complete. Noisy-only becomes the next noisy-head training control; V150 retains
 the stronger ADC photo result.
 
+[V152](docs/relative-phase-estimator.md) now tests an input-only RAW/residual
+cross-spectrum adapter against that noisy-only control. Quality is pending.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

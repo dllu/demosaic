@@ -1,0 +1,55 @@
+{
+  "status": "pass-active-preparation-and-document-publication",
+  "recorded_unix_UTC": 1793753487.5182917,
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v152-relative-phase-preparation-v1.json",
+    "sha256": "de5b8f2f9a068dde07cd119f0c7ea19837995fc5ade5ed4b0162d170bc300484"
+  },
+  "byte_exact_receipt_copies": 11,
+  "frozen_and_current_neural_hashes_matching": 86,
+  "previous_neural_hashes_unchanged": 85,
+  "source_texts_checked": 14,
+  "case_count": 822,
+  "ADC_controls": 24,
+  "planned_endpoints": 4,
+  "planned_native_primary_figures": 72,
+  "current_complete_control_trace_rows_exact_V151": 511,
+  "document_links_checked": 308,
+  "live_owners": {
+    "training-controller": {
+      "owner": {
+        "pid": 2988016,
+        "created": 1793752973.6
+      },
+      "status": "sleeping"
+    },
+    "training-worker": {
+      "owner": {
+        "pid": 2988112,
+        "created": 1793753000.49
+      },
+      "status": "running"
+    },
+    "postprocess-controller": {
+      "owner": {
+        "pid": 2988110,
+        "created": 1793752999.68
+      },
+      "status": "sleeping"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v152-preparation-v2.py",
+    "sha256": "d6e53d6ec50636d79fe7d5c28c1118141ab8f2d350ea5b489106fe56ff65c3d8",
+    "text": "\"\"\"Verify the published readiness evidence without touching active workers.\"\"\"\n\nimport json\nimport re\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo = Path('/home/dllu/proj/demosaic')\nroot = repo / '.cache/quality-20261103/V152-relative-phase-v1'\npublication = repo / 'docs/results/v152-relative-phase-preparation-v1.json'\np = read(publication)\nassert len(p['copies']) == 11\nfor binding in p['copies'].values():\n    assert ref(binding['original']['path']) == binding['original']\n    assert ref(binding['public']['path']) == binding['public']\n    assert Path(binding['original']['path']).read_bytes() == Path(binding['public']['path']).read_bytes()\nsource = read(p['sources']['path'])\nassert ref(p['sources']['path']) == p['sources']\nassert len(source['frozen_neural_hashes']) == 86\nfor path, sha in source['frozen_neural_hashes'].items():\n    assert ref(path)['sha256'] == sha\n    assert ref(repo / 'src/demosaic' / Path(path).name)['sha256'] == sha\nassert len(source['sources']) == 14\nfor binding in source['sources']:\n    assert ref(binding['path'])['sha256'] == binding['sha256']\n    assert Path(binding['path']).read_text() == binding['text']\nguard(read(root / 'plan-v1.json'))\nguard(read(root / 'postprocess-plan-v1.json'))\ndesign = read(root / 'quality-design-v1.json')\nassert len(design['observations']) == 822 and len(design['endpoints']) == 4\nadc = [c for c in design['observations'] if c.get('cohort') in ['adc-photo256', 'adc-sloped512']]\nassert len(adc) == 24 and sum(c['kind'] == 'photo' for c in adc) == 8\nassert all(c['reference_role'].startswith('Exact ') for c in adc)\nfor case in adc:\n    assert ref(case['arrays']['path']) == case['arrays']\n    assert ref(case['parent']['path']) == case['parent']\nassert read(root / 'postprocess-preflight-v1.json')['planned_primary_native_figures'] == 72\nassert read(root / 'checkpoint250-audit-v1.json')['finite_Adam_states'] == 25\nsnapshot = read(root / 'preparation-snapshot-v1.json')\nassert snapshot['completed_control_trace_rows_exact_V151'] == 397\nlive = {}\nfor name, owner in snapshot['owners_confirmed_live'].items():\n    process = psutil.Process(owner['pid'])\n    assert abs(process.create_time() - owner['created']) < .01\n    assert process.is_running() and process.status() not in ['zombie', 'dead']\n    live[name] = {'owner': owner, 'status': process.status()}\ntrace = [json.loads(s) for s in (root / 'train-trace-v1.jsonl').read_text().splitlines() if s.endswith('}')]\nold = read(Path(read(root / 'plan-v1.json')['previous']) / 'train-result-v1.json')['trace']\nfor row, previous in zip(trace, old, strict=False):\n    assert row['arms']['noisy-control'] == previous['arms']['noisy-only']\n    assert row['batch'] == previous['batch'] and row['domain'] == previous['domain']\ndocs = ['README.md', 'docs/index.md', 'docs/current-model.md', 'docs/research.md',\n        'docs/relative-phase-estimator.md', 'diary/2026-11-03-16-45-21-v152-relative-phase-estimator.md']\nlinks = 0\nfor name in docs:\n    path = repo / name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)', path.read_text()):\n        if '://' in link or link.startswith('#'):\n            continue\n        assert (path.parent / link.split('#')[0]).is_file(), (name, link)\n        links += 1\nsave(repo / 'docs/results/v152-relative-phase-preparation-verification-v1.json', {\n    'status': 'pass-active-preparation-and-document-publication',\n    'recorded_unix_UTC': time.time(), 'preparation': ref(publication),\n    'byte_exact_receipt_copies': 11, 'frozen_and_current_neural_hashes_matching': 86, 'previous_neural_hashes_unchanged': 85,\n    'source_texts_checked': 14, 'case_count': 822, 'ADC_controls': 24,\n    'planned_endpoints': 4, 'planned_native_primary_figures': 72,\n    'current_complete_control_trace_rows_exact_V151': len(trace),\n    'document_links_checked': links, 'live_owners': live,\n    'verifier': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'earlier_helper_path_error': {'source': dict(ref(repo / '.cache/verify-v152-preparation-v1.py'), text=(repo / '.cache/verify-v152-preparation-v1.py').read_text()), 'observed_error': 'FileNotFoundError for docs/relative-phase-training.md; corrected helper uses the actual relative-phase-estimator.md. Scientific sources, inputs, workers and receipts unchanged.'},\n    'scope': 'Active preparation verification only; trained quality remains pending. Historical snapshot and checkpoint250 receipt bytes are unchanged. No neural or noise calls.'})\nprint(f'PASS: 11 copies, 86 neural hashes, 14 source texts, {len(trace)} exact control rows, {links} links, 3 live owners')\n"
+  },
+  "earlier_helper_path_error": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/verify-v152-preparation-v1.py",
+      "sha256": "3046cc5ccd1b2b10583c68020f2f5250ce5cc68af0f28e5345b903f4034a9296",
+      "text": "\"\"\"Verify the published readiness evidence without touching active workers.\"\"\"\n\nimport json\nimport re\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nrepo = Path('/home/dllu/proj/demosaic')\nroot = repo / '.cache/quality-20261103/V152-relative-phase-v1'\npublication = repo / 'docs/results/v152-relative-phase-preparation-v1.json'\np = read(publication)\nassert len(p['copies']) == 11\nfor binding in p['copies'].values():\n    assert ref(binding['original']['path']) == binding['original']\n    assert ref(binding['public']['path']) == binding['public']\n    assert Path(binding['original']['path']).read_bytes() == Path(binding['public']['path']).read_bytes()\nsource = read(p['sources']['path'])\nassert ref(p['sources']['path']) == p['sources']\nassert len(source['frozen_neural_hashes']) == 86\nfor path, sha in source['frozen_neural_hashes'].items():\n    assert ref(path)['sha256'] == sha\n    assert ref(repo / 'src/demosaic' / Path(path).name)['sha256'] == sha\nassert len(source['sources']) == 14\nfor binding in source['sources']:\n    assert ref(binding['path'])['sha256'] == binding['sha256']\n    assert Path(binding['path']).read_text() == binding['text']\nguard(read(root / 'plan-v1.json'))\nguard(read(root / 'postprocess-plan-v1.json'))\ndesign = read(root / 'quality-design-v1.json')\nassert len(design['observations']) == 822 and len(design['endpoints']) == 4\nadc = [c for c in design['observations'] if c.get('cohort') in ['adc-photo256', 'adc-sloped512']]\nassert len(adc) == 24 and sum(c['kind'] == 'photo' for c in adc) == 8\nassert all(c['reference_role'].startswith('Exact ') for c in adc)\nfor case in adc:\n    assert ref(case['arrays']['path']) == case['arrays']\n    assert ref(case['parent']['path']) == case['parent']\nassert read(root / 'postprocess-preflight-v1.json')['planned_primary_native_figures'] == 72\nassert read(root / 'checkpoint250-audit-v1.json')['finite_Adam_states'] == 25\nsnapshot = read(root / 'preparation-snapshot-v1.json')\nassert snapshot['completed_control_trace_rows_exact_V151'] == 397\nlive = {}\nfor name, owner in snapshot['owners_confirmed_live'].items():\n    process = psutil.Process(owner['pid'])\n    assert abs(process.create_time() - owner['created']) < .01\n    assert process.is_running() and process.status() not in ['zombie', 'dead']\n    live[name] = {'owner': owner, 'status': process.status()}\ntrace = [json.loads(s) for s in (root / 'train-trace-v1.jsonl').read_text().splitlines() if s.endswith('}')]\nold = read(Path(read(root / 'plan-v1.json')['previous']) / 'train-result-v1.json')['trace']\nfor row, previous in zip(trace, old, strict=False):\n    assert row['arms']['noisy-control'] == previous['arms']['noisy-only']\n    assert row['batch'] == previous['batch'] and row['domain'] == previous['domain']\ndocs = ['README.md', 'docs/index.md', 'docs/current-model.md', 'docs/research.md',\n        'docs/relative-phase-training.md', 'diary/2026-11-03-16-45-21-v152-relative-phase-estimator.md']\nlinks = 0\nfor name in docs:\n    path = repo / name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)', path.read_text()):\n        if '://' in link or link.startswith('#'):\n            continue\n        assert (path.parent / link.split('#')[0]).is_file(), (name, link)\n        links += 1\nsave(repo / 'docs/results/v152-relative-phase-preparation-verification-v1.json', {\n    'status': 'pass-active-preparation-and-document-publication',\n    'recorded_unix_UTC': time.time(), 'preparation': ref(publication),\n    'byte_exact_receipt_copies': 11, 'frozen_and_current_neural_hashes_matching': 86, 'previous_neural_hashes_unchanged': 85,\n    'source_texts_checked': 14, 'case_count': 822, 'ADC_controls': 24,\n    'planned_endpoints': 4, 'planned_native_primary_figures': 72,\n    'current_complete_control_trace_rows_exact_V151': len(trace),\n    'document_links_checked': links, 'live_owners': live,\n    'verifier': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'scope': 'Active preparation verification only; trained quality remains pending. Historical snapshot and checkpoint250 receipt bytes are unchanged. No neural or noise calls.'})\nprint(f'PASS: 11 copies, 86 neural hashes, 14 source texts, {len(trace)} exact control rows, {links} links, 3 live owners')\n"
+    },
+    "observed_error": "FileNotFoundError for docs/relative-phase-training.md; corrected helper uses the actual relative-phase-estimator.md. Scientific sources, inputs, workers and receipts unchanged."
+  },
+  "scope": "Active preparation verification only; trained quality remains pending. Historical snapshot and checkpoint250 receipt bytes are unchanged. No neural or noise calls."
+}

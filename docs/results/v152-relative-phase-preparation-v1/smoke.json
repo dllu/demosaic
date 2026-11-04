@@ -1,0 +1,339 @@
+{
+  "status": "completed-matched-head-phase",
+  "phase": "smoke",
+  "steps": 10,
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/plan-v1.json",
+    "sha256": "4fb734c8d24918690310a2bd4e217d88d9289401dbbf37c8ad82c9a330146da7"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/checkpoints/smoke-step0010.pt",
+    "sha256": "e21f9c7dce8fa2162479b4e9bd80dea145b0fad0f4f0d7a8c69c038b9b938711"
+  },
+  "counts": {
+    "noisy-control": 10,
+    "relative-phase": 10
+  },
+  "updates": {
+    "noisy-control": 10,
+    "relative-phase": 10
+  },
+  "supervised_batches": {
+    "noisy-control": 7,
+    "relative-phase": 7
+  },
+  "zero_ADC_gradient_batches": {
+    "noisy-control": 3,
+    "relative-phase": 3
+  },
+  "peak_weight_evaluations": {
+    "noisy-control": 0,
+    "relative-phase": 0
+  },
+  "parameter_maximum_gradients": {
+    "noisy-control": {
+      "frequency_real_bias": 0.01324666477739811,
+      "frequency_in.weight": 4.847505806537811e-06,
+      "frequency_in.bias": 3.1463991945201997e-06,
+      "frequency_out.weight": 0.001267757499590516,
+      "local_in.weight": 9.190679467474538e-11,
+      "local_in.bias": 1.300590746211583e-10,
+      "local_middle.weight": 8.785050464865662e-11,
+      "local_middle.bias": 3.072915810697907e-10,
+      "local_wide.weight": 3.722181590726237e-11,
+      "local_wide.bias": 6.558129594935735e-10,
+      "local_out.weight": 1.406398411063492e-07,
+      "local_out.bias": 3.878102234011749e-06
+    },
+    "relative-phase": {
+      "frequency_real_bias": 0.01324666477739811,
+      "frequency_in.weight": 4.848164280701894e-06,
+      "frequency_in.bias": 3.1517915886070114e-06,
+      "frequency_out.weight": 0.001267757499590516,
+      "local_in.weight": 9.199993544761753e-11,
+      "local_in.bias": 1.3019169076144976e-10,
+      "local_middle.weight": 8.790396882618623e-11,
+      "local_middle.bias": 3.074223098309403e-10,
+      "local_wide.weight": 3.7220178328301046e-11,
+      "local_wide.bias": 6.56035115120801e-10,
+      "local_out.weight": 1.4075648380185157e-07,
+      "local_out.bias": 3.881222710333532e-06,
+      "relative_in.weight": 5.405115075518552e-07
+    }
+  },
+  "loss_floors_DN16": {
+    "noisy-control": 16,
+    "relative-phase": 16
+  },
+  "initial_outputs_exact_parent": true,
+  "trace": [
+    {
+      "step": 1,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-01.npz",
+        "sha256": "42532e49f7abff487d5ca8f93797f6c3596bee656132c67c68a61deb922856bb"
+      },
+      "domain": "mesh",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.08094210177659988,
+          "pixel": 0.018745463341474533,
+          "gradient": 0.005637601017951965,
+          "spectral": 0.00032265024492517114,
+          "gradient_norm": 0.02313876710832119,
+          "lr": 2e-05
+        },
+        "relative-phase": {
+          "loss": 0.08094210177659988,
+          "pixel": 0.018745463341474533,
+          "gradient": 0.005637601017951965,
+          "spectral": 0.00032265024492517114,
+          "gradient_norm": 0.02313876710832119,
+          "lr": 2e-05
+        }
+      }
+    },
+    {
+      "step": 2,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-02.npz",
+        "sha256": "92da4dd179c1b55b04e4f0bfdc5b7baaf410fe370627c9919dc620cd590d00a3"
+      },
+      "domain": "photo",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.07952088117599487,
+          "pixel": 0.0661054402589798,
+          "gradient": 0.041137732565402985,
+          "spectral": 0.012524028308689594,
+          "gradient_norm": 0.0025234767235815525,
+          "lr": 4e-05
+        },
+        "relative-phase": {
+          "loss": 0.07952088117599487,
+          "pixel": 0.0661054402589798,
+          "gradient": 0.041137732565402985,
+          "spectral": 0.012524028308689594,
+          "gradient_norm": 0.0025234767235815525,
+          "lr": 4e-05
+        }
+      }
+    },
+    {
+      "step": 3,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-03.npz",
+        "sha256": "d5cebc712689291cb93a9edeb626f1e90129c47b7e8358d36548ddf2da1bd96c"
+      },
+      "domain": "flat",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.0,
+          "pixel": 0.15802736580371857,
+          "gradient": 0.07299990952014923,
+          "spectral": 0.11022572219371796,
+          "gradient_norm": 0.0,
+          "lr": 6e-05
+        },
+        "relative-phase": {
+          "loss": 0.0,
+          "pixel": 0.15802736580371857,
+          "gradient": 0.07299990952014923,
+          "spectral": 0.11022572219371796,
+          "gradient_norm": 0.0,
+          "lr": 6e-05
+        }
+      }
+    },
+    {
+      "step": 4,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-04.npz",
+        "sha256": "29365de3221c9a2f9d3fc3488ba23c4405530bedcecab1f274bd1f2bd8fa0305"
+      },
+      "domain": "mixed",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.02811308018863201,
+          "pixel": 0.02523968182504177,
+          "gradient": 0.009548510424792767,
+          "spectral": 0.001945086638443172,
+          "gradient_norm": 0.004414327442646027,
+          "lr": 8e-05
+        },
+        "relative-phase": {
+          "loss": 0.02811308018863201,
+          "pixel": 0.02523968182504177,
+          "gradient": 0.009548510424792767,
+          "spectral": 0.0019450869876891375,
+          "gradient_norm": 0.004414318595081568,
+          "lr": 8e-05
+        }
+      }
+    },
+    {
+      "step": 5,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-05.npz",
+        "sha256": "458a098ad56289b80c9b77866de06686f5fc45288c4f5f82d3388e129f517a7b"
+      },
+      "domain": "weak",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.09157887101173401,
+          "pixel": 0.02115979790687561,
+          "gradient": 0.0063676778227090836,
+          "spectral": 0.0005720039480365813,
+          "gradient_norm": 0.010568421334028244,
+          "lr": 0.0001
+        },
+        "relative-phase": {
+          "loss": 0.09157887101173401,
+          "pixel": 0.02115979790687561,
+          "gradient": 0.006367677357047796,
+          "spectral": 0.000572003482375294,
+          "gradient_norm": 0.010568706318736076,
+          "lr": 0.0001
+        }
+      }
+    },
+    {
+      "step": 6,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-06.npz",
+        "sha256": "ebb061f00e4a2be5fe01c845691f31d4b14f82ea5749c18549783e4071eb8411"
+      },
+      "domain": "mesh",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.0,
+          "pixel": 0.023275773972272873,
+          "gradient": 0.006229785270988941,
+          "spectral": 0.00018878659466281533,
+          "gradient_norm": 0.0,
+          "lr": 0.00012
+        },
+        "relative-phase": {
+          "loss": 0.0,
+          "pixel": 0.023275773972272873,
+          "gradient": 0.006229785270988941,
+          "spectral": 0.00018878659466281533,
+          "gradient_norm": 0.0,
+          "lr": 0.00012
+        }
+      }
+    },
+    {
+      "step": 7,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-07.npz",
+        "sha256": "c901d72ca0524ff32f518690448ab12f392f9799315080814b6d75d73acbc885"
+      },
+      "domain": "photo",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.09107159078121185,
+          "pixel": 0.07517512887716293,
+          "gradient": 0.0476658008992672,
+          "spectral": 0.015920035541057587,
+          "gradient_norm": 0.00392064917832613,
+          "lr": 0.00014000000000000001
+        },
+        "relative-phase": {
+          "loss": 0.09107160568237305,
+          "pixel": 0.07517513632774353,
+          "gradient": 0.0476658008992672,
+          "spectral": 0.015920059755444527,
+          "gradient_norm": 0.003921549301594496,
+          "lr": 0.00014000000000000001
+        }
+      }
+    },
+    {
+      "step": 8,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-08.npz",
+        "sha256": "1e6249664c8313b2bdbac6e3181e4d4c58865bbc234566b504509465ac2ffa95"
+      },
+      "domain": "flat",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.0,
+          "pixel": 0.24426810443401337,
+          "gradient": 0.1649300456047058,
+          "spectral": 0.351896196603775,
+          "gradient_norm": 0.0,
+          "lr": 0.00016
+        },
+        "relative-phase": {
+          "loss": 0.0,
+          "pixel": 0.24426805973052979,
+          "gradient": 0.1649300456047058,
+          "spectral": 0.35189610719680786,
+          "gradient_norm": 0.0,
+          "lr": 0.00016
+        }
+      }
+    },
+    {
+      "step": 9,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-09.npz",
+        "sha256": "8070e21b0d28245d33adb52ae81e92b1f2b3adc8e23bfee5e69c8f76adb0cf12"
+      },
+      "domain": "mixed",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.027193240821361542,
+          "pixel": 0.02469553053379059,
+          "gradient": 0.008632712997496128,
+          "spectral": 0.0013581260573118925,
+          "gradient_norm": 0.005022075958549976,
+          "lr": 0.00017999999999999998
+        },
+        "relative-phase": {
+          "loss": 0.027193253859877586,
+          "pixel": 0.024695541709661484,
+          "gradient": 0.008632711134850979,
+          "spectral": 0.00135813991073519,
+          "gradient_norm": 0.005024109501391649,
+          "lr": 0.00017999999999999998
+        }
+      }
+    },
+    {
+      "step": 10,
+      "batch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/prefix/step-10.npz",
+        "sha256": "c4aa901f58ffe000142709d77e40333053e625701f675450f4bd5f90279c4f31"
+      },
+      "domain": "weak",
+      "arms": {
+        "noisy-control": {
+          "loss": 0.08233804255723953,
+          "pixel": 0.01905358023941517,
+          "gradient": 0.005740543827414513,
+          "spectral": 0.0003831795766018331,
+          "gradient_norm": 0.0103420689702034,
+          "lr": 0.0002
+        },
+        "relative-phase": {
+          "loss": 0.08233803510665894,
+          "pixel": 0.01905357837677002,
+          "gradient": 0.0057405345141887665,
+          "spectral": 0.000383185688406229,
+          "gradient_norm": 0.010341422632336617,
+          "lr": 0.0002
+        }
+      }
+    }
+  ],
+  "new_parent_DINO_forwards": 0,
+  "new_noise_draws": 0,
+  "CUDA_peak_allocated_bytes": 4451627520,
+  "owner": {
+    "pid": 2988041,
+    "created": 1793752984.21
+  },
+  "scope": "Two fresh native/relative-phase heads use the same tested noisy-only16DN objective and cached4000 observations. All12 common tensors initialize identically; extra2304 parameters start zero. Both have882 supervised batches but all1000 optimizer/EMA clocks, with zero ADC gradients and moment/weight-decay coasting. Input evidence and parameter count differ; other data/geometry,band/bound,spatial support,schedule,clipping and horizon match. No forward targets or new noise/DINO/parent calls. Smoke weights discarded."
+}

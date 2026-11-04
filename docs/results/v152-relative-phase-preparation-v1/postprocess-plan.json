@@ -1,0 +1,91 @@
+{
+  "root": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1",
+  "runner": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/complete_relative_phase_review.py",
+    "sha256": "9115055b29ce4e432fef5d0527c3789d8dd8a0d0f9d63a82cce05be2600496c7"
+  },
+  "work": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts",
+  "python": "/home/dllu/proj/demosaic/.venv/bin/python",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/plan-v1.json",
+    "sha256": "4fb734c8d24918690310a2bd4e217d88d9289401dbbf37c8ad82c9a330146da7"
+  },
+  "stages": [
+    {
+      "name": "review",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/review-source-v1.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/review-result-v1.json"
+    },
+    {
+      "name": "scores",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/score_relative_phase_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/scores-v1.json"
+    },
+    {
+      "name": "metric-audit",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/audit_relative_phase_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/independent-metrics-audit-v1.json"
+    },
+    {
+      "name": "render",
+      "argv": [
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/render_relative_phase_trial.py",
+        "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1"
+      ],
+      "result": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/figures-v1.json"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/plan-v1.json",
+      "sha256": "4fb734c8d24918690310a2bd4e217d88d9289401dbbf37c8ad82c9a330146da7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/review-plan-v1.json",
+      "sha256": "456ad2c3a57a72e38d04dd94c9b173b62fef0838e8f4120eeb17b61805263431"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/quality-design-v1.json",
+      "sha256": "64501b2743ec6b5f147dc75cdc4e55b7efbd71dc33cc76ee5d75148a1a306ef8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/review-source-v1.py",
+      "sha256": "b6b2b067f06f0b20b334042ebbcf7efc573831349d28f25b2414a84b27b82e5b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/collaborative-detail-v1/transfer-v1.py",
+      "sha256": "4e133f6492db7cfa3f0758410ccb1f91a50eecae18ff32018232ad373dc6beba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-photo-supplement-v1/operator-v2.py",
+      "sha256": "a8cd5a95ad45f4ebc6693666c63a911077c5c21642c695441ae996e6a0d2cefc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/collaborative-detail-v1/audit-transfer-v1.py",
+      "sha256": "58c6c7c4353da38209ec830f2f739848dd4a455f7cfc4b99ea2fc1e6355a20f6"
+    }
+  ],
+  "frozen_files": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/audit_relative_phase_trial.py": "4bd0d91308a1ffcbf68e50950718dadf4657b7be0f3c3436443fefdfdf826f9f",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/complete_relative_phase_review.py": "9115055b29ce4e432fef5d0527c3789d8dd8a0d0f9d63a82cce05be2600496c7",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/render_relative_phase_trial.py": "613c080bd8df68536dcd61cd1c1164b52768ebf0fdaf8e974e50300623473611",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/review_v146_window_transfer.py": "baf8302f75ede9733e033d86fdeba217edae5b6ca35305cecad0605d001f6285",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/report_checkpoint_pilot.py": "71cb12f089687b4669cc372c1451bcafb256eb8a82e583a3f60f065cfe965157",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/score_relative_phase_trial.py": "2ddcb91efea5e8b966e3d2be5eba9e4f4883463566f63be45a7d92c360ae0ed6",
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/postprocess-v1/scripts/report_late_spectral_mixed_quiet.py": "5e885b2d832d41845e219d4ca2286ef530dccf39dc4e8aa904b5ad8ada03a375"
+  },
+  "new_component_forwards": 3288,
+  "new_parent_DINO_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Four fixed final paired endpoints; retained798 plus24 ADC controls, independent array reductions and72 native figures with independent pixel checks. Actual native viewing remains required. Observed polling-time budget caps intervals at5s so suspended controllers do not charge a whole user pause."
+}

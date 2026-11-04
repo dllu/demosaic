@@ -1,0 +1,23 @@
+{
+  "status": "pass-both-finite-states-and-exact-control-at250",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1/checkpoints/train-step0250.pt",
+    "sha256": "8e62cc02befdec6bf2cf1c37ae91a05844b5c08197585c67963f458b2b8a1dd8"
+  },
+  "control_checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1/checkpoints/train-step0250.pt",
+    "sha256": "8932cbe74ed5f189152efddb89311eeaa11b2d1fbef2cf57bbf7eafd75d95a23"
+  },
+  "step": 250,
+  "finite_Adam_states": 25,
+  "control_raw_EMA_Adam_exact": true,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v152-checkpoint250-v1.py",
+    "sha256": "9bf6c3ca7468c4b5a3085030961eb1ef0cbf24f6c0936fe62f48ebe631184214",
+    "text": "\"\"\"CPU-only check of both finite states and the matched native control.\"\"\"\n\nfrom pathlib import Path\n\nimport torch\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V152-relative-phase-v1')\nprevious = Path(read(root / 'plan-v1.json')['previous'])\npath = root / 'checkpoints/train-step0250.pt'\noldpath = previous / 'checkpoints/train-step0250.pt'\nstate = torch.load(path, map_location='cpu', weights_only=True)\nold = torch.load(oldpath, map_location='cpu', weights_only=True)\nassert state['step'] == old['step'] == 250\nfinite = 0\nfor arm, tensors in [('noisy-control', 12), ('relative-phase', 13)]:\n    for key in ['models', 'emas']:\n        assert len(state[key][arm]) == tensors\n        assert all(torch.isfinite(value).all() for value in state[key][arm].values())\n    assert len(state['optimizers'][arm]['state']) == tensors\n    for values in state['optimizers'][arm]['state'].values():\n        assert int(values['step']) == 250\n        assert all(not torch.is_tensor(v) or torch.isfinite(v).all() for v in values.values())\n        finite += 1\nfor key in ['models', 'emas']:\n    current, archived = state[key]['noisy-control'], old[key]['noisy-only']\n    assert current.keys() == archived.keys()\n    assert all(torch.equal(value, archived[name]) for name, value in current.items())\ncurrent, archived = state['optimizers']['noisy-control'], old['optimizers']['noisy-only']\nassert current['param_groups'] == archived['param_groups']\nassert current['state'].keys() == archived['state'].keys()\nfor number, values in current['state'].items():\n    assert all(torch.equal(value, archived['state'][number][name])\n               if torch.is_tensor(value) else value == archived['state'][number][name]\n               for name, value in values.items())\nassert finite == 25 and not torch.cuda.is_initialized()\nsave(root / 'checkpoint250-audit-v1.json', {\n    'status': 'pass-both-finite-states-and-exact-control-at250',\n    'checkpoint': ref(path), 'control_checkpoint': ref(oldpath), 'step': 250,\n    'finite_Adam_states': finite, 'control_raw_EMA_Adam_exact': True,\n    'source': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'new_forwards': 0, 'new_noise_draws': 0, 'CUDA_initialized': False,\n    'scope': 'Both fresh states/EMAs and all25 optimizer states finite. Native raw/EMA/Adam exactly matches V151 noisy-only at250; quality unmeasured.'})\nprint('PASS: 25 finite Adam states; native raw/EMA/Adam exact V151 at250; no CUDA/forward')\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "CUDA_initialized": false,
+  "scope": "Both fresh states/EMAs and all25 optimizer states finite. Native raw/EMA/Adam exactly matches V151 noisy-only at250; quality unmeasured."
+}

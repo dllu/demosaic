@@ -1,0 +1,64 @@
+version: V152
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V151-noisy-objective-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  noisy-control:
+    class: LateSpectralMatrixDetail
+    parameters: 31409
+    parameter_tensors: 12
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+  relative-phase:
+    class: LateSpectralRelativeDetail
+    parameters: 33713
+    parameter_tensors: 13
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 96
+external_reserve_GiB: 208
+scope: >-
+  Two fresh native matrix heads adopt all 1000 V148 batches / 4000 old
+  observations and parents. Both use the tested V151 noisy-only objective:
+  16 DN floor, zero ADC-only supervised gradients, no clean-peak weighting,
+  882 supervised batches / 3528 observations, and all 1000 AdamW/EMA clocks.
+  Noisy-control must reproduce the V151 noisy-only trace, states and all
+  1644 raw/EMA control predictions exactly. Relative-phase adds eight
+  same-site real/imaginary observed-times-conjugate-innovation coordinates,
+  normalized by the geometric mean of their total power plus frame-noise
+  proxies. A zero-initialized circular3x3 8-to-32 convolution adds 2304
+  parameters before the existing frequency hidden SiLU. All twelve common
+  tensors initialize identically; the extra tensor starts zero and embeds a
+  trained native head exactly. This changes input evidence and parameter
+  count, not uniquely one causal mechanism. Existing 85 neural files stay
+  byte-identical; one new research module is added. Physical inputs,
+  FFT/band/bound, spatial support, data/geometry/domain weights, initialization
+  of common tensors, LR/schedule/clipping, EMA and 1k horizon otherwise match.
+  No target or reference enters forward. Cross-spectrum coordinates are not
+  calibrated coherence, detection probability or a flat-safety guarantee.
+  Ten discarded CUDA updates per arm include genuine8+2 state restoration
+  and explicit zero-ADC gradients; production restarts fresh. All four fixed
+  final raw/EMA endpoints use the same 822 quality cases, 3288 head calls,
+  72 native figures and 24 repeated-cell triplets. Actual blank/quiet error,
+  noisy flats, ADC photos/slopes and both protected real scenes/priors/windows/
+  JPEGs remain included. Independent ISO100/AHD/JPEG references are qualitative,
+  not exact GT. Adaptive reused cohort, not fresh independent validation.
+  No new parents/DINO, stochastic noise, source/original lookup, RAW decode or
+  dataz access. All validation/protected captures/siblings stay out of training.
