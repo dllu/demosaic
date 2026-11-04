@@ -1,0 +1,124 @@
+{
+  "status": "all12-recorded-owners-terminal-plus-unretained-failed-child",
+  "recorded_unix_UTC": 1793760189.3420506,
+  "recorded_owner_count": 12,
+  "failed_preclaim_reviewer_count": 1,
+  "unretained_failed_child_owner_count": 1,
+  "owners": [
+    {
+      "stage": "training-controller",
+      "owner": {
+        "pid": 3061852,
+        "created": 1793757753.67
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "parity",
+      "owner": {
+        "pid": 3061861,
+        "created": 1793757754.01
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "smoke",
+      "owner": {
+        "pid": 3061910,
+        "created": 1793757762.29
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "train",
+      "owner": {
+        "pid": 3061970,
+        "created": 1793757784.58
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "postprocess-controller",
+      "owner": {
+        "pid": 3067608,
+        "created": 1793759475.61
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 3067617,
+        "created": 1793759475.93
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "training-audit",
+      "owner": {
+        "pid": 3115432,
+        "created": 1793759850.35
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 3115521,
+        "created": 1793759868.63
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 3116111,
+        "created": 1793759994.94
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 3117374,
+        "created": 1793760145.24
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "failed-preclaim-review-controller",
+      "owner": {
+        "pid": 3062275,
+        "created": 1793757908.48
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "reused-v1-training-state-audit",
+      "owner": {
+        "pid": 3066822,
+        "created": 1793759304.1
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "live_matching_root_argv": [],
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/status-v1.json",
+    "sha256": "e73129d15f0297b5a5a5367bdaac3990cf8367cae97b97a7fd94c053a289de5e"
+  },
+  "postprocess_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/postprocess-status-v2.json",
+    "sha256": "ccaa5c4c0d8edceb5c7a5b719b9b5c564c5e94b99ddd93bc9b0893bc140a3748"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v153-execution-v1.py",
+    "sha256": "ee6e56677725fcc60c2be5374200289274b48005a9bd8b44bce8009c135fcd43",
+    "text": "\"\"\"Record actual terminal states after every owned primary stage completes.\"\"\"\n\nimport os\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1')\ntraining = read(root / 'status-v1.json')\npost = read(root / 'postprocess-status-v2.json')\nassert training['status'] == 'completed-matched-training-awaiting-fixed-quality-review'\nassert post['status'] == 'completed-audited-paired-arrays-awaiting-human-native-viewing'\nassert set(post['completed']) == {'review', 'training-audit', 'scores', 'metric-audit', 'render'}\nowners = [('training-controller', training['owner'])]\nowners += [(name, read(root / f'{name}-result-v1.json')['owner'])\n           for name in ['parity', 'smoke', 'train']]\nowners += [('postprocess-controller', post['owner'])]\nowners += [(stage, binding['owner']) for stage, binding in post['completed'].items()]\nfailed = read(root / 'postprocess-status-v1.json')\nassert failed['status'] == 'failed-preserved-no-automatic-retry'\nowners += [('failed-preclaim-review-controller', failed['owner'])]\nowners += [('reused-v1-training-state-audit', failed['completed']['training-state-audit']['owner'])]\nassert len(owners) == 12\nrecords = []\nfor stage, owner in owners:\n    try:\n        process = psutil.Process(owner['pid'])\n        if abs(process.create_time() - owner['created']) >= .01:\n            status = 'PID-reused-original-owner-terminal'\n        else:\n            status = process.status()\n            assert status in ['zombie', 'dead'], (stage, owner, status)\n    except psutil.NoSuchProcess:\n        status = 'absent'\n    records.append({'stage': stage, 'owner': owner, 'terminal_state': status})\nexcluded = {os.getpid()} | {p.pid for p in psutil.Process().parents()}\nmatching = []\nfor process in psutil.process_iter(['pid', 'cmdline', 'status']):\n    if process.pid in excluded or process.info['status'] in ['zombie', 'dead']:\n        continue\n    tokens = process.info['cmdline'] or []\n    if any(t == str(root) or t.startswith(str(root) + '/')\n           or t == str(root.relative_to(root.parents[2])) for t in tokens):\n        matching.append(process.info)\nassert not matching, matching\nsave(root / 'execution-completion-v1.json', {\n    'status': 'all12-recorded-owners-terminal-plus-unretained-failed-child', 'recorded_unix_UTC': time.time(),\n    'recorded_owner_count': 12, 'failed_preclaim_reviewer_count': 1, 'unretained_failed_child_owner_count': 1, 'owners': records, 'live_matching_root_argv': matching,\n    'training_completion': ref(root / 'status-v1.json'),\n    'postprocess_completion': ref(root / 'postprocess-status-v2.json'),\n    'verifier': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'preclaim_failure': ref(root / 'postprocess-preclaim-failure-v1.json'),\n    'scope': 'Exact PID/create-time terminal checks for12 retained owners:training controller/3 phases,failed v1 postprocess controller/its state-audit worker,and corrected v2 controller/5 postprocess workers. One additional failed reviewer child owner was not retained when v1 overwrote transient status; its nonzero return and preclaim traceback are preserved,so its exact PID/create-time is not claimed. No endpoint arrays or CUDA/head calls before that failure; first endpoint collection runs only under v2. Training was not restarted.'})\nprint('PASS: all12 retained owners terminal; failed preclaim child PID unretained; no live root argv matches')\n"
+  },
+  "preclaim_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V153-delivered-objective-v1/postprocess-preclaim-failure-v1.json",
+    "sha256": "4a1fa5a43cb77928ec4e506702c3e70f6b340bdbeaedf3069c8cdbdd41f9857b"
+  },
+  "scope": "Exact PID/create-time terminal checks for12 retained owners:training controller/3 phases,failed v1 postprocess controller/its state-audit worker,and corrected v2 controller/5 postprocess workers. One additional failed reviewer child owner was not retained when v1 overwrote transient status; its nonzero return and preclaim traceback are preserved,so its exact PID/create-time is not claimed. No endpoint arrays or CUDA/head calls before that failure; first endpoint collection runs only under v2. Training was not restarted."
+}

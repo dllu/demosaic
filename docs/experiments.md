@@ -1,11 +1,12 @@
 # Experiment index
 
-The [active V153 loss comparison](delivered-spectral-objective.md) tests whether
-spectral supervision on delivered output improves the proposal/support tradeoff.
-Three identical fresh relative-phase heads share cached data and 1k schedules;
-only pre-support CFA versus delivered mosaic/all-RGB spectral error differs.
-Independent loss/adjoint tests, exact forward compatibility and genuine8+2 CUDA
-checks pass. The full six-endpoint quality review remains pending.
+The [completed V153 loss comparison](delivered-spectral-objective.md) gains
+6.04–7.97% mesh response over its matched pre-support control, with worse actual
+blank errors, natural-band attenuation and ADC photo errors. Quiet results are
+mixed; mosaic coarse slope error improves with a DC tradeoff. All three1k heads,
+six fixed endpoints/822 cases/84 native views and independent audits are complete.
+No convincing new real crossings or organic texture appear. The new output loss
+is a stronger response prototype, with quieter/ADC strengths retained elsewhere.
 
 The [completed V152 proposal/support crossover](support-crossover.md) evaluates
 six fixed compositions on 822 cases, with 84 native figures and independent

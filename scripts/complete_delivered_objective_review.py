@@ -45,10 +45,22 @@ def prepare(root, revision=1):
         },
         {
             "name": "review",
-            "argv": [str(root / "review-source-v1.py"), "worker", str(root)],
+            "argv": [
+                str(root / f"review-source-v{revision}.py"),
+                "worker",
+                str(root),
+                "--revision",
+                str(revision),
+            ],
             "result": str(root / "review-result-v1.json"),
         },
     ]
+    if revision > 1:
+        assert (
+            read(root / "independent-training-state-audit-v1.json")["finite_Adam_states_at1000"]
+            == 39
+        )
+        stages = stages[1:]
     stages += [
         {"name": name, "argv": [str(work / script), str(root)], "result": str(root / result)}
         for name, script, result in (
@@ -70,11 +82,20 @@ def prepare(root, revision=1):
         ref(root / p)
         for p in (
             "plan-v1.json",
-            "review-plan-v1.json",
+            f"review-plan-v{revision}.json",
             "quality-design-v1.json",
-            "review-source-v1.py",
+            f"review-source-v{revision}.py",
         )
     ]
+    if revision > 1:
+        inputs += [
+            ref(root / name)
+            for name in (
+                "independent-training-state-audit-v1.json",
+                "postprocess-preclaim-failure-v1.json",
+                f"review-checkpoint-readiness-v{revision}.json",
+            )
+        ]
     inputs += [
         ref(root.parent / p)
         for p in (
@@ -114,6 +135,7 @@ def controller(root, revision=1):
         "completed": {},
     }
     child = owner = None
+    status_path = root / f"postprocess-status-v{revision}.json"
     try:
         observed, last = 0.0, time.monotonic()
         while True:
@@ -123,7 +145,7 @@ def controller(root, revision=1):
             assert status["status"] != "failed-preserved-no-automatic-retry", status
             assert live(status["owner"])
             save(
-                root / "postprocess-status-v1.json",
+                status_path,
                 {**state, "status": "waiting-for-fixed-matched-training"},
             )
             time.sleep(2)
@@ -143,7 +165,7 @@ def controller(root, revision=1):
             guard(training)
             while psutil.virtual_memory().available < 52 * 2**30:
                 save(
-                    root / "postprocess-status-v1.json",
+                    status_path,
                     {**state, "status": "waiting-for-headroom", "stage": stage["name"]},
                 )
                 time.sleep(2)
@@ -170,7 +192,7 @@ def controller(root, revision=1):
                 )
                 owner = {"pid": child.pid, "created": psutil.Process(child.pid).create_time()}
                 save(
-                    root / "postprocess-status-v1.json",
+                    status_path,
                     {
                         **state,
                         "status": "running-fixed-stage",
@@ -194,7 +216,7 @@ def controller(root, revision=1):
                 "owner_exited": True,
             }
         save(
-            root / "postprocess-status-v1.json",
+            status_path,
             {**state, "status": "completed-audited-paired-arrays-awaiting-human-native-viewing"},
         )
     except BaseException as error:
@@ -202,8 +224,14 @@ def controller(root, revision=1):
             os.killpg(child.pid, signal.SIGTERM)
             child.wait(timeout=30)
         save(
-            root / "postprocess-status-v1.json",
-            {**state, "status": "failed-preserved-no-automatic-retry", "error": repr(error)},
+            status_path,
+            {
+                **state,
+                "status": "failed-preserved-no-automatic-retry",
+                "error": repr(error),
+                "failed_child": owner,
+                "child_returncode": child.returncode if child else None,
+            },
         )
         raise
 

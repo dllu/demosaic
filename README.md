@@ -72,9 +72,12 @@ most added quiet-region error to the relative proposal in fixed-map comparisons.
 Full support raises mesh response to 2.56–2.60% of GT, but increases actual blank
 and quiet errors; real crossings remain missing. All six compositions, 822 cases,
 84 native figures and independent audits are complete. The
-[active V153 comparison](docs/delivered-spectral-objective.md) now trains identical
-heads with spectral loss before support, on delivered CFA error, or on all
-delivered RGB error. Quality review remains pending.
+[completed V153 trial](docs/delivered-spectral-objective.md) moves spectral loss
+onto delivered output: mesh response rises another6.04–7.97% over control,
+with worse actual blank errors, natural-band attenuation and ADC photo results.
+All six endpoints/822 cases/84 native figures and independent audits are complete.
+Real crossings remain missing; retain its narrow response gain alongside the
+quieter controls and V150's stronger ADC restoration.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -92,16 +95,17 @@ exact empty field, then WB/matrix/+3EV. Pixels are not resized.
 
 ![Native noisy, detail amplitude and exact GT with shared eightfold contrast](docs/images/supported-wave-amplitude-v1/mesh-seed2026112302-present-iso6400-prior-RGGB-retained-contrast8-triplet.png)
 
-Noisy → V143 + V152 relative-phase raw → **exact constructed GT**, two fixed mesh
-crops. Mean response rises 8.74% over V143 (1.41% over V151 control), but reaches
-only 2.39% of GT and crossings remain missing. Exact quiet-region error worsens.
-Native 160×160 cells, ROI `[176,176,160,160]` in 512px RGGB contexts, shot .00128/read
-6.5536e-6, common exposure 8 and contrast 1; no crop-pixel resizing.
-[All endpoints, checkpoint/source hashes and display metadata](docs/relative-phase-estimator.md).
+Noisy → V143 + V153 delivered-mosaic raw → **exact constructed GT**, two fixed
+mesh crops. Mean response rises17.40% over V143 (7.97% over matched control),
+but reaches only2.59% of GT and crossings remain missing. Actual blank and
+quiet-region errors worsen. Native160×160 cells, ROI `[176,176,160,160]` in512px
+RGGB contexts, shot .00128/read6.5536e-6, common exposure8 and contrast1;
+no crop-pixel resizing.
+[All endpoints, checkpoint/source hashes and display metadata](docs/delivered-spectral-objective.md).
 
-![Mesh2302: noisy, V152 relative-phase restoration, exact constructed GT](docs/images/v152-relative-phase-v1/comparison-00-relative-phase-raw-step1000-triplet.png)
+![Mesh2302: noisy, V153 delivered-mosaic restoration, exact constructed GT](docs/images/v153-delivered-objective-v1/comparison-00-delivered-mosaic-raw-step1000-triplet.png)
 
-![Mesh2309: noisy, V152 relative-phase restoration, exact constructed GT](docs/images/v152-relative-phase-v1/comparison-02-relative-phase-raw-step1000-triplet.png)
+![Mesh2309: noisy, V153 delivered-mosaic restoration, exact constructed GT](docs/images/v153-delivered-objective-v1/comparison-02-delivered-mosaic-raw-step1000-triplet.png)
 
 V150's stronger ADC-only result remains useful: mean photo RMS falls 3.06% on
 two held-out sources/four CFAs. Native
@@ -109,7 +113,7 @@ two held-out sources/four CFAs. Native
 [fur](docs/images/v150-objective-floor-v1/comparison-43-floor16-matrix-EMA-step1000-triplet.png)
 triplets retain exact constructed GT; [noise, licensing and display details](docs/objective-floor-training.md).
 
-Noisy organic texture remains weak: [current feather/grass/bark views](docs/relative-phase-estimator.md)
+Noisy organic texture remains weak: [current feather/grass/bark views](docs/delivered-spectral-objective.md)
 and the [earlier native photo gallery](docs/spatial-photo-supplement.md).
 
 Standing real GFX100S scene: DSCF3879 ISO6400 → **V120 Small, historical Haar

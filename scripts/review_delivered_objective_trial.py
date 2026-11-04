@@ -10,14 +10,14 @@ from train_delivered_objective_trial import classes
 from train_directional_bank_trial import guard, read, ref, save
 
 
-def prepare(root):
+def prepare(root, revision=1):
     plan = read(root / "plan-v1.json")
     guard(plan)
-    target = root / "review-source-v1.py"
+    target = root / f"review-source-v{revision}.py"
     assert not target.exists()
     shutil.copyfile(__file__, target)
     save(
-        root / "review-plan-v1.json",
+        root / f"review-plan-v{revision}.json",
         {
             "training_plan": ref(root / "plan-v1.json"),
             "design": ref(root / "quality-design-v1.json"),
@@ -27,7 +27,7 @@ def prepare(root):
     )
 
 
-def worker(root):
+def worker(root, revision=1, validate_only=False):
     import json
 
     import numpy as np
@@ -36,7 +36,7 @@ def worker(root):
 
     from demosaic.prediction_archive import fingerprint
 
-    path = root / "review-plan-v1.json"
+    path = root / f"review-plan-v{revision}.json"
     review_plan = read(path)
     assert ref(__file__) == review_plan["runner"]
     assert ref(review_plan["training_plan"]["path"]) == review_plan["training_plan"]
@@ -69,7 +69,7 @@ def worker(root):
             len(state["optimizers"][arm]["state"])
             == len(state["models"][arm])
             == len(state["emas"][arm])
-            == 12
+            == state["arms"][arm]["parameter_tensors"]
         )
         assert all(float(v["step"]) == 1000 for v in state["optimizers"][arm]["state"].values())
         assert all(
@@ -81,6 +81,27 @@ def worker(root):
         cache["parent_before"] == cache["parent_after"]
         and cache["DINO_before"] == cache["DINO_after"]
     )
+    if validate_only:
+        for arm in state["arms"]:
+            module = classes()[arm](**state["module_config"])
+            module.load_state_dict(state["models"][arm], strict=True)
+            assert sum(p.numel() for p in module.parameters()) == state["arms"][arm]["parameters"]
+        assert not torch.cuda.is_initialized()
+        save(
+            root / f"review-checkpoint-readiness-v{revision}.json",
+            {
+                "status": "pass-actual-final-checkpoint-before-review-claim",
+                "review_plan": ref(path),
+                "checkpoint": result["checkpoint"],
+                "parameter_tensors_per_arm": {
+                    arm: len(state["models"][arm]) for arm in state["arms"]
+                },
+                "new_neural_forwards": 0,
+                "CUDA_initialized": False,
+                "scope": "Validates all actual final model/EMA/Adam tensor counts and strict CPU model loading before any endpoint claim or CUDA setup.",
+            },
+        )
+        return
     (root / "review.claim").open("x").close()
     os.nice(10)
     os.sched_setaffinity(0, sorted(os.sched_getaffinity(0))[2:4])
@@ -227,7 +248,11 @@ def worker(root):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("prepare", "worker"))
+    parser.add_argument("mode", choices=("prepare", "validate", "worker"))
     parser.add_argument("root", type=Path)
+    parser.add_argument("--revision", type=int, default=1)
     args = parser.parse_args()
-    (prepare if args.mode == "prepare" else worker)(args.root.resolve())
+    if args.mode == "prepare":
+        prepare(args.root.resolve(), args.revision)
+    else:
+        worker(args.root.resolve(), args.revision, validate_only=args.mode == "validate")
