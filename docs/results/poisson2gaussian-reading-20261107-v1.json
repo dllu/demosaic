@@ -1,0 +1,103 @@
+{
+  "status": "primary-reading-and-independent-algebra-check-only",
+  "recorded_unix_UTC": 1794052226.7740512,
+  "title": "Poisson2Gaussian: Noise Gaussianization to Enhance Image Denoising",
+  "primary_url": "https://arxiv.org/html/2606.23098v1",
+  "version_date": "2026-06-22",
+  "cached_primary_HTML": {
+    "path": "/home/dllu/proj/demosaic/.cache/research-20261107/arxiv-2606.23098v1.html",
+    "sha256": "7a5d8fccb436d189d963351f8bc69c10a014d9cc829206db60c70b280c82209f"
+  },
+  "sections_read": [
+    "3.1-3.3",
+    "4.1-4.4",
+    "5"
+  ],
+  "paper_summary": "P2G alternates residual-flow likelihood fitting with denoiser updates. It evaluates packed SIDD RAW and microscopy denoising;this is not our joint16-bit/GFX task.",
+  "our_inference": "The left-invertible augmented tuple in3.2 does not alone prove that the collapsed denoiser input in3.3 is left-invertible. Retain the original observation explicitly in future representations. This logical gap does not negate the reported empirical results.",
+  "independent_counterexample": {
+    "estimate": "f(y)=y/2",
+    "flow": "g(r)=-r",
+    "scale": "std(y-f(y))>0",
+    "tuple_inverse": "y=f(y)+scale*g_inverse(g((y-f(y))/scale))",
+    "collapsed": "f(y)+scale*g((y-f(y))/scale)=0",
+    "fixtures": [
+      {
+        "observed": [
+          2.0,
+          4.0,
+          2.0,
+          4.0
+        ],
+        "estimate": [
+          1.0,
+          2.0,
+          1.0,
+          2.0
+        ],
+        "scale": 0.5,
+        "transformed_residual": [
+          -2.0,
+          -4.0,
+          -2.0,
+          -4.0
+        ],
+        "tuple_inverse": [
+          2.0,
+          4.0,
+          2.0,
+          4.0
+        ],
+        "collapsed_input": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "observed": [
+          4.0,
+          8.0,
+          4.0,
+          8.0
+        ],
+        "estimate": [
+          2.0,
+          4.0,
+          2.0,
+          4.0
+        ],
+        "scale": 1.0,
+        "transformed_residual": [
+          -2.0,
+          -4.0,
+          -2.0,
+          -4.0
+        ],
+        "tuple_inverse": [
+          4.0,
+          8.0,
+          4.0,
+          8.0
+        ],
+        "collapsed_input": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "V160_changed": false,
+  "external_code_or_weights_adopted": false,
+  "paper_reproduction": false,
+  "new_neural_forwards": 0,
+  "new_sensor_noise_draws": 0,
+  "recorder": {
+    "path": "/home/dllu/proj/demosaic/.cache/record-p2g-reading-20261107-v1.py",
+    "sha256": "9a27fc5c102d078ef8b3d2fc9f0ad513d8a9a1c4d98b20f103461b042f50ec4b",
+    "text": "\"\"\"Record primary reading and an independent information-preservation check.\"\"\"\nimport time\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');source=repo/'.cache/research-20261107/arxiv-2606.23098v1.html'\nassert source.is_file()\nvalues=[]\nfor observed in [np.array([2.,4.,2.,4.]),np.array([4.,8.,4.,8.])]:\n    estimate=observed/2\n    scale=np.std(observed-estimate)\n    normalized=(observed-estimate)/scale\n    transformed=-normalized  # This flow is bijective,with inverse itself.\n    restored_observation=estimate-scale*transformed\n    collapsed=estimate+scale*transformed\n    np.testing.assert_array_equal(restored_observation,observed)\n    np.testing.assert_array_equal(collapsed,np.zeros_like(observed))\n    values.append({'observed':observed.tolist(),'estimate':estimate.tolist(),'scale':float(scale),\n        'transformed_residual':transformed.tolist(),'tuple_inverse':restored_observation.tolist(),\n        'collapsed_input':collapsed.tolist()})\noutput=repo/'docs/results/poisson2gaussian-reading-20261107-v1.json';assert not output.exists()\nsave(output,{'status':'primary-reading-and-independent-algebra-check-only','recorded_unix_UTC':time.time(),\n    'title':'Poisson2Gaussian: Noise Gaussianization to Enhance Image Denoising',\n    'primary_url':'https://arxiv.org/html/2606.23098v1','version_date':'2026-06-22',\n    'cached_primary_HTML':ref(source),'sections_read':['3.1-3.3','4.1-4.4','5'],\n    'paper_summary':'P2G alternates residual-flow likelihood fitting with denoiser updates. It evaluates packed SIDD RAW and microscopy denoising;this is not our joint16-bit/GFX task.',\n    'our_inference':'The left-invertible augmented tuple in3.2 does not alone prove that the collapsed denoiser input in3.3 is left-invertible. Retain the original observation explicitly in future representations. This logical gap does not negate the reported empirical results.',\n    'independent_counterexample':{'estimate':'f(y)=y/2','flow':'g(r)=-r','scale':'std(y-f(y))>0',\n        'tuple_inverse':'y=f(y)+scale*g_inverse(g((y-f(y))/scale))',\n        'collapsed':'f(y)+scale*g((y-f(y))/scale)=0','fixtures':values},\n    'V160_changed':False,'external_code_or_weights_adopted':False,'paper_reproduction':False,\n    'new_neural_forwards':0,'new_sensor_noise_draws':0,\n    'recorder':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint('Recorded primary reading and two exact algebra fixtures;no neural calls or recipe changes')\n"
+  }
+}
