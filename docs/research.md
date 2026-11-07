@@ -1,5 +1,12 @@
 # Current method research
 
+The [V172 local-noise experiment](local-noise-matching.md) tests whether removing
+image-wide statistics from the new residual's feature/output units reduces
+V171's quiet-color regression. Local Bayer-cell mean/noise coordinates preserve
+all 39 input channels; the network, initialization, cache, loss and schedule
+stay fixed. The frozen parent and matching network still use spatial context.
+The run is active; no held-out gain or noisy-flat guarantee is claimed.
+
 The [completed V171 matching residual experiment](learned-matching-residual.md)
 trains a fresh 2.09M network above frozen V169/DINO on the existing free-image and
 synthetic pairs. EMA full-flat RMS falls 1.21–1.52% and coarse RMS 1.73% versus V169,

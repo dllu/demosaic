@@ -1,5 +1,10 @@
 # Documentation guide
 
+The [V172 local-noise matching experiment](local-noise-matching.md) is training
+the same V171 network and loss with local feature and output units. Initial
+tensors, data, recipe and training functions match; 126 CPU checks and native
+backward admission pass. Quality is pending and no gain is claimed.
+
 The [completed V171 learned matching residual](learned-matching-residual.md)
 lowers EMA native 512 full-flat RMS 1.21–1.52% and coarse RMS 1.73% versus V169;
 all 48 inputs improve in both measures. Mesh response rises 1.26% to 3.885% of GT.
