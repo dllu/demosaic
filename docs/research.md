@@ -313,6 +313,28 @@ This weakens a cutoff-only explanation for missing fundamentals. The analysis
 is a nominal mapping, not a learned transfer measurement, and the real
 references remain qualitative rather than exact GT. V165 was unchanged.
 
+The subsequent [retained training-coverage audit](results/mesh-training-coverage-20261107-v1.json)
+reconstructs both clean sensor fingerprints for all 341 cached mesh batches
+(682 pairs). Among 614 noisy pairs, 202 of 1,228 carrier families have center
+periods inside the real reference's dominant 7.12–9.40 pixel interval, but only
+13 pairs have both families there. The generator spans nominal 6–32 pixel
+periods; projective geometry broadens the observed local period range. The
+audit accounts for its Jacobian at five locations rather than treating the
+nominal recipe as the final frequency. These are analytic carrier estimates,
+not measured peaks after masking, interpolation and area reduction.
+
+The noisy pairs' actual clean sensor difference has median RMS 2.48 DN16
+(10th–90th percentiles 0.374–15.66); 264/614 are below 2 DN16 RMS and 47/614
+even have peak differences below 2 DN16. Median full-context signal/input-noise
+RMS ratio is 0.00932. That energy proxy does not measure matched-filter
+detectability or restored RGB error. The 68 ADC-only pairs are reported
+separately. This suggests testing stronger coverage of fine crossed carriers
+across an explicit contrast/noise ladder, with matched empty controls. Simply
+lowering contrast would make many already weak examples weaker. This is a
+data hypothesis, not an established explanation or quality gain; V167 remains
+fixed. No new training pixels, sensor draws, neural forwards or original media
+reads were used for this audit.
+
 ## Native frequencies from packed phases
 
 [DFENet](https://arxiv.org/html/2503.15800v1), with a November2026 journal issue
