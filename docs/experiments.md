@@ -1,12 +1,16 @@
 # Experiment index
 
-The [active V159 DC-transition trial](regional-dc-transition.md) changes only
-the hinge transition1e-4→1 on identical hybrids. Smaller positive regrets get
-quadratic pressure; sufficiently large regrets retain the same derivative.
-Weight1,base losses,data,optimizer/clipping/EMA remain fixed. 60 tests and exact
-V158 compatibility/restored control checks pass,with40 immutable matching live
-rows. Both1k heads/four endpoints/822 cases/72 native figures are fixed;four
-retained V156/V157 columns keep detail/coarse tradeoffs visible. Quality pending.
+The [completed V159 DC-transition trial](regional-dc-transition.md) changes only
+the hinge transition1e-4→1, weight1 fixed, on identical hybrids. Clipped batches
+fall726→101/882. Native512 full RMS improves0.27–0.39% and block32 0.17–0.19%
+versus V143; all48 coarse inputs improve at both endpoints against V143/V158/V156.
+Quiet total RMS instead rises0.18–0.48% versus V143 despite lower spatial error,
+with larger color bias and weaker mesh response than V158. Fine real crossings
+remain missing. Both1k heads/four endpoints/822 cases/72 actual native views and
+independent audits are complete. 60 tests,90 finite final Adam states,four strict
+loads and all1,644 exact V158 control replays pass. All10 original owners terminal,
+5,364 scientific head calls,no restart. Keep the modest coarse/quiet compromise
+beside V158's quiet strength,V156 detail and V157 larger coarse gain.
 
 The [completed V158 regional-DC trial](regional-dc-regret.md) changes only the
 training loss on two identical spatial hybrids. Quiet RMS falls 9.38–13.10%

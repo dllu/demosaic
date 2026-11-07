@@ -1,10 +1,13 @@
 # Documentation guide
 
-The [active V159 transition trial](regional-dc-transition.md) tests gentler
-regional-DC gradients near the parent while retaining weight1. 60 tests,
-28 exact CUDA contexts,genuine8+2 restoration and90 finite smoke Adam states
-pass. Both1k heads/full review are running/queued; quality remains unmeasured.
-Native comparisons retain V156 detail and V157 coarse controls.
+The [completed V159 transition trial](regional-dc-transition.md) recovers modest
+coarse-flat correction: native512 full RMS −0.27–0.39%, block32 −0.17–0.19%
+versus V143, with all 48 coarse inputs improving at both endpoints. Quiet total
+RMS instead rises 0.18–0.48%, while spatial error falls and color bias rises;
+mesh remains weaker than V143/V156. All four endpoints/822 cases/72 actual native
+views and audits are complete, retaining four V156/V157 comparator columns.
+60 tests, 90 finite final Adam states and exact V158 control states/replays pass.
+Preserve this coarse/quiet compromise beside V158 quiet accuracy and V156 detail.
 
 The separate [coupled sensor-noise primitive](coupled-counterfactual-noise.md)
 prepares matched synthetic targets for a possible later response loss. Sixteen

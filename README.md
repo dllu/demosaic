@@ -21,16 +21,18 @@ GT**. The `detail` mode is the default inside explicitly enabled `--phase-harmon
 ordinary inference keeps the stage off. Partial orientations, support seams,
 boundary spill, nonperiodic texture and slow correction remain unresolved.
 
-The completed [V158 regional-DC comparison](docs/regional-dc-regret.md) removes
-V157's large quiet-region color-bias regression. EMA quiet RMS is **0.09–0.12%
-below V143 on all 32 inputs**, and 0.13–0.17% lower on average than V156 EMA.
-The cost is losing nearly all of V157's standalone-flat gain; mesh response
-still falls below V143/V156. Raw retains individual quiet regressions. Both 1k
-heads, four endpoints, 822 cases, 72 native views and independent audits are done.
-Fine real cab crossings and broad mottle remain unresolved.
+The completed [V159 smoother-DC comparison](docs/regional-dc-transition.md)
+lowers native512 noisy-flat full RMS **0.27–0.39%** and block32 error
+**0.17–0.19%** versus V143; all 48 coarse errors improve at both endpoints.
+Quiet RMS instead rises **0.18–0.48%**, and mesh response weakens.
+[V158](docs/regional-dc-regret.md) keeps the better quiet result: EMA mean RMS
+0.09–0.12% below V143, with all 32 inputs improving, but little coarse correction.
+Both studies complete two 1k heads, four endpoints, 822 cases, 72 native views
+and independent audits. Fine real cab crossings and broad mottle remain unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V159 smoother DC](docs/regional-dc-transition.md) | All 48 native512 coarse errors improve versus V143/V158/V156; much less quiet damage than V157 | Quiet RMS remains above V143/V158; mesh weaker than V156 |
 | [V158 regional DC](docs/regional-dc-regret.md) | EMA quiet RMS improves on all 32 inputs versus V143; V157's extra casts recede | Near-parent correction; coarse gains shrink and mesh remains weaker than V156 |
 | [V156 local regret](docs/local-excess-risk.md) | Quiet RMS 0.30–0.63% below matched MSE; all 32 inputs improve at both endpoints | Small regressions versus V143 remain; real crossings missing |
 | [V157 spatial RGB](docs/spatial-rgb-residual.md) | All 48 native512 noisy-flat inputs improve in full and coarse error versus V143/V156 | Quiet color bias rises; response falls below V143 |
@@ -43,12 +45,12 @@ The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
 V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
 [Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
-Keep V158's quiet supervision, V156's stronger learned detail and V157's direct
-spatial/coarse capacity as useful controls; no model yet combines their strengths.
+Keep V158 quiet accuracy, V159's coarse/quiet compromise, V156 learned detail
+and V157 direct spatial/coarse capacity visible; no model combines their strengths.
 
-The [active V159 trial](docs/regional-dc-transition.md) widens the DC loss's
-quadratic transition while keeping its weight fixed. 60 tests and compatibility/
-restoration checks pass; both fixed heads are training. Quality is pending.
+The separate [coupled sensor-noise primitive](docs/coupled-counterfactual-noise.md)
+prepares a possible paired-response objective; its physical checks pass, with
+no paired training or quality gain claimed yet.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -78,17 +80,22 @@ no crop-pixel resizing.
 
 ![Mesh2309: noisy, V153 delivered-mosaic restoration, exact constructed GT](docs/images/v153-delivered-objective-v1/comparison-02-delivered-mosaic-raw-step1000-triplet.png)
 
-V158's quiet-region comparison: noisy → **regional-DC EMA** → exact constructed
-GT, ISO6400 and ISO12800 priors. The extra V157 color casts recede; parent
-mottle remains. Native 160×160 cells in 512px RGGB contexts,
-ROI `[80,176,160,160]`, shared exposure 8 and 40× camera-linear contrast about
-exact target RGB means `[.001500000013,.006000000052,.002666666871]`.
-Shot/read variance is .00128/6.5536e-6 or .00256/2.62144e-5; crop pixels are
-never resized. [All methods, checkpoint/source hashes and display metadata](docs/regional-dc-regret.md).
+V159's modest coarse-flat gain: noisy → **smooth-DC EMA** → exact constructed
+GT, ISO6400 and ISO12800 priors. Broad colored mottle remains; quiet neighbors
+still regress. Native 160×160 cells in 512px RGGB contexts,
+ROI `[176,176,160,160]`, shared exposure 4 and 40× camera-linear contrast about
+exact target means. Shot/read variance is .00128/6.5536e-6 or .00256/2.62144e-5;
+crop pixels are never resized.
+[All methods, checkpoint/source hashes and display metadata](docs/regional-dc-transition.md).
 
-![ISO6400 quiet: noisy, V158 regional-DC EMA, exact constructed GT](docs/images/v158-regional-dc-v1/comparison-26-dc-regret-EMA-step1000-triplet.png)
+![ISO6400 flat: noisy, V159 smooth-DC EMA, exact constructed GT](docs/images/v159-regional-dc-transition-v1/comparison-19-smooth-dc-EMA-step1000-triplet.png)
 
-![ISO12800 quiet: noisy, V158 regional-DC EMA, exact constructed GT](docs/images/v158-regional-dc-v1/comparison-28-dc-regret-EMA-step1000-triplet.png)
+![ISO12800 flat: noisy, V159 smooth-DC EMA, exact constructed GT](docs/images/v159-regional-dc-transition-v1/comparison-20-smooth-dc-EMA-step1000-triplet.png)
+
+V158's stronger quiet result remains visible:
+[ISO6400](docs/images/v158-regional-dc-v1/comparison-26-dc-regret-EMA-step1000-triplet.png)
+and [ISO12800](docs/images/v158-regional-dc-v1/comparison-28-dc-regret-EMA-step1000-triplet.png),
+with [full conditioning/display details](docs/regional-dc-regret.md).
 
 V157's stronger standalone-flat result remains visible:
 [ISO6400](docs/images/v157-spatial-rgb-v1/comparison-19-spatial-rgb-EMA-step1000-triplet.png)
