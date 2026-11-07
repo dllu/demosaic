@@ -59,6 +59,10 @@ V161 passes 139 CPU checks, CUDA parity, restored smoke and final 91-state
 validation. Its control exactly reproduces all V160 trace/model/Adam states
 and 1,644 actual predictions. The fixed context-removal diagnostic is complete.
 
+[V162](docs/flat-target-anchor.md) is testing additional absolute RGB supervision
+inside locally flat clean targets, at fixed V161 architecture/data/base losses.
+Its 156 CPU checks, CUDA arithmetic/parity and restored smoke pass; quality is pending.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. V160 uses the 90,782-photo training cache and reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

@@ -1,5 +1,12 @@
 # Experiment index
 
+[V162 target-flat anchor](flat-target-anchor.md) is running two fresh identical
+V161 harmonic heads. Only an extra absolute-target RGB loss on detached local
+flat masks changes. 156 CPU checks, 28 archived CUDA contexts, ten independent
+CUDA loss/gradient checks and genuine restored smoke pass. All four endpoints,
+822 cases, six retained native columns and both standing GFX scenes are fixed;
+quality remains pending.
+
 [Completed V161 frequency context](harmonic-frequency-context.md): same V160
 paired data/loss, plus 6,720 parameters. Mesh response rises 20.56–21.57% to
 4.83–5.24% of GT; native512 coarse RMS falls 0.20–0.30% versus paired control on

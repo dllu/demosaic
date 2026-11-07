@@ -1,5 +1,9 @@
 # Documentation guide
 
+[V162 clean-target flat-region anchoring](flat-target-anchor.md) is training two
+matched V161 heads with anchor weight 0 versus 0.25. Its 156 CPU checks, CUDA
+arithmetic/parity and restored smoke pass; final quality remains pending.
+
 The completed [V161 frequency-context trial](harmonic-frequency-context.md)
 raises learned mesh response 20.56–21.57% over exact V160 paired control, reaching
 4.83–5.24% of constructed GT. All 48 native512 coarse errors improve, while quiet

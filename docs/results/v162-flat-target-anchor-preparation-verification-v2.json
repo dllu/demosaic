@@ -1,0 +1,57 @@
+{
+  "status": "pass-immutable-readiness-and-fixed-comparators",
+  "recorded_unix_UTC": 1794058837.258131,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-preparation-v1.json",
+    "sha256": "1a67a0b5e770aace19313ae482275d3ba31a3f5cbc12b446bb04694ddd91a8d8"
+  },
+  "byte_exact_receipts": 11,
+  "source_texts": 46,
+  "unchanged_neural_hashes": 88,
+  "new_neural_modules": 0,
+  "actual_CPU_tests": 156,
+  "restored_smoke_finite_Adam_states": 92,
+  "exact_V161_control_prefix_rows": 40,
+  "retained_prediction_arrays_checked": 4932,
+  "planned_total_scientific_head_calls": 5364,
+  "additional_leaf_output_CUDA_backwards": 10,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "2c305fc6e87a50f5e0391099aa181d836f2afacece083d5ec30b40c9c15d9130"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "ad69448cc1c5179ee5407143250f9011a470625bdf16545da4515e5d939ec63e"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "94be28d41843326dd577e922beef2f62e7e9efc117a7f0eedf3a018e370fd5d3"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "546e381d791bf9382aaba7558159fd7cf87591ea0a6c27b7ad0629f699e0f4e7"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "3ecb117d908858589f968ead74cfd1d1dd2dda7b92a2a5a4ab2dd617a6932bf0"
+    },
+    "docs/flat-target-anchor.md": {
+      "path": "/home/dllu/proj/demosaic/docs/flat-target-anchor.md",
+      "sha256": "004d8a53fdde26343a51939774aad2d973f2e16d5a8a795dbb63a77e886abc8d"
+    },
+    "diary/2026-11-07-05-38-31-v162-flat-target-anchor.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-05-38-31-v162-flat-target-anchor.md",
+      "sha256": "8c802861b96d4d6a1310282d0927d35fdf997113a693a9cfbba9323a6492e90a"
+    }
+  },
+  "document_links_checked": 482,
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v162-preparation-v2.py",
+    "sha256": "d58dadc1b3935ecb21e3e74370a1727402480907c0a3405c11d2f4de5d2cd46b",
+    "text": "\"\"\"Verify immutable architecture readiness,frozen sources and native comparators.\"\"\"\nimport re\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V162-flat-target-anchor-v1'\nindex=repo/'docs/results/v162-flat-target-anchor-preparation-v1.json'\noutput=repo/'docs/results/v162-flat-target-anchor-preparation-verification-v2.json';assert not output.exists()\np=read(index);assert len(p['copies'])==11 and p['source_texts']==46\nfor item in p['copies'].values():\n    assert ref(item['original']['path'])==item['original'] and ref(item['public']['path'])==item['public']\n    assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan);post=read(root/'postprocess-plan-v1.json');guard(post)\nbundle=read(p['sources']['path']);assert ref(p['sources']['path'])==p['sources']\nassert len(bundle['source_texts'])==46 and len(bundle['unchanged_neural_hashes'])==88\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nfor path,h in bundle['unchanged_neural_hashes'].items():\n    assert ref(path)['sha256']==ref(repo/'src/demosaic'/Path(path).name)['sha256']==h\nassert len(list((Path(plan['work'])/'src/demosaic').glob('*.py')))==88\nready=read(root/'readiness-audit-v1.json');assert ready['finite_Adam_states_at10']==92\nassert ready['all92_parameter_tensors_have_finite_nonzero_prefix_gradients']\nassert ready['exact_V161_control_prefix_rows']==40\nimport json\nrows=[json.loads(s) for s in Path(ready['training_prefix']['path']).read_text().splitlines()]\nold=read(plan['baseline_training']['path'])['trace'];assert len(rows)==40\nfor row,before in zip(rows,old[:40],strict=True):\n    assert row['step']==before['step'] and row['batch']==before['batch'] and row['domain']==before['domain']\n    expected=before['arms']['harmonic-context'];assert {k:row['arms']['harmonic-control'][k] for k in expected}==expected\ndesign=read(root/'quality-design-v1.json');assert len(design['observations'])==822\nassert len(read(root/'parity-result-v1.json')['CUDA_anchor_loss_checks'])==10\narrays=0\nfor binding in post['retained_native_collections'].values():\n    assert ref(binding['path'])==binding\n    c=read(binding['path']);assert c['module_before']==c['module_after'] and c['RNG_unchanged']\n    for row,case in zip(c['observations'],design['observations'],strict=True):\n        assert row['id']==case['id'] and row['parent']==case['parent']\n        assert ref(row['prediction']['path'])==row['prediction'];arrays+=1\nassert arrays==4932\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n    'docs/flat-target-anchor.md','diary/2026-11-07-05-38-31-v162-flat-target-anchor.md']\nlinks=0\nfor name in docs:\n    path=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',path.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (path.parent/link.split('#')[0]).resolve().is_file(),(path,link);links+=1\nsave(output,{'status':'pass-immutable-readiness-and-fixed-comparators','recorded_unix_UTC':time.time(),\n    'publication':ref(index),'byte_exact_receipts':11,'source_texts':46,'unchanged_neural_hashes':88,\n    'new_neural_modules':0,'actual_CPU_tests':156,'restored_smoke_finite_Adam_states':92,\n    'exact_V161_control_prefix_rows':40,'retained_prediction_arrays_checked':arrays,\n    'planned_total_scientific_head_calls':5364,'additional_leaf_output_CUDA_backwards':10,\n    'documents':{p:ref(repo/p) for p in docs},'document_links_checked':links,\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forward_calls':0,'new_noise_draws':0,'scope':'Actual readiness and original live snapshot only;trained quality and actual final native viewing remain pending.'})\nprint('PASS11 receipts,46 source texts,88 unchanged neural modules,40 exact control rows,4932 retained arrays and',links,'links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Actual readiness and original live snapshot only;trained quality and actual final native viewing remain pending."
+}
