@@ -21,36 +21,26 @@ GT**. The `detail` mode is the default inside explicitly enabled `--phase-harmon
 ordinary inference keeps the stage off. Partial orientations, support seams,
 boundary spill, nonperiodic texture and slow correction remain unresolved.
 
-[Completed V153](docs/delivered-spectral-objective.md) moves spectral loss onto
-delivered output: mesh response rises6.04–7.97% over matched control to2.45–2.59%
-of GT, with worse actual blank errors, natural response and ADC photos.
-[V151](docs/noisy-objective-training.md)/[V152](docs/relative-phase-estimator.md)
-retain quieter controls, while [V150](docs/objective-floor-training.md) gives
-about3.06% lower ADC-photo RMS. Real fine cab crossings remain missing.
-[Architecture and loss comparisons](docs/current-model.md#quality-and-remaining-work)
-retain the complete measured strengths, failures and independent evidence.
+The completed [V157 spatial-RGB comparison](docs/spatial-rgb-residual.md) lowers
+native512 noisy-flat RMS **0.94–1.10%** and coarse error **0.90–0.98%** versus
+V143. It also raises quiet-neighbor RMS **10.26–14.98%**, adds visible color casts
+and weakens mesh response. Fine real cab crossings and broad mottle remain.
+Both 1k heads, four endpoints, 822 cases, 72 native views and independent audits
+are complete. Retain the spatial path's coarse-error strength; V156 remains the
+quieter learned-detail training control.
 
-[Completed V154](docs/robust-spectral-objective.md) gives weak spectral errors
-more relative pressure. Native512 noisy-flat RMS falls **0.45–0.50%** versus
-V143, with slightly lower actual blank errors. Broad mottle remains, mesh and
-natural detail weaken, and quiet regions beside structure get **1.51–2.27% worse**.
-All six endpoints,96 native figures and independent audits are complete.
+| Research implementation | Measured strength | Remaining cost |
+| --- | --- | --- |
+| [V156 local regret](docs/local-excess-risk.md) | Quiet RMS 0.30–0.63% below matched MSE; all 32 inputs improve at both endpoints | Small regressions versus V143 remain; real crossings missing |
+| [V157 spatial RGB](docs/spatial-rgb-residual.md) | All 48 native512 noisy-flat inputs improve in full and coarse error versus V143/V156 | Quiet color bias rises; response falls below V143 |
+| [V153 delivered loss](docs/delivered-spectral-objective.md) | Mesh response reaches 2.45–2.59% of exact GT | Worse blank/natural/ADC behavior; fine crossings missing |
+| [V150 objective floor](docs/objective-floor-training.md) | ADC-photo RMS about 3.06% lower on two held-out sources/four CFAs | Noisy fine-detail and quiet/coarse tradeoffs |
 
-The [matched V155 parent comparison](docs/matched-parent-comparison.md) finds
-V120's coarse noisy-flat error1.59–2.36% lower than V143, but total noisy-flat
-RMS2.31–5.11% higher and worse ADC slopes. Neither restores the fine cab fence.
-All1,644 fresh paired outputs,64 native figures and independent audits are complete.
-
-[Completed V156](docs/local-excess-risk.md) lowers mean quiet-region RMS **0.30–0.63%**
-versus matched MSE; all 32 mixed controls improve at both endpoints. It retains
-5.59–10.52% more mesh response than V143, with less response than MSE. Broad mottle
-and missing cab crossings remain. All four endpoints,72 native figures and
-independent audits are complete; local regret becomes the next learned-head
-training control, with stronger mesh/standalone-flat/ADC comparators retained.
-
-The [active V157 trial](docs/spatial-rgb-residual.md) adds a direct multiscale RGB
-path to address coarse parent mottle and missing-color detail. CPU/CUDA readiness
-passes; both fixed heads are training and restoration quality remains unmeasured.
+[V154 robust supervision](docs/robust-spectral-objective.md) retains a smaller
+0.45–0.50% standalone-flat gain with less mixed-quiet damage than V157.
+The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
+V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
+[Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
@@ -80,22 +70,27 @@ no crop-pixel resizing.
 
 ![Mesh2309: noisy, V153 delivered-mosaic restoration, exact constructed GT](docs/images/v153-delivered-objective-v1/comparison-02-delivered-mosaic-raw-step1000-triplet.png)
 
-V156's small quiet-neighbor gain: noisy → **local-risk EMA** → exact constructed
-GT, ISO6400 and ISO12800 priors. Broad colored mottle remains; these crops do not
-show a clean-field solution. Native 160×160 cells in 512px RGGB contexts,
-ROI `[80,176,160,160]`, common exposure 8 and 40× camera-linear contrast about the
-exact quiet target. Shot/read variance parameters are .00128/6.5536e-6 and
-.00256/2.62144e-5; crop pixels are never resized.
-[All methods, checkpoint/source hashes and display metadata](docs/local-excess-risk.md).
+V157's standalone-flat gain: noisy → **spatial-RGB EMA** → exact constructed
+GT, ISO6400 and ISO12800 priors. Broad colored mottle remains; the gain is small
+and quiet regions beside strong structure get worse. Native 160×160 cells in
+512px RGGB contexts, ROI `[176,176,160,160]`, shared exposure 4 and 40×
+camera-linear contrast about the exact target means. Shot/read variance is
+.00128/6.5536e-6 or .00256/2.62144e-5; crop pixels are never resized.
+[All methods, checkpoint/source hashes and display metadata](docs/spatial-rgb-residual.md).
 
-![ISO6400 quiet: noisy, V156 local-risk EMA, exact constructed GT](docs/images/v156-local-risk-v1/comparison-26-local-risk-EMA-step1000-triplet.png)
+![ISO6400 flat: noisy, V157 spatial-RGB EMA, exact constructed GT](docs/images/v157-spatial-rgb-v1/comparison-19-spatial-rgb-EMA-step1000-triplet.png)
 
-![ISO12800 quiet: noisy, V156 local-risk EMA, exact constructed GT](docs/images/v156-local-risk-v1/comparison-28-local-risk-EMA-step1000-triplet.png)
+![ISO12800 flat: noisy, V157 spatial-RGB EMA, exact constructed GT](docs/images/v157-spatial-rgb-v1/comparison-20-spatial-rgb-EMA-step1000-triplet.png)
 
-V154 retains the stronger standalone-flat gain:
-[ISO6400](docs/images/v154-robust-spectral-v1/flat-iso6400-charb-0p01-EMA-step1000-triplet.png)
+The V157 quiet-region failures are explicit:
+[ISO6400](docs/images/v157-spatial-rgb-v1/comparison-26-spatial-rgb-EMA-step1000-triplet.png)
+and [ISO12800](docs/images/v157-spatial-rgb-v1/comparison-28-spatial-rgb-EMA-step1000-triplet.png).
+The quieter V156 [ISO6400](docs/images/v156-local-risk-v1/comparison-26-local-risk-EMA-step1000-triplet.png)
+and [ISO12800](docs/images/v156-local-risk-v1/comparison-28-local-risk-EMA-step1000-triplet.png)
+triplets remain available with [full conditioning/display details](docs/local-excess-risk.md).
+Earlier V154 [ISO6400](docs/images/v154-robust-spectral-v1/flat-iso6400-charb-0p01-EMA-step1000-triplet.png)
 and [ISO12800](docs/images/v154-robust-spectral-v1/flat-iso12800-charb-0p01-EMA-step1000-triplet.png)
-native triplets use exact constructed GT; [full conditioning/display details](docs/robust-spectral-objective.md).
+flat triplets retain their [complete report](docs/robust-spectral-objective.md).
 
 V150's stronger ADC-only result remains useful: mean photo RMS falls 3.06% on
 two held-out sources/four CFAs. Native

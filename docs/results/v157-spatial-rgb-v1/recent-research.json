@@ -1,0 +1,34 @@
+{
+  "recorded_unix_UTC": 1793770188.3362317,
+  "status": "primary-paper-method-review-no-external-assets-adopted",
+  "sources": [
+    {
+      "url": "https://arxiv.org/html/2605.23531v1",
+      "title": "PixIE: Prompted Pixel-Space Low-Light Image Enhancement",
+      "version_date": "2026-05-22",
+      "sections": [
+        "3 Methodology",
+        "3.1 Cross-Scale Denoising"
+      ],
+      "facts": "Only denoised features propagate across scales; DINO-modulated outputs feed final fusion. One frozen multidepth encoder call supplies spatial prompts. Neighborhood embeddings precede prompting.",
+      "scope": "Low-light RGB enhancement, not our independently measured sensor-linear 16-bit JDD.",
+      "local_inference": "A future feature-fusion comparison should distinguish the measurement-driven denoising stream from semantic modulation and preserve native coordinates. Current V157 is an independent RGB-residual architecture, not this paper."
+    },
+    {
+      "url": "https://arxiv.org/html/2608.09995v1",
+      "title": "Structural Guidance for Unified Joint Demosaicing and Denoising",
+      "version_date": "2026-08-07",
+      "sections": [
+        "Online Structural Prior Adaptation and Fusion",
+        "B Online Structural Reasoning Branch"
+      ],
+      "facts": "Final fusion convolution is zero initialized and trainable. The nominal pseudo-RGB input stem remains zero in the reported state because the detached encoder prevents its gradients. Adapter/fusion sit outside the frozen encoder call.",
+      "scope": "Paper uses resized224 structural input and decoded-sRGB Gaussian observations; these do not validate native sensor-linear physical-noise quality.",
+      "local_inference": "Any new trainable input adapter must demonstrate an actual gradient path; freezing encoder parameters and enclosing input-dependent computation in no_grad differ. Feature adapters can train outside the frozen call."
+    }
+  ],
+  "changed_running_recipe": false,
+  "new_forward_calls": 0,
+  "new_data_weights_or_code_downloads": 0,
+  "scope": "Method review during the original fixed V157 run. No retuning or quality inference from external reported results."
+}

@@ -1,0 +1,146 @@
+{
+  "status": "all14-recorded-owners-terminal",
+  "recorded_unix_UTC": 1794042329.2865844,
+  "recorded_owner_count": 14,
+  "owners": [
+    {
+      "stage": "training-controller",
+      "owner": {
+        "pid": 3262714,
+        "created": 1793769543.05
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "parity",
+      "owner": {
+        "pid": 3262716,
+        "created": 1793769543.38
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "smoke",
+      "owner": {
+        "pid": 3262758,
+        "created": 1793769553.66
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "train",
+      "owner": {
+        "pid": 3262982,
+        "created": 1793769573.95
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "initial-postprocess-controller",
+      "owner": {
+        "pid": 3263463,
+        "created": 1793769642.96
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "initial-checkpoint-validation",
+      "owner": {
+        "pid": 3329572,
+        "created": 1793770793.86
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "initial-review",
+      "owner": {
+        "pid": 3329583,
+        "created": 1793770795.45
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "paused-recovery-controller",
+      "owner": {
+        "pid": 3336023,
+        "created": 1793771277.34
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "paused-recovery-review",
+      "owner": {
+        "pid": 3336035,
+        "created": 1793771277.95
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "final-postprocess-controller",
+      "owner": {
+        "pid": 3286477,
+        "created": 1794041879.22
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 3286480,
+        "created": 1794041879.78
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 3286570,
+        "created": 1794041960.15
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 3287384,
+        "created": 1794042071.79
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 3287624,
+        "created": 1794042181.48
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "live_matching_root_argv": [],
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/status-v1.json",
+    "sha256": "96b17ea361a9470f4da321d3aa25a1117249f28f34a6f92c39a65e36b04c8f0e"
+  },
+  "postprocess_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-status-v3.json",
+    "sha256": "7bf1d15341aa3538efaec39753d6bfc1d32c8b0b48483d5f2d309cddbd345d87"
+  },
+  "preserved_resource_stop": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-status-v1.json",
+    "sha256": "3e5d51f15421c322bb4a92ded7d0f10ed9131f692fa10f6dab5db8dfff9995e4"
+  },
+  "preserved_paused_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/postprocess-status-v2.json",
+    "sha256": "643d4763f2f93926ca5d411f2cf1f022431ce43c567b4bb518c4264c80d340bc"
+  },
+  "post_pause_resume": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/post-pause-resume-v1.json",
+    "sha256": "19a03455a2a498fcc89246b50259ab850b655fada013db72630ea44b4cf2cf4d"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v157-execution-v1.py",
+    "sha256": "3182f009c331b2562f0546e97819e0694a69fb2e58d5d20c1593acf66522167f",
+    "text": "\"\"\"Check all V157 owners,including the disk stop and interrupted paused review.\"\"\"\n\nimport os\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import read, ref, save\n\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1')\ntraining = read(root / 'status-v1.json')\ninitial = read(root / 'postprocess-status-v1.json')\ninterrupted = read(root / 'postprocess-status-v2.json')\npost = read(root / 'postprocess-status-v3.json')\nassert training['status'] == 'completed-matched-training-awaiting-fixed-quality-review'\nassert post['status'] == 'completed-four-endpoint-audits-and-rendering-awaiting-actual-native-viewing'\nassert set(post['completed']) == {'review','scores','metric-audit','render'}\nassert initial['status']=='failed-review-preserve-evidence-no-restart'\nassert initial['completed']['review']['returncode']==1\nassert all(v['returncode']==0 for v in post['completed'].values())\nowners = [('training-controller', training['owner'])]\nowners += [(name, read(root / f'{name}-result-v1.json')['owner']) for name in ['parity','smoke','train']]\nowners += [('initial-postprocess-controller',initial['owner'])]\nowners += [('initial-'+stage,item['owner']) for stage,item in initial['completed'].items()]\nowners += [('paused-recovery-controller',interrupted['owner']),('paused-recovery-review',interrupted['child_owner'])]\nowners += [('final-postprocess-controller', post['owner'])]\nowners += [(stage, item['owner']) for stage, item in post['completed'].items()]\nassert len(owners) == 14\nrecords = []\nfor stage, owner in owners:\n    try:\n        p = psutil.Process(owner['pid'])\n        terminal = 'PID-reused-original-terminal' if abs(p.create_time()-owner['created']) >= .01 else p.status()\n        assert terminal in ['PID-reused-original-terminal','dead','zombie'], (stage,owner,terminal)\n    except psutil.NoSuchProcess:\n        terminal = 'absent'\n    records.append({'stage':stage,'owner':owner,'terminal_state':terminal})\nexcluded = {os.getpid()} | {p.pid for p in psutil.Process().parents()}\nmatching = []\nfor p in psutil.process_iter(['pid','cmdline','status']):\n    if p.pid in excluded or p.info['status'] in ['zombie','dead']:\n        continue\n    if any(t == str(root) or t.startswith(str(root)+'/') for t in p.info['cmdline'] or []):\n        matching.append(p.info)\nassert not matching, matching\nsave(root / 'execution-completion-v1.json', {\n    'status':'all14-recorded-owners-terminal','recorded_unix_UTC':time.time(),\n    'recorded_owner_count':14,'owners':records,'live_matching_root_argv':matching,\n    'training_completion':ref(root / 'status-v1.json'),\n    'postprocess_completion':ref(root / 'postprocess-status-v3.json'),\n    'preserved_resource_stop':ref(root/'postprocess-status-v1.json'),\n    'preserved_paused_status':ref(root/'postprocess-status-v2.json'),\n    'post_pause_resume':ref(root/'post-pause-resume-v1.json'),\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Exact PID/create-time terminal checks for all14 recorded owners. Training completed unchanged;initial review hit a disk guard,first recovery was explicitly user-paused and its handles later absent. Final revision resumed only EMA then scored/audited/rendered with zero returns. Unknown exit status of vanished paused processes is not inferred. All histories preserved;no training restart. Root scan excludes verifier/ancestors.',\n})\nprint('PASS: all14 recorded owners terminal;disk-stop and pause histories preserved')\n"
+  },
+  "scope": "Exact PID/create-time terminal checks for all14 recorded owners. Training completed unchanged;initial review hit a disk guard,first recovery was explicitly user-paused and its handles later absent. Final revision resumed only EMA then scored/audited/rendered with zero returns. Unknown exit status of vanished paused processes is not inferred. All histories preserved;no training restart. Root scan excludes verifier/ancestors."
+}

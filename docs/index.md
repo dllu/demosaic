@@ -1,9 +1,11 @@
 # Documentation guide
 
-The [active V157 hybrid trial](spatial-rgb-residual.md) adds a direct multiscale
-RGB path beside the spectral estimator, keeping V156 local-regret supervision.
-45 tests, 28 exact CUDA compatibility contexts and genuine 8+2 restoration pass.
-Both fixed heads are training; final quality and native viewing remain pending.
+The [completed V157 hybrid trial](spatial-rgb-residual.md) lowers native512 noisy-flat
+full RMS 0.94–1.10% and coarse error 0.90–0.98% versus V143, improving all 48 inputs
+against V143/V156 at both endpoints. Quiet total RMS rises 10.26–14.98%, with visible
+color casts and weaker mesh response. Both 1k heads/four endpoints/822 cases/72 native
+views and independent audits are complete. Retain its direct spatial/coarse capacity
+beside the quieter V156 detail control; real cab crossings and broad mottle remain.
 
 The [completed V156 local-regret trial](local-excess-risk.md) lowers actual quiet
 RMS0.30–0.63% versus matched MSE, improving all 32 inputs at both raw/EMA endpoints.

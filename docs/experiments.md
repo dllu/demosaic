@@ -1,11 +1,14 @@
 # Experiment index
 
-The [active V157 spatial-RGB trial](spatial-rgb-residual.md) tests a four-scale
-direct RGB residual with DC/missing-color capacity against exact V156 control.
-Loss/data/schedule stay fixed; the hybrid has more parameters and compute.
-45 CPU tests, 84 CUDA compatibility calls and genuine 8+2 restoration pass.
-Both 1k heads are training; four endpoints/822 cases/72 native figures are queued.
-No restoration gain has been measured yet.
+The [completed V157 spatial-RGB trial](spatial-rgb-residual.md) adds direct coarse/DC
+capacity with the same V156 loss/data/schedule and greater model capacity/compute.
+Native512 flat full/coarse error improves on all 48 inputs at both endpoints, with
+full RMS 0.94–1.10% below V143. Mixed quiet RMS instead rises 10.26–14.98%; native
+views reveal stronger color casts, weaker response and missing fine cab crossings.
+All four endpoints/822 cases/72 actual native views and independent audits are done.
+45 tests and exact V156 control trace/raw/EMA/Adam/1,644 replays pass. A disk stop
+and explicit user pause/resume preserve all evidence; training never restarted.
+6,140 actual head evaluations include 748 repeated partial-review calls.
 
 The [completed V156 local-regret trial](local-excess-risk.md) reduces actual
 mixed quiet RMS0.30–0.63% versus exact MSE control on every input in both
