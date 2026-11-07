@@ -1,0 +1,71 @@
+{
+  "recorded_unix_UTC": 1794073508.3203626,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/plan-v1.json",
+      "sha256": "528ea2b9004396d3e4d6ea771b210bfbe00529bb766e6e1758be097cf880da45"
+    },
+    "owner": {
+      "pid": 3894352,
+      "created": 1794073344.44
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/parity-result-v1.json",
+        "sha256": "4b514df332633f3f0ded35ef9a4eee0932d741ac86c96ff8754466f915605007"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/smoke-result-v1.json",
+        "sha256": "ed68a3d56667f37cdf9076b53b1dbb887de60fe86f81d16b25115c4d771a66e3"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3894473,
+      "created": 1794073372.54
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3894589,
+      "created": 1794073419.23
+    },
+    "completed": {}
+  },
+  "owners": [
+    {
+      "pid": 3894352,
+      "created": 1794073344.44,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/work/scripts/train_common_support_routing_trial_v2.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/plan-v1.json"
+      ]
+    },
+    {
+      "pid": 3894473,
+      "created": 1794073372.54,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/work/scripts/train_common_support_routing_trial_v2.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/plan-v1.json",
+        "--phase",
+        "train"
+      ]
+    },
+    {
+      "pid": 3894589,
+      "created": 1794073419.23,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/queue-v166-review-v3.py"
+      ]
+    }
+  ]
+}

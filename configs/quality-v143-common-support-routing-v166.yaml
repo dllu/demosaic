@@ -1,0 +1,141 @@
+version: V166
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+  step: 5000
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+module: LateHarmonicPhaseDetail
+max_window: 256
+seed: 160
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+domains:
+  mesh: 0.35
+  weak: 0.1
+  flat: 0.15
+  mixed: 0.15
+  photo: 0.25
+domain_sizes:
+  mesh: 512
+  weak: 512
+  flat: 512
+  mixed: 512
+  photo: 256
+domain_loss_weights:
+  mesh: 4.0
+  weak: 4.0
+  flat: 1.0
+  mixed: 1.0
+  photo: 1.0
+first_ten_domains:
+- mesh
+- photo
+- flat
+- mixed
+- weak
+- mesh
+- photo
+- flat
+- mixed
+- weak
+pixel_epsilon_in_noise_units: 0.01
+gradient_epsilon_in_noise_units: 0.003
+gradient_weight: 0.25
+spectral_weight: 0.25
+local_risk_window_native: 32
+local_risk_hop_native: 16
+local_risk_RMS_rounding_DN16: 1
+local_risk_transition_noise_units: 0.0001
+regional_DC_window_native: 32
+regional_DC_hop_native: 16
+regional_DC_norm_rounding_DN16: 1
+regional_DC_unit_rule: max(existing image noise unit / (window/2), 1 DN16)
+noise_unit_floor_DN16: 16
+manifest: /home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl
+photo_sampling_reference_manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl
+photo_sampling_reference_sha256: 4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e
+reviewed_roi_catalogue: /home/dllu/proj/demosaic/configs/low-contrast-training-rois-cleaned90782-v1.json
+reviewed_roi_fraction: 0.5
+scope: Two fresh identical124909-parameter/47-tensor V165 heads;all1000 V160 B4 batches,initialization,loss
+  values,weights,AdamW/LR/clip/EMA unchanged. Both retain common-error weight1/unit16DN16,difference
+  weight1/floor2DN16/epsilon.003,flat anchor.25 and base losses. Only candidate common-loss
+  adjoint holds actual support activation fixed;removes direct gate and indirect proposal-to-support
+  routes while preserving direct spectral and spatial RGB derivatives. Deliberate
+  surrogate gradient,not finite-difference derivative of numerical forward. Forward
+  values bitexact;other losses train support normally. Support still multiplies spectral
+  correction;no forced lower bound or ungated inference. Gate can still close;no detail
+  or flat-safety guarantee. Candidate replays FFT synthesis/fixed Malvar on691 paired
+  training batches including71 zero-ADC batches;extra compute,no neural root calls.
+  Fixed4-call/16-image training-prefix probe compares actual V164 open and V165 closed
+  raw checkpoints,8 full-parameter adjoints;not held-out quality. All89 neural modules
+  unchanged. Control reproduces1000 V165 pair-common trace/raw/EMA/Adam and1644 actual
+  predictions before storage adoption. 94 final Adam states/four strict CPU loads;822cases/four
+  endpoints/3288 review calls/1644 new external arrays. Main5364roots/11424images
+  plus4probe roots/16images=5368roots/11440images;20 inherited parity leaf backwards
+  and8probe parameter adjoints separate. 72 native figures/24triplets/eight retained
+  columns/61824000 independently checked RGB channels;actual viewing required. Both
+  protected GFX scenes/priors/windows/JPEGs and18held-out IDs excluded;ISO100refs
+  qualitative,notGT. No new parent/DINO/source/noise/RAW/original/dataz calls. New56/128GiB
+  reserves+.5GiB margin,.25GiB remaininglocal artifacts;12GiB CUDA,52/32GiB RAM. Prior
+  evidence retained.
+pair_unit_floor_DN16: 2
+pair_epsilon: 0.003
+regional_DC_transition_units: 1.0
+regional_DC_weight: 1.0
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1
+external_root: /mnt/external/demosaic/quality-20261107/V166-common-support-routing-v1
+internal_reserve_GiB: 56
+external_reserve_GiB: 128
+projection_margin_GiB: 0.5
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+arms:
+  common-control:
+    class: LateHarmonicPhaseDetail
+    parameters: 124909
+    parameter_tensors: 47
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 1.0
+    paired_response_weight: 1.0
+    flat_anchor_weight: 0.25
+    pair_unit_floor_DN16: 2
+    pair_common_weight: 1.0
+    common_detach_support: false
+  routed-common:
+    class: LateHarmonicPhaseDetail
+    parameters: 124909
+    parameter_tensors: 47
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 1.0
+    paired_response_weight: 1.0
+    flat_anchor_weight: 0.25
+    pair_unit_floor_DN16: 2
+    pair_common_weight: 1.0
+    common_detach_support: true
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/work/configs/quality-v143-pair-common-v165.yaml
+  sha256: c546e9596d585f924c95dd4b2c0ae9769db15a0a2327b78f3a4fa341a5cb4f31
+flat_anchor_window: 17
+flat_anchor_tolerance_DN16: 1
+flat_anchor_unit_DN16: 16
+pair_unit_table:
+  path: /home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-inputs-v1.json
+  sha256: ac5380d0a35946481613a550b870d0b6595f874c7285fa8fe6a59270ba770de0
+pair_common_unit_DN16: 16

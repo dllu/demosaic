@@ -7,6 +7,9 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
+[V166 support-gradient routing](docs/common-support-routing.md) is in training:
+238 CPU checks and corrected smoke pass; quality comparisons are pending.
+
 | Useful choice | Measured strength | Remaining limits |
 | --- | --- | --- |
 | V120 Small | Broad photo/camera results and complete 102MP RGB16 checks | Fine foliage, mesh, neon and dark-field mottling |

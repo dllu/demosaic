@@ -1,0 +1,21 @@
+{
+  "status": "pass-readiness-source-neural-prefix-loss-and-unit-bindings",
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-preparation-v1.json",
+    "sha256": "0506bdbd3d8fcb641d8665a384a63a71dcb8e44c26672c52ebb17c9fb074de85"
+  },
+  "exact_receipts": 21,
+  "source_texts": 56,
+  "unchanged_neural_sources": 89,
+  "actual_prefix_rows": 40,
+  "bit_exact_FP32_prefix_losses": 80,
+  "independent_unit_records": 1000,
+  "original_floor16_fingerprints": 1000,
+  "CUDA_initialized": false,
+  "new_forwards": 0,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v166-preparation-v1.py",
+    "sha256": "0edb315fc44bc8278ee68540185e4416a07c2742326294735c85c3a83e3698fa",
+    "text": "\"\"\"Verify V166 readiness copies,source bindings,prefix objectives and all units.\"\"\"\nimport ast\nimport importlib.util\nfrom pathlib import Path\nimport numpy as np\nimport torch\nimport yaml\nfrom train_directional_bank_trial import read,ref,save,guard\nfrom train_v43_quality_trial import live\nfrom demosaic.prediction_archive import fingerprint\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V166-common-support-routing-v2'\nindex=repo/'docs/results/v166-common-support-routing-preparation-v1.json';prep=read(index)\nassert len(prep['copies'])==21\nfor item in prep['copies'].values():\n assert ref(item['original']['path'])==item['original'] and ref(item['public']['path'])==item['public']\n assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\nbundle=read(prep['sources']['path']);assert len(bundle['source_texts'])==56\nfor item in bundle['source_texts']+[bundle['publisher']]:\n assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\n if Path(item['path']).suffix=='.py':ast.parse(item['text'])\nplan=read(root/'plan-v1.json');guard(plan);guard(read(root/'postprocess-plan-v1.json'))\nassert len(bundle['unchanged_neural_hashes'])==89\nfor p,h in bundle['unchanged_neural_hashes'].items():assert ref(p)['sha256']==ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\nhelper=repo/'.cache/audit-v166-training-objective-v1.py';spec=importlib.util.spec_from_file_location('v166_ledger',helper)\nledger=importlib.util.module_from_spec(spec);spec.loader.exec_module(ledger)\nimport json\nprefix=[json.loads(s) for s in (root/'readiness-training-prefix-v1.jsonl').read_text().splitlines()]\nassert len(prefix)==40;recipe=yaml.safe_load(Path(plan['config']['path']).read_text());cache=read(plan['cache']['path'])\nfor row,item in zip(prefix,cache['batches'][:40],strict=True):\n adc=item['metadata']['noise']['shot']==item['metadata']['noise']['read']==0\n for arm,c in row['arms'].items():\n  assert ledger.reconstruct(c,recipe,recipe['arms'][arm],row['domain'],adc).tobytes()==np.float32(c['loss']).tobytes()\n  assert c['common_support_detached']==bool(recipe['arms'][arm]['common_detach_support'] and c['coupled_pairs'])\nunits=read(plan['pair_unit_table']['path'])['rows'];assert len(units)==1000\nfor item,table in zip(cache['batches'],units,strict=True):\n raw=np.sqrt(np.asarray(item['metadata']['sensor'].get('increment_mean_variance',[]),dtype=np.float32))\n values=np.maximum(raw,np.float32(2/65535)).reshape(-1,1,1,1)\n assert values.tobytes()==np.asarray(table['candidate_units_FP32'],dtype=np.float32).reshape(table['shape']).tobytes()\n assert fingerprint(np.maximum(raw,np.float32(16/65535)).reshape(-1,1,1,1))==item['inputs']['pair_units']\nsnapshot=read(root/'prepared-live-snapshot-v1.json');assert all(live(o) for o in snapshot['owners'])\nassert not torch.cuda.is_initialized()\noutput=repo/'docs/results/v166-common-support-routing-preparation-verification-v1.json';assert not output.exists()\nsave(output,{'status':'pass-readiness-source-neural-prefix-loss-and-unit-bindings','preparation':ref(index),\n 'exact_receipts':21,'source_texts':56,'unchanged_neural_sources':89,'actual_prefix_rows':40,'bit_exact_FP32_prefix_losses':80,\n 'independent_unit_records':1000,'original_floor16_fingerprints':1000,'CUDA_initialized':False,'new_forwards':0,\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint('PASS21 receipts/56 source texts/89 unchanged modules/80 actual losses/1000 units;no CUDA')\n"
+  }
+}

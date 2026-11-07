@@ -1,0 +1,1502 @@
+FFFFFFFF.FFFFFFFF                                                        [100%]
+=================================== FAILURES ===================================
+__ test_values_and_complete_adjoint_against_independent_numpy_operator[RGGB] ___
+
+pattern = 'RGGB'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_values_and_complete_adjoint_against_independent_numpy_operator(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__ test_values_and_complete_adjoint_against_independent_numpy_operator[BGGR] ___
+
+pattern = 'BGGR'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_values_and_complete_adjoint_against_independent_numpy_operator(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.6196e-04, -2.1174e-04,  7.5659e-05,  1.8204e-04],
+          [ 7.4399e-05, -4.0661e-05, -3.3249e-05, -8.5...45e-05, -2.3745e-05],
+          [-8.5292e-05, -6.6522e-05,  2.2182e-04,  3.5616e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[2, 1, 1, 0]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__ test_values_and_complete_adjoint_against_independent_numpy_operator[GRBG] ___
+
+pattern = 'GRBG'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_values_and_complete_adjoint_against_independent_numpy_operator(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 8.9977e-05, -1.1763e-04,  4.2033e-05,  1.0114e-04],
+          [ 4.1333e-05, -2.2590e-05, -1.8472e-05, -4.7...96e-05, -1.8265e-05],
+          [-6.5609e-05, -5.1171e-05,  1.7063e-04,  2.7397e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[1, 0, 2, 1]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__ test_values_and_complete_adjoint_against_independent_numpy_operator[GBRG] ___
+
+pattern = 'GBRG'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_values_and_complete_adjoint_against_independent_numpy_operator(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 8.9977e-05, -1.1763e-04,  4.2033e-05,  1.0114e-04],
+          [ 4.1333e-05, -2.2590e-05, -1.8472e-05, -4.7...96e-05, -1.8265e-05],
+          [-6.5609e-05, -5.1171e-05,  1.7063e-04,  2.7397e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[1, 2, 0, 1]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+______ test_full_common_loss_value_and_intended_parameter_gradients[RGGB] ______
+
+pattern = 'RGGB'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_full_common_loss_value_and_intended_parameter_gradients(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+______ test_full_common_loss_value_and_intended_parameter_gradients[BGGR] ______
+
+pattern = 'BGGR'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_full_common_loss_value_and_intended_parameter_gradients(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.6196e-04, -2.1174e-04,  7.5659e-05,  1.8204e-04],
+          [ 7.4399e-05, -4.0661e-05, -3.3249e-05, -8.5...45e-05, -2.3745e-05],
+          [-8.5292e-05, -6.6522e-05,  2.2182e-04,  3.5616e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[2, 1, 1, 0]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+______ test_full_common_loss_value_and_intended_parameter_gradients[GRBG] ______
+
+pattern = 'GRBG'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_full_common_loss_value_and_intended_parameter_gradients(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 8.9977e-05, -1.1763e-04,  4.2033e-05,  1.0114e-04],
+          [ 4.1333e-05, -2.2590e-05, -1.8472e-05, -4.7...96e-05, -1.8265e-05],
+          [-6.5609e-05, -5.1171e-05,  1.7063e-04,  2.7397e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[1, 0, 2, 1]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+______ test_full_common_loss_value_and_intended_parameter_gradients[GBRG] ______
+
+pattern = 'GBRG'
+
+    @pytest.mark.parametrize("pattern", PATTERNS)
+    def test_full_common_loss_value_and_intended_parameter_gradients(pattern):
+>       output, aux, colors, wb, delta, logits, spatial = fixture(pattern)
+                                                          ^^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 8.9977e-05, -1.1763e-04,  4.2033e-05,  1.0114e-04],
+          [ 4.1333e-05, -2.2590e-05, -1.8472e-05, -4.7...96e-05, -1.8265e-05],
+          [-6.5609e-05, -5.1171e-05,  1.7063e-04,  2.7397e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[1, 2, 0, 1]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+______ test_zero_ADC_weight_and_ordinary_losses_keep_original_gate_graph _______
+
+    def test_zero_ADC_weight_and_ordinary_losses_keep_original_gate_graph():
+>       output, aux, colors, wb, delta, logits, spatial = fixture("RGGB")
+                                                          ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__________________ test_does_not_change_rng_or_input_tensors ___________________
+
+    def test_does_not_change_rng_or_input_tensors():
+>       output, aux, colors, wb, *_ = fixture("RGGB")
+                                      ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+___________________ test_invalid_auxiliary_contracts[dtype] ____________________
+
+change = 'dtype'
+
+    @pytest.mark.parametrize("change", ["dtype", "odd", "missing", "support", "spatial", "proposal"])
+    def test_invalid_auxiliary_contracts(change):
+>       output, aux, colors, wb, *_ = fixture("RGGB")
+                                      ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+____________________ test_invalid_auxiliary_contracts[odd] _____________________
+
+change = 'odd'
+
+    @pytest.mark.parametrize("change", ["dtype", "odd", "missing", "support", "spatial", "proposal"])
+    def test_invalid_auxiliary_contracts(change):
+>       output, aux, colors, wb, *_ = fixture("RGGB")
+                                      ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__________________ test_invalid_auxiliary_contracts[missing] ___________________
+
+change = 'missing'
+
+    @pytest.mark.parametrize("change", ["dtype", "odd", "missing", "support", "spatial", "proposal"])
+    def test_invalid_auxiliary_contracts(change):
+>       output, aux, colors, wb, *_ = fixture("RGGB")
+                                      ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__________________ test_invalid_auxiliary_contracts[support] ___________________
+
+change = 'support'
+
+    @pytest.mark.parametrize("change", ["dtype", "odd", "missing", "support", "spatial", "proposal"])
+    def test_invalid_auxiliary_contracts(change):
+>       output, aux, colors, wb, *_ = fixture("RGGB")
+                                      ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__________________ test_invalid_auxiliary_contracts[spatial] ___________________
+
+change = 'spatial'
+
+    @pytest.mark.parametrize("change", ["dtype", "odd", "missing", "support", "spatial", "proposal"])
+    def test_invalid_auxiliary_contracts(change):
+>       output, aux, colors, wb, *_ = fixture("RGGB")
+                                      ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+__________________ test_invalid_auxiliary_contracts[proposal] __________________
+
+change = 'proposal'
+
+    @pytest.mark.parametrize("change", ["dtype", "odd", "missing", "support", "spatial", "proposal"])
+    def test_invalid_auxiliary_contracts(change):
+>       output, aux, colors, wb, *_ = fixture("RGGB")
+                                      ^^^^^^^^^^^^^^^
+
+tests/test_paired_common_routing.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_paired_common_routing.py:40: in fixture
+    output = base + malvar(delta * support, colors, wb) + spatial
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[ 1.1697e-04, -1.5292e-04,  5.4643e-05,  1.3148e-04],
+          [ 5.3733e-05, -2.9367e-05, -2.4013e-05, -6.1...94e-05, -3.2878e-05],
+          [-1.1810e-04, -9.2107e-05,  3.0713e-04,  4.9315e-05]]]],
+       grad_fn=<MulBackward0>)
+colors = tensor([[0, 1, 1, 2]])
+wb = tensor([[1.3000, 1.0000, 1.8000],
+        [1.3000, 1.0000, 1.8000]])
+
+    def malvar(packed: Tensor, colors: Tensor, wb=None) -> Tensor:
+        """FP32 Malvar-He-Cutler 5×5 linear demosaicing (ICASSP 2004, Fig. 2).
+    
+        Independently implemented from the published filters, with phase-preserving
+        reflected borders. A classical comparator, not a trained denoiser.
+        """
+        with (
+            torch.autocast(device_type=packed.device.type, enabled=False),
+            ieee_fp32(),
+        ):
+            packed = packed.float()
+            batch, _, height, width = packed.shape
+            if min(height, width) < 2:
+                raise ValueError("Malvar interpolation requires at least a 4×4 mosaic")
+            if colors.ndim == 1:
+                colors = colors[None].expand(batch, -1)
+            if wb is not None:
+                wb = torch.as_tensor(wb, device=packed.device, dtype=torch.float32).reshape(-1, 3)
+                wb = wb.expand(batch, -1).clamp_min(1e-6)
+                packed = packed * wb.gather(1, colors)[..., None, None]
+            raw = unpack(packed)
+            green = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1, 0, 0],
+                        [0, 0, 2, 0, 0],
+                        [-1, 2, 4, 2, -1],
+                        [0, 0, 2, 0, 0],
+                        [0, 0, -1, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            horizontal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, 0.5, 0, 0],
+                        [0, -1, 0, -1, 0],
+                        [-1, 4, 5, 4, -1],
+                        [0, -1, 0, -1, 0],
+                        [0, 0, 0.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            diagonal = (
+                packed.new_tensor(
+                    [
+                        [0, 0, -1.5, 0, 0],
+                        [0, 2, 0, 2, 0],
+                        [-1.5, 0, 6, 0, -1.5],
+                        [0, 2, 0, 2, 0],
+                        [0, 0, -1.5, 0, 0],
+                    ]
+                )
+                / 8
+            )
+            kernels = torch.stack((green, horizontal, horizontal.T, diagonal))[:, None]
+            g, horizontal, vertical, diagonal = F.conv2d(
+                F.pad(raw, (2, 2, 2, 2), mode="reflect"), kernels
+            ).split(1, dim=1)
+            labels = F.one_hot(colors, 3).permute(0, 2, 1)[..., None, None]
+            masks = F.pixel_shuffle(
+>               labels.expand(-1, -1, -1, height, width).reshape(batch, 12, height, width).float(), 2
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ).bool()
+E           RuntimeError: shape '[2, 12, 3, 4]' is invalid for input of size 144
+
+src/demosaic/cfa.py:176: RuntimeError
+=========================== short test summary info ============================
+FAILED tests/test_paired_common_routing.py::test_values_and_complete_adjoint_against_independent_numpy_operator[RGGB]
+FAILED tests/test_paired_common_routing.py::test_values_and_complete_adjoint_against_independent_numpy_operator[BGGR]
+FAILED tests/test_paired_common_routing.py::test_values_and_complete_adjoint_against_independent_numpy_operator[GRBG]
+FAILED tests/test_paired_common_routing.py::test_values_and_complete_adjoint_against_independent_numpy_operator[GBRG]
+FAILED tests/test_paired_common_routing.py::test_full_common_loss_value_and_intended_parameter_gradients[RGGB]
+FAILED tests/test_paired_common_routing.py::test_full_common_loss_value_and_intended_parameter_gradients[BGGR]
+FAILED tests/test_paired_common_routing.py::test_full_common_loss_value_and_intended_parameter_gradients[GRBG]
+FAILED tests/test_paired_common_routing.py::test_full_common_loss_value_and_intended_parameter_gradients[GBRG]
+FAILED tests/test_paired_common_routing.py::test_zero_ADC_weight_and_ordinary_losses_keep_original_gate_graph
+FAILED tests/test_paired_common_routing.py::test_does_not_change_rng_or_input_tensors
+FAILED tests/test_paired_common_routing.py::test_invalid_auxiliary_contracts[dtype]
+FAILED tests/test_paired_common_routing.py::test_invalid_auxiliary_contracts[odd]
+FAILED tests/test_paired_common_routing.py::test_invalid_auxiliary_contracts[missing]
+FAILED tests/test_paired_common_routing.py::test_invalid_auxiliary_contracts[support]
+FAILED tests/test_paired_common_routing.py::test_invalid_auxiliary_contracts[spatial]
+FAILED tests/test_paired_common_routing.py::test_invalid_auxiliary_contracts[proposal]
+16 failed, 1 passed in 0.92s
