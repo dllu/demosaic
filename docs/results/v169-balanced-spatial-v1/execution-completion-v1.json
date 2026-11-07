@@ -1,0 +1,39 @@
+{
+  "status": "complete-two-recorded-review-owners-terminal",
+  "owners": [
+    {
+      "pid": 4132908,
+      "created": 1794085898.37
+    },
+    {
+      "pid": 4132541,
+      "created": 1794085828.8
+    }
+  ],
+  "actual_quality_neural_roots": 1644,
+  "quality_images": 1644,
+  "new_parent_roots": 0,
+  "new_DINO_calls": 0,
+  "new_training_updates": 0,
+  "new_source_noise_draws": 0,
+  "original_V168_replays": 1644,
+  "streamed_method_rows": 6576,
+  "native_cases": 36,
+  "new_full_predictions": 216,
+  "new_direct_correction_arrays": 72,
+  "saved_arrays": 288,
+  "saved_array_bytes": 860393472,
+  "new_constant_ADC_outputs_exact_parent": 384,
+  "preparation_admission_failures": 1,
+  "worker_import_failures_before_neural_work": 1,
+  "repeated_scientific_forwards": 0,
+  "CUDA_filter_admission_cases": 6,
+  "CPU_tests": 47,
+  "new_CPU_tests": 19,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v169-execution-v1.py",
+    "sha256": "eb150af4933e12f3497b226cb4d8768604ac762c3a7a314d89e89fa4ce8c9c0c",
+    "text": "\"\"\"Close the actual review owners and count saved versus streamed evidence.\"\"\"\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V169-balanced-spatial-v3'\nplan=read(root/'plan-v1.json');guard(plan);scores=read(root/'scores-v1.json');status=read(root/'status-v1.json')\nassert status['status']=='completed-streamed-quality-awaiting-native-render-and-viewing' and status['returned_forwards']==1644\nowners=[read(root/'launch-v1.json')['owner'],read(root.parent/'V169-balanced-spatial-v2/launch-v1.json')['owner']]\nfor owner in owners:\n try:\n  p=psutil.Process(owner['pid']);assert p.create_time()!=owner['created'] or p.status() in [psutil.STATUS_ZOMBIE,psutil.STATUS_DEAD]\n except psutil.NoSuchProcess:pass\nfiles=list(Path(plan['external']).glob('*/*.npy'));assert len(files)==288\nassert sum(p.stat().st_size for p in files)==plan['projected_new_array_bytes']\nassert scores['component_forwards']==scores['original_predictions_replayed_exact']==1644\nassert scores['new_parent_DINO_forwards']==scores['new_noise_draws']==scores['new_training_updates']==0\nsave(root/'execution-completion-v1.json',dict(status='complete-two-recorded-review-owners-terminal',owners=owners,actual_quality_neural_roots=1644,\n quality_images=1644,new_parent_roots=0,new_DINO_calls=0,new_training_updates=0,new_source_noise_draws=0,\n original_V168_replays=1644,streamed_method_rows=6576,native_cases=36,new_full_predictions=216,new_direct_correction_arrays=72,\n saved_arrays=288,saved_array_bytes=sum(p.stat().st_size for p in files),new_constant_ADC_outputs_exact_parent=384,\n preparation_admission_failures=1,worker_import_failures_before_neural_work=1,repeated_scientific_forwards=0,\n CUDA_filter_admission_cases=6,CPU_tests=47,new_CPU_tests=19,\n source=dict(ref(__file__),text=Path(__file__).read_text()),scope=plan['scope']))\nprint('PASS1644 actual roots;2 review owners terminal;288 saved arrays/.801GiB;no repeated scientific forwards')\n"
+  },
+  "scope": "Fixed-weight inference intervention,not retraining. Same V168 raw/EMA weights,822 frozen inputs and source conditioning. One outer neural forward per case/endpoint returns original and separated corrections; original output must replay its actual archived prediction bitexact. Balanced output keeps spectral correction and subtracts sigma8/radius24 Gaussian lowpass from direct RGB correction. Spectral-only and spatial-only are branch diagnostics. Target/reference never enters inference. All822 cases get streamed metrics and prediction fingerprints;only36 preselected native cases retain full branch arrays/new predictions,not a full new prediction archive. In-process independent Gaussian checks cover all pixels and independent scalar/error decomposition checks accompany metrics. Fixed48 native boards plus24 triplets follow V168 ROIs/transforms;both protected GFX scenes/priors/JPEGs remain qualitative,notGT. No original/dataz reads,source/noise redraws,parent/DINO calls,training updates or claim of blind generalization. New module plus90 prior neural files remain frozen;two strict CPU transferred-weight loads/47tensors/124909params each. CUDA quota12GiB,32GiB RAM and56/116GiB local/external reserves;resource pressure waits before another forward. No full-output archive or training-quality claim."
+}

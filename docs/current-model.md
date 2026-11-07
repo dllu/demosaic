@@ -147,6 +147,7 @@ under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |
+| Broad direct RGB corrections | [Completed V169](balanced-spatial-correction.md): fixed V168 weights,Gaussian complement of direct RGB at sigma8/radius24 native pixels; full spectral path retained. Quiet RMS −3.74–10.69%,DC color bias −11.45–31.59%; mesh response stays3.806–3.837% of GT. All48 coarse-flat errors worsen; total-flat means +0.389–0.705%,quiet spatial +0.167–0.267%,local mottle/real crossings remain. Both endpoints/822cases/72 native views complete;47 CPU checks,six CUDA filter cases,1644 exact replays. All-case streamed metrics;posthoc full-array audit limited to36 saved native cases. Useful response/quiet-color option with flat/grain costs |
 | Fine-mesh training distribution | [Completed V168](fine-mesh-training.md): same V167 architecture/losses/init;171 finer-wire/contrast-ladder batches and829 exact old inputs/parents. Mesh response +17.48–18.09% to3.805–3.836% of GT; finest crossed recipes gain about59%,still1.8% of GT. All48 coarse-flat errors improve. Quiet RMS +1.49–5.44%,all32 spatial errors worse; total-flat means +0.136–0.228%,real crossings incomplete. Four endpoints/822cases/72 native views/audits complete;288 CPU checks,94 Adam states and exact V167 control reproduction. Retain data gain beside earlier detail/quiet/flat strengths |
 | Bounded spectral support | [Completed V167](bounded-spectral-support.md): shifted quarter-floor mapping at identical124909-parameter heads/data/init/loss/routing. Mesh response +47.33–47.55% versus exact V166 controls,to3.24–3.25% of GT; present RMS −1.09–1.15%. Quiet RMS +2.84–3.74%,all32 spatial errors worse; full-flat means +0.189–0.382%,coarse means slightly lower. Real fine crossings remain incomplete. All256 mesh support means stay near.25;coefficient RMS adapts downward. Retain useful bounded-path response beside V166 quiet color,V165 grain/flat and stronger V161/V164 detail. Four endpoints/72 actual native figures/audits complete;266 CPU checks,94 Adam states and exact controls |
 | Common-loss support routing | [Completed V166](common-support-routing.md): identical inference/124909 parameters/47 tensors,common loss values and weights. Only its candidate backward route holds support fixed. Quiet RMS −6.10–15.27% and DC bias −17.52–31.30% versus V165;27/32 raw and24/32 EMA quiet inputs improve. Mesh stays near parent2.20% of GT,all256 mean gates below1e-4;all48 coarse errors worsen versus V165. Full-flat/coarse still improve on46/48 and48/48 inputs versus V143,but quiet means remain above parent. Retain quiet-color option with persistent mottle/detail limits. All endpoints/72actual figures/audits complete;238 CPU checks,94 Adam states,exact V165 control;failed telemetry prefix preserved |
@@ -226,3 +227,11 @@ while increasing quiet and total-flat errors. It preserves all90 V167 neural
 sources; frequency and contrast change jointly,so their individual effects remain
 unresolved. More response alone does not establish accurate real crossings or
 safe quiet fields.
+
+The [V169 fixed-weight branch comparison](balanced-spatial-correction.md) now
+separates a useful part of that tradeoff: broad direct RGB corrections provide
+much of the added quiet DC bias and much of the standalone coarse-flat gain.
+Removing that broad component retains mesh response while reducing color bias,
+but slightly worsens quiet spatial error and increases total/coarse flat error.
+This supports further work on conditional coarse correction; it does not prove
+that broad correction is always harmful or that residual splotches are gone.

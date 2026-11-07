@@ -1,5 +1,20 @@
 # Experiment index
 
+[Completed V169 spatial balance](balanced-spatial-correction.md): fixed V168
+weights;remove only the sigma8/radius24 native Gaussian component of direct RGB.
+Quiet RMS −3.74–10.69% and DC bias −11.45–31.59%,with3.806–3.837% GT mesh response.
+All48 coarse-flat errors worsen,total-flat means +0.389–0.705%,quiet spatial
++0.167–0.267%;local mottle/real crossings unresolved. Spectral-only/direct-only
+ablations expose the broad-correction tradeoff. Both endpoints/all822cases/
+72 actual native figures/24triplets complete.47 CPU checks,six CUDA filter cases,
+1644 actual roots/exact original replays pass.6576 streamed method rows;216 new
+full predictions plus72 corrections are saved for36 fixed native cases. Separate
+audit checks19760 scalars and all saved native arrays;remaining new full outputs
+were independently filter/norm-checked in process and not retained. Both review
+owners terminal;one preparation assertion and one missing-import initialization
+used no model calls. Resource pause resumed the same worker after70 byte-exact
+fixture relocations,without repeating inference. Original evidence preserved.
+
 [Completed V168 finer-wire training](fine-mesh-training.md): identical V167
 heads/losses/init,171 changed mesh batches and829 archived input/parent adoptions.
 Mesh response rises17.48–18.09%,to3.805–3.836% of GT; both-fine recipes gain

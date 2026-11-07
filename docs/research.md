@@ -1,5 +1,18 @@
 # Current method research
 
+The completed [V169 branch intervention](balanced-spatial-correction.md) uses
+fixed V168 raw/EMA weights to isolate direct RGB and spectral contributions.
+Direct-only response stays near the parent,while its coarse corrections help
+standalone flats and add quiet DC bias. A fixed sigma8 Gaussian complement of
+the direct correction lowers quiet RMS3.74–10.69% and DC bias11.45–31.59%,with
+essentially unchanged3.806–3.837% GT mesh response. It also raises full/coarse-flat
+error and quiet spatial error; actual crops retain local blotches and missing
+fine crossings. This functional result motivates conditional coarse correction,
+not a claim about why training learned the behavior. Both endpoints/all822 cases/
+72 native views are complete. New outputs are streamed and fingerprinted;posthoc
+full-array checks cover36 retained native cases. No new training,source/noise or
+parent/DINO work was used;original V168 outputs replay exactly1,644 times.
+
 The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
 original positive global gate as selection and restores contrast only inside
 unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS

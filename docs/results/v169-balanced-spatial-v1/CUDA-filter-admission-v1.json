@@ -1,0 +1,78 @@
+{
+  "status": "pass-independent-device-value-gradient-and-autocast-filter-checks",
+  "rows": [
+    {
+      "dtype": "torch.float32",
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "maximum_value_error": 0.0,
+      "maximum_gradient_error": 0.0
+    },
+    {
+      "dtype": "torch.float32",
+      "shape": [
+        2,
+        3,
+        7,
+        11
+      ],
+      "maximum_value_error": 0.0,
+      "maximum_gradient_error": 7.82310962677002e-07
+    },
+    {
+      "dtype": "torch.float32",
+      "shape": [
+        1,
+        3,
+        65,
+        67
+      ],
+      "maximum_value_error": 0.0,
+      "maximum_gradient_error": 8.285045623779297e-06
+    },
+    {
+      "dtype": "torch.float64",
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "maximum_value_error": 0.0,
+      "maximum_gradient_error": 0.0
+    },
+    {
+      "dtype": "torch.float64",
+      "shape": [
+        2,
+        3,
+        7,
+        11
+      ],
+      "maximum_value_error": 6.776263578034403e-21,
+      "maximum_gradient_error": 1.016547956922409e-15
+    },
+    {
+      "dtype": "torch.float64",
+      "shape": [
+        1,
+        3,
+        65,
+        67
+      ],
+      "maximum_value_error": 6.776263578034403e-21,
+      "maximum_gradient_error": 1.687538997430238e-14
+    }
+  ],
+  "new_neural_forwards": 0,
+  "peak_CUDA_allocated_bytes": 1019392,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/admit-v169-cuda-v1.py",
+    "sha256": "ecc205d10c2ba7a394ba17af91b9d1f32d32840ce6ef7c3ddb56a24912044ef4",
+    "text": "\"\"\"Check the new fixed filter on CUDA before any held-out neural forward.\"\"\"\nimport json,time\nfrom pathlib import Path\nimport numpy as np\nimport torch\nfrom demosaic.late_balanced_spatial import SpatialHighpass\nfrom train_directional_bank_trial import ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V169-balanced-spatial-v2'\ntorch.set_num_threads(2);torch.set_num_interop_threads(1)\ntorch.backends.cuda.matmul.allow_tf32=torch.backends.cudnn.allow_tf32=False\ntorch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True;torch.use_deterministic_algorithms(True)\ntorch.cuda.set_per_process_memory_fraction(12*2**30/torch.cuda.get_device_properties(0).total_memory)\nrows=[]\nfor dtype in [torch.float32,torch.float64]:\n for shape in [(1,3,1,1),(2,3,7,11),(1,3,65,67)]:\n  value=np.random.default_rng(16904).normal(size=shape)*1e-5\n  cpu=torch.tensor(value,dtype=dtype,requires_grad=True);gpu=cpu.detach().cuda().requires_grad_()\n  a=SpatialHighpass()(cpu);b=SpatialHighpass().cuda()(gpu)\n  torch.testing.assert_close(a,b.cpu(),atol=2e-11,rtol=2e-5)\n  weights=torch.sin(torch.arange(cpu.numel(),dtype=dtype)).reshape(shape)\n  (a*weights).sum().backward();(b*weights.cuda()).sum().backward()\n  torch.testing.assert_close(cpu.grad,gpu.grad.cpu(),atol=3e-6 if dtype==torch.float32 else 1e-13,rtol=2e-5)\n  if dtype==torch.float32:\n   with torch.autocast('cuda',dtype=torch.bfloat16):mixed=SpatialHighpass().cuda()(gpu.detach())\n   assert mixed.dtype==torch.float32 and torch.equal(mixed,b)\n  rows.append(dict(dtype=str(dtype),shape=shape,maximum_value_error=float((a-b.cpu()).abs().max()),maximum_gradient_error=float((cpu.grad-gpu.grad.cpu()).abs().max())))\nsave(root/'CUDA-filter-admission-v1.json',dict(status='pass-independent-device-value-gradient-and-autocast-filter-checks',rows=rows,new_neural_forwards=0,\n    peak_CUDA_allocated_bytes=torch.cuda.max_memory_allocated(),source=dict(ref(__file__),text=Path(__file__).read_text())))\nprint('PASS6 CPU/CUDA filter value/gradient cases;3 FP32 autocast checks;no neural forwards')\n"
+  }
+}

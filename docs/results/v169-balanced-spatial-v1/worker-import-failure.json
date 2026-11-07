@@ -1,0 +1,30 @@
+{
+  "status": "terminal-missing-scipy-import-before-CUDA-or-any-neural-forward",
+  "recorded_unix_UTC": 1794085868.02447,
+  "launch": {
+    "owner": {
+      "pid": 4132541,
+      "created": 1794085828.8
+    },
+    "command": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v2/work/scripts/review_balanced_spatial_trial.py",
+      "run"
+    ],
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v2/plan-v1.json",
+      "sha256": "d75b880669963b3e60301fa1229754ffb1fa132b534d19bc61dc54c1a28a5178"
+    },
+    "log": "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v2/review-v1.log"
+  },
+  "log": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v2/review-v1.log",
+    "sha256": "377f68db55c4186353a3336ac808fb1eb2caa2656e3f1a5e4a6eb1fa3e0781b7",
+    "text": "Traceback (most recent call last):\n  File \"/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v2/work/scripts/review_balanced_spatial_trial.py\", line 176, in <module>\n    {'prepare':prepare,'run':run,'launch':launch}[args.mode]()\n  File \"/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v2/work/scripts/review_balanced_spatial_trial.py\", line 68, in run\n    from scipy.ndimage import convolve1d\nModuleNotFoundError: No module named 'scipy'\n"
+  },
+  "claim_exists": false,
+  "status_exists": false,
+  "neural_forwards": 0,
+  "new_prediction_arrays": 0,
+  "scope": "Import line68 fails before claim/owner/CUDA setup/model construction/input loading. Frozen source and original plan/preparation/log remain unchanged. Replacement uses independently tested NumPy separable convolution instead of introducing a dependency."
+}

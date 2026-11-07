@@ -7,14 +7,19 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
+[Completed V169 spatial balance](docs/balanced-spatial-correction.md) lowers quiet
+RMS **3.74–10.69%** and color bias **11.45–31.59% versus V168**, retaining its
+**3.806–3.837% of GT mesh response**. It filters broad direct RGB corrections at
+fixed weights. All48 coarse-flat errors worsen, total-flat means rise0.39–0.71%,
+and local blotches/fine crossings remain unresolved. Both endpoints,822 cases
+and72 actually viewed native figures are complete, with explicit audit scope.
+
 [Completed V168 fine-mesh training](docs/fine-mesh-training.md) raises mesh response
 **17.48–18.09% over V167**, reaching **3.805–3.836% of constructed GT amplitude**.
 The finest crossed-wire group improves about59%, but still recovers only1.8% of
 GT. Coarse-flat error improves on all48 inputs; quiet RMS rises1.49–5.44% and
 total-flat means rise0.136–0.228%. Real fine cab crossings remain incomplete.
 All four endpoints,822 cases,72 native figures and independent audits are complete.
-
-The completed [V167 bounded-support trial](docs/bounded-spectral-support.md) raises mesh response **47.33–47.55% versus V166**, reaching **3.24–3.25% of constructed GT amplitude**, with 1.09–1.15% lower present-mesh RMS. Quiet RMS rises2.84–3.74%, all32 quiet spatial errors worsen, and full-flat means rise0.189–0.382%; coarse means improve slightly. Fine cab crossings remain incomplete. All four endpoints,822 cases,72 native figures and independent audits are complete. Retain the response gain beside V166 quiet color and the stronger V161/V164 detail options.
 
 The completed [V166 common-support routing trial](docs/common-support-routing.md) reduces quiet RMS **6.10–15.27%** and DC color bias **17.52–31.30% versus V165**, visibly reducing the representative magenta casts. Mesh response stays near the parent and real fine crossings remain incomplete; all256 present-mesh mean supports remain below1e-4. Full-flat means worsen0.199–0.312%,coarse means0.216–0.376%,with all48 coarse inputs worse versus V165. Quiet means remain2.40–6.34% above V143. Retain this quiet-color gain beside V165 flat/grain,V161/V164 detail,V157 coarse and V158 quiet strengths. Both1k heads/four endpoints/822cases/72actual native figures are complete;238 CPU checks,94 final Adam states,exact V165 controls and independent audits pass. Original smoke failure and three discarded calls are preserved;no full-training restart.
 
@@ -43,6 +48,7 @@ cost remains unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V169 spatial balance](docs/balanced-spatial-correction.md) | Quiet RMS −3.74–10.69% and color bias −11.45–31.59% versus V168; mesh response stays3.806–3.837% of GT | All48 coarse-flat errors worse; total-flat means +0.39–0.71%,quiet spatial +0.17–0.27%; residual blotches/crossings |
 | [V168 finer training wires](docs/fine-mesh-training.md) | Mesh response +17.48–18.09% versus V167, reaching3.805–3.836% of GT; all48 coarse-flat errors improve | Quiet RMS +1.49–5.44%,all32 spatial errors worse; full-flat means +0.136–0.228%,real crossings incomplete |
 | [V167 bounded support](docs/bounded-spectral-support.md) | Mesh response +47.33–47.55% versus V166, reaching3.24–3.25% of GT; present RMS −1.09–1.15% | Quiet RMS +2.84–3.74%,all32 spatial errors worse; full-flat means +0.189–0.382%,real crossings incomplete |
 | [V166 common-support routing](docs/common-support-routing.md) | Quiet RMS −6.10–15.27% and color bias −17.52–31.30% versus V165 | Gate still nearly closes; mesh near parent; full-flat/coarse means +0.20–0.38% |
@@ -66,7 +72,7 @@ The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
 V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
 [Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
-Keep V168's data/response gain, V167's bounded-path response gain, V166's quiet-color gain, V165's grain/total-flat gain, V164's response/coarse gain, V161's stronger
+Keep V169's response/quiet-color option, V168's data/coarse gain, V167's bounded-path response gain, V166's quiet-color gain, V165's grain/total-flat gain, V164's response/coarse gain, V161's stronger
 learned response, V163's small bias gain, V158 quiet accuracy and V157's coarse
 capacity visible; no model combines their strengths.
 
@@ -113,31 +119,32 @@ common exposure 8 and contrast 1; crop pixels are never resized.
 
 ![Mesh2309: noisy, V161 harmonic-context EMA, exact constructed GT](docs/images/v161-harmonic-context-v1/comparison-02-harmonic-context-EMA-step1000-triplet.png)
 
-Noisy → **V168 fine-mesh EMA** → exact constructed GT, the same two mesh
-sources/ROIs above. Response rises18.09% versus V167 EMA to3.836% of GT;
-quiet RMS rises1.49–3.03% and all32 quiet spatial errors worsen. The crossing
+Noisy → **V169 balanced EMA** → exact constructed GT, the same two mesh
+sources/ROIs above. Response stays essentially unchanged from V168 at3.837% of
+GT, while quiet RMS falls3.74–5.95%. All48 coarse-flat errors worsen. The crossing
 family remains weak. Native160×160 cells, ROI `[176,176,160,160]`, shot.00128 /
 read variance6.5536e-6, common exposure8 and contrast1; pixels are never resized.
-EMA component SHA256 `d089b40e5502887510308816c648a9fc91d9cb58c687aa57862ed853e1efbc61`.
-[All endpoints, source hashes, costs and display metadata](docs/fine-mesh-training.md).
+EMA component SHA256 `2184e9fc4c462eb8d740baa32b8e4fd569a18d80cca6f00a710ff9af51408562`.
+[Both endpoints, branch ablations, costs and display metadata](docs/balanced-spatial-correction.md).
 
-![Mesh2302: noisy, V168 fine-mesh EMA, exact constructed GT](docs/images/v168-fine-mesh-v1/comparison-00-fine-mesh-EMA-step1000-triplet.png)
+![Mesh2302: noisy, V169 balanced EMA, exact constructed GT](docs/images/v169-balanced-spatial-v1/comparison-04.png)
 
-![Mesh2309: noisy, V168 fine-mesh EMA, exact constructed GT](docs/images/v168-fine-mesh-v1/comparison-02-fine-mesh-EMA-step1000-triplet.png)
+![Mesh2309: noisy, V169 balanced EMA, exact constructed GT](docs/images/v169-balanced-spatial-v1/comparison-10.png)
 
-Noisy → **V166 routed-common EMA** → exact constructed GT, ISO6400 and ISO12800
-quiet fields. Mean quiet RMS falls 6.10–6.87% and DC color bias 17.52–18.11%
-versus V165 EMA. Quiet means remain 2.40–3.22% above V143, broad mottle persists,
-and mesh response stays near the parent. Native 160×160 cells in 512px RGGB
+Noisy → **V169 balanced EMA** → exact constructed GT, ISO6400 and ISO12800
+quiet fields. Mean quiet RMS falls **3.74–5.95%** and DC color bias **11.45–21.13%**
+versus V168 EMA. Quiet means remain3.12–3.78% above V143, local mottle persists,
+and quiet spatial error rises. Native 160×160 cells in 512px RGGB
 contexts, quiet ROI `[80,176,160,160]`, exposure 8 and 40× camera-linear contrast
 about `[.001500000013,.006000000052,.002666666871]`. Shot/read variance is
 .00128/6.5536e-6 or .00256/2.62144e-5; crop pixels are never resized.
-EMA component SHA256 `f806d7fb37dd046397fa906f4b6dc0fa8de1bd4f0b655006694e5d6e836cf254`.
-[All endpoints, source hashes and display metadata](docs/common-support-routing.md).
+EMA component SHA256 `2184e9fc4c462eb8d740baa32b8e4fd569a18d80cca6f00a710ff9af51408562`.
+[All endpoints, source hashes and display metadata](docs/balanced-spatial-correction.md).
+[Earlier V166 quiet-color option and native views](docs/common-support-routing.md).
 
-![ISO6400 quiet field: noisy, V166 routed-common EMA, exact constructed GT](docs/images/v166-common-support-routing-v1/comparison-26-routed-common-EMA-step1000-triplet.png)
+![ISO6400 quiet field: noisy, V169 balanced EMA, exact constructed GT](docs/images/v169-balanced-spatial-v1/comparison-46.png)
 
-![ISO12800 quiet field: noisy, V166 routed-common EMA, exact constructed GT](docs/images/v166-common-support-routing-v1/comparison-28-routed-common-EMA-step1000-triplet.png)
+![ISO12800 quiet field: noisy, V169 balanced EMA, exact constructed GT](docs/images/v169-balanced-spatial-v1/comparison-52.png)
 
 Noisy → **V165 pair-common EMA** → exact constructed GT, native512 ISO6400/12800
 flat crops. Full RMS falls 1.45–1.91% versus V164 EMA with less fine colored

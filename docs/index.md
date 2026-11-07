@@ -1,5 +1,16 @@
 # Documentation guide
 
+The completed [V169 spatial-balance intervention](balanced-spatial-correction.md)
+lowers quiet RMS **3.74–10.69%** and DC color bias **11.45–31.59% versus V168**,
+retaining3.806–3.837% of GT mesh response at fixed weights. All48 coarse-flat
+errors worsen; total-flat means rise0.389–0.705% and quiet spatial error rises
+0.167–0.267%. Local blotches and real crossings remain unresolved. Both endpoints,
+822 cases,72 actually viewed native figures and audits complete. All47 CPU checks,
+six CUDA filter cases and1,644 exact original-output replays pass. All-case scores
+are streamed; independent posthoc new-array recomputation covers36 saved native
+cases. Keep this response/quiet-color option beside V168 coarse,V165 grain/flat,
+V161/V164 detail and earlier quiet choices.
+
 The completed [V168 fine-mesh data experiment](fine-mesh-training.md) raises mesh response **17.48–18.09% over V167**, to3.805–3.836% of GT. Both-fine recipes gain about59%,still only1.8% of GT. All48 coarse-flat errors improve; quiet RMS rises1.49–5.44%,all32 quiet spatial errors worsen,and total-flat means rise0.136–0.228%. Real fine crossings remain incomplete. Four endpoints/822 cases/72 actually viewed native figures and independent audits are complete;288 CPU checks,94 Adam states and exact V167 control reproduction pass. Training recovery,review continuation and publication-path correction preserve original evidence. Keep the data gain beside V161/V164 detail,V166 quiet color and V165 grain/flat strengths.
 
 The completed [V167 bounded-support trial](bounded-spectral-support.md) restores mesh response **47.33–47.55% versus V166**, to3.24–3.25% of GT,with1.09–1.15% lower present RMS. Quiet RMS rises2.84–3.74%,all32 quiet spatial errors worsen,and full-flat means rise0.189–0.382%;coarse means improve slightly. Real fine crossings remain incomplete. Both1k heads/four endpoints/822 cases/72 actual native figures and independent audits are complete;266 CPU checks,94 Adam states and exact V166 controls pass. Keep this response gain beside V166 quiet color,V165 grain/total flat and stronger V161/V164 detail.

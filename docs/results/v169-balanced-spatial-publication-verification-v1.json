@@ -1,0 +1,56 @@
+{
+  "status": "pass-exact-copies-sources-tables-native-pixels-and-links",
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v169-balanced-spatial-final-v1.json",
+    "sha256": "c4df7c24c14aa58f94820dba6741d833cd40478095eae4c6e4563cb1b9cc0923"
+  },
+  "exact_copies": 21,
+  "source_texts_checked": 114,
+  "unchanged_prior_neural_files": 90,
+  "strict_checkpoint_loads": 2,
+  "rounded_table_cells": 369,
+  "native_figures": 72,
+  "native_triplets": 24,
+  "new_RGB_channels_recomputed": 23961600,
+  "unchanged_RGB_channels_compared": 26803200,
+  "document_links_checked": 636,
+  "documents": {
+    "/home/dllu/proj/demosaic/README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "e900a0b166492f7f6645118da451175e60f32d075b2528ebdc0ea76ce3d6ed4b"
+    },
+    "/home/dllu/proj/demosaic/docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "2485b22bdeab3bd2d23ed0a088e7515c702ca1bf83ed5c2f53bf1b3460a7e8ad"
+    },
+    "/home/dllu/proj/demosaic/docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "1c6a58c8e26ad360422df932860c51f03b72f0680fbbd4ff9c61fcedfd05fd90"
+    },
+    "/home/dllu/proj/demosaic/docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "5e9bcf237ec37bfedd9fcec6e603e8be456fa5c79f424bab0c6dbf7ab20b6c37"
+    },
+    "/home/dllu/proj/demosaic/docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "4c07a06fe816f373314d1d8c52dfe53b3eb9fd899081ca7b8f8837013f7c7c57"
+    },
+    "/home/dllu/proj/demosaic/docs/balanced-spatial-correction.md": {
+      "path": "/home/dllu/proj/demosaic/docs/balanced-spatial-correction.md",
+      "sha256": "605981dc45be8de84e032ca69b044d07015c809e5cd336d1cdac0361c63df02e"
+    },
+    "/home/dllu/proj/demosaic/diary/2026-11-07-13-23-00-v169-balanced-spatial-quality.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-13-23-00-v169-balanced-spatial-quality.md",
+      "sha256": "4cab8fd6647a9876d8a6e5446cccd5b5280a4c9392f81a161f56816147605feb"
+    }
+  },
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v169-publication-v1.py",
+    "sha256": "b8a94f2dad05c00989ad91e0428b582841e6259a9740c4a80b7dcb9737fcffe5",
+    "text": "\"\"\"Check exact publication copies, source bindings, tables, native pixels and links.\"\"\"\nimport re,sys\nfrom pathlib import Path\nimport numpy as np\nimport torch\nfrom report_late_spectral_mixed_quiet import independent_display\nfrom train_directional_bank_trial import guard,read,ref,save\nfrom demosaic.late_balanced_spatial import LateBalancedSpatialDetail\nfrom profile_raw_kernel_inference import model_hash\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V169-balanced-spatial-v3'\noutput=repo/'docs/results/v169-balanced-spatial-publication-verification-v1.json';assert not output.exists()\nindex=repo/'docs/results/v169-balanced-spatial-final-v1.json';final=read(index);prep=read(final['preparation']['path']);plan=read(root/'plan-v1.json');guard(plan)\nassert ref(final['preparation']['path'])==final['preparation'] and len(final['copies'])==21\nfor copies in final['copies'].values():\n assert ref(copies['original']['path'])==copies['original'] and ref(copies['public']['path'])==copies['public']\n assert Path(copies['original']['path']).read_bytes()==Path(copies['public']['path']).read_bytes()\nsources=read(final['sources']['path']);assert len(sources['additional_sources'])==9\nfor source in prep['source_texts']+sources['additional_sources']+[sources['fixture_relocation_source'],prep['publisher']]:\n assert ref(source['path'])['sha256']==source['sha256'] and Path(source['path']).read_text()==source['text']\nfor path,h in prep['prior_neural_sources_unchanged'].items():assert ref(path)['sha256']==h\nassert len(prep['prior_neural_sources_unchanged'])==90 and prep['CPU_checks']==47\nfor endpoint,binding in final['checkpoints'].items():\n assert ref(binding['export']['path'])==binding['export']\n state=torch.load(binding['export']['path'],map_location='cpu',weights_only=True)\n module=LateBalancedSpatialDetail(**state['module_config']);module.load_state_dict(state['state_dict'],strict=True)\n assert model_hash(module)==binding['module_hash'] and state['source_V168_export']==binding['source_V168_export']\n assert state['kernel']==plan['kernel'] and state['training_updates_for_this_operator']==0\n assert ref(state['operator']['path'])==state['operator']\npaired=read(root/'paired-comparisons-v1.json');summary={(s['kind'],s['condition'],s['cohort'],s['method']):s for s in paired['summary']}\nbindings=read(root/'report-bindings-v1.json');report=repo/'docs/balanced-spatial-correction.md';text=report.read_text()\nassert ref(report)==bindings['report']==final['report']\nfor cell in bindings['cells']:\n s=summary[cell['kind'],cell['condition'],cell['cohort'],cell['method']];assert f\"{s[cell['field']]:.{cell['digits']}f}\"==cell['rendered']\nfor line in bindings['lines']:assert line in text\nnative=read(final['figures']['path']);assert len(native['images'])==72 and sum(i['triplet'] for i in native['images'])==24\nnew_channels=copied_channels=0\nprior=read(plan['prior_figures']['path'])\nfor item,old in zip(native['images'],prior['images'],strict=True):\n assert ref(item['image']['path'])==item['image'] and item['source_figure']==old['image'] and item['no_resize']\n assert Path(item['image']['path']).read_bytes()==Path(item['original_image']['path']).read_bytes()\n assert item['ROI_xywh']==old['ROI_xywh'] and item['anchor']==old['anchor'] and item['contrast']==old['contrast'] and item['exposure']==old['exposure']\n image=np.asarray(__import__('PIL.Image',fromlist=['Image']).open(item['image']['path']))\n old_image=np.asarray(__import__('PIL.Image',fromlist=['Image']).open(old['image']['path']))\n a=dict(np.load(item['case']['arrays']['path']));anchor=np.asarray(item['anchor']).reshape(1,3,1,1)\n old_panels={p['label']:p for p in old['panels']}\n for panel in item['panels']:\n  name=panel['label'];x,y,w,h=panel['xywh'];assert w==h==160\n  if name in item['predictions']:\n   b=item['predictions'][name];assert ref(b['path'])==b\n   value=np.load(b['path']);expected=independent_display(anchor+item['contrast']*(value.astype(np.float64)-anchor),a,item['ROI_xywh'],item['exposure']);new_channels+=expected.size\n  else:\n   label={'V168 raw':'Fine mesh raw1k','V168 EMA':'Fine mesh EMA1k'}.get(name,name)\n   source=old_panels[label];ox,oy,ow,oh=source['xywh'];expected=old_image[oy:oy+oh,ox:ox+ow];copied_channels+=expected.size\n  np.testing.assert_array_equal(image[y:y+h,x:x+w],expected)\nview=read(root/'native-viewing-completion-v1.json');assert view['native_figures']==72 and sorted(view['indices'])==list(range(72))\nassert ref(view['journal']['path'])==view['journal']\nexecution=read(root/'execution-completion-v1.json');assert execution['actual_quality_neural_roots']==1644 and execution['repeated_scientific_forwards']==0\naudit=read(root/'independent-audit-v1.json');assert audit['original_replays_checked']==1644 and audit['saved_native_predictions_checked']==288 and audit['saved_direct_corrections_checked']==72\ndiary=Path(sys.argv[1]).resolve();assert diary.is_relative_to(repo/'diary') and diary.is_file()\ndocuments=[repo/p for p in ['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md','docs/balanced-spatial-correction.md']]+[diary]\nlinks=0\nfor p in documents:\n for target in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  resolved=(p.parent/target.split('#')[0]).resolve();assert resolved==output or resolved.is_file(),(p,target);links+=1\nassert not torch.cuda.is_initialized()\nsave(output,dict(status='pass-exact-copies-sources-tables-native-pixels-and-links',publication=ref(index),exact_copies=21,source_texts_checked=len(prep['source_texts'])+11,\n    unchanged_prior_neural_files=90,strict_checkpoint_loads=2,rounded_table_cells=len(bindings['cells']),native_figures=72,native_triplets=24,\n    new_RGB_channels_recomputed=new_channels,unchanged_RGB_channels_compared=copied_channels,document_links_checked=links,\n    documents={str(p):ref(p) for p in documents},new_neural_forwards=0,new_noise_draws=0,CUDA_initialized=False,\n    source=dict(ref(__file__),text=Path(__file__).read_text()),\n    scope='Publication,all saved native pixels and table means checked. Scientific score/replay/input scope is exactly the separate audit:1644 original replay bindings and all6576 durable rows;posthoc new-array recomputation covers the36 saved native cases,not all822 new full predictions. No broader claim is made.'))\nprint('PASS21 exact copies;',len(bindings['cells']),'rounded cells;72 native images;',new_channels+copied_channels,'channels;',links,'links')\n"
+  },
+  "scope": "Publication,all saved native pixels and table means checked. Scientific score/replay/input scope is exactly the separate audit:1644 original replay bindings and all6576 durable rows;posthoc new-array recomputation covers the36 saved native cases,not all822 new full predictions. No broader claim is made."
+}
