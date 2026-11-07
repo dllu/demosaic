@@ -265,3 +265,20 @@ machine receipts retain their bytes and explicitly labeled UTC times.
 Earlier training and feature comparisons include [conditional-mean loss](conditional-mean-training.md),
 [spatial attention](raw-spatial-training.md), [global RAW attention](v136-global-attention-quality.md)
 and [neighboring-gradient memory](raw-patch-memory.md). Their original evidence remains available.
+
+## Frequency separation and delivered flat behavior
+
+[October 2026 RIECR](https://arxiv.org/html/2610.28191v1) separates exposure
+estimation and residual restoration, with gated low/high convolution responses.
+Its packed-RAW exposure benchmark does not establish our joint RGB quality.
+No implementation or weights are adopted.
+
+Our independent scalar fixtures show why frequency separation alone cannot
+establish flat safety: an exact zero-DC kernel can amplify white-noise variance
+by9/8, and nonnegative spatial gating after filtering can introduce DC. Zero
+whole-image mean also permits local quiet-region shifts. The current spectral
+proposal is spatially gated after its band restriction; future changes must
+check delivered camera RGB, local bias and noise. These are algebra
+counterexamples, not trained-model performance or a rejection of RIECR.
+[Exact fixture/source evidence](results/frequency-gating-reading-20261107-v1.json).
+V165's running recipe remains fixed pending its complete quality comparison.
