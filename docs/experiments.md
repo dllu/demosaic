@@ -1,11 +1,16 @@
 # Experiment index
 
-[V162 target-flat anchor](flat-target-anchor.md) is running two fresh identical
-V161 harmonic heads. Only an extra absolute-target RGB loss on detached local
-flat masks changes. 156 CPU checks, 28 archived CUDA contexts, ten independent
-CUDA loss/gradient checks and genuine restored smoke pass. All four endpoints,
-822 cases, six retained native columns and both standing GFX scenes are fixed;
-quality remains pending.
+[Completed V162 target-flat anchor](flat-target-anchor.md): identical V161
+harmonic heads, only anchor weight 0 versus 0.25. Quiet spatial RMS falls
+4.73–7.73% on all 32 inputs; total quiet RMS falls 1.68–5.29%, improving 26/32
+inputs at both endpoints. Mesh response falls 20–22% to 3.846–4.112% of GT.
+Native512 total flat RMS falls 1.28–2.55% versus V161; mean ISO12800 quiet bias
+increases and real crossings stay soft. All four endpoints/822 cases/72 actual
+native views, six retained columns and independent audits complete. 156 CPU
+checks, 92 final Adam states, exact V161 trace/state/1,644 replays and all 1,000
+independent mask checks pass. 5,364 actual head calls; zero scientific retries.
+The auxiliary stale-path verifier failure and premature terminal-guard rejection
+are preserved; no native viewing was credited before render completion.
 
 [Completed V161 frequency context](harmonic-frequency-context.md): same V160
 paired data/loss, plus 6,720 parameters. Mesh response rises 20.56–21.57% to

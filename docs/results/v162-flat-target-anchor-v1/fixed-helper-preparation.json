@@ -1,0 +1,44 @@
+{
+  "status": "fixed-reductions-prepared-before-quality",
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/summarize-v162-final-v1.py",
+      "sha256": "a70bd9a8115c895e303a13361b865e87123916422fb55f1d3cfaf08c6c1dc5ce"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/build-v162-tables-v1.py",
+      "sha256": "b31b48a7c52265a668c3bc747a81520501201ef9caabf7d4713d2f833127edd1"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/paired-v162-regions-v1.py",
+      "sha256": "9fdcac7b9c5f065829f45500c2e42ad0cf7b7c2209f1de1c2e5ed84d8d2488ff"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quiet-dc-v162-final-v1.py",
+      "sha256": "3da8ac018994e15edbe9465fc379cfa129426897a0bc8874484d9399aa95ce03"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/record-v162-viewing-v1.py",
+      "sha256": "26c5e75909c9369c397c9710b7096c28ef9945f0475c93721e9a2b3e747e3737"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/route-v162-final-v1.py",
+      "sha256": "cc0b37bf24a44ff46743351eae9d92cc3d3033d7bd89b64620682fc845a83f5c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/compare-v162-retained-v1.py",
+      "sha256": "75f17e0820aa95b475c63044028a23b4ab716e9ad3ce3b4e03d1d7ea7750e8bd"
+    }
+  ],
+  "protocol_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/protocol-document-v1.md",
+    "sha256": "004d8a53fdde26343a51939774aad2d973f2e16d5a8a795dbb63a77e886abc8d"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prepare-v162-final-helpers-v1.py",
+    "sha256": "b7c5344c0f2303f46a82d416d92ecff122f9e3a8cc2541685465c237d64afb6a",
+    "text": "\"\"\"Freeze fixed V162 reductions and viewing sources before endpoint quality.\"\"\"\nimport ast\nfrom pathlib import Path\nfrom train_directional_bank_trial import ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V162-flat-target-anchor-v1'\nsnapshot=root/'protocol-document-v1.md';assert not snapshot.exists();snapshot.write_bytes((repo/'docs/flat-target-anchor.md').read_bytes())\nmapping={'summarize-v161-final-v1.py':'summarize-v162-final-v1.py','build-v161-tables-v1.py':'build-v162-tables-v1.py',\n    'paired-v161-regions-v1.py':'paired-v162-regions-v1.py','quiet-dc-v161-final-v1.py':'quiet-dc-v162-final-v1.py',\n    'record-v161-viewing-v1.py':'record-v162-viewing-v1.py','route-v161-final-v1.py':'route-v162-final-v1.py',\n    'compare-v161-retained-v1.py':'compare-v162-retained-v1.py'}\nsources=[]\nfor old,new in mapping.items():\n p=repo/'.cache'/new;assert not p.exists();s=(repo/'.cache'/old).read_text()\n s=s.replace('V161-harmonic-context-v1','V162-flat-target-anchor-v1').replace('v161-harmonic-context','v162-flat-target-anchor')\n s=s.replace('paired-control','harmonic-control').replace('harmonic-context','flat-anchor')\n for a,b in [('Pair ctrl raw','Harm ctrl raw'),('Pair ctrl EMA','Harm ctrl EMA'),('Harmonic raw','Flat anchor raw'),('Harmonic EMA','Flat anchor EMA')]:s=s.replace(a,b)\n if old.startswith('paired'):\n  a=s.index(\"    'scope':\");b=s.index('\\n',a)\n  s=s[:a]+\"    'scope':'Lower-is-better actual errors preserve every case/worst increase. All4 current endpoints versus parent and2 candidate/control contrasts. Identical124397-parameter harmonic heads/data/base losses;only flat-target anchor weight0 versus.25 changes. Exact V161 controls. Related adaptive cohort,not independent scenes/significance.'})\"+s[b:]\n if old.startswith('record'):\n  a=s.index(\"        'scope':\");b=s.index('\\n',a)\n  s=s[:a]+\"        'scope':'All four fixed V162 endpoints;only target-flat anchor weight0 versus.25 changes. Six retained V156/V157/V158/V159/V160 ordinary/V160 paired columns. Original-detail viewing recorded only after seeing images. Both protected GFX scenes/windows/priors/JPEGs assessed;ISO100 refs qualitative,not exactGT.'})\"+s[b:]\n if old.startswith('compare'):\n  needle=\"    'V160 ordinary':(repo/'.cache/quality-20261107/V160-paired-response-v1','ordinary'),\";assert needle in s\n  s=s.replace(needle,needle+\"\\n    'V160 paired':(repo/'.cache/quality-20261107/V160-paired-response-v1','paired-response'),\\n    'V161':(repo/'.cache/quality-20261107/V161-harmonic-context-v1','harmonic-context'),\")\n  a=s.index(\"    'scope':\");b=s.index('\\n',a)\n  s=s[:a]+\"    'scope':'All four current endpoints compared with both endpoints of V156/V157/V158/V159/V160 ordinary/V160 paired/V161. Historical contrasts mix data/loss/architecture;only current harmonic-control versus flat-anchor isolates anchor weight0/.25. Related cohort,not independent scenes/significance. Lower errors preserve cases/worst increases;response means stay separate.'})\"+s[b:]\n ast.parse(s);p.write_text(s);sources.append(ref(p))\nsave(root/'final-helper-preparation-v1.json',{'status':'fixed-reductions-prepared-before-quality','sources':sources,\n    'protocol_snapshot':ref(snapshot),'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forwards':0,'new_noise_draws':0})\nprint('Prepared7 fixed reduction/table/viewing sources;not executed')\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0
+}

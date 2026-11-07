@@ -1,0 +1,130 @@
+{
+  "status": "all10-scientific-owners-and-independent-mask-auditor-terminal",
+  "recorded_unix_UTC": 1794060500.8872402,
+  "recorded_owner_count": 11,
+  "scientific_owner_count": 10,
+  "owners": [
+    {
+      "stage": "training-controller",
+      "owner": {
+        "pid": 3604321,
+        "created": 1794058390.8
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "parity",
+      "owner": {
+        "pid": 3604324,
+        "created": 1794058390.86
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "smoke",
+      "owner": {
+        "pid": 3604348,
+        "created": 1794058402.88
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "train",
+      "owner": {
+        "pid": 3604365,
+        "created": 1794058424.9
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "postprocess-controller",
+      "owner": {
+        "pid": 3604475,
+        "created": 1794058498.79
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "checkpoint-validation",
+      "owner": {
+        "pid": 3660200,
+        "created": 1794059869.15
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 3660225,
+        "created": 1794059870.19
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 3662183,
+        "created": 1794060232.98
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 3662430,
+        "created": 1794060330.46
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 3662553,
+        "created": 1794060440.44
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "independent-mask-auditor",
+      "owner": {
+        "pid": 3608125,
+        "created": 1794059444.88
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "live_matching_root_argv": [],
+  "head_calls": 5364,
+  "head_image_evaluations": 11424,
+  "additional_leaf_output_CUDA_backwards": 10,
+  "actual_parent_root_calls": 0,
+  "actual_DINO_backbone_calls": 0,
+  "new_source_constructions": 0,
+  "new_sensor_sampler_calls": 0,
+  "cache_batches_reused": 1000,
+  "unique_training_observations_reused": 4000,
+  "scientific_stage_failures": 0,
+  "full_training_restarts": 0,
+  "review_root_calls": 3288,
+  "control_prediction_replays_exact": 1644,
+  "new_prediction_arrays": 1644,
+  "new_array_bytes": 4747113984,
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/status-v1.json",
+    "sha256": "89f7805b8c8d820550e5cc7f7261f3d75d4db97401cf5f9f608e26ee62c7c1ca"
+  },
+  "postprocess_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/postprocess-status-v1.json",
+    "sha256": "9dbb5432c217b6162aa560d54800f3fe1878137217355c856507f648bda03f3e"
+  },
+  "independent_training_mask_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/training-mask-audit-v1.json",
+    "sha256": "ba2179a117617d8321e9af3ce580ff48d702efcc471c24a7fe9ac609abaa7d15"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v162-execution-v1.py",
+    "sha256": "ffd66fb77b6787495f8d15738430994603a51a87d30d7f47a209cca657e1d6a2",
+    "text": "\"\"\"Account original V162 scientific owners and the independent mask auditor.\"\"\"\nimport json\nimport os\nimport time\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import read,ref,save\nfrom train_v43_quality_trial import live\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1')\ntraining=read(root/'status-v1.json');post=read(root/'postprocess-status-v1.json')\nassert training['status']=='completed-matched-training-awaiting-fixed-quality-review'\nassert post['status']=='completed-four-endpoint-audits-and-rendering-awaiting-actual-native-viewing'\nassert set(training['completed'])=={'parity','smoke','train'}\nassert set(post['completed'])=={'checkpoint-validation','review','scores','metric-audit','render'}\nassert all(v['returncode']==0 for v in post['completed'].values())\nowners=[('training-controller',training['owner'])]+[(n,read(root/f'{n}-result-v1.json')['owner']) for n in ['parity','smoke','train']]\nowners += [('postprocess-controller',post['owner'])]+[(n,v['owner']) for n,v in post['completed'].items()]\nassert len(owners)==10\nmask=read(root/'training-mask-audit-v1.json');assert mask['mask_arrays_checked']==1000\nowners += [('independent-mask-auditor',mask['owner'])]\nassert len(owners)==len({(o['pid'],o['created']) for _,o in owners})==11\nrecords=[]\nfor stage,owner in owners:\n assert not live(owner),(stage,owner)\n try:\n  p=psutil.Process(owner['pid']);terminal='PID-reused-original-terminal' if abs(p.create_time()-owner['created'])>=.01 else p.status()\n except psutil.NoSuchProcess:terminal='absent'\n records.append({'stage':stage,'owner':owner,'terminal_state':terminal})\nreview=read(root/'review-result-v1.json');assert review['component_forwards']==3288 and review['new_prediction_arrays']==review['control_replayed_exact']==1644\npaths=set();newpaths=set();controls=0\nfor label,binding in review['collections'].items():\n c=read(binding['path']);assert c['component_forwards']==822\n forward=[json.loads(s) for s in Path(c['forward_journal']['path']).read_text().splitlines()]\n observations=[json.loads(s) for s in Path(c['observation_journal']['path']).read_text().splitlines()]\n assert [r['returned_forwards'] for r in forward]==list(range(1,823)) and observations==c['observations']\n control=c['arm']=='harmonic-control';assert c['adopted_array_storage_after_actual_replay']==control\n for row in observations:\n  p=Path(row['prediction']['path']);assert p.is_relative_to('/mnt/external') and str(p) not in paths\n  paths.add(str(p));assert row['archive_replayed_bit_exact']==control\n  if control:controls+=1\n  else:newpaths.add(str(p))\nassert len(paths)==3288 and len(newpaths)==controls==1644\nparity=read(root/'parity-result-v1.json');assert len(parity['CUDA_anchor_loss_checks'])==10\nhead_calls=parity['component_forward_evaluations']+sum(read(root/'smoke-result-v1.json')['counts'].values())+sum(read(root/'train-result-v1.json')['counts'].values())+review['component_forwards']\nassert head_calls==5364\nexcluded={os.getpid()}|{p.pid for p in psutil.Process().parents()};matching=[]\nfor p in psutil.process_iter(['pid','cmdline','status']):\n if p.pid in excluded or p.info['status'] in ['zombie','dead']:continue\n if any(t==str(root) or t.startswith(str(root)+'/') for t in p.info['cmdline'] or []):matching.append(p.info)\nassert not matching,matching\noutput=root/'execution-completion-v1.json';assert not output.exists()\nsave(output,{'status':'all10-scientific-owners-and-independent-mask-auditor-terminal','recorded_unix_UTC':time.time(),\n    'recorded_owner_count':11,'scientific_owner_count':10,'owners':records,'live_matching_root_argv':matching,\n    'head_calls':head_calls,'head_image_evaluations':11424,'additional_leaf_output_CUDA_backwards':10,\n    'actual_parent_root_calls':0,'actual_DINO_backbone_calls':0,'new_source_constructions':0,'new_sensor_sampler_calls':0,\n    'cache_batches_reused':1000,'unique_training_observations_reused':4000,'scientific_stage_failures':0,'full_training_restarts':0,\n    'review_root_calls':3288,'control_prediction_replays_exact':1644,'new_prediction_arrays':1644,\n    'new_array_bytes':sum(Path(p).stat().st_size for p in newpaths),\n    'training_completion':ref(root/'status-v1.json'),'postprocess_completion':ref(root/'postprocess-status-v1.json'),\n    'independent_training_mask_audit':ref(root/'training-mask-audit-v1.json'),\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'All10 original scientific controllers/workers plus one independent array-only mask auditor terminal.5364 root head calls exclude separate CPU tests and10 prefix leaf-output loss backwards. All1000 control trace/raw/EMA/Adam and1644 actual output replays reproduce V161 harmonic. Only anchor weight0/.25 changes;no new inference inputs,NN sources,parent/DINO/source/noise/RAW/original calls. All1644 new arrays external. Auxiliary readiness-verifier stale-path failure and corrected revision2 are separately preserved;no scientific retry.'})\nprint('PASS10 scientific owners plus mask auditor terminal;5364 head calls/11424 images;1644 new external arrays')\n"
+  },
+  "scope": "All10 original scientific controllers/workers plus one independent array-only mask auditor terminal.5364 root head calls exclude separate CPU tests and10 prefix leaf-output loss backwards. All1000 control trace/raw/EMA/Adam and1644 actual output replays reproduce V161 harmonic. Only anchor weight0/.25 changes;no new inference inputs,NN sources,parent/DINO/source/noise/RAW/original calls. All1644 new arrays external. Auxiliary readiness-verifier stale-path failure and corrected revision2 are separately preserved;no scientific retry."
+}

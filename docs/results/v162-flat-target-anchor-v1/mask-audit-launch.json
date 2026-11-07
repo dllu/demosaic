@@ -1,0 +1,18 @@
+{
+  "status": "original-independent-mask-auditor-launched",
+  "owner": {
+    "pid": 3608125,
+    "created": 1794059444.88
+  },
+  "recorded_unix_UTC": 1794059444.9446604,
+  "auditor": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v162-training-masks-v1.py",
+    "sha256": "e4ec9544bca7d075ea79a6e3b70c22d0263fe077d5c600c1a17ca0ad1839c13d"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v162-mask-audit-v1.py",
+    "sha256": "7b3e4b5cb32e1369d3aa3d181022e0e5028ebab87f6046a98f67bb54796a0b17",
+    "text": "\"\"\"Launch one independent array-only auditor alongside original training.\"\"\"\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import read,ref,save\nfrom train_v43_quality_trial import live\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V162-flat-target-anchor-v1'\nassert live(read(root/'launch-v1.json')['owner'])\nassert not (root/'training-mask-audit.claim').exists() and not (root/'mask-audit-launch-v1.json').exists()\nwith (root/'training-mask-audit-v1.log').open('x') as log:\n p=subprocess.Popen([str(repo/'.venv/bin/python'),str(repo/'.cache/audit-v162-training-masks-v1.py')],cwd=repo,\n    env=dict(os.environ,PYTHONPATH='src:scripts',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1'),stdout=log,\n    stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True)\n owner={'pid':p.pid,'created':psutil.Process(p.pid).create_time()}\nsave(root/'mask-audit-launch-v1.json',{'status':'original-independent-mask-auditor-launched','owner':owner,\n    'recorded_unix_UTC':time.time(),'auditor':ref(repo/'.cache/audit-v162-training-masks-v1.py'),\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_neural_forwards':0})\nprint(owner)\n"
+  },
+  "new_neural_forwards": 0
+}

@@ -1,8 +1,12 @@
 # Documentation guide
 
-[V162 clean-target flat-region anchoring](flat-target-anchor.md) is training two
-matched V161 heads with anchor weight 0 versus 0.25. Its 156 CPU checks, CUDA
-arithmetic/parity and restored smoke pass; final quality remains pending.
+The completed [V162 target-flat anchor trial](flat-target-anchor.md) reduces
+quiet spatial RMS 4.73–7.73% on all 32 inputs versus V161. Total quiet RMS falls
+1.68–5.29%, but six inputs worsen and mesh response falls 20–22%, reaching
+3.846–4.112% of GT. Native512 total-flat RMS falls 1.28–2.55% versus V161;
+broad casts/mottle and soft crossings remain. All four endpoints/822 cases,
+72 actual native views, independent audits and 1,000 training-mask checks are
+complete. Preserve this grain reduction beside V161's stronger response.
 
 The completed [V161 frequency-context trial](harmonic-frequency-context.md)
 raises learned mesh response 20.56–21.57% over exact V160 paired control, reaching

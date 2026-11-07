@@ -1,0 +1,65 @@
+{
+  "status": "completed-recorded-trace-reduction",
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/train-result-v1.json",
+    "sha256": "7730a55a20fe24db14a2d5be4f757ac3bb62e092db7965f320c4d9687c86d9fd"
+  },
+  "cache": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/cache-result-v2.json",
+    "sha256": "c7b02f5994dddca277601bf778604f68729b820fc34b732d2d1a9855d7c2df54"
+  },
+  "groups": [
+    {
+      "arm": "harmonic-control",
+      "ADC_only": true,
+      "batches": 100,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 100,
+      "exact_zero_total_losses": 100
+    },
+    {
+      "arm": "harmonic-control",
+      "ADC_only": false,
+      "batches": 900,
+      "norm_median": 0.2698173075914383,
+      "norm_maximum": 73.60221099853516,
+      "norms_over_one": 134,
+      "sum_norm_capped_at_one_squared_proxy": 229.73434383575784,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    },
+    {
+      "arm": "flat-anchor",
+      "ADC_only": true,
+      "batches": 100,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 100,
+      "exact_zero_total_losses": 100
+    },
+    {
+      "arm": "flat-anchor",
+      "ADC_only": false,
+      "batches": 900,
+      "norm_median": 0.4229089021682739,
+      "norm_maximum": 113.62727355957031,
+      "norms_over_one": 197,
+      "sum_norm_capped_at_one_squared_proxy": 329.8337123817746,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/route-v162-final-v1.py",
+    "sha256": "cc0b37bf24a44ff46743351eae9d92cc3d3033d7bd89b64620682fc845a83f5c",
+    "text": "\"\"\"Reduce actual pre-clip traces without new training or forward calls.\"\"\"\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import read,ref,save\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1')\nplan=read(root/'plan-v1.json');cache=read(plan['cache']['path']);training=read(root/'train-result-v1.json')\ngroups=[]\nfor arm in training['counts']:\n    for adc in [True,False]:\n        rows=[r['arms'][arm] for r,b in zip(training['trace'],cache['batches'],strict=True)\n            if (b['metadata']['noise']['shot']==b['metadata']['noise']['read']==0)==adc]\n        norms=np.array([r['gradient_norm'] for r in rows],dtype=np.float64)\n        groups.append({'arm':arm,'ADC_only':adc,'batches':len(rows),\n            'norm_median':float(np.median(norms)),'norm_maximum':float(norms.max()),\n            'norms_over_one':int((norms>1).sum()),'sum_norm_capped_at_one_squared_proxy':float((np.minimum(norms,1)**2).sum()),\n            'exact_zero_norms':int((norms==0).sum()),'exact_zero_total_losses':sum(r['loss']==0 for r in rows)})\noutput=root/'training-routing-summary-v1.json';assert not output.exists()\nsave(output,{'status':'completed-recorded-trace-reduction','training':ref(root/'train-result-v1.json'),\n    'cache':plan['cache'],'groups':groups,'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forwards':0,'new_noise_draws':0,\n    'scope':'Recorded full-parameter pre-clipping gradient norms for both matched arms. Summed capped squared norms omit clipping epsilon and are a routing proxy,not Adam displacement or causal quality. Zero-gradient ADC steps retain optimizer/EMA coasting.'})\nfor row in groups:print(row)\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Recorded full-parameter pre-clipping gradient norms for both matched arms. Summed capped squared norms omit clipping epsilon and are a routing proxy,not Adam displacement or causal quality. Zero-gradient ADC steps retain optimizer/EMA coasting."
+}
