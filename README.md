@@ -32,6 +32,7 @@ cost remains unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V163 phase inputs](docs/harmonic-phase-inputs.md) | Quiet DC bias falls 2.60–3.96%; total quiet RMS falls 0.62–1.19% versus V162 | Spatial error rises slightly; mesh response falls 0.52–0.59%; all 48 coarse-flat errors worsen |
 | [V162 target anchor](docs/flat-target-anchor.md) | Quiet spatial RMS falls 4.73–7.73% on all 32 inputs versus V161; native512 flat RMS falls 1.28–2.55% | Mesh response falls 20–22%; quiet bias and broad mottle persist |
 | [V161 frequency context](docs/harmonic-frequency-context.md) | Learned mesh response 4.83–5.24% of exact GT; coarse flat RMS 0.48–0.58% below V143 | Quiet RMS 14.14–18.38% above V143; extra grain/bias, soft real crossings |
 | [V160 paired response](docs/paired-response.md) | Stronger learned mesh response: 4.00–4.31% of exact GT | Blank/quiet errors and fine colored grain rise; real crossings remain soft |
@@ -49,8 +50,9 @@ The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
 V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
 [Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
-Keep V161's learned response, V162's grain reduction, V158 quiet accuracy and
-V157's stronger coarse capacity visible; no model combines their strengths.
+Keep V161's learned response, V162's grain reduction, V163's small bias gain,
+V158 quiet accuracy and V157's stronger coarse capacity visible; no model
+combines their strengths.
 
 V160 passes 123 CPU checks, 450 exact frozen-base gradient comparisons and final
 Adam/EMA validation. Its cache accounting failure, explicit 23-batch adoption
@@ -66,7 +68,7 @@ grain with persistent casts and soft crossings. Both heads/four endpoints,
 822 cases and 72 actual native views are audited. All 156 CPU checks, 92 final
 Adam states, exact V161 controls and 1,000 independent training-mask checks pass.
 
-The [V163 phase-input trial](docs/harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). Both 1,000-step heads pass final validation (93 Adam states, four strict CPU loads, exact V162 controls); 180 CPU checks pass. Full quality review continues after adopting 268 verified calls from a preserved disk-guard failure; native results remain pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
+The completed [V163 phase-input trial](docs/harmonic-phase-inputs.md) lowers mean quiet RMS **0.62–1.19% versus V162** through 2.60–3.96% lower color bias. Spatial error rises slightly, mesh response falls another 0.52–0.59%, and all 48 coarse-flat errors worsen versus V162. Native fence crossings remain soft. All four endpoints, 822 cases, 72 actual native views and independent audits are complete; 180 CPU checks, 93 final Adam states and exact controls pass. The disk-guard failure and verified 268-call adoption are preserved.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. V160 uses the 90,782-photo training cache and reviewed regions.
@@ -96,18 +98,25 @@ common exposure 8 and contrast 1; crop pixels are never resized.
 
 ![Mesh2309: noisy, V161 harmonic-context EMA, exact constructed GT](docs/images/v161-harmonic-context-v1/comparison-02-harmonic-context-EMA-step1000-triplet.png)
 
-Noisy → **V162 flat-anchor EMA** → exact constructed GT, ISO6400 and ISO12800
-quiet fields. Mean quiet RMS falls 2.81–5.29% versus V161 EMA, with less fine
-colored grain; broad casts remain, quiet errors stay above V143, and mesh response
-falls 21.53%. Native 160×160 cells in 512px RGGB contexts, quiet ROI
+Noisy → **V163 phase-input EMA** → exact constructed GT, ISO6400 and ISO12800
+quiet fields. Mean quiet RMS falls 1.17–1.19% versus V162 EMA through lower
+color bias; spatial RMS rises 0.025–0.042% and broad mottle persists. Mesh response
+falls another 0.59%. Native 160×160 cells in 512px RGGB contexts, quiet ROI
 `[80,176,160,160]`, common exposure 8 and 40× camera-linear contrast about
 `[.001500000013,.006000000052,.002666666871]`. Shot/read variance is
 .00128/6.5536e-6 or .00256/2.62144e-5; crop pixels are never resized.
-[All methods, checkpoint/source hashes and complete metadata](docs/flat-target-anchor.md).
+[All endpoints, checkpoint/source hashes and display metadata](docs/harmonic-phase-inputs.md).
 
-![ISO6400 quiet field: noisy, V162 flat-anchor EMA, exact constructed GT](docs/images/v162-flat-target-anchor-v1/comparison-26-flat-anchor-EMA-step1000-triplet.png)
+![ISO6400 quiet field: noisy, V163 phase-input EMA, exact constructed GT](docs/images/v163-harmonic-phase-v1/comparison-26-harmonic-phase-EMA-step1000-triplet.png)
 
-![ISO12800 quiet field: noisy, V162 flat-anchor EMA, exact constructed GT](docs/images/v162-flat-target-anchor-v1/comparison-28-flat-anchor-EMA-step1000-triplet.png)
+![ISO12800 quiet field: noisy, V163 phase-input EMA, exact constructed GT](docs/images/v163-harmonic-phase-v1/comparison-28-harmonic-phase-EMA-step1000-triplet.png)
+
+V162's measured grain-reduction triplets remain at
+[ISO6400](docs/images/v162-flat-target-anchor-v1/comparison-26-flat-anchor-EMA-step1000-triplet.png)
+and [ISO12800](docs/images/v162-flat-target-anchor-v1/comparison-28-flat-anchor-EMA-step1000-triplet.png).
+V163's slightly weaker mesh remains visible at
+[seed2302](docs/images/v163-harmonic-phase-v1/comparison-00-harmonic-phase-EMA-step1000-triplet.png)
+and [seed2309](docs/images/v163-harmonic-phase-v1/comparison-02-harmonic-phase-EMA-step1000-triplet.png).
 
 V162's weaker mesh response remains visible in
 [seed2302](docs/images/v162-flat-target-anchor-v1/comparison-00-flat-anchor-EMA-step1000-triplet.png)

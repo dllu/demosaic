@@ -1,0 +1,162 @@
+{
+  "status": "all13-original-and-continuation-owners-terminal",
+  "recorded_unix_UTC": 1794064920.4589927,
+  "recorded_owner_count": 13,
+  "owners": [
+    {
+      "stage": "training-controller",
+      "owner": {
+        "pid": 3681304,
+        "created": 1794062487.34
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "parity",
+      "owner": {
+        "pid": 3681306,
+        "created": 1794062487.38
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "smoke",
+      "owner": {
+        "pid": 3681331,
+        "created": 1794062499.4
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "train",
+      "owner": {
+        "pid": 3681402,
+        "created": 1794062521.42
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "postprocess-controller",
+      "owner": {
+        "pid": 3733877,
+        "created": 1794064298.25
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 3733892,
+        "created": 1794064299.19
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "phase-removal",
+      "owner": {
+        "pid": 3735554,
+        "created": 1794064637.15
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 3735590,
+        "created": 1794064647.27
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 3736048,
+        "created": 1794064743.98
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 3738678,
+        "created": 1794064876.39
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "original-postprocess-controller",
+      "owner": {
+        "pid": 3681305,
+        "created": 1794062487.36
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "original-checkpoint-validation",
+      "owner": {
+        "pid": 3731994,
+        "created": 1794063977.75
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "original-review",
+      "owner": {
+        "pid": 3731996,
+        "created": 1794063978.63
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "additional_leaf_output_CUDA_backwards": 10,
+  "separate_CPU_frequency_gain_calls_including_failed_serializer": 4,
+  "training_mask_replay": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/training-mask-replay-v1.json",
+    "sha256": "e230bc9d82108ad671404ed61729f5c41604c81d8d3935e1cba98183cce34300"
+  },
+  "live_matching_root_argv": [],
+  "head_calls": 5412,
+  "head_image_evaluations": 11472,
+  "actual_parent_root_calls": 0,
+  "actual_DINO_backbone_calls": 0,
+  "new_source_constructions": 0,
+  "new_sensor_sampler_calls": 0,
+  "cache_batches_reused": 1000,
+  "unique_training_observations_reused": 4000,
+  "scientific_stage_failures": 1,
+  "full_training_restarts": 0,
+  "explicit_review_continuations": 1,
+  "repeated_review_calls": 0,
+  "adopted_original_review_calls": 268,
+  "continuation_review_calls": 3020,
+  "review_root_calls": 3288,
+  "control_prediction_replays_exact": 1644,
+  "phase_removal_calls": 48,
+  "phase_on_replays_exact": 24,
+  "new_main_prediction_arrays": 1644,
+  "new_off_prediction_arrays": 24,
+  "new_prediction_arrays": 1668,
+  "new_array_bytes": 4835590656,
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/status-v1.json",
+    "sha256": "4e5cbe5f50740c02e4776cf524516b8f1fa412b37ddb84e139e55b85b4b327f3"
+  },
+  "postprocess_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/postprocess-status-v2.json",
+    "sha256": "70dd74084215d415a3df87c1699eb7f4e1c665393fbc9680b2319323879bebd4"
+  },
+  "original_postprocess_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/postprocess-status-v1.json",
+    "sha256": "0322a22cf964f65aacdc15ed3d67b3ca4b2f322e9b7e29418a85a7874aa5ca47"
+  },
+  "adoption": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/review-adoption-v2.json",
+    "sha256": "3a73614123380d138a053f8b55506b5cb4379a6666521b80ee8535a7d0462e40"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v163-execution-v2.py",
+    "sha256": "87482d68e80b06cc39885494fce3150335e1f0df12a051fb65323f9f6f4e2bc0",
+    "text": "\"\"\"Account original V163 owners and actual fixed scientific execution.\"\"\"\nimport json\nimport os\nimport time\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import read,ref,save\nfrom train_v43_quality_trial import live\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1')\ntraining=read(root/'status-v1.json');post=read(root/'postprocess-status-v2.json');original=read(root/'postprocess-status-v1.json')\nassert training['status']=='completed-matched-training-awaiting-fixed-quality-review'\nassert post['status']=='completed-four-endpoint-audits-and-rendering-awaiting-actual-native-viewing'\nassert set(training['completed'])=={'parity','smoke','train'}\nassert set(post['completed'])=={'review','phase-removal','scores','metric-audit','render'}\nassert all(v['returncode']==0 for v in post['completed'].values())\nowners=[('training-controller',training['owner'])]\nowners += [(name,read(root/f'{name}-result-v1.json')['owner']) for name in ['parity','smoke','train']]\nowners += [('postprocess-controller',post['owner'])]+[(stage,item['owner']) for stage,item in post['completed'].items()]\nowners += [('original-postprocess-controller',original['owner'])]+[('original-'+n,v['owner']) for n,v in original['completed'].items()]\nassert original['completed']['checkpoint-validation']['returncode']==0 and original['completed']['review']['returncode']==1\nassert len(owners)==len({(x['pid'],x['created']) for _,x in owners})==13\nrecords=[]\nfor stage,owner in owners:\n    assert not live(owner),(stage,owner)\n    try:\n        p=psutil.Process(owner['pid']);terminal='PID-reused-original-terminal' if abs(p.create_time()-owner['created'])>=.01 else p.status()\n    except psutil.NoSuchProcess:terminal='absent'\n    records.append({'stage':stage,'owner':owner,'terminal_state':terminal})\nreview=read(root/'review-result-v1.json');diagnostic=read(root/'phase-removal-result-v1.json')\nassert review['adopted_prior_returned_forwards']==268 and review['continuation_new_component_forwards']==3020\nadoption=read(root/'review-adoption-v2.json');assert adoption['adopted_head_calls']==268\noriginal_events=Path(adoption['original_forward_journal']['path']).read_bytes();original_observations=Path(adoption['original_observation_journal']['path']).read_bytes()\nassert review['component_forwards']==3288 and review['new_prediction_arrays']==review['control_replayed_exact']==1644\npaths=set();newpaths=set();controls=0\nfor label,binding in review['collections'].items():\n    c=read(binding['path']);assert c['component_forwards']==822\n    forward=[json.loads(s) for s in Path(c['forward_journal']['path']).read_text().splitlines()]\n    observations=[json.loads(s) for s in Path(c['observation_journal']['path']).read_text().splitlines()]\n    assert [r['returned_forwards'] for r in forward]==list(range(1,823)) and observations==c['observations'] and len(observations)==822\n    control=c['arm']=='anchor-control';assert c['adopted_array_storage_after_actual_replay']==control\n    if c['adopted_prior_returned_forwards']:\n        assert c['adopted_prior_returned_forwards']==268 and c['new_component_forwards']==554\n        assert Path(c['forward_journal']['path']).read_bytes().startswith(original_events)\n        assert Path(c['observation_journal']['path']).read_bytes().startswith(original_observations)\n    else:assert c['new_component_forwards']==822\n    for row in observations:\n        p=Path(row['prediction']['path']);assert p.is_relative_to('/mnt/external') and str(p) not in paths\n        paths.add(str(p));assert row['archive_replayed_bit_exact']==control\n        if control:controls+=1\n        else:newpaths.add(str(p))\nassert len(paths)==3288 and len(newpaths)==controls==1644\nassert diagnostic['head_calls']==48 and diagnostic['new_prediction_arrays']==24 and diagnostic['RNG_unchanged']\nforward=[json.loads(s) for s in Path(diagnostic['forward_journal']['path']).read_text().splitlines()]\nassert [r['returned_forwards'] for r in forward]==list(range(1,49))\nassert [json.loads(s) for s in Path(diagnostic['observation_journal']['path']).read_text().splitlines()]==diagnostic['records']\nfor r in diagnostic['records']:\n    assert r['on_replayed_bit_exact'] and r['direct_spatial_path_bit_exact'] and r['head_calls']==2\n    p=Path(r['off_prediction']['path']);assert p.is_relative_to('/mnt/external') and str(p) not in paths\n    paths.add(str(p));newpaths.add(str(p))\nassert len(newpaths)==1668 and len(paths)==3312\nhead_calls=read(root/'parity-result-v1.json')['component_forward_evaluations']+sum(read(root/'smoke-result-v1.json')['counts'].values())+sum(read(root/'train-result-v1.json')['counts'].values())+review['component_forwards']+diagnostic['head_calls']\nassert head_calls==5412\nexcluded={os.getpid()}|{p.pid for p in psutil.Process().parents()};matching=[]\nfor p in psutil.process_iter(['pid','cmdline','status']):\n    if p.pid in excluded or p.info['status'] in ['zombie','dead']:continue\n    if any(t==str(root) or t.startswith(str(root)+'/') for t in p.info['cmdline'] or []):matching.append(p.info)\nassert not matching,matching\noutput=root/'execution-completion-v1.json';assert not output.exists()\nsave(output,{'status':'all13-original-and-continuation-owners-terminal','recorded_unix_UTC':time.time(),'recorded_owner_count':13,'owners':records,\n    'additional_leaf_output_CUDA_backwards':10,'separate_CPU_frequency_gain_calls_including_failed_serializer':4,\n    'training_mask_replay':ref(root/'training-mask-replay-v1.json'),'live_matching_root_argv':matching,'head_calls':head_calls,'head_image_evaluations':11472,\n    'actual_parent_root_calls':0,'actual_DINO_backbone_calls':0,'new_source_constructions':0,'new_sensor_sampler_calls':0,\n    'cache_batches_reused':1000,'unique_training_observations_reused':4000,'scientific_stage_failures':1,'full_training_restarts':0,'explicit_review_continuations':1,'repeated_review_calls':0,'adopted_original_review_calls':268,'continuation_review_calls':3020,\n    'review_root_calls':3288,'control_prediction_replays_exact':1644,'phase_removal_calls':48,'phase_on_replays_exact':24,\n    'new_main_prediction_arrays':1644,'new_off_prediction_arrays':24,'new_prediction_arrays':1668,\n    'new_array_bytes':sum(Path(p).stat().st_size for p in newpaths),'training_completion':ref(root/'status-v1.json'),\n    'postprocess_completion':ref(root/'postprocess-status-v2.json'),'original_postprocess_failure':ref(root/'postprocess-status-v1.json'),'adoption':ref(root/'review-adoption-v2.json'),'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Uninterrupted V163 training and explicit verified review continuation after one disk-guard failure:5412 root calls/11472 images exclude CPU tests,10 CUDA leaf loss backwards and4 separate auxiliary CPU frequency-gain calls including serializer failure. All1000 control trace/raw/EMA/Adam and1644 actual outputs replay V162 flat-anchor exactly. Candidate adds16 phase coordinates/512 parameters at fixed V162 data/loss;extra capacity/compute part of intervention.1668 new arrays external,24 on-diagnostic replays exact. Phase removal measures trained output displacement,not accuracy or isolated training causality. All88 prior neural modules unchanged;one new module. No new parent/DINO/source/noise/RAW/original calls.'})\nprint('PASS13 original/continuation owners terminal;268 adopted+3020 new review calls;5412 head calls/11472 images;1668 new external arrays;zero scientific retries')\n"
+  },
+  "scope": "Uninterrupted V163 training and explicit verified review continuation after one disk-guard failure:5412 root calls/11472 images exclude CPU tests,10 CUDA leaf loss backwards and4 separate auxiliary CPU frequency-gain calls including serializer failure. All1000 control trace/raw/EMA/Adam and1644 actual outputs replay V162 flat-anchor exactly. Candidate adds16 phase coordinates/512 parameters at fixed V162 data/loss;extra capacity/compute part of intervention.1668 new arrays external,24 on-diagnostic replays exact. Phase removal measures trained output displacement,not accuracy or isolated training causality. All88 prior neural modules unchanged;one new module. No new parent/DINO/source/noise/RAW/original calls."
+}

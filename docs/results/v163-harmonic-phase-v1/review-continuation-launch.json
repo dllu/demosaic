@@ -1,0 +1,17 @@
+{
+  "status": "explicit-verified-review-continuation-launched",
+  "owner": {
+    "pid": 3733877,
+    "created": 1794064298.25
+  },
+  "recorded_unix_UTC": 1794064298.311285,
+  "adoption": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/review-adoption-v2.json",
+    "sha256": "3a73614123380d138a053f8b55506b5cb4379a6666521b80ee8535a7d0462e40"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v163-review-v2.py",
+    "sha256": "640c6fef983dc24dbf434d232324d862185d89b36f2bf55eb1121c492439c3ce",
+    "text": "\"\"\"Launch one explicit verified V163 review continuation;no repeated scientific call.\"\"\"\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import read,ref,save\nfrom train_v43_quality_trial import live\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V163-harmonic-phase-v1'\nold=read(root/'postprocess-status-v1.json');assert not live(old['owner']) and not live(old['child_owner'])\nassert read(root/'review-adoption-v2.json')['adopted_head_calls']==268\nassert not (root/'review-continuation-launch-v2.json').exists()\nwith (root/'queue-controller-v2.log').open('x') as log:\n    p=subprocess.Popen([str(repo/'.venv/bin/python'),str(repo/'.cache/queue-v163-review-v2.py')],cwd=repo,\n        env=dict(os.environ,PYTHONPATH='src:scripts',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1'),\n        stdout=log,stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True)\n    owner={'pid':p.pid,'created':psutil.Process(p.pid).create_time()}\nsave(root/'review-continuation-launch-v2.json',{'status':'explicit-verified-review-continuation-launched',\n    'owner':owner,'recorded_unix_UTC':time.time(),'adoption':ref(root/'review-adoption-v2.json'),\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint(owner)\n"
+  }
+}
