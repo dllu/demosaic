@@ -1,0 +1,303 @@
+{
+  "status": "pass-eight-own-polyphase-and-independent-dense-DFT-fixtures",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/packed-fourier-reading-20261107-v1.py",
+    "sha256": "ba35141a71f05d7d029adf2342fef02eb6d59078afefc2c37cdf7ab09dfc8de0",
+    "text": "\"\"\"Own exact polyphase fixtures,not DFENet reproduction or denoising evidence.\"\"\"\nimport hashlib\nfrom pathlib import Path\nimport urllib.request\nimport numpy as np\nfrom train_directional_bank_trial import read,ref,save\nfrom demosaic.prediction_archive import fingerprint\n\nrepo=Path('/home/dllu/proj/demosaic');cache=repo/'.cache/research-20261107';cache.mkdir(exist_ok=True)\npaper=cache/'arxiv-2503.15800v1.html'\nif not paper.exists():\n with urllib.request.urlopen('https://arxiv.org/html/2503.15800v1',timeout=30) as response:raw=response.read()\n with paper.open('xb') as f:f.write(raw)\nassert b'Frequency Enhancement for Image Demosaicking' in paper.read_bytes()\nheight,width=32,40;y,x=np.mgrid[:height,:width]\nperiod8=np.asarray([1,2**-.5,0,-2**-.5,-1,-2**-.5,0,2**-.5])[x%8]\nsignals={\n 'constant':np.full((height,width),.005),\n 'affine':.005+1e-5*x+2e-5*y,\n 'crossed-low-contrast':.005+2e-5*(np.cos(2*np.pi*(x/8+y/16))+np.sin(2*np.pi*(x/10-y/8))),\n 'checkerboard':.005+2e-5*((-1.0)**(x+y)),\n 'oblique-high-frequency':.005+2e-5*np.cos(2*np.pi*(3*x/8+y/8)),\n 'chirp':.005+2e-5*np.sin((x*x+y*y)/20),\n 'alias-low':.005+2e-5*period8,\n 'alias-high':.005+2e-5*period8*((-1.0)**x),\n}\nrows=[];arrays={}\n# Independent dense normalized DFT matrices do not call FFT.\ndy=np.exp(-2j*np.pi*np.outer(np.arange(height),np.arange(height))/height)/np.sqrt(height)\ndx=np.exp(-2j*np.pi*np.outer(np.arange(width),np.arange(width))/width)/np.sqrt(width)\nky,kx=np.mgrid[:height,:width];phases=[(0,0),(0,1),(1,0),(1,1)]\nfor name,value in signals.items():\n packed=np.stack([value[py::2,px::2] for py,px in phases]);unpacked=np.empty_like(value)\n for p,(py,px) in zip(packed,phases,strict=True):unpacked[py::2,px::2]=p\n assert np.array_equal(value,unpacked)\n packed_fft=np.fft.fft2(packed,norm='ortho');native=np.fft.fft2(value,norm='ortho')\n reconstructed=sum(np.exp(-2j*np.pi*(ky*py/height+kx*px/width))*p[ky%(height//2),kx%(width//2)]/2 for p,(py,px) in zip(packed_fft,phases,strict=True))\n dense=dy@value@dx.T\n error=float(np.max(np.abs(reconstructed-native)));dense_error=float(np.max(np.abs(reconstructed-dense)))\n assert error<2e-15 and dense_error<2e-15\n assert abs(np.sum(value*value)-np.sum(packed*packed))<1e-15\n rows.append({'name':name,'native_shape':[height,width],'packed_shape':list(packed.shape),'pack_unpack_bitexact':True,\n  'maximum_unfolded_vs_native_FFT_difference':error,'maximum_unfolded_vs_dense_DFT_difference':dense_error,\n  'input':fingerprint(value),'packed':fingerprint(packed)})\n arrays[name]=value;arrays[name+'::packed']=packed;arrays[name+'::unfolded_fft']=reconstructed\nfirst,second=arrays['alias-low::packed'],arrays['alias-high::packed']\nassert np.array_equal(first[[0,2]],second[[0,2]])\nassert not np.array_equal(first,second)\n# All packed per-phase magnitudes match after DC removal, but cross-phase\n# complex signs distinguish the native frequency. Magnitude-only evidence\n# need not identify the correct native alias.\nf1=np.fft.fft2(first-.005,norm='ortho');f2=np.fft.fft2(second-.005,norm='ortho')\nassert np.max(np.abs(np.abs(f1)-np.abs(f2)))<2e-17\narchive=cache/'packed-fourier-fixtures-v1.npz';assert not archive.exists();np.savez(archive,**arrays)\noutput=repo/'docs/results/packed-fourier-reading-20261107-v1.json';assert not output.exists()\nsave(output,{'status':'pass-eight-own-polyphase-and-independent-dense-DFT-fixtures','source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n 'paper':{'url':'https://arxiv.org/html/2503.15800v1','cached_html':ref(paper),'preprint_date':'2025-03-20',\n  'journal_url':'https://www.sciencedirect.com/science/article/pii/S0165168426002264','journal_issue_date':'2026-11',\n  'sections_read':['3.1-3.3','4','5.1','5.4','5.5','6'],\n  'paraphrase':'DFENet separately selects frequencies for spatial refinement and CFA-guided suppression,using staged RGB/intermediate spectral losses. Its tests use simulated Gaussian CFA noise and small line-pattern targets. Local patch inference reduces a reported size-distribution gap. The March2025 preprint precedes its November2026 journal issue.'},\n 'own_arrays':ref(archive),'rows':rows,'alias_fixture':{'even_x_phases_bitexact':True,'complete_packed_tuple_distinct':True,\n  'packed_phase_magnitude_max_difference':float(np.max(np.abs(np.abs(f1)-np.abs(f2)))),'native_frequencies_cycles_per_pixel':[.125,-.375]},\n 'own_inference':'Packing is an invertible rearrangement,not averaging. A phase-aware sum of all four packed spectra reconstructs every native mosaic Fourier bin exactly up to FP64 roundoff. Per-plane spectra fold frequencies;discarding phase or averaging planes can lose native-alias distinctions. This does not recover missing RGB color samples or prove our existing learned features use the available phase information.',\n 'limits':'These deterministic scalar-mosaic algebra fixtures are not paper reproduction,trained quality,RAW-noise covariance or a flat-safety result. No external code,weights or dataset adopted;V166 fixed. Eight small fixtures,no RNG,no neural/source/sensor-noise/RAW/dataz calls.',\n 'new_neural_forwards':0,'new_sensor_sampler_calls':0,'new_training_data':0})\nprint('PASS8 exact pack/unpack fixtures;max FFT',max(r['maximum_unfolded_vs_native_FFT_difference'] for r in rows),'dense DFT',max(r['maximum_unfolded_vs_dense_DFT_difference'] for r in rows))\n"
+  },
+  "paper": {
+    "url": "https://arxiv.org/html/2503.15800v1",
+    "cached_html": {
+      "path": "/home/dllu/proj/demosaic/.cache/research-20261107/arxiv-2503.15800v1.html",
+      "sha256": "c6df17c745d751435864ad121fcef3fbf5772ef7e378b8e8a9c367e66e5fb4f3"
+    },
+    "preprint_date": "2025-03-20",
+    "journal_url": "https://www.sciencedirect.com/science/article/pii/S0165168426002264",
+    "journal_issue_date": "2026-11",
+    "sections_read": [
+      "3.1-3.3",
+      "4",
+      "5.1",
+      "5.4",
+      "5.5",
+      "6"
+    ],
+    "paraphrase": "DFENet separately selects frequencies for spatial refinement and CFA-guided suppression,using staged RGB/intermediate spectral losses. Its tests use simulated Gaussian CFA noise and small line-pattern targets. Local patch inference reduces a reported size-distribution gap. The March2025 preprint precedes its November2026 journal issue."
+  },
+  "own_arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/research-20261107/packed-fourier-fixtures-v1.npz",
+    "sha256": "d233a0ba323a374327c5268944fefa1adc615f728a7e76d46c659adf04311db6"
+  },
+  "rows": [
+    {
+      "name": "constant",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 1.0953573965284053e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.2682945638164375e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "5472fe10d942c94d27c924bb786d852a7014cde90e58b98355aee2a1a094c803"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "5472fe10d942c94d27c924bb786d852a7014cde90e58b98355aee2a1a094c803"
+      }
+    },
+    {
+      "name": "affine",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 4.324685662833383e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.926957335503993e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "4c9ccf408034f093f3c11ab4549e77f4fceb04d1dea94b615c0f2d5d711ae124"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "cffb31437f93083e0741733104dc27d21a845888d0508bf4d27b2df1faaf368b"
+      }
+    },
+    {
+      "name": "crossed-low-contrast",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 1.0953573965284053e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.231163434275029e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "47de0ff009d4638f422cbdd7cda861ec84ed6aa2744f41b9fe3c6e364c6491b5"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "ed3022f429db04723a0948e7e1323e5d970245e053454aa257cf8dfe1ddb204a"
+      }
+    },
+    {
+      "name": "checkerboard",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 2.7755575615628914e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.2682945638164375e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "21aa540f35d692e66e623f05f8d4973692674d87fd3bcbe4fc3c8633d931781c"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "c1a0c82b85f51f2694a9b7208ad54f8f20023c4aa1d53f1f90fb766a738d4865"
+      }
+    },
+    {
+      "name": "oblique-high-frequency",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 1.0953573965284053e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.265437262822625e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "379697157801e12b5a6c7c0891d00a70380f18841378ce50f11be3d4255ee05b"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "fbfd779138db07ce0de11b51e70d6a9cdbe87e90ee86fd882d567531f42286f9"
+      }
+    },
+    {
+      "name": "chirp",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 2.7755575615628914e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.260918192407898e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "0c831cbc30cf58b92e72f49b42ee81fdf8272762db0462fd1b00827024832424"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "511ee543d0d00e4b510543ade63d09f8415c616f49ca47eb9b9dce06624cab69"
+      }
+    },
+    {
+      "name": "alias-low",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 1.0953573965284053e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.712925391739534e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "3453ef98e78c69af7987926d110f5021c83d56845ce37f2d9c4964239833bc3c"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "471e029cda2a9d42eea6f146d85162223e5886b64b01055ca911f798133de05a"
+      }
+    },
+    {
+      "name": "alias-high",
+      "native_shape": [
+        32,
+        40
+      ],
+      "packed_shape": [
+        4,
+        16,
+        20
+      ],
+      "pack_unpack_bitexact": true,
+      "maximum_unfolded_vs_native_FFT_difference": 1.0953573965284053e-17,
+      "maximum_unfolded_vs_dense_DFT_difference": 5.153621960354634e-16,
+      "input": {
+        "shape": [
+          32,
+          40
+        ],
+        "dtype": "<f8",
+        "sha256": "69a9ebc9dc4f2b349e4ef7ac7029516cb3dbf3c069ee8270f8aa5eb4479149ae"
+      },
+      "packed": {
+        "shape": [
+          4,
+          16,
+          20
+        ],
+        "dtype": "<f8",
+        "sha256": "ab7334d3aa3fd088f19d52562f42f576842112f52d9bd11cb8408f2cc3254aaa"
+      }
+    }
+  ],
+  "alias_fixture": {
+    "even_x_phases_bitexact": true,
+    "complete_packed_tuple_distinct": true,
+    "packed_phase_magnitude_max_difference": 0.0,
+    "native_frequencies_cycles_per_pixel": [
+      0.125,
+      -0.375
+    ]
+  },
+  "own_inference": "Packing is an invertible rearrangement,not averaging. A phase-aware sum of all four packed spectra reconstructs every native mosaic Fourier bin exactly up to FP64 roundoff. Per-plane spectra fold frequencies;discarding phase or averaging planes can lose native-alias distinctions. This does not recover missing RGB color samples or prove our existing learned features use the available phase information.",
+  "limits": "These deterministic scalar-mosaic algebra fixtures are not paper reproduction,trained quality,RAW-noise covariance or a flat-safety result. No external code,weights or dataset adopted;V166 fixed. Eight small fixtures,no RNG,no neural/source/sensor-noise/RAW/dataz calls.",
+  "new_neural_forwards": 0,
+  "new_sensor_sampler_calls": 0,
+  "new_training_data": 0
+}

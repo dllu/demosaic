@@ -282,7 +282,8 @@ proposal is spatially gated after its band restriction; future changes must
 check delivered camera RGB, local bias and noise. These are algebra
 counterexamples, not trained-model performance or a rejection of RIECR.
 [Exact fixture/source evidence](results/frequency-gating-reading-20261107-v1.json).
-V165's running recipe remains fixed pending its complete quality comparison.
+V165's recipe was held fixed; its [completed comparison](pair-common-error.md)
+records lower grain and total-flat error alongside lost mesh response and higher quiet bias.
 
 The fixed [cab-band diagnostic](results/mesh-band-coverage-20261107-v1.json)
 checks both native windows in cached ISO100 JPEG and independent AHD references.
@@ -290,4 +291,28 @@ Both dominant diagonal families fall inside the full nominal spectral band,
 at packed radial frequencies0.213–0.281; some higher harmonics fall outside.
 This weakens a cutoff-only explanation for missing fundamentals. The analysis
 is a nominal mapping, not a learned transfer measurement, and the real
-references remain qualitative rather than exact GT. V165 is unchanged.
+references remain qualitative rather than exact GT. V165 was unchanged.
+
+## Native frequencies from packed phases
+
+[DFENet](https://arxiv.org/html/2503.15800v1), with a November2026 journal issue
+and March2025 preprint, separates spatial detail refinement from CFA-guided
+frequency suppression. Sections3–5 describe staged RGB/spectral supervision,
+Gaussian CFA-noise tests, synthetic line patterns and local patch inference.
+Those results do not establish physical shot/read-noise behavior or our sky/fence
+quality. No paper implementation, weights or dataset are adopted.
+
+Our eight deterministic scalar-mosaic fixtures distinguish invertible packing
+from averaging. All four phase spectra, combined with their native phase factors,
+reconstruct every full-resolution mosaic Fourier bin: maximum difference
+4.33e−17 versus FFT and 5.93e−16 versus an independent dense DFT. Pack/unpack
+is bit-exact. Two native frequencies, +0.125 and −0.375 cycles/pixel, have identical
+even-x phase samples and matching per-phase spectral magnitudes after DC removal,
+but different cross-phase signs. The complete packed tuple distinguishes them.
+
+Our inference is that explicit native-alias features could make available phase
+relationships easier to learn. Packing itself does not discard recorded RAW
+samples; dropping phase, mixing phases or restricting bands can discard distinctions.
+This algebra does not reconstruct unmeasured RGB samples, measure trained detail
+recovery or establish flat safety. V166's fixed common-support routing trial is
+unchanged. [Own fixtures, source and primary-paper record](results/packed-fourier-reading-20261107-v1.json).
