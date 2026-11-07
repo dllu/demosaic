@@ -1,9 +1,10 @@
 # Cross-frequency phase inputs: V163
 
 V163 tests whether cross-frequency phase information can recover fine detail
-while retaining V162's flat-target anchor. The original run is active; CUDA
-parity, restored smoke and the first forty exact control/mask rows pass. Quality
-and native comparisons are pending. V161 remains the stronger learned mesh
+while retaining V162's flat-target anchor. Both 1,000-step heads are complete:
+93 finite final Adam states, four strict CPU endpoint loads, exact V162
+control trace/raw/EMA/Adam states and 1,000 inherited audited masks pass.
+Full quality review and native comparisons are pending. V161 remains the stronger learned mesh
 prototype, and V162 remains the measured grain-reduction implementation. Their
 strengths and costs are documented in the [current model guide](current-model.md).
 
@@ -86,9 +87,21 @@ Protected captures, JPEGs, siblings and held-out Commons sources stay out of
 training. No original RAW, source drive, `/mnt/dataz`, new parent/DINO call,
 source construction or noise sampling is required.
 
+The original reviewer stopped after 268 successful control calls when its
+combined disk guard failed. The log records no per-disk snapshot, so the failing
+disk is unproven. The original reviewer and queue are terminal. Full checks of
+input, parent, output, journal and exported-weight bytes verified all 268 calls;
+an explicit continuation adopts them and evaluates only the missing 3,020 main
+review calls. No completed model call or training run is repeated. The fixed
+822 cases, four endpoints, neural arithmetic, data, displays and 5,412 planned
+scientific root calls stay unchanged. One scientific review-stage failure is
+recorded; all failed sources, receipts, logs and journals remain preserved.
+[Training validation, failure and continuation evidence](results/v163-review-continuation-v2.json).
+
 The study uses a 12 GiB CUDA quota, 52 GiB launch / 32 GiB runtime RAM floor,
-and local/external free-space reserves of 60/148 GiB with a 0.5 GiB projection
-margin. Older experiment bytes are retained. Exact original process identities
+and initial local/external reserves of 60/148 GiB. The review continuation
+uses 58/148 GiB, a 0.25 GiB bound on remaining local artifacts and a 0.5 GiB
+projection margin. All prediction arrays remain external. Older experiment bytes are retained. Exact original process identities
 are monitored until terminal; timeouts do not authorize restarting workers.
 
 [Prospective LA diary](../diary/2026-11-07-06-41-03-v163-harmonic-phase.md) ·

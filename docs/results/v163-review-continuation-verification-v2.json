@@ -1,0 +1,64 @@
+{
+  "status": "pass-public-failure-evidence-source-bindings-and-complete-continued-control-endpoint",
+  "recorded_unix_UTC": 1794064578.7968998,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v163-review-continuation-v2.json",
+    "sha256": "29ef193da63a8b8175ba799bdcb2a5672dc08ce18db20b5d0e56170fc4b608ed"
+  },
+  "byte_exact_receipts": 17,
+  "source_texts": 18,
+  "unchanged_neural_source_hashes_since_launch": 89,
+  "verified_adopted_calls": 268,
+  "verified_new_first_endpoint_calls": 554,
+  "first_complete_control_endpoint_calls": 822,
+  "first_complete_control_endpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/review-v2/anchor-control-raw-step1000/collection-v1.json",
+    "sha256": "f39310faba55863f858eee9cf29784ec4c274ebb9a832dc1f404898b24a41c9f"
+  },
+  "strict_final_CPU_endpoint_loads": 4,
+  "finite_final_Adam_states": 93,
+  "exact_V162_training_rows": 1000,
+  "exact_inherited_training_masks": 1000,
+  "scientific_stage_failures": 1,
+  "full_training_restarts": 0,
+  "repeated_review_calls": 0,
+  "document_links_checked": 501,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "c1f83c3f2dcd2eb1c2a9e75d4c836d9702f5e69944f7cb429415d1e497396322"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "7a1d140f432d44883b0bca424ab73221b213d955ac79b6e6828327f193019d9c"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "8e52008f7fce92dc0b492e0e08d31359a5a40df0a2f3277d39a2d1c204d160a7"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "7fb7c81f78e351de59dd7e48fcd4f130521784fb2438466b09e0e152b6c6094a"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "06f46b11ee011a5f1c4224a6a2898f82bb842351ba7d28ad79c82bb18a4e6df9"
+    },
+    "docs/harmonic-phase-inputs.md": {
+      "path": "/home/dllu/proj/demosaic/docs/harmonic-phase-inputs.md",
+      "sha256": "9ba6269501302020c53044cca17d8c967f7c1865743fe71a5c683d2816849058"
+    },
+    "diary/2026-11-07-07-13-12-v163-review-continuation.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-07-13-12-v163-review-continuation.md",
+      "sha256": "38f7db302970eddee2215666fd900a228ceeaa81f81b69bbb7a8acdaaeed7691"
+    }
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v163-continuation-v2.py",
+    "sha256": "e014ffa012fcf505bb0b78b9f44e001c4ca6b6be2980571c1a5be2b1ed06a077",
+    "text": "\"\"\"Check public failure/adoption evidence and the completed continued control endpoint.\"\"\"\nimport json\nimport re\nimport time\nfrom pathlib import Path\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V163-harmonic-phase-v1'\nindex=repo/'docs/results/v163-review-continuation-v2.json';data=read(index)\nassert len(data['copies'])==17 and data['source_texts']==18\nfor item in data['copies'].values():\n    assert ref(item['original']['path'])==item['original'] and ref(item['public']['path'])==item['public']\n    assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\nbundle=read(data['source_bundle']['path']);assert ref(data['source_bundle']['path'])==data['source_bundle']\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nplan=read(root/'plan-v1.json');guard(plan);guard(read(root/'postprocess-plan-v1.json'));guard(read(root/'postprocess-plan-v2.json'))\nneural={p:h for p,h in plan['frozen_files'].items() if Path(p).parent.name=='demosaic'};assert len(neural)==89\nfor p,h in neural.items():assert ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\nadoption=read(root/'review-adoption-v2.json')\ncollection=read(root/'review-v2/anchor-control-raw-step1000/collection-v1.json')\nassert collection['component_forwards']==822 and collection['new_component_forwards']==554 and collection['adopted_prior_returned_forwards']==268\nassert collection['module_before']==collection['module_after'] and collection['RNG_unchanged']\nfor key in ['forward_journal','observation_journal']:\n    assert Path(collection[key]['path']).read_bytes().startswith(Path(adoption['original_'+key]['path']).read_bytes())\nevents=[json.loads(s) for s in Path(collection['forward_journal']['path']).read_text().splitlines()]\nassert [s['returned_forwards'] for s in events]==list(range(1,823))\nassert [json.loads(s) for s in Path(collection['observation_journal']['path']).read_text().splitlines()]==collection['observations']\noriginal=read(collection['original_control_collection']['path'])\nfor a,b in zip(collection['observations'],original['observations'],strict=True):\n    assert a['id']==b['id'] and a['prediction']==b['prediction'] and a['archive_replayed_bit_exact']\n    assert ref(a['prediction']['path'])==a['prediction']\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n    'docs/harmonic-phase-inputs.md','diary/2026-11-07-07-13-12-v163-review-continuation.md']\nlinks=0\nfor name in docs:\n    path=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',path.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (path.parent/link.split('#')[0]).resolve().is_file(),(path,link);links+=1\noutput=repo/'docs/results/v163-review-continuation-verification-v2.json';assert not output.exists()\nsave(output,{'status':'pass-public-failure-evidence-source-bindings-and-complete-continued-control-endpoint',\n    'recorded_unix_UTC':time.time(),'publication':ref(index),'byte_exact_receipts':17,'source_texts':18,\n    'unchanged_neural_source_hashes_since_launch':89,'verified_adopted_calls':268,'verified_new_first_endpoint_calls':554,\n    'first_complete_control_endpoint_calls':822,'first_complete_control_endpoint':ref(root/'review-v2/anchor-control-raw-step1000/collection-v1.json'),\n    'strict_final_CPU_endpoint_loads':4,'finite_final_Adam_states':93,'exact_V162_training_rows':1000,\n    'exact_inherited_training_masks':1000,'scientific_stage_failures':1,'full_training_restarts':0,'repeated_review_calls':0,\n    'document_links_checked':links,'documents':{p:ref(repo/p) for p in docs},'new_forwards':0,'new_noise_draws':0,\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'Historical live continuation plus first complete822-call control endpoint verified. Full candidate quality/phase removal/independent metrics/native viewing remain pending.'})\nprint('PASS17 receipts/18 source texts/89 unchanged neural modules;268 adopted+554 new=822 exact control calls;',links,'links')\n"
+  },
+  "scope": "Historical live continuation plus first complete822-call control endpoint verified. Full candidate quality/phase removal/independent metrics/native viewing remain pending."
+}

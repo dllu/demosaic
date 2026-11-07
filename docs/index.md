@@ -1,5 +1,5 @@
 # Documentation guide
-The [V163 phase-input trial](harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). All 180 CPU checks pass; original training/review is active and quality remains pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
+The [V163 phase-input trial](harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). Both 1,000-step heads pass final validation (93 Adam states, four strict CPU loads, exact V162 controls); 180 CPU checks pass. Full quality review continues after adopting 268 verified calls from a preserved disk-guard failure; native results remain pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
 
 
 The completed [V162 target-flat anchor trial](flat-target-anchor.md) reduces
