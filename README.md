@@ -42,6 +42,10 @@ The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
 V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
 [Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
+The [active V158 trial](docs/regional-dc-regret.md) adds regional color-bias regret
+to the unchanged spatial hybrid. 56 tests and CUDA/save-restore checks pass;
+both fixed heads are training, with restoration quality still unmeasured.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

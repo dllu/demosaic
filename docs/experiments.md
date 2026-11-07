@@ -1,5 +1,12 @@
 # Experiment index
 
+The [active V158 regional-DC trial](regional-dc-regret.md) adds one fixed loss
+term to two identical spatial hybrids, retaining the exact V157 control recipe.
+The term penalizes increasing RGB mean-error norms and leaves improving bias
+free; stronger mean-error units are a training proxy. 56 tests, 28 exact CUDA
+contexts and genuine 8+2 restore pass. Both 1k heads/four endpoints/822 cases
+are fixed; 72 native figures include retained V156 columns. Quality is pending.
+
 The [completed V157 spatial-RGB trial](spatial-rgb-residual.md) adds direct coarse/DC
 capacity with the same V156 loss/data/schedule and greater model capacity/compute.
 Native512 flat full/coarse error improves on all 48 inputs at both endpoints, with

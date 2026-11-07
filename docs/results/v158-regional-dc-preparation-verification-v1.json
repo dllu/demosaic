@@ -1,0 +1,58 @@
+{
+  "status": "pass-immutable-readiness-sources-prefix-retained-comparators-and-documents",
+  "recorded_unix_UTC": 1794044546.1657884,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-preparation-v1.json",
+    "sha256": "85ee37ee5e56224765403fd2a2128055ad01f82caf2750bc46c524c0125c7cbc"
+  },
+  "byte_exact_receipts": 12,
+  "source_texts": 33,
+  "unchanged_neural_hashes": 87,
+  "new_neural_modules": 0,
+  "actual_CPU_tests": 56,
+  "actual_CUDA_compatibility_calls": 56,
+  "restored_smoke_Adam_states": 90,
+  "exact_historical_control_trace_rows": 218,
+  "retained_V156_comparator_arrays_checked": 1644,
+  "fixed_quality_cases": 822,
+  "fixed_endpoints": 4,
+  "document_links_checked": 445,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "6b12e140756f471687c46d4b48d97ccaa824d29f59d2ffbeee17766fff7c93a2"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "90554c2ea8c5294b476d57b1b7801dac9030b968c34f4d07479427e8be32ae01"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "1d1f708c55299d8dba2084052be232368cf0962e95b2fb559a944625fd27dbb8"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "6e2145959b3941ba4c22b920c8d005c10d0598ddd9e5fbdb3d0888b644306cf4"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "f81eea7da2fb5ad987f9ac0139b1096cd55794326e0c692f3f475208a34d82e6"
+    },
+    "docs/regional-dc-regret.md": {
+      "path": "/home/dllu/proj/demosaic/docs/regional-dc-regret.md",
+      "sha256": "c7c3ce6d87ae7f1ebf38b91f49eb70b7346d62501ce008485701c9b50b0bd535"
+    },
+    "diary/2026-11-07-01-34-28-v158-regional-dc.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-01-34-28-v158-regional-dc.md",
+      "sha256": "2fb92160669cdd97f466a9f253a9db9217738be09e16111ff868a6023c8af61f"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v158-preparation-v1.py",
+    "sha256": "1c5af2281cf903b427b5f0701d34f678b225703324b89fb601d746657f2b0236",
+    "text": "\"\"\"Check exact V158 readiness bytes,sources,historical control and document links.\"\"\"\n\nimport json\nimport re\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261107/V158-regional-dc-v1'\nindex=repo/'docs/results/v158-regional-dc-preparation-v1.json'\noutput=repo/'docs/results/v158-regional-dc-preparation-verification-v1.json';assert not output.exists()\npublication=read(index);assert len(publication['copies'])==12 and publication['source_texts']==33\nfor copy in publication['copies'].values():\n    for role in ['original','public']:assert ref(copy[role]['path'])==copy[role]\n    assert Path(copy['original']['path']).read_bytes()==Path(copy['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan)\npost=read(root/'postprocess-plan-v1.json');guard(post)\nassert post['independent_metric_import']['returncode']==0\nbundle=read(publication['sources']['path']);assert ref(publication['sources']['path'])==publication['sources']\nassert len(bundle['source_texts'])==33 and len(bundle['unchanged_neural_hashes'])==87\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nfor p,h in bundle['unchanged_neural_hashes'].items():\n    assert ref(p)['sha256']==ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\n    assert ref(Path(plan['work'])/'src/demosaic'/Path(p).name)['sha256']==h\nready=read(root/'readiness-audit-v2.json')\nassert ready['finite_Adam_states_at10']==90 and ready['strict_raw_EMA_CPU_loads']==4\nassert ready['restored_control_raw_EMA_Adam_exact_V157'] and not ready['CUDA_initialized']\nassert ready['all90_parameter_tensors_have_finite_nonzero_prefix_gradients']\nassert ready['complete_rows']==ready['exact_control_trace_rows']==218\nassert ref(ready['live_prefix']['path'])==ready['live_prefix']\nrows=[json.loads(line) for line in Path(ready['live_prefix']['path']).read_text().splitlines()]\nreference=read(plan['baseline_training']['path'])['trace'];assert len(rows)==218\nfor n,row in enumerate(rows):\n    assert row['step']==n+1 and row['batch']==reference[n]['batch']\n    old=reference[n]['arms']['spatial-rgb']\n    assert {k:row['arms']['dc-control'][k] for k in old}==old\nassert read(root/'objective-tests-v1.json')['tests']==56\nfailure=read(root/'readiness-audit-failure-v1.json')\nassert failure['error']==\"KeyError('local-risk')\" and failure['observed_exit_code']==1\nassert not failure['training_restarted'] and failure['new_neural_forward_calls']==0\nassert ref(failure['source']['path'])['sha256']==failure['source']['sha256']\nparity=read(root/'parity-result-v1.json')\nassert parity['component_forward_evaluations']==56 and len(parity['rows'])==28\nassert all(r['exact_frozen_spatial_forward_and_archived'] for r in parity['rows'])\ndesign=read(root/'quality-design-v1.json')\nassert len(design['observations'])==822 and len(design['endpoints'])==4\nassert design['new_component_forwards']==3288\nfor item in design['observations']:\n    assert ref(item['arrays']['path'])==item['arrays'] and ref(item['parent']['path'])==item['parent']\nassert len(post['retained_native_collections'])==2\nfor binding in post['retained_native_collections'].values():\n    assert ref(binding['path'])==binding\n    collection=read(binding['path'])\n    assert len(collection['observations'])==822 and collection['module_before']==collection['module_after']\n    assert collection['RNG_unchanged']\n    for case,row in zip(design['observations'],collection['observations'],strict=True):\n        assert row['id']==case['id'] and row['parent']==case['parent']\n        assert ref(row['prediction']['path'])==row['prediction']\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n      'docs/regional-dc-regret.md','diary/2026-11-07-01-34-28-v158-regional-dc.md']\nlinks=0\nfor name in docs:\n    p=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        target=(p.parent/link.split('#')[0]).resolve();assert target==output or target.is_file(),(name,link)\n        links+=1\nsave(output,{'status':'pass-immutable-readiness-sources-prefix-retained-comparators-and-documents',\n    'recorded_unix_UTC':time.time(),'publication':ref(index),'byte_exact_receipts':12,'source_texts':33,\n    'unchanged_neural_hashes':87,'new_neural_modules':0,'actual_CPU_tests':56,'actual_CUDA_compatibility_calls':56,\n    'restored_smoke_Adam_states':90,'exact_historical_control_trace_rows':218,\n    'retained_V156_comparator_arrays_checked':1644,'fixed_quality_cases':822,'fixed_endpoints':4,\n    'document_links_checked':links,'documents':{p:ref(repo/p) for p in docs},\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forward_calls':0,'new_noise_draws':0,\n    'scope':'Actual completed readiness receipts,frozen sources,historical exact V157 control prefix,all supplied quality files and retained V156 native bindings. Original auxiliary reporter failure preserved and corrected. Final training,quality and actual native viewing remain pending;no restoration or safety gain inferred.'})\nprint('PASS12 exact receipts,33 source texts,87 unchanged neural hashes,218 exact control rows,1644 retained arrays and',links,'links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Actual completed readiness receipts,frozen sources,historical exact V157 control prefix,all supplied quality files and retained V156 native bindings. Original auxiliary reporter failure preserved and corrected. Final training,quality and actual native viewing remain pending;no restoration or safety gain inferred."
+}

@@ -1,0 +1,88 @@
+{
+  "recorded_unix_UTC": 1794044305.5313218,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/plan-v1.json",
+      "sha256": "48d23495ab3bea488214a655968aad409c7d68084c0a69af7e81c63bd6d10f77"
+    },
+    "owner": {
+      "pid": 3297500,
+      "created": 1794043883.07
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/parity-result-v1.json",
+        "sha256": "cdfc84c05e4d4f8b6d8d61f9062a2a6287d6fa0f645ba22f9e7712801051f46c"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/smoke-result-v1.json",
+        "sha256": "3a3d6f626bb7573abdd9a3029a78978d0eb17408a5006d36949635c5b15002f9"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3298031,
+      "created": 1794043913.84
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3298438,
+      "created": 1794044010.23
+    },
+    "completed": {}
+  },
+  "progress": {
+    "step": 310,
+    "counts": {
+      "dc-control": 310,
+      "dc-regret": 310
+    },
+    "updates": {
+      "dc-control": 310,
+      "dc-regret": 310
+    }
+  },
+  "observed_live_owners": [
+    {
+      "role": "controller",
+      "pid": 3297500,
+      "created": 1794043883.07,
+      "argv": [
+        ".venv/bin/python",
+        "scripts/train_regional_dc_trial.py",
+        "controller",
+        ".cache/quality-20261107/V158-regional-dc-v1/plan-v1.json"
+      ],
+      "process_status": "sleeping"
+    },
+    {
+      "role": "train-worker",
+      "pid": 3298031,
+      "created": 1794043913.84,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/work/scripts/train_regional_dc_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ],
+      "process_status": "running"
+    },
+    {
+      "role": "post-controller",
+      "pid": 3298438,
+      "created": 1794044010.23,
+      "argv": [
+        ".venv/bin/python",
+        ".cache/queue-v158-review-v1.py"
+      ],
+      "process_status": "sleeping"
+    }
+  ],
+  "scope": "Actual PID/create-time observations at preparation publication. Historical live snapshot,not final quality or final call totals. No training restart."
+}

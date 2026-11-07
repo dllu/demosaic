@@ -1,0 +1,76 @@
+version: V158
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  dc-control:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 0
+  dc-regret:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+local_risk_window_native: 32
+local_risk_hop_native: 16
+local_risk_RMS_rounding_DN16: 1
+local_risk_transition_noise_units: 0.0001
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 60
+external_reserve_GiB: 196
+projection_margin_GiB: 0.5
+external_quality_root: /mnt/external/demosaic/quality-20261107/V158-regional-dc-v1
+scope: Two identical fresh117677-parameter/45-tensor LateSpatialRgbDetail heads share1000
+  cached V148 batches/4000 observations,all base V157 RGB/gradient/delivered-spectral
+  MSE .25 and local-RMS-regret1 terms,schedule and optimizer/EMA clocks. Only dc-regret
+  adds fixed weight1 C1 hinge of regional RGB mean-error norm increase versus frozen
+  V143 parent. Native32 boxes/hop16/replicate grid;mean each RGB residual before norm;
+  unit=max(image noise unit/(window/2),1DN16),norm smoothing1DN16,transition1e-4.
+  Nominal Bayer-phase-mean training units amplify bias pressure;not calibrated RGB
+  covariance or a boundary-noise estimate. Parent/target/units detached,targets only
+  enter losses. Improving color bias is unpenalized;zero-mean spatial error remains
+  under existing losses. No inference gate,confidence or quiet-safety guarantee. Control
+  must reproduce V157 spatial-rgb1000 trace/raw/EMA/Adam and replay1644 actual archived
+  outputs before reusing array storage.882 supervised/118 ADC-zero gradient batches,all1000
+  optimizer/EMA clocks. One fixed coefficient/no quality selection;four raw/EMA final
+  endpoints/822 cases/3288 review calls. All87 neural sources unchanged,new loss only.
+  Additional retained V156 native columns compare the quieter detail control without
+  new calls. Both GFX scenes/priors/windows/JPEGs and actual full/coarse/DC/quiet/weak/ADC
+  errors retained. Real refs qualitative, not exactGT,never scored. No new parent/DINO/noise/source/RAW
+  calls or dataz access. New prediction arrays4.422GiB entirely external,controls
+  re-evaluated before reuse. 60/196GiB local/external reserves plus0.5GiB projected
+  margin. Original evidence retained,no deletion/movement. Adaptive related cohort,not
+  blind generalization.
+regional_DC_window_native: 32
+regional_DC_hop_native: 16
+regional_DC_transition_units: 0.0001
+regional_DC_unit_rule: max(existing image noise unit / (window/2), 1 DN16)
+regional_DC_norm_rounding_DN16: 1
