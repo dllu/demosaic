@@ -1,0 +1,89 @@
+{
+  "recorded_unix_UTC": 1794055711.9611404,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/plan-v1.json",
+      "sha256": "f500b409855595237c674ba998f71bc6900bb229522b3a2aefa223158995a1c2"
+    },
+    "owner": {
+      "pid": 3526979,
+      "created": 1794055333.01
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/parity-result-v1.json",
+        "sha256": "c2f985a108acb8f3ee72fccc1c6c1ccf9348a0147cba6dfb3b8f86d62447ee5f"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/smoke-result-v1.json",
+        "sha256": "ef3b2ffc2e22714897081f4f8d0c6cdb2919352ad13c68566bc4babd7e61f5d4"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3527522,
+      "created": 1794055371.11
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3528930,
+      "created": 1794055535.58
+    },
+    "completed": {}
+  },
+  "progress": {
+    "step": 260,
+    "counts": {
+      "paired-control": 260,
+      "harmonic-context": 260
+    },
+    "updates": {
+      "paired-control": 260,
+      "harmonic-context": 260
+    }
+  },
+  "observed_live_owners": [
+    {
+      "role": "training-controller",
+      "pid": 3526979,
+      "created": 1794055333.01,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/work/scripts/train_harmonic_context_trial.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/plan-v1.json"
+      ],
+      "status": "sleeping"
+    },
+    {
+      "role": "train-worker",
+      "pid": 3527522,
+      "created": 1794055371.11,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/work/scripts/train_harmonic_context_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ],
+      "status": "running"
+    },
+    {
+      "role": "review-controller",
+      "pid": 3528930,
+      "created": 1794055535.58,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/queue-v161-review-v1.py"
+      ],
+      "status": "sleeping"
+    }
+  ],
+  "scope": "Historical actual live snapshot,not final quality or final call totals. Both original workers continue once."
+}

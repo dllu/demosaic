@@ -1,0 +1,119 @@
+version: V161
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+  step: 5000
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+module: LateHarmonicContextDetail
+max_window: 256
+seed: 160
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+domains:
+  mesh: 0.35
+  weak: 0.1
+  flat: 0.15
+  mixed: 0.15
+  photo: 0.25
+domain_sizes:
+  mesh: 512
+  weak: 512
+  flat: 512
+  mixed: 512
+  photo: 256
+domain_loss_weights:
+  mesh: 4.0
+  weak: 4.0
+  flat: 1.0
+  mixed: 1.0
+  photo: 1.0
+first_ten_domains:
+- mesh
+- photo
+- flat
+- mixed
+- weak
+- mesh
+- photo
+- flat
+- mixed
+- weak
+pixel_epsilon_in_noise_units: 0.01
+gradient_epsilon_in_noise_units: 0.003
+gradient_weight: 0.25
+spectral_weight: 0.25
+local_risk_window_native: 32
+local_risk_hop_native: 16
+local_risk_RMS_rounding_DN16: 1
+local_risk_transition_noise_units: 0.0001
+regional_DC_window_native: 32
+regional_DC_hop_native: 16
+regional_DC_norm_rounding_DN16: 1
+regional_DC_unit_rule: max(existing image noise unit / (window/2), 1 DN16)
+noise_unit_floor_DN16: 16
+manifest: /home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl
+photo_sampling_reference_manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl
+photo_sampling_reference_sha256: 4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e
+reviewed_roi_catalogue: /home/dllu/proj/demosaic/configs/low-contrast-training-rois-cleaned90782-v1.json
+reviewed_roi_fraction: 0.5
+scope: Two fresh matched heads reuse all1000 actual V160 B4 observations/parents;only
+  the candidate adds a zero-initialized6720-parameter/one-tensor dyadic-frequency
+  adapter to the existing117677-parameter/45-tensor hybrid. Five42-channel locations:2omega
+  and all4 periodic half-frequency alias branches,with exact linear interpolation.
+  Both use paired-response weight1 and all V160 loss/LR/AdamW/clipping/EMA clocks.
+  No target/pair fields enter inference. Control must reproduce all1000 V160 paired
+  trace/raw/EMA/Adam and1644 actual endpoint replays before adopting its storage.
+  All87 prior neural sources unchanged,one new module. Final91 Adam states/four strict
+  loads;4 fixed endpoints/822 cached cases/3288 review calls,all1644 new arrays external.
+  Additional fixed12-case/raw-EMA on/off context-removal diagnostic48 calls,24 new
+  arrays,after main review;on outputs must replay current collections exactly. Both
+  protected GFX scenes/priors/windows/JPEGs remain qualitative,not exact GT. No new
+  parent/DINO/source/noise/RAW/dataz calls. New study60/156GiB reserves plus.5GiB
+  projected margin,12GiB CUDA quota;old evidence/receipts retained. More capacity/compute
+  is part of the architectural comparison;no quality or flat-safety guarantee.
+pair_unit_floor_DN16: 16
+pair_epsilon: 0.003
+regional_DC_transition_units: 1.0
+regional_DC_weight: 1.0
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1
+external_root: /mnt/external/demosaic/quality-20261107/V161-harmonic-context-v1
+internal_reserve_GiB: 60
+external_reserve_GiB: 156
+projection_margin_GiB: 0.5
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+arms:
+  paired-control:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 1.0
+    paired_response_weight: 1.0
+  harmonic-context:
+    class: LateHarmonicContextDetail
+    parameters: 124397
+    parameter_tensors: 46
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 1.0
+    paired_response_weight: 1.0
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/work-v2/configs/quality-v143-paired-response-v160.yaml
+  sha256: 53363ffd6e76ab57d1f661c4abb7f6c372ace9320c8a521b5e33e27cd755c2e3

@@ -1,0 +1,57 @@
+{
+  "status": "pass-immutable-readiness-and-fixed-comparators",
+  "recorded_unix_UTC": 1794055912.914351,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-preparation-v1.json",
+    "sha256": "9ed9be806fe6c3f26674cb1f2d9db68e96611cf2a28ae85f48aba528e7f468f3"
+  },
+  "byte_exact_receipts": 11,
+  "source_texts": 45,
+  "unchanged_prior_neural_hashes": 87,
+  "new_neural_modules": 1,
+  "actual_CPU_tests": 139,
+  "restored_smoke_finite_Adam_states": 91,
+  "exact_V160_control_prefix_rows": 40,
+  "retained_prediction_arrays_checked": 4110,
+  "planned_total_scientific_head_calls": 5412,
+  "fixed_context_removal_inputs": 12,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "b9ec515ce9ae8a5ebdee93e4f037137ed0d43130d8b9d90f4fcf88f243baba07"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "472399681d3bb98dc9d59642c05e12a59a8bdd58d171a288b8c382232ffc0a0f"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "647fb5e640d9cff6c8d94dde5d6aaaac4a3fe2324d35f12d716db6afa773df0b"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "2b9edbb3897480c2d4f7e917dea7be315ac42b87cbfec86cce9d5c25129c1494"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "19d245ccdd9fdae7e5b7df641dbbbbdd531771ff30e7007d7a0d95af95aec953"
+    },
+    "docs/harmonic-frequency-context.md": {
+      "path": "/home/dllu/proj/demosaic/docs/harmonic-frequency-context.md",
+      "sha256": "5779045c22f6d19101f19a405e59078b2373c83fd674f66f89da76dee8c26081"
+    },
+    "diary/2026-11-07-04-50-07-v161-harmonic-context.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-04-50-07-v161-harmonic-context.md",
+      "sha256": "378eccfe9b371f2f69025ee27d7e5bf7f41307ef1fd3843b07dde34bcccb5add"
+    }
+  },
+  "document_links_checked": 473,
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v161-preparation-v1.py",
+    "sha256": "9a1ddaf4bf76eb23ec467ed83889474555c0898a9fab3d6ca26ffa7ef8c2820d",
+    "text": "\"\"\"Verify immutable architecture readiness,frozen sources and native comparators.\"\"\"\nimport re\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V161-harmonic-context-v1'\nindex=repo/'docs/results/v161-harmonic-context-preparation-v1.json'\noutput=repo/'docs/results/v161-harmonic-context-preparation-verification-v1.json';assert not output.exists()\np=read(index);assert len(p['copies'])==11 and p['source_texts']==45\nfor item in p['copies'].values():\n    assert ref(item['original']['path'])==item['original'] and ref(item['public']['path'])==item['public']\n    assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan);post=read(root/'postprocess-plan-v1.json');guard(post)\nbundle=read(p['sources']['path']);assert ref(p['sources']['path'])==p['sources']\nassert len(bundle['source_texts'])==45 and len(bundle['unchanged_prior_neural_hashes'])==87\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nfor path,h in bundle['unchanged_prior_neural_hashes'].items():\n    assert ref(path)['sha256']==ref(repo/'src/demosaic'/Path(path).name)['sha256']==h\nassert len(list((Path(plan['work'])/'src/demosaic').glob('*.py')))==88\nassert ref(bundle['new_module']['path'])==bundle['new_module']\nready=read(root/'readiness-audit-v1.json');assert ready['finite_Adam_states_at10']==91\nassert ready['all91_parameter_tensors_have_finite_nonzero_prefix_gradients']\nassert ready['exact_V160_control_prefix_rows']==40\nimport json\nrows=[json.loads(s) for s in Path(ready['training_prefix']['path']).read_text().splitlines()]\nold=read(plan['baseline_training']['path'])['trace'];assert len(rows)==40\nfor row,before in zip(rows,old[:40],strict=True):\n    assert row['step']==before['step'] and row['batch']==before['batch'] and row['domain']==before['domain']\n    assert row['arms']['paired-control']==before['arms']['paired-response']\ndesign=read(root/'quality-design-v1.json');assert len(design['observations'])==822\nassert len(design['context_removal']['case_ids'])==12 and design['context_removal']['new_head_calls']==48\narrays=0\nfor binding in post['retained_native_collections'].values():\n    assert ref(binding['path'])==binding\n    c=read(binding['path']);assert c['module_before']==c['module_after'] and c['RNG_unchanged']\n    for row,case in zip(c['observations'],design['observations'],strict=True):\n        assert row['id']==case['id'] and row['parent']==case['parent']\n        assert ref(row['prediction']['path'])==row['prediction'];arrays+=1\nassert arrays==4110\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n    'docs/harmonic-frequency-context.md','diary/2026-11-07-04-50-07-v161-harmonic-context.md']\nlinks=0\nfor name in docs:\n    path=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',path.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (path.parent/link.split('#')[0]).resolve().is_file(),(path,link);links+=1\nsave(output,{'status':'pass-immutable-readiness-and-fixed-comparators','recorded_unix_UTC':time.time(),\n    'publication':ref(index),'byte_exact_receipts':11,'source_texts':45,'unchanged_prior_neural_hashes':87,\n    'new_neural_modules':1,'actual_CPU_tests':139,'restored_smoke_finite_Adam_states':91,\n    'exact_V160_control_prefix_rows':40,'retained_prediction_arrays_checked':arrays,\n    'planned_total_scientific_head_calls':5412,'fixed_context_removal_inputs':12,\n    'documents':{p:ref(repo/p) for p in docs},'document_links_checked':links,\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forward_calls':0,'new_noise_draws':0,'scope':'Actual readiness and original live snapshot only;trained quality and actual final native viewing remain pending.'})\nprint('PASS11 receipts,45 source texts,87 unchanged prior modules/one new,40 exact control rows,4110 retained arrays and',links,'links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Actual readiness and original live snapshot only;trained quality and actual final native viewing remain pending."
+}

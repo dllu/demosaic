@@ -1,5 +1,9 @@
 # Documentation guide
 
+[V161 distant frequency context](harmonic-frequency-context.md) is training
+against the exact V160 paired-response control. The new adapter passes CPU,
+CUDA and restored smoke checks; full quality remains pending.
+
 The [completed V160 paired-response trial](paired-response.md) raises learned
 mesh response 82–96% versus V143, reaching 4.00–4.31% of exact GT amplitude.
 Blank RMS rises 3.25–4.69% and quiet RMS 8.46–11.36%; native views show added

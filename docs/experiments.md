@@ -1,5 +1,12 @@
 # Experiment index
 
+[V161 distant frequency context](harmonic-frequency-context.md) is running
+two matched 1k heads on the V160 cache/loss, adding one zero-initialized adapter
+to the candidate. 139 CPU checks, 28 CUDA parity contexts, restored smoke and
+40 exact V160 control-prefix rows pass. All four final endpoints/822 cases,
+72 native figures and a fixed 12-case context-removal diagnostic are queued.
+Quality remains pending.
+
 The [completed V160 paired-response trial](paired-response.md) nearly doubles
 learned mesh response: +82–96% versus V143, reaching 4.00–4.31% of exact GT.
 Blank RMS rises 3.25–4.69%, quiet RMS 8.46–11.36%, with added fine colored grain

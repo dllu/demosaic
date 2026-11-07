@@ -53,6 +53,10 @@ V160 passes 123 CPU checks, 450 exact frozen-base gradient comparisons and final
 Adam/EMA validation. Its cache accounting failure, explicit 23-batch adoption
 and all original evidence are preserved in the report.
 
+[V161](docs/harmonic-frequency-context.md) is testing wider frequency context
+on the same paired-response data and loss. Its 139 CPU checks, CUDA parity and
+save/restore smoke pass; trained quality is pending.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. V160 uses the 90,782-photo training cache and reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·
