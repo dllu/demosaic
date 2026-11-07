@@ -40,6 +40,12 @@ and all 45 parameter gradients against extracted frozen V159 loss statements
 at ten steps: 450 tensor comparisons. All 28 CUDA parity contexts replayed
 their archived outputs exactly, using 56 head calls.
 
+Two additional [batch-isolation checks](results/v160-paired-batch-isolation-v1.json)
+pass with both paths activated: changing the other batch members preserves the
+first image's output bits, and its input adjoints to those members are zero.
+Both training and evaluation modes are covered. These four CPU test forwards
+are separate from the trial's scientific forward counts.
+
 The first cache attempt stopped during source step 24: a procedural Gaussian
 texture draw was counted as Gaussian sensor noise. Three new regression
 tests separate the two at sensor API boundaries and preserve bit-identical
