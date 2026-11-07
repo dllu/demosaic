@@ -9,10 +9,11 @@ views and audits are complete, retaining four V156/V157 comparator columns.
 60 tests, 90 finite final Adam states and exact V158 control states/replays pass.
 Preserve this coarse/quiet compromise beside V158 quiet accuracy and V156 detail.
 
-The separate [coupled sensor-noise primitive](coupled-counterfactual-noise.md)
-prepares matched synthetic targets for a possible later response loss. Sixteen
-tests and retained physical-moment fixtures pass; no model training or quality
-gain is claimed.
+The [V160 paired-response trial](paired-response.md) uses the validated
+[coupled sensor-noise primitive](coupled-counterfactual-noise.md) for two fresh
+matched heads. Exact base-loss gradients and save/restore checks pass. Full
+quality remains pending; the first cache accounting failure and 23-batch adoption
+are preserved with the original input inspections and sources.
 
 The [completed V158 regional-DC trial](regional-dc-regret.md) removes V157's large
 quiet-region color-bias increase. EMA quiet RMS falls 0.09–0.12% versus V143 on

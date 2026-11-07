@@ -1,0 +1,116 @@
+version: V160
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+  step: 5000
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+module: LateSpatialRgbDetail
+max_window: 256
+seed: 160
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+domains:
+  mesh: 0.35
+  weak: 0.1
+  flat: 0.15
+  mixed: 0.15
+  photo: 0.25
+domain_sizes:
+  mesh: 512
+  weak: 512
+  flat: 512
+  mixed: 512
+  photo: 256
+domain_loss_weights:
+  mesh: 4.0
+  weak: 4.0
+  flat: 1.0
+  mixed: 1.0
+  photo: 1.0
+first_ten_domains:
+- mesh
+- photo
+- flat
+- mixed
+- weak
+- mesh
+- photo
+- flat
+- mixed
+- weak
+pixel_epsilon_in_noise_units: 0.01
+gradient_epsilon_in_noise_units: 0.003
+gradient_weight: 0.25
+spectral_weight: 0.25
+local_risk_window_native: 32
+local_risk_hop_native: 16
+local_risk_RMS_rounding_DN16: 1
+local_risk_transition_noise_units: 0.0001
+regional_DC_window_native: 32
+regional_DC_hop_native: 16
+regional_DC_norm_rounding_DN16: 1
+regional_DC_unit_rule: max(existing image noise unit / (window/2), 1 DN16)
+noise_unit_floor_DN16: 16
+manifest: /home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-source-loss-through15800-review-v1/future-cohort-v1/manifest4.jsonl
+photo_sampling_reference_manifest: /mnt/external/demosaic/commons-source-tail-reviewed-20261023-v2/manifest4.jsonl
+photo_sampling_reference_sha256: 4175378ca100351eca4669220892d4d4e8db9c47133016206c7c0eadd7ab427e
+reviewed_roi_catalogue: /home/dllu/proj/demosaic/configs/low-contrast-training-rois-cleaned90782-v1.json
+reviewed_roi_fraction: 0.5
+scope: Two identical fresh117677-parameter/45-tensor heads use the same1000 freshB4
+  coupled/ordinary batches and frozen V143/DINO parent cache. Only paired-response
+  adds weight1 stable Charbonnier epsilon.003 on actual RGB pair differences versus
+  exact constructed target differences. Nominal sensor-increment units sqrt(mean(shot*abs(clean_packed_a-clean_packed_b)))
+  floored16DN16;read draw cancels beforeADC,not calibrated restored RGB covariance.
+  Base V159 smooth-DC recipe,DC weight1/transition1,local regret1,delivered spectral
+  MSE.25,pixel/gradient/domain weights,AdamW/LR/clipping/EMA fixed. Mesh/weak/photo
+  batches have2 aligned present/background pairs;flat/mixed have4 ordinary observations.
+  Same camera/CFA/geometry perpair,no GT or pair fields enter head forward. Fresh
+  data changes versus old V159;ordinary is a new matched-data control,not an archive
+  replay. All87 neural sources unchanged. Full fixedraw/EMA1000 endpoints/822 cases/3288
+  new review arrays. Protected GFX/RAFs/JPEGs/siblings and heldout Commons sources
+  excluded;dataz unused,originals read-only. All fresh training/review arrays external,60/156GiB
+  reserves plus.5GiB projected margin. Actual parent,DINO,head and noise counts recorded;no
+  quality or flat-safety guarantee.
+pair_unit_floor_DN16: 16
+pair_epsilon: 0.003
+regional_DC_transition_units: 1.0
+regional_DC_weight: 1.0
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1
+external_root: /mnt/external/demosaic/quality-20261107/V160-paired-response-v1
+internal_reserve_GiB: 60
+external_reserve_GiB: 156
+projection_margin_GiB: 0.5
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+arms:
+  ordinary:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 1.0
+    paired_response_weight: 0.0
+  paired-response:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 1.0
+    paired_response_weight: 1.0

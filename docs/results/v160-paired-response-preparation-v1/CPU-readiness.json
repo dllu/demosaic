@@ -1,0 +1,40 @@
+{
+  "status": "pass-before-original-controller-launch",
+  "recorded_unix_UTC": 1794050249.8511856,
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/plan-v1.json",
+    "sha256": "a5721448d8204bb4d0defcd1baad0c9ca09e88d10aacfe71961100ecef33f478"
+  },
+  "resources": {
+    "RAM_available_GiB": 96.82687377929688,
+    "local_free_GiB": 63.68659210205078,
+    "external_free_GiB": 197.39793395996094
+  },
+  "tests": {
+    "command": "PYTHONPATH=src:scripts .venv/bin/python -m pytest tests/test_late_spatial_rgb.py tests/test_regional_dc_objective.py tests/test_local_excess_risk.py tests/test_delivered_spectral_objective.py tests/test_robust_spectral_objective.py tests/test_paired_response_objective.py tests/test_paired_response_data.py tests/test_coupled_sensor_noise.py -q",
+    "passed": 118,
+    "elapsed_seconds": 3.32,
+    "result_source": "Actual completed tool session59981;CPU tests,not study neural-call accounting"
+  },
+  "ruff_check": "passed for new scripts/tests",
+  "reference_compiles": true,
+  "inspection": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/paired-response-data-inspection-v1/inspection-v1.json",
+    "sha256": "3996249c7e115baba127e34987bdbc645c9f2a24f5f574044de4ae625ed9008f"
+  },
+  "actual_viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/paired-response-data-inspection-v1/actual-viewing-v1.json",
+    "sha256": "119204008c21e1d64050af8aa66423973cb98d9d4fb9b01aa334f13c7f9b9884"
+  },
+  "new_study_reserve_policy": {
+    "internal_GiB": 60,
+    "external_GiB": 156,
+    "projection_margin_GiB": 0.5
+  },
+  "failure_history": "One auxiliary readiness command omitted PYTHONPATH: viewing receipt import and pytest collection failed before writes/test execution. Explicit PYTHONPATH corrected them;35 and118 tests passed. No scientific-stage attempt or restart.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v160-v1.py",
+    "sha256": "6941e3df71b1e411303bf39f9885740085e5d4283836ed1a1511d6562eacc389",
+    "text": "\"\"\"Record preparation and launch the sole original fixed V160 controller.\"\"\"\nimport os\nimport shutil\nimport subprocess\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261107/V160-paired-response-v1'\npath=root/'plan-v1.json';plan=read(path);guard(plan)\nassert not (root/'controller.claim').exists()\nassert not (root/'launch-v1.json').exists()\nresources={'RAM_available_GiB':psutil.virtual_memory().available/2**30,\n    'local_free_GiB':shutil.disk_usage(repo).free/2**30,\n    'external_free_GiB':shutil.disk_usage('/mnt/external').free/2**30}\nassert resources['RAM_available_GiB']>52 and resources['local_free_GiB']>60.75\nassert resources['external_free_GiB']>156.5+(plan['expected_cache_bytes']+plan['expected_new_quality_bytes_external'])/2**30\nsave(root/'CPU-readiness-v1.json',{'status':'pass-before-original-controller-launch',\n    'recorded_unix_UTC':time.time(),'plan':ref(path),'resources':resources,\n    'tests':{'command':'PYTHONPATH=src:scripts .venv/bin/python -m pytest tests/test_late_spatial_rgb.py tests/test_regional_dc_objective.py tests/test_local_excess_risk.py tests/test_delivered_spectral_objective.py tests/test_robust_spectral_objective.py tests/test_paired_response_objective.py tests/test_paired_response_data.py tests/test_coupled_sensor_noise.py -q',\n        'passed':118,'elapsed_seconds':3.32,'result_source':'Actual completed tool session59981;CPU tests,not study neural-call accounting'},\n    'ruff_check':'passed for new scripts/tests','reference_compiles':True,\n    'inspection':plan['inspection'],'actual_viewing':ref(repo/'.cache/quality-20261107/paired-response-data-inspection-v1/actual-viewing-v1.json'),\n    'new_study_reserve_policy':plan['reserve_policy'],\n    'failure_history':'One auxiliary readiness command omitted PYTHONPATH: viewing receipt import and pytest collection failed before writes/test execution. Explicit PYTHONPATH corrected them;35 and118 tests passed. No scientific-stage attempt or restart.',\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nwith (root/'controller-v1.log').open('x') as log:\n    proc=subprocess.Popen([str(repo/'.venv/bin/python'),'-P',plan['runner']['path'],'controller',str(path)],\n        cwd=plan['work'],env=dict(os.environ,PYTHONPATH=f\"{plan['work']}/src:{plan['work']}/scripts\",\n            OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1',HF_HUB_OFFLINE='1',\n            TRANSFORMERS_OFFLINE='1',CUDA_VISIBLE_DEVICES='0',CUBLAS_WORKSPACE_CONFIG=':4096:8'),\n        stdout=log,stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True)\n    owner={'pid':proc.pid,'created':psutil.Process(proc.pid).create_time()}\nsave(root/'launch-v1.json',{'status':'original-controller-launched','owner':owner,'plan':ref(path),\n    'recorded_unix_UTC':time.time(),'readiness':ref(root/'CPU-readiness-v1.json'),\n    'stages':['parity','prefix','smoke','cache','train'],'restarts':0})\nprint(owner,resources,flush=True)\n"
+  }
+}

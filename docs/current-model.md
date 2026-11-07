@@ -141,6 +141,7 @@ under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |
+| Paired weak-detail response | [V160](paired-response.md) is running two fresh matched heads on coupled detail/background data. 118 existing/paired checks, three counter regressions and 450 frozen-base gradient comparisons pass. Quality remains pending; the cache accounting failure and explicit 23-batch adoption are preserved |
 | Persistent detail bias | [V12420k native check](v124-final20000-native.md) gives ordinary+.0095dB/faint−.0856dB versus V120; faint spatial MSE is only0.39% higher after late recovery from14k. Real mesh remains weak. [V1256k](v125-progress6000-quality.md) is still1.009dB below V120 on faint contexts. Limited and unequal-budget supports; original matched full endpoint/bias review remains pending |
 | Spatial RAW detail | [V131/V132](raw-spatial-training.md) tests a22,664-parameter branch on90781/29. [V131 control at1k](v131-progress1000-quality.md) gives ordinary+.0016dB, deepest shadows−.0237–.0342dB and faint ADC−.2734dB versus V120, with mixed local detail and no clear mesh recovery. V131 stopped at step14,549; V132 production/full endpoints remain unmeasured |
 | Global RAW repetition | [Completed V1361k](v136-global-attention-quality.md) adds18,272 parameters for two-pass global attention. Against matched V129: ordinary+.0003dB, shadows+.0007–.0026dB, faint ADC+.0131dB; local gains/errors are mixed and real mesh remains weak. Full native comparison and independent audits published |

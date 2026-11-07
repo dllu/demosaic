@@ -1,5 +1,12 @@
 # Experiment index
 
+The [V160 paired-response trial](paired-response.md) is running fresh matched
+heads on coupled detail/background observations. The base-loss gradients,
+physical transport and restored smoke checks pass; quality is pending.
+The original cache counter's procedural/sensor Gaussian mix-up is preserved,
+with an explicit continuation adopting 23 completed parent batches. The fixed
+review includes both protected GFX scenes and quiet/coarse controls.
+
 The [completed V159 DC-transition trial](regional-dc-transition.md) changes only
 the hinge transition1e-4→1, weight1 fixed, on identical hybrids. Clipped batches
 fall726→101/882. Native512 full RMS improves0.27–0.39% and block32 0.17–0.19%

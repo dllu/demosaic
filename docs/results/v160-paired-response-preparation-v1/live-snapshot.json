@@ -1,0 +1,84 @@
+{
+  "recorded_unix_UTC": 1794050761.9878438,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/plan-v2.json",
+      "sha256": "824643a24cc186f18bea487fe703888a29be1ccd57aa09d1f8470e221c49495b"
+    },
+    "owner": {
+      "pid": 3440864,
+      "created": 1794050624.77
+    },
+    "completed": {},
+    "status": "running-declared-phase",
+    "phase": "cache",
+    "child": {
+      "pid": 3440877,
+      "created": 1794050625.14
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3441073,
+      "created": 1794050676.46
+    },
+    "completed": {}
+  },
+  "progress": {
+    "step": 90,
+    "counts": {
+      "parent_root": 67,
+      "DINO": 67
+    },
+    "source_counts": {
+      "batches": 67,
+      "observations": 268,
+      "Poisson": 225,
+      "Gaussian": 139,
+      "procedural_Poisson": 0,
+      "procedural_Gaussian": 13
+    }
+  },
+  "observed_live_owners": [
+    {
+      "role": "continuation-controller",
+      "pid": 3440864,
+      "created": 1794050624.77,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/work-v2/scripts/resume_paired_response_trial.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/plan-v2.json"
+      ],
+      "status": "sleeping"
+    },
+    {
+      "role": "worker",
+      "pid": 3440877,
+      "created": 1794050625.14,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/work-v2/scripts/resume_paired_response_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/plan-v2.json",
+        "--phase",
+        "cache"
+      ],
+      "status": "running"
+    },
+    {
+      "role": "review-controller",
+      "pid": 3441073,
+      "created": 1794050676.46,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/queue-v160-review-v2.py"
+      ],
+      "status": "sleeping"
+    }
+  ],
+  "scope": "Actual continuation snapshot. Original cache attempt failed at source24 accounting;completed23 parent batches adopted. No full training restart. Quality pending."
+}

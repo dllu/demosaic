@@ -48,9 +48,11 @@ V120's lower coarse noisy-flat error but higher total error and worse ADC slopes
 Keep V158 quiet accuracy, V159's coarse/quiet compromise, V156 learned detail
 and V157 direct spatial/coarse capacity visible; no model combines their strengths.
 
-The separate [coupled sensor-noise primitive](docs/coupled-counterfactual-noise.md)
-prepares a possible paired-response objective; its physical checks pass, with
-no paired training or quality gain claimed yet.
+The [V160 paired-response trial](docs/paired-response.md) now tests aligned
+detail/background examples with coupled sensor noise. Its control-loss,
+gradient and save/restore checks pass; full training and quality review are
+pending. The first cache accounting failure and its explicit continuation are
+preserved. No restoration gain is claimed from the training-input inspection.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.

@@ -1,0 +1,56 @@
+{
+  "status": "pass-immutable-preparation-and-fixed-comparator-bindings",
+  "recorded_unix_UTC": 1794050931.0554988,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-preparation-v1.json",
+    "sha256": "a86847f9142e4723879a518a164ea8f4932826b192e3c66e72637bb9ddc75230"
+  },
+  "byte_exact_receipts": 19,
+  "source_texts": 78,
+  "unchanged_neural_hashes": 87,
+  "restored_smoke_Adam_states": 90,
+  "frozen_base_gradient_tensor_checks": 450,
+  "adopted_complete_parent_batches": 23,
+  "retained_prediction_arrays_checked": 4110,
+  "fixed_quality_cases": 822,
+  "fixed_endpoints": 4,
+  "document_links_checked": 464,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "8ddec2181deae3cdc1cfe26cb152cd75a63064238f94f804c3f4f0cfa3977f6b"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "8d06caffb99460d92c3ad250a381cf7ad1cef622b91e805eff9ec7c6fddd7067"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "843b1f3a6d831cdd1d5b2c23e1a575a3f58d72f5cbfa0865b42d3605d05140cf"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "96c9440f64b00090aa0dccdf5801738155df9841192a22523f9748a4934ec9da"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "81f2a63955baa09ea998b5fba8ffbfd4824b8cf40ca3c2c4d09fb94af0588632"
+    },
+    "docs/paired-response.md": {
+      "path": "/home/dllu/proj/demosaic/docs/paired-response.md",
+      "sha256": "8158093fee1da83cc127d66332c95747d9151f898217827356d82c1672632cc3"
+    },
+    "diary/2026-11-07-03-26-40-v160-paired-response.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-03-26-40-v160-paired-response.md",
+      "sha256": "f1bf40c7733bf6cdbf41267b337da7edc50ed91ec1be5c5d4c08d1b86a68e938"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v160-preparation-v1.py",
+    "sha256": "db19b403f33b16bb8f85251e185917a96cb8a80db396c04da3134f67b81bfe79",
+    "text": "\"\"\"Verify public readiness bytes and all fixed native comparator bindings.\"\"\"\nimport hashlib\nimport re\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V160-paired-response-v1'\nindex=repo/'docs/results/v160-paired-response-preparation-v1.json'\noutput=repo/'docs/results/v160-paired-response-preparation-verification-v1.json';assert not output.exists()\npublication=read(index);assert len(publication['copies'])==19 and publication['source_texts']==78\nfor copy in publication['copies'].values():\n    assert ref(copy['original']['path'])==copy['original'] and ref(copy['public']['path'])==copy['public']\n    assert Path(copy['original']['path']).read_bytes()==Path(copy['public']['path']).read_bytes()\nplan=read(root/'plan-v2.json');guard(plan)\npost=read(root/'postprocess-plan-v2.json');guard(post)\nassert read(root/'postprocess-import-preflight-v2.json')['returncode']==0\nbundle=read(publication['sources']['path']);assert ref(publication['sources']['path'])==publication['sources']\nassert len(bundle['source_texts'])==78 and len(bundle['unchanged_neural_hashes'])==87\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nfor p,h in bundle['unchanged_neural_hashes'].items():\n    assert ref(p)['sha256']==ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\nsmoke=read(root/'smoke-result-v1.json')\nassert smoke['base_compatibility_steps']==10 and smoke['base_compatibility_parameter_gradients']==450\nassert smoke['counts']==smoke['updates']=={'ordinary':10,'paired-response':10}\nassert read(root/'parity-result-v1.json')['component_forward_evaluations']==56\nadoption=read(root/'cache-adoption-v2.json');assert len(adoption['batches'])==23\nfor item in adoption['batches']:\n    assert ref(item['arrays']['path'])==item['arrays'] and ref(item['parent']['path'])==item['parent']\ndesign=read(root/'quality-design-v1.json');assert len(design['observations'])==822\nassert len(post['retained_native_collections'])==5\narrays=0\nfor binding in post['retained_native_collections'].values():\n    assert ref(binding['path'])==binding\n    collection=read(binding['path']);assert len(collection['observations'])==822\n    assert collection['module_before']==collection['module_after'] and collection['RNG_unchanged']\n    for row,case in zip(collection['observations'],design['observations'],strict=True):\n        assert row['id']==case['id'] and row['parent']==case['parent']\n        assert ref(row['prediction']['path'])==row['prediction'];arrays+=1\nfor item in publication['completed_training_input_inspection']['images']:\n    assert ref(item['original']['path'])==item['original'] and ref(item['public']['path'])==item['public']\n    assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n    'docs/paired-response.md','diary/2026-11-07-03-26-40-v160-paired-response.md']\nlinks=0\nfor name in docs:\n    p=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (p.parent/link.split('#')[0]).resolve().is_file(),(name,link)\n        links+=1\nsave(output,{'status':'pass-immutable-preparation-and-fixed-comparator-bindings','recorded_unix_UTC':time.time(),\n    'publication':ref(index),'byte_exact_receipts':19,'source_texts':78,'unchanged_neural_hashes':87,\n    'restored_smoke_Adam_states':90,'frozen_base_gradient_tensor_checks':450,\n    'adopted_complete_parent_batches':23,'retained_prediction_arrays_checked':arrays,\n    'fixed_quality_cases':822,'fixed_endpoints':4,'document_links_checked':links,\n    'documents':{p:ref(repo/p) for p in docs},'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forward_calls':0,'new_noise_draws':0,\n    'scope':'Full training and restoration quality remain pending. Actual two-sheet training-input viewing is separate from pending performance-native viewing. Original failure and extra source draw preserved.'})\nprint('PASS19 exact receipts,78 source texts,87 unchanged neural hashes,23 adopted batches,',arrays,'retained arrays and',links,'links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Full training and restoration quality remain pending. Actual two-sheet training-input viewing is separate from pending performance-native viewing. Original failure and extra source draw preserved."
+}
