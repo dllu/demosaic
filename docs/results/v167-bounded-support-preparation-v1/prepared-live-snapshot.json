@@ -1,0 +1,71 @@
+{
+  "recorded_unix_UTC": 1794077068.1639483,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/plan-v1.json",
+      "sha256": "53676205bf8a92469416c1e3ebbc10e353e6a05dadf8209067e9e9a44cad6700"
+    },
+    "owner": {
+      "pid": 3954122,
+      "created": 1794076810.53
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/parity-result-v1.json",
+        "sha256": "d42433630c44959e089ba01611d00b614c1593773da157176fa56517073b262a"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/smoke-result-v1.json",
+        "sha256": "f8a17d6a807d67f562489237eef255f6964ade1951159bbbf38fb611ae22158e"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3954208,
+      "created": 1794076848.66
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3954127,
+      "created": 1794076810.7
+    },
+    "completed": {}
+  },
+  "owners": [
+    {
+      "pid": 3954122,
+      "created": 1794076810.53,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/work/scripts/train_bounded_support_trial.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/plan-v1.json"
+      ]
+    },
+    {
+      "pid": 3954208,
+      "created": 1794076848.66,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/work/scripts/train_bounded_support_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ]
+    },
+    {
+      "pid": 3954127,
+      "created": 1794076810.7,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/queue-v167-review-v1.py"
+      ]
+    }
+  ]
+}

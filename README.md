@@ -7,6 +7,9 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
+[V167 bounded support](docs/bounded-spectral-support.md) is training after
+266 CPU checks, GPU compatibility and restored-smoke checks passed. Quality is pending.
+
 The completed [V166 common-support routing trial](docs/common-support-routing.md) reduces quiet RMS **6.10–15.27%** and DC color bias **17.52–31.30% versus V165**, visibly reducing the representative magenta casts. Mesh response stays near the parent and real fine crossings remain incomplete; all256 present-mesh mean supports remain below1e-4. Full-flat means worsen0.199–0.312%,coarse means0.216–0.376%,with all48 coarse inputs worse versus V165. Quiet means remain2.40–6.34% above V143. Retain this quiet-color gain beside V165 flat/grain,V161/V164 detail,V157 coarse and V158 quiet strengths. Both1k heads/four endpoints/822cases/72actual native figures are complete;238 CPU checks,94 final Adam states,exact V165 controls and independent audits pass. Original smoke failure and three discarded calls are preserved;no full-training restart.
 
 | Useful choice | Measured strength | Remaining limits |
