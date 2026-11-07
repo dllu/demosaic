@@ -1,11 +1,16 @@
 # Experiment index
 
-The [V160 paired-response trial](paired-response.md) is running fresh matched
-heads on coupled detail/background observations. The base-loss gradients,
-physical transport and restored smoke checks pass; quality is pending.
-The original cache counter's procedural/sensor Gaussian mix-up is preserved,
-with an explicit continuation adopting 23 completed parent batches. The fixed
-review includes both protected GFX scenes and quiet/coarse controls.
+The [completed V160 paired-response trial](paired-response.md) nearly doubles
+learned mesh response: +82–96% versus V143, reaching 4.00–4.31% of exact GT.
+Blank RMS rises 3.25–4.69%, quiet RMS 8.46–11.36%, with added fine colored grain
+and soft real crossings. Its ordinary new-data control lowers native512 full
+flat RMS 0.42–0.53%, improving all 48 full/coarse inputs but regressing quiet
+means 0.76–1.58%. Both 1k heads/four endpoints/822 cases/72 actual native views
+and independent audits complete. 123 CPU checks, 450 frozen-base gradient
+comparisons and final 90-state/four-load validation pass. The failed source24
+counter and explicit 23-batch adoption are preserved; 1,000 parent/DINO batch
+calls each and 5,364 scientific head calls, with no successful-parent replay
+or full-training restart. Both protected GFX scenes/JPEGs remain qualitative.
 
 The [completed V159 DC-transition trial](regional-dc-transition.md) changes only
 the hinge transition1e-4→1, weight1 fixed, on identical hybrids. Clipped batches

@@ -1,0 +1,175 @@
+{
+  "status": "all15-successful-and-failed-owners-terminal",
+  "recorded_unix_UTC": 1794053688.3368661,
+  "recorded_owner_count": 15,
+  "owners": [
+    {
+      "stage": "original-controller",
+      "owner": {
+        "pid": 3437375,
+        "created": 1794050249.79
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "parity",
+      "owner": {
+        "pid": 3437385,
+        "created": 1794050250.17
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "prefix",
+      "owner": {
+        "pid": 3437481,
+        "created": 1794050260.51
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "smoke",
+      "owner": {
+        "pid": 3437880,
+        "created": 1794050318.85
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "original-cache-failed",
+      "owner": {
+        "pid": 3438089,
+        "created": 1794050343.21
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "original-review-queue",
+      "owner": {
+        "pid": 3438335,
+        "created": 1794050367.03
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "continuation-controller",
+      "owner": {
+        "pid": 3440864,
+        "created": 1794050624.77
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "continuation-cache",
+      "owner": {
+        "pid": 3440877,
+        "created": 1794050625.14
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "train",
+      "owner": {
+        "pid": 3457678,
+        "created": 1794052018.02
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review-controller",
+      "owner": {
+        "pid": 3441073,
+        "created": 1794050676.46
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "checkpoint-validation",
+      "owner": {
+        "pid": 3517096,
+        "created": 1794053192.78
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "review",
+      "owner": {
+        "pid": 3517099,
+        "created": 1794053194.38
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "scores",
+      "owner": {
+        "pid": 3517705,
+        "created": 1794053449.58
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "metric-audit",
+      "owner": {
+        "pid": 3517780,
+        "created": 1794053546.92
+      },
+      "terminal_state": "absent"
+    },
+    {
+      "stage": "render",
+      "owner": {
+        "pid": 3517901,
+        "created": 1794053657.49
+      },
+      "terminal_state": "absent"
+    }
+  ],
+  "live_matching_root_argv": [],
+  "actual_parent_root_calls": 1000,
+  "actual_DINO_backbone_calls": 1000,
+  "parent_images": 4000,
+  "DINO_images": 4000,
+  "head_calls": 5364,
+  "head_image_evaluations": 11424,
+  "unique_training_observations": 4000,
+  "actual_source_constructions_including_failed24": 4004,
+  "actual_sensor_sampler_API_calls": {
+    "Poisson": 3312,
+    "Gaussian": 1928
+  },
+  "unique_cache_sensor_sampler_API_calls": {
+    "Poisson": 3309,
+    "Gaussian": 1927
+  },
+  "procedural_Gaussian_API_calls_continuation_measured": 110,
+  "procedural_Gaussian_API_calls_legacy_derived_from_recipes": 2,
+  "procedural_Gaussian_API_calls_failed24": 1,
+  "scientific_cache_stage_failures": 1,
+  "full_training_restarts": 0,
+  "successful_parent_forwards_repeated": 0,
+  "new_prediction_arrays": 3288,
+  "review_root_calls": 3288,
+  "returned_forward_journal_entries": 4288,
+  "training_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/status-v2.json",
+    "sha256": "5a6067698e71953657859fdd99e8547eef45cda6e8ea5d1a7952006725687e6e"
+  },
+  "postprocess_completion": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/postprocess-status-v2.json",
+    "sha256": "63f8c9d91215e2457780be6dbf55d028a3f900dfc2d2b6be699e3b180e251818"
+  },
+  "failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/cache-failure-v1.json",
+    "sha256": "65df73c8ec8a768b7d959bfd44a1fdb36c450f9b1cb55db7a51f241bbd40b533"
+  },
+  "adoption": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/cache-adoption-v2.json",
+    "sha256": "0f9e773f21ac3c11f803cf11da6764021bd6b32b1512c0537e259a296c9f5634"
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v160-execution-v1.py",
+    "sha256": "e8d00feafc5833d2b872466746fefac8e1f3b143942f83fbcc2c91898e749a21",
+    "text": "\"\"\"Account successful and failed owners and actual V160 scientific calls.\"\"\"\nimport json\nimport os\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import read,ref,save\nfrom train_v43_quality_trial import live\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1')\ntraining=read(root/'status-v2.json');post=read(root/'postprocess-status-v2.json')\nassert training['status']=='completed-matched-training-awaiting-fixed-quality-review'\nassert post['status']=='completed-four-endpoint-audits-and-rendering-awaiting-actual-native-viewing'\nassert set(post['completed'])=={'checkpoint-validation','review','scores','metric-audit','render'}\nassert all(v['returncode']==0 for v in post['completed'].values())\noriginal=read(root/'status-v1.json');oldpost=read(root/'postprocess-status-v1.json')\nassert original['status']==oldpost['status']=='failed-preserved-no-automatic-retry'\nowners=[('original-controller',original['owner'])]\nowners += [(name,read(root/f'{name}-result-v1.json')['owner']) for name in ['parity','prefix','smoke']]\nowners += [('original-cache-failed',read(root/'cache-failure-v1.json')['owner']),('original-review-queue',oldpost['owner']),\n    ('continuation-controller',training['owner']),('continuation-cache',read(root/'cache-result-v2.json')['owner']),\n    ('train',read(root/'train-result-v1.json')['owner']),('review-controller',post['owner'])]\nowners += [(stage,item['owner']) for stage,item in post['completed'].items()]\nassert len(owners)==len({(x['pid'],x['created']) for _,x in owners})==15\nrecords=[]\nfor stage,owner in owners:\n    assert not live(owner),(stage,owner)\n    try:\n        p=psutil.Process(owner['pid'])\n        terminal='PID-reused-original-terminal' if abs(p.create_time()-owner['created'])>=.01 else p.status()\n    except psutil.NoSuchProcess:terminal='absent'\n    records.append({'stage':stage,'owner':owner,'terminal_state':terminal})\ncache=read(root/'cache-result-v2.json');prefix=read(root/'prefix-result-v1.json');failure=read(root/'cache-failure-v1.json')\nassert cache['counts']=={'parent_root':977,'DINO':977} and cache['adopted_parent_batches']==23\nassert prefix['counts']=={'parent_root':10,'DINO':10} and failure['progress']['counts']=={'parent_root':13,'DINO':13}\noldrows=[json.loads(s) for s in (root/'cache-trace-v1.jsonl').read_text().splitlines()]\nnewrows=[json.loads(s) for s in (root/'cache-trace-v2.jsonl').read_text().splitlines()]\nassert len(oldrows)==13 and len(newrows)==977\nassert cache['batches']==prefix['batches']+oldrows+newrows\nassert [x['step'] for x in cache['batches']]==list(range(1,1001))\nfor revision,steps in [(1,list(range(11,24))),(2,list(range(24,1001)))]:\n    forward=[json.loads(s) for s in (root/f'cache-forward-events-v{revision}.jsonl').read_text().splitlines()]\n    assert [x['step'] for x in forward]==steps\n    assert forward[-1]['returned_forwards']=={'parent_root':len(steps),'DINO':len(steps)}\nsensor_unique={k:sum(r['metadata']['sensor']['sampler_calls'][k] for r in cache['batches']) for k in ['Poisson','Gaussian']}\nassert sensor_unique=={'Poisson':3309,'Gaussian':1927}\nactual_sensor={'Poisson':sensor_unique['Poisson']+3,'Gaussian':sensor_unique['Gaussian']+1}\nassert actual_sensor=={'Poisson':3312,'Gaussian':1928}\nfor key in ['Poisson','Gaussian']:\n    assert cache['source_counts'][key]==sum(r['metadata']['actual_sampler_calls'][f'sensor_{key}'] for r in newrows)\nprocedural=sum(r['metadata']['actual_sampler_calls']['procedural_Gaussian'] for r in newrows)\nassert procedural==cache['source_counts']['procedural_Gaussian']\nlegacy_procedural=sum(c['source']['present_recipe']['kind']=='bandlimited' for r in cache['batches'][:23]\n    if r['metadata']['domain']=='weak' for c in r['metadata']['cases'][0::2])\nreview=read(root/'review-result-v1.json');assert review['component_forwards']==review['new_prediction_arrays']==3288\npaths=set()\nfor binding in review['collections'].values():\n    c=read(binding['path']);assert c['component_forwards']==822\n    forward=[json.loads(s) for s in Path(c['forward_journal']['path']).read_text().splitlines()]\n    observations=[json.loads(s) for s in Path(c['observation_journal']['path']).read_text().splitlines()]\n    assert [r['returned_forwards'] for r in forward]==list(range(1,823))\n    assert observations==c['observations'] and len(observations)==822\n    for row in observations:\n        p=Path(row['prediction']['path']);assert p.is_relative_to('/mnt/external')\n        assert str(p) not in paths;paths.add(str(p))\nassert len(paths)==3288\nhead_calls=read(root/'parity-result-v1.json')['component_forward_evaluations']\nhead_calls+=sum(read(root/'smoke-result-v1.json')['counts'].values())\nhead_calls+=sum(read(root/'train-result-v1.json')['counts'].values())+review['component_forwards']\nassert head_calls==5364\nexcluded={os.getpid()}|{p.pid for p in psutil.Process().parents()};matching=[]\nfor p in psutil.process_iter(['pid','cmdline','status']):\n    if p.pid in excluded or p.info['status'] in ['zombie','dead']:continue\n    if any(t==str(root) or t.startswith(str(root)+'/') for t in p.info['cmdline'] or []):matching.append(p.info)\nassert not matching,matching\ndest=root/'execution-completion-v1.json';assert not dest.exists()\nsave(dest,{'status':'all15-successful-and-failed-owners-terminal','recorded_unix_UTC':time.time(),\n    'recorded_owner_count':15,'owners':records,'live_matching_root_argv':matching,\n    'actual_parent_root_calls':1000,'actual_DINO_backbone_calls':1000,'parent_images':4000,'DINO_images':4000,\n    'head_calls':head_calls,'head_image_evaluations':11424,\n    'unique_training_observations':4000,'actual_source_constructions_including_failed24':4004,\n    'actual_sensor_sampler_API_calls':actual_sensor,'unique_cache_sensor_sampler_API_calls':sensor_unique,\n    'procedural_Gaussian_API_calls_continuation_measured':procedural,\n    'procedural_Gaussian_API_calls_legacy_derived_from_recipes':legacy_procedural,\n    'procedural_Gaussian_API_calls_failed24':1,\n    'scientific_cache_stage_failures':1,'full_training_restarts':0,'successful_parent_forwards_repeated':0,\n    'new_prediction_arrays':3288,'review_root_calls':3288,'returned_forward_journal_entries':1000+3288,\n    'training_completion':ref(root/'status-v2.json'),'postprocess_completion':ref(root/'postprocess-status-v2.json'),\n    'failure':ref(root/'cache-failure-v1.json'),'adoption':ref(root/'cache-adoption-v2.json'),\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'scope':'All scientific root/head/backbone calls exclude separate CPU regression tests. Original source24 failed only the accounting assertion after construction;no parent call or retained input. Explicit continuation adopted23 successful parent batches and constructed remaining977 once;first full training and all3288 review predictions completed once. Sensor API calls distinguish shared Poisson/read transport from procedural Gaussian texture draws. Executed cache receipt legacy prose990/adopt10 is superseded by actual977/adopt23 fields and these journals;frozen bytes preserved.'})\nprint('PASS all15 owners terminal;5364 head calls,1000 parent/DINO each;one accounted cache failure,zero successful-parent replays')\n"
+  },
+  "scope": "All scientific root/head/backbone calls exclude separate CPU regression tests. Original source24 failed only the accounting assertion after construction;no parent call or retained input. Explicit continuation adopted23 successful parent batches and constructed remaining977 once;first full training and all3288 review predictions completed once. Sensor API calls distinguish shared Poisson/read transport from procedural Gaussian texture draws. Executed cache receipt legacy prose990/adopt10 is superseded by actual977/adopt23 fields and these journals;frozen bytes preserved."
+}

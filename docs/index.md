@@ -1,5 +1,14 @@
 # Documentation guide
 
+The [completed V160 paired-response trial](paired-response.md) raises learned
+mesh response 82–96% versus V143, reaching 4.00–4.31% of exact GT amplitude.
+Blank RMS rises 3.25–4.69% and quiet RMS 8.46–11.36%; native views show added
+colored grain and slightly stronger existing real strands, with soft crossings.
+The ordinary new-data control improves all 48 native512 full/coarse flat inputs,
+with full RMS 0.42–0.53% lower and a smaller quiet regression. Both 1k heads,
+four endpoints/822 cases/72 actual native figures and independent audits are
+complete. Keep the response gain beside earlier quiet/coarse strengths.
+
 The [completed V159 transition trial](regional-dc-transition.md) recovers modest
 coarse-flat correction: native512 full RMS −0.27–0.39%, block32 −0.17–0.19%
 versus V143, with all 48 coarse inputs improving at both endpoints. Quiet total
@@ -9,11 +18,10 @@ views and audits are complete, retaining four V156/V157 comparator columns.
 60 tests, 90 finite final Adam states and exact V158 control states/replays pass.
 Preserve this coarse/quiet compromise beside V158 quiet accuracy and V156 detail.
 
-The [V160 paired-response trial](paired-response.md) uses the validated
-[coupled sensor-noise primitive](coupled-counterfactual-noise.md) for two fresh
-matched heads. Exact base-loss gradients and save/restore checks pass. Full
-quality remains pending; the first cache accounting failure and 23-batch adoption
-are preserved with the original input inspections and sources.
+V160 uses the validated [coupled sensor-noise primitive](coupled-counterfactual-noise.md).
+Its 123 CPU checks, exact base-loss gradients, restored smoke and final states
+pass. The cache accounting failure and explicit 23-batch adoption are preserved
+alongside the completed quality evidence.
 
 The [completed V158 regional-DC trial](regional-dc-regret.md) removes V157's large
 quiet-region color-bias increase. EMA quiet RMS falls 0.09–0.12% versus V143 on

@@ -1,0 +1,157 @@
+{
+  "status": "actually-viewed-all72-native-primary-figures-at-original-detail",
+  "recorded_unix_UTC": 1794053846.6292844,
+  "figure_manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/figures-v1.json",
+    "sha256": "9a70e080d366449736a0cd25c684454526e4503bdc39e10462dcc894198c3a4d"
+  },
+  "viewing_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/native-viewing-session-v1.jsonl",
+    "sha256": "32374d39f937bc0fd1b2b6df9f0ea4ec00bcd214e636332f5835daf5cf5b419c"
+  },
+  "events": [
+    {
+      "recorded_unix_UTC": 1794053708.1517155,
+      "sheets": [
+        0,
+        1,
+        2
+      ],
+      "detail": "original",
+      "notes": "Actually viewed original pixels: mesh2302 remains nearly flat at ordinary display; amplified view shows more fine residual texture in pair outputs. Mesh2309 keeps dominant stripes; weaker crossings remain much fainter than exact GT. All four endpoint triplets compared. No complete lattice recovery inferred."
+    },
+    {
+      "recorded_unix_UTC": 1794053754.0906699,
+      "sheets": [
+        3,
+        4,
+        5
+      ],
+      "detail": "original",
+      "notes": "Actually viewed native absent mesh, main sky/building/foliage/coarse fence, both cab windows/priors/JPEGs and organic examples. Pair outputs add fine residual grain in empty procedural field. Existing partial real mesh looks slightly more contrasted in places,especially nearby-profile windows,but crossings remain soft and far below independent ISO100 visibility. No convincing complete new cab lattice or broad natural microtexture recovery. Sky at ordinary exposure stays broadly smooth; building and foliage remain soft. ISO100 references are qualitative,not exact GT."
+    },
+    {
+      "recorded_unix_UTC": 1794053766.3141835,
+      "sheets": [
+        6,
+        7,
+        8
+      ],
+      "detail": "original",
+      "notes": "Actually viewed ADC constants,older256 ISO12800 and native512 ISO6400/12800 flats plus endpoint triplets. Constants stay visually identical. Pair outputs show extra fine colored grain,especially ISO12800,while broad mottling remains. Ordinary outputs keep slightly smoother fields. Small coarse-metric gains do not make these flat crops clean."
+    },
+    {
+      "recorded_unix_UTC": 1794053787.47562,
+      "sheets": [
+        9,
+        10,
+        11
+      ],
+      "detail": "original",
+      "notes": "Actually viewed bright/dark gray fields,retained bird/branch and ISO6400 quiet-neighbor boards/triplets. Pair outputs add visible fine grain in amplified quiet crops; broad colored mottling persists. V157 retained has a stronger purple cast in this quiet example. Ordinary quiet is closer to parent but still imperfect. Normal-display edge location remains intact. Bird and branch fine texture stays soft;no convincing new filaments."
+    },
+    {
+      "recorded_unix_UTC": 1794053799.080609,
+      "sheets": [
+        12,
+        13,
+        14
+      ],
+      "detail": "original",
+      "notes": "Actually viewed ISO12800 vertical-step endpoint triplets and narrow-bar/slanted-step controls at normal and40x contrast. Pair outputs visibly increase fine colored grain in exact quiet areas. Broad blue/green/red patches persist;retained V157 has stronger purple bias in some views. Edge geometry stays coherent at ordinary display. Whole-image edge gains do not imply cleaner neighboring fields."
+    },
+    {
+      "recorded_unix_UTC": 1794053846.6292367,
+      "sheets": [
+        15,
+        16,
+        17
+      ],
+      "detail": "original",
+      "notes": "Actually viewed remaining ISO12800 slanted/striped quiet controls and ADC bark,fur and four sloped planes. Pair outputs retain higher fine colored grain in quiet fields. Strong striped patch and edge geometry remain legible at ordinary display. ADC bark/fur/slopes stay visually close to parent and retained comparators;no new substantial ADC detail recovery. All18 original-detail sheets/72 primary images now actually viewed."
+    }
+  ],
+  "sheets_viewed": 18,
+  "primary_figures_covered": 72,
+  "primary_indices_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71
+  ],
+  "no_resize": true,
+  "recorder": {
+    "path": "/home/dllu/proj/demosaic/.cache/record-v160-viewing-v1.py",
+    "sha256": "b5821eca033b5799426fb764092f055c23d8ecbca724a0bb7bc861c615f24f49",
+    "text": "\"\"\"Record a human viewing event only after the assistant has actually seen it.\"\"\"\n\nimport argparse\nimport json\nimport time\nfrom pathlib import Path\n\nfrom train_directional_bank_trial import read, ref, save\n\nparser = argparse.ArgumentParser(description=__doc__)\nparser.add_argument('sheets', help='Comma-separated sheet numbers actually seen')\nparser.add_argument('notes')\nargs = parser.parse_args()\nroot = Path('/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1')\nmanifest = read(root / 'figures-v1.json')\njournal = root / 'native-viewing-session-v1.jsonl'\nevents = [json.loads(line) for line in journal.read_text().splitlines()] if journal.exists() else []\nseen = {number for event in events for number in event['sheets']}\nselected = [int(number) for number in args.sheets.split(',')]\nassert not seen.intersection(selected) and len(set(selected)) == len(selected)\nassert all(0 <= number < len(manifest['sheets']) for number in selected)\nfor number in selected:\n    sheet = manifest['sheets'][number]\n    assert ref(sheet['image']['path']) == sheet['image'] and sheet['no_resize']\nevent = {'recorded_unix_UTC': time.time(), 'sheets': selected,\n         'detail': 'original', 'notes': args.notes}\nwith journal.open('a') as stream:\n    stream.write(json.dumps(event) + '\\n')\nevents.append(event)\nseen.update(selected)\nprint('Recorded actual viewing:', selected, '; total', len(seen))\nif len(seen) == 18:\n    assert seen == set(range(18)) and len(manifest['images']) == 72\n    indices = [i for n in sorted(seen) for i in manifest['sheets'][n]['indices']]\n    assert sorted(indices) == list(range(72)) and len(indices) == len(set(indices))\n    save(root / 'native-viewing-v1.json', {\n        'status': 'actually-viewed-all72-native-primary-figures-at-original-detail',\n        'recorded_unix_UTC': time.time(), 'figure_manifest': ref(root / 'figures-v1.json'),\n        'viewing_journal': ref(journal), 'events': events,\n        'sheets_viewed': 18, 'primary_figures_covered': 72,\n        'primary_indices_covered': sorted(indices), 'no_resize': True,\n        'recorder': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n        'scope': 'All four fixed V160 endpoints. Matched heads differ only in pair-loss weight0 versus1 on same fresh data;five retained V156 detail/V157 coarse/V158 quiet/V159 compromise columns use same observations without new calls. Actual original-detail viewing recorded only after image outputs. Actual quiet DC/spatial/total,mesh/natural response,coarse flats and both protected GFX scenes/priors/windows/JPEGs assessed. Real references qualitative,not exactGT.' })\n"
+  },
+  "scope": "All four fixed V160 endpoints. Matched heads differ only in pair-loss weight0 versus1 on same fresh data;five retained V156 detail/V157 coarse/V158 quiet/V159 compromise columns use same observations without new calls. Actual original-detail viewing recorded only after image outputs. Actual quiet DC/spatial/total,mesh/natural response,coarse flats and both protected GFX scenes/priors/windows/JPEGs assessed. Real references qualitative,not exactGT."
+}

@@ -1,0 +1,65 @@
+{
+  "status": "reviewed-summary-bound-to-audited-metrics",
+  "scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/scores-v1.json",
+    "sha256": "6ba8084a49d80eb04641d3a38f89611b897ebb70b68906921e60c1872ec4d5fc"
+  },
+  "viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/native-viewing-v1.json",
+    "sha256": "c884785fe75faa2e53184823513617fc775539f71332ee39e62c8ba8c88097ad"
+  },
+  "notes": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/human-quality-notes-v1.md",
+    "sha256": "b1a38438397286bce132e52689449a254356b566ce4d1a64aeb20da658d1a695",
+    "text": "V160 pair supervision substantially strengthens learned weak-mesh response,\nwith a visible noise cost. Mean response rises **81.75% raw /\n95.73% EMA versus V143**, reaching **4.00% /\n4.31% of exact constructed target amplitude**. Against the fresh\nmatched ordinary heads, response rises 84.62% / 94.77%.\nThis is a stronger learned-detail starting point than the retained V156\u2013V159\nheads. Existing periodic `detail` still has higher mean mesh response.\n\nActual blank RMS rises **3.25% / 4.69% versus V143**. Quiet-region\nRMS rises **8.46\u201311.36%**, and all 32 quiet inputs worsen against\ntheir matched ordinary endpoint. Each paired endpoint is worse than V143 on\n31 of those 32 inputs. Native amplified crops show extra fine colored grain;\nbroad mottling persists. Full native512 noisy-flat RMS rises\n**1.48\u20132.83%**. Raw is worse on 47/48 flat inputs and EMA on all 48.\nMean coarse block error can improve while total/spatial errors worsen.\n\nThe **ordinary new-data control** has a separate useful strength: native512\nfull flat RMS falls **0.42\u20130.53% versus V143**, with all\n48 inputs improving in full and coarse error at both endpoints. Its quiet mean\ninstead rises 0.76\u20131.58%; 18/32 raw and 17/32 EMA inputs regress.\nThe largest quiet increase is 0.370174/0.387438 DN16. V158 retains stronger quiet\naccuracy, V159 a smaller quiet cost, and V157 the larger standalone coarse gain.\nThe ordinary control changes the full data recipe versus those older studies.\n\nIn the standing real views, some existing partial cab-mesh strands gain a\nlittle contrast, especially under the nearby profile. Crossings remain soft;\nthere is no convincing complete new fine lattice. Sky looks broadly smooth at\nordinary display, while exact flat/quiet controls expose the added texture.\nBuilding edges and foliage remain soft. Bird, butterfly, grass and wood views\ndo not show convincing broad microtexture recovery. Natural-band gains are\nsmall and mixed against V143, and ADC-photo error remains near parent level,\nwell behind V150's stronger ADC result. Independent ISO100 references are\nqualitative comparisons, not exact GT.\n\nRetain pair supervision and the paired data generator for further learned-detail\nwork, alongside the ordinary control's flat-field strength. The next problem is\nto distinguish supported fine structure from noise more effectively while\npreserving the measured response. The broader fine-detail/clean-field goal\nremains active.\n"
+  },
+  "derived": {
+    "mesh_response_raw_EMA": [
+      0.0400224697177169,
+      0.04310253517548251
+    ],
+    "mesh_percent_vs_parent": [
+      81.74767369448222,
+      95.73468488404467
+    ],
+    "mesh_percent_vs_matched_ordinary": [
+      84.61608348253118,
+      94.7735993418356
+    ],
+    "blank_percent_vs_parent": [
+      3.2502256244602235,
+      4.689273402779337
+    ],
+    "quiet_percent_vs_parent": [
+      9.745775836156723,
+      8.460414922967718,
+      11.358682319783252,
+      9.30923840665736
+    ],
+    "flat_percent_vs_parent": [
+      1.4756467094655612,
+      1.9068556859503927,
+      2.2751050531579997,
+      2.830636078115467
+    ],
+    "ordinary_flat_percent_vs_parent": [
+      -0.44068501932083004,
+      -0.532825590284125,
+      -0.42322072242659825,
+      -0.5106759005687245
+    ],
+    "ordinary_quiet_percent_vs_parent": [
+      0.7560388711886024,
+      1.582672151005582,
+      0.7695378298596234,
+      1.4548640738362373
+    ]
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/write-v160-quality-notes-v1.py",
+    "sha256": "cf1681b43fe6a49674aa9aba5abf2b79a25f592d80611dceaf0357a455cc1143",
+    "text": "\"\"\"Bind reviewed summary claims to fixed endpoint metrics and actual viewing.\"\"\"\nfrom pathlib import Path\nfrom train_directional_bank_trial import read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V160-paired-response-v1'\nscores=read(root/'scores-v1.json');assert read(root/'native-viewing-v1.json')['sheets_viewed']==18\nassert read(root/'independent-metrics-audit-v1.json')['status']=='pass'\n\ndef value(method,kind,condition,field,cohort=None):\n    return next(s[field] for s in scores['summary'] if (s['method'],s['kind'],s['condition'],s['cohort'])==(method,kind,condition,cohort))\n\ndef change(method,base,kind,condition,field,cohort=None):\n    return 100*(value(method,kind,condition,field,cohort)/value(base,kind,condition,field,cohort)-1)\n\nmethods=[f'paired-response-{e}-step1000' for e in ['raw','EMA']]\nresponse=[value(m,'mesh',True,'template_gain') for m in methods]\nresponse_change=[change(m,'parent','mesh',True,'template_gain') for m in methods]\nmatched_response=[change(m,f'ordinary-{e}-step1000','mesh',True,'template_gain') for m,e in zip(methods,['raw','EMA'],strict=True)]\nblank=[change(m,'parent','mesh',True,'blank_error_RMS_DN16') for m in methods]\nquiet=[change(m,'parent','mixed-quiet',p,'quiet_error_RMS_DN16') for m in methods for p in ['iso6400-prior','iso12800-prior']]\nflat=[change(m,'parent','flat',p,'full_error_RMS_DN16','fresh-flat512') for m in methods for p in ['iso6400-prior','iso12800-prior']]\nordinary_flat=[change(f'ordinary-{e}-step1000','parent','flat',p,'full_error_RMS_DN16','fresh-flat512') for e in ['raw','EMA'] for p in ['iso6400-prior','iso12800-prior']]\nordinary_quiet=[change(f'ordinary-{e}-step1000','parent','mixed-quiet',p,'quiet_error_RMS_DN16') for e in ['raw','EMA'] for p in ['iso6400-prior','iso12800-prior']]\ntext=f'''V160 pair supervision substantially strengthens learned weak-mesh response,\nwith a visible noise cost. Mean response rises **{response_change[0]:.2f}% raw /\n{response_change[1]:.2f}% EMA versus V143**, reaching **{100*response[0]:.2f}% /\n{100*response[1]:.2f}% of exact constructed target amplitude**. Against the fresh\nmatched ordinary heads, response rises {matched_response[0]:.2f}% / {matched_response[1]:.2f}%.\nThis is a stronger learned-detail starting point than the retained V156\u2013V159\nheads. Existing periodic `detail` still has higher mean mesh response.\n\nActual blank RMS rises **{blank[0]:.2f}% / {blank[1]:.2f}% versus V143**. Quiet-region\nRMS rises **{min(quiet):.2f}\u2013{max(quiet):.2f}%**, and all 32 quiet inputs worsen against\ntheir matched ordinary endpoint. Each paired endpoint is worse than V143 on\n31 of those 32 inputs. Native amplified crops show extra fine colored grain;\nbroad mottling persists. Full native512 noisy-flat RMS rises\n**{min(flat):.2f}\u2013{max(flat):.2f}%**. Raw is worse on 47/48 flat inputs and EMA on all 48.\nMean coarse block error can improve while total/spatial errors worsen.\n\nThe **ordinary new-data control** has a separate useful strength: native512\nfull flat RMS falls **{-max(ordinary_flat):.2f}\u2013{-min(ordinary_flat):.2f}% versus V143**, with all\n48 inputs improving in full and coarse error at both endpoints. Its quiet mean\ninstead rises {min(ordinary_quiet):.2f}\u2013{max(ordinary_quiet):.2f}%; 18/32 raw and 17/32 EMA inputs regress.\nThe largest quiet increase is 0.370174/0.387438 DN16. V158 retains stronger quiet\naccuracy, V159 a smaller quiet cost, and V157 the larger standalone coarse gain.\nThe ordinary control changes the full data recipe versus those older studies.\n\nIn the standing real views, some existing partial cab-mesh strands gain a\nlittle contrast, especially under the nearby profile. Crossings remain soft;\nthere is no convincing complete new fine lattice. Sky looks broadly smooth at\nordinary display, while exact flat/quiet controls expose the added texture.\nBuilding edges and foliage remain soft. Bird, butterfly, grass and wood views\ndo not show convincing broad microtexture recovery. Natural-band gains are\nsmall and mixed against V143, and ADC-photo error remains near parent level,\nwell behind V150's stronger ADC result. Independent ISO100 references are\nqualitative comparisons, not exact GT.\n\nRetain pair supervision and the paired data generator for further learned-detail\nwork, alongside the ordinary control's flat-field strength. The next problem is\nto distinguish supported fine structure from noise more effectively while\npreserving the measured response. The broader fine-detail/clean-field goal\nremains active.\n'''\nnotes=root/'human-quality-notes-v1.md';assert not notes.exists();notes.write_text(text)\nreceipt=root/'human-quality-claims-v1.json';assert not receipt.exists()\nsave(receipt,{'status':'reviewed-summary-bound-to-audited-metrics','scores':ref(root/'scores-v1.json'),\n    'viewing':ref(root/'native-viewing-v1.json'),'notes':dict(ref(notes),text=notes.read_text()),\n    'derived':{'mesh_response_raw_EMA':response,'mesh_percent_vs_parent':response_change,\n        'mesh_percent_vs_matched_ordinary':matched_response,'blank_percent_vs_parent':blank,\n        'quiet_percent_vs_parent':quiet,'flat_percent_vs_parent':flat,\n        'ordinary_flat_percent_vs_parent':ordinary_flat,'ordinary_quiet_percent_vs_parent':ordinary_quiet},\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forwards':0,'new_noise_draws':0})\nprint('Wrote reviewed quality notes and bound percentage claims')\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0
+}
