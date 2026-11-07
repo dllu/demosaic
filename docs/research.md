@@ -242,10 +242,20 @@ weights,data or reported gains were adopted into the running trial.
 The current catalogue corrects an earlier title mix-up:2608.09995 is the
 structural-guidance paper above. [SegDem](https://arxiv.org/abs/2608.07916) is a
 separate August2026 preprint whose abstract describes segmentation-to-demosaicing
-decoder transfer with a shared frozen DINOv2 representation. Only its abstract
-was checked here. Historical receipts and the cached2608.09995 HTML retain
+decoder transfer with a shared frozen DINOv2 representation. The initial correction
+checked its abstract; a later method review is recorded below. Historical receipts and the cached2608.09995 HTML retain
 their original bytes; this title correction changes no experiment or training
 decision. [Exact correction record](results/structural-paper-title-correction-20261107-v1.json).
+
+The [SegDem follow-up](results/segdem-followup-reading-20261107-v1.json) reads
+its method and implementation appendices. Decoder-weight transfer and masked
+spatial target-token alignment provide training supervision; the structural
+encoder is removed for inference. Its synthetic/re-mosaicked Gaussian-noise
+scope leaves native-camera generalization open. Our inference is to distinguish
+decoder-feature supervision from output perceptual losses and online encoder
+conditioning. Any later transfer still requires native fence and exact-flat
+controls. The author repository returned404 through the connected GitHub tool;
+no implementation, weights or data are adopted, and V166 remains unchanged.
 
 The heldout review includes the main DSCF3879/3880 platform scene and the
 additional DSCF3842 ISO6400 / **DSCF3835 ISO100 f/5.6** fine green mesh, with
