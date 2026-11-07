@@ -226,7 +226,8 @@ existing frozen encoder instance. Its diagnostic and pilot distinguish measured
 output gradients from trained quality; no GramSR reproduction is claimed.
 
 Two additional2026 preprints were reviewed on2026-11-03.
-[SegDem](https://arxiv.org/html/2608.09995v1) combines frozen DINOv3 ViT-S/16,
+[Structural Guidance for Unified Joint Demosaicing and Denoising](https://arxiv.org/html/2608.09995v1)
+combines frozen DINOv3 ViT-S/16,
 CFA/noise-conditioned SwinIR,feature adaptation/residual fusion and an auxiliary
 mosaic head. Its stated decoded-sRGB/Gaussian/fixed-RGGB scope and224px structural
 input differ from our sensor-linear conditions. The listed GitHub URL returned404
@@ -237,6 +238,14 @@ neighborhood-aware embedding and compact attention. It is a low-light enhancemen
 study rather than our validated16-bit JDD comparison. Our inference is that
 native-grid structural fusion deserves further controlled work; no source,
 weights,data or reported gains were adopted into the running trial.
+
+The current catalogue corrects an earlier title mix-up:2608.09995 is the
+structural-guidance paper above. [SegDem](https://arxiv.org/abs/2608.07916) is a
+separate August2026 preprint whose abstract describes segmentation-to-demosaicing
+decoder transfer with a shared frozen DINOv2 representation. Only its abstract
+was checked here. Historical receipts and the cached2608.09995 HTML retain
+their original bytes; this title correction changes no experiment or training
+decision. [Exact correction record](results/structural-paper-title-correction-20261107-v1.json).
 
 The heldout review includes the main DSCF3879/3880 platform scene and the
 additional DSCF3842 ISO6400 / **DSCF3835 ISO100 f/5.6** fine green mesh, with
