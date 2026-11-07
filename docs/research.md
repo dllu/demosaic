@@ -110,6 +110,8 @@ The completed [V163 phase-input trial](harmonic-phase-inputs.md) lowers mean qui
 
 The completed [V164 weak-pair floor trial](pair-unit-floor.md) gives **8.35–12.32% more mesh response and 0.28–0.52% lower coarse flat error versus V163**, changing only the pair-loss unit floor from16 to2 DN16. All48 native512 coarse inputs improve at both endpoints. Total-flat RMS rises0.27–0.39%, quiet means rise0.20–9.85%, and all32 quiet spatial errors worsen; real fine cab crossings remain incomplete. Both1k heads/four endpoints/822 cases/72 actual native figures and independent audits are complete. All199 CPU checks,94 final Adam states, exact V163 controls and all1,000 actual unit records pass. Retain the response/coarse gain beside earlier quiet/grain/total-flat strengths.
 
+The [V165 pair-common trial](pair-common-error.md) adds absolute supervision of the average reconstruction error of each training pair, keeping V164’s stronger difference loss. A fixed training-prefix diagnostic finds 55–99% of pair MSE in the common component; this includes shared noise and missing detail, not exclusively bias. All 221 CPU checks and the actual CUDA diagnostic pass. Matched training and full native review are in progress; quality is unmeasured.
+
 ## Current hypotheses and evidence
 
 The completed [V144/V145 pilot](v144-v145-quality.md) tests local RAW attention

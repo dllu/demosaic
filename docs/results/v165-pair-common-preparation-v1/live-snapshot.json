@@ -1,0 +1,86 @@
+{
+  "recorded_unix_UTC": 1794069775.000792,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/plan-v1.json",
+      "sha256": "008a49e25785086aa1f18715b29fd1daa1f8ef1b5b21f3cec469a2969d06ce8d"
+    },
+    "owner": {
+      "pid": 3817989,
+      "created": 1794069609.32
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/parity-result-v1.json",
+        "sha256": "fc3d43181bddeb1010e052b328c728670584ca5aab0ffa9d340c923ca7291bdc"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/smoke-result-v1.json",
+        "sha256": "2458f1e9db4ffe240ee5314da007591f7ff90213731ba266f7623a7825bd21c0"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3818089,
+      "created": 1794069643.42
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3817990,
+      "created": 1794069609.34
+    },
+    "completed": {}
+  },
+  "progress": {
+    "step": 90,
+    "counts": {
+      "fine-control": 90,
+      "pair-common": 90
+    },
+    "updates": {
+      "fine-control": 90,
+      "pair-common": 90
+    }
+  },
+  "observed_live_owners": [
+    {
+      "role": "training-controller",
+      "pid": 3817989,
+      "created": 1794069609.32,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/work/scripts/train_pair_common_trial.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/plan-v1.json"
+      ]
+    },
+    {
+      "role": "train-worker",
+      "pid": 3818089,
+      "created": 1794069643.42,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/work/scripts/train_pair_common_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ]
+    },
+    {
+      "role": "review-controller",
+      "pid": 3817990,
+      "created": 1794069609.34,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/queue-v165-review-v1.py"
+      ]
+    }
+  ],
+  "scope": "Historical observed original-live snapshot,not final counts or quality. No restart."
+}

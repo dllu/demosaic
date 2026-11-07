@@ -1,0 +1,62 @@
+{
+  "status": "pass-immutable-readiness-independent-units-diagnostic-and-fixed-comparators",
+  "recorded_unix_UTC": 1794069863.7696223,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-preparation-v1.json",
+    "sha256": "223e61cc4ac045613418a81667b80923f9d35604acfd87f34c2270050ee066de"
+  },
+  "byte_exact_receipts": 16,
+  "source_texts": 50,
+  "unchanged_neural_hashes": 89,
+  "actual_CPU_tests": 221,
+  "restored_smoke_finite_Adam_states": 94,
+  "exact_V164_control_prefix_rows": 40,
+  "independent_unit_records": 1000,
+  "pairs": 1382,
+  "diagnostic_prediction_arrays_checked": 12,
+  "diagnostic_scalar_checks": 48,
+  "retained_prediction_arrays_checked": 6576,
+  "planned_main_scientific_head_calls": 5364,
+  "actual_motivation_root_calls": 12,
+  "additional_parity_leaf_output_CUDA_backwards": 20,
+  "actual_motivation_leaf_backwards": 12,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "2275d7ca935ac6bf7f2b7aafe2d9d7eb9d5465756dc5c8949d0cdc4c3797f356"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "ead1b8841dee7bd549ee92350fc5256df69c65e8b0c257117b0eaae34304e1e5"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "d5ce4f05a8705dd8443eb04480281b3df893d029b7cb49db416c369a84d23eac"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "12622756da1d7093d77181f54a75556f35d0351d00f1ee65437bd46c90c310ae"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "2f42ef530e6c8446e5ef3fb75e4ab4d494443bbe1c3905a7b272e79d621e0e91"
+    },
+    "docs/pair-common-error.md": {
+      "path": "/home/dllu/proj/demosaic/docs/pair-common-error.md",
+      "sha256": "d28505d3dadf65106a0dc97b9f7dcf5a67c9e7b63b4c8c36a787ea770bda1e15"
+    },
+    "diary/2026-11-07-08-41-41-v165-pair-common-error.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-08-41-41-v165-pair-common-error.md",
+      "sha256": "b73a00381450fe783a2f797b93172bedb93f274ebdeeb8a713ab3d2ef6bbc2a1"
+    }
+  },
+  "document_links_checked": 520,
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v165-preparation-v1.py",
+    "sha256": "4903499020a15fc036a17c35ce9b3fadf3892269e992b8006679dc78fe256261",
+    "text": "\"\"\"Independently verify V165 unit,source,diagnostic and comparator bindings.\"\"\"\nimport json\nimport re\nimport time\nfrom pathlib import Path\nimport numpy as np\nfrom train_directional_bank_trial import guard,read,ref,save\nfrom demosaic.prediction_archive import fingerprint\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V165-pair-common-v1'\nindex=repo/'docs/results/v165-pair-common-preparation-v1.json';output=repo/'docs/results/v165-pair-common-preparation-verification-v1.json';assert not output.exists()\ndata=read(index);assert len(data['copies'])==16 and data['source_texts']==50\nfor v in data['copies'].values():\n assert ref(v['original']['path'])==v['original'] and ref(v['public']['path'])==v['public']\n assert Path(v['original']['path']).read_bytes()==Path(v['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan);post=read(root/'postprocess-plan-v1.json');guard(post)\nassert ref(data['sources']['path'])==data['sources'];bundle=read(data['sources']['path'])\nassert len(bundle['source_texts'])==50 and len(bundle['unchanged_neural_hashes'])==89\nfor v in bundle['source_texts']+[bundle['publisher']]:assert ref(v['path'])['sha256']==v['sha256'] and Path(v['path']).read_text()==v['text']\nfor p,h in bundle['unchanged_neural_hashes'].items():assert ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\ncache=read(plan['cache']['path']);table=read(plan['pair_unit_table']['path']);assert len(cache['batches'])==len(table['rows'])==1000\npairs=0\nfor b,u in zip(cache['batches'],table['rows'],strict=True):\n assert b['step']==u['step'] and b['arrays']==u['batch']\n variance=np.asarray(b['metadata']['sensor'].get('increment_mean_variance',[]),dtype=np.float32)\n raw=np.sqrt(variance);actual=np.maximum(raw,np.float32(2/65535)).reshape(u['shape'])\n old=np.maximum(raw,np.float32(16/65535)).reshape(u['shape'])\n assert actual.tobytes()==np.asarray(u['candidate_units_FP32'],dtype=np.float32).reshape(u['shape']).tobytes()\n assert fingerprint(old)==b['inputs']['pair_units'];pairs+=len(actual)\nassert pairs==1382\nready=read(root/'readiness-audit-v1.json');rows=[json.loads(s) for s in Path(ready['training_prefix']['path']).read_text().splitlines()];assert len(rows)==40\nold=read(plan['baseline_training']['path'])['trace'];assert ready['finite_Adam_states_at10']==94 and ready['all94_parameter_tensors_have_finite_nonzero_prefix_gradients']\nfor row,before,u in zip(rows,old,table['rows']):\n assert all(row[k]==before[k] for k in ['step','batch','domain','flat_target_mask'])\n expected=before['arms']['fine-pair'];assert {k:row['arms']['fine-control'][k] for k in expected}==expected\n assert row['arms']['fine-control']['pair_common_error']==0\n values=np.asarray(u['candidate_units_FP32'],dtype=np.float32).reshape(u['shape'])\n for arm in ['fine-control','pair-common']:assert row['arms'][arm]['pair_unit_values']==fingerprint(values) and row['arms'][arm]['pair_unit_floor_DN16']==2\n if not len(values):assert row['arms']['pair-common']['pair_common_error']==0\nparity=read(root/'parity-result-v1.json');assert [len(parity[k]) for k in ['CUDA_anchor_loss_checks','CUDA_pair_unit_loss_checks','CUDA_pair_common_loss_checks']]==[10,6,4]\nmotivation=read(repo/'docs/results/v165-pair-common-motivation-v1.json');assert ref(motivation['plan']['path'])=={k:motivation['plan'][k] for k in ['path','sha256']}\nguard(motivation['plan']['data']);diagnostic_scalars=0\nfor row in motivation['result']['data']['rows']:\n for k in ['arrays','parent','prediction']:assert ref(row[k]['path'])==row[k]\n a=np.load(row['arrays']['path']);v=np.load(row['prediction']['path']);assert fingerprint(v)==row['values']\n e=v.astype(np.float64)-a['target'].astype(np.float64);common=[];delta=[]\n for first,second in row['pairs']:common.append((e[first]+e[second])/2);delta.append((e[first]-e[second])/2)\n common=np.asarray(common);delta=np.asarray(delta);ce=np.mean(common**2);de=np.mean(delta**2);z=common/(16/65535)\n for actual,expected in [(row['common_RMS_DN16'],np.sqrt(ce)*65535),(row['half_difference_RMS_DN16'],np.sqrt(de)*65535),\n  (row['common_fraction_of_pair_MSE'],ce/(ce+de)),(row['independent_common_loss'],np.mean(z*z/(np.sqrt(1+z*z)+1)))]:\n  np.testing.assert_allclose(actual,expected,rtol=2e-15);diagnostic_scalars+=1\nassert diagnostic_scalars==48\ndesign=read(root/'quality-design-v1.json');assert len(design['observations'])==822;arrays=0\nfor binding in post['retained_native_collections'].values():\n assert ref(binding['path'])==binding;c=read(binding['path']);assert c['module_before']==c['module_after'] and c['RNG_unchanged']\n for row,case in zip(c['observations'],design['observations'],strict=True):\n  assert row['id']==case['id'] and row['parent']==case['parent'] and ref(row['prediction']['path'])==row['prediction'];arrays+=1\nassert arrays==6576\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md','docs/pair-common-error.md','diary/2026-11-07-08-41-41-v165-pair-common-error.md'];links=0\nfor name in docs:\n p=repo/name\n for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n  if '://' in link or link.startswith('#'):continue\n  target=(p.parent/link.split('#')[0]).resolve();assert target==output or target.is_file(),(p,link);links+=1\nsave(output,{'status':'pass-immutable-readiness-independent-units-diagnostic-and-fixed-comparators','recorded_unix_UTC':time.time(),\n 'publication':ref(index),'byte_exact_receipts':16,'source_texts':50,'unchanged_neural_hashes':89,'actual_CPU_tests':221,\n 'restored_smoke_finite_Adam_states':94,'exact_V164_control_prefix_rows':40,'independent_unit_records':1000,'pairs':1382,\n 'diagnostic_prediction_arrays_checked':12,'diagnostic_scalar_checks':diagnostic_scalars,'retained_prediction_arrays_checked':arrays,\n 'planned_main_scientific_head_calls':5364,'actual_motivation_root_calls':12,'additional_parity_leaf_output_CUDA_backwards':20,\n 'actual_motivation_leaf_backwards':12,'documents':{p:ref(repo/p) for p in docs},'document_links_checked':links,\n 'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forward_calls':0,'new_noise_draws':0,\n 'scope':'Actual readiness/historical live snapshot only. Final quality/control states/review outputs/actual native viewing remain pending.'})\nprint('PASS16 receipts/50 sources/89unchanged neural/1000units/40control+common rows/12diagnostic arrays+48scalars/6576retained arrays;',links,'links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Actual readiness/historical live snapshot only. Final quality/control states/review outputs/actual native viewing remain pending."
+}
