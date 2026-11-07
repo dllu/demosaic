@@ -1,0 +1,101 @@
+{
+  "status": "pass-independent-all-actual-unit-group-reductions",
+  "actual_unit_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/training-unit-audit-v1.json",
+    "sha256": "5180ab55158967400ff10eac2974faa1b23a4412fe0622154ee9c23e2066875a"
+  },
+  "groups": [
+    {
+      "domain": "mesh",
+      "ADC_only": false,
+      "pairs": 614,
+      "affected": 455,
+      "unit_ratio_median_p90_max": [
+        1.859455645084381,
+        5.597480058670045,
+        8.0
+      ],
+      "largest_quadratic_gradient_ratio": 64.0,
+      "effective_ADC_weight": 1
+    },
+    {
+      "domain": "photo",
+      "ADC_only": false,
+      "pairs": 428,
+      "affected": 73,
+      "unit_ratio_median_p90_max": [
+        1.0,
+        1.325681459903717,
+        8.0
+      ],
+      "largest_quadratic_gradient_ratio": 64.0,
+      "effective_ADC_weight": 1
+    },
+    {
+      "domain": "weak",
+      "ADC_only": false,
+      "pairs": 198,
+      "affected": 92,
+      "unit_ratio_median_p90_max": [
+        1.0,
+        2.605275058746343,
+        5.975420951843262
+      ],
+      "largest_quadratic_gradient_ratio": 35.70565555172743,
+      "effective_ADC_weight": 1
+    },
+    {
+      "domain": "mesh",
+      "ADC_only": true,
+      "pairs": 68,
+      "affected": 68,
+      "unit_ratio_median_p90_max": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "largest_quadratic_gradient_ratio": 64.0,
+      "effective_ADC_weight": 0
+    },
+    {
+      "domain": "photo",
+      "ADC_only": true,
+      "pairs": 58,
+      "affected": 58,
+      "unit_ratio_median_p90_max": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "largest_quadratic_gradient_ratio": 64.0,
+      "effective_ADC_weight": 0
+    },
+    {
+      "domain": "weak",
+      "ADC_only": true,
+      "pairs": 16,
+      "affected": 16,
+      "unit_ratio_median_p90_max": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "largest_quadratic_gradient_ratio": 64.0,
+      "effective_ADC_weight": 0
+    }
+  ],
+  "group_count_cells_checked": 12,
+  "group_quantile_cells_checked": 18,
+  "supervised_pairs": 1240,
+  "supervised_pairs_changed": 620,
+  "largest_unit_ratio": 8,
+  "largest_quadratic_gradient_ratio": 64,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v164-unit-groups-v1.py",
+    "sha256": "0cce7b47994bc696096e46d8e97ca15af4f32b70650d735c4ebbcabc949a80ab",
+    "text": "\"\"\"Recompute domain/ADC weighting summaries from all actual training-unit records.\"\"\"\nfrom collections import defaultdict\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V164-pair-unit-floor-v1'\naudit=read(root/'training-unit-audit-v1.json');assert len(audit['rows'])==1000\ngroups=defaultdict(list)\nfor row in audit['rows']:\n    old=np.asarray(row['control_units_FP32'],dtype=np.float32)\n    new=np.asarray(row['candidate_units_FP32'],dtype=np.float32)\n    assert old.shape==new.shape==(row['pairs'],)\n    if len(old):groups[row['domain'],row['ADC_only']].extend((old/new).tolist())\nactual=[]\nfor key,values in groups.items():\n    ratios=np.asarray(values,dtype=np.float64);domain,adc=key\n    expected=next(g for g in audit['unit_groups'] if (g['domain'],g['ADC_only'])==key)\n    count=len(ratios);affected=int(np.sum(ratios>1));quantiles=np.quantile(ratios,[.5,.9,1]).tolist()\n    assert count==expected['pairs'] and affected==expected['affected']\n    assert quantiles==expected['unit_ratio_median_p90_max']\n    assert np.all((ratios>=1)&(ratios<=8))\n    actual.append({'domain':domain,'ADC_only':adc,'pairs':count,'affected':affected,\n        'unit_ratio_median_p90_max':quantiles,'largest_quadratic_gradient_ratio':float(np.max(ratios**2)),\n        'effective_ADC_weight':0 if adc else 1})\nassert len(actual)==6 and sum(g['pairs'] for g in actual)==1382\nassert sum(g['affected'] for g in actual if not g['ADC_only'])==620\noutput=repo/'docs/results/v164-training-unit-group-verification-v1.json';assert not output.exists()\nsave(output,{'status':'pass-independent-all-actual-unit-group-reductions','actual_unit_audit':ref(root/'training-unit-audit-v1.json'),\n    'groups':actual,'group_count_cells_checked':12,'group_quantile_cells_checked':18,\n    'supervised_pairs':1240,'supervised_pairs_changed':620,'largest_unit_ratio':8,'largest_quadratic_gradient_ratio':64,\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forward_calls':0,'new_noise_draws':0,\n    'scope':'Group counts/changed counts and FP32-ratio median/P90/max independently recomputed from1000 actual training-unit records,not copied from the proposed input-table groups. The64x/8x asymptotes describe gradients at fixed errors in quadratic/linear regimes,not actual global training-gradient ratios or trained quality. ADC pair changes have zero total supervision.'})\nprint('PASS six actual domain/ADC groups:12 count cells/18 quantile cells;620/1240 supervised pairs reweighted')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Group counts/changed counts and FP32-ratio median/P90/max independently recomputed from1000 actual training-unit records,not copied from the proposed input-table groups. The64x/8x asymptotes describe gradients at fixed errors in quadratic/linear regimes,not actual global training-gradient ratios or trained quality. ADC pair changes have zero total supervision."
+}

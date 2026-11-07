@@ -316,7 +316,7 @@ matched studies when attributing a gain to a particular change.
 
 The completed [V163 phase-input trial](harmonic-phase-inputs.md) lowers mean quiet RMS **0.62–1.19% versus V162** through 2.60–3.96% lower color bias. Spatial error rises slightly, mesh response falls another 0.52–0.59%, and all 48 coarse-flat errors worsen versus V162. Native fence crossings remain soft. All four endpoints, 822 cases, 72 actual native views and independent audits are complete; 180 CPU checks, 93 final Adam states and exact controls pass. The disk-guard failure and verified 268-call adoption are preserved.
 
-The [V164 weak-pair floor trial](pair-unit-floor.md) tests a 2 DN16 pair-loss unit floor versus 16 on identical V163 heads/data, retaining the flat-target anchor. The old floor affects 455/614 supervised mesh pairs; all 199 CPU checks and CUDA parity pass. Original training/review is active; quality remains pending.
+The completed [V164 weak-pair floor trial](pair-unit-floor.md) gives **8.35–12.32% more mesh response and 0.28–0.52% lower coarse flat error versus V163**, changing only the pair-loss unit floor from16 to2 DN16. All48 native512 coarse inputs improve at both endpoints. Total-flat RMS rises0.27–0.39%, quiet means rise0.20–9.85%, and all32 quiet spatial errors worsen; real fine cab crossings remain incomplete. Both1k heads/four endpoints/822 cases/72 actual native figures and independent audits are complete. All199 CPU checks,94 final Adam states, exact V163 controls and all1,000 actual unit records pass. Retain the response/coarse gain beside earlier quiet/grain/total-flat strengths.
 
 ## What the main experiment families established
 

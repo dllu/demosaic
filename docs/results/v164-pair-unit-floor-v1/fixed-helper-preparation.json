@@ -1,0 +1,52 @@
+{
+  "status": "fixed-reductions-and-unit-audit-prepared-before-quality",
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/summarize-v164-final-v1.py",
+      "sha256": "bf414741030ce9af1d53a6586da6569cc1c5ee62f8196f9f71b28d832c89023f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/build-v164-tables-v1.py",
+      "sha256": "4d25aefd4f340573c5abf4bf3f2edfc01b5fe5cb89d7c088ba461bc0eecd2daa"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/paired-v164-regions-v1.py",
+      "sha256": "72ff22313628b306ec2b2a200ffebc342ce8962decad1c56ee21542c2463064a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quiet-dc-v164-final-v1.py",
+      "sha256": "f2daf4112bea32551a7271e1803f89d4cf770ac3314d177270a525de74dca366"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/record-v164-viewing-v1.py",
+      "sha256": "c31fb22eaf30a3df33b7685ea56fde044a1710455d5888a07cbacf68a48ab006"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/route-v164-final-v1.py",
+      "sha256": "7ef20f3a46aee38ca45f8f6be89a8f06144599f8013f97fc9fe922ab6e53602d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/compare-v164-retained-v1.py",
+      "sha256": "957bdc82de76841fa7d025f2f232ccc4509cfbcfef5d8459c5f1bda5fd519a3e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/review-v164-effects-v1.py",
+      "sha256": "293b63838187573e5af096868cfdccbf114c4c7cfb57535c372d4b8a07999473"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v164-training-units-v1.py",
+      "sha256": "ddd7e4bb269e478969c428bf0639ba2a5e3402af40bae3cc995813bf3dcb0457"
+    }
+  ],
+  "protocol_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/protocol-document-v1.md",
+    "sha256": "c651d361dd6f9c190ea11743e8a935916244f8a7ea869275cbe3f10b2574a384"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prepare-v164-final-helpers-v1.py",
+    "sha256": "108284dab9f98abdd1365055d6b68bb61e7eb4e6b99b7b03394f6204eba02987",
+    "text": "\"\"\"Freeze fixed V164 reductions,all-unit audit and actual-viewing recorder.\"\"\"\nimport ast\nfrom pathlib import Path\nfrom train_directional_bank_trial import ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V164-pair-unit-floor-v1'\nsnapshot=root/'protocol-document-v1.md';assert not snapshot.exists();snapshot.write_bytes((repo/'docs/pair-unit-floor.md').read_bytes())\nnames=['summarize-v163-final-v1.py','build-v163-tables-v1.py','paired-v163-regions-v1.py','quiet-dc-v163-final-v1.py',\n    'record-v163-viewing-v1.py','route-v163-final-v1.py','compare-v163-retained-v1.py']\nsources=[]\nfor old in names:\n    p=repo/'.cache'/old.replace('v163','v164');assert not p.exists();s=(repo/'.cache'/old).read_text()\n    s=s.replace('V163-harmonic-phase-v1','V164-pair-unit-floor-v1').replace('v163-harmonic-phase','v164-pair-unit-floor')\n    s=s.replace('anchor-control','phase-control').replace('harmonic-phase','fine-pair')\n    s=s.replace('Anchor ctrl raw','Phase ctrl raw').replace('Anchor ctrl EMA','Phase ctrl EMA').replace('Phase raw','Pair floor2 raw').replace('Phase EMA','Pair floor2 EMA')\n    if old.startswith('paired') or old.startswith('compare') or old.startswith('record'):\n        prefix=\"        'scope':\" if old.startswith('record') else \"    'scope':\"\n        a=s.index(prefix);b=s.index('\\n',a)\n        scope='All four fixed V164 endpoints. Current identical47-tensor phase heads/data/base losses differ only in paired-response unit floor16/2DN16;physical Charbonnier transition also scales. Exact V163 control. Historical contrasts mix architecture/data/loss. Related adaptive cohort,not independent scenes/significance. Every case and worst increase retained. Native viewing recorded only after original-detail inspection;both protected scenes/priors/windows/JPEGs,ISO100 qualitative refs,not exactGT. Eight retained native columns.'\n        s=s[:a]+prefix+repr(scope)+'})'+s[b:]\n    if old.startswith('compare'):\n        needle=\"    'V162':(repo/'.cache/quality-20261107/V162-flat-target-anchor-v1','flat-anchor'),\";assert needle in s\n        s=s.replace(needle,needle+\"\\n    'V163':(repo/'.cache/quality-20261107/V163-harmonic-phase-v1','harmonic-phase'),\")\n    ast.parse(s);p.write_text(s);sources.append(ref(p))\ns=(repo/'.cache/review-v163-effects-v1.py').read_text().replace('V163-harmonic-phase-v1','V164-pair-unit-floor-v1')\ns=s.replace('anchor-control','phase-control').replace('harmonic-phase','fine-pair')\ns=s.replace(\"'training_mask_replay':ref(root/'training-mask-replay-v1.json'),'phase_removal':ref(root/'phase-removal-result-v1.json')\", \"'training_unit_and_mask_audit':ref(root/'training-unit-audit-v1.json')\")\ns=s.replace('Current comparison adds16 phase inputs/512 parameters at fixed V162 flat-anchor.25 data/loss. Extra capacity and compute part of intervention.',\n    'Only pair-unit floor16/2DN16 changes at identical47-tensor V163 architecture/data/flat-anchor.25/base losses;physical Charbonnier transition also scales.')\np=repo/'.cache/review-v164-effects-v1.py';assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\np=repo/'.cache/audit-v164-training-units-v1.py';assert p.is_file();ast.parse(p.read_text());sources.append(ref(p))\nsave(root/'final-helper-preparation-v1.json',{'status':'fixed-reductions-and-unit-audit-prepared-before-quality',\n    'sources':sources,'protocol_snapshot':ref(snapshot),'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forwards':0,'new_noise_draws':0})\nprint('Prepared9 fixed final reduction/unit-audit/viewing sources;not executed')\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0
+}
