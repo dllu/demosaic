@@ -1,12 +1,20 @@
 # Current method research
 
-The [V171 matching residual experiment](learned-matching-residual.md) uses a fresh
-2.09M-parameter matching network above the frozen V169/DINO result. It tests
-whether greater spatial matching capacity can learn weak-detail recovery from
-the existing free-image/synthetic pairs while controlling common and flat error.
-The RGB tail starts at zero and zero supplied variance retains V169 exactly.
-The 1,000-row training run is active; final raw/EMA quality is pending. It does
-not load the externally trained V170 weights or isolate architecture from loss.
+The [completed V171 matching residual experiment](learned-matching-residual.md)
+trains a fresh 2.09M network above frozen V169/DINO on the existing free-image and
+synthetic pairs. EMA full-flat RMS falls 1.21–1.52% and coarse RMS 1.73% versus V169,
+with all 48 inputs improving in both measures. Mesh response gains1.26% to 3.885%
+of GT, while quiet RMS rises 26–31% through91–93% higher DC error. Native crops
+confirm stronger purple/blue casts and missing real crossings. More capacity
+at this schedule gives a measured flat option, not the requested combined gain.
+Zero supplied variance retains V169 exactly; released V170 weights are unused.
+Both endpoints/all 822cases/60 actually viewed figures and scoped audits complete.
+The next question is how correction color means and image-wide noise scaling
+behave beside bright structure; this is a hypothesis, not an established cause.
+A [posthoc saved-array diagnosis](results/v171-selected-native-scaling-diagnostic-v1.json)
+finds that local noise attenuation helps the selected quiet crops more than
+global RGB-mean removal, but neither beats V169. This supports a local-unit
+experiment; it does not establish a full-cohort improvement.
 
 The [V170 external checkpoint comparison](nonlocal-raw-comparison.md) tests the
 [April2026 NLFeMF paper](https://arxiv.org/abs/2604.17453) and its pinned release.

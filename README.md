@@ -7,6 +7,14 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
+[Completed V171 learned matching residual](docs/learned-matching-residual.md)
+lowers EMA native noisy-flat full RMS **1.21–1.52%** and coarse RMS **1.73% versus
+V169**, improving all 48 inputs in both measures. Mesh response rises **1.26%**
+to **3.885% of GT**. Quiet RMS rises **26–31%**, with stronger purple/blue casts,
+and real fine crossings remain missing. Retain this flat-field option beside
+the earlier detail and quiet-color strengths. Both endpoints, 822 cases and
+60 actually viewed native figures are complete; ADC-only outputs retain V169.
+
 [Completed V170 released RAW matching comparison](docs/nonlocal-raw-comparison.md)
 tests the April 2026 NLFeMF checkpoint. Native noisy-flat coarse error falls
 **15.79–19.38% versus V169 EMA**, but mesh response falls to **2.406–2.533% of GT**,
@@ -56,6 +64,7 @@ cost remains unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V171 learned matching residual](docs/learned-matching-residual.md) | EMA full-flat RMS −1.21–1.52%, coarse RMS −1.73% versus V169; all 48 inputs improve. Mesh response +1.26% to 3.885% of GT | Quiet RMS +26–31%, DC bias +91–93%; real crossings missing. Fresh 2.09M correction above frozen DINO/V169; exact ADC bypass |
 | [V170 released RAW matching](docs/nonlocal-raw-comparison.md) | Native512 coarse error −15.79–19.38%, quiet spatial RMS −6.26–32.71% versus V169 EMA | Mesh response only2.406–2.533% of GT; quiet total/DC error rises, ISO6400 full-flat RMS +17.67–19.03%; periodic low-noise artifacts. External training data |
 | [V169 spatial balance](docs/balanced-spatial-correction.md) | Quiet RMS −3.74–10.69% and color bias −11.45–31.59% versus V168; mesh response stays3.806–3.837% of GT | All48 coarse-flat errors worse; total-flat means +0.39–0.71%,quiet spatial +0.17–0.27%; residual blotches/crossings |
 | [V168 finer training wires](docs/fine-mesh-training.md) | Mesh response +17.48–18.09% versus V167, reaching3.805–3.836% of GT; all48 coarse-flat errors improve | Quiet RMS +1.49–5.44%,all32 spatial errors worse; full-flat means +0.136–0.228%,real crossings incomplete |
@@ -155,18 +164,24 @@ EMA component SHA256 `2184e9fc4c462eb8d740baa32b8e4fd569a18d80cca6f00a710ff9af51
 
 ![ISO12800 quiet field: noisy, V169 balanced EMA, exact constructed GT](docs/images/v169-balanced-spatial-v1/comparison-52.png)
 
-Noisy → **V165 pair-common EMA** → exact constructed GT, native512 ISO6400/12800
-flat crops. Full RMS falls 1.45–1.91% versus V164 EMA with less fine colored
-grain; coarse RMS rises 0.18–0.19%. Mesh response halves and quiet color bias
-rises, so this is a grain/flat option with substantial detail and color costs.
-Native 160×160 cells, ROI `[176,176,160,160]`, exposure4, contrast40 about
+Noisy → **V171 matching EMA** → exact constructed GT, native 512 ISO6400/12800
+flat crops. Full RMS falls **1.21–1.52%** and coarse RMS **1.73% versus V169 EMA**;
+all 48 inputs improve in both measures. Mesh response changes modestly, while
+quiet fields beside detail acquire stronger color casts. Native 160×160 cells,
+ROI `[176,176,160,160]`, exposure4, contrast40 about
 `[.010000000708,.020000001416,.013333332725]`; shot/read variance
 .00128/6.5536e-6 or .00256/2.62144e-5. Pixels are never resized.
-[Exact checkpoint hashes, source and display metadata](docs/pair-common-error.md).
+[Exact checkpoints, sources, both endpoints and display metadata](docs/learned-matching-residual.md).
+EMA checkpoint SHA256 `5ca2d80b2fc9a8e0a3b45bbb77b20ce83cdc57fe89a01320cf54d70c75a1722f`.
 
-![ISO6400 flat: noisy, V165 pair-common EMA, exact constructed GT](docs/images/v165-pair-common-v1/comparison-19-pair-common-EMA-step1000-triplet.png)
+![ISO6400 flat: noisy, V171 matching EMA, exact constructed GT](docs/images/v171-matching-residual-v1/comparison-25.png)
 
-![ISO12800 flat: noisy, V165 pair-common EMA, exact constructed GT](docs/images/v165-pair-common-v1/comparison-20-pair-common-EMA-step1000-triplet.png)
+![ISO12800 flat: noisy, V171 matching EMA, exact constructed GT](docs/images/v171-matching-residual-v1/comparison-28.png)
+
+The V165 grain/flat option retains its native
+[ISO6400](docs/images/v165-pair-common-v1/comparison-19-pair-common-EMA-step1000-triplet.png)
+and [ISO12800](docs/images/v165-pair-common-v1/comparison-20-pair-common-EMA-step1000-triplet.png)
+triplets and [complete comparison](docs/pair-common-error.md).
 
 The external V170 comparison retains native noisy → NLRaw Malvar → exact GT
 triplets at [ISO6400](docs/images/v170-nonlocal-raw-v1/comparison-24.png) and

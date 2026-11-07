@@ -1,0 +1,15 @@
+Sampler gradient {'dtype': 'float32', 'kernel': 1, 'device': 'cpu', 'input_maximum_difference': 4.523968746283913e-07, 'offset_maximum_difference': 1.1493142260121658e-06}
+/home/dllu/proj/demosaic/.venv/lib/python3.12/site-packages/torch/autograd/graph.py:1072: UserWarning: compute_grad_input does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/Context.cpp:186.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Sampler gradient {'dtype': 'float32', 'kernel': 1, 'device': 'cuda', 'input_maximum_difference': 4.523968746283913e-07, 'offset_maximum_difference': 1.1493142260121658e-06}
+Sampler gradient {'dtype': 'float32', 'kernel': 3, 'device': 'cpu', 'input_maximum_difference': 1.1832286253010693e-06, 'offset_maximum_difference': 8.708658931766422e-07}
+Sampler gradient {'dtype': 'float32', 'kernel': 3, 'device': 'cuda', 'input_maximum_difference': 9.448100461995068e-07, 'offset_maximum_difference': 8.708658931766422e-07}
+Sampler gradient {'dtype': 'float64', 'kernel': 1, 'device': 'cpu', 'input_maximum_difference': 2.220446049250313e-16, 'offset_maximum_difference': 4.440892098500626e-16}
+Sampler gradient {'dtype': 'float64', 'kernel': 1, 'device': 'cuda', 'input_maximum_difference': 2.220446049250313e-16, 'offset_maximum_difference': 4.440892098500626e-16}
+Sampler gradient {'dtype': 'float64', 'kernel': 3, 'device': 'cpu', 'input_maximum_difference': 8.881784197001252e-16, 'offset_maximum_difference': 8.881784197001252e-16}
+Sampler gradient {'dtype': 'float64', 'kernel': 3, 'device': 'cuda', 'input_maximum_difference': 1.3322676295501878e-15, 'offset_maximum_difference': 8.881784197001252e-16}
+Traceback (most recent call last):
+  File "/home/dllu/proj/demosaic/.cache/admit-v171-matching-v1.py", line 69, in <module>
+    value=values.to(device).requires_grad_();out=module(value);out.square().mean().backward();outputs.append(out.detach().cpu());gradients.append(value.grad.detach().cpu());assert all(p.grad is not None and torch.isfinite(p.grad).all() and p.grad.abs().max()>0 for p in module.parameters())
+                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

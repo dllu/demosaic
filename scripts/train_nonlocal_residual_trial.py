@@ -97,6 +97,7 @@ def prepare():
         "train_nonlocal_residual_trial.py",
         "nonlocal_residual_objective.py",
         "train_directional_bank_trial.py",
+        "train_v43_quality_trial.py",
         "profile_raw_kernel_inference.py",
         "flat_target_anchor.py",
         "local_excess_risk.py",

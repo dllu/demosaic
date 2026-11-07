@@ -1,5 +1,21 @@
 # Experiment index
 
+[Completed V171 learned matching residual](learned-matching-residual.md): fresh
+2.09M RGB correction above frozen V169 EMA and cached V143/DINO; same1,000 V168
+rows,900 updates/100 ADC skips,actual step 8 restoration and no prefix replay.
+EMA full-flat RMS −1.21–1.52%,coarse RMS −1.73% versus V169,all 48 inputs improve
+in both measures; mesh response +1.26% to 3.885% of GT. Quiet RMS +26–31%,DC color
+error +91–93%; real crossings remain missing. Both endpoints/all 822cases/60 actual
+native figures/12 triplets complete. 114 CPU tests,141 final Adam states,900
+independent loss totals and 900 inherited masks pass. All 1644 V169 outputs replay
+exactly;144 ADC outputs retain V169. New matching work totals 2406 CUDA/3 CPU
+calls;2548 frozen-component CUDA calls are nested,not DINO-parent calls. No new
+parent/DINO,source/noise or original/dataz reads. All 6576 input fingerprints and
+durable rows audited; separate posthoc new-array metrics/addition cover36 cases,
+72 RGB+72 residual arrays. Two synthetic admission failures and one zero-forward
+metric-import failure are preserved;all six recorded owners terminal. Retain the
+flat gain beside earlier detail and quiet strengths,with explicit color costs.
+
 [Completed V170 released RAW matching](nonlocal-raw-comparison.md): external
 NLFeMF15.28M weights, one RAW call with two fixed RGB reconstructions. Native 512
 coarse RMS −15.79–19.38% versus V169 EMA; quiet spatial RMS −6.26–32.71%.

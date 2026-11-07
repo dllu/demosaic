@@ -1,0 +1,56 @@
+{
+  "status": "pass-all-training-bindings-totals-inherited-masks-and-final-state",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V171-matching-residual-v1/plan-v1.json",
+    "sha256": "ac87bcc872094a644c38c7c6ed141702ecd8b0a8686754d6c794f1f0611e336e"
+  },
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V171-matching-residual-v1/train-result-v1.json",
+    "sha256": "c30463381ea978aa322ce8e1bf68ed645a617192d48e79428677c733660a84bc"
+  },
+  "training_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V171-matching-residual-v1/train-trace-v1.jsonl",
+    "sha256": "ef78b1ca6066f0ab7db6c22f073556ed32f57f605180840ccd9b08f4d7b04098"
+  },
+  "cached_batches_checked": 1000,
+  "cached_input_fingerprints_checked": 8000,
+  "parent_fingerprints_checked": 1000,
+  "unit_tables_checked": 1000,
+  "FP32_loss_totals_checked": 900,
+  "maximum_loss_total_difference": 0.0,
+  "inherited_target_mask_fingerprints_checked": 900,
+  "updates": 900,
+  "ADC_skips": 100,
+  "domains": {
+    "mesh": 341,
+    "photo": 243,
+    "flat": 153,
+    "mixed": 156,
+    "weak": 107
+  },
+  "strict_final_raw_and_EMA_states": 2,
+  "final_Adam_states": 141,
+  "frozen_module_hash": "a152045e5ad24e35e5e9e523f2ddec54cced5e68004d8cbfc077607aeb7facb8",
+  "checkpoint_restoration": {
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/quality-20261107/V171-matching-residual-v1/checkpoints/step0008.pt",
+      "sha256": "947d3520cb3f18e2b1f259e7f928b72587356814a48edbe6ceb0ecfaa1154b09"
+    },
+    "model_exact": true,
+    "optimizer_exact": true,
+    "EMA_exact": true,
+    "CPU_RNG_exact": true,
+    "CUDA_RNG_exact": true,
+    "continued_at_step": 9,
+    "repeated_prefix_forwards": 0
+  },
+  "new_neural_forwards": 0,
+  "new_source_noise_draws": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v171-training-v1.py",
+    "sha256": "eb2cd0f3d91842b554bca107ed49c070e02eb840cb2749ed232099f64f970548",
+    "text": "\"\"\"Audit cached training bindings,FP32 objective totals,restoration and final state.\"\"\"\nimport json\nfrom pathlib import Path\nimport numpy as np\nimport torch\nfrom demosaic.late_nonlocal_residual import LateNonlocalResidualDetail\nfrom demosaic.prediction_archive import fingerprint\nfrom profile_raw_kernel_inference import model_hash\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V171-matching-residual-v1'\nplan=read(root/'plan-v1.json');guard(plan);result=read(root/'train-result-v1.json')\ntrace=[json.loads(s) for s in (root/'train-trace-v1.jsonl').read_text().splitlines()]\nassert trace==result['trace'] and len(trace)==1000\ncache=read(plan['cache']['path'])['batches'];units=read(plan['pair_units']['path'])['rows']\ninherited=read(repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v3/train-result-v1.json')['trace']\ninputs=parents=masks=totals=skips=updates=0;max_loss_difference=0.;domains={}\nfor step,(row,item,unit,old) in enumerate(zip(trace,cache,units,inherited,strict=True),1):\n assert row['step']==item['step']==unit['step']==step and row['batch']==item['arrays'] and row['parent']==item['parent']\n assert ref(item['arrays']['path'])==item['arrays'] and ref(item['parent']['path'])==item['parent']\n arrays=dict(np.load(item['arrays']['path']));parent=np.load(item['parent']['path'])\n assert {k:fingerprint(v) for k,v in arrays.items()}==item['inputs'];inputs+=len(arrays)\n assert fingerprint(parent)==item['parent_values'];parents+=1\n noisy=bool(np.any(arrays['variance']>0));assert row['noisy']==noisy\n expected_units=np.maximum(np.sqrt(np.asarray(item['metadata']['sensor'].get('increment_mean_variance',[]),dtype=np.float32)),np.float32(2/65535))\n np.testing.assert_array_equal(expected_units,np.asarray(unit['candidate_units_FP32'],np.float32))\n domain=row['domain'];assert domain==item['metadata']['domain'];domains[domain]=domains.get(domain,0)+1\n if noisy:\n  updates+=1\n  t={k:np.float32(v) for k,v in row['terms'].items()}\n  value=np.float32(t['pixel']+np.float32(.25)*t['gradient'])\n  for term in [t['local_regret'],t['DC_regret'],np.float32(.25)*t['flat_anchor'],t['pair_difference'],t['pair_common']]:value=np.float32(value+term)\n  expected=float(np.float32(np.float32(plan['domain_weights'][domain])*value))\n  difference=abs(expected-row['loss']);max_loss_difference=max(max_loss_difference,difference)\n  assert difference<=2*np.spacing(np.float32(max(abs(expected),abs(row['loss'])))),(step,difference)\n  totals+=1\n  m=old['candidate_flat_target_mask'];assert row['flat_mask']==m['values'] and row['flat_eligible_pixels']==m['eligible_pixels'];masks+=1\n else:\n  skips+=1;assert row['skipped'].startswith('zero supplied variance') and 'terms' not in row\n assert row['updates']==updates and row['counts']==dict(wrapper=updates,frozen=updates,network=updates,sampler=5*updates)\nassert updates==result['updates'] and skips==result['skipped_ADC_batches']\nassert result['counts']==dict(wrapper=updates,frozen=updates,network=updates,sampler=5*updates)\nrestored=read(root/'checkpoint-restoration-v1.json');assert all(restored[k] for k in ['model_exact','optimizer_exact','EMA_exact','CPU_RNG_exact','CUDA_RNG_exact'])\nassert restored['continued_at_step']==9 and restored['repeated_prefix_forwards']==0\nfor b in result['checkpoints']:assert ref(b['path'])==b\nstate=torch.load(result['final_checkpoint']['path'],map_location='cpu',weights_only=True)\nmodule=LateNonlocalResidualDetail(**plan['module_config']);module.load_state_dict(state['models'],strict=True)\nassert model_hash(module.frozen)==result['frozen_module_hash']==plan['frozen_component']['module_hash']\nassert len(state['ema'])==141 and sum(p.numel() for p in module.network.parameters())==2088906\nassert len(state['optimizer']['state'])==141\nassert all(float(s['step'])==updates and all(torch.isfinite(v).all() for v in s.values()) for s in state['optimizer']['state'].values())\nassert all(torch.isfinite(v).all() for v in [*state['models'].values(),*state['ema'].values()])\nassert all(v>0 for v in result['parameter_maximum_gradients'].values())\nassert result['frozen_weights_unchanged'] and result['RNG_unchanged'] and state['updates']==updates\nassert not torch.cuda.is_initialized()\nsave(root/'training-audit-v1.json',dict(status='pass-all-training-bindings-totals-inherited-masks-and-final-state',plan=ref(root/'plan-v1.json'),training=ref(root/'train-result-v1.json'),training_journal=ref(root/'train-trace-v1.jsonl'),\n cached_batches_checked=1000,cached_input_fingerprints_checked=inputs,parent_fingerprints_checked=parents,unit_tables_checked=1000,FP32_loss_totals_checked=totals,maximum_loss_total_difference=max_loss_difference,inherited_target_mask_fingerprints_checked=masks,\n updates=updates,ADC_skips=skips,domains=domains,strict_final_raw_and_EMA_states=2,final_Adam_states=141,frozen_module_hash=model_hash(module.frozen),checkpoint_restoration=restored,new_neural_forwards=0,new_source_noise_draws=0,CUDA_initialized=False,\n source=dict(ref(__file__),text=Path(__file__).read_text()),scope='All1000 cached batch/input/parent/unit bindings and durable rows checked;all actual optimizer-update loss totals independently summed in NumPy FP32. Clean target masks reproduce previously independently audited V168 masks on identical targets;no fresh independent mask construction is claimed. Final raw/EMA tensors/Adam states and exact step8 restoration are checked;atomic sampler gradients do not imply bit-exact retraining.'))\nprint('PASS1000 training bindings;',updates,'FP32 loss totals;',masks,'inherited masks;141 Adam states;exact restore8')\n"
+  },
+  "scope": "All1000 cached batch/input/parent/unit bindings and durable rows checked;all actual optimizer-update loss totals independently summed in NumPy FP32. Clean target masks reproduce previously independently audited V168 masks on identical targets;no fresh independent mask construction is claimed. Final raw/EMA tensors/Adam states and exact step8 restoration are checked;atomic sampler gradients do not imply bit-exact retraining."
+}

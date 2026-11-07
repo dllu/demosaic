@@ -1,0 +1,87 @@
+{
+  "status": "completed-fresh-matching-training-and-fixed-quality-owners-terminal",
+  "owners": [
+    {
+      "pid": 15136,
+      "created": 1794091054.6
+    },
+    {
+      "pid": 67581,
+      "created": 1794092243.59
+    }
+  ],
+  "admission_owners": [
+    {
+      "pid": 13392,
+      "created": 1794090553.54
+    },
+    {
+      "pid": 13601,
+      "created": 1794090607.22
+    },
+    {
+      "pid": 13684,
+      "created": 1794090652.78
+    }
+  ],
+  "failed_initialization_owners": [
+    {
+      "pid": 66991,
+      "created": 1794092143.39
+    }
+  ],
+  "zero_forward_worker_initialization_failures": 1,
+  "training_rows": 1000,
+  "actual_training_optimizer_updates": 900,
+  "training_ADC_skips": 100,
+  "training_wrapper_calls": 900,
+  "training_frozen_component_calls": 900,
+  "training_new_matching_calls": 900,
+  "training_nested_sampler_calls": 4500,
+  "training_images": 3600,
+  "quality_wrapper_calls": 1644,
+  "quality_frozen_component_calls": 1644,
+  "quality_new_matching_calls": 1500,
+  "quality_nested_sampler_calls": 7500,
+  "quality_images": 1644,
+  "exact_V169_replays": 1644,
+  "ADC_outputs_exact_V169": 144,
+  "admission_new_matching_CPU_calls": 3,
+  "admission_new_matching_CUDA_calls": 6,
+  "admission_frozen_component_CUDA_calls": 4,
+  "admission_sampler_only_CPU_calls": 4,
+  "admission_sampler_only_CUDA_calls": 4,
+  "discarded_synthetic_optimizer_updates": 3,
+  "admission_failures": 2,
+  "total_new_matching_CUDA_calls": 2406,
+  "total_new_matching_CPU_calls": 3,
+  "total_frozen_component_CUDA_calls": 2548,
+  "total_new_matching_CUDA_images": 5115,
+  "total_frozen_component_CUDA_images": 5257,
+  "repeated_scientific_prefix_calls": 0,
+  "new_parent_DINO_calls": 0,
+  "new_source_noise_draws": 0,
+  "new_original_dataz_reads": 0,
+  "native_cases": 36,
+  "saved_native_RGB": 72,
+  "saved_native_residuals": 72,
+  "saved_arrays": 144,
+  "saved_array_bytes": 430196736,
+  "native_figures": 60,
+  "native_triplets": 12,
+  "relevant_CPU_tests": 114,
+  "new_CPU_test_cases": 6,
+  "trainable_parameters": 2088906,
+  "trainable_tensors": 141,
+  "final_Adam_states": 141,
+  "frozen_parameters": 124909,
+  "frozen_tensors": 47,
+  "peak_training_CUDA_allocated_bytes": 6741963776,
+  "peak_quality_CUDA_allocated_bytes": 2991606272,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v171-execution-v2.py",
+    "sha256": "c8d93f29916105b5ff8660da23dafc1100f2cb07fbae00cf8b18497c5967177f",
+    "text": "\"\"\"Count actual composed and component work;close the two scientific owners.\"\"\"\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V171-matching-residual-v1'\nplan=read(root/'plan-v1.json');guard(plan);training=read(root/'train-result-v1.json');quality=read(root/'scores-v1.json');admission=read(root/'admission-result-v3.json')\nowners=[read(root/n)['owner'] for n in ['train-launch-v1.json','review-recovery-launch-v1.json']]\nfailed_initialization_owners=[read(root/'review-launch-v1.json')['owner']]\nadmission_owners=[read(root/f'admission-source-freeze-v{n}.json')['owner'] for n in [1,2,3]]\nfor owner in owners+admission_owners+failed_initialization_owners:\n try:\n  p=psutil.Process(owner['pid']);assert p.create_time()!=owner['created'] or p.status() in [psutil.STATUS_ZOMBIE,psutil.STATUS_DEAD]\n except psutil.NoSuchProcess:pass\nassert quality['counts']==plan['expected_quality_counts'] and read(root/'native-viewing-completion-v1.json')['native_figures']==60\nassert read(root/'training-audit-v1.json')['updates']==training['updates']\nassert read(root/'quality-audit-v1.json')['saved_native_RGB_checked']==72\nfiles=list((Path(plan['external'])/'native').glob('*.npy'));assert len(files)==144\nsize=sum(p.stat().st_size for p in files);assert size==plan['projected_native_array_bytes']==430196736\nupdates=training['updates'];assert training['counts']==dict(wrapper=updates,frozen=updates,network=updates,sampler=5*updates)\nsave(root/'execution-completion-v1.json',dict(status='completed-fresh-matching-training-and-fixed-quality-owners-terminal',owners=owners,admission_owners=admission_owners,failed_initialization_owners=failed_initialization_owners,zero_forward_worker_initialization_failures=1,\n training_rows=1000,actual_training_optimizer_updates=updates,training_ADC_skips=training['skipped_ADC_batches'],training_wrapper_calls=updates,training_frozen_component_calls=updates,training_new_matching_calls=updates,training_nested_sampler_calls=5*updates,training_images=training['training_images'],\n quality_wrapper_calls=1644,quality_frozen_component_calls=1644,quality_new_matching_calls=1500,quality_nested_sampler_calls=7500,quality_images=1644,exact_V169_replays=1644,ADC_outputs_exact_V169=144,\n admission_new_matching_CPU_calls=3,admission_new_matching_CUDA_calls=6,admission_frozen_component_CUDA_calls=4,admission_sampler_only_CPU_calls=4,admission_sampler_only_CUDA_calls=4,discarded_synthetic_optimizer_updates=3,admission_failures=2,\n total_new_matching_CUDA_calls=updates+1506,total_new_matching_CPU_calls=3,total_frozen_component_CUDA_calls=updates+1648,total_new_matching_CUDA_images=4*updates+1515,total_frozen_component_CUDA_images=4*updates+1657,\n repeated_scientific_prefix_calls=0,new_parent_DINO_calls=0,new_source_noise_draws=0,new_original_dataz_reads=0,\n native_cases=36,saved_native_RGB=72,saved_native_residuals=72,saved_arrays=144,saved_array_bytes=size,native_figures=60,native_triplets=12,\n relevant_CPU_tests=114,new_CPU_test_cases=6,trainable_parameters=2088906,trainable_tensors=141,final_Adam_states=141,frozen_parameters=124909,frozen_tensors=47,\n peak_training_CUDA_allocated_bytes=training['peak_CUDA_allocated_bytes'],peak_quality_CUDA_allocated_bytes=quality['peak_CUDA_allocated_bytes'],source=dict(ref(__file__),text=Path(__file__).read_text()),scope=plan['scope']))\nprint('PASS owners terminal;',updates,'training updates;1644 quality compositions/1500 new matching calls;144 arrays;60 figures viewed')\n"
+  },
+  "scope": "Fresh2.09M matching RGB residual over frozenV169EMA and cachedV143/DINO. Pinned NLFeMF definitions,width16,K9 at3scales,39 physical/parent features,zero RGB tail. No releasedV170 weights. Same1000 free-image/synthetic V168 batches and pair units. Pixel/gradient plus paired-difference/common,flat-anchor,local/DC regret losses; old spectral loss is omitted,so architecture/objective changes are not isolated. ADC-only batches skip updates;all zero supplied-variance outputs retain V169 exactly. One1000-row schedule;actual checkpoint8 restore continues9without prefix replay. Upstream atomic grad-input backward is warn-only nondeterministic;no bit-exact training-trajectory claim. Raw/EMA endpoints fixed before quality;822 cases each, streamed metrics/fingerprints,36 fixed native cases retain72 RGB arrays plus72 residuals. Both protected GFX scenes/priors/windows/JPEGs qualitative,notGT;no original/dataz reads,source/noise draws or new parent/DINO calls. No flat-safety or blind claim."
+}
