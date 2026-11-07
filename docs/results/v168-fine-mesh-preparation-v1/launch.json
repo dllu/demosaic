@@ -1,0 +1,21 @@
+{
+  "status": "original-matched-training-controller-launched",
+  "owner": {
+    "pid": 4014797,
+    "created": 1794080786.8
+  },
+  "recorded_unix_UTC": 1794080786.8602011,
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/plan-v1.json",
+    "sha256": "ae0b0337ab8f39aadb29715bf38b27f352b674df5e948371733a43aefd3221fb"
+  },
+  "CPU_readiness": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/CPU-readiness-v1.json",
+    "sha256": "e41f9a4a9e6d70c564b238fa8203f0564b50d087944b1320f37f5e2c0887e886"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v168-heads-v1.py",
+    "sha256": "9c87a3d0903d1c36f2e12a2ddbe3dda44b69e97c30343ccb26d5eefe5a972e10",
+    "text": "\"\"\"Launch the original matched data-distribution experiment after canonical-cache audit.\"\"\"\nimport os,subprocess,time\nfrom pathlib import Path\nimport psutil,torch\nfrom train_directional_bank_trial import guard,read,ref,save\nfrom train_v43_quality_trial import live\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v1';plan=read(root/'plan-v1.json');guard(plan)\nassert not (root/'launch-v1.json').exists() and not (root/'controller.claim').exists()\nfor name in ['data-cache-launch-v1.json','data-parent-flag-validation-launch-v1.json']:assert not live(read(root/name)['owner'])\nvalidation=read(root/'data-parent-flag-validation-v1.json');assert validation['rows_checked']==171 and validation['different_rows']==171\nassert read(root/'data-input-audit-v1.json')['new_masks_independently_computed']==171\nassert read(root/'postprocess-import-preflight-v1.json')['returncode']==0\nassert '288 passed in 4.58s' in (repo/'.cache/v168-data-CPU-regression-v1.log').read_text()\nassert psutil.virtual_memory().available>52*2**30\nsave(root/'CPU-readiness-v1.json',{'status':'pass-data-audits-and-unchanged-neural-training-preflight',\n 'tests':{'passed':288,'seconds':4.58,'new_data_tests':22,'new_data_seconds':.73,'log':ref(repo/'.cache/v168-data-CPU-regression-v1.log')},\n 'data_plan':ref(root/'data-plan-v1.json'),'canonical_cache':plan['candidate_cache'],'data_audit':ref(root/'data-input-audit-v1.json'),\n 'parent_flag_correction':ref(root/'data-parent-flag-validation-v1.json'),'actual_data_viewing':ref(root/'data-actual-viewing-v1.json'),\n 'all90_neural_sources_unchanged':True,'expected_Adam_states':94,'expected_head_roots':5308,'expected_head_images':11368,\n 'expected_total_parent_DINO_roots_each':342,'expected_total_parent_DINO_images_each':1368,\n 'actual_parent_flag_maximum_difference_DN16':max(v['maximum_absolute_difference_DN16'] for v in validation['observations']),\n 'exact_loss_optimizer_statement_bytes':[2737,4768],'expected_new_prediction_arrays':1644,'new_source_batches':171,\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_neural_forwards':0,'CUDA_initialized':torch.cuda.is_initialized()})\nwith (root/'controller-v1.log').open('x') as log:\n p=subprocess.Popen([str(repo/'.venv/bin/python'),'-P',plan['runner']['path'],'controller',str(root/'plan-v1.json')],\n  cwd=repo,env=dict(os.environ,PYTHONPATH=f\"{plan['work']}/src:{plan['work']}/scripts\",OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1'),\n  stdout=log,stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True)\nowner={'pid':p.pid,'created':psutil.Process(p.pid).create_time()}\nsave(root/'launch-v1.json',{'status':'original-matched-training-controller-launched','owner':owner,'recorded_unix_UTC':time.time(),\n 'plan':ref(root/'plan-v1.json'),'CPU_readiness':ref(root/'CPU-readiness-v1.json'),'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint(owner,flush=True)\n"
+  }
+}

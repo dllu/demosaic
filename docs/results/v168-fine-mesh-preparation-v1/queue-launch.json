@@ -1,0 +1,17 @@
+{
+  "status": "original-review-queue-launched",
+  "owner": {
+    "pid": 4014800,
+    "created": 1794080787.05
+  },
+  "recorded_unix_UTC": 1794080787.1128917,
+  "expected_training_owner": {
+    "pid": 4014797,
+    "created": 1794080786.8
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v168-queue-v1.py",
+    "sha256": "2ffbaf504d23ee9e76f0dfccb3baba5219873527994b2194b50b60ed692f83ad",
+    "text": "\"\"\"Launch the sole fixed V168 postprocess queue after real import preflight.\"\"\"\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import read,ref,save\nfrom train_v43_quality_trial import live\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v1'\nlaunch=read(root/'launch-v1.json');assert live(launch['owner'])\nassert read(root/'postprocess-import-preflight-v1.json')['returncode']==0\nassert not (root/'postprocess-controller.claim').exists() and not (root/'queue-launch-v1.json').exists()\nwith (root/'queue-controller-v1.log').open('x') as log:\n p=subprocess.Popen([str(repo/'.venv/bin/python'),str(repo/'.cache/queue-v168-review-v1.py')],cwd=repo,\n    env=dict(os.environ,PYTHONPATH='src:scripts',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1'),\n    stdout=log,stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True)\n owner={'pid':p.pid,'created':psutil.Process(p.pid).create_time()}\nsave(root/'queue-launch-v1.json',{'status':'original-review-queue-launched','owner':owner,'recorded_unix_UTC':time.time(),\n    'expected_training_owner':launch['owner'],'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint(owner)\n"
+  }
+}

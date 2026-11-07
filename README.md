@@ -7,6 +7,10 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
+[V168 fine-mesh training](docs/fine-mesh-training.md) is running after 288 CPU
+checks, six native data-board inspections and a restored GPU smoke passed.
+It changes 171 mesh batches and retains 829 old batches; model quality is pending.
+
 The completed [V167 bounded-support trial](docs/bounded-spectral-support.md) raises mesh response **47.33–47.55% versus V166**, reaching **3.24–3.25% of constructed GT amplitude**, with 1.09–1.15% lower present-mesh RMS. Quiet RMS rises2.84–3.74%, all32 quiet spatial errors worsen, and full-flat means rise0.189–0.382%; coarse means improve slightly. Fine cab crossings remain incomplete. All four endpoints,822 cases,72 native figures and independent audits are complete. Retain the response gain beside V166 quiet color and the stronger V161/V164 detail options.
 
 The completed [V166 common-support routing trial](docs/common-support-routing.md) reduces quiet RMS **6.10–15.27%** and DC color bias **17.52–31.30% versus V165**, visibly reducing the representative magenta casts. Mesh response stays near the parent and real fine crossings remain incomplete; all256 present-mesh mean supports remain below1e-4. Full-flat means worsen0.199–0.312%,coarse means0.216–0.376%,with all48 coarse inputs worse versus V165. Quiet means remain2.40–6.34% above V143. Retain this quiet-color gain beside V165 flat/grain,V161/V164 detail,V157 coarse and V158 quiet strengths. Both1k heads/four endpoints/822cases/72actual native figures are complete;238 CPU checks,94 final Adam states,exact V165 controls and independent audits pass. Original smoke failure and three discarded calls are preserved;no full-training restart.

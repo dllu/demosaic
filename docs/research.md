@@ -335,6 +335,12 @@ data hypothesis, not an established explanation or quality gain; V167 remains
 fixed. No new training pixels, sensor draws, neural forwards or original media
 reads were used for this audit.
 
+The [V168 preparation](fine-mesh-training.md) implements that data test with
+171 changed mesh batches and 829 legacy batches. Actual changed noisy-pair
+signal RMS has median 10.71 DN16 versus 2.32 before; masks and clean empty
+backgrounds are independently checked. It changes frequency and contrast
+coverage jointly. Full restoration quality is pending.
+
 ## Native frequencies from packed phases
 
 [DFENet](https://arxiv.org/html/2503.15800v1), with a November2026 journal issue

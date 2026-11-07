@@ -1,0 +1,32 @@
+{
+  "status": "original-worker-launched-no-retry",
+  "owner": {
+    "pid": 4010430,
+    "created": 1794080086.92
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/data-plan-v1.json",
+    "sha256": "426134d2f545c51fc425062300038b2434c5f64099f605dfb5956dd92de3a211"
+  },
+  "worker": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/data-work/scripts/prepare_fine_mesh_cache.py",
+    "sha256": "a3d43b960cc5dd684ef047a8086e85d01afa5a258612ac1649e24f43b41d5586"
+  },
+  "actual_viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/data-actual-viewing-v1.json",
+    "sha256": "a484465ccb4281a02aa4fce2e164bf62efef6c66bd2a4e6f1742b0044d5b5b5a"
+  },
+  "CPU_tests": {
+    "passed": 288,
+    "seconds": 4.58,
+    "log": {
+      "path": "/home/dllu/proj/demosaic/.cache/v168-data-CPU-regression-v1.log",
+      "sha256": "eed9b319b8f6f4a1a8307b55c1fba2ff84116f9c46247fd435bb8d48d0299dbd"
+    }
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v168-data-cache-v1.py",
+    "sha256": "4bdf716fbfa1b210b8b0f5c466a41857f319a36a6962ef44610845cb117d87d9",
+    "text": "\"\"\"Launch the one original frozen-parent cache worker after actual data inspection.\"\"\"\nimport os\nimport subprocess\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v1';plan=read(root/'data-plan-v1.json');guard(plan)\nassert not (root/'data-cache-launch-v1.json').exists() and not (root/'data-cache.claim').exists()\nassert '288 passed in 4.58s' in (repo/'.cache/v168-data-CPU-regression-v1.log').read_text()\nview=read(root/'data-actual-viewing-v1.json');assert view['status']=='actually-viewed-all-six-data-boards-at-original-detail'\nassert ref(view['inspection']['path'])==view['inspection']\nwork=Path(plan['work']);env=dict(os.environ,PYTHONPATH=':'.join(str(work/p) for p in ['scripts','src']),\n OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',CUBLAS_WORKSPACE_CONFIG=':4096:8')\nworker=read(root/'data-worker-source-v1.json')['worker'];assert ref(worker['path'])==worker\nwith (root/'data-cache-v1.log').open('x') as log:\n p=subprocess.Popen([str(repo/'.venv/bin/python'),'-P',worker['path'],str(root),'cache'],cwd=repo,env=env,\n  stdout=log,stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True)\nowner={'pid':p.pid,'created':psutil.Process(p.pid).create_time()}\nsave(root/'data-cache-launch-v1.json',{'status':'original-worker-launched-no-retry','owner':owner,\n 'plan':ref(root/'data-plan-v1.json'),'worker':worker,'actual_viewing':ref(root/'data-actual-viewing-v1.json'),\n 'CPU_tests':{'passed':288,'seconds':4.58,'log':ref(repo/'.cache/v168-data-CPU-regression-v1.log')},\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint(owner,flush=True)\n"
+  }
+}
