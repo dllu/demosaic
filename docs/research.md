@@ -282,3 +282,11 @@ check delivered camera RGB, local bias and noise. These are algebra
 counterexamples, not trained-model performance or a rejection of RIECR.
 [Exact fixture/source evidence](results/frequency-gating-reading-20261107-v1.json).
 V165's running recipe remains fixed pending its complete quality comparison.
+
+The fixed [cab-band diagnostic](results/mesh-band-coverage-20261107-v1.json)
+checks both native windows in cached ISO100 JPEG and independent AHD references.
+Both dominant diagonal families fall inside the full nominal spectral band,
+at packed radial frequencies0.213–0.281; some higher harmonics fall outside.
+This weakens a cutoff-only explanation for missing fundamentals. The analysis
+is a nominal mapping, not a learned transfer measurement, and the real
+references remain qualitative rather than exact GT. V165 is unchanged.
