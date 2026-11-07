@@ -1,5 +1,11 @@
 # Documentation guide
 
+The [V171 learned matching residual](learned-matching-residual.md) is training
+from scratch above frozen V169 EMA and the cached DINO parent. It tests more
+matching capacity with paired detail and absolute flat-error supervision.
+Preparation, 114 CPU tests and real-shape gradient admission are complete;
+quality is pending and no gain is claimed.
+
 The [completed V170 external RAW matching comparison](nonlocal-raw-comparison.md)
 lowers native 512 coarse-flat error 15.79–19.38% versus V169 EMA, with lower quiet
 spatial error. Mesh response falls to 2.406–2.533% of GT, quiet total/DC error rises,

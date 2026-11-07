@@ -1,5 +1,13 @@
 # Current method research
 
+The [V171 matching residual experiment](learned-matching-residual.md) uses a fresh
+2.09M-parameter matching network above the frozen V169/DINO result. It tests
+whether greater spatial matching capacity can learn weak-detail recovery from
+the existing free-image/synthetic pairs while controlling common and flat error.
+The RGB tail starts at zero and zero supplied variance retains V169 exactly.
+The 1,000-row training run is active; final raw/EMA quality is pending. It does
+not load the externally trained V170 weights or isolate architecture from loss.
+
 The [V170 external checkpoint comparison](nonlocal-raw-comparison.md) tests the
 [April2026 NLFeMF paper](https://arxiv.org/abs/2604.17453) and its pinned release.
 It supplies learned RAW matching/filtering with actual noisy-input variance,
