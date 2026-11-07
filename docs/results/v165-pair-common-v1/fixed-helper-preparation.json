@@ -1,0 +1,64 @@
+{
+  "status": "fixed-reductions-and-actual-objective-unit-audits-prepared-before-quality",
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/summarize-v165-final-v1.py",
+      "sha256": "91062730e46d81d1a55326e92825fd2671f8348b5f1943a60e873abd92c362c7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/build-v165-tables-v1.py",
+      "sha256": "95577001de804287b8b6cd022e565688868dd9b237226a4aa580062a03eae027"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/paired-v165-regions-v1.py",
+      "sha256": "2a916e45dab4101bb60095444137df4054b0001c14725cb53d1272170d723a5d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quiet-dc-v165-final-v1.py",
+      "sha256": "11a6f73c10e31c4d7a7ddca69f7a6e31141810416646d8c999a289772148f310"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/record-v165-viewing-v1.py",
+      "sha256": "ed18210ad0c4e77d8198b6faf1e4fecf2c521708e27a7d71b52b0daedf5332cf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/route-v165-final-v1.py",
+      "sha256": "069d5b4c75ec34ab035380e6e4a09762a22924db2e28c6ed0ac3f159da4b8ba6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/compare-v165-retained-v1.py",
+      "sha256": "89c6956dd0a46b762cb809d05416554d29bbacb7887052ab7eda63c7f48369bf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/review-v165-effects-v1.py",
+      "sha256": "61527ff2b4ace66bd8fbe71b07be37b8efadc8c3484c1f35caaa1c8263c0b2f4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v165-training-units-v1.py",
+      "sha256": "89454daf20fab83134b0592ba0764b5b9063b57e0f8eca2fbe7d47605b48053e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v165-training-objective-v1.py",
+      "sha256": "60e5c0775a67a21c268de57e75ae5b055ec2589c523d0957909225fea9a30a07"
+    }
+  ],
+  "protocol_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/protocol-document-v1.md",
+    "sha256": "8ffc6015ac3c197a64b2bd2f5645a6685d7cb64ead5f0a155e1aa59f41d35b2e"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "prefix_objective_ledger_preflight": {
+    "actual_rows": 40,
+    "bit_exact_FP32_losses": 80,
+    "prefix": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/readiness-training-prefix-v1.jsonl",
+      "sha256": "aaa8b797cfb4afbdde81e5e677642294b631920049f6d7da5747b0b65133d3fb"
+    }
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prepare-v165-final-helpers-v1.py",
+    "sha256": "0b2dd4e062dd97c36bd201ebd3ceaf2936faf43119d55ace39aa5135899aefe1",
+    "text": "\"\"\"Freeze V165 objective/unit audits,reductions and actual-viewing recorder before quality.\"\"\"\nimport ast\nfrom pathlib import Path\nfrom train_directional_bank_trial import read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V165-pair-common-v1'\nassert not (root/'train-result-v1.json').exists() and not (root/'scores-v1.json').exists()\nscope=('All four fixed V165 endpoints. Identical47-tensor/124909-parameter V164 heads/data/init/optimizer/base losses differ only in added pair-average absolute RGB error weight0/1 with16DN16 pseudo-Huber units. Both keep difference floor2/weight1 and flat anchor.25. Exact V164 control. Historical contrasts mix interventions. Related adaptive cohort,not independent scenes/significance. All cases and worst increases retained. Actual native viewing recorded only after original-detail inspection;both protected scenes/priors/windows/JPEGs,ISO100 qualitative refs,notGT. Eight retained native columns.')\ndef rename(s):\n return s.replace('V164-pair-unit-floor-v1','V165-pair-common-v1').replace('v164-pair-unit-floor','v165-pair-common').replace('phase-control','fine-control').replace('fine-pair','pair-common').replace('Phase ctrl raw','Fine ctrl raw').replace('Phase ctrl EMA','Fine ctrl EMA').replace('Pair floor2 raw','Pair common raw').replace('Pair floor2 EMA','Pair common EMA')\nsources=[]\nfor old in ['summarize-v164-final-v1.py','build-v164-tables-v1.py','paired-v164-regions-v1.py','quiet-dc-v164-final-v1.py','record-v164-viewing-v1.py','route-v164-final-v1.py','compare-v164-retained-v1.py','review-v164-effects-v1.py']:\n s=rename((repo/'.cache'/old).read_text())\n if old.startswith(('paired','compare','record','review')):\n  prefix=\"        'scope':\" if old.startswith('record') else \"    'scope':\"\n  a=s.index(prefix);b=s.index('\\n',a);s=s[:a]+prefix+repr(scope)+'})'+s[b:]\n if old.startswith('compare'):\n  needle=\"    'V163':(repo/'.cache/quality-20261107/V163-harmonic-phase-v1','harmonic-phase'),\";assert needle in s\n  s=s.replace(needle,needle+\"\\n    'V164':(repo/'.cache/quality-20261107/V164-pair-unit-floor-v1','fine-pair'),\")\n p=repo/'.cache'/old.replace('v164','v165');assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\nfor name in ['audit-v165-training-units-v1.py','audit-v165-training-objective-v1.py']:\n p=repo/'.cache'/name;ast.parse(p.read_text());sources.append(ref(p))\nassert len(sources)==10\nreceipt=root/'final-helper-preparation-v1.json';assert not receipt.exists()\nsave(receipt,{'status':'fixed-reductions-and-actual-objective-unit-audits-prepared-before-quality','sources':sources,\n 'protocol_snapshot':ref(root/'protocol-document-v1.md'),'new_forwards':0,'new_noise_draws':0,\n 'prefix_objective_ledger_preflight':{'actual_rows':40,'bit_exact_FP32_losses':80,'prefix':ref(root/'readiness-training-prefix-v1.jsonl')},\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\npublic=repo/'docs/results/v165-final-helper-preparation-v1.json';assert not public.exists()\nsave(public,{'status':'fixed-before-trained-quality','preparation':ref(receipt),\n 'source_texts':[dict(v,text=Path(v['path']).read_text()) for v in sources],\n 'preparer':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forwards':0,'new_noise_draws':0,\n 'expected_actual_objective_checks':2000,'expected_unit_records':1000,'expected_unit_fingerprints':2000,'inherited_mask_records':1000,\n 'expected_current_paired_entries':3264,'expected_retained_versions':10,'expected_retained_paired_entries':35840,\n 'expected_retained_mean_cells':2960,'expected_score_table_cells':205,'actual_native_viewing_required':True,'scope':scope})\nprint('Frozen10 final helpers,80 actual prefix loss-ledger preflight checks,10 retained versions;quality remains pending')\n"
+  }
+}

@@ -32,6 +32,7 @@ cost remains unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V165 pair-common targets](docs/pair-common-error.md) | Full-flat RMS −1.35–1.91% and quiet spatial RMS −6.22–8.69% versus V164 | Mesh response halves to parent level; quiet color bias +7.67–28.07%, persistent casts |
 | [V164 smaller pair units](docs/pair-unit-floor.md) | Mesh response +8.35–12.32% versus V163; all48 coarse flat errors improve, means −0.28–0.52% | Total-flat RMS +0.27–0.39%; quiet means +0.20–9.85%; incomplete real crossings |
 | [V163 phase inputs](docs/harmonic-phase-inputs.md) | Quiet DC bias falls 2.60–3.96%; total quiet RMS falls 0.62–1.19% versus V162 | Spatial error rises slightly; mesh response falls 0.52–0.59%; all 48 coarse-flat errors worsen |
 | [V162 target anchor](docs/flat-target-anchor.md) | Quiet spatial RMS falls 4.73–7.73% on all 32 inputs versus V161; native512 flat RMS falls 1.28–2.55% | Mesh response falls 20–22%; quiet bias and broad mottle persist |
@@ -51,9 +52,9 @@ The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
 V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
 [Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
-Keep V164's response/coarse gain, V161's stronger learned response, V162's grain
-reduction, V163's small bias gain, V158 quiet accuracy and V157's coarse capacity
-visible; no model combines their strengths.
+Keep V165's grain/total-flat gain, V164's response/coarse gain, V161's stronger
+learned response, V163's small bias gain, V158 quiet accuracy and V157's coarse
+capacity visible; no model combines their strengths.
 
 V160 passes 123 CPU checks, 450 exact frozen-base gradient comparisons and final
 Adam/EMA validation. Its cache accounting failure, explicit 23-batch adoption
@@ -73,7 +74,7 @@ The completed [V163 phase-input trial](docs/harmonic-phase-inputs.md) lowers mea
 
 The completed [V164 weak-pair floor trial](docs/pair-unit-floor.md) gives **8.35–12.32% more mesh response and 0.28–0.52% lower coarse flat error versus V163**, changing only the pair-loss unit floor from16 to2 DN16. All48 native512 coarse inputs improve at both endpoints. Total-flat RMS rises0.27–0.39%, quiet means rise0.20–9.85%, and all32 quiet spatial errors worsen; real fine cab crossings remain incomplete. Both1k heads/four endpoints/822 cases/72 actual native figures and independent audits are complete. All199 CPU checks,94 final Adam states, exact V163 controls and all1,000 actual unit records pass. Retain the response/coarse gain beside earlier quiet/grain/total-flat strengths.
 
-The [V165 pair-common trial](docs/pair-common-error.md) adds absolute supervision of the average reconstruction error of each training pair, keeping V164’s stronger difference loss. A fixed training-prefix diagnostic finds 55–99% of pair MSE in the common component; this includes shared noise and missing detail, not exclusively bias. All 221 CPU checks and the actual CUDA diagnostic pass. Matched training and full native review are in progress; quality is unmeasured.
+The completed [V165 pair-common trial](docs/pair-common-error.md) lowers native512 full-flat RMS **1.35–1.91%** and quiet spatial RMS **6.22–8.69% versus V164**. Mesh response falls 49–50% to parent level, and quiet color bias rises 7.67–28.07%; real crossings remain weak. Retain the grain/total-flat option beside stronger V161/V164 detail and V158 quiet accuracy. Both 1k heads, four endpoints, 822 cases, 72 actual native figures and independent audits are complete; 221 CPU checks, 94 final Adam states, exact controls and all 2,000 recorded weighted loss totals pass.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. V160 uses the 90,782-photo training cache and reviewed regions.
@@ -116,17 +117,22 @@ falls another 0.59%. Native 160×160 cells in 512px RGGB contexts, quiet ROI
 
 ![ISO12800 quiet field: noisy, V163 phase-input EMA, exact constructed GT](docs/images/v163-harmonic-phase-v1/comparison-28-harmonic-phase-EMA-step1000-triplet.png)
 
-Noisy → **V164 smaller-pair-unit raw** → exact constructed GT, native512
-ISO6400/12800 flat crops. Coarse block32 RMS falls 0.46–0.52% versus V163 raw
-on all48 inputs; total-flat RMS rises 0.27–0.34%, and colored mottle/fine grain
-persist. Native160×160 cells, ROI `[176,176,160,160]`, exposure4, contrast40 about
+Noisy → **V165 pair-common EMA** → exact constructed GT, native512 ISO6400/12800
+flat crops. Full RMS falls 1.45–1.91% versus V164 EMA with less fine colored
+grain; coarse RMS rises 0.18–0.19%. Mesh response halves and quiet color bias
+rises, so this is a grain/flat option with substantial detail and color costs.
+Native 160×160 cells, ROI `[176,176,160,160]`, exposure4, contrast40 about
 `[.010000000708,.020000001416,.013333332725]`; shot/read variance
 .00128/6.5536e-6 or .00256/2.62144e-5. Pixels are never resized.
-[All endpoints, checkpoint hashes and shared display metadata](docs/pair-unit-floor.md).
+[Exact checkpoint hashes, source and display metadata](docs/pair-common-error.md).
 
-![ISO6400 flat: noisy, V164 smaller-unit raw, exact constructed GT](docs/images/v164-pair-unit-floor-v1/comparison-19-fine-pair-raw-step1000-triplet.png)
+![ISO6400 flat: noisy, V165 pair-common EMA, exact constructed GT](docs/images/v165-pair-common-v1/comparison-19-pair-common-EMA-step1000-triplet.png)
 
-![ISO12800 flat: noisy, V164 smaller-unit raw, exact constructed GT](docs/images/v164-pair-unit-floor-v1/comparison-20-fine-pair-raw-step1000-triplet.png)
+![ISO12800 flat: noisy, V165 pair-common EMA, exact constructed GT](docs/images/v165-pair-common-v1/comparison-20-pair-common-EMA-step1000-triplet.png)
+
+V164's stronger coarse result retains its native flat triplets at
+[ISO6400](docs/images/v164-pair-unit-floor-v1/comparison-19-fine-pair-raw-step1000-triplet.png)
+and [ISO12800](docs/images/v164-pair-unit-floor-v1/comparison-20-fine-pair-raw-step1000-triplet.png).
 
 V162's measured grain-reduction triplets remain at
 [ISO6400](docs/images/v162-flat-target-anchor-v1/comparison-26-flat-anchor-EMA-step1000-triplet.png)
