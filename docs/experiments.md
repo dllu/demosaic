@@ -1,5 +1,13 @@
 # Experiment index
 
+The [active V159 DC-transition trial](regional-dc-transition.md) changes only
+the hinge transition1e-4→1 on identical hybrids. Smaller positive regrets get
+quadratic pressure; sufficiently large regrets retain the same derivative.
+Weight1,base losses,data,optimizer/clipping/EMA remain fixed. 60 tests and exact
+V158 compatibility/restored control checks pass,with40 immutable matching live
+rows. Both1k heads/four endpoints/822 cases/72 native figures are fixed;four
+retained V156/V157 columns keep detail/coarse tradeoffs visible. Quality pending.
+
 The [completed V158 regional-DC trial](regional-dc-regret.md) changes only the
 training loss on two identical spatial hybrids. Quiet RMS falls 9.38–13.10%
 versus exact V157, which had regressed substantially. EMA is 0.09–0.12% below

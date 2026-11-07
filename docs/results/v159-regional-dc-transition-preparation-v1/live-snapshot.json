@@ -1,0 +1,88 @@
+{
+  "recorded_unix_UTC": 1794046340.0806286,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/plan-v1.json",
+      "sha256": "229b04cf311fdd135ce5fbca22c58e117fabbc5f0028e87aa146486bae3effa9"
+    },
+    "owner": {
+      "pid": 3363196,
+      "created": 1794046094.24
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/parity-result-v1.json",
+        "sha256": "6db12e4e70a1c2e8380aee0f8f82581d37bd3397c2b840a28681efef5b3b40eb"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/smoke-result-v1.json",
+        "sha256": "416cf4f2bd7afd9db3937b13ec23326dd952880890f4089c04b968c5e3be1222"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3363289,
+      "created": 1794046121.02
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3363350,
+      "created": 1794046162.86
+    },
+    "completed": {}
+  },
+  "progress": {
+    "step": 180,
+    "counts": {
+      "sharp-control": 180,
+      "smooth-dc": 180
+    },
+    "updates": {
+      "sharp-control": 180,
+      "smooth-dc": 180
+    }
+  },
+  "observed_live_owners": [
+    {
+      "role": "controller",
+      "pid": 3363196,
+      "created": 1794046094.24,
+      "argv": [
+        ".venv/bin/python",
+        "scripts/train_regional_dc_transition_trial.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/plan-v1.json"
+      ],
+      "process_status": "sleeping"
+    },
+    {
+      "role": "train-worker",
+      "pid": 3363289,
+      "created": 1794046121.02,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/work/scripts/train_regional_dc_transition_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ],
+      "process_status": "running"
+    },
+    {
+      "role": "post-controller",
+      "pid": 3363350,
+      "created": 1794046162.86,
+      "argv": [
+        ".venv/bin/python",
+        ".cache/queue-v159-review-v1.py"
+      ],
+      "process_status": "sleeping"
+    }
+  ],
+  "scope": "Actual PID/create-time observations at preparation publication. Historical live snapshot,not final quality or final call totals. No training restart."
+}

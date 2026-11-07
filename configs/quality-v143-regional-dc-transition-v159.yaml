@@ -1,0 +1,75 @@
+version: V159
+parent:
+  path: /mnt/external/demosaic/models/v143-final5000.pt
+  sha256: 96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4
+expected_DINO_sha256: 691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14
+previous_trial: /home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1
+shared_training_recipe:
+  path: /home/dllu/proj/demosaic/.cache/quality-20261103/V147-late-spectral-v2/work/configs/quality-v143-late-spectral-v147.yaml
+  sha256: c8549bb193b5b632cf881c83433e4beb52ee2b7e98aefcb61e0fdb9000d1f363
+arms:
+  sharp-control:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 0.0001
+  smooth-dc:
+    class: LateSpatialRgbDetail
+    parameters: 117677
+    parameter_tensors: 45
+    loss_floor_DN16: 16
+    ADC_loss_weight: 0
+    spectral_peak_bonus: 0
+    penalty: mse
+    spectral_epsilon: 0
+    local_risk_weight: 1
+    regional_DC_weight: 1
+    regional_DC_transition_units: 1.0
+local_risk_window_native: 32
+local_risk_hop_native: 16
+local_risk_RMS_rounding_DN16: 1
+local_risk_transition_noise_units: 0.0001
+max_window: 256
+steps: 1000
+batch_size: 4
+lr: 0.001
+warmup: 50
+gradient_clip: 1.0
+EMA_decay: 0.999
+launch_RAM_GiB: 52
+runtime_RAM_GiB: 32
+CUDA_quota_GiB: 12
+internal_reserve_GiB: 60
+external_reserve_GiB: 196
+projection_margin_GiB: 0.5
+external_quality_root: /mnt/external/demosaic/quality-20261107/V159-regional-dc-transition-v1
+scope: Two identical fresh117677-parameter/45-tensor LateSpatialRgbDetail heads reuse1000
+  V148 cached batches/4000 observations. Only the regional-DC positive hinge transition
+  changes:sharp-control1e-4 versus smooth-dc1 in nominal regional mean-noise units.
+  Both keep weight1,32px/hop16,replicated grid,1DN16 norm smoothing and unit floor.
+  For0<regret<1 the wider hinge is quadratic with derivative regret;forregret>=1 its
+  derivative is1. The absolute hinge value changes by a constant in its linear region;large-regret
+  derivatives stay equal. One mean-noise unit is a training proxy,not calibrated RGB
+  covariance or1DN16. All base pixel/gradient/delivered spectral MSE.25/local-regret1
+  losses,architecture,initialization,data,LR/AdamW/global clipping/EMA and domain
+  weights fixed. Control must reproduce V158 dc-regret complete1000 trace/raw/EMA/Adam
+  and1644 actual output replays. 882 supervised/118 ADC-zero gradient batches,all1000
+  optimizer/EMA clocks. All87 neural sources unchanged;targets only in training losses,no
+  inference gate or safety guarantee. Both fixed raw/EMA endpoints/822 cases/3288
+  review calls,with retained V156 detail and V157 coarse native columns. Both standing
+  GFX scenes/windows/priors/JPEGs remain qualitative,not exactGT or scored. Protected
+  captures/JPEGs/siblings excluded from training,originals read-only,dataz unused.
+  No new parent/DINO/noise/source/RAW calls;all1644 new arrays4.422GiB external,60/196GiB
+  reserves plus.5GiB projected margin. Old evidence retained,no deletion/movement.
+  Adaptive related cohort,not blind generalization.
+regional_DC_window_native: 32
+regional_DC_hop_native: 16
+regional_DC_unit_rule: max(existing image noise unit / (window/2), 1 DN16)
+regional_DC_norm_rounding_DN16: 1

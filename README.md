@@ -46,6 +46,10 @@ V120's lower coarse noisy-flat error but higher total error and worse ADC slopes
 Keep V158's quiet supervision, V156's stronger learned detail and V157's direct
 spatial/coarse capacity as useful controls; no model yet combines their strengths.
 
+The [active V159 trial](docs/regional-dc-transition.md) widens the DC loss's
+quadratic transition while keeping its weight fixed. 60 tests and compatibility/
+restoration checks pass; both fixed heads are training. Quality is pending.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. The prepared bank has 90,773 photos and 37 reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·
