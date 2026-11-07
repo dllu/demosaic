@@ -1,0 +1,61 @@
+{
+  "status": "fixed-before-trained-quality",
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/summarize-v167-final-v1.py",
+      "sha256": "a3e1790ab82a69a289fb5afec268bd02040ae41b0c932df2cc307766806996ca"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/build-v167-tables-v1.py",
+      "sha256": "52d1533f65e505acbc10ae02f4bb85542aa24cc3d30ae9d533243bf3ab56f163"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/paired-v167-regions-v1.py",
+      "sha256": "4af93af8fb72e6af764644b4c24eca90aea614dc1c6ae79defdd55d108c41502"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quiet-dc-v167-final-v1.py",
+      "sha256": "ba3c9bb76c602d0fe5bddfef0169d3e23327f222944bbc5b6aa11e4d8698199c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/record-v167-viewing-v1.py",
+      "sha256": "5b873983e8cef1184003e8b11f237c374849ca979edb57563b14af5275e61f7a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/route-v167-final-v1.py",
+      "sha256": "ef1dd80d8ffb8ef1f5460af8ab40863ab527e4e18f597aaf593314d35979fe66"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/compare-v167-retained-v1.py",
+      "sha256": "a9c748955e0b2c2724659388c31b06c074ed82c4c544d65aa23d85f95fb99388"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/review-v167-effects-v1.py",
+      "sha256": "1d8633dd25e381c8e0751f790e23f93894280b38732e4cd926ff455fb2b0e018"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v167-training-units-v1.py",
+      "sha256": "f7c0243f8c517b88247be5184245f29f7ef91bacecd079f67b11f03c59bbd192"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v167-training-objective-v1.py",
+      "sha256": "c34227efe368493591157b07052260d1bd291b63067a3dfb910a91362f72f560"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v167-archived-support-v1.py",
+      "sha256": "74aff7e83fdf559fcfa189c4896ce5d4d11c3f16588b0c8187ec544161259661"
+    }
+  ],
+  "protocol_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/protocol-document-v1.md",
+    "sha256": "dbebd28c181d13274ad3bd5cc98dbb370c132c29e00a6b7b9745e290b97217b2"
+  },
+  "scope": "All four fixed V167 endpoints;original/bounded-support heads have identical124909 parameters/47 tensors,data/init/loss weights/routing/optimizer. Only support mapping differs:original sigmoid versus quarter-floor shifted sigmoid,both initially.5. Both common fixed-support route/weight1/unit16,difference1/floor2/epsilon.003,anchor.25. Candidate floor is no assurance about delivered correction or noisy-flat safety. All89 prior neural files unchanged plus1new isolated variant. Exact V166 control. Historical contrasts mix interventions;adaptive related cohort,not independent scenes/significance. All cases and worst costs retained. Actual native viewing only after inspection;both protected scenes/priors/windows/JPEGs,ISO100 qualitative,notGT. Eight retained native columns.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prepare-v167-final-helpers-v1.py",
+    "sha256": "5f7bd8c4072a0882eda119730db8298c47a71d04de778a1f44dedf4a720edb4b",
+    "text": "\"\"\"Freeze V167 all-case reductions,explicit support-bound checks and viewing.\"\"\"\nimport ast\nimport shutil\nfrom pathlib import Path\nfrom train_directional_bank_trial import read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V167-bounded-support-v1'\nassert not (root/'train-result-v1.json').exists() and not (root/'scores-v1.json').exists()\nscope=('All four fixed V167 endpoints;original/bounded-support heads have identical124909 parameters/47 tensors,data/init/loss weights/routing/optimizer. '\n 'Only support mapping differs:original sigmoid versus quarter-floor shifted sigmoid,both initially.5. Both common fixed-support route/weight1/unit16,difference1/floor2/epsilon.003,anchor.25. '\n 'Candidate floor is no assurance about delivered correction or noisy-flat safety. All89 prior neural files unchanged plus1new isolated variant. '\n 'Exact V166 control. Historical contrasts mix interventions;adaptive related cohort,not independent scenes/significance. All cases and worst costs retained. '\n 'Actual native viewing only after inspection;both protected scenes/priors/windows/JPEGs,ISO100 qualitative,notGT. Eight retained native columns.')\ndef names(s):\n return (s.replace('V166-common-support-routing-v2','V167-bounded-support-v1').replace('v166','v167')\n  .replace('common-control','routed-control').replace('routed-common','bounded-support')\n  .replace('Common ctrl raw','Routed ctrl raw').replace('Common ctrl EMA','Routed ctrl EMA')\n  .replace('Routed common raw','Bounded support raw').replace('Routed common EMA','Bounded support EMA'))\nsources=[]\nfor old in ['summarize-v166-final-v1.py','build-v166-tables-v1.py','paired-v166-regions-v1.py','quiet-dc-v166-final-v1.py',\n 'record-v166-viewing-v1.py','route-v166-final-v1.py','compare-v166-retained-v1.py','review-v166-effects-v1.py']:\n s=names((repo/'.cache'/old).read_text())\n if old.startswith(('paired','record','compare','review')):\n  prefix=\"        'scope':\" if old.startswith('record') else \"    'scope':\"\n  a=s.index(prefix);b=s.index('\\n',a);s=s[:a]+prefix+repr(scope)+'})'+s[b:]\n if old.startswith('compare'):\n  needle=\"    'V165':(repo/'.cache/quality-20261107/V165-pair-common-v1','pair-common'),\";assert needle in s\n  s=s.replace(needle,needle+\"\\n    'V166':(repo/'.cache/quality-20261107/V166-common-support-routing-v2','routed-common'),\")\n if old.startswith('quiet-dc'):\n  s=s.replace('v165-bounded-support-quiet-DC-audit-v1.json','v167-bounded-support-quiet-DC-audit-v1.json')\n p=repo/'.cache'/old.replace('v166','v167');assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\ns=names((repo/'.cache/audit-v166-training-units-v1.py').read_text()).replace('through V165','through V166')\np=repo/'.cache/audit-v167-training-units-v1.py';assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\ns=names((repo/'.cache/audit-v166-training-objective-v1.py').read_text())\nneedle=\"   assert 0<=c['support_mean']<=1 and np.isfinite(c['spectral_delta_RMS']) and c['spectral_delta_RMS']>=0\";assert needle in s\ns=s.replace(needle,needle+\"\\n   assert c['declared_support_floor']==arm['support_floor']\\n   assert arm['support_floor']<=c['support_minimum']<=c['support_maximum']<=1\")\ns=s.replace('CPU/CUDA checks and4-call/eight-parameter-adjoint retained diagnostic','CPU/CUDA mapping/adjoint checks and56-root zero-floor compatibility replay')\np=repo/'.cache/audit-v167-training-objective-v1.py';assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\ns=names((repo/'.cache/audit-v166-archived-support-v1.py').read_text())\nneedle=\"  groups[label,case['kind'],condition,case.get('cohort')].append(row)\";assert needle in s\ns=s.replace(needle,\"  expected_floor=.25 if label.startswith('bounded-support-') else 0.\\n  assert row['declared_support_floor']==expected_floor and expected_floor<=row['support_minimum']<=row['support_maximum']<=1\\n\"+needle)\nneedle=\"'cases_support_mean_below_1e4':int((values<1e-4).sum()),\";assert needle in s\ns=s.replace(needle,needle+\"\\n  'declared_support_floor':rows[0]['declared_support_floor'],'minimum_support_over_cases':min(v['support_minimum'] for v in rows),\\n  'maximum_support_over_cases':max(v['support_maximum'] for v in rows),'cases_mean_within_1e4_of_floor':int((values<rows[0]['declared_support_floor']+1e-4).sum()),\")\ns=s.replace('A small gate alongside larger coefficient RMS suggests suppression but does not isolate training causality or measure a trained-path removal.',\n 'Recorded min/max verifies configured support bound on every original forward. Support values and coefficient RMS do not establish delivered correction or quality;full maps were not retained.')\np=repo/'.cache/audit-v167-archived-support-v1.py';assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\nassert len(sources)==11\nsnapshot=root/'protocol-document-v1.md';assert not snapshot.exists();shutil.copyfile(repo/'docs/bounded-spectral-support.md',snapshot)\nreceipt=root/'final-helper-preparation-v1.json';assert not receipt.exists()\nsave(receipt,{'status':'fixed-before-trained-quality','sources':sources,'protocol_snapshot':ref(snapshot),'scope':scope,\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forwards':0,'new_noise_draws':0})\noutput=repo/'docs/results/v167-final-helper-preparation-v1.json';assert not output.exists()\nsave(output,{'status':'fixed-before-trained-quality','preparation':ref(receipt),'source_texts':[dict(v,text=Path(v['path']).read_text()) for v in sources],\n 'preparer':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'expected_actual_objective_checks':2000,'expected_support_bound_training_records':2000,\n 'expected_support_bound_review_records':3288,'expected_unit_records':1000,'expected_unit_fingerprints':2000,'inherited_mask_records':1000,\n 'expected_current_paired_entries':3264,'expected_retained_versions':12,'expected_retained_paired_entries':43008,'expected_retained_mean_cells':3552,\n 'expected_score_table_cells':205,'actual_native_viewing_required':True,'scope':scope,'new_forwards':0,'new_noise_draws':0})\nprint('Frozen11 V167 reductions/support-bound checks/view recorder;12 retained versions')\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0
+}

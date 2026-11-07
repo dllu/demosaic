@@ -1,0 +1,20 @@
+{
+  "status": "frozen-additional-post-launch-diagnostic-before-V167-quality-available",
+  "recorded_unix_UTC": 1794078596.9001982,
+  "design": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/quality-design-v1.json",
+    "sha256": "85a8194e70043cb978fe0ae2ceac7df753a01f08f07633bccd0940a8a6595552"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v167-mesh-period-strata-v1.py",
+    "sha256": "3157e11003f5c11a04ecceb5d4f0ec56461351764835d4465cb9337aea520a3a",
+    "text": "\"\"\"Additional post-launch, pre-quality nominal mesh period stratification.\"\"\"\nfrom collections import defaultdict\nfrom pathlib import Path\nimport numpy as np\nfrom train_directional_bank_trial import read, ref, save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V167-bounded-support-v1'\nprep_path=repo/'docs/results/v167-mesh-period-strata-preparation-v1.json';prep=read(prep_path)\nassert ref(Path(__file__))=={k:prep['source'][k] for k in ['path','sha256']}\nassert ref(root/'quality-design-v1.json')==prep['design']\ncases={c['id']:c for c in read(root/'quality-design-v1.json')['observations']}\nscores=read(root/'scores-v1.json');groups=defaultdict(list)\nfields=['full_error_RMS_DN16','template_gain','blank_error_RMS_DN16','blank_spatial_RMS_DN16','blank_DC_RMS_DN16','blank_added_RMS_DN16']\nfor row in scores['rows']:\n if row['kind']!='mesh':continue\n c=cases[row['id']];recipe=c['source']['recipe'];fine=sum(v<=10 for v in recipe['periods_final_pixels'])\n groups[row['method'],row['present'],fine].append((row,recipe['seed']))\nrecords=[]\nfor (method,present,fine),values in groups.items():\n seeds=defaultdict(list)\n for row,seed in values:seeds[seed].append(row)\n per_seed=[{'seed':seed,'rows':len(rows),**{field:float(np.mean([r[field] for r in rows])) for field in fields}} for seed,rows in seeds.items()]\n assert all(v['rows']==4 for v in per_seed)\n records.append({'method':method,'present':present,'nominal_carriers_at_most10_pixels':fine,'rows':len(values),'distinct_recipes':len(seeds),\n  'means':{field:float(np.mean([r[field] for r,s in values])) for field in fields},'per_seed':per_seed})\nassert len(records)==36\noutput=repo/'docs/results/v167-mesh-period-strata-v1.json';assert not output.exists()\nsave(output,{'status':'completed-additional-nominal-period-stratification','preparation':ref(prep_path),'scores':ref(root/'scores-v1.json'),\n 'groups':records,'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forwards':0,'new_noise_draws':0,\n 'scope':prep['scope']})\nfor r in records:\n if r['present']:print(r['method'],'fine families',r['nominal_carriers_at_most10_pixels'],'recipes',r['distinct_recipes'],'response',r['means']['template_gain'],'full',r['means']['full_error_RMS_DN16'],'blank',r['means']['blank_error_RMS_DN16'])\n"
+  },
+  "scores_and_completed_review_absent": true,
+  "nominal_carriers_at_most10_pixels_recipe_counts": {
+    "0": 26,
+    "1": 29,
+    "2": 9
+  },
+  "scope": "Additional post-launch diagnostic frozen while original full review was live and before V167 scores or completed review existed. Three fixed groups have zero,one or two nominal carrier periods <=10 native pixels. Threshold rounds the qualitative reference dominant7.12-9.40 pixel interval upward;this is not a measured post-geometry spectral period. All64 recipes/all related CFA and noise rows retained;means and per-recipe means reported for all six fixed methods,present and empty cases. Related variants are not independent scenes;no significance,promotion gate,causal claim or new neural/sensor calls. Existing main protocol and all frozen scientific/publication helpers unchanged."
+}
