@@ -1,11 +1,15 @@
 # Experiment index
 
-[V161 distant frequency context](harmonic-frequency-context.md) is running
-two matched 1k heads on the V160 cache/loss, adding one zero-initialized adapter
-to the candidate. 139 CPU checks, 28 CUDA parity contexts, restored smoke and
-40 exact V160 control-prefix rows pass. All four final endpoints/822 cases,
-72 native figures and a fixed 12-case context-removal diagnostic are queued.
-Quality remains pending.
+[Completed V161 frequency context](harmonic-frequency-context.md): same V160
+paired data/loss, plus 6,720 parameters. Mesh response rises 20.56–21.57% to
+4.83–5.24% of GT; native512 coarse RMS falls 0.20–0.30% versus paired control on
+all 48 inputs. Quiet RMS rises 4.99–7.37% versus control and 14.14–18.38% versus
+V143. Fine colored/gridded grain and bias increase; real strands gain modest
+contrast but crossings stay soft. All four endpoints/822 cases/72 actual native
+views, independent audits and fixed context-removal diagnostic complete. 139 CPU
+checks, 91 final Adam states and exact V160 trace/state/1,644 replays pass.
+5,412 actual head calls, 1,668 new external arrays, 11 terminal original owners;
+no new parent/DINO/source/noise calls, scientific failures or training restarts.
 
 The [completed V160 paired-response trial](paired-response.md) nearly doubles
 learned mesh response: +82–96% versus V143, reaching 4.00–4.31% of exact GT.

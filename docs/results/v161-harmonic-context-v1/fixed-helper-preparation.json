@@ -1,0 +1,44 @@
+{
+  "status": "fixed-reductions-prepared-before-quality",
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/summarize-v161-final-v1.py",
+      "sha256": "750359dfdb201cdf5e8f754d6a415fe542f91b45d7499de039e7f58acff9afba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/build-v161-tables-v1.py",
+      "sha256": "e64a4810a0e02de338c6e963e1975face52eeb300822704cda429d9bd9237f05"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/paired-v161-regions-v1.py",
+      "sha256": "80082061b776c4ead9af05eec1eaa3eec80c17de20dc0c6b51039fddb1356f62"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quiet-dc-v161-final-v1.py",
+      "sha256": "dd442d2b2cd137363c9a9caf8aa249aaa8052c9f2bafedf3197ac399b86866b0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/record-v161-viewing-v1.py",
+      "sha256": "5b5e9bb7dd81b5fb5d4a58ba10423cb1be38edf3db703ca8b4353fd397047731"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/route-v161-final-v1.py",
+      "sha256": "109122299208f1eb3514bacec75d1040b35b13e41af7ea9a94d3676c611453e4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/compare-v161-retained-v1.py",
+      "sha256": "ea0b8d65e92a50b94dcf81e516f0de4a5eda67743b0aa6e269b8a0093dc04a3d"
+    }
+  ],
+  "protocol_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/protocol-document-v1.md",
+    "sha256": "5779045c22f6d19101f19a405e59078b2373c83fd674f66f89da76dee8c26081"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prepare-v161-final-helpers-v1.py",
+    "sha256": "11a7bc7ef120f1a5a88d85d4f0b347e44d9e4c20830ac6466d6433df92fb5dbb",
+    "text": "\"\"\"Freeze fixed array-only endpoint reductions before quality is observed.\"\"\"\nimport ast\nfrom pathlib import Path\nfrom train_directional_bank_trial import ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V161-harmonic-context-v1'\nsnapshot=root/'protocol-document-v1.md';assert not snapshot.exists();snapshot.write_bytes((repo/'docs/harmonic-frequency-context.md').read_bytes())\nmapping={'summarize-v160-final-v1.py':'summarize-v161-final-v1.py',\n    'build-v160-tables-v1.py':'build-v161-tables-v1.py','paired-v160-regions-v2.py':'paired-v161-regions-v1.py',\n    'quiet-dc-v160-final-v1.py':'quiet-dc-v161-final-v1.py','record-v160-viewing-v1.py':'record-v161-viewing-v1.py',\n    'route-v160-final-v1.py':'route-v161-final-v1.py','compare-v160-retained-v1.py':'compare-v161-retained-v1.py'}\nsources=[]\nfor old,new in mapping.items():\n    p=repo/'.cache'/new;assert not p.exists()\n    text=(repo/'.cache'/old).read_text()\n    text=text.replace('V160-paired-response-v1','V161-harmonic-context-v1').replace('v160-paired-response','v161-harmonic-context')\n    text=text.replace('ordinary','paired-control').replace('paired-response','harmonic-context')\n    text=text.replace('Ordinary raw','Pair ctrl raw').replace('Ordinary EMA','Pair ctrl EMA')\n    text=text.replace('Pair response raw','Harmonic raw').replace('Pair response EMA','Harmonic EMA')\n    if old.startswith('paired'):\n        text=text.replace('matched-arm comparison changes only paired-response weight0 versus1 on identical fresh data. Both differ from historical V159 in data;the ordinary arm is not an archive replay.',\n            'matched-arm comparison adds6720 parameters and distant dyadic context at fixed V160 data/loss. Current paired control exactly reproduces V160;older comparisons also include other data/loss differences.')\n        # The arm-name replacement above changes these words too;make scope explicit.\n        start=text.index(\"    'scope':\");end=text.index('\\n',start)\n        text=text[:start]+\"    'scope':'Lower-is-better actual errors retain every case/worst increase. All four current endpoints versus parent plus two candidate/control contrasts. Current paired-control exactly replays V160;candidate adds context/capacity at fixed loss/data. CFA placements/reused recipes are related,not independent scenes or significance.'})\"+text[end:]\n    if old.startswith('record'):\n        start=text.index(\"        'scope':\");end=text.index('\\n',start)\n        text=text[:start]+\"        'scope':'All four fixed V161 endpoints;candidate adds distant dyadic context/capacity at exact V160 paired data/loss. Five retained V156/V157/V158/V159/V160 ordinary columns share all observations. Original-detail viewing recorded only after images are seen. Both protected GFX scenes/windows/priors/JPEGs assessed;ISO100 references qualitative,not exactGT.'})\"+text[end:]\n    if old.startswith('route'):\n        text=text.replace(\"cache-result-v2.json\",\"CACHE_PLACEHOLDER\")\n        text=text.replace(\"cache=read(root/'CACHE_PLACEHOLDER');training=read(root/'train-result-v1.json')\",\n            \"plan=read(root/'plan-v1.json');cache=read(plan['cache']['path']);training=read(root/'train-result-v1.json')\")\n        text=text.replace(\"ref(root/'CACHE_PLACEHOLDER')\",\"plan['cache']\")\n        assert 'CACHE_PLACEHOLDER' not in text\n    if old.startswith('compare'):\n        needle=\"    'V159':(repo/'.cache/quality-20261107/V159-regional-dc-transition-v1','smooth-dc'),\"\n        assert needle in text\n        text=text.replace(needle,needle+\"\\n    'V160 ordinary':(repo/'.cache/quality-20261107/V160-paired-response-v1','ordinary'),\")\n        text=text.replace('All four current endpoints compared with both retained endpoints of V156/V157/V158/V159. These older comparisons also change training data,not an isolated pair-loss estimate. Only current paired-control/harmonic-context isolates weight0 versus1.',\n            'All four current endpoints compared with V156/V157/V158/V159 and V160 ordinary. Retained comparisons include architecture/loss/data differences;only current paired-control fixes V160 paired data/loss for the context/capacity comparison.')\n    ast.parse(text);p.write_text(text);sources.append(ref(p))\nsave(root/'final-helper-preparation-v1.json',{'status':'fixed-reductions-prepared-before-quality','sources':sources,\n    'protocol_snapshot':ref(snapshot),'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forwards':0,'new_noise_draws':0})\nprint('Prepared7 fixed reduction/table/viewing sources;not executed')\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0
+}

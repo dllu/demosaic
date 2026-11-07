@@ -1,8 +1,14 @@
 # Documentation guide
 
-[V161 distant frequency context](harmonic-frequency-context.md) is training
-against the exact V160 paired-response control. The new adapter passes CPU,
-CUDA and restored smoke checks; full quality remains pending.
+The completed [V161 frequency-context trial](harmonic-frequency-context.md)
+raises learned mesh response 20.56–21.57% over exact V160 paired control, reaching
+4.83–5.24% of constructed GT. All 48 native512 coarse errors improve, while quiet
+RMS rises another 4.99–7.37% and total flat error increases. Native cab strand
+contrast improves modestly; soft crossings, false colored grain and bias remain.
+Both heads/four endpoints/822 cases/72 actual native views and independent audits
+are complete, including 48 fixed context-removal calls. 139 CPU checks, 91 final
+Adam states, all 1,000 control trace/model/Adam states and 1,644 replays pass.
+Retain its learned-detail gain beside earlier quiet and total-flat strengths.
 
 The [completed V160 paired-response trial](paired-response.md) raises learned
 mesh response 82–96% versus V143, reaching 4.00–4.31% of exact GT amplitude.

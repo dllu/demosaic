@@ -21,16 +21,18 @@ GT**. The `detail` mode is the default inside explicitly enabled `--phase-harmon
 ordinary inference keeps the stage off. Partial orientations, support seams,
 boundary spill, nonperiodic texture and slow correction remain unresolved.
 
-The completed [V160 paired-response trial](docs/paired-response.md) raises learned
-mesh response **82–96%** over V143, reaching **4.00–4.31% of exact GT amplitude**.
-Blank RMS rises **3.25–4.69%** and quiet RMS **8.46–11.36%**. Native cab views show
-slightly stronger existing strands, with soft crossings and added grain.
-Its ordinary new-data control lowers native512 flat RMS **0.42–0.53%** on all
-48 inputs, with a smaller quiet regression. Both 1k heads, four endpoints,
-822 cases, 72 actual native views and independent audits are complete.
+The completed [V161 frequency-context trial](docs/harmonic-frequency-context.md)
+raises learned mesh response **21–22% over V160 paired response**, reaching
+**4.83–5.24% of exact GT amplitude**. Coarse flat error improves on all 48 inputs,
+but quiet RMS worsens another **5–7%** and total flat error increases. Native cab
+strands gain slight contrast; crossings remain soft and false colored grain rises.
+Both 1k heads, four endpoints, 822 cases, 72 actual native views and independent
+audits are complete. This is the stronger learned-detail prototype; its quiet
+cost remains unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V161 frequency context](docs/harmonic-frequency-context.md) | Learned mesh response 4.83–5.24% of exact GT; coarse flat RMS 0.48–0.58% below V143 | Quiet RMS 14.14–18.38% above V143; extra grain/bias, soft real crossings |
 | [V160 paired response](docs/paired-response.md) | Stronger learned mesh response: 4.00–4.31% of exact GT | Blank/quiet errors and fine colored grain rise; real crossings remain soft |
 | [V160 ordinary data](docs/paired-response.md) | Native512 full flat RMS falls 0.42–0.53%; all 48 full/coarse inputs improve versus V143 | Quiet RMS rises 0.76–1.58%; new data also changes versus older studies |
 | [V159 smoother DC](docs/regional-dc-transition.md) | All 48 native512 coarse errors improve versus V143/V158/V156; much less quiet damage than V157 | Quiet RMS remains above V143/V158; mesh weaker than V156 |
@@ -46,16 +48,16 @@ The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
 V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
 [Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
-Keep V160's learned response, V158 quiet accuracy, V159's coarse/quiet compromise
+Keep V161's learned response, V158 quiet accuracy, V159's coarse/quiet compromise
 and V157 direct spatial/coarse capacity visible; no model combines their strengths.
 
 V160 passes 123 CPU checks, 450 exact frozen-base gradient comparisons and final
 Adam/EMA validation. Its cache accounting failure, explicit 23-batch adoption
 and all original evidence are preserved in the report.
 
-[V161](docs/harmonic-frequency-context.md) is testing wider frequency context
-on the same paired-response data and loss. Its 139 CPU checks, CUDA parity and
-save/restore smoke pass; trained quality is pending.
+V161 passes 139 CPU checks, CUDA parity, restored smoke and final 91-state
+validation. Its control exactly reproduces all V160 trace/model/Adam states
+and 1,644 actual predictions. The fixed context-removal diagnostic is complete.
 
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. V160 uses the 90,782-photo training cache and reviewed regions.
@@ -73,29 +75,33 @@ exact empty field, then WB/matrix/+3EV. Pixels are not resized.
 
 ![Native noisy, detail amplitude and exact GT with shared eightfold contrast](docs/images/supported-wave-amplitude-v1/mesh-seed2026112302-present-iso6400-prior-RGGB-retained-contrast8-triplet.png)
 
-Noisy → V143 + **V160 paired-response EMA** → exact constructed GT, two fixed
-mesh crops. Mean response rises 95.73% over V143 and 94.77% over its matched
-ordinary control, reaching 4.31% of GT. Blank RMS rises 4.69%, quiet errors rise,
+Noisy → V143 + **V161 harmonic-context EMA** → exact constructed GT, two fixed
+mesh crops. Mean response rises 21.57% over matched V160 paired response,
+reaching 5.24% of GT. Blank RMS rises 5.31% versus V143, quiet errors rise,
 and weak crossings remain difficult. Native 160×160 cells, ROI
 `[176,176,160,160]` in 512px RGGB contexts, shot .00128/read variance 6.5536e-6,
 common exposure 8 and contrast 1; crop pixels are never resized.
-[All endpoints, checkpoint/source hashes and display metadata](docs/paired-response.md).
+[All endpoints, checkpoint/source hashes and display metadata](docs/harmonic-frequency-context.md).
 
-![Mesh2302: noisy, V160 paired-response EMA, exact constructed GT](docs/images/v160-paired-response-v1/comparison-00-paired-response-EMA-step1000-triplet.png)
+![Mesh2302: noisy, V161 harmonic-context EMA, exact constructed GT](docs/images/v161-harmonic-context-v1/comparison-00-harmonic-context-EMA-step1000-triplet.png)
 
-![Mesh2309: noisy, V160 paired-response EMA, exact constructed GT](docs/images/v160-paired-response-v1/comparison-02-paired-response-EMA-step1000-triplet.png)
+![Mesh2309: noisy, V161 harmonic-context EMA, exact constructed GT](docs/images/v161-harmonic-context-v1/comparison-02-harmonic-context-EMA-step1000-triplet.png)
 
-The paired model's quiet-field cost: noisy → **V160 paired-response EMA** →
+The context model's quiet-field cost: noisy → **V161 harmonic-context EMA** →
 exact constructed GT, ISO6400 and ISO12800 priors. Fine colored grain increases
 beside the edge. Native 160×160 cells in 512px RGGB contexts, quiet ROI
 `[80,176,160,160]`, common exposure 8 and 40× camera-linear contrast about
 `[.001500000013,.006000000052,.002666666871]`. Shot/read variance is
 .00128/6.5536e-6 or .00256/2.62144e-5; crop pixels are never resized.
-[All methods and complete metadata](docs/paired-response.md).
+[All methods and complete metadata](docs/harmonic-frequency-context.md).
 
-![ISO6400 quiet field: noisy, V160 paired-response EMA, exact constructed GT](docs/images/v160-paired-response-v1/comparison-26-paired-response-EMA-step1000-triplet.png)
+![ISO6400 quiet field: noisy, V161 harmonic-context EMA, exact constructed GT](docs/images/v161-harmonic-context-v1/comparison-26-harmonic-context-EMA-step1000-triplet.png)
 
-![ISO12800 quiet field: noisy, V160 paired-response EMA, exact constructed GT](docs/images/v160-paired-response-v1/comparison-28-paired-response-EMA-step1000-triplet.png)
+![ISO12800 quiet field: noisy, V161 harmonic-context EMA, exact constructed GT](docs/images/v161-harmonic-context-v1/comparison-28-harmonic-context-EMA-step1000-triplet.png)
+
+The prior V160 paired-response [mesh2302](docs/images/v160-paired-response-v1/comparison-00-paired-response-EMA-step1000-triplet.png),
+[mesh2309](docs/images/v160-paired-response-v1/comparison-02-paired-response-EMA-step1000-triplet.png)
+and [quiet-field costs](docs/paired-response.md) remain available.
 
 The ordinary control's flat-field gain remains visible at
 [ISO6400](docs/images/v160-paired-response-v1/comparison-19-ordinary-EMA-step1000-triplet.png)
