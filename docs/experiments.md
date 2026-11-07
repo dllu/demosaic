@@ -1,11 +1,17 @@
 # Experiment index
 
-The [active V158 regional-DC trial](regional-dc-regret.md) adds one fixed loss
-term to two identical spatial hybrids, retaining the exact V157 control recipe.
-The term penalizes increasing RGB mean-error norms and leaves improving bias
-free; stronger mean-error units are a training proxy. 56 tests, 28 exact CUDA
-contexts and genuine 8+2 restore pass. Both 1k heads/four endpoints/822 cases
-are fixed; 72 native figures include retained V156 columns. Quality is pending.
+The [completed V158 regional-DC trial](regional-dc-regret.md) changes only the
+training loss on two identical spatial hybrids. Quiet RMS falls 9.38–13.10%
+versus exact V157, which had regressed substantially. EMA is 0.09–0.12% below
+V143 on all 32 quiet inputs and averages 0.13–0.17% below retained V156 EMA;
+two inputs still worsen versus V156. Mean color bias returns near parent level.
+The cost is near-parent correction: standalone-flat full gain shrinks to
+0.046–0.053%, block32 gain about 0.001%; mesh remains below V143/V156 and real
+crossings stay missing. Both 1k heads/four endpoints/822 cases/72 actual native
+views and independent audits are complete. 56 tests, four strict CPU loads,
+90 finite final Adam states and all 1,644 V157 output replays pass. All 10 original
+owners are terminal, 5,364 scientific head calls, no training/review restart.
+One auxiliary CPU reporter failure and corrected revision are preserved.
 
 The [completed V157 spatial-RGB trial](spatial-rgb-residual.md) adds direct coarse/DC
 capacity with the same V156 loss/data/schedule and greater model capacity/compute.

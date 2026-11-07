@@ -1,9 +1,12 @@
 # Documentation guide
 
-The [active V158 regional-DC trial](regional-dc-regret.md) directly penalizes
-increases in regional RGB mean error on the unchanged V157 hybrid. 56 tests,
-28 exact CUDA contexts and genuine 8+2 restore pass; both fixed heads are training.
-The full review retains V156 native columns. Restoration quality remains unmeasured.
+The [completed V158 regional-DC trial](regional-dc-regret.md) removes V157's large
+quiet-region color-bias increase. EMA quiet RMS falls 0.09–0.12% versus V143 on
+all 32 inputs, and averages 0.13–0.17% below V156 EMA. Nearly all of V157's coarse
+flat gain is lost, mesh remains weaker than V143/V156 and fine cab crossings stay
+missing. All four endpoints/822 cases/72 actual native views and independent
+audits are complete; 56 tests and exact V157 state/output controls pass. Keep
+the quiet supervision alongside V156 detail and V157 coarse-capacity strengths.
 
 The [completed V157 hybrid trial](spatial-rgb-residual.md) lowers native512 noisy-flat
 full RMS 0.94–1.10% and coarse error 0.90–0.98% versus V143, improving all 48 inputs

@@ -1,0 +1,2342 @@
+{
+  "status": "pass-independent-original-pixel-quiet-DC-decomposition",
+  "scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/scores-v1.json",
+    "sha256": "b6ba4910599b5e9d4bb6aed077b5e4b5a3478b065f895f2414ffeec0c55b498b"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/quiet-dc-v158-final-v1.py",
+    "sha256": "e9c0bc16544b4b9ff521fc2d7474cc4878b10ba928f0ce414a0b2c0a6c2ebd15",
+    "text": "\"\"\"Separate quiet-region bias from spatial error using original RGB pixels.\"\"\"\n\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic')\nroot=repo/'.cache/quality-20261107/V158-regional-dc-v1'\nscores=read(root/'scores-v1.json')\ncases={c['id']:c for c in read(root/'quality-design-v1.json')['observations'] if c['kind']=='mixed-quiet'}\nassert len(cases)==32\nmethods=['parent','dc-control-raw-step1000','dc-control-EMA-step1000','dc-regret-raw-step1000','dc-regret-EMA-step1000']\nrecords=[];maximum=0.\nfor row in scores['rows']:\n    if row['id'] not in cases:continue\n    c=cases[row['id']];x,y,w,h=c['ROI_xywh']\n    assert ref(row['prediction']['path'])==row['prediction'] and ref(c['arrays']['path'])==c['arrays']\n    target=np.load(c['arrays']['path'])['target'][0,:,y:y+h,x:x+w].astype(np.float64)\n    value=np.load(row['prediction']['path'])[0,:,y:y+h,x:x+w].astype(np.float64)\n    error=(value-target)*65535\n    bias=np.array([sum(channel.ravel())/(w*h) for channel in error])\n    dc=float(np.linalg.norm(bias)/np.sqrt(3))\n    spatial=float(np.linalg.norm(error-bias[:,None,None])/np.sqrt(error.size))\n    total=float(np.linalg.norm(error)/np.sqrt(error.size))\n    for actual,field in [(dc,'crop_DC_RMS_DN16'),(spatial,'quiet_spatial_RMS_DN16'),(total,'quiet_error_RMS_DN16')]:\n        difference=abs(actual-row[field]);maximum=max(maximum,difference);assert difference<1e-9,(c['id'],field,difference)\n    assert abs(total**2-spatial**2-dc**2)<1e-9\n    records.append({'id':c['id'],'method':row['method'],'prior':c['noise']['name'],'template':c['template'],\n                    'bias_RGB_DN16':bias.tolist(),'DC_RMS_DN16':dc,'spatial_RMS_DN16':spatial,'total_RMS_DN16':total})\nassert len(records)==160\ngroups=[]\nfor prior in ['iso6400-prior','iso12800-prior']:\n    for method in methods:\n        selected=[r for r in records if r['prior']==prior and r['method']==method]\n        assert len(selected)==16\n        groups.append({'prior':prior,'method':method,'cases':16,\n            **{f'mean_{field}':float(np.mean([r[field] for r in selected])) for field in ['DC_RMS_DN16','spatial_RMS_DN16','total_RMS_DN16']}})\noutput=root/'quiet-DC-audit-v1.json';assert not output.exists()\nsave(output,{'status':'pass-independent-original-pixel-quiet-DC-decomposition','scores':ref(root/'scores-v1.json'),\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'rows':records,'groups':groups,\n    'scalar_checks':480,'per_case_energy_identities':160,'maximum_scalar_difference':maximum,\n    'new_forward_calls':0,'new_noise_draws':0,\n    'scope':'Native exact quiet ROIs,160 method/case outputs. Bias averaged per camera-RGB channel before Euclidean RMS. Total squared=spatial squared+DC squared verified per case;group mean RMS values do not obey that identity. Mean DC identifies observed bias cost,not an isolated cause such as global context or path gradients.'})\nimport shutil\npublic=repo/'docs/results/v158-regional-dc-quiet-DC-audit-v1.json';assert not public.exists()\nshutil.copyfile(output,public)\nfor g in groups:print(g['prior'],g['method'],g['mean_DC_RMS_DN16'])\nprint('PASS160 original-pixel decompositions,max difference',maximum)\n"
+  },
+  "rows": [
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        2.1139311462860633,
+        -0.5590938800443837,
+        -0.3596734304545407
+      ],
+      "DC_RMS_DN16": 1.2794081749668909,
+      "spatial_RMS_DN16": 2.9152515251231748,
+      "total_RMS_DN16": 3.1836420547707793
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        3.7747145142161345,
+        -3.439818104095957,
+        3.6123073712111817
+      ],
+      "DC_RMS_DN16": 3.6115362750131186,
+      "spatial_RMS_DN16": 2.896276437375828,
+      "total_RMS_DN16": 4.629428848943901
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        3.90017681595682,
+        -2.784897885040209,
+        3.1497721830616685
+      ],
+      "DC_RMS_DN16": 3.310996840379927,
+      "spatial_RMS_DN16": 2.890433260013552,
+      "total_RMS_DN16": 4.3951455615938855
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        2.1426158542616123,
+        -0.5541560407810721,
+        -0.3504451086928384
+      ],
+      "DC_RMS_DN16": 1.2936644838950202,
+      "spatial_RMS_DN16": 2.9090809644204567,
+      "total_RMS_DN16": 3.183758761973781
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        2.1145172593189274,
+        -0.5568059668241403,
+        -0.355207258793962
+      ],
+      "DC_RMS_DN16": 1.2789824498859128,
+      "spatial_RMS_DN16": 2.908720596060046,
+      "total_RMS_DN16": 3.1774914025155256
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-BGGR",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        1.7676275259523664,
+        -2.5608721164902817,
+        2.1296538543876524
+      ],
+      "DC_RMS_DN16": 2.1770008886102983,
+      "spatial_RMS_DN16": 3.399889775613196,
+      "total_RMS_DN16": 4.037150400385051
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        3.0745405257114955,
+        -5.349183562285452,
+        6.264249777650048
+      ],
+      "DC_RMS_DN16": 5.076330351216841,
+      "spatial_RMS_DN16": 3.3738450890342886,
+      "total_RMS_DN16": 6.095240808982535
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        3.2960926677227915,
+        -4.75031032216557,
+        5.7187486635448295
+      ],
+      "DC_RMS_DN16": 4.695166355160184,
+      "spatial_RMS_DN16": 3.3668935553733292,
+      "total_RMS_DN16": 5.777591134360635
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        1.795056281899201,
+        -2.5602171095859374,
+        2.1429365563315512
+      ],
+      "DC_RMS_DN16": 2.1885395273153043,
+      "spatial_RMS_DN16": 3.3938788167996967,
+      "total_RMS_DN16": 4.0383311758377625
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        1.7671361989516072,
+        -2.561019540369125,
+        2.1340929099249024
+      ],
+      "DC_RMS_DN16": 2.1783743158595246,
+      "spatial_RMS_DN16": 3.393597109958885,
+      "total_RMS_DN16": 4.032594202832434
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GRBG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.4574644469917986,
+        -0.282024623191046,
+        1.2913574258956033
+      ],
+      "DC_RMS_DN16": 1.6110321120046487,
+      "spatial_RMS_DN16": 3.4498510806270297,
+      "total_RMS_DN16": 3.807479079970584
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -0.8228832273888201,
+        -3.0384943481431947,
+        5.099533488721045
+      ],
+      "DC_RMS_DN16": 3.460001277080854,
+      "spatial_RMS_DN16": 3.429924779522769,
+      "total_RMS_DN16": 4.871959855190255
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -0.6804899747316995,
+        -2.422526246536836,
+        4.694401620319331
+      ],
+      "DC_RMS_DN16": 3.075120951210806,
+      "spatial_RMS_DN16": 3.4241375351468157,
+      "total_RMS_DN16": 4.60229146449646
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.4303430034337907,
+        -0.27883407338786126,
+        1.3029242334548599
+      ],
+      "DC_RMS_DN16": 1.600200728340623,
+      "spatial_RMS_DN16": 3.4450591295819204,
+      "total_RMS_DN16": 3.798562198687498
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.456703119540498,
+        -0.2811035464044835,
+        1.2947139023651744
+      ],
+      "DC_RMS_DN16": 1.611489322576981,
+      "spatial_RMS_DN16": 3.4450346699922862,
+      "total_RMS_DN16": 3.8033093108802603
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GBRG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.4800984722437307,
+        1.606531238658863,
+        0.6885451388212914
+      ],
+      "DC_RMS_DN16": 1.7517539268788962,
+      "spatial_RMS_DN16": 2.851495432331872,
+      "total_RMS_DN16": 3.346590506910752
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -1.0776212814296742,
+        -0.9488228188545691,
+        4.221062026121172
+      ],
+      "DC_RMS_DN16": 2.5741598626951046,
+      "spatial_RMS_DN16": 2.8351918329938863,
+      "total_RMS_DN16": 3.829440132524036
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -0.9344811644656374,
+        -0.3913908900262868,
+        3.7957005379101703
+      ],
+      "DC_RMS_DN16": 2.2681699266903985,
+      "spatial_RMS_DN16": 2.8287007270488944,
+      "total_RMS_DN16": 3.6257609710996763
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.4524918375914924,
+        1.6070470267345627,
+        0.7006683204277124
+      ],
+      "DC_RMS_DN16": 1.7405221874330594,
+      "spatial_RMS_DN16": 2.8462931414369375,
+      "total_RMS_DN16": 3.336285679005578
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.480082862323479,
+        1.6066760125556356,
+        0.6926073908688067
+      ],
+      "DC_RMS_DN16": 1.7523245334125368,
+      "spatial_RMS_DN16": 2.846305470753299,
+      "total_RMS_DN16": 3.3424685642859266
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -4.2176464388392105,
+        0.8713017823302834,
+        -1.912164949077578
+      ],
+      "DC_RMS_DN16": 2.720544251396882,
+      "spatial_RMS_DN16": 4.628282467992102,
+      "total_RMS_DN16": 5.368645977090656
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.5369729959966434,
+        -2.856274972107985,
+        3.427768832313359
+      ],
+      "DC_RMS_DN16": 2.9633392125824063,
+      "spatial_RMS_DN16": 4.588985872928019,
+      "total_RMS_DN16": 5.4626157315668324
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -2.3476878477776153,
+        -2.0048804427847244,
+        2.8138712917540945
+      ],
+      "DC_RMS_DN16": 2.411711388690697,
+      "spatial_RMS_DN16": 4.590424876097932,
+      "total_RMS_DN16": 5.185397994892881
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -4.176184918901162,
+        0.8773601384387802,
+        -1.8978830429629852
+      ],
+      "DC_RMS_DN16": 2.696432293120255,
+      "spatial_RMS_DN16": 4.620147596151239,
+      "total_RMS_DN16": 5.349440243764184
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        -4.218569861330775,
+        0.8725396124393228,
+        -1.9069626575774237
+      ],
+      "DC_RMS_DN16": 2.719936496047832,
+      "spatial_RMS_DN16": 4.619792802669597,
+      "total_RMS_DN16": 5.361020432914872
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-BGGR",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        4.104689005230694,
+        4.4062375775556575,
+        5.0925632872525055
+      ],
+      "DC_RMS_DN16": 4.55329925271033,
+      "spatial_RMS_DN16": 5.958751127224175,
+      "total_RMS_DN16": 7.4992832378119845
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        5.282527595597526,
+        0.8192275532809618,
+        10.6623016565517
+      ],
+      "DC_RMS_DN16": 6.886240101284329,
+      "spatial_RMS_DN16": 5.916671937726572,
+      "total_RMS_DN16": 9.07894870297313
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        5.6255360198500055,
+        1.5713359422600661,
+        9.925342034320101
+      ],
+      "DC_RMS_DN16": 6.649014128733914,
+      "spatial_RMS_DN16": 5.914718196447626,
+      "total_RMS_DN16": 8.899060637364592
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        4.144044248371392,
+        4.405490772554458,
+        5.113035062733343
+      ],
+      "DC_RMS_DN16": 4.572547766554333,
+      "spatial_RMS_DN16": 5.950972639968271,
+      "total_RMS_DN16": 7.504816349456658
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        4.10270346831594,
+        4.40404818334946,
+        5.09789093792474
+      ],
+      "DC_RMS_DN16": 4.553983902956857,
+      "spatial_RMS_DN16": 5.950867921500419,
+      "total_RMS_DN16": 7.493437022323794
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GRBG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        0.94797708148742,
+        5.077382944234159,
+        0.6148808424533854
+      ],
+      "DC_RMS_DN16": 3.0031403874301055,
+      "spatial_RMS_DN16": 5.455533787556168,
+      "total_RMS_DN16": 6.2274955715585065
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        2.562794892161878,
+        1.5346160347640763,
+        5.6879909576234695
+      ],
+      "DC_RMS_DN16": 3.709276891230616,
+      "spatial_RMS_DN16": 5.427511185602803,
+      "total_RMS_DN16": 6.573934341447365
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        2.796180596461568,
+        2.2977431862812407,
+        5.158530730365646
+      ],
+      "DC_RMS_DN16": 3.6381629510077733,
+      "spatial_RMS_DN16": 5.427673428713298,
+      "total_RMS_DN16": 6.534207565332307
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        0.9886268790159874,
+        5.081284107650481,
+        0.6319601479609901
+      ],
+      "DC_RMS_DN16": 3.0108805421440596,
+      "spatial_RMS_DN16": 5.450542460063171,
+      "total_RMS_DN16": 6.226862351779842
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        0.9479037212100365,
+        5.0777214827218815,
+        0.6182821153022815
+      ],
+      "DC_RMS_DN16": 3.0035562086123733,
+      "spatial_RMS_DN16": 5.450937033455625,
+      "total_RMS_DN16": 6.223669692471793
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GBRG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        5.069857758081525,
+        -2.0437755230356744,
+        4.129538604139452
+      ],
+      "DC_RMS_DN16": 3.955315628316624,
+      "spatial_RMS_DN16": 5.189975234268886,
+      "total_RMS_DN16": 6.525363181611435
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        6.364259385152854,
+        -5.240023948752878,
+        8.823447827868995
+      ],
+      "DC_RMS_DN16": 6.971725756609956,
+      "spatial_RMS_DN16": 5.167472465208684,
+      "total_RMS_DN16": 8.678002748563092
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        6.5916588380687475,
+        -4.534821897022721,
+        8.255946513142726
+      ],
+      "DC_RMS_DN16": 6.637650907338633,
+      "spatial_RMS_DN16": 5.1654544578751596,
+      "total_RMS_DN16": 8.410727038970872
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        5.1097744201295425,
+        -2.0446271578944106,
+        4.148569265607739
+      ],
+      "DC_RMS_DN16": 3.9791507381581948,
+      "spatial_RMS_DN16": 5.183581658899324,
+      "total_RMS_DN16": 6.534765444257535
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "vertical-step",
+      "bias_RGB_DN16": [
+        5.06883625913365,
+        -2.0447738426869364,
+        4.134621000937978
+      ],
+      "DC_RMS_DN16": 3.9568207739312666,
+      "spatial_RMS_DN16": 5.1837153449086,
+      "total_RMS_DN16": 6.521298598749707
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.7333572740956015,
+        0.23021157532557482,
+        5.091031873581005
+      ],
+      "DC_RMS_DN16": 2.9726203815657626,
+      "spatial_RMS_DN16": 4.075515478142738,
+      "total_RMS_DN16": 5.044432410636622
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.6610297187453398,
+        0.1133307997508382,
+        5.274840680371563
+      ],
+      "DC_RMS_DN16": 3.0699483362938125,
+      "spatial_RMS_DN16": 4.034277592376703,
+      "total_RMS_DN16": 5.0695146197506835
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.7034954036729687,
+        0.1292531675508144,
+        5.333252616911932
+      ],
+      "DC_RMS_DN16": 3.106723656850782,
+      "spatial_RMS_DN16": 4.030763640243071,
+      "total_RMS_DN16": 5.089085124414984
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.7489324021565608,
+        0.23319784047853317,
+        5.098516876087388
+      ],
+      "DC_RMS_DN16": 2.978263213773633,
+      "spatial_RMS_DN16": 4.071003584208872,
+      "total_RMS_DN16": 5.044117559411035
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.7338293550502385,
+        0.231433382758496,
+        5.093856449893155
+      ],
+      "DC_RMS_DN16": 2.9743033058239927,
+      "spatial_RMS_DN16": 4.070776341248728,
+      "total_RMS_DN16": 5.041596986620995
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.6802702217852812,
+        3.1469135044723773,
+        3.5850085332281196
+      ],
+      "DC_RMS_DN16": 2.919969109777671,
+      "spatial_RMS_DN16": 2.746599681125651,
+      "total_RMS_DN16": 4.008744118850108
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.467397412391324,
+        3.0526220415134957,
+        3.7997224632624693
+      ],
+      "DC_RMS_DN16": 2.9388006222521112,
+      "spatial_RMS_DN16": 2.6947520539838163,
+      "total_RMS_DN16": 3.9872594259465224
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.5714585173416709,
+        3.0194853317713752,
+        3.82191602078492
+      ],
+      "DC_RMS_DN16": 2.9548725641128537,
+      "spatial_RMS_DN16": 2.6905213940010513,
+      "total_RMS_DN16": 3.9962704164913854
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.6938862808641943,
+        3.149996721061143,
+        3.592223415182434
+      ],
+      "DC_RMS_DN16": 2.9266476350812964,
+      "spatial_RMS_DN16": 2.7398218539518973,
+      "total_RMS_DN16": 4.008976199894351
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.679585809676155,
+        3.147091393012397,
+        3.5869069282898183
+      ],
+      "DC_RMS_DN16": 2.9206788046760472,
+      "spatial_RMS_DN16": 2.739537644397051,
+      "total_RMS_DN16": 4.004426448962754
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.3001996903244617,
+        -0.990742087731087,
+        2.2396938657534973
+      ],
+      "DC_RMS_DN16": 1.4245371588421858,
+      "spatial_RMS_DN16": 3.250337336632138,
+      "total_RMS_DN16": 3.5488024626382164
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.24733258169251257,
+        -1.1655675023893308,
+        2.376296640561668
+      ],
+      "DC_RMS_DN16": 1.5347645565946435,
+      "spatial_RMS_DN16": 3.2031936656792053,
+      "total_RMS_DN16": 3.5518941290565706
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.3282183721551064,
+        -1.1969269837150933,
+        2.461401449538107
+      ],
+      "DC_RMS_DN16": 1.5915253270530292,
+      "spatial_RMS_DN16": 3.1997983069637383,
+      "total_RMS_DN16": 3.5737462237684494
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.3138734681705273,
+        -0.9881279596914283,
+        2.2456917061895636
+      ],
+      "DC_RMS_DN16": 1.4280574986082708,
+      "spatial_RMS_DN16": 3.2446677389038876,
+      "total_RMS_DN16": 3.5450270739748913
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.30093595768328213,
+        -0.991091207073896,
+        2.240802608476815
+      ],
+      "DC_RMS_DN16": 1.4252509207764605,
+      "spatial_RMS_DN16": 3.24478164271137,
+      "total_RMS_DN16": 3.5440017065530376
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.21380569934283358,
+        -0.5099095726703127,
+        0.7362452976899021
+      ],
+      "DC_RMS_DN16": 0.5315943904089507,
+      "spatial_RMS_DN16": 3.3158995285684725,
+      "total_RMS_DN16": 3.358240950181343
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.046001445558681554,
+        -0.6548578723565697,
+        0.9479510814440346
+      ],
+      "DC_RMS_DN16": 0.6657242218796451,
+      "spatial_RMS_DN16": 3.260296103273668,
+      "total_RMS_DN16": 3.3275695966604104
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.1377634615907482,
+        -0.6787427639485031,
+        0.9807442877072845
+      ],
+      "DC_RMS_DN16": 0.6931882545726397,
+      "spatial_RMS_DN16": 3.257109402202542,
+      "total_RMS_DN16": 3.3300557974595058
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.22726469453277787,
+        -0.508409989181564,
+        0.7430182537093515
+      ],
+      "DC_RMS_DN16": 0.5360988975384949,
+      "spatial_RMS_DN16": 3.3104779122938246,
+      "total_RMS_DN16": 3.3536049313726966
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        0.2134654016508648,
+        -0.5101519953665956,
+        0.7378044807416699
+      ],
+      "DC_RMS_DN16": 0.5323463746725339,
+      "spatial_RMS_DN16": 3.3104603972797726,
+      "total_RMS_DN16": 3.352989815759174
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        6.513457997698128,
+        0.684352702083288,
+        -0.24075528476873842
+      ],
+      "DC_RMS_DN16": 3.7838004182642653,
+      "spatial_RMS_DN16": 5.891463286656948,
+      "total_RMS_DN16": 7.001891548951863
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        6.1871105584817085,
+        0.7180502317151877,
+        -0.13080021707019113
+      ],
+      "DC_RMS_DN16": 3.596898751930969,
+      "spatial_RMS_DN16": 5.829502164648091,
+      "total_RMS_DN16": 6.849874168134722
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        6.3164975373122845,
+        0.6595769349174588,
+        0.030219567040967378
+      ],
+      "DC_RMS_DN16": 3.6667013374502977,
+      "spatial_RMS_DN16": 5.833055373183567,
+      "total_RMS_DN16": 6.889791991394625
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        6.53857759467328,
+        0.687804199423681,
+        -0.22837589948640016
+      ],
+      "DC_RMS_DN16": 3.7981674146784035,
+      "spatial_RMS_DN16": 5.885120857316505,
+      "total_RMS_DN16": 7.00433602957101
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        6.513577611368146,
+        0.6845738772400182,
+        -0.23776110066351067
+      ],
+      "DC_RMS_DN16": 3.783819280114759,
+      "spatial_RMS_DN16": 5.884933368486178,
+      "total_RMS_DN16": 6.996408299698514
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -1.8301696952825068,
+        -2.2540523620718886,
+        -1.7637634813582281
+      ],
+      "DC_RMS_DN16": 1.9613885202975656,
+      "spatial_RMS_DN16": 5.745689735332706,
+      "total_RMS_DN16": 6.071243320956812
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -2.2297675702447806,
+        -2.2508166505184817,
+        -1.6560639441705463
+      ],
+      "DC_RMS_DN16": 2.064024127664876,
+      "spatial_RMS_DN16": 5.669622976509212,
+      "total_RMS_DN16": 6.033640716461657
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -2.0164113849883507,
+        -2.3775209704246665,
+        -1.549952536588671
+      ],
+      "DC_RMS_DN16": 2.010047570249466,
+      "spatial_RMS_DN16": 5.668903597839214,
+      "total_RMS_DN16": 6.014711899688976
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -1.8079776201049527,
+        -2.250148310258555,
+        -1.7525021030077823
+      ],
+      "DC_RMS_DN16": 1.9496336505445067,
+      "spatial_RMS_DN16": 5.737025724005324,
+      "total_RMS_DN16": 6.059252060216205
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -1.8318219602955879,
+        -2.255491946056554,
+        -1.7626760368376382
+      ],
+      "DC_RMS_DN16": 1.9621283022769598,
+      "spatial_RMS_DN16": 5.736810545760558,
+      "total_RMS_DN16": 6.063080299034956
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.5844298639753789,
+        -2.1219824590803,
+        3.7141532523786283
+      ],
+      "DC_RMS_DN16": 2.6336389231540616,
+      "spatial_RMS_DN16": 4.954631012673429,
+      "total_RMS_DN16": 5.6110981500324355
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.409371127515192,
+        -2.1944281147617404,
+        3.614359166022223
+      ],
+      "DC_RMS_DN16": 2.5732880332976764,
+      "spatial_RMS_DN16": 4.897894337496081,
+      "total_RMS_DN16": 5.532737138486628
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.5906232794658535,
+        -2.350883239788254,
+        3.8397229847858396
+      ],
+      "DC_RMS_DN16": 2.7568222663173088,
+      "spatial_RMS_DN16": 4.898854750112035,
+      "total_RMS_DN16": 5.621285161843165
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.6083338287626021,
+        -2.1190045622917753,
+        3.723299832385692
+      ],
+      "DC_RMS_DN16": 2.6419613725159357,
+      "spatial_RMS_DN16": 4.948306465745608,
+      "total_RMS_DN16": 5.609429273358037
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        1.5855411100555785,
+        -2.123124017236114,
+        3.7136956935760734
+      ],
+      "DC_RMS_DN16": 2.633953423324374,
+      "spatial_RMS_DN16": 4.948822047548595,
+      "total_RMS_DN16": 5.606117220906575
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -0.38363259098280195,
+        0.6321191498654116,
+        -1.1906310417534314
+      ],
+      "DC_RMS_DN16": 0.809187012187255,
+      "spatial_RMS_DN16": 4.351886741827236,
+      "total_RMS_DN16": 4.42647736178377
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -0.7276928503982845,
+        0.5830426382307451,
+        -1.1286972367226098
+      ],
+      "DC_RMS_DN16": 0.8452678184459452,
+      "spatial_RMS_DN16": 4.283338024367121,
+      "total_RMS_DN16": 4.365943462287344
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -0.5330714101574813,
+        0.45553195369484456,
+        -1.0033436638178046
+      ],
+      "DC_RMS_DN16": 0.706723188829418,
+      "spatial_RMS_DN16": 4.2888518398956785,
+      "total_RMS_DN16": 4.346689288436175
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -0.3609705844593236,
+        0.6328598597886412,
+        -1.1788972048586857
+      ],
+      "DC_RMS_DN16": 0.8001270700333012,
+      "spatial_RMS_DN16": 4.34359304855786,
+      "total_RMS_DN16": 4.41667339744295
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "narrow-bar",
+      "bias_RGB_DN16": [
+        -0.3842919063431509,
+        0.6310675718925267,
+        -1.1894281751955078
+      ],
+      "DC_RMS_DN16": 0.8084276783823643,
+      "spatial_RMS_DN16": 4.343758959052162,
+      "total_RMS_DN16": 4.418347791371864
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        -1.3099218454891797,
+        -4.291733226748056,
+        -2.643359290343278
+      ],
+      "DC_RMS_DN16": 3.0067822041016528,
+      "spatial_RMS_DN16": 3.3541747187076254,
+      "total_RMS_DN16": 4.5045784782285425
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        0.2852651662232347,
+        -7.109939330086581,
+        1.213991253584436
+      ],
+      "DC_RMS_DN16": 4.167588761556332,
+      "spatial_RMS_DN16": 3.3377269655305644,
+      "total_RMS_DN16": 5.339402343135466
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        0.4058355158282893,
+        -6.47341028938763,
+        0.7661028852861363
+      ],
+      "DC_RMS_DN16": 3.770793765751936,
+      "spatial_RMS_DN16": 3.333553250487505,
+      "total_RMS_DN16": 5.033037144475438
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        -1.281872236174354,
+        -4.286945902413299,
+        -2.6342732724995583
+      ],
+      "DC_RMS_DN16": 2.9978046008314347,
+      "spatial_RMS_DN16": 3.3494102173175864,
+      "total_RMS_DN16": 4.49503962481284
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        -1.3094560107079816,
+        -4.289563897543303,
+        -2.6389873730494857
+      ],
+      "DC_RMS_DN16": 3.0044016503679387,
+      "spatial_RMS_DN16": 3.349129321005485,
+      "total_RMS_DN16": 4.499232877452806
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-BGGR",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        -0.08010629281259299,
+        6.175609664905187,
+        2.969141762740037
+      ],
+      "DC_RMS_DN16": 3.9564451451046114,
+      "spatial_RMS_DN16": 3.7214301163642913,
+      "total_RMS_DN16": 5.431620411737642
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.1756501682975569,
+        3.440669142917341,
+        6.979866539651175
+      ],
+      "DC_RMS_DN16": 4.543819772708996,
+      "spatial_RMS_DN16": 3.6976684562017397,
+      "total_RMS_DN16": 5.858246336477374
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.3916630318062062,
+        4.0188260474701565,
+        6.453057941315137
+      ],
+      "DC_RMS_DN16": 4.462049065466485,
+      "spatial_RMS_DN16": 3.6909655190232065,
+      "total_RMS_DN16": 5.790777868753779
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        -0.05319609800524176,
+        6.1763885808227315,
+        2.982256062078386
+      ],
+      "DC_RMS_DN16": 3.9599855616724877,
+      "spatial_RMS_DN16": 3.715659093974784,
+      "total_RMS_DN16": 5.430249363638109
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        -0.08049038345500321,
+        6.1755899134193895,
+        2.973616760521736
+      ],
+      "DC_RMS_DN16": 3.957557585136394,
+      "spatial_RMS_DN16": 3.7155019979967436,
+      "total_RMS_DN16": 5.428371499518836
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GRBG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.822726746787589,
+        -0.3324645166268965,
+        3.1403970286901766
+      ],
+      "DC_RMS_DN16": 2.1051491590919724,
+      "spatial_RMS_DN16": 3.106165753358588,
+      "total_RMS_DN16": 3.7523217704993477
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        3.3804575449027654,
+        -3.0053097551442987,
+        6.823649139950566
+      ],
+      "DC_RMS_DN16": 4.726576192918916,
+      "spatial_RMS_DN16": 3.0809678045618374,
+      "total_RMS_DN16": 5.642063906073243
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        3.5165208921977866,
+        -2.4072306382389796,
+        6.43357455431119
+      ],
+      "DC_RMS_DN16": 4.455392241498699,
+      "spatial_RMS_DN16": 3.0759275810868822,
+      "total_RMS_DN16": 5.414041975243431
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.8491911503578422,
+        -0.329513436750949,
+        3.151779417524176
+      ],
+      "DC_RMS_DN16": 2.1183169822833583,
+      "spatial_RMS_DN16": 3.101269864793919,
+      "total_RMS_DN16": 3.755681244689033
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.8233479422810206,
+        -0.3317132747236428,
+        3.1436850985488034
+      ],
+      "DC_RMS_DN16": 2.1069240940358305,
+      "spatial_RMS_DN16": 3.101357914297256,
+      "total_RMS_DN16": 3.7493399486580214
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GBRG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        0.6355716157665029,
+        2.176023362250271,
+        -1.054638419654657
+      ],
+      "DC_RMS_DN16": 1.4435247542085645,
+      "spatial_RMS_DN16": 3.1006440895574556,
+      "total_RMS_DN16": 3.420198457125036
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.967681116518247,
+        -0.33013984935932966,
+        2.3939896845393833
+      ],
+      "DC_RMS_DN16": 1.7992542812804857,
+      "spatial_RMS_DN16": 3.0764932663449156,
+      "total_RMS_DN16": 3.564004319101165
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        2.1082591347352264,
+        0.2114855503364197,
+        1.977674141984835
+      ],
+      "DC_RMS_DN16": 1.673387555137888,
+      "spatial_RMS_DN16": 3.0689158375520904,
+      "total_RMS_DN16": 3.495492859049838
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        0.6624914440275689,
+        2.176428163402579,
+        -1.0427133686127945
+      ],
+      "DC_RMS_DN16": 1.4448743466642695,
+      "spatial_RMS_DN16": 3.09519395156184,
+      "total_RMS_DN16": 3.4158289587497643
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        0.6354220109869857,
+        2.17598157764769,
+        -1.050621530817989
+      ],
+      "DC_RMS_DN16": 1.4425050617273654,
+      "spatial_RMS_DN16": 3.0951670403247205,
+      "total_RMS_DN16": 3.414803048584437
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        3.502480455119712,
+        0.12315041977235523,
+        -2.010083950797116
+      ],
+      "DC_RMS_DN16": 2.3325931816784107,
+      "spatial_RMS_DN16": 5.645943274548607,
+      "total_RMS_DN16": 6.10881874101968
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        5.092297308862021,
+        -3.493079104310527,
+        3.1682121631688007
+      ],
+      "DC_RMS_DN16": 4.0071045998187165,
+      "spatial_RMS_DN16": 5.622482980023142,
+      "total_RMS_DN16": 6.9042886769411815
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        5.277880474149083,
+        -2.6670495667989598,
+        2.578217943080381
+      ],
+      "DC_RMS_DN16": 3.7245305499793435,
+      "spatial_RMS_DN16": 5.622549936571532,
+      "total_RMS_DN16": 6.74427131771624
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        3.543147491836635,
+        0.12887382792214339,
+        -1.9961048733803637
+      ],
+      "DC_RMS_DN16": 2.34910885784123,
+      "spatial_RMS_DN16": 5.640392873595885,
+      "total_RMS_DN16": 6.1100199831505755
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        3.501366762306179,
+        0.12420295617330339,
+        -2.005118413081982
+      ],
+      "DC_RMS_DN16": 2.3306290587868514,
+      "spatial_RMS_DN16": 5.640347935433378,
+      "total_RMS_DN16": 6.102897397335895
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-BGGR",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        7.530976779790285,
+        0.7656264648815523,
+        1.5048056592865577
+      ],
+      "DC_RMS_DN16": 4.4559411730740015,
+      "spatial_RMS_DN16": 6.27267549496942,
+      "total_RMS_DN16": 7.694275118754589
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        8.594896449025555,
+        -2.6647170950182955,
+        6.897572166596729
+      ],
+      "DC_RMS_DN16": 6.54597749154305,
+      "spatial_RMS_DN16": 6.24459697141555,
+      "total_RMS_DN16": 9.046812292470785
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        8.932803278414394,
+        -1.9368018419243527,
+        6.184511691978469
+      ],
+      "DC_RMS_DN16": 6.371665419494626,
+      "spatial_RMS_DN16": 6.243979902235462,
+      "total_RMS_DN16": 8.921065252395813
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        7.569581796377361,
+        0.765276439561967,
+        1.5252056766384157
+      ],
+      "DC_RMS_DN16": 4.479972803378989,
+      "spatial_RMS_DN16": 6.266021114127391,
+      "total_RMS_DN16": 7.702803185964552
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        7.528978287109612,
+        0.7639003371315993,
+        1.5101986016785305
+      ],
+      "DC_RMS_DN16": 4.4553248137986365,
+      "spatial_RMS_DN16": 6.265982163699532,
+      "total_RMS_DN16": 7.688462243664238
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GRBG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.1422157635273151,
+        -0.348124606534293,
+        -1.05769618723657
+      ],
+      "DC_RMS_DN16": 0.9209720981332209,
+      "spatial_RMS_DN16": 4.9935882893342045,
+      "total_RMS_DN16": 5.077805983780358
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        2.6740217992647786,
+        -3.8046414957591876,
+        3.868714874021998
+      ],
+      "DC_RMS_DN16": 3.492498831814407,
+      "spatial_RMS_DN16": 4.973750893612317,
+      "total_RMS_DN16": 6.0774785924702615
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        2.9060529177845185,
+        -3.070204051480869,
+        3.358890792181273
+      ],
+      "DC_RMS_DN16": 3.1173409519703164,
+      "spatial_RMS_DN16": 4.978311512447506,
+      "total_RMS_DN16": 5.873789247649133
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.1823585996973407,
+        -0.3442843140286641,
+        -1.0409746793756312
+      ],
+      "DC_RMS_DN16": 0.9309729373556179,
+      "spatial_RMS_DN16": 4.988405234975018,
+      "total_RMS_DN16": 5.074534205068946
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.1423157231636423,
+        -0.3478518872593668,
+        -1.054343458053836
+      ],
+      "DC_RMS_DN16": 0.9196967388579237,
+      "spatial_RMS_DN16": 4.9887364059949535,
+      "total_RMS_DN16": 5.072803270378751
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GBRG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.2525107069233854,
+        0.09546059976300966,
+        0.2731287579519176
+      ],
+      "DC_RMS_DN16": 0.7421803723905193,
+      "spatial_RMS_DN16": 5.11796774945279,
+      "total_RMS_DN16": 5.171501289722414
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        2.483063029120262,
+        -3.0722860039938498,
+        4.883607103675876
+      ],
+      "DC_RMS_DN16": 3.6264841394015903,
+      "spatial_RMS_DN16": 5.106622805715184,
+      "total_RMS_DN16": 6.263304534603255
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        2.7126122081684114,
+        -2.387537180254185,
+        4.3278128214485605
+      ],
+      "DC_RMS_DN16": 3.2551785714711547,
+      "spatial_RMS_DN16": 5.106696246438327,
+      "total_RMS_DN16": 6.05595030408542
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.2918483440147384,
+        0.09456663552355167,
+        0.29200352763868975
+      ],
+      "DC_RMS_DN16": 0.7666118210762004,
+      "spatial_RMS_DN16": 5.1114757027785425,
+      "total_RMS_DN16": 5.168643685175943
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "slanted-step",
+      "bias_RGB_DN16": [
+        1.2515779582353617,
+        0.09436411872011377,
+        0.27829105951796007
+      ],
+      "DC_RMS_DN16": 0.7422483605573114,
+      "spatial_RMS_DN16": 5.111468315025696,
+      "total_RMS_DN16": 5.165078989159957
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        1.2744999485036488,
+        -1.912552468722879,
+        -1.7225625322617817
+      ],
+      "DC_RMS_DN16": 1.6582549805851035,
+      "spatial_RMS_DN16": 3.114153565948836,
+      "total_RMS_DN16": 3.528138604554411
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        2.0260879602174553,
+        -3.644196298808583,
+        0.6473498496955472
+      ],
+      "DC_RMS_DN16": 2.436134979476654,
+      "spatial_RMS_DN16": 3.0792424714077673,
+      "total_RMS_DN16": 3.926383556907187
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        2.091536422580816,
+        -3.2466119238534703,
+        0.39009064288566153
+      ],
+      "DC_RMS_DN16": 2.241070004912582,
+      "spatial_RMS_DN16": 3.073493487926172,
+      "total_RMS_DN16": 3.8037819321358937
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        1.2962503519562687,
+        -1.9080123198862566,
+        -1.7141711011828193
+      ],
+      "DC_RMS_DN16": 1.6592326089606209,
+      "spatial_RMS_DN16": 3.108042211836703,
+      "total_RMS_DN16": 3.5232058187390995
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        1.2746744774791297,
+        -1.910077421231199,
+        -1.7185001544503848
+      ],
+      "DC_RMS_DN16": 1.6559421849287608,
+      "spatial_RMS_DN16": 3.1076880139072216,
+      "total_RMS_DN16": 3.5213448157783764
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-BGGR",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.3009505463587174,
+        1.5981332237513015,
+        -0.5134649563411131
+      ],
+      "DC_RMS_DN16": 1.2261251141052931,
+      "spatial_RMS_DN16": 3.418511188819195,
+      "total_RMS_DN16": 3.6317491025016784
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -0.770333089334963,
+        -0.09449818897810473,
+        1.9590362262173584
+      ],
+      "DC_RMS_DN16": 1.216575235634366,
+      "spatial_RMS_DN16": 3.390497874222043,
+      "total_RMS_DN16": 3.602156456771833
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -0.6289593716826403,
+        0.25108478673182616,
+        1.6433827267648211
+      ],
+      "DC_RMS_DN16": 1.0262131435500403,
+      "spatial_RMS_DN16": 3.386340530918197,
+      "total_RMS_DN16": 3.5384199308920627
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.2809262182047632,
+        1.6002372737531005,
+        -0.5029287259746524
+      ],
+      "DC_RMS_DN16": 1.2185330815101136,
+      "spatial_RMS_DN16": 3.4128756685305626,
+      "total_RMS_DN16": 3.623885097458592
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.3013805047575944,
+        1.5988960979195326,
+        -0.5098981674955667
+      ],
+      "DC_RMS_DN16": 1.2261125684211294,
+      "spatial_RMS_DN16": 3.412640325265415,
+      "total_RMS_DN16": 3.6262192460009772
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GRBG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        3.5177545789531677,
+        0.8781711557360723,
+        2.74462126292201
+      ],
+      "DC_RMS_DN16": 2.6254350581314085,
+      "spatial_RMS_DN16": 3.1486431809476576,
+      "total_RMS_DN16": 4.099617436468145
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        4.25415411680508,
+        -0.8143352059725657,
+        5.014484917656955
+      ],
+      "DC_RMS_DN16": 3.8256166416507322,
+      "spatial_RMS_DN16": 3.1201028886176796,
+      "total_RMS_DN16": 4.9366369852801
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        4.341738934092087,
+        -0.45530053146394495,
+        4.794565789844318
+      ],
+      "DC_RMS_DN16": 3.743699447467612,
+      "spatial_RMS_DN16": 3.11523390477797,
+      "total_RMS_DN16": 4.870314962550933
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        3.5376799932183305,
+        0.8813975691067754,
+        2.7537217638773654
+      ],
+      "DC_RMS_DN16": 2.637866875722153,
+      "spatial_RMS_DN16": 3.1431018568064584,
+      "total_RMS_DN16": 4.103343872537659
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        3.518127099318485,
+        0.8791030780183064,
+        2.7473486005083485
+      ],
+      "DC_RMS_DN16": 2.6266559755359125,
+      "spatial_RMS_DN16": 3.143214025149579,
+      "total_RMS_DN16": 4.0962319296782415
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GBRG",
+      "method": "parent",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        1.4045439002677766,
+        1.3488108229136742,
+        -1.8919919695058525
+      ],
+      "DC_RMS_DN16": 1.5675530630532752,
+      "spatial_RMS_DN16": 3.32747206854454,
+      "total_RMS_DN16": 3.678218722755865
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        1.9781908455739086,
+        -0.21788348680593117,
+        0.2582962992869852
+      ],
+      "DC_RMS_DN16": 1.158652840379792,
+      "spatial_RMS_DN16": 3.2990602738070853,
+      "total_RMS_DN16": 3.496609085204155
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        2.0717711987185568,
+        0.11769577559362006,
+        0.006563878632869091
+      ],
+      "DC_RMS_DN16": 1.1980722404394788,
+      "spatial_RMS_DN16": 3.293896045291946,
+      "total_RMS_DN16": 3.505014728999236
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        1.4245701849143415,
+        1.3500753376149988,
+        -1.8824348151286814
+      ],
+      "DC_RMS_DN16": 1.5701023811832238,
+      "spatial_RMS_DN16": 3.3221242617123714,
+      "total_RMS_DN16": 3.674470179176203
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso6400-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        1.4041304553817782,
+        1.3492541996034562,
+        -1.8888314367397925
+      ],
+      "DC_RMS_DN16": 1.5662857792981364,
+      "spatial_RMS_DN16": 3.322186619142869,
+      "total_RMS_DN16": 3.6728973678614407
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        6.314492025397726,
+        -0.4147232907544094,
+        4.736972633987762
+      ],
+      "DC_RMS_DN16": 4.563759951394413,
+      "spatial_RMS_DN16": 5.2440539032784494,
+      "total_RMS_DN16": 6.951834738717648
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        6.818782459202657,
+        -2.4948907076259275,
+        7.790217760433097
+      ],
+      "DC_RMS_DN16": 6.148380996216139,
+      "spatial_RMS_DN16": 5.196144889406523,
+      "total_RMS_DN16": 8.050000657536449
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        6.968852056363289,
+        -2.0347665746097845,
+        7.495090067247429
+      ],
+      "DC_RMS_DN16": 6.024437708555026,
+      "spatial_RMS_DN16": 5.199294263972013,
+      "total_RMS_DN16": 7.957795583428365
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        6.346787812860453,
+        -0.4091511711896601,
+        4.749976408331667
+      ],
+      "DC_RMS_DN16": 4.582990148439017,
+      "spatial_RMS_DN16": 5.23789034959603,
+      "total_RMS_DN16": 6.959834338192275
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        6.3137082297223746,
+        -0.413321486001314,
+        4.741374185662698
+      ],
+      "DC_RMS_DN16": 4.5648795321571916,
+      "spatial_RMS_DN16": 5.237699788897342,
+      "total_RMS_DN16": 6.947778365903948
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-BGGR",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -0.5297546434844662,
+        -0.4851026649369487,
+        4.673312443122813
+      ],
+      "DC_RMS_DN16": 2.729823789726412,
+      "spatial_RMS_DN16": 5.803002223700595,
+      "total_RMS_DN16": 6.413015884217839
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-BGGR",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -0.3356040065922343,
+        -2.449899681574789,
+        7.825111202059088
+      ],
+      "DC_RMS_DN16": 4.738037702945937,
+      "spatial_RMS_DN16": 5.75784467146563,
+      "total_RMS_DN16": 7.456659877938805
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-BGGR",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -0.06546650441403017,
+        -2.076540963494881,
+        7.445108621901864
+      ],
+      "DC_RMS_DN16": 4.46265805054155,
+      "spatial_RMS_DN16": 5.758826939797216,
+      "total_RMS_DN16": 7.28556137841124
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-BGGR",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -0.4998430394070965,
+        -0.48315941508426474,
+        4.689556907124097
+      ],
+      "DC_RMS_DN16": 2.7371049224550883,
+      "spatial_RMS_DN16": 5.795947968365914,
+      "total_RMS_DN16": 6.409739168525724
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-BGGR",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -0.5312472080373482,
+        -0.4860838747399612,
+        4.677157490814443
+      ],
+      "DC_RMS_DN16": 2.7321727204559716,
+      "spatial_RMS_DN16": 5.795935328440898,
+      "total_RMS_DN16": 6.407623124519191
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GRBG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.8914786073021788,
+        -1.8896622681068038,
+        2.3174204910577374
+      ],
+      "DC_RMS_DN16": 2.0427883347492326,
+      "spatial_RMS_DN16": 5.464227786952604,
+      "total_RMS_DN16": 5.833589760027053
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GRBG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.3426739251750859,
+        -3.9395069641368536,
+        5.165214809467306
+      ],
+      "DC_RMS_DN16": 3.8297925277908647,
+      "spatial_RMS_DN16": 5.415512257389032,
+      "total_RMS_DN16": 6.63287899903606
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GRBG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.142950093764739,
+        -3.565336924780604,
+        4.9384367502272655
+      ],
+      "DC_RMS_DN16": 3.5779938438570147,
+      "spatial_RMS_DN16": 5.415747390628096,
+      "total_RMS_DN16": 6.490944441741412
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GRBG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.859877731444567,
+        -1.8855338940595174,
+        2.3307046115705363
+      ],
+      "DC_RMS_DN16": 2.0368740124650815,
+      "spatial_RMS_DN16": 5.4590032503287516,
+      "total_RMS_DN16": 5.826626144670299
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GRBG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        -1.8909912362013301,
+        -1.889644977063199,
+        2.319575013502572
+      ],
+      "DC_RMS_DN16": 2.0434475964242282,
+      "spatial_RMS_DN16": 5.459382699550536,
+      "total_RMS_DN16": 5.829282763726912
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GBRG",
+      "method": "parent",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        4.33688166417794,
+        1.8248395868502485,
+        5.943487375617906
+      ],
+      "DC_RMS_DN16": 4.376590159433408,
+      "spatial_RMS_DN16": 4.751649008302909,
+      "total_RMS_DN16": 6.460085891205733
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GBRG",
+      "method": "dc-control-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        4.621894483384949,
+        -0.016349712277042273,
+        8.661833228281603
+      ],
+      "DC_RMS_DN16": 5.668319292441663,
+      "spatial_RMS_DN16": 4.713029370400489,
+      "total_RMS_DN16": 7.371735850349222
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GBRG",
+      "method": "dc-control-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        4.8292580578370465,
+        0.3370117845336608,
+        8.371612059748804
+      ],
+      "DC_RMS_DN16": 5.583284541409601,
+      "spatial_RMS_DN16": 4.713490120978061,
+      "total_RMS_DN16": 7.306849895194316
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GBRG",
+      "method": "dc-regret-raw-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        4.366776302350081,
+        1.8250972239959993,
+        5.958716860723916
+      ],
+      "DC_RMS_DN16": 4.39340497329348,
+      "spatial_RMS_DN16": 4.745477236409702,
+      "total_RMS_DN16": 6.4669592128482245
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-GBRG",
+      "method": "dc-regret-EMA-step1000",
+      "prior": "iso12800-prior",
+      "template": "striped-patch",
+      "bias_RGB_DN16": [
+        4.335619517831037,
+        1.8238912008242552,
+        5.946949539642764
+      ],
+      "DC_RMS_DN16": 4.377609109354058,
+      "spatial_RMS_DN16": 4.7455357510127225,
+      "total_RMS_DN16": 6.456281521002589
+    }
+  ],
+  "groups": [
+    {
+      "prior": "iso6400-prior",
+      "method": "parent",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.0160741013398242,
+      "mean_spatial_RMS_DN16": 3.268502157525779,
+      "mean_total_RMS_DN16": 3.8988453105133827
+    },
+    {
+      "prior": "iso6400-prior",
+      "method": "dc-control-raw-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.9253427630395255,
+      "mean_spatial_RMS_DN16": 3.2380948471833624,
+      "mean_total_RMS_DN16": 4.48298815037534
+    },
+    {
+      "prior": "iso6400-prior",
+      "method": "dc-control-EMA-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.766652583765959,
+      "mean_spatial_RMS_DN16": 3.23291774862856,
+      "mean_total_RMS_DN16": 4.365051755986599
+    },
+    {
+      "prior": "iso6400-prior",
+      "method": "dc-regret-raw-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.018669413175835,
+      "mean_spatial_RMS_DN16": 3.262997516758232,
+      "mean_total_RMS_DN16": 3.895647983747431
+    },
+    {
+      "prior": "iso6400-prior",
+      "method": "dc-regret-EMA-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.016258432945966,
+      "mean_spatial_RMS_DN16": 3.2628811955931707,
+      "mean_total_RMS_DN16": 3.894207448246453
+    },
+    {
+      "prior": "iso12800-prior",
+      "method": "parent",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.849060215896044,
+      "mean_spatial_RMS_DN16": 5.341832570254452,
+      "mean_total_RMS_DN16": 6.152651609827673
+    },
+    {
+      "prior": "iso12800-prior",
+      "method": "dc-control-raw-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 4.229166017188696,
+      "mean_spatial_RMS_DN16": 5.300686487744653,
+      "mean_total_RMS_DN16": 6.898678530704174
+    },
+    {
+      "prior": "iso12800-prior",
+      "method": "dc-control-EMA-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 4.037120210993509,
+      "mean_spatial_RMS_DN16": 5.3016770520770455,
+      "mean_total_RMS_DN16": 6.783631187409096
+    },
+    {
+      "prior": "iso12800-prior",
+      "method": "dc-regret-raw-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.857871332753356,
+      "mean_spatial_RMS_DN16": 5.335244011305283,
+      "mean_total_RMS_DN16": 6.151545942090186
+    },
+    {
+      "prior": "iso12800-prior",
+      "method": "dc-regret-EMA-step1000",
+      "cases": 16,
+      "mean_DC_RMS_DN16": 2.849289624752435,
+      "mean_spatial_RMS_DN16": 5.3352954007148,
+      "mean_total_RMS_DN16": 6.147099189572722
+    }
+  ],
+  "scalar_checks": 480,
+  "per_case_energy_identities": 160,
+  "maximum_scalar_difference": 2.6645352591003757e-15,
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Native exact quiet ROIs,160 method/case outputs. Bias averaged per camera-RGB channel before Euclidean RMS. Total squared=spatial squared+DC squared verified per case;group mean RMS values do not obey that identity. Mean DC identifies observed bias cost,not an isolated cause such as global context or path gradients."
+}
