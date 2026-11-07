@@ -6,6 +6,11 @@ regional-DC gradients near the parent while retaining weight1. 60 tests,
 pass. Both1k heads/full review are running/queued; quality remains unmeasured.
 Native comparisons retain V156 detail and V157 coarse controls.
 
+The separate [coupled sensor-noise primitive](coupled-counterfactual-noise.md)
+prepares matched synthetic targets for a possible later response loss. Sixteen
+tests and retained physical-moment fixtures pass; no model training or quality
+gain is claimed.
+
 The [completed V158 regional-DC trial](regional-dc-regret.md) removes V157's large
 quiet-region color-bias increase. EMA quiet RMS falls 0.09–0.12% versus V143 on
 all 32 inputs, and averages 0.13–0.17% below V156 EMA. Nearly all of V157's coarse

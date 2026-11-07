@@ -1,0 +1,42 @@
+{
+  "status": "pass-source-fixture-moment-ADC-and-document-bindings",
+  "recorded_unix_UTC": 1794047099.7754412,
+  "audit": {
+    "path": "/home/dllu/proj/demosaic/docs/results/coupled-counterfactual-noise-v1.json",
+    "sha256": "be554c694ea3f4113b2b0628835b5c3df2bbd3869b68205afc54d06b8b94efa5"
+  },
+  "source_pairs": 3,
+  "retained_pair_fixtures": 4,
+  "actual_CPU_tests": 16,
+  "pre_ADC_scalar_checks": 24,
+  "maximum_scalar_difference": 2.168404344971009e-19,
+  "exact_ADC_values_checked": 2097152,
+  "document_links_checked": 207,
+  "documents": {
+    "docs/coupled-counterfactual-noise.md": {
+      "path": "/home/dllu/proj/demosaic/docs/coupled-counterfactual-noise.md",
+      "sha256": "99655a33a67a137aed195006dced8996b70f63accdd2884753ff31f5e74f2cd8"
+    },
+    "diary/2026-11-07-02-22-11-coupled-counterfactual-noise.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-02-22-11-coupled-counterfactual-noise.md",
+      "sha256": "efa7a5674176069d7909a3963d5b7f63d4c4ce2c9711a6a9612fe71fbd4206a0"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "03d22b8bf687eb393c2eb1064cf6bedc11fd20ae45bebfcff7a822a6037c2e4b"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "623637297a956aedbe86abedc4fc372fb5f52da36452c8b244a38d94ca3ac334"
+    }
+  },
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-coupled-counterfactual-noise-v1.py",
+    "sha256": "375530e501a3473756fe64eed0d08fd7d3a9e74d47d637063c8ec4dc5e21f0e7",
+    "text": "\"\"\"Check retained paired sensor fixtures,source bytes and human documentation.\"\"\"\n\nimport re\nimport time\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/coupled-counterfactual-noise-v1'\nsource=root/'audit-v1.json';public=repo/'docs/results/coupled-counterfactual-noise-v1.json'\nassert source.read_bytes()==public.read_bytes();data=read(source)\nassert data['status']=='pass-independent-physical-moments-and-coupled-data-construction'\nassert data['actual_CPU_tests']==16 and data['new_neural_forwards']==data['model_updates']==0\nassert data['Poisson_sampler_calls_excluding_tests']==12 and data['Gaussian_sampler_calls_excluding_tests']==4\nfor item in data['source_bindings']:\n    assert ref(item['original']['path'])==item['original']\n    assert ref(item['frozen']['path'])['sha256']==item['frozen']['sha256']\n    assert Path(item['original']['path']).read_bytes()==Path(item['frozen']['path']).read_bytes()\n    assert Path(item['frozen']['path']).read_text()==item['frozen']['text']\nassert ref(data['audit']['path'])['sha256']==data['audit']['sha256'] and Path(data['audit']['path']).read_text()==data['audit']['text']\nchannels=scalars=0;maximum=0.\nfor row in data['rows']:\n    assert ref(row['fixture']['path'])==row['fixture']\n    arrays=dict(np.load(row['fixture']['path']));assert len(arrays)==4\n    assert all(v.dtype==np.float32 and v.shape==(262144,) and np.isfinite(v).all() for v in arrays.values())\n    x,y=arrays['pre_ADC_a'].astype(np.float64),arrays['pre_ADC_b'].astype(np.float64)\n    actual={'means':[float(np.mean(x)),float(np.mean(y))],'variances':[float(np.var(x)),float(np.var(y))],\n        'covariance':float(np.cov(x,y,bias=True)[0,1]),'difference_variance':float(np.var(y-x))}\n    for key,values in actual.items():\n        values=values if isinstance(values,list) else [values]\n        previous=row['observed_pre_ADC'][key];previous=previous if isinstance(previous,list) else [previous]\n        for a,b in zip(values,previous,strict=True):\n            difference=abs(a-b);maximum=max(maximum,difference);assert difference<1e-15;scalars+=1\n    for member in ['a','b']:\n        before=arrays['pre_ADC_'+member]\n        expected=(np.clip(before,0,1)*65535).round()/65535\n        np.testing.assert_array_equal(arrays['noisy_'+member],expected);channels+=len(expected)\nassert channels==2097152 and scalars==24\ndocs=['docs/coupled-counterfactual-noise.md','diary/2026-11-07-02-22-11-coupled-counterfactual-noise.md',\n      'docs/index.md','docs/research.md'];links=0\noutput=repo/'docs/results/coupled-counterfactual-noise-verification-v1.json';assert not output.exists()\nfor name in docs:\n    p=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        target=(p.parent/link.split('#')[0]).resolve();assert target==output or target.is_file(),(name,link);links+=1\nsave(output,{'status':'pass-source-fixture-moment-ADC-and-document-bindings','recorded_unix_UTC':time.time(),\n    'audit':ref(public),'source_pairs':3,'retained_pair_fixtures':4,'actual_CPU_tests':16,\n    'pre_ADC_scalar_checks':scalars,'maximum_scalar_difference':maximum,'exact_ADC_values_checked':channels,\n    'document_links_checked':links,'documents':{p:ref(repo/p) for p in docs},\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_neural_forwards':0,'new_noise_draws':0,'model_updates':0,\n    'scope':'No sampling in this verifier. Reloads all original paired fixture bytes,reduces saved pre-ADC means/variances/covariance/difference variance and checks every saved16-bit ADC value. Source/test/sensor text bytes preserved. Separate synthetic construction evidence,not model quality or part of V159.'})\nprint('PASS3 source pairs,4 fixtures,24 moments,2097152 exact ADC values,',links,'links')\n"
+  },
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0,
+  "model_updates": 0,
+  "scope": "No sampling in this verifier. Reloads all original paired fixture bytes,reduces saved pre-ADC means/variances/covariance/difference variance and checks every saved16-bit ADC value. Source/test/sensor text bytes preserved. Separate synthetic construction evidence,not model quality or part of V159."
+}
