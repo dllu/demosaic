@@ -1,0 +1,28 @@
+{
+  "status": "fixed-before-trained-quality",
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/finish-v166-execution-v1.py",
+      "sha256": "7f20fb6d1b3a9ca9997eedeae08de699a32c4303e814666dcd155d194cdd5135"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/publish-v166-final-v1.py",
+      "sha256": "96a8226e8c1711056f57ae656cc01d5efa8b91e4e0bd25b43885b3521adfc65c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/build-v166-final-report-v1.py",
+      "sha256": "c14947c11dd4e539d860b5f71cca972844b8b85579c26891b86b934766a40c09"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/verify-v166-publication-v1.py",
+      "sha256": "40322acb7c27f75993974d32665cde49bceb822ba3884e585bd093493064beba"
+    }
+  ],
+  "preparer": {
+    "path": "/home/dllu/proj/demosaic/.cache/freeze-v166-publication-v1.py",
+    "sha256": "02427d6051bb500b2866de601e017791f19b3c02465d97a1d95c7d4e0d9a24de",
+    "text": "\"\"\"Bind publication helpers once after inspection and before final quality.\"\"\"\nimport ast\nfrom pathlib import Path\nfrom train_directional_bank_trial import read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V166-common-support-routing-v2'\nassert not (root/'train-result-v1.json').exists() and not (root/'scores-v1.json').exists()\npaths=[repo/'.cache'/p for p in ['finish-v166-execution-v1.py','publish-v166-final-v1.py','build-v166-final-report-v1.py','verify-v166-publication-v1.py']]\nfor p in paths:ast.parse(p.read_text())\nreceipt=root/'publication-helper-preparation-v1.json';assert not receipt.exists()\nsave(receipt,{'status':'fixed-before-trained-quality','sources':[ref(p) for p in paths],\n 'preparer':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forwards':0,'new_noise_draws':0})\nallpaths=[Path(v['path']) for v in read(root/'final-helper-preparation-v1.json')['sources']]+paths\nassert len(allpaths)==15\noutput=repo/'docs/results/v166-publication-layout-preparation-v1.json';assert not output.exists()\nsave(output,{'status':'fixed-before-trained-quality','publication_preparation':ref(receipt),\n 'source_texts':[dict(ref(p),text=p.read_text()) for p in allpaths],\n 'preparer':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'expected_root_calls':5371,\n 'expected_head_images':11452,'expected_owners':15,'expected_rounded_cells':273,'expected_objective_count_cells':60,\n 'expected_unit_count_cells':6,'expected_retained_versions':11,'expected_retained_paired_entries':39424,'expected_retained_mean_cells':3256,\n 'new_forwards':0,'new_noise_draws':0,'actual_native_viewing_required':True})\nprint('Frozen15 final source bodies;5371 roots/11452 images planned including failed prefix')\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0
+}

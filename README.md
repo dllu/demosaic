@@ -7,8 +7,7 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
-[V166 support-gradient routing](docs/common-support-routing.md) is in training:
-238 CPU checks and corrected smoke pass; quality comparisons are pending.
+The completed [V166 common-support routing trial](docs/common-support-routing.md) reduces quiet RMS **6.10–15.27%** and DC color bias **17.52–31.30% versus V165**, visibly reducing the representative magenta casts. Mesh response stays near the parent and real fine crossings remain incomplete; all256 present-mesh mean supports remain below1e-4. Full-flat means worsen0.199–0.312%,coarse means0.216–0.376%,with all48 coarse inputs worse versus V165. Quiet means remain2.40–6.34% above V143. Retain this quiet-color gain beside V165 flat/grain,V161/V164 detail,V157 coarse and V158 quiet strengths. Both1k heads/four endpoints/822cases/72actual native figures are complete;238 CPU checks,94 final Adam states,exact V165 controls and independent audits pass. Original smoke failure and three discarded calls are preserved;no full-training restart.
 
 | Useful choice | Measured strength | Remaining limits |
 | --- | --- | --- |
@@ -35,6 +34,7 @@ cost remains unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V166 common-support routing](docs/common-support-routing.md) | Quiet RMS −6.10–15.27% and color bias −17.52–31.30% versus V165 | Gate still nearly closes; mesh near parent; full-flat/coarse means +0.20–0.38% |
 | [V165 pair-common targets](docs/pair-common-error.md) | Full-flat RMS −1.35–1.91% and quiet spatial RMS −6.22–8.69% versus V164 | Mesh response halves to parent level; quiet color bias +7.67–28.07%, persistent casts |
 | [V164 smaller pair units](docs/pair-unit-floor.md) | Mesh response +8.35–12.32% versus V163; all48 coarse flat errors improve, means −0.28–0.52% | Total-flat RMS +0.27–0.39%; quiet means +0.20–9.85%; incomplete real crossings |
 | [V163 phase inputs](docs/harmonic-phase-inputs.md) | Quiet DC bias falls 2.60–3.96%; total quiet RMS falls 0.62–1.19% versus V162 | Spatial error rises slightly; mesh response falls 0.52–0.59%; all 48 coarse-flat errors worsen |
@@ -55,7 +55,7 @@ The [matched V155 parent comparison](docs/matched-parent-comparison.md) retains
 V120's lower coarse noisy-flat error but higher total error and worse ADC slopes.
 [Complete architecture/loss strengths and failures](docs/current-model.md#quality-and-remaining-work).
 
-Keep V165's grain/total-flat gain, V164's response/coarse gain, V161's stronger
+Keep V166's quiet-color gain, V165's grain/total-flat gain, V164's response/coarse gain, V161's stronger
 learned response, V163's small bias gain, V158 quiet accuracy and V157's coarse
 capacity visible; no model combines their strengths.
 
@@ -107,18 +107,19 @@ common exposure 8 and contrast 1; crop pixels are never resized.
 
 ![Mesh2309: noisy, V161 harmonic-context EMA, exact constructed GT](docs/images/v161-harmonic-context-v1/comparison-02-harmonic-context-EMA-step1000-triplet.png)
 
-Noisy → **V163 phase-input EMA** → exact constructed GT, ISO6400 and ISO12800
-quiet fields. Mean quiet RMS falls 1.17–1.19% versus V162 EMA through lower
-color bias; spatial RMS rises 0.025–0.042% and broad mottle persists. Mesh response
-falls another 0.59%. Native 160×160 cells in 512px RGGB contexts, quiet ROI
-`[80,176,160,160]`, common exposure 8 and 40× camera-linear contrast about
-`[.001500000013,.006000000052,.002666666871]`. Shot/read variance is
+Noisy → **V166 routed-common EMA** → exact constructed GT, ISO6400 and ISO12800
+quiet fields. Mean quiet RMS falls 6.10–6.87% and DC color bias 17.52–18.11%
+versus V165 EMA. Quiet means remain 2.40–3.22% above V143, broad mottle persists,
+and mesh response stays near the parent. Native 160×160 cells in 512px RGGB
+contexts, quiet ROI `[80,176,160,160]`, exposure 8 and 40× camera-linear contrast
+about `[.001500000013,.006000000052,.002666666871]`. Shot/read variance is
 .00128/6.5536e-6 or .00256/2.62144e-5; crop pixels are never resized.
-[All endpoints, checkpoint/source hashes and display metadata](docs/harmonic-phase-inputs.md).
+EMA component SHA256 `f806d7fb37dd046397fa906f4b6dc0fa8de1bd4f0b655006694e5d6e836cf254`.
+[All endpoints, source hashes and display metadata](docs/common-support-routing.md).
 
-![ISO6400 quiet field: noisy, V163 phase-input EMA, exact constructed GT](docs/images/v163-harmonic-phase-v1/comparison-26-harmonic-phase-EMA-step1000-triplet.png)
+![ISO6400 quiet field: noisy, V166 routed-common EMA, exact constructed GT](docs/images/v166-common-support-routing-v1/comparison-26-routed-common-EMA-step1000-triplet.png)
 
-![ISO12800 quiet field: noisy, V163 phase-input EMA, exact constructed GT](docs/images/v163-harmonic-phase-v1/comparison-28-harmonic-phase-EMA-step1000-triplet.png)
+![ISO12800 quiet field: noisy, V166 routed-common EMA, exact constructed GT](docs/images/v166-common-support-routing-v1/comparison-28-routed-common-EMA-step1000-triplet.png)
 
 Noisy → **V165 pair-common EMA** → exact constructed GT, native512 ISO6400/12800
 flat crops. Full RMS falls 1.45–1.91% versus V164 EMA with less fine colored

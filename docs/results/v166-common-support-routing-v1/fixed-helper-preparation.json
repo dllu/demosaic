@@ -1,0 +1,61 @@
+{
+  "status": "fixed-before-trained-quality",
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/summarize-v166-final-v1.py",
+      "sha256": "19f5101f97da89ab195218d45054f0b7a842edfdaea4958ce890997424ad8a8b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/build-v166-tables-v1.py",
+      "sha256": "eaec6292597600ae66ab29bd54081f7b8e5d285af93d426c02d4220d5a8fb7a8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/paired-v166-regions-v1.py",
+      "sha256": "d1193497b14470438f12cafc0fdbe418356fd9824389112994bbce0ca810ffc2"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quiet-dc-v166-final-v1.py",
+      "sha256": "6867b646ce47b2939214304a9bba56c47b3aed99f5661a6278f4fe9420bf6bf8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/record-v166-viewing-v1.py",
+      "sha256": "feb4519b93caecb4e015d3a882429f42de215a9a68fd602b40042b63a990e03f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/route-v166-final-v1.py",
+      "sha256": "1573ac970db7806a5487ee266d3a2b0ddb58035412d54fb9bd87ba1370212ba8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/compare-v166-retained-v1.py",
+      "sha256": "bd6f904efade994cc038b5cdbd79c45a776233c3137478cf639d7279dd24a0f4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/review-v166-effects-v1.py",
+      "sha256": "2eecab13896b80d76b9e37d7ab5b09ea678ebeb47181a5f37b1decfe9cdc9da7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v166-training-units-v1.py",
+      "sha256": "e4583d2b70c62087a75d1671043ce764e472a88304ebff12b91fd3d6419b0a51"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v166-training-objective-v1.py",
+      "sha256": "06483e7a883d405a74b71f672537c9d4046b01e008ff1af55133c37cedf6a20f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/audit-v166-archived-support-v1.py",
+      "sha256": "f65889f4f01dabdebb1cc2632a07a008c3f21586752213142000000292acd51c"
+    }
+  ],
+  "protocol_snapshot": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/protocol-document-v1.md",
+    "sha256": "1c699a2d2572cd203c31ebc037518066dd2481ee8ecde1b83ed1455ed9fdf058"
+  },
+  "scope": "All four fixed V166 endpoints;identical124909-parameter/47-tensor V165 heads/data/init/loss values/weights/optimizer/inference. Both common weight1/unit16DN16,difference floor2/weight1/epsilon.003,flat anchor.25. Only common-loss derivative holds support fixed in candidate;other losses train support normally. Surrogate adjoint,not finite-difference derivative. Exact V165 control. Historical contrasts mix interventions;adaptive related cohort,not independent scenes/significance. All cases/worst increases retained. Actual native viewing only after original-detail inspection;both protected scenes/priors/windows/JPEGs,ISO100 qualitative refs,notGT. Eight retained native columns. Failed v1 complex telemetry preserved;v2 fixes magnitude RMS.56 parity roots/20leaf checks adopted,3 discarded prefix roots/12images counted separately;no full-training restart.",
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prepare-v166-final-helpers-v1.py",
+    "sha256": "225c8022084871ce9ceb928b1fe9bfb52008a5d75ef3ec66f35e501b87f51d85",
+    "text": "\"\"\"Freeze all V166 array reductions before final training/quality exists.\"\"\"\nimport ast\nimport shutil\nfrom pathlib import Path\nfrom train_directional_bank_trial import read,ref,save\nrepo=Path('/home/dllu/proj/demosaic'); root=repo/'.cache/quality-20261107/V166-common-support-routing-v2'\nassert not (root/'train-result-v1.json').exists() and not (root/'scores-v1.json').exists()\nscope=('All four fixed V166 endpoints;identical124909-parameter/47-tensor V165 heads/data/init/loss values/weights/optimizer/inference. '\n 'Both common weight1/unit16DN16,difference floor2/weight1/epsilon.003,flat anchor.25. Only common-loss derivative holds support fixed in candidate;other losses train support normally. '\n 'Surrogate adjoint,not finite-difference derivative. Exact V165 control. Historical contrasts mix interventions;adaptive related cohort,not independent scenes/significance. '\n 'All cases/worst increases retained. Actual native viewing only after original-detail inspection;both protected scenes/priors/windows/JPEGs,ISO100 qualitative refs,notGT. Eight retained native columns. '\n 'Failed v1 complex telemetry preserved;v2 fixes magnitude RMS.56 parity roots/20leaf checks adopted,3 discarded prefix roots/12images counted separately;no full-training restart.')\ndef names(s):\n return (s.replace('V165-pair-common-v1','V166-common-support-routing-v2')\n  .replace('fine-control','common-control').replace('pair-common','routed-common')\n  .replace('Fine ctrl raw','Common ctrl raw').replace('Fine ctrl EMA','Common ctrl EMA')\n  .replace('Pair common raw','Routed common raw').replace('Pair common EMA','Routed common EMA'))\nsources=[]\nfor stem in ['summarize','build','paired','quiet-dc','record','route','compare','review']:\n old={'summarize':'summarize-v165-final-v1.py','build':'build-v165-tables-v1.py','paired':'paired-v165-regions-v1.py',\n  'quiet-dc':'quiet-dc-v165-final-v1.py','record':'record-v165-viewing-v1.py','route':'route-v165-final-v1.py',\n  'compare':'compare-v165-retained-v1.py','review':'review-v165-effects-v1.py'}[stem]\n s=names((repo/'.cache'/old).read_text())\n if stem in ['paired','record','compare','review']:\n  prefix=\"        'scope':\" if stem=='record' else \"    'scope':\"\n  a=s.index(prefix);b=s.index('\\n',a);s=s[:a]+prefix+repr(scope)+'})'+s[b:]\n if stem=='compare':\n  needle=\"    'V164':(repo/'.cache/quality-20261107/V164-pair-unit-floor-v1','fine-pair'),\";assert needle in s\n  s=s.replace(needle,needle+\"\\n    'V165':(repo/'.cache/quality-20261107/V165-pair-common-v1','pair-common'),\")\n p=repo/'.cache'/old.replace('v165','v166');assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\ns=names((repo/'.cache/audit-v165-training-units-v1.py').read_text()).replace('through V164','through V165')\np=repo/'.cache/audit-v166-training-units-v1.py';assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\ns=names((repo/'.cache/audit-v165-training-objective-v1.py').read_text())\ns=s.replace(\"if name=='common-control' or not paired:assert c['pair_common_error']==0\", \"if not paired:assert c['pair_common_error']==0\")\ns=s.replace(\"   if ADC:assert actual==c['gradient_norm']==0\", \"   assert c['common_support_detached']==bool(arm['common_detach_support'] and paired)\\n   assert 0<=c['support_mean']<=1 and np.isfinite(c['spectral_delta_RMS']) and c['spectral_delta_RMS']>=0\\n   if ADC:assert actual==c['gradient_norm']==0\")\ns=s.replace(\"'common_error':c['pair_common_error'],\", \"'common_error':c['pair_common_error'],'common_support_detached':c['common_support_detached'],\")\ns=s.replace(\"'common_supervised_batches':sum\", \"'fixed_support_batches':sum(v['common_support_detached'] for v in items),\\n  'common_supervised_batches':sum\")\ns=s.replace('Confirms actual weight0/1 and conditional routing','Confirms actual weight1 in both arms and conditional fixed-support routing')\ns=s.replace('CPU/CUDA checks and12-call retained-output diagnostic','CPU/CUDA checks and4-call/eight-parameter-adjoint retained diagnostic')\np=repo/'.cache/audit-v166-training-objective-v1.py';assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\ns=names((repo/'.cache/audit-v165-archived-support-v1.py').read_text()).replace('v165-archived-support','v166-archived-support')\ns=s.replace('Post-hoc reduction','Predeclared reduction').replace('completed-posthoc-archived','completed-predeclared-archived')\ns=s.replace('Post-hoc diagnostic after observed response loss.','Predeclared diagnostic of support and direct RGB activity. This reduction was frozen before final quality existed.')\np=repo/'.cache/audit-v166-archived-support-v1.py';assert not p.exists();ast.parse(s);p.write_text(s);sources.append(ref(p))\nassert len(sources)==11\nsnapshot=root/'protocol-document-v1.md';assert not snapshot.exists();shutil.copyfile(repo/'docs/common-support-routing.md',snapshot)\nreceipt=root/'final-helper-preparation-v1.json';assert not receipt.exists()\nsave(receipt,{'status':'fixed-before-trained-quality','sources':sources,'protocol_snapshot':ref(snapshot),\n 'scope':scope,'new_forwards':0,'new_noise_draws':0,'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\npublic=repo/'docs/results/v166-final-helper-preparation-v1.json';assert not public.exists()\nsave(public,{'status':'fixed-before-trained-quality','preparation':ref(receipt),'source_texts':[dict(v,text=Path(v['path']).read_text()) for v in sources],\n 'preparer':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forwards':0,'new_noise_draws':0,\n 'expected_actual_objective_checks':2000,'expected_unit_records':1000,'expected_unit_fingerprints':2000,'inherited_mask_records':1000,\n 'expected_current_paired_entries':3264,'expected_retained_versions':11,'expected_retained_paired_entries':39424,\n 'expected_retained_mean_cells':3256,'expected_score_table_cells':205,'actual_native_viewing_required':True,'scope':scope})\nprint('Frozen11 V166 final helpers before final quality;11 retained versions')\n"
+  }
+}
