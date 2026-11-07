@@ -1,0 +1,89 @@
+{
+  "recorded_unix_UTC": 1794062641.6336925,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/plan-v1.json",
+      "sha256": "17395c799c475273892c3a49d076c8fbb26164a0b7b622b8916d6b497b29c308"
+    },
+    "owner": {
+      "pid": 3681304,
+      "created": 1794062487.34
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/parity-result-v1.json",
+        "sha256": "95919f920d0b4bbab0df91aeddcbe4ac3bb3c0b114241bdf86e1a5d9334923b1"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/smoke-result-v1.json",
+        "sha256": "2e1eb88577137756110fe40f74676439a700889ea05c940ba71b8b8d21059114"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3681402,
+      "created": 1794062521.42
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3681305,
+      "created": 1794062487.36
+    },
+    "completed": {}
+  },
+  "progress": {
+    "step": 80,
+    "counts": {
+      "anchor-control": 80,
+      "harmonic-phase": 80
+    },
+    "updates": {
+      "anchor-control": 80,
+      "harmonic-phase": 80
+    }
+  },
+  "observed_live_owners": [
+    {
+      "role": "training-controller",
+      "pid": 3681304,
+      "created": 1794062487.34,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/work/scripts/train_harmonic_phase_trial.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/plan-v1.json"
+      ],
+      "status": "sleeping"
+    },
+    {
+      "role": "train-worker",
+      "pid": 3681402,
+      "created": 1794062521.42,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/work/scripts/train_harmonic_phase_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V163-harmonic-phase-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ],
+      "status": "running"
+    },
+    {
+      "role": "review-controller",
+      "pid": 3681305,
+      "created": 1794062487.36,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/queue-v163-review-v1.py"
+      ],
+      "status": "sleeping"
+    }
+  ],
+  "scope": "Historical actual live snapshot,not final quality/counts. Original workers continue once."
+}

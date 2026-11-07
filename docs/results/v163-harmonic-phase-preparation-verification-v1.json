@@ -1,0 +1,58 @@
+{
+  "status": "pass-immutable-readiness-and-fixed-comparators",
+  "recorded_unix_UTC": 1794062707.1897042,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v163-harmonic-phase-preparation-v1.json",
+    "sha256": "9eb27d5356a4088315d5d2ca40d86a8e3228666ce761bdeb9fb46c729c39c7df"
+  },
+  "byte_exact_receipts": 15,
+  "source_texts": 51,
+  "unchanged_neural_hashes": 88,
+  "new_neural_modules": 1,
+  "actual_CPU_tests": 180,
+  "restored_smoke_finite_Adam_states": 93,
+  "exact_V162_control_prefix_rows": 40,
+  "retained_prediction_arrays_checked": 5754,
+  "planned_total_scientific_head_calls": 5412,
+  "additional_leaf_output_CUDA_backwards": 10,
+  "separate_CPU_frequency_gain_calls_including_failed_serializer": 4,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "ed234ece067a71c29f22e028e109e588cdd5b8d77c9ce83f1210ba344984ad2a"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "6d891ada3281bdd3b8d630c83f2bab876a5d208a960ffc4a75846d31f62f5204"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "e4221d6bc07134b354ce3e663d6d2c058090d423ecdd6aa2c279ac5fa46caa66"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "484241cea7ff1f1359e76759a15672c0af59df8bc6314dff64689b64837a7a0e"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "7e726328c3145d26a09beeba222f91f924799295acdfa1a189af33f726dabd9f"
+    },
+    "docs/harmonic-phase-inputs.md": {
+      "path": "/home/dllu/proj/demosaic/docs/harmonic-phase-inputs.md",
+      "sha256": "fef1c067a595f3946f922f6e8c42de3aef3ea1f1c7c100314362fae344347501"
+    },
+    "diary/2026-11-07-06-41-03-v163-harmonic-phase.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-06-41-03-v163-harmonic-phase.md",
+      "sha256": "ddca6e56dc43675b0a909ba33ed7bec228d7796430539825f92fa57d0ffcee86"
+    }
+  },
+  "document_links_checked": 500,
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v163-preparation-v1.py",
+    "sha256": "11e82d5175e0afcf6fa82e690fea88e64eb1d17e70c519de6a6f94c2f050292d",
+    "text": "\"\"\"Check byte-exact V163 readiness, source bindings and retained arrays.\"\"\"\nimport json\nimport re\nimport time\nfrom pathlib import Path\nfrom train_directional_bank_trial import guard,read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V163-harmonic-phase-v1'\nindex=repo/'docs/results/v163-harmonic-phase-preparation-v1.json'\noutput=repo/'docs/results/v163-harmonic-phase-preparation-verification-v1.json';assert not output.exists()\np=read(index);assert len(p['copies'])==15 and p['source_texts']==51\nfor item in p['copies'].values():\n    assert ref(item['original']['path'])==item['original'] and ref(item['public']['path'])==item['public']\n    assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan);post=read(root/'postprocess-plan-v1.json');guard(post)\nbundle=read(p['sources']['path']);assert ref(p['sources']['path'])==p['sources']\nassert len(bundle['source_texts'])==51 and len(bundle['unchanged_neural_hashes'])==88\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nfor path,h in bundle['unchanged_neural_hashes'].items():\n    assert ref(path)['sha256']==ref(repo/'src/demosaic'/Path(path).name)['sha256']==h\nassert len(list((Path(plan['work'])/'src/demosaic').glob('*.py')))==89\nassert ref(repo/'src/demosaic/late_harmonic_phase.py')['sha256']==ref(Path(plan['work'])/'src/demosaic/late_harmonic_phase.py')['sha256']\nready=read(root/'readiness-audit-v1.json');assert ready['finite_Adam_states_at10']==93\nassert ready['all93_parameter_tensors_have_finite_nonzero_prefix_gradients']\nassert ready['exact_V162_control_prefix_rows']==40\nrows=[json.loads(s) for s in Path(ready['training_prefix']['path']).read_text().splitlines()]\nold=read(plan['baseline_training']['path'])['trace'];assert len(rows)==40\nfor row,before in zip(rows,old[:40],strict=True):\n    assert all(row[k]==before[k] for k in ['step','batch','domain','flat_target_mask'])\n    expected=before['arms']['flat-anchor'];assert {k:row['arms']['anchor-control'][k] for k in expected}==expected\ndesign=read(root/'quality-design-v1.json');assert len(design['observations'])==822\nassert len(design['phase_removal']['case_ids'])==12 and design['phase_removal']['new_head_calls']==48\nassert len(read(root/'parity-result-v1.json')['CUDA_anchor_loss_checks'])==10\nassert read(repo/'docs/results/v163-phase-information-witness-v2.json')['trained_frequency_gain_exact_tensor_equal']\narrays=0\nfor binding in post['retained_native_collections'].values():\n    assert ref(binding['path'])==binding\n    c=read(binding['path']);assert c['module_before']==c['module_after'] and c['RNG_unchanged']\n    for row,case in zip(c['observations'],design['observations'],strict=True):\n        assert row['id']==case['id'] and row['parent']==case['parent']\n        assert ref(row['prediction']['path'])==row['prediction'];arrays+=1\nassert arrays==5754\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n    'docs/harmonic-phase-inputs.md','diary/2026-11-07-06-41-03-v163-harmonic-phase.md']\nlinks=0\nfor name in docs:\n    path=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',path.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (path.parent/link.split('#')[0]).resolve().is_file(),(path,link);links+=1\nsave(output,{'status':'pass-immutable-readiness-and-fixed-comparators','recorded_unix_UTC':time.time(),\n    'publication':ref(index),'byte_exact_receipts':15,'source_texts':51,'unchanged_neural_hashes':88,\n    'new_neural_modules':1,'actual_CPU_tests':180,'restored_smoke_finite_Adam_states':93,\n    'exact_V162_control_prefix_rows':40,'retained_prediction_arrays_checked':arrays,\n    'planned_total_scientific_head_calls':5412,'additional_leaf_output_CUDA_backwards':10,\n    'separate_CPU_frequency_gain_calls_including_failed_serializer':4,\n    'documents':{p:ref(repo/p) for p in docs},'document_links_checked':links,\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forward_calls':0,'new_noise_draws':0,'scope':'Actual readiness and historical original-live snapshot only;final quality and native viewing remain pending.'})\nprint('PASS15 receipts,51 source texts,88 unchanged neural modules,40 exact control/mask rows,5754 retained arrays and',links,'links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Actual readiness and historical original-live snapshot only;final quality and native viewing remain pending."
+}

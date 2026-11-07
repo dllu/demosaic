@@ -314,6 +314,8 @@ The figure describes completed checkpoints with different architectures,
 initializers, data and training horizons. It shows real progress; use the linked
 matched studies when attributing a gain to a particular change.
 
+The [V163 phase-input trial](harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). All 180 CPU checks pass; original training/review is active and quality remains pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
+
 ## What the main experiment families established
 
 | Family | Main finding | Evidence |

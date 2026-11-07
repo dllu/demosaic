@@ -1,0 +1,42 @@
+{
+  "status": "primary-source-method-and-limitation-reading-not-a-reproduction",
+  "recorded_unix_UTC": 1794061915.3417137,
+  "sources": [
+    {
+      "title": "Functional Multi-Target Detection via Bispectrum Inversion",
+      "primary_url": "https://arxiv.org/html/2605.31579v1",
+      "HTML": {
+        "path": "/home/dllu/proj/demosaic/.cache/research-20261107/arxiv-2605.31579v1.html",
+        "sha256": "f4815cc6ae87d9ac31b8ca3428ca625f64899ba8117bab0abfcaefa15c340403"
+      },
+      "sections_read": [
+        "1.1-1.3",
+        "2.2.1",
+        "Appendix A/Lemma A.2"
+      ],
+      "reading_notes": "The repeated-signal recovery model uses stationary Gaussian noise and debiased third-order autocorrelation. Our proposed single-window normalized diagonal product is neither their estimator nor their inversion algorithm. Heteroscedastic Poisson/read noise and tapering prevent importing their recovery or unbiasedness guarantees."
+    },
+    {
+      "title": "Unifying Amplitude-Phase Coupling and Reliable Endogenous Priors for Low-Light Image Enhancement",
+      "primary_url": "https://arxiv.org/html/2610.24467v1",
+      "HTML": {
+        "path": "/home/dllu/proj/demosaic/.cache/research-20261107/arxiv-2610.24467v1.html",
+        "sha256": "f1753c5a86c263505de852225df13a994b7a6a929f3ae6c1b7c2c4eb2978c819"
+      },
+      "sections_read": [
+        "III overview",
+        "III-A",
+        "IV-F"
+      ],
+      "reading_notes": "Their RGB enhancement pipeline couples amplitude and trigonometric phase embeddings,then refines an intermediate-derived prior. Its reported fine-texture limitation matters here. We do not adopt APACF,ERP,code or weights;our proposed diagonal cross-frequency statistic and RAW trial are independently implemented."
+    }
+  ],
+  "new_external_code_or_weights": 0,
+  "new_neural_forwards": 0,
+  "own_proposal": "Expose real/imag coordinates of u(w)^2*conj(u(2w mod S)) for observed RAW and innovation. u=F/sqrt(sum_phase|F|^2+sum_phase noise),with existing1e-12 floor.16 features/one zero512-parameter projection. Test actual V162 control at unchanged paired+target-flat losses. Additional capacity/compute is part of comparison;single-window products are not calibrated confidence or guaranteed unbiased signal.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/read-v163-phase-research-v1.py",
+    "sha256": "54ef70095e6aa5a0521ee5e3b383eb5d711aea2fa18516aef5c50b285b8eb96a",
+    "text": "\"\"\"Preserve primary-source reading and distinguish the proposed RAW feature.\"\"\"\nimport time\nimport urllib.request\nfrom pathlib import Path\nfrom train_directional_bank_trial import ref,save\nrepo=Path('/home/dllu/proj/demosaic');dest=repo/'.cache/research-20261107';dest.mkdir(exist_ok=True)\nrecords=[]\nfor identifier,title,sections,notes in [\n ('2605.31579v1','Functional Multi-Target Detection via Bispectrum Inversion',\n  ['1.1-1.3','2.2.1','Appendix A/Lemma A.2'],\n  'The repeated-signal recovery model uses stationary Gaussian noise and debiased third-order autocorrelation. Our proposed single-window normalized diagonal product is neither their estimator nor their inversion algorithm. Heteroscedastic Poisson/read noise and tapering prevent importing their recovery or unbiasedness guarantees.'),\n ('2610.24467v1','Unifying Amplitude-Phase Coupling and Reliable Endogenous Priors for Low-Light Image Enhancement',\n  ['III overview','III-A','IV-F'],\n  'Their RGB enhancement pipeline couples amplitude and trigonometric phase embeddings,then refines an intermediate-derived prior. Its reported fine-texture limitation matters here. We do not adopt APACF,ERP,code or weights;our proposed diagonal cross-frequency statistic and RAW trial are independently implemented.')]:\n url=f'https://arxiv.org/html/{identifier}';path=dest/f'arxiv-{identifier}.html'\n if not path.exists():\n  request=urllib.request.Request(url,headers={'User-Agent':'demosaic-research/1.0'})\n  with urllib.request.urlopen(request,timeout=45) as response:\n   assert response.status==200;data=response.read()\n  assert b'<html' in data[:4000].lower() and len(data)>50000;path.write_bytes(data)\n records.append({'title':title,'primary_url':url,'HTML':ref(path),'sections_read':sections,'reading_notes':notes})\noutput=repo/'docs/results/harmonic-phase-research-20261107-v1.json';assert not output.exists()\nsave(output,{'status':'primary-source-method-and-limitation-reading-not-a-reproduction','recorded_unix_UTC':time.time(),\n    'sources':records,'new_external_code_or_weights':0,'new_neural_forwards':0,\n    'own_proposal':'Expose real/imag coordinates of u(w)^2*conj(u(2w mod S)) for observed RAW and innovation. u=F/sqrt(sum_phase|F|^2+sum_phase noise),with existing1e-12 floor.16 features/one zero512-parameter projection. Test actual V162 control at unchanged paired+target-flat losses. Additional capacity/compute is part of comparison;single-window products are not calibrated confidence or guaranteed unbiased signal.',\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint('Preserved2 primary readings;no external implementation or guarantee imported')\n"
+  }
+}

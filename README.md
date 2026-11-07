@@ -66,6 +66,8 @@ grain with persistent casts and soft crossings. Both heads/four endpoints,
 822 cases and 72 actual native views are audited. All 156 CPU checks, 92 final
 Adam states, exact V161 controls and 1,000 independent training-mask checks pass.
 
+The [V163 phase-input trial](docs/harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). All 180 CPU checks pass; original training/review is active and quality remains pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
+
 Training uses freely licensed images, geometry before downsampling and zero
 optical blur. V160 uses the 90,782-photo training cache and reviewed regions.
 [Source review](docs/current-source-loss-review.md) · [Data pipeline](docs/training-pipeline.md) ·

@@ -106,6 +106,8 @@ of16 new recipes activates; all absent inputs remain unchanged. Both standing
 GFX scenes/priors/JPEGs are reviewed on actualV1435k, preserving its96-photo/48-flat
 values. Remaining spill and missing full-frame support keep this experimental.
 
+The [V163 phase-input trial](harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). All 180 CPU checks pass; original training/review is active and quality remains pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
+
 ## Current hypotheses and evidence
 
 The completed [V144/V145 pilot](v144-v145-quality.md) tests local RAW attention

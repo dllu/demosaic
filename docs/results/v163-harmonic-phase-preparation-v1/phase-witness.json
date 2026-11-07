@@ -1,0 +1,145 @@
+{
+  "status": "pass-conditioning-collision-and-new-information",
+  "V162_export": {
+    "path": "/mnt/external/demosaic/quality-20261107/V162-flat-target-anchor-v1/review-v1/flat-anchor-EMA-step1000/module.pt",
+    "sha256": "ea80f26ab8893cfe0a461dd9532b6bc8efc2f2a9ac9006df8da1da67eed0ea9d"
+  },
+  "export_collection": {
+    "path": "/mnt/external/demosaic/quality-20261107/V162-flat-target-anchor-v1/review-v1/flat-anchor-EMA-step1000/collection-v1.json",
+    "sha256": "2dd0d6c22f5d60941b8dd5ad9bc30d8e3078abfacb11805a22de050c5c30e70f"
+  },
+  "computation_dtype": "float64 / complex128;original float32 weights loaded exactly then promoted",
+  "model_before_after": "01a2bd36ff1d8b7782a2bc1b2847db298d1fd11bf8f1b4cbca51da97cebf4fdb",
+  "old_conditioning": [
+    {
+      "name": "same-bin48",
+      "exact_tensor_equal": true,
+      "before": {
+        "shape": [
+          2,
+          48,
+          16,
+          16
+        ],
+        "dtype": "<f8",
+        "sha256": "3d12f20c1cbe82ab3a3d49b02b98c488b1d9229a917317b84be4b97a79d422b6"
+      },
+      "after": {
+        "shape": [
+          2,
+          48,
+          16,
+          16
+        ],
+        "dtype": "<f8",
+        "sha256": "3d12f20c1cbe82ab3a3d49b02b98c488b1d9229a917317b84be4b97a79d422b6"
+      }
+    },
+    {
+      "name": "relative8",
+      "exact_tensor_equal": true,
+      "before": {
+        "shape": [
+          2,
+          8,
+          16,
+          16
+        ],
+        "dtype": "<f8",
+        "sha256": "41fb5715c9e00828ea21a75eb8457b5a9a8c079e57a9f8d2c4bd05952be9a452"
+      },
+      "after": {
+        "shape": [
+          2,
+          8,
+          16,
+          16
+        ],
+        "dtype": "<f8",
+        "sha256": "41fb5715c9e00828ea21a75eb8457b5a9a8c079e57a9f8d2c4bd05952be9a452"
+      }
+    },
+    {
+      "name": "dyadic210",
+      "exact_tensor_equal": true,
+      "before": {
+        "shape": [
+          2,
+          210,
+          16,
+          16
+        ],
+        "dtype": "<f8",
+        "sha256": "20b828ec72b55cb9e2fb180074538dd5fe3a7ac2b38622b7d5c0bafe125a7f8c"
+      },
+      "after": {
+        "shape": [
+          2,
+          210,
+          16,
+          16
+        ],
+        "dtype": "<f8",
+        "sha256": "20b828ec72b55cb9e2fb180074538dd5fe3a7ac2b38622b7d5c0bafe125a7f8c"
+      }
+    }
+  ],
+  "trained_frequency_gain_exact_tensor_equal": true,
+  "gain_fingerprint_layout": "real/imaginary last dimension;finite float64",
+  "old_gain_before": {
+    "shape": [
+      2,
+      4,
+      4,
+      16,
+      16,
+      2
+    ],
+    "dtype": "<f8",
+    "sha256": "676c0acd10141f3571e23ef2e84d976779abe2feb3fe51fc0d7e2fd231c26b67"
+  },
+  "old_gain_after": {
+    "shape": [
+      2,
+      4,
+      4,
+      16,
+      16,
+      2
+    ],
+    "dtype": "<f8",
+    "sha256": "676c0acd10141f3571e23ef2e84d976779abe2feb3fe51fc0d7e2fd231c26b67"
+  },
+  "new_phase_before": {
+    "shape": [
+      2,
+      16,
+      16,
+      16
+    ],
+    "dtype": "<f8",
+    "sha256": "94b58c3a93fc3e15e9771b835477e8bcd9c40f5bda1040de5d7d79b33292dca4"
+  },
+  "new_phase_after": {
+    "shape": [
+      2,
+      16,
+      16,
+      16
+    ],
+    "dtype": "<f8",
+    "sha256": "a0b200087a66dbae2e08f17617d51880deee6ba765974232694d50019379619d"
+  },
+  "new_phase_maximum_absolute_difference": 0.3869084989676867,
+  "CPU_RNG_unchanged": true,
+  "separate_CPU_frequency_gain_calls": 2,
+  "root_model_forward_calls": 0,
+  "CUDA_calls": 0,
+  "new_parent_DINO_source_noise_RAW_calls": 0,
+  "scope": "Algebraic random-real-spectrum witness,not a retained photo or sensor simulation. A common sign flip at conjugate bins(2,6),(-2,-6) changes spatial phase while preserving real-image symmetry and all inherited frequency conditioning exactly. The actual trained V162 frequency gain remains exact,while16 new phase coordinates distinguish it. Existing spatial/support paths CAN see phase. This proves a representation distinction,not improved denoising,confidence,flat safety,or a whole-network invariance.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prove-v163-phase-information-v2.py",
+    "sha256": "52fe27dc71068a0a74b79bb4943b2654f029ab942b9d0c4b718291d9b2ca8e52",
+    "text": "\"\"\"Algebraic frequency-conditioning witness on the actual trained V162 head.\"\"\"\nimport os\nfrom pathlib import Path\n\nimport torch\nfrom profile_raw_kernel_inference import model_hash\nfrom train_directional_bank_trial import read, ref, save\n\nfrom demosaic.cfa import color_indices\nfrom demosaic.late_harmonic_context import LateHarmonicContextDetail, dyadic_frequency_context\nfrom demosaic.late_harmonic_phase import harmonic_phase_features\nfrom demosaic.late_spectral_relative import relative_spectrum_features\nfrom demosaic.prediction_archive import fingerprint\nfrom demosaic.raw_frequency_features import frequency_descriptor\n\nrepo=Path('/home/dllu/proj/demosaic')\ntorch.set_num_threads(2)\nbinding=read(repo/'.cache/quality-20261107/V162-flat-target-anchor-v1/review-result-v1.json')['collections']['flat-anchor-EMA-step1000']\nassert ref(binding['path'])==binding\ncollection=read(binding['path']);export=collection['export'];assert ref(export['path'])==export\nrng=torch.get_rng_state().clone()\nmodel=LateHarmonicContextDetail(256).double().eval()\nsaved=torch.load(export['path'],map_location='cpu',weights_only=True)\nmodel.load_state_dict(saved['state_dict'],strict=True)\nbefore=model_hash(model)\ngenerator=torch.Generator().manual_seed(16303)\nspectra=[torch.fft.fft2(torch.randn(2,4,16,16,generator=generator,dtype=torch.float64),norm='ortho') for _ in range(2)]\nsign=torch.ones(16,16,dtype=torch.float64);sign[2,6]=sign[-2,-6]=-1\nchanged=[value*sign for value in spectra]\nnoise=torch.ones(2,4,dtype=torch.float64);colors=color_indices('RGGB')[None].expand(2,-1)\ndef descriptors(a,b):\n    first,second=frequency_descriptor(a,noise,colors),frequency_descriptor(b,noise,colors)\n    relative=relative_spectrum_features(a,b,noise)\n    return [torch.cat((first,second[:,:17]),1),relative,\n        dyadic_frequency_context(torch.cat((first[:,:17],second[:,:17],relative),1))]\nrows=[]\nfor name,a,b in zip(['same-bin48','relative8','dyadic210'],descriptors(*spectra),descriptors(*changed),strict=True):\n    assert torch.equal(a,b)\n    rows.append({'name':name,'exact_tensor_equal':True,'before':fingerprint(a.numpy()),'after':fingerprint(b.numpy())})\nwith torch.inference_mode():\n    first=model.frequency_gain(*spectra,noise,colors)\n    second=model.frequency_gain(*changed,noise,colors)\nassert torch.equal(first,second)\nphase_first=harmonic_phase_features(*spectra,noise);phase_second=harmonic_phase_features(*changed,noise)\ndifference=float((phase_first-phase_second).abs().max());assert difference>.01\nassert model_hash(model)==before and torch.equal(rng,torch.get_rng_state())\ntarget=repo/'docs/results/v163-phase-information-witness-v2.json';assert not target.exists()\nsave(target,{'status':'pass-conditioning-collision-and-new-information','V162_export':export,'export_collection':binding,\n    'computation_dtype':'float64 / complex128;original float32 weights loaded exactly then promoted',\n    'model_before_after':before,'old_conditioning':rows,'trained_frequency_gain_exact_tensor_equal':True,\n    'gain_fingerprint_layout':'real/imaginary last dimension;finite float64',\n    'old_gain_before':fingerprint(torch.view_as_real(first).numpy()),'old_gain_after':fingerprint(torch.view_as_real(second).numpy()),\n    'new_phase_before':fingerprint(phase_first.numpy()),'new_phase_after':fingerprint(phase_second.numpy()),\n    'new_phase_maximum_absolute_difference':difference,'CPU_RNG_unchanged':True,\n    'separate_CPU_frequency_gain_calls':2,'root_model_forward_calls':0,'CUDA_calls':0,\n    'new_parent_DINO_source_noise_RAW_calls':0,\n    'scope':'Algebraic random-real-spectrum witness,not a retained photo or sensor simulation. A common sign flip at conjugate bins(2,6),(-2,-6) changes spatial phase while preserving real-image symmetry and all inherited frequency conditioning exactly. The actual trained V162 frequency gain remains exact,while16 new phase coordinates distinguish it. Existing spatial/support paths CAN see phase. This proves a representation distinction,not improved denoising,confidence,flat safety,or a whole-network invariance.',\n    'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint('PASS actual V162 conditioning/gain exact;new phase input difference',difference)\n"
+  }
+}

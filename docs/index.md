@@ -1,4 +1,6 @@
 # Documentation guide
+The [V163 phase-input trial](harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). All 180 CPU checks pass; original training/review is active and quality remains pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
+
 
 The completed [V162 target-flat anchor trial](flat-target-anchor.md) reduces
 quiet spatial RMS 4.73–7.73% on all 32 inputs versus V161. Total quiet RMS falls

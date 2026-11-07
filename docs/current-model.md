@@ -105,6 +105,8 @@ encoder size alone does not resolve it. [Full local diagnosis](local-material-de
 The [fixed V115/V117 output mean](fixed-tiny-small-mean.md) gives an intermediate
 tradeoff without a clear visible GFX improvement.
 
+The [V163 phase-input trial](harmonic-phase-inputs.md) keeps V162’s flat-target anchor and tests sixteen cross-frequency phase coordinates (+512 parameters). All 180 CPU checks pass; original training/review is active and quality remains pending. V161’s stronger learned response and V162’s grain reduction remain the measured choices.
+
 ## Run the current model
 
 [Inference, hot-pixel repair and linear DNG/JPEG usage](usage.md) reads the
