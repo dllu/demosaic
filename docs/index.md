@@ -1,5 +1,14 @@
 # Documentation guide
 
+The [completed V170 external RAW matching comparison](nonlocal-raw-comparison.md)
+lowers native 512 coarse-flat error 15.79–19.38% versus V169 EMA, with lower quiet
+spatial error. Mesh response falls to 2.406–2.533% of GT, quiet total/DC error rises,
+and ADC controls show periodic colored artifacts. Both protected scenes confirm
+incomplete crossings. All 822 cases/60 actually viewed native figures complete;
+13 CPU tests, original-code/kernel parity, 3288 input fingerprints and all saved
+native arrays pass their checks. Full arrays cover36 selected cases, not all 822.
+The externally trained checkpoint remains a comparison, not the general choice.
+
 The completed [V169 spatial-balance intervention](balanced-spatial-correction.md)
 lowers quiet RMS **3.74–10.69%** and DC color bias **11.45–31.59% versus V168**,
 retaining3.806–3.837% of GT mesh response at fixed weights. All48 coarse-flat

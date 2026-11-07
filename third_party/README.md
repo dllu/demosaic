@@ -15,3 +15,15 @@ and weights are not vendored into this repository or its original MIT source.
 
 Commons training manifests retain each image's own author, attribution, license
 and source URLs. Source images and derivative caches are not distributed here.
+## Nonlocal RAW comparison
+
+`nonlocal-matchfilter/LICENSE` covers the selected network class definitions
+from MIA-UIB/nonlocal-matchfilter v1.0.0, commit
+`6df6a79ce128a7741af88ff0f3e9794f9b5e03d4`, included in
+`src/demosaic/nonlocal_matchfilter.py`. Copyright 2026 Marco Sánchez Beeckman.
+The separately built sampling operator is pinned to
+MIA-UIB/deform-neighbourhood-sampling v0.1.1, commit
+`ba6c21d34effcb3c3903237704ab58388b86d006`; its MIT notice is retained alongside
+the network license. Upstream kernel files retain their embedded Caffe notices.
+The released checkpoint is an external training-data comparison, separate from
+this project's freely licensed image training pipeline.

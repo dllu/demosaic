@@ -1,0 +1,44 @@
+{
+  "status": "complete-two-recorded-owners-terminal-quality-audited-and-viewed",
+  "owners": [
+    {
+      "pid": 6276,
+      "created": 1794088818.33
+    },
+    {
+      "pid": 6399,
+      "created": 1794088898.4
+    }
+  ],
+  "actual_quality_neural_roots": 822,
+  "nested_quality_sampling_calls": 4110,
+  "quality_images": 822,
+  "streamed_RGB_method_rows": 1644,
+  "new_parent_roots": 0,
+  "new_DINO_calls": 0,
+  "new_training_updates": 0,
+  "new_source_noise_draws": 0,
+  "new_original_media_reads": 0,
+  "repeated_scientific_forwards": 0,
+  "native_cases": 36,
+  "saved_RGB_arrays": 72,
+  "saved_RAW_arrays": 36,
+  "saved_arrays": 108,
+  "saved_array_bytes": 250951168,
+  "native_figures": 60,
+  "native_triplets": 12,
+  "preparation_shape_failures": 1,
+  "worker_import_failures_before_neural_work": 1,
+  "admission_full_model_CPU_calls": 2,
+  "admission_full_model_CUDA_calls": 1,
+  "admission_CUDA_sampler_only_fixtures": 4,
+  "total_new_CUDA_full_model_calls": 823,
+  "CPU_tests": 13,
+  "peak_quality_CUDA_allocated_bytes": 2599097344,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v170-nonlocal-v1.py",
+    "sha256": "63fd47b03c8e45658d3c60d961979dee6b8d96d818f12dcc313c4845f5a52434",
+    "text": "\"\"\"Close both actual owners and count scientific, admission and retained work.\"\"\"\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V170-nonlocal-raw-v2'\nplan=read(root/'plan-v1.json');guard(plan);scores=read(root/'scores-v1.json');status=read(root/'status-v1.json')\nassert status['counts']==scores['counts']==dict(root=822,network=822,sampler=4110)\nassert status['status']=='completed-quality-awaiting-array-audit-render-and-viewing'\nowners=[read(root/n)['owner'] for n in ['launch-v1.json','initialization-recovery-launch-v1.json']]\nfor owner in owners:\n try:\n  p=psutil.Process(owner['pid']);assert p.create_time()!=owner['created'] or p.status() in [psutil.STATUS_ZOMBIE,psutil.STATUS_DEAD]\n except psutil.NoSuchProcess:pass\nfiles=list(Path(plan['external']).glob('*.npy'));assert len(files)==108\nsaved=sum(p.stat().st_size for p in files);assert saved==plan['projected_new_array_bytes']==250951168\nassert scores['new_parent_DINO_forwards']==scores['new_noise_draws']==scores['new_training_updates']==0\nassert read(root/'native-viewing-completion-v1.json')['native_figures']==60\nassert read(root/'independent-audit-v1.json')['input_fingerprints_checked']==3288\nsave(root/'execution-completion-v1.json',dict(status='complete-two-recorded-owners-terminal-quality-audited-and-viewed',owners=owners,actual_quality_neural_roots=822,nested_quality_sampling_calls=4110,quality_images=822,streamed_RGB_method_rows=1644,\n new_parent_roots=0,new_DINO_calls=0,new_training_updates=0,new_source_noise_draws=0,new_original_media_reads=0,repeated_scientific_forwards=0,\n native_cases=36,saved_RGB_arrays=72,saved_RAW_arrays=36,saved_arrays=108,saved_array_bytes=saved,native_figures=60,native_triplets=12,\n preparation_shape_failures=1,worker_import_failures_before_neural_work=1,admission_full_model_CPU_calls=2,admission_full_model_CUDA_calls=1,admission_CUDA_sampler_only_fixtures=4,total_new_CUDA_full_model_calls=823,CPU_tests=13,\n peak_quality_CUDA_allocated_bytes=scores['peak_CUDA_allocated_bytes'],source=dict(ref(__file__),text=Path(__file__).read_text()),scope=plan['scope']))\nprint('PASS owners terminal;822 unique quality roots +1 synthetic CUDA parity call;108 saved arrays;60 figures viewed')\n"
+  },
+  "scope": "External pretrained RAW-to-RAW NLFeMF v1.0.0 comparison,not a matched architecture/training test or a model newly trained on our free-image corpus. Selected original7 class ASTs/141 tensors/15282866 values match release;native CPU/CUDA sampling sources pinned and independently checked. Model input is canonical RGGB-oriented RGBG RAW clipped0..1 plus sqrt of supplied noisy-input variance. Output RAW clips0..1 as upstream. Two fixed RGB reconstructions share one network call:Malvar;and frozen V143 DINO-parent plus Malvar(denoisedRAW-CFA(parent)). No target/reference enters forward. Same822 cached cases,CFA/noise/parents/GT/ROIs/exposure asV169. Real references qualitative,notGT,unscored. No new photo source/noise draw,training,parent/DINO call or original/dataz read. All822 get streamed metrics/fingerprints;36 fixed native cases retain2 fullRGB outputs+RAW. Fixed48 native boards/12 triplets,60 figures,no resizing. Processing order firsttests512 and768 geometries without repeating those calls. New bounded trial reserves52GiB local/114GiB external+.5GiB projectionmargin;prior trialguards/receipts remainunchanged. Runtime32GiB RAM/12GiB CUDA;wait before nextforward on resource pressure. Prior91 neural files unchanged;two new source modules. Admission2CPU+1CUDA synthetic fullmodelcalls are separate;quality822 newGPUroots,with5 nested samplercalls perroot. No full new prediction archive/posthoc all-array or blind-generalization claim."
+}

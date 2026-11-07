@@ -7,6 +7,14 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
+[Completed V170 released RAW matching comparison](docs/nonlocal-raw-comparison.md)
+tests the April 2026 NLFeMF checkpoint. Native noisy-flat coarse error falls
+**15.79–19.38% versus V169 EMA**, but mesh response falls to **2.406–2.533% of GT**,
+quiet color bias rises, and low-noise controls acquire periodic colored texture.
+The cab's fine crossings remain missing. The external checkpoint is retained
+as a comparison; V120 and the useful learned prototypes below remain the choices.
+All 822 cases, 60 native figures and the scoped array audit are complete.
+
 [Completed V169 spatial balance](docs/balanced-spatial-correction.md) lowers quiet
 RMS **3.74–10.69%** and color bias **11.45–31.59% versus V168**, retaining its
 **3.806–3.837% of GT mesh response**. It filters broad direct RGB corrections at
@@ -48,6 +56,7 @@ cost remains unresolved.
 
 | Research implementation | Measured strength | Remaining cost |
 | --- | --- | --- |
+| [V170 released RAW matching](docs/nonlocal-raw-comparison.md) | Native512 coarse error −15.79–19.38%, quiet spatial RMS −6.26–32.71% versus V169 EMA | Mesh response only2.406–2.533% of GT; quiet total/DC error rises, ISO6400 full-flat RMS +17.67–19.03%; periodic low-noise artifacts. External training data |
 | [V169 spatial balance](docs/balanced-spatial-correction.md) | Quiet RMS −3.74–10.69% and color bias −11.45–31.59% versus V168; mesh response stays3.806–3.837% of GT | All48 coarse-flat errors worse; total-flat means +0.39–0.71%,quiet spatial +0.17–0.27%; residual blotches/crossings |
 | [V168 finer training wires](docs/fine-mesh-training.md) | Mesh response +17.48–18.09% versus V167, reaching3.805–3.836% of GT; all48 coarse-flat errors improve | Quiet RMS +1.49–5.44%,all32 spatial errors worse; full-flat means +0.136–0.228%,real crossings incomplete |
 | [V167 bounded support](docs/bounded-spectral-support.md) | Mesh response +47.33–47.55% versus V166, reaching3.24–3.25% of GT; present RMS −1.09–1.15% | Quiet RMS +2.84–3.74%,all32 spatial errors worse; full-flat means +0.189–0.382%,real crossings incomplete |
@@ -158,6 +167,12 @@ Native 160×160 cells, ROI `[176,176,160,160]`, exposure4, contrast40 about
 ![ISO6400 flat: noisy, V165 pair-common EMA, exact constructed GT](docs/images/v165-pair-common-v1/comparison-19-pair-common-EMA-step1000-triplet.png)
 
 ![ISO12800 flat: noisy, V165 pair-common EMA, exact constructed GT](docs/images/v165-pair-common-v1/comparison-20-pair-common-EMA-step1000-triplet.png)
+
+The external V170 comparison retains native noisy → NLRaw Malvar → exact GT
+triplets at [ISO6400](docs/images/v170-nonlocal-raw-v1/comparison-24.png) and
+[ISO12800](docs/images/v170-nonlocal-raw-v1/comparison-27.png).
+The latter improves total-flat RMS; the former worsens it. Both retain fine
+periodic artifacts. [Fixed coordinates, checkpoint, noise and display metadata](docs/nonlocal-raw-comparison.md).
 
 V164's stronger coarse result retains its native flat triplets at
 [ISO6400](docs/images/v164-pair-unit-floor-v1/comparison-19-fine-pair-raw-step1000-triplet.png)

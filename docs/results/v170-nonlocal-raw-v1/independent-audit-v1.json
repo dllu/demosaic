@@ -1,0 +1,48 @@
+{
+  "status": "pass-all-stream-bindings-and-selected-native-arrays",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v2/plan-v1.json",
+    "sha256": "3a3d7d612dbe789bbe5ad995bafad8bba4a7ec87957c17b84156acf36168a2de"
+  },
+  "scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v2/scores-v1.json",
+    "sha256": "29aee073294f6b5e22af6d3accb44085b848f83ad49a1d1de8bd17f31cdbadef"
+  },
+  "runtime_dependency_preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v170-runtime-dependency-preparation-v1.json",
+    "sha256": "466975b08736a0631bc85df5f87be4d041499942fdad75ae589006a05ba7b7e6"
+  },
+  "actual_forward_events": 822,
+  "completed_observation_events": 822,
+  "nested_quality_sampling_calls": 4110,
+  "streamed_method_rows_checked": 1644,
+  "input_fingerprints_checked": 3288,
+  "strict_checkpoint_tensors": 141,
+  "strict_checkpoint_parameters": 15282866,
+  "module_hash": "4f59c81c24e538e347e7fa8e3eaffa5c89b51be6c016736181f0056726ce8a06",
+  "saved_native_RGB_checked": 72,
+  "saved_native_RAW_checked": 36,
+  "scalar_checks": 570,
+  "native_metric_fields": 510,
+  "independent_NumPy_reconstructed_channels": 53772288,
+  "maximum_reconstruction_error": 1.949940626744251e-07,
+  "maximum_reconstruction_error_DN16": 0.012778935897368449,
+  "allcase_maximum_measured_CFA_error": 5.960464477539063e-08,
+  "forward_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v2/forward-events-v1.jsonl",
+    "sha256": "8094229a18ede077fd460e4225238adb45f36b030f07ac5f9325505668ce46a6"
+  },
+  "observation_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v2/observations-v1.jsonl",
+    "sha256": "ccf6243341b1cdce674c3c47d72e6376515ba1911366bb5e8f48d685bd8a4ee5"
+  },
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v170-nonlocal-v1.py",
+    "sha256": "b85f4058275fe8a7cc3958e9552494f7eee57b3254e89a88d4063ede51df5805",
+    "text": "\"\"\"Audit all streamed bindings and the preselected36 native RGB/RAW cases.\"\"\"\nimport json\nfrom pathlib import Path\nimport numpy as np\nimport torch\nfrom balanced_spatial_metrics import DetailMetrics\nfrom demosaic.archive_metrics import noisy_malvar\nfrom demosaic.nonlocal_raw import NonlocalRawDemosaic\nfrom demosaic.prediction_archive import fingerprint\nfrom profile_raw_kernel_inference import model_hash\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V170-nonlocal-raw-v2'\nplan=read(root/'plan-v1.json');guard(plan);result=read(root/'scores-v1.json');design=read(plan['design']['path'])\nsupp=read(repo/'docs/results/v170-runtime-dependency-preparation-v1.json')\nevents=[json.loads(s) for s in (root/'forward-events-v1.jsonl').read_text().splitlines()]\njournal=[json.loads(s) for s in (root/'observations-v1.jsonl').read_text().splitlines()]\nassert len(events)==len(journal)==822 and result['counts']==dict(root=822,network=822,sampler=4110)\nassert result['module_before']==result['module_after'] and result['RNG_unchanged']\nmodule=NonlocalRawDemosaic().load_released_state(plan['released_weights']['path']);assert model_hash(module)==result['module_before']\nassert len(module.network.state_dict())==141 and sum(p.numel() for p in module.parameters())==15282866\nmetric=DetailMetrics(plan['metrics_sources']);rows={(r['id'],r['method']):r for r in result['rows']};raw_rows={r['id']:r for r in result['raw_rows']}\ninputs=scalars=rgb_count=raw_count=reconstructed_channels=0;maximum=maximum_dn=maximum_sample=0.;metric_fields=0\n\ndef cfa(value,colors):\n return np.stack([value[0,int(colors[0,p]),p//2::2,p%2::2] for p in range(4)])[None]\n\nfor ordinal,index in enumerate(plan['processing_order']):\n case=design['observations'][index];event=events[ordinal];record=journal[ordinal]\n assert event['index']==record['index']==index and event['id']==record['id']==case['id']\n assert event['ordinal']==ordinal and event['returned_forwards']==event['network_forwards']==ordinal+1 and event['nested_sampler_calls']==5*(ordinal+1)\n assert record['arrays']==case['arrays'] and record['parent']==case['parent']\n assert ref(case['arrays']['path'])==case['arrays'] and ref(case['parent']['path'])==case['parent']\n a=dict(np.load(case['arrays']['path']));base=np.load(case['parent']['path'])\n for field,f in record['inputs'].items():assert fingerprint(a[field])==f;inputs+=1\n assert sorted(record['rows'],key=lambda r:r['method'])==[rows[case['id'],m] for m in sorted(plan['methods'])]\n assert record['raw']==raw_rows[case['id']]\n maximum_sample=max(maximum_sample,*record['raw']['measured_sample_maximum_error'].values())\n assert maximum_sample<5e-7\n if case['id'] not in result['native_predictions']:continue\n bindings=result['native_predictions'][case['id']];b=bindings['denoised-RAW'];assert ref(b['path'])==b\n raw=np.load(b['path']);assert fingerprint(raw)==record['raw']['values'] and np.isfinite(raw).all() and raw.min()>=0 and raw.max()<=1;raw_count+=1\n if case['kind']!='real':\n  target=cfa(a['target'],a['colors'])\n  for field,value in [('raw_error_RMS_DN16',raw),('noisy_error_RMS_DN16',a['packed'])]:\n   expected=float(np.sqrt(np.mean((value.astype(np.float64)-target)**2))*65535)\n   assert abs(expected-record['raw'][field])<1e-10;scalars+=1\n direct=noisy_malvar(dict(a,packed=raw))\n residual=(raw-cfa(base,a['colors'])).astype(np.float32)\n hybrid=base.astype(np.float64)+noisy_malvar(dict(a,packed=residual))\n for method,expected in [('NLRaw-Malvar',direct),('NLRaw-DINO',hybrid)]:\n  b=bindings[method];assert ref(b['path'])==b\n  value=np.load(b['path']);assert fingerprint(value)==rows[case['id'],method]['values']\n  measured=float(np.max(np.abs(cfa(value,a['colors'])-raw)));assert measured==record['raw']['measured_sample_maximum_error'][method]\n  measured_error=np.abs(value.astype(np.float64)-expected)\n  # Independent NumPy64 interpolation vs Torch FP32; a forward-error bound,\n  # including weighted sums/division and signed residual addition, no learned calls.\n  magnitude=np.maximum(np.max(np.abs(raw)),np.max(np.abs(base)))\n  bound=32*np.finfo(np.float32).eps*max(float(magnitude),1e-6)*max(1.,float(np.max(a['wb'])/np.min(a['wb'])))\n  assert measured_error.max()<=bound,(case['id'],method,float(measured_error.max()),bound)\n  maximum=max(maximum,float(measured_error.max()));maximum_dn=max(maximum_dn,float(measured_error.max())*65535);reconstructed_channels+=measured_error.size\n  actual=metric.measure(case,a,base,value)\n  for field,v in actual.items():\n   if isinstance(v,(float,int)) and not isinstance(v,bool):assert abs(v-rows[case['id'],method][field])<1e-10;scalars+=1;metric_fields+=1\n  rgb_count+=1\nassert inputs==3288 and rgb_count==72 and raw_count==36\nassert not torch.cuda.is_initialized()\nsave(root/'independent-audit-v1.json',dict(status='pass-all-stream-bindings-and-selected-native-arrays',plan=ref(root/'plan-v1.json'),scores=ref(root/'scores-v1.json'),runtime_dependency_preparation=ref(repo/'docs/results/v170-runtime-dependency-preparation-v1.json'),\n actual_forward_events=822,completed_observation_events=822,nested_quality_sampling_calls=4110,streamed_method_rows_checked=1644,input_fingerprints_checked=inputs,\n strict_checkpoint_tensors=141,strict_checkpoint_parameters=15282866,module_hash=model_hash(module),saved_native_RGB_checked=rgb_count,saved_native_RAW_checked=raw_count,\n scalar_checks=scalars,native_metric_fields=metric_fields,independent_NumPy_reconstructed_channels=reconstructed_channels,maximum_reconstruction_error=maximum,maximum_reconstruction_error_DN16=maximum_dn,\n allcase_maximum_measured_CFA_error=maximum_sample,forward_journal=ref(root/'forward-events-v1.jsonl'),observation_journal=ref(root/'observations-v1.jsonl'),new_neural_forwards=0,new_noise_draws=0,CUDA_initialized=False,\n source=dict(ref(__file__),text=Path(__file__).read_text()),scope='All822 input/parent file bindings,3288 actual input fingerprints,822 actual root/network events/4110 nested calls,and1644 RGB rows match durable journals. Independent posthoc array/metric/RAW-to-RGB reconstruction covers only36 preselected native cases:72 RGB+36 RAW arrays. All other new outputs were scored/fingerprinted and norm/decomposition checked in process but not retained;no full new-array posthoc audit is claimed.'))\nprint('PASS822 event/input bindings;72 RGB/36 RAW;scalars',scalars,'channels',reconstructed_channels,'maxNumPyDN',maximum_dn)\n"
+  },
+  "scope": "All822 input/parent file bindings,3288 actual input fingerprints,822 actual root/network events/4110 nested calls,and1644 RGB rows match durable journals. Independent posthoc array/metric/RAW-to-RGB reconstruction covers only36 preselected native cases:72 RGB+36 RAW arrays. All other new outputs were scored/fingerprinted and norm/decomposition checked in process but not retained;no full new-array posthoc audit is claimed."
+}

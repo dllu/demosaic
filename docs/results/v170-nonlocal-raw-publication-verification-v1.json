@@ -1,0 +1,57 @@
+{
+  "status": "pass-exact-copies-sources-tables-native-pixels-and-links",
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v170-nonlocal-raw-final-v1.json",
+    "sha256": "9fad88214006f8d7aa22af4cd866bfc4979e2e9c6f978d3fedbe56f9527c297e"
+  },
+  "exact_copies": 32,
+  "source_texts_checked": 142,
+  "unchanged_prior_neural_files": 91,
+  "strict_checkpoint_loads": 1,
+  "state_tensors": 141,
+  "rounded_table_cells": 210,
+  "native_figures": 60,
+  "native_triplets": 12,
+  "new_RGB_channels_recomputed": 8294400,
+  "unchanged_RGB_channels_compared": 24960000,
+  "document_links_checked": 635,
+  "documents": {
+    "/home/dllu/proj/demosaic/README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "156525f68bc5807132115bd36a433a5a154556de1e6c78b361a7b7286bc65a53"
+    },
+    "/home/dllu/proj/demosaic/docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "a3e8577369a0d2d487dff3e44a6a7e66bf4a439b690ddb7b253fa84fa4ea0dab"
+    },
+    "/home/dllu/proj/demosaic/docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "700ae1b2c5da8744955f8b0aa78f623626dbb46eea5d333115a3890cec29f9b6"
+    },
+    "/home/dllu/proj/demosaic/docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "2dce12f9c695cd2baf62f2a09f29203502649abb66473214b3cf8eb52bcde979"
+    },
+    "/home/dllu/proj/demosaic/docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "20243f0fcf75afc663d7422de1f48b384b00ffc1d4138d46a50c969bc8c28e74"
+    },
+    "/home/dllu/proj/demosaic/docs/nonlocal-raw-comparison.md": {
+      "path": "/home/dllu/proj/demosaic/docs/nonlocal-raw-comparison.md",
+      "sha256": "e18f17e12dc7de30fc8a93185a4498f79dd7ccb5d96b46e80eca73d78910e05a"
+    },
+    "/home/dllu/proj/demosaic/diary/2026-11-07-14-11-16-v170-nonlocal-raw-results.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-14-11-16-v170-nonlocal-raw-results.md",
+      "sha256": "eed465d1628e0a75aa9e6f1259be19bef19367bf706163bbd2776614b39d8ea9"
+    }
+  },
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v170-publication-v1.py",
+    "sha256": "9620133911412f103ef82ff201ed78dfb52563f3c4c35c8a907ce156e2687388",
+    "text": "\"\"\"Verify immutable copies,actual source bindings,tables and every native pixel.\"\"\"\nimport ast,json,re,sys\nfrom pathlib import Path\nimport numpy as np\nimport torch\nfrom PIL import Image\nfrom demosaic.nonlocal_raw import NonlocalRawDemosaic\nfrom profile_raw_kernel_inference import model_hash\nfrom report_late_spectral_mixed_quiet import independent_display\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V170-nonlocal-raw-v2'\noutput=repo/'docs/results/v170-nonlocal-raw-publication-verification-v1.json';assert not output.exists()\nindex=repo/'docs/results/v170-nonlocal-raw-final-v1.json';final=read(index);prep=read(final['preparation']['path']);plan=read(root/'plan-v1.json');guard(plan)\nfor k in ['preparation','runtime_dependency_preparation','sources','figures','report']:assert ref(final[k]['path'])==final[k]\nfor copies in final['copies'].values():\n for b in copies.values():assert ref(b['path'])==b\n assert Path(copies['original']['path']).read_bytes()==Path(copies['public']['path']).read_bytes()\nsources=read(final['sources']['path']);supp=read(final['runtime_dependency_preparation']['path'])\nsource_checks=0\nfor source in prep['source_texts']+sources['additional_sources']+prep['license_files']+[supp['source'],supp['new_dependency']]:\n assert ref(source['path'])['sha256']==source['sha256'] and Path(source['path']).read_text()==source['text'];source_checks+=1\nfor key in ['original_source','current_runner']:assert ref(supp[key]['path'])['sha256']==supp[key]['sha256']\ndef functions(path):return {n.name:ast.dump(n,include_attributes=False) for n in ast.parse(Path(path).read_text()).body if isinstance(n,ast.FunctionDef)}\na=functions(supp['original_source']['path']);b=functions(supp['current_runner']['path']);assert all(a[k]==b[k] for k in ['run','resources'])\nfor path,h in plan['prior_neural_hashes'].items():assert ref(repo/'src/demosaic'/path)['sha256']==h\nassert len(plan['prior_neural_hashes'])==91\nmodule=NonlocalRawDemosaic().load_released_state(plan['released_weights']['path']);assert model_hash(module)==final['checkpoints']['module_hash']\nassert len(module.network.state_dict())==141 and sum(p.numel() for p in module.parameters())==15282866\nfor key in ['released','original']:assert ref(final['checkpoints'][key]['path'])==final['checkpoints'][key]\npaired=read(root/'paired-comparisons-v1.json');summary={(s['kind'],s['condition'],s['cohort'],s['method']):s for s in paired['summary']}\nbindings=read(root/'report-bindings-v1.json');report=repo/'docs/nonlocal-raw-comparison.md';text=report.read_text();assert ref(report)==bindings['report']==final['report']\nfor cell in bindings['cells']:\n s=summary[cell['kind'],cell['condition'],cell['cohort'],cell['method']];assert f\"{s[cell['field']]:.{cell['digits']}f}\"==cell['rendered']\nfor line in bindings['lines']:assert line in text\nnative=read(final['figures']['path']);assert len(native['images'])==60 and sum(i['triplet'] for i in native['images'])==12\nnew_channels=copied_channels=0;prior=read(plan['prior_figures']['path']);old_map={i['image']['path']:i for i in prior['images']}\nfor item in native['images']:\n old=old_map[item['source_figure']['path']]\n assert ref(item['image']['path'])==item['image'] and item['source_figure']==old['image'] and item['no_resize']\n assert Path(item['image']['path']).read_bytes()==Path(item['original_image']['path']).read_bytes()\n for field in ['ROI_xywh','anchor','contrast','exposure']:assert item[field]==old[field]\n image=np.asarray(Image.open(item['image']['path']));old_image=np.asarray(Image.open(old['image']['path']));a=dict(np.load(item['case']['arrays']['path']));anchor=np.asarray(item['anchor']).reshape(1,3,1,1);old_panels={p['label']:p for p in old['panels']}\n for panel in item['panels']:\n  name=panel['label'];x,y,w,h=panel['xywh'];assert w==h==160\n  if name in item['predictions']:\n   binding=item['predictions'][name];assert ref(binding['path'])==binding;value=np.load(binding['path']);expected=independent_display(anchor+item['contrast']*(value.astype(np.float64)-anchor),a,item['ROI_xywh'],item['exposure']);new_channels+=expected.size\n  else:\n   label={'V169 EMA':'balanced-EMA'}.get(name,name);p=old_panels[label];ox,oy,ow,oh=p['xywh'];expected=old_image[oy:oy+oh,ox:ox+ow];copied_channels+=expected.size\n  np.testing.assert_array_equal(image[y:y+h,x:x+w],expected)\nview=read(root/'native-viewing-completion-v1.json');assert view['native_figures']==60 and sorted(view['indices'])==list(range(60)) and ref(view['journal']['path'])==view['journal']\nexecution=read(root/'execution-completion-v1.json');assert execution['actual_quality_neural_roots']==822 and execution['repeated_scientific_forwards']==0 and execution['total_new_CUDA_full_model_calls']==823\naudit=read(root/'independent-audit-v1.json');assert audit['input_fingerprints_checked']==3288 and audit['saved_native_RGB_checked']==72 and audit['saved_native_RAW_checked']==36\n# Assert prose comparison claims directly against paired per-case reductions.\ngroups=paired['groups']\ndef group(method,kind,condition,cohort,field):return next(g for g in groups if (g['method'],g['baseline'],g['kind'],g['condition'],g['cohort'],g['field'])==(method,'V169-EMA',kind,condition,cohort,field))\nfor method in plan['methods']:\n assert group(method,'photo','adc-only','adc-photo256','full_error_RMS_DN16')['increased']==8\n for cohort in [None,'fresh-flat512','adc-sloped512']:\n  g=group(method,'flat','adc-only',cohort,'full_error_RMS_DN16');assert g['increased']==g['cases']\n for condition in ['photo-faint','photo-dark']:assert group(method,'photo',condition,'retained512','full_error_RMS_DN16')['increased']==32\n assert group(method,'flat','iso6400-prior','fresh-flat512','block32_RMS_DN16')['decreased']==16\n assert group(method,'flat','iso12800-prior','fresh-flat512','block32_RMS_DN16')['decreased']==22\n assert group(method,'mesh',True,None,'template_gain')['mean_candidate']<.026\n assert group(method,'mixed-quiet','iso12800-prior',None,'quiet_DC_RMS_DN16')['percent_change']>100\nassert not torch.cuda.is_initialized()\ndiary=Path(sys.argv[1]).resolve();assert diary.is_relative_to(repo/'diary') and diary.is_file()\ndocuments=[repo/p for p in ['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md','docs/nonlocal-raw-comparison.md']]+[diary]\nlinks=0\nfor p in documents:\n for target in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  resolved=(p.parent/target.split('#')[0]).resolve();assert resolved==output or resolved.is_file(),(p,target);links+=1\nsave(output,dict(status='pass-exact-copies-sources-tables-native-pixels-and-links',publication=ref(index),exact_copies=len(final['copies']),source_texts_checked=source_checks,unchanged_prior_neural_files=91,strict_checkpoint_loads=1,state_tensors=141,rounded_table_cells=len(bindings['cells']),native_figures=60,native_triplets=12,new_RGB_channels_recomputed=new_channels,unchanged_RGB_channels_compared=copied_channels,document_links_checked=links,documents={str(p):ref(p) for p in documents},new_neural_forwards=0,new_noise_draws=0,CUDA_initialized=False,source=dict(ref(__file__),text=Path(__file__).read_text()),scope=audit['scope']))\nprint('PASS',len(final['copies']),'exact copies;',source_checks,'source texts;',len(bindings['cells']),'table cells;60 native figures;',new_channels+copied_channels,'RGB channels;',links,'links')\n"
+  },
+  "scope": "All822 input/parent file bindings,3288 actual input fingerprints,822 actual root/network events/4110 nested calls,and1644 RGB rows match durable journals. Independent posthoc array/metric/RAW-to-RGB reconstruction covers only36 preselected native cases:72 RGB+36 RAW arrays. All other new outputs were scored/fingerprinted and norm/decomposition checked in process but not retained;no full new-array posthoc audit is claimed."
+}

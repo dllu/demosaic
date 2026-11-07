@@ -21,6 +21,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+nonlocal = ["einops==0.8.1"]
 dev = ["pytest>=8", "ruff>=0.12"]
 eval = [
     "matplotlib>=3.10,<4",
@@ -43,6 +44,7 @@ packages = ["src/demosaic"]
 [tool.hatch.build.targets.wheel.force-include]
 "third_party/gaussian" = "demosaic/licenses/gaussian"
 "third_party/dinov3/LICENSE.md" = "demosaic/licenses/dinov3-LICENSE.md"
+"third_party/nonlocal-matchfilter" = "demosaic/licenses/nonlocal-matchfilter"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

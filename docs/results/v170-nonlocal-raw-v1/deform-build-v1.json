@@ -1,0 +1,32 @@
+{
+  "status": "compiled-pinned-upstream-CPU-and-CUDA-sampling-kernels",
+  "owner": {
+    "pid": 4144832,
+    "created": 1794087610.19
+  },
+  "started_unix_UTC": 1794087611.1311345,
+  "completed_unix_UTC": 1794087688.6473815,
+  "Torch": "2.14.1+cu130",
+  "Torch_CUDA": "13.0",
+  "architecture": "12.1",
+  "library": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v1/compiled-deform-v1/v170_deform.so",
+    "sha256": "f78420949ac56baa709b270011f1c0e3a1ee54f684e6a4f39e616076b4397ed0"
+  },
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v1/upstream/deform-source/deform-neighbourhood-sampling-ba6c21d34effcb3c3903237704ab58388b86d006/deform_neighbourhood_sampling/csrc/deform_nbrhd.cpp",
+      "sha256": "b4931f8bc8732b957a1faa113d587e19911081c6478a9319025dc5836214e8c3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v1/upstream/deform-source/deform-neighbourhood-sampling-ba6c21d34effcb3c3903237704ab58388b86d006/deform_neighbourhood_sampling/csrc/cpu/deform_nbrhd_kernel.cpp",
+      "sha256": "52a9ebcc6320403f4fe86fc4e980890ffd5628997d5f7e84f87477f7304190dc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v1/upstream/deform-source/deform-neighbourhood-sampling-ba6c21d34effcb3c3903237704ab58388b86d006/deform_neighbourhood_sampling/csrc/cuda/deform_nbrhd_kernel.cu",
+      "sha256": "a12198d65b854980c21ebd3e356906dccf6fa83306ea17bb52d653af0d211771"
+    }
+  ],
+  "new_neural_forwards": 0,
+  "source_text": "\"\"\"Build pinned upstream sampling kernels for the installed GB10 toolchain.\"\"\"\nimport json\nimport os\nfrom pathlib import Path\nimport time\nimport hashlib\n\nimport psutil\nimport torch\nfrom torch.utils.cpp_extension import load\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v1')\nsource=next((root/'upstream/deform-source').glob('*/deform_neighbourhood_sampling/csrc'))\nfiles=[source/'deform_nbrhd.cpp',source/'cpu/deform_nbrhd_kernel.cpp',source/'cuda/deform_nbrhd_kernel.cu']\nbuild=root/'compiled-deform-v1';assert not build.exists();build.mkdir()\nos.environ['MAX_JOBS']='2';os.environ['TORCH_CUDA_ARCH_LIST']='12.1'\nos.nice(10);os.sched_setaffinity(0,sorted(os.sched_getaffinity(0))[2:4])\nassert psutil.virtual_memory().available>32*2**30\nstarted=time.time()\nmodule=load(name='v170_deform',sources=[str(p) for p in files],extra_cflags=['-O2'],extra_cuda_cflags=['-O2'],\n    build_directory=str(build),with_cuda=True,verbose=True)\nreceipt=dict(status='compiled-pinned-upstream-CPU-and-CUDA-sampling-kernels',owner=dict(pid=os.getpid(),created=psutil.Process().create_time()),\n    started_unix_UTC=started,completed_unix_UTC=time.time(),Torch=torch.__version__,Torch_CUDA=torch.version.cuda,architecture='12.1',\n    library=dict(path=module.__file__,sha256=hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()),\n    sources=[dict(path=str(p),sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in files],\n    new_neural_forwards=0,source_text=Path(__file__).read_text())\n(root/'deform-build-v1.json').write_text(json.dumps(receipt,indent=2)+'\\n')\nprint('Built official CPU/CUDA sampling operator in',time.time()-started,'seconds',flush=True)\n"
+}

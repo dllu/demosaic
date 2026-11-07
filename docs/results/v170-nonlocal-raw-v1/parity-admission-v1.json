@@ -1,0 +1,67 @@
+{
+  "status": "pass-original-class-AST-independent-sampler-and-pretrained-model-parity",
+  "original_classes_exact_AST": [
+    "FeedForwardNetwork",
+    "GLUFeedForwardNetwork",
+    "ConvNeXtBlock",
+    "InputPadder",
+    "OffsetCNN",
+    "NonlocalBlock",
+    "SimpleBlockMatchingUNet"
+  ],
+  "sampler_cases": [
+    {
+      "dtype": "<class 'numpy.float32'>",
+      "kernel": [
+        1,
+        1
+      ],
+      "CPU_maximum_error": 3.650784492492676e-07,
+      "CUDA_maximum_error": 3.650784492492676e-07
+    },
+    {
+      "dtype": "<class 'numpy.float32'>",
+      "kernel": [
+        3,
+        5
+      ],
+      "CPU_maximum_error": 7.152557373046875e-07,
+      "CUDA_maximum_error": 7.152557373046875e-07
+    },
+    {
+      "dtype": "<class 'numpy.float64'>",
+      "kernel": [
+        1,
+        1
+      ],
+      "CPU_maximum_error": 2.220446049250313e-16,
+      "CUDA_maximum_error": 2.220446049250313e-16
+    },
+    {
+      "dtype": "<class 'numpy.float64'>",
+      "kernel": [
+        3,
+        5
+      ],
+      "CPU_maximum_error": 4.440892098500626e-16,
+      "CUDA_maximum_error": 4.440892098500626e-16
+    }
+  ],
+  "strict_weight_tensors": 141,
+  "parameters": 15282866,
+  "original_and_ported_CPU_output_bitexact": true,
+  "CUDA_vs_CPU_maximum_absolute_error": 2.2351741790771484e-08,
+  "CUDA_vs_CPU_RMS_error": 5.933527891244239e-09,
+  "model_hash": "bfa57469753ec6547a8f131efab03b615d826dbfbc579e2197471ad357cda214",
+  "forward_RNG_unchanged": true,
+  "weights_unchanged": true,
+  "CPU_full_model_forwards": 2,
+  "CUDA_full_model_forwards": 1,
+  "CUDA_sampling_only_calls": 4,
+  "peak_CUDA_allocated_bytes": 100102656,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v170-parity-admission-v1.py",
+    "sha256": "99e531d9e1a9e31f9c9810ad3dca93a7dd3c264cf576d39167098f2e11822f6c",
+    "text": "\"\"\"Check original class definitions, independent sampling and full-model parity.\"\"\"\nimport ast\nimport importlib\nimport json\nfrom pathlib import Path\nimport sys\nimport types\n\nimport numpy as np\nimport torch\nfrom demosaic.nonlocal_matchfilter import SimpleBlockMatchingUNet,deform_neighbourhood\nfrom profile_raw_kernel_inference import model_hash\nfrom train_directional_bank_trial import read,ref,save\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V170-nonlocal-raw-v1'\ntorch.set_num_threads(2);torch.set_num_interop_threads(1)\ntorch.backends.cuda.matmul.allow_tf32=torch.backends.cudnn.allow_tf32=False\ntorch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True;torch.use_deterministic_algorithms(True)\ntorch.cuda.set_per_process_memory_fraction(12*2**30/torch.cuda.get_device_properties(0).total_memory)\nlibrary=read(root/'deform-build-v1.json')['library'];assert ref(library['path'])==library;torch.ops.load_library(library['path'])\nsource=root/'upstream/source/nonlocal_matchfilter-1.0.0/src/nonlocal_matchfilter'\nours={n.name:ast.dump(n,include_attributes=False) for n in ast.parse((repo/'src/demosaic/nonlocal_matchfilter.py').read_text()).body if isinstance(n,ast.ClassDef)}\nchecked=[]\nfor path in [source/'ops/ffn.py',source/'ops/conv.py',source/'ops/padding.py',source/'networks/nonlocalmf.py']:\n for node in ast.parse(path.read_text()).body:\n  if isinstance(node,ast.ClassDef) and node.name in ours:\n   assert ours[node.name]==ast.dump(node,include_attributes=False);checked.append(node.name)\nassert len(checked)==7\n\ndef numpy_sample(value,offset,kh,kw):\n b,c,h,w=value.shape;out=np.zeros((b,c*kh*kw,h,w),dtype=value.dtype)\n for batch in range(b):\n  for channel in range(c):\n   for ky in range(kh):\n    for kx in range(kw):\n     k=ky*kw+kx\n     for y in range(h):\n      for x in range(w):\n       yy=y-kh//2+ky+float(offset[batch,2*k,y,x]);xx=x-kw//2+kx+float(offset[batch,2*k+1,y,x])\n       if yy<=-1 or yy>=h or xx<=-1 or xx>=w:continue\n       low_y,low_x=int(np.floor(yy)),int(np.floor(xx));answer=0.\n       for sy in [low_y,low_y+1]:\n        for sx in [low_x,low_x+1]:\n         if 0<=sy<h and 0<=sx<w:answer+=float(value[batch,channel,sy,sx])*(1-abs(yy-sy))*(1-abs(xx-sx))\n       out[batch,channel*kh*kw+k,y,x]=answer\n return out\n\nsampling=[]\nfor dtype in [np.float32,np.float64]:\n for kh,kw in [(1,1),(3,5)]:\n  rng=np.random.default_rng(17003);value=rng.normal(size=(2,4,5,7)).astype(dtype);offset=rng.uniform(-3,3,size=(2,2*kh*kw,5,7)).astype(dtype)\n  expected=numpy_sample(value,offset,kh,kw)\n  cpu=deform_neighbourhood(torch.from_numpy(value),torch.from_numpy(offset),(kh,kw),1,(kh//2,kw//2),1,1)\n  gpu=deform_neighbourhood(torch.from_numpy(value).cuda(),torch.from_numpy(offset).cuda(),(kh,kw),1,(kh//2,kw//2),1,1).cpu()\n  tolerance=3e-6 if dtype==np.float32 else 3e-14\n  np.testing.assert_allclose(cpu.numpy(),expected,atol=tolerance,rtol=tolerance);np.testing.assert_allclose(gpu.numpy(),expected,atol=tolerance,rtol=tolerance)\n  sampling.append(dict(dtype=str(dtype),kernel=[kh,kw],CPU_maximum_error=float(np.max(np.abs(cpu.numpy()-expected))),CUDA_maximum_error=float(np.max(np.abs(gpu.numpy()-expected)))))\n\n# Only the unused PatchMatch variant is stubbed; the evaluated learned-offset\n# class uses the real pinned sampling operator above, with unchanged class code.\npackage=types.ModuleType('deform_neighbourhood_sampling');ops=types.ModuleType('deform_neighbourhood_sampling.ops');ops.deform_neighbourhood=deform_neighbourhood\nsys.modules['deform_neighbourhood_sampling']=package;sys.modules['deform_neighbourhood_sampling.ops']=ops\npatchmatch=types.ModuleType('patchmatch')\ndef unused(*args,**kwargs):raise AssertionError('Unused upstream PatchMatch variant was called')\npatchmatch.patch_match=patchmatch.stack_matches=unused;sys.modules['patchmatch']=patchmatch\nsys.path.insert(0,str(source.parent))\nupstream=importlib.import_module('nonlocal_matchfilter.networks.nonlocalmf')\nstate=torch.load('/mnt/external/demosaic/models/nonlocal-matchfilter-v1/rawnoise-25-15-9-tensors-v1.pt',map_location='cpu',weights_only=True)['state_dict']\nkwargs=dict(input_channels=8,output_channels=4,n_features=32,neighbours={'scale1':[5,5],'scale2':[3,5],'scale3':[3,3]},max_search_dist=9.)\noriginal=upstream.SimpleBlockMatchingUNet(**kwargs).eval();ported=SimpleBlockMatchingUNet(**kwargs).eval()\noriginal.load_state_dict(state,strict=True);ported.load_state_dict(state,strict=True)\nassert model_hash(original)==model_hash(ported) and len(ported.state_dict())==141 and sum(p.numel() for p in ported.parameters())==15282866\nsample=torch.from_numpy(np.random.default_rng(17004).uniform(0,.05,size=(1,8,16,20)).astype(np.float32))\nwith torch.inference_mode():\n first=original(sample);second=ported(sample)\nnp.testing.assert_array_equal(first.numpy(),second.numpy())\ngpu=ported.cuda();before=model_hash(gpu);CPU_RNG=torch.get_rng_state().clone();CUDA_RNG=torch.cuda.get_rng_state().clone()\nwith torch.inference_mode():third=gpu(sample.cuda()).cpu()\ntorch.testing.assert_close(third,second,atol=2e-7,rtol=1e-4)\nassert before==model_hash(gpu) and torch.equal(CPU_RNG,torch.get_rng_state()) and torch.equal(CUDA_RNG,torch.cuda.get_rng_state())\nsave(root/'parity-admission-v1.json',dict(status='pass-original-class-AST-independent-sampler-and-pretrained-model-parity',\n original_classes_exact_AST=checked,sampler_cases=sampling,strict_weight_tensors=141,parameters=15282866,original_and_ported_CPU_output_bitexact=True,\n CUDA_vs_CPU_maximum_absolute_error=float((third-second).abs().max()),CUDA_vs_CPU_RMS_error=float((third-second).square().mean().sqrt()),\n model_hash=before,forward_RNG_unchanged=True,weights_unchanged=True,CPU_full_model_forwards=2,CUDA_full_model_forwards=1,\n CUDA_sampling_only_calls=4,peak_CUDA_allocated_bytes=torch.cuda.max_memory_allocated(),source=dict(ref(__file__),text=Path(__file__).read_text())))\nprint('PASS7 original ASTs,4 independent CPU/CUDA sampler fixtures,141 strict tensors,2 exact CPU model forwards/1 matching CUDA forward')\n"
+  }
+}

@@ -1,5 +1,21 @@
 # Experiment index
 
+[Completed V170 released RAW matching](nonlocal-raw-comparison.md): external
+NLFeMF15.28M weights, one RAW call with two fixed RGB reconstructions. Native 512
+coarse RMS −15.79–19.38% versus V169 EMA; quiet spatial RMS −6.26–32.71%.
+Mesh response falls to 2.406–2.533% of GT; quiet total/DC error rises, ISO6400
+total-flat error worsens17.67–19.03%, and all 72 ADC control inputs worsen with
+visible periodic artifacts. All 822 cases/1644 RGB rows/60 actually viewed native
+figures/12 triplets complete. Actual quality822 neural roots/4110 nested sampler
+calls; admission separately adds2 CPU and 1 CUDA model call. No parent/DINO,
+training, source/noise or original/dataz reads. 13 CPU tests, exact7-class ASTs,
+CPU model parity, CUDA tolerance and 4 independent sampler fixtures pass.
+All 3288 actual input fingerprints and durable journals audited; posthoc metrics
+and NumPy reconstruction cover72 RGB/36 RAW arrays for 36 fixed native cases.
+Both worker owners terminal; shape-preparation and missing-helper initialization
+failures precede held-out calls and remain preserved. No repeated scientific
+forward. External training data differ; keep this comparison and existing strengths.
+
 [Completed V169 spatial balance](balanced-spatial-correction.md): fixed V168
 weights;remove only the sigma8/radius24 native Gaussian component of direct RGB.
 Quiet RMS −3.74–10.69% and DC bias −11.45–31.59%,with3.806–3.837% GT mesh response.

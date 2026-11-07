@@ -1,5 +1,13 @@
 # Current model choices
 
+The [completed V170 released RAW matching comparison](nonlocal-raw-comparison.md)
+adds a pinned April2026 nonlocal model and a DINO-parent RGB reconstruction.
+Native 512 coarse-flat error falls 15.79–19.38% versus V169 EMA, but mesh response
+falls to 2.406–2.533% of GT, quiet total/DC error rises and low-noise controls gain
+periodic colored texture. Cab crossings remain missing. It uses external RAW
+training data and is a comparison, not a replacement for V120 or the useful
+V169/V161/V165 strengths. All 822 cases/60 native figures and scoped audits complete.
+
 The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
 original positive global gate as selection and restores contrast only inside
 unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS
@@ -147,6 +155,7 @@ under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |
+| Learned nonlocal RAW matching | [Completed V170](nonlocal-raw-comparison.md): released15.28M-parameter NLFeMF, direct Malvar and DINO-parent residual reconstruction from one RAW call. Coarse native512 error −15.79–19.38% versus V169 EMA; quiet spatial error lower. Mesh response falls to2.406–2.533% of GT; quiet total/DC error rises, low-noise periodic artifacts and missing cab crossings persist. All822 cases/60 native figures complete;13 CPU tests, exact original-class parity and independent sampler/selected-array checks pass. External training-data comparison; no matched training or broad superiority claim |
 | Broad direct RGB corrections | [Completed V169](balanced-spatial-correction.md): fixed V168 weights,Gaussian complement of direct RGB at sigma8/radius24 native pixels; full spectral path retained. Quiet RMS −3.74–10.69%,DC color bias −11.45–31.59%; mesh response stays3.806–3.837% of GT. All48 coarse-flat errors worsen; total-flat means +0.389–0.705%,quiet spatial +0.167–0.267%,local mottle/real crossings remain. Both endpoints/822cases/72 native views complete;47 CPU checks,six CUDA filter cases,1644 exact replays. All-case streamed metrics;posthoc full-array audit limited to36 saved native cases. Useful response/quiet-color option with flat/grain costs |
 | Fine-mesh training distribution | [Completed V168](fine-mesh-training.md): same V167 architecture/losses/init;171 finer-wire/contrast-ladder batches and829 exact old inputs/parents. Mesh response +17.48–18.09% to3.805–3.836% of GT; finest crossed recipes gain about59%,still1.8% of GT. All48 coarse-flat errors improve. Quiet RMS +1.49–5.44%,all32 spatial errors worse; total-flat means +0.136–0.228%,real crossings incomplete. Four endpoints/822cases/72 native views/audits complete;288 CPU checks,94 Adam states and exact V167 control reproduction. Retain data gain beside earlier detail/quiet/flat strengths |
 | Bounded spectral support | [Completed V167](bounded-spectral-support.md): shifted quarter-floor mapping at identical124909-parameter heads/data/init/loss/routing. Mesh response +47.33–47.55% versus exact V166 controls,to3.24–3.25% of GT; present RMS −1.09–1.15%. Quiet RMS +2.84–3.74%,all32 spatial errors worse; full-flat means +0.189–0.382%,coarse means slightly lower. Real fine crossings remain incomplete. All256 mesh support means stay near.25;coefficient RMS adapts downward. Retain useful bounded-path response beside V166 quiet color,V165 grain/flat and stronger V161/V164 detail. Four endpoints/72 actual native figures/audits complete;266 CPU checks,94 Adam states and exact controls |

@@ -1,0 +1,64 @@
+{
+  "status": "pass-final-checkout-with-preserved-diary-whitespace-correction",
+  "prior_publication_verification": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v170-nonlocal-raw-publication-verification-v2.json",
+    "sha256": "07435b6197954867563ec7fda29bac6d60304b45325e372da63065c7ee49d842"
+  },
+  "documents": {
+    "/home/dllu/proj/demosaic/README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "156525f68bc5807132115bd36a433a5a154556de1e6c78b361a7b7286bc65a53"
+    },
+    "/home/dllu/proj/demosaic/docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "67044a15ddd3f329924e53fa993a41767c885b6af79d22805221cb848d487eb5"
+    },
+    "/home/dllu/proj/demosaic/docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "92374bdadd14f9309200f296f8e273e822f85e3e33377b4967398700e3d9b29f"
+    },
+    "/home/dllu/proj/demosaic/docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "d02e55a9edad9b55441163934f1b0db0af446c562c3c85105047a49985e7f053"
+    },
+    "/home/dllu/proj/demosaic/docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "c19b45688314b614a6a6c09244a990fedfc8b1faf41ebbf50bdc3b6a716be56a"
+    },
+    "/home/dllu/proj/demosaic/docs/nonlocal-raw-comparison.md": {
+      "path": "/home/dllu/proj/demosaic/docs/nonlocal-raw-comparison.md",
+      "sha256": "c760fbd3c9b01bee80055c159dfd8fa1bfc0376a0fab05f7f0700ea4da2c8a64"
+    },
+    "/home/dllu/proj/demosaic/diary/2026-11-07-14-11-16-v170-nonlocal-raw-results.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-14-11-16-v170-nonlocal-raw-results.md",
+      "sha256": "bd31c85e9b8ecececcb93ca5befe96a232bbed4be8122b91273083f7b47a1ccd"
+    }
+  },
+  "diary_correction": {
+    "before": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-14-11-16-v170-nonlocal-raw-results.md",
+      "sha256": "f326b4704c9eae7514e925601f0934eb1c238483e5800b879dc32552c46205de"
+    },
+    "before_text": "# V170 released learned RAW matching comparison\n\nRecorded: 2026-11-07T14: 11: 16-08: 00 (America/Los_Angeles).\n\nThe released April 2026 NLFeMF model was tested on the fixed 822 cached cases,\nusing one RAW-network call per case and two fixed RGB reconstructions. This\ntests external pretrained weights; it does not isolate architecture or match\nthe project's freely licensed training pipeline. No training media were fetched.\n\nAgainst V169 EMA, native 512 coarse-flat RMS falls 15.79\u201319.38% and quiet spatial\nRMS falls 6.26\u201332.71%. These gains have substantial costs: mesh response falls\nto 2.406\u20132.533% of exact constructed amplitude, quiet total/DC error rises, and\nISO6400 native-flat total RMS rises 17.67\u201319.03%. ISO12800 total-flat RMS improves\n1.71\u20133.30%. All 72 ADC control inputs worsen in full RMS at both returns, with\nfine periodic colored texture visible in the native gray/plane/bark/fur controls.\nThe nominal cab prior erases much of the green fence; the alternate prior is\nspeckly and still lacks crossings. Main sky is smooth at ordinary display,\nbut coarse fence is rougher and natural textures weaker. The DINO-parent\ninterpolation residual reduces some direct-Malvar edge fringes without fixing\nthe tradeoff. Keep V120 as general choice and the earlier useful prototypes.\n\nAll 60 fixed native figures were actually viewed in 15 original-detail sheets,\nincluding both protected GFX scenes, both cab priors/windows and both JPEGs.\nISO100/AHD/JPEG references remain qualitative and unscored, never exact GT.\nNo source/noise, parent/DINO, training or original/dataz reads occurred.\n\nActual work: 822 unique quality roots and 4110 nested sampling calls, producing\n1644 streamed RGB metric rows. Admission separately used2 CPU and 1 synthetic\nCUDA full-model calls plus 4 CUDA sampler-only fixtures. Total new CUDA model\ncalls: 823. Both recorded workers are terminal. No scientific forward repeated.\nPeak quality CUDA allocation: 2.420598 GiB. The mixed-size wrapper intervals are\nnot a whole-pipeline or100 MP benchmark.\n\nAll 13 CPU tests pass. Seven original class ASTs, all 141 weight tensors and the\npinned sampling kernels are verified; full original/ported CPU outputs match\nexactly, with CUDA parity maximum2.24e-8 normalized. All 91 prior neural sources\nremain unchanged. The public fetcher uses restricted weights-only extraction\nwith inert unused metadata and retains upstream MIT/Caffe notices.\n\nAll 822 event/input/parent bindings and 3288 input fingerprints are audited.\nIndependent posthoc metrics and NumPy64 RAW-to-RGB reconstruction cover only\nthe 36 preselected native cases: 72 RGB and 36 RAW arrays, 250,951,168 bytes.\nThe maximum independent RGB reconstruction discrepancy is 0.012779 DN16.\nOther outputs have streamed metrics/fingerprints and in-process norm checks;\nthere is no complete new-array archive or all 822 posthoc array audit.\nIndependent Decimal arithmetic checks613 means.\n\nOriginal preparation and initialization failures remain byte-preserved.\nThe shape projection originally assumed optional metadata; correction reads\nNPY headers. The first worker missed a frozen import helper before any claim\nor neural call. A separate prelaunch dependency receipt binds the added\nunmodified helper, with unchanged inference AST and original frozen files.\nThe original plan was not edited. New52/114 GiB local/external reserves were\ndeclared before this bounded trial; older guards and receipts remain unchanged.\n\n[Completed report and native gallery](../docs/nonlocal-raw-comparison.md) \u00b7\n[Final evidence](../docs/results/v170-nonlocal-raw-final-v2.json) \u00b7\n[Publication checks](../docs/results/v170-nonlocal-raw-publication-verification-v2.json).\n\nThe fine-crossing/no-fabricated-structure goal remains open. A next matching\nexperiment needs matched free-image training and explicit low-noise identity\ncontrols; the released checkpoint is useful as a measured comparison, not a\nnew baseline. Historical prep remains in the earlier diary entry and receipts.\n\n",
+    "after": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-14-11-16-v170-nonlocal-raw-results.md",
+      "sha256": "bd31c85e9b8ecececcb93ca5befe96a232bbed4be8122b91273083f7b47a1ccd"
+    },
+    "scope": "Remove exactly one trailing empty line;all prose unchanged."
+  },
+  "public_report_bindings": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v170-nonlocal-raw-v1/report-bindings-v2.json",
+    "sha256": "45ea3464982508289afdf28e0ea48916b005b514af8483d5f8c467931dfe951c"
+  },
+  "original_report_bindings": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v2/report-bindings-v2.json",
+    "sha256": "45ea3464982508289afdf28e0ea48916b005b514af8483d5f8c467931dfe951c"
+  },
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/finalize-v170-worktree-v1.py",
+    "sha256": "e51445d8b91482824c34731481011ff3b240304d07873106934ab499fc5feafa",
+    "text": "\"\"\"Bind the final checkout and preserve the single trailing-blank-line correction.\"\"\"\nimport hashlib\nfrom pathlib import Path\nfrom train_directional_bank_trial import read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V170-nonlocal-raw-v2'\nverified=repo/'docs/results/v170-nonlocal-raw-publication-verification-v2.json';prior=read(verified)\ndiary=repo/'diary/2026-11-07-14-11-16-v170-nonlocal-raw-results.md';before=diary.read_text();old=ref(diary)\nassert old==prior['documents'][str(diary)] and before.endswith('\\n\\n')\nfor path,b in prior['documents'].items():assert ref(path)==b\nnew=before.rstrip()+'\\n';assert new+'\\n'==before;diary.write_text(new)\nbinding=root/'report-bindings-v2.json';public=repo/'docs/results/v170-nonlocal-raw-v1/report-bindings-v2.json';assert not public.exists();public.write_bytes(binding.read_bytes());assert public.read_bytes()==binding.read_bytes()\nfinal=read(repo/'docs/results/v170-nonlocal-raw-final-v2.json');assert ref(final['report']['path'])==final['report']\nfor pair in final['copies'].values():\n for b in pair.values():assert ref(b['path'])==b\nsave(repo/'docs/results/v170-final-checkout-verification-v1.json',dict(status='pass-final-checkout-with-preserved-diary-whitespace-correction',prior_publication_verification=ref(verified),documents={p:ref(p) for p in prior['documents']},\n diary_correction=dict(before=old,before_text=before,after=ref(diary),scope='Remove exactly one trailing empty line;all prose unchanged.'),public_report_bindings=ref(public),original_report_bindings=ref(binding),new_neural_forwards=0,new_noise_draws=0,\n source=dict(ref(__file__),text=Path(__file__).read_text())))\nprint('Final checkout bound;single diary trailing blank removed;all32 exact copies/current report unchanged')\n"
+  }
+}

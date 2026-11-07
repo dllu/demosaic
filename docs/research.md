@@ -1,5 +1,17 @@
 # Current method research
 
+The [V170 external checkpoint comparison](nonlocal-raw-comparison.md) tests the
+[April2026 NLFeMF paper](https://arxiv.org/abs/2604.17453) and its pinned release.
+It supplies learned RAW matching/filtering with actual noisy-input variance,
+then compares direct Malvar and a DINO-parent interpolation residual. Native 512
+coarse error falls 15.79–19.38% versus V169 EMA and quiet spatial error falls, but
+mesh response drops to 2.406–2.533% of GT, quiet color error rises and low-noise
+controls acquire a periodic pattern. Both cab priors still miss crossings.
+The port/kernel parity passes; this result motivates matched free-image training
+and low-noise identity controls, not a claim that nonlocal matching cannot help.
+All 822 cached cases and 60 native figures are complete; posthoc array checks
+cover36 selected cases. No new training, parent/DINO, source or noise draws.
+
 The completed [V169 branch intervention](balanced-spatial-correction.md) uses
 fixed V168 raw/EMA weights to isolate direct RGB and spectral contributions.
 Direct-only response stays near the parent,while its coarse corrections help
