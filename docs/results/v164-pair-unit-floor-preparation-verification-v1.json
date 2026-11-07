@@ -1,0 +1,61 @@
+{
+  "status": "pass-immutable-readiness-independent-units-and-fixed-comparators",
+  "recorded_unix_UTC": 1794066734.813139,
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-preparation-v1.json",
+    "sha256": "042e8f1fa9b192aa234d91cc3ad4ec4ff8ff100c185f0a34ce70274eb0e6ac55"
+  },
+  "byte_exact_receipts": 16,
+  "source_texts": 48,
+  "unchanged_neural_hashes": 89,
+  "new_neural_modules": 0,
+  "actual_CPU_tests": 199,
+  "restored_smoke_finite_Adam_states": 94,
+  "exact_V163_control_prefix_rows": 40,
+  "independently_reconstructed_unit_records": 1000,
+  "pairs": 1382,
+  "supervised_pairs": 1240,
+  "supervised_pairs_changed": 620,
+  "retained_prediction_arrays_checked": 6576,
+  "planned_total_scientific_head_calls": 5364,
+  "additional_leaf_output_CUDA_backwards": 16,
+  "documents": {
+    "README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "f167faac0866e2af83076c717cb3835033bdbba52f887dd3c21a6c39baaa4b1b"
+    },
+    "docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "044d10bd8578c281319a43f7554762fdcd3ee7de271a0d5824db55fd2a042c07"
+    },
+    "docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "f0c3f3afbf86c381082f75b3cd327326f9e47b0575115c2d16eff9bcf3d89efd"
+    },
+    "docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "25ba856925f5bc0da26062202cddc57d0ded63bfbbed1b7a7a4a0d76108dcb57"
+    },
+    "docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "f7d28e0524bf2ba9d9029c66b4e559308cc0fadc04241db68b5dea989bf3537e"
+    },
+    "docs/pair-unit-floor.md": {
+      "path": "/home/dllu/proj/demosaic/docs/pair-unit-floor.md",
+      "sha256": "c651d361dd6f9c190ea11743e8a935916244f8a7ea869275cbe3f10b2574a384"
+    },
+    "diary/2026-11-07-07-45-23-v164-pair-unit-floor.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-07-45-23-v164-pair-unit-floor.md",
+      "sha256": "cf6a3f43832bd3bef14494ff4641abb31e96fe4e3364363eb06177414bc98403"
+    }
+  },
+  "document_links_checked": 515,
+  "verifier": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v164-preparation-v1.py",
+    "sha256": "9bcbf35f5b1461ef0161d202fb7d65274d9c366c0921ef0527e7ee4fc06abe83",
+    "text": "\"\"\"Check frozen readiness,independent unit arithmetic and retained comparators.\"\"\"\nimport json\nimport re\nimport time\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import guard,read,ref,save\nfrom demosaic.prediction_archive import fingerprint\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V164-pair-unit-floor-v1'\nindex=repo/'docs/results/v164-pair-unit-floor-preparation-v1.json'\noutput=repo/'docs/results/v164-pair-unit-floor-preparation-verification-v1.json';assert not output.exists()\ndata=read(index);assert len(data['copies'])==16 and data['source_texts']==48\nfor item in data['copies'].values():\n    assert ref(item['original']['path'])==item['original'] and ref(item['public']['path'])==item['public']\n    assert Path(item['original']['path']).read_bytes()==Path(item['public']['path']).read_bytes()\nplan=read(root/'plan-v1.json');guard(plan);post=read(root/'postprocess-plan-v1.json');guard(post)\nbundle=read(data['sources']['path']);assert ref(data['sources']['path'])==data['sources']\nassert len(bundle['source_texts'])==48 and len(bundle['unchanged_neural_hashes'])==89\nfor item in bundle['source_texts']+[bundle['publisher']]:\n    assert ref(item['path'])['sha256']==item['sha256'] and Path(item['path']).read_text()==item['text']\nfor p,h in bundle['unchanged_neural_hashes'].items():assert ref(repo/'src/demosaic'/Path(p).name)['sha256']==h\ntable=read(plan['pair_unit_table']['path']);cache=read(plan['cache']['path'])\nassert len(table['rows'])==len(cache['batches'])==1000\npairs=affected=supervised=0\nfor entry,batch in zip(table['rows'],cache['batches'],strict=True):\n    assert entry['step']==batch['step'] and entry['batch']==batch['arrays']\n    variance=np.asarray(batch['metadata']['sensor'].get('increment_mean_variance',[]),dtype=np.float32)\n    raw=np.sqrt(variance)\n    old=np.maximum(raw,np.float32(16/65535)).reshape(entry['shape'])\n    new=np.maximum(raw,np.float32(2/65535)).reshape(entry['shape'])\n    assert old.tobytes()==np.array(entry['control_units_FP32'],dtype=np.float32).reshape(entry['shape']).tobytes()\n    assert new.tobytes()==np.array(entry['candidate_units_FP32'],dtype=np.float32).reshape(entry['shape']).tobytes()\n    assert fingerprint(old)==batch['inputs']['pair_units']\n    assert np.all(old>=new) and np.all(old<=8*new)\n    pairs+=len(old)\n    if not entry['ADC_only']:supervised+=len(old);affected+=int(np.sum(old>new))\nassert (pairs,supervised,affected)==(1382,1240,620)\nready=read(root/'readiness-audit-v1.json');assert ready['finite_Adam_states_at10']==94\nassert ready['all94_parameter_tensors_have_finite_nonzero_prefix_gradients']\nrows=[json.loads(s) for s in Path(ready['training_prefix']['path']).read_text().splitlines()];assert len(rows)==40\nold=read(plan['baseline_training']['path'])['trace']\nfor row,before,units in zip(rows,old[:40],table['rows'][:40],strict=True):\n    assert all(row[k]==before[k] for k in ['step','batch','domain','flat_target_mask'])\n    expected=before['arms']['harmonic-phase'];assert {k:row['arms']['phase-control'][k] for k in expected}==expected\n    for arm,key in [('phase-control','control_units_FP32'),('fine-pair','candidate_units_FP32')]:\n        v=np.array(units[key],dtype=np.float32).reshape(units['shape']);assert fingerprint(v)==row['arms'][arm]['pair_unit_values']\ndesign=read(root/'quality-design-v1.json');assert len(design['observations'])==822\nparity=read(root/'parity-result-v1.json');assert len(parity['CUDA_anchor_loss_checks'])==10 and len(parity['CUDA_pair_unit_loss_checks'])==6\narrays=0\nfor binding in post['retained_native_collections'].values():\n    assert ref(binding['path'])==binding\n    c=read(binding['path']);assert c['module_before']==c['module_after'] and c['RNG_unchanged']\n    for row,case in zip(c['observations'],design['observations'],strict=True):\n        assert row['id']==case['id'] and row['parent']==case['parent']\n        assert ref(row['prediction']['path'])==row['prediction'];arrays+=1\nassert arrays==6576\ndocs=['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md',\n    'docs/pair-unit-floor.md','diary/2026-11-07-07-45-23-v164-pair-unit-floor.md']\nlinks=0\nfor name in docs:\n    path=repo/name\n    for link in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',path.read_text()):\n        if '://' in link or link.startswith('#'):continue\n        assert (path.parent/link.split('#')[0]).resolve().is_file(),(path,link);links+=1\nsave(output,{'status':'pass-immutable-readiness-independent-units-and-fixed-comparators','recorded_unix_UTC':time.time(),\n    'publication':ref(index),'byte_exact_receipts':16,'source_texts':48,'unchanged_neural_hashes':89,'new_neural_modules':0,\n    'actual_CPU_tests':199,'restored_smoke_finite_Adam_states':94,'exact_V163_control_prefix_rows':40,\n    'independently_reconstructed_unit_records':1000,'pairs':1382,'supervised_pairs':1240,'supervised_pairs_changed':620,\n    'retained_prediction_arrays_checked':arrays,'planned_total_scientific_head_calls':5364,\n    'additional_leaf_output_CUDA_backwards':16,'documents':{p:ref(repo/p) for p in docs},'document_links_checked':links,\n    'verifier':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forward_calls':0,'new_noise_draws':0,\n    'scope':'Readiness and historical live snapshot only. Full trained quality,all1000 control states/outputs and actual native viewing remain pending.'})\nprint('PASS16 receipts/48 source texts/89 unchanged neural modules/1000 independent unit records/40 control+unit rows/6576 retained arrays;',links,'links')\n"
+  },
+  "new_forward_calls": 0,
+  "new_noise_draws": 0,
+  "scope": "Readiness and historical live snapshot only. Full trained quality,all1000 control states/outputs and actual native viewing remain pending."
+}

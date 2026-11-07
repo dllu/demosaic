@@ -1,0 +1,86 @@
+{
+  "recorded_unix_UTC": 1794066567.8855562,
+  "training": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/plan-v1.json",
+      "sha256": "437c226372b4b96fa1e203d62852857b11c302bbb0991504fffd67f03b8a965d"
+    },
+    "owner": {
+      "pid": 3754313,
+      "created": 1794066305.04
+    },
+    "completed": {
+      "parity": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/parity-result-v1.json",
+        "sha256": "d5efda0881eddf92ab536e97c120478e7054b17fe977a84bab611546321e06d3"
+      },
+      "smoke": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/smoke-result-v1.json",
+        "sha256": "492642a14b77755ef9585b2e49a746cb5aa501af8a77c88d7f76cfacad977869"
+      }
+    },
+    "status": "running-declared-phase",
+    "phase": "train",
+    "child": {
+      "pid": 3754794,
+      "created": 1794066341.14
+    }
+  },
+  "postprocess": {
+    "status": "waiting-for-original-training-owner",
+    "owner": {
+      "pid": 3754314,
+      "created": 1794066305.06
+    },
+    "completed": {}
+  },
+  "progress": {
+    "step": 160,
+    "counts": {
+      "phase-control": 160,
+      "fine-pair": 160
+    },
+    "updates": {
+      "phase-control": 160,
+      "fine-pair": 160
+    }
+  },
+  "observed_live_owners": [
+    {
+      "role": "training-controller",
+      "pid": 3754313,
+      "created": 1794066305.04,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/work/scripts/train_pair_unit_floor_trial.py",
+        "controller",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/plan-v1.json"
+      ]
+    },
+    {
+      "role": "train-worker",
+      "pid": 3754794,
+      "created": 1794066341.14,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "-P",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/work/scripts/train_pair_unit_floor_trial.py",
+        "worker",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/plan-v1.json",
+        "--phase",
+        "train"
+      ]
+    },
+    {
+      "role": "review-controller",
+      "pid": 3754314,
+      "created": 1794066305.06,
+      "argv": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/queue-v164-review-v1.py"
+      ]
+    }
+  ],
+  "scope": "Historical original-live snapshot,not final counts or trained quality. Original workers continue once."
+}
