@@ -1,0 +1,67 @@
+{
+  "status": "completed-primary-paper-abstract-and-pinned-author-code-review",
+  "paper": {
+    "url": "https://www.sciencedirect.com/science/article/pii/S0262885626002441",
+    "doi": "10.1016/j.imavis.2026.106137",
+    "available_online": "2026-07-28",
+    "read_scope": "Publisher abstract and section snippets;full publisher page returned403. Author code independently inspected;no full-paper reproduction claimed."
+  },
+  "repository": {
+    "url": "https://github.com/user-hbj/WGCAN",
+    "commit": "87413dd280af8228f34fe33188136077ad81ca68",
+    "commit_date_UTC": "2026-05-21T08:02:27Z",
+    "declared_license": null,
+    "root_license_file_present": false
+  },
+  "read_files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "96880eebe9e72e8739c07a7cc600c6a5c48f44aa",
+      "observation": "Describes paired RAW/RGB output,exposure-scaled packed LRD data and RAW/RGB/wavelet objective;not our physical-noise-conditioned camera-RGB interface."
+    },
+    {
+      "path": "train_WGCAN_LRD_two_L1.py",
+      "git_blob_sha": "a4c82ea079f79f7c1f83fb253d5eb13da9155123",
+      "line_refs": [
+        123,
+        124,
+        181,
+        183,
+        184,
+        185,
+        187,
+        264,
+        267
+      ],
+      "observation": "Training combines0.7 RAW L1,0.2 RGB L1,0.1 wavelet. RGB prediction is clipped0..1 before loss. Validation scalar instead combines0.5 RAW,0.4 RGB,0.1 wavelet. These weights must not be treated as a single common train/validation objective."
+    },
+    {
+      "path": "Losses/wavelet_loss.py",
+      "git_blob_sha": "fded20253c78597b95460712d58feb0febd791cf",
+      "line_refs": [
+        9,
+        15,
+        83,
+        85,
+        93,
+        96,
+        99,
+        103,
+        106
+      ],
+      "observation": "One-level 2x2 Haar-style transform;sum of meanL1 differences over LL,LH,HL,HH. A helper named euclidean_distance uses L1,not Euclidean norm. Includes low-frequency error rather than exclusively high-frequency detail."
+    },
+    {
+      "path": "models/WCGAN_Two.py",
+      "git_blob_sha": "ae2b062544cb7b69799e955cc7c9e74ef2579f7d",
+      "observation": "DWT low/high feature branches and RGB reconstruction;read for pipeline compatibility,not executed."
+    }
+  ],
+  "own_inference": "A spatial/frequency loss proposal must specify actual transform,normalization,subband weighting and reduction;wavelet loss alone does not certify low-contrast detail or sky safety. Any later test needs our same native mesh/blank/quiet/flat controls. This reading does not change the fixed V166 trial.",
+  "adopted_code": false,
+  "downloaded_weights": false,
+  "new_training_data": 0,
+  "new_neural_forwards": 0,
+  "new_sensor_sampler_calls": 0,
+  "tools": "Connected GitHub fetch used for primary repository,root listing,commit and pinned files. No external code executed."
+}

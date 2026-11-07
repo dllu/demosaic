@@ -316,3 +316,21 @@ samples; dropping phase, mixing phases or restricting bands can discard distinct
 This algebra does not reconstruct unmeasured RGB samples, measure trained detail
 recovery or establish flat safety. V166's fixed common-support routing trial is
 unchanged. [Own fixtures, source and primary-paper record](results/packed-fourier-reading-20261107-v1.json).
+
+## Inspecting a recent wavelet objective
+
+The July2026 [WGCAN publisher abstract](https://www.sciencedirect.com/science/article/pii/S0262885626002441)
+describes wavelet low/high processing followed by color reconstruction. The full
+publisher page returned403; the abstract and author code were reviewed separately.
+At [pinned author commit87413dd](https://github.com/user-hbj/WGCAN/tree/87413dd280af8228f34fe33188136077ad81ca68),
+the wavelet term sums mean L1 differences over all four one-level Haar bands,
+including LL. Training uses RAW/RGB/wavelet weights0.7/0.2/0.1 after RGB clipping;
+the reported validation loss uses0.5/0.4/0.1. A helper's Euclidean name does not
+describe its actual L1 operation.
+
+Our inference is to specify the exact transform, normalization and subband
+weighting before interpreting any wavelet-loss comparison. This paired-exposure
+RAW/RGB pipeline does not establish our physical-noise-conditioned camera-RGB
+or quiet-sky quality. The inspected repository declares no license; no code,
+weights or data are adopted. V166 remains fixed. [Primary URLs, pinned file hashes,
+line references and reading limits](results/wgcan-reading-20261107-v1.json).
