@@ -335,11 +335,20 @@ data hypothesis, not an established explanation or quality gain; V167 remains
 fixed. No new training pixels, sensor draws, neural forwards or original media
 reads were used for this audit.
 
-The [V168 preparation](fine-mesh-training.md) implements that data test with
+The [completed V168 experiment](fine-mesh-training.md) implements that data test with
 171 changed mesh batches and 829 legacy batches. Actual changed noisy-pair
 signal RMS has median 10.71 DN16 versus 2.32 before; masks and clean empty
 backgrounds are independently checked. It changes frequency and contrast
-coverage jointly. Full restoration quality is pending.
+coverage jointly. Matched V167 control trace,state and1,644 actual predictions
+reproduce exactly. Mesh response rises17.48–18.09%,to3.805–3.836% of GT; the nine
+both-fine recipes gain about59%,still only1.8% of GT. All48 coarse-flat errors
+improve at both endpoints. Quiet RMS rises1.49–5.44%,all32 quiet spatial errors
+worsen,and total-flat means rise0.136–0.228%; fine real crossings remain
+incomplete. The data result is useful but does not resolve the quiet/detail
+tradeoff or isolate frequency from contrast. All822 cases,four endpoints,
+72 actually viewed native figures and independent audits are complete. Original
+resource/policy stops,750-state recovery and2770-forward review adoption remain
+preserved; no full-training restart or repeated review inference.
 
 ## Native frequencies from packed phases
 

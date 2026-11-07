@@ -1,0 +1,56 @@
+{
+  "status": "2770-original-actual-rows-admitted-518-new-forwards-required",
+  "original_root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2",
+  "completed_collections": {
+    "legacy-control-raw-step1000": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/legacy-control-raw-step1000/collection-v1.json",
+      "sha256": "2fcb14a1a30f33315cd189f1a9d3c4617e7635e84012eba3c02ce4a8c30925dc"
+    },
+    "legacy-control-EMA-step1000": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/legacy-control-EMA-step1000/collection-v1.json",
+      "sha256": "0530659956f83963eb352be7354bfaab330f717cb09952e6d408d0216ebb970f"
+    },
+    "fine-mesh-raw-step1000": {
+      "path": "/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/fine-mesh-raw-step1000/collection-v1.json",
+      "sha256": "958f2f4beaa457f1e5b30d88946e17f4c8a8f2cd41c3bd625031948ff7144533"
+    }
+  },
+  "partial": {
+    "label": "fine-mesh-EMA-step1000",
+    "observations": {
+      "path": "/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/fine-mesh-EMA-step1000/observations-v1.jsonl",
+      "sha256": "aba3a5d068fadf9df885b8ff4c4d94c910e0bef6b552c6d6a5b4a26347a5bb0a"
+    },
+    "forwards": {
+      "path": "/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/fine-mesh-EMA-step1000/forward-events-v1.jsonl",
+      "sha256": "b14ae421782b1117299f5285d131da43545028a4a15024077665c63ae900ada5"
+    },
+    "export": {
+      "path": "/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/fine-mesh-EMA-step1000/module.pt",
+      "sha256": "d089b40e5502887510308816c648a9fc91d9cb58c687aa57862ed853e1efbc61"
+    },
+    "completed": 304,
+    "remaining": 518
+  },
+  "actual_completed_forwards": 2770,
+  "actual_remaining_forwards": 518,
+  "original_status": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/postprocess-status-v1.json",
+    "sha256": "a8026ed8fe6b6ed24edd5989042e6a1326b405c76a4880a549bf932e1aa82109"
+  },
+  "failed_worker_owner": {
+    "pid": 4074208,
+    "created": 1794083340.04
+  },
+  "failed_queue_owner": {
+    "pid": 4073550,
+    "created": 1794082938.89
+  },
+  "remaining_prediction_bytes": 1417216768,
+  "reason": "Inherited reviewer hardcoded120GiB while declared V168 policy is116GiB. It stopped before a new forward.2770 complete forward/observation records are retained;no completed inference is repeated.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/prepare-v168-review-continuation-v1.py",
+    "sha256": "1c32e4970adbae7d5c43fb97141464e258bba5182c7dc18eaa1d753ba65113ff",
+    "text": "\"\"\"Admit2770 actual completed review forwards and continue only518 unfinished cases.\"\"\"\nimport shutil\nfrom pathlib import Path\nimport numpy as np\nfrom train_directional_bank_trial import read,ref,save,guard\nfrom train_v43_quality_trial import live\nfrom demosaic.prediction_archive import fingerprint\nrepo=Path('/home/dllu/proj/demosaic');old=repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v2';root=repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v3';external=Path('/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v3')\nassert not root.exists() and not external.exists();prior=read(old/'plan-v1.json');guard(prior);status=read(old/'postprocess-status-v1.json')\nassert status['status']=='failed-preserved-no-automatic-retry' and status['completed']['review']['returncode']==1\nassert not live(status['owner']) and not live(status['completed']['review']['owner'])\nstate=read(old/'train-result-v1.json');design=read(old/'quality-design-v1.json');full={};partial=None;total=0\nfor arm in ['legacy-control','fine-mesh']:\n for endpoint in ['raw','EMA']:\n  label=f'{arm}-{endpoint}-step1000';point=Path(prior['quality_output_roots'][label])/label;collection=point/'collection-v1.json'\n  if collection.exists():\n   c=read(collection);assert c['component_forwards']==822 and len(c['observations'])==822 and c['module_before']==c['module_after'];full[label]=ref(collection);total+=822\n  else:\n   observations=point/'observations-v1.jsonl';forwards=point/'forward-events-v1.jsonl';rows=[__import__('json').loads(s) for s in observations.read_text().splitlines()];events=[__import__('json').loads(s) for s in forwards.read_text().splitlines()]\n   assert label=='fine-mesh-EMA-step1000' and len(rows)==len(events)==304 and len(list(point.glob('prediction-*.npy')))==304\n   for i,(row,event,case) in enumerate(zip(rows,events,design['observations'][:304],strict=True)):\n    assert row['id']==case['id']==event['id'] and event['index']==i and event['returned_forwards']==i+1\n    assert ref(row['prediction']['path'])==row['prediction'] and row['parent']==case['parent']\n    a=dict(np.load(case['arrays']['path']));value=np.load(row['prediction']['path']);assert fingerprint(value)==row['values'] and np.isfinite(value).all()\n    for k,v in row['inputs'].items():assert fingerprint(a[k])==v\n   partial={'label':label,'observations':ref(observations),'forwards':ref(forwards),'export':ref(point/'module.pt'),'completed':304,'remaining':518};total+=304\nassert len(full)==3 and total==2770\nremaining_bytes=sum(Path(c['parent']['path']).stat().st_size for c in design['observations'][304:])\nassert shutil.disk_usage('/mnt/external').free>116.5*2**30+remaining_bytes and shutil.disk_usage(repo).free>56.75*2**30\nroot.mkdir(parents=True);external.mkdir();copies={}\nfor p in old.glob('*'):\n if p.is_file() and (p.name.endswith('.json') or p.name in ['protocol-document-v1.md','protocol-document-v2.md','train-trace-v1.jsonl','data-parent-forward-events-v1.jsonl','data-parent-flag-validation-trace-v1.jsonl','resume-forward-events-v1.jsonl']):\n  if p.name in ['plan-v1.json','launch-v1.json','queue-launch-v1.json','postprocess-status-v1.json','postprocess-plan-v1.json','postprocess-import-preflight-v1.json','final-helper-preparation-v1.json','publication-helper-preparation-v1.json','review.claim']:continue\n  target=root/p.name;shutil.copyfile(p,target);copies[p.name]={'original':ref(p),'copy':ref(target)}\nshutil.copytree(old/'postprocess-v1',root/'postprocess-v1');reviewer=root/'postprocess-v1/scripts/review_fine_mesh_trial.py';s=reviewer.read_text();assert '> 120 * 2**30' in s;reviewer.write_text(s.replace('> 120 * 2**30','> 116 * 2**30'))\nadoption={'status':'2770-original-actual-rows-admitted-518-new-forwards-required','original_root':str(old),'completed_collections':full,'partial':partial,\n 'actual_completed_forwards':2770,'actual_remaining_forwards':518,'original_status':ref(old/'postprocess-status-v1.json'),\n 'failed_worker_owner':status['completed']['review']['owner'],'failed_queue_owner':status['owner'],'remaining_prediction_bytes':remaining_bytes,\n 'reason':'Inherited reviewer hardcoded120GiB while declared V168 policy is116GiB. It stopped before a new forward.2770 complete forward/observation records are retained;no completed inference is repeated.',\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())}\nsave(root/'review-adoption-v1.json',adoption);save(root/'review-prior-artifact-copies-v1.json',copies)\nplan=dict(prior);plan.update(root=str(root),external_root=str(external),external_quality_root=str(external),original_partial_review_root=str(old),review_adoption=ref(root/'review-adoption-v1.json'))\nplan['scope']+=' Review-policy recovery:inherited120GiB reviewer guard disagreed with declared116GiB policy and stopped after2770 complete actual forwards.3 complete collections and304 final-EMA rows are adopted after hash/fingerprint/journal checks;only518 unfinished cases run under corrected116GiB guard. No additional review inference or data/noise construction. Actual head counts remain5638/12688. Final recorded scientific owners17,model-stage guard failures2 and dependent controller failures3. Original source/failed queue/journals/predictions remain intact.'\nplan['quality_output_roots']={f'{a}-{e}-step1000':str((root if a=='legacy-control' else external)/'review-v1') for a in ['legacy-control','fine-mesh'] for e in ['raw','EMA']}\nplan['inputs']=[*prior['inputs'],ref(old/'plan-v1.json'),ref(root/'review-adoption-v1.json'),ref(old/'postprocess-status-v1.json'),ref(root/'review-prior-artifact-copies-v1.json')]\nplan['frozen_files']=dict(prior['frozen_files']);plan['frozen_files'].update({str(p):ref(p)['sha256'] for p in (root/'postprocess-v1/scripts').glob('*.py')})\nsave(root/'plan-v1.json',plan);guard(plan)\nprint('Admitted2770 completed reviews;remaining518;corrected declared116GiB policy;no new inference yet')\n"
+  }
+}

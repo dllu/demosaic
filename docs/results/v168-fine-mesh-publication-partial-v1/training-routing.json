@@ -1,0 +1,65 @@
+{
+  "status": "completed-recorded-trace-reduction",
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/train-result-v1.json",
+    "sha256": "8f7f7ef0b0bd94a855383a277b2d139bbcffefd6c98fb925310ac75ac6ac9250"
+  },
+  "cache": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/cache-result-v2.json",
+    "sha256": "c7b02f5994dddca277601bf778604f68729b820fc34b732d2d1a9855d7c2df54"
+  },
+  "groups": [
+    {
+      "arm": "legacy-control",
+      "ADC_only": true,
+      "batches": 100,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 100,
+      "exact_zero_total_losses": 100
+    },
+    {
+      "arm": "legacy-control",
+      "ADC_only": false,
+      "batches": 900,
+      "norm_median": 1.0178191661834717,
+      "norm_maximum": 479.2078857421875,
+      "norms_over_one": 459,
+      "sum_norm_capped_at_one_squared_proxy": 552.6594161287497,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    },
+    {
+      "arm": "fine-mesh",
+      "ADC_only": true,
+      "batches": 100,
+      "norm_median": 0.0,
+      "norm_maximum": 0.0,
+      "norms_over_one": 0,
+      "sum_norm_capped_at_one_squared_proxy": 0.0,
+      "exact_zero_norms": 100,
+      "exact_zero_total_losses": 100
+    },
+    {
+      "arm": "fine-mesh",
+      "ADC_only": false,
+      "batches": 900,
+      "norm_median": 1.0777225494384766,
+      "norm_maximum": 427.0531005859375,
+      "norms_over_one": 461,
+      "sum_norm_capped_at_one_squared_proxy": 557.9791156119504,
+      "exact_zero_norms": 0,
+      "exact_zero_total_losses": 0
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/route-v168-final-v2.py",
+    "sha256": "19863e306056a2f3d1db7ca3e46c252d70e66b6ffd785aa89bec2f350b4fb019",
+    "text": "\"\"\"Reduce actual pre-clip traces without new training or forward calls.\"\"\"\nfrom pathlib import Path\n\nimport numpy as np\nfrom train_directional_bank_trial import read,ref,save\n\nroot=Path('/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2')\nplan=read(root/'plan-v1.json');cache=read(plan['cache']['path']);training=read(root/'train-result-v1.json')\ngroups=[]\nfor arm in training['counts']:\n    for adc in [True,False]:\n        rows=[r['arms'][arm] for r,b in zip(training['trace'],cache['batches'],strict=True)\n            if (b['metadata']['noise']['shot']==b['metadata']['noise']['read']==0)==adc]\n        norms=np.array([r['gradient_norm'] for r in rows],dtype=np.float64)\n        groups.append({'arm':arm,'ADC_only':adc,'batches':len(rows),\n            'norm_median':float(np.median(norms)),'norm_maximum':float(norms.max()),\n            'norms_over_one':int((norms>1).sum()),'sum_norm_capped_at_one_squared_proxy':float((np.minimum(norms,1)**2).sum()),\n            'exact_zero_norms':int((norms==0).sum()),'exact_zero_total_losses':sum(r['loss']==0 for r in rows)})\noutput=root/'training-routing-summary-v1.json';assert not output.exists()\nsave(output,{'status':'completed-recorded-trace-reduction','training':ref(root/'train-result-v1.json'),\n    'cache':plan['cache'],'groups':groups,'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n    'new_forwards':0,'new_noise_draws':0,\n    'scope':'Two identical V167 bounded-support heads,124909 parameters/47 tensors,support floor.25,all90 neural source files unchanged. Only candidate data distribution differs:171/341 mesh batches replace periods6..32 with6..10 and balanced contrast bands.02,.05,.125,.25,.4;829 original batches/parents unchanged. Camera/CFA/geometry/background/exposure/noise coefficients/seeds match;changed Poisson rates do not imply identical noisy draws. New clean empty targets exactly match legacy. Same V167 common fixed-support surrogate routing/weight1/unit16,difference1/floor2/epsilon.003,anchor.25,base losses/init/AdamW/LR/clipping/EMA. 1000updates each,fixed raw/EMA endpoints/all822 cases,3288 review roots/1644 new external arrays and1644 actual bit-exact V167 control replays. No architecture,loss or held-out input changes;frequency and contrast change jointly,not isolated factors. New data cache has171 original parent/DINO roots plus171 explicit archived-deterministic-policy validation roots;684images each pass,342root/1368images total per parent/backbone. All inputs/noise constructed once;6 inspected inputs adopted and165additional inputs. Head stages have20 discarded smoke+2000 train+3288 review=5308roots/11368images,with no new compatibility roots becauseall90 neural sources match. 288 CPU checks;genuine8+2 restoration;94 final Adam states;all1000 V167 control trace/raw/EMA/Adam and1644 actual outputs must reproduce. Actual units and masks need audits for171 new target batches;829 inherited masks replay separately. Both GFX scenes/priors/windows/JPEGs and18held-out IDs stay excluded;references qualitative,notGT.72native figures/24triplets/actual viewing/eight retained comparators. New56/116GiB reserves+.5GiB margin,.25GiB local bound;12GiB CUDA,52/32GiB RAM. Originals/dataz unused;prior sources,receipts,first data-cache flag omission and all predictions preserved. No quality or flat-safety guarantee.'})\nfor row in groups:print(row)\n"
+  },
+  "new_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Two identical V167 bounded-support heads,124909 parameters/47 tensors,support floor.25,all90 neural source files unchanged. Only candidate data distribution differs:171/341 mesh batches replace periods6..32 with6..10 and balanced contrast bands.02,.05,.125,.25,.4;829 original batches/parents unchanged. Camera/CFA/geometry/background/exposure/noise coefficients/seeds match;changed Poisson rates do not imply identical noisy draws. New clean empty targets exactly match legacy. Same V167 common fixed-support surrogate routing/weight1/unit16,difference1/floor2/epsilon.003,anchor.25,base losses/init/AdamW/LR/clipping/EMA. 1000updates each,fixed raw/EMA endpoints/all822 cases,3288 review roots/1644 new external arrays and1644 actual bit-exact V167 control replays. No architecture,loss or held-out input changes;frequency and contrast change jointly,not isolated factors. New data cache has171 original parent/DINO roots plus171 explicit archived-deterministic-policy validation roots;684images each pass,342root/1368images total per parent/backbone. All inputs/noise constructed once;6 inspected inputs adopted and165additional inputs. Head stages have20 discarded smoke+2000 train+3288 review=5308roots/11368images,with no new compatibility roots becauseall90 neural sources match. 288 CPU checks;genuine8+2 restoration;94 final Adam states;all1000 V167 control trace/raw/EMA/Adam and1644 actual outputs must reproduce. Actual units and masks need audits for171 new target batches;829 inherited masks replay separately. Both GFX scenes/priors/windows/JPEGs and18held-out IDs stay excluded;references qualitative,notGT.72native figures/24triplets/actual viewing/eight retained comparators. New56/116GiB reserves+.5GiB margin,.25GiB local bound;12GiB CUDA,52/32GiB RAM. Originals/dataz unused;prior sources,receipts,first data-cache flag omission and all predictions preserved. No quality or flat-safety guarantee."
+}

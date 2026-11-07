@@ -1,0 +1,24 @@
+{
+  "status": "unchanged-fixed-period-diagnostic-rebound-before-quality-after-checkpoint-recovery",
+  "recorded_unix_UTC": 1794084303.2700357,
+  "design": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/quality-design-v1.json",
+    "sha256": "90a0f9e44813f55581fedc64fbab9a01559d79c7edbe37c48b9b642fe08800f0"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v168-mesh-period-strata-v3.py",
+    "sha256": "0070db2483015dbaf83b7a1f4ce4fe03856c2dda31f488796f751cadf704de06",
+    "text": "\"\"\"Additional post-launch, pre-quality nominal mesh period stratification.\"\"\"\nfrom collections import defaultdict\nfrom pathlib import Path\nimport numpy as np\nfrom train_directional_bank_trial import read, ref, save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v3'\nprep_path=repo/'docs/results/v168-mesh-period-strata-preparation-v3.json';prep=read(prep_path)\nassert ref(Path(__file__))=={k:prep['source'][k] for k in ['path','sha256']}\nassert ref(root/'quality-design-v1.json')==prep['design']\ncases={c['id']:c for c in read(root/'quality-design-v1.json')['observations']}\nscores=read(root/'scores-v1.json');groups=defaultdict(list)\nfields=['full_error_RMS_DN16','template_gain','blank_error_RMS_DN16','blank_spatial_RMS_DN16','blank_DC_RMS_DN16','blank_added_RMS_DN16']\nfor row in scores['rows']:\n if row['kind']!='mesh':continue\n c=cases[row['id']];recipe=c['source']['recipe'];fine=sum(v<=10 for v in recipe['periods_final_pixels'])\n groups[row['method'],row['present'],fine].append((row,recipe['seed']))\nrecords=[]\nfor (method,present,fine),values in groups.items():\n seeds=defaultdict(list)\n for row,seed in values:seeds[seed].append(row)\n per_seed=[{'seed':seed,'rows':len(rows),**{field:float(np.mean([r[field] for r in rows])) for field in fields}} for seed,rows in seeds.items()]\n assert all(v['rows']==4 for v in per_seed)\n records.append({'method':method,'present':present,'nominal_carriers_at_most10_pixels':fine,'rows':len(values),'distinct_recipes':len(seeds),\n  'means':{field:float(np.mean([r[field] for r,s in values])) for field in fields},'per_seed':per_seed})\nassert len(records)==36\noutput=repo/'docs/results/v168-mesh-period-strata-v1.json';assert not output.exists()\nsave(output,{'status':'completed-additional-nominal-period-stratification','preparation':ref(prep_path),'scores':ref(root/'scores-v1.json'),\n 'groups':records,'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'new_forwards':0,'new_noise_draws':0,\n 'scope':prep['scope']})\nfor r in records:\n if r['present']:print(r['method'],'fine families',r['nominal_carriers_at_most10_pixels'],'recipes',r['distinct_recipes'],'response',r['means']['template_gain'],'full',r['means']['full_error_RMS_DN16'],'blank',r['means']['blank_error_RMS_DN16'])\n"
+  },
+  "scores_and_completed_review_absent": true,
+  "nominal_carriers_at_most10_pixels_recipe_counts": {
+    "0": 26,
+    "1": 29,
+    "2": 9
+  },
+  "scope": "Same fixed nominal-period diagnostic as V167,declared before V168 quality exists. All64 recipes/all related CFA/noise rows retained. Groups zero,one,two nominal carrier periods<=10 pixels contain26/29/9 distinct recipes. This is not actual post-geometry frequency or independent scene replication. All six fixed methods,present and absent cases,all per-recipe means retained. V168 changes training frequency and contrast coverage jointly;no new evaluation inputs or neural calls,promotion gate,significance or isolated causal claim.",
+  "supersedes": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v168-mesh-period-strata-preparation-v2.json",
+    "sha256": "8e7ae54027cb637599049167a673a4e85b32123c07b66cb33a637ea2b900be91"
+  }
+}

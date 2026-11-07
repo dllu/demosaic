@@ -1,5 +1,21 @@
 # Experiment index
 
+[Completed V168 finer-wire training](fine-mesh-training.md): identical V167
+heads/losses/init,171 changed mesh batches and829 archived input/parent adoptions.
+Mesh response rises17.48–18.09%,to3.805–3.836% of GT; both-fine recipes gain
+about59%,still1.8% of GT. All48 coarse-flat errors improve. Quiet RMS rises
+1.49–5.44%,all32 spatial errors worsen,and total-flat means rise0.136–0.228%;
+real fine crossings remain incomplete. Both1k heads/four endpoints/822cases/
+72 native figures and independent audits complete. All288 CPU checks,94 Adam
+states,1,000 exact V167 control rows/state and1,644 actual prediction replays pass.
+Actual work5638 head roots/12688 images plus342 parent roots/1368 images;
+342 DINO calls are nested. The915-step disk stop resumes the750 checkpoint,
+replays165 completed rows exactly and finishes. Review adopts2770 completed
+forwards and runs only518 unfinished cases after correcting the guard. All17
+owners terminal; two model-stage guard stops,three dependent controller failures,
+one recovery,no full-training restart. Parent-policy,read-only verifier and
+publication-path corrections preserve original sources,logs and arrays.
+
 [Completed V162 target-flat anchor](flat-target-anchor.md): identical V161
 harmonic heads, only anchor weight 0 versus 0.25. Quiet spatial RMS falls
 4.73–7.73% on all 32 inputs; total quiet RMS falls 1.68–5.29%, improving 26/32

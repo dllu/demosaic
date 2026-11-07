@@ -1,0 +1,24 @@
+{
+  "status": "original750-checkpoint-recovery-controller-launched",
+  "owner": {
+    "pid": 4073548,
+    "created": 1794082938.87
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/plan-v1.json",
+    "sha256": "8f5775005e9a810fce2980b0cc7356e8dff69d6d4196eb2d062bf2e5bf1d98f3"
+  },
+  "adoption": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/resume-adoption-v1.json",
+    "sha256": "954aa5db63bcb9c8d1979cf2bdc2d60a7d4983048a835c94dcb26b0c51a7adad"
+  },
+  "CPU_readiness": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/recovery-CPU-readiness-v1.json",
+    "sha256": "4a9effe73d38333a2fcaf97ac206623e179a9c021922d084f003f963eba82848"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/launch-v168-recovery-v1.py",
+    "sha256": "0224fa4031d3499c9467494ffbe5603cee31a4dcbaf5129489bb624a66012baa",
+    "text": "\"\"\"Launch the admitted original checkpoint recovery;never restart full training.\"\"\"\nimport os,subprocess\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import guard,read,ref,save\nfrom train_v43_quality_trial import live\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V168-fine-mesh-ladder-v2';plan=read(root/'plan-v1.json');guard(plan)\nassert not (root/'launch-v1.json').exists() and not (root/'controller.claim').exists()\nassert read(root/'recovery-CPU-readiness-v1.json')['exact_original_control_rows']==915\nassert read(root/'postprocess-import-preflight-v1.json')['returncode']==0\nwith (root/'controller-v1.log').open('x') as log:\n p=subprocess.Popen([str(repo/'.venv/bin/python'),'-P',plan['runner']['path'],'controller',str(root/'plan-v1.json')],cwd=repo,\n  env=dict(os.environ,PYTHONPATH=f\"{plan['work']}/src:{plan['work']}/scripts\",OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1'),\n  stdin=subprocess.DEVNULL,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)\nowner={'pid':p.pid,'created':psutil.Process(p.pid).create_time()}\nsave(root/'launch-v1.json',{'status':'original750-checkpoint-recovery-controller-launched','owner':owner,'plan':ref(root/'plan-v1.json'),\n 'adoption':ref(root/'resume-adoption-v1.json'),'CPU_readiness':ref(root/'recovery-CPU-readiness-v1.json'),'source':dict(ref(Path(__file__)),text=Path(__file__).read_text())})\nprint(owner,flush=True)\n"
+  }
+}
