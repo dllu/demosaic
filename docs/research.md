@@ -13,6 +13,15 @@ keeping V172's balanced and earlier quiet/flat strengths available. Controlling
 the extra response in blank regions remains necessary. All 60 native figures
 were inspected, and full training/checkpoint/quality audits pass.
 
+The [V181 follow-up](flat-spatial-evidence.md) adds spatial-error variance inside
+the existing 17px clean-flat mask, at fixed 4-DN16 units and weight 0.25. It
+separates spatial pressure from constant RGB bias while retaining actual weak
+target gradients. The architecture, original seven terms, mask and training
+recipe are unchanged. All 55 focused CPU tests and two native CUDA updates with
+genuine restoration pass; both loss and 6.29 million output-gradient coordinates
+match CPU with zero observed differences. Matched training is running; this
+implementation evidence establishes no trained detail or noisy-sky gain.
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,
 reaching 3.9243% / 3.9235% of GT amplitude. This is uneven: fewer than half of

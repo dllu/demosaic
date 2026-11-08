@@ -19,6 +19,12 @@ Both endpoints, independent training/quality audits and all 60 native figures/
 12 triplets are complete and actually inspected. Fifteen methods retain the
 earlier detail, quiet and flat strengths.
 
+The [V181 clean-flat spatial loss](flat-spatial-evidence.md) now tests whether
+V180 can retain that gain with less quiet-region texture. It adds one target-only
+spatial-error term, keeping the architecture and old seven terms unchanged.
+All 55 focused CPU checks and two native CUDA updates/restoration pass; the
+900-update matched continuation is running. V181 image quality is unmeasured.
+
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
 0.03–0.05% versus V172, and real fine crossings remain weak. Raw quiet RMS falls
