@@ -1,0 +1,32 @@
+{
+  "status": "pass-first-actual-GPU-larger-window-review-record-CPU-QR-samples",
+  "created_unix_UTC": 1794163916.8744256,
+  "review_owner_observed_live": {
+    "pid": 1427978,
+    "created": 1794163877.89
+  },
+  "record_line_uncompressed_sha256": "33e2a2b72a081fc70e93469115e52061d71dc4a068d525e287d4515fd3fb5460",
+  "id": "mesh-seed2026112300-present-iso6400-prior-RGGB",
+  "method": "V193-large-dense-raw",
+  "arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112300-present-iso6400-prior-RGGB.npz",
+    "sha256": "dc8aa6624ef82e6229f5dcaa2359ef5f16d536d7b11d42f92adff94f6c57f67d"
+  },
+  "real_coordinate_checks": 1440,
+  "maximum_errors": {
+    "context": 6.637970617617839e-08,
+    "coefficient": 1.0283529106383527e-10,
+    "aligned_spectra": 1.0950441942103595e-17,
+    "propagated_variance": 3.1763735522036263e-22
+  },
+  "helper": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/quality-audit-work-v1/scripts/dense_spectrum_evidence_receipt.py",
+    "sha256": "8f59c4cb31b280bc2e43da30e844b624af8ea037ba7475ae75748d26492f2da5"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v193-first-actual-review-check-v1.py",
+    "sha256": "2f75abbb23610a1729182f4d4a087d0e29e1d747cd3037635b6c0d16186f3b2c",
+    "text": "from pathlib import Path\nimport sys,json,zlib,hashlib,time\nimport numpy as np\nR=Path.cwd();T=R/'.cache/quality-20261107/V193-large-dense-trial-v1';sys.path[:0]=[str(T/'quality-audit-work-v1/scripts'),str(T/'work/src'),str(T/'work/scripts')]\nfrom phase_admission_protocol import read,ref,owner_live\nfrom dense_spectrum_evidence_receipt import audit_samples,validate_dense\nfrom train_large_dense_trial import save\np=read(T/'plan-v1.json');owner=read(T/'review-launch-v1.json')['owner'];assert owner_live(owner)\nraw=(T/'quality-observations-v1.jsonl.gz').read_bytes();data=zlib.decompressobj(16+zlib.MAX_WBITS).decompress(raw)\nline,sep,rest=data.partition(b'\\n');assert sep,'First complete line not yet available; do not claim terminal stream'\nr=json.loads(line);assert r['method']=='V193-large-dense-raw' and r['dense']['windows']==[129,33,17]\nassert ref(r['arrays']['path'])==r['arrays']\nwith np.load(r['arrays']['path'],allow_pickle=False)as a:\n packed,variance,colors=[a[k]for k in ['packed','variance','colors']]\n validate_dense(r['dense'],packed.shape,colors,p['module_config'])\n count,errors=audit_samples(r['dense'],packed,variance,colors,p['module_config'])\nsave(T/'first-review-record-CPU-check-v1.json',{'status':'pass-first-actual-GPU-larger-window-review-record-CPU-QR-samples','created_unix_UTC':time.time(),'review_owner_observed_live':owner,'record_line_uncompressed_sha256':hashlib.sha256(line+b'\\n').hexdigest(),'id':r['id'],'method':r['method'],'arrays':r['arrays'],'real_coordinate_checks':count,'maximum_errors':errors,'helper':ref(T/'quality-audit-work-v1/scripts/dense_spectrum_evidence_receipt.py'),'source':dict(ref(__file__),text=Path(__file__).read_text()),'scope':'One already completed actual GPU record with dense129/stride64. Full750input audit still required. Partial journal read does not claim closed stream or immutable whole-journal hash. No extra neural,source ornoise draw.'})\nprint('PASS first actual129-window GPU record/1440independentCPU-QRcoordinates',errors)\n"
+  },
+  "scope": "One already completed actual GPU record with dense129/stride64. Full750input audit still required. Partial journal read does not claim closed stream or immutable whole-journal hash. No extra neural,source ornoise draw."
+}

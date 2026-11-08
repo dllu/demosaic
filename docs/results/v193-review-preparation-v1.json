@@ -1,0 +1,70 @@
+{
+  "status": "matched900update-training-audited-original-two-endpoint-review-live-quality-pending",
+  "created_unix_UTC": 1794163949.5614767,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v193-publish-review-preparation-v1.py",
+    "sha256": "7106f0e03e2fc3c48a962ea3eb92ea72ad315279b825d63bc5d35d5fe3322498",
+    "text": "from pathlib import Path\nimport sys,json,time,os\nR=Path.cwd();T=R/'.cache/quality-20261107/V193-large-dense-trial-v1';sys.path.insert(0,'scripts')\nfrom phase_admission_protocol import read,ref,owner_live\nassert not owner_live(read(T/'wave-train-launch-v1.json')['owner'])\naudit=read(T/'training-audit-v1.json');assert audit['status'].startswith('pass-') and audit['trace_checks']['updates']==900\nowner=read(T/'review-launch-v1.json')['owner'];assert owner_live(owner)\nD=R/'docs/results/v193-review-preparation-v1';D.mkdir()\nitems={'training-result-v1.json':T/'wave-train-result-v1.json','training-audit-v1.json':T/'training-audit-v1.json','training-audit-v1.log':T/'training-audit-v1.log','first-review-record-CPU-check-v1.json':T/'first-review-record-CPU-check-v1.json','train-review-controller-result-v1.json':T/'train-review-controller-result-v1.json'}\ncopies={}\nfor name,source in items.items():\n dest=D/name;os.link(source,dest);assert ref(source)['sha256']==ref(dest)['sha256'];copies[name]={'original':ref(source),'public':ref(dest)}\nv={'status':'matched900update-training-audited-original-two-endpoint-review-live-quality-pending','created_unix_UTC':time.time(),'source':dict(ref(__file__),text=Path(__file__).read_text()),'copies':copies,'review_owner_observed_live':owner,'previous_preparation':ref(R/'docs/results/v193-large-dense-preparation-v1.json'),'scope':'Training1000rows/900updates/3600images/100ADCskips/900nine-term totals/900masks/five checkpoints/1890inherited comparisons/headAdam900. SameV191data/loss/schedule; originaltrainingcompletedonce, genuine row8restoration continues9. First actualGPUreviewrecord independently CPU-QRchecked1440coordinates for129window. Full both822case quality/750input QRsamples/60actualnativeviews/12triplets/browserchecks still required; no quality promotion.'}\nwith(R/'docs/results/v193-review-preparation-v1.json').open('x')as f:json.dump(v,f,indent=2);f.write('\\n')\np=R/'docs/large-dense-spectrum-readout.md';s=p.read_text().replace('The matched training run is active;','The matched training run and full trace/five-checkpoint audit are complete; both-endpoint quality review is running;')\ns+='\\nThe completed training audit checks 900 nine-term totals, 900 masks, all matched V191 schedule fields, five checkpoints and 1,890 inherited-tensor comparisons. All four head Adam clocks end at900. The original training process is terminal; the review uses its saved final checkpoint. The first actual 129-window GPU review record passes 1,440 independent CPU/QR sample-coordinate checks. The full quality audit remains required. [Training audit and review preparation](results/v193-review-preparation-v1.json).\\n';p.write_text(s)\nfor name in ['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md']:\n p=R/name;s=p.read_text();old='Fresh matched training and the sealed full review are running; learned quality remains pending.';assert s.count(old)==1\n s=s.replace(old,'Fresh 900-update training and the full checkpoint/trace audit are complete; both-endpoint quality review is running, so learned quality remains pending.');p.write_text(s)\np=R/'diary/2026-11-08-10-51-32-large-dense-window-review.md'\ns=p.read_text()+'''The original V193 training process completed all1000rows/900updates/3600images/100ADCskips once. Independent full audit passed900nine-term totals/900masks/allV191matched cache/loss/schedule fields/five strictrawEMA checkpoints/1890inherited comparisons. HeadAdam900. Model/Adam/EMA/RNG restoration continued fromrow8to9 without repeated prefix. Final checkpoint SHA256 c4a60ffbda0635f7503888d9c02957867d328138dc6918eebfacd6f32609f8d8. All103 neural sources unchanged.\n\nOriginal review launched as PID1427978/create1794163877.89. The first actual GPUrecord for129window/stride64 passes1440independentCPU-QR samplecoordinates, with maximum context error6.64e-8 and coefficient error1.03e-10. Its partial-journal check hashes only the completed line, not a mutable full stream. Fullboth822case review/audit/reduction/60actualnativeviews/12triplets/browserpixelchecks remain required. No qualitypromotion; V187preferredwave/V120Smallgeneral remain. No newsource/noise/RAWdecode/parent-DINOinference; originals/dataz untouched and bothGFX families/JPEGs/siblingsheldout.\n\n[Training and early-review evidence](../docs/results/v193-review-preparation-v1.json) \u00b7 [Implementation and scope](../docs/large-dense-spectrum-readout.md).\n''';p.write_text(s)\nprint('Published training audit and first actual review-record CPU check; quality pending')\n"
+  },
+  "copies": {
+    "training-result-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/wave-train-result-v1.json",
+        "sha256": "c22a779ae1f4e6b2936f13a5c176bccbb40e79dd4360e44a0945cadc95f087c0"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v193-review-preparation-v1/training-result-v1.json",
+        "sha256": "c22a779ae1f4e6b2936f13a5c176bccbb40e79dd4360e44a0945cadc95f087c0"
+      }
+    },
+    "training-audit-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/training-audit-v1.json",
+        "sha256": "53fa58ef768d23156e5f1168a66ff95b507481b2cd2f24d0c714bccefcd4cba4"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v193-review-preparation-v1/training-audit-v1.json",
+        "sha256": "53fa58ef768d23156e5f1168a66ff95b507481b2cd2f24d0c714bccefcd4cba4"
+      }
+    },
+    "training-audit-v1.log": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/training-audit-v1.log",
+        "sha256": "084d5f9960a24f272292512253d70a07d66a6236deed3f0afe9bc7d06fb89bba"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v193-review-preparation-v1/training-audit-v1.log",
+        "sha256": "084d5f9960a24f272292512253d70a07d66a6236deed3f0afe9bc7d06fb89bba"
+      }
+    },
+    "first-review-record-CPU-check-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/first-review-record-CPU-check-v1.json",
+        "sha256": "ffef65688f4452a74e84390ccb276a4767af15f1320bc65095faa08a2f3277e5"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v193-review-preparation-v1/first-review-record-CPU-check-v1.json",
+        "sha256": "ffef65688f4452a74e84390ccb276a4767af15f1320bc65095faa08a2f3277e5"
+      }
+    },
+    "train-review-controller-result-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/train-review-controller-result-v1.json",
+        "sha256": "093c2d2f47019bd9774eeaf14b2ee09547f56cd5e310d238dca56be28ca781c4"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v193-review-preparation-v1/train-review-controller-result-v1.json",
+        "sha256": "093c2d2f47019bd9774eeaf14b2ee09547f56cd5e310d238dca56be28ca781c4"
+      }
+    }
+  },
+  "review_owner_observed_live": {
+    "pid": 1427978,
+    "created": 1794163877.89
+  },
+  "previous_preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v193-large-dense-preparation-v1.json",
+    "sha256": "16ccf9f81631149ec7757453e4bfcab1efedc8d2bf292c4211fd5045f19b0c8f"
+  },
+  "scope": "Training1000rows/900updates/3600images/100ADCskips/900nine-term totals/900masks/five checkpoints/1890inherited comparisons/headAdam900. SameV191data/loss/schedule; originaltrainingcompletedonce, genuine row8restoration continues9. First actualGPUreviewrecord independently CPU-QRchecked1440coordinates for129window. Full both822case quality/750input QRsamples/60actualnativeviews/12triplets/browserchecks still required; no quality promotion."
+}

@@ -1,6 +1,6 @@
 # Documentation guide
 
-The [V193 larger-window configuration](large-dense-spectrum-readout.md) passes native CPU/GPU admission with all 103 neural sources unchanged. Fresh matched training and the sealed full review are running; learned quality remains pending.
+The [V193 larger-window configuration](large-dense-spectrum-readout.md) passes native CPU/GPU admission with all 103 neural sources unchanged. Fresh 900-update training and the full checkpoint/trace audit are complete; both-endpoint quality review is running, so learned quality remains pending.
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. Keep V187 as the preferred experimental wave model. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 

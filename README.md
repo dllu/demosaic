@@ -49,7 +49,7 @@ optical blur. [Pipeline](docs/training-pipeline.md) · [Source review](docs/curr
 
 The [V192 measurement-support calculation](docs/dense-measurement-support.md) separates taper support from carrier-grid error. In its fixed analytic cases, Hann65 retains 23–48% of rectangular65 SNR power with nearest carriers; Hann129 retains 112–176%. This motivates a larger-window test, not a learned quality or flat-safety claim. No image/model inference or neural source changes occur.
 
-The [V193 larger-window configuration](docs/large-dense-spectrum-readout.md) passes native CPU/GPU admission with all 103 neural sources unchanged. Fresh matched training and the sealed full review are running; learned quality remains pending.
+The [V193 larger-window configuration](docs/large-dense-spectrum-readout.md) passes native CPU/GPU admission with all 103 neural sources unchanged. Fresh 900-update training and the full checkpoint/trace audit are complete; both-endpoint quality review is running, so learned quality remains pending.
 
 ## Current 100% crops
 
