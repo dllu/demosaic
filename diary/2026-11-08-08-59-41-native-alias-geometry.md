@@ -1,0 +1,19 @@
+# Native alias geometry diagnostic
+
+Recorded: 2026-11-08T08:59:41-08:00 (America/Los_Angeles).
+
+The completed V189 wider-suppression trial regressed despite better spectral proximity. Before changing native alias transport, V190 checks exact native camera-RGB template energy around the already frozen V187 and V189 bins. All 550 saved selection records and 1,650 RAW/variance/CFA fingerprints close before any template reads. No new selection, model/checkpoint, trained coefficient, noise draw or restored image is produced.
+
+The principal native square contains 90.781% of template power strictly inside, with 0.149% on quarter-cycle boundaries and 9.070% outside the closed square. Existing ±4-bin principal-carrier proximity averages 24.400% for V187 and 25.255% for V189, but both medians are only 3.348%. Adding all four native lifts raises means by just 0.445 / 0.674 percentage points; median added-alias proximity is 0.00876 / 0.01526 points. Native geometry still gives a small V189 mean advantage even though trained quality regressed. This argues against treating proximity as a quality proxy, and gives little support to an alias-only fix as the next priority.
+
+The two green phases distinguish only two relative-sign classes among four native aliases; analytic tests cover all four Bayer layouts. This real ambiguity is not established as the cause of current missing real crossings. Fixed carrier footprints are neither attainable amplitude nor neural recovery bounds because the learned local mixing can modulate frequencies. Next evidence should distinguish local/dense frequency measurements from readout/objective behavior; no architecture is promoted from geometry alone.
+
+Absent cases use hypothetical mesh templates. Their mean four-lift proximity is 1.759% / 1.778%, with a rare 47.24% chance-alignment tail. That is not evidence of signal or a calibrated false-positive rate. The 512 records contain 64 distinct native templates and are not independent replications.
+
+Twenty CPU contracts pass. The independent QR/sparse-coordinate audit checks all 512 template records, 18,432 fractions/cell counts, 1,100 selection bridges, 1,650 input fingerprints and 72 Decimal means; maximum fraction error is 3.33e-16. A standalone CDF in PNG/SVG/PDF was actually viewed at original detail and all 2,048 plotted points are verified. No new native restored-image report is required because no model changes; the completed V189 report retains 60 figures/12 triplets and both protected GFX scenes. V187 remains preferred for experimental waves; V120 Small remains the general recommendation.
+
+The first frozen package failed at import before its main function or any scientific claim/input journal: the imported report helper needed local_phase_projection, omitted from the capsule. Its terminal owner, plan, source and error log are preserved in the v1 directory. The corrected v2 package includes the helper and passes isolated import preflight before launching. Scientific work then completed once. Before first rendering, an unexecuted source seal embedded text inside a strict path/hash binding; those original bytes were archived and the text moved outside that binding. No scientific source/result or successful prefix changed.
+
+All outputs are local, with the 40 GiB disk / 32 GiB RAM floors, and external storage remains read-only. All 102 neural sources and earlier receipts/checkpoints are unchanged. No protected original, unavailable dataz or real reference was read; cached held-out RAW input bindings were checked without using their references as GT. The overall detail/flat quality goal remains open.
+
+[Full diagnostic](../docs/native-wave-alias-geometry.md) · [Exact evidence](../docs/results/v190-native-alias-geometry-v1.json) · [Publication verification](../docs/results/v190-native-alias-geometry-publication-verification-v1.json) · [Completed model comparison](../docs/spaced-pooled-wave-comparison.md).

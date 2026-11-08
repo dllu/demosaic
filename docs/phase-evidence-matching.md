@@ -199,3 +199,5 @@ confidence. V185 remains the latest trained comparison; the next hypothesis is
 to pool phase and neighboring-frequency evidence while retaining local support.
 
 The completed [V189 wider-suppression test](spaced-pooled-wave-comparison.md) changes only the pooled selector’s suppression radius at the same head and training budget. Mesh response falls 4.63% raw / 5.68% EMA, while quiet spatial RMS rises 0.38–1.31%. V188’s better weak-sector spectral proximity did not predict this learned restoration outcome. Retain V187; neither native basis/alias handling nor the objective is established as the cause.
+
+The [V190 native-spectrum diagnostic](native-wave-alias-geometry.md) checks the principal-band alias concern using exact constructed RGB templates. Most power is principal; four aliases at the existing bins add only 0.445–0.674 percentage points of mean proximity, while median principal proximity remains 3.348%. Two green phases cannot distinguish all four aliases, but this does not establish aliases as the cause of weak crossings. Prioritize separate evidence for local measurements and actual readout/objective behavior. No model or quality result changes.

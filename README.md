@@ -83,6 +83,8 @@ The [V188 allocation diagnostic](docs/spectral-selection-diversity.md) found bet
 
 The completed [V189 wider-separation trial](docs/spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. Keep V187 as the preferred experimental wave model. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](docs/images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](docs/results/v189-spaced-pooled-final-v1.json).
 
+The [V190 native-alias diagnostic](docs/native-wave-alias-geometry.md) finds 90.78% of exact mesh-template power in the strict principal square. Adding all four aliases around existing bins raises mean proximity only 0.445–0.674 percentage points; median principal proximity stays 3.348%. This gives little support to an alias-only fix as the next priority. Sparse local frequency measurements and the objective/readout deserve separate tests; geometric proximity is not a recovery bound or a quality gain. All 102 neural files remain unchanged.
+
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
 **9.60% raw / 15.96% EMA**, reaching **4.865% / 5.148% of GT amplitude**.
