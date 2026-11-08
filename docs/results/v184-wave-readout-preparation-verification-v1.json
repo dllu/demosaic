@@ -1,0 +1,48 @@
+{
+  "status": "pass-exact-readout-preparation-native-proofs-source-and-link-bindings-not-quality",
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v184-wave-readout-preparation-v1.json",
+    "sha256": "9babb3efa0bff88e4eb72173c2d95623a4d9cb662aa29d2d165ac9d88373fdf9"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v184-readout-preparation-v1.py",
+    "sha256": "9d0e3e779010a3ca9011aa4f0ddb5bb5fa59ca2b2db48a92f947a4a6eecf3462",
+    "text": "\"\"\"Verify exact preparation receipts, native proofs, sources and local links.\"\"\"\nfrom pathlib import Path\nimport hashlib,json,re\nR=Path('/home/dllu/proj/demosaic')\ndef ref(p):\n p=Path(p).absolute()\n with p.open('rb') as f:h=hashlib.file_digest(f,'sha256').hexdigest()\n return {'path':str(p),'sha256':h}\np=R/'docs/results/v184-wave-readout-preparation-v1.json';d=json.loads(p.read_text())\nchecks=0\nfor key in ['CPU_plan','CPU_result','admission_plan','admission_result','admission_CPU_inspection','training_plan','training_launch','training_audit_source']:\n b=d[key];assert ref(b['path'])=={k:b[k] for k in ['path','sha256']}\n assert json.loads(Path(b['path']).read_text())==b['contents'];checks+=1\nfor b in d['sources']:\n assert ref(b['path'])=={k:b[k] for k in ['path','sha256']} and Path(b['path']).read_text()==b['text'];checks+=1\nfor key in ['CPU_plan','admission_plan','training_plan']:\n plan=d[key]['contents']\n for path,digest in plan.get('frozen_files',{}).items():assert ref(path)['sha256']==digest;checks+=1\n for b in plan.get('sources',[]):assert ref(b['path'])=={k:b[k] for k in ['path','sha256']};checks+=1\ncpu=d['CPU_result']['contents'];admit=d['admission_result']['contents'];inspection=d['admission_CPU_inspection']['contents']\nassert cpu['native_values_checked']==12779520 and cpu['inherited_tensors_exact']==189 and cpu['old_module_forwards']==0\nassert len(admit['parities'])==7 and all(x['initial_output_bit_exact'] for x in admit['parities'])\nassert len([x for x in admit['parities'] if 'nonzero_head_values' in x])==6\nassert len(admit['records'])==2 and all(x['parameter_gradient_coordinates']==316 and x['independent_nine_term_FP32_total_exact'] for x in admit['records'])\nassert inspection['strict_CPU_raw_EMA_loads']==4 and inspection['inherited_tensor_comparisons']==756 and not inspection['CUDA_initialized']\nassert d['training_plan']['contents']['CPU_initialization']['new_head_parameters']==316\nfor key in ['training_live_rejection','CPU_model_state_tests']:\n b=d[key];assert ref(b['path'])=={k:b[k] for k in ['path','sha256']} and Path(b['path']).read_text()==b['text'];checks+=1\ndocs=[R/x for x in ['README.md','docs/index.md','docs/research.md','docs/experiments.md','docs/phase-wave-readout.md','diary/2026-11-08-04-19-42-phase-wave-native-and-training.md']]\nlinks=0\nfor path in docs:\n for target in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',path.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  assert (path.parent/target.split('#')[0]).resolve().is_file(),(path,target);links+=1\nout=R/'docs/results/v184-wave-readout-preparation-verification-v1.json'\nwith out.open('x') as f:\n json.dump({'status':'pass-exact-readout-preparation-native-proofs-source-and-link-bindings-not-quality',\n  'preparation':ref(p),'source':dict(ref(__file__),text=Path(__file__).read_text()),'exact_bindings_checked':checks,\n  'native_CPU_values':12779520,'initial_CUDA_parities':7,'nonzero_CUDA_readout_comparisons':6,\n  'new_head_gradient_coordinates':632,'strict_CPU_raw_EMA_loads':4,'document_links':links,\n  'documents':{str(p):ref(p) for p in docs},'new_module_forwards':0,'new_sensor_noise_draws':0,\n  'scope':'Integrity of actual preparation and launched experiment,not image-quality proof. Current guides may advance in later commits;this receipt preserves their historical bytes. No full training/quality completion claim.'},f,indent=2);f.write('\\n')\nprint('PASS',checks,'exact bindings,',links,'links,actual native proofs;quality unmeasured')\n"
+  },
+  "exact_bindings_checked": 1660,
+  "native_CPU_values": 12779520,
+  "initial_CUDA_parities": 7,
+  "nonzero_CUDA_readout_comparisons": 6,
+  "new_head_gradient_coordinates": 632,
+  "strict_CPU_raw_EMA_loads": 4,
+  "document_links": 561,
+  "documents": {
+    "/home/dllu/proj/demosaic/README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "a923f7ff03fc9341c363b493c24177f5a85c08b9f2bf3131fb7e15ef4a444e06"
+    },
+    "/home/dllu/proj/demosaic/docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "ac3b05679bdb92f946b9c970129d1fe26b7b1faaec622ad1b4d4d99ae556aa2d"
+    },
+    "/home/dllu/proj/demosaic/docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "6c06af22c057a79a16106c0b4643f813130d9fcef3b44d8cd13173855f69448f"
+    },
+    "/home/dllu/proj/demosaic/docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "332e015512e482c0654cd2d388c4c0d8c40f158d3e47ac6e6c1f69555fd2e9b6"
+    },
+    "/home/dllu/proj/demosaic/docs/phase-wave-readout.md": {
+      "path": "/home/dllu/proj/demosaic/docs/phase-wave-readout.md",
+      "sha256": "4e5746c955a5b8c17336ccada5fcf1179a24466e5d1d95df8e99062053946eed"
+    },
+    "/home/dllu/proj/demosaic/diary/2026-11-08-04-19-42-phase-wave-native-and-training.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-08-04-19-42-phase-wave-native-and-training.md",
+      "sha256": "56259d95b6aa800554d8a99ec6fb3a314776b06dc8448c0eaaf3cf8584b3c0d2"
+    }
+  },
+  "new_module_forwards": 0,
+  "new_sensor_noise_draws": 0,
+  "scope": "Integrity of actual preparation and launched experiment,not image-quality proof. Current guides may advance in later commits;this receipt preserves their historical bytes. No full training/quality completion claim."
+}

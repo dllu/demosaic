@@ -48,6 +48,12 @@ viewed native figures/12 triplets are complete. Nineteen methods/32contrasts/
 1,218cells retain prior results. The [loss implementation](coherent-pair-response.md)
 records25 CPU tests,20 native derivative replays and two genuine CUDA probes.
 
+The [V184 direct wave readout](phase-wave-readout.md) adds316 shared phase-aware
+parameters above frozen V183 EMA. All36 CPU checks, six native NumPy comparisons,
+seven bit-exact CUDA initial parities and two restored optimizer updates pass.
+The isolated900-update training run is active; image quality is unmeasured.
+Both endpoint reviews and actual protected-scene/native comparisons remain required.
+
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
 0.03–0.05% versus V172, and real fine crossings remain weak. Raw quiet RMS falls

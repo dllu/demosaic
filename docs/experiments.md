@@ -51,6 +51,15 @@ persists. All60 native figures/12triplets were actually viewed;19methods,
 [ten-state viewer](images/v183-coherent-pair-evidence-v1/native-viewer.html) keep
 raw/EMA metadata separate. Preparation fixtures remain explicitly marked.
 
+The [V184 direct phase-aware readout](phase-wave-readout.md) freezes completed
+V183 EMA and trains only316 new parameters on the same cached rows/nine losses.
+All36 CPU model/state checks, six native feature cases/12,779,520 NumPy values,
+seven bit-exact CUDA initial comparisons and two head-only updates with genuine
+restoration pass. Only the new four-tensor Adam/EMA history starts at0; no old
+matching parameter trains. The full900-update run is active, with14 independent
+training-audit CPU checks and a successful actual live-owner rejection. Image
+quality and both endpoint/protected-scene native comparisons remain unmeasured.
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of
 constructed GT amplitude. Quiet spatial error rises slightly at both noise

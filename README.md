@@ -64,6 +64,10 @@ and broad mottle remain unresolved. Both endpoints, independent audits and
 60 actually viewed native figures are complete. Retain this intermediate recipe
 beside V180's stronger response and V181's quieter output.
 
+The next [phase-aware readout](docs/phase-wave-readout.md) passes native CPU/CUDA
+and restoration checks and is training above frozen V183 EMA. Its image quality
+is unmeasured; current recommendations remain the completed comparisons above.
+
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |
 | V120 Small | Broad photo/camera results and complete 102MP RGB16 checks | Fine foliage, mesh, neon and dark-field mottling |

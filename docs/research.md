@@ -56,6 +56,16 @@ crossings and broad colored mottle remain unresolved. Direct coherent supervisio
 changes the tradeoff without removing shared-parameter interference; retain all
 three local recipes for their measured strengths.
 
+The [V184 architecture experiment](phase-wave-readout.md) bypasses the shared
+matching network for a small learned wave residual, freezing all189 inherited
+V183 EMA tensors. A316parameter shared contextual readout mixes both measured
+complex waves and explicitly transports phase to native RGB subpixels. All36
+CPU checks,12.78million independent native NumPy values, seven initial CUDA
+parities and two restored head-only updates pass. The full900-update head run
+is active. Freezing isolates new gradients from the inherited model but does
+not establish noisy-field safety or real crossing recovery; quality remains
+unmeasured and the completed V180/V181/V183 strengths remain current.
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,
 reaching 3.9243% / 3.9235% of GT amplitude. This is uneven: fewer than half of
