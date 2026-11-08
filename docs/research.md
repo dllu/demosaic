@@ -1,5 +1,11 @@
 # Current method research
 
+The next [V198 architecture test](cfa-innovation-wave.md) measures innovation at
+all four CFA phases and applies bounded real gains to each color's own wave.
+It addresses a possible source of V197's building color failure without assuming
+that the cause is established. CPU/GPU checks pass and training is underway;
+detail, edge and flat-region quality still require the complete comparison.
+
 **Current periodic-detail prototype:** [V197 innovation EMA](innovation-wave-comparison.md) reaches **9.092% GT mesh response** (+63.09% over V195) and visibly strengthens real cab-mesh modulation. It adds building color artifacts and false flat/photographic waves. [V195 Whole EMA](directional-response-comparison.md) has lower off-signal error and avoids that new building artifact; [V187 EMA](pooled-phase-wave-comparison.md) is quieter. V120 Small remains the general recommendation.
 
 All four V197 raw/EMA endpoints, 822 cases each, strict exports, 72 actually viewed native figures /24 triplets and browser source-pixel checks are complete. [Five-state native viewer](images/v197-innovation-wave-v1/native-viewer.html) · [Full strengths and costs](innovation-wave-comparison.md).

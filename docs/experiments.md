@@ -1,5 +1,10 @@
 # Experiment index
 
+**Active V198 experiment:** [Color-grounded innovation readout](cfa-innovation-wave.md),
+451 new parameters above frozen V195 Whole EMA. Independent CPU least-squares,
+actual trained-anchor GPU parity, isolated updates and restoration checks pass;
+full 900-update training is launched. No image-quality result yet.
+
 **Current periodic-detail prototype:** [V197 innovation EMA](innovation-wave-comparison.md) reaches **9.092% GT mesh response** (+63.09% over V195) and visibly strengthens real cab-mesh modulation. It adds building color artifacts and false flat/photographic waves. [V195 Whole EMA](directional-response-comparison.md) has lower off-signal error and avoids that new building artifact; [V187 EMA](pooled-phase-wave-comparison.md) is quieter. V120 Small remains the general recommendation.
 
 All four V197 raw/EMA endpoints, 822 cases each, strict exports, 72 actually viewed native figures /24 triplets and browser source-pixel checks are complete. [Five-state native viewer](images/v197-innovation-wave-v1/native-viewer.html) · [Full strengths and costs](innovation-wave-comparison.md).
