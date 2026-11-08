@@ -1,0 +1,15 @@
+# Balanced directional response loss CPU preparation
+
+Recorded: 2026-11-08T11:45:48-08:00 (America/Los_Angeles).
+
+Implemented training-only eight-region balancedpairresponsepressure. Two4sector nativeFourier tilings atoffset0/22.5degrees sharetargets; conjugatepairsassignedtogether,DCremoved,andCartesianhalf-openboundaries handleaxes/diagonals exactly. PerregionmeanprojectionerrornormalizedbyownGTenergyplus1DN16floor,unitpseudoHuber,averagepairs/regions. No inferencefeature/gateor103neural sourcechange.
+
+Twenty-sixCPUcontracts pass,bothfloats/threefloors againstexplicitdenseFourier-basis/spatialderivatives,knownweak-direction recoverypressure,D4nonboundarycarriers,pairswap/DC/shiftinvariance,odd/evenconjugacy/exactties,emptyconnectedzeroandbothwrappermodes retainingallnineoriginalscalars/masks/FP32totalorder. Earlier25-contract passandpre-exact-boundarysource preserved;the26th testmakes tiesexplicit. Unchangedtargetpairsandorthogonalfalsepatterns canremaininvisible,soalloldflat/common/absolute/differencetermsremainnecessary.
+
+All20audited savedV182RGBbatches replayedonce,fourpermesh/weak/photo/mixed/flatdomain,12paired. IndependentNumPyangularregions plusrealIFFTspatialsubtemplates/analyticderivatives verify53477376nativegradientcoordinates. MaxFP32gradienterror9.094947e-13,relativeL2error1.01745e-12,lossdifference9.99442e-9. No neuralModule/CUDA/optimizer/checkpointload/newsource-noise/RAWdecode/protectedinput;CPU RNGunchanged andall103neuralsourcehashesexact.
+
+Two unsealedpreparationstops precedeanynativecalculation: inherited40.005GiBlocalguardfailedafterlocalspacefellto35GiB,andamechanicalversionreplacementchangedtheunchangedV182baselineplanfilename. Bothpartialsource snapshots/correctionreceipts preserved;successfulplan-v2/work-v2runcompletedonce. NewprospectiveCPUlocal32/RAM32GiBreservesplus.005GiBsmallreceiptforecastreflectthismemory-onlyderivativecalculation. OlderGPUmodelplans/floors untouched;nofloorretroactivelychanged.
+
+Intendednextcomparison: samecompletedV187EMA508parameterheadstart,identicalfreshheadAdam/EMAclocks,data/schedule/budget. Wholecontroladds.25existingwholeterm(total.5);directionalarmretains.25wholeandadds.25regionalmean. Equalnominalweightsdonotmean equalgradientnorms;GPUhead-gradient/restorationproofandfinaltraining/allocationplanstillrequired. ThisisnotuninterruptedpriorAdamcontinuation. ProtectedGFXfamilies/JPEGs/siblingsheldout,realreferencesqualitative. No newqualityclaim;V187preferredwave/V120Smallgeneral andoverallgoalopen.
+
+[Loss and scope](../docs/directional-pair-response.md) · [CPU preparation evidence](../docs/results/v195-directional-response-CPU-preparation-v1.json) · [Motivating diagnostic](../docs/mesh-directional-response.md).

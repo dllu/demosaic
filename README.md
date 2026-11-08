@@ -49,10 +49,10 @@ optical blur. [Pipeline](docs/training-pipeline.md) · [Source review](docs/curr
 The [V192 measurement-support calculation](docs/dense-measurement-support.md) separates taper support from carrier-grid error. In its fixed analytic cases, Hann65 retains 23–48% of rectangular65 SNR power with nearest carriers; Hann129 retains 112–176%. This motivates a larger-window test, not a learned quality or flat-safety claim. No image/model inference or neural source changes occur.
 
 
-The [directional check](docs/mesh-directional-response.md) shows why whole-pattern
-response can hide missing crossings: one fixed example scores79.24% overall,
-with4.82% /91.69% in its two spectral regions. It motivates a balanced-response
-loss test; no new model or flat-safety gain is claimed.
+The [directional check](docs/mesh-directional-response.md) shows how whole-pattern
+response can hide missing crossings. A [balanced-response loss](docs/directional-pair-response.md)
+now passes CPU math and native-derivative checks; matched training and real/flat
+quality validation remain pending.
 
 ## Current 100% crops
 
