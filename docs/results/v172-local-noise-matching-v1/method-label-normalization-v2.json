@@ -1,0 +1,45 @@
+{
+  "status": "labels-only-derived-view-of-preserved-V172-records",
+  "original": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/scores-v1.json",
+    "sha256": "a54b95b33c57c09ebf182bda6fb9516ba174c4f06ceb020594c33a514272fdc5"
+  },
+  "normalized": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/scores-method-labels-v2.json",
+    "sha256": "f412247b64a21aba6e393f978686b13f5e5b46acc5a47dce376a9bdb680a4a81"
+  },
+  "mapping": {
+    "V171-raw": "V172-raw",
+    "V171-raw-correction": "V172-raw-correction",
+    "V171-EMA": "V172-EMA",
+    "V171-EMA-correction": "V172-EMA-correction"
+  },
+  "rows": 1644,
+  "native_cases": 36,
+  "unchanged_native_array_bindings": 144,
+  "all_other_record_fields_exact": true,
+  "roundtrip_exact": true,
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/train-result-v1.json",
+    "sha256": "4c4ac7548f34b29da137c0244e6d105722a07bf3412130784fe3ead347e0fa40"
+  },
+  "endpoint_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/training-audit-v1.json",
+    "sha256": "4ff857030f13edd004f4ddaf3abec4303eee1966d28004097ac7e66080bb83ee"
+  },
+  "frozen_runner": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/work/scripts/train_local_noise_matching_trial.py",
+    "sha256": "1efbe8bcf8060024a988324f717fbc4f55424f8aae2d87a3e9c12950e57eb9a1"
+  },
+  "current_runner": {
+    "path": "/home/dllu/proj/demosaic/scripts/train_local_noise_matching_trial.py",
+    "sha256": "45f1f1d4ff285fc70535de73a6601ad87216af300c7150352499e2a5876d0d44"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/normalize-v172-method-labels-v2.py",
+    "sha256": "4d7988a0d18263f5e74d28a8ec801322057164d8106a0827d682e517a154a94a",
+    "text": "\"\"\"Derive corrected method labels without changing any scientific record or array.\"\"\"\nimport copy,hashlib,json\nfrom pathlib import Path\nfrom train_directional_bank_trial import read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V172-local-noise-matching-v1';plan=read(root/'plan-v1.json');old=read(root/'scores-v1.json');training=read(root/'train-result-v1.json');audit=read(root/'training-audit-v1.json')\nassert old['checkpoint']==training['final_checkpoint'] and old['plan']==ref(root/'plan-v1.json')\nassert old['module_hashes']['raw']['before']==audit['raw_module_hash'] and old['module_hashes']['EMA']['before']==audit['EMA_module_hash']\nassert len(old['rows'])==1644 and {r['method'] for r in old['rows']}=={'V171-raw','V171-EMA'}\nassert plan['methods']==['V172-raw','V172-EMA']\nmapping={f'V171-{e}{suffix}':f'V172-{e}{suffix}' for e in ['raw','EMA'] for suffix in ['','-correction']}\nnew=copy.deepcopy(old)\nfor row in new['rows']+new['summary']:row['method']=mapping[row['method']]\nfor identifier,bindings in new['native_predictions'].items():\n assert len(bindings)==4\n for binding in bindings.values():\n  assert Path(binding['path']).is_relative_to(Path(plan['external'])/'native') and ref(binding['path'])==binding\n new['native_predictions'][identifier]={mapping[k]:v for k,v in bindings.items()}\nassert len(new['native_predictions'])==36\nreverse={v:k for k,v in mapping.items()};restored=copy.deepcopy(new)\nfor row in restored['rows']+restored['summary']:row['method']=reverse[row['method']]\nfor identifier,bindings in restored['native_predictions'].items():restored['native_predictions'][identifier]={reverse[k]:v for k,v in bindings.items()}\nassert restored==old\nout=root/'scores-method-labels-v2.json';assert not out.exists();save(out,new)\nreceipt=root/'method-label-normalization-v2.json';assert not receipt.exists()\nsave(receipt,dict(status='labels-only-derived-view-of-preserved-V172-records',original=ref(root/'scores-v1.json'),normalized=ref(out),mapping=mapping,rows=1644,native_cases=36,unchanged_native_array_bindings=144,all_other_record_fields_exact=True,roundtrip_exact=True,training=ref(root/'train-result-v1.json'),endpoint_audit=ref(root/'training-audit-v1.json'),frozen_runner=plan['runner'],current_runner=ref(repo/'scripts/train_local_noise_matching_trial.py'),source=dict(ref(__file__),text=Path(__file__).read_text()),new_neural_forwards=0,new_source_noise_draws=0))\nprint('Mapped1644 method labels/144 native keys;roundtrip exact;no arrays or original records altered')\n"
+  },
+  "new_neural_forwards": 0,
+  "new_source_noise_draws": 0
+}

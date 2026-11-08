@@ -676,7 +676,7 @@ def review(plan):
                 if not aux["matching_evaluated"]:
                     assert np.array_equal(value, frozen) and not np.any(a["variance"])
                     ADC_exact += 1
-                method = f"V171-{endpoint}"
+                method = f"V172-{endpoint}"
                 row = metric.measure(case, a, base, value)
                 row.update(
                     method=method,

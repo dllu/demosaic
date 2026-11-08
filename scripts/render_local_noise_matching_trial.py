@@ -15,10 +15,10 @@ ROOT = REPO / ".cache/quality-20261107/V172-local-noise-matching-v1"
 def render():
     plan = read(ROOT / "plan-v1.json")
     guard(plan)
-    result = read(ROOT / "scores-v1.json")
+    result = read(ROOT / "scores-method-labels-v2.json")
     assert result["counts"] == {"wrapper": 1644, "frozen": 1644, "network": 1500, "sampler": 7500}
     prior = read(plan["prior_figures"]["path"])
-    out = ROOT / "figures-v1"
+    out = ROOT / "figures-v2"
     out.mkdir(exist_ok=False)
     font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 10)
     figures = []

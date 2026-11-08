@@ -1,11 +1,27 @@
 # Current method research
 
-The [V172 local-noise experiment](local-noise-matching.md) tests whether removing
-image-wide statistics from the new residual's feature/output units reduces
-V171's quiet-color regression. Local Bayer-cell mean/noise coordinates preserve
-all 39 input channels; the network, initialization, cache, loss and schedule
-stay fixed. The frozen parent and matching network still use spatial context.
-The run is active; no held-out gain or noisy-flat guarantee is claimed.
+The [completed V172 local noise matching experiment](local-noise-matching.md)
+reduces EMA quiet RMS **0.31–0.77%** and DC bias **1.33–2.55% versus V169**,
+while mesh response rises **1.06% to3.877% of GT**. Quiet RMS falls21–24% versus
+V171 and native crops show much less added purple/blue cast. Standalone-flat
+full/coarse gains shrink to0.059–0.085%/0.021–0.050% versus V169; all48 inputs
+worsen versus V171. Absent mesh RMS rises0.060% versus V169, broad mottle persists
+and real fine crossings remain incomplete. Keep this local-unit variant beside
+V171 flat,V161 detail and earlier quiet strengths; V120 remains the general choice.
+Both endpoints/all822 cases/60 actual native figures complete;126 CPU checks,
+900 updates,exact restoration,1644 V169 replays and144 ADC identities pass.
+Independent posthoc metrics/addition cover36 selected cases,72 RGB+72 residuals.
+An inherited output-label error is corrected by an audited derived view;original
+records,arrays and frozen source remain unchanged,with no inference repeated.
+
+The paired local feature/output change is useful:it largely removes the added
+V171 color bias without sacrificing V169 mesh response. It also gives up most
+of V171's flat reduction. The unchanged criterion still uses image-wide units;
+local loss normalization and explicit low-amplitude detail learning remain
+questions for controlled trials. These are hypotheses, not measured improvements.
+Input coordinates/output scaling changed together;one training run does not
+isolate their individual effects or establish seed uncertainty. The frozen
+parent and matching network still use spatial context.
 
 The [completed V171 matching residual experiment](learned-matching-residual.md)
 trains a fresh 2.09M network above frozen V169/DINO on the existing free-image and
@@ -16,8 +32,8 @@ confirm stronger purple/blue casts and missing real crossings. More capacity
 at this schedule gives a measured flat option, not the requested combined gain.
 Zero supplied variance retains V169 exactly; released V170 weights are unused.
 Both endpoints/all 822cases/60 actually viewed figures and scoped audits complete.
-The next question is how correction color means and image-wide noise scaling
-behave beside bright structure; this is a hypothesis, not an established cause.
+The local-unit retraining above tests a joint feature/output change beside
+bright structure; it does not isolate individual causes of the color error.
 A [posthoc saved-array diagnosis](results/v171-selected-native-scaling-diagnostic-v1.json)
 finds that local noise attenuation helps the selected quiet crops more than
 global RGB-mean removal, but neither beats V169. This supports a local-unit

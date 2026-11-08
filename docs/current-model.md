@@ -1,5 +1,19 @@
 # Current model choices
 
+The [completed V172 local noise matching experiment](local-noise-matching.md)
+reduces EMA quiet RMS **0.31–0.77%** and DC bias **1.33–2.55% versus V169**,
+while mesh response rises **1.06% to3.877% of GT**. Quiet RMS falls21–24% versus
+V171 and native crops show much less added purple/blue cast. Standalone-flat
+full/coarse gains shrink to0.059–0.085%/0.021–0.050% versus V169; all48 inputs
+worsen versus V171. Absent mesh RMS rises0.060% versus V169, broad mottle persists
+and real fine crossings remain incomplete. Keep this local-unit variant beside
+V171 flat,V161 detail and earlier quiet strengths; V120 remains the general choice.
+Both endpoints/all822 cases/60 actual native figures complete;126 CPU checks,
+900 updates,exact restoration,1644 V169 replays and144 ADC identities pass.
+Independent posthoc metrics/addition cover36 selected cases,72 RGB+72 residuals.
+An inherited output-label error is corrected by an audited derived view;original
+records,arrays and frozen source remain unchanged,with no inference repeated.
+
 The [completed V171 matching residual](learned-matching-residual.md) is a new
 standalone-flat option above frozen V169 EMA and the cached DINO parent. EMA
 full-flat RMS falls 1.21–1.52%, coarse RMS 1.73%, with all 48 native noisy inputs
@@ -164,6 +178,7 @@ under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |
+| Local matching noise units | [Completed V172](local-noise-matching.md):same2.09M network/initialization/cache/loss as V171,local feature/output units together. EMA quiet RMS −0.31–0.77%, DC −1.33–2.55%,mesh response +1.06% to3.877% of GT versus V169; much less V171 added cast. Flat gains only0.059–0.085%,absent RMS +0.060%;mottle/crossings unresolved. Both endpoints/822cases/60 native views,126 tests and scoped audits complete. Useful local-unit variant;retain V171 flat and V161 detail strengths |
 | Fresh matching residual capacity | [Completed V171](learned-matching-residual.md):2.09M parameters above frozen V169/DINO, trained on the same free-image/synthetic cache. EMA full-flat RMS −1.21–1.52%, coarse RMS −1.73%, all 48 inputs improve; mesh response +1.26% to 3.885% of GT. Quiet RMS +26–31%, DC bias +91–93%, visible casts and missing real crossings remain. Both endpoints/all 822cases/60 native figures complete;114 CPU tests,900 updates,actual checkpoint restoration and 144 exact ADC bypasses. Useful flat option; context-dependent color error remains unresolved |
 | Learned nonlocal RAW matching | [Completed V170](nonlocal-raw-comparison.md): released15.28M-parameter NLFeMF, direct Malvar and DINO-parent residual reconstruction from one RAW call. Coarse native512 error −15.79–19.38% versus V169 EMA; quiet spatial error lower. Mesh response falls to2.406–2.533% of GT; quiet total/DC error rises, low-noise periodic artifacts and missing cab crossings persist. All822 cases/60 native figures complete;13 CPU tests, exact original-class parity and independent sampler/selected-array checks pass. External training-data comparison; no matched training or broad superiority claim |
 | Broad direct RGB corrections | [Completed V169](balanced-spatial-correction.md): fixed V168 weights,Gaussian complement of direct RGB at sigma8/radius24 native pixels; full spectral path retained. Quiet RMS −3.74–10.69%,DC color bias −11.45–31.59%; mesh response stays3.806–3.837% of GT. All48 coarse-flat errors worsen; total-flat means +0.389–0.705%,quiet spatial +0.167–0.267%,local mottle/real crossings remain. Both endpoints/822cases/72 native views complete;47 CPU checks,six CUDA filter cases,1644 exact replays. All-case streamed metrics;posthoc full-array audit limited to36 saved native cases. Useful response/quiet-color option with flat/grain costs |

@@ -1,0 +1,82 @@
+{
+  "status": "completed-local-noise-training-and-quality-all3-recorded-owners-terminal",
+  "owners": [
+    {
+      "pid": 83869,
+      "created": 1794094349.89
+    },
+    {
+      "pid": 98912,
+      "created": 1794095486.73
+    }
+  ],
+  "admission_owner": {
+    "pid": 81768,
+    "created": 1794094130.72
+  },
+  "training_rows": 1000,
+  "actual_training_optimizer_updates": 900,
+  "training_ADC_skips": 100,
+  "training_wrapper_calls": 900,
+  "training_frozen_component_calls": 900,
+  "training_new_matching_calls": 900,
+  "training_nested_sampler_calls": 4500,
+  "training_images": 3600,
+  "quality_wrapper_calls": 1644,
+  "quality_frozen_component_calls": 1644,
+  "quality_new_matching_calls": 1500,
+  "quality_nested_sampler_calls": 7500,
+  "quality_images": 1644,
+  "exact_V169_replays": 1644,
+  "ADC_outputs_exact_V169": 144,
+  "new_admission_matching_CUDA_calls": 4,
+  "new_admission_frozen_CUDA_calls": 4,
+  "new_admission_matching_CPU_calls": 0,
+  "new_admission_images": 13,
+  "new_sampler_only_admission_calls": 0,
+  "discarded_synthetic_optimizer_updates": 3,
+  "admission_failures": 0,
+  "scientific_worker_failures": 0,
+  "initial_reporting_failures": 3,
+  "method_label_normalization": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/method-label-normalization-v2.json",
+    "sha256": "2ecb36ebf2306c6d82cbe4adbc20d91ee50bd037e504527c30eda14c0265bf00"
+  },
+  "total_new_matching_CUDA_calls": 2404,
+  "total_new_matching_CPU_calls": 0,
+  "total_frozen_component_CUDA_calls": 2548,
+  "total_new_matching_CUDA_images": 5113,
+  "total_frozen_component_CUDA_images": 5257,
+  "repeated_scientific_prefix_calls": 0,
+  "new_parent_DINO_calls": 0,
+  "new_source_noise_draws": 0,
+  "new_original_dataz_reads": 0,
+  "native_cases": 36,
+  "saved_native_RGB": 72,
+  "saved_native_residuals": 72,
+  "saved_arrays": 144,
+  "saved_array_bytes": 430196736,
+  "native_figures": 60,
+  "native_triplets": 12,
+  "relevant_CPU_tests": 126,
+  "new_CPU_test_cases": 12,
+  "trainable_parameters": 2088906,
+  "trainable_tensors": 141,
+  "final_Adam_states": 141,
+  "frozen_parameters": 124909,
+  "frozen_tensors": 47,
+  "prior_neural_sources_unchanged": 95,
+  "peak_training_CUDA_allocated_bytes": 6741763584,
+  "peak_quality_CUDA_allocated_bytes": 2991606272,
+  "inherited_primitive_admission": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V171-matching-residual-v1/admission-result-v3.json",
+    "sha256": "4775df94e5a72dd7e4a1f8adc2e2528f8109b0c98b983033c89c9074eb57b31a"
+  },
+  "inherited_primitive_calls_repeated": 0,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/finish-v172-execution-v2.py",
+    "sha256": "5139cead02596a09226576a28bdcd46561b27305664b7eac19c2bfec874b950a",
+    "text": "\"\"\"Close actual V172 owners and distinguish new work from inherited evidence.\"\"\"\nfrom pathlib import Path\nimport psutil\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V172-local-noise-matching-v1';plan=read(root/'plan-v1.json');guard(plan)\nt=read(root/'train-result-v1.json');q=read(root/'scores-v1.json');a=read(root/'admission-result-v1.json')\nowners=[read(root/f'{p}-launch-v1.json')['owner'] for p in ['train','review']];admission_owner=read(root/'admission-source-freeze-v1.json')['owner']\nfor owner in owners+[admission_owner]:\n try:\n  p=psutil.Process(owner['pid']);assert p.create_time()!=owner['created'] or p.status() in [psutil.STATUS_ZOMBIE,psutil.STATUS_DEAD]\n except psutil.NoSuchProcess:pass\nassert q['counts']==plan['expected_quality_counts'] and read(root/'native-viewing-completion-v1.json')['native_figures']==60\nassert read(root/'training-audit-v1.json')['updates']==t['updates'] and read(root/'quality-audit-v1.json')['saved_native_RGB_checked']==72\nfiles=list((Path(plan['external'])/'native').glob('*.npy'));assert len(files)==144\nsize=sum(p.stat().st_size for p in files);assert size==plan['projected_native_array_bytes']==430196736\nu=t['updates'];assert u==900 and t['skipped_ADC_batches']==100 and t['training_images']==3600\nassert t['counts']==dict(wrapper=u,frozen=u,network=u,sampler=5*u)\nassert a['counts']==dict(wrapper=4,frozen=4,network=4,sampler=20)\nsave(root/'execution-completion-v1.json',dict(status='completed-local-noise-training-and-quality-all3-recorded-owners-terminal',owners=owners,admission_owner=admission_owner,training_rows=1000,actual_training_optimizer_updates=u,training_ADC_skips=100,training_wrapper_calls=u,training_frozen_component_calls=u,training_new_matching_calls=u,training_nested_sampler_calls=5*u,training_images=3600,\n quality_wrapper_calls=1644,quality_frozen_component_calls=1644,quality_new_matching_calls=1500,quality_nested_sampler_calls=7500,quality_images=1644,exact_V169_replays=1644,ADC_outputs_exact_V169=144,\n new_admission_matching_CUDA_calls=4,new_admission_frozen_CUDA_calls=4,new_admission_matching_CPU_calls=0,new_admission_images=13,new_sampler_only_admission_calls=0,discarded_synthetic_optimizer_updates=3,admission_failures=0,scientific_worker_failures=0,initial_reporting_failures=3,method_label_normalization=ref(root/'method-label-normalization-v2.json'),\n total_new_matching_CUDA_calls=u+1504,total_new_matching_CPU_calls=0,total_frozen_component_CUDA_calls=u+1648,total_new_matching_CUDA_images=4*u+1513,total_frozen_component_CUDA_images=4*u+1657,\n repeated_scientific_prefix_calls=0,new_parent_DINO_calls=0,new_source_noise_draws=0,new_original_dataz_reads=0,native_cases=36,saved_native_RGB=72,saved_native_residuals=72,saved_arrays=144,saved_array_bytes=size,native_figures=60,native_triplets=12,\n relevant_CPU_tests=126,new_CPU_test_cases=12,trainable_parameters=2088906,trainable_tensors=141,final_Adam_states=141,frozen_parameters=124909,frozen_tensors=47,prior_neural_sources_unchanged=95,\n peak_training_CUDA_allocated_bytes=t['peak_CUDA_allocated_bytes'],peak_quality_CUDA_allocated_bytes=q['peak_CUDA_allocated_bytes'],inherited_primitive_admission=a['inherited_primitive_admission'],inherited_primitive_calls_repeated=0,source=dict(ref(__file__),text=Path(__file__).read_text()),scope=plan['scope']))\nprint('PASS3 owners terminal;900 updates;1644 quality compositions;2404 new CUDA matching calls;144 native arrays;60 viewed figures')\n"
+  },
+  "scope": "V172 local-noise matching: same2.09M/141-tensor network,initialization,frozenV169EMA,V1681000-row cache,pair units,V171 loss,AdamW/LR/EMA and900 noisy updates. Only the new feature coordinate system and output unit change together:local Bayer-cell RGB mean/noiseRMS replace image-wide statistics. No target/reference enters forward,no new weights or releasedV170 initialization. FrozenV169/cachedDINO still provide spatial context;feature locality is not whole-pipeline invariance or a noisy-flat guarantee. Zero local variance retains V169 there;ADC-only rows skip updates. Exact step8 restoration continues9 without prefix replay. Sampler grad-input is atomic/warn-only nondeterministic;no exact retraining control is claimed. Both raw/EMA endpoints and all822 quality cases fixed;1644 V169 replays,1500 new matching calls,7500 nested samplers,144 exact ADC outputs. Metrics/fingerprints/addition checks stream;36 native cases retain72 RGB+72 residuals. Fixed48 boards/12 triplets include both protected scenes/priors/windows/JPEGs;real references qualitative,notGT,unscored. No source/noise draws,original/dataz reads or new parent/DINO calls. Previous95 neural files unchanged;no blind or general win claim."
+}

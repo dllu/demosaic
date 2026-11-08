@@ -1,9 +1,18 @@
 # Documentation guide
 
-The [V172 local-noise matching experiment](local-noise-matching.md) is training
-the same V171 network and loss with local feature and output units. Initial
-tensors, data, recipe and training functions match; 126 CPU checks and native
-backward admission pass. Quality is pending and no gain is claimed.
+The [completed V172 local noise matching experiment](local-noise-matching.md)
+reduces EMA quiet RMS **0.31–0.77%** and DC bias **1.33–2.55% versus V169**,
+while mesh response rises **1.06% to3.877% of GT**. Quiet RMS falls21–24% versus
+V171 and native crops show much less added purple/blue cast. Standalone-flat
+full/coarse gains shrink to0.059–0.085%/0.021–0.050% versus V169; all48 inputs
+worsen versus V171. Absent mesh RMS rises0.060% versus V169, broad mottle persists
+and real fine crossings remain incomplete. Keep this local-unit variant beside
+V171 flat,V161 detail and earlier quiet strengths; V120 remains the general choice.
+Both endpoints/all822 cases/60 actual native figures complete;126 CPU checks,
+900 updates,exact restoration,1644 V169 replays and144 ADC identities pass.
+Independent posthoc metrics/addition cover36 selected cases,72 RGB+72 residuals.
+An inherited output-label error is corrected by an audited derived view;original
+records,arrays and frozen source remain unchanged,with no inference repeated.
 
 The [completed V171 learned matching residual](learned-matching-residual.md)
 lowers EMA native 512 full-flat RMS 1.21–1.52% and coarse RMS 1.73% versus V169;

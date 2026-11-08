@@ -1,5 +1,29 @@
 # Experiment index
 
+[Completed V172 local noise matching experiment](local-noise-matching.md)
+reduces EMA quiet RMS **0.31–0.77%** and DC bias **1.33–2.55% versus V169**,
+while mesh response rises **1.06% to3.877% of GT**. Quiet RMS falls21–24% versus
+V171 and native crops show much less added purple/blue cast. Standalone-flat
+full/coarse gains shrink to0.059–0.085%/0.021–0.050% versus V169; all48 inputs
+worsen versus V171. Absent mesh RMS rises0.060% versus V169, broad mottle persists
+and real fine crossings remain incomplete. Keep this local-unit variant beside
+V171 flat,V161 detail and earlier quiet strengths; V120 remains the general choice.
+Both endpoints/all822 cases/60 actual native figures complete;126 CPU checks,
+900 updates,exact restoration,1644 V169 replays and144 ADC identities pass.
+Independent posthoc metrics/addition cover36 selected cases,72 RGB+72 residuals.
+An inherited output-label error is corrected by an audited derived view;original
+records,arrays and frozen source remain unchanged,with no inference repeated.
+
+The identical1,000-row V168 cache yields900 optimizer updates/100 ADC skips,
+3,600 images and an actual step8 model/Adam/EMA/RNG restore without prefix replay.
+New matching work totals2,404 CUDA calls and no CPU matching-core calls;2,548
+frozen-component CUDA calls are nested,not parent/DINO calls. All6,576 quality
+input fingerprints,900 NumPy FP32 loss totals,141 Adam states and both strict
+endpoints pass. The three original CPU reporting failures are preserved;the
+label correction changes only method strings/dictionary keys and reverses exactly.
+All three scientific owners are terminal;no failed or repeated scientific phase.
+No new source/noise draws,original/dataz reads or parent/DINO forwards.
+
 [Completed V171 learned matching residual](learned-matching-residual.md): fresh
 2.09M RGB correction above frozen V169 EMA and cached V143/DINO; same1,000 V168
 rows,900 updates/100 ADC skips,actual step 8 restoration and no prefix replay.
