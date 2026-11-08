@@ -35,3 +35,23 @@ Both matched jobs use the original 1,000 cached rows, 900 noisy updates, 3,600 i
 The first26-contract suite adds one exact-boundary test to an earlier25-contract pass; both logs and the earlier algebra implementation remain preserved. One unsealed preparation stopped at an inherited disk guard, and another caught an incorrect baseline plan filename introduced while adapting the wrapper. Both stopped before native calculations; their sources and correction receipts are retained. The successful native computation completed once. This CPU-only stage uses a prospective32GiB local/RAM reserve and0.005GiB small-receipt budget after local free space fell to35GiB; older model-trial plans remain byte-preserved.
 
 [Loss implementation](../scripts/directional_pair_objective.py) · [Independent native reference](../scripts/directional_pair_reference.py) · [CPU evidence](results/v195-directional-response-CPU-preparation-v1.json). Both protected GFX families, JPEGs and siblings remain excluded from training. ISO100/AHD/JPEG references remain qualitative, not exact GT. No learned-quality or flat-safety gain is claimed at this stage.
+
+
+The four-endpoint reviewer is now sealed, together with independent stream/native
+metric audits and compact comparison rendering. A structural fixture replays
+completed V187 metadata under four explicitly labeled fixture endpoints; it
+checks 3,288 event records, 13,152 input fingerprints and 750 shared input-evidence
+sets, and rejects a deliberately wrong endpoint label. This creates no V195
+predictions or quality claims. Both actual jobs' recorded donor weights, fresh
+Adam clocks, EMA copies, seeds and CPU/CUDA RNG fingerprints match, and both real
+row-8 restorations are verified.
+
+The planned gallery has 48 compact boards and 24 native triplets, with V187 EMA,
+the four new endpoints, noisy pixels and accurately labeled references. Earlier
+panels/galleries remain at their original paths. The same two V194 mesh examples
+will also receive independent directional breakdowns after quality completes;
+this remains a development-example diagnostic. A one-shot controller waits for
+the original training owners, then queues CPU training audit, one complete
+quality pass, CPU quality audit, reduction and rendering. It stops for actual
+native viewing and publication review. [Sealed review preparation and structural
+evidence](results/v195-response-review-preparation-v1.json).
