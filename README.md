@@ -30,6 +30,8 @@ input-only frequency selections repeat in separately measured green samples.
 An [untrained phase-evidence adapter](docs/phase-evidence-matching.md) now exposes
 those measurements to matching; CPU checks pass, with CUDA and quality pending.
 Its [guarded CUDA check](docs/phase-evidence-admission.md) is queued after V175.
+A [local-window variant](docs/local-phase-evidence-matching.md) has the same
+parameter budget and passes CPU numerical checks; it is also untrained.
 
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |

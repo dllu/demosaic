@@ -1,5 +1,14 @@
 # Experiment index
 
+The [V180 local phase-evidence prototype](local-phase-evidence-matching.md)
+replaces global coefficient fields with locally measured, interpolated fields
+at the same selected frequencies and parameter budget. All 112 focused CPU
+checks and six cached native feature cases pass: 85,196,800 FP64 map values
+match NumPy within 1.05e−12, and both V172 endpoints retain all 188 tensors
+exactly beside one zero adapter. The first rounding-sensitive test expectation
+and log are preserved. No actual matching/CUDA forward, optimizer update or
+new restored comparison has run; local halos/seams and quality remain open.
+
 The [completed V179 local-support diagnostic](local-phase-support.md) measures
 298,404 windows at 1,228 reused one-phase-selected bins. Local mean powers are
 higher in mesh-containing footprints while blank means stay near 1; larger

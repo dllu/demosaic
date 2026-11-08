@@ -1,5 +1,16 @@
 # Current method research
 
+The [V180 local-evidence variant](local-phase-evidence-matching.md) implements
+local affine-projected coefficients at V178's globally selected frequencies,
+with the same 3,120-weight adapter and matching parameter budget. Default
+65-packed-pixel windows and 32-pixel stride follow the training-only support
+diagnostic. All 112 focused CPU tests pass; six native cases match NumPy across
+85,196,800 FP64 values, with maximum error 1.05e−12 and FP32 outputs equal to
+FP64 casts. This is numerical preparation, not restored quality. Interpolation
+changes noise covariance and can spread support or create seams; CUDA cost,
+actual matching gradients, training and detail/sky tradeoffs remain unmeasured.
+The existing V175/V178 workers and their frozen recipes continue unchanged.
+
 The [local-phase support diagnostic](local-phase-support.md) reuses V177's fixed
 primary bins and measures local affine-projected coefficients in the other
 green phase. Across all 614 present observations, signal-containing mean power

@@ -7,6 +7,11 @@ flow in CPU test fixtures. All 188 existing V172 raw/EMA tensors load exactly.
 CUDA parity, actual matching gradients/memory, training and image quality remain
 pending; current restoration recommendations and native comparisons are unchanged.
 
+The separate [V180 local-window variant](local-phase-evidence-matching.md)
+keeps this parameter layout and global selection, replacing the coefficient
+fields with local affine measurements. Its CPU preparation passes; it is also
+untrained and does not alter the frozen V178 admission or matched trial.
+
 [Model implementation](../src/demosaic/late_phase_evidence_matching.py) ·
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·
 [Native preparation and preserved prototype failure](results/v178-phase-evidence-preparation-v1.json).

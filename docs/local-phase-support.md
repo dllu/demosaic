@@ -83,6 +83,11 @@ Native aliasing, weaker unknown frequencies, border support, FP32/GPU behavior
 and learned detail/flat tradeoffs still need testing. V175 and V178 continue
 their existing fixed recipes.
 
+The follow-on [V180 local-evidence model](local-phase-evidence-matching.md)
+implements this hypothesis with V178's parameter layout. Its local FP64 maps
+pass independent native CPU checks, but CUDA, training and restored quality
+remain unmeasured. Window and interpolation choices can still spread support.
+
 ## Checks and execution
 
 The [NumPy reference](../scripts/local_phase_projection.py) passes
