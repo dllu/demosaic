@@ -8,7 +8,7 @@ the stronger [V161 detail prototype](harmonic-frequency-context.md),
 [V173](weak-gradient-matching.md)/[V174](spread-sample-matching.md) quiet gains.
 Their remaining weaknesses differ; none combines strong mesh recovery and
 clean quiet fields. The latest completed
-[native-pixel viewer](images/v174-spread-matching-v1/native-viewer.html) retains
+[native-pixel viewer](images/v178-phase-evidence-v1/native-viewer.html) retains
 both protected GFX scenes and the earlier useful comparators.
 
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
@@ -22,20 +22,15 @@ stronger detail and its quiet/flat costs, with no new inference for that column.
 [Final evidence](results/v175-fresh-noise-matching-final-v1.json) ·
 [Historical four-pass losses](fresh-noise-matching.md#four-pass-training-losses).
 
-The [V178 phase-evidence variant](phase-evidence-matching.md) is undergoing a
-[matched continuation](phase-evidence-training.md), preserving both arms' real
-optimizer/EMA history. Actual [CUDA admission](phase-evidence-admission.md)
-passes all 14 initial parity comparisons, both 142-tensor gradient probes,
-genuine restoration and ADC invariants. Both arms have finished training; the
-fixed review is running, with V178 quality still unmeasured. Its zero
-3,120-weight adapter exposes 80 measured-wave
-maps to matching. Native renderer fixtures use old pixels and are explicitly
-labeled. The
-[independent CPU auditor](phase-evidence-training.md#independent-audit-preparation)
-has passed the actual training audit; quality audit and native viewing remain pending.
-Admission and preparation results do not change the measured model choices.
-The [matched tables and four-state native viewer](phase-evidence-training.md#matched-tables-and-native-viewer)
-also pass complete old-value/pixel fixtures, with actual V178 results pending.
+The completed [V178 phase-evidence comparison](phase-evidence-comparison.md)
+finds **0.92% higher mean mesh response than its matched control**, reaching
+3.924% of exact GT amplitude. Quiet spatial error rises slightly, and fine cab
+crossings/broad mottle remain unresolved. The [matched continuation](phase-evidence-training.md)
+preserves genuine raw/Adam/EMA history in both arms; training and quality audits
+pass, and all 72 native figures/24 triplets were actually inspected. Four strict
+exports and separate method metadata retain both arms' raw/EMA endpoints.
+The 13-method tables keep both V175 endpoints and the earlier useful strengths.
+[Final evidence](results/v178-phase-evidence-final-v1.json).
 
 The [V176 template diagnostic](mesh-template-evidence.md) finds substantially
 more conditional evidence over larger areas, using hidden GT templates.

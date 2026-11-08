@@ -1,5 +1,20 @@
 # Current model choices
 
+The completed [V178 measured phase-evidence trial](phase-evidence-comparison.md)
+adds a small mesh-response option: **3.9243% raw / 3.9235% EMA of constructed
+GT amplitude**, +0.920% / +0.915% over the same-endpoint matched control.
+Only 121/256 raw and 125/256 EMA inputs increase. Quiet spatial RMS rises
+0.011–0.052% versus control, and real fine cab crossings do not clearly recover.
+Versus V172 EMA, evidence EMA has +1.196% mesh response and −0.052–0.089%
+quiet total RMS, with ISO6400 quiet spatial RMS +0.052% and standalone-flat
+RMS +0.116%. Retain the gain alongside V172's balanced, V173's quiet, V171's
+flat, V161's stronger-detail and V175 raw's quiet strengths. V120 Small remains
+the general recommendation. Both full training traces/ten checkpoints and
+all four 822-case endpoints pass independent audits; all 72 native figures/
+24 triplets were actually inspected. Broad mottle persists.
+[Matched native-pixel viewer](images/v178-phase-evidence-v1/native-viewer.html) ·
+[Final evidence](results/v178-phase-evidence-final-v1.json).
+
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates. Raw quiet RMS falls **0.14–0.27% versus V172**, with 21/32
 inputs improving and 11 worsening; quiet spatial RMS falls 0.06–0.15% on 29/32.

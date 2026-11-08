@@ -1,5 +1,17 @@
 # Experiment index
 
+The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
+raises mean mesh response **0.92% over matched control**, reaching 3.924% of
+constructed GT amplitude. Quiet spatial error rises slightly at both noise
+levels; real fine cab crossings and broad colored mottle remain unresolved.
+Both arms preserve V172's optimizer history and finish 900 further updates.
+The independent audits pass all ten checkpoints, both full training traces,
+3,288 review rows, 288 native arrays and 750 input-only evidence pairs.
+All 72 native figures/24 triplets were actually inspected. Thirteen methods,
+both V175 endpoints and 34 contrasts retain earlier strengths and costs.
+[Four strict exports and final evidence](results/v178-phase-evidence-final-v1.json) ·
+[Matched viewer](images/v178-phase-evidence-v1/native-viewer.html).
+
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total optimizer updates with 8,073 fresh sensor batches. Mesh response
 rises only **0.03–0.05% versus V172**, reaching 3.878–3.879% of constructed GT;
@@ -31,7 +43,8 @@ restored RGB, new noise or original capture is used; V175/V178 remain separate.
 V178's [matched comparison and native viewer](phase-evidence-training.md#matched-tables-and-native-viewer)
 now support both control/evidence endpoints with per-method checkpoint metadata.
 The complete 13-method reused-value fixture and all 480 browser crops pass;
-actual V178 quality remains pending. Fourteen comparison tests pass, with
+actual V178 quality now has separate completed scores and native views above.
+Fourteen comparison tests pass, with
 earlier detail/quiet/flat strengths retained in 34 contrasts.
 
 A [four-pass V175 training-loss reduction](fresh-noise-matching.md#four-pass-training-losses)
@@ -43,17 +56,15 @@ and 350 independent Decimal means pass; training and final review stay fixed.
 V178's [independent CPU audits](phase-evidence-training.md#independent-audit-preparation)
 are implemented, with 34 checks, 2,000 adapted old trace rows, eight corruption
 rejections and a real V172 checkpoint restore. These are auditor checks, not
-new V178 quality results. The actual trial is now running after passed admission.
+new V178 quality results. The actual trial now passes both independent audits.
 
-The running [V178 one-pass matched trial](phase-evidence-training.md) implements control
+The completed [V178 one-pass matched trial](phase-evidence-training.md) implements control
 and evidence training plus four-endpoint/822-case review. Real V172 checkpoint
 proofs retain 141 old Adam states at 900 and zero new-adapter history; 13 CPU state
 tests and frozen-entry gates pass. A marked CPU fixture checks 72 native figures/
 24 triplets with reused V172/V174 pixels. Actual CUDA admission passes, and
-the controller has launched the control arm. At an earlier boundary, V175 reached its real
-row-5,000 checkpoint: 4,500 total updates, all 141 Adam clocks at 4,500, all 47
-frozen tensors exact and 4,000 audited continuation rows, with 3,588 fresh
-batches and 3,600 exact FP32 loss totals.
+both actual arms, four endpoints and native render are complete. Original
+fixtures and their preserved rejection evidence remain separate from quality.
 
 The completed [V178 CUDA admission](phase-evidence-admission.md) passes seven
 native cases at both old endpoints: all 14 RGB comparisons are bit-exact, with
@@ -72,7 +83,7 @@ All 68 CPU checks pass; native FP64 features match independent NumPy across
 85,196,800 values, and both old endpoints retain all 188 tensors exactly.
 The initial FP32 carrier-angle failure/source are preserved and fixed using
 integer periodic phase, with unchanged tolerances. Actual CUDA admission now
-passes and matched training is running; full numerical/native quality remains.
+passes and matched training plus full numerical/native quality are complete above.
 
 The [completed V177 phase-split diagnostic](phase-frequency-evidence.md)
 uses all 1,228 retained mesh member observations, selecting four frequencies
@@ -96,7 +107,7 @@ input fingerprints, 307 parent arrays, 16 CPU tests, 48 independent QR fits and
 published. The initial disk-reservation preparation rejection and first chart
 render are retained.
 
-The [V175 fresh-noise continuation](fresh-noise-matching.md) has launched a
+The completed [V175 fresh-noise continuation](fresh-noise-matching.md) uses a
 fixed nine-pass extension of V172: 8,100 additional updates/32,400 images,
 8,073 fresh sensor batches/new frozen-parent roots, 27 retained noisy batches
 and 900 ADC skips. Model, source/calibration/target bank and seven-term loss
@@ -107,11 +118,11 @@ from re-noising. The v1 launch stopped before its training claim/CUDA work
 because its snapshot omitted the sensor helper. That source, plan and log are
 preserved; the new v2 frozen worker passes actual imports/strict CPU model,
 parent and DINO loads plus 54 focused tests. No successful prefix was repeated.
-Both endpoints/all 822 cases/native crops remain scheduled; quality is unmeasured.
+Both endpoints/all 822 cases/native crops and final audits are complete above.
 [Preparation](results/v175-fresh-noise-matching-preparation-v2.json) ·
 [Actual frozen-worker readiness](results/v175-frozen-worker-readiness-v1.json).
 
-While V175 trains, an array-only reduction checks all 822 old V161 EMA outputs
+The V175 comparison's array-only reduction checks all 822 old V161 EMA outputs
 on identical current inputs/parents/ROIs and metric bytes. All 8,038 common
 scalars match exactly with no neural/noise calls. The stronger 5.240%-of-GT
 detail baseline and its quiet/flat costs enter the final nine-method tables.

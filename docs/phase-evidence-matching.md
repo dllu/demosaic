@@ -1,17 +1,19 @@
 # Measured phase evidence for the matching branch
 
-**V178 is undergoing a matched training trial.** It adds a zero-initialized
+**V178 has completed its matched training and quality trial.** It adds a zero-initialized
 3,120-parameter adapter that exposes separately measured RAW frequency evidence
 to the existing local-noise matching network. The adapter has real gradient
 flow in CPU test fixtures. All 188 existing V172 raw/EMA tensors load exactly.
-Actual CUDA initial parity, gradients, restoration and local ADC checks pass;
-both arms have completed their planned training, with image quality and actual
-native inspection still pending. Current restoration
-recommendations are unchanged, with the completed V175 comparisons available.
+Actual CUDA initial parity, gradients, restoration and local ADC checks pass.
+The [completed four-endpoint comparison](phase-evidence-comparison.md) finds
+mesh response +0.92% over matched control, reaching 3.924% of constructed GT.
+Quiet spatial error rises slightly and real fine crossings remain weak.
+All 72 native figures/24 triplets were actually inspected; both independent
+audits pass. Retain the small gain alongside earlier useful models.
 
 The separate [V180 local-window variant](local-phase-evidence-matching.md)
 keeps this parameter layout and global selection, replacing the coefficient
-fields with local affine measurements. Its CPU preparation passes; it is also
+fields with local affine measurements. Its CPU preparation passes; it is
 untrained and does not alter the frozen V178 admission or matched trial.
 
 [Model implementation](../src/demosaic/late_phase_evidence_matching.py) ·
@@ -69,8 +71,9 @@ the old weights does not establish optimizer compatibility.
 A [matched continuation](phase-evidence-training.md) verifies an
 explicit extension on the real checkpoint: 141 old Adam states stay at 900,
 while the new adapter starts without optimizer history and participates in EMA.
-Thirteen additional CPU state checks pass; both actual arms have finished their
-one-pass continuation, and the fixed quality review is running.
+Thirteen additional CPU state checks pass. Both actual arms finish 900 further
+updates, with old network Adam clocks at 1,800 and the new adapter at 900.
+All ten checkpoints, full traces, EMA and the fixed review pass independent audits.
 
 ## Detail and flat-region limits
 
@@ -139,9 +142,9 @@ model-quality scores or visual restoration claims. Both scenes and siblings
 remain outside training. Originals and `/mnt/dataz` are not accessed. The
 standing ISO100 captures remain qualitative references, not GT.
 
-V175 has completed with all 96 prior neural source files and 18 completion
-helpers unchanged. The separate 97th neural file does not enter V175's frozen
-source tree. After matched training, this variant still needs the full fixed comparison and native fence,
-foliage, building and sky views, including at least two unresized noisy/restored/GT
-crop triplets. Until then, use the [V172](local-noise-matching.md) and
-[V174](spread-sample-matching.md)/[V175](fresh-noise-matching.md) reports for actual model quality.
+V175 completed with all 96 prior neural source files and 18 completion helpers
+unchanged. The separate 97th neural file does not enter V175's frozen source
+tree. V178's [completed quality report](phase-evidence-comparison.md) includes
+both protected GFX scenes, fence/foliage/building/sky views and 24 unresized
+noisy/restored/exact constructed-GT triplets. Both scenes, JPEGs and siblings
+remain excluded from training. Numerical gains do not establish noisy-sky safety.

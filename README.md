@@ -29,10 +29,12 @@ much more conditional mesh evidence across larger areas. It supplies hidden GT
 and makes no new model-quality or flat-safety claim.
 A [CFA phase-split follow-up](docs/phase-frequency-evidence.md) tests whether
 input-only frequency selections repeat in separately measured green samples.
-An [experimental phase-evidence adapter](docs/phase-evidence-matching.md) exposes
-those measurements to matching; CPU and CUDA admission pass, with quality pending.
-Its [guarded CUDA check](docs/phase-evidence-admission.md) has passed; the
-[matched continuation](docs/phase-evidence-training.md) is running, with quality pending.
+The completed [V178 phase-evidence trial](docs/phase-evidence-comparison.md)
+exposes those measurements to matching. Mesh response rises **0.92% over its
+matched control**, reaching **3.924% of exact GT amplitude**. Quiet spatial
+error rises slightly; broad mottle and real fine cab crossings remain unresolved.
+All four endpoints, 72 actually viewed native figures and independent audits
+are complete. Retain this small mesh-response option alongside the earlier strengths.
 A [local-window variant](docs/local-phase-evidence-matching.md) has the same
 parameter budget and passes CPU numerical checks; it is also untrained.
 
@@ -47,6 +49,7 @@ parameter budget and passes CPU numerical checks; it is also untrained.
 | [V173 gradient supervision](docs/weak-gradient-matching.md) | Quiet spatial RMS −0.32–0.68% on all 32 inputs, full-flat means −0.25–0.30% versus V172 | Mesh response −3.95% to 3.724% of GT, natural band response −2.63–2.88% |
 | [V174 spread initialization](docs/spread-sample-matching.md) | Small quiet-color gain: total −0.12–0.17%, DC −0.36–0.43% versus V172 | Mesh response −0.25%; both coarse-flat means worsen, no visible crossing recovery |
 | [V175 fresh-noise raw](docs/fresh-noise-matching.md) | Quiet RMS −0.14–0.27% versus V172, with nearly unchanged mesh response | 11/32 quiet inputs worsen; ISO6400 flat RMS +0.09%, natural band response slips and fine crossings remain weak |
+| [V178 measured phase evidence](docs/phase-evidence-comparison.md) | Mesh response +0.92% versus matched control, reaching 3.924% of GT; EMA quiet total −0.05–0.09% versus V172 | Slightly higher quiet spatial error versus control; EMA ISO6400 flat RMS +0.12% versus V172, no clear real crossing recovery |
 | [V158 regional DC](docs/regional-dc-regret.md) | Quiet RMS −1.93–2.63% versus matched MSE; all 32 inputs improve | Small regressions versus V143, persistent real detail loss |
 
 No model combines these strengths. The [released V170 RAW matching comparison](docs/nonlocal-raw-comparison.md)
@@ -60,13 +63,14 @@ optical blur. [Data pipeline](docs/training-pipeline.md) · [Source review](docs
 
 ## Current 100% crops
 
-Open the local [V175 native-pixel viewer](docs/images/v175-fresh-noise-matching-v1/native-viewer.html),
+Open the local [V178 matched native-pixel viewer](docs/images/v178-phase-evidence-v1/native-viewer.html),
+[V175 viewer](docs/images/v175-fresh-noise-matching-v1/native-viewer.html),
 [V174 viewer](docs/images/v174-spread-matching-v1/native-viewer.html),
 [V173 viewer](docs/images/v173-weak-gradient-matching-v1/native-viewer.html) or
 [V172 viewer](docs/images/v172-local-noise-matching-v1/native-viewer.html). Click
 the flip tile or press **F**. All 160×160 browser crops retain the PNG pixels
-exactly. V175 opens with V174 EMA versus V175 EMA; select V172 EMA for the
-continuation baseline and V175 raw for its modest quiet gain.
+exactly. V178 opens with control EMA versus evidence EMA; both raw endpoints
+are selectable with separate checkpoint metadata. V175 retains its modest raw quiet gain.
 
 [Optional periodic-detail native comparisons and failure views](docs/supported-wave-amplitude.md)
 remain available alongside the learned heads below.
@@ -92,9 +96,20 @@ EMA checkpoint SHA256 `0103e5dc59102c849b5ce456f1de24ae3e3e30ec4019f16dc102a26dc
 [Both endpoints and complete metadata](docs/local-noise-matching.md).
 [Earlier V169 mesh comparisons](docs/balanced-spatial-correction.md) remain available.
 
-![Mesh2302: noisy, V172 local-noise EMA, exact constructed GT](docs/images/v172-local-noise-matching-v1/comparison-02.png)
+[V172 mesh2302 triplet](docs/images/v172-local-noise-matching-v1/comparison-02.png) ·
+[V172 mesh2309 triplet](docs/images/v172-local-noise-matching-v1/comparison-06.png).
 
-![Mesh2309: noisy, V172 local-noise EMA, exact constructed GT](docs/images/v172-local-noise-matching-v1/comparison-06.png)
+Noisy → **V178 evidence EMA** → exact constructed GT, the same mesh sources,
+ROI, physical noise and display transform above. Response reaches **3.9235%
+of GT**, +0.915% over matched control EMA and +1.196% over V172 EMA. Quiet
+spatial error rises 0.0165–0.0525% versus control; weak crossings still disappear.
+Native 160×160 pixels are never resized. EMA export SHA256
+`8e9896a22ca2b6885a5e838188d909a4dd4c0c173632437e656667e70a49c268`.
+[Four endpoints, source checkpoints and all display metadata](docs/phase-evidence-comparison.md).
+
+![Mesh2302: noisy, V178 evidence EMA, exact constructed GT](docs/images/v178-phase-evidence-v1/comparison-04.png)
+
+![Mesh2309: noisy, V178 evidence EMA, exact constructed GT](docs/images/v178-phase-evidence-v1/comparison-10.png)
 
 Noisy → **V173 gradient EMA** → exact constructed GT, ISO6400 and ISO12800
 quiet fields. Mean spatial RMS falls **0.32–0.68% on all 32 inputs versus V172**;

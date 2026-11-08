@@ -1,13 +1,16 @@
 # Matched continuation for phase evidence
 
-**The actual V178 matched trial is running.** Its
+**The actual V178 matched trial is complete.** Its
 [CUDA admission](phase-evidence-admission.md) has passed and the controller has
 inspected both real admission checkpoints. The prepared GPU plan binds that
 result and V175's completed scores/figures. Both arms have completed 900 further
 updates from V172's real raw/Adam/EMA history, and the independent training audit
-passes all ten checkpoints. The four-endpoint fixed quality review is running;
-quality audit and actual native inspection remain required. No V178 quality
-gain is established yet.
+passes all ten checkpoints. The four-endpoint fixed quality review and its
+independent audit pass, and all 72 native figures/24 triplets were actually
+inspected. [Completed quality](phase-evidence-comparison.md) shows mean mesh
+response +0.92% over matched control, reaching 3.924% of constructed GT.
+Quiet spatial error rises slightly; real fine cab crossings and mottle remain.
+Four strict exports retain separate checkpoint/state/module metadata.
 
 [Training and review](../scripts/train_phase_evidence_trial.py) ·
 [Adam/EMA state handling](../scripts/phase_evidence_training_state.py) ·
@@ -71,7 +74,7 @@ the trial does not promise a bit-exact retraining trajectory.
 
 ## Complete quality and native comparisons
 
-The implemented review covers **all four raw/EMA endpoints on all 822 fixed
+The completed review covers **all four raw/EMA endpoints on all 822 fixed
 inputs**: 3,288 component/frozen calls, 3,000 matching calls, 15,000 samplers and
 1,500 new evidence projections. It checks 3,288 exact V169 replays and 288 ADC
 identities, streams fingerprints/metrics/evidence metadata, and retains RGB plus
@@ -79,7 +82,7 @@ residual arrays for 36 native cases. EMA evaluation loads the new adapter EMA
 alongside the network EMA; it never silently evaluates a raw adapter as EMA.
 
 The renderer retains identical source coordinates, 160×160 crop pixels and
-display transforms. It plans 48 comparison boards plus 24 noisy/restored/exact
+display transforms. It produces 48 comparison boards plus 24 noisy/restored/exact
 constructed GT triplets, covering all four endpoints. Boards retain V175 EMA,
 V172 EMA, V169 EMA, stronger V161 detail, periodic detail and the appropriate
 exact or qualified references. Both protected GFX scenes include sky, building,
@@ -92,10 +95,11 @@ tags are simulated. Every header says **CPU LAYOUT FIXTURE / NO V178 QUALITY**;
 no fixture image is published as a model comparison. It checks 16,588,800 new-
 method crop channels against independent display conversion and preserves the
 old pixels/ROIs without resizing. One fixture triplet was viewed for layout
-only. The actual trial has no scores, predictions or figures yet.
+only. The actual trial's separate scores, predictions and figures are complete
+and bound in the [final evidence](results/v178-phase-evidence-final-v1.json).
 
 After actual training/review, independent numerical/checkpoint/native audits
-and actual viewing are still required. Report detail response together with
+and actual viewing all completed. The report presents detail response together with
 absent/blank error, quiet total/spatial/DC error, flat full/coarse error, natural
 band fidelity and the standing real-photo weaknesses. Keep useful gains and
 costs visible without claiming blind generalization or noisy-sky safety from
@@ -121,9 +125,12 @@ CPU. No actual model forward or optimizer update occurs in this preparation.
 Actual frozen imports/source gates pass, and both audit entries reject the
 then-absent prepared plan. The actual training audit now passes both full
 1,000-row traces and all ten checkpoints: existing network clocks are 1,800,
-and the evidence adapter clock is 900. The actual quality audit remains pending.
+and the evidence adapter clock is 900. The actual quality audit also passes:
+3,288 durable rows/13,152 input fingerprints, 144 RGB plus 144 residual arrays,
+107,544,576 addition channels, 1,164 native metric scalars, 556 Decimal means
+and 750 input-only raw/EMA evidence pairs.
 
-After the actual workers terminate successfully, the auditor will check both
+After the actual workers terminated successfully, the auditor checked both
 complete training traces, all ten checkpoints, distinct adapter/network clocks,
 raw/EMA states, saved RNG bytes and the unchanged frozen tensors. Quality checks
 cover all 3,288 durable rows, exact frozen/ADC bindings, source fingerprints,
@@ -152,7 +159,7 @@ done
 The [comparison reducer](../scripts/reduce_phase_evidence_trial.py) implements
 two primary contrasts: evidence raw versus control raw, and evidence EMA versus
 control EMA. It also keeps 32 contextual contrasts against the parent, V161,
-V169, V171, V172, V173, V174 and V175 EMA. V175 has a larger fresh-noise budget
+V169, V171, V172, V173, V174 and both V175 raw/EMA. V175 has a larger fresh-noise budget
 and remains a contextual comparison. The evidence path and its 3,120 added
 parameters change together in the matched trial.
 
@@ -189,8 +196,9 @@ channels exactly match their source PNG pixels**, with correct state metadata,
 default pairing, click/F-key flipping, navigation and no JavaScript errors.
 Its heading explicitly says **CPU LAYOUT FIXTURE / no V178 quality**. The first
 browser screenshot was actually viewed for layout only. These are viewer and
-reducer checks; actual V178 predictions, tables, native viewing and quality
-conclusions remain pending. Fixtures are not public model comparisons.
+reducer preparation checks. Actual V178 predictions, tables and native viewing
+are now complete separately in the [quality report](phase-evidence-comparison.md).
+Fixtures are not public model comparisons.
 [Sources, fixture evidence and preserved rejections](results/v178-matched-comparison-viewer-preparation-v1.json).
 
 After actual audits, run the sealed reducer:
@@ -202,10 +210,10 @@ CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=1 \
   .venv/bin/python "$phase_trial_root/report-work-v1/scripts/reduce_phase_evidence_trial.py"
 ```
 
-The output is internal paired evidence and numeric tables. Final prose and
-publication still require actual native viewing, qualified references and at
-least two unresized noisy/restored/exact constructed GT triplets. The renderer
-already plans 24 such triplets across the four endpoints.
+The completed output has 13 methods/10,686 rows, 34 contrasts and 714 table
+cells. Publication includes actual recorded native viewing, qualified references
+and 24 unresized noisy/restored/exact constructed-GT triplets across four endpoints.
+The sealed commands document execution; successful outputs must not be overwritten.
 
 ## Storage and launch
 
@@ -229,7 +237,8 @@ evidence. It prepared the trial and launched the original control owner. It
 waits for resources, runs each matched stage once, renders native comparisons,
 and stops for actual image viewing. Its source and launch identity remain
 sealed. Trial-start evidence is recorded in the completed-admission receipt;
-full V178 quality and actual native viewing remain pending.
+completed V178 quality and actual native viewing are recorded in the
+[final evidence](results/v178-phase-evidence-final-v1.json).
 
 ## Publication preparation
 
@@ -257,3 +266,12 @@ These are publication-integrity checks; no V178 quality or actual viewing is
 claimed by this preparation. New helpers are frozen in a separate snapshot;
 existing GPU, audit and comparison sources remain unchanged.
 [Exact sources and rejection evidence](results/v178-publication-preparation-v1.json).
+
+The actual publication now contains four strict CPU exports, all 714 cells,
+72 native figures and 24 triplets. All 18 original-detail sheets were inspected
+before export/publication. [Execution provenance](results/v178-completion-execution-v1.json)
+preserves a manual audit launch that resolved the Python symlink to the system
+interpreter and stopped at Torch import; the unchanged auditor passed with the
+explicit environment path. No scientific forward or noise was repeated.
+[Independent publication verification](results/v178-phase-evidence-publication-verification-v1.json)
+checks actual evidence, exports, source pixels, matched browser states and links.

@@ -1,5 +1,20 @@
 # Current method research
 
+The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
+raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,
+reaching 3.9243% / 3.9235% of GT amplitude. This is uneven: fewer than half of
+the 256 paired inputs increase, while 201–209 increase against V172 EMA.
+Quiet spatial error rises at both noise levels versus control; tiny total-error
+gains largely reflect DC changes. Actual fine cab crossings do not clearly
+recover, and contrast40 exposes broad colored mottle. All 72 native figures
+were inspected; both full training traces/ten checkpoints and all four review
+endpoints pass independent audits. The feature operator and 3,120 extra weights
+change together, so their individual contributions are not isolated.
+Retain the small mesh gain alongside earlier quiet/flat/detail strengths.
+Spatially local coefficients in the untrained V180 variant remain a useful
+next hypothesis, with unchanged global frequency selection and possible support
+spreading/seams. The goal of strong fine dark detail with clean sky remains open.
+
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) supplies
 little additional fine-detail response after 8,100 more updates: mesh gain is
 only 0.052% raw/0.033% EMA versus V172, with missing real cab crossings. Raw
@@ -11,7 +26,7 @@ mottle and texture loss persist. Retain the small raw quiet gain and the earlier
 detail/quiet/flat options. The completed audits cover all 9,000 continuation
 rows, 8,100 loss totals, 141 Adam states at 9,000 and both endpoint reviews.
 Longer fresh-noise training alone barely changes this tradeoff; the separate
-V178 matched trial now tests access to measured phase evidence.
+V178 matched trial tests access to measured phase evidence, with results above.
 
 The [V180 local-evidence variant](local-phase-evidence-matching.md) implements
 local affine-projected coefficients at V178's globally selected frequencies,
@@ -22,7 +37,7 @@ diagnostic. All 112 focused CPU tests pass; six native cases match NumPy across
 FP64 casts. This is numerical preparation, not restored quality. Interpolation
 changes noise covariance and can spread support or create seams; CUDA cost,
 actual matching gradients, training and detail/sky tradeoffs remain unmeasured.
-The running V178 workers retain their frozen recipe; V175's completed outcomes
+The completed V178 workers retained their frozen recipe; V175's completed outcomes
 remain separate.
 
 The [local-phase support diagnostic](local-phase-support.md) reuses V177's fixed
@@ -43,15 +58,14 @@ are moving-model training values rather than checkpoint quality. They supply
 no basis to assume that longer training has already recovered more strands;
 the final detail/flat/native outcomes are now available in the completed report above.
 
-The running [V178 matched continuation](phase-evidence-training.md) compares one
+The completed [V178 matched continuation](phase-evidence-training.md) compares one
 additional cached pass at the same raw/Adam/EMA starting point and budget.
 The existing 141 optimizer clocks continue from 900; the new adapter starts from 0
 and is included in EMA and restoration. Thirteen CPU state tests and actual
-checkpoint checks pass; the renderer is exercised only with labeled baseline
-fixtures. The controller has inspected passed admission and launched the control
-arm; V178 quality remains unmeasured. Separately, V175's actual row-5,000
-checkpoint/four-pass trace passes checks of all 141 Adam clocks at 4,500, all 47
-frozen tensors, 3,600 loss totals and 14,376 events with no extra inference or noise.
+checkpoint checks pass, followed by actual training/quality audits and all
+72 original-detail native figures. Both old network clocks finish at 1,800;
+the evidence adapter clock finishes at 900. Labeled baseline fixtures remain
+separate from actual scores/pixels and cannot pass actual publication gates.
 
 The [V178 native CUDA admission](phase-evidence-admission.md) has passed after
 V175's complete GPU pipeline. All 14 zero-adapter RGB comparisons are bit-exact;
@@ -59,7 +73,8 @@ CPU/CUDA features differ by at most 2.00e−6 within fixed tolerance. Both probe
 updates have nonzero gradients on all 142 tensors, exact model/Adam/RNG
 restoration and post-update ADC/mixed-zero invariants. Peak allocation is
 6.27 GiB. The earlier 18 CPU protocol tests and dependency rejection remain
-preserved. These checks establish execution; V178 quality remains pending.
+preserved. These checks establish execution; the separate trained-quality
+comparison is complete above.
 
 The [V178 phase-evidence matching path](phase-evidence-matching.md) makes the
 V177 observations available to the matching network as continuous features.
@@ -70,8 +85,8 @@ already frozen component: the matching branch can directly use the measured
 waves while learning spatial support. It introduces no hard detection threshold
 or direct sinusoid-to-RGB correction. All 68 CPU checks and native feature/strict
 checkpoint probes pass, with the original FP32 phase-angle failure preserved.
-The model is undergoing its matched trial after passed CUDA admission. Detail
-recovery and noisy-flat costs remain unmeasured; completed V175 results remain separate.
+The matched trial after passed CUDA admission now measures the small mesh gain
+and noisy-field costs above; completed V175 results remain separate.
 
 The [V177 within-image CFA sample split](phase-frequency-evidence.md) closes a
 specific diagnostic gap: one green RAW phase selects an unknown frequency and
@@ -96,7 +111,7 @@ not measure the existing model's receptive field. V143's matched training
 Bayer-sample amplitudes also remain weak on many high-conditional-SNR cases;
 these are not the held-out RGB mesh metrics. Sixteen CPU tests and independent
 QR/variance checks pass, with no model/noise calls or restored RGB. V175's fixed
-recipe remains unchanged and its quality pending.
+recipe remained unchanged; its completed quality is reported above.
 
 The [V175 fresh-noise continuation](fresh-noise-matching.md) tests a longer
 training recipe at V172's unchanged model and seven-term objective. It starts
@@ -106,7 +121,8 @@ photo rows per pass retain their original observations/parents rather than
 substitute a clipped target for clean sensor data. The full 1,000-row preflight
 and 54 focused tests pass. Its budget, fresh realizations and reheated learning
 rate change together; individual effects are not isolated. Training has
-launched, quality is pending, and V172 remains the matching baseline.
+completed with the small quiet gain and costs reported above; V172 remains
+the balanced matching baseline.
 
 The final comparison now includes all 822 saved V161 EMA outputs, re-reduced on
 identical inputs/parents/ROIs and current metric bytes. All 8,038 comparable old

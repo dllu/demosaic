@@ -1,0 +1,129 @@
+{
+  "status": "completed-terminal-quality-audit-and-actual-native-viewing",
+  "launches": {
+    "manual-quality-audit-launch-v1.json": {
+      "owner": {
+        "pid": 777511,
+        "created": 1794129054.19
+      },
+      "command": [
+        "/usr/bin/python3.12",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py",
+        "quality"
+      ],
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py",
+        "sha256": "410527580fa09075d344e54373a856556536e10a22ae9e2c8ff9f982b04c57fe"
+      },
+      "log": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v1.log",
+      "scope": "One independent CPU audit after actual four-endpoint review owner terminal; no neural forward or noise regeneration."
+    },
+    "manual-quality-audit-launch-v2.json": {
+      "owner": {
+        "pid": 777629,
+        "created": 1794129080.61
+      },
+      "command": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py",
+        "quality"
+      ],
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py",
+        "sha256": "410527580fa09075d344e54373a856556536e10a22ae9e2c8ff9f982b04c57fe"
+      },
+      "log": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v2.log",
+      "scope": "Independent CPU quality audit with unchanged frozen source; correct explicit virtual-environment interpreter. First launch failed before torch import/no model work.",
+      "previous_launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-launch-v1.json",
+        "sha256": "038141922a6c38b71bdbbb1aebf527f82bbecab9f8011470d5727507daef97ea"
+      },
+      "previous_failure_log": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v1.log",
+        "sha256": "c968e6650d6b47b302bef6a05b6d86c862dd7262aa25b520e1385ef395329b81"
+      }
+    },
+    "controller-launch-v1.json": {
+      "owner": {
+        "pid": 453410,
+        "created": 1794113512.6
+      },
+      "command": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/watch-v178-matched-trial-v1.py"
+      ],
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/watch-v178-matched-trial-v1.py",
+        "sha256": "4b2f1dca6174127e25c7d3acf3bd88bddf0c8ee5b701c8fac683e0aa8449c32e"
+      },
+      "draft": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/draft-v1.json",
+        "sha256": "76a60982c9559d9c144277e55995e45dcfa3fba5ad2f989ef09eef0906cb60ee"
+      },
+      "scope": "CPU-only waiting until inspected actual CUDA admission;then staged workers once. No quality claimed."
+    },
+    "review-launch-v1.json": {
+      "owner": {
+        "pid": 773036,
+        "created": 1794128425.82
+      },
+      "command": [
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/work/scripts/train_phase_evidence_trial.py",
+        "review"
+      ],
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/plan-v1.json",
+        "sha256": "5b3607531549b83cdd0c80c383038163111834ce389936670ea84766c4095538"
+      }
+    }
+  },
+  "manual_logs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v1.log",
+      "sha256": "c968e6650d6b47b302bef6a05b6d86c862dd7262aa25b520e1385ef395329b81",
+      "text": "Traceback (most recent call last):\n  File \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py\", line 570, in <module>\n    {\"training\": training_audit, \"quality\": quality_audit}[args.phase](args.root)\n  File \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py\", line 434, in quality_audit\n    import torch\nModuleNotFoundError: No module named 'torch'\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-reducer-v1.log",
+      "sha256": "9492c5df983736d412796c5d71a03fb6ec89bddd5ecec7a79635c3a950103883",
+      "text": "Reduced13methods/10686rows/34contrasts/714tablecells;no new inference\n"
+    }
+  ],
+  "launch_bindings": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-launch-v1.json",
+      "sha256": "038141922a6c38b71bdbbb1aebf527f82bbecab9f8011470d5727507daef97ea",
+      "text": "{\n  \"owner\": {\n    \"pid\": 777511,\n    \"created\": 1794129054.19\n  },\n  \"command\": [\n    \"/usr/bin/python3.12\",\n    \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py\",\n    \"quality\"\n  ],\n  \"source\": {\n    \"path\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py\",\n    \"sha256\": \"410527580fa09075d344e54373a856556536e10a22ae9e2c8ff9f982b04c57fe\"\n  },\n  \"log\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v1.log\",\n  \"scope\": \"One independent CPU audit after actual four-endpoint review owner terminal; no neural forward or noise regeneration.\"\n}\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-launch-v2.json",
+      "sha256": "37f7d2bd4f712f04333fa89ab5dcb7c4670598e371a5de4d00caf07c9156bd32",
+      "text": "{\n  \"owner\": {\n    \"pid\": 777629,\n    \"created\": 1794129080.61\n  },\n  \"command\": [\n    \"/home/dllu/proj/demosaic/.venv/bin/python\",\n    \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py\",\n    \"quality\"\n  ],\n  \"source\": {\n    \"path\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/audit-work-v1/scripts/audit_phase_evidence_trial.py\",\n    \"sha256\": \"410527580fa09075d344e54373a856556536e10a22ae9e2c8ff9f982b04c57fe\"\n  },\n  \"log\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v2.log\",\n  \"scope\": \"Independent CPU quality audit with unchanged frozen source; correct explicit virtual-environment interpreter. First launch failed before torch import/no model work.\",\n  \"previous_launch\": {\n    \"path\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-launch-v1.json\",\n    \"sha256\": \"038141922a6c38b71bdbbb1aebf527f82bbecab9f8011470d5727507daef97ea\"\n  },\n  \"previous_failure_log\": {\n    \"path\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-v1.log\",\n    \"sha256\": \"c968e6650d6b47b302bef6a05b6d86c862dd7262aa25b520e1385ef395329b81\"\n  }\n}\n"
+    }
+  ],
+  "actual_quality_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/quality-audit-v1.json",
+    "sha256": "bee210789053cbd336be2bb6170d5372a84294ca385330724b2d04e0f635838c"
+  },
+  "actual_comparisons": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/paired-comparisons-v1.json",
+    "sha256": "dbd15bcada43f376e5b27ebfac2eb22e8a205383627fe236e943b0c118f0a101"
+  },
+  "actual_figures": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/figures-v1.json",
+    "sha256": "b4cd9b4808f0c4bca6242ca6a570568ade501223c2ea9d0b89b3cd1de729ca99"
+  },
+  "actual_viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/native-viewing-completion-v1.json",
+    "sha256": "599b35e032fadf5a869af8508cd8595548930b748858d91ee8dc69f75ef83d36",
+    "text": "{\n  \"status\": \"actually-viewed72-native-figures-in18-original-detail-sheets\",\n  \"figures\": {\n    \"path\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/figures-v1.json\",\n    \"sha256\": \"b4cd9b4808f0c4bca6242ca6a570568ade501223c2ea9d0b89b3cd1de729ca99\"\n  },\n  \"journal\": {\n    \"path\": \"/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/native-viewing-v1.jsonl\",\n    \"sha256\": \"d8d168c1a5e0dfe552abaf3ea8be540451c939e64308ec3eaa252fa7af4d2723\"\n  },\n  \"events\": [\n    {\n      \"recorded_unix_UTC\": 1794129118.9757552,\n      \"sheets\": [\n        0,\n        1,\n        2,\n        3,\n        4\n      ],\n      \"detail\": \"original\",\n      \"notes\": \"Actually viewed all original-detail sheets0..4. Constructed mesh2302 remains nearly uniform at normal display; contrast40 exposes broad colored mottle and no recovered crossed lattice. Mesh2309 retains mostly one line orientation, with the weaker crossing missing in both matched arms/raw/EMA. Blank constructed crop also mottled at contrast40. Main sky looks smooth at ordinary exposure4; building and foliage stay soft. Coarse main fence survives. Both fine green cab ROIs remain weak and incomplete under both noise profiles; no clear matched-arm visible recovery. ISO100/AHD and JPEGs are qualitative references with differing exposure/aperture,not GT.\"\n    },\n    {\n      \"recorded_unix_UTC\": 1794129149.3359916,\n      \"sheets\": [\n        5,\n        6,\n        7,\n        8,\n        9,\n        10,\n        11,\n        12,\n        13\n      ],\n      \"detail\": \"original\",\n      \"notes\": \"Actually inspected all original-detail sheets5..13. Alternate cab ROI/profile shows faint diagonals and softened crossing detail with no clear evidence-vs-control recovery. Natural photo detail remains softened: butterfly pattern disappears, bird/branch and bark remain blurred. ADC flat crops remain uniform. Noisy gray/color flats retain broad green/purple mottle at contrast40,including all four endpoint triplets. Quiet fields beside vertical edges retain broad colored mottling under ISO6400 and ISO12800; ordinary contrast1 appears nearly smooth. Both matched endpoints look extremely similar; native views do not support a visible leap in detail or sky safety.\"\n    },\n    {\n      \"recorded_unix_UTC\": 1794129173.918415,\n      \"sheets\": [\n        14,\n        15,\n        16,\n        17\n      ],\n      \"detail\": \"original\",\n      \"notes\": \"Actually viewed all remaining original-detail sheets14..17. Narrow bars,slanted steps and striped patch preserve intended edge/patch at normal contrast but surrounding quiet fields show broad colored errors under contrast40,with little visible control/evidence separation. ADC bark and fur retain detail identically across new matching methods;four ADC plane controls remain smooth without added texture. All72 figures in18 sheets now actually inspected at original detail,including24 unresized noisy/restored/exact constructed-GT triplets. The numerical mesh gain is too small to read as newly recovered fine cab crossings in these views.\"\n    }\n  ],\n  \"indices\": [\n    0,\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8,\n    9,\n    10,\n    11,\n    12,\n    13,\n    14,\n    15,\n    16,\n    17,\n    18,\n    19,\n    20,\n    21,\n    22,\n    23,\n    24,\n    25,\n    26,\n    27,\n    28,\n    29,\n    30,\n    31,\n    32,\n    33,\n    34,\n    35,\n    36,\n    37,\n    38,\n    39,\n    40,\n    41,\n    42,\n    43,\n    44,\n    45,\n    46,\n    47,\n    48,\n    49,\n    50,\n    51,\n    52,\n    53,\n    54,\n    55,\n    56,\n    57,\n    58,\n    59,\n    60,\n    61,\n    62,\n    63,\n    64,\n    65,\n    66,\n    67,\n    68,\n    69,\n    70,\n    71\n  ],\n  \"native_figures\": 72,\n  \"native_triplets\": 24,\n  \"no_resize\": true\n}\n"
+  },
+  "correction": "First quality-audit launch erroneously resolved the venv Python symlink to /usr/bin/python3.12,which lacks torch. It terminated at import before model/data audit work. Preserved launch/log; second explicit .venv/bin/python invocation completed with identical frozen audit source. No scientific forward,noise or saved result repeated.",
+  "scope": "Actual completed audit and recorded original-detail inspection,not preparation/layout fixtures. Both training arms and all review/controller owners terminal. Originals and unavailable /mnt/dataz unused."
+}
