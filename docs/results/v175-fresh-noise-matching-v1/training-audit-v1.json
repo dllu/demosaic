@@ -1,0 +1,74 @@
+{
+  "status": "pass-all9000-continuation-bindings-events-totals-and-final-states",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/plan-v1.json",
+    "sha256": "fd297555af23e0affc0a5788b90f0657f81139d116b600983e3747361dea1840"
+  },
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/train-result-v1.json",
+    "sha256": "f101082d0c6dc1ca06c7910d4181d4d3324a06779613d59dcb9c3a90abd837a1"
+  },
+  "training_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/train-trace-v1.jsonl",
+    "sha256": "5beafb8aea229a0eda717c03e700be091fb73dca948373b6c59c1d4d925c83bc"
+  },
+  "training_forward_journal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/train-forward-events-v1.jsonl",
+    "sha256": "12fa2d097fc3b88b5aa0e18ba5defeb58db7161ce4eb1497dcea34b5df4eea78"
+  },
+  "cached_batches_checked": 1000,
+  "cached_input_fingerprints_checked": 8000,
+  "unique_cached_parent_bindings_checked": 1000,
+  "continuation_rows_checked": 9000,
+  "unit_table_bindings_checked": 9000,
+  "updates": 8100,
+  "total_optimizer_updates_including_V172": 9000,
+  "ADC_skips": 900,
+  "fresh_sensor_batches": 8073,
+  "retained_cached_noisy_batches": 27,
+  "actual_parent_argument_fingerprints_checked": 40365,
+  "training_forward_events_checked": 32346,
+  "FP32_loss_totals_checked": 8100,
+  "maximum_loss_total_difference": 0.0,
+  "inherited_target_mask_fingerprints_checked": 8100,
+  "source_domains": {
+    "mesh": 3069,
+    "photo": 2187,
+    "flat": 1377,
+    "mixed": 1404,
+    "weak": 963
+  },
+  "unique_fresh_sensor_seeds": 8073,
+  "sensor_Poisson_calls": 19179,
+  "sensor_Gaussian_calls": 8073,
+  "saved_prefix_batches_checked": 7,
+  "saved_prefix_bytes": 184566642,
+  "strict_final_raw_and_EMA_states": 2,
+  "raw_module_hash": "6a6616185280c1a4d3c07b52e1a197a7b6c3d0370c7dfd701e6db1ab676d6a4b",
+  "EMA_module_hash": "e7427ea260054c1a86235d8f1d12846eda97d2c9d0edc2d852fdb3be673d8ff3",
+  "final_Adam_states": 141,
+  "actual_final_Adam_step": 9000,
+  "frozen47_state_tensors_exact_initial": true,
+  "checkpoint_restoration": {
+    "checkpoint": {
+      "path": "/mnt/external/demosaic/quality-20261107/V175-fresh-noise-matching-v2/checkpoints/step01008.pt",
+      "sha256": "4882967bff1ce26a02b9a634d1d4dbb78a30e53800d0d2829de31267787211f7"
+    },
+    "model_exact": true,
+    "optimizer_exact": true,
+    "EMA_exact": true,
+    "CPU_RNG_exact": true,
+    "CUDA_RNG_exact": true,
+    "continued_at_step": 1009,
+    "repeated_prefix_forwards": 0
+  },
+  "new_neural_forwards": 0,
+  "new_sensor_noise_draws": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v175-training-v1.py",
+    "sha256": "d621fd2eb891ca508b2a47da4bba4a2d3a9ed53254df86f46025f66cdb6e240d",
+    "text": "\"\"\"Audit all continuation rows, durable calls, saved prefix and final Adam/EMA state.\"\"\"\n\nimport json\nfrom pathlib import Path\n\nimport numpy as np\nimport torch\nfrom profile_raw_kernel_inference import model_hash\nfrom v175_postprocess import REPO, ROOT, context, read, ref, source, write_once\n\nfrom demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail\nfrom demosaic.prediction_archive import fingerprint\n\nplan, post = context()\nresult = read(ROOT / \"train-result-v1.json\")\ntrace = [json.loads(s) for s in (ROOT / \"train-trace-v1.jsonl\").read_text().splitlines()]\nassert len(trace) == 9000 and trace == result[\"trace\"]\nassert result[\"status\"].startswith(\"completed\")\ncache = read(plan[\"cache\"][\"path\"])[\"batches\"]\nunits = read(plan[\"pair_units\"][\"path\"])[\"rows\"]\neligible = read(plan[\"clean_sensor_preflight\"][\"path\"])[\"rows\"]\nold = read(plan[\"initial_training\"][\"path\"])[\"trace\"]\nassert len(cache) == len(units) == len(eligible) == len(old) == 1000\n\n# Recheck each unique original array/parent binding once. The 8,073 new arrays\n# were streamed; their complete posthoc byte archive does not exist.\nsource_inputs = 0\nfor index, (item, unit, permitted) in enumerate(zip(cache, units, eligible, strict=True)):\n    assert item[\"step\"] == unit[\"step\"] == permitted[\"step\"] == index + 1\n    assert item[\"arrays\"] == unit[\"batch\"] == permitted[\"arrays\"]\n    assert ref(item[\"arrays\"][\"path\"]) == item[\"arrays\"]\n    assert ref(item[\"parent\"][\"path\"]) == item[\"parent\"]\n    arrays = dict(np.load(item[\"arrays\"][\"path\"]))\n    assert {k: fingerprint(v) for k, v in arrays.items()} == item[\"inputs\"]\n    assert fingerprint(np.load(item[\"parent\"][\"path\"])) == item[\"parent_values\"]\n    expected_units = np.maximum(\n        np.sqrt(np.asarray(item[\"metadata\"][\"sensor\"].get(\"increment_mean_variance\", []), np.float32)),\n        np.float32(2 / 65535),\n    )\n    np.testing.assert_array_equal(expected_units, np.asarray(unit[\"candidate_units_FP32\"], np.float32))\n    assert permitted[\"noisy\"] == bool(np.any(arrays[\"variance\"] > 0))\n    source_inputs += len(arrays)\n\nevents = [json.loads(s) for s in (ROOT / \"train-forward-events-v1.jsonl\").read_text().splitlines()]\nfrom v175_training_trace_audit import validate_trace\nvalidated = validate_trace(trace, cache, units, eligible, old, events, plan)\ncounts, parent_counts, cursor, updates, skips, fresh, cached, totals, masks, observed_arguments, poisson, gaussian, domains, seeds, maximum_difference = [validated[k] for k in [\"counts\", \"parent_counts\", \"cursor\", \"updates\", \"skips\", \"fresh\", \"cached\", \"totals\", \"masks\", \"observed_arguments\", \"poisson\", \"gaussian\", \"domains\", \"seeds\", \"maximum_difference\"]]\nassert cursor == len(events) == 2 * 8073 + 2 * 8100\nassert updates == 8100 and skips == 900 and fresh == 8073 and cached == 27\nassert result[\"counts\"] == counts and result[\"parent_counts\"] == parent_counts == dict(parent=8075, DINO=8075)\nassert result[\"sensor_Poisson_calls\"] == poisson and result[\"sensor_Gaussian_calls\"] == gaussian == 8073\nassert result[\"training_images\"] == 32400 and result[\"total_training_images_including_V172\"] == 36000\nassert result[\"total_optimizer_updates\"] == 9000 and result[\"updates\"] == updates\n\nsaved = saved_bytes = 0\nfor row in trace[:8]:\n    if not row[\"noisy\"]:\n        continue\n    item = cache[row[\"cache_step\"] - 1]\n    for field in [\"saved_inputs\", \"saved_parent\"]:\n        assert ref(row[field][\"path\"]) == row[field]\n        saved_bytes += Path(row[field][\"path\"]).stat().st_size\n    arrays = dict(np.load(row[\"saved_inputs\"][\"path\"]))\n    parent = np.load(row[\"saved_parent\"][\"path\"])\n    assert {k: fingerprint(v) for k, v in arrays.items()} == row[\"inputs\"] and fingerprint(parent) == row[\"parent_values\"]\n    shot, read_noise = [item[\"metadata\"][\"noise\"][k] for k in [\"shot\", \"read\"]]\n    np.testing.assert_allclose(arrays[\"variance\"], np.maximum(arrays[\"packed\"].astype(np.float64), 0) * shot + read_noise, rtol=2e-7, atol=1e-12)\n    clean = np.stack([np.stack([rgb[int(c), k // 2::2, k % 2::2] for k, c in enumerate(layout)]) for rgb, layout in zip(arrays[\"target\"].clip(min=0), arrays[\"colors\"], strict=True)])\n    for first, second in arrays[\"pair_indices\"]:\n        identical = clean[first] == clean[second]\n        np.testing.assert_array_equal(arrays[\"packed\"][first][identical], arrays[\"packed\"][second][identical])\n    saved += 1\nassert saved == 7\n\nrestoration = read(ROOT / \"checkpoint-restoration-v1.json\")\nassert all(restoration[k] for k in [\"model_exact\", \"optimizer_exact\", \"EMA_exact\", \"CPU_RNG_exact\", \"CUDA_RNG_exact\"])\nassert restoration[\"continued_at_step\"] == 1009 and restoration[\"repeated_prefix_forwards\"] == 0\nfor binding in result[\"checkpoints\"]:\n    assert ref(binding[\"path\"]) == binding\nstate = torch.load(result[\"final_checkpoint\"][\"path\"], map_location=\"cpu\", weights_only=True)\ninitial = torch.load(plan[\"initial_checkpoint\"][\"path\"], map_location=\"cpu\", weights_only=True)\nassert state[\"step\"] == 10000 and state[\"updates\"] == 8100 and state[\"total_updates\"] == 9000\nassert state[\"counts\"] == counts and state[\"parent_counts\"] == parent_counts and state[\"skipped\"] == 900\nassert len(state[\"optimizer\"][\"state\"]) == 141\nassert all(float(s[\"step\"]) == 9000 and all(torch.isfinite(v).all() for v in s.values()) for s in state[\"optimizer\"][\"state\"].values())\nassert all(torch.isfinite(v).all() for v in [*state[\"models\"].values(), *state[\"ema\"].values()])\nassert all(value > 0 for value in result[\"parameter_maximum_gradients\"].values())\nfrozen = [k for k in state[\"models\"] if k.startswith(\"frozen.\")]\nassert len(frozen) == 47 and all(torch.equal(state[\"models\"][k], initial[\"models\"][k]) for k in frozen)\nmodule = LateLocalNoiseMatchingDetail(**plan[\"module_config\"])\nmodule.load_state_dict(state[\"models\"], strict=True)\nraw_hash = model_hash(module)\nmodule.network.load_state_dict(state[\"ema\"], strict=True)\nEMA_hash = model_hash(module)\nassert model_hash(module.frozen) == plan[\"frozen_component\"][\"module_hash\"] == result[\"frozen_module_hash\"]\nassert result[\"frozen_weights_unchanged\"] and result[\"RNG_unchanged\"] and not torch.cuda.is_initialized()\nwrite_once(ROOT / \"training-audit-v1.json\", dict(status=\"pass-all9000-continuation-bindings-events-totals-and-final-states\",\n    plan=ref(ROOT / \"plan-v1.json\"), training=ref(ROOT / \"train-result-v1.json\"), training_journal=ref(ROOT / \"train-trace-v1.jsonl\"),\n    training_forward_journal=ref(ROOT / \"train-forward-events-v1.jsonl\"), cached_batches_checked=1000,\n    cached_input_fingerprints_checked=source_inputs, unique_cached_parent_bindings_checked=1000, continuation_rows_checked=9000,\n    unit_table_bindings_checked=9000, updates=updates, total_optimizer_updates_including_V172=9000, ADC_skips=skips,\n    fresh_sensor_batches=fresh, retained_cached_noisy_batches=cached, actual_parent_argument_fingerprints_checked=observed_arguments,\n    training_forward_events_checked=len(events), FP32_loss_totals_checked=totals, maximum_loss_total_difference=maximum_difference,\n    inherited_target_mask_fingerprints_checked=masks, source_domains=dict(domains), unique_fresh_sensor_seeds=len(seeds),\n    sensor_Poisson_calls=poisson, sensor_Gaussian_calls=gaussian, saved_prefix_batches_checked=saved, saved_prefix_bytes=saved_bytes,\n    strict_final_raw_and_EMA_states=2, raw_module_hash=raw_hash, EMA_module_hash=EMA_hash, final_Adam_states=141,\n    actual_final_Adam_step=9000, frozen47_state_tensors_exact_initial=True, checkpoint_restoration=restoration,\n    new_neural_forwards=0, new_sensor_noise_draws=0, CUDA_initialized=False, source=source(__file__),\n    scope=\"All9000 source/target/pair-unit mappings,durable parent/matching events,8100 actual FP32 loss totals and inherited clean masks checked. Original1000 cached observations/parents rehashed once. New8073 full-array archive was not retained;posthoc physical variance/pair equality checks cover only seven saved fresh prefix batches. Other fresh rows have stateless seeds,actual observed parent-argument/output fingerprints and unchanged-source proof,not a posthoc full-array audit. No noise regenerated or neural forwards repeated. Final141 Adam states are at step9000,including900 inherited V172 updates. Exact checkpoint restoration does not promise bit-exact retraining.\"))\nprint(\"PASS9000 rows;8100 FP32 loss totals;8073 fresh parent bindings;141 Adam states at9000;zero new forwards/noise\")\n"
+  },
+  "scope": "All9000 source/target/pair-unit mappings,durable parent/matching events,8100 actual FP32 loss totals and inherited clean masks checked. Original1000 cached observations/parents rehashed once. New8073 full-array archive was not retained;posthoc physical variance/pair equality checks cover only seven saved fresh prefix batches. Other fresh rows have stateless seeds,actual observed parent-argument/output fingerprints and unchanged-source proof,not a posthoc full-array audit. No noise regenerated or neural forwards repeated. Final141 Adam states are at step9000,including900 inherited V172 updates. Exact checkpoint restoration does not promise bit-exact retraining."
+}

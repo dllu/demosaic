@@ -1,5 +1,17 @@
 # Experiment index
 
+The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
+9,000 total optimizer updates with 8,073 fresh sensor batches. Mesh response
+rises only **0.03–0.05% versus V172**, reaching 3.878–3.879% of constructed GT;
+raw quiet RMS falls **0.14–0.27%**, while EMA ISO12800 quiet RMS rises 0.21%.
+Native512 flat results are mixed, natural band response slips and actual fine
+cab crossings/mottle remain unresolved. Both endpoints, all 822 cases,
+60 actually viewed native figures/12 triplets and independent audits are
+complete. All 141 final Adam states are at 9,000; 8,100 recorded FP32 totals
+match exactly, with no successful prefix repeated. The nine-method report
+retains V161 detail and the earlier quiet/flat strengths. Strict exports and
+[240 exact browser crops](results/v175-native-viewer-verification-v1.json) pass.
+
 The [V180 local phase-evidence prototype](local-phase-evidence-matching.md)
 replaces global coefficient fields with locally measured, interpolated fields
 at the same selected frequencies and parameter budget. All 112 focused CPU

@@ -1,8 +1,18 @@
 # Current model choices
 
-The [V175 fresh-noise continuation](fresh-noise-matching.md) is training from
-V172's actual model/Adam/EMA states. Its final quality comparison is pending;
-the useful measured choices below remain current.
+The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
+9,000 total updates. Raw quiet RMS falls **0.14–0.27% versus V172**, with 21/32
+inputs improving and 11 worsening; quiet spatial RMS falls 0.06–0.15% on 29/32.
+Mesh response rises only **0.052% to 3.879% of exact GT amplitude**. ISO6400
+native512 full-flat RMS rises 0.091%, photographic band response slips, and
+fine cab crossings/broad mottle remain unresolved. EMA quiet ISO12800 RMS rises
+0.213% despite lower spatial error. Keep raw's small quiet gain beside V172's
+balanced matching baseline, V173 quiet, V171 flat and V161 detail strengths;
+V120 Small remains the general recommendation. Both endpoints, all 822 cases,
+60 actually viewed figures/12 triplets and final audits are complete, with all
+141 Adam states at 9,000 and no successful prefix repeated.
+[Native-pixel viewer](images/v175-fresh-noise-matching-v1/native-viewer.html) ·
+[240 exact browser crops](results/v175-native-viewer-verification-v1.json).
 
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, but fine crossings remain missing. EMA quiet

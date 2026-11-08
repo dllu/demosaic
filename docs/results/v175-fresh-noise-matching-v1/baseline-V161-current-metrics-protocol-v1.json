@@ -1,0 +1,41 @@
+{
+  "status": "fixed-all822-existing-V161-EMA-array-reduction-before-V175-quality",
+  "owner": {
+    "pid": 283784,
+    "created": 1794103440.52
+  },
+  "old_scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/scores-v1.json",
+    "sha256": "e20ed5035dd5621de320deecbb0a0ba1f35d16020c4a4b6a266fe39ccac24036"
+  },
+  "old_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/review-result-v1.json",
+    "sha256": "1fb5bc444a54e2e3d991e21f0d76240deb419cd212a157cf66cd6260c1f965c5"
+  },
+  "old_design": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/quality-design-v1.json",
+    "sha256": "e4a0d39b8f58ec95b488352ba86a0f3c6ea78ab251bb8ad5010a08bf02420565"
+  },
+  "current_design": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/quality-design-v1.json",
+    "sha256": "90a0f9e44813f55581fedc64fbab9a01559d79c7edbe37c48b9b642fe08800f0"
+  },
+  "metric_sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/collaborative-detail-v1/transfer-v1.py",
+      "sha256": "4e133f6492db7cfa3f0758410ccb1f91a50eecae18ff32018232ad373dc6beba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V144-V145-photo-supplement-v1/operator-v2.py",
+      "sha256": "a8cd5a95ad45f4ebc6693666c63a911077c5c21642c695441ae996e6a0d2cefc"
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/reduce-v175-V161-baseline-v1.py",
+    "sha256": "e9640aebb6334728bfff69c7625a1e87bdccd92768ab47891cd5130964cc80f6",
+    "text": "\"\"\"Recompute all saved V161 EMA outputs using the exact current inputs and metrics.\"\"\"\nimport os,time\nfrom pathlib import Path\nimport numpy as np,psutil,torch\nfrom balanced_spatial_metrics import DetailMetrics,summarize\nfrom train_directional_bank_trial import read,ref,save\nfrom demosaic.prediction_archive import fingerprint\n\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V175-fresh-noise-matching-v2'\noutput=root/'baseline-V161-current-metrics-v1.json';protocol=root/'baseline-V161-current-metrics-protocol-v1.json'\nassert not output.exists() and not protocol.exists()\nos.nice(10);os.sched_setaffinity(0,[4,5]);torch.set_num_threads(2);torch.set_num_interop_threads(1)\nplan=read(root/'plan-v1.json');old_path=repo/'.cache/quality-20261107/V161-harmonic-context-v1/scores-v1.json';old=read(old_path)\ndesign=read(plan['design']['path'])['observations'];previous=read(old['design']['path'])['observations']\nassert old['metric_sources']==plan['metrics_sources'] and len(previous)==len(design)==822\nfor a,b in zip(previous,design,strict=True):\n for key in ['id','arrays','parent','ROI_xywh','kind','cohort','noise','variant','output_shape']:assert a.get(key)==b.get(key),(a['id'],key)\nowner=dict(pid=os.getpid(),created=psutil.Process().create_time())\nsave(protocol,dict(status='fixed-all822-existing-V161-EMA-array-reduction-before-V175-quality',owner=owner,old_scores=ref(old_path),old_review=old['review'],old_design=old['design'],current_design=plan['design'],metric_sources=plan['metrics_sources'],source=dict(ref(__file__),text=Path(__file__).read_text()),new_neural_forwards=0,new_source_noise_draws=0,scope='Previously strongest learned-detail baseline;all822 original V161 EMA full arrays already exist on exactly the same cached inputs/parents/ROIs. Recompute established metrics and compare common original values,not new model inference or new quality selection.'))\nmetric=DetailMetrics(plan['metrics_sources']);lookup={r['id']:r for r in old['rows'] if r['method']=='harmonic-context-EMA-step1000'}\nassert len(lookup)==822\nrows=[];checks=channels=bytes_read=0;maximum=0.\nfor index,case in enumerate(design):\n assert psutil.virtual_memory().available>32*2**30\n original=lookup[case['id']]\n for binding in [case['arrays'],case['parent'],original['prediction']]:assert ref(binding['path'])==binding\n arrays=dict(np.load(case['arrays']['path']));base=np.load(case['parent']['path']);value=np.load(original['prediction']['path'])\n row=metric.measure(case,arrays,base,value)\n for key,number in row.items():\n  if isinstance(number,(int,float)) and not isinstance(number,bool) and key in original:\n   delta=abs(number-original[key]);assert delta<1e-10,(case['id'],key,delta);maximum=max(maximum,delta);checks+=1\n row.update(method='V161-EMA',source_method=original['method'],index=index,prediction=original['prediction'],values=fingerprint(value))\n rows.append(row);channels+=value.size;bytes_read+=Path(original['prediction']['path']).stat().st_size\n if (index+1)%100==0:print('Checked old V161 EMA arrays',index+1,flush=True)\nassert len(rows)==822 and not torch.cuda.is_initialized()\nsave(output,dict(status='pass-all822-existing-V161-EMA-arrays-on-identical-current-inputs-and-metrics',protocol=ref(protocol),owner=owner,old_scores=ref(old_path),old_review=old['review'],design=plan['design'],metric_sources=plan['metrics_sources'],rows=rows,summary=summarize(rows),common_original_scalar_checks=checks,maximum_original_scalar_difference=maximum,old_RGB_channels_checked=channels,old_prediction_array_bytes=bytes_read,new_neural_forwards=0,new_source_noise_draws=0,CUDA_initialized=False,source=dict(ref(__file__),text=Path(__file__).read_text()),scope='All822 saved old V161 EMA arrays rehashed/reduced against exactly the same current cached noisy inputs,parents and ROIs with identical metric-source bytes. No V161,V175,parent,DINO or sampling model forward;no new noise/source draws;real references remain unscored. This strengthens the numerical comparison with the earlier detail prototype without claiming new V175 quality.'))\nprint('PASS822 old V161 EMA arrays;',checks,'common original scalars;maxdiff',maximum,';zero inference/noise',flush=True)\n"
+  },
+  "new_neural_forwards": 0,
+  "new_source_noise_draws": 0,
+  "scope": "Previously strongest learned-detail baseline;all822 original V161 EMA full arrays already exist on exactly the same cached inputs/parents/ROIs. Recompute established metrics and compare common original values,not new model inference or new quality selection."
+}

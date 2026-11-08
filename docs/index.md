@@ -11,14 +11,16 @@ clean quiet fields. The latest completed
 [native-pixel viewer](images/v174-spread-matching-v1/native-viewer.html) retains
 both protected GFX scenes and the earlier useful comparators.
 
-[V175 fresh-noise training](fresh-noise-matching.md) continues from V172's actual
-raw/Adam/EMA history for 8,100 more updates. Its first four passes have exact
-checkpoint/trace checks, but [recorded detail losses move little](fresh-noise-matching.md#four-pass-training-losses).
-Those moving-model training scalars are not final image quality. The final
-nine-method comparison includes V161's stronger detail and its quiet/flat costs;
-all 822 old V161 arrays reproduce 8,038 common metrics without inference.
-[Final comparison preparation](results/v175-postprocess-preparation-v1.json) ·
-[V161 baseline audit](results/v175-V161-baseline-metric-audit-v1.json).
+The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
+9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
+0.03–0.05% versus V172, and real fine crossings remain weak. Raw quiet RMS falls
+0.14–0.27%, while EMA ISO12800 quiet RMS rises 0.21%; flats are mixed and mottle
+persists. All 822 cases, 60 actual native figures/12 triplets, 141 Adam states
+at 9,000 and final audits pass. The nine-method comparison retains V161's
+stronger detail and its quiet/flat costs, with no new inference for that column.
+[Native-pixel viewer](images/v175-fresh-noise-matching-v1/native-viewer.html) ·
+[Final evidence](results/v175-fresh-noise-matching-final-v1.json) ·
+[Historical four-pass losses](fresh-noise-matching.md#four-pass-training-losses).
 
 The [V178 phase-evidence variant](phase-evidence-matching.md) is implemented
 and untrained. Its zero 3,120-weight adapter exposes 80 measured-wave maps to

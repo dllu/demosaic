@@ -1,5 +1,18 @@
 # Current method research
 
+The completed [V175 fresh-noise continuation](fresh-noise-matching.md) supplies
+little additional fine-detail response after 8,100 more updates: mesh gain is
+only 0.052% raw/0.033% EMA versus V172, with missing real cab crossings. Raw
+quiet total RMS falls 0.135%/0.269% across ISO6400/12800 means, but 11/32 inputs
+worsen and native512 ISO6400 full-flat RMS rises 0.091%. EMA ISO12800 quiet RMS
+rises 0.213% as DC error increases despite lower spatial error. Photograph band
+response falls slightly. All 60 native figures were actually inspected: broad
+mottle and texture loss persist. Retain the small raw quiet gain and the earlier
+detail/quiet/flat options. The completed audits cover all 9,000 continuation
+rows, 8,100 loss totals, 141 Adam states at 9,000 and both endpoint reviews.
+Longer fresh-noise training alone barely changes this tradeoff; the separate
+V178 matched trial now tests access to measured phase evidence.
+
 The [V180 local-evidence variant](local-phase-evidence-matching.md) implements
 local affine-projected coefficients at V178's globally selected frequencies,
 with the same 3,120-weight adapter and matching parameter budget. Default

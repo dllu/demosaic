@@ -7,7 +7,7 @@ measured known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 D
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
-The latest [V174 spread-sampling experiment](docs/spread-sample-matching.md)
+The [V174 spread-sampling experiment](docs/spread-sample-matching.md)
 keeps wide matching positions but does not recover more fine fence crossings.
 EMA quiet total RMS falls **0.12–0.17% versus V172**, with DC color error down
 0.36–0.43%; mesh response slips **0.25% to 3.868% of exact constructed GT amplitude**.
@@ -17,10 +17,12 @@ the balanced matching baseline for detail work. The separate six-input
 [V175 path-removal probe](docs/results/v175-local-shortcut-diagnostic-v1.json)
 finds a nonzero matching contribution; it does not establish why detail is lost.
 
-The [V175 fresh-noise continuation](docs/fresh-noise-matching.md) extends V172
-with 8,100 further updates and newly computed frozen-parent outputs for 8,073
-fresh sensor batches. Quality is pending; the current model choices below stay
-available while this training recipe is tested.
+The completed [V175 fresh-noise continuation](docs/fresh-noise-matching.md)
+reaches 9,000 total updates but barely changes mesh response: **+0.03–0.05%
+versus V172**, reaching 3.878–3.879% of exact constructed GT amplitude. Raw
+quiet RMS falls **0.14–0.27%**, while EMA ISO12800 quiet RMS rises 0.21%.
+Flat results remain mixed, broad mottle persists and real fine crossings stay
+weak. Both endpoints, 822 cases and 60 actually viewed native figures are complete.
 
 An [exact-template training diagnostic](docs/mesh-template-evidence.md) finds
 much more conditional mesh evidence across larger areas. It supplies hidden GT
@@ -29,7 +31,8 @@ A [CFA phase-split follow-up](docs/phase-frequency-evidence.md) tests whether
 input-only frequency selections repeat in separately measured green samples.
 An [untrained phase-evidence adapter](docs/phase-evidence-matching.md) now exposes
 those measurements to matching; CPU checks pass, with CUDA and quality pending.
-Its [guarded CUDA check](docs/phase-evidence-admission.md) is queued after V175.
+Its [guarded CUDA check](docs/phase-evidence-admission.md) has passed; the
+[matched continuation](docs/phase-evidence-training.md) is running, with quality pending.
 A [local-window variant](docs/local-phase-evidence-matching.md) has the same
 parameter budget and passes CPU numerical checks; it is also untrained.
 
@@ -43,6 +46,7 @@ parameter budget and passes CPU numerical checks; it is also untrained.
 | [V172 local noise units](docs/local-noise-matching.md) | Quiet RMS −0.31–0.77% and mesh response +1.06% to 3.877% of GT versus V169; much less cast than V171 | Flat gain only 0.059–0.085%; broad mottle and fine crossings unresolved |
 | [V173 gradient supervision](docs/weak-gradient-matching.md) | Quiet spatial RMS −0.32–0.68% on all 32 inputs, full-flat means −0.25–0.30% versus V172 | Mesh response −3.95% to 3.724% of GT, natural band response −2.63–2.88% |
 | [V174 spread initialization](docs/spread-sample-matching.md) | Small quiet-color gain: total −0.12–0.17%, DC −0.36–0.43% versus V172 | Mesh response −0.25%; both coarse-flat means worsen, no visible crossing recovery |
+| [V175 fresh-noise raw](docs/fresh-noise-matching.md) | Quiet RMS −0.14–0.27% versus V172, with nearly unchanged mesh response | 11/32 quiet inputs worsen; ISO6400 flat RMS +0.09%, natural band response slips and fine crossings remain weak |
 | [V158 regional DC](docs/regional-dc-regret.md) | Quiet RMS −1.93–2.63% versus matched MSE; all 32 inputs improve | Small regressions versus V143, persistent real detail loss |
 
 No model combines these strengths. The [released V170 RAW matching comparison](docs/nonlocal-raw-comparison.md)
@@ -56,12 +60,13 @@ optical blur. [Data pipeline](docs/training-pipeline.md) · [Source review](docs
 
 ## Current 100% crops
 
-Open the local [V174 native-pixel viewer](docs/images/v174-spread-matching-v1/native-viewer.html),
+Open the local [V175 native-pixel viewer](docs/images/v175-fresh-noise-matching-v1/native-viewer.html),
+[V174 viewer](docs/images/v174-spread-matching-v1/native-viewer.html),
 [V173 viewer](docs/images/v173-weak-gradient-matching-v1/native-viewer.html) or
 [V172 viewer](docs/images/v172-local-noise-matching-v1/native-viewer.html). Click
 the flip tile or press **F**. All 160×160 browser crops retain the PNG pixels
-exactly. V174 opens with V173 EMA versus V174 EMA; select V172 EMA for its main
-matched comparison.
+exactly. V175 opens with V174 EMA versus V175 EMA; select V172 EMA for the
+continuation baseline and V175 raw for its modest quiet gain.
 
 [Optional periodic-detail native comparisons and failure views](docs/supported-wave-amplitude.md)
 remain available alongside the learned heads below.
@@ -129,6 +134,18 @@ RMS gain leaves more mesh response than V173, but slightly less than V172.
 EMA checkpoint SHA256 `3f604e7ef028e2ed6e1f475e347fed6db7da96f672c0ee6eeafcd2af3c8c817b`.
 [Both endpoints, 12 triplets and complete metadata](docs/spread-sample-matching.md).
 Earlier native comparisons remain in their [experiment reports](docs/experiments.md).
+
+Noisy → **V175 fresh-noise raw** → exact constructed GT, ISO6400 and ISO12800
+quiet fields. Mean quiet RMS falls **0.14–0.27% versus V172**, with 21/32 inputs
+improving; broad mottle remains and fine cab crossings do not visibly recover.
+Native 160×160 cells use the same quiet source, ROI `[80,176,160,160]`, exposure8,
+contrast40 anchor and shot/read variance as the V173 quiet crops above; no resizing.
+Raw export SHA256 `75e3a404345ba79a9dfbb9e4e579182d0972b3e81824dd9f9e980cf38b48436f`.
+[Both endpoints, all comparisons and complete metadata](docs/fresh-noise-matching.md).
+
+![ISO6400 quiet field: noisy, V175 raw, exact constructed GT](docs/images/v175-fresh-noise-matching-v1/comparison-35.png)
+
+![ISO12800 quiet field: noisy, V175 raw, exact constructed GT](docs/images/v175-fresh-noise-matching-v1/comparison-39.png)
 
 Standing real GFX100S scene: DSCF3879 ISO6400 → **V120 Small, historical Haar
 prior** → DSCF3880 ISO100 f/5.6. Complete 102MP outputs, native 160px cells, common
