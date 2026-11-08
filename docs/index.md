@@ -1,9 +1,17 @@
 # Documentation guide
 
-The [V174 spread-sampling experiment](spread-sample-matching.md) is training
-V172's unchanged model and loss with wider initial matching positions. A six-input
-probe found its trained sample displacements stayed local. Only five bias vectors
-change; 133 CPU checks and native backward admission pass. Quality is pending.
+The [completed V174 spread-sampling experiment](spread-sample-matching.md)
+retains wide matching positions, with six observed coarsest p90 distances about
+90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls **0.12–0.17%**
+and DC error 0.36–0.43% versus V172; mesh response slips **0.25% to 3.868% of GT**.
+Flat changes are mixed, broad mottle persists and real crossings remain missing.
+Both endpoints/all 822 cases/60 actually viewed native figures, 133 CPU tests
+and scoped audits are complete. [Native-pixel viewer](images/v174-spread-matching-v1/native-viewer.html)
+with [240 verified browser crops](results/v174-native-viewer-verification-v1.json).
+V172 remains the balanced matching baseline; V173 quiet, V171 flat and V161
+detail strengths remain useful. A separate six-input
+[V175 path-removal probe](results/v175-local-shortcut-diagnostic-v1.json)
+rejects complete matching bypass on those inputs; no V175 model was trained.
 
 The [completed V173 gradient-loss experiment](weak-gradient-matching.md) lowers
 EMA quiet spatial RMS **0.32–0.68% versus V172**, improving all 32 inputs. Quiet

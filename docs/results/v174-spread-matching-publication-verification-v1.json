@@ -1,0 +1,61 @@
+{
+  "status": "pass-exact-copies-sources-matched-recipe-endpoints-tables-native-pixels-and-links",
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v174-spread-matching-final-v1.json",
+    "sha256": "92ae57f09e03c223f3a033448b1582b513fa8fa7b6ef85c9e4a547853e62cdf8"
+  },
+  "exact_copies": 33,
+  "source_texts_checked": 133,
+  "unchanged_prior_neural_files": 96,
+  "strict_full_state_endpoint_loads": 2,
+  "matched_function_ASTs": 4,
+  "strict_initial_changed_bias_vectors": 5,
+  "strict_initial_changed_scalars": 60,
+  "other183_initial_tensors_exact": true,
+  "saved_offset_tensors_checked": 30,
+  "rounded_table_cells": 294,
+  "native_figures": 60,
+  "native_triplets": 12,
+  "new_RGB_channels_recomputed": 8294400,
+  "unchanged_RGB_channels_compared": 28646400,
+  "document_links_checked": 623,
+  "documents": {
+    "/home/dllu/proj/demosaic/README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "06c6d170f2375ca5ed55cd1bd7e35b5f3927572d73fd7ca721c3b67e669bb31a"
+    },
+    "/home/dllu/proj/demosaic/docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "d0cee0b01756421a86f7f975c983e2f5fa5705edbb811e51e134a15e77a6aa43"
+    },
+    "/home/dllu/proj/demosaic/docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "d67f97b83a2dcd66a76e3ab99facf2c0a5ae9e388987afa09b4114d0e9055bdf"
+    },
+    "/home/dllu/proj/demosaic/docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "14b0f59f82d09ebc54060f4a9d176940580bac10895830ec07f661ae9670b0ab"
+    },
+    "/home/dllu/proj/demosaic/docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "e03eef835a3704eed10c9646e44a9edf6bb6729e4aeefcbf4fd0ea3b1cfcaa28"
+    },
+    "/home/dllu/proj/demosaic/docs/spread-sample-matching.md": {
+      "path": "/home/dllu/proj/demosaic/docs/spread-sample-matching.md",
+      "sha256": "53a44a46e44dc82fd5adcd590e8e0defba3782f11005807c577fc99aa0b6ae2b"
+    },
+    "/home/dllu/proj/demosaic/diary/2026-11-07-17-11-53-v174-spread-sampling-results.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-17-11-53-v174-spread-sampling-results.md",
+      "sha256": "3c5717712b27a8ba573277fa1e600d0563c6707879c8a65aceb5da5008c5f8fe"
+    }
+  },
+  "new_neural_forwards": 0,
+  "new_source_noise_draws": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v174-publication-v1.py",
+    "sha256": "1132f92f952b4d42f420de2ef7267264fbb5709f1f97b2b1125374e5b9a2502a",
+    "text": "\"\"\"Verify exact copies,source integrity,matched recipe,tables and native pixels.\"\"\"\nimport ast,re,sys\nfrom pathlib import Path\nimport numpy as np\nimport torch\nfrom PIL import Image\nfrom demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail\nfrom spread_matching_offsets import initialize_spread_offsets\nfrom profile_raw_kernel_inference import model_hash\nfrom report_late_spectral_mixed_quiet import independent_display\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V174-spread-matching-v1'\noutput=repo/'docs/results/v174-spread-matching-publication-verification-v1.json';assert not output.exists()\nindex=repo/'docs/results/v174-spread-matching-final-v1.json';final=read(index);plan=read(root/'plan-v1.json');guard(plan)\nfor k in ['preparation','CPU_readiness','postprocess_preparation','baseline_offset_probe','initial_loss_isolation','sources','figures','report']:assert ref(final[k]['path'])==final[k]\nfor copies in final['copies'].values():\n for b in copies.values():assert ref(b['path'])==b\n assert Path(copies['original']['path']).read_bytes()==Path(copies['public']['path']).read_bytes()\nprep=read(final['preparation']['path']);sources=read(final['sources']['path']);ready=read(final['CPU_readiness']['path']);post=read(final['postprocess_preparation']['path']);source_checks=0\nfor s in prep['source_texts']+sources['additional_sources']+post['source_texts']:\n assert ref(s['path'])['sha256']==s['sha256'] and Path(s['path']).read_text()==s['text'];source_checks+=1\nfor name,h in plan['prior_neural_hashes'].items():assert ref(repo/'src/demosaic'/name)['sha256']==h\nassert len(plan['prior_neural_hashes'])==96\nassert '133 passed' in ready['CPU_tests']['text'] and ready['metric_runtime']['contents']['new_neural_forwards']==0\nassert ref(ready['runner']['path'])==ready['runner']==plan['runner'] and ref(ready['renderer']['path'])==ready['renderer']\ndef functions(p):return {n.name:ast.dump(n,include_attributes=False) for n in ast.parse(p.read_text()).body if isinstance(n,ast.FunctionDef)}\nreference=read(plan['matched_V172_recipe']['reference_plan']['path']);old=Path(reference['runner']['path']);current=Path(plan['runner']['path']);a,b=functions(old),functions(current)\nassert all(a[k]==b[k] for k in ['train','runtime','resources','tree_equal'])\nassert ref(plan['matched_V172_recipe']['objective']['path'])['sha256']==ref(repo/'scripts/nonlocal_residual_objective.py')['sha256']\nassert ref(plan['offset_initializer']['path'])['sha256']==ref(repo/'scripts/spread_matching_offsets.py')['sha256']\ncontrol=LateLocalNoiseMatchingDetail(**plan['module_config']).load_frozen_component(plan['frozen_component']['export']['path']);original_state={k:v.clone() for k,v in control.state_dict().items()};assert model_hash(control)==plan['matched_V172_recipe']['old_initial_module_hash']\nchanged=initialize_spread_offsets(control,spacing=8);differences=[k for k,v in control.state_dict().items() if not torch.equal(v,original_state[k])];assert differences==plan['matched_V172_recipe']['changed_initial_tensors']==['network.'+n for n in changed] and len(differences)==5\nassert sum(int((control.state_dict()[k]!=original_state[k]).sum()) for k in differences)==60 and model_hash(control)==plan['matched_V172_recipe']['new_initial_module_hash']\nassert 'method = f\"V174-{endpoint}\"' in current.read_text() and plan['methods']==['V174-raw','V174-EMA']\nfor endpoint,binding in final['checkpoints'].items():\n assert ref(binding['export']['path'])==binding['export'];state=torch.load(binding['export']['path'],map_location='cpu',weights_only=True)\n module=LateLocalNoiseMatchingDetail(**state['module_config']);module.load_state_dict(state['state_dict'],strict=True)\n assert state['component']=='LateLocalNoiseMatchingDetail' and model_hash(module)==binding['module_hash'] and model_hash(module.frozen)==binding['frozen_module_hash']\n assert len(module.state_dict())==188 and len(module.network.state_dict())==141 and sum(p.numel() for p in module.network.parameters())==2088906\n assert state['matched_V172_recipe']==plan['matched_V172_recipe'] and ref(state['source']['path'])==state['source']\npaired=read(root/'paired-comparisons-v1.json');summary={(s['kind'],s['condition'],s['cohort'],s['method']):s for s in paired['summary']};bindings=read(root/'report-bindings-v1.json');report=repo/'docs/spread-sample-matching.md';text=report.read_text();assert ref(report)==bindings['report']==final['report']\nfor cell in bindings['cells']:\n s=summary[cell['kind'],cell['condition'],cell['cohort'],cell['method']];assert f\"{s[cell['field']]:.{cell['digits']}f}\"==cell['rendered']\nfor line in bindings['lines']:assert line in text\nnative=read(final['figures']['path']);assert len(native['images'])==60 and sum(i['triplet'] for i in native['images'])==12\nprior=read(plan['prior_figures']['path']);old_map={i['image']['path']:i for i in prior['images']};new_channels=copied_channels=0\nfor item in native['images']:\n old=old_map[item['source_figure']['path']]\n assert ref(item['image']['path'])==item['image'] and item['source_figure']==old['image'] and item['no_resize']\n assert Path(item['image']['path']).read_bytes()==Path(item['original_image']['path']).read_bytes()\n for field in ['ROI_xywh','anchor','contrast','exposure']:assert item[field]==old[field]\n image=np.asarray(Image.open(item['image']['path']));old_image=np.asarray(Image.open(old['image']['path']));a=dict(np.load(item['case']['arrays']['path']));anchor=np.asarray(item['anchor']).reshape(1,3,1,1);old_panels={p['label']:p for p in old['panels']}\n for panel in item['panels']:\n  label=panel['label'];x,y,w,h=panel['xywh'];assert w==h==160\n  if label in item['predictions']:\n   binding=item['predictions'][label];assert ref(binding['path'])==binding;value=np.load(binding['path']);expected=independent_display(anchor+item['contrast']*(value.astype(np.float64)-anchor),a,item['ROI_xywh'],item['exposure']);new_channels+=expected.size\n  else:\n   p=old_panels[label];ox,oy,ow,oh=p['xywh'];expected=old_image[oy:oy+oh,ox:ox+ow];copied_channels+=expected.size\n  np.testing.assert_array_equal(image[y:y+h,x:x+w],expected)\nview=read(root/'native-viewing-completion-v1.json');assert view['native_figures']==60 and sorted(view['indices'])==list(range(60)) and ref(view['journal']['path'])==view['journal']\ne=read(root/'execution-completion-v1.json');assert e['quality_wrapper_calls']==1644 and e['repeated_scientific_prefix_calls']==0 and e['total_new_candidate_matching_CUDA_calls']==2404 and e['total_new_matching_CUDA_calls']==2410\ntraining=read(root/'training-audit-v1.json');assert training['cached_batches_checked']==1000 and training['final_Adam_states']==141 and training['strict_final_raw_and_EMA_states']==2\nquality=read(root/'quality-audit-v1.json');assert quality['input_fingerprints_checked']==6576 and quality['saved_native_RGB_checked']==quality['saved_native_residuals_checked']==72 and quality['ADC_outputs_exact_V169']==144\noffsets=read(root/'offset-audit-v1.json');assert offsets['arrays']==30 and offsets['bytes']==102780672\nfor observation in offsets['observations']:\n for block in observation['blocks']:assert ref(block['array']['path'])==block['array']\nassert e['saved_offset_arrays']==30 and e['saved_offset_array_bytes']==102780672\nassert not torch.cuda.is_initialized()\ndiary=Path(sys.argv[1]).resolve();assert diary.is_relative_to(repo/'diary') and diary.is_file()\ndocuments=[repo/p for p in ['README.md','docs/index.md','docs/current-model.md','docs/research.md','docs/experiments.md','docs/spread-sample-matching.md']]+[diary];links=0\nfor p in documents:\n for target in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  resolved=(p.parent/target.split('#')[0]).resolve();assert resolved==output or resolved.is_file(),(p,target);links+=1\nsave(output,dict(status='pass-exact-copies-sources-matched-recipe-endpoints-tables-native-pixels-and-links',publication=ref(index),exact_copies=len(final['copies']),source_texts_checked=source_checks,unchanged_prior_neural_files=96,strict_full_state_endpoint_loads=2,matched_function_ASTs=4,strict_initial_changed_bias_vectors=5,strict_initial_changed_scalars=60,other183_initial_tensors_exact=True,saved_offset_tensors_checked=30,rounded_table_cells=len(bindings['cells']),native_figures=60,native_triplets=12,new_RGB_channels_recomputed=new_channels,unchanged_RGB_channels_compared=copied_channels,document_links_checked=links,documents={str(p):ref(p) for p in documents},new_neural_forwards=0,new_source_noise_draws=0,CUDA_initialized=False,source=dict(ref(__file__),text=Path(__file__).read_text()),scope=quality['scope']))\nprint('PASS',len(final['copies']),'exact copies;',source_checks,'source texts;',len(bindings['cells']),'cells;60 native figures;',new_channels+copied_channels,'RGB channels;',links,'links')\n"
+  },
+  "scope": "All1644 actual composition event/input/parent/V169 replay bindings,6576 actual input fingerprints and1644 method rows match durable journals. All144 ADC outputs retain V169 exactly. Independent posthoc metrics/FP32 residual-addition checks cover36 preselected native cases at both endpoints,72 RGB+72 residual arrays. Other new outputs were scored/fingerprinted and independently norm/decomposition/addition checked in process but not retained;there is no full new-array posthoc audit."
+}

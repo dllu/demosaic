@@ -1,5 +1,32 @@
 # Experiment index
 
+The [completed V174 spread-sampling experiment](spread-sample-matching.md)
+changes only five existing offset bias vectors/60 scalar values at V172's model,
+loss and cached inputs. Six observed coarsest p90 sample distances remain about
+90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls
+**0.12–0.17% versus V172**, spatial RMS 0.04–0.08% and DC error 0.36–0.43%.
+Mesh response slips **0.25% to 3.868% of GT**; natural band response slips
+0.016–0.023%. Full-flat changes are mixed and both coarse means worsen.
+Native crops retain broad mottle and missing cab crossings. This is a small
+quiet-color gain; V172 remains the balanced matching baseline.
+
+Both endpoints/all 822 cases/60 actual native figures/12 triplets complete;
+133 focused CPU tests, 900 updates, actual step-8 model/Adam/EMA/RNG restoration,
+1,644 V169 replays and 144 ADC identities pass. Independent posthoc array checks
+cover 36 selected cases; 30 captured offset tensors cover six primary EMA inputs.
+Candidate matching work totals 2,404 CUDA calls plus six separate V172 baseline
+probe calls. No CPU matching, parent/DINO, new source/noise or original/dataz
+reads. The [viewer](images/v174-spread-matching-v1/native-viewer.html) verifies
+240 displayed crops exactly. Original sources, receipts and checkpoints remain.
+
+A separate posthoc [V175 shortcut probe](results/v175-local-shortcut-diagnostic-v1.json)
+uses six head and six tail convolutions, with no full matching/frozen/sampler
+forwards. Removing the matching pathway changes 18–84% of the added correction's
+RMS on six selected inputs; that full correction is only 0.20–0.22 DN16 RMS.
+Six saved corrections and compositions are independently checked. This rejects
+complete bypass on the tested inputs, but does not isolate far samples or the
+cause of missing detail. There is no trained V175 alternative or all-case ablation.
+
 The [completed V173 gradient-loss experiment](weak-gradient-matching.md) lowers
 EMA quiet spatial RMS **0.32–0.68% versus V172**, improving all 32 inputs. Quiet
 total RMS falls 0.27–0.52%, and native512 total-flat means fall 0.25–0.30%.

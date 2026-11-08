@@ -1,9 +1,24 @@
 # Current method research
 
-The [V174 spread-sampling experiment](spread-sample-matching.md) is training
-V172's unchanged model and loss with wider initial matching positions. A six-input
-probe found its trained sample displacements stayed local. Only five bias vectors
-change; 133 CPU checks and native backward admission pass. Quality is pending.
+The [completed V174 spread-sampling experiment](spread-sample-matching.md)
+retains wide matching positions: six observed coarsest p90 distances are about
+90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls
+**0.12–0.17% versus V172**, spatial RMS 0.04–0.08% and DC error 0.36–0.43%.
+Mesh response slips **0.25% to 3.868% of GT** and natural band response slips
+0.016–0.023%. Flat changes are mixed; broad mottle and missing real crossings
+persist. All 822 cases/both endpoints/60 native figures, 133 CPU checks and
+scoped audits complete. V172 remains the balanced matching baseline. Wider
+sample positions alone did not improve detail in this 900-update schedule.
+The initialization also changes tanh optimization conditioning; a single seed
+does not isolate geometric reach. [Native-pixel viewer](images/v174-spread-matching-v1/native-viewer.html).
+
+A separate [V175 functional shortcut probe](results/v175-local-shortcut-diagnostic-v1.json)
+removes the whole matching path at the final fusion on six selected V174 EMA
+inputs. Six existing head/tail paths run without the sampler or frozen/parent
+forwards. The change has 18–84% of the full added correction's RMS, while that
+correction is only 0.20–0.22 DN16 RMS. This rejects complete matching bypass on
+these inputs, but does not isolate distant information or explain under-recovery.
+No V175 model is trained. Saved corrections/compositions pass independent checks.
 
 The [completed V173 gradient-loss experiment](weak-gradient-matching.md) lowers
 EMA quiet spatial RMS **0.32–0.68% versus V172**, improving all 32 inputs. Quiet
@@ -34,14 +49,15 @@ An inherited output-label error is corrected by an audited derived view;original
 records,arrays and frozen source remain unchanged,with no inference repeated.
 
 V172's local input/output units retain the response/quiet-color compromise used
-as the next matching baseline. V173 shows that this amplitude-balanced gradient
-objective reduces quiet spatial error while weakening both synthetic mesh and
-natural band response. Its loss units and transition changed together; one
-training seed does not isolate their individual effects. A next controlled
-architecture test can measure larger RAW matching contexts at V172's loss,
-including absent fields, natural bands and both protected real scenes. That
-mechanism remains unmeasured; increasing gradient pressure did not recover the
-missing crossing family in V173.
+as the next matching baseline. V173's changed gradient units and transition
+reduce quiet spatial error while weakening synthetic mesh and natural band
+response. V174 retains wide sample positions without recovering crossings;
+the V175 probe finds a nonzero matching-path contribution on its selected inputs.
+The next useful question is whether matching learns content correspondence and
+enough corrective amplitude under a better training schedule or aggregation
+rule. Test that directly with paired detail and absent/quiet controls, natural
+bands and both protected scenes. Existing results do not establish that longer
+training, stronger gradients or wider offsets will solve the remaining bias.
 
 The [completed V171 matching residual experiment](learned-matching-residual.md)
 trains a fresh 2.09M network above frozen V169/DINO on the existing free-image and

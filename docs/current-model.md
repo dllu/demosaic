@@ -1,5 +1,18 @@
 # Current model choices
 
+The [completed V174 spread-sampling experiment](spread-sample-matching.md)
+retains wide matching positions, but fine crossings remain missing. EMA quiet
+total RMS falls **0.12–0.17% versus V172**, DC color error falls 0.36–0.43%, and
+spatial RMS falls 0.04–0.08%. Mesh response slips **0.25% to 3.868% of GT**;
+standalone-flat results are mixed and both coarse-flat means worsen. The native
+changes are subtle. Keep V172 as the balanced matching baseline, V173 for its
+stronger quiet/spatial gain, V171 for flats and V161 for learned detail. V120
+Small remains the general recommendation. Both endpoints, 822 cases, 60 actually
+viewed native figures, 12 triplets, 133 CPU tests and scoped audits are complete.
+The [native-pixel viewer](images/v174-spread-matching-v1/native-viewer.html)
+opens with V173 EMA versus V174 EMA; select V172 EMA for the main comparison.
+All 240 browser crops match their source pixels exactly.
+
 The [completed V173 gradient-loss experiment](weak-gradient-matching.md) lowers
 EMA quiet spatial RMS **0.32–0.68% versus V172**, improving all 32 inputs. Quiet
 total RMS falls 0.27–0.52%, and native512 total-flat means fall 0.25–0.30%.
@@ -192,6 +205,7 @@ under this new ordering remains unmeasured.
 
 | Quality question | Current evidence and action |
 | --- | --- |
+| Wider initial matching samples | [Completed V174](spread-sample-matching.md): only five offset bias vectors change at fixed V172 model/loss/data. Six observed coarsest p90 distances remain about 90.7 native pixels versus 12.04 for V172. EMA quiet total −0.12–0.17%, spatial −0.04–0.08%, DC −0.36–0.43%; mesh response −0.25% to 3.868% of GT. Flat/coarse changes mixed; mottle and crossings persist. Both endpoints/822 cases/60 native figures and scoped audits complete. Separate six-input V175 path removal changes 18–84% of the small added correction, rejecting complete bypass on those inputs without isolating distant information |
 | Amplitude-balanced gradient loss | [Completed V173](weak-gradient-matching.md): same V172 network/data/optimizer, only gradient term changes. EMA quiet spatial RMS −0.32–0.68% on all 32 inputs, quiet total −0.27–0.52%, full-flat −0.25–0.30%; mesh response −3.95% to 3.724% of GT and natural band response −2.63–2.88%. Mottle/crossings unresolved. Both endpoints/822 cases/60 native figures, 162 focused checks and scoped audits complete. Quiet variant; V172 remains the matching baseline for detail work |
 | Local matching noise units | [Completed V172](local-noise-matching.md):same2.09M network/initialization/cache/loss as V171,local feature/output units together. EMA quiet RMS −0.31–0.77%, DC −1.33–2.55%,mesh response +1.06% to3.877% of GT versus V169; much less V171 added cast. Flat gains only0.059–0.085%,absent RMS +0.060%;mottle/crossings unresolved. Both endpoints/822cases/60 native views,126 tests and scoped audits complete. Useful local-unit variant;retain V171 flat and V161 detail strengths |
 | Fresh matching residual capacity | [Completed V171](learned-matching-residual.md):2.09M parameters above frozen V169/DINO, trained on the same free-image/synthetic cache. EMA full-flat RMS −1.21–1.52%, coarse RMS −1.73%, all 48 inputs improve; mesh response +1.26% to 3.885% of GT. Quiet RMS +26–31%, DC bias +91–93%, visible casts and missing real crossings remain. Both endpoints/all 822cases/60 native figures complete;114 CPU tests,900 updates,actual checkpoint restoration and 144 exact ADC bypasses. Useful flat option; context-dependent color error remains unresolved |

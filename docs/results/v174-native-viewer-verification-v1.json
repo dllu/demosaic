@@ -1,0 +1,1005 @@
+{
+  "status": "pass-browser-native-pixel-equality-all48-cases-and-flip-navigation",
+  "viewer": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v174-spread-matching-v1/native-viewer.html",
+    "sha256": "54b51dbe93a26cefd886dfa4f6389b99e48d3b0037494f813b2c68dff09857bb"
+  },
+  "builder": {
+    "path": "/home/dllu/proj/demosaic/scripts/build_native_crop_viewer.py",
+    "sha256": "9f9140da5b4863f217012446a84bbea1020665f0d02977f0d7be1e53f8bea1bc",
+    "text": "\"\"\"Build a local, offline viewer of existing native comparison panels.\"\"\"\n\nimport argparse\nimport html\nimport json\nfrom pathlib import Path\nfrom urllib.parse import quote\n\nfrom PIL import Image\n\nTEMPLATE = r\"\"\"<!doctype html>\n<html lang=\"en\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Native denoising comparisons</title>\n<style>\n*{box-sizing:border-box}body{margin:24px;background:#f4f4f1;color:#202321;font:14px/20px system-ui,sans-serif}\nh1{font-size:24px;line-height:32px;margin:0 0 12px}p{max-width:960px;margin:8px 0 16px}\n.controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:16px 0}\nlabel{display:block;font-size:12px}select,button{display:block;max-width:100%;font:14px/20px system-ui;padding:6px;border:1px solid #969c95;background:white;border-radius:3px;color:inherit}\n#case{width:720px}button{cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #317f66;outline-offset:2px}\n.cards{display:flex;flex-wrap:wrap;align-items:start;gap:16px;margin:20px 0}\n.card{width:178px;flex-shrink:0;padding:8px;border:1px solid #bbbfb8;background:white}\n.title{height:40px;font-size:12px;line-height:20px;overflow:hidden;margin:0 0 8px}\n.crop{position:relative;width:160px;height:160px;overflow:hidden;background:#777}\n.crop img{position:absolute;max-width:none!important;width:auto;height:auto;display:block}\n#metadata,#checkpoint{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/20px ui-monospace,monospace;max-width:1100px}\n.badge{font-weight:600;color:#216a50}a{color:#216a50}footer{margin-top:24px}\n</style>\n<h1>Denoising at 100%</h1>\n<p>Each crop is 160 \u00d7 160 native pixels. Compare A and B side by side, then use\n<strong>Flip A/B</strong> or press <strong>F</strong> to compare them in the same position.\nExposure and contrast stay fixed for every method within a case.</p>\n<label for=\"case\">Case and display</label><select id=\"case\"></select>\n<div class=\"controls\"><div><label for=\"method-a\">A</label><select id=\"method-a\"></select></div>\n<div><label for=\"method-b\">B</label><select id=\"method-b\"></select></div>\n<button id=\"previous\" type=\"button\">Previous case</button><button id=\"next\" type=\"button\">Next case</button>\n<button id=\"flip\" type=\"button\">Flip A/B \u00b7 F</button></div>\n<div id=\"metadata\"></div><div class=\"cards\" id=\"cards\"></div>\n<div class=\"badge\" id=\"flip-status\" role=\"status\" aria-live=\"polite\"></div><div id=\"checkpoint\"></div>\n<p>Constructed targets are labeled exact GT. Real ISO100/AHD/JPEG references differ in\ncapture or processing; they are qualitative references, not exact GT.</p>\n<footer><a href=\"manifest-v1.json\">Source, ROI, noise and checkpoint manifest</a> \u00b7\n<a href=\"../../__REPORT__\">Report and limitations</a></footer>\n<script id=\"native-data\" type=\"application/json\">__DATA__</script>\n<script>\n'use strict';\nconst data=JSON.parse(document.getElementById('native-data').textContent);\nconst byId=id=>document.getElementById(id), picker=byId('case'), a=byId('method-a'), b=byId('method-b');\nlet showingB=true;\nfunction options(select,labels,value){select.replaceChildren(...labels.map((label,index)=>{const o=document.createElement('option');o.value=label;o.textContent=label;return o}));select.value=labels.includes(value)?value:labels[0]}\ndata.cases.forEach((row,index)=>{const o=document.createElement('option');o.value=index;o.textContent=`${index+1}. ${row.id} \u00b7 contrast ${row.contrast} \u00b7 exposure ${row.exposure}`;picker.append(o)});\nfunction card(title,label,id){\n const row=data.cases[Number(picker.value)],panel=row.panels.find(p=>p.label===label);if(!panel)return;\n const box=document.createElement('section');box.className='card';const heading=document.createElement('div');heading.className='title';heading.textContent=`${title}: ${label}`;\n const crop=document.createElement('div');crop.className='crop';crop.dataset.panel=label;crop.dataset.testid=id;\n const picture=document.createElement('img');picture.src=row.image;picture.alt=label;picture.style.left=`${-panel.xywh[0]}px`;picture.style.top=`${-panel.xywh[1]}px`;\n crop.append(picture);box.append(heading,crop);byId('cards').append(box);\n}\nfunction render(){\n const row=data.cases[Number(picker.value)];byId('cards').replaceChildren();\n card('Noisy',row.panels[0].label,'noisy');card('A',a.value,'a');card('B',b.value,'b');card('Flip',showingB?b.value:a.value,'flip');\n const reference=row.panels.find(p=>p.label==='Exact constructed GT')||row.panels.find(p=>p.label==='ISO100 AHD, not GT');if(reference)card('Reference',reference.label,'reference');\n byId('flip-status').textContent=`Flip is showing ${showingB?'B':'A'}: ${showingB?b.value:a.value}`;\n byId('metadata').textContent=`${row.id}\\nROI [${row.roi.join(', ')}] \u00b7 exposure ${row.exposure} \u00b7 contrast ${row.contrast}\\nAnchor [${row.anchor.join(', ')}]`;\n const descriptions=[a.value,b.value].map(label=>data.checkpoints[label]?`${label} checkpoint SHA256 ${data.checkpoints[label]}`:`${label}: retained source panel; see manifest`);byId('checkpoint').textContent=descriptions.join('\\n');\n}\nfunction selectCase(){const row=data.cases[Number(picker.value)],labels=row.panels.map(p=>p.label),previousA=a.value,previousB=b.value;\n const latest=row.predictions.find(label=>label.endsWith('EMA'))||labels[labels.length-1];\n const prior=labels.filter(label=>/V[0-9]+[- ]EMA/.test(label)&&label!==latest).at(-1)||labels[1];\n options(a,labels,previousA||prior);options(b,labels,previousB||latest);showingB=true;render();}\npicker.addEventListener('change',selectCase);a.addEventListener('change',render);b.addEventListener('change',render);\nfunction flip(){showingB=!showingB;render()}byId('flip').addEventListener('click',flip);\ndocument.addEventListener('keydown',e=>{if(e.code==='KeyF'&&!['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();flip()}});\nfor(const [id,direction] of [['previous',-1],['next',1]])byId(id).addEventListener('click',()=>{picker.value=(Number(picker.value)+direction+data.cases.length)%data.cases.length;selectCase()});\nselectCase();\n</script></html>\n\"\"\"\n\n\ndef build(manifest, output, report):\n    data = json.loads(manifest.read_text())\n    cases = []\n    checkpoints = {}\n    for item in data[\"images\"]:\n        if item[\"triplet\"]:\n            continue\n        assert item[\"no_resize\"]\n        image = Path(item[\"image\"][\"path\"])\n        assert image.parent == output.parent and image.is_file()\n        with Image.open(image) as pixels:\n            width, height = pixels.size\n        for panel in item[\"panels\"]:\n            x, y, w, h = panel[\"xywh\"]\n            assert w == h == 160 and 0 <= x <= width - w and 0 <= y <= height - h\n        for label in item[\"predictions\"]:\n            if label.endswith((\"-raw\", \"-EMA\")):\n                endpoint = label.rsplit(\"-\", 1)[1]\n                checkpoints[label] = data[\"checkpoints\"][endpoint][\"export\"][\"sha256\"]\n        cases.append(\n            {\n                \"id\": item[\"case\"][\"id\"],\n                \"image\": quote(image.name),\n                \"roi\": item[\"ROI_xywh\"],\n                \"anchor\": item[\"anchor\"],\n                \"exposure\": item[\"exposure\"],\n                \"contrast\": item[\"contrast\"],\n                \"panels\": item[\"panels\"],\n                \"predictions\": list(item[\"predictions\"]),\n            }\n        )\n    assert cases\n    payload = json.dumps({\"cases\": cases, \"checkpoints\": checkpoints}, ensure_ascii=True).replace(\n        \"<\", \"\\\\u003c\"\n    )\n    rendered = TEMPLATE.replace(\"__DATA__\", payload).replace(\"__REPORT__\", html.escape(report))\n    with output.open(\"x\") as stream:\n        stream.write(rendered)\n    print(f\"Built {len(cases)} native cases, without resampling pixels: {output}\")\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"manifest\", type=Path)\n    parser.add_argument(\"--output\", type=Path)\n    parser.add_argument(\"--report\", required=True)\n    args = parser.parse_args()\n    build(\n        args.manifest.resolve(),\n        (args.output or args.manifest.with_name(\"native-viewer.html\")).resolve(),\n        args.report,\n    )\n"
+  },
+  "browser_checker": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-native-viewer-browser-v1.cjs",
+    "sha256": "c23ac8c2cff35297fa0f70f7113d2d86bf3a04a74c69c34ac4ab3ebaa6c1b95c",
+    "text": "const fs=require('fs'),path=require('path');\nconst {firefox}=require('/home/dllu/.cache/uv/archive-v0/OL6JBkxJbE2O3Mwj/lib/python3.12/site-packages/playwright/driver/package');\n(async()=>{\n const file=path.resolve(process.argv[2]),out=path.resolve(process.argv[3]);if(fs.existsSync(out))throw new Error('Output exists');fs.mkdirSync(out,{recursive:true});\n const browser=await firefox.launch({executablePath:'/home/dllu/.cache/ms-playwright/firefox-1532/firefox/firefox',headless:true,firefoxUserPrefs:{'datareporting.policy.dataSubmissionEnabled':false,'toolkit.telemetry.enabled':false}});\n try{\n const page=await browser.newPage({viewport:{width:1240,height:900},deviceScaleFactor:1});const errors=[];page.on('pageerror',error=>errors.push(String(error)));\n await page.goto('file://'+file);const data=await page.locator('#native-data').textContent();const parsed=JSON.parse(data);if(parsed.cases.length!==48)throw new Error('Expected48 cases');const records=[];\n for(let i=0;i<48;i++){\n  await page.selectOption('#case',String(i));await page.evaluate(async()=>{await Promise.all([...document.querySelectorAll('#cards img')].map(img=>img.decode()))});\n  for(const id of ['noisy','a','b','flip','reference']){\n   const node=page.locator(`[data-testid=\"${id}\"]`),rect=await node.boundingBox(),label=await node.getAttribute('data-panel');if(rect.width!==160||rect.height!==160||rect.x%1||rect.y%1)throw new Error('Non-native rectangle '+JSON.stringify(rect));\n   const panel=parsed.cases[i].panels.find(p=>p.label===label);const name=`case-${String(i).padStart(2,'0')}-${id}.png`;await node.screenshot({path:path.join(out,name)});records.push({case:i,id,label,rect,panel:panel.xywh,source:path.resolve(path.dirname(file),decodeURIComponent(parsed.cases[i].image)),screenshot:path.join(out,name)});\n  }\n  const before=await page.locator('[data-testid=\"flip\"]').getAttribute('data-panel');await page.click('#flip');const after=await page.locator('[data-testid=\"flip\"]').getAttribute('data-panel');if(before===after)throw new Error('Flip did not change method');await page.keyboard.press('f');if(await page.locator('[data-testid=\"flip\"]').getAttribute('data-panel')!==before)throw new Error('F did not restore method');\n  if(i===0)await page.screenshot({path:path.join(out,'screen-first.png'),fullPage:true});\n }\n await page.click('#next');if(await page.locator('#case').inputValue()!=='0')throw new Error('Next wrap failed');await page.click('#previous');if(await page.locator('#case').inputValue()!=='47')throw new Error('Previous wrap failed');\n if(errors.length)throw new Error(errors.join('\\n'));fs.writeFileSync(path.join(out,'browser-records-v1.json'),JSON.stringify({status:'all48-cases-native-rectangles-flip-and-navigation-pass',viewer:file,records,JS_errors:errors,browser:browser.version()},null,2)+'\\n');process.stdout.write('PASS48 cases,240 native screenshots,click/key flipping and navigation;no JS errors\\n');\n }finally{await browser.close()}\n})().catch(e=>{process.stderr.write(String(e.stack)+'\\n');process.exitCode=1});\n"
+  },
+  "pixel_checker": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-native-viewer-pixels-v1.py",
+    "sha256": "f030c3259e6ced599a64c03334334d75a3e809b1994efa4813b5a733a02ed8ed",
+    "text": "\"\"\"Check actual browser crop screenshots against source PNG pixels,without resampling.\"\"\"\nfrom pathlib import Path\nimport sys,numpy as np\nfrom PIL import Image\nfrom train_directional_bank_trial import read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');directory=Path(sys.argv[1]).resolve();output=Path(sys.argv[2]).resolve();assert not output.exists()\nb=read(directory/'browser-records-v1.json');assert len(b['records'])==240 and b['JS_errors']==[];channels=0\nfor record in b['records']:\n r=record['rect'];assert r['width']==r['height']==160 and r['x'].is_integer() and r['y'].is_integer()\n x,y,w,h=record['panel'];assert w==h==160\n expected=np.asarray(Image.open(record['source']).convert('RGB'))[y:y+h,x:x+w]\n actual=np.asarray(Image.open(record['screenshot']).convert('RGB'));np.testing.assert_array_equal(actual,expected);channels+=actual.size\nassert channels==18432000\nsave(output,dict(status='pass-browser-native-pixel-equality-all48-cases-and-flip-navigation',viewer=ref(b['viewer']),builder=dict(ref(repo/'scripts/build_native_crop_viewer.py'),text=(repo/'scripts/build_native_crop_viewer.py').read_text()),browser_checker=dict(ref(repo/'.cache/verify-native-viewer-browser-v1.cjs'),text=(repo/'.cache/verify-native-viewer-browser-v1.cjs').read_text()),pixel_checker=dict(ref(__file__),text=Path(__file__).read_text()),browser_version=b['browser'],browser_records=ref(directory/'browser-records-v1.json'),source_manifest=ref(Path(b['viewer']).with_name('manifest-v1.json')),cases=48,native_panels=240,panel_width_height=[160,160],screen_RGB_channels_exact=channels,click_and_keyboard_flip_pass=True,next_previous_wrap_pass=True,JS_errors=[],screenshots=[ref(r['screenshot']) for r in b['records']],new_neural_forwards=0,new_source_noise_draws=0))\nprint('PASS48 cases/240 browser crops;',channels,'screen RGB channels exactly equal original PNG pixels')\n"
+  },
+  "browser_version": "151.0",
+  "browser_records": {
+    "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/browser-records-v1.json",
+    "sha256": "f28fa427c21108bf8c9e1dfb81928594d1329ff0bdc557460d58df7fac90df21"
+  },
+  "source_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/v174-spread-matching-v1/manifest-v1.json",
+    "sha256": "ab8092ef14767aacd4a7a62bf4b21aa08041e185c0d5a51c5bf8420a0db9401e"
+  },
+  "cases": 48,
+  "native_panels": 240,
+  "panel_width_height": [
+    160,
+    160
+  ],
+  "screen_RGB_channels_exact": 18432000,
+  "click_and_keyboard_flip_pass": true,
+  "next_previous_wrap_pass": true,
+  "JS_errors": [],
+  "screenshots": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-00-noisy.png",
+      "sha256": "4b9bf773fb59f80a2cb5522bc74c66c294ba186289c0ce2b4edebe421019a9cf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-00-a.png",
+      "sha256": "115969d39027bc8e1e9a28d6200c7b643fbd0ddde2268966b428ef0b51653d2f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-00-b.png",
+      "sha256": "626563e32ac653d808543f6b3906dc67d670dd03ec4556cc1b994c3d29d5231b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-00-flip.png",
+      "sha256": "626563e32ac653d808543f6b3906dc67d670dd03ec4556cc1b994c3d29d5231b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-00-reference.png",
+      "sha256": "6121dc07db84f39d82f3931bcf33ab33cf336d537ab93eb992a82ce60f946c55"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-01-noisy.png",
+      "sha256": "45c90919984aa9a79630b5316af6e7d085609307388185dffe559ad873b21b38"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-01-a.png",
+      "sha256": "2458b0389bb9c014dd650fb8f5d1662cb56262e78f2f1f559a8f96a1cb496127"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-01-b.png",
+      "sha256": "36b443e914c4af7d1ad3e4d880afe2106191322fe1c241709ae03309c410424d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-01-flip.png",
+      "sha256": "36b443e914c4af7d1ad3e4d880afe2106191322fe1c241709ae03309c410424d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-01-reference.png",
+      "sha256": "1599604e028f65f7843fd9a98b87d3106431df359b847ab71d9a14b2d19c497d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-02-noisy.png",
+      "sha256": "dd7a311c0012232c445bf4d44d6d5f5f75d1f4d5d61cbedf2c240d0a68925fa1"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-02-a.png",
+      "sha256": "a8289935e8924a6fa7ab05a36c565dbdaec18c549ef373edf8f769dd64cbe7d3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-02-b.png",
+      "sha256": "f47126168a91459e5a56b810450e75654f8b09de23ed796c759851b38caf68ff"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-02-flip.png",
+      "sha256": "f47126168a91459e5a56b810450e75654f8b09de23ed796c759851b38caf68ff"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-02-reference.png",
+      "sha256": "92cde93c69ff942a5cfa7235498ddce9a7a2878de4a567b68503b8d1a001e9bf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-03-noisy.png",
+      "sha256": "fc16aacce4dc5a81307880fbd5c12ef10af02ae4d04fdfdb77d4157c677185b0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-03-a.png",
+      "sha256": "8bddcab58ebb097338ff31c4f2424c5488b7729953a544085b1b6b9a4fdbe244"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-03-b.png",
+      "sha256": "ea6bab66763de6224baf06545211d2bc54a0e057d7d98e439550c30fccb889a3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-03-flip.png",
+      "sha256": "ea6bab66763de6224baf06545211d2bc54a0e057d7d98e439550c30fccb889a3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-03-reference.png",
+      "sha256": "61848fc1d5e22f3d919820b09340a4c7004a85327b3cd1c3cdaf02f64c0409e8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-04-noisy.png",
+      "sha256": "8aae2f50a5d5020a22cde80d32a7da857b25809553d00185f7d1e0af58b9355b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-04-a.png",
+      "sha256": "d76836daf3c806221159a48ccfe9917b128df3d671d0b3449431923dfbce9998"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-04-b.png",
+      "sha256": "62aba1c6ae24d642fbe9650c70af4bbb277b0f829927ff2e73345dce055281a6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-04-flip.png",
+      "sha256": "62aba1c6ae24d642fbe9650c70af4bbb277b0f829927ff2e73345dce055281a6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-04-reference.png",
+      "sha256": "6a6f401d093078925dec77209556cff37e7c9de50f159ad149d9931243b3348e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-05-noisy.png",
+      "sha256": "c92ad88a5a566ea2ed886a81b39f596674977101f1e74e572cfac7c40e359f9f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-05-a.png",
+      "sha256": "39e7f1cd8886578fa676a95583ebebcb5aa21304d71095410f637313b78aabb4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-05-b.png",
+      "sha256": "46770a1ced086901287c3edf72f18ebb1c4f5aa7b18deab1191719ad91bb49b4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-05-flip.png",
+      "sha256": "46770a1ced086901287c3edf72f18ebb1c4f5aa7b18deab1191719ad91bb49b4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-05-reference.png",
+      "sha256": "1ea7e2423919315704c3f089c69639f0ffcd6f658334772cd1fdd6a1dec32252"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-06-noisy.png",
+      "sha256": "97515ecf5d696008172b622ab9d927735dc7fe713fe51209711517b9b607314f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-06-a.png",
+      "sha256": "8f77bc93d3e51a565cb315784e42be67c305c8c7004bbb8cd3c6043331f55ed8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-06-b.png",
+      "sha256": "ac54722f5e025d97b176f531b9e7ecc7ed478cb0b724492c4b029362f510a377"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-06-flip.png",
+      "sha256": "ac54722f5e025d97b176f531b9e7ecc7ed478cb0b724492c4b029362f510a377"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-06-reference.png",
+      "sha256": "ad76955b0c6d7389af498acbe957b768725c8541061240601d2c775c36993263"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-07-noisy.png",
+      "sha256": "a83f4c43ad8e74c62a00a79c7013418e46149c4be81471919edf15269e742a34"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-07-a.png",
+      "sha256": "fa77a2d2ee894528fe5c1e41b18083b4916cc7e40cb2048c9fb5bf3e12bcfbba"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-07-b.png",
+      "sha256": "9ddc42ad900b3961e555008b420c7794eafe796b30e774f685c31ffcd972f1fe"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-07-flip.png",
+      "sha256": "9ddc42ad900b3961e555008b420c7794eafe796b30e774f685c31ffcd972f1fe"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-07-reference.png",
+      "sha256": "88119138538d6d1e1a75e65d087f0c88fc48cfc0119df078c3655601eb62d266"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-08-noisy.png",
+      "sha256": "77d354350eab9d214b4f1aff1277fa79561224dfa858db573bf8319303c6facb"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-08-a.png",
+      "sha256": "b1e74a5ea69f1f6b47b2538554498044a772be538b1251477fdf18c3318ea4da"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-08-b.png",
+      "sha256": "5d905b5cbd2b1753d84c3707eb7e27cb6b98ace3774d84479edde97bc8ab48d0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-08-flip.png",
+      "sha256": "5d905b5cbd2b1753d84c3707eb7e27cb6b98ace3774d84479edde97bc8ab48d0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-08-reference.png",
+      "sha256": "1af547528afc92fe0544fb33178b5a78d75e46420a54c487c8d4232d5a2a4b65"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-09-noisy.png",
+      "sha256": "59c0cb1b65be7432e62fdc6f4cb8d956a74cd618f99312d254a57c53a55e5ffc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-09-a.png",
+      "sha256": "f377836fd1ddaa0e010316da4116aae20f2765c32076ed58cb9285726f96d7df"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-09-b.png",
+      "sha256": "fe9cfb9934b798da2eed5380144fa485bfb0512e74ce46de1b73731add229165"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-09-flip.png",
+      "sha256": "fe9cfb9934b798da2eed5380144fa485bfb0512e74ce46de1b73731add229165"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-09-reference.png",
+      "sha256": "1e887304a1a454763af135922dc3202c9aa9c78f939a12f35dfc2da33d027fdc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-10-noisy.png",
+      "sha256": "90ce8768daccb4c36e12e73cb325eb3a965cfdbb63db268c32d5909e008bbe6f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-10-a.png",
+      "sha256": "3e48dfccb9aae71a05451e2f647fdef2eb9aef7d676f8a6fe6eb696cd31f00a4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-10-b.png",
+      "sha256": "dcac9d22cb74edc96bf82df7f2b229862108f6b270b3fb2f3f807a827c580e80"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-10-flip.png",
+      "sha256": "dcac9d22cb74edc96bf82df7f2b229862108f6b270b3fb2f3f807a827c580e80"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-10-reference.png",
+      "sha256": "d1402b8958734ca2b5e3e0467dddbcd4c86bcc6875bec6dfba8ee86f9f2022d1"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-11-noisy.png",
+      "sha256": "59c0cb1b65be7432e62fdc6f4cb8d956a74cd618f99312d254a57c53a55e5ffc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-11-a.png",
+      "sha256": "34f6d8f1ef1ca9e69df33e6576bb6dddb78e26ba5b429318be820d4ba1a9df36"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-11-b.png",
+      "sha256": "a2c3487b5a4fdc647d31e84369b3ddf280d3f818aca7a0b86e42f89ce5f700f9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-11-flip.png",
+      "sha256": "a2c3487b5a4fdc647d31e84369b3ddf280d3f818aca7a0b86e42f89ce5f700f9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-11-reference.png",
+      "sha256": "1e887304a1a454763af135922dc3202c9aa9c78f939a12f35dfc2da33d027fdc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-12-noisy.png",
+      "sha256": "90ce8768daccb4c36e12e73cb325eb3a965cfdbb63db268c32d5909e008bbe6f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-12-a.png",
+      "sha256": "5632eb8ae138d41008d4bbdd0ea17dd146deea7448e5c6ef89653c4503a4c37d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-12-b.png",
+      "sha256": "191ba9bb4ebc208e8dfc84d8c17cfd3905086646202cf8b52eb9425ad981ed31"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-12-flip.png",
+      "sha256": "191ba9bb4ebc208e8dfc84d8c17cfd3905086646202cf8b52eb9425ad981ed31"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-12-reference.png",
+      "sha256": "d1402b8958734ca2b5e3e0467dddbcd4c86bcc6875bec6dfba8ee86f9f2022d1"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-13-noisy.png",
+      "sha256": "1bb03d4729a7b656cae9a0afdfc6711277b0a1d760ee2b66106fa51ffe672755"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-13-a.png",
+      "sha256": "68e768117588d0bc8ca60af6e3d388cbec1c060709bde866af6ecd306c5395b5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-13-b.png",
+      "sha256": "ea515e2bee4af8da6c285cf27bef418a8e00400b9985e459cf41c206001c66d5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-13-flip.png",
+      "sha256": "ea515e2bee4af8da6c285cf27bef418a8e00400b9985e459cf41c206001c66d5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-13-reference.png",
+      "sha256": "f011c42ea712b3880af50d35f43c0d8dfc2e13d251f068f73cd5e3788c4da70c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-14-noisy.png",
+      "sha256": "01adc742a706d519381bc3294b44dbd1e98946591f9deb22e20ae9ffbbe0788d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-14-a.png",
+      "sha256": "771a08cb34505181327dd33ca9ece4dfcc4efe45d2ad4641fced0bec65157b77"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-14-b.png",
+      "sha256": "22b25dd2a29607bc5a24a9e4124104193a98cc50ebd6128ee4279b88fd5076a0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-14-flip.png",
+      "sha256": "22b25dd2a29607bc5a24a9e4124104193a98cc50ebd6128ee4279b88fd5076a0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-14-reference.png",
+      "sha256": "c3512e82a7816a105dfda1b85fee63032c1570af47856670698f272f145473d0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-15-noisy.png",
+      "sha256": "c46e0ed94c39b523ec2211299552f198e34aaf8aba3edbb34e452f653ea572f8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-15-a.png",
+      "sha256": "6f9802bcb4a20df33fda336826342bc5e9d0b6e457865a37b0e78e0d1b98fc4a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-15-b.png",
+      "sha256": "b628e2a62dcbfad4aefa849b8838498a381eefa81da0c22b8959719075990ef6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-15-flip.png",
+      "sha256": "b628e2a62dcbfad4aefa849b8838498a381eefa81da0c22b8959719075990ef6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-15-reference.png",
+      "sha256": "908b8a1201be90d18d0de2acdac7989eae063e1c0a95faa9a660cb24014095ac"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-16-noisy.png",
+      "sha256": "f20860640b13b7442137378b51c60f430ac7783619d0ef0026ce7aa29da0f2af"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-16-a.png",
+      "sha256": "e516ce6b1dfca61d485348a5de2b471eb1bf0b574f698d05eb65e03b2e255b88"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-16-b.png",
+      "sha256": "e516ce6b1dfca61d485348a5de2b471eb1bf0b574f698d05eb65e03b2e255b88"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-16-flip.png",
+      "sha256": "e516ce6b1dfca61d485348a5de2b471eb1bf0b574f698d05eb65e03b2e255b88"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-16-reference.png",
+      "sha256": "568abb1f401774e67b1d793bac95789c5e8da695718b66d62fd70123df2af3c7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-17-noisy.png",
+      "sha256": "6eaa9e883650009732a93ca4baf716e16e9f9cef75a99494054f4785b4494080"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-17-a.png",
+      "sha256": "83233047e769b835897c971c62df09bb81a542d006abcb96af61a9fef16eb69f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-17-b.png",
+      "sha256": "6940ff63e3326a6b70963417c4335a4ba741852b5319646e5f783072f6b1c2bd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-17-flip.png",
+      "sha256": "6940ff63e3326a6b70963417c4335a4ba741852b5319646e5f783072f6b1c2bd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-17-reference.png",
+      "sha256": "568abb1f401774e67b1d793bac95789c5e8da695718b66d62fd70123df2af3c7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-18-noisy.png",
+      "sha256": "f20860640b13b7442137378b51c60f430ac7783619d0ef0026ce7aa29da0f2af"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-18-a.png",
+      "sha256": "3263a3d0e5f9ded639de114206c3b982b8404128d7e4c7d7d995f425f8f8237e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-18-b.png",
+      "sha256": "3263a3d0e5f9ded639de114206c3b982b8404128d7e4c7d7d995f425f8f8237e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-18-flip.png",
+      "sha256": "3263a3d0e5f9ded639de114206c3b982b8404128d7e4c7d7d995f425f8f8237e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-18-reference.png",
+      "sha256": "568abb1f401774e67b1d793bac95789c5e8da695718b66d62fd70123df2af3c7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-19-noisy.png",
+      "sha256": "b89c3fc8e7939b966c5c6fd6c8fa312b20d0c54ae2e4ba6f5cad9b442661c675"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-19-a.png",
+      "sha256": "19afbd0df216d9416d69d08bd2bf4ca9de7c74eec3e5860d235de017732b4677"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-19-b.png",
+      "sha256": "be197127f867adfa04d741303c00e951e93cac22a2f41875de03b90e2f04ef55"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-19-flip.png",
+      "sha256": "be197127f867adfa04d741303c00e951e93cac22a2f41875de03b90e2f04ef55"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-19-reference.png",
+      "sha256": "568abb1f401774e67b1d793bac95789c5e8da695718b66d62fd70123df2af3c7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-20-noisy.png",
+      "sha256": "03bda51c3631ce1da33b289eb730b770403062c0144ebf68def81159df27a635"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-20-a.png",
+      "sha256": "a4b3cb500d2696791aedc1d1627ab6df430981dd710873e96efad13a0f941b12"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-20-b.png",
+      "sha256": "f8e8b92a64aa80f8d656d1c2f6a47c91fc8bd37c42ee1ba52161500b2e192a81"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-20-flip.png",
+      "sha256": "f8e8b92a64aa80f8d656d1c2f6a47c91fc8bd37c42ee1ba52161500b2e192a81"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-20-reference.png",
+      "sha256": "568abb1f401774e67b1d793bac95789c5e8da695718b66d62fd70123df2af3c7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-21-noisy.png",
+      "sha256": "1bd791a993d4d9a2c59be6da6aa0f4bd525538f5eac2fbfa4d923970bd21006c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-21-a.png",
+      "sha256": "9dc3cabc8e76db90ee5efb2de8a423623c8e2c23997cf57d8a13158dc882b82a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-21-b.png",
+      "sha256": "5167d38a87976940a14df51e07d7dfab4d0f5b19dd244ff336c8f18528204440"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-21-flip.png",
+      "sha256": "5167d38a87976940a14df51e07d7dfab4d0f5b19dd244ff336c8f18528204440"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-21-reference.png",
+      "sha256": "3684028bb439638fa124e672c631a188f74ddbc240680d6628fa35096bbb2774"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-22-noisy.png",
+      "sha256": "2e5faf62557bea95ea96bbc4e8af59272d0cd6053ad32ff5ec1b5260738d912d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-22-a.png",
+      "sha256": "b2b915c449fefe8fc5adba4ba39dc8005fc7068c6fae5796a39330193104ffaf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-22-b.png",
+      "sha256": "e8da9a831982f41e35cb553b2fb3e91260a1e2d5f5e71f01d64705fa755c39c2"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-22-flip.png",
+      "sha256": "e8da9a831982f41e35cb553b2fb3e91260a1e2d5f5e71f01d64705fa755c39c2"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-22-reference.png",
+      "sha256": "47036d2e7182408ca3738b382c6ebbcd97f3e612b1e4b9b01d2e6e075ce7850b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-23-noisy.png",
+      "sha256": "3647aebc35f8f391d14819759757155e0dca90b1649df7ded47bdb2625c14298"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-23-a.png",
+      "sha256": "856fbe0d6312ff63312cbf7949196a147572f9e11056216703c693fcd2ca6c2c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-23-b.png",
+      "sha256": "403f412e70bb28afdaad554a33bfb4fa9c082f454f785dc2dc8d0aa42ea8b764"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-23-flip.png",
+      "sha256": "403f412e70bb28afdaad554a33bfb4fa9c082f454f785dc2dc8d0aa42ea8b764"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-23-reference.png",
+      "sha256": "4d06d05bfaf0d3148c84e4bee7e4f29c64669a42883412a082e90d600ccffe86"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-24-noisy.png",
+      "sha256": "36b8566ed2e02aba537be427a5bad04eef42c6e2b51ed2ec566e7f8c79fe6d0f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-24-a.png",
+      "sha256": "80e0dbc42b6f7cbb3e3932d9bf82dfe65fb0785c9d475453f18f35bfd2f6bfcd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-24-b.png",
+      "sha256": "a7d022ec154a0bfda329e78afa93ea4fc99b00e9f6a1a51571c584488140c595"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-24-flip.png",
+      "sha256": "a7d022ec154a0bfda329e78afa93ea4fc99b00e9f6a1a51571c584488140c595"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-24-reference.png",
+      "sha256": "b7a6b49c596351a5c0fa3a8e50693787202b015b8b6a25d02fad49d673d13d76"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-25-noisy.png",
+      "sha256": "176e8bea17d58c053a4c4b0628b2d92a8f1d9c7d6aa595855f16148abd0987b8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-25-a.png",
+      "sha256": "425dcb8b3e47e2ff796856dc03f5cf13e5b3c14ddc0a5fca8135a780c2de724f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-25-b.png",
+      "sha256": "11aa59dad17391fe6b37a3db2798976dd19ed9826a8ea53aad0a8de4c0aeecbd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-25-flip.png",
+      "sha256": "11aa59dad17391fe6b37a3db2798976dd19ed9826a8ea53aad0a8de4c0aeecbd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-25-reference.png",
+      "sha256": "8d9b5f1d72451113d257fd17b2f39615009d5091f0e21c59dd324e4798920e03"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-26-noisy.png",
+      "sha256": "0c915801ac2c4e49114d3dac29ea2489ffc4c830b5d340bf90c89e089033e575"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-26-a.png",
+      "sha256": "290dcef79fd4cc01ee1f6bda529b5408d9ceee58c973c62db42e1d005a149136"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-26-b.png",
+      "sha256": "9398acc6b0e02fd9e73e9c7b27e27949d3092a1bcf5a25fe4767ba5ac5990691"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-26-flip.png",
+      "sha256": "9398acc6b0e02fd9e73e9c7b27e27949d3092a1bcf5a25fe4767ba5ac5990691"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-26-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-27-noisy.png",
+      "sha256": "b74e45bec0644f3241f8d990c39e52e2a02e321c381f94b758cf29f8a36f2f6b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-27-a.png",
+      "sha256": "d383093362efcd27de855634195eb390356be0b76358ecf84544ab8661342e42"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-27-b.png",
+      "sha256": "6b2f6bdfed29f9f2a37ceca005cf17fe3457f80a41cacdb6c1c240764a8a3bc4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-27-flip.png",
+      "sha256": "6b2f6bdfed29f9f2a37ceca005cf17fe3457f80a41cacdb6c1c240764a8a3bc4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-27-reference.png",
+      "sha256": "8e9e1adc4639f8053fff41f76becec5e4bd53f0d025fc3db106a9d33349572c4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-28-noisy.png",
+      "sha256": "e9db2f28df2f9a9d13a6ca533b9504b63f4c59c655c33dee7e3ad0553a00c729"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-28-a.png",
+      "sha256": "5b8a538ee38dfa89236532f93170966479ac73d0be0ee444620dbd2f8d37e0a7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-28-b.png",
+      "sha256": "4de66e2912632a5067e616a0b74e7d362e9ffe0b9ec690f45f77aa0cb454bfec"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-28-flip.png",
+      "sha256": "4de66e2912632a5067e616a0b74e7d362e9ffe0b9ec690f45f77aa0cb454bfec"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-28-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-29-noisy.png",
+      "sha256": "b7f106987aeaa6416c1cf5d1343d59026aac3aadf424b9338a80bb18accf04d7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-29-a.png",
+      "sha256": "3b69bfd910a31075990d70536fddec41200ed16ab6339f5e5272375d9876db76"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-29-b.png",
+      "sha256": "7b9d14a560028a8034b776be10a8661cb0f4cbbc50cdebf8664bbaabc2df9366"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-29-flip.png",
+      "sha256": "7b9d14a560028a8034b776be10a8661cb0f4cbbc50cdebf8664bbaabc2df9366"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-29-reference.png",
+      "sha256": "8e9e1adc4639f8053fff41f76becec5e4bd53f0d025fc3db106a9d33349572c4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-30-noisy.png",
+      "sha256": "83b25dd7ab975a7f1866ede85c0d500edb254a7f41a0c819432e77abd5ec9df6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-30-a.png",
+      "sha256": "4e113150568e6d080e70a15da1396275973559a52c4a506dcc51df6a7567015e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-30-b.png",
+      "sha256": "223d95cb8f72805e08594ff47e3d87c67de00600ef3871687b5e7f32354facb6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-30-flip.png",
+      "sha256": "223d95cb8f72805e08594ff47e3d87c67de00600ef3871687b5e7f32354facb6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-30-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-31-noisy.png",
+      "sha256": "32320bf73efc2d0a8d6f3c94fc74ca19326c4e737292edc7ffc7c7ecacb38d6a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-31-a.png",
+      "sha256": "ad6c4bf2a2d50356d16ae768f2e454fbcdb79df45bf421dc4fc4523d579b5d40"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-31-b.png",
+      "sha256": "d8a083ea126cc77ffb46f061f005eb319fcda81cee4dfc9e9a7999c68d96a19e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-31-flip.png",
+      "sha256": "d8a083ea126cc77ffb46f061f005eb319fcda81cee4dfc9e9a7999c68d96a19e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-31-reference.png",
+      "sha256": "99e7da3c9cfa97e396c221c1743cb3953d135ce0f543853d552f9467d1d61187"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-32-noisy.png",
+      "sha256": "988f67a6ff267538789fcf03da5048d13ec8285ad13333739c6c11f87b2df453"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-32-a.png",
+      "sha256": "e424771e59004b9a26546717e6afa9a925c35fdbacbaaa7abe72179ddecca65d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-32-b.png",
+      "sha256": "454fe0f76da293aa762e97f9185576938ba7aba1ec06fecf0aac00e4198d6945"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-32-flip.png",
+      "sha256": "454fe0f76da293aa762e97f9185576938ba7aba1ec06fecf0aac00e4198d6945"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-32-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-33-noisy.png",
+      "sha256": "cc2c8f250f2bd020b0e53d4e9bcd4dbf8b9c213b016b6aa07f86b00b3f499050"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-33-a.png",
+      "sha256": "7a057c6492f06c2ce9fed01d35fa130cd4cd05f44a98dfa67171d603f7d09e04"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-33-b.png",
+      "sha256": "477b953f3401136f3e48f02098262a77495b1a84b6f10d0fe913943baed1597c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-33-flip.png",
+      "sha256": "477b953f3401136f3e48f02098262a77495b1a84b6f10d0fe913943baed1597c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-33-reference.png",
+      "sha256": "99e7da3c9cfa97e396c221c1743cb3953d135ce0f543853d552f9467d1d61187"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-34-noisy.png",
+      "sha256": "4f83c64df59a7337151ac9d1a0cf50b9b57eab357c4b538a720ab94e0842245b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-34-a.png",
+      "sha256": "86408a02ac290ba42e4122d219245c78aeccae6cfca074a13cca98bf148bbada"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-34-b.png",
+      "sha256": "9f50dd21aa8b2cecd584710b2bb4068cda5ca2a5ff1c42eb5f7b966150841752"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-34-flip.png",
+      "sha256": "9f50dd21aa8b2cecd584710b2bb4068cda5ca2a5ff1c42eb5f7b966150841752"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-34-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-35-noisy.png",
+      "sha256": "c28c60b0bf24bd0a5eb885410126970ee0467a033bc26894b1757515dcf93d45"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-35-a.png",
+      "sha256": "581ef908a6f5247403849191a25a18b15f1db88bb39ccb0ae5555d641291fd86"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-35-b.png",
+      "sha256": "96d02f4dcc7b3299a7182861d8e335c0aa93148a5c80d422259b70566b531dc7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-35-flip.png",
+      "sha256": "96d02f4dcc7b3299a7182861d8e335c0aa93148a5c80d422259b70566b531dc7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-35-reference.png",
+      "sha256": "587b2e9640b57892ab0d7f2280b5609889c8e87d5e4c0f2e5c18eb8879e0c2d8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-36-noisy.png",
+      "sha256": "b9fd373ba84117e6c899c91c55d0b6dd9889c1ce54381e3c8944bc90537825d4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-36-a.png",
+      "sha256": "d855d2b33d4b652d9f4e2cae79c1084ff73725d95b2730d6f41c39aeb519afae"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-36-b.png",
+      "sha256": "4ed7ca5451a7d8975bd7cfd7a01bed289f641b486c5561d9a810c3b304cbff66"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-36-flip.png",
+      "sha256": "4ed7ca5451a7d8975bd7cfd7a01bed289f641b486c5561d9a810c3b304cbff66"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-36-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-37-noisy.png",
+      "sha256": "97b67f122dfd052d72320a1c6193829fbff8d8d030d3479a0883c8c7acf55b60"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-37-a.png",
+      "sha256": "677f153921e5c1d24e0f62a14c5c936da5b7add0dd9c645520bb887e2d62ee0e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-37-b.png",
+      "sha256": "6b5f8aa9a18c9b62341f566171c43e508396904dc57883da9b2cced8753b2e35"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-37-flip.png",
+      "sha256": "6b5f8aa9a18c9b62341f566171c43e508396904dc57883da9b2cced8753b2e35"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-37-reference.png",
+      "sha256": "587b2e9640b57892ab0d7f2280b5609889c8e87d5e4c0f2e5c18eb8879e0c2d8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-38-noisy.png",
+      "sha256": "1e00c0408e052526a503a9cf28742fb22b7ce82a667df2f7b7c2b5d82887b2ed"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-38-a.png",
+      "sha256": "93bd6bb64ac82f6b4b5cceab1bf60d9b606276f69bf5825fe41c2289f05cb927"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-38-b.png",
+      "sha256": "9174ab617b62341e7512b52c0764e0ed478618267ba1148ef1c96d716b49cad7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-38-flip.png",
+      "sha256": "9174ab617b62341e7512b52c0764e0ed478618267ba1148ef1c96d716b49cad7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-38-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-39-noisy.png",
+      "sha256": "f7b0d41354e4deccdf7563845d48e9e4371458c7098972d63c956ce8dd8d3093"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-39-a.png",
+      "sha256": "da486a1e45afe2fa6060fdc982bc12a72faf5b731d5ee31ae0a191eb58b354ec"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-39-b.png",
+      "sha256": "7292e0e864a53b584647c1787d3717a592eb9f9004a3bed397f7709f6c777a1f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-39-flip.png",
+      "sha256": "7292e0e864a53b584647c1787d3717a592eb9f9004a3bed397f7709f6c777a1f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-39-reference.png",
+      "sha256": "2fe3a22d855a80d06f12130d8e7a755f343711ff0de76a73b7013fef4eda3875"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-40-noisy.png",
+      "sha256": "8f2456ab42ac66c3b6f4d7de95fb5d3f55d8e7a346dd602b5d8f8c8dfc897a3c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-40-a.png",
+      "sha256": "9763459f0370e04fe1f215543037a9837f35301f943800657740186b30a96a38"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-40-b.png",
+      "sha256": "bac79c63f37edb0b050d980c039f674c4db5915152795b7d900a17479601b418"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-40-flip.png",
+      "sha256": "bac79c63f37edb0b050d980c039f674c4db5915152795b7d900a17479601b418"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-40-reference.png",
+      "sha256": "66749549dc46f705d26462f614df7d48e85e6a6073e92602d09afd9fb4682d2e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-41-noisy.png",
+      "sha256": "54b242228fb6b2d86f7c9b02d4b91dc067eebbb8dd08803910742438d2d624fc"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-41-a.png",
+      "sha256": "51fffbb9fe0b7727a3f9b41ece960f56ee8a9b85bc09e902d6d6021c192153ff"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-41-b.png",
+      "sha256": "b93116a0dc7a02cd8a48c99e4d4e5b7f11d4d773d161c73fb12aa63a582a2e34"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-41-flip.png",
+      "sha256": "b93116a0dc7a02cd8a48c99e4d4e5b7f11d4d773d161c73fb12aa63a582a2e34"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-41-reference.png",
+      "sha256": "2fe3a22d855a80d06f12130d8e7a755f343711ff0de76a73b7013fef4eda3875"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-42-noisy.png",
+      "sha256": "df85a0c13f0825210e14312b68ecaf6788b16850bc4095a58896598be83b1168"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-42-a.png",
+      "sha256": "70c5b7dfd812e1271aebb4431a3d8ea4d3d33fa3e4edd5ce759e7889b6a7a928"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-42-b.png",
+      "sha256": "70c5b7dfd812e1271aebb4431a3d8ea4d3d33fa3e4edd5ce759e7889b6a7a928"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-42-flip.png",
+      "sha256": "70c5b7dfd812e1271aebb4431a3d8ea4d3d33fa3e4edd5ce759e7889b6a7a928"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-42-reference.png",
+      "sha256": "7240f6ba43d5bfb78ee0f95e920344fcaa9b7c86a9836a123edb8222dc3c4961"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-43-noisy.png",
+      "sha256": "a1b67ab854720b93fe7ec2a6043fbe10fccb4940ce0acb5e2319f96f6e135a22"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-43-a.png",
+      "sha256": "fdfc3a808950d4432f179fb356f5660e2823f52b2561815a050e911629d10b84"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-43-b.png",
+      "sha256": "fdfc3a808950d4432f179fb356f5660e2823f52b2561815a050e911629d10b84"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-43-flip.png",
+      "sha256": "fdfc3a808950d4432f179fb356f5660e2823f52b2561815a050e911629d10b84"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-43-reference.png",
+      "sha256": "8fce6939e2e67a18e0869fd8af99cb31171de911183645bcd6e9af01cb5fd9e3"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-44-noisy.png",
+      "sha256": "1e87487d818e1c78ee580c306f7e767182619b328335fe1f9973f233aa3a9534"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-44-a.png",
+      "sha256": "ae6281bfa6bc80246e6205402e929d00b909a8d8cf3a9430eeeeae3832e93d36"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-44-b.png",
+      "sha256": "ae6281bfa6bc80246e6205402e929d00b909a8d8cf3a9430eeeeae3832e93d36"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-44-flip.png",
+      "sha256": "ae6281bfa6bc80246e6205402e929d00b909a8d8cf3a9430eeeeae3832e93d36"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-44-reference.png",
+      "sha256": "2200aaa33c1d7cc6305171ee53e8086a930ea658cbada8a1045bdf073b8f4723"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-45-noisy.png",
+      "sha256": "2dff32d16a426eab8385d5d47bbc33c4a56aeff813e77b4edb09c44a09252d2a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-45-a.png",
+      "sha256": "24091fe850841e12ca9762739875731a1b8cda8bb0d8982f55cc2f932aced64e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-45-b.png",
+      "sha256": "24091fe850841e12ca9762739875731a1b8cda8bb0d8982f55cc2f932aced64e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-45-flip.png",
+      "sha256": "24091fe850841e12ca9762739875731a1b8cda8bb0d8982f55cc2f932aced64e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-45-reference.png",
+      "sha256": "69df835f8cf30100351345964f687033259760ced69e4cdd25772003b53b35ea"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-46-noisy.png",
+      "sha256": "57d3260ee4f264424988061dc0795d00f07893e0426d9cc0d436dd5ae4ac4107"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-46-a.png",
+      "sha256": "29905c586116eb89d52af1ba63e2aef81a8946c96daf0ae31dc2ebd1ecbf18c9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-46-b.png",
+      "sha256": "29905c586116eb89d52af1ba63e2aef81a8946c96daf0ae31dc2ebd1ecbf18c9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-46-flip.png",
+      "sha256": "29905c586116eb89d52af1ba63e2aef81a8946c96daf0ae31dc2ebd1ecbf18c9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-46-reference.png",
+      "sha256": "cf051fdf693749c975d89ccf72f1e2f0e909030347014f31145d372d85a279ce"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-47-noisy.png",
+      "sha256": "807b6657e9beb0ec44bd6714fab7ce883ba55bc763deb5fb9113f10dd9510508"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-47-a.png",
+      "sha256": "a7176d10edd65177f1e175d1a746c48162e3ac2f93b5bdee77140f03653f0277"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-47-b.png",
+      "sha256": "a7176d10edd65177f1e175d1a746c48162e3ac2f93b5bdee77140f03653f0277"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-47-flip.png",
+      "sha256": "a7176d10edd65177f1e175d1a746c48162e3ac2f93b5bdee77140f03653f0277"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/viewer-v174-browser-v1/case-47-reference.png",
+      "sha256": "ef798444503b1415830881208e92034ff9785ffcd8259e7c0ee7649105e077ae"
+    }
+  ],
+  "new_neural_forwards": 0,
+  "new_source_noise_draws": 0
+}

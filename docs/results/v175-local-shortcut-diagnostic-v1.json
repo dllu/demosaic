@@ -1,0 +1,318 @@
+{
+  "status": "six-local-shortcut-paths-and-independent-saved-correction-audit-pass",
+  "protocol": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-local-shortcut-diagnostic-v1/protocol-v1.json",
+    "sha256": "97cdb326a94c71bedfc6677cabdde63f4588306af18ab7c0eb48e4bc822aac52",
+    "contents": {
+      "owner": {
+        "pid": 223851,
+        "created": 1794100904.19
+      },
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/probe-v175-local-shortcut-v1.py",
+        "sha256": "c453012750b88e629ec3f3a8229d64a5bfa53bb6fbd47aa31851806cf0bc8a57",
+        "text": "\"\"\"Posthoc functional contribution probe;only existing head/tail convolutions run.\"\"\"\nimport os,time\nfrom pathlib import Path\nimport numpy as np,torch,psutil\nfrom torch.nn import functional as F\nfrom demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail,local_noise_features\nfrom demosaic.prediction_archive import fingerprint\nfrom demosaic.precision import ieee_fp32\nfrom profile_raw_kernel_inference import model_hash\nfrom train_directional_bank_trial import read,ref,save,guard\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V175-local-shortcut-diagnostic-v1';assert not root.exists();root.mkdir();external=Path('/mnt/external/demosaic/quality-20261107/V175-local-shortcut-diagnostic-v1');assert not external.exists();external.mkdir()\norigin=repo/'.cache/quality-20261107/V174-spread-matching-v1';plan=read(origin/'plan-v1.json');guard(plan);scores=read(origin/'scores-v1.json');training=read(origin/'train-result-v1.json');prior=read(plan['prior_scores']['path']);design={c['id']:c for c in read(plan['design']['path'])['observations']};quality={r['id']:r for r in scores['rows'] if r['method']=='V174-EMA'}\nselected=['mesh-seed2026112302-present-iso6400-prior-RGGB','mesh-seed2026112304-absent-iso6400-prior-RGGB','mesh-seed2026112309-present-iso6400-prior-RGGB','main-overcast-sky','mesh-nominal','mesh-profile3879']\nassert all(i in scores['native_predictions'] and i in prior['native_predictions'] for i in selected)\nowner=dict(pid=os.getpid(),created=psutil.Process().create_time());save(root/'protocol-v1.json',dict(owner=owner,source=dict(ref(__file__),text=Path(__file__).read_text()),checkpoint=training['final_checkpoint'],origin=ref(origin/'scores-v1.json'),selected=selected,selection='Same5 offset-probe cases plus saved absent2304 instead of unsaved absent2302,selected for existing full RGB/frozen arrays after seeing V174 aggregate results.',intervention='Zero the final matching block output at the last fusion: the existing linear tail then receives only head(features). For these divisible-by8 native sizes InputPadder adds no pixels. This is a posthoc diagnostic,not a trained alternative or all822 quality claim.',expected_local_paths=6,expected_head_tail_convolutions=12,expected_matching_roots=0,expected_samplers=0,new_parent_DINO_calls=0,new_source_noise_draws=0))\nos.nice(10);os.sched_setaffinity(0,sorted(os.sched_getaffinity(0))[:2]);torch.set_num_threads(2);torch.set_num_interop_threads(1);torch.set_float32_matmul_precision('highest');torch.backends.cuda.matmul.allow_tf32=torch.backends.cudnn.allow_tf32=False;torch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True;torch.use_deterministic_algorithms(True,warn_only=True);torch.cuda.set_per_process_memory_fraction(8*2**30/torch.cuda.get_device_properties(0).total_memory)\nstate=torch.load(training['final_checkpoint']['path'],map_location='cpu',weights_only=True);module=LateLocalNoiseMatchingDetail(**plan['module_config']);module.load_state_dict(state['models'],strict=True);module.network.load_state_dict(state['ema'],strict=True);assert model_hash(module)==scores['module_hashes']['EMA']['before'];module.cuda().eval();before=model_hash(module)\ndef forbidden(*args):raise AssertionError('Full matching/frozen path must not execute in local-path diagnostic')\nfor child in [module,module.network,module.frozen]+[c for c in module.network.modules() if type(c).__name__=='NonlocalBlock']:child.register_forward_pre_hook(forbidden)\ncounts=dict(head=0,tail=0)\nfor name,child in [('head',module.network.head),('tail',module.network.tail)]:child.register_forward_hook(lambda *args,name=name:counts.__setitem__(name,counts[name]+1))\ncpu_rng=torch.get_rng_state().clone();cuda_rng=torch.cuda.get_rng_state().clone();rows=[]\nfor index,identifier in enumerate(selected):\n c=design[identifier];assert ref(c['arrays']['path'])==c['arrays'];a=dict(np.load(c['arrays']['path']));full_binding=scores['native_predictions'][identifier]['V174-EMA'];correction_binding=scores['native_predictions'][identifier]['V174-EMA-correction'];frozen_binding=prior['native_predictions'][identifier]['balanced-EMA']\n for b in [full_binding,correction_binding,frozen_binding]:assert ref(b['path'])==b\n full=np.load(full_binding['path']);full_correction=np.load(correction_binding['path']);frozen=np.load(frozen_binding['path']);assert fingerprint(full)==quality[identifier]['values'] and fingerprint(frozen)==quality[identifier]['frozen_values'];assert full.shape[-2]%8==full.shape[-1]%8==0\n with torch.inference_mode(),ieee_fp32():\n  base=torch.from_numpy(frozen).cuda();batch={k:torch.from_numpy(a[k]).cuda() for k in ['packed','variance','colors','wb']};features,sigma=local_noise_features(base,*(batch[k] for k in ['packed','variance','colors','wb']));local=F.pixel_shuffle(module.network.tail(module.network.head(features)),2)*sigma;output=torch.where(sigma>0,base+local,base)\n local_correction=local.cpu().numpy();local_RGB=output.cpu().numpy();np.testing.assert_array_equal(local_RGB,frozen+local_correction);path=external/f'local-correction-{index:02d}.npy';np.save(path,local_correction,allow_pickle=False)\n def rms(x):return float(np.sqrt(np.mean(x.astype(np.float64)**2)))*65535\n full_rms=rms(full_correction);delta=rms(full_correction.astype(np.float64)-local_correction.astype(np.float64));rgb_delta=rms(full.astype(np.float64)-local_RGB.astype(np.float64))\n row=dict(id=identifier,input=c['arrays'],full=full_binding,full_correction=correction_binding,frozen=frozen_binding,local_correction=ref(path),local_output_values=fingerprint(local_RGB),full_correction_RMS_DN16=full_rms,local_correction_RMS_DN16=rms(local_correction),matching_path_correction_change_RMS_DN16=delta,matching_path_RGB_change_RMS_DN16=rgb_delta,matching_change_over_full_correction_RMS=delta/full_rms if full_rms else None);rows.append(row);print(identifier,full_rms,delta,delta/full_rms if full_rms else None,flush=True)\n del base,batch,features,sigma,local,output,local_RGB,local_correction,full,full_correction,frozen\nassert counts==dict(head=6,tail=6) and model_hash(module)==before and torch.equal(cpu_rng,torch.get_rng_state()) and torch.equal(cuda_rng,torch.cuda.get_rng_state())\nsave(root/'result-v1.json',dict(status='six-fixed-weight-local-shortcut-paths-evaluated-no-matching-or-parent-forwards',protocol=ref(root/'protocol-v1.json'),owner=owner,rows=rows,counts=counts,local_paths=6,matching_root_calls=0,frozen_component_calls=0,sampler_calls=0,weights_unchanged=True,RNG_unchanged=True,peak_CUDA_bytes=torch.cuda.max_memory_allocated(),new_parent_DINO_calls=0,new_source_noise_draws=0,scope='Posthoc six-input functional removal of the complete final matching path at fixed V174 EMA weights. Head and tail execute once per input;full RGB/corrections/frozen arrays are reused. No matched training ablation,all822 quality conclusion or proof of the cause of under-recovery.'))\nprint('PASS6 local paths/12Conv calls;0 matching/frozen/sampler calls',flush=True)\n"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/checkpoints/step1000.pt",
+        "sha256": "f1329f875ceb06d7e0aca17b35a598d15d82478ebb41a6bf1f7ddfa4496216e9"
+      },
+      "origin": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-spread-matching-v1/scores-v1.json",
+        "sha256": "4ac92ec9563ca0ef85fb4f47c2cbd4dd3f6297f281f84b006862e3b878aa7411"
+      },
+      "selected": [
+        "mesh-seed2026112302-present-iso6400-prior-RGGB",
+        "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+        "mesh-seed2026112309-present-iso6400-prior-RGGB",
+        "main-overcast-sky",
+        "mesh-nominal",
+        "mesh-profile3879"
+      ],
+      "selection": "Same5 offset-probe cases plus saved absent2304 instead of unsaved absent2302,selected for existing full RGB/frozen arrays after seeing V174 aggregate results.",
+      "intervention": "Zero the final matching block output at the last fusion: the existing linear tail then receives only head(features). For these divisible-by8 native sizes InputPadder adds no pixels. This is a posthoc diagnostic,not a trained alternative or all822 quality claim.",
+      "expected_local_paths": 6,
+      "expected_head_tail_convolutions": 12,
+      "expected_matching_roots": 0,
+      "expected_samplers": 0,
+      "new_parent_DINO_calls": 0,
+      "new_source_noise_draws": 0
+    }
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-local-shortcut-diagnostic-v1/result-v1.json",
+    "sha256": "65af7298fa40251d01ec3468e6c1bf4d469ac940fbe1f6196dd411b712e7c2a2",
+    "contents": {
+      "status": "six-fixed-weight-local-shortcut-paths-evaluated-no-matching-or-parent-forwards",
+      "protocol": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-local-shortcut-diagnostic-v1/protocol-v1.json",
+        "sha256": "97cdb326a94c71bedfc6677cabdde63f4588306af18ab7c0eb48e4bc822aac52"
+      },
+      "owner": {
+        "pid": 223851,
+        "created": 1794100904.19
+      },
+      "rows": [
+        {
+          "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112302-present-iso6400-prior-RGGB.npz",
+            "sha256": "b88ac3be4eeb5c4b88b6e3814ae41fe7920bcc7c0eda969761c4f5530234bd75"
+          },
+          "full": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-016.npy",
+            "sha256": "3f5b4b58fa31e5628357e4a2c2c9251c4164a91049df7bf9c261305c8e902354"
+          },
+          "full_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-correction-016.npy",
+            "sha256": "4ab6df6c7f6237b7355bef716d6a9ae4b312b987f9de91b018bfe01b1b809a53"
+          },
+          "frozen": {
+            "path": "/mnt/external/demosaic/quality-20261107/V169-balanced-spatial-v3/EMA/balanced-016.npy",
+            "sha256": "a4f0b436b68d5bf849053cef1486951aaf2792f623204ba5b1700f8cdaef3f00"
+          },
+          "local_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V175-local-shortcut-diagnostic-v1/local-correction-00.npy",
+            "sha256": "df6d7f0e6290ae60a07ede9e3e4db161e1d5ce1a0f1c0d5cd5b0a8c97d950bc2"
+          },
+          "local_output_values": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "ef7dd9d0729f2ef9542d594f024c774789ab9ae5e477e63e62ac52cd6bed39ca"
+          },
+          "full_correction_RMS_DN16": 0.2007544200713228,
+          "local_correction_RMS_DN16": 0.200791091708265,
+          "matching_path_correction_change_RMS_DN16": 0.035709991347933095,
+          "matching_path_RGB_change_RMS_DN16": 0.035710002582194915,
+          "matching_change_over_full_correction_RMS": 0.17787897937811914
+        },
+        {
+          "id": "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112304-absent-iso6400-prior-RGGB.npz",
+            "sha256": "414074f61e6ee3aabd465afbe19c4babeb17af1ef949ae91e36f956ff87941f6"
+          },
+          "full": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-033.npy",
+            "sha256": "c34255f4f829e84aa61f7646c0603a2c82a14ec03b830b91d276f20961ba88ff"
+          },
+          "full_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-correction-033.npy",
+            "sha256": "3c6050abcdcfffd5a754a089620be1c6778a5cc84387903e02ebbaa2b3aa1daa"
+          },
+          "frozen": {
+            "path": "/mnt/external/demosaic/quality-20261107/V169-balanced-spatial-v3/EMA/balanced-033.npy",
+            "sha256": "bebf1a447cd4603057d6bc2594a65efaa1490662d32e7c9f77c9218b7a781290"
+          },
+          "local_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V175-local-shortcut-diagnostic-v1/local-correction-01.npy",
+            "sha256": "30620de265601968b54217b0607a5f85c3ac05413b0260e7ad1457e90862e592"
+          },
+          "local_output_values": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "22b5bbdcc11ef1ffea572600c1f594bebb19715ecbef3941ebca73d4fcf95647"
+          },
+          "full_correction_RMS_DN16": 0.20433004793103962,
+          "local_correction_RMS_DN16": 0.20310024722382086,
+          "matching_path_correction_change_RMS_DN16": 0.0503595943066766,
+          "matching_path_RGB_change_RMS_DN16": 0.05035956969574339,
+          "matching_change_over_full_correction_RMS": 0.24646200995201994
+        },
+        {
+          "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112309-present-iso6400-prior-RGGB.npz",
+            "sha256": "b9c69ce123091185791e5cac8da227b5993f5993950cff9bcc10ebd21b01f96d"
+          },
+          "full": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-072.npy",
+            "sha256": "c7b4ebd302e506e12b687d51f0975980cc39ecc552e2c6f07e60b2e5be332a16"
+          },
+          "full_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-correction-072.npy",
+            "sha256": "2a90ede2caa454f4b96fa49054b0009331d97cebad6321ebdb3e2037933c54c0"
+          },
+          "frozen": {
+            "path": "/mnt/external/demosaic/quality-20261107/V169-balanced-spatial-v3/EMA/balanced-072.npy",
+            "sha256": "48fe92599d2191c414aab9021ade9a4c8a0bd3b9fdb64ad929e7aa42ee2b6649"
+          },
+          "local_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V175-local-shortcut-diagnostic-v1/local-correction-02.npy",
+            "sha256": "39c55dcfe8e55051d3783aa19559051827d45c8ef3d5b3b73a34628fde8ec723"
+          },
+          "local_output_values": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "f22f36cf1712be07e2fbc39c4f2a66c893c3102a04049d9f8ece62507eabd98f"
+          },
+          "full_correction_RMS_DN16": 0.22120758291218776,
+          "local_correction_RMS_DN16": 0.2141408761254597,
+          "matching_path_correction_change_RMS_DN16": 0.041105865451829995,
+          "matching_path_RGB_change_RMS_DN16": 0.0411058593170528,
+          "matching_change_over_full_correction_RMS": 0.18582484791286605
+        },
+        {
+          "id": "main-overcast-sky",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+            "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+          },
+          "full": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-688.npy",
+            "sha256": "951845a33e418a8b9a67168a4532b2d605b5b8cd1260c6428ba04fc464cb2b3d"
+          },
+          "full_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-correction-688.npy",
+            "sha256": "e311a7684eae24e302dd4035d3ee7e4665e68788b3cfb00900ac5937e135ad3f"
+          },
+          "frozen": {
+            "path": "/mnt/external/demosaic/quality-20261107/V169-balanced-spatial-v3/EMA/balanced-688.npy",
+            "sha256": "f53e526cb06d894e6de998d86c8e3e946a1f5f30cb2c4cea76f09176199cc00a"
+          },
+          "local_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V175-local-shortcut-diagnostic-v1/local-correction-03.npy",
+            "sha256": "e2bb5c3f1fd189de7674ce2549ca0165313fdb0e2f4042a3e645b90304a600ef"
+          },
+          "local_output_values": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "df72e5d672a21cfed0326e280e8844a16dc380b38fe218988c3fe0ca6ff46338"
+          },
+          "full_correction_RMS_DN16": 0.21500162301426268,
+          "local_correction_RMS_DN16": 0.21625441625851405,
+          "matching_path_correction_change_RMS_DN16": 0.10258707190273314,
+          "matching_path_RGB_change_RMS_DN16": 0.10258713736897306,
+          "matching_change_over_full_correction_RMS": 0.47714556971473543
+        },
+        {
+          "id": "mesh-nominal",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "full": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-692.npy",
+            "sha256": "781ad69c6670edd59440c50ad778a26802d99c5f91d89766dbbb52a0bb26966c"
+          },
+          "full_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-correction-692.npy",
+            "sha256": "eb199ed0dd8cf9b541b8f2a7b37dec6c61220a180bbd71ab384da1c548e8b539"
+          },
+          "frozen": {
+            "path": "/mnt/external/demosaic/quality-20261107/V169-balanced-spatial-v3/EMA/balanced-692.npy",
+            "sha256": "951a31a52baf5586dfca45bc364cb16c6a4871217206ff49a32b01b0e288b869"
+          },
+          "local_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V175-local-shortcut-diagnostic-v1/local-correction-04.npy",
+            "sha256": "1b0b81ca2e1840b795dc715d6b44c2a7c5d79970842edf5ecacd05fe1535f903"
+          },
+          "local_output_values": {
+            "shape": [
+              1,
+              3,
+              768,
+              768
+            ],
+            "dtype": "<f4",
+            "sha256": "af4e19a3fb4ae5a5db046cb67fbf34071e1540091a3ed2353623474ae335f4e6"
+          },
+          "full_correction_RMS_DN16": 0.20526407752717646,
+          "local_correction_RMS_DN16": 0.22954428375067729,
+          "matching_path_correction_change_RMS_DN16": 0.17302780087145025,
+          "matching_path_RGB_change_RMS_DN16": 0.17302782179357443,
+          "matching_change_over_full_correction_RMS": 0.8429521763180496
+        },
+        {
+          "id": "mesh-profile3879",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "full": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-693.npy",
+            "sha256": "71e5ce1276e0c690299e274983381f9305b2029b3329b72b4557e3bb4ed48ca5"
+          },
+          "full_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V174-spread-matching-v1/native/V174-EMA-correction-693.npy",
+            "sha256": "c20918c3dbb69fe5e3cdae2a3e095cf97791534f2a658a93190e48fb9d48e0b9"
+          },
+          "frozen": {
+            "path": "/mnt/external/demosaic/quality-20261107/V169-balanced-spatial-v3/EMA/balanced-693.npy",
+            "sha256": "31ce1bdb95daa364d9ace0a04317444cb0e6ed1055986852511c992938ef9734"
+          },
+          "local_correction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V175-local-shortcut-diagnostic-v1/local-correction-05.npy",
+            "sha256": "94356023a93319902758cb932075c0a5dcddbc2c2cfb3fef024aea18b67c2ac2"
+          },
+          "local_output_values": {
+            "shape": [
+              1,
+              3,
+              768,
+              768
+            ],
+            "dtype": "<f4",
+            "sha256": "b1cf633f1e81c2a08b7fba73dc0a28d8897e35e9206b1335977c2c0006319dfd"
+          },
+          "full_correction_RMS_DN16": 0.20057779756834423,
+          "local_correction_RMS_DN16": 0.21080963358733712,
+          "matching_path_correction_change_RMS_DN16": 0.09036443656443245,
+          "matching_path_RGB_change_RMS_DN16": 0.0903644544218958,
+          "matching_change_over_full_correction_RMS": 0.4505206341875499
+        }
+      ],
+      "counts": {
+        "head": 6,
+        "tail": 6
+      },
+      "local_paths": 6,
+      "matching_root_calls": 0,
+      "frozen_component_calls": 0,
+      "sampler_calls": 0,
+      "weights_unchanged": true,
+      "RNG_unchanged": true,
+      "peak_CUDA_bytes": 90344448,
+      "new_parent_DINO_calls": 0,
+      "new_source_noise_draws": 0,
+      "scope": "Posthoc six-input functional removal of the complete final matching path at fixed V174 EMA weights. Head and tail execute once per input;full RGB/corrections/frozen arrays are reused. No matched training ablation,all822 quality conclusion or proof of the cause of under-recovery."
+    }
+  },
+  "log": {
+    "path": "/home/dllu/proj/demosaic/.cache/v175-local-shortcut-v1.log",
+    "sha256": "f014979ca8c65fa425f5f3e07a926106fca34193d394b04e2781479dd4a98534",
+    "text": "mesh-seed2026112302-present-iso6400-prior-RGGB 0.2007544200713228 0.035709991347933095 0.17787897937811914\nmesh-seed2026112304-absent-iso6400-prior-RGGB 0.20433004793103962 0.0503595943066766 0.24646200995201994\nmesh-seed2026112309-present-iso6400-prior-RGGB 0.22120758291218776 0.041105865451829995 0.18582484791286605\nmain-overcast-sky 0.21500162301426268 0.10258707190273314 0.47714556971473543\nmesh-nominal 0.20526407752717646 0.17302780087145025 0.8429521763180496\nmesh-profile3879 0.20057779756834423 0.09036443656443245 0.4505206341875499\nPASS6 local paths/12Conv calls;0 matching/frozen/sampler calls\n"
+  },
+  "owner_terminal": true,
+  "independent_array_rows_checked": 6,
+  "new_local_head_tail_paths": 6,
+  "head_convolutions": 6,
+  "tail_convolutions": 6,
+  "new_matching_root_calls": 0,
+  "new_frozen_component_calls": 0,
+  "new_native_sampler_calls": 0,
+  "new_training_updates": 0,
+  "new_parent_DINO_calls": 0,
+  "new_source_noise_draws": 0,
+  "scope": "Separate posthoc V175 preparation diagnostic on V174 EMA;not a trained alternative or all822 quality result. Removing the complete matching pathway does not isolate distant sample information. Small correction amplitudes and nonzero pathway contribution do not prove the cause of under-recovery."
+}

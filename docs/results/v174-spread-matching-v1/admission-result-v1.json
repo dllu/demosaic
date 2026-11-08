@@ -1,0 +1,104 @@
+{
+  "status": "pass-spread-initialization-native-backward-and-inherited-sampler-proofs",
+  "source_freeze": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-spread-matching-v1/admission-source-freeze-v1.json",
+    "sha256": "4f812a7421ca9ffe1f995715ac441458c434f30d24ae94aee0fff42f37478c74"
+  },
+  "real_shapes": [
+    {
+      "batch": 4,
+      "native": 512,
+      "backward": true,
+      "seconds": 7.354279650026001,
+      "nonzero_parameter_gradient_tensors": 1,
+      "counts": {
+        "wrapper": 1,
+        "frozen": 1,
+        "network": 1,
+        "sampler": 5
+      },
+      "peak_CUDA_bytes": 6669824512
+    },
+    {
+      "batch": 4,
+      "native": 512,
+      "backward": true,
+      "seconds": 1.2511757139873225,
+      "nonzero_parameter_gradient_tensors": 91,
+      "counts": {
+        "wrapper": 2,
+        "frozen": 2,
+        "network": 2,
+        "sampler": 10
+      },
+      "peak_CUDA_bytes": 6720356864
+    },
+    {
+      "batch": 4,
+      "native": 512,
+      "backward": true,
+      "seconds": 1.2418230809853412,
+      "nonzero_parameter_gradient_tensors": 141,
+      "counts": {
+        "wrapper": 3,
+        "frozen": 3,
+        "network": 3,
+        "sampler": 15
+      },
+      "peak_CUDA_bytes": 6720356864
+    },
+    {
+      "batch": 1,
+      "native": 768,
+      "backward": false,
+      "seconds": 0.2598470720113255,
+      "nonzero_parameter_gradient_tensors": null,
+      "counts": {
+        "wrapper": 4,
+        "frozen": 4,
+        "network": 4,
+        "sampler": 20
+      },
+      "peak_CUDA_bytes": 6720356864
+    }
+  ],
+  "counts": {
+    "wrapper": 4,
+    "frozen": 4,
+    "network": 4,
+    "sampler": 20
+  },
+  "trainable_parameters": 2088906,
+  "trainable_tensors": 141,
+  "frozen_module_hash": "a152045e5ad24e35e5e9e523f2ddec54cced5e68004d8cbfc077607aeb7facb8",
+  "initial_module_hash": "20877e2cbc5b0c05004efa27a703cc5eca12f677add5b1cc73041ad274c13bab",
+  "initial_network_hash": "a95f6f00c8787de9af1fbcb43c44c5cb77fddcef8739a7b25d0e88794b35a6cf",
+  "unchanged183_initial_tensors_exact_V172": true,
+  "changed_initial_tensors": [
+    "network.down1.0.offset_cnn.cnn.10.bias",
+    "network.down2.0.offset_cnn.cnn.10.bias",
+    "network.body.0.offset_cnn.cnn.10.bias",
+    "network.up2.1.offset_cnn.cnn.10.bias",
+    "network.up1.1.offset_cnn.cnn.10.bias"
+  ],
+  "changed_initial_scalar_values": 60,
+  "initial_grid_spacing": 8,
+  "inherited_primitive_admission": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/admission-result-v1.json",
+    "sha256": "2eb47d112fe9b1817c02797a2569a722f4661636c6599d4c7d71e4403c2ec5b1"
+  },
+  "inherited_old_primitive_calls_repeated": 0,
+  "new_matching_CUDA_calls": 4,
+  "new_frozen_CUDA_calls": 4,
+  "new_matching_CPU_calls": 0,
+  "new_wrapper_CUDA_images": 13,
+  "new_sampler_only_calls": 0,
+  "discarded_synthetic_optimizer_updates": 3,
+  "new_heldout_calls": 0,
+  "native_backward_nondeterminism": "Unchanged upstream CUDA grad-input uses atomic accumulation and warns under warn-only deterministic mode;no bit-exact retraining claim.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/admit-v174-spread-v1.py",
+    "sha256": "6fb3056278472dfb71fdf9c26c4d72a6b22f27bf7115ea8f1741dbf294fdc28a",
+    "text": "\"\"\"New local-feature wrapper admission;inherit unchanged sampler primitive proofs.\"\"\"\nimport os,time\nfrom pathlib import Path\nimport psutil,torch,numpy as np\nfrom nonlocal_residual_objective import objective\nfrom spread_matching_offsets import initialize_spread_offsets\nfrom demosaic.cfa import color_indices\nfrom demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail\nfrom demosaic.late_nonlocal_residual import LateNonlocalResidualDetail\nfrom profile_raw_kernel_inference import model_hash\nfrom train_directional_bank_trial import guard,read,ref,save\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V174-spread-matching-v1'\nassert not root.exists();root.mkdir()\nprevious=read(repo/'.cache/quality-20261107/V172-local-noise-matching-v1/plan-v1.json');guard(previous)\nassert psutil.virtual_memory().available>52*2**30\nos.nice(10);os.sched_setaffinity(0,sorted(os.sched_getaffinity(0))[2:4])\ntorch.set_num_threads(2);torch.set_num_interop_threads(1);torch.set_float32_matmul_precision('highest')\ntorch.backends.cuda.matmul.allow_tf32=torch.backends.cudnn.allow_tf32=False\ntorch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True\ntorch.use_deterministic_algorithms(True,warn_only=True)\ntorch.cuda.set_per_process_memory_fraction(24*2**30/torch.cuda.get_device_properties(0).total_memory)\nlibrary=previous['sampling_library'];assert ref(library['path'])==library;torch.ops.load_library(library['path'])\nfrozen=previous['frozen_component'];assert ref(frozen['export']['path'])==frozen['export']\nmodule=LateLocalNoiseMatchingDetail().load_frozen_component(frozen['export']['path']);changed_biases=initialize_spread_offsets(module,spacing=8)\ncontrol=LateLocalNoiseMatchingDetail().load_frozen_component(frozen['export']['path'])\nassert module.state_dict().keys()==control.state_dict().keys()\ndifferences=[k for k,v in module.state_dict().items() if not torch.equal(v,control.state_dict()[k])]\nassert differences==['network.'+n for n in changed_biases] and len(differences)==5\nassert sum(int((module.state_dict()[k]!=control.state_dict()[k]).sum()) for k in differences)==60\nassert model_hash(control)==read(previous['admission']['path'])['initial_module_hash']\ninitial=model_hash(module);initial_network=model_hash(module.network);del control\nsource_paths=list((repo/'src/demosaic').glob('*.py'))+[Path(__file__),repo/'tests/test_spread_matching_offsets.py',repo/'scripts/spread_matching_offsets.py']\nsave(root/'admission-source-freeze-v1.json',dict(owner=dict(pid=os.getpid(),created=psutil.Process().create_time()),sources=[dict(ref(p),text=p.read_text()) for p in source_paths],native_library=library,frozen_component=frozen,\n inherited_primitive_admission=previous['admission'],initial_module_hash=initial,initial_network_hash=initial_network,unchanged183_initial_tensors_exact_V172=True,changed_initial_tensors=differences,changed_initial_scalar_values=60,initial_grid_spacing=8,scope='Synthetic local-feature wrapper admission only. The unchanged pinned sampler/autograd/core definitions inherit V171 independent adjoint and CPU/CUDA parity evidence;those old calls are not repeated or counted as new.'))\nmodule.cuda();optimizer=torch.optim.AdamW(module.network.parameters(),lr=.0003)\ncounts=dict(wrapper=0,frozen=0,network=0,sampler=0)\nfor name,child in [('wrapper',module),('frozen',module.frozen),('network',module.network)]:\n child.register_forward_hook(lambda *args,name=name:counts.__setitem__(name,counts[name]+1))\nfor child in module.network.modules():\n if type(child).__name__=='NonlocalBlock':child.register_forward_hook(lambda *args:counts.__setitem__('sampler',counts['sampler']+1))\ntorch.cuda.reset_peak_memory_stats();shapes=[]\nfor iteration,(batch,size) in enumerate([(4,512),(4,512),(4,512),(1,768)]):\n generator=torch.Generator().manual_seed(17410+iteration)\n parent=(torch.rand((batch,3,size,size),generator=generator)*.01+.005).cuda()\n raw=(torch.rand((batch,4,size//2,size//2),generator=generator)*.012+.004).cuda()\n variance=raw*.00128+6.5536e-6\n colors=color_indices('RGGB')[None].expand(batch,-1).cuda();wb=torch.tensor([[1.5,1.,1.2]],device='cuda').expand(batch,-1)\n torch.cuda.synchronize();started=time.perf_counter()\n nonzero=None\n if iteration<3:\n  output,aux=module(parent,raw,variance,colors,wb,return_aux=True)\n  if iteration==0:assert torch.equal(output,aux['frozen_output'])\n  loss,terms,mask=objective(output,aux['frozen_output'],dict(target=parent,variance=variance,pair_indices=torch.empty((0,2),device='cuda',dtype=torch.int64)),torch.empty((0,1,1,1),device='cuda'),1)\n  loss.backward();assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in module.network.parameters())\n  nonzero=sum(bool(p.grad.abs().max()>0) for p in module.network.parameters())\n  if iteration==2:\n   assert module.network.head.weight.grad.abs().max()>0 and module.network.tail.weight.grad.abs().max()>0\n   assert all(child.offset_cnn.cnn[-1].weight.grad.abs().max()>0 for child in module.network.modules() if type(child).__name__=='NonlocalBlock')\n  optimizer.step();optimizer.zero_grad(set_to_none=True)\n else:\n  with torch.inference_mode():output=module(parent,raw,variance,colors,wb)\n torch.cuda.synchronize();elapsed=time.perf_counter()-started\n assert torch.isfinite(output).all() and model_hash(module.frozen)==frozen['module_hash']\n assert not any(p.grad is not None for p in module.frozen.parameters())\n row=dict(batch=batch,native=size,backward=iteration<3,seconds=elapsed,nonzero_parameter_gradient_tensors=nonzero,counts=dict(counts),peak_CUDA_bytes=torch.cuda.max_memory_allocated());shapes.append(row);print(row,flush=True)\n save(root/'admission-progress-v1.json',dict(status='synthetic-admission',owner=dict(pid=os.getpid(),created=psutil.Process().create_time()),shapes=shapes))\n del parent,raw,variance,colors,wb,output\n if iteration<3:del aux,loss,terms,mask\nassert counts==dict(wrapper=4,frozen=4,network=4,sampler=20)\nsave(root/'admission-result-v1.json',dict(status='pass-spread-initialization-native-backward-and-inherited-sampler-proofs',source_freeze=ref(root/'admission-source-freeze-v1.json'),real_shapes=shapes,counts=counts,\n trainable_parameters=sum(p.numel() for p in module.network.parameters()),trainable_tensors=len(module.network.state_dict()),frozen_module_hash=model_hash(module.frozen),initial_module_hash=initial,initial_network_hash=initial_network,unchanged183_initial_tensors_exact_V172=True,changed_initial_tensors=differences,changed_initial_scalar_values=60,initial_grid_spacing=8,\n inherited_primitive_admission=previous['admission'],inherited_old_primitive_calls_repeated=0,new_matching_CUDA_calls=4,new_frozen_CUDA_calls=4,new_matching_CPU_calls=0,new_wrapper_CUDA_images=13,new_sampler_only_calls=0,discarded_synthetic_optimizer_updates=3,new_heldout_calls=0,\n native_backward_nondeterminism='Unchanged upstream CUDA grad-input uses atomic accumulation and warns under warn-only deterministic mode;no bit-exact retraining claim.',source=dict(ref(__file__),text=Path(__file__).read_text())))\nprint('ADMISSION PASS;peakGiB',torch.cuda.max_memory_allocated()/2**30,flush=True)\n"
+  }
+}
