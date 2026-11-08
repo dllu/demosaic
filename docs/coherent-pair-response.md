@@ -1,6 +1,6 @@
 # Bounded coherent pair-response supervision
 
-**V183 has a CPU-verified loss implementation; trained quality is unmeasured.**
+**V183 has passed real CUDA updates/restoration and is training; quality is unmeasured.**
 The [V182 gradient study](flat-spatial-gradient-conflict.md) finds that added
 spatial pressure can oppose weak-detail response through shared parameters.
 This follow-up adds direct coherent response supervision while retaining all
@@ -60,8 +60,46 @@ cleanup remove that warning; five added contract/overflow checks bring the total
 to 25. The empty-pair implementation also avoids a possible finite-sum overflow;
 nonempty projection math is unchanged. Native replay uses the final exact sources.
 
-Next required work is actual CUDA/network-gradient and restoration checks,
-followed by the matched continuation and both endpoint reviews. Those must retain
+The actual CUDA probe completes two native four-image updates, mesh then mixed,
+from V172's real 141 Adam states at900 plus a zero local-evidence adapter with
+no optimizer history. Both nine-term FP32 totals match independently. The new
+loss and all6,291,456 output-gradient coordinates match CPU with zero observed
+differences; all142 trainable tensors have finite/nonzero gradients at both
+updates. Model/Adam/EMA/CPU-CUDA RNG restoration between them is exact, with
+zero prefix replay. Counts are two wrapper/frozen/network/projection and ten
+samplers; peak allocation is6.292GiB. Independent CPU inspection strictly loads
+both raw/EMA/frozen/Adam checkpoints at network901/902 and adapter1/2. These
+probe checkpoints never initialize the matched trial.
+
+The original matched continuation is now running from the same V172 initializer
+and zero adapter used for V180/V181. It adds900 updates/3,600 images over the same
+1,000 cached rows with100 ADC skips, keeping domain weights,LR,EMA and sampler.
+All754 worker files are frozen, including98 unchanged neural files. Seven helper
+bodies stay exact; the training body changes only its objective import. Actual
+row8 restoration resumes at row9. One immutable live-prefix observation verifies
+575 completed rows and514 exact nine-term totals, with unchanged input/mask/LR
+bindings. This is not the terminal training audit or a quality result.
+
+Separate preparation passes44 audit CPU checks,14 comparison checks and16
+publication guards. A positive audit fixture caught a stale prior method-prefix
+predicate after43 passes/one failure; source/log are preserved, and the corrected
+predicate uses the configured evidence methods before freezing or scientific
+audit use. Full marked fixtures retain19methods/15,618rows/32contrasts/1,218cells
+and60nativefigures/12triplets/15sheets, using old V181 values/pixels explicitly.
+They establish no new quality. The ten-state viewer fixture retains all eight
+older checkpoint entries exactly, defaults V181 EMA/V183 EMA, and is rejected
+by actual browser/pixel entries. A new480-screenshot fixture is unnecessary for
+the unchanged viewer template; actual480crop verification remains required.
+
+The completion controller adopts the original training owner, runs full audits,
+one review, reduction and rendering, then stops for all15 actual sheet inspections.
+Measured V181 same-format artifacts total619,215,007 external bytes; the new trial
+forecasts0.65GiB externally plus a separate0.08GiB admission, with local/external
+reserves48.5/111.5GiB. Native arrays, checkpoints and exports use the external SSD.
+[Actual CUDA, training launch and helper evidence](results/v183-coherent-pair-CUDA-and-trial-preparation-v1.json).
+
+Remaining work is terminal training/quality audits, both endpoint reviews,
+actual native inspection, exports and browser/publication verification. Those retain
 the V180/V181 and earlier useful strengths, the complete quiet/absent/ADC controls,
 both protected GFX scenes, main sky/building/foliage/coarse fence and both fine
 cab ROIs/profiles/JPEGs. Any claimed quality improvement needs at least two

@@ -36,8 +36,13 @@ is implemented above the unchanged eight-term V181 objective. A 1-DN16 energy
 floor limits pressure from vanishing differences; per-channel DC is removed.
 All 25 focused CPU checks and the independent 20-native-batch replay pass:
 53,477,376 output-gradient coordinates have zero observed FP32 differences.
-Constant/orthogonal blind directions remain explicit. No CUDA admission,
-optimizer update, matched training or new quality conclusion is claimed yet.
+Constant/orthogonal blind directions remain explicit. Actual admission now passes
+two native updates,all142 finite/nonzero tensor gradients,6,291,456 CPU/GPU
+output derivatives,both9term FP32 totals and model/Adam/EMA/RNG restoration;
+both saved checkpoints pass strict CPU inspection. Matched900-update training
+is running from V172 realAdam900/EMA and zero adapter. A live prefix checks514
+totals;44 audit/14comparison/16publication guards and marked fixtures pass.
+No trained V183 quality or actual new native viewing is claimed yet.
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of

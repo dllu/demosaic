@@ -39,9 +39,11 @@ quality comparisons and the earlier useful models remain unchanged.
 
 The [V183 coherent pair-response implementation](coherent-pair-response.md)
 adds bounded supervision along each training pair's clean spatial difference,
-retaining every V181 term. All 25 CPU tests and 20 saved-native output-gradient
-replays pass, with zero observed FP32 derivative differences across 53.48 million
-coordinates. Actual CUDA/network/optimizer and trained-quality work remains.
+retaining every V181 term. All25 CPU tests,20 saved-native derivative replays,
+two real CUDA updates and genuine model/Adam/EMA/RNG restoration pass. The matched
+900-update continuation is running from the same V172 history and zero adapter;
+actual row8 restoration and a514-total prefix check pass. V183 quality remains
+unmeasured; both endpoints and all protected-scene comparisons are still required.
 
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
