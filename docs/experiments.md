@@ -39,10 +39,17 @@ All 25 focused CPU checks and the independent 20-native-batch replay pass:
 Constant/orthogonal blind directions remain explicit. Actual admission now passes
 two native updates,all142 finite/nonzero tensor gradients,6,291,456 CPU/GPU
 output derivatives,both9term FP32 totals and model/Adam/EMA/RNG restoration;
-both saved checkpoints pass strict CPU inspection. Matched900-update training
-is running from V172 realAdam900/EMA and zero adapter. A live prefix checks514
-totals;44 audit/14comparison/16publication guards and marked fixtures pass.
-No trained V183 quality or actual new native viewing is claimed yet.
+both saved checkpoints pass strict CPU inspection. The matched900-update trial
+from V172 realAdam900/EMA and zero adapter is complete. Independent audits pass
+all900 nine-term totals, five strict checkpoints and both822-case endpoints.
+The [actual quality report](coherent-pair-evidence-comparison.md) finds EMA mesh
+response+6.95% versus V181 to4.439% of GT, with quiet spatial RMS+0.39–0.67%
+on all32 inputs. Against V180, mesh response is2.41% lower and quiet spatial
+RMS0.09–0.49% lower. Both fine cab windows remain incomplete and broad mottle
+persists. All60 native figures/12triplets were actually viewed;19methods,
+32contrasts and1,218cells retain earlier strengths. Two strict exports and the
+[ten-state viewer](images/v183-coherent-pair-evidence-v1/native-viewer.html) keep
+raw/EMA metadata separate. Preparation fixtures remain explicitly marked.
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of

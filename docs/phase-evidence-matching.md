@@ -21,6 +21,15 @@ reduces EMA quiet spatial RMS 0.47–1.15% versus local V180 while giving up
 8.75% of its mesh response. Its 4.150% GT response remains 5.78% above global
 V178; real fine crossings and broad mottle remain unresolved.
 
+The completed [V183 coherent-response loss](coherent-pair-evidence-comparison.md)
+keeps the local architecture and all V181 terms. EMA mesh response recovers
+6.95% versus V181 to4.439% of GT, while quiet spatial RMS rises0.39–0.67%.
+It retains0.09–0.49% lower quiet spatial error than V180 at2.41% lower mesh
+response. Both endpoints/all822 cases, independent audits and60 actually viewed
+native figures are complete. Retain this intermediate recipe beside V180's
+stronger response and V181's quieter output; real crossings and broad mottle
+remain unresolved. The frozen V178 evidence and scientific receipts stay unchanged.
+
 [Model implementation](../src/demosaic/late_phase_evidence_matching.py) ·
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·
 [Native preparation and preserved prototype failure](results/v178-phase-evidence-preparation-v1.json).

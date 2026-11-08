@@ -45,8 +45,16 @@ are complete, with no updates or new data/noise. The follow-up
 25 CPU checks and all53.48million independent native output-gradient values,
 retaining the eight old terms and mask. Two actual CUDA updates pass all142
 tensor gradients,6.29million CPU/GPU output derivatives,both9term totals and
-genuine model/Adam/EMA/RNG restoration. Matched900-update training is running
-from the original V172 history; terminal audits and image quality remain pending.
+genuine model/Adam/EMA/RNG restoration. The matched900-update trial is now complete:
+[V183 actual quality](coherent-pair-evidence-comparison.md) recovers EMA mesh
+response6.95% versus V181 to4.439% of GT, with quiet spatial RMS0.39–0.67%
+higher. Against V180, it gives up2.41% of mesh response while keeping0.09–0.49%
+lower quiet spatial RMS. Natural fine-band response rises slightly on all128
+inputs versus V181; organic-dark band error worsens. Independent training/quality
+audits and all60 original-detail figures/12triplets pass inspection. Real fence
+crossings and broad colored mottle remain unresolved. Direct coherent supervision
+changes the tradeoff without removing shared-parameter interference; retain all
+three local recipes for their measured strengths.
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,

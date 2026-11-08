@@ -1,5 +1,22 @@
 # Current model choices
 
+The completed [V183 coherent-response comparison](coherent-pair-evidence-comparison.md)
+adds an intermediate recipe on the same local-evidence architecture. EMA mesh
+response rises **6.95% versus V181 to4.4390% of exact constructed GT amplitude**,
+with237/256 inputs increasing. Quiet spatial RMS rises **0.668% / 0.386%**
+at ISO6400/12800, worsening all32 inputs; quiet total rises0.538% / 0.357%.
+Against V180, mesh response is2.406% lower and quiet spatial RMS0.492% / 0.089%
+lower, while ISO12800 quiet total changes+0.0087%. Natural fine-band response
+rises slightly versus V181, with mixed band-error changes. Full-flat RMS rises
+0.013% / 0.022% versus V181. Both real cab windows remain soft/incomplete and
+broad mottle persists. Retain V183's response recovery beside V180's stronger
+response, V181's quieter output and V172's balanced comparison; none dominates
+the combined goal. V120 Small remains the general recommendation. Both endpoints,
+all822 cases, full900-total/five-checkpoint and quality audits, two strict exports
+and60 actually inspected native figures/12 triplets are complete.
+[Ten-state viewer](images/v183-coherent-pair-evidence-v1/native-viewer.html) ·
+[Exact evidence](results/v183-coherent-pair-evidence-final-v1.json).
+
 The completed [V181 spatial-loss comparison](flat-spatial-evidence-comparison.md)
 adds a quieter option above the same local-evidence architecture. EMA quiet
 spatial RMS falls **1.15% / 0.47% versus V180** for ISO6400/12800, improving

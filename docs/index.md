@@ -8,7 +8,7 @@ the stronger [V161 detail prototype](harmonic-frequency-context.md),
 [V173](weak-gradient-matching.md)/[V174](spread-sample-matching.md) quiet gains.
 Their remaining weaknesses differ; none combines strong mesh recovery and
 clean quiet fields. The latest completed
-[native-pixel viewer](images/v181-flat-spatial-evidence-v1/native-viewer.html) retains
+[native-pixel viewer](images/v183-coherent-pair-evidence-v1/native-viewer.html) retains
 both protected GFX scenes and the earlier useful comparators.
 
 The completed [V180 local-evidence comparison](local-phase-evidence-comparison.md)
@@ -37,13 +37,16 @@ All 20 native training batches and an independent audit are complete, with zero
 optimizer updates. This guides the next loss experiment; V180/V181's actual
 quality comparisons and the earlier useful models remain unchanged.
 
-The [V183 coherent pair-response implementation](coherent-pair-response.md)
-adds bounded supervision along each training pair's clean spatial difference,
-retaining every V181 term. All25 CPU tests,20 saved-native derivative replays,
-two real CUDA updates and genuine model/Adam/EMA/RNG restoration pass. The matched
-900-update continuation is running from the same V172 history and zero adapter;
-actual row8 restoration and a514-total prefix check pass. V183 quality remains
-unmeasured; both endpoints and all protected-scene comparisons are still required.
+The completed [V183 coherent-response comparison](coherent-pair-evidence-comparison.md)
+recovers EMA mesh response **6.95% versus V181 to4.439% of GT**, at a quiet
+spatial cost of **0.39–0.67%** on all32 inputs. Against V180, response is2.41%
+lower and quiet spatial RMS0.09–0.49% lower. Natural band response improves
+slightly versus V181; real cab crossings and broad mottle remain unresolved.
+Retain this intermediate recipe alongside both predecessors and earlier strengths.
+Both endpoints/all822 cases, independent audits, two exports and all60 actually
+viewed native figures/12 triplets are complete. Nineteen methods/32contrasts/
+1,218cells retain prior results. The [loss implementation](coherent-pair-response.md)
+records25 CPU tests,20 native derivative replays and two genuine CUDA probes.
 
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
