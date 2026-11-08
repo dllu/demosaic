@@ -3,9 +3,11 @@
 **The actual V178 matched trial is running.** Its
 [CUDA admission](phase-evidence-admission.md) has passed and the controller has
 inspected both real admission checkpoints. The prepared GPU plan binds that
-result and V175's completed scores/figures; the control arm has started from
-V172's real raw/Adam/EMA history. Evidence training and the four-endpoint quality
-review follow the control. No V178 quality gain is established yet.
+result and V175's completed scores/figures. Both arms have completed 900 further
+updates from V172's real raw/Adam/EMA history, and the independent training audit
+passes all ten checkpoints. The four-endpoint fixed quality review is running;
+quality audit and actual native inspection remain required. No V178 quality
+gain is established yet.
 
 [Training and review](../scripts/train_phase_evidence_trial.py) ·
 [Adam/EMA state handling](../scripts/phase_evidence_training_state.py) ·
@@ -117,7 +119,9 @@ fields in this structural fixture are simulated. One real V172 checkpoint
 restores all 141 original Adam states at 900 and its raw/EMA weights exactly on
 CPU. No actual model forward or optimizer update occurs in this preparation.
 Actual frozen imports/source gates pass, and both audit entries reject the
-then-absent prepared plan. No complete V178 training or quality audit is available yet.
+then-absent prepared plan. The actual training audit now passes both full
+1,000-row traces and all ten checkpoints: existing network clocks are 1,800,
+and the evidence adapter clock is 900. The actual quality audit remains pending.
 
 After the actual workers terminate successfully, the auditor will check both
 complete training traces, all ten checkpoints, distinct adapter/network clocks,
@@ -224,5 +228,32 @@ their 142 fresh Adam states, nonzero adapter weights, frozen tensors and restore
 evidence. It prepared the trial and launched the original control owner. It
 waits for resources, runs each matched stage once, renders native comparisons,
 and stops for actual image viewing. Its source and launch identity remain
-sealed. Current progress is recorded in the completed-admission receipt;
+sealed. Trial-start evidence is recorded in the completed-admission receipt;
 full V178 quality and actual native viewing remain pending.
+
+## Publication preparation
+
+The [publication entry](../scripts/publish_phase_evidence_trial.py) requires
+terminal train/review/controller owners, both passed independent audits,
+all 72 actual native figures and recorded inspection of all 18 sheets before
+writing a report or four strict CPU exports. Each method records its own source
+checkpoint, raw/EMA state, module-state hash, component class and configuration.
+Adapter EMA is loaded along with network EMA. All 13 comparison methods and
+714 table cells remain available, including both V175 endpoints.
+
+The [publication verifier](../scripts/verify_phase_evidence_publication.py)
+compares each export against the actual reviewed checkpoint state and
+independently recomputes all new native crop pixels. The separate
+[browser pixel check](../scripts/check_matched_native_viewer_pixels.py) checks
+both matched endpoint pairs, their state metadata and all 480 captured crops.
+The actual-mode browser/pixel entries reject marked layout fixtures.
+
+All [16 publication guard tests](../tests/test_phase_evidence_publication.py)
+pass, covering live owners, observation errors, mismatched results/audits,
+fixtures, partial/resized renders, missing viewing and required arguments.
+An actual frozen-entry check rejects the live review before importing Torch;
+both actual-mode pixel/browser checks reject the existing marked fixtures.
+These are publication-integrity checks; no V178 quality or actual viewing is
+claimed by this preparation. New helpers are frozen in a separate snapshot;
+existing GPU, audit and comparison sources remain unchanged.
+[Exact sources and rejection evidence](results/v178-publication-preparation-v1.json).

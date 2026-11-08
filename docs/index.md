@@ -26,12 +26,13 @@ The [V178 phase-evidence variant](phase-evidence-matching.md) is undergoing a
 [matched continuation](phase-evidence-training.md), preserving both arms' real
 optimizer/EMA history. Actual [CUDA admission](phase-evidence-admission.md)
 passes all 14 initial parity comparisons, both 142-tensor gradient probes,
-genuine restoration and ADC invariants. The control arm is training; V178
-quality remains unmeasured. Its zero 3,120-weight adapter exposes 80 measured-wave
+genuine restoration and ADC invariants. Both arms have finished training; the
+fixed review is running, with V178 quality still unmeasured. Its zero
+3,120-weight adapter exposes 80 measured-wave
 maps to matching. Native renderer fixtures use old pixels and are explicitly
 labeled. The
 [independent CPU auditor](phase-evidence-training.md#independent-audit-preparation)
-is implemented; complete training/quality audits and native viewing remain pending.
+has passed the actual training audit; quality audit and native viewing remain pending.
 Admission and preparation results do not change the measured model choices.
 The [matched tables and four-state native viewer](phase-evidence-training.md#matched-tables-and-native-viewer)
 also pass complete old-value/pixel fixtures, with actual V178 results pending.

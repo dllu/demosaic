@@ -5,7 +5,8 @@
 to the existing local-noise matching network. The adapter has real gradient
 flow in CPU test fixtures. All 188 existing V172 raw/EMA tensors load exactly.
 Actual CUDA initial parity, gradients, restoration and local ADC checks pass;
-completed training and image quality remain pending. Current restoration
+both arms have completed their planned training, with image quality and actual
+native inspection still pending. Current restoration
 recommendations are unchanged, with the completed V175 comparisons available.
 
 The separate [V180 local-window variant](local-phase-evidence-matching.md)
@@ -68,7 +69,8 @@ the old weights does not establish optimizer compatibility.
 A [matched continuation](phase-evidence-training.md) verifies an
 explicit extension on the real checkpoint: 141 old Adam states stay at 900,
 while the new adapter starts without optimizer history and participates in EMA.
-Thirteen additional CPU state checks pass; the actual control arm is training.
+Thirteen additional CPU state checks pass; both actual arms have finished their
+one-pass continuation, and the fixed quality review is running.
 
 ## Detail and flat-region limits
 
