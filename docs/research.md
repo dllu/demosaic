@@ -13,15 +13,23 @@ keeping V172's balanced and earlier quiet/flat strengths available. Controlling
 the extra response in blank regions remains necessary. All 60 native figures
 were inspected, and full training/checkpoint/quality audits pass.
 
-The [V181 follow-up](flat-spatial-evidence.md) adds spatial-error variance inside
+The completed [V181 follow-up](flat-spatial-evidence-comparison.md) adds spatial-error variance inside
 the existing 17px clean-flat mask, at fixed 4-DN16 units and weight 0.25. It
 separates spatial pressure from constant RGB bias while retaining actual weak
 target gradients. The architecture, original seven terms, mask and training
 recipe are unchanged. All 55 focused CPU tests and two native CUDA updates with
 genuine restoration pass; both loss and 6.29 million output-gradient coordinates
-match CPU with zero observed differences. Matched training and its independent
-full-trace/five-checkpoint audit have finished; raw/EMA review is running.
-Implementation/training integrity establishes no trained detail or noisy-sky gain.
+match CPU with zero observed differences. Matched training, full-trace/five-checkpoint
+and quality audits, both endpoints/all 822 cases and actual inspection of all
+60 native figures are complete. EMA quiet spatial RMS falls **0.47–1.15% on
+all 32 inputs versus V180**, but mesh response falls **8.75% to 4.150% of GT**
+and natural fine-band response falls on all 128 inputs. It retains 5.78% more
+mean mesh response than global V178; quiet spatial changes versus V172 are
+−0.058% / +0.283%. Clean-target masking does not prevent shared-parameter detail
+suppression, and removing DC from the added term does not guarantee lower bias.
+Retain this quieter local recipe and V180's stronger response as separate useful
+options. Broad mottle and real fine crossings remain unresolved.
+[Loss implementation and exact preparation](flat-spatial-evidence.md).
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,
@@ -34,9 +42,9 @@ were inspected; both full training traces/ten checkpoints and all four review
 endpoints pass independent audits. The feature operator and 3,120 extra weights
 change together, so their individual contributions are not isolated.
 Retain the small mesh gain alongside earlier quiet/flat/detail strengths.
-Spatially local coefficients in the untrained V180 variant remain a useful
-next hypothesis, with unchanged global frequency selection and possible support
-spreading/seams. The goal of strong fine dark detail with clean sky remains open.
+Spatially local coefficients are now measured in completed V180 above, with
+unchanged global frequency selection and remaining support-spreading/seam risks.
+The goal of strong fine dark detail with clean sky remains open.
 
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) supplies
 little additional fine-detail response after 8,100 more updates: mesh gain is

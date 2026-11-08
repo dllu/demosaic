@@ -1,5 +1,22 @@
 # Current model choices
 
+The completed [V181 spatial-loss comparison](flat-spatial-evidence-comparison.md)
+adds a quieter option above the same local-evidence architecture. EMA quiet
+spatial RMS falls **1.15% / 0.47% versus V180** for ISO6400/12800, improving
+all 32 inputs; total quiet RMS falls 0.96% / 0.35%. Mesh response falls **8.75%
+to 4.1504% of exact constructed GT amplitude**, still 5.78% above global V178
+and 7.05% above V172. Only 90/256 mesh inputs increase against each earlier EMA.
+Versus V172, EMA quiet total changes −0.214% / +0.109% and spatial −0.058% /
++0.283%, so it does not dominate the balanced comparison. Natural fine-band
+response falls on all 128 inputs versus V180, coarse-flat means are mixed,
+broad mottle persists and real cab crossings remain incomplete. Retain V181's
+quieter recipe and V180's stronger response on the local architecture alongside
+earlier strengths; V120 Small remains the general recommendation. Both endpoints,
+all 822 cases, independent training/quality audits, two strict exports and
+60 actually inspected native figures/12 triplets are complete.
+[Loss-comparison viewer](images/v181-flat-spatial-evidence-v1/native-viewer.html) ·
+[Exact evidence](results/v181-flat-spatial-evidence-final-v1.json).
+
 The completed [V180 local phase-evidence comparison](local-phase-evidence-comparison.md)
 provides a stronger matching detail option at the same parameter budget.
 Raw/EMA mesh response reaches **4.5219% / 4.5484% of constructed GT amplitude**,

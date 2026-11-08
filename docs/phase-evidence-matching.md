@@ -16,6 +16,10 @@ keeps this parameter layout and global selection, replacing the coefficient
 fields with local affine measurements. Its [completed comparison](local-phase-evidence-comparison.md)
 raises mean mesh response 15.2–15.9% over this global variant at a higher quiet
 spatial cost. The frozen V178 admission and matched trial remain unchanged.
+The completed [V181 loss-only follow-up](flat-spatial-evidence-comparison.md)
+reduces EMA quiet spatial RMS 0.47–1.15% versus local V180 while giving up
+8.75% of its mesh response. Its 4.150% GT response remains 5.78% above global
+V178; real fine crossings and broad mottle remain unresolved.
 
 [Model implementation](../src/demosaic/late_phase_evidence_matching.py) ·
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·

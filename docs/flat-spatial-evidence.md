@@ -1,13 +1,21 @@
 # Clean-flat spatial-error supervision
 
-**V181 has finished training; its fixed quality review is running.** It keeps the completed
+**V181 has completed training, quality review and actual native inspection.**
+The [completed comparison](flat-spatial-evidence-comparison.md) finds EMA quiet
+spatial RMS **0.47–1.15% lower than V180 on all 32 inputs**, with mesh response
+**8.75% lower at 4.150% of exact GT amplitude**, still 5.78% above global V178.
+Natural fine-band response falls; broad mottle and missing real crossings remain.
+Retain this quieter local recipe beside V180's stronger response and earlier
+balanced/quiet/flat strengths. It keeps the completed
 [V180 local-evidence architecture](local-phase-evidence-comparison.md), initial
 checkpoint, data and 900-update recipe. One added loss targets spatial error
 inside clean flat neighborhoods. The 98 neural source files, all seven existing
 loss terms and the existing target mask stay unchanged. V180's measured mesh
-gain and its quiet-field costs remain the current evidence.
+gain and its quiet-field costs remain comparison evidence.
 The independent training audit passes all 1,000 rows, 900 eight-term FP32
-totals and five checkpoints; trained image-quality conclusions remain pending.
+totals and five checkpoints; the independent quality audit also passes.
+[Two strict exports and actual evidence](results/v181-flat-spatial-evidence-final-v1.json) ·
+[Native viewer](images/v181-flat-spatial-evidence-v1/native-viewer.html).
 
 [Loss](../scripts/flat_spatial_objective.py) ·
 [Independent CPU tests](../tests/test_flat_spatial_objective.py) ·
@@ -95,7 +103,7 @@ continuation now finishes with network clocks at 1,800 and adapter at 900;
 all five raw/EMA/Adam/frozen/RNG checkpoints pass independent CPU verification.
 
 Outputs use the external SSD to preserve the local reserve. The trial keeps
-both raw/EMA endpoints and plans the complete 822-case review, exact frozen/ADC
+both raw/EMA endpoints and completes the full 822-case review, exact frozen/ADC
 checks, the same 36 native cases and independent training/quality audits. The
 completed V180 endpoints and earlier useful strengths remain comparisons;
 they are not rerun. Atomic sampler backward prevents a bit-exact retraining
@@ -136,3 +144,27 @@ These helpers and the completion controller are separate source snapshots.
 The controller adopts the original training owner, runs the full audits/review/
 tables/render once, and stops for actual inspection. The original 737-source
 worker remains unchanged. [Exact preparation evidence](results/v181-flat-spatial-comparison-preparation-v1.json).
+
+## Completed actual comparison
+
+Both raw/EMA endpoints finish all 822 fixed inputs, with 1,644 exact frozen
+replays, 144 ADC identities, 1,500 network/projection and 7,500 sampler calls.
+Independent quality audit checks 6,576 input bindings, 72 RGB plus 72 residual
+arrays, 53,772,288 addition channels, 582 native metric scalars, 278 Decimal
+means and 750 input-only raw/EMA evidence pairs. All 60 actual figures/12 native
+triplets in 15 original-detail sheets were inspected, including both fine cab
+ROIs/profiles/JPEGs and main sky/building/foliage/coarse fence. Real references
+remain qualified and unscored. The prepared fixtures above remain separate.
+
+The loss recovers quieter spatial error at both endpoints, with weaker mesh
+and natural fine-band response. EMA quiet total RMS falls 0.96% / 0.35% versus
+V180, but quiet total changes −0.214% / +0.109% versus V172. Native views show
+slightly reduced fine structure over persistent broad colored mottle; no clearly
+recovered new real cab crossings. This is a useful local quiet/detail option,
+not a combined solution. The full report preserves all 17 methods, 28 contrasts
+and 1,050 cells alongside earlier strengths. Both strict CPU exports and the
+actual viewer retain eight per-method checkpoint states.
+All 480 actual browser crops/36,864,000 RGB channels match their source PNGs
+exactly; raw/EMA metadata, default pairing, click/F flipping and navigation pass.
+[Actual browser proof](results/v181-flat-spatial-native-viewer-verification-v1.json) ·
+[Independent publication verification](results/v181-flat-spatial-evidence-publication-verification-v1.json).

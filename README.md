@@ -42,6 +42,15 @@ fine cab crossings remain incomplete. Both endpoints, independent audits and
 60 actually viewed figures are complete. Retain this stronger detail architecture
 alongside the earlier quiet and flat strengths.
 
+The completed [V181 spatial-loss variant](docs/flat-spatial-evidence-comparison.md)
+recovers quiet-field performance on the local architecture: EMA quiet spatial
+RMS falls **0.47–1.15% versus V180 on all 32 inputs**. Mesh response falls
+**8.75% to 4.150% of GT**, still 5.78% above global V178. Natural fine-band
+response also falls; real cab crossings and broad mottle remain unresolved.
+Retain this quieter option beside V180's stronger response and V172's balanced
+comparison. Both endpoints, independent audits and 60 actually viewed figures
+are complete.
+
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |
 | V120 Small | Broad photo/camera results and complete 102MP RGB16 checks | Fine foliage, mesh, neon and dark-field mottling |
@@ -55,6 +64,7 @@ alongside the earlier quiet and flat strengths.
 | [V175 fresh-noise raw](docs/fresh-noise-matching.md) | Quiet RMS −0.14–0.27% versus V172, with nearly unchanged mesh response | 11/32 quiet inputs worsen; ISO6400 flat RMS +0.09%, natural band response slips and fine crossings remain weak |
 | [V178 measured phase evidence](docs/phase-evidence-comparison.md) | Mesh response +0.92% versus matched control, reaching 3.924% of GT; EMA quiet total −0.05–0.09% versus V172 | Slightly higher quiet spatial error versus control; EMA ISO6400 flat RMS +0.12% versus V172, no clear real crossing recovery |
 | [V180 local phase evidence](docs/local-phase-evidence-comparison.md) | Mesh response +15.2–15.9% versus global V178, reaching 4.52–4.55% of GT; same parameter budget | Quiet spatial RMS +0.76–1.05%; broad/fine mottle and missing real cab crossings remain |
+| [V181 clean-flat spatial loss](docs/flat-spatial-evidence-comparison.md) | EMA quiet spatial RMS −0.47–1.15% on all 32 inputs versus V180; mesh response still 5.78% above global V178 | Mesh response −8.75% versus V180 to 4.150% of GT; fine-band response falls and real crossings/broad mottle remain |
 | [V158 regional DC](docs/regional-dc-regret.md) | Quiet RMS −1.93–2.63% versus matched MSE; all 32 inputs improve | Small regressions versus V143, persistent real detail loss |
 
 No model combines these strengths. The [released V170 RAW matching comparison](docs/nonlocal-raw-comparison.md)
@@ -68,15 +78,16 @@ optical blur. [Data pipeline](docs/training-pipeline.md) · [Source review](docs
 
 ## Current 100% crops
 
-Open the local [V180 local/global native-pixel viewer](docs/images/v180-local-phase-evidence-v1/native-viewer.html),
+Open the local [V181 loss-comparison native-pixel viewer](docs/images/v181-flat-spatial-evidence-v1/native-viewer.html),
+[V180 viewer](docs/images/v180-local-phase-evidence-v1/native-viewer.html),
 [V178 viewer](docs/images/v178-phase-evidence-v1/native-viewer.html),
 [V175 viewer](docs/images/v175-fresh-noise-matching-v1/native-viewer.html),
 [V174 viewer](docs/images/v174-spread-matching-v1/native-viewer.html),
 [V173 viewer](docs/images/v173-weak-gradient-matching-v1/native-viewer.html) or
 [V172 viewer](docs/images/v172-local-noise-matching-v1/native-viewer.html). Click
 the flip tile or press **F**. All 160×160 browser crops retain the PNG pixels
-exactly. V180 opens with global V178 EMA versus local V180 EMA; both raw endpoints
-and V178 controls retain separate checkpoint metadata. V175 retains its modest raw quiet gain.
+exactly. V181 opens with V180 EMA versus V181 EMA; both raw endpoints and all
+four V178 states retain separate checkpoint metadata. V175 retains its modest raw quiet gain.
 
 [Optional periodic-detail native comparisons and failure views](docs/supported-wave-amplitude.md)
 remain available alongside the learned heads below.
@@ -124,9 +135,22 @@ are never resized. EMA export SHA256
 `a04d1db000d168c23ada05eb6b5a73015be8fbb4cc6f5ca1581f61d08ca9592d`.
 [Both endpoints, all prior strengths and complete metadata](docs/local-phase-evidence-comparison.md).
 
-![Mesh2302: noisy, V180 local evidence EMA, exact constructed GT](docs/images/v180-local-phase-evidence-v1/comparison-02.png)
+[V180 mesh2302 triplet](docs/images/v180-local-phase-evidence-v1/comparison-02.png) ·
+[V180 mesh2309 triplet](docs/images/v180-local-phase-evidence-v1/comparison-06.png).
 
-![Mesh2309: noisy, V180 local evidence EMA, exact constructed GT](docs/images/v180-local-phase-evidence-v1/comparison-06.png)
+Noisy → **V181 flat-spatial EMA** → exact constructed GT, ISO6400/12800 quiet
+fields. Spatial RMS falls **1.15% / 0.47% on all 32 inputs versus V180**;
+total quiet RMS falls 0.96% / 0.35%. Mesh response falls 8.75%, and broad mottle
+persists. Native 160×160 cells, ROI `[80,176,160,160]` in the same 512px RGGB
+contexts, exposure8/contrast40 about camera RGB
+`[.001500000013,.006000000052,.002666666871]`. Shot/read variance is
+.00128/6.5536e-6 or .00256/2.62144e-5; pixels are never resized.
+EMA export SHA256 `62a293c27b9f0443904ac76428578df0033b0c64336927e6188e62763ec51486`.
+[Both endpoints, mesh triplets and complete metadata](docs/flat-spatial-evidence-comparison.md).
+
+![ISO6400 quiet field: noisy, V181 flat-spatial EMA, exact constructed GT](docs/images/v181-flat-spatial-evidence-v1/comparison-36.png)
+
+![ISO12800 quiet field: noisy, V181 flat-spatial EMA, exact constructed GT](docs/images/v181-flat-spatial-evidence-v1/comparison-40.png)
 
 Noisy → **V173 gradient EMA** → exact constructed GT, ISO6400 and ISO12800
 quiet fields. Mean spatial RMS falls **0.32–0.68% on all 32 inputs versus V172**;

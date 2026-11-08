@@ -8,7 +8,7 @@ the stronger [V161 detail prototype](harmonic-frequency-context.md),
 [V173](weak-gradient-matching.md)/[V174](spread-sample-matching.md) quiet gains.
 Their remaining weaknesses differ; none combines strong mesh recovery and
 clean quiet fields. The latest completed
-[native-pixel viewer](images/v180-local-phase-evidence-v1/native-viewer.html) retains
+[native-pixel viewer](images/v181-flat-spatial-evidence-v1/native-viewer.html) retains
 both protected GFX scenes and the earlier useful comparators.
 
 The completed [V180 local-evidence comparison](local-phase-evidence-comparison.md)
@@ -19,12 +19,15 @@ Both endpoints, independent training/quality audits and all 60 native figures/
 12 triplets are complete and actually inspected. Fifteen methods retain the
 earlier detail, quiet and flat strengths.
 
-The [V181 clean-flat spatial loss](flat-spatial-evidence.md) now tests whether
-V180 can retain that gain with less quiet-region texture. It adds one target-only
-spatial-error term, keeping the architecture and old seven terms unchanged.
-All 55 focused CPU checks and two native CUDA updates/restoration pass; the
-900-update matched continuation and its full independent training audit have
-finished. Fixed raw/EMA review is running; V181 image quality remains unmeasured.
+The completed [V181 clean-flat spatial loss](flat-spatial-evidence-comparison.md)
+reduces EMA quiet spatial RMS **0.47–1.15% versus V180 on all 32 inputs**, with
+mesh response **−8.75% to 4.150% of GT**, still 5.78% above global V178. It
+retains the architecture and old seven terms. Natural fine-band response falls,
+broad mottle persists and real crossings remain weak. Retain the quieter recipe
+alongside V180's stronger detail and earlier balanced/quiet/flat strengths.
+Both endpoints/all 822 cases, full trace/five checkpoints, independent audits,
+two strict exports and all 60 actually inspected native figures/12 triplets
+are complete. [Loss implementation and preparation](flat-spatial-evidence.md).
 
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only

@@ -10,13 +10,16 @@ pass, with 60 actually inspected native figures/12 triplets. Fifteen methods,
 [Final evidence](results/v180-local-phase-evidence-final-v1.json) ·
 [Local/global viewer](images/v180-local-phase-evidence-v1/native-viewer.html).
 
-The [V181 flat spatial-error trial](flat-spatial-evidence.md) keeps V180's
-architecture and the original seven losses, adding one clean-target spatial
-term. All 55 focused CPU checks and two real native updates/FP32 totals/
-CPU-GPU gradients/genuine restoration pass. The same 900-update continuation
-has finished from the original V172 Adam/EMA initializer, with all 900 totals
-and five checkpoints passing independent audit. Raw/EMA review is running; V180 outputs
-remain comparisons. No trained V181 quality or actual viewing is claimed yet.
+The completed [V181 flat spatial-error trial](flat-spatial-evidence-comparison.md)
+keeps V180's architecture and original seven losses, adding one clean-target
+spatial term. EMA quiet spatial RMS falls **0.47–1.15% on all 32 inputs versus
+V180**, while mesh response falls **8.75% to 4.150% of GT**. It retains 5.78%
+more mean response than global V178, with weaker natural fine-band response,
+missing real crossings and persistent broad mottle. Both endpoints/all 822
+cases, full 900-total/five-checkpoint audit, quality audit, two strict exports
+and all 60 actual native figures/12 triplets are complete. Seventeen methods,
+28 contrasts and 1,050 cells retain earlier strengths. The [implementation](flat-spatial-evidence.md)
+preserves CPU/CUDA checks and preparation fixtures separately from actual quality.
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of
