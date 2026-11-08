@@ -1,0 +1,1340 @@
+{
+  "status": "six-exact-V172-replays-offset-observations",
+  "protocol": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-offset-usage-v1/protocol-v1.json",
+    "sha256": "de99d9be5605d7bc989ff3525236a6665448434ab555a92b160088abfae1b05f",
+    "contents": {
+      "owner": {
+        "pid": 158785,
+        "created": 1794098706.46
+      },
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/probe-v174-offset-usage-v1.py",
+        "sha256": "86361feb41714d4135ab62cb83a1857cec7e0e0a5a01f845007c4c34c3e2e482",
+        "text": "\"\"\"Observe six fixed V172 EMA forwards without altering predictions or weights.\"\"\"\nimport os,time\nfrom pathlib import Path\nimport numpy as np,psutil,torch\nfrom demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail\nfrom demosaic.prediction_archive import fingerprint\nfrom profile_raw_kernel_inference import model_hash\nfrom train_directional_bank_trial import read,ref,save,guard\nrepo=Path('/home/dllu/proj/demosaic');root=repo/'.cache/quality-20261107/V174-offset-usage-v1';assert not root.exists();root.mkdir()\nplan=read(repo/'.cache/quality-20261107/V172-local-noise-matching-v1/plan-v1.json');guard(plan)\nexport=read(repo/'docs/results/v172-local-noise-matching-final-v1.json')['checkpoints']['EMA'];assert ref(export['export']['path'])==export['export']\nselected=['mesh-seed2026112302-present-iso6400-prior-RGGB','mesh-seed2026112302-absent-iso6400-prior-RGGB','mesh-seed2026112309-present-iso6400-prior-RGGB','main-overcast-sky','mesh-nominal','mesh-profile3879']\ndesign={c['id']:c for c in read(plan['design']['path'])['observations']};scores=read(repo/'.cache/quality-20261107/V172-local-noise-matching-v1/scores-method-labels-v2.json');expected={r['id']:r['values'] for r in scores['rows'] if r['method']=='V172-EMA'}\nowner=dict(pid=os.getpid(),created=psutil.Process().create_time());save(root/'protocol-v1.json',dict(owner=owner,source=dict(ref(__file__),text=Path(__file__).read_text()),selected=selected,checkpoint=export,design=plan['design'],expected_wrapper_calls=6,expected_sampler_calls=30,new_training_updates=0,new_source_noise_draws=0,scope='Six reused inputs;offset-displacement observation only. Output fingerprints must replay V172 exactly. Component sample displacements are not whole-model receptive fields or causal RGB contributions.'))\nos.nice(10);os.sched_setaffinity(0,sorted(os.sched_getaffinity(0))[:2]);torch.set_num_threads(2);torch.set_num_interop_threads(1);torch.set_float32_matmul_precision('highest');torch.backends.cuda.matmul.allow_tf32=torch.backends.cudnn.allow_tf32=False;torch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True;torch.use_deterministic_algorithms(True,warn_only=True);torch.cuda.set_per_process_memory_fraction(24*2**30/torch.cuda.get_device_properties(0).total_memory);torch.ops.load_library(plan['sampling_library']['path'])\nstate=torch.load(export['export']['path'],map_location='cpu',weights_only=True);module=LateLocalNoiseMatchingDetail(**state['module_config']);module.load_state_dict(state['state_dict'],strict=True);assert model_hash(module)==export['module_hash'];module.cuda().eval();before=model_hash(module);cpu_rng=torch.get_rng_state().clone();cuda_rng=torch.cuda.get_rng_state().clone()\ncounts=dict(wrapper=0,frozen=0,network=0,sampler=0);observations=[];captured={}\nfor name,child in [('wrapper',module),('frozen',module.frozen),('network',module.network)]:child.register_forward_hook(lambda *args,name=name:counts.__setitem__(name,counts[name]+1))\nscales={'down1.0':2,'down2.0':4,'body.0':8,'up2.1':4,'up1.1':2}\nfor name,child in module.network.named_modules():\n if type(child).__name__=='NonlocalBlock':\n  child.register_forward_hook(lambda *args:counts.__setitem__('sampler',counts['sampler']+1))\n  child.offset_cnn.register_forward_hook(lambda m,a,out,name=name:captured.__setitem__(name,out.detach().cpu().numpy()))\nfor identifier in selected:\n case=design[identifier];assert ref(case['arrays']['path'])==case['arrays'] and ref(case['parent']['path'])==case['parent'];a=dict(np.load(case['arrays']['path']));batch={k:torch.from_numpy(a[k]).cuda() for k in ['packed','variance','colors','wb']};base=torch.from_numpy(np.load(case['parent']['path'])).cuda();captured.clear()\n with torch.inference_mode():output=module(base,*(batch[k] for k in ['packed','variance','colors','wb']))\n value=output.cpu().numpy();assert fingerprint(value)==expected[identifier] and set(captured)==set(scales);blocks=[]\n for name,raw in captured.items():\n  n,c,h,w=raw.shape;assert n==1 and c==18;offset=9*np.tanh(raw.astype(np.float64).reshape(1,9,2,h,w));grid=np.asarray([(y,x) for y in [-1,0,1] for x in [-1,0,1]],np.float64).reshape(1,9,2,1,1);disp=(offset+grid)*scales[name];distance=np.sqrt(np.sum(disp**2,axis=2));learned=np.sqrt(np.sum((offset*scales[name])**2,axis=2))\n  blocks.append(dict(name=name,native_pixels_per_feature=scales[name],raw_shape=list(raw.shape),raw_values=fingerprint(raw),learned_offset_distance_native_percentiles=np.percentile(learned,[0,50,90,99,100]).tolist(),total_sample_distance_native_percentiles=np.percentile(distance,[0,50,90,99,100]).tolist(),fraction_total_distance_above_16=float(np.mean(distance>16)),fraction_total_distance_above_32=float(np.mean(distance>32)),tanh_saturation_fraction=float(np.mean(np.abs(np.tanh(raw.astype(np.float64)))>.9))))\n observations.append(dict(id=identifier,input=case['arrays'],parent=case['parent'],output=expected[identifier],blocks=blocks));print(identifier,[(b['name'],round(b['total_sample_distance_native_percentiles'][2],3),round(b['total_sample_distance_native_percentiles'][-1],3)) for b in blocks],flush=True)\n del output,batch,base,value\nassert counts==dict(wrapper=6,frozen=6,network=6,sampler=30) and model_hash(module)==before and torch.equal(cpu_rng,torch.get_rng_state()) and torch.equal(cuda_rng,torch.cuda.get_rng_state())\nsave(root/'result-v1.json',dict(status='six-V172-EMA-replays-offset-usage-observed',protocol=ref(root/'protocol-v1.json'),owner=owner,observations=observations,counts=counts,weights_unchanged=True,RNG_unchanged=True,peak_CUDA_bytes=torch.cuda.max_memory_allocated(),new_parent_DINO_calls=0,new_source_noise_draws=0,new_training_updates=0,scope='Displacement distributions at five nested matching blocks on six reused inputs;not causal influence,full-pipeline receptive field or a new quality/model claim.'))\nprint('PASS6 exact V172 replays;30 sampler forwards;offset statistics only',flush=True)\n"
+      },
+      "selected": [
+        "mesh-seed2026112302-present-iso6400-prior-RGGB",
+        "mesh-seed2026112302-absent-iso6400-prior-RGGB",
+        "mesh-seed2026112309-present-iso6400-prior-RGGB",
+        "main-overcast-sky",
+        "mesh-nominal",
+        "mesh-profile3879"
+      ],
+      "checkpoint": {
+        "export": {
+          "path": "/mnt/external/demosaic/quality-20261107/V172-local-noise-matching-v1/exports/local-noise-EMA-step1000.pt",
+          "sha256": "0103e5dc59102c849b5ce456f1de24ae3e3e30ec4019f16dc102a26dca0867c1"
+        },
+        "module_hash": "e57d262960d546543aed4f7a4e3a088922c5b2333bfa6c6d4f4a54917d65f697",
+        "module_config": {
+          "width": 16,
+          "max_search": 9.0
+        },
+        "frozen_module_hash": "a152045e5ad24e35e5e9e523f2ddec54cced5e68004d8cbfc077607aeb7facb8",
+        "trainable_parameters": 2088906,
+        "trainable_tensors": 141,
+        "full_state_tensors": 188
+      },
+      "design": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/quality-design-v1.json",
+        "sha256": "90a0f9e44813f55581fedc64fbab9a01559d79c7edbe37c48b9b642fe08800f0"
+      },
+      "expected_wrapper_calls": 6,
+      "expected_sampler_calls": 30,
+      "new_training_updates": 0,
+      "new_source_noise_draws": 0,
+      "scope": "Six reused inputs;offset-displacement observation only. Output fingerprints must replay V172 exactly. Component sample displacements are not whole-model receptive fields or causal RGB contributions."
+    }
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-offset-usage-v1/result-v1.json",
+    "sha256": "0433c1d8846ac1f2f36024b4eb3e857e7c62c12c27ab8d7a4174372828700da7",
+    "contents": {
+      "status": "six-V172-EMA-replays-offset-usage-observed",
+      "protocol": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-offset-usage-v1/protocol-v1.json",
+        "sha256": "de99d9be5605d7bc989ff3525236a6665448434ab555a92b160088abfae1b05f"
+      },
+      "owner": {
+        "pid": 158785,
+        "created": 1794098706.46
+      },
+      "observations": [
+        {
+          "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112302-present-iso6400-prior-RGGB.npz",
+            "sha256": "b88ac3be4eeb5c4b88b6e3814ae41fe7920bcc7c0eda969761c4f5530234bd75"
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-016.npy",
+            "sha256": "b1724b86319c931b8c534f627bd4e9652c1ca4c2e2181e442747f1ca51f06d79"
+          },
+          "output": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "25f41e260d660be23b54bbaa0f56c4463dbb57ae5b77bb0fb6d5f60299a68e31"
+          },
+          "blocks": [
+            {
+              "name": "down1.0",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "02001374ac5900d7a578ae5dd52b1090b12f827428f20382f2a593a753c78e49"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.14260630238590183,
+                0.9881047682646156,
+                2.0211158107549565,
+                2.043163834834501,
+                2.0636536750963503
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.7373060224296099,
+                1.4643595953828576,
+                2.640468762181782,
+                2.643119358959586,
+                2.7183290435049807
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "down2.0",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "490f0ac24ffc294dee19914b70f62dc7d792e73d8fa469c3f4398dd643317779"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.12216398276811984,
+                0.17360565026993321,
+                0.31528590751206526,
+                0.315527734482682,
+                0.317110488374984
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3094177033520025,
+                4.2073579735797555,
+                5.807968253022094,
+                5.80819917243808,
+                5.80970491785055
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "body.0",
+              "native_pixels_per_feature": 8,
+              "raw_shape": [
+                1,
+                18,
+                64,
+                64
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  64,
+                  64
+                ],
+                "dtype": "<f4",
+                "sha256": "9c8f42b7249f516eb78f158eb07f3fa75443c65ca9b6af710f32826ca599a592"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.2911261197188654,
+                0.5914481911076337,
+                0.7253791833035389,
+                0.7257876858581673,
+                0.7328822429216765
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.6499414942634366,
+                8.624011190080253,
+                12.036197608538423,
+                12.036746151898699,
+                12.043655553272881
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up2.1",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "9a5c1a99460516aaee07da2e0b16f9bfe47a7d02f30fb748f2ea389346793fec"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.1580243156880636,
+                0.22666601019243104,
+                0.3933185332024133,
+                0.3933288626775748,
+                0.39909748612378304
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3558431731663072,
+                4.266332728060575,
+                5.907222555610696,
+                5.9072325082488115,
+                5.912990759068604
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up1.1",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "e86654985fff4c8ec5e5d8013a33aa11d0aa42f23652ba92b57c126bff9db890"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.2180736826624484,
+                1.3384044099081538,
+                1.8252197861427804,
+                1.8280861220524913,
+                1.8308574808678362
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.2180736826624484,
+                1.5053898333474316,
+                2.752717216148076,
+                2.753129122698486,
+                2.7535376546877735
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            }
+          ]
+        },
+        {
+          "id": "mesh-seed2026112302-absent-iso6400-prior-RGGB",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112302-absent-iso6400-prior-RGGB.npz",
+            "sha256": "c2adc4b6b194278cc7e99f6a9bf358e8bed49ccea2832669fb8635f247dccea8"
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-017.npy",
+            "sha256": "392ad2f2bc94bb4977fc7759605f6e0a88ada1ec3377001497b7a67f5add05aa"
+          },
+          "output": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "fbbd3fe8bfb6bad69b5bb6ea5fc08ac01bfd462b45ce94743311aecd180e72f7"
+          },
+          "blocks": [
+            {
+              "name": "down1.0",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "d101410072cd7634d79eead4bc17d903da44a13679afe6ba4ebdacdae7cef689"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.1438690374514172,
+                0.988047008495191,
+                2.021105006487403,
+                2.043196093046394,
+                2.0635455595244023
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.7382718117657168,
+                1.464393079062335,
+                2.6404818347645054,
+                2.6431154174959204,
+                2.717727180492253
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "down2.0",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "bbf7d2169cd9bd05f0b2cc09861916c4f60d31ebe9df5b9090b78c2e957f8b1c"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.12209914160488398,
+                0.17360601544793985,
+                0.3152896205180398,
+                0.3155252569583843,
+                0.3170734508199136
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3094544828959861,
+                4.207357985441783,
+                5.807971382795407,
+                5.8081965011991485,
+                5.809671007954271
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "body.0",
+              "native_pixels_per_feature": 8,
+              "raw_shape": [
+                1,
+                18,
+                64,
+                64
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  64,
+                  64
+                ],
+                "dtype": "<f4",
+                "sha256": "3bdcf557b7ead814114d8522403e9ff0d8dca1a082ae26e1ab2e73c47ccdbfbd"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.29112541335037584,
+                0.5914484498740467,
+                0.7253803617825191,
+                0.7257870799181626,
+                0.7328755543205148
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.649937294995931,
+                8.624011932678801,
+                12.03620073367801,
+                12.036740084560424,
+                12.04364902313897
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up2.1",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "6d9e21630b49ef52e77c7fc44021fcb20af2d856cdc969ecd5a83d90f411f5cb"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.15802373915132845,
+                0.2266660395523698,
+                0.39331852758413643,
+                0.3933288212830123,
+                0.39909643511270254
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3558422500632161,
+                4.266332758851991,
+                5.907222867962324,
+                5.9072324955796836,
+                5.912991442701164
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up1.1",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "e80c9b13c54c4f53450a31040ac2e01f118b97b813a662d84308c60f55073cdf"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.2181528051289775,
+                1.3383574182011788,
+                1.8252292952917877,
+                1.8280706042652866,
+                1.8308130099147937
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.2181528051289775,
+                1.5054335493465372,
+                2.7527187310517816,
+                2.7531269105200336,
+                2.753522985336369
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            }
+          ]
+        },
+        {
+          "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112309-present-iso6400-prior-RGGB.npz",
+            "sha256": "b9c69ce123091185791e5cac8da227b5993f5993950cff9bcc10ebd21b01f96d"
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-072.npy",
+            "sha256": "7587c7c3e7ef3323f12186838831a0fc02b0185d07041c1c6d2880c6dcc8219f"
+          },
+          "output": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "52d2a6e61ff5b1f1596f102aa0ee419e1e9f101ff59e757b3658bc92903a011c"
+          },
+          "blocks": [
+            {
+              "name": "down1.0",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "94d611502856f234ba3fda9463e9904d8ecc97fabd829a9253de0c69e4abd2ec"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.14326615316834412,
+                0.9927079607364635,
+                2.030435297283157,
+                2.052095846680232,
+                2.0739356307087147
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.737193320073316,
+                1.4617497224837979,
+                2.640037568778994,
+                2.6426878889079917,
+                2.7176530961770626
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "down2.0",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "e0e336f99c95839a725059df048efbbae1f71b95fc47699637ad16c7b8ee88ae"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.12208976554724697,
+                0.17360002918380785,
+                0.315273488995411,
+                0.31549974034111516,
+                0.31701940829624936
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.309412365649277,
+                4.207346635171353,
+                5.807955785802607,
+                5.808171495237334,
+                5.809638065108152
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "body.0",
+              "native_pixels_per_feature": 8,
+              "raw_shape": [
+                1,
+                18,
+                64,
+                64
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  64,
+                  64
+                ],
+                "dtype": "<f4",
+                "sha256": "52e458219c77619d38bd05813b952643c7cbfe9230459deff584cb84af6f391d"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.2911241592925946,
+                0.5914525774537718,
+                0.725381845404704,
+                0.7257980274540461,
+                0.7328742854347664
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.6499298461455097,
+                8.62401474823863,
+                12.03620781556549,
+                12.036747895640838,
+                12.043648244847626
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up2.1",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "3c7fb762a51aca27a8dd3430bd9d33a80beb549030db655d969788559360f4a4"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.15802396431924132,
+                0.2266660554174727,
+                0.3933147400377992,
+                0.393328690070647,
+                0.3990937364179771
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3558422294405957,
+                4.266332645061192,
+                5.907219838087165,
+                5.907232538248354,
+                5.912991012738112
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up1.1",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "27db47e7cf2a99c70abffc6c22ccc1b218c66193a9f26bb84d6c5a976d3f0e39"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.21804421628490672,
+                1.3383512565576328,
+                1.8252028696512035,
+                1.8279651129318182,
+                1.8302482840729186
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.21804421628490672,
+                1.505454023299376,
+                2.7527134978882666,
+                2.7531106303433184,
+                2.753447059121456
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            }
+          ]
+        },
+        {
+          "id": "main-overcast-sky",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+            "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v4/step5000/work/artifacts/predictions/prediction-080.npy",
+            "sha256": "ede8366d3c83a8608c209a7d78853db8c1d4e21707c758b1e96ac5399e3d0c05"
+          },
+          "output": {
+            "shape": [
+              1,
+              3,
+              512,
+              512
+            ],
+            "dtype": "<f4",
+            "sha256": "f8e587e90d664438608a11c397ff50847f85f4fc8ade77e3d896b408d04591c5"
+          },
+          "blocks": [
+            {
+              "name": "down1.0",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "4d32f6881c8a2ff5c42ddc861f91d865eca639a59b004af82994882c4e69b26c"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.14291022148608729,
+                0.9848589883319185,
+                2.0151678963607713,
+                2.0368508634557525,
+                2.0557123672356488
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.7363897630295283,
+                1.4661445820665766,
+                2.640831701768851,
+                2.643451815968539,
+                2.7179383771625805
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "down2.0",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "35e9f4a3f3f36eadf23a1a699153cc1bc952ff5229ee44975ce7a05f7feb30da"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.12209954844469516,
+                0.17360110127869027,
+                0.3152818795724751,
+                0.31550062895623554,
+                0.3170757252608433
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3094075287072503,
+                4.207348233179429,
+                5.807964201240835,
+                5.80817302626685,
+                5.809680023905452
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "body.0",
+              "native_pixels_per_feature": 8,
+              "raw_shape": [
+                1,
+                18,
+                64,
+                64
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  64,
+                  64
+                ],
+                "dtype": "<f4",
+                "sha256": "c40368371b55162c2cbf1dfb1bdd90789cd724681da7c1c1f4222e76e67d1a88"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.29112690375629474,
+                0.5914569879050238,
+                0.7253855763745596,
+                0.7258046368886237,
+                0.7328690885051443
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.6499443214292319,
+                8.624018507738366,
+                12.036211077229027,
+                12.036754401542668,
+                12.043642784633322
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up2.1",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                128,
+                128
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "16b9b597d987465732842944f80f0cbb4d699d816b3d8ed9be83456b4749a9d2"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.15802416002005612,
+                0.2266661553822876,
+                0.3933142310120121,
+                0.3933287297466612,
+                0.39909327464300987
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3558424539198945,
+                4.266332758112983,
+                5.907219324774964,
+                5.907232629426918,
+                5.912990180176046
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up1.1",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                256,
+                256
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "c8f8a74c9951720025d7a7db41cf9bd30ca1b8ac808867816bd0c164478ace2f"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.21803050985894543,
+                1.338174325936405,
+                1.8249872808666745,
+                1.8277823382859943,
+                1.830506627298737
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.21803050985894543,
+                1.5056223605465155,
+                2.7526818696737925,
+                2.7530845240366526,
+                2.753469006962524
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            }
+          ]
+        },
+        {
+          "id": "mesh-nominal",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v4/step5000/work/artifacts/predictions/prediction-084.npy",
+            "sha256": "aaded61070b7dc78f17e7212ac85fc357f6df0a384d51b9a1c95114e941f0391"
+          },
+          "output": {
+            "shape": [
+              1,
+              3,
+              768,
+              768
+            ],
+            "dtype": "<f4",
+            "sha256": "bb10c105012ce74f81d331f8a0fe5011da5ea1fa3be4132194b3e85c669954c2"
+          },
+          "blocks": [
+            {
+              "name": "down1.0",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                384,
+                384
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "1287d8db67888d033123c65e134da208150079e6c41294ce778e11a40e4c9b5c"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.14286817221980952,
+                0.9840940657221562,
+                2.0097575404083936,
+                2.045468412789286,
+                2.2192119058300754
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.735906057199074,
+                1.4664988137186092,
+                2.640529887124809,
+                2.6435526997908845,
+                2.718032700888432
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "down2.0",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                192,
+                192
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  192,
+                  192
+                ],
+                "dtype": "<f4",
+                "sha256": "528ed9bef510bb96c8d664c59e3a7df62751ce2d6da785918030c05809d26a05"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.12207854126785998,
+                0.17361463900213556,
+                0.31531898911065115,
+                0.3155658873413234,
+                0.31703748985353153
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.30941860804504595,
+                4.207372510813221,
+                5.808004655769153,
+                5.808243233251155,
+                5.809575489115626
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "body.0",
+              "native_pixels_per_feature": 8,
+              "raw_shape": [
+                1,
+                18,
+                96,
+                96
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  96,
+                  96
+                ],
+                "dtype": "<f4",
+                "sha256": "314d54c45ed39c62f9f3fb87059feb3b18c65e280efb14b2f9380f7050250a8a"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.2911236807879323,
+                0.5914914739412513,
+                0.7254126925039098,
+                0.7255471498789215,
+                0.7328585148371223
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.6499204681256784,
+                8.624047517802069,
+                12.03663170074155,
+                12.036771323187965,
+                12.043632556127266
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up2.1",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                192,
+                192
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  192,
+                  192
+                ],
+                "dtype": "<f4",
+                "sha256": "795f68be2242011531339f084a4d4bcebc1c7b36baffd9468316ea2aae87c604"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.15802608950751174,
+                0.22666753450457966,
+                0.3932853705654508,
+                0.3933342261592939,
+                0.3990720549868075
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.3558460127387625,
+                4.26633449578336,
+                5.907200264527376,
+                5.90723765254791,
+                5.912992218034718
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up1.1",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                384,
+                384
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "9c518b3b420e8ee4dec31a85e0334ec59542571a1cf8fdf7fb163c15193ea891"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.2180879755355783,
+                1.3377271365680072,
+                1.8242820187055726,
+                1.8270748772072285,
+                1.840846754578575
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.2180879755355783,
+                1.5061234869645719,
+                2.752565513945196,
+                2.7529592949612147,
+                2.7549764306070825
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            }
+          ]
+        },
+        {
+          "id": "mesh-profile3879",
+          "input": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "parent": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v4/step5000/work/artifacts/predictions/prediction-085.npy",
+            "sha256": "5a1884dc692d34207d33ca6b6423cabe2e4bf801620c8fb5c92222cc3ac08cf9"
+          },
+          "output": {
+            "shape": [
+              1,
+              3,
+              768,
+              768
+            ],
+            "dtype": "<f4",
+            "sha256": "8826803d280928703f3f347f9c36bec337e3663cd7ae2d211099ebdce5520a44"
+          },
+          "blocks": [
+            {
+              "name": "down1.0",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                384,
+                384
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "5eab3e3a6a04f431459e54a6fb5b99b99e5482e27742a2b95d2de8bfaa89b3ff"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.1428902478542589,
+                0.9908321112398715,
+                2.019120319045142,
+                2.057672547405322,
+                2.2199467899291454
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.7364833642573175,
+                1.4627825717477405,
+                2.639739485293641,
+                2.6433377518060115,
+                2.7180740892365987
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "down2.0",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                192,
+                192
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  192,
+                  192
+                ],
+                "dtype": "<f4",
+                "sha256": "507fe7f505ecfc817144875dfea99fb9a9b174e6996ea8189ab5e083f1f1ad2a"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.12210427865568022,
+                0.17362070678671437,
+                0.3153202591429838,
+                0.3155773155577938,
+                0.3171482194647925
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.30942435434234256,
+                4.207376329514247,
+                5.808005335282797,
+                5.808252765532467,
+                5.809702685645346
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "body.0",
+              "native_pixels_per_feature": 8,
+              "raw_shape": [
+                1,
+                18,
+                96,
+                96
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  96,
+                  96
+                ],
+                "dtype": "<f4",
+                "sha256": "cae3c204753fc3ebcb304ddb0b64f260ffaccfca835f0e52f2915c060c12f30f"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.2911299390873133,
+                0.5914861504849429,
+                0.7254124310460996,
+                0.7255470920484092,
+                0.732865585681767
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.6499464955999849,
+                8.6240444871443,
+                12.03663383453008,
+                12.036770963253652,
+                12.043638726657898
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up2.1",
+              "native_pixels_per_feature": 4,
+              "raw_shape": [
+                1,
+                18,
+                192,
+                192
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  192,
+                  192
+                ],
+                "dtype": "<f4",
+                "sha256": "1e77f1b30553336b49b8a892bc2345a1d36a274143089abb0a2deeaac99c040a"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.15802452463453304,
+                0.22666642837396578,
+                0.3933072048599605,
+                0.393330123246541,
+                0.3990823914341696
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.35584314871166717,
+                4.266332936749232,
+                5.907216360944311,
+                5.907234220594938,
+                5.912991842219806
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            },
+            {
+              "name": "up1.1",
+              "native_pixels_per_feature": 2,
+              "raw_shape": [
+                1,
+                18,
+                384,
+                384
+              ],
+              "raw_values": {
+                "shape": [
+                  1,
+                  18,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "4ff82f5efd1bac2faa2ff524bed7a1c0d429ccb810ad9496f1ff33a2bd0929e6"
+              },
+              "learned_offset_distance_native_percentiles": [
+                0.21806751204169164,
+                1.3362244717200509,
+                1.8223058193776365,
+                1.8254216629496256,
+                1.840414720093666
+              ],
+              "total_sample_distance_native_percentiles": [
+                0.21806751204169164,
+                1.507579914547326,
+                2.752298645308686,
+                2.7527399150552747,
+                2.754916531097756
+              ],
+              "fraction_total_distance_above_16": 0.0,
+              "fraction_total_distance_above_32": 0.0,
+              "tanh_saturation_fraction": 0.0
+            }
+          ]
+        }
+      ],
+      "counts": {
+        "wrapper": 6,
+        "frozen": 6,
+        "network": 6,
+        "sampler": 30
+      },
+      "weights_unchanged": true,
+      "RNG_unchanged": true,
+      "peak_CUDA_bytes": 2990868992,
+      "new_parent_DINO_calls": 0,
+      "new_source_noise_draws": 0,
+      "new_training_updates": 0,
+      "scope": "Displacement distributions at five nested matching blocks on six reused inputs;not causal influence,full-pipeline receptive field or a new quality/model claim."
+    }
+  },
+  "log": {
+    "path": "/home/dllu/proj/demosaic/.cache/v174-offset-probe-v1.log",
+    "sha256": "619008989ee0a6c06da7762d8cae5d1fc6bd3d621b86bda00c3f54b2fe05257c",
+    "text": "mesh-seed2026112302-present-iso6400-prior-RGGB [('down1.0', 2.64, 2.718), ('down2.0', 5.808, 5.81), ('body.0', 12.036, 12.044), ('up2.1', 5.907, 5.913), ('up1.1', 2.753, 2.754)]\nmesh-seed2026112302-absent-iso6400-prior-RGGB [('down1.0', 2.64, 2.718), ('down2.0', 5.808, 5.81), ('body.0', 12.036, 12.044), ('up2.1', 5.907, 5.913), ('up1.1', 2.753, 2.754)]\nmesh-seed2026112309-present-iso6400-prior-RGGB [('down1.0', 2.64, 2.718), ('down2.0', 5.808, 5.81), ('body.0', 12.036, 12.044), ('up2.1', 5.907, 5.913), ('up1.1', 2.753, 2.753)]\nmain-overcast-sky [('down1.0', 2.641, 2.718), ('down2.0', 5.808, 5.81), ('body.0', 12.036, 12.044), ('up2.1', 5.907, 5.913), ('up1.1', 2.753, 2.753)]\nmesh-nominal [('down1.0', 2.641, 2.718), ('down2.0', 5.808, 5.81), ('body.0', 12.037, 12.044), ('up2.1', 5.907, 5.913), ('up1.1', 2.753, 2.755)]\nmesh-profile3879 [('down1.0', 2.64, 2.718), ('down2.0', 5.808, 5.81), ('body.0', 12.037, 12.044), ('up2.1', 5.907, 5.913), ('up1.1', 2.752, 2.755)]\nPASS6 exact V172 replays;30 sampler forwards;offset statistics only\n"
+  },
+  "new_V172_matching_CUDA_calls": 6,
+  "new_V169_frozen_CUDA_calls": 6,
+  "nested_sampler_calls": 30,
+  "new_parent_DINO_calls": 0,
+  "new_source_noise_draws": 0,
+  "new_training_updates": 0,
+  "scope": "Six selected reused contexts;actual V172 predictions replay exactly. Positions reconstructed from captured pre-tanh offsets in NumPy FP64;not causal influence or full-model receptive fields."
+}

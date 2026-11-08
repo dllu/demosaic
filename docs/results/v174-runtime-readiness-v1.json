@@ -1,0 +1,71 @@
+{
+  "status": "pass-before-candidate-training-and-quality",
+  "CPU_tests": {
+    "path": "/home/dllu/proj/demosaic/.cache/v174-relevant-CPU-tests-v2.log",
+    "sha256": "e6f9c03a55f43376c15a41ed83b1ffc0429fa9eba9d2f26919fceb5109d6760e",
+    "text": "........................................................................ [ 54%]\n.............................................................            [100%]\n133 passed in 2.32s\n"
+  },
+  "relevant_CPU_tests": 133,
+  "new_CPU_test_cases": 10,
+  "runner": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-spread-matching-v1/work/scripts/train_spread_matching_trial.py",
+    "sha256": "b783be67dd0998ce36dbf64e2e0db6a62062a237cacc95503ca8a6f5567124ed"
+  },
+  "renderer": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-spread-matching-v1/work/scripts/render_spread_matching_trial.py",
+    "sha256": "784775031aee3f655454515238844af5bdfe4bf27793e237435a2001aa797934"
+  },
+  "metric_runtime": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-spread-matching-v1/metric-runtime-readiness-v1.json",
+    "sha256": "6f3816ad63ecd63ccfb7b3875e0d185b80d2fb6d879dcb7d8c0cf8560f33a58d",
+    "contents": {
+      "status": "pass-before-training-launch",
+      "stdout": "Frozen metric runtime ready without neural calls\n",
+      "stderr": "",
+      "new_neural_forwards": 0
+    }
+  },
+  "method_labels": [
+    "V174-raw",
+    "V174-EMA"
+  ],
+  "prior_panels_and_triplets_checked": true,
+  "initialization": {
+    "reference_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/plan-v1.json",
+      "sha256": "789638f16439f4c91b062af8cbaa3393f364a5cfd7a49bfa093751b242ae38df"
+    },
+    "reference_training": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/train-result-v1.json",
+      "sha256": "4c4ac7548f34b29da137c0244e6d105722a07bf3412130784fe3ead347e0fa40"
+    },
+    "objective": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/work/scripts/nonlocal_residual_objective.py",
+      "sha256": "7092e03fe933ef1a1d71092b13165ee35992af7334954bada097821037e9817f"
+    },
+    "unchanged_function_ASTs": [
+      "train",
+      "runtime",
+      "resources",
+      "tree_equal"
+    ],
+    "initializer": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-spread-matching-v1/work/scripts/spread_matching_offsets.py",
+      "sha256": "b127c61c525405bc02b91907579c76f9ccaa221064e396c86dfd60fa730d63a0"
+    },
+    "changed_initial_tensors": [
+      "network.down1.0.offset_cnn.cnn.10.bias",
+      "network.down2.0.offset_cnn.cnn.10.bias",
+      "network.body.0.offset_cnn.cnn.10.bias",
+      "network.up2.1.offset_cnn.cnn.10.bias",
+      "network.up1.1.offset_cnn.cnn.10.bias"
+    ],
+    "changed_initial_scalar_values": 60,
+    "other183_initial_tensors_exact": true,
+    "old_initial_module_hash": "2f8e7d5d46e86dddd5206f195e7115bcad8490e5af8d217dbd251c22d3746873",
+    "new_initial_module_hash": "20877e2cbc5b0c05004efa27a703cc5eca12f677add5b1cc73041ad274c13bab",
+    "new_initial_network_hash": "a95f6f00c8787de9af1fbcb43c44c5cb77fddcef8739a7b25d0e88794b35a6cf"
+  },
+  "new_candidate_neural_forwards": 0,
+  "new_source_noise_draws": 0
+}

@@ -1,5 +1,10 @@
 # Current method research
 
+The [V174 spread-sampling experiment](spread-sample-matching.md) is training
+V172's unchanged model and loss with wider initial matching positions. A six-input
+probe found its trained sample displacements stayed local. Only five bias vectors
+change; 133 CPU checks and native backward admission pass. Quality is pending.
+
 The [completed V173 gradient-loss experiment](weak-gradient-matching.md) lowers
 EMA quiet spatial RMS **0.32–0.68% versus V172**, improving all 32 inputs. Quiet
 total RMS falls 0.27–0.52%, and native512 total-flat means fall 0.25–0.30%.
