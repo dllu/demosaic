@@ -24,14 +24,18 @@ match exactly, with no successful prefix repeated. The nine-method report
 retains V161 detail and the earlier quiet/flat strengths. Strict exports and
 [240 exact browser crops](results/v175-native-viewer-verification-v1.json) pass.
 
-The [V180 local phase-evidence prototype](local-phase-evidence-matching.md)
+The [V180 local phase-evidence variant](local-phase-evidence-matching.md)
 replaces global coefficient fields with locally measured, interpolated fields
 at the same selected frequencies and parameter budget. All 112 focused CPU
 checks and six cached native feature cases pass: 85,196,800 FP64 map values
 match NumPy within 1.05e−12, and both V172 endpoints retain all 188 tensors
 exactly beside one zero adapter. The first rounding-sensitive test expectation
-and log are preserved. No actual matching/CUDA forward, optimizer update or
-new restored comparison has run; local halos/seams and quality remain open.
+and log are preserved. Actual CUDA admission now passes all 14 initial parity
+rows, both 142-tensor gradient probes, restoration, 170,393,600 feature values
+and 42,304 local powers. All 241 component events and two saved checkpoints pass
+independent CPU inspection. A single 900-update continuation now preserves
+V172's real Adam/EMA history and the same V178 recipe, retaining completed
+V178 comparisons without rerunning them. Restored quality remains unmeasured.
 
 The [completed V179 local-support diagnostic](local-phase-support.md) measures
 298,404 windows at 1,228 reused one-phase-selected bins. Local mean powers are

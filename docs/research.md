@@ -34,9 +34,12 @@ with the same 3,120-weight adapter and matching parameter budget. Default
 65-packed-pixel windows and 32-pixel stride follow the training-only support
 diagnostic. All 112 focused CPU tests pass; six native cases match NumPy across
 85,196,800 FP64 values, with maximum error 1.05e−12 and FP32 outputs equal to
-FP64 casts. This is numerical preparation, not restored quality. Interpolation
-changes noise covariance and can spread support or create seams; CUDA cost,
-actual matching gradients, training and detail/sky tradeoffs remain unmeasured.
+FP64 casts. This CPU preparation is separate from restored quality. Interpolation
+changes noise covariance and can spread support or create seams. Actual CUDA
+initial parity, gradients and restoration now pass; CPU/GPU map differences
+stay below 3e−8 and local-power differences below 7e−13. A 900-update continuation
+is running from the same V172 Adam/EMA history and cached V178 recipe. Real
+detail/sky tradeoffs remain unmeasured.
 The completed V178 workers retained their frozen recipe; V175's completed outcomes
 remain separate.
 

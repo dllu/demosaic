@@ -36,7 +36,8 @@ error rises slightly; broad mottle and real fine cab crossings remain unresolved
 All four endpoints, 72 actually viewed native figures and independent audits
 are complete. Retain this small mesh-response option alongside the earlier strengths.
 A [local-window variant](docs/local-phase-evidence-matching.md) has the same
-parameter budget and passes CPU numerical checks; it is also untrained.
+parameter budget, passes CPU/CUDA checks and is training on the same cached
+continuation. Its image quality remains pending.
 
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |

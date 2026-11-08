@@ -48,9 +48,10 @@ RGB and changes none of the queued model recipes or measured recommendations.
 
 The follow-on [V180 local-evidence variant](local-phase-evidence-matching.md)
 implements those spatial measurements with V178's parameter budget. All 112
-focused CPU checks and six native feature cases pass, including 85.2 million
-independent FP64 map comparisons. CUDA, training and image quality are untested;
-interpolation may still spread support or introduce grid artifacts.
+focused CPU checks and six native feature cases pass, followed by actual CUDA
+parity/gradient/restoration and local measurement checks. Its 900-update cached
+continuation is running; image quality remains unmeasured. Interpolation may
+still spread support or introduce grid artifacts.
 
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, with six observed coarsest p90 distances about

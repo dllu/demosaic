@@ -1,17 +1,64 @@
 # Local phase evidence for matching
 
-**V180 is an implemented, untrained variant.** It replaces V178's global
+**V180 is training after passed CUDA admission.** It replaces V178's global
 coefficient fields with local measurements at the same selected frequencies.
 The matching network, zero 80→39 adapter and **2,092,026 trainable parameters
 across 142 tensors** stay the same. Both inherited V172 endpoints load all
 188 existing tensors exactly; the additional 3,120 weights start at zero.
-No actual matching forward, CUDA admission, optimizer update or restored-image
-comparison has run for V180. Current model recommendations remain unchanged.
+Actual CUDA parity, gradients, save/restore and CPU/GPU local measurements pass.
+A 900-update continuation is running from V172's real optimizer/EMA history;
+restored-image quality remains unmeasured. Current measured choices remain available.
 
 [Model](../src/demosaic/late_local_phase_evidence_matching.py) ·
 [24 new CPU tests](../tests/test_late_local_phase_evidence_matching.py) ·
 [Native CPU profiler](../scripts/profile_local_phase_preparation.py) ·
 [Source bindings and preparation receipts](results/v180-local-phase-preparation-v1.json).
+
+## CUDA admission and continuation
+
+The [separate CUDA entry](../scripts/admit_local_phase_evidence_matching.py)
+requires V178's actual terminal, audited, viewed and verified publication.
+All 98 existing neural files remain unchanged. Seven cached cases cover four
+training domains, ADC, protected sky and cab evaluation. All **14 initial
+raw/EMA outputs are bit-exact against V172**, with no protected optimizer use.
+The 12 captured GPU feature fields check 170,393,600 coordinates and 42,304
+local-center powers against CPU. Maximum differences are **2.98e−8** and
+**6.90e−13**; grid geometry and selected bins match exactly. Fixed feature
+tolerances remain 1e−4; local powers use 1e−8 absolute/relative tolerance.
+
+Both actual fresh-Adam probe updates have nonzero gradients on all 142 tensors
+and all 3,120 adapter weights. Model, 142 Adam states and CPU/CUDA RNG restore
+exactly between updates, without replay. Post-update ADC/mixed-zero cells retain
+the frozen output exactly; constant RAW evidence stays zero and changing the
+other phase cannot change a selecting phase's bins/global power. Totals are
+32 wrapper/frozen, 27 matching, 135 sampler and 15 projection calls, with peak
+CUDA allocation **6.27 GiB**. The [CPU inspector](../scripts/inspect_local_phase_admission.py)
+independently checks all 241 component events and both strict checkpoints.
+These two fresh-Adam probe checkpoints are not training initializers.
+
+Single warm parity calls after startup take roughly 0.62–0.63 s versus
+0.57 s for the four-image 512px control and 0.29 s versus 0.24 s for the
+768px cab context. Cold mesh startup takes 5.01 s. These are observed admission
+calls, not repeated throughput benchmarks or full-frame timings.
+
+The [continuation entry](../scripts/train_local_phase_evidence_trial.py)
+uses the exact frozen V178 training engine with explicit module-local factory,
+root, method and prerequisite bindings. The local class/configuration/source
+are recorded even though its initial tensor hash equals global V178. All 141
+existing Adam states remain at 900, original moments/network EMA load exactly,
+and the adapter starts at zero without Adam history. The cached 1,000 rows,
+900 updates/3,600 images/100 ADC skips, seven-term objective, domain weights,
+learning-rate schedule and EMA decay match V178. Genuine row8 restoration
+has already passed; training resumes at row9 without replay.
+
+Completed V178 control/global-evidence raw/EMA results are retained as
+comparisons. They are not rerun; atomic sampler backward remains nondeterministic
+under the existing warn-only setting, so this is not bit-exact paired retraining.
+Both V180 endpoints will use all 822 fixed inputs and the same 36 native cases,
+followed by independent audit and actual inspection of mesh, quiet/flat,
+foliage/building/sky and both fine cab windows. No quality improvement follows
+from implementation admission. No new sensor/source/parent/DINO/RAW decode or
+original capture access occurs. [Actual admission and launch evidence](results/v180-local-phase-CUDA-admission-v1.json).
 
 ## Local measurements
 
@@ -106,14 +153,13 @@ discovery probabilities. Finite windows and interpolation spread support;
 halos, broad structure, grid seams, global peak mistakes, weak unknown
 frequencies and native aliases remain possible. The local window, nuisance
 fit, aggregation and interpolation change together, so equal parameter counts
-alone do not isolate a single cause. FP64 moments are a reference implementation
-with unmeasured CUDA speed and memory cost.
+alone do not isolate a single cause. FP64 moments are a reference implementation;
+the limited CUDA probe timings above do not establish full-frame cost.
 
-Actual CUDA feature parity, full-network zero-adapter parity and gradients,
-memory, genuine optimizer restoration, matched training and native restored
-comparisons remain necessary before judging usefulness. No new GPU job is
-queued for V180; V175's completed comparison and the running frozen V178 trial
-retain their existing recipes and source snapshots.
+Actual CUDA feature parity, full-network zero-adapter parity/gradients and
+genuine optimizer restoration now pass. The continuation and native restored
+comparisons remain necessary before judging usefulness. V175 and V178's
+completed comparisons retain their existing recipes and source snapshots.
 
 Both protected GFX families appear here only as cached input geometry, without
 reference decoding or RGB restoration. Originals and `/mnt/dataz` are unused;
