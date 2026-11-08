@@ -1,6 +1,6 @@
 # Matched RAW/innovation training above V195 (V197)
 
-**Training is running; image quality is not yet established.** The new architecture has passed [CPU/GPU admission and strict checkpoint inspection](innovation-wave-readout.md). The [input-selection diagnostic](innovation-frequency-selection.md) motivates targeting a missing direction through RAW-minus-current-output measurements. Current usable model choices remain [V195 Whole EMA and V187 EMA](current-model.md).
+**Both arms completed 900 updates and passed the independent training audit. Image quality is now being evaluated.** The new architecture has passed [CPU/GPU admission and strict checkpoint inspection](innovation-wave-readout.md). The [input-selection diagnostic](innovation-frequency-selection.md) motivates targeting a missing direction through RAW-minus-current-output measurements. Current usable model choices remain [V195 Whole EMA and V187 EMA](current-model.md). [Full four-endpoint evaluation](innovation-wave-evaluation.md).
 
 Both arms add a fresh 508-parameter head above the same frozen, trained V195 Whole EMA anchor. They start with identical 197-tensor full state, zero final output, fresh Adam/EMA clocks zero, and seed `202611080197`. The 193 anchor tensors include the prior V187 900-update wave stage followed by the additional V195 900-update stage; the new head's history is separate.
 
