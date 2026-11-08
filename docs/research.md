@@ -725,3 +725,4 @@ but only 21.25% mean / 1.18% median proximity to input-selected bins. Broadening
 at the same candidate count helps little. Strong global peaks also occur beside
 uniform quiet ROIs. These are diagnostic fractions, not recovery bounds or
 confidence. The completed [V187 pooled-selection trial](pooled-phase-wave-comparison.md) improves mesh and quiet means at the same parameter/training budget, while slightly worsening absent/flat controls. Pooling and rank allocation change together; neither phase is now a selection holdout.
+The [V188 allocation diagnostic](spectral-selection-diversity.md) supports testing wider peak separation at the same eight-slot budget. Mean template proximity rises from 24.84% to 25.93%, and weak-sector proximity improves, but the median is unchanged, tighter proximity falls and local quiet powers rise. These are spectral measurements, not denoising gains. V187 remains the latest trained comparison.

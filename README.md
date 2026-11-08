@@ -79,6 +79,8 @@ alone helps little; no new denoising gain is claimed.
 
 The completed [V187 pooled-selection readout](docs/pooled-phase-wave-comparison.md) is the current experimental wave option. At V185's same 508-parameter and 900-update budget, mesh response rises **5.23% raw / 3.64% EMA** to **5.227% / 5.359% of exact GT amplitude**; 168/256 present inputs improve in each state. EMA quiet spatial RMS falls **0.48–0.52%**, improving 27/32 cases. Absent RMS rises about 0.034% on all 256 inputs and fresh-flat RMS about 0.020–0.021% on all 48; false waves, mottle and missing real cab crossings remain. Both endpoints/all 822 cases, audits, 60 actually viewed native figures / 12 triplets and two strict exports are complete. [Sixteen-state native viewer](docs/images/v187-pooled-wave-v1/native-viewer.html) · [Exact evidence](docs/results/v187-pooled-wave-final-v1.json). V120 Small remains the general recommendation.
 
+The [V188 allocation diagnostic](docs/spectral-selection-diversity.md) supports testing wider peak separation at the same eight-slot budget. Mean template proximity rises from 24.84% to 25.93%, and weak-sector proximity improves, but the median is unchanged, tighter proximity falls and local quiet powers rise. These are spectral measurements, not denoising gains. V187 remains the latest trained comparison.
+
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
 **9.60% raw / 15.96% EMA**, reaching **4.865% / 5.148% of GT amplitude**.
