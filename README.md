@@ -14,14 +14,13 @@ EMA quiet spatial RMS falls 0.48–0.52%; absent and standalone-flat errors rise
 slightly. False waves, broad mottle and missing real crossings remain.
 [Full comparison](docs/pooled-phase-wave-comparison.md).
 
-The completed [V191 dense local spectral trial](docs/dense-local-spectrum-comparison.md)
-measures the full existing band in overlapping windows at the same 508-parameter /
-900-update budget. Mesh response falls **14.31% raw / 16.54% EMA** versus V187,
-to **4.479% / 4.473% of GT**. EMA quiet spatial RMS improves **0.296–0.339%** on
-26/32 cases, with small fresh-flat gains, but natural response falls and actual
-cab crossings do not clearly recover. V187 remains preferred. Both endpoints,
-audits, 60 viewed native figures / 12 triplets and two exports are complete.
-[Architecture](docs/dense-local-spectrum-readout.md) · [Exact evidence](docs/results/v191-dense-spectrum-final-v1.json).
+The completed [V193 larger dense-window trial](docs/large-dense-spectrum-comparison.md)
+raises mesh response **1.72% raw / 1.50% EMA** over V191 to **4.556% / 4.540% of GT**,
+with quiet spatial RMS **0.285–0.707% higher**. Response remains **12.84% / 15.29%
+below V187**, and real cab crossings remain incomplete. The measured dense-response
+gain and quiet cost are retained; V187 stays preferred. Both endpoints, audits,
+60 viewed native figures / 12 triplets and two exports are complete.
+[Implementation](docs/large-dense-spectrum-readout.md) · [Exact evidence](docs/results/v193-large-dense-final-v1.json).
 
 Useful strengths remain split across implementations:
 
@@ -49,12 +48,11 @@ optical blur. [Pipeline](docs/training-pipeline.md) · [Source review](docs/curr
 
 The [V192 measurement-support calculation](docs/dense-measurement-support.md) separates taper support from carrier-grid error. In its fixed analytic cases, Hann65 retains 23–48% of rectangular65 SNR power with nearest carriers; Hann129 retains 112–176%. This motivates a larger-window test, not a learned quality or flat-safety claim. No image/model inference or neural source changes occur.
 
-The [V193 larger-window configuration](docs/large-dense-spectrum-readout.md) passes native CPU/GPU admission with all 103 neural sources unchanged. Fresh 900-update training and the full checkpoint/trace audit are complete; both-endpoint quality review is running, so learned quality remains pending.
 
 ## Current 100% crops
 
-The [twenty-state native viewer](docs/images/v191-dense-spectrum-v1/native-viewer.html)
-opens V187 EMA versus V191 EMA. Select matching raw states to compare raw/raw;
+The [twenty-two-state native viewer](docs/images/v193-large-dense-v1/native-viewer.html)
+opens V191 EMA versus V193 EMA; V187 remains selectable. Select matching raw states to compare raw/raw;
 click the flip tile or press **F**. All 160×160 browser crops retain source PNG
 pixels exactly, with separate checkpoint metadata. Both standing GFX scenes and
 all older useful states remain available.
@@ -81,7 +79,7 @@ common +2EV. The independent ISO100 exposure is a qualitative reference,
 ![GFX fence: noisy, V120 restored, independent ISO100 reference](docs/images/v120-v121-fixed-Haar-GFX-v1/V120-chain-link-fence-fixed-Haar-triplet.png)
 
 The difficult fine green cab mesh uses held-out DSCF3842 ISO6400 and DSCF3835
-ISO100 plus both SOOC JPEGs. The [latest comparisons](docs/dense-local-spectrum-comparison.md)
+ISO100 plus both SOOC JPEGs. The [latest comparisons](docs/large-dense-spectrum-comparison.md)
 include both cab ROIs/profiles alongside main-scene sky, building, foliage and
 coarse fence. ISO100/AHD/JPEG views are qualitative, **not exact GT**.
 [Complete-frame optional detail comparisons](docs/supported-wave-amplitude.md) ·
