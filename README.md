@@ -29,8 +29,8 @@ much more conditional mesh evidence across larger areas. It supplies hidden GT
 and makes no new model-quality or flat-safety claim.
 A [CFA phase-split follow-up](docs/phase-frequency-evidence.md) tests whether
 input-only frequency selections repeat in separately measured green samples.
-An [untrained phase-evidence adapter](docs/phase-evidence-matching.md) now exposes
-those measurements to matching; CPU checks pass, with CUDA and quality pending.
+An [experimental phase-evidence adapter](docs/phase-evidence-matching.md) exposes
+those measurements to matching; CPU and CUDA admission pass, with quality pending.
 Its [guarded CUDA check](docs/phase-evidence-admission.md) has passed; the
 [matched continuation](docs/phase-evidence-training.md) is running, with quality pending.
 A [local-window variant](docs/local-phase-evidence-matching.md) has the same

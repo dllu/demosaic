@@ -22,7 +22,8 @@ diagnostic. All 112 focused CPU tests pass; six native cases match NumPy across
 FP64 casts. This is numerical preparation, not restored quality. Interpolation
 changes noise covariance and can spread support or create seams; CUDA cost,
 actual matching gradients, training and detail/sky tradeoffs remain unmeasured.
-The existing V175/V178 workers and their frozen recipes continue unchanged.
+The running V178 workers retain their frozen recipe; V175's completed outcomes
+remain separate.
 
 The [local-phase support diagnostic](local-phase-support.md) reuses V177's fixed
 primary bins and measures local affine-projected coefficients in the other
@@ -40,24 +41,25 @@ pair losses rise slightly. Standalone-flat anchor falls 0.558%, while photo
 flat-anchor rises 4.797%. Noise, parameters and LR change together, and these
 are moving-model training values rather than checkpoint quality. They supply
 no basis to assume that longer training has already recovered more strands;
-the fixed final detail/flat/native comparisons remain the next decision point.
+the final detail/flat/native outcomes are now available in the completed report above.
 
-The [V178 matched continuation draft](phase-evidence-training.md) compares one
+The running [V178 matched continuation](phase-evidence-training.md) compares one
 additional cached pass at the same raw/Adam/EMA starting point and budget.
 The existing 141 optimizer clocks continue from 900; the new adapter starts from 0
 and is included in EMA and restoration. Thirteen CPU state tests and actual
 checkpoint checks pass; the renderer is exercised only with labeled baseline
-fixtures. A CPU controller waits for admission before running the matched trial.
-No V178 training or quality is measured. Separately, V175's actual row-5,000
+fixtures. The controller has inspected passed admission and launched the control
+arm; V178 quality remains unmeasured. Separately, V175's actual row-5,000
 checkpoint/four-pass trace passes checks of all 141 Adam clocks at 4,500, all 47
 frozen tensors, 3,600 loss totals and 14,376 events with no extra inference or noise.
 
-The [V178 native CUDA admission](phase-evidence-admission.md) is prepared and
-waiting behind V175's complete GPU pipeline. It will check actual zero-adapter
-output parity, CPU/CUDA features, all 142 gradients, checkpoint/Adam/RNG restoration
-and post-update ADC/mixed-zero invariants. All 18 CPU launch-protocol tests pass;
-the frozen worker entry rejects the current live dependency before Torch import.
-This is implementation preparation; V178 has no trained-quality result yet.
+The [V178 native CUDA admission](phase-evidence-admission.md) has passed after
+V175's complete GPU pipeline. All 14 zero-adapter RGB comparisons are bit-exact;
+CPU/CUDA features differ by at most 2.00e−6 within fixed tolerance. Both probe
+updates have nonzero gradients on all 142 tensors, exact model/Adam/RNG
+restoration and post-update ADC/mixed-zero invariants. Peak allocation is
+6.27 GiB. The earlier 18 CPU protocol tests and dependency rejection remain
+preserved. These checks establish execution; V178 quality remains pending.
 
 The [V178 phase-evidence matching path](phase-evidence-matching.md) makes the
 V177 observations available to the matching network as continuous features.
@@ -68,8 +70,8 @@ already frozen component: the matching branch can directly use the measured
 waves while learning spatial support. It introduces no hard detection threshold
 or direct sinusoid-to-RGB correction. All 68 CPU checks and native feature/strict
 checkpoint probes pass, with the original FP32 phase-angle failure preserved.
-The model is untrained; CUDA behavior, actual matching gradients, detail recovery
-and noisy-flat costs remain unmeasured. V175 continues unchanged.
+The model is undergoing its matched trial after passed CUDA admission. Detail
+recovery and noisy-flat costs remain unmeasured; completed V175 results remain separate.
 
 The [V177 within-image CFA sample split](phase-frequency-evidence.md) closes a
 specific diagnostic gap: one green RAW phase selects an unknown frequency and

@@ -112,8 +112,8 @@ with unmeasured CUDA speed and memory cost.
 Actual CUDA feature parity, full-network zero-adapter parity and gradients,
 memory, genuine optimizer restoration, matched training and native restored
 comparisons remain necessary before judging usefulness. No new GPU job is
-queued for V180; V175 and the already frozen V178 admission/trial continue their
-existing recipes and source snapshots.
+queued for V180; V175's completed comparison and the running frozen V178 trial
+retain their existing recipes and source snapshots.
 
 Both protected GFX families appear here only as cached input geometry, without
 reference decoding or RGB restoration. Originals and `/mnt/dataz` are unused;

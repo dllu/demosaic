@@ -80,8 +80,8 @@ features rather than drawn wires; their network can already learn support from
 other inputs. This diagnostic does not show that V178 hallucinates, compare
 its restored RGB, or establish that another feature path will improve it.
 Native aliasing, weaker unknown frequencies, border support, FP32/GPU behavior
-and learned detail/flat tradeoffs still need testing. V175 and V178 continue
-their existing fixed recipes.
+and learned detail/flat tradeoffs still need testing. V175's completed comparison
+and the running V178 trial retain their separate fixed recipes.
 
 The follow-on [V180 local-evidence model](local-phase-evidence-matching.md)
 implements this hypothesis with V178's parameter layout. Its local FP64 maps

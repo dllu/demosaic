@@ -1,11 +1,12 @@
 # Measured phase evidence for the matching branch
 
-**V178 is an implemented, untrained model variant.** It adds a zero-initialized
+**V178 is undergoing a matched training trial.** It adds a zero-initialized
 3,120-parameter adapter that exposes separately measured RAW frequency evidence
 to the existing local-noise matching network. The adapter has real gradient
 flow in CPU test fixtures. All 188 existing V172 raw/EMA tensors load exactly.
-CUDA parity, actual matching gradients/memory, training and image quality remain
-pending; current restoration recommendations and native comparisons are unchanged.
+Actual CUDA initial parity, gradients, restoration and local ADC checks pass;
+completed training and image quality remain pending. Current restoration
+recommendations are unchanged, with the completed V175 comparisons available.
 
 The separate [V180 local-window variant](local-phase-evidence-matching.md)
 keeps this parameter layout and global selection, replacing the coefficient
@@ -16,9 +17,10 @@ untrained and does not alter the frozen V178 admission or matched trial.
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·
 [Native preparation and preserved prototype failure](results/v178-phase-evidence-preparation-v1.json).
 
-The [frozen CUDA admission](phase-evidence-admission.md) is queued after V175's
-complete GPU pipeline, with 18 additional CPU protocol checks and an actual
-frozen-entry dependency rejection before Torch import. It has not run on CUDA.
+The [completed CUDA admission](phase-evidence-admission.md) follows V175's
+complete GPU pipeline. All 14 initial old/new comparisons are bit-exact and
+both actual updates have nonzero gradients on all 142 trainable tensors.
+The earlier dependency rejection and 18 CPU protocol checks remain preserved.
 
 ## Path into the model
 
@@ -58,14 +60,15 @@ The new model has **2,092,026 trainable parameters** with the matching network
 enabled, including the new 3,120; the frozen component has 124,909 parameters.
 The initial adapter contribution is zero by construction. CPU fixtures verify
 bit-exact output equality at initialization, and real checkpoint checks verify
-all original tensors. This is not a claim of actual CUDA output parity yet.
+all original tensors. Actual CUDA output parity now passes all 14 native
+case/endpoint comparisons at the zero-adapter initialization.
 The new optimizer state must be initialized or explicitly extended; loading
 the old weights does not establish optimizer compatibility.
 
-A [matched continuation draft](phase-evidence-training.md) now verifies an
+A [matched continuation](phase-evidence-training.md) verifies an
 explicit extension on the real checkpoint: 141 old Adam states stay at 900,
 while the new adapter starts without optimizer history and participates in EMA.
-Thirteen additional CPU state checks pass; no training has launched.
+Thirteen additional CPU state checks pass; the actual control arm is training.
 
 ## Detail and flat-region limits
 
@@ -134,10 +137,9 @@ model-quality scores or visual restoration claims. Both scenes and siblings
 remain outside training. Originals and `/mnt/dataz` are not accessed. The
 standing ISO100 captures remain qualitative references, not GT.
 
-V175 continues in its original process with all 96 prior neural source files
-and 18 completion helpers unchanged. The new 97th neural file is a separate
-variant; it does not enter V175's frozen source tree. After GPU admission and
-training, this variant will need the full fixed comparison and native fence,
+V175 has completed with all 96 prior neural source files and 18 completion
+helpers unchanged. The separate 97th neural file does not enter V175's frozen
+source tree. After matched training, this variant still needs the full fixed comparison and native fence,
 foliage, building and sky views, including at least two unresized noisy/restored/GT
 crop triplets. Until then, use the [V172](local-noise-matching.md) and
-[V174](spread-sample-matching.md) reports for actual model quality.
+[V174](spread-sample-matching.md)/[V175](fresh-noise-matching.md) reports for actual model quality.

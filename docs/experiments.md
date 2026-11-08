@@ -43,24 +43,26 @@ and 350 independent Decimal means pass; training and final review stay fixed.
 V178's [independent CPU audits](phase-evidence-training.md#independent-audit-preparation)
 are implemented, with 34 checks, 2,000 adapted old trace rows, eight corruption
 rejections and a real V172 checkpoint restore. These are auditor checks, not
-new V178 training or quality results. All V178 workers remain queued.
+new V178 quality results. The actual trial is now running after passed admission.
 
-The [V178 one-pass matched draft](phase-evidence-training.md) implements control
+The running [V178 one-pass matched trial](phase-evidence-training.md) implements control
 and evidence training plus four-endpoint/822-case review. Real V172 checkpoint
 proofs retain 141 old Adam states at 900 and zero new-adapter history; 13 CPU state
 tests and frozen-entry gates pass. A marked CPU fixture checks 72 native figures/
-24 triplets with reused V172/V174 pixels. Actual CUDA admission and training
-remain pending, with one CPU controller waiting. V175 meanwhile reaches its real
+24 triplets with reused V172/V174 pixels. Actual CUDA admission passes, and
+the controller has launched the control arm. At an earlier boundary, V175 reached its real
 row-5,000 checkpoint: 4,500 total updates, all 141 Adam clocks at 4,500, all 47
 frozen tensors exact and 4,000 audited continuation rows, with 3,588 fresh
 batches and 3,600 exact FP32 loss totals.
 
-The [V178 CUDA admission queue](phase-evidence-admission.md) binds seven native
-cases, both V172 endpoints, the exact sampler and two real optimizer/restore
-probes. Its CPU watcher waits for completed V175 train/review/render owners and
-receipts before any CUDA work. All 18 protocol checks and actual frozen-entry
-guard/import checks pass; the live watcher has no Torch/CUDA libraries loaded.
-No admission GPU call, update or model-quality result has occurred yet.
+The completed [V178 CUDA admission](phase-evidence-admission.md) passes seven
+native cases at both old endpoints: all 14 RGB comparisons are bit-exact, with
+nonzero gradients on all 142 tensors in both probe updates. Model/Adam/RNG
+restoration, CPU/GPU features and ADC invariants pass. Actual totals are 32
+wrapper/frozen, 27 matching, 135 sampler and 15 projection calls; peak CUDA
+allocation is 6.27 GiB. The two fresh-Adam probe checkpoints pass CPU inspection.
+The matched trial separately restores V172's 900-update history. No V178 quality
+result is established by this admission.
 
 The [V178 model variant](phase-evidence-matching.md) is implemented and CPU
 prepared, with a zero 80→39 measured-phase-evidence projection above V172's
@@ -69,8 +71,8 @@ and frozen component, and applies no hard spectral cutoff or direct wave output.
 All 68 CPU checks pass; native FP64 features match independent NumPy across
 85,196,800 values, and both old endpoints retain all 188 tensors exactly.
 The initial FP32 carrier-angle failure/source are preserved and fixed using
-integer periodic phase, with unchanged tolerances. No actual matching forward
-or training has run; CUDA admission and full numerical/native quality remain.
+integer periodic phase, with unchanged tolerances. Actual CUDA admission now
+passes and matched training is running; full numerical/native quality remains.
 
 The [completed V177 phase-split diagnostic](phase-frequency-evidence.md)
 uses all 1,228 retained mesh member observations, selecting four frequencies

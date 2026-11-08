@@ -1,15 +1,19 @@
-# Matched continuation draft for phase evidence
+# Matched continuation for phase evidence
 
-The V178 training/review code is implemented and CPU drafted. **No training has
-launched.** Actual [CUDA admission](phase-evidence-admission.md) must finish
-before the draft can become a prepared GPU plan. This is a controlled test of
-the [phase-evidence variant](phase-evidence-matching.md), not a new quality result.
+**The actual V178 matched trial is running.** Its
+[CUDA admission](phase-evidence-admission.md) has passed and the controller has
+inspected both real admission checkpoints. The prepared GPU plan binds that
+result and V175's completed scores/figures; the control arm has started from
+V172's real raw/Adam/EMA history. Evidence training and the four-endpoint quality
+review follow the control. No V178 quality gain is established yet.
 
 [Training and review](../scripts/train_phase_evidence_trial.py) ·
 [Adam/EMA state handling](../scripts/phase_evidence_training_state.py) ·
 [State tests](../tests/test_phase_evidence_training_state.py) ·
 [Native renderer](../scripts/render_phase_evidence_trial.py) ·
 [CPU draft and checks](results/v178-matched-trial-CPU-draft-v1.json).
+
+[Completed admission and actual trial-start bindings](results/v178-CUDA-admission-completed-v1.json).
 
 ## Same starting history and budget
 
@@ -27,7 +31,7 @@ seven loss terms and domain weights stay unchanged. Both use the same row-based
 gradient clip 1 and EMA rule. The evidence arm changes the feature path and adds
 3,120 parameters jointly; it is not an isolation of information from capacity.
 
-This is separate from V175's larger fresh-noise recipe. V175 will remain an
+This is separate from V175's larger fresh-noise recipe. Completed V175 remains an
 explicit comparison with its own strengths and costs; it is not the matched
 control for this one-pass fork. A later useful initializer can change without
 reinterpreting the current fixed experiment.
@@ -50,10 +54,10 @@ though actual GPU loading usually creates new storage.
 The completed real-checkpoint CPU draft verifies all 141 old Adam states at 900,
 all old weights/EMA exact in both arms and the new adapter at no-history/zero.
 It loads one existing checkpoint, performs no actual matching/DINO/sampler
-forward or optimizer update and does not initialize CUDA. The frozen actual
-`prepare` entry rejects the absent admission result before importing Torch;
-the training entry rejects the absent prepared plan before any CUDA call or
-training claim.
+forward or optimizer update and does not initialize CUDA. At draft time the
+frozen actual `prepare` entry rejected the absent admission result before
+importing Torch; training likewise rejected the absent prepared plan before
+any CUDA call or training claim. Those checks remain historical evidence.
 
 Checkpoints are planned at rows 8/250/500/750/1000. The row 8 checkpoint must be
 genuinely restored into a fresh module, with model, Adam, EMA and CPU/CUDA RNG
@@ -113,7 +117,7 @@ fields in this structural fixture are simulated. One real V172 checkpoint
 restores all 141 original Adam states at 900 and its raw/EMA weights exactly on
 CPU. No actual model forward or optimizer update occurs in this preparation.
 Actual frozen imports/source gates pass, and both audit entries reject the
-absent prepared plan. No actual V178 training or quality audit is complete.
+then-absent prepared plan. No complete V178 training or quality audit is available yet.
 
 After the actual workers terminate successfully, the auditor will check both
 complete training traces, all ten checkpoints, distinct adapter/network clocks,
@@ -207,18 +211,18 @@ with a 2 GiB forecast and 48 GiB local reserve plus margin. This uses recovered
 local headroom while preserving the external 111 GiB reserve and existing
 V175/admission forecasts. No old evidence is removed or moved.
 
-Formal preparation must bind the actual passed CUDA admission and V175's
-completed scores/figures, verify that all 97 neural source files match the
-admitted variant, and check current resources. Launch wrappers use frozen code
+Actual preparation binds the passed CUDA admission and V175's completed
+scores/figures, verifies the original 97 neural source files against the admitted
+snapshot, and checks current resources. Launch wrappers use frozen code
 and gate each stage on the preceding actual owner/result. The control runs
 before evidence, and both complete before review. No stage automatically
 restarts a failed scientific prefix. The current CPU draft does not authorize
 code to bypass missing admission or results.
 
-A single CPU controller is now waiting for the admission watcher to terminate
-successfully. It will inspect both actual admission checkpoints and their
-142 fresh Adam states, nonzero adapter weights, frozen tensors and restore
-evidence before preparing the trial. It waits for resources, runs each matched
-stage once, renders native comparisons, and stops for actual image viewing.
-Its source and launch identity are sealed; the publication receipt records the
-observed waiting state. No V178 training or quality worker is running yet.
+A single CPU controller has inspected both actual admission checkpoints and
+their 142 fresh Adam states, nonzero adapter weights, frozen tensors and restore
+evidence. It prepared the trial and launched the original control owner. It
+waits for resources, runs each matched stage once, renders native comparisons,
+and stops for actual image viewing. Its source and launch identity remain
+sealed. Current progress is recorded in the completed-admission receipt;
+full V178 quality and actual native viewing remain pending.
