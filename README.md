@@ -51,8 +51,8 @@ The [V192 measurement-support calculation](docs/dense-measurement-support.md) se
 
 The [directional check](docs/mesh-directional-response.md) shows how whole-pattern
 response can hide missing crossings. A [balanced-response loss](docs/directional-pair-response.md)
-now passes CPU math and native-derivative checks; matched training and real/flat
-quality validation remain pending.
+now passes CPU math, native derivatives and GPU/head-state checks. Matched training
+is running; real-photo and flat-region quality validation remains pending.
 
 ## Current 100% crops
 

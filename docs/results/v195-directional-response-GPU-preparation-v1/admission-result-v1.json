@@ -1,0 +1,315 @@
+{
+  "status": "pass-V195-V187-EMA-parity-both-response-gradients-and-restoration",
+  "owner": {
+    "pid": 1572512,
+    "created": 1794169080.96
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-admission-v1/plan-v1.json",
+    "sha256": "5d8268775d57c2a29b096da3f4e047c9de5d5722d94722518ef948f91a65b8a2"
+  },
+  "parities": [
+    {
+      "case": "training-mesh-step1",
+      "native_values": 3145728,
+      "V187_EMA_initial_bit_exact": true,
+      "noisy": true,
+      "nonzero_head_values": 3145728,
+      "CPU_GPU_head_maximum_difference": 5.587935447692871e-09
+    },
+    {
+      "case": "training-photo-step2",
+      "native_values": 786432,
+      "V187_EMA_initial_bit_exact": true,
+      "noisy": true,
+      "nonzero_head_values": 786432,
+      "CPU_GPU_head_maximum_difference": 1.5133991837501526e-09
+    },
+    {
+      "case": "training-mixed-step4",
+      "native_values": 3145728,
+      "V187_EMA_initial_bit_exact": true,
+      "noisy": true,
+      "nonzero_head_values": 3145728,
+      "CPU_GPU_head_maximum_difference": 1.4901161193847656e-08
+    },
+    {
+      "case": "training-flat-step8",
+      "native_values": 3145728,
+      "V187_EMA_initial_bit_exact": true,
+      "noisy": true,
+      "nonzero_head_values": 3145728,
+      "CPU_GPU_head_maximum_difference": 1.862645149230957e-09
+    },
+    {
+      "case": "training-ADC-step3",
+      "native_values": 3145728,
+      "V187_EMA_initial_bit_exact": true,
+      "noisy": false
+    },
+    {
+      "case": "main-overcast-sky",
+      "native_values": 786432,
+      "V187_EMA_initial_bit_exact": true,
+      "noisy": true,
+      "nonzero_head_values": 786432,
+      "CPU_GPU_head_maximum_difference": 1.3969838619232178e-09
+    },
+    {
+      "case": "mesh-nominal",
+      "native_values": 1769472,
+      "V187_EMA_initial_bit_exact": true,
+      "noisy": true,
+      "nonzero_head_values": 1769472,
+      "CPU_GPU_head_maximum_difference": 1.4901161193847656e-08
+    }
+  ],
+  "records": [
+    {
+      "mode": "whole",
+      "update": 1,
+      "domain": "mesh",
+      "case": "training-mesh-step1",
+      "loss": 2.4053144454956055,
+      "terms": {
+        "pixel": 0.02397197298705578,
+        "gradient": 0.00953015685081482,
+        "local_regret": 3.136273517156951e-05,
+        "DC_regret": 2.203732719863183e-06,
+        "flat_anchor": 0.044301729649305344,
+        "pair_difference": 0.24308574199676514,
+        "pair_common": 0.1049952358007431,
+        "flat_spatial": 0.15759724378585815,
+        "coherent_response": 0.3527697026729584,
+        "response_addition": 0.3527697026729584
+      },
+      "ten_term_FP32_total_exact": true,
+      "mask_pixels": 771129,
+      "gradient_norm": 7.71629524230957,
+      "parameter_gradient_coordinates": 508,
+      "nonzero_gradients": {
+        "context.weight": 288,
+        "context.bias": 16,
+        "mixing.weight": 192,
+        "mixing.bias": 12
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 1.6450881958007812e-05,
+      "response_gradient_coordinates": 3145728,
+      "response_gradient_maximum_difference": 0.0,
+      "independent_response_loss": 0.3527697026729584,
+      "EMA_decay": 0.18181818181818182,
+      "Adam": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          1.0
+        ]
+      },
+      "module_hash": "cda77a867a79d4a5b53c592808b23be1af5e2abf14e21b3718d91489e61564cf",
+      "counts": {
+        "wrapper": 15,
+        "frozen": 15,
+        "network": 13,
+        "sampler": 65,
+        "projection": 13
+      }
+    },
+    {
+      "mode": "whole",
+      "update": 2,
+      "domain": "mixed",
+      "case": "training-mixed-step4",
+      "loss": 0.1008826345205307,
+      "terms": {
+        "pixel": 0.024397771805524826,
+        "gradient": 0.00881779845803976,
+        "local_regret": 0.0009186193346977234,
+        "DC_regret": 1.7754940927261487e-05,
+        "flat_anchor": 0.05524306744337082,
+        "pair_difference": 0.0,
+        "pair_common": 0.0,
+        "flat_spatial": 0.23813308775424957,
+        "coherent_response": 0.0,
+        "response_addition": 0.0
+      },
+      "ten_term_FP32_total_exact": true,
+      "mask_pixels": 957167,
+      "gradient_norm": 1.8321630954742432,
+      "parameter_gradient_coordinates": 508,
+      "nonzero_gradients": {
+        "context.weight": 288,
+        "context.bias": 16,
+        "mixing.weight": 192,
+        "mixing.bias": 12
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 1.2516975402832031e-06,
+      "response_gradient_coordinates": 3145728,
+      "response_gradient_maximum_difference": 0.0,
+      "independent_response_loss": 0.0,
+      "EMA_decay": 0.25,
+      "Adam": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          2.0
+        ]
+      },
+      "module_hash": "3984d971d41ec1743e2aefe51cba3949f7c7dfdc01552e9c16c854b9e1a16152",
+      "counts": {
+        "wrapper": 16,
+        "frozen": 16,
+        "network": 14,
+        "sampler": 70,
+        "projection": 14
+      }
+    },
+    {
+      "mode": "directional",
+      "update": 1,
+      "domain": "mesh",
+      "case": "training-mesh-step1",
+      "loss": 2.3824684619903564,
+      "terms": {
+        "pixel": 0.02397197298705578,
+        "gradient": 0.00953015685081482,
+        "local_regret": 3.136273517156951e-05,
+        "DC_regret": 2.203732719863183e-06,
+        "flat_anchor": 0.044301729649305344,
+        "pair_difference": 0.24308574199676514,
+        "pair_common": 0.1049952358007431,
+        "flat_spatial": 0.15759724378585815,
+        "coherent_response": 0.3527697026729584,
+        "response_addition": 0.32992371916770935
+      },
+      "ten_term_FP32_total_exact": true,
+      "mask_pixels": 771129,
+      "gradient_norm": 7.104557991027832,
+      "parameter_gradient_coordinates": 508,
+      "nonzero_gradients": {
+        "context.weight": 288,
+        "context.bias": 16,
+        "mixing.weight": 192,
+        "mixing.bias": 12
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 9.5367431640625e-06,
+      "response_gradient_coordinates": 3145728,
+      "response_gradient_maximum_difference": 0.0,
+      "independent_response_loss": 0.32992372504674355,
+      "EMA_decay": 0.18181818181818182,
+      "Adam": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          1.0
+        ]
+      },
+      "module_hash": "b26a4f31694077e037aa6303e4c634d33df6b7c35a2e59b3c2cbf79314afdcdd",
+      "counts": {
+        "wrapper": 17,
+        "frozen": 17,
+        "network": 15,
+        "sampler": 75,
+        "projection": 15
+      }
+    },
+    {
+      "mode": "directional",
+      "update": 2,
+      "domain": "mixed",
+      "case": "training-mixed-step4",
+      "loss": 0.10088302940130234,
+      "terms": {
+        "pixel": 0.024397796019911766,
+        "gradient": 0.008817803114652634,
+        "local_regret": 0.000918649195227772,
+        "DC_regret": 1.7755852240952663e-05,
+        "flat_anchor": 0.05524318665266037,
+        "pair_difference": 0.0,
+        "pair_common": 0.0,
+        "flat_spatial": 0.23813432455062866,
+        "coherent_response": 0.0,
+        "response_addition": 0.0
+      },
+      "ten_term_FP32_total_exact": true,
+      "mask_pixels": 957167,
+      "gradient_norm": 1.832192063331604,
+      "parameter_gradient_coordinates": 508,
+      "nonzero_gradients": {
+        "context.weight": 288,
+        "context.bias": 16,
+        "mixing.weight": 192,
+        "mixing.bias": 12
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 1.6093254089355469e-06,
+      "response_gradient_coordinates": 3145728,
+      "response_gradient_maximum_difference": 0.0,
+      "independent_response_loss": 0.0,
+      "EMA_decay": 0.25,
+      "Adam": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          2.0
+        ]
+      },
+      "module_hash": "5aa5a9b77e4567a5a3ca5f3dbf5642dab71a8c21aa2c72835e0d1f4f17cf342c",
+      "counts": {
+        "wrapper": 18,
+        "frozen": 18,
+        "network": 16,
+        "sampler": 80,
+        "projection": 16
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-admission-v1/artifacts/whole-probe-step1.pt",
+      "sha256": "ceca83434b4613ec9ec16914df034fd90e97c9074dd70bb54c26d4af4e0cd14e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-admission-v1/artifacts/whole-probe-step2.pt",
+      "sha256": "fcf0105efe3aa7825fe1fddaf9441c380200553735a5cb79fe21ef80309af15d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-admission-v1/artifacts/directional-probe-step1.pt",
+      "sha256": "8e5b79272be7c02145cf882cac423cd9d9ab0f548d187632824159bbdcde4b26"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-admission-v1/artifacts/directional-probe-step2.pt",
+      "sha256": "3c3399256449c056a1fdca5de9e9d1a0630d043536aacc7a254f3565350c6eb6"
+    }
+  ],
+  "restorations": [
+    {
+      "mode": "whole",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-admission-v1/artifacts/whole-probe-step1.pt",
+        "sha256": "ceca83434b4613ec9ec16914df034fd90e97c9074dd70bb54c26d4af4e0cd14e"
+      },
+      "model_Adam_EMA_CPU_CUDA_RNG_exact": true,
+      "repeated_prefix_forwards": 0
+    },
+    {
+      "mode": "directional",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-admission-v1/artifacts/directional-probe-step1.pt",
+        "sha256": "8e5b79272be7c02145cf882cac423cd9d9ab0f548d187632824159bbdcde4b26"
+      },
+      "model_Adam_EMA_CPU_CUDA_RNG_exact": true,
+      "repeated_prefix_forwards": 0
+    }
+  ],
+  "counts": {
+    "wrapper": 18,
+    "frozen": 18,
+    "network": 16,
+    "sampler": 80,
+    "projection": 16
+  },
+  "peak_CUDA_allocated_bytes": 6714942464,
+  "inherited189_unchanged": true,
+  "new_source_noise_draws": 0,
+  "protected_optimizer_inputs": 0,
+  "scope": "Same completed V187 EMA full state,508 head parameters/four tensors;189 inherited V183 EMA tensors frozen and all103 neural sources unchanged. Seven native initial parities against a separately strict-loaded V187 EMA model, six nonzero trained-head CPU/GPU readouts. Each loss mode starts identical donor weights with fresh Adam/EMA clocks0 and performs two training-only four-image updates(mesh,mixed), with real Model/Adam/EMA/CPU-CUDA RNG restoration after its first update. Check addition output derivatives on CPU and all508 head parameter derivatives against CPU replay of the GPU upstream gradient. Protected GFX inputs are parity-only. All nine earlier terms/masks retained; add.25domain-weight whole or directional response. Probes never initialize future training. No new source/noise,parent/DINO inference,RAW decode or original/dataz access. Localforecast.05GiB above40GiB reserve; no external writes. Old architecture/CPU geometry contracts reused, not counted as new."
+}
