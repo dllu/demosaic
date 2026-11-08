@@ -1,5 +1,15 @@
 # Current method research
 
+The [V175 fresh-noise continuation](fresh-noise-matching.md) tests a longer
+training recipe at V172's unchanged model and seven-term objective. It starts
+from the actual raw/Adam/EMA states, adds 8,100 updates and regenerates physical
+sensor noise with exact new V143/DINO parents on 8,073 batches. Three clipped
+photo rows per pass retain their original observations/parents rather than
+substitute a clipped target for clean sensor data. The full 1,000-row preflight
+and 54 focused tests pass. Its budget, fresh realizations and reheated learning
+rate change together; individual effects are not isolated. Training has
+launched, quality is pending, and V172 remains the matching baseline.
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions: six observed coarsest p90 distances are about
 90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls

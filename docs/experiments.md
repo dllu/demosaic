@@ -1,5 +1,20 @@
 # Experiment index
 
+The [V175 fresh-noise continuation](fresh-noise-matching.md) has launched a
+fixed nine-pass extension of V172: 8,100 additional updates/32,400 images,
+8,073 fresh sensor batches/new frozen-parent roots, 27 retained noisy batches
+and 900 ADC skips. Model, source/calibration/target bank and seven-term loss
+stay fixed; training budget, noise realizations and learning-rate schedule
+change together. All 1,000 input bindings are checked, including independent
+Bayer reconstruction and explicit exclusion of three clipped-target cases
+from re-noising. The v1 launch stopped before its training claim/CUDA work
+because its snapshot omitted the sensor helper. That source, plan and log are
+preserved; the new v2 frozen worker passes actual imports/strict CPU model,
+parent and DINO loads plus 54 focused tests. No successful prefix was repeated.
+Both endpoints/all 822 cases/native crops remain scheduled; quality is unmeasured.
+[Preparation](results/v175-fresh-noise-matching-preparation-v2.json) ·
+[Actual frozen-worker readiness](results/v175-frozen-worker-readiness-v1.json).
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 changes only five existing offset bias vectors/60 scalar values at V172's model,
 loss and cached inputs. Six observed coarsest p90 sample distances remain about

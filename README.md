@@ -17,6 +17,11 @@ the balanced matching baseline for detail work. The separate six-input
 [V175 path-removal probe](docs/results/v175-local-shortcut-diagnostic-v1.json)
 finds a nonzero matching contribution; it does not establish why detail is lost.
 
+The [V175 fresh-noise continuation](docs/fresh-noise-matching.md) extends V172
+with 8,100 further updates and newly computed frozen-parent outputs for 8,073
+fresh sensor batches. Quality is pending; the current model choices below stay
+available while this training recipe is tested.
+
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |
 | V120 Small | Broad photo/camera results and complete 102MP RGB16 checks | Fine foliage, mesh, neon and dark-field mottling |

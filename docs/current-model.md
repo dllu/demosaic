@@ -1,5 +1,9 @@
 # Current model choices
 
+The [V175 fresh-noise continuation](fresh-noise-matching.md) is training from
+V172's actual model/Adam/EMA states. Its final quality comparison is pending;
+the useful measured choices below remain current.
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, but fine crossings remain missing. EMA quiet
 total RMS falls **0.12–0.17% versus V172**, DC color error falls 0.36–0.43%, and

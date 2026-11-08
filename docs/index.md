@@ -1,5 +1,14 @@
 # Documentation guide
 
+The [V175 fresh-noise continuation](fresh-noise-matching.md) has launched from
+V172's actual raw model/Adam/EMA states. It plans 8,100 further updates, with
+8,073 fresh sensor batches and exact new frozen V143/DINO parents; three clipped
+photo rows per pass retain their old observations. All 1,000 scene bindings and
+54 focused CPU tests pass. The corrected frozen worker also passes actual
+imports and strict CPU parent/matching loads. Quality remains pending.
+[Preparation and preserved rejections](results/v175-fresh-noise-matching-preparation-v2.json) ·
+[Frozen-worker readiness](results/v175-frozen-worker-readiness-v1.json).
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, with six observed coarsest p90 distances about
 90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls **0.12–0.17%**
