@@ -1,0 +1,35 @@
+{
+  "status": "pass-independent-QR-all1152linearrows-and768ratios-and16Decimalmeans",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V192-dense-support-v1/plan-v1.json",
+    "sha256": "b1a781902d025bed2ede2eb51c3f68b88722c980780ae28f0052ba424d6a4bb3"
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V192-dense-support-v1/result-v1.json",
+    "sha256": "56625d46e96bcb04bd79845acc2ea56f0d10697a72c5b6a6b0c1b41c736a8aae"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V192-dense-support-v1/work/scripts/audit_dense_measurement_support.py",
+    "sha256": "7fc4ff19687fbc3a32227106be6c517cf5175ac23f776cae4a1ff799a5701aec",
+    "text": "\"\"\"Independent QR rows, phase responses and Decimal analytical-support audit.\"\"\"\n\nimport gzip, json, sys, os, time\nfrom collections import defaultdict\nfrom decimal import Decimal, localcontext\nfrom pathlib import Path\nimport numpy as np\nimport psutil\nfrom dense_support_reference import reference\nfrom phase_admission_protocol import read, ref, owner_live\nfrom report_dense_measurement_support import ROOT, guard, save\n\n\ndef audit():\n    p, r = read(ROOT / \"plan-v1.json\"), read(ROOT / \"result-v1.json\")\n    guard(p)\n    assert ref(__file__) == p[\"auditor\"] and r[\"plan\"] == ref(ROOT / \"plan-v1.json\")\n    assert not owner_live(r[\"owner\"]) and r[\"owner\"] == read(ROOT / \"launch-v1.json\")[\"owner\"]\n    assert ref(r[\"measurements\"][\"path\"]) == r[\"measurements\"]\n    os.nice(10)\n    os.sched_setaffinity(0, [8, 9])\n    with gzip.open(r[\"measurements\"][\"path\"], \"rt\") as f:\n        rows = [json.loads(line) for line in f]\n    assert len(rows) == len(p[\"cases\"]) == 1152\n    maxima = {}\n    checks = 0\n    for case, row in zip(p[\"cases\"], rows, strict=True):\n        assert case[\"id\"] == row[\"id\"]\n        expected = reference(case)\n        for key, value in expected.items():\n            observed = np.asarray(row[key])\n            value = np.asarray(value)\n            error = float(abs(observed - value).max())\n            maxima[key] = max(maxima.get(key, 0), error)\n            np.testing.assert_allclose(observed, value, rtol=2e-10, atol=2e-10)\n            checks += value.size\n        assert row[\"maximum_affine_annihilation_error\"] < 1e-11\n    lookup = {c[\"id\"]: row for c, row in zip(p[\"cases\"], rows, strict=True)}\n    groups = defaultdict(dict)\n    for c in p[\"cases\"]:\n        groups[tuple(c[k] for k in [\"target\", \"position\", \"noise\", \"mode\"])][c[\"method\"]] = lookup[\n            c[\"id\"]\n        ]\n    measured = {\n        (q[\"target\"], q[\"position\"], q[\"noise\"], q[\"mode\"], q[\"method\"]): q for q in r[\"ratios\"]\n    }\n    assert len(measured) == 768\n    for key, values in groups.items():\n        for method in [\"hann65_grid65\", \"hann129_grid129\"]:\n            expected = (\n                values[method][\"phase_averaged_signal_to_noise_power\"]\n                / values[\"rect65_grid256\"][\"phase_averaged_signal_to_noise_power\"]\n            )\n            assert measured[*key, method][\"ratio_to_rect65\"] == expected\n    groups = defaultdict(list)\n    for q in r[\"ratios\"]:\n        groups[tuple(q[k] for k in [\"position\", \"noise\", \"mode\", \"method\"])].append(\n            q[\"ratio_to_rect65\"]\n        )\n    for s in r[\"summary\"]:\n        values = groups[tuple(s[k] for k in [\"position\", \"noise\", \"mode\", \"method\"])]\n        assert len(values) == s[\"cases\"] == 48\n        with localcontext() as ctx:\n            ctx.prec = 50\n            mean = float(sum(Decimal(str(v)) for v in values) / len(values))\n        assert (\n            abs(mean - s[\"mean\"]) < 1e-12\n            and s[\"median\"] == float(np.median(values))\n            and s[\"minimum\"] == min(values)\n            and s[\"maximum\"] == max(values)\n        )\n        assert s[\"above_one\"] == sum(v > 1 for v in values) and s[\"below_one\"] == sum(\n            v < 1 for v in values\n        )\n    assert len(groups) == 16 and \"torch\" not in sys.modules and \"rawpy\" not in sys.modules\n    guard(p)\n    save(\n        ROOT / \"verification-v1.json\",\n        {\n            \"status\": \"pass-independent-QR-all1152linearrows-and768ratios-and16Decimalmeans\",\n            \"plan\": ref(ROOT / \"plan-v1.json\"),\n            \"result\": ref(ROOT / \"result-v1.json\"),\n            \"source\": dict(ref(__file__), text=Path(__file__).read_text()),\n            \"owner\": {\"pid\": os.getpid(), \"created\": psutil.Process().create_time()},\n            \"independent_coordinate_checks\": checks,\n            \"independent_ratios\": 768,\n            \"Decimal_summary_means\": 16,\n            \"maximum_errors\": maxima,\n            \"new_neural_forwards\": 0,\n            \"new_source_noise_draws\": 0,\n        },\n    )\n    print(\"PASS1152independentQRrows/\", checks, \"coordinates/768ratios/16Decimalmeans\", flush=True)\n\n\nif __name__ == \"__main__\":\n    audit()\n"
+  },
+  "owner": {
+    "pid": 1410698,
+    "created": 1794161822.45
+  },
+  "independent_coordinate_checks": 12672,
+  "independent_ratios": 768,
+  "Decimal_summary_means": 16,
+  "maximum_errors": {
+    "measured_native_fyx": 0,
+    "cos_response_real_imag": 1.8474111129762605e-13,
+    "sin_response_real_imag": 1.1368683772161603e-13,
+    "noise_trace_variance": 8.215650382226158e-15,
+    "phase_averaged_signal_power": 5.4569682106375694e-12,
+    "phase_averaged_signal_to_noise_power": 8.86757334228605e-12,
+    "observed_pixels": 0,
+    "raw_taper_effective_sample_count_without_affine": 0
+  },
+  "new_neural_forwards": 0,
+  "new_source_noise_draws": 0
+}

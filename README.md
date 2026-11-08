@@ -47,6 +47,8 @@ options remain in [current choices](docs/current-model.md), the
 Training uses freely licensed photos, geometry before downsampling and zero
 optical blur. [Pipeline](docs/training-pipeline.md) · [Source review](docs/current-source-loss-review.md).
 
+The [V192 measurement-support calculation](docs/dense-measurement-support.md) separates taper support from carrier-grid error. In its fixed analytic cases, Hann65 retains 23–48% of rectangular65 SNR power with nearest carriers; Hann129 retains 112–176%. This motivates a larger-window test, not a learned quality or flat-safety claim. No image/model inference or neural source changes occur.
+
 ## Current 100% crops
 
 The [twenty-state native viewer](docs/images/v191-dense-spectrum-v1/native-viewer.html)

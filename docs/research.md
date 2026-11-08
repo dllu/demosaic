@@ -736,3 +736,6 @@ The [V188 allocation diagnostic](spectral-selection-diversity.md) found better w
 The August 2026 [DINOv3-guided JDD paper](https://arxiv.org/html/2608.09995v1) combines structural adaptation and auxiliary mosaic supervision. Its synthetic Gaussian, sRGB-derived benchmark leaves our physical-noise GFX task unverified. The reported stem-gradient limitation also matters for adapter design. These ideas need controlled tests here.
 
 The October 2026 [RAW exposure-restoration paper](https://arxiv.org/html/2610.28191v1) separates linear exposure correction from residual restoration and modulates low/high-frequency convolutional responses spatially. Our inference is that dense conditioned frequency features offer an alternative to sparse global selection. No code, weights or data are adopted, and neither reading changed the completed V189 protocol. [Reading scope and primary URLs](results/recent-jdd-reading-20261108-v1.json).
+
+
+The [V192 measurement-support calculation](dense-measurement-support.md) separates taper support from carrier-grid error. In its fixed analytic cases, Hann65 retains 23–48% of rectangular65 SNR power with nearest carriers; Hann129 retains 112–176%. This motivates a larger-window test, not a learned quality or flat-safety claim. No image/model inference or neural source changes occur.

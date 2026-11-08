@@ -529,3 +529,6 @@ at the same candidate count helps little. Strong global peaks also occur beside
 uniform quiet ROIs. These are diagnostic fractions, not recovery bounds or
 confidence. The completed [V187 pooled-selection trial](pooled-phase-wave-comparison.md) improves mesh and quiet means at the same parameter/training budget, while slightly worsening absent/flat controls. Pooling and rank allocation change together; neither phase is now a selection holdout.
 The [V188 allocation diagnostic](spectral-selection-diversity.md) found better weak-sector proximity with wider suppression, with unchanged whole-template median, lower tighter proximity and higher local quiet powers. The completed [V189 matched model test](spaced-pooled-wave-comparison.md) regresses on mesh/quiet quality, demonstrating that this proximity gain is not a reliable quality proxy. V187 remains preferred.
+
+
+The [V192 measurement-support calculation](dense-measurement-support.md) separates taper support from carrier-grid error. In its fixed analytic cases, Hann65 retains 23–48% of rectangular65 SNR power with nearest carriers; Hann129 retains 112–176%. This motivates a larger-window test, not a learned quality or flat-safety claim. No image/model inference or neural source changes occur.
