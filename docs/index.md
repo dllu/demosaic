@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [V177 CFA phase-split diagnostic](phase-frequency-evidence.md) selects
+frequencies from one green RAW phase and measures the other. Primary nominal
+power≥16 occurs in 170/614 present and 0/614 matched absent training cases;
+power≥4 admits six absent cases, or 71 when considering eight candidates.
+Thirty-three CPU tests and independent QR/DFT checks pass. This suggests a
+continuous model feature, with no restoration or calibrated flat-safety claim.
+
 The [V176 conditional-template diagnostic](mesh-template-evidence.md) finds
 substantially more evidence across larger areas of the 614 noisy training mesh
 pairs: green median known-template SNR rises from 0.653 at native16 to 7.360 at

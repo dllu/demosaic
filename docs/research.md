@@ -1,5 +1,17 @@
 # Current method research
 
+The [V177 within-image CFA sample split](phase-frequency-evidence.md) closes a
+specific diagnostic gap: one green RAW phase selects an unknown frequency and
+the other measures it, with GT entering only afterward. Primary nominal power≥16
+occurs in 170/614 present and 0/614 matched absent training cases. At≥4, six
+absent cases pass; considering eight candidates raises that to 71. This suggests
+using continuous repeatability evidence, with no calibrated detector or safe
+restoration claim. A strict power16 gate misses 204/374 cases whose V176
+conditional green SNR is≥5, and negative principal-band agreement occurs on
+reference-supported peaks. Native aliases, spatial support and weak evidence
+must be preserved rather than treating one signed spectral statistic as truth.
+All 33 CPU checks and independent QR/DFT verification pass; no model is trained.
+
 The [V176 training-template diagnostic](mesh-template-evidence.md) measures
 conditional evidence in all 614 retained noisy mesh pairs. Green median
 known-template SNR rises from 0.653 in the best native16 window to 7.360 over

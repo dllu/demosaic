@@ -25,6 +25,8 @@ available while this training recipe is tested.
 An [exact-template training diagnostic](docs/mesh-template-evidence.md) finds
 much more conditional mesh evidence across larger areas. It supplies hidden GT
 and makes no new model-quality or flat-safety claim.
+A [CFA phase-split follow-up](docs/phase-frequency-evidence.md) tests whether
+input-only frequency selections repeat in separately measured green samples.
 
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |

@@ -1,0 +1,94 @@
+{
+  "status": "pass-all1228-points8-edge-summaries16-table-cells3-exact-figures",
+  "recorded_local": "2026-11-07T19:23:26.041247-08:00",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v177-publication-v1.py",
+    "sha256": "e2ded84e48916a233041de4ee2ace165071a0f123f920249220ea05a1a25f893",
+    "text": "\"\"\"Verify public points,group summaries,claims,links and preserved live work.\"\"\"\nfrom datetime import datetime\nimport hashlib\nimport json\nimport math\nfrom pathlib import Path\nimport re\nfrom statistics import median\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO=Path('/home/dllu/proj/demosaic')\nROOT=REPO/'.cache/quality-20261107/V177-phase-frequency-holdout-v1'\n\ndef read(p):return json.loads(Path(p).read_text())\ndef ref(p):\n p=Path(p).absolute()\n with p.open('rb') as f:digest=hashlib.file_digest(f,'sha256').hexdigest()\n return {'path':str(p),'sha256':digest}\ndef equal(a,b):assert math.isclose(a,b,rel_tol=1e-13,abs_tol=1e-16),(a,b)\n\nsummary_path=REPO/'docs/results/v177-phase-frequency-holdout-v1.json'\ns=read(summary_path);result=read(s['full_result']['path']);plan=s['plan']['contents']\nassert ref(s['full_result']['path'])==s['full_result']\nassert ref(result['plan']['path'])==result['plan']=={k:s['plan'][k] for k in ['path','sha256']}\nassert read(result['plan']['path'])==plan\nassert read(ROOT/'independent-verification-v1.json')==s['independent_verification']['contents']\nassert ref(ROOT/'independent-verification-v1.json')=={k:s['independent_verification'][k] for k in ['path','sha256']}\nassert s['independent_verification']['contents']['independent_selected_bins']==384\nassert s['independent_verification']['contents']['independent_scalar_checks']==1920\nfor binding in plan['sources']+[s['sources']['publication']]:\n assert ref(binding['path'])['sha256']==binding['sha256']\n assert Path(binding['path']).read_text()==binding['text']\nassert '33 passed' in plan['CPU_tests']['text']\nassert ref(plan['superseded_preparation_plan']['path'])==plan['superseded_preparation_plan']\nassert ref(s['V176_template_result']['path'])==s['V176_template_result']\ntemplates={(r['step'],r['pair']):r['windows'][-1]['known_template_SNR'] for r in read(s['V176_template_result']['path'])['rows'] if r['phase_group']=='green'}\nrows={(r['step'],r['pair'],r['member']):r for r in result['rows']}\nassert len(rows)==len(s['plot_points'])==1228\nfor point in s['plot_points']:\n row=rows[(point['step'],point['pair'],point['member'])]\n assert point['primary']==row['directions'][0]['peaks'][0]\n assert point['fine_ladder']==row['fine_ladder']\n assert point['conditional_template_SNR']==templates[(row['step'],row['pair'])]\n peaks=[p for d in row['directions'] for p in d['peaks']]\n assert point['maximum_other_phase_power_over8']==max(p['other_phase_power'] for p in peaks)\n for edge in [1,4,16,64]:assert point['counts_other_power_at_least'][str(edge)]==sum(p['other_phase_power']>=edge for p in peaks)\nfor member,group in s['groups'].items():\n selected=[p for p in s['plot_points'] if p['member']==member]\n original=[r for r in rows.values() if r['member']==member]\n peaks=[p for r in original for d in r['directions'] for p in d['peaks']]\n assert len(selected)==614 and sum(p['fine_ladder'] for p in selected)==322 and len(peaks)==4912\n for name,key in [('primary_selection_power','selection_power'),('primary_other_phase_power','other_phase_power')]:\n  values=[p['primary'][key] for p in selected]\n  equal(group[name]['mean'],math.fsum(values)/len(values));assert group[name]['median']==median(values)\n for edge in [1,4,16,64]:\n  edge_group=group['descriptive_edges'][str(edge)]\n  passing=[p for p in peaks if p['other_phase_power']>=edge]\n  expected={\n   'primary_cases':sum(p['primary']['other_phase_power']>=edge for p in selected),\n   'any_of8_cases':sum(p['maximum_other_phase_power_over8']>=edge for p in selected),\n   'all_peaks':len(passing),\n   'passing_peaks_clean_other_power_below1':sum(p['clean_other_power']<1 for p in passing),\n   'passing_peaks_negative_principal_agreement':sum(p['signed_principal_phase_agreement']<0 for p in passing),\n   'primary_high_conditional_SNR_cases':sum(p['primary']['other_phase_power']>=edge and p['conditional_template_SNR']>=5 for p in selected),\n   'high_conditional_SNR_cases':sum(p['conditional_template_SNR']>=5 for p in selected)}\n  assert edge_group==expected\ndocs=[REPO/p for p in ['README.md','docs/phase-frequency-evidence.md','docs/index.md','docs/research.md','docs/experiments.md']]\nreport=(REPO/'docs/phase-frequency-evidence.md').read_text()\ntable_rows=[line.split('|')[1:-1] for line in report.splitlines() if re.match(r'\\|\u2265\\d+\\|',line)]\nassert len(table_rows)==4\ntable_cells=0\nfor line,edge in zip(table_rows,[1,4,16,64],strict=True):\n expected=[s['groups'][name]['descriptive_edges'][str(edge)][field] for field,name in [('primary_cases','present'),('primary_cases','absent'),('any_of8_cases','present'),('any_of8_cases','absent')]]\n assert [int(x.strip()) for x in line[1:]]==expected;table_cells+=4\nfigures=[]\nfor binding in s['figures']:\n external=Path(binding['path']);public=REPO/'docs/images/v177-phase-frequency-holdout-v1'/external.name\n assert ref(external)==binding and external.read_bytes()==public.read_bytes()\n figures.append(ref(public))\nlinks=0\nfor doc in docs:\n for target in re.findall(r'\\]\\(([^)]+)\\)',doc.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  assert (doc.parent/target.split('#')[0]).resolve().exists(),(doc,target)\n  links+=1\nlive=REPO/'.cache/quality-20261107/V175-fresh-noise-matching-v2'\nv175=read(live/'plan-v1.json')\nfor name,digest in v175['prior_neural_hashes'].items():assert ref(REPO/'src/demosaic'/name)['sha256']==digest\nhelpers=read(live/'postprocess-inputs-v1.json')['helpers']\nfor b in helpers:assert ref(b['path'])['sha256']==b['sha256']\nstatus=read(live/'train-status-v1.json');owner=status['owner'];process=psutil.Process(owner['pid'])\nassert process.create_time()==owner['created']\nwatch=read(live/'completion-watch-status-v1.json');p=psutil.Process(watch['owner']['pid']);assert p.create_time()==watch['owner']['created']\nassert status['status']=='training'\nreceipt={'status':'pass-all1228-points8-edge-summaries16-table-cells3-exact-figures',\n 'recorded_local':datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n 'summary':ref(summary_path),'figures':figures,'documents':[ref(p) for p in docs],\n 'points_verified':1228,'edge_summaries_verified':8,'table_cells_verified':table_cells,\n 'local_links_checked':links,'unchanged_neural_sources':len(v175['prior_neural_hashes']),\n 'unchanged_completion_helpers':len(helpers),'actual_chart_viewing':'Final PNG actually viewed;both panels have readable axes/legends,all points retained and descriptive16 line labeled in report.',\n 'observed_live_training':status,'observed_live_completion_watcher':watch,\n 'scope':'Publication verification only,no new inference,noise,source render,RAW decode or scientific prefix replay.'}\nout=REPO/'docs/results/v177-publication-verification-v1.json'\nwith out.open('x') as f:json.dump(receipt,f,indent=2);f.write('\\n')\nprint('PASS1228points8summaries16cells3figures96neural18helpers',flush=True)\n"
+  },
+  "summary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v177-phase-frequency-holdout-v1.json",
+    "sha256": "5504330cd23f3457fe82074028f454bbffe5109476a54b6ca75adcfe8ca95514"
+  },
+  "figures": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/v177-phase-frequency-holdout-v1/phase-frequency-v1.png",
+      "sha256": "aa317f246d7fbef12a571f5bc599b74686cf39fa568c72bad8274aa2d7fdc46d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/v177-phase-frequency-holdout-v1/phase-frequency-v1.svg",
+      "sha256": "3572f191fa91baf9a9329f58c7f0f33ca511ff5666fe68b50c52c844298bb44b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/v177-phase-frequency-holdout-v1/phase-frequency-v1.pdf",
+      "sha256": "19e601d2cf8a3cb86f8905665dc5433154f0d157ff0d8be7f0c5607865f1b0ca"
+    }
+  ],
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "73154e2bf32ac94d430d0f08ab22c61b22a5da54befd7db0233d7b0e04c70a8c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-frequency-evidence.md",
+      "sha256": "45c1d88a25757ce1a84ad79dd57e54d3fb319c2eb47624a57ba5b8f3b1edbac9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "9e8828bbeff475bdc2b01361064d568739372988c2a8e587d876f77d42313084"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "13a45bc6aa2dffb2248dbd68d28c669548f17ad71dcfbfde8bb4628c25bf4222"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "ca928f34aa9114074247a8c4f024edbf82d6787208cea5fd6adeb4238b86ef92"
+    }
+  ],
+  "points_verified": 1228,
+  "edge_summaries_verified": 8,
+  "table_cells_verified": 16,
+  "local_links_checked": 468,
+  "unchanged_neural_sources": 96,
+  "unchanged_completion_helpers": 18,
+  "actual_chart_viewing": "Final PNG actually viewed;both panels have readable axes/legends,all points retained and descriptive16 line labeled in report.",
+  "observed_live_training": {
+    "status": "training",
+    "owner": {
+      "pid": 274124,
+      "created": 1794102724.04
+    },
+    "step": 3040,
+    "continuation_row": 2040,
+    "updates": 1836,
+    "total_updates": 2736,
+    "skipped": 204,
+    "fresh_batches": 1830,
+    "cached_noisy_batches": 6,
+    "counts": {
+      "wrapper": 1836,
+      "frozen": 1836,
+      "network": 1836,
+      "sampler": 9180
+    },
+    "parent_counts": {
+      "parent": 1832,
+      "DINO": 1832
+    },
+    "peak_CUDA_bytes": 7075942912
+  },
+  "observed_live_completion_watcher": {
+    "status": "waiting-for-train",
+    "owner": {
+      "pid": 287357,
+      "created": 1794104682.2
+    },
+    "observed_unix_UTC": 1794108192.9936762,
+    "worker_owner": {
+      "pid": 274124,
+      "created": 1794102724.04
+    }
+  },
+  "scope": "Publication verification only,no new inference,noise,source render,RAW decode or scientific prefix replay."
+}

@@ -1,5 +1,15 @@
 # Experiment index
 
+The [completed V177 phase-split diagnostic](phase-frequency-evidence.md)
+uses all 1,228 retained mesh member observations, selecting four frequencies
+from each green CFA phase without target or other-phase selection inputs.
+Primary other-phase nominal power≥16 occurs in 170/614 present and 0/614 absent
+cases; power≥4 gives 231/6, with 303/71 when considering all eight records.
+It misses many GT-conditional high-SNR cases and is not deployed as a gate.
+All 33 CPU tests, 307 npz hashes, 1,535 used fingerprints, 9,824 journal bindings
+and 384 independently selected/DFT-checked bins pass. No RGB restoration, neural,
+noise or original-media calls; the fixed V175 recipe and model choices remain.
+
 The [completed V176 conditional-template diagnostic](mesh-template-evidence.md)
 analyzes all 614 noisy training mesh pairs at six context widths, using each
 member's marginal RAW separately. Median green template SNR rises from 0.653
