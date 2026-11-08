@@ -95,6 +95,50 @@ band fidelity and the standing real-photo weaknesses. Keep useful gains and
 costs visible without claiming blind generalization or noisy-sky safety from
 this reused development suite.
 
+## Independent audit preparation
+
+The [independent CPU auditor](../scripts/audit_phase_evidence_trial.py) is now
+implemented and frozen separately from the unchanged training code. All
+[34 audit checks](../tests/test_phase_evidence_trial_audit.py) pass. They include
+damaged loss, mask, source, call-count, evidence, ADC and reference records,
+missing summary columns and CPU restoration with CUDA RNG APIs forbidden.
+[Preparation, exact sources and preserved checks](results/v178-matched-trial-audit-preparation-v1.json).
+
+Two explicitly adapted copies of V172's existing trace exercise 2,000 rows and
+1,800 recorded FP32 loss totals; eight deliberately corrupted copies reject.
+Their V178 schedules, clocks and projection counts are simulated bookkeeping,
+not actual V178 execution. Six existing feature profiles also exercise metadata
+geometry and peak suppression using their saved bins/powers; cross/validity
+fields in this structural fixture are simulated. One real V172 checkpoint
+restores all 141 original Adam states at 900 and its raw/EMA weights exactly on
+CPU. No actual model forward or optimizer update occurs in this preparation.
+Actual frozen imports/source gates pass, and both audit entries reject the
+absent prepared plan. No actual V178 training or quality audit is complete.
+
+After the actual workers terminate successfully, the auditor will check both
+complete training traces, all ten checkpoints, distinct adapter/network clocks,
+raw/EMA states, saved RNG bytes and the unchanged frozen tensors. Quality checks
+cover all 3,288 durable rows, exact frozen/ADC bindings, source fingerprints,
+input-only evidence equality across raw/EMA, and independent Decimal summary
+means. All 144 saved native RGB arrays and 144 residual arrays are remeasured,
+including addition closure and detail/blank/quiet/flat metrics. Other outputs
+have fingerprints and in-process metrics rather than retained full arrays;
+the audit does not claim a full posthoc array check on all 822 inputs. Real
+ISO100/AHD/JPEG references remain unscored. Evidence metadata agreement does
+not independently recompute spectra or establish calibrated confidence.
+
+Run the sealed CPU entries after completion; they reject missing/live results:
+
+```bash
+set -e
+phase_trial_root=.cache/quality-20261107/V178-phase-evidence-trial-v1
+for phase in training quality; do
+  CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=2 \
+    PYTHONPATH="$phase_trial_root/work/src:$phase_trial_root/work/scripts" \
+    .venv/bin/python "$phase_trial_root/audit-work-v1/scripts/audit_phase_evidence_trial.py" "$phase"
+done
+```
+
 ## Storage and launch
 
 New trial checkpoints and native arrays are planned under its local

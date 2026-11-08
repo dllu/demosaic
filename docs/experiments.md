@@ -1,5 +1,10 @@
 # Experiment index
 
+V178's [independent CPU audits](phase-evidence-training.md#independent-audit-preparation)
+are implemented, with 34 checks, 2,000 adapted old trace rows, eight corruption
+rejections and a real V172 checkpoint restore. These are auditor checks, not
+new V178 training or quality results. All V178 workers remain queued.
+
 The [V178 one-pass matched draft](phase-evidence-training.md) implements control
 and evidence training plus four-endpoint/822-case review. Real V172 checkpoint
 proofs retain 141 old Adam states at 900 and zero new-adapter history; 13 CPU state

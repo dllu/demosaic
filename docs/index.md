@@ -1,5 +1,9 @@
 # Documentation guide
 
+V178's [independent audit preparation](phase-evidence-training.md#independent-audit-preparation)
+adds 34 CPU checks and sealed training/state/native-array validators. Old-record
+fixtures pass; actual V178 audits and quality remain pending behind training.
+
 The [V178 matched training/review draft](phase-evidence-training.md) preserves
 V172's real 900-step Adam/EMA history in both arms and starts only the new adapter
 at zero optimizer history. Thirteen state tests, actual checkpoint checks,

@@ -1,0 +1,147 @@
+{
+  "status": "pass-frozen-audit-preparation-sources-checks-live-owners-and-document-links",
+  "recorded_local": "2026-11-07T21:14:00.205584-08:00",
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v178-matched-trial-audit-preparation-v1.json",
+    "sha256": "6868eccce87122484d6a223bde60876a5d2828141c3a122127a1f1f6fcd3d57c"
+  },
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-training.md",
+      "sha256": "339426780b3dd53f84321740533a58fc01d6c26a6154fe14c75cd1f8d15b976b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "3dece20b93b88186c6e0455abb4641c4dc9ea818ff372dc69b1fc41916e31e8b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "287178cff948b9486ef0189289cd230e6bc95b3963218e533ed1fa47af1926bf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-21-08-26-phase-evidence-independent-audits.md",
+      "sha256": "2dd0552c4a41406c0ea4b916003c18e875e7aafbf2d86b5099202c0678ff66f4"
+    }
+  ],
+  "local_links_checked": 293,
+  "trial_frozen_files_checked": 713,
+  "trial_immutable_inputs_checked": 9,
+  "additive_frozen_helpers_checked": 2,
+  "actual_CPU_tests": 34,
+  "adapted_old_trace_rows": 2000,
+  "actual_old_FP32_totals_in_adapted_fixture": 1800,
+  "deliberately_corrupted_old_records_rejected": 8,
+  "saved_profile_geometry_cases": 6,
+  "actual_old_checkpoint_loads_in_preparation": 1,
+  "unchanged_current_neural_files": 97,
+  "unchanged_original_V175_neural_files": 96,
+  "unchanged_sealed_V175_helpers": 18,
+  "verified_live_owners": [
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2",
+      "owner": {
+        "pid": 274124,
+        "created": 1794102724.04
+      },
+      "live": true,
+      "status": {
+        "status": "training",
+        "owner": {
+          "pid": 274124,
+          "created": 1794102724.04
+        },
+        "step": 6090,
+        "continuation_row": 5090,
+        "updates": 4579,
+        "total_updates": 5479,
+        "skipped": 511,
+        "fresh_batches": 4563,
+        "cached_noisy_batches": 16,
+        "counts": {
+          "wrapper": 4579,
+          "frozen": 4579,
+          "network": 4579,
+          "sampler": 22895
+        },
+        "parent_counts": {
+          "parent": 4565,
+          "DINO": 4565
+        },
+        "peak_CUDA_bytes": 7075942912
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2",
+      "owner": {
+        "pid": 287357,
+        "created": 1794104682.2
+      },
+      "live": true,
+      "status": {
+        "status": "waiting-for-train",
+        "owner": {
+          "pid": 287357,
+          "created": 1794104682.2
+        },
+        "observed_unix_UTC": 1794114838.6558044,
+        "worker_owner": {
+          "pid": 274124,
+          "created": 1794102724.04
+        }
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-admission-v1",
+      "owner": {
+        "pid": 417389,
+        "created": 1794110449.65
+      },
+      "live": true,
+      "status": {
+        "status": "waiting-for-train-owner",
+        "owner": {
+          "pid": 417389,
+          "created": 1794110449.65
+        },
+        "observed_unix_UTC": 1794114830.5137522,
+        "dependency": {
+          "ready": false,
+          "reason": "waiting-for-train-owner",
+          "owner": {
+            "pid": 274124,
+            "created": 1794102724.04
+          }
+        }
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1",
+      "owner": {
+        "pid": 453410,
+        "created": 1794113512.6
+      },
+      "live": true,
+      "status": {
+        "status": "waiting-for-CUDA-admission-watch-owner",
+        "owner": {
+          "pid": 453410,
+          "created": 1794113512.6
+        },
+        "observed_unix_UTC": 1794114832.8565466,
+        "target": {
+          "pid": 417389,
+          "created": 1794110449.65
+        }
+      }
+    }
+  ],
+  "new_GPU_calls": 0,
+  "new_trial_updates": 0,
+  "actual_V178_training_or_quality_audits_completed": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/publish-v178-audit-preparation-v1.py",
+    "sha256": "20590aa1d3e5a20e0bb5196111861835057e6ffd5d2ed294d9515a08384be85e",
+    "text": "\"\"\"Publish completed CPU audit preparation and current authoritative waiting state.\"\"\"\nimport datetime\nimport hashlib\nimport json\nfrom pathlib import Path\nimport re\nimport shutil\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO = Path('/home/dllu/proj/demosaic')\nROOT = REPO/'.cache/quality-20261107/V178-phase-evidence-trial-v1'\nV175 = ROOT.parent/'V175-fresh-noise-matching-v2'\nADMISSION = ROOT.parent/'V178-phase-evidence-admission-v1'\n\n\ndef read(path):\n    return json.loads(Path(path).read_text())\n\n\ndef ref(path):\n    path = Path(path).absolute()\n    with path.open('rb') as stream:\n        digest = hashlib.file_digest(stream, 'sha256').hexdigest()\n    return dict(path=str(path), sha256=digest)\n\n\ndef save(path, value):\n    with Path(path).open('x') as stream:\n        json.dump(value, stream, indent=2, allow_nan=False)\n        stream.write('\\n')\n\n\ndef main():\n    draft = read(ROOT/'draft-v1.json')\n    for path, digest in draft['frozen_files'].items():\n        assert ref(path)['sha256'] == digest\n    for binding in draft['inputs']:\n        assert ref(binding['path']) == binding\n    assert len(draft['frozen_files']) == 713 and len(draft['inputs']) == 9\n    seal = read(ROOT/'audit-source-v1.json')\n    proof = read(ROOT/'audit-structural-proof-v1.json')\n    entry = read(ROOT/'audit-frozen-entry-v1.json')\n    assert proof['status'].startswith('pass-CPU-audit-structural') and not proof['CUDA_initialized']\n    assert not proof['actual_V178_training_or_quality_audits_completed']\n    assert all(proof[key] == 0 for key in ['actual_neural_forwards','actual_optimizer_updates','new_sensor_draws'])\n    assert len(proof['rejected_deliberately_corrupted_adapted_records']) == 8\n    assert sum(row['rows'] for row in proof['adapted_trace_checks'].values()) == 2000\n    assert sum(row['FP32_loss_totals'] for row in proof['adapted_trace_checks'].values()) == 1800\n    assert '34 passed' in proof['tests']['text'] and ref(proof['tests']['path']) == {k:proof['tests'][k] for k in ['path','sha256']}\n    assert entry['status'].startswith('pass-actual-frozen-audit') and not entry['CUDA_initialized']\n    assert entry['auditor'] == seal['auditor'] and entry['source_seal'] == ref(ROOT/'audit-source-v1.json')\n    assert seal['actual_CPU_structural_proof'] == ref(ROOT/'audit-structural-proof-v1.json')\n    helpers = []\n    for binding in seal['helpers']:\n        path = Path(binding['path'])\n        assert ref(path) == binding\n        current = REPO/path.relative_to(ROOT/'audit-work-v1')\n        assert current.read_bytes() == path.read_bytes()\n        helpers.append(dict(binding, text=path.read_text(), canonical=ref(current)))\n    baseline = read(V175/'plan-v1.json')\n    assert len(baseline['prior_neural_hashes']) == 96\n    for name, digest in baseline['prior_neural_hashes'].items():\n        assert ref(REPO/'src/demosaic'/name)['sha256'] == digest\n    neural = list((REPO/'src/demosaic').glob('*.py'))\n    assert len(neural) == 97\n    for path in neural:\n        assert path.read_bytes() == (Path(draft['work'])/'src/demosaic'/path.name).read_bytes()\n    post = read(V175/'postprocess-inputs-v1.json')\n    for binding in post['helpers']:\n        assert ref(binding['path']) == binding\n    assert len(post['helpers']) == 18\n    observed = []\n    for folder, launch_name, status_name in [\n        (V175,'train-launch-v1.json','train-status-v1.json'),\n        (V175,'completion-watch-launch-v1.json','completion-watch-status-v1.json'),\n        (ADMISSION,'watch-launch-v1.json','watch-status-v1.json'),\n        (ROOT,'controller-launch-v1.json','controller-status-v1.json')]:\n        owner = read(folder/launch_name)['owner']\n        process = psutil.Process(owner['pid'])\n        assert process.create_time() == owner['created'] and process.status() not in ['dead','zombie']\n        assert not list(folder.glob('*failure-v1.json'))\n        observed.append(dict(root=str(folder), owner=owner, live=True, status=read(folder/status_name)))\n    for name in ['plan-v1.json','control-train.claim','evidence-train.claim','review.claim',\n                 'control-train-launch-v1.json','evidence-train-launch-v1.json','review-launch-v1.json',\n                 'scores-v1.json','training-audit-v1.json','quality-audit-v1.json']:\n        assert not (ROOT/name).exists(), name\n    stamp = datetime.datetime.now(ZoneInfo('America/Los_Angeles')).isoformat()\n    public = REPO/'docs/results/v178-matched-trial-audit-preparation-v1.json'\n    save(public, dict(status='pass-implemented-frozen-CPU-audit-preparation-no-actual-V178-result',\n         recorded_local=stamp, draft=ref(ROOT/'draft-v1.json'), source_seal=seal,\n         exact_helper_sources=helpers, structural_and_old_checkpoint_proof=proof,\n         actual_frozen_entry_proof=entry,\n         scientific_current_observations=observed,\n         GiB_available=dict(RAM=psutil.virtual_memory().available/2**30,\n                            local=shutil.disk_usage(REPO).free/2**30,\n                            external=shutil.disk_usage('/mnt/external').free/2**30),\n         actual_V178_training_or_quality_audits_completed=False,\n         new_GPU_calls=0, new_neural_forwards=0, new_optimizer_updates=0,\n         scope='Independent audit implementation/CPU preparation only. Adapted old training and partially simulated metadata fixtures are explicit; no actual V178 training, prediction, quality or viewing result. Actual neural code, trial recipe, jobs and original receipts remain unchanged.',\n         publisher=dict(ref(__file__), text=Path(__file__).read_text())))\n    verification = REPO/'docs/results/v178-matched-trial-audit-publication-verification-v1.json'\n    docs = [REPO/relative for relative in ['docs/phase-evidence-training.md','docs/index.md',\n            'docs/experiments.md','diary/2026-11-07-21-08-26-phase-evidence-independent-audits.md']]\n    count = 0\n    for path in docs:\n        for link in re.findall(r'\\]\\(([^)]+)\\)', path.read_text()):\n            if link.startswith(('http:','https:','mailto:','#')):\n                continue\n            target = (path.parent/link.split('#')[0]).resolve()\n            assert target.exists() or target == verification, (path, link)\n            count += 1\n    save(verification, dict(status='pass-frozen-audit-preparation-sources-checks-live-owners-and-document-links',\n         recorded_local=stamp, preparation=ref(public), documents=[ref(path) for path in docs],\n         local_links_checked=count, trial_frozen_files_checked=713, trial_immutable_inputs_checked=9,\n         additive_frozen_helpers_checked=2, actual_CPU_tests=34, adapted_old_trace_rows=2000,\n         actual_old_FP32_totals_in_adapted_fixture=1800, deliberately_corrupted_old_records_rejected=8,\n         saved_profile_geometry_cases=6, actual_old_checkpoint_loads_in_preparation=1,\n         unchanged_current_neural_files=97, unchanged_original_V175_neural_files=96,\n         unchanged_sealed_V175_helpers=18, verified_live_owners=observed,\n         new_GPU_calls=0, new_trial_updates=0,\n         actual_V178_training_or_quality_audits_completed=False,\n         source=dict(ref(__file__), text=Path(__file__).read_text()),\n         scope='Publication verification hashes/reads only. Process states are timestamp-specific. No neural/sensor/optimizer/checkpoint/CUDA work in this verifier; no actual V178 result or quality gain claimed.'))\n    print('PASS publication/frozen713+2/input9/neural97/helper18/CPU34/links',count, flush=True)\n\n\nif __name__ == '__main__': main()\n"
+  },
+  "scope": "Publication verification hashes/reads only. Process states are timestamp-specific. No neural/sensor/optimizer/checkpoint/CUDA work in this verifier; no actual V178 result or quality gain claimed."
+}
