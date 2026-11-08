@@ -1,5 +1,7 @@
 # Documentation guide
 
+The [V187 pooled-selection trial](pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+
 Start with [current model choices](current-model.md). **V120 Small remains the
 general recommendation** with broad photo/camera and complete 102MP RGB16
 checks. For fine dark detail and sky, compare [V172 local-noise matching](local-noise-matching.md),

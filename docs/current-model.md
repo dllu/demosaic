@@ -1,5 +1,7 @@
 # Current model choices
 
+The [V187 pooled-selection trial](pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+
 The completed [V185 smaller-support wave readout](spatial-context-wave-comparison.md)
 is the current experimental direct-readout option. At matched 900-update head
 training, mesh response rises **2.11% raw / 0.45% EMA versus V184** to

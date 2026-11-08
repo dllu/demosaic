@@ -1,5 +1,7 @@
 # Current method research
 
+The [V187 pooled-selection trial](pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+
 The completed [V180 local/global comparison](local-phase-evidence-comparison.md)
 shows that spatially varying coefficient fields help mean mesh response:
 **+15.23% raw / +15.93% EMA versus global V178**, reaching 4.52–4.55% of GT.

@@ -1,0 +1,58 @@
+{
+  "status": "pass-V187-readout-probe-CPU-raw-EMA-Adam-and-inherited-state",
+  "admission": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-admission-v1/admission-result-v1.json",
+    "sha256": "4b6e84fc3dfdb61be9d26cb13fefcc00257c94745822e9967e657b12912fce1f"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-admission-v1/plan-v1.json",
+    "sha256": "782ced8e305877a70dc4614a4ac82acedb8b0318187e8bde82c37e57d699bc94"
+  },
+  "checkpoints": [
+    {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-admission-v1/artifacts/probe-step1.pt",
+        "sha256": "78c0a92640843285370e5612b35c1e8b9f64346856faf6f58783ff4bd292a187"
+      },
+      "update": 1,
+      "strict_state_tensors": 193,
+      "inherited_tensors_exact": 189,
+      "Adam": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          1.0
+        ]
+      },
+      "raw_module_hash": "9eae780005b4f46f999bfb01f6774b244b7a83a5877853a1d16da40f0c3d59ad",
+      "EMA_module_hash": "e32c5ed1ff965664083995391fe3482552d5deec8e9d47fc69f8ff99f90a0603"
+    },
+    {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-admission-v1/artifacts/probe-step2.pt",
+        "sha256": "b75e315939b45d471e9969bf31817760479788a68d389837394113a9f5c3d0ab"
+      },
+      "update": 2,
+      "strict_state_tensors": 193,
+      "inherited_tensors_exact": 189,
+      "Adam": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          2.0
+        ]
+      },
+      "raw_module_hash": "28e21e0cb22cd2122c59fcefacdcbce56fed7c0353a485bc69f4022e3be8282f",
+      "EMA_module_hash": "1b34af82c896d2902285d7842631037eb0de13e8e34f80d13d1bfd18cd63dc37"
+    }
+  ],
+  "strict_CPU_raw_EMA_loads": 4,
+  "inherited_tensor_comparisons": 756,
+  "new_module_forwards": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-admission-v1/work/scripts/inspect_pooled_phase_admission.py",
+    "sha256": "73c713bf18f5654169d931da25609a902fd6589894b876f7ca2c381d41d855a1",
+    "text": "\"\"\"Independently inspect terminal readout probe states on CPU, without forwards.\"\"\"\n\nimport argparse\nimport json\nfrom pathlib import Path\n\nfrom phase_admission_protocol import owner_live, read, ref\n\nREPO = Path(\"/home/dllu/proj/demosaic\")\nROOT = REPO / \".cache/quality-20261107/V187-pooled-wave-admission-v1\"\n\n\ndef inspect(output):\n    result = read(ROOT / \"admission-result-v1.json\")\n    assert (\n        result[\"status\"]\n        == \"pass-V187-frozen-baseline-native-CUDA-parity-head-gradients-and-restoration\"\n    )\n    assert not owner_live(result[\"owner\"])\n    plan = read(result[\"plan\"][\"path\"])\n    assert ref(result[\"plan\"][\"path\"]) == result[\"plan\"]\n    for binding in plan[\"inputs\"]:\n        assert ref(binding[\"path\"]) == binding\n    for path, digest in plan[\"frozen_files\"].items():\n        assert ref(path)[\"sha256\"] == digest\n    assert not output.exists()\n    import torch\n    from phase_wave_training_state import clocks, fresh_state, inherited_hash, load_ema\n    from profile_raw_kernel_inference import model_hash\n    from spatial_wave_training_state import expand_checkpoint\n    from train_local_noise_matching_trial import tree_equal\n\n    from demosaic.late_pooled_phase_wave import LatePooledPhaseWaveDetail\n\n    assert not torch.cuda.is_initialized()\n    torch.set_num_threads(1)\n    initializer = torch.load(\n        plan[\"initializer\"][\"export\"][\"path\"], map_location=\"cpu\", weights_only=True\n    )\n    original_call = torch.nn.Module._call_impl\n\n    def forbidden(*args, **kwargs):\n        raise RuntimeError(\"No module forward in CPU inspection\")\n\n    torch.nn.Module._call_impl = forbidden\n    rows = []\n    try:\n        for update, (binding, record) in enumerate(\n            zip(result[\"checkpoints\"], result[\"records\"], strict=True), 1\n        ):\n            assert ref(binding[\"path\"]) == binding\n            checkpoint = expand_checkpoint(\n                torch.load(binding[\"path\"], map_location=\"cpu\", weights_only=True)\n            )\n            module = LatePooledPhaseWaveDetail(**plan[\"module_config\"])\n            module.load_state_dict(checkpoint[\"models\"], strict=True)\n            assert len(module.state_dict()) == 193 and len(initializer[\"state_dict\"]) == 189\n            assert all(\n                torch.equal(module.state_dict()[n], v) for n, v in initializer[\"state_dict\"].items()\n            )\n            assert model_hash(module) == record[\"model_hash\"]\n            optimizer, _ = fresh_state(module, lr=plan[\"lr\"], weight_decay=plan[\"weight_decay\"])\n            optimizer.load_state_dict(checkpoint[\"optimizer\"])\n            assert tree_equal(optimizer.state_dict(), checkpoint[\"optimizer\"])\n            assert clocks(module, optimizer) == {\n                \"tensors\": 4,\n                \"states\": 4,\n                \"steps\": [float(update)],\n            }\n            raw_hash = model_hash(module)\n            load_ema(module, checkpoint[\"ema\"])\n            assert (\n                inherited_hash(module)\n                == checkpoint[\"inherited_hash\"]\n                == plan[\"initializer\"][\"module_hash\"]\n            )\n            assert all(\n                torch.equal(module.state_dict()[n], v) for n, v in initializer[\"state_dict\"].items()\n            )\n            assert set(checkpoint[\"ema\"]) == {\n                n for n, p in module.named_parameters() if p.requires_grad\n            }\n            assert all(torch.isfinite(v).all() for v in checkpoint[\"ema\"].values())\n            rows.append(\n                {\n                    \"checkpoint\": binding,\n                    \"update\": update,\n                    \"strict_state_tensors\": 193,\n                    \"inherited_tensors_exact\": 189,\n                    \"Adam\": clocks(module, optimizer),\n                    \"raw_module_hash\": raw_hash,\n                    \"EMA_module_hash\": model_hash(module),\n                }\n            )\n    finally:\n        torch.nn.Module._call_impl = original_call\n    assert not torch.cuda.is_initialized()\n    proof = {\n        \"status\": \"pass-V187-readout-probe-CPU-raw-EMA-Adam-and-inherited-state\",\n        \"admission\": ref(ROOT / \"admission-result-v1.json\"),\n        \"plan\": result[\"plan\"],\n        \"checkpoints\": rows,\n        \"strict_CPU_raw_EMA_loads\": 4,\n        \"inherited_tensor_comparisons\": 756,\n        \"new_module_forwards\": 0,\n        \"CUDA_initialized\": False,\n        \"source\": dict(ref(__file__), text=Path(__file__).read_text()),\n    }\n    with output.open(\"x\") as stream:\n        json.dump(proof, stream, indent=2, allow_nan=False)\n        stream.write(\"\\n\")\n    print(\"PASS2probecheckpoints/4strictRawEMAloads/756inheritedTensorChecks/4AdamClocks\")\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"output\", type=Path)\n    inspect(parser.parse_args().output)\n"
+  }
+}

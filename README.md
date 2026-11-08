@@ -77,6 +77,8 @@ finds most clean mesh power already inside the current frequency band, while
 selected bins lie near little of it in typical weak cases. Broadening the band
 alone helps little; no new denoising gain is claimed.
 
+The [V187 pooled-selection trial](docs/pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
 **9.60% raw / 15.96% EMA**, reaching **4.865% / 5.148% of GT amplitude**.

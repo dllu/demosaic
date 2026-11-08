@@ -1,0 +1,24 @@
+{
+  "methods": 25,
+  "metric_rows": 20550,
+  "contrasts": 46,
+  "primary_endpoint_contrasts": 2,
+  "independent_Decimal_summary_means": 3425,
+  "paired_mean_and_difference_checks": 17184,
+  "real_references_scored": false,
+  "status": "pass-structural-full-suite-reused-V185-endpoint-standins-not-V187-quality",
+  "fixture_only_no_actual_V187_quality": true,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v187-full-comparison-fixture-v1.py",
+    "sha256": "fc78fc9de47ca3d6b6fc28085916cfde70ad5c1f8e9bd5e1a58eebc28c34882f",
+    "text": "from pathlib import Path\nimport json,sys\nR=Path('/home/dllu/proj/demosaic');sys.path.insert(0,str(R/'scripts'));sys.path.insert(0,str(R/'src'))\nfrom phase_admission_protocol import read,ref\nimport reduce_pooled_phase_trial as m\nplan=read(m.ROOT/'plan-v1.json');rows,sources=m.earlier_rows(plan)\ncontext=read(plan['baseline_plan']['path'])\nhistory=[context[k] for k in ['V175_scores','matched_scores','local_scores','flat_spatial_scores']]+[plan['baseline_scores'],ref(m.ROOT.parent/'V184-wave-readout-trial-v1/scores-v1.json'),plan['V185_scores']]\nfor b in history:\n old=read(b['path'])\n for method in dict.fromkeys(r['method'] for r in old['rows']):rows+=m.source_rows(b,method,method,plan)\nactual=read(history[-1]['path'])\nrows += [dict(r,method=m.METHODS[e]) for e in ['raw','EMA'] for r in actual['rows'] if r['method']==m.PRIMARY_BASELINE[e]]\ndesign=read(plan['design']['path'])['observations']\nx=m.comparisons(rows,m.ALL_METHODS,[c['id'] for c in design]);text,cells=m.tables(x['summary'],fixture=True)\nassert x['methods']==25 and x['metric_rows']==20550 and x['contrasts']==46 and len(cells)==1722\nassert all(g['mean_difference']==0 for g in x['groups'] if g['comparison_role'].startswith('matched-pooled-selection-'))\nout=m.ROOT/'full-comparison-fixture-verification-v1.json'\nvalue={k:x[k] for k in ['methods','metric_rows','contrasts','primary_endpoint_contrasts','independent_Decimal_summary_means','paired_mean_and_difference_checks','real_references_scored']}\nvalue.update(status='pass-structural-full-suite-reused-V185-endpoint-standins-not-V187-quality',fixture_only_no_actual_V187_quality=True,source=dict(ref(__file__),text=Path(__file__).read_text()),reducer=ref(R/'scripts/reduce_pooled_phase_trial.py'),table_cells=len(cells),all_primary_fixture_differences_exact_zero=True,new_neural_forwards=0,new_noise_draws=0)\nwith out.open('x') as f:json.dump(value,f,indent=2);f.write('\\n')\nprint('PASS',value['methods'],value['metric_rows'],value['contrasts'],value['table_cells'],value['paired_mean_and_difference_checks'])\n"
+  },
+  "reducer": {
+    "path": "/home/dllu/proj/demosaic/scripts/reduce_pooled_phase_trial.py",
+    "sha256": "2e46d5bf4357886dee1bf4045ab3538ae75374ce3ef6e5d5e9451274d644c2c2"
+  },
+  "table_cells": 1722,
+  "all_primary_fixture_differences_exact_zero": true,
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0
+}

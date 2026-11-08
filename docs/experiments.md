@@ -1,5 +1,7 @@
 # Experiment index
 
+The [V187 pooled-selection trial](pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+
 The completed [V180 local phase-evidence comparison](local-phase-evidence-comparison.md)
 raises mean mesh response **15.2–15.9% over global V178**, reaching 4.52–4.55%
 of constructed GT amplitude with the same parameters and continuation recipe.
