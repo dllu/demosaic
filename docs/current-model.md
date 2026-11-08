@@ -1,5 +1,22 @@
 # Current model choices
 
+The completed [V180 local phase-evidence comparison](local-phase-evidence-comparison.md)
+provides a stronger matching detail option at the same parameter budget.
+Raw/EMA mesh response reaches **4.5219% / 4.5484% of constructed GT amplitude**,
+**15.23% / 15.93% above global V178**; 122/256 and 142/256 inputs increase.
+EMA quiet spatial RMS rises **1.05% / 0.79%** for ISO6400/12800, worsening
+31/32 inputs; quiet total rises 0.84% / 0.51%. Fine cab crossings still do not
+clearly recover, and amplified quiet crops show stronger fine mottle over the
+broad field. Native512 full-flat changes are mixed. Against V172 EMA, mesh
+response rises 17.31% while quiet spatial error rises 1.11% / 0.76%.
+Use the local-evidence architecture for further detail work while retaining
+V172 as a balanced comparison, V173/V175 raw for quiet strengths, V171 for
+flats and V161 for stronger learned response at a larger quiet cost. V120 Small
+remains the general recommendation. Both endpoints/all 822 cases, full trace/
+five checkpoints, independent audits and 60 actually viewed figures/12 triplets
+are complete. [Native viewer](images/v180-local-phase-evidence-v1/native-viewer.html) ·
+[Exact evidence](results/v180-local-phase-evidence-final-v1.json).
+
 The completed [V178 measured phase-evidence trial](phase-evidence-comparison.md)
 adds a small mesh-response option: **3.9243% raw / 3.9235% EMA of constructed
 GT amplitude**, +0.920% / +0.915% over the same-endpoint matched control.

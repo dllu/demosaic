@@ -1,5 +1,15 @@
 # Experiment index
 
+The completed [V180 local phase-evidence comparison](local-phase-evidence-comparison.md)
+raises mean mesh response **15.2–15.9% over global V178**, reaching 4.52–4.55%
+of constructed GT amplitude with the same parameters and continuation recipe.
+Quiet spatial RMS rises 0.76–1.05%; actual fine cab crossings and broad/fine
+mottle remain unresolved. Both endpoints/all 822 cases and independent audits
+pass, with 60 actually inspected native figures/12 triplets. Fifteen methods,
+22 contrasts and 882 cells retain both V175 and all four V178 endpoints.
+[Final evidence](results/v180-local-phase-evidence-final-v1.json) ·
+[Local/global viewer](images/v180-local-phase-evidence-v1/native-viewer.html).
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of
 constructed GT amplitude. Quiet spatial error rises slightly at both noise
@@ -33,9 +43,9 @@ exactly beside one zero adapter. The first rounding-sensitive test expectation
 and log are preserved. Actual CUDA admission now passes all 14 initial parity
 rows, both 142-tensor gradient probes, restoration, 170,393,600 feature values
 and 42,304 local powers. All 241 component events and two saved checkpoints pass
-independent CPU inspection. A single 900-update continuation now preserves
+independent CPU inspection. The completed 900-update continuation preserves
 V172's real Adam/EMA history and the same V178 recipe, retaining completed
-V178 comparisons without rerunning them. Restored quality remains unmeasured.
+V178 comparisons without rerunning them. Restored quality is measured above.
 
 The [completed V179 local-support diagnostic](local-phase-support.md) measures
 298,404 windows at 1,228 reused one-phase-selected bins. Local mean powers are

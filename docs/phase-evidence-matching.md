@@ -13,8 +13,9 @@ audits pass. Retain the small gain alongside earlier useful models.
 
 The separate [V180 local-window variant](local-phase-evidence-matching.md)
 keeps this parameter layout and global selection, replacing the coefficient
-fields with local affine measurements. Its CPU preparation passes; it is
-untrained and does not alter the frozen V178 admission or matched trial.
+fields with local affine measurements. Its [completed comparison](local-phase-evidence-comparison.md)
+raises mean mesh response 15.2–15.9% over this global variant at a higher quiet
+spatial cost. The frozen V178 admission and matched trial remain unchanged.
 
 [Model implementation](../src/demosaic/late_phase_evidence_matching.py) ·
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·

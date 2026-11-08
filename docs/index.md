@@ -8,8 +8,16 @@ the stronger [V161 detail prototype](harmonic-frequency-context.md),
 [V173](weak-gradient-matching.md)/[V174](spread-sample-matching.md) quiet gains.
 Their remaining weaknesses differ; none combines strong mesh recovery and
 clean quiet fields. The latest completed
-[native-pixel viewer](images/v178-phase-evidence-v1/native-viewer.html) retains
+[native-pixel viewer](images/v180-local-phase-evidence-v1/native-viewer.html) retains
 both protected GFX scenes and the earlier useful comparators.
+
+The completed [V180 local-evidence comparison](local-phase-evidence-comparison.md)
+raises mesh response **15.2–15.9% over global V178**, reaching 4.52–4.55% of
+constructed GT amplitude at the same parameter budget. Quiet spatial RMS rises
+0.76–1.05%; fine cab crossings and broad/fine mottle remain unresolved.
+Both endpoints, independent training/quality audits and all 60 native figures/
+12 triplets are complete and actually inspected. Fifteen methods retain the
+earlier detail, quiet and flat strengths.
 
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
@@ -49,12 +57,12 @@ RGB and changes none of the queued model recipes or measured recommendations.
 The follow-on [V180 local-evidence variant](local-phase-evidence-matching.md)
 implements those spatial measurements with V178's parameter budget. All 112
 focused CPU checks and six native feature cases pass, followed by actual CUDA
-parity/gradient/restoration and local measurement checks. Its 900-update cached
-continuation is running; image quality remains unmeasured. Interpolation may
+parity/gradient/restoration and a completed 900-update cached continuation.
+Its measured gain and quiet-field costs are reported above. Interpolation may
 still spread support or introduce grid artifacts.
 Its [local audit/table/native preparation](local-phase-evidence-matching.md#cuda-admission-and-continuation)
 passes 42 audit checks, 14 comparison checks and marked 60-figure/882-cell
-fixtures. Actual local quality and viewing remain required.
+fixtures. Actual local quality and viewing have now completed separately.
 
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, with six observed coarsest p90 distances about

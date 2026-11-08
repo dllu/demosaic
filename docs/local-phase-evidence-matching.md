@@ -1,13 +1,18 @@
 # Local phase evidence for matching
 
-**V180 is training after passed CUDA admission.** It replaces V178's global
+**V180 has completed training, quality review and actual native inspection.** It replaces V178's global
 coefficient fields with local measurements at the same selected frequencies.
 The matching network, zero 80→39 adapter and **2,092,026 trainable parameters
 across 142 tensors** stay the same. Both inherited V172 endpoints load all
 188 existing tensors exactly; the additional 3,120 weights start at zero.
 Actual CUDA parity, gradients, save/restore and CPU/GPU local measurements pass.
-A 900-update continuation is running from V172's real optimizer/EMA history;
-restored-image quality remains unmeasured. Current measured choices remain available.
+A 900-update continuation from V172's real optimizer/EMA history raises mesh
+response **15.2–15.9% over global V178**, reaching **4.52–4.55% of constructed
+GT amplitude**. Quiet spatial RMS rises 0.76–1.05%; fine cab crossings and
+broad/fine mottle remain unresolved. This is a useful detail architecture,
+with earlier balanced, quiet and flat options retained.
+[Completed comparison](local-phase-evidence-comparison.md) ·
+[Native viewer](images/v180-local-phase-evidence-v1/native-viewer.html).
 
 [Model](../src/demosaic/late_local_phase_evidence_matching.py) ·
 [24 new CPU tests](../tests/test_late_local_phase_evidence_matching.py) ·
@@ -49,15 +54,17 @@ existing Adam states remain at 900, original moments/network EMA load exactly,
 and the adapter starts at zero without Adam history. The cached 1,000 rows,
 900 updates/3,600 images/100 ADC skips, seven-term objective, domain weights,
 learning-rate schedule and EMA decay match V178. Genuine row8 restoration
-has already passed; training resumes at row9 without replay.
+passed and continued at row9 without replay. Existing network clocks finish
+at 1,800; the adapter finishes at 900. All five checkpoints and the full trace
+pass the independent training audit.
 
 Completed V178 control/global-evidence raw/EMA results are retained as
 comparisons. They are not rerun; atomic sampler backward remains nondeterministic
 under the existing warn-only setting, so this is not bit-exact paired retraining.
-Both V180 endpoints will use all 822 fixed inputs and the same 36 native cases,
-followed by independent audit and actual inspection of mesh, quiet/flat,
-foliage/building/sky and both fine cab windows. No quality improvement follows
-from implementation admission. No new sensor/source/parent/DINO/RAW decode or
+Both V180 endpoints use all 822 fixed inputs and the same 36 native cases.
+The independent quality audit and actual inspection of all 60 figures/12 triplets
+cover mesh, quiet/flat, foliage/building/sky and both fine cab windows. Implementation
+admission is separate from those quality results. No new sensor/source/parent/DINO/RAW decode or
 original capture access occurs. [Actual admission and launch evidence](results/v180-local-phase-CUDA-admission-v1.json).
 
 The [independent local auditor](../scripts/audit_local_phase_evidence_trial.py)
@@ -78,7 +85,9 @@ coordinates and display transforms. A marked old-pixel fixture checks 60 figures
 pixels under simulated local labels, not V180 quality. Actual mode requires
 terminal quality and passed audits and rejects before creating outputs now.
 These helpers are frozen separately; the running worker's 725-source snapshot
-is unchanged. [Preparation sources and evidence](results/v180-local-phase-comparison-preparation-v1.json).
+is unchanged. These preparation fixtures remain separate from completed actual
+quality. [Preparation sources and evidence](results/v180-local-phase-comparison-preparation-v1.json) ·
+[Actual completion and viewing](results/v180-local-phase-completion-execution-v1.json).
 
 ## Local measurements
 
@@ -177,8 +186,8 @@ alone do not isolate a single cause. FP64 moments are a reference implementation
 the limited CUDA probe timings above do not establish full-frame cost.
 
 Actual CUDA feature parity, full-network zero-adapter parity/gradients and
-genuine optimizer restoration now pass. The continuation and native restored
-comparisons remain necessary before judging usefulness. V175 and V178's
+genuine optimizer restoration now pass, followed by the completed continuation
+and native restored comparison above. V175 and V178's
 completed comparisons retain their existing recipes and source snapshots.
 
 Both protected GFX families appear here only as cached input geometry, without

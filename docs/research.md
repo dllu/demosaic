@@ -1,5 +1,18 @@
 # Current method research
 
+The completed [V180 local/global comparison](local-phase-evidence-comparison.md)
+shows that spatially varying coefficient fields help mean mesh response:
+**+15.23% raw / +15.93% EMA versus global V178**, reaching 4.52–4.55% of GT.
+The same parameter budget and continuation recipe remain; windowed nuisance
+fits, aggregation and interpolation change together. The gain is uneven,
+and actual cab crossings still do not clearly recover. Quiet spatial RMS
+increases 0.76–1.05% versus global V178; 31/32 EMA quiet inputs worsen.
+Amplified native views show stronger fine texture over broad colored mottle.
+Use this local-evidence architecture as the next detail-development baseline,
+keeping V172's balanced and earlier quiet/flat strengths available. Controlling
+the extra response in blank regions remains necessary. All 60 native figures
+were inspected, and full training/checkpoint/quality audits pass.
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,
 reaching 3.9243% / 3.9235% of GT amplitude. This is uneven: fewer than half of
@@ -37,9 +50,9 @@ diagnostic. All 112 focused CPU tests pass; six native cases match NumPy across
 FP64 casts. This CPU preparation is separate from restored quality. Interpolation
 changes noise covariance and can spread support or create seams. Actual CUDA
 initial parity, gradients and restoration now pass; CPU/GPU map differences
-stay below 3e−8 and local-power differences below 7e−13. A 900-update continuation
-is running from the same V172 Adam/EMA history and cached V178 recipe. Real
-detail/sky tradeoffs remain unmeasured.
+stay below 3e−8 and local-power differences below 7e−13. The 900-update continuation
+from the same V172 Adam/EMA history and cached V178 recipe is complete, with
+the detail/quiet tradeoff measured above.
 The completed V178 workers retained their frozen recipe; V175's completed outcomes
 remain separate.
 
