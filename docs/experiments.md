@@ -788,3 +788,11 @@ include 37 model tests, 19 codec/state checks and 69 audit/comparison/publicatio
 checks. Lossless native recipes and factored checkpoints preserve exact bits.
 Smaller support improves the measured tradeoff without becoming calibrated
 confidence or establishing noisy-sky safety.
+
+The [V186 read-only frequency diagnostic](frequency-selection-coverage.md)
+finds 90.08% of clean green-CFA template power already inside the current band,
+but only 21.25% mean / 1.18% median proximity to input-selected bins. Broadening
+at the same candidate count helps little. Strong global peaks also occur beside
+uniform quiet ROIs. These are diagnostic fractions, not recovery bounds or
+confidence. V185 remains the latest trained comparison; the next hypothesis is
+to pool phase and neighboring-frequency evidence while retaining local support.

@@ -72,6 +72,11 @@ This is the current experimental wave option. Standalone flats and absent-mesh
 controls regress slightly; false striping, broad mottle and real missing crossings
 remain. Both endpoints, audits and all 60 viewed native figures are complete.
 
+The read-only [V186 selection diagnostic](docs/frequency-selection-coverage.md)
+finds most clean mesh power already inside the current frequency band, while
+selected bins lie near little of it in typical weak cases. Broadening the band
+alone helps little; no new denoising gain is claimed.
+
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
 **9.60% raw / 15.96% EMA**, reaching **4.865% / 5.148% of GT amplitude**.

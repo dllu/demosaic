@@ -413,3 +413,11 @@ Removing that broad component retains mesh response while reducing color bias,
 but slightly worsens quiet spatial error and increases total/coarse flat error.
 This supports further work on conditional coarse correction; it does not prove
 that broad correction is always harmful or that residual splotches are gone.
+
+The [V186 read-only frequency diagnostic](frequency-selection-coverage.md)
+finds 90.08% of clean green-CFA template power already inside the current band,
+but only 21.25% mean / 1.18% median proximity to input-selected bins. Broadening
+at the same candidate count helps little. Strong global peaks also occur beside
+uniform quiet ROIs. These are diagnostic fractions, not recovery bounds or
+confidence. V185 remains the latest trained comparison; the next hypothesis is
+to pool phase and neighboring-frequency evidence while retaining local support.

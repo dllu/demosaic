@@ -1,0 +1,64 @@
+{
+  "status": "pass-frequency-diagnostic-source-prefix-figures-plot-data-current-guides-and-links",
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v186-frequency-coverage-v1.json",
+    "sha256": "2abae792f10efab8402e3925c3c2c4b4876bf78d4acd2439d5f77cc278f64ade"
+  },
+  "source_capsule": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v186-frequency-coverage-source-capsule-v1.json",
+    "sha256": "c93130934d9d67ec2461bf68ac124098015e1ff8c85c5d329bda47ddb342597c"
+  },
+  "independent_numeric_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V186-frequency-coverage-v1/verification-v2.json",
+    "sha256": "ce308c4864fec3d4396180e7188cef411e9ce94ef47d312e46c4b7b398ced2c7"
+  },
+  "linked_closed_receipt_copies": 23,
+  "scientific_figure_files": 6,
+  "CDF_points_checked": 768,
+  "quiet_points_checked": 96,
+  "same_v1_v2_plot_data": true,
+  "neural_sources_unchanged": 100,
+  "document_links": 726,
+  "documents": {
+    "/home/dllu/proj/demosaic/README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "ef4882507af8f8aa176c37706d672f4cfe4c43860058c918749040bb461d6b3b"
+    },
+    "/home/dllu/proj/demosaic/docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "4d6fe42b406dda94c78c0f9de68e295d9343324e8c8b04c2595e4c128c166339"
+    },
+    "/home/dllu/proj/demosaic/docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "d9d1454ddf275315eff2c710404769e451afde6e87e32cc5c070836e8a59929b"
+    },
+    "/home/dllu/proj/demosaic/docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "79a5268d256b575edbecc947014e82acaca8bd3158650823cc1d6ef0c29d5580"
+    },
+    "/home/dllu/proj/demosaic/docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "a9f0805c62475160aaee09b13a6388a2434d126ad7d2de6fb8580f8304912c24"
+    },
+    "/home/dllu/proj/demosaic/docs/phase-evidence-matching.md": {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-matching.md",
+      "sha256": "c3fb2ff7cdf045d986be707c1ffc99aec5a0e9359b05c349762e4d71f4a5fe2a"
+    },
+    "/home/dllu/proj/demosaic/docs/frequency-selection-coverage.md": {
+      "path": "/home/dllu/proj/demosaic/docs/frequency-selection-coverage.md",
+      "sha256": "7d7e2183b1c3fb39868697a2b4c47cf1a08da9eb57927fe4e6780d6f2d7b6658"
+    },
+    "/home/dllu/proj/demosaic/diary/2026-11-08-06-45-14-frequency-coverage-diagnostic.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-08-06-45-14-frequency-coverage-diagnostic.md",
+      "sha256": "737b6fd77806cd8758615b0939e43c149fd1ed418e0df5f59ce0743d8e19e429"
+    }
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v186-publication-v1.py",
+    "sha256": "ff79c4f90b6665749422cd984b7a12689367a0cd624753aa03930b14e49654f2",
+    "text": "from pathlib import Path\nimport hashlib,json,re,sys,math,os\nimport numpy as np\nfrom PIL import Image\nR=Path('/home/dllu/proj/demosaic');sys.path.insert(0,str(R/'scripts'))\nfrom phase_admission_protocol import read,ref,owner_live\nT=R/'.cache/quality-20261107/V186-frequency-coverage-v1';index=R/'docs/results/v186-frequency-coverage-v1.json';final=read(index);result=read(final['result']['path']);audit=read(final['verification']['path']);plan=read(final['plan']['path']);out=R/'docs/results/v186-frequency-coverage-publication-verification-v1.json'\nassert final['status']=='completed-verified-actually-viewed-frequency-diagnostic-not-new-model-quality'\nfor k in ['plan','result','corrected_summary','verification','report','latest_model_publication']:assert ref(final[k]['path'])==final[k]\nfor pair in final['copies'].values():\n assert ref(pair['original']['path'])==pair['original'] and ref(pair['public']['path'])==pair['public']\n assert pair['original']['sha256']==pair['public']['sha256']\n assert os.stat(pair['original']['path']).st_ino==os.stat(pair['public']['path']).st_ino\nfor b in final['figures']:assert ref(b['path'])==b\nplots=read(T/'figures-v2.json');old=read(T/'figures-v1.json')\nfor k in ['coverage_CDF_points','band_mean_power_percent','quiet_points']:assert plots[k]==old[k]\nassert plots['identical_plot_data_as_v1'] is True\npresent=[r for r in result['rows'] if r['present']]\npoints=0\nfor g in plots['coverage_CDF_points']:\n expected=np.sort([r[g['method']+'_localwidth_template_fraction']*100 for r in present]).tolist()\n assert expected==g['fraction_percent'] and ((np.arange(256)+1)/256).tolist()==g['CDF'];points+=256\ncontrols=read(T/'control-ROI-measurements-v1.json')['rows'];quiet_points=0\nfor g in plots['quiet_points']:\n rows=[r for r in controls if r['kind']=='mixed-quiet' and r['method']==g['method']]\n assert [r['id'] for r in rows]==g['ids']\n assert [max(v['other_phase_power'] for v in r['measurements']) for r in rows]==g['global_max_other_power']\n assert [max(v['ROI_center_local_other_power'] for v in r['measurements']) for r in rows]==g['ROI_center_max_other_power'];quiet_points+=len(rows)\nfor b in final['figures']:\n p=Path(b['path'])\n if p.suffix=='.png':\n  with Image.open(p) as image:assert image.width>1000 and image.height>500\nassert points==768 and quiet_points==96 and len(final['figures'])==6\nassert audit['status'].startswith('pass-retained-prefix') and audit['input_fingerprints']==1650\nassert not owner_live(result['owner']) and not owner_live(result['original_owner'])\nfor b in read(T/'control-resume-plan-v1.json')['original_prefix']:assert ref(b['path'])==b\nfor name,digest in plan['dependency']['neural100_hashes'].items():assert ref(R/'src/demosaic'/name)['sha256']==digest\nsources=[]\nfor p in sorted(set(list((T/'work').rglob('*.py'))+list((T/'control-resume-work-v1').rglob('*.py'))+list((T/'audit-work-v1').rglob('*.py'))+list((T/'audit-work-v2').rglob('*.py'))+list((T/'publication-work-v1').rglob('*.py'))+list((T/'publication-work-v2').rglob('*.py')))):\n sources.append(dict(ref(p),text=p.read_text()))\nlogs=[R/'.cache/v186-frequency-coverage-CPU-tests-v1.log',R/'.cache/v186-frequency-coverage-CPU-tests-v2.log',R/'.cache/v186-frequency-coverage-CPU-tests-v3.log',R/'.cache/v186-independent-reference-CPU-tests-v1.log',R/'.cache/v186-control-resume-prepare-v1.log',R/'.cache/v186-control-resume-prepare-v2.log',R/'.cache/v186-control-resume-prepare-v3.log']\ncapsule={'status':'preserved-frozen-source-variants-and-CPU-receipts','sources':sources,'logs':[dict(ref(p),text=p.read_text()) for p in logs],'publication':ref(index),'scope':'Original science/control/audit/plot versions retain exact source bytes, including failed variants. Final CPU checks are24selection/reduction plus2independent-reference checks. Earlier22/23-check receipts are historical, not additional distinct checks.'}\ncap=R/'docs/results/v186-frequency-coverage-source-capsule-v1.json'\nwith cap.open('x') as f:json.dump(capsule,f,indent=2);f.write('\\n')\ndocuments=[R/p for p in ['README.md','docs/current-model.md','docs/index.md','docs/research.md','docs/experiments.md','docs/phase-evidence-matching.md','docs/frequency-selection-coverage.md','diary/2026-11-08-06-45-14-frequency-coverage-diagnostic.md']]\nlinks=0\nfor p in documents:\n for target in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]+)\\)',p.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  resolved=(p.parent/target.split('#')[0]).resolve();assert resolved.is_file(),(p,target);links+=1\nproof={'status':'pass-frequency-diagnostic-source-prefix-figures-plot-data-current-guides-and-links','publication':ref(index),'source_capsule':ref(cap),'independent_numeric_audit':ref(T/'verification-v2.json'),'linked_closed_receipt_copies':len(final['copies']),'scientific_figure_files':6,'CDF_points_checked':points,'quiet_points_checked':quiet_points,'same_v1_v2_plot_data':True,'neural_sources_unchanged':100,'document_links':links,'documents':{str(p):ref(p) for p in documents},'source':dict(ref(__file__),text=Path(__file__).read_text()),'new_neural_forwards':0,'new_RGB_restorations':0,'scope':'Publication integrity and exact plotted data only. Independent scientific audit retains its first12case numerical scope and all3200local power checks. No new model-quality or recoverability claim.'}\nwith out.open('x') as f:json.dump(proof,f,indent=2);f.write('\\n')\nprint('PASS',len(sources),'frozen source files',len(final['copies']),'closed receipts',points,'CDF points',quiet_points,'quiet points',links,'links')\n"
+  },
+  "new_neural_forwards": 0,
+  "new_RGB_restorations": 0,
+  "scope": "Publication integrity and exact plotted data only. Independent scientific audit retains its first12case numerical scope and all3200local power checks. No new model-quality or recoverability claim."
+}

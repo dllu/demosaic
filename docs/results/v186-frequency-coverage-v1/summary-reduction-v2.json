@@ -1,0 +1,840 @@
+{
+  "status": "corrected-numeric-group-identities-in-summary-only-no-new-scientific-evaluation",
+  "original_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V186-frequency-coverage-v1/result-v1.json",
+    "sha256": "57c71332fc12b1f00b16e449cbf29337e6425040c1e7c65b6eabf7736167c7dd"
+  },
+  "original_verifier_failure": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V186-frequency-coverage-v1/verification-v1.log",
+    "sha256": "befd7498adb01cf23a20cfcadff8264201c3e47bd3599b872be24953b76329f7"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/scripts/report_frequency_coverage.py",
+    "sha256": "e2f943b2681a39b72780a59cff99358b9e94aee6ed9c12aa5e1897dadeebcc49",
+    "text": "\"\"\"Read-only frequency-selection coverage on the completed V185 fixed inputs.\n\nSelect counterfactual bins from RAW only and close the entire input journal\nbefore reading clean arrays. No neural inference, checkpoint load, RGB output,\nRAW decode, source render or noise draw occurs. Saved V185 selections stay exact.\n\"\"\"\n\nimport argparse\nimport gzip\nimport hashlib\nimport json\nimport math\nimport os\nimport resource\nimport shutil\nimport subprocess\nimport sys\nimport time\nfrom collections import defaultdict\nfrom pathlib import Path\n\nimport numpy as np\nimport psutil\nfrom frequency_coverage import (\n    eligible_bins,\n    footprint,\n    power_fraction,\n    sample_camera_rgb,\n    select_bins,\n)\nfrom green_phase_spectrum import tapered_spectrum\nfrom local_phase_projection import local_phase_projection\nfrom phase_admission_protocol import owner_live, read, ref\n\nREPO = Path(\"/home/dllu/proj/demosaic\")\nROOT = REPO / \".cache/quality-20261107/V186-frequency-coverage-v1\"\nPREVIOUS = ROOT.parent / \"V185-spatial-context-trial-v1\"\nMETHODS = [\"actual_high4\", \"FP64_high4\", \"broad4\", \"balanced8\"]\n\n\ndef save(path, value):\n    with Path(path).open(\"x\") as stream:\n        json.dump(value, stream, indent=2, allow_nan=False)\n        stream.write(\"\\n\")\n\n\ndef fingerprint(value):\n    return {\n        \"shape\": list(value.shape),\n        \"dtype\": value.dtype.str,\n        \"sha256\": hashlib.sha256(np.ascontiguousarray(value).tobytes()).hexdigest(),\n    }\n\n\ndef require_completed():\n    publication = REPO / \"docs/results/v185-spatial-context-final-v1.json\"\n    verification = REPO / \"docs/results/v185-spatial-context-publication-verification-v1.json\"\n    final, verified = read(publication), read(verification)\n    assert final[\"status\"].startswith(\"completed-\") and verified[\"status\"].startswith(\"pass-\")\n    assert verified[\"publication\"] == ref(publication)\n    for key in [\"report\", \"figures\", \"notes\", \"publication_source\"]:\n        assert ref(final[key][\"path\"]) == final[key]\n    for name in [\"wave-train\", \"review\"]:\n        assert not owner_live(read(PREVIOUS / f\"{name}-launch-v1.json\")[\"owner\"])\n        assert not (PREVIOUS / f\"{name}-failure-v1.json\").exists()\n    for name in [\"training-audit-v1.json\", \"quality-audit-v1.json\"]:\n        pair = final[\"copies\"][name]\n        assert ref(pair[\"original\"][\"path\"]) == pair[\"original\"]\n        assert read(pair[\"original\"][\"path\"])[\"status\"].startswith(\"pass-\")\n    old = read(PREVIOUS / \"plan-v1.json\")\n    neural = {Path(p).name: h for p, h in old[\"frozen_files\"].items() if \"/src/demosaic/\" in p}\n    assert len(neural) == 100\n    for name, digest in neural.items():\n        assert ref(REPO / \"src/demosaic\" / name)[\"sha256\"] == digest\n    return {\n        \"publication\": ref(publication),\n        \"verification\": ref(verification),\n        \"plan\": ref(PREVIOUS / \"plan-v1.json\"),\n        \"scores\": ref(PREVIOUS / \"scores-v1.json\"),\n        \"selection_journal\": ref(PREVIOUS / \"quality-observations-v1.jsonl.gz\"),\n        \"neural100_hashes\": neural,\n        \"design\": old[\"design\"],\n    }\n\n\ndef prepare():\n    dependency = require_completed()\n    assert not ROOT.exists()\n    assert (\n        shutil.disk_usage(REPO).free > (48.5 + 0.025) * 2**30\n        and psutil.virtual_memory().available > 32 * 2**30\n    )\n    tests = REPO / \".cache/v186-frequency-coverage-CPU-tests-v2.log\"\n    assert \"23 passed\" in tests.read_text()\n    design = read(dependency[\"design\"][\"path\"])[\"observations\"]\n    cases = [c for c in design if c[\"kind\"] in [\"mesh\", \"mixed-quiet\", \"real\"]]\n    assert len(cases) == 550 and sum(c[\"kind\"] == \"mesh\" for c in cases) == 512\n    ROOT.mkdir()\n    work = ROOT / \"work\"\n    names = [\n        \"scripts/report_frequency_coverage.py\",\n        \"scripts/frequency_coverage.py\",\n        \"scripts/green_phase_spectrum.py\",\n        \"scripts/local_phase_projection.py\",\n        \"scripts/phase_admission_protocol.py\",\n        \"scripts/phase_frequency_holdout.py\",\n        \"tests/test_frequency_coverage.py\",\n    ]\n    for name in names:\n        dest = work / name\n        dest.parent.mkdir(parents=True, exist_ok=True)\n        shutil.copyfile(REPO / name, dest)\n    plan = {\n        \"status\": \"fixed-read-only-RAW-selection-and-hidden-template-coverage-not-model-quality\",\n        \"created_unix_UTC\": time.time(),\n        \"dependency\": dependency,\n        \"cases\": cases,\n        \"runner\": ref(work / \"scripts/report_frequency_coverage.py\"),\n        \"sources\": [dict(ref(p), text=p.read_text()) for p in work.rglob(\"*.py\")],\n        \"CPU_tests\": dict(ref(tests), text=tests.read_text()),\n        \"methods\": METHODS,\n        \"bands\": {\"high\": [1 / 16, 1 / 3], \"lower\": [1 / 32, 1 / 16], \"broad\": [1 / 32, 1 / 3]},\n        \"peaks_per_direction\": 4,\n        \"legacy_window_packed\": 65,\n        \"near_bin_radius\": 1,\n        \"local_bandwidth_radius\": \"ceil(packed_axis/65); square FFT proximity footprint, not exact local filter support\",\n        \"descriptive_power_bins\": [1, 4, 16, 64],\n        \"independent_verification_case_ids\": [c[\"id\"] for c in cases[:12]],\n        \"new_local_forecast_GiB\": 0.025,\n        \"new_external_writes\": 0,\n        \"scope\": \"Previous goal turn was progress: completed V185 training, both822case endpoints, native/browser audits and publication. This diagnostic asks whether the fixed high-frequency selection omits clean crossed-wire energy. Original actual V185 bins are reused exactly; FP64 high4 is a numerical bridge, broad4 retains the same candidate count, balanced8 adds a separate lower-octave bank and doubles candidate count. New bins use one RAW green phase only, other phase measurements cannot alter them. Complete550case input journal closes before clean target arrays or saved V185 response rows are interpreted. Clean spectra enter only post-selection scoring on512constructed present/absent inputs; absent uses the hypothetical present template, not actual signal. Fractions of principal CFA spectral power near selected bins are descriptive, never a reconstruction/recoverability bound or confidence test. Overlapping neighborhoods, reused phase directions, repeated noise/pattern variants and this reused development suite are not independent scene replications. No new inference, RGB restoration, checkpoint load, noise/source render, sensor draw, original/RAW decode or dataz access. Six protected real crops are input-only controls; no ISO100/JPEG reference is read or scored. Existing source/checkpoints/arrays/receipts remain unchanged; new100-neural-file hashes stay exact.\",\n    }\n    save(ROOT / \"plan-v1.json\", plan)\n    print(\n        \"Prepared550input-onlyselections/512postselectiontemplates;no neural code or quality change\"\n    )\n\n\ndef guard(plan):\n    assert ref(__file__) == plan[\"runner\"]\n    for b in plan[\"sources\"]:\n        assert ref(b[\"path\"]) == {k: b[k] for k in [\"path\", \"sha256\"]}\n    for key in [\"publication\", \"verification\", \"plan\", \"scores\", \"selection_journal\", \"design\"]:\n        b = plan[\"dependency\"][key]\n        assert ref(b[\"path\"]) == b\n\n\ndef selected_stats(spectra, noise, greens, bins):\n    height, width = spectra.shape[-2:]\n    fy, fx = [np.fft.fftfreq(n) / 2 for n in [height, width]]\n    records = []\n    for direction, (a, b) in enumerate([(0, 1), (1, 0)]):\n        for rank, (y, x) in enumerate(bins[direction], 1):\n            za = spectra[a, y, x] / math.sqrt(noise[a, y, x])\n            zb = spectra[b, y, x] / math.sqrt(noise[b, y, x])\n            dy, dx = greens[b] // 2 - greens[a] // 2, greens[b] % 2 - greens[a] % 2\n            cross = za * np.conj(zb) * np.exp(2j * np.pi * (dy * fy[y] + dx * fx[x]))\n            records.append(\n                {\n                    \"direction\": direction,\n                    \"rank\": rank,\n                    \"bin_yx\": [y, x],\n                    \"selection_power\": float(abs(za) ** 2),\n                    \"other_phase_power\": float(abs(zb) ** 2),\n                    \"bounded_cross_real\": float(\n                        cross.real / np.sqrt((1 + abs(za) ** 2) * (1 + abs(zb) ** 2))\n                    ),\n                }\n            )\n    return records\n\n\ndef measure_input(arrays, actual):\n    packed, variance, colors = [arrays[k] for k in [\"packed\", \"variance\", \"colors\"]]\n    assert len(packed) == 1 and variance.shape == packed.shape and colors.shape == (1, 4)\n    greens = np.flatnonzero(colors[0] == 1)\n    phase = [\n        tapered_spectrum(\n            packed[0, g].astype(np.float64) - float(packed[0, g, 0, 0]), variance[0, g]\n        )\n        for g in greens\n    ]\n    spectra = np.stack([p[\"spectrum\"] for p in phase])\n    noise = np.maximum(np.stack([p[\"noise_variance\"] for p in phase]), (1 / 65535) ** 2)\n    shape = tuple(int(n) for n in packed.shape[-2:])\n    masks = {\n        \"FP64_high4\": eligible_bins(shape, 1 / 16, 1 / 3),\n        \"lower4\": eligible_bins(shape, 1 / 32, 1 / 16, upper_inclusive=False),\n        \"broad4\": eligible_bins(shape, 1 / 32, 1 / 3),\n    }\n    choices = {\"actual_high4\": actual}\n    for key, mask in masks.items():\n        choices[key] = [select_bins(spectra[a], noise[a], mask, count=4) for a in range(2)]\n    choices[\"balanced8\"] = [actual[a] + choices[\"lower4\"][a] for a in range(2)]\n    stats = {k: selected_stats(spectra, noise, greens, choices[k]) for k in METHODS}\n    return choices, stats\n\n\ndef summarize(rows, keys):\n    output = []\n    groups = defaultdict(list)\n    for row in rows:\n        groups[tuple(row.get(k) for k in keys)].append(row)\n    for key, items in groups.items():\n        entry = dict(zip(keys, key, strict=True), cases=len(items))\n        for field in items[0]:\n            if field in keys:\n                continue\n            values = [r.get(field) for r in items]\n            if all(type(v) in [float, int] and math.isfinite(v) for v in values):\n                entry[field] = {\n                    \"mean\": math.fsum(values) / len(values),\n                    \"median\": float(np.median(values)),\n                    \"p10\": float(np.quantile(values, 0.1)),\n                    \"p90\": float(np.quantile(values, 0.9)),\n                }\n        output.append(entry)\n    return output\n\n\ndef run():\n    plan = read(ROOT / \"plan-v1.json\")\n    guard(plan)\n    require_completed()\n    owner = {\"pid\": os.getpid(), \"created\": psutil.Process().create_time()}\n    for _ in range(60):\n        if (ROOT / \"launch-v1.json\").exists() and read(ROOT / \"launch-v1.json\")[\"owner\"] == owner:\n            break\n        time.sleep(0.2)\n    else:\n        raise RuntimeError(\"Missing actual scientific owner; no array work\")\n    (ROOT / \"run.claim\").open(\"x\").close()\n    save(ROOT / \"owner-v1.json\", owner)\n    os.nice(10)\n    os.sched_setaffinity(0, [6, 7])\n    started = time.time()\n    actual = {}\n    ids = {c[\"id\"] for c in plan[\"cases\"]}\n    with gzip.open(plan[\"dependency\"][\"selection_journal\"][\"path\"], \"rt\") as stream:\n        for line in stream:\n            record = json.loads(line)\n            if record[\"method\"] == \"V185-spatial-context-raw\" and record[\"id\"] in ids:\n                e = record[\"evidence\"]\n                assert e is not None and all(np.array(e[\"valid\"]).ravel())\n                actual[record[\"id\"]] = {\"bins\": e[\"bin_yx\"][0], \"inputs\": record[\"inputs\"]}\n    assert len(actual) == 550\n    input_rows = []\n    mismatch = 0\n    path = ROOT / \"input-selections-v1.jsonl.gz\"\n    with gzip.open(path, \"xt\", compresslevel=6) as journal:\n        for index, case in enumerate(plan[\"cases\"]):\n            assert (\n                shutil.disk_usage(REPO).free > 48.5 * 2**30\n                and psutil.virtual_memory().available > 32 * 2**30\n            )\n            assert ref(case[\"arrays\"][\"path\"]) == case[\"arrays\"]\n            with np.load(case[\"arrays\"][\"path\"], allow_pickle=False) as archive:\n                arrays = {k: archive[k] for k in [\"packed\", \"variance\", \"colors\"]}\n            inputs = {k: fingerprint(v) for k, v in arrays.items()}\n            assert all(v == actual[case[\"id\"]][\"inputs\"][k] for k, v in inputs.items())\n            choices, stats = measure_input(arrays, actual[case[\"id\"]][\"bins\"])\n            same = choices[\"actual_high4\"] == choices[\"FP64_high4\"]\n            mismatch += int(not same)\n            row = {\n                \"index\": index,\n                \"id\": case[\"id\"],\n                \"kind\": case[\"kind\"],\n                \"present\": case.get(\"present\"),\n                \"noise\": case.get(\"noise\", {}).get(\"name\"),\n                \"arrays\": case[\"arrays\"],\n                \"inputs\": inputs,\n                \"packed_shape\": list(arrays[\"packed\"].shape),\n                \"colors\": arrays[\"colors\"].tolist(),\n                \"bins\": choices,\n                \"selected_stats\": stats,\n                \"actual_vs_FP64_high4_bins_exact\": same,\n            }\n            input_rows.append(row)\n            journal.write(json.dumps(row, separators=(\",\", \":\"), allow_nan=False) + \"\\n\")\n            journal.flush()\n            if (index + 1) % 50 == 0:\n                print(\"input-only\", index + 1, \"/550\", flush=True)\n    # This binding exists before any exact clean array or saved response is read.\n    save(\n        ROOT / \"input-completion-v1.json\",\n        {\n            \"status\": \"closed-all550-RAW-only-counterfactual-selections-before-target-scoring\",\n            \"journal\": ref(path),\n            \"cases\": len(input_rows),\n            \"input_fingerprints\": 3 * len(input_rows),\n            \"saved_actual_V185_bins_retained_exact\": True,\n            \"actual_vs_FP64_case_mismatches\": mismatch,\n            \"target_array_reads_before_close\": 0,\n            \"owner\": owner,\n        },\n    )\n    assert \"torch\" not in sys.modules and \"rawpy\" not in sys.modules\n    saved = read(plan[\"dependency\"][\"scores\"][\"path\"])\n    responses = {(r[\"id\"], r[\"method\"]): r for r in saved[\"rows\"]}\n    scored = []\n    control = []\n    with gzip.open(ROOT / \"postselection-template-v1.jsonl.gz\", \"xt\", compresslevel=6) as journal:\n        for case, selection in zip(plan[\"cases\"], input_rows, strict=True):\n            assert case[\"id\"] == selection[\"id\"] and ref(case[\"arrays\"][\"path\"]) == case[\"arrays\"]\n            if case[\"kind\"] == \"mesh\":\n                with np.load(case[\"arrays\"][\"path\"], allow_pickle=False) as archive:\n                    colors = archive[\"colors\"]\n                    present = np.maximum(archive[\"target_present\"], np.float32(0))\n                    empty = np.maximum(archive[\"target_empty\"], np.float32(0))\n                signal = sample_camera_rgb(present, colors).astype(np.float64) - sample_camera_rgb(\n                    empty, colors\n                ).astype(np.float64)\n                greens = np.flatnonzero(colors[0] == 1)\n                spectra = np.stack([tapered_spectrum(signal[0, g])[\"spectrum\"] for g in greens])\n                power = (abs(spectra) ** 2).sum(0)\n                h, w = power.shape\n                fy, fx = [np.fft.fftfreq(n) / 2 for n in [h, w]]\n                radius = np.hypot(fy[:, None], fx[None, :])\n                result = {\n                    \"id\": case[\"id\"],\n                    \"kind\": \"mesh\",\n                    \"present\": case[\"present\"],\n                    \"seed\": case[\"seed\"],\n                    \"noise\": case[\"noise\"][\"name\"],\n                    \"pattern\": case[\"pattern\"],\n                    \"template_sensor_values\": fingerprint(signal),\n                    \"template_power\": fingerprint(power),\n                    \"total_tapered_template_energy\": float(power.sum()),\n                    \"lower_octave_power_fraction\": power_fraction(\n                        power, (radius >= 1 / 32) & (radius < 1 / 16)\n                    ),\n                    \"high_band_power_fraction\": power_fraction(\n                        power, (radius >= 1 / 16) & (radius <= 1 / 3)\n                    ),\n                    \"below_lower_octave_power_fraction\": power_fraction(power, radius < 1 / 32),\n                    \"nominal_fundamentals_below_high\": sum(\n                        p > 16 for p in case[\"source\"][\"recipe\"][\"periods_final_pixels\"]\n                    ),\n                    \"V185_raw_template_gain\": responses[case[\"id\"], \"V185-spatial-context-raw\"][\n                        \"template_gain\"\n                    ],\n                    \"V185_EMA_template_gain\": responses[case[\"id\"], \"V185-spatial-context-EMA\"][\n                        \"template_gain\"\n                    ],\n                }\n                local_radius = max(math.ceil(h / 65), math.ceil(w / 65))\n                result[\"local_bandwidth_square_radius_bins\"] = local_radius\n                for method in METHODS:\n                    bins = np.asarray(selection[\"bins\"][method]).reshape(-1, 2)\n                    for label, r in [(\"near1\", 1), (\"localwidth\", local_radius)]:\n                        result[method + \"_\" + label + \"_template_fraction\"] = power_fraction(\n                            power, footprint((h, w), bins, r)\n                        )\n                scored.append(result)\n                journal.write(json.dumps(result, separators=(\",\", \":\"), allow_nan=False) + \"\\n\")\n            else:\n                with np.load(case[\"arrays\"][\"path\"], allow_pickle=False) as archive:\n                    raw, variance, colors = [archive[k] for k in [\"packed\", \"variance\", \"colors\"]]\n                regions = (\n                    [{\"name\": case[\"id\"], \"ROI_xywh\": case[\"ROI_xywh\"]}]\n                    if \"ROI_xywh\" in case\n                    else case[\"source\"][\"cases\"]\n                )\n                for region in regions:\n                    x, y, width, height = region[\"ROI_xywh\"]\n                    center = np.array(\n                        [[(y + height // 2) // 2, (x + width // 2) // 2]], dtype=np.int64\n                    )\n                    greens = np.flatnonzero(colors[0] == 1)\n                    for method in METHODS:\n                        values = []\n                        for stat in selection[\"selected_stats\"][method]:\n                            a, b = [greens[q] for q in [(0, 1), (1, 0)][stat[\"direction\"]]]\n                            local = []\n                            for phase in [a, b]:\n                                item = local_phase_projection(\n                                    raw[0, phase],\n                                    variance[0, phase],\n                                    stat[\"bin_yx\"],\n                                    window=65,\n                                    centers_yx=center,\n                                )\n                                local.append(\n                                    float(\n                                        abs(item[\"coefficient\"][0]) ** 2\n                                        / max(float(item[\"noise_variance\"][0]), (1 / 65535) ** 2)\n                                    )\n                                )\n                            values.append(\n                                {\n                                    **stat,\n                                    \"ROI_center_local_selection_power\": local[0],\n                                    \"ROI_center_local_other_power\": local[1],\n                                }\n                            )\n                        control.append(\n                            {\n                                \"id\": case[\"id\"],\n                                \"kind\": case[\"kind\"],\n                                \"noise\": selection[\"noise\"],\n                                \"method\": method,\n                                \"ROI_xywh\": region[\"ROI_xywh\"],\n                                \"center_packed_yx\": center.tolist(),\n                                \"window_packed\": 65,\n                                \"measurements\": values,\n                            }\n                        )\n    power_summary = []\n    for (kind, present), items in _group_inputs(input_rows).items():\n        for method in METHODS:\n            maxima = [\n                max(v[\"other_phase_power\"] for v in r[\"selected_stats\"][method]) for r in items\n            ]\n            power_summary.append(\n                {\n                    \"kind\": kind,\n                    \"present\": present,\n                    \"method\": method,\n                    \"cases\": len(items),\n                    \"max_other_phase_power_median\": float(np.median(maxima)),\n                    \"max_other_phase_power_p90\": float(np.quantile(maxima, 0.9)),\n                    \"counts_at_predeclared_power\": {\n                        str(t): sum(v >= t for v in maxima) for t in plan[\"descriptive_power_bins\"]\n                    },\n                }\n            )\n    save(\n        ROOT / \"control-ROI-measurements-v1.json\",\n        {\n            \"rows\": control,\n            \"scope\": \"Input-only RAW measurements after selection at each fixed ROI center; real references never read and no real GT scored.\",\n        },\n    )\n    result = {\n        \"status\": \"completed-input-only-selection-and-postselection-template-coverage-not-new-model-quality\",\n        \"owner\": owner,\n        \"plan\": ref(ROOT / \"plan-v1.json\"),\n        \"input_completion\": ref(ROOT / \"input-completion-v1.json\"),\n        \"input_journal\": ref(path),\n        \"template_journal\": ref(ROOT / \"postselection-template-v1.jsonl.gz\"),\n        \"control_measurements\": ref(ROOT / \"control-ROI-measurements-v1.json\"),\n        \"input_cases\": 550,\n        \"constructed_template_cases\": len(scored),\n        \"control_case_methods\": len(control),\n        \"actual_vs_FP64_high4_case_mismatches\": mismatch,\n        \"input_power_summary\": power_summary,\n        \"template_summary_by_presence\": summarize(scored, [\"present\"]),\n        \"template_summary_by_presence_and_nominal_band\": summarize(\n            scored, [\"present\", \"nominal_fundamentals_below_high\"]\n        ),\n        \"rows\": scored,\n        \"new_neural_forwards\": 0,\n        \"new_RGB_restorations\": 0,\n        \"new_checkpoint_loads\": 0,\n        \"new_source_noise_draws\": 0,\n        \"real_reference_reads\": 0,\n        \"torch_imported\": False,\n        \"rawpy_imported\": False,\n        \"maximum_RSS_bytes\": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,\n        \"seconds\": time.time() - started,\n        \"scope\": plan[\"scope\"],\n    }\n    assert (\n        len(scored) == 512\n        and len(control) == 160\n        and \"torch\" not in sys.modules\n        and \"rawpy\" not in sys.modules\n    )\n    guard(plan)\n    save(ROOT / \"result-v1.json\", result)\n    print(\n        \"PASS550inputselections/512postselectiontemplates/160controlmethods;no inference\",\n        flush=True,\n    )\n\n\ndef _group_inputs(rows):\n    result = defaultdict(list)\n    for r in rows:\n        result[r[\"kind\"], r[\"present\"]].append(r)\n    return result\n\n\ndef launch():\n    plan = read(ROOT / \"plan-v1.json\")\n    guard(plan)\n    assert not (ROOT / \"launch-v1.json\").exists()\n    env = dict(\n        os.environ,\n        PYTHONPATH=str(ROOT / \"work/scripts\"),\n        CUDA_VISIBLE_DEVICES=\"\",\n        OPENBLAS_NUM_THREADS=\"1\",\n        OMP_NUM_THREADS=\"1\",\n        MKL_NUM_THREADS=\"1\",\n    )\n    with (ROOT / \"run-v1.log\").open(\"xb\") as log:\n        process = subprocess.Popen(\n            [str(REPO / \".venv/bin/python\"), plan[\"runner\"][\"path\"], \"run\"],\n            cwd=REPO,\n            env=env,\n            stdout=log,\n            stderr=subprocess.STDOUT,\n            start_new_session=True,\n        )\n    owner = {\"pid\": process.pid, \"created\": psutil.Process(process.pid).create_time()}\n    save(ROOT / \"launch-v1.json\", {\"owner\": owner, \"plan\": ref(ROOT / \"plan-v1.json\")})\n    print(json.dumps(owner))\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"phase\", choices=[\"prepare\", \"launch\", \"run\"])\n    args = parser.parse_args()\n    if args.phase == \"run\":\n        try:\n            run()\n        except BaseException as exc:\n            save(ROOT / \"failure-v1.json\", {\"error\": repr(exc), \"created_unix_UTC\": time.time()})\n            raise\n    else:\n        {\"prepare\": prepare, \"launch\": launch}[args.phase]()\n"
+  },
+  "template_summary_by_presence": [
+    {
+      "present": true,
+      "cases": 256,
+      "seed": {
+        "mean": 2026112331.5,
+        "median": 2026112331.5,
+        "p10": 2026112306.0,
+        "p90": 2026112357.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.002498946616095046,
+        "median": 0.00027249056262522106,
+        "p10": 1.1965584891836486e-05,
+        "p90": 0.005361212410460588
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.09571946384831129,
+        "median": 0.053302360431730894,
+        "p10": 0.00017091163894015395,
+        "p90": 0.31457164976359336
+      },
+      "high_band_power_fraction": {
+        "mean": 0.900777787007676,
+        "median": 0.9431171649855199,
+        "p10": 0.6853376214904645,
+        "p90": 0.9997383191388511
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 0.002797266746854714,
+        "median": 2.040486678894388e-05,
+        "p10": 1.352553504788524e-08,
+        "p90": 0.0050807441731719576
+      },
+      "nominal_fundamentals_below_high": {
+        "mean": 0.78125,
+        "median": 1.0,
+        "p10": 0.0,
+        "p90": 2.0
+      },
+      "V185_raw_template_gain": {
+        "mean": 0.04967607741887174,
+        "median": 0.006898024237309533,
+        "p10": -0.0037966995387492017,
+        "p90": 0.11464062241582558
+      },
+      "V185_EMA_template_gain": {
+        "mean": 0.05170912348419074,
+        "median": 0.006878233759095792,
+        "p10": -0.0038009078450316367,
+        "p90": 0.11946020844670396
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.17341964067110116,
+        "median": 0.00018572363079724283,
+        "p10": 2.582156520442208e-07,
+        "p90": 0.6760829032114901
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.21253436217083202,
+        "median": 0.011777296445054567,
+        "p10": 0.00010324950586048755,
+        "p90": 0.7717010902709286
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.17341964067110116,
+        "median": 0.00018572363079724283,
+        "p10": 2.582156520442208e-07,
+        "p90": 0.6760829032114901
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.21253436217083202,
+        "median": 0.011777296445054567,
+        "p10": 0.00010324950586048755,
+        "p90": 0.7717010902709286
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.18354749890085148,
+        "median": 0.00022000643696240072,
+        "p10": 3.224068902911951e-07,
+        "p90": 0.6760829032114901
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.22412650427500833,
+        "median": 0.015812739696494518,
+        "p10": 9.549582950340621e-05,
+        "p90": 0.7724746592015757
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.1993970848998111,
+        "median": 0.0043373848361535575,
+        "p10": 4.0629242790283605e-06,
+        "p90": 0.6883197887422553
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.2707219871618531,
+        "median": 0.0833618861582554,
+        "p10": 0.0009262216919956675,
+        "p90": 0.7910870673169181
+      }
+    },
+    {
+      "present": false,
+      "cases": 256,
+      "seed": {
+        "mean": 2026112331.5,
+        "median": 2026112331.5,
+        "p10": 2026112306.0,
+        "p90": 2026112357.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.002498946616095046,
+        "median": 0.00027249056262522106,
+        "p10": 1.1965584891836486e-05,
+        "p90": 0.005361212410460588
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.09571946384831129,
+        "median": 0.053302360431730894,
+        "p10": 0.00017091163894015395,
+        "p90": 0.31457164976359336
+      },
+      "high_band_power_fraction": {
+        "mean": 0.900777787007676,
+        "median": 0.9431171649855199,
+        "p10": 0.6853376214904645,
+        "p90": 0.9997383191388511
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 0.002797266746854714,
+        "median": 2.040486678894388e-05,
+        "p10": 1.352553504788524e-08,
+        "p90": 0.0050807441731719576
+      },
+      "nominal_fundamentals_below_high": {
+        "mean": 0.78125,
+        "median": 1.0,
+        "p10": 0.0,
+        "p90": 2.0
+      },
+      "V185_raw_template_gain": {
+        "mean": 1.1997955531686838e-05,
+        "median": -8.010327758967804e-05,
+        "p10": -0.0050879098437632015,
+        "p90": 0.0038336424307167565
+      },
+      "V185_EMA_template_gain": {
+        "mean": 1.1006390088914102e-05,
+        "median": -7.756597834742503e-05,
+        "p10": -0.0050979486142842135,
+        "p90": 0.0038602303069837527
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.0016691493556702742,
+        "median": 2.0628390549343923e-05,
+        "p10": 1.7160714034473705e-07,
+        "p90": 0.0011426590410467958
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.016957024615710678,
+        "median": 0.0010720600431745513,
+        "p10": 5.018345131223802e-05,
+        "p90": 0.04122350656117976
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.0016691493556702742,
+        "median": 2.0628390549343923e-05,
+        "p10": 1.7160714034473705e-07,
+        "p90": 0.0011426590410467958
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.016957024615710678,
+        "median": 0.0010720600431745513,
+        "p10": 5.018345131223802e-05,
+        "p90": 0.04122350656117976
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.0016610309503670073,
+        "median": 1.8299090496646176e-05,
+        "p10": 1.368157630846313e-07,
+        "p90": 0.0011251070274490012
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.017036197261825606,
+        "median": 0.0010908005286598683,
+        "p10": 3.6514819989804115e-05,
+        "p90": 0.041711212816106694
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.008624803849714233,
+        "median": 0.00017468722888847686,
+        "p10": 2.6408081973136666e-06,
+        "p90": 0.017713641868240364
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.05843533749260957,
+        "median": 0.013194991119566221,
+        "p10": 0.0004875793815070368,
+        "p90": 0.17966761001743398
+      }
+    }
+  ],
+  "template_summary_by_presence_and_nominal_band": [
+    {
+      "present": true,
+      "nominal_fundamentals_below_high": 1,
+      "cases": 104,
+      "seed": {
+        "mean": 2026112330.5384614,
+        "median": 2026112330.5,
+        "p10": 2026112304.0,
+        "p90": 2026112356.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.0025398578536720584,
+        "median": 0.0003013015186569966,
+        "p10": 1.7726166909259867e-05,
+        "p90": 0.002643334730012962
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.09716523356986022,
+        "median": 0.07879340633179843,
+        "p10": 0.044749506424532876,
+        "p90": 0.17603090023930204
+      },
+      "high_band_power_fraction": {
+        "mean": 0.8993080592812213,
+        "median": 0.9184494541988883,
+        "p10": 0.823961940717043,
+        "p90": 0.9472707506231007
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 0.003384590140277988,
+        "median": 4.787643190638227e-05,
+        "p10": 1.5598456617470433e-06,
+        "p90": 0.01359100963305072
+      },
+      "V185_raw_template_gain": {
+        "mean": 0.05124515453499426,
+        "median": 0.007872023503778034,
+        "p10": -0.0021150146561237384,
+        "p90": 0.10896799581647265
+      },
+      "V185_EMA_template_gain": {
+        "mean": 0.05294657802717868,
+        "median": 0.008090193234242548,
+        "p10": -0.002101326395407359,
+        "p90": 0.11562708241455703
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.17098886964314108,
+        "median": 0.000226519113372111,
+        "p10": 9.380168116535811e-07,
+        "p90": 0.5738435129184208
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.21726295386363195,
+        "median": 0.011726930123799398,
+        "p10": 0.0003334057622200226,
+        "p90": 0.7204530682700203
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.17098886964314108,
+        "median": 0.000226519113372111,
+        "p10": 9.380168116535811e-07,
+        "p90": 0.5738435129184208
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.21726295386363195,
+        "median": 0.011726930123799398,
+        "p10": 0.0003334057622200226,
+        "p90": 0.7204530682700203
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.17421446934857657,
+        "median": 0.0003110472135529551,
+        "p10": 1.120368215243574e-06,
+        "p90": 0.5869809382815443
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.22225287772060318,
+        "median": 0.022406951474366343,
+        "p10": 0.0004338018378529938,
+        "p90": 0.7204530682700203
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.1975615899966217,
+        "median": 0.011438382666370074,
+        "p10": 1.4494106097625543e-05,
+        "p90": 0.6218774717623023
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.2769158575779289,
+        "median": 0.11570404703599774,
+        "p10": 0.002885809903364042,
+        "p90": 0.7647083300555974
+      }
+    },
+    {
+      "present": false,
+      "nominal_fundamentals_below_high": 1,
+      "cases": 104,
+      "seed": {
+        "mean": 2026112330.5384614,
+        "median": 2026112330.5,
+        "p10": 2026112304.0,
+        "p90": 2026112356.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.0025398578536720584,
+        "median": 0.0003013015186569966,
+        "p10": 1.7726166909259867e-05,
+        "p90": 0.002643334730012962
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.09716523356986022,
+        "median": 0.07879340633179843,
+        "p10": 0.044749506424532876,
+        "p90": 0.17603090023930204
+      },
+      "high_band_power_fraction": {
+        "mean": 0.8993080592812213,
+        "median": 0.9184494541988883,
+        "p10": 0.823961940717043,
+        "p90": 0.9472707506231007
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 0.003384590140277988,
+        "median": 4.787643190638227e-05,
+        "p10": 1.5598456617470433e-06,
+        "p90": 0.01359100963305072
+      },
+      "V185_raw_template_gain": {
+        "mean": -0.001212335970301694,
+        "median": -0.00010676905745944589,
+        "p10": -0.00742546266028294,
+        "p90": 0.0032711826272614846
+      },
+      "V185_EMA_template_gain": {
+        "mean": -0.0012275186405289928,
+        "median": -0.00010438840245731814,
+        "p10": -0.007427419758907465,
+        "p90": 0.0032681402419566193
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.0030025906869320914,
+        "median": 2.8195470701624047e-05,
+        "p10": 3.811397998785322e-07,
+        "p90": 0.0015802662040368825
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.02263577137186255,
+        "median": 0.0015322993021298437,
+        "p10": 0.00014840093529436428,
+        "p90": 0.04637801933657163
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.0030025906869320914,
+        "median": 2.8195470701624047e-05,
+        "p10": 3.811397998785322e-07,
+        "p90": 0.0015802662040368825
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.02263577137186255,
+        "median": 0.0015322993021298437,
+        "p10": 0.00014840093529436428,
+        "p90": 0.04637801933657163
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.002983792369196115,
+        "median": 2.503297911431539e-05,
+        "p10": 2.8053898801737686e-07,
+        "p90": 0.0013160074313453376
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.021346262326014134,
+        "median": 0.0016147047031586127,
+        "p10": 0.00010697861730801772,
+        "p90": 0.04637801933657163
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.008914032129802307,
+        "median": 0.0002841013366242125,
+        "p10": 5.443652550073236e-06,
+        "p90": 0.01584857369007875
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.06275975470017257,
+        "median": 0.024504620750694307,
+        "p10": 0.0011008046176545073,
+        "p90": 0.1526149842128652
+      }
+    },
+    {
+      "present": true,
+      "nominal_fundamentals_below_high": 0,
+      "cases": 104,
+      "seed": {
+        "mean": 2026112332.8076923,
+        "median": 2026112332.0,
+        "p10": 2026112310.0,
+        "p90": 2026112359.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.0033307982942453115,
+        "median": 0.0007143296857840569,
+        "p10": 2.8951170500428264e-05,
+        "p90": 0.01023926302805465
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.005128754169261864,
+        "median": 0.00043266695672508875,
+        "p10": 5.455695380963549e-06,
+        "p90": 0.011808799932663967
+      },
+      "high_band_power_fraction": {
+        "mean": 0.9937203129488096,
+        "median": 0.9993545686493968,
+        "p10": 0.9785461232881624,
+        "p90": 0.9999695056000569
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 9.076312249664075e-05,
+        "median": 4.8329669555280385e-06,
+        "p10": 4.4888119388139136e-10,
+        "p90": 0.0002127837956658519
+      },
+      "V185_raw_template_gain": {
+        "mean": 0.06350075830781822,
+        "median": 0.01041286611519682,
+        "p10": -0.002913298490053351,
+        "p90": 0.16903942977054143
+      },
+      "V185_EMA_template_gain": {
+        "mean": 0.06668870434230148,
+        "median": 0.010726732584913638,
+        "p10": -0.0029226431809279093,
+        "p90": 0.1760619693992026
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.23450554248945465,
+        "median": 0.00011103044438102433,
+        "p10": 3.609659090967165e-08,
+        "p90": 0.7572361693460689
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.2724202670374401,
+        "median": 0.011777406783305798,
+        "p10": 1.9769506860237782e-05,
+        "p90": 0.8135141781046428
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.23450554248945465,
+        "median": 0.00011103044438102433,
+        "p10": 3.609659090967165e-08,
+        "p90": 0.7572361693460689
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.2724202670374401,
+        "median": 0.011777406783305798,
+        "p10": 1.9769506860237782e-05,
+        "p90": 0.8135141781046428
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.23466355668975722,
+        "median": 0.00011103044438102433,
+        "p10": 4.054391851694483e-08,
+        "p90": 0.7626656025836678
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.27247712985473027,
+        "median": 0.011777406783305798,
+        "p10": 1.9769506860237782e-05,
+        "p90": 0.8315080347540428
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.2372913228166437,
+        "median": 0.0014431665620001895,
+        "p10": 9.37035219939867e-07,
+        "p90": 0.7682052785010235
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.2775613510703268,
+        "median": 0.018804308653014884,
+        "p10": 0.00019614034716452106,
+        "p90": 0.8404293408460864
+      }
+    },
+    {
+      "present": false,
+      "nominal_fundamentals_below_high": 0,
+      "cases": 104,
+      "seed": {
+        "mean": 2026112332.8076923,
+        "median": 2026112332.0,
+        "p10": 2026112310.0,
+        "p90": 2026112359.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.0033307982942453115,
+        "median": 0.0007143296857840569,
+        "p10": 2.8951170500428264e-05,
+        "p90": 0.01023926302805465
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.005128754169261864,
+        "median": 0.00043266695672508875,
+        "p10": 5.455695380963549e-06,
+        "p90": 0.011808799932663967
+      },
+      "high_band_power_fraction": {
+        "mean": 0.9937203129488096,
+        "median": 0.9993545686493968,
+        "p10": 0.9785461232881624,
+        "p90": 0.9999695056000569
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 9.076312249664075e-05,
+        "median": 4.8329669555280385e-06,
+        "p10": 4.4888119388139136e-10,
+        "p90": 0.0002127837956658519
+      },
+      "V185_raw_template_gain": {
+        "mean": -0.00011167385162225981,
+        "median": -5.7709520497213444e-05,
+        "p10": -0.0018299661316452881,
+        "p90": 0.0016039556542983182
+      },
+      "V185_EMA_template_gain": {
+        "mean": -0.0001094753133822312,
+        "median": -5.8391275145236595e-05,
+        "p10": -0.0018333646777255774,
+        "p90": 0.001608380331883954
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.000623366031439858,
+        "median": 7.76281029635051e-06,
+        "p10": 3.966377596484465e-08,
+        "p90": 0.0009853792873359773
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.01367322927804544,
+        "median": 0.000809801977489778,
+        "p10": 1.5400700789043333e-05,
+        "p90": 0.03789904781304799
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.000623366031439858,
+        "median": 7.76281029635051e-06,
+        "p10": 3.966377596484465e-08,
+        "p90": 0.0009853792873359773
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.01367322927804544,
+        "median": 0.000809801977489778,
+        "p10": 1.5400700789043333e-05,
+        "p90": 0.03789904781304799
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.0006185611148284891,
+        "median": 7.28415122471555e-06,
+        "p10": 3.0216244167033225e-08,
+        "p90": 0.0009853360382071348
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.013615330035274653,
+        "median": 0.000809801977489778,
+        "p10": 1.316675124916113e-05,
+        "p90": 0.03789904781304799
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.0015489958322268,
+        "median": 3.4606525225468885e-05,
+        "p10": 5.540533486803252e-07,
+        "p90": 0.0017325616760026934
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.017450832876318365,
+        "median": 0.0018470692634198814,
+        "p10": 0.00016425627355877112,
+        "p90": 0.05307343590557491
+      }
+    },
+    {
+      "present": true,
+      "nominal_fundamentals_below_high": 2,
+      "cases": 48,
+      "seed": {
+        "mean": 2026112330.75,
+        "median": 2026112330.5,
+        "p10": 2026112308.0,
+        "p90": 2026112352.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.0006079602986859424,
+        "median": 3.52311570518338e-05,
+        "p10": 7.2888247093280645e-06,
+        "p90": 0.0023290730718280696
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.288866833756229,
+        "median": 0.29633360582195134,
+        "p10": 0.2298957757313263,
+        "p90": 0.358414505520681
+      },
+      "high_band_power_fraction": {
+        "mean": 0.7025867242092053,
+        "median": 0.7034074837206995,
+        "p10": 0.6142466832660274,
+        "p90": 0.7698122788392624
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 0.007388823913880113,
+        "median": 0.00015942795496739332,
+        "p10": 7.266240526361218e-06,
+        "p90": 0.022321876736112477
+      },
+      "V185_raw_template_gain": {
+        "mean": 0.016322935074555577,
+        "median": 0.0023133312407745124,
+        "p10": -0.010440194636538398,
+        "p90": 0.07579610798368008
+      },
+      "V185_EMA_template_gain": {
+        "mean": 0.016572213448476935,
+        "median": 0.002318725472374573,
+        "p10": -0.010458382047464833,
+        "p90": 0.07649306819403352
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.04633352395858212,
+        "median": 8.575278585200806e-05,
+        "p10": 1.953493260950328e-06,
+        "p90": 0.25129776425928857
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.07253628629211463,
+        "median": 0.010794373069792845,
+        "p10": 0.00024988774382179194,
+        "p90": 0.2959915915651258
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.04633352395858212,
+        "median": 8.575278585200806e-05,
+        "p10": 1.953493260950328e-06,
+        "p90": 0.25129776425928857
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.07253628629211463,
+        "median": 0.010794373069792845,
+        "p10": 0.00024988774382179194,
+        "p90": 0.2959915915651258
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.09301760438815139,
+        "median": 9.445948073609524e-05,
+        "p10": 1.643283366501657e-06,
+        "p90": 0.5214569962237239
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.12342633972015528,
+        "median": 0.01601092567951666,
+        "p10": 0.00017972275219053246,
+        "p90": 0.5941977217472757
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.12126980837025081,
+        "median": 0.004093555294925882,
+        "p10": 9.285209854605256e-05,
+        "p90": 0.6045105578281577
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.24248331279199564,
+        "median": 0.18464798441811045,
+        "p10": 0.04052307338097037,
+        "p90": 0.6683980877102286
+      }
+    },
+    {
+      "present": false,
+      "nominal_fundamentals_below_high": 2,
+      "cases": 48,
+      "seed": {
+        "mean": 2026112330.75,
+        "median": 2026112330.5,
+        "p10": 2026112308.0,
+        "p90": 2026112352.0
+      },
+      "total_tapered_template_energy": {
+        "mean": 0.0006079602986859424,
+        "median": 3.52311570518338e-05,
+        "p10": 7.2888247093280645e-06,
+        "p90": 0.0023290730718280696
+      },
+      "lower_octave_power_fraction": {
+        "mean": 0.288866833756229,
+        "median": 0.29633360582195134,
+        "p10": 0.2298957757313263,
+        "p90": 0.358414505520681
+      },
+      "high_band_power_fraction": {
+        "mean": 0.7025867242092053,
+        "median": 0.7034074837206995,
+        "p10": 0.6142466832660274,
+        "p90": 0.7698122788392624
+      },
+      "below_lower_octave_power_fraction": {
+        "mean": 0.007388823913880113,
+        "median": 0.00015942795496739332,
+        "p10": 7.266240526361218e-06,
+        "p90": 0.022321876736112477
+      },
+      "V185_raw_template_gain": {
+        "mean": 0.0029326770436708966,
+        "median": -0.00022076789684795324,
+        "p10": -0.007899412183361074,
+        "p90": 0.020115464279729822
+      },
+      "V185_EMA_template_gain": {
+        "mean": 0.002955520980615194,
+        "median": -0.0002153312273879664,
+        "p10": -0.007900877692684443,
+        "p90": 0.020316655681608526
+      },
+      "local_bandwidth_square_radius_bins": {
+        "mean": 4.0,
+        "median": 4.0,
+        "p10": 4.0,
+        "p90": 4.0
+      },
+      "actual_high4_near1_template_fraction": {
+        "mean": 0.0010458903404355722,
+        "median": 5.178614262926587e-05,
+        "p10": 2.438103020435313e-06,
+        "p90": 0.0010269059471490173
+      },
+      "actual_high4_localwidth_template_fraction": {
+        "mean": 0.011767963208989637,
+        "median": 0.0010422150811925796,
+        "p10": 0.00017023338692895808,
+        "p90": 0.039320568418834405
+      },
+      "FP64_high4_near1_template_fraction": {
+        "mean": 0.0010458903404355722,
+        "median": 5.178614262926587e-05,
+        "p10": 2.438103020435313e-06,
+        "p90": 0.0010269059471490173
+      },
+      "FP64_high4_localwidth_template_fraction": {
+        "mean": 0.011767963208989637,
+        "median": 0.0010422150811925796,
+        "p10": 0.00017023338692895808,
+        "p90": 0.039320568418834405
+      },
+      "broad4_near1_template_fraction": {
+        "mean": 0.0010537325199040635,
+        "median": 5.178614262926587e-05,
+        "p10": 3.5378154753359995e-06,
+        "p90": 0.0010269062030694364
+      },
+      "broad4_localwidth_template_fraction": {
+        "mean": 0.01510960194694419,
+        "median": 0.0011143117490296035,
+        "p10": 0.00019494263782196154,
+        "p90": 0.041525089875995395
+      },
+      "balanced8_near1_template_fraction": {
+        "mean": 0.023329059947412845,
+        "median": 0.001765146312637985,
+        "p10": 5.7757194824238606e-05,
+        "p90": 0.06032933946249791
+      },
+      "balanced8_localwidth_template_fraction": {
+        "mean": 0.13786552687818732,
+        "median": 0.13267921792392456,
+        "p10": 0.012316166024744946,
+        "p90": 0.2836444883062284
+      }
+    }
+  ],
+  "new_input_selection_or_template_calculations": 0,
+  "scope": "Original aggregate loop replaced the numeric nominal-band group identity with a numeric-statistics object. All512 row values and primary presence-only summaries were correct and remain unchanged. Corrected reducer skips group-key fields; original result, source and failed audit preserved. Canonical runner also handles the two-ROI cab metadata; retained science is not rerun."
+}
