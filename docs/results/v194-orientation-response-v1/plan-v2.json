@@ -1,0 +1,1544 @@
+{
+  "status": "prepared-D4-corrected-orientation-supplement-before-any-saved-prediction-projection",
+  "created_unix_UTC": 1794165739.2367773,
+  "runner": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/work/report_mesh_orientation_response.py",
+    "sha256": "14486e536eb3157624002b3cf460d8dcf701019d00b662ab206e7d7498743424"
+  },
+  "original_preparation": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-preparation-v1/plan-v1.json",
+    "sha256": "5957053e1b715b047e5d60326ceac1c8a611a4228380be89e1ab78e8733d6735"
+  },
+  "correction": "Original recipe normals precede augmentation. Metadata inspection found seed2302 rot2+horizontalflip and seed2309 rot3. Correct native normals before reading actual saved predictions. Original plan/math/tests remain unchanged. Same two cases/eight methods; no result-based case/angle selection.",
+  "cases": [
+    {
+      "case": {
+        "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112302-present-iso6400-prior-RGGB.npz",
+          "sha256": "b88ac3be4eeb5c4b88b6e3814ae41fe7920bcc7c0eda969761c4f5530234bd75"
+        },
+        "pattern": "RGGB",
+        "seed": 2026112302,
+        "present": true,
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 8,
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0,
+          "contrast_multiplier": 1
+        },
+        "reference_role": "Exact procedural mesh or empty GT; hypothetical present template used only for diagnostic metrics",
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-016.npy",
+          "sha256": "b1724b86319c931b8c534f627bd4e9652c1ca4c2e2181e442747f1ca51f06d79"
+        },
+        "kind": "mesh",
+        "origin_plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/plan-v1.json",
+          "sha256": "6ca622ce855282096f1cf0e82555be2130f5d30c4b937ef1e9aa00c33aa2cacf"
+        },
+        "origin_index": 16,
+        "source": {
+          "recipe": {
+            "kind": "crossed-lines",
+            "present": true,
+            "seed": 4887276094017745860,
+            "size": 1024,
+            "pixel_scale": 2,
+            "level": 0.010231375756123073,
+            "requested_peak_relative_contrast": 0.10288250347805222,
+            "peak_relative_contrast": 0.10288250347805222,
+            "tint": [
+              0.8520712852478027,
+              0.9096097350120544,
+              1.0
+            ],
+            "contrast_direction": [
+              1.0,
+              -0.9933177828788757,
+              -0.14096839725971222
+            ],
+            "background_slope": [
+              0.0,
+              0.0
+            ],
+            "angles_radians": [
+              1.9653401245429662,
+              2.9951611798202493
+            ],
+            "periods_final_pixels": [
+              9.004032062696457,
+              7.0325739239678935
+            ],
+            "wire_sigma_final_pixels": [
+              1.0538010079079503,
+              0.7165287365882756
+            ],
+            "phases_cycles": [
+              0.10644427945996926,
+              0.6241716321910649
+            ],
+            "mask_center_final_pixels": [
+              222.1202646983116,
+              210.3193128142888
+            ],
+            "mask_radii_final_pixels": [
+              212.87907406662634,
+              244.42347106763617
+            ],
+            "rms_relative_contrast": 0.03523594832315021,
+            "space": "scene-linear-sRGB",
+            "absence_probability": 0.5
+          }
+        },
+        "periodic_detail": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-evaluation-v1/predictions/detail-mesh-seed2026112302-present-iso6400-prior-RGGB.npy",
+          "sha256": "cd92b27f4cb067374bc34293630739a55bafbd86e6db4bee74ac12891fdf00bd"
+        },
+        "periodic_expected_full_RMS": 17.815957854600175,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "73f564ca451858807b93ac9ce548297eab0ea47998b4ffbdd6ff3121a8e18755"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "758806088579e092e3f959640e7eff9da92255a86e504091961363a33b1c45a9"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ]
+      },
+      "geometry": {
+        "rotation90_CCW": 2,
+        "horizontal_flip_after_rotation": true,
+        "homography": false,
+        "saved_geometry_RNG_state_exact": true,
+        "recipe_normals_radians": [
+          1.9653401245429662,
+          2.9951611798202493
+        ],
+        "native_normals_radians": [
+          1.1762525290468266,
+          0.1464314737695438
+        ]
+      },
+      "methods": [
+        {
+          "method": "V143 parent",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-016.npy",
+            "sha256": "b1724b86319c931b8c534f627bd4e9652c1ca4c2e2181e442747f1ca51f06d79"
+          },
+          "prior_whole_template_gain": 1.2922154094572512e-06,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/scores-v1.json",
+            "sha256": "aeeb60f2d514e3a6deb814cf43491f3bda570b3ab5984a8c748d82bcd64c31c6"
+          },
+          "checkpoint_metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v4/step5000/V143-step5000-inference.pt",
+            "sha256": "96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4"
+          }
+        },
+        {
+          "method": "V183-coherent-pair-EMA",
+          "prediction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-016.npy",
+            "sha256": "d10c8786c407a417347cbf3817289e0c8866be6d31c87cc2e1eaaab068ddcba1"
+          },
+          "prior_whole_template_gain": 0.021931669524779505,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/scores-v1.json",
+            "sha256": "2182a12e117bf89d87e5f7b6e48b345eb9a3f22372d8cc7d5efdc4acf5d3b9a9"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+              "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+            },
+            "source_checkpoint": {
+              "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+              "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+            },
+            "state": "EMA",
+            "arm": "evidence",
+            "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+            "component": "LateLocalPhaseEvidenceMatchingDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+              "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+            },
+            "full_state_tensors": 189
+          }
+        },
+        {
+          "method": "V187-pooled-wave-raw",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-raw-016.native.json",
+            "sha256": "49817f8f1e57ebc9a69807a39a66c20ea5102570dafcdc64e2aa33945d647493"
+          },
+          "prior_whole_template_gain": 0.047187668182459556,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/scores-v1.json",
+            "sha256": "0f19ff7ca7a8cab280b8b00d7497270960482a861563438080c0b45a9a7c7d86"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/exports/pooled-phase-wave-raw-step1000.pt",
+              "sha256": "517b5a7df9d8dc7ac864981efceeff0fb70b4995d7a877a4a04e4b96c7f75680"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "40b7c7c295ba82cc6b4a4646245483a3234de2759e2ae4d5a8e4e63a16a5e05a"
+            },
+            "state": "raw",
+            "module_hash": "3c61f8575b7c0ffa77bd42ba07ce17273d2f2d0fd36a4ba148a1ac578c24c012",
+            "component": "LatePooledPhaseWaveDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "support_windows": [
+                33,
+                17
+              ],
+              "support_stride": 8
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_pooled_phase_wave.py",
+              "sha256": "2c7ff56f0bcb6586f7f1966a4818af05f11c0e32033bd7d1fb5cdddc304975c6"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V187-pooled-wave-EMA",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-EMA-016.native.json",
+            "sha256": "09f3d8e7c278c9d5ab71857d36b5a03c28e48d0ea9fd2157ebdcb8bb24f06c50"
+          },
+          "prior_whole_template_gain": 0.05122252572621361,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/scores-v1.json",
+            "sha256": "0f19ff7ca7a8cab280b8b00d7497270960482a861563438080c0b45a9a7c7d86"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/exports/pooled-phase-wave-EMA-step1000.pt",
+              "sha256": "4965a9baa17dc36e6f64115644d6ea62af1a48416f253b45c8a73c028f4306f8"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "40b7c7c295ba82cc6b4a4646245483a3234de2759e2ae4d5a8e4e63a16a5e05a"
+            },
+            "state": "EMA",
+            "module_hash": "4739e107a2460166dae5f14c7d89415b4b0c1ccc689d5a3480787ffa1696ebc4",
+            "component": "LatePooledPhaseWaveDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "support_windows": [
+                33,
+                17
+              ],
+              "support_stride": 8
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_pooled_phase_wave.py",
+              "sha256": "2c7ff56f0bcb6586f7f1966a4818af05f11c0e32033bd7d1fb5cdddc304975c6"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V191-dense-spectrum-raw",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-raw-016.native.json",
+            "sha256": "992efc4e56ccb5166b50d4405c7607cbea8771865a03e51ea472b62912c87995"
+          },
+          "prior_whole_template_gain": 0.02373588451056257,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/scores-v1.json",
+            "sha256": "2b19e2d6e823481a4cd1085ffa7d2686ef5a04d1d5271ab6b54e730c6f79c258"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/exports/dense-local-spectrum-raw-step1000.pt",
+              "sha256": "e4461e929deda960581872d25e21603bf55f5005c5b05d8b8abeb79b900a7f15"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "706df7d7f94fb7d19c6242ccc8945aef3b71077a9fa8bcca9f6245f5169f604d"
+            },
+            "state": "raw",
+            "module_hash": "2ae50c7c159edf8cfa5ed3245b740e0cc353300996af55eba28af385c986bf2f",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 65,
+              "dense_stride": 32,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V191-dense-spectrum-EMA",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-EMA-016.native.json",
+            "sha256": "f9414d6d29debd933387fe4db4492e52c79996a796a1211b70530f3abc839ba6"
+          },
+          "prior_whole_template_gain": 0.023661415311028226,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/scores-v1.json",
+            "sha256": "2b19e2d6e823481a4cd1085ffa7d2686ef5a04d1d5271ab6b54e730c6f79c258"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/exports/dense-local-spectrum-EMA-step1000.pt",
+              "sha256": "172dffe382622e734af901030bd4263c68f67a1e371c7d4caf959cfda5c62366"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "706df7d7f94fb7d19c6242ccc8945aef3b71077a9fa8bcca9f6245f5169f604d"
+            },
+            "state": "EMA",
+            "module_hash": "9d63b281d8f96642cc7161e4fc935c619c9c41d275380215cdc8bdd6dfc7064c",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 65,
+              "dense_stride": 32,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V193-large-dense-raw",
+          "prediction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-raw-016.native.json",
+            "sha256": "6561dc3c2e30cde61769a4f4e55acd3ac477d20768740f4211bbf7e7038119fd"
+          },
+          "prior_whole_template_gain": 0.02655330579653077,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/scores-v1.json",
+            "sha256": "f6bee2e2c364240fe692d504d7c21199c80016a6dcfcf3459c68b519af61ea66"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/exports/large-dense-spectrum-raw-step1000.pt",
+              "sha256": "f4d6705d1132160a8801a641fc26b15ce3184604dec81cbe4423d67ff1402ecc"
+            },
+            "source_checkpoint": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/checkpoints/wave-step1000.pt",
+              "sha256": "c4a60ffbda0635f7503888d9c02957867d328138dc6918eebfacd6f32609f8d8"
+            },
+            "state": "raw",
+            "module_hash": "142c77d4b1092c4ec2b934889d0746e91fffed13e2ab13beebbd1c8a32e4ce64",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 129,
+              "dense_stride": 64,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V193-large-dense-EMA",
+          "prediction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-EMA-016.native.json",
+            "sha256": "d5f42553cb3ca7488c73d7cc8bb27ce3c7895075763a6fb16f3626c44c8c8f41"
+          },
+          "prior_whole_template_gain": 0.02622195712171947,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/scores-v1.json",
+            "sha256": "f6bee2e2c364240fe692d504d7c21199c80016a6dcfcf3459c68b519af61ea66"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/exports/large-dense-spectrum-EMA-step1000.pt",
+              "sha256": "1dcc1db17af77e8ae9542793b3d1dedc92b29f8ef4bc59e927478cafa30a1d5a"
+            },
+            "source_checkpoint": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/checkpoints/wave-step1000.pt",
+              "sha256": "c4a60ffbda0635f7503888d9c02957867d328138dc6918eebfacd6f32609f8d8"
+            },
+            "state": "EMA",
+            "module_hash": "1135b23012ae54167565abaee7ac08fc4cdaf16f0dc054b37c66be105c425e1a",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 129,
+              "dense_stride": 64,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112309-present-iso6400-prior-RGGB.npz",
+          "sha256": "b9c69ce123091185791e5cac8da227b5993f5993950cff9bcc10ebd21b01f96d"
+        },
+        "pattern": "RGGB",
+        "seed": 2026112309,
+        "present": true,
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "display_exposure": 8,
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 1.0,
+          "contrast_multiplier": 1
+        },
+        "reference_role": "Exact procedural mesh or empty GT; hypothetical present template used only for diagnostic metrics",
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-072.npy",
+          "sha256": "7587c7c3e7ef3323f12186838831a0fc02b0185d07041c1c6d2880c6dcc8219f"
+        },
+        "kind": "mesh",
+        "origin_plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/plan-v1.json",
+          "sha256": "6ca622ce855282096f1cf0e82555be2130f5d30c4b937ef1e9aa00c33aa2cacf"
+        },
+        "origin_index": 72,
+        "source": {
+          "recipe": {
+            "kind": "crossed-lines",
+            "present": true,
+            "seed": 7722121410200143080,
+            "size": 1024,
+            "pixel_scale": 2,
+            "level": 0.010658776612548325,
+            "requested_peak_relative_contrast": 0.1719960776267557,
+            "peak_relative_contrast": 0.1719960776267557,
+            "tint": [
+              0.662882924079895,
+              1.0,
+              0.7368290424346924
+            ],
+            "contrast_direction": [
+              0.662882924079895,
+              1.0,
+              0.7368290424346924
+            ],
+            "background_slope": [
+              0.0,
+              0.0
+            ],
+            "angles_radians": [
+              0.4261037758503065,
+              1.3775964792221977
+            ],
+            "periods_final_pixels": [
+              27.685588833047248,
+              7.712249050507512
+            ],
+            "wire_sigma_final_pixels": [
+              0.7443174651976812,
+              1.1562400270885567
+            ],
+            "phases_cycles": [
+              0.045025540516571594,
+              0.48238460807367645
+            ],
+            "mask_center_final_pixels": [
+              247.34615725948836,
+              173.44569154994764
+            ],
+            "mask_radii_final_pixels": [
+              243.7163425569295,
+              229.61151464871222
+            ],
+            "rms_relative_contrast": 0.05343530603660176,
+            "space": "scene-linear-sRGB",
+            "absence_probability": 0.5
+          }
+        },
+        "periodic_detail": {
+          "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-evaluation-v1/predictions/detail-mesh-seed2026112309-present-iso6400-prior-RGGB.npy",
+          "sha256": "c3d056735051b6b7aafb0e53f16d71bb8ab0202820fc728952d3d99b7b778bd7"
+        },
+        "periodic_expected_full_RMS": 27.281582711103248,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "36b77dc075cf9657c465079e12c672942f681a916c65fd87c4ab1f147ed3ffd9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "d265750427330aa23eee582e8d29750130006bbe05e6c93d675521c370d9664b"
+          },
+          "colors": {
+            "shape": [
+              1,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+          },
+          "wb": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+          },
+          "matrix": {
+            "shape": [
+              1,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+          }
+        },
+        "output_shape": [
+          1,
+          3,
+          512,
+          512
+        ]
+      },
+      "geometry": {
+        "rotation90_CCW": 3,
+        "horizontal_flip_after_rotation": false,
+        "homography": false,
+        "saved_geometry_RNG_state_exact": true,
+        "recipe_normals_radians": [
+          0.4261037758503065,
+          1.3775964792221977
+        ],
+        "native_normals_radians": [
+          1.9969001026452027,
+          2.948392806017094
+        ]
+      },
+      "methods": [
+        {
+          "method": "V143 parent",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-072.npy",
+            "sha256": "7587c7c3e7ef3323f12186838831a0fc02b0185d07041c1c6d2880c6dcc8219f"
+          },
+          "prior_whole_template_gain": 0.6749105132238576,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/scores-v1.json",
+            "sha256": "aeeb60f2d514e3a6deb814cf43491f3bda570b3ab5984a8c748d82bcd64c31c6"
+          },
+          "checkpoint_metadata": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261102/V143-fixed-reviews-v4/step5000/V143-step5000-inference.pt",
+            "sha256": "96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4"
+          }
+        },
+        {
+          "method": "V183-coherent-pair-EMA",
+          "prediction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-072.npy",
+            "sha256": "a619661b5b15e8f44e346e4521536ce357bed23eb0ef6453e7ae89e193462d4d"
+          },
+          "prior_whole_template_gain": 0.72847507591559,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/scores-v1.json",
+            "sha256": "2182a12e117bf89d87e5f7b6e48b345eb9a3f22372d8cc7d5efdc4acf5d3b9a9"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+              "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+            },
+            "source_checkpoint": {
+              "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+              "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+            },
+            "state": "EMA",
+            "arm": "evidence",
+            "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+            "component": "LateLocalPhaseEvidenceMatchingDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+              "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+            },
+            "full_state_tensors": 189
+          }
+        },
+        {
+          "method": "V187-pooled-wave-raw",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-raw-072.native.json",
+            "sha256": "11448399e169658670ee43c5cf9d992d37f46226267d44f55b882e0c14e325ee"
+          },
+          "prior_whole_template_gain": 0.7790681300250545,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/scores-v1.json",
+            "sha256": "0f19ff7ca7a8cab280b8b00d7497270960482a861563438080c0b45a9a7c7d86"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/exports/pooled-phase-wave-raw-step1000.pt",
+              "sha256": "517b5a7df9d8dc7ac864981efceeff0fb70b4995d7a877a4a04e4b96c7f75680"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "40b7c7c295ba82cc6b4a4646245483a3234de2759e2ae4d5a8e4e63a16a5e05a"
+            },
+            "state": "raw",
+            "module_hash": "3c61f8575b7c0ffa77bd42ba07ce17273d2f2d0fd36a4ba148a1ac578c24c012",
+            "component": "LatePooledPhaseWaveDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "support_windows": [
+                33,
+                17
+              ],
+              "support_stride": 8
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_pooled_phase_wave.py",
+              "sha256": "2c7ff56f0bcb6586f7f1966a4818af05f11c0e32033bd7d1fb5cdddc304975c6"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V187-pooled-wave-EMA",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-EMA-072.native.json",
+            "sha256": "ec4aa7b179b36e27c2c57ec74bfa44b6429c032c8d0e22f81519dd26631c9645"
+          },
+          "prior_whole_template_gain": 0.7924432483878511,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/scores-v1.json",
+            "sha256": "0f19ff7ca7a8cab280b8b00d7497270960482a861563438080c0b45a9a7c7d86"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/exports/pooled-phase-wave-EMA-step1000.pt",
+              "sha256": "4965a9baa17dc36e6f64115644d6ea62af1a48416f253b45c8a73c028f4306f8"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "40b7c7c295ba82cc6b4a4646245483a3234de2759e2ae4d5a8e4e63a16a5e05a"
+            },
+            "state": "EMA",
+            "module_hash": "4739e107a2460166dae5f14c7d89415b4b0c1ccc689d5a3480787ffa1696ebc4",
+            "component": "LatePooledPhaseWaveDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "support_windows": [
+                33,
+                17
+              ],
+              "support_stride": 8
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_pooled_phase_wave.py",
+              "sha256": "2c7ff56f0bcb6586f7f1966a4818af05f11c0e32033bd7d1fb5cdddc304975c6"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V191-dense-spectrum-raw",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-raw-072.native.json",
+            "sha256": "fc6468ee312151fdab2dbef8fc9e129683419a070a2f16595113d1b5e6cc38ae"
+          },
+          "prior_whole_template_gain": 0.7343559124678777,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/scores-v1.json",
+            "sha256": "2b19e2d6e823481a4cd1085ffa7d2686ef5a04d1d5271ab6b54e730c6f79c258"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/exports/dense-local-spectrum-raw-step1000.pt",
+              "sha256": "e4461e929deda960581872d25e21603bf55f5005c5b05d8b8abeb79b900a7f15"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "706df7d7f94fb7d19c6242ccc8945aef3b71077a9fa8bcca9f6245f5169f604d"
+            },
+            "state": "raw",
+            "module_hash": "2ae50c7c159edf8cfa5ed3245b740e0cc353300996af55eba28af385c986bf2f",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 65,
+              "dense_stride": 32,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V191-dense-spectrum-EMA",
+          "prediction": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-EMA-072.native.json",
+            "sha256": "a0071731ac7849d076573f786bc50f1e73201a1a2c6aec4315eb63cac344c990"
+          },
+          "prior_whole_template_gain": 0.7341566823790234,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/scores-v1.json",
+            "sha256": "2b19e2d6e823481a4cd1085ffa7d2686ef5a04d1d5271ab6b54e730c6f79c258"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/exports/dense-local-spectrum-EMA-step1000.pt",
+              "sha256": "172dffe382622e734af901030bd4263c68f67a1e371c7d4caf959cfda5c62366"
+            },
+            "source_checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+              "sha256": "706df7d7f94fb7d19c6242ccc8945aef3b71077a9fa8bcca9f6245f5169f604d"
+            },
+            "state": "EMA",
+            "module_hash": "9d63b281d8f96642cc7161e4fc935c619c9c41d275380215cdc8bdd6dfc7064c",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 65,
+              "dense_stride": 32,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V193-large-dense-raw",
+          "prediction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-raw-072.native.json",
+            "sha256": "e4ffd53508ea34f793c8d04af0ef93bbd31bcba9c642cd16221a2736ccec6101"
+          },
+          "prior_whole_template_gain": 0.7412972070156709,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/scores-v1.json",
+            "sha256": "f6bee2e2c364240fe692d504d7c21199c80016a6dcfcf3459c68b519af61ea66"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/exports/large-dense-spectrum-raw-step1000.pt",
+              "sha256": "f4d6705d1132160a8801a641fc26b15ce3184604dec81cbe4423d67ff1402ecc"
+            },
+            "source_checkpoint": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/checkpoints/wave-step1000.pt",
+              "sha256": "c4a60ffbda0635f7503888d9c02957867d328138dc6918eebfacd6f32609f8d8"
+            },
+            "state": "raw",
+            "module_hash": "142c77d4b1092c4ec2b934889d0746e91fffed13e2ab13beebbd1c8a32e4ce64",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 129,
+              "dense_stride": 64,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        },
+        {
+          "method": "V193-large-dense-EMA",
+          "prediction": {
+            "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-EMA-072.native.json",
+            "sha256": "4b335abc8ffcd6ccb166d9b5ad1538de532fd0b78b3da82e172b45ef25e933c2"
+          },
+          "prior_whole_template_gain": 0.7404473618147539,
+          "score_source": {
+            "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/scores-v1.json",
+            "sha256": "f6bee2e2c364240fe692d504d7c21199c80016a6dcfcf3459c68b519af61ea66"
+          },
+          "checkpoint_metadata": {
+            "export": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/exports/large-dense-spectrum-EMA-step1000.pt",
+              "sha256": "1dcc1db17af77e8ae9542793b3d1dedc92b29f8ef4bc59e927478cafa30a1d5a"
+            },
+            "source_checkpoint": {
+              "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/checkpoints/wave-step1000.pt",
+              "sha256": "c4a60ffbda0635f7503888d9c02957867d328138dc6918eebfacd6f32609f8d8"
+            },
+            "state": "EMA",
+            "module_hash": "1135b23012ae54167565abaee7ac08fc4cdaf16f0dc054b37c66be105c425e1a",
+            "component": "LateDenseLocalSpectrumDetail",
+            "module_config": {
+              "width": 16,
+              "max_search": 9.0,
+              "evidence_peaks": 4,
+              "evidence_window": 65,
+              "evidence_stride": 32,
+              "dense_window": 129,
+              "dense_stride": 64,
+              "dense_support_windows": [
+                33,
+                17
+              ]
+            },
+            "source": {
+              "path": "/home/dllu/proj/demosaic/src/demosaic/late_dense_local_spectrum.py",
+              "sha256": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+            },
+            "frozen_V183_initializer": {
+              "export": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/exports/local-phase-evidence-EMA-step1000.pt",
+                "sha256": "b713608498158b24b09da72c8079d6eae58bc2458f7d4ac63d493b7b679f63b3"
+              },
+              "source_checkpoint": {
+                "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/checkpoints/evidence-step1000.pt",
+                "sha256": "4d6d47cc14ef3effb9569d867c5aed59a1e09b315de6bbb82e61281e928b3962"
+              },
+              "state": "EMA",
+              "arm": "evidence",
+              "module_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+              "component": "LateLocalPhaseEvidenceMatchingDetail",
+              "module_config": {
+                "width": 16,
+                "max_search": 9.0,
+                "evidence_peaks": 4,
+                "evidence_window": 65,
+                "evidence_stride": 32
+              },
+              "source": {
+                "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_phase_evidence_matching.py",
+                "sha256": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33"
+              },
+              "full_state_tensors": 189
+            },
+            "full_state_tensors": 193
+          }
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v193-completed-execution-v1.json",
+      "sha256": "936f2a9237c47433b50df6e586dbbd3ea35ef1308bd19f75e6b4466da6fb4e58"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v193-large-dense-final-v1.json",
+      "sha256": "a84edf805fd2051a7e66371d16b69d6c6b3654de579386da9b2c3fbdab328f91"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v193-large-dense-publication-verification-v1.json",
+      "sha256": "b703eeb2a2a6a71272d926692c5c2171f445271f2a9b126e23222f168d602aae"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/plan-v1.json",
+      "sha256": "3f50fa7ed287fbf6f868b12cef9ff95b5ff062c9a7bbeb112aa3bc8070c8f923"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/v193-large-dense-v1/manifest-v1.json",
+      "sha256": "49e5d47d00907d33fb208832a074ef5822d1838d736a64a6f2a95b7cbe05c334"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-preparation-v1/plan-v1.json",
+      "sha256": "5957053e1b715b047e5d60326ceac1c8a611a4228380be89e1ab78e8733d6735"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/CPU-contracts-v2.log",
+      "sha256": "9b159b9c7e8980afeeaa68123e8ce449ef144081876450a9fe0caa2a8b4a66e4"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112302-present-iso6400-prior-RGGB.npz",
+      "sha256": "b88ac3be4eeb5c4b88b6e3814ae41fe7920bcc7c0eda969761c4f5530234bd75"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/plan-v1.json",
+      "sha256": "6ca622ce855282096f1cf0e82555be2130f5d30c4b937ef1e9aa00c33aa2cacf"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-016.npy",
+      "sha256": "b1724b86319c931b8c534f627bd4e9652c1ca4c2e2181e442747f1ca51f06d79"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/scores-v1.json",
+      "sha256": "aeeb60f2d514e3a6deb814cf43491f3bda570b3ab5984a8c748d82bcd64c31c6"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-016.npy",
+      "sha256": "d10c8786c407a417347cbf3817289e0c8866be6d31c87cc2e1eaaab068ddcba1"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/scores-v1.json",
+      "sha256": "2182a12e117bf89d87e5f7b6e48b345eb9a3f22372d8cc7d5efdc4acf5d3b9a9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-raw-016.native.json",
+      "sha256": "49817f8f1e57ebc9a69807a39a66c20ea5102570dafcdc64e2aa33945d647493"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/scores-v1.json",
+      "sha256": "0f19ff7ca7a8cab280b8b00d7497270960482a861563438080c0b45a9a7c7d86"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-EMA-016.native.json",
+      "sha256": "09f3d8e7c278c9d5ab71857d36b5a03c28e48d0ea9fd2157ebdcb8bb24f06c50"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-raw-016.native.json",
+      "sha256": "992efc4e56ccb5166b50d4405c7607cbea8771865a03e51ea472b62912c87995"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/scores-v1.json",
+      "sha256": "2b19e2d6e823481a4cd1085ffa7d2686ef5a04d1d5271ab6b54e730c6f79c258"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-EMA-016.native.json",
+      "sha256": "f9414d6d29debd933387fe4db4492e52c79996a796a1211b70530f3abc839ba6"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-raw-016.native.json",
+      "sha256": "6561dc3c2e30cde61769a4f4e55acd3ac477d20768740f4211bbf7e7038119fd"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/scores-v1.json",
+      "sha256": "f6bee2e2c364240fe692d504d7c21199c80016a6dcfcf3459c68b519af61ea66"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-EMA-016.native.json",
+      "sha256": "d5f42553cb3ca7488c73d7cc8bb27ce3c7895075763a6fb16f3626c44c8c8f41"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112309-present-iso6400-prior-RGGB.npz",
+      "sha256": "b9c69ce123091185791e5cac8da227b5993f5993950cff9bcc10ebd21b01f96d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-072.npy",
+      "sha256": "7587c7c3e7ef3323f12186838831a0fc02b0185d07041c1c6d2880c6dcc8219f"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-072.npy",
+      "sha256": "a619661b5b15e8f44e346e4521536ce357bed23eb0ef6453e7ae89e193462d4d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-raw-072.native.json",
+      "sha256": "11448399e169658670ee43c5cf9d992d37f46226267d44f55b882e0c14e325ee"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/native/V187-pooled-wave-EMA-072.native.json",
+      "sha256": "ec4aa7b179b36e27c2c57ec74bfa44b6429c032c8d0e22f81519dd26631c9645"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-raw-072.native.json",
+      "sha256": "fc6468ee312151fdab2dbef8fc9e129683419a070a2f16595113d1b5e6cc38ae"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/native/V191-dense-spectrum-EMA-072.native.json",
+      "sha256": "a0071731ac7849d076573f786bc50f1e73201a1a2c6aec4315eb63cac344c990"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-raw-072.native.json",
+      "sha256": "e4ffd53508ea34f793c8d04af0ef93bbd31bcba9c642cd16221a2736ccec6101"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/native/V193-large-dense-EMA-072.native.json",
+      "sha256": "4b335abc8ffcd6ccb166d9b5ad1538de532fd0b78b3da82e172b45ef25e933c2"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/work/lossless_native.py",
+      "sha256": "8f66dd576956539393b7bad31eb3fc3fb2085ed22a2660761fe4acaf0e932e97",
+      "text": "\"\"\"Exact FP32 native arrays with checked dependencies and lossless byte planes.\n\nNew outputs only: a checked baseline-plus-wave recipe avoids storing redundant\nRGB bits when NumPy FP32 addition reproduces every original bit. Otherwise use\nbyte-plane zlib, optionally after XOR with an immutable baseline. No quantizing.\n\"\"\"\n\nimport hashlib\nimport json\nimport os\nimport zlib\nfrom pathlib import Path\n\nimport numpy as np\n\n\ndef ref(path):\n    path = Path(path).absolute()\n    with path.open(\"rb\") as stream:\n        digest = hashlib.file_digest(stream, \"sha256\").hexdigest()\n    return {\"path\": str(path), \"sha256\": digest}\n\n\ndef fingerprint(array):\n    array = np.ascontiguousarray(array)\n    return {\n        \"shape\": list(array.shape),\n        \"dtype\": array.dtype.str,\n        \"sha256\": hashlib.sha256(array.tobytes()).hexdigest(),\n    }\n\n\ndef checked(binding):\n    if ref(binding[\"path\"]) != binding:\n        raise ValueError(\"Native dependency file digest mismatch\")\n    return Path(binding[\"path\"])\n\n\ndef publish_exclusive(path, data):\n    path = Path(path)\n    temporary = path.with_name(\".\" + path.name + \".writing\")\n    with temporary.open(\"xb\") as stream:\n        stream.write(data)\n        stream.flush()\n        os.fsync(stream.fileno())\n    os.link(temporary, path)  # Atomic publication; never replace existing output.\n    temporary.unlink()\n\n\ndef load_native(binding):\n    path = checked(binding) if isinstance(binding, dict) else Path(binding)\n    if path.suffix == \".npy\":\n        return np.load(path, allow_pickle=False)\n    metadata = json.loads(path.read_text())\n    if metadata[\"format\"] != \"exact-native-f32-v1\":\n        raise ValueError(\"Unknown native format\")\n    expected = metadata[\"values\"]\n    shape = tuple(expected[\"shape\"])\n    if expected[\"dtype\"] != \"<f4\" or any(type(n) is not int or n < 1 for n in shape):\n        raise ValueError(\"Expected little-endian FP32 native array\")\n    if metadata[\"encoding\"] == \"checked-f32-add\":\n        baseline = load_native(metadata[\"baseline\"])\n        wave = load_native(metadata[\"wave\"])\n        if baseline.shape != shape or wave.shape != shape:\n            raise ValueError(\"Addition operand shape mismatch\")\n        value = np.add(baseline, wave, dtype=np.float32)\n    elif metadata[\"encoding\"] in [\"byteplanes-zlib\", \"xor-byteplanes-zlib\"]:\n        compressed = checked(metadata[\"payload\"]).read_bytes()\n        raw = zlib.decompress(compressed)\n        count = int(np.prod(shape))\n        if len(raw) != count * 4:\n            raise ValueError(\"Native payload length mismatch\")\n        bits = np.frombuffer(raw, dtype=np.uint8).reshape(4, count).T.copy()\n        bits = bits.reshape(-1).view(\"<u4\").reshape(shape)\n        if metadata[\"encoding\"] == \"xor-byteplanes-zlib\":\n            baseline = load_native(metadata[\"baseline\"])\n            if baseline.shape != shape or baseline.dtype != np.dtype(\"<f4\"):\n                raise ValueError(\"XOR baseline contract mismatch\")\n            bits = np.bitwise_xor(bits, baseline.view(\"<u4\"))\n        value = bits.view(\"<f4\")\n    else:\n        raise ValueError(\"Unknown native encoding\")\n    if fingerprint(value) != expected:\n        raise ValueError(\"Decoded native array bit digest mismatch\")\n    return value\n\n\ndef write_native(path, array, *, baseline=None, wave=None):\n    \"\"\"Publish one exact array; wave is a binding to an already closed array.\"\"\"\n    path = Path(path)\n    if path.suffix != \".json\" or path.exists():\n        raise ValueError(\"Expected a new JSON native manifest\")\n    value = np.ascontiguousarray(array)\n    if value.dtype != np.dtype(\"<f4\") or not np.isfinite(value).all():\n        raise ValueError(\"Expected finite little-endian FP32 native values\")\n    metadata = {\"format\": \"exact-native-f32-v1\", \"values\": fingerprint(value)}\n    prior = load_native(baseline) if baseline is not None else None\n    if prior is not None and (prior.shape != value.shape or prior.dtype != value.dtype):\n        raise ValueError(\"Baseline contract mismatch\")\n    if wave is not None:\n        if prior is None:\n            raise ValueError(\"An addition recipe requires an immutable baseline\")\n        delta = load_native(wave)\n        if delta.shape != value.shape or delta.dtype != value.dtype:\n            raise ValueError(\"Wave contract mismatch\")\n        reproduced = np.add(prior, delta, dtype=np.float32)\n        if fingerprint(reproduced) == metadata[\"values\"]:\n            metadata.update(encoding=\"checked-f32-add\", baseline=baseline, wave=wave)\n    if \"encoding\" not in metadata:\n        bits = value.view(\"<u4\")\n        if prior is not None:\n            bits = np.bitwise_xor(bits, prior.view(\"<u4\"))\n        planes = bits.view(np.uint8).reshape(-1, 4).T.copy().tobytes()\n        payload = path.with_suffix(\".zlib\")\n        publish_exclusive(payload, zlib.compress(planes, level=6))\n        metadata.update(\n            encoding=\"byteplanes-zlib\" if prior is None else \"xor-byteplanes-zlib\",\n            payload=ref(payload),\n        )\n        if prior is not None:\n            metadata[\"baseline\"] = baseline\n    publish_exclusive(path, (json.dumps(metadata, indent=2, allow_nan=False) + \"\\n\").encode())\n    binding = ref(path)\n    if fingerprint(load_native(binding)) != metadata[\"values\"]:\n        raise ValueError(\"Published native round trip failed\")\n    return binding\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/work/test_mesh_orientation_response.py",
+      "sha256": "62ffaceda04384c3707a50ee572a45001681d2f3474a61891b69cc13cc4c95e1",
+      "text": "import math\n\nimport numpy as np\nimport pytest\nfrom mesh_orientation_response import detrend, project, sectors\n\n\ndef example():\n    y, x = np.mgrid[:64, :64]\n    a = np.cos(2 * np.pi * (5 * x + 3 * y) / 64)\n    b = 0.25 * np.cos(2 * np.pi * (-4 * x + 7 * y) / 64)\n    c = 0.1 * (-1.0) ** (x + y)\n    return (\n        np.stack([a + 0.5 * b + 0.2 * c] * 3),\n        np.stack([0.2 * a + 0.5 * 1.8 * b + 0.2 * -0.3 * c] * 3),\n        [math.atan2(3, 5), math.atan2(7, -4)],\n    )\n\n\ndef test_known_independent_native_carrier_amplitudes_and_recomposition():\n    target, value, angles = example()\n    r = project(value, target, np.zeros_like(target), angles)\n    for actual, want in zip([s[\"gain\"] for s in r[\"sectors\"]], [0.2, 1.8, -0.3], strict=True):\n        assert actual == pytest.approx(want, abs=1e-11)\n    assert r[\"whole_template_gain\"] == pytest.approx(\n        sum(s[\"gain\"] * s[\"template_energy_fraction\"] for s in r[\"sectors\"]), abs=1e-13\n    )\n    assert r[\"whole_template_gain\"] != pytest.approx(1.0)\n\n\ndef test_exact_GT_and_empty_response_and_affine_invariance():\n    t, v, a = example()\n    y, x = np.mgrid[:64, :64]\n    background = np.stack([5 + 2 * x + 0.3 * y] * 3)\n    for value, want in [(t, 1.0), (np.zeros_like(t), 0.0)]:\n        r = project(value + background, t + background, background, a)\n        assert r[\"whole_template_gain\"] == pytest.approx(want, abs=1e-11)\n        for s in r[\"sectors\"]:\n            assert s[\"gain\"] == pytest.approx(want, abs=1e-11)\n    np.testing.assert_allclose(detrend(v + background), detrend(v), atol=2e-13)\n\n\ndef test_conjugate_closed_partition_and_recipe_order_symmetry():\n    t, v, a = example()\n    m = sectors((64, 64), a)\n    assert np.all(m.sum(0) == 1)\n    p = project(v, t, np.zeros_like(t), a)\n    q = project(v, t, np.zeros_like(t), a[::-1])\n    assert p[\"whole_template_gain\"] == q[\"whole_template_gain\"]\n    assert [s[\"gain\"] for s in p[\"sectors\"][:2]] == pytest.approx(\n        [s[\"gain\"] for s in q[\"sectors\"][:2]][::-1]\n    )\n\n\n@pytest.mark.parametrize(\"angles\", [[0, 0], [0, math.pi], [0, float(\"nan\")], [0]])\ndef test_invalid_normals(angles):\n    with pytest.raises(ValueError):\n        sectors((64, 64), angles)\n\n\ndef test_no_template_and_mismatched_native_shapes():\n    t, v, a = example()\n    with pytest.raises(ValueError):\n        project(v, np.zeros_like(t), np.zeros_like(t), a)\n    with pytest.raises(ValueError):\n        project(v, t[:, :, :32], np.zeros_like(t), a)\n\n\n@pytest.mark.parametrize(\"rotation\", range(4))\n@pytest.mark.parametrize(\"flip\", [False, True])\ndef test_native_angle_transport_matches_exact_pixel_transforms(rotation, flip):\n    from mesh_orientation_response import native_angles\n\n    target, value, angles = example()\n    target, value = [np.rot90(v, rotation, axes=(-2, -1)) for v in [target, value]]\n    if flip:\n        target, value = [v[..., ::-1] for v in [target, value]]\n    carried = native_angles(angles, rotation, flip)\n    measured = project(value, target, np.zeros_like(target), carried)\n    assert [s[\"gain\"] for s in measured[\"sectors\"]] == pytest.approx([0.2, 1.8, -0.3], abs=1e-11)\n    # Independent coordinate-grid transport, including translations.\n    y, x = np.mgrid[:64, :64]\n    xy = np.rot90(np.stack([x, y]), rotation, axes=(-2, -1))\n    if flip:\n        xy = xy[..., ::-1]\n    jacobian = np.stack([xy[:, 0, 1] - xy[:, 0, 0], xy[:, 1, 0] - xy[:, 0, 0]], axis=1)\n    for original, actual in zip(angles, carried, strict=True):\n        expected = jacobian.T @ np.array([math.cos(original), math.sin(original)])\n        assert abs(np.dot(expected, [math.cos(actual), math.sin(actual)])) == pytest.approx(\n            1.0, abs=1e-14\n        )\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/work/phase_admission_protocol.py",
+      "sha256": "8cd4037d07794bc253d84ca2371d5e4807caf377802dee16cae6c49a0fde519a",
+      "text": "\"\"\"CPU-only dependency proof for V178 GPU work; absence alone is not success.\"\"\"\n\nimport hashlib\nimport json\nfrom pathlib import Path\n\nimport psutil\n\n\ndef read(path):\n    return json.loads(Path(path).read_text())\n\n\ndef ref(path):\n    path = Path(path).absolute()\n    with path.open(\"rb\") as stream:\n        digest = hashlib.file_digest(stream, \"sha256\").hexdigest()\n    return {\"path\": str(path), \"sha256\": digest}\n\n\ndef owner_live(owner):\n    \"\"\"Transient/permission errors propagate, never turning an owner terminal.\"\"\"\n    try:\n        process = psutil.Process(owner[\"pid\"])\n        return process.create_time() == owner[\"created\"] and process.status() not in (\n            psutil.STATUS_ZOMBIE,\n            psutil.STATUS_DEAD,\n        )\n    except psutil.NoSuchProcess:\n        return False\n\n\ndef dependency_readiness(root, *, is_live=owner_live):\n    \"\"\"Require terminal train/review/watch owners and the completed pipeline.\"\"\"\n    root = Path(root)\n    for name in [\n        \"train-failure-v1.json\",\n        \"review-failure-v1.json\",\n        \"completion-watch-failure-v1.json\",\n    ]:\n        if (root / name).exists():\n            raise RuntimeError(f\"Preserved dependency failure requires inspection: {root / name}\")\n    bindings, owners = [], {}\n    phases = [\n        (\"train\", \"train-result-v1.json\"),\n        (\"review\", \"scores-v1.json\"),\n        (\"completion-watch\", \"completion-watch-result-v1.json\"),\n    ]\n    for phase, result_name in phases:\n        launch_path = root / f\"{phase}-launch-v1.json\"\n        if not launch_path.exists():\n            return {\"ready\": False, \"reason\": f\"waiting-for-{phase}-launch\"}\n        launch = read(launch_path)\n        owner = launch[\"owner\"]\n        owners[phase] = owner\n        if is_live(owner):\n            return {\"ready\": False, \"reason\": f\"waiting-for-{phase}-owner\", \"owner\": owner}\n        result_path = root / result_name\n        if not result_path.exists():\n            return {\n                \"ready\": False,\n                \"reason\": f\"waiting-for-{phase}-completed-result\",\n                \"owner\": owner,\n            }\n        result = read(result_path)\n        if result.get(\"owner\") != owner or not result.get(\"status\", \"\").startswith(\"completed\"):\n            raise RuntimeError(f\"Dependency result does not prove {phase} success: {result_path}\")\n        bindings.extend([ref(launch_path), ref(result_path)])\n    status_path = root / \"completion-watch-status-v1.json\"\n    status = read(status_path)\n    if (\n        status[\"owner\"] != owners[\"completion-watch\"]\n        or status[\"status\"] != \"ready-for-actual-native-viewing\"\n    ):\n        raise RuntimeError(\"Completion watcher did not reach its final native-viewing state\")\n    for name in [\n        \"training-audit-v1.json\",\n        \"quality-audit-v1.json\",\n        \"offset-audit-v1.json\",\n        \"paired-comparisons-v1.json\",\n        \"figures-v1.json\",\n    ]:\n        path = root / name\n        if not path.exists():\n            raise RuntimeError(f\"Completed dependency is missing required output: {path}\")\n        value = read(path)\n        if not value.get(\"status\", \"\").startswith((\"pass\", \"completed\", \"rendered\")):\n            raise RuntimeError(f\"Dependency output lacks completed status: {path}\")\n        bindings.append(ref(path))\n    bindings.append(ref(status_path))\n    return {\n        \"ready\": True,\n        \"reason\": \"all-V175-owners-terminal-completed-audits-review-render\",\n        \"owners\": owners,\n        \"bindings\": bindings,\n        \"scope\": \"Ready for separate GPU admission;V175 human viewing/report/publication may remain.\",\n    }\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/work/report_mesh_orientation_response.py",
+      "sha256": "14486e536eb3157624002b3cf460d8dcf701019d00b662ab206e7d7498743424",
+      "text": "\"\"\"Read-only directional projections of two predeclared saved native examples.\"\"\"\n\nimport argparse\nimport ast\nimport json\nimport os\nimport random\nimport shutil\nimport sys\nimport time\nfrom pathlib import Path\n\nimport numpy as np\nimport psutil\nfrom lossless_native import load_native\nfrom mesh_orientation_response import native_angles, project\nfrom phase_admission_protocol import owner_live, read, ref\n\nREPO = Path(\"/home/dllu/proj/demosaic\")\nROOT = REPO / \".cache/quality-20261108/V194-orientation-response-v1\"\nPREPARATION = ROOT.with_name(\"V194-orientation-response-preparation-v1\")\n\n\ndef save(path, value):\n    with Path(path).open(\"x\") as stream:\n        json.dump(value, stream, indent=2, allow_nan=False)\n        stream.write(\"\\n\")\n\n\ndef geometry(case):\n    \"\"\"Replay existing metadata draws only, checking the original terminal state.\"\"\"\n    original = read(case[\"origin_plan\"][\"path\"])[\"observations\"][case[\"origin_index\"]]\n    assert original[\"id\"] == case[\"id\"] and original[\"arrays\"] == case[\"arrays\"]\n    rng = random.Random(case[\"seed\"])\n    assert rng.getrandbits(63) == case[\"source\"][\"recipe\"][\"seed\"]\n    rotation, flip, homography = rng.randrange(4), rng.random() < 0.5, rng.random() < 0.2\n    assert not homography, \"This fixed two-case diagnostic accepts exact D4 geometry only\"\n    rng.random()  # optical-blur choice is drawn even at the fixed zero probability\n    assert repr(rng.getstate()) == original[\"source\"][\"geometry_final_rng_state\"]\n    angles = native_angles(case[\"source\"][\"recipe\"][\"angles_radians\"], rotation, flip)\n    return {\n        \"rotation90_CCW\": rotation,\n        \"horizontal_flip_after_rotation\": flip,\n        \"homography\": False,\n        \"saved_geometry_RNG_state_exact\": True,\n        \"recipe_normals_radians\": case[\"source\"][\"recipe\"][\"angles_radians\"],\n        \"native_normals_radians\": angles,\n    }\n\n\ndef prepare():\n    assert not (ROOT / \"plan-v2.json\").exists()\n    completed = REPO / \"docs/results/v193-completed-execution-v1.json\"\n    closure = read(completed)\n    for owner in closure[\"all_terminal_owners\"].values():\n        assert not owner_live(owner)\n    final = read(closure[\"publication\"][\"path\"])\n    assert ref(closure[\"publication\"][\"path\"]) == closure[\"publication\"]\n    assert read(closure[\"verification\"][\"path\"])[\"publication\"] == closure[\"publication\"]\n    for name, digest in closure[\"previous103_neural_hashes_unchanged\"].items():\n        assert ref(REPO / \"src/demosaic\" / name)[\"sha256\"] == digest\n    prep = read(PREPARATION / \"plan-v1.json\")\n    for source in prep[\"sources\"]:\n        assert ref(source[\"path\"]) == {k: source[k] for k in [\"path\", \"sha256\"]}\n    tests = ROOT / \"CPU-contracts-v2.log\"\n    assert \"16 passed\" in tests.read_text()\n    assert shutil.disk_usage(REPO).free > 40.005 * 2**30\n    assert psutil.virtual_memory().available > 32 * 2**30\n    old_src = Path(prep[\"cases\"][0][\"origin_plan\"][\"path\"]).parent / \"work/src/demosaic\"\n    # The original data preparation algorithm must match the geometry we replay.\n    for name, function in [\n        (\"data.py\", \"augment_before_downsample\"),\n        (\"textures.py\", \"crossed_line_texture\"),\n    ]:\n        functions = []\n        for folder in [old_src, REPO / \"src/demosaic\"]:\n            tree = ast.parse((folder / name).read_text())\n            functions.append(\n                ast.dump(\n                    next(\n                        n\n                        for n in tree.body\n                        if isinstance(n, ast.FunctionDef) and n.name == function\n                    )\n                )\n            )\n        assert functions[0] == functions[1]\n    manifest = read(final[\"figures\"][\"path\"])\n    trial = read(final[\"plan\"][\"path\"])\n    parent_scores = read(\n        REPO / \".cache/quality-20261107/V175-fresh-noise-matching-v2/plan-v1.json\"\n    )[\"parent_scores\"]\n    score_sources = {\n        \"V143 parent\": parent_scores,\n        \"V183-coherent-pair-EMA\": trial[\"baseline_scores\"],\n    }\n    for version in [\"V187\", \"V191\", \"V193\"]:\n        for endpoint in [\"raw\", \"EMA\"]:\n            method = next(\n                m for m in prep[\"methods\"] if m.startswith(version) and m.endswith(endpoint)\n            )\n            score_sources[method] = (\n                trial[version + \"_scores\"]\n                if version != \"V193\"\n                else ref(Path(final[\"plan\"][\"path\"]).parent / \"scores-v1.json\")\n            )\n    cases = []\n    for case in prep[\"cases\"]:\n        board = next(\n            b for b in manifest[\"images\"] if not b[\"triplet\"] and b[\"case\"][\"id\"] == case[\"id\"]\n        )\n        entries = []\n        for method in prep[\"methods\"]:\n            score_label = \"parent\" if method == \"V143 parent\" else method\n            scores = read(score_sources[method][\"path\"])\n            row = next(\n                r for r in scores[\"rows\"] if r[\"id\"] == case[\"id\"] and r[\"method\"] == score_label\n            )\n            entries.append(\n                {\n                    \"method\": method,\n                    \"prediction\": case[\"parent\"]\n                    if method == \"V143 parent\"\n                    else board[\"predictions\"][method],\n                    \"prior_whole_template_gain\": row[\"template_gain\"],\n                    \"score_source\": score_sources[method],\n                    \"checkpoint_metadata\": read(case[\"origin_plan\"][\"path\"])[\"checkpoint\"]\n                    if method == \"V143 parent\"\n                    else manifest[\"method_checkpoints\"][method],\n                }\n            )\n        cases.append({\"case\": case, \"geometry\": geometry(case), \"methods\": entries})\n    work = ROOT / \"work\"\n    for path in [\n        Path(__file__),\n        REPO / \"scripts/mesh_orientation_response.py\",\n        REPO / \"scripts/lossless_native.py\",\n        REPO / \"scripts/phase_admission_protocol.py\",\n        REPO / \"tests/test_mesh_orientation_response.py\",\n    ]:\n        shutil.copyfile(path, work / path.name)\n    bindings = [\n        ref(completed),\n        closure[\"publication\"],\n        closure[\"verification\"],\n        final[\"plan\"],\n        final[\"figures\"],\n        ref(PREPARATION / \"plan-v1.json\"),\n        ref(tests),\n    ]\n    for item in cases:\n        case = item[\"case\"]\n        bindings += [case[\"arrays\"], case[\"origin_plan\"]]\n        for entry in item[\"methods\"]:\n            bindings += [entry[\"prediction\"], entry[\"score_source\"]]\n    inputs = list({b[\"path\"]: b for b in bindings}.values())\n    plan = {\n        \"status\": \"prepared-D4-corrected-orientation-supplement-before-any-saved-prediction-projection\",\n        \"created_unix_UTC\": time.time(),\n        \"runner\": ref(work / Path(__file__).name),\n        \"original_preparation\": ref(PREPARATION / \"plan-v1.json\"),\n        \"correction\": \"Original recipe normals precede augmentation. Metadata inspection found seed2302 rot2+horizontalflip and seed2309 rot3. Correct native normals before reading actual saved predictions. Original plan/math/tests remain unchanged. Same two cases/eight methods; no result-based case/angle selection.\",\n        \"cases\": cases,\n        \"inputs\": inputs,\n        \"sources\": [dict(ref(p), text=p.read_text()) for p in work.glob(\"*.py\")],\n        \"neural103\": closure[\"previous103_neural_hashes_unchanged\"],\n        \"tests\": dict(ref(tests), text=tests.read_text()),\n        \"minimum_GiB\": {\"local\": 40, \"RAM\": 32},\n        \"new_local_forecast_GiB\": 0.005,\n        \"scope\": \"Sixteen saved native512 camera-RGB projections on two fixed present-mesh examples. Eight comparators, known D4-corrected recipe normals, full-context unweighted affine detrending. No checkpoint load, model/Torch/CUDA call, image regeneration, source/noise draw, original/dataz/real-reference access or optimization. Three disjoint conjugate-closed native spectral regions recompose the existing whole-template score. Regions have envelope/intersection leakage and are not isolated wire-family amplitudes, confidence or generalization evidence. Existing V193 full quality and native comparisons remain authoritative.\",\n    }\n    for b in inputs:\n        assert ref(b[\"path\"]) == b\n    save(ROOT / \"plan-v2.json\", plan)\n    print(\n        \"Prepared16nativeprojections/2fixedexamples/8comparators/D4-correctedangles; no saved prediction pixels read\"\n    )\n\n\ndef run():\n    plan = read(ROOT / \"plan-v2.json\")\n    assert ref(__file__) == plan[\"runner\"]\n    for b in plan[\"inputs\"]:\n        assert ref(b[\"path\"]) == b\n    for b in plan[\"sources\"]:\n        assert ref(b[\"path\"]) == {k: b[k] for k in [\"path\", \"sha256\"]}\n    (ROOT / \"run.claim\").open(\"x\").close()\n    os.nice(10)\n    os.sched_setaffinity(0, [8, 9])\n    rows = []\n    for item in plan[\"cases\"]:\n        assert (\n            shutil.disk_usage(REPO).free > 40 * 2**30\n            and psutil.virtual_memory().available > 32 * 2**30\n        )\n        case = item[\"case\"]\n        with np.load(case[\"arrays\"][\"path\"], allow_pickle=False) as arrays:\n            present, empty = [arrays[n][0] for n in [\"target_present\", \"target_empty\"]]\n        for entry in item[\"methods\"]:\n            value = load_native(entry[\"prediction\"])\n            assert value.shape == (1, 3, 512, 512) and value.dtype == np.float32\n            measured = project(value[0], present, empty, item[\"geometry\"][\"native_normals_radians\"])\n            assert abs(measured[\"whole_template_gain\"] - entry[\"prior_whole_template_gain\"]) < 2e-12\n            rows.append(\n                {\n                    \"id\": case[\"id\"],\n                    \"method\": entry[\"method\"],\n                    \"prediction\": entry[\"prediction\"],\n                    **measured,\n                }\n            )\n            print(\n                case[\"seed\"],\n                entry[\"method\"],\n                \"whole\",\n                measured[\"whole_template_gain\"],\n                \"sectors\",\n                [s[\"gain\"] for s in measured[\"sectors\"]],\n                flush=True,\n            )\n    assert len(rows) == 16 and \"torch\" not in sys.modules\n    save(\n        ROOT / \"result-v1.json\",\n        {\n            \"status\": \"completed-saved-native-directional-projections-awaiting-independent-audit\",\n            \"owner\": {\"pid\": os.getpid(), \"created\": psutil.Process().create_time()},\n            \"plan\": ref(ROOT / \"plan-v2.json\"),\n            \"rows\": rows,\n            \"whole_template_bridges\": 16,\n            \"native_RGB_values_read\": 16 * 3 * 512 * 512,\n            \"Torch_imported\": False,\n            \"neural_forwards\": 0,\n            \"source_noise_draws\": 0,\n            \"scope\": plan[\"scope\"],\n        },\n    )\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"phase\", choices=[\"prepare\", \"run\"])\n    globals()[parser.parse_args().phase]()\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/work/mesh_orientation_response.py",
+      "sha256": "7a2590c5744816935459f4fde03cd5612015101b155b2767400ab4a53d7acf0f",
+      "text": "\"\"\"Orientation-conditioned whole-template projections, not isolated wire families.\n\nDisjoint native Fourier sectors use the two fixed recipe normals. A residual\nsector holds Nyquist axes and DC, avoiding ambiguous orientation there. The\nenergy-weighted gains exactly recompose the existing affine-detrended scalar.\nNo input selection, confidence, model fitting, or real-reference scoring occurs.\n\"\"\"\n\nimport math\n\nimport numpy as np\n\n\ndef detrend(value):\n    value = np.asarray(value, dtype=np.float64)\n    if (\n        value.ndim != 3\n        or value.shape[0] != 3\n        or min(value.shape[-2:]) < 16\n        or not np.isfinite(value).all()\n    ):\n        raise ValueError(\"Expected finite native3xHxW RGB\")\n    h, w = value.shape[-2:]\n    y, x = np.meshgrid(np.linspace(-1, 1, h), np.linspace(-1, 1, w), indexing=\"ij\")\n    basis = np.stack([np.ones_like(x), x, y], -1).reshape(-1, 3)\n    q = np.linalg.qr(basis, mode=\"reduced\")[0]\n    flat = value.reshape(3, -1).T\n    return (flat - q @ (q.T @ flat)).T.reshape(value.shape)\n\n\ndef sectors(shape, angles):\n    if len(shape) != 2 or any(type(n) is not int or n < 16 or n % 2 for n in shape):\n        raise ValueError(\"Expected even native axes>=16\")\n    if (\n        len(angles) != 2\n        or not all(math.isfinite(a) for a in angles)\n        or abs(math.sin(angles[0] - angles[1])) < 1e-4\n    ):\n        raise ValueError(\"Expected two finite distinct orientation normals modulo pi\")\n    fy, fx = np.meshgrid(np.fft.fftfreq(shape[0]), np.fft.fftfreq(shape[1]), indexing=\"ij\")\n    score = np.stack([(fx * math.cos(a) + fy * math.sin(a)) ** 2 for a in angles])\n    labels = np.argmax(score, axis=0)\n    labels[(fx == 0) & (fy == 0) | (fx == -0.5) | (fy == -0.5)] = 2\n    masks = np.stack([labels == i for i in range(3)])\n    yy = (-np.arange(shape[0])) % shape[0]\n    xx = (-np.arange(shape[1])) % shape[1]\n    if not np.array_equal(masks, masks[:, yy][:, :, xx]):\n        raise ArithmeticError(\"Orientation masks must be conjugate closed\")\n    assert np.all(masks.sum(0) == 1)\n    return masks\n\n\ndef project(restored, present, empty, angles):\n    if np.shape(restored) != np.shape(present) or np.shape(present) != np.shape(empty):\n        raise ValueError(\"Native restored/present/empty shapes must match\")\n    t = detrend(np.asarray(present, dtype=np.float64) - empty)\n    v = detrend(np.asarray(restored, dtype=np.float64) - empty)\n    masks = sectors(t.shape[-2:], angles)\n    ft, fv = [np.fft.fft2(a, norm=\"ortho\") for a in [t, v]]\n    power = np.sum(abs(ft) ** 2, axis=0)\n    cross = np.sum((fv * ft.conj()).real, axis=0)\n    total = float(np.sum(power))\n    if total <= 0:\n        raise ValueError(\"Nonzero constructed template required\")\n    records = []\n    for i, mask in enumerate(masks):\n        energy = float(np.sum(power[mask]))\n        numerator = float(np.sum(cross[mask]))\n        records.append(\n            {\n                \"sector\": i,\n                \"template_energy_fraction\": energy / total,\n                \"template_energy\": energy,\n                \"projection_numerator\": numerator,\n                \"gain\": numerator / energy if energy > 0 else None,\n            }\n        )\n    gain = float(np.sum(cross) / total)\n    spatial = float(np.sum(v * t) / np.sum(t * t))\n    recomposed = sum(r[\"projection_numerator\"] for r in records) / total\n    if not np.isclose(gain, spatial, rtol=2e-12, atol=2e-12) or not np.isclose(\n        gain, recomposed, rtol=2e-12, atol=2e-12\n    ):\n        raise ArithmeticError(\"Native Parseval/orientation decomposition failed\")\n    return {\n        \"whole_template_gain\": gain,\n        \"spatial_whole_template_gain\": spatial,\n        \"recomposed_gain\": recomposed,\n        \"sectors\": records,\n        \"scope\": \"Nearest-recipe-normal spectral sectors after full-context unweighted affine removal. Mask/envelope/intersection leakage remains; these are not exact isolated wire-family amplitudes. Residual sector includes Nyquist axes and DC.\",\n    }\n\n\ndef native_angles(recipe_angles, rotation, flip):\n    \"\"\"Normals after rot90 CCW in image coordinates, then horizontal flip.\n\n    Array y increases downwards. No projective transform is accepted by this\n    helper; callers must establish that the cached scene used only this D4 map.\n    \"\"\"\n    if type(rotation) is not int or not 0 <= rotation < 4 or type(flip) is not bool:\n        raise ValueError(\"Expected exact rot90 count0..3 and a boolean horizontal flip\")\n    result = []\n    for angle in recipe_angles:\n        if not math.isfinite(angle):\n            raise ValueError(\"Expected finite recipe normals\")\n        transported = angle - rotation * math.pi / 2\n        if flip:\n            transported = math.pi - transported\n        result.append(transported % math.pi)\n    if len(result) != 2:\n        raise ValueError(\"Expected exactly two recipe normals\")\n    return result\n"
+    }
+  ],
+  "neural103": {
+    "nonlocal_autograd.py": "e79776c0d5aafb690efeeaa520af0c9614114bd74bb094f967d1ff49afc69563",
+    "phase_sparse_cuda.py": "41e4cf8f85a4ce73a4df06b29db26a6ce17312ae45923c9eec48c37e7ec0790f",
+    "paired_admission.py": "85a0953c1a9b44cc135e2e61b7f2306ebc4688c5323f1cacf550b19cc43c8825",
+    "phase_envelope.py": "ce53cfa8f4ef5f293a18636393913f4e3ac6008901e1662a35fdda83a46e9d75",
+    "prior.py": "bf1fb6fc02ee02f1c6e579f74294da6ff1cf0fff20fa46089faee5c7c4a22e4a",
+    "metrics.py": "f88c882cd0e868c36caa8200c4d972bc8cb4cc5d74dbdac87aadc64b88edab31",
+    "noise_pairs.py": "d4404f8c353ec0703572a903e41f01dae5ac2f61c345e7276f8ba8dff394de10",
+    "inference.py": "c6129d65eb9d28235cc750b6d694a1bbda7afa2bf7413a727a4d92011e82a94a",
+    "late_balanced_spatial.py": "3ce86fc83f24301d2e1a701020fad66d8a6bbf9e806c6d655b57ab1e306f0076",
+    "train.py": "1e204de61f8c8519b8109eaff05effb836b3d701182d075a97ca4ea1e085c3a6",
+    "late_spectral_coherent.py": "ddab604372a3251d345dd74cec400fcd3ac004f1b2e047c12bfc194ef7f590c8",
+    "personal_admission.py": "9431fa9ccda526e79f07a1ce9a8e4834689e519828395ce40135c2d09a4f777f",
+    "archive_metrics.py": "a7ba33502539a26ecd87add43f0ab561d7b7fc09122dcbe6d1b839ba59450f8c",
+    "execution.py": "ddabc53dd01ff8792196aed5787c1dc0224940eeeefbde85188e093df50059fd",
+    "packed_isotropic.py": "c88568c931e3da224d0f27bd74cca4f23da25cea1e543d488b3defcfb9485dba",
+    "dino_adaptation.py": "f1a9c205b1442ab1386214eb3a10338d8492b9112d06de97f9a4e543f3dd1861",
+    "raw_global_memory_features.py": "33609837af230af7d052bca955d74715513239ad3bf29c4fed3ba615d342bf8d",
+    "late_rgb.py": "8e81263dd3eaf619700ad34c550153f066ed6125788356feb3812b31b6eb1fb7",
+    "dng.py": "dc2a54f4ee88d032013cf806892c1c1bb688b8c47a5efaaec738268f449c3999",
+    "paired_training.py": "8eff2a50ed898ffa0b79bc5f20c98b90e8a6aa561a9f227f491932031c3cc03e",
+    "raw_global_training.py": "0b241a885e0df7f7164002728a175ca71ecd4777c53bf504bacc759a3827bd85",
+    "phase_tv.py": "d71da9768751937d832bfd1532e577202326005630cbd93f8aee28fb9b0eeb9f",
+    "reference.py": "91cba3dbcab05f25e67f6c6f9b6122c7fe7059cafe10c58bdc3a153984e4345b",
+    "raw_global_features.py": "59d5eac2047727004592c6e5cd5cb4ef1fb1556be3c7c53a3b2668b5c5fa5577",
+    "prepare.py": "0573132bed2b21ba5be6fd0464daca4f506640a5f03b0311abbeec9b23a875f1",
+    "raw_spectral.py": "84b723d4a2f8e2a644fde7c3083ba9fa925dcf40b386f392e9f0f419628bfee0",
+    "raw_spatial_training.py": "8602eedb4e3666121d9c126bfc88586290edf65abdcf808a95e8b0f4c9d56f68",
+    "realdata.py": "943540dfd4fddfad96d6337e134da5c96ca8ee27f23b3dbb689d423d6b5a2dd0",
+    "cfa.py": "da90a3863904a0c6517b2e5d9e4270cd31103f620785d5f23e78f8ff1aed8aed",
+    "paired.py": "2aee3c8ebdd51defd34e669d3c16a35be6a3a9d74c26b46c00363a80acefc36d",
+    "raw_directional.py": "4309e5c0952b6957035fb13d3c9149e4f42e18c6c7cd1d305677c2ae02a5df55",
+    "photo_sampling.py": "7638dc5914ff97dfbed758567223f62a4949596e7a9656d90eac8817db7a1d04",
+    "audit.py": "3a5e6c978977be1d8f21b1d282848f07e4c7df5c7a4ac8a2c3e8f21b955f520d",
+    "source_loss.py": "07d22ad7863d6d05667d9f684fe3a31e063b8d7cf8fa320eab900a5c9d6336c7",
+    "late_spaced_pooled_wave.py": "bc6860308eff1b8dc6167d92eae124cd74c40e964865ff1be7370b99c939a6bf",
+    "self_ensemble.py": "6f54d52dc39bf0f073ff402f1e9fab6d0419608868c4dff09a6f837d7993bf54",
+    "losses.py": "f53b1a20850d2c11a52164e8325d7550573fd7fe5b194d32a346a6de8242cf20",
+    "gaussian.py": "60df28dece86393e7d7c6de34ff649a1a6e897f9de1ce719f11c57bbdd5ffe72",
+    "phase_tv_cuda.py": "07ff40092f973969bece64fa8db7b17af4971a57f0951051a6e3af75ef880e91",
+    "real_suite.py": "b54703f430e070733f9dceb9859801e7405f9c01a39b8bbf1c0b6477aa307ba1",
+    "late_spectral_relative.py": "bc9c95c57f5e9ac91a81baf474e2a48d7c52ff7f031b0e8d2cc838dc4666f897",
+    "late_nonlocal_residual.py": "167268130814ddb27df9eb9abced01299687798994fb93af66620d1132ac7cf1",
+    "hotpixels.py": "0a4b8777a47b49af0f16c83c86b970387960c44432228e5f958b433c71d30672",
+    "raw_frequency_features.py": "cc0bc7ba1930eac1d42d62fe334770b2b7c3a72288fd22cbbb070718644edc46",
+    "late_local_noise_matching.py": "fe9c31c67901c6431573b222049fec2b416803f111437fed2c6d7b2729e890e9",
+    "shadow_exposure.py": "a3d5c3385bad3bc98375aeb578ecaf820d12e84b21184790368efb03ec89d49d",
+    "prediction_archive.py": "d92c79c2895db0dd265bc4894276ec513ec1e3add60218373fa56406a927ec48",
+    "phase_noise_floor.py": "5b5f631ef2f79b66373c1b8db8516a438fd1b1e84cdbb2b243aa5982ca222352",
+    "raw_clean.py": "37237ec96d00ab83e0a9fd6d65d456495c2c9e23803395c908cc4de3b9c52209",
+    "checkpoint_cache.py": "24399e0946d6d07872e6aa01cc4a7e12b4ae0c5c055bac9470a2dea8be2d4622",
+    "raw_patch_memory_features.py": "3afce3ac5a5f98addf3129f4ce2a7c700a70a0c6e95a98d489e80124deb896d7",
+    "raw_admission.py": "06fe28c7a12559ce964f28571ecbbed282ac53ee4ecea1998945358dc7d5737b",
+    "raw_spatial_features.py": "b2f1603a1734e69c21cbaa6c3583e666ebc7d06662d0dbc34f5498592ec682d3",
+    "vst.py": "9ac639792870c11ceb4960dc836ff7c70d7740491eb7b8c829ccf263616e9077",
+    "conditional_bias.py": "3c780cd22135a86c1ec61ccb63e9d5062d74ee6d0329dcae76014a39446cace5",
+    "phase_sparse.py": "25287c58361d0d177ed447b4c7a3d709a913cf4129eaa56def4893bbc1eef7d4",
+    "late_harmonic_context.py": "7e62df176d35ace301ca3cb8ea986ea8133e80bb12748773f1e5124e42d024a4",
+    "detail_loss.py": "e3b50def1463258d4703cd803b6c600130a93903a6afb4bc4e7809a43c37c59f",
+    "io.py": "3e693732086ee6c4995989dbb9740dc76f3ee13449c407a85d89a138466f798a",
+    "late_spectral_detail.py": "574fdcee9ddef8dd88151296433c06017b20104d0806cf305918f00bea57f97f",
+    "late_phase_wave_readout.py": "39f72dcc827c1e8f16c9ea5ea609868f8c227bb5282d2a850fd51fc16372ac7b",
+    "data.py": "67e660f87aab39fa2ac2d3599464819adcbb5671d235a0043a9b76432f5eca74",
+    "__init__.py": "0dca8e160e262f92c95bfb083c5ba5018403e32d1f7443619c5c09273a7b827d",
+    "calibration.py": "49fc00d2f1ff9bf52c18bb16291d26e670f58702f133a8244bf4dfca09bf0918",
+    "noise.py": "35d4a0fb8ee050818c513516419c8e0507f4df3ac8a38a504d878fc4b27384ce",
+    "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "precision.py": "f83635ef4834f0a5ad3c57824c50e8e0aaf5f95af34e8f802f04b131579594f4",
+    "late_local_phase_evidence_matching.py": "e31a5458e0b0da277d0b7b3d5bccfde82e2e43da682a7e215113dbd0f7b10c33",
+    "nonlocal_raw.py": "ee580b1cccf0fb79336109730d3598f07034ad67e26561a90f8c8db54edc49a2",
+    "cli.py": "0d44f8e6399cba2f3dbd7950c096ff474081585e6b5142b173d6b6d1370879e7",
+    "reporting.py": "9fa2fe983613352a7a0c9201237529ff693787e0904bd175ea1af25dfa7f721d",
+    "model.py": "0f5d55b81d4df7a17d2612ed85a307b583c6f5b38c906aeb0d01a2dbcaa64445",
+    "late_spectral_matrix.py": "7291bcf635bcc35483e889a323fe29b743ed737a1d59a0f4d620cc6f3a8ea21d",
+    "color.py": "384fae2250c3893b3552eea3d8217629a7a67b9ed37cb901a2bb68ff5449ad57",
+    "dino_pyramid.py": "430c272eee1c764197b4f20810215798644f565a8d5e3637c7002d6fb71232af",
+    "late_harmonic_phase.py": "90b0577135729a75481d03eb59a91bc525cc059e86adb4dc29347e933fb56bd4",
+    "phase_context.py": "94d4be533e14787e0a66ec760be0193241f94f4f3428dc6069450ce47e52563b",
+    "raw_global_conditioned_features.py": "64dbb55240c6d31b54cc1a01d6260549d95e25ad71a78168a1c26679aea78059",
+    "textures.py": "9cbeb6d2bc746c5deb5ca4c9165ee1f9200699b121642e280d7307db4bd08ac5",
+    "nonlocal_matchfilter.py": "2d588d4d3c97ad39362376a8e641c2a04b253ca6d545d83eff9a6b78bc7099c6",
+    "late_phase_evidence_matching.py": "f6b4d414e0eaa6ecc1f508346231b7f643c1ae81b4f9807838eec0197433b53f",
+    "nonlocal_reference.py": "7e4a00e9d90a61b772da9c1a7414bf499f84b9c9bb0239fd250fb8263dfb3f88",
+    "collaborative_detail.py": "6f381aa839c4550936a19d1d2ea1e0ccc7dbcf3e026faf7a11c5b91652253b5d",
+    "late_pooled_phase_wave.py": "2c7ff56f0bcb6586f7f1966a4818af05f11c0e32033bd7d1fb5cdddc304975c6",
+    "reviewed_rois.py": "c1f4ce7d6d46d65a447903913fd8555ae9fdb511f1f8b1fc415446daba2c7cf4",
+    "late_spatial_rgb.py": "79cb9c5e6a305fc117f21a5559f9a3dfd31a09d692e4611bf05a436057789c5b",
+    "phase_cross.py": "c3eae14d6a34426baa0cabd2b2bf637d117b70f560dac621f06e4b0ca9752e35",
+    "safety.py": "d3b949c9614ee41495d676d6584e9927c70d6f95a9f8d4a7eff4823c72a17ac7",
+    "conditional_gradient.py": "eda41a837a1604f4bb2af8c1b16847dd63b77555dd52e442179dbaba5358e448",
+    "raw_kernel.py": "32ba3747479f0e328fe87a84fb227dd456ae0d08b242a4d1411756dfbf9fb498",
+    "training_context.py": "1322c59d3c7b931bdb9db50faadfa28516dcefd999b3902beef9e399be475b77",
+    "pretrained_rgb.py": "374791c4dcaa7e293eef52cf5a52c71456abfd8cdeb97f42974af663a5cd30f6",
+    "dino_supervision.py": "203982984ef0ae84b91fa973949761f57c2a10f29cf93e3024775b7bde8c07e5",
+    "optimizer_batches.py": "256da1120d07288d30cee26689c106e236ca430e982babbbc89d867d086504a5",
+    "registration.py": "ee9b128f86347dc0737c0adf7ed6ab8d7dca883c3d4c62810d6426e7d5869202",
+    "suite.py": "58eceac48377a8b52f1f4838b2051bd54d3d20f66b7cf1306b03f5264fc6dbb3",
+    "phase_context_frequency.py": "e5395e30cfafc78a96a1f24d9c91d71162f0529cb30b27f369ac68c17b17cb27",
+    "phase_frequency.py": "6ff3feace59a44237258168adbd89a30f9b355b57f4c806be9539ff09aa4a8c9",
+    "late_bounded_support.py": "471ef893542dd3e72c5e38bbb0d3c3c2e9b7ddc45452b44cdbc920769d846e7b",
+    "phase_harmonic.py": "8fe0239f3f7385101dc2b2ec784609cb49fac1dfed5c86f2033fc19afb01dc3d",
+    "photo_epoch_order.py": "b0130c66415a3b9f27c87630660bdb1acdc755d255ca8ac9a6eb73a6f990a1a2",
+    "late_spatial_context_wave.py": "d5af705bc43fc655b4bff6ee52db27b3ebbe90655a97c805c2b2f68bcb42d572",
+    "late_dense_local_spectrum.py": "05e4bc97518d8588ddd82b8d4fde551c170d6dcabd17e8dda19e057a97108f90"
+  },
+  "tests": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/CPU-contracts-v2.log",
+    "sha256": "9b159b9c7e8980afeeaa68123e8ce449ef144081876450a9fe0caa2a8b4a66e4",
+    "text": "................                                                         [100%]\n16 passed in 0.07s\n"
+  },
+  "minimum_GiB": {
+    "local": 40,
+    "RAM": 32
+  },
+  "new_local_forecast_GiB": 0.005,
+  "scope": "Sixteen saved native512 camera-RGB projections on two fixed present-mesh examples. Eight comparators, known D4-corrected recipe normals, full-context unweighted affine detrending. No checkpoint load, model/Torch/CUDA call, image regeneration, source/noise draw, original/dataz/real-reference access or optimization. Three disjoint conjugate-closed native spectral regions recompose the existing whole-template score. Regions have envelope/intersection leakage and are not isolated wire-family amplitudes, confidence or generalization evidence. Existing V193 full quality and native comparisons remain authoritative."
+}

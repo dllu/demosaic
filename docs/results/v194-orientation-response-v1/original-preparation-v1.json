@@ -1,0 +1,335 @@
+{
+  "status": "prospective-secondary-orientation-score-CPU-preparation-before-V193-completed-quality",
+  "created_unix_UTC": 1794164182.8390973,
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-preparation-v1/test_mesh_orientation_response.py",
+      "sha256": "6fe205762f5adaeca6c2dd3179109f5d8825d5dcaf8b1679c2dd2a4d3025f162",
+      "text": "import math\nimport numpy as np\nimport pytest\nfrom mesh_orientation_response import project,sectors,detrend\n\n\ndef example():\n y,x=np.mgrid[:64,:64]\n a=np.cos(2*np.pi*(5*x+3*y)/64)\n b=.25*np.cos(2*np.pi*(-4*x+7*y)/64)\n c=.1*(-1.)**(x+y)\n return np.stack([a+.5*b+.2*c]*3),np.stack([.2*a+.5*1.8*b+.2*-.3*c]*3),[math.atan2(3,5),math.atan2(7,-4)]\n\n\ndef test_known_independent_native_carrier_amplitudes_and_recomposition():\n target,value,angles=example();r=project(value,target,np.zeros_like(target),angles)\n for actual,want in zip([s['gain']for s in r['sectors']],[.2,1.8,-.3],strict=True):assert actual==pytest.approx(want,abs=1e-11)\n assert r['whole_template_gain']==pytest.approx(sum(s['gain']*s['template_energy_fraction']for s in r['sectors']),abs=1e-13)\n assert r['whole_template_gain']!=pytest.approx(1.)\n\n\ndef test_exact_GT_and_empty_response_and_affine_invariance():\n t,v,a=example();y,x=np.mgrid[:64,:64];background=np.stack([5+2*x+.3*y]*3)\n for value,want in [(t,1.),(np.zeros_like(t),0.)]:\n  r=project(value+background,t+background,background,a)\n  assert r['whole_template_gain']==pytest.approx(want,abs=1e-11)\n  for s in r['sectors']:assert s['gain']==pytest.approx(want,abs=1e-11)\n np.testing.assert_allclose(detrend(v+background),detrend(v),atol=2e-13)\n\n\ndef test_conjugate_closed_partition_and_recipe_order_symmetry():\n t,v,a=example();m=sectors((64,64),a);assert np.all(m.sum(0)==1)\n p=project(v,t,np.zeros_like(t),a);q=project(v,t,np.zeros_like(t),a[::-1])\n assert p['whole_template_gain']==q['whole_template_gain']\n assert [s['gain']for s in p['sectors'][:2]]==pytest.approx([s['gain']for s in q['sectors'][:2]][::-1])\n\n\n@pytest.mark.parametrize('angles',[[0,0],[0,math.pi],[0,float('nan')],[0]])\ndef test_invalid_normals(angles):\n with pytest.raises(ValueError):sectors((64,64),angles)\n\n\ndef test_no_template_and_mismatched_native_shapes():\n t,v,a=example()\n with pytest.raises(ValueError):project(v,np.zeros_like(t),np.zeros_like(t),a)\n with pytest.raises(ValueError):project(v,t[:,:,:32],np.zeros_like(t),a)\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-preparation-v1/mesh_orientation_response.py",
+      "sha256": "36e1cd4a325497b2f99eace4382820c086894f49b9636d52ee671187cf3d5d0a",
+      "text": "\"\"\"Orientation-conditioned whole-template projections, not isolated wire families.\n\nDisjoint native Fourier sectors use the two fixed recipe normals. A residual\nsector holds Nyquist axes and DC, avoiding ambiguous orientation there. The\nenergy-weighted gains exactly recompose the existing affine-detrended scalar.\nNo input selection, confidence, model fitting, or real-reference scoring occurs.\n\"\"\"\nimport math\nimport numpy as np\n\n\ndef detrend(value):\n    value=np.asarray(value,dtype=np.float64)\n    if value.ndim!=3 or value.shape[0]!=3 or min(value.shape[-2:])<16 or not np.isfinite(value).all():\n        raise ValueError('Expected finite native3xHxW RGB')\n    h,w=value.shape[-2:]\n    y,x=np.meshgrid(np.linspace(-1,1,h),np.linspace(-1,1,w),indexing='ij')\n    basis=np.stack([np.ones_like(x),x,y],-1).reshape(-1,3)\n    q=np.linalg.qr(basis,mode='reduced')[0]\n    flat=value.reshape(3,-1).T\n    return (flat-q@(q.T@flat)).T.reshape(value.shape)\n\n\ndef sectors(shape,angles):\n    if len(shape)!=2 or any(type(n)is not int or n<16 or n%2 for n in shape):\n        raise ValueError('Expected even native axes>=16')\n    if len(angles)!=2 or not all(math.isfinite(a)for a in angles) or abs(math.sin(angles[0]-angles[1]))<1e-4:\n        raise ValueError('Expected two finite distinct orientation normals modulo pi')\n    fy,fx=np.meshgrid(np.fft.fftfreq(shape[0]),np.fft.fftfreq(shape[1]),indexing='ij')\n    score=np.stack([(fx*math.cos(a)+fy*math.sin(a))**2 for a in angles])\n    labels=np.argmax(score,axis=0)\n    labels[(fx==0)&(fy==0) | (fx==-.5) | (fy==-.5)]=2\n    masks=np.stack([labels==i for i in range(3)])\n    yy=(-np.arange(shape[0]))%shape[0];xx=(-np.arange(shape[1]))%shape[1]\n    if not np.array_equal(masks,masks[:,yy][:,:,xx]):\n        raise ArithmeticError('Orientation masks must be conjugate closed')\n    assert np.all(masks.sum(0)==1)\n    return masks\n\n\ndef project(restored,present,empty,angles):\n    if np.shape(restored)!=np.shape(present) or np.shape(present)!=np.shape(empty):\n        raise ValueError('Native restored/present/empty shapes must match')\n    t=detrend(np.asarray(present,dtype=np.float64)-empty)\n    v=detrend(np.asarray(restored,dtype=np.float64)-empty)\n    masks=sectors(t.shape[-2:],angles)\n    ft,fv=[np.fft.fft2(a,norm='ortho')for a in [t,v]]\n    power=np.sum(abs(ft)**2,axis=0)\n    cross=np.sum((fv*ft.conj()).real,axis=0)\n    total=float(np.sum(power))\n    if total<=0:raise ValueError('Nonzero constructed template required')\n    records=[]\n    for i,mask in enumerate(masks):\n        energy=float(np.sum(power[mask]));numerator=float(np.sum(cross[mask]))\n        records.append({'sector':i,'template_energy_fraction':energy/total,'template_energy':energy,'projection_numerator':numerator,'gain':numerator/energy if energy>0 else None})\n    gain=float(np.sum(cross)/total)\n    spatial=float(np.sum(v*t)/np.sum(t*t))\n    recomposed=sum(r['projection_numerator']for r in records)/total\n    if not np.isclose(gain,spatial,rtol=2e-12,atol=2e-12) or not np.isclose(gain,recomposed,rtol=2e-12,atol=2e-12):\n        raise ArithmeticError('Native Parseval/orientation decomposition failed')\n    return {'whole_template_gain':gain,'spatial_whole_template_gain':spatial,'recomposed_gain':recomposed,'sectors':records,'scope':'Nearest-recipe-normal spectral sectors after full-context unweighted affine removal. Mask/envelope/intersection leakage remains; these are not exact isolated wire-family amplitudes. Residual sector includes Nyquist axes and DC.'}\n"
+    }
+  ],
+  "CPU_contracts": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-preparation-v1/CPU-contracts-v1.log",
+    "sha256": "f83d9d610e658c2588951f9d5fcf5eb6869412bb3ff4984e533ea0cdb5fce58f",
+    "text": "........                                                                 [100%]\n8 passed in 0.12s\n"
+  },
+  "current_review_owner_observed_live": {
+    "pid": 1427978,
+    "created": 1794163877.89
+  },
+  "prerequisite": "Only evaluate saved predictions after V193 both endpoints/audits/native viewing/publication are complete and original owners terminal. Do not modify the sealed V193 metric or run any additional model forward.",
+  "cases": [
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112302-present-iso6400-prior-RGGB.npz",
+        "sha256": "b88ac3be4eeb5c4b88b6e3814ae41fe7920bcc7c0eda969761c4f5530234bd75"
+      },
+      "pattern": "RGGB",
+      "seed": 2026112302,
+      "present": true,
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "display_exposure": 8,
+      "noise": {
+        "name": "iso6400-prior",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 1.0,
+        "contrast_multiplier": 1
+      },
+      "reference_role": "Exact procedural mesh or empty GT; hypothetical present template used only for diagnostic metrics",
+      "parent": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-016.npy",
+        "sha256": "b1724b86319c931b8c534f627bd4e9652c1ca4c2e2181e442747f1ca51f06d79"
+      },
+      "kind": "mesh",
+      "origin_plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/plan-v1.json",
+        "sha256": "6ca622ce855282096f1cf0e82555be2130f5d30c4b937ef1e9aa00c33aa2cacf"
+      },
+      "origin_index": 16,
+      "source": {
+        "recipe": {
+          "kind": "crossed-lines",
+          "present": true,
+          "seed": 4887276094017745860,
+          "size": 1024,
+          "pixel_scale": 2,
+          "level": 0.010231375756123073,
+          "requested_peak_relative_contrast": 0.10288250347805222,
+          "peak_relative_contrast": 0.10288250347805222,
+          "tint": [
+            0.8520712852478027,
+            0.9096097350120544,
+            1.0
+          ],
+          "contrast_direction": [
+            1.0,
+            -0.9933177828788757,
+            -0.14096839725971222
+          ],
+          "background_slope": [
+            0.0,
+            0.0
+          ],
+          "angles_radians": [
+            1.9653401245429662,
+            2.9951611798202493
+          ],
+          "periods_final_pixels": [
+            9.004032062696457,
+            7.0325739239678935
+          ],
+          "wire_sigma_final_pixels": [
+            1.0538010079079503,
+            0.7165287365882756
+          ],
+          "phases_cycles": [
+            0.10644427945996926,
+            0.6241716321910649
+          ],
+          "mask_center_final_pixels": [
+            222.1202646983116,
+            210.3193128142888
+          ],
+          "mask_radii_final_pixels": [
+            212.87907406662634,
+            244.42347106763617
+          ],
+          "rms_relative_contrast": 0.03523594832315021,
+          "space": "scene-linear-sRGB",
+          "absence_probability": 0.5
+        }
+      },
+      "periodic_detail": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-evaluation-v1/predictions/detail-mesh-seed2026112302-present-iso6400-prior-RGGB.npy",
+        "sha256": "cd92b27f4cb067374bc34293630739a55bafbd86e6db4bee74ac12891fdf00bd"
+      },
+      "periodic_expected_full_RMS": 17.815957854600175,
+      "input_fingerprints": {
+        "packed": {
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "73f564ca451858807b93ac9ce548297eab0ea47998b4ffbdd6ff3121a8e18755"
+        },
+        "variance": {
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "758806088579e092e3f959640e7eff9da92255a86e504091961363a33b1c45a9"
+        },
+        "colors": {
+          "shape": [
+            1,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+        },
+        "wb": {
+          "shape": [
+            1,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+        },
+        "matrix": {
+          "shape": [
+            1,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+        }
+      },
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ]
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/inputs/mesh-seed2026112309-present-iso6400-prior-RGGB.npz",
+        "sha256": "b9c69ce123091185791e5cac8da227b5993f5993950cff9bcc10ebd21b01f96d"
+      },
+      "pattern": "RGGB",
+      "seed": 2026112309,
+      "present": true,
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "display_exposure": 8,
+      "noise": {
+        "name": "iso6400-prior",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 1.0,
+        "contrast_multiplier": 1
+      },
+      "reference_role": "Exact procedural mesh or empty GT; hypothetical present template used only for diagnostic metrics",
+      "parent": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/work/artifacts/predictions/prediction-072.npy",
+        "sha256": "7587c7c3e7ef3323f12186838831a0fc02b0185d07041c1c6d2880c6dcc8219f"
+      },
+      "kind": "mesh",
+      "origin_plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-v1/V143-5000/plan-v1.json",
+        "sha256": "6ca622ce855282096f1cf0e82555be2130f5d30c4b937ef1e9aa00c33aa2cacf"
+      },
+      "origin_index": 72,
+      "source": {
+        "recipe": {
+          "kind": "crossed-lines",
+          "present": true,
+          "seed": 7722121410200143080,
+          "size": 1024,
+          "pixel_scale": 2,
+          "level": 0.010658776612548325,
+          "requested_peak_relative_contrast": 0.1719960776267557,
+          "peak_relative_contrast": 0.1719960776267557,
+          "tint": [
+            0.662882924079895,
+            1.0,
+            0.7368290424346924
+          ],
+          "contrast_direction": [
+            0.662882924079895,
+            1.0,
+            0.7368290424346924
+          ],
+          "background_slope": [
+            0.0,
+            0.0
+          ],
+          "angles_radians": [
+            0.4261037758503065,
+            1.3775964792221977
+          ],
+          "periods_final_pixels": [
+            27.685588833047248,
+            7.712249050507512
+          ],
+          "wire_sigma_final_pixels": [
+            0.7443174651976812,
+            1.1562400270885567
+          ],
+          "phases_cycles": [
+            0.045025540516571594,
+            0.48238460807367645
+          ],
+          "mask_center_final_pixels": [
+            247.34615725948836,
+            173.44569154994764
+          ],
+          "mask_radii_final_pixels": [
+            243.7163425569295,
+            229.61151464871222
+          ],
+          "rms_relative_contrast": 0.05343530603660176,
+          "space": "scene-linear-sRGB",
+          "absence_probability": 0.5
+        }
+      },
+      "periodic_detail": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/supported-amplitude-v1/prospective-evaluation-v1/predictions/detail-mesh-seed2026112309-present-iso6400-prior-RGGB.npy",
+        "sha256": "c3d056735051b6b7aafb0e53f16d71bb8ab0202820fc728952d3d99b7b778bd7"
+      },
+      "periodic_expected_full_RMS": 27.281582711103248,
+      "input_fingerprints": {
+        "packed": {
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "36b77dc075cf9657c465079e12c672942f681a916c65fd87c4ab1f147ed3ffd9"
+        },
+        "variance": {
+          "shape": [
+            1,
+            4,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "d265750427330aa23eee582e8d29750130006bbe05e6c93d675521c370d9664b"
+        },
+        "colors": {
+          "shape": [
+            1,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "7acccfef7a7e85ef7264470497c1a438a1f281c784c4df9658b37135ba552cc1"
+        },
+        "wb": {
+          "shape": [
+            1,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "fd75449648496bd71ed0ed1e333cb79884a4b2933853e106ee113b41fd2210d4"
+        },
+        "matrix": {
+          "shape": [
+            1,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "bd161ae97a03c8b7ed51495934a9581caf77b872bb7887a8a7b7160f87b37daa"
+        }
+      },
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ]
+    }
+  ],
+  "methods": [
+    "V143 parent",
+    "V183-coherent-pair-EMA",
+    "V187-pooled-wave-raw",
+    "V187-pooled-wave-EMA",
+    "V191-dense-spectrum-raw",
+    "V191-dense-spectrum-EMA",
+    "V193-large-dense-raw",
+    "V193-large-dense-EMA"
+  ],
+  "analysis": "Full native512 camera-RGB contexts. Same unweighted affine removal as existing whole-template metric. Disjoint nearest-recipe-normal native Fourier sectors plus residual DC/Nyquist axes. Report sector GT energy shares and signed template gains; energy-weighted sum must reproduce existing whole-pattern gain. No post-selection of cases/angle thresholds/regions from candidate predictions. Sectors have envelope/intersection leakage: not exact individual wire-family amplitudes. Two preexisting native seeds only, descriptive supplement without population or calibrated-confidence claims. Absent/globalflat safety remains in fullV193 quality audit.",
+  "source_noise_draws": 0,
+  "neural_forwards": 0,
+  "new_neural_source_files": 0,
+  "scope": "Preparation and eight independent math contracts only. No actual saved prediction/GT image read yet; no model quality finding or completed diagnostic claim. Intended question: do whole-template gains hide uneven directional response? New allocations under.005GiB local; local40/RAM32 floors, oldevidencepreserved."
+}

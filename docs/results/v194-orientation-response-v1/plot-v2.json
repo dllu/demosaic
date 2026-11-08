@@ -1,0 +1,321 @@
+{
+  "status": "same48auditedpoints-legend-outside-axes-no-model-or-metric-repetition",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/scripts/render_mesh_orientation_response.py",
+    "sha256": "8cbccf98d0802b2e56240bb92b1ccc31f2d3bf5e12be2fef2af9a1478b20d2d5",
+    "text": "\"\"\"Render all audited native directional values with legends outside data axes.\"\"\"\n\nimport json\nfrom pathlib import Path\n\nimport matplotlib\n\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom phase_admission_protocol import read, ref\n\nREPO = Path(\"/home/dllu/proj/demosaic\")\nROOT = REPO / \".cache/quality-20261108/V194-orientation-response-v1\"\n\n\ndef render():\n    plan = read(ROOT / \"plan-v2.json\")\n    result = read(ROOT / \"result-v1.json\")\n    audit = read(ROOT / \"audit-v1.json\")\n    assert audit[\"result\"] == ref(ROOT / \"result-v1.json\") and audit[\"status\"].startswith(\"pass-\")\n    images = REPO / \"docs/images/v194-orientation-response-v1\"\n    methods = [r[\"method\"] for r in plan[\"cases\"][0][\"methods\"]]\n    fig, axes = plt.subplots(1, 2, figsize=(11.2, 5.1), layout=\"constrained\")\n    points = []\n    for ax, item in zip(axes, plan[\"cases\"], strict=True):\n        case = item[\"case\"]\n        rows = [\n            next(r for r in result[\"rows\"] if r[\"id\"] == case[\"id\"] and r[\"method\"] == m)\n            for m in methods\n        ]\n        labels = [\n            m.replace(\"-coherent-pair\", \"\")\n            .replace(\"-pooled-wave\", \"\")\n            .replace(\"-dense-spectrum\", \"\")\n            .replace(\"-large-dense\", \"\")\n            for m in methods\n        ]\n        y = np.arange(len(methods))\n        for series, offset, color, marker in [\n            (\"Region A\", -0.16, \"#1769aa\", \"o\"),\n            (\"Region B\", 0.16, \"#b44b18\", \"s\"),\n            (\"Whole\", 0, \"#202020\", \"|\"),\n        ]:\n            values = [\n                100\n                * (\n                    r[\"whole_template_gain\"]\n                    if series == \"Whole\"\n                    else r[\"sectors\"][0 if series == \"Region A\" else 1][\"gain\"]\n                )\n                for r in rows\n            ]\n            ax.scatter(values, y + offset, label=series, c=color, marker=marker, s=28, zorder=3)\n            points += [\n                {\"id\": case[\"id\"], \"method\": m, \"series\": series, \"response_percent\": v}\n                for m, v in zip(methods, values, strict=True)\n            ]\n        ax.set_yticks(y, labels, fontsize=8)\n        ax.invert_yaxis()\n        ax.axvline(0, c=\"#777\", lw=0.6)\n        ax.set_xlabel(\"Response (% of exact constructed regional template)\")\n        shares = rows[0][\"sectors\"]\n        ax.set_title(\n            f\"Mesh{str(case['seed'])[-4:]}: GT energy A {100 * shares[0]['template_energy_fraction']:.2f}% / B {100 * shares[1]['template_energy_fraction']:.2f}%\",\n            fontsize=10,\n        )\n        ax.grid(axis=\"x\", alpha=0.2)\n    fig.suptitle(\n        \"Directional response on two fixed native examples \u00b7 separate linear x scales\", fontsize=12\n    )\n    fig.legend(*axes[0].get_legend_handles_labels(), loc=\"outside lower center\", ncol=3, fontsize=9)\n    figures = {}\n    for extension in [\"png\", \"svg\", \"pdf\"]:\n        path = images / f\"orientation-response-v2.{extension}\"\n        assert not path.exists()\n        fig.savefig(path, dpi=150)\n        figures[extension] = ref(path)\n    plt.close(fig)\n    old = read(REPO / \"docs/results/v194-orientation-response-v1/plot-v1.json\")\n    assert old[\"points\"] == points and len(points) == 48\n    receipt = {\n        \"status\": \"same48auditedpoints-legend-outside-axes-no-model-or-metric-repetition\",\n        \"source\": dict(ref(__file__), text=Path(__file__).read_text()),\n        \"result\": ref(ROOT / \"result-v1.json\"),\n        \"previous_plot\": ref(REPO / \"docs/results/v194-orientation-response-v1/plot-v1.json\"),\n        \"figures\": figures,\n        \"points\": points,\n        \"reason\": \"Actual original-detail inspection found V1 legend occluding the final dominant-direction point. V2 changes presentation only. V1 files and receipt preserved.\",\n    }\n    with (REPO / \"docs/results/v194-orientation-response-v1/plot-v2.json\").open(\"x\") as stream:\n        json.dump(receipt, stream, indent=2, allow_nan=False)\n        stream.write(\"\\n\")\n    print(\"Rendered same48points inPNG/SVG/PDF with legend outside axes; V1 preserved\")\n\n\nif __name__ == \"__main__\":\n    render()\n"
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V194-orientation-response-v1/result-v1.json",
+    "sha256": "0ff7715c9a4e2fba9242bfd77aff2a6e743b4a748e6344acaecf8732e616491c"
+  },
+  "previous_plot": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v194-orientation-response-v1/plot-v1.json",
+    "sha256": "959be9a1d4318db668068c63475455b2a83e8047de3333d7397c6e030360e181"
+  },
+  "figures": {
+    "png": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v194-orientation-response-v1/orientation-response-v2.png",
+      "sha256": "b97084849e58156597bdcf0f3ca8dd00f439b0334bca28bed18e9984a062c3f0"
+    },
+    "svg": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v194-orientation-response-v1/orientation-response-v2.svg",
+      "sha256": "287dc2ea83781fa72b428509ff8720978e2a65afc7fd24669115746d250b7681"
+    },
+    "pdf": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v194-orientation-response-v1/orientation-response-v2.pdf",
+      "sha256": "8f1db73bd3a1cb409f9caf6b3c139346eb706a572ee77df2238acc0d063b1dbe"
+    }
+  },
+  "points": [
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V143 parent",
+      "series": "Region A",
+      "response_percent": -0.1250823196968082
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V183-coherent-pair-EMA",
+      "series": "Region A",
+      "response_percent": 2.544828735639999
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-raw",
+      "series": "Region A",
+      "response_percent": 5.926791258493724
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-EMA",
+      "series": "Region A",
+      "response_percent": 6.47750082498741
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-raw",
+      "series": "Region A",
+      "response_percent": 2.765149448511815
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-EMA",
+      "series": "Region A",
+      "response_percent": 2.7556909351642567
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-raw",
+      "series": "Region A",
+      "response_percent": 3.0935742819100267
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-EMA",
+      "series": "Region A",
+      "response_percent": 3.0534967509885846
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V143 parent",
+      "series": "Region B",
+      "response_percent": 0.13058532030721348
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V183-coherent-pair-EMA",
+      "series": "Region B",
+      "response_percent": 1.8267699041253953
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-raw",
+      "series": "Region B",
+      "response_percent": 3.4601274382873424
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-EMA",
+      "series": "Region B",
+      "response_percent": 3.710221021765653
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-raw",
+      "series": "Region B",
+      "response_percent": 1.9656204978747192
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-EMA",
+      "series": "Region B",
+      "response_percent": 1.9602694560436438
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-raw",
+      "series": "Region B",
+      "response_percent": 2.198724053372407
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-EMA",
+      "series": "Region B",
+      "response_percent": 2.1728227328593785
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V143 parent",
+      "series": "Whole",
+      "response_percent": 0.00012922154094570506
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V183-coherent-pair-EMA",
+      "series": "Whole",
+      "response_percent": 2.1931669524779513
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-raw",
+      "series": "Whole",
+      "response_percent": 4.718766818245957
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-EMA",
+      "series": "Whole",
+      "response_percent": 5.122252572621361
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-raw",
+      "series": "Whole",
+      "response_percent": 2.3735884510562566
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-EMA",
+      "series": "Whole",
+      "response_percent": 2.3661415311028224
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-raw",
+      "series": "Whole",
+      "response_percent": 2.6553305796530773
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-EMA",
+      "series": "Whole",
+      "response_percent": 2.6221957121719464
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V143 parent",
+      "series": "Region A",
+      "response_percent": 1.0350910860560778
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V183-coherent-pair-EMA",
+      "series": "Region A",
+      "response_percent": 4.919106598797289
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-raw",
+      "series": "Region A",
+      "response_percent": 4.843822493361349
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-EMA",
+      "series": "Region A",
+      "response_percent": 4.823006740374634
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-raw",
+      "series": "Region A",
+      "response_percent": 4.955862444644264
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-EMA",
+      "series": "Region A",
+      "response_percent": 4.947583315967298
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-raw",
+      "series": "Region A",
+      "response_percent": 5.093290998041441
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-EMA",
+      "series": "Region A",
+      "response_percent": 5.07258639422121
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V143 parent",
+      "series": "Region B",
+      "response_percent": 78.6049553645809
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V183-coherent-pair-EMA",
+      "series": "Region B",
+      "response_percent": 84.20766188748571
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-raw",
+      "series": "Region B",
+      "response_percent": 90.12566037694036
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-EMA",
+      "series": "Region B",
+      "response_percent": 91.69033479243353
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-raw",
+      "series": "Region B",
+      "response_percent": 84.88794810541313
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-EMA",
+      "series": "Region B",
+      "response_percent": 84.86607779649515
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-raw",
+      "series": "Region B",
+      "response_percent": 85.67517860989983
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-EMA",
+      "series": "Region B",
+      "response_percent": 85.5794440784418
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V143 parent",
+      "series": "Whole",
+      "response_percent": 67.49105132238577
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V183-coherent-pair-EMA",
+      "series": "Whole",
+      "response_percent": 72.84750759155901
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-raw",
+      "series": "Whole",
+      "response_percent": 77.90681300250544
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V187-pooled-wave-EMA",
+      "series": "Whole",
+      "response_percent": 79.2443248387851
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-raw",
+      "series": "Whole",
+      "response_percent": 73.43559124678778
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V191-dense-spectrum-EMA",
+      "series": "Whole",
+      "response_percent": 73.41566823790238
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-raw",
+      "series": "Whole",
+      "response_percent": 74.12972070156712
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "method": "V193-large-dense-EMA",
+      "series": "Whole",
+      "response_percent": 74.04473618147541
+    }
+  ],
+  "reason": "Actual original-detail inspection found V1 legend occluding the final dominant-direction point. V2 changes presentation only. V1 files and receipt preserved."
+}

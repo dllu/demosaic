@@ -534,3 +534,5 @@ The [V188 allocation diagnostic](spectral-selection-diversity.md) found better w
 
 
 The [V192 measurement-support calculation](dense-measurement-support.md) separates taper support from carrier-grid error. In its fixed analytic cases, Hann65 retains 23–48% of rectangular65 SNR power with nearest carriers; Hann129 retains 112–176%. This motivates a larger-window test, not a learned quality or flat-safety claim. No image/model inference or neural source changes occur.
+
+The [V194 directional check](mesh-directional-response.md) finds a hidden imbalance in the fixed mesh2309 example: V187 EMA has79.24% whole-template response but4.82% /91.69% in its two spectral regions, with85.67% of GT energy in the stronger region. Mesh2302 stays weak in both. This two-example saved-output diagnostic motivates testing balanced response pressure, without claiming a new model, isolated wire-family amplitudes or flat safety. [Audited, actually viewed evidence](results/v194-orientation-response-completed-v1.json).
