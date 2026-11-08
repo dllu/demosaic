@@ -1,5 +1,8 @@
 # Documentation guide
 
+See [storage maintenance](storage.md) for cache cleanup, verified consolidation
+of duplicate historical artifacts, and preservation of experiment paths/evidence.
+
 The completed [V193 larger dense window](large-dense-spectrum-comparison.md) raises mesh response **1.72% raw /1.50% EMA** over matched V191 to **4.556% /4.540% of exact GT**, with quiet spatial RMS **0.285–0.707% higher**, worsening31/32 inputs in each state. Response remains **12.84% /15.29% below V187**, and real fine crossings remain incomplete. Retain the measured dense-response gain and its quiet cost; V187 remains preferred wave and V120 Small general. Both endpoints, audits,60 viewed native figures/12 triplets and two exports are complete. [Twenty-two-state viewer](images/v193-large-dense-v1/native-viewer.html) · [Exact evidence](results/v193-large-dense-final-v1.json).
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. Keep V187 as the preferred experimental wave model. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).

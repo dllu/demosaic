@@ -1,0 +1,136 @@
+{
+  "status": "completed-verified-storage-cleanup",
+  "created_local": "2026-11-08T12:11:18.380882-08:00",
+  "duplicate_bytes_reclaimed": 118361493504,
+  "disposable_bytes_reclaimed": 4618145792,
+  "total_reclaimed_bytes": 122979639296,
+  "project_allocated_bytes_after": 582768418816,
+  "project_allocated_before_approx_GiB": 658,
+  "local_free_bytes_after": 157648252928,
+  "external_free_bytes_after": 119590670336,
+  "offloaded_bytes": 0,
+  "historical_groups": 5892,
+  "historical_paths_preserved": 30293,
+  "duplicate_path_replacements": 23438,
+  "historical_all_paths_rechecked_after_completion": true,
+  "every_group_rehashed_after_replacement": true,
+  "by_type": {
+    ".jsonl": {
+      "reclaimed_bytes": 57848262656,
+      "duplicate_inodes_removed": 691
+    },
+    ".json": {
+      "reclaimed_bytes": 502812672,
+      "duplicate_inodes_removed": 742
+    },
+    ".npz": {
+      "reclaimed_bytes": 40997097472,
+      "duplicate_inodes_removed": 9447
+    },
+    ".npy": {
+      "reclaimed_bytes": 12072927232,
+      "duplicate_inodes_removed": 10608
+    },
+    ".pt": {
+      "reclaimed_bytes": 6650458112,
+      "duplicate_inodes_removed": 14
+    },
+    ".png": {
+      "reclaimed_bytes": 288346112,
+      "duplicate_inodes_removed": 1783
+    },
+    ".tiff": {
+      "reclaimed_bytes": 1589248,
+      "duplicate_inodes_removed": 4
+    }
+  },
+  "disposable_roots_removed": 34,
+  "disposable_files_removed": 37764,
+  "canonical_neural_sources_verified": 103,
+  "checkpoint_bindings_verified": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/exports/pooled-phase-wave-raw-step1000.pt",
+      "sha256": "517b5a7df9d8dc7ac864981efceeff0fb70b4995d7a877a4a04e4b96c7f75680"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+      "sha256": "40b7c7c295ba82cc6b4a4646245483a3234de2759e2ae4d5a8e4e63a16a5e05a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/exports/pooled-phase-wave-EMA-step1000.pt",
+      "sha256": "4965a9baa17dc36e6f64115644d6ea62af1a48416f253b45c8a73c028f4306f8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/artifacts/checkpoints/wave-step1000.pt",
+      "sha256": "40b7c7c295ba82cc6b4a4646245483a3234de2759e2ae4d5a8e4e63a16a5e05a"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/exports/large-dense-spectrum-raw-step1000.pt",
+      "sha256": "f4d6705d1132160a8801a641fc26b15ce3184604dec81cbe4423d67ff1402ecc"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/checkpoints/wave-step1000.pt",
+      "sha256": "c4a60ffbda0635f7503888d9c02957867d328138dc6918eebfacd6f32609f8d8"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/exports/large-dense-spectrum-EMA-step1000.pt",
+      "sha256": "1dcc1db17af77e8ae9542793b3d1dedc92b29f8ef4bc59e927478cafa30a1d5a"
+    },
+    {
+      "path": "/mnt/external/demosaic/quality-20261107/V193-large-dense-trial-v1/checkpoints/wave-step1000.pt",
+      "sha256": "c4a60ffbda0635f7503888d9c02957867d328138dc6918eebfacd6f32609f8d8"
+    }
+  ],
+  "recent_sealed_bindings_verified": [
+    {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V193-large-dense-trial-v1/plan-v1.json",
+        "sha256": "3f50fa7ed287fbf6f868b12cef9ff95b5ff062c9a7bbeb112aa3bc8070c8f923"
+      },
+      "bindings_verified": 906
+    },
+    {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-CPU-v1/plan-v2.json",
+        "sha256": "58caaa33c55f153ca6c69612234a2f41cc3d3a111e696085cf856fb1c5e5b4f0"
+      },
+      "bindings_verified": 11
+    }
+  ],
+  "protected_GFX_caches_local_real_directories": true,
+  "preservation": "All unique historical artifacts, original historical paths and selected file bytes preserved. Merged artifacts now read-only and share anchor mtime/inode; original metadata recorded in plan. No source photos, protected GFX caches, virtualenv, Git objects/history, external files, training, inference, or quality measurement changed.",
+  "verification": "Duplicate/distinct-content/unknown-alias/read-only fixtures passed. Changed-input fixture rejected before mutation. Ruff passed. Recent V187/V193 exports/checkpoints, V193/V195 sealed inputs and 103 neural sources retain hashes.",
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/scripts/compact_historical_cache.py",
+    "sha256": "74febd96fd27f3c905876b6d129d82e6504442bc3892c895d949b106c9e1d3c0",
+    "source_text": "\"\"\"Hash-verified hard links for inactive historical artifacts; preserve paths and bytes.\n\nCreate a plan first, inspect it, then apply that exact plan. Only repository-local\n.cache roots are accepted. This never walks symlinks or deletes unique artifacts.\nMerged files become read-only: copy a checkpoint before resuming training.\n\"\"\"\n\nimport argparse\nimport gzip\nimport hashlib\nimport json\nimport os\nimport shutil\nimport stat\nimport time\nfrom collections import defaultdict\nfrom datetime import datetime\nfrom pathlib import Path\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO = Path(__file__).resolve().parents[1]\nSUFFIXES = {\".npy\", \".npz\", \".pt\", \".jsonl\", \".json\", \".tiff\", \".png\"}\nFIELDS = (\"dev\", \"ino\", \"size\", \"mode\", \"uid\", \"gid\", \"nlink\", \"mtime_ns\", \"ctime_ns\", \"blocks\")\n\n\ndef identity(path):\n    s = Path(path).lstat()\n    if not stat.S_ISREG(s.st_mode) or s.st_uid != os.getuid():\n        raise ValueError(f\"Not an owned regular file: {path}\")\n    return {k: getattr(s, \"st_\" + k) for k in FIELDS}\n\n\ndef sha(path):\n    with Path(path).open(\"rb\") as stream:\n        return hashlib.file_digest(stream, \"sha256\").hexdigest()\n\n\ndef save(path, value):\n    opener = gzip.open if str(path).endswith(\".gz\") else open\n    with opener(path, \"xt\") as stream:\n        json.dump(value, stream, separators=(\",\", \":\"))\n        stream.write(\"\\n\")\n\n\ndef read(path):\n    opener = gzip.open if str(path).endswith(\".gz\") else open\n    with opener(path, \"rt\") as stream:\n        return json.load(stream)\n\n\ndef local_now():\n    return datetime.now(ZoneInfo(\"America/Los_Angeles\")).isoformat()\n\n\ndef checked_root(value):\n    path = Path(os.path.abspath(value))\n    if not path.is_relative_to(REPO / \".cache\") or path == REPO / \".cache\":\n        raise ValueError(\"Select explicit subdirectories of repository .cache\")\n    if path.resolve() != path or not path.is_dir():\n        raise ValueError(f\"Root must be a real directory without symlink ancestors: {path}\")\n    return path\n\n\ndef assert_inactive(roots, paths=None):\n    \"\"\"Reject scientific workers in selected roots, and all open candidate files.\"\"\"\n    for process in psutil.process_iter([\"pid\", \"cmdline\", \"cwd\"]):\n        try:\n            if process.pid == os.getpid():\n                continue\n            command = process.info[\"cmdline\"] or []\n            # Shell/editor sessions are harmless; Python experiments are not.\n            if command and (\"python\" in Path(command[0]).name or \"pytest\" in command[0]):\n                for root in roots:\n                    if any(str(root) in arg for arg in command):\n                        raise RuntimeError(f\"Worker {process.pid} references {root}\")\n                    cwd = process.info[\"cwd\"]\n                    if cwd and Path(cwd).is_relative_to(root):\n                        raise RuntimeError(f\"Worker {process.pid} is in {root}\")\n            if paths is not None and process.uids().real == os.getuid():\n                for handle in process.open_files():\n                    if handle.path in paths:\n                        raise RuntimeError(f\"Candidate open by PID {process.pid}: {handle.path}\")\n        except (psutil.NoSuchProcess, psutil.AccessDenied):\n            continue\n\n\ndef plan(args):\n    roots = [checked_root(value) for value in args.root]\n    if any(a != b and a.is_relative_to(b) for a in roots for b in roots):\n        raise ValueError(\"Roots must not overlap\")\n    assert_inactive(roots)\n    cutoff = time.time_ns() - int(args.age_days * 86400 * 1e9)\n    sizes = defaultdict(dict)\n    for root in roots:\n        for directory, dirs, names in os.walk(root, followlinks=False):\n            dirs[:] = [d for d in dirs if not Path(directory, d).is_symlink()]\n            for name in names:\n                path = Path(directory, name)\n                if path.suffix not in SUFFIXES or path.is_symlink():\n                    continue\n                info = identity(path)\n                if info[\"size\"] < 65536 or info[\"mtime_ns\"] > cutoff:\n                    continue\n                inode = (info[\"dev\"], info[\"ino\"])\n                item = sizes[(info[\"dev\"], info[\"size\"])].setdefault(\n                    inode, {\"identity\": info, \"paths\": []}\n                )\n                item[\"paths\"].append(str(path))\n    samples = defaultdict(list)\n    considered = 0\n    for (device, size), inodes in sizes.items():\n        # Every existing alias must be within this explicit inventory.\n        complete = [v for v in inodes.values() if len(v[\"paths\"]) == v[\"identity\"][\"nlink\"]]\n        if len(complete) < 2:\n            continue\n        for item in complete:\n            path = item[\"paths\"][0]\n            assert identity(path) == item[\"identity\"]\n            digest = hashlib.sha256()\n            with Path(path).open(\"rb\") as stream:\n                for offset in sorted({0, max(0, size // 2 - 16384), max(0, size - 32768)}):\n                    stream.seek(offset)\n                    digest.update(stream.read(32768))\n            assert identity(path) == item[\"identity\"]\n            samples[(device, size, digest.hexdigest())].append(item)\n            considered += 1\n    candidates = [items for items in samples.values() if len(items) > 1]\n    print(json.dumps({\"stage\": \"full-hash\", \"candidate_inodes\": sum(map(len, candidates)),\n                      \"sampled_inodes\": considered}), flush=True)\n    groups = []\n    total_hashed = 0\n    last = time.monotonic()\n    for items in candidates:\n        hashes = defaultdict(list)\n        for item in items:\n            path = item[\"paths\"][0]\n            assert identity(path) == item[\"identity\"]\n            digest = sha(path)\n            assert identity(path) == item[\"identity\"]\n            total_hashed += item[\"identity\"][\"size\"]\n            # Differing permissions/ownership are separate semantic objects.\n            metadata = tuple(item[\"identity\"][k] for k in (\"mode\", \"uid\", \"gid\"))\n            hashes[(digest, metadata)].append(item)\n        for (digest, _), copies in hashes.items():\n            if len(copies) > 1:\n                groups.append({\"sha256\": digest, \"inodes\": copies})\n        if time.monotonic() - last > 10:\n            print(json.dumps({\"hashed_GiB\": round(total_hashed / 2**30, 2),\n                              \"duplicate_groups\": len(groups)}), flush=True)\n            last = time.monotonic()\n    savings = sum(v[\"identity\"][\"blocks\"] * 512 for g in groups for v in g[\"inodes\"][1:])\n    result = {\"status\": \"fully-hashed-historical-cache-plan\", \"created_local\": local_now(),\n              \"driver\": {\"path\": str(Path(__file__)), \"sha256\": sha(__file__)},\n              \"roots\": list(map(str, roots)), \"minimum_age_days\": args.age_days,\n              \"groups\": groups, \"expected_reclaimed_bytes\": savings,\n              \"full_hashed_bytes\": total_hashed,\n              \"metadata_change\": \"Read-only shared inode; anchor mtime, inode/link count and ctime. \"\n              \"Original per-path metadata recorded here. All paths and bytes preserved.\"}\n    save(args.output, result)\n    print(json.dumps({\"plan\": str(args.output), \"groups\": len(groups),\n                      \"reclaim_GiB\": savings / 2**30}), flush=True)\n\n\ndef apply(args):\n    data = read(args.plan)\n    assert data[\"status\"] == \"fully-hashed-historical-cache-plan\"\n    roots = [checked_root(value) for value in data[\"roots\"]]\n    assert data[\"driver\"][\"sha256\"] == sha(__file__)\n    paths = {p for g in data[\"groups\"] for v in g[\"inodes\"] for p in v[\"paths\"]}\n    assert all(any(Path(p).is_relative_to(root) for root in roots) for p in paths)\n    assert all(Path(p).resolve() == Path(p) for p in paths)\n    assert_inactive(roots, paths)\n    for group in data[\"groups\"]:\n        for item in group[\"inodes\"]:\n            for path in item[\"paths\"]:\n                assert identity(path) == item[\"identity\"], path\n    before = shutil.disk_usage(REPO).free\n    replaced = 0\n    last = time.monotonic()\n    with Path(args.journal).open(\"x\") as journal:\n        for index, group in enumerate(data[\"groups\"]):\n            anchor = Path(group[\"inodes\"][0][\"paths\"][0])\n            for item in group[\"inodes\"]:\n                for path in item[\"paths\"]:\n                    assert identity(path) == item[\"identity\"], path\n            # Durable intent before changing permissions or storage identity.\n            journal.write(json.dumps({\"group\": index, \"sha256\": group[\"sha256\"],\n                                      \"anchor\": str(anchor)}) + \"\\n\")\n            journal.flush()\n            os.fsync(journal.fileno())\n            os.chmod(anchor, anchor.stat().st_mode & ~0o222)\n            for item in group[\"inodes\"][1:]:\n                for ordinal, value in enumerate(item[\"paths\"]):\n                    path = Path(value)\n                    expected = dict(item[\"identity\"])\n                    # Earlier alias removal changes ctime/link count, never content.\n                    actual = identity(path)\n                    for field in FIELDS:\n                        if field == \"ctime_ns\":\n                            continue\n                        want = expected[field] - ordinal if field == \"nlink\" else expected[field]\n                        assert actual[field] == want, (path, field)\n                    temporary = path.with_name(path.name + f\".compact-{os.getpid()}\")\n                    assert not temporary.exists()\n                    os.link(anchor, temporary, follow_symlinks=False)\n                    os.replace(temporary, path)\n                    replaced += 1\n            assert sha(anchor) == group[\"sha256\"]\n            inode = anchor.stat().st_ino\n            for item in group[\"inodes\"]:\n                for path in item[\"paths\"]:\n                    current = identity(path)\n                    assert current[\"ino\"] == inode and current[\"dev\"] == item[\"identity\"][\"dev\"]\n                    assert current[\"size\"] == item[\"identity\"][\"size\"]\n                    assert not current[\"mode\"] & 0o222\n            if time.monotonic() - last > 10:\n                print(json.dumps({\"groups_done\": index + 1, \"paths_replaced\": replaced}), flush=True)\n                last = time.monotonic()\n    save(args.output, {\"status\": \"pass-historical-cache-compaction\", \"created_local\": local_now(),\n                       \"plan\": {\"path\": str(Path(args.plan).resolve()), \"sha256\": sha(args.plan)},\n                       \"journal\": {\"path\": str(Path(args.journal).resolve()),\n                                   \"sha256\": sha(args.journal)},\n                       \"groups\": len(data[\"groups\"]), \"paths_preserved\": len(paths),\n                       \"paths_replaced\": replaced,\n                       \"allocated_duplicate_bytes_reclaimed\": data[\"expected_reclaimed_bytes\"],\n                       \"local_free_before\": before, \"local_free_after\": shutil.disk_usage(REPO).free,\n                       \"all_groups_rehashed_after_replacement\": True,\n                       \"metadata_change\": data[\"metadata_change\"]})\n    print(json.dumps({\"result\": str(args.output), \"reclaimed_GiB\":\n                      data[\"expected_reclaimed_bytes\"] / 2**30}), flush=True)\n\n\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    sub = parser.add_subparsers(dest=\"action\", required=True)\n    prepare = sub.add_parser(\"plan\")\n    prepare.add_argument(\"--root\", action=\"append\", required=True)\n    prepare.add_argument(\"--age-days\", type=float, default=2)\n    prepare.add_argument(\"--output\", type=Path, required=True)\n    execute = sub.add_parser(\"apply\")\n    execute.add_argument(\"--plan\", type=Path, required=True)\n    execute.add_argument(\"--journal\", type=Path, required=True)\n    execute.add_argument(\"--output\", type=Path, required=True)\n    args = parser.parse_args()\n    if args.action == \"plan\" and args.age_days < 2:\n        parser.error(\"Historical compaction requires at least two days of inactivity\")\n    (plan if args.action == \"plan\" else apply)(args)\n\n\nif __name__ == \"__main__\":\n    main()\n"
+  },
+  "public_evidence": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/storage-maintenance-20261108-v1/disposable-plan-v1.json.gz",
+      "sha256": "d7df0ae0d22759e3d2019d91e7ba17011d279f3e7d5943f76d09325354992208"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/storage-maintenance-20261108-v1/disposable-result-v1.json",
+      "sha256": "ca52d4d92126cbdd5add5ae3ef3ba87c1a3d08d30a9dc275fbbb7f79f0a5b1a8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/storage-maintenance-20261108-v1/fixture-result.json",
+      "sha256": "da7849002103d277007dd955568c2ff0aa57f8af444bd54cceb65d2bccbf837c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/storage-maintenance-20261108-v1/historical-applied-v1.jsonl.gz",
+      "sha256": "10f52211ce5573859fa4374f230f9b18a9a4c386164ebee9ef5bb883c43cfc23"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/storage-maintenance-20261108-v1/historical-plan-v1.json.gz",
+      "sha256": "4f80b54476be935c3843d5845ffe1e65c046f17ef23b8c44a0801c6ab59bfa35"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/storage-maintenance-20261108-v1/historical-result-v1.json",
+      "sha256": "e944f8f9fbc4380bb17afae8efd18b68df5ce4ec7e20900fbaad095d2f96a0d4"
+    }
+  ],
+  "private_evidence_root": "/home/dllu/proj/demosaic/.cache/storage-maintenance-20261108-v1",
+  "free_space_note": "Allocated duplicate/cache bytes are the reclamation accounting. Free-space changes can also include concurrent activity from other projects."
+}

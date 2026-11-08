@@ -122,6 +122,6 @@ isolated Bayer defects before restoration.
 [native crop investigation](docs/hot-pixel-clusters.md).
 [Usage](docs/usage.md) · [current training](docs/quality-first-training.md) ·
 [data pipeline](docs/training-pipeline.md) · [experiments](docs/experiments.md) ·
-[documentation guide](docs/index.md). Quality takes priority. State-of-the-art
+[storage maintenance](docs/storage.md) · [documentation guide](docs/index.md). Quality takes priority. State-of-the-art
 quality and 100MP within 10s remain project goals; full-frame timing is
 checkpoint-specific.
