@@ -64,7 +64,13 @@ and broad mottle remain unresolved. Both endpoints, independent audits and
 60 actually viewed native figures are complete. Retain this intermediate recipe
 beside V180's stronger response and V181's quieter output.
 
-The [V185 smaller-support readout experiment](docs/spatial-context-wave-readout.md) has passed native CPU/GPU correctness and started matched training. Quality review is pending.
+The completed [V185 smaller-support readout](docs/spatial-context-wave-comparison.md)
+improves the wave readout at matched training: mesh response rises **2.11% raw /
+0.45% EMA versus V184**, reaching **4.968% / 5.171% of GT**. Quiet spatial RMS
+falls **0.42–0.55% raw / 0.83–1.38% EMA**, with all 32 EMA inputs improving.
+This is the current experimental wave option. Standalone flats and absent-mesh
+controls regress slightly; false striping, broad mottle and real missing crossings
+remain. Both endpoints, audits and all 60 viewed native figures are complete.
 
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
@@ -92,6 +98,7 @@ This adds training and capacity; both primary baselines are V183 EMA.
 | [V181 clean-flat spatial loss](docs/flat-spatial-evidence-comparison.md) | EMA quiet spatial RMS −0.47–1.15% on all 32 inputs versus V180; mesh response still 5.78% above global V178 | Mesh response −8.75% versus V180 to 4.150% of GT; fine-band response falls and real crossings/broad mottle remain |
 | [V183 coherent pair response](docs/coherent-pair-evidence-comparison.md) | EMA mesh response +6.95% versus V181 to 4.439% of GT; quiet spatial RMS 0.09–0.49% below V180 | Quiet spatial RMS +0.39–0.67% versus V181 on all 32 inputs; real crossings and broad mottle remain |
 | [V184 phase-aware readout](docs/phase-wave-readout-comparison.md) | Mesh response +9.60% raw / +15.96% EMA versus frozen V183 EMA, reaching 4.865–5.148% of GT | Quiet spatial RMS +0.76–2.35%, extra false striping, worse natural band-error means and incomplete real crossings; extra training/capacity |
+| [V185 smaller RAW support](docs/spatial-context-wave-comparison.md) | Mesh response +2.11% raw / +0.45% EMA and quiet spatial RMS −0.42–1.38% versus matched V184; all 32 EMA quiet cases improve | Still only 4.968–5.171% of GT response; tiny flat/absent regressions, false striping, mottle and incomplete real crossings |
 | [V158 regional DC](docs/regional-dc-regret.md) | Quiet RMS −1.93–2.63% versus matched MSE; all 32 inputs improve | Small regressions versus V143, persistent real detail loss |
 
 No model combines these strengths. The [released V170 RAW matching comparison](docs/nonlocal-raw-comparison.md)
@@ -105,7 +112,8 @@ optical blur. [Data pipeline](docs/training-pipeline.md) · [Source review](docs
 
 ## Current 100% crops
 
-Open the local [V184 readout native-pixel viewer](docs/images/v184-wave-readout-v1/native-viewer.html),
+Open the local [V185 native-pixel viewer](docs/images/v185-spatial-context-v1/native-viewer.html),
+[V184 viewer](docs/images/v184-wave-readout-v1/native-viewer.html),
 [V183 viewer](docs/images/v183-coherent-pair-evidence-v1/native-viewer.html),
 [V181 viewer](docs/images/v181-flat-spatial-evidence-v1/native-viewer.html),
 [V180 viewer](docs/images/v180-local-phase-evidence-v1/native-viewer.html),
@@ -115,9 +123,9 @@ Open the local [V184 readout native-pixel viewer](docs/images/v184-wave-readout-
 [V173 viewer](docs/images/v173-weak-gradient-matching-v1/native-viewer.html) or
 [V172 viewer](docs/images/v172-local-noise-matching-v1/native-viewer.html). Click
 the flip tile or press **F**. All 160×160 browser crops retain the PNG pixels
-exactly. V184 opens with V183 EMA versus V184 EMA; select V184 raw for its lower
-quiet-field cost. All twelve V178/V180/V181/V183/V184 states retain separate
-checkpoint metadata. V175 retains its modest raw quiet gain.
+exactly. V185 opens with V184 EMA versus V185 EMA; select both raw states for
+the matched raw comparison. All fourteen V178/V180/V181/V183/V184/V185 states
+retain separate checkpoint metadata. V175 retains its modest raw quiet gain.
 
 [Optional periodic-detail native comparisons and failure views](docs/supported-wave-amplitude.md)
 remain available alongside the learned heads below.
@@ -194,20 +202,22 @@ Fine crossed strands remain incomplete; amplified views retain broad colored mot
 [V183 mesh2302 triplet](docs/images/v183-coherent-pair-evidence-v1/comparison-02.png) ·
 [V183 mesh2309 triplet](docs/images/v183-coherent-pair-evidence-v1/comparison-06.png).
 
-Noisy → **V184 wave-readout raw** → exact constructed GT, mesh2302/mesh2309.
-Mean response reaches **4.865% of GT**, +9.60% over its frozen V183 EMA
-initializer. Quiet spatial RMS rises 0.76–0.94%, with extra false striping in
-quiet fields. Both crops retain the same 512px RGGB contexts,
+[V184 mesh2302 triplet](docs/images/v184-wave-readout-v1/comparison-01.png) ·
+[V184 mesh2309 triplet](docs/images/v184-wave-readout-v1/comparison-05.png).
+
+Noisy → **V185 spatial-support raw** → exact constructed GT, mesh2302/mesh2309.
+Mean response reaches **4.968% of GT**, +2.11% over V184 raw, while quiet
+spatial RMS falls 0.42–0.55%. Both fixed 512px RGGB contexts use native
 ROI `[176,176,160,160]`, shot .00128/read variance 6.5536e-6, exposure8/contrast1.
-Native 160×160 pixels are never resized. Raw export SHA256
-`faf7efba78da5e6e3df13a48819c6659fb082cf3f42ae5b7e2de7fb4e1f6a51e`;
-training checkpoint `b99b2c72f0db0026cdbe9d8f1709e4fffd40b4412e1d9b5280874cb5b6e03576`.
-[Both endpoints, quiet/flat triplets and complete metadata](docs/phase-wave-readout-comparison.md).
-Real fine crossings remain incomplete; stronger mesh response has not removed broad mottle.
+The 160×160 crop pixels are never resized. Raw export SHA256
+`054f31a5734ed944163f51b73f5efb2c814f863c54948167d573e9e90b9ca1b8`;
+training checkpoint `4bce120381d4c5208e17f10e43a450b0e00884dcbb8f6a7b632312a714787d9f`.
+[Both endpoints, quiet/flat triplets and complete metadata](docs/spatial-context-wave-comparison.md).
+False striping, broad mottle and incomplete real crossings remain.
 
-![Mesh2302: noisy, V184 wave-readout raw, exact constructed GT](docs/images/v184-wave-readout-v1/comparison-01.png)
+![Mesh2302: noisy, V185 spatial-support raw, exact constructed GT](docs/images/v185-spatial-context-v1/comparison-01.png)
 
-![Mesh2309: noisy, V184 wave-readout raw, exact constructed GT](docs/images/v184-wave-readout-v1/comparison-05.png)
+![Mesh2309: noisy, V185 spatial-support raw, exact constructed GT](docs/images/v185-spatial-context-v1/comparison-05.png)
 
 Noisy → **V173 gradient EMA** → exact constructed GT, ISO6400 and ISO12800
 quiet fields. Mean spatial RMS falls **0.32–0.68% on all 32 inputs versus V172**;

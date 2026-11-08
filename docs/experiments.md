@@ -773,3 +773,18 @@ their checkpoints. Quality has priority over further speed work.
 [Remaining project goals](requirements.md).
 
 The completed [V166 common-support routing trial](common-support-routing.md) reduces quiet RMS **6.10–15.27%** and DC color bias **17.52–31.30% versus V165**, visibly reducing the representative magenta casts. Mesh response stays near the parent and real fine crossings remain incomplete; all256 present-mesh mean supports remain below1e-4. Full-flat means worsen0.199–0.312%,coarse means0.216–0.376%,with all48 coarse inputs worse versus V165. Quiet means remain2.40–6.34% above V143. Retain this quiet-color gain beside V165 flat/grain,V161/V164 detail,V157 coarse and V158 quiet strengths. Both1k heads/four endpoints/822cases/72actual native figures are complete;238 CPU checks,94 final Adam states,exact V165 controls and independent audits pass. Original smoke failure and three discarded calls are preserved;no full-training restart.
+
+The completed [V185 smaller-support trial](spatial-context-wave-comparison.md)
+adds 33/17-packed-pixel measurements at stride8 to the unchanged large wave basis
+and selected bins. At the same 900 head updates and nine losses as V184, mesh
+response rises 2.11% raw / 0.45% EMA, while quiet spatial RMS falls 0.42–0.55%
+raw / 0.83–1.38% EMA, improving all 32 EMA quiet cases. Extra 192 parameters and
+support context change together. Flat and absent-mesh errors regress slightly;
+false fine striping, broad casts and incomplete real cab crossings remain.
+All 189 inherited tensors stay exact; all 60 native figures were viewed. Both
+strict exports and 23-method/42-contrast/1,554-cell comparisons retain earlier
+strengths. The [implementation and receipts](spatial-context-wave-readout.md)
+include 37 model tests, 19 codec/state checks and 69 audit/comparison/publication
+checks. Lossless native recipes and factored checkpoints preserve exact bits.
+Smaller support improves the measured tradeoff without becoming calibrated
+confidence or establishing noisy-sky safety.

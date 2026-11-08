@@ -1,0 +1,2507 @@
+{
+  "status": "pass-completed-render-copy-storage-all-paths-and-receipt-bytes-preserved",
+  "created_local": "2026-11-08T06:01:07.821598-08:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/v185-completed-public-receipt-storage-v2/plan-v1.json",
+    "sha256": "d3776bc16e30e4652a0ec2b1d47b3fb31e4f08ed182d53830630dc6df66e12d0"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v185-completed-public-receipt-storage-v2.py",
+    "sha256": "329fbac5ddfb120980233dcec0f764408977fe99c1db26b4270d2d3695830d2f",
+    "text": "\"\"\"Share completed original/public receipt copies; retain all paths and bytes.\"\"\"\nfrom datetime import datetime\nfrom zoneinfo import ZoneInfo\nimport hashlib,json,os,shutil,stat,sys\nfrom pathlib import Path\nimport psutil\nR=Path('/home/dllu/proj/demosaic');Q=R/'.cache/v185-completed-public-receipt-storage-v2'\nNAMES=['v157-spatial-rgb','v158-regional-dc','v159-regional-dc-transition','v160-paired-response',\n 'v161-harmonic-context','v162-flat-target-anchor','v164-pair-unit-floor','v165-pair-common',\n 'v166-common-support-routing','v167-bounded-support','v168-fine-mesh','v169-balanced-spatial',\n 'v171-matching-residual','v172-local-noise-matching','v173-weak-gradient-matching','v174-spread-matching',\n 'v175-fresh-noise-matching','v178-phase-evidence','v180-local-phase-evidence','v181-flat-spatial-evidence','v183-coherent-pair-evidence']\ndef ref(p):\n p=Path(p).absolute()\n with p.open('rb') as f:h=hashlib.file_digest(f,'sha256').hexdigest()\n return {'path':str(p),'sha256':h}\ndef read(p):return json.loads(Path(p).read_text())\ndef save(p,x):\n with p.open('x') as f:json.dump(x,f,indent=2,allow_nan=False);f.write('\\n')\ndef stamp():return datetime.now(ZoneInfo('America/Los_Angeles')).isoformat()\ndef obs(p):\n s=p.lstat();assert stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and not p.is_symlink()\n return {n:getattr(s,'st_'+n) for n in ['dev','ino','size','blocks','mode','uid','gid','nlink','mtime_ns','ctime_ns']}\ndef terminal(o):\n try:p=psutil.Process(o['pid']);return p.create_time()!=o['created'] or p.status() in [psutil.STATUS_ZOMBIE,psutil.STATUS_DEAD]\n except psutil.NoSuchProcess:return True\ndef root_for(p):\n parts=p.parts\n for index,part in enumerate(parts):\n  if part.startswith('V') and part[1:2].isdigit():return Path(*parts[:index+1])\n raise ValueError(p)\ndef plan():\n assert not Q.exists();Q.mkdir()\n rows=[];publications=[];roots=set();bound=[];owners=[]\n for n in NAMES[:12]:\n  index=R/f'docs/results/{n}-final-v1.json';d=read(index)\n  assert d['status'].startswith('completed-'),(index,d['status'])\n  manifest=d['figures'];assert ref(manifest['path'])==manifest\n  publications.append(ref(index));bound.append(manifest)\n  for item in d['copies'].values():\n   if not isinstance(item,dict) or not all(k in item for k in ['original','public']):continue\n   a,b=Path(item['original']['path']),Path(item['public']['path'])\n   if not (a.is_relative_to(R/'.cache') and b.is_relative_to(R/'docs/results')):continue\n   if a.stat().st_size < 2**20:continue\n   sa,sb=obs(a),obs(b);roots.add(root_for(a))\n   if sa['nlink']!=1 or (sa['dev'],sa['ino'])==(sb['dev'],sb['ino']):continue\n   assert (sa['dev'],sa['mode'],sa['uid'],sa['gid'],sa['size'])==(sb['dev'],sb['mode'],sb['uid'],sb['gid'],sb['size'])\n   assert item['original']['sha256']==item['public']['sha256']\n   assert ref(a)==item['original'] and ref(b)==item['public']\n   assert obs(a)==sa and obs(b)==sb\n   rows.append({'publication':ref(index),'original':item['original'],'public':item['public'],'before_original':sa,'before_public':sb})\n for root in roots:\n  for p in root.glob('*launch*.json'):\n   x=read(p)\n   if isinstance(x,dict) and 'owner' in x and isinstance(x['owner'],dict) and set(x['owner'])>={'pid','created'}:\n    assert terminal(x['owner']),(p,x['owner'])\n    owners.append({'launch':ref(p),'owner':x['owner'],'observed_terminal':True})\n for proc in psutil.process_iter(['pid','cmdline']):\n  try:\n   command=' '.join(proc.info['cmdline'] or [])\n   assert not any(str(root)+'/' in command for root in roots),(proc.pid,command)\n  except (psutil.NoSuchProcess,psutil.AccessDenied):pass\n save(Q/'plan-v1.json',{'status':'read-only-full-byte-hash-plan-for-completed-receipt-copy-sharing','created_local':stamp(),\n  'rows':rows,'publications':publications,'manifest_bindings':bound,'trial_roots_observed_without_active_command':[str(p) for p in sorted(roots)],\n  'terminal_launch_owners':owners,'previous_duplicate_allocated_bytes':sum(512*r['before_original']['blocks'] for r in rows),\n  'free_before':shutil.disk_usage(R).free,'source':dict(ref(__file__),text=Path(__file__).read_text()),\n  'scope':'Only explicit original/public publication receipt copies from12 completed V157/158/159/160/161/162/164/165/166/167/168/169 publications;not capture/JPEG/source/native/checkpoint files. Full equal publication-bound hashes and same filesystem/user/mode before atomic hardlinks. Every path/byte retained;before inode/mtime metadata recorded. Old roots have no active command and recorded launch owners observed terminal. New V184 work and unavailable original/dataz media untouched. No previous storage consolidation rerun.'})\n print('PLAN',len(rows),'completed receipt pairs',sum(512*r['before_original']['blocks'] for r in rows)/2**20,'MiB prior duplicate allocation;',len(owners),'terminal launch owners')\ndef apply():\n p=read(Q/'plan-v1.json');assert ref(__file__)['sha256']==p['source']['sha256'];assert not (Q/'result-v1.json').exists()\n for item in p['terminal_launch_owners']:assert ref(item['launch']['path'])==item['launch'] and terminal(item['owner'])\n for b in p['publications']+p['manifest_bindings']:assert ref(b['path'])==b\n for row in p['rows']:\n  a,b=Path(row['original']['path']),Path(row['public']['path'])\n  assert obs(a)==row['before_original'] and obs(b)==row['before_public']\n  assert ref(a)==row['original'] and ref(b)==row['public']\n  temp=a.with_name('.'+a.name+'.v184-png-copy-v1.tmp');assert not temp.exists()\n  os.link(b,temp);os.replace(temp,a)\n  assert ref(a)==row['original'] and ref(b)==row['public'] and a.stat().st_ino==b.stat().st_ino\n for b in p['publications']+p['manifest_bindings']:assert ref(b['path'])==b\n result={'status':'pass-completed-render-copy-storage-all-paths-and-receipt-bytes-preserved','created_local':stamp(),\n  'plan':ref(Q/'plan-v1.json'),'source':p['source'],'rows':p['rows'],'pairs':len(p['rows']),\n  'terminal_launch_owners_checked':len(p['terminal_launch_owners']),'trial_roots_without_active_commands':p['trial_roots_observed_without_active_command'],\n  'previous_duplicate_allocated_bytes':p['previous_duplicate_allocated_bytes'],'free_before':p['free_before'],\n  'free_after':shutil.disk_usage(R).free,'scope':p['scope']}\n save(Q/'result-v1.json',result);save(R/'docs/results/v185-completed-public-receipt-storage-v2.json',result)\n print('PASS',len(p['rows']),'receipt pairs;local free GiB',shutil.disk_usage(R).free/2**30)\nif __name__=='__main__':\n assert sys.argv[1] in ['plan','apply']\n plan() if sys.argv[1]=='plan' else apply()\n"
+  },
+  "rows": [
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-final-v1.json",
+        "sha256": "bbccc6c068307d1f8955c44334d95d6b760dc5aa8a973e97de02c396468fb764"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/train-result-v1.json",
+        "sha256": "4c857b25ce7c88806fab6936a8e77d151dd037ab019f6ec7e3c193e0e891c813"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-v1/training-result.json",
+        "sha256": "4c857b25ce7c88806fab6936a8e77d151dd037ab019f6ec7e3c193e0e891c813"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10485977,
+        "size": 1048978,
+        "blocks": 2056,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1793770781531275795,
+        "ctime_ns": 1793770781531275795
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10497514,
+        "size": 1048978,
+        "blocks": 2056,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794042360965136643,
+        "ctime_ns": 1794042360965136643
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-final-v1.json",
+        "sha256": "bbccc6c068307d1f8955c44334d95d6b760dc5aa8a973e97de02c396468fb764"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/scores-v1.json",
+        "sha256": "3549a8fd3fc504263929e049237bf5535e217576f3881a648a1d81cf6b756905"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-v1/scores.json",
+        "sha256": "3549a8fd3fc504263929e049237bf5535e217576f3881a648a1d81cf6b756905"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10497337,
+        "size": 4670725,
+        "blocks": 9128,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794042071270290676,
+        "ctime_ns": 1794042071270290676
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10497519,
+        "size": 4670725,
+        "blocks": 9128,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794042360969546368,
+        "ctime_ns": 1794042360969546368
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-final-v1.json",
+        "sha256": "bbccc6c068307d1f8955c44334d95d6b760dc5aa8a973e97de02c396468fb764"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/review-v1/local-control-raw-step1000/collection-v1.json",
+        "sha256": "ead0878a4815bac9ed1e36dbb6a684213d80a544adf1bbfceceb29f905a312e6"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-v1/local-control-raw-step1000-collection.json",
+        "sha256": "ead0878a4815bac9ed1e36dbb6a684213d80a544adf1bbfceceb29f905a312e6"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10488124,
+        "size": 1571446,
+        "blocks": 3072,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1793770861980222786,
+        "ctime_ns": 1793770861980222786
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10497543,
+        "size": 1571446,
+        "blocks": 3072,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794042360980551898,
+        "ctime_ns": 1794042360980551898
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-final-v1.json",
+        "sha256": "bbccc6c068307d1f8955c44334d95d6b760dc5aa8a973e97de02c396468fb764"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1/review-v1/local-control-EMA-step1000/collection-v1.json",
+        "sha256": "4822b94816ed76413c2fdf007fd4ec586327110a0dfc318380eaeb65f2b7c896"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v157-spatial-rgb-v1/local-control-EMA-step1000-collection.json",
+        "sha256": "4822b94816ed76413c2fdf007fd4ec586327110a0dfc318380eaeb65f2b7c896"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10488112,
+        "size": 1564196,
+        "blocks": 3056,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1793770925317216509,
+        "ctime_ns": 1793770925317216509
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10497544,
+        "size": 1564196,
+        "blocks": 3056,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794042360982672744,
+        "ctime_ns": 1794042360982672744
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-final-v1.json",
+        "sha256": "4f6f43be66fb5e22dd146ea2e9bf5a11f2f8a82300b84892b4fec16c8615f1bc"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/train-result-v1.json",
+        "sha256": "9907ea847cfd6ff06a769d582a2c8a71e19ae42793ca6654e0370d41800fd46a"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-v1/training-result.json",
+        "sha256": "9907ea847cfd6ff06a769d582a2c8a71e19ae42793ca6654e0370d41800fd46a"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10497278,
+        "size": 1194719,
+        "blocks": 2336,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045111595687968,
+        "ctime_ns": 1794045111595687968
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10497924,
+        "size": 1194719,
+        "blocks": 2336,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045712922886144,
+        "ctime_ns": 1794045712922886144
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-final-v1.json",
+        "sha256": "4f6f43be66fb5e22dd146ea2e9bf5a11f2f8a82300b84892b4fec16c8615f1bc"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/scores-v1.json",
+        "sha256": "b6ba4910599b5e9d4bb6aed077b5e4b5a3478b065f895f2414ffeec0c55b498b"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-v1/scores.json",
+        "sha256": "b6ba4910599b5e9d4bb6aed077b5e4b5a3478b065f895f2414ffeec0c55b498b"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10497929,
+        "size": 4655918,
+        "blocks": 9096,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045485136259616,
+        "ctime_ns": 1794045485136259616
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10498041,
+        "size": 4655918,
+        "blocks": 9096,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045712926495746,
+        "ctime_ns": 1794045712926495746
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-final-v1.json",
+        "sha256": "4f6f43be66fb5e22dd146ea2e9bf5a11f2f8a82300b84892b4fec16c8615f1bc"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/review-v1/dc-control-raw-step1000/collection-v1.json",
+        "sha256": "1cef29adc6687910e18db864533bb6b5b3dc02589e25f1f2c8ce756001a61d6a"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-v1/dc-control-raw-step1000-collection.json",
+        "sha256": "1cef29adc6687910e18db864533bb6b5b3dc02589e25f1f2c8ce756001a61d6a"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10497914,
+        "size": 1618984,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045194528197792,
+        "ctime_ns": 1794045194528197792
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10498055,
+        "size": 1618984,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045712936478437,
+        "ctime_ns": 1794045712936478437
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-final-v1.json",
+        "sha256": "4f6f43be66fb5e22dd146ea2e9bf5a11f2f8a82300b84892b4fec16c8615f1bc"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1/review-v1/dc-control-EMA-step1000/collection-v1.json",
+        "sha256": "f2c7290ef2cf6d11fe2474bdd2bc71538a06186d24a3f1893c39ad34d1f740cb"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v158-regional-dc-v1/dc-control-EMA-step1000-collection.json",
+        "sha256": "f2c7290ef2cf6d11fe2474bdd2bc71538a06186d24a3f1893c39ad34d1f740cb"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10497919,
+        "size": 1613722,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045261758119210,
+        "ctime_ns": 1794045261758119210
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10498056,
+        "size": 1613722,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794045712938629446,
+        "ctime_ns": 1794045712938629446
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-final-v1.json",
+        "sha256": "06e7ed534fe411f62e32a620e8e2b173eecd213edddbfa21077293d003f43341"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/train-result-v1.json",
+        "sha256": "02b5b0b7401c3a690ddfc0deff6d87774de92298d77b3daaa80008cc8b52116f"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-v1/training-result.json",
+        "sha256": "02b5b0b7401c3a690ddfc0deff6d87774de92298d77b3daaa80008cc8b52116f"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10498302,
+        "size": 1312807,
+        "blocks": 2568,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794047298257789252,
+        "ctime_ns": 1794047298257789252
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 8792545,
+        "size": 1312807,
+        "blocks": 2568,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794048031912315549,
+        "ctime_ns": 1794048031912315549
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-final-v1.json",
+        "sha256": "06e7ed534fe411f62e32a620e8e2b173eecd213edddbfa21077293d003f43341"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/scores-v1.json",
+        "sha256": "dca688c00b75600deef076ed640f13f7bc6f7e53fac14a8aa52798043a7f45cc"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-v1/scores.json",
+        "sha256": "dca688c00b75600deef076ed640f13f7bc6f7e53fac14a8aa52798043a7f45cc"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10495060,
+        "size": 4671046,
+        "blocks": 9128,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794047667308639771,
+        "ctime_ns": 1794047667308639771
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 8794549,
+        "size": 4671046,
+        "blocks": 9128,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794048031926746286,
+        "ctime_ns": 1794048031926746286
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-final-v1.json",
+        "sha256": "06e7ed534fe411f62e32a620e8e2b173eecd213edddbfa21077293d003f43341"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/review-v1/sharp-control-raw-step1000/collection-v1.json",
+        "sha256": "f31b4cab3aa13d1f83cd6b748556684fbba9fa8b2a9324b651831c000a47936a"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-v1/sharp-control-raw-step1000-collection.json",
+        "sha256": "f31b4cab3aa13d1f83cd6b748556684fbba9fa8b2a9324b651831c000a47936a"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10498369,
+        "size": 1613094,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794047376148239073,
+        "ctime_ns": 1794047376148239073
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 8794705,
+        "size": 1613094,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794048031937379654,
+        "ctime_ns": 1794048031937379654
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-final-v1.json",
+        "sha256": "06e7ed534fe411f62e32a620e8e2b173eecd213edddbfa21077293d003f43341"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1/review-v1/sharp-control-EMA-step1000/collection-v1.json",
+        "sha256": "1ac58b70ddeeca0fa18ee33a381b7428d14fe4e41c6cae8705b70bc710262406"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v159-regional-dc-transition-v1/sharp-control-EMA-step1000-collection.json",
+        "sha256": "1ac58b70ddeeca0fa18ee33a381b7428d14fe4e41c6cae8705b70bc710262406"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10498327,
+        "size": 1613072,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794047443762777755,
+        "ctime_ns": 1794047443762777755
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 8794708,
+        "size": 1613072,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794048031939571563,
+        "ctime_ns": 1794048031939571563
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-final-v1.json",
+        "sha256": "2e73460020ab56a2782ec949fb5d676072394fa80f189e1dffaed3b2d0865ec1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/train-result-v1.json",
+        "sha256": "bca690fd0572f62ad729c5616691696fe8c9b6b0dd939b61bb1ca89ab5c1f831"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-v1/training-result.json",
+        "sha256": "bca690fd0572f62ad729c5616691696fe8c9b6b0dd939b61bb1ca89ab5c1f831"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499214,
+        "size": 1461880,
+        "blocks": 2856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053189383616086,
+        "ctime_ns": 1794053189383680422
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499334,
+        "size": 1461880,
+        "blocks": 2856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053847005282546,
+        "ctime_ns": 1794053847005282546
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-final-v1.json",
+        "sha256": "2e73460020ab56a2782ec949fb5d676072394fa80f189e1dffaed3b2d0865ec1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/train-trace-v1.jsonl",
+        "sha256": "018d8634521619296979d13e2dde0ec392c08da0aa148e3576666a24bdacc220"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-v1/training-journal.jsonl",
+        "sha256": "018d8634521619296979d13e2dde0ec392c08da0aa148e3576666a24bdacc220"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499188,
+        "size": 1110683,
+        "blocks": 2184,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053188804678392,
+        "ctime_ns": 1794053188804678392
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499335,
+        "size": 1110683,
+        "blocks": 2176,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053847017576913,
+        "ctime_ns": 1794053847017576913
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-final-v1.json",
+        "sha256": "2e73460020ab56a2782ec949fb5d676072394fa80f189e1dffaed3b2d0865ec1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/cache-result-v2.json",
+        "sha256": "c7b02f5994dddca277601bf778604f68729b820fc34b732d2d1a9855d7c2df54"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-v1/cache-completion.json",
+        "sha256": "c7b02f5994dddca277601bf778604f68729b820fc34b732d2d1a9855d7c2df54"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10495103,
+        "size": 12048216,
+        "blocks": 23536,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794052015078685178,
+        "ctime_ns": 1794052015079537051
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499338,
+        "size": 12048216,
+        "blocks": 23536,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053847021576922,
+        "ctime_ns": 1794053847021576922
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-final-v1.json",
+        "sha256": "2e73460020ab56a2782ec949fb5d676072394fa80f189e1dffaed3b2d0865ec1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/scores-v1.json",
+        "sha256": "6ba8084a49d80eb04641d3a38f89611b897ebb70b68906921e60c1872ec4d5fc"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-v1/scores.json",
+        "sha256": "6ba8084a49d80eb04641d3a38f89611b897ebb70b68906921e60c1872ec4d5fc"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499218,
+        "size": 4672877,
+        "blocks": 9128,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053546295654527,
+        "ctime_ns": 1794053546295789344
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499341,
+        "size": 4672877,
+        "blocks": 9128,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053847040066488,
+        "ctime_ns": 1794053847040066488
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-final-v1.json",
+        "sha256": "2e73460020ab56a2782ec949fb5d676072394fa80f189e1dffaed3b2d0865ec1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1/retained-comparisons-v1.json",
+        "sha256": "4c4e6272cdae8344b5caf8ebe6d0d578cbcd470bb133526f7a84d3b0bb78fb25"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v160-paired-response-v1/retained-comparisons.json",
+        "sha256": "4c4e6272cdae8344b5caf8ebe6d0d578cbcd470bb133526f7a84d3b0bb78fb25"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499233,
+        "size": 3928607,
+        "blocks": 7680,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053603385664166,
+        "ctime_ns": 1794053603385946535
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499350,
+        "size": 3928607,
+        "blocks": 7680,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794053847049170159,
+        "ctime_ns": 1794053847049170159
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-final-v1.json",
+        "sha256": "34a2a3565984f72babbff1335b7cd63a36acad1e22d5b33e5f2cfbfac7b6c6ec"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/train-result-v1.json",
+        "sha256": "83fc76d4913a5e1daf902c4fc901923a97cbe7a1bb730b3521dd94ffb1dfde04"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-v1/training-result.json",
+        "sha256": "83fc76d4913a5e1daf902c4fc901923a97cbe7a1bb730b3521dd94ffb1dfde04"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10495210,
+        "size": 1478371,
+        "blocks": 2888,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794056669423354741,
+        "ctime_ns": 1794056669423354741
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499730,
+        "size": 1478371,
+        "blocks": 2888,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057401885209686,
+        "ctime_ns": 1794057401885209686
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-final-v1.json",
+        "sha256": "34a2a3565984f72babbff1335b7cd63a36acad1e22d5b33e5f2cfbfac7b6c6ec"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/train-trace-v1.jsonl",
+        "sha256": "2c433d73e47396ab30bf700c470fc4536de6f76d0d8183683aedb8bf134420c8"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-v1/training-journal.jsonl",
+        "sha256": "2c433d73e47396ab30bf700c470fc4536de6f76d0d8183683aedb8bf134420c8"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499565,
+        "size": 1127340,
+        "blocks": 2216,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794056669198007391,
+        "ctime_ns": 1794056669198007391
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499731,
+        "size": 1127340,
+        "blocks": 2208,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057401896987025,
+        "ctime_ns": 1794057401896987025
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-final-v1.json",
+        "sha256": "34a2a3565984f72babbff1335b7cd63a36acad1e22d5b33e5f2cfbfac7b6c6ec"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/scores-v1.json",
+        "sha256": "e20ed5035dd5621de320deecbb0a0ba1f35d16020c4a4b6a266fe39ccac24036"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-v1/scores.json",
+        "sha256": "e20ed5035dd5621de320deecbb0a0ba1f35d16020c4a4b6a266fe39ccac24036"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499611,
+        "size": 4697103,
+        "blocks": 9176,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057096919177551,
+        "ctime_ns": 1794057096919260879
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499738,
+        "size": 4697103,
+        "blocks": 9176,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057401900880634,
+        "ctime_ns": 1794057401900880634
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-final-v1.json",
+        "sha256": "34a2a3565984f72babbff1335b7cd63a36acad1e22d5b33e5f2cfbfac7b6c6ec"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/retained-comparisons-v1.json",
+        "sha256": "ec72edfe0d817b9923e250be0d09ce39bb7d68e0c00441f21190b557d17e3797"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-v1/retained-comparisons.json",
+        "sha256": "ec72edfe0d817b9923e250be0d09ce39bb7d68e0c00441f21190b557d17e3797"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499628,
+        "size": 4913216,
+        "blocks": 9600,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057174174453986,
+        "ctime_ns": 1794057174176453991
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499747,
+        "size": 4913216,
+        "blocks": 9600,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057401910513295,
+        "ctime_ns": 1794057401910513295
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-final-v1.json",
+        "sha256": "34a2a3565984f72babbff1335b7cd63a36acad1e22d5b33e5f2cfbfac7b6c6ec"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/review-v1/paired-control-raw-step1000/collection-v1.json",
+        "sha256": "7d7baaa2d8d3e2cc9e04a79234a8ec9966ea370ed18c864573df8ef1c8b298c0"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-v1/paired-control-raw-step1000-collection.json",
+        "sha256": "7d7baaa2d8d3e2cc9e04a79234a8ec9966ea370ed18c864573df8ef1c8b298c0"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10498538,
+        "size": 1618098,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794056748241269827,
+        "ctime_ns": 1794056748241269827
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499756,
+        "size": 1618098,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057401919730468,
+        "ctime_ns": 1794057401919730468
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-final-v1.json",
+        "sha256": "34a2a3565984f72babbff1335b7cd63a36acad1e22d5b33e5f2cfbfac7b6c6ec"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1/review-v1/paired-control-EMA-step1000/collection-v1.json",
+        "sha256": "18df9eb6ddaea0bb1efb85ae564634a8da069bdfa2b29eccb6e6f3b4280d2d1f"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v161-harmonic-context-v1/paired-control-EMA-step1000-collection.json",
+        "sha256": "18df9eb6ddaea0bb1efb85ae564634a8da069bdfa2b29eccb6e6f3b4280d2d1f"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499608,
+        "size": 1618000,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794056814961183084,
+        "ctime_ns": 1794056814961183084
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10499757,
+        "size": 1618000,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794057401921996425,
+        "ctime_ns": 1794057401921996425
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-final-v1.json",
+        "sha256": "671d169d4c3d040d6dd94acbd8ae8fc357b94ef92c748947b18ee6ba4c3b41c8"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/train-result-v1.json",
+        "sha256": "7730a55a20fe24db14a2d5be4f757ac3bb62e092db7965f320c4d9687c86d9fd"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-v1/training-result.json",
+        "sha256": "7730a55a20fe24db14a2d5be4f757ac3bb62e092db7965f320c4d9687c86d9fd"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10498531,
+        "size": 2026215,
+        "blocks": 3960,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794059863475340349,
+        "ctime_ns": 1794059863475340349
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10500394,
+        "size": 2026215,
+        "blocks": 3960,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060737955143279,
+        "ctime_ns": 1794060737955143279
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-final-v1.json",
+        "sha256": "671d169d4c3d040d6dd94acbd8ae8fc357b94ef92c748947b18ee6ba4c3b41c8"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/train-trace-v1.jsonl",
+        "sha256": "1fc4d492af48f545d6a29cbe1a287a74944e2f6bc8c5138273f341e4a5f29d86"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-v1/training-journal.jsonl",
+        "sha256": "1fc4d492af48f545d6a29cbe1a287a74944e2f6bc8c5138273f341e4a5f29d86"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10500148,
+        "size": 1459210,
+        "blocks": 2864,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794059863219924280,
+        "ctime_ns": 1794059863219924280
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10500395,
+        "size": 1459210,
+        "blocks": 2856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060737959552561,
+        "ctime_ns": 1794060737959552561
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-final-v1.json",
+        "sha256": "671d169d4c3d040d6dd94acbd8ae8fc357b94ef92c748947b18ee6ba4c3b41c8"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/scores-v1.json",
+        "sha256": "2484d3062341f5a54dab0b1ee63c7a124c34af1358700aeb5f88f9b3e4c439a1"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-v1/scores.json",
+        "sha256": "2484d3062341f5a54dab0b1ee63c7a124c34af1358700aeb5f88f9b3e4c439a1"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10500262,
+        "size": 4690711,
+        "blocks": 9168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060330152683479,
+        "ctime_ns": 1794060330152683479
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10500400,
+        "size": 4690711,
+        "blocks": 9168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060737963552577,
+        "ctime_ns": 1794060737963552577
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-final-v1.json",
+        "sha256": "671d169d4c3d040d6dd94acbd8ae8fc357b94ef92c748947b18ee6ba4c3b41c8"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/retained-comparisons-v1.json",
+        "sha256": "4360a135416007f767dd0aaa45a626be7b99ce3ad19776561a48066e9743479b"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-v1/retained-comparisons.json",
+        "sha256": "4360a135416007f767dd0aaa45a626be7b99ce3ad19776561a48066e9743479b"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10500293,
+        "size": 6863937,
+        "blocks": 13408,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060353281809697,
+        "ctime_ns": 1794060353283721796
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10500409,
+        "size": 6863937,
+        "blocks": 13408,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060737972788485,
+        "ctime_ns": 1794060737972788485
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-final-v1.json",
+        "sha256": "671d169d4c3d040d6dd94acbd8ae8fc357b94ef92c748947b18ee6ba4c3b41c8"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/review-v1/harmonic-control-raw-step1000/collection-v1.json",
+        "sha256": "3fef23a0c20aee87daf3fa614621b040d4d6a38ce1d66beba68b0a5da617d150"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-v1/harmonic-control-raw-step1000-collection.json",
+        "sha256": "3fef23a0c20aee87daf3fa614621b040d4d6a38ce1d66beba68b0a5da617d150"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10500269,
+        "size": 1619724,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794059966577089330,
+        "ctime_ns": 1794059966577089330
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10500422,
+        "size": 1619724,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060737986056537,
+        "ctime_ns": 1794060737986056537
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-final-v1.json",
+        "sha256": "671d169d4c3d040d6dd94acbd8ae8fc357b94ef92c748947b18ee6ba4c3b41c8"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1/review-v1/harmonic-control-EMA-step1000/collection-v1.json",
+        "sha256": "eec69c4c53c0fcf8db3f3e74097cf75739093844cb831583f92696603b6bf9cb"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v162-flat-target-anchor-v1/harmonic-control-EMA-step1000-collection.json",
+        "sha256": "eec69c4c53c0fcf8db3f3e74097cf75739093844cb831583f92696603b6bf9cb"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10500274,
+        "size": 1619618,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060058458375402,
+        "ctime_ns": 1794060058458375402
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10500423,
+        "size": 1619618,
+        "blocks": 3168,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794060737988205154,
+        "ctime_ns": 1794060737988205154
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-final-v1.json",
+        "sha256": "e580a7e017516bf0a7113be77cb2d47ec8da1c30158f516a99f2c42123172267"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/train-result-v1.json",
+        "sha256": "a303a2c8fdfec201dff1068f10c45cd090a1e255330bd803aa349304c60b26e3"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-v1/training-result.json",
+        "sha256": "a303a2c8fdfec201dff1068f10c45cd090a1e255330bd803aa349304c60b26e3"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10501718,
+        "size": 2646442,
+        "blocks": 5176,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794067807764411882,
+        "ctime_ns": 1794067807764411882
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10501850,
+        "size": 2646442,
+        "blocks": 5176,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068842784294901,
+        "ctime_ns": 1794068842784294901
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-final-v1.json",
+        "sha256": "e580a7e017516bf0a7113be77cb2d47ec8da1c30158f516a99f2c42123172267"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/train-trace-v1.jsonl",
+        "sha256": "562647c635cc6a15d3189ecd506f1ac37257b2f42e053737081bb8e01d3cfb07"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-v1/training-journal.jsonl",
+        "sha256": "562647c635cc6a15d3189ecd506f1ac37257b2f42e053737081bb8e01d3cfb07"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10494784,
+        "size": 1803253,
+        "blocks": 3536,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794067807491411667,
+        "ctime_ns": 1794067807491411667
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10501851,
+        "size": 1803253,
+        "blocks": 3528,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068842788537162,
+        "ctime_ns": 1794068842788537162
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-final-v1.json",
+        "sha256": "e580a7e017516bf0a7113be77cb2d47ec8da1c30158f516a99f2c42123172267"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/scores-v1.json",
+        "sha256": "967d8ef0b3700eba07643d6c0eb90e1ea144226ff3fc75f512c811648668b1c4"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-v1/scores.json",
+        "sha256": "967d8ef0b3700eba07643d6c0eb90e1ea144226ff3fc75f512c811648668b1c4"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10501724,
+        "size": 4667718,
+        "blocks": 9120,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068285297875654,
+        "ctime_ns": 1794068285297875654
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10501856,
+        "size": 4667718,
+        "blocks": 9120,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068842792691663,
+        "ctime_ns": 1794068842792691663
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-final-v1.json",
+        "sha256": "e580a7e017516bf0a7113be77cb2d47ec8da1c30158f516a99f2c42123172267"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/retained-comparisons-v1.json",
+        "sha256": "ebff9d5263accf42523444e5bd852e52b4fd2e28e11d7c9a36f48214d828d83b"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-v1/retained-comparisons.json",
+        "sha256": "ebff9d5263accf42523444e5bd852e52b4fd2e28e11d7c9a36f48214d828d83b"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10501746,
+        "size": 8821480,
+        "blocks": 17232,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068327342922502,
+        "ctime_ns": 1794068327345922505
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10501865,
+        "size": 8821480,
+        "blocks": 17232,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068842802537179,
+        "ctime_ns": 1794068842802537179
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-final-v1.json",
+        "sha256": "e580a7e017516bf0a7113be77cb2d47ec8da1c30158f516a99f2c42123172267"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/review-v1/phase-control-raw-step1000/collection-v1.json",
+        "sha256": "996c0375182ac639f24fc6eb1430ce56707b57caa72082d2cb6bc0d026d4a99f"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-v1/phase-control-raw-step1000-collection.json",
+        "sha256": "996c0375182ac639f24fc6eb1430ce56707b57caa72082d2cb6bc0d026d4a99f"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10501732,
+        "size": 1616788,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794067909553041464,
+        "ctime_ns": 1794067909553041464
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10501875,
+        "size": 1616788,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068842817445886,
+        "ctime_ns": 1794068842817445886
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-final-v1.json",
+        "sha256": "e580a7e017516bf0a7113be77cb2d47ec8da1c30158f516a99f2c42123172267"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1/review-v1/phase-control-EMA-step1000/collection-v1.json",
+        "sha256": "98738d4e49b1cf2aad2fa30b39c28796c13743f9fd1e68a22836849d96aacde7"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v164-pair-unit-floor-v1/phase-control-EMA-step1000-collection.json",
+        "sha256": "98738d4e49b1cf2aad2fa30b39c28796c13743f9fd1e68a22836849d96aacde7"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10501737,
+        "size": 1616764,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068005316664058,
+        "ctime_ns": 1794068005316664058
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10501876,
+        "size": 1616764,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794068842819491841,
+        "ctime_ns": 1794068842819491841
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-final-v1.json",
+        "sha256": "32d0ea3a84c9d4cd685a37051504d82d1d9d8353352a99ab82c70ed99263a2a9"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/train-result-v1.json",
+        "sha256": "bb27e2d943ba7c247948c6ce31bd54c2f2963c577d706e80eeee1276fafdba9f"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-v1/training-result.json",
+        "sha256": "bb27e2d943ba7c247948c6ce31bd54c2f2963c577d706e80eeee1276fafdba9f"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10502339,
+        "size": 2728726,
+        "blocks": 5336,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794071104554615274,
+        "ctime_ns": 1794071104554615274
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10502539,
+        "size": 2728726,
+        "blocks": 5336,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794072176715878971,
+        "ctime_ns": 1794072176715878971
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-final-v1.json",
+        "sha256": "32d0ea3a84c9d4cd685a37051504d82d1d9d8353352a99ab82c70ed99263a2a9"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/train-trace-v1.jsonl",
+        "sha256": "91da1047ce1be76876eb318c6f4afabdaa0e0ebeb77775d5c08e7fc966642c83"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-v1/training-journal.jsonl",
+        "sha256": "91da1047ce1be76876eb318c6f4afabdaa0e0ebeb77775d5c08e7fc966642c83"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10502233,
+        "size": 1865289,
+        "blocks": 3656,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794071104287615486,
+        "ctime_ns": 1794071104287615486
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10502540,
+        "size": 1865289,
+        "blocks": 3648,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794072176721502004,
+        "ctime_ns": 1794072176721502004
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-final-v1.json",
+        "sha256": "32d0ea3a84c9d4cd685a37051504d82d1d9d8353352a99ab82c70ed99263a2a9"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/scores-v1.json",
+        "sha256": "29951c53696bfb238bfa2e2be12ccaec26acb8920503bcac038abf803dd1ce50"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-v1/scores.json",
+        "sha256": "29951c53696bfb238bfa2e2be12ccaec26acb8920503bcac038abf803dd1ce50"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10499208,
+        "size": 4661119,
+        "blocks": 9104,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794071587468706966,
+        "ctime_ns": 1794071587468706966
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10502546,
+        "size": 4661119,
+        "blocks": 9104,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794072176727502014,
+        "ctime_ns": 1794072176727502014
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-final-v1.json",
+        "sha256": "32d0ea3a84c9d4cd685a37051504d82d1d9d8353352a99ab82c70ed99263a2a9"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/retained-comparisons-v1.json",
+        "sha256": "84dc897e185d4f5b8ff3a3c188c21ce4e38031ace53135d0de28955f4042cbc8"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-v1/retained-comparisons.json",
+        "sha256": "84dc897e185d4f5b8ff3a3c188c21ce4e38031ace53135d0de28955f4042cbc8"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10502368,
+        "size": 9806002,
+        "blocks": 19160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794071685011805096,
+        "ctime_ns": 1794071685015805101
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10502555,
+        "size": 9806002,
+        "blocks": 19160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794072176738502032,
+        "ctime_ns": 1794072176738502032
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-final-v1.json",
+        "sha256": "32d0ea3a84c9d4cd685a37051504d82d1d9d8353352a99ab82c70ed99263a2a9"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/review-v1/fine-control-raw-step1000/collection-v1.json",
+        "sha256": "833d0dbe1c425f9f4f9c0ac7f6e83264b65e19cd25d4827505773b5e36e68995"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-v1/fine-control-raw-step1000-collection.json",
+        "sha256": "833d0dbe1c425f9f4f9c0ac7f6e83264b65e19cd25d4827505773b5e36e68995"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10502355,
+        "size": 1613143,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794071209748686940,
+        "ctime_ns": 1794071209748686940
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10502566,
+        "size": 1613143,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794072176755459085,
+        "ctime_ns": 1794072176755459085
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-final-v1.json",
+        "sha256": "32d0ea3a84c9d4cd685a37051504d82d1d9d8353352a99ab82c70ed99263a2a9"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1/review-v1/fine-control-EMA-step1000/collection-v1.json",
+        "sha256": "98d638a6ec85d3a88f66dd81c5a502f1f5af9f8415fda09fdb7684751a606178"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v165-pair-common-v1/fine-control-EMA-step1000-collection.json",
+        "sha256": "98d638a6ec85d3a88f66dd81c5a502f1f5af9f8415fda09fdb7684751a606178"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10502360,
+        "size": 1613165,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794071305328395245,
+        "ctime_ns": 1794071305328395245
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10502567,
+        "size": 1613165,
+        "blocks": 3152,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794072176757359920,
+        "ctime_ns": 1794072176757359920
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-final-v1.json",
+        "sha256": "c2fb9ab7e445cf4744b8a2b300955dd91a619e069abca585e8c29df3cbf9f94b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/train-result-v1.json",
+        "sha256": "781d84a05582f019a3abfff47437c0438a6755e23b214f3e0ff87755dc55a3d5"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-v1/training-result.json",
+        "sha256": "781d84a05582f019a3abfff47437c0438a6755e23b214f3e0ff87755dc55a3d5"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503220,
+        "size": 3039812,
+        "blocks": 5944,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075000135558139,
+        "ctime_ns": 1794075000135558139
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503349,
+        "size": 3039812,
+        "blocks": 5944,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075865919071191,
+        "ctime_ns": 1794075865919071191
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-final-v1.json",
+        "sha256": "c2fb9ab7e445cf4744b8a2b300955dd91a619e069abca585e8c29df3cbf9f94b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/train-trace-v1.jsonl",
+        "sha256": "d0c4aaf2415a0f248532ac8d4379d3e7c487edea7c68941437bcc3a57bd85078"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-v1/training-journal.jsonl",
+        "sha256": "d0c4aaf2415a0f248532ac8d4379d3e7c487edea7c68941437bcc3a57bd85078"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503088,
+        "size": 2115723,
+        "blocks": 4144,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794074999511180787,
+        "ctime_ns": 1794074999511180787
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503350,
+        "size": 2115723,
+        "blocks": 4136,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075865923999864,
+        "ctime_ns": 1794075865923999864
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-final-v1.json",
+        "sha256": "c2fb9ab7e445cf4744b8a2b300955dd91a619e069abca585e8c29df3cbf9f94b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/scores-v1.json",
+        "sha256": "624e30a31cd5afd18d0784c639839cc0847c9516a4e8b5e2a69ae13a39f2b50d"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-v1/scores.json",
+        "sha256": "624e30a31cd5afd18d0784c639839cc0847c9516a4e8b5e2a69ae13a39f2b50d"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503224,
+        "size": 4687668,
+        "blocks": 9160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075510863475030,
+        "ctime_ns": 1794075510864475035
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503356,
+        "size": 4687668,
+        "blocks": 9160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075865929889068,
+        "ctime_ns": 1794075865929889068
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-final-v1.json",
+        "sha256": "c2fb9ab7e445cf4744b8a2b300955dd91a619e069abca585e8c29df3cbf9f94b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/retained-comparisons-v1.json",
+        "sha256": "3e71052a0a14f3c4920e54d9dabac0b6dc8bd0c5f565c27708f85437af983aa6"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-v1/retained-comparisons.json",
+        "sha256": "3e71052a0a14f3c4920e54d9dabac0b6dc8bd0c5f565c27708f85437af983aa6"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503247,
+        "size": 10803040,
+        "blocks": 21104,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075519084513266,
+        "ctime_ns": 1794075519088513285
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503365,
+        "size": 10803040,
+        "blocks": 21104,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075865939889102,
+        "ctime_ns": 1794075865939889102
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-final-v1.json",
+        "sha256": "c2fb9ab7e445cf4744b8a2b300955dd91a619e069abca585e8c29df3cbf9f94b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/review-v1/common-control-raw-step1000/collection-v1.json",
+        "sha256": "fc950f41dc1757a669b15e038da1a1c2325c7441eedcdaa5be7582ecba635cc3"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-v1/common-control-raw-step1000-collection.json",
+        "sha256": "fc950f41dc1757a669b15e038da1a1c2325c7441eedcdaa5be7582ecba635cc3"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503233,
+        "size": 1614503,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075119892275577,
+        "ctime_ns": 1794075119892275577
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503377,
+        "size": 1614503,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075865958889168,
+        "ctime_ns": 1794075865958889168
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-final-v1.json",
+        "sha256": "c2fb9ab7e445cf4744b8a2b300955dd91a619e069abca585e8c29df3cbf9f94b"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2/review-v1/common-control-EMA-step1000/collection-v1.json",
+        "sha256": "29f60853feda8e355a70ce599647e0db1e74eae55810caf44adf930f85b4ef82"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v166-common-support-routing-v1/common-control-EMA-step1000-collection.json",
+        "sha256": "29f60853feda8e355a70ce599647e0db1e74eae55810caf44adf930f85b4ef82"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503238,
+        "size": 1614502,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075223138094374,
+        "ctime_ns": 1794075223138094374
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503378,
+        "size": 1614502,
+        "blocks": 3160,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794075865960889175,
+        "ctime_ns": 1794075865960889175
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-final-v1.json",
+        "sha256": "2e844b543bb56acac02b968bd2406f12c9b772df5f573a3f5563ae7eb2d8fff1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/train-result-v1.json",
+        "sha256": "8773e9b3bc933cb79c565a4e3c44a3510cc17aab379907a6c391356d7894003d"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-v1/training-result.json",
+        "sha256": "8773e9b3bc933cb79c565a4e3c44a3510cc17aab379907a6c391356d7894003d"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503811,
+        "size": 3303230,
+        "blocks": 6456,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794078451651583378,
+        "ctime_ns": 1794078451651583378
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503940,
+        "size": 3303230,
+        "blocks": 6456,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794079223773293123,
+        "ctime_ns": 1794079223773293123
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-final-v1.json",
+        "sha256": "2e844b543bb56acac02b968bd2406f12c9b772df5f573a3f5563ae7eb2d8fff1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/train-trace-v1.jsonl",
+        "sha256": "fccd89dc8ee9a6690e0949e26a4e8d0f008e72bcf8e6043524566d2e1a16b3b6"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-v1/training-journal.jsonl",
+        "sha256": "fccd89dc8ee9a6690e0949e26a4e8d0f008e72bcf8e6043524566d2e1a16b3b6"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503729,
+        "size": 2319501,
+        "blocks": 4544,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794078451347583282,
+        "ctime_ns": 1794078451347583282
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503941,
+        "size": 2319501,
+        "blocks": 4536,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794079223789334913,
+        "ctime_ns": 1794079223789334913
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-final-v1.json",
+        "sha256": "2e844b543bb56acac02b968bd2406f12c9b772df5f573a3f5563ae7eb2d8fff1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/scores-v1.json",
+        "sha256": "b2a489c5a19f8580e4bf02a4d6b1199d0b85bb94cb18a20a0fd0e974a965198a"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-v1/scores.json",
+        "sha256": "b2a489c5a19f8580e4bf02a4d6b1199d0b85bb94cb18a20a0fd0e974a965198a"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503815,
+        "size": 4702924,
+        "blocks": 9192,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794078949106504661,
+        "ctime_ns": 1794078949106827270
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503947,
+        "size": 4702924,
+        "blocks": 9192,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794079223796334982,
+        "ctime_ns": 1794079223796334982
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-final-v1.json",
+        "sha256": "2e844b543bb56acac02b968bd2406f12c9b772df5f573a3f5563ae7eb2d8fff1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/retained-comparisons-v1.json",
+        "sha256": "4ba4a266192ec072c370b2b4dff1da6e08a7ba9e91d65bdaf0643b834e65ab36"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-v1/retained-comparisons.json",
+        "sha256": "4ba4a266192ec072c370b2b4dff1da6e08a7ba9e91d65bdaf0643b834e65ab36"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503838,
+        "size": 11790211,
+        "blocks": 23032,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794078968388839211,
+        "ctime_ns": 1794078968391839213
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503956,
+        "size": 11790211,
+        "blocks": 23032,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794079223806335080,
+        "ctime_ns": 1794079223806335080
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-final-v1.json",
+        "sha256": "2e844b543bb56acac02b968bd2406f12c9b772df5f573a3f5563ae7eb2d8fff1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/review-v1/routed-control-raw-step1000/collection-v1.json",
+        "sha256": "e828a750917725a516612a442ca73c949f0040131186d7a3d7df9cb4beb1ac9a"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-v1/routed-control-raw-step1000-collection.json",
+        "sha256": "e828a750917725a516612a442ca73c949f0040131186d7a3d7df9cb4beb1ac9a"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10503824,
+        "size": 1734062,
+        "blocks": 3392,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794078560125722868,
+        "ctime_ns": 1794078560125722868
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503967,
+        "size": 1734062,
+        "blocks": 3392,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794079223827121108,
+        "ctime_ns": 1794079223827121108
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-final-v1.json",
+        "sha256": "2e844b543bb56acac02b968bd2406f12c9b772df5f573a3f5563ae7eb2d8fff1"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1/review-v1/routed-control-EMA-step1000/collection-v1.json",
+        "sha256": "d7940c51b7e1aff28342577418a671f7335e479063dc5e8e4bb048aca8e576d0"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v167-bounded-support-v1/routed-control-EMA-step1000-collection.json",
+        "sha256": "d7940c51b7e1aff28342577418a671f7335e479063dc5e8e4bb048aca8e576d0"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10502766,
+        "size": 1733951,
+        "blocks": 3392,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794078660535672197,
+        "ctime_ns": 1794078660535672197
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10503968,
+        "size": 1733951,
+        "blocks": 3392,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794079223829227401,
+        "ctime_ns": 1794079223829227401
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/train-result-v1.json",
+        "sha256": "8f7f7ef0b0bd94a855383a277b2d139bbcffefd6c98fb925310ac75ac6ac9250"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/training-result.json",
+        "sha256": "8f7f7ef0b0bd94a855383a277b2d139bbcffefd6c98fb925310ac75ac6ac9250"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504164,
+        "size": 4231127,
+        "blocks": 8264,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794084059769328813,
+        "ctime_ns": 1794084059769328813
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10504996,
+        "size": 4231127,
+        "blocks": 8264,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009161333624,
+        "ctime_ns": 1794085009161333624
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/train-trace-v1.jsonl",
+        "sha256": "d294f0547682147e8df1cfe4b748ec17bf9f066fb5d69a24750c6eedc50c4d08"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/training-journal.jsonl",
+        "sha256": "d294f0547682147e8df1cfe4b748ec17bf9f066fb5d69a24750c6eedc50c4d08"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504780,
+        "size": 2989249,
+        "blocks": 5840,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794084059774055575,
+        "ctime_ns": 1794084059774055575
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10504997,
+        "size": 2989249,
+        "blocks": 5840,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009168134038,
+        "ctime_ns": 1794085009168134038
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/training-unit-audit-v1.json",
+        "sha256": "297dd9f80c7274f85d579a0b45327a835c643b13ce339f34601db97b06fe7140"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/training-unit-audit.json",
+        "sha256": "297dd9f80c7274f85d579a0b45327a835c643b13ce339f34601db97b06fe7140"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504785,
+        "size": 1938314,
+        "blocks": 3792,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794084059778725153,
+        "ctime_ns": 1794084059778725153
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505001,
+        "size": 1938314,
+        "blocks": 3792,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009172783200,
+        "ctime_ns": 1794085009172783200
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/scores-v1.json",
+        "sha256": "aeeb60f2d514e3a6deb814cf43491f3bda570b3ab5984a8c748d82bcd64c31c6"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/scores.json",
+        "sha256": "aeeb60f2d514e3a6deb814cf43491f3bda570b3ab5984a8c748d82bcd64c31c6"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504845,
+        "size": 4674836,
+        "blocks": 9136,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794084364174911085,
+        "ctime_ns": 1794084364174911085
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505003,
+        "size": 4674836,
+        "blocks": 9136,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009176030679,
+        "ctime_ns": 1794085009176030679
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/retained-comparisons-v1.json",
+        "sha256": "69a58ce71169609473e6386de218d9d84feffb3b99da162a57c32a052d855184"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/retained-comparisons.json",
+        "sha256": "69a58ce71169609473e6386de218d9d84feffb3b99da162a57c32a052d855184"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504851,
+        "size": 12754124,
+        "blocks": 24912,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794084392629971509,
+        "ctime_ns": 1794084392633971518
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505012,
+        "size": 12754124,
+        "blocks": 24912,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009185270810,
+        "ctime_ns": 1794085009185270810
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/legacy-control-raw-step1000/collection-v1.json",
+        "sha256": "2fcb14a1a30f33315cd189f1a9d3c4617e7635e84012eba3c02ce4a8c30925dc"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/legacy-control-raw-step1000-collection.json",
+        "sha256": "2fcb14a1a30f33315cd189f1a9d3c4617e7635e84012eba3c02ce4a8c30925dc"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504752,
+        "size": 1701512,
+        "blocks": 3328,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794083438519790298,
+        "ctime_ns": 1794083438519880570
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505024,
+        "size": 1701512,
+        "blocks": 3328,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009205982774,
+        "ctime_ns": 1794085009205982774
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2/review-v1/legacy-control-EMA-step1000/collection-v1.json",
+        "sha256": "0530659956f83963eb352be7354bfaab330f717cb09952e6d408d0216ebb970f"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/legacy-control-EMA-step1000-collection.json",
+        "sha256": "0530659956f83963eb352be7354bfaab330f717cb09952e6d408d0216ebb970f"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504763,
+        "size": 1701510,
+        "blocks": 3328,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794083534192505520,
+        "ctime_ns": 1794083534192505520
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505025,
+        "size": 1701510,
+        "blocks": 3328,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009208119882,
+        "ctime_ns": 1794085009208119882
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/review-continuation-v1/fine-mesh-EMA-step1000/collection-v1.json",
+        "sha256": "83a3f41973985adb0e93fc953976481fd0c0779475c6e94d620595b789d684a1"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/fine-mesh-EMA-step1000-collection.json",
+        "sha256": "83a3f41973985adb0e93fc953976481fd0c0779475c6e94d620595b789d684a1"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504840,
+        "size": 1698444,
+        "blocks": 3320,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794084266688450558,
+        "ctime_ns": 1794084266688450558
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505027,
+        "size": 1698444,
+        "blocks": 3320,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009212280755,
+        "ctime_ns": 1794085009212280755
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-final-v1.json",
+        "sha256": "2cd3fb7505387cf7f129a40638568edb8097517381b2705c9ce3288990897c82"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/train-trace-v1.jsonl",
+        "sha256": "885c09d0445a0ad09e4ecc23ded4a2792fbe7bad716950e0c2e4ef62e4e44a04"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v168-fine-mesh-v1/original-training-journal.jsonl",
+        "sha256": "885c09d0445a0ad09e4ecc23ded4a2792fbe7bad716950e0c2e4ef62e4e44a04"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10504458,
+        "size": 2735628,
+        "blocks": 5352,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794082259132392687,
+        "ctime_ns": 1794082259132392687
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505028,
+        "size": 2735628,
+        "blocks": 5344,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794085009214457544,
+        "ctime_ns": 1794085009214457544
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v169-balanced-spatial-final-v1.json",
+        "sha256": "c4df7c24c14aa58f94820dba6741d833cd40478095eae4c6e4563cb1b9cc0923"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v3/scores-v1.json",
+        "sha256": "63cf2eadc99c691faa90ba0dd03e638d18c8d49b9566ae2143426efb8618017f"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v169-balanced-spatial-v1/scores-v1.json",
+        "sha256": "63cf2eadc99c691faa90ba0dd03e638d18c8d49b9566ae2143426efb8618017f"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10497816,
+        "size": 6312790,
+        "blocks": 12336,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794086407476329374,
+        "ctime_ns": 1794086407476329374
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505722,
+        "size": 6312790,
+        "blocks": 12336,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794086666275654898,
+        "ctime_ns": 1794086666275654898
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v169-balanced-spatial-final-v1.json",
+        "sha256": "c4df7c24c14aa58f94820dba6741d833cd40478095eae4c6e4563cb1b9cc0923"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v3/paired-comparisons-v1.json",
+        "sha256": "f61cd629e261b71278bfb8c3902fe76f43e77d243cd86609e63029786309c7ca"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v169-balanced-spatial-v1/paired-comparisons-v1.json",
+        "sha256": "f61cd629e261b71278bfb8c3902fe76f43e77d243cd86609e63029786309c7ca"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10505626,
+        "size": 18854124,
+        "blocks": 36832,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794086439057267252,
+        "ctime_ns": 1794086439064267264
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505723,
+        "size": 18854124,
+        "blocks": 36832,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794086666287654919,
+        "ctime_ns": 1794086666287654919
+      }
+    },
+    {
+      "publication": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v169-balanced-spatial-final-v1.json",
+        "sha256": "c4df7c24c14aa58f94820dba6741d833cd40478095eae4c6e4563cb1b9cc0923"
+      },
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v3/observations-v1.jsonl",
+        "sha256": "524bd72e5caed3b8cf2ad0126f272361c094d25be9763eecb7ab608dcd29a8b6"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v169-balanced-spatial-v1/observations-v1.jsonl",
+        "sha256": "524bd72e5caed3b8cf2ad0126f272361c094d25be9763eecb7ab608dcd29a8b6"
+      },
+      "before_original": {
+        "dev": 66306,
+        "ino": 10505612,
+        "size": 6972371,
+        "blocks": 13632,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794086407300214056,
+        "ctime_ns": 1794086407300214056
+      },
+      "before_public": {
+        "dev": 66306,
+        "ino": 10505730,
+        "size": 6972371,
+        "blocks": 13624,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794086666319654974,
+        "ctime_ns": 1794086666319654974
+      }
+    }
+  ],
+  "pairs": 65,
+  "terminal_launch_owners_checked": 29,
+  "trial_roots_without_active_commands": [
+    "/home/dllu/proj/demosaic/.cache/quality-20261103/V157-spatial-rgb-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V158-regional-dc-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V159-regional-dc-transition-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V160-paired-response-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V161-harmonic-context-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V162-flat-target-anchor-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V164-pair-unit-floor-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V165-pair-common-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V166-common-support-routing-v2",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V167-bounded-support-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v2",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3",
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v3"
+  ],
+  "previous_duplicate_allocated_bytes": 243761152,
+  "free_before": 52100468736,
+  "free_after": 52344115200,
+  "scope": "Only explicit original/public publication receipt copies from12 completed V157/158/159/160/161/162/164/165/166/167/168/169 publications;not capture/JPEG/source/native/checkpoint files. Full equal publication-bound hashes and same filesystem/user/mode before atomic hardlinks. Every path/byte retained;before inode/mtime metadata recorded. Old roots have no active command and recorded launch owners observed terminal. New V184 work and unavailable original/dataz media untouched. No previous storage consolidation rerun."
+}

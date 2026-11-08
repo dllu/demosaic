@@ -48,7 +48,19 @@ viewed native figures/12 triplets are complete. Nineteen methods/32contrasts/
 1,218cells retain prior results. The [loss implementation](coherent-pair-response.md)
 records25 CPU tests,20 native derivative replays and two genuine CUDA probes.
 
-The [V185 smaller-support readout experiment](spatial-context-wave-readout.md) has passed native CPU/GPU correctness and started matched training. Quality review is pending.
+The completed [V185 smaller-support wave readout](spatial-context-wave-comparison.md)
+is the current experimental direct-readout option. At matched 900-update head
+training, mesh response rises **2.11% raw / 0.45% EMA versus V184** to
+**4.968% / 5.171% of GT**, while quiet spatial RMS falls **0.42–0.55% raw /
+0.83–1.38% EMA**. All 32 EMA quiet cases improve. Standalone flat RMS rises
+0.001–0.003% and absent-mesh errors rise slightly; false striping, broad mottle
+and real missing crossings remain. Quiet spatial RMS is still 0.34–0.96% above
+frozen V183 EMA. Extra 192 parameters and smaller RAW contexts change together;
+all 189 inherited tensors stay frozen. Both endpoints/all 822 cases, independent
+audits, two strict exports and all 60 viewed native figures/12 triplets are complete.
+[Fourteen-state viewer](images/v185-spatial-context-v1/native-viewer.html) ·
+[Exact evidence](results/v185-spatial-context-final-v1.json).
+V120 Small remains the general recommendation; earlier quieter/flat/detail options remain available.
 
 The completed [V184 phase-aware readout](phase-wave-readout-comparison.md) adds
 316 parameters above frozen V183 EMA. Mesh response rises **9.60% raw / 15.96%

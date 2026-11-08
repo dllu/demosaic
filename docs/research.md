@@ -701,3 +701,18 @@ RAW/RGB pipeline does not establish our physical-noise-conditioned camera-RGB
 or quiet-sky quality. The inspected repository declares no license; no code,
 weights or data are adopted. V166 remains fixed. [Primary URLs, pinned file hashes,
 line references and reading limits](results/wgcan-reading-20261107-v1.json).
+
+The completed [V185 smaller-support trial](spatial-context-wave-comparison.md)
+adds 33/17-packed-pixel measurements at stride8 to the unchanged large wave basis
+and selected bins. At the same 900 head updates and nine losses as V184, mesh
+response rises 2.11% raw / 0.45% EMA, while quiet spatial RMS falls 0.42–0.55%
+raw / 0.83–1.38% EMA, improving all 32 EMA quiet cases. Extra 192 parameters and
+support context change together. Flat and absent-mesh errors regress slightly;
+false fine striping, broad casts and incomplete real cab crossings remain.
+All 189 inherited tensors stay exact; all 60 native figures were viewed. Both
+strict exports and 23-method/42-contrast/1,554-cell comparisons retain earlier
+strengths. The [implementation and receipts](spatial-context-wave-readout.md)
+include 37 model tests, 19 codec/state checks and 69 audit/comparison/publication
+checks. Lossless native recipes and factored checkpoints preserve exact bits.
+Smaller support improves the measured tradeoff without becoming calibrated
+confidence or establishing noisy-sky safety.
