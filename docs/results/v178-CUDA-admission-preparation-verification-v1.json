@@ -1,0 +1,59 @@
+{
+  "status": "pass-frozen-preparation-live-CPU-wait-sources-protocol-and-document-links",
+  "recorded_local": "2026-11-07T20:07:52.257358-08:00",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/publish-v178-CUDA-admission-preparation-v1.py",
+    "sha256": "c3faf96cf3a29991da40c38f10c86a6aa1c1784724f1ab0c9b8cac8e4745c8a5",
+    "text": "\"\"\"Verify/publish prepared sources and live CPU wait;no GPU admission is executed.\"\"\"\nfrom datetime import datetime\nimport json\nfrom pathlib import Path\nimport re\nfrom zoneinfo import ZoneInfo\n\nimport psutil\nfrom phase_admission_protocol import dependency_readiness,read,ref\n\nREPO=Path('/home/dllu/proj/demosaic')\nROOT=REPO/'.cache/quality-20261107/V178-phase-evidence-admission-v1'\nLIVE=REPO/'.cache/quality-20261107/V175-fresh-noise-matching-v2'\nplan_path=ROOT/'plan-v1.json';plan=read(plan_path)\nfor binding in plan['inputs']:assert ref(binding['path'])==binding\nfor path,digest in plan['frozen_files'].items():assert ref(path)['sha256']==digest\nassert len(plan['cases'])==7\nassert len([c for c in plan['cases'] if c['noisy']])==6\nassert len([c for c in plan['cases'] if c['domain']=='protected-real'])==2\nassert all(c['training_step'] is None for c in plan['cases'] if c['domain']=='protected-real')\nassert plan['expected']=={'parity_rows':14,'all_component_calls':32,'frozen_calls':32,'matching_calls':27,'sampler_calls':135,\n                         'new_projection_calls':15,'CPU_feature_calls':6,'direct_GPU_feature_calls':3,\n                         'optimizer_updates':2,'Adam_tensors':142,'restored_checkpoint_step':1}\nassert '18 passed' in plan['protocol_CPU_tests']['text']\nreadiness_path=ROOT/'frozen-entry-readiness-v1.json';readiness=read(readiness_path)\nassert readiness['plan']==ref(plan_path) and readiness['Torch_imported_by_rejected_worker'] is False\nassert readiness['CUDA_initialized'] is False and not readiness['scientific_claim_created']\nassert readiness['frozen_constructor_trainable_tensors']==142 and readiness['sampler_blocks_per_matching_forward']==5\nlaunch_path=ROOT/'watch-launch-v1.json';launch=read(launch_path)\nassert launch['plan']==ref(plan_path) and launch['worker_source']==plan['runner']\nwatch=read(ROOT/'watch-status-v1.json');owner=launch['owner'];process=psutil.Process(owner['pid'])\nassert process.create_time()==owner['created'] and watch['owner']==owner\nassert process.status() not in [psutil.STATUS_ZOMBIE,psutil.STATUS_DEAD]\nassert process.nice()==10 and process.cpu_affinity()==[4,5]\nno_torch=not any('libtorch' in m.path or 'libcudart' in m.path for m in process.memory_maps())\nassert no_torch\nassert watch['status']=='waiting-for-train-owner'\nabsent=['admission-launch-v1.json','admission.claim','admission-result-v1.json','admission-failure-v1.json','watch-failure-v1.json']\nassert not any((ROOT/name).exists() for name in absent)\nproof=dependency_readiness(plan['dependency_root']);assert not proof['ready'] and proof['reason']=='waiting-for-train-owner'\nlive=read(LIVE/'plan-v1.json')\nfor name,digest in live['prior_neural_hashes'].items():assert ref(REPO/'src/demosaic'/name)['sha256']==digest\nhelpers=read(LIVE/'postprocess-inputs-v1.json')['helpers']\nfor binding in helpers:assert ref(binding['path'])['sha256']==binding['sha256']\ntrain=read(LIVE/'train-status-v1.json');training_process=psutil.Process(train['owner']['pid'])\nassert training_process.create_time()==train['owner']['created'] and train['status']=='training'\nwatch175=read(LIVE/'completion-watch-status-v1.json');p=psutil.Process(watch175['owner']['pid'])\nassert p.create_time()==watch175['owner']['created']\nsources=[REPO/'scripts'/name for name in ['admit_phase_evidence_matching.py','phase_admission_protocol.py']]+[REPO/'tests/test_phase_admission_protocol.py']\nfor source in sources:\n frozen=Path(plan['work'])/source.relative_to(REPO)\n assert source.read_bytes()==frozen.read_bytes()\nsummary={\n 'status':'prepared-frozen-CUDA-admission-CPU-watcher-live-no-GPU-work-yet',\n 'recorded_local':datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n 'plan':dict(ref(plan_path),contents=plan),'sources':[dict(ref(p),text=p.read_text()) for p in sources],\n 'frozen_entry_readiness':dict(ref(readiness_path),contents=readiness),\n 'frozen_entry_log':dict(ref(REPO/'.cache/v178-frozen-admission-readiness-v1.log'),text=(REPO/'.cache/v178-frozen-admission-readiness-v1.log').read_text()),\n 'watch_launch':dict(ref(launch_path),contents=launch),'watch_observed':watch,\n 'watcher_observed_RSS_bytes':process.memory_info().rss,'watcher_no_loaded_Torch_CUDA_libraries':no_torch,\n 'observed_dependency_proof':proof,'observed_live_V175_training':train,\n 'original_neural_sources_unchanged':96,'existing_V175_helpers_unchanged':18,\n 'absent_scientific_launch_claim_result_files':absent,\n 'new_GPU_component_forwards':0,'new_optimizer_updates':0,\n 'future_admission_expected':plan['expected'],\n 'scope':'Preparation/CPU-entry rejection/import/constructor/live-wait evidence only. Future counts are planned,not executed. No source or noise draw,checkpoint load,actual matching/frozen/parent/DINO/sampler forward or RAW decode in this preparation. Existing CPU prototype evidence is separate. V175 sources/recipe/owners and machine receipt bytes preserved.'}\npublic=REPO/'docs/results/v178-CUDA-admission-preparation-v1.json'\nwith public.open('x') as f:json.dump(summary,f,indent=2);f.write('\\n')\ndocs=[REPO/p for p in ['README.md','docs/phase-evidence-admission.md','docs/phase-evidence-matching.md',\n                      'docs/index.md','docs/research.md','docs/experiments.md']]\nlinks=0\nfor doc in docs:\n for target in re.findall(r'\\]\\(([^)]+)\\)',doc.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  assert (doc.parent/target.split('#')[0]).resolve().exists(),(doc,target)\n  links+=1\nverification={\n 'status':'pass-frozen-preparation-live-CPU-wait-sources-protocol-and-document-links',\n 'recorded_local':datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'summary':ref(public),\n 'documents':[ref(p) for p in docs],'local_links_checked':links,\n 'all_frozen_files_verified':len(plan['frozen_files']),'input_bindings_verified':len(plan['inputs']),\n 'watcher_owner':owner,'live_V175_training_owner':train['owner'],'live_V175_completion_watcher_owner':watch175['owner'],\n 'new_GPU_calls':0,'new_updates':0,'original_neural_sources_unchanged':96,'sealed_V175_helpers_unchanged':18,\n 'scope':'No GPU or scientific worker launched by verification;actual frozen dependency gate probe preserved,not a failed CUDA experiment.'}\nwith (REPO/'docs/results/v178-CUDA-admission-preparation-verification-v1.json').open('x') as f:json.dump(verification,f,indent=2);f.write('\\n')\nprint('PASS18CPUprotocol-frozen-entry-live-wait7cases32futurecalls0GPU',flush=True)\n"
+  },
+  "summary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v178-CUDA-admission-preparation-v1.json",
+    "sha256": "e62afad1e3309cc2c5d9d2f8c486193f7ac9af30200e6cb97f248d77daef17df"
+  },
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "54bc010526b78422c5ea6473508d9de23c35968c8280718f6acda46e5cfdcc8a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-admission.md",
+      "sha256": "5de8f405b6de5090ed0b8a52a718e2fbdeaf1b9eb40d7d02819d6a2bb310d225"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-matching.md",
+      "sha256": "b19a371143d51d6642bb3728ec7a273b33ecfd8eabd1a79d375abecd40c3d0ec"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "0285b2b1d0afaa8865405ca8b6f96f4039e098648cf76d4293562dd06c609b50"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "170c69e2ff91596b8c92413e44e1b14caa5d903b5d5cea99f6f139936eeae765"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "ff392d1a0da58e60ba44a6dfb668ed6e06fc1b8750e3b9f3d070c91afaf9e40d"
+    }
+  ],
+  "local_links_checked": 480,
+  "all_frozen_files_verified": 710,
+  "input_bindings_verified": 19,
+  "watcher_owner": {
+    "pid": 417389,
+    "created": 1794110449.65
+  },
+  "live_V175_training_owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "live_V175_completion_watcher_owner": {
+    "pid": 287357,
+    "created": 1794104682.2
+  },
+  "new_GPU_calls": 0,
+  "new_updates": 0,
+  "original_neural_sources_unchanged": 96,
+  "sealed_V175_helpers_unchanged": 18,
+  "scope": "No GPU or scientific worker launched by verification;actual frozen dependency gate probe preserved,not a failed CUDA experiment."
+}

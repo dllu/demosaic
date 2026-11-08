@@ -11,6 +11,10 @@ pending; current restoration recommendations and native comparisons are unchange
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·
 [Native preparation and preserved prototype failure](results/v178-phase-evidence-preparation-v1.json).
 
+The [frozen CUDA admission](phase-evidence-admission.md) is queued after V175's
+complete GPU pipeline, with 18 additional CPU protocol checks and an actual
+frozen-entry dependency rejection before Torch import. It has not run on CUDA.
+
 ## Path into the model
 
 The [V177 diagnostic](phase-frequency-evidence.md) finds useful repeated evidence

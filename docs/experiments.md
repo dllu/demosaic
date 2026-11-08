@@ -1,5 +1,12 @@
 # Experiment index
 
+The [V178 CUDA admission queue](phase-evidence-admission.md) binds seven native
+cases, both V172 endpoints, the exact sampler and two real optimizer/restore
+probes. Its CPU watcher waits for completed V175 train/review/render owners and
+receipts before any CUDA work. All 18 protocol checks and actual frozen-entry
+guard/import checks pass; the live watcher has no Torch/CUDA libraries loaded.
+No admission GPU call, update or model-quality result has occurred yet.
+
 The [V178 model variant](phase-evidence-matching.md) is implemented and CPU
 prepared, with a zero 80→39 measured-phase-evidence projection above V172's
 matching features. It adds 3,120 weights, keeps the existing matching network

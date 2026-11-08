@@ -1,5 +1,11 @@
 # Documentation guide
 
+The [V178 CUDA admission](phase-evidence-admission.md) is frozen and its CPU
+watcher is live, waiting for V175's train/review/completion owners and completed
+audits/render. All 18 protocol checks and actual frozen-entry/import checks pass.
+The planned 32 component calls, real gradients/checkpoint restoration and native
+ADC invariants have not run yet; no V178 trained-quality gain is claimed.
+
 The [V178 phase-evidence matching variant](phase-evidence-matching.md) adds
 80 measured-wave coordinates through a zero 3,120-parameter adapter. All 68 CPU
 checks pass, both V172 states load with 188 existing tensors exact, and native

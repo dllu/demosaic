@@ -29,6 +29,7 @@ A [CFA phase-split follow-up](docs/phase-frequency-evidence.md) tests whether
 input-only frequency selections repeat in separately measured green samples.
 An [untrained phase-evidence adapter](docs/phase-evidence-matching.md) now exposes
 those measurements to matching; CPU checks pass, with CUDA and quality pending.
+Its [guarded CUDA check](docs/phase-evidence-admission.md) is queued after V175.
 
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |

@@ -1,5 +1,12 @@
 # Current method research
 
+The [V178 native CUDA admission](phase-evidence-admission.md) is prepared and
+waiting behind V175's complete GPU pipeline. It will check actual zero-adapter
+output parity, CPU/CUDA features, all 142 gradients, checkpoint/Adam/RNG restoration
+and post-update ADC/mixed-zero invariants. All 18 CPU launch-protocol tests pass;
+the frozen worker entry rejects the current live dependency before Torch import.
+This is implementation preparation; V178 has no trained-quality result yet.
+
 The [V178 phase-evidence matching path](phase-evidence-matching.md) makes the
 V177 observations available to the matching network as continuous features.
 Four A-selected frequencies per green direction provide 80 wave/power/signed
