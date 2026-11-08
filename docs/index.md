@@ -1,9 +1,18 @@
 # Documentation guide
 
-The [V173 gradient-loss experiment](weak-gradient-matching.md) is training the
-unchanged V172 matching network with amplitude-balanced gradient supervision.
-The six other terms, data, initial state and schedule match. All 162 focused CPU
-checks and native backward admission pass; held-out quality is pending.
+The [completed V173 gradient-loss experiment](weak-gradient-matching.md) lowers
+EMA quiet spatial RMS **0.32–0.68% versus V172**, improving all 32 inputs. Quiet
+total RMS falls 0.27–0.52%, and native512 total-flat means fall 0.25–0.30%.
+**Mesh response falls 3.95% to 3.724% of GT**; natural fine-band response falls
+2.63–2.88% on all 128 inputs. Broad mottle and real fine crossings remain
+unresolved. Retain this modest quiet/spatial-error option alongside V172's
+stronger response and V171's stronger flats. V172 remains the balanced matching
+baseline for further detail work; V120 remains the general recommendation.
+Both endpoints, 822 cases, 60 actual native figures, 12 triplets and scoped audits
+are complete. All 162 focused checks pass (161 CPU tests and one CUDA stream
+guard); no matching core or native sampler runs in that guard. An offline
+[native-pixel viewer](images/v173-weak-gradient-matching-v1/native-viewer.html)
+adds click/F-key flipping; all 240 browser crops match their PNG pixels exactly.
 
 The [completed V172 local noise matching experiment](local-noise-matching.md)
 reduces EMA quiet RMS **0.31–0.77%** and DC bias **1.33–2.55% versus V169**,
