@@ -60,6 +60,26 @@ foliage/building/sky and both fine cab windows. No quality improvement follows
 from implementation admission. No new sensor/source/parent/DINO/RAW decode or
 original capture access occurs. [Actual admission and launch evidence](results/v180-local-phase-CUDA-admission-v1.json).
 
+The [independent local auditor](../scripts/audit_local_phase_evidence_trial.py)
+passes 42 CPU checks, including local-grid geometry, nonfinite/negative powers,
+raw/EMA input-only agreement, trace/metric corruption and terminal launch owners.
+Its frozen actual entry rejects live training before Torch or checkpoint loading.
+The [comparison reducer](../scripts/reduce_local_phase_evidence_trial.py)
+passes 14 checks and a complete marked fixture: 15 methods/12,330 rows,
+22 contrasts, 2,035 Decimal means and 882 table cells. Both V175 endpoints and
+all four V178 endpoints remain available. Four same-endpoint contrasts compare
+local against global evidence and control; 18 contextual contrasts retain earlier strengths.
+
+The [native renderer](../scripts/render_local_phase_evidence_trial.py) preserves
+all four completed V178 panels, adding two local endpoints at identical source
+coordinates and display transforms. A marked old-pixel fixture checks 60 figures,
+12 noisy/restored/exact-GT triplets, 8,294,400 newly displayed RGB channels and
+43,392,000 copied channels. It is a layout/display check using global V178
+pixels under simulated local labels, not V180 quality. Actual mode requires
+terminal quality and passed audits and rejects before creating outputs now.
+These helpers are frozen separately; the running worker's 725-source snapshot
+is unchanged. [Preparation sources and evidence](results/v180-local-phase-comparison-preparation-v1.json).
+
 ## Local measurements
 
 The [V179 training-input diagnostic](local-phase-support.md) finds higher local

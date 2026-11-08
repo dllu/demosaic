@@ -52,6 +52,9 @@ focused CPU checks and six native feature cases pass, followed by actual CUDA
 parity/gradient/restoration and local measurement checks. Its 900-update cached
 continuation is running; image quality remains unmeasured. Interpolation may
 still spread support or introduce grid artifacts.
+Its [local audit/table/native preparation](local-phase-evidence-matching.md#cuda-admission-and-continuation)
+passes 42 audit checks, 14 comparison checks and marked 60-figure/882-cell
+fixtures. Actual local quality and viewing remain required.
 
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, with six observed coarsest p90 distances about
