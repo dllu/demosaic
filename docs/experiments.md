@@ -21,6 +21,16 @@ and all 60 actual native figures/12 triplets are complete. Seventeen methods,
 28 contrasts and 1,050 cells retain earlier strengths. The [implementation](flat-spatial-evidence.md)
 preserves CPU/CUDA checks and preparation fixtures separately from actual quality.
 
+The completed [V182 gradient-conflict diagnostic](flat-spatial-gradient-conflict.md)
+uses ten fixed cached training batches at each completed raw V180/V181 state.
+All 20 forwards/76 parameter backwards finish with no updates. Output flat/detail
+gradients align on all 12 paired cases, while parameter gradients conflict on
+10/12; fixed-denominator spatial descent opposes target-pair response on 12/12.
+The independent CPU audit passes all 20 outputs/loss totals/masks, 140 geometry
+matrices, 284 Adam denominators and 568 retained layer Grams. A variable-shadowing
+failure in the first audit and the first plot layout remain preserved; no
+scientific forward is repeated. Model-quality recommendations stay unchanged.
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of
 constructed GT amplitude. Quiet spatial error rises slightly at both noise

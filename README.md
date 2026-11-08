@@ -51,6 +51,10 @@ Retain this quieter option beside V180's stronger response and V172's balanced
 comparison. Both endpoints, independent audits and 60 actually viewed figures
 are complete.
 
+A [training-gradient diagnostic](docs/flat-spatial-gradient-conflict.md) finds
+that flat and paired-detail supervision can conflict through shared parameters,
+despite positive output-gradient alignment. It changes no model or quality result.
+
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |
 | V120 Small | Broad photo/camera results and complete 102MP RGB16 checks | Fine foliage, mesh, neon and dark-field mottling |

@@ -29,6 +29,14 @@ Both endpoints/all 822 cases, full trace/five checkpoints, independent audits,
 two strict exports and all 60 actually inspected native figures/12 triplets
 are complete. [Loss implementation and preparation](flat-spatial-evidence.md).
 
+The completed [V182 training-gradient diagnostic](flat-spatial-gradient-conflict.md)
+finds negative flat/detail parameter-gradient cosines on 10/12 paired cases,
+despite positive output cosines on all twelve. The added flat direction opposes
+the measured target-pair response on 12/12 in a fixed saved-Adam metric.
+All 20 native training batches and an independent audit are complete, with zero
+optimizer updates. This guides the next loss experiment; V180/V181's actual
+quality comparisons and the earlier useful models remain unchanged.
+
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
 0.03–0.05% versus V172, and real fine crossings remain weak. Raw quiet RMS falls

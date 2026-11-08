@@ -31,6 +31,18 @@ Retain this quieter local recipe and V180's stronger response as separate useful
 options. Broad mottle and real fine crossings remain unresolved.
 [Loss implementation and exact preparation](flat-spatial-evidence.md).
 
+The completed [V182 local-gradient study](flat-spatial-gradient-conflict.md)
+finds that the new spatial term conflicts with paired-difference loss in shared
+parameters on 10/12 selected paired training cases. Output-gradient cosines
+remain positive on all twelve. A negative added-spatial direction reduces the
+full-target pair-response functional on 12/12 with a fixed saved-Adam denominator,
+including within the shared network alone. This is local geometry, omitting
+first/new second moments, clipping, decay and cross-batch effects; it predicts
+no finite training or real-photo gain. All 20 native forwards, 76 parameter
+backwards, independent array/loss/retained-gradient audit and actual plot viewing
+are complete, with no updates or new data/noise. A coherent pair-response term
+is the next experiment to prepare while retaining the absolute and flat losses.
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,
 reaching 3.9243% / 3.9235% of GT amplitude. This is uneven: fewer than half of
