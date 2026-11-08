@@ -1,6 +1,7 @@
 """All822 cases for each V195 endpoint, with exact inherited baseline replay."""
 
 import argparse
+import ast
 import gc
 import json
 import time
@@ -24,7 +25,7 @@ from phase_admission_protocol import owner_live
 
 def source_guard(plan):
     guard(plan)
-    seal = read(ROOT / "review-source-v1.json")
+    seal = read(ROOT / "review-source-v2.json")
     for name, digest in seal["frozen_files"].items():
         assert ref(name)["sha256"] == digest
     return seal
@@ -47,18 +48,33 @@ def ready(plan):
 def prepare():
     plan = read(ROOT / "plan-v1.json")
     guard(plan)
-    assert not (ROOT / "review-source-v1.json").exists()
+    assert not (ROOT / "review-source-v2.json").exists()
+    from directional_trial_protocol import REPO
+
+    extra = set()
+    for binding in plan["metrics_sources"]:
+        for node in ast.walk(ast.parse(Path(binding["path"]).read_text())):
+            names = []
+            if isinstance(node, ast.Import):
+                names = [alias.name for alias in node.names]
+            elif isinstance(node, ast.ImportFrom) and not node.level and node.module:
+                names = [node.module]
+            for name in names:
+                filename = name.split(".")[0] + ".py"
+                if (REPO / "scripts" / filename).is_file():
+                    extra.add(filename)
     work, sources = freeze(
-        ROOT / "review-frozen-v1",
+        ROOT / "review-frozen-v2",
         [
             "review_directional_response.py",
             "audit_directional_quality.py",
             "render_directional_response.py",
             "reduce_directional_response.py",
+            *sorted(extra),
         ],
     )
     save(
-        ROOT / "review-source-v1.json",
+        ROOT / "review-source-v2.json",
         {
             "created_unix_UTC": time.time(),
             "plan": ref(ROOT / "plan-v1.json"),
@@ -68,6 +84,7 @@ def prepare():
             "renderer": ref(work / "scripts/render_directional_response.py"),
             "reducer": ref(work / "scripts/reduce_directional_response.py"),
             "frozen_files": sources,
+            "dynamic_metric_import_roots": sorted(extra),
             "scope": "Prepare code while training may run; review requires both original owners terminal and full CPU training audit. Four endpoints x822cases,144native RGB+144wave encodings,exact V183/V169 replays,all protected scenes. Reuse inputs/baselines; compact six-method current figures/tables instead of recopying historical galleries. No quality claim at preparation.",
         },
     )
@@ -79,8 +96,8 @@ def review():
     seal = source_guard(plan)
     assert ref(__file__) == seal["reviewer"]
     ready(plan)
-    owner = require_launch(ROOT, "review")
-    (ROOT / "review.claim").open("x").close()
+    owner = require_launch(ROOT, "review-v2")
+    (ROOT / "review-v2.claim").open("x").close()
     import numpy as np
     import torch
     from balanced_spatial_metrics import DetailMetrics, summarize
@@ -324,7 +341,7 @@ def launch_review():
 
     import psutil
 
-    assert not (ROOT / "review-launch-v1.json").exists()
+    assert not (ROOT / "review-v2-launch-v1.json").exists()
     assert psutil.virtual_memory().available > plan["launch_RAM_GiB"] * 2**30
     env = dict(
         os.environ,
@@ -337,7 +354,7 @@ def launch_review():
     )
     from directional_trial_protocol import REPO
 
-    with (ROOT / "review-v1.log").open("xb") as log:
+    with (ROOT / "review-v2-v1.log").open("xb") as log:
         child = subprocess.Popen(
             [str(REPO / ".venv/bin/python"), seal["reviewer"]["path"], "review"],
             cwd=REPO,
@@ -348,11 +365,11 @@ def launch_review():
         )
     owner = {"pid": child.pid, "created": psutil.Process(child.pid).create_time()}
     save(
-        ROOT / "review-launch-v1.json",
+        ROOT / "review-v2-launch-v1.json",
         {
             "owner": owner,
             "plan": ref(ROOT / "plan-v1.json"),
-            "review_source": ref(ROOT / "review-source-v1.json"),
+            "review_source": ref(ROOT / "review-source-v2.json"),
         },
     )
     print(owner)
@@ -370,5 +387,5 @@ if __name__ == "__main__":
         try:
             review()
         except BaseException as exc:
-            save(ROOT / "review-failure-v1.json", {"error": repr(exc), "time_UTC": time.time()})
+            save(ROOT / "review-v2-failure-v1.json", {"error": repr(exc), "time_UTC": time.time()})
             raise

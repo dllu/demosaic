@@ -1,6 +1,6 @@
 # Balanced directional pair-response pressure (V195 preparation)
 
-The new training-only loss passes **26 CPU contracts and native derivative checks on20 saved training batches**. GPU admission has also passed; matched training is running, and learned quality remains unverified. The [V194 saved-output diagnostic](mesh-directional-response.md) found that a high whole-pattern score can coexist with poor response in one crossing direction. This motivates testing more balanced pressure while retaining every existing flat and reconstruction penalty. V187 remains the preferred experimental wave model; V120 Small remains the general recommendation.
+The new training-only loss passes **26 CPU contracts and native derivative checks on20 saved training batches**. GPU admission has also passed; both matched arms have completed 900 updates and passed the full independent checkpoint audit. Four-endpoint quality evaluation is running; learned quality remains unverified. The [V194 saved-output diagnostic](mesh-directional-response.md) found that a high whole-pattern score can coexist with poor response in one crossing direction. This motivates testing more balanced pressure while retaining every existing flat and reconstruction penalty. V187 remains the preferred experimental wave model; V120 Small remains the general recommendation.
 
 For each training pair, remove each channel's spatial mean from the actual target difference. Split its native Fourier coefficients into four angular regions, then repeat with boundaries offset22.5degrees. The two tilings reuse the same target; they are not independent evidence. Each non-DC bin belongs to one region per tiling, with conjugate pairs kept together. Cartesian comparisons make axis/diagonal boundaries exact; Nyquist-axis orientations follow a declared discrete conjugate-pair convention.
 
@@ -13,14 +13,14 @@ loss = mean_over_pairs_and_regions(sqrt(1 + r_s²) − 1)
 
 FP64 orthonormal Fourier reductions equal the spatial projections. The positive1DN16 floor limits sensitivity as a component vanishes; there is no hard amplitude cutoff. Averaging the regional losses reduces dominance by a large-energy direction. It does not guarantee recovery where the current readout lacks useful measurements or capacity. Targets and pair labels enter only after inference; no inference gate, reference-conditioned feature or model source changes.
 
-The prospective matched comparison adds weight0.25 per domain to the unchanged nine-term objective:
+The matched comparison adds weight0.25 per domain to the unchanged nine-term objective:
 
 | Arm | Existing whole-response weight | Additional pressure |
 | --- | ---: | --- |
 | Whole control | 0.25 | 0.25 × existing whole-response loss, giving total0.50 |
 | Directional | 0.25 | 0.25 × mean response loss in eight regions |
 
-Both wrappers preserve all nine original scalar terms, their masks and their FP32 accumulation exactly. Equal nominal added weights do not mean equal gradient norms. The intended model comparison retrains the same508-parameter V187 head from one shared completed V187 EMA state, with identical fresh head Adam/EMA clocks, cached data, schedule and update budget. All189 inherited tensors and all103 neural source files stay fixed. That is a new matched optimization stage, not a claim of uninterrupted prior Adam history. GPU/head admission is complete and the sealed matched training plan is running.
+Both wrappers preserve all nine original scalar terms, their masks and their FP32 accumulation exactly. Equal nominal added weights do not mean equal gradient norms. The intended model comparison retrains the same508-parameter V187 head from one shared completed V187 EMA state, with identical fresh head Adam/EMA clocks, cached data, schedule and update budget. All189 inherited tensors and all103 neural source files stay fixed. That is a new matched optimization stage, not a claim of uninterrupted prior Adam history. GPU/head admission and matched training are complete. The full 2,000-row audit checks ten factored checkpoints, 20 raw/EMA states and 3,780 inherited tensor comparisons. [Completed training/state evidence](results/v195-response-training-completed-v1.json).
 
 An analytically missing6DN16 wave beside a correctly restored30DN16 wave receives a stronger recovery gradient under the regional term than under the whole projection. Explicit dense Fourier-basis/spatial derivatives verify arbitrary outputs in both floating-point types and at three floors. Other contracts cover pair symmetry, constant errors, shifts, D4 transport of non-boundary carriers, exact axis/diagonal ties, conjugate-closed odd/even grids, connected empty-pair zero and both wrappers' unchanged nine terms.
 
@@ -30,7 +30,7 @@ The native check reuses all20 audited saved V182 RGB batches: four each from mes
 
 GPU admission starts from the same strict-loaded V187 EMA model hash `4739e107a2460166dae5f14c7d89415b4b0c1ccc689d5a3480787ffa1696ebc4`. Seven cached native initial outputs match a separately loaded donor bit for bit; six noisy cases also check the trained head against CPU execution. Each loss variant performs two training-only probe updates, restoring its actual model, Adam, EMA and CPU/CUDA RNG state after the first. All 2,032 parameter-gradient coordinates pass CPU replay checks; both directional output gradients match the independent NumPy spatial calculation exactly in FP32. CPU inspection then verifies all four probe checkpoints, eight raw/EMA strict loads and 1,512 inherited tensor comparisons without forwards. Probe checkpoints never initialize training. [GPU/state evidence and sealed training plan](results/v195-directional-response-GPU-preparation-v1.json).
 
-Both matched jobs use the original 1,000 cached rows, 900 noisy updates, 3,600 images and 100 ADC skips, with identical seeds, donor weights, fresh optimizer clocks, learning-rate schedule and penalties. The total new local output budget is 2 GiB, including all four endpoints, compact native figures and reports; existing datasets, parents and historical panels are reused. Local/RAM reserves are 40/32 GiB, launch RAM 52 GiB and CUDA quota 24 GiB. No external writes are planned. All 822 held-out cases per endpoint and both protected GFX families remain required before a quality conclusion.
+Both completed matched jobs used the original 1,000 cached rows, 900 noisy updates, 3,600 images and 100 ADC skips, with identical seeds, donor weights, fresh optimizer clocks, learning-rate schedule and penalties. The total new local output budget is 2 GiB, including all four endpoints, compact native figures and reports; existing datasets, parents and historical panels are reused. Local/RAM reserves are 40/32 GiB, launch RAM 52 GiB and CUDA quota 24 GiB. No external writes are planned. All 822 held-out cases per endpoint and both protected GFX families remain required before a quality conclusion.
 
 The first26-contract suite adds one exact-boundary test to an earlier25-contract pass; both logs and the earlier algebra implementation remain preserved. One unsealed preparation stopped at an inherited disk guard, and another caught an incorrect baseline plan filename introduced while adapting the wrapper. Both stopped before native calculations; their sources and correction receipts are retained. The successful native computation completed once. This CPU-only stage uses a prospective32GiB local/RAM reserve and0.005GiB small-receipt budget after local free space fell to35GiB; older model-trial plans remain byte-preserved.
 
@@ -50,8 +50,12 @@ The planned gallery has 48 compact boards and 24 native triplets, with V187 EMA,
 the four new endpoints, noisy pixels and accurately labeled references. Earlier
 panels/galleries remain at their original paths. The same two V194 mesh examples
 will also receive independent directional breakdowns after quality completes;
-this remains a development-example diagnostic. A one-shot controller waits for
-the original training owners, then queues CPU training audit, one complete
-quality pass, CPU quality audit, reduction and rendering. It stops for actual
-native viewing and publication review. [Sealed review preparation and structural
+this remains a development-example diagnostic. Both original training owners are terminal and the CPU training audit passed.
+The corrected reviewer is processing all four endpoints; its finisher waits for
+that actual owner, then runs CPU quality audit, reduction, rendering, the fixed
+directional breakdown and strict exports. It stops for actual native viewing,
+browser verification and publication review. The first review bundle omitted a
+dynamically imported metric helper and stopped before predictions; the corrected
+bundle passed a five-kind cached-metric preflight. Original launch/failure bytes
+are retained. [Sealed review preparation and structural
 evidence](results/v195-response-review-preparation-v1.json).

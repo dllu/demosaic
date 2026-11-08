@@ -12,7 +12,7 @@ from review_directional_response import source_guard
 def export():
     plan = read(ROOT / "plan-v1.json")
     source_guard(plan)
-    seal = read(ROOT / "export-source-v1.json")
+    seal = read(ROOT / "export-source-v2.json")
     assert seal["runner"] == ref(__file__) and seal["plan"] == ref(ROOT / "plan-v1.json")
     scores = read(ROOT / "scores-v1.json")
     assert not owner_live(scores["owner"])
@@ -100,6 +100,7 @@ def export():
             "plan": ref(ROOT / "plan-v1.json"),
             "scores": ref(ROOT / "scores-v1.json"),
             "exports": exports,
+            "export_source": ref(ROOT / "export-source-v2.json"),
             "strict_CPU_export_loads": 4,
             "inherited_tensor_comparisons": 756,
             "new_module_forwards": 0,
@@ -114,16 +115,16 @@ def export():
 def prepare():
     plan = read(ROOT / "plan-v1.json")
     source_guard(plan)
-    runner = ROOT / "exporter-v1.py"
+    runner = ROOT / "exporter-v2.py"
     with runner.open("x") as stream:
         stream.write(Path(__file__).read_text())
     save(
-        ROOT / "export-source-v1.json",
+        ROOT / "export-source-v2.json",
         {
             "status": "prepared-four-strict-exports-quality-audit-required",
             "runner": ref(runner),
             "plan": ref(ROOT / "plan-v1.json"),
-            "review_source": ref(ROOT / "review-source-v1.json"),
+            "review_source": ref(ROOT / "review-source-v2.json"),
             "scope": "Use the sealed runner with review-work source imports. Preparation only; exports and promotion not performed.",
         },
     )

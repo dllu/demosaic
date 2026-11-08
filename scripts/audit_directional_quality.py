@@ -142,10 +142,10 @@ def audit():
         for mode in MODES
         for endpoint, method in plan["methods"][mode].items()
     }
-    launch = read(ROOT / "review-launch-v1.json")
+    launch = read(ROOT / "review-v2-launch-v1.json")
     if owner_live(launch["owner"]):
         raise RuntimeError("Actual review is still live; no Torch import")
-    assert not (ROOT / "review-failure-v1.json").exists()
+    assert not (ROOT / "review-v2-failure-v1.json").exists()
     scores = read(ROOT / "scores-v1.json")
     assert (
         scores["owner"] == launch["owner"]
