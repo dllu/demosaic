@@ -69,4 +69,3 @@ unchanged pending measured gains and actual native viewing.
 [CPU draft, source and controller receipt](../docs/results/v178-matched-trial-CPU-draft-v1.json) ·
 [Publication verification](../docs/results/v178-matched-trial-publication-verification-v1.json) ·
 [V175 four-pass checkpoint/prefix audit](../docs/results/v175-four-pass-boundary-audit-v1.json).
-
