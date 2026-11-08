@@ -1,0 +1,217 @@
+...............FFFFF.......                                              [100%]
+=================================== FAILURES ===================================
+______ test_noise_conditioning_rescaling_and_individual_supplied_variance ______
+
+    def test_noise_conditioning_rescaling_and_individual_supplied_variance():
+        raw, var, colors = fixture()
+        x, c, g = dense_local_spectrum(raw, var, colors, window=9, stride=4, support_windows=(7, 5))
+        sx, sc, sg = dense_local_spectrum(
+            raw * 2, var * 4, colors, window=9, stride=4, support_windows=(7, 5)
+        )
+>       torch.testing.assert_close(x, sx, rtol=2e-12, atol=2e-12)
+E       AssertionError: Tensor-likes are not close!
+E       
+E       Mismatched elements: 27 / 17496 (0.2%)
+E       Greatest absolute difference: 0.700048700406811 at index (8, 13, 0, 0) (up to 2e-12 allowed)
+E       Greatest relative difference: 0.1939313110981217 at index (8, 13, 0, 0) (up to 2e-12 allowed)
+
+tests/test_late_dense_local_spectrum.py:152: AssertionError
+_____ test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[RGGB] _____
+
+pattern = 'RGGB'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_wrapper_exact_inheritance_local_ADC_routing_and_gradients(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+        from demosaic.late_local_phase_evidence_matching import LateLocalPhaseEvidenceMatchingDetail
+    
+        old = LateLocalPhaseEvidenceMatchingDetail(evidence_window=9, evidence_stride=8)
+        new = LateDenseLocalSpectrumDetail(
+            evidence_window=9,
+            evidence_stride=8,
+            dense_window=9,
+            dense_stride=4,
+            dense_support_windows=(7, 5),
+        )
+        new.initialize_from_evidence(old.state_dict())
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        raw, var, colors = fixture(pattern, torch.float32)
+        var[..., :4, :5] = 0
+        base = torch.linspace(0.001, 0.02, 3 * 16 * 22).reshape(1, 3, 16, 22)
+>       expected = old(base, raw, var, colors)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_dense_local_spectrum.py:181: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_local_phase_evidence_matching.py:323: in forward
+    enable_sampler_autograd()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def enable_sampler_autograd():
+        global _registered
+        if _registered:
+            return
+        namespace = torch.ops.deform_neighbourhood_sampling
+        if not hasattr(namespace, "deform_neighbourhood_backward"):
+>           raise RuntimeError("Load the pinned native sampling library before training")
+E           RuntimeError: Load the pinned native sampling library before training
+
+src/demosaic/nonlocal_autograd.py:19: RuntimeError
+_____ test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[BGGR] _____
+
+pattern = 'BGGR'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_wrapper_exact_inheritance_local_ADC_routing_and_gradients(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+        from demosaic.late_local_phase_evidence_matching import LateLocalPhaseEvidenceMatchingDetail
+    
+        old = LateLocalPhaseEvidenceMatchingDetail(evidence_window=9, evidence_stride=8)
+        new = LateDenseLocalSpectrumDetail(
+            evidence_window=9,
+            evidence_stride=8,
+            dense_window=9,
+            dense_stride=4,
+            dense_support_windows=(7, 5),
+        )
+        new.initialize_from_evidence(old.state_dict())
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        raw, var, colors = fixture(pattern, torch.float32)
+        var[..., :4, :5] = 0
+        base = torch.linspace(0.001, 0.02, 3 * 16 * 22).reshape(1, 3, 16, 22)
+>       expected = old(base, raw, var, colors)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_dense_local_spectrum.py:181: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_local_phase_evidence_matching.py:323: in forward
+    enable_sampler_autograd()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def enable_sampler_autograd():
+        global _registered
+        if _registered:
+            return
+        namespace = torch.ops.deform_neighbourhood_sampling
+        if not hasattr(namespace, "deform_neighbourhood_backward"):
+>           raise RuntimeError("Load the pinned native sampling library before training")
+E           RuntimeError: Load the pinned native sampling library before training
+
+src/demosaic/nonlocal_autograd.py:19: RuntimeError
+_____ test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[GRBG] _____
+
+pattern = 'GRBG'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_wrapper_exact_inheritance_local_ADC_routing_and_gradients(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+        from demosaic.late_local_phase_evidence_matching import LateLocalPhaseEvidenceMatchingDetail
+    
+        old = LateLocalPhaseEvidenceMatchingDetail(evidence_window=9, evidence_stride=8)
+        new = LateDenseLocalSpectrumDetail(
+            evidence_window=9,
+            evidence_stride=8,
+            dense_window=9,
+            dense_stride=4,
+            dense_support_windows=(7, 5),
+        )
+        new.initialize_from_evidence(old.state_dict())
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        raw, var, colors = fixture(pattern, torch.float32)
+        var[..., :4, :5] = 0
+        base = torch.linspace(0.001, 0.02, 3 * 16 * 22).reshape(1, 3, 16, 22)
+>       expected = old(base, raw, var, colors)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_dense_local_spectrum.py:181: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_local_phase_evidence_matching.py:323: in forward
+    enable_sampler_autograd()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def enable_sampler_autograd():
+        global _registered
+        if _registered:
+            return
+        namespace = torch.ops.deform_neighbourhood_sampling
+        if not hasattr(namespace, "deform_neighbourhood_backward"):
+>           raise RuntimeError("Load the pinned native sampling library before training")
+E           RuntimeError: Load the pinned native sampling library before training
+
+src/demosaic/nonlocal_autograd.py:19: RuntimeError
+_____ test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[GBRG] _____
+
+pattern = 'GBRG'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_wrapper_exact_inheritance_local_ADC_routing_and_gradients(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+        from demosaic.late_local_phase_evidence_matching import LateLocalPhaseEvidenceMatchingDetail
+    
+        old = LateLocalPhaseEvidenceMatchingDetail(evidence_window=9, evidence_stride=8)
+        new = LateDenseLocalSpectrumDetail(
+            evidence_window=9,
+            evidence_stride=8,
+            dense_window=9,
+            dense_stride=4,
+            dense_support_windows=(7, 5),
+        )
+        new.initialize_from_evidence(old.state_dict())
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        raw, var, colors = fixture(pattern, torch.float32)
+        var[..., :4, :5] = 0
+        base = torch.linspace(0.001, 0.02, 3 * 16 * 22).reshape(1, 3, 16, 22)
+>       expected = old(base, raw, var, colors)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_dense_local_spectrum.py:181: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_local_phase_evidence_matching.py:323: in forward
+    enable_sampler_autograd()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def enable_sampler_autograd():
+        global _registered
+        if _registered:
+            return
+        namespace = torch.ops.deform_neighbourhood_sampling
+        if not hasattr(namespace, "deform_neighbourhood_backward"):
+>           raise RuntimeError("Load the pinned native sampling library before training")
+E           RuntimeError: Load the pinned native sampling library before training
+
+src/demosaic/nonlocal_autograd.py:19: RuntimeError
+=========================== short test summary info ============================
+FAILED tests/test_late_dense_local_spectrum.py::test_noise_conditioning_rescaling_and_individual_supplied_variance
+FAILED tests/test_late_dense_local_spectrum.py::test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[RGGB]
+FAILED tests/test_late_dense_local_spectrum.py::test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[BGGR]
+FAILED tests/test_late_dense_local_spectrum.py::test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[GRBG]
+FAILED tests/test_late_dense_local_spectrum.py::test_wrapper_exact_inheritance_local_ADC_routing_and_gradients[GBRG]
+5 failed, 22 passed in 1.47s

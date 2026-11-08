@@ -1,0 +1,212 @@
+{
+  "status": "pass-V191-frozen-baseline-native-CUDA-parity-head-gradients-and-restoration",
+  "owner": {
+    "pid": 1351590,
+    "created": 1794158383.86
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-admission-v1/plan-v1.json",
+    "sha256": "14dc4b36f21eda2aab924aebc34434860eed995232cb21bdc87ae4367617e555"
+  },
+  "parities": [
+    {
+      "case": "training-mesh-step1",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "dense_context_values_checked": 24640200,
+      "dense_complex_coordinates_checked": 16426800,
+      "dense_variance_values_checked": 8213400,
+      "dense_context_maximum_CPU_GPU_difference": 7.275957614183426e-12,
+      "dense_coefficient_maximum_CPU_GPU_difference": 1.1368683772161603e-13,
+      "nonzero_head_values": 3145728,
+      "nonzero_head_maximum_CPU_GPU_difference": 6.984919309616089e-10
+    },
+    {
+      "case": "training-photo-step2",
+      "native_output_values": 786432,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "dense_context_values_checked": 7605000,
+      "dense_complex_coordinates_checked": 5070000,
+      "dense_variance_values_checked": 2535000,
+      "dense_context_maximum_CPU_GPU_difference": 0.0,
+      "dense_coefficient_maximum_CPU_GPU_difference": 0.0,
+      "nonzero_head_values": 786432,
+      "nonzero_head_maximum_CPU_GPU_difference": 5.820766091346741e-10
+    },
+    {
+      "case": "training-mixed-step4",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "dense_context_values_checked": 24640200,
+      "dense_complex_coordinates_checked": 16426800,
+      "dense_variance_values_checked": 8213400,
+      "dense_context_maximum_CPU_GPU_difference": 1.1641532182693481e-10,
+      "dense_coefficient_maximum_CPU_GPU_difference": 2.9103830456733704e-11,
+      "nonzero_head_values": 3145728,
+      "nonzero_head_maximum_CPU_GPU_difference": 1.862645149230957e-09
+    },
+    {
+      "case": "training-flat-step8",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "dense_context_values_checked": 24640200,
+      "dense_complex_coordinates_checked": 16426800,
+      "dense_variance_values_checked": 8213400,
+      "dense_context_maximum_CPU_GPU_difference": 0.0,
+      "dense_coefficient_maximum_CPU_GPU_difference": 1.4210854715202004e-14,
+      "nonzero_head_values": 3145728,
+      "nonzero_head_maximum_CPU_GPU_difference": 1.3969838619232178e-09
+    },
+    {
+      "case": "training-ADC-step3",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": false
+    },
+    {
+      "case": "main-overcast-sky",
+      "native_output_values": 786432,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "dense_context_values_checked": 6160050,
+      "dense_complex_coordinates_checked": 4106700,
+      "dense_variance_values_checked": 2053350,
+      "dense_context_maximum_CPU_GPU_difference": 0.0,
+      "dense_coefficient_maximum_CPU_GPU_difference": 0.0,
+      "nonzero_head_values": 786432,
+      "nonzero_head_maximum_CPU_GPU_difference": 6.984919309616089e-10
+    },
+    {
+      "case": "mesh-nominal",
+      "native_output_values": 1769472,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "dense_context_values_checked": 12852450,
+      "dense_complex_coordinates_checked": 8568300,
+      "dense_variance_values_checked": 4284150,
+      "dense_context_maximum_CPU_GPU_difference": 0.0,
+      "dense_coefficient_maximum_CPU_GPU_difference": 0.0,
+      "nonzero_head_values": 1769472,
+      "nonzero_head_maximum_CPU_GPU_difference": 7.450580596923828e-09
+    }
+  ],
+  "records": [
+    {
+      "update": 1,
+      "domain": "mesh",
+      "case": "training-mesh-step1",
+      "loss": 2.08844256401062,
+      "terms": {
+        "pixel": 0.024134930223226547,
+        "gradient": 0.009610636159777641,
+        "local_regret": 2.800287984427996e-05,
+        "DC_regret": 2.255181016153074e-06,
+        "flat_anchor": 0.04427456110715866,
+        "pair_difference": 0.24720732867717743,
+        "pair_common": 0.10689764469861984,
+        "flat_spatial": 0.15718983113765717,
+        "coherent_response": 0.3642869293689728
+      },
+      "independent_nine_term_FP32_total_exact": true,
+      "mask_pixels": 771129,
+      "gradient_norm": 2.500765323638916,
+      "nonzero_gradient_coordinates": {
+        "context.weight": 0,
+        "context.bias": 0,
+        "mixing.weight": 192,
+        "mixing.bias": 10
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 1.0251998901367188e-05,
+      "parameter_gradient_coordinates": 508,
+      "EMA_decay": 0.18181818181818182,
+      "Adam_clocks": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          1.0
+        ]
+      },
+      "inherited_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+      "model_hash": "45909cbb105378d583493e9b753547f54564cb32958d9a9b34df354bacf75f41",
+      "counts": {
+        "wrapper": 15,
+        "frozen": 15,
+        "network": 13,
+        "sampler": 65,
+        "projection": 13
+      }
+    },
+    {
+      "update": 2,
+      "domain": "mixed",
+      "case": "training-mixed-step4",
+      "loss": 0.10672777891159058,
+      "terms": {
+        "pixel": 0.024104397743940353,
+        "gradient": 0.00979386642575264,
+        "local_regret": 0.0009287502616643906,
+        "DC_regret": 1.6247980965999886e-05,
+        "flat_anchor": 0.056950654834508896,
+        "pair_difference": 0.0,
+        "pair_common": 0.0,
+        "flat_spatial": 0.25996899604797363,
+        "coherent_response": 0.0
+      },
+      "independent_nine_term_FP32_total_exact": true,
+      "mask_pixels": 957167,
+      "gradient_norm": 5.279537200927734,
+      "nonzero_gradient_coordinates": {
+        "context.weight": 288,
+        "context.bias": 16,
+        "mixing.weight": 192,
+        "mixing.bias": 12
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 7.033348083496094e-06,
+      "parameter_gradient_coordinates": 508,
+      "EMA_decay": 0.25,
+      "Adam_clocks": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          2.0
+        ]
+      },
+      "inherited_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+      "model_hash": "a5a54a9ba49850d30984d9fdaedf4a5948ea23b2dc4a3075a85c2c08664c6e17",
+      "counts": {
+        "wrapper": 16,
+        "frozen": 16,
+        "network": 14,
+        "sampler": 70,
+        "projection": 14
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-admission-v1/artifacts/probe-step1.pt",
+      "sha256": "91e04f54414df5e8d62c9ceb257ba979779f8ea220c36e9f7377d3c36334e2d5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-admission-v1/artifacts/probe-step2.pt",
+      "sha256": "16857bf834e64c5a2d5bfb20c21ef87fc9ac5fa3f49ef07ccf05d66761497e2f"
+    }
+  ],
+  "counts": {
+    "wrapper": 16,
+    "frozen": 16,
+    "network": 14,
+    "sampler": 70,
+    "projection": 14
+  },
+  "peak_CUDA_allocated_bytes": 6692874240,
+  "inherited189_tensors_unchanged": true,
+  "new_source_noise_draws": 0,
+  "parent_DINO_calls": 0,
+  "protected_optimizer_inputs": 0,
+  "scope": "New103rdneural source measures all eligible principal-band frequencies in overlapping65packedHann windows/stride32,with33/17support on the same65FFTgrid andpatchcenters. Same508parameter18to16to12mixer/193state/189frozenV183EMA/initialhash. Dense coefficients retain cameraRGBunits,shared complex weights,Hermitian symmetrization andfour-subpixel weightedOLA; no second sigma scaling. Frozen matching unchanged. Seven exact initial baselines,six full measurement andnonzerohead CPU/GPU parities,all508gradient coordinates over two actualmesh/mixed updates,true model/Adam/EMA/CPU-CUDA RNGrestore without prefixreplay. Same nine losses/masks/domainweights;protectedsky/cab inference-only,neveroptimization. No confidence/safe-flat/quality/speed claim. No newsource/noise,original/dataz/RAWdecode/parent-DINOinference. Probes never initialize training. All102olderneural files/evidence preserved; newlocalforecast.025GiB above40GiBfloor,52GiBlaunchRAM/32GiBruntimeRAM/24GiBCUDAquota;externalread-only."
+}
