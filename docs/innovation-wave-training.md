@@ -1,0 +1,17 @@
+# Matched RAW/innovation training above V195 (V197)
+
+**Training is running; image quality is not yet established.** The new architecture has passed [CPU/GPU admission and strict checkpoint inspection](innovation-wave-readout.md). The [input-selection diagnostic](innovation-frequency-selection.md) motivates targeting a missing direction through RAW-minus-current-output measurements. Current usable model choices remain [V195 Whole EMA and V187 EMA](current-model.md).
+
+Both arms add a fresh 508-parameter head above the same frozen, trained V195 Whole EMA anchor. They start with identical 197-tensor full state, zero final output, fresh Adam/EMA clocks zero, and seed `202611080197`. The 193 anchor tensors include the prior V187 900-update wave stage followed by the additional V195 900-update stage; the new head's history is separate.
+
+The RAW control and innovation variant share eight selected frequencies, native band 1/64…1/3, 65/33/17px packed measurement contexts, support strides, architecture and parameter count. The field changes both frequency selection and local wave/support measurements together. Supplied RAW variance provides nominal units for the correlated innovation; it is not innovation-noise calibration.
+
+Each arm uses the same 1,000 cached batches: 900 noisy updates, 3,600 images and 100 ADC skips. The LR schedule, AdamW weight decay, gradient clipping, domain weights and V195 Whole objective are identical. All previous losses and clean-target masks remain, including actual flat spatial-error terms and total coherent-response coefficient 0.50. Targets enter only after inference. Both GFX families, JPEGs and siblings stay outside training.
+
+Each arm saves compact checkpoints at rows 8, 250, 500, 750 and 1,000, binding frozen anchor tensors to the checked export. A real model/Adam/EMA/CPU-CUDA RNG restore after row eight continues at row nine without repeating the prefix. A registered controller runs RAW then innovation sequentially and invokes the independently frozen full training audit. It polls actual PID plus process creation time, and never restarts work because observation expires.
+
+At the recorded 2026-11-08 14:16 PST inspection, controller PID1731086/create1794176145.15 and RAW worker PID1731095/create1794176145.22 were live. RAW had reached row 40 / 36 updates and passed the row-eight restoration. This is a timestamped observation; [source-bound preparation and launch evidence](results/v197-innovation-wave-training-prepared-v1.json) and private live status files are authoritative for later progress.
+
+The planned quality evaluation covers all four raw/EMA endpoints on the same 822-case design, including actual absent/blank/quiet/fresh-flat errors, natural-photo detail and both standing GFX scenes. Improved-model reports must include at least two native 100% noisy/restored/GT triplets, identical coordinates and transforms, checkpoint/noise/exposure metadata, and correctly labeled independent real references. New training capacity and duration are confounded versus the anchor; the matched RAW/innovation comparison tests the measurement arm. Training loss and admission checks establish no image-quality gain.
+
+The trial budgets **2 GiB total new local output**, reserves 40 GiB free, writes nothing to external storage and reuses existing immutable data in place. It creates no new parent/DINO predictions, noise draws, source images or RAW decodes, and does not access originals or unavailable `/mnt/dataz`.

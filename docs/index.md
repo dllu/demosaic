@@ -2,6 +2,8 @@
 
 **Current wave choices:** [V195 Whole EMA](directional-response-comparison.md) provides more measured mesh response; [V187 EMA](pooled-phase-wave-comparison.md) is quieter. The difficult real fine mesh and flat-field mottle remain unresolved. V120 Small remains the general recommendation.
 
+Current development: [V196 innovation selection](innovation-frequency-selection.md) reaches the missing coarse direction on one reused synthetic example; this is measurement geometry, not restored quality. The [V197 fresh-head RAW/innovation trial](innovation-wave-training.md) has passed engineering admission and is training above frozen V195 Whole EMA. Current quality recommendations remain unchanged.
+
 See [storage maintenance](storage.md) for cache cleanup, verified consolidation
 of duplicate historical artifacts, and preservation of experiment paths/evidence.
 
