@@ -1,0 +1,1978 @@
+{
+  "status": "completed-V178-CPU-preparation-untrained-CUDA-and-quality-pending",
+  "created_local": "2026-11-07T19:42:56.213253-08:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-preparation-v1/plan-v1.json",
+    "sha256": "9eaef7f7bb2fd3af0444abc86a62be4a81610b5974707c5d97738839aec1f52b",
+    "contents": {
+      "status": "fixed-CPU-only-native-feature-and-strict-load-preparation",
+      "created_unix_UTC": 1794109048.411023,
+      "V175_live_plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/plan-v1.json",
+        "sha256": "fd297555af23e0affc0a5788b90f0657f81139d116b600983e3747361dea1840"
+      },
+      "cases": [
+        {
+          "id": "training-mesh-step1",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v1/training-batches/step-0001-inputs.npz",
+            "sha256": "2b3e5f6724dd127edc4b142203e834f77aa2f490473ee02fbd933d69f1f10458"
+          },
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "training-photo-step2",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/paired-response-data-inspection-v1/step-0002-inputs.npz",
+            "sha256": "0f223f318be216ba89b032a3c70ed93e13cde4e1584bef4c7398e20a7ce40652"
+          },
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "training-mixed-step4",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/V160-paired-response-v1/training-batches/step-0004-inputs.npz",
+            "sha256": "b4df8bcd0ecf54a7474d78432a3bfc6d4574ffe4ed21efa070e29dcd5775b97f"
+          },
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "training-flat-step8",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/V160-paired-response-v1/training-batches/step-0008-inputs.npz",
+            "sha256": "62e90d6b881787f63a40a9382377cf88a073e3c9bc2c1c48d27670e38ca48ebd"
+          },
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "main-overcast-sky",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+            "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+          },
+          "scope": "Protected cached RAW feature geometry only;no GT/reference/parent read or quality score."
+        },
+        {
+          "id": "mesh-nominal",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "scope": "Protected cached RAW feature geometry only;no GT/reference/parent read or quality score."
+        }
+      ],
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/quality-20261107/V172-local-noise-matching-v1/checkpoints/step1000.pt",
+        "sha256": "d56becdb999f29860e30ac8c89c873958bc3c82f750e855f21cb9864b10b3869"
+      },
+      "sources": [
+        {
+          "path": "/home/dllu/proj/demosaic/src/demosaic/late_phase_evidence_matching.py",
+          "sha256": "f6b4d414e0eaa6ecc1f508346231b7f643c1ae81b4f9807838eec0197433b53f",
+          "text": "\"\"\"Expose separately measured RAW frequency evidence to local-unit matching.\n\nExperimental variant; initialization/CPU checks do not establish trained quality\nor noisy-flat safety. No target, clean template or paired metadata enters forward.\n\"\"\"\n\nimport math\n\nimport torch\nfrom torch import nn\nfrom torch.nn import functional as F\n\nfrom .late_local_noise_matching import LateLocalNoiseMatchingDetail, local_noise_features\nfrom .nonlocal_autograd import enable_sampler_autograd\nfrom .precision import ieee_fp32\n\n\ndef _green_spectra(packed, variance, green):\n    \"\"\"Hann/weighted-affine FFT and complete conditional coefficient variance.\"\"\"\n    _batch, _, height, width = packed.shape\n    index = green[:, :, None, None].expand(-1, -1, height, width)\n    # Subtraction makes exactly constant phase inputs exactly zero before fitting.\n    values = packed.gather(1, index)\n    values = values - values[..., :1, :1]\n    noise = variance.clamp_min(0).gather(1, index)\n    device, dtype = packed.device, packed.dtype\n    y, x = torch.meshgrid(\n        torch.linspace(-1, 1, height, device=device, dtype=dtype),\n        torch.linspace(-1, 1, width, device=device, dtype=dtype),\n        indexing=\"ij\",\n    )\n    basis = torch.stack((torch.ones_like(x), x, y), -1)\n    window = (\n        torch.hann_window(height, periodic=False, device=device, dtype=dtype)[:, None]\n        * torch.hann_window(width, periodic=False, device=device, dtype=dtype)[None, :]\n    )\n    gram = torch.einsum(\"hwi,hwj,hw->ij\", basis, basis, window.square())\n    inverse = torch.linalg.inv(gram)\n    beta = torch.einsum(\"nphw,hwi,hw->npi\", values, basis, window.square()) @ inverse\n    spectrum = torch.fft.fft2(\n        window * (values - torch.einsum(\"npi,hwi->nphw\", beta, basis)), norm=\"ortho\"\n    )\n    transformed = torch.fft.fft2(window[..., None] * basis, dim=(0, 1), norm=\"ortho\")\n    h = transformed @ inverse.to(transformed.dtype)\n    cross = torch.fft.fft2((noise * window.pow(3))[..., None] * basis, dim=(-3, -2), norm=\"ortho\")\n    covariance = torch.einsum(\"hwi,hwj,nphw->npij\", basis, basis, noise * window.pow(4))\n    propagated = (\n        (noise * window.square()).mean((-2, -1))[..., None, None]\n        - 2 * (h.conj() * cross).sum(-1).real\n        + torch.einsum(\"hwi,npij,hwj->nphw\", h, covariance.to(h.dtype), h.conj()).real\n    )\n    return spectrum, propagated.clamp_min(0)\n\n\ndef phase_evidence_maps(packed, variance, colors, *, peaks=4):\n    \"\"\"Return 10 channels for each of K selected peaks in each green direction.\n\n    Channels are transported real/imaginary coefficients of A and B (asinh\n    Fourier-noise units), log1p power A/B, bounded signed real/imaginary cross\n    evidence, and native fx/fy times continuous total-power strength. Selection\n    uses A only; B cannot alter its frequency or rank. Both directions reuse the\n    observations and are not independent tests. No hard detection gate is used.\n\n    Principal-band transport does not resolve all native aliases. Full-context\n    waves are features only; spatial localization must be learned and evaluated.\n    A one-DN16-squared Fourier-variance floor provides finite ADC arithmetic,\n    not statistical calibration. Exactly constant phase inputs yield zero maps.\n    \"\"\"\n    if (\n        packed.ndim != 4\n        or packed.shape[1] != 4\n        or variance.shape != packed.shape\n        or packed.shape[0] < 1\n        or min(packed.shape[-2:]) < 8\n        or max(packed.shape[-2:]) > 512\n        or packed.dtype not in (torch.float32, torch.float64)\n        or variance.dtype != packed.dtype\n        or variance.device != packed.device\n        or type(peaks) is not int\n        or not 1 <= peaks <= 8\n    ):\n        raise ValueError(\"Expected finite matching FP32/FP64 Nx4xHxW,axes8..512,peaks1..8\")\n    batch, _, height, width = packed.shape\n    if colors.ndim == 1:\n        colors = colors[None].expand(batch, -1)\n    colors = colors.to(device=packed.device)\n    allowed = torch.tensor(\n        [[0, 1, 1, 2], [2, 1, 1, 0], [1, 0, 2, 1], [1, 2, 0, 1]], device=packed.device\n    )\n    if colors.shape != (batch, 4) or not bool((colors[:, None] == allowed).all(-1).any(-1).all()):\n        raise ValueError(\"Expected standard Bayer layouts aligned with the batch\")\n    if not bool(torch.isfinite(packed).all() & torch.isfinite(variance).all()):\n        raise ValueError(\"Expected finite RAW and variance\")\n    green = torch.where(colors == 1)[1].reshape(batch, 2)\n    with torch.autocast(packed.device.type, enabled=False), ieee_fp32():\n        spectra, noise = _green_spectra(packed, variance, green)\n        noise = noise.clamp_min((1 / 65535) ** 2)\n        fy = torch.fft.fftfreq(height, device=packed.device, dtype=packed.dtype) / 2\n        fx = torch.fft.fftfreq(width, device=packed.device, dtype=packed.dtype) / 2\n        radius = torch.hypot(fy[:, None], fx[None, :])\n        eligible = (radius >= 1 / 16) & (radius <= 1 / 3)\n        eligible &= (fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0))\n        yy, xx = torch.meshgrid(\n            torch.arange(height, device=packed.device),\n            torch.arange(width, device=packed.device),\n            indexing=\"ij\",\n        )\n        carrier_period = math.lcm(height, width)\n        batch_index = torch.arange(batch, device=packed.device)\n        features, bins, powers, agreements, validity = [], [], [], [], []\n        for a, b in [(0, 1), (1, 0)]:\n            available = eligible[None].expand(batch, -1, -1).clone()\n            power_a = spectra[:, a].abs().square() / noise[:, a]\n            direction_bins, direction_power, direction_cross, direction_valid = [], [], [], []\n            for _ in range(peaks):\n                scores = power_a.masked_fill(~available, -torch.inf).flatten(1)\n                maximum, flat = scores.max(1)\n                valid = torch.isfinite(maximum)\n                y, x = flat // width, flat % width\n                f_y, f_x = fy[y], fx[x]\n                coefficients = []\n                for phase in [a, b]:\n                    z = spectra[batch_index, phase, y, x] / noise[batch_index, phase, y, x].sqrt()\n                    index = green[:, phase]\n                    offset = 2 * math.pi * (f_y * (index // 2) + f_x * (index % 2))\n                    coefficients.append(z * torch.polar(torch.ones_like(offset), -offset))\n                first, second = coefficients\n                p_a, p_b = first.abs().square(), second.abs().square()\n                cross = first * second.conj() / ((1 + p_a) * (1 + p_b)).sqrt()\n                # Integer FFT-bin phase is exactly periodic. Reduce it before\n                # radians to avoid FP32 large-angle error at zero crossings.\n                ky = torch.where(y <= (height - 1) // 2, y, y - height)\n                kx = torch.where(x <= (width - 1) // 2, x, x - width)\n                phase = (\n                    ky[:, None, None] * yy * (carrier_period // height)\n                    + kx[:, None, None] * xx * (carrier_period // width)\n                ).remainder(carrier_period)\n                phase = torch.where(phase > carrier_period // 2, phase - carrier_period, phase)\n                angle = phase.to(packed.dtype) * (2 * math.pi / carrier_period)\n                carrier = torch.polar(torch.ones_like(angle), angle)\n                first_wave, second_wave = (\n                    first[:, None, None] * carrier,\n                    second[:, None, None] * carrier,\n                )\n                strength = (p_a + p_b) / (1 + p_a + p_b)\n                constants = torch.stack(\n                    (\n                        p_a.log1p(),\n                        p_b.log1p(),\n                        cross.real,\n                        cross.imag,\n                        f_x * strength,\n                        f_y * strength,\n                    ),\n                    1,\n                )[:, :, None, None].expand(-1, -1, height, width)\n                maps = torch.cat(\n                    (\n                        torch.stack(\n                            (\n                                first_wave.real.asinh(),\n                                first_wave.imag.asinh(),\n                                second_wave.real.asinh(),\n                                second_wave.imag.asinh(),\n                            ),\n                            1,\n                        ),\n                        constants,\n                    ),\n                    1,\n                )\n                features.append(\n                    torch.where(valid[:, None, None, None], maps, torch.zeros_like(maps))\n                )\n                direction_bins.append(torch.stack((y, x), -1))\n                direction_power.append(torch.stack((p_a, p_b), -1))\n                direction_cross.append(torch.stack((cross.real, cross.imag), -1))\n                direction_valid.append(valid)\n                # Suppression depends on the A-selected indices only.\n                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:\n                    for dy in [-1, 0, 1]:\n                        for dx in [-1, 0, 1]:\n                            available[batch_index, (cy + dy) % height, (cx + dx) % width] = False\n            bins.append(torch.stack(direction_bins, 1))\n            powers.append(torch.stack(direction_power, 1))\n            agreements.append(torch.stack(direction_cross, 1))\n            validity.append(torch.stack(direction_valid, 1))\n        return torch.cat(features, 1), {\n            \"green_phase_indices\": green,\n            \"bin_yx\": torch.stack(bins, 1),\n            \"nominal_power\": torch.stack(powers, 1),\n            \"bounded_cross\": torch.stack(agreements, 1),\n            \"valid\": torch.stack(validity, 1),\n        }\n\n\nclass LatePhaseEvidenceMatchingDetail(LateLocalNoiseMatchingDetail):\n    \"\"\"Zero adapter adds 80 measured-wave coordinates to 39 matching features.\n\n    The existing matching network and frozen V169 component are inherited. At\n    zero adapter weights the added coordinates contribute zero; real CUDA parity\n    and training/quality admission remain necessary. No hard spectral support or\n    direct wave-to-RGB output is added. Local zero variance retains the frozen\n    component exactly, including mixed noisy/ADC cells.\n    \"\"\"\n\n    def __init__(self, width=16, max_search=9.0, evidence_peaks=4):\n        if type(evidence_peaks) is not int or not 1 <= evidence_peaks <= 8:\n            raise ValueError(\"Expected evidence_peaks1..8\")\n        super().__init__(width, max_search)\n        self.evidence_peaks = evidence_peaks\n        with torch.random.fork_rng(devices=[]):\n            torch.set_rng_state(torch.Generator(device=\"cpu\").manual_seed(17801).get_state())\n            self.phase_evidence_in = nn.Conv2d(20 * evidence_peaks, 39, 1, bias=False, device=\"cpu\")\n        nn.init.zeros_(self.phase_evidence_in.weight)\n\n    def initialize_from_local_matching(self, state):\n        \"\"\"Strict old-component load; new adapter is zero, optimizer is separate.\"\"\"\n        expected = set(self.state_dict()) - {\"phase_evidence_in.weight\"}\n        if set(state) != expected:\n            raise ValueError(\"Expected exactly the local-noise matching component tensors\")\n        with torch.no_grad():\n            self.phase_evidence_in.weight.zero_()\n        self.load_state_dict(\n            dict(\n                state,\n                **{\"phase_evidence_in.weight\": self.phase_evidence_in.weight.detach().clone()},\n            ),\n            strict=True,\n        )\n        return self\n\n    def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):\n        with torch.autocast(base.device.type, enabled=False), ieee_fp32():\n            with torch.no_grad():\n                restored = self.frozen(base, packed, variance, colors, wb)\n                features, sigma = local_noise_features(restored, packed, variance, colors, wb)\n            evaluated = bool(torch.any(sigma > 0))\n            evidence_aux = None\n            if evaluated:\n                with torch.no_grad():\n                    evidence, evidence_aux = phase_evidence_maps(\n                        packed.float(), variance.float(), colors, peaks=self.evidence_peaks\n                    )\n                features = features + self.phase_evidence_in(evidence)\n                if torch.is_grad_enabled():\n                    enable_sampler_autograd()\n                correction = F.pixel_shuffle(self.network(features), 2) * sigma\n                output = torch.where(sigma > 0, restored + correction, restored)\n            else:\n                correction = torch.zeros_like(restored)\n                output = restored\n            if return_aux:\n                return output, {\n                    \"frozen_output\": restored,\n                    \"correction\": correction,\n                    \"sigma\": sigma,\n                    \"matching_evaluated\": evaluated,\n                    \"phase_evidence\": evidence_aux,\n                }\n            return output\n"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/tests/test_late_phase_evidence_matching.py",
+          "sha256": "55298bc5f6c6e56db609916858a982d3b89891cef777c2ba2ec2c24f1822183d",
+          "text": "\"\"\"Independent feature coordinates,strict initialization and real gradient routing.\"\"\"\n\nimport numpy as np\nimport pytest\nimport torch\nfrom green_phase_spectrum import tapered_spectrum\nfrom phase_frequency_holdout import describe_phase_holdout\nfrom torch import nn\n\nfrom demosaic.cfa import color_indices\nfrom demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail\nfrom demosaic.late_phase_evidence_matching import (\n    LatePhaseEvidenceMatchingDetail,\n    phase_evidence_maps,\n)\n\n\ndef fixture(pattern=\"RGGB\", dtype=torch.float64):\n    rng = np.random.default_rng(17801)\n    raw = rng.normal(0.02, 0.001, (1, 4, 24, 32))\n    y, x = np.indices(raw.shape[-2:])\n    for phase in range(4):\n        raw[0, phase] += 0.002 * np.cos(\n            2 * np.pi * (5 * (2 * x + phase % 2) / 64 + 4 * (2 * y + phase // 2) / 48) + 0.3\n        )\n    variance = rng.uniform(1e-6, 3e-6, raw.shape)\n    return (\n        torch.tensor(raw, dtype=dtype),\n        torch.tensor(variance, dtype=dtype),\n        color_indices(pattern),\n    )\n\n\ndef independent_maps(raw, variance, colors, count):\n    raw, variance, colors = raw.numpy()[0], variance.numpy()[0], colors.numpy()\n    selection = describe_phase_holdout(raw, variance, colors, count=count)\n    fields = {int(i): tapered_spectrum(raw[i], variance[i]) for i in np.flatnonzero(colors == 1)}\n    height, width = raw.shape[-2:]\n    y, x = np.indices((height, width))\n    maps = []\n    for direction in selection:\n        coefficients = []\n        for peak in direction[\"peaks\"]:\n            ky, kx = peak[\"bin_yx\"]\n            fx, fy = peak[\"principal_native_fxy\"]\n            for key in [\"selection_phase\", \"other_phase\"]:\n                p = direction[key]\n                field = fields[p]\n                coefficients.append(\n                    field[\"spectrum\"][ky, kx]\n                    / np.sqrt(field[\"noise_variance\"][ky, kx])\n                    * np.exp(-2j * np.pi * (fy * (p // 2) + fx * (p % 2)))\n                )\n            a, b = coefficients[-2:]\n            pa, pb = abs(a) ** 2, abs(b) ** 2\n            carrier = np.exp(4j * np.pi * (fy * y + fx * x))\n            wa, wb = a * carrier, b * carrier\n            cross = a * np.conj(b) / np.sqrt((1 + pa) * (1 + pb))\n            strength = (pa + pb) / (1 + pa + pb)\n            constants = [\n                np.log1p(pa),\n                np.log1p(pb),\n                cross.real,\n                cross.imag,\n                fx * strength,\n                fy * strength,\n            ]\n            maps.extend(\n                [np.arcsinh(wa.real), np.arcsinh(wa.imag), np.arcsinh(wb.real), np.arcsinh(wb.imag)]\n                + [np.full((height, width), v) for v in constants]\n            )\n    return np.stack(maps)[None], selection\n\n\n@pytest.mark.parametrize(\"pattern\", [\"RGGB\", \"BGGR\", \"GRBG\", \"GBRG\"])\n@pytest.mark.parametrize(\"dtype\", [torch.float32, torch.float64])\ndef test_all_feature_channels_match_independent_numpy(pattern, dtype):\n    raw, variance, colors = fixture(pattern, dtype)\n    actual, aux = phase_evidence_maps(raw, variance, colors)\n    expected, selections = independent_maps(raw.double(), variance.double(), colors, 4)\n    tolerance = 3e-5 if dtype == torch.float32 else 3e-12\n    np.testing.assert_allclose(actual.numpy(), expected, rtol=tolerance, atol=tolerance)\n    assert aux[\"bin_yx\"].tolist()[0] == [[p[\"bin_yx\"] for p in d[\"peaks\"]] for d in selections]\n    assert aux[\"valid\"].all()\n\n\ndef test_changing_measured_phase_cannot_change_selecting_phase_bins_or_power():\n    raw, variance, colors = fixture()\n    _, before = phase_evidence_maps(raw, variance, colors)\n    changed = raw.clone()\n    noise = variance.clone()\n    changed[:, 2] = changed[:, 2].flip(-1) * 20\n    noise[:, 2] *= 17\n    _, after = phase_evidence_maps(changed, noise, colors)\n    assert torch.equal(before[\"bin_yx\"][:, 0], after[\"bin_yx\"][:, 0])\n    assert torch.equal(before[\"nominal_power\"][:, 0, :, 0], after[\"nominal_power\"][:, 0, :, 0])\n    assert not torch.equal(before[\"nominal_power\"][:, 0, :, 1], after[\"nominal_power\"][:, 0, :, 1])\n\n\ndef test_constant_phases_zero_features_and_finite_ADC_floor():\n    raw = torch.arange(4, dtype=torch.float32)[None, :, None, None].expand(1, 4, 16, 24).clone()\n    features, _ = phase_evidence_maps(raw, torch.zeros_like(raw), color_indices(\"RGGB\"))\n    assert features.count_nonzero() == 0 and torch.isfinite(features).all()\n    raw, _, colors = fixture(dtype=torch.float32)\n    features, _ = phase_evidence_maps(raw, torch.zeros_like(raw), colors)\n    assert torch.isfinite(features).all()\n\n\ndef test_small_axis_exhausted_peak_slots_are_zero_and_marked():\n    raw = torch.arange(4, dtype=torch.float64)[None, :, None, None].expand(1, 4, 8, 8).clone()\n    features, aux = phase_evidence_maps(raw, torch.ones_like(raw), color_indices(\"GBRG\"), peaks=8)\n    assert features.shape == (1, 160, 8, 8)\n    assert (~aux[\"valid\"]).any()\n    for d in range(2):\n        for p in range(8):\n            if not aux[\"valid\"][0, d, p]:\n                assert features[0, 10 * (8 * d + p) : 10 * (8 * d + p + 1)].count_nonzero() == 0\n\n\ndef test_mixed_layout_batch_matches_separate_calls():\n    a, va, ca = fixture(\"RGGB\")\n    b, vb, cb = fixture(\"GBRG\")\n    batch, aux = phase_evidence_maps(torch.cat([a, b]), torch.cat([va, vb]), torch.stack([ca, cb]))\n    first, _ = phase_evidence_maps(a, va, ca)\n    second, _ = phase_evidence_maps(b, vb, cb)\n    torch.testing.assert_close(batch, torch.cat([first, second]), rtol=1e-12, atol=1e-12)\n    assert aux[\"green_phase_indices\"].tolist() == [[1, 2], [0, 3]]\n\n\nclass FrozenFixture(nn.Module):\n    def forward(self, base, packed, variance, colors, wb):\n        return base * 0.75\n\n\nclass MatchingFixture(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.weight = nn.Parameter(\n            torch.arange(12 * 39, dtype=torch.float32).reshape(12, 39, 1, 1) / 1000\n        )\n        self.calls = 0\n\n    def forward(self, features):\n        self.calls += 1\n        return torch.nn.functional.conv2d(features, self.weight)\n\n\ndef matched_fixtures(monkeypatch):\n    pytest.importorskip(\"einops\")\n    monkeypatch.setattr(\"demosaic.late_local_noise_matching.enable_sampler_autograd\", lambda: None)\n    monkeypatch.setattr(\n        \"demosaic.late_phase_evidence_matching.enable_sampler_autograd\", lambda: None\n    )\n    old, new = LateLocalNoiseMatchingDetail(), LatePhaseEvidenceMatchingDetail()\n    for m in [old, new]:\n        m.frozen = FrozenFixture()\n        m.network = MatchingFixture()\n    return old, new\n\n\ndef test_zero_adapter_fixture_parity_and_new_gradient_can_learn(monkeypatch):\n    old, new = matched_fixtures(monkeypatch)\n    raw, variance, colors = fixture(dtype=torch.float32)\n    base = torch.full((1, 3, 48, 64), 0.02)\n    before = old(base, raw, variance, colors)\n    after, aux = new(base, raw, variance, colors, return_aux=True)\n    assert torch.equal(before.view(torch.int32), after.view(torch.int32))\n    assert aux[\"phase_evidence\"] is not None and aux[\"matching_evaluated\"]\n    loss = after.square().mean()\n    loss.backward()\n    assert torch.isfinite(new.phase_evidence_in.weight.grad).all()\n    assert new.phase_evidence_in.weight.grad.count_nonzero() > 0\n    assert new.network.weight.grad.count_nonzero() > 0\n\n\ndef test_zero_variance_bypasses_new_features_and_matching(monkeypatch):\n    _, new = matched_fixtures(monkeypatch)\n    monkeypatch.setattr(\n        \"demosaic.late_phase_evidence_matching.phase_evidence_maps\",\n        lambda *a, **kw: pytest.fail(\"ADC invoked evidence\"),\n    )\n    raw, _, colors = fixture(dtype=torch.float32)\n    base = torch.full((1, 3, 48, 64), 0.02)\n    result, aux = new(base, raw, torch.zeros_like(raw), colors, return_aux=True)\n    assert torch.equal(result.view(torch.int32), (base * 0.75).view(torch.int32))\n    assert (\n        new.network.calls == 0 and not aux[\"matching_evaluated\"] and aux[\"phase_evidence\"] is None\n    )\n\n\ndef test_mixed_noisy_ADC_cells_retain_frozen_component_after_adapter_moves(monkeypatch):\n    _, new = matched_fixtures(monkeypatch)\n    with torch.no_grad():\n        new.phase_evidence_in.weight.fill_(0.01)\n    raw, variance, colors = fixture(dtype=torch.float32)\n    variance[..., :8] = 0\n    base = torch.full((1, 3, 48, 64), 0.02)\n    result = new(base, raw, variance, colors)\n    assert torch.equal(\n        result[..., :16].view(torch.int32), (base[..., :16] * 0.75).view(torch.int32)\n    )\n    assert not torch.equal(result[..., 16:], base[..., 16:] * 0.75)\n\n\ndef test_rng_frozen_mode_and_strict_baseline_initialization():\n    pytest.importorskip(\"einops\")\n    before = torch.get_rng_state().clone()\n    old, new = LateLocalNoiseMatchingDetail(), LatePhaseEvidenceMatchingDetail()\n    assert torch.equal(before, torch.get_rng_state())\n    with torch.no_grad():\n        new.phase_evidence_in.weight.fill_(1)\n    new.initialize_from_local_matching(old.state_dict())\n    assert new.phase_evidence_in.weight.count_nonzero() == 0\n    assert new.phase_evidence_in.weight.numel() == 3120\n    for key, value in old.state_dict().items():\n        assert torch.equal(new.state_dict()[key], value)\n    new.train()\n    assert not new.frozen.training and new.network.training\n    assert not any(p.requires_grad for p in new.frozen.parameters())\n    with pytest.raises(ValueError):\n        new.initialize_from_local_matching({})\n\n\n@pytest.mark.parametrize(\"damage\", [\"shape\", \"small\", \"large\", \"layout\", \"nan\", \"dtype\", \"peaks\"])\ndef test_invalid_contract(damage):\n    raw, variance, colors = fixture()\n    peaks = 4\n    if damage == \"shape\":\n        raw = raw[:, :3]\n    elif damage == \"small\":\n        raw = raw[..., :7, :]\n        variance = variance[..., :7, :]\n    elif damage == \"large\":\n        raw = torch.zeros((1, 4, 513, 8), dtype=raw.dtype)\n        variance = raw.clone()\n    elif damage == \"layout\":\n        colors = torch.tensor([0, 0, 1, 2])\n    elif damage == \"nan\":\n        raw[0, 1, 0, 0] = torch.nan\n    elif damage == \"dtype\":\n        variance = variance.float()\n    else:\n        peaks = 0\n    with pytest.raises(ValueError):\n        phase_evidence_maps(raw, variance, colors, peaks=peaks)\n"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/scripts/green_phase_spectrum.py",
+          "sha256": "1880258616df1b589dc71953f3740cea3cb7c5e55c983a441067df770d7040b4",
+          "text": "\"\"\"NumPy diagnostics of separately measured green CFA planes, not restoration.\n\nPhase compensation describes the principal packed-grid band. Aliases can reverse\nthe signed cross-spectrum; a four-native-pixel carrier can even vanish in one\ngreen phase. Agreement is therefore neither an all-frequency signal detector\nnor a calibrated photographic confidence measure.\n\"\"\"\n\nimport numpy as np\n\n\ndef _geometry(shape):\n    height, width = shape\n    if min(shape) < 8:\n        raise ValueError(\"Spectral fields need at least eight samples per axis\")\n    y, x = np.meshgrid(np.linspace(-1, 1, height), np.linspace(-1, 1, width), indexing=\"ij\")\n    basis = np.stack((np.ones(shape), x, y), axis=-1)\n    window = np.hanning(height)[:, None] * np.hanning(width)[None, :]\n    gram = np.einsum(\"hwi,hwj,hw->ij\", basis, basis, window**2)\n    return basis, window, np.linalg.inv(gram)\n\n\ndef tapered_spectrum(image, variance=None):\n    \"\"\"Hann-taper a weighted-plane residual and propagate independent noise.\n\n    For Q=[1,x,y], W=diag(Hann), beta=(Q'W\u00b2Q)^-1 Q'W\u00b2image.\n    The Fourier operator is F W (I-Q(Q'W\u00b2Q)^-1 Q'W\u00b2). Its per-coefficient\n    noise variance includes the fitted-plane terms, not just mean input noise.\n    This is conditional linear propagation for supplied independent variances;\n    observed-signal variance proxies are not established camera-noise truth.\n    \"\"\"\n    image = np.asarray(image, dtype=np.float64)\n    if image.ndim != 2 or not np.isfinite(image).all():\n        raise ValueError(\"Expected one finite real image plane\")\n    basis, window, inverse = _geometry(image.shape)\n    beta = inverse @ np.einsum(\"hwi,hw,hw->i\", basis, window**2, image)\n    residual = window * (image - np.einsum(\"hwi,i->hw\", basis, beta))\n    spectrum = np.fft.fft2(residual, norm=\"ortho\")\n    noise = None\n    if variance is not None:\n        variance = np.asarray(variance, dtype=np.float64)\n        if variance.shape != image.shape or not np.isfinite(variance).all() or (variance < 0).any():\n            raise ValueError(\"Variance must be finite, nonnegative and match the image\")\n        # t_k = a_k - h_k (W\u00b2 Q)', with a_k the tapered Fourier row.\n        transformed_basis = np.fft.fft2(window[..., None] * basis, axes=(0, 1), norm=\"ortho\")\n        h = transformed_basis @ inverse\n        cross = np.fft.fft2((variance * window**3)[..., None] * basis, axes=(0, 1), norm=\"ortho\")\n        covariance = np.einsum(\"hwi,hwj,hw->ij\", basis, basis, variance * window**4)\n        base = float(np.mean(variance * window**2))\n        noise = (\n            base\n            - 2 * np.real(np.sum(np.conj(h) * cross, axis=-1))\n            + np.real(np.einsum(\"hwi,ij,hwj->hw\", h, covariance, np.conj(h)))\n        )\n        if np.min(noise) < -1e-10 * max(base, np.finfo(np.float64).tiny):\n            raise ArithmeticError(\"Propagated spectral noise variance became negative\")\n        noise = np.maximum(noise, 0)\n    return {\"spectrum\": spectrum, \"noise_variance\": noise, \"plane\": beta}\n\n\ndef _average3(values):\n    return sum(np.roll(values, (y, x), axis=(0, 1)) for y in (-1, 0, 1) for x in (-1, 0, 1)) / 9\n\n\ndef green_pair(packed, variance, colors):\n    \"\"\"Describe both greens on an even-origin four-phase packed RAW field.\n\n    The 3\u00d73 frequency average is not nine independent observations. Its signed\n    coherence is bounded by Cauchy-Schwarz, but is not a test probability.\n    Noise-normalized cross power has no calibrated false-discovery threshold.\n    \"\"\"\n    packed = np.asarray(packed, dtype=np.float64)\n    variance = np.asarray(variance, dtype=np.float64)\n    colors = np.asarray(colors)\n    allowed = {(0, 1, 1, 2), (2, 1, 1, 0), (1, 0, 2, 1), (1, 2, 0, 1)}\n    if (\n        packed.ndim != 3\n        or packed.shape[0] != 4\n        or variance.shape != packed.shape\n        or colors.shape != (4,)\n        or tuple(colors) not in allowed\n    ):\n        raise ValueError(\"Expected matching 4\u00d7H\u00d7W RAW/variance and a standard Bayer layout\")\n    indices = np.flatnonzero(colors == 1)\n    first, second = [tapered_spectrum(packed[i], variance[i]) for i in indices]\n    height, width = packed.shape[-2:]\n    fy = np.fft.fftfreq(height)[:, None] / 2\n    fx = np.fft.fftfreq(width)[None, :] / 2\n    y0, x0 = divmod(int(indices[0]), 2)\n    y1, x1 = divmod(int(indices[1]), 2)\n    alignment = np.exp(2j * np.pi * ((y1 - y0) * fy + (x1 - x0) * fx))\n    cross = first[\"spectrum\"] * np.conj(second[\"spectrum\"]) * alignment\n    power = np.stack([np.abs(item[\"spectrum\"]) ** 2 for item in (first, second)])\n    averaged_cross = _average3(cross)\n    averaged_power = np.stack([_average3(p) for p in power])\n    denominator = np.sqrt(averaged_power[0] * averaged_power[1])\n    coherence = np.divide(\n        averaged_cross,\n        denominator,\n        out=np.zeros_like(averaged_cross),\n        where=denominator > np.finfo(np.float64).tiny,\n    )\n    if np.max(np.abs(coherence)) > 1 + 1e-12:\n        raise ArithmeticError(\"Smoothed cross-spectrum violates Cauchy-Schwarz\")\n    noise = np.stack([item[\"noise_variance\"] for item in (first, second)])\n    averaged_noise = np.stack([_average3(v) for v in noise])\n    scale = np.sqrt(averaged_noise[0] * averaged_noise[1])\n    normalized_cross = None\n    normalized_power = None\n    if np.all(scale > 0) and np.all(averaged_noise > 0):\n        normalized_cross = np.real(averaged_cross) / scale\n        normalized_power = np.mean(averaged_power / averaged_noise, axis=0)\n    return {\n        \"green_phase_indices\": indices,\n        \"spectra\": np.stack([first[\"spectrum\"], second[\"spectrum\"]]),\n        \"noise_variance\": noise,\n        \"power\": power,\n        \"aligned_cross\": cross,\n        \"average_cross\": averaged_cross,\n        \"signed_coherence\": np.real(coherence),\n        \"complex_coherence\": coherence,\n        \"noise_units_signed_cross\": normalized_cross,\n        \"noise_units_mean_phase_power\": normalized_power,\n        \"native_fx\": np.broadcast_to(fx, (height, width)).copy(),\n        \"native_fy\": np.broadcast_to(fy, (height, width)).copy(),\n        \"removed_planes\": np.stack([first[\"plane\"], second[\"plane\"]]),\n    }\n\n\ndef cross_decomposition(packed, reference, variance, colors):\n    \"\"\"Separate reference, residual and mixed terms in observed green cross-power.\n\n    This is an algebraic diagnostic, not an independence or unbiasedness claim.\n    The residual can include added noise, ADC quantization/clipping and reference\n    mismatch. A low-noise camera estimate must not be called noiseless GT.\n    \"\"\"\n    observed = green_pair(packed, variance, colors)\n    target = green_pair(reference, variance, colors)\n    if np.shape(reference) != np.shape(packed):\n        raise ValueError(\"Reference must match packed observation geometry\")\n    signal = target[\"spectra\"]\n    residual = observed[\"spectra\"] - signal\n    first, second = observed[\"green_phase_indices\"]\n    y0, x0 = divmod(int(first), 2)\n    y1, x1 = divmod(int(second), 2)\n    alignment = np.exp(\n        2j * np.pi * ((y1 - y0) * observed[\"native_fy\"] + (x1 - x0) * observed[\"native_fx\"])\n    )\n    products = {\n        \"reference\": signal[0] * np.conj(signal[1]),\n        \"residual\": residual[0] * np.conj(residual[1]),\n        \"mixed\": signal[0] * np.conj(residual[1]) + residual[0] * np.conj(signal[1]),\n    }\n    cross = {name: _average3(value * alignment) for name, value in products.items()}\n    total = sum(cross.values())\n    scale = max(float(np.max(np.abs(observed[\"average_cross\"]))), np.finfo(float).tiny)\n    if np.max(np.abs(total - observed[\"average_cross\"])) > 64 * np.finfo(float).eps * scale:\n        raise ArithmeticError(\"Reference/residual/mixed cross-power identity failed\")\n    noise_scale = np.sqrt(\n        np.prod(np.stack([_average3(v) for v in observed[\"noise_variance\"]]), axis=0)\n    )\n    normalized = None\n    if np.all(noise_scale > 0):\n        normalized = {name: value.real / noise_scale for name, value in cross.items()}\n    return {\n        \"observed\": observed,\n        \"reference\": target,\n        \"component_cross\": cross,\n        \"noise_units_components\": normalized,\n    }\n"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/scripts/phase_frequency_holdout.py",
+          "sha256": "36ccc741833e9f9bcc5281f74558914f92e38a01a0112310e1e27e945f80381c",
+          "text": "\"\"\"Select frequencies in one green CFA phase and describe the other phase.\n\nThis within-image sample split is not an unseen-image validation set. Supplied\nnoisy variance proxies and fitted nuisance affect the statistics; no threshold\nis calibrated here. The principal packed band has unresolved native aliases.\n\"\"\"\n\nimport numpy as np\nfrom green_phase_spectrum import tapered_spectrum\n\n\ndef select_phase_frequencies(spectrum, noise_variance, *, count=4):\n    \"\"\"Rank one phase only, suppressing nearby/conjugate bins after each pick.\"\"\"\n    spectrum = np.asarray(spectrum)\n    noise_variance = np.asarray(noise_variance)\n    if (\n        spectrum.ndim != 2\n        or noise_variance.shape != spectrum.shape\n        or not np.isfinite(spectrum).all()\n        or not np.isfinite(noise_variance).all()\n        or (noise_variance <= 0).any()\n        or not isinstance(count, int)\n        or count < 1\n    ):\n        raise ValueError(\"Require finite 2D spectrum, positive matching variance and count\")\n    height, width = spectrum.shape\n    fy = np.fft.fftfreq(height)[:, None] / 2\n    fx = np.fft.fftfreq(width)[None, :] / 2\n    radius = np.hypot(fy, fx)\n    available = (radius >= 1 / 16) & (radius <= 1 / 3)\n    available &= (fy > 0) | ((fy == 0) & (fx > 0))\n    power = np.abs(spectrum) ** 2 / noise_variance\n    selected = []\n    for _ in range(count):\n        score = np.where(available, power, -np.inf)\n        flat = int(np.argmax(score))\n        if not np.isfinite(score.ravel()[flat]):\n            break\n        y, x = np.unravel_index(flat, score.shape)\n        selected.append((int(y), int(x)))\n        for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:\n            for dy in (-1, 0, 1):\n                for dx in (-1, 0, 1):\n                    available[(cy + dy) % height, (cx + dx) % width] = False\n    return selected\n\n\ndef describe_phase_holdout(packed, variance, colors, *, count=4):\n    \"\"\"Both directions of one-phase selection followed by other-phase measurement.\n\n    Each direction's bins depend on its selection phase only. Descriptive power\n    and signed principal-band phase agreement in the other phase do not affect\n    that selection. Separate physical sensor samples can have independent noise\n    under the synthetic model; real-camera independence is not established.\n    \"\"\"\n    packed = np.asarray(packed, dtype=np.float64)\n    variance = np.asarray(variance, dtype=np.float64)\n    colors = np.asarray(colors)\n    allowed = {(0, 1, 1, 2), (2, 1, 1, 0), (1, 0, 2, 1), (1, 2, 0, 1)}\n    if (\n        packed.ndim != 3\n        or packed.shape[0] != 4\n        or variance.shape != packed.shape\n        or colors.shape != (4,)\n        or tuple(colors) not in allowed\n    ):\n        raise ValueError(\"Expected matching 4xHxW RAW/variance and standard Bayer colors\")\n    green = np.flatnonzero(colors == 1)\n    phases = {int(i): tapered_spectrum(packed[i], variance[i]) for i in green}\n    fy = np.fft.fftfreq(packed.shape[-2]) / 2\n    fx = np.fft.fftfreq(packed.shape[-1]) / 2\n    output = []\n    for a, b in [(int(green[0]), int(green[1])), (int(green[1]), int(green[0]))]:\n        selection, held = phases[a], phases[b]\n        ay, ax = divmod(a, 2)\n        by, bx = divmod(b, 2)\n        peaks = []\n        for y, x in select_phase_frequencies(\n            selection[\"spectrum\"], selection[\"noise_variance\"], count=count\n        ):\n            first, second = selection[\"spectrum\"][y, x], held[\"spectrum\"][y, x]\n            first_noise = float(selection[\"noise_variance\"][y, x])\n            second_noise = float(held[\"noise_variance\"][y, x])\n            if second_noise <= 0:\n                raise ValueError(\"Other-phase propagated variance must be positive\")\n            alignment = np.exp(2j * np.pi * ((by - ay) * fy[y] + (bx - ax) * fx[x]))\n            product = first * np.conj(second) * alignment\n            amplitude_product = abs(first) * abs(second)\n            peaks.append(\n                {\n                    \"bin_yx\": [y, x],\n                    \"principal_native_fxy\": [float(fx[x]), float(fy[y])],\n                    \"selection_power\": float(abs(first) ** 2 / first_noise),\n                    \"other_phase_power\": float(abs(second) ** 2 / second_noise),\n                    \"signed_principal_phase_agreement\": (\n                        float(np.real(product) / amplitude_product)\n                        if amplitude_product > 0\n                        else 0.0\n                    ),\n                    \"selection_noise_variance\": first_noise,\n                    \"other_noise_variance\": second_noise,\n                }\n            )\n        output.append({\"selection_phase\": a, \"other_phase\": b, \"peaks\": peaks})\n    return output\n"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/src/demosaic/late_local_noise_matching.py",
+          "sha256": "fe9c31c67901c6431573b222049fec2b416803f111437fed2c6d7b2729e890e9",
+          "text": "\"\"\"Matching residual with local physical features and local output noise units.\"\"\"\n\nimport torch\nfrom torch.nn import functional as F\n\nfrom .cfa import mosaic\nfrom .late_nonlocal_residual import LateNonlocalResidualDetail\nfrom .nonlocal_autograd import enable_sampler_autograd\nfrom .precision import ieee_fp32\n\n\ndef local_noise_features(base, packed, variance, colors, wb=None):\n    \"\"\"Keep the39 input coordinates while removing image-wide statistics.\n\n    RGB is centered on its own Bayer-cell mean, which is also supplied. The\n    quartet's mean physical variance defines its input/output unit. This is an\n    amplitude convention, not calibrated post-demosaic covariance. Everything\n    here depends on one2x2 native cell and supplied camera conditioning only.\n    \"\"\"\n    batch, phases, height, width = packed.shape\n    if phases != 4 or variance.shape != packed.shape:\n        raise ValueError(\"Expected matching four-phase RAW and variance\")\n    if base.shape != (batch, 3, height * 2, width * 2):\n        raise ValueError(\"Expected aligned native camera RGB\")\n    if colors.ndim == 1:\n        colors = colors[None].expand(batch, -1)\n    if colors.shape != (batch, 4):\n        raise ValueError(\"Expected one four-phase CFA per image\")\n    if wb is None:\n        wb = base.new_ones(batch, 3)\n    wb = torch.as_tensor(wb, dtype=base.dtype, device=base.device)\n    if wb.shape == (3,):\n        wb = wb[None].expand(batch, -1)\n    if wb.shape != (batch, 3):\n        raise ValueError(\"Expected three white-balance values per image\")\n    positive = variance.clamp_min(0)\n    sigma = positive.mean(1, keepdim=True).sqrt()\n    unit = sigma.clamp_min(16 / 65535)\n    rgb = F.pixel_unshuffle(base, 2).reshape(batch, 3, 4, height, width)\n    mean = rgb.mean(2)\n    centered = (rgb - mean[:, :, None]).flatten(1, 2) / unit\n    innovation = (packed - mosaic(base, colors)) / unit\n    noise = torch.log1p(positive / unit.square())\n    layout = F.one_hot(colors, 3).flatten(1).to(base.dtype)[:, :, None, None]\n    layout = layout.expand(-1, -1, height, width)\n    balance = wb.clamp_min(1e-6).log()[:, :, None, None].expand(-1, -1, height, width)\n    condition = torch.cat((layout, (mean / unit).asinh(), balance, (unit * 65535).log()), 1)\n    features = torch.cat((centered.asinh(), innovation.asinh(), noise, condition), 1)\n    native_sigma = sigma.repeat_interleave(2, -2).repeat_interleave(2, -1)\n    return features, native_sigma\n\n\nclass LateLocalNoiseMatchingDetail(LateNonlocalResidualDetail):\n    \"\"\"V171's exact initial weights with local inputs and output amplitude.\n\n    No global mean/noise statistic enters the new feature transform. The frozen\n    V169 component and the matching network can still use spatial context.\n    Zero local supplied variance retains V169 at that cell, including mixed\n    batches. This does not guarantee safety or correct detail in noisy regions.\n    \"\"\"\n\n    def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):\n        with torch.autocast(base.device.type, enabled=False), ieee_fp32():\n            with torch.no_grad():\n                restored = self.frozen(base, packed, variance, colors, wb)\n                features, sigma = local_noise_features(restored, packed, variance, colors, wb)\n            evaluated = bool(torch.any(sigma > 0))\n            if evaluated:\n                if torch.is_grad_enabled():\n                    enable_sampler_autograd()\n                correction = F.pixel_shuffle(self.network(features), 2) * sigma\n                output = torch.where(sigma > 0, restored + correction, restored)\n            else:\n                correction = torch.zeros_like(restored)\n                output = restored\n            if return_aux:\n                return output, {\n                    \"frozen_output\": restored,\n                    \"correction\": correction,\n                    \"sigma\": sigma,\n                    \"matching_evaluated\": evaluated,\n                }\n            return output\n"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/src/demosaic/late_nonlocal_residual.py",
+          "sha256": "167268130814ddb27df9eb9abced01299687798994fb93af66620d1132ac7cf1",
+          "text": "\"\"\"Learned matching on RAW innovations and a frozen DINO-parent restoration.\n\nThis new RGB residual is trained from scratch on the project's cached free-image\nand synthetic data. It uses the pinned NLFeMF network definitions, with narrower\nfeatures and nine neighbours at each scale; released RAW weights are not loaded.\n\"\"\"\n\nimport torch\nfrom torch import nn\nfrom torch.nn import functional as F\n\nfrom .late_balanced_spatial import LateBalancedSpatialDetail\nfrom .late_spatial_rgb import SpatialRgbResidual\nfrom .nonlocal_autograd import enable_sampler_autograd\nfrom .precision import ieee_fp32\n\n\nclass LateNonlocalResidualDetail(nn.Module):\n    \"\"\"A zero-initialized RGB residual above the frozen V169 EMA component.\n\n    Only the matching network is trainable. Inputs are the supplied V143 RGB,\n    actual noisy RAW, variance, Bayer layout and white balance. The inherited\n    physical features contain no target or reference. The image noise RMS scales\n    the output, so zero supplied variance retains the frozen component exactly.\n    No noisy-flat safety or correct-detail guarantee follows from this routing.\n    \"\"\"\n\n    def __init__(self, width=16, max_search=9.0):\n        super().__init__()\n        if type(width) is not int or width < 8 or width % 4:\n            raise ValueError(\"Expected a feature width divisible by four and at least eight\")\n        if not isinstance(max_search, (int, float)) or not 0 < max_search <= 32:\n            raise ValueError(\"Expected a positive search distance at most32 packed pixels\")\n        from .nonlocal_matchfilter import SimpleBlockMatchingUNet\n\n        with torch.random.fork_rng(devices=[]):\n            torch.set_rng_state(torch.Generator(device=\"cpu\").manual_seed(17101).get_state())\n            self.frozen = LateBalancedSpatialDetail()\n            self.network = SimpleBlockMatchingUNet(\n                input_channels=39,\n                output_channels=12,\n                n_features=width,\n                neighbours={\"scale1\": [3, 3], \"scale2\": [3, 3], \"scale3\": [3, 3]},\n                max_search_dist=float(max_search),\n            )\n        nn.init.zeros_(self.network.tail.weight)\n        self.frozen.requires_grad_(False).eval()\n        self.width, self.max_search = width, float(max_search)\n\n    def load_frozen_component(self, path):\n        state = torch.load(path, map_location=\"cpu\", weights_only=True)\n        expected = {\"max_window\": 256, \"support_floor\": 0.25, \"balance_spatial\": True}\n        if state[\"component\"] != \"LateBalancedSpatialDetail\" or state[\"module_config\"] != expected:\n            raise ValueError(\"Expected the fixed balanced V169 component configuration\")\n        self.frozen.load_state_dict(state[\"state_dict\"], strict=True)\n        return self\n\n    def train(self, mode=True):\n        super().train(mode)\n        self.frozen.eval()\n        return self\n\n    def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):\n        with torch.autocast(base.device.type, enabled=False), ieee_fp32():\n            with torch.no_grad():\n                restored = self.frozen(base, packed, variance, colors, wb)\n                features, sigma = SpatialRgbResidual.features(\n                    restored, packed, variance, colors, wb\n                )\n            # ADC-only observations have no shot/read variance in this pipeline.\n            # The branch is bypassed and no new learned value reaches the result.\n            evaluated = bool(torch.any(sigma > 0))\n            if evaluated:\n                if torch.is_grad_enabled():\n                    enable_sampler_autograd()\n                correction = F.pixel_shuffle(self.network(features), 2) * sigma\n                output = restored + correction\n            else:\n                correction = torch.zeros_like(restored)\n                output = restored\n            if return_aux:\n                return output, {\n                    \"frozen_output\": restored,\n                    \"correction\": correction,\n                    \"sigma\": sigma,\n                    \"matching_evaluated\": evaluated,\n                }\n            return output\n"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/scripts/profile_phase_evidence_preparation.py",
+          "sha256": "687602e3cf9c8d27ce512ef5c1e0b94834b3f17e61732d20a1ed237092950084",
+          "text": "\"\"\"CPU-only native feature/strict-load preparation; no matching forward or training.\"\"\"\n\nimport argparse\nimport gc\nimport hashlib\nimport importlib.util\nimport json\nimport os\nimport resource\nimport shutil\nimport time\nfrom pathlib import Path\n\nimport numpy as np\nimport psutil\n\nREPO = Path(\"/home/dllu/proj/demosaic\")\nROOT = REPO / \".cache/quality-20261107/V178-phase-evidence-preparation-v1\"\n\n\ndef read(path):\n    return json.loads(Path(path).read_text())\n\n\ndef ref(path):\n    path = Path(path).absolute()\n    with path.open(\"rb\") as stream:\n        digest = hashlib.file_digest(stream, \"sha256\").hexdigest()\n    return {\"path\": str(path), \"sha256\": digest}\n\n\ndef save(path, value):\n    with Path(path).open(\"x\") as stream:\n        json.dump(value, stream, indent=2, allow_nan=False)\n        stream.write(\"\\n\")\n\n\ndef fingerprint(array):\n    return {\n        \"shape\": list(array.shape),\n        \"dtype\": array.dtype.str,\n        \"sha256\": hashlib.sha256(np.ascontiguousarray(array).tobytes()).hexdigest(),\n    }\n\n\ndef prepare():\n    assert not ROOT.exists()\n    live_path = REPO / \".cache/quality-20261107/V175-fresh-noise-matching-v2/plan-v1.json\"\n    live = read(live_path)\n    cache = read(live[\"cache\"][\"path\"])\n    design = read(live[\"design\"][\"path\"])\n    cases = []\n    for domain in [\"mesh\", \"photo\", \"mixed\", \"flat\"]:\n        row = next(\n            r\n            for r in cache[\"batches\"]\n            if r[\"metadata\"][\"domain\"] == domain\n            and any(\n                row_noise > 0\n                for key, row_noise in r[\"metadata\"][\"noise\"].items()\n                if key in [\"shot\", \"read\"]\n            )\n        )\n        cases.append(\n            {\n                \"id\": f\"training-{domain}-step{row['step']}\",\n                \"arrays\": row[\"arrays\"],\n                \"scope\": \"Retained training RAW only;targets and parents not interpreted.\",\n            }\n        )\n    for name in [\"main-overcast-sky\", \"mesh-nominal\"]:\n        row = next(r for r in design[\"observations\"] if r[\"id\"] == name)\n        cases.append(\n            {\n                \"id\": name,\n                \"arrays\": row[\"arrays\"],\n                \"scope\": \"Protected cached RAW feature geometry only;no GT/reference/parent read or quality score.\",\n            }\n        )\n    names = [\n        \"src/demosaic/late_phase_evidence_matching.py\",\n        \"tests/test_late_phase_evidence_matching.py\",\n        \"scripts/green_phase_spectrum.py\",\n        \"scripts/phase_frequency_holdout.py\",\n        \"src/demosaic/late_local_noise_matching.py\",\n        \"src/demosaic/late_nonlocal_residual.py\",\n        \"scripts/profile_phase_evidence_preparation.py\",\n        \"scripts/profile_raw_kernel_inference.py\",\n    ]\n    tests = REPO / \".cache/v178-phase-evidence-CPU-tests-v3.log\"\n    assert \"68 passed\" in tests.read_text()\n    assert shutil.disk_usage(REPO).free > (48 + 0.5 + 0.4 + 0.02) * 2**30\n    assert shutil.disk_usage(\"/mnt/external\").free > (111 + 0.5 + 1.25 + 0.01) * 2**30\n    assert psutil.virtual_memory().available > 40 * 2**30\n    ROOT.mkdir()\n    save(\n        ROOT / \"plan-v1.json\",\n        {\n            \"status\": \"fixed-CPU-only-native-feature-and-strict-load-preparation\",\n            \"created_unix_UTC\": time.time(),\n            \"V175_live_plan\": ref(live_path),\n            \"cases\": cases,\n            \"checkpoint\": live[\"initial_checkpoint\"],\n            \"sources\": [dict(ref(REPO / name), text=(REPO / name).read_text()) for name in names],\n            \"CPU_tests\": dict(ref(tests), text=tests.read_text()),\n            \"prototype_failure\": {\n                \"source\": dict(\n                    ref(REPO / \".cache/v178-phase-evidence-fp32-carrier-v1.py\"),\n                    text=(REPO / \".cache/v178-phase-evidence-fp32-carrier-v1.py\").read_text(),\n                ),\n                \"log\": dict(\n                    ref(REPO / \".cache/v178-phase-evidence-CPU-tests-v1.log\"),\n                    text=(REPO / \".cache/v178-phase-evidence-CPU-tests-v1.log\").read_text(),\n                ),\n                \"correction\": \"Integer FFT-bin periodic phase reduction before FP32 radians;no tolerance relaxation.23 new checks and68 combined checks now pass.\",\n            },\n            \"FP64_numpy_tolerance\": {\"rtol\": 1e-8, \"atol\": 1e-8},\n            \"FP32_policy\": \"Record native FP32/FP64 bin equality and map errors descriptively,not a trained-quality or CUDA parity test. Independent FP32 fixtures retain3e-5 tolerance.\",\n            \"scope\": \"CPU feature extraction on6 fixed cached cases only,each in FP32/FP64 plus independent NumPy reference. Strict raw/EMA model-weight compatibility uses one existing V172 checkpoint load. No full matching/frozen/V143/DINO/sampler forward,optimizer update,new sensor/source render or RAW decode. Test fixtures are separate. Protected real inputs stay excluded from training;no original/dataz access. New model remains untrained and requires CUDA parity/gradient/memory/admission plus full quality/native views before use. V175 source/recipe/live owner unchanged.\",\n        },\n    )\n    print(\"Prepared6CPUfeaturecases;oneoldcheckpoint;noGPUortraining\", flush=True)\n\n\ndef execute():\n    import torch\n    from profile_raw_kernel_inference import model_hash\n\n    from demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail\n    from demosaic.late_phase_evidence_matching import (\n        LatePhaseEvidenceMatchingDetail,\n        phase_evidence_maps,\n    )\n\n    assert not torch.cuda.is_initialized()\n    plan = read(ROOT / \"plan-v1.json\")\n    (ROOT / \"run.claim\").open(\"x\").close()\n    for binding in plan[\"sources\"]:\n        assert ref(binding[\"path\"])[\"sha256\"] == binding[\"sha256\"]\n        assert Path(binding[\"path\"]).read_text() == binding[\"text\"]\n    os.nice(10)\n    os.sched_setaffinity(0, [4, 5])\n    torch.set_num_threads(2)\n    owner = {\"pid\": os.getpid(), \"created\": psutil.Process().create_time()}\n    save(ROOT / \"owner-v1.json\", owner)\n    spec = importlib.util.spec_from_file_location(\n        \"v178_independent_reference\", REPO / \"tests/test_late_phase_evidence_matching.py\"\n    )\n    reference = importlib.util.module_from_spec(spec)\n    spec.loader.exec_module(reference)\n    rows = []\n    for case in plan[\"cases\"]:\n        assert psutil.virtual_memory().available > 32 * 2**30\n        assert shutil.disk_usage(REPO).free > 48 * 2**30\n        assert ref(case[\"arrays\"][\"path\"]) == case[\"arrays\"]\n        with np.load(case[\"arrays\"][\"path\"], allow_pickle=False) as source:\n            raw, variance, colors = [source[k] for k in [\"packed\", \"variance\", \"colors\"]]\n        raw = torch.from_numpy(raw.copy())\n        variance = torch.from_numpy(variance.copy())\n        colors = torch.from_numpy(colors.copy())\n        if colors.ndim == 1:\n            colors = colors[None].expand(len(raw), -1)\n        records = {}\n        with torch.no_grad():\n            started = time.monotonic()\n            f32, a32 = phase_evidence_maps(raw.float(), variance.float(), colors)\n            seconds32 = time.monotonic() - started\n            started = time.monotonic()\n            f64, a64 = phase_evidence_maps(raw.double(), variance.double(), colors)\n            seconds64 = time.monotonic() - started\n        assert torch.isfinite(f32).all() and torch.isfinite(f64).all()\n        maximum_numpy_error = 0.0\n        numpy_bins = []\n        for index in range(len(raw)):\n            expected, selected = reference.independent_maps(\n                raw[index : index + 1].double(),\n                variance[index : index + 1].double(),\n                colors[index],\n                4,\n            )\n            np.testing.assert_allclose(\n                f64[index : index + 1].numpy(), expected, **plan[\"FP64_numpy_tolerance\"]\n            )\n            maximum_numpy_error = max(\n                maximum_numpy_error, float(np.max(abs(f64[index : index + 1].numpy() - expected)))\n            )\n            numpy_bins.append([[p[\"bin_yx\"] for p in d[\"peaks\"]] for d in selected])\n        assert a64[\"bin_yx\"].tolist() == numpy_bins\n        same_bins = torch.equal(a32[\"bin_yx\"], a64[\"bin_yx\"])\n        error = f32.double() - f64 if same_bins else None\n        records = {\n            \"id\": case[\"id\"],\n            \"arrays\": case[\"arrays\"],\n            \"RAW\": fingerprint(raw.numpy()),\n            \"variance\": fingerprint(variance.numpy()),\n            \"feature_shape\": list(f32.shape),\n            \"feature_logical_bytes\": f32.numel() * 4,\n            \"FP32_seconds\": seconds32,\n            \"FP64_seconds\": seconds64,\n            \"FP32_feature_fingerprint\": fingerprint(f32.numpy()),\n            \"FP64_feature_fingerprint\": fingerprint(f64.numpy()),\n            \"FP64_numpy_maximum_absolute_error\": maximum_numpy_error,\n            \"FP32_FP64_selection_identical\": same_bins,\n            \"FP32_FP64_RMS_difference\": float(error.square().mean().sqrt()) if same_bins else None,\n            \"FP32_FP64_maximum_absolute_difference\": float(error.abs().max())\n            if same_bins\n            else None,\n            \"FP32_bins\": a32[\"bin_yx\"].tolist(),\n            \"FP32_nominal_power\": a32[\"nominal_power\"].tolist(),\n            \"scope\": case[\"scope\"],\n        }\n        rows.append(records)\n        save(ROOT / f\"case-{len(rows):02d}-v1.json\", records)\n        print(\n            json.dumps(\n                {\n                    \"case\": case[\"id\"],\n                    \"shape\": list(f32.shape),\n                    \"FP32_seconds\": seconds32,\n                    \"FP64_numpy_max_abs\": maximum_numpy_error,\n                    \"same_bins\": same_bins,\n                }\n            ),\n            flush=True,\n        )\n        del f32, f64, a32, a64, expected, error, raw, variance, colors\n        gc.collect()\n    assert ref(plan[\"checkpoint\"][\"path\"]) == plan[\"checkpoint\"]\n    state = torch.load(plan[\"checkpoint\"][\"path\"], map_location=\"cpu\", weights_only=True)\n    old, new = LateLocalNoiseMatchingDetail(), LatePhaseEvidenceMatchingDetail()\n    assert state[\"updates\"] == 900\n    old.load_state_dict(state[\"models\"], strict=True)\n    compatibility = []\n    for endpoint in [\"raw\", \"EMA\"]:\n        if endpoint == \"EMA\":\n            old.network.load_state_dict(state[\"ema\"], strict=True)\n        new.initialize_from_local_matching(old.state_dict())\n        assert all(\n            torch.equal(value, new.state_dict()[name]) for name, value in old.state_dict().items()\n        )\n        assert new.phase_evidence_in.weight.count_nonzero() == 0\n        compatibility.append(\n            {\n                \"endpoint\": endpoint,\n                \"old_module_hash\": model_hash(old),\n                \"new_module_hash\": model_hash(new),\n                \"existing_tensors_exact\": len(old.state_dict()),\n                \"added_zero_tensors\": 1,\n                \"added_parameters\": new.phase_evidence_in.weight.numel(),\n            }\n        )\n    assert ref(plan[\"checkpoint\"][\"path\"]) == plan[\"checkpoint\"]\n    assert not torch.cuda.is_initialized()\n    result = {\n        \"status\": \"completed-CPU-native-features-and-strict-initialization-no-training\",\n        \"owner\": owner,\n        \"plan\": ref(ROOT / \"plan-v1.json\"),\n        \"cases\": rows,\n        \"strict_baseline_compatibility\": compatibility,\n        \"feature_module_calls\": 12,\n        \"feature_images\": 2 * sum(r[\"feature_shape\"][0] for r in rows),\n        \"independent_numpy_image_references\": sum(r[\"feature_shape\"][0] for r in rows),\n        \"existing_checkpoint_loads\": 1,\n        \"actual_matching_frozen_parent_DINO_sampler_forwards\": 0,\n        \"new_optimizer_updates\": 0,\n        \"new_sensor_source_draws\": 0,\n        \"RAW_decodes\": 0,\n        \"CUDA_initialized\": False,\n        \"trainable_parameters\": sum(p.numel() for p in new.parameters() if p.requires_grad),\n        \"frozen_parameters\": sum(p.numel() for p in new.frozen.parameters()),\n        \"peak_RSS_bytes\": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,\n        \"scope\": plan[\"scope\"],\n    }\n    save(ROOT / \"result-v1.json\", result)\n    print(\"CompletedCPUpreparation;GPUandtrainedqualitypending\", flush=True)\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"phase\", choices=[\"prepare\", \"run\"])\n    prepare() if parser.parse_args().phase == \"prepare\" else execute()\n"
+        },
+        {
+          "path": "/home/dllu/proj/demosaic/scripts/profile_raw_kernel_inference.py",
+          "sha256": "731a415340d80b1e4868ee9a4e6671a205baa2ccbf5b5bc504fa35b0b05936f3",
+          "text": "\"\"\"Attribute unchanged V67 inference costs on four retained GFX RAW contexts.\n\nCUDA events measure inclusive branch intervals; the separate operator trace is\ninstrumented and is not an end-to-end or full-frame speed benchmark. CPU mode\nexists only to verify real-model hooks, inputs and unchanged outputs beforehand.\n\"\"\"\n\nimport argparse\nimport hashlib\nimport json\nimport os\nimport statistics\nimport time\nfrom contextlib import contextmanager\nfrom pathlib import Path\n\nimport numpy as np\nimport torch\n\nfrom demosaic.cfa import color_indices\nfrom demosaic.inference import load_checkpoint\nfrom demosaic.precision import amp_context\nfrom demosaic.safety import writable_path\n\n\ndef sha(path):\n    with Path(path).open(\"rb\") as stream:\n        return hashlib.file_digest(stream, \"sha256\").hexdigest()\n\n\ndef describe(value):\n    if isinstance(value, torch.Tensor):\n        return {\n            \"shape\": list(value.shape),\n            \"dtype\": str(value.dtype),\n            \"logical_bytes\": value.numel() * value.element_size(),\n            \"contiguous\": value.is_contiguous(),\n            \"channels_last\": value.ndim == 4\n            and value.is_contiguous(memory_format=torch.channels_last),\n        }\n    if isinstance(value, (tuple, list)):\n        return [describe(v) for v in value]\n    return None\n\n\ndef model_hash(model):\n    digest = hashlib.sha256()\n    for name, value in model.state_dict().items():\n        value = value.detach().cpu().contiguous()\n        digest.update(name.encode() + str(value.dtype).encode() + str(tuple(value.shape)).encode())\n        # Singleton dimensions can be \"contiguous\" yet retain a non-unit last\n        # stride (notably channels-last 1x1 weights). Byte reinterpretation\n        # requires unit stride. Copy the logical values to a canonical vector;\n        # this also supports scalars and BF16 without converting their values.\n        flat = value.reshape(-1).clone(memory_format=torch.contiguous_format)\n        digest.update(flat.view(torch.uint8).numpy().tobytes())\n    return digest.hexdigest()\n\n\n@contextmanager\ndef instrument(model, device):\n    modules = {\n        \"DINO-context-inclusive\": model.context,\n        \"DINO-backbone-nested\": model.context.backbone,\n        \"restoration-trunk\": model.pretrained_rgb.network,\n        \"RAW-head-inclusive\": model.pretrained_rgb.raw_kernel,\n        \"RAW-coefficients-nested\": model.pretrained_rgb.raw_kernel.coefficients,\n    }\n    with instrument_modules(modules, device) as records:\n        yield records\n\n\n@contextmanager\ndef instrument_modules(modules, device):\n    \"\"\"Attach observational hooks; never return replacements or retain tensors.\"\"\"\n    assert modules and all(isinstance(module, torch.nn.Module) for module in modules.values())\n    records, stacks, handles = {name: [] for name in modules}, {name: [] for name in modules}, []\n\n    def begin(name):\n        def hook(_module, args):\n            region = torch.profiler.record_function(\"demosaic::\" + name)\n            region.__enter__()\n            start = torch.cuda.Event(enable_timing=True) if device.type == \"cuda\" else None\n            if start is not None:\n                start.record()\n            stacks[name].append(\n                {\n                    \"start_cpu\": time.perf_counter(),\n                    \"start\": start,\n                    \"region\": region,\n                    \"inputs\": describe(args),\n                }\n            )\n\n        return hook\n\n    def end(name):\n        def hook(_module, _args, output):\n            entry = stacks[name].pop()\n            elapsed = (time.perf_counter() - entry[\"start_cpu\"]) * 1000\n            stop = torch.cuda.Event(enable_timing=True) if device.type == \"cuda\" else None\n            if stop is not None:\n                stop.record()\n            entry[\"region\"].__exit__(None, None, None)\n            records[name].append(\n                {\n                    \"CPU_interval_ms\": elapsed,\n                    \"start\": entry[\"start\"],\n                    \"end\": stop,\n                    \"inputs\": entry[\"inputs\"],\n                    \"output\": describe(output),\n                }\n            )\n\n        return hook\n\n    try:\n        for name, module in modules.items():\n            handles.append(module.register_forward_pre_hook(begin(name)))\n            handles.append(module.register_forward_hook(end(name), always_call=True))\n        yield records\n    finally:\n        for handle in handles:\n            handle.remove()\n        assert all(not value for value in stacks.values())\n\n\ndef collect(records, cuda):\n    result = {}\n    for name, entries in records.items():\n        assert entries\n        result[name] = {\n            \"calls\": len(entries),\n            \"CPU_interval_ms\": [entry[\"CPU_interval_ms\"] for entry in entries],\n            \"CUDA_interval_ms\": [entry[\"start\"].elapsed_time(entry[\"end\"]) for entry in entries]\n            if cuda\n            else None,\n            \"inputs\": entries[0][\"inputs\"],\n            \"output\": entries[0][\"output\"],\n        }\n    return result\n\n\ndef load_inputs(report, device, batch_size, native_size):\n    source = json.loads(report.read_text())\n    records = [r for r in source[\"float_contexts\"] if r[\"role\"] == \"noisy-packed\"]\n    assert len(records) == 4 and batch_size in (1, 4) and native_size in (256, 512)\n    packed, provenance = [], []\n    for record in records[:batch_size]:\n        path = report.parent / record[\"image\"]\n        assert sha(path) == record[\"sha256\"]\n        value = np.load(path, allow_pickle=False)\n        assert (\n            value.shape == (1, 4, 256, 256)\n            and value.dtype == np.float32\n            and np.isfinite(value).all()\n        )\n        packed.append(torch.from_numpy(value[..., : native_size // 2, : native_size // 2].copy()))\n        provenance.append(\n            {\n                **record,\n                \"path\": str(path),\n                \"profile_context_xywh\": [*record[\"context_xywh\"][:2], native_size, native_size],\n            }\n        )\n    raw = torch.cat(packed).to(device)\n    if device.type == \"cuda\":\n        raw = raw.contiguous(memory_format=torch.channels_last)\n    metadata = next(r[\"metadata\"] for r in source[\"sources\"] if r[\"role\"] == \"noisy\")\n    shot, read = source[\"conditioning\"][\"shot\"], source[\"conditioning\"][\"read\"]\n    return [\n        raw,\n        raw.clamp_min(0) * shot + read,\n        color_indices(metadata[\"pattern\"], device=device)[None].expand(batch_size, -1),\n        torch.tensor(metadata[\"white_balance\"], device=device)[None].expand(batch_size, -1),\n        torch.tensor(metadata[\"camera_to_srgb\"], device=device)[None].expand(batch_size, -1, -1),\n    ], {\n        \"report\": str(report),\n        \"report_sha256\": sha(report),\n        \"cases\": provenance,\n        \"conditioning\": source[\"conditioning\"],\n        \"metadata\": metadata,\n    }\n\n\n@torch.inference_mode()\ndef main(\n    checkpoint,\n    gfx_report,\n    output,\n    device=\"cuda\",\n    batch_size=4,\n    native_size=512,\n    warmup=3,\n    samples=5,\n):\n    os.nice(5)\n    torch.set_num_threads(2)\n    device = torch.device(device)\n    if device.type == \"cpu\":\n        assert not torch.cuda.is_initialized() and batch_size == 1 and native_size == 256\n    else:\n        assert batch_size == 4 and native_size == 512\n    assert warmup >= 1 and samples >= 2\n    output = writable_path(output)\n    output.mkdir(parents=True, exist_ok=False)\n    batch, provenance = load_inputs(gfx_report, device, batch_size, native_size)\n    model, state = load_checkpoint(checkpoint, device)\n    assert state[\"loaded_sha256\"] == sha(checkpoint)\n    assert model.config.raw_kernel_reconstruction and model.config.raw_kernel_phase_conditioning\n    model.eval()\n    if device.type == \"cuda\":\n        model.to(memory_format=torch.channels_last)\n    model.set_noise(provenance[\"conditioning\"][\"shot\"], provenance[\"conditioning\"][\"read\"])\n    step, digest = state[\"step\"], state[\"loaded_sha256\"]\n    del state\n    before = model_hash(model)\n    rng = torch.get_rng_state().clone()\n    cuda_rng = torch.cuda.get_rng_state().clone() if device.type == \"cuda\" else None\n\n    def synchronize():\n        if device.type == \"cuda\":\n            torch.cuda.synchronize(device)\n\n    def forward():\n        with amp_context(device, dtype=\"float16\" if device.type == \"cuda\" else \"float32\"):\n            return model(*batch)\n\n    for _ in range(warmup):\n        reference = forward()\n    synchronize()\n    assert (\n        reference.shape == (batch_size, 3, native_size, native_size)\n        and reference.dtype == torch.float32\n    )\n    assert torch.isfinite(reference).all()\n    if device.type == \"cuda\":\n        torch.cuda.reset_peak_memory_stats(device)\n    unhooked_ms = []\n    for _ in range(samples):\n        started = time.perf_counter()\n        actual = forward()\n        synchronize()\n        unhooked_ms.append((time.perf_counter() - started) * 1000)\n        assert torch.equal(actual, reference)\n    with instrument(model, device) as records:\n        for _ in range(samples):\n            actual = forward()\n            synchronize()\n            assert torch.equal(actual, reference)\n    branches = collect(records, device.type == \"cuda\")\n    assert all(row[\"calls\"] == samples for row in branches.values())\n    activities = [torch.profiler.ProfilerActivity.CPU]\n    if device.type == \"cuda\":\n        activities.append(torch.profiler.ProfilerActivity.CUDA)\n    with (\n        torch.profiler.profile(\n            activities=activities, record_shapes=False, with_stack=False, profile_memory=True\n        ) as profile,\n        instrument(model, device) as trace_records,\n    ):\n        actual = forward()\n        synchronize()\n    assert torch.equal(actual, reference)\n    trace_branches = collect(trace_records, device.type == \"cuda\")\n    keys = profile.key_averages()\n    operators = [\n        {\n            \"name\": row.key,\n            \"calls\": row.count,\n            \"self_CPU_us\": row.self_cpu_time_total,\n            \"inclusive_CPU_us\": row.cpu_time_total,\n            \"self_device_us\": row.self_device_time_total,\n            \"inclusive_device_us\": row.device_time_total,\n            \"self_CPU_memory_bytes\": row.self_cpu_memory_usage,\n            \"self_device_memory_bytes\": row.self_device_memory_usage,\n        }\n        for row in keys\n    ]\n    assert {\"demosaic::\" + name for name in branches} <= {row[\"name\"] for row in operators}\n    cuda_events = sum(\n        str(event.device_type) == \"DeviceType.CUDA\" and event.time_range.elapsed_us() > 0\n        for event in profile.events()\n    )\n    if device.type == \"cuda\":\n        assert cuda_events > 0, \"No genuine CUDA events; profiler fallback is not GPU evidence\"\n    trace = output / \"operator-trace.json\"\n    profile.export_chrome_trace(str(trace))\n    assert model_hash(model) == before\n    assert torch.equal(torch.get_rng_state(), rng)\n    if cuda_rng is not None:\n        assert torch.equal(torch.cuda.get_rng_state(), cuda_rng)\n    assert sha(checkpoint) == digest\n    np.save(output / \"unchanged-reference-f32.npy\", reference.cpu().numpy(), allow_pickle=False)\n    archive = output / \"source\"\n    archive.mkdir()\n    sources = {str(path): sha(path) for path in Path(\"src/demosaic\").glob(\"*.py\")}\n    for path in [Path(__file__), *map(Path, sources)]:\n        (archive / path.name).write_bytes(path.read_bytes())\n    result = {\n        \"status\": \"completed-real-V67-CPU-profiler-preflight-no-GPU-timing\"\n        if device.type == \"cpu\"\n        else \"completed-real-V67-bounded-CUDA-inference-profile\",\n        \"checkpoint\": {\"path\": str(checkpoint), \"sha256\": digest, \"step\": step},\n        \"inputs\": provenance,\n        \"device\": str(device),\n        \"torch\": str(torch.__version__),\n        \"hardware\": torch.cuda.get_device_name(device)\n        if device.type == \"cuda\"\n        else \"CPU engineering preflight\",\n        \"batch_size\": batch_size,\n        \"native_size\": native_size,\n        \"warmup\": warmup,\n        \"samples\": samples,\n        \"unhooked_forward_synchronized_ms\": unhooked_ms,\n        \"unhooked_median_ms\": statistics.median(unhooked_ms),\n        \"inclusive_branches\": branches,\n        \"instrumented_trace_branches\": trace_branches,\n        \"operator_statistics\": sorted(\n            operators,\n            key=lambda row: row[\"self_device_us\"] if device.type == \"cuda\" else row[\"self_CPU_us\"],\n            reverse=True,\n        ),\n        \"genuine_CUDA_trace_events\": cuda_events,\n        \"trace\": {\"path\": str(trace), \"sha256\": sha(trace)},\n        \"all_hooked_unhooked_profiled_outputs_bitwise_reference\": True,\n        \"model_and_actual_DINO_state_hash_before_after\": before,\n        \"model_and_actual_DINO_state_unchanged\": True,\n        \"CPU_and_CUDA_RNG_unchanged\": True,\n        \"source_files\": sources,\n        \"driver_sha256\": sha(__file__),\n        \"CUDA_initialized\": torch.cuda.is_initialized(),\n        \"peak_CUDA_allocation_GB\": torch.cuda.max_memory_allocated(device) / 1e9\n        if device.type == \"cuda\"\n        else None,\n        \"scope\": \"Unchanged checkpoint and fixed input batch; no optimization, compile, weight/precision/tile change, quality score or promotion. Branch intervals are inclusive and nested; never sum parent and child times. Profiler statistics/trace are instrumented, separate from synchronized unhooked forward samples. Excludes RAW decoding, input transfer, output transfer, tiling/blending and encoding; not a100MP speed result or throughput sweep. Shared-machine measurements do not establish idle hardware performance. CPU mode verifies hooks and identity only, never GPU bottlenecks.\",\n        \"API_sources\": [\n            \"https://docs.pytorch.org/docs/2.14/profiler.html\",\n            \"https://docs.pytorch.org/docs/2.14/generated/torch.cuda.Event.html\",\n        ],\n    }\n    (output / \"result.json\").write_text(json.dumps(result, indent=2, allow_nan=False) + \"\\n\")\n    print(\n        json.dumps(\n            {\"result\": str(output / \"result.json\"), \"status\": result[\"status\"], \"step\": step}\n        ),\n        flush=True,\n    )\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"--checkpoint\", type=Path, required=True)\n    parser.add_argument(\"--gfx-report\", type=Path, required=True)\n    parser.add_argument(\"--output\", type=Path, required=True)\n    parser.add_argument(\"--device\", choices=(\"cpu\", \"cuda\"), default=\"cuda\")\n    for name, default in [(\"batch-size\", 4), (\"native-size\", 512), (\"warmup\", 3), (\"samples\", 5)]:\n        parser.add_argument(\"--\" + name, type=int, default=default)\n    main(**vars(parser.parse_args()))\n"
+        }
+      ],
+      "CPU_tests": {
+        "path": "/home/dllu/proj/demosaic/.cache/v178-phase-evidence-CPU-tests-v3.log",
+        "sha256": "3efaa11cc17b7f4272d1b968de0ca43743894af75aa758d8df3936e77cae0109",
+        "text": "....................................................................     [100%]\n68 passed in 2.33s\n"
+      },
+      "prototype_failure": {
+        "source": {
+          "path": "/home/dllu/proj/demosaic/.cache/v178-phase-evidence-fp32-carrier-v1.py",
+          "sha256": "a4af1d0086fb3169dffccd0d67be625ec7fee2baedc21a7a6a98528a4b436b3d",
+          "text": "\"\"\"Expose separately measured RAW frequency evidence to local-unit matching.\n\nExperimental variant; initialization/CPU checks do not establish trained quality\nor noisy-flat safety. No target, clean template or paired metadata enters forward.\n\"\"\"\n\nimport math\n\nimport torch\nfrom torch import nn\nfrom torch.nn import functional as F\n\nfrom .late_local_noise_matching import LateLocalNoiseMatchingDetail, local_noise_features\nfrom .nonlocal_autograd import enable_sampler_autograd\nfrom .precision import ieee_fp32\n\n\ndef _green_spectra(packed, variance, green):\n    \"\"\"Hann/weighted-affine FFT and complete conditional coefficient variance.\"\"\"\n    _batch, _, height, width = packed.shape\n    index = green[:, :, None, None].expand(-1, -1, height, width)\n    # Subtraction makes exactly constant phase inputs exactly zero before fitting.\n    values = packed.gather(1, index)\n    values = values - values[..., :1, :1]\n    noise = variance.clamp_min(0).gather(1, index)\n    device, dtype = packed.device, packed.dtype\n    y, x = torch.meshgrid(\n        torch.linspace(-1, 1, height, device=device, dtype=dtype),\n        torch.linspace(-1, 1, width, device=device, dtype=dtype),\n        indexing=\"ij\",\n    )\n    basis = torch.stack((torch.ones_like(x), x, y), -1)\n    window = (\n        torch.hann_window(height, periodic=False, device=device, dtype=dtype)[:, None]\n        * torch.hann_window(width, periodic=False, device=device, dtype=dtype)[None, :]\n    )\n    gram = torch.einsum(\"hwi,hwj,hw->ij\", basis, basis, window.square())\n    inverse = torch.linalg.inv(gram)\n    beta = torch.einsum(\"nphw,hwi,hw->npi\", values, basis, window.square()) @ inverse\n    spectrum = torch.fft.fft2(\n        window * (values - torch.einsum(\"npi,hwi->nphw\", beta, basis)), norm=\"ortho\"\n    )\n    transformed = torch.fft.fft2(window[..., None] * basis, dim=(0, 1), norm=\"ortho\")\n    h = transformed @ inverse.to(transformed.dtype)\n    cross = torch.fft.fft2((noise * window.pow(3))[..., None] * basis, dim=(-3, -2), norm=\"ortho\")\n    covariance = torch.einsum(\"hwi,hwj,nphw->npij\", basis, basis, noise * window.pow(4))\n    propagated = (\n        (noise * window.square()).mean((-2, -1))[..., None, None]\n        - 2 * (h.conj() * cross).sum(-1).real\n        + torch.einsum(\"hwi,npij,hwj->nphw\", h, covariance.to(h.dtype), h.conj()).real\n    )\n    return spectrum, propagated.clamp_min(0)\n\n\ndef phase_evidence_maps(packed, variance, colors, *, peaks=4):\n    \"\"\"Return 10 channels for each of K selected peaks in each green direction.\n\n    Channels are transported real/imaginary coefficients of A and B (asinh\n    Fourier-noise units), log1p power A/B, bounded signed real/imaginary cross\n    evidence, and native fx/fy times continuous total-power strength. Selection\n    uses A only; B cannot alter its frequency or rank. Both directions reuse the\n    observations and are not independent tests. No hard detection gate is used.\n\n    Principal-band transport does not resolve all native aliases. Full-context\n    waves are features only; spatial localization must be learned and evaluated.\n    A one-DN16-squared Fourier-variance floor provides finite ADC arithmetic,\n    not statistical calibration. Exactly constant phase inputs yield zero maps.\n    \"\"\"\n    if (\n        packed.ndim != 4\n        or packed.shape[1] != 4\n        or variance.shape != packed.shape\n        or packed.shape[0] < 1\n        or min(packed.shape[-2:]) < 8\n        or max(packed.shape[-2:]) > 512\n        or packed.dtype not in (torch.float32, torch.float64)\n        or variance.dtype != packed.dtype\n        or variance.device != packed.device\n        or type(peaks) is not int\n        or not 1 <= peaks <= 8\n    ):\n        raise ValueError(\"Expected finite matching FP32/FP64 Nx4xHxW,axes8..512,peaks1..8\")\n    batch, _, height, width = packed.shape\n    if colors.ndim == 1:\n        colors = colors[None].expand(batch, -1)\n    colors = colors.to(device=packed.device)\n    allowed = torch.tensor(\n        [[0, 1, 1, 2], [2, 1, 1, 0], [1, 0, 2, 1], [1, 2, 0, 1]], device=packed.device\n    )\n    if colors.shape != (batch, 4) or not bool((colors[:, None] == allowed).all(-1).any(-1).all()):\n        raise ValueError(\"Expected standard Bayer layouts aligned with the batch\")\n    if not bool(torch.isfinite(packed).all() & torch.isfinite(variance).all()):\n        raise ValueError(\"Expected finite RAW and variance\")\n    green = torch.where(colors == 1)[1].reshape(batch, 2)\n    with torch.autocast(packed.device.type, enabled=False), ieee_fp32():\n        spectra, noise = _green_spectra(packed, variance, green)\n        noise = noise.clamp_min((1 / 65535) ** 2)\n        fy = torch.fft.fftfreq(height, device=packed.device, dtype=packed.dtype) / 2\n        fx = torch.fft.fftfreq(width, device=packed.device, dtype=packed.dtype) / 2\n        radius = torch.hypot(fy[:, None], fx[None, :])\n        eligible = (radius >= 1 / 16) & (radius <= 1 / 3)\n        eligible &= (fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0))\n        yy, xx = torch.meshgrid(\n            torch.arange(height, device=packed.device, dtype=packed.dtype),\n            torch.arange(width, device=packed.device, dtype=packed.dtype),\n            indexing=\"ij\",\n        )\n        batch_index = torch.arange(batch, device=packed.device)\n        features, bins, powers, agreements, validity = [], [], [], [], []\n        for a, b in [(0, 1), (1, 0)]:\n            available = eligible[None].expand(batch, -1, -1).clone()\n            power_a = spectra[:, a].abs().square() / noise[:, a]\n            direction_bins, direction_power, direction_cross, direction_valid = [], [], [], []\n            for _ in range(peaks):\n                scores = power_a.masked_fill(~available, -torch.inf).flatten(1)\n                maximum, flat = scores.max(1)\n                valid = torch.isfinite(maximum)\n                y, x = flat // width, flat % width\n                f_y, f_x = fy[y], fx[x]\n                coefficients = []\n                for phase in [a, b]:\n                    z = spectra[batch_index, phase, y, x] / noise[batch_index, phase, y, x].sqrt()\n                    index = green[:, phase]\n                    offset = 2 * math.pi * (f_y * (index // 2) + f_x * (index % 2))\n                    coefficients.append(z * torch.polar(torch.ones_like(offset), -offset))\n                first, second = coefficients\n                p_a, p_b = first.abs().square(), second.abs().square()\n                cross = first * second.conj() / ((1 + p_a) * (1 + p_b)).sqrt()\n                angle = 4 * math.pi * (f_y[:, None, None] * yy + f_x[:, None, None] * xx)\n                carrier = torch.polar(torch.ones_like(angle), angle)\n                first_wave, second_wave = (\n                    first[:, None, None] * carrier,\n                    second[:, None, None] * carrier,\n                )\n                strength = (p_a + p_b) / (1 + p_a + p_b)\n                constants = torch.stack(\n                    (\n                        p_a.log1p(),\n                        p_b.log1p(),\n                        cross.real,\n                        cross.imag,\n                        f_x * strength,\n                        f_y * strength,\n                    ),\n                    1,\n                )[:, :, None, None].expand(-1, -1, height, width)\n                maps = torch.cat(\n                    (\n                        torch.stack(\n                            (\n                                first_wave.real.asinh(),\n                                first_wave.imag.asinh(),\n                                second_wave.real.asinh(),\n                                second_wave.imag.asinh(),\n                            ),\n                            1,\n                        ),\n                        constants,\n                    ),\n                    1,\n                )\n                features.append(\n                    torch.where(valid[:, None, None, None], maps, torch.zeros_like(maps))\n                )\n                direction_bins.append(torch.stack((y, x), -1))\n                direction_power.append(torch.stack((p_a, p_b), -1))\n                direction_cross.append(torch.stack((cross.real, cross.imag), -1))\n                direction_valid.append(valid)\n                # Suppression depends on the A-selected indices only.\n                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:\n                    for dy in [-1, 0, 1]:\n                        for dx in [-1, 0, 1]:\n                            available[batch_index, (cy + dy) % height, (cx + dx) % width] = False\n            bins.append(torch.stack(direction_bins, 1))\n            powers.append(torch.stack(direction_power, 1))\n            agreements.append(torch.stack(direction_cross, 1))\n            validity.append(torch.stack(direction_valid, 1))\n        return torch.cat(features, 1), {\n            \"green_phase_indices\": green,\n            \"bin_yx\": torch.stack(bins, 1),\n            \"nominal_power\": torch.stack(powers, 1),\n            \"bounded_cross\": torch.stack(agreements, 1),\n            \"valid\": torch.stack(validity, 1),\n        }\n\n\nclass LatePhaseEvidenceMatchingDetail(LateLocalNoiseMatchingDetail):\n    \"\"\"Zero adapter adds 80 measured-wave coordinates to 39 matching features.\n\n    The existing matching network and frozen V169 component are inherited. At\n    zero adapter weights the added coordinates contribute zero; real CUDA parity\n    and training/quality admission remain necessary. No hard spectral support or\n    direct wave-to-RGB output is added. Local zero variance retains the frozen\n    component exactly, including mixed noisy/ADC cells.\n    \"\"\"\n\n    def __init__(self, width=16, max_search=9.0, evidence_peaks=4):\n        if type(evidence_peaks) is not int or not 1 <= evidence_peaks <= 8:\n            raise ValueError(\"Expected evidence_peaks1..8\")\n        super().__init__(width, max_search)\n        self.evidence_peaks = evidence_peaks\n        with torch.random.fork_rng(devices=[]):\n            torch.set_rng_state(torch.Generator(device=\"cpu\").manual_seed(17801).get_state())\n            self.phase_evidence_in = nn.Conv2d(20 * evidence_peaks, 39, 1, bias=False, device=\"cpu\")\n        nn.init.zeros_(self.phase_evidence_in.weight)\n\n    def initialize_from_local_matching(self, state):\n        \"\"\"Strict old-component load; new adapter is zero, optimizer is separate.\"\"\"\n        expected = set(self.state_dict()) - {\"phase_evidence_in.weight\"}\n        if set(state) != expected:\n            raise ValueError(\"Expected exactly the local-noise matching component tensors\")\n        with torch.no_grad():\n            self.phase_evidence_in.weight.zero_()\n        self.load_state_dict(\n            dict(\n                state,\n                **{\"phase_evidence_in.weight\": self.phase_evidence_in.weight.detach().clone()},\n            ),\n            strict=True,\n        )\n        return self\n\n    def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):\n        with torch.autocast(base.device.type, enabled=False), ieee_fp32():\n            with torch.no_grad():\n                restored = self.frozen(base, packed, variance, colors, wb)\n                features, sigma = local_noise_features(restored, packed, variance, colors, wb)\n            evaluated = bool(torch.any(sigma > 0))\n            evidence_aux = None\n            if evaluated:\n                with torch.no_grad():\n                    evidence, evidence_aux = phase_evidence_maps(\n                        packed.float(), variance.float(), colors, peaks=self.evidence_peaks\n                    )\n                features = features + self.phase_evidence_in(evidence)\n                if torch.is_grad_enabled():\n                    enable_sampler_autograd()\n                correction = F.pixel_shuffle(self.network(features), 2) * sigma\n                output = torch.where(sigma > 0, restored + correction, restored)\n            else:\n                correction = torch.zeros_like(restored)\n                output = restored\n            if return_aux:\n                return output, {\n                    \"frozen_output\": restored,\n                    \"correction\": correction,\n                    \"sigma\": sigma,\n                    \"matching_evaluated\": evaluated,\n                    \"phase_evidence\": evidence_aux,\n                }\n            return output\n"
+        },
+        "log": {
+          "path": "/home/dllu/proj/demosaic/.cache/v178-phase-evidence-CPU-tests-v1.log",
+          "sha256": "ddf09a0b1dbd66e62508262949a9028235231457e2ce827120e30c7535762085",
+          "text": "FFFF...................                                                  [100%]\n=================================== FAILURES ===================================\n________ test_all_feature_channels_match_independent_numpy[dtype0-RGGB] ________\n\npattern = 'RGGB', dtype = torch.float32\n\n    @pytest.mark.parametrize(\"pattern\", [\"RGGB\", \"BGGR\", \"GRBG\", \"GBRG\"])\n    @pytest.mark.parametrize(\"dtype\", [torch.float32, torch.float64])\n    def test_all_feature_channels_match_independent_numpy(pattern, dtype):\n        raw, variance, colors = fixture(pattern, dtype)\n        actual, aux = phase_evidence_maps(raw, variance, colors)\n        expected, selections = independent_maps(raw.double(), variance.double(), colors, 4)\n        tolerance = 3e-5 if dtype == torch.float32 else 3e-12\n>       np.testing.assert_allclose(actual.numpy(), expected, rtol=tolerance, atol=tolerance)\nE       AssertionError: \nE       Not equal to tolerance rtol=3e-05, atol=3e-05\nE       \nE       Mismatched elements: 16 / 61440 (0.026%)\nE       First 5 mismatches are at indices:\nE        [0, 0, 8, 28]: -0.2844953238964081 (ACTUAL), -0.284538258147525 (DESIRED)\nE        [0, 0, 17, 28]: 0.28449511528015137 (ACTUAL), 0.284538258147489 (DESIRED)\nE        [0, 0, 23, 12]: -0.2844953238964081 (ACTUAL), -0.284538258147525 (DESIRED)\nE        [0, 0, 23, 28]: 0.28446584939956665 (ACTUAL), 0.28453825814757294 (DESIRED)\nE        [0, 2, 7, 29]: 0.6192618608474731 (ACTUAL), 0.6192090004109523 (DESIRED)\nE       Max absolute difference among violations: 7.2408748e-05\nE       Max relative difference among violations: 0.00025448\nE        ACTUAL: array([[[[ 3.141028,  2.116133, -2.643904, ..., -3.07255 , -1.367565,\nE                  2.863832],\nE                [ 1.924043, -2.727028, -3.163726, ..., -0.926078,  2.919948,...\nE        DESIRED: array([[[[ 3.141028,  2.116133, -2.643904, ..., -3.07255 , -1.367573,\nE                  2.863832],\nE                [ 1.924043, -2.727028, -3.163726, ..., -0.926082,  2.919948,...\n\ntests/test_late_phase_evidence_matching.py:82: AssertionError\n________ test_all_feature_channels_match_independent_numpy[dtype0-BGGR] ________\n\npattern = 'BGGR', dtype = torch.float32\n\n    @pytest.mark.parametrize(\"pattern\", [\"RGGB\", \"BGGR\", \"GRBG\", \"GBRG\"])\n    @pytest.mark.parametrize(\"dtype\", [torch.float32, torch.float64])\n    def test_all_feature_channels_match_independent_numpy(pattern, dtype):\n        raw, variance, colors = fixture(pattern, dtype)\n        actual, aux = phase_evidence_maps(raw, variance, colors)\n        expected, selections = independent_maps(raw.double(), variance.double(), colors, 4)\n        tolerance = 3e-5 if dtype == torch.float32 else 3e-12\n>       np.testing.assert_allclose(actual.numpy(), expected, rtol=tolerance, atol=tolerance)\nE       AssertionError: \nE       Not equal to tolerance rtol=3e-05, atol=3e-05\nE       \nE       Mismatched elements: 16 / 61440 (0.026%)\nE       First 5 mismatches are at indices:\nE        [0, 0, 8, 28]: -0.2844953238964081 (ACTUAL), -0.284538258147525 (DESIRED)\nE        [0, 0, 17, 28]: 0.28449511528015137 (ACTUAL), 0.284538258147489 (DESIRED)\nE        [0, 0, 23, 12]: -0.2844953238964081 (ACTUAL), -0.284538258147525 (DESIRED)\nE        [0, 0, 23, 28]: 0.28446584939956665 (ACTUAL), 0.28453825814757294 (DESIRED)\nE        [0, 2, 7, 29]: 0.6192618608474731 (ACTUAL), 0.6192090004109523 (DESIRED)\nE       Max absolute difference among violations: 7.2408748e-05\nE       Max relative difference among violations: 0.00025448\nE        ACTUAL: array([[[[ 3.141028,  2.116133, -2.643904, ..., -3.07255 , -1.367565,\nE                  2.863832],\nE                [ 1.924043, -2.727028, -3.163726, ..., -0.926078,  2.919948,...\nE        DESIRED: array([[[[ 3.141028,  2.116133, -2.643904, ..., -3.07255 , -1.367573,\nE                  2.863832],\nE                [ 1.924043, -2.727028, -3.163726, ..., -0.926082,  2.919948,...\n\ntests/test_late_phase_evidence_matching.py:82: AssertionError\n________ test_all_feature_channels_match_independent_numpy[dtype0-GRBG] ________\n\npattern = 'GRBG', dtype = torch.float32\n\n    @pytest.mark.parametrize(\"pattern\", [\"RGGB\", \"BGGR\", \"GRBG\", \"GBRG\"])\n    @pytest.mark.parametrize(\"dtype\", [torch.float32, torch.float64])\n    def test_all_feature_channels_match_independent_numpy(pattern, dtype):\n        raw, variance, colors = fixture(pattern, dtype)\n        actual, aux = phase_evidence_maps(raw, variance, colors)\n        expected, selections = independent_maps(raw.double(), variance.double(), colors, 4)\n        tolerance = 3e-5 if dtype == torch.float32 else 3e-12\n>       np.testing.assert_allclose(actual.numpy(), expected, rtol=tolerance, atol=tolerance)\nE       AssertionError: \nE       Not equal to tolerance rtol=3e-05, atol=3e-05\nE       \nE       Mismatched elements: 32 / 61440 (0.0521%)\nE       First 5 mismatches are at indices:\nE        [0, 0, 8, 28]: -0.02597050927579403 (ACTUAL), -0.026016081151520775 (DESIRED)\nE        [0, 0, 17, 28]: 0.025970034301280975 (ACTUAL), 0.026016081151483173 (DESIRED)\nE        [0, 0, 23, 12]: -0.02597050927579403 (ACTUAL), -0.026016081151520775 (DESIRED)\nE        [0, 0, 23, 28]: 0.025939414277672768 (ACTUAL), 0.02601608115157129 (DESIRED)\nE        [0, 1, 14, 20]: 0.0259782113134861 (ACTUAL), 0.026016081151541408 (DESIRED)\nE       Max absolute difference among violations: 7.66668739e-05\nE       Max relative difference among violations: 0.0029469\nE        ACTUAL: array([[[[ 3.145396,  2.065257, -2.683151, ..., -3.072004, -1.244431,\nE                  2.893564],\nE                [ 1.858664, -2.762638, -3.171084, ..., -0.740817,  2.947234,...\nE        DESIRED: array([[[[ 3.145396,  2.065257, -2.683151, ..., -3.072005, -1.24444 ,\nE                  2.893564],\nE                [ 1.858664, -2.762637, -3.171084, ..., -0.740821,  2.947234,...\n\ntests/test_late_phase_evidence_matching.py:82: AssertionError\n________ test_all_feature_channels_match_independent_numpy[dtype0-GBRG] ________\n\npattern = 'GBRG', dtype = torch.float32\n\n    @pytest.mark.parametrize(\"pattern\", [\"RGGB\", \"BGGR\", \"GRBG\", \"GBRG\"])\n    @pytest.mark.parametrize(\"dtype\", [torch.float32, torch.float64])\n    def test_all_feature_channels_match_independent_numpy(pattern, dtype):\n        raw, variance, colors = fixture(pattern, dtype)\n        actual, aux = phase_evidence_maps(raw, variance, colors)\n        expected, selections = independent_maps(raw.double(), variance.double(), colors, 4)\n        tolerance = 3e-5 if dtype == torch.float32 else 3e-12\n>       np.testing.assert_allclose(actual.numpy(), expected, rtol=tolerance, atol=tolerance)\nE       AssertionError: \nE       Not equal to tolerance rtol=3e-05, atol=3e-05\nE       \nE       Mismatched elements: 32 / 61440 (0.0521%)\nE       First 5 mismatches are at indices:\nE        [0, 0, 8, 28]: -0.02597050927579403 (ACTUAL), -0.026016081151520775 (DESIRED)\nE        [0, 0, 17, 28]: 0.025970034301280975 (ACTUAL), 0.026016081151483173 (DESIRED)\nE        [0, 0, 23, 12]: -0.02597050927579403 (ACTUAL), -0.026016081151520775 (DESIRED)\nE        [0, 0, 23, 28]: 0.025939414277672768 (ACTUAL), 0.02601608115157129 (DESIRED)\nE        [0, 1, 14, 20]: 0.0259782113134861 (ACTUAL), 0.026016081151541408 (DESIRED)\nE       Max absolute difference among violations: 7.66668739e-05\nE       Max relative difference among violations: 0.0029469\nE        ACTUAL: array([[[[ 3.145396,  2.065257, -2.683151, ..., -3.072004, -1.244431,\nE                  2.893564],\nE                [ 1.858664, -2.762638, -3.171084, ..., -0.740817,  2.947234,...\nE        DESIRED: array([[[[ 3.145396,  2.065257, -2.683151, ..., -3.072005, -1.24444 ,\nE                  2.893564],\nE                [ 1.858664, -2.762637, -3.171084, ..., -0.740821,  2.947234,...\n\ntests/test_late_phase_evidence_matching.py:82: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_late_phase_evidence_matching.py::test_all_feature_channels_match_independent_numpy[dtype0-RGGB]\nFAILED tests/test_late_phase_evidence_matching.py::test_all_feature_channels_match_independent_numpy[dtype0-BGGR]\nFAILED tests/test_late_phase_evidence_matching.py::test_all_feature_channels_match_independent_numpy[dtype0-GRBG]\nFAILED tests/test_late_phase_evidence_matching.py::test_all_feature_channels_match_independent_numpy[dtype0-GBRG]\n4 failed, 19 passed in 2.05s\n"
+        },
+        "correction": "Integer FFT-bin periodic phase reduction before FP32 radians;no tolerance relaxation.23 new checks and68 combined checks now pass."
+      },
+      "FP64_numpy_tolerance": {
+        "rtol": 1e-08,
+        "atol": 1e-08
+      },
+      "FP32_policy": "Record native FP32/FP64 bin equality and map errors descriptively,not a trained-quality or CUDA parity test. Independent FP32 fixtures retain3e-5 tolerance.",
+      "scope": "CPU feature extraction on6 fixed cached cases only,each in FP32/FP64 plus independent NumPy reference. Strict raw/EMA model-weight compatibility uses one existing V172 checkpoint load. No full matching/frozen/V143/DINO/sampler forward,optimizer update,new sensor/source render or RAW decode. Test fixtures are separate. Protected real inputs stay excluded from training;no original/dataz access. New model remains untrained and requires CUDA parity/gradient/memory/admission plus full quality/native views before use. V175 source/recipe/live owner unchanged."
+    }
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-preparation-v1/result-v1.json",
+    "sha256": "b8ad5976cfdb408baf18510d7537204afe603ef857e2f19030a36fb206df99df",
+    "contents": {
+      "status": "completed-CPU-native-features-and-strict-initialization-no-training",
+      "owner": {
+        "pid": 361731,
+        "created": 1794109066.33
+      },
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-preparation-v1/plan-v1.json",
+        "sha256": "9eaef7f7bb2fd3af0444abc86a62be4a81610b5974707c5d97738839aec1f52b"
+      },
+      "cases": [
+        {
+          "id": "training-mesh-step1",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v1/training-batches/step-0001-inputs.npz",
+            "sha256": "2b3e5f6724dd127edc4b142203e834f77aa2f490473ee02fbd933d69f1f10458"
+          },
+          "RAW": {
+            "shape": [
+              4,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "dc41a74206449a97e50f3b919100ffa3c12eb1b8414896788c420a0a9b812309"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "2f8a691c111e4c43daf27ecd162f05e44dc93950dfd0fa8137848dff26012bb8"
+          },
+          "feature_shape": [
+            4,
+            80,
+            256,
+            256
+          ],
+          "feature_logical_bytes": 83886080,
+          "FP32_seconds": 0.2818290680006612,
+          "FP64_seconds": 0.2747678939776961,
+          "FP32_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "b4f34e7c5a546c0e8d2ab8f6aa56d6838be37f78d23cbbfb6341f8fda8c480f2"
+          },
+          "FP64_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f8",
+            "sha256": "ecf737f63385c70dc75ec0ca0e3b39397dcdcfe4ebd7ca9862809626bf4b22a0"
+          },
+          "FP64_numpy_maximum_absolute_error": 3.4830471840052724e-13,
+          "FP32_FP64_selection_identical": true,
+          "FP32_FP64_RMS_difference": 1.269221706738692e-07,
+          "FP32_FP64_maximum_absolute_difference": 1.6601534957860764e-06,
+          "FP32_bins": [
+            [
+              [
+                [
+                  1,
+                  184
+                ],
+                [
+                  46,
+                  39
+                ],
+                [
+                  56,
+                  191
+                ],
+                [
+                  33,
+                  32
+                ]
+              ],
+              [
+                [
+                  92,
+                  30
+                ],
+                [
+                  31,
+                  203
+                ],
+                [
+                  102,
+                  131
+                ],
+                [
+                  71,
+                  226
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  1,
+                  184
+                ],
+                [
+                  46,
+                  39
+                ],
+                [
+                  33,
+                  32
+                ],
+                [
+                  56,
+                  191
+                ]
+              ],
+              [
+                [
+                  92,
+                  30
+                ],
+                [
+                  31,
+                  203
+                ],
+                [
+                  102,
+                  131
+                ],
+                [
+                  71,
+                  226
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  15,
+                  172
+                ],
+                [
+                  69,
+                  193
+                ],
+                [
+                  31,
+                  211
+                ],
+                [
+                  35,
+                  89
+                ]
+              ],
+              [
+                [
+                  15,
+                  173
+                ],
+                [
+                  52,
+                  21
+                ],
+                [
+                  53,
+                  19
+                ],
+                [
+                  68,
+                  193
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  35,
+                  89
+                ],
+                [
+                  31,
+                  211
+                ],
+                [
+                  24,
+                  215
+                ],
+                [
+                  97,
+                  247
+                ]
+              ],
+              [
+                [
+                  57,
+                  205
+                ],
+                [
+                  110,
+                  240
+                ],
+                [
+                  67,
+                  62
+                ],
+                [
+                  29,
+                  127
+                ]
+              ]
+            ]
+          ],
+          "FP32_nominal_power": [
+            [
+              [
+                [
+                  9.538189888000488,
+                  0.1685604304075241
+                ],
+                [
+                  9.318686485290527,
+                  0.7249382138252258
+                ],
+                [
+                  8.751114845275879,
+                  0.5173476338386536
+                ],
+                [
+                  8.505949020385742,
+                  1.4712679386138916
+                ]
+              ],
+              [
+                [
+                  10.416574478149414,
+                  0.23742800951004028
+                ],
+                [
+                  9.50787353515625,
+                  0.6767089366912842
+                ],
+                [
+                  8.897919654846191,
+                  1.1856716871261597
+                ],
+                [
+                  8.76386833190918,
+                  1.042866587638855
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  9.980184555053711,
+                  0.18272152543067932
+                ],
+                [
+                  9.37607192993164,
+                  0.6874836087226868
+                ],
+                [
+                  8.56802749633789,
+                  1.561042070388794
+                ],
+                [
+                  8.46700668334961,
+                  0.676755964756012
+                ]
+              ],
+              [
+                [
+                  10.3712797164917,
+                  0.3209802806377411
+                ],
+                [
+                  10.02696418762207,
+                  0.5700697302818298
+                ],
+                [
+                  8.929824829101562,
+                  1.163567304611206
+                ],
+                [
+                  8.602215766906738,
+                  0.9514917135238647
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  22.945566177368164,
+                  15.15804672241211
+                ],
+                [
+                  12.529094696044922,
+                  2.7127976417541504
+                ],
+                [
+                  11.719484329223633,
+                  0.6448045372962952
+                ],
+                [
+                  11.540278434753418,
+                  2.8884670734405518
+                ]
+              ],
+              [
+                [
+                  29.190553665161133,
+                  19.559354782104492
+                ],
+                [
+                  20.045635223388672,
+                  4.921424388885498
+                ],
+                [
+                  13.820456504821777,
+                  2.5905678272247314
+                ],
+                [
+                  9.906457901000977,
+                  10.433133125305176
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  12.02830982208252,
+                  2.923487901687622
+                ],
+                [
+                  10.870431900024414,
+                  0.3876621127128601
+                ],
+                [
+                  10.520281791687012,
+                  1.3688225746154785
+                ],
+                [
+                  9.077847480773926,
+                  0.7028411030769348
+                ]
+              ],
+              [
+                [
+                  10.039057731628418,
+                  1.407091736793518
+                ],
+                [
+                  9.787947654724121,
+                  0.7628042101860046
+                ],
+                [
+                  9.422586441040039,
+                  0.28451594710350037
+                ],
+                [
+                  8.39808464050293,
+                  1.631636619567871
+                ]
+              ]
+            ]
+          ],
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "training-photo-step2",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/paired-response-data-inspection-v1/step-0002-inputs.npz",
+            "sha256": "0f223f318be216ba89b032a3c70ed93e13cde4e1584bef4c7398e20a7ce40652"
+          },
+          "RAW": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "2be9add8813d3367a2aa41b3e35cff592d2c78643ac57796a1af2ce9c8113bf3"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "f25b763490cd989e79af728f61e9bfe2a04461278c08217d51239c56e2edd9e3"
+          },
+          "feature_shape": [
+            4,
+            80,
+            128,
+            128
+          ],
+          "feature_logical_bytes": 20971520,
+          "FP32_seconds": 0.057024409994482994,
+          "FP64_seconds": 0.08094485101173632,
+          "FP32_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "5743ab513a4d48e7e02d881aef877c58e17275de35f2e48347e8e885634f3b7d"
+          },
+          "FP64_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              128,
+              128
+            ],
+            "dtype": "<f8",
+            "sha256": "64dcd5cd83972bb59a6ae299ac9fd08930a8edb78b6958e4b4c4e9dce6143ed8"
+          },
+          "FP64_numpy_maximum_absolute_error": 1.954547634852588e-13,
+          "FP32_FP64_selection_identical": true,
+          "FP32_FP64_RMS_difference": 1.0166267612079807e-07,
+          "FP32_FP64_maximum_absolute_difference": 9.146014959826587e-07,
+          "FP32_bins": [
+            [
+              [
+                [
+                  37,
+                  34
+                ],
+                [
+                  9,
+                  69
+                ],
+                [
+                  30,
+                  118
+                ],
+                [
+                  6,
+                  87
+                ]
+              ],
+              [
+                [
+                  32,
+                  22
+                ],
+                [
+                  22,
+                  124
+                ],
+                [
+                  34,
+                  83
+                ],
+                [
+                  54,
+                  122
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  37,
+                  34
+                ],
+                [
+                  8,
+                  70
+                ],
+                [
+                  39,
+                  34
+                ],
+                [
+                  6,
+                  62
+                ]
+              ],
+              [
+                [
+                  32,
+                  22
+                ],
+                [
+                  34,
+                  83
+                ],
+                [
+                  45,
+                  111
+                ],
+                [
+                  62,
+                  29
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  13,
+                  11
+                ],
+                [
+                  53,
+                  15
+                ],
+                [
+                  63,
+                  34
+                ],
+                [
+                  42,
+                  70
+                ]
+              ],
+              [
+                [
+                  60,
+                  110
+                ],
+                [
+                  20,
+                  15
+                ],
+                [
+                  4,
+                  53
+                ],
+                [
+                  12,
+                  109
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  13,
+                  11
+                ],
+                [
+                  53,
+                  15
+                ],
+                [
+                  63,
+                  34
+                ],
+                [
+                  42,
+                  70
+                ]
+              ],
+              [
+                [
+                  20,
+                  15
+                ],
+                [
+                  60,
+                  110
+                ],
+                [
+                  4,
+                  53
+                ],
+                [
+                  56,
+                  110
+                ]
+              ]
+            ]
+          ],
+          "FP32_nominal_power": [
+            [
+              [
+                [
+                  7.9047040939331055,
+                  0.35666078329086304
+                ],
+                [
+                  6.313454627990723,
+                  1.9254412651062012
+                ],
+                [
+                  6.252804279327393,
+                  0.08551965653896332
+                ],
+                [
+                  6.048596382141113,
+                  0.4271067678928375
+                ]
+              ],
+              [
+                [
+                  8.593599319458008,
+                  1.6734527349472046
+                ],
+                [
+                  7.778419017791748,
+                  0.21689683198928833
+                ],
+                [
+                  7.227539539337158,
+                  1.1679298877716064
+                ],
+                [
+                  6.997511863708496,
+                  2.0197129249572754
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  8.926520347595215,
+                  0.3458627462387085
+                ],
+                [
+                  6.104398727416992,
+                  0.22415228188037872
+                ],
+                [
+                  5.829578876495361,
+                  1.6499396562576294
+                ],
+                [
+                  5.668224811553955,
+                  0.008241076022386551
+                ]
+              ],
+              [
+                [
+                  8.717144012451172,
+                  1.1726211309432983
+                ],
+                [
+                  7.075056552886963,
+                  1.530663013458252
+                ],
+                [
+                  6.464074611663818,
+                  0.3235522508621216
+                ],
+                [
+                  6.251250743865967,
+                  0.8661631941795349
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  9.833517074584961,
+                  0.3032704293727875
+                ],
+                [
+                  7.266541004180908,
+                  1.0117607116699219
+                ],
+                [
+                  6.359089374542236,
+                  1.0626842975616455
+                ],
+                [
+                  5.659653186798096,
+                  1.1102075576782227
+                ]
+              ],
+              [
+                [
+                  6.426935195922852,
+                  0.05791269987821579
+                ],
+                [
+                  6.2377238273620605,
+                  0.4645440876483917
+                ],
+                [
+                  6.096121788024902,
+                  0.9088565707206726
+                ],
+                [
+                  5.673286437988281,
+                  4.024086952209473
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  9.877761840820312,
+                  0.2663032114505768
+                ],
+                [
+                  7.402841567993164,
+                  0.985828161239624
+                ],
+                [
+                  6.364990234375,
+                  1.0570725202560425
+                ],
+                [
+                  5.787861347198486,
+                  1.1093124151229858
+                ]
+              ],
+              [
+                [
+                  6.344932556152344,
+                  0.4113313853740692
+                ],
+                [
+                  6.278014659881592,
+                  0.06600207090377808
+                ],
+                [
+                  6.196863651275635,
+                  0.834743857383728
+                ],
+                [
+                  5.769318580627441,
+                  1.1100406646728516
+                ]
+              ]
+            ]
+          ],
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "training-mixed-step4",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/V160-paired-response-v1/training-batches/step-0004-inputs.npz",
+            "sha256": "b4df8bcd0ecf54a7474d78432a3bfc6d4574ffe4ed21efa070e29dcd5775b97f"
+          },
+          "RAW": {
+            "shape": [
+              4,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "1d5f22c4ef6a663615cf49c58db90613ab26fd647108369e8a19cb6fb8741d37"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "072999acbae7a72ef2b2a03ccba49ae5a6f96f1a282c27f3e69019d612cfc8e6"
+          },
+          "feature_shape": [
+            4,
+            80,
+            256,
+            256
+          ],
+          "feature_logical_bytes": 83886080,
+          "FP32_seconds": 0.2252813300001435,
+          "FP64_seconds": 0.2602774029946886,
+          "FP32_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "92b970c78d7ea0a30c1a076763cd88dd1c8beb55daf78e99e740b4e5aeba8de7"
+          },
+          "FP64_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f8",
+            "sha256": "51c4f19a227b5c67d567c9b60045a0fd93b0ac68952c2b38393c5334999fa35a"
+          },
+          "FP64_numpy_maximum_absolute_error": 4.968178646258536e-13,
+          "FP32_FP64_selection_identical": true,
+          "FP32_FP64_RMS_difference": 1.4400158782147109e-07,
+          "FP32_FP64_maximum_absolute_difference": 2.426743793387809e-06,
+          "FP32_bins": [
+            [
+              [
+                [
+                  102,
+                  138
+                ],
+                [
+                  61,
+                  121
+                ],
+                [
+                  103,
+                  243
+                ],
+                [
+                  105,
+                  113
+                ]
+              ],
+              [
+                [
+                  26,
+                  107
+                ],
+                [
+                  113,
+                  135
+                ],
+                [
+                  28,
+                  209
+                ],
+                [
+                  98,
+                  141
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  49,
+                  3
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  53,
+                  3
+                ],
+                [
+                  119,
+                  7
+                ]
+              ],
+              [
+                [
+                  54,
+                  3
+                ],
+                [
+                  48,
+                  3
+                ],
+                [
+                  0,
+                  47
+                ],
+                [
+                  91,
+                  29
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  24,
+                  214
+                ],
+                [
+                  22,
+                  218
+                ],
+                [
+                  21,
+                  220
+                ],
+                [
+                  23,
+                  216
+                ]
+              ],
+              [
+                [
+                  23,
+                  216
+                ],
+                [
+                  25,
+                  213
+                ],
+                [
+                  22,
+                  218
+                ],
+                [
+                  26,
+                  211
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  12,
+                  220
+                ],
+                [
+                  11,
+                  222
+                ],
+                [
+                  12,
+                  218
+                ],
+                [
+                  13,
+                  216
+                ]
+              ],
+              [
+                [
+                  12,
+                  219
+                ],
+                [
+                  11,
+                  222
+                ],
+                [
+                  13,
+                  217
+                ],
+                [
+                  17,
+                  204
+                ]
+              ]
+            ]
+          ],
+          "FP32_nominal_power": [
+            [
+              [
+                [
+                  13.49351692199707,
+                  2.7109971046447754
+                ],
+                [
+                  9.803563117980957,
+                  0.3145812451839447
+                ],
+                [
+                  9.741189002990723,
+                  0.989180326461792
+                ],
+                [
+                  9.588178634643555,
+                  1.6367319822311401
+                ]
+              ],
+              [
+                [
+                  9.610401153564453,
+                  0.2631569504737854
+                ],
+                [
+                  9.002912521362305,
+                  0.16865605115890503
+                ],
+                [
+                  8.897896766662598,
+                  2.046893835067749
+                ],
+                [
+                  8.686727523803711,
+                  0.7261702418327332
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  16.11194610595703,
+                  17.70144271850586
+                ],
+                [
+                  15.027000427246094,
+                  7.828464508056641
+                ],
+                [
+                  12.699310302734375,
+                  10.949470520019531
+                ],
+                [
+                  12.411715507507324,
+                  4.136451721191406
+                ]
+              ],
+              [
+                [
+                  24.26424217224121,
+                  7.0705695152282715
+                ],
+                [
+                  21.98661994934082,
+                  13.101264953613281
+                ],
+                [
+                  17.711130142211914,
+                  1.319269061088562
+                ],
+                [
+                  12.972078323364258,
+                  0.5861415863037109
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  22.190200805664062,
+                  21.48676872253418
+                ],
+                [
+                  21.380971908569336,
+                  18.89631462097168
+                ],
+                [
+                  16.15138816833496,
+                  12.680962562561035
+                ],
+                [
+                  15.900460243225098,
+                  23.15510368347168
+                ]
+              ],
+              [
+                [
+                  23.15510368347168,
+                  15.900460243225098
+                ],
+                [
+                  22.555673599243164,
+                  5.986684322357178
+                ],
+                [
+                  18.89631462097168,
+                  21.380971908569336
+                ],
+                [
+                  15.957684516906738,
+                  1.5227844715118408
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  172.28224182128906,
+                  160.64837646484375
+                ],
+                [
+                  127.26896667480469,
+                  161.4984130859375
+                ],
+                [
+                  120.24114227294922,
+                  138.9127655029297
+                ],
+                [
+                  78.2292709350586,
+                  90.7964096069336
+                ]
+              ],
+              [
+                [
+                  172.4595184326172,
+                  164.31690979003906
+                ],
+                [
+                  161.4984130859375,
+                  127.26896667480469
+                ],
+                [
+                  120.22364044189453,
+                  110.68866729736328
+                ],
+                [
+                  113.17015838623047,
+                  75.96043395996094
+                ]
+              ]
+            ]
+          ],
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "training-flat-step8",
+          "arrays": {
+            "path": "/mnt/external/demosaic/quality-20261107/V160-paired-response-v1/training-batches/step-0008-inputs.npz",
+            "sha256": "62e90d6b881787f63a40a9382377cf88a073e3c9bc2c1c48d27670e38ca48ebd"
+          },
+          "RAW": {
+            "shape": [
+              4,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "477c21a92c8c79d00c94b6946268b98dea9c558562a39dd5eff1d37d95eabde3"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "a67d308c8db3a9349130f7461ad49fd78974223c9c97989cb2ddd915b5da9af3"
+          },
+          "feature_shape": [
+            4,
+            80,
+            256,
+            256
+          ],
+          "feature_logical_bytes": 83886080,
+          "FP32_seconds": 0.23350516299251467,
+          "FP64_seconds": 0.2772830380126834,
+          "FP32_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "f4897f73b84cc23c7b4e123f3090deb7cb06fd7deef907d9a821ec896e907dfa"
+          },
+          "FP64_feature_fingerprint": {
+            "shape": [
+              4,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f8",
+            "sha256": "cd21b70ddf6d11064f07237cbefddb01bdf704f8822f89dc50fdd40be404a8b2"
+          },
+          "FP64_numpy_maximum_absolute_error": 5.444256157005611e-13,
+          "FP32_FP64_selection_identical": true,
+          "FP32_FP64_RMS_difference": 1.286333682688074e-07,
+          "FP32_FP64_maximum_absolute_difference": 9.895971580103913e-07,
+          "FP32_bins": [
+            [
+              [
+                [
+                  25,
+                  111
+                ],
+                [
+                  61,
+                  103
+                ],
+                [
+                  76,
+                  212
+                ],
+                [
+                  15,
+                  41
+                ]
+              ],
+              [
+                [
+                  98,
+                  254
+                ],
+                [
+                  5,
+                  124
+                ],
+                [
+                  9,
+                  121
+                ],
+                [
+                  74,
+                  251
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  82,
+                  93
+                ],
+                [
+                  80,
+                  127
+                ],
+                [
+                  1,
+                  95
+                ],
+                [
+                  89,
+                  17
+                ]
+              ],
+              [
+                [
+                  17,
+                  53
+                ],
+                [
+                  22,
+                  112
+                ],
+                [
+                  95,
+                  232
+                ],
+                [
+                  80,
+                  226
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  80,
+                  159
+                ],
+                [
+                  76,
+                  192
+                ],
+                [
+                  64,
+                  38
+                ],
+                [
+                  53,
+                  143
+                ]
+              ],
+              [
+                [
+                  41,
+                  79
+                ],
+                [
+                  106,
+                  125
+                ],
+                [
+                  112,
+                  89
+                ],
+                [
+                  97,
+                  172
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  95,
+                  242
+                ],
+                [
+                  38,
+                  220
+                ],
+                [
+                  68,
+                  125
+                ],
+                [
+                  17,
+                  47
+                ]
+              ],
+              [
+                [
+                  10,
+                  165
+                ],
+                [
+                  108,
+                  114
+                ],
+                [
+                  26,
+                  62
+                ],
+                [
+                  28,
+                  64
+                ]
+              ]
+            ]
+          ],
+          "FP32_nominal_power": [
+            [
+              [
+                [
+                  11.104065895080566,
+                  0.26459136605262756
+                ],
+                [
+                  10.90615177154541,
+                  0.6614376306533813
+                ],
+                [
+                  10.705527305603027,
+                  0.8799374103546143
+                ],
+                [
+                  9.179424285888672,
+                  0.7893916368484497
+                ]
+              ],
+              [
+                [
+                  10.450984001159668,
+                  1.1877100467681885
+                ],
+                [
+                  9.133319854736328,
+                  1.7606089115142822
+                ],
+                [
+                  8.913615226745605,
+                  0.4603651463985443
+                ],
+                [
+                  8.733434677124023,
+                  0.33001089096069336
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  11.87426471710205,
+                  0.9540066123008728
+                ],
+                [
+                  10.193588256835938,
+                  0.09370850771665573
+                ],
+                [
+                  10.178764343261719,
+                  1.2519335746765137
+                ],
+                [
+                  10.176576614379883,
+                  0.43429142236709595
+                ]
+              ],
+              [
+                [
+                  9.463135719299316,
+                  0.9245783090591431
+                ],
+                [
+                  9.084319114685059,
+                  3.2395684719085693
+                ],
+                [
+                  9.037092208862305,
+                  2.1190850734710693
+                ],
+                [
+                  8.384708404541016,
+                  0.7157139182090759
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  12.077983856201172,
+                  0.6191954612731934
+                ],
+                [
+                  11.119011878967285,
+                  0.08459582924842834
+                ],
+                [
+                  10.8267240524292,
+                  1.3134576082229614
+                ],
+                [
+                  10.422969818115234,
+                  0.0742049515247345
+                ]
+              ],
+              [
+                [
+                  11.817450523376465,
+                  0.09352613985538483
+                ],
+                [
+                  9.387893676757812,
+                  0.01177525520324707
+                ],
+                [
+                  8.712329864501953,
+                  1.6729611158370972
+                ],
+                [
+                  8.452281951904297,
+                  0.6383755207061768
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  12.773946762084961,
+                  0.242316335439682
+                ],
+                [
+                  9.150863647460938,
+                  1.975023627281189
+                ],
+                [
+                  8.843334197998047,
+                  0.4778132438659668
+                ],
+                [
+                  8.765929222106934,
+                  2.088312864303589
+                ]
+              ],
+              [
+                [
+                  12.145278930664062,
+                  1.2503777742385864
+                ],
+                [
+                  11.581250190734863,
+                  0.4204636216163635
+                ],
+                [
+                  10.195928573608398,
+                  0.15277446806430817
+                ],
+                [
+                  10.043811798095703,
+                  1.3564306497573853
+                ]
+              ]
+            ]
+          ],
+          "scope": "Retained training RAW only;targets and parents not interpreted."
+        },
+        {
+          "id": "main-overcast-sky",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+            "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+          },
+          "RAW": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "d08ecda9a5804a542b2546d3789f002dad40f1bbbf79bec9476fd027599d34fa"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "ba5c353221b680ef7ea497e145e7d02ee63b0638332284f0d008ec7b9cb272d7"
+          },
+          "feature_shape": [
+            1,
+            80,
+            256,
+            256
+          ],
+          "feature_logical_bytes": 20971520,
+          "FP32_seconds": 0.058750368014443666,
+          "FP64_seconds": 0.07549392199143767,
+          "FP32_feature_fingerprint": {
+            "shape": [
+              1,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f4",
+            "sha256": "5186aa9d9c7b5146b873c03ab44d44c73631068adb29399f1c858d8caac922d0"
+          },
+          "FP64_feature_fingerprint": {
+            "shape": [
+              1,
+              80,
+              256,
+              256
+            ],
+            "dtype": "<f8",
+            "sha256": "482bcfc025cb32b671fc3dd8b3a7c8023d64dfb406a5b12148bdbdfbca49f919"
+          },
+          "FP64_numpy_maximum_absolute_error": 4.1089354141377044e-13,
+          "FP32_FP64_selection_identical": true,
+          "FP32_FP64_RMS_difference": 1.1741771902418051e-07,
+          "FP32_FP64_maximum_absolute_difference": 7.699644773845327e-07,
+          "FP32_bins": [
+            [
+              [
+                [
+                  56,
+                  0
+                ],
+                [
+                  55,
+                  40
+                ],
+                [
+                  98,
+                  167
+                ],
+                [
+                  53,
+                  106
+                ]
+              ],
+              [
+                [
+                  110,
+                  207
+                ],
+                [
+                  58,
+                  28
+                ],
+                [
+                  120,
+                  45
+                ],
+                [
+                  24,
+                  22
+                ]
+              ]
+            ]
+          ],
+          "FP32_nominal_power": [
+            [
+              [
+                [
+                  9.613536834716797,
+                  2.235220432281494
+                ],
+                [
+                  9.538134574890137,
+                  1.1808185577392578
+                ],
+                [
+                  9.527488708496094,
+                  1.1257439851760864
+                ],
+                [
+                  9.442584037780762,
+                  0.27358517050743103
+                ]
+              ],
+              [
+                [
+                  9.970787048339844,
+                  1.875810146331787
+                ],
+                [
+                  8.641178131103516,
+                  0.11195919662714005
+                ],
+                [
+                  8.452462196350098,
+                  0.49014443159103394
+                ],
+                [
+                  8.33869457244873,
+                  0.5665028691291809
+                ]
+              ]
+            ]
+          ],
+          "scope": "Protected cached RAW feature geometry only;no GT/reference/parent read or quality score."
+        },
+        {
+          "id": "mesh-nominal",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "RAW": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "a9247efec350735301a5bfb48233a8064086fe99b4930c235daa37fff97fe2f9"
+          },
+          "variance": {
+            "shape": [
+              1,
+              4,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "511cc9a2ca48cc87c1fc5cc5050256467ae6e6bd3840c9ff838dd1bc9ff2dde5"
+          },
+          "feature_shape": [
+            1,
+            80,
+            384,
+            384
+          ],
+          "feature_logical_bytes": 47185920,
+          "FP32_seconds": 0.09936392898089252,
+          "FP64_seconds": 0.16313053597696126,
+          "FP32_feature_fingerprint": {
+            "shape": [
+              1,
+              80,
+              384,
+              384
+            ],
+            "dtype": "<f4",
+            "sha256": "760a81497cf393a44093ed733ffa1cae2b62153ecdb72e65aa84d29e7d1c3c57"
+          },
+          "FP64_feature_fingerprint": {
+            "shape": [
+              1,
+              80,
+              384,
+              384
+            ],
+            "dtype": "<f8",
+            "sha256": "261053c929e900b3c44c73953be05324e840a51391694bc679fb8354a428ce29"
+          },
+          "FP64_numpy_maximum_absolute_error": 2.2475077354755513e-12,
+          "FP32_FP64_selection_identical": true,
+          "FP32_FP64_RMS_difference": 1.7527692675620726e-07,
+          "FP32_FP64_maximum_absolute_difference": 1.9647575095760317e-06,
+          "FP32_bins": [
+            [
+              [
+                [
+                  56,
+                  90
+                ],
+                [
+                  55,
+                  314
+                ],
+                [
+                  58,
+                  90
+                ],
+                [
+                  54,
+                  89
+                ]
+              ],
+              [
+                [
+                  56,
+                  90
+                ],
+                [
+                  58,
+                  90
+                ],
+                [
+                  55,
+                  315
+                ],
+                [
+                  112,
+                  20
+                ]
+              ]
+            ]
+          ],
+          "FP32_nominal_power": [
+            [
+              [
+                [
+                  120.23049926757812,
+                  103.6417465209961
+                ],
+                [
+                  74.35428619384766,
+                  45.70831298828125
+                ],
+                [
+                  60.61870193481445,
+                  65.36624145507812
+                ],
+                [
+                  43.236698150634766,
+                  27.933692932128906
+                ]
+              ],
+              [
+                [
+                  103.6417465209961,
+                  120.23049926757812
+                ],
+                [
+                  65.36624145507812,
+                  60.61870193481445
+                ],
+                [
+                  49.342140197753906,
+                  73.85186767578125
+                ],
+                [
+                  37.21456527709961,
+                  32.141666412353516
+                ]
+              ]
+            ]
+          ],
+          "scope": "Protected cached RAW feature geometry only;no GT/reference/parent read or quality score."
+        }
+      ],
+      "strict_baseline_compatibility": [
+        {
+          "endpoint": "raw",
+          "old_module_hash": "371c30cd533591fb857096ebbc1edb1c9edbbc9b6866eba0eeb73f15f9477f47",
+          "new_module_hash": "84f275ce405ad7ada6af7cc08617d6a5acd6e41ebc562f7993bf4ee5d5ed97cc",
+          "existing_tensors_exact": 188,
+          "added_zero_tensors": 1,
+          "added_parameters": 3120
+        },
+        {
+          "endpoint": "EMA",
+          "old_module_hash": "e57d262960d546543aed4f7a4e3a088922c5b2333bfa6c6d4f4a54917d65f697",
+          "new_module_hash": "ad69773a61a316518f5ca45b2be8d1f5080a2112944e831b94f4aacf7c8423be",
+          "existing_tensors_exact": 188,
+          "added_zero_tensors": 1,
+          "added_parameters": 3120
+        }
+      ],
+      "feature_module_calls": 12,
+      "feature_images": 36,
+      "independent_numpy_image_references": 18,
+      "existing_checkpoint_loads": 1,
+      "actual_matching_frozen_parent_DINO_sampler_forwards": 0,
+      "new_optimizer_updates": 0,
+      "new_sensor_source_draws": 0,
+      "RAW_decodes": 0,
+      "CUDA_initialized": false,
+      "trainable_parameters": 2092026,
+      "frozen_parameters": 124909,
+      "peak_RSS_bytes": 1394855936,
+      "scope": "CPU feature extraction on6 fixed cached cases only,each in FP32/FP64 plus independent NumPy reference. Strict raw/EMA model-weight compatibility uses one existing V172 checkpoint load. No full matching/frozen/V143/DINO/sampler forward,optimizer update,new sensor/source render or RAW decode. Test fixtures are separate. Protected real inputs stay excluded from training;no original/dataz access. New model remains untrained and requires CUDA parity/gradient/memory/admission plus full quality/native views before use. V175 source/recipe/live owner unchanged."
+    }
+  },
+  "profile_log": {
+    "path": "/home/dllu/proj/demosaic/.cache/v178-phase-evidence-profile-v1.log",
+    "sha256": "1b99e4a03151916727af4354f46921857f47eec3854e4704c22eb9351b033bf6",
+    "text": "{\"case\": \"training-mesh-step1\", \"shape\": [4, 80, 256, 256], \"FP32_seconds\": 0.2818290680006612, \"FP64_numpy_max_abs\": 3.4830471840052724e-13, \"same_bins\": true}\n{\"case\": \"training-photo-step2\", \"shape\": [4, 80, 128, 128], \"FP32_seconds\": 0.057024409994482994, \"FP64_numpy_max_abs\": 1.954547634852588e-13, \"same_bins\": true}\n{\"case\": \"training-mixed-step4\", \"shape\": [4, 80, 256, 256], \"FP32_seconds\": 0.2252813300001435, \"FP64_numpy_max_abs\": 4.968178646258536e-13, \"same_bins\": true}\n{\"case\": \"training-flat-step8\", \"shape\": [4, 80, 256, 256], \"FP32_seconds\": 0.23350516299251467, \"FP64_numpy_max_abs\": 5.444256157005611e-13, \"same_bins\": true}\n{\"case\": \"main-overcast-sky\", \"shape\": [1, 80, 256, 256], \"FP32_seconds\": 0.058750368014443666, \"FP64_numpy_max_abs\": 4.1089354141377044e-13, \"same_bins\": true}\n{\"case\": \"mesh-nominal\", \"shape\": [1, 80, 384, 384], \"FP32_seconds\": 0.09936392898089252, \"FP64_numpy_max_abs\": 2.2475077354755513e-12, \"same_bins\": true}\nCompletedCPUpreparation;GPUandtrainedqualitypending\n"
+  },
+  "terminal_observation": "original-owner-missing-terminal",
+  "native_FP64_feature_values_compared_during_profile": 85196800,
+  "unchanged_prior_neural_sources": 96,
+  "new_neural_source_files": 1,
+  "unchanged_completion_helpers": 18,
+  "observed_live_V175_training": {
+    "status": "training",
+    "owner": {
+      "pid": 274124,
+      "created": 1794102724.04
+    },
+    "step": 3580,
+    "continuation_row": 2580,
+    "updates": 2319,
+    "total_updates": 3219,
+    "skipped": 261,
+    "fresh_batches": 2310,
+    "cached_noisy_batches": 9,
+    "counts": {
+      "wrapper": 2319,
+      "frozen": 2319,
+      "network": 2319,
+      "sampler": 11595
+    },
+    "parent_counts": {
+      "parent": 2312,
+      "DINO": 2312
+    },
+    "peak_CUDA_bytes": 7075942912
+  },
+  "scope": "CPU feature extraction on6 fixed cached cases only,each in FP32/FP64 plus independent NumPy reference. Strict raw/EMA model-weight compatibility uses one existing V172 checkpoint load. No full matching/frozen/V143/DINO/sampler forward,optimizer update,new sensor/source render or RAW decode. Test fixtures are separate. Protected real inputs stay excluded from training;no original/dataz access. New model remains untrained and requires CUDA parity/gradient/memory/admission plus full quality/native views before use. V175 source/recipe/live owner unchanged."
+}

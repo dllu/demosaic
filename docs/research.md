@@ -1,5 +1,17 @@
 # Current method research
 
+The [V178 phase-evidence matching path](phase-evidence-matching.md) makes the
+V177 observations available to the matching network as continuous features.
+Four A-selected frequencies per green direction provide 80 wave/power/signed
+cross/frequency maps; a zero 3,120-weight projection adds them to the existing
+39 matching coordinates. This differs from another spectral descriptor in the
+already frozen component: the matching branch can directly use the measured
+waves while learning spatial support. It introduces no hard detection threshold
+or direct sinusoid-to-RGB correction. All 68 CPU checks and native feature/strict
+checkpoint probes pass, with the original FP32 phase-angle failure preserved.
+The model is untrained; CUDA behavior, actual matching gradients, detail recovery
+and noisy-flat costs remain unmeasured. V175 continues unchanged.
+
 The [V177 within-image CFA sample split](phase-frequency-evidence.md) closes a
 specific diagnostic gap: one green RAW phase selects an unknown frequency and
 the other measures it, with GT entering only afterward. Primary nominal power≥16

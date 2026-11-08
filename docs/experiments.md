@@ -1,5 +1,15 @@
 # Experiment index
 
+The [V178 model variant](phase-evidence-matching.md) is implemented and CPU
+prepared, with a zero 80→39 measured-phase-evidence projection above V172's
+matching features. It adds 3,120 weights, keeps the existing matching network
+and frozen component, and applies no hard spectral cutoff or direct wave output.
+All 68 CPU checks pass; native FP64 features match independent NumPy across
+85,196,800 values, and both old endpoints retain all 188 tensors exactly.
+The initial FP32 carrier-angle failure/source are preserved and fixed using
+integer periodic phase, with unchanged tolerances. No actual matching forward
+or training has run; CUDA admission and full numerical/native quality remain.
+
 The [completed V177 phase-split diagnostic](phase-frequency-evidence.md)
 uses all 1,228 retained mesh member observations, selecting four frequencies
 from each green CFA phase without target or other-phase selection inputs.

@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [V178 phase-evidence matching variant](phase-evidence-matching.md) adds
+80 measured-wave coordinates through a zero 3,120-parameter adapter. All 68 CPU
+checks pass, both V172 states load with 188 existing tensors exact, and native
+feature checks cover 18 cached training/sky/cab images without resizing or
+reference reads. CUDA admission, training and image quality remain pending;
+the active V175 recipe and current model recommendations are unchanged.
+
 The [V177 CFA phase-split diagnostic](phase-frequency-evidence.md) selects
 frequencies from one green RAW phase and measures the other. Primary nominal
 power≥16 occurs in 170/614 present and 0/614 matched absent training cases;

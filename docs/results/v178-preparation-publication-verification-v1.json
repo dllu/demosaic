@@ -1,0 +1,51 @@
+{
+  "status": "pass-six-native-feature-cases-two-strict-states-and-source-preservation",
+  "created_local": "2026-11-07T19:42:56.231047-08:00",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/publish-v178-preparation-v1.py",
+    "sha256": "17a9fd725f7e898c3ea4a29439def125dab0e40bc1b6ca0ab34953ede2b4c9dc",
+    "text": "\"\"\"Publish completed CPU preparation and verify live-run/source preservation.\"\"\"\nfrom datetime import datetime\nimport hashlib\nimport json\nfrom pathlib import Path\nimport re\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO=Path('/home/dllu/proj/demosaic')\nROOT=REPO/'.cache/quality-20261107/V178-phase-evidence-preparation-v1'\nLIVE=REPO/'.cache/quality-20261107/V175-fresh-noise-matching-v2'\n\ndef read(p):return json.loads(Path(p).read_text())\ndef ref(p):\n p=Path(p).absolute()\n with p.open('rb') as f:h=hashlib.file_digest(f,'sha256').hexdigest()\n return {'path':str(p),'sha256':h}\ndef write(p,value):\n with Path(p).open('x') as f:json.dump(value,f,indent=2);f.write('\\n')\n\nplan_path=ROOT/'plan-v1.json';result_path=ROOT/'result-v1.json'\nplan,result=read(plan_path),read(result_path)\nassert result['status']=='completed-CPU-native-features-and-strict-initialization-no-training'\nassert result['plan']==ref(plan_path)\ntry:\n process=psutil.Process(result['owner']['pid'])\n assert process.create_time()!=result['owner']['created']\n terminal='original-owner-terminal-PID-reused'\nexcept psutil.NoSuchProcess:terminal='original-owner-missing-terminal'\nfor binding in plan['sources']:\n assert ref(binding['path'])['sha256']==binding['sha256']\n assert Path(binding['path']).read_text()==binding['text']\nassert '68 passed' in plan['CPU_tests']['text']\nassert '4 failed, 19 passed' in plan['prototype_failure']['log']['text']\nassert 'tolerance = 3e-5' in next(b['text'] for b in plan['sources'] if b['path'].endswith('/test_late_phase_evidence_matching.py'))\nimages=elements=0\nassert len(result['cases'])==6\nfor index,row in enumerate(result['cases'],1):\n assert row==read(ROOT/f'case-{index:02d}-v1.json')\n assert row['arrays']==plan['cases'][index-1]['arrays']\n assert ref(row['arrays']['path'])==row['arrays']\n assert row['FP32_FP64_selection_identical']\n assert row['feature_shape'][1]==80\n assert row['FP64_numpy_maximum_absolute_error']<1e-8\n assert row['FP32_FP64_RMS_difference']<2e-4\n count=1\n for value in row['feature_shape']:count*=value\n assert row['feature_logical_bytes']==count*4\n images+=row['feature_shape'][0];elements+=count\nassert images==18 and elements==85196800\nassert result['feature_module_calls']==12 and result['feature_images']==36\nassert result['independent_numpy_image_references']==18\nassert result['new_optimizer_updates']==result['actual_matching_frozen_parent_DINO_sampler_forwards']==0\nassert result['CUDA_initialized'] is False\nlive=read(LIVE/'plan-v1.json')\nassert result['strict_baseline_compatibility'][0]['old_module_hash']==live['initial_module_hashes']['raw']\nassert result['strict_baseline_compatibility'][1]['old_module_hash']==live['initial_module_hashes']['EMA']\nfor item in result['strict_baseline_compatibility']:\n assert item['existing_tensors_exact']==188 and item['added_zero_tensors']==1 and item['added_parameters']==3120\nassert result['trainable_parameters']==2092026 and result['frozen_parameters']==124909\nfor name,digest in live['prior_neural_hashes'].items():assert ref(REPO/'src/demosaic'/name)['sha256']==digest\nhelpers=read(LIVE/'postprocess-inputs-v1.json')['helpers']\nfor binding in helpers:assert ref(binding['path'])['sha256']==binding['sha256']\nsource_count=len(list((REPO/'src/demosaic').glob('*.py')))\nassert source_count==97\nstatus=read(LIVE/'train-status-v1.json');owner=status['owner'];process=psutil.Process(owner['pid'])\nassert process.create_time()==owner['created'] and status['status']=='training'\nwatch=read(LIVE/'completion-watch-status-v1.json');p=psutil.Process(watch['owner']['pid'])\nassert p.create_time()==watch['owner']['created']\ndocs=[REPO/name for name in ['README.md','docs/phase-evidence-matching.md','docs/index.md','docs/research.md','docs/experiments.md']]\nreport=(REPO/'docs/phase-evidence-matching.md').read_text()\nassert '**85,196,800' in report and '**68 focused CPU checks**' in report\ntable=[line.split('|')[1:-1] for line in report.splitlines() if re.match(r'\\|(Training|Protected)',line)]\nassert len(table)==6\nfor row,text in zip(result['cases'],table,strict=True):\n assert text[1]=='\u00d7'.join(str(x) for x in row['RAW']['shape'])\n assert text[2]=='\u00d7'.join(str(x) for x in row['feature_shape'])\n assert text[3]==f\"{row['FP32_seconds']:.3f}\"\nassert 'untrained' in report and 'CUDA parity' in report\nsummary={'status':'completed-V178-CPU-preparation-untrained-CUDA-and-quality-pending',\n 'created_local':datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n 'plan':dict(ref(plan_path),contents=plan),'result':dict(ref(result_path),contents=result),\n 'profile_log':dict(ref(REPO/'.cache/v178-phase-evidence-profile-v1.log'),text=(REPO/'.cache/v178-phase-evidence-profile-v1.log').read_text()),\n 'terminal_observation':terminal,'native_FP64_feature_values_compared_during_profile':elements,\n 'unchanged_prior_neural_sources':len(live['prior_neural_hashes']),'new_neural_source_files':1,\n 'unchanged_completion_helpers':len(helpers),'observed_live_V175_training':status,\n 'scope':plan['scope']}\npublic=REPO/'docs/results/v178-phase-evidence-preparation-v1.json';write(public,summary)\nlinks=0\nfor doc in docs:\n for target in re.findall(r'\\]\\(([^)]+)\\)',doc.read_text()):\n  if '://' in target or target.startswith('#'):continue\n  assert (doc.parent/target.split('#')[0]).resolve().exists(),(doc,target)\n  links+=1\nwrite(REPO/'docs/results/v178-preparation-publication-verification-v1.json',{\n 'status':'pass-six-native-feature-cases-two-strict-states-and-source-preservation',\n 'created_local':datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n 'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),'summary':ref(public),\n 'documents':[ref(p) for p in docs],'native_case_records_checked':6,'strict_endpoint_records_checked':2,\n 'table_numeric_cells_checked':18,'local_links_checked':links,'original_neural_sources_unchanged':96,\n 'added_neural_source_files':1,'sealed_V175_helpers_unchanged':18,\n 'current_V175_owner':owner,'current_completion_watcher_owner':watch['owner'],\n 'scope':'Publication/source/count/hash/shape/table verification,not a second feature/model run. Full-map comparisons occurred in the completed fixed CPU profile against independent NumPy. Matching/CUDA/training/quality remain unmeasured.'})\nprint('PASS6nativecases188oldtensorsx2onezero3120adapter96oldfiles18helpers',flush=True)\n"
+  },
+  "summary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v178-phase-evidence-preparation-v1.json",
+    "sha256": "5d1473990cd63ec60fdd3602b86296e7783d6cbe91f0195f4e30dbd8fc395b47"
+  },
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "9275ac14cbaf3e733b58b7f15d701bf5be4ef6f0f87b9d710d42117c0e3b8dac"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-matching.md",
+      "sha256": "1abfd232a2127597315ab1322ed4bfec21d8f4a7c9977f11a76aceee9db335ae"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "5cf4260c7c166a2bf9eae058926c162edf7b093ca55c5de814cc783af561ba1b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "09709d855d8eb7d34d67f3d4a3dae33ad4f68b6961d771aa2ed085caaef3a4ac"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "b923d9f274c08e105c2e7cd4378daecfaf720dc7f968a66fc13f5b7c253966fb"
+    }
+  ],
+  "native_case_records_checked": 6,
+  "strict_endpoint_records_checked": 2,
+  "table_numeric_cells_checked": 18,
+  "local_links_checked": 470,
+  "original_neural_sources_unchanged": 96,
+  "added_neural_source_files": 1,
+  "sealed_V175_helpers_unchanged": 18,
+  "current_V175_owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "current_completion_watcher_owner": {
+    "pid": 287357,
+    "created": 1794104682.2
+  },
+  "scope": "Publication/source/count/hash/shape/table verification,not a second feature/model run. Full-map comparisons occurred in the completed fixed CPU profile against independent NumPy. Matching/CUDA/training/quality remain unmeasured."
+}
