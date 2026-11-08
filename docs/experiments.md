@@ -1,5 +1,11 @@
 # Experiment index
 
+V178's [matched comparison and native viewer](phase-evidence-training.md#matched-tables-and-native-viewer)
+now support both control/evidence endpoints with per-method checkpoint metadata.
+The complete 13-method reused-value fixture and all 480 browser crops pass;
+actual V178 quality remains pending. Fourteen comparison tests pass, with
+earlier detail/quiet/flat strengths retained in 34 contrasts.
+
 A [four-pass V175 training-loss reduction](fresh-noise-matching.md#four-pass-training-losses)
 finds mesh pair loss −0.094%, weak/photo pair losses +0.059%/+0.156%, and
 standalone-flat anchor −0.558%. Photo flat-anchor rises 4.797%. These are

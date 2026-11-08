@@ -139,6 +139,66 @@ for phase in training quality; do
 done
 ```
 
+## Matched tables and native viewer
+
+The [comparison reducer](../scripts/reduce_phase_evidence_trial.py) implements
+two primary contrasts: evidence raw versus control raw, and evidence EMA versus
+control EMA. It also keeps 32 contextual contrasts against the parent, V161,
+V169, V171, V172, V173, V174 and V175 EMA. V175 has a larger fresh-noise budget
+and remains a contextual comparison. The evidence path and its 3,120 added
+parameters change together in the matched trial.
+
+All 13 methods retain their complete 822 rows. Tables cover mesh response and
+blank error, quiet total/spatial/DC error, standalone full/coarse flat error,
+natural fine-band fidelity and ADC controls. They show both matched endpoints
+separately and preserve the earlier useful strengths. Paired increase/decrease
+counts describe directions, not automatic improvements. Signed absent-template
+gains receive absolute differences without unstable relative percentages.
+Real ISO100/AHD/JPEG references stay unscored. The reducer requires terminal
+training/review owners, matching launch identities and passed real audits.
+
+The [matched native viewer](../scripts/build_matched_native_crop_viewer.py)
+opens on **control EMA versus evidence EMA** and supports all four endpoints.
+Each method has its own source-checkpoint hash, raw/EMA state and module-state
+hash. This fixes the old viewer's assumption of one raw/EMA pair without
+changing V175's sealed viewer helper. For each new prediction, the manifest
+must supply a `method_checkpoints` entry containing `source_checkpoint`,
+`state` and `module_hash`. Source PNG hashes and native panel coordinates are
+checked before building; method/metadata mismatches and resized panels reject.
+
+The completed CPU table fixture reuses V172 values for all four new labels and
+V174 values for the V175-shaped labels. Its matched differences are exactly
+zero by construction. It exercises **10,686 reused rows, 34 contrasts, 1,757
+independent Decimal summary means, 13,410 paired-mean checks and 714 independently
+formatted cells**. Fourteen comparison tests pass. A first fixture caught an
+older parent record without the duplicate `quiet_DC_RMS_DN16` alias; the common
+original `crop_DC_RMS_DN16` measurement is used without altering old scores.
+The failed fixture/source/log are preserved.
+
+The browser fixture uses the existing marked renderer PNGs. Actual Firefox
+checks all 48 boards at both endpoint pairs: **480 native crops/36,864,000 RGB
+channels exactly match their source PNG pixels**, with correct state metadata,
+default pairing, click/F-key flipping, navigation and no JavaScript errors.
+Its heading explicitly says **CPU LAYOUT FIXTURE / no V178 quality**. The first
+browser screenshot was actually viewed for layout only. These are viewer and
+reducer checks; actual V178 predictions, tables, native viewing and quality
+conclusions remain pending. Fixtures are not public model comparisons.
+[Sources, fixture evidence and preserved rejections](results/v178-matched-comparison-viewer-preparation-v1.json).
+
+After actual audits, run the sealed reducer:
+
+```bash
+phase_trial_root=.cache/quality-20261107/V178-phase-evidence-trial-v1
+CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=1 \
+  PYTHONPATH="$phase_trial_root/audit-work-v1/scripts:$phase_trial_root/work/src:$phase_trial_root/work/scripts" \
+  .venv/bin/python "$phase_trial_root/report-work-v1/scripts/reduce_phase_evidence_trial.py"
+```
+
+The output is internal paired evidence and numeric tables. Final prose and
+publication still require actual native viewing, qualified references and at
+least two unresized noisy/restored/exact constructed GT triplets. The renderer
+already plans 24 such triplets across the four endpoints.
+
 ## Storage and launch
 
 New trial checkpoints and native arrays are planned under its local

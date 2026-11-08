@@ -29,6 +29,8 @@ old pixels and are explicitly labeled. The
 [independent CPU auditor](phase-evidence-training.md#independent-audit-preparation)
 is implemented; actual V178 admission, training and quality remain pending.
 These preparation results do not change the measured model choices.
+The [matched tables and four-state native viewer](phase-evidence-training.md#matched-tables-and-native-viewer)
+also pass complete old-value/pixel fixtures, with actual V178 results pending.
 
 The [V176 template diagnostic](mesh-template-evidence.md) finds substantially
 more conditional evidence over larger areas, using hidden GT templates.

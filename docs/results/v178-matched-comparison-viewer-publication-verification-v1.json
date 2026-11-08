@@ -1,0 +1,147 @@
+{
+  "status": "pass-report-viewer-source-fixture-publication-and-live-owner-checks",
+  "recorded_local": "2026-11-07T21:42:06.560654-08:00",
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v178-matched-comparison-viewer-preparation-v1.json",
+    "sha256": "f52317ed64e4ef8ec795954a78be5b8864631e164823952ea37f4fb1b5c09afc"
+  },
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "54bc010526b78422c5ea6473508d9de23c35968c8280718f6acda46e5cfdcc8a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-training.md",
+      "sha256": "5ff7f771198b0beda244db83c556c7aff7b59f199896d688238842e29f889f6e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "ade2776e660eed28c1cb9ec733a3fbc92891b2effe837fb6a3f6a11b8524f6f7"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "2b104cea0441278ff53a04f5b19bf501713cdefecc22ec60444e7238849b0521"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-21-38-58-phase-evidence-matched-comparisons-viewer.md",
+      "sha256": "c8e63fc68ab6c5724064ef6c55020a73194ee83799a8594cadeafd8d70795060"
+    }
+  ],
+  "local_links_checked": 370,
+  "trial_frozen_files": 713,
+  "trial_immutable_inputs": 9,
+  "additive_audit_helpers": 2,
+  "additive_report_helpers": 3,
+  "current_neural_sources_unchanged": 97,
+  "prior_V175_neural_sources_unchanged": 96,
+  "sealed_V175_helpers_unchanged": 18,
+  "CPU_comparison_tests": 14,
+  "reused_rows_in_fixture": 10686,
+  "fixture_table_cells": 714,
+  "browser_fixture_crops": 480,
+  "exact_fixture_browser_RGB_channels": 36864000,
+  "observed_live_owners": [
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2",
+      "owner": {
+        "pid": 274124,
+        "created": 1794102724.04
+      },
+      "status": {
+        "status": "training",
+        "owner": {
+          "pid": 274124,
+          "created": 1794102724.04
+        },
+        "step": 6860,
+        "continuation_row": 5860,
+        "updates": 5273,
+        "total_updates": 6173,
+        "skipped": 587,
+        "fresh_batches": 5255,
+        "cached_noisy_batches": 18,
+        "counts": {
+          "wrapper": 5273,
+          "frozen": 5273,
+          "network": 5273,
+          "sampler": 26365
+        },
+        "parent_counts": {
+          "parent": 5257,
+          "DINO": 5257
+        },
+        "peak_CUDA_bytes": 7075942912
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2",
+      "owner": {
+        "pid": 287357,
+        "created": 1794104682.2
+      },
+      "status": {
+        "status": "waiting-for-train",
+        "owner": {
+          "pid": 287357,
+          "created": 1794104682.2
+        },
+        "observed_unix_UTC": 1794116518.8153603,
+        "worker_owner": {
+          "pid": 274124,
+          "created": 1794102724.04
+        }
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-admission-v1",
+      "owner": {
+        "pid": 417389,
+        "created": 1794110449.65
+      },
+      "status": {
+        "status": "waiting-for-train-owner",
+        "owner": {
+          "pid": 417389,
+          "created": 1794110449.65
+        },
+        "observed_unix_UTC": 1794116525.7100568,
+        "dependency": {
+          "ready": false,
+          "reason": "waiting-for-train-owner",
+          "owner": {
+            "pid": 274124,
+            "created": 1794102724.04
+          }
+        }
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1",
+      "owner": {
+        "pid": 453410,
+        "created": 1794113512.6
+      },
+      "status": {
+        "status": "waiting-for-CUDA-admission-watch-owner",
+        "owner": {
+          "pid": 453410,
+          "created": 1794113512.6
+        },
+        "observed_unix_UTC": 1794116513.02421,
+        "target": {
+          "pid": 417389,
+          "created": 1794110449.65
+        }
+      }
+    }
+  ],
+  "new_model_forwards": 0,
+  "new_sensor_draws": 0,
+  "actual_V178_quality_rows": 0,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/publish-v178-comparison-viewer-preparation-v1.py",
+    "sha256": "6f7c935c3692ac31eec143d290f06d0abc754d4d73e0395cd1b75bac044b4cae",
+    "text": "\"\"\"Publish comparison/viewer fixture evidence with no new model-quality claim.\"\"\"\nimport datetime\nimport hashlib\nimport json\nfrom pathlib import Path\nimport re\nimport shutil\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO=Path('/home/dllu/proj/demosaic')\nROOT=REPO/'.cache/quality-20261107/V178-phase-evidence-trial-v1'\nV175=ROOT.parent/'V175-fresh-noise-matching-v2'\nADMISSION=ROOT.parent/'V178-phase-evidence-admission-v1'\n\n\ndef read(path):return json.loads(Path(path).read_text())\ndef ref(path):\n path=Path(path).absolute()\n with path.open('rb') as stream:digest=hashlib.file_digest(stream,'sha256').hexdigest()\n return dict(path=str(path),sha256=digest)\ndef source(path):return dict(ref(path),text=Path(path).read_text())\ndef save(path,value):\n with Path(path).open('x') as stream:json.dump(value,stream,indent=2,allow_nan=False);stream.write('\\n')\n\n\ndef main():\n draft=read(ROOT/'draft-v1.json');seal=read(ROOT/'report-source-v1.json')\n for path,digest in draft['frozen_files'].items():assert ref(path)['sha256']==digest\n for binding in draft['inputs']:assert ref(binding['path'])==binding\n assert len(draft['frozen_files'])==713 and len(draft['inputs'])==9\n helpers=[]\n for binding in seal['helpers']:\n  path=Path(binding['path']);assert ref(path)==binding\n  canonical=REPO/path.relative_to(ROOT/'report-work-v1')\n  assert path.read_bytes()==canonical.read_bytes()\n  helpers.append(dict(binding,text=path.read_text(),canonical=ref(canonical)))\n audit_seal=read(ROOT/'audit-source-v1.json')\n for binding in audit_seal['helpers']:assert ref(binding['path'])==binding\n tests=read(ROOT/'report-source-v1.json')['CPU_tests'];assert '14 passed' in tests['text']\n assert ref(tests['path'])=={k:tests[k] for k in ['path','sha256']}\n comparison=read(ROOT/'comparison-fixture-verification-v2.json')\n assert comparison['methods']==13 and comparison['reused_metric_rows']==10686\n assert comparison['contrasts']==34 and comparison['fixture_paired_groups']==4470\n assert comparison['independent_Decimal_summary_means']==1757 and comparison['paired_mean_and_difference_checks']==13410\n assert comparison['table_cells_independently_formatted_with_Decimal']==714\n assert comparison['matched_fixture_differences_all_zero'] and comparison['actual_new_quality_rows']==0\n for key in ['fixture_result','fixture_tables']:\n  assert ref(comparison[key]['path'])==comparison[key]\n assert Path(comparison['fixture_tables']['path']).read_text().startswith('# CPU COMPARISON FIXTURE')\n pixels=read(ROOT/'viewer-fixture-pixels-v1.json');build=read(ROOT/'viewer-fixture-build-v1.json')\n assert pixels['browser_crop_screenshots']==480 and pixels['RGB_channels_exact_source_PNG']==36864000\n assert pixels['JS_errors']==[] and pixels['fixture_only_no_actual_V178_quality']\n assert len(build['rejected_invalid_manifests'])==4 and build['actual_new_model_forwards']==0\n assert ref(pixels['viewer']['path'])==pixels['viewer'] and ref(pixels['manifest']['path'])==pixels['manifest']\n assert read(pixels['manifest']['path'])['fixture'] is True\n entry=read(ROOT/'report-frozen-entry-v1.json');assert not entry['Torch_imported'] and not entry['actual_V178_results']\n assert entry['reducer']==seal['reducer'] and entry['viewer']==seal['viewer']\n baseline=read(V175/'plan-v1.json')\n for name,digest in baseline['prior_neural_hashes'].items():assert ref(REPO/'src/demosaic'/name)['sha256']==digest\n neural=list((REPO/'src/demosaic').glob('*.py'));assert len(neural)==97\n for path in neural:assert path.read_bytes()==(Path(draft['work'])/'src/demosaic'/path.name).read_bytes()\n post=read(V175/'postprocess-inputs-v1.json');assert len(post['helpers'])==18\n for binding in post['helpers']:assert ref(binding['path'])==binding\n assert (REPO/'scripts/build_native_crop_viewer.py').read_bytes()==(Path(draft['work'])/'scripts/build_native_crop_viewer.py').read_bytes()\n owners=[]\n for folder,launch,status in [(V175,'train-launch-v1.json','train-status-v1.json'),\n   (V175,'completion-watch-launch-v1.json','completion-watch-status-v1.json'),\n   (ADMISSION,'watch-launch-v1.json','watch-status-v1.json'),(ROOT,'controller-launch-v1.json','controller-status-v1.json')]:\n  owner=read(folder/launch)['owner'];process=psutil.Process(owner['pid'])\n  assert process.create_time()==owner['created'] and process.status() not in ['dead','zombie']\n  assert not list(folder.glob('*failure-v1.json'))\n  owners.append(dict(root=str(folder),owner=owner,status=read(folder/status)))\n for name in ['plan-v1.json','scores-v1.json','paired-comparisons-v1.json','comparison-tables-v1.md','control-train-launch-v1.json','evidence-train-launch-v1.json']:\n  assert not (ROOT/name).exists(),name\n public=REPO/'docs/results/v178-matched-comparison-viewer-preparation-v1.json'\n stamp=datetime.datetime.now(ZoneInfo('America/Los_Angeles')).isoformat()\n save(public,dict(status='pass-frozen-matched-report-and-native-viewer-fixtures-no-actual-V178-quality',\n  recorded_local=stamp,source_seal=seal,exact_helper_sources=helpers,\n  comparison_fixture= comparison,viewer_build_fixture=build,actual_browser_pixel_fixture=pixels,\n  frozen_entry_checks=entry,CPU_tests=tests,\n  preserved_preparation_rejections=dict(\n   first_test_log=source(REPO/'.cache/v178-comparison-CPU-tests-v1.log'),\n   first_test_source=source(REPO/'.cache/test-phase-evidence-comparisons-v1.py'),\n   correction='Test fixture expectation incorrectly applied evidence increment to control contrasts;corrected by method.12passed/1failed then13passed;adding alias regression yields14passed.',\n   first_full_fixture_log=source(REPO/'.cache/v178-comparison-fixture-v1.log'),\n   first_reducer_source=source(REPO/'.cache/v178-comparison-reducer-v1.py'),\n   alias_correction='Older parent has original crop_DC_RMS_DN16 without later duplicate quiet_DC_RMS_DN16. Common original DC field stays mandatory;old scores unchanged. First fixture stopped before a result. v2 succeeds without new model work.'),\n  actual_layout_viewing=dict(screenshot=ref(ROOT/'viewer-browser-fixture-v1/screen-first.png'),\n     viewed=True,scope='First browser screenshot actually viewed at original detail for layout only. Marked CPU fixture,no V178 quality viewing.'),\n  observed_live_owners=owners,\n  GiB_available=dict(RAM=psutil.virtual_memory().available/2**30,local=shutil.disk_usage(REPO).free/2**30,external=shutil.disk_usage('/mnt/external').free/2**30),\n  actual_new_V178_forwards=0,actual_V178_trial_updates=0,actual_V178_quality_rows=0,\n  scope='Three additive report/viewer/test files;original713 trial andtwo audit files unchanged. All synthetic method names explicitly reuse old values/pixels;no new performance/native comparison is published. Real future results require completed owners/audits and actual viewing. No new external artifacts or original-media work.',\n  publisher=source(__file__)))\n docs=[REPO/name for name in ['README.md','docs/phase-evidence-training.md','docs/index.md','docs/experiments.md',\n       'diary/2026-11-07-21-38-58-phase-evidence-matched-comparisons-viewer.md']]\n links=0\n for path in docs:\n  for link in re.findall(r'\\]\\(([^)]+)\\)',path.read_text()):\n   if link.startswith(('http:','https:','mailto:','#')):continue\n   assert (path.parent/link.split('#')[0]).resolve().exists(),(path,link)\n   links+=1\n save(REPO/'docs/results/v178-matched-comparison-viewer-publication-verification-v1.json',dict(\n  status='pass-report-viewer-source-fixture-publication-and-live-owner-checks',recorded_local=stamp,\n  preparation=ref(public),documents=[ref(path) for path in docs],local_links_checked=links,\n  trial_frozen_files=713,trial_immutable_inputs=9,additive_audit_helpers=2,additive_report_helpers=3,\n  current_neural_sources_unchanged=97,prior_V175_neural_sources_unchanged=96,sealed_V175_helpers_unchanged=18,\n  CPU_comparison_tests=14,reused_rows_in_fixture=10686,fixture_table_cells=714,\n  browser_fixture_crops=480,exact_fixture_browser_RGB_channels=36864000,\n  observed_live_owners=owners,new_model_forwards=0,new_sensor_draws=0,actual_V178_quality_rows=0,\n  source=source(__file__),scope='Publication verification only;hashes and owner checks. Existing CPU fixture/prototype failures remain preserved. No new scientific model result,quality viewing or gain is claimed.'))\n print('PASS713+2+3files/input9/neural97/helper18/CPU14/714cells/480browsercrops/links',links,flush=True)\n\n\nif __name__=='__main__':main()\n"
+  },
+  "scope": "Publication verification only;hashes and owner checks. Existing CPU fixture/prototype failures remain preserved. No new scientific model result,quality viewing or gain is claimed."
+}
