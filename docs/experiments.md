@@ -1,5 +1,15 @@
 # Experiment index
 
+The [V178 one-pass matched draft](phase-evidence-training.md) implements control
+and evidence training plus four-endpoint/822-case review. Real V172 checkpoint
+proofs retain 141 old Adam states at 900 and zero new-adapter history; 13 CPU state
+tests and frozen-entry gates pass. A marked CPU fixture checks 72 native figures/
+24 triplets with reused V172/V174 pixels. Actual CUDA admission and training
+remain pending, with one CPU controller waiting. V175 meanwhile reaches its real
+row-5,000 checkpoint: 4,500 total updates, all 141 Adam clocks at 4,500, all 47
+frozen tensors exact and 4,000 audited continuation rows, with 3,588 fresh
+batches and 3,600 exact FP32 loss totals.
+
 The [V178 CUDA admission queue](phase-evidence-admission.md) binds seven native
 cases, both V172 endpoints, the exact sampler and two real optimizer/restore
 probes. Its CPU watcher waits for completed V175 train/review/render owners and

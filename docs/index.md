@@ -1,5 +1,13 @@
 # Documentation guide
 
+The [V178 matched training/review draft](phase-evidence-training.md) preserves
+V172's real 900-step Adam/EMA history in both arms and starts only the new adapter
+at zero optimizer history. Thirteen state tests, actual checkpoint checks,
+frozen entry gates and a 72-figure baseline-pixel renderer fixture pass. A CPU
+controller waits for CUDA admission; training/quality remain pending. V175's
+separate real row-5,000 checkpoint has 4,500 total updates and passes its
+four-pass CPU trace/state audit.
+
 The [V178 CUDA admission](phase-evidence-admission.md) is frozen and its CPU
 watcher is live, waiting for V175's train/review/completion owners and completed
 audits/render. All 18 protocol checks and actual frozen-entry/import checks pass.

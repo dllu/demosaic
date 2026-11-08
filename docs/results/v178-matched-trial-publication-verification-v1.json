@@ -1,0 +1,82 @@
+{
+  "status": "pass-frozen-draft-live-CPU-controller-source-state-fixture-prefix-and-document-checks",
+  "recorded_local": "2026-11-07T20:57:58.920051-08:00",
+  "summary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v178-matched-trial-CPU-draft-v1.json",
+    "sha256": "35cd482ecc8f29ab827b9081758123dc71a521efb3a27537ffba47bda8b60e9d"
+  },
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "54bc010526b78422c5ea6473508d9de23c35968c8280718f6acda46e5cfdcc8a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-training.md",
+      "sha256": "f4778ee8e494400ebbaa9f096aa236dd06a321cb5a81261c597d7f01ceb96ac9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/phase-evidence-matching.md",
+      "sha256": "430c8c2a20ebb2bb010e7f0d6ec24409dc38bb5c356a1f1d9af3a828752d47ce"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/fresh-noise-matching.md",
+      "sha256": "bb8606bf0e45b4e5e6a9b72fa1d7d42a34a0c7feeb132ee3ee5535b927b419b0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "4bfc1bf94e481bdbae66003ae697c383c86006724be70bd2d91e075ce40ba48a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "e6ad1bdc14c6b1736d6fcd8c5bc2c58ccacae7df24c9c96a7365b18a00924621"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "30d29a598198a1691bd3e47121f43d7f41a6abb33466476ea25b1d7d21724345"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-20-45-04-phase-evidence-matched-training-draft.md",
+      "sha256": "9bbb5acd4953e1c48de15d6892472356e32f12cd757721bad67a0073a83749dc"
+    }
+  ],
+  "local_links_checked": 501,
+  "frozen_files_checked": 713,
+  "immutable_inputs_checked": 9,
+  "current_neural_files_exact_frozen": 97,
+  "original_V175_neural_files_unchanged": 96,
+  "sealed_V175_helpers_unchanged": 18,
+  "CPU_state_tests": 13,
+  "actual_checkpoint_clocks_and_EMA_verified": true,
+  "fixture_only_figures": 72,
+  "fixture_only_triplets": 24,
+  "fixture_only_new_method_RGB_channels_checked": 16588800,
+  "V175_four_pass_audit": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v175-four-pass-boundary-audit-v1.json",
+    "sha256": "c99c0dcb211d0893a65326da7a00f7ab7225e7da0efa1fd255fc9598a712a6bd"
+  },
+  "V175_audit_immutable_prefixes_checked": 2,
+  "controller_owner": {
+    "pid": 453410,
+    "created": 1794113512.6
+  },
+  "V175_training_owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "CUDA_admission_watcher_owner": {
+    "pid": 417389,
+    "created": 1794110449.65
+  },
+  "V175_completion_watcher_owner": {
+    "pid": 287357,
+    "created": 1794104682.2
+  },
+  "new_GPU_calls": 0,
+  "new_trial_updates": 0,
+  "scope": "Publication verification only; no checkpoint or model load, no neural/sensor/GPU work. Actual trial and quality remain pending.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/publish-v178-matched-draft-v1.py",
+    "sha256": "698fcb04893034e62fe7058eac46aeaf0066f757f400fd982d4f152564d9366d",
+    "text": "\"\"\"Publish completed CPU draft evidence; no neural/sensor/GPU work.\"\"\"\nimport datetime\nimport hashlib\nimport json\nimport pathlib\nimport re\nimport shutil\nimport time\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO = pathlib.Path('/home/dllu/proj/demosaic')\nROOT = REPO / '.cache/quality-20261107/V178-phase-evidence-trial-v1'\nADMISSION = REPO / '.cache/quality-20261107/V178-phase-evidence-admission-v1'\nV175 = REPO / '.cache/quality-20261107/V175-fresh-noise-matching-v2'\n\n\ndef read(path):\n    return json.loads(pathlib.Path(path).read_text())\n\n\ndef ref(path):\n    path = pathlib.Path(path).absolute()\n    digest = hashlib.sha256()\n    with path.open('rb') as stream:\n        for chunk in iter(lambda: stream.read(2**20), b''):\n            digest.update(chunk)\n    return dict(path=str(path), sha256=digest.hexdigest())\n\n\ndef save(path, value):\n    with pathlib.Path(path).open('x') as stream:\n        json.dump(value, stream, indent=2, allow_nan=False)\n        stream.write('\\n')\n\n\ndef live(owner):\n    process = psutil.Process(owner['pid'])\n    assert process.create_time() == owner['created']\n    assert process.status() not in ['zombie', 'dead']\n    return process\n\n\ndef source(path):\n    return dict(ref(path), text=pathlib.Path(path).read_text())\n\n\ndef main():\n    os_owner = dict(pid=453410, created=1794113512.6)\n    controller = live(os_owner)\n    assert controller.nice() == 10 and controller.cpu_affinity() == [4, 5]\n    assert not any('libtorch' in item.path or 'libcudart' in item.path\n                   for item in controller.memory_maps())\n    draft = read(ROOT / 'draft-v1.json')\n    assert draft['status'] == 'CPU-draft-actual-warmstart-verified-awaiting-CUDA-admission'\n    assert len(draft['frozen_files']) == 713 and len(draft['inputs']) == 9\n    for path, digest in draft['frozen_files'].items():\n        assert ref(path)['sha256'] == digest\n    for binding in draft['inputs']:\n        assert ref(binding['path']) == binding\n    sources = []\n    for relative in ['scripts/train_phase_evidence_trial.py',\n                     'scripts/phase_evidence_training_state.py',\n                     'scripts/render_phase_evidence_trial.py',\n                     'tests/test_phase_evidence_training_state.py']:\n        path = REPO / relative\n        frozen = pathlib.Path(draft['work']) / relative\n        assert path.read_bytes() == frozen.read_bytes()\n        sources.append(source(path))\n    for arm, parameters, tensors in [('control', 2088906, 141), ('evidence', 2092026, 142)]:\n        proof = draft['CPU_warmstart_proof'][arm]\n        assert proof['initial_updates'] == 900\n        assert proof['Adam_clocks']['network'] == dict(tensors=141, states=141, steps=[900.0])\n        assert proof['Adam_clocks']['adapter']['states'] == 0\n        assert proof['trainable_parameters'] == parameters and proof['trainable_tensors'] == tensors\n        assert proof['EMA_tensors'] == tensors\n        assert all(proof[k] for k in ['original_moments_exact', 'network_EMA_exact',\n                                      'new_adapter_has_no_Adam_state', 'adapter_EMA_starts_zero'])\n    assert '13 passed' in draft['state_CPU_tests']['text']\n    assert ref(draft['state_CPU_tests']['path']) == {k: draft['state_CPU_tests'][k]\n                                                    for k in ['path', 'sha256']}\n    baseline = read(V175 / 'plan-v1.json')\n    assert len(baseline['prior_neural_hashes']) == 96\n    for name, digest in baseline['prior_neural_hashes'].items():\n        assert ref(REPO / 'src/demosaic' / name)['sha256'] == digest\n    neural_sources = list((REPO / 'src/demosaic').glob('*.py'))\n    assert len(neural_sources) == 97\n    for path in neural_sources:\n        assert path.read_bytes() == (pathlib.Path(draft['work']) / 'src/demosaic' / path.name).read_bytes()\n    post = read(V175 / 'postprocess-inputs-v1.json')\n    assert len(post['helpers']) == 18\n    for binding in post['helpers']:\n        assert ref(binding['path']) == binding\n    entry = read(ROOT / 'frozen-entry-readiness-v1.json')\n    fixture = read(ROOT / 'renderer-fixture-verification-v1.json')\n    assert entry['status'].startswith('pass-') and not entry['CUDA_initialized']\n    assert not entry['Torch_imported_by_rejected_prepare'] and not entry['training_claim_or_launch']\n    assert fixture['status'] == 'pass-renderer-layout-fixture-only-no-V178-quality-evaluation'\n    assert fixture['figures'] == fixture['all_headers_marked_fixture'] == 72\n    assert fixture['triplets'] == 24 and fixture['sheets'] == 18\n    assert fixture['new_method_crop_RGB_channels_compared_against_independent_display'] == 16588800\n    assert fixture['actual_new_model_forwards'] == 0\n    for proof in [entry, fixture]:\n        assert proof['draft'] == ref(ROOT / 'draft-v1.json')\n        assert ref(proof['source']['path']) == {k: proof['source'][k] for k in ['path', 'sha256']}\n    seal = read(ROOT / 'controller-source-v1.json')\n    assert ref(seal['source']['path']) == seal['source']\n    assert pathlib.Path(seal['source']['path']).read_text() == seal['text']\n    assert seal['draft'] == ref(ROOT / 'draft-v1.json')\n    launch = read(ROOT / 'controller-launch-v1.json')\n    assert launch['owner'] == os_owner and read(ROOT / 'controller-owner-v1.json') == os_owner\n    state = read(ROOT / 'controller-status-v1.json')\n    assert state['status'] == 'waiting-for-CUDA-admission-watch-owner'\n    admission_owner = read(ADMISSION / 'watch-launch-v1.json')['owner']\n    assert state['target'] == admission_owner\n    live(admission_owner)\n    training_owner = read(V175 / 'train-launch-v1.json')['owner']\n    watcher_owner = read(V175 / 'completion-watch-launch-v1.json')['owner']\n    live(training_owner)\n    live(watcher_owner)\n    for name in ['plan-v1.json', 'control-train.claim', 'evidence-train.claim', 'review.claim',\n                 'control-train-launch-v1.json', 'evidence-train-launch-v1.json',\n                 'review-launch-v1.json', 'scores-v1.json', 'figures-v1.json',\n                 'controller-failure-v1.json']:\n        assert not (ROOT / name).exists(), name\n    assert not (ADMISSION / 'admission-result-v1.json').exists()\n    assert not (ADMISSION / 'admission.claim').exists()\n    audit_path = REPO / 'docs/results/v175-four-pass-boundary-audit-v1.json'\n    audit = read(audit_path)\n    assert audit['status'].startswith('pass-real-row5000')\n    assert audit['FP32_loss_totals_checked'] == 3600 and audit['maximum_loss_total_difference'] == 0\n    assert audit['actual_Adam_states'] == 141 and audit['actual_Adam_step'] == 4500\n    for key in ['journal_prefix', 'event_journal_prefix']:\n        prefix = audit[key]\n        with pathlib.Path(prefix['path']).open('rb') as stream:\n            data = stream.read(prefix['bytes'])\n        assert len(data) == prefix['bytes'] and hashlib.sha256(data).hexdigest() == prefix['sha256']\n    observed = dict(\n        recorded_local=datetime.datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n        observed_unix_UTC=time.time(), controller_owner=os_owner,\n        controller_status=state, controller_RSS_bytes=controller.memory_info().rss,\n        controller_nice=controller.nice(), controller_CPU_affinity=controller.cpu_affinity(),\n        controller_has_Torch_or_CUDA_libraries=False,\n        CUDA_admission_watcher_owner=admission_owner,\n        CUDA_admission_watcher_status=read(ADMISSION / 'watch-status-v1.json'),\n        V175_training_owner=training_owner, V175_training_status=read(V175 / 'train-status-v1.json'),\n        V175_completion_watcher_owner=watcher_owner,\n        V175_completion_watcher_status=read(V175 / 'completion-watch-status-v1.json'),\n        available_GiB=dict(RAM=psutil.virtual_memory().available/2**30,\n                           local=shutil.disk_usage(REPO).free/2**30,\n                           external=shutil.disk_usage('/mnt/external').free/2**30),\n        scope='Process liveness, statuses and free space are timestamp-specific observations.')\n    public = REPO / 'docs/results/v178-matched-trial-CPU-draft-v1.json'\n    save(public, dict(\n        status='pass-completed-CPU-draft-state-checks-frozen-entry-and-layout-fixture-awaiting-admission',\n        draft_binding=ref(ROOT/'draft-v1.json'), draft=draft, implementation_sources=sources,\n        frozen_entry_readiness=entry, renderer_layout_fixture_verification=fixture,\n        controller_source_seal=seal, controller_launch=launch, publication_observation=observed,\n        V175_four_pass_checkpoint_audit=ref(audit_path),\n        actual_new_V178_neural_forwards=0, actual_V178_trial_optimizer_updates=0,\n        actual_V178_trial_GPU_launches=0, actual_V178_quality_rows=0,\n        actual_real_checkpoint_CPU_loads_in_draft=1, CPU_state_tests=13,\n        CPU_state_tests_scope='Small toy modules perform actual AdamW updates to test clocks/storage/EMA/restore. No actual matching-module update or forward.',\n        fixture_viewing='One explicitly marked fixture triplet viewed for layout only; no V178 model-quality viewing.',\n        scope='No model quality gain. The waiting controller schedules actual trial only after successful terminal CUDA admission; no training plan/claims/results yet. Both protected scenes and all original evidence remain unchanged. No original/remote-source work.',\n        publisher=source(__file__)))\n    docs = [REPO/p for p in ['README.md', 'docs/phase-evidence-training.md',\n            'docs/phase-evidence-matching.md', 'docs/fresh-noise-matching.md', 'docs/index.md',\n            'docs/research.md', 'docs/experiments.md',\n            'diary/2026-11-07-20-45-04-phase-evidence-matched-training-draft.md']]\n    verification = REPO / 'docs/results/v178-matched-trial-publication-verification-v1.json'\n    count = 0\n    for path in docs:\n        for link in re.findall(r'\\]\\(([^)]+)\\)', path.read_text()):\n            if link.startswith(('http:', 'https:', 'mailto:', '#')):\n                continue\n            target = (path.parent/link.split('#')[0]).resolve()\n            assert target.exists() or target == verification, (path, link)\n            count += 1\n    save(verification, dict(\n        status='pass-frozen-draft-live-CPU-controller-source-state-fixture-prefix-and-document-checks',\n        recorded_local=observed['recorded_local'], summary=ref(public),\n        documents=[ref(path) for path in docs], local_links_checked=count,\n        frozen_files_checked=713, immutable_inputs_checked=9,\n        current_neural_files_exact_frozen=97, original_V175_neural_files_unchanged=96,\n        sealed_V175_helpers_unchanged=18, CPU_state_tests=13,\n        actual_checkpoint_clocks_and_EMA_verified=True, fixture_only_figures=72,\n        fixture_only_triplets=24, fixture_only_new_method_RGB_channels_checked=16588800,\n        V175_four_pass_audit=ref(audit_path), V175_audit_immutable_prefixes_checked=2,\n        controller_owner=os_owner, V175_training_owner=training_owner,\n        CUDA_admission_watcher_owner=admission_owner, V175_completion_watcher_owner=watcher_owner,\n        new_GPU_calls=0, new_trial_updates=0,\n        scope='Publication verification only; no checkpoint or model load, no neural/sensor/GPU work. Actual trial and quality remain pending.',\n        source=source(__file__)))\n    print('PASS CPU draft, frozen713/input9, neural97/old96/helper18, fixture72/triplet24, controller453410, links',count, flush=True)\n\n\nif __name__ == '__main__':\n    main()\n"
+  }
+}

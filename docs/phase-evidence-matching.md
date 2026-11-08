@@ -57,6 +57,11 @@ all original tensors. This is not a claim of actual CUDA output parity yet.
 The new optimizer state must be initialized or explicitly extended; loading
 the old weights does not establish optimizer compatibility.
 
+A [matched continuation draft](phase-evidence-training.md) now verifies an
+explicit extension on the real checkpoint: 141 old Adam states stay at 900,
+while the new adapter starts without optimizer history and participates in EMA.
+Thirteen additional CPU state checks pass; no training has launched.
+
 ## Detail and flat-region limits
 
 The global wave maps are features, not reconstructed wires. Their coefficients

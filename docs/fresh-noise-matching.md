@@ -85,6 +85,14 @@ totals/masks/parent argument bindings also pass. This is a running-prefix check,
 not final quality evidence; no sensor noise or neural inference was repeated.
 [Actual restored prefix audit](results/v175-restored-live-prefix-v1.json).
 
+The actual row-5,000 checkpoint now has **4,500 total optimizer updates**, with
+all 141 Adam states at 4,500 and all 47 frozen tensors exact. Four complete further
+passes validate 4,000 rows, 3,600 loss totals, 3,588 fresh batches, 12 retained noisy
+rows, 400 ADC skips and 14,376 durable events. Five visits to the first scene
+have distinct actual RAW/variance/parent fingerprints with unchanged target/
+calibration/pairs. This CPU-only check repeats no noise or inference and claims
+no model quality. [Four-pass checkpoint/prefix audit](results/v175-four-pass-boundary-audit-v1.json).
+
 The shared final trace auditor has also checked an actual 512-row prefix:
 456 updates, 454 fresh batches, 1,820 durable parent/matching events and exact
 FP32 loss totals. Eight deliberately corrupted in-memory copies of a separate

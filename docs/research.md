@@ -1,5 +1,15 @@
 # Current method research
 
+The [V178 matched continuation draft](phase-evidence-training.md) compares one
+additional cached pass at the same raw/Adam/EMA starting point and budget.
+The existing 141 optimizer clocks continue from 900; the new adapter starts from 0
+and is included in EMA and restoration. Thirteen CPU state tests and actual
+checkpoint checks pass; the renderer is exercised only with labeled baseline
+fixtures. A CPU controller waits for admission before running the matched trial.
+No V178 training or quality is measured. Separately, V175's actual row-5,000
+checkpoint/four-pass trace passes checks of all 141 Adam clocks at 4,500, all 47
+frozen tensors, 3,600 loss totals and 14,376 events with no extra inference or noise.
+
 The [V178 native CUDA admission](phase-evidence-admission.md) is prepared and
 waiting behind V175's complete GPU pipeline. It will check actual zero-adapter
 output parity, CPU/CUDA features, all 142 gradients, checkpoint/Adam/RNG restoration
