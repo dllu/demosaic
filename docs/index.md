@@ -37,6 +37,12 @@ All 20 native training batches and an independent audit are complete, with zero
 optimizer updates. This guides the next loss experiment; V180/V181's actual
 quality comparisons and the earlier useful models remain unchanged.
 
+The [V183 coherent pair-response implementation](coherent-pair-response.md)
+adds bounded supervision along each training pair's clean spatial difference,
+retaining every V181 term. All 25 CPU tests and 20 saved-native output-gradient
+replays pass, with zero observed FP32 derivative differences across 53.48 million
+coordinates. Actual CUDA/network/optimizer and trained-quality work remains.
+
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only
 0.03–0.05% versus V172, and real fine crossings remain weak. Raw quiet RMS falls

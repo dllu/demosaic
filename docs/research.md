@@ -40,8 +40,11 @@ including within the shared network alone. This is local geometry, omitting
 first/new second moments, clipping, decay and cross-batch effects; it predicts
 no finite training or real-photo gain. All 20 native forwards, 76 parameter
 backwards, independent array/loss/retained-gradient audit and actual plot viewing
-are complete, with no updates or new data/noise. A coherent pair-response term
-is the next experiment to prepare while retaining the absolute and flat losses.
+are complete, with no updates or new data/noise. The follow-up
+[bounded coherent pair-response term](coherent-pair-response.md) now passes
+25 CPU checks and all 53.48 million independent native output-gradient values,
+retaining the eight old terms and mask. Actual CUDA/network-gradient, restoration,
+matched training and quality checks remain; no new model gain is claimed.
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,

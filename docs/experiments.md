@@ -31,6 +31,14 @@ matrices, 284 Adam denominators and 568 retained layer Grams. A variable-shadowi
 failure in the first audit and the first plot layout remain preserved; no
 scientific forward is repeated. Model-quality recommendations stay unchanged.
 
+The [V183 bounded coherent pair-response loss](coherent-pair-response.md)
+is implemented above the unchanged eight-term V181 objective. A 1-DN16 energy
+floor limits pressure from vanishing differences; per-channel DC is removed.
+All 25 focused CPU checks and the independent 20-native-batch replay pass:
+53,477,376 output-gradient coordinates have zero observed FP32 differences.
+Constant/orthogonal blind directions remain explicit. No CUDA admission,
+optimizer update, matched training or new quality conclusion is claimed yet.
+
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of
 constructed GT amplitude. Quiet spatial error rises slightly at both noise
