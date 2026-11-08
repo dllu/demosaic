@@ -51,14 +51,21 @@ persists. All60 native figures/12triplets were actually viewed;19methods,
 [ten-state viewer](images/v183-coherent-pair-evidence-v1/native-viewer.html) keep
 raw/EMA metadata separate. Preparation fixtures remain explicitly marked.
 
-The [V184 direct phase-aware readout](phase-wave-readout.md) freezes completed
+The completed [V184 direct phase-aware readout](phase-wave-readout-comparison.md) freezes completed
 V183 EMA and trains only316 new parameters on the same cached rows/nine losses.
 All36 CPU model/state checks, six native feature cases/12,779,520 NumPy values,
 seven bit-exact CUDA initial comparisons and two head-only updates with genuine
 restoration pass. Only the new four-tensor Adam/EMA history starts at0; no old
-matching parameter trains. The full900-update run is active, with14 independent
-training-audit CPU checks and a successful actual live-owner rejection. Image
-quality and both endpoint/protected-scene native comparisons remain unmeasured.
+matching parameter trains. Full 900-update training and both endpoint reviews
+complete with independent audits and all 60 actual native figures/12 triplets.
+Mesh response rises **9.60% raw / 15.96% EMA versus V183 EMA** to4.865% / 5.148%
+of GT, with quiet spatial RMS0.76–0.94% / 1.81–2.35% higher. Raw has the smaller
+quiet cost. Real crossings stay incomplete and quiet fields gain false striping.
+Both primary baselines are frozen V183 EMA; extra training/capacity/freezing
+change together. Twenty-one methods/17,262 rows/38 contrasts/1,386 cells retain
+earlier strengths. All14 training-audit,12 quality-audit,15 comparison and16
+publication CPU checks pass; actual owner/viewing guards remain preserved.
+[Implementation and exact preparation](phase-wave-readout.md).
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises mean mesh response **0.92% over matched control**, reaching 3.924% of

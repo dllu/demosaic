@@ -1,5 +1,26 @@
 # Current model choices
 
+The completed [V184 phase-aware readout](phase-wave-readout-comparison.md)
+provides a stronger-response development option. Mean mesh response rises
+**9.60% raw / 15.96% EMA versus frozen V183 EMA**, reaching **4.865% / 5.148%
+of exact constructed GT amplitude**; 163/256 raw and 160/256 EMA inputs increase.
+Quiet spatial RMS rises **0.936% / 0.765% raw and 2.346% / 1.807% EMA** at
+ISO6400/12800. Quiet total RMS rises 0.836% / 0.575% raw and 1.855% / 1.386% EMA.
+Raw has the smaller quiet cost. Constructed views show more periodic modulation,
+but real cab crossings stay incomplete and quiet fields gain false fine striping.
+Natural band-error means worsen in all four cohorts despite some response gains.
+
+Only 316 new parameters train above the exact frozen V183 EMA component. Both
+primary comparisons use that EMA initializer; added training, capacity and
+freezing change together. EMA has 1.76% less mean mesh response than V161 EMA
+with 9.18–10.70% lower quiet total RMS. Retain the direct readout for further
+detail work beside V183's intermediate, V181's quieter and V172's balanced
+comparisons, plus earlier flat/quiet/detail strengths. V120 Small remains the
+general recommendation. Both endpoints/all 822 cases, full 900-total/five-checkpoint
+and quality audits, two strict exports and all 60 actually viewed native figures/
+12 triplets are complete. [Twelve-state viewer](images/v184-wave-readout-v1/native-viewer.html) ·
+[Exact evidence](results/v184-wave-readout-final-v1.json).
+
 The completed [V183 coherent-response comparison](coherent-pair-evidence-comparison.md)
 adds an intermediate recipe on the same local-evidence architecture. EMA mesh
 response rises **6.95% versus V181 to4.4390% of exact constructed GT amplitude**,

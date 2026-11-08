@@ -8,7 +8,7 @@ the stronger [V161 detail prototype](harmonic-frequency-context.md),
 [V173](weak-gradient-matching.md)/[V174](spread-sample-matching.md) quiet gains.
 Their remaining weaknesses differ; none combines strong mesh recovery and
 clean quiet fields. The latest completed
-[native-pixel viewer](images/v183-coherent-pair-evidence-v1/native-viewer.html) retains
+[native-pixel viewer](images/v184-wave-readout-v1/native-viewer.html) retains
 both protected GFX scenes and the earlier useful comparators.
 
 The completed [V180 local-evidence comparison](local-phase-evidence-comparison.md)
@@ -48,11 +48,15 @@ viewed native figures/12 triplets are complete. Nineteen methods/32contrasts/
 1,218cells retain prior results. The [loss implementation](coherent-pair-response.md)
 records25 CPU tests,20 native derivative replays and two genuine CUDA probes.
 
-The [V184 direct wave readout](phase-wave-readout.md) adds316 shared phase-aware
-parameters above frozen V183 EMA. All36 CPU checks, six native NumPy comparisons,
-seven bit-exact CUDA initial parities and two restored optimizer updates pass.
-The isolated900-update training run is active; image quality is unmeasured.
-Both endpoint reviews and actual protected-scene/native comparisons remain required.
+The completed [V184 phase-aware readout](phase-wave-readout-comparison.md) adds
+316 parameters above frozen V183 EMA. Mesh response rises **9.60% raw / 15.96%
+EMA**, reaching 4.865% / 5.148% of GT amplitude; quiet spatial RMS rises
+**0.76–0.94% raw / 1.81–2.35% EMA**. Raw has the lower quiet cost. Constructed
+periodic modulation strengthens, while real crossings stay incomplete and quiet
+fields gain false striping. Retain this direct path beside earlier quieter options.
+Both endpoints/all 822 cases, independent audits and all 60 actual native figures/
+12 triplets are complete. Twenty-one methods/38 contrasts/1,386 cells preserve
+earlier strengths. [Implementation and native admission](phase-wave-readout.md).
 
 The completed [V175 fresh-noise continuation](fresh-noise-matching.md) reaches
 9,000 total updates, with 8,073 fresh sensor batches. Mesh response rises only

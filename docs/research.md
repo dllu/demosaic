@@ -56,15 +56,22 @@ crossings and broad colored mottle remain unresolved. Direct coherent supervisio
 changes the tradeoff without removing shared-parameter interference; retain all
 three local recipes for their measured strengths.
 
-The [V184 architecture experiment](phase-wave-readout.md) bypasses the shared
+The completed [V184 architecture experiment](phase-wave-readout-comparison.md) bypasses the shared
 matching network for a small learned wave residual, freezing all189 inherited
 V183 EMA tensors. A316parameter shared contextual readout mixes both measured
 complex waves and explicitly transports phase to native RGB subpixels. All36
 CPU checks,12.78million independent native NumPy values, seven initial CUDA
-parities and two restored head-only updates pass. The full900-update head run
-is active. Freezing isolates new gradients from the inherited model but does
-not establish noisy-field safety or real crossing recovery; quality remains
-unmeasured and the completed V180/V181/V183 strengths remain current.
+parities and two restored head-only updates pass. The full 900-update head run,
+independent audits and all 60 original-detail figures are complete. Raw/EMA mesh
+response rises **9.60% / 15.96% versus V183 EMA**, reaching 4.865% / 5.148% of
+GT amplitude, with quiet spatial RMS **0.76–0.94% / 1.81–2.35% higher**.
+Both new primary comparisons use the frozen EMA initializer. Extra training,
+capacity and freezing change together. Constructed periodic modulation improves,
+while real fine crossings remain incomplete and quiet fields gain false striping.
+All four natural band-error means worsen. Freezing protects inherited parameters
+from new gradients but cannot protect the combined output from false waves.
+Retain this stronger-response path, with raw's lower quiet cost, alongside the
+quieter V183/V181/V172 and earlier useful strengths. [Implementation](phase-wave-readout.md).
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
 raises constructed-mesh response **0.920% raw / 0.915% EMA over matched control**,

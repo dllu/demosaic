@@ -30,6 +30,16 @@ native figures are complete. Retain this intermediate recipe beside V180's
 stronger response and V181's quieter output; real crossings and broad mottle
 remain unresolved. The frozen V178 evidence and scientific receipts stay unchanged.
 
+The completed [V184 phase-aware readout](phase-wave-readout-comparison.md) adds
+316 new parameters above frozen V183 EMA. Both raw/EMA primary comparisons use
+that EMA initializer: mesh response rises9.60% / 15.96% to4.865% / 5.148% of GT,
+with quiet spatial RMS0.76–0.94% / 1.81–2.35% higher. Raw has the lower quiet
+cost. All189 inherited tensors stay exact, and all822 inherited outputs replay
+at both endpoints. Extra training/capacity/freezing change together. Retain the
+direct readout as a stronger-response path beside earlier quieter choices;
+real crossings remain incomplete and quiet fields gain false striping. Both
+audits and all60 actually viewed native figures/12triplets are complete.
+
 [Model implementation](../src/demosaic/late_phase_evidence_matching.py) ·
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·
 [Native preparation and preserved prototype failure](results/v178-phase-evidence-preparation-v1.json).

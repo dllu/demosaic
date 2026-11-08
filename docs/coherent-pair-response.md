@@ -9,6 +9,13 @@ quiet RMS0.09–0.49% lower. Natural fine-band response rises slightly versus
 V181; broad mottle and missing real fence crossings persist. Retain this
 intermediate recipe beside V180's stronger response and V181's quieter output.
 
+The completed [V184 direct readout](phase-wave-readout-comparison.md) now freezes
+this V183 EMA component and adds316 trainable wave parameters. Raw/EMA mesh
+response rises9.60% / 15.96% versus that frozen initializer, with quiet spatial
+RMS0.76–0.94% / 1.81–2.35% higher and visible extra false striping. Keep V183's
+quieter intermediate output available beside the new stronger-response path.
+Real fine crossings and broad mottle remain unresolved.
+
 The [V182 gradient study](flat-spatial-gradient-conflict.md) finds that added
 spatial pressure can oppose weak-detail response through shared parameters.
 This follow-up adds direct coherent response supervision while retaining all
