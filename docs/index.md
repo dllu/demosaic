@@ -1,5 +1,12 @@
 # Documentation guide
 
+The [V176 conditional-template diagnostic](mesh-template-evidence.md) finds
+substantially more evidence across larger areas of the 614 noisy training mesh
+pairs: green median known-template SNR rises from 0.653 at native16 to 7.360 at
+native512. Exact hidden template/background/variances are supplied, so this
+does not establish input-only recovery or flat safety. All pairs, 16 CPU tests
+and an independent QR check are complete; no new model or restored RGB is made.
+
 The [V175 fresh-noise continuation](fresh-noise-matching.md) has launched from
 V172's actual raw model/Adam/EMA states. It plans 8,100 further updates, with
 8,073 fresh sensor batches and exact new frozen V143/DINO parents; three clipped

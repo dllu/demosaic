@@ -1,5 +1,17 @@
 # Experiment index
 
+The [completed V176 conditional-template diagnostic](mesh-template-evidence.md)
+analyzes all 614 noisy training mesh pairs at six context widths, using each
+member's marginal RAW separately. Median green template SNR rises from 0.653
+at native16 to 7.360 at native512; exact hidden templates/background/variances
+are diagnostic inputs unavailable at inference. This produces no restored RGB
+or new model-quality claim and changes no V175 training choices. All 2,456
+input fingerprints, 307 parent arrays, 16 CPU tests, 48 independent QR fits and
+7,368 window identities pass. Full rows remain on external storage, with
+[source, plot points and verification](results/v176-template-information-v1.json)
+published. The initial disk-reservation preparation rejection and first chart
+render are retained.
+
 The [V175 fresh-noise continuation](fresh-noise-matching.md) has launched a
 fixed nine-pass extension of V172: 8,100 additional updates/32,400 images,
 8,073 fresh sensor batches/new frozen-parent roots, 27 retained noisy batches

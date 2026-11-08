@@ -22,6 +22,10 @@ with 8,100 further updates and newly computed frozen-parent outputs for 8,073
 fresh sensor batches. Quality is pending; the current model choices below stay
 available while this training recipe is tested.
 
+An [exact-template training diagnostic](docs/mesh-template-evidence.md) finds
+much more conditional mesh evidence across larger areas. It supplies hidden GT
+and makes no new model-quality or flat-safety claim.
+
 | Useful implementation | Measured strength | Remaining limits |
 | --- | --- | --- |
 | V120 Small | Broad photo/camera results and complete 102MP RGB16 checks | Fine foliage, mesh, neon and dark-field mottling |

@@ -1,0 +1,66 @@
+{
+  "status": "pass-publication-bindings-all1228-points-and-summary-counts",
+  "summary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v176-template-information-v1.json",
+    "sha256": "652cddad5b1ed465dc69c76fffe3e6c274de6b89181e0d398ee4ea7d1c555d28"
+  },
+  "figures": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/v176-template-information-v1/context-evidence-v1.png",
+      "sha256": "37c7f8522c7132c9101a4e68e5ab6bb7995eb4d571a5948ba0e0a02f12b63e33"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/v176-template-information-v1/context-evidence-v1.svg",
+      "sha256": "27ff9fb429dc371075812d999cd584631837884c034dc4285b75c4760594ccfe"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/images/v176-template-information-v1/context-evidence-v1.pdf",
+      "sha256": "b98c7732c102b24500edb7bee0453790c6234d107a5ba65aba4b2b7deeb8d9b0"
+    }
+  ],
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "6ad30c8cc77414ff61db36f3e3cc28ed445e2b6b13c2719f92dc8690b5c8bf66"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/mesh-template-evidence.md",
+      "sha256": "bc5c792ac0deb8b4a529cb214010120f9ce3c5ebdd714c80b94022325b139f37"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "4453cfa30a883f4f51b24f44534db8e98735987a4b56aa2ae326ccd781544307"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "a6018e1c9703f23d574deb28d8d9bf695a6db138f3b301c23be21a5312617d42"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "d6b0b7bd80d2855ed2fbcf83be1d7e37684b513fdab1a737aa4d067314f7e9fc"
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v176-publication-v1.py",
+    "sha256": "dac42c0a5b55b656b7ec18c07b127bde54fe6c7a56e1d63bc537febe943f8626",
+    "text": "\"\"\"Independent publication binding/count/point verification; no scientific rerun.\"\"\"\nimport hashlib\nimport json\nimport math\nfrom pathlib import Path\nimport re\nfrom statistics import median\n\nREPO = Path('/home/dllu/proj/demosaic')\nEXTERNAL = Path('/mnt/external/demosaic/quality-20261107/V176-template-information-v1')\nROOT = REPO / '.cache/quality-20261107/V176-template-information-v1'\n\ndef read(path):\n    return json.loads(Path(path).read_text())\n\ndef ref(path):\n    with Path(path).open('rb') as f:\n        digest = hashlib.file_digest(f, 'sha256').hexdigest()\n    return {'path': str(Path(path).absolute()), 'sha256': digest}\n\nsummary_path = REPO / 'docs/results/v176-template-information-v1.json'\nsummary = read(summary_path)\nresult = read(summary['full_result']['path'])\nassert ref(summary['full_result']['path']) == summary['full_result']\nassert ref(summary['row_journal']['path']) == summary['row_journal']\nassert read(ROOT / 'plan-v1.json') == summary['plan']['contents']\nassert ref(ROOT / 'plan-v1.json') == {k: summary['plan'][k] for k in ['path','sha256']}\nassert read(ROOT / 'independent-verification-v1.json') == summary['independent_verification']['contents']\nassert summary['independent_verification']['contents']['independent_scalar_checks'] == 336\nfor binding in summary['plan']['contents']['sources'] + [summary['publication_source']]:\n    assert ref(binding['path'])['sha256'] == binding['sha256']\n    assert Path(binding['path']).read_text() == binding['text']\nassert '16 passed' in summary['plan']['contents']['CPU_tests']['text']\nrows = {(r['step'],r['pair'],r['phase_group']):r for r in result['rows']}\nassert len(rows) == 1228\nfor point in summary['plot_points']:\n    row = rows[(point['step'],point['pair'],point['phase_group'])]\n    assert point['fine_ladder'] == row['fine_ladder']\n    assert point['SNR_by_width'] == [w['known_template_SNR'] for w in row['windows']]\n    assert point['full_context_amplitudes'] == row['windows'][-1]['amplitudes']\nfor group, values in summary['groups'].items():\n    selected = [r for r in rows.values() if r['phase_group'] == group]\n    assert len(selected) == 614\n    assert sum(r['fine_ladder'] for r in selected) == 322\n    for index, width in enumerate([16,32,64,128,256,512]):\n        snr = [r['windows'][index]['known_template_SNR'] for r in selected]\n        v = values['widths'][str(width)]\n        assert v['known_template_SNR']['median'] == median(snr)\n        assert math.isclose(v['known_template_SNR']['mean'], math.fsum(snr)/614, rel_tol=1e-14)\n        assert v['below_1'] == sum(s<1 for s in snr)\n        assert v['at_least_3'] == sum(s>=3 for s in snr)\n        assert v['at_least_5'] == sum(s>=5 for s in snr)\n    for name, s in values['full_context_amplitudes'].items():\n        a = [r['windows'][-1]['amplitudes'][name] for r in selected]\n        assert s['median'] == median(a)\n        assert math.isclose(s['mean'], math.fsum(a)/614, rel_tol=1e-13,abs_tol=1e-17)\n    high = [r for r in selected if r['windows'][-1]['known_template_SNR'] >= 5]\n    expected = 0.003718 if group == 'green' else 0.003266\n    assert round(median(r['windows'][-1]['amplitudes']['parent_present'] for r in high),6) == expected\nfigures=[]\nfor binding in summary['figures']:\n    path = Path(binding['path'])\n    public = REPO / 'docs/images/v176-template-information-v1' / path.name\n    assert ref(path) == binding\n    assert public.read_bytes() == path.read_bytes()\n    figures.append(ref(public))\ndocs = [REPO / name for name in ['README.md','docs/mesh-template-evidence.md','docs/index.md',\n                                  'docs/research.md','docs/experiments.md']]\nlinks = []\nfor doc in docs:\n    for target in re.findall(r'\\]\\(([^)]+)\\)',doc.read_text()):\n        if '://' in target or target.startswith('#'):\n            continue\n        path = (doc.parent / target.split('#')[0]).resolve()\n        assert path.exists(), (doc,target)\n        links.append(str(path))\nlive = read(REPO / '.cache/quality-20261107/V175-fresh-noise-matching-v2/plan-v1.json')\nfor name, digest in live['prior_neural_hashes'].items():\n    assert ref(REPO / 'src/demosaic' / name)['sha256'] == digest\nout = REPO / 'docs/results/v176-publication-verification-v1.json'\nreceipt = {'status':'pass-publication-bindings-all1228-points-and-summary-counts',\n           'summary':ref(summary_path),'figures':figures,'documents':[ref(p) for p in docs],\n           'source':dict(ref(Path(__file__)),text=Path(__file__).read_text()),\n           'points_verified':1228,'group_width_summaries':12,'verified_local_links':len(links),\n           'unchanged_neural_sources':len(live['prior_neural_hashes']),\n           'actual_chart_viewing':'Both publication-v1 and corrected publication-v2 PNGs were viewed. V1 had crowded minor x labels;V2 has six readable context labels. All points and scientific records are unchanged.',\n           'prior_publication_source':ref(EXTERNAL / 'publication-v1-source.py'),\n           'prior_summary':ref(EXTERNAL / 'publication-v1/summary-v1.json'),\n           'scientific_result':ref(EXTERNAL / 'result-v1.json'),\n           'scope':'No new inference,noise,source render,RAW decode or scientific rerun;independent publication verification only.'}\nwith out.open('x') as f:\n    json.dump(receipt,f,indent=2);f.write('\\n')\nprint('PASS1228points12summaries3figures96neuralfiles',flush=True)\n"
+  },
+  "points_verified": 1228,
+  "group_width_summaries": 12,
+  "verified_local_links": 463,
+  "unchanged_neural_sources": 96,
+  "actual_chart_viewing": "Both publication-v1 and corrected publication-v2 PNGs were viewed. V1 had crowded minor x labels;V2 has six readable context labels. All points and scientific records are unchanged.",
+  "prior_publication_source": {
+    "path": "/mnt/external/demosaic/quality-20261107/V176-template-information-v1/publication-v1-source.py",
+    "sha256": "7f4c2a4dfdcf9aca427afd53f0ace32dd6407438bf8c66091b5b13d447c46ba3"
+  },
+  "prior_summary": {
+    "path": "/mnt/external/demosaic/quality-20261107/V176-template-information-v1/publication-v1/summary-v1.json",
+    "sha256": "e16c9c3280060daab5ca41feac8f4c7fbb549d7c0c2d44ee78f0e5fd6cb8e929"
+  },
+  "scientific_result": {
+    "path": "/mnt/external/demosaic/quality-20261107/V176-template-information-v1/result-v1.json",
+    "sha256": "413e82b308db38c924a993ad6b308902b30b91262cbb0cf0cfbfe61ce4c22534"
+  },
+  "scope": "No new inference,noise,source render,RAW decode or scientific rerun;independent publication verification only."
+}

@@ -1,0 +1,116 @@
+{
+  "status": "pass-all22703-original-paths-preserved-9568-read-only-inodes-and-live-V175-progress",
+  "created_local": "2026-11-07T19:08:09.789400-08:00",
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/result-v1.json",
+    "sha256": "fdba50cc69b0c66f5755f56f0cd7318467a06875fa3224b6c98580687743feb3",
+    "contents": {
+      "status": "completed-path-and-byte-preserving-read-only-array-consolidation",
+      "created_local": "2026-11-07T19:07:33.746192-08:00",
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/consolidation-plan-v1.json",
+        "sha256": "9c343e4cc50cba59520b53df93ce955fd237413ca20a7bc84b9941678f4b227d"
+      },
+      "inventory": {
+        "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/inventory-v1.json",
+        "sha256": "971c9b638b502e23f7fa7d9340d24ca6dcc4d98c1b63389fe3b56ab6aed763e4"
+      },
+      "byte_verification": {
+        "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/pre-mutation-byte-verification-v1.json",
+        "sha256": "d9f8aadc20a57d2eff3a10ff25f2a5407a2fe630dffe233e0d75a0edb3fbffc7"
+      },
+      "journal": {
+        "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/replacement-journal-v1.jsonl",
+        "sha256": "faaa628e9bfc065aeb49118aa311525246924642ce4c97c9f0b6dbf1649d9179"
+      },
+      "groups": 9568,
+      "all_paths_preserved": 22703,
+      "replacement_paths": 13135,
+      "logical_duplicate_bytes_removed": 36589643648,
+      "free_bytes_before": 40093507584,
+      "free_bytes_after": 76950372352,
+      "all_canonical_hashes_verified_after_replacement": true,
+      "completed_owner_and_active_input_receipts_unchanged": true,
+      "metadata_change": "Merged paths share canonical inode/mtime;write bits removed. Original metadata is preserved in inventory. No symlinks or path-resolution changes.",
+      "scope": "Storage only;no model/noise/quality calls or scientific worker restart. Free-space difference can include other processes."
+    }
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/consolidation-plan-v1.json",
+    "sha256": "9c343e4cc50cba59520b53df93ce955fd237413ca20a7bc84b9941678f4b227d",
+    "contents": {
+      "created_local": "2026-11-07T19:04:27.316507-08:00",
+      "inventory": {
+        "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/inventory-v1.json",
+        "sha256": "971c9b638b502e23f7fa7d9340d24ca6dcc4d98c1b63389fe3b56ab6aed763e4"
+      },
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/consolidate-completed-array-duplicates-v1.py",
+        "sha256": "bfdda1048455e963dab13a0b47497eca95d8208b94e53e5ca110f8e666e7d0ae",
+        "text": "\"\"\"Path/byte-preserving hard-link consolidation of completed historical arrays.\"\"\"\nfrom datetime import datetime\nimport filecmp\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport shutil\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO = Path('/home/dllu/proj/demosaic')\nROOT = REPO / '.cache/completed-array-storage-20261107-v1'\n\ndef read(path):\n    return json.loads(Path(path).read_text())\n\ndef sha(path):\n    with Path(path).open('rb') as stream:\n        return hashlib.file_digest(stream, 'sha256').hexdigest()\n\ndef ref(path):\n    return {'path': str(path), 'sha256': sha(path)}\n\ndef save(path, value):\n    with Path(path).open('x') as stream:\n        json.dump(value, stream, indent=2)\n        stream.write('\\n')\n\ndef identity(path):\n    s = Path(path).lstat()\n    return {k: getattr(s, 'st_' + k) for k in\n            ['dev', 'ino', 'size', 'mode', 'uid', 'gid', 'nlink', 'mtime_ns', 'ctime_ns', 'blocks']}\n\ninventory_path = ROOT / 'inventory-v1.json'\ninventory = read(inventory_path)\nassert inventory['status'] == 'read-only-content-verified-inventory-no-storage-mutation'\nassert not (ROOT / 'consolidation-plan-v1.json').exists()\ngroups = inventory['groups']\npaths = {v['path'] for g in groups for v in g['copies']}\nassert not paths.intersection(inventory['excluded_active_paths'])\nfor process in psutil.process_iter(['pid', 'cmdline']):\n    try:\n        command = ' '.join(process.info['cmdline'] or [])\n        assert not any(str(Path(b['path']).parent) in command for b in inventory['completed_roots'])\n        if process.uids().real == os.getuid():\n            for f in process.open_files():\n                assert not (f.path in paths and ('w' in f.mode or '+' in f.mode)), (process.pid, f)\n    except (psutil.NoSuchProcess, psutil.AccessDenied):\n        pass\nfor binding in inventory['completed_roots'] + inventory['active_input_bindings']:\n    assert ref(binding['path']) == binding\nsave(ROOT / 'consolidation-plan-v1.json', {\n    'created_local': datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n    'inventory': ref(inventory_path),\n    'source': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'scope': 'Full byte comparison before any replacement, following full-SHA256 inventory. Preserve every original path and byte. Seal merged historical arrays read-only; record original inode,mode,mtime/ctime in immutable inventory. Hard links share canonical inode/mtime; metadata is not claimed unchanged. No originals, receipts, checkpoints, training inputs, external data or live scientific worker changes.'})\nfor index, group in enumerate(groups):\n    origin = group['copies'][0]\n    for copy in group['copies']:\n        assert identity(copy['path']) == copy['identity']\n        assert Path(copy['path']).resolve() == Path(copy['path'])\n        assert copy['identity']['uid'] == os.getuid() and copy['identity']['nlink'] == 1\n        if copy != origin:\n            assert filecmp.cmp(origin['path'], copy['path'], shallow=False)\n        assert identity(copy['path']) == copy['identity']\n    if index % 200 == 0:\n        print('byte compared groups', index, flush=True)\nsave(ROOT / 'pre-mutation-byte-verification-v1.json', {\n    'plan': ref(ROOT / 'consolidation-plan-v1.json'),\n    'full_byte_compared_groups': len(groups), 'paths': len(paths),\n    'all_distinct_inputs_unchanged_since_full_SHA256_inventory': True})\nfree_before = shutil.disk_usage(REPO).free\nreplaced = 0\nwith (ROOT / 'replacement-journal-v1.jsonl').open('x') as journal:\n    for group in groups:\n        canonical = Path(group['copies'][0]['path'])\n        assert identity(canonical) == group['copies'][0]['identity']\n        old_mode = canonical.stat().st_mode\n        os.chmod(canonical, old_mode & ~0o222)\n        new_inode = canonical.stat().st_ino\n        for copy in group['copies'][1:]:\n            path = Path(copy['path'])\n            assert identity(path) == copy['identity']\n            temporary = path.with_name(path.name + '.dedup-' + str(os.getpid()))\n            assert not temporary.exists()\n            entry = {'path': str(path), 'canonical': str(canonical), 'sha256': group['sha256'],\n                     'old_identity': copy['identity'], 'new_inode': new_inode,\n                     'new_mode': old_mode & ~0o222}\n            journal.write(json.dumps(entry) + '\\n')\n            journal.flush()\n            os.fsync(journal.fileno())\n            os.link(canonical, temporary)\n            os.replace(temporary, path)\n            replaced += 1\n        assert sha(canonical) == group['sha256']\n        for copy in group['copies']:\n            s = Path(copy['path']).stat()\n            assert s.st_ino == new_inode and s.st_dev == copy['identity']['dev']\n            assert s.st_size == copy['identity']['size'] and not s.st_mode & 0o222\n            assert s.st_nlink == len(group['copies'])\nfor binding in inventory['completed_roots'] + inventory['active_input_bindings']:\n    assert ref(binding['path']) == binding\nsave(ROOT / 'result-v1.json', {\n    'status': 'completed-path-and-byte-preserving-read-only-array-consolidation',\n    'created_local': datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n    'plan': ref(ROOT / 'consolidation-plan-v1.json'), 'inventory': ref(inventory_path),\n    'byte_verification': ref(ROOT / 'pre-mutation-byte-verification-v1.json'),\n    'journal': ref(ROOT / 'replacement-journal-v1.jsonl'),\n    'groups': len(groups), 'all_paths_preserved': len(paths), 'replacement_paths': replaced,\n    'logical_duplicate_bytes_removed': inventory['nominal_duplicate_bytes'],\n    'free_bytes_before': free_before, 'free_bytes_after': shutil.disk_usage(REPO).free,\n    'all_canonical_hashes_verified_after_replacement': True,\n    'completed_owner_and_active_input_receipts_unchanged': True,\n    'metadata_change': 'Merged paths share canonical inode/mtime;write bits removed. Original metadata is preserved in inventory. No symlinks or path-resolution changes.',\n    'scope': 'Storage only;no model/noise/quality calls or scientific worker restart. Free-space difference can include other processes.'})\nprint('completed', replaced, 'duplicate GiB', inventory['nominal_duplicate_bytes']/2**30, flush=True)\n"
+      },
+      "scope": "Full byte comparison before any replacement, following full-SHA256 inventory. Preserve every original path and byte. Seal merged historical arrays read-only; record original inode,mode,mtime/ctime in immutable inventory. Hard links share canonical inode/mtime; metadata is not claimed unchanged. No originals, receipts, checkpoints, training inputs, external data or live scientific worker changes."
+    }
+  },
+  "inventory": {
+    "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/inventory-v1.json",
+    "sha256": "971c9b638b502e23f7fa7d9340d24ca6dcc4d98c1b63389fe3b56ab6aed763e4"
+  },
+  "inventory_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/inventory-completed-array-duplicates-v1.py",
+    "sha256": "90879deede481a75b8d0402878e196eeaed523bb261fc0066c6eafec749c44da",
+    "text": "\"\"\"Read-only duplicate inventory of completed, owned historical arrays.\"\"\"\nimport collections\nfrom datetime import datetime\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport stat\nimport time\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO = Path('/home/dllu/proj/demosaic')\nBASE = REPO / '.cache/quality-20261103'\nROOT = REPO / '.cache/completed-array-storage-20261107-v1'\n\ndef sha(path):\n    with Path(path).open('rb') as stream:\n        return hashlib.file_digest(stream, 'sha256').hexdigest()\n\ndef ref(path):\n    return {'path': str(path), 'sha256': sha(path)}\n\ndef save(path, value):\n    with Path(path).open('x') as stream:\n        json.dump(value, stream, indent=2)\n        stream.write('\\n')\n\ndef identity(path):\n    s = path.lstat()\n    assert stat.S_ISREG(s.st_mode) and s.st_uid == os.getuid()\n    assert path.resolve() == path and s.st_nlink == 1\n    return {k: getattr(s, 'st_' + k) for k in\n            ['dev', 'ino', 'size', 'mode', 'uid', 'gid', 'nlink', 'mtime_ns', 'ctime_ns', 'blocks']}\n\ndef sample(path):\n    size = path.stat().st_size\n    h = hashlib.sha256()\n    with path.open('rb') as stream:\n        for offset in [0, size // 4, size // 2, 3 * size // 4, max(0, size - 4096)]:\n            stream.seek(offset)\n            h.update(stream.read(4096))\n    return h.hexdigest()\n\nROOT.mkdir(exist_ok=False)\ncompleted = sorted(d for d in BASE.iterdir() if (d / 'execution-completion-v1.json').is_file())\nassert len(completed) == 13\nfor process in psutil.process_iter(['pid', 'cmdline']):\n    try:\n        command = ' '.join(process.info['cmdline'] or [])\n        assert not any(str(d) in command for d in completed), (process.pid, command)\n    except (psutil.NoSuchProcess, psutil.AccessDenied):\n        pass\nprotected = set()\nlive = REPO / '.cache/quality-20261107/V175-fresh-noise-matching-v2'\nbindings = []\ndef walk(value):\n    if isinstance(value, str) and value.startswith(str(BASE) + '/'):\n        protected.add(value)\n    elif isinstance(value, dict):\n        for key, item in value.items():\n            walk(key)\n            if key != 'text':\n                walk(item)\n    elif isinstance(value, list):\n        for item in value:\n            walk(item)\nplan = json.loads((live / 'plan-v1.json').read_text())\nfor p in [live / 'plan-v1.json', live / 'postprocess-inputs-v1.json'] + [\n        Path(v['path']) for v in plan['inputs'] if v['path'].endswith('.json')]:\n    bindings.append(ref(p))\n    walk(json.loads(p.read_text()))\nby_name = collections.defaultdict(list)\nfor directory in completed:\n    for path in sorted(directory.rglob('*.npy')):\n        s = path.lstat()\n        if (s.st_size >= 512 * 1024 and s.st_nlink == 1 and\n                s.st_mtime < time.time() - 86400 and str(path) not in protected and\n                stat.S_ISREG(s.st_mode) and s.st_uid == os.getuid()):\n            by_name[(path.name, s.st_size)].append(path)\ncandidate_groups = [g for g in by_name.values() if len(g) > 1]\nprint('candidate groups', len(candidate_groups), flush=True)\ngroups = []\nsampled_files = hashed_files = 0\nfor index, group in enumerate(candidate_groups):\n    sampled = collections.defaultdict(list)\n    for path in group:\n        sampled[sample(path)].append(path)\n        sampled_files += 1\n    for paths in sampled.values():\n        if len(paths) < 2:\n            continue\n        digests = collections.defaultdict(list)\n        for path in paths:\n            before = identity(path)\n            digest = sha(path)\n            assert identity(path) == before\n            digests[digest].append({'path': str(path), 'identity': before})\n            hashed_files += 1\n        for digest, copies in digests.items():\n            if len(copies) > 1:\n                assert len({(v['identity']['dev'], v['identity']['mode'], v['identity']['uid'],\n                             v['identity']['gid'], v['identity']['size']) for v in copies}) == 1\n                groups.append({'sha256': digest, 'copies': copies})\n    if index % 100 == 0:\n        amount = sum(g['copies'][0]['identity']['size'] * (len(g['copies'])-1) for g in groups)\n        print('groups scanned', index, 'duplicate GiB', amount / 2**30, flush=True)\nsave(ROOT / 'inventory-v1.json', {\n    'status': 'read-only-content-verified-inventory-no-storage-mutation',\n    'created_local': datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n    'source': dict(ref(Path(__file__)), text=Path(__file__).read_text()),\n    'completed_roots': [ref(d / 'execution-completion-v1.json') for d in completed],\n    'active_input_bindings': bindings, 'excluded_active_paths': sorted(protected),\n    'scope': 'Owned regular single-link .npy arrays older than24h in13 completed trials only. No receipts, checkpoints, source, originals, npz, current training, or external files. Candidate grouping uses filename,size and sampled bytes; listed duplicates are full-SHA256 verified, not just sample matches.',\n    'sampled_files': sampled_files, 'full_hashed_files': hashed_files, 'groups': groups,\n    'nominal_duplicate_bytes': sum(g['copies'][0]['identity']['size'] * (len(g['copies'])-1) for g in groups)})\nprint('inventory complete', len(groups), flush=True)\n"
+  },
+  "pre_mutation_byte_verification": {
+    "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/pre-mutation-byte-verification-v1.json",
+    "sha256": "d9f8aadc20a57d2eff3a10ff25f2a5407a2fe630dffe233e0d75a0edb3fbffc7",
+    "contents": {
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/completed-array-storage-20261107-v1/consolidation-plan-v1.json",
+        "sha256": "9c343e4cc50cba59520b53df93ce955fd237413ca20a7bc84b9941678f4b227d"
+      },
+      "full_byte_compared_groups": 9568,
+      "paths": 22703,
+      "all_distinct_inputs_unchanged_since_full_SHA256_inventory": true
+    }
+  },
+  "all_original_paths_independently_stated": 22703,
+  "no_symlink_or_path_resolution_changes": true,
+  "original_metadata_preserved_in_inventory": true,
+  "active_and_completed_receipt_bindings_rechecked": 29,
+  "same_live_training_owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "same_completion_watcher_owner": {
+    "pid": 287357,
+    "created": 1794104682.2
+  },
+  "observed_training_progress": {
+    "status": "training",
+    "owner": {
+      "pid": 274124,
+      "created": 1794102724.04
+    },
+    "step": 2620,
+    "continuation_row": 1620,
+    "updates": 1456,
+    "total_updates": 2356,
+    "skipped": 164,
+    "fresh_batches": 1450,
+    "cached_noisy_batches": 6,
+    "counts": {
+      "wrapper": 1456,
+      "frozen": 1456,
+      "network": 1456,
+      "sampler": 7280
+    },
+    "parent_counts": {
+      "parent": 1452,
+      "DINO": 1452
+    },
+    "peak_CUDA_bytes": 7075942912
+  },
+  "current_free_GiB": 71.45938491821289,
+  "scope": "Storage only. Existing arrays,scientific receipts,checkpoints and originals preserved. Full hashes and direct byte comparison precede hardlinks;every canonical hash checked after mutation. This independent stat pass checks all original path identities,sizes,owners,modes and linkcounts;no redundant scientific inference. Original mtime/ctime/mode values remain in inventory;merged files share canonical inode/mtime and are sealed read-only. Other processes can affect free-space delta."
+}

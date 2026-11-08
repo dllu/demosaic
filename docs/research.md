@@ -1,5 +1,18 @@
 # Current method research
 
+The [V176 training-template diagnostic](mesh-template-evidence.md) measures
+conditional evidence in all 614 retained noisy mesh pairs. Green median
+known-template SNR rises from 0.653 in the best native16 window to 7.360 over
+native512; all-CFA medians rise from 0.893 to 10.502. Small-window evidence is
+often weak even with an exact template. This motivates investigating useful
+aggregation over larger areas, but hidden template/background/variances are
+supplied. It proves neither inference recoverability nor flat safety, and does
+not measure the existing model's receptive field. V143's matched training
+Bayer-sample amplitudes also remain weak on many high-conditional-SNR cases;
+these are not the held-out RGB mesh metrics. Sixteen CPU tests and independent
+QR/variance checks pass, with no model/noise calls or restored RGB. V175's fixed
+recipe remains unchanged and its quality pending.
+
 The [V175 fresh-noise continuation](fresh-noise-matching.md) tests a longer
 training recipe at V172's unchanged model and seven-term objective. It starts
 from the actual raw/Adam/EMA states, adds 8,100 updates and regenerates physical
