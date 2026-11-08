@@ -64,6 +64,8 @@ and broad mottle remain unresolved. Both endpoints, independent audits and
 60 actually viewed native figures are complete. Retain this intermediate recipe
 beside V180's stronger response and V181's quieter output.
 
+The [V185 smaller-support readout experiment](docs/spatial-context-wave-readout.md) has passed native CPU/GPU correctness and started matched training. Quality review is pending.
+
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
 **9.60% raw / 15.96% EMA**, reaching **4.865% / 5.148% of GT amplitude**.

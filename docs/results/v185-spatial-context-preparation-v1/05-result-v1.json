@@ -1,0 +1,2046 @@
+{
+  "status": "pass-completed-native-72-bit-exact-addition-recipes-not-new-quality",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/measure-v185-addition-storage-v1.py",
+    "sha256": "df8e21b939f1a88eceeb5f34822ae09716ce2af8f6b6b50515595a027ec5203a",
+    "text": "import json,time,os,sys,hashlib\nfrom pathlib import Path\nimport numpy as np\nR=Path('/home/dllu/proj/demosaic');sys.path.insert(0,str(R/'scripts'))\nfrom lossless_native import ref, fingerprint\nQ=R/'.cache/quality-20261107/V185-addition-storage-forecast-v1';Q.mkdir()\nos.nice(10);os.sched_setaffinity(0,[6,7])\ndef read(p):return json.loads(Path(p).read_text())\na=R/'.cache/quality-20261107/V184-wave-readout-trial-v1/scores-v1.json'\nb=R/'.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/scores-v1.json'\nnew,base=read(a),read(b);old=read(R/'.cache/quality-20261107/V185-native-storage-forecast-v1/result-v1.json')\nrows=[]\nfor cid,bs in new['native_predictions'].items():\n binding=base['native_predictions'][cid]['V183-coherent-pair-EMA'];assert ref(binding['path'])==binding\n inherited=np.load(binding['path'],allow_pickle=False)\n for e in ['raw','EMA']:\n  name=f'V184-wave-readout-{e}';pr,wa=bs[name],bs[name+'-wave']\n  assert ref(pr['path'])==pr and ref(wa['path'])==wa\n  value=np.load(pr['path'],allow_pickle=False);wave=np.load(wa['path'],allow_pickle=False)\n  actual=np.add(inherited,wave,dtype=np.float32)\n  rows.append({'id':cid,'endpoint':e,'RGB':pr,'wave':wa,'baseline':binding,'values':fingerprint(value),'addition_bit_exact':fingerprint(value)==fingerprint(actual),'channels':value.size})\nassert all(r['addition_bit_exact'] for r in rows)\nwave_bytes=sum(r['sizes']['zlib_byteplanes'] for r in old['rows'] if r['kind']=='wave')\nr={'status':'pass-completed-native-72-bit-exact-addition-recipes-not-new-quality','source':dict(ref(__file__),text=Path(__file__).read_text()),'previous_forecast':ref(R/'.cache/quality-20261107/V185-native-storage-forecast-v1/result-v1.json'),'scores':ref(a),'baseline_scores':ref(b),'rows':rows,'arrays':144,'RGB_arrays':len(rows),'RGB_channels_checked':sum(r['channels'] for r in rows),'wave_compressed_bytes':wave_bytes,'native_forecast_35percent_and_manifests_bytes':int(wave_bytes*1.35)+144*2048,'new_neural_forwards':0,'new_noise_draws':0,'scope':'Future RGB manifest may bind exact FP32 addition of immutable baseline and stored wave. Each future array must pass byte digest equality; otherwise codec stores XOR bytes. Every old array remains unchanged. Wave entropy can change; measured forecast is not a bound.'}\nassert 'torch' not in sys.modules\nwith (Q/'result-v1.json').open('x') as f:json.dump(r,f,indent=2);f.write('\\n')\nprint({k:r[k] for k in ['RGB_arrays','RGB_channels_checked','wave_compressed_bytes','native_forecast_35percent_and_manifests_bytes']})\n"
+  },
+  "previous_forecast": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V185-native-storage-forecast-v1/result-v1.json",
+    "sha256": "18a9e2965673a11dcd55311a19be9033fd6f22ec39c36cbb09a46afb72cb9d2f"
+  },
+  "scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V184-wave-readout-trial-v1/scores-v1.json",
+    "sha256": "879a416c3660f8ada30c50275388eb49b63d0a28db8a025ea9383b3e8428b9f5"
+  },
+  "baseline_scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/scores-v1.json",
+    "sha256": "2182a12e117bf89d87e5f7b6e48b345eb9a3f22372d8cc7d5efdc4acf5d3b9a9"
+  },
+  "rows": [
+    {
+      "id": "mesh-nominal",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-692.npy",
+        "sha256": "1577a814af34ba530cf93fea52c1408c90d974919fa11c3a495c7e1f68f3d180"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-692.npy",
+        "sha256": "74c38a93776b250d912f01bd28336c67ddc7de6429971003409969d625d770d4"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-692.npy",
+        "sha256": "3ece1d8a167fa5075e6065837b091681abfe34d8979f99fb2840f2f66d4f8557"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "dtype": "<f4",
+        "sha256": "8fded79cb44ea47b3c1f0bd09c16a3ec3b823982fa976d1ce6be79b23b4ec68c"
+      },
+      "addition_bit_exact": true,
+      "channels": 1769472
+    },
+    {
+      "id": "mesh-nominal",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-692.npy",
+        "sha256": "15ca6fe8da58ad6f20e04b4de881a0acf3a7a3fc34a92dc90d1e8d3e2084046c"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-692.npy",
+        "sha256": "92ec8c1628385f2c20c868912683a1f1e9a996e08d5f9ec166e271b990f54666"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-692.npy",
+        "sha256": "3ece1d8a167fa5075e6065837b091681abfe34d8979f99fb2840f2f66d4f8557"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "dtype": "<f4",
+        "sha256": "f354def52b27e986f3cecdbca303d670c1f3595f413673a2d4ec66fa232bdd41"
+      },
+      "addition_bit_exact": true,
+      "channels": 1769472
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-016.npy",
+        "sha256": "5af39873e7722d2dff053bba427f935ee1413523a9a4393044642b9b8a355038"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-016.npy",
+        "sha256": "17185ccdd93a7081dd913b05a25ad53d04c46703786c2be4c056c5118d9a3127"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-016.npy",
+        "sha256": "d10c8786c407a417347cbf3817289e0c8866be6d31c87cc2e1eaaab068ddcba1"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "a461295e1fe87af2be95f6370ef98dac79d5a7684f8e8a35022bf4514d087cd2"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-016.npy",
+        "sha256": "115feab3d75611ccc44a03d9035001fb059ed84433849172c614a141cd51bf1c"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-016.npy",
+        "sha256": "dc54b0c0f0b4fc52b3b797242ac49bc38625abe0ceab29d451e6da99f9ce9b4e"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-016.npy",
+        "sha256": "d10c8786c407a417347cbf3817289e0c8866be6d31c87cc2e1eaaab068ddcba1"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "75e620bf9beefbe6034cf75000f7a0396425f4045d8f7672a88a0f2c64d2522d"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-033.npy",
+        "sha256": "e1556e2ce567eeafe521f8cfce3f72eb6869b1d957d2178ffed1f6f8b3735420"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-033.npy",
+        "sha256": "3ad95e1edbaf8eec47f8f1b19c5d708a4a4cb6cdf65cb353d1d714c07248cb50"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-033.npy",
+        "sha256": "417df189b2209c505686f7b97169f2fe215e57d7cdb05429a68f878cc4c1483b"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "85213af7266c981bc5733494c454c1f233214b2061cc4d89e564ce991538a6a2"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-033.npy",
+        "sha256": "2cb65fd0f68b3687a51d02402c63d339c9399b2c5c362e18fa03f220e3f56a0e"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-033.npy",
+        "sha256": "097da320bf0c7afe86233655d93fdce40262a052f2e2ea8c7ce3c968ba55b673"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-033.npy",
+        "sha256": "417df189b2209c505686f7b97169f2fe215e57d7cdb05429a68f878cc4c1483b"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "285087dc3b4364270d01dbb8f016c299d09172795b108a6146e4c9028815dcb6"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-072.npy",
+        "sha256": "faf28e9551bd7efc9ad5143ac8665a995cd40562849f433c012c14a731f16bfd"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-072.npy",
+        "sha256": "fd6a1af8927ddfcadae1339958e6f25ee333ef7dee16133907378e74bbf3f4bb"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-072.npy",
+        "sha256": "a619661b5b15e8f44e346e4521536ce357bed23eb0ef6453e7ae89e193462d4d"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "b87be35837dbb0ced16cb7fa8ae3d3270e27f25fb9423355567f7fb100af1da4"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-072.npy",
+        "sha256": "a0bc78d2817176676f369ab8b10c07487fc62d85f0f32eaf1706bcad9ac5ca2a"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-072.npy",
+        "sha256": "64da28313d6cff67393c3493164a9076f1c9dc480ef1b2f749d034a1eb28eaf7"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-072.npy",
+        "sha256": "a619661b5b15e8f44e346e4521536ce357bed23eb0ef6453e7ae89e193462d4d"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "c3b8f07dff61c389c07216e1a32487821dccc389c5b6e50bef80ed2c0c1544bc"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-faint-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-528.npy",
+        "sha256": "86418b40faecc2f23a86eb45a334676555cb7c2b9ca29cead474fefe161bfd54"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-528.npy",
+        "sha256": "085be2da84b21bf229f68adf93d3476ff3d85484027e3d4b82d9baac1e597902"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-528.npy",
+        "sha256": "79e8003fab3883a184be882f3fc4b99a386e680e9c76c2e8fc842a7639e5dcba"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "d2c578006660cbe1d31d9beb628cd6c3ce48147090baf4e5b04573cd7170d052"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-faint-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-528.npy",
+        "sha256": "5c13eb12a06f421aaad255ca3e5f9e20734a7aeff111117fa8acb6fd2523b870"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-528.npy",
+        "sha256": "9a6a9c1c74bf7a8aaa979b77ef9bdd3b93bb3fae559a722ea581bff5e8a17e35"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-528.npy",
+        "sha256": "79e8003fab3883a184be882f3fc4b99a386e680e9c76c2e8fc842a7639e5dcba"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "18a72e1ae309d0332f9bfae1c0e8e141e54bde3cc18b68f6a6f74a01f6de8ffa"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-dark-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-532.npy",
+        "sha256": "cdd31c50750181eff86217633ab7a98d1e12814cc8318bf13d75ca3ecc0fabed"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-532.npy",
+        "sha256": "ae7416aa63f8dc5cc21f1b27708297f720a7078b2a0a3ef72d6b07570e8458fb"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-532.npy",
+        "sha256": "e8a7216f2a371a49a9269e2e07aac59a98ae8ac4bb841d0b5f8a49cd6a437040"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "e62cc96ee8576ed7c2d8cbdb283205f7ee141c8cb8d69fbf559617e1875a7df7"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-532.npy",
+        "sha256": "e12c5b37e2e48875f357afe528ee737cf7f78fcb705fe2f6c81e670ff4166b5e"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-532.npy",
+        "sha256": "2f2660df66c64f68b095ceb4021f26b8262873c58c15f12499215efbe50d8d66"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-532.npy",
+        "sha256": "e8a7216f2a371a49a9269e2e07aac59a98ae8ac4bb841d0b5f8a49cd6a437040"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "aab2c5f24359e0008eb4577ab60d4d17b13c734a122f7754ef908b6d719a324a"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "organic-02a76fd33b5e1414a0504f0b3f0aeb03a569b6f4-photo-faint-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-576.npy",
+        "sha256": "6ed335868f25ba4f163b61b7184bf7e987c23909b629990c62f90786e99138fc"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-576.npy",
+        "sha256": "226ec0355f099a5eb3e03eda76dd51a608b89c4168e9cc44268d49a78576034a"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-576.npy",
+        "sha256": "835aa0c77f33056985a8c728c19479e30e0263c4813b28b78695adaeb16f6fc0"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          384,
+          384
+        ],
+        "dtype": "<f4",
+        "sha256": "1f125c442f853b8f3002f64fcb5a93663d95bbd32e13447cd69a8d7bc16fea57"
+      },
+      "addition_bit_exact": true,
+      "channels": 442368
+    },
+    {
+      "id": "organic-02a76fd33b5e1414a0504f0b3f0aeb03a569b6f4-photo-faint-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-576.npy",
+        "sha256": "f1a820a2416852f40ab28e314146ba0fd286ce135d6b611aa6d8edc48174001e"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-576.npy",
+        "sha256": "40efe7b95051f4ed702333982396f7c0189f4b547633b1ad67cd9787094ac460"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-576.npy",
+        "sha256": "835aa0c77f33056985a8c728c19479e30e0263c4813b28b78695adaeb16f6fc0"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          384,
+          384
+        ],
+        "dtype": "<f4",
+        "sha256": "4fae6a10dd99fa6637f63f02c41cd9de2eaa1ac164acf1d3ff87fe9bac154742"
+      },
+      "addition_bit_exact": true,
+      "channels": 442368
+    },
+    {
+      "id": "organic-6b3920bceba82d95ecf9351d47f6f94267694bd0-photo-dark-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-604.npy",
+        "sha256": "c0014a874bb9cf139c9c6b456a71fdab399435372d71c0349bb61cc24614acd9"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-604.npy",
+        "sha256": "2c5755bcfc66b5c8ef07e666b1cc7d90040aa58eefcd47935f1c4a067e8f0199"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-604.npy",
+        "sha256": "55089e531850efb3e6bbe4c0bf6f32bfced4cd82014e6283c364b835ebb9adb5"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          384,
+          384
+        ],
+        "dtype": "<f4",
+        "sha256": "2180ac95c89afda7bc598b6cdabc5f778213b2f515cbb6e43fc5ce9377515ecf"
+      },
+      "addition_bit_exact": true,
+      "channels": 442368
+    },
+    {
+      "id": "organic-6b3920bceba82d95ecf9351d47f6f94267694bd0-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-604.npy",
+        "sha256": "b698ffc9d91f3fffba2839bc9a7005f1bb6ceb1b64214a728a656a371886dfce"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-604.npy",
+        "sha256": "6f4056aeccb30fde6d0818baf6ed0530fc792ec4becc0457a960e69e66c58aa5"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-604.npy",
+        "sha256": "55089e531850efb3e6bbe4c0bf6f32bfced4cd82014e6283c364b835ebb9adb5"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          384,
+          384
+        ],
+        "dtype": "<f4",
+        "sha256": "1b15fa34b257f7e81f724a0833fb271dbe0e5fff45036fc5076fac2748763878"
+      },
+      "addition_bit_exact": true,
+      "channels": 442368
+    },
+    {
+      "id": "organic-dabacecd4780a1c230f8e9fce6ca1a604bdeab4c-photo-dark-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-636.npy",
+        "sha256": "89a9a955bf1df6c0a30999817392c8ed775874ba0da0f005763d5ca560affd8c"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-636.npy",
+        "sha256": "ca6acd2d81d044cd90bafb22bde8a1c72e0a87ff83741d4284621210a7ad9c43"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-636.npy",
+        "sha256": "17ce9f419f941b2ee4147956f0f3f37ec3ca4b0e583252015283eff4f07a2601"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          384,
+          384
+        ],
+        "dtype": "<f4",
+        "sha256": "65860a55432fd2db777fd7ad6c80432998703b03bb8b47553fd99c5fe99c6eac"
+      },
+      "addition_bit_exact": true,
+      "channels": 442368
+    },
+    {
+      "id": "organic-dabacecd4780a1c230f8e9fce6ca1a604bdeab4c-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-636.npy",
+        "sha256": "2b174e7a6daa5ad70c363103f66a07bbab33cb061c0318af38aeb527e1efd6e7"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-636.npy",
+        "sha256": "8d3ebb8aece6832fc65a432a875a8ad08a34e43fb2837ce71033e87d92f8a525"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-636.npy",
+        "sha256": "17ce9f419f941b2ee4147956f0f3f37ec3ca4b0e583252015283eff4f07a2601"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          384,
+          384
+        ],
+        "dtype": "<f4",
+        "sha256": "3cfaeb277ac19bb526f613772a1b504906832ff3c1218893940fa1fbfbb6f16d"
+      },
+      "addition_bit_exact": true,
+      "channels": 442368
+    },
+    {
+      "id": "gray-l0.02-adc-only-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "52a7bfaad29956a341c9164ad8df8d018535f3f760f8aa8a59422ef389e10864"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "gray-l0.02-adc-only-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "52a7bfaad29956a341c9164ad8df8d018535f3f760f8aa8a59422ef389e10864"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-644.npy",
+        "sha256": "2d3e511aac0cc0b03b4d27a94d91b9d6457fef08da838d270d972f7d83f95325"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-644.npy",
+        "sha256": "4f49dfaf69329cc81d41b8f02471a19f8b61c1fa2f4213c3b9fdcb535707503a"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-644.npy",
+        "sha256": "f49a24bc6a67f439af8d2ad92d34692decc61a56856497142c65d1c416a49070"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "9ef15f663744e6385b1782437339c8c0465443d666f58f01d00e35508c9d981d"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-644.npy",
+        "sha256": "b7a2413ed666150d99413bc76c68c905e2255791c49bcd3afbf8332a637a2ffb"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-644.npy",
+        "sha256": "3e593dc4b61a006ff62f717266fea68ed1251ae432de9a0578a0d310fb6aec7d"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-644.npy",
+        "sha256": "f49a24bc6a67f439af8d2ad92d34692decc61a56856497142c65d1c416a49070"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "8bf8d0ce1ba0c122a35740ec95a7b9360f62888e0740680c5eb7792ae3fb3dce"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "main-overcast-sky",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-688.npy",
+        "sha256": "21df94cddc8dbdde58fdf1d17c185d8ef9e5ef74bc2e181cf4f687b53d602185"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-688.npy",
+        "sha256": "57a6a725bf161e20a3795cc5c6c6a5a119145540f6d0f44e25b41fada4d20ea6"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-688.npy",
+        "sha256": "03fa2c43b562b6d611dd696cd5a3cdc4150df15d6712f2cab4ca6b2d242d9d95"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "df407ee5513d2ec84421ca3af16fd516191b3589dc062fcebdefd89050ae0ab6"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "main-overcast-sky",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-688.npy",
+        "sha256": "24c0956309d6eb072194ca9e462f8bd24ef36aa744c9acf2c1dd0c303ed0db70"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-688.npy",
+        "sha256": "0065987384199905a8b97340e773de1f90896786e8c10b17927e0ad34a4949d7"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-688.npy",
+        "sha256": "03fa2c43b562b6d611dd696cd5a3cdc4150df15d6712f2cab4ca6b2d242d9d95"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "15d09b023d6937e593a049d07f85ba05046242359de38c9c50cd5f233d691234"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "main-building-detail",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-689.npy",
+        "sha256": "5d70f5b8a9379b084fd7609cb332d1baadd5d318c119383549cfc44c5cf9d00c"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-689.npy",
+        "sha256": "942643c7d05e2cab97161f241ba8c6447323153dd444605bb0c5c85d72148078"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-689.npy",
+        "sha256": "8e01e799a144a3f45c23c4f41ccc8c633a92f832e5fe25e0552b517bc0e34954"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "207b5260e220ef5938820cca20ddc3f360342f53753afb7bd8759d73ce46d55b"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "main-building-detail",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-689.npy",
+        "sha256": "67be5b3332e8e9f6958ce17f6fd892d525df91897af3694762f86a49d2a7ae42"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-689.npy",
+        "sha256": "251f6a8880049a6d8cc2a899032d3b90bffc8b141eda8d9f924d3dc05138d6ad"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-689.npy",
+        "sha256": "8e01e799a144a3f45c23c4f41ccc8c633a92f832e5fe25e0552b517bc0e34954"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "34b3fa658411c6d35cfdff291c38864549c2bbb0f529a5b9defb79284185511b"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "main-foliage",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-690.npy",
+        "sha256": "c7976cb011179a6d8d72921b00cc395f1e575813efa776ab5ec16893eb8e084a"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-690.npy",
+        "sha256": "114c45a8300b6458091c2dbb537385498210a5a21446fdda0373778497863434"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-690.npy",
+        "sha256": "936370d71b605136b55f7edc5b98a94e414eef87a023101223ea8099a69dcb72"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "8e75f49e13e40925214db7373d35f2775267f409fc649c0ed039000ebbf1ada4"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "main-foliage",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-690.npy",
+        "sha256": "7a789b4fb9f6a61dbb430de2b9a0721317d55a72133cfa1a062d7a98bbe3e342"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-690.npy",
+        "sha256": "789ad5e1f9516483645747f0d64da2fffa35a3b2963ba91f14cae5c8c623a5ee"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-690.npy",
+        "sha256": "936370d71b605136b55f7edc5b98a94e414eef87a023101223ea8099a69dcb72"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "e12c285134db5ce4d17cd70e3dbbe6f54ce8e26f16de54ace058c943619d4a28"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "main-chain-link-fence",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-691.npy",
+        "sha256": "8b6185966444b23aec09e1c1920c23897580627a5910e982183d3c2a0c05603e"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-691.npy",
+        "sha256": "29058674e94f70aabdc62fd88302c153e1cd748b20cc1e74de0672ac99053644"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-691.npy",
+        "sha256": "e850628c7b02324913220b1a0c7c358361b2184da5479b188ae6b0f05ee1a92c"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "ec15e77c0fd50918f81521c7c1bb1d090ab83847502cb9803c058265b0f8c4b1"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "main-chain-link-fence",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-691.npy",
+        "sha256": "55d62b0bc016f1f9b00eb40f04177450265493610438953bef2e03cb8fd299d1"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-691.npy",
+        "sha256": "2d503abe73fd44a5c117323e962b386ba3ef8cd6c4d44cefe9c5070b6e62f3e1"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-691.npy",
+        "sha256": "e850628c7b02324913220b1a0c7c358361b2184da5479b188ae6b0f05ee1a92c"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "f8ed4a0f029afd297aaa2d3125bc3a43b53a3b792442d6dc89340c4fba27b3de"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mesh-profile3879",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-693.npy",
+        "sha256": "b67e6a015e28cbb4083e51dabd142b6787a6f834615f2a6c647b3c520e7858f1"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-693.npy",
+        "sha256": "7e9192c6b15d8b94b5260b7e625bce36173427272d6b8136afe54ded8cc27934"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-693.npy",
+        "sha256": "5cb13f761263761311c5f7ec71a0804bb688e4c7a5ef0c18675b589c8f009082"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "dtype": "<f4",
+        "sha256": "690976c68812f16a9e2ed5eecd78185d6f08f25d128c1fe183ece7b84b9e7b5c"
+      },
+      "addition_bit_exact": true,
+      "channels": 1769472
+    },
+    {
+      "id": "mesh-profile3879",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-693.npy",
+        "sha256": "a246054392d2f3a58bbec1d6f0104135bb1889beef1ca6a08ecb7a981b0fadc6"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-693.npy",
+        "sha256": "3e1de4a60c7e10e3c2a499428f8ead9fa9af4e11ef433e5a86d6c3caaa6ca6c8"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-693.npy",
+        "sha256": "5cb13f761263761311c5f7ec71a0804bb688e4c7a5ef0c18675b589c8f009082"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          768,
+          768
+        ],
+        "dtype": "<f4",
+        "sha256": "222519a47e1374f843a5ff01a999cab10c02229306075575566a532f3466c59c"
+      },
+      "addition_bit_exact": true,
+      "channels": 1769472
+    },
+    {
+      "id": "flat512-gray-l0.02-adc-only-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "309ddf87d1ee53384f9886d502d9fddb9e37c3651517e8f968e081dc8f797ef6"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.02-adc-only-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "309ddf87d1ee53384f9886d502d9fddb9e37c3651517e8f968e081dc8f797ef6"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-698.npy",
+        "sha256": "e2ef32a1af20ed140cc24c41c49ff38136836920a234a2dce48edfae2aceb4d7"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-698.npy",
+        "sha256": "b84f4bfec20680789e17b09d63bca077237e11acd301275a980e8db1a4e51784"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-698.npy",
+        "sha256": "dfe48f9510bfaa8f30ff5ddad554cf72b45bbe183fa69b97095f366700615085"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "7e5d5caac462a3148df62b10887798280d671a6217930235eeb3d2d58492c8d3"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-698.npy",
+        "sha256": "b9007a6b4daa293b28f2e930e0f60f06b434bddf509f04faff0d1ac5b6f61649"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-698.npy",
+        "sha256": "2e506d2f2b963e1445bd906e11cf98724e850a7097f61285233562fdc2873311"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-698.npy",
+        "sha256": "dfe48f9510bfaa8f30ff5ddad554cf72b45bbe183fa69b97095f366700615085"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "398f0ac9eda4eeb8139a8f227c2612a2a70df634cc4ee5133aca09b5a88058c9"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-702.npy",
+        "sha256": "e1835f5c1123b434382bd33aa78b0b512fd3f730c71bcad0afdc41935bef5700"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-702.npy",
+        "sha256": "dd70cd70705f2de4479976800b7753e4999a394ce281152415587aceba964ac7"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-702.npy",
+        "sha256": "6e0a849599889e191c4abefe66dff0fad4e0d67388ccd2e82d1556415ad08df2"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "b4ce3c452938c1c6f32328025fd9a5206e731b20ceeb604150deaf8f5ada69af"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-702.npy",
+        "sha256": "fc0b21956caaf6cec1545842e99a52e793c01d0d5d9f4267dc769ce147b00600"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-702.npy",
+        "sha256": "ea7c021ea13ec5b35fd0e02e33c1b312648e4e42682cabe9141be3b987cd330f"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-702.npy",
+        "sha256": "6e0a849599889e191c4abefe66dff0fad4e0d67388ccd2e82d1556415ad08df2"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "d393d236db0b036d93f10ad6d9f683a23e1d801208f2c3b372020482d59acc8a"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-h210-s0.50-l0.02-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-722.npy",
+        "sha256": "f803a082e08532c61488a358cdb00674d9b708edf22f7ff521f3f0915f78c89f"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-722.npy",
+        "sha256": "963004abaa222c90a7aa9d125454163f35d957d5907dedee95b92988e796766d"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-722.npy",
+        "sha256": "21f6c20db13b662f78db284fd9e9d7d3f844cce092221c1316c078661e60ba32"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "830c158764ad96f2ec00bc2e29d018e4f42fdff06b99bd77259e309f9acb559c"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-h210-s0.50-l0.02-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-722.npy",
+        "sha256": "1bb25233cf9a9feddbfc6f54cc7c9a0c078a2112fd75c64f37186a8efc264266"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-722.npy",
+        "sha256": "da2dcf3213112447ea174f4ec4c7ab1934b66cbcc3daaa8db3ecced2ba2b40da"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-722.npy",
+        "sha256": "21f6c20db13b662f78db284fd9e9d7d3f844cce092221c1316c078661e60ba32"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "c2ee57105ed6aa3accf88523b566186aaddb5f25b40ea14403b80c846c9ff927"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.18-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-738.npy",
+        "sha256": "04df12f3b86d137f7913da91ce3cfddfd49eb650915392df0f43ba1a724f1d3c"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-738.npy",
+        "sha256": "6368b522f0857eabeab6c9c98527c2f37dd9276132cf6382f2f98cad394bb117"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-738.npy",
+        "sha256": "9bc62035d3a8189d14f9680ea1ca2fd2b76bcd0c48f8b3fc261d6f9b4cf1c987"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "28e6d345e68e8d5cbc726a6e4c2108db6952dd093ec805f016394a0133966b05"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.18-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-738.npy",
+        "sha256": "87dc3f205ef0eb7cf83cdb42a13ac25eaa75633a687a0db4af258972b1c701c2"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-738.npy",
+        "sha256": "bc7c3c811b62a4329bcfaf70f98c31cbf0540c8a143275e0471fd3ca4b9ffad0"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-738.npy",
+        "sha256": "9bc62035d3a8189d14f9680ea1ca2fd2b76bcd0c48f8b3fc261d6f9b4cf1c987"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "88f7085f987283a0d5bab75bea7ed4aa98cd72a67cfa6ef15eb602adf74bc945"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.90-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-762.npy",
+        "sha256": "2bd721ef0e594395bce588904781c72fe25f5580e448d36d6a953f5f82c2a14b"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-762.npy",
+        "sha256": "9c588a2f69f0ab1deee8afcb99b3128b8e298954768a9fd04fc3a4facbab0b61"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-762.npy",
+        "sha256": "90637466cb44fc01dceaca98cd5a79b1ca1174ab981022fae1da46660b0068a0"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "32b933f81fcc3a3a9f585ce20ba13bdce78ee895d8ab234a5f1037c21d0a4a61"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "flat512-gray-l0.90-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-762.npy",
+        "sha256": "90c1b3d2bc1f2471b64b28a2bcad9af2a6afd949616ed57cb8491112c70a2731"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-762.npy",
+        "sha256": "5c74a79c0d38d49e3476345798bb0b691c15897f09a49624783495fee863c99d"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-762.npy",
+        "sha256": "90637466cb44fc01dceaca98cd5a79b1ca1174ab981022fae1da46660b0068a0"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "d46494a9e2b001df44b544593d57d9dec9dd124704a680c091010496f804875e"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-766.npy",
+        "sha256": "872ffef9902a37cc72d34802a540906134e7437f40ae637db69bcbdbcff51792"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-766.npy",
+        "sha256": "2ee54bbb770d7f3bbeafabb1d5201f5c4f3f3c62c00cb73badd9467ab50d0749"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-766.npy",
+        "sha256": "c12906dd442497869ff062dda81f23e7558c6a7a3176b23fdeefebac19920049"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "2e817544d292fb6c62129797d4bb199677b68a19ebd41c392133583a5f4a3a81"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-766.npy",
+        "sha256": "3b173a71f4d9df336a4ecd1d4b6f67981c2150bca18a18bbe07f834974d86d80"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-766.npy",
+        "sha256": "964d32bcc4144fb2867f0a38080222a76f4f7a014934f70f49cb1ea7981981ac"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-766.npy",
+        "sha256": "c12906dd442497869ff062dda81f23e7558c6a7a3176b23fdeefebac19920049"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "6f736cc8d0d7d058d2a0148b0b540025f99f4d5eeaa359a248ec876331d4a585"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-770.npy",
+        "sha256": "7e7ba4b98186ec326304b1315ca37b4adfc190f0a1db8f2e61888f408bf5325a"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-770.npy",
+        "sha256": "8e66d903702533ddf1ad1e6ea7ae2f30c49422191376de2671ae63136900e0bd"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-770.npy",
+        "sha256": "36e5545ab039939aae4a9c4185c17fd84a996eb649e3e04de6c8b1e63970ba93"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "da6754831053b33c5ff72167a37e966d13e64d584748e05325455dc4ba384398"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-770.npy",
+        "sha256": "23936aeb3f8d0bfc5c7675f2b108c2578ce579410ba68a623e572d4244b17fe2"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-770.npy",
+        "sha256": "c58d5a488d728b384ead6d909558aae44c8996a72625c900712c57efff0c15a1"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-770.npy",
+        "sha256": "36e5545ab039939aae4a9c4185c17fd84a996eb649e3e04de6c8b1e63970ba93"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "a1d7bfa492133d1df35c5147e5aba90199e1796aa17937e1210f4b79ce0c24f9"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-774.npy",
+        "sha256": "fe46c21bb53aa6bdd5dbaca1c08bd963f9bb9b8f17bbfdaab31bc4490a593c71"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-774.npy",
+        "sha256": "74b7f745a0bd1b9e9df05ddd11ef21b655a8e4c75c01e21f19c4d96d07aa0bfd"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-774.npy",
+        "sha256": "d591537708f240dce23da9f46495219b3e241f02e28d3b67d34c9a72ac4a4517"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "222dc8f4e43b6b238cffccbc809dd28d99523af019720fc5eb448c40700863dc"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-774.npy",
+        "sha256": "e9527669615067c0712ea458ac10adc9e7c377bab57a379fea70322c83eaee6c"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-774.npy",
+        "sha256": "fb5a293f7bc60eebedc1d1e730a8aefff627e6a0de501f831ad1c6148af35da0"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-774.npy",
+        "sha256": "d591537708f240dce23da9f46495219b3e241f02e28d3b67d34c9a72ac4a4517"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "1f4ac0a1277d56a7464323d111924b030b3e467d04c4a9b61c0ca94935033d4f"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-778.npy",
+        "sha256": "f4e678232e36df1c539e7b88b13a06d27d142cd5e61986e34f9640d16a0b243b"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-778.npy",
+        "sha256": "35a13927e57ce60cf814a8e0b7582155f435faa6a6982c0b1b2a66a92d107bb3"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-778.npy",
+        "sha256": "ca94f97637656cc0fe18fd5eea4c50674411ae0cdb50376967311ba86ec85ac6"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "4a77aefa33e73e17a8c5a1592389b6a176dd41807a165c70e14fb8b9055edbe8"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-778.npy",
+        "sha256": "d00089b7cffe686acd5be1bc4a2a078be0b34f366ff0973588ca6cc98ec05209"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-778.npy",
+        "sha256": "d9c0f9fa0f49f5e3dc4f091405bc8e0223b848691d9abbc13f0906305734d8f2"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-778.npy",
+        "sha256": "ca94f97637656cc0fe18fd5eea4c50674411ae0cdb50376967311ba86ec85ac6"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "9dff8eaea3db5f25954c9f3484eb8ed5ebaf26a71a02c4bfb54cf8af420de07b"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-782.npy",
+        "sha256": "455c849eaa913d90b675f75665417cbf8d00aceb0c6946a66c932aafd04f6f43"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-782.npy",
+        "sha256": "358027bf4a6f7886ed779c74df0a2eedb7467e2fddafce0c28777bb0a776f44a"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-782.npy",
+        "sha256": "ca55750d1e372b1abc5ba56b38ef61610365e9668e871cac04cc67f7aac30a73"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "2ad85bb4887e99d0e5d854bd54bf536510313b947dcd933e40f6ec2a827dd384"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-782.npy",
+        "sha256": "4afbfa7711d96fb93ba0e605d06297fdc0e636bee37dc2900f8ec7343c160f9c"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-782.npy",
+        "sha256": "c2b0f3ce1836610e82e64935544d0174f69995370a4214705aed32dd8ec24570"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-782.npy",
+        "sha256": "ca55750d1e372b1abc5ba56b38ef61610365e9668e871cac04cc67f7aac30a73"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "a45e9c054d828c38aa601334d255c2a9fbd49efb10c90a92b8c28ae635362e0b"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-786.npy",
+        "sha256": "76c981c30c098e36401880270029550813be35c220b4b2207b15fecabef1b7f2"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-786.npy",
+        "sha256": "e91b1ec547ba6a59a50740015b05caddaa0e76b26a586d7a5521932937a45296"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-786.npy",
+        "sha256": "99593a815a15fd4984f1db013fc6fd5ede3e6066e7d108c177bda407ea3a4889"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "395ffeaac1395f3cfbf9dd207c2943fc8c3c055f00d8415b4f661179c21cf1fa"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-786.npy",
+        "sha256": "278a0d9f867b1a647b10b33040542b084528f92b40130ed4e7026bff439549c5"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-786.npy",
+        "sha256": "c5c50bf10678f03667bcb1441d6db887f5f3d9c9ad9d69b1708947f895f35e32"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-786.npy",
+        "sha256": "99593a815a15fd4984f1db013fc6fd5ede3e6066e7d108c177bda407ea3a4889"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "ff0dadcd7e0f35ec13c51f95ee5fb9c1667231a899d709fa04df179233cfc51e"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-790.npy",
+        "sha256": "91b6cb17c80ebed39f8e7b9bda8c429e5688cb0360c274ad98a8ca75c9e61855"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-790.npy",
+        "sha256": "11fc1b657a821f23eb2c105b842a49bcf67b978540ff3f0f398204fd024532ce"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-790.npy",
+        "sha256": "9d1fa30ed0c4d9628a00304e8f3d791f05867c03ff66ed792490bbd7b57c0ab2"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "15d0cb4ed70b751b83f6e9571da1cffc895f373ae09f4c0879e66cf92b76a448"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-790.npy",
+        "sha256": "885bddbc20fd71d491c60c8cde28eaab571f29dd40e3cadf10a781185590ab3a"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-790.npy",
+        "sha256": "915191aeced59116db2215ae31d6dd1e2ed183cf58eff6b8ec9e867b2c7ac011"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-790.npy",
+        "sha256": "9d1fa30ed0c4d9628a00304e8f3d791f05867c03ff66ed792490bbd7b57c0ab2"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "b77da3dc2ca7cefa383aef3a5c3ef14fb75bd3118b5e7a5ae157a99e2cf0e777"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-794.npy",
+        "sha256": "a84d8a8b7a326286d9e7edfb212725275f6aca7a0ffc22df0653fcf115ce8cae"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-794.npy",
+        "sha256": "0b004c30d3d2d09e820411778cd12274456259200fd26766f4f441a83102350d"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-794.npy",
+        "sha256": "7afa2ee3ab9023d1f653db5c52b682f6eee631cb4884aac17d3cf2b81c757b09"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "5df20fb3199ef75fc8aada297e0d3eff8058d87d220dc573a2ce216762cd2dde"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-794.npy",
+        "sha256": "5df3c7298af03d9fba4ca1b73a36e2e5a7535662a429e2a0c65968106bd0e3e9"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-794.npy",
+        "sha256": "3b1c9058da1ac92f063146308ada23a77d60979cf73a3026ebb5a18fa3b70ba0"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-794.npy",
+        "sha256": "7afa2ee3ab9023d1f653db5c52b682f6eee631cb4884aac17d3cf2b81c757b09"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "293f94a133b7ff5dea3f9d4db0fae577457eacadf526b4cb0b03589211bb0721"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-bark-contrast0p025-adc-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-798.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "758357672c74a6d4077e8c4d830ba2a83e0a3442800167f0d0f2b6eea5384fdb"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "V150-control-bark-contrast0p025-adc-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-798.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "758357672c74a6d4077e8c4d830ba2a83e0a3442800167f0d0f2b6eea5384fdb"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "V150-control-raccoon-fur-contrast0p025-adc-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-802.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "468bdf3fb4ceec76f35b543dd771cd7b970a334662bdf084457e0108b646f3c1"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "V150-control-raccoon-fur-contrast0p025-adc-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-802.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "dtype": "<f4",
+        "sha256": "468bdf3fb4ceec76f35b543dd771cd7b970a334662bdf084457e0108b646f3c1"
+      },
+      "addition_bit_exact": true,
+      "channels": 196608
+    },
+    {
+      "id": "V150-control-ADC-plane0-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-806.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "337e33f48b86beb5bd6f4da8431e6758194ed8c52f40bced0a92d8307e2b778b"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-ADC-plane0-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-806.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "337e33f48b86beb5bd6f4da8431e6758194ed8c52f40bced0a92d8307e2b778b"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-ADC-plane1-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-810.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "8654d5ec543015ced04d3ef167f92190a8e0d1f5e3d36e06c7b3aa0de33f9faa"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-ADC-plane1-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-810.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "8654d5ec543015ced04d3ef167f92190a8e0d1f5e3d36e06c7b3aa0de33f9faa"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-ADC-plane2-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-814.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "d57504a0b43b9a3b29d5cecd6a1789018cd42e6d45597425ac5b9e8878ffcef0"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-ADC-plane2-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-814.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "d57504a0b43b9a3b29d5cecd6a1789018cd42e6d45597425ac5b9e8878ffcef0"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-ADC-plane3-RGGB",
+      "endpoint": "raw",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-818.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "d07b95d92cbb13989e8cae00581b55d87ab697971bb66d0bc9aadea82776c0d5"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    },
+    {
+      "id": "V150-control-ADC-plane3-RGGB",
+      "endpoint": "EMA",
+      "RGB": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "wave": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-818.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "baseline": {
+        "path": "/mnt/external/demosaic/quality-20261107/V183-coherent-pair-evidence-trial-v1/native/V183-coherent-pair-EMA-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "values": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "<f4",
+        "sha256": "d07b95d92cbb13989e8cae00581b55d87ab697971bb66d0bc9aadea82776c0d5"
+      },
+      "addition_bit_exact": true,
+      "channels": 786432
+    }
+  ],
+  "arrays": 144,
+  "RGB_arrays": 72,
+  "RGB_channels_checked": 53772288,
+  "wave_compressed_bytes": 135859290,
+  "native_forecast_35percent_and_manifests_bytes": 183704953,
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0,
+  "scope": "Future RGB manifest may bind exact FP32 addition of immutable baseline and stored wave. Each future array must pass byte digest equality; otherwise codec stores XOR bytes. Every old array remains unchanged. Wave entropy can change; measured forecast is not a bound."
+}

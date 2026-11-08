@@ -48,6 +48,8 @@ viewed native figures/12 triplets are complete. Nineteen methods/32contrasts/
 1,218cells retain prior results. The [loss implementation](coherent-pair-response.md)
 records25 CPU tests,20 native derivative replays and two genuine CUDA probes.
 
+The [V185 smaller-support readout experiment](spatial-context-wave-readout.md) has passed native CPU/GPU correctness and started matched training. Quality review is pending.
+
 The completed [V184 phase-aware readout](phase-wave-readout-comparison.md) adds
 316 parameters above frozen V183 EMA. Mesh response rises **9.60% raw / 15.96%
 EMA**, reaching 4.865% / 5.148% of GT amplitude; quiet spatial RMS rises

@@ -1,0 +1,3129 @@
+{
+  "status": "pass-read-only-lossless-native-storage-forecast-not-new-quality",
+  "created_local": "2026-11-08T05:18:01.955727-08:00",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/measure-v185-native-storage-v1.py",
+    "sha256": "944bc578125251c2bb5eef923c079655d22dbe8235553358d0ace768ec21ebfb",
+    "text": "\"\"\"Read-only lossless storage forecast on completed V184 native arrays.\"\"\"\nfrom pathlib import Path\nimport hashlib,json,os,sys,time,zlib\nfrom datetime import datetime\nfrom zoneinfo import ZoneInfo\nimport numpy as np\nR=Path('/home/dllu/proj/demosaic');Q=R/'.cache/quality-20261107/V185-native-storage-forecast-v1'\ndef read(p):return json.loads(Path(p).read_text())\ndef ref(p):\n p=Path(p).absolute()\n with p.open('rb') as f:h=hashlib.file_digest(f,'sha256').hexdigest()\n return {'path':str(p),'sha256':h}\ndef save(p,x):\n with p.open('x') as f:json.dump(x,f,indent=2,allow_nan=False);f.write('\\n')\nassert not Q.exists();Q.mkdir();os.nice(10);os.sched_setaffinity(0,[6,7])\nnew_path=R/'.cache/quality-20261107/V184-wave-readout-trial-v1/scores-v1.json'\nnew=read(new_path);plan=read(R/'.cache/quality-20261107/V184-wave-readout-trial-v1/plan-v1.json')\nbase=read(plan['baseline_scores']['path'])\nrows=[];started=time.time()\nfor cid,bindings in new['native_predictions'].items():\n b=base['native_predictions'][cid]['V183-coherent-pair-EMA'];assert ref(b['path'])==b\n baseline=np.load(b['path'],allow_pickle=False)\n for endpoint in ['raw','EMA']:\n  for kind,label in [('RGB',f'V184-wave-readout-{endpoint}'),('wave',f'V184-wave-readout-{endpoint}-wave')]:\n   binding=bindings[label];assert ref(binding['path'])==binding\n   value=np.load(binding['path'],allow_pickle=False);assert value.dtype==np.float32 and value.flags.c_contiguous\n   raw=value.tobytes();shuffled=value.view(np.uint8).reshape(-1,4).T.copy().tobytes()\n   choices={'zlib_raw':raw,'zlib_byteplanes':shuffled}\n   if kind=='RGB':\n    assert value.shape==baseline.shape\n    xor=np.bitwise_xor(value.view(np.uint32),baseline.view(np.uint32))\n    choices['zlib_baseline_xor_byteplanes']=xor.view(np.uint8).reshape(-1,4).T.copy().tobytes()\n   sizes={}\n   for name,payload in choices.items():\n    compressed=zlib.compress(payload,6);decoded=zlib.decompress(compressed);assert decoded==payload\n    if name=='zlib_raw':restored=np.frombuffer(decoded,np.float32).reshape(value.shape)\n    else:\n     restored=np.frombuffer(decoded,np.uint8).reshape(4,-1).T.copy().view(np.uint32).reshape(value.shape)\n     if name=='zlib_baseline_xor_byteplanes':restored=np.bitwise_xor(restored,baseline.view(np.uint32))\n     restored=restored.view(np.float32)\n    assert restored.tobytes()==raw\n    sizes[name]=len(compressed)\n   rows.append({'id':cid,'endpoint':endpoint,'kind':kind,'original':binding,'array_bytes':value.nbytes,\n                'shape':list(value.shape),'sizes':sizes,'all_decoded_bits_exact':True})\ntotals={name:sum(r['sizes'].get(name,0) for r in rows) for name in ['zlib_raw','zlib_byteplanes','zlib_baseline_xor_byteplanes']}\nselected=sum(r['sizes']['zlib_baseline_xor_byteplanes' if r['kind']=='RGB' else 'zlib_byteplanes'] for r in rows)\nresult={'status':'pass-read-only-lossless-native-storage-forecast-not-new-quality','created_local':datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n 'source':dict(ref(__file__),text=Path(__file__).read_text()),'completed_scores':ref(new_path),'baseline_scores':plan['baseline_scores'],\n 'rows':rows,'arrays':len(rows),'original_array_bytes':sum(r['array_bytes'] for r in rows),'compressed_totals':totals,\n 'selected_RGB_xor_plus_wave_byteplanes_bytes':selected,'forecast_with_35_percent_margin_and_1KiB_per_array':int(selected*1.35)+len(rows)*1024,\n 'all_array_bits_roundtrip_exact':True,'new_neural_forwards':0,'new_sensor_source_draws':0,'seconds':time.time()-started,\n 'scope':'Read completed V184 RGB/wave and V183 EMA baseline arrays only;no original/checkpoint/source array modified. All channels roundtrip exactly in memory including signed zero. Selected prospective format uses bitwise XOR RGB against immutable baseline,then byte-plane transpose and zlib6;wave uses byte-plane transpose and zlib6. Compressed payloads not retained;compact forecast only. Future method entropy can differ;35percent margin is a forecast,not bound.'}\nassert 'torch' not in sys.modules and 'rawpy' not in sys.modules\nsave(Q/'result-v1.json',result)\nprint('PASS',len(rows),'arrays;originalMiB',result['original_array_bytes']/2**20,'selectedMiB',selected/2**20,'forecastMiB',result['forecast_with_35_percent_margin_and_1KiB_per_array']/2**20,flush=True)\n"
+  },
+  "completed_scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V184-wave-readout-trial-v1/scores-v1.json",
+    "sha256": "879a416c3660f8ada30c50275388eb49b63d0a28db8a025ea9383b3e8428b9f5"
+  },
+  "baseline_scores": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/scores-v1.json",
+    "sha256": "2182a12e117bf89d87e5f7b6e48b345eb9a3f22372d8cc7d5efdc4acf5d3b9a9"
+  },
+  "rows": [
+    {
+      "id": "mesh-nominal",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-692.npy",
+        "sha256": "1577a814af34ba530cf93fea52c1408c90d974919fa11c3a495c7e1f68f3d180"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6170057,
+        "zlib_byteplanes": 5190515,
+        "zlib_baseline_xor_byteplanes": 3711300
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-nominal",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-692.npy",
+        "sha256": "74c38a93776b250d912f01bd28336c67ddc7de6429971003409969d625d770d4"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6591515,
+        "zlib_byteplanes": 5743030
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-nominal",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-692.npy",
+        "sha256": "15ca6fe8da58ad6f20e04b4de881a0acf3a7a3fc34a92dc90d1e8d3e2084046c"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6170050,
+        "zlib_byteplanes": 5192249,
+        "zlib_baseline_xor_byteplanes": 3763715
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-nominal",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-692.npy",
+        "sha256": "92ec8c1628385f2c20c868912683a1f1e9a996e08d5f9ec166e271b990f54666"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6604733,
+        "zlib_byteplanes": 5747581
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-016.npy",
+        "sha256": "5af39873e7722d2dff053bba427f935ee1413523a9a4393044642b9b8a355038"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2307125,
+        "zlib_byteplanes": 1726468,
+        "zlib_baseline_xor_byteplanes": 1538941
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-016.npy",
+        "sha256": "17185ccdd93a7081dd913b05a25ad53d04c46703786c2be4c056c5118d9a3127"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2941045,
+        "zlib_byteplanes": 2607319
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-016.npy",
+        "sha256": "115feab3d75611ccc44a03d9035001fb059ed84433849172c614a141cd51bf1c"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2311041,
+        "zlib_byteplanes": 1730907,
+        "zlib_baseline_xor_byteplanes": 1567318
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112302-present-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-016.npy",
+        "sha256": "dc54b0c0f0b4fc52b3b797242ac49bc38625abe0ceab29d451e6da99f9ce9b4e"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2947577,
+        "zlib_byteplanes": 2607052
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-033.npy",
+        "sha256": "e1556e2ce567eeafe521f8cfce3f72eb6869b1d957d2178ffed1f6f8b3735420"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2293934,
+        "zlib_byteplanes": 1714380,
+        "zlib_baseline_xor_byteplanes": 1348217
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-033.npy",
+        "sha256": "3ad95e1edbaf8eec47f8f1b19c5d708a4a4cb6cdf65cb353d1d714c07248cb50"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2914439,
+        "zlib_byteplanes": 2609614
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-033.npy",
+        "sha256": "2cb65fd0f68b3687a51d02402c63d339c9399b2c5c362e18fa03f220e3f56a0e"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2293454,
+        "zlib_byteplanes": 1714473,
+        "zlib_baseline_xor_byteplanes": 1347481
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112304-absent-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-033.npy",
+        "sha256": "097da320bf0c7afe86233655d93fdce40262a052f2e2ea8c7ce3c968ba55b673"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2915020,
+        "zlib_byteplanes": 2610447
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-072.npy",
+        "sha256": "faf28e9551bd7efc9ad5143ac8665a995cd40562849f433c012c14a731f16bfd"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2493723,
+        "zlib_byteplanes": 1926743,
+        "zlib_baseline_xor_byteplanes": 1667226
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-072.npy",
+        "sha256": "fd6a1af8927ddfcadae1339958e6f25ee333ef7dee16133907378e74bbf3f4bb"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2938901,
+        "zlib_byteplanes": 2544501
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-072.npy",
+        "sha256": "a0bc78d2817176676f369ab8b10c07487fc62d85f0f32eaf1706bcad9ac5ca2a"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2498029,
+        "zlib_byteplanes": 1930745,
+        "zlib_baseline_xor_byteplanes": 1724128
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-seed2026112309-present-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-072.npy",
+        "sha256": "64da28313d6cff67393c3493164a9076f1c9dc480ef1b2f749d034a1eb28eaf7"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2946367,
+        "zlib_byteplanes": 2526202
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-faint-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-528.npy",
+        "sha256": "86418b40faecc2f23a86eb45a334676555cb7c2b9ca29cead474fefe161bfd54"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2542145,
+        "zlib_byteplanes": 1826736,
+        "zlib_baseline_xor_byteplanes": 1365916
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-faint-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-528.npy",
+        "sha256": "085be2da84b21bf229f68adf93d3476ff3d85484027e3d4b82d9baac1e597902"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2915278,
+        "zlib_byteplanes": 2624318
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-faint-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-528.npy",
+        "sha256": "5c13eb12a06f421aaad255ca3e5f9e20734a7aeff111117fa8acb6fd2523b870"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2542017,
+        "zlib_byteplanes": 1826774,
+        "zlib_baseline_xor_byteplanes": 1366189
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-faint-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-528.npy",
+        "sha256": "9a6a9c1c74bf7a8aaa979b77ef9bdd3b93bb3fae559a722ea581bff5e8a17e35"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2916706,
+        "zlib_byteplanes": 2624688
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-dark-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-532.npy",
+        "sha256": "cdd31c50750181eff86217633ab7a98d1e12814cc8318bf13d75ca3ecc0fabed"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2769251,
+        "zlib_byteplanes": 2269935,
+        "zlib_baseline_xor_byteplanes": 1615588
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-dark-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-532.npy",
+        "sha256": "ae7416aa63f8dc5cc21f1b27708297f720a7078b2a0a3ef72d6b07570e8458fb"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2918767,
+        "zlib_byteplanes": 2619914
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-532.npy",
+        "sha256": "e12c5b37e2e48875f357afe528ee737cf7f78fcb705fe2f6c81e670ff4166b5e"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2769336,
+        "zlib_byteplanes": 2269828,
+        "zlib_baseline_xor_byteplanes": 1616383
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "photo-3e638bbb56ed80abc88939468783e3bf9b92ee77-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-532.npy",
+        "sha256": "2f2660df66c64f68b095ceb4021f26b8262873c58c15f12499215efbe50d8d66"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2917293,
+        "zlib_byteplanes": 2619400
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-02a76fd33b5e1414a0504f0b3f0aeb03a569b6f4-photo-faint-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-576.npy",
+        "sha256": "6ed335868f25ba4f163b61b7184bf7e987c23909b629990c62f90786e99138fc"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1422433,
+        "zlib_byteplanes": 1026679,
+        "zlib_baseline_xor_byteplanes": 764981
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-02a76fd33b5e1414a0504f0b3f0aeb03a569b6f4-photo-faint-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-576.npy",
+        "sha256": "226ec0355f099a5eb3e03eda76dd51a608b89c4168e9cc44268d49a78576034a"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1639766,
+        "zlib_byteplanes": 1472700
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-02a76fd33b5e1414a0504f0b3f0aeb03a569b6f4-photo-faint-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-576.npy",
+        "sha256": "f1a820a2416852f40ab28e314146ba0fd286ce135d6b611aa6d8edc48174001e"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1422528,
+        "zlib_byteplanes": 1026653,
+        "zlib_baseline_xor_byteplanes": 766168
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-02a76fd33b5e1414a0504f0b3f0aeb03a569b6f4-photo-faint-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-576.npy",
+        "sha256": "40efe7b95051f4ed702333982396f7c0189f4b547633b1ad67cd9787094ac460"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1640312,
+        "zlib_byteplanes": 1473470
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-6b3920bceba82d95ecf9351d47f6f94267694bd0-photo-dark-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-604.npy",
+        "sha256": "c0014a874bb9cf139c9c6b456a71fdab399435372d71c0349bb61cc24614acd9"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1592993,
+        "zlib_byteplanes": 1364507,
+        "zlib_baseline_xor_byteplanes": 978069
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-6b3920bceba82d95ecf9351d47f6f94267694bd0-photo-dark-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-604.npy",
+        "sha256": "2c5755bcfc66b5c8ef07e666b1cc7d90040aa58eefcd47935f1c4a067e8f0199"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1643945,
+        "zlib_byteplanes": 1450012
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-6b3920bceba82d95ecf9351d47f6f94267694bd0-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-604.npy",
+        "sha256": "b698ffc9d91f3fffba2839bc9a7005f1bb6ceb1b64214a728a656a371886dfce"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1592988,
+        "zlib_byteplanes": 1364509,
+        "zlib_baseline_xor_byteplanes": 989908
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-6b3920bceba82d95ecf9351d47f6f94267694bd0-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-604.npy",
+        "sha256": "6f4056aeccb30fde6d0818baf6ed0530fc792ec4becc0457a960e69e66c58aa5"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1646731,
+        "zlib_byteplanes": 1449393
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-dabacecd4780a1c230f8e9fce6ca1a604bdeab4c-photo-dark-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-636.npy",
+        "sha256": "89a9a955bf1df6c0a30999817392c8ed775874ba0da0f005763d5ca560affd8c"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1579966,
+        "zlib_byteplanes": 1321094,
+        "zlib_baseline_xor_byteplanes": 951985
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-dabacecd4780a1c230f8e9fce6ca1a604bdeab4c-photo-dark-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-636.npy",
+        "sha256": "ca6acd2d81d044cd90bafb22bde8a1c72e0a87ff83741d4284621210a7ad9c43"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1642133,
+        "zlib_byteplanes": 1472743
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-dabacecd4780a1c230f8e9fce6ca1a604bdeab4c-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-636.npy",
+        "sha256": "2b174e7a6daa5ad70c363103f66a07bbab33cb061c0318af38aeb527e1efd6e7"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1579890,
+        "zlib_byteplanes": 1320979,
+        "zlib_baseline_xor_byteplanes": 954150
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "organic-dabacecd4780a1c230f8e9fce6ca1a604bdeab4c-photo-dark-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-636.npy",
+        "sha256": "8d3ebb8aece6832fc65a432a875a8ad08a34e43fb2837ce71033e87d92f8a525"
+      },
+      "array_bytes": 1769472,
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "sizes": {
+        "zlib_raw": 1642242,
+        "zlib_byteplanes": 1472149
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-adc-only-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 432322,
+        "zlib_byteplanes": 260633,
+        "zlib_baseline_xor_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-adc-only-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 785,
+        "zlib_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-adc-only-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 432322,
+        "zlib_byteplanes": 260633,
+        "zlib_baseline_xor_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-adc-only-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 785,
+        "zlib_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-644.npy",
+        "sha256": "2d3e511aac0cc0b03b4d27a94d91b9d6457fef08da838d270d972f7d83f95325"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 585633,
+        "zlib_byteplanes": 445799,
+        "zlib_baseline_xor_byteplanes": 353232
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-644.npy",
+        "sha256": "4f49dfaf69329cc81d41b8f02471a19f8b61c1fa2f4213c3b9fdcb535707503a"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 729995,
+        "zlib_byteplanes": 656651
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-644.npy",
+        "sha256": "b7a2413ed666150d99413bc76c68c905e2255791c49bcd3afbf8332a637a2ffb"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 585608,
+        "zlib_byteplanes": 445889,
+        "zlib_baseline_xor_byteplanes": 351100
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-644.npy",
+        "sha256": "3e593dc4b61a006ff62f717266fea68ed1251ae432de9a0578a0d310fb6aec7d"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 729883,
+        "zlib_byteplanes": 657435
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-overcast-sky",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-688.npy",
+        "sha256": "21df94cddc8dbdde58fdf1d17c185d8ef9e5ef74bc2e181cf4f687b53d602185"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2398566,
+        "zlib_byteplanes": 1735108,
+        "zlib_baseline_xor_byteplanes": 1350998
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-overcast-sky",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-688.npy",
+        "sha256": "57a6a725bf161e20a3795cc5c6c6a5a119145540f6d0f44e25b41fada4d20ea6"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2915327,
+        "zlib_byteplanes": 2607220
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-overcast-sky",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-688.npy",
+        "sha256": "24c0956309d6eb072194ca9e462f8bd24ef36aa744c9acf2c1dd0c303ed0db70"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2398488,
+        "zlib_byteplanes": 1735167,
+        "zlib_baseline_xor_byteplanes": 1353867
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-overcast-sky",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-688.npy",
+        "sha256": "0065987384199905a8b97340e773de1f90896786e8c10b17927e0ad34a4949d7"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2916134,
+        "zlib_byteplanes": 2607635
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-building-detail",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-689.npy",
+        "sha256": "5d70f5b8a9379b084fd7609cb332d1baadd5d318c119383549cfc44c5cf9d00c"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2751716,
+        "zlib_byteplanes": 2195442,
+        "zlib_baseline_xor_byteplanes": 1910783
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-building-detail",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-689.npy",
+        "sha256": "942643c7d05e2cab97161f241ba8c6447323153dd444605bb0c5c85d72148078"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2971911,
+        "zlib_byteplanes": 2462497
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-building-detail",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-689.npy",
+        "sha256": "67be5b3332e8e9f6958ce17f6fd892d525df91897af3694762f86a49d2a7ae42"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2751152,
+        "zlib_byteplanes": 2192960,
+        "zlib_baseline_xor_byteplanes": 1925445
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-building-detail",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-689.npy",
+        "sha256": "251f6a8880049a6d8cc2a899032d3b90bffc8b141eda8d9f924d3dc05138d6ad"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2969262,
+        "zlib_byteplanes": 2464356
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-foliage",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-690.npy",
+        "sha256": "c7976cb011179a6d8d72921b00cc395f1e575813efa776ab5ec16893eb8e084a"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2827669,
+        "zlib_byteplanes": 2412484,
+        "zlib_baseline_xor_byteplanes": 1824001
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-foliage",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-690.npy",
+        "sha256": "114c45a8300b6458091c2dbb537385498210a5a21446fdda0373778497863434"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2929449,
+        "zlib_byteplanes": 2541202
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-foliage",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-690.npy",
+        "sha256": "7a789b4fb9f6a61dbb430de2b9a0721317d55a72133cfa1a062d7a98bbe3e342"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2827685,
+        "zlib_byteplanes": 2412602,
+        "zlib_baseline_xor_byteplanes": 1882395
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-foliage",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-690.npy",
+        "sha256": "789ad5e1f9516483645747f0d64da2fffa35a3b2963ba91f14cae5c8c623a5ee"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2929934,
+        "zlib_byteplanes": 2539961
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-chain-link-fence",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-691.npy",
+        "sha256": "8b6185966444b23aec09e1c1920c23897580627a5910e982183d3c2a0c05603e"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2782997,
+        "zlib_byteplanes": 2416119,
+        "zlib_baseline_xor_byteplanes": 1907118
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-chain-link-fence",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-691.npy",
+        "sha256": "29058674e94f70aabdc62fd88302c153e1cd748b20cc1e74de0672ac99053644"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2934038,
+        "zlib_byteplanes": 2565661
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-chain-link-fence",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-691.npy",
+        "sha256": "55d62b0bc016f1f9b00eb40f04177450265493610438953bef2e03cb8fd299d1"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2783152,
+        "zlib_byteplanes": 2416448,
+        "zlib_baseline_xor_byteplanes": 1913787
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "main-chain-link-fence",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-691.npy",
+        "sha256": "2d503abe73fd44a5c117323e962b386ba3ef8cd6c4d44cefe9c5070b6e62f3e1"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2928196,
+        "zlib_byteplanes": 2564631
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-profile3879",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-693.npy",
+        "sha256": "b67e6a015e28cbb4083e51dabd142b6787a6f834615f2a6c647b3c520e7858f1"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6160096,
+        "zlib_byteplanes": 5201743,
+        "zlib_baseline_xor_byteplanes": 3648092
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-profile3879",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-693.npy",
+        "sha256": "7e9192c6b15d8b94b5260b7e625bce36173427272d6b8136afe54ded8cc27934"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6598832,
+        "zlib_byteplanes": 5764922
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-profile3879",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-693.npy",
+        "sha256": "a246054392d2f3a58bbec1d6f0104135bb1889beef1ca6a08ecb7a981b0fadc6"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6160179,
+        "zlib_byteplanes": 5204004,
+        "zlib_baseline_xor_byteplanes": 3708325
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mesh-profile3879",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-693.npy",
+        "sha256": "3e1de4a60c7e10e3c2a499428f8ead9fa9af4e11ef433e5a86d6c3caaa6ca6c8"
+      },
+      "array_bytes": 7077888,
+      "shape": [
+        1,
+        3,
+        768,
+        768
+      ],
+      "sizes": {
+        "zlib_raw": 6613179,
+        "zlib_byteplanes": 5768521
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-adc-only-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1666271,
+        "zlib_byteplanes": 920906,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-adc-only-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-adc-only-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1666271,
+        "zlib_byteplanes": 920906,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-adc-only-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-698.npy",
+        "sha256": "e2ef32a1af20ed140cc24c41c49ff38136836920a234a2dce48edfae2aceb4d7"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2292916,
+        "zlib_byteplanes": 1715854,
+        "zlib_baseline_xor_byteplanes": 1356598
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-698.npy",
+        "sha256": "b84f4bfec20680789e17b09d63bca077237e11acd301275a980e8db1a4e51784"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2914783,
+        "zlib_byteplanes": 2618896
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-698.npy",
+        "sha256": "b9007a6b4daa293b28f2e930e0f60f06b434bddf509f04faff0d1ac5b6f61649"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2293032,
+        "zlib_byteplanes": 1715943,
+        "zlib_baseline_xor_byteplanes": 1354564
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-698.npy",
+        "sha256": "2e506d2f2b963e1445bd906e11cf98724e850a7097f61285233562fdc2873311"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2915565,
+        "zlib_byteplanes": 2618967
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-702.npy",
+        "sha256": "e1835f5c1123b434382bd33aa78b0b512fd3f730c71bcad0afdc41935bef5700"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2354027,
+        "zlib_byteplanes": 1767989,
+        "zlib_baseline_xor_byteplanes": 1409370
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-702.npy",
+        "sha256": "dd70cd70705f2de4479976800b7753e4999a394ce281152415587aceba964ac7"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2920150,
+        "zlib_byteplanes": 2633350
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-702.npy",
+        "sha256": "fc0b21956caaf6cec1545842e99a52e793c01d0d5d9f4267dc769ce147b00600"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2354002,
+        "zlib_byteplanes": 1768210,
+        "zlib_baseline_xor_byteplanes": 1412208
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.02-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-702.npy",
+        "sha256": "ea7c021ea13ec5b35fd0e02e33c1b312648e4e42682cabe9141be3b987cd330f"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2920668,
+        "zlib_byteplanes": 2633687
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-h210-s0.50-l0.02-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-722.npy",
+        "sha256": "f803a082e08532c61488a358cdb00674d9b708edf22f7ff521f3f0915f78c89f"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2349552,
+        "zlib_byteplanes": 1756675,
+        "zlib_baseline_xor_byteplanes": 1386945
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-h210-s0.50-l0.02-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-722.npy",
+        "sha256": "963004abaa222c90a7aa9d125454163f35d957d5907dedee95b92988e796766d"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2915557,
+        "zlib_byteplanes": 2608915
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-h210-s0.50-l0.02-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-722.npy",
+        "sha256": "1bb25233cf9a9feddbfc6f54cc7c9a0c078a2112fd75c64f37186a8efc264266"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2350185,
+        "zlib_byteplanes": 1756630,
+        "zlib_baseline_xor_byteplanes": 1391256
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-h210-s0.50-l0.02-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-722.npy",
+        "sha256": "da2dcf3213112447ea174f4ec4c7ab1934b66cbcc3daaa8db3ecced2ba2b40da"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2915636,
+        "zlib_byteplanes": 2610428
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.18-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-738.npy",
+        "sha256": "04df12f3b86d137f7913da91ce3cfddfd49eb650915392df0f43ba1a724f1d3c"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2207008,
+        "zlib_byteplanes": 1660374,
+        "zlib_baseline_xor_byteplanes": 1263898
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.18-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-738.npy",
+        "sha256": "6368b522f0857eabeab6c9c98527c2f37dd9276132cf6382f2f98cad394bb117"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2914815,
+        "zlib_byteplanes": 2631862
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.18-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-738.npy",
+        "sha256": "87dc3f205ef0eb7cf83cdb42a13ac25eaa75633a687a0db4af258972b1c701c2"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2206838,
+        "zlib_byteplanes": 1660323,
+        "zlib_baseline_xor_byteplanes": 1259611
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.18-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-738.npy",
+        "sha256": "bc7c3c811b62a4329bcfaf70f98c31cbf0540c8a143275e0471fd3ca4b9ffad0"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2914746,
+        "zlib_byteplanes": 2631833
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.90-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-762.npy",
+        "sha256": "2bd721ef0e594395bce588904781c72fe25f5580e448d36d6a953f5f82c2a14b"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2159846,
+        "zlib_byteplanes": 1624859,
+        "zlib_baseline_xor_byteplanes": 1144359
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.90-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-762.npy",
+        "sha256": "9c588a2f69f0ab1deee8afcb99b3128b8e298954768a9fd04fc3a4facbab0b61"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2919118,
+        "zlib_byteplanes": 2631173
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.90-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-762.npy",
+        "sha256": "90c1b3d2bc1f2471b64b28a2bcad9af2a6afd949616ed57cb8491112c70a2731"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2160110,
+        "zlib_byteplanes": 1624888,
+        "zlib_baseline_xor_byteplanes": 1137401
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "flat512-gray-l0.90-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-762.npy",
+        "sha256": "5c74a79c0d38d49e3476345798bb0b691c15897f09a49624783495fee863c99d"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2918441,
+        "zlib_byteplanes": 2630892
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-766.npy",
+        "sha256": "872ffef9902a37cc72d34802a540906134e7437f40ae637db69bcbdbcff51792"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2505642,
+        "zlib_byteplanes": 1850705,
+        "zlib_baseline_xor_byteplanes": 1623516
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-766.npy",
+        "sha256": "2ee54bbb770d7f3bbeafabb1d5201f5c4f3f3c62c00cb73badd9467ab50d0749"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1493852,
+        "zlib_byteplanes": 1259966
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-766.npy",
+        "sha256": "3b173a71f4d9df336a4ecd1d4b6f67981c2150bca18a18bbe07f834974d86d80"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2510839,
+        "zlib_byteplanes": 1855119,
+        "zlib_baseline_xor_byteplanes": 1645426
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-766.npy",
+        "sha256": "964d32bcc4144fb2867f0a38080222a76f4f7a014934f70f49cb1ea7981981ac"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1499661,
+        "zlib_byteplanes": 1261307
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-770.npy",
+        "sha256": "7e7ba4b98186ec326304b1315ca37b4adfc190f0a1db8f2e61888f408bf5325a"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2556996,
+        "zlib_byteplanes": 1910862,
+        "zlib_baseline_xor_byteplanes": 1684580
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-770.npy",
+        "sha256": "8e66d903702533ddf1ad1e6ea7ae2f30c49422191376de2671ae63136900e0bd"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1489857,
+        "zlib_byteplanes": 1262635
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-770.npy",
+        "sha256": "23936aeb3f8d0bfc5c7675f2b108c2578ce579410ba68a623e572d4244b17fe2"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2560087,
+        "zlib_byteplanes": 1914004,
+        "zlib_baseline_xor_byteplanes": 1696794
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-vertical-step-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-770.npy",
+        "sha256": "c58d5a488d728b384ead6d909558aae44c8996a72625c900712c57efff0c15a1"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1494016,
+        "zlib_byteplanes": 1264498
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-774.npy",
+        "sha256": "fe46c21bb53aa6bdd5dbaca1c08bd963f9bb9b8f17bbfdaab31bc4490a593c71"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2528541,
+        "zlib_byteplanes": 1952698,
+        "zlib_baseline_xor_byteplanes": 1788617
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-774.npy",
+        "sha256": "74b7f745a0bd1b9e9df05ddd11ef21b655a8e4c75c01e21f19c4d96d07aa0bfd"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1498532,
+        "zlib_byteplanes": 1261106
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-774.npy",
+        "sha256": "e9527669615067c0712ea458ac10adc9e7c377bab57a379fea70322c83eaee6c"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2518729,
+        "zlib_byteplanes": 1942491,
+        "zlib_baseline_xor_byteplanes": 1780683
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-774.npy",
+        "sha256": "fb5a293f7bc60eebedc1d1e730a8aefff627e6a0de501f831ad1c6148af35da0"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1497370,
+        "zlib_byteplanes": 1263487
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-778.npy",
+        "sha256": "f4e678232e36df1c539e7b88b13a06d27d142cd5e61986e34f9640d16a0b243b"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2561295,
+        "zlib_byteplanes": 2013499,
+        "zlib_baseline_xor_byteplanes": 1808271
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-778.npy",
+        "sha256": "35a13927e57ce60cf814a8e0b7582155f435faa6a6982c0b1b2a66a92d107bb3"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1491215,
+        "zlib_byteplanes": 1264095
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-778.npy",
+        "sha256": "d00089b7cffe686acd5be1bc4a2a078be0b34f366ff0973588ca6cc98ec05209"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2566607,
+        "zlib_byteplanes": 2021495,
+        "zlib_baseline_xor_byteplanes": 1832172
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-narrow-bar-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-778.npy",
+        "sha256": "d9c0f9fa0f49f5e3dc4f091405bc8e0223b848691d9abbc13f0906305734d8f2"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 1495501,
+        "zlib_byteplanes": 1261609
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-782.npy",
+        "sha256": "455c849eaa913d90b675f75665417cbf8d00aceb0c6946a66c932aafd04f6f43"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2521781,
+        "zlib_byteplanes": 1862852,
+        "zlib_baseline_xor_byteplanes": 1656453
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-782.npy",
+        "sha256": "358027bf4a6f7886ed779c74df0a2eedb7467e2fddafce0c28777bb0a776f44a"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2956849,
+        "zlib_byteplanes": 2502391
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-782.npy",
+        "sha256": "4afbfa7711d96fb93ba0e605d06297fdc0e636bee37dc2900f8ec7343c160f9c"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2526718,
+        "zlib_byteplanes": 1866537,
+        "zlib_baseline_xor_byteplanes": 1679175
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-782.npy",
+        "sha256": "c2b0f3ce1836610e82e64935544d0174f69995370a4214705aed32dd8ec24570"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2968329,
+        "zlib_byteplanes": 2503043
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-786.npy",
+        "sha256": "76c981c30c098e36401880270029550813be35c220b4b2207b15fecabef1b7f2"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2568780,
+        "zlib_byteplanes": 1918287,
+        "zlib_baseline_xor_byteplanes": 1696448
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-786.npy",
+        "sha256": "e91b1ec547ba6a59a50740015b05caddaa0e76b26a586d7a5521932937a45296"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2950045,
+        "zlib_byteplanes": 2514780
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-786.npy",
+        "sha256": "278a0d9f867b1a647b10b33040542b084528f92b40130ed4e7026bff439549c5"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2571197,
+        "zlib_byteplanes": 1920464,
+        "zlib_baseline_xor_byteplanes": 1713524
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-slanted-step-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-786.npy",
+        "sha256": "c5c50bf10678f03667bcb1441d6db887f5f3d9c9ad9d69b1708947f895f35e32"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2956801,
+        "zlib_byteplanes": 2515078
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-790.npy",
+        "sha256": "91b6cb17c80ebed39f8e7b9bda8c429e5688cb0360c274ad98a8ca75c9e61855"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2641923,
+        "zlib_byteplanes": 2080082,
+        "zlib_baseline_xor_byteplanes": 1783011
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-790.npy",
+        "sha256": "11fc1b657a821f23eb2c105b842a49bcf67b978540ff3f0f398204fd024532ce"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2975727,
+        "zlib_byteplanes": 2491694
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-790.npy",
+        "sha256": "885bddbc20fd71d491c60c8cde28eaab571f29dd40e3cadf10a781185590ab3a"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2646188,
+        "zlib_byteplanes": 2085771,
+        "zlib_baseline_xor_byteplanes": 1779849
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso6400-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-790.npy",
+        "sha256": "915191aeced59116db2215ae31d6dd1e2ed183cf58eff6b8ec9e867b2c7ac011"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2973858,
+        "zlib_byteplanes": 2497494
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-794.npy",
+        "sha256": "a84d8a8b7a326286d9e7edfb212725275f6aca7a0ffc22df0653fcf115ce8cae"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2664498,
+        "zlib_byteplanes": 2137950,
+        "zlib_baseline_xor_byteplanes": 1798410
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-794.npy",
+        "sha256": "0b004c30d3d2d09e820411778cd12274456259200fd26766f4f441a83102350d"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2960863,
+        "zlib_byteplanes": 2493097
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-794.npy",
+        "sha256": "5df3c7298af03d9fba4ca1b73a36e2e5a7535662a429e2a0c65968106bd0e3e9"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2667032,
+        "zlib_byteplanes": 2143610,
+        "zlib_baseline_xor_byteplanes": 1852319
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "mixed-striped-patch-iso12800-prior-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-794.npy",
+        "sha256": "3b1c9058da1ac92f063146308ada23a77d60979cf73a3026ebb5a18fa3b70ba0"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2968363,
+        "zlib_byteplanes": 2482362
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-bark-contrast0p025-adc-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 600659,
+        "zlib_byteplanes": 473887,
+        "zlib_baseline_xor_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-bark-contrast0p025-adc-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-798.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 785,
+        "zlib_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-bark-contrast0p025-adc-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 600659,
+        "zlib_byteplanes": 473887,
+        "zlib_baseline_xor_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-bark-contrast0p025-adc-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-798.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 785,
+        "zlib_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-raccoon-fur-contrast0p025-adc-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 607718,
+        "zlib_byteplanes": 448302,
+        "zlib_baseline_xor_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-raccoon-fur-contrast0p025-adc-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-802.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 785,
+        "zlib_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-raccoon-fur-contrast0p025-adc-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 607718,
+        "zlib_byteplanes": 448302,
+        "zlib_baseline_xor_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-raccoon-fur-contrast0p025-adc-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-802.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "array_bytes": 786432,
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "sizes": {
+        "zlib_raw": 785,
+        "zlib_byteplanes": 785
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane0-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2130325,
+        "zlib_byteplanes": 1431322,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane0-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-806.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane0-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2130325,
+        "zlib_byteplanes": 1431322,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane0-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-806.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane1-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2251414,
+        "zlib_byteplanes": 1575510,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane1-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-810.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane1-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2251414,
+        "zlib_byteplanes": 1575510,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane1-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-810.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane2-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2093777,
+        "zlib_byteplanes": 1410233,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane2-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-814.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane2-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2093777,
+        "zlib_byteplanes": 1410233,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane2-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-814.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane3-RGGB",
+      "endpoint": "raw",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2297237,
+        "zlib_byteplanes": 1539595,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane3-RGGB",
+      "endpoint": "raw",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-818.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane3-RGGB",
+      "endpoint": "EMA",
+      "kind": "RGB",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 2297237,
+        "zlib_byteplanes": 1539595,
+        "zlib_baseline_xor_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    },
+    {
+      "id": "V150-control-ADC-plane3-RGGB",
+      "endpoint": "EMA",
+      "kind": "wave",
+      "original": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-818.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "array_bytes": 3145728,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "sizes": {
+        "zlib_raw": 3071,
+        "zlib_byteplanes": 3071
+      },
+      "all_decoded_bits_exact": true
+    }
+  ],
+  "arrays": 144,
+  "original_array_bytes": 430178304,
+  "compressed_totals": {
+    "zlib_raw": 324732364,
+    "zlib_byteplanes": 266066176,
+    "zlib_baseline_xor_byteplanes": 91137684
+  },
+  "selected_RGB_xor_plus_wave_byteplanes_bytes": 226996974,
+  "forecast_with_35_percent_margin_and_1KiB_per_array": 306593370,
+  "all_array_bits_roundtrip_exact": true,
+  "new_neural_forwards": 0,
+  "new_sensor_source_draws": 0,
+  "seconds": 28.18027901649475,
+  "scope": "Read completed V184 RGB/wave and V183 EMA baseline arrays only;no original/checkpoint/source array modified. All channels roundtrip exactly in memory including signed zero. Selected prospective format uses bitwise XOR RGB against immutable baseline,then byte-plane transpose and zlib6;wave uses byte-plane transpose and zlib6. Compressed payloads not retained;compact forecast only. Future method entropy can differ;35percent margin is a forecast,not bound."
+}

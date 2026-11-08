@@ -1,0 +1,799 @@
+{
+  "status": "pass-completed-copy-consolidation-all-paths-and-bytes-preserved",
+  "created_local": "2026-11-08T05:29:43.887237-08:00",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/v185-completed-v184-native-storage-v1/plan-v1.json",
+    "sha256": "922d83942a6d6912eebe65b3bbb52ead887f87cb3a5a1327454181544437432d"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v185-completed-v184-native-storage-v1.py",
+    "sha256": "f3b2f7b1c204c1f6525e6185f2593fac8937ed7e984e8ef7b27855f6f7eeba2c",
+    "text": "\"\"\"Consolidate explicit completed native/receipt copies without changing bytes.\"\"\"\nimport collections\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport shutil\nimport stat\nimport sys\nfrom datetime import datetime\nfrom zoneinfo import ZoneInfo\nimport psutil\n\nR=Path('/home/dllu/proj/demosaic')\nROOT=R/'.cache/v185-completed-v184-native-storage-v1'\nSPECS=[(184,'wave-readout')]\ndef read(p):return json.loads(Path(p).read_text())\ndef ref(p):\n p=Path(p).absolute()\n with p.open('rb') as f:h=hashlib.file_digest(f,'sha256').hexdigest()\n return {'path':str(p),'sha256':h}\ndef save(p,x):\n with p.open('x') as f:json.dump(x,f,indent=2,allow_nan=False);f.write('\\n')\ndef stamp():return datetime.now(ZoneInfo('America/Los_Angeles')).isoformat()\ndef observed(p):\n s=p.lstat();assert stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and not p.is_symlink()\n return {n:getattr(s,'st_'+n) for n in ['dev','ino','size','mode','uid','gid','nlink','mtime_ns','ctime_ns','blocks']}\ndef terminal(o):\n try:p=psutil.Process(o['pid']);return p.create_time()!=o['created'] or p.status() in [psutil.STATUS_ZOMBIE,psutil.STATUS_DEAD]\n except psutil.NoSuchProcess:return True\ndef owners(root):\n out=[]\n for p in root.glob('*-launch-v1.json'):\n  d=read(p)\n  if 'owner' in d:\n   assert terminal(d['owner']),(p,d['owner'])\n   out.append({'launch':ref(p),'owner':d['owner'],'observed_terminal':True})\n return out\ndef free():return {p:shutil.disk_usage(p).free for p in [str(R),'/mnt/external']}\ndef plan():\n assert not ROOT.exists();ROOT.mkdir()\n all_owners=[];publications=[];native=[];receipts=[]\n for v,name in SPECS:\n  index=R/f'docs/results/v{v}-{name}-final-v1.json';d=read(index)\n  assert d['status'].startswith('completed-')\n  binding=d.get('plan',d['copies'].get('plan-v1.json',{}).get('original'))\n  assert binding and ref(binding['path'])==binding\n  p=Path(binding['path']);metadata=read(p);artifact=Path(metadata.get('artifacts',metadata.get('external','')))\n  assert p.parent.is_relative_to(R/'.cache/quality-20261107')\n  assert artifact.is_relative_to(R/'.cache/quality-20261107') or artifact.is_relative_to(Path('/mnt/external/demosaic/quality-20261107'))\n  checks=owners(p.parent);assert checks\n  all_owners+=checks;publications.append(ref(index))\n  for a in sorted((artifact/'native').rglob('*.npy')):\n   s=observed(a)\n   if s['size']>=512*1024:native.append({'binding':ref(a),'before':s})\n  for pair in d['copies'].values():\n   a,b=Path(pair['original']['path']),Path(pair['public']['path'])\n   if not a.is_relative_to(p.parent) or not b.is_relative_to(R/'docs/results'):continue\n   sa,sb=observed(a),observed(b)\n   if sa['size']<2**20 or sa['nlink']!=1 or (sa['dev'],sa['ino'])==(sb['dev'],sb['ino']):continue\n   assert sa['dev']==sb['dev'] and sa['mode']==sb['mode'] and sa['gid']==sb['gid']\n   assert ref(a)==pair['original'] and ref(b)==pair['public'] and pair['original']['sha256']==pair['public']['sha256']\n   receipts.append({'kind':'completed-receipt-copy','replace':pair['original'],'canonical':pair['public'],'before_replace':sa,'before_canonical':sb})\n groups=collections.defaultdict(list)\n for item in native:\n  s=item['before'];groups[(s['dev'],s['size'],s['mode'],s['gid'],item['binding']['sha256'])].append(item)\n rows=list(receipts)\n for group in groups.values():\n  by_inode={x['before']['ino']:x for x in group}\n  if len(by_inode)<2:continue\n  copies=list(by_inode.values());canonical=copies[0]\n  for item in copies[1:]:\n   if item['before']['nlink']!=1:continue\n   rows.append({'kind':'completed-native-array','replace':item['binding'],'canonical':canonical['binding'],\n                'before_replace':item['before'],'before_canonical':canonical['before']})\n assert rows\n allocated=collections.Counter()\n for row in rows:allocated[row['before_replace']['dev']]+=512*row['before_replace']['blocks']\n save(ROOT/'plan-v1.json',{'status':'read-only-full-hash-inventory-before-storage-change','created_local':stamp(),\n  'source':dict(ref(__file__),text=Path(__file__).read_text()),'publications':publications,\n  'terminal_launch_owners':all_owners,'native_arrays_hashed':len(native),'rows':rows,\n  'previous_duplicate_allocated_bytes_by_device':dict(allocated),'free_before':free(),\n  'scope':'Only native .npy outputs and explicit publication receipt copies in completed owned V184 native outputs only. Full hashes before mutation; all paths/bytes retained. No source, checkpoint, training input, original/capture/JPEG or dataz access. Existing inode metadata retained in inventory; replacements share canonical inode/mode/mtime. No earlier dedup is rerun. V185 source, probes and inputs are excluded.'})\n print('PLAN',len(rows),'replacement paths',len(native),'native arrays hashed','allocated GiB by device',{k:v/2**30 for k,v in allocated.items()},flush=True)\ndef apply():\n p=read(ROOT/'plan-v1.json');assert p['source']['sha256']==ref(__file__)['sha256']\n assert not (ROOT/'result-v1.json').exists()\n for item in p['terminal_launch_owners']:\n  assert ref(item['launch']['path'])==item['launch'] and terminal(item['owner'])\n for binding in p['publications']:assert ref(binding['path'])==binding\n for row in p['rows']:\n  a,b=Path(row['replace']['path']),Path(row['canonical']['path'])\n  # Other replacements may already have increased the canonical link count.\n  assert observed(a)==row['before_replace']\n  assert ref(a)==row['replace'] and ref(b)==row['canonical']\n  assert row['replace']['sha256']==row['canonical']['sha256']\n  temporary=a.with_name('.'+a.name+'.v185-copy-v1.tmp');assert not temporary.exists()\n  os.link(b,temporary);os.replace(temporary,a)\n  assert ref(a)==row['replace'] and ref(b)==row['canonical']\n  sa,sb=observed(a),observed(b);assert sa['dev']==sb['dev'] and sa['ino']==sb['ino']\n for binding in p['publications']:assert ref(binding['path'])==binding\n result={'status':'pass-completed-copy-consolidation-all-paths-and-bytes-preserved','created_local':stamp(),\n         'plan':ref(ROOT/'plan-v1.json'),'source':p['source'],'rows':p['rows'],\n         'terminal_launch_owners_checked':len(p['terminal_launch_owners']),\n         'replacement_paths':len(p['rows']),'previous_duplicate_allocated_bytes_by_device':p['previous_duplicate_allocated_bytes_by_device'],\n         'free_before':p['free_before'],'free_after':free(),'scope':p['scope']}\n save(ROOT/'result-v1.json',result)\n save(R/'docs/results/v185-completed-v184-native-storage-v1.json',result)\n print('PASS',len(p['rows']),'paths retained; free GiB',{k:v/2**30 for k,v in free().items()},flush=True)\nif __name__=='__main__':\n assert sys.argv[1] in ['plan','apply']\n plan() if sys.argv[1]=='plan' else apply()\n"
+  },
+  "rows": [
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-640.npy",
+        "sha256": "3477a8488fe2b63115d34dca9bc21d437e9db5f2636738413b5f02a6b500d3d9"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879058,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141264963117962,
+        "ctime_ns": 1794141264963117962,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879377,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141426950475963,
+        "ctime_ns": 1794141426950475963,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-694.npy",
+        "sha256": "3506cd8109fdc9fb654109aabab591a041559486057a5eb1fbbde3fea835524e"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879128,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141268824552799,
+        "ctime_ns": 1794141268824552799,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879477,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430808619456,
+        "ctime_ns": 1794141430808619456,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-798.npy",
+        "sha256": "c4f4c0a7ee192eb23558a622c2e92bd835021fb651b5fd45964ff4160e6f0b62"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879241,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141287739855432,
+        "ctime_ns": 1794141287739855432,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879716,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141449682366676,
+        "ctime_ns": 1794141449682366676,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-802.npy",
+        "sha256": "6a43cabd09eb1f455a8c941623ddbcba69d0c71d91f750411049dfeacbf4d1eb"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879255,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141287883705640,
+        "ctime_ns": 1794141287883705640,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879718,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141449827630736,
+        "ctime_ns": 1794141449827630736,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-806.npy",
+        "sha256": "9d06b795447400058db2af8d83b96ae3c48e9ff2f1f7a935ad03bf29ca20ceef"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879283,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141288117065836,
+        "ctime_ns": 1794141288117065836,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879720,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141450059636776,
+        "ctime_ns": 1794141450059636776,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-810.npy",
+        "sha256": "21f84b58ff70d4a5e98860055bcb6e214d4ddf045be7decb26bc5556527e8774"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879285,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141288630644023,
+        "ctime_ns": 1794141288630644023,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879722,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141450572255178,
+        "ctime_ns": 1794141450572255178,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-814.npy",
+        "sha256": "0cf106f1a3c3abaee49223101789b67824ac2c133d3fdd94a246a10772adf9da"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879287,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141289141482084,
+        "ctime_ns": 1794141289141482084,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879761,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141451083663883,
+        "ctime_ns": 1794141451083663883,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-818.npy",
+        "sha256": "cf22f7fe93e111a2a8107130256980cbbafa737c78749ecbf5c454eea5fff787"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879289,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141289648493094,
+        "ctime_ns": 1794141289648493094,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879775,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141451592305086,
+        "ctime_ns": 1794141451592305086,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-798.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879717,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141449682994868,
+        "ctime_ns": 1794141449682994868,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879416,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141426951083355,
+        "ctime_ns": 1794141426951083355,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-802.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879719,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141449828267168,
+        "ctime_ns": 1794141449828267168,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879416,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141426951083355,
+        "ctime_ns": 1794141426951083355,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879059,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141264963718634,
+        "ctime_ns": 1794141264963718634,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879416,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141426951083355,
+        "ctime_ns": 1794141426951083355,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-798.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879254,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141287740978535,
+        "ctime_ns": 1794141287740978535,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879416,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141426951083355,
+        "ctime_ns": 1794141426951083355,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-802.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-640.npy",
+        "sha256": "75c54750a655329faabf12bb8cb8336ca85c682ee0facfa9b963547c1049b0ef"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879282,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141287884321335,
+        "ctime_ns": 1794141287884321335,
+        "blocks": 1544
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879416,
+        "size": 786560,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141426951083355,
+        "ctime_ns": 1794141426951083355,
+        "blocks": 1544
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-806.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879721,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141450061775384,
+        "ctime_ns": 1794141450061775384,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-810.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879760,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141450574820186,
+        "ctime_ns": 1794141450574820186,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-814.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879774,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141451085830843,
+        "ctime_ns": 1794141451085830843,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-818.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879802,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141451594853070,
+        "ctime_ns": 1794141451594853070,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879129,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141268826735533,
+        "ctime_ns": 1794141268826735533,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-806.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879284,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141288119187627,
+        "ctime_ns": 1794141288119187627,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-810.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879286,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141288632791638,
+        "ctime_ns": 1794141288632791638,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-814.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879288,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141289143596947,
+        "ctime_ns": 1794141289143596947,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    },
+    {
+      "kind": "completed-native-array",
+      "replace": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-raw-wave-818.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "canonical": {
+        "path": "/mnt/external/demosaic/quality-20261107/V184-wave-readout-trial-v1/native/V184-wave-readout-EMA-wave-694.npy",
+        "sha256": "b96b53105fa4aaf2fd304f688508dcbcbc52cad271ca805eb13799517b5a3f60"
+      },
+      "before_replace": {
+        "dev": 2049,
+        "ino": 31879290,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141289650610180,
+        "ctime_ns": 1794141289650610180,
+        "blocks": 6152
+      },
+      "before_canonical": {
+        "dev": 2049,
+        "ino": 31879478,
+        "size": 3145856,
+        "mode": 33204,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtime_ns": 1794141430810771280,
+        "ctime_ns": 1794141430810771280,
+        "blocks": 6152
+      }
+    }
+  ],
+  "terminal_launch_owners_checked": 2,
+  "replacement_paths": 22,
+  "previous_duplicate_allocated_bytes_by_device": {
+    "2049": 50421760
+  },
+  "free_before": {
+    "/home/dllu/proj/demosaic": 52211699712,
+    "/mnt/external": 119903510528
+  },
+  "free_after": {
+    "/home/dllu/proj/demosaic": 52212133888,
+    "/mnt/external": 119953932288
+  },
+  "scope": "Only native .npy outputs and explicit publication receipt copies in completed owned V184 native outputs only. Full hashes before mutation; all paths/bytes retained. No source, checkpoint, training input, original/capture/JPEG or dataz access. Existing inode metadata retained in inventory; replacements share canonical inode/mode/mtime. No earlier dedup is rerun. V185 source, probes and inputs are excluded."
+}

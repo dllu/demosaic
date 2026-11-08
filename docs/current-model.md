@@ -1,5 +1,7 @@
 # Current model choices
 
+The [V185 smaller-support readout experiment](spatial-context-wave-readout.md) has passed native CPU/GPU correctness and started matched training. Quality review is pending.
+
 The completed [V184 phase-aware readout](phase-wave-readout-comparison.md)
 provides a stronger-response development option. Mean mesh response rises
 **9.60% raw / 15.96% EMA versus frozen V183 EMA**, reaching **4.865% / 5.148%
