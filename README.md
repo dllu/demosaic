@@ -79,9 +79,9 @@ alone helps little; no new denoising gain is claimed.
 
 The completed [V187 pooled-selection readout](docs/pooled-phase-wave-comparison.md) is the current experimental wave option. At V185's same 508-parameter and 900-update budget, mesh response rises **5.23% raw / 3.64% EMA** to **5.227% / 5.359% of exact GT amplitude**; 168/256 present inputs improve in each state. EMA quiet spatial RMS falls **0.48–0.52%**, improving 27/32 cases. Absent RMS rises about 0.034% on all 256 inputs and fresh-flat RMS about 0.020–0.021% on all 48; false waves, mottle and missing real cab crossings remain. Both endpoints/all 822 cases, audits, 60 actually viewed native figures / 12 triplets and two strict exports are complete. [Sixteen-state native viewer](docs/images/v187-pooled-wave-v1/native-viewer.html) · [Exact evidence](docs/results/v187-pooled-wave-final-v1.json). V120 Small remains the general recommendation.
 
-The [V188 allocation diagnostic](docs/spectral-selection-diversity.md) supports testing wider peak separation at the same eight-slot budget. Mean template proximity rises from 24.84% to 25.93%, and weak-sector proximity improves, but the median is unchanged, tighter proximity falls and local quiet powers rise. These are spectral measurements, not denoising gains. V187 remains the latest trained comparison.
+The [V188 allocation diagnostic](docs/spectral-selection-diversity.md) found better weak-sector proximity with wider suppression, with unchanged whole-template median, lower tighter proximity and higher local quiet powers. The completed [V189 matched model test](docs/spaced-pooled-wave-comparison.md) regresses on mesh/quiet quality, demonstrating that this proximity gain is not a reliable quality proxy. V187 remains preferred.
 
-The [V189 wider-separation trial](docs/spaced-pooled-wave-readout.md) is running at V187’s same parameter and training budget. Native CPU/GPU parity, gradients and restoration pass; trained quality is pending.
+The completed [V189 wider-separation trial](docs/spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. Keep V187 as the preferred experimental wave model. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](docs/images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](docs/results/v189-spaced-pooled-final-v1.json).
 
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
@@ -111,6 +111,7 @@ This adds training and capacity; both primary baselines are V183 EMA.
 | [V184 phase-aware readout](docs/phase-wave-readout-comparison.md) | Mesh response +9.60% raw / +15.96% EMA versus frozen V183 EMA, reaching 4.865–5.148% of GT | Quiet spatial RMS +0.76–2.35%, extra false striping, worse natural band-error means and incomplete real crossings; extra training/capacity |
 | [V185 smaller RAW support](docs/spatial-context-wave-comparison.md) | Mesh response +2.11% raw / +0.45% EMA and quiet spatial RMS −0.42–1.38% versus matched V184; all 32 EMA quiet cases improve | Still only 4.968–5.171% of GT response; tiny flat/absent regressions, false striping, mottle and incomplete real crossings |
 | [V187 pooled selection](docs/pooled-phase-wave-comparison.md) | Same508 parameters and budget: mesh +5.23% raw / +3.64% EMA versus V185 to 5.227–5.359% of GT; EMA quiet spatial −0.48–0.52% | All absent/fresh-flat errors rise slightly; false waves, mottle and real missing crossings remain |
+| [V189 wider suppression](docs/spaced-pooled-wave-comparison.md) | Completed matched negative test; tiny natural-response/DC gains | Mesh −4.63% raw / −5.68% EMA; quiet spatial +0.38–1.31%; no clear new cab crossings; retain V187 |
 | [V158 regional DC](docs/regional-dc-regret.md) | Quiet RMS −1.93–2.63% versus matched MSE; all 32 inputs improve | Small regressions versus V143, persistent real detail loss |
 
 No model combines these strengths. The [released V170 RAW matching comparison](docs/nonlocal-raw-comparison.md)
@@ -124,7 +125,8 @@ optical blur. [Data pipeline](docs/training-pipeline.md) · [Source review](docs
 
 ## Current 100% crops
 
-Open the local [V187 native-pixel viewer](docs/images/v187-pooled-wave-v1/native-viewer.html),
+Open the local [V189 native-pixel viewer](docs/images/v189-spaced-pooled-v1/native-viewer.html),
+[V187 viewer](docs/images/v187-pooled-wave-v1/native-viewer.html),
 [V185 viewer](docs/images/v185-spatial-context-v1/native-viewer.html),
 [V184 viewer](docs/images/v184-wave-readout-v1/native-viewer.html),
 [V183 viewer](docs/images/v183-coherent-pair-evidence-v1/native-viewer.html),
@@ -136,9 +138,10 @@ Open the local [V187 native-pixel viewer](docs/images/v187-pooled-wave-v1/native
 [V173 viewer](docs/images/v173-weak-gradient-matching-v1/native-viewer.html) or
 [V172 viewer](docs/images/v172-local-noise-matching-v1/native-viewer.html). Click
 the flip tile or press **F**. All 160×160 browser crops retain the PNG pixels
-exactly. V187 opens with V185 EMA versus V187 EMA; select both raw states for
-the matched raw comparison. All sixteen V178/V180/V181/V183/V184/V185/V187 states
-retain separate checkpoint metadata. V175 retains its modest raw quiet gain.
+exactly. V189 opens with V187 EMA versus V189 EMA; select both raw states for
+the matched raw comparison. All eighteen V178/V180/V181/V183/V184/V185/V187/V189
+states retain separate checkpoint metadata. V187 remains preferred; the viewer
+includes the negative V189 result. V175 retains its modest raw quiet gain.
 
 [Optional periodic-detail native comparisons and failure views](docs/supported-wave-amplitude.md)
 remain available alongside the learned heads below.

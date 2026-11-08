@@ -1,0 +1,50 @@
+{
+  "status": "screened-primary-2026-method-and-limitations-sections-no-code-weights-or-data-adoption",
+  "recorded_local": "2026-11-08T08:35:30-08:00",
+  "sources": [
+    {
+      "title": "Structural Guidance for Unified Joint Demosaicing and Denoising",
+      "version": "arXiv2608.09995v1",
+      "submitted_UTC_date": "2026-08-07",
+      "URL": "https://arxiv.org/html/2608.09995v1",
+      "read_sections": [
+        "Overview and Sensor Representation",
+        "Online Structural Prior Adaptation and Fusion",
+        "Parameters, Computation, and Runtime",
+        "Limitations and Scope"
+      ],
+      "facts": [
+        "Frozen DINOv3ViT-S/16 structural encoder remains active during inference; sparse pseudoRGB input is resized to224square and14x14tokens are adapted/resized into the restoration stream.",
+        "Shared decoder includes RGB and auxiliary mosaic heads.",
+        "Authors explicitly report Gaussian noise on decoded-sRGB-derived mosaics,fixedRGGB,CFAfamiliesSingle/Quad/Nona,and8bitquantized metric inputs.",
+        "Authors report a pseudoRGBstem marked trainable whose reconstruction gradient is blocked by a no-gradient encoder path."
+      ],
+      "inference_for_this_repo": "Sensor-domain auxiliary supervision and structural-feature adaptation deserve controlled tests, but this paper does not establish16bitlinearphysical-noise or darkGFXfence/flat quality. Any new adapter must have demonstrated gradient flow; our V189 protocol remains unchanged.",
+      "reading_scope": "Selected method/implementation/limitations sections inspected; no repository clone, license audit, checkpoint load, execution, dataset or code adoption."
+    },
+    {
+      "title": "Unified RAW Image Exposure Correction and Restoration via Linear Illumination and Frequency-Adaptive Enhancement",
+      "version": "arXiv2610.28191v1",
+      "submitted_UTC_date": "2026-10-20",
+      "URL": "https://arxiv.org/html/2610.28191v1",
+      "read_sections": [
+        "Abstract",
+        "Problem Formulation",
+        "Frequency-Based Enhancement Network"
+      ],
+      "facts": [
+        "Separates RAW linear-gain estimation from residual restoration.",
+        "Frequency Dynamic Convolution splits a spatial kernel into average and residual components with pixelwise modulation."
+      ],
+      "inference_for_this_repo": "Dense spatially conditioned frequency modulation is an alternative to sparseglobaltopKselection. This is a hypothesis, not evidence of our fence recovery or flat safety; no imported results substitute for matched physical-noise/ADC/protected native tests.",
+      "reading_scope": "Architecture passages screened; no code, weights, data or pipeline adopted."
+    }
+  ],
+  "other_screening_limits": [
+    {
+      "URL": "https://openaccess.thecvf.com/content/WACV2026W/WVAQ/papers/Fan_Efficient_Deep_Demosaicing_with_Spatially_Downsampled_Isotropic_Networks_WACVW_2026_paper.pdf",
+      "scope": "Search preview only; directCVFfetch returned403. No detailed finding adopted."
+    }
+  ],
+  "new_inference_or_training_changes": 0
+}

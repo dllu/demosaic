@@ -1,0 +1,24 @@
+{
+  "methods": 27,
+  "metric_rows": 22194,
+  "contrasts": 50,
+  "primary_endpoint_contrasts": 2,
+  "independent_Decimal_summary_means": 3703,
+  "paired_mean_and_difference_checks": 18828,
+  "real_references_scored": false,
+  "status": "pass-structural-full-suite-reused-V187-standins-not-V189-quality",
+  "fixture_only_no_actual_V189_quality": true,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v189-full-comparison-fixture-v1.py",
+    "sha256": "85a96c83de9b56db748650b750518034890c636a60f962eaa3f0c881588ee68c",
+    "text": "from pathlib import Path\nimport json,sys\nR=Path.cwd();sys.path.insert(0,str(R/'scripts'));sys.path.insert(0,str(R/'src'))\nfrom phase_admission_protocol import read,ref\nimport reduce_spaced_pooled_trial as m\np=read(m.ROOT/'plan-v1.json');rows,sources=m.earlier_rows(p);c=read(p['baseline_plan']['path'])\nhistory=[c[k] for k in ['V175_scores','matched_scores','local_scores','flat_spatial_scores']]+[p['baseline_scores'],ref(m.ROOT.parent/'V184-wave-readout-trial-v1/scores-v1.json'),p['V185_scores'],p['V187_scores']]\nfor b in history:\n old=read(b['path'])\n for method in dict.fromkeys(r['method'] for r in old['rows']):rows+=m.source_rows(b,method,method,p)\na=read(history[-1]['path']);rows += [dict(r,method=m.METHODS[e]) for e in ['raw','EMA'] for r in a['rows'] if r['method']==m.PRIMARY_BASELINE[e]]\nd=read(p['design']['path'])['observations'];x=m.comparisons(rows,m.ALL_METHODS,[c['id'] for c in d]);text,cells=m.tables(x['summary'],fixture=True)\nassert (x['methods'],x['metric_rows'],x['contrasts'],len(cells))==(27,22194,50,1890)\nassert all(g['mean_difference']==0 for g in x['groups'] if g['comparison_role'].startswith('matched-spaced-selection-'))\nv={k:x[k] for k in ['methods','metric_rows','contrasts','primary_endpoint_contrasts','independent_Decimal_summary_means','paired_mean_and_difference_checks','real_references_scored']}\nv.update(status='pass-structural-full-suite-reused-V187-standins-not-V189-quality',fixture_only_no_actual_V189_quality=True,source=dict(ref(__file__),text=Path(__file__).read_text()),reducer=ref(R/'scripts/reduce_spaced_pooled_trial.py'),table_cells=len(cells),all_primary_fixture_differences_exact_zero=True,new_neural_forwards=0,new_noise_draws=0)\nwith (m.ROOT/'full-comparison-fixture-verification-v1.json').open('x') as f:json.dump(v,f,indent=2);f.write('\\n')\nprint('PASS',v['methods'],v['metric_rows'],v['contrasts'],v['table_cells'],v['independent_Decimal_summary_means'],v['paired_mean_and_difference_checks'])\n"
+  },
+  "reducer": {
+    "path": "/home/dllu/proj/demosaic/scripts/reduce_spaced_pooled_trial.py",
+    "sha256": "a68904c82703cb6863189ce6abb29de2eb112c9534e587fa9b1d2ada3f3d6ca8"
+  },
+  "table_cells": 1890,
+  "all_primary_fixture_differences_exact_zero": true,
+  "new_neural_forwards": 0,
+  "new_noise_draws": 0
+}
