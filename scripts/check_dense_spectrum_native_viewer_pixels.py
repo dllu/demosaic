@@ -24,12 +24,13 @@ def verify(directory, output):
     manifest_path = viewer.with_name("manifest-v1.json")
     manifest = read(manifest_path)
     assert manifest["fixture"] is False and manifest["native_figures"] == 60
-    expected_old = read(REPO / "docs/results/v187-pooled-wave-final-v1.json")[
+    expected_old = read(REPO / "docs/results/v189-spaced-pooled-final-v1.json")[
         "viewer_method_checkpoints"
     ]
     assert set(manifest["method_checkpoints"]) == set(expected_old) | set(
         METHODS["evidence"].values()
     )
+    assert len(expected_old) == 18 and len(manifest["method_checkpoints"]) == 20
     for method, entry in expected_old.items():
         assert manifest["method_checkpoints"][method] == entry
     for entry in manifest["method_checkpoints"].values():
@@ -81,7 +82,7 @@ def verify(directory, output):
             "RGB_channels_exact_source_PNG": channels,
             "rectangle_width_height": [160, 160],
             "per_method_state_metadata_checked": True,
-            "default_V187_EMA_vs_V187_EMA": True,
+            "default_V187_EMA_vs_V191_EMA": True,
             "click_keyboard_flip_and_navigation": True,
             "JS_errors": [],
             "screenshot_bindings": [ref(r["screenshot"]) for r in browser["records"]],

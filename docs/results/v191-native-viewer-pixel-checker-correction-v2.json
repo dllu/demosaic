@@ -1,0 +1,54 @@
+{
+  "status": "pass-corrected20state-history-binding-and-all480unchanged-browser-crops",
+  "created_unix_UTC": 1794160891.2917821,
+  "prospective_source_seal": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/browser-pixel-audit-source-v2.json",
+    "sha256": "ded2efefae319b0429b3646c54cbbf26adcc589e65e6fa3d324ec9ddb10beda6"
+  },
+  "source_seal_contents": {
+    "status": "prospective-corrected-retained20state-history-binding-before-pixel-audit",
+    "created_unix_UTC": 1794160804.2280183,
+    "original_frozen_checker": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/publication-work-v1/scripts/check_dense_spectrum_native_viewer_pixels.py",
+      "sha256": "a82166d553ea8160f19e26eac999afa8ab0be86b95d529a7b8e01f8057ca0e38"
+    },
+    "corrected_checker": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/browser-audit-work-v2/scripts/check_dense_spectrum_native_viewer_pixels_v2.py",
+      "sha256": "3e0b1cfa0ef28c8787cee29e76531580ac4e31209ec9d4d6069fc0de2bb0dea8",
+      "text": "\"\"\"Check actual raw/EMA matched browser captures against their public PNG pixels.\"\"\"\n\nimport argparse\nfrom pathlib import Path\n\nimport numpy as np\nfrom phase_admission_protocol import read, ref\nfrom PIL import Image\nfrom train_dense_spectrum_trial import REPO, save\n\nMETHODS = {\n    \"control\": {e: f\"V187-pooled-wave-{e}\" for e in [\"raw\", \"EMA\"]},\n    \"evidence\": {e: f\"V191-dense-spectrum-{e}\" for e in [\"raw\", \"EMA\"]},\n}\n\n\ndef verify(directory, output):\n    if output.exists():\n        raise FileExistsError(output)\n    browser = read(directory / \"browser-records-v1.json\")\n    assert browser[\"fixture_only_no_V191_quality\"] is False and browser[\"JS_errors\"] == []\n    assert len(browser[\"records\"]) == 480 and len(browser[\"metadata\"]) == 96\n    viewer = Path(browser[\"viewer\"])\n    manifest_path = viewer.with_name(\"manifest-v1.json\")\n    manifest = read(manifest_path)\n    assert manifest[\"fixture\"] is False and manifest[\"native_figures\"] == 60\n    expected_old = read(REPO / \"docs/results/v189-spaced-pooled-final-v1.json\")[\n        \"viewer_method_checkpoints\"\n    ]\n    assert set(manifest[\"method_checkpoints\"]) == set(expected_old) | set(\n        METHODS[\"evidence\"].values()\n    )\n    assert len(expected_old) == 18 and len(manifest[\"method_checkpoints\"]) == 20\n    for method, entry in expected_old.items():\n        assert manifest[\"method_checkpoints\"][method] == entry\n    for entry in manifest[\"method_checkpoints\"].values():\n        assert ref(entry[\"source_checkpoint\"][\"path\"]) == entry[\"source_checkpoint\"]\n    images = {item[\"image\"][\"path\"]: item for item in manifest[\"images\"] if not item[\"triplet\"]}\n    assert len(images) == 48\n    for item in images.values():\n        assert ref(item[\"image\"][\"path\"]) == item[\"image\"]\n    assert len({(m[\"case\"], m[\"endpoint\"]) for m in browser[\"metadata\"]}) == 96\n    for record in browser[\"metadata\"]:\n        for arm in [\"control\", \"evidence\"]:\n            method = METHODS[arm][record[\"endpoint\"]]\n            metadata = manifest[\"method_checkpoints\"][method]\n            assert metadata[\"state\"] == record[\"endpoint\"]\n            for value in [method, metadata[\"source_checkpoint\"][\"sha256\"], metadata[\"module_hash\"]]:\n                assert value in record[\"description\"]\n    channels = 0\n    assert len({(r[\"case\"], r[\"endpoint\"], r[\"id\"]) for r in browser[\"records\"]}) == 480\n    for record in browser[\"records\"]:\n        rect = record[\"rect\"]\n        assert rect[\"width\"] == rect[\"height\"] == 160\n        assert rect[\"x\"].is_integer() and rect[\"y\"].is_integer()\n        item = images[record[\"source\"]]\n        expected_panel = next(p for p in item[\"panels\"] if p[\"label\"] == record[\"label\"])\n        assert expected_panel[\"xywh\"] == record[\"panel\"]\n        if record[\"id\"] in [\"a\", \"b\"]:\n            arm = \"control\" if record[\"id\"] == \"a\" else \"evidence\"\n            assert record[\"label\"] == METHODS[arm][record[\"endpoint\"]]\n        x, y, width, height = record[\"panel\"]\n        assert width == height == 160\n        expected = np.asarray(Image.open(record[\"source\"]).convert(\"RGB\"))[\n            y : y + height, x : x + width\n        ]\n        actual = np.asarray(Image.open(record[\"screenshot\"]).convert(\"RGB\"))\n        np.testing.assert_array_equal(actual, expected)\n        channels += actual.size\n    assert channels == 36864000\n    save(\n        output,\n        {\n            \"status\": \"pass-actual-matched-browser-480-native-crops-checkpoint-state-and-source-pixels\",\n            \"viewer\": ref(viewer),\n            \"manifest\": ref(manifest_path),\n            \"browser_records\": ref(directory / \"browser-records-v1.json\"),\n            \"browser_version\": browser[\"browser\"],\n            \"cases\": 48,\n            \"matched_raw_EMA_pairs\": 96,\n            \"browser_crop_screenshots\": 480,\n            \"RGB_channels_exact_source_PNG\": channels,\n            \"rectangle_width_height\": [160, 160],\n            \"per_method_state_metadata_checked\": True,\n            \"default_V187_EMA_vs_V191_EMA\": True,\n            \"click_keyboard_flip_and_navigation\": True,\n            \"JS_errors\": [],\n            \"screenshot_bindings\": [ref(r[\"screenshot\"]) for r in browser[\"records\"]],\n            \"fixture_only_no_actual_V191_quality\": False,\n            \"new_neural_forwards\": 0,\n            \"new_noise_draws\": 0,\n            \"source\": dict(ref(__file__), text=Path(__file__).read_text()),\n            \"scope\": \"Actual headless-browser screenshot pixels and source/checkpoint-state metadata are checked. Image-quality gains and costs require the separate matched measurements and actual human native viewing.\",\n        },\n    )\n    print(\"PASS480actualbrowsercrops/36864000RGBchannels/raw+EMAstate-metadata\")\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"directory\", type=Path)\n    parser.add_argument(\"output\", type=Path)\n    args = parser.parse_args()\n    verify(args.directory.resolve(), args.output.resolve())\n"
+    },
+    "canonical_corrected_checker": {
+      "path": "/home/dllu/proj/demosaic/scripts/check_dense_spectrum_native_viewer_pixels_v2.py",
+      "sha256": "3e0b1cfa0ef28c8787cee29e76531580ac4e31209ec9d4d6069fc0de2bb0dea8"
+    },
+    "browser_records": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/artifacts/viewer-browser-actual-v1/browser-records-v1.json",
+      "sha256": "1d8a642b0b818387eb165cb65471a3dd0e64711a3924c527c3059e93c57b11df"
+    },
+    "manifest": {
+      "path": "/home/dllu/proj/demosaic/docs/images/v191-dense-spectrum-v1/manifest-v1.json",
+      "sha256": "10c1342cba762253aeb5173f02c4ac87dd93562ecda48505a699f3483106f1c7"
+    },
+    "previous18state_publication": {
+      "path": "/home/dllu/proj/demosaic/docs/results/v189-spaced-pooled-final-v1.json",
+      "sha256": "c136a9d6c6faae16200eee57460672cbead744a2ed37bf7303f70a14e5f4f097"
+    },
+    "original_expected_states": 18,
+    "actual_expected_states": 20,
+    "reason": "Original v1 stopped before pixel comparisons: it used V187(16states)+newV191(2),omitting retainedV189(2). V2 uses actualV189(18)+newV191(2),preserves V187asprimarycontrol and all strict pixel/hash/metadata checks. Also correct inherited default-pair proof label to actualV187EMA_vsV191EMA,already asserted by browser. No scientific/model/export/image/render/browser-capture repetition or source/receipt mutation."
+  },
+  "pixel_verification": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v191-dense-spectrum-native-viewer-verification-v1.json",
+    "sha256": "7f4543ed9f31e62ecf837e6eec25a65e54f08ee75f61bcdd974e8f3a82e31c27"
+  },
+  "corrected_default_command_source": {
+    "path": "/home/dllu/proj/demosaic/scripts/check_dense_spectrum_native_viewer_pixels.py",
+    "sha256": "3e0b1cfa0ef28c8787cee29e76531580ac4e31209ec9d4d6069fc0de2bb0dea8"
+  },
+  "old_expected_total_states": 18,
+  "actual_total_states": 20,
+  "screenshots_repeated": 0,
+  "renders_repeated": 0,
+  "neural_or_sensor_work_repeated": 0,
+  "scope": "Original v1 stopped before pixel comparisons: it used V187(16states)+newV191(2),omitting retainedV189(2). V2 uses actualV189(18)+newV191(2),preserves V187asprimarycontrol and all strict pixel/hash/metadata checks. Also correct inherited default-pair proof label to actualV187EMA_vsV191EMA,already asserted by browser. No scientific/model/export/image/render/browser-capture repetition or source/receipt mutation."
+}

@@ -1,0 +1,92 @@
+{
+  "status": "pass-full29method-comparison-structure-with-explicitly-reused-V189-values-not-V191-quality",
+  "fixture_only_no_actual_V191_quality": true,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v191-comparison-fixture-v1.py",
+    "sha256": "c167c96cd4b2ff6efb85f657d811cdc739c3e658ae95d84f9302efb88add0edb",
+    "text": "from pathlib import Path\nimport sys,math,json\nfrom decimal import Decimal,localcontext\nR=Path.cwd();T=R/'.cache/quality-20261107/V191-dense-spectrum-trial-v1';sys.path[:0]=[str(T/'work/scripts'),str(R/'scripts')]\nfrom phase_admission_protocol import read,ref\nfrom spatial_trial_protocol import read as load\nfrom reduce_dense_spectrum_trial import earlier_rows,source_rows,comparisons,tables,ALL_METHODS,METHODS\nfrom train_dense_spectrum_trial import save\np=read(T/'plan-v1.json');rows,sources=earlier_rows(p);context=read(p['baseline_plan']['path'])\nhistorical=[context[k]for k in ['V175_scores','matched_scores','local_scores','flat_spatial_scores']]+[p['baseline_scores'],ref(T.parent/'V184-wave-readout-trial-v1/scores-v1.json'),p['V185_scores'],p['V187_scores'],p['V189_scores']]\nfor binding in historical:\n old=read(binding['path'])\n for method in dict.fromkeys(row['method'] for row in old['rows']):rows+=source_rows(binding,method,method,p)\nold=read(p['V189_scores']['path'])\nfor e,m in METHODS.items():rows+=[dict(row,method=m)for row in old['rows']if row['method']==f'V189-spaced-pooled-{e}']\ndesign=read(p['design']['path'])['observations'];result=comparisons(rows,ALL_METHODS,[c['id']for c in design]);text,cells=tables(result['summary'],fixture=True)\nassert result['methods']==29 and result['metric_rows']==23838 and result['contrasts']==54 and len(cells)==2058\nchecks=0\nfor g in result['groups']:\n with localcontext()as ctx:\n  ctx.prec=50\n  for key,out in [('candidate','mean_candidate'),('baseline','mean_baseline'),('difference','mean_difference')]:\n   mean=float(sum(Decimal(str(v[key]))for v in g['pairs'])/len(g['pairs']));assert abs(mean-g[out])<1e-10*max(1,abs(mean));checks+=1\n assert g['decreased']==sum(v['difference']<0 for v in g['pairs']) and g['increased']==sum(v['difference']>0 for v in g['pairs'])\n if g['kind']=='mesh' and g['condition']is False and g['field']=='template_gain':assert g['percent_change_of_means']is None\nvalue={'status':'pass-full29method-comparison-structure-with-explicitly-reused-V189-values-not-V191-quality','fixture_only_no_actual_V191_quality':True,'source':dict(ref(__file__),text=Path(__file__).read_text()),'reducer_source':ref(R/'scripts/reduce_dense_spectrum_trial.py'),'plan':ref(T/'plan-v1.json'),'score_sources':sources+historical,'methods':result['methods'],'metric_rows':result['metric_rows'],'contrasts':result['contrasts'],'table_cells':len(cells),'independent_Decimal_summary_means':result['independent_Decimal_summary_means'],'independent_paired_Decimal_checks':checks,'new_neural_forwards':0,'new_source_noise_draws':0,'scope':'Structural fixture only. Newcandidate rows explicitly reuse same-endpointV189values; no trainedV191quality is read or represented. Completecoverage/pairing/tables/summary/sign/absent-denominator checks before actual review.'}\nsave(T/'full-comparison-fixture-verification-v1.json',value)\nprint('PASS29methods/23838rows/54contrasts/2058cells',value['independent_Decimal_summary_means'],'means',checks,'pairedDecimalchecks;fixtureNOTquality')\n"
+  },
+  "reducer_source": {
+    "path": "/home/dllu/proj/demosaic/scripts/reduce_dense_spectrum_trial.py",
+    "sha256": "e48cd07168dcc78d59ff907d57b1ccbb14fdb4cf226d20a222940a9a8ec3e166"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/plan-v1.json",
+    "sha256": "81bfcd512d1a38a4892c2fa389292b71cd9f9513fc9f2bd927830e8702cd57a6"
+  },
+  "score_sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v3/scores-v1.json",
+      "sha256": "aeeb60f2d514e3a6deb814cf43491f3bda570b3ab5984a8c748d82bcd64c31c6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/baseline-V161-current-metrics-v1.json",
+      "sha256": "d196df2c42d7ec14d248a9b49008e68fd965c751bc232ec6db97d8dfb440849f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V169-balanced-spatial-v3/scores-v1.json",
+      "sha256": "63cf2eadc99c691faa90ba0dd03e638d18c8d49b9566ae2143426efb8618017f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V171-matching-residual-v1/scores-v1.json",
+      "sha256": "76bd43d48ee9130ac98bae4502b60676a425fd86d94726b76982497e9a528d83"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V172-local-noise-matching-v1/scores-method-labels-v2.json",
+      "sha256": "f412247b64a21aba6e393f978686b13f5e5b46acc5a47dce376a9bdb680a4a81"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V173-weak-gradient-matching-v1/scores-v1.json",
+      "sha256": "f0228ddefb36ff7d542f1bcc77602951c875762f4150f9800f099828ab5c2860"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V174-spread-matching-v1/scores-v1.json",
+      "sha256": "4ac92ec9563ca0ef85fb4f47c2cbd4dd3f6297f281f84b006862e3b878aa7411"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/scores-v1.json",
+      "sha256": "278c5a35e1b1930c74a122fb80da2359dc3381a0ede995a0c77a6cdd1cbd1915"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/scores-v1.json",
+      "sha256": "aedfdeaefc8ad66b0f0a8976226c13917dc412b748624a411a9777adf526d7c8"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/scores-v1.json",
+      "sha256": "a8cb894d0d8934498b5b8b53dde9644e94225f2c139464d9d4daa59e0e982dfb"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/scores-v1.json",
+      "sha256": "f0b9fd43fde630c8a7f8e7beac54d8358478bd4a625449729244d6dd8772aca0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/scores-v1.json",
+      "sha256": "2182a12e117bf89d87e5f7b6e48b345eb9a3f22372d8cc7d5efdc4acf5d3b9a9"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V184-wave-readout-trial-v1/scores-v1.json",
+      "sha256": "879a416c3660f8ada30c50275388eb49b63d0a28db8a025ea9383b3e8428b9f5"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V185-spatial-context-trial-v1/scores-v1.json",
+      "sha256": "22dd9045b2b8e36a039be51c96ce8a196c973a81acb222aa80acfd6a6f301a9a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/scores-v1.json",
+      "sha256": "0f19ff7ca7a8cab280b8b00d7497270960482a861563438080c0b45a9a7c7d86"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V189-spaced-pooled-trial-v1/scores-v1.json",
+      "sha256": "7236a18d48ca512707d23a2c960701be89aa9c81fdbcd80006419a39f8c0df04"
+    }
+  ],
+  "methods": 29,
+  "metric_rows": 23838,
+  "contrasts": 54,
+  "table_cells": 2058,
+  "independent_Decimal_summary_means": 3981,
+  "independent_paired_Decimal_checks": 20472,
+  "new_neural_forwards": 0,
+  "new_source_noise_draws": 0,
+  "scope": "Structural fixture only. Newcandidate rows explicitly reuse same-endpointV189values; no trainedV191quality is read or represented. Completecoverage/pairing/tables/summary/sign/absent-denominator checks before actual review."
+}
