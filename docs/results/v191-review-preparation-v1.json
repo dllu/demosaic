@@ -1,0 +1,179 @@
+{
+  "status": "training900updates-audited-original-two-endpoint-review-live-quality-pending",
+  "created_unix_UTC": 1794159857.4438202,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v191-publish-review-preparation-v1.py",
+    "sha256": "4a65100baf15ca65fdb232602322a71f17d04d83f5abdda2468f3d628cf71755",
+    "text": "from pathlib import Path\nimport sys,json,time,os,shutil\nR=Path.cwd();T=R/'.cache/quality-20261107/V191-dense-spectrum-trial-v1';sys.path.insert(0,'scripts')\nfrom phase_admission_protocol import read,ref,owner_live\nprep=read(R/'docs/results/v191-dense-spectrum-preparation-v1.json');guide=R/'docs/dense-local-spectrum-readout.md';assert ref(guide)==prep['guide']\nD=R/'docs/results/v191-review-preparation-v1';D.mkdir();archive=D/'initial-architecture-guide-v1.md';shutil.copyfile(guide,archive);assert ref(archive)['sha256']==prep['guide']['sha256']\nitems={'training-result-v1.json':T/'wave-train-result-v1.json','training-audit-v1.json':T/'training-audit-v1.json','training-audit-v1.log':T/'training-audit-v1.log','review-source-v1.json':T/'review-source-v1.json','quality-audit-source-v1.json':T/'quality-audit-source-v1.json','reduction-source-v1.json':T/'reduction-source-v1.json','render-source-v1.json':T/'render-source-v1.json','publication-source-v1.json':T/'publication-source-v1.json','comparison-fixture-verification-v1.json':T/'full-comparison-fixture-verification-v1.json','first-actual-review-record-CPU-check-v1.json':T/'first-review-record-CPU-check-v1.json'}\nfor v in [1,2,3]:items[f'receipt-CPU-tests-v{v}.log']=R/f'.cache/v191-dense-receipt-CPU-tests-v{v}.log'\nfor v in [1,2]:items[f'receipt-fixture-failed-v{v}.py']=R/f'.cache/v191-dense-receipt-tests-failed-v{v}.py'\ncopies={}\nfor name,source in items.items():\n target=D/name;os.link(source,target);assert ref(target)['sha256']==ref(source)['sha256'];copies[name]={'original':ref(source),'public':ref(target)}\nreview=read(T/'review-launch-v1.json')['owner'];assert owner_live(review)\nv={'status':'training900updates-audited-original-two-endpoint-review-live-quality-pending','created_unix_UTC':time.time(),'source':dict(ref(__file__),text=Path(__file__).read_text()),'copies':copies,'initial_guide_byte_preservation':{'original_binding':prep['guide'],'archived':ref(archive),'note':'Architecture guide is current documentation and will be updated as work completes; original preparation guide bytes remain here.'},'review_owner_observed_live':review,'distinct_current_CPU_contracts':47,'test_count_note':'31model+16newreceiptcontracts. Receipt test v1/v2 each preserved one rectangle-patch fixture failure; v3 corrects the fixture and passes16. No neural/reference/receipt implementation change for those corrections. Allsuccessfulmodel/training/admission science completedonce.','scope':'Full1000row/900update/5checkpoint training audit passed. Full29method comparison structure passes3981Decimalmeans/20472pairedchecks. Newqualityrecipe has750input-only raw-EMA pairs and independentQRsamples,withfullnativeaddition/metrics and60views/12triplets/browserchecks stillrequired. No trainedqualitypromotion.'}\nwith(R/'docs/results/v191-review-preparation-v1.json').open('x')as f:json.dump(v,f,indent=2);f.write('\\n')\nprint('Published training audit and pending-review pipeline with immutable initial-guide bytes')\n"
+  },
+  "copies": {
+    "training-result-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/wave-train-result-v1.json",
+        "sha256": "8e9d94cafe548ae422c0b0583a8ac2fd13b830c578af12a8249b5b74be3e554c"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/training-result-v1.json",
+        "sha256": "8e9d94cafe548ae422c0b0583a8ac2fd13b830c578af12a8249b5b74be3e554c"
+      }
+    },
+    "training-audit-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/training-audit-v1.json",
+        "sha256": "0bbee6d5539bc63a520a764e74be1447d4402f52f4d3e8fe1afd0fdc8ef0323e"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/training-audit-v1.json",
+        "sha256": "0bbee6d5539bc63a520a764e74be1447d4402f52f4d3e8fe1afd0fdc8ef0323e"
+      }
+    },
+    "training-audit-v1.log": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/training-audit-v1.log",
+        "sha256": "084d5f9960a24f272292512253d70a07d66a6236deed3f0afe9bc7d06fb89bba"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/training-audit-v1.log",
+        "sha256": "084d5f9960a24f272292512253d70a07d66a6236deed3f0afe9bc7d06fb89bba"
+      }
+    },
+    "review-source-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/review-source-v1.json",
+        "sha256": "45fc6e9efad95ce685f3d11873b66de953d427ce1c107a841c123f26ee37d44a"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/review-source-v1.json",
+        "sha256": "45fc6e9efad95ce685f3d11873b66de953d427ce1c107a841c123f26ee37d44a"
+      }
+    },
+    "quality-audit-source-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/quality-audit-source-v1.json",
+        "sha256": "dcd35ec477d58a3374355c928630aeb0ae1d8af30ceff34f228597ac425e014e"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/quality-audit-source-v1.json",
+        "sha256": "dcd35ec477d58a3374355c928630aeb0ae1d8af30ceff34f228597ac425e014e"
+      }
+    },
+    "reduction-source-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/reduction-source-v1.json",
+        "sha256": "6e2ed4938330fe9a509547c40c4f81cc21de5bc90a7ce417956f15afd6e83a15"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/reduction-source-v1.json",
+        "sha256": "6e2ed4938330fe9a509547c40c4f81cc21de5bc90a7ce417956f15afd6e83a15"
+      }
+    },
+    "render-source-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/render-source-v1.json",
+        "sha256": "2124ade03dba9e9d68fd8f1100415cd0fa9d4f56680dd74bed85a1669af9f6e2"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/render-source-v1.json",
+        "sha256": "2124ade03dba9e9d68fd8f1100415cd0fa9d4f56680dd74bed85a1669af9f6e2"
+      }
+    },
+    "publication-source-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/publication-source-v1.json",
+        "sha256": "674ef78bcc4603abd7967a959c0c68203252ef31cd470a8eada82e841b84a123"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/publication-source-v1.json",
+        "sha256": "674ef78bcc4603abd7967a959c0c68203252ef31cd470a8eada82e841b84a123"
+      }
+    },
+    "comparison-fixture-verification-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/full-comparison-fixture-verification-v1.json",
+        "sha256": "b563e7d27491d588dd96ae4623d917e5ce9c25da65e8a15de4681782d2a938f3"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/comparison-fixture-verification-v1.json",
+        "sha256": "b563e7d27491d588dd96ae4623d917e5ce9c25da65e8a15de4681782d2a938f3"
+      }
+    },
+    "first-actual-review-record-CPU-check-v1.json": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V191-dense-spectrum-trial-v1/first-review-record-CPU-check-v1.json",
+        "sha256": "5d14379649f7f1de201535ee315d07725d0d74f75794c8634b00d17cdffa920c"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/first-actual-review-record-CPU-check-v1.json",
+        "sha256": "5d14379649f7f1de201535ee315d07725d0d74f75794c8634b00d17cdffa920c"
+      }
+    },
+    "receipt-CPU-tests-v1.log": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/v191-dense-receipt-CPU-tests-v1.log",
+        "sha256": "0516321e4d1dd9fa660e0ba5898e0d6a4053f7cfbd92fa0907e795f768322bb4"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/receipt-CPU-tests-v1.log",
+        "sha256": "0516321e4d1dd9fa660e0ba5898e0d6a4053f7cfbd92fa0907e795f768322bb4"
+      }
+    },
+    "receipt-CPU-tests-v2.log": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/v191-dense-receipt-CPU-tests-v2.log",
+        "sha256": "1de644e8706dd95a09f2abdaaa9035e1cc422cff65aef969b4cd53a5cb595cb4"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/receipt-CPU-tests-v2.log",
+        "sha256": "1de644e8706dd95a09f2abdaaa9035e1cc422cff65aef969b4cd53a5cb595cb4"
+      }
+    },
+    "receipt-CPU-tests-v3.log": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/v191-dense-receipt-CPU-tests-v3.log",
+        "sha256": "b090b01877e0dd8150df822b42be3ce8157cc70c16284c93788c03c9dec781e6"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/receipt-CPU-tests-v3.log",
+        "sha256": "b090b01877e0dd8150df822b42be3ce8157cc70c16284c93788c03c9dec781e6"
+      }
+    },
+    "receipt-fixture-failed-v1.py": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/v191-dense-receipt-tests-failed-v1.py",
+        "sha256": "5d485ae3cee59778c46a9c8af48c6e646e84c011d7cc673d8a8f86df0becc6f5"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/receipt-fixture-failed-v1.py",
+        "sha256": "5d485ae3cee59778c46a9c8af48c6e646e84c011d7cc673d8a8f86df0becc6f5"
+      }
+    },
+    "receipt-fixture-failed-v2.py": {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/v191-dense-receipt-tests-failed-v2.py",
+        "sha256": "fe871c469dc0923ad5bf275f40c76e6065fde1e499feb02a755986d32b3260a0"
+      },
+      "public": {
+        "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/receipt-fixture-failed-v2.py",
+        "sha256": "fe871c469dc0923ad5bf275f40c76e6065fde1e499feb02a755986d32b3260a0"
+      }
+    }
+  },
+  "initial_guide_byte_preservation": {
+    "original_binding": {
+      "path": "/home/dllu/proj/demosaic/docs/dense-local-spectrum-readout.md",
+      "sha256": "c4bef7befee020dc06c6b5aed1d166a71f83a8af518d462f1fd2038e296d60ff"
+    },
+    "archived": {
+      "path": "/home/dllu/proj/demosaic/docs/results/v191-review-preparation-v1/initial-architecture-guide-v1.md",
+      "sha256": "c4bef7befee020dc06c6b5aed1d166a71f83a8af518d462f1fd2038e296d60ff"
+    },
+    "note": "Architecture guide is current documentation and will be updated as work completes; original preparation guide bytes remain here."
+  },
+  "review_owner_observed_live": {
+    "pid": 1356100,
+    "created": 1794159484.88
+  },
+  "distinct_current_CPU_contracts": 47,
+  "test_count_note": "31model+16newreceiptcontracts. Receipt test v1/v2 each preserved one rectangle-patch fixture failure; v3 corrects the fixture and passes16. No neural/reference/receipt implementation change for those corrections. Allsuccessfulmodel/training/admission science completedonce.",
+  "scope": "Full1000row/900update/5checkpoint training audit passed. Full29method comparison structure passes3981Decimalmeans/20472pairedchecks. Newqualityrecipe has750input-only raw-EMA pairs and independentQRsamples,withfullnativeaddition/metrics and60views/12triplets/browserchecks stillrequired. No trainedqualitypromotion."
+}

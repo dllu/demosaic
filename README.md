@@ -85,7 +85,7 @@ The completed [V189 wider-separation trial](docs/spaced-pooled-wave-comparison.m
 
 The [V190 native-alias diagnostic](docs/native-wave-alias-geometry.md) finds 90.78% of exact mesh-template power in the strict principal square. Adding all four aliases around existing bins raises mean proximity only 0.445–0.674 percentage points; median principal proximity stays 3.348%. This gives little support to an alias-only fix as the next priority. Sparse local frequency measurements and the objective/readout deserve separate tests; geometric proximity is not a recovery bound or a quality gain. All 102 neural files remain unchanged.
 
-The [V191 dense local spectral readout](docs/dense-local-spectrum-readout.md) is training from a fresh V183 EMA initializer at V187’s same 508-parameter / 900-update budget. It measures the full existing band in overlapping local windows, replacing eight global frequencies. Independent native CPU measurements/synthesis, GPU parity, gradients and restoration pass. Trained quality is pending; V187 remains preferred.
+The [V191 dense local spectral readout](docs/dense-local-spectrum-readout.md) completed its fresh 900-update training run at V187’s 508-parameter budget. It measures the full existing band in overlapping local windows, replacing eight global frequencies. Independent native CPU measurements/synthesis, GPU parity, gradients and restoration pass. The full training audit passes; both-endpoint quality review is running, so V187 remains preferred.
 
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises

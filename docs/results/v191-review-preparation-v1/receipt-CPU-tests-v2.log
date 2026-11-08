@@ -1,0 +1,48 @@
+...............F                                                         [100%]
+=================================== FAILURES ===================================
+_______________________ test_ADC_and_selected_QR_centers _______________________
+
+    def test_ADC_and_selected_QR_centers():
+        assert (
+            describe_dense(dict(dense_context=None, dense_coefficient=None, dense_spectrum=None))
+            is None
+        )
+        raw, var, colors, aux = example()
+        full = measurements(
+            raw.numpy(), var.numpy(), colors.numpy(), window=9, stride=4, support_windows=(7, 5)
+        )
+        subset = measurements(
+            raw.numpy(),
+            var.numpy(),
+            colors.numpy(),
+            window=9,
+            stride=4,
+            support_windows=(7, 5),
+            centers_yx=aux["dense_spectrum"]["centers_yx"][[0, 5, 11]].numpy(),
+        )
+>       np.testing.assert_array_equal(
+            subset[0].reshape(1, 3, 18, 9, 9), full[0].reshape(1, 12, 18, 9, 9)[:, [0, 4, 8]]
+        )
+E       AssertionError: 
+E       Arrays are not equal
+E       
+E       Mismatched elements: 2802 / 4374 (64.1%)
+E       First 5 mismatches are at indices:
+E        [0, 1, 0, 0, 0]: 2.0736334028106747 (ACTUAL), 1.0655133753093162 (DESIRED)
+E        [0, 1, 0, 0, 1]: 3.8306742332958117 (ACTUAL), 0.06938380863539162 (DESIRED)
+E        [0, 1, 0, 0, 2]: 4.5758849838177795 (ACTUAL), 2.4181085254252954 (DESIRED)
+E        [0, 1, 0, 0, 3]: 5.5181190624009755 (ACTUAL), 4.0128978408794165 (DESIRED)
+E        [0, 1, 0, 0, 4]: 6.081144133441868 (ACTUAL), 4.6318542351256555 (DESIRED)
+E       Max absolute difference among violations: 4.78561068
+E       Max relative difference among violations: 1005.47649081
+E        ACTUAL: array([[[[[ 1.987870e+00,  2.447200e+00,  2.261243e+00, ...,
+E                   3.269799e+00,  2.261243e+00,  2.447200e+00],
+E                 [ 3.217063e+00,  3.693097e+00,  2.555058e+00, ...,...
+E        DESIRED: array([[[[[ 1.987870e+00,  2.447200e+00,  2.261243e+00, ...,
+E                   3.269799e+00,  2.261243e+00,  2.447200e+00],
+E                 [ 3.217063e+00,  3.693097e+00,  2.555058e+00, ...,...
+
+tests/test_dense_spectrum_evidence_receipt.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dense_spectrum_evidence_receipt.py::test_ADC_and_selected_QR_centers
+1 failed, 15 passed in 1.04s

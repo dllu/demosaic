@@ -12,11 +12,18 @@ def patch_geometry(shape, window, stride):
     return centers, design, fy, fx
 
 
-def measurements(packed, variance, colors, *, window=65, stride=32, support_windows=(33, 17)):
+def measurements(
+    packed, variance, colors, *, window=65, stride=32, support_windows=(33, 17), centers_yx=None
+):
     raw, noise = np.asarray(packed, dtype=float), np.asarray(variance, dtype=float)
     colors = np.broadcast_to(colors, (len(raw), 4))
     h, w = raw.shape[-2:]
     centers, design, fy, fx = patch_geometry((h, w), window, stride)
+    if centers_yx is not None:
+        allowed = set(centers)
+        centers = [tuple(map(int, value)) for value in centers_yx]
+        if not centers or len(set(centers)) != len(centers) or not set(centers) <= allowed:
+            raise ValueError("Expected distinct actual patch centers")
     r = window // 2
     context = np.empty((len(raw), len(centers), 18, window, window))
     spectra = np.empty((len(raw), len(centers), 3, 2, window, window), dtype=complex)
