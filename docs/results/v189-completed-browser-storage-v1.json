@@ -1,0 +1,189 @@
+{
+  "status": "pass-completed-browser-byte-identical-hardlinks-all-paths-hashes-and-proofs-preserved",
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/v189-completed-browser-storage-v1/plan-v1.json",
+    "sha256": "ddd5e6fe5cd0bd5eb4145065d42b0d8c1fecac7626861739d9319303f65cc0da"
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/v189-completed-browser-storage-v1.py",
+    "sha256": "c0235e309464e17daf3c708bdc5f21087328b2495a386da0e95a14a4fb7df39f",
+    "text": "from pathlib import Path\nimport os,json,collections,shutil,sys,time\nR=Path.cwd();sys.path.insert(0,str(R/'scripts'))\nfrom phase_admission_protocol import read,ref,owner_live\nT=R/'.cache/v189-completed-browser-storage-v1';assert not T.exists();T.mkdir()\ngroups=collections.defaultdict(list);proofs=[];owners={}\nfor p in (R/'docs/results').glob('*native-viewer-verification-v1.json'):\n d=read(p);bound=[]\n for b in d.get('screenshot_bindings',[]):\n  f=Path(b['path'])\n  if not f.is_relative_to(R/'.cache/quality-20261107'):continue\n  root=R/'.cache/quality-20261107'/f.relative_to(R/'.cache/quality-20261107').parts[0]\n  if root.name.startswith('V189'):continue\n  for launch in root.glob('*launch-v1.json'):\n   o=read(launch).get('owner')\n   if o:assert not owner_live(o);owners[str(launch)]=o\n  assert ref(f)==b and not f.is_symlink();groups[b['sha256']].append(b);bound.append(b)\n if bound:proofs.append({'proof':ref(p),'screenshots':bound})\noperations=[];logical=0\nfor digest,bindings in groups.items():\n bindings=sorted(bindings,key=lambda b:b['path']);canon=Path(bindings[0]['path']);seen={}\n for b in bindings:\n  f=Path(b['path']);s=f.stat();seen[s.st_dev,s.st_ino]=s.st_blocks*512\n  if (s.st_dev,s.st_ino)!=(canon.stat().st_dev,canon.stat().st_ino):operations.append({'canonical':ref(canon),'destination':b,'device':s.st_dev})\n if len(seen)>1:logical+=sum(seen.values())-canon.stat().st_blocks*512\nplan={'status':'planned-byte-identical-terminal-browser-screenshot-hardlinks','created_unix_UTC':time.time(),'source':dict(ref(__file__),text=Path(__file__).read_text()),'proofs':proofs,'terminal_owners':owners,'operations':operations,'logical_unique_allocated_reduction_bytes':logical,'free_before':shutil.disk_usage(R).free,'scope':'Only byte-identical local screenshot PNGs in six completed trials. Preserve every path/hash/browserproof byte; hardlink shared contents atomically. All36original launchowners terminal; no V189 live path orsource/model/capture/checkpoint/receipt is replaced. External storage unchanged. Shared filesystemfree delta is not attributed solely to this operation.'}\nwith (T/'plan-v1.json').open('x') as f:json.dump(plan,f,indent=2);f.write('\\n')\nfor path,o in owners.items():assert not owner_live(o)\nfor n,op in enumerate(operations):\n a,b=Path(op['canonical']['path']),Path(op['destination']['path']);assert ref(a)==op['canonical'] and ref(b)==op['destination']\n tmp=b.with_name(b.name+'.v189-link-tmp');assert not tmp.exists();os.link(a,tmp);os.replace(tmp,b)\n assert ref(b)==op['destination'] and a.stat().st_ino==b.stat().st_ino\nfor p in proofs:\n assert ref(p['proof']['path'])==p['proof']\n for b in p['screenshots']:assert ref(b['path'])==b\nfor path,o in owners.items():assert not owner_live(o)\nreceipt={'status':'pass-completed-browser-byte-identical-hardlinks-all-paths-hashes-and-proofs-preserved','plan':ref(T/'plan-v1.json'),'source':plan['source'],'original_terminal_owners':owners,'operations':len(operations),'bound_screenshot_paths':sum(len(p['screenshots']) for p in proofs),'unchanged_browser_proofs':[p['proof'] for p in proofs],'logical_unique_allocated_reduction_bytes':logical,'free_after':shutil.disk_usage(R).free,'scope':plan['scope']}\nwith (R/'docs/results/v189-completed-browser-storage-v1.json').open('x') as f:json.dump(receipt,f,indent=2);f.write('\\n')\nprint('PASS',len(operations),'byte-identical paths/',len(owners),'terminal owners/',logical/2**20,'MiB logical unique reduction')\n"
+  },
+  "original_terminal_owners": {
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/completion-quality-audit-launch-v1.json": {
+      "pid": 794534,
+      "created": 1794131360.39
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/completion-launch-v1.json": {
+      "pid": 791120,
+      "created": 1794130922.7
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/completion-launch-review-launch-v1.json": {
+      "pid": 792262,
+      "created": 1794131045.19
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/completion-reduce-launch-v1.json": {
+      "pid": 794579,
+      "created": 1794131371.97
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/completion-render-launch-v1.json": {
+      "pid": 794584,
+      "created": 1794131373.13
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/review-launch-v1.json": {
+      "pid": 792263,
+      "created": 1794131045.32
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/evidence-train-launch-v1.json": {
+      "pid": 786037,
+      "created": 1794130035.47
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V180-local-phase-trial-v1/completion-training-audit-launch-v1.json": {
+      "pid": 792259,
+      "created": 1794131042.82
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/completion-quality-audit-launch-v1.json": {
+      "pid": 929861,
+      "created": 1794138343.62
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/completion-launch-v1.json": {
+      "pid": 925942,
+      "created": 1794137290.89
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/completion-launch-review-launch-v1.json": {
+      "pid": 928878,
+      "created": 1794138028.42
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/completion-reduce-launch-v1.json": {
+      "pid": 929913,
+      "created": 1794138355.13
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/completion-render-launch-v1.json": {
+      "pid": 929914,
+      "created": 1794138356.69
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/review-launch-v1.json": {
+      "pid": 928879,
+      "created": 1794138028.58
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/evidence-train-launch-v1.json": {
+      "pid": 924248,
+      "created": 1794136955.78
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V183-coherent-pair-evidence-trial-v1/completion-training-audit-launch-v1.json": {
+      "pid": 928873,
+      "created": 1794138026.05
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-training-audit-launch-v1.json": {
+      "pid": 773628,
+      "created": 1794128571.4
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/control-train-launch-v1.json": {
+      "pid": 717964,
+      "created": 1794126490.38
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/review-launch-v1.json": {
+      "pid": 773036,
+      "created": 1794128425.82
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/controller-launch-v1.json": {
+      "pid": 453410,
+      "created": 1794113512.6
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/manual-quality-audit-launch-v1.json": {
+      "pid": 777511,
+      "created": 1794129054.19
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1/evidence-train-launch-v1.json": {
+      "pid": 724598,
+      "created": 1794127450.6
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/completion-quality-audit-launch-v1.json": {
+      "pid": 860007,
+      "created": 1794134208.43
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/completion-launch-v1.json": {
+      "pid": 854999,
+      "created": 1794133470.67
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/completion-launch-review-launch-v1.json": {
+      "pid": 857080,
+      "created": 1794133893.23
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/completion-reduce-launch-v1.json": {
+      "pid": 860112,
+      "created": 1794134219.86
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/completion-render-launch-v1.json": {
+      "pid": 860115,
+      "created": 1794134221.24
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/review-launch-v1.json": {
+      "pid": 857081,
+      "created": 1794133893.38
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/evidence-train-launch-v1.json": {
+      "pid": 852882,
+      "created": 1794132873.37
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V181-flat-spatial-evidence-trial-v1/completion-training-audit-launch-v1.json": {
+      "pid": 857065,
+      "created": 1794133890.82
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V184-wave-readout-trial-v1/wave-train-launch-v1.json": {
+      "pid": 984348,
+      "created": 1794140356.75
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V184-wave-readout-trial-v1/review-launch-v1.json": {
+      "pid": 992275,
+      "created": 1794141129.42
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/train-review-controller-launch-v1.json": {
+      "pid": 1195275,
+      "created": 1794151330.07
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/wave-train-launch-v1.json": {
+      "pid": 1194470,
+      "created": 1794151142.7
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/review-render-controller-launch-v1.json": {
+      "pid": 1198641,
+      "created": 1794151453.88
+    },
+    "/home/dllu/proj/demosaic/.cache/quality-20261107/V187-pooled-wave-trial-v1/review-launch-v1.json": {
+      "pid": 1200288,
+      "created": 1794151912.79
+    }
+  },
+  "operations": 2156,
+  "bound_screenshot_paths": 2880,
+  "unchanged_browser_proofs": [
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v180-local-native-viewer-verification-v1.json",
+      "sha256": "89deb6a5ef3b4080f63763489d7674ec05532b879de84134c9e3df718e4965c2"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v183-coherent-pair-native-viewer-verification-v1.json",
+      "sha256": "04baad98d647ca3b20036d01f96169a70dbf1d18318365d8a6778687924fd753"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v178-native-viewer-verification-v1.json",
+      "sha256": "8eeb7fdbbdf269afc42a8bdf36d38f1c37ad63d0e73aec4a3360746d09400629"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v181-flat-spatial-native-viewer-verification-v1.json",
+      "sha256": "7173d61e8a6c03a212e4bcc7f57477edecd3576684c2c25f82e2d4db5278cc31"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v184-wave-readout-native-viewer-verification-v1.json",
+      "sha256": "41b206989445563d85d082eb9174498cced3bcfb144170dc8cb8f71238e9be0c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/results/v187-pooled-wave-native-viewer-verification-v1.json",
+      "sha256": "74047f20ae481f54500248f4854f96817fa65c55c9e99b21e6e49350472d0311"
+    }
+  ],
+  "logical_unique_allocated_reduction_bytes": 87261184,
+  "free_after": 45211074560,
+  "scope": "Only byte-identical local screenshot PNGs in six completed trials. Preserve every path/hash/browserproof byte; hardlink shared contents atomically. All36original launchowners terminal; no V189 live path orsource/model/capture/checkpoint/receipt is replaced. External storage unchanged. Shared filesystemfree delta is not attributed solely to this operation."
+}
