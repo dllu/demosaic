@@ -1,6 +1,6 @@
 # Experiment index
 
-The [V187 pooled-selection trial](pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+The completed [V187 pooled-selection readout](pooled-phase-wave-comparison.md) is the current experimental wave option. At V185's same 508-parameter and 900-update budget, mesh response rises **5.23% raw / 3.64% EMA** to **5.227% / 5.359% of exact GT amplitude**; 168/256 present inputs improve in each state. EMA quiet spatial RMS falls **0.48–0.52%**, improving 27/32 cases. Absent RMS rises about 0.034% on all 256 inputs and fresh-flat RMS about 0.020–0.021% on all 48; false waves, mottle and missing real cab crossings remain. Both endpoints/all 822 cases, audits, 60 actually viewed native figures / 12 triplets and two strict exports are complete. [Sixteen-state native viewer](images/v187-pooled-wave-v1/native-viewer.html) · [Exact evidence](results/v187-pooled-wave-final-v1.json). V120 Small remains the general recommendation.
 
 The completed [V180 local phase-evidence comparison](local-phase-evidence-comparison.md)
 raises mean mesh response **15.2–15.9% over global V178**, reaching 4.52–4.55%
@@ -48,7 +48,7 @@ The [actual quality report](coherent-pair-evidence-comparison.md) finds EMA mesh
 response+6.95% versus V181 to4.439% of GT, with quiet spatial RMS+0.39–0.67%
 on all32 inputs. Against V180, mesh response is2.41% lower and quiet spatial
 RMS0.09–0.49% lower. Both fine cab windows remain incomplete and broad mottle
-persists. All60 native figures/12triplets were actually viewed;19methods,
+persists. All60 native figures / 12 triplets were actually viewed;19methods,
 32contrasts and1,218cells retain earlier strengths. Two strict exports and the
 [ten-state viewer](images/v183-coherent-pair-evidence-v1/native-viewer.html) keep
 raw/EMA metadata separate. Preparation fixtures remain explicitly marked.
@@ -324,7 +324,7 @@ weights;remove only the sigma8/radius24 native Gaussian component of direct RGB.
 Quiet RMS −3.74–10.69% and DC bias −11.45–31.59%,with3.806–3.837% GT mesh response.
 All48 coarse-flat errors worsen,total-flat means +0.389–0.705%,quiet spatial
 +0.167–0.267%;local mottle/real crossings unresolved. Spectral-only/direct-only
-ablations expose the broad-correction tradeoff. Both endpoints/all822cases/
+ablations expose the broad-correction tradeoff. Both endpoints/all 822 cases/
 72 actual native figures/24triplets complete.47 CPU checks,six CUDA filter cases,
 1644 actual roots/exact original replays pass.6576 streamed method rows;216 new
 full predictions plus72 corrections are saved for36 fixed native cases. Separate
@@ -796,5 +796,4 @@ finds 90.08% of clean green-CFA template power already inside the current band,
 but only 21.25% mean / 1.18% median proximity to input-selected bins. Broadening
 at the same candidate count helps little. Strong global peaks also occur beside
 uniform quiet ROIs. These are diagnostic fractions, not recovery bounds or
-confidence. V185 remains the latest trained comparison; the next hypothesis is
-to pool phase and neighboring-frequency evidence while retaining local support.
+confidence. The completed [V187 pooled-selection trial](pooled-phase-wave-comparison.md) improves mesh and quiet means at the same parameter/training budget, while slightly worsening absent/flat controls. Pooling and rank allocation change together; neither phase is now a selection holdout.

@@ -1,6 +1,6 @@
 # Current method research
 
-The [V187 pooled-selection trial](pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+The completed [V187 pooled-selection readout](pooled-phase-wave-comparison.md) is the current experimental wave option. At V185's same 508-parameter and 900-update budget, mesh response rises **5.23% raw / 3.64% EMA** to **5.227% / 5.359% of exact GT amplitude**; 168/256 present inputs improve in each state. EMA quiet spatial RMS falls **0.48–0.52%**, improving 27/32 cases. Absent RMS rises about 0.034% on all 256 inputs and fresh-flat RMS about 0.020–0.021% on all 48; false waves, mottle and missing real cab crossings remain. Both endpoints/all 822 cases, audits, 60 actually viewed native figures / 12 triplets and two strict exports are complete. [Sixteen-state native viewer](images/v187-pooled-wave-v1/native-viewer.html) · [Exact evidence](results/v187-pooled-wave-final-v1.json). V120 Small remains the general recommendation.
 
 The completed [V180 local/global comparison](local-phase-evidence-comparison.md)
 shows that spatially varying coefficient fields help mean mesh response:
@@ -53,7 +53,7 @@ response6.95% versus V181 to4.439% of GT, with quiet spatial RMS0.39–0.67%
 higher. Against V180, it gives up2.41% of mesh response while keeping0.09–0.49%
 lower quiet spatial RMS. Natural fine-band response rises slightly on all128
 inputs versus V181; organic-dark band error worsens. Independent training/quality
-audits and all60 original-detail figures/12triplets pass inspection. Real fence
+audits and all60 original-detail figures / 12 triplets pass inspection. Real fence
 crossings and broad colored mottle remain unresolved. Direct coherent supervision
 changes the tradeoff without removing shared-parameter interference; retain all
 three local recipes for their measured strengths.
@@ -724,5 +724,4 @@ finds 90.08% of clean green-CFA template power already inside the current band,
 but only 21.25% mean / 1.18% median proximity to input-selected bins. Broadening
 at the same candidate count helps little. Strong global peaks also occur beside
 uniform quiet ROIs. These are diagnostic fractions, not recovery bounds or
-confidence. V185 remains the latest trained comparison; the next hypothesis is
-to pool phase and neighboring-frequency evidence while retaining local support.
+confidence. The completed [V187 pooled-selection trial](pooled-phase-wave-comparison.md) improves mesh and quiet means at the same parameter/training budget, while slightly worsening absent/flat controls. Pooling and rank allocation change together; neither phase is now a selection holdout.

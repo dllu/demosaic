@@ -1,9 +1,9 @@
 # Current model choices
 
-The [V187 pooled-selection trial](pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+The completed [V187 pooled-selection readout](pooled-phase-wave-comparison.md) is the current experimental wave option. At V185's same 508-parameter and 900-update budget, mesh response rises **5.23% raw / 3.64% EMA** to **5.227% / 5.359% of exact GT amplitude**; 168/256 present inputs improve in each state. EMA quiet spatial RMS falls **0.48–0.52%**, improving 27/32 cases. Absent RMS rises about 0.034% on all 256 inputs and fresh-flat RMS about 0.020–0.021% on all 48; false waves, mottle and missing real cab crossings remain. Both endpoints/all 822 cases, audits, 60 actually viewed native figures / 12 triplets and two strict exports are complete. [Sixteen-state native viewer](images/v187-pooled-wave-v1/native-viewer.html) · [Exact evidence](results/v187-pooled-wave-final-v1.json). V120 Small remains the general recommendation.
 
 The completed [V185 smaller-support wave readout](spatial-context-wave-comparison.md)
-is the current experimental direct-readout option. At matched 900-update head
+is a retained smaller-support option. At matched 900-update head
 training, mesh response rises **2.11% raw / 0.45% EMA versus V184** to
 **4.968% / 5.171% of GT**, while quiet spatial RMS falls **0.42–0.55% raw /
 0.83–1.38% EMA**. All 32 EMA quiet cases improve. Standalone flat RMS rises
@@ -421,5 +421,4 @@ finds 90.08% of clean green-CFA template power already inside the current band,
 but only 21.25% mean / 1.18% median proximity to input-selected bins. Broadening
 at the same candidate count helps little. Strong global peaks also occur beside
 uniform quiet ROIs. These are diagnostic fractions, not recovery bounds or
-confidence. V185 remains the latest trained comparison; the next hypothesis is
-to pool phase and neighboring-frequency evidence while retaining local support.
+confidence. The completed [V187 pooled-selection trial](pooled-phase-wave-comparison.md) improves mesh and quiet means at the same parameter/training budget, while slightly worsening absent/flat controls. Pooling and rank allocation change together; neither phase is now a selection holdout.

@@ -68,7 +68,7 @@ The completed [V185 smaller-support readout](docs/spatial-context-wave-compariso
 improves the wave readout at matched training: mesh response rises **2.11% raw /
 0.45% EMA versus V184**, reaching **4.968% / 5.171% of GT**. Quiet spatial RMS
 falls **0.42–0.55% raw / 0.83–1.38% EMA**, with all 32 EMA inputs improving.
-This is the current experimental wave option. Standalone flats and absent-mesh
+V185 retains slightly better flat/absent controls than V187. Standalone flats and absent-mesh
 controls regress slightly; false striping, broad mottle and real missing crossings
 remain. Both endpoints, audits and all 60 viewed native figures are complete.
 
@@ -77,7 +77,7 @@ finds most clean mesh power already inside the current frequency band, while
 selected bins lie near little of it in typical weak cases. Broadening the band
 alone helps little; no new denoising gain is claimed.
 
-The [V187 pooled-selection trial](docs/pooled-phase-wave-readout.md) is running at V185’s parameter and training budget, following the completed frequency diagnostic. Native CPU/GPU parity and optimizer restoration pass; trained quality is pending.
+The completed [V187 pooled-selection readout](docs/pooled-phase-wave-comparison.md) is the current experimental wave option. At V185's same 508-parameter and 900-update budget, mesh response rises **5.23% raw / 3.64% EMA** to **5.227% / 5.359% of exact GT amplitude**; 168/256 present inputs improve in each state. EMA quiet spatial RMS falls **0.48–0.52%**, improving 27/32 cases. Absent RMS rises about 0.034% on all 256 inputs and fresh-flat RMS about 0.020–0.021% on all 48; false waves, mottle and missing real cab crossings remain. Both endpoints/all 822 cases, audits, 60 actually viewed native figures / 12 triplets and two strict exports are complete. [Sixteen-state native viewer](docs/images/v187-pooled-wave-v1/native-viewer.html) · [Exact evidence](docs/results/v187-pooled-wave-final-v1.json). V120 Small remains the general recommendation.
 
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
@@ -106,6 +106,7 @@ This adds training and capacity; both primary baselines are V183 EMA.
 | [V183 coherent pair response](docs/coherent-pair-evidence-comparison.md) | EMA mesh response +6.95% versus V181 to 4.439% of GT; quiet spatial RMS 0.09–0.49% below V180 | Quiet spatial RMS +0.39–0.67% versus V181 on all 32 inputs; real crossings and broad mottle remain |
 | [V184 phase-aware readout](docs/phase-wave-readout-comparison.md) | Mesh response +9.60% raw / +15.96% EMA versus frozen V183 EMA, reaching 4.865–5.148% of GT | Quiet spatial RMS +0.76–2.35%, extra false striping, worse natural band-error means and incomplete real crossings; extra training/capacity |
 | [V185 smaller RAW support](docs/spatial-context-wave-comparison.md) | Mesh response +2.11% raw / +0.45% EMA and quiet spatial RMS −0.42–1.38% versus matched V184; all 32 EMA quiet cases improve | Still only 4.968–5.171% of GT response; tiny flat/absent regressions, false striping, mottle and incomplete real crossings |
+| [V187 pooled selection](docs/pooled-phase-wave-comparison.md) | Same508 parameters and budget: mesh +5.23% raw / +3.64% EMA versus V185 to 5.227–5.359% of GT; EMA quiet spatial −0.48–0.52% | All absent/fresh-flat errors rise slightly; false waves, mottle and real missing crossings remain |
 | [V158 regional DC](docs/regional-dc-regret.md) | Quiet RMS −1.93–2.63% versus matched MSE; all 32 inputs improve | Small regressions versus V143, persistent real detail loss |
 
 No model combines these strengths. The [released V170 RAW matching comparison](docs/nonlocal-raw-comparison.md)
@@ -119,7 +120,8 @@ optical blur. [Data pipeline](docs/training-pipeline.md) · [Source review](docs
 
 ## Current 100% crops
 
-Open the local [V185 native-pixel viewer](docs/images/v185-spatial-context-v1/native-viewer.html),
+Open the local [V187 native-pixel viewer](docs/images/v187-pooled-wave-v1/native-viewer.html),
+[V185 viewer](docs/images/v185-spatial-context-v1/native-viewer.html),
 [V184 viewer](docs/images/v184-wave-readout-v1/native-viewer.html),
 [V183 viewer](docs/images/v183-coherent-pair-evidence-v1/native-viewer.html),
 [V181 viewer](docs/images/v181-flat-spatial-evidence-v1/native-viewer.html),
@@ -130,8 +132,8 @@ Open the local [V185 native-pixel viewer](docs/images/v185-spatial-context-v1/na
 [V173 viewer](docs/images/v173-weak-gradient-matching-v1/native-viewer.html) or
 [V172 viewer](docs/images/v172-local-noise-matching-v1/native-viewer.html). Click
 the flip tile or press **F**. All 160×160 browser crops retain the PNG pixels
-exactly. V185 opens with V184 EMA versus V185 EMA; select both raw states for
-the matched raw comparison. All fourteen V178/V180/V181/V183/V184/V185 states
+exactly. V187 opens with V185 EMA versus V187 EMA; select both raw states for
+the matched raw comparison. All sixteen V178/V180/V181/V183/V184/V185/V187 states
 retain separate checkpoint metadata. V175 retains its modest raw quiet gain.
 
 [Optional periodic-detail native comparisons and failure views](docs/supported-wave-amplitude.md)
@@ -212,19 +214,23 @@ Fine crossed strands remain incomplete; amplified views retain broad colored mot
 [V184 mesh2302 triplet](docs/images/v184-wave-readout-v1/comparison-01.png) ·
 [V184 mesh2309 triplet](docs/images/v184-wave-readout-v1/comparison-05.png).
 
-Noisy → **V185 spatial-support raw** → exact constructed GT, mesh2302/mesh2309.
-Mean response reaches **4.968% of GT**, +2.11% over V184 raw, while quiet
-spatial RMS falls 0.42–0.55%. Both fixed 512px RGGB contexts use native
-ROI `[176,176,160,160]`, shot .00128/read variance 6.5536e-6, exposure8/contrast1.
-The 160×160 crop pixels are never resized. Raw export SHA256
-`054f31a5734ed944163f51b73f5efb2c814f863c54948167d573e9e90b9ca1b8`;
-training checkpoint `4bce120381d4c5208e17f10e43a450b0e00884dcbb8f6a7b632312a714787d9f`.
-[Both endpoints, quiet/flat triplets and complete metadata](docs/spatial-context-wave-comparison.md).
+[V185 mesh2302 triplet](docs/images/v185-spatial-context-v1/comparison-01.png) ·
+[V185 mesh2309 triplet](docs/images/v185-spatial-context-v1/comparison-05.png).
+
+Noisy → **V187 pooled-selection EMA** → exact constructed GT, mesh2302/mesh2309.
+Mean response reaches **5.359% of GT**, +3.64% over matched V185 EMA; quiet
+spatial RMS falls 0.48–0.52%, with 27/32 cases improving. Absent and fresh-flat
+errors rise slightly. Both fixed 512px RGGB contexts use native ROI
+`[176,176,160,160]`, shot .00128/read variance6.5536e-6, exposure8/contrast1.
+The 160×160 crop pixels are never resized. EMA export SHA256
+`4965a9baa17dc36e6f64115644d6ea62af1a48416f253b45c8a73c028f4306f8`;
+training checkpoint `40b7c7c295ba82cc6b4a4646245483a3234de2759e2ae4d5a8e4e63a16a5e05a`.
+[Both endpoints, quiet/flat triplets and complete metadata](docs/pooled-phase-wave-comparison.md).
 False striping, broad mottle and incomplete real crossings remain.
 
-![Mesh2302: noisy, V185 spatial-support raw, exact constructed GT](docs/images/v185-spatial-context-v1/comparison-01.png)
+![Mesh2302: noisy, V187 pooled-selection EMA, exact constructed GT](docs/images/v187-pooled-wave-v1/comparison-02.png)
 
-![Mesh2309: noisy, V185 spatial-support raw, exact constructed GT](docs/images/v185-spatial-context-v1/comparison-05.png)
+![Mesh2309: noisy, V187 pooled-selection EMA, exact constructed GT](docs/images/v187-pooled-wave-v1/comparison-06.png)
 
 Noisy → **V173 gradient EMA** → exact constructed GT, ISO6400 and ISO12800
 quiet fields. Mean spatial RMS falls **0.32–0.68% on all 32 inputs versus V172**;

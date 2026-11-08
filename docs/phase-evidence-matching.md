@@ -40,6 +40,8 @@ direct readout as a stronger-response path beside earlier quieter choices;
 real crossings remain incomplete and quiet fields gain false striping. Both
 audits and all60 actually viewed native figures/12triplets are complete.
 
+The completed [V187 pooled-selection readout](pooled-phase-wave-comparison.md) keeps V185's 508-parameter head and matched 900-update budget, pooling two green phases and 3×3 frequency neighbors before sparse selection. Raw/EMA mesh response rises 5.23% / 3.64% over V185 to 5.227% / 5.359% of GT; EMA quiet spatial RMS falls 0.48–0.52%, with 27/32 inputs improving. All absent/fresh-flat errors rise slightly. Frozen V183 matching retains its original one-phase selections and 189 tensors; only the new readout uses pooled bins. Neither green phase is a selection holdout for that head. This is the current experimental wave architecture, alongside V185 controls and earlier quieter options; real crossings, false waves and mottle remain. Both endpoints, audits and 60 actual native figures are complete. [Implementation](pooled-phase-wave-readout.md).
+
 [Model implementation](../src/demosaic/late_phase_evidence_matching.py) ·
 [CPU tests](../tests/test_late_phase_evidence_matching.py) ·
 [Native preparation and preserved prototype failure](results/v178-phase-evidence-preparation-v1.json).
