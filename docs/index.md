@@ -41,6 +41,11 @@ establishes restoration quality or calibrated flat safety. Exact source,
 checks and preserved decisions are linked from their reports and the
 [timestamped diary](../diary/index.md).
 
+[Local measurements at those fixed frequencies](local-phase-support.md) now
+show higher mean power in constructed mesh footprints while blank means stay
+near 1, with overlapping noisy tails. This CPU support diagnostic restores no
+RGB and changes none of the queued model recipes or measured recommendations.
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, with six observed coarsest p90 distances about
 90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls **0.12–0.17%**

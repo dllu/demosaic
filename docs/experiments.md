@@ -1,5 +1,12 @@
 # Experiment index
 
+The [completed V179 local-support diagnostic](local-phase-support.md) measures
+298,404 windows at 1,228 reused one-phase-selected bins. Local mean powers are
+higher in mesh-containing footprints while blank means stay near 1; larger
+windows gather signal but leave fewer pure blank footprints. Twenty CPU tests,
+all input/journal bindings and 288 native independent QR rows pass. No model,
+restored RGB, new noise or original capture is used; V175/V178 remain separate.
+
 V178's [matched comparison and native viewer](phase-evidence-training.md#matched-tables-and-native-viewer)
 now support both control/evidence endpoints with per-method checkpoint metadata.
 The complete 13-method reused-value fixture and all 480 browser crops pass;

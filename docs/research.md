@@ -1,5 +1,15 @@
 # Current method research
 
+The [local-phase support diagnostic](local-phase-support.md) reuses V177's fixed
+primary bins and measures local affine-projected coefficients in the other
+green phase. Across all 614 present observations, signal-containing mean power
+rises 5.749→12.572→21.761 with larger boxes; blank means remain near 1, with
+fewer blank contributors at the largest size. All 614 absent means remain near
+1, yet roughly 1.7% of their windows exceed nominal power 4. This motivates
+continuous spatial evidence without a hard gate. Twenty CPU tests and 288
+native independent QR rows pass. It is training-input evidence, not restored
+RGB or calibrated confidence; V175/V178 recipes and quality status stay unchanged.
+
 V175's [first four continuation passes](fresh-noise-matching.md#four-pass-training-losses)
 show only a 0.094% reduction in mesh pair-difference training loss; weak/photo
 pair losses rise slightly. Standalone-flat anchor falls 0.558%, while photo
