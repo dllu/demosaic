@@ -1,5 +1,10 @@
 # Current method research
 
+The [V173 gradient-loss experiment](weak-gradient-matching.md) is training the
+unchanged V172 matching network with amplitude-balanced gradient supervision.
+The six other terms, data, initial state and schedule match. All 162 focused CPU
+checks and native backward admission pass; held-out quality is pending.
+
 The [completed V172 local noise matching experiment](local-noise-matching.md)
 reduces EMA quiet RMS **0.31–0.77%** and DC bias **1.33–2.55% versus V169**,
 while mesh response rises **1.06% to3.877% of GT**. Quiet RMS falls21–24% versus
