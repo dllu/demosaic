@@ -1,0 +1,212 @@
+{
+  "status": "pass-V189-frozen-baseline-native-CUDA-parity-head-gradients-and-restoration",
+  "owner": {
+    "pid": 1263934,
+    "created": 1794154515.69
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V189-spaced-pooled-admission-v1/plan-v1.json",
+    "sha256": "a8fe88271bbfd271db5e279b2656fd9f4cb998e9f5e1c653969baa20a6c7f735"
+  },
+  "parities": [
+    {
+      "case": "training-mesh-step1",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "pooled_selection_CPU_GPU_bins_exact": true,
+      "wave_feature_values_checked": 20971520,
+      "wave_feature_maximum_CPU_GPU_difference": 5.684341886080802e-14,
+      "support_values_checked": 25165824,
+      "support_maximum_CPU_GPU_difference": 1.862645149230957e-09,
+      "nonzero_head_values": 3145728,
+      "nonzero_head_maximum_CPU_GPU_difference": 2.384185791015625e-07
+    },
+    {
+      "case": "training-photo-step2",
+      "native_output_values": 786432,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "pooled_selection_CPU_GPU_bins_exact": true,
+      "wave_feature_values_checked": 5242880,
+      "wave_feature_maximum_CPU_GPU_difference": 2.9802322387695312e-08,
+      "support_values_checked": 6291456,
+      "support_maximum_CPU_GPU_difference": 0.0,
+      "nonzero_head_values": 786432,
+      "nonzero_head_maximum_CPU_GPU_difference": 8.940696716308594e-08
+    },
+    {
+      "case": "training-mixed-step4",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "pooled_selection_CPU_GPU_bins_exact": true,
+      "wave_feature_values_checked": 20971520,
+      "wave_feature_maximum_CPU_GPU_difference": 3.725290298461914e-09,
+      "support_values_checked": 25165824,
+      "support_maximum_CPU_GPU_difference": 5.960464477539063e-08,
+      "nonzero_head_values": 3145728,
+      "nonzero_head_maximum_CPU_GPU_difference": 9.5367431640625e-07
+    },
+    {
+      "case": "training-flat-step8",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "pooled_selection_CPU_GPU_bins_exact": true,
+      "wave_feature_values_checked": 20971520,
+      "wave_feature_maximum_CPU_GPU_difference": 2.2737367544323206e-13,
+      "support_values_checked": 25165824,
+      "support_maximum_CPU_GPU_difference": 2.9802322387695312e-08,
+      "nonzero_head_values": 3145728,
+      "nonzero_head_maximum_CPU_GPU_difference": 1.1920928955078125e-07
+    },
+    {
+      "case": "training-ADC-step3",
+      "native_output_values": 3145728,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": false
+    },
+    {
+      "case": "main-overcast-sky",
+      "native_output_values": 786432,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "pooled_selection_CPU_GPU_bins_exact": true,
+      "wave_feature_values_checked": 5242880,
+      "wave_feature_maximum_CPU_GPU_difference": 0.0,
+      "support_values_checked": 6291456,
+      "support_maximum_CPU_GPU_difference": 1.4901161193847656e-08,
+      "nonzero_head_values": 786432,
+      "nonzero_head_maximum_CPU_GPU_difference": 8.940696716308594e-08
+    },
+    {
+      "case": "mesh-nominal",
+      "native_output_values": 1769472,
+      "initial_output_bit_exact": true,
+      "matching_evaluated": true,
+      "pooled_selection_CPU_GPU_bins_exact": true,
+      "wave_feature_values_checked": 11796480,
+      "wave_feature_maximum_CPU_GPU_difference": 7.450580596923828e-09,
+      "support_values_checked": 14155776,
+      "support_maximum_CPU_GPU_difference": 1.1920928955078125e-07,
+      "nonzero_head_values": 1769472,
+      "nonzero_head_maximum_CPU_GPU_difference": 7.152557373046875e-07
+    }
+  ],
+  "records": [
+    {
+      "update": 1,
+      "domain": "mesh",
+      "case": "training-mesh-step1",
+      "loss": 2.08844256401062,
+      "terms": {
+        "pixel": 0.024134930223226547,
+        "gradient": 0.009610636159777641,
+        "local_regret": 2.800287984427996e-05,
+        "DC_regret": 2.255181016153074e-06,
+        "flat_anchor": 0.04427456110715866,
+        "pair_difference": 0.24720732867717743,
+        "pair_common": 0.10689764469861984,
+        "flat_spatial": 0.15718983113765717,
+        "coherent_response": 0.3642869293689728
+      },
+      "independent_nine_term_FP32_total_exact": true,
+      "mask_pixels": 771129,
+      "gradient_norm": 7.460471153259277,
+      "nonzero_gradient_coordinates": {
+        "context.weight": 0,
+        "context.bias": 0,
+        "mixing.weight": 192,
+        "mixing.bias": 12
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 5.245208740234375e-06,
+      "parameter_gradient_coordinates": 508,
+      "EMA_decay": 0.18181818181818182,
+      "Adam_clocks": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          1.0
+        ]
+      },
+      "inherited_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+      "model_hash": "a6a841824bf078d63cb4dcb8e7da0207dcd7a66bc5878baae29000957a62785a",
+      "counts": {
+        "wrapper": 15,
+        "frozen": 15,
+        "network": 13,
+        "sampler": 65,
+        "projection": 13
+      }
+    },
+    {
+      "update": 2,
+      "domain": "mixed",
+      "case": "training-mixed-step4",
+      "loss": 0.10413085669279099,
+      "terms": {
+        "pixel": 0.024764534085989,
+        "gradient": 0.009062021039426327,
+        "local_regret": 0.0012654324527829885,
+        "DC_regret": 2.3114978830562904e-05,
+        "flat_anchor": 0.05599580332636833,
+        "pair_difference": 0.0,
+        "pair_common": 0.0,
+        "flat_spatial": 0.24725326895713806,
+        "coherent_response": 0.0
+      },
+      "independent_nine_term_FP32_total_exact": true,
+      "mask_pixels": 957167,
+      "gradient_norm": 2.7503321170806885,
+      "nonzero_gradient_coordinates": {
+        "context.weight": 288,
+        "context.bias": 16,
+        "mixing.weight": 192,
+        "mixing.bias": 12
+      },
+      "CPU_GPU_parameter_gradient_maximum_difference": 1.0132789611816406e-06,
+      "parameter_gradient_coordinates": 508,
+      "EMA_decay": 0.25,
+      "Adam_clocks": {
+        "tensors": 4,
+        "states": 4,
+        "steps": [
+          2.0
+        ]
+      },
+      "inherited_hash": "7070a8d8cf7d08288c2f8078e17228cfc345e80cc5dc774286751dd961df8f62",
+      "model_hash": "7c2abfe1658d36694a94845386010151d70dbbef847064cac89f83ae1032ea85",
+      "counts": {
+        "wrapper": 16,
+        "frozen": 16,
+        "network": 14,
+        "sampler": 70,
+        "projection": 14
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V189-spaced-pooled-admission-v1/artifacts/probe-step1.pt",
+      "sha256": "bf1a7a4ed010d7caf857c94a5a07f4da0f6d2f6c4307731f0582a64247cb0a2b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V189-spaced-pooled-admission-v1/artifacts/probe-step2.pt",
+      "sha256": "cab0413b88470a0a3bbb62f1b9ac70962d14c6c243aa259ddde29030839c5dcb"
+    }
+  ],
+  "counts": {
+    "wrapper": 16,
+    "frozen": 16,
+    "network": 14,
+    "sampler": 70,
+    "projection": 14
+  },
+  "peak_CUDA_allocated_bytes": 6692874240,
+  "inherited189_tensors_unchanged": true,
+  "new_source_noise_draws": 0,
+  "parent_DINO_calls": 0,
+  "protected_optimizer_inputs": 0,
+  "scope": "One new102nd neural source:508parameter shared phase-aware readout with18 context inputs (large6 plus33/17packed-window6each atstride8, samepooledfixedbins); all189 V183 EMA tensors frozen. Seven baseline/new native initial parities, six standalone nonzero head CPU/GPU checks, two real four-image head-only AdamW updates(mesh,mixed), genuine model/Adam/EMA/CPU-CUDA RNG restoration between them with zero prefix replay. All nine V183 losses/mask retained. New head starts Adam/EMA at0, no old moments are loaded because inherited189 tensors never train. Only training mesh/mixed can optimize; protected sky/cab are parity-only. No quality claim, new source/noise,parent/DINO,RAW decode,original/dataz access. Probe checkpoints never initialize a future trial; local outputs forecast.025GiB above40GiB buffer; external inputs read-only. Pooled2green9neighbor ranking picks2Kunique suppressed bins with alternate-rank phase ordering, not selection holdouts. Same508parameters/193state/initialhash as V187; all101 older neural sources unchanged. V189 changes only suppression radius toceil(maxpackedaxis/65), other pooled ranking/waves/support unchanged. Paired CPU/GPU checks use these actual spaced bins."
+}

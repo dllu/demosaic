@@ -1,0 +1,2029 @@
+FFFFFFFFFFFFFFFFFFFFFFFF                                                 [100%]
+=================================== FAILURES ===================================
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-RGGB] ______
+
+pattern = 'RGGB', dtype = torch.float32
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...02, 0.0217, 0.0210,  ..., 0.0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]])
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...6, 1.0086e-06],
+          [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]])
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-BGGR] ______
+
+pattern = 'BGGR', dtype = torch.float32
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...02, 0.0217, 0.0210,  ..., 0.0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]])
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...6, 1.0086e-06],
+          [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]])
+colors = tensor([2, 1, 1, 0]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-GRBG] ______
+
+pattern = 'GRBG', dtype = torch.float32
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...02, 0.0217, 0.0210,  ..., 0.0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]])
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...6, 1.0086e-06],
+          [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]])
+colors = tensor([1, 0, 2, 1]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-GBRG] ______
+
+pattern = 'GBRG', dtype = torch.float32
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...02, 0.0217, 0.0210,  ..., 0.0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]])
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...6, 1.0086e-06],
+          [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]])
+colors = tensor([1, 2, 0, 1]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-RGGB] ______
+
+pattern = 'RGGB', dtype = torch.float64
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-BGGR] ______
+
+pattern = 'BGGR', dtype = torch.float64
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([2, 1, 1, 0]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-GRBG] ______
+
+pattern = 'GRBG', dtype = torch.float64
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([1, 0, 2, 1]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____ test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-GBRG] ______
+
+pattern = 'GBRG', dtype = torch.float64
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_pooled_bins_score_and_per_phase_power_match_numpy(pattern, dtype):
+        raw, variance, colors = fixture(pattern, dtype)
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([1, 2, 0, 1]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_______ test_new_selected_wave_channels_match_independent_numpy[dtype0] ________
+
+dtype = torch.float32
+
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_new_selected_wave_channels_match_independent_numpy(dtype):
+        raw, variance, colors = fixture("GBRG", dtype)
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...02, 0.0217, 0.0210,  ..., 0.0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]])
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...6, 1.0086e-06],
+          [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]])
+colors = tensor([1, 2, 0, 1]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_______ test_new_selected_wave_channels_match_independent_numpy[dtype1] ________
+
+dtype = torch.float64
+
+    @pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+    def test_new_selected_wave_channels_match_independent_numpy(dtype):
+        raw, variance, colors = fixture("GBRG", dtype)
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([1, 2, 0, 1]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+________ test_pooling_is_symmetric_and_both_phases_can_change_selection ________
+
+    def test_pooling_is_symmetric_and_both_phases_can_change_selection():
+        raw, variance, colors = fixture(dtype=torch.float64)
+        green = torch.where(colors == 1)[0]
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+________ test_constant_exhausted_invalid_slots_and_no_global_rng_change ________
+
+    def test_constant_exhausted_invalid_slots_and_no_global_rng_change():
+        raw = torch.ones((1, 4, 8, 8), dtype=torch.float64) * 0.02
+        variance = torch.ones_like(raw) * 2e-6
+        colors = color_indices("RGGB")
+        before = torch.get_rng_state().clone()
+>       bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=8)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0200, 0.0200, 0.0200, 0.0200, 0.0200, 0.0200, 0.0200, 0.0200],
+          [0.0200, 0.0200, 0.0200, 0.0200,...00, 0.0200],
+          [0.0200, 0.0200, 0.0200, 0.0200, 0.0200, 0.0200, 0.0200, 0.0200]]]],
+       dtype=torch.float64)
+variance = tensor([[[[2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06,
+           2.0000e-06, 2.0000e-06, 2.0000e-06],...2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06,
+           2.0000e-06, 2.0000e-06, 2.0000e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 8, window = 65
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_________ test_frozen_baseline_local_adc_and_new_context_routing[RGGB] _________
+
+pattern = 'RGGB'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_frozen_baseline_local_adc_and_new_context_routing(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        old = LateSpatialContextWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        new = LateSpacedPooledPhaseWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        state = {n: v for n, v in old.state_dict().items() if not n.startswith("wave_readout.")}
+        new.initialize_from_evidence(state)
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        rng = np.random.default_rng(18704)
+        base = torch.tensor(rng.uniform(0.001, 0.02, (1, 3, 16, 22)), dtype=torch.float32)
+        raw = torch.tensor(rng.uniform(0.001, 0.02, (1, 4, 8, 11)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        colors = color_indices(pattern)
+        expected = old(base, raw, variance, colors)
+>       initial, aux = new(base, raw, variance, colors, return_aux=True)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_spaced_pooled_wave.py:121: in forward
+    bins, valid, pool_aux = spaced_pooled_phase_bins(
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0088, 0.0079, 0.0013, 0.0192, 0.0193, 0.0109, 0.0136, 0.0092,
+           0.0070, 0.0099, 0.0091],
+       ...042],
+          [0.0192, 0.0092, 0.0046, 0.0136, 0.0144, 0.0077, 0.0125, 0.0080,
+           0.0095, 0.0177, 0.0048]]]])
+variance = tensor([[[[0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, ...0000e-06, 2.0000e-06,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06,
+           2.0000e-06]]]])
+colors = tensor([0, 1, 1, 2]), peaks = 4, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_________ test_frozen_baseline_local_adc_and_new_context_routing[BGGR] _________
+
+pattern = 'BGGR'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_frozen_baseline_local_adc_and_new_context_routing(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        old = LateSpatialContextWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        new = LateSpacedPooledPhaseWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        state = {n: v for n, v in old.state_dict().items() if not n.startswith("wave_readout.")}
+        new.initialize_from_evidence(state)
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        rng = np.random.default_rng(18704)
+        base = torch.tensor(rng.uniform(0.001, 0.02, (1, 3, 16, 22)), dtype=torch.float32)
+        raw = torch.tensor(rng.uniform(0.001, 0.02, (1, 4, 8, 11)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        colors = color_indices(pattern)
+        expected = old(base, raw, variance, colors)
+>       initial, aux = new(base, raw, variance, colors, return_aux=True)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_spaced_pooled_wave.py:121: in forward
+    bins, valid, pool_aux = spaced_pooled_phase_bins(
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0088, 0.0079, 0.0013, 0.0192, 0.0193, 0.0109, 0.0136, 0.0092,
+           0.0070, 0.0099, 0.0091],
+       ...042],
+          [0.0192, 0.0092, 0.0046, 0.0136, 0.0144, 0.0077, 0.0125, 0.0080,
+           0.0095, 0.0177, 0.0048]]]])
+variance = tensor([[[[0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, ...0000e-06, 2.0000e-06,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06,
+           2.0000e-06]]]])
+colors = tensor([2, 1, 1, 0]), peaks = 4, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_________ test_frozen_baseline_local_adc_and_new_context_routing[GRBG] _________
+
+pattern = 'GRBG'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_frozen_baseline_local_adc_and_new_context_routing(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        old = LateSpatialContextWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        new = LateSpacedPooledPhaseWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        state = {n: v for n, v in old.state_dict().items() if not n.startswith("wave_readout.")}
+        new.initialize_from_evidence(state)
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        rng = np.random.default_rng(18704)
+        base = torch.tensor(rng.uniform(0.001, 0.02, (1, 3, 16, 22)), dtype=torch.float32)
+        raw = torch.tensor(rng.uniform(0.001, 0.02, (1, 4, 8, 11)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        colors = color_indices(pattern)
+        expected = old(base, raw, variance, colors)
+>       initial, aux = new(base, raw, variance, colors, return_aux=True)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_spaced_pooled_wave.py:121: in forward
+    bins, valid, pool_aux = spaced_pooled_phase_bins(
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0088, 0.0079, 0.0013, 0.0192, 0.0193, 0.0109, 0.0136, 0.0092,
+           0.0070, 0.0099, 0.0091],
+       ...042],
+          [0.0192, 0.0092, 0.0046, 0.0136, 0.0144, 0.0077, 0.0125, 0.0080,
+           0.0095, 0.0177, 0.0048]]]])
+variance = tensor([[[[0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, ...0000e-06, 2.0000e-06,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06,
+           2.0000e-06]]]])
+colors = tensor([1, 0, 2, 1]), peaks = 4, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_________ test_frozen_baseline_local_adc_and_new_context_routing[GBRG] _________
+
+pattern = 'GBRG'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_frozen_baseline_local_adc_and_new_context_routing(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        old = LateSpatialContextWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        new = LateSpacedPooledPhaseWaveDetail(
+            evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4
+        )
+        state = {n: v for n, v in old.state_dict().items() if not n.startswith("wave_readout.")}
+        new.initialize_from_evidence(state)
+        old.frozen, new.frozen = FrozenFixture(), FrozenFixture()
+        old.network, new.network = NetworkFixture(), NetworkFixture()
+        rng = np.random.default_rng(18704)
+        base = torch.tensor(rng.uniform(0.001, 0.02, (1, 3, 16, 22)), dtype=torch.float32)
+        raw = torch.tensor(rng.uniform(0.001, 0.02, (1, 4, 8, 11)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        colors = color_indices(pattern)
+        expected = old(base, raw, variance, colors)
+>       initial, aux = new(base, raw, variance, colors, return_aux=True)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1794: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/demosaic/late_spaced_pooled_wave.py:121: in forward
+    bins, valid, pool_aux = spaced_pooled_phase_bins(
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0088, 0.0079, 0.0013, 0.0192, 0.0193, 0.0109, 0.0136, 0.0092,
+           0.0070, 0.0099, 0.0091],
+       ...042],
+          [0.0192, 0.0092, 0.0046, 0.0136, 0.0144, 0.0077, 0.0125, 0.0080,
+           0.0095, 0.0177, 0.0048]]]])
+variance = tensor([[[[0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, ...0000e-06, 2.0000e-06,
+           2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06, 2.0000e-06,
+           2.0000e-06]]]])
+colors = tensor([1, 2, 0, 1]), peaks = 4, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____________________ test_invalid_contracts_reject[dtype] _____________________
+
+change = 'dtype'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____________________ test_invalid_contracts_reject[shape] _____________________
+
+change = 'shape'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+______________________ test_invalid_contracts_reject[nan] ______________________
+
+change = 'nan'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+____________________ test_invalid_contracts_reject[colors] _____________________
+
+change = 'colors'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____________________ test_invalid_contracts_reject[peaks] _____________________
+
+change = 'peaks'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____________________ test_invalid_contracts_reject[bins] ______________________
+
+change = 'bins'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+_____________________ test_invalid_contracts_reject[valid] _____________________
+
+change = 'valid'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+____________________ test_invalid_contracts_reject[window] _____________________
+
+change = 'window'
+
+    @pytest.mark.parametrize(
+        "change", ["dtype", "shape", "nan", "colors", "peaks", "bins", "valid", "window"]
+    )
+    def test_invalid_contracts_reject(change):
+        raw, variance, colors = fixture()
+>       bins, valid, _ = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_late_spaced_pooled_wave.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:124: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packed = tensor([[[[0.0233, 0.0211, 0.0202,  ..., 0.0165, 0.0212, 0.0201],
+          [0.0208, 0.0195, 0.0178,  ..., 0.0201, 0.0...0170, 0.0175, 0.0176],
+          [0.0229, 0.0197, 0.0176,  ..., 0.0173, 0.0203, 0.0222]]]],
+       dtype=torch.float64)
+variance = tensor([[[[1.9834e-06, 1.5078e-06, 1.0642e-06,  ..., 2.5108e-06,
+           2.2918e-06, 2.0665e-06],
+          [1.7998...     [2.0891e-06, 2.7436e-06, 1.5599e-06,  ..., 2.7560e-06,
+           2.5339e-06, 2.4138e-06]]]], dtype=torch.float64)
+colors = tensor([0, 1, 1, 2]), peaks = 2, window = 9
+
+    @torch.no_grad()
+    def spaced_pooled_phase_bins(packed, variance, colors, *, peaks=4, window=65):
+        """Same pooled ranking as V187, with wider conjugate suppression.
+    
+        Radius ceil(max packed axis/window) tracks the wave-window frequency scale.
+        It changes allocation, not calibrated confidence; both greens affect picks.
+        """
+        green = _green_layout(packed, variance, colors)
+        if type(peaks) is not int or not 1 <= peaks <= 8:
+            raise ValueError("Expected peaks1..8")
+        batch, _, height, width = packed.shape
+        if type(window) is not int or window < 3 or window % 2 != 1:
+            raise ValueError("Expected odd wave window>=3")
+        radius = math.ceil(max(height, width) / window)
+        device = packed.device
+        with torch.autocast(device.type, enabled=False), ieee_fp32():
+            spectrum, noise = _green_spectra(packed, variance, green)
+            power = spectrum.abs().square() / noise.clamp_min((1 / 65535) ** 2)
+            mean = power.mean(1)
+            score = (
+                sum(torch.roll(mean, (dy, dx), (-2, -1)) for dy in [-1, 0, 1] for dx in [-1, 0, 1]) / 9
+            )
+            if not bool(torch.isfinite(score).all()):
+                raise ArithmeticError("Pooled spectral score is nonfinite")
+            fy, fx = [
+                torch.fft.fftfreq(n, device=device, dtype=torch.float64) / 2 for n in [height, width]
+            ]
+            radius = torch.hypot(fy[:, None], fx[None, :])
+            eligible = (
+                (radius >= 1 / 16)
+                & (radius <= 1 / 3)
+                & ((fy[:, None] > 0) | ((fy[:, None] == 0) & (fx[None, :] > 0)))
+            )
+            available = eligible[None].expand(batch, -1, -1).clone()
+            item = torch.arange(batch, device=device)
+            bins = []
+            validity = []
+            selected_scores = []
+            for _ in range(2 * peaks):
+                maximum, flat = score.masked_fill(~available, -torch.inf).flatten(1).max(1)
+                valid = torch.isfinite(maximum)
+                y, x = flat // width, flat % width
+                bins.append(torch.stack((y, x), -1))
+                validity.append(valid)
+                selected_scores.append(torch.where(valid, maximum, torch.zeros_like(maximum)))
+                for cy, cx in [(y, x), ((-y) % height, (-x) % width)]:
+>                   for dy in range(-radius, radius + 1):
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   TypeError: only integer tensors of a single element can be converted to an index
+
+src/demosaic/late_spaced_pooled_wave.py:66: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-RGGB]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-BGGR]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-GRBG]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype0-GBRG]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-RGGB]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-BGGR]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-GRBG]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooled_bins_score_and_per_phase_power_match_numpy[dtype1-GBRG]
+FAILED tests/test_late_spaced_pooled_wave.py::test_new_selected_wave_channels_match_independent_numpy[dtype0]
+FAILED tests/test_late_spaced_pooled_wave.py::test_new_selected_wave_channels_match_independent_numpy[dtype1]
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooling_is_symmetric_and_both_phases_can_change_selection
+FAILED tests/test_late_spaced_pooled_wave.py::test_constant_exhausted_invalid_slots_and_no_global_rng_change
+FAILED tests/test_late_spaced_pooled_wave.py::test_frozen_baseline_local_adc_and_new_context_routing[RGGB]
+FAILED tests/test_late_spaced_pooled_wave.py::test_frozen_baseline_local_adc_and_new_context_routing[BGGR]
+FAILED tests/test_late_spaced_pooled_wave.py::test_frozen_baseline_local_adc_and_new_context_routing[GRBG]
+FAILED tests/test_late_spaced_pooled_wave.py::test_frozen_baseline_local_adc_and_new_context_routing[GBRG]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[dtype]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[shape]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[nan]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[colors]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[peaks]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[bins]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[valid]
+FAILED tests/test_late_spaced_pooled_wave.py::test_invalid_contracts_reject[window]
+24 failed in 1.27s

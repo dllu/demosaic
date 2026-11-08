@@ -1,0 +1,26 @@
+..........F...................                                           [100%]
+=================================== FAILURES ===================================
+________ test_pooling_is_symmetric_and_both_phases_can_change_selection ________
+
+    def test_pooling_is_symmetric_and_both_phases_can_change_selection():
+        raw, variance, colors = fixture(dtype=torch.float64)
+        green = torch.where(colors == 1)[0]
+        bins, valid, aux = spaced_pooled_phase_bins(raw, variance, colors, peaks=2, window=9)
+        changed = raw.clone()
+        v = variance.clone()
+        changed[:, green] = raw[:, green.flip(0)]
+        v[:, green] = variance[:, green.flip(0)]
+        other, ov, oa = spaced_pooled_phase_bins(changed, v, colors, peaks=2)
+>       assert (
+            torch.equal(bins, other)
+            and torch.equal(valid, ov)
+            and torch.equal(aux["pooled_score"], oa["pooled_score"])
+        )
+E       assert (False)
+E        +  where False = <built-in method equal of type object at 0xee833e37de98>(tensor([[[[ 4,  5],\n          [ 7, 19]],\n\n         [[ 3,  0],\n          [ 2, 27]]]]), tensor([[[[4, 5],\n          [4, 7]],\n\n         [[2, 5],\n          [4, 3]]]]))
+E        +    where <built-in method equal of type object at 0xee833e37de98> = torch.equal
+
+tests/test_late_spaced_pooled_wave.py:97: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_late_spaced_pooled_wave.py::test_pooling_is_symmetric_and_both_phases_can_change_selection
+1 failed, 29 passed in 4.20s

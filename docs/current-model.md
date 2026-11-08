@@ -1,5 +1,7 @@
 # Current model choices
 
+The [V189 wider-separation trial](spaced-pooled-wave-readout.md) is running at V187’s same parameter and training budget. Native CPU/GPU parity, gradients and restoration pass; trained quality is pending.
+
 The completed [V187 pooled-selection readout](pooled-phase-wave-comparison.md) is the current experimental wave option. At V185's same 508-parameter and 900-update budget, mesh response rises **5.23% raw / 3.64% EMA** to **5.227% / 5.359% of exact GT amplitude**; 168/256 present inputs improve in each state. EMA quiet spatial RMS falls **0.48–0.52%**, improving 27/32 cases. Absent RMS rises about 0.034% on all 256 inputs and fresh-flat RMS about 0.020–0.021% on all 48; false waves, mottle and missing real cab crossings remain. Both endpoints/all 822 cases, audits, 60 actually viewed native figures / 12 triplets and two strict exports are complete. [Sixteen-state native viewer](images/v187-pooled-wave-v1/native-viewer.html) · [Exact evidence](results/v187-pooled-wave-final-v1.json). V120 Small remains the general recommendation.
 
 The completed [V185 smaller-support wave readout](spatial-context-wave-comparison.md)

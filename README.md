@@ -81,6 +81,8 @@ The completed [V187 pooled-selection readout](docs/pooled-phase-wave-comparison.
 
 The [V188 allocation diagnostic](docs/spectral-selection-diversity.md) supports testing wider peak separation at the same eight-slot budget. Mean template proximity rises from 24.84% to 25.93%, and weak-sector proximity improves, but the median is unchanged, tighter proximity falls and local quiet powers rise. These are spectral measurements, not denoising gains. V187 remains the latest trained comparison.
 
+The [V189 wider-separation trial](docs/spaced-pooled-wave-readout.md) is running at V187’s same parameter and training budget. Native CPU/GPU parity, gradients and restoration pass; trained quality is pending.
+
 The completed [V184 phase-aware readout](docs/phase-wave-readout-comparison.md)
 adds a stronger response option above frozen V183 EMA: mesh response rises
 **9.60% raw / 15.96% EMA**, reaching **4.865% / 5.148% of GT amplitude**.
