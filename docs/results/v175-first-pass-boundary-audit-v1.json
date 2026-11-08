@@ -1,0 +1,64 @@
+{
+  "status": "pass-first-full-continuation-pass-and-distinct-second-pass-noise",
+  "observed_unix_UTC": 1794104969.9559398,
+  "training_owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "training_owner_live": true,
+  "watcher_owner": {
+    "pid": 287357,
+    "created": 1794104682.2
+  },
+  "watcher_live": true,
+  "checkpoint": {
+    "path": "/mnt/external/demosaic/quality-20261107/V175-fresh-noise-matching-v2/checkpoints/step02000.pt",
+    "sha256": "79c7881a53c722b1c4cc655a9653c81bbc004e2652affef86dedc4bf86eed7b3"
+  },
+  "checkpoint_new_updates": 900,
+  "actual_Adam_step": 1800,
+  "final_Adam_states_in_checkpoint": 141,
+  "checkpoint_fresh_sensor_batches": 897,
+  "checkpoint_retained_cached_noisy_batches": 3,
+  "checkpoint_ADC_skips": 100,
+  "checkpoint_matching_calls": 900,
+  "checkpoint_full_parent_DINO_calls_including_two_replays": 899,
+  "frozen47_state_tensors_exact_initial": true,
+  "raw_module_hash": "b938a2c87a73a971a63ee7f975ccedff8a5f4466a1d0d9c2f289e1c46ab9c71b",
+  "EMA_module_hash": "bf370d13d4459cb417814f97accaf4bbef4f24eef09c26df47378537dccf9468",
+  "actual_second_pass_first_row": {
+    "continuation_row": 1001,
+    "original_batch": {
+      "path": "/mnt/external/demosaic/quality-20261107/V168-fine-mesh-ladder-v1/training-batches/step-0001-inputs.npz",
+      "sha256": "2b3e5f6724dd127edc4b142203e834f77aa2f490473ee02fbd933d69f1f10458"
+    },
+    "first_seed": 6482605019613289608,
+    "second_seed": 4750640233634427538,
+    "same_target_calibration_and_pairs": true,
+    "changed_RAW_fingerprint": true,
+    "changed_variance_fingerprint": true,
+    "recomputed_parent_fingerprint_changed": true
+  },
+  "live_prefix_rows": 1014,
+  "live_prefix_FP32_loss_totals_checked": 912,
+  "live_prefix_parent_argument_bindings_checked": 4545,
+  "journal_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/train-trace-v1.jsonl",
+    "bytes": 3070470,
+    "sha256": "bde78d9d6bab7ea9eb1e184dd9bf9276311a1fc3984313d1d979f8608315b9b2"
+  },
+  "event_journal_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/train-forward-events-v1.jsonl",
+    "bytes": 627744,
+    "sha256": "12acf2aacaa1164a61784a800dc56c26ec43b48a4696057a83f2e1fefaa0bd28"
+  },
+  "new_neural_forwards": 0,
+  "new_sensor_noise_draws": 0,
+  "CUDA_initialized": false,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/audit-v175-pass-boundary-v1.py",
+    "sha256": "a4ef92004da2f1fbf79dfff7f50497b95a7e7edba75bbf67aa271e0b5f0b825a",
+    "text": "\"\"\"Check the first full continuation pass and actual second-pass noise fingerprints.\"\"\"\n\nimport hashlib\nimport json\nimport time\nfrom pathlib import Path\n\nimport psutil\nimport torch\nfrom profile_raw_kernel_inference import model_hash\nfrom v175_postprocess import REPO, ROOT, context, read, ref, source, write_once\nfrom v175_training_trace_audit import validate_trace\n\nfrom demosaic.late_local_noise_matching import LateLocalNoiseMatchingDetail\n\nplan, post = context()\noutput = REPO / \"docs/results/v175-first-pass-boundary-audit-v1.json\"\nassert not output.exists()\nowner = read(ROOT / \"train-launch-v1.json\")[\"owner\"]\nprocess = psutil.Process(owner[\"pid\"])\nassert process.create_time() == owner[\"created\"] and process.status() not in [psutil.STATUS_ZOMBIE, psutil.STATUS_DEAD]\nraw = (ROOT / \"train-trace-v1.jsonl\").read_bytes()\nprefix = raw[:raw.rfind(b\"\\n\") + 1]\ntrace = [json.loads(line) for line in prefix.splitlines()]\nassert len(trace) >= 1010\nevent_raw = (ROOT / \"train-forward-events-v1.jsonl\").read_bytes()\nevent_prefix = b\"\".join(line for line in event_raw[:event_raw.rfind(b\"\\n\") + 1].splitlines(keepends=True) if json.loads(line)[\"step\"] <= trace[-1][\"step\"])\nevents = [json.loads(line) for line in event_prefix.splitlines()]\ncache = read(plan[\"cache\"][\"path\"])[\"batches\"]\nunits = read(plan[\"pair_units\"][\"path\"])[\"rows\"]\neligible = read(plan[\"clean_sensor_preflight\"][\"path\"])[\"rows\"]\nold = read(plan[\"initial_training\"][\"path\"])[\"trace\"]\naudit = validate_trace(trace, cache, units, eligible, old, events, plan)\nfirst, following = trace[0], trace[1000]\nassert first[\"cache_step\"] == following[\"cache_step\"] == 1\nassert first[\"original_batch\"] == following[\"original_batch\"]\nassert first[\"sensor_draw\"][\"seed\"] != following[\"sensor_draw\"][\"seed\"]\nfor key in [\"packed\", \"variance\"]:\n    assert first[\"inputs\"][key] != following[\"inputs\"][key]\nfor key in first[\"inputs\"]:\n    if key not in [\"packed\", \"variance\"]:\n        assert first[\"inputs\"][key] == following[\"inputs\"][key]\nassert first[\"parent_values\"] != following[\"parent_values\"]\nbinding = ref(Path(plan[\"external\"]) / \"checkpoints/step02000.pt\")\ncheckpoint = torch.load(binding[\"path\"], map_location=\"cpu\", weights_only=True)\ninitial = torch.load(plan[\"initial_checkpoint\"][\"path\"], map_location=\"cpu\", weights_only=True)\nassert checkpoint[\"step\"] == 2000 and checkpoint[\"updates\"] == 900 and checkpoint[\"total_updates\"] == 1800\nassert checkpoint[\"skipped\"] == 100 and checkpoint[\"counts\"] == dict(wrapper=900, frozen=900, network=900, sampler=4500)\nassert checkpoint[\"parent_counts\"] == dict(parent=899, DINO=899)\nassert len(checkpoint[\"optimizer\"][\"state\"]) == 141\nassert all(float(state[\"step\"]) == 1800 and all(torch.isfinite(value).all() for value in state.values()) for state in checkpoint[\"optimizer\"][\"state\"].values())\nfrozen = [key for key in checkpoint[\"models\"] if key.startswith(\"frozen.\")]\nassert len(frozen) == 47 and all(torch.equal(checkpoint[\"models\"][key], initial[\"models\"][key]) for key in frozen)\nmodule = LateLocalNoiseMatchingDetail(**plan[\"module_config\"])\nmodule.load_state_dict(checkpoint[\"models\"], strict=True)\nraw_hash = model_hash(module)\nmodule.network.load_state_dict(checkpoint[\"ema\"], strict=True)\nEMA_hash = model_hash(module)\nassert not torch.cuda.is_initialized()\nwatch_owner = read(ROOT / \"completion-watch-launch-v1.json\")[\"owner\"]\nwatch = psutil.Process(watch_owner[\"pid\"])\nassert watch.create_time() == watch_owner[\"created\"] and watch.status() not in [psutil.STATUS_ZOMBIE, psutil.STATUS_DEAD]\nassert not (ROOT / \"train-failure-v1.json\").exists() and not (ROOT / \"review-launch-v1.json\").exists()\nwrite_once(output, dict(status=\"pass-first-full-continuation-pass-and-distinct-second-pass-noise\",\n    observed_unix_UTC=time.time(), training_owner=owner, training_owner_live=True, watcher_owner=watch_owner, watcher_live=True,\n    checkpoint=binding, checkpoint_new_updates=900, actual_Adam_step=1800, final_Adam_states_in_checkpoint=141,\n    checkpoint_fresh_sensor_batches=897, checkpoint_retained_cached_noisy_batches=3, checkpoint_ADC_skips=100,\n    checkpoint_matching_calls=900, checkpoint_full_parent_DINO_calls_including_two_replays=899,\n    frozen47_state_tensors_exact_initial=True, raw_module_hash=raw_hash, EMA_module_hash=EMA_hash,\n    actual_second_pass_first_row=dict(continuation_row=following[\"continuation_row\"], original_batch=following[\"original_batch\"],\n        first_seed=first[\"sensor_draw\"][\"seed\"], second_seed=following[\"sensor_draw\"][\"seed\"],\n        same_target_calibration_and_pairs=True, changed_RAW_fingerprint=True, changed_variance_fingerprint=True,\n        recomputed_parent_fingerprint_changed=True),\n    live_prefix_rows=len(trace), live_prefix_FP32_loss_totals_checked=audit[\"totals\"], live_prefix_parent_argument_bindings_checked=audit[\"observed_arguments\"],\n    journal_prefix=dict(path=str(ROOT / \"train-trace-v1.jsonl\"), bytes=len(prefix), sha256=hashlib.sha256(prefix).hexdigest()),\n    event_journal_prefix=dict(path=str(ROOT / \"train-forward-events-v1.jsonl\"), bytes=len(event_prefix), sha256=hashlib.sha256(event_prefix).hexdigest()),\n    new_neural_forwards=0, new_sensor_noise_draws=0, CUDA_initialized=False, source=source(__file__),\n    scope=\"Actual first-pass checkpoint and a live second-pass journal boundary,not final training or model quality. First and second visits retain the same scene/calibration/target but have distinct actual RAW/variance and newly computed parent fingerprints. Second-pass full arrays were streamed,not retained or independently regenerated. All complete observed prefix rows/events use the shared final validator. Strict tensor loads are CPU-only and no noise or neural forward is repeated.\"))\nprint(\"PASS first900 continuation updates;141 Adam states at1800;distinct second-pass RAW/variance/parent;\", len(trace), \"live rows;zero extra inference/noise\")\n"
+  },
+  "scope": "Actual first-pass checkpoint and a live second-pass journal boundary,not final training or model quality. First and second visits retain the same scene/calibration/target but have distinct actual RAW/variance and newly computed parent fingerprints. Second-pass full arrays were streamed,not retained or independently regenerated. All complete observed prefix rows/events use the shared final validator. Strict tensor loads are CPU-only and no noise or neural forward is repeated."
+}
