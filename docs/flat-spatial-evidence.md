@@ -1,11 +1,13 @@
 # Clean-flat spatial-error supervision
 
-**V181 is training; image quality is unmeasured.** It keeps the completed
+**V181 has finished training; its fixed quality review is running.** It keeps the completed
 [V180 local-evidence architecture](local-phase-evidence-comparison.md), initial
 checkpoint, data and 900-update recipe. One added loss targets spatial error
 inside clean flat neighborhoods. The 98 neural source files, all seven existing
 loss terms and the existing target mask stay unchanged. V180's measured mesh
 gain and its quiet-field costs remain the current evidence.
+The independent training audit passes all 1,000 rows, 900 eight-term FP32
+totals and five checkpoints; trained image-quality conclusions remain pending.
 
 [Loss](../scripts/flat_spatial_objective.py) ·
 [Independent CPU tests](../tests/test_flat_spatial_objective.py) ·
@@ -14,8 +16,8 @@ gain and its quiet-field costs remain the current evidence.
 [Eight-term auditor](../scripts/audit_flat_spatial_evidence_trial.py) ·
 [Actual preparation, probe and launch evidence](results/v181-flat-spatial-preparation-v1.json).
 
-The previous goal turn made concrete progress: V180's completed comparison,
-exports, native viewing and audits are published. Its EMA mesh response rises
+V180's completed comparison, exports, native viewing and audits are published.
+Its EMA mesh response rises
 15.93% over global V178, but quiet spatial RMS rises 0.79–1.05%, worsening
 31/32 inputs. That result motivates this loss experiment; it does not meet the
 joint detail/quiet-field goal. No earlier successful training is repeated.
@@ -88,7 +90,9 @@ adapter used for V180. It adds 900 updates/3,600 noisy images over the same
 and architecture stay fixed. The bound training body changes only its objective
 import; seven helper bodies are exact copies of the completed engine. CPU
 warm-start proof retains all old moments/network EMA, with adapter EMA initially
-zero. Actual row8 checkpoint restoration has passed and resumed at row9.
+zero. Actual row8 checkpoint restoration passed and resumed at row9. The full
+continuation now finishes with network clocks at 1,800 and adapter at 900;
+all five raw/EMA/Adam/frozen/RNG checkpoints pass independent CPU verification.
 
 Outputs use the external SSD to preserve the local reserve. The trial keeps
 both raw/EMA endpoints and plans the complete 822-case review, exact frozen/ADC
@@ -103,3 +107,32 @@ RAW decode or original/dataz access occurs. Future quality reports must retain
 main-scene sky/building/foliage/fence, both fine cab ROIs/profiles/JPEGs and at
 least two unresized noisy/restored/exact constructed-GT triplets. Independent
 ISO100/AHD/JPEG references stay qualitative, not exact GT or scoring targets.
+
+## Comparison and publication preparation
+
+Separate frozen helpers retain **17 methods/13,974 rows**, including both V180
+endpoints, all four V178 endpoints, both V175 endpoints and earlier strengths.
+Two same-endpoint loss-only contrasts compare V181 with V180; 26 contextual
+contrasts keep the broader tradeoffs visible. Fourteen comparison checks pass.
+A marked full fixture verifies 2,313 Decimal means, 11,226 paired identities
+and 1,050 formatted table cells, reusing completed V180 values under simulated
+candidate labels. It establishes no V181 gain.
+
+The native renderer fixture checks 60 figures/12 triplets/15 sheets, with
+8,294,400 newly displayed channels independently converted and 50,764,800 older
+channels copied exactly. It keeps all four V178 and both V180 panels beside
+both candidates, both protected GFX scenes, qualified references and identical
+source/ROI/display transforms. All fixture headings identify reused pixels.
+
+The viewer defaults V180 EMA/V181 EMA, with eight method-specific checkpoint
+states available. Its marked fixture passes both raw/EMA pairings, metadata,
+480 crop screenshots, click/F flipping and navigation. Actual-mode browser and
+pixel entries reject marked fixtures. Sixteen publication guard tests pass;
+the frozen entry rejects the actual live scientific owner before Torch or
+export work. Publication requires completed owners, both independent audits,
+all actual figures and recorded inspection of every original-detail sheet.
+
+These helpers and the completion controller are separate source snapshots.
+The controller adopts the original training owner, runs the full audits/review/
+tables/render once, and stops for actual inspection. The original 737-source
+worker remains unchanged. [Exact preparation evidence](results/v181-flat-spatial-comparison-preparation-v1.json).

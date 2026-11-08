@@ -14,7 +14,8 @@ The [V181 flat spatial-error trial](flat-spatial-evidence.md) keeps V180's
 architecture and the original seven losses, adding one clean-target spatial
 term. All 55 focused CPU checks and two real native updates/FP32 totals/
 CPU-GPU gradients/genuine restoration pass. The same 900-update continuation
-is running from the original V172 Adam/EMA initializer; completed V180 outputs
+has finished from the original V172 Adam/EMA initializer, with all 900 totals
+and five checkpoints passing independent audit. Raw/EMA review is running; V180 outputs
 remain comparisons. No trained V181 quality or actual viewing is claimed yet.
 
 The completed [V178 matched phase-evidence trial](phase-evidence-comparison.md)
