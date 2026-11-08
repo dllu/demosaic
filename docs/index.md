@@ -1,5 +1,7 @@
 # Documentation guide
 
+**Current wave choices:** [V195 Whole EMA](directional-response-comparison.md) provides more measured mesh response; [V187 EMA](pooled-phase-wave-comparison.md) is quieter. The difficult real fine mesh and flat-field mottle remain unresolved. V120 Small remains the general recommendation.
+
 See [storage maintenance](storage.md) for cache cleanup, verified consolidation
 of duplicate historical artifacts, and preservation of experiment paths/evidence.
 
@@ -540,4 +542,4 @@ The [V192 measurement-support calculation](dense-measurement-support.md) separat
 
 The [V194 directional check](mesh-directional-response.md) finds a hidden imbalance in the fixed mesh2309 example: V187 EMA has79.24% whole-template response but4.82% /91.69% in its two spectral regions, with85.67% of GT energy in the stronger region. Mesh2302 stays weak in both. This two-example saved-output diagnostic motivates testing balanced response pressure, without claiming a new model, isolated wire-family amplitudes or flat safety. [Audited, actually viewed evidence](results/v194-orientation-response-completed-v1.json).
 
-The [V195 balanced directional response loss](directional-pair-response.md) passes 26 CPU contracts, 53,477,376 saved-output gradient coordinates and GPU/head-state admission. Both matched whole-pressure/directional-pressure arms completed 900 updates from the same V187 EMA donor with fresh identical optimizer clocks. The full independent audit passed 2,000 rows, ten checkpoints and 3,780 inherited tensor comparisons. Four-endpoint evaluation is running; all 822 cases per endpoint and native protected-GFX/flat comparisons remain required before a quality conclusion. All 103 neural sources and current model choices remain unchanged. [Completed training/state evidence](results/v195-response-training-completed-v1.json).
+The completed [V195 matched response-pressure study](directional-response-comparison.md) adds a stronger-response option: Whole EMA reaches **5.575% of exact GT amplitude**, **4.02% above V187 EMA**, with quiet spatial RMS **0.334–0.376% higher**, worsening 30/32 quiet inputs. Directional pressure is 0.80% raw / 1.11% EMA lower in response than whole control, with 0.038–0.078% lower quiet spatial error. Real cab crossings and broad mottle remain unresolved. Retain Whole EMA for its measured response gain and V187 as the quieter alternative; V120 Small remains general. All four endpoints/all 822 cases, independent audits, 72 viewed native figures/24 triplets, four strict exports and 480 browser crops are complete. [Five-state viewer](images/v195-directional-response-v1/native-viewer.html) · [Final evidence](results/v195-response-final-v1.json).

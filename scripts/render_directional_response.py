@@ -15,7 +15,13 @@ from review_directional_response import source_guard
 def render():
     plan = read(ROOT / "plan-v1.json")
     seal = source_guard(plan)
-    assert ref(__file__) == seal["renderer"]
+    correction = None
+    if ref(__file__) != seal["renderer"]:
+        correction = read(ROOT / "render-source-v2.json")
+        assert correction["renderer"] == ref(__file__)
+        assert correction["original_renderer"] == seal["renderer"]
+        for binding in correction["partial_images"]:
+            assert ref(binding["path"]) == binding
     assert read(ROOT / "quality-audit-v1.json")["status"].startswith("pass-V195-four-endpoint")
     scores = read(ROOT / "scores-v1.json")
     prior_path = Path(plan["V187_plan"]["path"]).parent / "figures-v1.json"
@@ -23,7 +29,7 @@ def render():
     prior_scores = read(plan["V187_scores"]["path"])
     methods = [method for mode in MODES for method in plan["methods"][mode].values()]
     out = ROOT / "figures-v1"
-    out.mkdir()
+    out.mkdir(exist_ok=correction is not None)
     font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 10)
     figures = []
     displayed_channels = copied_channels = 0
@@ -87,7 +93,11 @@ def render():
             canvas.paste(Image.fromarray(crop), (x, 44))
             panels.append({"label": label, "xywh": [x, 44, 160, 160], **provenance})
         path = out / f"comparison-{len(figures):02d}.png"
-        canvas.save(path)
+        if path.exists():
+            assert correction is not None
+            np.testing.assert_array_equal(np.asarray(Image.open(path)), np.asarray(canvas))
+        else:
+            canvas.save(path)
         image = np.asarray(Image.open(path))
         for panel in panels:
             x, y, w, h = panel["xywh"]
@@ -113,7 +123,12 @@ def render():
                 "triplet": len(selections) == 3,
                 "no_resize": True,
                 "checkpoints": {mode: scores["checkpoints"][mode] for mode in MODES},
-                "reference_role": case["reference_role"],
+                "reference_role": case.get("reference_role")
+                or "; ".join(
+                    p["label"]
+                    for p in panels
+                    if p["label"] == "Exact constructed GT" or p["label"].startswith("ISO")
+                ),
             }
         )
 
@@ -169,6 +184,10 @@ def render():
             "new_neural_forwards": 0,
             "new_source_noise_draws": 0,
             "renderer": dict(ref(__file__), text=Path(__file__).read_text()),
+            "metadata_correction": ref(ROOT / "render-source-v2.json") if correction else None,
+            "existing_partial_images_preserved": len(correction["partial_images"])
+            if correction
+            else 0,
         },
     )
     print("Rendered 48 compact boards +24 native triplets; actual viewing pending")
