@@ -9,6 +9,13 @@ imports and strict CPU parent/matching loads. Quality remains pending.
 [Preparation and preserved rejections](results/v175-fresh-noise-matching-preparation-v2.json) ·
 [Frozen-worker readiness](results/v175-frozen-worker-readiness-v1.json).
 
+[Final comparison/audit preparation](results/v175-postprocess-preparation-v1.json)
+is frozen before V175 quality. It includes all 822 saved V161 EMA outputs;
+8,038 common scalars reproduce exactly in the
+[current-metric baseline audit](results/v175-V161-baseline-metric-audit-v1.json).
+The shared training auditor passes on 512 actual live rows and rejects eight
+corrupted copies; this remains partial execution evidence, not model quality.
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, with six observed coarsest p90 distances about
 90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls **0.12–0.17%**

@@ -1,0 +1,114 @@
+{
+  "status": "watcher-live-waiting-for-the-confirmed-current-training-owner",
+  "observed_unix_UTC": 1794104743.610275,
+  "owner": {
+    "pid": 287357,
+    "created": 1794104682.2
+  },
+  "owner_live": true,
+  "source_freeze": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/completion-watch-source-v1.json",
+    "sha256": "1ed8b5f5403a6ea20eb884102b6fbaf0b06888f096fd3119974cf63bb3dcd3f7",
+    "contents": {
+      "status": "source-frozen-and-owner-liveness-logic-checked-before-watch-launch",
+      "worker": {
+        "path": "/home/dllu/proj/demosaic/.cache/watch-v175-completion-v1.py",
+        "sha256": "1130bafb7811823a670b10a347880c6d4b222b4784baf4774fdc0173e4b00a51"
+      },
+      "text": "\"\"\"Continue the fixed V175 pipeline once; never retry a scientific worker.\"\"\"\n\nimport json\nimport os\nimport subprocess\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\n\nREPO = Path(\"/home/dllu/proj/demosaic\")\nROOT = REPO / \".cache/quality-20261107/V175-fresh-noise-matching-v2\"\n\n\ndef owner_live(owner):\n    \"\"\"Only absence, terminal state or a different creation time proves exit.\n\n    AccessDenied/transient observation errors propagate to the wait loop and\n    are never interpreted as worker completion.\n    \"\"\"\n    try:\n        process = psutil.Process(owner[\"pid\"])\n        return process.create_time() == owner[\"created\"] and process.status() not in [psutil.STATUS_ZOMBIE, psutil.STATUS_DEAD]\n    except psutil.NoSuchProcess:\n        return False\n\n\ndef main():\n    (ROOT / \"completion-watch.claim\").open(\"x\").close()\n    owner = dict(pid=os.getpid(), created=psutil.Process().create_time())\n    plan = read(ROOT / \"plan-v1.json\")\n    post = read(ROOT / \"postprocess-inputs-v1.json\")\n    for binding in post[\"helpers\"]:\n        assert ref(binding[\"path\"]) == binding\n    expected_source = read(ROOT / \"completion-watch-source-v1.json\")\n    assert expected_source[\"worker\"] == ref(__file__)\n    python = str(REPO / \".venv/bin/python\")\n    last_log = 0.0\n\n    def status(phase, **fields):\n        nonlocal last_log\n        record = dict(status=phase, owner=owner, observed_unix_UTC=time.time(), **fields)\n        save(ROOT / \"completion-watch-status-v1.json\", record)\n        if time.time() - last_log > 120 or not phase.startswith(\"waiting\"):\n            print(json.dumps(record), flush=True)\n            last_log = time.time()\n\n    def wait_worker(phase, result_name):\n        launch = read(ROOT / f\"{phase}-launch-v1.json\")\n        target = launch[\"owner\"]\n        while True:\n            try:\n                live = owner_live(target)\n            except (psutil.AccessDenied, OSError) as error:\n                status(f\"waiting-for-{phase}-observation\", worker_owner=target, observation_error=repr(error))\n                time.sleep(15)\n                continue\n            if live:\n                status(f\"waiting-for-{phase}\", worker_owner=target)\n                time.sleep(15)\n                continue\n            assert not (ROOT / f\"{phase}-failure-v1.json\").exists(), f\"{phase} recorded a failure;manual review required\"\n            result = read(ROOT / result_name)\n            assert result[\"status\"].startswith(\"completed\")\n            assert result[\"owner\"] == target\n            status(f\"{phase}-terminal-with-complete-result\", worker_owner=target, result=ref(ROOT / result_name))\n            return\n\n    def cpu_phase(label, script, result_name):\n        path = ROOT / result_name\n        if path.exists():\n            result = read(path)\n            assert result[\"status\"].startswith((\"pass-\", \"completed-\", \"rendered-\"))\n            status(f\"adopt-existing-{label}\", result=ref(path))\n            return\n        claim = ROOT / f\"watch-{label}.claim\"\n        claim.open(\"x\").close()\n        script = Path(script)\n        env = dict(os.environ, PYTHONPATH=f\"{plan['work']}/src:{plan['work']}/scripts:{REPO}/.cache\",\n                   OPENBLAS_NUM_THREADS=\"1\", OMP_NUM_THREADS=\"2\", MKL_NUM_THREADS=\"1\", CUDA_VISIBLE_DEVICES=\"\")\n        command = [python, str(script)]\n        with (ROOT / f\"watch-{label}-v1.log\").open(\"xb\") as log:\n            status(f\"running-{label}\", command=command, source=ref(script))\n            child = subprocess.Popen(command, cwd=REPO, env=env, stdout=log, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)\n            save(ROOT / f\"watch-{label}-launch-v1.json\", dict(owner=dict(pid=child.pid, created=psutil.Process(child.pid).create_time()), command=command, source=ref(script)))\n            assert child.wait() == 0, f\"{label} exited unsuccessfully;no retry\"\n        assert path.exists()\n        status(f\"completed-{label}\", result=ref(path))\n\n    try:\n        guard(plan)\n        wait_worker(\"train\", \"train-result-v1.json\")\n        cpu_phase(\"training-audit\", REPO / \".cache/audit-v175-training-v1.py\", \"training-audit-v1.json\")\n        if not (ROOT / \"review-launch-v1.json\").exists():\n            assert not (ROOT / \"review.claim\").exists() and not (ROOT / \"review-failure-v1.json\").exists()\n            while psutil.virtual_memory().available <= plan[\"launch_RAM_GiB\"] * 2**30:\n                status(\"waiting-for-review-launch-RAM\")\n                time.sleep(15)\n            guard(plan)\n            status(\"launching-fixed-review\")\n            # This launch inherits the watcher's CUDA visibility. Only CPU\n            # subprocesses above receive CUDA_VISIBLE_DEVICES=\"\".\n            env = dict(os.environ, PYTHONPATH=f\"{plan['work']}/src:{plan['work']}/scripts\", OPENBLAS_NUM_THREADS=\"1\")\n            assert subprocess.run([python, plan[\"runner\"][\"path\"], \"launch-review\"], cwd=REPO, env=env, check=False).returncode == 0\n        wait_worker(\"review\", \"scores-v1.json\")\n        cpu_phase(\"quality-audit\", REPO / \".cache/audit-v175-quality-v1.py\", \"quality-audit-v1.json\")\n        cpu_phase(\"offset-audit\", REPO / \".cache/audit-v175-offsets-v1.py\", \"offset-audit-v1.json\")\n        cpu_phase(\"paired-reductions\", REPO / \".cache/reduce-v175-fresh-noise-v1.py\", \"paired-comparisons-v1.json\")\n        cpu_phase(\"native-render\", plan[\"renderer\"][\"path\"], \"figures-v1.json\")\n        status(\"ready-for-actual-native-viewing\", figures=ref(ROOT / \"figures-v1.json\"), generated_report=False, published_exports=False)\n        save(ROOT / \"completion-watch-result-v1.json\", dict(status=\"completed-fixed-audits-review-and-render-awaiting-human-viewing\",\n             owner=owner, source=ref(__file__), plan=ref(ROOT / \"plan-v1.json\"), new_direct_model_forwards=0,\n             scientific_workers_launched_at_most_once=True, report_or_viewing_claims_generated=False))\n    except BaseException as error:\n        status(\"failed-preserved-no-automatic-retry\", error=repr(error))\n        save(ROOT / \"completion-watch-failure-v1.json\", dict(status=\"failed-preserved-no-automatic-retry\", owner=owner, error=repr(error), source=ref(__file__)))\n        raise\n\n\nif __name__ == \"__main__\":\n    main()\n",
+      "owner_liveness_cases": [
+        "running",
+        "sleeping",
+        "zombie",
+        "dead",
+        "PID_reused",
+        "missing",
+        "AccessDenied propagated",
+        "OSError propagated"
+      ],
+      "training_owner_confirmed_live": {
+        "pid": 274124,
+        "created": 1794102724.04
+      },
+      "new_neural_forwards": 0,
+      "new_sensor_noise_draws": 0,
+      "scope": "Eight CPU owner-status cases,including propagation of observation errors;no model or scientific phase launched by this check. Watcher must wait for the actual current owner and completed result,never restart training or an existing review."
+    }
+  },
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/completion-watch-launch-v1.json",
+    "sha256": "60956a11c87170e4e4389c1f0da421b539ea69e968c9bce48ad41509ad575b07",
+    "contents": {
+      "owner": {
+        "pid": 287357,
+        "created": 1794104682.2
+      },
+      "command": [
+        "/usr/bin/python3.12",
+        "/home/dllu/proj/demosaic/.cache/watch-v175-completion-v1.py"
+      ],
+      "source": {
+        "path": "/home/dllu/proj/demosaic/.cache/watch-v175-completion-v1.py",
+        "sha256": "1130bafb7811823a670b10a347880c6d4b222b4784baf4774fdc0173e4b00a51"
+      },
+      "source_freeze": {
+        "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/completion-watch-source-v1.json",
+        "sha256": "1ed8b5f5403a6ea20eb884102b6fbaf0b06888f096fd3119974cf63bb3dcd3f7"
+      }
+    }
+  },
+  "observed_watch_status": {
+    "status": "waiting-for-train",
+    "owner": {
+      "pid": 287357,
+      "created": 1794104682.2
+    },
+    "observed_unix_UTC": 1794104742.657819,
+    "worker_owner": {
+      "pid": 274124,
+      "created": 1794102724.04
+    }
+  },
+  "training_owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "training_owner_live": true,
+  "observed_training_status": {
+    "status": "training",
+    "owner": {
+      "pid": 274124,
+      "created": 1794102724.04
+    },
+    "step": 1910,
+    "continuation_row": 910,
+    "updates": 818,
+    "total_updates": 1718,
+    "skipped": 92,
+    "fresh_batches": 815,
+    "cached_noisy_batches": 3,
+    "counts": {
+      "wrapper": 818,
+      "frozen": 818,
+      "network": 818,
+      "sampler": 4090
+    },
+    "parent_counts": {
+      "parent": 817,
+      "DINO": 817
+    },
+    "peak_CUDA_bytes": 7075942912
+  },
+  "priority_nice": 10,
+  "CPU_affinity": [
+    4,
+    5
+  ],
+  "postprocess_preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v175-postprocess-preparation-v1.json",
+    "sha256": "4cef5fe9a9f1bee501f09632b5db2cb2dbcf612c637c122a2657eb004360aba8"
+  },
+  "new_neural_forwards_at_this_observation": 0,
+  "new_sensor_noise_draws": 0,
+  "scope": "A detached local watcher will wait for authoritative training exit and completed result,run the frozen final training audit,launch the existing fixed review at most once,then run CPU quality/offset/reduction/render phases. It never restarts training or a failed/existing review;observation errors wait on the same owner. It stops on failures and never writes actual-viewing claims,human notes,final report or exports. The watcher and future children inherit nice10/CPU4,5 settings;CPU-only children hide CUDA while the quality launcher preserves normal visibility. Scientific model calls later belong to their separately recorded review owner,not a completed result claimed here."
+}

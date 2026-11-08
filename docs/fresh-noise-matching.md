@@ -3,8 +3,7 @@
 V175 tests whether a substantially longer training recipe with fresh sensor
 noise can improve the weak correction learned by V172. Training is running;
 quality is pending. V172 remains the balanced matching baseline, V173 the
-stronger recent
-quiet/spatial variant, V171 the standalone-flat option, V161 the stronger learned
+stronger recent quiet/spatial variant, V171 the standalone-flat option, V161 the stronger learned
 mesh prototype and V120 Small the general recommendation.
 
 The preceding [V174 experiment](spread-sample-matching.md) retained wide sample
@@ -86,6 +85,32 @@ totals/masks/parent argument bindings also pass. This is a running-prefix check,
 not final quality evidence; no sensor noise or neural inference was repeated.
 [Actual restored prefix audit](results/v175-restored-live-prefix-v1.json).
 
+The shared final trace auditor has also checked an actual 512-row prefix:
+456 updates, 454 fresh batches, 1,820 durable parent/matching events and exact
+FP32 loss totals. Eight deliberately corrupted in-memory copies of a separate
+200-row prefix reject; original journals stay untouched. These check the audit
+tools and partial execution, not final quality.
+[Live trace audit](results/v175-continuation-trace-audit-v1.json) ·
+[Auditor rejection checks](results/v175-trace-auditor-rejection-checks-v1.json).
+
+Final postprocessing is frozen before candidate quality: nine methods,
+378 table cells, 60 native figures, strict exports and browser pixel checks.
+The V172 comparison uses its previously audited label-corrected view; reversing
+the labels reproduces the original scores exactly. Training and its original
+plan are unchanged. The larger journal/result copies and comparisons raise the
+remaining local publication forecast from 0.2 to **0.4 GiB**, with the same
+48/111 GiB reserves and 0.5 GiB margin; current space passes this forecast.
+[Exact postprocessing sources and inputs](results/v175-postprocess-preparation-v1.json).
+
+A local watcher now waits for the actual training owner to exit successfully,
+runs the frozen final training audit, launches the fixed review once and runs
+the CPU quality/offset/reduction/render stages. It stops on failures, waits
+through observation errors and never restarts a scientific prefix. Its output
+stops at images ready for actual viewing; it writes no visual-review claim,
+human notes, final report or exports. Eight CPU owner-status checks include
+PID reuse, terminal states and transient-error propagation.
+[Watcher source, launch and observed live state](results/v175-completion-watch-preparation-v1.json).
+
 ## Quality and protected scenes
 
 Both final endpoints will complete all 822 fixed cached inputs, with 1,644 exact
@@ -94,6 +119,16 @@ detail strengths directly. Retain full new RGB/residual arrays for 36 native
 cases and 30 offset fields from six existing primary EMA quality forwards.
 Report mesh response and blank error, quiet total/spatial/DC error, native
 512-flat full/coarse error and natural photographic band response/error.
+
+The final numeric tables also include V161 EMA, the earlier stronger learned
+detail option. All **822 saved outputs** use the same cached observations,
+parents, ROIs and metric-source bytes as V175's fixed comparison. Rehashing and
+recomputing them reproduces **8,038 old scalars exactly**, with zero inference
+or new sensor draws. Its mesh response remains **5.240% of exact constructed
+GT**, alongside higher quiet RMS (4.616/7.061 DN16 at ISO6400/12800) and full-flat
+RMS (19.024/24.867 DN16). This preserves the stronger detail comparator and its
+costs while V175 is unmeasured.
+[Complete array-only baseline audit](results/v175-V161-baseline-metric-audit-v1.json).
 
 Render and actually review 60 fixed native figures, including 12 noisy/restored/
 exact constructed GT triplets. Preserve identical 160×160 pixels, coordinates

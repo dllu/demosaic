@@ -1,0 +1,95 @@
+{
+  "status": "pass-published-postprocess-sources-baseline-prefix-bindings-and-document-links",
+  "observed_unix_UTC": 1794104765.4404511,
+  "preparation": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v175-postprocess-preparation-v1.json",
+    "sha256": "4cef5fe9a9f1bee501f09632b5db2cb2dbcf612c637c122a2657eb004360aba8"
+  },
+  "postprocess_inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/postprocess-inputs-v1.json",
+    "sha256": "8bd59c6201308d30da85a87a141c5a33e9ba295e785efe6743983077d88c96c1"
+  },
+  "frozen_postprocessing_sources": 18,
+  "compiled_Python_sources": 17,
+  "prior_neural_files_unchanged": 96,
+  "old_V161_prediction_arrays": 822,
+  "old_V161_common_scalars_exact": 8038,
+  "shared_trace_validator_live_rows": 512,
+  "corruption_rejections": 8,
+  "journal_prefix_hashes_still_exact": true,
+  "document_links_checked": 575,
+  "documents": {
+    "/home/dllu/proj/demosaic/README.md": {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "8996a3fc3153e1d8e42f1dcd2dfffd0db96a8556720852b5e4bdf511c65987f7"
+    },
+    "/home/dllu/proj/demosaic/docs/index.md": {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "448c0ff18e7a15e102137bf3d6765273d7c9b2a6fc3462b5a083ef47c762ad8e"
+    },
+    "/home/dllu/proj/demosaic/docs/current-model.md": {
+      "path": "/home/dllu/proj/demosaic/docs/current-model.md",
+      "sha256": "0418a024a5745d1ee79e429d4be7b5d0e29fbfd77b151be51eb423e478b00ff2"
+    },
+    "/home/dllu/proj/demosaic/docs/research.md": {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "7a3be008338ece865d3578ab235fb21de69f7811f315a5b8077bf3cbb4196ef4"
+    },
+    "/home/dllu/proj/demosaic/docs/experiments.md": {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "45c49dd4780d030deae3fc5f2684c1e06c81332b63ee53c0c2f8b4866a583adf"
+    },
+    "/home/dllu/proj/demosaic/docs/fresh-noise-matching.md": {
+      "path": "/home/dllu/proj/demosaic/docs/fresh-noise-matching.md",
+      "sha256": "859bd2e2c359f93a5ed75451e607f59df6fd14f7c4d117f4f83463336748c5ee"
+    },
+    "/home/dllu/proj/demosaic/diary/2026-11-07-18-18-28-v175-comparison-audits.md": {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-18-18-28-v175-comparison-audits.md",
+      "sha256": "25e815a08b6649af2e433eb5cdf41ae8df230ca84a0915a089f2ef9aba2e4d72"
+    }
+  },
+  "training_owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "owner_confirmed_live": true,
+  "observed_training_status": {
+    "status": "training",
+    "owner": {
+      "pid": 274124,
+      "created": 1794102724.04
+    },
+    "step": 1910,
+    "continuation_row": 910,
+    "updates": 818,
+    "total_updates": 1718,
+    "skipped": 92,
+    "fresh_batches": 815,
+    "cached_noisy_batches": 3,
+    "counts": {
+      "wrapper": 818,
+      "frozen": 818,
+      "network": 818,
+      "sampler": 4090
+    },
+    "parent_counts": {
+      "parent": 817,
+      "DINO": 817
+    },
+    "peak_CUDA_bytes": 7075942912
+  },
+  "completion_watcher_owner": {
+    "pid": 287357,
+    "created": 1794104682.2
+  },
+  "completion_watcher_confirmed_live": true,
+  "candidate_quality_not_yet_created": true,
+  "new_neural_forwards": 0,
+  "new_sensor_noise_draws": 0,
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/verify-v175-postprocess-preparation-v2.py",
+    "sha256": "5c5993621ca8fb01464fd8ba145937451075a72052016466c3b35c9877473afa",
+    "text": "\"\"\"Verify published preparation, actual prefix bindings and current document links.\"\"\"\n\nimport hashlib\nimport re\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom v175_postprocess import REPO, ROOT, context, read, ref, source, write_once\n\nplan, post = context()\npreparation_path = REPO / \"docs/results/v175-postprocess-preparation-v1.json\"\npreparation = read(preparation_path)\nassert preparation[\"postprocess_inputs\"][\"contents\"] == post\nassert ref(preparation[\"postprocess_inputs\"][\"path\"])[\"sha256\"] == preparation[\"postprocess_inputs\"][\"sha256\"]\nfor item in preparation[\"source_texts\"]:\n    assert Path(item[\"path\"]).read_text() == item[\"text\"] and ref(item[\"path\"])[\"sha256\"] == item[\"sha256\"]\nassert len(preparation[\"source_texts\"]) == 18 and preparation[\"source_compilations\"] == 17\nassert post[\"expected_metric_rows\"] == 7398 and post[\"expected_rounded_table_cells\"] == 378\nassert post[\"remaining_local_projection_GiB\"] == 0.4 and post[\"original_local_projection_GiB\"] == 0.2\nfor name, digest in plan[\"prior_neural_hashes\"].items():\n    assert ref(REPO / \"src/demosaic\" / name)[\"sha256\"] == digest\nbaseline = read(preparation[\"V161_metric_audit\"][\"path\"])\nresult = baseline[\"result\"][\"contents\"]\nassert ref(baseline[\"result\"][\"path\"])[\"sha256\"] == baseline[\"result\"][\"sha256\"]\nassert len(result[\"rows\"]) == 822 and result[\"common_original_scalar_checks\"] == 8038 and result[\"maximum_original_scalar_difference\"] == 0\nlive = read(preparation[\"live_trace_audit\"][\"path\"])\nfor key in [\"training_journal_prefix\", \"training_event_journal_prefix\"]:\n    binding = live[key]\n    with Path(binding[\"path\"]).open(\"rb\") as stream:\n        assert hashlib.sha256(stream.read(binding[\"bytes\"])).hexdigest() == binding[\"sha256\"]\nrejections = read(preparation[\"trace_auditor_rejection_checks\"][\"path\"])\nassert len(rejections[\"cases\"]) == 8 and not rejections[\"original_rows_modified\"] and not rejections[\"original_events_modified\"]\ndocuments = [REPO / name for name in [\"README.md\", \"docs/index.md\", \"docs/current-model.md\", \"docs/research.md\", \"docs/experiments.md\", \"docs/fresh-noise-matching.md\", \"diary/2026-11-07-18-18-28-v175-comparison-audits.md\"]]\nlinks = 0\nfor document in documents:\n    for target in re.findall(r\"!?\\[[^\\]]*\\]\\(([^)]+)\\)\", document.read_text()):\n        if \"://\" in target or target.startswith(\"#\"):\n            continue\n        assert (document.parent / target.split(\"#\")[0]).resolve().is_file(), (document, target)\n        links += 1\nowner = read(ROOT / \"train-launch-v1.json\")[\"owner\"]\nprocess = psutil.Process(owner[\"pid\"])\nassert process.create_time() == owner[\"created\"] and process.status() not in [psutil.STATUS_ZOMBIE, psutil.STATUS_DEAD]\nstatus = read(ROOT / \"train-status-v1.json\")\nwatch = read(REPO / \"docs/results/v175-completion-watch-preparation-v1.json\")\nwatch_owner = watch[\"owner\"]\nwatch_process = psutil.Process(watch_owner[\"pid\"])\nassert watch_process.create_time() == watch_owner[\"created\"] and watch_process.status() not in [psutil.STATUS_ZOMBIE, psutil.STATUS_DEAD]\nassert ref(watch[\"source_freeze\"][\"contents\"][\"worker\"][\"path\"]) == watch[\"source_freeze\"][\"contents\"][\"worker\"]\nassert len(watch[\"source_freeze\"][\"contents\"][\"owner_liveness_cases\"]) == 8\n\noutput = REPO / \"docs/results/v175-postprocess-preparation-verification-v2.json\"\nwrite_once(output, dict(status=\"pass-published-postprocess-sources-baseline-prefix-bindings-and-document-links\",\n    observed_unix_UTC=time.time(), preparation=ref(preparation_path), postprocess_inputs=ref(ROOT / \"postprocess-inputs-v1.json\"),\n    frozen_postprocessing_sources=18, compiled_Python_sources=17, prior_neural_files_unchanged=96,\n    old_V161_prediction_arrays=822, old_V161_common_scalars_exact=8038,\n    shared_trace_validator_live_rows=live[\"continuation_rows\"], corruption_rejections=8,\n    journal_prefix_hashes_still_exact=True, document_links_checked=links,\n    documents={str(path): ref(path) for path in documents}, training_owner=owner,\n    owner_confirmed_live=True, observed_training_status=status, completion_watcher_owner=watch_owner, completion_watcher_confirmed_live=True, candidate_quality_not_yet_created=not (ROOT / \"scores-v1.json\").exists(),\n    new_neural_forwards=0, new_sensor_noise_draws=0, source=source(__file__),\n    scope=\"Preparation and partial execution proof while training is live. Final9000-row training,822-case endpoint quality,new RGB pixels and actual viewing are not yet complete. Source/label/baseline/old-native metadata checks do not substitute for those later checks. Owner liveness applies only to this timestamp.\"))\nprint(\"PASS18 frozen sources;822 old V161 arrays/8038 exact scalars;live-prefix byte hashes;\", links, \"links;training owner live\")\n"
+  },
+  "scope": "Preparation and partial execution proof while training is live. Final9000-row training,822-case endpoint quality,new RGB pixels and actual viewing are not yet complete. Source/label/baseline/old-native metadata checks do not substitute for those later checks. Owner liveness applies only to this timestamp."
+}

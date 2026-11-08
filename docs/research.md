@@ -10,6 +10,16 @@ and 54 focused tests pass. Its budget, fresh realizations and reheated learning
 rate change together; individual effects are not isolated. Training has
 launched, quality is pending, and V172 remains the matching baseline.
 
+The final comparison now includes all 822 saved V161 EMA outputs, re-reduced on
+identical inputs/parents/ROIs and current metric bytes. All 8,038 comparable old
+scalars reproduce exactly without inference: 5.240% GT mesh response, with
+quiet RMS 4.616/7.061 DN16 and full-flat RMS 19.024/24.867 DN16. The stronger
+learned detail option and its quiet/flat costs remain explicit.
+[Baseline audit](results/v175-V161-baseline-metric-audit-v1.json).
+The [prepared postprocessing](results/v175-postprocess-preparation-v1.json)
+uses the existing V172 label-corrected scores and freezes nine-method tables,
+60 native figures and strict exports before any new candidate quality.
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions: six observed coarsest p90 distances are about
 90.7 native pixels versus 12.04 for V172. EMA quiet total RMS falls

@@ -1,0 +1,60 @@
+{
+  "status": "pass-shared-final-trace-validator-on-actual-live-prefix",
+  "observed_unix_UTC": 1794103861.096841,
+  "owner": {
+    "pid": 274124,
+    "created": 1794102724.04
+  },
+  "owner_confirmed_live": true,
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/plan-v1.json",
+    "sha256": "fd297555af23e0affc0a5788b90f0657f81139d116b600983e3747361dea1840"
+  },
+  "continuation_rows": 512,
+  "last_total_row": 1512,
+  "new_updates": 456,
+  "ADC_skips": 56,
+  "fresh_sensor_batches": 454,
+  "cached_noisy_batches": 2,
+  "matching_counts": {
+    "wrapper": 456,
+    "frozen": 456,
+    "network": 456,
+    "sampler": 2280
+  },
+  "parent_counts_including_two_replays": {
+    "parent": 456,
+    "DINO": 456
+  },
+  "FP32_loss_totals_checked": 456,
+  "maximum_loss_total_difference": 0.0,
+  "inherited_clean_masks_checked": 456,
+  "observed_parent_argument_fingerprints_checked": 2270,
+  "training_forward_events_checked": 1820,
+  "unique_fresh_sensor_seeds": 454,
+  "training_journal_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/train-trace-v1.jsonl",
+    "bytes": 1539740,
+    "sha256": "e5712f66cb949e1d8de392d1d02e4f6d72a154e90f54a99f642b0ba202848200"
+  },
+  "training_event_journal_prefix": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2/train-forward-events-v1.jsonl",
+    "bytes": 312959,
+    "sha256": "fc19c268fbd5fae0c9fccd20030115bb2901f78ebea0c86fa3ce8b3167c3fee5"
+  },
+  "sources": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/live-v175-trace-audit-v1.py",
+      "sha256": "30cacb3aa927295f0874fc492d97025ce1e27f4409f117bf4c0fdc52ae82f0ff",
+      "text": "\"\"\"Exercise the final trace validator on a complete, timestamped live prefix.\"\"\"\n\nimport hashlib\nimport json\nimport time\nfrom pathlib import Path\n\nimport psutil\nfrom train_directional_bank_trial import guard, read, ref, save\nfrom v175_training_trace_audit import validate_trace\n\nrepo = Path(\"/home/dllu/proj/demosaic\")\nroot = repo / \".cache/quality-20261107/V175-fresh-noise-matching-v2\"\noutput = repo / \"docs/results/v175-continuation-trace-audit-v1.json\"\nassert not output.exists()\nplan = read(root / \"plan-v1.json\")\nguard(plan)\nowner = read(root / \"train-launch-v1.json\")[\"owner\"]\nprocess = psutil.Process(owner[\"pid\"])\nassert process.create_time() == owner[\"created\"] and process.status() not in [psutil.STATUS_ZOMBIE, psutil.STATUS_DEAD]\nraw = (root / \"train-trace-v1.jsonl\").read_bytes()\ntrace_bytes = raw[:raw.rfind(b\"\\n\") + 1]\ntrace = [json.loads(s) for s in trace_bytes.splitlines()]\nlast = trace[-1][\"step\"]\nevent_raw = (root / \"train-forward-events-v1.jsonl\").read_bytes()\nevent_lines = event_raw[:event_raw.rfind(b\"\\n\") + 1].splitlines(keepends=True)\nevent_bytes = b\"\".join(line for line in event_lines if json.loads(line)[\"step\"] <= last)\nevents = [json.loads(s) for s in event_bytes.splitlines()]\ncache = read(plan[\"cache\"][\"path\"])[\"batches\"]\nunits = read(plan[\"pair_units\"][\"path\"])[\"rows\"]\neligible = read(plan[\"clean_sensor_preflight\"][\"path\"])[\"rows\"]\nold = read(plan[\"initial_training\"][\"path\"])[\"trace\"]\naudit = validate_trace(trace, cache, units, eligible, old, events, plan)\nassert len(trace) > 100 and audit[\"updates\"] > 90\nassert psutil.Process(owner[\"pid\"]).create_time() == owner[\"created\"]\nsave(output, dict(status=\"pass-shared-final-trace-validator-on-actual-live-prefix\",\n    observed_unix_UTC=time.time(), owner=owner, owner_confirmed_live=True,\n    plan=ref(root / \"plan-v1.json\"), continuation_rows=len(trace), last_total_row=last,\n    new_updates=audit[\"updates\"], ADC_skips=audit[\"skips\"], fresh_sensor_batches=audit[\"fresh\"], cached_noisy_batches=audit[\"cached\"],\n    matching_counts=audit[\"counts\"], parent_counts_including_two_replays=audit[\"parent_counts\"],\n    FP32_loss_totals_checked=audit[\"totals\"], maximum_loss_total_difference=audit[\"maximum_difference\"],\n    inherited_clean_masks_checked=audit[\"masks\"], observed_parent_argument_fingerprints_checked=audit[\"observed_arguments\"],\n    training_forward_events_checked=len(events), unique_fresh_sensor_seeds=len(audit[\"seeds\"]),\n    training_journal_prefix=dict(path=str(root / \"train-trace-v1.jsonl\"), bytes=len(trace_bytes), sha256=hashlib.sha256(trace_bytes).hexdigest()),\n    training_event_journal_prefix=dict(path=str(root / \"train-forward-events-v1.jsonl\"), bytes=len(event_bytes), sha256=hashlib.sha256(event_bytes).hexdigest()),\n    sources=[dict(ref(p), text=p.read_text()) for p in [Path(__file__), repo / \".cache/v175_training_trace_audit.py\"]],\n    new_neural_forwards=0, new_sensor_noise_draws=0,\n    scope=\"Partial actual live training,not final performance or completed training. The same validator will check the final9000-row stream. Prefix byte lengths/hashes bind exactly the complete rows/events observed;later appends do not invalidate those prefixes. Fresh arrays outside the seven saved batches are streamed fingerprints,not independently reconstructed full arrays. No sensor noise regenerated or model/parent/DINO/sampler calls repeated. Owner liveness is timestamp-specific.\"))\nprint(\"PASS shared validator on\", len(trace), \"live rows,\", audit[\"updates\"], \"updates,\", audit[\"fresh\"], \"fresh batches;zero extra inference/noise\")\n"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/v175_training_trace_audit.py",
+      "sha256": "0f0e15e856fdbe869d62b780ade1ffcc9c5f4e982b8d8569b448593ad3c7b426",
+      "text": "\"\"\"Audit actual continuation rows/events without regenerating noise or running a model.\"\"\"\nimport hashlib\nimport math\nfrom collections import Counter\nimport numpy as np\n\n\ndef validate_trace(trace, cache, units, eligible, old, events, plan):\n    counts = dict(wrapper=0, frozen=0, network=0, sampler=0)\n    parent_counts = dict(parent=2, DINO=2)\n    cursor = updates = skips = fresh = cached = totals = masks = observed_arguments = 0\n    poisson = gaussian = 0\n    domains = Counter()\n    seeds = set()\n    maximum_difference = 0.0\n    \n    \n    def event(name, step):\n        nonlocal cursor\n        value = events[cursor]\n        cursor += 1\n        assert value[\"event\"] == name and value[\"step\"] == step\n        return value\n    \n    \n    for row_number, row in enumerate(trace, 1):\n        index = (row_number - 1) % 1000\n        item, permitted = cache[index], eligible[index]\n        assert row[\"continuation_row\"] == row_number and row[\"step\"] == 1000 + row_number\n        assert row[\"cache_step\"] == index + 1 and row[\"scene_pass\"] == 1 + (row_number - 1) // 1000\n        assert row[\"original_batch\"] == item[\"arrays\"] and row[\"original_parent\"] == item[\"parent\"]\n        assert row[\"noisy\"] == permitted[\"noisy\"] and row[\"fresh_noise_eligible\"] == permitted[\"fresh_noise_eligible\"]\n        assert row[\"domain\"] == item[\"metadata\"][\"domain\"]\n        domains[row[\"domain\"]] += 1\n        progress = max(0, row_number - 100) / 8900\n        lr = 0.0001 * min(1, row_number / 100) * (0.1 + 0.9 * (1 + math.cos(math.pi * progress)) / 2)\n        assert lr == row[\"lr\"]\n        if not row[\"noisy\"]:\n            skips += 1\n            assert \"terms\" not in row and \"sensor_draw\" not in row\n            assert row[\"skipped\"].startswith(\"ADC row retained\")\n            assert row[\"updates\"] == updates and row[\"counts\"] == counts and row[\"parent_counts\"] == parent_counts\n            continue\n        for key in item[\"inputs\"]:\n            if key not in [\"packed\", \"variance\"]:\n                assert row[\"inputs\"][key] == item[\"inputs\"][key]\n        if row[\"fresh_noise_eligible\"]:\n            fresh += 1\n            token = f\"V175-fresh-sensor:17501:{row_number}:{index + 1}\".encode()\n            seed = int.from_bytes(hashlib.sha256(token).digest()[:8], \"little\") % 2**63\n            assert row[\"sensor_draw\"][\"seed\"] == seed and seed not in seeds\n            seeds.add(seed)\n            expected_poisson = 3 if len(units[index][\"candidate_units_FP32\"]) else 1\n            assert row[\"sensor_draw\"] == dict(seed=seed, Poisson_calls=expected_poisson, Gaussian_calls=1, ADC_reused=False)\n            poisson += expected_poisson\n            gaussian += 1\n            assert row[\"actual_parent_inputs\"] == {\n                k: row[\"inputs\"][k] for k in [\"packed\", \"variance\", \"colors\", \"wb\", \"matrix\"]\n            }\n            observed_arguments += 5\n            assert event(\"before-parent\", row[\"step\"])[\"parent_counts\"] == parent_counts\n            parent_counts = {k: v + 1 for k, v in parent_counts.items()}\n            returned = event(\"returned-parent\", row[\"step\"])\n            assert returned[\"parent_counts\"] == parent_counts and returned[\"values\"] == row[\"parent_values\"]\n        else:\n            cached += 1\n            assert row[\"cache_step\"] in [65, 358, 543]\n            assert row[\"sensor_draw\"][\"seed\"] is None and row[\"sensor_draw\"][\"Poisson_calls\"] == row[\"sensor_draw\"][\"Gaussian_calls\"] == 0\n            assert row[\"inputs\"] == item[\"inputs\"] and row[\"parent_values\"] == item[\"parent_values\"]\n        assert event(\"before-matching\", row[\"step\"])[\"counts\"] == counts\n        updates += 1\n        counts = dict(wrapper=updates, frozen=updates, network=updates, sampler=5 * updates)\n        returned = event(\"returned-matching\", row[\"step\"])\n        assert returned[\"counts\"] == counts and returned[\"frozen_values\"][\"shape\"] == row[\"inputs\"][\"target\"][\"shape\"]\n        assert row[\"counts\"] == counts and row[\"parent_counts\"] == parent_counts and row[\"updates\"] == updates\n        terms = {k: np.float32(v) for k, v in row[\"terms\"].items()}\n        value = np.float32(terms[\"pixel\"] + np.float32(0.25) * terms[\"gradient\"])\n        for term in [terms[\"local_regret\"], terms[\"DC_regret\"], np.float32(0.25) * terms[\"flat_anchor\"], terms[\"pair_difference\"], terms[\"pair_common\"]]:\n            value = np.float32(value + term)\n        expected = float(np.float32(np.float32(plan[\"domain_weights\"][row[\"domain\"]]) * value))\n        difference = abs(expected - row[\"loss\"])\n        assert difference == 0\n        maximum_difference = max(maximum_difference, difference)\n        totals += 1\n        assert row[\"flat_mask\"] == old[index][\"flat_mask\"] and row[\"flat_eligible_pixels\"] == old[index][\"flat_eligible_pixels\"]\n        masks += 1\n    assert cursor == len(events)\n    return dict(counts=counts, parent_counts=parent_counts, updates=updates, skips=skips, fresh=fresh, cached=cached,\n                totals=totals, masks=masks, observed_arguments=observed_arguments, poisson=poisson, gaussian=gaussian,\n                domains=domains, seeds=seeds, maximum_difference=maximum_difference, cursor=cursor)\n"
+    }
+  ],
+  "new_neural_forwards": 0,
+  "new_sensor_noise_draws": 0,
+  "scope": "Partial actual live training,not final performance or completed training. The same validator will check the final9000-row stream. Prefix byte lengths/hashes bind exactly the complete rows/events observed;later appends do not invalidate those prefixes. Fresh arrays outside the seven saved batches are streamed fingerprints,not independently reconstructed full arrays. No sensor noise regenerated or model/parent/DINO/sampler calls repeated. Owner liveness is timestamp-specific."
+}

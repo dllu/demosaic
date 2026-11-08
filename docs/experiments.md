@@ -15,6 +15,21 @@ Both endpoints/all 822 cases/native crops remain scheduled; quality is unmeasure
 [Preparation](results/v175-fresh-noise-matching-preparation-v2.json) ·
 [Actual frozen-worker readiness](results/v175-frozen-worker-readiness-v1.json).
 
+While V175 trains, an array-only reduction checks all 822 old V161 EMA outputs
+on identical current inputs/parents/ROIs and metric bytes. All 8,038 common
+scalars match exactly with no neural/noise calls. The stronger 5.240%-of-GT
+detail baseline and its quiet/flat costs enter the final nine-method tables.
+The shared final training auditor passes on an actual 512-row prefix
+(456 updates/454 fresh batches/1,820 events) and rejects eight corrupted copies.
+Postprocessing sources, 378 table cells, 60 native figures and strict publication
+checks are frozen before candidate quality; V172 uses its existing audited
+label-only view. The local publication forecast rises from 0.2 to 0.4 GiB,
+preserving earlier guards and receipt bytes.
+[Postprocessing preparation](results/v175-postprocess-preparation-v1.json) ·
+[V161 array audit](results/v175-V161-baseline-metric-audit-v1.json) ·
+[Partial trace audit](results/v175-continuation-trace-audit-v1.json) ·
+[Corruption rejection checks](results/v175-trace-auditor-rejection-checks-v1.json).
+
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 changes only five existing offset bias vectors/60 scalar values at V172's model,
 loss and cached inputs. Six observed coarsest p90 sample distances remain about
