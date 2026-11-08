@@ -119,6 +119,41 @@ human notes, final report or exports. Eight CPU owner-status checks include
 PID reuse, terminal states and transient-error propagation.
 [Watcher source, launch and observed live state](results/v175-completion-watch-preparation-v1.json).
 
+## Four-pass training losses
+
+A posthoc reduction of the already audited first four continuation passes
+finds **small changes in recorded detail losses**. The table compares means
+over the same clean scene rows in passes 1 and 4; these are the changing raw
+model's losses before each update, not evaluations of a fixed checkpoint.
+Fresh noise, model state and learning rate change together. Three noisy photo
+rows retain their original observations. No inference or noise is repeated.
+
+| Domain | Updates/pass | Pair-difference mean, pass 1 → 4 | Flat-anchor change | Total loss change | Pre-clip norm >1, pass 1 → 4 |
+|---|---:|---:|---:|---:|---:|
+| Mesh | 307 | 0.189039 → 0.188861 (−0.094%) | +0.071% | −0.204% | 59.61% → 46.91% |
+| Weak texture | 99 | 0.247964 → 0.248109 (+0.059%) | −0.237% | −0.039% | 52.53% → 45.45% |
+| Photo | 214 | 0.314902 → 0.315394 (+0.156%) | +4.797% | +0.156% | 9.81% → 9.81% |
+| Flat | 141 | No pairs | −0.558% | −0.387% | 1.42% → 0.71% |
+| Mixed edge/quiet | 139 | No pairs | −0.976% | −0.589% | 0% → 0% |
+
+The flat-anchor term integrates a clean-target mask and pseudo-Huber error in
+fixed 16-DN16 units. Its mean includes all image elements, so it is neither
+flat-region RMS nor a sky score. Its rise on photo batches contrasts with the
+fall on standalone flats; one aggregate training total cannot establish both
+detail preservation and flat behavior. Reported gradient norms also differ
+substantially across domains. Scalar term shares do not establish gradient or
+Adam-update contributions, and batch losses mix multiple image contrasts.
+
+The reduction checks all 3,600 FP32 totals exactly and 350 means with independent
+Decimal arithmetic. It retains every pass/domain/term summary and paired-row
+change counts; repeated scenes and coupled members are correlated, with no
+significance or generalization claim. This is descriptive training evidence,
+not a new quality result or a reason to select a checkpoint early. The fixed
+training recipe continues; final raw/EMA detail, blank, quiet, flat and real
+fence/sky comparisons will determine useful gains and costs.
+[All reductions and exact source](results/v175-four-pass-training-loss-v1.json) ·
+[Reducer](../scripts/summarize_fresh_noise_prefix.py).
+
 ## Quality and protected scenes
 
 Both final endpoints will complete all 822 fixed cached inputs, with 1,644 exact

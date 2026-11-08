@@ -1,59 +1,43 @@
 # Documentation guide
 
-V178's [independent audit preparation](phase-evidence-training.md#independent-audit-preparation)
-adds 34 CPU checks and sealed training/state/native-array validators. Old-record
-fixtures pass; actual V178 audits and quality remain pending behind training.
+Start with [current model choices](current-model.md). **V120 Small remains the
+general recommendation** with broad photo/camera and complete 102MP RGB16
+checks. For fine dark detail and sky, compare [V172 local-noise matching](local-noise-matching.md),
+the stronger [V161 detail prototype](harmonic-frequency-context.md),
+[V171 standalone-flat strength](learned-matching-residual.md), and the
+[V173](weak-gradient-matching.md)/[V174](spread-sample-matching.md) quiet gains.
+Their remaining weaknesses differ; none combines strong mesh recovery and
+clean quiet fields. The latest completed
+[native-pixel viewer](images/v174-spread-matching-v1/native-viewer.html) retains
+both protected GFX scenes and the earlier useful comparators.
 
-The [V178 matched training/review draft](phase-evidence-training.md) preserves
-V172's real 900-step Adam/EMA history in both arms and starts only the new adapter
-at zero optimizer history. Thirteen state tests, actual checkpoint checks,
-frozen entry gates and a 72-figure baseline-pixel renderer fixture pass. A CPU
-controller waits for CUDA admission; training/quality remain pending. V175's
-separate real row-5,000 checkpoint has 4,500 total updates and passes its
-four-pass CPU trace/state audit.
+[V175 fresh-noise training](fresh-noise-matching.md) continues from V172's actual
+raw/Adam/EMA history for 8,100 more updates. Its first four passes have exact
+checkpoint/trace checks, but [recorded detail losses move little](fresh-noise-matching.md#four-pass-training-losses).
+Those moving-model training scalars are not final image quality. The final
+nine-method comparison includes V161's stronger detail and its quiet/flat costs;
+all 822 old V161 arrays reproduce 8,038 common metrics without inference.
+[Final comparison preparation](results/v175-postprocess-preparation-v1.json) ·
+[V161 baseline audit](results/v175-V161-baseline-metric-audit-v1.json).
 
-The [V178 CUDA admission](phase-evidence-admission.md) is frozen and its CPU
-watcher is live, waiting for V175's train/review/completion owners and completed
-audits/render. All 18 protocol checks and actual frozen-entry/import checks pass.
-The planned 32 component calls, real gradients/checkpoint restoration and native
-ADC invariants have not run yet; no V178 trained-quality gain is claimed.
+The [V178 phase-evidence variant](phase-evidence-matching.md) is implemented
+and untrained. Its zero 3,120-weight adapter exposes 80 measured-wave maps to
+matching. [CUDA admission](phase-evidence-admission.md) waits behind V175's
+complete pipeline; the [matched continuation](phase-evidence-training.md)
+preserves both arms' real optimizer/EMA history. Native renderer fixtures use
+old pixels and are explicitly labeled. The
+[independent CPU auditor](phase-evidence-training.md#independent-audit-preparation)
+is implemented; actual V178 admission, training and quality remain pending.
+These preparation results do not change the measured model choices.
 
-The [V178 phase-evidence matching variant](phase-evidence-matching.md) adds
-80 measured-wave coordinates through a zero 3,120-parameter adapter. All 68 CPU
-checks pass, both V172 states load with 188 existing tensors exact, and native
-feature checks cover 18 cached training/sky/cab images without resizing or
-reference reads. CUDA admission, training and image quality remain pending;
-the active V175 recipe and current model recommendations are unchanged.
-
-The [V177 CFA phase-split diagnostic](phase-frequency-evidence.md) selects
-frequencies from one green RAW phase and measures the other. Primary nominal
-power≥16 occurs in 170/614 present and 0/614 matched absent training cases;
-power≥4 admits six absent cases, or 71 when considering eight candidates.
-Thirty-three CPU tests and independent QR/DFT checks pass. This suggests a
-continuous model feature, with no restoration or calibrated flat-safety claim.
-
-The [V176 conditional-template diagnostic](mesh-template-evidence.md) finds
-substantially more evidence across larger areas of the 614 noisy training mesh
-pairs: green median known-template SNR rises from 0.653 at native16 to 7.360 at
-native512. Exact hidden template/background/variances are supplied, so this
-does not establish input-only recovery or flat safety. All pairs, 16 CPU tests
-and an independent QR check are complete; no new model or restored RGB is made.
-
-The [V175 fresh-noise continuation](fresh-noise-matching.md) has launched from
-V172's actual raw model/Adam/EMA states. It plans 8,100 further updates, with
-8,073 fresh sensor batches and exact new frozen V143/DINO parents; three clipped
-photo rows per pass retain their old observations. All 1,000 scene bindings and
-54 focused CPU tests pass. The corrected frozen worker also passes actual
-imports and strict CPU parent/matching loads. Quality remains pending.
-[Preparation and preserved rejections](results/v175-fresh-noise-matching-preparation-v2.json) ·
-[Frozen-worker readiness](results/v175-frozen-worker-readiness-v1.json).
-
-[Final comparison/audit preparation](results/v175-postprocess-preparation-v1.json)
-is frozen before V175 quality. It includes all 822 saved V161 EMA outputs;
-8,038 common scalars reproduce exactly in the
-[current-metric baseline audit](results/v175-V161-baseline-metric-audit-v1.json).
-The shared training auditor passes on 512 actual live rows and rejects eight
-corrupted copies; this remains partial execution evidence, not model quality.
+The [V176 template diagnostic](mesh-template-evidence.md) finds substantially
+more conditional evidence over larger areas, using hidden GT templates.
+[V177 phase-split selection](phase-frequency-evidence.md) instead selects from
+one green RAW phase and measures the other. It motivates continuous evidence
+features, with missed patterns and overlapping noisy tails; neither diagnostic
+establishes restoration quality or calibrated flat safety. Exact source,
+checks and preserved decisions are linked from their reports and the
+[timestamped diary](../diary/index.md).
 
 The [completed V174 spread-sampling experiment](spread-sample-matching.md)
 retains wide matching positions, with six observed coarsest p90 distances about

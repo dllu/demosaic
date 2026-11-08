@@ -1,0 +1,144 @@
+{
+  "status": "pass-training-loss-source-prefix-doc-links-and-unchanged-live-owners",
+  "recorded_local": "2026-11-07T21:23:26.103363-08:00",
+  "reduction": {
+    "path": "/home/dllu/proj/demosaic/docs/results/v175-four-pass-training-loss-v1.json",
+    "sha256": "af9778ce78c136b094c56e13dd7115e785604b70d43480e044144d1101230ad2"
+  },
+  "prefix_hash_checked": true,
+  "documents": [
+    {
+      "path": "/home/dllu/proj/demosaic/README.md",
+      "sha256": "54bc010526b78422c5ea6473508d9de23c35968c8280718f6acda46e5cfdcc8a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/index.md",
+      "sha256": "efd6288f462693223dd43d69ca3e3c5bc1549a17e178e22acc0b6ee0a344d29d"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/experiments.md",
+      "sha256": "d03a7f365681bf75abb7f7910dcd079423eff322b6c8e0340ecc1e6d1e50810c"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/research.md",
+      "sha256": "d7bd4a3f539f417539085c4bbdb03450d5c96006b3bb1b814fb5d12375bd197e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/docs/fresh-noise-matching.md",
+      "sha256": "9cb1f03a3af3cc78b35668d2d0f45937be289377764ef248d25279933e17ae90"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/diary/2026-11-07-21-20-24-fresh-noise-training-loss-prefix.md",
+      "sha256": "8fc987e8fc7d2542eab765e305617b67ae5d3134ad61bbfe3382f6e02182f358"
+    }
+  ],
+  "local_links_checked": 497,
+  "training_table_tokens_checked": 6,
+  "original_neural_sources_unchanged": 96,
+  "current_neural_files_exact_trial_snapshot": 97,
+  "sealed_V175_helpers_unchanged": 18,
+  "observed_live_owners": [
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2",
+      "owner": {
+        "pid": 274124,
+        "created": 1794102724.04
+      },
+      "status": {
+        "status": "training",
+        "owner": {
+          "pid": 274124,
+          "created": 1794102724.04
+        },
+        "step": 6350,
+        "continuation_row": 5350,
+        "updates": 4812,
+        "total_updates": 5712,
+        "skipped": 538,
+        "fresh_batches": 4796,
+        "cached_noisy_batches": 16,
+        "counts": {
+          "wrapper": 4812,
+          "frozen": 4812,
+          "network": 4812,
+          "sampler": 24060
+        },
+        "parent_counts": {
+          "parent": 4798,
+          "DINO": 4798
+        },
+        "peak_CUDA_bytes": 7075942912
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V175-fresh-noise-matching-v2",
+      "owner": {
+        "pid": 287357,
+        "created": 1794104682.2
+      },
+      "status": {
+        "status": "waiting-for-train",
+        "owner": {
+          "pid": 287357,
+          "created": 1794104682.2
+        },
+        "observed_unix_UTC": 1794115393.7191255,
+        "worker_owner": {
+          "pid": 274124,
+          "created": 1794102724.04
+        }
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-admission-v1",
+      "owner": {
+        "pid": 417389,
+        "created": 1794110449.65
+      },
+      "status": {
+        "status": "waiting-for-train-owner",
+        "owner": {
+          "pid": 417389,
+          "created": 1794110449.65
+        },
+        "observed_unix_UTC": 1794115400.5675538,
+        "dependency": {
+          "ready": false,
+          "reason": "waiting-for-train-owner",
+          "owner": {
+            "pid": 274124,
+            "created": 1794102724.04
+          }
+        }
+      }
+    },
+    {
+      "root": "/home/dllu/proj/demosaic/.cache/quality-20261107/V178-phase-evidence-trial-v1",
+      "owner": {
+        "pid": 453410,
+        "created": 1794113512.6
+      },
+      "status": {
+        "status": "waiting-for-CUDA-admission-watch-owner",
+        "owner": {
+          "pid": 453410,
+          "created": 1794113512.6
+        },
+        "observed_unix_UTC": 1794115402.9095778,
+        "target": {
+          "pid": 417389,
+          "created": 1794110449.65
+        }
+      }
+    }
+  ],
+  "new_neural_forwards": 0,
+  "new_sensor_draws": 0,
+  "new_checkpoint_loads": 0,
+  "scope": "Publication hashes/bindings/text checks only. Actual loss reduction independently checks350 means/3600 totals and is descriptive training data,not model quality. Process liveness is timestamp-specific. No training or queued recipe changes.",
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/check-v175-loss-prefix-publication-v1.py",
+    "sha256": "f12a8cf50028cd5f2600e9c933d431eba3704b7306782bf557caeb7e07377d13",
+    "text": "\"\"\"Verify published loss means, document links and the unchanged running recipe.\"\"\"\nimport datetime\nimport hashlib\nimport json\nfrom pathlib import Path\nimport re\nfrom zoneinfo import ZoneInfo\n\nimport psutil\n\nREPO=Path('/home/dllu/proj/demosaic')\nROOT=REPO/'.cache/quality-20261107/V175-fresh-noise-matching-v2'\n\n\ndef read(p):return json.loads(Path(p).read_text())\ndef ref(p):\n p=Path(p).absolute();return dict(path=str(p),sha256=hashlib.sha256(p.read_bytes()).hexdigest())\n\n\ndef main():\n result_path=REPO/'docs/results/v175-four-pass-training-loss-v1.json'\n result=read(result_path)\n assert result['status']=='completed-descriptive-four-pass-training-loss-reduction-not-quality'\n assert result['continuation_rows']==4000 and result['noisy_updates']==3600\n assert result['independent_Decimal_mean_checks']==350 and result['exact_FP32_loss_totals_rechecked']==3600\n assert all(result[k]==0 for k in ['neural_forwards','checkpoint_loads','optimizer_updates','sensor_draws'])\n assert not result['Torch_imported'] and not result['rawpy_imported']\n assert ref(result['source']['path'])=={k:result['source'][k] for k in ['path','sha256']}\n assert Path(result['source']['path']).read_text()==result['source']['text']\n binding=result['journal_prefix']\n with Path(binding['path']).open('rb') as stream:data=stream.read(binding['bytes'])\n assert len(data)==binding['bytes'] and hashlib.sha256(data).hexdigest()==binding['sha256']\n assert len(result['groups'])==20 and len(result['first_to_fourth_paired_reductions'])==50\n plan=read(ROOT/'plan-v1.json');assert ref(ROOT/'plan-v1.json')==result['plan']\n assert len(plan['prior_neural_hashes'])==96\n for name,digest in plan['prior_neural_hashes'].items():assert ref(REPO/'src/demosaic'/name)['sha256']==digest\n post=read(ROOT/'postprocess-inputs-v1.json')\n for binding in post['helpers']:assert ref(binding['path'])==binding\n assert len(post['helpers'])==18\n trial=ROOT.parent/'V178-phase-evidence-trial-v1';draft=read(trial/'draft-v1.json')\n neural=list((REPO/'src/demosaic').glob('*.py'));assert len(neural)==97\n for path in neural:assert path.read_bytes()==(Path(draft['work'])/'src/demosaic'/path.name).read_bytes()\n owners=[]\n for folder,launch,status in [(ROOT,'train-launch-v1.json','train-status-v1.json'),\n   (ROOT,'completion-watch-launch-v1.json','completion-watch-status-v1.json'),\n   (ROOT.parent/'V178-phase-evidence-admission-v1','watch-launch-v1.json','watch-status-v1.json'),\n   (trial,'controller-launch-v1.json','controller-status-v1.json')]:\n  owner=read(folder/launch)['owner'];p=psutil.Process(owner['pid'])\n  assert p.create_time()==owner['created'] and p.status() not in ['dead','zombie']\n  assert not list(folder.glob('*failure-v1.json'))\n  owners.append(dict(root=str(folder),owner=owner,status=read(folder/status)))\n docs=[REPO/name for name in ['README.md','docs/index.md','docs/experiments.md','docs/research.md',\n       'docs/fresh-noise-matching.md','diary/2026-11-07-21-20-24-fresh-noise-training-loss-prefix.md']]\n links=0\n for path in docs:\n  for link in re.findall(r'\\]\\(([^)]+)\\)',path.read_text()):\n   if link.startswith(('http:','https:','mailto:','#')):continue\n   assert (path.parent/link.split('#')[0]).resolve().exists(),(path,link)\n   links+=1\n prose=(REPO/'docs/fresh-noise-matching.md').read_text()\n for token in ['0.189039 \u2192 0.188861 (\u22120.094%)','0.247964 \u2192 0.248109 (+0.059%)',\n               '0.314902 \u2192 0.315394 (+0.156%)','\u22120.558%','+4.797%','59.61% \u2192 46.91%']:\n  assert token in prose\n output=REPO/'docs/results/v175-four-pass-training-loss-publication-v1.json'\n proof=dict(status='pass-training-loss-source-prefix-doc-links-and-unchanged-live-owners',\n  recorded_local=datetime.datetime.now(ZoneInfo('America/Los_Angeles')).isoformat(),\n  reduction=ref(result_path),prefix_hash_checked=True,documents=[ref(p) for p in docs],\n  local_links_checked=links,training_table_tokens_checked=6,\n  original_neural_sources_unchanged=96,current_neural_files_exact_trial_snapshot=97,\n  sealed_V175_helpers_unchanged=18,observed_live_owners=owners,\n  new_neural_forwards=0,new_sensor_draws=0,new_checkpoint_loads=0,\n  scope='Publication hashes/bindings/text checks only. Actual loss reduction independently checks350 means/3600 totals and is descriptive training data,not model quality. Process liveness is timestamp-specific. No training or queued recipe changes.',\n  source=dict(ref(__file__),text=Path(__file__).read_text()))\n with output.open('x') as stream:json.dump(proof,stream,indent=2);stream.write('\\n')\n print('PASS loss source/prefix/table/links',links,'and four live owners; original code unchanged',flush=True)\n\n\nif __name__=='__main__':main()\n"
+  }
+}

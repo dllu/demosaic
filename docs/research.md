@@ -1,5 +1,13 @@
 # Current method research
 
+V175's [first four continuation passes](fresh-noise-matching.md#four-pass-training-losses)
+show only a 0.094% reduction in mesh pair-difference training loss; weak/photo
+pair losses rise slightly. Standalone-flat anchor falls 0.558%, while photo
+flat-anchor rises 4.797%. Noise, parameters and LR change together, and these
+are moving-model training values rather than checkpoint quality. They supply
+no basis to assume that longer training has already recovered more strands;
+the fixed final detail/flat/native comparisons remain the next decision point.
+
 The [V178 matched continuation draft](phase-evidence-training.md) compares one
 additional cached pass at the same raw/Adam/EMA starting point and budget.
 The existing 141 optimizer clocks continue from 900; the new adapter starts from 0

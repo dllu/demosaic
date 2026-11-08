@@ -1,5 +1,11 @@
 # Experiment index
 
+A [four-pass V175 training-loss reduction](fresh-noise-matching.md#four-pass-training-losses)
+finds mesh pair loss −0.094%, weak/photo pair losses +0.059%/+0.156%, and
+standalone-flat anchor −0.558%. Photo flat-anchor rises 4.797%. These are
+changing-model training means, not quality measurements. All 3,600 FP32 totals
+and 350 independent Decimal means pass; training and final review stay fixed.
+
 V178's [independent CPU audits](phase-evidence-training.md#independent-audit-preparation)
 are implemented, with 34 checks, 2,000 adapted old trace rows, eight corruption
 rejections and a real V172 checkpoint restore. These are auditor checks, not
