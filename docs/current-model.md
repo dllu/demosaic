@@ -21,11 +21,17 @@ fringes and flat ripples; constant gates lose useful correction strength, and
 matching it restores artifacts. The fourteen selected contexts are diagnostic,
 with all native comparisons retained, rather than a population quality test.
 
-[V200 scale-supported CFA waves](scale-supported-cfa-wave.md) are a follow-up
-prototype with a fresh 643-parameter head. CPU/GPU engineering checks pass and
-the matched 900-update training and full state audit are complete. Quality review
-is running; trained-quality conclusions remain pending, and
-the recommendations and measured tradeoffs above remain current.
+[V200 scale-supported CFA waves](scale-supported-cfa-wave-comparison.md) add a
+small quiet/flat alternative near V198: EMA quiet spatial RMS falls
+**0.059–0.119%** (31/32 better), fresh-flat full RMS falls **0.022–0.030%**
+(all 48 better), and mesh response falls **0.503% to 11.102% of GT**.
+Both states retain building fringes, flat/photo ripples and incomplete crossings.
+Quiet spatial RMS is still 1.092–1.527% above V195, and all fresh-flat inputs
+remain worse than V195. V198 keeps its stronger-response role; V200 offers these
+small measured quiet gains at 192 extra parameters and unbenchmarked added
+measurement cost. Both endpoints/all 822 cases, audits, two exports, 60 viewed
+figures/12 triplets and **1,680 exact seven-state browser captures** are complete.
+[Current native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html).
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 

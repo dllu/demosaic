@@ -25,22 +25,22 @@ models or population quality evidence. Next priority is stronger input-only
 local support and physical amplitude/phase agreement, while better learned
 gates remain open.
 
-The [V200 follow-up](scale-supported-cfa-wave.md) adds twelve physical RGB
-amplitude/phase agreement coordinates across 65/33/17 windows, with nominal
-fit covariance and an overlap-aware interpolation bound. These are support
-features, not calibrated confidence. All 105 prior neural files remain unchanged;
-the fresh 643-parameter head passes 34 CPU checks, eight actual anchor parities,
-seven CPU/GPU map/readout comparisons, two restored update probes and four
-strict raw/EMA state loads. The matched 900-update training is complete from V195
-with fresh clocks; the independent full training audit passes. Trained quality
-and all native comparisons remain pending.
-The [full review is running](scale-supported-cfa-quality-plan.md):
-both endpoints/all 822 cases, direct V198 raw/EMA baselines, new support bindings,
-unchanged old measurement checks, and 60 native figures/12 triplets. CPU
-metric/layout/reference preflights pass; candidate quality is still pending.
-The seven-state browser fixture passes 210 native captures / 16,128,000 exact
-RGB channels using explicitly labeled reused V198 pixels; the actual-quality
-verifier rejects it. [Training/fixture evidence](results/v200-scale-supported-cfa-training-completed-v1.json).
+The completed [V200 follow-up](scale-supported-cfa-wave-comparison.md) adds
+twelve physical RGB amplitude/phase agreement coordinates across 65/33/17
+windows, nominal covariance and an overlap-aware trace bound. EMA quiet
+spatial RMS falls **0.059–0.119%** and fresh-flat RMS **0.022–0.030%** versus
+V198 EMA, while mesh response falls **0.503% to 11.102% of GT**. Both states
+retain the building/flat/photo failures and incomplete cab crossings. This
+is a small measured quiet/response tradeoff, with 192 extra parameters; it does
+not validate the features as calibrated innovation confidence. All 107 neural
+sources retain their prepared hashes. Both endpoints/all 822 cases, full audits,
+two exports, 60 viewed figures/12 triplets and **1,680 actual browser captures**
+are complete. The earlier reused-pixel fixture remains explicitly separate.
+[Seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html) ·
+[Completed review protocol](scale-supported-cfa-quality-plan.md).
+The next useful experiment must address input-dependent edge leakage and noisy
+flat false positives while retaining faint/dark detail; cross-scale agreement
+alone did not achieve that separation in this matched trial.
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 

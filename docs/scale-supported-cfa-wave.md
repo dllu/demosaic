@@ -4,8 +4,11 @@ The [V199 gate diagnostic](cfa-wave-gate-diagnostic.md) leaves building fringes
 and false flat/photo ripples under shared RGB and positive-only gates. The next
 prototype adds **physical amplitude/phase agreement between local windows** to
 the readout, preserving V198's measured color basis and frozen V195 anchor.
-Fresh training and its independent audit are complete; full quality assessment
-and native comparisons remain pending.
+The [completed trained comparison](scale-supported-cfa-wave-comparison.md)
+finds small quiet/flat gains versus V198 with slightly lower mesh response.
+EMA quiet spatial RMS falls 0.059–0.119% and fresh-flat RMS 0.022–0.030%, while
+response falls 0.503% to 11.102% of GT. Building fringes, false ripples and
+incomplete cab crossings remain in both states.
 
 V198 already compares two green phases within each window. Its 24 context
 channels do not directly compare a color's physical fitted amplitude between
@@ -130,9 +133,11 @@ checkpoint restoration passes and continues at row nine without repeating
 earlier forwards. The independent audit passes all 1,000 trace rows, 900 loss
 totals and masks, five factored snapshots, ten raw/EMA states and 1,930 unchanged
 anchor tensor comparisons. [Completed training evidence](results/v200-scale-supported-cfa-training-completed-v1.json).
-Both endpoints/all 822 quality cases are now being evaluated. Native viewing
-and final comparison remain pending; training loss is not restoration-quality
-evidence.
+Both endpoints/all 822 quality cases, independent audits, two strict exports,
+60 actually viewed native figures/12 triplets and 1,680 exact seven-state browser
+captures are complete. All 750 old V198 measurement groups replay exactly;
+new support agrees between raw/EMA. [Quality results and limits](scale-supported-cfa-wave-comparison.md)
+separate the small quiet/flat gains from remaining response/artifact costs.
 
 The GPU check uses retained cached inputs and training-only mesh/mixed update
 probes; protected sky, cab and building inputs are parity-only. Probe snapshots
@@ -147,7 +152,7 @@ DSCF3842/3835 fine cab mesh, both cab ROIs/noise profiles and both JPEGs remain
 required qualitative checks. Their independent ISO100/AHD/JPEG references are
 not exact GT. Both capture families, JPEGs and siblings stay out of training.
 
-Current useful trained choices and their observed costs remain in the
-[V198 comparison](cfa-innovation-wave-comparison.md) and
-[model guide](current-model.md). Fine real crossings and flat safety remain
-unresolved.
+Current choices retain [V198's stronger response](cfa-innovation-wave-comparison.md)
+and [V200's small quiet/flat gains](scale-supported-cfa-wave-comparison.md),
+plus V197's lower off-signal costs and V195/V187's quieter/cleaner strengths.
+V120 Small remains the general recommendation. The combined goal remains open.

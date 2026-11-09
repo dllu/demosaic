@@ -22,12 +22,14 @@ restore artifacts. [All 46 native figures](cfa-wave-gate-diagnostic-gallery.md)
 and source-bound measurements guide the next local-support test; no new model
 quality promotion is claimed.
 
-[V200 physical cross-scale support](scale-supported-cfa-wave.md) implements
-nominal amplitude covariance and twelve bounded RGB agreement coordinates.
-CPU/GPU engineering and restoration checks pass; a fresh matched 900-update
-training and full checkpoint audit are complete. Model quality remains pending.
-The [quality review plan](scale-supported-cfa-quality-plan.md) records verified
-CPU preflights and the registered controller now running both endpoint reviews.
+[V200 physical cross-scale support](scale-supported-cfa-wave-comparison.md)
+adds small measured quiet/flat gains near V198: EMA quiet spatial RMS
+**−0.059–0.119%**, fresh-flat full RMS **−0.022–0.030%**, with mesh response
+**−0.503% to 11.102% of GT**. Building fringes, false ripples and incomplete
+fine crossings remain. Both endpoints/all 822 cases, audits, 60 viewed figures /
+12 triplets, two exports and 1,680 exact browser captures are complete.
+[Seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html) ·
+[Completed review protocol](scale-supported-cfa-quality-plan.md).
 
 See [storage maintenance](storage.md) for cache cleanup, verified consolidation
 of duplicate historical artifacts, and preservation of experiment paths/evidence.
@@ -50,7 +52,7 @@ the stronger [V161 detail prototype](harmonic-frequency-context.md),
 [V173](weak-gradient-matching.md)/[V174](spread-sample-matching.md) quiet gains.
 Their remaining weaknesses differ; none combines strong mesh recovery and
 clean quiet fields. The latest completed
-[native-pixel viewer](images/v187-pooled-wave-v1/native-viewer.html) retains
+[native-pixel viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html) retains
 both protected GFX scenes and the earlier useful comparators.
 
 The completed [V180 local-evidence comparison](local-phase-evidence-comparison.md)

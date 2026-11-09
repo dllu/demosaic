@@ -24,20 +24,17 @@ native figures/eight triplets and post-save pixel verification are complete.
 No training, full-model forward or new source/noise draw; no quality promotion.
 The next priority is input-only local support evidence.
 
-[V200 physical cross-scale support](scale-supported-cfa-wave.md): twelve
-bounded complex-amplitude agreement coordinates condition a fresh 643-parameter
-CFA readout above all 193 frozen V195 tensors. Nominal covariance and overlapping
-interpolation bounds are not innovation confidence. All 34 CPU tests, eight
-actual anchor parities, seven CPU/GPU feature/readout checks, two training-only
-update probes with strict restoration and four CPU raw/EMA state loads pass.
-The full matched 900-update training and independent audit pass; both endpoints/all 822 quality
-cases and native comparisons are still required.
-Its [frozen review preparation](scale-supported-cfa-quality-plan.md) passes
-35 receipt tests and 35 frozen-copy checks, 36 baseline metric replays, all
-822 layouts and 52 earlier GT panels. The registered controller has verified the
-full training audit and is running both endpoints. [Completed training](results/v200-scale-supported-cfa-training-completed-v1.json)
-also records a seven-state reused-pixel browser fixture with 210 exact native
-captures; no candidate-quality result or image improvement is claimed yet.
+[V200 physical cross-scale support](scale-supported-cfa-wave-comparison.md):
+twelve bounded RGB agreement coordinates and a fresh 643-parameter head give
+small quiet/flat gains versus V198. EMA quiet spatial RMS falls 0.059–0.119%
+(31/32 better) and fresh-flat full RMS 0.022–0.030% (all 48 better), while
+mesh response falls 0.503% to 11.102% of GT. Both states retain building fringes,
+flat/photo ripples and incomplete cab crossings. All 193 V195 anchor tensors
+stay frozen; covariance features omit selection/anchor correlations and remain
+uncalibrated support. Both endpoints/all 822 cases, independent audits, two
+strict exports, 60 actually viewed figures/12 triplets and the seven-state
+browser's 1,680 exact native captures are complete.
+[Full evidence](results/v200-scale-supported-cfa-wave-final-v1.json).
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 

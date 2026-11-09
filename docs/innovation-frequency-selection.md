@@ -2,7 +2,7 @@
 
 On the fixed weak-crossing mesh example 2309, **subtracting the current restoration and widening the selection band finds the missing coarse fundamental**. Its nearest selected carrier is **0.391 native DFT bins** away, versus **55.489** for RAW selection. At radius one native bin, selected carriers lie near **59.13% of region A's exact GT spectral power**, versus **0%** for RAW. Widening RAW alone does not change that result. All four views make identical selections on example 2302.
 
-This is an input-measurement diagnostic, **not a restored-image improvement or flat-safety result**. The current useful options remain [V195 Whole EMA for stronger response and V187 EMA for quieter output](directional-response-comparison.md). Missing real cab crossings and flat-field mottle remain unresolved.
+This is an input-measurement diagnostic, **not a restored-image improvement or flat-safety result**. Current useful options include [V198 for stronger periodic response](cfa-innovation-wave-comparison.md), [V200 for its small quiet/response tradeoff](scale-supported-cfa-wave-comparison.md), and [V195/V187 for cleaner-building or quieter strengths](directional-response-comparison.md). Missing real cab crossings and flat-field mottle remain unresolved.
 
 ![Four input-only selectors, two template regions and two fixed neighborhoods](images/v196-innovation-selection-v1/selection-proximity-v1.png)
 
@@ -53,3 +53,11 @@ The saved V195 Whole EMA module hash is `1ebf98a696494e7bf8f9dacc4cdda92f795c161
 The [V197 prototype](innovation-wave-readout.md) adds a fresh 508-parameter wave head above all 193 frozen V195 Whole EMA tensors. Matched RAW/innovation arms share the wider band and fresh zero-output initialization; the measurement field changes both selection and local wave/support coordinates together. This tests a practical new measurement architecture, not selection in isolation. Its signed residual may also expose parent errors, but improvement requires trained comparisons on detail, sky, absent meshes, mixed quiet areas and fresh flats.
 
 An optional case-metadata hash field stopped the first input pass after 23 completed contexts. Those exact rows are reused in the corrected journal; only the remaining thirteen contexts are completed. Original source, plan, log and prefix bytes survive. One uncommitted context is remeasured after the genuine metadata exception; no neural work occurs. The initial independent variance fixture also caught a missing window factor before any recorded data pass. See the [timestamped diary](../diary/2026-11-08-14-02-17-innovation-selection-geometry.md).
+
+The trained follow-ups are now complete. [V198 CFA EMA](cfa-innovation-wave-comparison.md)
+raises mean mesh response to 11.158% GT with colored modulation and new
+building/flat artifacts. [V200 cross-scale support](scale-supported-cfa-wave-comparison.md)
+keeps 11.102% GT response with 0.059–0.119% lower quiet spatial RMS than V198,
+but retains those artifacts and incomplete fine cab crossings. The original
+selection-geometry diagnostic above remains a measurement result; these later
+native comparisons determine their actual image-quality strengths and limits.
