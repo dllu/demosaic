@@ -1,0 +1,130 @@
+{
+  "status": "pass-full-saved-training-metadata-and-trace-coverage-audit",
+  "created_local": "2026-11-08T18:58:16.962306-08:00",
+  "inputs": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V200-scale-supported-CFA-trial-v1/plan-v1.json",
+      "sha256": "cb6292c081d9f1f2d88f3eeae6489aa02f5567896be0f079842154cb8fac455e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/data-canonical-cache-v1.json",
+      "sha256": "c7dacefef803713f2fd7c43dbd373f2d18cd5b454ec2a388c95debef1227b7f0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V200-scale-supported-CFA-trial-v1/scale-train-result-v1.json",
+      "sha256": "4ee396572dd474e0f4db0b60dc13bf1d4a131607d74c06e259aae97e015f9b16"
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V201-training-distribution-audit-v1/audit_paired_training_distribution.py",
+    "sha256": "e5207b1aa7207f61e5abb03ce09f6e250e97ad6a7313d077d122b586b49635aa",
+    "text": "\"\"\"Audit saved training metadata and completed trace; never read image arrays.\"\"\"\n\nimport argparse\nimport hashlib\nimport json\nimport math\nimport sys\nfrom collections import Counter, defaultdict\nfrom datetime import datetime\nfrom pathlib import Path\nfrom zoneinfo import ZoneInfo\n\n\ndef read(path):\n    return json.loads(Path(path).read_text())\n\n\ndef ref(path):\n    path = Path(path).resolve()\n    with path.open(\"rb\") as stream:\n        digest = hashlib.file_digest(stream, \"sha256\").hexdigest()\n    return {\"path\": str(path), \"sha256\": digest}\n\n\ndef bounds(values):\n    assert values and all(math.isfinite(v) for v in values)\n    return {\"count\": len(values), \"minimum\": min(values), \"maximum\": max(values)}\n\n\ndef audit(repository, trial):\n    plan_path = trial / \"plan-v1.json\"\n    plan = read(plan_path)\n    cache_binding = plan[\"cache\"]\n    assert ref(cache_binding[\"path\"]) == cache_binding\n    cache = read(cache_binding[\"path\"])\n    result_path = trial / \"scale-train-result-v1.json\"\n    result = read(result_path)\n    assert result[\"status\"].startswith(\"completed\") and result[\"updates\"] == 900\n    trace = result[\"trace\"]\n    batches = cache[\"batches\"]\n    assert len(trace) == len(batches) == 1000\n    bindings = [ref(plan_path), cache_binding, ref(result_path), ref(__file__)]\n    by_domain = defaultdict(Counter)\n    sizes = defaultdict(Counter)\n    photo_contrasts, mixed_levels, mixed_widths = [], [], []\n    mixed_pairs = Counter()\n    backgrounds = defaultdict(Counter)\n    for expected_step, (item, row) in enumerate(zip(batches, trace, strict=True), 1):\n        metadata = item[\"metadata\"]\n        domain = metadata[\"domain\"]\n        noise = metadata[\"noise\"]\n        noisy = noise[\"shot\"] > 0 or noise[\"read\"] > 0\n        assert item[\"step\"] == metadata[\"step\"] == row[\"step\"] == expected_step\n        assert row[\"batch\"] == item[\"arrays\"] and row[\"domain\"] == domain\n        assert row[\"noisy\"] == noisy\n        cases = metadata[\"cases\"]\n        assert len(cases) == 4\n        by_domain[domain][\"total_batches\"] += 1\n        by_domain[domain][\"noisy_updates\" if noisy else \"ADC_skips\"] += 1\n        if not noisy:\n            continue\n        by_domain[domain][\"noisy_images\"] += len(cases)\n        by_domain[domain][\"coupled_pairs\"] += metadata[\"coupled_pairs\"]\n        sizes[domain][metadata[\"native_size\"]] += 1\n        if domain == \"mixed\":\n            mixed_pairs[metadata[\"coupled_pairs\"]] += 1\n        for case in cases:\n            source = case[\"source\"]\n            if domain == \"mixed\":\n                mixed_levels.append(source[\"level\"])\n                mixed_widths.append(source[\"width\"])\n            if case.get(\"role\") == \"present\":\n                background = source.get(\"background_recipe\", {}).get(\"kind\")\n                if background is None:\n                    background = source.get(\"counterfactual\", \"not-described\")\n                backgrounds[domain][background] += 1\n                if domain == \"photo\":\n                    contrast = source[\"contrast\"]\n                    assert 0 < contrast <= 1\n                    photo_contrasts.append(contrast)\n    assert sum(v[\"noisy_updates\"] for v in by_domain.values()) == 900\n    assert sum(v[\"ADC_skips\"] for v in by_domain.values()) == 100\n    assert sum(v[\"noisy_images\"] for v in by_domain.values()) == 3600\n    assert len(photo_contrasts) == 2 * by_domain[\"photo\"][\"noisy_updates\"]\n    assert set(mixed_pairs) == {0}\n    domains = {}\n    for domain in sorted(by_domain):\n        values = dict(by_domain[domain])\n        values[\"domain_weight\"] = plan[\"domain_weights\"][domain]\n        values[\"nominal_weighted_update_count\"] = (\n            values[\"noisy_updates\"] * values[\"domain_weight\"]\n        )\n        values[\"native_size_update_histogram\"] = dict(sizes[domain])\n        values[\"present_pair_background_descriptions\"] = dict(backgrounds[domain])\n        domains[domain] = values\n    assert \"torch\" not in sys.modules\n    assert all(ref(binding[\"path\"]) == binding for binding in bindings)\n    return {\n        \"status\": \"pass-full-saved-training-metadata-and-trace-coverage-audit\",\n        \"created_local\": datetime.now(ZoneInfo(\"America/Los_Angeles\")).isoformat(),\n        \"inputs\": bindings[:-1],\n        \"source\": dict(bindings[-1], text=Path(__file__).read_text()),\n        \"repository\": str(repository),\n        \"matched_trace_rows\": len(trace),\n        \"domains\": domains,\n        \"photo_present_pair_contrasts\": {\n            **bounds(photo_contrasts),\n            \"full_contrast\": sum(v == 1 for v in photo_contrasts),\n            \"reduced_contrast\": sum(v < 1 for v in photo_contrasts),\n            \"reduced_contrast_range\": bounds([v for v in photo_contrasts if v < 1]),\n        },\n        \"mixed_nominal_scene_levels\": bounds(mixed_levels),\n        \"mixed_nominal_bar_half_width_pixels\": bounds(mixed_widths),\n        \"mixed_coupled_pair_count_histogram\": dict(mixed_pairs),\n        \"new_image_array_reads\": 0,\n        \"new_noise_source_draws\": 0,\n        \"new_model_forwards\": 0,\n        \"Torch_imported\": False,\n        \"external_bytes_written\": 0,\n        \"limits\": \"Metadata/trace coverage only. Nominal scene levels and widths precede geometry/camera transport; they do not bound realized camera-RGB gradients. Weighted update counts are sampling/loss-weight descriptions, not gradient magnitudes or causal quality evidence. Full-contrast photos already include edges; no claim that strong edges are absent from all training. No new quality measurement or loss ablation.\",\n        \"next_test_rationale\": \"Noisy flats and reduced-contrast photos already exist. Mixed edge/quiet batches have zero coupled pairs, unlike detail/background domains. Test training-only paired scenes sharing a stronger edge/background with and without a faint mesh increment, preserving the broad scene in the counterfactual. Keep generic flat and no-increment controls, held-out evaluation and both protected real-photo families. Improvement requires actual trained raw/EMA comparisons, not this coverage audit.\",\n    }\n\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"--repository\", type=Path, required=True)\n    parser.add_argument(\"--trial\", type=Path, required=True)\n    parser.add_argument(\"--output\", type=Path, required=True)\n    args = parser.parse_args()\n    evidence = audit(args.repository.resolve(), args.trial.resolve())\n    with args.output.open(\"x\") as stream:\n        json.dump(evidence, stream, indent=2, allow_nan=False)\n        stream.write(\"\\n\")\n    print(\"PASS:1000metadata/trace rows;900updates/3600images;no image/model reads\")\n"
+  },
+  "repository": "/home/dllu/proj/demosaic",
+  "matched_trace_rows": 1000,
+  "domains": {
+    "flat": {
+      "total_batches": 153,
+      "ADC_skips": 12,
+      "noisy_updates": 141,
+      "noisy_images": 564,
+      "coupled_pairs": 0,
+      "domain_weight": 1.0,
+      "nominal_weighted_update_count": 141.0,
+      "native_size_update_histogram": {
+        "512": 141
+      },
+      "present_pair_background_descriptions": {}
+    },
+    "mesh": {
+      "total_batches": 341,
+      "noisy_updates": 307,
+      "noisy_images": 1228,
+      "coupled_pairs": 614,
+      "ADC_skips": 34,
+      "domain_weight": 4.0,
+      "nominal_weighted_update_count": 1228.0,
+      "native_size_update_histogram": {
+        "512": 307
+      },
+      "present_pair_background_descriptions": {
+        "crossed-lines": 614
+      }
+    },
+    "mixed": {
+      "total_batches": 156,
+      "noisy_updates": 139,
+      "noisy_images": 556,
+      "coupled_pairs": 0,
+      "ADC_skips": 17,
+      "domain_weight": 1.0,
+      "nominal_weighted_update_count": 139.0,
+      "native_size_update_histogram": {
+        "512": 139
+      },
+      "present_pair_background_descriptions": {}
+    },
+    "photo": {
+      "total_batches": 243,
+      "noisy_updates": 214,
+      "noisy_images": 856,
+      "coupled_pairs": 428,
+      "ADC_skips": 29,
+      "domain_weight": 1.0,
+      "nominal_weighted_update_count": 214.0,
+      "native_size_update_histogram": {
+        "256": 214
+      },
+      "present_pair_background_descriptions": {
+        "Exact constant channel means of the augmented free-photo patch;constructed target,not a real empty capture.": 428
+      }
+    },
+    "weak": {
+      "total_batches": 107,
+      "noisy_updates": 99,
+      "noisy_images": 396,
+      "coupled_pairs": 198,
+      "ADC_skips": 8,
+      "domain_weight": 4.0,
+      "nominal_weighted_update_count": 396.0,
+      "native_size_update_histogram": {
+        "512": 99
+      },
+      "present_pair_background_descriptions": {
+        "constant-counterfactual": 198
+      }
+    }
+  },
+  "photo_present_pair_contrasts": {
+    "count": 428,
+    "minimum": 0.005031607410631723,
+    "maximum": 1.0,
+    "full_contrast": 215,
+    "reduced_contrast": 213,
+    "reduced_contrast_range": {
+      "count": 213,
+      "minimum": 0.005031607410631723,
+      "maximum": 0.1993941926317194
+    }
+  },
+  "mixed_nominal_scene_levels": {
+    "count": 556,
+    "minimum": 0.0020119037071580407,
+    "maximum": 0.04995541889032387
+  },
+  "mixed_nominal_bar_half_width_pixels": {
+    "count": 556,
+    "minimum": 2.0267873950015067,
+    "maximum": 19.95566620318032
+  },
+  "mixed_coupled_pair_count_histogram": {
+    "0": 139
+  },
+  "new_image_array_reads": 0,
+  "new_noise_source_draws": 0,
+  "new_model_forwards": 0,
+  "Torch_imported": false,
+  "external_bytes_written": 0,
+  "limits": "Metadata/trace coverage only. Nominal scene levels and widths precede geometry/camera transport; they do not bound realized camera-RGB gradients. Weighted update counts are sampling/loss-weight descriptions, not gradient magnitudes or causal quality evidence. Full-contrast photos already include edges; no claim that strong edges are absent from all training. No new quality measurement or loss ablation.",
+  "next_test_rationale": "Noisy flats and reduced-contrast photos already exist. Mixed edge/quiet batches have zero coupled pairs, unlike detail/background domains. Test training-only paired scenes sharing a stronger edge/background with and without a faint mesh increment, preserving the broad scene in the counterfactual. Keep generic flat and no-increment controls, held-out evaluation and both protected real-photo families. Improvement requires actual trained raw/EMA comparisons, not this coverage audit."
+}
