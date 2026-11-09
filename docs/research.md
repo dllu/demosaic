@@ -33,6 +33,10 @@ the fresh 643-parameter head passes 34 CPU checks, eight actual anchor parities,
 seven CPU/GPU map/readout comparisons, two restored update probes and four
 strict raw/EMA state loads. The matched 900-update trial is launched from V195
 with fresh clocks; trained quality and all native comparisons remain pending.
+The [full review is prepared and queued](scale-supported-cfa-quality-plan.md):
+both endpoints/all 822 cases, direct V198 raw/EMA baselines, new support bindings,
+unchanged old measurement checks, and 60 native figures/12 triplets. CPU
+metric/layout/reference preflights pass; candidate quality is still pending.
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 
