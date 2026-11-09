@@ -17,6 +17,12 @@ quieter. The fine-detail/clean-flat goal remains unresolved.
 [Complete comparison](docs/cfa-innovation-wave-comparison.md) ·
 [Six-state native viewer](docs/images/v198-cfa-innovation-wave-v1/native-viewer.html).
 
+The [V199 gate diagnostic](docs/cfa-wave-gate-diagnostic.md) finds that sharing
+RGB gates or clipping negative gates does not remove these failures. Constant
+gates look cleaner while shrinking correction strength; matching that strength
+brings artifacts back. The native comparison motivates better local support
+measurements; it is not a newly trained model.
+
 Earlier [dense-window](docs/large-dense-spectrum-comparison.md) and
 [pooled-selection](docs/pooled-phase-wave-comparison.md) results remain available.
 

@@ -15,6 +15,13 @@ Both V198 endpoints, all 822 cases each, independent audits, two strict exports,
 are complete. [Six-state native viewer](images/v198-cfa-innovation-wave-v1/native-viewer.html) ·
 [Measured strengths and costs](cfa-innovation-wave-comparison.md).
 
+The [V199 gate diagnostic](cfa-wave-gate-diagnostic.md) finds that shared RGB
+and positive-only gates retain the selected building/flat failures. Constant
+gates suppress them largely by weakening correction; matched-strength controls
+restore artifacts. [All 46 native figures](cfa-wave-gate-diagnostic-gallery.md)
+and source-bound measurements guide the next local-support test; no new model
+quality promotion is claimed.
+
 See [storage maintenance](storage.md) for cache cleanup, verified consolidation
 of duplicate historical artifacts, and preservation of experiment paths/evidence.
 
