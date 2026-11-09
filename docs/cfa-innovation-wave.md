@@ -1,7 +1,7 @@
 # Color-grounded innovation readout (V198)
 
-**The engineering checks pass and full training has launched. Image quality is
-unmeasured.** This candidate addresses a weakness in the completed
+**The engineering checks and full 900-update training audit pass. Image quality
+is unmeasured.** This candidate addresses a weakness in the completed
 [V197 comparison](innovation-wave-comparison.md): stronger faint mesh modulation
 coexists with a pronounced red/cyan building artifact and extra flat-field waves.
 The real cab crossings remain incomplete. V197's gains and costs, V195/V187's
@@ -81,10 +81,12 @@ anchor tensors** across the two probe checkpoints. Peak admission CUDA allocatio
 is **6.233 GiB**, not a 100MP performance measurement.
 
 [Source-bound preparation, admission and launch evidence](results/v198-cfa-innovation-prepared-v1.json).
+The [full evaluation pipeline](cfa-innovation-evaluation.md) is now frozen, its
+CPU preflights pass, and its controller is registered to follow this training run.
 
 ## Full training and required quality comparison
 
-The launched run starts a fresh head with seed `202611080198` and uses the same
+The completed run started a fresh head with seed `202611080198` and used the same
 1,000 cached rows as V195/V197: **900 noisy updates, 3,600 images and 100 ADC
 skips**. The V195 Whole ten-term objective, coherent coefficient 0.50, clean-target
 masks, pair units, domain weights, LR schedule, decay and clipping are retained.
@@ -92,8 +94,11 @@ Only the four new head tensors train. Row-eight restoration has succeeded and
 continues at row nine without repeating the prefix. Five compact checkpoints
 bind the frozen anchor rather than copying it.
 
-A registered controller polls the actual worker PID and creation time, then
-runs the frozen full-trace/checkpoint CPU audit after that worker terminates.
+A registered controller followed the actual worker PID and creation time, then
+ran the frozen full-trace/checkpoint CPU audit after that worker terminated.
+The audit passes all 1,000 rows, 900 FP32 loss totals and clean masks, five
+checkpoints / ten raw-EMA states and 1,930 frozen-anchor tensor comparisons.
+[Training completion and actual feature bridge](results/v198-cfa-training-completed-v1.json).
 The private trial root is
 `.cache/quality-20261108/V198-cfa-innovation-wave-trial-v1/`; launch records and
 status files are authoritative for progress after the public snapshot.
