@@ -1,11 +1,16 @@
 # Full quality review for V200
 
 The [physical cross-scale support prototype](scale-supported-cfa-wave.md) is
-training, and a registered controller now waits for that same worker's full
-training audit before evaluating it. **Image-quality gains remain unproven.**
+fully trained and independently audited; its registered two-endpoint quality
+review is now running. **Image-quality gains remain unproven.**
 The [readiness evidence](results/v200-scale-CFA-quality-readiness-v1.json)
 records actual CPU checks and process observations separately from the planned
 model measurements.
+
+[Completed training and viewer preparation](results/v200-scale-supported-cfa-training-completed-v1.json)
+records 900 updates, the full five-checkpoint audit and a seven-state browser
+fixture. The fixture reuses V198 pixels and is explicitly rejected by the
+actual-quality verifier; it is not a V200 image comparison.
 
 ## Comparisons that will decide whether it helps
 
@@ -64,10 +69,11 @@ a guarantee against hallucinated texture.
 
 ## Execution and remaining work
 
-The controller follows the original training PID and creation time, requires
-the complete 900-update result and independent full trace/checkpoint audit,
-then runs one measurement-only CUDA bridge and one two-endpoint review. It
-subsequently runs the independent quality audit, eleven-method reduction,
+The controller verified the original training PID and creation time as terminal,
+the complete 900-update result and independent full trace/checkpoint audit.
+The four-case measurement-only CUDA bridge passed without neural forwards,
+and the two-endpoint review is running. It will subsequently run the independent
+quality audit, eleven-method reduction,
 two strict exports, directional projections and native rendering. An expired
 observation does not restart a scientific prefix. Native viewing, browser
 pixel checks, qualitative interpretation and publication follow separately.

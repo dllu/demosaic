@@ -25,9 +25,9 @@ quality promotion is claimed.
 [V200 physical cross-scale support](scale-supported-cfa-wave.md) implements
 nominal amplitude covariance and twelve bounded RGB agreement coordinates.
 CPU/GPU engineering and restoration checks pass; a fresh matched 900-update
-trial is launched. Model quality remains pending.
+training and full checkpoint audit are complete. Model quality remains pending.
 The [quality review plan](scale-supported-cfa-quality-plan.md) records verified
-CPU preflights and the registered controller waiting for the training audit.
+CPU preflights and the registered controller now running both endpoint reviews.
 
 See [storage maintenance](storage.md) for cache cleanup, verified consolidation
 of duplicate historical artifacts, and preservation of experiment paths/evidence.

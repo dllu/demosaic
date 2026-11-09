@@ -23,7 +23,8 @@ with all native comparisons retained, rather than a population quality test.
 
 [V200 scale-supported CFA waves](scale-supported-cfa-wave.md) are a follow-up
 prototype with a fresh 643-parameter head. CPU/GPU engineering checks pass and
-the matched 900-update trial is launched. Trained quality remains pending;
+the matched 900-update training and full state audit are complete. Quality review
+is running; trained-quality conclusions remain pending, and
 the recommendations and measured tradeoffs above remain current.
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).

@@ -4,7 +4,8 @@ The [V199 gate diagnostic](cfa-wave-gate-diagnostic.md) leaves building fringes
 and false flat/photo ripples under shared RGB and positive-only gates. The next
 prototype adds **physical amplitude/phase agreement between local windows** to
 the readout, preserving V198's measured color basis and frozen V195 anchor.
-It is an engineering implementation; trained quality remains unmeasured.
+Fresh training and its independent audit are complete; full quality assessment
+and native comparisons remain pending.
 
 V198 already compares two green phases within each window. Its 24 context
 channels do not directly compare a color's physical fitted amplitude between
@@ -92,7 +93,7 @@ sum across bins and real tanh gates in [−1,1] remain. Support cannot synthesiz
 red/blue waves from green, and the correction is not multiplied by output
 sigma. Zero-noise pixels retain the anchor exactly.
 
-Additional features and 192 parameters change together. A future comparison
+Additional features and 192 parameters change together. The quality comparison
 tests this combined architecture, not covariance or cross-scale evidence in
 isolation. The present implementation remeasures amplitudes at three scales;
 its extra computation has not been benchmarked on a complete 100MP frame.
@@ -121,14 +122,17 @@ tensors and both Adam states without CUDA initialization.
 Device comparisons use the same frozen implementation on CPU and GPU; the
 independent mathematical reference is the direct-QR test implementation.
 
-A fresh **900-update trial has been launched** from the retained V195 anchor,
+A fresh **900-update trial is complete** from the retained V195 anchor,
 using the same 1,000 cached rows, 3,600 noisy images, 100 ADC skips, ten-term
 Whole objective, pair units, masks, LR/WD/clip and seed 202611080198 as V198.
 Adam and EMA start at zero, independently of the probes. The real row-eight
 checkpoint restoration passes and continues at row nine without repeating
-earlier forwards. Five factored snapshots, a full independent training audit,
-both endpoints/all 822 quality cases and native comparisons are required.
-Quality is pending; training loss is not restoration-quality evidence.
+earlier forwards. The independent audit passes all 1,000 trace rows, 900 loss
+totals and masks, five factored snapshots, ten raw/EMA states and 1,930 unchanged
+anchor tensor comparisons. [Completed training evidence](results/v200-scale-supported-cfa-training-completed-v1.json).
+Both endpoints/all 822 quality cases are now being evaluated. Native viewing
+and final comparison remain pending; training loss is not restoration-quality
+evidence.
 
 The GPU check uses retained cached inputs and training-only mesh/mixed update
 probes; protected sky, cab and building inputs are parity-only. Probe snapshots
