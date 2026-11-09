@@ -25,6 +25,15 @@ models or population quality evidence. Next priority is stronger input-only
 local support and physical amplitude/phase agreement, while better learned
 gates remain open.
 
+The [V200 follow-up](scale-supported-cfa-wave.md) adds twelve physical RGB
+amplitude/phase agreement coordinates across 65/33/17 windows, with nominal
+fit covariance and an overlap-aware interpolation bound. These are support
+features, not calibrated confidence. All 105 prior neural files remain unchanged;
+the fresh 643-parameter head passes 34 CPU checks, eight actual anchor parities,
+seven CPU/GPU map/readout comparisons, two restored update probes and four
+strict raw/EMA state loads. The matched 900-update trial is launched from V195
+with fresh clocks; trained quality and all native comparisons remain pending.
+
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 
 The [V190 native-alias diagnostic](native-wave-alias-geometry.md) finds 90.78% of exact mesh-template power in the strict principal square. Adding all four aliases around existing bins raises mean proximity only 0.445–0.674 percentage points; median principal proximity stays 3.348%. This gives little support to an alias-only fix as the next priority. Sparse local frequency measurements and the objective/readout deserve separate tests; geometric proximity is not a recovery bound or a quality gain. That diagnostic changed no neural code.

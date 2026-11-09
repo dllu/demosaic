@@ -21,6 +21,11 @@ fringes and flat ripples; constant gates lose useful correction strength, and
 matching it restores artifacts. The fourteen selected contexts are diagnostic,
 with all native comparisons retained, rather than a population quality test.
 
+[V200 scale-supported CFA waves](scale-supported-cfa-wave.md) are a follow-up
+prototype with a fresh 643-parameter head. CPU/GPU engineering checks pass and
+the matched 900-update trial is launched. Trained quality remains pending;
+the recommendations and measured tradeoffs above remain current.
+
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 
 The [V190 native-alias diagnostic](native-wave-alias-geometry.md) finds 90.78% of exact mesh-template power in the strict principal square. Adding all four aliases around existing bins raises mean proximity only 0.445–0.674 percentage points; median principal proximity stays 3.348%. This gives little support to an alias-only fix as the next priority. Sparse local frequency measurements and the objective/readout deserve separate tests; geometric proximity is not a recovery bound or a quality gain. That diagnostic changed no neural code.

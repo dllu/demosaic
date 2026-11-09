@@ -22,6 +22,11 @@ restore artifacts. [All 46 native figures](cfa-wave-gate-diagnostic-gallery.md)
 and source-bound measurements guide the next local-support test; no new model
 quality promotion is claimed.
 
+[V200 physical cross-scale support](scale-supported-cfa-wave.md) implements
+nominal amplitude covariance and twelve bounded RGB agreement coordinates.
+CPU/GPU engineering and restoration checks pass; a fresh matched 900-update
+trial is launched. Model quality remains pending.
+
 See [storage maintenance](storage.md) for cache cleanup, verified consolidation
 of duplicate historical artifacts, and preservation of experiment paths/evidence.
 

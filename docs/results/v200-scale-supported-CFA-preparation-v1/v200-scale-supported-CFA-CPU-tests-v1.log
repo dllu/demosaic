@@ -1,0 +1,224 @@
+.............................FFFF.                                       [100%]
+=================================== FAILURES ===================================
+__ test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[RGGB] ___
+
+pattern = 'RGGB'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_anchor_ADC_old_measurements_and_isolated_extra_column_learning(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        config = dict(evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4)
+        anchor = LatePooledPhaseWaveDetail(**config)
+        old = LateCFAInnovationWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        new = LateScaleSupportedCFAWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        for m in (anchor, old, new):
+            m.frozen, m.network = FrozenFixture(), NetworkFixture()
+        rng = np.random.default_rng(20012)
+        raw = torch.tensor(rng.normal(0.02, 0.003, (1, 4, 12, 17)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        base = torch.tensor(rng.normal(0.02, 0.003, (1, 3, 24, 34)), dtype=torch.float32)
+        colors = color_indices(pattern)
+        with torch.no_grad():
+            expected, old_aux = old(base, raw, variance, colors, return_aux=True)
+            actual, aux = new(base, raw, variance, colors, return_aux=True)
+        assert torch.equal(actual.view(torch.int32), expected.view(torch.int32))
+        assert torch.equal(aux["measurement_field"], raw - mosaic(expected, colors))
+        assert torch.equal(aux["cfa_waves"], old_aux["cfa_waves"])
+        assert torch.equal(aux["cfa_context"][:, :, :24], old_aux["cfa_context"])
+        assert (aux["cfa_context"][:, :, 24:].abs() <= 1 + 1e-6).all()
+        assert not aux["cfa_context"].requires_grad and not aux["cfa_waves"].requires_grad
+        optimizer = torch.optim.AdamW(new.cfa_readout.parameters(), lr=0.01)
+        for _ in range(2):
+            optimizer.zero_grad(set_to_none=True)
+            output = new(base, raw, variance, colors)
+            (output - base - 0.001).square().mean().backward()
+            assert all(
+                p.grad is None for n, p in new.named_parameters() if not n.startswith("cfa_readout.")
+            )
+            optimizer.step()
+        assert new.cfa_readout.context.weight.grad[:, 24:].count_nonzero() > 0
+        assert new.cfa_readout.context.weight[:, 24:].count_nonzero() > 0
+        learned = new(base, raw, variance, colors)
+        adc = (aux["sigma"] == 0).expand_as(learned)
+        assert torch.equal(learned[adc], expected[adc])
+        zero, zero_aux = new(base, raw, variance * 0, colors, return_aux=True)
+        assert torch.equal(zero, anchor(base, raw, variance * 0, colors))
+        assert (
+            zero_aux["scale_support"] is zero_aux["cfa_context"] is zero_aux["wave_selection"] is None
+        )
+>       assert not new.frozen.training and new.cfa_readout.training
+E       assert (not True)
+E        +  where True = FrozenFixture().training
+E        +    where FrozenFixture() = LateScaleSupportedCFAWaveDetail(\n  (frozen): FrozenFixture()\n  (network): NetworkFixture()\n  (phase_evidence_in): Conv...: Conv2d(36, 16, kernel_size=(1, 1), stride=(1, 1))\n    (gates): Conv2d(16, 3, kernel_size=(1, 1), stride=(1, 1))\n  )\n).frozen
+
+tests/test_late_scale_supported_cfa_wave.py:106: AssertionError
+__ test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[BGGR] ___
+
+pattern = 'BGGR'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_anchor_ADC_old_measurements_and_isolated_extra_column_learning(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        config = dict(evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4)
+        anchor = LatePooledPhaseWaveDetail(**config)
+        old = LateCFAInnovationWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        new = LateScaleSupportedCFAWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        for m in (anchor, old, new):
+            m.frozen, m.network = FrozenFixture(), NetworkFixture()
+        rng = np.random.default_rng(20012)
+        raw = torch.tensor(rng.normal(0.02, 0.003, (1, 4, 12, 17)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        base = torch.tensor(rng.normal(0.02, 0.003, (1, 3, 24, 34)), dtype=torch.float32)
+        colors = color_indices(pattern)
+        with torch.no_grad():
+            expected, old_aux = old(base, raw, variance, colors, return_aux=True)
+            actual, aux = new(base, raw, variance, colors, return_aux=True)
+        assert torch.equal(actual.view(torch.int32), expected.view(torch.int32))
+        assert torch.equal(aux["measurement_field"], raw - mosaic(expected, colors))
+        assert torch.equal(aux["cfa_waves"], old_aux["cfa_waves"])
+        assert torch.equal(aux["cfa_context"][:, :, :24], old_aux["cfa_context"])
+        assert (aux["cfa_context"][:, :, 24:].abs() <= 1 + 1e-6).all()
+        assert not aux["cfa_context"].requires_grad and not aux["cfa_waves"].requires_grad
+        optimizer = torch.optim.AdamW(new.cfa_readout.parameters(), lr=0.01)
+        for _ in range(2):
+            optimizer.zero_grad(set_to_none=True)
+            output = new(base, raw, variance, colors)
+            (output - base - 0.001).square().mean().backward()
+            assert all(
+                p.grad is None for n, p in new.named_parameters() if not n.startswith("cfa_readout.")
+            )
+            optimizer.step()
+        assert new.cfa_readout.context.weight.grad[:, 24:].count_nonzero() > 0
+        assert new.cfa_readout.context.weight[:, 24:].count_nonzero() > 0
+        learned = new(base, raw, variance, colors)
+        adc = (aux["sigma"] == 0).expand_as(learned)
+        assert torch.equal(learned[adc], expected[adc])
+        zero, zero_aux = new(base, raw, variance * 0, colors, return_aux=True)
+        assert torch.equal(zero, anchor(base, raw, variance * 0, colors))
+        assert (
+            zero_aux["scale_support"] is zero_aux["cfa_context"] is zero_aux["wave_selection"] is None
+        )
+>       assert not new.frozen.training and new.cfa_readout.training
+E       assert (not True)
+E        +  where True = FrozenFixture().training
+E        +    where FrozenFixture() = LateScaleSupportedCFAWaveDetail(\n  (frozen): FrozenFixture()\n  (network): NetworkFixture()\n  (phase_evidence_in): Conv...: Conv2d(36, 16, kernel_size=(1, 1), stride=(1, 1))\n    (gates): Conv2d(16, 3, kernel_size=(1, 1), stride=(1, 1))\n  )\n).frozen
+
+tests/test_late_scale_supported_cfa_wave.py:106: AssertionError
+__ test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[GRBG] ___
+
+pattern = 'GRBG'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_anchor_ADC_old_measurements_and_isolated_extra_column_learning(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        config = dict(evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4)
+        anchor = LatePooledPhaseWaveDetail(**config)
+        old = LateCFAInnovationWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        new = LateScaleSupportedCFAWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        for m in (anchor, old, new):
+            m.frozen, m.network = FrozenFixture(), NetworkFixture()
+        rng = np.random.default_rng(20012)
+        raw = torch.tensor(rng.normal(0.02, 0.003, (1, 4, 12, 17)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        base = torch.tensor(rng.normal(0.02, 0.003, (1, 3, 24, 34)), dtype=torch.float32)
+        colors = color_indices(pattern)
+        with torch.no_grad():
+            expected, old_aux = old(base, raw, variance, colors, return_aux=True)
+            actual, aux = new(base, raw, variance, colors, return_aux=True)
+        assert torch.equal(actual.view(torch.int32), expected.view(torch.int32))
+        assert torch.equal(aux["measurement_field"], raw - mosaic(expected, colors))
+        assert torch.equal(aux["cfa_waves"], old_aux["cfa_waves"])
+        assert torch.equal(aux["cfa_context"][:, :, :24], old_aux["cfa_context"])
+        assert (aux["cfa_context"][:, :, 24:].abs() <= 1 + 1e-6).all()
+        assert not aux["cfa_context"].requires_grad and not aux["cfa_waves"].requires_grad
+        optimizer = torch.optim.AdamW(new.cfa_readout.parameters(), lr=0.01)
+        for _ in range(2):
+            optimizer.zero_grad(set_to_none=True)
+            output = new(base, raw, variance, colors)
+            (output - base - 0.001).square().mean().backward()
+            assert all(
+                p.grad is None for n, p in new.named_parameters() if not n.startswith("cfa_readout.")
+            )
+            optimizer.step()
+        assert new.cfa_readout.context.weight.grad[:, 24:].count_nonzero() > 0
+        assert new.cfa_readout.context.weight[:, 24:].count_nonzero() > 0
+        learned = new(base, raw, variance, colors)
+        adc = (aux["sigma"] == 0).expand_as(learned)
+        assert torch.equal(learned[adc], expected[adc])
+        zero, zero_aux = new(base, raw, variance * 0, colors, return_aux=True)
+        assert torch.equal(zero, anchor(base, raw, variance * 0, colors))
+        assert (
+            zero_aux["scale_support"] is zero_aux["cfa_context"] is zero_aux["wave_selection"] is None
+        )
+>       assert not new.frozen.training and new.cfa_readout.training
+E       assert (not True)
+E        +  where True = FrozenFixture().training
+E        +    where FrozenFixture() = LateScaleSupportedCFAWaveDetail(\n  (frozen): FrozenFixture()\n  (network): NetworkFixture()\n  (phase_evidence_in): Conv...: Conv2d(36, 16, kernel_size=(1, 1), stride=(1, 1))\n    (gates): Conv2d(16, 3, kernel_size=(1, 1), stride=(1, 1))\n  )\n).frozen
+
+tests/test_late_scale_supported_cfa_wave.py:106: AssertionError
+__ test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[GBRG] ___
+
+pattern = 'GBRG'
+
+    @pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+    def test_anchor_ADC_old_measurements_and_isolated_extra_column_learning(pattern):
+        from test_late_phase_wave_readout import FrozenFixture, NetworkFixture
+    
+        config = dict(evidence_window=9, evidence_stride=8, support_windows=(7, 3), support_stride=4)
+        anchor = LatePooledPhaseWaveDetail(**config)
+        old = LateCFAInnovationWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        new = LateScaleSupportedCFAWaveDetail(**config).initialize_anchor(anchor.state_dict())
+        for m in (anchor, old, new):
+            m.frozen, m.network = FrozenFixture(), NetworkFixture()
+        rng = np.random.default_rng(20012)
+        raw = torch.tensor(rng.normal(0.02, 0.003, (1, 4, 12, 17)), dtype=torch.float32)
+        variance = torch.full_like(raw, 2e-6)
+        variance[..., :4, :5] = 0
+        base = torch.tensor(rng.normal(0.02, 0.003, (1, 3, 24, 34)), dtype=torch.float32)
+        colors = color_indices(pattern)
+        with torch.no_grad():
+            expected, old_aux = old(base, raw, variance, colors, return_aux=True)
+            actual, aux = new(base, raw, variance, colors, return_aux=True)
+        assert torch.equal(actual.view(torch.int32), expected.view(torch.int32))
+        assert torch.equal(aux["measurement_field"], raw - mosaic(expected, colors))
+        assert torch.equal(aux["cfa_waves"], old_aux["cfa_waves"])
+        assert torch.equal(aux["cfa_context"][:, :, :24], old_aux["cfa_context"])
+        assert (aux["cfa_context"][:, :, 24:].abs() <= 1 + 1e-6).all()
+        assert not aux["cfa_context"].requires_grad and not aux["cfa_waves"].requires_grad
+        optimizer = torch.optim.AdamW(new.cfa_readout.parameters(), lr=0.01)
+        for _ in range(2):
+            optimizer.zero_grad(set_to_none=True)
+            output = new(base, raw, variance, colors)
+            (output - base - 0.001).square().mean().backward()
+            assert all(
+                p.grad is None for n, p in new.named_parameters() if not n.startswith("cfa_readout.")
+            )
+            optimizer.step()
+        assert new.cfa_readout.context.weight.grad[:, 24:].count_nonzero() > 0
+        assert new.cfa_readout.context.weight[:, 24:].count_nonzero() > 0
+        learned = new(base, raw, variance, colors)
+        adc = (aux["sigma"] == 0).expand_as(learned)
+        assert torch.equal(learned[adc], expected[adc])
+        zero, zero_aux = new(base, raw, variance * 0, colors, return_aux=True)
+        assert torch.equal(zero, anchor(base, raw, variance * 0, colors))
+        assert (
+            zero_aux["scale_support"] is zero_aux["cfa_context"] is zero_aux["wave_selection"] is None
+        )
+>       assert not new.frozen.training and new.cfa_readout.training
+E       assert (not True)
+E        +  where True = FrozenFixture().training
+E        +    where FrozenFixture() = LateScaleSupportedCFAWaveDetail(\n  (frozen): FrozenFixture()\n  (network): NetworkFixture()\n  (phase_evidence_in): Conv...: Conv2d(36, 16, kernel_size=(1, 1), stride=(1, 1))\n    (gates): Conv2d(16, 3, kernel_size=(1, 1), stride=(1, 1))\n  )\n).frozen
+
+tests/test_late_scale_supported_cfa_wave.py:106: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_late_scale_supported_cfa_wave.py::test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[RGGB]
+FAILED tests/test_late_scale_supported_cfa_wave.py::test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[BGGR]
+FAILED tests/test_late_scale_supported_cfa_wave.py::test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[GRBG]
+FAILED tests/test_late_scale_supported_cfa_wave.py::test_anchor_ADC_old_measurements_and_isolated_extra_column_learning[GBRG]
+4 failed, 30 passed in 3.47s

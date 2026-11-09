@@ -22,6 +22,8 @@ RGB gates or clipping negative gates does not remove these failures. Constant
 gates look cleaner while shrinking correction strength; matching that strength
 brings artifacts back. The native comparison motivates better local support
 measurements; it is not a newly trained model.
+The [V200 physical cross-scale support prototype](docs/scale-supported-cfa-wave.md)
+passes CPU/GPU engineering checks and has entered fresh training; quality is pending.
 
 Earlier [dense-window](docs/large-dense-spectrum-comparison.md) and
 [pooled-selection](docs/pooled-phase-wave-comparison.md) results remain available.
