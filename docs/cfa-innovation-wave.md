@@ -1,7 +1,10 @@
 # Color-grounded innovation readout (V198)
 
-**The engineering checks and full 900-update training audit pass. Image quality
-is unmeasured.** This candidate addresses a weakness in the completed
+**The [completed quality comparison](cfa-innovation-wave-comparison.md) shows
+stronger colored mesh response with persistent edge and flat artifacts.**
+EMA reaches 11.158% GT response, +22.72% over V197 innovation EMA, but adds
+green/magenta building fringes and raises quiet spatial RMS 1.151–1.648% over
+V195 on all 32 inputs. This candidate addresses a weakness in the completed
 [V197 comparison](innovation-wave-comparison.md): stronger faint mesh modulation
 coexists with a pronounced red/cyan building artifact and extra flat-field waves.
 The real cab crossings remain incomplete. V197's gains and costs, V195/V187's
@@ -81,8 +84,10 @@ anchor tensors** across the two probe checkpoints. Peak admission CUDA allocatio
 is **6.233 GiB**, not a 100MP performance measurement.
 
 [Source-bound preparation, admission and launch evidence](results/v198-cfa-innovation-prepared-v1.json).
-The [full evaluation pipeline](cfa-innovation-evaluation.md) is now frozen, its
-CPU preflights pass, and its controller is registered to follow this training run.
+The [full evaluation pipeline](cfa-innovation-evaluation.md), both endpoints,
+audits, strict exports, 60 actually viewed native figures and browser checks are
+complete. Own-color synthesis and bounded gains did not prevent the building
+failure or false flat-field waves.
 
 ## Full training and required quality comparison
 

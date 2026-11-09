@@ -1,8 +1,10 @@
 # Complete V198 evaluation protocol
 
-**Full training and its CPU audit are complete. Evaluation code is frozen, CPU
-preflights and the four actual CUDA feature bridges pass, and the controller is
-registered for both endpoints. No complete V198 image-quality result exists yet.** The
+**Both endpoints and all audits are complete.** The
+[quality comparison](cfa-innovation-wave-comparison.md) records 11.158% GT mesh
+response and improved colored modulation, alongside green/magenta building
+fringes and higher quiet/flat errors. All 60 native figures / 12 triplets were
+actually viewed, and 1,440 browser captures match source pixels. The
 [architecture and training note](cfa-innovation-wave.md) explains the all-CFA
 physical-wave representation and its limitations.
 
@@ -56,11 +58,11 @@ implementations verify prediction panels. No crop is resized. Source/ROI,
 checkpoint, noise and exposure metadata remain attached to every comparison.
 
 Actual viewing, browser source-pixel verification, report interpretation and
-README updates follow the rendered outputs. A training loss, completion status,
+README updates are complete. A training loss, completion status,
 aggregate response gain or engineering bound cannot substitute for inspecting
 fine crossings, the building artifact and false flat-region texture. The current
-[V197 strengths and costs](innovation-wave-comparison.md) remain the latest
-completed quality evidence.
+[V197 strengths and costs](innovation-wave-comparison.md) retain lower off-signal
+and quiet-error strengths beside V198's stronger-response experiment.
 
 Preparation checks pass **13 measurement-record tests**, including altered
 canonical phase, bin/rank, geometry, wave hash/shape and power/rank-count rejection.

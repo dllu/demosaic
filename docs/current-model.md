@@ -1,8 +1,19 @@
 # Current model choices
 
-**Current periodic-detail prototype:** [V197 innovation EMA](innovation-wave-comparison.md) reaches **9.092% GT mesh response** (+63.09% over V195) and visibly strengthens real cab-mesh modulation. It adds building color artifacts and false flat/photographic waves. [V195 Whole EMA](directional-response-comparison.md) has lower off-signal error and avoids that new building artifact; [V187 EMA](pooled-phase-wave-comparison.md) is quieter. V120 Small remains the general recommendation.
+**Current stronger-response experiment:** [V198 CFA EMA](cfa-innovation-wave-comparison.md)
+reaches **11.158% GT mesh response**, +22.72% over V197 innovation EMA. It improves
+colored constructed-mesh modulation and strengthens real cab pattern, but creates
+pronounced green/magenta building fringes and raises quiet spatial RMS
+**1.151–1.648% versus V195** on all 32 inputs. Own-color waves and bounded gains
+did not solve false texture. [V197](innovation-wave-comparison.md) has lower
+off-signal/quiet error, [V195](directional-response-comparison.md) avoids the new
+building color failures in these views, and [V187](pooled-phase-wave-comparison.md)
+is quieter. V120 Small remains the general recommendation.
 
-All four V197 raw/EMA endpoints, 822 cases each, strict exports, 72 actually viewed native figures /24 triplets and browser source-pixel checks are complete. [Five-state native viewer](images/v197-innovation-wave-v1/native-viewer.html) · [Full strengths and costs](innovation-wave-comparison.md).
+Both V198 endpoints, all 822 cases each, independent audits, two strict exports,
+60 actually viewed native figures / 12 triplets and 1,440 exact browser captures
+are complete. [Six-state native viewer](images/v198-cfa-innovation-wave-v1/native-viewer.html) ·
+[Measured strengths and costs](cfa-innovation-wave-comparison.md).
 
 The completed [V189 wider-separation trial](spaced-pooled-wave-comparison.md) regresses at the same 508-parameter / 900-update budget: mesh response falls **4.63% raw / 5.68% EMA** versus V187, and quiet spatial RMS rises **0.38–1.31%**, worsening 30/32 inputs in each state. Fresh-flat errors also rise slightly on 47/48 inputs. Small natural-response/DC gains do not produce clear new cab crossings. That historical comparison favors V187 over V189; current options are above. Both endpoints, audits, 60 viewed native figures / 12 triplets and two exports are complete. [Eighteen-state viewer](images/v189-spaced-pooled-v1/native-viewer.html) · [Exact evidence](results/v189-spaced-pooled-final-v1.json).
 

@@ -7,14 +7,15 @@ known/unseen-CFA means 54.31272/54.00872 dB, tested ADC maximum 55.52 DN16.
 It uses a pretrained DRUNet trunk and the official DINOv3 ConvNeXt-Small pyramid.
 [Primary results](docs/v120-v121-primary.md) · [Current choices](docs/current-model.md).
 
-**V197 innovation EMA is a stronger periodic-detail prototype:** mesh response
-rises **63.09% over V195 Whole EMA**, reaching **9.092% of exact GT amplitude**,
-and real cab-mesh modulation is visibly stronger. It also creates a pronounced
-red/cyan building-edge artifact, adds false flat-field waves, and raises quiet
-spatial RMS **0.176–0.326%**. V195 avoids that new building artifact and has
-lower off-signal error; V187 is quieter. The fine-detail/clean-flat goal remains
-unresolved. [Completed tradeoff report](docs/innovation-wave-comparison.md) ·
-[Five-state native viewer](docs/images/v197-innovation-wave-v1/native-viewer.html).
+**V198 CFA EMA is a stronger periodic-response experiment:** it reaches
+**11.158% of exact GT mesh amplitude**, +22.72% over V197 innovation EMA, with
+more target-like constructed-mesh color and stronger real cab modulation.
+It also creates pronounced **green/magenta building fringes** and raises quiet
+spatial RMS **1.151–1.648% versus V195** on all 32 inputs. V197 has lower
+flat/quiet costs, V195 avoids these new building color failures, and V187 is
+quieter. The fine-detail/clean-flat goal remains unresolved.
+[Complete comparison](docs/cfa-innovation-wave-comparison.md) ·
+[Six-state native viewer](docs/images/v198-cfa-innovation-wave-v1/native-viewer.html).
 
 Earlier [dense-window](docs/large-dense-spectrum-comparison.md) and
 [pooled-selection](docs/pooled-phase-wave-comparison.md) results remain available.
@@ -33,6 +34,7 @@ Useful strengths remain split across implementations:
 | [V185 smaller support](docs/spatial-context-wave-comparison.md) | Better mesh/quiet means than V184; slightly better flat/absent controls than V187 | Only 4.968–5.171% GT response; false waves and mottle |
 | [V187 pooled selection](docs/pooled-phase-wave-comparison.md) | Quieter immediate alternative to V195 Whole EMA; good response/quiet balance over V185 | Small absent/flat regressions; incomplete real crossings |
 | [V195 response pressure](docs/directional-response-comparison.md) | Whole EMA: 5.575% GT mesh response, +4.02% over V187 EMA; four natural-response means rise | Quiet RMS +0.334–0.376%; small blank/flat costs; real fine crossings unresolved |
+| [V198 own-color innovation waves](docs/cfa-innovation-wave-comparison.md) | EMA: 11.158% GT mesh response, +22.72% over V197; stronger colored mesh modulation | New green/magenta building fringes; quiet RMS +1.151–1.648%, fresh-flat RMS +0.631–0.792% versus V195; crossings incomplete |
 | [V197 innovation measurements](docs/innovation-wave-comparison.md) | EMA: 9.092% GT mesh response, +63.09% over frozen V195; stronger synthetic lattice and real cab modulation | New red/cyan building artifact, false periodic texture; quiet RMS +0.176–0.326%, fresh-flat RMS +0.194–0.272% |
 | [V191 dense local spectrum](docs/dense-local-spectrum-comparison.md) | Small EMA quiet/fresh-flat improvements over V187 | Large mesh-response loss, lower natural response; no clear new cab crossings |
 
@@ -55,35 +57,36 @@ pressure gives the stronger response; angular balancing has not fixed missing cr
 
 ## Current 100% crops
 
-The [five-state native viewer](docs/images/v197-innovation-wave-v1/native-viewer.html)
-opens matched RAW EMA versus Innovation EMA; select V195 Whole EMA to compare
-the frozen anchor. Flip A/B or press **F**. All crops are native 160px, with identical
-coordinates/transforms across methods. The
-[earlier viewer](docs/images/v193-large-dense-v1/native-viewer.html) preserves older strengths.
+The [six-state native viewer](docs/images/v198-cfa-innovation-wave-v1/native-viewer.html)
+opens V197 innovation EMA versus V198 CFA EMA; V187/V195 and V197 RAW EMA are
+also selectable. Flip A/B or press **F**. All crop cells are native 160px, with
+identical coordinates and transforms. [Earlier V197 comparisons](docs/innovation-wave-comparison.md)
+retain that model's lower-error strengths and red/cyan failure.
 
-Mesh2302 and Mesh2309 below: noisy → **V197 Innovation EMA** → exact constructed GT;
+Mesh2302 and Mesh2309 below: noisy → **V198 CFA EMA** → exact constructed GT;
 512px RGGB source, ROI `[176,176,160,160]`, shot 0.00128/read 6.5536e−6,
-exposure 8 (+3 EV), contrast 1. [Checkpoint hashes and complete metadata](docs/images/v197-innovation-wave-v1/manifest-v1.json).
+exposure 8 (+3 EV), contrast 1. [Checkpoint hashes and complete metadata](docs/images/v198-cfa-innovation-wave-v1/manifest-v1.json).
 
-![Mesh2302: noisy, V197 Innovation EMA, exact constructed GT](docs/images/v197-innovation-wave-v1/comparison-04.png)
+![Mesh2302: noisy, V198 CFA EMA, exact constructed GT](docs/images/v198-cfa-innovation-wave-v1/comparison-02.png)
 
-![Mesh2309: noisy, V197 Innovation EMA, exact constructed GT](docs/images/v197-innovation-wave-v1/comparison-10.png)
+![Mesh2309: noisy, V198 CFA EMA, exact constructed GT](docs/images/v198-cfa-innovation-wave-v1/comparison-06.png)
 
-Real examples below: noisy → **V197 Innovation EMA** → independent ISO100 AHD.
-The cab mesh uses DSCF3842 ISO6400 and DSCF3835 ISO100 f/5.6; the right ROI is
-`[426,189,160,160]` in the cached 768px context, exposure16. The main building
-uses DSCF3879 ISO6400 /DSCF3880 ISO100 f/5.6, central160px ROI, exposure4.
-Both use the disclosed nominal shot0.00128/read6.5536e−6 prior. The cab gains
-mesh modulation; the building exposes the new red/cyan edge failure.
-Independent references differ in aperture, exposure and motion and are
-**not exact GT**. [Exact native-panel provenance](docs/results/v197-innovation-wave-v1/representative-figures-v1.json).
+Real examples: noisy → **V198 CFA EMA** → independent ISO100 AHD. The cab uses
+DSCF3842 ISO6400 / DSCF3835 ISO100 f/5.6; right ROI `[426,189,160,160]` in the
+cached 768px context, exposure 16. Main building uses DSCF3879 ISO6400 /
+DSCF3880 ISO100 f/5.6; central ROI `[176,176,160,160]`, exposure 4. Nominal
+shot 0.00128/read 6.5536e−6 is a disclosed prior, not measured calibration.
+The cab gains modulation; the building shows a strong green/magenta failure.
+Independent references differ in aperture, exposure and motion and are **not
+exact GT**. [Native-panel provenance](docs/results/v198-cfa-innovation-wave-v1/representative-figures-v1.json).
 
-![Cab mesh: noisy, V197 Innovation EMA, independent ISO100 reference](docs/images/v197-innovation-wave-v1/readme-cab-v1.png)
+![Cab modulation: noisy, V198 CFA EMA, independent ISO100 reference](docs/images/v198-cfa-innovation-wave-v1/readme-cab-v1.png)
 
-![Building color cost: noisy, V197 Innovation EMA, independent ISO100 reference](docs/images/v197-innovation-wave-v1/readme-building-v1.png)
+![Building failure: noisy, V198 CFA EMA, independent ISO100 reference](docs/images/v198-cfa-innovation-wave-v1/readme-building-v1.png)
 
-The [full comparison](docs/innovation-wave-comparison.md) retains both cab ROIs,
-both noise profiles, both SOOC JPEGs, and main-scene sky/foliage/coarse fence.
+The [full comparison](docs/cfa-innovation-wave-comparison.md) retains both cab
+ROIs/noise profiles/JPEGs and main-scene sky, foliage and coarse fence, with
+flat and natural-photo counterexamples beside the measured detail gains.
 [V120 full-frame GFX examples](docs/gfx-qualitative.md) and
 [camera comparisons](docs/native-camera-development.md) remain available.
 [Complete-frame optional detail comparisons](docs/supported-wave-amplitude.md) ·
