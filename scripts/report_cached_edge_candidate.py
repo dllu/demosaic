@@ -15,8 +15,9 @@ from demosaic.experiments.evaluation.crops import display_pixels, write_triplet
 from demosaic.experiments.evaluation.native import load_native
 
 
-def paired_rows(candidate, baseline):
+def paired_rows(candidate, baseline, *, prefix="competing", baseline_states=None, anchor_gain=0.0):
     """Bind every new metric to the same observation, conditions and anchor."""
+    baseline_states = baseline_states or {"raw": "raw", "ema": "ema"}
     old = {}
     for row in baseline:
         key = row["index"], row["method"], row["gain_scale"]
@@ -25,13 +26,14 @@ def paired_rows(candidate, baseline):
         old[key] = row
     seen = set()
     for row in candidate:
-        state = row["method"].removeprefix("competing-")
-        if state not in ("raw", "ema") or row["method"] != "competing-" + state:
+        state = row["method"].removeprefix(prefix + "-")
+        if state not in ("raw", "ema") or row["method"] != prefix + "-" + state:
             raise ValueError("Unknown candidate endpoint")
-        key = row["index"], "V200-" + state, row["gain_scale"]
-        if key in seen or key not in old:
+        identity = row["index"], state, row["gain_scale"]
+        key = row["index"], "V200-" + baseline_states[state], row["gain_scale"]
+        if identity in seen or key not in old:
             raise ValueError("Duplicate or missing paired observation")
-        seen.add(key)
+        seen.add(identity)
         control = old[key]
         if any(row[k] != control[k] for k in ["source", "placement", "pattern", "repeat"]):
             raise ValueError("Mismatched paired conditions")
@@ -40,15 +42,21 @@ def paired_rows(candidate, baseline):
                 continue
             if not math.isfinite(value) or not math.isfinite(control[name]):
                 raise ValueError("Nonfinite paired metric")
-            if row["gain_scale"] == 0 and value != control[name]:
+            anchor = old[row["index"], "V200-" + baseline_states[state], anchor_gain]
+            if row["gain_scale"] == 0 and value != anchor[name]:
                 raise ValueError("Different zero-gain anchor")
-    expected = {k for k in old if k[1] in ("V200-raw", "V200-ema")}
+    expected = {
+        (index, state, gain)
+        for state in ["raw", "ema"]
+        for index, method, gain in old
+        if method == "V200-" + baseline_states[state]
+    }
     if seen != expected:
         raise ValueError("Incomplete paired coverage")
     return [r for r in baseline if r["method"] in ("V195-ema", "V200-raw", "V200-ema")] + candidate
 
 
-def render(profile, scores, baseline, cache, output):
+def render(profile, scores, baseline, cache, output, *, candidate="competing"):
     figures = []
     for source in [0, 1]:
         for placement in ["near", "far"]:
@@ -65,7 +73,7 @@ def render(profile, scores, baseline, cache, output):
             old = baseline["native_predictions"][str(item["index"])]
             new = scores["native_predictions"][profile][str(item["index"])]
             values = {m: load_native(old[m])[2:3] for m in ["V195-ema", "V200-ema"]}
-            values["competing-ema"] = load_native(new["ema"])[2:3]
+            values[candidate + "-ema"] = load_native(new["ema"])[2:3]
             noisy = malvar(
                 torch.from_numpy(arrays["packed"][2:3]), torch.from_numpy(arrays["colors"][2:3])
             ).numpy()
@@ -75,7 +83,7 @@ def render(profile, scores, baseline, cache, output):
             metadata = write_triplet(
                 output / (stem + "-triplet.png"),
                 noisy,
-                values["competing-ema"],
+                values[candidate + "-ema"],
                 target,
                 calibration,
                 roi=[176, 176, 160, 160],
@@ -96,7 +104,7 @@ def render(profile, scores, baseline, cache, output):
                 ("noisy Malvar", noisy),
                 ("V195-ema", values["V195-ema"]),
                 ("V200-ema", values["V200-ema"]),
-                ("competing-ema", values["competing-ema"]),
+                (candidate + "-ema", values[candidate + "-ema"]),
                 ("exact-GT", target),
             ]
             image = output / (stem + "-comparison.png")
@@ -129,6 +137,8 @@ def report(run, output):
     ):
         raise ValueError("Incomplete cached candidate evaluation")
     plan = read_json(checked(scores["plan"]))
+    candidate = plan.get("candidate", "competing")
+    baseline_states = plan.get("baseline_states", {"raw": "raw", "ema": "ema"})
     output.mkdir(parents=True, exist_ok=False)
     summaries, comparisons, figures, inputs = [], [], [], []
     torch.set_num_threads(1)
@@ -140,14 +150,22 @@ def report(run, output):
         if len(baseline["rows"]) != 2688 or len(cache["rows"]) != 128:
             raise ValueError("Incomplete baseline panel")
         new = [r for r in scores["rows"] if r["profile"] == profile]
-        merged = paired_rows(new, baseline["rows"])
-        summary, comparison = statistics({"rows": merged}, candidate="competing")
+        merged = paired_rows(
+            new,
+            baseline["rows"],
+            prefix=candidate,
+            baseline_states=baseline_states,
+            anchor_gain=plan.get("anchor_control_gain", 0.0),
+        )
+        summary, comparison = statistics(
+            {"rows": merged}, candidate=candidate, baseline_states=baseline_states
+        )
         folder = output / profile
         folder.mkdir()
-        plot(summary, folder, candidate="competing")
+        plot(summary, folder, candidate=candidate, baseline_states=baseline_states)
         summaries.extend([dict(r, profile=profile) for r in summary])
         comparisons.extend([dict(r, profile=profile) for r in comparison])
-        figures.extend(render(profile, scores, baseline, cache, output))
+        figures.extend(render(profile, scores, baseline, cache, output, candidate=candidate))
     checked(binding)
     write_json(
         output / "analysis.json",
@@ -156,6 +174,11 @@ def report(run, output):
             "inputs": inputs,
             "summaries": summaries,
             "paired_differences": comparisons,
+            "baseline_states": baseline_states,
+            "candidate_zero_gain_control": {
+                "method": plan.get("anchor_method", "V195-ema"),
+                "gain_scale": plan.get("anchor_control_gain", 0.0),
+            },
             "figures": figures,
             "native_viewed": False,
             "script": reference(__file__),

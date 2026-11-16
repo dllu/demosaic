@@ -9,7 +9,8 @@ def build_component(kind, config=None):
     from .wave import compose_legacy
 
     config = dict(config or {})
-    competing = kind == "orientation-balanced-cfa-wave"
+    complementary = kind == "complementary-cfa-wave"
+    competing = kind == "orientation-balanced-cfa-wave" or complementary
     family_degrees = config.pop("family_degrees", 20.0) if competing else None
     if competing:
         import math
@@ -25,12 +26,21 @@ def build_component(kind, config=None):
         "cfa-wave": LateCFAInnovationWaveDetail,
         "scale-supported-cfa-wave": LateScaleSupportedCFAWaveDetail,
         "orientation-balanced-cfa-wave": LateScaleSupportedCFAWaveDetail,
+        "complementary-cfa-wave": LateScaleSupportedCFAWaveDetail,
     }
     if kind not in constructors:
         raise ValueError(f"Unknown component kind: {kind}")
     # Retain exact seeded initialization; old classes are discarded after adoption.
     module = compose_legacy(constructors[kind](**config))
-    if competing:
+    if complementary:
+        import copy
+
+        from .wave import ComplementaryWaveStage
+
+        module = ComplementaryWaveStage(
+            module, copy.deepcopy(module.readout), family_degrees=family_degrees
+        )
+    elif competing:
         from functools import partial
 
         from demosaic.competing_phase import competing_phase_bins

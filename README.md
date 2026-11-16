@@ -38,6 +38,9 @@ The [completed fresh-noise review](docs/competing-edge-response.md) raises far-e
 weak response 3.13%→5.06% at the 1600 prior with slightly lower quiet error;
 strong response falls. Both endpoints/all native boards are reviewed, with
 persistent building/flat artifacts.
+The [next complementary stage](docs/complementary-cfa-branch.md) is training above
+frozen V200 EMA, adding proposals while retaining its existing carrier path.
+Its trained quality remains unmeasured.
 
 ## Setup and inference
 

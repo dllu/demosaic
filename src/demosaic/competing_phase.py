@@ -15,6 +15,25 @@ from .late_pooled_phase_wave import _green_layout
 from .precision import ieee_fp32
 
 
+def exclude_nearby_bins(bins, valid, inherited_bins, inherited_valid, shape, *, radius=1):
+    """Remove duplicate/conjugate proposals on the periodic packed DFT lattice.
+
+    This only reserves the inherited carriers' neighborhoods. It neither detects
+    a structure nor bounds overlap of spatially modulated wave estimates.
+    """
+    if type(radius) is not int or radius < 0:
+        raise ValueError("Expected a nonnegative integer exclusion radius")
+    size = bins.new_tensor(shape)
+    new, old = bins.flatten(1, 2), inherited_bins.flatten(1, 2)
+    occupied = inherited_valid.flatten(1, 2)
+    duplicate = torch.zeros(new.shape[:2], dtype=torch.bool, device=bins.device)
+    for sign in [-1, 1]:
+        delta = (new[:, :, None] - sign * old[:, None]).remainder(size)
+        distance = torch.minimum(delta, size - delta).amax(-1)
+        duplicate |= ((distance <= radius) & occupied[:, None]).any(-1)
+    return valid & ~duplicate.reshape(valid.shape)
+
+
 @torch.no_grad()
 def competing_phase_bins(field, variance, colors, *, peaks=4, lower=1 / 64, family_degrees=20.0):
     if type(peaks) is not int or not 1 <= peaks <= 8:

@@ -24,6 +24,7 @@ from demosaic.experiments.evaluation.edge_response import measure
 from demosaic.experiments.evaluation.native import load_native, write_native
 from demosaic.experiments.runtime import RuntimePolicy, exclusive_run, owner_identity, owner_live
 from demosaic.models.compat import load_component
+from demosaic.models.wave import readout_state_prefix
 from demosaic.prediction_archive import fingerprint
 
 
@@ -48,6 +49,7 @@ def prepare(root, review):
         )
     main = read_json(review / "plan.json")
     training = read_json(checked(main["training"]))
+    extension = training["recipe"]["model"]["kind"] == "complementary-cfa-wave"
     plan = {
         "root": str(root),
         "work": str(work),
@@ -57,6 +59,12 @@ def prepare(root, review):
         "review_plan": reference(review / "plan.json"),
         "baselines": baselines,
         "kind": training["recipe"]["model"]["kind"],
+        "candidate": "complementary" if extension else "competing",
+        "anchor_method": "V200-ema" if extension else "V195-ema",
+        "anchor_control_gain": 1.0 if extension else 0.0,
+        "baseline_states": {"raw": "ema", "ema": "ema"}
+        if extension
+        else {"raw": "raw", "ema": "ema"},
         "library": training["recipe"]["sampling_library"],
         "runtime": training["recipe"]["runtime"],
         "inputs": [
@@ -99,16 +107,17 @@ def run(root):
                 plan["kind"], checked(result["exports"]["raw"]), device="cuda"
             )
             _, ema = load_component(plan["kind"], checked(result["exports"]["ema"]), device="cpu")
+            head_prefix = readout_state_prefix(core)
             for name, value in raw["state_dict"].items():
-                if not name.startswith("cfa_readout."):
+                if not name.startswith(head_prefix):
                     assert torch.equal(value, ema["state_dict"][name])
             core.eval().requires_grad_(False)
             heads = {"raw": core.readout, "ema": copy.deepcopy(core.readout)}
             heads["ema"].load_state_dict(
                 {
-                    n.removeprefix("cfa_readout."): v
+                    n.removeprefix(head_prefix): v
                     for n, v in ema["state_dict"].items()
-                    if n.startswith("cfa_readout.")
+                    if n.startswith(head_prefix)
                 },
                 strict=True,
             )
@@ -140,7 +149,9 @@ def run(root):
                         anchor = aux["anchor_output"]
                         sigma = aux["sigma"]
                         expected = load_native(
-                            baseline["native_predictions"][str(item["index"])]["V195-ema"]
+                            baseline["native_predictions"][str(item["index"])][
+                                plan.get("anchor_method", "V195-ema")
+                            ]
                         )
                         np.testing.assert_array_equal(
                             anchor.cpu().numpy().view(np.uint32), expected.view(np.uint32)
@@ -179,7 +190,7 @@ def run(root):
                                         placement=item["metadata"]["placement"],
                                         pattern=item["metadata"]["pattern"],
                                         repeat=item["metadata"]["repeat"],
-                                        method="competing-" + state,
+                                        method=plan.get("candidate", "competing") + "-" + state,
                                         gain_scale=gain,
                                         **measure(arrays, delivered),
                                     )

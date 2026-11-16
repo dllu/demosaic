@@ -56,16 +56,20 @@ class TrainingConfig:
 
 def initialize_model(spec):
     from demosaic.models.compat import build_component
-    from demosaic.models.wave import legacy_state_dict, load_legacy_state_dict
+    from demosaic.models.wave import (
+        legacy_state_dict,
+        load_legacy_state_dict,
+        readout_state_prefix,
+    )
 
     model = build_component(spec["kind"], spec.get("config"))
     payload = load_torch(spec["initializer"])
     state = payload["state_dict"]
     if spec.get("initialization", "component") == "anchor":
         current = legacy_state_dict(model)
-        expected = {n for n in current if not n.startswith("cfa_readout.")}
+        expected = {n for n in current if not n.startswith(readout_state_prefix(model))}
         if set(state) != expected:
-            raise ValueError("Anchor initializer must contain exactly the frozen pooled component")
+            raise ValueError("Anchor initializer must contain exactly the frozen component")
         state = dict(current, **state)
     load_legacy_state_dict(model, state)
     values = trainable_parameters(model)

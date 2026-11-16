@@ -1,0 +1,70 @@
+{
+  "format": "cached-head-experiment-v1",
+  "name": "Complementary CFA carriers above frozen V200 EMA; quality unmeasured",
+  "model": {
+    "kind": "complementary-cfa-wave",
+    "config": {
+      "width": 16,
+      "max_search": 9.0,
+      "evidence_peaks": 4,
+      "evidence_window": 65,
+      "evidence_stride": 32,
+      "support_windows": [
+        33,
+        17
+      ],
+      "support_stride": 8,
+      "family_degrees": 20.0
+    },
+    "initializer": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V200-scale-supported-CFA-trial-v1/artifacts/exports/scale-supported-scale-EMA-step1000.pt",
+      "sha256": "2bb4a05943b6e9c1eb31877d19058ca4a3fea723666510fbaa133554d6ef7d22"
+    },
+    "initialization": "anchor"
+  },
+  "cache": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/data-canonical-cache-v1.json",
+    "sha256": "c7dacefef803713f2fd7c43dbd373f2d18cd5b454ec2a388c95debef1227b7f0"
+  },
+  "pair_units": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V168-fine-mesh-ladder-v1/candidate-pair-unit-table-v1.json",
+    "sha256": "3f10883c9d50f392d4deac96d00551744bc61ff0609fced19e52f643fd3df2fd"
+  },
+  "sampling_library": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v1/compiled-deform-v1/v170_deform.so",
+    "sha256": "f78420949ac56baa709b270011f1c0e3a1ee54f684e6a4f39e616076b4397ed0"
+  },
+  "domain_weights": {
+    "mesh": 4.0,
+    "weak": 4.0,
+    "photo": 1.0,
+    "flat": 1.0,
+    "mixed": 1.0
+  },
+  "training": {
+    "steps": 1000,
+    "warmup": 50,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0
+  },
+  "runtime": {
+    "device": "cuda",
+    "seed": 202611080198,
+    "threads": 2,
+    "deterministic": true,
+    "cuda_quota_gib": 24,
+    "minimum_ram_gib": 32,
+    "minimum_disk_gib": 40
+  },
+  "evidence": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V200-scale-supported-CFA-trial-v1/plan-v1.json",
+      "sha256": "cb6292c081d9f1f2d88f3eeae6489aa02f5567896be0f079842154cb8fac455e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/orientation-balanced-edge-review/scores.json",
+      "sha256": "18027a667d7e964a5ee9a9cea8665c8c0de0cd0e5fd607d1ff2c4d7f88e6e5b0"
+    }
+  ]
+}

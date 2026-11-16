@@ -130,6 +130,43 @@ class PooledWaveStage(nn.Module):
             return output
 
 
+@torch.no_grad()
+def measure_cfa_carriers(field, variance, colors, bins, valid, config, *, cross_scale):
+    """The shared physical CFA fits and context coordinates for measured bins."""
+    large, waves, evidence = cfa_innovation_wave_maps(
+        field,
+        variance,
+        colors,
+        bins,
+        valid,
+        window=config.evidence_window,
+        stride=config.evidence_stride,
+    )
+    small, support = fixed_bin_support_context(
+        field,
+        variance,
+        colors,
+        bins,
+        valid,
+        windows=config.support_windows,
+        stride=config.support_stride,
+    )
+    parts = [large[:, :, :6], small, large[:, :, 6:]]
+    scale_aux = None
+    if cross_scale:
+        agreement, scale_aux = cfa_cross_scale_support(
+            field,
+            variance,
+            colors,
+            bins,
+            valid,
+            windows=(config.evidence_window, *config.support_windows),
+            strides=(config.evidence_stride, config.support_stride, config.support_stride),
+        )
+        parts.append(agreement)
+    return torch.cat(parts, 2), waves, evidence, support, scale_aux
+
+
 class InnovationWaveStage(nn.Module):
     def __init__(self, anchor, readout, *, lower, cross_scale):
         super().__init__()
@@ -162,41 +199,15 @@ class InnovationWaveStage(nn.Module):
                         peaks=self.config.evidence_peaks,
                         lower=self.lower,
                     )
-                    large, waves, evidence = cfa_innovation_wave_maps(
+                    context, waves, evidence, support, scale_aux = measure_cfa_carriers(
                         field,
                         variance.float(),
                         colors,
                         bins,
                         valid,
-                        window=self.config.evidence_window,
-                        stride=self.config.evidence_stride,
+                        self.config,
+                        cross_scale=self.cross_scale,
                     )
-                    small, support = fixed_bin_support_context(
-                        field,
-                        variance.float(),
-                        colors,
-                        bins,
-                        valid,
-                        windows=self.config.support_windows,
-                        stride=self.config.support_stride,
-                    )
-                    parts = [large[:, :, :6], small, large[:, :, 6:]]
-                    if self.cross_scale:
-                        agreement, scale_aux = cfa_cross_scale_support(
-                            field,
-                            variance.float(),
-                            colors,
-                            bins,
-                            valid,
-                            windows=(self.config.evidence_window, *self.config.support_windows),
-                            strides=(
-                                self.config.evidence_stride,
-                                self.config.support_stride,
-                                self.config.support_stride,
-                            ),
-                        )
-                        parts.append(agreement)
-                    context = torch.cat(parts, 2)
             if evaluated:
                 wave = self.readout(context, waves, bins)
                 wave = torch.where(sigma > 0, wave, torch.zeros_like(wave))
@@ -223,6 +234,78 @@ class InnovationWaveStage(nn.Module):
             return output
 
 
+class ComplementaryWaveStage(nn.Module):
+    """Frozen complete V200 path plus a fresh head on additional RAW proposals.
+
+    Existing carriers/readout are retained. The new field is RAW minus that
+    complete restoration; its nominal noise units are not residual calibration.
+    A carrier exclusion is not a guarantee that final strong response is safe.
+    """
+
+    def __init__(self, anchor, readout, *, family_degrees=20.0):
+        super().__init__()
+        self.anchor, self.readout = anchor, readout
+        self.config, self.family_degrees = anchor.config, family_degrees
+        self.anchor.requires_grad_(False)
+
+    def train(self, mode=True):
+        super().train(mode)
+        self.anchor.eval()
+        return self
+
+    def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):
+        from demosaic.competing_phase import competing_phase_bins, exclude_nearby_bins
+
+        with torch.autocast(base.device.type, enabled=False), ieee_fp32():
+            with torch.no_grad():
+                anchor, inherited = self.anchor(base, packed, variance, colors, wb, return_aux=True)
+                sigma = inherited["sigma"]
+                evaluated = bool(torch.any(sigma > 0))
+                field = selection = evidence = support = context = waves = scale_aux = None
+                if evaluated:
+                    field = packed.float() - mosaic(anchor.float(), colors)
+                    bins, proposed, selection = competing_phase_bins(
+                        field,
+                        variance.float(),
+                        colors,
+                        peaks=self.config.evidence_peaks,
+                        lower=self.anchor.lower,
+                        family_degrees=self.family_degrees,
+                    )
+                    old = inherited["cfa_evidence"]
+                    valid = exclude_nearby_bins(
+                        bins, proposed, old["bin_yx"], old["valid"], field.shape[-2:]
+                    )
+                    selection = dict(selection, proposed_valid=proposed, valid=valid)
+                    context, waves, evidence, support, scale_aux = measure_cfa_carriers(
+                        field, variance.float(), colors, bins, valid, self.config, cross_scale=True
+                    )
+            if evaluated:
+                wave = self.readout(context, waves, bins)
+                wave = torch.where(sigma > 0, wave, torch.zeros_like(wave))
+                output = torch.where(sigma > 0, anchor + wave, anchor)
+            else:
+                wave, output = torch.zeros_like(anchor), anchor
+            if return_aux:
+                return output, {
+                    "anchor_output": anchor,
+                    # Keep the original frozen-restoration objective reference.
+                    "anchor_aux": inherited["anchor_aux"],
+                    "inherited_aux": inherited,
+                    "sigma": sigma,
+                    "matching_evaluated": evaluated,
+                    "measurement_field": field,
+                    "wave_selection": selection,
+                    "cfa_evidence": evidence,
+                    "wave_support": support,
+                    "cfa_context": context,
+                    "cfa_waves": waves,
+                    "wave_correction": wave,
+                    "scale_support": scale_aux,
+                }
+            return output
+
+
 def compose_legacy(module):
     """Adopt initialized modules once; subsequent forwards have no legacy dispatch."""
     config = WaveConfig(**{name: getattr(module, name) for name in WaveConfig.__dataclass_fields__})
@@ -241,28 +324,9 @@ def compose_legacy(module):
     return composed
 
 
-def legacy_state_dict(module):
-    """Export the historical tensor names/order for comparisons and old consumers."""
-    anchor = module.anchor if isinstance(module, InnovationWaveStage) else module
-    state = {}
-    for prefix, part in (
-        ("frozen", anchor.matching.frozen),
-        ("network", anchor.matching.network),
-        ("phase_evidence_in", anchor.matching.adapter),
-        ("wave_readout", anchor.readout),
-    ):
-        state.update({prefix + "." + name: value for name, value in part.state_dict().items()})
-    if isinstance(module, InnovationWaveStage):
-        state.update(
-            {"cfa_readout." + name: value for name, value in module.readout.state_dict().items()}
-        )
-    return state
-
-
-def load_legacy_state_dict(module, state):
-    current = legacy_state_dict(module)
-    if set(current) != set(state):
-        raise ValueError("Historical component tensor names do not match the composed model")
+def _legacy_parts(module):
+    if isinstance(module, ComplementaryWaveStage):
+        return [*_legacy_parts(module.anchor), ("complement_readout", module.readout)]
     anchor = module.anchor if isinstance(module, InnovationWaveStage) else module
     parts = [
         ("frozen", anchor.matching.frozen),
@@ -272,11 +336,30 @@ def load_legacy_state_dict(module, state):
     ]
     if isinstance(module, InnovationWaveStage):
         parts.append(("cfa_readout", module.readout))
+    return parts
+
+
+def readout_state_prefix(module):
+    return _legacy_parts(module)[-1][0] + "."
+
+
+def legacy_state_dict(module):
+    """Export the historical tensor names/order, adding new stages explicitly."""
+    state = {}
+    for prefix, part in _legacy_parts(module):
+        state.update({prefix + "." + name: value for name, value in part.state_dict().items()})
+    return state
+
+
+def load_legacy_state_dict(module, state):
+    current = legacy_state_dict(module)
+    if set(current) != set(state):
+        raise ValueError("Historical component tensor names do not match the composed model")
     # Validate every shape/dtype before mutating any module.
     for name, value in state.items():
         if value.shape != current[name].shape or value.dtype != current[name].dtype:
             raise ValueError(f"Incompatible historical tensor: {name}")
-    for prefix, part in parts:
+    for prefix, part in _legacy_parts(module):
         part.load_state_dict(
             {n[len(prefix) + 1 :]: v for n, v in state.items() if n.startswith(prefix + ".")},
             strict=True,

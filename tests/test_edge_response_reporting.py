@@ -48,3 +48,17 @@ def test_missing_or_duplicated_views_cannot_enter_uncertainty_summary():
     scores["rows"].pop()
     with pytest.raises(ValueError, match="four CFAs"):
         statistics(scores)
+
+
+def test_extra_stage_both_endpoints_compare_to_the_same_frozen_ema():
+    scores = fixture()
+    for row in scores["rows"]:
+        row["method"] = row["method"].replace("shared-", "complementary-")
+        if row["method"] == "V200-raw":
+            row["weak_gain"] += 10
+    _, comparisons = statistics(
+        scores, candidate="complementary", baseline_states={"raw": "ema", "ema": "ema"}
+    )
+    assert all(
+        row["metrics"]["weak_gain"]["difference"] == pytest.approx(0.1) for row in comparisons
+    )

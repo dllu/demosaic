@@ -3,7 +3,47 @@
 import copy
 
 import pytest
-from review_cached_head_trial import paired_comparison, recipe_changes
+from review_cached_head_trial import paired_comparison, recipe_changes, verify_frozen_extension
+
+
+def test_frozen_extension_keeps_data_fixed_and_requires_the_scored_export_history():
+    control = {
+        "model": {
+            "kind": "scale-supported-cfa-wave",
+            "config": {"width": 16},
+            "initializer": {"sha256": "V195"},
+        },
+        "cache": {"sha256": "same-data"},
+    }
+    new = copy.deepcopy(control)
+    new["model"].update(
+        kind="complementary-cfa-wave", initialization="anchor", initializer={"sha256": "V200"}
+    )
+    new["model"]["config"]["family_degrees"] = 20
+    assert recipe_changes(new, control, frozen_baseline_extension=True) == ["model"]
+    changed = copy.deepcopy(new)
+    changed["cache"]["sha256"] = "different-data"
+    with pytest.raises(ValueError, match="Unmatched"):
+        recipe_changes(changed, control, frozen_baseline_extension=True)
+    payload = {
+        "component": "LateScaleSupportedCFAWaveDetail",
+        "endpoint": "EMA",
+        "method": "scored-EMA",
+        "source_checkpoint": {"sha256": "trained"},
+        "training_plan": {"sha256": "plan"},
+        "frozen_V195_anchor": {"export": control["model"]["initializer"]},
+    }
+    baseline = {
+        "checkpoints": {"scale": payload["source_checkpoint"]},
+        "plan": payload["training_plan"],
+    }
+    verify_frozen_extension(payload, baseline, control, ["scored-EMA"] * 2)
+    for key in ["source_checkpoint", "training_plan", "endpoint", "frozen_V195_anchor"]:
+        changed = dict(payload, **{key: None})
+        with pytest.raises(ValueError):
+            verify_frozen_extension(changed, baseline, control, ["scored-EMA"] * 2)
+    with pytest.raises(ValueError):
+        verify_frozen_extension(payload, baseline, control, ["scored-raw", "scored-EMA"])
 
 
 def test_model_intervention_cannot_silently_change_data_or_initializer():

@@ -15,7 +15,7 @@ from demosaic.experiments.evaluation.edge_response import measure
 from demosaic.experiments.evaluation.native import load_native
 
 
-def statistics(scores, *, candidate="shared", baseline="V200"):
+def statistics(scores, *, candidate="shared", baseline="V200", baseline_states=None):
     groups = defaultdict(lambda: defaultdict(list))
     identities = set()
     for row in scores["rows"]:
@@ -51,11 +51,12 @@ def statistics(scores, *, candidate="shared", baseline="V200"):
             }
         )
     comparisons = []
+    baseline_states = baseline_states or {"raw": "raw", "ema": "ema"}
     for state in ["raw", "ema"]:
         for placement in ["near", "far"]:
             delta = (
                 source_values[f"{candidate}-{state}", 1.0, placement]
-                - source_values[f"{baseline}-{state}", 1.0, placement]
+                - source_values[f"{baseline}-{baseline_states[state]}", 1.0, placement]
             )
             draws = rng.integers(8, size=(5000, 8))
             intervals = np.quantile(delta[draws].mean(1), [0.025, 0.975], axis=0).T
@@ -72,7 +73,7 @@ def statistics(scores, *, candidate="shared", baseline="V200"):
     return summary, comparisons
 
 
-def plot(summary, output, *, candidate="shared", baseline="V200"):
+def plot(summary, output, *, candidate="shared", baseline="V200", baseline_states=None):
     import matplotlib
 
     matplotlib.use("Agg")
@@ -80,12 +81,15 @@ def plot(summary, output, *, candidate="shared", baseline="V200"):
 
     figure, axes = plt.subplots(1, 2, figsize=(10, 4.1), layout="constrained")
     for placement, axis in zip(["near", "far"], axes, strict=True):
-        for method, color, style in [
+        methods = [
             (f"{baseline}-raw", "#ba6b25", "--"),
             (f"{baseline}-ema", "#b83c2e", "-"),
             (f"{candidate}-raw", "#5c8baf", "--"),
             (f"{candidate}-ema", "#176d9c", "-"),
-        ]:
+        ]
+        if baseline_states == {"raw": "ema", "ema": "ema"}:
+            methods = methods[1:]
+        for method, color, style in methods:
             points = sorted(
                 [r for r in summary if r["method"] == method and r["placement"] == placement],
                 key=lambda r: r["gain_scale"],

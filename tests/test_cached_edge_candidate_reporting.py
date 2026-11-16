@@ -32,6 +32,31 @@ def test_pairing_is_order_independent_and_retains_the_actual_model_effect():
     assert merged[-2]["weak_gain"] == 1.1
 
 
+def test_added_stage_zero_gain_is_the_full_fixed_ema_control_for_both_endpoints():
+    old, _ = data()
+    for row in old:
+        if row["method"] == "V200-ema" and row["gain_scale"] == 1:
+            row.update(weak_gain=0.3, quiet_error_RMS_DN16=9.0)
+    new = []
+    for state in ["raw", "ema"]:
+        for gain in [0.0, 1.0]:
+            control = next(r for r in old if r["method"] == "V200-ema" and r["gain_scale"] == 1)
+            new.append(
+                dict(
+                    control,
+                    method="complementary-" + state,
+                    gain_scale=gain,
+                    weak_gain=0.3 + gain * 0.2,
+                )
+            )
+    options = {"prefix": "complementary", "baseline_states": {"raw": "ema", "ema": "ema"}}
+    assert len(paired_rows(new, old, anchor_gain=1.0, **options)) == 8
+    with pytest.raises(ValueError, match="zero-gain"):
+        paired_rows(new, old, **options)
+    with pytest.raises(ValueError, match="Incomplete"):
+        paired_rows(new[:-1], old, anchor_gain=1.0, **options)
+
+
 @pytest.mark.parametrize("problem", ["repeat", "duplicate", "missing", "anchor", "nonfinite"])
 def test_candidate_cannot_change_observations_or_zero_gain_anchors(problem):
     old, new = data()

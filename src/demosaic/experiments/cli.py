@@ -43,6 +43,7 @@ def resolve_recipe(path):
         "cfa-wave",
         "scale-supported-cfa-wave",
         "orientation-balanced-cfa-wave",
+        "complementary-cfa-wave",
     ):
         raise ValueError("Unknown cached component kind")
     if model.get("initialization", "component") not in ("component", "anchor"):
@@ -148,6 +149,8 @@ def main(argv=None):
         command.add_argument("run", type=Path)
         if name == "evaluate":
             command.add_argument("cases", type=Path, help="Checked quality-design observations")
+            command.add_argument("--verify-anchor-scores", type=Path)
+            command.add_argument("--verify-anchor-method")
         command.add_argument("output", type=Path)
         command.add_argument("--state", choices=("raw", "ema"), default="ema")
     for name in ("inspect", "audit-cache", "train", "launch"):
@@ -157,6 +160,8 @@ def main(argv=None):
             command.add_argument("--resume", action="store_true")
             command.add_argument("--stop-after", type=int, help="Additional schedule rows")
     args = parser.parse_args(argv)
+    if args.command == "evaluate" and bool(args.verify_anchor_scores) != bool(args.verify_anchor_method):
+        raise ValueError("Supply both anchor scores and method")
     if args.command == "models":
         from demosaic.models import model_presets
 
@@ -180,6 +185,13 @@ def main(argv=None):
             if args.command == "evaluate":
                 command.append(str(args.cases.absolute()))
             command += [str(args.output.absolute()), "--state", args.state]
+            if args.command == "evaluate" and args.verify_anchor_scores:
+                command += [
+                    "--verify-anchor-scores",
+                    str(args.verify_anchor_scores.absolute()),
+                    "--verify-anchor-method",
+                    args.verify_anchor_method,
+                ]
             os.execve(sys.executable, command, snapshot_environment(plan))
         if args.command == "export":
             from .outputs import export_endpoint
@@ -197,6 +209,14 @@ def main(argv=None):
                 checkpoint=checkpoint,
                 method=plan["recipe"]["name"] + "-" + args.state,
                 device=plan["recipe"]["runtime"]["device"],
+                anchor_reference=(
+                    {
+                        "scores": reference(args.verify_anchor_scores.absolute()),
+                        "method": args.verify_anchor_method,
+                    }
+                    if args.verify_anchor_scores
+                    else None
+                ),
             )
         elif args.command == "inspect":
             result = {

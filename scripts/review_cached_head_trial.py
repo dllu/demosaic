@@ -91,9 +91,21 @@ def paired_comparison(candidate, baseline, baseline_method):
     return results
 
 
-def recipe_changes(treatment, control, *, model_intervention=False):
+def recipe_changes(
+    treatment, control, *, model_intervention=False, frozen_baseline_extension=False
+):
     changed = {k for k in treatment.keys() | control.keys() if treatment.get(k) != control.get(k)}
-    if model_intervention:
+    if frozen_baseline_extension:
+        allowed = {"name", "evidence", "model"}
+        if (
+            treatment["model"]["kind"] != "complementary-cfa-wave"
+            or treatment["model"].get("initialization") != "anchor"
+            or control["model"]["kind"] != "scale-supported-cfa-wave"
+            or {k: v for k, v in treatment["model"]["config"].items() if k != "family_degrees"}
+            != control["model"]["config"]
+        ):
+            raise ValueError("Expected an explicit complementary extension of the same V200 stage")
+    elif model_intervention:
         allowed = {"name", "evidence", "model"}
         if any(
             treatment["model"].get(k) != control["model"].get(k)
@@ -107,6 +119,18 @@ def recipe_changes(treatment, control, *, model_intervention=False):
     return sorted(changed)
 
 
+def verify_frozen_extension(payload, baseline, control, methods):
+    if (
+        payload.get("component") != "LateScaleSupportedCFAWaveDetail"
+        or payload.get("endpoint") != "EMA"
+        or set(methods) != {payload.get("method")}
+        or payload.get("source_checkpoint") not in baseline["checkpoints"].values()
+        or payload.get("training_plan") != baseline["plan"]
+        or (payload.get("frozen_V195_anchor") or {}).get("export") != control["model"]["initializer"]
+    ):
+        raise ValueError("Frozen extension must bind the exact scored V200 EMA export/history")
+
+
 def prepare(args):
     run = args.run.absolute()
     training = read_json(run / "plan.json")
@@ -116,8 +140,18 @@ def prepare(args):
         raise ValueError("Expected a live training process or a completed run")
     control, _ = resolve_recipe(args.control_recipe)
     treatment = training["recipe"]
-    changed = recipe_changes(treatment, control, model_intervention=args.model_intervention)
+    changed = recipe_changes(
+        treatment,
+        control,
+        model_intervention=args.model_intervention,
+        frozen_baseline_extension=args.frozen_baseline_extension,
+    )
     baseline = read_json(args.baseline_scores)
+    if args.frozen_baseline_extension:
+        from demosaic.experiments.checkpoints import load_torch
+
+        payload = load_torch(treatment["model"]["initializer"])
+        verify_frozen_extension(payload, baseline, control, args.baseline_methods)
     baseline_plan = read_json(checked(baseline["plan"]))
     if reference(args.cases) != baseline_plan["design"]:
         raise ValueError("Review must use exactly the control's cached observations")
@@ -136,8 +170,11 @@ def prepare(args):
     plan = {
         "run": str(run),
         "label": args.label,
-        "export_prefix": "candidate" if args.model_intervention else "shared-edge",
+        "export_prefix": "candidate"
+        if args.model_intervention or args.frozen_baseline_extension
+        else "shared-edge",
         "model_intervention": args.model_intervention,
+        "frozen_baseline_extension": args.frozen_baseline_extension,
         "training": reference(run / "plan.json"),
         "training_owner": owner,
         "root": str(root),
@@ -159,7 +196,11 @@ def prepare(args):
         "baseline_figures": reference(args.baseline_figures),
         "baseline_methods": dict(zip(("raw", "ema"), args.baseline_methods)),
         "changed_recipe_fields": sorted(changed),
-        "scope": "Combined shared-edge scene/coupling intervention; no automatic quality promotion.",
+        "scope": (
+            "Additional643-parameter head/900updates over frozen scored V200EMA. Original training data, objective and schedule fixed; extra capacity/training, changed residual and proposals are a combined stage intervention. Every retained anchor scalar/native array must replay exactly. No quality claim before complete review."
+            if args.frozen_baseline_extension
+            else "Explicit matched recipe intervention; no automatic quality promotion."
+        ),
     }
     write_json(root / "plan.json", plan)
     return reference(root / "plan.json")
@@ -377,12 +418,32 @@ def run(root):
                 )
                 exports[state] = reference(endpoint)
                 output = root / f"evaluation-{state}"
+                arguments = [
+                    "evaluate",
+                    plan["run"],
+                    plan["cases"]["path"],
+                    str(output),
+                    "--state",
+                    state,
+                ]
+                if plan.get("frozen_baseline_extension"):
+                    arguments += [
+                        "--verify-anchor-scores",
+                        plan["baseline_scores"]["path"],
+                        "--verify-anchor-method",
+                        plan["baseline_methods"][state],
+                    ]
                 run_child(
                     plan,
                     f"evaluate-{state}",
-                    ["evaluate", plan["run"], plan["cases"]["path"], str(output), "--state", state],
+                    arguments,
                 )
                 scores[state] = read_json(output / "scores.json")
+                if (
+                    plan.get("frozen_baseline_extension")
+                    and scores[state]["anchor_verification"]["cases"] != plan["expected_cases"]
+                ):
+                    raise ValueError("Frozen anchor review is incomplete")
                 if scores[state]["cases"] != plan["cases"]:
                     raise ValueError("Evaluation used a different case suite")
                 contrasts[state] = paired_comparison(
@@ -424,10 +485,16 @@ def main():
     for name in ("run", "control-recipe", "cases", "baseline-scores", "baseline-figures", "output"):
         prep.add_argument("--" + name, type=Path, required=True)
     prep.add_argument("--baseline-methods", nargs=2, required=True, metavar=("RAW", "EMA"))
-    prep.add_argument(
+    mode = prep.add_mutually_exclusive_group()
+    mode.add_argument(
         "--model-intervention",
         action="store_true",
         help="Require fixed data/initializer while allowing explicit model changes",
+    )
+    mode.add_argument(
+        "--frozen-baseline-extension",
+        action="store_true",
+        help="Bind a complementary head to the exact scored V200EMA and replay all anchor controls",
     )
     prep.add_argument("--label", default="Shared-edge")
     worker = sub.add_parser("run")

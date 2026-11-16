@@ -41,3 +41,5 @@ Latest model trial: [completed noise ladder and competing-orientation training](
 Latest quality review: [competing-orientation raw/EMA and all60 native boards](2026-11-16-03-58-23-competing-orientation-quality.md); local weak-sector gain, lower aggregate response and persistent artifacts; conditional-noise review running.
 
 Latest conditional result: [competing-orientation three-noise review completed](../docs/competing-edge-response.md); higher far-edge weak response with strong-direction losses and mixed quiet effects. [Diary follow-up](2026-11-16-03-58-23-competing-orientation-quality.md).
+
+Latest model trial: [complementary CFA branch over frozen V200 EMA](2026-11-16-04-38-49-complementary-cfa-branch.md); training live, exact baseline review and all three conditional-noise profiles queued.

@@ -11,7 +11,7 @@ from demosaic.experiments.artifacts import checked, read_json, reference, write_
 from demosaic.experiments.evaluation.native import load_native
 
 
-def breakdown(run, previous, output):
+def breakdown(run, previous, output, *, candidate="competing"):
     result = read_json(run / "result.json")
     if result["status"] != "evaluated-awaiting-native-viewing":
         raise ValueError("Expected completed matched review")
@@ -54,7 +54,7 @@ def breakdown(run, previous, output):
             rows.append(
                 dict(
                     id=old["id"],
-                    method="competing-" + state,
+                    method=candidate + "-" + state,
                     prediction=binding,
                     geometry=old["geometry"],
                     **actual,
@@ -83,5 +83,11 @@ if __name__ == "__main__":
     parser.add_argument("run", type=Path)
     parser.add_argument("previous", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--candidate", default="competing")
     args = parser.parse_args()
-    breakdown(args.run.absolute(), args.previous.absolute(), args.output.absolute())
+    breakdown(
+        args.run.absolute(),
+        args.previous.absolute(),
+        args.output.absolute(),
+        candidate=args.candidate,
+    )
