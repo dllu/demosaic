@@ -8,6 +8,7 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 
 | Choice | Useful strength | Remaining weakness |
 | --- | --- | --- |
+| [Whole-context neural nuisance pilot](neural-nuisance-reconstruction.md) | Conditional analytic control:400/far quiet RMS−0.493%; no added building ripple because neural arm returns V120 exactly | Weak response3.686%→0.900%, increment error+0.028%; fine cab crossings missing;88 masked background calls, no broad quality/speed claim |
 | [V120 Small](v120-v121-primary.md) | 37.04008 dB on 427 photos; known/unseen CFA means 54.31272/54.00872 dB; verified 102MP RGB16 exports | Fine foliage, mesh, neon and dark-field mottle |
 | [V131 completed continuation](v131-broad-primary.md) |427-photo +0.04000 dB with400/427 source gains; targeted faint-ADC +0.14555 dB; modest high-noise carrier/flat gains | Unseen-camera −0.04381 dB; ADC color maximum1,816 DN16 versus55.5; high-noise weak-band error slightly worse; soft foliage/fine cab crossings; no new full-frame validation |
 | [V131 ADC Malvar, opt-in](v131-adc-projection.md) | Fixed existing policy, identical91 weights; ADC photo+0.15074 dB versus V131,382/427 gains; ADC color maximum19.98 DN16 | Weakest ADC band error+1.43%, lower analytic carrier amplitude,45 non-improving photos; positive-noise V131/camera costs unchanged; no new full-frame validation |
@@ -67,8 +68,11 @@ point available. V120 remains the general recommendation.
 The [A-only neural background diagnostic](withheld-neural-background.md) predicts
 withheld building/cab sensor samples better than the analytic H1 fit. It uses
 four fresh frozen-model/DINO calls, with held-out values removed before inference.
-Its blur/artifacts remain; it motivates a richer nuisance competitor rather
-than establishing a new delivered weak-detail improvement.
+Its [matched whole-context nuisance correction](neural-nuisance-reconstruction.md)
+now has complete numerical/native review: it reduces some added errors but
+loses clearest-prior weak recovery. This remains an experimental guard/control,
+with no general model promotion. Fixed-proposal nuisance fitting is the next
+discriminator; the closed88-field cache avoids neural replay.
 
 The [shared-edge cache](paired-training-coverage.md) is completed and audited:
 156 changed rows and 844 exact adoptions. Its [matched training and complete

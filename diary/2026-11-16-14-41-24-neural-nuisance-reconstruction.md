@@ -34,3 +34,34 @@ actual withheld NaNs and independent finite Gaussian stencil; the latter is
 bit-exact on all88 input fields. Correction worker609986/create1794869071.19
 continues under the same frozen controller. No GT-quality conclusions yet.
 
+All48 corrections subsequently close in536.69s; every controller stage passes.
+The independent audit checks3,819 metric fields,228 finite rows,114 material
+rows and14,131,200 native RGB channels across44 base boards, maximum scalar
+discrepancy3.0e-15. The additional channelwise publication check covers
+11,520,000 matched/stress channels. All34 published figures are actually viewed:
+22 matched,6 new-arm stress,2 supplemental building stress,2 exact-GT triplets,
+2 plots. Exact receipts/logs/sources and test failures are archived byte for
+byte in235 compressed publications, with a separately verified source tar.
+
+Main result:400/far conditional analytic→neural weak response3.686%→0.900%,
+quiet RMS−0.493%, weak-increment RMS+0.028%. Both sources lose weak recovery;
+strong response42.741%→41.320%. At1600/far quiet/increment improve1.075%/.181%
+while weak response falls slightly. No weak-detail model promotion. Neural
+building/sky outputs are exact V120 at every fixed threshold/mode; building
+direction matches13→0 while diagnostic standardized MSE29.82→6.12. Retained
+analytic-control maximum ROI[83,326,160,160] adds63.55 DN16 and the historical
+failure ROI[76,260,160,160] adds52.79; neural adds0 at both. Both cab profiles
+still lack fine crossings despite modulation changes.
+
+Post-inference recipe-frequency coverage finds two matched weak-fundamental
+pairs for analytic H1 and zero for neural nuisance across the two400/far
+two-direction scenes, at the unchanged1.5-bin radius. One source0 neural
+frequency is just outside at1.519 bins; this is descriptive coverage rather
+than a new inference gate. Selected-wave Gram spectra mostly remain near1.
+The next discriminator is fixed analytic proposals with neural nuisance,
+reusing the88-field cache without neural replay.
+
+Implementation/protocol committed and pushed as485cee83. README/current model,
+literature/index and the [complete quality report](../docs/neural-nuisance-reconstruction.md)
+now retain measured gains and losses together. [Publication](../docs/results/neural-nuisance-v1/publication.json).
+

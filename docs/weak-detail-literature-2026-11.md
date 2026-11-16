@@ -49,6 +49,13 @@ The [individual-harmonic/background controls](individual-wave-validation.md)
 retain lower far quiet/increment error than group support, with less response;
 neither removes building bands. Two affine planes further increase quiet error.
 Per-component held-out support remains insufficient for the real artifact.
+The [whole-context neural nuisance follow-up](neural-nuisance-reconstruction.md)
+shares a global CFA withholding partition between88 frozen neural backgrounds
+and all analytic tiles. Its completed48-case audit/native review finds less
+added quiet/building error, but400/far weak response falls3.686%→0.900% versus
+matched conditional analytic H1. Better background prediction still does not
+recover missing weak directions; fixed analytic proposals with the same neural
+nuisance are the next discriminator, using the closed background cache.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

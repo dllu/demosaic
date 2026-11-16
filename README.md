@@ -66,7 +66,10 @@ raises the fixed pilot's400/far weak response2.80%→12.68% versus matched H1,
 with quiet/increment error+5.44%/+1.94% and severe building bands. Both projection
 arms are fully reviewed. An [A-only neural background diagnostic](docs/withheld-neural-background.md)
 predicts withheld building/cab RAW better than the analytic fit, supporting a
-richer nuisance test; delivered weak-detail fidelity remains unresolved.
+richer nuisance test. Its [completed matched correction pilot](docs/neural-nuisance-reconstruction.md)
+reduces added building/quiet error but loses400/far weak recovery3.69%→0.90%;
+both cab profiles still miss fine crossings. Native comparisons and all controls
+are retained.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a

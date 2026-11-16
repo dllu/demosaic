@@ -123,5 +123,7 @@ not select or validate that future reconstruction model.
 
 The [whole-context matched correction pilot](neural-nuisance-reconstruction.md)
 now implements that shared-partition test, with a separate control for
-conditional prediction delivery. Its background cache/input audit is complete;
-the correction-quality review is pending.
+conditional prediction delivery. Its completed audit/native review finds lower
+added quiet/building error but lost clearest-prior weak recovery,3.69%→0.90%.
+The backgrounds predict sensor structure better without supplying clean new
+weak detail in that correction.
