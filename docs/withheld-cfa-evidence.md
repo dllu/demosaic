@@ -8,7 +8,8 @@ its represented edge family. Slight geometry mismatch leaves large false
 corrections. This is a diagnostic result, not a new demosaicing model or an
 explanation proven for V200's building fringes.
 
-The separate [shared-edge neural trial](experiments.md) is still training;
+The separate [shared-edge neural trial](experiments.md) has completed training and
+its quality review is running;
 this diagnostic changes neither its frozen sources nor its review.
 
 ## Measured tradeoff
@@ -92,6 +93,9 @@ fixed waves and an exactly represented noiseless step.
 
 The useful next analytic comparison is finer A-only edge geometry and local
 support, keeping the off-grid absent controls and weak second direction visible.
+The [geometry-refinement follow-up](withheld-cfa-edge-refinement.md) now measures
+that first comparison, with native exact-GT views and improved synthetic
+weaker-direction/false-error tradeoffs; finite support remains open.
 Merely increasing the withheld-validation threshold loses true wave response
 while retaining substantial edge leakage in this prototype. The current
 diagnostic therefore supports the plan's competing-edge investigation; it

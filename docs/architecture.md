@@ -78,8 +78,8 @@ Preparation and metadata inspection initialize no CUDA context.
 Recipes make the model, initialization, domain weights, complete LR horizon,
 runtime policy and resource reserves explicit. The shipped V200 replay recipe
 uses the original observations and schedule. The shared-edge recipe substitutes
-the completed audited cache; its matched trial is now running and trained
-quality remains unmeasured. Neither recipe launches merely by being prepared. Cached training performs no parent
+the completed audited cache; matched training is complete and its raw/EMA quality
+review is running. Neither recipe launches merely by being prepared. Cached training performs no parent
 DINO inference, source loading or new noise draws.
 
 Every completed schedule row is atomically published with its summary,

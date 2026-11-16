@@ -1,16 +1,18 @@
 # Current experiments
 
-**The matched shared-edge trial is training (November 16); quality is still
-unmeasured.** A live controller will audit the committed training rows, export
-both raw/EMA endpoints, evaluate all 822 existing inputs and retain all 60 native
-boards/triplets with the original coordinates and display choices.
+**The matched shared-edge trial completed all 900 updates and 100 ADC skips
+(November 16); quality review is running.** All 1,000 committed rows passed the
+checkpoint/Adam/frozen-state audit. The raw endpoint completed all 822 existing
+inputs; EMA evaluation is running. The controller then retains all 60 native
+boards/triplets with the original coordinates and display choices for inspection.
+[Training completion](results/shared-edge-training-completed-v1.json) ·
 [Launch observation](results/shared-edge-launch-v1.json) ·
 [Current model choices](current-model.md).
 
 | Recipe | Purpose | State |
 | --- | --- | --- |
 | [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
-| [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training in `.cache/experiments/shared-edge`; matched review queued in `.cache/experiments/shared-edge-review` |
+| [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training complete in `.cache/experiments/shared-edge`; raw complete/EMA evaluating in `.cache/experiments/shared-edge-review`; native inspection pending |
 
 Both recipes bind existing inputs and evidence by checksum. They are local
 artifact recipes; the referenced caches/operator/checkpoints must be present.
@@ -48,6 +50,12 @@ The [analytic withheld-CFA diagnostic](withheld-cfa-evidence.md) has completed:
 the tested flat-noise candidates but exposes predictable edge leakage, especially
 when step geometry is misspecified. This CPU-only result changes no neural
 checkpoint or recommendation.
+
+The [edge-refinement follow-up](withheld-cfa-edge-refinement.md) completes 7,168
+matched analytic fits. At thresholds selected on calibration nulls alone, both
+arms have zero observed test-null activations; off-grid weaker-direction gain
+rises from 2.39% to 56.99%, with lower exact increment error. Two native exact-GT
+triplets and the unchanged-control checks accompany this restricted result.
 
 Historical study entry points remain for reproduction. Their reusable helper
 imports now resolve to packaged implementations; original frozen snapshots are

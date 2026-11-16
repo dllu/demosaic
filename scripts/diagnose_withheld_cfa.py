@@ -19,7 +19,7 @@ from demosaic.experiments.evaluation.withheld import (
 )
 
 
-def make_scene(kind, size, seed):
+def make_scene(kind, size, seed, *, components=False):
     rng = np.random.default_rng(seed)
     y, x = np.mgrid[:size, :size]
     colors = np.array([[0, 1], [1, 2]])[y % 2, x % 2]
@@ -36,26 +36,36 @@ def make_scene(kind, size, seed):
         ) > offset
         background += 0.06 * tint * edge
     increment = np.zeros_like(background)
+    directions = []
     if "wave" in kind:
         # Unknown phases and two unequal directions; frequencies lie on the
         # diagnostic's native grid, with no template supplied to the estimator.
         phase = rng.uniform(0, 2 * np.pi, 2)
-        increment += 0.0014 * tint * np.cos(2 * np.pi * (5 * x + 3 * y) / size + phase[0])
+        directions.append(0.0014 * tint * np.cos(2 * np.pi * (5 * x + 3 * y) / size + phase[0]))
         if "two" in kind:
-            increment += 0.0007 * tint * np.cos(2 * np.pi * (-4 * x + 7 * y) / size + phase[1])
-    return background + increment, background, increment, colors
+            directions.append(
+                0.0007 * tint * np.cos(2 * np.pi * (-4 * x + 7 * y) / size + phase[1])
+            )
+        for direction in directions:
+            increment += direction
+    values = (background + increment, background, increment, colors)
+    return (*values, directions) if components else values
 
 
-def run(output, *, scenes=8, size=128):
+def run(output, *, scenes=8, size=128, edge_refinements=0, offgrid_waves=False):
     output.mkdir(exist_ok=False, parents=True)
     shot, read = 0.00128, 6.5536e-6
     kinds = ("flat", "edge", "edge-offgrid", "one-wave", "two-wave", "two-wave-edge")
+    if offgrid_waves:
+        kinds += ("two-wave-edge-offgrid",)
     rows = []
     for cohort, base_seed in (("calibration", 202611160100), ("test", 202611160200)):
         for kind_index, kind in enumerate(kinds):
             for source in range(scenes):
                 source_seed = base_seed + kind_index * 10000 + source
-                target, _background, increment, colors = make_scene(kind, size, source_seed)
+                target, _background, increment, colors, directions = make_scene(
+                    kind, size, source_seed, components=True
+                )
                 for repeat in range(2):
                     noise_seed = source_seed * 100 + repeat
                     rng = np.random.default_rng(noise_seed)
@@ -65,7 +75,13 @@ def run(output, *, scenes=8, size=128):
                         candidates, validations = [], []
                         for mask in (a, ~a):
                             candidate = fit_candidate(
-                                raw, colors, mask, shot=shot, read=read, nuisance=nuisance
+                                raw,
+                                colors,
+                                mask,
+                                shot=shot,
+                                read=read,
+                                nuisance=nuisance,
+                                edge_refinements=edge_refinements if nuisance == "step" else 0,
                             )
                             candidates.append(candidate)
                             validations.append(validate_candidate(candidate, raw, ~mask))
@@ -84,10 +100,14 @@ def run(output, *, scenes=8, size=128):
                             "min_validation_z": min(v["validation_z"] for v in validations),
                             "selected_frequencies": [c.frequencies_xy for c in candidates],
                             "selected_edges": [c.edge_index for c in candidates],
+                            "selected_edge_geometry": [c.edge_geometry for c in candidates],
                             "correction_RMS_DN16": float(np.sqrt(np.mean(correction**2)) * 65535),
                             "template_gain": float(np.sum(correction * increment) / energy)
                             if energy > 0
                             else None,
+                            "direction_gains": [
+                                float(np.sum(correction * d) / np.sum(d**2)) for d in directions
+                            ],
                         }
                         rows.append(row)
             print(cohort, kind, "complete", flush=True)
@@ -120,6 +140,16 @@ def run(output, *, scenes=8, size=128):
                     )
                     if "wave" in kind
                     else None,
+                    "delivered_weak_direction_gain": float(
+                        np.mean(
+                            [
+                                r["direction_gains"][1] * flag
+                                for r, flag in zip(group, active, strict=True)
+                            ]
+                        )
+                    )
+                    if "two-wave" in kind
+                    else None,
                 }
             )
     write_json(
@@ -135,6 +165,8 @@ def run(output, *, scenes=8, size=128):
             "pattern": "RGGB",
             "shot": shot,
             "read": read,
+            "edge_refinements": edge_refinements,
+            "offgrid_wave_followup": offgrid_waves,
             "rows": rows,
             "curves": curves,
             "split": "Half of each native CFA phase; reverse and require both z>t",
@@ -156,5 +188,13 @@ if __name__ == "__main__":
     parser.add_argument("output", type=Path)
     parser.add_argument("--scenes", type=int, default=8)
     parser.add_argument("--size", type=int, default=128)
+    parser.add_argument("--edge-refinements", type=int, choices=range(4), default=0)
+    parser.add_argument("--include-offgrid-waves", action="store_true")
     args = parser.parse_args()
-    run(args.output, scenes=args.scenes, size=args.size)
+    run(
+        args.output,
+        scenes=args.scenes,
+        size=args.size,
+        edge_refinements=args.edge_refinements,
+        offgrid_waves=args.include_offgrid_waves,
+    )

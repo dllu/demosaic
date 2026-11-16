@@ -4,9 +4,10 @@ Literature and project review, **2026-11-15, America/Los_Angeles**.
 This is a research note: proposals below are unimplemented and unmeasured.
 
 Implementation follow-up, November 16: the first shared-edge trial is
-[training with its matched review queued](experiments.md), and the
+[finished training with matched review running](experiments.md), and the
 [first analytic withheld-CFA/edge diagnostic](withheld-cfa-evidence.md) has
-completed. The review and
+completed, followed by a [geometry-refinement comparison](withheld-cfa-edge-refinement.md).
+The review and
 proposals below remain the original November 15 assessment; quality is unmeasured.
 
 **The next useful step is better discrimination between weak structure and

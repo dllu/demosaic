@@ -40,7 +40,8 @@ RAW inputs; their component exports alone are not full-frame parent models.
 ## Current research and evidence
 
 The [shared-edge cache](paired-training-coverage.md) is completed and audited:
-156 changed rows and 844 exact adoptions. Its [matched trial is training](experiments.md).
+156 changed rows and 844 exact adoptions. Its [matched training is complete;
+quality review is running](experiments.md).
 No shared-edge model-quality result
 has been measured. The new [configured runner](experiments.md) is ready for that
 trial, with the same V200 architecture and loss recipe.

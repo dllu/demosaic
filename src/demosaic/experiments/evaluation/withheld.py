@@ -20,6 +20,7 @@ class Candidate:
     noise_variance: np.ndarray
     edge_index: int | None
     discovery_mask: np.ndarray
+    edge_geometry: tuple | None = None
 
 
 def stratified_split(shape, seed):
@@ -55,7 +56,9 @@ def geometry(shape):
     return xx, yy, basis, steps
 
 
-def fit_candidate(raw, colors, discovery_mask, *, shot, read, nuisance="affine", peaks=2):
+def fit_candidate(
+    raw, colors, discovery_mask, *, shot, read, nuisance="affine", peaks=2, edge_refinements=0
+):
     """Fit a fixed native-coordinate prediction using only discovery samples.
 
     Edge geometry and Fourier peaks are selected on this same discovery subset.
@@ -76,6 +79,9 @@ def fit_candidate(raw, colors, discovery_mask, *, shot, read, nuisance="affine",
         or not np.isfinite([shot, read]).all()
         or min(shot, read) < 0
         or shot + read <= 0
+        or type(edge_refinements) is not int
+        or not 0 <= edge_refinements <= 3
+        or (edge_refinements and nuisance != "step")
     ):
         raise ValueError("Invalid CFA discovery inputs")
     xx, yy, basis, steps = geometry(raw.shape)
@@ -83,6 +89,7 @@ def fit_candidate(raw, colors, discovery_mask, *, shot, read, nuisance="affine",
     if any(((colors == c) & discovery_mask).sum() < 16 for c in range(3)):
         raise ValueError("Discovery subset needs samples of every color")
     edge_index = None
+    edge_geometry = None
     if nuisance == "step":
         # Residualize every fixed edge competitor against the A-only affine fit.
         q, _ = np.linalg.qr(basis[green], mode="reduced")
@@ -93,7 +100,30 @@ def fit_candidate(raw, colors, discovery_mask, *, shot, read, nuisance="affine",
         energy = np.sum(edges * edges, axis=0)
         benefit = (residual @ edges) ** 2 / np.maximum(energy, 1e-20)
         edge_index = int(np.argmax(benefit))
-        basis = np.column_stack((basis, steps[:, edge_index]))
+        angle = edge_index // 9 * np.pi / 12
+        offset = np.linspace(-0.4, 0.4, 9)[edge_index % 9]
+        chosen_step = steps[:, edge_index]
+        x, y = 2 * (xx + 0.5) / raw.shape[1] - 1, 2 * (yy + 0.5) / raw.shape[0] - 1
+        angular_radius, offset_radius = np.pi / 12, 0.1
+        for _ in range(edge_refinements):
+            candidates = [
+                (a, b)
+                for a in angle + np.linspace(-angular_radius, angular_radius, 9)
+                for b in offset + np.linspace(-offset_radius, offset_radius, 9)
+            ]
+            search = np.stack(
+                [(x * np.cos(a) + y * np.sin(a) > b).ravel() for a, b in candidates], axis=-1
+            ).astype(np.float64)
+            projected = search[green] - q @ (q.T @ search[green])
+            energy = np.sum(projected**2, axis=0)
+            benefit = (residual @ projected) ** 2 / np.maximum(energy, 1e-20)
+            selected = int(np.argmax(benefit))
+            angle, offset = candidates[selected]
+            chosen_step = search[:, selected]
+            angular_radius /= 4
+            offset_radius /= 4
+        edge_geometry = (float(angle), float(offset))
+        basis = np.column_stack((basis, chosen_step))
     background = np.empty(raw.size, np.float64)
     noise_variance = np.empty(raw.size, np.float64)
     for color in range(3):
@@ -138,6 +168,7 @@ def fit_candidate(raw, colors, discovery_mask, *, shot, read, nuisance="affine",
         noise_variance.reshape(raw.shape),
         edge_index,
         discovery_mask.copy(),
+        edge_geometry,
     )
 
 

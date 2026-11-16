@@ -17,16 +17,33 @@ def scene(size=64):
     return 0.02 + signal, colors
 
 
-@pytest.mark.parametrize("nuisance", ["affine", "step"])
-def test_discovery_is_invariant_to_arbitrary_withheld_values(nuisance):
+@pytest.mark.parametrize("nuisance,refinements", [("affine", 0), ("step", 0), ("step", 3)])
+def test_discovery_is_invariant_to_arbitrary_withheld_values(nuisance, refinements):
     raw, colors = scene()
     mask = stratified_split(raw.shape, 17)
-    first = fit_candidate(raw, colors, mask, shot=0.00128, read=6.5536e-6, nuisance=nuisance)
+    first = fit_candidate(
+        raw,
+        colors,
+        mask,
+        shot=0.00128,
+        read=6.5536e-6,
+        nuisance=nuisance,
+        edge_refinements=refinements,
+    )
     damaged = raw.copy()
     damaged[~mask] = np.nan
-    second = fit_candidate(damaged, colors, mask, shot=0.00128, read=6.5536e-6, nuisance=nuisance)
+    second = fit_candidate(
+        damaged,
+        colors,
+        mask,
+        shot=0.00128,
+        read=6.5536e-6,
+        nuisance=nuisance,
+        edge_refinements=refinements,
+    )
     assert first.frequencies_xy == second.frequencies_xy
     assert first.edge_index == second.edge_index
+    assert first.edge_geometry == second.edge_geometry
     for key in ("background", "prediction", "noise_variance"):
         np.testing.assert_array_equal(getattr(first, key), getattr(second, key))
 

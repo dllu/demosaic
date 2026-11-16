@@ -29,3 +29,5 @@ Latest research: [weak-detail literature review and reconstruction ideas](2026-1
 Latest experiment: [matched shared-edge trial launched](2026-11-16-01-38-52-shared-edge-trial.md); trained quality pending.
 
 Latest diagnostic: [withheld CFA evidence and predictable edge leakage](2026-11-16-01-46-42-withheld-cfa-edge-diagnostic.md).
+
+Latest follow-up: [edge refinement and completed shared-edge training](2026-11-16-02-02-45-edge-refinement-and-training.md); EMA/native quality review pending.

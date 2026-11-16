@@ -20,9 +20,11 @@ Broad state-of-the-art quality and 100MP within 10 seconds remain goals.
 
 [Weak-detail literature review and proposed experiments](docs/weak-detail-literature-2026-11.md)
 examines the fence/flat-region tradeoff and recent methods. The first proposed
-shared-edge trial is now training; [quality review is queued](docs/experiments.md).
+shared-edge trial has completed training; [quality review is running](docs/experiments.md).
 The [first withheld-CFA diagnostic](docs/withheld-cfa-evidence.md) shows why
 independent sample agreement still needs an adequate edge/background model.
+Its [geometry refinement](docs/withheld-cfa-edge-refinement.md) improves the
+measured synthetic weak-direction/false-detail tradeoff.
 
 ## Setup and inference
 
@@ -62,8 +64,8 @@ uv run demosaic-experiment inspect .cache/experiments/shared-edge
 PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
-The shared-edge cache is complete and audited; its matched trial is training
-and quality remains unmeasured.
+The shared-edge cache and matched training are complete; its raw/EMA quality
+review is running.
 Preparation does not launch training. Training data comes from freely licensed
 photos and procedural targets, with geometry before downsampling and zero
 optical blur in the current recipes. [Data pipeline](docs/training-pipeline.md).
