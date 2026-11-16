@@ -15,7 +15,7 @@ from demosaic.experiments.evaluation.edge_response import measure
 from demosaic.experiments.evaluation.native import load_native
 
 
-def statistics(scores):
+def statistics(scores, *, candidate="shared", baseline="V200"):
     groups = defaultdict(lambda: defaultdict(list))
     identities = set()
     for row in scores["rows"]:
@@ -54,8 +54,8 @@ def statistics(scores):
     for state in ["raw", "ema"]:
         for placement in ["near", "far"]:
             delta = (
-                source_values[f"shared-{state}", 1.0, placement]
-                - source_values[f"V200-{state}", 1.0, placement]
+                source_values[f"{candidate}-{state}", 1.0, placement]
+                - source_values[f"{baseline}-{state}", 1.0, placement]
             )
             draws = rng.integers(8, size=(5000, 8))
             intervals = np.quantile(delta[draws].mean(1), [0.025, 0.975], axis=0).T
@@ -72,7 +72,7 @@ def statistics(scores):
     return summary, comparisons
 
 
-def plot(summary, output):
+def plot(summary, output, *, candidate="shared", baseline="V200"):
     import matplotlib
 
     matplotlib.use("Agg")
@@ -81,10 +81,10 @@ def plot(summary, output):
     figure, axes = plt.subplots(1, 2, figsize=(10, 4.1), layout="constrained")
     for placement, axis in zip(["near", "far"], axes, strict=True):
         for method, color, style in [
-            ("V200-raw", "#ba6b25", "--"),
-            ("V200-ema", "#b83c2e", "-"),
-            ("shared-raw", "#5c8baf", "--"),
-            ("shared-ema", "#176d9c", "-"),
+            (f"{baseline}-raw", "#ba6b25", "--"),
+            (f"{baseline}-ema", "#b83c2e", "-"),
+            (f"{candidate}-raw", "#5c8baf", "--"),
+            (f"{candidate}-ema", "#176d9c", "-"),
         ]:
             points = sorted(
                 [r for r in summary if r["method"] == method and r["placement"] == placement],

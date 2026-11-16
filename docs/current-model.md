@@ -1,8 +1,9 @@
 # Current model choices
 
-**V120 Small remains the general recommendation.** The latest shared-edge head
-has small quiet gains with lower mesh response; the analytic edge-refinement
-result is restricted synthetic evidence. [Architecture and commands](architecture.md).
+**V120 Small remains the general recommendation.** The competing-orientation
+head improves one fixed mesh's weak sector but lowers aggregate mesh response.
+Shared-edge training has small quiet gains with lower response; analytic
+edge refinement remains restricted synthetic evidence. [Architecture and commands](architecture.md).
 
 | Choice | Useful strength | Remaining weakness |
 | --- | --- | --- |
@@ -13,6 +14,7 @@ result is restricted synthetic evidence. [Architecture and commands](architectur
 | [V198 CFA innovation](cfa-innovation-wave-comparison.md) | 11.158% GT mesh amplitude; stronger colored synthetic and real cab modulation | New green/magenta building fringes; quiet RMS +1.151–1.648% versus V195 |
 | [V200 cross-scale support](scale-supported-cfa-wave-comparison.md) | Quiet RMS −0.059–0.119% and fresh-flat RMS −0.022–0.030% versus V198 | Mesh response falls to 11.102% GT; building fringes, ripples and incomplete crossings persist |
 | [Shared-edge training](shared-edge-comparison.md) | EMA quiet RMS −0.051–0.076% and cached fresh-flat RMS −0.036–0.045% versus V200 | Mesh response falls to 10.874%; present-mesh error rises; fringes/ripples/incomplete crossings persist |
+| [Competing orientations](competing-orientation-comparison.md) | Fixed mesh2302 weaker sector 28.41%→33.55% at EMA; small quiet/flat gains | Other fixed weak sector worsens; mean mesh response 10.607%; fringes/false waves persist |
 
 V198/V200 do not combine strong fine-detail recovery with clean quiet fields.
 These are bounded experiment results, not a broad ranking against V120. Mesh
@@ -59,8 +61,10 @@ training supplies no clear weaker-direction gain across the three profiles.
 The [competing-orientation prototype](competing-wave-candidates.md) divides the
 same eight carrier slots between two angular families. Its proposal diagnostic
 reaches more weaker fundamentals but loses some strong-family coverage. Matched
-900-update training is complete; both endpoints and all three fresh-noise panels
-are in the review pipeline. No trained quality improvement is established yet.
+900-update training and the [full two-endpoint native review](competing-orientation-comparison.md)
+are complete. One fixed mesh has a real directional gain, with weaker aggregate
+mesh response and persistent artifacts. The three-noise conditional-response
+review is underway; this local gain does not establish broad weak-detail recovery.
 
 The [seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html)
 retains raw/EMA endpoints, both protected GFX scenes, independent ISO100

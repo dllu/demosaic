@@ -1,11 +1,12 @@
 # Current experiments
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
-skips (November 16); raw/EMA quality review is underway.** It changes carrier
+skips (November 16); raw/EMA quality review is complete.** It changes carrier
 allocation with the original V200 data, initializer, parameter count and objective
 fixed. The [proposal diagnostic and admission](competing-wave-candidates.md)
-explain the intervention and its strong-family coverage cost. No model-quality
-gain is established yet.
+explain the intervention and its strong-family coverage cost. The
+[full native review](competing-orientation-comparison.md) finds a directional
+gain in one mesh, weaker aggregate response and persistent color/texture failures.
 
 The matched shared-edge trial completed all 900 updates and 100 ADC skips
 (November 16), and its full quality review is complete. All 1,000 committed
@@ -22,7 +23,7 @@ fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 | [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
 | [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
 | [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |
-| [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates complete and audited; raw/EMA 822-input and three-noise reviews underway |
+| [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates audited; both 822-input endpoints/all60 native boards reviewed; three-noise review running |
 
 Training recipes bind existing inputs and evidence by checksum. They are local
 artifact recipes; the referenced caches/operator/checkpoints must be present.

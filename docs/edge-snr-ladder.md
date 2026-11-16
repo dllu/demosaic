@@ -86,5 +86,7 @@ An [input-only competing-family proposal comparison](competing-wave-candidates.m
 finds that the existing carrier bank often misses the weaker fundamental even
 in the clearer condition. A completed matched training trial changes that allocation
 while keeping the cache, initializer, parameter count, objectives and update
-budget fixed. Its model-quality result remains unmeasured; candidate proximity
-does not establish recovered detail or quiet-region safety.
+budget fixed. Its [completed native review](competing-orientation-comparison.md)
+finds a local directional gain with lower aggregate response. Conditional-increment
+evaluation on these three noise caches is underway; candidate proximity does
+not establish recovered detail or quiet-region safety.

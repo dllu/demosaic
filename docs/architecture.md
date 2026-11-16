@@ -54,6 +54,13 @@ Experimental presets require an explicit component checkpoint unless a default
 is published. These components consume cached base-restoration RGB plus RAW;
 they do not replace the full-frame parent by themselves.
 
+The experimental `orientation-balanced-cfa-wave` kind uses that same composed
+stage with an explicit selector from `demosaic.competing_phase`. It allocates four
+carriers to each of two angular proposals with `family_degrees: 20`, retaining
+the original eight-carrier budget and 643 trainable parameters. Its exported
+`module_config` carries this setting. Existing kinds use the original selector.
+[Intervention and measured limits](competing-wave-candidates.md).
+
 ## Running an experiment
 
 ```bash

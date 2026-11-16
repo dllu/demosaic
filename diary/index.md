@@ -37,3 +37,5 @@ Latest quality result: [shared-edge raw/EMA review](2026-11-16-02-16-07-shared-e
 Latest test: [fresh independent-noise finite wires](2026-11-16-02-41-09-near-edge-response.md); nominal panel complete, lower-noise profiles running.
 
 Latest model trial: [completed noise ladder and competing-orientation training](2026-11-16-03-37-19-competing-phase-training.md); 900 updates complete, raw/EMA/native quality review underway.
+
+Latest quality review: [competing-orientation raw/EMA and all60 native boards](2026-11-16-03-58-23-competing-orientation-quality.md); local weak-sector gain, lower aggregate response and persistent artifacts; conditional-noise review running.

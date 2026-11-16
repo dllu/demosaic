@@ -144,9 +144,11 @@ the plan's decisive result of more weak second-direction response at the same
 actual quiet error. This fixed cached suite did not measure fresh independent
 noise repetitions of shared-edge increments. The new
 [finite-wire near-edge panel](near-edge-response.md) now supplies that check:
-no clear weaker-direction gain at the nominal noisy condition, with lower-noise
-follow-ups running. Its low measurement SNR still prevents a strong causal claim
-about the architecture's capabilities.
+no clear weaker-direction gain at the nominal noisy condition. Its
+[completed three-noise extension](edge-snr-ladder.md) retains that limitation:
+strong response improves substantially at lower noise, but weak response stays
+low. Known-template evidence remains different from unknown-structure detection
+power or a guaranteed recovery bound.
 
 Meanwhile, the [A-only edge-refinement diagnostic](withheld-cfa-edge-refinement.md)
 shows a concrete improvement in separating the tested weak signal from a

@@ -31,9 +31,11 @@ measured synthetic weak-direction/false-detail tradeoff.
 The [completed three-noise wire panel](docs/edge-snr-ladder.md) still finds
 strong direction imbalance: V200 EMA recovers 86.7% of the strong increment but
 8.1% of the weaker increment far from the edge at the clearest tested prior.
-A [competing-orientation selector](docs/competing-wave-candidates.md) allocates
-the same eight carriers between two families. Its matched training is complete;
-raw/EMA quality evaluation is underway, with no measured quality gain yet.
+A [competing-orientation selector](docs/competing-orientation-comparison.md)
+improves one fixed mesh's weaker orientation sector from 28.41% to 33.55% at EMA,
+but another weak sector worsens and overall mesh response falls to 10.607%.
+Both endpoints and all native boards are reviewed; the same building/flat
+artifacts persist. Its fresh-noise conditional-response review is underway.
 
 ## Setup and inference
 
@@ -92,12 +94,16 @@ V120 checkpoint SHA256 `a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aa
 
 ![Fur: noisy, V120, exact synthetic GT](docs/images/v120-v121-primary-v1/crop-881399e7a68af49a.png)
 
-The latest experiment's [cab detail](docs/images/shared-edge-v1/readme-cab.png)
-and [building color failure](docs/images/shared-edge-v1/readme-building.png)
-are noisy → shared-edge EMA → independent ISO100/AHD reference. They remain native160
+The latest experiment's [directional gain](docs/images/competing-orientation-v1/comparison-02.png)
+and [counterexample](docs/images/competing-orientation-v1/comparison-06.png) are
+noisy → competing EMA → exact constructed GT (native160, exposure 8/contrast 1;
+[full provenance](docs/competing-orientation-comparison.md#the-directional-improvement-and-its-counterexample)).
+Its [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
+and [building color failure](docs/images/competing-orientation-v1/readme-building.png)
+are noisy → competing EMA → independent ISO100/AHD reference. They remain native160
 pixels with matched coordinates/transforms; the separate real captures differ
 in aperture, exposure and motion and are **not exact GT**.
-[Complete source, checkpoint and display provenance](docs/results/shared-edge-v1/representative-real.json).
+[Complete source, checkpoint and display provenance](docs/results/competing-orientation-v1/representative-real.json).
 
 [Documentation](docs/index.md) · [Experiment history](docs/history/experiments-through-v200.md) ·
 [Diary](diary/index.md) · [Storage](docs/storage.md).

@@ -9,9 +9,10 @@ Implementation follow-up, November 16: the first shared-edge trial is
 completed, followed by a [geometry-refinement comparison](withheld-cfa-edge-refinement.md).
 The [fresh-noise neural finite-wire panel](edge-snr-ladder.md) completes all three
 noise profiles; weaker response remains low even when strong response improves.
-The [competing-orientation model trial](competing-wave-candidates.md) has finished
-matched training and is undergoing raw/EMA/native evaluation. Its quality gain is
-unmeasured. The review and proposals below remain the original November 15
+The [competing-orientation model trial](competing-orientation-comparison.md) has
+finished matched training and raw/EMA/native evaluation: one fixed mesh improves
+its weaker orientation, with lower overall mesh response and persistent artifacts.
+Its fresh-noise conditional-response follow-up is running. The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
 **The next useful step is better discrimination between weak structure and

@@ -4,7 +4,9 @@ The new prototype changes how the existing CFA-wave head allocates its eight
 measured carriers. **Two competing angular families receive four slots each.**
 It retains the same input spectrum, native frequency band, physical CFA wave
 fits, 36 readout coordinates and 643 trainable parameters. A matched 900-update
-trial has completed; trained reconstruction quality is not yet measured.
+trial and [full two-endpoint native review](competing-orientation-comparison.md)
+have completed. One fixed mesh's weaker sector improves, but another gets worse;
+aggregate mesh response falls and the building/flat-region artifacts persist.
 
 This is a proposal mechanism. A second proposal is not evidence that a second
 wire exists, and the learned readout can reject its output. The selector uses
@@ -82,9 +84,9 @@ All 1,000 rows completed: 900 noisy updates and 100 exact ADC skips. The audit
 confirms the frozen-state hash and original domain counts (307 mesh, 214 photo,
 141 flat, 139 mixed, 99 weak). [Training completion](results/competing-phase-v1/training-completed.json).
 
-The live pipeline evaluates both endpoints on all 822 existing quality inputs and
-all 60 native boards, including the protected main/cab scenes, both cab profiles
-and both JPEGs. A second queued worker then reuses all three fresh-noise caches,
+Both endpoints complete all 822 existing quality inputs; all 60 native boards
+have been inspected, including the protected main/cab scenes, both cab profiles
+and both JPEGs. A second worker is now reusing all three fresh-noise caches,
 with independent role/repeat noise, for actual weak/quiet gain curves. It checks
 the inherited anchor against saved V195 pixels and actual full-forward delivery
 before interpretation. No existing scientific prefix is restarted.
@@ -94,8 +96,8 @@ unchanged training data and initializer; it records the model change and gives
 figures the correct candidate label. Source snapshots, exact process identities,
 checkpoint rows and launch evidence are [retained](results/competing-phase-v1/launch.json).
 That launch observation records the earlier row 705; it is preserved unchanged.
-No current recommendation changes until actual strengths and failures are
-measured. The earlier [shared-edge](shared-edge-comparison.md) and
+The [measured strengths and failures](competing-orientation-comparison.md)
+leave V120 as the general recommendation. The earlier [shared-edge](shared-edge-comparison.md) and
 [analytic edge-fit](withheld-cfa-edge-refinement.md) results remain available.
 
 ```bash

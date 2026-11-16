@@ -12,7 +12,7 @@ workflow. V120 Small remains the general recommendation.
 | Understand broad training data | [Training pipeline](training-pipeline.md), [current source review](current-source-loss-review.md) |
 | Evaluate restoration quality | [Evaluation](evaluation.md), [V120 results](v120-v121-primary.md) |
 | Inspect latest detail/quiet tradeoffs | [Shared-edge](shared-edge-comparison.md), [three-noise finite wires](edge-snr-ladder.md), [V200](scale-supported-cfa-wave-comparison.md) |
-| Follow the new carrier-allocation trial | [Competing orientations](competing-wave-candidates.md): matched training complete, quality review underway |
+| Follow the new carrier-allocation trial | [Proposal](competing-wave-candidates.md), [complete native review](competing-orientation-comparison.md): local directional gain and aggregate response loss |
 | Review literature and next weak-detail ideas | [November 2026 review](weak-detail-literature-2026-11.md), [withheld CFA](withheld-cfa-evidence.md), [edge refinement](withheld-cfa-edge-refinement.md) |
 | Inspect real-camera weaknesses | [Main GFX scene](gfx-qualitative.md), [fine green mesh](gfx-green-mesh.md), [other cameras](cross-camera-qualitative.md) |
 | Manage cached artifacts | [Storage](storage.md) |
