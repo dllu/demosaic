@@ -3,6 +3,10 @@
 Literature and project review, **2026-11-15, America/Los_Angeles**.
 This is a research note: proposals below are unimplemented and unmeasured.
 
+Implementation follow-up, November 16: the first shared-edge trial is
+[training with its matched review queued](experiments.md). The review and
+proposals below remain the original November 15 assessment; quality is unmeasured.
+
 **The next useful step is better discrimination between weak structure and
 noise/edge leakage, coupled with training that rewards that distinction.**
 The project has demonstrated real detail gains, but increasing response alone
