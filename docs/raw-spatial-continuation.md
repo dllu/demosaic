@@ -94,12 +94,11 @@ CPU metric/native-pixel audit. It reuses the original102-input panel and saved
 V120 predictions. V131's collection/audit/all64 native-board views are complete;
 V132 will compare with the saved V131 endpoint without another control forward.
 
-The separate broad numerical/full-frame review remains required. It must retain
-ordinary photos, faint/ADC/flat controls, at least two native noisy/restored/GT
-triplets and both protected real-photo families with accurately labeled
-independent references. The targeted gains/costs are documented now, while the
-broader427-photo/camera/flat/full-frame review and architecture comparison remain pending.
-The [V131 broad numerical run](v131-broad-primary.md) has started the original
-photo/known/unseen/texture/color pipeline with saved controls and exact input
-witnesses. Full-frame/standalone-flat review and the completed V132 comparison
-are separate outstanding requirements.
+The [completed V131 broad numerical/native review](v131-broad-primary.md)
+retains the original photo/known/unseen/texture/color pipeline, saved controls,
+exact input witnesses, two native triplets and both protected GFX families.
+It finds427-photo+0.04000 dB, unseen-camera−0.04381 dB and a severe ADC-color
+regression. An existing [fixed ADC projection](v131-adc-projection.md) repairs
+that color panel and adds ADC-photo gains with weakest-band costs.
+Full-frame validation, broader standalone-flat
+review and the completed V132 architecture comparison remain outstanding.

@@ -28,9 +28,16 @@ _PRESETS = (
     ModelPreset(
         "v131",
         "joint",
-        "experimental completed continuation; mixed faint-ADC gains",
-        "docs/v131-endpoint-quality.md",
+        "experimental photo/faint gains; unseen-camera and ADC-color costs",
+        "docs/v131-broad-primary.md",
         sha256="4d78e6302f6e72d68acb03fe58eb7106763b8129ccb059747ef5d2cfbd3ec1e1",
+    ),
+    ModelPreset(
+        "v131-adc-malvar",
+        "joint",
+        "experimental fixed ADC repair; positive-noise V131 unchanged",
+        "docs/v131-adc-projection.md",
+        sha256="6b1851e85933b56001ee1100e6ef0083173f3949849c1429894534a5caf2708e",
     ),
     ModelPreset(
         "v187",

@@ -32,8 +32,12 @@ now tests that direction: its fixed two-geometry pilot raises far weak response
 0.96%→2.80% above V143, with lower quiet/increment costs than the same-candidate
 global support. Source1 drives the gain; quiet error still rises versus the
 parent and real cab crossings remain missing. All24 cases/native views are
-complete; the full three-prior/all-CFA panel is running. Real/photo parents are
-V120; corrected lineage is explicit. This is an implemented experimental
+complete. The [full three-prior/all-CFA panel](local-wave-full-panel.md) now
+finds400/far weak response1.826%→2.690%, with quiet/increment error
++0.405%/+0.289%. Local support lowers global-support error in all six cells,
+while gains remain source-dependent and higher-noise weak detail stays missing.
+The frozen full run uses the historical matcher. Real/photo parents are V120;
+corrected lineage is explicit. This is an implemented experimental
 reconstruction component, not a calibrated confidence guarantee.
 Its [matching/harmonic follow-up](local-wave-shapes.md) fixes a valid-pair
 assignment failure and tests a richer input-only waveform. H3 doubles the
@@ -52,6 +56,15 @@ added-attention arm is training, with original source and20k horizons preserved.
 Its [matched1k/native review](v132-progress1000-quality.md) finds faint-ADC
 +0.03356 dB versus V1311k but−0.23979 dB versus V120, without clear new real
 crossings or foliage recovery. That early gain does not establish convergence.
+V131's [completed broad review](v131-broad-primary.md) finds photo+0.04000 dB
+and400/427 source gains, but unseen-camera−0.04381 dB and worst ADC color error
+1,816 DN16 versus55.5. Its weakest high-noise band gains amplitude with slightly
+higher reconstruction error. An existing fixed physical projection repairs
+the color panel to20.0 DN16. Its [completed ADC photo/texture review](v131-adc-projection.md)
+adds0.15074 dB ADC-photo PSNR over V131, with382/427 gains, but weakest-band
+error rises1.43% and orthogonal error2.63% despite higher projected response.
+That available operating point improves color/overall score without resolving
+weak-detail fidelity; positive-noise V131 outputs stay unchanged.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

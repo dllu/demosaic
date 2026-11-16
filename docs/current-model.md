@@ -9,9 +9,10 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 | Choice | Useful strength | Remaining weakness |
 | --- | --- | --- |
 | [V120 Small](v120-v121-primary.md) | 37.04008 dB on 427 photos; known/unseen CFA means 54.31272/54.00872 dB; verified 102MP RGB16 exports | Fine foliage, mesh, neon and dark-field mottle |
-| [V131 completed continuation](v131-endpoint-quality.md) | Four-source targeted faint-ADC +0.14555 dB; fur/wood weak-stratum error falls; ordinary/shadow +0.01539/+0.01673 dB | Bark faint regression; soft foliage/fine cab crossings persist; broad photo/camera/flat/full-frame quality unmeasured |
+| [V131 completed continuation](v131-broad-primary.md) |427-photo +0.04000 dB with400/427 source gains; targeted faint-ADC +0.14555 dB; modest high-noise carrier/flat gains | Unseen-camera −0.04381 dB; ADC color maximum1,816 DN16 versus55.5; high-noise weak-band error slightly worse; soft foliage/fine cab crossings; no new full-frame validation |
+| [V131 ADC Malvar, opt-in](v131-adc-projection.md) | Fixed existing policy, identical91 weights; ADC photo+0.15074 dB versus V131,382/427 gains; ADC color maximum19.98 DN16 | Weakest ADC band error+1.43%, lower analytic carrier amplitude,45 non-improving photos; positive-noise V131/camera costs unchanged; no new full-frame validation |
 | [V132 RAW attention,1k progress](v132-progress1000-quality.md) | Matched faint-ADC +0.03356 dB versus V1311k; all four weakest-stratum RMS means improve | Faint mean remains0.23979 dB below V120; wood PSNR cost; no clear new cab crossings/foliage; production still training |
-| [Local conditional waves, analytic pilot](local-validated-waves.md) | Two-geometry far weak response0.96%→2.80% above V143; lower quiet/increment costs than same-candidate global support; fewer global cab ripples above V120 | Source1 drives gain; quiet/increment error still above parent; most real mesh missing; full three-prior evaluation running |
+| [Local conditional waves, complete panel](local-wave-full-panel.md) |400/far weak response1.826%→2.690% above V143; lower global-support quiet/increment error in all six cells; fewer global cab ripples above V120 | Quiet/increment error still above parent; sources1/2 dominate gains; higher-noise weak structure and real crossings mostly missing; executed historical matcher |
 | [Harmonic analytic ablation](local-wave-shapes.md) | Same pilot H1→H3 far weak response 2.80%→5.46%, strong 43.33%→46.88%; small full-error reduction | Quiet/increment error +0.993%/+0.745% versus H1; new building color bands, missing real crossings; H1 remains default |
 | [Individual harmonic support](individual-wave-validation.md) | Far quiet/increment RMS 4.06592/11.89181→4.05049/11.85942 DN16 versus H3 group; weak response 4.07% | Near quiet error rises; building bands persist; expanded affine background further raises quiet error; explicit ablations |
 | [V114 Tiny](v114-v115-quality.md) | Lower tested ADC maximum: 51.73 versus V120's 55.52 DN16 | Different photo/camera tradeoffs |
@@ -53,6 +54,12 @@ the revised cohort for 20k additional updates; it does not add the RAW-attention
 branch. The matched V132 arm is training; its [early1k review](v132-progress1000-quality.md)
 has a small faint gain against V1311k while remaining below V120.
 [Completed-control gains and counterexamples](v131-endpoint-quality.md).
+The [completed broad review](v131-broad-primary.md) supports V131 as an
+experimental photo/faint-detail option with camera and ADC-color costs. A
+fixed existing ADC projection repairs the color panel and improves ADC photo
+PSNR, with weaker-band error and carrier-amplitude costs. The
+[`v131-adc-malvar` export/preset](v131-adc-projection.md) makes that operating
+point available. V120 remains the general recommendation.
 
 ## Current research and evidence
 

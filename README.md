@@ -52,7 +52,10 @@ target access does not supply a deployable detail improvement.
 The [input-only local-support prototype](docs/local-validated-waves.md) improves
 a two-geometry pilot's far response from 0.96% to 2.80% above V143, with quiet
 RMS +0.43%; it reduces global-support cab ripples but still misses fine crossings.
-The gain is source-dependent. Its full three-prior evaluation is running.
+The [complete three-prior panel](docs/local-wave-full-panel.md) finds far-edge
+weak response 1.826%→2.690% at400, with quiet/increment RMS +0.405%/+0.289%.
+Local support lowers global-support error in all six cells; gains remain
+source-dependent and higher-noise weak detail stays missing.
 A [three-harmonic follow-up](docs/local-wave-shapes.md) reaches 5.46% far weak
 response but raises quiet/increment error and adds building color bands;
 one harmonic remains the default. The independent fold-assignment fix is retained.
@@ -66,8 +69,13 @@ soft foliage remain unresolved. The experimental `v131` preset is available.
 V132's added-attention arm is training. Its [matched1k review](docs/v132-progress1000-quality.md)
 gains0.034 dB faint ADC over V1311k but stays0.240 dB below V120, without clear
 new real mesh recovery. The20k architecture comparison remains pending.
-V131's [broad numerical review](docs/v131-broad-primary.md) is running on the
-original photo/camera/texture/color pipeline; aggregate results are pending.
+V131's [completed broad review](docs/v131-broad-primary.md) improves427-photo
+PSNR by0.04000 dB (400/427 source gains), with unseen-camera −0.04381 dB and
+worst ADC mean-color error1,816 DN16 versus V120's55.5. Its small high-noise
+weak-amplitude gain also raises weak-band error. The opt-in
+[`v131-adc-malvar` variant](docs/v131-adc-projection.md) reduces the ADC color
+maximum to20.0 DN16 and adds0.151 dB ADC-photo PSNR over V131, with weakest-band
+error+1.43%. Positive-noise output is unchanged; fine real mesh remains unresolved.
 
 ## Setup and inference
 
@@ -146,6 +154,11 @@ The input-only local stage retains [source 0 without a weak gain](docs/images/lo
 and [source 1 with a gain](docs/images/local-validated-wave-pilot-v1/source1-far-role2-triplet.png):
 noisy → local support above V143 → exact constructed GT, native160 cells,
 exposure2/contrast1. [Complete parent/configuration/noise/source metadata](docs/local-validated-waves.md#native-triplets-retain-a-gain-and-a-counterexample).
+The [completed full-panel gallery](docs/images/local-wave-full-panel-v1/native-viewer.html)
+adds all eight sources and three priors, including a
+[source1 gain](docs/images/local-wave-full-panel-v1/iso400-source1-far-triplet.png)
+and [remaining source7 limitation](docs/images/local-wave-full-panel-v1/iso400-source7-far-triplet.png)
+under the same native crop/display conditions.
 The individual-harmonic trial retains native noisy → restored → exact-GT triplets for
 [source0](docs/images/individual-wave-pilot-v1/individual/source0-far-role2-triplet.png)
 and [source1](docs/images/individual-wave-pilot-v1/individual/source1-far-role2-triplet.png),

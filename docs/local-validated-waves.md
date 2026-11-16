@@ -18,12 +18,15 @@ The [matching/harmonic follow-up](local-wave-shapes.md) retains a fold-assignmen
 fix and an optional richer basis. H3 raises far weak response to 5.46% in this
 same development pilot, with higher quiet/increment error and conspicuous
 new building color bands. One harmonic remains the default. Original results
-below and the live full-panel source stay unchanged.
+below and the frozen full-panel source stay unchanged.
 
-The [full three-prior evaluation](results/local-validated-wave-pilot-v1/full-panel-original-plan.json.gz)
-is running: eight geometries × two placements × four CFAs × two repeats × three
-roles × three priors, or **1,152 images**. It reuses 12 exact pilot predictions.
-No parameter or threshold changes enter that frozen run. The separate
+The [completed full three-prior evaluation](local-wave-full-panel.md) covers
+eight geometries × two placements × four CFAs × two repeats × three roles ×
+three priors, or **1,152 images**, adopting12 exact pilot predictions. At400/far,
+weak response rises1.826%→2.690% above V143, with quiet/increment costs.
+Local support lowers global-support error in all six cells; higher-noise weak
+detail remains missing. That result uses the historical matcher, without later
+parameter or threshold changes. The separate
 [V132 full-model training](raw-spatial-continuation.md) also continues.
 [Pilot evidence and executed sources](results/local-validated-wave-pilot-v1/publication.json).
 

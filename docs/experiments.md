@@ -1,5 +1,12 @@
 # Current experiments
 
+The [full local/global wire panel](local-wave-full-panel.md) and
+[V131 broad photo/camera/texture/color review](v131-broad-primary.md) are
+complete and independently audited. V131 improves photo scores with
+unseen-camera and severe ADC-color costs. The opt-in
+[fixed ADC repair](v131-adc-projection.md) improves ADC photo/color results,
+with weakest-band error+1.43%. V132's original20k training continues.
+
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier
 allocation with the original V200 data, initializer, parameter count and objective
@@ -25,7 +32,7 @@ fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 | [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
 | [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |
 | [Fixed additional-wave GT oracle](measured-wave-oracle.md) | Hold the measured bank fixed; fit bounded/unbounded/phase-free global gains using targets | All64 far/400 views complete and audited: weak response 9.43%→19.39%, but quiet/increment errors rise on56/64 and46/64. Explicit oracle diagnostic, no learned-model gain |
-| [Local conditional RAW waves](local-validated-waves.md) | Raw-only A/B discovery, per-direction/color validation and local support; replace parent wave projection | Fixed24-input pilot/28 native boards complete. Conditional far gain on one geometry, less quiet cost than global support; real crossings unresolved. Frozen1,152-image/all-CFA/three-prior evaluation running;12 pilot outputs reused |
+| [Local conditional RAW waves](local-wave-full-panel.md) | Raw-only A/B discovery, per-direction/color validation and local support; replace parent wave projection | Complete1,152-image/three-prior audit:400/far weak response1.826%→2.690%, lower global-support error in all six cells, parent-error costs and unresolved real crossings; historical matcher |
 | [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates audited; both 822-input endpoints/all60 native boards and [all three fresh-noise panels](competing-edge-response.md) reviewed |
 | [Complementary CFA branch](../configs/experiments/complementary.json) | Freeze complete V200 EMA; add a new head/nonduplicate proposals on its residual | 900 updates audited; both 822-input endpoints/all60 native boards reviewed: [almost unchanged weak detail](complementary-comparison.md); [three-noise follow-up](complementary-edge-response.md) complete: small lower-noise weak gain with strong response retained |
 

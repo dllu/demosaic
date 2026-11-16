@@ -169,10 +169,12 @@ model, payload = load_model(
 )
 ```
 
-The preset checks the declared checkpoint hash. Broad427-photo, known/unseen
-camera, standalone-flat, full-frame102MP and speed results for this endpoint
-remain unmeasured. The [broad numerical review](v131-broad-primary.md) is running
-on the original primary pipeline; independent aggregate results are pending.
+The preset checks the declared checkpoint hash. Full-frame102MP/speed and
+broader standalone-flat validation remain separate. The
+[completed broad numerical review](v131-broad-primary.md)
+uses the original primary pipeline and independent audits: photo+0.04000 dB,
+unseen-camera−0.04381 dB and a severe ADC-color regression. Its native boards
+and full-cohort weak-detail analysis retain those gains and costs explicitly.
 The small targeted gains are useful findings, with their
 counterexamples retained; they do not establish broad superiority or resolve
 the weak-detail objective. V132's matched production and endpoint review continue.

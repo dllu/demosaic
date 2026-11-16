@@ -22,9 +22,10 @@ historical paths. Resolve an old diary path without editing such a receipt:
 For a concise view of the evidence, start with the
 [experiment index](../docs/experiments.md) rather than the chronological diary.
 
-Latest full-model result: [V131 completed20k control and native review](2026-11-16-08-08-24-v131-endpoint-quality.md),
-with small mixed faint gains, a bark regression and unresolved real fine mesh.
-V132 production is training.
+Latest completed cohort reviews: [full wave panel, V131 broad audit and fixed ADC repair](2026-11-16-11-25-42-full-panel-v131-audits.md).
+V131 photo+0.04000 dB has unseen-camera/ADC-color costs; an opt-in physical ADC
+repair adds0.15074 dB ADC-photo PSNR while increasing weakest-band error1.43%.
+V132 production continues on its original full20k schedule.
 
 Latest matched progress: [V1321k attention review](2026-11-16-08-22-36-v132-progress1000-review.md),
 small faint gain versus V1311k, still below V120; no clear new real mesh crossings.
@@ -33,9 +34,9 @@ Latest fixed-basis diagnostic: [target-assisted measured-wave fits](2026-11-16-0
 weak response 9.43%→19.39%, with quiet/increment errors worsening on most views;
 an oracle result, not an inference improvement.
 
-Latest input-only reconstruction: [local conditional wave support](2026-11-16-09-35-34-local-validated-wave-pilot.md),
-source-dependent far response gains with lower costs than global support; real
-mesh unresolved. Full three-prior/all-CFA evaluation is running.
+Latest input-only reconstruction: [complete local-support panel](2026-11-16-11-25-42-full-panel-v131-audits.md),
+400/far weak response1.826%→2.690% with lower global-support error in all six
+cells, but source-dependent gains and parent-error costs; real mesh unresolved.
 
 Latest consolidation: [shared experiments and composed models](2026-11-15-22-22-09-experiment-consolidation.md), with exact V200 CUDA-prefix replay and preserved historical evidence.
 

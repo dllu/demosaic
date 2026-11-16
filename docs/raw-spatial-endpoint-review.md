@@ -65,8 +65,10 @@ zero new source/noise construction, RAW decodes or optimizer updates.
 CPU analysis computes photo/detail metrics and native boards. A separate process
 that does not import Torch independently recomputes mirrored-FFT DCT16 metrics,
 channelwise display transforms and every published PNG cell. Actual native
-viewing is completed for V131 and remains required for V132. The broader 427-photo/camera/flat/full-frame
-review is separate; this targeted panel does not establish broad model quality.
+viewing is completed for V131 and remains required for V132. The separate
+[V131 broad photo/camera/texture/color review](v131-broad-primary.md) is now
+complete, with gains and material costs. Full-frame validation remains separate;
+this targeted panel alone does not establish broad model quality.
 
 ## Executed preparation and coverage correction
 
