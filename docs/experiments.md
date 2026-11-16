@@ -6,6 +6,9 @@ complete and independently audited. V131 improves photo scores with
 unseen-camera and severe ADC-color costs. The opt-in
 [fixed ADC repair](v131-adc-projection.md) improves ADC photo/color results,
 with weakest-band error+1.43%. V132's original20k training continues.
+The [phase-aggregation pilot](phase-measurement-aggregation.md) now completes
+all48 inputs/native review: more low-prior response with higher error and
+severe real color bands. Its consistent nuisance-projection follow-up is running.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

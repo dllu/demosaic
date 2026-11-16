@@ -18,7 +18,12 @@ def report(root, output=None):
     os.sched_setaffinity(0, sorted(os.sched_getaffinity(0))[-2:])
     plan = read_json(root / "plan.json")
     collection = read_json(root / "collection.json")
-    if collection["plan"] != reference(root / "plan.json") or len(collection["rows"]) != 24:
+    if (
+        collection["plan"] != reference(root / "plan.json")
+        or len(collection["rows"]) != len(plan["rows"])
+        or {r["id"] for r in collection["rows"]} != {r["id"] for r in plan["rows"]}
+        or len({r["id"] for r in collection["rows"]}) != len(plan["rows"])
+    ):
         raise ValueError("Require all input-only outputs closed before reference access")
     rows = {r["id"]: r for r in collection["rows"]}
     output = root / "report" if output is None else output

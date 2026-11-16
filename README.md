@@ -61,6 +61,11 @@ response but raises quiet/increment error and adds building color bands;
 one harmonic remains the default. The independent fold-assignment fix is retained.
 [Individual harmonic validation](docs/individual-wave-validation.md) lowers
 far error versus H3 group support, with response 4.07%; building bands persist.
+The [initial phase-aligned measurement average](docs/phase-measurement-aggregation.md)
+raises the fixed pilot's400/far weak response2.80%→12.61% versus matched H1, with
+quiet/increment error+5.42%/+1.95% and severe building bands. A consistent
+nuisance-projection follow-up is under matched review; real fine mesh remains
+unresolved.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a

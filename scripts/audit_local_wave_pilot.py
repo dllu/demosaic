@@ -128,7 +128,12 @@ def audit(root, report_dir=None, output=None):
         else "finite-scores.json"
     )
     finite = read_json(finite_path)
-    finite_rows = {(r["source"], r["placement"], r["method"]): r for r in finite["rows"]}
+    finite_rows = {
+        (r.get("profile", "iso400"), r["source"], r["placement"], r["method"]): r
+        for r in finite["rows"]
+    }
+    if len(finite_rows) != len(finite["rows"]):
+        raise ValueError("Duplicate finite profile/source/placement/method identity")
     for group in plan["finite_groups"]:
         data = cache[group["cases"][0]][0]
         truth = data["target"].astype(np.float64)
@@ -161,7 +166,10 @@ def audit(root, report_dir=None, output=None):
                     np.sqrt(np.mean((predicted - gain * delta) ** 2)) * 65535
                 )
             recorded = finite_rows[
-                group["metadata"]["recipe"]["source"], group["metadata"]["placement"], method
+                group.get("profile", "iso400"),
+                group["metadata"]["recipe"]["source"],
+                group["metadata"]["placement"],
+                method,
             ]
             for k, v in expected.items():
                 maximum["finite_metric"] = max(maximum["finite_metric"], abs(v - recorded[k]))

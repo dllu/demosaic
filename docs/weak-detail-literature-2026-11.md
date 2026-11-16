@@ -1,7 +1,8 @@
 # Recovering weak detail without inventing texture
 
 Literature and project review, **2026-11-15, America/Los_Angeles**.
-This is a research note: proposals below are unimplemented and unmeasured.
+The original proposals below were unimplemented when written; the follow-up
+links record subsequent implementations and measurements.
 
 Implementation follow-up, November 16: the first shared-edge trial is
 [finished training and matched native review](shared-edge-comparison.md), and the
@@ -65,6 +66,14 @@ adds0.15074 dB ADC-photo PSNR over V131, with382/427 gains, but weakest-band
 error rises1.43% and orthogonal error2.63% despite higher projected response.
 That available operating point improves color/overall score without resolving
 weak-detail fidelity; positive-noise V131 outputs stay unchanged.
+The [phase-aligned measurement-aggregation prototype](phase-measurement-aggregation.md)
+now tests proposal4 with the same RAW-only H1 discovery and matched H1 control:
+local same-color phase averages, edge stopping and A/B conditional validation.
+Its [completed48-input/three-prior review](phase-measurement-aggregation.md)
+raises400/far weak response2.80%→12.61% versus matched H1, but adds5.42% quiet
+and1.95% increment error, with severe building color bands and poor high-noise
+results. A consistent nuisance-projection follow-up passes its algebraic checks
+but does not fix the building in an input-only check; its full review is running.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
@@ -88,7 +97,7 @@ or remove these failures.
 | [V187 → V195 → V198](scale-supported-cfa-wave-comparison.md) | Held-out constructed-mesh projected amplitude rises 5.359% → 5.575% → 11.158% of GT | V198 adds building color fringes and higher blank/quiet error; amplitude is not overall reconstruction quality |
 | [V199 gate interventions](cfa-wave-gate-diagnostic.md) | Shared-color, constant and positive-only controls clarify the failure | Constant gates look cleaner partly because they greatly weaken corrections; artifacts return at matched correction RMS |
 | [V200](scale-supported-cfa-wave-comparison.md) | Cross-scale support reduces quiet RMS 0.059–0.119% and fresh-flat RMS 0.022–0.030% versus V198 EMA | Response slips to 11.102%; fringes, flat ripples and incomplete crossings persist |
-| [Shared-edge preparation](paired-training-coverage.md) and [consolidation](architecture.md) | Cache ready; repeatable experiment runner and retained composed models | Shared-edge model quality is unmeasured; engineering consolidation is not a quality gain |
+| [Shared-edge comparison](shared-edge-comparison.md) and [consolidation](architecture.md) | Complete matched training/native review; small quiet/flat gains; repeatable runner and retained models | Lower mesh response, persistent real fringes/crossing losses; engineering consolidation alone is not a quality gain |
 
 The current data already contains reduced-contrast photos, procedural mesh,
 paired signal increments and noisy flats. The specific audited gap was that
