@@ -56,7 +56,7 @@ def audit(root, output):
     assert cache["all91_restoration_and_backbone_tensors_unchanged"]
     assert cache["background_configuration"] == plan["background_configuration"]
     rows = {r["id"]: r for r in cache["rows"]}
-    assert len(rows) == len(plan["rows"]) == 48
+    assert len(rows) == len(plan["rows"])
     cases = []
     maximum = 0.0
     fields = channels = fresh = 0
@@ -126,7 +126,7 @@ def audit(root, output):
         fresh += 2 * (record["adopted_from"] is None)
         cases.append({"id": row["id"], "folds": fold_checks})
     assert fresh == cache["new_root_forwards"] == cache["new_encoder_forwards"]
-    assert fields == cache["complete_background_fields"] == plan["background_field_count"] == 88
+    assert fields == cache["complete_background_fields"] == plan["background_field_count"]
     assert "torch" not in sys.modules
     write_json(
         output,

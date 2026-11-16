@@ -117,7 +117,9 @@ def empirical_bootstrap_weights(n=8):
     return counts, weights
 
 
-def summarize(rows):
+def summarize(rows, *, methods=METHODS, contrast_pairs=None):
+    if contrast_pairs is None:
+        contrast_pairs = (("V143", "global-t2"), ("V143", "local-t2"), ("global-t2", "local-t2"))
     counts, weights = empirical_bootstrap_weights()
     metrics = [
         k
@@ -129,7 +131,7 @@ def summarize(rows):
         for placement in ["near", "far"]:
             group = [r for r in rows if r["profile"] == profile and r["placement"] == placement]
             source_means = {}
-            for method in METHODS:
+            for method in methods:
                 values = [r for r in group if r["method"] == method]
                 if len(values) != 64:
                     raise ValueError("Require all64 CFA/repeat views in each cell")
@@ -155,11 +157,7 @@ def summarize(rows):
                         },
                     }
                 )
-            for first, second in [
-                ("V143", "global-t2"),
-                ("V143", "local-t2"),
-                ("global-t2", "local-t2"),
-            ]:
+            for first, second in contrast_pairs:
                 fields = {}
                 for k in metrics:
                     delta = np.array(

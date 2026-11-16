@@ -23,14 +23,40 @@ BACKGROUND_SHA = "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589
 BACKBONE_SHA = "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
 
 
-def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False):
+def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False, full_panel=False):
     from demosaic.local_validated_waves import LocalWaveConfig
 
     source = REPO / ".cache/experiments/phase-aggregation-projected-pilot-v1"
     previous = read_json(source / "plan.json")
+    prediction_cache = None
+    extra_inputs = []
+    if full_panel:
+        assert fixed_analytic_frequencies and background_cache is not None
+        full_source = REPO / ".cache/experiments/local-validated-wave-panel-v1"
+        full = read_json(full_source / "plan.json")
+        assert len(full["rows"]) == 1152 and len(full["finite_groups"]) == 384
+        previous = {
+            **previous,
+            "rows": [
+                dict(row, ROI_xywh=[176, 176, 160, 160], display_exposure=2.0)
+                for row in full["rows"]
+            ]
+            + [row for row in previous["rows"] if row["kind"] != "finite-wire"],
+            "finite_groups": full["finite_groups"],
+        }
+        prediction_cache = reference(
+            REPO / ".cache/experiments/neural-nuisance-fixed-proposals-pilot-v1/collection.json"
+        )
+        extra_inputs = [
+            reference(full_source / "plan.json"),
+            reference(full_source / "analytic-model-v2.json"),
+            prediction_cache,
+        ]
     checkpoint = reference(Path("/mnt/external/demosaic/models/v120-final20000.pt"))
     assert checkpoint["sha256"] == BACKGROUND_SHA
-    assert len(previous["rows"]) == 48 and len(previous["finite_groups"]) == 12
+    assert (len(previous["rows"]), len(previous["finite_groups"])) == (
+        (1164, 384) if full_panel else (48, 12)
+    )
     geometry = LocalWaveConfig().to_dict()
     background_config = {
         "checkpoint": checkpoint,
@@ -43,9 +69,12 @@ def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False):
         old = read_json(checked(cache))
         assert old["background_configuration"] == background_config
         assert old["all91_restoration_and_backbone_tensors_unchanged"]
-        assert len(old["rows"]) == len(previous["rows"]) and {
-            r["id"] for r in old["rows"]
-        } == {r["id"] for r in previous["rows"]}
+        cached_ids = {r["id"] for r in old["rows"]}
+        assert len(cached_ids) == len(old["rows"])
+        current_ids = {r["id"] for r in previous["rows"]}
+        assert cached_ids <= current_ids if full_panel else cached_ids == current_ids
+    else:
+        cached_ids = set()
     root.mkdir(parents=True, exist_ok=False)
     work, files = freeze_sources(
         REPO,
@@ -77,6 +106,7 @@ def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False):
     write_json(root / "analytic-model.json", model)
     positive = sum(r["noise"]["shot"] + r["noise"]["read"] > 0 for r in previous["rows"])
     inputs = [reference(source / "plan.json"), reference(root / "analytic-model.json"), checkpoint]
+    inputs += extra_inputs
     inputs += [r[k] for r in previous["rows"] for k in ("arrays", "parent")]
     if cache:
         inputs.append(cache)
@@ -89,10 +119,12 @@ def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False):
         "geometry_config": geometry,
         "background_configuration": background_config,
         "background_cache": cache,
+        "prediction_cache": prediction_cache,
+        "full_panel": full_panel,
         "fixed_analytic_frequencies": fixed_analytic_frequencies,
         "rows": previous["rows"],
         "finite_groups": previous["finite_groups"],
-        "thresholds": [0, 2, 4],
+        "thresholds": [2] if full_panel else [0, 2, 4],
         "primary": "local-t2",
         "modes": [
             "H1-global",
@@ -105,16 +137,24 @@ def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False):
         "shared_global_CFA_partition": True,
         "positive_noise_cases": positive,
         "background_field_count": 2 * positive,
-        "maximum_new_neural_forwards": 0 if cache else 2 * positive,
+        "maximum_new_neural_forwards": 2
+        * sum(
+            r["id"] not in cached_ids and r["noise"]["shot"] + r["noise"]["read"] > 0
+            for r in previous["rows"]
+        ),
         "minimum_start_RAM_GiB": 48,
         "minimum_runtime_RAM_GiB": 32,
         "minimum_disk_GiB": 96,
-        "maximum_stage_seconds": 7200,
+        "maximum_stage_seconds": 21600 if full_panel else 7200,
         "standalone_H1_checks": ["iso400-index0024-role2", "main-building-detail"],
         "inputs": list({(x["path"], x["sha256"]): x for x in inputs}.values()),
         "frozen_files": files,
         "scope": "Fixed48-case development cohort: sources0/1, RGGB/repeat0, near/far400/1600/6400 roles, original materials and both protected GFX families/profiles/ROIs/JPEGs. One global A/B split shared by whole-context frozen V120 predictions and overlapping analytic tiles; all new controls use that split. Same A-only analytic edge/variance proxy for both nuisance models. Controls separate raw-H1 delivery, conditional analytic delivery, and conditional neural-nuisance delivery. All88 background fields and all48 corrections close before new GT/reference scoring. Four ADC cases bypass with zero NN calls. No new sensor noise/source observation, original RAW decode, optimizer update or parent-feature leakage. Reused adaptive2-source cohort, no broad quality/generalization claim.",
     }
+    if full_panel:
+        plan["scope"] = (
+            "Complete1152-role finite-wire panel:8 sources x2 placements x4 CFAs x2 independent-noise repeats x3 roles x3 original priors, plus12 protected/material contexts. Fixed analytic proposals and shared global CFA partition; current cardinality matcher, threshold2, six matched global/local analytic/raw-wave/conditional/neural controls. Whole-context V120 backgrounds, V143 procedural parent and V120 photo parent unchanged. Adopt the completed48-case pilot's exact88 neural fields and threshold2 corrections after source/argument checks; at most2232 fresh root/encoder forwards for1116 additional cases. All2320 background fields and all1164 corrections close before new GT/reference scoring. No new sensor/source observation, RAW decode, optimizer update or training admission. Eight reused development geometries; summarize source clusters/CFA/repeat/noise cells, not population camera generalization. Protected real references remain qualitative, never exact GT."
+        )
     write_json(root / "plan.json", plan)
     verify_plan(plan)
     return root / "plan.json"
@@ -347,6 +387,31 @@ def predict(root):
         and cache["background_configuration"] == plan["background_configuration"]
     )
     by_id = {r["id"]: r for r in cache["rows"]}
+    adopted = {}
+    if plan.get("prediction_cache"):
+        prior = read_json(checked(plan["prediction_cache"]))
+        prior_plan = read_json(checked(prior["plan"]))
+        assert prior_plan["fixed_analytic_frequencies"] == plan["fixed_analytic_frequencies"]
+        assert prior_plan["geometry_config"] == plan["geometry_config"]
+        assert prior_plan["background_configuration"] == plan["background_configuration"]
+        for name in ("neural_nuisance.py", "local_validated_waves.py"):
+            assert (
+                reference(Path(prior_plan["work"]) / "src/demosaic" / name)["sha256"]
+                == reference(Path(plan["work"]) / "src/demosaic" / name)["sha256"]
+            )
+        old_package = {
+            str(Path(path).relative_to(Path(prior_plan["work"]) / "src")): digest
+            for path, digest in prior_plan["frozen_files"].items()
+            if Path(prior_plan["work"]) / "src" in Path(path).parents
+        }
+        new_package = {
+            str(Path(path).relative_to(Path(plan["work"]) / "src")): digest
+            for path, digest in plan["frozen_files"].items()
+            if Path(plan["work"]) / "src" in Path(path).parents
+        }
+        assert old_package == new_package
+        adopted = {r["id"]: r for r in prior["rows"]}
+        assert len(adopted) == 48
     config = LocalWaveConfig(**plan["geometry_config"])
     (root / "predict.claim").open("x").close()
     write_json(root / "owner.json", owner_identity())
@@ -386,17 +451,34 @@ def predict(root):
                 for item, m in zip(record["fields"], [mask, ~mask], strict=True)
             )
         parent = np.load(checked(row["parent"]))[row["sample"]]
-        values, aux = restore_neural_nuisance(
-            parent,
-            data["packed"],
-            data["colors"],
-            fields,
-            shot=row["noise"]["shot"],
-            read=row["noise"]["read"],
-            thresholds=tuple(plan["thresholds"]),
-            config=config,
-            reselect_frequencies=not plan.get("fixed_analytic_frequencies", False),
-        )
+        cached_prediction = adopted.get(row["id"])
+        if cached_prediction is not None:
+            assert cached_prediction["parent_values"] == fingerprint(parent)
+            assert cached_prediction["packed_values"] == fingerprint(data["packed"])
+            assert cached_prediction["colors_values"] == fingerprint(data["colors"])
+            assert cached_prediction["aux"]["identity_zero_noise"] == record["identity_zero_noise"]
+            old_background = read_json(checked(cached_prediction["background_receipt"]))
+            assert old_background["fields"] == record["fields"]
+            values = {
+                (mode, float(t)): np.load(
+                    checked(cached_prediction["predictions"][f"{mode}-t{t:g}"])
+                )
+                for mode in plan["modes"]
+                for t in plan["thresholds"]
+            }
+            aux = cached_prediction["aux"]
+        else:
+            values, aux = restore_neural_nuisance(
+                parent,
+                data["packed"],
+                data["colors"],
+                fields,
+                shot=row["noise"]["shot"],
+                read=row["noise"]["read"],
+                thresholds=tuple(plan["thresholds"]),
+                config=config,
+                reselect_frequencies=not plan.get("fixed_analytic_frequencies", False),
+            )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
                 parent,
@@ -419,10 +501,13 @@ def predict(root):
                 and np.isfinite(value).all()
             )
             name = f"{mode}-t{t:g}"
-            path = output / f"{row['id']}-{name}.npy"
-            with path.open("xb") as f:
-                np.save(f, value, allow_pickle=False)
-            predictions[name] = reference(path)
+            if cached_prediction is not None:
+                predictions[name] = cached_prediction["predictions"][name]
+            else:
+                path = output / f"{row['id']}-{name}.npy"
+                with path.open("xb") as f:
+                    np.save(f, value, allow_pickle=False)
+                predictions[name] = reference(path)
             if aux["identity_zero_noise"]:
                 np.testing.assert_array_equal(value, parent)
         result = {
@@ -433,6 +518,7 @@ def predict(root):
             "colors_values": fingerprint(data["colors"]),
             "background_receipt": reference(root / "backgrounds" / (row["id"] + "-receipt.json")),
             "aux": aux,
+            "prediction_adopted_from": plan["prediction_cache"] if cached_prediction else None,
         }
         write_json(output / (row["id"] + "-receipt.json"), result)
         records.append(result)
@@ -476,7 +562,8 @@ def predict(root):
             "new_neural_forwards": 0,
             "Torch_imported": False,
             "elapsed_seconds": time.monotonic() - began,
-            "status": "all48-global-split-neural-nuisance-corrections-closed-before-GT",
+            "adopted_prediction_cases": len(adopted),
+            "status": f"all{len(records)}-global-split-neural-nuisance-corrections-closed-before-GT",
         },
     )
 
@@ -487,6 +574,7 @@ if __name__ == "__main__":
     parser.add_argument("root", type=Path)
     parser.add_argument("--background-cache", type=Path)
     parser.add_argument("--fixed-analytic-frequencies", action="store_true")
+    parser.add_argument("--full-panel", action="store_true")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -494,6 +582,7 @@ if __name__ == "__main__":
                 args.root.resolve(),
                 args.background_cache.resolve() if args.background_cache else None,
                 fixed_analytic_frequencies=args.fixed_analytic_frequencies,
+                full_panel=args.full_panel,
             )
         )
     elif args.mode == "score":

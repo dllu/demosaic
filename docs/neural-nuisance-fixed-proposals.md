@@ -115,3 +115,7 @@ parent projection can still attenuate a retained candidate. A broader
 source/CFA/noise review and untouched real scenes are needed to assess whether
 this quieter operating point generalizes. The complete two-source result is
 useful without treating it as a new general model recommendation.
+
+The [complete source/CFA/repeat/noise review](neural-nuisance-full-panel.md)
+is now running with the same variant and exact pilot-output adoption. Its
+larger-cohort quality remains pending.

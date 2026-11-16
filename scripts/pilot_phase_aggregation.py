@@ -204,7 +204,7 @@ def score(root):
     records = {r["id"]: r for r in collection["rows"]}
     methods = ["V143", *records[plan["rows"][0]["id"]]["predictions"]]
     metrics = []
-    for group in plan["finite_groups"]:
+    for group_index, group in enumerate(plan["finite_groups"]):
         with np.load(checked(group["arrays"]), allow_pickle=False) as z:
             arrays = {k: z[k] for k in ("target", "quiet", "edge_band")}
         parent = next(r["parent"] for r in plan["rows"] if r["id"] == group["cases"][0])
@@ -224,6 +224,9 @@ def score(root):
                     "profile": group["profile"],
                     "source": group["metadata"]["recipe"]["source"],
                     "placement": group["metadata"]["placement"],
+                    "group_index": group_index,
+                    "pattern": group["metadata"]["pattern"],
+                    "repeat": group["metadata"]["repeat"],
                     "method": method,
                     **measure(arrays, value),
                 }

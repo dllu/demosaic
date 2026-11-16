@@ -27,10 +27,10 @@ def report(
     os.sched_setaffinity(0, sorted(os.sched_getaffinity(0))[-2:])
     plan, collection = read_json(root / "plan.json"), read_json(root / "collection.json")
     original = read_json(root / "report/report.json")
-    if len(collection["rows"]) != 48 or original["collection"] != reference(
+    if len(collection["rows"]) != len(plan["rows"]) or original["collection"] != reference(
         root / "collection.json"
     ):
-        raise ValueError("Require the complete48-case cohort before any target/image analysis")
+        raise ValueError("Require the complete declared cohort before any target/image analysis")
     output.mkdir(exist_ok=False)
     records = {r["id"]: r for r in collection["rows"]}
     font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 10)
@@ -134,6 +134,7 @@ def report(
             }
         )
     finite = read_json(root / "finite-scores.json")
+    sources = len({g["metadata"]["recipe"]["source"] for g in plan["finite_groups"]})
     means = []
     for prior in ("iso400", "iso1600", "iso6400"):
         for placement in ("near", "far"):
@@ -143,15 +144,15 @@ def report(
                     for r in finite["rows"]
                     if (r["profile"], r["placement"], r["method"]) == (prior, placement, method)
                 ]
-                assert len(rows) == 2
+                assert len(rows) == sources
                 keys = [k for k, v in rows[0].items() if isinstance(v, float)]
                 means.append(
                     {
                         "profile": prior,
                         "placement": placement,
                         "method": method,
-                        "sources": 2,
-                        "views": 2,
+                        "sources": sources,
+                        "views": len(rows),
                         **{k: float(np.mean([r[k] for r in rows])) for k in keys},
                     }
                 )
@@ -197,7 +198,7 @@ def report(
             "new_or_replaced_RGB_channels_exact": channels,
             "new_neural_forwards": 0,
             "Torch_imported": False,
-            "scope": "Two reused geometries, one CFA/repeat across3 priors, fixed0/2/4 curves. Native H1/aggregation comparisons and post-inference correction stress views; references are qualitative except constructed/synthetic targets. No population-confidence claim. Viewing remains pending.",
+            "scope": f"{sources} reused geometries, one CFA/repeat across3 priors, declared fixed thresholds{plan['thresholds']}. Native {control_label}/{method_label} comparisons and post-inference correction stress views; references qualitative except constructed/synthetic targets. No population-confidence claim. Actual viewing remains pending.",
         },
     )
 
