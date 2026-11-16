@@ -51,7 +51,7 @@ def checked_adoption(binding, parent, packed, colors, methods):
     return predictions, record["aux"]
 
 
-def prepare(root):
+def prepare(root, *, config=None, study=None):
     from demosaic.local_validated_waves import LocalWaveConfig
 
     cache_path = REPO / ".cache/experiments/near-edge-response-iso400-v1/cache.json"
@@ -128,13 +128,14 @@ def prepare(root):
     script.parent.mkdir()
     shutil.copyfile(__file__, script)
     files[str(script)] = reference(script)["sha256"]
-    config = LocalWaveConfig().to_dict()
+    config = (config or LocalWaveConfig()).to_dict()
     identity_path = root / "analytic-model.json"
     write_json(
         identity_path,
         {
             "kind": "Input-only local validated wave replacement, no trained weights",
             "config": config,
+            "study": study,
             "thresholds": [0, 2, 4],
             "modes": ["global", "local"],
             "parent_bindings_by_domain": {
@@ -162,6 +163,7 @@ def prepare(root):
         "python": sys.executable,
         "model": reference(identity_path),
         "config": config,
+        "study": study,
         "thresholds": [0, 2, 4],
         "modes": ["global", "local"],
         "rows": rows,
@@ -171,7 +173,7 @@ def prepare(root):
         "maximum_prediction_seconds": 1800,
         "inputs": list({(b["path"], b["sha256"]): b for b in inputs}.values()),
         "frozen_files": files,
-        "scope": "Fixed first-two-source RGGB/repeat0 finite-wire near/far400 pilot, ordinary exact-target bark/fur, all4 faint-ADC RGGB materials, both protected GFX families/all4 main contexts/both cab profiles and ROIs/JPEG metadata. Reuse V120 predictions, no neural model/DINO/noise/source/RAW work. Raw-only discovery/conditional validation and per-color scores, then replace parent wave projection. Full256 discovery/129 local validation, two-fold CFA split, fixed thresholds0/2/4, matched global/local support comparison from identical candidates. All24 input-only outputs close before target/reference loading. This pilot is development evidence, not broad/independent model-quality promotion or calibrated confidence.",
+        "scope": "Fixed first-two-source RGGB/repeat0 finite-wire near/far400 pilot, ordinary exact-target bark/fur, all4 faint-ADC RGGB materials, both protected GFX families/all4 main contexts/both cab profiles and ROIs/JPEG metadata. Reuse V143 procedural and V120 photographic predictions, no neural model/DINO/noise/source/RAW work. Raw-only discovery/conditional validation and per-color scores, then replace parent wave projection. Full256 discovery/129 local validation, two-fold CFA split, fixed thresholds0/2/4, matched global/local support comparison from identical candidates. All24 input-only outputs close before target/reference loading. This pilot is development evidence, not broad/independent model-quality promotion or calibrated confidence.",
     }
     write_json(root / "plan.json", plan)
     verify_plan(plan)

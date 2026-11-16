@@ -35,6 +35,11 @@ parent and real cab crossings remain missing. All24 cases/native views are
 complete; the full three-prior/all-CFA panel is running. Real/photo parents are
 V120; corrected lineage is explicit. This is an implemented experimental
 reconstruction component, not a calibrated confidence guarantee.
+Its [matching/harmonic follow-up](local-wave-shapes.md) fixes a valid-pair
+assignment failure and tests a richer input-only waveform. H3 doubles the
+fixed-pilot far weak response to 5.46%, with higher quiet/increment error and
+new building color bands; a nearly matched weak-response H1 threshold has
+lower errors. More basis capacity alone does not resolve the fidelity problem.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

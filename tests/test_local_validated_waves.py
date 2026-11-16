@@ -23,27 +23,33 @@ def scene(layout=LAYOUTS[0], size=64):
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
-def test_every_discovery_quantity_excludes_withheld_pixels(layout):
+@pytest.mark.parametrize("harmonics", [1, 3])
+def test_every_discovery_quantity_excludes_withheld_pixels(layout, harmonics):
     raw, colors, _ = scene(layout)
     mask = stratified_split(raw.shape, 71)
-    first = local.fit_local_candidate(raw, colors, mask, shot=0.00008, read=2.56e-8, config=CONFIG)
+    config = replace(CONFIG, harmonics=harmonics)
+    first = local.fit_local_candidate(raw, colors, mask, shot=0.00008, read=2.56e-8, config=config)
     destroyed = raw.copy()
     destroyed[~mask] = np.nan
     second = local.fit_local_candidate(
-        destroyed, colors, mask, shot=0.00008, read=2.56e-8, config=CONFIG
+        destroyed, colors, mask, shot=0.00008, read=2.56e-8, config=config
     )
     assert first.frequencies_xy == second.frequencies_xy
     assert first.edge_geometry == second.edge_geometry
     for key in [
         "design",
         "coefficients",
-        "wave_fields",
         "full_cfa",
         "conditional_null_cfa",
         "variance_cfa",
     ]:
         np.testing.assert_array_equal(getattr(first, key), getattr(second, key))
-    for a, b in zip(first.operators, second.operators, strict=True):
+    assert first.wave_slices == second.wave_slices
+    for a, b in zip(
+        (*first.operators, *first.wave_fields),
+        (*second.operators, *second.wave_fields),
+        strict=True,
+    ):
         np.testing.assert_array_equal(a, b)
 
 
@@ -152,6 +158,74 @@ def test_direction_matching_handles_swaps_conjugates_and_rejects_other_frequenci
     assert not local.match_directions(first, ((0.2, 0.1), (-0.2, 0.15)), (64, 96), 1.5)
 
 
+def test_unrelated_direction_cannot_discard_a_valid_partial_match():
+    first = np.array([[3, 0], [-3, 2]]) / 128
+    second = np.array([[3.1, 0], [3, 2]]) / 128
+    assert local.match_directions(first, second, (128, 128), 1.5, matching="legacy") == []
+    matched = local.match_directions(first, second, (128, 128), 1.5)
+    assert [(a, b) for a, b, _ in matched] == [(0, 0)]
+    assert matched[0][2] == pytest.approx(0.1)
+    swapped = local.match_directions(first, -second[::-1], (128, 128), 1.5)
+    assert [(a, b) for a, b, _ in swapped] == [(0, 1)]
+
+
+def test_harmonic_group_is_fitted_and_validated_as_a_whole():
+    size = 64
+    y, x = np.mgrid[:size, :size]
+    phase = 2 * np.pi * (3 * x + y) / size
+    signal = 0.03 + 0.003 * np.cos(phase) + 0.001 * np.sin(2 * phase) + 0.0005 * np.cos(3 * phase)
+    signal += 0.001 * np.cos(2 * np.pi * (-2 * x + 4 * y) / size)
+    rgb = np.array([0.8, 1, 0.6])[:, None, None] * signal
+    colors = np.tile(np.array(LAYOUTS[0]).reshape(2, 2), (size // 2, size // 2))
+    raw = rgb[colors, y, x]
+    mask = stratified_split(raw.shape, 71)
+    candidate = local.fit_local_candidate(
+        raw,
+        colors,
+        mask,
+        shot=0.00008,
+        read=2.56e-8,
+        config=replace(CONFIG, harmonics=3, frequency_refinements=0),
+    )
+    assert [stop - start for start, stop in candidate.wave_slices] == [6, 6]
+    np.testing.assert_allclose(candidate.full_cfa, raw, atol=2e-15)
+    np.testing.assert_array_equal(local.replacement_components(candidate, rgb), 0)
+    for direction in range(2):
+        start, stop = candidate.wave_slices[direction]
+        assert 3 * np.linalg.norm(candidate.frequencies_xy[direction]) <= 0.24
+        assert candidate.wave_fields[direction].shape == (size, size, stop - start)
+        # A null retains the entire other family, but none of this family's harmonics.
+        changed = raw.copy()
+        changed[~mask] = candidate.conditional_null_cfa[direction, ~mask]
+        _, score = local.conditional_scores(candidate, changed, colors, ~mask)
+        assert np.all(score[direction] < 0)
+    assert local._harmonic_count((0.13, 0), 3) == 1
+    assert local._harmonic_count((0.09, 0), 3) == 2
+
+
+@pytest.mark.parametrize("layout", LAYOUTS)
+def test_even_nonmultiple_four_axes_fit_boundary_tiles_without_cfa_shift(layout):
+    h, w = 66, 70
+    y, x = np.mgrid[:h, :w]
+    signal = 0.03 + 0.003 * np.cos(2 * np.pi * (5 * x + 3 * y) / 64)
+    rgb = np.array([0.8, 1, 0.6])[:, None, None] * signal
+    colors = np.tile(np.array(layout).reshape(2, 2), (h // 2, w // 2))
+    raw = rgb[colors, y, x]
+    packed = np.stack([raw[a::2, b::2] for a in range(2) for b in range(2)])
+    outputs, aux = local.restore_local_waves(
+        rgb,
+        packed,
+        np.array(layout),
+        shot=0.00008,
+        read=2.56e-8,
+        config=replace(CONFIG, harmonics=3),
+    )
+    assert aux["patches"] == 4
+    assert [r["xy"] for r in aux["records"]] == [[0, 0], [6, 0], [0, 2], [6, 2]]
+    for output in outputs.values():
+        np.testing.assert_array_equal(output, rgb)
+
+
 def test_soft_support_is_zero_below_threshold_and_monotone():
     values = local.support_weight(np.array([-4, 0, 1, 2, 3, 10, 1e8]), 2)
     np.testing.assert_array_equal(values[:4], 0)
@@ -193,6 +267,10 @@ def test_zero_noise_is_bit_identity_without_fitting(monkeypatch):
         ("edge_refinements", 4),
         ("window", 64.0),
         ("validation_window", 64),
+        ("harmonics", 0),
+        ("harmonics", 5),
+        ("harmonics", 3.0),
+        ("matching", "greedy"),
     ],
 )
 def test_invalid_geometry_rejects(key, value):

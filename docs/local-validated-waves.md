@@ -14,6 +14,12 @@ incorrectly V120. Original outputs/receipts are preserved with a verified
 corrected metrics and image headings. Numerical results did not change.
 V120 remains the general recommendation.
 
+The [matching/harmonic follow-up](local-wave-shapes.md) retains a fold-assignment
+fix and an optional richer basis. H3 raises far weak response to 5.46% in this
+same development pilot, with higher quiet/increment error and conspicuous
+new building color bands. One harmonic remains the default. Original results
+below and the live full-panel source stay unchanged.
+
 The [full three-prior evaluation](results/local-validated-wave-pilot-v1/full-panel-original-plan.json.gz)
 is running: eight geometries × two placements × four CFAs × two repeats × three
 roles × three priors, or **1,152 images**. It reuses 12 exact pilot predictions.
@@ -187,8 +193,11 @@ restored = outputs[("local", 2.0)]
 ```
 
 Inputs are matching normalized camera-RGB `3×H×W`, packed `4×H/2×W/2` and four
-standard Bayer color indices. This prototype requires axes divisible by four
-and at least 256 pixels. It is an experimental NumPy component; full 102MP
+standard Bayer color indices. The current implementation accepts even axes
+of at least 256 pixels. The original pilot/full-panel snapshot required
+divisibility by four. Positive-noise native 66×70 boundary-tile tests cover
+all four Bayer layouts; this does not establish full-frame performance.
+It is an experimental NumPy component; full 102MP
 integration and speed are unverified. Its finite-window sinusoidal model,
 noise proxies and support test still miss weak nonperiodic/finite detail and
 can retain structured artifacts. Broader evidence must determine whether the
