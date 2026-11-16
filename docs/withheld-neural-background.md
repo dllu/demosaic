@@ -120,3 +120,8 @@ see samples reserved for validation. Fit its nuisance coefficients on A, keep
 the proposal/threshold controls fixed, then measure actual weak-increment and
 absolute false-detail errors. These two-context background scores alone do
 not select or validate that future reconstruction model.
+
+The [whole-context matched correction pilot](neural-nuisance-reconstruction.md)
+now implements that shared-partition test, with a separate control for
+conditional prediction delivery. Its background cache/input audit is complete;
+the correction-quality review is pending.

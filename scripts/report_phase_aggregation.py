@@ -14,7 +14,15 @@ from demosaic.archive_metrics import noisy_malvar
 from demosaic.experiments.artifacts import checked, read_json, reference, write_json
 
 
-def report(root, output):
+def report(
+    root,
+    output,
+    *,
+    method_label="Phase avg local t2",
+    check_old_h1=True,
+    control_method="H1-local-t2",
+    control_label="H1 local t2",
+):
     os.nice(10)
     os.sched_setaffinity(0, sorted(os.sched_getaffinity(0))[-2:])
     plan, collection = read_json(root / "plan.json"), read_json(root / "collection.json")
@@ -33,7 +41,7 @@ def report(root, output):
         row = figure["source"]
         with np.load(checked(row["arrays"]), allow_pickle=False) as z:
             calibration = {k: z[k][row["sample"] : row["sample"] + 1] for k in ("wb", "matrix")}
-        values = np.load(checked(records[row["id"]]["predictions"]["H1-local-t2"]))[None]
+        values = np.load(checked(records[row["id"]]["predictions"][control_method]))[None]
         cell = pixels(values, calibration, figure["ROI_xywh"], figure["display_exposure"])
         # The independent channelwise display helper checks the newly inserted cell.
         np.testing.assert_array_equal(
@@ -45,7 +53,7 @@ def report(root, output):
         x, y, w, h = panels[2]["xywh"]
         canvas.paste(Image.fromarray(cell), (x, y))
         draw = ImageDraw.Draw(canvas)
-        for column, label in [(2, "H1 local t2"), (3, "Phase avg local t2")]:
+        for column, label in [(2, control_label), (3, method_label)]:
             px = panels[column]["xywh"][0]
             draw.rectangle((px, 0, px + 160, 23), fill="#eeeeee")
             draw.text((px, 5), label, fill="black", font=font)
@@ -61,7 +69,7 @@ def report(root, output):
                 image=reference(path),
                 panels=panels,
                 original_aggregation_board=figure["image"],
-                H1_prediction=records[row["id"]]["predictions"]["H1-local-t2"],
+                H1_prediction=records[row["id"]]["predictions"][control_method],
                 scope="Existing audited board with only H1 control cell and two headings replaced; unchanged native pixels/calibration/ROI/references/JPEGs.",
             )
         )
@@ -71,7 +79,7 @@ def report(root, output):
             continue
         record, sample = records[row["id"]], row["sample"]
         parent = np.load(checked(row["parent"]))[sample : sample + 1]
-        h1 = np.load(checked(record["predictions"]["H1-local-t2"]))[None]
+        h1 = np.load(checked(record["predictions"][control_method]))[None]
         aggregate = np.load(checked(record["predictions"]["local-t2"]))[None]
         error = np.mean((aggregate[0].astype(np.float64) - parent[0]) ** 2, axis=0)
         integral = np.pad(error.cumsum(0).cumsum(1), ((1, 0), (1, 0)))
@@ -92,7 +100,7 @@ def report(root, output):
         cells = []
         for j, (label, value) in enumerate(
             zip(
-                ("Noisy Malvar", "V120", "H1 local t2", "Phase avg local t2"),
+                ("Noisy Malvar", "V120", control_label, method_label),
                 (noisy, parent, h1, aggregate),
                 strict=True,
             )
@@ -148,27 +156,30 @@ def report(root, output):
                     }
                 )
     # Check new H1 controls against existing completed matching-stage inputs/outputs.
-    previous = root.parents[0] / "local-wave-shapes-pilot-v1/matching"
-    old = read_json(previous / "collection.json")
-    key = lambda r: tuple(
-        r[k]["sha256"] for k in ("parent_values", "packed_values", "colors_values")
-    )
-    lookup = {key(r): r for r in old["rows"]}
     equivalence = []
-    for record in collection["rows"]:
-        prior = lookup.get(key(record))
-        if prior is None:
-            continue
-        diffs = []
-        for method, binding in prior["predictions"].items():
-            a, b = (
-                np.load(checked(binding)),
-                np.load(checked(record["predictions"]["H1-" + method])),
-            )
-            assert np.array_equal(a, b)
-            diffs.append({"method": method, "byte_exact_values": True})
-        equivalence.append({"case": record["id"], "previous": prior["id"], "methods": diffs})
-    assert len(equivalence) == 24
+    if check_old_h1:
+        previous = root.parents[0] / "local-wave-shapes-pilot-v1/matching"
+        old = read_json(previous / "collection.json")
+        key = lambda r: tuple(
+            r[k]["sha256"] for k in ("parent_values", "packed_values", "colors_values")
+        )
+        lookup = {key(r): r for r in old["rows"]}
+        for record in collection["rows"]:
+            prior = lookup.get(key(record))
+            if prior is None:
+                continue
+            diffs = []
+            for method, binding in prior["predictions"].items():
+                a, b = (
+                    np.load(checked(binding)),
+                    np.load(checked(record["predictions"]["H1-" + method])),
+                )
+                assert np.array_equal(a, b)
+                diffs.append({"method": method, "byte_exact_values": True})
+            equivalence.append({"case": record["id"], "previous": prior["id"], "methods": diffs})
+        assert len(equivalence) == 24
+    elif not plan.get("shared_global_CFA_partition"):
+        raise ValueError("Skipping old per-tile controls requires a declared global split")
     assert "torch" not in sys.modules
     write_json(
         output / "report.json",
@@ -180,6 +191,9 @@ def report(root, output):
             "stress_figures": stress,
             "means": means,
             "H1_equivalence_cases": equivalence,
+            "H1_equivalence_scope": "Original per-tile split controls"
+            if check_old_h1
+            else "Global split differs from historical per-tile masks; standalone global-mask control checks are separate",
             "new_or_replaced_RGB_channels_exact": channels,
             "new_neural_forwards": 0,
             "Torch_imported": False,
@@ -192,5 +206,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--method-label", default="Phase avg local t2")
+    parser.add_argument("--skip-old-h1-equivalence", action="store_true")
+    parser.add_argument("--control-method", default="H1-local-t2")
+    parser.add_argument("--control-label", default="H1 local t2")
     args = parser.parse_args()
-    report(args.root.resolve(), args.output.resolve())
+    report(
+        args.root.resolve(),
+        args.output.resolve(),
+        method_label=args.method_label,
+        check_old_h1=not args.skip_old_h1_equivalence,
+        control_method=args.control_method,
+        control_label=args.control_label,
+    )

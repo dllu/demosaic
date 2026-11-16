@@ -430,7 +430,15 @@ def replacement_components(candidate, parent):
 
 
 def restore_local_waves(
-    parent, packed, colors, *, shot, read, thresholds=(2.0,), config=_DEFAULT_CONFIG
+    parent,
+    packed,
+    colors,
+    *,
+    shot,
+    read,
+    thresholds=(2.0,),
+    config=_DEFAULT_CONFIG,
+    discovery_mask=None,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -457,6 +465,10 @@ def restore_local_waves(
         raise ValueError("Invalid native axes/CFA/noise priors")
     if not thresholds or len(set(thresholds)) != len(thresholds):
         raise ValueError("Require a nonempty distinct set of fixed thresholds")
+    if discovery_mask is not None:
+        discovery_mask = np.asarray(discovery_mask)
+        if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
+            raise ValueError("Require a native boolean global discovery mask")
     for threshold in thresholds:
         support_weight(0, threshold)
     outputs = {(mode, float(t)): parent.copy() for mode in ["global", "local"] for t in thresholds}
@@ -480,7 +492,11 @@ def restore_local_waves(
         for x in positions[1]:
             region = np.s_[y : y + n, x : x + n]
             tile, layout = raw[region], cfa[region]
-            split = stratified_split(tile.shape, config.split_seed + int(y) * w + int(x))
+            split = (
+                stratified_split(tile.shape, config.split_seed + int(y) * w + int(x))
+                if discovery_mask is None
+                else discovery_mask[region]
+            )
             candidates = [
                 fit_local_candidate(tile, layout, mask, shot=shot, read=read, config=config)
                 for mask in [split, ~split]
