@@ -18,7 +18,10 @@ The [complementary-stage follow-up](complementary-cfa-branch.md) has trained abo
 frozen V200 EMA with extra proposals; its [full native review](complementary-comparison.md)
 finds almost unchanged weaker directions and slightly higher quiet/flat error.
 Its [complete fresh-noise review](complementary-edge-response.md) finds a small
-lower-noise weak-response gain with mean strong response retained.
+lower-noise weak-response gain with mean strong response retained. The
+[coverage-to-response follow-up](complementary-coverage-quality.md) verifies all
+closed carrier choices on CUDA and finds substantial attenuation among close-
+carrier views; global proximity alone is not a reconstruction bound.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 resumed its saved control before the added-attention arm, with original source
 and20k horizons preserved.

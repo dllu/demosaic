@@ -73,6 +73,11 @@ development panel is exploratory, with no calibrated false-detail guarantee.
 [1600 curve](images/complementary-edge-response-v1/iso1600-curve.png) ·
 [6400 curve](images/complementary-edge-response-v1/iso6400-curve.png).
 
+The [closed coverage-to-response follow-up](complementary-coverage-quality.md)
+links most added response to newly covered views, while finding low weak
+response even among close-carrier inputs. It is a descriptive association, not
+a causal allocation estimate.
+
 ## Native pixels still show substantial attenuation
 
 Noisy Malvar → **complementary EMA** → exact procedural GT, source0 and source1

@@ -8,7 +8,11 @@ and edge-aware local reconstruction. Measured follow-ups now include the
 and [complementary](complementary-comparison.md) trials. The last retains the
 V200 path with little added fixed-mesh detail and slightly higher quiet/flat error;
 its [fresh-noise review](complementary-edge-response.md) retains a small lower-noise
-weak-response gain. The [full-model attention comparison](raw-spatial-continuation.md)
+weak-response gain. A [closed coverage/response join](complementary-coverage-quality.md)
+finds that most added response comes from newly covered views, but close
+carriers still leave most of the weaker increment missing. This motivates
+checking physical fits and learned attenuation with carriers held fixed.
+The [full-model attention comparison](raw-spatial-continuation.md)
 resumes its saved control before the added-attention arm.
 V120 remains the general recommendation.
 

@@ -44,6 +44,8 @@ EMA and adds proposals: full review finds almost unchanged weaker directions,
 real-photo families retain their detail/color failures. The [three-noise review](docs/complementary-edge-response.md)
 finds a small conditional gain at the clearest prior: far-edge weak response
 8.14%→9.43%, with strong response retained and slightly lower quiet error.
+A [coverage/response diagnostic](docs/complementary-coverage-quality.md) finds
+low weak response even when a nearby carrier is present.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 resumed its preserved control; the added-attention arm and
 [matched endpoint review](docs/raw-spatial-endpoint-review.md) are queued.
