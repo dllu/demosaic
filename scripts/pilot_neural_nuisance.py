@@ -23,7 +23,7 @@ BACKGROUND_SHA = "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589
 BACKBONE_SHA = "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
 
 
-def prepare(root, background_cache=None):
+def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False):
     from demosaic.local_validated_waves import LocalWaveConfig
 
     source = REPO / ".cache/experiments/phase-aggregation-projected-pilot-v1"
@@ -43,6 +43,9 @@ def prepare(root, background_cache=None):
         old = read_json(checked(cache))
         assert old["background_configuration"] == background_config
         assert old["all91_restoration_and_backbone_tensors_unchanged"]
+        assert len(old["rows"]) == len(previous["rows"]) and {
+            r["id"] for r in old["rows"]
+        } == {r["id"] for r in previous["rows"]}
     root.mkdir(parents=True, exist_ok=False)
     work, files = freeze_sources(
         REPO,
@@ -62,10 +65,13 @@ def prepare(root, background_cache=None):
         "kind": "A-only whole-context neural nuisance with conditional H1 wave replacement",
         "geometry": geometry,
         "background_configuration": background_config,
+        "neural_frequency_source": "fixed-analytic-proposals"
+        if fixed_analytic_frequencies
+        else "residual-reselection",
         "source": reference(work / "src/demosaic/neural_nuisance.py"),
         "shared_wave_source": reference(work / "src/demosaic/local_validated_waves.py"),
         "parents": read_json(checked(previous["model"]))["parents"],
-        "nuisance": "One own-color neural CFA coordinate, upper-censored at sensor white; same analytic A-only edge and variance proxy. Reselect frequencies after adding nuisance, joint per-color WLS. No neural training update.",
+        "nuisance": "One own-color neural CFA coordinate, upper-censored at sensor white; same analytic A-only edge and variance proxy. Frequency source explicitly declared above, joint per-color WLS. No neural training update.",
         "delivery": "Unique full-minus-conditional-null prediction for both analytic and neural nuisance arms. Raw-sinusoid H1 control retained separately. Parent projected after all scores; empirical support is not calibrated confidence.",
     }
     write_json(root / "analytic-model.json", model)
@@ -83,6 +89,7 @@ def prepare(root, background_cache=None):
         "geometry_config": geometry,
         "background_configuration": background_config,
         "background_cache": cache,
+        "fixed_analytic_frequencies": fixed_analytic_frequencies,
         "rows": previous["rows"],
         "finite_groups": previous["finite_groups"],
         "thresholds": [0, 2, 4],
@@ -98,7 +105,7 @@ def prepare(root, background_cache=None):
         "shared_global_CFA_partition": True,
         "positive_noise_cases": positive,
         "background_field_count": 2 * positive,
-        "maximum_new_neural_forwards": 2 * positive,
+        "maximum_new_neural_forwards": 0 if cache else 2 * positive,
         "minimum_start_RAM_GiB": 48,
         "minimum_runtime_RAM_GiB": 32,
         "minimum_disk_GiB": 96,
@@ -388,6 +395,7 @@ def predict(root):
             read=row["noise"]["read"],
             thresholds=tuple(plan["thresholds"]),
             config=config,
+            reselect_frequencies=not plan.get("fixed_analytic_frequencies", False),
         )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
@@ -478,12 +486,14 @@ if __name__ == "__main__":
     parser.add_argument("mode", choices=("prepare", "backgrounds", "predict", "score"))
     parser.add_argument("root", type=Path)
     parser.add_argument("--background-cache", type=Path)
+    parser.add_argument("--fixed-analytic-frequencies", action="store_true")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
             prepare(
                 args.root.resolve(),
                 args.background_cache.resolve() if args.background_cache else None,
+                fixed_analytic_frequencies=args.fixed_analytic_frequencies,
             )
         )
     elif args.mode == "score":

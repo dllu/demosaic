@@ -94,12 +94,15 @@ def masked_packed_input(raw, discovery_mask):
     return np.stack(result)
 
 
-def fit_neural_candidate(raw, colors, reference, background, *, config=_DEFAULT):
+def fit_neural_candidate(
+    raw, colors, reference, background, *, config=_DEFAULT, reselect_frequencies=True
+):
     """Add one own-color neural nuisance coordinate; retain A-only edge/noise proxy.
 
     The CFA-interleaved feature is used only on each color's actual sensor
     sites. It is not an RGB nuisance image at unmeasured color locations.
-    Frequencies are reselected/refined after adding this competing nuisance.
+    Frequencies are normally reselected/refined after adding this competing
+    nuisance. The explicit ablation retains the analytic reference proposals.
     """
     raw, colors = np.asarray(raw, np.float64), np.asarray(colors)
     if (
@@ -119,29 +122,32 @@ def fit_neural_candidate(raw, colors, reference, background, *, config=_DEFAULT)
     nuisance = np.column_stack((reference.design[:, :base_columns], feature.ravel()))
     mask = reference.discovery_mask
     green = ((colors == 1) & mask).ravel()
-    first = _refine_frequency(
-        raw,
-        green,
-        nuisance,
-        xx,
-        yy,
-        _residual_peak(raw, green, nuisance),
-        config.frequency_refinements,
-        harmonics=1,
-    )
-    one = np.column_stack((nuisance, _wave_columns(xx, yy, first)))
-    second = _refine_frequency(
-        raw,
-        green,
-        one,
-        xx,
-        yy,
-        _residual_peak(raw, green, one, avoid=first, family_degrees=config.family_degrees),
-        config.frequency_refinements,
-        avoid=first,
-        family_degrees=config.family_degrees,
-        harmonics=1,
-    )
+    if reselect_frequencies:
+        first = _refine_frequency(
+            raw,
+            green,
+            nuisance,
+            xx,
+            yy,
+            _residual_peak(raw, green, nuisance),
+            config.frequency_refinements,
+            harmonics=1,
+        )
+        one = np.column_stack((nuisance, _wave_columns(xx, yy, first)))
+        second = _refine_frequency(
+            raw,
+            green,
+            one,
+            xx,
+            yy,
+            _residual_peak(raw, green, one, avoid=first, family_degrees=config.family_degrees),
+            config.frequency_refinements,
+            avoid=first,
+            family_degrees=config.family_degrees,
+            harmonics=1,
+        )
+    else:
+        first, second = reference.frequencies_xy
     waves = [_wave_columns(xx, yy, f) for f in (first, second)]
     n = nuisance.shape[1]
     slices = ((n, n + 2), (n + 2, n + 4))
@@ -194,7 +200,8 @@ def conditional_components(candidate, parent, raw, colors, background=None):
     A neural nuisance can be strongly correlated with a wave. Delivering its
     unresidualized sinusoid would amplify an arbitrarily assigned coefficient.
     Each color instead uses W-X_null*beta, including its own neural RGB field
-    at unmeasured locations. No parent value enters the residualization fit.
+    at unmeasured locations. The residualization design and wave projection
+    depend only on discovery data; the parent enters the final difference RHS.
     """
     shape = candidate.full_cfa.shape
     parent, raw, colors = (
@@ -259,6 +266,7 @@ def restore_neural_nuisance(
     read,
     thresholds=(0.0, 2.0, 4.0),
     config=_DEFAULT,
+    reselect_frequencies=True,
 ):
     """Matched analytic/neural-nuisance H1 corrections under one global CFA split."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -341,6 +349,7 @@ def restore_neural_nuisance(
                     r,
                     WithheldBackground(b.rgb[:, region[0], region[1]], mask),
                     config=config,
+                    reselect_frequencies=reselect_frequencies,
                 )
                 for r, b, mask in zip(reference, backgrounds, masks, strict=True)
             ]
@@ -439,7 +448,10 @@ def restore_neural_nuisance(
         "records": records,
         "shared_global_CFA_partition": True,
         "shared_analytic_edges_and_variance_proxy": True,
+        "neural_frequency_source": "residual-reselection"
+        if reselect_frequencies
+        else "fixed-analytic-proposals",
         "parent_used_for_discovery_or_validation": False,
         "geometry_config": config.to_dict(),
-        "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; residual frequency reselection and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent.",
+        "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent.",
     }

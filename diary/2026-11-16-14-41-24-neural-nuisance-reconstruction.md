@@ -65,3 +65,14 @@ Implementation/protocol committed and pushed as485cee83. README/current model,
 literature/index and the [complete quality report](../docs/neural-nuisance-reconstruction.md)
 now retain measured gains and losses together. [Publication](../docs/results/neural-nuisance-v1/publication.json).
 
+Published the completed study as678f6402, pushed. Added an explicit fixed
+analytic-frequency ablation; residual reselection remains the original default.
+The expanded numerical suite passes126 tests in6.57s. Prepared
+`neural-nuisance-fixed-proposals-pilot-v1`, plan SHA256
+`8a3df975b40a038459c5b32242f65bee12daff64f492b7834e54830c52829d31`,
+which adopts the complete original88-field cache with exact physical/mask/NN
+argument checks, and declares maximum zero new root/encoder calls. Controller
+613097/create1794870192.99, follow-up reviewer613098/create1794870193.01.
+All48 new corrections again close before reference scoring. The first study's
+sources/receipts/publication remain unchanged. Fixed-proposal quality pending.
+

@@ -40,18 +40,26 @@ def scene(layout=LAYOUTS[0], shape=(64, 64)):
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
-def test_neural_nuisance_excludes_withheld_RAW_and_keeps_shared_proxy(layout):
+@pytest.mark.parametrize("reselect", [True, False])
+def test_neural_nuisance_excludes_withheld_RAW_and_keeps_shared_proxy(layout, reselect):
     raw, colors, _, _, background = scene(layout)
     mask = stratified_split(raw.shape, 71)
     reference = fit_local_candidate(raw, colors, mask, shot=0.00008, read=2.56e-8, config=CONFIG)
     field = WithheldBackground(background, mask)
-    candidate = fit_neural_candidate(raw, colors, reference, field, config=CONFIG)
+    candidate = fit_neural_candidate(
+        raw, colors, reference, field, config=CONFIG, reselect_frequencies=reselect
+    )
     damaged = raw.copy()
     damaged[~mask] = np.nan
     repeated_reference = fit_local_candidate(
         damaged, colors, mask, shot=0.00008, read=2.56e-8, config=CONFIG
     )
-    repeated = fit_neural_candidate(damaged, colors, repeated_reference, field, config=CONFIG)
+    repeated = fit_neural_candidate(
+        damaged, colors, repeated_reference, field, config=CONFIG, reselect_frequencies=reselect
+    )
+    if not reselect:
+        assert candidate.frequencies_xy == reference.frequencies_xy
+        assert candidate.design.shape[1] == reference.design.shape[1] + 1
     assert candidate.frequencies_xy == repeated.frequencies_xy
     assert candidate.edge_geometry == reference.edge_geometry
     np.testing.assert_array_equal(candidate.variance_cfa, reference.variance_cfa)
@@ -114,12 +122,15 @@ def test_mismatched_background_mask_is_rejected_before_fitting():
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
-def test_delivered_conditional_component_is_the_tested_full_minus_null(layout):
+@pytest.mark.parametrize("reselect", [True, False])
+def test_delivered_conditional_component_is_the_tested_full_minus_null(layout, reselect):
     raw, colors, rgb, _, background = scene(layout)
     mask = stratified_split(raw.shape, 71)
     reference = fit_local_candidate(raw, colors, mask, shot=0.00008, read=2.56e-8, config=CONFIG)
     field = WithheldBackground(background, mask)
-    neural = fit_neural_candidate(raw, colors, reference, field, config=CONFIG)
+    neural = fit_neural_candidate(
+        raw, colors, reference, field, config=CONFIG, reselect_frequencies=reselect
+    )
     yy, xx = np.indices(raw.shape)
     for candidate, used in [(reference, None), (neural, field)]:
         components, fractions, spectra = conditional_components(
