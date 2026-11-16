@@ -16,6 +16,11 @@ versus 9.43% learned, with quiet/increment errors increasing on 56/64 and 46/64
 views. Unbounded/phase-free fits add little. Target-assisted global fits reveal
 some synthesis headroom while retaining the false-detail tradeoff; they do not
 bound the shared spatial network or establish an inference improvement.
+An [input-only local-support stage](local-validated-waves.md) now replaces
+raw-validated components in the parent. The two-geometry pilot improves the
+far weak/quiet tradeoff versus global support, with source-dependent gains and
+remaining costs versus V143. Above V120, it suppresses much of the global cab
+ripple but does not recover fine crossings. The full three-prior panel is running.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes its control: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

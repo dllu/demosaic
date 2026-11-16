@@ -166,3 +166,8 @@ scalar gain or the mere presence of a nearby carrier does not answer that
 question. These results retain the demonstrated synthesis headroom without
 mistaking target access, a lower aggregate loss or a global fit for the desired
 faithful model improvement.
+
+The [input-only local-support follow-up](local-validated-waves.md) now implements
+per-direction/color conditional validation and parent-component replacement.
+Its small pilot improves the global-support tradeoff while retaining parent
+error costs and unresolved real mesh. The full fixed three-prior review is running.

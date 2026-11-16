@@ -110,7 +110,10 @@ safe replacement for the real-camera detail head.
 The next useful diagnostic should add finite/local support and richer competing
 edges while retaining these absent controls and separate weaker-direction
 error. The completed neural comparison establishes no decisive weak-detail gain;
-fresh-noise near-edge response remains unmeasured. Protected GFX images,
+the [three-prior fresh-noise panel](edge-snr-ladder.md) is now reviewed. The new
+[local conditional-wave component](local-validated-waves.md) extends A/B evidence
+to finite-window parent replacement, with a completed pilot and full-panel
+evaluation running. Its real crossings remain unresolved. Protected GFX images,
 originals and existing receipts are intact.
 
 [Comparison and paired intervals](results/withheld-cfa-edge-refinement-v1/comparison.json) ·

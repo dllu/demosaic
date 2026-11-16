@@ -33,6 +33,10 @@ Latest fixed-basis diagnostic: [target-assisted measured-wave fits](2026-11-16-0
 weak response 9.43%→19.39%, with quiet/increment errors worsening on most views;
 an oracle result, not an inference improvement.
 
+Latest input-only reconstruction: [local conditional wave support](2026-11-16-09-35-34-local-validated-wave-pilot.md),
+source-dependent far response gains with lower costs than global support; real
+mesh unresolved. Full three-prior/all-CFA evaluation is running.
+
 Latest consolidation: [shared experiments and composed models](2026-11-15-22-22-09-experiment-consolidation.md), with exact V200 CUDA-prefix replay and preserved historical evidence.
 
 Latest research: [weak-detail literature review and reconstruction ideas](2026-11-15-23-04-10-weak-detail-literature.md), documenting proposals without implementation.

@@ -27,6 +27,14 @@ bank's global-fit weak response to 19.39%, but quiet error worsens on 56/64 view
 and weak-increment error on 46/64. Removing the gain box or permitting phase
 rotation adds little. This is target-assisted diagnostic evidence, not an
 inference gain or a spatial-head capacity bound; localized discrimination remains unresolved.
+The [input-only local conditional-wave prototype](local-validated-waves.md)
+now tests that direction: its fixed two-geometry pilot raises far weak response
+0.96%→2.80% above V143, with lower quiet/increment costs than the same-candidate
+global support. Source1 drives the gain; quiet error still rises versus the
+parent and real cab crossings remain missing. All24 cases/native views are
+complete; the full three-prior/all-CFA panel is running. Real/photo parents are
+V120; corrected lineage is explicit. This is an implemented experimental
+reconstruction component, not a calibrated confidence guarantee.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

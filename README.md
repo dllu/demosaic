@@ -49,6 +49,10 @@ low weak response even when a nearby carrier is present.
 A [fixed-wave GT oracle](docs/measured-wave-oracle.md) raises response to 19.39%,
 but quiet error worsens on 56/64 views and weak-increment error on 46/64;
 target access does not supply a deployable detail improvement.
+The [input-only local-support prototype](docs/local-validated-waves.md) improves
+a two-geometry pilot's far response from 0.96% to 2.80% above V143, with quiet
+RMS +0.43%; it reduces global-support cab ripples but still misses fine crossings.
+The gain is source-dependent. Its full three-prior evaluation is running.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -130,6 +134,11 @@ exact constructed-GT triplets at the same ordinary conditions above. Its faint
 and [bark regression](docs/images/v131-endpoint-v1/bark-contrast0p025-adc-contrast20-comparison.png)
 use common contrast20, ADC-only noise and unchanged native pixels.
 [Checkpoint, source and display provenance](docs/v131-endpoint-quality.md).
+
+The input-only local stage retains [source 0 without a weak gain](docs/images/local-validated-wave-pilot-v1/source0-far-role2-triplet.png)
+and [source 1 with a gain](docs/images/local-validated-wave-pilot-v1/source1-far-role2-triplet.png):
+noisy → local support above V143 → exact constructed GT, native160 cells,
+exposure2/contrast1. [Complete parent/configuration/noise/source metadata](docs/local-validated-waves.md#native-triplets-retain-a-gain-and-a-counterexample).
 
 The competing selector's [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
 and [building color failure](docs/images/competing-orientation-v1/readme-building.png)
