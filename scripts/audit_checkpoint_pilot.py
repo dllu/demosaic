@@ -219,9 +219,17 @@ def audit(root, output=None):
                 noisy = crop(data["noisy_rgb"], data, roi, exposure)
                 gt = crop(data["reference_rgb"], data, roi, exposure)
                 name = o["id"] + "-" + case["name"]
+                jpeg_cells = []
+                if plan.get("include_camera_jpegs", False):
+                    for key in ("noisy_camera_jpeg", "reference_camera_jpeg"):
+                        native = np.load(
+                            checked(case["camera_JPEGs"][key]["pixels"]), allow_pickle=False
+                        )
+                        assert native.shape == (160, 160, 3) and native.dtype == np.uint8
+                        jpeg_cells.append(native)
                 check_board(
                     name + "-comparison",
-                    [noisy] + [crop(p, data, roi, exposure) for _, p in preds] + [gt],
+                    [noisy] + [crop(p, data, roi, exposure) for _, p in preds] + [gt] + jpeg_cells,
                 )
                 check_board(name + "-triplet", [noisy, crop(new, data, roi, exposure), gt])
     assert rows_checked == set(measured) and images_checked == set(images)

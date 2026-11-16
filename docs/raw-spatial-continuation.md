@@ -77,6 +77,11 @@ safety function accepts both run paths and rejects an outside-work path.
 [Thirteen focused state/trace/relaunch tests](../tests/test_raw_spatial_continuation.py) ·
 [Exact adoption, source, first-update and failure evidence](results/raw-spatial-continuation-v1/publication.json).
 
+The [matched endpoint detail review](raw-spatial-endpoint-review.md) is now queued
+with exact source/state/input checks, explicit camera-JPEG cells and an independent
+CPU metric/native-pixel audit. It reuses the original102-input panel and saved
+V120 predictions, then compares V132 with the saved V131 endpoint.
+
 Full numerical and native review remains required after training. It must retain
 ordinary photos, faint/ADC/flat controls, at least two native noisy/restored/GT
 triplets and both protected real-photo families with accurately labeled

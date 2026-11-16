@@ -45,7 +45,8 @@ real-photo families retain their detail/color failures. The [three-noise review]
 finds a small conditional gain at the clearest prior: far-edge weak response
 8.14%→9.43%, with strong response retained and slightly lower quiet error.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
-resumed its preserved control; the added-attention arm follows.
+resumed its preserved control; the added-attention arm and
+[matched endpoint review](docs/raw-spatial-endpoint-review.md) are queued.
 
 ## Setup and inference
 

@@ -48,6 +48,54 @@ def verify_progress_checkpoint(state, plan):
         raise ValueError("Progress spatial state coverage differs")
 
 
+def verify_completed_training_checkpoint(state, plan, result):
+    """Check the complete matched training endpoint before constructing a model."""
+    import torch
+
+    spatial = plan["raw_spatial_features"]
+    tensors, optimizer_states = (114, 112) if spatial else (91, 89)
+    counts = result["counts"]
+    if not (
+        state["step"] == plan["step"] == plan["training_horizon"] == 20000
+        and state["config"]["steps"] == 20000
+        and state["config"]["seed"] == 70
+        and state["config"]["source_sha256"] == plan["training_source_sha256"]
+        and state["model_config"].get("raw_spatial_features", False) is spatial
+        and state["config"]["initialized_from"] == plan["expected_lineage"]
+        and len(state["model"]) == len(state["ema"]) == plan["EMA_tensors"] == tensors
+        and state["model"].keys() == state["ema"].keys()
+        and result["status"] == "completed-raw-spatial-training-phase"
+        and result["phase"] == "train"
+        and result["arm"] == ("V132" if spatial else "V131")
+        and result["updates"] == result["all_AdamW_steps"] == 20000
+        and result["source_sha256"] == plan["training_source_sha256"]
+        and result["checkpoint"] == plan["checkpoint"]
+        and all(
+            counts[k] == 20000
+            for k in ("training_forwards", "optimizer_steps", "prepared_training_batches")
+        )
+        and counts["validation_forwards"] == 640
+        and counts["encoder_forwards"] == 20640
+        and counts["target_contexts"] == 320000
+    ):
+        raise ValueError("Completed endpoint identity, source, lineage or call counts differ")
+    rows = result["observed_inputs"]
+    if [row["step"] for row in rows] != list(range(1, 20001)):
+        raise ValueError("Completed endpoint input trace is incomplete")
+    if spatial and result["all_observed_inputs_match_saved_control"] is not True:
+        raise ValueError("Spatial endpoint lacks the full matched-input check")
+    states = state["optimizer"]["state"]
+    if len(states) != optimizer_states or any(float(s["step"]) != 20000 for s in states.values()):
+        raise ValueError("Completed endpoint optimizer count or clock differs")
+    values = [*state["model"].values(), *state["ema"].values()]
+    values += [v for s in states.values() for v in s.values() if isinstance(v, torch.Tensor)]
+    if any(not torch.isfinite(v).all() for v in values):
+        raise ValueError("Nonfinite completed endpoint model, EMA or optimizer state")
+    branch = [k for k in state["model"] if k.startswith("pretrained_rgb.raw_spatial.")]
+    if len(branch) != (23 if spatial else 0):
+        raise ValueError("Completed endpoint spatial state coverage differs")
+
+
 def collect(path):
     import torch
     from frozen_backbone_identity import verify_backbone_identity
@@ -95,11 +143,14 @@ def collect(path):
     counts = {"root": 0, "encoder": 0}
     rows = []
     witness = {}
-    if plan.get("progress_checkpoint", False):
+    if plan.get("progress_checkpoint", False) or plan.get("completed_training_checkpoint", False):
         state = torch.load(
             plan["checkpoint"]["path"], map_location="cpu", weights_only=True, mmap=True
         )
-        verify_progress_checkpoint(state, plan)
+        if plan.get("progress_checkpoint", False):
+            verify_progress_checkpoint(state, plan)
+        else:
+            verify_completed_training_checkpoint(state, plan, read(plan["training_result"]["path"]))
         del state
     with torch.random.fork_rng(devices=[0]):
         model, state = load_checkpoint(plan["checkpoint"]["path"], "cuda")
@@ -251,6 +302,9 @@ def collect(path):
             "torch": torch.__version__,
             "cuda": torch.version.cuda,
             "progress_checkpoint_verified": plan.get("progress_checkpoint", False),
+            "completed_training_checkpoint_verified": plan.get(
+                "completed_training_checkpoint", False
+            ),
             "training_horizon": plan.get("training_horizon"),
             "scope": plan["scope"],
             "observations": rows,

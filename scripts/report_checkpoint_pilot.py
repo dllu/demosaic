@@ -224,6 +224,18 @@ def report(plan_path, collection_path, *, model_label=None):
                 noisy = pixels(arrays["noisy_rgb"], arrays, roi, exposure)
                 truth = pixels(arrays["reference_rgb"], arrays, roi, exposure)
                 metadata_case = {**metadata, "case": case, "ROI_xywh": roi}
+                jpeg_cells = []
+                if plan.get("include_camera_jpegs", False):
+                    for key, label in (
+                        ("noisy_camera_jpeg", "SOOC ISO6400 JPEG"),
+                        ("reference_camera_jpeg", "SOOC ISO100 JPEG"),
+                    ):
+                        native = np.load(
+                            checked(case["camera_JPEGs"][key]["pixels"]), allow_pickle=False
+                        )
+                        if native.shape != (160, 160, 3) or native.dtype != np.uint8:
+                            raise ValueError("Require original native160 camera JPEG pixels")
+                        jpeg_cells.append((label, native))
                 board(
                     observation["id"] + "-" + case["name"] + "-comparison",
                     [("Noisy Malvar", noisy)]
@@ -231,7 +243,8 @@ def report(plan_path, collection_path, *, model_label=None):
                         (label.replace("-profile3879", ""), pixels(p, arrays, roi, exposure))
                         for label, p in predictions
                     ]
-                    + [("ISO100 ref (not GT)", truth)],
+                    + [("ISO100 ref (not GT)", truth)]
+                    + jpeg_cells,
                     metadata_case,
                 )
                 board(
