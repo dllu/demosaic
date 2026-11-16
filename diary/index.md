@@ -27,3 +27,5 @@ Latest consolidation: [shared experiments and composed models](2026-11-15-22-22-
 Latest research: [weak-detail literature review and reconstruction ideas](2026-11-15-23-04-10-weak-detail-literature.md), documenting proposals without implementation.
 
 Latest experiment: [matched shared-edge trial launched](2026-11-16-01-38-52-shared-edge-trial.md); trained quality pending.
+
+Latest diagnostic: [withheld CFA evidence and predictable edge leakage](2026-11-16-01-46-42-withheld-cfa-edge-diagnostic.md).

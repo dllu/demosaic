@@ -21,6 +21,8 @@ Broad state-of-the-art quality and 100MP within 10 seconds remain goals.
 [Weak-detail literature review and proposed experiments](docs/weak-detail-literature-2026-11.md)
 examines the fence/flat-region tradeoff and recent methods. The first proposed
 shared-edge trial is now training; [quality review is queued](docs/experiments.md).
+The [first withheld-CFA diagnostic](docs/withheld-cfa-evidence.md) shows why
+independent sample agreement still needs an adequate edge/background model.
 
 ## Setup and inference
 

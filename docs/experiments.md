@@ -43,6 +43,12 @@ numerical result explicitly leaves actual native viewing pending. Paired metrics
 match case identities and conditions, retain error tails, and exclude independent
 real references from exact-GT scoring.
 
+The [analytic withheld-CFA diagnostic](withheld-cfa-evidence.md) has completed:
+3,072 A/B fits, fixed threshold curves and source-cluster summaries. It rejects
+the tested flat-noise candidates but exposes predictable edge leakage, especially
+when step geometry is misspecified. This CPU-only result changes no neural
+checkpoint or recommendation.
+
 Historical study entry points remain for reproduction. Their reusable helper
 imports now resolve to packaged implementations; original frozen snapshots are
 unchanged. The complete [earlier experiment index](history/experiments-through-v200.md)
