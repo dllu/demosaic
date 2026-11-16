@@ -99,3 +99,7 @@ ordinary photos, faint/ADC/flat controls, at least two native noisy/restored/GT
 triplets and both protected real-photo families with accurately labeled
 independent references. The targeted gains/costs are documented now, while the
 broader427-photo/camera/flat/full-frame review and architecture comparison remain pending.
+The [V131 broad numerical run](v131-broad-primary.md) has started the original
+photo/known/unseen/texture/color pipeline with saved controls and exact input
+witnesses. Full-frame/standalone-flat review and the completed V132 comparison
+are separate outstanding requirements.

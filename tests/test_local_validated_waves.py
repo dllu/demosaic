@@ -1,6 +1,7 @@
 """Actual held-out invariance, color/direction validation and parent replacement."""
 
 from dataclasses import replace
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -24,10 +25,16 @@ def scene(layout=LAYOUTS[0], size=64):
 
 @pytest.mark.parametrize("layout", LAYOUTS)
 @pytest.mark.parametrize("harmonics", [1, 3])
-def test_every_discovery_quantity_excludes_withheld_pixels(layout, harmonics):
+@pytest.mark.parametrize(
+    "support_unit,background",
+    [("direction", "step"), ("harmonic", "step"), ("harmonic", "piecewise_affine")],
+)
+def test_every_discovery_quantity_excludes_withheld_pixels(
+    layout, harmonics, support_unit, background
+):
     raw, colors, _ = scene(layout)
     mask = stratified_split(raw.shape, 71)
-    config = replace(CONFIG, harmonics=harmonics)
+    config = replace(CONFIG, harmonics=harmonics, support_unit=support_unit, background=background)
     first = local.fit_local_candidate(raw, colors, mask, shot=0.00008, read=2.56e-8, config=config)
     destroyed = raw.copy()
     destroyed[~mask] = np.nan
@@ -45,9 +52,10 @@ def test_every_discovery_quantity_excludes_withheld_pixels(layout, harmonics):
     ]:
         np.testing.assert_array_equal(getattr(first, key), getattr(second, key))
     assert first.wave_slices == second.wave_slices
+    assert first.unit_slices == second.unit_slices and first.unit_keys == second.unit_keys
     for a, b in zip(
-        (*first.operators, *first.wave_fields),
-        (*second.operators, *second.wave_fields),
+        (*first.operators, *first.wave_fields, *first.unit_fields),
+        (*second.operators, *second.wave_fields, *second.unit_fields),
         strict=True,
     ):
         np.testing.assert_array_equal(a, b)
@@ -203,8 +211,77 @@ def test_harmonic_group_is_fitted_and_validated_as_a_whole():
     assert local._harmonic_count((0.09, 0), 3) == 2
 
 
+def test_harmonic_unit_cannot_borrow_fundamental_validation():
+    size = 64
+    y, x = np.mgrid[:size, :size]
+    phase = 2 * np.pi * (3 * x + y) / size
+    signal = 0.03 + 0.003 * np.cos(phase) + 0.001 * np.sin(2 * phase)
+    signal += 0.0007 * np.cos(2 * np.pi * (-2 * x + 4 * y) / size)
+    rgb = np.array([0.8, 1, 0.6])[:, None, None] * signal
+    colors = np.tile(np.array(LAYOUTS[0]).reshape(2, 2), (size // 2, size // 2))
+    raw, mask = rgb[colors, y, x], stratified_split((size, size), 71)
+    config = replace(CONFIG, harmonics=3, frequency_refinements=0, support_unit="harmonic")
+    candidate = local.fit_local_candidate(
+        raw, colors, mask, shot=0.00008, read=2.56e-8, config=config
+    )
+    group = local.fit_local_candidate(
+        raw,
+        colors,
+        mask,
+        shot=0.00008,
+        read=2.56e-8,
+        config=replace(config, support_unit="direction"),
+    )
+    assert candidate.frequencies_xy == group.frequencies_xy
+    np.testing.assert_array_equal(candidate.coefficients, group.coefficients)
+    np.testing.assert_array_equal(candidate.full_cfa, group.full_cfa)
+    np.testing.assert_array_equal(local.replacement_components(candidate, rgb), 0)
+    unit, fundamental = [candidate.unit_keys.index(key) for key in [(0, 2), (0, 1)]]
+    _, original = local.conditional_scores(candidate, raw, colors, ~mask)
+    assert np.all(original[[unit, fundamental]] > 0)
+    changed = raw.copy()
+    changed[~mask] = candidate.conditional_null_cfa[unit, ~mask]
+    _, score = local.conditional_scores(candidate, changed, colors, ~mask)
+    assert np.all(score[unit] < 0)
+    assert np.all(score[fundamental] > 0)
+
+
+def test_harmonic_matching_uses_its_actual_native_frequency_distance():
+    first = SimpleNamespace(unit_keys=((0, 1), (0, 2), (0, 3), (1, 1)))
+    second = SimpleNamespace(unit_keys=((1, 1), (1, 2), (1, 3), (0, 1)))
+    units = local._match_units(first, second, [(0, 1, 0.6), (1, 0, 0.9)], 1.5)
+    assert [(a, b) for a, b, _ in units] == [(0, 0), (1, 1), (3, 3)]
+    np.testing.assert_allclose([d for _, _, d in units], [0.6, 1.2, 0.9])
+
+
+def test_piecewise_affine_background_explains_different_slopes_across_the_edge():
+    size = 64
+    y, x = np.mgrid[:size, :size]
+    xx, yy = 2 * (x + 0.5) / size - 1, 2 * (y + 0.5) / size - 1
+    signal = 0.03 + 0.006 * xx + 0.005 * yy + (xx > 0) * (0.02 + 0.01 * xx - 0.008 * yy)
+    signal += 0.0005 * np.cos(2 * np.pi * (5 * x + 3 * y) / size)
+    rgb = np.array([0.8, 1, 0.6])[:, None, None] * signal
+    colors = np.tile(np.array(LAYOUTS[0]).reshape(2, 2), (size // 2, size // 2))
+    raw = rgb[colors, y, x]
+    candidate = local.fit_local_candidate(
+        raw,
+        colors,
+        stratified_split(raw.shape, 71),
+        shot=0.00008,
+        read=2.56e-8,
+        config=replace(CONFIG, background="piecewise_affine", frequency_refinements=0),
+    )
+    assert candidate.wave_slices[0][0] == 6
+    np.testing.assert_allclose(candidate.full_cfa, raw, atol=2e-14)
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
-def test_even_nonmultiple_four_axes_fit_boundary_tiles_without_cfa_shift(layout):
+@pytest.mark.parametrize(
+    "support_unit,background", [("direction", "step"), ("harmonic", "piecewise_affine")]
+)
+def test_even_nonmultiple_four_axes_fit_boundary_tiles_without_cfa_shift(
+    layout, support_unit, background
+):
     h, w = 66, 70
     y, x = np.mgrid[:h, :w]
     signal = 0.03 + 0.003 * np.cos(2 * np.pi * (5 * x + 3 * y) / 64)
@@ -218,7 +295,7 @@ def test_even_nonmultiple_four_axes_fit_boundary_tiles_without_cfa_shift(layout)
         np.array(layout),
         shot=0.00008,
         read=2.56e-8,
-        config=replace(CONFIG, harmonics=3),
+        config=replace(CONFIG, harmonics=3, support_unit=support_unit, background=background),
     )
     assert aux["patches"] == 4
     assert [r["xy"] for r in aux["records"]] == [[0, 0], [6, 0], [0, 2], [6, 2]]
@@ -271,6 +348,8 @@ def test_zero_noise_is_bit_identity_without_fitting(monkeypatch):
         ("harmonics", 5),
         ("harmonics", 3.0),
         ("matching", "greedy"),
+        ("support_unit", "channel"),
+        ("background", "polynomial"),
     ],
 )
 def test_invalid_geometry_rejects(key, value):

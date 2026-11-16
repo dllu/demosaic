@@ -17,10 +17,26 @@ def report(root):
     closed = read_json(root / "both-arms-closed-before-GT.json")
     if closed["plan"] != reference(root / "plan.json"):
         raise ValueError("Study closure differs")
-    sources = {"H1-legacy": Path(checked(plan["controls"]["plan"])).parent}
-    sources.update({name: Path(checked(binding)).parent for name, binding in plan["arms"].items()})
+    if "comparison_sources" in plan:
+        sources = {
+            name: Path(checked(binding)).parent
+            for name, binding in plan["comparison_sources"].items()
+        }
+        labels = {"individual": "H3 individual", "background": "H3 piecewise"}
+    else:
+        sources = {"H1-legacy": Path(checked(plan["controls"]["plan"])).parent}
+        sources.update(
+            {name: Path(checked(binding)).parent for name, binding in plan["arms"].items()}
+        )
+        labels = {"H1-legacy": "H1 legacy", "matching": "H1 matched", "harmonics": "H3 matched"}
+    baseline = next(iter(sources))
     score_paths = {
-        name: path / ("finite-scores-v2.json" if name == "H1-legacy" else "finite-scores.json")
+        name: path
+        / (
+            "finite-scores-v2.json"
+            if (path / "finite-scores-v2.json").exists()
+            else "finite-scores.json"
+        )
         for name, path in sources.items()
     }
     scores = {name: read_json(path)["rows"] for name, path in score_paths.items()}
@@ -44,7 +60,9 @@ def report(root):
                     }
                 )
     reports = {
-        name: read_json(path / ("report-v2" if name == "H1-legacy" else "report") / "report.json")
+        name: read_json(
+            path / ("report-v2" if (path / "report-v2").exists() else "report") / "report.json"
+        )
         for name, path in sources.items()
     }
     output = root / "comparison"
@@ -68,13 +86,13 @@ def report(root):
             for f in item["figures"]
             if f["image"]["path"].endswith("-comparison.png")
         }
-    if not all(set(comparisons[a]) == set(comparisons["H1-legacy"]) for a in comparisons):
+    if not all(set(comparisons[a]) == set(comparisons[baseline]) for a in comparisons):
         raise ValueError("Native case coverage differs across arms")
     figures, channels = [], 0
-    for name in comparisons["H1-legacy"]:
+    for name in comparisons[baseline]:
         source_cells = {a: cells(items[name]) for a, items in comparisons.items()}
-        old = source_cells["H1-legacy"]
-        for arm in ["matching", "harmonics"]:
+        old = source_cells[baseline]
+        for arm in sources:
             new = source_cells[arm]
             for i in [0, 1, *range(4, len(old))]:
                 np.testing.assert_array_equal(old[i][1], new[i][1])
@@ -85,9 +103,10 @@ def report(root):
                 [
                     old[0],
                     old[1],
-                    (f"H1 legacy {support}", old[index][1]),
-                    (f"H1 matched {support}", source_cells["matching"][index][1]),
-                    (f"H3 matched {support}", source_cells["harmonics"][index][1]),
+                    *[
+                        (f"{labels.get(a, a)} {support}", source_cells[a][index][1])
+                        for a in sources
+                    ],
                     *old[4:],
                 ]
             )
@@ -115,11 +134,14 @@ def report(root):
             }
         )
     changes = []
-    old_collection = read_json(checked(plan["controls"]["collection"]))
+    old_collection = read_json(sources[baseline] / "collection.json")
     old_rows = {r["id"]: r for r in old_collection["rows"]}
-    for arm in ["matching", "harmonics"]:
+    for arm in sources:
         collection = read_json(sources[arm] / "collection.json")
         for row in collection["rows"]:
+            for key in ["parent_values", "packed_values", "colors_values"]:
+                if row[key] != old_rows[row["id"]][key]:
+                    raise ValueError("Compared waveform arms have different native inputs")
             deltas = {}
             for method, binding in row["predictions"].items():
                 a, b = [
@@ -144,7 +166,10 @@ def report(root):
             "means": means,
             "figures": figures,
             "channels_reread_exact": channels,
-            "changes_from_legacy": changes,
+            "changes_from_legacy"
+            if "comparison_sources" not in plan
+            else "changes_from_baseline": changes,
+            "baseline_arm": baseline,
             "scope": "Same development sources/RAW/parent/noise/ROIs/display; descriptive two-geometry means. Joint harmonic support does not establish each individual harmonic. Both real references and JPEGs are qualitative, never scored. No broad promotion. All native cells preserve source report pixels exactly.",
         },
     )

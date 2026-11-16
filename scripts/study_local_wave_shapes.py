@@ -23,32 +23,49 @@ from demosaic.experiments.artifacts import (
 REPO = next(p for p in Path(__file__).resolve().parents if (p / "PROMPT.md").is_file())
 
 
-def prepare(root):
+def prepare(
+    root, *, control_root=None, configurations=None, study_question=None, comparison_sources=None
+):
     from pilot_local_validated_waves import prepare as prepare_pilot
 
     from demosaic.local_validated_waves import LocalWaveConfig
 
-    old = REPO / ".cache/experiments/local-validated-wave-pilot-v1"
+    old = control_root or REPO / ".cache/experiments/local-validated-wave-pilot-v1"
+    model_name = (
+        "analytic-model-v2.json"
+        if (old / "analytic-model-v2.json").exists()
+        else "analytic-model.json"
+    )
+    score_name = (
+        "finite-scores-v2.json"
+        if (old / "finite-scores-v2.json").exists()
+        else "finite-scores.json"
+    )
     controls = {
         key: reference(old / name)
         for key, name in [
             ("plan", "plan.json"),
             ("collection", "collection.json"),
-            ("model", "analytic-model-v2.json"),
-            ("scores", "finite-scores-v2.json"),
+            ("model", model_name),
+            ("scores", score_name),
         ]
     }
     study = {
         "primary_threshold": 2,
         "controls": controls,
-        "question": "Separate valid-partial-fold matching from a richer thin-line waveform. H1/cardinality changes only matching; H3/cardinality permits up to three harmonics per family, with counts fixed before refinement and all harmonic columns jointly withheld-validated. All other settings/inputs remain fixed. This reused development pilot is not an independent test population.",
+        "question": study_question
+        or "Separate valid-partial-fold matching from a richer thin-line waveform. H1/cardinality changes only matching; H3/cardinality permits up to three harmonics per family, with counts fixed before refinement and all harmonic columns jointly withheld-validated. All other settings/inputs remain fixed. This reused development pilot is not an independent test population.",
     }
     root.mkdir(parents=True, exist_ok=False)
     arms = {}
-    for name, harmonics in [("matching", 1), ("harmonics", 3)]:
+    configurations = configurations or {
+        "matching": LocalWaveConfig(),
+        "harmonics": replace(LocalWaveConfig(), harmonics=3),
+    }
+    for name, configuration in configurations.items():
         path = prepare_pilot(
             root / name,
-            config=replace(LocalWaveConfig(), harmonics=harmonics),
+            config=configuration,
             study=study,
         )
         arms[name] = reference(path)
@@ -73,6 +90,12 @@ def prepare(root):
         "frozen_files": files,
         "scope": "Check legacy H1 pixel equivalence first. Close both 24-image input-only arms before any new GT/reference analysis, then score/render/audit each. No NN/DINO/RAW/source/noise/optimizer work. Fixed original thresholds0/2/4, primary2; all protected main/cab contexts and both JPEGs retained. Existing full three-prior H1/legacy run and full V132 training remain independent and unchanged.",
     }
+    if comparison_sources:
+        plan["comparison_sources"] = {
+            **comparison_sources,
+            **{name: binding for name, binding in arms.items()},
+        }
+        plan["inputs"].extend(comparison_sources.values())
     write_json(root / "plan.json", plan)
     verify_plan(plan)
     return root / "plan.json"
@@ -101,7 +124,9 @@ def equivalence(root):
             colors,
             shot=row["noise"]["shot"],
             read=row["noise"]["read"],
-            config=LocalWaveConfig(**old["config"], matching="legacy"),
+            config=LocalWaveConfig(
+                **{**old["config"], "matching": old["config"].get("matching", "legacy")}
+            ),
             thresholds=tuple(old["thresholds"]),
         )
         checks = []

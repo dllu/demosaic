@@ -56,6 +56,8 @@ The gain is source-dependent. Its full three-prior evaluation is running.
 A [three-harmonic follow-up](docs/local-wave-shapes.md) reaches 5.46% far weak
 response but raises quiet/increment error and adds building color bands;
 one harmonic remains the default. The independent fold-assignment fix is retained.
+[Individual harmonic validation](docs/individual-wave-validation.md) lowers
+far error versus H3 group support, with response 4.07%; building bands persist.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -64,6 +66,8 @@ soft foliage remain unresolved. The experimental `v131` preset is available.
 V132's added-attention arm is training. Its [matched1k review](docs/v132-progress1000-quality.md)
 gains0.034 dB faint ADC over V1311k but stays0.240 dB below V120, without clear
 new real mesh recovery. The20k architecture comparison remains pending.
+V131's [broad numerical review](docs/v131-broad-primary.md) is running on the
+original photo/camera/texture/color pipeline; aggregate results are pending.
 
 ## Setup and inference
 
@@ -142,12 +146,12 @@ The input-only local stage retains [source 0 without a weak gain](docs/images/lo
 and [source 1 with a gain](docs/images/local-validated-wave-pilot-v1/source1-far-role2-triplet.png):
 noisy → local support above V143 → exact constructed GT, native160 cells,
 exposure2/contrast1. [Complete parent/configuration/noise/source metadata](docs/local-validated-waves.md#native-triplets-retain-a-gain-and-a-counterexample).
-The harmonic variant retains native noisy → H3 → exact-GT triplets for
-[source0](docs/images/local-wave-shapes-pilot-v1/harmonics/source0-far-role2-triplet.png)
-and [source1](docs/images/local-wave-shapes-pilot-v1/harmonics/source1-far-role2-triplet.png),
+The individual-harmonic trial retains native noisy → restored → exact-GT triplets for
+[source0](docs/images/individual-wave-pilot-v1/individual/source0-far-role2-triplet.png)
+and [source1](docs/images/individual-wave-pilot-v1/individual/source1-far-role2-triplet.png),
 under those same conditions, alongside its
-[building-band failure](docs/images/local-wave-shapes-pilot-v1/stress/main-building-detail-max-new-change.png).
-[Measured tradeoffs and configuration provenance](docs/local-wave-shapes.md).
+[persistent building-band failure](docs/images/individual-wave-pilot-v1/stress/building-prior-failure-ROI.png).
+[Measured tradeoffs and configuration provenance](docs/individual-wave-validation.md).
 
 The competing selector's [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
 and [building color failure](docs/images/competing-orientation-v1/readme-building.png)

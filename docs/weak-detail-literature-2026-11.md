@@ -40,6 +40,10 @@ assignment failure and tests a richer input-only waveform. H3 doubles the
 fixed-pilot far weak response to 5.46%, with higher quiet/increment error and
 new building color bands; a nearly matched weak-response H1 threshold has
 lower errors. More basis capacity alone does not resolve the fidelity problem.
+The [individual-harmonic/background controls](individual-wave-validation.md)
+retain lower far quiet/increment error than group support, with less response;
+neither removes building bands. Two affine planes further increase quiet error.
+Per-component held-out support remains insufficient for the real artifact.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

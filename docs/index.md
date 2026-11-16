@@ -17,6 +17,7 @@ workflow. V120 Small remains the general recommendation.
 | Inspect the remaining weak-response limit | [Coverage/response diagnostic](complementary-coverage-quality.md); [fixed-wave GT oracle](measured-wave-oracle.md): more response, persistent quiet/increment costs |
 | Follow input-derived localization | [Local conditional wave prototype](local-validated-waves.md): pilot improves global-support tradeoff; full three-prior comparison running |
 | Inspect waveform capacity and its cost | [Matching and harmonic follow-up](local-wave-shapes.md): more response, higher increment error and building bands; assignment fix retained |
+| Inspect individual evidence and background | [Harmonic controls](individual-wave-validation.md): lower far error than group support, persistent real bands; [V131 broad review](v131-broad-primary.md) running |
 | Follow the added-stage trial | [Complementary CFA branch](complementary-comparison.md): full review finds almost unchanged weak detail and slightly higher quiet/flat error; [fresh-noise follow-up](complementary-edge-response.md) retains a small lower-noise gain |
 | Review literature and next weak-detail ideas | [November 2026 review](weak-detail-literature-2026-11.md), [withheld CFA](withheld-cfa-evidence.md), [edge refinement](withheld-cfa-edge-refinement.md) |
 | Inspect real-camera weaknesses | [Main GFX scene](gfx-qualitative.md), [fine green mesh](gfx-green-mesh.md), [other cameras](cross-camera-qualitative.md) |

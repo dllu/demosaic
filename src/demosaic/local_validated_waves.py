@@ -27,6 +27,8 @@ class LocalWaveConfig:
     match_native_bins: float = 1.5
     matching: str = "cardinality"
     harmonics: int = 1
+    support_unit: str = "direction"
+    background: str = "step"
     split_seed: int = 202611160909
 
     def __post_init__(self):
@@ -58,6 +60,8 @@ class LocalWaveConfig:
             or not 0 < self.match_native_bins <= 4
             or self.matching not in ("legacy", "cardinality")
             or not 1 <= self.harmonics <= 4
+            or self.support_unit not in ("direction", "harmonic")
+            or self.background not in ("step", "piecewise_affine")
         ):
             raise ValueError("Invalid local-wave geometry")
 
@@ -79,6 +83,9 @@ class LocalCandidate:
     coefficients: np.ndarray
     wave_fields: tuple
     wave_slices: tuple
+    unit_fields: tuple
+    unit_slices: tuple
+    unit_keys: tuple
     full_cfa: np.ndarray
     conditional_null_cfa: np.ndarray
     variance_cfa: np.ndarray
@@ -99,6 +106,27 @@ def _wave_columns(xx, yy, frequency, harmonics=1):
 def _harmonic_count(frequency, maximum):
     """Fix degrees of freedom before refinement; keep every harmonic below .24."""
     return max(1, min(maximum, int(np.floor((0.24 + 1e-12) / np.linalg.norm(frequency)))))
+
+
+def _residual_peak(raw, selected, nuisance, *, avoid=None, family_degrees=20.0):
+    """Choose a green A-only FFT peak after refitting all competing columns."""
+    fitted = (
+        nuisance[selected]
+        @ np.linalg.lstsq(nuisance[selected], raw.ravel()[selected], rcond=1e-10)[0]
+    )
+    residual = np.zeros(raw.size)
+    residual[selected] = raw.ravel()[selected] - fitted
+    power = np.abs(np.fft.fft2(residual.reshape(raw.shape))) ** 2
+    fy, fx = np.meshgrid(np.fft.fftfreq(raw.shape[0]), np.fft.fftfreq(raw.shape[1]), indexing="ij")
+    radius = np.hypot(fx, fy)
+    allowed = (radius >= 1 / 64) & (radius <= 0.24) & ((fy > 0) | ((fy == 0) & (fx > 0)))
+    if avoid is not None:
+        alignment = np.abs(
+            (fx * avoid[0] + fy * avoid[1]) / np.maximum(radius * np.linalg.norm(avoid), 1e-30)
+        )
+        allowed &= alignment <= np.cos(np.deg2rad(family_degrees))
+    index = np.unravel_index(np.argmax(np.where(allowed, power, -np.inf)), raw.shape)
+    return (float(fx[index]), float(fy[index]))
 
 
 def _refine_frequency(
@@ -167,42 +195,34 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
     x, y = 2 * (xx + 0.5) / raw.shape[1] - 1, 2 * (yy + 0.5) / raw.shape[0] - 1
     nuisance = np.column_stack((affine, (x * np.cos(angle) + y * np.sin(angle) > offset).ravel()))
     green = ((colors == 1) & discovery_mask).ravel()
-    first_harmonics = _harmonic_count(initial.frequencies_xy[0], config.harmonics)
+    first_frequency = initial.frequencies_xy[0]
+    if config.background == "piecewise_affine":
+        step = nuisance[:, 3]
+        nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
+        first_frequency = _residual_peak(raw, green, nuisance)
+    first_harmonics = _harmonic_count(first_frequency, config.harmonics)
     first = _refine_frequency(
         raw,
         green,
         nuisance,
         xx,
         yy,
-        initial.frequencies_xy[0],
+        first_frequency,
         config.frequency_refinements,
         harmonics=first_harmonics,
     )
     one = np.column_stack((nuisance, _wave_columns(xx, yy, first, first_harmonics)))
-    fitted = one[green] @ np.linalg.lstsq(one[green], raw.ravel()[green], rcond=1e-10)[0]
-    residual = np.zeros(raw.size)
-    residual[green] = raw.ravel()[green] - fitted
-    power = np.abs(np.fft.fft2(residual.reshape(raw.shape))) ** 2
-    fy, fx = np.meshgrid(np.fft.fftfreq(raw.shape[0]), np.fft.fftfreq(raw.shape[1]), indexing="ij")
-    radius = np.hypot(fx, fy)
-    alignment = np.abs(
-        (fx * first[0] + fy * first[1]) / np.maximum(radius * np.linalg.norm(first), 1e-30)
+    second_frequency = _residual_peak(
+        raw, green, one, avoid=first, family_degrees=config.family_degrees
     )
-    allowed = (
-        (radius >= 1 / 64)
-        & (radius <= 0.24)
-        & ((fy > 0) | ((fy == 0) & (fx > 0)))
-        & (alignment <= np.cos(np.deg2rad(config.family_degrees)))
-    )
-    index = np.unravel_index(np.argmax(np.where(allowed, power, -np.inf)), raw.shape)
-    second_harmonics = _harmonic_count((fx[index], fy[index]), config.harmonics)
+    second_harmonics = _harmonic_count(second_frequency, config.harmonics)
     second = _refine_frequency(
         raw,
         green,
         one,
         xx,
         yy,
-        (fx[index], fy[index]),
+        second_frequency,
         config.frequency_refinements,
         avoid=first,
         family_degrees=config.family_degrees,
@@ -211,9 +231,27 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
     frequencies = (first, second)
     counts = (first_harmonics, second_harmonics)
     waves = [_wave_columns(xx, yy, f, count) for f, count in zip(frequencies, counts, strict=True)]
-    wave_slices = ((4, 4 + 2 * first_harmonics), (4 + 2 * first_harmonics, 4 + 2 * sum(counts)))
+    n = nuisance.shape[1]
+    wave_slices = ((n, n + 2 * first_harmonics), (n + 2 * first_harmonics, n + 2 * sum(counts)))
+    wave_fields = tuple(
+        wave.reshape(*raw.shape, 2 * count) for wave, count in zip(waves, counts, strict=True)
+    )
+    if config.support_unit == "direction":
+        unit_slices, unit_fields, unit_keys = wave_slices, wave_fields, ((0, 0), (1, 0))
+    else:
+        unit_slices, unit_fields, unit_keys = [], [], []
+        for direction, (start, stop) in enumerate(wave_slices):
+            for column in range(start, stop, 2):
+                offset = column - start
+                unit_slices.append((column, column + 2))
+                unit_fields.append(wave_fields[direction][..., offset : offset + 2])
+                unit_keys.append((direction, offset // 2 + 1))
     design = np.column_stack((nuisance, *waves))
-    full_cfa, nulls, variance = np.empty(raw.size), np.empty((2, raw.size)), np.empty(raw.size)
+    full_cfa, nulls, variance = (
+        np.empty(raw.size),
+        np.empty((len(unit_slices), raw.size)),
+        np.empty(raw.size),
+    )
     operators, indices, coefficients = [], [], []
     for color in range(3):
         selected = np.flatnonzero(((colors == color) & discovery_mask).ravel())
@@ -229,9 +267,8 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
         coefficient = operator @ raw.ravel()[selected]
         full_cfa[destination] = design[destination] @ coefficient
         variance[destination] = noise[destination]
-        for direction in range(2):
+        for unit, (start, stop) in enumerate(unit_slices):
             keep = np.ones(design.shape[1], bool)
-            start, stop = wave_slices[direction]
             keep[start:stop] = False
             subset = design[:, keep]
             null_coeff = np.linalg.lstsq(
@@ -239,7 +276,7 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
                 raw.ravel()[selected] * inverse_sigma,
                 rcond=1e-10,
             )[0]
-            nulls[direction, destination] = subset[destination] @ null_coeff
+            nulls[unit, destination] = subset[destination] @ null_coeff
         operators.append(operator)
         indices.append(selected)
         coefficients.append(coefficient)
@@ -251,12 +288,13 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
         tuple(indices),
         tuple(operators),
         np.stack(coefficients),
-        tuple(
-            wave.reshape(*raw.shape, 2 * count) for wave, count in zip(waves, counts, strict=True)
-        ),
+        wave_fields,
         wave_slices,
+        tuple(unit_fields),
+        tuple(unit_slices),
+        tuple(unit_keys),
         full_cfa.reshape(raw.shape),
-        nulls.reshape(2, *raw.shape),
+        nulls.reshape(len(unit_slices), *raw.shape),
         variance.reshape(raw.shape),
     )
 
@@ -276,7 +314,7 @@ def _box_sums(field, centers_y, centers_x, window):
 
 
 def conditional_scores(candidate, raw, colors, validation_mask, *, window=65, stride=16):
-    """Fix the candidate, then assess each direction/color against its A-only null."""
+    """Assess each fixed direction/harmonic and color against its A-only null."""
     raw, colors, mask = np.asarray(raw, np.float64), np.asarray(colors), np.asarray(validation_mask)
     if (
         raw.shape != candidate.full_cfa.shape
@@ -288,8 +326,9 @@ def conditional_scores(candidate, raw, colors, validation_mask, *, window=65, st
         raise ValueError("Require finite disjoint validation samples")
     h, w = raw.shape
     ay, ax = [np.unique(np.r_[np.arange(0, n, stride), n - 1]) for n in raw.shape]
-    local, global_scores = np.zeros((2, 3, h, w)), np.zeros((2, 3))
-    for direction in range(2):
+    units = len(candidate.unit_keys)
+    local, global_scores = np.zeros((units, 3, h, w)), np.zeros((units, 3))
+    for direction in range(units):
         for color in range(3):
             selected = mask & (colors == color)
             improvement, energy = np.zeros(raw.shape), np.zeros(raw.shape)
@@ -360,21 +399,33 @@ def support_weight(score, threshold):
     return np.where(score > threshold, 1 - (threshold / np.maximum(score, threshold)) ** 2, 0)
 
 
+def _match_units(first, second, matched_directions, maximum_native_bins):
+    """Match the same harmonic; apply the radius in its actual frequency bins."""
+    lookup = {key: index for index, key in enumerate(second.unit_keys)}
+    result = []
+    for a, b, distance in matched_directions:
+        for index, (direction, harmonic) in enumerate(first.unit_keys):
+            other = lookup.get((b, harmonic))
+            scaled_distance = distance * max(1, harmonic)
+            if direction == a and other is not None and scaled_distance <= maximum_native_bins:
+                result.append((index, other, scaled_distance))
+    return result
+
+
 def replacement_components(candidate, parent):
     """Project the parent only after all raw-only predictors/scores are fixed."""
     parent = np.asarray(parent, np.float64)
     shape = candidate.full_cfa.shape
     if parent.shape != (3, *shape) or not np.isfinite(parent).all():
         raise ValueError("Require finite matching camera RGB parent")
-    result = np.empty((2, 3, *shape))
+    result = np.empty((len(candidate.unit_keys), 3, *shape))
     for color in range(3):
         fitted = (
             candidate.operators[color] @ parent[color].ravel()[candidate.selected_indices[color]]
         )
-        for direction in range(2):
-            start, stop = candidate.wave_slices[direction]
+        for direction, (start, stop) in enumerate(candidate.unit_slices):
             delta = candidate.coefficients[color, start:stop] - fitted[start:stop]
-            result[direction, color] = candidate.wave_fields[direction] @ delta
+            result[direction, color] = candidate.unit_fields[direction] @ delta
     return result
 
 
@@ -455,8 +506,9 @@ def restore_local_waves(
             components = [
                 replacement_components(c, parent[:, y : y + n, x : x + n]) for c in candidates
             ]
+            units = _match_units(*candidates, matched, config.match_native_bins)
             local_max, global_max = [], []
-            for a, b, _distance in matched:
+            for a, b, _distance in units:
                 component = (components[0][a] + components[1][b]) / 2
                 local = np.minimum(scores[0][0][a], scores[1][0][b])
                 global_score = np.minimum(scores[0][1][a], scores[1][1][b])
@@ -479,6 +531,8 @@ def restore_local_waves(
                         [(stop - start) // 2 for start, stop in c.wave_slices] for c in candidates
                     ],
                     "matched": matched,
+                    "unit_keys": [c.unit_keys for c in candidates],
+                    "matched_units": units,
                     "local_max": local_max,
                     "global_scores": global_max,
                 }

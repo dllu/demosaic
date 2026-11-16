@@ -171,6 +171,8 @@ model, payload = load_model(
 
 The preset checks the declared checkpoint hash. Broad427-photo, known/unseen
 camera, standalone-flat, full-frame102MP and speed results for this endpoint
-remain unmeasured. The small targeted gains are useful findings, with their
+remain unmeasured. The [broad numerical review](v131-broad-primary.md) is running
+on the original primary pipeline; independent aggregate results are pending.
+The small targeted gains are useful findings, with their
 counterexamples retained; they do not establish broad superiority or resolve
 the weak-detail objective. V132's matched production and endpoint review continue.

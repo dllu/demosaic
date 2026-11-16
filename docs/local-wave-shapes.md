@@ -6,6 +6,11 @@ far-edge weak response rises 2.80%→5.46%; quiet RMS rises 4.02596→4.06592 DN
 One harmonic remains the default. The assignment fix is retained independently;
 V120 remains the general full-model recommendation.
 
+The [individual-harmonic and background follow-up](individual-wave-validation.md)
+now tests the two proposed controls: far quiet/increment costs fall under
+individual support, with less response, but conspicuous bands persist.
+The expanded affine background raises quiet error further.
+
 This follows the [local conditional-wave pilot](local-validated-waves.md)
 on its identical development inputs. The full three-prior pilot retains its
 original frozen source; neither it nor the separate V132 training is restarted.
