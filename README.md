@@ -18,6 +18,9 @@ reviewed views. [Complete comparison](docs/scale-supported-cfa-wave-comparison.m
 [Seven-state native viewer](docs/images/v200-scale-supported-cfa-wave-v1/native-viewer.html).
 Broad state-of-the-art quality and 100MP within 10 seconds remain goals.
 
+[Weak-detail literature review and proposed experiments](docs/weak-detail-literature-2026-11.md)
+examines the fence/flat-region tradeoff and recent methods; proposals are unimplemented.
+
 ## Setup and inference
 
 Linux, Python 3.12+, `uv` and a CUDA 13-compatible NVIDIA driver are required for

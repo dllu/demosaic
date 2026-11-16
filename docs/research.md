@@ -1,5 +1,11 @@
 # Current method research
 
+[November 15 literature and progress review](weak-detail-literature-2026-11.md)
+connects recent JDD/RAW/denoising papers to the existing fence/flat-region results.
+It prioritizes the prepared shared-edge comparison, withheld-sample validation
+and edge-aware local reconstruction; these are unimplemented proposals, with
+no new model-quality result or change to the V120 recommendation.
+
 **Current stronger-response experiment:** [V198 CFA EMA](cfa-innovation-wave-comparison.md)
 reaches **11.158% GT mesh response**, +22.72% over V197 innovation EMA. It improves
 colored constructed-mesh modulation and strengthens real cab pattern, but creates
