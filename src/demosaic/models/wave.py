@@ -154,7 +154,8 @@ class InnovationWaveStage(nn.Module):
                 field = selection = evidence = support = context = waves = scale_aux = None
                 if evaluated:
                     field = packed.float() - mosaic(anchor.float(), colors)
-                    bins, valid, selection = innovation_phase_bins(
+                    selector = getattr(self, "selector", innovation_phase_bins)
+                    bins, valid, selection = selector(
                         field,
                         variance.float(),
                         colors,

@@ -38,7 +38,12 @@ def resolve_recipe(path):
     model = value["model"]
     if model.keys() - {"kind", "config", "initializer", "initialization"}:
         raise ValueError("Unknown model recipe fields")
-    if model.get("kind") not in ("pooled-wave", "cfa-wave", "scale-supported-cfa-wave"):
+    if model.get("kind") not in (
+        "pooled-wave",
+        "cfa-wave",
+        "scale-supported-cfa-wave",
+        "orientation-balanced-cfa-wave",
+    ):
         raise ValueError("Unknown cached component kind")
     if model.get("initialization", "component") not in ("component", "anchor"):
         raise ValueError("Unknown initialization mode")

@@ -11,6 +11,8 @@ stronger family.
 This is a small constructed development panel, not a new broad camera benchmark.
 No weights changed, no original photos were read, and both protected real-photo
 families remain in the [completed full review](shared-edge-comparison.md).
+The [completed three-noise extension](edge-snr-ladder.md) keeps these clean
+targets fixed and tests clearer measurements as well.
 
 ## What is measured
 

@@ -1,7 +1,14 @@
 # Current experiments
 
-**The matched shared-edge trial completed all 900 updates and 100 ADC skips
-(November 16), and its full quality review is complete.** All 1,000 committed
+**The competing-orientation model trial completed all 900 updates and 100 ADC
+skips (November 16); raw/EMA quality review is underway.** It changes carrier
+allocation with the original V200 data, initializer, parameter count and objective
+fixed. The [proposal diagnostic and admission](competing-wave-candidates.md)
+explain the intervention and its strong-family coverage cost. No model-quality
+gain is established yet.
+
+The matched shared-edge trial completed all 900 updates and 100 ADC skips
+(November 16), and its full quality review is complete. All 1,000 committed
 rows passed the checkpoint/Adam/frozen-state audit. Both endpoints completed all
 822 existing inputs; all 60 native boards/12 triplets were actually inspected.
 The result has small quiet/flat gains, lower mesh response and persistent real
@@ -14,9 +21,10 @@ fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 | --- | --- | --- |
 | [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
 | [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
-| [Fresh-noise finite-wire panel](near-edge-response.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | Nominal 384-observation review complete; lower-noise ISO1600/ISO400-prior evaluations running sequentially |
+| [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |
+| [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates complete and audited; raw/EMA 822-input and three-noise reviews underway |
 
-Both recipes bind existing inputs and evidence by checksum. They are local
+Training recipes bind existing inputs and evidence by checksum. They are local
 artifact recipes; the referenced caches/operator/checkpoints must be present.
 Do not silently substitute missing sources or refresh their hashes.
 

@@ -28,8 +28,12 @@ The [first withheld-CFA diagnostic](docs/withheld-cfa-evidence.md) shows why
 independent sample agreement still needs an adequate edge/background model.
 Its [geometry refinement](docs/withheld-cfa-edge-refinement.md) improves the
 measured synthetic weak-direction/false-detail tradeoff.
-The [fresh-noise wire panel](docs/near-edge-response.md) finds no clear
-weaker-direction gain from shared-edge training; lower-noise checks are running.
+The [completed three-noise wire panel](docs/edge-snr-ladder.md) still finds
+strong direction imbalance: V200 EMA recovers 86.7% of the strong increment but
+8.1% of the weaker increment far from the edge at the clearest tested prior.
+A [competing-orientation selector](docs/competing-wave-candidates.md) allocates
+the same eight carriers between two families. Its matched training is complete;
+raw/EMA quality evaluation is underway, with no measured quality gain yet.
 
 ## Setup and inference
 
@@ -63,13 +67,14 @@ Historical script entry points and frozen experiment evidence remain available.
 ```bash
 uv sync --extra dev --extra nonlocal
 uv run demosaic-experiment models
-uv run demosaic-experiment prepare configs/experiments/shared-edge.json \
-  .cache/experiments/shared-edge
-uv run demosaic-experiment inspect .cache/experiments/shared-edge
+uv run demosaic-experiment prepare configs/experiments/orientation-balanced.json \
+  .cache/experiments/competing-new
+uv run demosaic-experiment inspect .cache/experiments/competing-new
 PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
 The shared-edge cache, matched training and raw/EMA quality review are complete.
+The same-data competing-orientation trial has also completed all 900 updates.
 Preparation does not launch training. Training data comes from freely licensed
 photos and procedural targets, with geometry before downsampling and zero
 optical blur in the current recipes. [Data pipeline](docs/training-pipeline.md).

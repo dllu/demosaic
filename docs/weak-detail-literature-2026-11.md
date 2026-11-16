@@ -7,10 +7,12 @@ Implementation follow-up, November 16: the first shared-edge trial is
 [finished training and matched native review](shared-edge-comparison.md), and the
 [first analytic withheld-CFA/edge diagnostic](withheld-cfa-evidence.md) has
 completed, followed by a [geometry-refinement comparison](withheld-cfa-edge-refinement.md).
-The [fresh-noise neural finite-wire panel](near-edge-response.md) also completes
-its nominal noisy condition; lower-noise comparisons are running.
-The review and
-proposals below remain the original November 15 assessment; quality is unmeasured.
+The [fresh-noise neural finite-wire panel](edge-snr-ladder.md) completes all three
+noise profiles; weaker response remains low even when strong response improves.
+The [competing-orientation model trial](competing-wave-candidates.md) has finished
+matched training and is undergoing raw/EMA/native evaluation. Its quality gain is
+unmeasured. The review and proposals below remain the original November 15
+assessment; measured follow-ups are linked here rather than rewriting history.
 
 **The next useful step is better discrimination between weak structure and
 noise/edge leakage, coupled with training that rewards that distinction.**

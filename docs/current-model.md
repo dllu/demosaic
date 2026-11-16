@@ -52,7 +52,15 @@ camera recommendation.
 The [fresh independent-noise finite-wire test](near-edge-response.md) measures
 roughly 1% weaker-increment response near a strong edge and 1.5% far from it in
 the nominal noisy condition, with no clear gain from shared-edge training.
-The known-template sensor SNR is low; lower-noise comparisons are running.
+The [completed lower-noise extension](edge-snr-ladder.md) reaches strong/weak
+responses of 86.7%/8.1% far from the edge at the clearest prior. Shared-edge
+training supplies no clear weaker-direction gain across the three profiles.
+
+The [competing-orientation prototype](competing-wave-candidates.md) divides the
+same eight carrier slots between two angular families. Its proposal diagnostic
+reaches more weaker fundamentals but loses some strong-family coverage. Matched
+900-update training is complete; both endpoints and all three fresh-noise panels
+are in the review pipeline. No trained quality improvement is established yet.
 
 The [seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html)
 retains raw/EMA endpoints, both protected GFX scenes, independent ISO100

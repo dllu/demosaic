@@ -3,7 +3,28 @@
 import copy
 
 import pytest
-from review_cached_head_trial import paired_comparison
+from review_cached_head_trial import paired_comparison, recipe_changes
+
+
+def test_model_intervention_cannot_silently_change_data_or_initializer():
+    control = {
+        "model": {"kind": "old", "initializer": {"sha256": "fixed"}, "initialization": "anchor"},
+        "cache": {"sha256": "data"},
+        "pair_units": {"sha256": "units"},
+    }
+    new = copy.deepcopy(control)
+    new["model"]["kind"] = "new"
+    assert recipe_changes(new, control, model_intervention=True) == ["model"]
+    with pytest.raises(ValueError, match="Unmatched"):
+        recipe_changes(new, control)
+    changed = copy.deepcopy(new)
+    changed["cache"]["sha256"] = "different"
+    with pytest.raises(ValueError, match="Unmatched"):
+        recipe_changes(changed, control, model_intervention=True)
+    changed = copy.deepcopy(new)
+    changed["model"]["initializer"]["sha256"] = "different"
+    with pytest.raises(ValueError, match="initializer"):
+        recipe_changes(changed, control, model_intervention=True)
 
 
 def documents():

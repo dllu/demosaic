@@ -91,6 +91,22 @@ def paired_comparison(candidate, baseline, baseline_method):
     return results
 
 
+def recipe_changes(treatment, control, *, model_intervention=False):
+    changed = {k for k in treatment.keys() | control.keys() if treatment.get(k) != control.get(k)}
+    if model_intervention:
+        allowed = {"name", "evidence", "model"}
+        if any(
+            treatment["model"].get(k) != control["model"].get(k)
+            for k in ["initializer", "initialization"]
+        ):
+            raise ValueError("Model intervention must retain the exact initializer")
+    else:
+        allowed = {"name", "cache", "pair_units", "evidence"}
+    if changed - allowed:
+        raise ValueError(f"Unmatched settings: {changed - allowed}")
+    return sorted(changed)
+
+
 def prepare(args):
     run = args.run.absolute()
     training = read_json(run / "plan.json")
@@ -100,9 +116,7 @@ def prepare(args):
         raise ValueError("Expected a live training process or a completed run")
     control, _ = resolve_recipe(args.control_recipe)
     treatment = training["recipe"]
-    changed = {k for k in treatment.keys() | control.keys() if treatment.get(k) != control.get(k)}
-    if changed - {"name", "cache", "pair_units", "evidence"}:
-        raise ValueError(f"Unmatched settings: {changed}")
+    changed = recipe_changes(treatment, control, model_intervention=args.model_intervention)
     baseline = read_json(args.baseline_scores)
     baseline_plan = read_json(checked(baseline["plan"]))
     if reference(args.cases) != baseline_plan["design"]:
@@ -121,6 +135,9 @@ def prepare(args):
     work, sources = freeze_sources(repository, root, [Path(__file__).name])
     plan = {
         "run": str(run),
+        "label": args.label,
+        "export_prefix": "candidate" if args.model_intervention else "shared-edge",
+        "model_intervention": args.model_intervention,
         "training": reference(run / "plan.json"),
         "training_owner": owner,
         "root": str(root),
@@ -283,7 +300,7 @@ def render(plan, scores, exports):
                 anchor = np.asarray(figure["anchor"]).reshape(1, 3, 1, 1)
                 value = anchor + figure["contrast"] * (value.astype(np.float64) - anchor)
                 crop = display_pixels(value, arrays, figure["ROI_xywh"], figure["exposure"])
-                label = "Shared-edge " + selection
+                label = plan.get("label", "Shared-edge") + " " + selection
                 provenance = {
                     "prediction": binding,
                     "checkpoint": exports[selection],
@@ -352,7 +369,7 @@ def run(root):
             scores, exports, contrasts = {}, {}, {}
             baseline = read_json(checked(plan["baseline_scores"]))
             for state in ("raw", "ema"):
-                endpoint = root / f"shared-edge-{state}.pt"
+                endpoint = root / (plan.get("export_prefix", "shared-edge") + f"-{state}.pt")
                 run_child(
                     plan,
                     f"export-{state}",
@@ -407,6 +424,12 @@ def main():
     for name in ("run", "control-recipe", "cases", "baseline-scores", "baseline-figures", "output"):
         prep.add_argument("--" + name, type=Path, required=True)
     prep.add_argument("--baseline-methods", nargs=2, required=True, metavar=("RAW", "EMA"))
+    prep.add_argument(
+        "--model-intervention",
+        action="store_true",
+        help="Require fixed data/initializer while allowing explicit model changes",
+    )
+    prep.add_argument("--label", default="Shared-edge")
     worker = sub.add_parser("run")
     worker.add_argument("root", type=Path)
     launch = sub.add_parser("launch")

@@ -8,15 +8,35 @@ def build_component(kind, config=None):
 
     from .wave import compose_legacy
 
+    config = dict(config or {})
+    competing = kind == "orientation-balanced-cfa-wave"
+    family_degrees = config.pop("family_degrees", 20.0) if competing else None
+    if competing:
+        import math
+
+        if (
+            type(family_degrees) not in (int, float)
+            or not math.isfinite(family_degrees)
+            or not 0 < family_degrees < 45
+        ):
+            raise ValueError("Expected an angular family radius between0 and45degrees")
     constructors = {
         "pooled-wave": LatePooledPhaseWaveDetail,
         "cfa-wave": LateCFAInnovationWaveDetail,
         "scale-supported-cfa-wave": LateScaleSupportedCFAWaveDetail,
+        "orientation-balanced-cfa-wave": LateScaleSupportedCFAWaveDetail,
     }
     if kind not in constructors:
         raise ValueError(f"Unknown component kind: {kind}")
     # Retain exact seeded initialization; old classes are discarded after adoption.
-    return compose_legacy(constructors[kind](**(config or {})))
+    module = compose_legacy(constructors[kind](**config))
+    if competing:
+        from functools import partial
+
+        from demosaic.competing_phase import competing_phase_bins
+
+        module.selector = partial(competing_phase_bins, family_degrees=family_degrees)
+    return module
 
 
 def load_component(kind, checkpoint, *, config=None, device="cpu"):

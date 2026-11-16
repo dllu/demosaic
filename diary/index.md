@@ -35,3 +35,5 @@ Latest follow-up: [edge refinement and completed shared-edge training](2026-11-1
 Latest quality result: [shared-edge raw/EMA review](2026-11-16-02-16-07-shared-edge-quality.md); small quiet gains, weaker mesh response and persistent artifacts.
 
 Latest test: [fresh independent-noise finite wires](2026-11-16-02-41-09-near-edge-response.md); nominal panel complete, lower-noise profiles running.
+
+Latest model trial: [completed noise ladder and competing-orientation training](2026-11-16-03-37-19-competing-phase-training.md); 900 updates complete, raw/EMA/native quality review underway.
