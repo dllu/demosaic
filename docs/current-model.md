@@ -14,7 +14,7 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 | [V198 CFA innovation](cfa-innovation-wave-comparison.md) | 11.158% GT mesh amplitude; stronger colored synthetic and real cab modulation | New green/magenta building fringes; quiet RMS +1.151–1.648% versus V195 |
 | [V200 cross-scale support](scale-supported-cfa-wave-comparison.md) | Quiet RMS −0.059–0.119% and fresh-flat RMS −0.022–0.030% versus V198 | Mesh response falls to 11.102% GT; building fringes, ripples and incomplete crossings persist |
 | [Shared-edge training](shared-edge-comparison.md) | EMA quiet RMS −0.051–0.076% and cached fresh-flat RMS −0.036–0.045% versus V200 | Mesh response falls to 10.874%; present-mesh error rises; fringes/ripples/incomplete crossings persist |
-| [Competing orientations](competing-orientation-comparison.md) | Fixed mesh2302 weaker sector 28.41%→33.55% at EMA; small quiet/flat gains | Other fixed weak sector worsens; mean mesh response 10.607%; fringes/false waves persist |
+| [Competing orientations](competing-orientation-comparison.md) | Mesh2302 weak sector 28.41%→33.55%; fresh far-edge weak increment 3.13%→5.06% at1600 prior with lower quiet error | Strong response falls; other fixed weak sector worsens; mean mesh response 10.607%; fringes/false waves persist |
 
 V198/V200 do not combine strong fine-detail recovery with clean quiet fields.
 These are bounded experiment results, not a broad ranking against V120. Mesh
@@ -63,8 +63,10 @@ same eight carrier slots between two angular families. Its proposal diagnostic
 reaches more weaker fundamentals but loses some strong-family coverage. Matched
 900-update training and the [full two-endpoint native review](competing-orientation-comparison.md)
 are complete. One fixed mesh has a real directional gain, with weaker aggregate
-mesh response and persistent artifacts. The three-noise conditional-response
-review is underway; this local gain does not establish broad weak-detail recovery.
+mesh response and persistent artifacts. The [complete three-noise review](competing-edge-response.md)
+finds higher far-edge weak response with strong-family losses: slightly lower
+quiet error at1600, slightly higher at400. Every full-image RMS mean increases.
+These specific strengths do not establish broad weak-detail recovery.
 
 The [seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html)
 retains raw/EMA endpoints, both protected GFX scenes, independent ISO100

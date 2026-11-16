@@ -56,6 +56,9 @@ conditions, signed tails and worst case IDs are retained in the
 Natural-photo relative band errors decline very slightly, while band gains have
 mixed signs. Duck/butterfly/bird detail stays soft; faint ribbing remains in
 backgrounds. All 32 ADC metric groups are exactly equal to V200 at both states.
+The eight ADC cases with retained original native arrays also match V200
+bit-for-bit at both endpoints: 4,521,984 RGB channels per state.
+[Pixel replay and its coverage](results/competing-orientation-v1/adc-pixel-replay.json).
 
 ## The directional improvement and its counterexample
 
@@ -99,6 +102,9 @@ Raw checkpoint SHA256:
 `098cb3b5e3d090bd924dc40a832443d570fbad1b1825ecd25fcba31e787f1d4a`.
 These are component exports above the V143 restoration/frozen V195 anchor.
 [Every source/ROI/noise/display/checkpoint binding](images/competing-orientation-v1/manifest.json).
+`demosaic-experiment models` lists the experimental `competing` preset.
+`load_model("competing", checkpoint=..., expected_sha256=...)` requires an
+explicit component checkpoint, as the other experimental presets do.
 
 ## Protected real-photo and false-detail checks
 
@@ -143,12 +149,12 @@ patterns retain their geometry; ADC bark/fur/plane appearance stays inherited.
 
 ## Fresh independent-noise follow-up
 
-The queued candidate review is now running on all three immutable
-[finite-wire noise caches](edge-snr-ladder.md), reusing the exact observations
-for matched strong/weak incremental response versus actual quiet error.
-It recomputes contexts for the changed selector and checks actual anchor/full
-forward delivery before gain sweeps. This comparison remains pending here;
-carrier proximity and the mesh2302 sector gain cannot substitute for it.
+The [completed three-noise conditional-increment review](competing-edge-response.md)
+finds far-edge weak response 3.13%→5.06% at the 1600 prior with slightly lower
+quiet error, and 8.14%→14.20% at the 400 prior with slightly higher quiet error.
+Strong-family response falls substantially. All six full-image RMS means rise;
+near-edge/noisiest weak response does not improve. Both actual increments and
+the broader quality failures remain part of the result.
 
 All 8,294,400 newly displayed RGB channels match saved native predictions;
 20,889,600 retained comparison channels match their original source panels.

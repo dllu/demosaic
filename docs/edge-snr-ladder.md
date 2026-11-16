@@ -87,6 +87,7 @@ finds that the existing carrier bank often misses the weaker fundamental even
 in the clearer condition. A completed matched training trial changes that allocation
 while keeping the cache, initializer, parameter count, objectives and update
 budget fixed. Its [completed native review](competing-orientation-comparison.md)
-finds a local directional gain with lower aggregate response. Conditional-increment
-evaluation on these three noise caches is underway; candidate proximity does
-not establish recovered detail or quiet-region safety.
+finds a local directional gain with lower aggregate response. The
+[completed conditional-increment review](competing-edge-response.md) finds
+higher far-edge weak response, with strong-family losses and mixed quiet-error
+effects. Candidate proximity alone does not establish recovered detail or safety.

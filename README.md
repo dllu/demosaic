@@ -34,8 +34,10 @@ strong direction imbalance: V200 EMA recovers 86.7% of the strong increment but
 A [competing-orientation selector](docs/competing-orientation-comparison.md)
 improves one fixed mesh's weaker orientation sector from 28.41% to 33.55% at EMA,
 but another weak sector worsens and overall mesh response falls to 10.607%.
-Both endpoints and all native boards are reviewed; the same building/flat
-artifacts persist. Its fresh-noise conditional-response review is underway.
+The [completed fresh-noise review](docs/competing-edge-response.md) raises far-edge
+weak response 3.13%→5.06% at the 1600 prior with slightly lower quiet error;
+strong response falls. Both endpoints/all native boards are reviewed, with
+persistent building/flat artifacts.
 
 ## Setup and inference
 

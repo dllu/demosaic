@@ -23,7 +23,7 @@ fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 | [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
 | [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
 | [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |
-| [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates audited; both 822-input endpoints/all60 native boards reviewed; three-noise review running |
+| [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates audited; both 822-input endpoints/all60 native boards and [all three fresh-noise panels](competing-edge-response.md) reviewed |
 
 Training recipes bind existing inputs and evidence by checksum. They are local
 artifact recipes; the referenced caches/operator/checkpoints must be present.

@@ -12,7 +12,9 @@ noise profiles; weaker response remains low even when strong response improves.
 The [competing-orientation model trial](competing-orientation-comparison.md) has
 finished matched training and raw/EMA/native evaluation: one fixed mesh improves
 its weaker orientation, with lower overall mesh response and persistent artifacts.
-Its fresh-noise conditional-response follow-up is running. The proposals below remain the original November 15
+Its [complete fresh-noise follow-up](competing-edge-response.md) finds higher
+far-edge weak response with strong-direction losses and mixed quiet effects.
+The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
 **The next useful step is better discrimination between weak structure and

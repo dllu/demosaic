@@ -86,10 +86,11 @@ confirms the frozen-state hash and original domain counts (307 mesh, 214 photo,
 
 Both endpoints complete all 822 existing quality inputs; all 60 native boards
 have been inspected, including the protected main/cab scenes, both cab profiles
-and both JPEGs. A second worker is now reusing all three fresh-noise caches,
-with independent role/repeat noise, for actual weak/quiet gain curves. It checks
-the inherited anchor against saved V195 pixels and actual full-forward delivery
-before interpretation. No existing scientific prefix is restarted.
+and both JPEGs. The [completed second review](competing-edge-response.md) reuses
+all three fresh-noise caches, with independent role/repeat noise, for actual
+weak/quiet gain curves. Far-edge weak response improves, with strong-family
+losses and mixed quiet effects. The inherited anchor and actual full-forward
+delivery are checked exactly. No existing scientific prefix was restarted.
 
 The review runner now has an explicit model-intervention mode that requires
 unchanged training data and initializer; it records the model change and gives

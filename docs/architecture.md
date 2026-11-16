@@ -60,6 +60,8 @@ carriers to each of two angular proposals with `family_degrees: 20`, retaining
 the original eight-carrier budget and 643 trainable parameters. Its exported
 `module_config` carries this setting. Existing kinds use the original selector.
 [Intervention and measured limits](competing-wave-candidates.md).
+The `competing` preset exposes its trained component through the same registry;
+both raw/EMA exports pass exact 197-tensor loading checks.
 
 ## Running an experiment
 

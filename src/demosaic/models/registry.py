@@ -49,6 +49,12 @@ _PRESETS = (
         "experimental small quiet/flat gains",
         "docs/scale-supported-cfa-wave-comparison.md",
     ),
+    ModelPreset(
+        "competing",
+        "orientation-balanced-cfa-wave",
+        "experimental local directional gain; lower aggregate mesh response",
+        "docs/competing-orientation-comparison.md",
+    ),
 )
 
 
