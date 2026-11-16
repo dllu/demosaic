@@ -3,8 +3,9 @@
 **V131 at1,000 updates shows mixed local changes and no clear new recovery of
 the fine green mesh.** Ordinary sRGB PSNR rises.00162dB over V120, while the
 deepest shadows fall.02368–.03421dB and faint ADC falls.27335dB. V120 Small
-remains the general recommendation. V131's original20k worker continues;
-this immutable progress snapshot is not its endpoint.
+remains the general recommendation. This immutable progress snapshot is not
+its endpoint. The [completed20k control](v131-endpoint-quality.md) and
+[matched V1321k review](v132-progress1000-quality.md) are now reported separately.
 
 [Measurements and execution](results/v131-progress1000-quality-v2.json) ·
 [Per-observation scores](results/v131-progress1000-metrics-v1.csv) ·
@@ -227,8 +228,10 @@ all image bytes are preserved. A prepared memory-admission handoff was aborted
 when the original queue began collection. Neither draft controller launched;
 the original52GiB admission, owners, source, deadlines and call budgets remain.
 
-The original V131 and V125 workers continue. V132 progress and the complete
-427-photo/camera/color/GFX/full-frame endpoint chain remain pending. This
+The original progress queue later exited with the memory-reserve training stop.
+The saved control predictions are preserved; a separate continuation completes
+V13120k and the linked V1321k comparison. The complete
+427-photo/camera/color/full-frame endpoint chain remains pending. This
 report does not establish convergence, a population gain, full-frame quality,
 speed or broad real-camera superiority. The full-primary PSNR history remains
 separate from this partial progress comparison.

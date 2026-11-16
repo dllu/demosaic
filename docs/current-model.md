@@ -10,6 +10,7 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 | --- | --- | --- |
 | [V120 Small](v120-v121-primary.md) | 37.04008 dB on 427 photos; known/unseen CFA means 54.31272/54.00872 dB; verified 102MP RGB16 exports | Fine foliage, mesh, neon and dark-field mottle |
 | [V131 completed continuation](v131-endpoint-quality.md) | Four-source targeted faint-ADC +0.14555 dB; fur/wood weak-stratum error falls; ordinary/shadow +0.01539/+0.01673 dB | Bark faint regression; soft foliage/fine cab crossings persist; broad photo/camera/flat/full-frame quality unmeasured |
+| [V132 RAW attention,1k progress](v132-progress1000-quality.md) | Matched faint-ADC +0.03356 dB versus V1311k; all four weakest-stratum RMS means improve | Faint mean remains0.23979 dB below V120; wood PSNR cost; no clear new cab crossings/foliage; production still training |
 | [V114 Tiny](v114-v115-quality.md) | Lower tested ADC maximum: 51.73 versus V120's 55.52 DN16 | Different photo/camera tradeoffs |
 | [V187 pooled waves](pooled-phase-wave-comparison.md) | Quieter wave option; 5.359% constructed-GT mesh amplitude | Incomplete crossings, false waves and small flat/absent costs |
 | [V195 response pressure](directional-response-comparison.md) | 5.575% GT mesh response; stronger than V187 in that comparison | Quiet RMS +0.334–0.376%; fine crossings unresolved |
@@ -46,7 +47,9 @@ RAW inputs; their component exports alone are not full-frame parent models.
 `load_model("v131", checkpoint=...)` exposes the completed full-model continuation
 with its declared checkpoint hash. It trains the original restoration trunk on
 the revised cohort for 20k additional updates; it does not add the RAW-attention
-branch. The matched V132 arm is training. [Measured gains and counterexamples](v131-endpoint-quality.md).
+branch. The matched V132 arm is training; its [early1k review](v132-progress1000-quality.md)
+has a small faint gain against V1311k while remaining below V120.
+[Completed-control gains and counterexamples](v131-endpoint-quality.md).
 
 ## Current research and evidence
 

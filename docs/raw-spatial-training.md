@@ -52,8 +52,8 @@ V132's comparison waits for its original training.
 
 ## Early retained-input comparison
 
-A separate live queue waits for each immutable1,000-step progress snapshot
-while the original20k workers continue. Each model gets102 IEEE FP32 calls:
+The original queue waited for each immutable1,000-step progress snapshot
+while the original20k workers continued. Each model gets102 IEEE FP32 calls:
 64 saved shadow observations,16 ordinary material inputs, four main-GFX512px
 contexts, two mesh768px fixed profiles and16 faint-ADC observations. All V120
 predictions are reused; V132 also compares the saved V131 progress predictions.
@@ -72,7 +72,12 @@ triplets and accurately labeled approximate real references. V131's102-input
 collection, independent score/pixel/faint audits and42 actual native views are
 complete, including both corrected GFX pairs and camera JPEGs.
 [Measured progress and native comparisons](v131-progress1000-quality.md).
-V132's collection and viewing remain pending. Four material sources do not become independent
+The old queue exited with the original training failure; its source/receipts and
+completed V131 collection remain intact. A [new V1321k review](v132-progress1000-quality.md)
+now completes102 calls, independent audit and all64 native/eight amplified views,
+using the exact saved V131/V120 predictions. Faint ADC gains0.03356 dB versus
+V1311k but remains0.23979 dB below V120; new real crossings remain unresolved.
+Production continues within the original20k horizon. Four material sources do not become independent
 photographs through different noise/CFA conditions. The full endpoint chain below
 keeps its original source and call budgets.
 

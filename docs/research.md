@@ -15,7 +15,9 @@ checking physical fits and learned attenuation with carriers held fixed.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes its control: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains
-and persistent real mesh/foliage weakness. V132's added-attention arm is training.
+and persistent real mesh/foliage weakness. V132's added-attention arm is training;
+its [matched1k/native review](v132-progress1000-quality.md) retains a small faint
+gain versus V1311k, while remaining below V120 with no clear new real mesh.
 V120 remains the general recommendation.
 
 **Current stronger-response experiment:** [V198 CFA EMA](cfa-innovation-wave-comparison.md)

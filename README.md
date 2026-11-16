@@ -51,7 +51,9 @@ completed its **V131 control**: [targeted native review](docs/v131-endpoint-qual
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
 bark regression. Ordinary/shadow gains are about 0.02 dB; fine cab crossings and
 soft foliage remain unresolved. The experimental `v131` preset is available.
-V132's added-attention arm is training; its matched comparison remains pending.
+V132's added-attention arm is training. Its [matched1k review](docs/v132-progress1000-quality.md)
+gains0.034 dB faint ADC over V1311k but stays0.240 dB below V120, without clear
+new real mesh recovery. The20k architecture comparison remains pending.
 
 ## Setup and inference
 

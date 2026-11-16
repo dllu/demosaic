@@ -1,0 +1,128 @@
+{
+  "observed_UTC_unix": 1794846537.8497396,
+  "training_status": {
+    "status": "running-explicit-raw-spatial-continuation",
+    "arm": "V132",
+    "owner": {
+      "pid": 121044,
+      "created": 1794837453.44
+    },
+    "child": {
+      "pid": 224010,
+      "created": 1794843486.14
+    },
+    "worker_deadline": 1795016286.14,
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-continuation-v2/plan.json",
+      "sha256": "e9e2f6d030eaa9b0c5fbd3730aaaacddd45c63b45ed69b4f517a74272787ebcf"
+    }
+  },
+  "exact_training_controller": {
+    "owner": {
+      "pid": 121044,
+      "created": 1794837453.44
+    },
+    "status": "sleeping",
+    "cmdline": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-continuation-v2/continuation.py",
+      "controller",
+      "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-continuation-v2/plan.json"
+    ]
+  },
+  "exact_training_worker": {
+    "owner": {
+      "pid": 224010,
+      "created": 1794843486.14
+    },
+    "status": "running",
+    "cmdline": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-continuation-v2/continuation.py",
+      "worker",
+      "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-continuation-v2/plan.json",
+      "--arm",
+      "V132"
+    ]
+  },
+  "last_logged_training_step": 2100,
+  "endpoint_reviewer_status": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-endpoint-review-v3/queue-plan.json",
+      "sha256": "515c0a15d1e137cdd44413a57dd4fa9bb59206cee6d367f42277de1c61b83a36"
+    },
+    "owner": {
+      "pid": 178183,
+      "created": 1794842394.64
+    },
+    "completed": {
+      "V131": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-endpoint-review-v3/V131/collection-v1.json",
+        "sha256": "ad87d5dfac7ce4d30c73b1bb4344c1d75d656bfa236b43bbc73a17261d47a1cf"
+      }
+    },
+    "reports": {
+      "V131": {
+        "report": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-endpoint-review-v3/V131/report-v1/report.json",
+          "sha256": "f1a2d09a3eed94be979f5224a3f1f184150efe5690c8ab1a421c58156101efcb"
+        },
+        "independent_audit": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-endpoint-review-v3/V131/independent-audit-v1.json",
+          "sha256": "3b35f9991476ba4e9ae75a59bc1af2547cb7d8f1ffc06c6ce62df5db12a7fd71"
+        }
+      }
+    },
+    "status": "waiting-for-exact-completed-endpoint",
+    "updated_unix": 1794843634.5205097,
+    "arm": "V132",
+    "child": null,
+    "observed_training_workers": {
+      "V131": {
+        "pid": 121050,
+        "created": 1794837454.94
+      },
+      "V132": {
+        "pid": 224010,
+        "created": 1794843486.14
+      }
+    }
+  },
+  "exact_endpoint_reviewer": {
+    "owner": {
+      "pid": 178183,
+      "created": 1794842394.64
+    },
+    "status": "sleeping",
+    "cmdline": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-endpoint-review-v3/controller.py",
+      "controller",
+      "/home/dllu/proj/demosaic/.cache/experiments/raw-spatial-endpoint-review-v3/queue-plan.json"
+    ]
+  },
+  "available_RAM_GiB": 87.70293426513672,
+  "progress_review_status": {
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/V132-progress1000-review-v1/plan-v1.json",
+      "sha256": "00f9aa95a0cd4d6d9800fec3b3b0cc317cfffb274fb1718bb5d97740c67e8972"
+    },
+    "owner": {
+      "pid": 229461,
+      "created": 1794845988.98
+    },
+    "status": "completed-progress-report-audit-and-staging-awaiting-actual-viewing",
+    "updated_unix": 1794846177.3332841,
+    "child": null,
+    "collection": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/V132-progress1000-review-v1/collection-v1.json",
+      "sha256": "dc67e23104eb5673082f2786520aec548fa8ed02b5d4392384aff5f4fa917c5c"
+    },
+    "audit": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/V132-progress1000-review-v1/independent-audit-v1.json",
+      "sha256": "0bede9afa126215fce88ff047f45532c678a5d51ffeea9a0db83212a1812c4a7"
+    }
+  },
+  "no_training_signal_or_restart": true,
+  "scope": "Publication-time observation only. Original20k V132 production continues; endpoint review remains waiting for that exact completed worker. No convergence or future-completion assertion."
+}

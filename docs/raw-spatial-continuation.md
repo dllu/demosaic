@@ -63,6 +63,10 @@ The completed control now has all20,000 Adam clocks/updates,640 validation and
 `4d78e6302f6e72d68acb03fe58eb7106763b8129ccb059747ef5d2cfbd3ec1e1`.
 V132 production started only after control completion and has retained its
 immutable1,000-step snapshot within the same20k worker/schedule.
+Its [matched progress review](v132-progress1000-quality.md) is complete: all1,000
+training input hashes agree,102 retained inputs/all64 native and eight amplified
+boards are reviewed. Faint ADC is+0.03356 dB versus V1311k and−0.23979 dB versus
+V120, without clear new real mesh crossings. This remains an early comparison.
 
 The complete original numerical/data package is copied byte-for-byte under the
 new `work` directory; only output run paths change in the recipes. The source

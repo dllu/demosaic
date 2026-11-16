@@ -27,6 +27,9 @@ completes its original20k control: [V131 targeted quality](v131-endpoint-quality
 has faint-ADC +0.14555 dB across four sources with a bark regression, small
 ordinary/shadow gains and no convincing new real mesh crossings. V132's
 added-attention arm is training, with original source and20k horizons preserved.
+Its [matched1k/native review](v132-progress1000-quality.md) finds faint-ADC
++0.03356 dB versus V1311k but−0.23979 dB versus V120, without clear new real
+crossings or foliage recovery. That early gain does not establish convergence.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
