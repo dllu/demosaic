@@ -71,8 +71,10 @@ These specific strengths do not establish broad weak-detail recovery.
 The [complementary stage](complementary-cfa-branch.md) has completed training above the
 complete frozen V200 EMA path. It adds a fresh 643-parameter head and up to eight
 nonduplicate proposals, with unchanged training observations/objective/schedule.
-Its actual quality remains unmeasured; the standard review is running and the
-three-noise review is queued, with exact frozen-baseline checks. A sealed
+The [complete standard/native review](complementary-comparison.md) finds almost
+unchanged weaker sectors, tiny aggregate mesh gains and slightly higher
+quiet/flat error. The three-noise review is running. Exact frozen-baseline
+checks pass at both endpoints. A sealed
 evaluator-only repair handles legacy receipt metadata without changing training
 or numerical model code.
 

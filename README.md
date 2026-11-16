@@ -38,9 +38,10 @@ The [completed fresh-noise review](docs/competing-edge-response.md) raises far-e
 weak response 3.13%→5.06% at the 1600 prior with slightly lower quiet error;
 strong response falls. Both endpoints/all native boards are reviewed, with
 persistent building/flat artifacts.
-The [next complementary stage](docs/complementary-cfa-branch.md) has completed
-training above frozen V200 EMA, adding proposals while retaining its carrier
-path. Raw/EMA quality review is running; its gains remain unmeasured.
+The [complementary stage](docs/complementary-comparison.md) retains frozen V200
+EMA and adds proposals: full review finds almost unchanged weaker directions,
+11.121% aggregate mesh amplitude and slightly higher quiet/flat error. Both
+real-photo families retain their detail/color failures; fresh-noise review is running.
 
 ## Setup and inference
 
@@ -99,7 +100,7 @@ V120 checkpoint SHA256 `a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aa
 
 ![Fur: noisy, V120, exact synthetic GT](docs/images/v120-v121-primary-v1/crop-881399e7a68af49a.png)
 
-The latest experiment's [directional gain](docs/images/competing-orientation-v1/comparison-02.png)
+The competing selector's [directional gain](docs/images/competing-orientation-v1/comparison-02.png)
 and [counterexample](docs/images/competing-orientation-v1/comparison-06.png) are
 noisy → competing EMA → exact constructed GT (native160, exposure 8/contrast 1;
 [full provenance](docs/competing-orientation-comparison.md#the-directional-improvement-and-its-counterexample)).

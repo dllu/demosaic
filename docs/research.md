@@ -3,8 +3,11 @@
 [November 15 literature and progress review](weak-detail-literature-2026-11.md)
 connects recent JDD/RAW/denoising papers to the existing fence/flat-region results.
 It prioritizes the prepared shared-edge comparison, withheld-sample validation
-and edge-aware local reconstruction; these are unimplemented proposals, with
-no new model-quality result or change to the V120 recommendation.
+and edge-aware local reconstruction. Measured follow-ups now include the
+[shared-edge](shared-edge-comparison.md), [competing](competing-edge-response.md)
+and [complementary](complementary-comparison.md) trials. The last retains the
+V200 path with little added weak detail and slightly higher quiet/flat error.
+V120 remains the general recommendation.
 
 **Current stronger-response experiment:** [V198 CFA EMA](cfa-innovation-wave-comparison.md)
 reaches **11.158% GT mesh response**, +22.72% over V197 innovation EMA. It improves

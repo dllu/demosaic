@@ -15,7 +15,9 @@ its weaker orientation, with lower overall mesh response and persistent artifact
 Its [complete fresh-noise follow-up](competing-edge-response.md) finds higher
 far-edge weak response with strong-direction losses and mixed quiet effects.
 The [complementary-stage follow-up](complementary-cfa-branch.md) has trained above
-frozen V200 EMA with extra proposals; its quality review is running.
+frozen V200 EMA with extra proposals; its [full native review](complementary-comparison.md)
+finds almost unchanged weaker directions and slightly higher quiet/flat error.
+Fresh-noise evaluation is running.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
