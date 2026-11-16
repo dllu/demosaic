@@ -7,6 +7,8 @@ Implementation follow-up, November 16: the first shared-edge trial is
 [finished training and matched native review](shared-edge-comparison.md), and the
 [first analytic withheld-CFA/edge diagnostic](withheld-cfa-evidence.md) has
 completed, followed by a [geometry-refinement comparison](withheld-cfa-edge-refinement.md).
+The [fresh-noise neural finite-wire panel](near-edge-response.md) also completes
+its nominal noisy condition; lower-noise comparisons are running.
 The review and
 proposals below remain the original November 15 assessment; quality is unmeasured.
 

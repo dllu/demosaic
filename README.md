@@ -28,6 +28,8 @@ The [first withheld-CFA diagnostic](docs/withheld-cfa-evidence.md) shows why
 independent sample agreement still needs an adequate edge/background model.
 Its [geometry refinement](docs/withheld-cfa-edge-refinement.md) improves the
 measured synthetic weak-direction/false-detail tradeoff.
+The [fresh-noise wire panel](docs/near-edge-response.md) finds no clear
+weaker-direction gain from shared-edge training; lower-noise checks are running.
 
 ## Setup and inference
 

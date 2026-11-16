@@ -141,10 +141,12 @@ GT or scoring targets**: aperture, exposure, motion and processing differ.
 The shared-edge intervention yields a slightly quieter operating point, with
 lower mesh response and persistent color/texture failures. It does not supply
 the plan's decisive result of more weak second-direction response at the same
-actual quiet error. Nor does this fixed cached suite measure fresh independent
-noise repetitions of shared-edge present/absent increments. A dedicated near-edge
-response panel remains necessary before making a stronger causal claim about
-the data intervention or the architecture's capabilities.
+actual quiet error. This fixed cached suite did not measure fresh independent
+noise repetitions of shared-edge increments. The new
+[finite-wire near-edge panel](near-edge-response.md) now supplies that check:
+no clear weaker-direction gain at the nominal noisy condition, with lower-noise
+follow-ups running. Its low measurement SNR still prevents a strong causal claim
+about the architecture's capabilities.
 
 Meanwhile, the [A-only edge-refinement diagnostic](withheld-cfa-edge-refinement.md)
 shows a concrete improvement in separating the tested weak signal from a

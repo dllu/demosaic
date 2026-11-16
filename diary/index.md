@@ -33,3 +33,5 @@ Latest diagnostic: [withheld CFA evidence and predictable edge leakage](2026-11-
 Latest follow-up: [edge refinement and completed shared-edge training](2026-11-16-02-02-45-edge-refinement-and-training.md); EMA/native quality review pending.
 
 Latest quality result: [shared-edge raw/EMA review](2026-11-16-02-16-07-shared-edge-quality.md); small quiet gains, weaker mesh response and persistent artifacts.
+
+Latest test: [fresh independent-noise finite wires](2026-11-16-02-41-09-near-edge-response.md); nominal panel complete, lower-noise profiles running.

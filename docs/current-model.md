@@ -49,6 +49,11 @@ architecture/loss recipe and all experiment evidence. The separate
 restricted synthetic weak-direction/false-error tradeoffs; it is not a neural
 camera recommendation.
 
+The [fresh independent-noise finite-wire test](near-edge-response.md) measures
+roughly 1% weaker-increment response near a strong edge and 1.5% far from it in
+the nominal noisy condition, with no clear gain from shared-edge training.
+The known-template sensor SNR is low; lower-noise comparisons are running.
+
 The [seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html)
 retains raw/EMA endpoints, both protected GFX scenes, independent ISO100
 references, noisy/restored/exact constructed-GT triplets and failure cases.
