@@ -1,13 +1,14 @@
 # Add weak-family proposals without replacing the trained V200 bank
 
-The next trial keeps the complete **V200 EMA path frozen** and learns a fresh
+This completed trial keeps the complete **V200 EMA path frozen** and learns a fresh
 643-parameter correction from additional CFA proposals. It follows the
 [measured competing-orientation tradeoff](competing-edge-response.md): higher
 weak-increment response came with lower strong response and higher full-image
 RMS in every tested condition. Training and its 1,000-row audit are complete;
 the [complete raw/EMA/native review](complementary-comparison.md) finds only a tiny
 aggregate mesh gain, essentially unchanged weaker sectors and slightly higher
-quiet/flat error. The fresh-noise follow-up is running.
+quiet/flat error. The [completed fresh-noise follow-up](complementary-edge-response.md)
+finds a small lower-noise weak-increment gain with mean strong response retained.
 
 This expands capacity and adds training. It is a combined stage intervention,
 with a different residual field and additional carriers, rather than an isolated
@@ -97,7 +98,7 @@ or condition. Added valid carriers average 3.82/4.89/5.60 per input at the three
 priors, ranging from one to eight on this panel. These counts do not detect
 structures. Each entry contains 64 related CFA/repeat views from eight sources;
 native-bin proximity is not a reconstruction bound. The training recipe was
-already frozen when this diagnostic ran; it does not change the live trial.
+already frozen when this diagnostic ran; it does not change the frozen training recipe.
 [Exact selections, geometry scoring and source copies](results/complementary-preparation-v1/proposal-publication.json).
 
 ## Complete training and quality review
@@ -119,7 +120,7 @@ every retained original V200 scalar and available native baseline array against
 the frozen anchor, without an extra forward. Independent ISO100/AHD/JPEG
 references remain qualitative, not exact GT or scoring targets.
 
-The second worker is evaluating the same three finite-wire caches,
+The second worker completed evaluation of the same three finite-wire caches,
 checking all saved V200 EMA anchor pixels and actual full-forward delivery.
 Gain zero now means **full V200 EMA**, not the earlier V195 anchor. Both endpoint
 differences use that fixed EMA control; plotted V200 gain curves retain their
@@ -141,7 +142,7 @@ passes; it does not skip unknown scalar fields or weaken numerical tolerances.
 The corrected review uses the original training package with **only the evaluator
 replaced**; 147 other Python files match exactly. The trained checkpoint and
 original failed prefixes remain untouched. Its raw export is byte-identical to
-the first export. The corrected main review is complete and the fresh-noise worker is live;
+the first export. Both corrected reviews and all native viewing are complete;
 validation passes
 **64 focused tests** and Ruff. The initial launch receipt above is retained
 unchanged. [Completion, failure and recovery evidence](results/complementary-preparation-v1/training-completed-and-review-recovery.json).

@@ -6,7 +6,10 @@ It prioritizes the prepared shared-edge comparison, withheld-sample validation
 and edge-aware local reconstruction. Measured follow-ups now include the
 [shared-edge](shared-edge-comparison.md), [competing](competing-edge-response.md)
 and [complementary](complementary-comparison.md) trials. The last retains the
-V200 path with little added weak detail and slightly higher quiet/flat error.
+V200 path with little added fixed-mesh detail and slightly higher quiet/flat error;
+its [fresh-noise review](complementary-edge-response.md) retains a small lower-noise
+weak-response gain. The [full-model attention comparison](raw-spatial-continuation.md)
+resumes its saved control before the added-attention arm.
 V120 remains the general recommendation.
 
 **Current stronger-response experiment:** [V198 CFA EMA](cfa-innovation-wave-comparison.md)

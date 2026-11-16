@@ -10,7 +10,9 @@ and the real building fringes and incomplete fence crossings remain.
 V120 remains the general recommendation. This is an additional-capacity and
 additional-training intervention, not an equal-compute selector comparison.
 [Architecture, matched observations and admission](complementary-cfa-branch.md).
-The fresh-noise conditional-increment follow-up is still running.
+The [completed fresh-noise follow-up](complementary-edge-response.md) retains a
+small lower-noise gain: far-edge weak response 8.14%→9.43% at the400 prior,
+with mean strong response retained and slightly lower quiet error.
 
 ## Full-suite changes against the same V200 EMA control
 

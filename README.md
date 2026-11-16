@@ -41,7 +41,11 @@ persistent building/flat artifacts.
 The [complementary stage](docs/complementary-comparison.md) retains frozen V200
 EMA and adds proposals: full review finds almost unchanged weaker directions,
 11.121% aggregate mesh amplitude and slightly higher quiet/flat error. Both
-real-photo families retain their detail/color failures; fresh-noise review is running.
+real-photo families retain their detail/color failures. The [three-noise review](docs/complementary-edge-response.md)
+finds a small conditional gain at the clearest prior: far-edge weak response
+8.14%→9.43%, with strong response retained and slightly lower quiet error.
+The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
+resumed its preserved control; the added-attention arm follows.
 
 ## Setup and inference
 
@@ -104,7 +108,11 @@ The competing selector's [directional gain](docs/images/competing-orientation-v1
 and [counterexample](docs/images/competing-orientation-v1/comparison-06.png) are
 noisy → competing EMA → exact constructed GT (native160, exposure 8/contrast 1;
 [full provenance](docs/competing-orientation-comparison.md#the-directional-improvement-and-its-counterexample)).
-Its [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
+The complementary lower-noise gain has [source0](docs/images/complementary-edge-response-v1/iso400-source0-far-triplet.png)
+and [source1](docs/images/complementary-edge-response-v1/iso400-source1-far-triplet.png)
+triplets with [full provenance](docs/complementary-edge-response.md#native-pixels-still-show-substantial-attenuation).
+
+The competing selector's [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
 and [building color failure](docs/images/competing-orientation-v1/readme-building.png)
 are noisy → competing EMA → independent ISO100/AHD reference. They remain native160
 pixels with matched coordinates/transforms; the separate real captures differ

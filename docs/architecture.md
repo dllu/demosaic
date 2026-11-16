@@ -68,7 +68,10 @@ frozen V200 stage. Its extra proposals use the full V200 residual and exclude
 inherited carrier neighborhoods. Shared physical fitting stays in
 `measure_cfa_carriers`; existing output/auxiliary/gradient behavior is retained.
 The new stage exports 201 tensors with an explicit `complement_readout` prefix,
-while existing checkpoint layouts stay intact. [Live trial and exact admission](complementary-cfa-branch.md).
+while existing checkpoint layouts stay intact. [Architecture and exact admission](complementary-cfa-branch.md). The
+`complementary` preset exposes both trained201-tensor exports. Its
+[three-noise review](complementary-edge-response.md) retains a small conditional
+lower-noise gain; full-suite quiet/flat and real-photo costs remain documented.
 
 For this added stage, `evaluate --verify-anchor-scores ... --verify-anchor-method ...`
 checks the frozen baseline inside each actual forward. Every retained original

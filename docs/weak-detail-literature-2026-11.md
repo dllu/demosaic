@@ -17,7 +17,11 @@ far-edge weak response with strong-direction losses and mixed quiet effects.
 The [complementary-stage follow-up](complementary-cfa-branch.md) has trained above
 frozen V200 EMA with extra proposals; its [full native review](complementary-comparison.md)
 finds almost unchanged weaker directions and slightly higher quiet/flat error.
-Fresh-noise evaluation is running.
+Its [complete fresh-noise review](complementary-edge-response.md) finds a small
+lower-noise weak-response gain with mean strong response retained.
+The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
+resumed its saved control before the added-attention arm, with original source
+and20k horizons preserved.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

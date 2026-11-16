@@ -8,7 +8,8 @@ matched continuation. Native mesh/organic detail remains weak. Genuine CPU/CUDA
 implementation checks pass. The [V131/V132 full-budget trial](raw-spatial-training.md) has four
 matched CPU/CUDA checks complete. V131's original20k control stopped at the32GB
 reserve, preserving step14,549; its [1k progress review](v131-progress1000-quality.md)
-has mixed detail changes and no clear mesh recovery. V132 production remains
+has mixed detail changes and no clear mesh recovery. A [November16 continuation](raw-spatial-continuation.md)
+resumes the saved control with unchanged source/horizon before V132. V132 production remains
 unstarted. The [V144/V145 pilot](v143-spatial-attention-trial.md) is a separate
 completed run from V143, with a larger branch learning rate and matched control.
 V120 remains the general recommendation; the original mean-loss trial

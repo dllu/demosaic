@@ -55,6 +55,12 @@ _PRESETS = (
         "experimental local directional gain; lower aggregate mesh response",
         "docs/competing-orientation-comparison.md",
     ),
+    ModelPreset(
+        "complementary",
+        "complementary-cfa-wave",
+        "experimental lower-noise weak-response gain; high-noise flat costs",
+        "docs/complementary-edge-response.md",
+    ),
 )
 
 

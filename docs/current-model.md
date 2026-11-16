@@ -2,7 +2,8 @@
 
 **V120 Small remains the general recommendation.** The competing-orientation
 head improves one fixed mesh's weak sector but lowers aggregate mesh response.
-Shared-edge training has small quiet gains with lower response; analytic
+The complementary stage retains a small lower-noise weak-increment gain with
+mean strong response preserved. Shared-edge training has small quiet gains with lower response; analytic
 edge refinement remains restricted synthetic evidence. [Architecture and commands](architecture.md).
 
 | Choice | Useful strength | Remaining weakness |
@@ -14,6 +15,7 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 | [V198 CFA innovation](cfa-innovation-wave-comparison.md) | 11.158% GT mesh amplitude; stronger colored synthetic and real cab modulation | New green/magenta building fringes; quiet RMS +1.151–1.648% versus V195 |
 | [V200 cross-scale support](scale-supported-cfa-wave-comparison.md) | Quiet RMS −0.059–0.119% and fresh-flat RMS −0.022–0.030% versus V198 | Mesh response falls to 11.102% GT; building fringes, ripples and incomplete crossings persist |
 | [Shared-edge training](shared-edge-comparison.md) | EMA quiet RMS −0.051–0.076% and cached fresh-flat RMS −0.036–0.045% versus V200 | Mesh response falls to 10.874%; present-mesh error rises; fringes/ripples/incomplete crossings persist |
+| [Complementary stage](complementary-edge-response.md) |400/far weak response8.14%→9.43% with mean strong response retained and slightly lower quiet error | Extra capacity/training; high-noise quiet/flat costs, little fixed-mesh change, real fringes/incomplete crossings persist |
 | [Competing orientations](competing-orientation-comparison.md) | Mesh2302 weak sector 28.41%→33.55%; fresh far-edge weak increment 3.13%→5.06% at1600 prior with lower quiet error | Strong response falls; other fixed weak sector worsens; mean mesh response 10.607%; fringes/false waves persist |
 
 V198/V200 do not combine strong fine-detail recovery with clean quiet fields.
@@ -73,7 +75,10 @@ complete frozen V200 EMA path. It adds a fresh 643-parameter head and up to eigh
 nonduplicate proposals, with unchanged training observations/objective/schedule.
 The [complete standard/native review](complementary-comparison.md) finds almost
 unchanged weaker sectors, tiny aggregate mesh gains and slightly higher
-quiet/flat error. The three-noise review is running. Exact frozen-baseline
+quiet/flat error. The [completed three-noise review](complementary-edge-response.md)
+retains a small conditional lower-noise gain, with far-edge weak response
+8.14%→9.43% at400, mean strong response retained and slightly lower quiet error.
+The `complementary` preset exposes its trained component. Exact frozen-baseline
 checks pass at both endpoints. A sealed
 evaluator-only repair handles legacy receipt metadata without changing training
 or numerical model code.
