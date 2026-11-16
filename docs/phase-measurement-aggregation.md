@@ -1,8 +1,8 @@
 # Phase aggregation gains weak response with larger errors and real color bands
 
-**At400/far, local measurement aggregation raises weak response2.80%→12.61%
-versus the matched H1 stage**, with strong response43.33%→65.99%. Quiet error
-rises5.42% and weak-increment error1.95%. Higher-noise results are poor, and the
+**At400/far, current local measurement aggregation raises weak response2.80%→12.68%
+versus the matched H1 stage**, with strong response43.33%→65.96%. Quiet error
+rises5.44% and weak-increment error1.94%. Higher-noise results are poor, and the
 building stress crop has severe new green/magenta bands. Local averaging does
 not resolve the fidelity problem. H1 remains the simpler experimental wave
 baseline; V120 remains the general photographic recommendation.
@@ -14,10 +14,11 @@ is available with explicit matched H1 controls and its measured costs.
 [Complete receipts and executed sources](results/phase-aggregation-v1/publication.json).
 [Viewing, absolute-role and follow-up evidence](results/phase-aggregation-v1/publication-addendum.json).
 
-The figures/table below describe the **initial innovation-projection arm**.
-The current implementation additionally has a consistent conditional-null
-projection, now the default; its separate matched48-input review is running.
-The one-image input-only check below does not establish a quality improvement.
+The first figures/table below describe the **initial innovation-projection arm**.
+The current default applies a consistent conditional-null projection. Its
+separate matched48-input audit/native review is also complete, with similar
+costs and the same artifact; current figures/results appear in the follow-up
+section. Neither arm supplies clean weak-detail reconstruction.
 
 The experiment follows the measurement-aggregation question in the
 [weak-detail review](weak-detail-literature-2026-11.md#4-compare-measurement-aggregation-with-wave-synthesis).
@@ -221,7 +222,7 @@ V132 training. This CPU experiment is not a full-frame speed benchmark.
 All original outputs, failed test fixture run, known legacy audit failure,
 corrected postprocessing sources and independent checks remain preserved.
 
-## Consistent projection follow-up, with no demonstrated artifact repair
+## Completed consistent-projection follow-up: same artifact, small numerical changes
 
 The initial arm validates `Q(I−Pnull)raw`, but its delivered parent innovation
 uses `Q(raw−parent)`. Since phase/local averaging does not itself annihilate
@@ -246,7 +247,46 @@ reads no target/reference arrays and performs no neural work.
 
 The consistent-projection building check retains byte-exact H1 control and
 changes the same failure ROI's correction RMS **410.30→411.88 DN16**, with no
-new reference/GT access. The original and new maximum ROIs coincide. The full
-three-prior48-input projected arm is running with unchanged observations,
-geometry, validation, thresholds, parents and full V132 training. No broader
-gain is claimed while that comparison is incomplete.
+new reference/GT access. The original and new maximum ROIs coincide.
+
+The full three-prior48-input projected arm is complete in828.14s, with the same
+observations, geometry, validation, thresholds and parents. All288 H1 prediction
+files match the initial arm byte-for-byte. All44 positive-noise cases' saved
+raw-only edge/frequency/matching/validation records also match exactly; four
+ADC cases retain exact parent identities. The change is isolated to delivered
+aggregation projection, not discovery or validation.
+
+| Prior / placement | Initial weak response | Current weak response | Current quiet RMS DN16 | Current weak-increment RMS DN16 |
+| --- | ---: | ---: | ---: | ---: |
+|400 near |4.746% |4.749% |7.86499 |14.22694 |
+|400 far |12.614% |12.676% |4.24512 |12.03250 |
+|1600 near |6.473% |6.488% |12.04775 |20.46812 |
+|1600 far |1.114% |1.114% |5.95801 |16.09730 |
+|6400 near |0.974% |0.953% |43.81330 |36.56831 |
+|6400 far |−0.030% |−0.051% |14.34096 |25.98722 |
+
+Changes versus the initial arm are small and mixed. Building bands remain
+severe; sky/foliage/fence/cab limitations remain visible under both real priors.
+The consistent operator is retained for its exact nuisance-span behavior,
+without claiming a quality win over the initial arm.
+[Current native viewer](images/phase-aggregation-projected-v1/native-viewer.html) ·
+[Projected-arm receipts and sources](results/phase-aggregation-projected-v1/publication.json) ·
+[Complete isolation/viewing addendum](results/phase-aggregation-projected-v1/publication-addendum.json).
+
+Current noisy → aggregation local2 → exact-GT triplets retain the same source,
+ROI, checkpoint/noise and native160 display settings stated above:
+
+![Current source0 far: noisy, consistent-projection aggregation, exact GT](images/phase-aggregation-projected-v1/original/iso400-index0008-role2-triplet.png)
+
+![Current source1 far: noisy, consistent-projection aggregation, exact GT](images/phase-aggregation-projected-v1/original/iso400-index0024-role2-triplet.png)
+
+All22 current matched comparisons, six stress boards, two triplets and both
+plots were actually viewed. Its independent audit again checks2,613 fields,
+44 original boards/14,131,200 RGB channels; score/finite differences zero,
+maximum band difference `3.28e-15`. A further3,532,800 matched/stress channels
+pass the independent display check. V132's original full20k training continues.
+
+The next discriminating evidence is the [A-only neural background diagnostic](withheld-neural-background.md):
+it predicts withheld building/cab sensor samples better than the analytic fit,
+while retaining artifacts. That supports testing a richer nuisance competitor,
+not treating larger wave amplitude as recovered faithful detail.

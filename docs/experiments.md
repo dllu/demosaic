@@ -8,7 +8,11 @@ unseen-camera and severe ADC-color costs. The opt-in
 with weakest-band error+1.43%. V132's original20k training continues.
 The [phase-aggregation pilot](phase-measurement-aggregation.md) now completes
 all48 inputs/native review: more low-prior response with higher error and
-severe real color bands. Its consistent nuisance-projection follow-up is running.
+severe real color bands. Its consistent nuisance-projection follow-up is also
+complete:12.68% far/400 weak response, similar errors and persistent bands.
+A [four-forward A-only neural diagnostic](withheld-neural-background.md) improves
+held-out sensor prediction on the building/cab contexts; a richer nuisance
+correction remains the next experiment.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

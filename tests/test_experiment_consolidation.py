@@ -248,7 +248,9 @@ def test_package_imports_without_scripts_and_native_pixels_have_no_resampling(tm
         "from demosaic.experiments.data.shared_edge import pair_recipe; "
         "from demosaic.experiments.objectives.directional import objective; "
         "from demosaic.experiments.evaluation.detail import DetailMetrics; "
-        "from demosaic.models import model_presets; assert model_presets()[0]['name']=='v120'"
+        "import sys; from demosaic.models import load_model, model_presets; "
+        "assert callable(load_model) and model_presets()[0]['name']=='v120'; "
+        "assert 'torch' not in sys.modules"
     )
     subprocess.run([sys.executable, "-c", command], cwd=tmp_path, env=env, check=True)
     rng = np.random.default_rng(4)

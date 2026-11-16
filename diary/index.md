@@ -35,10 +35,11 @@ weak response 9.43%→19.39%, with quiet/increment errors worsening on most view
 an oracle result, not an inference improvement.
 
 Latest input-only comparison: [phase-aligned measurement aggregation](2026-11-16-12-46-37-phase-measurement-aggregation.md),
-two-source400/far weak response2.80%→12.61% versus H1, with quiet/increment
-error+5.42%/+1.95%, severe building bands and poor high-noise results. Its
-consistent nuisance-projection follow-up is running; a one-image check retains
-the bands. The separate [complete local-support panel](2026-11-16-11-25-42-full-panel-v131-audits.md)
+two-source400/far weak response2.80%→12.68% versus H1, with quiet/increment
+error+5.44%/+1.94%, severe building bands and poor high-noise results. Both
+projection arms are fully reviewed. A four-forward A-only neural nuisance
+diagnostic improves held-out sensor prediction, with blur/artifacts remaining.
+The separate [complete local-support panel](2026-11-16-11-25-42-full-panel-v131-audits.md)
 retains all eight sources/CFAs/repeats and its smaller measured tradeoff.
 
 Latest consolidation: [shared experiments and composed models](2026-11-15-22-22-09-experiment-consolidation.md), with exact V200 CUDA-prefix replay and preserved historical evidence.

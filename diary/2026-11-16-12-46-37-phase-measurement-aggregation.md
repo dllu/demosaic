@@ -129,3 +129,77 @@ receipt archives. The first33 archive payloads and18 addenda preserve old bytes,
 including failed fixture/audit attempts. README/current choices/experiment/
 research/diary indexes retain the useful low-prior response gain and material
 costs explicitly. Conditional-projection full quality is still pending.
+
+The conditional-null arm subsequently completed all48 cases/412 tiles in828.14s.
+All288 H1 prediction files match the initial arm byte-for-byte, as do raw-only
+edge/frequency/matching/validation diagnostic records for all44 positive-noise
+cases; the other4 are ADC identities. Its independent audit again passes2,613
+fields/44 boards/14,131,200 RGB channels, maximum band discrepancy3.28e-15;
+matched/stress display check covers3,532,800 channels. Actually viewed its22
+matched comparisons/six stress boards/two triplets/two plots,32 further views.
+Far400 weak response12.676%, quiet4.24512DN16 (+5.44% versus H1), increment
+12.03250 (+1.94%); remaining changes are small/mixed. Building bands and poor
+high-noise response persist. Consistent projection is retained for algebraic
+nuisance behavior, not claimed as an image-quality win. Both arms' full evidence
+is now published separately; initial receipts/live snapshots remain unchanged.
+
+The next diagnostic tests a genuinely A-only neural nuisance instead of another
+small analytic basis. Two adaptively reused real contexts: existing building
+failure ROI[76,260,160,160], native256 origin[28,212], and standing left cab
+ROI[206,229,160,160], origin[158,181]. The shifted cab origin uses its actual
+local CFA layout. Missing per-phase samples are normalized-Gaussian filled
+from A only (sigma1packed/truncate3); actual A samples remain exact, A-only
+phase mean fallback if needed. Replacing B withNaNs gives exact neural-input
+invariance before every forward. Original explicit shot/read are retained;
+filled-input covariance differs from ordinary RAW and is not claimed calibrated.
+
+First launch failed before model/encoder inference because the documented
+public `from demosaic.models import load_model` was not exported. Fixed the
+package to export the existing registry function lazily and extended the
+existing package/native-pixel import check to require callable loader and no
+Torch import. That test passes; the earlier ADC export doc's import example
+now works. Original failed source/log/plan remain intact. A separately frozen
+v2 runs exactly4 root/4 fresh DINO forwards,82.11s including load. All91 loaded
+V120 EMA tensors and official backbone hash691963f0... remain exact before/after;
+no target/reference arrays, parent RGB, original RAW decode or optimizer used.
+
+A-only masked V120 predicts noisy held-out building sensor samples much better
+than analytic H1: pooled sensor RMS5031.42→1889.30DN16, same A-only proxy weighted
+MSE87.2265→16.3008. Cab improves216.34→202.72DN16,1.4323→1.2976. Each case pools
+65,536 sensor observations over complementary folds and colors. B samples are
+noisy validation observations, not exact GT or ISO100 references. Both outputs
+upper-clip at sensor white for the comparison; signed negative read-noise
+observations are retained. An independent no-Torch CPU check verifies48 fields,
+maximum discrepancy4.55e-12, archived input fingerprints, finite native FP32
+predictions and H1 NaN-withholding invariance, with zero additional neural calls.
+
+Actually viewed both native160 A-only comparison boards, shared WB/matrix,
+exposure4/16 and no resizing; no GT/reference shown. Analytic building geometry
+is very poor, while the neural view recovers more structure but retains blur,
+highlight/color artifacts. Cab improvement is modest, with mottle and missing
+mesh in the neural view. This supports a richer independently computed neural
+nuisance in the next matched correction test; it is not a denoising/weak-detail
+performance claim. Added `docs/withheld-neural-background.md`, exact source/
+receipt archives and native metadata; current docs now mark both aggregation
+arms complete and retain their gain/cost comparisons. Original V132 training
+continues unchanged; broad weak-detail fidelity remains unresolved.
+
+Final publication checks verify39 projected-arm and22 neural-diagnostic gzip
+payloads exact,72+2 native PNG bindings exact, and local links across9 current
+Markdown files. The extra native diagnostic audit matches460,800 RGB channels
+exactly without Torch/NN work. The import recovery changes only the lazy
+models/__init__.py export; all other frozen package/entry-script bytes match
+between failed and working diagnostic versions. A metadata clarification keeps
+the initial arm's legacy profile-join failure separate from the projected arm,
+whose original audit passed. All original receipt bytes remain intact.
+
+Ruff and diff whitespace checks pass. The99 algorithm checks plus the public
+loader/native-import test pass; no repeated whole-suite run solely for reports.
+Original controller121044, worker224010 and endpoint reviewer178183 retain their
+creation identities and remain live. V132 reaches14,950/20k, about86.6GiB RAM
+available. Both new CPU aggregation jobs and the neural nuisance diagnostic
+are terminal with completed evidence. Next meaningful experiment is adding an
+independently computed A-only neural nuisance to the matched correction graph,
+using one shared global CFA partition across whole-context neural prediction
+and overlapping analytic tiles, then checking actual weak/false-detail error.
+The weak-detail goal stays active; no broad quality or convergence claim.

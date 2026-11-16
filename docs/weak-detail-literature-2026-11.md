@@ -72,8 +72,12 @@ local same-color phase averages, edge stopping and A/B conditional validation.
 Its [completed48-input/three-prior review](phase-measurement-aggregation.md)
 raises400/far weak response2.80%→12.61% versus matched H1, but adds5.42% quiet
 and1.95% increment error, with severe building color bands and poor high-noise
-results. A consistent nuisance-projection follow-up passes its algebraic checks
-but does not fix the building in an input-only check; its full review is running.
+results. The completed consistent nuisance-projection follow-up reaches12.68%
+with similar error costs and the same building bands. An
+[A-only masked-neural background diagnostic](withheld-neural-background.md)
+predicts withheld noisy building/cab sensor samples better than the analytic
+fit, with blur/artifacts still present. This supports testing a richer nuisance
+competitor, without claiming improved delivered detail or calibrated confidence.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
