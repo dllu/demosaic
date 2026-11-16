@@ -156,7 +156,10 @@ simple coefficient-collinearity collapse is not a sufficient explanation.
 The next discriminator should **hold analytic proposals fixed while fitting
 the neural nuisance**, reusing the closed88-field cache. That separates proposal
 loss from conditional fitting/validation without replaying the neural model.
-This separately frozen48-case ablation is now running, with a declared maximum
-of zero new model/encoder calls and the same matched analytic controls. The
-expanded withholding/conditional-delivery suite passes126 tests. Its quality
-results remain pending.
+The [completed fixed-proposal follow-up](neural-nuisance-fixed-proposals.md)
+raises400/far weak response0.900%→2.690%, with lower quiet/increment RMS and
+zero neural replay. It retains less response than analytic H1 but much less
+added building banding, and is the preferred neural-nuisance variant for further
+weak-detail work. All576 analytic control files match exactly. The expanded
+withholding/conditional-delivery suite passes126 tests; both runs and all native
+counterexamples remain published separately.

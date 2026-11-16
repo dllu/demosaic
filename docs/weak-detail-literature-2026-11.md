@@ -54,8 +54,11 @@ shares a global CFA withholding partition between88 frozen neural backgrounds
 and all analytic tiles. Its completed48-case audit/native review finds less
 added quiet/building error, but400/far weak response falls3.686%→0.900% versus
 matched conditional analytic H1. Better background prediction still does not
-recover missing weak directions; fixed analytic proposals with the same neural
-nuisance are the next discriminator, using the closed background cache.
+recover missing weak directions. Its [fixed-proposal follow-up](neural-nuisance-fixed-proposals.md)
+uses the same88 cached backgrounds, zero neural replay and576 exact analytic
+control files:400/far weak response recovers to2.690%, with quiet/increment
+RMS−0.574%/−0.133% versus the3.686% conditional analytic control. This useful
+quieter operating point still loses response and misses real fine crossings.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

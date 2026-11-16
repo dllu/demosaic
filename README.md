@@ -69,7 +69,10 @@ predicts withheld building/cab RAW better than the analytic fit, supporting a
 richer nuisance test. Its [completed matched correction pilot](docs/neural-nuisance-reconstruction.md)
 reduces added building/quiet error but loses400/far weak recovery3.69%→0.90%;
 both cab profiles still miss fine crossings. Native comparisons and all controls
-are retained.
+are retained. [Holding its analytic proposals fixed](docs/neural-nuisance-fixed-proposals.md)
+recovers2.69% weak response, with quiet/increment RMS−0.57%/−0.13% versus
+conditional analytic H1, which retains3.69% response. Building banding is much
+smaller; missing crossings remain unresolved.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -174,6 +177,14 @@ and [source1](docs/images/individual-wave-pilot-v1/individual/source1-far-role2-
 under those same conditions, alongside its
 [persistent building-band failure](docs/images/individual-wave-pilot-v1/stress/building-prior-failure-ROI.png).
 [Measured tradeoffs and configuration provenance](docs/individual-wave-validation.md).
+
+The fixed-proposal neural-nuisance trial retains native noisy → restored →
+exact-GT triplets for [source0](docs/images/neural-nuisance-fixed-v1/triplets/iso400-index0008-role2-triplet.png)
+and source1 below, at ROI`[176,176,160,160]`, exposure2/contrast1 and
+shot/read`8e-5/2.56e-8`. Fine crossings remain weak.
+[Checkpoint/source metadata and measured costs](docs/neural-nuisance-fixed-proposals.md).
+
+![Source1: noisy, fixed-proposal neural nuisance, exact constructed GT](docs/images/neural-nuisance-fixed-v1/triplets/iso400-index0024-role2-triplet.png)
 
 The competing selector's [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
 and [building color failure](docs/images/competing-orientation-v1/readme-building.png)

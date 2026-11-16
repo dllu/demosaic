@@ -8,13 +8,14 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 
 | Choice | Useful strength | Remaining weakness |
 | --- | --- | --- |
-| [Whole-context neural nuisance pilot](neural-nuisance-reconstruction.md) | Conditional analytic control:400/far quiet RMS−0.493%; no added building ripple because neural arm returns V120 exactly | Weak response3.686%→0.900%, increment error+0.028%; fine cab crossings missing;88 masked background calls, no broad quality/speed claim |
 | [V120 Small](v120-v121-primary.md) | 37.04008 dB on 427 photos; known/unseen CFA means 54.31272/54.00872 dB; verified 102MP RGB16 exports | Fine foliage, mesh, neon and dark-field mottle |
 | [V131 completed continuation](v131-broad-primary.md) |427-photo +0.04000 dB with400/427 source gains; targeted faint-ADC +0.14555 dB; modest high-noise carrier/flat gains | Unseen-camera −0.04381 dB; ADC color maximum1,816 DN16 versus55.5; high-noise weak-band error slightly worse; soft foliage/fine cab crossings; no new full-frame validation |
 | [V131 ADC Malvar, opt-in](v131-adc-projection.md) | Fixed existing policy, identical91 weights; ADC photo+0.15074 dB versus V131,382/427 gains; ADC color maximum19.98 DN16 | Weakest ADC band error+1.43%, lower analytic carrier amplitude,45 non-improving photos; positive-noise V131/camera costs unchanged; no new full-frame validation |
 | [V132 RAW attention,1k progress](v132-progress1000-quality.md) | Matched faint-ADC +0.03356 dB versus V1311k; all four weakest-stratum RMS means improve | Faint mean remains0.23979 dB below V120; wood PSNR cost; no clear new cab crossings/foliage; production still training |
 | [Local conditional waves, complete panel](local-wave-full-panel.md) |400/far weak response1.826%→2.690% above V143; lower global-support quiet/increment error in all six cells; fewer global cab ripples above V120 | Quiet/increment error still above parent; sources1/2 dominate gains; higher-noise weak structure and real crossings mostly missing; executed historical matcher |
 | [Phase measurement aggregation, analytic pilot](phase-measurement-aggregation.md) | Same H1 discovery:current400/far weak response2.80%→12.68%, strong43.33%→65.96%; both projection arms reviewed | Quiet/increment error+5.44%/+1.94%, severe building bands, poor high-noise response; consistent nuisance projection does not repair real artifacts |
+| [Fixed-proposal neural nuisance](neural-nuisance-fixed-proposals.md) |400/far quiet/increment RMS−0.574%/−0.133% versus conditional analytic H1; much smaller added building bands; exact cached fields, zero neural replay | Weak response3.686%→2.690%, still above parent's0.958%; edge-only error above parent, fine cab crossings missing; reused two-source cohort |
+| [Neural residual-reselection ablation](neural-nuisance-reconstruction.md) |400/far quiet RMS−0.493%; no added building correction because arm returns V120 exactly | Weak response3.686%→0.900%, increment error+0.028%; fine cab crossings missing;88 masked background calls, no broad quality/speed claim |
 | [Harmonic analytic ablation](local-wave-shapes.md) | Same pilot H1→H3 far weak response 2.80%→5.46%, strong 43.33%→46.88%; small full-error reduction | Quiet/increment error +0.993%/+0.745% versus H1; new building color bands, missing real crossings; H1 remains default |
 | [Individual harmonic support](individual-wave-validation.md) | Far quiet/increment RMS 4.06592/11.89181→4.05049/11.85942 DN16 versus H3 group; weak response 4.07% | Near quiet error rises; building bands persist; expanded affine background further raises quiet error; explicit ablations |
 | [V114 Tiny](v114-v115-quality.md) | Lower tested ADC maximum: 51.73 versus V120's 55.52 DN16 | Different photo/camera tradeoffs |
@@ -71,8 +72,10 @@ four fresh frozen-model/DINO calls, with held-out values removed before inferenc
 Its [matched whole-context nuisance correction](neural-nuisance-reconstruction.md)
 now has complete numerical/native review: it reduces some added errors but
 loses clearest-prior weak recovery. This remains an experimental guard/control,
-with no general model promotion. Fixed-proposal nuisance fitting is the next
-discriminator; the closed88-field cache avoids neural replay.
+with no general model promotion. Its [fixed-proposal follow-up](neural-nuisance-fixed-proposals.md)
+recovers part of the weak response and reduces quiet/increment error versus
+analytic H1. That is the preferred nuisance variant for further weak-detail
+work; both measured operating points and their real-photo limitations remain.
 
 The [shared-edge cache](paired-training-coverage.md) is completed and audited:
 156 changed rows and 844 exact adoptions. Its [matched training and complete

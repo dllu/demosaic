@@ -76,3 +76,42 @@ argument checks, and declares maximum zero new root/encoder calls. Controller
 All48 new corrections again close before reference scoring. The first study's
 sources/receipts/publication remain unchanged. Fixed-proposal quality pending.
 
+The fixed-proposal run completes: cache adoption5.68s, CPU correction382.79s,
+zero new root/encoder forwards. Independent cache audit passes again. All576
+analytic-control prediction files are byte-exact and all412 analytic tile
+diagnostic records unchanged; neural proposals/matches equal those controls.
+Correction audit passes3,819 fields and14,131,200 native RGB channels, maximum
+discrepancy2.8e-15. Actual viewing covers another34 figures; the publication
+verifies11,520,000 matched/stress channels and151 exact receipt/source archives.
+Both runs' original evidence remains immutable and separately published.
+
+Fixed proposals recover400/far weak response0.900%→2.690% versus reselection.
+Against conditional analytic H1 they trade3.686%→2.690% response for quiet/
+increment RMS−0.574%/−0.133%. Versus parent0.958% response, quiet RMS is−0.026%
+and increment RMS+0.331%. Source0/1 response1.500%/3.880%; source1 drives most
+retained gain. Edge-only full error remains slightly above parent despite
+improving versus analytic H1. Thus this is a useful quieter experimental
+operating point, not a free weak-fidelity win or new general recommendation.
+
+Building correction at analytic maximum63.55→16.61 DN16, historical failure
+ROI52.79→15.60. Neural own maximum17.49 at[80,305,160,160], so unlike reselection
+it does not abstain completely. Native views show much less added analytic
+banding, persistent soft foliage and unresolved fine cab crossings in both
+profiles. Both JPEGs/ROIs and independent qualitative references are retained.
+Fixed proposals are preferred for further neural-nuisance weak-detail work;
+the reselection mode remains an explicit implemented ablation. Broader source/
+CFA testing and untouched real scenes remain necessary to assess generalization.
+
+[Fixed-proposal quality report](../docs/neural-nuisance-fixed-proposals.md) ·
+[Publication](../docs/results/neural-nuisance-fixed-v1/publication.json).
+
+At15:17 PST, original V132 worker224010/create1794843486.14 is observed at
+18,300/20k, with controller121044 and reviewer178183 retaining their original
+creation identities. All151 shared logged batch hashes match V131 through
+18,300; this is explicitly a logged-prefix check, not the final full optimizer
+trace or20k architecture review. Available RAM86.65GiB. Observation is archived
+in a separate publication addendum; no original worker was restarted/signaled.
+The20k architecture endpoint remains pending while both new nuisance studies
+are complete. General weak-detail quality remains unresolved and the goal stays
+active.
+
