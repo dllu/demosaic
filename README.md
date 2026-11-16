@@ -47,8 +47,11 @@ finds a small conditional gain at the clearest prior: far-edge weak response
 A [coverage/response diagnostic](docs/complementary-coverage-quality.md) finds
 low weak response even when a nearby carrier is present.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
-resumed its preserved control; the added-attention arm and
-[matched endpoint review](docs/raw-spatial-endpoint-review.md) are queued.
+completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
+finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
+bark regression. Ordinary/shadow gains are about 0.02 dB; fine cab crossings and
+soft foliage remain unresolved. The experimental `v131` preset is available.
+V132's added-attention arm is training; its matched comparison remains pending.
 
 ## Setup and inference
 
@@ -114,6 +117,14 @@ noisy → competing EMA → exact constructed GT (native160, exposure 8/contrast
 The complementary lower-noise gain has [source0](docs/images/complementary-edge-response-v1/iso400-source0-far-triplet.png)
 and [source1](docs/images/complementary-edge-response-v1/iso400-source1-far-triplet.png)
 triplets with [full provenance](docs/complementary-edge-response.md#native-pixels-still-show-substantial-attenuation).
+
+V131's completed continuation has native [bark](docs/images/v131-endpoint-v1/bark-small-triplet.png)
+and [fur](docs/images/v131-endpoint-v1/raccoon-fur-small-triplet.png) noisy → V131 →
+exact constructed-GT triplets at the same ordinary conditions above. Its faint
+[fur gain](docs/images/v131-endpoint-v1/raccoon-fur-contrast0p025-adc-contrast20-comparison.png)
+and [bark regression](docs/images/v131-endpoint-v1/bark-contrast0p025-adc-contrast20-comparison.png)
+use common contrast20, ADC-only noise and unchanged native pixels.
+[Checkpoint, source and display provenance](docs/v131-endpoint-quality.md).
 
 The competing selector's [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
 and [building color failure](docs/images/competing-orientation-v1/readme-building.png)

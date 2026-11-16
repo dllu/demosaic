@@ -521,3 +521,142 @@ def test_actual_CPU_report_and_independent_audit_preserve_native_camera_pixels(
             assert (w, h) == (160, 160)
             np.testing.assert_array_equal(pixels[y : y + h, x : x + w], cell)
     assert audit["PNG_channels_exact"] == report["PNG_channels_verified"]
+
+
+def live_endpoint_fixture(tmp_path):
+    from train_directional_bank_trial import save
+
+    plan, status = dependency(tmp_path)
+    owner = {"pid": 999999901, "created": 1.0}
+    peer = {"pid": 999999902, "created": 2.0}
+    checkpoint = tmp_path / "actual-fixture-bytes"
+    checkpoint.write_bytes(b"Protocol fixture, not model weights")
+    result = {
+        "status": "completed-raw-spatial-training-phase",
+        "phase": "train",
+        "arm": "V131",
+        "updates": 20000,
+        "owner": owner,
+        "checkpoint": ref(checkpoint),
+    }
+    path = tmp_path / "train-V131-result.json"
+    save(path, result)
+    status.update(status="running-explicit-raw-spatial-continuation", arm="V132", child=peer)
+    return plan, status, {"V131": owner}, path, checkpoint
+
+
+def test_completed_control_ready_while_exact_peer_and_controller_live(tmp_path, monkeypatch):
+    plan, status, workers, path, _ = live_endpoint_fixture(tmp_path)
+    monkeypatch.setattr(
+        queue, "live", lambda owner: owner in [plan["training_owner"], status["child"]]
+    )
+    binding, result = queue.endpoint_ready(plan, status, "V131", workers)
+    assert binding == ref(path) and result["arm"] == "V131"
+    assert workers["V132"] == status["child"]
+
+
+@pytest.mark.parametrize(
+    "change", ["parent", "worker", "result_owner", "checkpoint", "updates", "missing_result"]
+)
+def test_as_ready_identity_and_complete_worker_guards(tmp_path, monkeypatch, change):
+    from train_directional_bank_trial import read, save
+
+    plan, status, workers, path, checkpoint = live_endpoint_fixture(tmp_path)
+    workers["V132"] = dict(status["child"])
+    monkeypatch.setattr(queue, "live", lambda owner: owner == plan["training_owner"])
+    if change == "parent":
+        status["owner"] = {"pid": 1, "created": 1.0}
+    elif change == "worker":
+        status["child"] = {"pid": 999999902, "created": 3.0}
+    elif change == "result_owner":
+        d = read(path)
+        d["owner"] = {"pid": 999999901, "created": 2.0}
+        save(path, d)
+    elif change == "checkpoint":
+        checkpoint.write_bytes(b"Changed checkpoint fixture")
+    elif change == "updates":
+        d = read(path)
+        d["updates"] = 19999
+        save(path, d)
+    else:
+        path.unlink()
+    with pytest.raises((ValueError, RuntimeError)):
+        queue.endpoint_ready(plan, status, "V131", workers)
+
+
+def test_as_ready_waits_for_completed_result_owner_to_exit(tmp_path, monkeypatch):
+    plan, status, workers, _, _ = live_endpoint_fixture(tmp_path)
+    monkeypatch.setattr(queue, "live", lambda owner: True)
+    assert queue.endpoint_ready(plan, status, "V131", workers) is None
+
+
+def test_completed_control_survives_peer_controller_failure(tmp_path, monkeypatch):
+    plan, status, workers, _, _ = live_endpoint_fixture(tmp_path)
+    status["status"] = "failed-preserved-no-automatic-retry"
+    monkeypatch.setattr(queue, "live", lambda owner: False)
+    assert queue.endpoint_ready(plan, status, "V131", workers)[1]["updates"] == 20000
+    with pytest.raises(RuntimeError):
+        queue.endpoint_ready(plan, status, "V132", workers)
+
+
+def as_ready_protocol_fixture(tmp_path, monkeypatch, *, peer_failed=False):
+    from train_directional_bank_trial import read, save
+
+    path, root = protocol_fixture(tmp_path)
+    plan = read(path)
+    status = read(plan["training_status"])
+    original_live = queue.live
+    workers = {a: {"pid": 999999901 + i, "created": 1.0 + i} for i, a in enumerate(queue.ARMS)}
+    for a in queue.ARMS:
+        p = root.parent / "training" / f"train-{a}-result.json"
+        r = read(p)
+        r.update(
+            status="completed-raw-spatial-training-phase",
+            phase="train",
+            updates=20000,
+            owner=workers[a],
+        )
+        save(p, r)
+    status.update(
+        status="running-explicit-raw-spatial-continuation", arm="V132", child=workers["V132"]
+    )
+    if peer_failed:
+        status["status"] = "failed-preserved-no-automatic-retry"
+        (root.parent / "training/train-V132-result.json").unlink()
+    save(plan["training_status"], status)
+    plan.update(review_as_ready=True, initial_training_workers={"V131": workers["V131"]})
+    save(path, plan)
+    monkeypatch.setattr(
+        queue,
+        "live",
+        lambda owner: True if owner == plan["training_owner"] else original_live(owner),
+    )
+    sleep = queue.time.sleep
+    monkeypatch.setattr(queue.time, "sleep", lambda seconds: sleep(0.01))
+    return path, root
+
+
+def test_actual_protocol_can_finish_both_reviews_before_controller_exit(tmp_path, monkeypatch):
+    from train_directional_bank_trial import read
+
+    path, root = as_ready_protocol_fixture(tmp_path, monkeypatch)
+    queue.controller(path)
+    assert (
+        read(root / "status.json")["status"]
+        == "completed-both-endpoint-reviews-awaiting-actual-viewing"
+    )
+    assert read(root / "V131/plan-v1.json")["matched_training_verified"] is False
+    assert read(root / "V132/plan-v1.json")["matched_training_verified"] is True
+    assert (root / "matched-training.json").exists()
+
+
+def test_actual_protocol_preserves_control_report_when_peer_failed(tmp_path, monkeypatch):
+    from train_directional_bank_trial import read
+
+    path, root = as_ready_protocol_fixture(tmp_path, monkeypatch, peer_failed=True)
+    with pytest.raises(RuntimeError):
+        queue.controller(path)
+    status = read(root / "status.json")
+    assert set(status["completed"]) == set(status["reports"]) == {"V131"}
+    assert not (root / "V132/collection-v1.json").exists()
+    assert not (root / "matched-training.json").exists()

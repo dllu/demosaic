@@ -13,7 +13,9 @@ finds that most added response comes from newly covered views, but close
 carriers still leave most of the weaker increment missing. This motivates
 checking physical fits and learned attenuation with carriers held fixed.
 The [full-model attention comparison](raw-spatial-continuation.md)
-resumes its saved control before the added-attention arm.
+completes its control: [V131 targeted/native quality](v131-endpoint-quality.md)
+finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains
+and persistent real mesh/foliage weakness. V132's added-attention arm is training.
 V120 remains the general recommendation.
 
 **Current stronger-response experiment:** [V198 CFA EMA](cfa-innovation-wave-comparison.md)
@@ -496,7 +498,7 @@ faint ADC −.00813 dB, noisy-flat spatial RMS +1.11% and no clear new mesh/orga
 detail. The [photographic supplement](spatial-photo-supplement.md) confirms
 near-parent outputs on 128 observations from 16 sources. All primary/flat/photo
 audits and 154 native-board views are complete. This does not resume or relabel
-the unstarted V132 experiment. A subsequent
+the separate V132 experiment, whose full-budget production is now running. A subsequent
 [fixed whole-patch probe](cross-phase-patch-return.md) also adds noise without
 useful detail. Further matching work needs explicit rejection of unsupported
 noisy patches; V120/V143 recommendations are unchanged.
@@ -536,7 +538,7 @@ spatial RMS −.15% against V120, with no clear new mesh recovery. The original
 | Can a learned RAW innovation reach the output without another denoiser pass? | [Completed V1471k](late-spectral-detail.md): direct soft spectral correction after frozen V143 lowers mesh response about 8% and slightly worsens noisy flats. Small strong-edge image gains coexist with quiet-region regressions. Both fixed endpoints and 64 native figures are complete. Its 766-case raw-endpoint full-support intervention lowers response further to .00870 and adds false fine texture. The [updated V152 proposals](support-crossover.md) instead gain response at full support, with blank/quiet costs; the old intervention does not determine the newer baseline |
 | Can a frozen foundation encoder supply useful detail supervision? | [Completed V128 pilot](v128-feature-pilot-quality.md): the26-call gradient diagnostic passes, but weight.1 gives no useful gain at1,000 matched updates. Independent scores and all28 native boards are complete; the term stays off by default |
 | Can RAW phase/frequency features preserve thin structures? | [Completed V122/V123 trial](v122-v123-quality.md): V122 slightly improves weak eight-pixel carrier response; V123 gains0.05493dB photo PSNR against it but lowers unseen-camera PSNR and greatly worsens the ADC tail. Weak natural detail/mesh remain soft; full numerical/selected native review is published |
-| Can local attention use spatial repetition more effectively? | [Completed V144/V145 1k](v144-v145-quality.md): ordinary +.00036 dB but faint ADC −.00813 dB and noisy-flat spatial RMS +1.11% versus matched continuation. No clear new mesh/organic detail across 154 native boards. The older [V131/V132 trial](raw-spatial-training.md) remains distinct: V131 stopped at 14,549 and V132 production never started |
+| Can local attention use spatial repetition more effectively? | [Completed V144/V145 1k](v144-v145-quality.md): ordinary +.00036 dB but faint ADC −.00813 dB and noisy-flat spatial RMS +1.11% versus matched continuation. No clear new mesh/organic detail across154 native boards. The distinct [V131/V132 trial](raw-spatial-continuation.md) now has a completed20k control and active spatial-arm production; [control quality](v131-endpoint-quality.md) has mixed faint gains without clear new mesh |
 | Can whole-tile matching preserve repeated weak detail? | [Completed normalized V1371k](v137-global-conditioned-quality.md) gives faint ADC+.0334dB over V136, tiny ordinary/shadow regressions and no clear new lattice recovery. [Actual trained-memory removal](global-memory-contribution.md) changes0.83–1.39% of branch-offset RMS on six contexts; the local feature path dominates there despite varied attention. This is not a measured final-RGB effect |
 | Can a larger update to the new branch help without moving the trained parent? | [Completed V138 1k](v138-quality.md): faint ADC +.02103 dB versus V137 but only +.00406 dB versus V120, noisy-flat spatial RMS −.15% versus V120, no clear new real mesh recovery. All 91 parent model/EMA tensors stay exact, 18 branch tensors train at LR1e−3, all 1,000 inputs match V137. Full 150-input/audit/native review is complete; combined scope/LR intervention |
 | Can larger Fourier support and much more mesh supervision help? | [V146 at 500 updates](v146-coherent-frequency.md): packed128/native256 frames, LR .001, 1,246 present/1,183 empty meshes, frozen V143 parent. Raw/EMA mesh response+.62%/+.44%, image error+.051%/+.059%, all four photo groups regress slightly. Small flat/sky gains; no clear new native mesh. Both 694-input reviews and 22 native figures complete. Combined context/data/LR feasibility trial |
@@ -576,9 +578,10 @@ withholds two display/artwork-dominated frames from a future90,778-source/33-reg
 cohort. It adds fine wing mesh and subtle pitted stone while preserving all31
 prior region objects. Native annotations and actual saved full-context reader
 draws distinguish intrinsic source contrast from augmentation. Existing training
-inputs stay fixed: V131/V132 use90,781/29, with V131 stopped at the memory reserve and V132 unstarted;
-[V1311k progress](v131-progress1000-quality.md) is mixed and full-endpoint/branch
-quality remains unmeasured. The completed [V129](reviewed-detail-training-pilot.md)
+inputs stay fixed: V131/V132 use90,781/29. The [resumed control](raw-spatial-continuation.md)
+completes20k and its [targeted endpoint review](v131-endpoint-quality.md) finds
+small mixed faint gains; V132 production is running. Broad/branch endpoint quality
+remains unmeasured. The completed [V129](reviewed-detail-training-pilot.md)
 27-region pilot has small mixed changes without clear large visible recovery.
 The [new texture review](repetitive-material-source-review.md) adds one qualified
 pale-feather context, preserving all33 earlier regions and the same90778 manifest.

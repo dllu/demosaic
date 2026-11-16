@@ -23,8 +23,10 @@ lower-noise weak-response gain with mean strong response retained. The
 closed carrier choices on CUDA and finds substantial attenuation among close-
 carrier views; global proximity alone is not a reconstruction bound.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
-resumed its saved control before the added-attention arm, with original source
-and20k horizons preserved.
+completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
+has faint-ADC +0.14555 dB across four sources with a bark regression, small
+ordinary/shadow gains and no convincing new real mesh crossings. V132's
+added-attention arm is training, with original source and20k horizons preserved.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

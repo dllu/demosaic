@@ -1,8 +1,10 @@
 # V131/V132: full-budget spatial-detail trial
 
 **November16 update:** a [separate continuation](raw-spatial-continuation.md)
-resumes V131 at14,549 with its saved model/EMA/Adam/RNG and unchanged20k horizon;
-V132 follows from V120 EMA. Original plans, checks and failures remain intact.
+completes V131's20k horizon with its saved model/EMA/Adam/RNG. The
+[102-input/native control review](v131-endpoint-quality.md) is complete: mixed
+faint-ADC gains, small ordinary/shadow changes and no clear new fine cab mesh.
+V132 production is training from V120 EMA. Original plans/checks/failures remain intact.
 
 **November2 execution update:** V131 stopped at the32GB memory reserve,
 preserving step14,549 of20k. V132 production remains unstarted; the original
@@ -16,8 +18,8 @@ cohort with29 reviewed regions. V131 started after V125's original memory admiss
 The [V1311k progress review](v131-progress1000-quality.md) is complete: ordinary
 PSNR+.0016dB over V120, deepest shadows−.0237–.0342dB and faint ADC−.2734dB,
 with mixed local response and no clear new mesh recovery. This is the unchanged
-architecture control within its original20k horizon; the added branch and full
-endpoints remain unmeasured. V120 remains the general recommendation.
+architecture control at its early1k checkpoint. The completed20k control is
+reviewed above; the added branch endpoint remains unmeasured. V120 remains the general recommendation.
 
 [Control recipe](../configs/quality-v120-raw-spatial-v131.yaml) ·
 [Spatial recipe](../configs/quality-v120-raw-spatial-v132.yaml) ·
@@ -101,7 +103,9 @@ texture/color probes, all six main GFX regions and complete102MP RGB16 output.
 Independent saved-array audits prepare local-detail/numerical contrasts against
 V120/V117 and V131 versus V132. Reports include at least two native100%
 noisy/restored/GT triplets with shared coordinates/transforms and recorded
-checkpoint, noise and exposure. Scores and actual viewing are pending.
+checkpoint, noise and exposure. That broad chain remains pending; the separate
+targeted V131 endpoint review above is complete and must not be mistaken for
+a427-photo/full-frame result.
 
 Both new models receive identical32-pixel full-frame tile grids. Whole CFA-cell
 padding preserves native pixels; RGB returns to8746×11662. The original520

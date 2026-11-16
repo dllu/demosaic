@@ -26,6 +26,13 @@ _PRESETS = (
         "v114", "joint", "Tiny alternative; lower tested ADC maximum", "docs/v114-v115-quality.md"
     ),
     ModelPreset(
+        "v131",
+        "joint",
+        "experimental completed continuation; mixed faint-ADC gains",
+        "docs/v131-endpoint-quality.md",
+        sha256="4d78e6302f6e72d68acb03fe58eb7106763b8129ccb059747ef5d2cfbd3ec1e1",
+    ),
+    ModelPreset(
         "v187",
         "pooled-wave",
         "experimental quieter wave option",

@@ -1,10 +1,12 @@
-# Matched endpoint detail review is queued
+# Matched endpoint detail review: control complete, spatial arm pending
 
 The [full-model RAW-attention comparison](raw-spatial-continuation.md) now has a
-source-frozen review queue. It waits for the exact training controller to finish
-both 20k endpoints, then collects **102 saved inputs per model** and independently
-audits their numerical metrics and native pixels. No completed-model quality
-result is available yet. V120 remains the recommendation.
+source-frozen review queue. It collects **102 saved inputs per completed model**
+and independently audits their numerical metrics and native pixels. V131 has
+completed20k and its entire collection/audit/native viewing is done:
+[small mixed faint-detail gains, no clear new real mesh](v131-endpoint-quality.md).
+V132 is training; the queue waits for its exact completed endpoint. V120 remains
+the general recommendation.
 
 ## The same weak-detail and photographic evidence
 
@@ -41,9 +43,12 @@ checked. The independent auditor verifies their actual displayed pixels.
 
 The exact controller owner and immutable training plan must agree throughout the
 wait. A timeout, missing handle or failed controller never triggers a training
-restart. Once the controller finishes, both result/checkpoint bindings and dead
-training owners are checked. Every step/domain/clean/noisy fingerprint across
-all 20,000 training observations must match between arms.
+restart. As each arm finishes, its result/checkpoint binding and exact dead
+worker are checked, while the parent/peer may remain live. An already completed
+control can still be reviewed if its peer fails. Worker substitution and a
+parent advancing without the expected result reject. Before V132's collection,
+every step/domain/clean/noisy fingerprint across all20,000 training observations
+must match V131. Reviewing the control alone does not establish matched training.
 
 The collector then checks the saved model/EMA/Adam state, source hash, V120
 lineage, seed 70, architecture and complete 20k horizon before model construction.
@@ -60,7 +65,7 @@ zero new source/noise construction, RAW decodes or optimizer updates.
 CPU analysis computes photo/detail metrics and native boards. A separate process
 that does not import Torch independently recomputes mirrored-FFT DCT16 metrics,
 channelwise display transforms and every published PNG cell. Actual native
-viewing remains a required next step. The broader 427-photo/camera/flat/full-frame
+viewing is completed for V131 and remains required for V132. The broader 427-photo/camera/flat/full-frame
 review is separate; this targeted panel does not establish broad model quality.
 
 ## Executed preparation and coverage correction
@@ -79,6 +84,19 @@ source/plan/status/log and zero-forward handoff preserved. Training was not
 signalled. The corrected queue adopts the identical collector's real checkpoint
 admission proof and adds the explicit JPEG cells/audit; it repeats no neural
 work. Historical report defaults and existing receipts remain intact.
+
+A second zero-forward handoff enables per-endpoint collection as soon as each
+worker finishes. Only the exact owned idle reviewer was stopped; training was
+never signalled. The numerical collector/reporter/auditor,63-file model source,
+102 inputs per arm and204-call quality budget are unchanged. Eleven additional
+readiness/protocol tests cover live-peer collection, changed owners/checkpoints,
+incomplete results, and actual child-process execution. The updated combined
+endpoint/progress suite has **86 passing tests**, with Ruff passing. This count
+is a separate run from the earlier compatibility suite described above.
+V131's102 calls, independent audit and all64 native boards are complete; the
+reviewer is waiting for V132. One separate normal-loader compatibility call is
+disclosed in the [V131 quality report](v131-endpoint-quality.md).
+[Unchanged receipts and executed per-endpoint sources](results/v131-endpoint-v1/publication.json).
 
 The queue uses 52 GiB RAM admission, 12 GiB CUDA allocation cap and 32 GiB runtime
 floor; internal free-space admission/reserve is 128/96 GiB and external read-only

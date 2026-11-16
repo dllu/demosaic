@@ -46,6 +46,55 @@ def training_ready(plan, status):
     return True
 
 
+def endpoint_ready(plan, status, arm, workers):
+    """Admit one completed, exact worker without waiting for its peer to finish."""
+    if status["plan"] != plan["training_plan"] or status["owner"] != plan["training_owner"]:
+        raise ValueError("Training controller or plan identity changed")
+    if status.get("status") == "running-explicit-raw-spatial-continuation":
+        active, owner = status["arm"], status["child"]
+        if active not in ARMS or (active in workers and workers[active] != owner):
+            raise ValueError("Training worker was replaced")
+        workers[active] = owner
+    if not live(plan["training_owner"]) and status["status"] == (
+        "completed-both-arms-quality-review-pending"
+    ):
+        training_ready(plan, status)
+        for binding in status["results"]:
+            if ref(binding["path"]) != binding:
+                raise ValueError("Completed training result changed")
+            result = read(binding["path"])
+            name = result["arm"]
+            if name not in ARMS or (name in workers and workers[name] != result["owner"]):
+                raise ValueError("Completed training worker differs")
+            workers[name] = result["owner"]
+    path = Path(plan["training_status"]).parent / f"train-{arm}-result.json"
+    if path.exists():
+        binding = ref(path)
+        result = read(path)
+        if ref(path) != binding:
+            raise ValueError("Endpoint result changed during observation")
+        if not (
+            result["status"] == "completed-raw-spatial-training-phase"
+            and result["phase"] == "train"
+            and result["arm"] == arm
+            and result["updates"] == 20000
+            and workers.get(arm) == result["owner"]
+        ):
+            raise ValueError("Endpoint does not belong to the observed complete worker")
+        if live(result["owner"]):
+            return None
+        if ref(result["checkpoint"]["path"]) != result["checkpoint"]:
+            raise ValueError("Completed endpoint checkpoint changed")
+        return binding, result
+    if status["status"].startswith("failed"):
+        raise RuntimeError("Requested endpoint did not finish; preserve available prior review")
+    if status.get("arm") in ARMS and ARMS.index(status["arm"]) > ARMS.index(arm):
+        raise RuntimeError("Training controller advanced without the declared endpoint result")
+    if not live(plan["training_owner"]):
+        raise RuntimeError("Exact training owner exited without the requested endpoint")
+    return None
+
+
 def matched_results(results):
     """Compare every training observation directly, in addition to the worker checks."""
     a, b = [results[arm] for arm in ARMS]
@@ -112,7 +161,7 @@ def attach_control(observations, execution, collection):
     return output
 
 
-def prepare(root, training_path, observations_path, zero_forward_handoff=None):
+def prepare(root, training_path, observations_path, zero_forward_handoff=None, *, as_ready=False):
     training_path, observations_path = training_path.resolve(), observations_path.resolve()
     training, previous = read(training_path), read(observations_path)
     guard(training)
@@ -120,6 +169,11 @@ def prepare(root, training_path, observations_path, zero_forward_handoff=None):
     status = read(Path(training["root"]) / "status.json")
     assert status["plan"] == ref(training_path) and live(status["owner"])
     assert not status["status"].startswith("failed")
+    workers = {}
+    if as_ready:
+        assert status["status"] == "running-explicit-raw-spatial-continuation"
+        assert status["arm"] == "V131" and live(status["child"])
+        workers["V131"] = status["child"]
     assert list(training["arms"]) == list(ARMS)
     assert training["train_updates"] == 20000
     assert training["restoration_tensors_by_arm"] == {"V131": 91, "V132": 114}
@@ -162,6 +216,8 @@ def prepare(root, training_path, observations_path, zero_forward_handoff=None):
         "training_plan": ref(training_path),
         "training_owner": status["owner"],
         "training_status": str(Path(training["root"]) / "status.json"),
+        "review_as_ready": as_ready,
+        "initial_training_workers": workers,
         "observations_plan": ref(observations_path),
         "observations": observations,
         "include_camera_jpegs": True,
@@ -200,6 +256,18 @@ def prepare(root, training_path, observations_path, zero_forward_handoff=None):
         },
         "scope": "New completed20k endpoints only, same original102 retained observations, original frozen numerical/data package. Wait for exact controller success and dead owners; verify both model/EMA/Adam/source/lineage/horizons/counts and every matched clean/noisy training hash before constructing models. Reuse V120 predictions; V132 also compares newly saved V131 endpoint predictions.204 total IEEEFP32 root/DINO calls, zero training/noise/source/RAW work. CPU metrics plus independent FFT/display/all-native-pixel audit. Both protected GFX families/ROIs/profiles/JPEGs retained; independent references not GT. Actual viewing and broad427-photo/full-resolution review remain separate.52GiB admission/12GiB CUDAcap/32GiB runtime floor; internal128/96GiB and external-readonly96/64GiB. No automatic retry, checkpoint selection or model promotion.",
     }
+    if as_ready:
+        plan["scope"] = (
+            "Review each exact completed20k worker as it becomes available. V131 may be "
+            "collected/reported while V132 trains; this first comparison is against saved V120, "
+            "not a completed architecture comparison. Before V132 inference, match every20k "
+            "clean/noisy training observation and attach the saved V131 predictions. "
+            "Worker identities are frozen/observed from the same exact controller; a replaced "
+            "worker is rejected. Preserve a completed control review if the peer later fails. "
+        ) + plan["scope"].replace(
+            "Wait for exact controller success and dead owners; verify both model/EMA/Adam/source/lineage/horizons/counts and every matched clean/noisy training hash before constructing models.",
+            "Verify each dead worker's model/EMA/Adam/source/lineage/horizon/counts before its model construction.",
+        )
     if zero_forward_handoff is not None:
         handoff = read(zero_forward_handoff)
         assert handoff["training_plan"] == ref(training_path)
@@ -286,33 +354,59 @@ def controller(path):
         save(root / "status.json", state)
 
     try:
-        record("waiting-for-exact-completed-training", child=None)
-        while not training_ready(plan, read(plan["training_status"])):
-            assert time.time() < plan["training_wait_deadline_unix"]
-            time.sleep(15)
-        guard(plan)
         training = read(plan["training_plan"]["path"])
-        completed = read(plan["training_status"])
-        results = {read(b["path"])["arm"]: read(b["path"]) for b in completed["results"]}
-        assert set(results) == set(ARMS)
-        for binding in completed["results"]:
-            assert ref(binding["path"]) == binding
-        matched_results(results)
-        for arm in ARMS:
-            result = results[arm]
-            assert not live(result["owner"])
-            assert ref(result["checkpoint"]["path"]) == result["checkpoint"]
-        save(
-            root / "matched-training.json",
-            {
-                "status": "all20000-training-observations-exact-between-arms",
-                "results": completed["results"],
-                "keys": ["step", "domain", "clean_sha256", "batch_sha256"],
-                "new_neural_forwards": 0,
-            },
-        )
+        results, bindings = {}, {}
+        workers = dict(plan.get("initial_training_workers", {}))
+        as_ready = plan.get("review_as_ready", False)
+        if not as_ready:
+            record("waiting-for-exact-completed-training", child=None)
+            while not training_ready(plan, read(plan["training_status"])):
+                assert time.time() < plan["training_wait_deadline_unix"]
+                time.sleep(15)
+            completed = read(plan["training_status"])
+            for binding in completed["results"]:
+                assert ref(binding["path"]) == binding
+                result = read(binding["path"])
+                assert not live(result["owner"])
+                assert ref(result["checkpoint"]["path"]) == result["checkpoint"]
+                results[result["arm"]], bindings[result["arm"]] = result, binding
+            matched_results(results)
+        guard(plan)
         prior_execution = prior_collection = None
         for arm in ARMS:
+            if as_ready:
+                record("waiting-for-exact-completed-endpoint", arm=arm, child=None)
+                while True:
+                    observed = read(plan["training_status"])
+                    ready = endpoint_ready(plan, observed, arm, workers)
+                    state["observed_training_workers"] = dict(workers)
+                    if ready is not None:
+                        bindings[arm], results[arm] = ready
+                        break
+                    assert time.time() < plan["training_wait_deadline_unix"]
+                    time.sleep(15)
+                save(
+                    root / f"readiness-{arm}.json",
+                    {
+                        "training_plan": plan["training_plan"],
+                        "training_result": bindings[arm],
+                        "observed_workers": workers,
+                        "observed_training_status": observed,
+                        "endpoint_owner_dead": True,
+                        "peer_training_result_available": arm == "V132",
+                    },
+                )
+            if arm == "V132":
+                matched_results(results)
+                save(
+                    root / "matched-training.json",
+                    {
+                        "status": "all20000-training-observations-exact-between-arms",
+                        "results": [bindings[name] for name in ARMS],
+                        "keys": ["step", "domain", "clean_sha256", "batch_sha256"],
+                        "new_neural_forwards_in_this_check": 0,
+                    },
+                )
             record("preparing-completed-endpoint", arm=arm, child=None)
             work = root / arm / "work"
             observations = plan["observations"]
@@ -324,7 +418,7 @@ def controller(path):
                     *[row["prediction"] for row in prior_collection["observations"]],
                 ]
             result = results[arm]
-            result_binding = next(b for b in completed["results"] if read(b["path"])["arm"] == arm)
+            result_binding = bindings[arm]
             execution = {
                 **{k: v for k, v in plan.items() if k.startswith(("launch_", "runtime_"))},
                 "root": str(root / arm),
@@ -332,6 +426,7 @@ def controller(path):
                 "step": 20000,
                 "training_horizon": 20000,
                 "completed_training_checkpoint": True,
+                "matched_training_verified": not as_ready or arm == "V132",
                 "include_camera_jpegs": plan["include_camera_jpegs"],
                 "training_source_sha256": plan["training_source_sha256"],
                 "training_result": result_binding,
@@ -420,6 +515,7 @@ if __name__ == "__main__":
     parser.add_argument("--training-plan", type=Path)
     parser.add_argument("--observations-plan", type=Path)
     parser.add_argument("--zero-forward-handoff", type=Path)
+    parser.add_argument("--as-ready", action="store_true")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -428,6 +524,7 @@ if __name__ == "__main__":
                 args.training_plan,
                 args.observations_plan,
                 args.zero_forward_handoff,
+                as_ready=args.as_ready,
             )
         )
     else:

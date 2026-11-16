@@ -1,9 +1,12 @@
-# Resume the full-model RAW-attention comparison
+# Full-model RAW-attention comparison: control complete, spatial arm training
 
 The existing V131/V132 comparison has a new, separately recorded execution.
-**V131 resumed from step14,549 on November16; V132 follows from V120 EMA.**
+**V131 completed20k on November16; V132 is training from V120 EMA.**
 The original failed controller, RAM-stop receipt, checkpoint and source remain
-intact. V120 remains the recommendation; these full endpoints are unmeasured.
+intact. V131's [targeted102-input/native review](v131-endpoint-quality.md) is
+complete: faint-ADC +0.14555 dB across four sources, with a bark regression,
+small ordinary/shadow gains and no clear new fine cab crossings. V120 remains
+the general recommendation; V132 endpoint quality is unmeasured.
 
 This addresses the broader comparison in the [weak-detail research review](weak-detail-literature-2026-11.md):
 small residual heads do not bound what a trained restoration trunk can recover.
@@ -26,8 +29,8 @@ All protected GFX captures/JPEGs/siblings remain outside training.
 
 | Arm | Preserved work | New execution |
 | --- | --- | --- |
-| V131 control |14,549 updates,448 validation forwards, all clean/noisy hashes | Resume5,451 updates,192 remaining validation forwards |
-| V132 RAW attention | Discarded16+2 CPU and16+2 CUDA checks; production unstarted | Fresh20,000 updates/640 validation forwards from V120 EMA |
+| V131 control |14,549 updates,448 validation forwards, all clean/noisy hashes | Completed remaining5,451 updates/192 validation forwards, no replay |
+| V132 RAW attention | Discarded16+2 CPU and16+2 CUDA checks | Fresh20,000-update/640-validation production running from V120 EMA |
 
 The additional branch has signed CFA differences and two window-attention blocks
 with shifted support, feeding the existing restoration trunk. Both arms train
@@ -54,8 +57,12 @@ Actual resumed training verifies all91 model tensors before its first forward,
 all89 Adam states and parameter groups on restoration, and CPU/Python/CUDA RNG
 before the first new noise draw. Step14,550 uses LR
 `2.5653477379816604e−6`, the correct position in the original20k schedule.
-The retained publication observation has completed14,724 updates; the next
-prepared input is14,725. Training remains live.
+The earlier adoption publication captured14,724 updates with input14,725 next.
+The completed control now has all20,000 Adam clocks/updates,640 validation and
+20,640 encoder calls/320,000 target contexts. Its checkpoint SHA256 is
+`4d78e6302f6e72d68acb03fe58eb7106763b8129ccb059747ef5d2cfbd3ec1e1`.
+V132 production started only after control completion and has retained its
+immutable1,000-step snapshot within the same20k worker/schedule.
 
 The complete original numerical/data package is copied byte-for-byte under the
 new `work` directory; only output run paths change in the recipes. The source
@@ -77,12 +84,14 @@ safety function accepts both run paths and rejects an outside-work path.
 [Thirteen focused state/trace/relaunch tests](../tests/test_raw_spatial_continuation.py) ·
 [Exact adoption, source, first-update and failure evidence](results/raw-spatial-continuation-v1/publication.json).
 
-The [matched endpoint detail review](raw-spatial-endpoint-review.md) is now queued
+The [matched endpoint detail review](raw-spatial-endpoint-review.md) runs per endpoint
 with exact source/state/input checks, explicit camera-JPEG cells and an independent
 CPU metric/native-pixel audit. It reuses the original102-input panel and saved
-V120 predictions, then compares V132 with the saved V131 endpoint.
+V120 predictions. V131's collection/audit/all64 native-board views are complete;
+V132 will compare with the saved V131 endpoint without another control forward.
 
-Full numerical and native review remains required after training. It must retain
+The separate broad numerical/full-frame review remains required. It must retain
 ordinary photos, faint/ADC/flat controls, at least two native noisy/restored/GT
 triplets and both protected real-photo families with accurately labeled
-independent references. This execution establishes state continuity, not quality.
+independent references. The targeted gains/costs are documented now, while the
+broader427-photo/camera/flat/full-frame review and architecture comparison remain pending.

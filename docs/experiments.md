@@ -20,7 +20,7 @@ fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 
 | Recipe | Purpose | State |
 | --- | --- | --- |
-| [Full-model RAW attention](raw-spatial-continuation.md) | Matched20k control versus added RAW spatial attention, full restoration trunk trained | Control resumed at14,549 with original source/horizon; spatial arm follows; [matched endpoint/native review queued](raw-spatial-endpoint-review.md) |
+| [Full-model RAW attention](raw-spatial-continuation.md) | Matched20k control versus added RAW spatial attention, full restoration trunk trained | V131 completes20k and [102-input/all64-native-board review](v131-endpoint-quality.md): mixed faint gains, no clear new real mesh. V132 production is training; [per-endpoint review](raw-spatial-endpoint-review.md) waits for its result |
 | [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
 | [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
 | [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |
