@@ -1,6 +1,5 @@
 """Shared, source-bound V195 preparation and resource helpers; no Torch import."""
 
-import ast
 import json
 import os
 import shutil
@@ -67,33 +66,10 @@ def dependency():
 
 
 def freeze(root, entries):
-    """Snapshot only code and its local import closure, never data or artifacts."""
-    work = root / "work"
-    shutil.copytree(
-        REPO / "src", work / "src", ignore=shutil.ignore_patterns("__pycache__", "*.pyc")
-    )
-    pending = list(entries)
-    copied = set()
-    while pending:
-        name = pending.pop()
-        if name in copied:
-            continue
-        source = REPO / "scripts" / name
-        target = work / "scripts" / name
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, target)
-        copied.add(name)
-        for node in ast.walk(ast.parse(source.read_text())):
-            names = []
-            if isinstance(node, ast.Import):
-                names = [alias.name for alias in node.names]
-            elif isinstance(node, ast.ImportFrom) and not node.level and node.module:
-                names = [node.module]
-            for imported in names:
-                candidate = imported.split(".")[0] + ".py"
-                if (REPO / "scripts" / candidate).is_file():
-                    pending.append(candidate)
-    return work, {str(p): ref(p)["sha256"] for p in work.rglob("*.py")}
+    """Compatibility wrapper for the shared source snapshot implementation."""
+    from demosaic.experiments.artifacts import freeze_sources
+
+    return freeze_sources(REPO, root, entries)
 
 
 def guard(plan, entry=None):

@@ -1,33 +1,10 @@
-"""CPU-only dependency proof for V178 GPU work; absence alone is not success."""
+"""CPU-only dependency proof for historical V178 work."""
 
-import hashlib
-import json
 from pathlib import Path
 
-import psutil
-
-
-def read(path):
-    return json.loads(Path(path).read_text())
-
-
-def ref(path):
-    path = Path(path).absolute()
-    with path.open("rb") as stream:
-        digest = hashlib.file_digest(stream, "sha256").hexdigest()
-    return {"path": str(path), "sha256": digest}
-
-
-def owner_live(owner):
-    """Transient/permission errors propagate, never turning an owner terminal."""
-    try:
-        process = psutil.Process(owner["pid"])
-        return process.create_time() == owner["created"] and process.status() not in (
-            psutil.STATUS_ZOMBIE,
-            psutil.STATUS_DEAD,
-        )
-    except psutil.NoSuchProcess:
-        return False
+from demosaic.experiments.artifacts import read_json as read
+from demosaic.experiments.artifacts import reference as ref
+from demosaic.experiments.runtime import owner_live
 
 
 def dependency_readiness(root, *, is_live=owner_live):

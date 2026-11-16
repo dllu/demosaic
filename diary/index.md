@@ -21,3 +21,5 @@ historical paths. Resolve an old diary path without editing such a receipt:
 
 For a concise view of the evidence, start with the
 [experiment index](../docs/experiments.md) rather than the chronological diary.
+
+Latest consolidation: [shared experiments and composed models](2026-11-15-22-22-09-experiment-consolidation.md), with exact V200 CUDA-prefix replay and preserved historical evidence.

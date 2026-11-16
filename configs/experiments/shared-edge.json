@@ -1,0 +1,73 @@
+{
+  "format": "cached-head-experiment-v1",
+  "name": "Shared-edge cached-head trial; trained quality unmeasured",
+  "model": {
+    "kind": "scale-supported-cfa-wave",
+    "config": {
+      "width": 16,
+      "max_search": 9.0,
+      "evidence_peaks": 4,
+      "evidence_window": 65,
+      "evidence_stride": 32,
+      "support_windows": [
+        33,
+        17
+      ],
+      "support_stride": 8
+    },
+    "initializer": {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V195-directional-response-trial-v1/artifacts/exports/response-whole-EMA-step1000.pt",
+      "sha256": "891f6ab1fd99b26db9f2cde2ca3ee2afaeae058a775a1b35365f1e96001712c6"
+    },
+    "initialization": "anchor"
+  },
+  "cache": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V202-shared-edge-data-v2/cache-result-v1.json",
+    "sha256": "7d41e3261fe4df513694f80e8ac182410444b248e790551b5b1c3247388fa567"
+  },
+  "pair_units": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V202-shared-edge-data-v2/candidate-pair-unit-table-v1.json",
+    "sha256": "37816a499e2f42ec7fdaf392b9a622c73f095be571aa2d1cf9e219d4c1fdafac"
+  },
+  "sampling_library": {
+    "path": "/home/dllu/proj/demosaic/.cache/quality-20261107/V170-nonlocal-raw-v1/compiled-deform-v1/v170_deform.so",
+    "sha256": "f78420949ac56baa709b270011f1c0e3a1ee54f684e6a4f39e616076b4397ed0"
+  },
+  "domain_weights": {
+    "mesh": 4.0,
+    "weak": 4.0,
+    "photo": 1.0,
+    "flat": 1.0,
+    "mixed": 1.0
+  },
+  "training": {
+    "steps": 1000,
+    "warmup": 50,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0
+  },
+  "runtime": {
+    "device": "cuda",
+    "seed": 202611080198,
+    "threads": 2,
+    "deterministic": true,
+    "cuda_quota_gib": 24,
+    "minimum_ram_gib": 32,
+    "minimum_disk_gib": 40
+  },
+  "evidence": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V200-scale-supported-CFA-trial-v1/plan-v1.json",
+      "sha256": "cb6292c081d9f1f2d88f3eeae6489aa02f5567896be0f079842154cb8fac455e"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V202-shared-edge-data-v2/cache-audit-v1.json",
+      "sha256": "07ce7bb07457249d4c3f35e57b1cfe53bfe256dcb38607addd1efd022b406f2b"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/quality-20261108/V202-shared-edge-data-v2/actual-viewing-v1.json",
+      "sha256": "c9e3bfb8da925df520b8fc6e253284e395906a4e93e75cff357ceba8fd44507e"
+    }
+  ]
+}

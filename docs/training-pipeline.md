@@ -1,5 +1,10 @@
 # Training data, augmentation and sampling
 
+This page describes the broad full-model data pipeline and historical frozen
+recipes. New cached-head trials use the [consolidated runner](architecture.md)
+and [current experiment recipes](experiments.md); the source reviews below do
+not imply active jobs.
+
 **Current quality recipes use native 256/B16, geometry before final downsampling,
 zero optical PSF augmentation and loading only the selected data domain.**
 Commons targets come from the completed, reviewed Quality Images corpus;
@@ -17,10 +22,10 @@ production quality is unmeasured. Existing trials retain their frozen inputs:
 
 | Trial | Commons sources / regions | Reviewed fraction within photographs |
 | --- | --- | ---: |
-| [V124/V125 mean-loss comparison](conditional-mean-training.md): control20k complete, V125 running |90,784 /20 |5% |
-| [V131/V132 spatial comparison](raw-spatial-training.md): V131 running, V132 next |90,781 /29 |50% |
-| Queued [V133 quota comparison](reviewed-quota-training.md) |90,781 /29 |5% |
-| Queued [V134/V135 cleaned data/order comparison](photo-epoch-training.md) |90,778 /33 |5%, with replacement versus epochs |
+| [V124/V125 mean-loss comparison](conditional-mean-training.md): historical control/treatment recipes |90,784 /20 |5% |
+| [V131/V132 spatial comparison](raw-spatial-training.md): historical spatial recipes |90,781 /29 |50% |
+| Prepared [V133 quota comparison](reviewed-quota-training.md) |90,781 /29 |5% |
+| Prepared [V134/V135 cleaned data/order comparison](photo-epoch-training.md) |90,778 /33 |5%, with replacement versus epochs |
 
 Corpus size is distinct from scheduled source diversity. The
 [full 20k source audit](training-source-schedule-coverage.md) finds that the spatial
