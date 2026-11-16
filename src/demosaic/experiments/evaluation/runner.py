@@ -3,6 +3,8 @@
 import numpy as np
 import torch
 
+from demosaic.prediction_archive import fingerprint
+
 from ..artifacts import checked, read_json, reference, write_json
 from ..paths import writable_output
 from .detail import DetailMetrics, summarize
@@ -25,7 +27,7 @@ def evaluate_cases(
     if not cases or len(set(ids)) != len(ids):
         raise ValueError("Evaluation needs unique nonempty case IDs")
     anchor_rows = anchor_document = None
-    anchor_values = anchor_channels = 0
+    anchor_values = anchor_channels = anchor_fingerprints = 0
     if anchor_reference is not None:
         anchor_document = read_json(checked(anchor_reference["scores"]))
         selected = [r for r in anchor_document["rows"] if r["method"] == anchor_reference["method"]]
@@ -48,22 +50,62 @@ def evaluate_cases(
             ]
             model_args = (torch.from_numpy(parent).to(device), *batch)
             delivered = (
-                model(*model_args, return_aux=True) if anchor_rows is not None else model(*model_args)
+                model(*model_args, return_aux=True)
+                if anchor_rows is not None
+                else model(*model_args)
             )
             if anchor_rows is not None:
                 delivered, aux = delivered
                 anchor = aux["anchor_output"].float().cpu().numpy()
                 actual = metric.measure(case, arrays, parent, anchor)
-                for name, expected in anchor_rows[case["id"]].items():
-                    if name == "method":
+                control_row = anchor_rows[case["id"]]
+                actual.update(index=index, values=fingerprint(anchor))
+                if "inherited_values" in control_row:
+                    # Original V200 rows also retain intermediate replay receipts.
+                    # Verify those actual tensors rather than treating them as image metrics.
+                    inherited = aux["inherited_aux"]
+                    pooled = inherited["anchor_aux"]
+                    tensors = {
+                        "inherited_values": inherited["anchor_output"],
+                        "frozen_values": pooled["frozen_output"],
+                        "V183_values": pooled["inherited_output"],
+                        "wave_correction_values": inherited["wave_correction"],
+                    }
+                    actual.update(
+                        {k: fingerprint(v.float().cpu().numpy()) for k, v in tensors.items()}
+                    )
+                    wave = inherited["wave_correction"].float().cpu().numpy()
+                    actual.update(
+                        wave_correction_RMS_DN16=float(
+                            np.sqrt(np.mean(wave.astype(np.float64) ** 2))
+                        )
+                        * 65535,
+                        ADC_exact=not inherited["matching_evaluated"],
+                        anchor_V195_EMA_replay_exact=actual["inherited_values"]
+                        == control_row["inherited_values"],
+                        V183_replay_exact=actual["V183_values"] == control_row["V183_values"],
+                        frozen_V169_replay_exact=actual["frozen_values"]
+                        == control_row["frozen_values"],
+                    )
+                for name, expected in control_row.items():
+                    if name in ("method", "prediction"):
                         continue
                     if name not in actual or actual[name] != expected:
                         raise ValueError(f"Frozen anchor scalar mismatch: {case['id']} / {name}")
                     anchor_values += isinstance(expected, (int, float))
+                anchor_fingerprints += "values" in control_row
                 retained = anchor_document["native_predictions"].get(case["id"], {})
-                if anchor_reference["method"] in retained:
-                    expected = load_native(retained[anchor_reference["method"]])
+                native_controls = (
+                    [retained[anchor_reference["method"]]]
+                    if anchor_reference["method"] in retained
+                    else []
+                )
+                if "prediction" in control_row and control_row["prediction"] not in native_controls:
+                    native_controls.append(control_row["prediction"])
+                for native in native_controls:
+                    expected = load_native(native)
                     np.testing.assert_array_equal(anchor.view(np.uint32), expected.view(np.uint32))
+                if native_controls:
                     anchor_channels += anchor.size
             value = delivered.float().cpu().numpy()
             row = metric.measure(case, arrays, parent, value)
@@ -91,6 +133,7 @@ def evaluate_cases(
             "reference": anchor_reference,
             "cases": len(anchor_rows),
             "exact_scalar_checks": anchor_values,
+            "exact_output_array_fingerprints": anchor_fingerprints,
             "exact_retained_native_RGB_channels": anchor_channels,
             "new_anchor_forwards": 0,
             "scope": "Existing complete anchor path from the same forward. Every retained control scalar and available original native array matches exactly.",

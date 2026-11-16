@@ -68,11 +68,13 @@ finds higher far-edge weak response with strong-family losses: slightly lower
 quiet error at1600, slightly higher at400. Every full-image RMS mean increases.
 These specific strengths do not establish broad weak-detail recovery.
 
-The [complementary stage](complementary-cfa-branch.md) is now training above the
+The [complementary stage](complementary-cfa-branch.md) has completed training above the
 complete frozen V200 EMA path. It adds a fresh 643-parameter head and up to eight
 nonduplicate proposals, with unchanged training observations/objective/schedule.
-Its actual quality remains unmeasured; full standard and three-noise reviews are
-queued, with exact frozen-baseline checks.
+Its actual quality remains unmeasured; the standard review is running and the
+three-noise review is queued, with exact frozen-baseline checks. A sealed
+evaluator-only repair handles legacy receipt metadata without changing training
+or numerical model code.
 
 The [seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html)
 retains raw/EMA endpoints, both protected GFX scenes, independent ISO100

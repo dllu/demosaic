@@ -75,6 +75,12 @@ checks the frozen baseline inside each actual forward. Every retained original
 scalar and available native array must match exactly before numerical completion
 is published. Both new endpoints use the same scored V200 EMA control; the
 standalone model-intervention mode still requires an unchanged initializer.
+Legacy rows include output/intermediate fingerprints and replay diagnostics;
+the verifier checks those separately from image metrics and validates every
+saved observation index. For the completed complementary run, an evaluator-only
+overlay repairs that metadata handling while retaining all original numerical
+modules and trained artifacts. The normal CLI still runs its sealed training
+snapshot; the explicit review overlay records its one replacement by hash.
 
 ## Running an experiment
 

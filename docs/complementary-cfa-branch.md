@@ -4,8 +4,8 @@ The next trial keeps the complete **V200 EMA path frozen** and learns a fresh
 643-parameter correction from additional CFA proposals. It follows the
 [measured competing-orientation tradeoff](competing-edge-response.md): higher
 weak-increment response came with lower strong response and higher full-image
-RMS in every tested condition. Training is running; no trained quality gain is
-claimed for this new stage.
+RMS in every tested condition. Training and its 1,000-row audit are complete;
+raw/EMA quality review is running. No quality gain is claimed for this new stage.
 
 This expands capacity and adds training. It is a combined stage intervention,
 with a different residual field and additional carriers, rather than an isolated
@@ -98,7 +98,11 @@ native-bin proximity is not a reconstruction bound. The training recipe was
 already frozen when this diagnostic ran; it does not change the live trial.
 [Exact selections, geometry scoring and source copies](results/complementary-preparation-v1/proposal-publication.json).
 
-## Complete quality review queued
+## Complete training and quality review
+
+All 900 new updates and 100 ADC skips completed. The complete row/Adam/EMA audit
+passes, with the frozen hash identical to admission. Final checkpoint SHA256:
+`07d6344285465f177a54b205911d0e8293e71f2fbe09e715e2b3960890a11640`.
 
 Both new raw/EMA endpoints will be compared with the **same V200 EMA control**.
 The controller binds that export's scored checkpoint, endpoint, training plan
@@ -106,7 +110,7 @@ and V195 history. Training data and other recipe settings stay fixed. This
 explicit extension mode does not relax the earlier same-initializer model-test
 mode or permit silent data changes.
 
-The standard review will cover all 822 inputs and all 60 native boards/12
+The standard review covers all 822 inputs and all 60 native boards/12
 triplets, including both protected GFX families, sky/building/foliage/chain-link,
 both cab ROIs/profiles and both JPEGs. In each actual forward it also checks
 every retained original V200 scalar and available native baseline array against
@@ -121,5 +125,19 @@ original V195-based definition. These references are explicit in the machine
 plan and paired reporter, including tests that reject the wrong zero point.
 [Actual live launch identities, exact plans and validation](results/complementary-preparation-v1/launch.json).
 
-The implementation and review boundaries pass 61 focused tests and Ruff. Actual
+Initial implementation/review validation passed 61 focused tests and Ruff. Actual
 trained strengths, error tails and native photographic quality remain unmeasured.
+
+The initial evaluator stopped before publishing any prediction because it treated
+legacy receipt fields as ordinary image metrics. Those rows also contain an
+observation index, array fingerprints, intermediate replay flags and wave RMS.
+The corrected evaluator verifies these fields explicitly, including complete
+output hashes and actual intermediate tensors. Its real cached-case preflight
+passes; it does not skip unknown scalar fields or weaken numerical tolerances.
+
+The corrected review uses the original training package with **only the evaluator
+replaced**; 147 other Python files match exactly. The trained checkpoint and
+original failed prefixes remain untouched. Its raw export is byte-identical to
+the first export. Both corrected workers are live, and validation now passes
+**64 focused tests** and Ruff. The initial launch receipt above is retained
+unchanged. [Completion, failure and recovery evidence](results/complementary-preparation-v1/training-completed-and-review-recovery.json).

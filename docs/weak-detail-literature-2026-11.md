@@ -14,8 +14,8 @@ finished matched training and raw/EMA/native evaluation: one fixed mesh improves
 its weaker orientation, with lower overall mesh response and persistent artifacts.
 Its [complete fresh-noise follow-up](competing-edge-response.md) finds higher
 far-edge weak response with strong-direction losses and mixed quiet effects.
-The [complementary-stage follow-up](complementary-cfa-branch.md) is training above
-frozen V200 EMA with extra proposals; its quality is still unmeasured.
+The [complementary-stage follow-up](complementary-cfa-branch.md) has trained above
+frozen V200 EMA with extra proposals; its quality review is running.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

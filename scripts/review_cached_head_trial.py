@@ -6,6 +6,7 @@ native viewing and any recommendation to a separate, explicit report.
 
 import argparse
 import math
+import shutil
 import subprocess
 import sys
 import time
@@ -126,9 +127,37 @@ def verify_frozen_extension(payload, baseline, control, methods):
         or set(methods) != {payload.get("method")}
         or payload.get("source_checkpoint") not in baseline["checkpoints"].values()
         or payload.get("training_plan") != baseline["plan"]
-        or (payload.get("frozen_V195_anchor") or {}).get("export") != control["model"]["initializer"]
+        or (payload.get("frozen_V195_anchor") or {}).get("export")
+        != control["model"]["initializer"]
     ):
         raise ValueError("Frozen extension must bind the exact scored V200 EMA export/history")
+
+
+def evaluation_overlay(training, root, work):
+    """Preserve every original inference module; replace only evaluation metadata checks."""
+    original = Path(training["work"]) / "src"
+    overlay = root / "evaluation-work"
+    shutil.copytree(original, overlay / "src")
+    relative = Path("demosaic/experiments/evaluation/runner.py")
+    before = reference(original / relative)
+    shutil.copyfile(work / "src" / relative, overlay / "src" / relative)
+    unchanged = 0
+    for source in original.rglob("*.py"):
+        name = source.relative_to(original)
+        if name != relative:
+            if reference(source)["sha256"] != reference(overlay / "src" / name)["sha256"]:
+                raise ValueError("Evaluation overlay changed a numerical/training module")
+            unchanged += 1
+    files = {str(p.absolute()): reference(p)["sha256"] for p in overlay.rglob("*.py")}
+    return (
+        overlay,
+        files,
+        {
+            "original_runner": before,
+            "corrected_runner": reference(overlay / "src" / relative),
+            "other_original_Python_files_exact": unchanged,
+        },
+    )
 
 
 def prepare(args):
@@ -166,7 +195,16 @@ def prepare(args):
     root = args.output.absolute()
     root.mkdir(parents=True, exist_ok=False)
     repository = Path(__file__).resolve().parents[1]
-    work, sources = freeze_sources(repository, root, [Path(__file__).name])
+    entries = [Path(__file__).name]
+    if args.repair_evaluation_runner:
+        if not args.frozen_baseline_extension:
+            raise ValueError("Evaluator overlay requires the explicit frozen-baseline extension")
+        entries.append("evaluate_component_snapshot.py")
+    work, sources = freeze_sources(repository, root, entries)
+    overlay = repair = None
+    if args.repair_evaluation_runner:
+        overlay, files, repair = evaluation_overlay(training, root, work)
+        sources.update(files)
     plan = {
         "run": str(run),
         "label": args.label,
@@ -175,6 +213,8 @@ def prepare(args):
         else "shared-edge",
         "model_intervention": args.model_intervention,
         "frozen_baseline_extension": args.frozen_baseline_extension,
+        "evaluation_work": str(overlay) if overlay else None,
+        "evaluation_repair": repair,
         "training": reference(run / "plan.json"),
         "training_owner": owner,
         "root": str(root),
@@ -211,10 +251,16 @@ def run_child(plan, stage, arguments):
     training = read_json(checked(plan["training"]))
     # Run the original training snapshot's package, even after workspace edits.
     command = [sys.executable, "-m", "demosaic.experiments", *arguments]
+    environment = snapshot_environment(training)
+    if stage.startswith("evaluate-") and plan.get("evaluation_work"):
+        command = [
+            sys.executable,
+            str(Path(plan["work"]) / "scripts/evaluate_component_snapshot.py"),
+            *arguments[1:],
+        ]
+        environment = snapshot_environment(dict(training, work=plan["evaluation_work"]))
     with (root / f"{stage}.log").open("xb") as log:
-        child = subprocess.Popen(
-            command, env=snapshot_environment(training), stdout=log, stderr=subprocess.STDOUT
-        )
+        child = subprocess.Popen(command, env=environment, stdout=log, stderr=subprocess.STDOUT)
         import psutil
 
         identity = {"pid": child.pid, "created": psutil.Process(child.pid).create_time()}
@@ -497,6 +543,11 @@ def main():
         help="Bind a complementary head to the exact scored V200EMA and replay all anchor controls",
     )
     prep.add_argument("--label", default="Shared-edge")
+    prep.add_argument(
+        "--repair-evaluation-runner",
+        action="store_true",
+        help="Seal an evaluator-only overlay while keeping every original numerical module and trained artifact",
+    )
     worker = sub.add_parser("run")
     worker.add_argument("root", type=Path)
     launch = sub.add_parser("launch")

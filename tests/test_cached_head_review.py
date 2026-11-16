@@ -3,7 +3,29 @@
 import copy
 
 import pytest
-from review_cached_head_trial import paired_comparison, recipe_changes, verify_frozen_extension
+from review_cached_head_trial import (
+    evaluation_overlay,
+    paired_comparison,
+    recipe_changes,
+    verify_frozen_extension,
+)
+
+
+def test_evaluator_overlay_keeps_original_numerical_modules_even_when_checkout_differs(tmp_path):
+    original, current, review = [tmp_path / name for name in ["training", "current", "review"]]
+    relative = "src/demosaic/experiments/evaluation/runner.py"
+    for root in [original, current]:
+        (root / relative).parent.mkdir(parents=True)
+    (original / relative).write_text("OLD_EVALUATOR = True\n")
+    (current / relative).write_text("CORRECTED_METADATA = True\n")
+    (original / "src/kernel.py").write_text("ORIGINAL_NUMERICS = True\n")
+    (current / "src/kernel.py").write_text("UNRELATED_NEW_NUMERICS = True\n")
+    review.mkdir()
+    overlay, files, receipt = evaluation_overlay({"work": str(original)}, review, current)
+    assert (overlay / relative).read_bytes() == (current / relative).read_bytes()
+    assert (overlay / "src/kernel.py").read_bytes() == (original / "src/kernel.py").read_bytes()
+    assert (original / relative).read_text() == "OLD_EVALUATOR = True\n"
+    assert receipt["other_original_Python_files_exact"] == 1 and len(files) == 2
 
 
 def test_frozen_extension_keeps_data_fixed_and_requires_the_scored_export_history():

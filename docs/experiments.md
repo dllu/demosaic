@@ -24,7 +24,7 @@ fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 | [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
 | [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |
 | [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates audited; both 822-input endpoints/all60 native boards and [all three fresh-noise panels](competing-edge-response.md) reviewed |
-| [Complementary CFA branch](../configs/experiments/complementary.json) | Freeze complete V200 EMA; add a new head/nonduplicate proposals on its residual | Training live; full standard/native and three-noise reviews queued; [admission/proposal evidence](complementary-cfa-branch.md) |
+| [Complementary CFA branch](../configs/experiments/complementary.json) | Freeze complete V200 EMA; add a new head/nonduplicate proposals on its residual | 900 updates complete/audited; standard/native review running, three-noise review queued; [admission/proposal/recovery evidence](complementary-cfa-branch.md) |
 
 Training recipes bind existing inputs and evidence by checksum. They are local
 artifact recipes; the referenced caches/operator/checkpoints must be present.
