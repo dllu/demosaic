@@ -46,6 +46,9 @@ finds a small conditional gain at the clearest prior: far-edge weak response
 8.14%→9.43%, with strong response retained and slightly lower quiet error.
 A [coverage/response diagnostic](docs/complementary-coverage-quality.md) finds
 low weak response even when a nearby carrier is present.
+A [fixed-wave GT oracle](docs/measured-wave-oracle.md) raises response to 19.39%,
+but quiet error worsens on 56/64 views and weak-increment error on 46/64;
+target access does not supply a deployable detail improvement.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a

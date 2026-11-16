@@ -1,0 +1,669 @@
+{
+  "figures": [
+    {
+      "source": 0,
+      "index": 8,
+      "original_learned_triplet": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/docs/images/complementary-edge-response-v1/iso400-source0-far-triplet.png",
+          "sha256": "48afa3b902af695f318c3ccb93dac8d8a27c0ceb247c4631dd80a2f1100652a4"
+        },
+        "source": {
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-edge-response-iso400-v1/cache/inputs-0008.npz",
+            "sha256": "fd3509f1236f12b13d29509252c976d1791e29ce0108b109fc007b9907ddc3dd"
+          },
+          "metadata": {
+            "recipe": {
+              "source": 0,
+              "seed": 202611160500,
+              "size": 512,
+              "level": 0.027726535578793877,
+              "bright_level": 0.17192814707531526,
+              "edge_angle": 1.8622966536107284,
+              "edge_jitter": 6.204533769167806,
+              "wire_angles": [
+                0.6129464243967613,
+                1.818218530277174
+              ],
+              "periods": [
+                8.880476135400876,
+                19.42924049878081
+              ],
+              "widths": [
+                0.5798278028473207,
+                0.5743618099191692
+              ],
+              "phases": [
+                0.43325865157662147,
+                0.7903916052734716
+              ],
+              "amplitude": 0.0023167355714507347,
+              "weak_fraction": 0.5,
+              "mask_radii": [
+                117.76,
+                148.48
+              ],
+              "camera_seed": 202611161500,
+              "optical_blur": 0.0,
+              "area_reduction": 2
+            },
+            "placement": "far",
+            "pattern": "RGGB",
+            "repeat": 0,
+            "identities": [
+              "edge-response:0:far:0:role0",
+              "edge-response:0:far:0:role1",
+              "edge-response:0:far:0:role2"
+            ],
+            "roles": [
+              "background",
+              "one-direction",
+              "two-directions"
+            ],
+            "noise": {
+              "name": "iso400-prior",
+              "shot": 8e-05,
+              "read": 2.56e-08,
+              "exposure": 1.0
+            },
+            "noise_coupling": "none: distinct role/repeat keys"
+          },
+          "role": "two-directions",
+          "context": [
+            512,
+            512
+          ]
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/complementary-review-corrected-v1/candidate-ema.pt",
+          "sha256": "0d87687b7224d40c7d0de998efc1aafc3f4a3016fe77b9d1dc91666007a3083b"
+        },
+        "noise_conditioning": {
+          "name": "iso400-prior",
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "exposure": 1.0,
+          "pattern": "RGGB",
+          "black_level": 0.03,
+          "ADC_bits": 16
+        },
+        "display_exposure": 2.0,
+        "display_contrast": 1,
+        "wb": [
+          [
+            1.9010502099990845,
+            1.0,
+            2.111267328262329
+          ]
+        ],
+        "matrix": [
+          [
+            [
+              1.1307986974716187,
+              0.0005442611873149872,
+              -0.1313430517911911
+            ],
+            [
+              0.0007818813901394606,
+              1.0516905784606934,
+              -0.05247240886092186
+            ],
+            [
+              -0.09831522405147552,
+              -0.13364094495773315,
+              1.231956124305725
+            ]
+          ]
+        ],
+        "reference_kind": "exact-GT",
+        "columns": [
+          "noisy",
+          "restored",
+          "exact-GT"
+        ],
+        "cell_pixels_wh": [
+          160,
+          160
+        ],
+        "resized": false
+      },
+      "main": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source0-comparison.png",
+          "sha256": "de13903e3f18e35fbd1e63e1ef77dfbc606e3a6c21cedc638d543593dccccd54"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V200 EMA",
+            "xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Complementary EMA",
+            "xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT oracle: bounded",
+            "xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "no_resize": true,
+        "original_image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source0-comparison.png",
+          "sha256": "de13903e3f18e35fbd1e63e1ef77dfbc606e3a6c21cedc638d543593dccccd54"
+        }
+      },
+      "relaxations": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source0-relaxations.png",
+          "sha256": "cc51bd8ff1cb0f69997ba6fb414463b8b06617675c7d9bc370ea6bab1b913c3a"
+        },
+        "panels": [
+          {
+            "label": "GT oracle: bounded",
+            "xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT oracle: unbounded",
+            "xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT oracle: phase-free",
+            "xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "no_resize": true,
+        "original_image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source0-relaxations.png",
+          "sha256": "cc51bd8ff1cb0f69997ba6fb414463b8b06617675c7d9bc370ea6bab1b913c3a"
+        }
+      },
+      "triplets": [
+        {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source0-learned-triplet.png",
+            "sha256": "48afa3b902af695f318c3ccb93dac8d8a27c0ceb247c4631dd80a2f1100652a4"
+          },
+          "columns": [
+            "noisy",
+            "Complementary EMA",
+            "exact constructed GT"
+          ],
+          "no_resize": true,
+          "original_image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source0-learned-triplet.png",
+            "sha256": "48afa3b902af695f318c3ccb93dac8d8a27c0ceb247c4631dd80a2f1100652a4"
+          }
+        },
+        {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source0-GT-oracle-triplet.png",
+            "sha256": "49100218d393f72262fd205b8982e66049c47ff630d041d70fe509bd4ed546da"
+          },
+          "columns": [
+            "noisy",
+            "oracle-real-bounded",
+            "exact constructed GT"
+          ],
+          "no_resize": true,
+          "original_image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source0-GT-oracle-triplet.png",
+            "sha256": "49100218d393f72262fd205b8982e66049c47ff630d041d70fe509bd4ed546da"
+          }
+        }
+      ],
+      "GT_oracle_uses_target_for_fitting": true,
+      "target_used_for_inference": false,
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "wb": [
+        [
+          1.9010502099990845,
+          1.0,
+          2.111267328262329
+        ]
+      ],
+      "matrix": [
+        [
+          [
+            1.1307986974716187,
+            0.0005442611873149872,
+            -0.1313430517911911
+          ],
+          [
+            0.0007818813901394606,
+            1.0516905784606934,
+            -0.05247240886092186
+          ],
+          [
+            -0.09831522405147552,
+            -0.13364094495773315,
+            1.231956124305725
+          ]
+        ]
+      ],
+      "noise_conditioning": {
+        "name": "iso400-prior",
+        "shot": 8e-05,
+        "read": 2.56e-08,
+        "exposure": 1.0,
+        "pattern": "RGGB",
+        "black_level": 0.03,
+        "ADC_bits": 16
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/complementary-review-corrected-v1/candidate-ema.pt",
+        "sha256": "0d87687b7224d40c7d0de998efc1aafc3f4a3016fe77b9d1dc91666007a3083b"
+      }
+    },
+    {
+      "source": 1,
+      "index": 24,
+      "original_learned_triplet": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/docs/images/complementary-edge-response-v1/iso400-source1-far-triplet.png",
+          "sha256": "ae48ddcbfe6196b20e92ea05729eaeb3b0bda56765c1861ba2f655b02e2032ec"
+        },
+        "source": {
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-edge-response-iso400-v1/cache/inputs-0024.npz",
+            "sha256": "0adca13c0a94604db0203c6fa22fa99d01af02760d417abacd0a93773832764a"
+          },
+          "metadata": {
+            "recipe": {
+              "source": 1,
+              "seed": 202611160500,
+              "size": 512,
+              "level": 0.02750941988633438,
+              "bright_level": 0.2805735184976315,
+              "edge_angle": 1.4201298873963588,
+              "edge_jitter": 5.341925642278596,
+              "wire_angles": [
+                0.7468783484108659,
+                1.8217278482894979
+              ],
+              "periods": [
+                7.892034785528155,
+                12.409958383982552
+              ],
+              "widths": [
+                0.4515741919432789,
+                0.5290119769346141
+              ],
+              "phases": [
+                0.03705857795291234,
+                0.31221039988481125
+              ],
+              "amplitude": 0.00282511365377502,
+              "weak_fraction": 0.5,
+              "mask_radii": [
+                117.76,
+                148.48
+              ],
+              "camera_seed": 202611161501,
+              "optical_blur": 0.0,
+              "area_reduction": 2
+            },
+            "placement": "far",
+            "pattern": "RGGB",
+            "repeat": 0,
+            "identities": [
+              "edge-response:1:far:0:role0",
+              "edge-response:1:far:0:role1",
+              "edge-response:1:far:0:role2"
+            ],
+            "roles": [
+              "background",
+              "one-direction",
+              "two-directions"
+            ],
+            "noise": {
+              "name": "iso400-prior",
+              "shot": 8e-05,
+              "read": 2.56e-08,
+              "exposure": 1.0
+            },
+            "noise_coupling": "none: distinct role/repeat keys"
+          },
+          "role": "two-directions",
+          "context": [
+            512,
+            512
+          ]
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/complementary-review-corrected-v1/candidate-ema.pt",
+          "sha256": "0d87687b7224d40c7d0de998efc1aafc3f4a3016fe77b9d1dc91666007a3083b"
+        },
+        "noise_conditioning": {
+          "name": "iso400-prior",
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "exposure": 1.0,
+          "pattern": "RGGB",
+          "black_level": 0.03,
+          "ADC_bits": 16
+        },
+        "display_exposure": 2.0,
+        "display_contrast": 1,
+        "wb": [
+          [
+            1.5534642934799194,
+            1.0,
+            1.6997519731521606
+          ]
+        ],
+        "matrix": [
+          [
+            [
+              1.0998371839523315,
+              -0.0683525949716568,
+              -0.03148448467254639
+            ],
+            [
+              -0.03423410281538963,
+              1.8058098554611206,
+              -0.7715757489204407
+            ],
+            [
+              -0.04522598534822464,
+              -0.6578882336616516,
+              1.7031141519546509
+            ]
+          ]
+        ],
+        "reference_kind": "exact-GT",
+        "columns": [
+          "noisy",
+          "restored",
+          "exact-GT"
+        ],
+        "cell_pixels_wh": [
+          160,
+          160
+        ],
+        "resized": false
+      },
+      "main": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source1-comparison.png",
+          "sha256": "9e044cc2f4b75273c95f43466ba368931962f00ff49152750b475358a3a4e678"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V200 EMA",
+            "xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Complementary EMA",
+            "xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT oracle: bounded",
+            "xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "no_resize": true,
+        "original_image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source1-comparison.png",
+          "sha256": "9e044cc2f4b75273c95f43466ba368931962f00ff49152750b475358a3a4e678"
+        }
+      },
+      "relaxations": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source1-relaxations.png",
+          "sha256": "cb8b7295cf085c4b92ed3a1b1254112c93798ac6e31c76fa06ed993ba46c3649"
+        },
+        "panels": [
+          {
+            "label": "GT oracle: bounded",
+            "xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT oracle: unbounded",
+            "xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "GT oracle: phase-free",
+            "xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "no_resize": true,
+        "original_image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source1-relaxations.png",
+          "sha256": "cb8b7295cf085c4b92ed3a1b1254112c93798ac6e31c76fa06ed993ba46c3649"
+        }
+      },
+      "triplets": [
+        {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source1-learned-triplet.png",
+            "sha256": "ae48ddcbfe6196b20e92ea05729eaeb3b0bda56765c1861ba2f655b02e2032ec"
+          },
+          "columns": [
+            "noisy",
+            "Complementary EMA",
+            "exact constructed GT"
+          ],
+          "no_resize": true,
+          "original_image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source1-learned-triplet.png",
+            "sha256": "ae48ddcbfe6196b20e92ea05729eaeb3b0bda56765c1861ba2f655b02e2032ec"
+          }
+        },
+        {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/source1-GT-oracle-triplet.png",
+            "sha256": "ea87f38da5ea9c0b8afcced51afbb27266b0647dbfb74e9f2cc0664a8f31847b"
+          },
+          "columns": [
+            "noisy",
+            "oracle-real-bounded",
+            "exact constructed GT"
+          ],
+          "no_resize": true,
+          "original_image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/report-v2/source1-GT-oracle-triplet.png",
+            "sha256": "ea87f38da5ea9c0b8afcced51afbb27266b0647dbfb74e9f2cc0664a8f31847b"
+          }
+        }
+      ],
+      "GT_oracle_uses_target_for_fitting": true,
+      "target_used_for_inference": false,
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "wb": [
+        [
+          1.5534642934799194,
+          1.0,
+          1.6997519731521606
+        ]
+      ],
+      "matrix": [
+        [
+          [
+            1.0998371839523315,
+            -0.0683525949716568,
+            -0.03148448467254639
+          ],
+          [
+            -0.03423410281538963,
+            1.8058098554611206,
+            -0.7715757489204407
+          ],
+          [
+            -0.04522598534822464,
+            -0.6578882336616516,
+            1.7031141519546509
+          ]
+        ]
+      ],
+      "noise_conditioning": {
+        "name": "iso400-prior",
+        "shot": 8e-05,
+        "read": 2.56e-08,
+        "exposure": 1.0,
+        "pattern": "RGGB",
+        "black_level": 0.03,
+        "ADC_bits": 16
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/complementary-review-corrected-v1/candidate-ema.pt",
+        "sha256": "0d87687b7224d40c7d0de998efc1aafc3f4a3016fe77b9d1dc91666007a3083b"
+      }
+    }
+  ],
+  "plot": {
+    "path": "/home/dllu/proj/demosaic/docs/images/measured-wave-oracle-v1/oracle-response-and-error.png",
+    "sha256": "c6a78a03260cbf7aaec4d07a1009b2416b3be13f3bc3f1a792c9efa94e0d9af4"
+  },
+  "script": {
+    "path": "/home/dllu/proj/demosaic/scripts/report_measured_wave_fit.py",
+    "sha256": "c7849f151520c01d4dcda4d116f17d3dfae4865091f073ee89a3d96c1f5ee518"
+  },
+  "actual_viewing_pending": false,
+  "new_neural_forwards": 0,
+  "scope": "Two original fixed source0/source1 far/RGGB/repeat0 native160 ROIs, no resizing. Original learned/noisy/GT pixels verified against prior published strips. Target-assisted oracles are explicitly labeled and are not inference models.",
+  "viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/measured-wave-oracle-v1/viewing.json",
+    "sha256": "a75e7b18069f7de81910c72cc1deda787ba999577b07402d880f8691a4d4a01d"
+  }
+}

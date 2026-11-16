@@ -10,8 +10,12 @@ V200 path with little added fixed-mesh detail and slightly higher quiet/flat err
 its [fresh-noise review](complementary-edge-response.md) retains a small lower-noise
 weak-response gain. A [closed coverage/response join](complementary-coverage-quality.md)
 finds that most added response comes from newly covered views, but close
-carriers still leave most of the weaker increment missing. This motivates
-checking physical fits and learned attenuation with carriers held fixed.
+carriers still leave most of the weaker increment missing. The subsequent
+[fixed-wave GT oracle](measured-wave-oracle.md) reaches 19.39% weak response,
+versus 9.43% learned, with quiet/increment errors increasing on 56/64 and 46/64
+views. Unbounded/phase-free fits add little. Target-assisted global fits reveal
+some synthesis headroom while retaining the false-detail tradeoff; they do not
+bound the shared spatial network or establish an inference improvement.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes its control: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

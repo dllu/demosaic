@@ -29,6 +29,10 @@ V132 production is training.
 Latest matched progress: [V1321k attention review](2026-11-16-08-22-36-v132-progress1000-review.md),
 small faint gain versus V1311k, still below V120; no clear new real mesh crossings.
 
+Latest fixed-basis diagnostic: [target-assisted measured-wave fits](2026-11-16-08-49-09-measured-wave-oracle.md),
+weak response 9.43%→19.39%, with quiet/increment errors worsening on most views;
+an oracle result, not an inference improvement.
+
 Latest consolidation: [shared experiments and composed models](2026-11-15-22-22-09-experiment-consolidation.md), with exact V200 CUDA-prefix replay and preserved historical evidence.
 
 Latest research: [weak-detail literature review and reconstruction ideas](2026-11-15-23-04-10-weak-detail-literature.md), documenting proposals without implementation.

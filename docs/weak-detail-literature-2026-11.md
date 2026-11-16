@@ -22,6 +22,11 @@ lower-noise weak-response gain with mean strong response retained. The
 [coverage-to-response follow-up](complementary-coverage-quality.md) verifies all
 closed carrier choices on CUDA and finds substantial attenuation among close-
 carrier views; global proximity alone is not a reconstruction bound.
+The [fixed measured-wave GT fit](measured-wave-oracle.md) doubles the additional
+bank's global-fit weak response to 19.39%, but quiet error worsens on 56/64 views
+and weak-increment error on 46/64. Removing the gain box or permitting phase
+rotation adds little. This is target-assisted diagnostic evidence, not an
+inference gain or a spatial-head capacity bound; localized discrimination remains unresolved.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

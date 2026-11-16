@@ -71,6 +71,14 @@ the failure. A useful next diagnostic would compare the same measured basis's
 known-target fit against its learned correction, with explicit oracle labeling;
 the target must never enter an inference proposal or confidence score.
 
+That [fixed-basis GT diagnostic is now complete](measured-wave-oracle.md) for all
+64 far/400 views. Bounded constant gains on the additional bank raise weak
+response from 9.43% to 19.39%, while quiet error increases on 56/64 views and
+weak-increment error on 46/64. Removing amplitude bounds or allowing phase
+rotation adds little. These target-assisted global fits show some available
+synthesis capacity, with persistent error costs; they do not bound the spatial
+head or establish a deployable improvement.
+
 ## The native views remain the same
 
 Noisy Malvar → **complementary EMA** → exact constructed GT, source0/source1
