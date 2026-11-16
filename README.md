@@ -13,6 +13,9 @@ The latest detail experiments retain useful tradeoffs: **V198 EMA reaches
 11.158% of constructed-GT mesh amplitude**, with stronger real cab modulation,
 but introduces green/magenta building fringes and false texture. V200 slightly
 improves quiet/flat error while reducing mesh response to 11.102% of GT.
+The [shared-edge training comparison](docs/shared-edge-comparison.md) adds small
+quiet/flat gains but lowers EMA mesh response to 10.874%; the same fringes and
+incomplete crossings persist.
 V187 is quieter and V195 avoids those new building color failures in the
 reviewed views. [Complete comparison](docs/scale-supported-cfa-wave-comparison.md) ·
 [Seven-state native viewer](docs/images/v200-scale-supported-cfa-wave-v1/native-viewer.html).
@@ -20,7 +23,7 @@ Broad state-of-the-art quality and 100MP within 10 seconds remain goals.
 
 [Weak-detail literature review and proposed experiments](docs/weak-detail-literature-2026-11.md)
 examines the fence/flat-region tradeoff and recent methods. The first proposed
-shared-edge trial has completed training; [quality review is running](docs/experiments.md).
+shared-edge trial and its [full quality review are complete](docs/shared-edge-comparison.md).
 The [first withheld-CFA diagnostic](docs/withheld-cfa-evidence.md) shows why
 independent sample agreement still needs an adequate edge/background model.
 Its [geometry refinement](docs/withheld-cfa-edge-refinement.md) improves the
@@ -64,8 +67,7 @@ uv run demosaic-experiment inspect .cache/experiments/shared-edge
 PYTHONPATH=.:src:scripts uv run pytest -q
 ```
 
-The shared-edge cache and matched training are complete; its raw/EMA quality
-review is running.
+The shared-edge cache, matched training and raw/EMA quality review are complete.
 Preparation does not launch training. Training data comes from freely licensed
 photos and procedural targets, with geometry before downsampling and zero
 optical blur in the current recipes. [Data pipeline](docs/training-pipeline.md).
@@ -83,12 +85,12 @@ V120 checkpoint SHA256 `a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aa
 
 ![Fur: noisy, V120, exact synthetic GT](docs/images/v120-v121-primary-v1/crop-881399e7a68af49a.png)
 
-The latest experiment's [cab detail](docs/images/v200-scale-supported-cfa-wave-v1/readme-cab-v1.png)
-and [building color failure](docs/images/v200-scale-supported-cfa-wave-v1/readme-building-v1.png)
-are noisy → V200 EMA → independent ISO100/AHD reference. They remain native160
+The latest experiment's [cab detail](docs/images/shared-edge-v1/readme-cab.png)
+and [building color failure](docs/images/shared-edge-v1/readme-building.png)
+are noisy → shared-edge EMA → independent ISO100/AHD reference. They remain native160
 pixels with matched coordinates/transforms; the separate real captures differ
 in aperture, exposure and motion and are **not exact GT**.
-[Complete source, checkpoint and display provenance](docs/results/v200-scale-supported-cfa-wave-v1/representative-figures-v1.json).
+[Complete source, checkpoint and display provenance](docs/results/shared-edge-v1/representative-real.json).
 
 [Documentation](docs/index.md) · [Experiment history](docs/history/experiments-through-v200.md) ·
 [Diary](diary/index.md) · [Storage](docs/storage.md).

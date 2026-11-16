@@ -1,10 +1,11 @@
 # Current experiments
 
 **The matched shared-edge trial completed all 900 updates and 100 ADC skips
-(November 16); quality review is running.** All 1,000 committed rows passed the
-checkpoint/Adam/frozen-state audit. The raw endpoint completed all 822 existing
-inputs; EMA evaluation is running. The controller then retains all 60 native
-boards/triplets with the original coordinates and display choices for inspection.
+(November 16), and its full quality review is complete.** All 1,000 committed
+rows passed the checkpoint/Adam/frozen-state audit. Both endpoints completed all
+822 existing inputs; all 60 native boards/12 triplets were actually inspected.
+The result has small quiet/flat gains, lower mesh response and persistent real
+fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 [Training completion](results/shared-edge-training-completed-v1.json) ·
 [Launch observation](results/shared-edge-launch-v1.json) ·
 [Current model choices](current-model.md).
@@ -12,7 +13,7 @@ boards/triplets with the original coordinates and display choices for inspection
 | Recipe | Purpose | State |
 | --- | --- | --- |
 | [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
-| [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training complete in `.cache/experiments/shared-edge`; raw complete/EMA evaluating in `.cache/experiments/shared-edge-review`; native inspection pending |
+| [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
 
 Both recipes bind existing inputs and evidence by checksum. They are local
 artifact recipes; the referenced caches/operator/checkpoints must be present.

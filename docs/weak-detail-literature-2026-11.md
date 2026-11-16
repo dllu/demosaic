@@ -4,7 +4,7 @@ Literature and project review, **2026-11-15, America/Los_Angeles**.
 This is a research note: proposals below are unimplemented and unmeasured.
 
 Implementation follow-up, November 16: the first shared-edge trial is
-[finished training with matched review running](experiments.md), and the
+[finished training and matched native review](shared-edge-comparison.md), and the
 [first analytic withheld-CFA/edge diagnostic](withheld-cfa-evidence.md) has
 completed, followed by a [geometry-refinement comparison](withheld-cfa-edge-refinement.md).
 The review and

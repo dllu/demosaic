@@ -8,8 +8,8 @@ its represented edge family. Slight geometry mismatch leaves large false
 corrections. This is a diagnostic result, not a new demosaicing model or an
 explanation proven for V200's building fringes.
 
-The separate [shared-edge neural trial](experiments.md) has completed training and
-its quality review is running;
+The separate [shared-edge neural trial](shared-edge-comparison.md) has completed
+training and quality review;
 this diagnostic changes neither its frozen sources nor its review.
 
 ## Measured tradeoff

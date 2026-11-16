@@ -1,8 +1,8 @@
 # Current model choices
 
-**V120 Small remains the general recommendation.** The consolidation changes
-software organization and experiment execution; it changes no trained weights
-or measured quality ranking. [Architecture and commands](architecture.md).
+**V120 Small remains the general recommendation.** The latest shared-edge head
+has small quiet gains with lower mesh response; the analytic edge-refinement
+result is restricted synthetic evidence. [Architecture and commands](architecture.md).
 
 | Choice | Useful strength | Remaining weakness |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ or measured quality ranking. [Architecture and commands](architecture.md).
 | [V195 response pressure](directional-response-comparison.md) | 5.575% GT mesh response; stronger than V187 in that comparison | Quiet RMS +0.334–0.376%; fine crossings unresolved |
 | [V198 CFA innovation](cfa-innovation-wave-comparison.md) | 11.158% GT mesh amplitude; stronger colored synthetic and real cab modulation | New green/magenta building fringes; quiet RMS +1.151–1.648% versus V195 |
 | [V200 cross-scale support](scale-supported-cfa-wave-comparison.md) | Quiet RMS −0.059–0.119% and fresh-flat RMS −0.022–0.030% versus V198 | Mesh response falls to 11.102% GT; building fringes, ripples and incomplete crossings persist |
+| [Shared-edge training](shared-edge-comparison.md) | EMA quiet RMS −0.051–0.076% and cached fresh-flat RMS −0.036–0.045% versus V200 | Mesh response falls to 10.874%; present-mesh error rises; fringes/ripples/incomplete crossings persist |
 
 V198/V200 do not combine strong fine-detail recovery with clean quiet fields.
 These are bounded experiment results, not a broad ranking against V120. Mesh
@@ -40,11 +41,13 @@ RAW inputs; their component exports alone are not full-frame parent models.
 ## Current research and evidence
 
 The [shared-edge cache](paired-training-coverage.md) is completed and audited:
-156 changed rows and 844 exact adoptions. Its [matched training is complete;
-quality review is running](experiments.md).
-No shared-edge model-quality result
-has been measured. The new [configured runner](experiments.md) is ready for that
-trial, with the same V200 architecture and loss recipe.
+156 changed rows and 844 exact adoptions. Its [matched training and complete
+raw/EMA review](shared-edge-comparison.md) measure a quieter, weaker-response
+operating point. The [configured runner](experiments.md) retains the same V200
+architecture/loss recipe and all experiment evidence. The separate
+[analytic edge-refinement comparison](withheld-cfa-edge-refinement.md) improves
+restricted synthetic weak-direction/false-error tradeoffs; it is not a neural
+camera recommendation.
 
 The [seven-state native viewer](images/v200-scale-supported-cfa-wave-v1/native-viewer.html)
 retains raw/EMA endpoints, both protected GFX scenes, independent ISO100

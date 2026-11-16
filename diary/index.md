@@ -31,3 +31,5 @@ Latest experiment: [matched shared-edge trial launched](2026-11-16-01-38-52-shar
 Latest diagnostic: [withheld CFA evidence and predictable edge leakage](2026-11-16-01-46-42-withheld-cfa-edge-diagnostic.md).
 
 Latest follow-up: [edge refinement and completed shared-edge training](2026-11-16-02-02-45-edge-refinement-and-training.md); EMA/native quality review pending.
+
+Latest quality result: [shared-edge raw/EMA review](2026-11-16-02-16-07-shared-edge-quality.md); small quiet gains, weaker mesh response and persistent artifacts.

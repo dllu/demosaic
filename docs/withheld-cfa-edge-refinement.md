@@ -9,8 +9,8 @@ from **65.01 to 27.71 DN16 RMS**. These are restricted procedural results, not
 an improved neural demosaicing checkpoint or validated camera confidence.
 
 The shared-edge neural trial separately completed **900 updates/100 ADC skips**.
-Its raw endpoint is slightly quieter but attenuates mesh more than V200 raw;
-EMA and native review are still running. [Current execution](experiments.md).
+Both endpoints are slightly quieter but attenuate mesh more than matching V200
+states; native color/detail failures persist. [Full neural comparison](shared-edge-comparison.md).
 
 ## Controlled comparison
 
@@ -109,8 +109,9 @@ safe replacement for the real-camera detail head.
 
 The next useful diagnostic should add finite/local support and richer competing
 edges while retaining these absent controls and separate weaker-direction
-error. The neural shared-edge comparison should finish before selecting a new
-architecture. Protected GFX images, originals and existing receipts are intact.
+error. The completed neural comparison establishes no decisive weak-detail gain;
+fresh-noise near-edge response remains unmeasured. Protected GFX images,
+originals and existing receipts are intact.
 
 [Comparison and paired intervals](results/withheld-cfa-edge-refinement-v1/comparison.json) ·
 [Exact compressed fit records/code archives](results/withheld-cfa-edge-refinement-v1/publication.json).

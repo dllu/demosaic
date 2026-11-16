@@ -9,6 +9,10 @@ Then the pair difference targets the weak increment while full-image and quiet
 losses still constrain the common scene. This is a training-data hypothesis,
 not a demonstrated image-quality gain.
 
+November 16 follow-up: the [matched shared-edge trial and full native review](shared-edge-comparison.md)
+are complete. They measure small quiet gains, lower mesh response and persistent
+fringes/incomplete crossings; the original coverage audit below is unchanged.
+
 This CPU metadata audit checks all **1,000 saved rows** against the completed
 V200 training trace: **900 updates, 100 ADC skips and 3,600 noisy images**.
 It reads no image arrays, original photos, noise samples or models and imports
