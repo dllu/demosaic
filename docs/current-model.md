@@ -106,6 +106,13 @@ It reaches 19.16% at equal measured quiet RMS in a separate
 diagnostic. Uniform refitting changes little, and the weighted
 ISO6400 near and real cab results remain limited.
 
+The [fresh refit panel](fresh-phase-refit.md) confirms the ISO400 far
+gain on eight new geometries with accurately measured guides. Frozen
+settings give 20.94% fold-average and 23.66% weighted response at
+virtually the same quiet RMS. Both exceed the intended absolute quiet
+budget. The ISO6400 gain is limited and the camera comparison uses
+the same reviewed refits.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

@@ -57,6 +57,10 @@ has repeatedly come with extra flat-region error or false color. The
    positive pooled support improves ISO400 far response and increment
    error. The gain survives a descriptive matched-quiet check in all
    eight retained geometries. [RAW refit test](phase-refit-delivery.md).
+   The gain repeats for all eight fresh ISO400 far geometries with
+   accurate guides and settings frozen on development. Absolute quiet
+   error exceeds the development budget, and tight ISO6400 shows little
+   or worse weak response. [Fresh-geometry refit test](fresh-phase-refit.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

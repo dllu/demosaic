@@ -97,6 +97,11 @@ gain is on retained development geometries. Independent scenes and
 fresh sensor-noise draws remain open.
 [Paired summaries and all eight thresholds](results/phase-refit-delivery-v1/summary.json).
 
+The [fresh-geometry follow-up](fresh-phase-refit.md) confirms the
+ISO400 far-edge gain on eight new geometries with similar achieved
+quiet error. Both methods exceed the transferred quiet budget.
+ISO6400 remains mixed.
+
 ![Weak response versus quiet error for the three delivery fits](images/phase-refit-delivery-v1/quiet-tradeoff.png)
 
 ## Native comparisons
