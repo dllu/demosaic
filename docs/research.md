@@ -39,8 +39,11 @@ without requiring neural nuisance fields.
 The [global-background follow-up](global-background-local-carriers.md) reduces
 neural local-fit building bands while retaining4.695% low-prior weak response,
 with source-dependent error/noise costs and missing cab crossings. Its
-[full-cohort comparison](global-background-full-panel.md) now checks this point
-against the completed256 neural baseline without replaying neural predictions.
+[completed full-cohort comparison](global-background-full-panel.md) finds
+weak2.299%→2.778% and strong37.032%→48.055% versus256 NN, with lower full RGB
+error on all8 sources and higher mean quiet/increment errors. Added real cab
+ripples are smaller, without fine crossing recovery. All68 native figures and
+the saved256 panels are actually reviewed, with zero neural replay.
 The [phase reconstruction follow-up](global-background-phase-reconstruction.md)
 raises400/far neural weak response4.695%→27.390% on both constructed sources,
 with higher quiet/increment errors and building bands. The analytic phase arm

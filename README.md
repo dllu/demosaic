@@ -91,8 +91,10 @@ color bands. Global-amplitude alternatives remain available.
 Keeping the [background global while fitting carriers locally](docs/global-background-local-carriers.md)
 reduces the neural building correction41.87→15.55 DN16, with weak response4.695%
 and explicit noise/error costs. Fine crossings remain missing. Its
-[full source/CFA/noise comparison](docs/global-background-full-panel.md) is running
-with cached fields and no new neural forwards.
+[completed full source/CFA/noise comparison](docs/global-background-full-panel.md)
+raises weak2.299%→2.778% and strong37.032%→48.055% versus256 neural, with
+higher quiet/increment error. Added cab ripples are smaller; fine crossings
+remain missing. All68 native figures and saved-baseline panels are reviewed.
 The [phase measurement follow-up](docs/global-background-phase-reconstruction.md)
 raises two-source400/far neural weak response4.70%→27.39%, with quiet/increment
 errors+2.35%/+0.43% versus parent and larger building artifacts. Its analytic

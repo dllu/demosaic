@@ -129,6 +129,9 @@ this is a development timing, not a100MP benchmark.
 Broader source/CFA/repeat validation is needed to assess whether the stronger
 detail tradeoff survives beyond these two sources. Real weak-detail recovery
 and reliable nuisance discrimination remain open.
-The [full1164-case comparison](global-background-full-panel.md) is now running,
-reusing all2320 masked fields and48 exact pilot cases, with a predeclared paired
-comparison to the completed256 neural baseline. Full quality is pending.
+The [full1164-case comparison](global-background-full-panel.md) is complete,
+reusing all2320 masked fields and48 exact pilot cases. Versus256 neural,
+400/far weak2.299%→2.778% and strong37.032%→48.055% accompany higher mean
+quiet/increment errors. All8 sources improve strong response/full RGB error;
+added real cab ripples are smaller while fine crossings remain missing.
+All68 native figures and paired saved-baseline panels are actually reviewed.

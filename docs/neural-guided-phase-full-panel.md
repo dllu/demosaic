@@ -70,7 +70,9 @@ Roots: `.cache/experiments/neural-nuisance-guided-phase129-full-v1/` and
 Exact PID/creation-time ownership gates review; no automatic restart.
 CPU14/15 for production,18/19 for review, two threads/low priority, RAM
 admission/runtime reserves48/32GiB, disk96GiB and six-hour stage deadlines.
-The separate [full sinusoidal run](global-background-full-panel.md) retains
-its original source and owners.
+The separate [full sinusoidal review](global-background-full-panel.md) is now
+complete, with its original source/receipts preserved and all68 native figures
+actually inspected. Its stronger-response/error tradeoff remains separate
+from this pending guided-phase result.
 
 [Exact launch receipts and336 frozen source files](results/guided-phase129-full-setup-v1/publication.json).

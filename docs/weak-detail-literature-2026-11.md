@@ -86,7 +86,12 @@ reduces the neural building maximum41.87→15.55 DN16, at weak response6.043%→
 4.695%. Analytic bands remain around302.55 DN16, rejecting local nuisance
 coefficient changes as the sole cause. Mean synthetic gains still depend on
 source1 and real crossings remain missing. A [full source/CFA/noise comparison](global-background-full-panel.md)
-is running with all cached fields and an explicit paired256-neural baseline.
+is now complete with all cached fields and an explicit paired256-neural
+baseline: weak2.299%→2.778%, strong37.032%→48.055%, all8 sources improve strong
+response/full RGB error. Mean quiet/increment errors rise; added real cab
+ripples fall while fine crossings remain missing. All68 native figures and
+paired saved256 panels are actually reviewed. The broader result preserves a
+useful stronger-detail tradeoff rather than establishing weak fidelity.
 The [fixed-background phase reconstruction](global-background-phase-reconstruction.md)
 raises two-source400/far neural weak response4.695%→27.390%, now on both
 sources, with quiet/increment errors+2.352%/+0.434% versus parent. Its analytic
