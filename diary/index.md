@@ -27,6 +27,8 @@ Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-docume
 Latest context review: [64-source analysis and canonical primary admission](2026-11-17-04-17-00-scene-development64-primary-admission.md).
 
 Training follow-up: [checkpoint-write recovery with retained6k state](2026-11-17-04-36-50-full-corpus-checkpoint-recovery.md).
+
+Camera results: [complete known/unseen panels and actual7k checkpoint validation](2026-11-17-05-04-36-scene-context-camera-panels.md).
 separates current guidance from historical reports and records the remaining
 camera-gallery coverage gap.
 

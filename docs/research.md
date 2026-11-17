@@ -15,7 +15,9 @@ has repeatedly come with extra flat-region error or false color. The
    shuffled/masked context and include wires in sky and flat gaps beside fences.
    The [completed64-source study](whole-scene-context-development64.md) finds
    quiet-coarse gains but no established weak-detail benefit from correct spatial
-   placement. [Full primary collection is running](whole-scene-context-primary-admission.md).
+   placement. The [completed camera panels](whole-scene-context-camera-review.md)
+   show partial unseen repair versus local-only but regression versus V120.
+   Full427 photos are still collecting.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
@@ -46,7 +48,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Weak-detail literature review](weak-detail-literature-2026-11.md) | Initial November 15 literature search, with explicitly added follow-ups; primary-paper links and proposed tests |
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
-| [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md) | All3 matched2k arms and64-source/intervention study complete/native-viewed; small quiet-coarse gains with detail/color costs, no convincing new crossings. Full427/camera collection running |
+| [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study and both camera panels complete/native-viewed. Small quiet gains/partial unseen repair versus local-only; unseen remains below V120 and fine crossings missing. Full427 photos collecting |
 | [Full-corpus scaling](full-corpus-scaling.md) | Executing100k/20k matched-data continuations, source/crop/noise coverage and actual execution profile; no endpoint quality claim yet |
 
 These are research proposals and bounded experiment conclusions. They do not

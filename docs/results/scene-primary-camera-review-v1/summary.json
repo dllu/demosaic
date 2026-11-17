@@ -1,0 +1,56 @@
+{
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "none": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+        "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+      },
+      "step": 2000
+    },
+    "pooled": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+        "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+      },
+      "step": 2000
+    },
+    "spatial": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+        "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+      },
+      "step": 2000
+    }
+  },
+  "weights": "EMA",
+  "known_scenes": 4,
+  "unseen_scenes": 5,
+  "known_crops": 72,
+  "unseen_crops": 90,
+  "known_measured_CFA_PSNR": {
+    "V120": 54.31271764967177,
+    "none": 54.31771082348294,
+    "pooled": 54.313084231482605,
+    "spatial": 54.31754891077678
+  },
+  "unseen_measured_CFA_PSNR": {
+    "V120": 54.00872213575575,
+    "none": 53.936568578084305,
+    "pooled": 53.95344852871365,
+    "spatial": 53.95395380655924
+  },
+  "full427_photo_PSNR": null,
+  "primary_three_panel_completion": false,
+  "scope": "Complete matched-CPU camera results, not a completed full427/three-panel primary registry. Individual source/capture/crop metrics and native provenance are archived; full photo collection continues."
+}

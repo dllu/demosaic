@@ -153,8 +153,10 @@ GT. Those original predictions and PNGs are reused, never relabeled as new.
 
 ## Next decision
 
-Finish the [full427 and known/unseen camera collection](whole-scene-context-primary-admission.md)
-before judging broad performance. V120/V131 remain the latest completed broad
+The [known/unseen camera panels](whole-scene-context-camera-review.md) have now
+completed numerical/native review: spatial partly repairs local-only's unseen
+regression but remains below V120. Finish the full427 photo collection before
+judging complete broad performance. V120/V131 remain the latest completed broad
 measurements; this scoped study adds no PSNR-history point. Keep the small
 quiet-region benefit visible alongside the shadow/color and weak-detail costs.
 The [larger-corpus experiment](full-corpus-scaling.md) separately tests source

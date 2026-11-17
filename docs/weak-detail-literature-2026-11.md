@@ -156,6 +156,13 @@ prioritizes aligned whole-scene features alongside local RAW reconstruction,
 with same-observation scene/crop training and correct-versus-shuffled-context
 controls. CFA preview/query plumbing is tested; no scene-conditioned quality
 benefit is established yet.
+November17 execution follow-up: the [matched2k/64-source study](whole-scene-context-development64.md)
+now finds small quiet-coarse gains, and [complete camera panels](whole-scene-context-camera-review.md)
+find partial unseen-camera repair over local-only, still below V120. Correct
+spatial placement has no established fine-detail advantage. Both protected GFX
+families are actually reviewed; full427 photos continue collecting. The separate
+[larger-corpus continuation](full-corpus-scaling.md) is running with RAW domains
+retained. These measured follow-ups preserve the original review's cutoff.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

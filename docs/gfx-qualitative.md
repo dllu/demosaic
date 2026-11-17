@@ -14,6 +14,9 @@ historical boards. Use these reports for the current completed comparisons:
   The [completed64-source study](whole-scene-context-development64.md) adds
   diagnostic/intervention results for these same endpoints; it reuses these
   exact GFX outputs, with no new camera-score claim.
+  [Both primary camera panels](whole-scene-context-camera-review.md) now have
+  separate completed numerical/native review for these endpoints; full427 photos
+  remain pending.
 - [Full guided phase review](neural-guided-phase-full-panel.md) and
   [joint-color fine support](joint-fine-colour-support.md): available detail
   experiments with response/tint gains and persistent flat/color costs.

@@ -115,6 +115,8 @@ last checkpoint, and continues the remaining14k in a new frozen output tree.
 The long arm still resumes its original1k state afterward. Old worker/controller
 identities describe their historical allocation; the recovery has new bound
 ownership. Neither training horizon is complete and no quality gain is inferred.
+The first actual post-repair7k checkpoint has since passed complete raw/EMA/
+Adam/RNG validation and atomic last/best retention; training continues advancing.
 
 Training completion, numerical evaluation and actual native viewing are tracked
 separately. No new full427 or known/unseen-camera result is available, and the

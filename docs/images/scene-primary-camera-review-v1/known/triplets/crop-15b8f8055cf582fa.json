@@ -1,0 +1,188 @@
+{
+  "image": "crop-15b8f8055cf582fa.png",
+  "caption": "known-D60-2",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Spatial2k EMA",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Independent AHD ref",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "aa3b46212c1c29de9bb0a43aa08fbbbb459076b8ca56db89c4ab7a38d3519ed2",
+  "id": "known-D60-2",
+  "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+  "analysis": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-camera-review-v1/known/result.json",
+    "sha256": "b29eaab9ed3ff3f4dc76cd9ae04754c0e3720577c10416949150d4ca6bc0e32b"
+  },
+  "case": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-v1/full/known-00018/result.json",
+    "sha256": "f7729ce8c28cbbb1c83513c37d7e78ef93491947c5bbf810d6f8430c3267fbf3"
+  },
+  "canonical_arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/known-00018.npz",
+    "sha256": "594fe457437235817d7c3f130d6f427ddfed33f5bcb765809688549ef247c9d3"
+  },
+  "native_context_xywh": [
+    160,
+    160,
+    512,
+    512
+  ],
+  "ROI_xywh": [
+    176,
+    176,
+    160,
+    160
+  ],
+  "absolute_native_ROI_xywh": [
+    336,
+    336,
+    160,
+    160
+  ],
+  "source_noisy_RAW": {
+    "filename": "Bayer_D60-2_ISO800_sha1=67a5e80d99f1c3c44f17e04cf2b4292154d073cf.crw",
+    "file_id": 29189,
+    "bytes": 7398216,
+    "publisher_checksum": {
+      "type": "MD5",
+      "value": "e1a81ad03c9348ede50172245bf97739"
+    },
+    "sha1": "67a5e80d99f1c3c44f17e04cf2b4292154d073cf",
+    "iso_label": 800,
+    "role": "noisy",
+    "url": "https://dataverse.uclouvain.be/api/access/datafile/29189",
+    "sha256": "bec4a494a7f76f0014c73e3d255284e3ca79c657ee94a093a67c6f8a3f616601",
+    "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_D60-2_ISO800_sha1=67a5e80d99f1c3c44f17e04cf2b4292154d073cf.crw"
+  },
+  "capture_metadata": {
+    "source": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_D60-2_ISO800_sha1=67a5e80d99f1c3c44f17e04cf2b4292154d073cf.crw",
+    "camera": "Canon EOS D60",
+    "pattern": "RGGB",
+    "black_levels": [
+      132.0,
+      132.0,
+      132.0,
+      131.0
+    ],
+    "white_levels": [
+      4000.0,
+      4000.0,
+      4000.0,
+      4000.0
+    ],
+    "white_balance": [
+      1.887706855791962,
+      1.0,
+      1.5780141843971631
+    ],
+    "camera_to_srgb": [
+      [
+        1.576069457951723,
+        -0.6723545241759883,
+        0.09628506622426548
+      ],
+      [
+        0.0032496919551647995,
+        1.3965132845334578,
+        -0.39976297648862275
+      ],
+      [
+        0.06447709344447952,
+        -0.4647536827453767,
+        1.4002765893008973
+      ]
+    ],
+    "flip": 0,
+    "iso": 800
+  },
+  "conditioning": {
+    "shot": 0.0002617722900517909,
+    "read": 7.031910895109717e-06
+  },
+  "CFA_pattern": "RGGB",
+  "WB": [
+    1.8877068758010864,
+    1.0,
+    1.5780141353607178
+  ],
+  "camera_to_sRGB": [
+    [
+      1.5760694742202759,
+      -0.672354519367218,
+      0.09628506749868393
+    ],
+    [
+      0.0032496920321136713,
+      1.3965133428573608,
+      -0.39976298809051514
+    ],
+    [
+      0.0644770935177803,
+      -0.4647536873817444,
+      1.4002765417099
+    ]
+  ],
+  "display_exposure": 1.0,
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "none": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+        "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+      },
+      "step": 2000
+    },
+    "pooled": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+        "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+      },
+      "step": 2000
+    },
+    "spatial": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+        "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+      },
+      "step": 2000
+    }
+  },
+  "weights": "EMA",
+  "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask."
+}

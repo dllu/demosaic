@@ -1,0 +1,188 @@
+{
+  "image": "crop-8ff2f2b19d9c54c9.png",
+  "caption": "known-2pilesofplates",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Spatial2k EMA",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Independent AHD ref",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "34c75b185df423518be316936e8424ab8ec231f0bcddb935d9fb2fa16b1056b6",
+  "id": "known-2pilesofplates",
+  "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+  "analysis": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-camera-review-v1/known/result.json",
+    "sha256": "b29eaab9ed3ff3f4dc76cd9ae04754c0e3720577c10416949150d4ca6bc0e32b"
+  },
+  "case": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-v1/preflight/known-00000/result.json",
+    "sha256": "cd4536cee70ef6f230dd703fd4d1a200b5687b76a23637c6dbf6a5bf8b410968"
+  },
+  "canonical_arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/known-00000.npz",
+    "sha256": "38eb89dbc9c3388fc69c85d1569753f702e132155073f546a76586cd773a4b3e"
+  },
+  "native_context_xywh": [
+    160,
+    160,
+    512,
+    512
+  ],
+  "ROI_xywh": [
+    176,
+    176,
+    160,
+    160
+  ],
+  "absolute_native_ROI_xywh": [
+    336,
+    336,
+    160,
+    160
+  ],
+  "source_noisy_RAW": {
+    "filename": "Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw",
+    "file_id": 28686,
+    "bytes": 49112576,
+    "publisher_checksum": {
+      "type": "MD5",
+      "value": "b68f3f538b448e5f76ccff5dc308df4e"
+    },
+    "sha1": "31fac4e2aeaa235193744d7e49c503734b6346b2",
+    "iso_label": 2000,
+    "role": "noisy",
+    "url": "https://dataverse.uclouvain.be/api/access/datafile/28686",
+    "sha256": "4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1",
+    "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw"
+  },
+  "capture_metadata": {
+    "source": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw",
+    "camera": "ILCE-7C",
+    "pattern": "RGGB",
+    "black_levels": [
+      512.0,
+      512.0,
+      512.0,
+      512.0
+    ],
+    "white_levels": [
+      15360.0,
+      15360.0,
+      15360.0,
+      15360.0
+    ],
+    "white_balance": [
+      2.40625,
+      1.0,
+      1.69140625
+    ],
+    "camera_to_srgb": [
+      [
+        1.6353747641867242,
+        -0.42196120206077053,
+        -0.21341356212595397
+      ],
+      [
+        -0.13106821045315706,
+        1.5426731789357453,
+        -0.411604968482588
+      ],
+      [
+        0.011429855280569487,
+        -0.4196218028471881,
+        1.4081919475666185
+      ]
+    ],
+    "flip": 0,
+    "iso": 2000
+  },
+  "conditioning": {
+    "shot": 0.00022425719328779764,
+    "read": 9.48210212944349e-08
+  },
+  "CFA_pattern": "RGGB",
+  "WB": [
+    2.40625,
+    1.0,
+    1.69140625
+  ],
+  "camera_to_sRGB": [
+    [
+      1.6353747844696045,
+      -0.4219611883163452,
+      -0.2134135663509369
+    ],
+    [
+      -0.13106821477413177,
+      1.5426732301712036,
+      -0.41160497069358826
+    ],
+    [
+      0.011429855599999428,
+      -0.4196217954158783,
+      1.4081919193267822
+    ]
+  ],
+  "display_exposure": 1.0,
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "none": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+        "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+      },
+      "step": 2000
+    },
+    "pooled": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+        "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+      },
+      "step": 2000
+    },
+    "spatial": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+        "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+      },
+      "step": 2000
+    }
+  },
+  "weights": "EMA",
+  "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask."
+}

@@ -1,0 +1,188 @@
+{
+  "image": "crop-f91facf30106d754.png",
+  "caption": "known-7D-1",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Spatial2k EMA",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Independent AHD ref",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "8fd9b856d77e450bbafd5454ea3493ad19b1a24d0bf8dfe3d0694ebcb72756a1",
+  "id": "known-7D-1",
+  "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+  "analysis": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-camera-review-v1/known/result.json",
+    "sha256": "b29eaab9ed3ff3f4dc76cd9ae04754c0e3720577c10416949150d4ca6bc0e32b"
+  },
+  "case": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-v1/full/known-00006/result.json",
+    "sha256": "9ad5b7703087c7ba69f690e042fe7abf3d48bd2a7298dbed3f0807de5e4658fb"
+  },
+  "canonical_arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/known-00006.npz",
+    "sha256": "5ab03d16b265db8344894102db826b5a81bdcd72bed36d1fc678090bc2cff46a"
+  },
+  "native_context_xywh": [
+    160,
+    160,
+    512,
+    512
+  ],
+  "ROI_xywh": [
+    176,
+    176,
+    160,
+    160
+  ],
+  "absolute_native_ROI_xywh": [
+    336,
+    336,
+    160,
+    160
+  ],
+  "source_noisy_RAW": {
+    "filename": "Bayer_7D-1_ISO1600_sha1=9b21ad6490fbd55426bad0791a6f3990d8b0e395.cr2",
+    "file_id": 29233,
+    "bytes": 26746549,
+    "publisher_checksum": {
+      "type": "MD5",
+      "value": "f55dd94e8423aacfad4de32659a5f48f"
+    },
+    "sha1": "9b21ad6490fbd55426bad0791a6f3990d8b0e395",
+    "iso_label": 1600,
+    "role": "noisy",
+    "url": "https://dataverse.uclouvain.be/api/access/datafile/29233",
+    "sha256": "eaa8fd439aaccef097701842c51f23280b92331ec9250e6f36982e0cc60256cf",
+    "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_7D-1_ISO1600_sha1=9b21ad6490fbd55426bad0791a6f3990d8b0e395.cr2"
+  },
+  "capture_metadata": {
+    "source": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_7D-1_ISO1600_sha1=9b21ad6490fbd55426bad0791a6f3990d8b0e395.cr2",
+    "camera": "Canon EOS 7D",
+    "pattern": "GBRG",
+    "black_levels": [
+      2047.0,
+      2046.0,
+      2047.0,
+      2046.0
+    ],
+    "white_levels": [
+      15094.0,
+      15094.0,
+      15094.0,
+      15094.0
+    ],
+    "white_balance": [
+      2.0986328125,
+      1.0,
+      1.654296875
+    ],
+    "camera_to_srgb": [
+      [
+        1.9204999025301575,
+        -1.0413495812710656,
+        0.12084967874090806
+      ],
+      [
+        -0.24696281331132816,
+        1.7593124803218942,
+        -0.5123496670105661
+      ],
+      [
+        -0.006956121305943532,
+        -0.4895846857258788,
+        1.4965408070318222
+      ]
+    ],
+    "flip": 0,
+    "iso": 1600
+  },
+  "conditioning": {
+    "shot": 0.0005918457435588024,
+    "read": 2.2157751772176863e-06
+  },
+  "CFA_pattern": "GBRG",
+  "WB": [
+    2.0986328125,
+    1.0,
+    1.654296875
+  ],
+  "camera_to_sRGB": [
+    [
+      1.9204999208450317,
+      -1.0413495302200317,
+      0.12084967643022537
+    ],
+    [
+      -0.24696281552314758,
+      1.7593125104904175,
+      -0.5123496651649475
+    ],
+    [
+      -0.006956121418625116,
+      -0.48958468437194824,
+      1.4965407848358154
+    ]
+  ],
+  "display_exposure": 1.0,
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "none": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+        "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+      },
+      "step": 2000
+    },
+    "pooled": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+        "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+      },
+      "step": 2000
+    },
+    "spatial": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+        "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+      },
+      "step": 2000
+    }
+  },
+  "weights": "EMA",
+  "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask."
+}

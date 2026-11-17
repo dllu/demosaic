@@ -48,7 +48,8 @@ finds small mixed spatial-context changes on its first two sources and no
 convincing new fence/sky-cord recovery. All16 native boards were viewed. The
 [64-source/intervention study](whole-scene-context-development64.md) has completed
 analysis and eight further native boards: small quiet-coarse gains coexist with
-detail/color costs. [Full primary collection is running on CPU](whole-scene-context-primary-admission.md).
+detail/color costs. [Both camera panels are complete](whole-scene-context-camera-review.md);
+full427 photos are still collecting on CPU.
 V120 stays the general recommendation.
 [Exact model/data/preflight receipts](results/whole-scene-context-training-setup-v1/publication.json).
 [Independent source/checkpoint audit](results/whole-scene-context-training-setup-v1/independent-review.json).

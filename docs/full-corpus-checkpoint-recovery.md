@@ -54,6 +54,14 @@ through97,584, immediately after the original prefix's95,984. Startup declares
 with source indices continuing after6,000 B16 batches; it does not claim the
 next full checkpoint, endpoint evaluation or productive full-run duration.
 
+**Later production verification:** step7,000 has now saved successfully. The
+actual complete raw/EMA/Adam/RNG checkpoint is retained with SHA256
+`17cd10ac0e93c980e707c81dca056e5c26321d6856eda011e3028084c24c3cf7`;
+all89 Adam states are at7,000, and the live last/best names shared its completed
+inode. Training then advanced beyond7,200. This validates the repair in the real
+run, separately from the earlier IO fixture and6,350-step observation.
+[Exact post-repair addendum](results/full-corpus-checkpoint-recovery-v1/post-repair-step7000-addendum.json).
+
 Admission failures are preserved separately. The first preparer compared a
 completion-receipt hash with a checkpoint hash and stopped on CPU. A later
 worker was correctly rejected by the frozen checkout's output-path guard; the

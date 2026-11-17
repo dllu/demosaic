@@ -1,5 +1,10 @@
 # Whole-scene context: primary benchmark admission
 
+**November17 follow-up:** [both camera panels and actual native review are complete](whole-scene-context-camera-review.md).
+Spatial partly repairs the local-only unseen regression, while remaining below
+V120; full427 photos are still collecting. The admission cutoff/pending wording
+below describes the original launch, with its immutable receipts unchanged.
+
 **The full427 and known/unseen camera evaluation is running on CPU.** This
 report records input preservation and numerical qualification; it contains no
 completed new primary score. The three2k EMA endpoints and matched V120 control
