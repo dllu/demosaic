@@ -24,7 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
-Latest results are recorded in the [bounded guide-error entry](2026-11-17-14-11-24-phase-guide-recenter.md)
+Latest results are recorded in the [second ordinary-photo pass entry](2026-11-17-14-18-00-full-corpus-second-epoch.md).
+See also the [bounded guide-error entry](2026-11-17-14-11-24-phase-guide-recenter.md)
 and the [fresh weighted RAW refit entry](2026-11-17-13-56-05-fresh-phase-refit.md).
 The [30k training coverage entry](2026-11-17-13-34-39-full-corpus-long30k-prefix.md)
 records source and crop coverage.

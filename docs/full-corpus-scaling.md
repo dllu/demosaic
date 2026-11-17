@@ -1,6 +1,6 @@
 # Full-corpus scaling and whole-scene context training
 
-**The 20k control is complete and the 100k run has passed 30,000 updates.**
+**The 20k control is complete and the 100k run has completed two ordinary photo passes.**
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
@@ -140,6 +140,21 @@ These rectangles precede geometry and sensor corruption. The 30k
 checkpoint write is logged, and quality is assessed on the declared
 immutable milestones.
 [30k source, crop, and conditioning audit](results/full-corpus-long30k-prefix-v1/publication.json).
+
+### Second ordinary photo pass
+
+The second full ordinary photo epoch completes at update 33,985.
+By the saved 34k update, the run records 544,000 example slots.
+There are 181,674 ordinary photo visits and 9,479 reviewed visits.
+All 90,778 photos appear at least twice in the ordinary stream,
+with 118 already seen a third time. Of the second visits,
+90,757 use a different cached crop rectangle. Median rectangle
+overlap is 0.634 by intersection over union, with 926 disjoint
+pairs. The audit rechecks the two 30k byte prefixes and the
+original conditioning chunks, then verifies the draw order and
+all 136 saved chunks through 34k. The native 50k quality review
+waits for the immutable state.
+[Second-epoch source and crop audit](results/full-corpus-long34k-prefix-v1/publication.json).
 
 The long arm also retains its10k state
 `6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.
