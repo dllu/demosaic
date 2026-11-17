@@ -24,9 +24,9 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
-Latest results are recorded in the [joint Bayer phase-profile entry](2026-11-17-12-48-30-joint-phase-profile-support.md).
-See also the [oriented RAW support entry](2026-11-17-12-32-47-oriented-raw-support.md)
-and the [donor guide and long-schedule 20k review](2026-11-17-12-14-43-donor-subharmonics-long20k.md).
+Latest results are recorded in the [donor harmonics and 50k review entry](2026-11-17-13-08-54-donor-phase-support-and-50k-queue.md).
+See also the [joint Bayer phase-profile entry](2026-11-17-12-48-30-joint-phase-profile-support.md)
+and the [oriented RAW support entry](2026-11-17-12-32-47-oriented-raw-support.md).
 
 Latest context review: [64-source analysis and canonical primary admission](2026-11-17-04-17-00-scene-development64-primary-admission.md).
 

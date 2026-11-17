@@ -131,7 +131,18 @@ def _phase_bin_weights(xx, yy, frequency, bins):
     return weights
 
 
-def _validate_phase_bins(phase_bins, guide, config):
+def _phase_harmonic_columns(xx, yy, frequency, bins, orders):
+    """Evaluate Fourier modes on a periodic knot grid before native interpolation."""
+    phase = 2 * np.pi * np.arange(bins) / bins
+    modes = []
+    for order in orders:
+        modes.append(np.cos(order * phase))
+        if 2 * order != bins:
+            modes.append(np.sin(order * phase))
+    return _phase_bin_weights(xx, yy, frequency, bins) @ np.column_stack(modes)
+
+
+def _validate_phase_bins(phase_bins, guide, config, phase_harmonics=None):
     if type(phase_bins) is not int or (phase_bins and not 3 <= phase_bins <= 12):
         raise ValueError("Phase interpolation requires 3 to 12 bins")
     if phase_bins and (
@@ -141,6 +152,17 @@ def _validate_phase_bins(phase_bins, guide, config):
         or config.amplitude_window
     ):
         raise ValueError("Phase bins require fixed guides and one whole-query fit per direction")
+    if phase_harmonics is not None and (
+        not phase_bins
+        or len(phase_harmonics) != 2
+        or any(
+            len(orders) == 0
+            or any(type(k) is not int or not 1 <= k <= phase_bins // 2 for k in orders)
+            or tuple(orders) != tuple(sorted(set(orders)))
+            for orders in phase_harmonics
+        )
+    ):
+        raise ValueError("Require sorted, distinct phase harmonics for both fixed guides")
 
 
 def _harmonic_count(frequency, maximum):
@@ -252,13 +274,14 @@ def fit_local_candidate(
     config=_DEFAULT_CONFIG,
     guide_frequencies_xy=None,
     phase_bins=0,
+    phase_harmonics=None,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
-    Optional guides supply only frequencies. Independent validation requires
-    obtaining them from measurements disjoint from the entire query.
+    Optional guides fix frequencies and can constrain the phase basis.
+    Obtain those choices from measurements disjoint from the entire query.
     """
-    _validate_phase_bins(phase_bins, guide_frequencies_xy, config)
+    _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -335,7 +358,12 @@ def fit_local_candidate(
         )
         frequencies = (first, second)
         counts = (first_harmonics, second_harmonics)
-    if phase_bins:
+    if phase_harmonics is not None:
+        waves = [
+            _phase_harmonic_columns(xx, yy, f, phase_bins, orders)
+            for f, orders in zip(frequencies, phase_harmonics, strict=True)
+        ]
+    elif phase_bins:
         waves = []
         for frequency in frequencies:
             weights = _phase_bin_weights(xx, yy, frequency, phase_bins)
@@ -704,6 +732,7 @@ def restore_local_waves(
     conditional_delivery=False,
     guide_frequencies_xy=None,
     phase_bins=0,
+    phase_harmonics=None,
     shrink_phase_fit=False,
     compare_pooled_support=False,
     compare_phase_agreement=False,
@@ -737,13 +766,14 @@ def restore_local_waves(
         raise ValueError("Require a nonempty distinct set of fixed thresholds")
     if type(conditional_delivery) is not bool:
         raise ValueError("Require an explicit boolean conditional-delivery choice")
-    _validate_phase_bins(phase_bins, guide_frequencies_xy, config)
+    _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if type(compare_pooled_support) is not bool:
         raise ValueError("Require an explicit boolean pooled-support choice")
     if type(compare_phase_agreement) is not bool or (
-        compare_phase_agreement and (not phase_bins or not compare_pooled_support)
+        compare_phase_agreement
+        and (not phase_bins or phase_harmonics is not None or not compare_pooled_support)
     ):
         raise ValueError("Phase agreement requires fixed phase bins and pooled support")
     if type(compare_oriented_support) is not bool or (
@@ -759,6 +789,8 @@ def restore_local_waves(
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
     if phase_bins:
         guide["phase_bins"] = phase_bins
+    if phase_harmonics is not None:
+        guide["phase_harmonics"] = phase_harmonics
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:

@@ -93,6 +93,12 @@ colors at the tight quiet budget. The near-edge ISO400 response
 improves slightly with higher increment error. The sky matches V120
 and the fine cab crossings remain unresolved.
 
+The [donor waveform comparison](donor-phase-support.md) retains more
+weak response with the full eight-knot basis at all three calibrated
+budgets. Selecting higher harmonics with an external RAW region keeps
+most of that response and slightly lowers ISO6400 increment error at the
+tight budget. A fundamental-only fit loses much more signal.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

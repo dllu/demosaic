@@ -48,6 +48,10 @@ has repeatedly come with extra flat-region error or false color. The
    ISO400 response gain with higher increment error, and less far-edge
    response at both noise levels under the tight quiet budget.
    [Joint Bayer phase-profile evidence](joint-phase-profile-support.md).
+   Selecting waveform harmonics from a disjoint RAW donor keeps more
+   response than the fundamental alone. The full phase basis recovers
+   more weak signal in every held-out budget cell.
+   [Donor waveform comparison](donor-phase-support.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

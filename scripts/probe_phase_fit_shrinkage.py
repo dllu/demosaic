@@ -78,7 +78,7 @@ def restore(parent, packed, colors, frequencies, noise, config):
     return outputs, statistics
 
 
-def collect(path, *, restore_view=restore, driver=__file__):
+def collect(path, *, restore_view=restore, driver=__file__, select_guide=dict.__getitem__):
     plan = read_json(path)
     verify_plan(plan)
     assert plan["driver"] == reference(driver)
@@ -102,7 +102,7 @@ def collect(path, *, restore_view=restore, driver=__file__):
                 parent[role],
                 packed[role],
                 colors[role],
-                group["frequencies"],
+                select_guide(group, "frequencies"),
                 group["noise"],
                 config,
             )
@@ -137,7 +137,9 @@ def collect(path, *, restore_view=restore, driver=__file__):
             )
         noise = next(o["noise"] for o in native["observations"] if o["id"] == row["query"])
         parent = np.load(checked(row["parent_prediction"]))[0, :, y : y + height, x : x + width]
-        outputs, stats = restore_view(parent, packed, colors, row["guide"], noise, config)
+        outputs, stats = restore_view(
+            parent, packed, colors, select_guide(row, "guide"), noise, config
+        )
         destination = output / f"{key}.npz"
         with destination.open("xb") as stream:
             np.savez(stream, **outputs)

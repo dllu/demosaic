@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 
 import demosaic.local_validated_waves as local
+from demosaic.donor_phase_support import ALL_HARMONICS, donor_harmonic_scores
 from demosaic.experiments.evaluation.withheld import stratified_split
 
 LAYOUTS = ([0, 1, 1, 2], [2, 1, 1, 0], [1, 0, 2, 1], [1, 2, 0, 1])
@@ -45,6 +46,43 @@ def test_guided_query_refits_phase_from_only_its_discovery_samples():
     assert changed.frequencies_xy == frequencies
     np.testing.assert_allclose(changed.full_cfa, translated, rtol=0, atol=1e-12)
     assert not np.allclose(original.coefficients[:, -4:], changed.coefficients[:, -4:])
+
+
+def test_all_knot_harmonics_span_the_existing_discovery_model():
+    raw, colors, _ = scene()
+    split = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 8e-5,
+        "read": 2.56e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": ((5 / 64, 3 / 64), (-4 / 64, 7 / 64)),
+        "phase_bins": 8,
+    }
+    knot = local.fit_local_candidate(raw, colors, split, **options)
+    modes = local.fit_local_candidate(raw, colors, split, phase_harmonics=ALL_HARMONICS, **options)
+    np.testing.assert_allclose(modes.full_cfa, knot.full_cfa, rtol=0, atol=1e-13)
+    np.testing.assert_allclose(
+        modes.conditional_null_cfa, knot.conditional_null_cfa, rtol=0, atol=1e-13
+    )
+    np.testing.assert_allclose(
+        local.phase_fit_reliability(modes, colors),
+        local.phase_fit_reliability(knot, colors),
+        rtol=0,
+        atol=1e-13,
+    )
+
+
+def test_donor_support_requires_the_actual_higher_harmonic():
+    _, colors, _ = scene()
+    yy, xx = np.indices(colors.shape)
+    frequencies = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))
+    first = local._phase_harmonic_columns(xx, yy, frequencies[0], 8, (1, 2))
+    second = local._phase_harmonic_columns(xx, yy, frequencies[1], 8, (1,))
+    baseline = 0.06 + second @ np.array([0.001, -0.002])
+    data = baseline + first @ np.array([0.001, 0.002, 0.004, -0.001])
+    noisy = data.reshape(colors.shape) + np.random.default_rng(120).normal(0, 0.001, colors.shape)
+    scores = donor_harmonic_scores(noisy, colors, frequencies, shot=0, read=1e-6, config=CONFIG)
+    np.testing.assert_array_equal((scores >= 3).all(axis=0), [[True, False, False], [False] * 3])
 
 
 def test_discovery_reliability_subtracts_fit_noise_and_shrinks_the_validated_prediction():

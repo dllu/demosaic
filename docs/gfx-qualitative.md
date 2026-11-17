@@ -61,6 +61,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Joint Bayer phase-profile evidence](joint-phase-profile-support.md)
   gives the same sky pixels as V120. The building and foliage stay
   soft and the coarse fence retains its visible crossings.
+- [Donor waveform fitting](donor-phase-support.md) reproduces the
+  V120 sky. The coarse crossings remain visible with subtle
+  modulation changes. The foliage and thin building detail stay soft.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

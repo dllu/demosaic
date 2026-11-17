@@ -51,6 +51,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [testing longer repeats in donor RAW](donor-subharmonics.md) ·
 [oriented footprints for RAW validation](oriented-raw-support.md) ·
 [joint Bayer phase-profile evidence](joint-phase-profile-support.md) ·
+[donor-selected waveform harmonics](donor-phase-support.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

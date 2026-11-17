@@ -116,6 +116,11 @@ and the long-schedule 20k EMA. All 220 control predictions match the
 earlier review bit for bit. The audit and both GFX families are covered
 in the [completed native review](full-corpus-long20k-native.md).
 Training continues independently toward the 50k and 100k checkpoints.
+The native 50k review is queued on the trainer's immutable checkpoint
+receipt. It uses the same 110 inputs and reuses the 220 verified V120
+and long-schedule 20k control predictions. The 50k EMA requires 110
+new CPU restoration calls. Numerical results and native viewing
+follow the checkpoint.
 
 The long arm also retains its10k state
 `6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.
