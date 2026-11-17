@@ -82,6 +82,14 @@ distinct IDs remain unrecorded. Reported retained-loop windows total12,490.150s;
 attempted controller phases total20,104.376s including stalls/replay/concurrency.
 Training completion, targeted numerical/native completion and pending broad
 scores are distinguished in the [endpoint report](full-corpus-control20k-review.md).
+The long run reached its own first complete ordinary-source epoch at update
+17,039. Through update 17,250 it processed 276,000 target slots, including
+92,049 ordinary and 4,847 reviewed photo visits. The audit checks all 90,778
+ordinary IDs, 17,250 source/crop rows and 69 conditioning chunks. Their
+recorded values match the short-schedule control apart from the distinct
+order-header ID. A matched 110-input native comparison is queued for the
+long run’s retained 20k milestone. [First-epoch audit](results/scene-wave-guides-v1/long100k-first-epoch.json).
+
 The long arm retains its10k state
 `6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.
 [Independent actual-prefix comparison](results/full-corpus-control20k-camera-v1/long-control-source-identity.json)

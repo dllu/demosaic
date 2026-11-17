@@ -51,6 +51,10 @@ in each linked report. [Package interfaces](architecture.md).
 
 ## Experimental detail components
 
+The disjoint RAW direction-guide probe improves lower-noise synthetic
+far-wire response with a small reduction in increment error. The real cab
+tradeoff and near-edge costs keep it experimental. [Direction-guide review](scene-wave-guides.md).
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

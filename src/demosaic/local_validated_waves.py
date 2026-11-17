@@ -205,8 +205,27 @@ def _refine_frequency(
     return tuple(float(v) for v in chosen)
 
 
-def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFAULT_CONFIG):
-    """A-only edge/frequency/amplitude/noise fitting with two competing directions."""
+def _guide_frequencies(value, family_degrees):
+    frequencies = np.asarray(value, dtype=np.float64)
+    if frequencies.shape != (2, 2) or not np.isfinite(frequencies).all():
+        raise ValueError("Require two finite guide frequencies in native cycles per pixel")
+    radius = np.linalg.norm(frequencies, axis=1)
+    if np.any((radius < 1 / 64) | (radius > 0.24)):
+        raise ValueError("Guide frequencies must lie in the native search annulus")
+    cosine = abs(float(frequencies[0] @ frequencies[1] / np.prod(radius)))
+    if cosine > np.cos(np.deg2rad(family_degrees)):
+        raise ValueError("Guide directions must belong to separate orientation families")
+    return tuple(tuple(float(v) for v in row) for row in frequencies)
+
+
+def fit_local_candidate(
+    raw, colors, discovery_mask, *, shot, read, config=_DEFAULT_CONFIG, guide_frequencies_xy=None
+):
+    """Fit query nuisance, phase and amplitude on the discovery fold.
+
+    Optional guides supply only frequencies. Independent validation requires
+    obtaining them from measurements disjoint from the entire query.
+    """
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -232,55 +251,61 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
     if config.background == "piecewise_affine":
         step = nuisance[:, 3]
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
-        first_frequency = _residual_peak(raw, green, nuisance)
-    weights = None
-    if config.frequency_weighting != "uniform":
-        from .carrier_spectrum import discovery_weights
+    if guide_frequencies_xy is not None:
+        frequencies = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
+        counts = tuple(_harmonic_count(f, config.harmonics) for f in frequencies)
+    else:
+        if config.background == "piecewise_affine":
+            first_frequency = _residual_peak(raw, green, nuisance)
+        weights = None
+        if config.frequency_weighting != "uniform":
+            from .carrier_spectrum import discovery_weights
 
-        weights = discovery_weights(
+            weights = discovery_weights(
+                raw,
+                green,
+                nuisance,
+                shot=shot,
+                read=read,
+                hann=config.frequency_weighting == "hann-inverse-variance",
+            )
+            first_frequency = _residual_peak(raw, green, nuisance, weights=weights)
+        first_harmonics = _harmonic_count(first_frequency, config.harmonics)
+        first = _refine_frequency(
             raw,
             green,
             nuisance,
-            shot=shot,
-            read=read,
-            hann=config.frequency_weighting == "hann-inverse-variance",
+            xx,
+            yy,
+            first_frequency,
+            config.frequency_refinements,
+            harmonics=first_harmonics,
+            weights=weights,
         )
-        first_frequency = _residual_peak(raw, green, nuisance, weights=weights)
-    first_harmonics = _harmonic_count(first_frequency, config.harmonics)
-    first = _refine_frequency(
-        raw,
-        green,
-        nuisance,
-        xx,
-        yy,
-        first_frequency,
-        config.frequency_refinements,
-        harmonics=first_harmonics,
-        weights=weights,
-    )
-    one = np.column_stack((nuisance, _wave_columns(xx, yy, first, first_harmonics)))
-    second_frequency = _residual_peak(
-        raw, green, one, avoid=first, family_degrees=config.family_degrees, weights=weights
-    )
-    second_harmonics = _harmonic_count(second_frequency, config.harmonics)
-    second = _refine_frequency(
-        raw,
-        green,
-        one,
-        xx,
-        yy,
-        second_frequency,
-        config.frequency_refinements,
-        avoid=first,
-        family_degrees=config.family_degrees,
-        harmonics=second_harmonics,
-        weights=weights,
-    )
-    frequencies = (first, second)
-    counts = (first_harmonics, second_harmonics)
+        one = np.column_stack((nuisance, _wave_columns(xx, yy, first, first_harmonics)))
+        second_frequency = _residual_peak(
+            raw, green, one, avoid=first, family_degrees=config.family_degrees, weights=weights
+        )
+        second_harmonics = _harmonic_count(second_frequency, config.harmonics)
+        second = _refine_frequency(
+            raw,
+            green,
+            one,
+            xx,
+            yy,
+            second_frequency,
+            config.frequency_refinements,
+            avoid=first,
+            family_degrees=config.family_degrees,
+            harmonics=second_harmonics,
+            weights=weights,
+        )
+        frequencies = (first, second)
+        counts = (first_harmonics, second_harmonics)
     waves = [_wave_columns(xx, yy, f, count) for f, count in zip(frequencies, counts, strict=True)]
     n = nuisance.shape[1]
-    wave_slices = ((n, n + 2 * first_harmonics), (n + 2 * first_harmonics, n + 2 * sum(counts)))
+    split = n + 2 * counts[0]
+    wave_slices = ((n, split), (split, n + 2 * sum(counts)))
     wave_fields = tuple(
         wave.reshape(*raw.shape, 2 * count) for wave, count in zip(waves, counts, strict=True)
     )
@@ -488,6 +513,7 @@ def restore_local_waves(
     config=_DEFAULT_CONFIG,
     discovery_mask=None,
     conditional_delivery=False,
+    guide_frequencies_xy=None,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -516,6 +542,9 @@ def restore_local_waves(
         raise ValueError("Require a nonempty distinct set of fixed thresholds")
     if type(conditional_delivery) is not bool:
         raise ValueError("Require an explicit boolean conditional-delivery choice")
+    if guide_frequencies_xy is not None:
+        guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
+    guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
@@ -549,7 +578,9 @@ def restore_local_waves(
                 else discovery_mask[region]
             )
             candidates = [
-                fit_local_candidate(tile, layout, mask, shot=shot, read=read, config=config)
+                fit_local_candidate(
+                    tile, layout, mask, shot=shot, read=read, config=config, **guide
+                )
                 for mask in [split, ~split]
             ]
             spatial = None
@@ -637,6 +668,7 @@ def restore_local_waves(
         "records": records,
         "config": config.to_dict(),
         "parent_used_for_discovery_or_validation": False,
+        **guide,
         "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }
@@ -652,6 +684,7 @@ def restore_conditional_waves(
     thresholds=(2.0,),
     config=_DEFAULT_CONFIG,
     discovery_mask=None,
+    guide_frequencies_xy=None,
 ):
     """Standalone analytic conditional delivery; no neural nuisance fields needed."""
     return restore_local_waves(
@@ -664,4 +697,5 @@ def restore_conditional_waves(
         config=config,
         discovery_mask=discovery_mask,
         conditional_delivery=True,
+        guide_frequencies_xy=guide_frequencies_xy,
     )

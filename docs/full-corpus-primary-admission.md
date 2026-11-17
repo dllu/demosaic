@@ -58,6 +58,12 @@ also passes the established path/hash/logical-value reader on its two photo
 model/batch records, using exact same-filesystem hardlinks rather than copying
 or changing tensor pixels. Neither qualification is a full427 evaluation.
 
+A separate IEEE FP32 CUDA replay matches the original numerical limits on
+all 24 probed outputs. It measures a roughly tenfold forward-time difference
+under concurrent workloads. The maximum pixel difference is close to the
+limit, and the existing CPU collection continues with its original policy.
+[CUDA probe and scope](local-primary-cuda-probe.md).
+
 ## Admitted endpoint and subsequent evidence
 
 The owned review queue observed the v7 control stage's successful return code,

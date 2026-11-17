@@ -1,0 +1,1506 @@
+{
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/plan.json",
+    "sha256": "c351a38975ac18b91d67bdd3158b2db0be511b067921019e5f707a69d202c9f5"
+  },
+  "rows": [
+    {
+      "stage": "photo",
+      "batch": 0,
+      "model": "V120",
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00000/result.json",
+        "sha256": "8b0e069493bc3fb3f23ab6a35ce4b298c0b4a07eab036b0900b09e113f0e7ed8"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00000/V120-RGB-f32.npy",
+        "sha256": "4c5264bd0a31575aa8d4658fc4c73702d830387cea95fa6bc630ef6b7d2dc36d"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/00-V120.npy",
+        "sha256": "e82206c9d6ea8ce3ed9b2988b1c27b9340893737b7b4c26161bdd544607982fe"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.027343332767486572,
+      "RMS_DN16": 0.0027979790520618135,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -1.0361667079905601e-08,
+          -9.254686261783718e-08,
+          -4.895172196484054e-07,
+          9.878895923520759e-08
+        ],
+        "srgb_psnr": [
+          2.2896479379141965e-07,
+          -4.354572880060914e-07,
+          -4.893019607266069e-07,
+          6.891583126389378e-08
+        ],
+        "chroma_mae": [
+          1.455690346909011e-10,
+          3.2703507740414195e-10,
+          1.9539001536519884e-10,
+          -1.635580525183311e-10
+        ],
+        "gradient_mae": [
+          3.106673286679129e-10,
+          6.819536870969478e-10,
+          3.0854542532043894e-10,
+          -1.8334802946717854e-10
+        ]
+      },
+      "CPU_inference_seconds": 10.701491374988109,
+      "CUDA_inference_seconds": 10.356216546962969
+    },
+    {
+      "stage": "photo",
+      "batch": 0,
+      "model": "scale-control20k",
+      "condition": "adc-only",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00000/result.json",
+        "sha256": "8b0e069493bc3fb3f23ab6a35ce4b298c0b4a07eab036b0900b09e113f0e7ed8"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00000/scale-control20k-RGB-f32.npy",
+        "sha256": "f1d5c8d4aceac4d0bb3e4cfadeb6a68f504b133a9c4a56afd2cff2e5c5721d4c"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/00-scale-control20k.npy",
+        "sha256": "613180794aecc069fec3f8d59ddf1b158cffd4fc1ee977161dddbeae8458a507"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.027343332767486572,
+      "RMS_DN16": 0.002801755386624813,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -4.142598371004169e-07,
+          -2.2443821734441372e-07,
+          -2.584765539381806e-07,
+          1.2319772224600456e-07
+        ],
+        "srgb_psnr": [
+          -1.4106517909340255e-07,
+          2.429291399153044e-07,
+          5.609515270066368e-07,
+          -7.597789419833134e-08
+        ],
+        "chroma_mae": [
+          6.66523507393546e-11,
+          -1.344008641358807e-10,
+          2.814824458588494e-11,
+          1.237496650291492e-10
+        ],
+        "gradient_mae": [
+          8.179037616455609e-10,
+          -2.410776838573936e-10,
+          2.8150355570882857e-10,
+          -1.4340463538875525e-10
+        ]
+      },
+      "CPU_inference_seconds": 9.6767506969627,
+      "CUDA_inference_seconds": 0.9265479790046811
+    },
+    {
+      "stage": "photo",
+      "batch": 5,
+      "model": "V120",
+      "condition": "iso100-prior",
+      "pattern": "BGGR",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00005/result.json",
+        "sha256": "4723bc347de22f9274f436d819580aac8bfa037d3ae55c934bb39f23acc4bdcf"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00005/V120-RGB-f32.npy",
+        "sha256": "b37c0af32470b10805222fa529122bfa5496552dbe054c9329a67d9c9bbe17d8"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/01-V120.npy",
+        "sha256": "4b89fa8044caebe56ed4bc23329d488a653abebce417f0bd52bf2df2fad5489d"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.05859285593032837,
+      "RMS_DN16": 0.004008621835580977,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -2.7233716082264436e-06,
+          2.0774017883695706e-07,
+          -3.905974494955444e-07,
+          3.8270727031886054e-07
+        ],
+        "srgb_psnr": [
+          -1.350078818518341e-06,
+          1.0744076917035272e-07,
+          -4.259852630639216e-07,
+          3.0093096370364947e-07
+        ],
+        "chroma_mae": [
+          2.0314567562851327e-10,
+          -1.4293543432186695e-10,
+          8.15947136245665e-12,
+          -3.1226285793217734e-10
+        ],
+        "gradient_mae": [
+          2.179153199034778e-10,
+          -1.6395728524853936e-10,
+          1.9948178005269046e-10,
+          -3.282544236427043e-10
+        ]
+      },
+      "CPU_inference_seconds": 10.685006684972905,
+      "CUDA_inference_seconds": 1.1045393580570817
+    },
+    {
+      "stage": "photo",
+      "batch": 5,
+      "model": "scale-control20k",
+      "condition": "iso100-prior",
+      "pattern": "BGGR",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00005/result.json",
+        "sha256": "4723bc347de22f9274f436d819580aac8bfa037d3ae55c934bb39f23acc4bdcf"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00005/scale-control20k-RGB-f32.npy",
+        "sha256": "c21e152707613bd1036dc9a116960275968f9afdff4b724732b877bfab6f2bbd"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/01-scale-control20k.npy",
+        "sha256": "7ce26d24b24d53a7e9350cb89ff7a285ef813bc59ded398010fcf668c8be58a4"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.05859285593032837,
+      "RMS_DN16": 0.0039967716766509094,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          4.914281674928134e-07,
+          -9.188189977749062e-07,
+          -1.7078368159673118e-06,
+          -1.7093304194304437e-07
+        ],
+        "srgb_psnr": [
+          -5.146652881649061e-07,
+          -3.492923568160222e-07,
+          -2.6543940379042397e-07,
+          -9.874974438162099e-08
+        ],
+        "chroma_mae": [
+          2.0987446329445714e-10,
+          -7.291745419274465e-11,
+          -1.0426808852090352e-10,
+          8.933181104564536e-11
+        ],
+        "gradient_mae": [
+          5.356755108931743e-10,
+          1.0331954302528201e-10,
+          -7.998316679108664e-11,
+          -5.408811939999758e-11
+        ]
+      },
+      "CPU_inference_seconds": 9.903747679083608,
+      "CUDA_inference_seconds": 0.7723919110139832
+    },
+    {
+      "stage": "photo",
+      "batch": 10,
+      "model": "V120",
+      "condition": "iso1600-prior",
+      "pattern": "GRBG",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00010/result.json",
+        "sha256": "58d32261bf07cf2856235be6a7327ee8235352b875afffb37900f6f9e0d7875a"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00010/V120-RGB-f32.npy",
+        "sha256": "c1e2f7a73b533aeae8ea314be8326689121e64d0a82de22a4acf52e84bcfe2d1"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/02-V120.npy",
+        "sha256": "2994be0f37a03d6e43477cb5619dce0c5fd6db1720b57c7937b0c9b498b8e5f8"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.04296809434890747,
+      "RMS_DN16": 0.003933228439815987,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -1.553245823515681e-06,
+          -4.855539685877375e-07,
+          2.6816976372856516e-07,
+          1.552702428853081e-07
+        ],
+        "srgb_psnr": [
+          -5.566358538544591e-07,
+          -3.7419427911800085e-07,
+          5.749237530494611e-07,
+          2.2295722601484158e-07
+        ],
+        "chroma_mae": [
+          2.8175970280888696e-10,
+          3.0535527925645845e-10,
+          2.370342485659427e-10,
+          -1.1804788049851744e-10
+        ],
+        "gradient_mae": [
+          8.985236816735909e-11,
+          1.1260072388386e-10,
+          3.0585666291327307e-10,
+          5.55776084876225e-12
+        ]
+      },
+      "CPU_inference_seconds": 10.52260840893723,
+      "CUDA_inference_seconds": 0.9098510559415445
+    },
+    {
+      "stage": "photo",
+      "batch": 10,
+      "model": "scale-control20k",
+      "condition": "iso1600-prior",
+      "pattern": "GRBG",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00010/result.json",
+        "sha256": "58d32261bf07cf2856235be6a7327ee8235352b875afffb37900f6f9e0d7875a"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00010/scale-control20k-RGB-f32.npy",
+        "sha256": "90942d97d9b6b540ae8d631ebe77a5340f22e8873290470bb1ae820762c9097a"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/02-scale-control20k.npy",
+        "sha256": "e16fb85e46408533ada968a8ade7050cf3c46cbdd81de097ab7a5bd5983b7d01"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.07812380790710449,
+      "RMS_DN16": 0.00392622409210129,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -2.9742065521531913e-07,
+          2.550857232108683e-07,
+          2.7861220530667197e-07,
+          -5.713084760827769e-08
+        ],
+        "srgb_psnr": [
+          4.5886949351370276e-08,
+          2.2473076199958086e-07,
+          -2.790850075484741e-07,
+          8.08105937721848e-08
+        ],
+        "chroma_mae": [
+          -1.2578681672648084e-10,
+          1.1313139661184302e-10,
+          3.770743699921253e-11,
+          -2.5253030569438728e-11
+        ],
+        "gradient_mae": [
+          -2.0339816983461212e-10,
+          8.198177813695251e-11,
+          -1.8621548227015783e-10,
+          -1.9657166692998995e-10
+        ]
+      },
+      "CPU_inference_seconds": 9.861578571028076,
+      "CUDA_inference_seconds": 0.9387478040298447
+    },
+    {
+      "stage": "photo",
+      "batch": 15,
+      "model": "V120",
+      "condition": "iso12800-prior",
+      "pattern": "GBRG",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00015/result.json",
+        "sha256": "882e783cb930f67058f11a69db4989735c4222011d7a35bb02e66ef83efae9d4"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00015/V120-RGB-f32.npy",
+        "sha256": "e01d495808027b6f513701c178e8bc19813337ec06b83b8017791e5c2dd264a1"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/03-V120.npy",
+        "sha256": "948e9d83eef16d8dbbe942867b51e068d6fc1b1ec3987a5632ec051850b0e293"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.046874284744262695,
+      "RMS_DN16": 0.004254335691339987,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -2.9172241511332686e-07,
+          -1.7031961618840796e-07,
+          6.73416877816635e-08,
+          -4.110309532734391e-07
+        ],
+        "srgb_psnr": [
+          -2.4391367503540096e-07,
+          8.546841456791299e-08,
+          1.5077752379966114e-08,
+          -1.1463918525578265e-07
+        ],
+        "chroma_mae": [
+          -6.980822777474804e-11,
+          -6.786271631448182e-11,
+          -4.789329965601552e-10,
+          1.0552648685435706e-10
+        ],
+        "gradient_mae": [
+          -4.665705885878446e-11,
+          6.453205157741504e-11,
+          1.0534035536219344e-10,
+          -1.7656983514191538e-11
+        ]
+      },
+      "CPU_inference_seconds": 10.66451601299923,
+      "CUDA_inference_seconds": 0.9198143620742485
+    },
+    {
+      "stage": "photo",
+      "batch": 15,
+      "model": "scale-control20k",
+      "condition": "iso12800-prior",
+      "pattern": "GBRG",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00015/result.json",
+        "sha256": "882e783cb930f67058f11a69db4989735c4222011d7a35bb02e66ef83efae9d4"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00015/scale-control20k-RGB-f32.npy",
+        "sha256": "578c47a0aaa8d7984319271a83d11440b807e8f45ffe92c5b46e339d8672b2bd"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/03-scale-control20k.npy",
+        "sha256": "9bf56ef5261bb569e26fb243d9c1fda65171787e2a75d8aa6d5dff35c8aca55a"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.05078047513961792,
+      "RMS_DN16": 0.004248056994823572,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          7.241519739409341e-08,
+          5.273231806768308e-08,
+          5.128725462100192e-07,
+          5.643393308218947e-08
+        ],
+        "srgb_psnr": [
+          2.837043098224967e-07,
+          7.771467380734975e-08,
+          2.719225804526104e-07,
+          9.796596600608609e-08
+        ],
+        "chroma_mae": [
+          -5.950541960217381e-10,
+          -9.552592224182366e-11,
+          8.366331065434718e-11,
+          -4.141248108324724e-12
+        ],
+        "gradient_mae": [
+          -1.1197655302996878e-10,
+          -8.39812438341303e-11,
+          7.448209583815757e-11,
+          2.7213153605543106e-11
+        ]
+      },
+      "CPU_inference_seconds": 9.815061960020103,
+      "CUDA_inference_seconds": 0.964784511947073
+    },
+    {
+      "stage": "photo",
+      "batch": 16,
+      "model": "V120",
+      "condition": "shadows",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00016/result.json",
+        "sha256": "475b621106f4ba54f6cd2ea59f9e7a7e487518bda5f5d71f9782b397a3ba71c1"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00016/V120-RGB-f32.npy",
+        "sha256": "f52fd1d42ef4c85cfeb26becfd123129c042010e9991c630c04fa504bdf9e67e"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/04-V120.npy",
+        "sha256": "1ebae8607c48867fde7fff95b9f200043584940d3a9410c5d53c13f5750def82"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.005615148693323135,
+      "RMS_DN16": 0.0005488268642385168,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -4.7481567833074223e-07,
+          1.8025863113280138e-07,
+          1.7467245072566584e-07,
+          -4.031718958685815e-08
+        ],
+        "srgb_psnr": [
+          -7.465386318017408e-07,
+          6.642578398441401e-08,
+          5.594852297008401e-07,
+          5.7831130106933415e-08
+        ],
+        "chroma_mae": [
+          3.445279268040474e-10,
+          3.068251173965475e-10,
+          -7.24606232221231e-11,
+          2.1679802918173063e-11
+        ],
+        "gradient_mae": [
+          -6.847855160523053e-11,
+          -4.924999644217998e-11,
+          -7.234377246562174e-11,
+          5.297835607709356e-11
+        ]
+      },
+      "CPU_inference_seconds": 10.695885838009417,
+      "CUDA_inference_seconds": 0.9303902790416032
+    },
+    {
+      "stage": "photo",
+      "batch": 16,
+      "model": "scale-control20k",
+      "condition": "shadows",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00016/result.json",
+        "sha256": "475b621106f4ba54f6cd2ea59f9e7a7e487518bda5f5d71f9782b397a3ba71c1"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00016/scale-control20k-RGB-f32.npy",
+        "sha256": "58e3d39af6b9d92b5299950232f3c2f5cc97a18140035ad431ebc4c701a3fd1c"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/04-scale-control20k.npy",
+        "sha256": "725ec1e20b0240fec508d128b4a99e1b2a6386fa1a5cb1df7f433c336eee8263"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.005371011793613434,
+      "RMS_DN16": 0.0005464369256759014,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -9.78221194714024e-07,
+          -2.857660774679971e-09,
+          -1.8844671245688005e-07,
+          2.830127243669267e-08
+        ],
+        "srgb_psnr": [
+          -6.210609697632208e-07,
+          -4.139735665376065e-08,
+          -1.1850004000280023e-07,
+          8.803225171050144e-08
+        ],
+        "chroma_mae": [
+          2.2380640851867029e-10,
+          3.873895995654131e-11,
+          6.882796025828308e-11,
+          1.0383005046021854e-10
+        ],
+        "gradient_mae": [
+          2.991466406185306e-11,
+          1.2195168486162089e-11,
+          -2.28739249763521e-12,
+          -4.1972040426552226e-11
+        ]
+      },
+      "CPU_inference_seconds": 9.820152531028725,
+      "CUDA_inference_seconds": 0.9601619880413637
+    },
+    {
+      "stage": "photo",
+      "batch": 20,
+      "model": "V120",
+      "condition": "highlights",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00020/result.json",
+        "sha256": "7f06a0e7daf8dfeae69a68b56dc54020129cbbb46269c659547d7f2457a76d8c"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00020/V120-RGB-f32.npy",
+        "sha256": "575852fd5b82bc9f7e1e51a18cc2ef0030da0dd65e9eb3c1d9ae123e06a2d766"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/05-V120.npy",
+        "sha256": "c1ae3ede383934604f06616c6c75fbf08cb237c231e2cd1b295fcba2b4276ae8"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.24218380451202393,
+      "RMS_DN16": 0.021878556355397573,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -2.566787671298698e-09,
+          -2.7563435978095185e-08,
+          4.4804755461314016e-08,
+          3.474995935448533e-08
+        ],
+        "srgb_psnr": [
+          4.81559830234346e-07,
+          -2.28039468197494e-07,
+          1.607865840469458e-07,
+          1.903952124848729e-07
+        ],
+        "chroma_mae": [
+          -1.853932250772683e-09,
+          -5.636293428507022e-11,
+          -1.353321734190449e-10,
+          -4.2589522880609465e-10
+        ],
+        "gradient_mae": [
+          -6.38365567004473e-10,
+          -3.2087140236503053e-11,
+          -1.6685633083546314e-10,
+          -2.2950009601063748e-10
+        ]
+      },
+      "CPU_inference_seconds": 10.631295536994003,
+      "CUDA_inference_seconds": 0.9112890919204801
+    },
+    {
+      "stage": "photo",
+      "batch": 20,
+      "model": "scale-control20k",
+      "condition": "highlights",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00020/result.json",
+        "sha256": "7f06a0e7daf8dfeae69a68b56dc54020129cbbb46269c659547d7f2457a76d8c"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00020/scale-control20k-RGB-f32.npy",
+        "sha256": "f8589e793c06a68817d826dfe66e043ea44c34fd850037cdf28a5752b2821377"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/05-scale-control20k.npy",
+        "sha256": "c899c8959a10ea718294618daee2a1d0675f1b3a53525864ec295fc55ed073a9"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.24999618530273438,
+      "RMS_DN16": 0.02229720728961841,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -7.702396942477208e-09,
+          -2.6788335105720762e-08,
+          7.158766024417673e-09,
+          1.995924492348422e-08
+        ],
+        "srgb_psnr": [
+          -2.6865774493955996e-06,
+          6.087519466291269e-07,
+          -5.758381007581193e-07,
+          -2.6876623593352633e-07
+        ],
+        "chroma_mae": [
+          7.995614212386037e-09,
+          9.708227711319184e-11,
+          1.7506111534351665e-10,
+          7.528615231233715e-10
+        ],
+        "gradient_mae": [
+          -1.523365383490627e-10,
+          -6.766369946981099e-10,
+          4.512036490961213e-11,
+          4.3472621683027235e-10
+        ]
+      },
+      "CPU_inference_seconds": 10.082112313015386,
+      "CUDA_inference_seconds": 0.9189516250044107
+    },
+    {
+      "stage": "photo",
+      "batch": 25,
+      "model": "V120",
+      "condition": "legacy-noise",
+      "pattern": "BGGR",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00025/result.json",
+        "sha256": "c54199866032e57b9df7484e3613a8a1f73efffb11af2308d14288b7ddfeb8a7"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00025/V120-RGB-f32.npy",
+        "sha256": "6a63bf352edf54daba9ff4c4a992953b5b8032f92086deb952383e225314b4ca"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/06-V120.npy",
+        "sha256": "bb09d01ba26b450ca096def5657dab63e766df76816496ef406ebe4674cdccdb"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.046874284744262695,
+      "RMS_DN16": 0.004237087689606938,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -1.4699465964440606e-06,
+          1.1381821707345807e-08,
+          8.992654656481136e-07,
+          8.028351317079796e-09
+        ],
+        "srgb_psnr": [
+          -2.3248343694604046e-07,
+          1.0391392635256125e-07,
+          6.442027924435934e-07,
+          1.2384980152546632e-07
+        ],
+        "chroma_mae": [
+          -2.1450434787781414e-10,
+          -2.7339062871195585e-10,
+          -5.348966235219077e-11,
+          -1.5315412653371663e-10
+        ],
+        "gradient_mae": [
+          4.5891975376105565e-10,
+          2.726204080191752e-10,
+          -6.120213199081737e-10,
+          4.475214296362218e-11
+        ]
+      },
+      "CPU_inference_seconds": 10.82525613589678,
+      "CUDA_inference_seconds": 0.8942821349482983
+    },
+    {
+      "stage": "photo",
+      "batch": 25,
+      "model": "scale-control20k",
+      "condition": "legacy-noise",
+      "pattern": "BGGR",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00025/result.json",
+        "sha256": "c54199866032e57b9df7484e3613a8a1f73efffb11af2308d14288b7ddfeb8a7"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00025/scale-control20k-RGB-f32.npy",
+        "sha256": "0de99150236582c0f82146718620ce413bbaa0db6699fff158d32110658aa8a2"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/06-scale-control20k.npy",
+        "sha256": "dc3916054b88b830d74c3461b29fff3237238301c8662a77cb46a037a3a8a94f"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.05078047513961792,
+      "RMS_DN16": 0.004213992305367614,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          8.774691480084584e-07,
+          -8.137079277048542e-08,
+          -1.1716729204636067e-06,
+          1.3958711519990175e-08
+        ],
+        "srgb_psnr": [
+          5.515418379786752e-07,
+          -1.4552597349393182e-08,
+          -4.843760734729585e-07,
+          6.439758948317831e-08
+        ],
+        "chroma_mae": [
+          -1.9210739943265054e-10,
+          -2.8883338082374976e-10,
+          1.20653993306713e-10,
+          -2.423754686536883e-10
+        ],
+        "gradient_mae": [
+          2.4265074671792064e-10,
+          -1.0610926200194104e-10,
+          2.750428253206483e-10,
+          -2.498165459219326e-10
+        ]
+      },
+      "CPU_inference_seconds": 10.008800930925645,
+      "CUDA_inference_seconds": 0.9615485519170761
+    },
+    {
+      "stage": "photo",
+      "batch": 76,
+      "model": "V120",
+      "condition": "highlights",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00076/result.json",
+        "sha256": "f16e34108b31fb37bbc74c7e71b1c4ef8203425b0c13953ff7f279178abb0bef"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00076/V120-RGB-f32.npy",
+        "sha256": "156aa0ad3afb0ebf72917522f2dca47cb9e6c65f8751011b7d1ed1695592ae1e"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/07-V120.npy",
+        "sha256": "a7bac1c9914448f97fc850b87b99f7386420bed09a77b5d71a98325d5487f8a2"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.20312190055847168,
+      "RMS_DN16": 0.01895525593793671,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          -1.2274165683834326e-08,
+          -3.125703074147168e-08,
+          -3.713090279688913e-09,
+          -4.625361782473192e-08
+        ],
+        "srgb_psnr": [
+          7.72779664259815e-07,
+          -1.640621434262357e-07,
+          6.539709218600365e-07,
+          2.4598028147693185e-07
+        ],
+        "chroma_mae": [
+          -2.8495134160241853e-10,
+          1.0584548550129913e-09,
+          -3.607688366796813e-12,
+          -3.9295021923846374e-10
+        ],
+        "gradient_mae": [
+          -4.877577976930558e-10,
+          -1.538790345145813e-10,
+          -8.268847499076637e-11,
+          -3.2680155456765725e-11
+        ]
+      },
+      "CPU_inference_seconds": 10.860334480064921,
+      "CUDA_inference_seconds": 0.9110454759793356
+    },
+    {
+      "stage": "photo",
+      "batch": 76,
+      "model": "scale-control20k",
+      "condition": "highlights",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00076/result.json",
+        "sha256": "f16e34108b31fb37bbc74c7e71b1c4ef8203425b0c13953ff7f279178abb0bef"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/photo-00076/scale-control20k-RGB-f32.npy",
+        "sha256": "a81b6e180c66c21bb99926df2678b2ebc4312d62fb4fb9689fd4ace66e4e1426"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/07-scale-control20k.npy",
+        "sha256": "b54e1dfafa6dad93fda994e40e8d6a96d0e3a29e85315f2a6310b9358af982f9"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        256,
+        256
+      ],
+      "max_DN16": 0.21874666213989258,
+      "RMS_DN16": 0.019364364537096865,
+      "within_pixel_bounds": true,
+      "primary_metric": "srgb_psnr",
+      "metric_differences": {
+        "linear_psnr": [
+          9.583883908703683e-09,
+          -1.2835875295991173e-07,
+          -1.9584973642849945e-08,
+          -2.3137868510048065e-08
+        ],
+        "srgb_psnr": [
+          2.4624704053621826e-08,
+          2.3244323443805115e-07,
+          -6.273188333238977e-07,
+          -4.951323262503138e-07
+        ],
+        "chroma_mae": [
+          -5.900598759600584e-11,
+          -3.544780198538877e-10,
+          1.7623432877963974e-11,
+          1.10938787323267e-09
+        ],
+        "gradient_mae": [
+          2.232025710091623e-10,
+          5.091903114429197e-10,
+          -4.583402234137335e-11,
+          1.5908440016698666e-10
+        ]
+      },
+      "CPU_inference_seconds": 9.892772585968487,
+      "CUDA_inference_seconds": 0.9204293889924884
+    },
+    {
+      "stage": "known",
+      "batch": 0,
+      "model": "V120",
+      "condition": "known",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00000/result.json",
+        "sha256": "7bfa0fbb77b4581f01cf61cc7ef35029cfa59e49c00362138410f4024e2fb716"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00000/V120-RGB-f32.npy",
+        "sha256": "60a7cccfaa63028d23baf3af2f2c08edf124be9454ba42cd3ca1077a8559c85c"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/08-V120.npy",
+        "sha256": "766f6c7b9d5fc0306e7046c5270e5fad84b3eb1ab37c28cd4be2dde24b4d20fd"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.01269511878490448,
+      "RMS_DN16": 0.0007599815723543312,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          4.1939813399949344e-08,
+          5.4743033217619086e-08,
+          4.479361322751174e-06,
+          2.1777435676995083e-07
+        ],
+        "reference_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          4.751628992494261e-07,
+          -1.7660131845786964e-07,
+          2.945590971137335e-06,
+          4.783639511174442e-07
+        ],
+        "ahd_chroma_mae": [
+          -9.32598859249012e-11,
+          2.1965893557199245e-10,
+          -3.762129327684882e-10,
+          -9.905844547408726e-11
+        ],
+        "ahd_gradient_mae": [
+          -1.261212835557135e-11,
+          1.3305098819568761e-10,
+          1.3424613851120704e-11,
+          4.8544102765335495e-11
+        ]
+      },
+      "CPU_inference_seconds": 44.7856892189011,
+      "CUDA_inference_seconds": 2.97200198401697
+    },
+    {
+      "stage": "known",
+      "batch": 0,
+      "model": "scale-control20k",
+      "condition": "known",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00000/result.json",
+        "sha256": "7bfa0fbb77b4581f01cf61cc7ef35029cfa59e49c00362138410f4024e2fb716"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00000/scale-control20k-RGB-f32.npy",
+        "sha256": "5afa0c77f9392fdf170223d0c0ea91b7d880c034ba4a319e62663247132d2c6a"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/08-scale-control20k.npy",
+        "sha256": "67c9e453ad977eee7b17b360ff00ea1aacf111687d18c5660cfe753a0424594d"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.013671666383743286,
+      "RMS_DN16": 0.0007503005652037429,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          1.0757978401443324e-06,
+          1.6532076543285257e-06,
+          3.911149100588318e-06,
+          -1.6386752577091102e-07
+        ],
+        "reference_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          3.5373140860883723e-07,
+          -2.674493941867695e-07,
+          2.0835715943690047e-06,
+          2.505974379118925e-07
+        ],
+        "ahd_chroma_mae": [
+          -9.382645832153869e-11,
+          9.750792924825835e-11,
+          -2.357181528959973e-10,
+          -1.7774252122210177e-11
+        ],
+        "ahd_gradient_mae": [
+          -4.581198441433454e-11,
+          3.646389960809682e-11,
+          -5.287667005637875e-12,
+          7.929624838698413e-12
+        ]
+      },
+      "CPU_inference_seconds": 40.96111324604135,
+      "CUDA_inference_seconds": 2.6250780349364504
+    },
+    {
+      "stage": "known",
+      "batch": 2,
+      "model": "V120",
+      "condition": "known",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00002/result.json",
+        "sha256": "0e5ddb86a771ed753d6eab12cc39541336687e3464e407ee3bfe3569174fe650"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00002/V120-RGB-f32.npy",
+        "sha256": "1e132a6dff2bd88eb8e932ea31491279fa14a40145df7b394907d5d2530f3bb9"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/09-V120.npy",
+        "sha256": "69b1e43615e404d1df0709cc809f2a245c35a8eabaab9fc66451515aa3760418"
+      },
+      "batch_size": 1,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.004394464194774628,
+      "RMS_DN16": 0.0005260169905233266,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          -1.6767532287076392e-06
+        ],
+        "reference_samples": [
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          -9.963339380192338e-07
+        ],
+        "ahd_chroma_mae": [
+          6.1640059376144585e-12
+        ],
+        "ahd_gradient_mae": [
+          -3.636378654789385e-11
+        ]
+      },
+      "CPU_inference_seconds": 11.120845427038148,
+      "CUDA_inference_seconds": 0.4142545909853652
+    },
+    {
+      "stage": "known",
+      "batch": 2,
+      "model": "scale-control20k",
+      "condition": "known",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00002/result.json",
+        "sha256": "0e5ddb86a771ed753d6eab12cc39541336687e3464e407ee3bfe3569174fe650"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00002/scale-control20k-RGB-f32.npy",
+        "sha256": "abbfcb8fa73e2eef2740dec68b3fca03637802f00dcd4808fcaccf6925f973dd"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/09-scale-control20k.npy",
+        "sha256": "86c7eb9a6dda71818b4bcf01b0cfda542a7ca003d741958ac01ada04aa45717b"
+      },
+      "batch_size": 1,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.004394464194774628,
+      "RMS_DN16": 0.0005218071065762565,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          -1.8413764379943132e-06
+        ],
+        "reference_samples": [
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          -7.532701644663575e-07
+        ],
+        "ahd_chroma_mae": [
+          -1.5606699092785004e-11
+        ],
+        "ahd_gradient_mae": [
+          -5.134941430395834e-11
+        ]
+      },
+      "CPU_inference_seconds": 10.132075786939822,
+      "CUDA_inference_seconds": 0.5529072739882395
+    },
+    {
+      "stage": "unseen",
+      "batch": 3,
+      "model": "V120",
+      "condition": "unseen",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00003/result.json",
+        "sha256": "e49e632a97cda3827fa0b8870f846224fefc180aeae418b2aa9fe9d703625140"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00003/V120-RGB-f32.npy",
+        "sha256": "68f8330544fe3e56fe704ef22d5e65a2f812c097f1acb1553e84b8de3b30fe36"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/10-V120.npy",
+        "sha256": "a88883de12a7af9c113209fec24ed0bd2c31a030691739f83d4de04f47f7c9ab"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.031249523162841797,
+      "RMS_DN16": 0.0025402260670550503,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          -2.2189659887317248e-07,
+          2.6436786981776095e-07,
+          2.0726442784280152e-07,
+          -3.6913184686682143e-07
+        ],
+        "reference_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          -6.376171768351924e-08,
+          4.11663663157924e-08,
+          1.551718540326874e-07,
+          5.249908952009719e-09
+        ],
+        "ahd_chroma_mae": [
+          -1.1042099613139955e-10,
+          -1.1363594006746913e-10,
+          -2.0659152513702317e-10,
+          -5.771712795199502e-11
+        ],
+        "ahd_gradient_mae": [
+          1.276964090024535e-10,
+          -7.138621464786166e-11,
+          2.3432076591556328e-11,
+          -1.905015954012379e-10
+        ]
+      },
+      "CPU_inference_seconds": 45.09266868804116,
+      "CUDA_inference_seconds": 2.392369347042404
+    },
+    {
+      "stage": "unseen",
+      "batch": 3,
+      "model": "scale-control20k",
+      "condition": "unseen",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00003/result.json",
+        "sha256": "e49e632a97cda3827fa0b8870f846224fefc180aeae418b2aa9fe9d703625140"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00003/scale-control20k-RGB-f32.npy",
+        "sha256": "a3de263e59d31cbaa80dd0f76cd06614b5c584f0497d8c174d0515235765ce21"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/10-scale-control20k.npy",
+        "sha256": "7a3804f57f4dc779c6024ee47f6768babd3b8fd508beb9346f53688ac7f3ff93"
+      },
+      "batch_size": 4,
+      "shape": [
+        4,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.027343332767486572,
+      "RMS_DN16": 0.0025285612895380913,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          2.8892254277934626e-07,
+          -3.4082248134836846e-08,
+          -2.3478717281477657e-07,
+          -5.604203536790919e-07
+        ],
+        "reference_samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          -1.3413519184268807e-07,
+          1.2410102812054902e-07,
+          -5.981985395919764e-08,
+          1.1693871471152306e-07
+        ],
+        "ahd_chroma_mae": [
+          7.33958603095497e-10,
+          4.533531796496737e-11,
+          -4.870351604652212e-11,
+          -1.157986467131833e-10
+        ],
+        "ahd_gradient_mae": [
+          1.0364357809489189e-11,
+          1.3378780201744878e-10,
+          3.105563983057946e-11,
+          -2.0018778128239045e-10
+        ]
+      },
+      "CPU_inference_seconds": 40.47044468391687,
+      "CUDA_inference_seconds": 2.553068889072165
+    },
+    {
+      "stage": "unseen",
+      "batch": 5,
+      "model": "V120",
+      "condition": "unseen",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00005/result.json",
+        "sha256": "6d40c594c4d4653e1f265cb31d0711674e713d12e56a37356ab85a167d3ef98e"
+      },
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00005/V120-RGB-f32.npy",
+        "sha256": "88779b9094ea9644864858b37f6f66b622594d02894a2e5dc7d19e182cde180c"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/11-V120.npy",
+        "sha256": "2d5138f29eff6c6b0ade078a2c5229648605560d452944c1751ccf3d35485638"
+      },
+      "batch_size": 1,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.009277202188968658,
+      "RMS_DN16": 0.0013315777048164763,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          4.3404450877915224e-07
+        ],
+        "reference_samples": [
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          2.137108836564039e-07
+        ],
+        "ahd_chroma_mae": [
+          -2.40321992341086e-10
+        ],
+        "ahd_gradient_mae": [
+          5.1185857635749343e-11
+        ]
+      },
+      "CPU_inference_seconds": 10.790993880014867,
+      "CUDA_inference_seconds": 0.30071018100716174
+    },
+    {
+      "stage": "unseen",
+      "batch": 5,
+      "model": "scale-control20k",
+      "condition": "unseen",
+      "pattern": "RGGB",
+      "CPU_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00005/result.json",
+        "sha256": "6d40c594c4d4653e1f265cb31d0711674e713d12e56a37356ab85a167d3ef98e"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "CPU_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00005/scale-control20k-RGB-f32.npy",
+        "sha256": "67c4874836a7556c16acceebfbcfb6711d94bcf0eebca92a37fd2377e3c4d6bb"
+      },
+      "CUDA_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-CUDA-probe-v1/output/11-scale-control20k.npy",
+        "sha256": "a93802757d91e19fff247ab020bd4d10dc1ae705c9dabe6491aa57158fc1dba6"
+      },
+      "batch_size": 1,
+      "shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_DN16": 0.008788928389549255,
+      "RMS_DN16": 0.0013289917623556537,
+      "within_pixel_bounds": true,
+      "primary_metric": "sensor_psnr",
+      "metric_differences": {
+        "sensor_psnr": [
+          9.455578009465171e-08
+        ],
+        "reference_samples": [
+          0.0
+        ],
+        "ahd_srgb_psnr": [
+          -4.5096914647047015e-07
+        ],
+        "ahd_chroma_mae": [
+          4.66523063236135e-10
+        ],
+        "ahd_gradient_mae": [
+          -2.270664819364887e-11
+        ]
+      },
+      "CPU_inference_seconds": 9.895763434004039,
+      "CUDA_inference_seconds": 0.5582291450118646
+    }
+  ],
+  "calls": {
+    "V120": {
+      "root": 12,
+      "DINO": 12
+    },
+    "scale-control20k": {
+      "root": 12,
+      "DINO": 12
+    }
+  },
+  "all_pixel_bounds_pass": true,
+  "maximum_DN16": 0.24999618530273438,
+  "maximum_RMS_DN16": 0.02229720728961841,
+  "maximum_primary_metric_difference_dB": 4.479361322751174e-06,
+  "peak_cuda_allocated_GiB": 3.2552289962768555,
+  "peak_cuda_reserved_GiB": 3.751953125,
+  "probe_wall_seconds_excluding_load": 44.86353192105889,
+  "state_hashes": {
+    "V120": "8816512ccbf637001d15b059f461378331c2bb766877c29b1674d005993d07a4",
+    "scale-control20k": "3c4ddf00d4462a90c21b50472556064d56efc8f5389e9f2ff4ab4cc02f789727"
+  },
+  "scope": "Same immutable inputs/checkpoints; both models run independently on CUDA. Concurrent training and CPU work affect timing. Pixel bounds are numerical compatibility checks. Full primary or model quality claims require all cases."
+}

@@ -18,6 +18,10 @@ has repeatedly come with extra flat-region error or false color. The
    placement. The [completed camera panels](whole-scene-context-camera-review.md)
    show partial unseen repair versus local-only but regression versus V120.
    Full427 photos are still collecting.
+   A disjoint RAW direction guide also improves the ISO400 far-wire result
+   in eight reused synthetic geometries, with no clear ISO6400 weak-detail
+   benefit. The real cab comparisons show stripe suppression on one side
+   and stronger diagonal modulation on the other. [Direction-guide test](scene-wave-guides.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

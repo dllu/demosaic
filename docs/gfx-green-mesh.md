@@ -12,6 +12,7 @@ preserves its original comparison pixels and provenance.
 | [Corpus control10k midpoint](full-corpus-control10k-review.md) | Both native ROIs/profiles/JPEGs viewed against matched V120; nominal mesh mostly erased, nearby lattice soft/incomplete. No convincing new crossings; completed-horizon broad scores pending |
 | [Execution/raw-EMA follow-up](training-execution-quality.md) | All77-step profiles and10k raw/EMA, both ROIs/profiles/JPEGs actually viewed. Fine nominal mesh still erased; nearby lattice incomplete. No convincing new crossings |
 | [Completed corpus20k](full-corpus-control20k-review.md) | Both ROIs/profiles/JPEGs actually viewed against fresh matched V120. Nominal mesh largely erased; nearby soft/incomplete. No faithful new crossings. ADC-bin diagnostic bypasses these positive-noise images identically. Separate [camera panels](full-corpus-control20k-camera-review.md) are complete; full427 photos pending |
+| [Disjoint RAW direction guides](scene-wave-guides.md) | Both ROIs, profiles and JPEGs viewed. Some right query-only stripes suppressed, with stronger left diagonal modulation. Fine crossings remain unresolved |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |

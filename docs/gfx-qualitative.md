@@ -33,6 +33,10 @@ historical boards. Use these reports for the current completed comparisons:
   [ADC-bin diagnostic](adc-bin-consistency.md) bypasses these positive-noise
   inputs identically and adds no new GFX image. The [camera follow-up](full-corpus-control20k-camera-review.md)
   now completes its separate known/unseen panels; full427 photos are pending.
+- [Disjoint RAW direction-guide stress](scene-wave-guides.md): the coarse
+  fence guide leaves the sky unchanged. Building and foliage changes are
+  slight, and the coarse lattice remains visible. The companion cab test
+  finds a modulation tradeoff and no clear new crossings.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

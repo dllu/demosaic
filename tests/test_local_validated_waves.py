@@ -23,6 +23,30 @@ def scene(layout=LAYOUTS[0], size=64):
     return raw, colors, rgb
 
 
+def test_guided_query_refits_phase_from_only_its_discovery_samples():
+    raw, colors, _ = scene()
+    frequencies = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))
+    mask = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 0.00008,
+        "read": 2.56e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": frequencies,
+    }
+    original = local.fit_local_candidate(raw, colors, mask, **options)
+    corrupted = local.fit_local_candidate(np.where(mask, raw, np.nan), colors, mask, **options)
+    assert original.frequencies_xy == frequencies
+    np.testing.assert_array_equal(original.coefficients, corrupted.coefficients)
+    np.testing.assert_array_equal(original.conditional_null_cfa, corrupted.conditional_null_cfa)
+    # Donor phase is absent from the API. A translated query must fit changed
+    # sine/cosine amplitudes without changing either supplied direction.
+    translated = np.roll(raw, 2, axis=1)
+    changed = local.fit_local_candidate(translated, colors, mask, **options)
+    assert changed.frequencies_xy == frequencies
+    np.testing.assert_allclose(changed.full_cfa, translated, rtol=0, atol=1e-12)
+    assert not np.allclose(original.coefficients[:, -4:], changed.coefficients[:, -4:])
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
 @pytest.mark.parametrize("harmonics", [1, 3])
 @pytest.mark.parametrize(
