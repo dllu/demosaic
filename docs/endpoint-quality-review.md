@@ -1,9 +1,11 @@
 # Endpoint quality and native-image review
 
-The [V131/V132 spatial trial](raw-spatial-training.md) also has a live full-panel
-→ independent audit → matched native review → extra green-mesh queue chain.
-All four new checks passed; V131's original20k control now runs after V125's admission and V132 follows.
-It uses the90,781/29 cohort and matched full-frame32px tile grids. Quality is pending.
+The [V131/V132 spatial trial](raw-spatial-continuation.md) completes both20k
+arms and [targeted independent/native review](raw-spatial-endpoint-review.md).
+V131 has small mixed gains; [V132](v132-endpoint-quality.md) loses0.410 dB faint
+ADC versus V131 with ordinary detail tied and missing fine crossings.
+Original full-panel queue failures and source receipts remain preserved;
+the current targeted review does not supply a broad V132 or full-frame result.
 
 **[V122/V123 full quality and selected native review](v122-v123-quality.md) are
 complete; [V124's mean-loss control](conditional-mean-training.md) completed20k.**

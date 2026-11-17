@@ -284,7 +284,9 @@ All22 current matched comparisons, six stress boards, two triplets and both
 plots were actually viewed. Its independent audit again checks2,613 fields,
 44 original boards/14,131,200 RGB channels; score/finite differences zero,
 maximum band difference `3.28e-15`. A further3,532,800 matched/stress channels
-pass the independent display check. V132's original full20k training continues.
+pass the independent display check. The separate
+[V132 full20k review](v132-endpoint-quality.md) is now complete, with a
+faint-ADC regression and no new fine crossings.
 
 The next discriminating evidence is the [A-only neural background diagnostic](withheld-neural-background.md):
 it predicts withheld building/cab sensor samples better than the analytic fit,

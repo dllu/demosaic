@@ -5,8 +5,11 @@ source-frozen review queue. It collects **102 saved inputs per completed model**
 and independently audits their numerical metrics and native pixels. V131 has
 completed20k and its entire collection/audit/native viewing is done:
 [small mixed faint-detail gains, no clear new real mesh](v131-endpoint-quality.md).
-V132 is training; the queue waits for its exact completed endpoint. V120 remains
-the general recommendation.
+V132's [completed endpoint review](v132-endpoint-quality.md) uses all114 EMA
+tensors and102 retained inputs, passes the independent audit and completes all64
+native-board views. Faint ADC loses0.410 dB versus V131; ordinary detail is
+essentially tied and fine crossings remain missing. V120 remains the general
+recommendation. Original queue/source/state receipts remain intact.
 
 ## The same weak-detail and photographic evidence
 

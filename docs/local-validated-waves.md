@@ -27,7 +27,8 @@ weak response rises1.826%→2.690% above V143, with quiet/increment costs.
 Local support lowers global-support error in all six cells; higher-noise weak
 detail remains missing. That result uses the historical matcher, without later
 parameter or threshold changes. The separate
-[V132 full-model training](raw-spatial-continuation.md) also continues.
+[V132 full-model comparison](v132-endpoint-quality.md) is now complete, with
+faint-ADC regression and no new fine crossings.
 [Pilot evidence and executed sources](results/local-validated-wave-pilot-v1/publication.json).
 
 ## Reconstruction from RAW before consulting the parent

@@ -252,7 +252,11 @@ All four contexts were actually viewed, including
 Foliage remains painterly, larger geometry coherent and sky quiet. The
 [corrected DSCF3842/DSCF3835 mesh with both camera JPEGs](gfx-green-mesh.md#v131-retained1k-progress)
 also shows no clear new lattice recovery. V131 retains V120's architecture;
-V132's added branch and full-endpoint quality remain pending.
+Both full20k [V131](v131-endpoint-quality.md) and [V132](v132-endpoint-quality.md)
+endpoints now have independent audits and completed native views of all four
+main contexts plus the cab pair/JPEGs. Foliage remains soft and fine crossings
+missing. The [native512 nuisance ablations](neural-nuisance-context512.md)
+do not resolve those weaknesses.
 [Source/ROI/checkpoint/noise/display metadata](images/v131-progress1000-quality-v1/manifest-v2.json).
 
 ## V137 conditioned-global pilot

@@ -76,7 +76,10 @@ The [V131/V132 spatial-detail trial](raw-spatial-training.md) queues both fixed
 mesh profiles and both native160 regions, with this corrected DSCF3835 reference
 and both camera JPEGs. [V1311k progress](v131-progress1000-quality.md) is now
 actually viewed and measured below, with no clear new lattice recovery;
-V132 and the full endpoints remain pending.
+Both20k [V131](v131-endpoint-quality.md) and [V132](v132-endpoint-quality.md)
+endpoints are now actually reviewed at both profiles/ROIs with both JPEGs;
+fine crossings remain missing. The [native512 nuisance ablations](neural-nuisance-context512.md)
+also retain these difficult views without new crossing recovery.
 
 The [V137 conditioned-global review](v137-global-conditioned-quality.md) is
 complete on these two profiles/regions with corrected DSCF3835 and all three

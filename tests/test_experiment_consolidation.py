@@ -245,12 +245,14 @@ def test_exclusive_json_snapshot_and_worker_lock(tmp_path):
 def test_package_imports_without_scripts_and_native_pixels_have_no_resampling(tmp_path):
     env = dict(os.environ, PYTHONPATH=str(Path(__file__).resolve().parents[1] / "src"))
     command = (
+        "import sys; from demosaic.models import load_model, model_presets; "
+        "assert callable(load_model) and model_presets()[0]['name']=='v120'; "
+        "assert any(p['name']=='v132' for p in model_presets()); "
+        "assert 'torch' not in sys.modules; "
         "from demosaic.experiments.data.shared_edge import pair_recipe; "
         "from demosaic.experiments.objectives.directional import objective; "
         "from demosaic.experiments.evaluation.detail import DetailMetrics; "
-        "import sys; from demosaic.models import load_model, model_presets; "
-        "assert callable(load_model) and model_presets()[0]['name']=='v120'; "
-        "assert 'torch' not in sys.modules"
+        "import torch; assert not torch.cuda.is_initialized()"
     )
     subprocess.run([sys.executable, "-c", command], cwd=tmp_path, env=env, check=True)
     rng = np.random.default_rng(4)

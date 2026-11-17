@@ -57,7 +57,16 @@ def geometry(shape):
 
 
 def fit_candidate(
-    raw, colors, discovery_mask, *, shot, read, nuisance="affine", peaks=2, edge_refinements=0
+    raw,
+    colors,
+    discovery_mask,
+    *,
+    shot,
+    read,
+    nuisance="affine",
+    peaks=2,
+    edge_refinements=0,
+    edge_search="bounded-grid",
 ):
     """Fit a fixed native-coordinate prediction using only discovery samples.
 
@@ -82,6 +91,8 @@ def fit_candidate(
         or type(edge_refinements) is not int
         or not 0 <= edge_refinements <= 3
         or (edge_refinements and nuisance != "step")
+        or edge_search not in ("bounded-grid", "full-frame")
+        or (edge_search == "full-frame" and nuisance != "step")
     ):
         raise ValueError("Invalid CFA discovery inputs")
     xx, yy, basis, steps = geometry(raw.shape)
@@ -90,7 +101,15 @@ def fit_candidate(
         raise ValueError("Discovery subset needs samples of every color")
     edge_index = None
     edge_geometry = None
-    if nuisance == "step":
+    if nuisance == "step" and edge_search == "full-frame":
+        from demosaic.full_frame_edge import search_edge
+
+        angle, offset = search_edge(raw.ravel()[green], basis[green, 1:], edge_refinements)
+        x, y = basis[:, 1], basis[:, 2]
+        chosen_step = (x * np.cos(angle) + y * np.sin(angle) > offset).astype(np.float64)
+        edge_geometry = (angle, offset)
+        basis = np.column_stack((basis, chosen_step))
+    elif nuisance == "step":
         # Residualize every fixed edge competitor against the A-only affine fit.
         q, _ = np.linalg.qr(basis[green], mode="reduced")
         edges = steps[green]

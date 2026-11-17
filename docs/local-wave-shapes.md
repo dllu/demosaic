@@ -12,8 +12,9 @@ individual support, with less response, but conspicuous bands persist.
 The expanded affine background raises quiet error further.
 
 This follows the [local conditional-wave pilot](local-validated-waves.md)
-on its identical development inputs. The full three-prior pilot retains its
-original frozen source; neither it nor the separate V132 training is restarted.
+on its identical development inputs. The [full three-prior panel](local-wave-full-panel.md)
+and separate [V13220k comparison](v132-endpoint-quality.md) now complete under
+their original frozen sources; no original process is restarted.
 [Receipts, executed sources and publication](results/local-wave-shapes-pilot-v1/publication.json).
 
 ## Measured gain and its costs

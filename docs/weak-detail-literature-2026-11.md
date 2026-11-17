@@ -59,14 +59,21 @@ uses the same88 cached backgrounds, zero neural replay and576 exact analytic
 control files:400/far weak response recovers to2.690%, with quiet/increment
 RMS−0.574%/−0.133% versus the3.686% conditional analytic control. This useful
 quieter operating point still loses response and misses real fine crossings.
+The [native512 follow-ups](neural-nuisance-context512.md) lose this gain, returning
+near-parent0.957–0.959% weak response. A complete edge-offset search fixes the
+far-background geometry and greatly lowers withheld noisy sensor error, but
+still misses weak carriers. This separates a real nuisance-model limitation
+from the remaining frequency-discovery/reconstruction problem. The
+[full eight-source256 panel](neural-nuisance-full-panel.md) is running.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
-completes its original20k control: [V131 targeted quality](v131-endpoint-quality.md)
+completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small
 ordinary/shadow gains and no convincing new real mesh crossings. V132's
-added-attention arm is training, with original source and20k horizons preserved.
-Its [matched1k/native review](v132-progress1000-quality.md) finds faint-ADC
-+0.03356 dB versus V1311k but−0.23979 dB versus V120, without clear new real
-crossings or foliage recovery. That early gain does not establish convergence.
+[completed20k/native review](v132-endpoint-quality.md) loses0.40978 dB faint ADC
+versus V131, with ordinary+0.00046 dB/shadow−0.00438 dB and no new fine cab
+crossings. All20,000 actual clean/noisy input hashes match; original source and
+horizons are preserved. The earlier1k faint advantage did not persist, so this
+specific RAW-attention continuation does not improve targeted weak fidelity.
 V131's [completed broad review](v131-broad-primary.md) finds photo+0.04000 dB
 and400/427 source gains, but unseen-camera−0.04381 dB and worst ADC color error
 1,816 DN16 versus55.5. Its weakest high-noise band gains amplitude with slightly

@@ -5,14 +5,18 @@ The [full local/global wire panel](local-wave-full-panel.md) and
 complete and independently audited. V131 improves photo scores with
 unseen-camera and severe ADC-color costs. The opt-in
 [fixed ADC repair](v131-adc-projection.md) improves ADC photo/color results,
-with weakest-band error+1.43%. V132's original20k training continues.
+with weakest-band error+1.43%. V132's [completed20k review](v132-endpoint-quality.md)
+loses0.410 dB faint ADC versus V131; ordinary detail is essentially tied.
 The [phase-aggregation pilot](phase-measurement-aggregation.md) now completes
 all48 inputs/native review: more low-prior response with higher error and
 severe real color bands. Its consistent nuisance-projection follow-up is also
 complete:12.68% far/400 weak response, similar errors and persistent bands.
 A [four-forward A-only neural diagnostic](withheld-neural-background.md) improves
-held-out sensor prediction on the building/cab contexts; a richer nuisance
-correction remains the next experiment.
+held-out sensor prediction on the building/cab contexts. The
+[fixed-proposal neural nuisance](neural-nuisance-fixed-proposals.md) retains a
+quieter2.690% weak-response operating point. [Native512 ablations](neural-nuisance-context512.md)
+fit the far edge better but lose that response; the
+[full256 source/CFA/noise panel](neural-nuisance-full-panel.md) is running.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier
@@ -34,7 +38,7 @@ fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
 
 | Recipe | Purpose | State |
 | --- | --- | --- |
-| [Full-model RAW attention](raw-spatial-continuation.md) | Matched20k control versus added RAW spatial attention, full restoration trunk trained | V131 completes20k and [native control review](v131-endpoint-quality.md). V132 production is training; [matched1k/native review](v132-progress1000-quality.md) finds small faint gains versus V1311k, still below V120. [Completed-endpoint review](raw-spatial-endpoint-review.md) waits for its result |
+| [Full-model RAW attention](raw-spatial-continuation.md) | Matched20k control versus added RAW spatial attention, full restoration trunk trained | Both20k/input-trace audits/native reviews complete. [V132 endpoint](v132-endpoint-quality.md): faint ADC −0.410 dB versus V131; ordinary tied, fine crossings missing |
 | [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
 | [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
 | [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |

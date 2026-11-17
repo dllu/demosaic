@@ -34,12 +34,11 @@ useful gain at1,000 matched updates, with independently audited native/GFX views
 finds small mixed changes without clear noisy/GFX recovery. The matched
 [V130 FP32 pilot](training-precision-pilot.md) slightly improves selected faint-ADC
 bands, with subtle native changes. The [V131/V132 spatial trial](raw-spatial-training.md)
-has four exact-recipe CPU/CUDA checks complete on90781/29. Its original V13120k
-control now runs after V125's admission; V132 follows. The
-[V1311k progress review](v131-progress1000-quality.md) is complete: ordinary
-+.0016dB, deepest shadows−.0237–.0342dB and faint ADC−.2734dB versus V120,
-with mixed local detail and no clear mesh recovery. V132's branch quality and
-both full endpoints remain unmeasured.
+has four exact-recipe CPU/CUDA checks complete on90781/29 and both20k arms
+completed with matching actual input hashes. [V131](v131-endpoint-quality.md)
+has small mixed faint gains; [V132](v132-endpoint-quality.md) loses0.410 dB
+faint ADC versus V131, ordinary detail essentially tied and no new fine mesh.
+Its broad photo/camera and full-frame quality remain unmeasured.
 
 The [V133 quota comparison](reviewed-quota-training.md) has completed both
 device checks and queues20k updates against the original V131 control, changing
@@ -54,9 +53,9 @@ quality remain separate measurements. Actual quality is pending.
 | 16-bit/full-resolution output | V120/V121 complete101.996MP FP32 outputs and linear/sRGB RGB16 exports verified, including matched-Haar full-frame comparisons | Preserve per-checkpoint precision/quality evidence |
 | 100MP within10s on GB10 | Ordered Tiny/Small FP32 observations116.57/101.66s, not a controlled speed ranking | Target open; improve quality before speed work |
 | Modern DINOv3 architecture | V84-family DRUNet and official frozen Tiny/Small pyramids; completed matched trained comparison | Retain useful gains and improve finer detail |
-| Diverse clean targets and binning | Newest prepared bank90,773/37 regions; V12420k complete, V125 original controller failed, V131 stopped14,549 and V132 unstarted. [V134/V135](photo-epoch-training.md) retains its prepared source-order comparison after the old dependency queues exited;4×→geometry→area2, zero optical blur | Assess useful new cohorts without changing existing study bytes; broad weak-detail recovery remains incomplete |
+| Diverse clean targets and binning | Newest prepared bank90,773/37 regions; V12420k complete, V125 original controller failed; V131/V132 complete20k on90,781/29 with all input hashes matching. [V134/V135](photo-epoch-training.md) retains its prepared source-order comparison after the old dependency queues exited;4×→geometry→area2, zero optical blur | Assess useful new cohorts without changing existing study bytes; broad weak-detail recovery remains incomplete |
 | Physical noise/camera/color | Poisson/read noise, signed black subtraction, all Bayer phases, WB/matrix and exposure/clipping; V120 ADC max55.52DN16, Tiny alternative51.73DN16 | Spatial dark-field/weak-detail failures and real-noise calibration limits remain |
-| Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V12420k complete; original V125 failed and V131 stopped at its memory reserve; [V1381k/150-input review](v138-quality.md) is complete with tiny faint/flat gains and no new mesh recovery | Preserve executed work and improve real-photo/detail quality |
+| Resource-aware training and evaluation | Frozen source/parent/input plans and retained failures; V12420k complete; original V125 failed; V131 resumes saved14,549 state to20k without replay, V13220k matches inputs; [V1381k/150-input review](v138-quality.md) has tiny faint/flat gains and no new mesh recovery | Preserve executed work and improve real-photo/detail quality |
 | Protected originals/tests | Cached GFX3879/3880 and extra3842/3835 RAF/JPEG pairs; originals read-only; captures/siblings outside training;16-scene test reserve unscored | Preserve boundaries in future cohorts |
 | Current documentation |56 completed primary endpoints in plot; native triplets, latest GFX comparisons and explicit profiles/checkpoints; local-time diary | Update useful results without promotion freezes |
 

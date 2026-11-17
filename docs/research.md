@@ -20,13 +20,19 @@ An [input-only local-support stage](local-validated-waves.md) now replaces
 raw-validated components in the parent. The two-geometry pilot improves the
 far weak/quiet tradeoff versus global support, with source-dependent gains and
 remaining costs versus V143. Above V120, it suppresses much of the global cab
-ripple but does not recover fine crossings. The full three-prior panel is running.
+ripple but does not recover fine crossings. The
+[completed full three-prior panel](local-wave-full-panel.md) retains a
+source-dependent low-prior gain with costs versus the parent. The
+[fixed-proposal neural nuisance](neural-nuisance-fixed-proposals.md) reduces
+added errors; its [native512 controls](neural-nuisance-context512.md) lose weak
+response despite improved edge geometry. A [full256 review](neural-nuisance-full-panel.md)
+is running.
 The [full-model attention comparison](raw-spatial-continuation.md)
-completes its control: [V131 targeted/native quality](v131-endpoint-quality.md)
+completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains
-and persistent real mesh/foliage weakness. V132's added-attention arm is training;
-its [matched1k/native review](v132-progress1000-quality.md) retains a small faint
-gain versus V1311k, while remaining below V120 with no clear new real mesh.
+and persistent real mesh/foliage weakness. V132's
+[completed20k/native review](v132-endpoint-quality.md) loses0.410 dB faint ADC
+versus V131, with near-tied ordinary detail and no clear new fine mesh.
 V120 remains the general recommendation.
 
 **Current stronger-response experiment:** [V198 CFA EMA](cfa-innovation-wave-comparison.md)

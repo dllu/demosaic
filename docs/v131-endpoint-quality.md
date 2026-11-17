@@ -10,8 +10,10 @@ available experimental full-model preset.
 
 This is additional full-trunk training with V120's architecture and a revised
 training cohort/recipe, not a controlled architecture comparison against V120.
-The matched added-attention arm **V132 is training**. Its comparison with V131
-will use the same 20,000 training inputs and saved evaluation arrays.
+The matched added-attention arm **V132 completed20k**. Its
+[completed comparison](v132-endpoint-quality.md) uses the same20,000 actual
+training inputs and saved evaluation arrays: faint ADC −0.410 dB versus V131,
+ordinary essentially tied, no new fine crossings.
 [Training/state continuity](raw-spatial-continuation.md) ·
 [Per-endpoint review](raw-spatial-endpoint-review.md) ·
 [Machine evidence and frozen sources](results/v131-endpoint-v1/publication.json).

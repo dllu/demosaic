@@ -40,6 +40,14 @@ _PRESETS = (
         sha256="6b1851e85933b56001ee1100e6ef0083173f3949849c1429894534a5caf2708e",
     ),
     ModelPreset(
+        "v132",
+        "joint",
+        "experimental full20k RAW-attention ablation; faint-ADC regression",
+        "docs/v132-endpoint-quality.md",
+        "/mnt/external/demosaic/models/v132-final20000.pt",
+        "6a0bf916ab4e179dda5dc3349971e93ef4b89a6f9136cd01363090e615ffbc77",
+    ),
+    ModelPreset(
         "v187",
         "pooled-wave",
         "experimental quieter wave option",

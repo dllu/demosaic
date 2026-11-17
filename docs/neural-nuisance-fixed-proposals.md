@@ -15,6 +15,10 @@ This is the preferred neural-nuisance variant for further weak-detail work;
 the [frequency-reselection arm](neural-nuisance-reconstruction.md) remains an
 explicit ablation. Both are implemented experimental choices, with their
 measured gains and costs retained.
+The completed [native512 context/complete-edge follow-ups](neural-nuisance-context512.md)
+return near-parent0.96% weak response despite better far-background geometry;
+native256 remains preferred. Their exact cached fields and all native views
+are published separately.
 
 | Prior / placement | Analytic weak response | Fixed-proposal neural response | Quiet RMS change | Weak-increment RMS change |
 | --- | ---: | ---: | ---: | ---: |

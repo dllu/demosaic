@@ -5,6 +5,7 @@ import os
 import shutil
 import sys
 import time
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -23,7 +24,15 @@ BACKGROUND_SHA = "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589
 BACKBONE_SHA = "691963f0f796aac860d818d59d9d14287a4675612829fbe9467c7f5df8ce5b14"
 
 
-def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False, full_panel=False):
+def prepare(
+    root,
+    background_cache=None,
+    *,
+    fixed_analytic_frequencies=False,
+    full_panel=False,
+    geometry_window=256,
+    edge_search="bounded-grid",
+):
     from demosaic.local_validated_waves import LocalWaveConfig
 
     source = REPO / ".cache/experiments/phase-aggregation-projected-pilot-v1"
@@ -57,7 +66,34 @@ def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False, fu
     assert (len(previous["rows"]), len(previous["finite_groups"])) == (
         (1164, 384) if full_panel else (48, 12)
     )
-    geometry = LocalWaveConfig().to_dict()
+    assert geometry_window in (256, 512) and (not full_panel or geometry_window == 256)
+    geometry = LocalWaveConfig(
+        window=geometry_window, stride=geometry_window // 2, edge_search=edge_search
+    ).to_dict()
+    if prediction_cache is not None:
+        prior_plan = read_json(checked(read_json(checked(prediction_cache))["plan"]))
+        previous_root = Path(prior_plan["work"]) / "src"
+        previous_package = {
+            str(Path(path).relative_to(previous_root)): digest
+            for path, digest in prior_plan["frozen_files"].items()
+            if previous_root in Path(path).parents
+        }
+        current_package = {
+            str(path.relative_to(REPO / "src")): reference(path)["sha256"]
+            for path in (REPO / "src").rglob("*.py")
+        }
+        if (
+            previous_package != current_package
+            or LocalWaveConfig(**prior_plan["geometry_config"]).to_dict() != geometry
+        ):
+            prediction_cache = None
+            extra_inputs = [
+                b
+                for b in extra_inputs
+                if not b["path"].endswith(
+                    "neural-nuisance-fixed-proposals-pilot-v1/collection.json"
+                )
+            ]
     background_config = {
         "checkpoint": checkpoint,
         "backbone_sha256": BACKBONE_SHA,
@@ -117,6 +153,7 @@ def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False, fu
         "script": reference(work / "scripts/pilot_neural_nuisance.py"),
         "model": reference(root / "analytic-model.json"),
         "geometry_config": geometry,
+        "small_context_geometry_policy": "Use native minimum axis when smaller than declared window, half-window stride; only native256 materials use this input-dimension-only fallback.",
         "background_configuration": background_config,
         "background_cache": cache,
         "prediction_cache": prediction_cache,
@@ -154,6 +191,15 @@ def prepare(root, background_cache=None, *, fixed_analytic_frequencies=False, fu
     if full_panel:
         plan["scope"] = (
             "Complete1152-role finite-wire panel:8 sources x2 placements x4 CFAs x2 independent-noise repeats x3 roles x3 original priors, plus12 protected/material contexts. Fixed analytic proposals and shared global CFA partition; current cardinality matcher, threshold2, six matched global/local analytic/raw-wave/conditional/neural controls. Whole-context V120 backgrounds, V143 procedural parent and V120 photo parent unchanged. Adopt the completed48-case pilot's exact88 neural fields and threshold2 corrections after source/argument checks; at most2232 fresh root/encoder forwards for1116 additional cases. All2320 background fields and all1164 corrections close before new GT/reference scoring. No new sensor/source observation, RAW decode, optimizer update or training admission. Eight reused development geometries; summarize source clusters/CFA/repeat/noise cells, not population camera generalization. Protected real references remain qualitative, never exact GT."
+        )
+    if geometry_window == 512:
+        plan["scope"] += (
+            " Discovery window512/stride256 for native512/768 contexts, native256 input-size-only fallback for materials. Validation129/window and all other fitting/threshold rules unchanged. Compare matched512 analytic/neural arms, retaining256 separately. No hidden templates/GT in inference."
+        )
+    if full_panel and prediction_cache is None:
+        plan["scope"] = plan["scope"].replace(
+            "and threshold2 corrections after source/argument checks",
+            "after source/argument checks; cached corrections disabled because implementation/config differs, all1164 corrections recomputed",
         )
     write_json(root / "plan.json", plan)
     verify_plan(plan)
@@ -451,6 +497,9 @@ def predict(root):
                 for item, m in zip(record["fields"], [mask, ~mask], strict=True)
             )
         parent = np.load(checked(row["parent"]))[row["sample"]]
+        case_config = config
+        if min(raw.shape) < config.window:
+            case_config = replace(config, window=min(raw.shape), stride=min(raw.shape) // 2)
         cached_prediction = adopted.get(row["id"])
         if cached_prediction is not None:
             assert cached_prediction["parent_values"] == fingerprint(parent)
@@ -476,7 +525,7 @@ def predict(root):
                 shot=row["noise"]["shot"],
                 read=row["noise"]["read"],
                 thresholds=tuple(plan["thresholds"]),
-                config=config,
+                config=case_config,
                 reselect_frequencies=not plan.get("fixed_analytic_frequencies", False),
             )
         if row["id"] in plan["standalone_H1_checks"]:
@@ -487,7 +536,7 @@ def predict(root):
                 shot=row["noise"]["shot"],
                 read=row["noise"]["read"],
                 thresholds=tuple(plan["thresholds"]),
-                config=config,
+                config=case_config,
                 discovery_mask=mask,
             )
             for (mode, t), value in expected.items():
@@ -519,6 +568,7 @@ def predict(root):
             "background_receipt": reference(root / "backgrounds" / (row["id"] + "-receipt.json")),
             "aux": aux,
             "prediction_adopted_from": plan["prediction_cache"] if cached_prediction else None,
+            "effective_geometry_config": case_config.to_dict(),
         }
         write_json(output / (row["id"] + "-receipt.json"), result)
         records.append(result)
@@ -575,6 +625,10 @@ if __name__ == "__main__":
     parser.add_argument("--background-cache", type=Path)
     parser.add_argument("--fixed-analytic-frequencies", action="store_true")
     parser.add_argument("--full-panel", action="store_true")
+    parser.add_argument("--geometry-window", type=int, choices=(256, 512), default=256)
+    parser.add_argument(
+        "--edge-search", choices=("bounded-grid", "full-frame"), default="bounded-grid"
+    )
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -583,6 +637,8 @@ if __name__ == "__main__":
                 args.background_cache.resolve() if args.background_cache else None,
                 fixed_analytic_frequencies=args.fixed_analytic_frequencies,
                 full_panel=args.full_panel,
+                geometry_window=args.geometry_window,
+                edge_search=args.edge_search,
             )
         )
     elif args.mode == "score":

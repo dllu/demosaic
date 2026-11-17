@@ -4,7 +4,10 @@
 completes V131's20k horizon with its saved model/EMA/Adam/RNG. The
 [102-input/native control review](v131-endpoint-quality.md) is complete: mixed
 faint-ADC gains, small ordinary/shadow changes and no clear new fine cab mesh.
-V132 production is training from V120 EMA. Original plans/checks/failures remain intact.
+V132 also completes20k from V120 EMA; its
+[completed native endpoint](v132-endpoint-quality.md) loses0.410 dB faint ADC
+versus V131, with ordinary detail essentially tied. All20k actual training
+input hashes match across arms. Original plans/checks/failures remain intact.
 
 **November2 execution update:** V131 stopped at the32GB memory reserve,
 preserving step14,549 of20k. V132 production remains unstarted; the original
@@ -48,7 +51,8 @@ including the first18 exact-recipe CUDA check inputs. A hardlinked step1,000
 progress checkpoint is retained within the same live worker and original20k
 schedule, after validation. Atomic replacement of `last.pt` preserves it.
 It is not a completed endpoint. The early V131 comparison below is complete;
-V132's comparison waits for its original training.
+V132's [completed comparison](v132-endpoint-quality.md) preserves that original
+training horizon and uses the saved V131 endpoint without replay.
 
 ## Early retained-input comparison
 

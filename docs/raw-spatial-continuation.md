@@ -1,12 +1,15 @@
-# Full-model RAW-attention comparison: control complete, spatial arm training
+# Full-model RAW-attention comparison: both20k arms complete
 
 The existing V131/V132 comparison has a new, separately recorded execution.
-**V131 completed20k on November16; V132 is training from V120 EMA.**
+**V131 and V132 completed20k on November16.**
 The original failed controller, RAM-stop receipt, checkpoint and source remain
 intact. V131's [targeted102-input/native review](v131-endpoint-quality.md) is
 complete: faint-ADC +0.14555 dB across four sources, with a bark regression,
 small ordinary/shadow gains and no clear new fine cab crossings. V120 remains
-the general recommendation; V132 endpoint quality is unmeasured.
+the general recommendation. V132's [completed targeted/native review](v132-endpoint-quality.md)
+loses0.40978 dB faint ADC versus V131, with ordinary detail essentially tied
+and soft foliage/missing fine crossings. The earlier1k gain did not persist.
+All20,000 actual clean/noisy training hashes match across arms.
 
 This addresses the broader comparison in the [weak-detail research review](weak-detail-literature-2026-11.md):
 small residual heads do not bound what a trained restoration trunk can recover.
@@ -30,13 +33,13 @@ All protected GFX captures/JPEGs/siblings remain outside training.
 | Arm | Preserved work | New execution |
 | --- | --- | --- |
 | V131 control |14,549 updates,448 validation forwards, all clean/noisy hashes | Completed remaining5,451 updates/192 validation forwards, no replay |
-| V132 RAW attention | Discarded16+2 CPU and16+2 CUDA checks | Fresh20,000-update/640-validation production running from V120 EMA |
+| V132 RAW attention | Discarded16+2 CPU and16+2 CUDA checks | Completed fresh20,000 updates/640 validation forwards from V120 EMA |
 
 The additional branch has signed CFA differences and two window-attention blocks
 with shifted support, feeding the existing restoration trunk. Both arms train
 the full restoration path; DINOv3 stays frozen. V131 has91 restoration tensors/
 89 Adam states; V132 has114/112. All23 added tensors had finite nonzero gradients
-in the original exact-recipe checks. V132 must match all20,000 control clean/noisy
+in the original exact-recipe checks. V132 matches all20,000 control clean/noisy
 hashes and the original first initial outputs, including its first18 smoke inputs.
 
 This preserves each original20k horizon and avoids replaying the14,549-step
@@ -49,8 +52,8 @@ All106 original input/source checksum checks pass. The original checkpoint loads
 with matching installed/saved PyTorch2.14.1+cu130 and deterministic backend
 settings. Its model, EMA, Adam and Torch/Python/CUDA RNG are present and finite;
 all89 Adam clocks equal14,549. The full14,549 input trace and forward/update/
-target counts agree. Original training owners are dead; V132 has no production
-claim. The checkpoint is copied unchanged into the new namespace, SHA256:
+target counts agree. At adoption, original training owners were dead and V132
+had no production claim. The checkpoint was copied unchanged into the new namespace, SHA256:
 `ddbb4d6fbec2f76c2b79abb60c9afcbb1cf7ca32380b9ee73e51e94ee8983716`.
 
 Actual resumed training verifies all91 model tensors before its first forward,
@@ -67,6 +70,16 @@ Its [matched progress review](v132-progress1000-quality.md) is complete: all1,00
 training input hashes agree,102 retained inputs/all64 native and eight amplified
 boards are reviewed. Faint ADC is+0.03356 dB versus V1311k and−0.23979 dB versus
 V120, without clear new real mesh crossings. This remains an early comparison.
+
+The full20k endpoint is now complete, checkpoint SHA256
+`6a0bf916ab4e179dda5dc3349971e93ef4b89a6f9136cd01363090e615ffbc77`.
+Both arms have20,000 updates/320,000 target contexts,640 validation and20,640
+encoder calls, with all Adam clocks at20k and finite model/EMA/optimizer state.
+All20,000 actual input hashes and domains agree, including the resumed control
+prefix:10,046 Commons/4,965 native/4,989 paired batches, zero selected shadow
+targets. V132's114 EMA tensors load exactly through the public `v132` preset;
+the portable checkpoint copy is byte-identical. The original processes finish
+normally without replaying or extending either horizon.
 
 The complete original numerical/data package is copied byte-for-byte under the
 new `work` directory; only output run paths change in the recipes. The source
@@ -91,8 +104,10 @@ safety function accepts both run paths and rejects an outside-work path.
 The [matched endpoint detail review](raw-spatial-endpoint-review.md) runs per endpoint
 with exact source/state/input checks, explicit camera-JPEG cells and an independent
 CPU metric/native-pixel audit. It reuses the original102-input panel and saved
-V120 predictions. V131's collection/audit/all64 native-board views are complete;
-V132 will compare with the saved V131 endpoint without another control forward.
+V120 predictions. Both collections/audits/all64 native-board views per endpoint
+are complete. V132 uses the saved V131 endpoint without another control forward.
+Its independent audit checks4,275 metric fields/288 rows and20,275,200 native
+RGB channels; [complete endpoint result/evidence](v132-endpoint-quality.md).
 
 The [completed V131 broad numerical/native review](v131-broad-primary.md)
 retains the original photo/known/unseen/texture/color pipeline, saved controls,
@@ -100,5 +115,6 @@ exact input witnesses, two native triplets and both protected GFX families.
 It finds427-photo+0.04000 dB, unseen-camera−0.04381 dB and a severe ADC-color
 regression. An existing [fixed ADC projection](v131-adc-projection.md) repairs
 that color panel and adds ADC-photo gains with weakest-band costs.
-Full-frame validation, broader standalone-flat
-review and the completed V132 architecture comparison remain outstanding.
+Full-frame validation, broader standalone-flat review and a broad V132
+photo/camera panel remain unmeasured. The completed targeted V132 architecture
+comparison does not show a weak-detail fidelity improvement.

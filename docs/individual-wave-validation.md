@@ -8,8 +8,9 @@ configuration; V120 remains the general full-model recommendation.
 
 This follows the [harmonic waveform trial](local-wave-shapes.md) on identical
 development inputs. Both new 24-image arms close before new target/reference
-analysis. The separate full three-prior H1 evaluation and V132 training retain
-their original frozen sources.
+analysis. The separate [full three-prior H1 evaluation](local-wave-full-panel.md)
+and [V13220k review](v132-endpoint-quality.md) are now complete with their
+original frozen sources preserved.
 
 ## What changes
 

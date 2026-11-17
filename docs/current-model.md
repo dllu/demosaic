@@ -11,10 +11,11 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 | [V120 Small](v120-v121-primary.md) | 37.04008 dB on 427 photos; known/unseen CFA means 54.31272/54.00872 dB; verified 102MP RGB16 exports | Fine foliage, mesh, neon and dark-field mottle |
 | [V131 completed continuation](v131-broad-primary.md) |427-photo +0.04000 dB with400/427 source gains; targeted faint-ADC +0.14555 dB; modest high-noise carrier/flat gains | Unseen-camera −0.04381 dB; ADC color maximum1,816 DN16 versus55.5; high-noise weak-band error slightly worse; soft foliage/fine cab crossings; no new full-frame validation |
 | [V131 ADC Malvar, opt-in](v131-adc-projection.md) | Fixed existing policy, identical91 weights; ADC photo+0.15074 dB versus V131,382/427 gains; ADC color maximum19.98 DN16 | Weakest ADC band error+1.43%, lower analytic carrier amplitude,45 non-improving photos; positive-noise V131/camera costs unchanged; no new full-frame validation |
-| [V132 RAW attention,1k progress](v132-progress1000-quality.md) | Matched faint-ADC +0.03356 dB versus V1311k; all four weakest-stratum RMS means improve | Faint mean remains0.23979 dB below V120; wood PSNR cost; no clear new cab crossings/foliage; production still training |
+| [V132 RAW attention, completed20k](v132-endpoint-quality.md) | Reproducible full-model ablation; ordinary-material +0.00046 dB versus V131; all20k input hashes match | Faint ADC −0.40978 dB versus V131/−0.26423 versus V120; shadow −0.00438 dB; missing cab crossings/soft foliage; no broad or100MP validation |
 | [Local conditional waves, complete panel](local-wave-full-panel.md) |400/far weak response1.826%→2.690% above V143; lower global-support quiet/increment error in all six cells; fewer global cab ripples above V120 | Quiet/increment error still above parent; sources1/2 dominate gains; higher-noise weak structure and real crossings mostly missing; executed historical matcher |
 | [Phase measurement aggregation, analytic pilot](phase-measurement-aggregation.md) | Same H1 discovery:current400/far weak response2.80%→12.68%, strong43.33%→65.96%; both projection arms reviewed | Quiet/increment error+5.44%/+1.94%, severe building bands, poor high-noise response; consistent nuisance projection does not repair real artifacts |
 | [Fixed-proposal neural nuisance](neural-nuisance-fixed-proposals.md) |400/far quiet/increment RMS−0.574%/−0.133% versus conditional analytic H1; much smaller added building bands; exact cached fields, zero neural replay | Weak response3.686%→2.690%, still above parent's0.958%; edge-only error above parent, fine cab crossings missing; reused two-source cohort |
+| [Native512 nuisance/complete-edge ablations](neural-nuisance-context512.md) | Complete edge-offset search fixes far-background coverage; withheld noisy sensor RMS substantially lower; zero new neural calls | Weak response near-parent0.957–0.959% versus preferred256's2.690%; high-noise/cab detail missing; geometry fix alone does not improve reconstruction |
 | [Neural residual-reselection ablation](neural-nuisance-reconstruction.md) |400/far quiet RMS−0.493%; no added building correction because arm returns V120 exactly | Weak response3.686%→0.900%, increment error+0.028%; fine cab crossings missing;88 masked background calls, no broad quality/speed claim |
 | [Harmonic analytic ablation](local-wave-shapes.md) | Same pilot H1→H3 far weak response 2.80%→5.46%, strong 43.33%→46.88%; small full-error reduction | Quiet/increment error +0.993%/+0.745% versus H1; new building color bands, missing real crossings; H1 remains default |
 | [Individual harmonic support](individual-wave-validation.md) | Far quiet/increment RMS 4.06592/11.89181→4.05049/11.85942 DN16 versus H3 group; weak response 4.07% | Near quiet error rises; building bands persist; expanded affine background further raises quiet error; explicit ablations |
@@ -54,8 +55,10 @@ RAW inputs; their component exports alone are not full-frame parent models.
 `load_model("v131", checkpoint=...)` exposes the completed full-model continuation
 with its declared checkpoint hash. It trains the original restoration trunk on
 the revised cohort for 20k additional updates; it does not add the RAW-attention
-branch. The matched V132 arm is training; its [early1k review](v132-progress1000-quality.md)
-has a small faint gain against V1311k while remaining below V120.
+branch. The matched V132 arm has completed20k; its
+[endpoint review](v132-endpoint-quality.md) finds a0.410 dB faint regression
+against V131 and near-tied ordinary detail. The earlier1k advantage did not
+persist. `load_model("v132")` verifies the portable114-tensor EMA export.
 [Completed-control gains and counterexamples](v131-endpoint-quality.md).
 The [completed broad review](v131-broad-primary.md) supports V131 as an
 experimental photo/faint-detail option with camera and ADC-color costs. A
@@ -76,6 +79,10 @@ with no general model promotion. Its [fixed-proposal follow-up](neural-nuisance-
 recovers part of the weak response and reduces quiet/increment error versus
 analytic H1. That is the preferred nuisance variant for further weak-detail
 work; both measured operating points and their real-photo limitations remain.
+Its [native512 ablations](neural-nuisance-context512.md) fit the far edge better
+but lose the weak-response gain. Native256 remains preferred while the
+[full source/CFA/noise review](neural-nuisance-full-panel.md) runs under its
+original frozen source.
 
 The [shared-edge cache](paired-training-coverage.md) is completed and audited:
 156 changed rows and 844 exact adoptions. Its [matched training and complete

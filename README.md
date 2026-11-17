@@ -73,14 +73,20 @@ are retained. [Holding its analytic proposals fixed](docs/neural-nuisance-fixed-
 recovers2.69% weak response, with quiet/increment RMS−0.57%/−0.13% versus
 conditional analytic H1, which retains3.69% response. Building banding is much
 smaller; missing crossings remain unresolved.
+The [native512 context/edge-search ablations](docs/neural-nuisance-context512.md)
+fit far-edge backgrounds better but return near-parent0.96% weak response;
+native256 remains the preferred nuisance variant. Its
+[full source/CFA/noise panel](docs/neural-nuisance-full-panel.md) is running.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
-completed its **V131 control**: [targeted native review](docs/v131-endpoint-quality.md)
+completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
 bark regression. Ordinary/shadow gains are about 0.02 dB; fine cab crossings and
 soft foliage remain unresolved. The experimental `v131` preset is available.
-V132's added-attention arm is training. Its [matched1k review](docs/v132-progress1000-quality.md)
-gains0.034 dB faint ADC over V1311k but stays0.240 dB below V120, without clear
-new real mesh recovery. The20k architecture comparison remains pending.
+V132's [completed20k/native review](docs/v132-endpoint-quality.md) loses0.410 dB
+faint ADC versus V131, with ordinary detail essentially tied and no new fine
+cab crossings. All20,000 training input hashes match across arms; the earlier
+1k advantage did not persist. The experimental `v132` preset preserves this
+reproducible ablation; it is not a quality upgrade.
 V131's [completed broad review](docs/v131-broad-primary.md) improves427-photo
 PSNR by0.04000 dB (400/427 source gains), with unseen-camera −0.04381 dB and
 worst ADC mean-color error1,816 DN16 versus V120's55.5. Its small high-noise
@@ -161,6 +167,11 @@ exact constructed-GT triplets at the same ordinary conditions above. Its faint
 and [bark regression](docs/images/v131-endpoint-v1/bark-contrast0p025-adc-contrast20-comparison.png)
 use common contrast20, ADC-only noise and unchanged native pixels.
 [Checkpoint, source and display provenance](docs/v131-endpoint-quality.md).
+V132's completed20k [faint bark](docs/images/v132-endpoint-v1/bark-contrast0p025-adc-triplet.png)
+and [faint fur](docs/images/v132-endpoint-v1/raccoon-fur-contrast0p025-adc-triplet.png)
+retain the matched native160 noisy → restored → exact synthetic GT comparison,
+ROI`[48,48,160,160]`, exposure1/contrast20, shot/read0/0, ADC16/black`.03`.
+[Completed attention-ablation result and checkpoint](docs/v132-endpoint-quality.md).
 
 The input-only local stage retains [source 0 without a weak gain](docs/images/local-validated-wave-pilot-v1/source0-far-role2-triplet.png)
 and [source 1 with a gain](docs/images/local-validated-wave-pilot-v1/source1-far-role2-triplet.png):

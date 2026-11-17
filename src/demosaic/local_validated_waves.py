@@ -29,6 +29,7 @@ class LocalWaveConfig:
     harmonics: int = 1
     support_unit: str = "direction"
     background: str = "step"
+    edge_search: str = "bounded-grid"
     split_seed: int = 202611160909
 
     def __post_init__(self):
@@ -62,6 +63,7 @@ class LocalWaveConfig:
             or not 1 <= self.harmonics <= 4
             or self.support_unit not in ("direction", "harmonic")
             or self.background not in ("step", "piecewise_affine")
+            or self.edge_search not in ("bounded-grid", "full-frame")
         ):
             raise ValueError("Invalid local-wave geometry")
 
@@ -189,6 +191,7 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
         nuisance="step",
         peaks=1,
         edge_refinements=config.edge_refinements,
+        edge_search=config.edge_search,
     )
     xx, yy, affine, _ = geometry(raw.shape)
     angle, offset = initial.edge_geometry

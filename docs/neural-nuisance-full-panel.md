@@ -43,8 +43,8 @@ cache adoption checks actual input/mask/argument/field hashes.
 
 The separately frozen [reviewer](../scripts/review_neural_nuisance_panel.py)
 streams independent scalar checks over all2688 method/group rows and8064
-absolute role rows. It reports all64 CFA/repeat views per source/noise/placement
-cell, eight paired source-cluster differences and exact empirical bootstrap
+absolute role rows. It reports all64 CFA/repeat views per noise/placement
+cell, eight views within each source, paired source-cluster differences and exact empirical bootstrap
 percentiles over8^8 ordered source resamples. These are descriptive conditional
 statistics for eight development geometries, not calibrated camera-population
 confidence. Its parameterized summary reproduces all previous full-H1 means,
