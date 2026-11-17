@@ -3,6 +3,7 @@
 import hashlib
 import json
 import math
+import os
 import random
 import time
 from contextlib import contextmanager, nullcontext
@@ -486,6 +487,19 @@ def expand_stem(weights, source_config, model):
         new_offset = 32 if target.camera_conditioning else 20
         expanded[:, new_offset:] = old[:, old_offset:]
     weights["stem.weight"] = expanded
+
+
+def retain_checkpoint(source, path):
+    """Atomically retain a completed checkpoint without serializing CUDA twice.
+
+    Later saves replace the source inode atomically, so the retained best state
+    stays fixed. Both names must be on the same filesystem. A stale retention
+    temporary is an explicit error rather than something to overwrite.
+    """
+    path = writable_path(path)
+    temporary = path.with_suffix(".retain.tmp")
+    os.link(source, temporary)
+    temporary.replace(path)
 
 
 def save_checkpoint(path, model, optimizer, ema, step, config, best):
@@ -1417,7 +1431,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             best = max(best, monitored)
             save_checkpoint(run / "last.pt", model, optimizer, ema, step, config, best)
             if improved:
-                save_checkpoint(run / "best.pt", model, optimizer, ema, step, config, best)
+                retain_checkpoint(run / "last.pt", run / "best.pt")
         if stop_after and step - first >= stop_after:
             save_checkpoint(run / "last.pt", model, optimizer, ema, step, config, best)
             break

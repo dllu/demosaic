@@ -2,7 +2,9 @@
 
 **Larger-corpus training has begun: the100,000-update trajectory has saved its
 first1,000 updates.** All three whole-scene comparison arms have completed;
-the fresh matched20k control is now training, before the remaining99k updates.
+the matched20k control is continuing from its complete6k state, before the
+remaining99k updates. A [diagnosed duplicate-checkpoint write stall was repaired](full-corpus-checkpoint-recovery.md)
+without replaying updates or resetting its schedule.
 Their [first matched native review](whole-scene-context-native-review.md) finds
 no convincing new fine crossings; the [completed64-source study](whole-scene-context-development64.md)
 adds small quiet-coarse gains and mixed detail/color costs. No larger-corpus endpoint gain is claimed.
@@ -105,6 +107,14 @@ The immutable raw/EMA/Adam/RNG checkpoint is
 `e72da50252f1de4c76ecf7985d940d4094a6e8b7de0dca50269cc39eb0ba8c54`.
 This is an interrupted trajectory milestone, not a completed100k endpoint.
 The new allocation adopts that state and does not replay its prefix.
+
+The20k control later retained a complete6k raw/EMA/Adam/RNG state, then stalled
+while redundantly writing `best.pt`. [The explicit recovery](full-corpus-checkpoint-recovery.md)
+preserves the failure/partial bytes, retains best by atomic link to the completed
+last checkpoint, and continues the remaining14k in a new frozen output tree.
+The long arm still resumes its original1k state afterward. Old worker/controller
+identities describe their historical allocation; the recovery has new bound
+ownership. Neither training horizon is complete and no quality gain is inferred.
 
 Training completion, numerical evaluation and actual native viewing are tracked
 separately. No new full427 or known/unseen-camera result is available, and the
