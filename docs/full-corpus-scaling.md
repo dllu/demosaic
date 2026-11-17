@@ -10,7 +10,9 @@ is running, with subsequent broader weak-band analysis queued. The
 [complete camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
 known/lose0.04067 unseen. The [complete color panel](full-corpus-control20k-color-review.md)
 finds worst ADC bias765.7 DN16 versus V12055.5,largely repaired by physical
-Malvar/bin correction. Broad photo results remain pending.
+Malvar/bin correction. Broad photo results remain pending. The separate faint-ADC suite has a completed qualification
+and live reporting queue using original-source local-band masks
+and four-CFA, equal-source pooling. [Faint analysis status](adc-bin-consistency.md).
 
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
 [64-source study](whole-scene-context-development64.md) and

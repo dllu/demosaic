@@ -53,7 +53,10 @@ in each linked report. [Package interfaces](architecture.md).
 
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
-tradeoff and near-edge costs keep it experimental. [Direction-guide review](scene-wave-guides.md).
+tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens
+some lower-noise synthetic wires compared with the sinusoid and lowers their
+paired increment error. ISO6400 weak recovery and cab crossings remain open.
+[Direction-guide review](scene-wave-guides.md) · [Phase-profile results](guided-phase-profiles.md).
 
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated

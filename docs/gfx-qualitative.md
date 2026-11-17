@@ -37,6 +37,9 @@ historical boards. Use these reports for the current completed comparisons:
   fence guide leaves the sky unchanged. Building and foliage changes are
   slight, and the coarse lattice remains visible. The companion cab test
   finds a modulation tradeoff and no clear new crossings.
+- [RAW phase profiles](guided-phase-profiles.md): the guided phase-profile
+  crop is exactly unchanged from V120 in sky and building. Foliage remains
+  soft. The coarse fence has a slight modulation change.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

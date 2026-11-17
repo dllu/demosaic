@@ -48,6 +48,50 @@ def test_guided_query_refits_phase_from_only_its_discovery_samples():
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
+def test_phase_bins_recover_periodic_profile_and_ignore_withheld_measurements(layout):
+    height = width = 64
+    y, x = np.mgrid[:height, :width]
+    directions = ((0.078, 0.045), (-0.064, 0.108))
+    positions = np.arange(8) / 8
+    profiles = (
+        ([0, 0, -3, 2, 1, 0, 0, 0], [0, 1, 0, 0, 0, 0, -1, 0]),
+        ([0, 1, -5, 3, 0, 1, 0, 0], [-1, 0, 0, 2, 0, -1, 0, 0]),
+        ([0, 0, -1, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, -2, 1]),
+    )
+    rgb = np.stack(
+        [
+            0.04
+            + 0.001
+            * sum(
+                np.interp(fx * x + fy * y, positions, profile, period=1)
+                for (fx, fy), profile in zip(directions, channel, strict=True)
+            )
+            for channel in profiles
+        ]
+    )
+    colors = np.tile(np.asarray(layout).reshape(2, 2), (height // 2, width // 2))
+    raw = rgb[colors, y, x]
+    split = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 8e-5,
+        "read": 2.56e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": directions,
+        "phase_bins": 8,
+    }
+    first = local.fit_local_candidate(raw, colors, split, **options)
+    destroyed = local.fit_local_candidate(np.where(split, raw, np.nan), colors, split, **options)
+    np.testing.assert_allclose(first.full_cfa, raw, atol=1e-12, rtol=0)
+    np.testing.assert_array_equal(first.full_cfa, destroyed.full_cfa)
+    np.testing.assert_array_equal(first.conditional_null_cfa, destroyed.conditional_null_cfa)
+    assert np.max(np.abs(first.full_cfa - first.conditional_null_cfa[0])) > 0.001
+    assert np.max(np.abs(first.full_cfa - first.conditional_null_cfa[1])) > 0.001
+    options.pop("guide_frequencies_xy")
+    with pytest.raises(ValueError, match="fixed guides"):
+        local.fit_local_candidate(raw, colors, split, **options)
+
+
+@pytest.mark.parametrize("layout", LAYOUTS)
 @pytest.mark.parametrize("harmonics", [1, 3])
 @pytest.mark.parametrize(
     "support_unit,background",

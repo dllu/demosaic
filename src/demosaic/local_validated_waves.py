@@ -119,6 +119,30 @@ def _wave_columns(xx, yy, frequency, harmonics=1):
     )
 
 
+def _phase_bin_weights(xx, yy, frequency, bins):
+    """Circular linear-interpolation weights for a native periodic profile."""
+    phase = np.remainder(xx * frequency[0] + yy * frequency[1], 1).ravel() * bins
+    left = np.floor(phase).astype(np.int64)
+    fraction = phase - left
+    weights = np.zeros((phase.size, bins), dtype=np.float64)
+    indices = np.arange(phase.size)
+    weights[indices, left % bins] = 1 - fraction
+    weights[indices, (left + 1) % bins] = fraction
+    return weights
+
+
+def _validate_phase_bins(phase_bins, guide, config):
+    if type(phase_bins) is not int or (phase_bins and not 3 <= phase_bins <= 12):
+        raise ValueError("Phase interpolation requires 3 to 12 bins")
+    if phase_bins and (
+        guide is None
+        or config.harmonics != 1
+        or config.support_unit != "direction"
+        or config.amplitude_window
+    ):
+        raise ValueError("Phase bins require fixed guides and one whole-query fit per direction")
+
+
 def _harmonic_count(frequency, maximum):
     """Fix degrees of freedom before refinement; keep every harmonic below .24."""
     return max(1, min(maximum, int(np.floor((0.24 + 1e-12) / np.linalg.norm(frequency)))))
@@ -219,13 +243,22 @@ def _guide_frequencies(value, family_degrees):
 
 
 def fit_local_candidate(
-    raw, colors, discovery_mask, *, shot, read, config=_DEFAULT_CONFIG, guide_frequencies_xy=None
+    raw,
+    colors,
+    discovery_mask,
+    *,
+    shot,
+    read,
+    config=_DEFAULT_CONFIG,
+    guide_frequencies_xy=None,
+    phase_bins=0,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
     Optional guides supply only frequencies. Independent validation requires
     obtaining them from measurements disjoint from the entire query.
     """
+    _validate_phase_bins(phase_bins, guide_frequencies_xy, config)
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -302,13 +335,21 @@ def fit_local_candidate(
         )
         frequencies = (first, second)
         counts = (first_harmonics, second_harmonics)
-    waves = [_wave_columns(xx, yy, f, count) for f, count in zip(frequencies, counts, strict=True)]
+    if phase_bins:
+        waves = []
+        for frequency in frequencies:
+            weights = _phase_bin_weights(xx, yy, frequency, phase_bins)
+            # Parameterize a zero-mean knot profile. The existing nuisance
+            # intercept handles the DC shared across phase bins.
+            waves.append(weights[:, :-1] - weights[:, -1:])
+    else:
+        waves = [
+            _wave_columns(xx, yy, f, count) for f, count in zip(frequencies, counts, strict=True)
+        ]
     n = nuisance.shape[1]
-    split = n + 2 * counts[0]
-    wave_slices = ((n, split), (split, n + 2 * sum(counts)))
-    wave_fields = tuple(
-        wave.reshape(*raw.shape, 2 * count) for wave, count in zip(waves, counts, strict=True)
-    )
+    split = n + waves[0].shape[1]
+    wave_slices = ((n, split), (split, split + waves[1].shape[1]))
+    wave_fields = tuple(wave.reshape(*raw.shape, wave.shape[1]) for wave in waves)
     if config.support_unit == "direction":
         unit_slices, unit_fields, unit_keys = wave_slices, wave_fields, ((0, 0), (1, 0))
     else:
@@ -514,6 +555,7 @@ def restore_local_waves(
     discovery_mask=None,
     conditional_delivery=False,
     guide_frequencies_xy=None,
+    phase_bins=0,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -542,9 +584,12 @@ def restore_local_waves(
         raise ValueError("Require a nonempty distinct set of fixed thresholds")
     if type(conditional_delivery) is not bool:
         raise ValueError("Require an explicit boolean conditional-delivery choice")
+    _validate_phase_bins(phase_bins, guide_frequencies_xy, config)
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
+    if phase_bins:
+        guide["phase_bins"] = phase_bins
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
@@ -650,9 +695,16 @@ def restore_local_waves(
                     "xy": [int(x), int(y)],
                     "frequencies": [c.frequencies_xy for c in candidates],
                     "edges": [c.edge_geometry for c in candidates],
-                    "harmonics": [
-                        [(stop - start) // 2 for start, stop in c.wave_slices] for c in candidates
-                    ],
+                    **(
+                        {"phase_bins": phase_bins}
+                        if phase_bins
+                        else {
+                            "harmonics": [
+                                [(stop - start) // 2 for start, stop in c.wave_slices]
+                                for c in candidates
+                            ]
+                        }
+                    ),
                     "matched": matched,
                     "unit_keys": [c.unit_keys for c in candidates],
                     "matched_units": units,

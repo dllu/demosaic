@@ -9,15 +9,27 @@ import numpy as np
 from PIL import Image, ImageDraw
 from probe_scene_wave_guides import MODES
 
-from demosaic.archive_metrics import display, noisy_malvar
+from demosaic.archive_metrics import linear_rgb, noisy_malvar
 from demosaic.experiments.artifacts import checked, read_json, reference, write_json
 from demosaic.experiments.evaluation.edge_response import measure
 
 METHODS = ("V143", *MODES)
 
 
-def native_board(output, key, values, arrays, metadata):
-    labels = (
+def native_board(
+    output,
+    key,
+    values,
+    arrays,
+    metadata,
+    *,
+    labels=None,
+    triplet_indices=(0, 3, 5),
+    exposure=2,
+    roi=(48, 48, 160, 160),
+    contrast=1,
+):
+    labels = labels or (
         "Noisy Malvar",
         "V143 EMA",
         "Query only",
@@ -25,12 +37,18 @@ def native_board(output, key, values, arrays, metadata):
         "Unrelated guide",
         "Exact GT",
     )
-    cells = [
-        np.rint(
-            display(value[None], arrays, exposure=2)[0, :, 48:208, 48:208].transpose(1, 2, 0) * 255
-        ).astype(np.uint8)
-        for value in values
-    ]
+    x, y, width, height = roi
+    crop = np.s_[0, :, y : y + height, x : x + width]
+    crops = [linear_rgb(value[None] * exposure, arrays)[crop] for value in values]
+    if contrast != 1:
+        center = crops[-1].mean((-2, -1), keepdims=True)
+        # Use the same reference-centered viewing transform for every column.
+        crops = [center + (value - center) * contrast for value in crops]
+    cells = []
+    for crop_rgb in crops:
+        clipped = np.clip(crop_rgb, 0, 1)
+        srgb = np.where(clipped <= 0.0031308, 12.92 * clipped, 1.055 * clipped ** (1 / 2.4) - 0.055)
+        cells.append(np.rint(srgb.transpose(1, 2, 0) * 255).astype(np.uint8))
 
     def render(indices, filename):
         image = Image.new("RGB", (8 + 168 * len(indices), 192), "#eeeeee")
@@ -52,14 +70,15 @@ def native_board(output, key, values, arrays, metadata):
         return {"image": reference(path), "panels": panels}
 
     return {
-        **metadata,
         "id": key,
         "ROI_xywh": [176, 176, 160, 160],
-        "display_exposure": 2,
+        "display_exposure": exposure,
+        "display_contrast": contrast,
         "ADC_bits": 16,
         "black_level": 0.03,
-        "board": render(range(6), key + "-comparison.png"),
-        "triplet": render((0, 3, 5), key + "-triplet.png"),
+        **metadata,
+        "board": render(range(len(labels)), key + "-comparison.png"),
+        "triplet": render(triplet_indices, key + "-triplet.png"),
     }
 
 

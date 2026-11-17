@@ -7,7 +7,9 @@ increment error fell on all eight tested geometries. Most weak signal still
 went unreconstructed, and the ISO6400 weak response barely changed. The
 standing cab views show a tradeoff between suppressing query-only stripes in
 one region and adding diagonal modulation in another. Fine crossings remain
-unresolved. [Audits, executed sources and native images](results/scene-wave-guides-v1/publication.json).
+unresolved. The follow-up estimates a richer wire profile from a different
+retained query noise draw and all four Bayer layouts. [Phase-profile comparison](guided-phase-profiles.md).
+[Audits, executed sources and native images](results/scene-wave-guides-v1/publication.json).
 
 ## What transfers between regions
 

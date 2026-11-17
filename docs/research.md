@@ -22,6 +22,9 @@ has repeatedly come with extra flat-region error or false color. The
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side
    and stronger diagonal modulation on the other. [Direction-guide test](scene-wave-guides.md).
+   Fitting a phase profile from query RAW improves lower-noise recovery beyond
+   a sine wave on a different retained draw across all four CFAs. ISO6400 still
+   trades weak response for higher quiet and increment errors. [Phase-profile test](guided-phase-profiles.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
