@@ -14,9 +14,10 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 | [V132 RAW attention, completed20k](v132-endpoint-quality.md) | Reproducible full-model ablation; ordinary-material +0.00046 dB versus V131; all20k input hashes match | Faint ADC −0.40978 dB versus V131/−0.26423 versus V120; shadow −0.00438 dB; missing cab crossings/soft foliage; no broad or100MP validation |
 | [Local conditional waves, complete panel](local-wave-full-panel.md) |400/far weak response1.826%→2.690% above V143; lower global-support quiet/increment error in all six cells; fewer global cab ripples above V120 | Quiet/increment error still above parent; sources1/2 dominate gains; higher-noise weak structure and real crossings mostly missing; executed historical matcher |
 | [Phase measurement aggregation, analytic pilot](phase-measurement-aggregation.md) | Same H1 discovery:current400/far weak response2.80%→12.68%, strong43.33%→65.96%; both projection arms reviewed | Quiet/increment error+5.44%/+1.94%, severe building bands, poor high-noise response; consistent nuisance projection does not repair real artifacts |
-| [Fixed-proposal neural nuisance](neural-nuisance-fixed-proposals.md) |400/far quiet/increment RMS−0.574%/−0.133% versus conditional analytic H1; much smaller added building bands; exact cached fields, zero neural replay | Weak response3.686%→2.690%, still above parent's0.958%; edge-only error above parent, fine cab crossings missing; reused two-source cohort |
+| [Fixed-proposal neural nuisance, full panel](neural-nuisance-full-panel.md) | All8 sources/CFAs/repeats: quieter than conditional analytic in all6 cells;400/far quiet/increment−0.485%/−0.362%; smaller building bands | Weak response2.476%→2.299%, parent1.826%; quiet/increment still+0.058%/+0.055% over parent; source1 dominates gain; missing fine crossings |
 | [Native512 nuisance/complete-edge ablations](neural-nuisance-context512.md) | Complete edge-offset search fixes far-background coverage; withheld noisy sensor RMS substantially lower; zero new neural calls | Weak response near-parent0.957–0.959% versus preferred256's2.690%; high-noise/cab detail missing; geometry fix alone does not improve reconstruction |
 | [Hann512 analytic discovery](neural-nuisance-hann512.md) |400/far weak response0.958%→2.702%, weak-increment RMS−0.093% versus parent in both pilot sources; quiet+0.0037%; matched neural arm has smaller building correction | Weaker strong response/higher full RGB error than256 neural; most weak structure and real crossings absent; two-source development scope, high-noise gains negligible |
+| [Local129 amplitudes](spatial-carrier-amplitudes.md) | Same Hann geometry:400/far analytic weak2.702%→6.241%, strong37.587%→52.053%; lower increment/full error | Severe green/magenta building bands,306.78 DN16 added correction;1600/far weak response falls; fine cab crossings absent; explicit two-source ablation |
 | [Neural residual-reselection ablation](neural-nuisance-reconstruction.md) |400/far quiet RMS−0.493%; no added building correction because arm returns V120 exactly | Weak response3.686%→0.900%, increment error+0.028%; fine cab crossings missing;88 masked background calls, no broad quality/speed claim |
 | [Harmonic analytic ablation](local-wave-shapes.md) | Same pilot H1→H3 far weak response 2.80%→5.46%, strong 43.33%→46.88%; small full-error reduction | Quiet/increment error +0.993%/+0.745% versus H1; new building color bands, missing real crossings; H1 remains default |
 | [Individual harmonic support](individual-wave-validation.md) | Far quiet/increment RMS 4.06592/11.89181→4.05049/11.85942 DN16 versus H3 group; weak response 4.07% | Near quiet error rises; building bands persist; expanded affine background further raises quiet error; explicit ablations |
@@ -81,13 +82,18 @@ recovers part of the weak response and reduces quiet/increment error versus
 analytic H1. That is the preferred nuisance variant for further weak-detail
 work; both measured operating points and their real-photo limitations remain.
 Its [native512 ablations](neural-nuisance-context512.md) fit the far edge better
-but lose the weak-response gain. Native256 remains preferred while the
-[full source/CFA/noise review](neural-nuisance-full-panel.md) runs under its
-original frozen source.
+but lose the weak-response gain. The
+[completed full source/CFA/noise review](neural-nuisance-full-panel.md)
+confirms lower added errors versus analytic H1, with remaining costs versus
+parent and source-dependent response.
 The [Hann512 follow-up](neural-nuisance-hann512.md) adds an analytic option with
 lower low-prior weak-increment error than256 neural, at weaker strong response
 and higher total RGB error. This useful operating point is available without
 changing the256 default or claiming general quality superiority.
+The [local-amplitude ablation](spatial-carrier-amplitudes.md) adds synthetic
+response/error gains but severe real building bands. Its opt-in implementation
+and exact standalone conditional API remain available; global amplitudes stay
+the default.
 
 The [shared-edge cache](paired-training-coverage.md) is completed and audited:
 156 changed rows and 844 exact adoptions. Its [matched training and complete

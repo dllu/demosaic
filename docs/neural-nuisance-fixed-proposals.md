@@ -121,5 +121,7 @@ this quieter operating point generalizes. The complete two-source result is
 useful without treating it as a new general model recommendation.
 
 The [complete source/CFA/repeat/noise review](neural-nuisance-full-panel.md)
-is now running with the same variant and exact pilot-output adoption. Its
-larger-cohort quality remains pending.
+is complete with the same variant and exact pilot-output adoption: quieter
+than analytic in all6 cells,400/far weak2.299% versus parent's1.826%, slight
+parent-error costs and source1-dominated gains. All68 selected figures are
+actually viewed; fine real crossings remain unresolved.

@@ -76,13 +76,18 @@ smaller; missing crossings remain unresolved.
 The [native512 context/edge-search ablations](docs/neural-nuisance-context512.md)
 fit far-edge backgrounds better but return near-parent0.96% weak response;
 native256 remains the preferred nuisance variant. Its
-[full source/CFA/noise panel](docs/neural-nuisance-full-panel.md) is running.
+[completed full source/CFA/noise panel](docs/neural-nuisance-full-panel.md)
+retains lower added errors than analytic H1, with400/far weak response2.299%
+versus parent's1.826%; quiet/increment errors remain slightly above parent.
 A [tapered physical-discovery follow-up](docs/neural-nuisance-hann512.md)
 adds an analytic option:400/far weak response2.702%, with weak-increment
 error−0.093% and quiet error+0.0037% versus parent. Against256 neural it has
 lower weak-increment error, weaker strong response and higher total RGB error.
 The matched Hann neural arm has smaller added building correction; fine cab
 crossings remain absent. Both are audited and actually viewed.
+The [local-amplitude follow-up](docs/spatial-carrier-amplitudes.md) reaches6.24%
+pilot weak response with lower increment error, but restores severe building
+color bands. Global-amplitude alternatives remain available.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -208,6 +213,13 @@ and source1 noisy → restored → exact-GT triplets with the same native160 ROI
 noise and display conditions above. [Configuration, checkpoint and tradeoffs](docs/neural-nuisance-hann512.md).
 
 ![Source1: noisy, Hann analytic correction, exact constructed GT](docs/images/neural-nuisance-hann512-v1/triplets/iso400-index0024-role2-analytic-triplet.png)
+
+The full neural panel retains [source1](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0024-role2-triplet.png)
+and [source7](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0120-role2-triplet.png)
+triplets under those same settings. Local amplitudes retain
+[source0](docs/images/neural-nuisance-spatial129-v1/triplets/iso400-index0008-role2-analytic-triplet.png)
+and [source1](docs/images/neural-nuisance-spatial129-v1/triplets/iso400-index0024-role2-analytic-triplet.png),
+alongside the [building failure](docs/images/neural-nuisance-spatial129-v1/stress/main-building-analytic-max.png).
 
 The competing selector's [cab detail](docs/images/competing-orientation-v1/readme-cab.png)
 and [building color failure](docs/images/competing-orientation-v1/readme-building.png)

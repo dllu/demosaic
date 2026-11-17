@@ -64,7 +64,10 @@ near-parent0.957–0.959% weak response. A complete edge-offset search fixes the
 far-background geometry and greatly lowers withheld noisy sensor error, but
 still misses weak carriers. This separates a real nuisance-model limitation
 from the remaining frequency-discovery/reconstruction problem. The
-[full eight-source256 panel](neural-nuisance-full-panel.md) is running.
+[completed full eight-source256 panel](neural-nuisance-full-panel.md) confirms
+lower quiet/increment errors than analytic H1 in all6 cells.400/far weak
+response2.299% exceeds parent's1.826%, with parent quiet/increment costs
+0.058%/0.055%, source1-dominated response and missing real fine crossings.
 The [Hann/inverse-variance discovery follow-up](neural-nuisance-hann512.md)
 finds both procedural carriers in both folds and restores2.702%400/far weak
 response with weak-increment RMS−0.093% versus parent. Both reused sources
@@ -72,6 +75,12 @@ improve that error. Against256 neural, strong response falls and total RGB
 error rises. The matched neural arm reduces added building correction further,
 with less weak response; real fine crossings remain missing. This is an
 implemented useful error/response alternative, not broad weak-detail recovery.
+The [local129 amplitude follow-up](spatial-carrier-amplitudes.md) raises
+400/far weak response6.241% with lower increment error but severe real building
+bands. A frozen-operator diagnostic reproduces actual Hann outputs and shows
+only3–5% ungated transfer of known finite weak increments. Local full/null
+fits address amplitude dilution while reintroducing background-transfer costs;
+localizing carrier amplitudes with a better constrained nuisance remains open.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

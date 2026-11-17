@@ -355,6 +355,29 @@ def restore_neural_nuisance(
             ]
             tile_records = {}
             for prefix, candidates in [("H1-", reference), ("", neural)]:
+                local_backgrounds = (
+                    [
+                        WithheldBackground(b.rgb[:, region[0], region[1]], mask)
+                        for b, mask in zip(backgrounds, masks, strict=True)
+                    ]
+                    if not prefix
+                    else [None, None]
+                )
+                spatial = None
+                if config.amplitude_window:
+                    from .spatial_carrier_amplitudes import SpatialCarrierOperator
+
+                    spatial = [
+                        SpatialCarrierOperator(
+                            c,
+                            layout,
+                            window=config.amplitude_window,
+                            stride=config.amplitude_stride,
+                            background=b,
+                        )
+                        for c, b in zip(candidates, local_backgrounds, strict=True)
+                    ]
+                predictors = candidates if spatial is None else [s.predict(tile) for s in spatial]
                 scores = [
                     conditional_scores(
                         c,
@@ -364,7 +387,7 @@ def restore_neural_nuisance(
                         window=config.validation_window,
                         stride=config.validation_stride,
                     )
-                    for c in candidates
+                    for c in predictors
                 ]
                 matched = match_directions(
                     candidates[0].frequencies_xy,
@@ -375,20 +398,19 @@ def restore_neural_nuisance(
                 )
                 # Only this final projection may consume the full-input parent.
                 rgb = parent[:, region[0], region[1]]
-                local_backgrounds = (
-                    [
-                        WithheldBackground(b.rgb[:, region[0], region[1]], mask)
-                        for b, mask in zip(backgrounds, masks, strict=True)
+                if spatial is None:
+                    unique = [
+                        conditional_components(c, rgb, tile, layout, b)
+                        for c, b in zip(candidates, local_backgrounds, strict=True)
                     ]
-                    if not prefix
-                    else [None, None]
-                )
-                unique = [
-                    conditional_components(c, rgb, tile, layout, b)
-                    for c, b in zip(candidates, local_backgrounds, strict=True)
-                ]
+                    legacy = (
+                        [replacement_components(c, rgb) for c in candidates] if prefix else None
+                    )
+                else:
+                    local_components = [s.components(tile, rgb) for s in spatial]
+                    unique = [value[0] for value in local_components]
+                    legacy = [value[1] for value in local_components] if prefix else None
                 components = [u[0] for u in unique]
-                legacy = [replacement_components(c, rgb) for c in candidates] if prefix else None
                 maxima = []
                 for a, b, _distance in matched:
                     component = (components[0][a] + components[1][b]) / 2
@@ -430,14 +452,22 @@ def restore_neural_nuisance(
                             )
                             for color in range(3)
                         ]
-                        for c in candidates
+                        for c in predictors
                     ],
                 }
+                if spatial is not None:
+                    tile_records[prefix or "neural"]["wave_diagnostic_scope"] = (
+                        "Energy-weighted local-query averages; normalized Gram inverse cutoff1e-8. Geometry/global variance unchanged."
+                    )
                 if not prefix:
                     column = reference[0].wave_slices[0][0]
                     tile_records["neural"]["neural_nuisance_coefficients_by_color"] = [
                         c.coefficients[:, column].tolist() for c in candidates
                     ]
+                    if spatial is not None:
+                        tile_records["neural"]["neural_coefficient_scope"] = (
+                            "Global discovery coefficients only; actual prediction/delivery use local-query coefficients."
+                        )
             denominator[region] += blend
             records.append({"xy": [int(x), int(y)], "arms": tile_records})
     for key in outputs:

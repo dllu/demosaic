@@ -153,6 +153,11 @@ def review(root, output):
                 entry["arms"][arm]["neural_coefficient_quantiles"] = np.quantile(
                     coefficients, [0, 0.1, 0.5, 0.9, 1]
                 ).tolist()
+                entry["arms"][arm]["neural_coefficient_scope"] = (
+                    "Global discovery initialization; local-query coefficients used for actual spatial-amplitude prediction/delivery"
+                    if plan["geometry_config"].get("amplitude_window", 0)
+                    else "Global prediction/delivery coefficients"
+                )
         diagnostics.append(entry)
 
     figures = []

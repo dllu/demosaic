@@ -127,5 +127,6 @@ existing nuisance/control behavior. CPU corrections take220.15s/237.98s under
 concurrent work; these are development timings, not100MP production benchmarks.
 
 The separate [full eight-source256 review](neural-nuisance-full-panel.md)
-continues with its original frozen implementation. Neither512 result changes
-its source, predictions, plan or running process.
+completed with its original frozen implementation, independent audits and all
+selected native views. Neither512 result changes its source, predictions or
+plan.

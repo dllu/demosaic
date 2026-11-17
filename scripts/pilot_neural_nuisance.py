@@ -33,6 +33,7 @@ def prepare(
     geometry_window=256,
     edge_search="bounded-grid",
     frequency_weighting="uniform",
+    amplitude_window=0,
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
 
@@ -73,6 +74,7 @@ def prepare(
         stride=geometry_window // 2,
         edge_search=edge_search,
         frequency_weighting=frequency_weighting,
+        amplitude_window=amplitude_window,
     ).to_dict()
     if prediction_cache is not None:
         prior_plan = read_json(checked(read_json(checked(prediction_cache))["plan"]))
@@ -203,6 +205,10 @@ def prepare(
     if frequency_weighting != "uniform":
         plan["scope"] += (
             f" Analytic frequency discovery/refinement uses {frequency_weighting}: A-only shot/read variance proxy, weighted nuisance projection and exact sinusoid Gram energy. Optional pixel-centered separable Hann is fixed by native dimensions, without template/GT/reference geometry. Neural nuisance uses the declared fixed/reselected frequency source."
+        )
+    if amplitude_window:
+        plan["scope"] += (
+            f" Override global amplitudes with native{amplitude_window} box/stride32 A-only per-color query WLS; fixed normalized Gram cutoff1e-8. Broad-context edge/frequency/variance unchanged. Predict full and each conditional null with interpolated query coefficients; parent uses exactly the same linear operator only after validation. No target-derived support or amplitude."
         )
     if full_panel and prediction_cache is None:
         plan["scope"] = plan["scope"].replace(
@@ -642,6 +648,7 @@ if __name__ == "__main__":
         choices=("uniform", "inverse-variance", "hann-inverse-variance"),
         default="uniform",
     )
+    parser.add_argument("--amplitude-window", type=int, default=0)
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -653,6 +660,7 @@ if __name__ == "__main__":
                 geometry_window=args.geometry_window,
                 edge_search=args.edge_search,
                 frequency_weighting=args.frequency_weighting,
+                amplitude_window=args.amplitude_window,
             )
         )
     elif args.mode == "score":

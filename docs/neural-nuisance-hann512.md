@@ -66,7 +66,8 @@ nuisance arms share the exact analytic proposal bank.
 
 Use `LocalWaveConfig(window=512, stride=256, edge_search="full-frame",
 frequency_weighting="hann-inverse-variance")` for analytic discovery;
-`restore_local_thresholds` supplies the analytic local correction. The nuisance
+`demosaic.local_validated_waves.restore_conditional_waves` supplies the analytic
+correction without neural nuisance fields. The nuisance
 producer adds `--fixed-analytic-frequencies --geometry-window 512 --edge-search
 full-frame --frequency-weighting hann-inverse-variance`. Uniform discovery
 remains the default; the lower-strong-response Hann option is explicit.
@@ -130,5 +131,9 @@ their corrected results. CPU correction takes162.37s under concurrent work,
 not a100MP production benchmark.
 
 The [full eight-source256 study](neural-nuisance-full-panel.md) keeps its frozen
-source and original running process. This Hann pilot supplies a useful new
+source and completed original execution. This Hann pilot supplies a useful new
 weak-increment-error option, while broad weak-detail recovery remains open.
+Its [local-amplitude follow-up](spatial-carrier-amplitudes.md) increases synthetic
+response but restores severe real building bands; global amplitudes remain the
+default. The standalone conditional API reproduces both completed studies
+exactly without neural nuisance fields.

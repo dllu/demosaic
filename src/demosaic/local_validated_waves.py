@@ -31,6 +31,8 @@ class LocalWaveConfig:
     background: str = "step"
     edge_search: str = "bounded-grid"
     frequency_weighting: str = "uniform"
+    amplitude_window: int = 0
+    amplitude_stride: int = 32
     split_seed: int = 202611160909
 
     def __post_init__(self):
@@ -46,6 +48,8 @@ class LocalWaveConfig:
                     self.frequency_refinements,
                     self.split_seed,
                     self.harmonics,
+                    self.amplitude_window,
+                    self.amplitude_stride,
                 ]
             )
             or not np.isfinite([self.family_degrees, self.match_native_bins]).all()
@@ -67,6 +71,11 @@ class LocalWaveConfig:
             or self.edge_search not in ("bounded-grid", "full-frame")
             or self.frequency_weighting
             not in ("uniform", "inverse-variance", "hann-inverse-variance")
+            or (
+                self.amplitude_window != 0
+                and (self.amplitude_window < 17 or self.amplitude_window % 2 != 1)
+            )
+            or not 1 <= self.amplitude_stride <= 64
         ):
             raise ValueError("Invalid local-wave geometry")
 
@@ -473,6 +482,7 @@ def restore_local_waves(
     thresholds=(2.0,),
     config=_DEFAULT_CONFIG,
     discovery_mask=None,
+    conditional_delivery=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -499,6 +509,8 @@ def restore_local_waves(
         raise ValueError("Invalid native axes/CFA/noise priors")
     if not thresholds or len(set(thresholds)) != len(thresholds):
         raise ValueError("Require a nonempty distinct set of fixed thresholds")
+    if type(conditional_delivery) is not bool:
+        raise ValueError("Require an explicit boolean conditional-delivery choice")
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
@@ -535,6 +547,17 @@ def restore_local_waves(
                 fit_local_candidate(tile, layout, mask, shot=shot, read=read, config=config)
                 for mask in [split, ~split]
             ]
+            spatial = None
+            if config.amplitude_window:
+                from .spatial_carrier_amplitudes import SpatialCarrierOperator
+
+                spatial = [
+                    SpatialCarrierOperator(
+                        c, layout, window=config.amplitude_window, stride=config.amplitude_stride
+                    )
+                    for c in candidates
+                ]
+            predictors = candidates if spatial is None else [s.predict(tile) for s in spatial]
             scores = [
                 conditional_scores(
                     c,
@@ -544,7 +567,7 @@ def restore_local_waves(
                     window=config.validation_window,
                     stride=config.validation_stride,
                 )
-                for c in candidates
+                for c in predictors
             ]
             matched = match_directions(
                 candidates[0].frequencies_xy,
@@ -553,9 +576,19 @@ def restore_local_waves(
                 config.match_native_bins,
                 matching=config.matching,
             )
-            components = [
-                replacement_components(c, parent[:, y : y + n, x : x + n]) for c in candidates
-            ]
+            rgb = parent[:, y : y + n, x : x + n]
+            if spatial is None:
+                if conditional_delivery:
+                    from .neural_nuisance import conditional_components
+
+                    components = [
+                        conditional_components(c, rgb, tile, layout)[0] for c in candidates
+                    ]
+                else:
+                    components = [replacement_components(c, rgb) for c in candidates]
+            else:
+                values = [s.components(tile, rgb) for s in spatial]
+                components = [value[0][0] if conditional_delivery else value[1] for value in values]
             units = _match_units(*candidates, matched, config.match_native_bins)
             local_max, global_max = [], []
             for a, b, _distance in units:
@@ -595,5 +628,31 @@ def restore_local_waves(
         "records": records,
         "config": config.to_dict(),
         "parent_used_for_discovery_or_validation": False,
+        "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }
+
+
+def restore_conditional_waves(
+    parent,
+    packed,
+    colors,
+    *,
+    shot,
+    read,
+    thresholds=(2.0,),
+    config=_DEFAULT_CONFIG,
+    discovery_mask=None,
+):
+    """Standalone analytic conditional delivery; no neural nuisance fields needed."""
+    return restore_local_waves(
+        parent,
+        packed,
+        colors,
+        shot=shot,
+        read=read,
+        thresholds=thresholds,
+        config=config,
+        discovery_mask=discovery_mask,
+        conditional_delivery=True,
+    )
