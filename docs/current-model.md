@@ -135,6 +135,12 @@ far-edge increment and chroma error reduction. Near-edge ISO400
 response at matched quiet RMS falls from 12.16% to 7.54%.
 The real fine cab crossings remain incomplete.
 
+[Same-side validation](phase-edge-side.md) improves ISO400
+dark-side weak recovery from 8.19% to 11.84% at equal measured
+quiet RMS. Bright-side recovery falls from 6.87% to 5.22%.
+Separate profiles lose more overall response, and the real
+fine cab views retain the guarded fit.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

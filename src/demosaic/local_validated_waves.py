@@ -108,6 +108,8 @@ class LocalCandidate:
     guide_search_excluded: int = 0
     phase_reliability_degrees: int | None = None
     donor_phase_shifts: tuple = ()
+    phase_bright_side: np.ndarray | None = None
+    phase_side_profiles: bool = False
 
 
 def _wave_columns(xx, yy, frequency, harmonics=1):
@@ -360,18 +362,44 @@ def _donor_phase_fields(waves, templates, nuisance, values, indices, variances):
     return fields, tuple(phases)
 
 
-def _edge_guarded_green(raw, green, nuisance, x, y, angle, offset, width, shot, read):
-    """Exclude a band around a strong discovery-fold step from frequency selection."""
-    design = nuisance[green]
-    values = raw.ravel()[green]
+def _green_edge_polarity(raw, green, nuisance, shot, read):
+    """Measure the strength and polarity of the discovery-fold green step."""
+    design, values = nuisance[green], raw.ravel()[green]
     coefficients = np.linalg.lstsq(design, values, rcond=1e-10)[0]
     brightest = max(float(np.max(design @ coefficients)), 1e-6)
     if abs(coefficients[3]) <= 2 * np.sqrt(read + shot * brightest):
+        return 0
+    return 1 if coefficients[3] > 0 else -1
+
+
+def _edge_guarded_green(raw, green, nuisance, x, y, angle, offset, width, shot, read):
+    """Exclude a band around a strong discovery-fold step from frequency selection."""
+    if not _green_edge_polarity(raw, green, nuisance, shot, read):
         return green
     cx, cy = np.cos(angle), np.sin(angle)
     per_pixel = np.hypot(2 * cx / raw.shape[1], 2 * cy / raw.shape[0])
     distance = np.abs(x * cx + y * cy - offset).ravel() / per_pixel
     return green & (distance >= width)
+
+
+def _phase_side_option(mode, bins, harmonics, shared, templates):
+    if mode not in (None, "validation", "profiles") or (
+        mode is not None and (not bins or harmonics is not None or shared or templates is not None)
+    ):
+        raise ValueError("Edge-side phase support requires independent full phase profiles")
+
+
+def _bright_edge_side(raw, green, nuisance, selected, shot, read):
+    polarity = _green_edge_polarity(raw, green, nuisance, shot, read)
+    if polarity == 0:
+        return None
+    bright = nuisance[:, 3] == (polarity > 0)
+    # Require at least one eighth of each measured color on each side.
+    for sites in selected:
+        count = np.count_nonzero(bright[sites])
+        if 8 * min(count, len(sites) - count) < len(sites):
+            return None
+    return bright.reshape(raw.shape)
 
 
 def _recenter_phase_guides(raw, green, nuisance, xx, yy, frequencies, bins, shot, read, family):
@@ -430,6 +458,7 @@ def fit_local_candidate(
     phase_guide_edge_guard_px=0,
     shared_phase_shape=False,
     donor_phase_templates=None,
+    phase_edge_side=None,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
@@ -444,6 +473,7 @@ def fit_local_candidate(
     templates = _donor_templates(
         donor_phase_templates, phase_bins, phase_harmonics, shared_phase_shape
     )
+    _phase_side_option(phase_edge_side, phase_bins, phase_harmonics, shared_phase_shape, templates)
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -574,11 +604,29 @@ def fit_local_candidate(
         waves, shifts = _donor_phase_fields(
             waves, templates, nuisance, raw.ravel(), indices, noise_fields
         )
+    bright = (
+        _bright_edge_side(raw, green, nuisance, indices, shot, read)
+        if phase_edge_side is not None
+        else None
+    )
+    split_profiles = bright is not None and phase_edge_side == "profiles"
+    if split_profiles:
+        side = bright.ravel()[:, None]
+        waves = [np.column_stack((wave * ~side, wave * side)) for wave in waves]
     n = nuisance.shape[1]
     split = n + waves[0].shape[1]
     wave_slices = ((n, split), (split, split + waves[1].shape[1]))
     wave_fields = tuple(wave.reshape(*raw.shape, wave.shape[1]) for wave in waves)
-    if config.support_unit == "direction":
+    if split_profiles:
+        unit_slices, unit_fields, unit_keys = [], [], []
+        width = phase_bins - 1
+        for direction, (start, _) in enumerate(wave_slices):
+            for side in (0, 1):
+                offset = side * width
+                unit_slices.append((start + offset, start + offset + width))
+                unit_fields.append(wave_fields[direction][..., offset : offset + width])
+                unit_keys.append((direction, side))
+    elif config.support_unit == "direction":
         unit_slices, unit_fields, unit_keys = wave_slices, wave_fields, ((0, 0), (1, 0))
     else:
         unit_slices, unit_fields, unit_keys = [], [], []
@@ -634,6 +682,8 @@ def fit_local_candidate(
         excluded,
         phase_bins - 1 if shared_phase_shape or shifts else None,
         shifts,
+        bright,
+        split_profiles,
     )
 
 
@@ -664,8 +714,13 @@ def phase_fit_reliability(candidate, colors):
         # A one-column shape selected on this fold is not a fixed one-parameter fit.
         degrees = candidate.phase_reliability_degrees or stop - start
         difference = candidate.full_cfa - candidate.conditional_null_cfa[direction]
+        discovery = candidate.discovery_mask
+        if candidate.phase_side_profiles:
+            discovery = discovery & (
+                candidate.phase_bright_side == candidate.unit_keys[direction][1]
+            )
         for color in range(3):
-            selected = candidate.discovery_mask & (colors == color)
+            selected = discovery & (colors == color)
             energy = np.sum(difference[selected] ** 2 / candidate.variance_cfa[selected])
             if energy > degrees:
                 reliability[direction, color] = 1 - degrees / energy
@@ -722,8 +777,14 @@ def conditional_scores(
     if orientation is not None:
         from scipy.signal import fftconvolve
 
+    side_map = getattr(candidate, "phase_bright_side", None)
     local, global_scores = np.zeros((units, 3, h, w)), np.zeros((units, 3))
     for direction in range(units):
+        sides = (None,)
+        if side_map is not None:
+            sides = (
+                (candidate.unit_keys[direction][1],) if candidate.phase_side_profiles else (0, 1)
+            )
         if orientation is not None:
             family = candidate.unit_keys[direction][0]
             footprint = oriented_validation_footprint(
@@ -731,6 +792,8 @@ def conditional_scores(
             )
         for color in range(3):
             selected = mask & (colors == color)
+            if side_map is not None and candidate.phase_side_profiles:
+                selected &= side_map == sides[0]
             improvement, energy = np.zeros(raw.shape), np.zeros(raw.shape)
             base, full, value, variance = [
                 v[selected]
@@ -745,24 +808,32 @@ def conditional_scores(
                 full = base + reliability[direction, color] * (full - base)
             improvement[selected] = ((value - base) ** 2 - (value - full) ** 2) / variance
             energy[selected] = (full - base) ** 2 / variance
-            if orientation is None:
-                numerator = _box_sums(improvement, ay, ax, window)
-                support_energy = _box_sums(energy, ay, ax, window)
-            else:
-                centers = np.ix_(ay, ax)
-                numerator = fftconvolve(improvement, footprint, mode="same")[centers]
-                support_energy = fftconvolve(energy, footprint, mode="same")[centers]
-                # Ignore roundoff at centers with no contributing energy.
-                floor = 64 * np.finfo(np.float64).eps * energy.sum()
-                support_energy = np.where(support_energy > floor, support_energy, 0)
-            denominator = 2 * np.sqrt(np.maximum(support_energy, 0))
-            scores = np.divide(
-                numerator, denominator, out=np.zeros_like(numerator), where=denominator > 0
-            )
-            horizontal = np.stack([np.interp(np.arange(w), ax, row) for row in scores])
-            local[direction, color] = np.stack(
-                [np.interp(np.arange(h), ay, horizontal[:, x]) for x in range(w)], axis=1
-            )
+            for side in sides:
+                side_mask = side_map == side if side is not None else None
+                signal = improvement if side_mask is None else np.where(side_mask, improvement, 0)
+                power = energy if side_mask is None else np.where(side_mask, energy, 0)
+                if orientation is None:
+                    numerator = _box_sums(signal, ay, ax, window)
+                    support_energy = _box_sums(power, ay, ax, window)
+                else:
+                    centers = np.ix_(ay, ax)
+                    numerator = fftconvolve(signal, footprint, mode="same")[centers]
+                    support_energy = fftconvolve(power, footprint, mode="same")[centers]
+                    # Ignore roundoff at centers with no contributing energy.
+                    floor = 64 * np.finfo(np.float64).eps * power.sum()
+                    support_energy = np.where(support_energy > floor, support_energy, 0)
+                denominator = 2 * np.sqrt(np.maximum(support_energy, 0))
+                scores = np.divide(
+                    numerator, denominator, out=np.zeros_like(numerator), where=denominator > 0
+                )
+                horizontal = np.stack([np.interp(np.arange(w), ax, row) for row in scores])
+                image = np.stack(
+                    [np.interp(np.arange(h), ay, horizontal[:, x]) for x in range(w)], axis=1
+                )
+                if side_mask is None:
+                    local[direction, color] = image
+                else:
+                    local[direction, color, side_mask] = image[side_mask]
             norm = 2 * np.sqrt(energy.sum())
             global_scores[direction, color] = improvement.sum() / norm if norm > 0 else 0
     return local, global_scores
@@ -890,11 +961,12 @@ def phase_profile_agreement(first, second):
 def _match_units(first, second, matched_directions, maximum_native_bins):
     """Match the same harmonic; apply the radius in its actual frequency bins."""
     lookup = {key: index for index, key in enumerate(second.unit_keys)}
+    is_side = getattr(first, "phase_side_profiles", False)
     result = []
     for a, b, distance in matched_directions:
         for index, (direction, harmonic) in enumerate(first.unit_keys):
             other = lookup.get((b, harmonic))
-            scaled_distance = distance * max(1, harmonic)
+            scaled_distance = distance * (1 if is_side else max(1, harmonic))
             if direction == a and other is not None and scaled_distance <= maximum_native_bins:
                 result.append((index, other, scaled_distance))
     return result
@@ -964,6 +1036,7 @@ def restore_local_waves(
     phase_guide_edge_guard_px=0,
     shared_phase_shape=False,
     donor_phase_templates=None,
+    phase_edge_side=None,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -1000,6 +1073,9 @@ def restore_local_waves(
     templates = _donor_templates(
         donor_phase_templates, phase_bins, phase_harmonics, shared_phase_shape
     )
+    _phase_side_option(phase_edge_side, phase_bins, phase_harmonics, shared_phase_shape, templates)
+    if phase_edge_side is not None and (compare_joint_colour_support or compare_phase_agreement):
+        raise ValueError("Edge-side support uses per-color fold evidence")
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if type(compare_pooled_support) is not bool:
@@ -1044,6 +1120,8 @@ def restore_local_waves(
         guide["shared_phase_shape"] = True
     if templates is not None:
         guide["donor_phase_templates"] = templates
+    if phase_edge_side is not None:
+        guide["phase_edge_side"] = phase_edge_side
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
@@ -1093,6 +1171,15 @@ def restore_local_waves(
                 )
                 for mask in [split, ~split]
             ]
+            active_sides = [c.phase_bright_side is not None for c in candidates]
+            if phase_edge_side is not None and active_sides[0] != active_sides[1]:
+                plain = {k: v for k, v in guide.items() if k != "phase_edge_side"}
+                candidates = [
+                    fit_local_candidate(
+                        tile, layout, mask, shot=shot, read=read, config=config, **plain
+                    )
+                    for mask in (split, ~split)
+                ]
             spatial = None
             if config.amplitude_window:
                 from .spatial_carrier_amplitudes import SpatialCarrierOperator
@@ -1294,6 +1381,14 @@ def restore_local_waves(
                     **(
                         {"donor_phase_shifts": [c.donor_phase_shifts for c in candidates]}
                         if templates is not None
+                        else {}
+                    ),
+                    **(
+                        {
+                            "phase_edge_side_detected": active_sides,
+                            "phase_edge_side_applied": all(active_sides),
+                        }
+                        if phase_edge_side is not None
                         else {}
                     ),
                     **({"phase_agreement": agreements} if compare_phase_agreement else {}),

@@ -164,6 +164,45 @@ def test_donor_template_refits_query_phase_and_signed_amplitudes(layout):
     np.testing.assert_allclose(amp / amp[0], [1, -1 / 3, 2 / 3], rtol=0, atol=1e-13)
 
 
+def test_same_side_validation_and_profiles_do_not_cross_a_strong_step():
+    raw, colors, _ = scene()
+    frequencies = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))
+    x, y, _, _ = local.geometry(raw.shape)
+    side = x >= 32
+    basis = local._phase_bin_weights(x, y, frequencies[0], 8)
+    dark = (basis @ np.array([1, -0.1, -0.4, -0.6, -0.6, -0.4, 0.2, 0.9])).reshape(raw.shape)
+    bright = (basis @ np.array([-0.6, -0.4, 0.1, 0.8, 0.7, 0.1, -0.3, -0.4])).reshape(raw.shape)
+    raw = 0.04 + 0.2 * side + np.where(side, 0.003 * bright, 0.008 * dark)
+    fold = stratified_split(raw.shape, 19)
+    options = {
+        "shot": 0.00008,
+        "read": 2.56e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": frequencies,
+        "phase_bins": 8,
+    }
+    plain = local.fit_local_candidate(raw, colors, fold, **options)
+    check = local.fit_local_candidate(raw, colors, fold, phase_edge_side="validation", **options)
+    split = local.fit_local_candidate(raw, colors, fold, phase_edge_side="profiles", **options)
+    damage = local.fit_local_candidate(
+        np.where(fold, raw, np.nan), colors, fold, phase_edge_side="profiles", **options
+    )
+    np.testing.assert_array_equal(check.full_cfa, plain.full_cfa)
+    np.testing.assert_array_equal(split.design, damage.design)
+    np.testing.assert_array_equal(split.full_cfa, damage.full_cfa)
+    np.testing.assert_array_equal(split.phase_bright_side, side)
+    np.testing.assert_allclose(split.full_cfa, raw, rtol=0, atol=1e-13)
+    assert np.linalg.norm(plain.full_cfa - raw) > 0.05
+    assert split.unit_keys == ((0, 0), (0, 1), (1, 0), (1, 1))
+    assert not split.unit_fields[0][side].any()
+    clean = local.conditional_scores(check, raw, colors, ~fold, window=33, stride=8)[0]
+    damaged = local.conditional_scores(
+        check, raw + 0.08 * (side & ~fold), colors, ~fold, window=33, stride=8
+    )[0]
+    np.testing.assert_array_equal(clean[..., ~side], damaged[..., ~side])
+    assert np.max(abs(clean[..., side] - damaged[..., side])) > 0.1
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
 def test_shared_phase_shape_keeps_signed_color_and_withheld_independence(layout):
     _, colors, _ = scene(layout)

@@ -11,6 +11,10 @@ preserves the far-edge repair. ISO6400 recovery remains weak. The
 standing sky matches V120 and the real fine lattice remains
 incomplete.
 
+The [same-side follow-up](phase-edge-side.md) retains the frequency
+guard and confines held-out evidence to the fitted side of each edge.
+At matched quiet error it improves lower-noise dark-side recovery.
+
 ## Discovery-fold exclusion
 
 Each discovery fold fits the existing affine background and edge step

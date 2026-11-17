@@ -76,6 +76,9 @@ has repeatedly come with extra flat-region error or false color. The
    harmonic-phase scramble at the original settings. At matched quiet
    error the independent fit still recovers more true near-edge detail.
    [Donor waveform](donor-waveform.md).
+   Same-side validation improves dark-side ISO400 recovery at matched quiet
+   RMS. Bright-side recovery drops, and separately fitting the waveforms
+   loses more overall response. [Same-side comparison](phase-edge-side.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
