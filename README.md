@@ -88,6 +88,11 @@ crossings remain absent. Both are audited and actually viewed.
 The [local-amplitude follow-up](docs/spatial-carrier-amplitudes.md) reaches6.24%
 pilot weak response with lower increment error, but restores severe building
 color bands. Global-amplitude alternatives remain available.
+Keeping the [background global while fitting carriers locally](docs/global-background-local-carriers.md)
+reduces the neural building correction41.87→15.55 DN16, with weak response4.695%
+and explicit noise/error costs. Fine crossings remain missing. Its
+[full source/CFA/noise comparison](docs/global-background-full-panel.md) is running
+with cached fields and no new neural forwards.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a

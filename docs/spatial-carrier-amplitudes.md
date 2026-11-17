@@ -136,3 +136,8 @@ file contents also occur byte-for-byte in the completed publication.
 This separates a useful synthetic response/error gain from a serious real-photo
 failure. Fixing local background/parent transfer without discarding supported
 finite detail remains necessary.
+The [global-background follow-up](global-background-local-carriers.md) freezes
+the broad nuisance coefficients and localizes only residual carriers. It
+reduces neural building correction41.87→15.55 DN16 with lower weak response;
+analytic bands persist. The local nuisance-coefficient explanation is therefore
+incomplete. Its full source/CFA/noise comparison is separately running.

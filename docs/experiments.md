@@ -25,6 +25,12 @@ error−0.093% versus parent; stronger noise/strong-response tradeoffs remain.
 The [local129 amplitude ablation](spatial-carrier-amplitudes.md) is complete:
 6.241%400/far weak response with lower increment error, severe new building
 bands and persistent fine cab loss. Global amplitudes remain the default.
+The [global-background/local-carrier follow-up](global-background-local-carriers.md)
+reduces neural building artifacts with lower weak response than local nuisance
+fitting. Its [full1164-case comparison](global-background-full-panel.md) is
+running, adopting all2320 background fields and48 exact pilot cases with zero
+fresh neural forwards; paired comparison to the completed256 neural baseline
+is predeclared.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

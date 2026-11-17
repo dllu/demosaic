@@ -81,6 +81,12 @@ bands. A frozen-operator diagnostic reproduces actual Hann outputs and shows
 only3–5% ungated transfer of known finite weak increments. Local full/null
 fits address amplitude dilution while reintroducing background-transfer costs;
 localizing carrier amplitudes with a better constrained nuisance remains open.
+The [fixed global-background follow-up](global-background-local-carriers.md)
+reduces the neural building maximum41.87→15.55 DN16, at weak response6.043%→
+4.695%. Analytic bands remain around302.55 DN16, rejecting local nuisance
+coefficient changes as the sole cause. Mean synthetic gains still depend on
+source1 and real crossings remain missing. A [full source/CFA/noise comparison](global-background-full-panel.md)
+is running with all cached fields and an explicit paired256-neural baseline.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

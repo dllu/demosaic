@@ -18,6 +18,7 @@ edge refinement remains restricted synthetic evidence. [Architecture and command
 | [Native512 nuisance/complete-edge ablations](neural-nuisance-context512.md) | Complete edge-offset search fixes far-background coverage; withheld noisy sensor RMS substantially lower; zero new neural calls | Weak response near-parent0.957–0.959% versus preferred256's2.690%; high-noise/cab detail missing; geometry fix alone does not improve reconstruction |
 | [Hann512 analytic discovery](neural-nuisance-hann512.md) |400/far weak response0.958%→2.702%, weak-increment RMS−0.093% versus parent in both pilot sources; quiet+0.0037%; matched neural arm has smaller building correction | Weaker strong response/higher full RGB error than256 neural; most weak structure and real crossings absent; two-source development scope, high-noise gains negligible |
 | [Local129 amplitudes](spatial-carrier-amplitudes.md) | Same Hann geometry:400/far analytic weak2.702%→6.241%, strong37.587%→52.053%; lower increment/full error | Severe green/magenta building bands,306.78 DN16 added correction;1600/far weak response falls; fine cab crossings absent; explicit two-source ablation |
+| [Global background/local129 carriers](global-background-local-carriers.md) | Neural building correction41.87→15.55 DN16;400/far weak4.695%, strong51.780%; lower increment/full error than256 neural | Quiet+0.407% versus parent; source1 drives mean gain, source0 increment worsens; higher-noise/cab weak detail missing; full8-source validation running |
 | [Neural residual-reselection ablation](neural-nuisance-reconstruction.md) |400/far quiet RMS−0.493%; no added building correction because arm returns V120 exactly | Weak response3.686%→0.900%, increment error+0.028%; fine cab crossings missing;88 masked background calls, no broad quality/speed claim |
 | [Harmonic analytic ablation](local-wave-shapes.md) | Same pilot H1→H3 far weak response 2.80%→5.46%, strong 43.33%→46.88%; small full-error reduction | Quiet/increment error +0.993%/+0.745% versus H1; new building color bands, missing real crossings; H1 remains default |
 | [Individual harmonic support](individual-wave-validation.md) | Far quiet/increment RMS 4.06592/11.89181→4.05049/11.85942 DN16 versus H3 group; weak response 4.07% | Near quiet error rises; building bands persist; expanded affine background further raises quiet error; explicit ablations |
@@ -94,6 +95,10 @@ The [local-amplitude ablation](spatial-carrier-amplitudes.md) adds synthetic
 response/error gains but severe real building bands. Its opt-in implementation
 and exact standalone conditional API remain available; global amplitudes stay
 the default.
+Keeping the [neural background global](global-background-local-carriers.md)
+reduces the local-fit building bands, at a weak-response cost. This stronger
+detail option remains opt-in while its [full comparison](global-background-full-panel.md)
+runs; source1 dependence and real fine-crossing loss remain explicit.
 
 The [shared-edge cache](paired-training-coverage.md) is completed and audited:
 156 changed rows and 844 exact adoptions. Its [matched training and complete

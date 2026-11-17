@@ -31,11 +31,21 @@ PAIRS = (
 )
 
 
-def prepare(producer, root):
+def prepare(producer, root, *, pilot_role_errors=None, baseline_summary=None):
     plan = read_json(producer / "plan.json")
     assert plan["full_panel"] and plan["fixed_analytic_frequencies"]
     assert (len(plan["rows"]), len(plan["finite_groups"])) == (1164, 384)
     assert plan["thresholds"] == [2]
+    producer_launch = reference(producer / "launch.json")
+    old_roles = (
+        reference(pilot_role_errors)
+        if pilot_role_errors is not None
+        else reference(
+            REPO
+            / ".cache/experiments/neural-nuisance-fixed-proposals-pilot-v1/summary-review/absolute-role-errors.json"
+        )
+    )
+    baseline = reference(baseline_summary) if baseline_summary is not None else None
     root.mkdir(exist_ok=False)
     work, files = freeze_sources(
         REPO,
@@ -49,18 +59,16 @@ def prepare(producer, root):
             "pilot_phase_aggregation.py",
             "audit_local_wave_panel.py",
             "report_local_wave_panel.py",
+            "compare_neural_nuisance_panels.py",
         ),
-    )
-    old_roles = reference(
-        REPO
-        / ".cache/experiments/neural-nuisance-fixed-proposals-pilot-v1/summary-review/absolute-role-errors.json"
     )
     own = {
         "producer": str(producer),
         "producer_plan": reference(producer / "plan.json"),
-        "producer_launch": reference(producer / "launch.json"),
+        "producer_launch": producer_launch,
         "model": plan["model"],
         "pilot_role_errors": old_roles,
+        "cross_study_baseline_summary": baseline,
         "work": str(work),
         "python": sys.executable,
         "script": reference(work / "scripts/review_neural_nuisance_panel.py"),
@@ -80,10 +88,11 @@ def prepare(producer, root):
         "contrasts": PAIRS,
         "inputs": [
             reference(producer / "plan.json"),
-            reference(producer / "launch.json"),
+            producer_launch,
             plan["model"],
             old_roles,
-        ],
+        ]
+        + ([baseline] if baseline else []),
         "frozen_files": files,
         "scope": "Predeclared complete1152 finite-role/all8-source/all4-CFA/two-repeat/three-prior audit plus all12 standing contexts. Require exact producer termination and complete1164-case closure before GT/reference analysis. Stream independent metrics/all absolute roles, descriptive paired8-source bootstrap and tails. Native48 RGGB/repeat0 role2 source/noise/placement boards plus all protected/material contexts, same native160 ROI/exposure. Full inference/control sources frozen separately, no new model/RAW/noise/training work in review. Real references qualitative, not exact GT. Actual viewing remains a separate required step.",
     }
@@ -397,6 +406,18 @@ def run(root):
         ],
     )
     assert "torch" not in sys.modules
+    comparison = None
+    if own.get("cross_study_baseline_summary"):
+        command(
+            "cross-study",
+            [
+                "compare_neural_nuisance_panels.py",
+                root,
+                checked(own["cross_study_baseline_summary"]),
+                root / "cross-study-comparison.json",
+            ],
+        )
+        comparison = reference(root / "cross-study-comparison.json")
     write_json(
         root / "completed.json",
         {
@@ -407,6 +428,7 @@ def run(root):
             "background_input_audit": reference(root / "background-independent-audit.json"),
             "native_report": reference(native / "matched/report.json"),
             "native_independent_audit": reference(native / "independent-audit.json"),
+            "cross_study_comparison": comparison,
             "new_neural_forwards": 0,
             "Torch_imported": False,
             "status": "complete-full-neural-nuisance-panel-metrics-and-native-rendering-awaiting-actual-viewing",
@@ -419,8 +441,17 @@ if __name__ == "__main__":
     parser.add_argument("mode", choices=("prepare", "run"))
     parser.add_argument("root", type=Path)
     parser.add_argument("--producer", type=Path)
+    parser.add_argument("--pilot-role-errors", type=Path)
+    parser.add_argument("--baseline-summary", type=Path)
     args = parser.parse_args()
     if args.mode == "prepare":
-        print(prepare(args.producer.resolve(), args.root.resolve()))
+        print(
+            prepare(
+                args.producer.resolve(),
+                args.root.resolve(),
+                pilot_role_errors=args.pilot_role_errors,
+                baseline_summary=args.baseline_summary,
+            )
+        )
     else:
         run(args.root.resolve())

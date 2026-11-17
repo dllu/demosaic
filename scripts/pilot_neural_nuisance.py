@@ -34,6 +34,8 @@ def prepare(
     edge_search="bounded-grid",
     frequency_weighting="uniform",
     amplitude_window=0,
+    amplitude_nuisance="local",
+    prediction_collection=None,
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
 
@@ -41,6 +43,7 @@ def prepare(
     previous = read_json(source / "plan.json")
     prediction_cache = None
     extra_inputs = []
+    assert prediction_collection is None or full_panel
     if full_panel:
         assert fixed_analytic_frequencies and background_cache is not None
         full_source = REPO / ".cache/experiments/local-validated-wave-panel-v1"
@@ -56,7 +59,10 @@ def prepare(
             "finite_groups": full["finite_groups"],
         }
         prediction_cache = reference(
-            REPO / ".cache/experiments/neural-nuisance-fixed-proposals-pilot-v1/collection.json"
+            prediction_collection
+            if prediction_collection is not None
+            else REPO
+            / ".cache/experiments/neural-nuisance-fixed-proposals-pilot-v1/collection.json"
         )
         extra_inputs = [
             reference(full_source / "plan.json"),
@@ -68,13 +74,14 @@ def prepare(
     assert (len(previous["rows"]), len(previous["finite_groups"])) == (
         (1164, 384) if full_panel else (48, 12)
     )
-    assert geometry_window in (256, 512) and (not full_panel or geometry_window == 256)
+    assert geometry_window in (256, 512)
     geometry = LocalWaveConfig(
         window=geometry_window,
         stride=geometry_window // 2,
         edge_search=edge_search,
         frequency_weighting=frequency_weighting,
         amplitude_window=amplitude_window,
+        amplitude_nuisance=amplitude_nuisance,
     ).to_dict()
     if prediction_cache is not None:
         prior_plan = read_json(checked(read_json(checked(prediction_cache))["plan"]))
@@ -92,14 +99,9 @@ def prepare(
             previous_package != current_package
             or LocalWaveConfig(**prior_plan["geometry_config"]).to_dict() != geometry
         ):
+            invalid_cache = prediction_cache
             prediction_cache = None
-            extra_inputs = [
-                b
-                for b in extra_inputs
-                if not b["path"].endswith(
-                    "neural-nuisance-fixed-proposals-pilot-v1/collection.json"
-                )
-            ]
+            extra_inputs = [b for b in extra_inputs if b != invalid_cache]
     background_config = {
         "checkpoint": checkpoint,
         "backbone_sha256": BACKBONE_SHA,
@@ -210,10 +212,21 @@ def prepare(
         plan["scope"] += (
             f" Override global amplitudes with native{amplitude_window} box/stride32 A-only per-color query WLS; fixed normalized Gram cutoff1e-8. Broad-context edge/frequency/variance unchanged. Predict full and each conditional null with interpolated query coefficients; parent uses exactly the same linear operator only after validation. No target-derived support or amplitude."
         )
+        plan["scope"] += (
+            f" Nuisance coefficient scope is {amplitude_nuisance}. Global mode freezes the broad-context joint-fit background operator, fits only carrier residual amplitudes locally, and uses that same global residualization for parent projection. Full/null validation share the identical fixed background; no target/reference enters that operator."
+        )
     if full_panel and prediction_cache is None:
         plan["scope"] = plan["scope"].replace(
             "and threshold2 corrections after source/argument checks",
             "after source/argument checks; cached corrections disabled because implementation/config differs, all1164 corrections recomputed",
+        )
+    if full_panel and cache and cached_ids == current_ids:
+        plan["scope"] += (
+            " Complete closed background cache adopted: zero fresh neural/encoder forwards expected; all2320 fields still checked against actual input/mask/argument identities."
+        )
+    if full_panel and prediction_collection is not None:
+        plan["scope"] += (
+            " Explicit completed pilot prediction cache selected above; threshold2 outputs adopted only with identical complete package source, canonical geometry and actual physical input/parent fingerprints. No numerical replay for valid adopted predictions."
         )
     write_json(root / "plan.json", plan)
     verify_plan(plan)
@@ -649,6 +662,8 @@ if __name__ == "__main__":
         default="uniform",
     )
     parser.add_argument("--amplitude-window", type=int, default=0)
+    parser.add_argument("--amplitude-nuisance", choices=("local", "global"), default="local")
+    parser.add_argument("--prediction-cache", type=Path)
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -661,6 +676,10 @@ if __name__ == "__main__":
                 edge_search=args.edge_search,
                 frequency_weighting=args.frequency_weighting,
                 amplitude_window=args.amplitude_window,
+                amplitude_nuisance=args.amplitude_nuisance,
+                prediction_collection=args.prediction_cache.resolve()
+                if args.prediction_cache
+                else None,
             )
         )
     elif args.mode == "score":

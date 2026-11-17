@@ -36,6 +36,11 @@ The [local-amplitude follow-up](spatial-carrier-amplitudes.md) reaches6.241%
 400/far weak response with lower increment error, but adds severe building
 color bands. The standalone conditional API now exposes the analytic options
 without requiring neural nuisance fields.
+The [global-background follow-up](global-background-local-carriers.md) reduces
+neural local-fit building bands while retaining4.695% low-prior weak response,
+with source-dependent error/noise costs and missing cab crossings. Its
+[full-cohort comparison](global-background-full-panel.md) now checks this point
+against the completed256 neural baseline without replaying neural predictions.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

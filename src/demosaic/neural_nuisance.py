@@ -374,6 +374,7 @@ def restore_neural_nuisance(
                             window=config.amplitude_window,
                             stride=config.amplitude_stride,
                             background=b,
+                            nuisance_mode=config.amplitude_nuisance,
                         )
                         for c, b in zip(candidates, local_backgrounds, strict=True)
                     ]
@@ -459,6 +460,9 @@ def restore_neural_nuisance(
                     tile_records[prefix or "neural"]["wave_diagnostic_scope"] = (
                         "Energy-weighted local-query averages; normalized Gram inverse cutoff1e-8. Geometry/global variance unchanged."
                     )
+                    tile_records[prefix or "neural"]["amplitude_nuisance"] = (
+                        config.amplitude_nuisance
+                    )
                 if not prefix:
                     column = reference[0].wave_slices[0][0]
                     tile_records["neural"]["neural_nuisance_coefficients_by_color"] = [
@@ -466,7 +470,9 @@ def restore_neural_nuisance(
                     ]
                     if spatial is not None:
                         tile_records["neural"]["neural_coefficient_scope"] = (
-                            "Global discovery coefficients only; actual prediction/delivery use local-query coefficients."
+                            "Global background coefficients used in prediction; only residual carrier amplitudes vary locally."
+                            if config.amplitude_nuisance == "global"
+                            else "Global discovery coefficients only; actual prediction/delivery use local-query coefficients."
                         )
             denominator[region] += blend
             records.append({"xy": [int(x), int(y)], "arms": tile_records})

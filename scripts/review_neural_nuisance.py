@@ -154,7 +154,10 @@ def review(root, output):
                     coefficients, [0, 0.1, 0.5, 0.9, 1]
                 ).tolist()
                 entry["arms"][arm]["neural_coefficient_scope"] = (
-                    "Global discovery initialization; local-query coefficients used for actual spatial-amplitude prediction/delivery"
+                    "Actual fixed global background; carrier amplitudes fitted locally"
+                    if plan["geometry_config"].get("amplitude_window", 0)
+                    and plan["geometry_config"].get("amplitude_nuisance") == "global"
+                    else "Global discovery initialization; local-query coefficients used for actual spatial-amplitude prediction/delivery"
                     if plan["geometry_config"].get("amplitude_window", 0)
                     else "Global prediction/delivery coefficients"
                 )

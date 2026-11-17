@@ -43,11 +43,25 @@ def fixture(layout=(0, 1, 1, 2)):
         0.03 + 0.2 * step + 0.005 * waves[0] + 0.003 * waves[2]
     )
     raw = rgb[colors, y, x] + np.random.default_rng(8).normal(0, 0.0002, x.shape)
+    attach_global_operators(candidate, colors)
     return candidate, colors, raw, rgb
 
 
+def attach_global_operators(candidate, colors):
+    operators = []
+    for color in range(3):
+        selected = (candidate.discovery_mask & (colors == color)).ravel()
+        precision = 1 / np.sqrt(candidate.variance_cfa.ravel()[selected])
+        operators.append(
+            np.linalg.pinv(candidate.design[selected] * precision[:, None], rcond=1e-10)
+            * precision[None]
+        )
+    candidate.operators = tuple(operators)
+
+
 @pytest.mark.parametrize("neural", [False, True])
-def test_query_predictions_match_independent_column_scaled_svd(neural):
+@pytest.mark.parametrize("nuisance_mode", ["local", "global"])
+def test_query_predictions_match_independent_column_scaled_svd(neural, nuisance_mode):
     candidate, colors, raw, rgb = fixture()
     field = None
     if neural:
@@ -58,7 +72,10 @@ def test_query_predictions_match_independent_column_scaled_svd(neural):
         feature = field.rgb[colors, yy, xx]
         candidate.design = np.insert(candidate.design, 4, feature.ravel(), axis=1)
         candidate.unit_slices = candidate.wave_slices = ((5, 7), (7, 9))
-    operator = SpatialCarrierOperator(candidate, colors, window=33, stride=16, background=field)
+        attach_global_operators(candidate, colors)
+    operator = SpatialCarrierOperator(
+        candidate, colors, window=33, stride=16, background=field, nuisance_mode=nuisance_mode
+    )
     for group in operator.groups:
         coefficient, nulls = operator.coefficients(raw, group)
         for iy, ix in [(0, 0), (2, 2), (4, 4), (1, 3)]:
@@ -68,23 +85,38 @@ def test_query_predictions_match_independent_column_scaled_svd(neural):
             selected &= (abs(yy - y) <= 16) & (abs(xx - x) <= 16)
             sigma = np.sqrt(group["weights"][selected])
             for keep, actual in [
-                (np.ones(candidate.design.shape[1], bool), coefficient),
+                (np.ones(operator.design.shape[1], bool), coefficient),
                 *zip(operator.keep, nulls, strict=True),
             ]:
-                matrix = candidate.design[selected.ravel()][:, keep] * sigma[:, None]
+                matrix = operator.design[selected.ravel()][:, keep] * sigma[:, None]
                 norm = np.linalg.norm(matrix, axis=0)
                 scale = np.divide(1, norm, out=np.zeros_like(norm), where=norm > 0)
-                expected = scale * (
-                    np.linalg.pinv(matrix * scale, rcond=1e-4) @ (raw[selected] * sigma)
-                )
+                values = raw[selected]
+                if nuisance_mode == "global":
+                    global_selected = group["selected"].ravel()
+                    precision = 1 / np.sqrt(candidate.variance_cfa.ravel()[global_selected])
+                    global_fit = np.linalg.lstsq(
+                        candidate.design[global_selected] * precision[:, None],
+                        raw.ravel()[global_selected] * precision,
+                        rcond=1e-10,
+                    )[0]
+                    values = (
+                        values
+                        - candidate.design[selected.ravel(), : operator.nuisance_columns]
+                        @ global_fit[: operator.nuisance_columns]
+                    )
+                expected = scale * (np.linalg.pinv(matrix * scale, rcond=1e-4) @ (values * sigma))
                 native = group["native"][y * 64 + x, keep]
                 assert abs(native @ expected - native @ actual[iy, ix]) < 2e-8
 
 
 @pytest.mark.parametrize("layout", [(0, 1, 1, 2), (2, 1, 1, 0), (1, 0, 2, 1), (1, 2, 0, 1)])
-def test_local_operator_withholding_linearity_and_constant_null(layout):
+@pytest.mark.parametrize("nuisance_mode", ["local", "global"])
+def test_local_operator_withholding_linearity_and_constant_null(layout, nuisance_mode):
     candidate, colors, raw, rgb = fixture(layout)
-    operator = SpatialCarrierOperator(candidate, colors, window=33, stride=16)
+    operator = SpatialCarrierOperator(
+        candidate, colors, window=33, stride=16, nuisance_mode=nuisance_mode
+    )
     original = operator.predict(raw)
     damaged = raw.copy()
     damaged[~candidate.discovery_mask] = np.nan
@@ -106,13 +138,16 @@ def test_local_operator_withholding_linearity_and_constant_null(layout):
     assert np.isfinite(operator.fractions).all() and np.isfinite(operator.spectra).all()
 
 
-def test_compact_carrier_local_fit_reduces_global_amplitude_dilution():
+@pytest.mark.parametrize("nuisance_mode", ["local", "global"])
+def test_compact_carrier_local_fit_reduces_global_amplitude_dilution(nuisance_mode):
     candidate, colors, _, _ = fixture()
     y, x = np.indices(colors.shape)
     envelope = np.exp(-((x - 32) ** 2 + (y - 32) ** 2) / (2 * 8**2))
     truth = 0.003 * envelope * candidate.design[:, 6].reshape(colors.shape)
     rgb_truth = np.broadcast_to(truth, (3, *truth.shape))
-    operator = SpatialCarrierOperator(candidate, colors, window=17, stride=8)
+    operator = SpatialCarrierOperator(
+        candidate, colors, window=17, stride=8, nuisance_mode=nuisance_mode
+    )
     local = operator.components(truth, np.zeros_like(rgb_truth))[0][0][1]
     global_value = []
     for color in range(3):
@@ -127,7 +162,10 @@ def test_compact_carrier_local_fit_reduces_global_amplitude_dilution():
 
 
 @pytest.mark.parametrize("amplitude_window", [0, 33])
-def test_spatial_raw_wave_controls_match_standalone_shared_partition(amplitude_window):
+@pytest.mark.parametrize("nuisance_mode", ["local", "global"])
+def test_spatial_raw_wave_controls_match_standalone_shared_partition(
+    amplitude_window, nuisance_mode
+):
     candidate, _colors, raw, rgb = fixture()
     packed = np.stack([raw[y::2, x::2] for y in range(2) for x in range(2)])
     layout = np.array([0, 1, 1, 2])
@@ -138,6 +176,7 @@ def test_spatial_raw_wave_controls_match_standalone_shared_partition(amplitude_w
         edge_refinements=1,
         amplitude_window=amplitude_window,
         amplitude_stride=16,
+        amplitude_nuisance=nuisance_mode,
     )
     backgrounds = [
         WithheldBackground(rgb, mask)
@@ -179,6 +218,32 @@ def test_spatial_raw_wave_controls_match_standalone_shared_partition(amplitude_w
     for (mode, threshold), value in conditional.items():
         np.testing.assert_array_equal(outputs["conditional-" + mode, threshold], value)
     assert aux["parent_used_for_discovery_or_validation"] is False
+
+
+def test_fixed_global_background_span_and_parent_projection_share_one_operator():
+    candidate, colors, raw, rgb = fixture()
+    operator = SpatialCarrierOperator(
+        candidate, colors, window=33, stride=16, nuisance_mode="global"
+    )
+    zero = np.zeros_like(rgb)
+    base = operator.components(raw, zero)[0][0]
+    delta = np.zeros_like(raw)
+    for group in operator.groups:
+        delta[group["selected"]] = (
+            group["sensor_background"] @ np.arange(1, operator.nuisance_columns + 1) * 0.01
+        )
+    np.testing.assert_allclose(operator.components(raw + delta, zero)[0][0], base, atol=1e-9)
+    y, x = np.indices(raw.shape)
+    parent_cfa = rgb[colors, y, x]
+    projected = operator.components(parent_cfa, zero)[0][0]
+    np.testing.assert_allclose(operator.components(raw, rgb)[0][0], base - projected, atol=1e-9)
+    predicted = operator.predict(raw)
+    for unit in range(2):
+        np.testing.assert_allclose(
+            predicted.full_cfa - predicted.conditional_null_cfa[unit],
+            base[unit, colors, y, x],
+            atol=1e-10,
+        )
 
 
 def test_invalid_local_geometry_rejected():

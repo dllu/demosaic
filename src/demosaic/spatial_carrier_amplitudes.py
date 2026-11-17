@@ -30,7 +30,9 @@ class SpatialCarrierOperator:
     Coefficients interpolate in native coordinates before RGB evaluation.
     """
 
-    def __init__(self, candidate, colors, *, window=129, stride=32, background=None):
+    def __init__(
+        self, candidate, colors, *, window=129, stride=32, background=None, nuisance_mode="local"
+    ):
         self.candidate = candidate
         self.mask = np.asarray(candidate.discovery_mask)
         self.colors = np.asarray(colors)
@@ -46,6 +48,7 @@ class SpatialCarrierOperator:
             or not np.isin(self.colors, (0, 1, 2)).all()
             or not np.isfinite(candidate.variance_cfa).all()
             or np.any(candidate.variance_cfa <= 0)
+            or nuisance_mode not in ("local", "global")
         ):
             raise ValueError(
                 "Require a native CFA mask, positive A-only variance and local geometry"
@@ -56,9 +59,17 @@ class SpatialCarrierOperator:
         ):
             raise ValueError("Require the matching A-only RGB nuisance field")
         self.window = window
+        self.nuisance_mode = nuisance_mode
         self.ay, self.ax = [np.unique(np.r_[np.arange(0, n, stride), n - 1]) for n in self.shape]
         self.design = candidate.design
         self.units = candidate.unit_slices
+        self.nuisance_columns = candidate.wave_slices[0][0]
+        if nuisance_mode == "global":
+            self.design = candidate.design[:, self.nuisance_columns :]
+            self.units = tuple(
+                (a - self.nuisance_columns, b - self.nuisance_columns)
+                for a, b in candidate.unit_slices
+            )
         self.keep = []
         for start, stop in self.units:
             keep = np.ones(self.design.shape[1], bool)
@@ -83,7 +94,7 @@ class SpatialCarrierOperator:
             full_inverse = gram_inverse(gram)
             null_inverses = [gram_inverse(gram[..., keep, :][..., keep]) for keep in self.keep]
             native = self.design
-            if background is not None:
+            if background is not None and nuisance_mode == "local":
                 native = native.copy()
                 native[:, candidate.wave_slices[0][0] - 1] = np.minimum(
                     background.rgb[color].ravel(), 1
@@ -97,6 +108,15 @@ class SpatialCarrierOperator:
                     "native": native,
                 }
             )
+            if nuisance_mode == "global":
+                native_background = candidate.design[:, : self.nuisance_columns].copy()
+                if background is not None:
+                    native_background[:, -1] = np.minimum(background.rgb[color].ravel(), 1)
+                self.groups[-1].update(
+                    global_operator=candidate.operators[color],
+                    sensor_background=candidate.design[selected.ravel(), : self.nuisance_columns],
+                    native_background=native_background,
+                )
             color_fraction, color_spectrum = [], []
             for (start, stop), keep, inverse in zip(
                 self.units, self.keep, null_inverses, strict=True
@@ -144,7 +164,13 @@ class SpatialCarrierOperator:
         if values.shape != self.shape or not np.isfinite(values[selected]).all():
             raise ValueError("Require finite discovery values on the fixed native grid")
         weighted = np.zeros(self.shape)
-        weighted[selected] = values[selected] * group["weights"][selected]
+        discovery = values[selected]
+        if self.nuisance_mode == "global":
+            coefficient = group["global_operator"] @ discovery
+            discovery = (
+                discovery - group["sensor_background"] @ coefficient[: self.nuisance_columns]
+            )
+        weighted[selected] = discovery * group["weights"][selected]
         rhs = np.stack(
             [self.box(weighted * column.reshape(self.shape)) for column in self.design.T], axis=-1
         )
@@ -167,13 +193,21 @@ class SpatialCarrierOperator:
         for color, group in enumerate(self.groups):
             coefficient, null_coefficients = self.coefficients(raw, group)
             destination = self.colors == color
-            full[destination] = self.evaluate(coefficient, group["native"])[destination]
+            background = np.zeros(self.shape)
+            if self.nuisance_mode == "global":
+                global_coefficient = group["global_operator"] @ raw[group["selected"]]
+                background = (
+                    group["native_background"] @ global_coefficient[: self.nuisance_columns]
+                ).reshape(self.shape)
+            full[destination] = (background + self.evaluate(coefficient, group["native"]))[
+                destination
+            ]
             for direction, (keep, value) in enumerate(
                 zip(self.keep, null_coefficients, strict=True)
             ):
-                nulls[direction, destination] = self.evaluate(value, group["native"][:, keep])[
-                    destination
-                ]
+                nulls[direction, destination] = (
+                    background + self.evaluate(value, group["native"][:, keep])
+                )[destination]
         return SimpleNamespace(
             full_cfa=full,
             conditional_null_cfa=nulls,

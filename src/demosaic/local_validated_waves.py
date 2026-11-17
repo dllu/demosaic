@@ -33,6 +33,7 @@ class LocalWaveConfig:
     frequency_weighting: str = "uniform"
     amplitude_window: int = 0
     amplitude_stride: int = 32
+    amplitude_nuisance: str = "local"
     split_seed: int = 202611160909
 
     def __post_init__(self):
@@ -76,6 +77,7 @@ class LocalWaveConfig:
                 and (self.amplitude_window < 17 or self.amplitude_window % 2 != 1)
             )
             or not 1 <= self.amplitude_stride <= 64
+            or self.amplitude_nuisance not in ("local", "global")
         ):
             raise ValueError("Invalid local-wave geometry")
 
@@ -553,7 +555,11 @@ def restore_local_waves(
 
                 spatial = [
                     SpatialCarrierOperator(
-                        c, layout, window=config.amplitude_window, stride=config.amplitude_stride
+                        c,
+                        layout,
+                        window=config.amplitude_window,
+                        stride=config.amplitude_stride,
+                        nuisance_mode=config.amplitude_nuisance,
                     )
                     for c in candidates
                 ]
