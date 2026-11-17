@@ -35,8 +35,9 @@ weights alone do not establish useful reliance.
 ## Integrated model/data path and completed2k probes
 
 The complete noisy-scene/native-crop path and a trainable scene adapter are now
-implemented. Forty-seven focused tests now cover observation, geometry,
-inference and canonical-crop context composition. Actual V120 native256/B4 checks
+implemented. Fifty-five focused tests now cover observation, geometry,
+inference, canonical-crop context composition and checked frozen-feature reuse.
+Actual V120 native256/B4 checks
 complete two discarded optimizer updates for each of no-context/pooled/spatial
 conditioning. Initialization matches the base exactly on those fixtures;
 gradients reach the new adapter and the shared encoder stays frozen. Three
@@ -44,9 +45,11 @@ matched2000-update probes have completed in the
 [full-corpus/context compute allocation](full-corpus-scaling.md). Their actual
 training observation logs match byte for byte. The [matched native review](whole-scene-context-native-review.md)
 finds small mixed spatial-context changes on its first two sources and no
-convincing new fence/sky-cord recovery. All16 native boards were viewed. A fixed
-64-source study with context interventions is collecting on CPU; broad panels
-remain pending. V120 stays the general recommendation.
+convincing new fence/sky-cord recovery. All16 native boards were viewed. The
+[64-source/intervention study](whole-scene-context-development64.md) has completed
+analysis and eight further native boards: small quiet-coarse gains coexist with
+detail/color costs. [Full primary collection is running on CPU](whole-scene-context-primary-admission.md).
+V120 stays the general recommendation.
 [Exact model/data/preflight receipts](results/whole-scene-context-training-setup-v1/publication.json).
 [Independent source/checkpoint audit](results/whole-scene-context-training-setup-v1/independent-review.json).
 
@@ -58,7 +61,7 @@ The first admission's preflight omitted the auxiliary term; its production
 handoff failed at directory creation before any context update. Both historical
 sources/receipts remain intact. Production starts afresh from V120, not the
 discarded checks. Training and the first native review are now complete;
-the broader development/intervention and full427/camera reviews are separate.
+the completed development/intervention and running full427/camera reviews are separate.
 
 [scene_context.py](../src/demosaic/scene_context.py) now provides:
 

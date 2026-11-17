@@ -4,7 +4,8 @@
 first1,000 updates.** All three whole-scene comparison arms have completed;
 the fresh matched20k control is now training, before the remaining99k updates.
 Their [first matched native review](whole-scene-context-native-review.md) finds
-no convincing new fine crossings. No larger-corpus endpoint gain is claimed.
+no convincing new fine crossings; the [completed64-source study](whole-scene-context-development64.md)
+adds small quiet-coarse gains and mixed detail/color costs. No larger-corpus endpoint gain is claimed.
 V120 remains the general recommendation while milestone evaluation is pending.
 This implements the [training-scale review](training-scale-pipeline-review-2026-11-17.md)
 and complements the [scene-context experiment](whole-scene-context-next-test.md).
@@ -108,7 +109,11 @@ The new allocation adopts that state and does not replay its prefix.
 Training completion, numerical evaluation and actual native viewing are tracked
 separately. No new full427 or known/unseen-camera result is available, and the
 32-photo monitor is not a comparable panel. Neither scaling horizon is complete;
-the finished scene arms' broad evaluation is still pending. The PSNR registry/
+the finished scene arms' [broad evaluation is running on CPU](whole-scene-context-primary-admission.md).
+Its canonical physical-only CUDA input export ran briefly alongside training;
+neural evaluation is CPU-only. Training PID, recipe and schedule were preserved;
+wall time is not exclusive and resulting weights are not claimed bit-identical
+to execution without concurrent activity. The PSNR registry/
 chart therefore remains unchanged. V120/V131 remain the latest
 completed comparable broad measurements. Both standing fence reviews and native
 triplets are pending for scaling endpoints; the separate scene2k arms now have

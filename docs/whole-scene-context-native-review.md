@@ -1,5 +1,12 @@
 # Whole-scene context: first matched native review
 
+**November17 follow-up:** the [64-source/intervention study](whole-scene-context-development64.md)
+has completed numerical analysis and actual native viewing. It finds small
+quiet-coarse gains, mixed detail/color costs and no established benefit from
+correct spatial placement. [Full primary evaluation is now running on CPU](whole-scene-context-primary-admission.md).
+The original cutoff and pending statements below describe this first review;
+its receipts, scores and native pixels are unchanged.
+
 **All three2k continuations have finished.** Spatial context makes a small,
 mixed change on the first two development sources, with no convincing recovery
 of missing fine fence crossings or sky rigging in the viewed crops. V120 stays

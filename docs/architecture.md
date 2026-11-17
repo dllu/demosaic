@@ -20,6 +20,10 @@ still open. [Current choices](current-model.md).
 | `demosaic.experiments.checkpoints` | Trainable head state, frozen-state identity, Adam, EMA and RNG |
 | `demosaic.experiments.training` | One cached-head training loop |
 | `demosaic.experiments.evaluation` | Established metrics, exact arrays and native crop triplets |
+| `demosaic.scene_data`, `scene_training_data` | One noisy whole observation with phase-preserving native training crops |
+| `demosaic.scene_restoration`, `scene_inference` | Optional local/pooled/spatial scene adapter, explicit raw/EMA loading and scene/tile sessions |
+| `demosaic.photo_scene` | Surrounding noisy context that preserves every original primary benchmark crop |
+| `demosaic.frozen_encoder_replay` | Evaluation-only reuse of identical frozen CPU DINO requests across checkpoints |
 
 The new packages import no experiment scripts. Sixteen former helper modules
 under `scripts/` now alias the packaged modules, including private names and
@@ -32,6 +36,16 @@ for broad photo/camera training and historical checkpoints. The shared runner
 currently consolidates cached head experiments, not every historical training
 regime. A future full-model experiment should extend the shared runtime instead
 of copying another versioned script.
+
+The optional scene wrapper preserves the original local encoder/trunk. It
+accepts one shared `EncodedScene` or one scene per native crop, allowing the
+primary photo panel to keep its original B4 local computation. Full noisy
+fields are reduced on CPU before a bounded preview transfer; clean targets
+never enter the scene encoder. The [64-source review](whole-scene-context-development64.md)
+documents the trained endpoints and limits. The [primary admission](whole-scene-context-primary-admission.md)
+qualifies heterogeneous batches and checked frozen-feature sharing; learned
+trunks/projections still execute separately for every checkpoint. Ordinary
+inference and historical sources remain available unchanged.
 
 ## Composed model stages
 

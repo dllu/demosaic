@@ -1,0 +1,1580 @@
+{
+  "analysis": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/analysis-v1/result.json",
+    "sha256": "7b1d55ccdbae9c793a270ad88f5bdd0c2c0836f5057c3dec7fc81371feb16777"
+  },
+  "renderer": {
+    "path": "/home/dllu/proj/demosaic/.cache/render-scene-development64-v1.py",
+    "sha256": "f86fffe22996684741ff27c63e23158f6742992d067d3b58f46a9054df6ba1e6"
+  },
+  "boards": [
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-0-shadows-crop1.png",
+        "sha256": "9840dcde92bca6e60dd7ab5b7b17c39f0e0eaffdd28683cd477936658e4abe08"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-0-shadows-crop1",
+      "selection": [
+        "Fixed sky-rigging example from the initial preselected source."
+      ],
+      "source_id": "d4538e5aa578ec6de5ef2f5d253add05435a7211",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/d4/d4538e5aa578ec6de5ef2f5d253add05435a7211.npy",
+        "sha256": "e74458799236151c28cc0de81b911ec4a37721fbd4f027e87923afa42a898295"
+      },
+      "source_context_xywh": [
+        706,
+        220,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        754,
+        268,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-context-native-review-v1/inputs/development-0-shadows.npz",
+        "sha256": "8f8e00d7f3cf9f2c6a943fbaa5816dcfbe0429bb4c20afbd3b593a3eb41018ec"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 0.125,
+        "shot": 0.00064,
+        "read": 1.6384e-06,
+        "black": 0.03,
+        "noise_seed": 71000
+      },
+      "display_exposure": 8.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-1-iso12800-prior-crop0.png",
+        "sha256": "c93d092708c6f1f9ee528b97acef3711a47d78de8900e0d107aa5dbbf63df0a2"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-1-iso12800-prior-crop0",
+      "selection": [
+        "Fixed quiet-sky example from the initial preselected source."
+      ],
+      "source_id": "7085fbd6e9a67c2965e7b40d8f43693ab6497ed1",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/70/7085fbd6e9a67c2965e7b40d8f43693ab6497ed1.npy",
+        "sha256": "6254da82b83d05f9d3cc0ad3103fd6e4e0cc4c314cc0c0383b527646677159ce"
+      },
+      "source_context_xywh": [
+        992,
+        402,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        1040,
+        450,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-context-native-review-v1/inputs/development-1-iso12800-prior.npz",
+        "sha256": "2c96c33e90a506beb3ee28c7a7c65565d81dd2e69f897761402a79dbee380c5c"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 1.0,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "black": 0.03,
+        "noise_seed": 71103
+      },
+      "display_exposure": 1.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-32-iso12800-prior-crop1.png",
+        "sha256": "f23b87b2add85dffa97faa0063708e956c4c1d3a17e62e2b6153c413e639f21d"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-32-iso12800-prior-crop1",
+      "selection": [
+        "Largest improvement in quiet coarse luma versus local-only,selected from all256 ISO12800 crops:delta-26.246935."
+      ],
+      "source_id": "053a6decabebc26103ae53c73be6e11ee1b4f5a2",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-incoming-20261016-v2-quarantine/extension4/prepared4/images/05/053a6decabebc26103ae53c73be6e11ee1b4f5a2.npy",
+        "sha256": "abe951735a7faa2ec53fea10b77f51f0e23e8cfeb868c7b70b49e0eb69d97baf"
+      },
+      "source_context_xywh": [
+        280,
+        122,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        328,
+        170,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/cases/development-32-iso12800-prior/inputs.npz",
+        "sha256": "4186e82292026d4f140e339b964b7db1386fad19eb600eacdb68f67c81dd6cad"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 1.0,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "black": 0.03,
+        "noise_seed": 74265
+      },
+      "display_exposure": 1.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-41-iso12800-prior-crop1.png",
+        "sha256": "3b1dcd8a4e51b5f2855a3b701ad6767c3d5b872c4cbfb45868b2f67656b879f9"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-41-iso12800-prior-crop1",
+      "selection": [
+        "Largest regression in quiet coarse luma versus local-only,selected from all256 ISO12800 crops:delta0.43903304."
+      ],
+      "source_id": "1bc8356eefa0296195a210c1c3520320d8771728",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/1b/1bc8356eefa0296195a210c1c3520320d8771728.npy",
+        "sha256": "87bb742cf2e5569e7bbf9de08b79c324c09613adc8f7264f42fd878ca5c29c0b"
+      },
+      "source_context_xywh": [
+        114,
+        330,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        162,
+        378,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/cases/development-41-iso12800-prior/inputs.npz",
+        "sha256": "6148983ea80f3a0d09119e43f2fb311b13b459cf4a3b19dfb0233258f6328786"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 1.0,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "black": 0.03,
+        "noise_seed": 75183
+      },
+      "display_exposure": 1.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-56-iso12800-prior-crop3.png",
+        "sha256": "3b447d2d5f6b7665d861cbbebc39128b3a9e3e22f051b7eae005610b814c40a1"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-56-iso12800-prior-crop3",
+      "selection": [
+        "Largest improvement in weak-region detail error versus local-only,selected from all256 ISO12800 crops:delta-0.82939825."
+      ],
+      "source_id": "4baa9987a286ea0736b4342c9067c9362f2851d9",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-incoming-20261017-v5-quarantine/extension4/prepared4/images/4b/4baa9987a286ea0736b4342c9067c9362f2851d9.npy",
+        "sha256": "90f253a0e4b1ab39d66e7f31bf9e6a13697beb4975c29dbc00a9702a8695caa2"
+      },
+      "source_context_xywh": [
+        316,
+        98,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        364,
+        146,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/cases/development-56-iso12800-prior/inputs.npz",
+        "sha256": "693016cf1a105db000b3385dc69ad5dfe22d1dcdd053bbfda39081bd834b5869"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 1.0,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "black": 0.03,
+        "noise_seed": 76713
+      },
+      "display_exposure": 1.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-21-iso12800-prior-crop2.png",
+        "sha256": "94baa0589ae96ab77dcb607b8f3a0fea8e21603aa3cffa33cef650c752230264"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-21-iso12800-prior-crop2",
+      "selection": [
+        "Largest regression in weak-region detail error versus local-only,selected from all256 ISO12800 crops:delta8.9770793."
+      ],
+      "source_id": "b44b891912c12a8abcde189cded5daf7d81a1986",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/b4/b44b891912c12a8abcde189cded5daf7d81a1986.npy",
+        "sha256": "cecf84e31f611e8ff3f7e4acd6625c25dfcdcf6c82572b8f9a4327ecf0815fc0"
+      },
+      "source_context_xywh": [
+        396,
+        452,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        444,
+        500,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/cases/development-21-iso12800-prior/inputs.npz",
+        "sha256": "a90bd372879e20dd89e0fab58f8744bbceb168a2a94e6149fa9bf8c0516875c1"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 1.0,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "black": 0.03,
+        "noise_seed": 73143
+      },
+      "display_exposure": 1.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-32-iso12800-prior-crop0.png",
+        "sha256": "6253b937c0b25a3d577ff741754b77e311c098e25ea1b90bb1f91732a48d6a7f"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-32-iso12800-prior-crop0",
+      "selection": [
+        "Largest final-RGB response to masked scene context among256 ISO12800 crops."
+      ],
+      "source_id": "053a6decabebc26103ae53c73be6e11ee1b4f5a2",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-incoming-20261016-v2-quarantine/extension4/prepared4/images/05/053a6decabebc26103ae53c73be6e11ee1b4f5a2.npy",
+        "sha256": "abe951735a7faa2ec53fea10b77f51f0e23e8cfeb868c7b70b49e0eb69d97baf"
+      },
+      "source_context_xywh": [
+        850,
+        318,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        898,
+        366,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/cases/development-32-iso12800-prior/inputs.npz",
+        "sha256": "4186e82292026d4f140e339b964b7db1386fad19eb600eacdb68f67c81dd6cad"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 1.0,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "black": 0.03,
+        "noise_seed": 74265
+      },
+      "display_exposure": 1.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/development-59-iso12800-prior-crop2.png",
+        "sha256": "a553223963b321a6ddee83783b19069089d34c3cfb7fc31b03ddef5e29144290"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Local-only2k",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Pooled2k",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial2k",
+          "png_xywh": [
+            680,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial masked",
+          "png_xywh": [
+            848,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Spatial shuffled",
+          "png_xywh": [
+            1016,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Exact GT",
+          "png_xywh": [
+            1184,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "development-59-iso12800-prior-crop2",
+      "selection": [
+        "Largest final-RGB response to shuffled scene context among256 ISO12800 crops."
+      ],
+      "source_id": "bf6e16bc74071af12671d4ea77408458c30b3e59",
+      "source_cache": {
+        "path": "/mnt/external/demosaic/commons-incoming-20261016-v2-quarantine/extension4/prepared4/images/bf/bf6e16bc74071af12671d4ea77408458c30b3e59.npy",
+        "sha256": "5875aa6109ecae246eb9d1d12d36360950b8aac97b2046c75c28a92f2eaaac84"
+      },
+      "source_context_xywh": [
+        550,
+        358,
+        256,
+        256
+      ],
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "source_ROI_xywh": [
+        598,
+        406,
+        160,
+        160
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/cases/development-59-iso12800-prior/inputs.npz",
+        "sha256": "670cccd001c25248db18ef226338c381692fd10f6e2235859e462abf2eca6038"
+      },
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "camera_inverse": [
+          [
+            0.9000000357627869,
+            0.05000000074505806,
+            0.05000000447034836
+          ],
+          [
+            0.05000000074505806,
+            0.9000000357627869,
+            0.05000000074505806
+          ],
+          [
+            0.05000000074505806,
+            0.05000000447034836,
+            0.9000000357627869
+          ]
+        ],
+        "exposure": 1.0,
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "black": 0.03,
+        "noise_seed": 77019
+      },
+      "display_exposure": 1.0,
+      "WB": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "camera_to_sRGB": [
+        [
+          1.1176470518112183,
+          -0.05882352590560913,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          1.1176470518112183,
+          -0.05882352963089943
+        ],
+        [
+          -0.05882352963089943,
+          -0.05882352963089943,
+          1.1176470518112183
+        ]
+      ],
+      "endpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "none": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+          "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+        },
+        "pooled": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+          "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+        },
+        "spatial": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+          "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+        }
+      },
+      "weights": "EMA",
+      "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+    }
+  ],
+  "triplets": [
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-78f0f7a63ceaf729.png",
+        "sha256": "97a78ca061f43f2669a260ed54826f065d833f9c20a951525ecca2986f176e2e"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-78f0f7a63ceaf729.json",
+        "sha256": "530b0f8a038d9967bae98d01c4aaacbb11592b1966a67cba7f08681bfe728cb4"
+      },
+      "id": "development-0-shadows-crop1"
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-c712148529c38b8f.png",
+        "sha256": "1f0340131491ce7818cee4034e1901e1084c98d795913786af3d3a3f37f35eaa"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-c712148529c38b8f.json",
+        "sha256": "26106ba2040ffb803fd3f5020757c9a4d5527763700331e5ebc52bec5d5a7cd7"
+      },
+      "id": "development-1-iso12800-prior-crop0"
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-8568930e828f8ea0.png",
+        "sha256": "1aff01ce8b3b23d331f0fe31360f4ba3a97a7daaf05cf50de8fed373db0f9839"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-8568930e828f8ea0.json",
+        "sha256": "c5b512fbf91ccd96728f71a0cadce57a05406604cca2a9e3a770c23b635a6888"
+      },
+      "id": "development-32-iso12800-prior-crop1"
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-ed4b333945140e4f.png",
+        "sha256": "dd649294c3943692c1a80bc4e3f1ae6c0c3b6dc6a5a84f4cd9fd3513fe96e1ba"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-ed4b333945140e4f.json",
+        "sha256": "58b7d6d432b0cc1c30ccd0bb314db415869562c455a5d2313472897be50b6fac"
+      },
+      "id": "development-41-iso12800-prior-crop1"
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-79e7a29a1cdf5426.png",
+        "sha256": "2f0fd5bd8cf993724f8f7d788173096b0fe5da8d3348bd17204e3a0a0166ea2d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-79e7a29a1cdf5426.json",
+        "sha256": "45f7be842f3738abf1f325067e883ecd355c27ba7627edbc4a8b19b86120deda"
+      },
+      "id": "development-56-iso12800-prior-crop3"
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-4c7f3a884017c2d4.png",
+        "sha256": "493834f1e6a55ed27fd2bfd96aa990494f53ce256f31f403615d8095f7e0b618"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-4c7f3a884017c2d4.json",
+        "sha256": "1ce1915477bb5376bd1c07d636d0bb8fac58fa374a1b114dbc318e857e21f85d"
+      },
+      "id": "development-21-iso12800-prior-crop2"
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-efd5df38849379a9.png",
+        "sha256": "972bc79327d66ade3c04c4c34041e48de79a4f4db1ddd20c90fa347776460982"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-efd5df38849379a9.json",
+        "sha256": "3a8adce276a0cb6484ecb6b5f81ca47bb99c4234cda0becbb6a5fa7c87c803a7"
+      },
+      "id": "development-32-iso12800-prior-crop0"
+    },
+    {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-fccaf6ee3a178ea7.png",
+        "sha256": "b109b51fa44974a77291a7ef9fcd6d3173684e79175183a9cddc7e553ec42e7f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-development64-context-review-v1/native-review-v1/triplets/crop-fccaf6ee3a178ea7.json",
+        "sha256": "6bfdbc23504923ff7df70152c9cfea790e2652d84a6246ec2bd5f953a54df9cd"
+      },
+      "id": "development-59-iso12800-prior-crop2"
+    }
+  ],
+  "native_pixel_size": [
+    160,
+    160
+  ],
+  "actual_viewing": "pending",
+  "scope": "Two fixed earlier controls plus disclosed best/worst quiet/detail and largest-intervention responses. ROI is always the center160 of the selected256 crop;selection metrics score the border-trimmed240,not only thiscenter. Identical display/ROI across methods,original noisy scene/targets,no resampling. Reread every PNG panel.0 neural/noise/GPU/RAW/optimizer calls;not a representative mean-quality gallery."
+}

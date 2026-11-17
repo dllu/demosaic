@@ -36,6 +36,8 @@ Start with the [README](../README.md) for installation and inference.
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [matched2k native review](whole-scene-context-native-review.md) ·
+[completed64-source/intervention study](whole-scene-context-development64.md) ·
+[primary benchmark admission](whole-scene-context-primary-admission.md) ·
 [full-corpus scaling](full-corpus-scaling.md).
 
 Individual experiment reports are evidence snapshots, not automatically current

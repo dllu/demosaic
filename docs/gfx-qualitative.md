@@ -11,6 +11,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Matched2k scene-context arms](whole-scene-context-native-review.md): local-only,
   pooled and spatial conditioning, all main regions/both cab profiles actually
   viewed. Main detail stays close to V120; no convincing new fine crossings.
+  The [completed64-source study](whole-scene-context-development64.md) adds
+  diagnostic/intervention results for these same endpoints; it reuses these
+  exact GFX outputs, with no new camera-score claim.
 - [Full guided phase review](neural-guided-phase-full-panel.md) and
   [joint-color fine support](joint-fine-colour-support.md): available detail
   experiments with response/tint gains and persistent flat/color costs.

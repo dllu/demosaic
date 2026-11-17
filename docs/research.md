@@ -13,14 +13,18 @@ has repeatedly come with extra flat-region error or false color. The
    region and condition smoothing or refinement. RAW measurements must still
    determine fine phase, orientation, color and amplitude. Test correct versus
    shuffled/masked context and include wires in sky and flat gaps beside fences.
-   [Implementation and next test](whole-scene-context-next-test.md).
+   The [completed64-source study](whole-scene-context-development64.md) finds
+   quiet-coarse gains but no established weak-detail benefit from correct spatial
+   placement. [Full primary collection is running](whole-scene-context-primary-admission.md).
+   [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
    The [100k full-corpus continuation](full-corpus-scaling.md) has saved its first
    1000 updates, with shuffled epochs,5% reviewed quota and a fresh20k control.
-   Its remaining allocation follows the context probes. Quality is pending.
+   All3 context probes are complete; the20k control is running before the99k
+   remainder. Quality is pending.
    [Coverage and pipeline rationale](training-scale-pipeline-review-2026-11-17.md).
 3. **Evaluate the delivered correction.** Better background prediction or a
    stronger synthetic mesh response does not guarantee lower final-image error.
@@ -42,7 +46,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Weak-detail literature review](weak-detail-literature-2026-11.md) | Initial November 15 literature search, with explicitly added follow-ups; primary-paper links and proposed tests |
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
-| [Whole-scene context test](whole-scene-context-next-test.md), [first native review](whole-scene-context-native-review.md) | All3 matched2k arms trained/native-viewed; no convincing new fine crossing. Fixed64-source/intervention study collecting; full427/camera pending |
+| [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md) | All3 matched2k arms and64-source/intervention study complete/native-viewed; small quiet-coarse gains with detail/color costs, no convincing new crossings. Full427/camera collection running |
 | [Full-corpus scaling](full-corpus-scaling.md) | Executing100k/20k matched-data continuations, source/crop/noise coverage and actual execution profile; no endpoint quality claim yet |
 
 These are research proposals and bounded experiment conclusions. They do not

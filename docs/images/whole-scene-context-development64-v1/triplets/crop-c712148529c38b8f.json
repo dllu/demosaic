@@ -1,0 +1,140 @@
+{
+  "image": "crop-c712148529c38b8f.png",
+  "caption": "development-1-iso12800-prior-crop0",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Spatial2k EMA",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Exact GT",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "1f0340131491ce7818cee4034e1901e1084c98d795913786af3d3a3f37f35eaa",
+  "id": "development-1-iso12800-prior-crop0",
+  "selection": [
+    "Fixed quiet-sky example from the initial preselected source."
+  ],
+  "source_id": "7085fbd6e9a67c2965e7b40d8f43693ab6497ed1",
+  "source_cache": {
+    "path": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/70/7085fbd6e9a67c2965e7b40d8f43693ab6497ed1.npy",
+    "sha256": "6254da82b83d05f9d3cc0ad3103fd6e4e0cc4c314cc0c0383b527646677159ce"
+  },
+  "source_context_xywh": [
+    992,
+    402,
+    256,
+    256
+  ],
+  "ROI_xywh": [
+    48,
+    48,
+    160,
+    160
+  ],
+  "source_ROI_xywh": [
+    1040,
+    450,
+    160,
+    160
+  ],
+  "inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-context-native-review-v1/inputs/development-1-iso12800-prior.npz",
+    "sha256": "2c96c33e90a506beb3ee28c7a7c65565d81dd2e69f897761402a79dbee380c5c"
+  },
+  "recipe": {
+    "pattern": "RGGB",
+    "wb": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "camera_inverse": [
+      [
+        0.9000000357627869,
+        0.05000000074505806,
+        0.05000000447034836
+      ],
+      [
+        0.05000000074505806,
+        0.9000000357627869,
+        0.05000000074505806
+      ],
+      [
+        0.05000000074505806,
+        0.05000000447034836,
+        0.9000000357627869
+      ]
+    ],
+    "exposure": 1.0,
+    "shot": 0.00256,
+    "read": 2.62144e-05,
+    "black": 0.03,
+    "noise_seed": 71103
+  },
+  "display_exposure": 1.0,
+  "WB": [
+    2.0,
+    1.0,
+    1.5
+  ],
+  "camera_to_sRGB": [
+    [
+      1.1176470518112183,
+      -0.05882352590560913,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      1.1176470518112183,
+      -0.05882352963089943
+    ],
+    [
+      -0.05882352963089943,
+      -0.05882352963089943,
+      1.1176470518112183
+    ]
+  ],
+  "endpoints": {
+    "V120": {
+      "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+    },
+    "none": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+      "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+    },
+    "pooled": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/pooled/step002000.pt",
+      "sha256": "d1ab7f10dd0bbea62d59a78d3ff941f8895479a6b0d2029a2e473286ae20dedc"
+    },
+    "spatial": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/spatial/step002000.pt",
+      "sha256": "97fd551bd0ae0b7aa97c67e1f6e8b513b722f70d5ad8b8814a96586b934eafac"
+    }
+  },
+  "weights": "EMA",
+  "reference": "Exact synthetic clean target;context-probe holdout only,not parent-lifetime/scaling-independent holdout."
+}

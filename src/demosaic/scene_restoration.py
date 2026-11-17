@@ -120,6 +120,12 @@ class WholeSceneRestorer(nn.Module):
             return self.base(packed, variance, colors, wb, matrix)
         if scene is None or boxes_xywh is None or len(boxes_xywh) != len(packed):
             raise ValueError("Scene-conditioned crops require their encoded scene and native boxes")
+        if not isinstance(scene, EncodedScene) and (
+            not isinstance(scene, (tuple, list))
+            or len(scene) != len(packed)
+            or any(not isinstance(s, EncodedScene) for s in scene)
+        ):
+            raise ValueError("Require one shared scene or one encoded scene per native crop")
         h, w = 2 * packed.shape[-2], 2 * packed.shape[-1]
         if (
             h % 8
@@ -139,7 +145,17 @@ class WholeSceneRestorer(nn.Module):
             offsets = self.base.context(preview, size)
             if not isinstance(offsets, tuple) or len(offsets) != 3:
                 raise ValueError("Require all three original local context offsets")
-            extra = self.adapter(scene, boxes_xywh, size, mode=self.mode)
+            if isinstance(scene, EncodedScene):
+                extra = self.adapter(scene, boxes_xywh, size, mode=self.mode)
+            else:
+                # Keep the original local B4 forward for the primary panel;
+                # each photograph still queries only its own scene/coordinates.
+                extra = torch.cat(
+                    [
+                        self.adapter(s, [box], size, mode=self.mode)
+                        for s, box in zip(scene, boxes_xywh, strict=True)
+                    ]
+                )
             return (*offsets[:2], offsets[2] + extra.to(offsets[2].dtype))
 
         return self.base.pretrained_rgb(

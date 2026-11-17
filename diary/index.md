@@ -23,6 +23,8 @@ For a concise view of the evidence, start with the
 [experiment index](../docs/experiments.md) rather than the chronological diary.
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
+
+Latest context review: [64-source analysis and canonical primary admission](2026-11-17-04-17-00-scene-development64-primary-admission.md).
 separates current guidance from historical reports and records the remaining
 camera-gallery coverage gap.
 

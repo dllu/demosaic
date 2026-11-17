@@ -83,6 +83,39 @@ def inputs():
     return scene, args, [[0, 0, 32, 32], [96, 64, 32, 32]]
 
 
+@pytest.mark.parametrize("mode", ["pooled", "spatial"])
+def test_heterogeneous_scenes_keep_crop_assignment_and_original_local_batch(mode):
+    model = WholeSceneRestorer(Base(), mode=mode, adapter_width=4).eval()
+    raw, args, _ = inputs()
+    other = torch.rand(4, 80, 128, generator=torch.Generator().manual_seed(222))
+    scenes = [model.encode_scene(r, args[2][0], args[3][0], args[4][0]) for r in [raw, other]]
+    with torch.no_grad():
+        model.adapter.output.weight.fill_(0.12)
+    boxes = [[0, 0, 32, 32], [0, 0, 32, 32]]
+    before = model.base.context.backbone.calls
+    actual = model(*args, scene=scenes, boxes_xywh=boxes)
+    assert model.base.context.backbone.calls == before + 1
+    expected = torch.cat(
+        [
+            model(*(v[i : i + 1] for v in args), scene=scenes[i], boxes_xywh=[boxes[i]])
+            for i in range(2)
+        ]
+    )
+    torch.testing.assert_close(actual, expected, atol=1e-6, rtol=1e-6)
+    swapped = model(*args, scene=scenes[::-1], boxes_xywh=boxes)
+    assert (actual - swapped).abs().max() > 1e-4
+
+
+def test_reject_missing_scene_assignment_before_local_encoder():
+    model = WholeSceneRestorer(Base(), mode="spatial", adapter_width=4)
+    raw, args, boxes = inputs()
+    encoded = model.encode_scene(raw, args[2][0], args[3][0], args[4][0])
+    before = model.base.context.backbone.calls
+    with pytest.raises(ValueError, match="one encoded scene per"):
+        model(*args, scene=[encoded], boxes_xywh=boxes)
+    assert model.base.context.backbone.calls == before
+
+
 @pytest.mark.parametrize("mode", ["none", "pooled", "spatial"])
 def test_zero_initialization_preserves_base_and_retains_local_encoder(mode):
     model = WholeSceneRestorer(Base(), mode=mode, adapter_width=4)
