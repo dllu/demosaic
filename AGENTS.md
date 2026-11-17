@@ -39,3 +39,11 @@ RAF. Include this difficult mesh in future quality reports alongside the main
 DSCF3879/3880 scene. The reference differs in aperture, exposure time and moving
 subjects; it is not exact GT. Keep both captures, their JPEGs and siblings out
 of training, and preserve original files read-only.
+
+Documentation structure: keep README a concise quickstart with the recommended
+model, navigation and a small native-crop set. Put model tradeoffs in
+`docs/current-model.md`, research status in `docs/experiments.md`, and detailed
+findings in scoped reports. Update the relevant summary instead of appending
+experiment narratives across entry points. General-looking galleries must name
+the models actually shown and link newer reviews or state the coverage gap.
+Follow `docs/documentation-maintenance.md`; preserve historical evidence.

@@ -1,6 +1,13 @@
-# Cached Q2, Sony a7R II and GFX50R comparisons
+# Q2, Sony a7R II and GFX50R: V104/V114/V115 gallery
 
-**V114 Tiny and V115 Small now have current comparisons on all three cameras,**
+**Historical model coverage; checked November 17, 2026.** This page has no
+published V120/V131/V132 results on these three captures. V120 is the
+[current general recommendation](current-model.md); newer
+[GFX comparisons](gfx-qualitative.md) cover a different scene and do not update
+this panel. The original images, reference definitions and receipts below
+remain unchanged.
+
+**V114 Tiny and V115 Small were compared on all three cameras,**
 alongside retained V104 and both released RawNIND variants. Tiny/Small look
 close to each other and to V104 here. All three preserve finer-looking concrete
 texture than RawNIND, while Q2 shadows and Sony windows remain soft. These six

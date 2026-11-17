@@ -1,5 +1,25 @@
 # Fine green fence beside the red train
 
+**Review map updated November 17, 2026.** Faithful weak, colored crossings remain
+unresolved. Newer reports are linked here; the version-specific gallery below
+preserves its original comparison pixels and provenance.
+
+| Review | Relevant outcome |
+| --- | --- |
+| [V120 baseline](#v120-after-correcting-the-paired-data-mix) | Soft/irregular lattice, strongly affected by noise conditioning |
+| [V131 endpoint](v131-endpoint-quality.md), [V132 endpoint](v132-endpoint-quality.md) | Both 20k reviews complete; no clear new fine crossings |
+| [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
+| [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
+| [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |
+
+The protected pair is **DSCF3842 ISO6400 / DSCF3835 ISO100 f/5.6**, with both
+camera JPEGs. The separate reference differs in aperture, exposure and moving
+subjects; it is **not exact GT**. These captures and siblings remain excluded
+from training. Historical progress sections below are not current job status.
+[Model choices](current-model.md) · [Main GFX scene](gfx-qualitative.md).
+
+## Historical comparisons
+
 ## V142 crossed-line data1k: fine lattice remains unresolved
 
 The [completed V142/native/48-flat report](v142-crossed-line-pilot.md) finds
@@ -92,7 +112,7 @@ V120/V121 mesh review is complete below, with no clear V121 lattice-recovery
 gain. V120's two saved predictions were adopted without rerunning it. V122/V123
 final mesh review is complete below. A separate
 [V1239k midpoint](#v123-at-9000-updates) is now measured with saved controls.
-V124's [14k progress review](#v124-at-14000-updates) is complete; its original
+V124's [14k progress review](v124-progress14000.md) is complete; its original
 20k control has completed and V125's original20k worker stopped at the memory reserve.
 The [completed V12420k native check](#v124-at20k) and [V1256k progress](#v125-at6k)
 are now measured; neither shows clear new lattice recovery.

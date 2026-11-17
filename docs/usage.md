@@ -17,8 +17,9 @@ cases improve; positive-noise profiles bypass the correction. Its report include
 actual serialized-export triplets and the increased flat-field spatial variation.
 V114 Tiny retains a slightly lower tested ADC maximum; V115 Small has a slightly
 higher known-camera mean and V117 a higher photo mean. The model guide records
-these useful alternatives. Active V122/V123 retain their fixed V115 parent for
-the controlled frequency-adapter experiment.
+these useful alternatives. The [V122/V123 frequency experiment](v122-v123-quality.md)
+is complete and retains its fixed V115 parent. Newer experimental full-model
+choices are [V131 and its ADC-only repair](current-model.md#full-model-choices).
 
 Add `--phase-harmonic` to `infer` for the experimental local periodic-detail
 correction. It runs after neural restoration and before linear/sRGB RGB16 export,

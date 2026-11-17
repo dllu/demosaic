@@ -1,94 +1,39 @@
-# Current experiments
+# Experiment status and workflow
 
-The [full local/global wire panel](local-wave-full-panel.md) and
-[V131 broad photo/camera/texture/color review](v131-broad-primary.md) are
-complete and independently audited. V131 improves photo scores with
-unseen-camera and severe ADC-color costs. The opt-in
-[fixed ADC repair](v131-adc-projection.md) improves ADC photo/color results,
-with weakest-band error+1.43%. V132's [completed20k review](v132-endpoint-quality.md)
-loses0.410 dB faint ADC versus V131; ordinary detail is essentially tied.
-The [phase-aggregation pilot](phase-measurement-aggregation.md) now completes
-all48 inputs/native review: more low-prior response with higher error and
-severe real color bands. Its consistent nuisance-projection follow-up is also
-complete:12.68% far/400 weak response, similar errors and persistent bands.
-A [four-forward A-only neural diagnostic](withheld-neural-background.md) improves
-held-out sensor prediction on the building/cab contexts. The
-[fixed-proposal neural nuisance](neural-nuisance-fixed-proposals.md) retains a
-quieter2.690% weak-response operating point. [Native512 ablations](neural-nuisance-context512.md)
-fit the far edge better but lose that response; the
-[full256 source/CFA/noise panel](neural-nuisance-full-panel.md) is complete:
-quieter than analytic H1 in all6 cells,400/far weak2.299%, slight parent-error
-costs and source1-dominated response; all native views actually inspected.
-The [Hann512 carrier follow-up](neural-nuisance-hann512.md) completes all48
-cases/audits/native viewing: analytic weak response2.702% with weak-increment
-error−0.093% versus parent; stronger noise/strong-response tradeoffs remain.
-The [local129 amplitude ablation](spatial-carrier-amplitudes.md) is complete:
-6.241%400/far weak response with lower increment error, severe new building
-bands and persistent fine cab loss. Global amplitudes remain the default.
-The [global-background/local-carrier follow-up](global-background-local-carriers.md)
-reduces neural building artifacts with lower weak response than local nuisance
-fitting. Its [full1164-case comparison](global-background-full-panel.md) is
-complete: versus256 NN,400/far weak2.299%→2.778%, strong37.032%→48.055%,
-lower full RGB error and smaller added cab ripples, with higher mean quiet/
-increment errors. All68 native figures/saved baseline panels are reviewed.
-The [guided phase pilot](neural-guided-phase-pooling.md) retains much stronger
-analytic400/far weak28.702%, lower increment error and smaller building bands
-than unguided phase, with quiet/error costs and missing fine crossings. Its
-[full source/CFA/noise comparison](neural-guided-phase-full-panel.md) is complete:
-1164 cases, zero fresh neural calls and70 actual native views.400/far analytic
-weak2.299%→9.300%, strong37.032%→68.274% versus256 NN, lower full RGB error
-but quiet/increment+0.258%/+0.606%; the pilot increment gain does not persist.
-The separate [fine-band pilot](fine-frequency-proposals.md) is
-complete:1600/far analytic weak0.989%→2.037%, same quiet/slightly lower increment
-error, source1-driven. Real cab lattice is more visible with false purple/green
-grid; building/neural1600 errors rise. All44 figures were actually inspected.
-The [sinusoidal fine control](fine-sinusoidal-carriers.md) is complete with
-46 actual native figures/210 passing tests: NN1600/far increment−3.017%
-versus fine phase with less weak response; the cab grid persists and building
-bands increase. [Joint-colour fine support](joint-fine-colour-support.md) now
-reduces real cab tint with the lattice retained, losing the extra1600/far
-synthetic response;46 actual figures/217 tests complete. The
-[fresh coloured-wire benchmark](coloured-fine-wire-benchmark.md) has48 new V120
-parents/96 genuine A-only fields and has closed all192 corrections/scored400
-rows, with all40 native figures viewed and8400 fields independently audited.
-The small1600 joint gain is almost entirely neutral; signed-colour response
-barely changes and increment/colour errors rise.6400 has no useful weak gain.
-The [A-only fine-innovation control](parent-innovation-validation.md) now closes
-both48-case producers and numerical audits with0 new neural calls; actual
-native review/quality decision remain pending. The
-[whole-scene-context next test](whole-scene-context-next-test.md) is the next
-architecture priority:8 preview/query tests pass and the source-lineage audit
-is complete, but shared-noise scene/crop generation and a trained adapter are
-still required.
+Reviewed November 17, 2026. This page tracks research outcomes and the next
+questions. Use the [model guide](current-model.md) to choose an implementation;
+individual reports retain exact measurements, native comparisons and receipts.
 
-**The competing-orientation model trial completed all 900 updates and 100 ADC
-skips (November 16); raw/EMA quality review is complete.** It changes carrier
-allocation with the original V200 data, initializer, parameter count and objective
-fixed. The [proposal diagnostic and admission](competing-wave-candidates.md)
-explain the intervention and its strong-family coverage cost. The
-[full native review](competing-orientation-comparison.md) finds a directional
-gain in one mesh, weaker aggregate response and persistent color/texture failures.
+## Active and unresolved work
 
-The matched shared-edge trial completed all 900 updates and 100 ADC skips
-(November 16), and its full quality review is complete. All 1,000 committed
-rows passed the checkpoint/Adam/frozen-state audit. Both endpoints completed all
-822 existing inputs; all 60 native boards/12 triplets were actually inspected.
-The result has small quiet/flat gains, lower mesh response and persistent real
-fringes/incomplete crossings. [Complete comparison](shared-edge-comparison.md).
-[Training completion](results/shared-edge-training-completed-v1.json) ·
-[Launch observation](results/shared-edge-launch-v1.json) ·
-[Current model choices](current-model.md).
-
-| Recipe | Purpose | State |
+| Work | Evidence available | Next unresolved question |
 | --- | --- | --- |
-| [Full-model RAW attention](raw-spatial-continuation.md) | Matched20k control versus added RAW spatial attention, full restoration trunk trained | Both20k/input-trace audits/native reviews complete. [V132 endpoint](v132-endpoint-quality.md): faint ADC −0.410 dB versus V131; ordinary tied, fine crossings missing |
-| [V200 replay](../configs/experiments/v200-replay.json) | Original V200 initialization, observations, loss and complete LR schedule | Existing original study complete; new runner recipe ready |
-| [Shared-edge](../configs/experiments/shared-edge.json) | Same head/loss recipe with paired strong-edge backgrounds and faint mesh increments | Training and full two-endpoint native review complete; [measured tradeoff](shared-edge-comparison.md) |
-| [Fresh-noise finite-wire panel](edge-snr-ladder.md) | Independent zero/one/two-direction roles, near/far edges, all CFAs | All three priors complete: 1,152 observations; no clear shared-edge weak-response gain |
-| [Fixed additional-wave GT oracle](measured-wave-oracle.md) | Hold the measured bank fixed; fit bounded/unbounded/phase-free global gains using targets | All64 far/400 views complete and audited: weak response 9.43%→19.39%, but quiet/increment errors rise on56/64 and46/64. Explicit oracle diagnostic, no learned-model gain |
-| [Local conditional RAW waves](local-wave-full-panel.md) | Raw-only A/B discovery, per-direction/color validation and local support; replace parent wave projection | Complete1,152-image/three-prior audit:400/far weak response1.826%→2.690%, lower global-support error in all six cells, parent-error costs and unresolved real crossings; historical matcher |
-| [Competing orientations](../configs/experiments/orientation-balanced.json) | Same data/initializer/loss, two angular families with four carriers each | 900 updates audited; both 822-input endpoints/all60 native boards and [all three fresh-noise panels](competing-edge-response.md) reviewed |
-| [Complementary CFA branch](../configs/experiments/complementary.json) | Freeze complete V200 EMA; add a new head/nonduplicate proposals on its residual | 900 updates audited; both 822-input endpoints/all60 native boards reviewed: [almost unchanged weak detail](complementary-comparison.md); [three-noise follow-up](complementary-edge-response.md) complete: small lower-noise weak gain with strong response retained |
+| [Whole-scene context](whole-scene-context-next-test.md) | Scene preview and coordinate-query utilities are committed; scene data/training integration is under development | Does shared full-image context improve weak-detail reconstruction and flat regions? No reviewed trained-model result yet |
+| [A-only parent-innovation validation](parent-innovation-validation.md) | Both 48-case numerical reviews complete with zero new neural calls | Native viewing and the quality decision are still pending in the published report |
+| [Longer training and pipeline scale](training-scale-pipeline-review-2026-11-17.md) | Coverage/timing audit and proposed matched scaling experiment | Whether a longer full-model run improves held-out quality; throughput of current models at larger batches remains unmeasured |
+| [Production speed](weak-detail-global-context-production-review-2026-11-16.md) | Runtime bottlenecks and proposed optimization sequence | Repeatable end-to-end baseline, then measured quality-preserving speedups; 100MP in 10 seconds remains unmet |
+
+## Completed comparisons that guide the next work
+
+| Question | Finding | Evidence |
+| --- | --- | --- |
+| How did the full-model continuation perform? | V131 improves broad photo PSNR by 0.04000 dB, with unseen-camera and severe ADC-color costs. Fixed ADC projection repairs color with a weak-band tradeoff | [Broad V131](v131-broad-primary.md), [ADC option](v131-adc-projection.md) |
+| Does local RAW attention help at the full budget? | V132 at 20k loses 0.40978 dB faint ADC versus V131; ordinary detail is tied. The early 1k advantage did not persist | [Matched training](raw-spatial-continuation.md), [V132 endpoint](v132-endpoint-quality.md) |
+| Do shared edges or better carrier allocation solve weak detail? | Shared-edge training is quieter but weakens response. Competing orientations help some weak sectors and hurt strong ones. Complementary proposals give a small lower-noise gain | [Shared-edge](shared-edge-comparison.md), [competing](competing-edge-response.md), [complementary](complementary-edge-response.md) |
+| Does local support reduce false texture? | It lowers errors relative to global support; neural background prediction further reduces added error. Weak detail and small costs versus the parent remain | [Local full panel](local-wave-full-panel.md), [neural full panel](neural-nuisance-full-panel.md) |
+| Does more local context or richer amplitude fitting suffice? | Larger background context loses weak response; local amplitudes increase response with severe building bands. Global background reduces those artifacts | [512-context ablation](neural-nuisance-context512.md), [local amplitudes](spatial-carrier-amplitudes.md), [global-background full panel](global-background-full-panel.md) |
+| Does guided phase pooling generalize? | Weak response and full RGB error improve, but quiet/increment error worsens on the full eight-source panel; the pilot increment gain does not persist | [Full guided comparison](neural-guided-phase-full-panel.md) |
+| Can extra fine frequencies restore the green fence faithfully? | Fine proposals make both directions more visible. Joint color support reduces tint; fresh signed-color wires still have no useful weak-response gain | [Fine proposal pilot](fine-frequency-proposals.md), [joint color](joint-fine-colour-support.md), [colored-wire validation](coloured-fine-wire-benchmark.md) |
+
+V131 also changes the training cohort, so its gain is not an isolated test of
+training duration. The longer-run proposal remains untested.
+
+The synthetic panels differ in parents, sources, noise and metrics. Response
+percentages from different rows are not a leaderboard. Both protected GFX scenes
+remain required qualitative checks; their separate ISO100 references are not GT.
+[Research rationale and literature](research.md).
+
+## Running an experiment
 
 Training recipes bind existing inputs and evidence by checksum. They are local
 artifact recipes; the referenced caches/operator/checkpoints must be present.
@@ -111,29 +56,22 @@ includes head weights, Adam, EMA, RNG and frozen-state identity; resumption skip
 the completed prefix. `launch` starts a detached worker with the same options.
 [Configuration, export, evaluation and native-crop interfaces](architecture.md).
 
-The shared-edge intervention changes generic scene content and coupling
-together. It addresses the [observed coverage gap](paired-training-coverage.md),
-not an established cause of the current artifacts. A quality report still needs
-the complete matched present/absent/quiet/flat/photo suite, raw/EMA endpoints,
-both protected GFX families and native triplets with accurate references.
-The review controller does not restart training or promote a model; its terminal
-numerical result explicitly leaves actual native viewing pending. Paired metrics
-match case identities and conditions, retain error tails, and exclude independent
-real references from exact-GT scoring.
+Reusable recipes include [V200 replay](../configs/experiments/v200-replay.json),
+[shared-edge](../configs/experiments/shared-edge.json),
+[competing orientations](../configs/experiments/orientation-balanced.json) and
+[complementary proposals](../configs/experiments/complementary.json).
+Their original completed runs and a fresh invocation of a recipe are separate
+experiments; preparation alone does not launch training.
 
-The [analytic withheld-CFA diagnostic](withheld-cfa-evidence.md) has completed:
-3,072 A/B fits, fixed threshold curves and source-cluster summaries. It rejects
-the tested flat-noise candidates but exposes predictable edge leakage, especially
-when step geometry is misspecified. This CPU-only result changes no neural
-checkpoint or recommendation.
+Quality review needs numerical checks and actual native viewing, including
+present/absent detail, quiet/flat controls, natural photos and both GFX families.
+A completed numerical producer is not a completed qualitative review.
+[Evaluation protocol](evaluation.md).
 
-The [edge-refinement follow-up](withheld-cfa-edge-refinement.md) completes 7,168
-matched analytic fits. At thresholds selected on calibration nulls alone, both
-arms have zero observed test-null activations; off-grid weaker-direction gain
-rises from 2.39% to 56.99%, with lower exact increment error. Two native exact-GT
-triplets and the unchanged-control checks accompany this restricted result.
+## Historical experiment catalogue
 
-Historical study entry points remain for reproduction. Their reusable helper
-imports now resolve to packaged implementations; original frozen snapshots are
-unchanged. The complete [earlier experiment index](history/experiments-through-v200.md)
-and [timestamped diary](../diary/index.md) retain previous results and decisions.
+The [pre-cleanup index](history/before-2026-11-17-cleanup/experiments.md),
+[detailed research record](history/before-2026-11-17-cleanup/research.md),
+[V200-era index](history/experiments-through-v200.md) and
+[timestamped diary](../diary/index.md) preserve the longer sequence of trials.
+Their running/queued statements describe their writing dates, not current jobs.

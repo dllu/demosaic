@@ -18,8 +18,10 @@ The full20k EMA checkpoint is SHA256
 `4d78e6302f6e72d68acb03fe58eb7106763b8129ccb059747ef5d2cfbd3ec1e1`;
 V120 is `a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb`.
 The experimental `v131` preset loads that endpoint. V132's added-attention arm
-keeps its original training source and full20k horizon; its endpoint comparison
-remains pending. No new 102MP V131 export/timing result is claimed here.
+has since completed the same full20k horizon.
+Its [endpoint review](v132-endpoint-quality.md) finds faint ADC −0.40978 dB
+versus V131 and near-tied ordinary detail; this is a November 17 status update.
+No new 102MP V131 export/timing result is claimed here.
 
 ## Complete matched numerical review
 

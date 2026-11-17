@@ -1,6 +1,31 @@
-# Current real-camera quality
+# Real-camera quality and coverage
 
-**V114 Tiny is the general baseline; V115 Small has a higher known-camera mean.**
+Reviewed November 17, 2026. **V120 Small is the general recommendation.**
+V131's newer broad review improves photographic scores but reduces the unseen
+camera mean. Scored camera panels and the unscored three-camera gallery below
+are different evidence sets.
+
+| Endpoint | Known4 measured-CFA PSNR | Unseen5 measured-CFA PSNR | Source |
+| --- | ---: | ---: | --- |
+| V120 Small | 54.31272 | 54.00872 | [Primary review](v120-v121-primary.md) |
+| V131 continuation | 54.31993 | 53.96491 | [Broad review](v131-broad-primary.md) |
+| RawNIND pre-upsampled | 54.26068 | 53.86528 | [Released-reference study](rawnind-variants.md) |
+
+Known/unseen panels balance 72/90 crops within four/five scenes. Measured CFA
+scores are distinct from auxiliary AHD RGB scores; independently demosaiced RGB
+is not exact GT. These small development panels do not establish broad camera
+superiority. V132 has no completed broad-camera score; ADC-only V131 projection
+does not change its positive-noise camera output.
+
+The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) still covers
+V104/V114/V115 and RawNIND, with no clean reference. Newer qualitative reviews
+cover the protected [GFX main scene](gfx-qualitative.md) and
+[green mesh](gfx-green-mesh.md); separate ISO100 captures are not pixelwise GT.
+[Model choices](current-model.md) · [Comparable score history](performance-history.md).
+
+## Historical V114/V115 camera comparison
+
+**V114 Tiny was the baseline in this study; V115 Small had a higher known-camera mean.**
 Both complete72/90-crop panels have independent NumPy64 checks and native review.
 
 | Endpoint | Known4 measured-CFA PSNR | Unseen5 measured-CFA PSNR |
@@ -18,7 +43,7 @@ set, not training-repeat/general-camera uncertainty. AHD RGB is not exact GT.
 [Full comparisons, hashes, intervals and native evidence](v114-v115-quality.md) ·
 [Current choices](current-model.md) · [GFX gallery](gfx-qualitative.md).
 
-The separate [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) now shows
+The separate [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) shows
 V114/V115, V104 and both RawNIND variants. These six fixed low-ISO regions have
 no clean reference or pixelwise score. Tiny/Small look close; soft shadows and
 window edges remain, while concrete texture looks finer than both RawNIND variants.

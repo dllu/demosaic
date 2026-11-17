@@ -1,9 +1,14 @@
-# Current RawNIND reference variants
+# RawNIND reference variants and historical comparisons
 
-**Current joint model: [V114 Tiny](v114-v115-quality.md).** Both trained Tiny/Small
-endpoints still lose four of nine scene means to the stronger RawNIND reference.
-The released-reference study below retains its original V104 controls and
-checkpoint-specific scores.
+**Scope checked November 17, 2026:** this page defines the released comparator
+variants and preserves the original V104/V112/V114/V115 studies. The general
+recommendation is now [V120 Small](current-model.md); current broad camera means
+are in the [real-camera overview](real-camera-quality.md). Native boards below
+have not been rerun with newer models.
+
+In the V114/V115 study, both endpoints lost four of nine scene means to the
+stronger RawNIND reference. That count belongs to those checkpoints; it is not
+a scene-win count for V120 or V131.
 
 **The released pre-upsampled RawNIND is a stronger tested comparator than the
 half-resolution variant used in our earlier reports.** It improves all 12
@@ -18,7 +23,7 @@ camera panels. It scores below both width-32 references on all three photo
 condition means and both camera panel means. Greater width alone did not help
 this checkpoint; its different training history prevents a capacity-only conclusion.
 
-[Current three-variant executions, audits and native evidence](results/rawnind-three-variants-current-v1.json) ·
+[Recorded three-variant executions, audits and native evidence](results/rawnind-three-variants-current-v1.json) ·
 [Earlier half/pre-upsampled execution](results/rawnind-preupsample-current-v1.json).
 Historical RawNIND scores retain their original half-resolution checkpoint;
 the four-source photographic pilot below does not replace its full427 results.

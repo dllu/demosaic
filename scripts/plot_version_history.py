@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import gzip
 import hashlib
 import json
 import math
@@ -10,6 +11,17 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 MODEL_SELECTION = REPO / "configs/current-model.json"
+COVERAGE_NOTE = (
+    "**Coverage reviewed November 17, 2026: completed broad panels through V131.** "
+    "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
+    "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
+    "ADC-color costs; see the [broad review](v131-broad-primary.md). "
+    "V132 has only a targeted endpoint review, and V198/V200 and later detail "
+    "components use different panels. They do not have comparable full427 points "
+    "here. The opt-in V131 ADC-only repair is not a second all-condition point. "
+    "The [previous chart and registry](history/before-2026-11-17-cleanup/performance-history.md) "
+    "are preserved."
+)
 STUDIES = [
     ("geometry-corpus-v34-v36-review.json", [32, 34, 35, 36], "geometry-corpus-v34-v36-review.md"),
     ("native-corpus-2k-review.json", [37, 39, 43], "native-corpus-2k-review.md"),
@@ -103,6 +115,11 @@ STUDIES = [
     ("v119-quality-complete-v1.json", [119], "v119-quality.md"),
     ("v120-v121-primary-v1.json", [120, 121], "v120-v121-primary.md"),
     ("v122-v123-quality-complete-v1.json", [122, 123], "v122-v123-quality.md"),
+    (
+        "v131-broad-completed-v1/audit-audited-comparisons-v2.json.gz",
+        [131],
+        "v131-broad-primary.md",
+    ),
 ]
 METRICS = {
     ("full427", "photo", "srgb_psnr"): "photo_srgb_PSNR",
@@ -161,7 +178,9 @@ def collect():
     output, evidence = [], []
     for filename, versions, report in STUDIES:
         path = REPO / "docs/results" / filename
-        source = json.loads(path.read_text())
+        source = json.loads(
+            gzip.decompress(path.read_bytes()) if path.suffix == ".gz" else path.read_bytes()
+        )
         evidence.append(
             {
                 "path": str(path.relative_to(REPO)),
@@ -171,7 +190,49 @@ def collect():
             }
         )
         selected = {}
-        if "runs" in source:
+        if filename == "v131-broad-completed-v1/audit-audited-comparisons-v2.json.gz":
+            # Use the canonical CPU-to-CPU independent audit, not the earlier
+            # mixed-precision comparison or the four-material endpoint means.
+            plan_path = path.with_name("producer-plan.json.gz")
+            plan = json.loads(gzip.decompress(plan_path.read_bytes()))
+            checkpoint = next(c for c in plan["checkpoints"] if c["arm"] == "V131")
+            step = checkpoint["expected_lineage"]["step"]
+            assert step == 20000
+            point = {
+                "version": 131,
+                "checkpoint_sha256": checkpoint["sha256"],
+                "endpoint": "step-20000",
+                "step": step,
+                "report": report,
+                "source": filename,
+                "evaluation_metadata": {},
+            }
+            evidence.append(
+                {
+                    "path": str(plan_path.relative_to(REPO)),
+                    "sha256": digest(plan_path),
+                    "versions": versions,
+                    "report": report,
+                }
+            )
+            for stage, field, metric, units, observations in (
+                ("photo", "photo_srgb_PSNR", "srgb_psnr", 427, 11956),
+                ("known", "known_CFA_PSNR", "sensor_psnr", 4, 72),
+                ("unseen", "unseen_CFA_PSNR", "sensor_psnr", 5, 90),
+            ):
+                row = next(
+                    r for r in source["stages"][stage]["comparisons"] if r["metric"] == metric
+                )
+                assert (row["units"], row["observations"]) == (units, observations)
+                point[field] = row["current_mean"]
+                point["evaluation_metadata"][stage] = {
+                    "units": units,
+                    "observations": observations,
+                    "precision": "Independent NumPy64 audit of saved FP32 predictions",
+                    "input_provenance": plan["stages"][stage],
+                }
+            selected[131] = point
+        elif "runs" in source:
             for panel in ("full427", "known", "unseen"):
                 if panel not in source["runs"]:
                     continue
@@ -299,7 +360,7 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-v123-current-v1.json"
+    destination = REPO / "docs/results/version-PSNR-history-v131-current-v1.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
@@ -313,6 +374,7 @@ def main():
     if args.refresh_sources:
         points, evidence = collect()
         result = {
+            "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",
             "panels": {
                 "photo_srgb_PSNR": "427 fixed photos, seven noise/exposure conditions, four CFAs; source-balanced sRGB PSNR",
@@ -406,7 +468,7 @@ def main():
             if "photo_srgb_PSNR" not in p:
                 continue
             offset, alignment = (0, 7), "center"
-            if 0 < latest - preferred <= 6:
+            if 0 < latest - preferred <= 15:
                 if version == preferred:
                     offset, alignment = (-12, 20), "right"
                 elif version == latest:
@@ -476,7 +538,9 @@ def main():
         f"+{reference['photo_srgb_PSNR'] - original['photo_srgb_PSNR']:.2f} dB. "
         "Training histories differ; current strengths, tradeoffs and native comparisons "
         "are in the [model guide](current-model.md). A version names an experiment, "
-        "not a training step.\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
+        "not a training step.\n\n"
+        + result.get("coverage_note", "")
+        + "\n\n![PSNR versus model version](images/version-PSNR-history.png)\n\n"
         + result["description"]
         + pending_note
         + f" Camera references are measured CFA samples; independently demosaiced RGB references are not exact GT. Small camera panels have scene uncertainty. The plot describes checkpoints with unequal budgets and data; use the linked comparisons to assess particular gains and weaknesses. Dashed lines show V{preferred}'s measured means. There are {len(metric_points(points, 'photo_srgb_PSNR')[0])} completed photo endpoints and {len(metric_points(points, 'known_CFA_PSNR')[0])}/{len(metric_points(points, 'unseen_CFA_PSNR')[0])} known/unseen camera endpoints. The lower panels omit V72/V73 RAW-native prototypes only to show the mature RGB range more clearly.\n\nAll photo points use the full fixed427-source panel, seven conditions and four CFAs. Known/unseen points balance captures within scenes, then scenes (4/5 scenes,72/90 crops). Precision, checkpoint hashes and per-source results remain in the source reports.\n\nV98/V99 use common ADC-only inference projection; only V99 trained through it. Their original V43/V95 references retain their checkpoint policies. The [completed ADC study](v95-adc-training-quality-review.md) improves ADC color but retains positive-noise color/detail weaknesses. Study-specific statistical gates do not prevent showing progress or choosing a stronger development baseline.\n\n"

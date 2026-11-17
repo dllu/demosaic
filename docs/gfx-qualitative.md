@@ -1,5 +1,25 @@
 # GFX100S qualitative comparisons
 
+**Review map updated November 17, 2026.** This page retains checkpoint-specific
+historical boards. Use these reports for the current completed comparisons:
+
+- [V120/V121 primary and full-frame review](v120-v121-primary.md): the general
+  baseline, including matched full-frame noise conditioning.
+- [V131 20k endpoint](v131-endpoint-quality.md) and
+  [V132 20k endpoint](v132-endpoint-quality.md): sky, building, foliage and
+  chain-link fence, plus both fine-cab profiles; weak crossings remain unresolved.
+- [Full guided phase review](neural-guided-phase-full-panel.md) and
+  [joint-color fine support](joint-fine-colour-support.md): available detail
+  experiments with response/tint gains and persistent flat/color costs.
+- [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
+
+The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO
+capture differs in aperture and moving subjects and is a qualitative reference,
+not exact GT. Older sections retain their original captures and status wording;
+they are not a live experiment queue. [Current choices](current-model.md).
+
+## Historical gallery and implementation notes
+
 The new [supported-amplitude option](supported-wave-amplitude.md) keeps the
 original positive global gate as selection and restores contrast only inside
 unchanged reciprocal support. Fresh mesh response rises 26.4% and image RMS

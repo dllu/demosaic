@@ -1,4 +1,12 @@
-# Current quality training
+# Quality training strategy and historical recipes
+
+**Status map updated November 17, 2026.** Use the [experiment index](experiments.md)
+for active work and the [training pipeline](training-pipeline.md) for data flow.
+V131/V132 have since completed both20k runs: [V131 broad results](v131-broad-primary.md)
+and [V132 endpoint](v132-endpoint-quality.md). The November2 execution update and
+queue descriptions below are historical. Current proposals for broader sampling,
+longer training and throughput measurement are in the
+[training-scale review](training-scale-pipeline-review-2026-11-17.md).
 
 **V120 Small is the general recommendation and quality-development parent.**
 It keeps the V84-family pretrained DRUNet RGB trunk, physical noise/camera

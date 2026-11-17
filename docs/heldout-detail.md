@@ -1,7 +1,14 @@
-# Natural fine-detail comparisons
+# Natural fine-detail gallery: V112 and earlier comparisons
 
-**Current general baseline: [V114](v114-v115-quality.md), with matched
-Tiny/Small native comparisons.** The fixed material results below explicitly
+**Historical gallery; scope checked November 17, 2026.** The general baseline
+is [V120](current-model.md). Newer native comparisons and provenance are in
+[V120/V121](v120-v121-primary.md), [V131](v131-endpoint-quality.md) and
+[V132](v132-endpoint-quality.md); broad weak-band measurements are in the
+[V131 broad review](v131-broad-primary.md). The original gallery below remains
+bound to its named checkpoints and noise draws.
+
+At the time of this gallery, [V114/V115](v114-v115-quality.md) supplied the newer
+Tiny/Small comparison. The fixed material results below explicitly
 use V112 and their original noise draws. V112 improves all twelve
 selected material cases over V104, with four-source PSNR means of
 39.74086/40.90266/33.51165dB at ADC-only/ISO100/ISO12800. Its native differences
@@ -9,7 +16,7 @@ from V111 are small; the completed camera/color panels favor V112.
 [Matched V111/V112 material results](v111-v112-material.md) ·
 [Complete V112 quality report](v112-quality.md).
 
-The [current local V114 diagnostic](local-material-detail.md) separates weak
+The [checkpoint-specific V114 diagnostic](local-material-detail.md) separates weak
 fine structure from strong edges in these same four contexts. At high noise,
 V114 eight-view projected gain is.31813 in the weakest group, with112 blocks
 from only feather/fur, versus.94254 in the strongest group. Whole-patch gain
@@ -47,7 +54,7 @@ by +11.606/+12.775/+5.914dB at ADC-only/ISO100/ISO12800. All twelve cases improv
 These are **four-source material means**, not the full427-photo benchmark or
 evidence of broad real-camera superiority. On the complete development camera
 panels, V112 leads by only+.00846/+.08850dB and loses four of nine scene means.
-[Current scene comparisons and limitations](rawnind-variants.md#current-v112-camera-comparison) ·
+[Current scene comparisons and limitations](rawnind-variants.md#v112-camera-reference) ·
 [Original score joins and independent arithmetic/pixel checks](results/v112-strong-reference-current-v1.json).
 
 Two standalone V112 noisy → restored → exact synthetic GT triplets at the same
@@ -135,7 +142,7 @@ V104 checkpoint SHA256:
 The read-only local file is `/mnt/external/demosaic/models/v104-final20000.pt`.
 [Actual scores, replay checks and all 60 viewed native cells](results/V104-final20000-heldout-detail-CPU-v1.json) ·
 [Independent original 20k checkpoint/source boundary](results/V104-original20000-training-boundary-v1.json).
-The [full quality evaluation](quality-first-training.md#active-v104-cleaned-corpus-continuation)
+The [full quality evaluation](quality-first-training.md)
 and complete 102MP GFX exports are finished. The loss is the original .001
 Charbonnier setting; the new experimental epsilon option was not used.
 
@@ -208,7 +215,7 @@ three conditions and RGGB, rather than full427 or measured-camera results.
 Continuation budget, LR, seed and cohort differ from V101, so this comparison
 does not isolate a dataset effect. The [final20k receipt](results/V102-final20000-detail-GFX-CPU-v1.json)
 records all12 scores and actual viewing of96 native gallery cells plus30 GFX
-cells. [Six-region real-capture comparison](gfx-qualitative.md#v102-at-5000-and-20000-updates).
+cells. [Six-region real-capture comparison](gfx-qualitative.md).
 The [fixed5k receipt](results/V102-progress5000-detail-GFX-CPU-v1.json) preserves
 its earlier gains and small individual SSIM/chroma regressions.
 

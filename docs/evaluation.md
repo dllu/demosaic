@@ -26,10 +26,11 @@ personal photos require an explicit qualitative-reference label; see
 [the GFX scene](gfx-qualitative.md). Keep representative native comparisons in
 the README/current guides as useful versions appear, with visible failures in
 their reports. The [current real-camera guide](real-camera-quality.md) includes
-the [completed V101/V102/V103 comparison](v102-v103-quality-review.md), including
-its gains and mixed auxiliary results. The selected
-[V102 final20k detail panel](heldout-detail.md) has its own scope and does not
-replace those completed full photographic/camera results.
+the completed [V120/V121](v120-v121-primary.md) and [V131](v131-broad-primary.md)
+broad panels and identifies missing camera-gallery coverage. Selected material
+and faint-detail panels have their own scope and do not replace full photographic
+or camera results. The [PSNR history](performance-history.md) keeps those
+measurements separate.
 
 ## Multi-condition evaluation
 

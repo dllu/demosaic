@@ -22,6 +22,10 @@ historical paths. Resolve an old diary path without editing such a receipt:
 For a concise view of the evidence, start with the
 [experiment index](../docs/experiments.md) rather than the chronological diary.
 
+Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
+separates current guidance from historical reports and records the remaining
+camera-gallery coverage gap.
+
 Latest detail reviews: [full guided and coloured-wire quality](2026-11-16-23-10-59-full-guided-coloured-review.md).
 All110 native figures viewed. Full guided response/full RGB gains have higher
 increment error; the pilot gain does not persist. Joint coloured-wire gain is

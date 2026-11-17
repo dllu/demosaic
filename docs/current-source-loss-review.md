@@ -1,4 +1,12 @@
-# Current photographic-source review
+# Prepared photographic sources and historical review cohorts
+
+**Scope checked November 17, 2026.** This page inventories the prepared bank and
+its source-review evidence. Preparation is separate from actual training use.
+For current experiment status use the [experiment index](experiments.md); for
+actual visitation and longer-training proposals use the
+[training-scale review](training-scale-pipeline-review-2026-11-17.md).
+Queue/running descriptions in the historical cohort table are original records,
+not a live worker inventory.
 
 **The prepared future dataset contains 90,773 training photos and 37 reviewed
 regions.** The latest balanced V125/V131 inspection retains 39 of 40 new sources,
@@ -22,8 +30,8 @@ or source-wide pristine guarantee.
 | V129/V130 and V136/V137 pilots |90,782 /27 | Completed1k reviews show small mixed changes without clear fine-mesh recovery |
 | V138 frozen-parent branch |90,782 /27 | [Completed1k/150-input review](v138-quality.md): tiny faint/flat gains versus V120; no clear new real mesh recovery |
 | V139 memory-only branch |90,782 /27 | CPU/CUDA16+2 checks pass; original1k/review remain unstarted after the original dependency failure; V138 recovery does not launch V139 |
-| V140 neighboring-gradient memory |90,782 /27 | CPU/CUDA16+2 pass; fresh1k and matched102-input review queued, reusing612 predictions |
-| V131/V132 spatial trial |90,781 /29 | [V1311k progress](v131-progress1000-quality.md) has mixed changes and no clear mesh recovery; [saved-control continuation](raw-spatial-continuation.md) resumed at14,549, V132 follows |
+| V140 neighboring-gradient memory |90,782 /27 | [Standalone1k review complete](v140-standalone-pilot.md); near-parent output, no clear new fine mesh |
+| V131/V132 spatial trial |90,781 /29 | Both20k reviews complete: [V131 broad gain and costs](v131-broad-primary.md), [V132 faint-detail regression](v132-endpoint-quality.md) |
 | V133 quota trial |90,781 /29 | CPU/CUDA checks pass;5% versus V131's50% quota; full/progress reviews queued |
 | V134/V135 cleaned-data cohort |90,778 /33 | Four checks complete; matched20k/full reviews queued; quality unmeasured |
 | Latest prepared future bank | **90,773 /37** | One grainy coastal source withheld; mixed leaf region added; all 36 prior regions preserved; actual reader/pixel evidence retained |
