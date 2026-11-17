@@ -41,6 +41,8 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [primary benchmark admission](whole-scene-context-primary-admission.md) ·
 [full-corpus scaling](full-corpus-scaling.md) ·
 [control10k weak-detail/native review](full-corpus-control10k-review.md) ·
+[execution/raw-EMA follow-up](training-execution-quality.md) ·
+[qualified endpoint benchmark](full-corpus-primary-admission.md) ·
 [CPU checkpoint recovery](full-corpus-checkpoint-cpu-recovery.md).
 
 Individual experiment reports are evidence snapshots, not automatically current

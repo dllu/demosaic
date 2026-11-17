@@ -1,4 +1,4 @@
-"""Matched CPU EMA review of a retained full-corpus checkpoint on fixed observations."""
+"""Matched CPU raw/EMA review of retained checkpoints on fixed observations."""
 
 import argparse
 import os
@@ -40,11 +40,17 @@ def collect(plan_path):
         model, state = load_checkpoint(checked(specification["checkpoint"]), "cpu")
         assert state["loaded_sha256"] == specification["checkpoint"]["sha256"]
         assert state["step"] == specification["step"] and "ema" in state
+        weights = specification.get("weights", "EMA")
+        if weights not in {"RAW", "EMA"}:
+            raise ValueError("Checkpoint review weights must be RAW or EMA")
+        expected = state["model" if weights == "RAW" else "ema"]
+        if weights == "RAW":
+            model.load_state_dict(expected, strict=False)
         actual = model.restoration_state_dict()
-        assert len(actual) == len(state["ema"]) == 91
-        assert all(torch.equal(value, state["ema"][key]) for key, value in actual.items())
+        assert len(actual) == len(expected) == 91
+        assert all(torch.equal(value, expected[key]) for key, value in actual.items())
         if specification.get("retained_progress"):
-            assert state["config"]["steps"] == specification["training_horizon"] == 20000
+            assert state["config"]["steps"] == specification["training_horizon"]
             assert len(state["optimizer"]["state"]) == 89
             assert all(value["step"] == state["step"] for value in state["optimizer"]["state"].values())
             assert all(torch.isfinite(value).all() for name in ["model", "ema"] for value in state[name].values())
@@ -87,7 +93,7 @@ def collect(plan_path):
                         np.save(stream, value.numpy(), allow_pickle=False)
                     variants.append({"label": label, "checkpoint": plan["models"][label]["checkpoint"],
                                      "prediction": reference(path), "inference_seconds": seconds})
-            assert statistics == {"requests": 2, "executions": 1, "replays": 1}
+                assert statistics == {"requests": len(models), "executions": 1, "replays": len(models) - 1}
             assert fingerprints == {name: fingerprint(value) for name, value in arguments.items()}
             for name, count in statistics.items():
                 totals[name] += count
@@ -104,10 +110,11 @@ def collect(plan_path):
     assert not torch.cuda.is_initialized()
     assert all(counter["root"] == len(plan["observations"]) for counter in counters.values())
     write_json(output / "result.json", {"plan": reference(plan_path), "records": records, "models": plan["models"],
-               "weights": "EMA", "root_calls": counters, "local_DINO": totals,
+               "weights": {k: v.get("weights", "EMA") for k, v in plan["models"].items()},
+               "root_calls": counters, "local_DINO": totals,
                "full_model_before": before, "full_model_after": after, "CPU_rng_unchanged": True,
                "seconds": time.monotonic() - began,
-               "scope": "Complete declared retained-observation CPU IEEE FP32 contiguous B1 review, fresh matched V120 and retained scaling EMA. Identical checked frozen local DINO requests shared; learned trunks still execute separately. Zero new GPU/RAW/noise/optimizer calls. Targets are not read by this collector. Partial training trajectory, not a completed20k/100k horizon or full427/camera score; numerical/native analysis separate."})
+               "scope": "Complete declared retained-observation CPU IEEE FP32 contiguous B1 review with explicit raw/EMA state selection. Identical checked frozen local DINO requests shared; learned trunks still execute separately. Zero new GPU/RAW/noise/optimizer calls. Targets are not read by this collector. Retained checkpoints/profiles, not a full427/camera score; numerical/native analysis separate."})
     print("Completed", len(records), "fixed inputs", counters, totals)
 
 

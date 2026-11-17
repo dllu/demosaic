@@ -13,6 +13,9 @@ the running20k control. The [control10k midpoint](full-corpus-control10k-review.
 has53,506 source IDs visited, but faint fidelity−0.61431 dB and no convincing new
 fence crossings. Both fence families were viewed; scaling endpoint broad scores
 remain pending.
+The [raw/EMA follow-up](training-execution-quality.md) finds10k raw worse than
+EMA on all three review means. The control has actually covered all90,778
+photos; its [endpoint benchmark](full-corpus-primary-admission.md) is queued.
 [Research status](experiments.md).
 
 ## Full-model choices

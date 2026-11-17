@@ -24,6 +24,9 @@ historical boards. Use these reports for the current completed comparisons:
   main regions and both cab profiles/ROIs/JPEGs actually viewed against matched
   V120. Sky smooth, building/foliage soft, coarse fence similar; no convincing
   new fine crossings. This midpoint does not fill the broad camera panels.
+  The [six-model execution/raw-EMA follow-up](training-execution-quality.md)
+  adds all three77-step profiles and10k raw, with26 boards actually viewed.
+  No convincing new crossings; broader endpoint scores remain pending.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

@@ -28,7 +28,14 @@ def report(root):
     output = root / "report"
     output.mkdir()
     records = {read_json(checked(b))["id"]: read_json(checked(b)) for b in collection["records"]}
-    labels = {"V120": "V120 EMA", "scale-control10k": "Corpus10k EMA"}
+    defaults = {"V120": "V120 EMA", "scale-control10k": "Corpus10k EMA"}
+    labels = {key: spec.get("display_label", defaults.get(key, key))
+              for key, spec in plan["models"].items()}
+    parent = plan.get("parent_label", "V120")
+    triplet_model = plan.get("triplet_model", "scale-control10k")
+    assert parent in labels and triplet_model in labels
+    triplet_column = list(labels).index(triplet_model) + 1
+    reference_column = len(labels) + 1
     metric_rows, strata_rows, color_rows, boards, triplets = [], [], [], [], []
 
     def board(key, cells, metadata):
@@ -61,7 +68,7 @@ def report(root):
         if material or kind == "color-spot-check":
             with np.load(checked(observation["target"]), allow_pickle=False) as data:
                 target = data["target"]
-            assert target.shape == prediction["V120"].shape
+            assert all(target.shape == value.shape for value in prediction.values())
         if material:
             faint = "contrast0p025-adc" in observation["case_id"]
             group = "faint-ADC" if faint else "shadows" if kind == "shadow-material" else "ordinary"
@@ -95,7 +102,8 @@ def report(root):
             continue
         metadata = {"observation_id": observation["id"], "input_arrays": observation["arrays"],
                     "input_fingerprints": observation["input_fingerprints"], "noise": observation["noise"],
-                    "display_exposure": exposure, "models": plan["models"], "weights": "EMA", "no_resize": True,
+                    "display_exposure": exposure, "models": plan["models"],
+                    "weights": {k: v.get("weights", "EMA") for k, v in plan["models"].items()}, "no_resize": True,
                     "reference_role": observation["reference_role"], "source_id": observation.get("source_id"),
                     "source_case": observation.get("case"), "actual_retained_noise_draw": 0,
                     "selection": "Fixed RGGB ordinary/faint and deepest ISO12800 shadows; all standing GFX regions/profiles/ROIs/JPEGs; prior failure hue BGGR and neutral RGGB. No selection from current outcomes."}
@@ -108,7 +116,7 @@ def report(root):
             cells = [(name, pixels(v, arrays, roi, exposure)) for name, v in values]
             metadata.update(ROI_xywh=roi, target=observation["target"])
             boards.append(board(observation["id"], cells, metadata))
-            triplets.append(board(observation["id"] + "-triplet", [cells[i] for i in [0, 2, 3]], metadata))
+            triplets.append(board(observation["id"] + "-triplet", [cells[i] for i in [0, triplet_column, reference_column]], metadata))
             if faint:
                 x, y, w, h = roi
                 anchor = (linear_rgb(target.astype(np.float64), arrays) * exposure)[..., y:y+h, x:x+w].mean((-2,-1), keepdims=True)
@@ -132,7 +140,7 @@ def report(root):
                      ("ISO100 ref, not GT", pixels(target, arrays, [0,0,160,160], exposure))]
             metadata.update(ROI_xywh=roi, source_ROIs=observation["metadata"]["region"], target=observation["target"])
             boards.append(board(observation["id"], cells, metadata))
-            triplets.append(board(observation["id"] + "-triplet", [cells[i] for i in [0,2,3]], metadata))
+            triplets.append(board(observation["id"] + "-triplet", [cells[i] for i in [0,triplet_column,reference_column]], metadata))
         else:
             assert kind == "mesh"
             for case in observation["cases"]:
@@ -147,8 +155,8 @@ def report(root):
                 specific = {**metadata, "case": case, "ROI_xywh": roi}
                 key = observation["id"] + "-" + case["name"]
                 boards.append(board(key, cells, specific))
-                triplets.append(board(key + "-triplet", [cells[i] for i in [0,2,3]], specific))
-    assert len(metric_rows) == 192 and len(color_rows) == 16 and len(boards) == 26 and len(triplets) == 22
+                triplets.append(board(key + "-triplet", [cells[i] for i in [0,triplet_column,reference_column]], specific))
+    assert len(metric_rows) == 96*len(labels) and len(color_rows) == 8*len(labels) and len(boards) == 26 and len(triplets) == 22
     means = {}
     for group in ["ordinary", "shadows", "faint-ADC"]:
         for label in labels:
@@ -158,8 +166,10 @@ def report(root):
     for group in ["ordinary", "shadows", "faint-ADC"]:
         for source in sorted({r["source_id"] for r in metric_rows}):
             values = {label: [r for r in metric_rows if r["group"] == group and r["source_id"] == source and r["method"] == label] for label in labels}
-            paired.append({"group": group, "source_id": source,
-                           "candidate_minus_parent_sRGB_dB": float(np.mean([r["sRGB_PSNR"] for r in values["scale-control10k"]])) - float(np.mean([r["sRGB_PSNR"] for r in values["V120"]]))})
+            for label in labels:
+                if label != parent:
+                    paired.append({"group": group, "source_id": source, "candidate": label, "parent": parent,
+                                   "candidate_minus_parent_sRGB_dB": float(np.mean([r["sRGB_PSNR"] for r in values[label]])) - float(np.mean([r["sRGB_PSNR"] for r in values[parent]]))})
     table = output / "metrics.csv"
     with table.open("x", newline="") as stream:
         fields = ["id", "source_id", "case", "group", "method", "pattern", "camera_RGB_PSNR", "sRGB_PSNR", "reference_role"]

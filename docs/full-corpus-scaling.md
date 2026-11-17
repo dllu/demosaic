@@ -11,6 +11,11 @@ adds small quiet-coarse gains and mixed detail/color costs. The [10k scaling
 review](full-corpus-control10k-review.md) confirms53,506 photo IDs visited but
 faint ADC fidelity−0.61431 dB, with no convincing new fence crossings.
 No completed larger-corpus endpoint gain is claimed; V120 remains recommended.
+The control has now **actually visited all90,778 photo IDs**, completing its
+first ordinary epoch at17,039. A complete18k raw/EMA/Adam/RNG state is retained.
+The [execution/raw-EMA follow-up](training-execution-quality.md) finds no large
+early backend difference;10k raw is worse than EMA. [Full endpoint reviews](full-corpus-primary-admission.md)
+are qualified and queued behind successful20k completion.
 This implements the [training-scale review](training-scale-pipeline-review-2026-11-17.md)
 and complements the [scene-context experiment](whole-scene-context-next-test.md).
 
@@ -47,6 +52,8 @@ locations and corruption draws are useful dimensions to test separately.
 |Partial next epoch|16,045|78,013|
 
 These are **planned source-order counts**, not completed training coverage.
+The separate actual audit below confirms only its named executed prefix;
+the100k arm still awaits its continuation from1k.
 The first complete ordinary-photo epoch occurs at step17,039. The first320k
 source slots of the two orders match exactly. In the100k ordinary sequence,
 12,765 sources have five visits and78,013 have six; reviewed visits are additional.
@@ -54,6 +61,28 @@ The schedule is generated once, not restarted at each milestone. Repeated visits
 use fresh global sample indices, spatial augmentation, camera/exposure and
 per-step sensor RNG. Correlated/overlapping crops are not counted as disjoint
 native detail or newly independent scene layouts.
+
+### First full corpus epoch: actual execution
+
+The [actual source/conditioning audit](results/full-corpus-execution-followup-v1/actual-first-epoch.json)
+combines original1–6k, valid6,001–13k and replayed13,001–17,250 source rows.
+It excludes the abandoned13,001–14k segment before counting its replay. Every
+ordinary source identity matches the bound permutation payload, and its actual
+ID set equals all90,778 declared training photos. The first complete ordinary
+epoch occurs at17,039, exactly as planned, without inferring visits from liveness.
+
+Through17,250 updates/276,000 target slots:96,896 photo visits comprise92,049
+ordinary and4,847 reviewed draws across33 reviewed sources.89,507 ordinary
+sources have one visit and1,271 have two. Domain batches are8,663 Commons,
+4,277 native and4,310 paired. All69 conditioning chunks and global indices are
+checked; native/paired actual distinct IDs remain unrecorded. These are source
+visits, not lifetime novelty, disjoint pixel coverage or established quality.
+
+The [retained complete18k state](results/full-corpus-execution-followup-v1/saved18k-state.json)
+has SHA256 `00c5dd7d8bdcb747b870368ce376bb874e8fea0fbcc472796bc3d501fa346926`,
+91 finite raw/91 EMA tensors,89 Adam states at18k and RNG. It saves progress
+after the first full epoch; neither the20k horizon nor its broad quality review
+is thereby complete. Original receipts and earlier failure bytes are preserved.
 
 The100k arm uses a100k cosine horizon, LR1e-5→1e-6 with100-step warmup. The
 separate control anneals over20k. Checkpoints20k/50k/100k on the long trajectory
@@ -70,6 +99,11 @@ EMA tensors,89 Adam states and their steps are finite; the official backbone
 stays frozen/unchanged. All five sampled complete input witnesses at steps
 1/2/6/76/77 match across policies and worker settings. No held-out quality
 score is computed by these optimizer checks.
+The later [six-model CPU quality review](training-execution-quality.md) now
+compares their77-step EMA states and10k raw/EMA. Strict0/fast0 faint means differ
+only0.000215 dB at77, with source-specific gains/costs. This short comparison
+does not establish long-run equivalence.10k raw is worse than EMA on all three
+review means; selecting raw does not repair the faint regression.
 
 |Execution / workers per loader|Measured patches/s|Loader wait fraction|
 |---|---:|---:|

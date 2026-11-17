@@ -31,6 +31,11 @@ has repeatedly come with extra flat-region error or false color. The
    error remains higher after exact measured-CFA projection. Coverage, reviewed
    density and execution co-vary; a future matched test should separate them.
    Completed-horizon quality remains pending.
+   All90,778 photos have now actually been visited. The [execution follow-up](training-execution-quality.md)
+   finds10k raw worse than EMA and only a tiny strict/fast0 mean difference at77;
+   it does not explain the later drift. [Broader weak-band/primary analysis](full-corpus-primary-admission.md)
+   is queued. Use it before attributing the loss to coverage or changing the
+   reviewed-example quota while preserving full-corpus exposure.
    [Coverage and pipeline rationale](training-scale-pipeline-review-2026-11-17.md).
 3. **Evaluate the delivered correction.** Better background prediction or a
    stronger synthetic mesh response does not guarantee lower final-image error.

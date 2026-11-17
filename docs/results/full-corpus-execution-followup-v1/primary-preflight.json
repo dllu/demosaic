@@ -1,0 +1,836 @@
+{
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-preflight-v1/plan.json",
+    "sha256": "5dc3a087f55792bc8d026b29824e55ba0145f3f8e8bb7b944a06de7fff4c0840"
+  },
+  "kind": "preflight",
+  "all_complete": true,
+  "cases": 3,
+  "case_records": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-preflight-v1/collection/known-00000/result.json",
+      "sha256": "5154147650cb76458e8a1f002c8bc06756735eddd620dd685a330c6498836865"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-preflight-v1/collection/unseen-00000/result.json",
+      "sha256": "15b38b74cef8df4314653b51e959e7439b74f2e4821391ebc6902394e07df29f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-primary-preflight-v1/collection/photo-00016/result.json",
+      "sha256": "a51b164f6fbdfa7649deeaccef7084fe3217c7c2ea274cb360ab9411a4f27668"
+    }
+  ],
+  "models": {
+    "V120": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "scale-control10k": {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v6/work/artifacts/train/control20k/step010000.pt",
+        "sha256": "41d45a9c2f5b3ec33922940280e5780fdea1a0065c1f1f522f8f54f935dc330b"
+      },
+      "step": 10000,
+      "retained_progress": true,
+      "training_horizon": 20000
+    }
+  },
+  "summaries": {
+    "known": {
+      "per_pair": [
+        {
+          "model": "V120",
+          "id": "2pilesofplates",
+          "kind": "real",
+          "condition": "4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": 63.57245635986328,
+            "reference_samples": 200703.0,
+            "ahd_linear_psnr": 63.4797945022583,
+            "ahd_srgb_psnr": 47.45961952209473,
+            "ahd_srgb_ssim": 0.9859244227409363,
+            "ahd_chroma_mae": 0.0023277917644008994,
+            "ahd_gradient_mae": 0.0028069617110304534,
+            "ahd_highlight_boundary_chroma_mae": null,
+            "ahd_highlight_boundary_rgb_mae": null,
+            "ahd_shadow_linear_psnr": 67.92233784993489
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "id": "2pilesofplates",
+          "kind": "real",
+          "condition": "4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": 63.59987545013428,
+            "reference_samples": 200703.0,
+            "ahd_linear_psnr": 63.49291706085205,
+            "ahd_srgb_psnr": 47.47490310668945,
+            "ahd_srgb_ssim": 0.9859464913606644,
+            "ahd_chroma_mae": 0.0023247228236868978,
+            "ahd_gradient_mae": 0.0028064228245057166,
+            "ahd_highlight_boundary_chroma_mae": null,
+            "ahd_highlight_boundary_rgb_mae": null,
+            "ahd_shadow_linear_psnr": 68.03629302978516
+          }
+        }
+      ],
+      "groups": [
+        {
+          "model": "V120",
+          "kind": "real",
+          "condition": "4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 63.57245635986328,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200703.0,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 63.4797945022583,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 47.45961952209473,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9859244227409363,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0023277917644008994,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.0028069617110304534,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 67.92233784993489,
+              "count": 1
+            }
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "kind": "real",
+          "condition": "4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 63.59987545013428,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200703.0,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 63.49291706085205,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 47.47490310668945,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9859464913606644,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0023247228236868978,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.0028064228245057166,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 68.03629302978516,
+              "count": 1
+            }
+          }
+        }
+      ],
+      "overall": [
+        {
+          "model": "V120",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 63.57245635986328,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200703.0,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 63.4797945022583,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 47.45961952209473,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9859244227409363,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0023277917644008994,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.0028069617110304534,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 67.92233784993489,
+              "count": 1
+            }
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 63.59987545013428,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200703.0,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 63.49291706085205,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 47.47490310668945,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9859464913606644,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.0023247228236868978,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.0028064228245057166,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 68.03629302978516,
+              "count": 1
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 1,
+          "mean_first_minus_second": -0.027419090270996094,
+          "source_bootstrap_95_interval": [
+            -0.027419090270996094,
+            -0.027419090270996094
+          ]
+        },
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 1,
+          "mean_first_minus_second": -0.015283584594726562,
+          "source_bootstrap_95_interval": [
+            -0.015283584594726562,
+            -0.015283584594726562
+          ]
+        },
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 1,
+          "mean_first_minus_second": -2.206861972808838e-05,
+          "source_bootstrap_95_interval": [
+            -2.206861972808838e-05,
+            -2.206861972808838e-05
+          ]
+        }
+      ]
+    },
+    "unseen": {
+      "per_pair": [
+        {
+          "model": "V120",
+          "id": "LucieB_3apples",
+          "kind": "real",
+          "condition": "9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": 47.026822090148926,
+            "reference_samples": 200695.25,
+            "ahd_linear_psnr": 46.85665225982666,
+            "ahd_srgb_psnr": 38.62718868255615,
+            "ahd_srgb_ssim": 0.9246842265129089,
+            "ahd_chroma_mae": 0.006381654995493591,
+            "ahd_gradient_mae": 0.007035881048068404,
+            "ahd_highlight_boundary_chroma_mae": 0.02240745536983013,
+            "ahd_highlight_boundary_rgb_mae": 0.02723391354084015,
+            "ahd_shadow_linear_psnr": 56.509572982788086
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "id": "LucieB_3apples",
+          "kind": "real",
+          "condition": "9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": 47.040855407714844,
+            "reference_samples": 200695.25,
+            "ahd_linear_psnr": 46.85929775238037,
+            "ahd_srgb_psnr": 38.636056900024414,
+            "ahd_srgb_ssim": 0.9246955364942551,
+            "ahd_chroma_mae": 0.006389335845597088,
+            "ahd_gradient_mae": 0.007035887101665139,
+            "ahd_highlight_boundary_chroma_mae": 0.0227231252938509,
+            "ahd_highlight_boundary_rgb_mae": 0.02763253729790449,
+            "ahd_shadow_linear_psnr": 56.558237075805664
+          }
+        }
+      ],
+      "groups": [
+        {
+          "model": "V120",
+          "kind": "real",
+          "condition": "9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 47.026822090148926,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200695.25,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 46.85665225982666,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.62718868255615,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9246842265129089,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006381654995493591,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.007035881048068404,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": 0.02240745536983013,
+              "count": 1
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": 0.02723391354084015,
+              "count": 1
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 56.509572982788086,
+              "count": 1
+            }
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "kind": "real",
+          "condition": "9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f",
+          "pattern": "RGGB",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 47.040855407714844,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200695.25,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 46.85929775238037,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.636056900024414,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9246955364942551,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006389335845597088,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.007035887101665139,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": 0.0227231252938509,
+              "count": 1
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": 0.02763253729790449,
+              "count": 1
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 56.558237075805664,
+              "count": 1
+            }
+          }
+        }
+      ],
+      "overall": [
+        {
+          "model": "V120",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 47.026822090148926,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200695.25,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 46.85665225982666,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.62718868255615,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9246842265129089,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006381654995493591,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.007035881048068404,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": 0.02240745536983013,
+              "count": 1
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": 0.02723391354084015,
+              "count": 1
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 56.509572982788086,
+              "count": 1
+            }
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "kind": "real",
+          "metrics": {
+            "sensor_psnr": {
+              "mean": 47.040855407714844,
+              "count": 1
+            },
+            "reference_samples": {
+              "mean": 200695.25,
+              "count": 1
+            },
+            "ahd_linear_psnr": {
+              "mean": 46.85929775238037,
+              "count": 1
+            },
+            "ahd_srgb_psnr": {
+              "mean": 38.636056900024414,
+              "count": 1
+            },
+            "ahd_srgb_ssim": {
+              "mean": 0.9246955364942551,
+              "count": 1
+            },
+            "ahd_chroma_mae": {
+              "mean": 0.006389335845597088,
+              "count": 1
+            },
+            "ahd_gradient_mae": {
+              "mean": 0.007035887101665139,
+              "count": 1
+            },
+            "ahd_highlight_boundary_chroma_mae": {
+              "mean": 0.0227231252938509,
+              "count": 1
+            },
+            "ahd_highlight_boundary_rgb_mae": {
+              "mean": 0.02763253729790449,
+              "count": 1
+            },
+            "ahd_shadow_linear_psnr": {
+              "mean": 56.558237075805664,
+              "count": 1
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "real",
+          "metric": "sensor_psnr",
+          "sources": 1,
+          "mean_first_minus_second": -0.014033317565917969,
+          "source_bootstrap_95_interval": [
+            -0.014033317565917969,
+            -0.014033317565917969
+          ]
+        },
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "real",
+          "metric": "ahd_srgb_psnr",
+          "sources": 1,
+          "mean_first_minus_second": -0.008868217468261719,
+          "source_bootstrap_95_interval": [
+            -0.008868217468261719,
+            -0.008868217468261719
+          ]
+        },
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "real",
+          "metric": "ahd_srgb_ssim",
+          "sources": 1,
+          "mean_first_minus_second": -1.1309981346130371e-05,
+          "source_bootstrap_95_interval": [
+            -1.1309981346130371e-05,
+            -1.1309981346130371e-05
+          ]
+        }
+      ]
+    },
+    "photo": {
+      "groups": [
+        {
+          "model": "V120",
+          "kind": "photo",
+          "condition": "shadows",
+          "pattern": "RGGB",
+          "metrics": {
+            "linear_psnr": {
+              "mean": 57.99065399169922,
+              "count": 4
+            },
+            "srgb_psnr": {
+              "mean": 43.75736427307129,
+              "count": 4
+            },
+            "srgb_ssim": {
+              "mean": 0.9780052006244659,
+              "count": 4
+            },
+            "chroma_mae": {
+              "mean": 0.002531036181608215,
+              "count": 4
+            },
+            "gradient_mae": {
+              "mean": 0.0038250026118475944,
+              "count": 4
+            },
+            "highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "shadow_linear_psnr": {
+              "mean": 58.9470911026001,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "kind": "photo",
+          "condition": "shadows",
+          "pattern": "RGGB",
+          "metrics": {
+            "linear_psnr": {
+              "mean": 57.99586009979248,
+              "count": 4
+            },
+            "srgb_psnr": {
+              "mean": 43.773080825805664,
+              "count": 4
+            },
+            "srgb_ssim": {
+              "mean": 0.978029876947403,
+              "count": 4
+            },
+            "chroma_mae": {
+              "mean": 0.002521806745789945,
+              "count": 4
+            },
+            "gradient_mae": {
+              "mean": 0.003821510705165565,
+              "count": 4
+            },
+            "highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "shadow_linear_psnr": {
+              "mean": 58.95860004425049,
+              "count": 4
+            }
+          }
+        }
+      ],
+      "overall": [
+        {
+          "model": "V120",
+          "kind": "photo",
+          "metrics": {
+            "linear_psnr": {
+              "mean": 57.99065399169922,
+              "count": 4
+            },
+            "srgb_psnr": {
+              "mean": 43.75736427307129,
+              "count": 4
+            },
+            "srgb_ssim": {
+              "mean": 0.9780052006244659,
+              "count": 4
+            },
+            "chroma_mae": {
+              "mean": 0.002531036181608215,
+              "count": 4
+            },
+            "gradient_mae": {
+              "mean": 0.0038250026118475944,
+              "count": 4
+            },
+            "highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "shadow_linear_psnr": {
+              "mean": 58.9470911026001,
+              "count": 4
+            }
+          }
+        },
+        {
+          "model": "scale-control10k",
+          "kind": "photo",
+          "metrics": {
+            "linear_psnr": {
+              "mean": 57.99586009979248,
+              "count": 4
+            },
+            "srgb_psnr": {
+              "mean": 43.773080825805664,
+              "count": 4
+            },
+            "srgb_ssim": {
+              "mean": 0.978029876947403,
+              "count": 4
+            },
+            "chroma_mae": {
+              "mean": 0.002521806745789945,
+              "count": 4
+            },
+            "gradient_mae": {
+              "mean": 0.003821510705165565,
+              "count": 4
+            },
+            "highlight_boundary_chroma_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "highlight_boundary_rgb_mae": {
+              "mean": null,
+              "count": 0
+            },
+            "shadow_linear_psnr": {
+              "mean": 58.95860004425049,
+              "count": 4
+            }
+          }
+        }
+      ],
+      "paired_comparisons": [
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "photo",
+          "metric": "linear_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.005206108093261719,
+          "source_bootstrap_95_interval": [
+            -0.013678550720214844,
+            0.0029735565185546875
+          ]
+        },
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "photo",
+          "metric": "srgb_psnr",
+          "sources": 4,
+          "mean_first_minus_second": -0.015716552734375,
+          "source_bootstrap_95_interval": [
+            -0.035625457763671875,
+            0.004192352294921875
+          ]
+        },
+        {
+          "first": "V120",
+          "second": "scale-control10k",
+          "kind": "photo",
+          "metric": "srgb_ssim",
+          "sources": 4,
+          "mean_first_minus_second": -2.467632293701172e-05,
+          "source_bootstrap_95_interval": [
+            -9.243190288543701e-05,
+            5.735456943511963e-05
+          ]
+        }
+      ]
+    }
+  },
+  "counts": {
+    "root": 6,
+    "local_DINO_requests": 6,
+    "local_DINO_executions": 3,
+    "local_DINO_replays": 3
+  },
+  "parent_reference_checks": [
+    {
+      "stage": "known",
+      "batch": 0,
+      "all_output_values_bitexact": true,
+      "previous_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/known-00000-CPU-f32.npy",
+        "sha256": "60a7cccfaa63028d23baf3af2f2c08edf124be9454ba42cd3ca1077a8559c85c"
+      },
+      "all_metric_rows_bitexact": true
+    },
+    {
+      "stage": "unseen",
+      "batch": 0,
+      "all_output_values_bitexact": true,
+      "previous_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/unseen-00000-CPU-f32.npy",
+        "sha256": "42d57e6f809596b287cd0396de9cd3aa0254eb14974e3f5a6d5d7392efce90e7"
+      },
+      "all_metric_rows_bitexact": true
+    },
+    {
+      "stage": "photo",
+      "batch": 16,
+      "all_output_values_bitexact": true,
+      "previous_prediction": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/photo-00016-CPU-f32.npy",
+        "sha256": "f52fd1d42ef4c85cfeb26becfd123129c042010e9991c630c04fa504bdf9e67e"
+      },
+      "all_metric_rows_bitexact": true
+    }
+  ],
+  "seconds": 196.5027175110299,
+  "full_model_before": {
+    "V120": "8816512ccbf637001d15b059f461378331c2bb766877c29b1674d005993d07a4",
+    "scale-control10k": "221d4633ad96e5d9efd0c85ba082da2f7c24dcb2fa4c440d4d795f72a064a1c8"
+  },
+  "full_model_after": {
+    "V120": "8816512ccbf637001d15b059f461378331c2bb766877c29b1674d005993d07a4",
+    "scale-control10k": "221d4633ad96e5d9efd0c85ba082da2f7c24dcb2fa4c440d4d795f72a064a1c8"
+  },
+  "CPU_rng_unchanged": true,
+  "scope": "Same-CPU EMA local full models, exact canonical historic inputs/targets/noise, B4 preserved. Shared checked frozen local DINO; no scene context/RAW decode/new corruption/GPU/optimizer work.3-case preflight is not a primary score; only full3162 cases comprise427-photo plus known/unseen primary panels. Unchanged metric formulas/reference CPU SSIM; independent AHD camera RGB is auxiliary, not exact GT. Actual native review and source-bound history publication separate."
+}
