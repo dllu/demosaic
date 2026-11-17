@@ -125,6 +125,11 @@ guides while preserving the far-edge radial repair. The guard changes
 frequency selection only, with a small measured quiet-error increase
 on the near-edge fields.
 
+The [shared waveform fit](shared-phase-shape.md) slightly lowers
+far-edge chroma error but weakens near-edge recovery. At the same
+measured quiet RMS, ISO400 near gives 12.00% weak response with
+independent waveforms and 7.65% with one shared shape.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

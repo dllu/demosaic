@@ -69,6 +69,9 @@ has repeatedly come with extra flat-region error or false color. The
    near-edge guide accuracy and response while retaining the far-edge
    repair. Held-out validation still uses its original RAW samples.
    [Edge exclusion](phase-guide-edge-guard.md).
+   Fitting one waveform with signed Bayer amplitudes lowers far-edge
+   chroma error slightly. Near-edge weak response falls even at
+   matched quiet error. [Shared waveform](shared-phase-shape.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

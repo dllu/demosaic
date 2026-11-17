@@ -106,6 +106,7 @@ class LocalCandidate:
     conditional_null_cfa: np.ndarray
     variance_cfa: np.ndarray
     guide_search_excluded: int = 0
+    phase_reliability_degrees: int | None = None
 
 
 def _wave_columns(xx, yy, frequency, harmonics=1):
@@ -272,6 +273,39 @@ def _validate_guide_search(recenter, guard_px, bins, harmonics):
         raise ValueError("An edge guard requires phase-guide recentering and a native pixel width")
 
 
+def _validate_shared_phase_shape(shared, bins, harmonics):
+    if type(shared) is not bool or (shared and (not bins or harmonics is not None)):
+        raise ValueError("A shared phase shape requires the full interpolated phase basis")
+
+
+def _shared_phase_fields(waves, nuisance, values, indices, variances):
+    """Estimate one signed-amplitude waveform subspace per direction."""
+    design = np.column_stack((nuisance, *waves))
+    coefficients, precision = [], []
+    for measured, noise in zip(indices, variances, strict=True):
+        sigma = 1 / np.sqrt(noise[measured])
+        coefficients.append(
+            np.linalg.lstsq(
+                design[measured] * sigma[:, None], values[measured] * sigma, rcond=1e-10
+            )[0]
+        )
+        precision.append(np.linalg.norm(sigma))
+    coefficients = np.stack(coefficients)
+    fields = []
+    start = nuisance.shape[1]
+    for wave in waves:
+        stop = start + wave.shape[1]
+        reduced = coefficients[:, start:stop]
+        knots = np.column_stack((reduced, -reduced.sum(axis=1)))
+        _, _, directions = np.linalg.svd(
+            np.asarray(precision)[:, None] * knots, full_matrices=False
+        )
+        # The opposing end of the same basis permits negative color amplitudes.
+        fields.append(wave @ directions[0, :-1, None])
+        start = stop
+    return fields
+
+
 def _edge_guarded_green(raw, green, nuisance, x, y, angle, offset, width, shot, read):
     """Exclude a band around a strong discovery-fold step from frequency selection."""
     design = nuisance[green]
@@ -340,6 +374,7 @@ def fit_local_candidate(
     phase_harmonics=None,
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
+    shared_phase_shape=False,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
@@ -350,6 +385,7 @@ def fit_local_candidate(
     _validate_guide_search(
         recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
     )
+    _validate_shared_phase_shape(shared_phase_shape, phase_bins, phase_harmonics)
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -464,6 +500,17 @@ def fit_local_candidate(
         waves = [
             _wave_columns(xx, yy, f, count) for f, count in zip(frequencies, counts, strict=True)
         ]
+    indices, noise_fields = [], []
+    for color in range(3):
+        selected = np.flatnonzero(((colors == color) & discovery_mask).ravel())
+        background_coeff = np.linalg.lstsq(nuisance[selected], raw.ravel()[selected], rcond=1e-10)[
+            0
+        ]
+        proxy = nuisance @ background_coeff
+        indices.append(selected)
+        noise_fields.append(read + shot * np.maximum(proxy, 1e-6))
+    if shared_phase_shape:
+        waves = _shared_phase_fields(waves, nuisance, raw.ravel(), indices, noise_fields)
     n = nuisance.shape[1]
     split = n + waves[0].shape[1]
     wave_slices = ((n, split), (split, split + waves[1].shape[1]))
@@ -484,15 +531,9 @@ def fit_local_candidate(
         np.empty((len(unit_slices), raw.size)),
         np.empty(raw.size),
     )
-    operators, indices, coefficients = [], [], []
-    for color in range(3):
-        selected = np.flatnonzero(((colors == color) & discovery_mask).ravel())
+    operators, coefficients = [], []
+    for color, (selected, noise) in enumerate(zip(indices, noise_fields, strict=True)):
         destination = (colors == color).ravel()
-        background_coeff = np.linalg.lstsq(nuisance[selected], raw.ravel()[selected], rcond=1e-10)[
-            0
-        ]
-        proxy = nuisance @ background_coeff
-        noise = read + shot * np.maximum(proxy, 1e-6)
         inverse_sigma = 1 / np.sqrt(noise[selected])
         weighted = design[selected] * inverse_sigma[:, None]
         operator = np.linalg.pinv(weighted, rcond=1e-10) * inverse_sigma[None]
@@ -510,7 +551,6 @@ def fit_local_candidate(
             )[0]
             nulls[unit, destination] = subset[destination] @ null_coeff
         operators.append(operator)
-        indices.append(selected)
         coefficients.append(coefficient)
     return LocalCandidate(
         frequencies,
@@ -529,6 +569,7 @@ def fit_local_candidate(
         nulls.reshape(len(unit_slices), *raw.shape),
         variance.reshape(raw.shape),
         excluded,
+        phase_bins - 1 if shared_phase_shape else None,
     )
 
 
@@ -556,12 +597,14 @@ def phase_fit_reliability(candidate, colors):
     """
     reliability = np.zeros((len(candidate.unit_slices), 3), dtype=np.float64)
     for direction, (start, stop) in enumerate(candidate.unit_slices):
+        # A one-column shape selected on this fold is not a fixed one-parameter fit.
+        degrees = candidate.phase_reliability_degrees or stop - start
         difference = candidate.full_cfa - candidate.conditional_null_cfa[direction]
         for color in range(3):
             selected = candidate.discovery_mask & (colors == color)
             energy = np.sum(difference[selected] ** 2 / candidate.variance_cfa[selected])
-            if energy > stop - start:
-                reliability[direction, color] = 1 - (stop - start) / energy
+            if energy > degrees:
+                reliability[direction, color] = 1 - degrees / energy
     return reliability
 
 
@@ -855,6 +898,7 @@ def restore_local_waves(
     compare_pooled_refit=False,
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
+    shared_phase_shape=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -887,6 +931,7 @@ def restore_local_waves(
     _validate_guide_search(
         recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
     )
+    _validate_shared_phase_shape(shared_phase_shape, phase_bins, phase_harmonics)
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if type(compare_pooled_support) is not bool:
@@ -897,6 +942,7 @@ def restore_local_waves(
             not phase_bins
             or phase_harmonics is not None
             or recenter_phase_guides
+            or shared_phase_shape
             or not compare_pooled_support
         )
     ):
@@ -925,6 +971,8 @@ def restore_local_waves(
         guide["recenter_phase_guides"] = True
     if phase_guide_edge_guard_px:
         guide["phase_guide_edge_guard_px"] = phase_guide_edge_guard_px
+    if shared_phase_shape:
+        guide["shared_phase_shape"] = True
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:

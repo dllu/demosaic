@@ -163,6 +163,10 @@ spatial placement has no established fine-detail advantage. Both protected GFX
 families are actually reviewed; full427 photos continue collecting. The separate
 [larger-corpus continuation](full-corpus-scaling.md) is running with RAW domains
 retained. These measured follow-ups preserve the original review's cutoff.
+The later [edge exclusion](phase-guide-edge-guard.md) improves lower-noise
+near-edge frequency selection. The [shared Bayer waveform](shared-phase-shape.md)
+slightly lowers far-edge chroma error and loses near-edge weak recovery at
+matched quiet RMS. Both tests retain independent RAW validation.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

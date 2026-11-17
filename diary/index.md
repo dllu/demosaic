@@ -24,7 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
-Latest results are recorded in the [edge-exclusion entry](2026-11-17-14-27-46-phase-guide-edge-guard.md) and the
+Latest results are in the [shared waveform entry](2026-11-17-14-37-42-shared-phase-shape.md).
+See also the [edge-exclusion entry](2026-11-17-14-27-46-phase-guide-edge-guard.md) and the
 [second ordinary-photo pass entry](2026-11-17-14-18-00-full-corpus-second-epoch.md).
 See also the [bounded guide-error entry](2026-11-17-14-11-24-phase-guide-recenter.md)
 and the [fresh weighted RAW refit entry](2026-11-17-13-56-05-fresh-phase-refit.md).

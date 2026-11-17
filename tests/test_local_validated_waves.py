@@ -126,6 +126,47 @@ def test_edge_guard_subsets_only_the_frequency_search(monkeypatch):
     np.testing.assert_array_equal(inspected[-1], inspected[0])
 
 
+@pytest.mark.parametrize("layout", LAYOUTS)
+def test_shared_phase_shape_keeps_signed_color_and_withheld_independence(layout):
+    _, colors, _ = scene(layout)
+    frequencies = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))
+    x, y, _, _ = local.geometry(colors.shape)
+    shapes = (
+        np.array([0.6, -0.1, -0.4, -0.4, -0.1, 0.0, 0.1, 0.3]),
+        np.array([-0.4, -0.4, 0.1, 0.4, 0.5, 0.2, -0.2, -0.2]),
+    )
+    strong, weak = [
+        (local._phase_bin_weights(x, y, f, 8) @ shape).reshape(colors.shape)
+        for f, shape in zip(frequencies, shapes, strict=True)
+    ]
+    rgb = 0.06 + np.array([0.02, 0.03, 0.01])[:, None, None] * strong
+    rgb += np.array([0.015, -0.005, 0.01])[:, None, None] * weak
+    raw = np.take_along_axis(rgb, colors[None], axis=0)[0]
+    mask = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 8e-5,
+        "read": 2.56e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": frequencies,
+        "phase_bins": 8,
+        "shared_phase_shape": True,
+    }
+    candidate = local.fit_local_candidate(raw, colors, mask, **options)
+    damaged = local.fit_local_candidate(np.where(mask, raw, np.nan), colors, mask, **options)
+    np.testing.assert_array_equal(candidate.design, damaged.design)
+    np.testing.assert_array_equal(candidate.conditional_null_cfa, damaged.conditional_null_cfa)
+    np.testing.assert_allclose(candidate.full_cfa, raw, rtol=0, atol=1e-13)
+    assert candidate.phase_reliability_degrees == 7
+    assert [v.shape[-1] for v in candidate.unit_fields] == [1, 1]
+    stop, _ = candidate.unit_slices[1]
+    np.testing.assert_allclose(
+        candidate.coefficients[:, stop] / candidate.coefficients[0, stop],
+        [1, -1 / 3, 2 / 3],
+        rtol=0,
+        atol=1e-13,
+    )
+
+
 def test_all_knot_harmonics_span_the_existing_discovery_model():
     raw, colors, _ = scene()
     split = stratified_split(raw.shape, 81)
