@@ -143,7 +143,7 @@ def report_synthetic(plan, collected, output):
     return rows, boards
 
 
-def matched_quiet(rows, thresholds, budgets):
+def matched_quiet(rows, thresholds, budgets, *, methods=METHODS, shared_zero="minimum"):
     by_source = defaultdict(list)
     for row in rows:
         by_source[row["profile"], row["placement"], row["source"], row["method"]].append(row)
@@ -158,10 +158,11 @@ def matched_quiet(rows, thresholds, budgets):
         for budget in budgets:
             for test in range(8):
                 calibrate = [i for i in range(8) if i != test]
-                for name in METHODS:
+                for name in methods:
                     choices = []
                     for t in thresholds:
-                        key = f"{name if t else 'minimum'}-t{t:g}"
+                        method = name if t or shared_zero is None else shared_zero
+                        key = f"{method}-t{t:g}"
                         training = [means[profile, placement, index, key] for index in calibrate]
                         quiet = np.mean([v["quiet_mse"] for v in training], axis=0)
                         gain = np.mean([v["weak_gain"] for v in training], axis=0)
@@ -193,6 +194,33 @@ def matched_quiet(rows, thresholds, budgets):
     return out
 
 
+def insert_camera_panel(output, key, old, after_label, new_label, new_pixels):
+    source = np.asarray(Image.open(checked(old["image"])))
+    cells = []
+    for panel in old["panels"]:
+        x, y, w, h = panel["png_xywh"]
+        cells.append((panel["label"], source[y : y + h, x : x + w]))
+        if panel["label"] == after_label:
+            cells.append((new_label, new_pixels))
+    assert len(cells) == len(old["panels"]) + 1
+    board = Image.new("RGB", (8 + 168 * len(cells), 192), "#eeeeee")
+    drawer = ImageDraw.Draw(board)
+    panels = []
+    for i, (label, cell) in enumerate(cells):
+        assert cell.shape == (160, 160, 3)
+        x = 8 + 168 * i
+        board.paste(Image.fromarray(cell), (x, 24))
+        drawer.text((x, 5), label, fill="black")
+        panels.append({"label": label, "png_xywh": [x, 24, 160, 160]})
+    dest = output / f"{key}.png"
+    board.save(dest)
+    rendered = np.asarray(Image.open(dest))
+    for panel, (_, pixels) in zip(panels, cells, strict=True):
+        x, y, w, h = panel["png_xywh"]
+        np.testing.assert_array_equal(rendered[y : y + h, x : x + w], pixels)
+    return reference(dest), panels
+
+
 def report_camera(plan, collected, output):
     adopted = read_json(checked(plan["adopted_report"]))
     originals = {row["id"]: row for row in adopted["camera_boards"]}
@@ -202,7 +230,6 @@ def report_camera(plan, collected, output):
         assert result["id"] == key
         old = originals[key]
         native = old["original_board"]
-        image = np.asarray(Image.open(checked(old["image"])))
         with np.load(checked(row["query_arrays"])) as arrays:
             calibration = {k: arrays[k] for k in ("wb", "matrix")}
         x, y, w, h = native["ROI_xywh"]
@@ -219,34 +246,14 @@ def report_camera(plan, collected, output):
             value = data["pooled-t2"]
             correction = value[crop].astype(np.float64) - data["minimum-t2"][crop]
         rgb = display(value[None], calibration, exposure=native["display_exposure"])[0][crop]
-        cells = []
-        for panel in old["panels"]:
-            px, py, pw, ph = panel["png_xywh"]
-            cells.append((panel["label"], image[py : py + ph, px : px + pw]))
-            if panel["label"] == "Shrunken phase fit":
-                cells.append(
-                    ("Pooled folds", np.rint(rgb.transpose(1, 2, 0) * 255).astype(np.uint8))
-                )
-        assert len(cells) == len(old["panels"]) + 1
-        board = Image.new("RGB", (8 + 168 * len(cells), 192), "#eeeeee")
-        drawer = ImageDraw.Draw(board)
-        panels = []
-        for i, (label, cell) in enumerate(cells):
-            assert cell.shape == (160, 160, 3)
-            px = 8 + 168 * i
-            board.paste(Image.fromarray(cell), (px, 24))
-            drawer.text((px, 5), label, fill="black")
-            panels.append({"label": label, "png_xywh": [px, 24, 160, 160]})
-        dest = output / f"{key}.png"
-        board.save(dest)
-        rendered = np.asarray(Image.open(dest))
-        for panel, (_, pixels) in zip(panels, cells, strict=True):
-            x, y, w, h = panel["png_xywh"]
-            np.testing.assert_array_equal(rendered[y : y + h, x : x + w], pixels)
+        pixels = np.rint(rgb.transpose(1, 2, 0) * 255).astype(np.uint8)
+        image, panels = insert_camera_panel(
+            output, key, old, "Shrunken phase fit", "Pooled folds", pixels
+        )
         boards.append(
             {
                 "id": key,
-                "image": reference(dest),
+                "image": image,
                 "prior_board": old["image"],
                 "panels": panels,
                 "ROI_xywh": native["ROI_xywh"],

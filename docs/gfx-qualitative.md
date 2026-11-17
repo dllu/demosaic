@@ -46,6 +46,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Pooled RAW support](fold-support-pooling.md) reproduces the sky exactly.
   The building changes by 0.42 DN16 RMS, the coarse lattice stays coherent,
   and foliage remains soft.
+- [Phase-profile agreement](phase-profile-agreement.md) reduces the
+  building correction to 0.166 DN16 RMS. Sky still matches V120, and coarse
+  crossings and foliage look similar to the pooled gate.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

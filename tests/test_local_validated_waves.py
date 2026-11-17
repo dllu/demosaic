@@ -100,6 +100,18 @@ def test_pooled_support_preserves_veto_and_can_admit_unequal_positive_scores():
     assert local.support_weight(np.minimum(first, second), 2)[3] == 0
 
 
+def test_phase_agreement_measures_interpolated_shape_and_preserves_phase_sign():
+    a = np.array([[0.2, 0.3, -0.8, 0.4], [0.0, 0.2, 0.1, -0.1], [0.0, 0.0, 0.0, 0.0]])
+    b = np.array([[0.1, -0.2, -0.3, 0.7], [0.0, -0.6, -0.3, 0.3], [1.0, 0.0, 0.0, 0.0]])
+    x = np.linspace(0, 1, 10000, endpoint=False)
+    phases = np.arange(5) / 5
+    first, second = [np.interp(x, phases, np.r_[v, -v.sum()], period=1) for v in (a[0], b[0])]
+    expected = first @ second / (np.linalg.norm(first) * np.linalg.norm(second))
+    observed = local.phase_profile_agreement(a, b)
+    np.testing.assert_allclose(observed, [expected, -1.0, 0.0], rtol=0, atol=2e-7)
+    np.testing.assert_allclose(local.phase_profile_agreement(3 * b, a / 2), observed, atol=1e-14)
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
 def test_phase_bins_recover_periodic_profile_and_ignore_withheld_measurements(layout):
     height = width = 64

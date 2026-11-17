@@ -10,6 +10,10 @@ crossings remain incomplete.
 [Full evidence](results/fold-support-pooling-v1/publication.json) ·
 [Frozen setup and preflight](results/fold-support-pooling-setup-v1/publication.json).
 
+The [phase-agreement follow-up](phase-profile-agreement.md) reduces the
+small building correction with lower weak-wire recovery at nearly the
+same quiet-region error.
+
 The current gate uses the lower of two local predictive scores. The pooled
 gate averages them where both are positive and gives zero correction when
 either is zero or negative. This tests whether both RAW folds can support the

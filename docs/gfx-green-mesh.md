@@ -16,6 +16,7 @@ preserves its original comparison pixels and provenance.
 | [RAW phase profiles](guided-phase-profiles.md) | Both ROIs, noise profiles and JPEGs viewed. Additional slight diagonal modulation with the richer profile. Fine crossings remain unresolved |
 | [Phase-fit shrinkage](guided-phase-fit-shrinkage.md) | Both ROIs, noise profiles and JPEGs viewed. Correction is slightly smaller with shrinkage. Faint diagonals remain and the fine crossings are unresolved |
 | [Pooled RAW support](fold-support-pooling.md) | Both ROIs, profiles and JPEGs viewed. Left diagonal modulation is somewhat stronger. Both sides still lack convincing added fine crossings |
+| [Phase-profile agreement](phase-profile-agreement.md) | Both ROIs, profiles and JPEGs viewed. High agreement in both fitted directions, slight attenuation of modulation, crossings still incomplete |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |

@@ -101,6 +101,11 @@ source IDs are unlogged, and the audit covers the recorded inputs.
 [Milestone state, independent audit and launch](results/full-corpus-long20k-progress-v1/publication.json) ·
 [First-epoch audit](results/scene-wave-guides-v1/long100k-first-epoch.json).
 
+The recorded training loops take 695.68 seconds for updates 1–1,000 and
+12,432.29 seconds for updates 1,001–20,000. These windows exclude the pause
+between phases and the final checkpoint write. The separate CPU image
+review has its own timing. [Training timing and exact log prefix](results/full-corpus-long20k-progress-v1/timing-and-audit-followup.json).
+
 The same 110 retained inputs are now running through fresh V120, the
 completed 20k control and the long-schedule 20k EMA. The comparison will
 measure what the different schedules deliver at the same update count.

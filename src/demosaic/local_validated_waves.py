@@ -548,6 +548,18 @@ def pooled_support_score(first, second):
     return np.where(lower > 0, (first + second) / 2, lower)
 
 
+def phase_profile_agreement(first, second):
+    """Signed cosine between zero-mean linearly interpolated periodic profiles."""
+    a = np.concatenate((first, -first.sum(axis=-1, keepdims=True)), axis=-1)
+    b = np.concatenate((second, -second.sum(axis=-1, keepdims=True)), axis=-1)
+    ma = (a + np.roll(a, -1, axis=-1)) / 2
+    mb = (b + np.roll(b, -1, axis=-1)) / 2
+    # Composite Simpson weights integrate the piecewise quadratic products exactly.
+    cross = np.sum(a * b + 2 * ma * mb, axis=-1)
+    norm = np.sqrt(np.sum(a**2 + 2 * ma**2, axis=-1)) * np.sqrt(np.sum(b**2 + 2 * mb**2, axis=-1))
+    return np.clip(np.divide(cross, norm, out=np.zeros_like(cross), where=norm > 0), -1, 1)
+
+
 def _match_units(first, second, matched_directions, maximum_native_bins):
     """Match the same harmonic; apply the radius in its actual frequency bins."""
     lookup = {key: index for index, key in enumerate(second.unit_keys)}
@@ -593,6 +605,7 @@ def restore_local_waves(
     phase_bins=0,
     shrink_phase_fit=False,
     compare_pooled_support=False,
+    compare_phase_agreement=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -626,6 +639,10 @@ def restore_local_waves(
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if type(compare_pooled_support) is not bool:
         raise ValueError("Require an explicit boolean pooled-support choice")
+    if type(compare_phase_agreement) is not bool or (
+        compare_phase_agreement and (not phase_bins or not compare_pooled_support)
+    ):
+        raise ValueError("Phase agreement requires fixed phase bins and pooled support")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
@@ -638,6 +655,8 @@ def restore_local_waves(
     for threshold in thresholds:
         support_weight(0, threshold)
     modes = ("global", "local", "pooled-local") if compare_pooled_support else ("global", "local")
+    if compare_phase_agreement:
+        modes += ("phase-agreement",)
     outputs = {(mode, float(t)): parent.copy() for mode in modes for t in thresholds}
     if shot + read == 0:
         return outputs, {"patches": 0, "identity_zero_noise": True}
@@ -724,6 +743,7 @@ def restore_local_waves(
                 components = [value[0][0] if conditional_delivery else value[1] for value in values]
             units = _match_units(*candidates, matched, config.match_native_bins)
             local_max, global_max = [], []
+            agreements = []
             for a, b, _distance in units:
                 if shrink_phase_fit:
                     component = (
@@ -737,6 +757,14 @@ def restore_local_waves(
                 global_score = np.minimum(scores[0][1][a], scores[1][1][b])
                 if compare_pooled_support:
                     pooled = pooled_support_score(first, second)
+                if compare_phase_agreement:
+                    slices = [slice(*c.unit_slices[index]) for c, index in zip(candidates, (a, b))]
+                    agreement = phase_profile_agreement(
+                        candidates[0].coefficients[:, slices[0]],
+                        candidates[1].coefficients[:, slices[1]],
+                    )
+                    agreements.append(agreement.tolist())
+                    agreement_weight = np.maximum(agreement, 0)[:, None, None]
                 for threshold in thresholds:
                     totals["local", float(threshold)][:, y : y + n, x : x + n] += (
                         component * support_weight(local, threshold) * blend
@@ -745,9 +773,14 @@ def restore_local_waves(
                         component * support_weight(global_score, threshold)[:, None, None] * blend
                     )
                     if compare_pooled_support:
+                        pooled_delivery = component * support_weight(pooled, threshold) * blend
                         totals["pooled-local", float(threshold)][:, y : y + n, x : x + n] += (
-                            component * support_weight(pooled, threshold) * blend
+                            pooled_delivery
                         )
+                        if compare_phase_agreement:
+                            totals["phase-agreement", float(threshold)][
+                                :, y : y + n, x : x + n
+                            ] += pooled_delivery * agreement_weight
                 local_max.append(float(np.max(local)))
                 global_max.append(global_score.tolist())
             denominator[region] += blend
@@ -771,6 +804,7 @@ def restore_local_waves(
                     "matched_units": units,
                     "local_max": local_max,
                     "global_scores": global_max,
+                    **({"phase_agreement": agreements} if compare_phase_agreement else {}),
                     **(
                         {"discovery_reliability": [weight.tolist() for weight in reliability]}
                         if shrink_phase_fit
@@ -789,6 +823,7 @@ def restore_local_waves(
         **guide,
         **({"shrink_phase_fit": True} if shrink_phase_fit else {}),
         **({"compare_pooled_support": True} if compare_pooled_support else {}),
+        **({"compare_phase_agreement": True} if compare_phase_agreement else {}),
         "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }

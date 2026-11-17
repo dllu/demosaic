@@ -69,6 +69,12 @@ ISO6400 gains are smaller and have mixed increment errors. Both standing
 families retain the same remaining fine-detail limitations.
 [Pooled support and native crops](fold-support-pooling.md).
 
+A phase-agreement weight further reduces the small building correction
+from 0.421 to 0.166 DN16 RMS. It lowers weak response in all four
+noise and edge cells at the tightest quiet budget. The ISO6400 far
+weak fits show similar agreement when the wire is present or absent.
+[Agreement results](phase-profile-agreement.md).
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

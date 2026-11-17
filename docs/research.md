@@ -32,6 +32,10 @@ has repeatedly come with extra flat-region error or false color. The
    leaves high-noise weak recovery and real fine crossings open.
    [Phase-profile test](guided-phase-profiles.md) · [Equal-quiet shrinkage](guided-phase-fit-shrinkage.md#iso6400-at-equal-measured-quiet-error) ·
    [Pooled RAW support](fold-support-pooling.md).
+   At ISO6400 far, phase agreement has the same positive rate with
+   the weak wire present and absent. Attenuating by agreement lowers the
+   building correction and reduces weak response at matched quiet error.
+   [Phase-agreement test](phase-profile-agreement.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

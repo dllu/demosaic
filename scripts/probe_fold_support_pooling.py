@@ -11,9 +11,23 @@ from demosaic.experiments.artifacts import freeze_sources, read_json, reference,
 from demosaic.local_validated_waves import restore_local_waves
 
 THRESHOLDS = (0.0, 0.25, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0)
+SCOPE = (
+    "Compare minimum and mean positive predictive support on the same shrunken"
+    " phase fit, using eight fixed score thresholds on all 384 retained query views"
+    " and eight real cases. Threshold zero agrees exactly between modes. Three fixed"
+    " excess quiet RMS budgets are calibrated leave-one-geometry-out. Threshold 2 is"
+    " shown on the standing camera crops with the same parent, ROI and display."
+)
 
 
-def prepare(root, source):
+def prepare(
+    root,
+    source,
+    *,
+    driver="probe_fold_support_pooling.py",
+    reporter="report_fold_support_pooling.py",
+    scope=SCOPE,
+):
     plan = read_json(source / "plan.json")
     closure_path = source / "output/collection.json"
     closed = read_json(closure_path)
@@ -23,7 +37,7 @@ def prepare(root, source):
     work, files = freeze_sources(
         Path.cwd(),
         root,
-        ["probe_fold_support_pooling.py", "report_fold_support_pooling.py"],
+        [driver, reporter],
     )
     write_json(
         root / "plan.json",
@@ -32,7 +46,7 @@ def prepare(root, source):
             "root": str(root),
             "work": str(work),
             "frozen_files": files,
-            "driver": reference(work / "scripts/probe_fold_support_pooling.py"),
+            "driver": reference(work / "scripts" / driver),
             "adopted_plan": reference(source / "plan.json"),
             "adopted_collection": reference(closure_path),
             "adopted_report": reference(source / "review/result.json"),
@@ -44,11 +58,7 @@ def prepare(root, source):
             ],
             "thresholds": THRESHOLDS,
             "positive_quiet_RMS_budgets_DN16": [0.02, 0.1, 0.3],
-            "scope": "Compare minimum and mean positive predictive support on the same shrunken"
-            " phase fit, using eight fixed score thresholds on all 384 retained query views"
-            " and eight real cases. Threshold zero agrees exactly between modes. Three fixed"
-            " excess quiet RMS budgets are calibrated leave-one-geometry-out. Threshold 2 is"
-            " shown on the standing camera crops with the same parent, ROI and display.",
+            "scope": scope,
         },
     )
 
