@@ -85,6 +85,52 @@ def test_donor_support_requires_the_actual_higher_harmonic():
     np.testing.assert_array_equal((scores >= 3).all(axis=0), [[True, False, False], [False] * 3])
 
 
+def test_refit_uses_measured_color_and_preserves_the_gate():
+    raw, layout, rgb = scene()
+    raw += np.random.default_rng(5).normal(0, 0.001, raw.shape)
+    packed = np.stack([raw[y::2, x::2] for y in range(2) for x in range(2)])
+    parent = np.broadcast_to(rgb.mean(axis=(-2, -1), keepdims=True), rgb.shape).copy()
+    config = replace(CONFIG, window=64, stride=64, validation_window=33, validation_stride=8)
+    options = {
+        "shot": 8e-5,
+        "read": 2.56e-8,
+        "config": config,
+        "guide_frequencies_xy": ((5 / 64, 3 / 64), (-4 / 64, 7 / 64)),
+        "phase_bins": 8,
+    }
+    for compare in (False, True):
+        values, stats = local.restore_local_waves(
+            parent,
+            packed,
+            LAYOUTS[0],
+            **options,
+            shrink_phase_fit=True,
+            compare_pooled_support=True,
+            compare_pooled_refit=compare,
+            thresholds=(0, 1e3),
+        )
+        if not compare:
+            control, original_stats = values, stats["records"]
+    assert original_stats == stats["records"]
+    for method, output in control.items():
+        np.testing.assert_array_equal(values[method], output)
+    for mode in ("all-site-refit", "weighted-refit"):
+        np.testing.assert_array_equal(values[mode, 1e3], parent)
+    assert np.max(abs(values["all-site-refit", 0] - parent)) > 1e-4
+    assert np.max(abs(values["all-site-refit", 0] - values["weighted-refit", 0])) > 1e-6
+
+    fold = stratified_split(raw.shape, config.split_seed)
+    fit = local.fit_local_candidate(raw, layout, fold, **options)
+    altered = raw.copy()
+    altered[(layout == 1) & ~fold] += 0.002 * fit.unit_fields[0][(layout == 1) & ~fold, 0]
+    scores = {0: np.zeros((3, *raw.shape))}
+    first, _ = local._refit_phase_components(fit, raw, layout, parent, scores)
+    second, focused = local._refit_phase_components(fit, altered, layout, parent, scores)
+    assert np.max(abs(second[0, 1] - first[0, 1])) > 1e-4
+    np.testing.assert_array_equal(second[:, [0, 2]], first[:, [0, 2]])
+    np.testing.assert_allclose(second, focused, atol=1e-13, rtol=0)
+
+
 def test_discovery_reliability_subtracts_fit_noise_and_shrinks_the_validated_prediction():
     raw, colors, _ = scene()
     split = stratified_split(raw.shape, 81)

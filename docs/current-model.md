@@ -99,6 +99,13 @@ budgets. Selecting higher harmonics with an external RAW region keeps
 most of that response and slightly lowers ISO6400 increment error at the
 tight budget. A fundamental-only fit loses much more signal.
 
+The [weighted RAW refit](phase-refit-delivery.md) improves ISO400
+far-edge weak response from 17.54% to 21.07% at the tight calibration
+budget, with lower increment error and slightly higher quiet RMS.
+It reaches 19.16% at equal measured quiet RMS in a separate
+diagnostic. Uniform refitting changes little, and the weighted
+ISO6400 near and real cab results remain limited.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

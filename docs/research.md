@@ -52,6 +52,11 @@ has repeatedly come with extra flat-region error or false color. The
    response than the fundamental alone. The full phase basis recovers
    more weak signal in every held-out budget cell.
    [Donor waveform comparison](donor-phase-support.md).
+   Refitting the delivered phase on all query sites changes little
+   with uniform spatial weights. Giving more weight to sites with
+   positive pooled support improves ISO400 far response and increment
+   error. The gain survives a descriptive matched-quiet check in all
+   eight retained geometries. [RAW refit test](phase-refit-delivery.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

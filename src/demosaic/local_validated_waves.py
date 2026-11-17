@@ -719,6 +719,29 @@ def replacement_components(candidate, parent):
     return result
 
 
+def _refit_phase_components(candidate, raw, colors, parent, pooled_scores):
+    """Refit delivered coefficients on all CFA sites after validation is fixed."""
+    by_unit = {
+        unit: 0.25 + 0.75 * support_weight(score, 1) for unit, score in pooled_scores.items()
+    }
+    shape = (len(candidate.unit_keys), 3, *raw.shape)
+    uniform, focused = np.zeros(shape), np.zeros(shape)
+    for color in range(3):
+        measured = colors == color
+        sigma = np.sqrt(candidate.variance_cfa[measured])
+        design = candidate.design[measured.ravel()] / sigma[:, None]
+        residual = (raw[measured] - parent[color, measured]) / sigma
+        full = np.linalg.lstsq(design, residual, rcond=1e-10)[0]
+        for unit, weights in by_unit.items():
+            start, stop = candidate.unit_slices[unit]
+            basis = candidate.unit_fields[unit]
+            uniform[unit, color] = basis @ full[start:stop]
+            spatial = np.sqrt(weights[color, measured])
+            coef = np.linalg.lstsq(design * spatial[:, None], residual * spatial, rcond=1e-10)[0]
+            focused[unit, color] = basis @ coef[start:stop]
+    return uniform, focused
+
+
 def restore_local_waves(
     parent,
     packed,
@@ -738,6 +761,7 @@ def restore_local_waves(
     compare_phase_agreement=False,
     compare_oriented_support=False,
     compare_joint_colour_support=False,
+    compare_pooled_refit=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -784,6 +808,11 @@ def restore_local_waves(
         compare_joint_colour_support and not compare_pooled_support
     ):
         raise ValueError("Joint color support requires pooled support")
+    if type(compare_pooled_refit) is not bool or (
+        compare_pooled_refit
+        and (not shrink_phase_fit or not compare_pooled_support or conditional_delivery)
+    ):
+        raise ValueError("Refit requires shrunken phase profiles and pooled RAW-wave support")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
@@ -806,6 +835,8 @@ def restore_local_waves(
         from .joint_colour_evidence import joint_conditional_scores
 
         modes += ("joint", "joint-veto")
+    refit_modes = ("all-site-refit", "weighted-refit") if compare_pooled_refit else ()
+    modes += refit_modes
     outputs = {(mode, float(t)): parent.copy() for mode in modes for t in thresholds}
     if shot + read == 0:
         return outputs, {"patches": 0, "identity_zero_noise": True}
@@ -920,9 +951,26 @@ def restore_local_waves(
                 values = [s.components(tile, rgb) for s in spatial]
                 components = [value[0][0] if conditional_delivery else value[1] for value in values]
             units = _match_units(*candidates, matched, config.match_native_bins)
+            pooled_scores = (
+                [pooled_support_score(scores[0][0][a], scores[1][0][b]) for a, b, _ in units]
+                if compare_pooled_support
+                else [None] * len(units)
+            )
+            if compare_pooled_refit:
+                refitted = [
+                    _refit_phase_components(
+                        c,
+                        tile,
+                        layout,
+                        rgb,
+                        {pair[fold]: p for pair, p in zip(units, pooled_scores, strict=True)},
+                    )
+                    for fold, c in enumerate(candidates)
+                ]
+                paired_refits = tuple(zip(refitted[0], refitted[1], strict=True))
             local_max, global_max = [], []
             agreements = []
-            for a, b, _distance in units:
+            for (a, b, _distance), pooled in zip(units, pooled_scores, strict=True):
                 if shrink_phase_fit:
                     component = (
                         reliability[0][a, :, None, None] * components[0][a]
@@ -933,8 +981,18 @@ def restore_local_waves(
                 first, second = scores[0][0][a], scores[1][0][b]
                 local = np.minimum(first, second)
                 global_score = np.minimum(scores[0][1][a], scores[1][1][b])
-                if compare_pooled_support:
-                    pooled = pooled_support_score(first, second)
+                refit_components = (
+                    [
+                        (
+                            reliability[0][a, :, None, None] * left[a]
+                            + reliability[1][b, :, None, None] * right[b]
+                        )
+                        / 2
+                        for left, right in paired_refits
+                    ]
+                    if compare_pooled_refit
+                    else ()
+                )
                 if compare_joint_colour_support:
                     joint = pooled_support_score(joint_scores[0][a], joint_scores[1][b])
                     color_veto = local > 0
@@ -958,7 +1016,8 @@ def restore_local_waves(
                         component * support_weight(global_score, threshold)[:, None, None] * blend
                     )
                     if compare_pooled_support:
-                        pooled_delivery = component * support_weight(pooled, threshold) * blend
+                        weight = support_weight(pooled, threshold)
+                        pooled_delivery = component * weight * blend
                         totals["pooled-local", float(threshold)][:, y : y + n, x : x + n] += (
                             pooled_delivery
                         )
@@ -966,6 +1025,10 @@ def restore_local_waves(
                             totals["phase-agreement", float(threshold)][
                                 :, y : y + n, x : x + n
                             ] += pooled_delivery * agreement_weight
+                        for mode, fitted in zip(refit_modes, refit_components, strict=True):
+                            totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
+                                fitted * weight * blend
+                            )
                     for mode, score in oriented_pooled:
                         totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
                             component * support_weight(score, threshold) * blend
@@ -1021,6 +1084,11 @@ def restore_local_waves(
         **({"compare_phase_agreement": True} if compare_phase_agreement else {}),
         **({"compare_oriented_support": True} if compare_oriented_support else {}),
         **({"compare_joint_colour_support": True} if compare_joint_colour_support else {}),
+        **(
+            {"compare_pooled_refit": True, "refit_weight_floor": 0.25, "refit_weight_threshold": 1}
+            if compare_pooled_refit
+            else {}
+        ),
         "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }

@@ -64,6 +64,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Donor waveform fitting](donor-phase-support.md) reproduces the
   V120 sky. The coarse crossings remain visible with subtle
   modulation changes. The foliage and thin building detail stay soft.
+- [Post-validation RAW refits](phase-refit-delivery.md) reproduce the
+  V120 sky in linear RGB and show a subtle change in coarse-fence
+  contrast. Foliage and thin building detail stay soft.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO
