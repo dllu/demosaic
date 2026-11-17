@@ -67,6 +67,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Post-validation RAW refits](phase-refit-delivery.md) reproduce the
   V120 sky in linear RGB and show a subtle change in coarse-fence
   contrast. Foliage and thin building detail stay soft.
+- [Bounded guide recentering](phase-guide-recenter.md) preserves the
+  V120 sky pixels and changes modulation around the coarse crossings.
+  Foliage and thin building hardware stay soft.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

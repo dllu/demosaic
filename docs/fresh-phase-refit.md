@@ -43,8 +43,8 @@ sites with positive pooled support.
 
 All 16 donors recover both true frequencies within 0.091 of a
 native 256-pixel Fourier bin. The result tests delivery with an
-accurate guide. Recovery with uncertain or incorrect directions
-remains an open case.
+accurate guide. The [guide-error follow-up](phase-guide-recenter.md)
+tests offsets and recovery on these same observations.
 
 The common synthetic parent is V143 EMA, SHA256
 `96d146d017c54196288c585f8b7eddcf030e8a235061049c31e985b9380b7ce4`.

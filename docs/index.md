@@ -54,6 +54,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [donor-selected waveform harmonics](donor-phase-support.md) ·
 [refitting RAW after held-out validation](phase-refit-delivery.md) ·
 [fresh-geometry weighted refit test](fresh-phase-refit.md) ·
+[bounded guide-error and recentering test](phase-guide-recenter.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

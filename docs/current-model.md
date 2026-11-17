@@ -113,6 +113,12 @@ virtually the same quiet RMS. Both exceed the intended absolute quiet
 budget. The ISO6400 gain is limited and the camera comparison uses
 the same reviewed refits.
 
+The [bounded guide search](phase-guide-recenter.md) recovers 22.33%
+of the ISO400 far weak increment after a one-bin radial error,
+compared with 1.36% from the shifted guide alone. It lowers recovery
+with the nominal near-edge guides and offers little repair at
+ISO6400. The fine cab crossings remain unresolved.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

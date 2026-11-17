@@ -61,6 +61,10 @@ has repeatedly come with extra flat-region error or false color. The
    accurate guides and settings frozen on development. Absolute quiet
    error exceeds the development budget, and tight ISO6400 shows little
    or worse weak response. [Fresh-geometry refit test](fresh-phase-refit.md).
+   Bounded, fold-local frequency search repairs a one-bin radial error
+   at ISO400 far. Frequency choices can drift on accurate near-edge
+   guides, with higher delivered no-wire correction. ISO6400 radial
+   recovery is small. [Guide-error test](phase-guide-recenter.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

@@ -264,6 +264,47 @@ def _guide_frequencies(value, family_degrees):
     return tuple(tuple(float(v) for v in row) for row in frequencies)
 
 
+def _recenter_phase_guides(raw, green, nuisance, xx, yy, frequencies, bins, shot, read, family):
+    """Search a bounded frequency cross using only one fold's green measurements."""
+    x, y = xx.ravel()[green], yy.ravel()[green]
+    background = nuisance[green]
+    values = raw.ravel()[green]
+    fitted = background @ np.linalg.lstsq(background, values, rcond=1e-10)[0]
+    inverse_sigma = 1 / np.sqrt(read + shot * np.maximum(fitted, 1e-6))
+    spacing = 1 / min(raw.shape)
+    cosine = np.cos(np.deg2rad(family))
+    chosen = [np.asarray(f) for f in frequencies]
+    for index, origin in enumerate(chosen.copy()):
+        other = chosen[1 - index]
+        knot = _phase_bin_weights(x, y, other, bins)
+        design = np.column_stack((background, knot[:, :-1] - knot[:, -1:]))
+        u, s, _ = np.linalg.svd(design * inverse_sigma[:, None], full_matrices=False)
+        basis = u[:, s > 1e-10 * s[0]]
+        target = values * inverse_sigma
+        target -= basis @ (basis.T @ target)
+        radial = origin / np.linalg.norm(origin)
+        tangent = np.array([-radial[1], radial[0]])
+        candidates = [origin]
+        for direction in (radial, tangent):
+            candidates.extend(origin + step * spacing * direction for step in (-0.5, 0.5, -1, 1))
+        scores = np.full(len(candidates), -np.inf)
+        for i, candidate in enumerate(candidates):
+            norm = np.linalg.norm(candidate)
+            if not 1 / 64 <= norm <= 0.24:
+                continue
+            if abs(other @ candidate) > cosine * np.linalg.norm(other) * norm:
+                continue
+            columns = _wave_columns(x, y, candidate) * inverse_sigma[:, None]
+            columns -= basis @ (basis.T @ columns)
+            coefficient = np.linalg.lstsq(columns, target, rcond=1e-10)[0]
+            projection = columns @ coefficient
+            scores[i] = projection @ projection
+        best = int(np.argmax(scores))
+        if scores[best] > scores[0] + 4:
+            chosen[index] = candidates[best]
+    return tuple(tuple(float(v) for v in f) for f in chosen)
+
+
 def fit_local_candidate(
     raw,
     colors,
@@ -275,13 +316,18 @@ def fit_local_candidate(
     guide_frequencies_xy=None,
     phase_bins=0,
     phase_harmonics=None,
+    recenter_phase_guides=False,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
-    Optional guides fix frequencies and can constrain the phase basis.
-    Obtain those choices from measurements disjoint from the entire query.
+    Optional guides supply initial frequencies and can constrain the phase
+    basis. The bounded search, when enabled, reads only this fold's green sites.
     """
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
+    if type(recenter_phase_guides) is not bool or (
+        recenter_phase_guides and (not phase_bins or phase_harmonics is not None)
+    ):
+        raise ValueError("Guide recentering requires the full interpolated phase basis")
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -309,6 +355,19 @@ def fit_local_candidate(
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
     if guide_frequencies_xy is not None:
         frequencies = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
+        if recenter_phase_guides:
+            frequencies = _recenter_phase_guides(
+                raw,
+                green,
+                nuisance,
+                xx,
+                yy,
+                frequencies,
+                phase_bins,
+                shot,
+                read,
+                config.family_degrees,
+            )
         counts = tuple(_harmonic_count(f, config.harmonics) for f in frequencies)
     else:
         if config.background == "piecewise_affine":
@@ -762,6 +821,7 @@ def restore_local_waves(
     compare_oriented_support=False,
     compare_joint_colour_support=False,
     compare_pooled_refit=False,
+    recenter_phase_guides=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -791,13 +851,22 @@ def restore_local_waves(
     if type(conditional_delivery) is not bool:
         raise ValueError("Require an explicit boolean conditional-delivery choice")
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
+    if type(recenter_phase_guides) is not bool or (
+        recenter_phase_guides and (not phase_bins or phase_harmonics is not None)
+    ):
+        raise ValueError("Guide recentering requires the full interpolated phase basis")
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if type(compare_pooled_support) is not bool:
         raise ValueError("Require an explicit boolean pooled-support choice")
     if type(compare_phase_agreement) is not bool or (
         compare_phase_agreement
-        and (not phase_bins or phase_harmonics is not None or not compare_pooled_support)
+        and (
+            not phase_bins
+            or phase_harmonics is not None
+            or recenter_phase_guides
+            or not compare_pooled_support
+        )
     ):
         raise ValueError("Phase agreement requires fixed phase bins and pooled support")
     if type(compare_oriented_support) is not bool or (
@@ -820,6 +889,8 @@ def restore_local_waves(
         guide["phase_bins"] = phase_bins
     if phase_harmonics is not None:
         guide["phase_harmonics"] = phase_harmonics
+    if recenter_phase_guides:
+        guide["recenter_phase_guides"] = True
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:

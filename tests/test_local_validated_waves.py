@@ -48,6 +48,45 @@ def test_guided_query_refits_phase_from_only_its_discovery_samples():
     assert not np.allclose(original.coefficients[:, -4:], changed.coefficients[:, -4:])
 
 
+def test_phase_recenter_recovers_an_offset_without_the_other_fold():
+    raw, colors, _ = scene()
+    truth = np.asarray(((5 / 64, 3 / 64), (-4 / 64, 7 / 64)))
+    radial = truth / np.linalg.norm(truth, axis=1, keepdims=True)
+    shifted = truth + radial / 64
+    mask = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 0,
+        "read": 1e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": shifted,
+        "phase_bins": 8,
+        "recenter_phase_guides": True,
+    }
+    selected = local.fit_local_candidate(raw, colors, mask, **options)
+    corrupted = local.fit_local_candidate(np.where(mask, raw, np.nan), colors, mask, **options)
+    np.testing.assert_allclose(selected.frequencies_xy, truth, rtol=0, atol=1e-14)
+    np.testing.assert_array_equal(selected.frequencies_xy, corrupted.frequencies_xy)
+    np.testing.assert_array_equal(selected.full_cfa, corrupted.full_cfa)
+
+
+def test_phase_recenter_does_not_move_the_guide_on_a_flat():
+    raw, colors, _ = scene()
+    raw.fill(0.07)
+    original = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))
+    fit = local.fit_local_candidate(
+        raw,
+        colors,
+        stratified_split(raw.shape, 81),
+        shot=0,
+        read=1e-8,
+        config=CONFIG,
+        phase_bins=8,
+        guide_frequencies_xy=original,
+        recenter_phase_guides=True,
+    )
+    assert fit.frequencies_xy == original
+
+
 def test_all_knot_harmonics_span_the_existing_discovery_model():
     raw, colors, _ = scene()
     split = stratified_split(raw.shape, 81)

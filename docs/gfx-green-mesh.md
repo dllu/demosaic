@@ -23,6 +23,7 @@ preserves its original comparison pixels and provenance.
 | [Joint Bayer phase-profile evidence](joint-phase-profile-support.md) | Both joint gates, both ROIs and both profiles viewed with the two JPEGs. The strongest change is subtle diagonal modulation on the left at the transferred prior. Fine crossings remain unresolved |
 | [Donor-selected waveform harmonics](donor-phase-support.md) | Both reduced bases, both ROIs and both profiles viewed with the two JPEGs. The donor fit reduces the correction on the right under both profiles. Fine crossings remain unresolved |
 | [Post-validation RAW refits](phase-refit-delivery.md) | Both refits, both ROIs and both profiles viewed alongside both JPEGs. Weighting increases residual modulation on the left, with no convincing new fine crossings |
+| [Bounded guide recentering](phase-guide-recenter.md) | Both ROIs and both profiles viewed with the two JPEGs. Subtle changes to the existing diagonals, with fine crossings still unresolved |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |
