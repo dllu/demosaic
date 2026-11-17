@@ -40,6 +40,10 @@ neural calls. The separate [fine-band pilot](fine-frequency-proposals.md) is
 complete:1600/far analytic weak0.989%→2.037%, same quiet/slightly lower increment
 error, source1-driven. Real cab lattice is more visible with false purple/green
 grid; building/neural1600 errors rise. All44 figures were actually inspected.
+The [sinusoidal fine control](fine-sinusoidal-carriers.md) is complete with
+46 actual native figures/210 passing tests: NN1600/far increment−3.017%
+versus fine phase with less weak response; the cab grid persists and building
+bands increase. The separate full broad-only guided run continues unchanged.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

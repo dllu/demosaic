@@ -113,6 +113,10 @@ weak response0.989%→2.037% has unchanged quiet error and slightly lower
 increment error, driven by one source;400/far is unchanged. Building artifacts
 and neural1600 errors increase. This is an available experimental option;
 faithful fine-mesh colour and high-noise recovery remain unresolved.
+The [sinusoidal fine-carrier control](docs/fine-sinusoidal-carriers.md) lowers
+NN1600/far increment error3.017% versus fine phase, with less weak response.
+The cab colour grid persists and building bands increase; both options and
+their measured costs remain available.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -262,6 +266,10 @@ and source1 below: same native160 ROI/exposure2/contrast1, shot/read
 The [cab before/after](docs/images/neural-nuisance-fine-phase129-v1/cab-before-after/mesh-nominal-right-before-after.png)
 shows increased lattice visibility and false colour against an independent
 ISO100 reference and JPEG, neither exact GT.
+The sinusoidal NN-nuisance alternative retains native1600/far triplets for
+[source0](docs/images/neural-nuisance-fine-sinusoidal129-v1/triplets/iso1600-index0008-role2-triplet.png)
+and [source1](docs/images/neural-nuisance-fine-sinusoidal129-v1/triplets/iso1600-index0024-role2-triplet.png)
+under those identical ROI/noise/display conditions. [Lower error, response loss and real-scene costs](docs/fine-sinusoidal-carriers.md).
 
 ![Source1: noisy, broad plus fine analytic phase, exact constructed GT](docs/images/neural-nuisance-fine-phase129-v1/triplets/iso1600-index0024-role2-analytic-triplet.png)
 

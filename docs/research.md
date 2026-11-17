@@ -64,6 +64,15 @@ unchanged quiet error and slightly lower increment error, driven by source1;
 a useful proposal limitation and a remaining colour/reconstruction problem;
 frequency discovery alone does not establish faithful recovery. A bounded
 fine waveform and coloured exact-GT controls are the next useful comparison.
+The [sinusoidal fine-carrier control](fine-sinusoidal-carriers.md) now completes
+all48 cases/46 native figures. NN1600/far increment error falls3.017% versus
+fine phase, with weak1.849%→1.247%; analytic weak falls2.037%→1.500% with
+slightly higher increment error. The real purple/green grid persists and
+building bands worsen. Full-fit fine coefficients preserve known independent
+RGB amplitudes/phases where summing conditional differences loses a faint red
+coefficient. This implementation check does not establish real colour fidelity.
+Next useful evidence is end-to-end coloured fine-wire GT and per-colour
+background/evidence diagnostics at the now identified fine frequencies.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

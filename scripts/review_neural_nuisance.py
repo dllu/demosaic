@@ -186,7 +186,9 @@ def review(root, output):
                 for prefix, label, color in zip(
                     ("H1-", "conditional-", ""),
                     (
-                        ("Analytic raw wave", "Analytic broad+fine", "Neural broad+fine")
+                        ("Analytic raw wave", "Analytic fine H1", "Neural fine H1")
+                        if plan.get("fine_reconstruction") == "sinusoidal"
+                        else ("Analytic raw wave", "Analytic broad+fine", "Neural broad+fine")
                         if plan.get("add_fine_carriers")
                         else ("Analytic raw wave", "Analytic guided phase", "Neural guided phase")
                         if plan.get("phase_guide")

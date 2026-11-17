@@ -195,7 +195,10 @@ Two-thread correction takes725.28s versus384.33s broad-only. The extra proposal
 search/fit/operator work is not optimized and this is not a100MP speed claim.
 No learned weights changed. An appropriate next comparison is a frequency-
 limited fine-carrier reconstruction with the broad branch held fixed, plus
-coloured fine-wire exact-GT controls. High profile harmonics and CFA ambiguity
+coloured fine-wire exact-GT controls. The [sinusoidal fine control](fine-sinusoidal-carriers.md)
+now completes all48 cases/46 actual native figures: NN1600/far increment
+−3.017% versus fine phase with less response, analytic response/error worsens,
+cab colour grid persists and building bands increase. High profile harmonics and CFA ambiguity
 are possible explanations for the chroma grid; this trial does not isolate
 their cause, and shared green geometry does not justify forcing equal RGB
 amplitudes.

@@ -120,6 +120,16 @@ quiet error and slightly lowers increment error, driven by one source;
 400/far remains identical. Building artifacts/neural1600 errors increase.
 The useful proposal gain is implemented, with its limits; finding a frequency
 does not validate missing-colour samples or the full delivered profile.
+The [sinusoidal fine control](fine-sinusoidal-carriers.md) retains the same
+proposals/broad correction, using local full-fit sine/cosine coefficients
+with conditional support. All48 cases/46 native figures are reviewed:
+NN1600/far increment−3.017% versus fine phase with less weak response;
+analytic weak2.037%→1.500%, cab colour grid persists, building bands worsen.
+The practical H1 fine constraint alone does not repair the artifact. Tests
+also expose faint-colour loss from summing conditional differences and verify
+full-fit colour amplitudes/phases with known correct geometry on all4CFAs.
+Actual colour/background discrimination remains open; the test is not a
+real-scene recovery or calibrated inference claim.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

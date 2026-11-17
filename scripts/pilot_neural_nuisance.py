@@ -39,6 +39,7 @@ def prepare(
     phase_aggregation=False,
     phase_guide=False,
     add_fine_carriers=False,
+    fine_reconstruction="phase",
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
     from demosaic.phase_aggregation import PhaseAggregateConfig
@@ -48,6 +49,8 @@ def prepare(
     assert not add_fine_carriers or (
         phase_aggregation and fixed_analytic_frequencies and not full_panel
     )
+    assert fine_reconstruction in ("phase", "sinusoidal")
+    assert fine_reconstruction == "phase" or add_fine_carriers
     aggregation = (
         PhaseAggregateConfig(bins=32, window=129, query_stride=32).to_dict()
         if phase_aggregation
@@ -116,6 +119,7 @@ def prepare(
             or prior_plan.get("aggregation_config") != aggregation
             or prior_plan.get("phase_guide", False) != phase_guide
             or prior_plan.get("add_fine_carriers", False) != add_fine_carriers
+            or prior_plan.get("fine_reconstruction", "phase") != fine_reconstruction
         ):
             invalid_cache = prediction_cache
             prediction_cache = None
@@ -179,11 +183,19 @@ def prepare(
                 "Both analytic/neural phase arms use own-color A-only neural RGB guides, clipped0..1, exact physical shot/read square-root variance stabilization, fixed two-noise-unit bins and [1,2,1]/4 range smoothing. Four-dimensional phase/range/native query histogram, positive normalized weights. RGB amplitudes stay separate; RAW/parent share the identical fixed operator."
             )
     model["add_fine_carriers"] = add_fine_carriers
+    model["fine_reconstruction"] = fine_reconstruction
     if add_fine_carriers:
         model["fine_proposal_source"] = reference(work / "src/demosaic/fine_carrier_proposals.py")
         model["fine_proposal_policy"] = (
             "Retain broad pair and correction. Add two native1/16..0.24 directions after broad-design projection. Exclude already-fine coarse angular families and integer harmonics with h-scaled1.5-native-bin radii. Fixed20-degree fine-family separation, original sub-bin refinement/matching and physical weights. Fine nuisance includes broad carriers; identical fixed A-only RAW/parent map, separate conditional support. No distinct pair in either fold falls back to broad-only. No ROI/reference-derived frequency."
         )
+        if fine_reconstruction == "sinusoidal":
+            model["fine_reconstruction_source"] = reference(
+                work / "src/demosaic/spatial_carrier_amplitudes.py"
+            )
+            model["fine_delivery"] = (
+                "Keep broad guided phase exactly. Fine pair uses native129/stride32 per-color local H1 WLS full-fit carrier coefficients for delivery and full/null predictions for conditional support, with fixed global joint-fit nuisance including broad carriers. Separate RGB coefficients; same A-only variance and A/B geometry matching. Identical fixed full-fit RAW/parent carrier map. Fine branch has no phase/range/edge-side pooling. Not a strict spectral cutoff or isolated harmonic-only ablation."
+            )
     write_json(root / "analytic-model.json", model)
     positive = sum(r["noise"]["shot"] + r["noise"]["read"] > 0 for r in previous["rows"])
     inputs = [reference(source / "plan.json"), reference(root / "analytic-model.json"), checkpoint]
@@ -201,6 +213,7 @@ def prepare(
         "aggregation_config": aggregation,
         "phase_guide": phase_guide,
         "add_fine_carriers": add_fine_carriers,
+        "fine_reconstruction": fine_reconstruction,
         "small_context_geometry_policy": "Use native minimum axis when smaller than declared window, half-window stride; only native256 materials use this input-dimension-only fallback.",
         "background_configuration": background_config,
         "background_cache": cache,
@@ -280,6 +293,8 @@ def prepare(
         plan["scope"] += (
             " Add a separate two-direction native1/16..0.24 fine-band search after the unchanged broad design. Broad phase retained; per-fold exclusions remove already-fine coarse angular profiles and h-scaled1.5-bin integer-harmonic neighborhoods to limit duplicate profiles. Fine geometry has separate A/B matching and per-color support; fine full/null/parent maps retain broad carriers as global nuisance. No available pair in either fold keeps broad only. Raw-H1 controls unchanged. More candidates are not calibrated confidence. All48 cases close before quality analysis."
         )
+        if fine_reconstruction == "sinusoidal":
+            plan["scope"] += " " + model["fine_delivery"]
     write_json(root / "plan.json", plan)
     verify_plan(plan)
     return root / "plan.json"
@@ -522,6 +537,9 @@ def predict(root):
         assert prior_plan.get("aggregation_config") == plan.get("aggregation_config")
         assert prior_plan.get("phase_guide", False) == plan.get("phase_guide", False)
         assert prior_plan.get("add_fine_carriers", False) == plan.get("add_fine_carriers", False)
+        assert prior_plan.get("fine_reconstruction", "phase") == plan.get(
+            "fine_reconstruction", "phase"
+        )
         assert prior_plan["background_configuration"] == plan["background_configuration"]
         for name in ("neural_nuisance.py", "local_validated_waves.py"):
             assert (
@@ -615,6 +633,7 @@ def predict(root):
                 else None,
                 phase_guide=plan.get("phase_guide", False),
                 add_fine_carriers=plan.get("add_fine_carriers", False),
+                fine_reconstruction=plan.get("fine_reconstruction", "phase"),
             )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
@@ -728,6 +747,7 @@ if __name__ == "__main__":
     parser.add_argument("--phase-aggregation", action="store_true")
     parser.add_argument("--phase-guide", action="store_true")
     parser.add_argument("--add-fine-carriers", action="store_true")
+    parser.add_argument("--fine-reconstruction", choices=("phase", "sinusoidal"), default="phase")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -747,6 +767,7 @@ if __name__ == "__main__":
                 phase_aggregation=args.phase_aggregation,
                 phase_guide=args.phase_guide,
                 add_fine_carriers=args.add_fine_carriers,
+                fine_reconstruction=args.fine_reconstruction,
             )
         )
     elif args.mode == "score":

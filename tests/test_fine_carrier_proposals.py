@@ -11,6 +11,7 @@ from demosaic.fine_carrier_proposals import admissible_fine, fit_fine_candidate
 from demosaic.local_validated_waves import LocalWaveConfig, _wave_columns, match_directions
 from demosaic.neural_nuisance import WithheldBackground, restore_neural_nuisance
 from demosaic.phase_aggregation import PhaseAggregateConfig
+from demosaic.spatial_carrier_amplitudes import SpatialCarrierOperator
 
 LAYOUTS = ([0, 1, 1, 2], [2, 1, 1, 0], [1, 0, 2, 1], [1, 2, 0, 1])
 TRUE_FINE = ((30 / 256, 19 / 256), (-23 / 256, 19 / 256))
@@ -150,7 +151,8 @@ def test_no_distinct_fine_pair_falls_back_to_broad_and_keeps_exact_parent_identi
         np.testing.assert_array_equal(value, rgb)
 
 
-def test_distinct_fine_pair_adds_actual_analytic_detail_without_changing_H1():
+@pytest.mark.parametrize("fine_reconstruction", ["phase", "sinusoidal"])
+def test_distinct_fine_pair_adds_actual_analytic_detail_without_changing_H1(fine_reconstruction):
     _, _, raw, rgb = fixture(LAYOUTS[0])
     packed = np.stack([raw[y::2, x::2] for y in range(2) for x in range(2)])
     mask = stratified_split(raw.shape, 71)
@@ -174,9 +176,17 @@ def test_distinct_fine_pair_adds_actual_analytic_detail_without_changing_H1():
         "phase_guide": True,
     }
     parent = rgb * 0.4
-    control, _ = restore_neural_nuisance(parent, packed, np.array(LAYOUTS[0]), fields, **kwargs)
+    control, control_aux = restore_neural_nuisance(
+        parent, packed, np.array(LAYOUTS[0]), fields, **kwargs
+    )
     added, aux = restore_neural_nuisance(
-        parent, packed, np.array(LAYOUTS[0]), fields, add_fine_carriers=True, **kwargs
+        parent,
+        packed,
+        np.array(LAYOUTS[0]),
+        fields,
+        add_fine_carriers=True,
+        fine_reconstruction=fine_reconstruction,
+        **kwargs,
     )
     assert all("fine-H1-" in r["arms"] for r in aux["records"])
     for key, value in control.items():
@@ -184,4 +194,67 @@ def test_distinct_fine_pair_adds_actual_analytic_detail_without_changing_H1():
             np.testing.assert_array_equal(added[key], value)
     assert (
         np.max(np.abs(added["conditional-local", 0.0] - control["conditional-local", 0.0])) > 1e-4
+    )
+    if fine_reconstruction == "sinusoidal":
+        for record in aux["records"]:
+            assert record["arms"]["fine-H1-"]["amplitude_nuisance"] == "global"
+            assert record["arms"]["fine-H1-"]["amplitude_window"] == 33
+            assert "H1_diagnostics_scope" not in record["arms"]["fine-H1-"]
+            assert record["arms"]["fine-H1-"]["carrier_delivery"].startswith("Sinusoidal full-fit")
+    for a, b in zip(aux["records"], control_aux["records"], strict=True):
+        for name in ["H1-", "neural"]:
+            assert a["arms"][name] == b["arms"][name]
+
+
+@pytest.mark.parametrize("layout", LAYOUTS)
+def test_fine_sinusoidal_operator_preserves_independent_colour_amplitudes_and_A_only_map(layout):
+    reference, colors, _, _ = fixture(layout)
+    yy, xx = np.indices(colors.shape)
+    waves = np.column_stack([_wave_columns(xx, yy, f) for f in TRUE_FINE])
+    design = np.column_stack([reference.design, waves])
+    operators = []
+    for selected in reference.selected_indices:
+        operators.append(np.linalg.pinv(design[selected], rcond=1e-10))
+    candidate = SimpleNamespace(
+        design=design,
+        discovery_mask=reference.discovery_mask,
+        variance_cfa=reference.variance_cfa,
+        operators=operators,
+        wave_slices=((8, 10), (10, 12)),
+        unit_slices=((8, 10), (10, 12)),
+        unit_keys=((0, 0), (1, 0)),
+    )
+    # Deliberately different RGB amplitudes and phases in the two directions.
+    # Geometry is fixed here: discovery accuracy is tested separately above.
+    amplitude = np.array(
+        [
+            [0.003, 0.0004, 0.0002, -0.0001],
+            [0.0018, -0.0003, 0.0016, 0.0002],
+            [0.0003, 0.0001, 0.0028, -0.0005],
+        ]
+    )
+    truth = (amplitude @ waves.T).reshape(3, *colors.shape)
+    rng = np.random.default_rng(122)
+    broad = (rng.normal(0, 0.01, (3, 8)) @ reference.design.T).reshape(truth.shape)
+    raw = (broad + truth)[colors, yy, xx]
+    operator = SpatialCarrierOperator(
+        candidate, colors, window=129, stride=32, nuisance_mode="global"
+    )
+    recovered = operator.components(raw, broad)[1].sum(axis=0)
+    assert np.mean((recovered - truth) ** 2) < 1e-16 * np.mean(truth**2)
+    # Recover each colour's actual signed sine/cosine coefficients, rather than
+    # approving a neutralized image that merely shows more green geometry.
+    for color in range(3):
+        fitted = np.linalg.lstsq(waves, recovered[color].ravel(), rcond=1e-10)[0]
+        np.testing.assert_allclose(fitted, amplitude[color], atol=1e-10)
+    damaged = raw.copy()
+    damaged[~candidate.discovery_mask] = np.nan
+    a, b = operator.predict(raw), operator.predict(damaged)
+    np.testing.assert_array_equal(a.full_cfa, b.full_cfa)
+    np.testing.assert_array_equal(a.conditional_null_cfa, b.conditional_null_cfa)
+    actual = operator.components(damaged, broad)[1]
+    np.testing.assert_array_equal(actual, operator.components(raw, broad)[1])
+    np.testing.assert_allclose(operator.components(raw, broad + truth)[1], 0, atol=1e-12)
+    np.testing.assert_allclose(
+        operator.components(broad[colors, yy, xx], np.zeros_like(broad))[1], 0, atol=1e-12
     )

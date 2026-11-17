@@ -67,3 +67,5 @@ Latest model trial: [complementary CFA branch over frozen V200 EMA](2026-11-16-0
 Latest trial status: [complementary training completed and evaluator repaired](2026-11-16-04-38-49-complementary-cfa-branch.md); all 900 updates audited, corrected raw/EMA quality review running without retraining.
 
 Latest fine-detail follow-up: [additional fine-frequency proposals](2026-11-16-20-39-10-fine-frequency-proposals.md), complete48-case/44-figure review. Analytic1600/far weak0.989%→2.037% with unchanged quiet error/slightly lower increment error; source1 drives gain. Cab lattice more visible with purple/green grid, building/neural1600 errors rise. Separate broad-only full guided study remains running with its exact publication queue.
+
+Latest reconstruction control: [sinusoidal fine carriers](2026-11-16-21-21-39-sinusoidal-fine-carriers.md), complete48-case/46-figure review. NN1600/far increment−3.017% versus fine phase with less weak response; known independent RGB coefficients recovered on all4CFAs. Real cab grid persists/building bands increase; V120 and earlier useful alternatives retained.210 tests pass; separate full guided run continues.

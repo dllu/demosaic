@@ -270,6 +270,7 @@ def restore_neural_nuisance(
     aggregation_config=None,
     phase_guide=False,
     add_fine_carriers=False,
+    fine_reconstruction="phase",
 ):
     """Matched analytic/neural nuisances; optional fixed-background phase delivery."""
     if type(phase_guide) is not bool or (phase_guide and aggregation_config is None):
@@ -280,11 +281,17 @@ def restore_neural_nuisance(
         raise ValueError(
             "Additional fine carriers require phase reconstruction and fixed proposals"
         )
+    if fine_reconstruction not in ("phase", "sinusoidal") or (
+        fine_reconstruction != "phase" and not add_fine_carriers
+    ):
+        raise ValueError("Require an enabled fine pair for sinusoidal fine reconstruction")
     if aggregation_config is not None:
         from .phase_aggregation import PhaseAggregateConfig
 
         if not isinstance(aggregation_config, PhaseAggregateConfig) or config.amplitude_window:
             raise ValueError("Phase aggregation replaces the amplitude model; require no local WLS")
+        if fine_reconstruction == "sinusoidal" and aggregation_config.window < 17:
+            raise ValueError("Sinusoidal fine amplitudes require a window of at least17 pixels")
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
     if (
         parent.ndim != 3
@@ -399,6 +406,9 @@ def restore_neural_nuisance(
                     )
             tile_records = {}
             for record_key, prefix, candidates, legacy_control in candidate_groups:
+                fine_sinusoidal = (
+                    record_key.startswith("fine-") and fine_reconstruction == "sinusoidal"
+                )
                 local_backgrounds = (
                     [
                         WithheldBackground(b.rgb[:, region[0], region[1]], mask)
@@ -408,17 +418,22 @@ def restore_neural_nuisance(
                     else [None, None]
                 )
                 spatial = None
-                if config.amplitude_window:
+                nuisance_mode = "global" if fine_sinusoidal else config.amplitude_nuisance
+                if config.amplitude_window or fine_sinusoidal:
                     from .spatial_carrier_amplitudes import SpatialCarrierOperator
 
                     spatial = [
                         SpatialCarrierOperator(
                             c,
                             layout,
-                            window=config.amplitude_window,
-                            stride=config.amplitude_stride,
+                            window=aggregation_config.window
+                            if fine_sinusoidal
+                            else config.amplitude_window,
+                            stride=aggregation_config.query_stride
+                            if fine_sinusoidal
+                            else config.amplitude_stride,
                             background=b,
-                            nuisance_mode=config.amplitude_nuisance,
+                            nuisance_mode=nuisance_mode,
                         )
                         for c, b in zip(candidates, local_backgrounds, strict=True)
                     ]
@@ -437,7 +452,7 @@ def restore_neural_nuisance(
                 scores = reference_scores
                 phase = None
                 phase_predictors = None
-                if aggregation_config is not None:
+                if aggregation_config is not None and not fine_sinusoidal:
                     from .background_phase_aggregation import BackgroundPhaseOperator
 
                     phase = [
@@ -502,7 +517,11 @@ def restore_neural_nuisance(
                     unique = [value[0] for value in local_components]
                     legacy = [value[1] for value in local_components] if legacy_control else None
                 if unique is not None:
-                    components = [u[0] for u in unique]
+                    components = (
+                        [value[1] for value in local_components]
+                        if fine_sinusoidal
+                        else [u[0] for u in unique]
+                    )
                 maxima = []
                 for a, b, _distance in matched:
                     component = (components[0][a] + components[1][b]) / 2
@@ -588,7 +607,12 @@ def restore_neural_nuisance(
                     tile_records[record_key]["wave_diagnostic_scope"] = (
                         "Energy-weighted local-query averages; normalized Gram inverse cutoff1e-8. Geometry/global variance unchanged."
                     )
-                    tile_records[record_key]["amplitude_nuisance"] = config.amplitude_nuisance
+                    tile_records[record_key]["amplitude_nuisance"] = nuisance_mode
+                    tile_records[record_key]["amplitude_window"] = spatial[0].window
+                    if fine_sinusoidal:
+                        tile_records[record_key]["carrier_delivery"] = (
+                            "Sinusoidal full-fit coefficients; full/null used for validation."
+                        )
                 if not prefix:
                     column = candidates[0].wave_slices[0][0] - 1
                     tile_records[record_key]["neural_nuisance_coefficients_by_color"] = [
@@ -597,7 +621,7 @@ def restore_neural_nuisance(
                     if spatial is not None:
                         tile_records[record_key]["neural_coefficient_scope"] = (
                             "Global background coefficients used in prediction; only residual carrier amplitudes vary locally."
-                            if config.amplitude_nuisance == "global"
+                            if nuisance_mode == "global"
                             else "Global discovery coefficients only; actual prediction/delivery use local-query coefficients."
                         )
                     if phase is not None:
@@ -628,6 +652,7 @@ def restore_neural_nuisance(
         "aggregation_config": aggregation_config.to_dict() if aggregation_config else None,
         "phase_guide": phase_guide,
         "add_fine_carriers": add_fine_carriers,
+        "fine_reconstruction": fine_reconstruction,
         "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent."
         + (
             " Conditional/neural delivery uses local signed phase averages after a fixed global joint-fit background and per-direction global competing H1 fit. Identical composite linear map projects RAW and parent. H1 control retains its own original H1 validation scores."
@@ -642,6 +667,11 @@ def restore_neural_nuisance(
         + (
             " Additional1/16..0.24-native fine pair discovered after projecting the original broad design, with coarse-profile/harmonic duplicate exclusions. Broad corrections retained; fine full/null and parent maps include broad carriers in global nuisance. Fine directions have separate A/B matching/validation; raw-H1 controls unchanged. More candidates do not confer calibrated confidence."
             if add_fine_carriers
+            else ""
+        )
+        + (
+            " Fine delivery instead uses native local sinusoidal full-fit coefficients, with full/null prediction for validation, the same query window/stride and frozen global broad/background nuisance. Separate RGB coefficients; identical full-fit RAW/parent carrier map, no phase/range/edge-side fine pooling. Broad guided phase and H1 controls unchanged. This changes the fine waveform, fit, delivery and support model, not an isolated harmonic-only ablation or strict spectral cutoff."
+            if fine_reconstruction == "sinusoidal"
             else ""
         ),
     }
