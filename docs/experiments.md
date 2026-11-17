@@ -10,7 +10,7 @@ individual reports retain exact measurements, native comparisons and receipts.
 | --- | --- | --- |
 | [Whole-scene context](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study, both camera panels and33 final native boards complete, including both GFX families. Spatial unseen +0.01739 dB vs local-only, still−0.05477 vs V120; no convincing new fine crossings | Full427 photos running on CPU with exact canonical inputs/matched CPU V120. Camera costs and quiet gains are documented; V120/V131 remain last complete three-panel evaluations |
 | [A-only parent-innovation validation](parent-innovation-validation.md) | Both 48-case numerical reviews complete with zero new neural calls | Native viewing and the quality decision are still pending in the published report |
-| [Full-corpus scaling](full-corpus-scaling.md) |First1000 of100k updates complete:5045 photo IDs/5294 visits.90778-photo epochs,5% reviewed quota, native/paired retained.20k control resumes complete6k after [checkpoint-write repair](full-corpus-checkpoint-recovery.md), then remaining99k; source order/Adam/RNG/horizons preserved |20/50/100k learning curves, full427/known-unseen camera panels and both fence reviews. These scores remain missing;32-photo monitoring is not a substitute |
+| [Full-corpus scaling](full-corpus-scaling.md) | [Control10k review](full-corpus-control10k-review.md):53506 photo IDs/56363 visits, faint ADC−0.61431 dB, selected flat bias improves but spatial RMS worsens;32 native boards/both GFX families viewed. Control resumes complete13k after [CPU checkpoint repair](full-corpus-checkpoint-cpu-recovery.md), then long100k from1k | Completed20k/100k horizons,20/50/100k learning curves and full427/known-unseen camera panels. Midpoint/32-photo monitoring cannot substitute for broad scores |
 | [Production speed](weak-detail-global-context-production-review-2026-11-16.md) | Runtime bottlenecks and proposed optimization sequence | Repeatable end-to-end baseline, then measured quality-preserving speedups; 100MP in 10 seconds remains unmet |
 
 ## Completed comparisons that guide the next work
@@ -26,9 +26,10 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Can extra fine frequencies restore the green fence faithfully? | Fine proposals make both directions more visible. Joint color support reduces tint; fresh signed-color wires still have no useful weak-response gain | [Fine proposal pilot](fine-frequency-proposals.md), [joint color](joint-fine-colour-support.md), [colored-wire validation](coloured-fine-wire-benchmark.md) |
 
 V131 also changes the training cohort, so its gain is not an isolated test of
-training duration. The new100k run has begun; its quality result remains
+training duration. The new100k run has begun; its endpoint quality remains
 unmeasured. Its checkpoints use a100k schedule, distinct from the annealed20k
-control. [Budget, source/crop/noise coverage and runtime evidence](full-corpus-scaling.md).
+control whose10k review now records a weak-detail regression.
+[Budget, source/crop/noise coverage and runtime evidence](full-corpus-scaling.md).
 
 The synthetic panels differ in parents, sources, noise and metrics. Response
 percentages from different rows are not a leaderboard. Both protected GFX scenes

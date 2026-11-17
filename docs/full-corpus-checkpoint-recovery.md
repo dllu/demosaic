@@ -1,5 +1,10 @@
 # Full-corpus training: checkpoint-write recovery
 
+**Historical first repair.** Subsequent saves succeeded through13k, then the
+first `last.tmp` write stalled at14k. The [CPU-snapshot follow-up](full-corpus-checkpoint-cpu-recovery.md)
+records the stronger fix, retained13k state and explicit replay of the lost1k
+segment. Original receipts and observation cutoffs below remain unchanged.
+
 The20k control stopped advancing after its completed step6,000 checkpoint.
 The worker remained alive and consumed CPU for over an hour while its open
 `best.tmp` stayed at131,685,248 bytes. Training/source logs and the complete

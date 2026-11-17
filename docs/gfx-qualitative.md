@@ -20,6 +20,10 @@ historical boards. Use these reports for the current completed comparisons:
 - [Full guided phase review](neural-guided-phase-full-panel.md) and
   [joint-color fine support](joint-fine-colour-support.md): available detail
   experiments with response/tint gains and persistent flat/color costs.
+- [Full-corpus control10k midpoint](full-corpus-control10k-review.md): all four
+  main regions and both cab profiles/ROIs/JPEGs actually viewed against matched
+  V120. Sky smooth, building/foliage soft, coarse fence similar; no convincing
+  new fine crossings. This midpoint does not fill the broad camera panels.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

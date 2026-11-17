@@ -9,8 +9,10 @@ find a partial unseen-camera repair over local-only, still below V120.
 Full427 photo evaluation is running.
 A [100k full-corpus V120 continuation](full-corpus-scaling.md)
 has completed its first1,000 updates and awaits its scheduled continuation after
-the now-completed context probes and running20k control. Scaling endpoint scores
-and fence reviews remain pending; the separate2k scene arms have both fence reviews.
+the running20k control. The [control10k midpoint](full-corpus-control10k-review.md)
+has53,506 source IDs visited, but faint fidelity−0.61431 dB and no convincing new
+fence crossings. Both fence families were viewed; scaling endpoint broad scores
+remain pending.
 [Research status](experiments.md).
 
 ## Full-model choices
@@ -22,6 +24,7 @@ and fence reviews remain pending; the separate2k scene arms have both fence revi
 | [V131 ADC Malvar](v131-adc-projection.md) | Same learned weights; ADC-only photo +0.15074 dB over V131 and worst ADC color error reduced to 19.98 DN16 | Opt-in repair for zero shot/read conditioning. Weakest ADC band error +1.43%; positive-noise V131 output and camera costs remain unchanged |
 | [V132 RAW attention](v132-endpoint-quality.md) | Completed 20k ablation with every training input hash matched to V131 | Faint ADC −0.40978 dB versus V131, ordinary material quality essentially tied; no broad-panel or full-frame validation. Retained for reproduction |
 | [Scene-context2k arms](whole-scene-context-camera-review.md) | Scene/tile API;64-source quiet-coarse gains. Spatial unseen-camera +0.01739 dB versus matched local-only; pooled provides almost the same repair | Unseen remains−0.05477 dB versus V120; known nearly ties local-only. No established weak-detail gain or faithful new fence crossings; original local encoder retained. Full427 photos running |
+| [Corpus control10k midpoint](full-corpus-control10k-review.md) | Broader actual source coverage; selected ADC flat mean bias15.08→7.87 DN16 | Faint ADC−0.61431 dB; selected flat centered RMS4.64→8.69 DN16; no convincing new crossings. Midpoint only,20k/100k and broad panels pending |
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes

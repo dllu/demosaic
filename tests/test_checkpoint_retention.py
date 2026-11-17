@@ -2,7 +2,28 @@
 
 import torch
 
-from demosaic.train import retain_checkpoint
+from demosaic.train import checkpoint_cpu_snapshot, retain_checkpoint
+
+
+def test_snapshot_owns_nested_tensor_storage_without_changing_rng():
+    original = torch.arange(12.0).reshape(3, 4).t().requires_grad_()
+    rng = torch.get_rng_state().clone()
+    state = {
+        "model": {"weight": original},
+        "optimizer": [{"step": torch.tensor(6.0)}],
+        "rng": (rng, 70, None),
+    }
+    snapshot = checkpoint_cpu_snapshot(state)
+    assert isinstance(snapshot["optimizer"], list) and isinstance(snapshot["rng"], tuple)
+    assert snapshot["model"]["weight"].device.type == "cpu"
+    assert not snapshot["model"]["weight"].requires_grad
+    torch.testing.assert_close(snapshot["model"]["weight"], original, rtol=0, atol=0)
+    with torch.no_grad():
+        original.add_(100)
+        state["optimizer"][0]["step"].add_(1)
+    assert snapshot["model"]["weight"][0, 0] == 0
+    assert snapshot["optimizer"][0]["step"] == 6
+    torch.testing.assert_close(torch.get_rng_state(), rng, rtol=0, atol=0)
 
 
 def test_retained_state_includes_optimizer_rng_and_survives_next_save(tmp_path):

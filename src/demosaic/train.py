@@ -502,7 +502,31 @@ def retain_checkpoint(source, path):
     temporary.replace(path)
 
 
+def checkpoint_cpu_snapshot(value):
+    """Own every tensor on CPU before handing the state to serialization.
+
+    The training loop is paused while this runs. Blocking copies keep CUDA
+    transfers out of torch.save, and copying CPU tensors prevents subsequent
+    optimizer/RNG changes from changing the captured state.
+    """
+    if isinstance(value, torch.Tensor):
+        return value.detach().to(device="cpu", copy=True)
+    if isinstance(value, dict):
+        return {key: checkpoint_cpu_snapshot(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [checkpoint_cpu_snapshot(item) for item in value]
+    if isinstance(value, tuple):
+        return tuple(checkpoint_cpu_snapshot(item) for item in value)
+    return value
+
+
 def save_checkpoint(path, model, optimizer, ema, step, config, best):
+    path = writable_path(path)
+    temporary = path.with_suffix(".tmp")
+    if temporary.exists():
+        raise FileExistsError(temporary)
+    began = time.monotonic()
+    print(json.dumps({"event": "checkpoint", "step": step, "phase": "snapshot-start"}), flush=True)
     state = {
         "format_version": 1,
         "model": model.restoration_state_dict(),
@@ -521,10 +545,29 @@ def save_checkpoint(path, model, optimizer, ema, step, config, best):
     if groups > 1:
         state["data_step"] = step * groups
         state["example_draws"] = step * groups * config.get("batch_size", 4)
-    path = writable_path(path)
-    temporary = path.with_suffix(".tmp")
-    torch.save(state, temporary)
+    for key, value in state.items():
+        state[key] = checkpoint_cpu_snapshot(value)
+        if key in {"model", "ema", "optimizer", "cuda_rng"}:
+            print(
+                json.dumps(
+                    {"event": "checkpoint", "step": step, "phase": "cpu-snapshot", "group": key}
+                ),
+                flush=True,
+            )
+    with temporary.open("xb") as stream:
+        torch.save(state, stream)
     temporary.replace(path)
+    print(
+        json.dumps(
+            {
+                "event": "checkpoint",
+                "step": step,
+                "phase": "complete",
+                "seconds": time.monotonic() - began,
+            }
+        ),
+        flush=True,
+    )
 
 
 def train(config_path, *, resume=None, initialize=None, stop_after=None):
@@ -1433,6 +1476,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
             if improved:
                 retain_checkpoint(run / "last.pt", run / "best.pt")
         if stop_after and step - first >= stop_after:
-            save_checkpoint(run / "last.pt", model, optimizer, ema, step, config, best)
+            if step % checkpoint_interval and step != steps:
+                save_checkpoint(run / "last.pt", model, optimizer, ema, step, config, best)
             break
     return run / "last.pt"

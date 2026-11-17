@@ -2,13 +2,15 @@
 
 **Larger-corpus training has begun: the100,000-update trajectory has saved its
 first1,000 updates.** All three whole-scene comparison arms have completed;
-the matched20k control is continuing from its complete6k state, before the
-remaining99k updates. A [diagnosed duplicate-checkpoint write stall was repaired](full-corpus-checkpoint-recovery.md)
-without replaying updates or resetting its schedule.
+the matched20k control is continuing from its complete13k state, before the
+remaining99k updates. A [second checkpoint stall prompted CPU snapshots](full-corpus-checkpoint-cpu-recovery.md);
+only the unserialized13k→14k segment is replayed, with original state/draws/horizons.
 Their [first matched native review](whole-scene-context-native-review.md) finds
 no convincing new fine crossings; the [completed64-source study](whole-scene-context-development64.md)
-adds small quiet-coarse gains and mixed detail/color costs. No larger-corpus endpoint gain is claimed.
-V120 remains the general recommendation while milestone evaluation is pending.
+adds small quiet-coarse gains and mixed detail/color costs. The [10k scaling
+review](full-corpus-control10k-review.md) confirms53,506 photo IDs visited but
+faint ADC fidelity−0.61431 dB, with no convincing new fence crossings.
+No completed larger-corpus endpoint gain is claimed; V120 remains recommended.
 This implements the [training-scale review](training-scale-pipeline-review-2026-11-17.md)
 and complements the [scene-context experiment](whole-scene-context-next-test.md).
 
@@ -116,7 +118,19 @@ The long arm still resumes its original1k state afterward. Old worker/controller
 identities describe their historical allocation; the recovery has new bound
 ownership. Neither training horizon is complete and no quality gain is inferred.
 The first actual post-repair7k checkpoint has since passed complete raw/EMA/
-Adam/RNG validation and atomic last/best retention; training continues advancing.
+Adam/RNG validation and atomic last/best retention. A later first-last write
+stalled at14k, after complete13k. [CPU checkpoint recovery](full-corpus-checkpoint-cpu-recovery.md)
+preserves that evidence and resumes the remaining7k without changing learning
+math; the lost1k segment is recomputed with identical source/conditioning.
+Its first actual14k production checkpoint has now saved and passed complete
+raw/EMA/Adam/RNG validation; optimizer logs advance beyond14,125.
+
+The retained [10k EMA review](full-corpus-control10k-review.md) is numerically
+complete and all32 boards have actually been viewed, including both GFX families.
+Its53,506 distinct photo IDs/56,363 visits exceed the old20k continuation's
+42,086 IDs, but faint fidelity regresses on all four materials. The selected
+flat-color mean bias improves while centered spatial RMS worsens. This midpoint
+does not isolate coverage from reviewed quota/execution or fill broad panels.
 
 Training completion, numerical evaluation and actual native viewing are tracked
 separately. No new full427 or known/unseen-camera result is available, and the

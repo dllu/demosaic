@@ -26,7 +26,11 @@ has repeatedly come with extra flat-region error or false color. The
    The [100k full-corpus continuation](full-corpus-scaling.md) has saved its first
    1000 updates, with shuffled epochs,5% reviewed quota and a fresh20k control.
    All3 context probes are complete; the20k control is running before the99k
-   remainder. Quality is pending.
+   remainder. The [control10k midpoint](full-corpus-control10k-review.md) has
+   visited53,506 photo IDs but loses0.61431 dB on faint ADC detail. Missing-color
+   error remains higher after exact measured-CFA projection. Coverage, reviewed
+   density and execution co-vary; a future matched test should separate them.
+   Completed-horizon quality remains pending.
    [Coverage and pipeline rationale](training-scale-pipeline-review-2026-11-17.md).
 3. **Evaluate the delivered correction.** Better background prediction or a
    stronger synthetic mesh response does not guarantee lower final-image error.
@@ -49,7 +53,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
 | [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study and both camera panels complete/native-viewed. Small quiet gains/partial unseen repair versus local-only; unseen remains below V120 and fine crossings missing. Full427 photos collecting |
-| [Full-corpus scaling](full-corpus-scaling.md) | Executing100k/20k matched-data continuations, source/crop/noise coverage and actual execution profile; no endpoint quality claim yet |
+| [Full-corpus scaling](full-corpus-scaling.md), [10k review](full-corpus-control10k-review.md) | Executing100k/20k continuations; actual coverage grows, but faint midpoint fidelity regresses and fixed ADC consistency does not repair missing colors. Both fence families reviewed; endpoint/broad quality pending |
 
 These are research proposals and bounded experiment conclusions. They do not
 establish broad state-of-the-art quality. Dates describe the source review;

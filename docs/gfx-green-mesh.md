@@ -9,6 +9,7 @@ preserves its original comparison pixels and provenance.
 | [V120 baseline](#v120-after-correcting-the-paired-data-mix) | Soft/irregular lattice, strongly affected by noise conditioning |
 | [V131 endpoint](v131-endpoint-quality.md), [V132 endpoint](v132-endpoint-quality.md) | Both 20k reviews complete; no clear new fine crossings |
 | [Matched2k whole-scene arms](whole-scene-context-native-review.md), [64-source follow-up](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | Same endpoints/unchanged GFX pixels; both native ROIs/profiles/JPEGs viewed. Nominal erases mesh, nearby profile soft/incomplete; no convincing new crossings. Separate camera scores now complete, photos pending |
+| [Corpus control10k midpoint](full-corpus-control10k-review.md) | Both native ROIs/profiles/JPEGs viewed against matched V120; nominal mesh mostly erased, nearby lattice soft/incomplete. No convincing new crossings; completed-horizon broad scores pending |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |

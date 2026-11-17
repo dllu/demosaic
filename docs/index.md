@@ -39,7 +39,9 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·
 [primary benchmark admission](whole-scene-context-primary-admission.md) ·
-[full-corpus scaling](full-corpus-scaling.md).
+[full-corpus scaling](full-corpus-scaling.md) ·
+[control10k weak-detail/native review](full-corpus-control10k-review.md) ·
+[CPU checkpoint recovery](full-corpus-checkpoint-cpu-recovery.md).
 
 Individual experiment reports are evidence snapshots, not automatically current
 recommendations. The [pre-cleanup entry points](history/before-2026-11-17-cleanup/README.md),

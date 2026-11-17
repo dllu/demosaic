@@ -1,0 +1,103 @@
+{
+  "publication": {
+    "path": "/home/dllu/proj/demosaic/docs/results/full-corpus-checkpoint-cpu-recovery-v1/publication.json",
+    "sha256": "49c44d84d84168f3bb57db7cb4a449872983ddc2da2d368ebe611c05fa592d93"
+  },
+  "receipt": {
+    "recorded_UTC": "2026-11-17T14:52:00.200242+00:00",
+    "producer": {
+      "path": "/home/dllu/proj/demosaic/.cache/verify-checkpoint-cpu-recovery-step14000-v1.py",
+      "sha256": "1540383261c6641495150717912a4a37275d42504789e04e96a8b6ba55d8a87b"
+    },
+    "production_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/production-handoff-plan-v7.json",
+      "sha256": "73135ffa70791305d6af79b983b6ab1685c1ea1042278dc9b5376155608dd14a"
+    },
+    "actual_checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/post-repair-step14000-v1/step014000.pt",
+      "sha256": "8259e05a5f381c6e4e1e5fa34f88f6075c480737331aa5aee8a9fea418c1e75d"
+    },
+    "launch": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/production-handoff-v7/00-scale-control20k-launch.json",
+      "sha256": "c3db19fd34649da5aff6c30f0fed8e9c9d136112bba86c71f431059612214457"
+    },
+    "owner": {
+      "pid": 1474785,
+      "create_time": 1794926392.88
+    },
+    "raw_tensors": 91,
+    "EMA_tensors": 91,
+    "Adam_states": 89,
+    "all_Adam_steps": 14000,
+    "all_values_finite": true,
+    "Python_CPU_CUDA_RNG_present": true,
+    "all_serialized_tensors_CPU": true,
+    "original_horizon": 20000,
+    "batch_size": 16,
+    "checkpoint_events": [
+      {
+        "event": "checkpoint",
+        "step": 14000,
+        "phase": "snapshot-start"
+      },
+      {
+        "event": "checkpoint",
+        "step": 14000,
+        "phase": "cpu-snapshot",
+        "group": "model"
+      },
+      {
+        "event": "checkpoint",
+        "step": 14000,
+        "phase": "cpu-snapshot",
+        "group": "ema"
+      },
+      {
+        "event": "checkpoint",
+        "step": 14000,
+        "phase": "cpu-snapshot",
+        "group": "optimizer"
+      },
+      {
+        "event": "checkpoint",
+        "step": 14000,
+        "phase": "cpu-snapshot",
+        "group": "cuda_rng"
+      },
+      {
+        "event": "checkpoint",
+        "step": 14000,
+        "phase": "complete",
+        "seconds": 0.5303938839351758
+      }
+    ],
+    "last_observed_train_step": 14125,
+    "log_snapshot": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/post-repair-step14000-v1/log-snapshot.log",
+      "sha256": "becd7dd0e3bb7ee7e32053ccd0e301d831c22c947f5b7f16c7b132eb92bf0aa3"
+    },
+    "scope": "First actual full production checkpoint after CPU-snapshot repair, separately verified from transport qualification. Training advances beyond14k. No model quality/full-horizon/duration claim; future reliability remains observed, not guaranteed. Source and failed partial bytes unchanged; large checkpoint remains local."
+  },
+  "exact_source_addendum": [
+    {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/verify-checkpoint-cpu-recovery-step14000-v1.py",
+        "sha256": "1540383261c6641495150717912a4a37275d42504789e04e96a8b6ba55d8a87b"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/results/full-corpus-checkpoint-cpu-recovery-v1/step14000-verifier.py",
+        "sha256": "1540383261c6641495150717912a4a37275d42504789e04e96a8b6ba55d8a87b"
+      }
+    },
+    {
+      "original": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/post-repair-step14000-v1/log-snapshot.log",
+        "sha256": "becd7dd0e3bb7ee7e32053ccd0e301d831c22c947f5b7f16c7b132eb92bf0aa3"
+      },
+      "published": {
+        "path": "/home/dllu/proj/demosaic/docs/results/full-corpus-checkpoint-cpu-recovery-v1/step14000-log-snapshot.log",
+        "sha256": "becd7dd0e3bb7ee7e32053ccd0e301d831c22c947f5b7f16c7b132eb92bf0aa3"
+      }
+    }
+  ]
+}
