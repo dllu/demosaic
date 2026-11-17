@@ -106,7 +106,9 @@ improves the analytic-nuisance option:28.70% weak response, increment error
 smaller building bands. The neural-nuisance arm worsens increment error;
 higher-noise detail and fine real crossings remain unresolved.
 Its [full guided source/CFA/noise review](docs/neural-guided-phase-full-panel.md)
-has completed all1164 corrections/audits;70 native figures await actual review.
+is complete with70 actual native views:400/far weak2.299%→9.300% and
+strong37.032%→68.274% versus256 NN, with lower full RGB error but
+quiet/increment error+0.258%/+0.606%. The pilot's increment gain does not persist.
 The [additional fine-band pilot](docs/fine-frequency-proposals.md) makes both
 cab mesh directions more visible, with a purple/green grid. Analytic1600/far
 weak response0.989%→2.037% has unchanged quiet error and slightly lower
@@ -121,8 +123,9 @@ The [joint-colour fine support](docs/joint-fine-colour-support.md) keeps separat
 RGB amplitudes and visibly reduces cab purple/green tint while retaining the
 lattice. Extra1600/far synthetic weak response is lost; building bands remain.
 Its [fresh coloured-wire comparison](docs/coloured-fine-wire-benchmark.md) has
-closed all192 corrections across four CFAs with genuine A-only fields;40 native
-figures await actual review.
+completed all192 corrections/audits and40 actual views. The small1600 weak gain
+comes almost entirely from neutral wires; signed-colour response barely changes
+and its increment/colour errors rise. Thin crossings remain unresolved.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -264,6 +267,22 @@ The [prior sinusoidal/phase comparison](docs/images/neural-nuisance-phase129-v1/
 remains available.
 
 ![Noisy, guided analytic-nuisance phase and exact constructed GT](docs/images/neural-nuisance-guided-phase129-v1/triplets/iso400-index0024-role2-analytic-triplet.png)
+
+The completed [eight-source follow-up](docs/neural-guided-phase-full-panel.md)
+retains matching native triplets for
+[source1](docs/images/neural-nuisance-guided-phase129-full-v1/triplets/iso400-index0024-role2-analytic-triplet.png)
+and [source7](docs/images/neural-nuisance-guided-phase129-full-v1/triplets/iso400-index0120-role2-analytic-triplet.png),
+same ROI/exposure2/400 conditioning and V143 checkpoint as above.
+Its response gain has higher mean increment error.
+The [fresh coloured benchmark](docs/coloured-fine-wire-benchmark.md) includes
+[neutral](docs/images/coloured-fine-wire-v1/iso1600-source0-RGGB-analytic-triplet.png)
+and signed-colour exact-GT triplets: native160 ROI`[176,176,160,160]`,
+exposure16/contrast1,1600 shot/read`0.00032/4.096e-7`, V120 parent/teacher
+`a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb`.
+The linked report binds the fine-support configuration/calibration. Weak
+coloured crossings remain missing:
+
+![Signed-colour wires: noisy, joint fine restoration, exact GT](docs/images/coloured-fine-wire-v1/iso1600-source1-RGGB-analytic-triplet.png)
 
 The added fine-band option retains native1600/far noisy → restored → exact-GT
 triplets for [source0](docs/images/neural-nuisance-fine-phase129-v1/triplets/iso1600-index0008-role2-analytic-triplet.png)

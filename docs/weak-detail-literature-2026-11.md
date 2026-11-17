@@ -111,6 +111,12 @@ reviewed. Guidance helps this measured analytic operating point without
 recovering high-noise weak detail or fine real crossings. An input-only
 168-operator diagnostic finds only1.01549 maximum global residual amplification,
 so a large oblique-projection gain does not explain the checked failure.
+The completed [eight-source guided panel](neural-guided-phase-full-panel.md)
+retains stronger400/far response, weak2.299%→9.300% and strong37.032%→68.274%
+versus256 NN, with lower full RGB error. Quiet/increment errors rise
+0.258%/0.606%; the pilot increment gain does not persist. All70 native figures
+are viewed; weak real crossings/high-noise detail remain missing. A candidate
+that helps a nuisance predictor can still worsen the delivered neural parent.
 The [additional fine-band follow-up](fine-frequency-proposals.md) instead
 checks discovery: original cab proposals miss both RAW-green fine families.
 An additive A-only search finds them, preserving broad carriers and their
@@ -138,8 +144,11 @@ keeps separate RGB amplitudes/phases. All48 cases/46 figures are reviewed,
 with extra1600/far synthetic response lost and persistent building bands.
 The [fresh coloured benchmark](coloured-fine-wire-benchmark.md) adds neutral
 and signed-colour fine wires across allCFAs, genuine A-only predictions and
-four fixed reconstruction variants;192 corrections/scoring/rendering complete,
-40 actual native views/final independent audit and quality conclusions pending.
+four fixed reconstruction variants;192 corrections/400 rows/40 actual figures
+are independently audited. The1600 joint weak gain is almost entirely neutral:
+signed-colour weak25.362225%→25.362461%, with increment/colour errors slightly
+worse. All-stage errors remain above V120;6400 has no useful weak gain.
+Reduced real tint and faithful signed-colour reconstruction are distinct outcomes.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

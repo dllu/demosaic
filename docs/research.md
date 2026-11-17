@@ -55,6 +55,12 @@ error−0.946% versus parent on two improving sources, quiet+0.541%, and much
 smaller building bands. The neural-nuisance primary arm worsens increment
 error. This is an available measured alternative; high-noise weak detail and
 fine real crossings remain unresolved.
+The completed [full guided panel](neural-guided-phase-full-panel.md) reviews
+all1164 cases/70 native figures: analytic400/far weak2.299%→9.300% and
+strong37.032%→68.274% versus256 NN, lower full RGB error but quiet/increment
++0.258%/+0.606%. The two-source increment gain does not persist across eight
+sources; validating nuisance reconstruction alone does not guarantee lower
+error for the delivered neural-parent correction.
 The [additive fine-frequency follow-up](fine-frequency-proposals.md) finds both
 RAW green cab families after projecting the broad design. Its complete48-case/
 44-figure review makes both real fine directions more visible, with conspicuous
@@ -82,8 +88,11 @@ the extra1600/far weak-response gain is lost and building bands remain.
 Its [new coloured-wire comparison](coloured-fine-wire-benchmark.md) has48 fresh
 observations,48 V120 parents/96 true A-only fields, and four completed variants.
 Signed green contrast and all four CFAs test true colour recovery rather than
-rewarding neutralization.192 corrections/400 metric rows/40 native figures
-are prepared; actual viewing/final audit and quality conclusions remain pending.
+rewarding neutralization.192 corrections/400 rows/40 actual native figures are
+audited. Almost all1600 joint weak gain is neutral; signed-colour response is
+essentially unchanged and its increment/colour errors rise slightly.6400 has
+no useful weak gain, and all-stage errors remain above V120. This limits the
+inference drawn from reduced real cab tint.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

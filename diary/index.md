@@ -22,6 +22,11 @@ historical paths. Resolve an old diary path without editing such a receipt:
 For a concise view of the evidence, start with the
 [experiment index](../docs/experiments.md) rather than the chronological diary.
 
+Latest detail reviews: [full guided and coloured-wire quality](2026-11-16-23-10-59-full-guided-coloured-review.md).
+All110 native figures viewed. Full guided response/full RGB gains have higher
+increment error; the pilot gain does not persist. Joint coloured-wire gain is
+almost entirely neutral, with signed-colour fine recovery still missing.
+
 Latest completed cohort reviews: [full wave panel, V131 broad audit and fixed ADC repair](2026-11-16-11-25-42-full-panel-v131-audits.md).
 V131 photo+0.04000 dB has unseen-camera/ADC-color costs; an opt-in physical ADC
 repair adds0.15074 dB ADC-photo PSNR while increasing weakest-band error1.43%.

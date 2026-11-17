@@ -34,9 +34,10 @@ increment errors. All68 native figures/saved baseline panels are reviewed.
 The [guided phase pilot](neural-guided-phase-pooling.md) retains much stronger
 analytic400/far weak28.702%, lower increment error and smaller building bands
 than unguided phase, with quiet/error costs and missing fine crossings. Its
-[full source/CFA/noise comparison](neural-guided-phase-full-panel.md) has completed
-all1164 corrections and audits from its frozen broad-only source, all2320
-fields cached, zero fresh neural calls;70 actual native views remain pending.
+[full source/CFA/noise comparison](neural-guided-phase-full-panel.md) is complete:
+1164 cases, zero fresh neural calls and70 actual native views.400/far analytic
+weak2.299%→9.300%, strong37.032%→68.274% versus256 NN, lower full RGB error
+but quiet/increment+0.258%/+0.606%; the pilot increment gain does not persist.
 The separate [fine-band pilot](fine-frequency-proposals.md) is
 complete:1600/far analytic weak0.989%→2.037%, same quiet/slightly lower increment
 error, source1-driven. Real cab lattice is more visible with false purple/green
@@ -49,8 +50,9 @@ reduces real cab tint with the lattice retained, losing the extra1600/far
 synthetic response;46 actual figures/217 tests complete. The
 [fresh coloured-wire benchmark](coloured-fine-wire-benchmark.md) has48 new V120
 parents/96 genuine A-only fields and has closed all192 corrections/scored400
-rows;40 actual native views/final audit remain, no quality conclusion yet.
-The full broad-only guided native review remains separate.
+rows, with all40 native figures viewed and8400 fields independently audited.
+The small1600 joint gain is almost entirely neutral; signed-colour response
+barely changes and increment/colour errors rise.6400 has no useful weak gain.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

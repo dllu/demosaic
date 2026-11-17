@@ -178,8 +178,11 @@ DINO backbone:
 The [new coloured-wire benchmark](coloured-fine-wire-benchmark.md) separately
 adds48 fresh synthetic observations and144 explicitly counted neural calls.
 It includes a signed green contrast and all four CFAs, so an achromatic-looking
-result cannot by itself count as recovery. All192 corrections are closed,
-scoring/rendering complete;40 actual native views/final audit are pending,
-so no new-cohort quality outcome is claimed here. The original
+result cannot by itself count as recovery. All192 corrections/400 rows and40
+actual native figures are now independently audited. Its small1600 joint weak
+gain is almost entirely neutral; signed-colour response barely changes while
+increment/colour errors rise slightly.6400 has no useful weak gain. The real
+cab tint improvement remains useful, with faithful colour/detail unresolved.
+The original
 [full broad-only guided study](neural-guided-phase-full-panel.md) remains a
 separate frozen comparison.

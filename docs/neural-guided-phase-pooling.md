@@ -177,8 +177,9 @@ turn visibility into faithful mesh recovery.
 Frozen plan:
 `3735fe54cdb0136f9528b6c7859a2cc970c675051f50323cab6100aad8e89dcb`.
 Root: `.cache/experiments/neural-nuisance-guided-phase129-pilot-v1/`.
-The separate [full sinusoidal comparison](global-background-full-panel.md)
-continues from its original sources and owners.
-The [full guided follow-up](neural-guided-phase-full-panel.md) is now running
-with the analytic-nuisance option declared primary, all cached fields and all
-controls retained. Full quality remains pending.
+The separate [full sinusoidal comparison](global-background-full-panel.md) is
+complete. The [full guided follow-up](neural-guided-phase-full-panel.md) now
+completes1164 cases and70 actual figures with analytic nuisance primary:
+400/far weak2.299%→9.300%, strong37.032%→68.274% versus256 NN, lower full
+RGB error, but quiet/increment+0.258%/+0.606%. This pilot's increment-error
+gain does not persist across the eight-source panel; both records remain.
