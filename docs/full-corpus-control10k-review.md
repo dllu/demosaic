@@ -1,5 +1,8 @@
 # Full-corpus control: 10,000-step weak-detail review
 
+Follow-up: the [completed20k review](full-corpus-control20k-review.md) recovers
+most of this midpoint faint loss; original measurements below are preserved.
+
 **Broader coverage is real; weak-detail fidelity regresses at this midpoint.**
 The control has visited 53,506 distinct photographic sources in 10,000 updates,
 already more than the previous V131/V132 20k continuations. Its four-source

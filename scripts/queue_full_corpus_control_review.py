@@ -114,11 +114,18 @@ def run(path):
     shutil.copytree(
         Path(plan["qualified_work"]), work, ignore=shutil.ignore_patterns("__pycache__", "*.pyc")
     )
+    native_template = read_json(checked(plan["native_template"]))
+    native_work = Path(native_template["work"])
+    for source, digest in native_template["frozen_files"].items():
+        relative = Path(source).relative_to(native_work)
+        if relative.parts[0] == "scripts" and not (work / relative).exists():
+            target = work / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(checked({"path": source, "sha256": digest}), target)
     for source in plan["review_scripts"]:
         shutil.copyfile(checked(source), work / "scripts" / Path(source["path"]).name)
     frozen = {str(p): reference(p)["sha256"] for p in work.rglob("*") if p.is_file()}
     template = read_json(checked(plan["primary_template"]))
-    native_template = read_json(checked(plan["native_template"]))
     models = {
         "V120": dict(template["models"]["V120"], weights="EMA", display_label="V120 EMA"),
         "scale-control20k": {

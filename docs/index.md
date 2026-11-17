@@ -40,7 +40,9 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [completed camera panels](whole-scene-context-camera-review.md) ·
 [primary benchmark admission](whole-scene-context-primary-admission.md) ·
 [full-corpus scaling](full-corpus-scaling.md) ·
-[control10k weak-detail/native review](full-corpus-control10k-review.md) ·
+[completed20k corpus review](full-corpus-control20k-review.md) ·
+[calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·
+[historical10k midpoint](full-corpus-control10k-review.md) ·
 [execution/raw-EMA follow-up](training-execution-quality.md) ·
 [qualified endpoint benchmark](full-corpus-primary-admission.md) ·
 [CPU checkpoint recovery](full-corpus-checkpoint-cpu-recovery.md).

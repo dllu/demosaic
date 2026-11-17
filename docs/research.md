@@ -23,19 +23,15 @@ has repeatedly come with extra flat-region error or false color. The
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
-   The [100k full-corpus continuation](full-corpus-scaling.md) has saved its first
-   1000 updates, with shuffled epochs,5% reviewed quota and a fresh20k control.
-   All3 context probes are complete; the20k control is running before the99k
-   remainder. The [control10k midpoint](full-corpus-control10k-review.md) has
-   visited53,506 photo IDs but loses0.61431 dB on faint ADC detail. Missing-color
-   error remains higher after exact measured-CFA projection. Coverage, reviewed
-   density and execution co-vary; a future matched test should separate them.
-   Completed-horizon quality remains pending.
-   All90,778 photos have now actually been visited. The [execution follow-up](training-execution-quality.md)
-   finds10k raw worse than EMA and only a tiny strict/fast0 mean difference at77;
-   it does not explain the later drift. [Broader weak-band/primary analysis](full-corpus-primary-admission.md)
-   is queued. Use it before attributing the loss to coverage or changing the
-   reviewed-example quota while preserving full-corpus exposure.
+   The [100k full-corpus continuation](full-corpus-scaling.md) has resumed its
+   original1k state. The [completed20k control](full-corpus-control20k-review.md)
+   actually covers all90,778 photos and recovers most10k faint loss, but remains
+   0.02061 dB below V120 with higher fine-band error for3/4 materials. Both fences
+   remain incomplete. Coverage, reviewed quota and execution co-vary; they do not
+   isolate a cause. [Broader primary/weak-band evidence](full-corpus-primary-admission.md)
+   is collecting/queued. The [calibrated ADC-bin diagnostic](adc-bin-consistency.md)
+   improves selected zero-noise errors with material regressions; the full588
+   palette is collecting. Preserve the long trajectory before changing its data.
    [Coverage and pipeline rationale](training-scale-pipeline-review-2026-11-17.md).
 3. **Evaluate the delivered correction.** Better background prediction or a
    stronger synthetic mesh response does not guarantee lower final-image error.
@@ -58,7 +54,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
 | [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study and both camera panels complete/native-viewed. Small quiet gains/partial unseen repair versus local-only; unseen remains below V120 and fine crossings missing. Full427 photos collecting |
-| [Full-corpus scaling](full-corpus-scaling.md), [10k review](full-corpus-control10k-review.md) | Executing100k/20k continuations; actual coverage grows, but faint midpoint fidelity regresses and fixed ADC consistency does not repair missing colors. Both fence families reviewed; endpoint/broad quality pending |
+| [Full-corpus scaling](full-corpus-scaling.md), [20k review](full-corpus-control20k-review.md) | Control complete/all90,778 photos visited; most midpoint faint loss repaired, small ordinary/shadow gains but mixed spatial/color costs. Both fences viewed. Original100k trajectory and full primary collections running |
 
 These are research proposals and bounded experiment conclusions. They do not
 establish broad state-of-the-art quality. Dates describe the source review;

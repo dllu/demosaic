@@ -7,15 +7,12 @@ finds small quiet-region gains and mixed detail/color costs; fine crossings
 remain missing. The [completed camera panels](whole-scene-context-camera-review.md)
 find a partial unseen-camera repair over local-only, still below V120.
 Full427 photo evaluation is running.
-A [100k full-corpus V120 continuation](full-corpus-scaling.md)
-has completed its first1,000 updates and awaits its scheduled continuation after
-the running20k control. The [control10k midpoint](full-corpus-control10k-review.md)
-has53,506 source IDs visited, but faint fidelity−0.61431 dB and no convincing new
-fence crossings. Both fence families were viewed; scaling endpoint broad scores
-remain pending.
-The [raw/EMA follow-up](training-execution-quality.md) finds10k raw worse than
-EMA on all three review means. The control has actually covered all90,778
-photos; its [endpoint benchmark](full-corpus-primary-admission.md) is queued.
+The [completed full-corpus20k control](full-corpus-control20k-review.md) has
+actually visited all90,778 photos. Faint mean recovers0.59370 dB from10k,
+remaining0.02061 dB below V120; ordinary/shadow gains are small and three faint
+materials have higher fine-band error. Both real fence families were viewed
+without convincing new crossings. The original100k trajectory has resumed;
+its [full endpoint benchmark](full-corpus-primary-admission.md) is running.
 [Research status](experiments.md).
 
 ## Full-model choices
@@ -27,7 +24,7 @@ photos; its [endpoint benchmark](full-corpus-primary-admission.md) is queued.
 | [V131 ADC Malvar](v131-adc-projection.md) | Same learned weights; ADC-only photo +0.15074 dB over V131 and worst ADC color error reduced to 19.98 DN16 | Opt-in repair for zero shot/read conditioning. Weakest ADC band error +1.43%; positive-noise V131 output and camera costs remain unchanged |
 | [V132 RAW attention](v132-endpoint-quality.md) | Completed 20k ablation with every training input hash matched to V131 | Faint ADC −0.40978 dB versus V131, ordinary material quality essentially tied; no broad-panel or full-frame validation. Retained for reproduction |
 | [Scene-context2k arms](whole-scene-context-camera-review.md) | Scene/tile API;64-source quiet-coarse gains. Spatial unseen-camera +0.01739 dB versus matched local-only; pooled provides almost the same repair | Unseen remains−0.05477 dB versus V120; known nearly ties local-only. No established weak-detail gain or faithful new fence crossings; original local encoder retained. Full427 photos running |
-| [Corpus control10k midpoint](full-corpus-control10k-review.md) | Broader actual source coverage; selected ADC flat mean bias15.08→7.87 DN16 | Faint ADC−0.61431 dB; selected flat centered RMS4.64→8.69 DN16; no convincing new crossings. Midpoint only,20k/100k and broad panels pending |
+| [Corpus control20k](full-corpus-control20k-review.md) | Completed320k target slots/all90,778 photos. Ordinary/shadow +0.00852/+0.01047 dB; substantial faint recovery from10k | Faint−0.02061 dB versus V120; fine-band error higher for3/4 materials, selected flat spatial RMS worse. Both fences reviewed without faithful new crossings; full427/camera publication pending |
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes
@@ -49,7 +46,10 @@ in each linked report. [Package interfaces](architecture.md).
 
 ## Experimental detail components
 
-These are useful, bounded tradeoffs, not a general replacement for V120:
+These are useful, bounded tradeoffs, not a general replacement for V120. The
+[new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
+zero-noise errors with material PSNR regressions; full588-color collection is
+running. It is opt-in and bypasses positive noise identically:
 
 | Component family | What worked | What remains unresolved |
 | --- | --- | --- |

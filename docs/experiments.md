@@ -10,7 +10,7 @@ individual reports retain exact measurements, native comparisons and receipts.
 | --- | --- | --- |
 | [Whole-scene context](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study, both camera panels and33 final native boards complete, including both GFX families. Spatial unseen +0.01739 dB vs local-only, still−0.05477 vs V120; no convincing new fine crossings | Full427 photos running on CPU with exact canonical inputs/matched CPU V120. Camera costs and quiet gains are documented; V120/V131 remain last complete three-panel evaluations |
 | [A-only parent-innovation validation](parent-innovation-validation.md) | Both 48-case numerical reviews complete with zero new neural calls | Native viewing and the quality decision are still pending in the published report |
-| [Full-corpus scaling](full-corpus-scaling.md) | Actual90778-photo epoch completed at17039; complete18k state retained. [10k quality](full-corpus-control10k-review.md) loses0.61431 dB faint ADC. [Six-model follow-up](training-execution-quality.md):raw10k worse than EMA; early strict/fast0 gap only0.000215 dB. Both GFX families viewed | Completed20k/100k horizons and learning curves. [Qualified endpoint pipeline](full-corpus-primary-admission.md) waits for successful20k completion, then full427/known-unseen and broader weak-band analysis; midpoint means cannot substitute |
+| [Full-corpus scaling](full-corpus-scaling.md), [completed20k review](full-corpus-control20k-review.md) | All320k slots/90,778 photos audited; faint recovers0.59370 dB from10k, still−0.02061 versus V120; small ordinary/shadow gains and3/4 fine-band regressions. Both GFX families actually viewed. Original100k trajectory resumed | Full427/camera primary collection running; subsequent broader weak-band analysis queued. [ADC-bin subset](adc-bin-consistency.md) has selected gains/costs and complete588-color collection running; no default/history change |
 | [Production speed](weak-detail-global-context-production-review-2026-11-16.md) | Runtime bottlenecks and proposed optimization sequence | Repeatable end-to-end baseline, then measured quality-preserving speedups; 100MP in 10 seconds remains unmet |
 
 ## Completed comparisons that guide the next work
@@ -28,7 +28,8 @@ individual reports retain exact measurements, native comparisons and receipts.
 V131 also changes the training cohort, so its gain is not an isolated test of
 training duration. The new100k run has begun; its endpoint quality remains
 unmeasured. Its checkpoints use a100k schedule, distinct from the annealed20k
-control whose10k review now records a weak-detail regression.
+control whose completed20k review recovers most of the earlier faint loss but
+still has mixed fine-detail/color costs.
 [Budget, source/crop/noise coverage and runtime evidence](full-corpus-scaling.md).
 
 The synthetic panels differ in parents, sources, noise and metrics. Response

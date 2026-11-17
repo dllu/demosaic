@@ -3,9 +3,11 @@
 **The local-model CPU benchmark has passed its real three-case qualification.**
 Fresh V120 outputs and every metric row are bit-exact to the existing closed
 CPU controls on a photo batch, known-camera batch and unseen-camera batch.
-The20k endpoint's native review and complete benchmark are queued behind the
-existing trainer's successful phase completion. These are waiting jobs, not
-completed primary scores. V120 remains the recommendation.
+The20k endpoint is admitted at SHA633053… after successful training. Its
+[110-input native review](full-corpus-control20k-review.md) is complete; its own
+three-case preflight passes with bit-exact V120 predictions/metrics. The full
+3,162-case benchmark is running, with broader offline analysis waiting for
+completion. Complete primary scores remain missing; V120 stays recommended.
 
 [Qualification, frozen sources and bound job observations](results/full-corpus-execution-followup-v1/publication.json) ·
 [Three-case result](results/full-corpus-execution-followup-v1/primary-preflight.json) ·
@@ -54,17 +56,17 @@ also passes the established path/hash/logical-value reader on its two photo
 model/batch records, using exact same-filesystem hardlinks rather than copying
 or changing tensor pixels. Neither qualification is a full427 evaluation.
 
-## Queued endpoint and subsequent evidence
+## Admitted endpoint and subsequent evidence
 
-The exact owned review queue waits for the existing v7 control stage's successful
-return code, completed20k horizon and immutable endpoint. It independently checks
+The owned review queue observed the v7 control stage's successful return code,
+completed20k horizon and immutable endpoint. It independently checked
 91 raw/91 EMA tensors,89 finite Adam states all at20k, RNG and original horizon;
 the checkpoint must match the retained20k receipt. It does not restart training,
 change data/optimizer/schedule or interrupt the99k long-arm continuation.
 
-After admission, it starts the110-input native review and its own bound20k
-three-case benchmark preflight. Only a successful preflight permits the full
-3,162-case benchmark. Its deadline is48h, with40GiB start/24GiB runtime RAM and
+After admission, the110-input native collection completed220 CPU roots in
+626.509s, with110 DINO executions/110 replays. Its bound20k three-case preflight
+passes in189.545s. The full3,162-case benchmark then started. Its deadline is48h, with40GiB start/24GiB runtime RAM and
 192GiB disk reserves; failures stop explicitly without retry. Numerical/native
 render completion, actual image viewing and history publication remain separate.
 
@@ -76,8 +78,11 @@ used for V131:427 photos, three priors/all CFAs,5,124 matched observations,
 source balancing. This complements the repeated four-material faint subset;
 no synthetic or camera reference is silently counted as photo GT.
 
-Publication still requires the actual completed results, independent audits,
-native crop inspection, both protected GFX reviews, source-bound history update
-and reconciliation of guidance. The [scene2k full427 benchmark](whole-scene-context-primary-admission.md)
+The targeted publication includes independent audits, actual native crop
+inspection and both protected GFX reviews. Final primary publication still needs
+complete results/audits and an eligible source-bound history update. An original
+native reporter helper-import failure was recovered with identical sealed helper
+bytes; the full primary worker continued unchanged. [Exact recovery evidence and
+running-job cutoff](results/full-corpus-control20k-review-v1/publication.json). The [scene2k full427 benchmark](whole-scene-context-primary-admission.md)
 continues separately; its already-completed camera scores are not copied to the
 new scaling model. [Current training and actual corpus coverage](full-corpus-scaling.md).

@@ -1,21 +1,20 @@
 # Full-corpus scaling and whole-scene context training
 
-**Larger-corpus training has begun: the100,000-update trajectory has saved its
-first1,000 updates.** All three whole-scene comparison arms have completed;
-the matched20k control is continuing from its complete13k state, before the
-remaining99k updates. A [second checkpoint stall prompted CPU snapshots](full-corpus-checkpoint-cpu-recovery.md);
-only the unserialized13k→14k segment is replayed, with original state/draws/horizons.
-Their [first matched native review](whole-scene-context-native-review.md) finds
-no convincing new fine crossings; the [completed64-source study](whole-scene-context-development64.md)
-adds small quiet-coarse gains and mixed detail/color costs. The [10k scaling
-review](full-corpus-control10k-review.md) confirms53,506 photo IDs visited but
-faint ADC fidelity−0.61431 dB, with no convincing new fence crossings.
-No completed larger-corpus endpoint gain is claimed; V120 remains recommended.
-The control has now **actually visited all90,778 photo IDs**, completing its
-first ordinary epoch at17,039. A complete18k raw/EMA/Adam/RNG state is retained.
-The [execution/raw-EMA follow-up](training-execution-quality.md) finds no large
-early backend difference;10k raw is worse than EMA. [Full endpoint reviews](full-corpus-primary-admission.md)
-are qualified and queued behind successful20k completion.
+**The matched20k control is complete; the original100k trajectory has resumed.**
+The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
+all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
+recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
+improve slightly. Both protected fence families still lack convincing new fine
+crossings. V120 remains recommended. The [full endpoint benchmark](full-corpus-primary-admission.md)
+is running, with subsequent broader weak-band analysis queued.
+
+All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
+[64-source study](whole-scene-context-development64.md) and
+[camera review](whole-scene-context-camera-review.md) find small quiet/partial
+unseen-camera gains with mixed detail/color costs; their full427 collection runs
+separately. [Checkpoint recovery](full-corpus-checkpoint-cpu-recovery.md)
+preserves both failures, exact replay and the completed20k state. The long arm
+continues from its original1k Adam/EMA/RNG state and100k horizon.
 This implements the [training-scale review](training-scale-pipeline-review-2026-11-17.md)
 and complements the [scene-context experiment](whole-scene-context-next-test.md).
 
@@ -51,9 +50,9 @@ locations and corruption draws are useful dimensions to test separately.
 |Complete ordinary-photo epochs|1|5|
 |Partial next epoch|16,045|78,013|
 
-These are **planned source-order counts**, not completed training coverage.
-The separate actual audit below confirms only its named executed prefix;
-the100k arm still awaits its continuation from1k.
+The20k column is now independently confirmed by actual execution. The100k
+column remains a planned full-horizon order; its continuation is running.
+Source-order totals do not establish quality or lifetime novelty.
 The first complete ordinary-photo epoch occurs at step17,039. The first320k
 source slots of the two orders match exactly. In the100k ordinary sequence,
 12,765 sources have five visits and78,013 have six; reviewed visits are additional.
@@ -62,27 +61,25 @@ use fresh global sample indices, spatial augmentation, camera/exposure and
 per-step sensor RNG. Correlated/overlapping crops are not counted as disjoint
 native detail or newly independent scene layouts.
 
-### First full corpus epoch: actual execution
+### Completed20k: actual execution
 
-The [actual source/conditioning audit](results/full-corpus-execution-followup-v1/actual-first-epoch.json)
-combines original1–6k, valid6,001–13k and replayed13,001–17,250 source rows.
-It excludes the abandoned13,001–14k segment before counting its replay. Every
-ordinary source identity matches the bound permutation payload, and its actual
-ID set equals all90,778 declared training photos. The first complete ordinary
-epoch occurs at17,039, exactly as planned, without inferring visits from liveness.
+The [completed source/state audit](results/full-corpus-control20k-review-v1/completed-training-audit.json)
+combines original1–6k, valid6,001–13k and replayed13,001–20k. It excludes the
+abandoned13,001–14k segment. All20,000 step/global indices,320,000 target slots
+and80 conditioning chunks are checked. Actual112,424 photo visits comprise
+106,823 ordinary/5,601 reviewed draws; all90,778 ordinary IDs are present,
+74,733 once/16,045 twice. The first epoch completes at17,039. All1,000 replayed
+source rows/four conditioning chunks exactly match the abandoned segment.
 
-Through17,250 updates/276,000 target slots:96,896 photo visits comprise92,049
-ordinary and4,847 reviewed draws across33 reviewed sources.89,507 ordinary
-sources have one visit and1,271 have two. Domain batches are8,663 Commons,
-4,277 native and4,310 paired. All69 conditioning chunks and global indices are
-checked; native/paired actual distinct IDs remain unrecorded. These are source
-visits, not lifetime novelty, disjoint pixel coverage or established quality.
-
-The [retained complete18k state](results/full-corpus-execution-followup-v1/saved18k-state.json)
-has SHA256 `00c5dd7d8bdcb747b870368ce376bb874e8fea0fbcc472796bc3d501fa346926`,
-91 finite raw/91 EMA tensors,89 Adam states at18k and RNG. It saves progress
-after the first full epoch; neither the20k horizon nor its broad quality review
-is thereby complete. Original receipts and earlier failure bytes are preserved.
+The complete20k raw/EMA/Adam/RNG checkpoint is
+`633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795`.
+Domain batches:10,046 Commons/4,965 native/4,989 paired. Native/paired actual
+distinct IDs remain unrecorded. Reported retained-loop windows total12,490.150s;
+attempted controller phases total20,104.376s including stalls/replay/concurrency.
+Training completion, targeted numerical/native completion and pending broad
+scores are distinguished in the [endpoint report](full-corpus-control20k-review.md).
+The earlier [first-epoch/18k receipts](results/full-corpus-execution-followup-v1/actual-first-epoch.json)
+remain preserved snapshots.
 
 The100k arm uses a100k cosine horizon, LR1e-5→1e-6 with100-step warmup. The
 separate control anneals over20k. Checkpoints20k/50k/100k on the long trajectory
@@ -148,16 +145,18 @@ The20k control later retained a complete6k raw/EMA/Adam/RNG state, then stalled
 while redundantly writing `best.pt`. [The explicit recovery](full-corpus-checkpoint-recovery.md)
 preserves the failure/partial bytes, retains best by atomic link to the completed
 last checkpoint, and continues the remaining14k in a new frozen output tree.
-The long arm still resumes its original1k state afterward. Old worker/controller
+The long arm subsequently resumed its original1k state. Old worker/controller
 identities describe their historical allocation; the recovery has new bound
-ownership. Neither training horizon is complete and no quality gain is inferred.
+ownership. The20k horizon is now complete; the100k horizon continues. Training completion
+alone establishes no quality gain.
 The first actual post-repair7k checkpoint has since passed complete raw/EMA/
 Adam/RNG validation and atomic last/best retention. A later first-last write
 stalled at14k, after complete13k. [CPU checkpoint recovery](full-corpus-checkpoint-cpu-recovery.md)
 preserves that evidence and resumes the remaining7k without changing learning
 math; the lost1k segment is recomputed with identical source/conditioning.
-Its first actual14k production checkpoint has now saved and passed complete
-raw/EMA/Adam/RNG validation; optimizer logs advance beyond14,125.
+Its actual14k and subsequent20k checkpoints saved and passed complete
+raw/EMA/Adam/RNG validation. The long continuation is
+[actually observed after resume](results/full-corpus-control20k-review-v1/long100k-resume.json).
 
 The retained [10k EMA review](full-corpus-control10k-review.md) is numerically
 complete and all32 boards have actually been viewed, including both GFX families.
@@ -166,18 +165,21 @@ Its53,506 distinct photo IDs/56,363 visits exceed the old20k continuation's
 flat-color mean bias improves while centered spatial RMS worsens. This midpoint
 does not isolate coverage from reviewed quota/execution or fill broad panels.
 
-Training completion, numerical evaluation and actual native viewing are tracked
-separately. No new full427 or known/unseen-camera result is available, and the
-32-photo monitor is not a comparable panel. Neither scaling horizon is complete;
-the finished scene arms' [broad evaluation is running on CPU](whole-scene-context-primary-admission.md).
-Its canonical physical-only CUDA input export ran briefly alongside training;
-neural evaluation is CPU-only. Training PID, recipe and schedule were preserved;
-wall time is not exclusive and resulting weights are not claimed bit-identical
-to execution without concurrent activity. The PSNR registry/
-chart therefore remains unchanged. V120/V131 remain the latest
-completed comparable broad measurements. Both standing fence reviews and native
-triplets are pending for scaling endpoints; the separate scene2k arms now have
-their [completed native comparison](whole-scene-context-native-review.md).
+The [completed20k targeted review](full-corpus-control20k-review.md) uses110
+matched inputs/220 CPU roots and actually views all26 boards, including both GFX
+families and native GT triplets. Ordinary/shadow means improve slightly; faint
+mean nearly returns to V120, with higher spatial error for three materials.
+The [ADC-bin follow-up](adc-bin-consistency.md) is a separate opt-in zero-noise
+physical diagnostic, not a new training result or default.
+
+The20k [full427/known/unseen benchmark](full-corpus-primary-admission.md) and the
+[scene-arm benchmark](whole-scene-context-primary-admission.md) are running on
+CPU. Complete comparable results and the broader96,075-block analysis remain
+pending;32-photo monitoring and four-material means do not fill those gaps.
+No history point is added; V120/V131 remain the latest complete three-panel
+measurements. Concurrent physical CUDA input export and CPU reviews preserve
+training recipes/ownership, but wall time is not exclusive or claimed identical
+to execution without concurrent activity.
 
 The scaling worker records CPU source/crop metadata each update. Actual
 shot/read/WB/matrix tensors are transferred in250-update batches; complete

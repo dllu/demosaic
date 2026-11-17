@@ -1,0 +1,53 @@
+{
+  "producer": {
+    "path": "/home/dllu/proj/demosaic/.cache/qualify-adc-bins-gpu-v2.py",
+    "sha256": "fb500f0399fa663ade1fe12c76dc48a950b4a7ccc82c1c847a1daf5800c23d45"
+  },
+  "operator_source": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/adc-bin-gpu-qualification-v2/adc_bins.py",
+    "sha256": "aebfd43ee171a56e3e07e33f5eb328e8de4278d1ca99acb58975670f89c982f2"
+  },
+  "tables": [
+    {
+      "precision": "float32",
+      "all65536_CPU_CUDA_bin_bounds_bitexact": true
+    },
+    {
+      "precision": "float64",
+      "all65536_CPU_CUDA_bin_bounds_bitexact": true
+    }
+  ],
+  "actual_saved_output_comparisons": [
+    {
+      "id": "bark-contrast0p025-adc-RGGB",
+      "method": "V120",
+      "bitexact": true,
+      "max_DN16": 0.0,
+      "RMS_DN16": 0.0
+    },
+    {
+      "id": "bark-contrast0p025-adc-RGGB",
+      "method": "scale-control20k",
+      "bitexact": true,
+      "max_DN16": 0.0,
+      "RMS_DN16": 0.0
+    },
+    {
+      "id": "flat-gray-l0.18-RGGB",
+      "method": "V120",
+      "bitexact": true,
+      "max_DN16": 0.0,
+      "RMS_DN16": 0.0
+    },
+    {
+      "id": "flat-gray-l0.18-RGGB",
+      "method": "scale-control20k",
+      "bitexact": true,
+      "max_DN16": 0.0,
+      "RMS_DN16": 0.0
+    }
+  ],
+  "module_forwards": 0,
+  "peak_torch_CUDA_GiB": 0.007876873016357422,
+  "scope": "Physical-only CUDA qualification under existing training concurrency,2GiB per-process cap. Exact all65536-code CPU/CUDA tables under both source codecs,4 actual retained input/parent-policy outputs compared under existing quarter-DN/RMS numerical bounds.0 learned/module/RAW/noise/optimizer calls. No isolated timing or new quality sample claim."
+}
