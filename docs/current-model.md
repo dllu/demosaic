@@ -11,8 +11,8 @@ The [completed full-corpus20k control](full-corpus-control20k-review.md) has
 actually visited all90,778 photos. Faint mean recovers0.59370 dB from10k,
 remaining0.02061 dB below V120; ordinary/shadow gains are small and three faint
 materials have higher fine-band error. Both real fence families were viewed
-without convincing new crossings. The original100k trajectory has resumed;
-its [full427 benchmark](full-corpus-primary-admission.md) is running. The
+without convincing new crossings. The original100k trajectory has resumed.
+The20k control's [full427 benchmark](full-corpus-primary-admission.md) is running. The
 [completed camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
 known and lose0.04067 unseen versus V120, with mostly channel-mean unseen costs.
 The [complete ADC-color panel](full-corpus-control20k-color-review.md) exposes
