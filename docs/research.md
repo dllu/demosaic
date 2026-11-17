@@ -55,6 +55,15 @@ error−0.946% versus parent on two improving sources, quiet+0.541%, and much
 smaller building bands. The neural-nuisance primary arm worsens increment
 error. This is an available measured alternative; high-noise weak detail and
 fine real crossings remain unresolved.
+The [additive fine-frequency follow-up](fine-frequency-proposals.md) finds both
+RAW green cab families after projecting the broad design. Its complete48-case/
+44-figure review makes both real fine directions more visible, with conspicuous
+purple/green periodic texture. Analytic1600/far weak response0.989%→2.037% has
+unchanged quiet error and slightly lower increment error, driven by source1;
+400/far stays unchanged. Building and neural1600 errors rise. This identifies
+a useful proposal limitation and a remaining colour/reconstruction problem;
+frequency discovery alone does not establish faithful recovery. A bounded
+fine waveform and coloured exact-GT controls are the next useful comparison.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

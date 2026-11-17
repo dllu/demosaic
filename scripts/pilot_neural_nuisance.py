@@ -38,12 +38,16 @@ def prepare(
     prediction_collection=None,
     phase_aggregation=False,
     phase_guide=False,
+    add_fine_carriers=False,
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
     from demosaic.phase_aggregation import PhaseAggregateConfig
 
     assert not phase_aggregation or not amplitude_window
     assert not phase_guide or phase_aggregation
+    assert not add_fine_carriers or (
+        phase_aggregation and fixed_analytic_frequencies and not full_panel
+    )
     aggregation = (
         PhaseAggregateConfig(bins=32, window=129, query_stride=32).to_dict()
         if phase_aggregation
@@ -111,6 +115,7 @@ def prepare(
             or LocalWaveConfig(**prior_plan["geometry_config"]).to_dict() != geometry
             or prior_plan.get("aggregation_config") != aggregation
             or prior_plan.get("phase_guide", False) != phase_guide
+            or prior_plan.get("add_fine_carriers", False) != add_fine_carriers
         ):
             invalid_cache = prediction_cache
             prediction_cache = None
@@ -173,6 +178,12 @@ def prepare(
             model["range_guidance"] = (
                 "Both analytic/neural phase arms use own-color A-only neural RGB guides, clipped0..1, exact physical shot/read square-root variance stabilization, fixed two-noise-unit bins and [1,2,1]/4 range smoothing. Four-dimensional phase/range/native query histogram, positive normalized weights. RGB amplitudes stay separate; RAW/parent share the identical fixed operator."
             )
+    model["add_fine_carriers"] = add_fine_carriers
+    if add_fine_carriers:
+        model["fine_proposal_source"] = reference(work / "src/demosaic/fine_carrier_proposals.py")
+        model["fine_proposal_policy"] = (
+            "Retain broad pair and correction. Add two native1/16..0.24 directions after broad-design projection. Exclude already-fine coarse angular families and integer harmonics with h-scaled1.5-native-bin radii. Fixed20-degree fine-family separation, original sub-bin refinement/matching and physical weights. Fine nuisance includes broad carriers; identical fixed A-only RAW/parent map, separate conditional support. No distinct pair in either fold falls back to broad-only. No ROI/reference-derived frequency."
+        )
     write_json(root / "analytic-model.json", model)
     positive = sum(r["noise"]["shot"] + r["noise"]["read"] > 0 for r in previous["rows"])
     inputs = [reference(source / "plan.json"), reference(root / "analytic-model.json"), checkpoint]
@@ -189,6 +200,7 @@ def prepare(
         "geometry_config": geometry,
         "aggregation_config": aggregation,
         "phase_guide": phase_guide,
+        "add_fine_carriers": add_fine_carriers,
         "small_context_geometry_policy": "Use native minimum axis when smaller than declared window, half-window stride; only native256 materials use this input-dimension-only fallback.",
         "background_configuration": background_config,
         "background_cache": cache,
@@ -264,6 +276,10 @@ def prepare(
             plan["scope"] += (
                 " Both phase arms condition their same-color measurement averages on the matching own-color A-only neural guide. Physical variance stabilization and fixed two-noise-unit range bins/[1,2,1]/4 smoothing restrict pooling across different predicted signal levels; no shared RGB amplitude or green-derived red/blue reconstruction. Native query histograms preserve phase/range assignment exactly. H1 controls keep their unguided original scores. No bandwidth/threshold tuning from GT/reference outcomes."
             )
+    if add_fine_carriers:
+        plan["scope"] += (
+            " Add a separate two-direction native1/16..0.24 fine-band search after the unchanged broad design. Broad phase retained; per-fold exclusions remove already-fine coarse angular profiles and h-scaled1.5-bin integer-harmonic neighborhoods to limit duplicate profiles. Fine geometry has separate A/B matching and per-color support; fine full/null/parent maps retain broad carriers as global nuisance. No available pair in either fold keeps broad only. Raw-H1 controls unchanged. More candidates are not calibrated confidence. All48 cases close before quality analysis."
+        )
     write_json(root / "plan.json", plan)
     verify_plan(plan)
     return root / "plan.json"
@@ -505,6 +521,7 @@ def predict(root):
         assert prior_plan["geometry_config"] == plan["geometry_config"]
         assert prior_plan.get("aggregation_config") == plan.get("aggregation_config")
         assert prior_plan.get("phase_guide", False) == plan.get("phase_guide", False)
+        assert prior_plan.get("add_fine_carriers", False) == plan.get("add_fine_carriers", False)
         assert prior_plan["background_configuration"] == plan["background_configuration"]
         for name in ("neural_nuisance.py", "local_validated_waves.py"):
             assert (
@@ -597,6 +614,7 @@ def predict(root):
                 if plan.get("aggregation_config")
                 else None,
                 phase_guide=plan.get("phase_guide", False),
+                add_fine_carriers=plan.get("add_fine_carriers", False),
             )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
@@ -709,6 +727,7 @@ if __name__ == "__main__":
     parser.add_argument("--prediction-cache", type=Path)
     parser.add_argument("--phase-aggregation", action="store_true")
     parser.add_argument("--phase-guide", action="store_true")
+    parser.add_argument("--add-fine-carriers", action="store_true")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -727,6 +746,7 @@ if __name__ == "__main__":
                 else None,
                 phase_aggregation=args.phase_aggregation,
                 phase_guide=args.phase_guide,
+                add_fine_carriers=args.add_fine_carriers,
             )
         )
     elif args.mode == "score":

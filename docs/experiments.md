@@ -28,9 +28,18 @@ bands and persistent fine cab loss. Global amplitudes remain the default.
 The [global-background/local-carrier follow-up](global-background-local-carriers.md)
 reduces neural building artifacts with lower weak response than local nuisance
 fitting. Its [full1164-case comparison](global-background-full-panel.md) is
-running, adopting all2320 background fields and48 exact pilot cases with zero
-fresh neural forwards; paired comparison to the completed256 neural baseline
-is predeclared.
+complete: versus256 NN,400/far weak2.299%→2.778%, strong37.032%→48.055%,
+lower full RGB error and smaller added cab ripples, with higher mean quiet/
+increment errors. All68 native figures/saved baseline panels are reviewed.
+The [guided phase pilot](neural-guided-phase-pooling.md) retains much stronger
+analytic400/far weak28.702%, lower increment error and smaller building bands
+than unguided phase, with quiet/error costs and missing fine crossings. Its
+[full source/CFA/noise comparison](neural-guided-phase-full-panel.md) is running
+from its original frozen broad-only source, all2320 fields cached, zero fresh
+neural calls. The separate [fine-band pilot](fine-frequency-proposals.md) is
+complete:1600/far analytic weak0.989%→2.037%, same quiet/slightly lower increment
+error, source1-driven. Real cab lattice is more visible with false purple/green
+grid; building/neural1600 errors rise. All44 figures were actually inspected.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

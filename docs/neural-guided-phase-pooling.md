@@ -167,6 +167,13 @@ CPU correction takes384.33s versus629.08s unguided with two threads; the direct
 query-histogram implementation also changes, so that timing is not a range-
 guidance-only speed effect or a100MP benchmark.
 
+The separate [additional fine-band comparison](fine-frequency-proposals.md)
+now makes both cab directions more visible, with a purple/green periodic grid.
+Its1600/far analytic gain is source1-driven, with unchanged quiet error and
+slightly lower increment error;400/far stays unchanged. Building corrections
+and neural1600 errors rise. This does not alter the broad-only experiment or
+turn visibility into faithful mesh recovery.
+
 Frozen plan:
 `3735fe54cdb0136f9528b6c7859a2cc970c675051f50323cab6100aad8e89dcb`.
 Root: `.cache/experiments/neural-nuisance-guided-phase129-pilot-v1/`.

@@ -111,6 +111,15 @@ reviewed. Guidance helps this measured analytic operating point without
 recovering high-noise weak detail or fine real crossings. An input-only
 168-operator diagnostic finds only1.01549 maximum global residual amplification,
 so a large oblique-projection gain does not explain the checked failure.
+The [additional fine-band follow-up](fine-frequency-proposals.md) instead
+checks discovery: original cab proposals miss both RAW-green fine families.
+An additive A-only search finds them, preserving broad carriers and their
+correction. Complete48-case/44-figure review shows more cab lattice, with
+false purple/green periodic chroma. Analytic1600/far weak0.989%→2.037% retains
+quiet error and slightly lowers increment error, driven by one source;
+400/far remains identical. Building artifacts/neural1600 errors increase.
+The useful proposal gain is implemented, with its limits; finding a frequency
+does not validate missing-colour samples or the full delivered profile.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

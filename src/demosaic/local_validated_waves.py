@@ -163,6 +163,7 @@ def _refine_frequency(
     family_degrees=20.0,
     harmonics=1,
     weights=None,
+    admissible=None,
 ):
     basis = nuisance[selected]
     values = raw.ravel()[selected]
@@ -184,6 +185,8 @@ def _refine_frequency(
         chosen_next = chosen
         for candidate in candidates:
             if not 1 / 64 <= np.linalg.norm(candidate) <= 0.24 / harmonics:
+                continue
+            if admissible is not None and not admissible(candidate):
                 continue
             if avoid is not None and abs(np.dot(candidate, avoid)) > np.cos(
                 np.deg2rad(family_degrees)

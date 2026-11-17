@@ -186,7 +186,9 @@ def review(root, output):
                 for prefix, label, color in zip(
                     ("H1-", "conditional-", ""),
                     (
-                        ("Analytic raw wave", "Analytic guided phase", "Neural guided phase")
+                        ("Analytic raw wave", "Analytic broad+fine", "Neural broad+fine")
+                        if plan.get("add_fine_carriers")
+                        else ("Analytic raw wave", "Analytic guided phase", "Neural guided phase")
                         if plan.get("phase_guide")
                         else ("Analytic raw wave", "Analytic phase", "Neural phase")
                         if plan.get("aggregation_config")

@@ -76,3 +76,13 @@ actually inspected. Its stronger-response/error tradeoff remains separate
 from this pending guided-phase result.
 
 [Exact launch receipts and336 frozen source files](results/guided-phase129-full-setup-v1/publication.json).
+
+The [publication-queue addendum](results/guided-phase129-full-setup-v1/publication-queue-v1.json)
+freezes six exact launch/helper archives. It waits for the same producer and
+reviewer PID/creation times and successful terminal receipts before preparing
+saved256 baseline panels, extra real stress views, **two declared-primary
+analytic noisy/restored/exact-GT triplets**, and a70-figure native viewer/contact
+sheets. All70 still require actual viewing and final publication after closure;
+queue setup is not a quality result. No worker restart or neural replay is
+scheduled. A later [fine-band pilot](fine-frequency-proposals.md) is separate:
+this full run keeps the original broad-only guided source/configuration.

@@ -107,6 +107,12 @@ smaller building bands. The neural-nuisance arm worsens increment error;
 higher-noise detail and fine real crossings remain unresolved.
 Its [full guided source/CFA/noise review](docs/neural-guided-phase-full-panel.md)
 is running with all cached fields and no neural replay.
+The [additional fine-band pilot](docs/fine-frequency-proposals.md) makes both
+cab mesh directions more visible, with a purple/green grid. Analytic1600/far
+weak response0.989%→2.037% has unchanged quiet error and slightly lower
+increment error, driven by one source;400/far is unchanged. Building artifacts
+and neural1600 errors increase. This is an available experimental option;
+faithful fine-mesh colour and high-noise recovery remain unresolved.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -248,6 +254,16 @@ The [prior sinusoidal/phase comparison](docs/images/neural-nuisance-phase129-v1/
 remains available.
 
 ![Noisy, guided analytic-nuisance phase and exact constructed GT](docs/images/neural-nuisance-guided-phase129-v1/triplets/iso400-index0024-role2-analytic-triplet.png)
+
+The added fine-band option retains native1600/far noisy → restored → exact-GT
+triplets for [source0](docs/images/neural-nuisance-fine-phase129-v1/triplets/iso1600-index0008-role2-analytic-triplet.png)
+and source1 below: same native160 ROI/exposure2/contrast1, shot/read
+`0.00032/4.096e-7`. [Checkpoint/configuration and measured costs](docs/fine-frequency-proposals.md).
+The [cab before/after](docs/images/neural-nuisance-fine-phase129-v1/cab-before-after/mesh-nominal-right-before-after.png)
+shows increased lattice visibility and false colour against an independent
+ISO100 reference and JPEG, neither exact GT.
+
+![Source1: noisy, broad plus fine analytic phase, exact constructed GT](docs/images/neural-nuisance-fine-phase129-v1/triplets/iso1600-index0024-role2-analytic-triplet.png)
 
 The full neural panel retains [source1](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0024-role2-triplet.png)
 and [source7](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0120-role2-triplet.png)

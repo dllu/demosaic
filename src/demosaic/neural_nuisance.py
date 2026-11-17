@@ -269,10 +269,17 @@ def restore_neural_nuisance(
     reselect_frequencies=True,
     aggregation_config=None,
     phase_guide=False,
+    add_fine_carriers=False,
 ):
     """Matched analytic/neural nuisances; optional fixed-background phase delivery."""
     if type(phase_guide) is not bool or (phase_guide and aggregation_config is None):
         raise ValueError("Range guidance requires the phase reconstruction option")
+    if type(add_fine_carriers) is not bool or (
+        add_fine_carriers and (aggregation_config is None or reselect_frequencies)
+    ):
+        raise ValueError(
+            "Additional fine carriers require phase reconstruction and fixed proposals"
+        )
     if aggregation_config is not None:
         from .phase_aggregation import PhaseAggregateConfig
 
@@ -362,8 +369,36 @@ def restore_neural_nuisance(
                 )
                 for r, b, mask in zip(reference, backgrounds, masks, strict=True)
             ]
+            candidate_groups = [("H1-", "H1-", reference, True), ("neural", "", neural, False)]
+            fine_unavailable = []
+            if add_fine_carriers:
+                from .fine_carrier_proposals import fit_fine_candidate
+
+                fine = [
+                    fit_fine_candidate(tile, layout, r, shot=shot, read=read, config=config)
+                    for r in reference
+                ]
+                fine_unavailable = [
+                    fold for fold, candidate in enumerate(fine) if candidate is None
+                ]
+                fine_neural = [
+                    fit_neural_candidate(
+                        tile,
+                        layout,
+                        r,
+                        WithheldBackground(b.rgb[:, region[0], region[1]], mask),
+                        config=config,
+                        reselect_frequencies=False,
+                    )
+                    for r, b, mask in zip(fine, backgrounds, masks, strict=True)
+                    if not fine_unavailable
+                ]
+                if not fine_unavailable:
+                    candidate_groups.extend(
+                        [("fine-H1-", "H1-", fine, False), ("fine-neural", "", fine_neural, False)]
+                    )
             tile_records = {}
-            for prefix, candidates in [("H1-", reference), ("", neural)]:
+            for record_key, prefix, candidates, legacy_control in candidate_groups:
                 local_backgrounds = (
                     [
                         WithheldBackground(b.rgb[:, region[0], region[1]], mask)
@@ -448,7 +483,9 @@ def restore_neural_nuisance(
                     components = [p.components(tile, rgb) for p in phase]
                     unique = None
                     legacy = (
-                        [replacement_components(c, rgb) for c in candidates] if prefix else None
+                        [replacement_components(c, rgb) for c in candidates]
+                        if legacy_control
+                        else None
                     )
                 elif spatial is None:
                     unique = [
@@ -456,12 +493,14 @@ def restore_neural_nuisance(
                         for c, b in zip(candidates, local_backgrounds, strict=True)
                     ]
                     legacy = (
-                        [replacement_components(c, rgb) for c in candidates] if prefix else None
+                        [replacement_components(c, rgb) for c in candidates]
+                        if legacy_control
+                        else None
                     )
                 else:
                     local_components = [s.components(tile, rgb) for s in spatial]
                     unique = [value[0] for value in local_components]
-                    legacy = [value[1] for value in local_components] if prefix else None
+                    legacy = [value[1] for value in local_components] if legacy_control else None
                 if unique is not None:
                     components = [u[0] for u in unique]
                 maxima = []
@@ -491,7 +530,7 @@ def restore_neural_nuisance(
                                 * blend
                             )
                     maxima.append(float(local.max()))
-                tile_records[prefix or "neural"] = {
+                tile_records[record_key] = {
                     "frequencies": [c.frequencies_xy for c in candidates],
                     "matched": matched,
                     "local_max": maxima,
@@ -513,7 +552,7 @@ def restore_neural_nuisance(
                     ],
                 }
                 if unique is not None:
-                    tile_records[prefix or "neural"].update(
+                    tile_records[record_key].update(
                         wave_residual_energy_fraction_by_direction_color=[
                             u[1].tolist() for u in unique
                         ],
@@ -522,7 +561,7 @@ def restore_neural_nuisance(
                         ],
                     )
                 if phase_predictors is not None:
-                    arm = tile_records[prefix or "neural"]
+                    arm = tile_records[record_key]
                     arm["H1_diagnostics_scope"] = "Not phase-kernel diagnostics; omitted."
                     arm["heldout_full_standardized_MSE_by_color"] = [
                         [
@@ -546,29 +585,33 @@ def restore_neural_nuisance(
                         "Mean of the two direction-specific phase full models."
                     )
                 if spatial is not None:
-                    tile_records[prefix or "neural"]["wave_diagnostic_scope"] = (
+                    tile_records[record_key]["wave_diagnostic_scope"] = (
                         "Energy-weighted local-query averages; normalized Gram inverse cutoff1e-8. Geometry/global variance unchanged."
                     )
-                    tile_records[prefix or "neural"]["amplitude_nuisance"] = (
-                        config.amplitude_nuisance
-                    )
+                    tile_records[record_key]["amplitude_nuisance"] = config.amplitude_nuisance
                 if not prefix:
-                    column = reference[0].wave_slices[0][0]
-                    tile_records["neural"]["neural_nuisance_coefficients_by_color"] = [
+                    column = candidates[0].wave_slices[0][0] - 1
+                    tile_records[record_key]["neural_nuisance_coefficients_by_color"] = [
                         c.coefficients[:, column].tolist() for c in candidates
                     ]
                     if spatial is not None:
-                        tile_records["neural"]["neural_coefficient_scope"] = (
+                        tile_records[record_key]["neural_coefficient_scope"] = (
                             "Global background coefficients used in prediction; only residual carrier amplitudes vary locally."
                             if config.amplitude_nuisance == "global"
                             else "Global discovery coefficients only; actual prediction/delivery use local-query coefficients."
                         )
                     if phase is not None:
-                        tile_records["neural"]["neural_coefficient_scope"] = (
+                        tile_records[record_key]["neural_coefficient_scope"] = (
                             "Global joint-fit background coefficients used in both phase full/null models."
                         )
             denominator[region] += blend
-            records.append({"xy": [int(x), int(y)], "arms": tile_records})
+            records.append(
+                {
+                    "xy": [int(x), int(y)],
+                    "arms": tile_records,
+                    "fine_proposal_unavailable_folds": fine_unavailable,
+                }
+            )
     for key in outputs:
         outputs[key] = (parent.astype(np.float64) + totals[key] / denominator).astype(parent.dtype)
     return outputs, {
@@ -584,6 +627,7 @@ def restore_neural_nuisance(
         "geometry_config": config.to_dict(),
         "aggregation_config": aggregation_config.to_dict() if aggregation_config else None,
         "phase_guide": phase_guide,
+        "add_fine_carriers": add_fine_carriers,
         "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent."
         + (
             " Conditional/neural delivery uses local signed phase averages after a fixed global joint-fit background and per-direction global competing H1 fit. Identical composite linear map projects RAW and parent. H1 control retains its own original H1 validation scores."
@@ -593,6 +637,11 @@ def restore_neural_nuisance(
         + (
             " Both phase arms also condition normalized averages on their own-color A-only neural field, clipped0..1 and transformed by physical shot/read standard-deviation units. Fixed two-noise-unit range bins and [1,2,1]/4 range smoothing; RGB amplitudes remain separate."
             if phase_guide
+            else ""
+        )
+        + (
+            " Additional1/16..0.24-native fine pair discovered after projecting the original broad design, with coarse-profile/harmonic duplicate exclusions. Broad corrections retained; fine full/null and parent maps include broad carriers in global nuisance. Fine directions have separate A/B matching/validation; raw-H1 controls unchanged. More candidates do not confer calibrated confidence."
+            if add_fine_carriers
             else ""
         ),
     }

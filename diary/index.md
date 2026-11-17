@@ -65,3 +65,5 @@ Latest conditional result: [competing-orientation three-noise review completed](
 Latest model trial: [complementary CFA branch over frozen V200 EMA](2026-11-16-04-38-49-complementary-cfa-branch.md); training live, exact baseline review and all three conditional-noise profiles queued.
 
 Latest trial status: [complementary training completed and evaluator repaired](2026-11-16-04-38-49-complementary-cfa-branch.md); all 900 updates audited, corrected raw/EMA quality review running without retraining.
+
+Latest fine-detail follow-up: [additional fine-frequency proposals](2026-11-16-20-39-10-fine-frequency-proposals.md), complete48-case/44-figure review. Analytic1600/far weak0.989%→2.037% with unchanged quiet error/slightly lower increment error; source1 drives gain. Cab lattice more visible with purple/green grid, building/neural1600 errors rise. Separate broad-only full guided study remains running with its exact publication queue.
