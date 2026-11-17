@@ -32,15 +32,21 @@ real sky structure or drawing a mesh across smooth objects. Evaluate final RGB
 under correct, shuffled, masked and spatially shuffled scene context. Attention
 weights alone do not establish useful reliance.
 
-## Integrated model/data path, no quality claim yet
+## Integrated model/data path and completed2k probes
 
 The complete noisy-scene/native-crop path and a trainable scene adapter are now
-implemented. Nineteen focused tests pass, and actual V120 native256/B4 checks
+implemented. Forty-seven focused tests now cover observation, geometry,
+inference and canonical-crop context composition. Actual V120 native256/B4 checks
 complete two discarded optimizer updates for each of no-context/pooled/spatial
 conditioning. Initialization matches the base exactly on those fixtures;
 gradients reach the new adapter and the shared encoder stays frozen. Three
-matched2000-update probes are admitted, with the local-only arm running in the
-[full-corpus/context compute allocation](full-corpus-scaling.md).
+matched2000-update probes have completed in the
+[full-corpus/context compute allocation](full-corpus-scaling.md). Their actual
+training observation logs match byte for byte. The [matched native review](whole-scene-context-native-review.md)
+finds small mixed spatial-context changes on its first two sources and no
+convincing new fence/sky-cord recovery. All16 native boards were viewed. A fixed
+64-source study with context interventions is collecting on CPU; broad panels
+remain pending. V120 stays the general recommendation.
 [Exact model/data/preflight receipts](results/whole-scene-context-training-setup-v1/publication.json).
 [Independent source/checkpoint audit](results/whole-scene-context-training-setup-v1/independent-review.json).
 
@@ -51,7 +57,8 @@ output parity, gradient/frozen-backbone checks and optimizer/checkpoint reload.
 The first admission's preflight omitted the auxiliary term; its production
 handoff failed at directory creation before any context update. Both historical
 sources/receipts remain intact. Production starts afresh from V120, not the
-discarded checks. No context endpoint or restoration-quality review is complete.
+discarded checks. Training and the first native review are now complete;
+the broader development/intervention and full427/camera reviews are separate.
 
 [scene_context.py](../src/demosaic/scene_context.py) now provides:
 
@@ -129,8 +136,8 @@ source planes stay smaller. Encode once per noisy scene and share the spatial
 features across its crops/tiles. The new adapter projects four frozen feature
 levels and adds a zero-initialized offset to the trunk's eighth-resolution state.
 Tests verify gradient flow and spatially shuffled feature sensitivity. Final RGB
-dependence on correct versus shuffled/masked context still needs trained-quality
-evaluation. A local-only adapter remains a useful future capacity control.
+dependence on correct versus shuffled/masked context is being evaluated in the
+fixed64-source study. A local-only adapter remains a useful future capacity control.
 
 This quality experiment precedes replacing repeated local DINO calls with a
 student. Removing local capacity at the same time would confound the missing-

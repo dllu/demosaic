@@ -31,11 +31,11 @@ All110 native figures viewed. Full guided response/full RGB gains have higher
 increment error; the pilot gain does not persist. Joint coloured-wire gain is
 almost entirely neutral, with signed-colour fine recovery still missing.
 
-Latest training: [whole-scene integration and full-corpus scaling](2026-11-17-00-58-45-scene-context-full-corpus-training.md).
-The100k full V120 continuation has saved its first1000 updates with shuffled90778-photo epochs.
-Shared scene/crop generation and the added spatial/pooled context adapter pass
-19 tests and corrected optimizer qualification; the first matched context arm is running.
-Endpoint quality and required PSNR/fence bookkeeping remain pending.
+Latest native review: [scene inference and matched context arms](2026-11-17-01-45-10-scene-inference-first-control.md).
+All3 scene2k arms have completed training and both fence/native reviews, with no
+convincing new fine crossings.47 tests pass; fixed64-source/context interventions
+are collecting on CPU. Larger-corpus20k control is training; the100k trajectory
+has saved1000 updates. Full427/camera scores for these new endpoints remain pending.
 
 Latest completed cohort reviews: [full wave panel, V131 broad audit and fixed ADC repair](2026-11-16-11-25-42-full-panel-v131-audits.md).
 V131 photo+0.04000 dB has unseen-camera/ADC-color costs; an opt-in physical ADC

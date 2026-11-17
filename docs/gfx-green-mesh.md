@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 | --- | --- |
 | [V120 baseline](#v120-after-correcting-the-paired-data-mix) | Soft/irregular lattice, strongly affected by noise conditioning |
 | [V131 endpoint](v131-endpoint-quality.md), [V132 endpoint](v132-endpoint-quality.md) | Both 20k reviews complete; no clear new fine crossings |
+| [Matched2k whole-scene arms](whole-scene-context-native-review.md) | Local-only/pooled/spatial, both native ROIs/profiles/JPEGs viewed; nominal erases the mesh, nearby profile remains soft/incomplete; no convincing new crossings |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |

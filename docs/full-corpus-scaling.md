@@ -1,9 +1,10 @@
 # Full-corpus scaling and whole-scene context training
 
 **Larger-corpus training has begun: the100,000-update trajectory has saved its
-first1,000 updates.** The first whole-scene comparison arm is now running;
-the other context arms, a fresh matched20k control and the remaining99k updates
-share a sequential GPU allocation. No restoration-quality gain is claimed.
+first1,000 updates.** All three whole-scene comparison arms have completed;
+the fresh matched20k control is now training, before the remaining99k updates.
+Their [first matched native review](whole-scene-context-native-review.md) finds
+no convincing new fine crossings. No larger-corpus endpoint gain is claimed.
 V120 remains the general recommendation while milestone evaluation is pending.
 This implements the [training-scale review](training-scale-pipeline-review-2026-11-17.md)
 and complements the [scene-context experiment](whole-scene-context-next-test.md).
@@ -105,11 +106,13 @@ This is an interrupted trajectory milestone, not a completed100k endpoint.
 The new allocation adopts that state and does not replay its prefix.
 
 Training completion, numerical evaluation and actual native viewing are tracked
-separately. No new full427 or known/unseen-camera result is available: the new
-endpoints have not finished, and the32-photo monitor is not a comparable panel.
-The PSNR registry/chart therefore remains unchanged. V120/V131 remain the latest
-completed comparable broad measurements. Both standing fence reviews and at
-least two native exact-GT triplets are pending for the new endpoints.
+separately. No new full427 or known/unseen-camera result is available, and the
+32-photo monitor is not a comparable panel. Neither scaling horizon is complete;
+the finished scene arms' broad evaluation is still pending. The PSNR registry/
+chart therefore remains unchanged. V120/V131 remain the latest
+completed comparable broad measurements. Both standing fence reviews and native
+triplets are pending for scaling endpoints; the separate scene2k arms now have
+their [completed native comparison](whole-scene-context-native-review.md).
 
 The scaling worker records CPU source/crop metadata each update. Actual
 shot/read/WB/matrix tensors are transferred in250-update batches; complete

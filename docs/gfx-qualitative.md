@@ -8,6 +8,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [V131 20k endpoint](v131-endpoint-quality.md) and
   [V132 20k endpoint](v132-endpoint-quality.md): sky, building, foliage and
   chain-link fence, plus both fine-cab profiles; weak crossings remain unresolved.
+- [Matched2k scene-context arms](whole-scene-context-native-review.md): local-only,
+  pooled and spatial conditioning, all main regions/both cab profiles actually
+  viewed. Main detail stays close to V120; no convincing new fine crossings.
 - [Full guided phase review](neural-guided-phase-full-panel.md) and
   [joint-color fine support](joint-fine-colour-support.md): available detail
   experiments with response/tint gains and persistent flat/color costs.

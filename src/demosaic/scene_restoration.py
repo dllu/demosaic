@@ -100,6 +100,9 @@ class WholeSceneRestorer(nn.Module):
         preview, grid = scene_preview(
             packed, colors, wb, matrix, long_side=long_side, exposure=exposure
         )
+        # Inference may build the small preview on the CPU. Transfer only that
+        # preview; a complete100MP packed observation need not live on CUDA.
+        preview = preview.to(self.base.context.mean.device)
         preview = F.pad(
             preview,
             (0, grid.padded_hw[1] - grid.preview_hw[1], 0, grid.padded_hw[0] - grid.preview_hw[0]),

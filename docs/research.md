@@ -31,8 +31,9 @@ has repeatedly come with extra flat-region error or false color. The
 4. **Establish a production speed baseline, then optimize against it.** Separate
    decoding, context encoding, trunk, overlap, transfer and output costs. Benchmark
    batch/precision changes on the current model before selecting them. Shared
-   scene features, efficient reconstruction and distillation remain proposals,
-   not measured speedups. [Runtime/context review](weak-detail-global-context-production-review-2026-11-16.md).
+   scene conditioning is implemented; efficient reconstruction and distillation
+   still need testing. No shared-context production speedup is measured.
+   [Runtime/context review](weak-detail-global-context-production-review-2026-11-16.md).
 
 ## Reading and design notes
 
@@ -41,7 +42,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Weak-detail literature review](weak-detail-literature-2026-11.md) | Initial November 15 literature search, with explicitly added follow-ups; primary-paper links and proposed tests |
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
-| [Whole-scene context test](whole-scene-context-next-test.md) | Architecture/data contract and implementation status; no reviewed trained quality gain yet |
+| [Whole-scene context test](whole-scene-context-next-test.md), [first native review](whole-scene-context-native-review.md) | All3 matched2k arms trained/native-viewed; no convincing new fine crossing. Fixed64-source/intervention study collecting; full427/camera pending |
 | [Full-corpus scaling](full-corpus-scaling.md) | Executing100k/20k matched-data continuations, source/crop/noise coverage and actual execution profile; no endpoint quality claim yet |
 
 These are research proposals and bounded experiment conclusions. They do not

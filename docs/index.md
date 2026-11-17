@@ -34,7 +34,8 @@ Start with the [README](../README.md) for installation and inference.
 [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) ·
 [Training scale review](training-scale-pipeline-review-2026-11-17.md).
 
-Implementation reports: [whole-scene context](whole-scene-context-next-test.md) ·
+Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
+[matched2k native review](whole-scene-context-native-review.md) ·
 [full-corpus scaling](full-corpus-scaling.md).
 
 Individual experiment reports are evidence snapshots, not automatically current

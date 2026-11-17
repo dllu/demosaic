@@ -2,10 +2,12 @@
 
 Reviewed November 17, 2026. **V120 Small is the general inference recommendation.**
 The latest completed broad comparison is V131; its higher photo score comes with
-camera and color costs. Whole-scene context is under development, with no reviewed
-trained-model result yet. A [100k full-corpus V120 continuation](full-corpus-scaling.md)
+camera and color costs. The [first2k whole-scene review](whole-scene-context-native-review.md)
+finds small mixed changes and persistent missing fine crossings; broader
+evaluation is pending. A [100k full-corpus V120 continuation](full-corpus-scaling.md)
 has completed its first1,000 updates and awaits its scheduled continuation after
-the context probes/control; photo/camera scores and both fence reviews are pending.
+the now-completed context probes and running20k control. Scaling endpoint scores
+and fence reviews remain pending; the separate2k scene arms have both fence reviews.
 [Research status](experiments.md).
 
 ## Full-model choices
@@ -16,6 +18,7 @@ the context probes/control; photo/camera scores and both fence reviews are pendi
 | [V131 continuation](v131-broad-primary.md) | 37.08008 dB on the same photo panel; 400/427 source means improve; targeted faint ADC +0.14555 dB over V120 | Experimental photo/detail option. Unseen-camera −0.04381 dB; worst ADC mean-color error 1,816 DN16 versus V120's 55.5; no new full-frame validation |
 | [V131 ADC Malvar](v131-adc-projection.md) | Same learned weights; ADC-only photo +0.15074 dB over V131 and worst ADC color error reduced to 19.98 DN16 | Opt-in repair for zero shot/read conditioning. Weakest ADC band error +1.43%; positive-noise V131 output and camera costs remain unchanged |
 | [V132 RAW attention](v132-endpoint-quality.md) | Completed 20k ablation with every training input hash matched to V131 | Faint ADC −0.40978 dB versus V131, ordinary material quality essentially tied; no broad-panel or full-frame validation. Retained for reproduction |
+| [Scene-context2k arms](whole-scene-context-native-review.md) | Usable experimental scene/native-tile API; all3 matched horizons and both fence reviews complete | Small mixed changes on two sky-heavy sources, missing fine crossings. Added scene-encoding/adapter work; original local encoder retained.64-source/intervention and broad panels pending |
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes

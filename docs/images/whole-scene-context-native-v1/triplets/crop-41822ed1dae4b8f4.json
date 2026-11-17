@@ -1,0 +1,104 @@
+{
+  "image": "crop-41822ed1dae4b8f4.png",
+  "caption": "mesh-nominal-fine-green-mesh-left",
+  "pixel_scale": "1 image pixel = 1 PNG pixel; open original at 100%",
+  "display_encoding": "8-bit sRGB preview; evaluation uses unquantized predictions",
+  "panels": [
+    {
+      "label": "Noisy (Malvar)",
+      "png_xywh": [
+        8,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "Local-only2k EMA",
+      "png_xywh": [
+        176,
+        24,
+        160,
+        160
+      ]
+    },
+    {
+      "label": "ISO100 AHD, not GT",
+      "png_xywh": [
+        344,
+        24,
+        160,
+        160
+      ]
+    }
+  ],
+  "png_sha256": "514b67e3e911dcc68d85b043418601ee16c0fbe508f323f58d0e1efa492aae0c",
+  "observation": "mesh-nominal",
+  "case": {
+    "name": "fine-green-mesh-left",
+    "ROI_xywh": [
+      206,
+      229,
+      160,
+      160
+    ],
+    "noisy_raw_xywh": [
+      806,
+      6489,
+      160,
+      160
+    ],
+    "reference_raw_xywh": [
+      805,
+      6489,
+      160,
+      160
+    ],
+    "camera_JPEGs": {
+      "noisy_camera_jpeg": {
+        "pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+          "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+        },
+        "xywh": [
+          760,
+          6500,
+          160,
+          160
+        ],
+        "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+      },
+      "reference_camera_jpeg": {
+        "pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+          "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+        },
+        "xywh": [
+          759,
+          6501,
+          160,
+          160
+        ],
+        "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+      }
+    },
+    "crop_index": 0
+  },
+  "noise": {
+    "shot": 0.00128,
+    "read": 6.5536e-06,
+    "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+  },
+  "input_arrays": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+    "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+  },
+  "display_exposure": 16.0,
+  "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v2/work/artifacts/train/none/step002000.pt",
+    "sha256": "ceb5ddaf23fce47806a01045bd86d34bb48d1f64031e382b0d5cfbabf0716880"
+  },
+  "weights": "EMA",
+  "arm": "none"
+}
