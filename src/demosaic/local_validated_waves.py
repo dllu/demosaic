@@ -105,6 +105,7 @@ class LocalCandidate:
     full_cfa: np.ndarray
     conditional_null_cfa: np.ndarray
     variance_cfa: np.ndarray
+    guide_search_excluded: int = 0
 
 
 def _wave_columns(xx, yy, frequency, harmonics=1):
@@ -264,6 +265,27 @@ def _guide_frequencies(value, family_degrees):
     return tuple(tuple(float(v) for v in row) for row in frequencies)
 
 
+def _validate_guide_search(recenter, guard_px, bins, harmonics):
+    if type(recenter) is not bool or (recenter and (not bins or harmonics is not None)):
+        raise ValueError("Guide recentering requires the full interpolated phase basis")
+    if type(guard_px) is not int or guard_px < 0 or (guard_px and not recenter):
+        raise ValueError("An edge guard requires phase-guide recentering and a native pixel width")
+
+
+def _edge_guarded_green(raw, green, nuisance, x, y, angle, offset, width, shot, read):
+    """Exclude a band around a strong discovery-fold step from frequency selection."""
+    design = nuisance[green]
+    values = raw.ravel()[green]
+    coefficients = np.linalg.lstsq(design, values, rcond=1e-10)[0]
+    brightest = max(float(np.max(design @ coefficients)), 1e-6)
+    if abs(coefficients[3]) <= 2 * np.sqrt(read + shot * brightest):
+        return green
+    cx, cy = np.cos(angle), np.sin(angle)
+    per_pixel = np.hypot(2 * cx / raw.shape[1], 2 * cy / raw.shape[0])
+    distance = np.abs(x * cx + y * cy - offset).ravel() / per_pixel
+    return green & (distance >= width)
+
+
 def _recenter_phase_guides(raw, green, nuisance, xx, yy, frequencies, bins, shot, read, family):
     """Search a bounded frequency cross using only one fold's green measurements."""
     x, y = xx.ravel()[green], yy.ravel()[green]
@@ -317,6 +339,7 @@ def fit_local_candidate(
     phase_bins=0,
     phase_harmonics=None,
     recenter_phase_guides=False,
+    phase_guide_edge_guard_px=0,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
@@ -324,10 +347,9 @@ def fit_local_candidate(
     basis. The bounded search, when enabled, reads only this fold's green sites.
     """
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
-    if type(recenter_phase_guides) is not bool or (
-        recenter_phase_guides and (not phase_bins or phase_harmonics is not None)
-    ):
-        raise ValueError("Guide recentering requires the full interpolated phase basis")
+    _validate_guide_search(
+        recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
+    )
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -353,12 +375,21 @@ def fit_local_candidate(
     if config.background == "piecewise_affine":
         step = nuisance[:, 3]
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
+    excluded = 0
     if guide_frequencies_xy is not None:
         frequencies = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
-        if recenter_phase_guides:
+        search = green
+        if phase_guide_edge_guard_px:
+            search = _edge_guarded_green(
+                raw, green, nuisance, x, y, angle, offset, phase_guide_edge_guard_px, shot, read
+            )
+            excluded = int(green.sum() - search.sum())
+        if recenter_phase_guides and (
+            not phase_guide_edge_guard_px or search.sum() >= nuisance.shape[1] + phase_bins + 1
+        ):
             frequencies = _recenter_phase_guides(
                 raw,
-                green,
+                search,
                 nuisance,
                 xx,
                 yy,
@@ -497,6 +528,7 @@ def fit_local_candidate(
         full_cfa.reshape(raw.shape),
         nulls.reshape(len(unit_slices), *raw.shape),
         variance.reshape(raw.shape),
+        excluded,
     )
 
 
@@ -822,6 +854,7 @@ def restore_local_waves(
     compare_joint_colour_support=False,
     compare_pooled_refit=False,
     recenter_phase_guides=False,
+    phase_guide_edge_guard_px=0,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -851,10 +884,9 @@ def restore_local_waves(
     if type(conditional_delivery) is not bool:
         raise ValueError("Require an explicit boolean conditional-delivery choice")
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
-    if type(recenter_phase_guides) is not bool or (
-        recenter_phase_guides and (not phase_bins or phase_harmonics is not None)
-    ):
-        raise ValueError("Guide recentering requires the full interpolated phase basis")
+    _validate_guide_search(
+        recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
+    )
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if type(compare_pooled_support) is not bool:
@@ -891,6 +923,8 @@ def restore_local_waves(
         guide["phase_harmonics"] = phase_harmonics
     if recenter_phase_guides:
         guide["recenter_phase_guides"] = True
+    if phase_guide_edge_guard_px:
+        guide["phase_guide_edge_guard_px"] = phase_guide_edge_guard_px
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
@@ -1133,6 +1167,11 @@ def restore_local_waves(
                     "matched_units": units,
                     "local_max": local_max,
                     "global_scores": global_max,
+                    **(
+                        {"guide_search_excluded": [c.guide_search_excluded for c in candidates]}
+                        if phase_guide_edge_guard_px
+                        else {}
+                    ),
                     **({"phase_agreement": agreements} if compare_phase_agreement else {}),
                     **(
                         {"discovery_reliability": [weight.tolist() for weight in reliability]}

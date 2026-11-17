@@ -87,6 +87,45 @@ def test_phase_recenter_does_not_move_the_guide_on_a_flat():
     assert fit.frequencies_xy == original
 
 
+def test_edge_guard_subsets_only_the_frequency_search(monkeypatch):
+    raw, colors, _ = scene()
+    raw[:, 30:] += 0.1
+    discovery = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 0,
+        "read": 1e-6,
+        "config": CONFIG,
+        "guide_frequencies_xy": ((5 / 64, 3 / 64), (-4 / 64, 7 / 64)),
+        "phase_bins": 8,
+        "recenter_phase_guides": True,
+    }
+    inspected = []
+
+    def record(_raw, green, _nuisance, _x, _y, guide, *_args):
+        inspected.append(green.reshape(raw.shape).copy())
+        return guide
+
+    monkeypatch.setattr(local, "_recenter_phase_guides", record)
+    plain = local.fit_local_candidate(raw, colors, discovery, **options)
+    guarded = local.fit_local_candidate(
+        np.where(discovery, raw, np.nan), colors, discovery, **options, phase_guide_edge_guard_px=8
+    )
+    np.testing.assert_array_equal(inspected[0], (colors == 1) & discovery)
+    assert guarded.guide_search_excluded > 100
+    assert inspected[0].sum() - inspected[1].sum() == guarded.guide_search_excluded
+    assert not (inspected[1] & ~inspected[0]).any()
+    np.testing.assert_array_equal(guarded.full_cfa, plain.full_cfa)
+    np.testing.assert_array_equal(guarded.conditional_null_cfa, plain.conditional_null_cfa)
+    for match, control in zip(guarded.selected_indices, plain.selected_indices, strict=True):
+        np.testing.assert_array_equal(match, control)
+
+    flat = local.fit_local_candidate(
+        np.full_like(raw, 0.07), colors, discovery, **options, phase_guide_edge_guard_px=8
+    )
+    assert flat.guide_search_excluded == 0
+    np.testing.assert_array_equal(inspected[-1], inspected[0])
+
+
 def test_all_knot_harmonics_span_the_existing_discovery_model():
     raw, colors, _ = scene()
     split = stratified_split(raw.shape, 81)

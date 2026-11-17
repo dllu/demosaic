@@ -7,6 +7,10 @@ from the same error at ISO6400. The real sky matches V120, and fine
 cab crossings remain unresolved.
 [Audited comparison and executed sources](results/phase-guide-recenter-v1/publication.json).
 
+The [edge-exclusion follow-up](phase-guide-edge-guard.md) repairs most
+of the ISO400 near-edge guide drift by dropping a narrow band only
+from frequency selection.
+
 ## The guide-error test
 
 The [fresh weighted-refit comparison](fresh-phase-refit.md) recovered

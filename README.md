@@ -19,10 +19,11 @@ V132's matched attention trial does not improve faint-detail quality.
 Version numbers identify experiments, not releases: V198/V200 are separate
 small detail-head studies, not successors to the full V131/V132 models.
 
-The larger-corpus continuation visited all 90,778 ordinary training photos
-by step 17,039. Its 20k checkpoint improves fine-band error on three faint
-materials versus the short schedule, with lower mean faint sRGB PSNR.
-The 100k schedule continues.
+The larger-corpus continuation completed its second pass through all
+90,778 ordinary training photos at step 33,985. Its 20k checkpoint
+reduces fine-band error on three faint materials versus the short
+schedule, with lower mean faint sRGB PSNR. The 100k run continues,
+with a matched image review queued for the 50k checkpoint.
 [Training coverage](docs/full-corpus-scaling.md) ·
 [Matched 20k images and metrics](docs/full-corpus-long20k-native.md).
 

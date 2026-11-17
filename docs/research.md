@@ -65,6 +65,10 @@ has repeatedly come with extra flat-region error or false color. The
    at ISO400 far. Frequency choices can drift on accurate near-edge
    guides, with higher delivered no-wire correction. ISO6400 radial
    recovery is small. [Guide-error test](phase-guide-recenter.md).
+   Excluding an 8-pixel band during the discovery search improves ISO400
+   near-edge guide accuracy and response while retaining the far-edge
+   repair. Held-out validation still uses its original RAW samples.
+   [Edge exclusion](phase-guide-edge-guard.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

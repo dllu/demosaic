@@ -119,6 +119,12 @@ compared with 1.36% from the shifted guide alone. It lowers recovery
 with the nominal near-edge guides and offers little repair at
 ISO6400. The fine cab crossings remain unresolved.
 
+An [8-pixel edge exclusion](phase-guide-edge-guard.md) raises ISO400
+near-edge weak response from 6.47% to 12.16% with nominal
+guides while preserving the far-edge radial repair. The guard changes
+frequency selection only, with a small measured quiet-error increase
+on the near-edge fields.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

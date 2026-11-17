@@ -84,7 +84,7 @@ def prepare(root, fresh):
     )
 
 
-def restore(parent, packed, colors, guides, noise, cfg, thresholds, recenter):
+def restore(parent, packed, colors, guides, noise, cfg, thresholds, recenter, *, edge_guard_px=0):
     values, audit = restore_local_waves(
         parent,
         packed,
@@ -95,6 +95,7 @@ def restore(parent, packed, colors, guides, noise, cfg, thresholds, recenter):
         compare_pooled_support=True,
         compare_pooled_refit=True,
         recenter_phase_guides=recenter,
+        phase_guide_edge_guard_px=edge_guard_px,
         shot=noise["shot"],
         read=noise["read"],
         config=cfg,
