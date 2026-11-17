@@ -55,6 +55,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Long-schedule 20k checkpoint](full-corpus-long20k-native.md) compares
   all four areas with V120 and short 20k. The coarse crossings remain
   visible, and foliage and building details remain soft.
+- [Oriented RAW support](oriented-raw-support.md) gives the same sky
+  pixels. The rectangles make small changes to the building, foliage,
+  and coarse fence, with the main crossings still visible.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

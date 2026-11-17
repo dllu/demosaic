@@ -82,6 +82,11 @@ frequencies. At the same quiet error, it raises held-out ISO400 far weak
 response from 16.89% to 17.54%. The tighter ISO6400 gate still recovers
 little weak detail, and real cab crossings remain unresolved.
 
+The [oriented-support comparison](oriented-raw-support.md) favors the
+square validation window at the tight quiet budget. Both tested
+rectangles lose low-noise recovery. At ISO6400 far they slightly reduce
+increment error and also reduce weak response.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

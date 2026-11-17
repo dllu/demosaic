@@ -19,6 +19,7 @@ preserves its original comparison pixels and provenance.
 | [Phase-profile agreement](phase-profile-agreement.md) | Both ROIs, profiles and JPEGs viewed. High agreement in both fitted directions, slight attenuation of modulation, crossings still incomplete |
 | [Donor subharmonics](donor-subharmonics.md) | Both ROIs and profiles match the previous pooled result exactly. Both JPEG comparisons still show missing fine crossings |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Matched V120 and short schedule, both ROIs/profiles/JPEGs viewed. Fine crossings are largely erased at nominal conditioning and soft or incomplete with the transferred profile |
+| [Oriented RAW support](oriented-raw-support.md) | Both rectangular footprints reviewed on both ROIs and noise profiles. Subtle changes to diagonal modulation, with no convincing additional crossings |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |

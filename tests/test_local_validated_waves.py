@@ -112,6 +112,52 @@ def test_phase_agreement_measures_interpolated_shape_and_preserves_phase_sign():
     np.testing.assert_allclose(local.phase_profile_agreement(3 * b, a / 2), observed, atol=1e-14)
 
 
+@pytest.mark.parametrize("orientation", ["along", "across"])
+def test_oriented_validation_matches_direct_native_pixel_sums(orientation):
+    raw, colors, _ = scene()
+    split = stratified_split(raw.shape, 87)
+    fit = local.fit_local_candidate(
+        raw,
+        colors,
+        split,
+        shot=8e-5,
+        read=2.56e-8,
+        config=CONFIG,
+        guide_frequencies_xy=((0.078, 0.045), (-0.064, 0.108)),
+    )
+    window = 19
+    local_scores, global_scores = local.conditional_scores(
+        fit,
+        raw,
+        colors,
+        ~split,
+        window=window,
+        stride=8,
+        orientation=orientation,
+    )
+    _, square_global = local.conditional_scores(fit, raw, colors, ~split, window=window, stride=8)
+    np.testing.assert_array_equal(global_scores, square_global)
+    for direction, (fx, fy) in enumerate(fit.frequencies_xy):
+        norm = np.hypot(fx, fy)
+        for cy, cx in [(0, 0), (32, 24), (63, 63)]:
+            y, x = np.mgrid[:64, :64]
+            parallel = ((y - cy) * fx - (x - cx) * fy) / norm
+            perpendicular = ((x - cx) * fx + (y - cy) * fy) / norm
+            if orientation == "across":
+                parallel, perpendicular = perpendicular, parallel
+            region = (abs(parallel) <= window / np.sqrt(2)) & (
+                abs(perpendicular) <= window / (2 * np.sqrt(2))
+            )
+            for color in range(3):
+                good = region & ~split & (colors == color)
+                full, base = fit.full_cfa[good], fit.conditional_null_cfa[direction, good]
+                variance, value = fit.variance_cfa[good], raw[good]
+                energy = np.sum((full - base) ** 2 / variance)
+                numerator = np.sum(((value - base) ** 2 - (value - full) ** 2) / variance)
+                expected = numerator / (2 * np.sqrt(energy)) if energy else 0.0
+                assert local_scores[direction, color, cy, cx] == pytest.approx(expected, abs=1e-10)
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
 def test_donor_half_frequency_requires_measured_long_repeat(layout):
     y, x = np.mgrid[:64, :64]

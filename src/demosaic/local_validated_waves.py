@@ -446,8 +446,31 @@ def phase_fit_reliability(candidate, colors):
     return reliability
 
 
+def oriented_validation_footprint(window, frequency, orientation):
+    """Sample a two-to-one validation rectangle on the native pixel lattice."""
+    normal = np.asarray(frequency, np.float64)
+    normal = normal / np.linalg.norm(normal)
+    tangent = np.array([-normal[1], normal[0]])
+    long_radius, short_radius = window / np.sqrt(2), window / (2 * np.sqrt(2))
+    radius = int(np.ceil(np.hypot(long_radius, short_radius)))
+    y, x = np.mgrid[-radius : radius + 1, -radius : radius + 1]
+    along = x * tangent[0] + y * tangent[1]
+    across = x * normal[0] + y * normal[1]
+    if orientation == "across":
+        along, across = across, along
+    return (np.abs(along) <= long_radius) & (np.abs(across) <= short_radius)
+
+
 def conditional_scores(
-    candidate, raw, colors, validation_mask, *, window=65, stride=16, reliability=None
+    candidate,
+    raw,
+    colors,
+    validation_mask,
+    *,
+    window=65,
+    stride=16,
+    reliability=None,
+    orientation=None,
 ):
     """Assess each fixed direction/harmonic and color against its A-only null."""
     raw, colors, mask = np.asarray(raw, np.float64), np.asarray(colors), np.asarray(validation_mask)
@@ -468,8 +491,18 @@ def conditional_scores(
         or np.any((reliability < 0) | (reliability > 1))
     ):
         raise ValueError("Require finite per-direction and color reliability in [0, 1]")
+    if orientation not in (None, "along", "across"):
+        raise ValueError("Unknown orientation for validation support")
+    if orientation is not None:
+        from scipy.signal import fftconvolve
+
     local, global_scores = np.zeros((units, 3, h, w)), np.zeros((units, 3))
     for direction in range(units):
+        if orientation is not None:
+            family = candidate.unit_keys[direction][0]
+            footprint = oriented_validation_footprint(
+                window, candidate.frequencies_xy[family], orientation
+            )
         for color in range(3):
             selected = mask & (colors == color)
             improvement, energy = np.zeros(raw.shape), np.zeros(raw.shape)
@@ -486,8 +519,17 @@ def conditional_scores(
                 full = base + reliability[direction, color] * (full - base)
             improvement[selected] = ((value - base) ** 2 - (value - full) ** 2) / variance
             energy[selected] = (full - base) ** 2 / variance
-            numerator = _box_sums(improvement, ay, ax, window)
-            denominator = 2 * np.sqrt(np.maximum(_box_sums(energy, ay, ax, window), 0))
+            if orientation is None:
+                numerator = _box_sums(improvement, ay, ax, window)
+                support_energy = _box_sums(energy, ay, ax, window)
+            else:
+                centers = np.ix_(ay, ax)
+                numerator = fftconvolve(improvement, footprint, mode="same")[centers]
+                support_energy = fftconvolve(energy, footprint, mode="same")[centers]
+                # Ignore roundoff at centers with no contributing energy.
+                floor = 64 * np.finfo(np.float64).eps * energy.sum()
+                support_energy = np.where(support_energy > floor, support_energy, 0)
+            denominator = 2 * np.sqrt(np.maximum(support_energy, 0))
             scores = np.divide(
                 numerator, denominator, out=np.zeros_like(numerator), where=denominator > 0
             )
@@ -665,6 +707,7 @@ def restore_local_waves(
     shrink_phase_fit=False,
     compare_pooled_support=False,
     compare_phase_agreement=False,
+    compare_oriented_support=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -702,6 +745,10 @@ def restore_local_waves(
         compare_phase_agreement and (not phase_bins or not compare_pooled_support)
     ):
         raise ValueError("Phase agreement requires fixed phase bins and pooled support")
+    if type(compare_oriented_support) is not bool or (
+        compare_oriented_support and not compare_pooled_support
+    ):
+        raise ValueError("Oriented support requires pooled support")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
@@ -716,6 +763,8 @@ def restore_local_waves(
     modes = ("global", "local", "pooled-local") if compare_pooled_support else ("global", "local")
     if compare_phase_agreement:
         modes += ("phase-agreement",)
+    orientations = ("along", "across") if compare_oriented_support else ()
+    modes += orientations
     outputs = {(mode, float(t)): parent.copy() for mode in modes for t in thresholds}
     if shot + read == 0:
         return outputs, {"patches": 0, "identity_zero_noise": True}
@@ -780,6 +829,22 @@ def restore_local_waves(
                 )
                 for c, weight in zip(predictors, reliability, strict=True)
             ]
+            oriented_scores = {
+                mode: [
+                    conditional_scores(
+                        c,
+                        tile,
+                        layout,
+                        ~c.discovery_mask,
+                        window=config.validation_window,
+                        stride=config.validation_stride,
+                        reliability=weight,
+                        orientation=mode,
+                    )[0]
+                    for c, weight in zip(predictors, reliability, strict=True)
+                ]
+                for mode in orientations
+            }
             matched = match_directions(
                 candidates[0].frequencies_xy,
                 candidates[1].frequencies_xy,
@@ -816,6 +881,10 @@ def restore_local_waves(
                 global_score = np.minimum(scores[0][1][a], scores[1][1][b])
                 if compare_pooled_support:
                     pooled = pooled_support_score(first, second)
+                oriented_pooled = [
+                    (mode, pooled_support_score(folds[0][a], folds[1][b]))
+                    for mode, folds in oriented_scores.items()
+                ]
                 if compare_phase_agreement:
                     slices = [slice(*c.unit_slices[index]) for c, index in zip(candidates, (a, b))]
                     agreement = phase_profile_agreement(
@@ -840,6 +909,10 @@ def restore_local_waves(
                             totals["phase-agreement", float(threshold)][
                                 :, y : y + n, x : x + n
                             ] += pooled_delivery * agreement_weight
+                    for mode, score in oriented_pooled:
+                        totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
+                            component * support_weight(score, threshold) * blend
+                        )
                 local_max.append(float(np.max(local)))
                 global_max.append(global_score.tolist())
             denominator[region] += blend
@@ -883,6 +956,7 @@ def restore_local_waves(
         **({"shrink_phase_fit": True} if shrink_phase_fit else {}),
         **({"compare_pooled_support": True} if compare_pooled_support else {}),
         **({"compare_phase_agreement": True} if compare_phase_agreement else {}),
+        **({"compare_oriented_support": True} if compare_oriented_support else {}),
         "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }

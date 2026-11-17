@@ -194,15 +194,15 @@ def matched_quiet(rows, thresholds, budgets, *, methods=METHODS, shared_zero="mi
     return out
 
 
-def insert_camera_panel(output, key, old, after_label, new_label, new_pixels):
+def insert_camera_panels(output, key, old, after_label, added):
     source = np.asarray(Image.open(checked(old["image"])))
     cells = []
     for panel in old["panels"]:
         x, y, w, h = panel["png_xywh"]
         cells.append((panel["label"], source[y : y + h, x : x + w]))
         if panel["label"] == after_label:
-            cells.append((new_label, new_pixels))
-    assert len(cells) == len(old["panels"]) + 1
+            cells.extend(added)
+    assert len(cells) == len(old["panels"]) + len(added)
     board = Image.new("RGB", (8 + 168 * len(cells), 192), "#eeeeee")
     drawer = ImageDraw.Draw(board)
     panels = []
@@ -219,6 +219,10 @@ def insert_camera_panel(output, key, old, after_label, new_label, new_pixels):
         x, y, w, h = panel["png_xywh"]
         np.testing.assert_array_equal(rendered[y : y + h, x : x + w], pixels)
     return reference(dest), panels
+
+
+def insert_camera_panel(output, key, old, after_label, new_label, new_pixels):
+    return insert_camera_panels(output, key, old, after_label, [(new_label, new_pixels)])
 
 
 def report_camera(plan, collected, output):

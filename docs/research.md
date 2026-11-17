@@ -40,6 +40,10 @@ has repeatedly come with extra flat-region error or false color. The
    both guide misses. The lower-noise far response improves at equal
    quiet error. The high-noise case still has little recoverable response
    at the conservative gate. [Donor subharmonic test](donor-subharmonics.md).
+   Two-to-one validation rectangles along and across the wire retain less
+   weak response than the square under the tight quiet budget. The
+   ISO6400 wire-free edge control gives essentially the same error for
+   all three. [Oriented validation](oriented-raw-support.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
