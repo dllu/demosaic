@@ -149,6 +149,13 @@ are independently audited. The1600 joint weak gain is almost entirely neutral:
 signed-colour weak25.362225%→25.362461%, with increment/colour errors slightly
 worse. All-stage errors remain above V120;6400 has no useful weak gain.
 Reduced real tint and faithful signed-colour reconstruction are distinct outcomes.
+The [whole-image production/context review](weak-detail-global-context-production-review-2026-11-16.md)
+therefore remains useful: current DINO still receives only tiles. The
+[scene-context implementation/data follow-up](whole-scene-context-next-test.md)
+prioritizes aligned whole-scene features alongside local RAW reconstruction,
+with same-observation scene/crop training and correct-versus-shuffled-context
+controls. CFA preview/query plumbing is tested; no scene-conditioned quality
+benefit is established yet.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

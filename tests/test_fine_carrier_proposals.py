@@ -152,11 +152,16 @@ def test_no_distinct_fine_pair_falls_back_to_broad_and_keeps_exact_parent_identi
 
 
 @pytest.mark.parametrize(
-    ("fine_reconstruction", "fine_support"),
-    [("phase", "independent"), ("sinusoidal", "independent"), ("sinusoidal", "joint")],
+    ("fine_reconstruction", "fine_support", "fine_validation"),
+    [
+        ("phase", "independent", "nuisance"),
+        ("sinusoidal", "independent", "nuisance"),
+        ("sinusoidal", "joint", "nuisance"),
+        ("sinusoidal", "joint", "neural-parent"),
+    ],
 )
 def test_distinct_fine_pair_adds_actual_analytic_detail_without_changing_H1(
-    fine_reconstruction, fine_support
+    fine_reconstruction, fine_support, fine_validation
 ):
     _, _, raw, rgb = fixture(LAYOUTS[0])
     packed = np.stack([raw[y::2, x::2] for y in range(2) for x in range(2)])
@@ -192,6 +197,7 @@ def test_distinct_fine_pair_adds_actual_analytic_detail_without_changing_H1(
         add_fine_carriers=True,
         fine_reconstruction=fine_reconstruction,
         fine_support=fine_support,
+        fine_validation=fine_validation,
         **kwargs,
     )
     assert all("fine-H1-" in r["arms"] for r in aux["records"])
@@ -208,9 +214,23 @@ def test_distinct_fine_pair_adds_actual_analytic_detail_without_changing_H1(
             assert "H1_diagnostics_scope" not in record["arms"]["fine-H1-"]
             assert record["arms"]["fine-H1-"]["carrier_delivery"].startswith("Sinusoidal full-fit")
             assert record["arms"]["fine-H1-"]["colour_support"] == fine_support
+            assert record["arms"]["fine-H1-"]["validation_target"] == fine_validation
     for a, b in zip(aux["records"], control_aux["records"], strict=True):
         for name in ["H1-", "neural"]:
             assert a["arms"][name] == b["arms"][name]
+    if fine_validation == "neural-parent":
+        _, changed_parent = restore_neural_nuisance(
+            parent * 0.7,
+            packed,
+            np.array(LAYOUTS[0]),
+            fields,
+            add_fine_carriers=True,
+            fine_reconstruction=fine_reconstruction,
+            fine_support=fine_support,
+            fine_validation=fine_validation,
+            **kwargs,
+        )
+        assert aux["records"] == changed_parent["records"]
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)

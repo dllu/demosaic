@@ -238,3 +238,33 @@ class SpatialCarrierOperator:
                     coefficient[..., start:stop], group["native"][:, start:stop]
                 )
         return (conditional, self.fractions, self.spectra), sinusoidal
+
+    def predict_parent_innovation(self, raw, background):
+        """A-only neural RGB plus the actual full-fit fine correction.
+
+        The caller must supply a genuine A-only background, never a full-input
+        parent. Each null removes one delivered sinusoidal direction while
+        retaining the other. This validates the unshrunk fine composition on
+        the A-only teacher, not the later broad+fine/full-input estimator.
+        """
+        if (
+            self.nuisance_mode != "global"
+            or background.rgb.shape != (3, *self.shape)
+            or not np.array_equal(background.discovery_mask, self.mask)
+            or not np.isfinite(background.rgb).all()
+        ):
+            raise ValueError("Require global fine nuisance and matching finite A-only RGB/mask")
+        directions = self.components(raw, background.rgb)[1]
+        yy, xx = np.indices(self.shape)
+        innovation = directions[:, self.colors, yy, xx]
+        base = background.rgb[self.colors, yy, xx]
+        full = base + innovation.sum(axis=0)
+        return SimpleNamespace(
+            full_cfa=full,
+            conditional_null_cfa=full[None] - innovation,
+            discovery_mask=self.mask,
+            variance_cfa=self.candidate.variance_cfa,
+            unit_keys=self.candidate.unit_keys,
+            parent_cfa=base,
+            innovation_cfa=innovation,
+        )

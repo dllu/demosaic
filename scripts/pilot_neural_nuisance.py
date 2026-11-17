@@ -41,6 +41,7 @@ def prepare(
     add_fine_carriers=False,
     fine_reconstruction="phase",
     fine_support="independent",
+    fine_validation="nuisance",
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
     from demosaic.phase_aggregation import PhaseAggregateConfig
@@ -54,6 +55,10 @@ def prepare(
     assert fine_reconstruction == "phase" or add_fine_carriers
     assert fine_support in ("independent", "joint")
     assert fine_support != "joint" or (add_fine_carriers and fine_reconstruction == "sinusoidal")
+    assert fine_validation in ("nuisance", "neural-parent")
+    assert fine_validation != "neural-parent" or (
+        add_fine_carriers and fine_reconstruction == "sinusoidal" and fine_support == "joint"
+    )
     aggregation = (
         PhaseAggregateConfig(bins=32, window=129, query_stride=32).to_dict()
         if phase_aggregation
@@ -124,6 +129,7 @@ def prepare(
             or prior_plan.get("add_fine_carriers", False) != add_fine_carriers
             or prior_plan.get("fine_reconstruction", "phase") != fine_reconstruction
             or prior_plan.get("fine_support", "independent") != fine_support
+            or prior_plan.get("fine_validation", "nuisance") != fine_validation
         ):
             invalid_cache = prediction_cache
             prediction_cache = None
@@ -189,6 +195,7 @@ def prepare(
     model["add_fine_carriers"] = add_fine_carriers
     model["fine_reconstruction"] = fine_reconstruction
     model["fine_support"] = fine_support
+    model["fine_validation"] = fine_validation
     if add_fine_carriers:
         model["fine_proposal_source"] = reference(work / "src/demosaic/fine_carrier_proposals.py")
         model["fine_proposal_policy"] = (
@@ -207,6 +214,10 @@ def prepare(
                 )
                 model["joint_colour_support"] = (
                     "For fine H1 only, sum held-out variance-normalized full/null improvement and energy over all actual CFA colours before dividing by2sqrt(total energy). One scalar local/global support preserves separately fitted RGB coefficients/phases. Both fold scores required with original matching and0/2/4 thresholds. Can admit noisy weak-colour coefficients; not calibrated confidence or green-only evidence. Broad phase support/H1 unchanged."
+                )
+            if fine_validation == "neural-parent":
+                model["fine_validation_policy"] = (
+                    "Validate A-only neural RGB plus both actual unshrunk full-fit fine innovations; each null removes one delivered direction. Use joint actual-CFA scores with original variance/matching/thresholds. Same independent RGB coefficients and fixed RAW-parent map. Full-input parent and B values excluded from predictors. Does not validate the later broad+fine/full-parent estimator."
                 )
     write_json(root / "analytic-model.json", model)
     positive = sum(r["noise"]["shot"] + r["noise"]["read"] > 0 for r in previous["rows"])
@@ -227,6 +238,7 @@ def prepare(
         "add_fine_carriers": add_fine_carriers,
         "fine_reconstruction": fine_reconstruction,
         "fine_support": fine_support,
+        "fine_validation": fine_validation,
         "small_context_geometry_policy": "Use native minimum axis when smaller than declared window, half-window stride; only native256 materials use this input-dimension-only fallback.",
         "background_configuration": background_config,
         "background_cache": cache,
@@ -310,6 +322,8 @@ def prepare(
             plan["scope"] += " " + model["fine_delivery"]
             if fine_support == "joint":
                 plan["scope"] += " " + model["joint_colour_support"]
+            if fine_validation == "neural-parent":
+                plan["scope"] += " " + model["fine_validation_policy"]
     write_json(root / "plan.json", plan)
     verify_plan(plan)
     return root / "plan.json"
@@ -558,6 +572,9 @@ def predict(root):
         assert prior_plan.get("fine_support", "independent") == plan.get(
             "fine_support", "independent"
         )
+        assert prior_plan.get("fine_validation", "nuisance") == plan.get(
+            "fine_validation", "nuisance"
+        )
         assert prior_plan["background_configuration"] == plan["background_configuration"]
         for name in ("neural_nuisance.py", "local_validated_waves.py"):
             assert (
@@ -653,6 +670,7 @@ def predict(root):
                 add_fine_carriers=plan.get("add_fine_carriers", False),
                 fine_reconstruction=plan.get("fine_reconstruction", "phase"),
                 fine_support=plan.get("fine_support", "independent"),
+                fine_validation=plan.get("fine_validation", "nuisance"),
             )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
@@ -768,6 +786,9 @@ if __name__ == "__main__":
     parser.add_argument("--add-fine-carriers", action="store_true")
     parser.add_argument("--fine-reconstruction", choices=("phase", "sinusoidal"), default="phase")
     parser.add_argument("--fine-support", choices=("independent", "joint"), default="independent")
+    parser.add_argument(
+        "--fine-validation", choices=("nuisance", "neural-parent"), default="nuisance"
+    )
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -789,6 +810,7 @@ if __name__ == "__main__":
                 add_fine_carriers=args.add_fine_carriers,
                 fine_reconstruction=args.fine_reconstruction,
                 fine_support=args.fine_support,
+                fine_validation=args.fine_validation,
             )
         )
     elif args.mode == "score":

@@ -126,6 +126,10 @@ Its [fresh coloured-wire comparison](docs/coloured-fine-wire-benchmark.md) has
 completed all192 corrections/audits and40 actual views. The small1600 weak gain
 comes almost entirely from neutral wires; signed-colour response barely changes
 and its increment/colour errors rise. Thin crossings remain unresolved.
+The [next whole-scene context test](docs/whole-scene-context-next-test.md) addresses
+a remaining architectural gap: DINO currently sees each tile. CFA-aware scene
+preview/aligned feature-query utilities pass8 tests; a trained scene branch and
+its quality benefit are still untested.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a

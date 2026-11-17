@@ -8,6 +8,10 @@ as `c06ed5ac` while this review was being written.
 This document records findings and proposed experiments only. No models,
 training jobs, inference settings, or experiment artifacts were changed.
 
+Current follow-up: [scene-context implementation and data feasibility](whole-scene-context-next-test.md).
+That later work confirms the missing whole-image input and adds tested preview/
+coordinate utilities; it does not change this review's historical cutoff.
+
 **Start production optimization of V120 now. For the next quality architecture,
 test whole-image context once per photograph, coupled to a smaller native-detail
 path that still requires RAW evidence.** The strongest recent result is improved

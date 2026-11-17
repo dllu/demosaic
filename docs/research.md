@@ -93,6 +93,15 @@ audited. Almost all1600 joint weak gain is neutral; signed-colour response is
 essentially unchanged and its increment/colour errors rise slightly.6400 has
 no useful weak gain, and all-stage errors remain above V120. This limits the
 inference drawn from reduced real cab tint.
+The [whole-image production review](weak-detail-global-context-production-review-2026-11-16.md)
+identifies the next architectural priority: add spatial scene context while
+retaining local DINO/RAW reconstruction. The [implementation/data follow-up](whole-scene-context-next-test.md)
+confirms tile-only DINO input and adds tested CFA preview/aligned feature queries.
+The sampler still needs a single noisy full scene with exactly corresponding
+native crops; crop-then-noise data is not that experiment. No scene-context
+training or quality gain is claimed. The already-admitted
+[fine-innovation validation control](parent-innovation-validation.md) has closed
+both48-case numerical reviews; actual native review remains pending.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

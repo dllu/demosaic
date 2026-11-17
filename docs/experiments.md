@@ -53,6 +53,13 @@ parents/96 genuine A-only fields and has closed all192 corrections/scored400
 rows, with all40 native figures viewed and8400 fields independently audited.
 The small1600 joint gain is almost entirely neutral; signed-colour response
 barely changes and increment/colour errors rise.6400 has no useful weak gain.
+The [A-only fine-innovation control](parent-innovation-validation.md) now closes
+both48-case producers and numerical audits with0 new neural calls; actual
+native review/quality decision remain pending. The
+[whole-scene-context next test](whole-scene-context-next-test.md) is the next
+architecture priority:8 preview/query tests pass and the source-lineage audit
+is complete, but shared-noise scene/crop generation and a trained adapter are
+still required.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

@@ -272,6 +272,7 @@ def restore_neural_nuisance(
     add_fine_carriers=False,
     fine_reconstruction="phase",
     fine_support="independent",
+    fine_validation="nuisance",
 ):
     """Matched analytic/neural nuisances; optional fixed-background phase delivery."""
     if type(phase_guide) is not bool or (phase_guide and aggregation_config is None):
@@ -290,6 +291,13 @@ def restore_neural_nuisance(
         fine_support == "joint" and (not add_fine_carriers or fine_reconstruction != "sinusoidal")
     ):
         raise ValueError("Joint colour support requires enabled sinusoidal fine carriers")
+    if fine_validation not in ("nuisance", "neural-parent") or (
+        fine_validation == "neural-parent"
+        and (
+            not add_fine_carriers or fine_reconstruction != "sinusoidal" or fine_support != "joint"
+        )
+    ):
+        raise ValueError("Neural-parent validation requires joint sinusoidal fine carriers")
     if aggregation_config is not None:
         from .phase_aggregation import PhaseAggregateConfig
 
@@ -443,6 +451,13 @@ def restore_neural_nuisance(
                         for c, b in zip(candidates, local_backgrounds, strict=True)
                     ]
                 predictors = candidates if spatial is None else [s.predict(tile) for s in spatial]
+                if fine_sinusoidal and fine_validation == "neural-parent":
+                    predictors = [
+                        s.predict_parent_innovation(
+                            tile, WithheldBackground(b.rgb[:, region[0], region[1]], mask)
+                        )
+                        for s, b, mask in zip(spatial, backgrounds, masks, strict=True)
+                    ]
                 score_function = conditional_scores
                 if fine_sinusoidal and fine_support == "joint":
                     from .joint_colour_evidence import joint_conditional_scores
@@ -624,6 +639,12 @@ def restore_neural_nuisance(
                             "Sinusoidal full-fit coefficients; full/null used for validation."
                         )
                         tile_records[record_key]["colour_support"] = fine_support
+                        tile_records[record_key]["validation_target"] = fine_validation
+                        if fine_validation == "neural-parent":
+                            tile_records[record_key]["heldout_MSE_scope"] = (
+                                "A-only neural RGB plus both unshrunk full-fit fine innovations; "
+                                "each null removes one delivered direction. Not full-input or broad+fine risk."
+                            )
                 if not prefix:
                     column = candidates[0].wave_slices[0][0] - 1
                     tile_records[record_key]["neural_nuisance_coefficients_by_color"] = [
@@ -665,6 +686,7 @@ def restore_neural_nuisance(
         "add_fine_carriers": add_fine_carriers,
         "fine_reconstruction": fine_reconstruction,
         "fine_support": fine_support,
+        "fine_validation": fine_validation,
         "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent."
         + (
             " Conditional/neural delivery uses local signed phase averages after a fixed global joint-fit background and per-direction global competing H1 fit. Identical composite linear map projects RAW and parent. H1 control retains its own original H1 validation scores."
@@ -689,6 +711,11 @@ def restore_neural_nuisance(
         + (
             " Fine support pools held-out variance-normalized full/null gains and energies over all actual CFA colours before normalization. One scalar support per direction/pixel preserves independently fitted RGB amplitudes/phases. It can admit noisy weak colour coefficients; it is not green-only validation or calibrated colour confidence. Broad support and raw-H1 controls unchanged."
             if fine_support == "joint"
+            else ""
+        )
+        + (
+            " Fine full/null validation instead composes the genuine A-only neural RGB field with both unshrunk sinusoidal RAW-minus-that-field innovations; each null removes one delivered direction. Same full-fit operator and separately fitted RGB coefficients. Full-input parent remains excluded from scoring. Does not validate the later broad+fine sum or calibrate final-estimator confidence."
+            if fine_validation == "neural-parent"
             else ""
         ),
     }
