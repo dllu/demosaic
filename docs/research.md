@@ -18,7 +18,10 @@ has repeatedly come with extra flat-region error or false color. The
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
-   [Coverage, proposed budgets and pipeline review](training-scale-pipeline-review-2026-11-17.md).
+   The [100k full-corpus continuation](full-corpus-scaling.md) has saved its first
+   1000 updates, with shuffled epochs,5% reviewed quota and a fresh20k control.
+   Its remaining allocation follows the context probes. Quality is pending.
+   [Coverage and pipeline rationale](training-scale-pipeline-review-2026-11-17.md).
 3. **Evaluate the delivered correction.** Better background prediction or a
    stronger synthetic mesh response does not guarantee lower final-image error.
    The [full guided panel](neural-guided-phase-full-panel.md) and
@@ -39,6 +42,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
 | [Whole-scene context test](whole-scene-context-next-test.md) | Architecture/data contract and implementation status; no reviewed trained quality gain yet |
+| [Full-corpus scaling](full-corpus-scaling.md) | Executing100k/20k matched-data continuations, source/crop/noise coverage and actual execution profile; no endpoint quality claim yet |
 
 These are research proposals and bounded experiment conclusions. They do not
 establish broad state-of-the-art quality. Dates describe the source review;

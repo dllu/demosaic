@@ -31,9 +31,11 @@ All110 native figures viewed. Full guided response/full RGB gains have higher
 increment error; the pilot gain does not persist. Joint coloured-wire gain is
 almost entirely neutral, with signed-colour fine recovery still missing.
 
-Latest architecture direction: [whole-scene context and innovation validation](2026-11-16-23-37-51-whole-scene-context-innovation.md).
-Whole-image DINO input remains missing;8 tested preview/query primitives and a
-source-lineage inventory support the next matched scene/crop experiment.
+Latest training: [whole-scene integration and full-corpus scaling](2026-11-17-00-58-45-scene-context-full-corpus-training.md).
+The100k full V120 continuation has saved its first1000 updates with shuffled90778-photo epochs.
+Shared scene/crop generation and the added spatial/pooled context adapter pass
+19 tests and corrected optimizer qualification; the first matched context arm is running.
+Endpoint quality and required PSNR/fence bookkeeping remain pending.
 
 Latest completed cohort reviews: [full wave panel, V131 broad audit and fixed ADC repair](2026-11-16-11-25-42-full-panel-v131-audits.md).
 V131 photo+0.04000 dB has unseen-camera/ADC-color costs; an opt-in physical ADC

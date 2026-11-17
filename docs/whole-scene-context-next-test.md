@@ -6,7 +6,7 @@ proposes the right next architecture experiment: preserve local RAW reconstructi
 and the existing local DINO encoder, then add one spatial scene encoding shared
 by native tiles. The review's historical evidence cutoff remains unchanged.
 
-Current code still sends DINO only the current tile: `inference.py` passes no
+Recommended-model inference still sends DINO only the current tile: `inference.py` passes no
 scene preview or tile box, and `pretrained_rgb.py` calls its context encoder on
 the locally rendered RGB. The recent full guided/fine studies use512/768-native
 contexts, not the whole photograph. Their useful response and cab-tint gains
@@ -32,7 +32,26 @@ real sky structure or drawing a mesh across smooth objects. Evaluate final RGB
 under correct, shuffled, masked and spatially shuffled scene context. Attention
 weights alone do not establish useful reliance.
 
-## Implemented foundation, no quality claim yet
+## Integrated model/data path, no quality claim yet
+
+The complete noisy-scene/native-crop path and a trainable scene adapter are now
+implemented. Nineteen focused tests pass, and actual V120 native256/B4 checks
+complete two discarded optimizer updates for each of no-context/pooled/spatial
+conditioning. Initialization matches the base exactly on those fixtures;
+gradients reach the new adapter and the shared encoder stays frozen. Three
+matched2000-update probes are admitted, with the local-only arm running in the
+[full-corpus/context compute allocation](full-corpus-scaling.md).
+[Exact model/data/preflight receipts](results/whole-scene-context-training-setup-v1/publication.json).
+[Independent source/checkpoint audit](results/whole-scene-context-training-setup-v1/independent-review.json).
+
+The corrected frozen trainer uses the canonical sensor-valid objective including
+auxiliary mosaic supervision, and retains raw/EMA weights, Adam, Python/CPU/CUDA
+RNG and scene draw index. Its three actual two-update preflights pass initial
+output parity, gradient/frozen-backbone checks and optimizer/checkpoint reload.
+The first admission's preflight omitted the auxiliary term; its production
+handoff failed at directory creation before any context update. Both historical
+sources/receipts remain intact. Production starts afresh from V120, not the
+discarded checks. No context endpoint or restoration-quality review is complete.
 
 [scene_context.py](../src/demosaic/scene_context.py) now provides:
 
@@ -48,9 +67,10 @@ Eight numerical tests check all four CFA layouts, withheld-input
 invariance of an A-only preview, scene calibration, rectangular padding, tile
 coordinates, batch-independent queries, feature gradients and FP32 native-coordinate
 arithmetic for FP16/BF16 feature maps. These are
-plumbing/geometry tests, not restoration scores. No encoder or scene adapter is
-connected to V120 yet, no scene-context weights were trained, and no new DINO
-forward was made by this work.
+plumbing/geometry tests, not restoration scores. The original foundation made
+no encoder calls. The later integrated qualification makes explicit scene/local
+encoder calls, counted separately in its new receipts; those discarded updates
+do not establish a quality gain.
 
 For a held-out A→B diagnostic, the **entire scene preview** must be A-only,
 including imputation/exposure/noise estimates; using full-RAW scene features
@@ -81,31 +101,36 @@ training. The existing sampler also crops before camera/noise augmentation and
 may apply independent crop homographies. It does not already provide a shared
 full-scene noisy observation plus an exactly corresponding native tile.
 
-The first data implementation should draw one camera/exposure/CFA/noise
-realization for a complete cached scene, then extract native tiles from that
-same observation, with even phase-preserving origins and explicit transforms.
-Apply D4 augmentation to the complete scene; initially disable independent tile
-homographies/resizing in **every matched arm**. Reuse the exact observation and
-crop schedule across arms and record fingerprints. Clean full scenes are targets
-for supervision only, never scene-encoder inputs.
+The new [scene observation](../src/demosaic/scene_data.py) and
+[photo sampler](../src/demosaic/scene_training_data.py) create one camera/exposure/
+CFA/noise realization for a complete cached scene, then extract native tiles
+from that same observation. Origins preserve Bayer phase; global D4 transforms,
+camera/noise seeds, crop boxes and actual input/target fingerprints are retained.
+Independent tile homographies/resizing are disabled in every matched context
+arm. Clean scenes are supervision targets, never encoder inputs.
 
-Two cohort choices must be explicit: retain the extra2× reduction on the smaller
-eligible subset, or test native bin4 scenes from the24746-source >=768 subset.
-The latter changes data relative to mature V120, so it needs a matched local-only
-control on those same scenes. Do not credit that data change to scene context.
-The header inventory is feasibility evidence; it does not admit a new training
-cohort or replace the existing protected-family/content-hash exclusions.
+The context probe chooses native bin4 scenes: short axis>=768, at most4MP.
+After the size cap,24,660 sources train the adapter/trunk and64 are reserved for
+development. Every selected source remains in the later cleaned90,778-photo
+cohort; the three later exclusions were already below768 and ineligible.
+This changes targets relative to mature V120's extra2× reduction, so the local-
+only context control uses exactly the same bin4 scenes. The separate100k scaling
+run retains bin4→geometry→area2 and its larger90,778-source pool. Gains from one
+data choice must not be credited to the other architecture experiment.
 
 ## Prospective matched test
 
-Compare no added scene branch, a pooled scene descriptor and aligned spatial
-scene features, retaining V120's local encoder/trunk. Use the same frozen DINO
+The implemented [scene restorer](../src/demosaic/scene_restoration.py) compares
+no added scene branch, a pooled descriptor and aligned spatial scene features,
+retaining V120's local encoder/trunk. All arms use the same frozen DINO
 weights, parent checkpoint, observations, crop boxes, training horizon and loss.
 A preview long side around1024 is an initial cap, not a measured optimum; smaller
 source planes stay smaller. Encode once per noisy scene and share the spatial
-features across its crops/tiles. Start with a zero-output adapter so initialization
-preserves the base, then verify gradients reach it and final RGB actually depends
-on correct context. A local-only adapter is a useful capacity control.
+features across its crops/tiles. The new adapter projects four frozen feature
+levels and adds a zero-initialized offset to the trunk's eighth-resolution state.
+Tests verify gradient flow and spatially shuffled feature sensitivity. Final RGB
+dependence on correct versus shuffled/masked context still needs trained-quality
+evaluation. A local-only adapter remains a useful future capacity control.
 
 This quality experiment precedes replacing repeated local DINO calls with a
 student. Removing local capacity at the same time would confound the missing-

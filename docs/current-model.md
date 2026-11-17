@@ -3,7 +3,10 @@
 Reviewed November 17, 2026. **V120 Small is the general inference recommendation.**
 The latest completed broad comparison is V131; its higher photo score comes with
 camera and color costs. Whole-scene context is under development, with no reviewed
-trained-model result yet. [Research status](experiments.md).
+trained-model result yet. A [100k full-corpus V120 continuation](full-corpus-scaling.md)
+has completed its first1,000 updates and awaits its scheduled continuation after
+the context probes/control; photo/camera scores and both fence reviews are pending.
+[Research status](experiments.md).
 
 ## Full-model choices
 

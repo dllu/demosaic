@@ -8,9 +8,9 @@ individual reports retain exact measurements, native comparisons and receipts.
 
 | Work | Evidence available | Next unresolved question |
 | --- | --- | --- |
-| [Whole-scene context](whole-scene-context-next-test.md) | Scene preview and coordinate-query utilities are committed; scene data/training integration is under development | Does shared full-image context improve weak-detail reconstruction and flat regions? No reviewed trained-model result yet |
+| [Whole-scene context](whole-scene-context-next-test.md) | Shared noisy-scene/native-crop data and pooled/spatial adapter integrated;19 tests and corrected three-mode optimizer checks pass; first matched2000-update arm running | Does scene context improve weak detail and flat regions? Trained endpoint, full photo/camera evaluation and native review remain pending |
 | [A-only parent-innovation validation](parent-innovation-validation.md) | Both 48-case numerical reviews complete with zero new neural calls | Native viewing and the quality decision are still pending in the published report |
-| [Longer training and pipeline scale](training-scale-pipeline-review-2026-11-17.md) | Coverage/timing audit and proposed matched scaling experiment | Whether a longer full-model run improves held-out quality; throughput of current models at larger batches remains unmeasured |
+| [Full-corpus scaling](full-corpus-scaling.md) |First1000 of100k updates complete:5045 photo IDs/5294 visits.90778-photo epochs,5% reviewed quota, native/paired retained;20k control and remaining99k scheduled after context probes. B16 warm throughput24.96 patches/s versus14.82 strict |20/50/100k learning curves, full427/known-unseen camera panels and both fence reviews. These scores remain missing;32-photo monitoring is not a substitute |
 | [Production speed](weak-detail-global-context-production-review-2026-11-16.md) | Runtime bottlenecks and proposed optimization sequence | Repeatable end-to-end baseline, then measured quality-preserving speedups; 100MP in 10 seconds remains unmet |
 
 ## Completed comparisons that guide the next work
@@ -26,7 +26,9 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Can extra fine frequencies restore the green fence faithfully? | Fine proposals make both directions more visible. Joint color support reduces tint; fresh signed-color wires still have no useful weak-response gain | [Fine proposal pilot](fine-frequency-proposals.md), [joint color](joint-fine-colour-support.md), [colored-wire validation](coloured-fine-wire-benchmark.md) |
 
 V131 also changes the training cohort, so its gain is not an isolated test of
-training duration. The longer-run proposal remains untested.
+training duration. The new100k run has begun; its quality result remains
+unmeasured. Its checkpoints use a100k schedule, distinct from the annealed20k
+control. [Budget, source/crop/noise coverage and runtime evidence](full-corpus-scaling.md).
 
 The synthetic panels differ in parents, sources, noise and metrics. Response
 percentages from different rows are not a leaderboard. Both protected GFX scenes

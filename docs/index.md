@@ -34,6 +34,9 @@ Start with the [README](../README.md) for installation and inference.
 [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) ·
 [Training scale review](training-scale-pipeline-review-2026-11-17.md).
 
+Implementation reports: [whole-scene context](whole-scene-context-next-test.md) ·
+[full-corpus scaling](full-corpus-scaling.md).
+
 Individual experiment reports are evidence snapshots, not automatically current
 recommendations. The [pre-cleanup entry points](history/before-2026-11-17-cleanup/README.md),
 [archived research catalogue](history/before-2026-11-17-cleanup/research.md) and
