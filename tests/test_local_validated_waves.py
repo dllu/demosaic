@@ -112,6 +112,40 @@ def test_phase_agreement_measures_interpolated_shape_and_preserves_phase_sign():
     np.testing.assert_allclose(local.phase_profile_agreement(3 * b, a / 2), observed, atol=1e-14)
 
 
+def test_joint_delivery_preserves_an_individual_color_veto(monkeypatch):
+    import demosaic.joint_colour_evidence as joint
+
+    raw, _, rgb = scene()
+    packed = np.stack([raw[y::2, x::2] for y in range(2) for x in range(2)])
+    parent = np.broadcast_to(rgb.mean(axis=(-2, -1), keepdims=True), rgb.shape)
+
+    def positive_joint(candidate, raw, *_args, **_kwargs):
+        return np.full((len(candidate.unit_keys), *raw.shape), 4.0), None
+
+    def green_only(candidate, raw, *_args, **_kwargs):
+        field = np.zeros((len(candidate.unit_keys), 3, *raw.shape))
+        field[:, 1] = 4.0
+        return field, np.zeros((len(candidate.unit_keys), 3))
+
+    monkeypatch.setattr(joint, "joint_conditional_scores", positive_joint)
+    monkeypatch.setattr(local, "conditional_scores", green_only)
+    result, _ = local.restore_local_waves(
+        parent,
+        packed,
+        LAYOUTS[0],
+        shot=8e-5,
+        read=2.56e-8,
+        config=CONFIG,
+        guide_frequencies_xy=((5 / 64, 3 / 64), (-4 / 64, 7 / 64)),
+        compare_pooled_support=True,
+        compare_joint_colour_support=True,
+    )
+    full, guarded = result["joint", 2.0], result["joint-veto", 2.0]
+    assert np.max(abs(full[[0, 2]] - parent[[0, 2]])) > 1e-4
+    np.testing.assert_array_equal(guarded[[0, 2]], parent[[0, 2]])
+    np.testing.assert_array_equal(guarded[1], full[1])
+
+
 @pytest.mark.parametrize("orientation", ["along", "across"])
 def test_oriented_validation_matches_direct_native_pixel_sums(orientation):
     raw, colors, _ = scene()

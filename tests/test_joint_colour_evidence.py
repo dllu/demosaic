@@ -92,3 +92,39 @@ def test_zero_prediction_difference_has_zero_support():
         candidate, np.ones(colors.shape), colors, ~mask, window=17, stride=8
     )
     assert not local.any() and not glob.any()
+
+
+def test_joint_scores_apply_each_colors_shrinkage_before_pooling():
+    colors = np.tile([[0, 1], [1, 2]], (16, 16))
+    mask = stratified_split(colors.shape, 21)
+    y, x = np.indices(colors.shape)
+    null = 0.1 + y / 1000
+    full = null + 0.02 * np.cos((x + y) / 3) * np.array([-1.0, 0.5, 1.4])[colors]
+    raw = full + 0.005 * np.sin(x)
+    raw[mask] = np.nan
+    variance = np.array([1e-5, 2e-5, 3e-5])[colors]
+    candidate = SimpleNamespace(
+        full_cfa=full,
+        conditional_null_cfa=null[None],
+        variance_cfa=variance,
+        discovery_mask=mask,
+        unit_keys=((0, 0),),
+    )
+    reliability = np.array([[0.0, 0.35, 0.8]])
+    local, global_scores = joint_conditional_scores(
+        candidate,
+        raw,
+        colors,
+        ~mask,
+        reliability=reliability,
+        window=17,
+        stride=8,
+    )
+    for subset in [~mask, ~mask & (np.abs(y - 16) <= 8) & (np.abs(x - 8) <= 8)]:
+        change = (full[subset] - null[subset]) * reliability[0, colors[subset]]
+        sigma = np.sqrt(variance[subset])
+        whitened = change / sigma
+        expected = ((raw[subset] - null[subset]) / sigma) @ whitened / np.linalg.norm(whitened)
+        expected -= np.linalg.norm(whitened) / 2
+        observed = global_scores[0] if subset.sum() == (~mask).sum() else local[0, :, 16, 8]
+        np.testing.assert_allclose(observed, expected, rtol=0, atol=1e-12)

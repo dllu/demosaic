@@ -12,10 +12,10 @@ from report_scene_wave_guides import native_board
 from demosaic.archive_metrics import display, noisy_malvar
 from demosaic.experiments.artifacts import checked, read_json, reference, write_json
 
-METHODS = ("square", "along", "across")
+LABELS = {"square": "Square", "along": "Along wire", "across": "Across wire"}
 
 
-def report_synthetic(plan, collection, prior, saved, output):
+def report_synthetic(plan, collection, prior, saved, output, labels):
     rows = [
         {**row, "method": row["method"].replace("subharmonic-", "square-")}
         for row in prior["fixed_threshold_metrics"]
@@ -24,7 +24,7 @@ def report_synthetic(plan, collection, prior, saved, output):
     thresholds = plan["thresholds"]
     assert len(rows) == 128 * len(thresholds)
     boards = []
-    methods = [f"{mode}-t{t:g}" for mode in METHODS[1:] for t in thresholds]
+    methods = [f"{mode}-t{t:g}" for mode in labels if mode != "square" for t in thresholds]
     for group, observed, before in zip(
         plan["groups"], collection["synthetic"], saved["synthetic"], strict=True
     ):
@@ -64,7 +64,7 @@ def report_synthetic(plan, collection, prior, saved, output):
             values = [
                 noisy_malvar(context)[0],
                 parent[2][ROI],
-                *[variants[f"{mode}-t2"][2] for mode in METHODS],
+                *[variants[f"{mode}-t2"][2] for mode in labels],
                 truth[2][ROI],
             ]
             boards.append(
@@ -74,14 +74,7 @@ def report_synthetic(plan, collection, prior, saved, output):
                     values,
                     context,
                     {"group": group, "role": 2, "threshold": 2},
-                    labels=(
-                        "Noisy Malvar",
-                        "V143 EMA",
-                        "Square",
-                        "Along wire",
-                        "Across wire",
-                        "Exact GT",
-                    ),
+                    labels=("Noisy Malvar", "V143 EMA", *labels.values(), "Exact GT"),
                     triplet_indices=(0, 3, 5),
                 )
             )
@@ -89,7 +82,7 @@ def report_synthetic(plan, collection, prior, saved, output):
     return rows, boards
 
 
-def report_camera(plan, collection, prior, saved, output):
+def report_camera(plan, collection, prior, saved, output, labels):
     originals = {row["id"]: row for row in prior["camera_boards"]}
     boards = []
     for case, result, before in zip(
@@ -112,7 +105,9 @@ def report_camera(plan, collection, prior, saved, output):
             square = data["square-t2"]
             old_name = "subharmonic-t2" if before["changed"] else "pooled-t2"
             np.testing.assert_array_equal(square, control[old_name])
-            for method, label in (("along", "Along wire"), ("across", "Across wire")):
+            for method, label in labels.items():
+                if method == "square":
+                    continue
                 value = data[f"{method}-t2"]
                 rgb = display(value[None], cal, exposure=old["display_exposure"])[0][crop]
                 addition.append((label, np.rint(rgb.transpose(1, 2, 0) * 255).astype(np.uint8)))
@@ -137,9 +132,10 @@ def report_camera(plan, collection, prior, saved, output):
     return boards
 
 
-def report(path):
+def report(path, *, labels=LABELS, driver=__file__):
     plan = read_json(path)
-    assert plan["frozen_files"][str(Path(__file__))] == reference(__file__)["sha256"]
+    assert len(labels) == 3 and next(iter(labels)) == "square"
+    assert plan["frozen_files"][str(Path(driver))] == reference(driver)["sha256"]
     root = Path(plan["root"])
     closed = root / "output/collection.json"
     collection = read_json(closed)
@@ -148,12 +144,12 @@ def report(path):
     assert collection["plan"] == reference(path) and collection["query_roles"] == 384
     output = root / "review"
     output.mkdir()
-    rows, boards = report_synthetic(plan, collection, prior, saved, output)
+    rows, boards = report_synthetic(plan, collection, prior, saved, output, labels)
     matched = matched_quiet(
         rows,
         plan["thresholds"],
         plan["positive_quiet_RMS_budgets_DN16"],
-        methods=METHODS,
+        methods=tuple(labels),
         shared_zero=None,
     )
     assert len(matched) == 288
@@ -165,16 +161,16 @@ def report(path):
     write_json(
         output / "result.json",
         {
-            "driver": reference(__file__),
+            "driver": reference(driver),
             "plan": reference(path),
             "collection": reference(closed),
             "fixed_threshold_metrics": rows,
             "leave_one_geometry_out": matched,
             "synthetic_boards": boards,
-            "camera_boards": report_camera(plan, collection, prior, saved, output),
+            "camera_boards": report_camera(plan, collection, prior, saved, output, labels),
             "square_t2_controls_bitexact": 392,
             "square_heldout_rows_exact": 96,
-            "scope": "Same-area footprints evaluated on actual CFA samples. Matched-budget calibration excludes the"
+            "scope": "Support variants evaluated on actual CFA samples. Matched-budget calibration excludes the"
             " test geometry. Real-camera comparisons use fixed t2 and qualitative references.",
         },
     )

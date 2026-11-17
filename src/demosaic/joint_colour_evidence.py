@@ -5,7 +5,9 @@ import numpy as np
 from .local_validated_waves import _box_sums
 
 
-def joint_conditional_scores(candidate, raw, colors, validation_mask, *, window=65, stride=16):
+def joint_conditional_scores(
+    candidate, raw, colors, validation_mask, *, window=65, stride=16, reliability=None
+):
     """Pool actual CFA full/null gains before normalization, then share one gain.
 
     RGB coefficients remain independent. A scalar score sums variance-normalized
@@ -26,11 +28,19 @@ def joint_conditional_scores(candidate, raw, colors, validation_mask, *, window=
         or np.any(candidate.variance_cfa <= 0)
     ):
         raise ValueError("Require matching CFA, positive A-only variance and disjoint validation")
+    units = len(candidate.unit_keys)
+    if reliability is not None and (
+        reliability.shape != (units, 3)
+        or not np.isfinite(reliability).all()
+        or np.any((reliability < 0) | (reliability > 1))
+    ):
+        raise ValueError("Require finite per-direction and color reliability in [0, 1]")
     h, w = raw.shape
     ay, ax = [np.unique(np.r_[np.arange(0, n, stride), n - 1]) for n in raw.shape]
-    local = np.empty((len(candidate.unit_keys), h, w))
-    glob = np.empty(len(candidate.unit_keys))
-    for unit in range(len(candidate.unit_keys)):
+    selected_colors = colors[mask].astype(np.intp, copy=False) if reliability is not None else None
+    local = np.empty((units, h, w))
+    glob = np.empty(units)
+    for unit in range(units):
         base, full, value, variance = [
             a[mask]
             for a in [
@@ -40,6 +50,8 @@ def joint_conditional_scores(candidate, raw, colors, validation_mask, *, window=
                 candidate.variance_cfa,
             ]
         ]
+        if reliability is not None:
+            full = base + reliability[unit, selected_colors] * (full - base)
         improvement, energy = np.zeros(raw.shape), np.zeros(raw.shape)
         improvement[mask] = ((value - base) ** 2 - (value - full) ** 2) / variance
         energy[mask] = (full - base) ** 2 / variance

@@ -708,6 +708,7 @@ def restore_local_waves(
     compare_pooled_support=False,
     compare_phase_agreement=False,
     compare_oriented_support=False,
+    compare_joint_colour_support=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -749,6 +750,10 @@ def restore_local_waves(
         compare_oriented_support and not compare_pooled_support
     ):
         raise ValueError("Oriented support requires pooled support")
+    if type(compare_joint_colour_support) is not bool or (
+        compare_joint_colour_support and not compare_pooled_support
+    ):
+        raise ValueError("Joint color support requires pooled support")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
@@ -765,6 +770,10 @@ def restore_local_waves(
         modes += ("phase-agreement",)
     orientations = ("along", "across") if compare_oriented_support else ()
     modes += orientations
+    if compare_joint_colour_support:
+        from .joint_colour_evidence import joint_conditional_scores
+
+        modes += ("joint", "joint-veto")
     outputs = {(mode, float(t)): parent.copy() for mode in modes for t in thresholds}
     if shot + read == 0:
         return outputs, {"patches": 0, "identity_zero_noise": True}
@@ -845,6 +854,19 @@ def restore_local_waves(
                 ]
                 for mode in orientations
             }
+            if compare_joint_colour_support:
+                joint_scores = [
+                    joint_conditional_scores(
+                        c,
+                        tile,
+                        layout,
+                        ~c.discovery_mask,
+                        window=config.validation_window,
+                        stride=config.validation_stride,
+                        reliability=weight,
+                    )[0]
+                    for c, weight in zip(predictors, reliability, strict=True)
+                ]
             matched = match_directions(
                 candidates[0].frequencies_xy,
                 candidates[1].frequencies_xy,
@@ -881,6 +903,9 @@ def restore_local_waves(
                 global_score = np.minimum(scores[0][1][a], scores[1][1][b])
                 if compare_pooled_support:
                     pooled = pooled_support_score(first, second)
+                if compare_joint_colour_support:
+                    joint = pooled_support_score(joint_scores[0][a], joint_scores[1][b])
+                    color_veto = local > 0
                 oriented_pooled = [
                     (mode, pooled_support_score(folds[0][a], folds[1][b]))
                     for mode, folds in oriented_scores.items()
@@ -912,6 +937,12 @@ def restore_local_waves(
                     for mode, score in oriented_pooled:
                         totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
                             component * support_weight(score, threshold) * blend
+                        )
+                    if compare_joint_colour_support:
+                        shared = component * support_weight(joint, threshold) * blend
+                        totals["joint", float(threshold)][:, y : y + n, x : x + n] += shared
+                        totals["joint-veto", float(threshold)][:, y : y + n, x : x + n] += (
+                            shared * color_veto
                         )
                 local_max.append(float(np.max(local)))
                 global_max.append(global_score.tolist())
@@ -957,6 +988,7 @@ def restore_local_waves(
         **({"compare_pooled_support": True} if compare_pooled_support else {}),
         **({"compare_phase_agreement": True} if compare_phase_agreement else {}),
         **({"compare_oriented_support": True} if compare_oriented_support else {}),
+        **({"compare_joint_colour_support": True} if compare_joint_colour_support else {}),
         "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }

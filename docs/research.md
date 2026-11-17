@@ -44,6 +44,10 @@ has repeatedly come with extra flat-region error or false color. The
    weak response than the square under the tight quiet budget. The
    ISO6400 wire-free edge control gives essentially the same error for
    all three. [Oriented validation](oriented-raw-support.md).
+   Pooling actual CFA evidence across colors gives a small near-edge
+   ISO400 response gain with higher increment error, and less far-edge
+   response at both noise levels under the tight quiet budget.
+   [Joint Bayer phase-profile evidence](joint-phase-profile-support.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
