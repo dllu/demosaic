@@ -36,13 +36,19 @@ has repeatedly come with extra flat-region error or false color. The
    the weak wire present and absent. Attenuating by agreement lowers the
    building correction and reduces weak response at matched quiet error.
    [Phase-agreement test](phase-profile-agreement.md).
+   Comparing the original and half frequencies on donor RAW repairs
+   both guide misses. The lower-noise far response improves at equal
+   quiet error. The high-noise case still has little recoverable response
+   at the conservative gate. [Donor subharmonic test](donor-subharmonics.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
    The [100k full-corpus continuation](full-corpus-scaling.md#long-schedule-20k-milestone)
-   has saved its 20k state and begun the matched image review. The
+   has completed the [matched 20k image review](full-corpus-long20k-native.md),
+   with lower fine-band error in three faint materials, worse flat spot checks,
+   and lower mean faint sRGB PSNR versus the shorter schedule. The
    [completed20k control](full-corpus-control20k-review.md)
    actually covers all90,778 photos and recovers most10k faint loss, but remains
    0.02061 dB below V120 with higher fine-band error for3/4 materials. Both fences

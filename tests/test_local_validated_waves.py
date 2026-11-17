@@ -113,6 +113,27 @@ def test_phase_agreement_measures_interpolated_shape_and_preserves_phase_sign():
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
+def test_donor_half_frequency_requires_measured_long_repeat(layout):
+    y, x = np.mgrid[:64, :64]
+    colors = np.tile(np.asarray(layout).reshape(2, 2), (32, 32))
+    guides = np.array([[10 / 64, 4 / 64], [-4 / 64, 10 / 64]])
+
+    def signal(f):
+        return np.cos(2 * np.pi * (x * f[0] + y * f[1]) + 0.4)
+
+    raw = 0.12 + 0.01 * signal(guides[0]) + 0.008 * signal(guides[1])
+    raw += np.random.default_rng(93).normal(0, 0.001, raw.shape)
+    options = {"shot": 0.0, "read": 1e-6, "config": CONFIG}
+    original = local.donor_subharmonic_scores(raw, colors, guides, **options)
+    longer = local.donor_subharmonic_scores(
+        raw + 0.003 * signal(guides[1] / 2), colors, guides, **options
+    )
+    assert np.max(original) < 3.0
+    assert np.min(longer[:, 1]) > 10.0
+    assert np.max(longer[:, 0]) < 3.0
+
+
+@pytest.mark.parametrize("layout", LAYOUTS)
 def test_phase_bins_recover_periodic_profile_and_ignore_withheld_measurements(layout):
     height = width = 64
     y, x = np.mgrid[:height, :width]

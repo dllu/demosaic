@@ -41,12 +41,14 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [primary benchmark admission](whole-scene-context-primary-admission.md) ·
 [full-corpus scaling](full-corpus-scaling.md) ·
 [completed20k corpus review](full-corpus-control20k-review.md) ·
+[long-schedule 20k native review](full-corpus-long20k-native.md) ·
 [completed20k camera panels](full-corpus-control20k-camera-review.md) ·
 [disjoint RAW direction guides](scene-wave-guides.md) ·
 [phase profiles fitted from query RAW](guided-phase-profiles.md) ·
 [discovery-only phase-fit shrinkage](guided-phase-fit-shrinkage.md) ·
 [pooled RAW support under a quiet-error budget](fold-support-pooling.md) ·
 [agreement between fitted RAW profiles](phase-profile-agreement.md) ·
+[testing longer repeats in donor RAW](donor-subharmonics.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

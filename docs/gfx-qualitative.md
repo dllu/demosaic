@@ -49,6 +49,12 @@ historical boards. Use these reports for the current completed comparisons:
 - [Phase-profile agreement](phase-profile-agreement.md) reduces the
   building correction to 0.166 DN16 RMS. Sky still matches V120, and coarse
   crossings and foliage look similar to the pooled gate.
+- [Donor subharmonics](donor-subharmonics.md) revises one coarse-fence
+  direction. Its visible crossings look similar. Sky, building, and
+  foliage reproduce the earlier pooled results.
+- [Long-schedule 20k checkpoint](full-corpus-long20k-native.md) compares
+  all four areas with V120 and short 20k. The coarse crossings remain
+  visible, and foliage and building details remain soft.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

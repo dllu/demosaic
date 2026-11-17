@@ -14,6 +14,11 @@ Malvar/bin correction. Broad photo results remain pending. The separate faint-AD
 and live reporting queue using original-source local-band masks
 and four-CFA, equal-source pooling. [Faint analysis status](adc-bin-consistency.md).
 
+The [three-way 20k checkpoint review](full-corpus-long20k-native.md)
+is now complete. The long schedule lowers faint fine-band error for
+three of four materials and loses 0.19124 dB mean faint sRGB PSNR versus
+the short schedule. Both standing GFX families were reviewed.
+
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
 [64-source study](whole-scene-context-development64.md) and
 [camera review](whole-scene-context-camera-review.md) find small quiet/partial
@@ -106,12 +111,11 @@ The recorded training loops take 695.68 seconds for updates 1–1,000 and
 between phases and the final checkpoint write. The separate CPU image
 review has its own timing. [Training timing and exact log prefix](results/full-corpus-long20k-progress-v1/timing-and-audit-followup.json).
 
-The same 110 retained inputs are now running through fresh V120, the
-completed 20k control and the long-schedule 20k EMA. The comparison will
-measure what the different schedules deliver at the same update count.
+All 110 retained inputs ran through fresh V120, the completed 20k control
+and the long-schedule 20k EMA. All 220 control predictions match the
+earlier review bit for bit. The audit and both GFX families are covered
+in the [completed native review](full-corpus-long20k-native.md).
 Training continues independently toward the 50k and 100k checkpoints.
-The first 27 of these input cases reproduced both control RGB predictions
-byte for byte. [Early control check](results/fold-support-pooling-setup-v1/long20k-early-control-check.json).
 
 The long arm also retains its10k state
 `6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.

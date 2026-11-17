@@ -11,9 +11,10 @@ The [completed full-corpus20k control](full-corpus-control20k-review.md) has
 actually visited all90,778 photos. Faint mean recovers0.59370 dB from10k,
 remaining0.02061 dB below V120; ordinary/shadow gains are small and three faint
 materials have higher fine-band error. Both real fence families were viewed
-without convincing new crossings. The original 100k trajectory has reached
-its [audited 20k milestone](full-corpus-scaling.md#long-schedule-20k-milestone)
-and its matched 110-input review is running.
+without convincing new crossings. The original 100k trajectory's
+[matched 20k review](full-corpus-long20k-native.md) improves faint
+fine-band error on bark, fur, and wood while losing mean faint sRGB PSNR
+against the short schedule.
 The20k control's [full427 benchmark](full-corpus-primary-admission.md) is running. The
 [completed camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
 known and lose0.04067 unseen versus V120, with mostly channel-mean unseen costs.
@@ -32,6 +33,7 @@ of it. These costs keep the completed control experimental.
 | [V132 RAW attention](v132-endpoint-quality.md) | Completed 20k ablation with every training input hash matched to V131 | Faint ADC −0.40978 dB versus V131, ordinary material quality essentially tied; no broad-panel or full-frame validation. Retained for reproduction |
 | [Scene-context2k arms](whole-scene-context-camera-review.md) | Scene/tile API;64-source quiet-coarse gains. Spatial unseen-camera +0.01739 dB versus matched local-only; pooled provides almost the same repair | Unseen remains−0.05477 dB versus V120; known nearly ties local-only. No established weak-detail gain or faithful new fence crossings; original local encoder retained. Full427 photos running |
 | [Corpus control20k](full-corpus-control20k-review.md) | Completed320k target slots/all90,778 photos. Ordinary/shadow +0.00852/+0.01047 dB; substantial faint recovery from10k | Faint−0.02061 dB versus V120; fine-band error higher for3/4 materials, selected flat spatial RMS worse. Known/unseen +0.03285/−0.04067 dB; worst ADC mean error765.7 versus55.5 DN16. [Camera](full-corpus-control20k-camera-review.md)/[color](full-corpus-control20k-color-review.md) reviews complete, no faithful new fence crossings; full427 photos collecting |
+| [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes
@@ -74,6 +76,11 @@ from 0.421 to 0.166 DN16 RMS. It lowers weak response in all four
 noise and edge cells at the tightest quiet budget. The ISO6400 far
 weak fits show similar agreement when the wire is present or absent.
 [Agreement results](phase-profile-agreement.md).
+
+The [donor subharmonic check](donor-subharmonics.md) repairs two doubled
+frequencies. At the same quiet error, it raises held-out ISO400 far weak
+response from 16.89% to 17.54%. The tighter ISO6400 gate still recovers
+little weak detail, and real cab crossings remain unresolved.
 
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated

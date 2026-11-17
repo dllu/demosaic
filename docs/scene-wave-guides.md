@@ -39,6 +39,9 @@ are identical. This follow-up was prompted by the first result and uses the
 same sources. [Initial results](results/scene-wave-guides-v1/probe-v1-result.json) ·
 [Full-frame donor replay](results/scene-wave-guides-v1/probe-v2-result.json).
 
+The [donor subharmonic follow-up](donor-subharmonics.md) corrects both
+remaining doubled frequencies on the same 16 retained donors.
+
 ## Paired detail and absent-wire scores
 
 The table shows signed weak response and weak-increment RMS against the exact

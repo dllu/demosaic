@@ -548,6 +548,65 @@ def pooled_support_score(first, second):
     return np.where(lower > 0, (first + second) / 2, lower)
 
 
+def donor_subharmonic_scores(raw, colors, frequencies, *, shot, read, config=_DEFAULT_CONFIG):
+    """Test whether the donor supports half of each existing guide frequency.
+
+    The nuisance geometry and existing frequencies may use the entire donor.
+    Each fold fits its own amplitudes and variance proxy. Only the additional
+    half-frequency columns can improve validation over the fixed two-guide null.
+    These empirical scores only choose geometry for a disjoint query.
+    """
+    raw, colors = np.asarray(raw, np.float64), np.asarray(colors)
+    if not np.isfinite([shot, read]).all() or min(shot, read) < 0 or shot + read == 0:
+        raise ValueError("Require a positive donor noise prior")
+    frequencies = np.asarray(_guide_frequencies(frequencies, config.family_degrees))
+    fixed = fit_local_candidate(
+        raw,
+        colors,
+        np.ones(raw.shape, dtype=bool),
+        shot=shot,
+        read=read,
+        config=config,
+        guide_frequencies_xy=frequencies,
+    )
+    split = stratified_split(raw.shape, config.split_seed)
+    xx, yy, _, _ = geometry(raw.shape)
+    baseline = fixed.design
+    nuisance = baseline[:, : fixed.unit_slices[0][0]]
+    candidates = [
+        np.column_stack((baseline, _wave_columns(xx, yy, f / 2)))
+        if np.linalg.norm(f) / 2 >= 1 / 64
+        else None
+        for f in frequencies
+    ]
+    scores = np.zeros((2, 2), dtype=np.float64)
+    for fold, discovery in enumerate((split, ~split)):
+        improvements, energies = np.zeros(2), np.zeros(2)
+        for color in range(3):
+            selected = (colors == color) & discovery
+            a, b = selected.ravel(), ((colors == color) & ~discovery).ravel()
+            values = raw.ravel()
+            offset = np.linalg.lstsq(nuisance[a], values[a], rcond=1e-10)[0]
+            inverse_variance = 1 / (read + shot * np.maximum(nuisance @ offset, 1e-6))
+            sigma = np.sqrt(inverse_variance[a])
+            weighted = values[a] * sigma
+            coefficient = np.linalg.lstsq(baseline[a] * sigma[:, None], weighted, rcond=1e-10)[0]
+            null = baseline[b] @ coefficient
+            for i, design in enumerate(candidates):
+                if design is None:
+                    continue
+                coefficient = np.linalg.lstsq(design[a] * sigma[:, None], weighted, rcond=1e-10)[0]
+                change = design[b] @ coefficient - null
+                inner = np.sum((values[b] - null) * change * inverse_variance[b])
+                energy = np.sum(change**2 * inverse_variance[b])
+                improvements[i] += inner - energy / 2
+                energies[i] += energy
+        scores[fold] = np.divide(
+            improvements, np.sqrt(energies), out=np.zeros(2), where=energies > 0
+        )
+    return scores
+
+
 def phase_profile_agreement(first, second):
     """Signed cosine between zero-mean linearly interpolated periodic profiles."""
     a = np.concatenate((first, -first.sum(axis=-1, keepdims=True)), axis=-1)
