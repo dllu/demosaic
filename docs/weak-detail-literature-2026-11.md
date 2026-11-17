@@ -65,6 +65,13 @@ far-background geometry and greatly lowers withheld noisy sensor error, but
 still misses weak carriers. This separates a real nuisance-model limitation
 from the remaining frequency-discovery/reconstruction problem. The
 [full eight-source256 panel](neural-nuisance-full-panel.md) is running.
+The [Hann/inverse-variance discovery follow-up](neural-nuisance-hann512.md)
+finds both procedural carriers in both folds and restores2.702%400/far weak
+response with weak-increment RMS−0.093% versus parent. Both reused sources
+improve that error. Against256 neural, strong response falls and total RGB
+error rises. The matched neural arm reduces added building correction further,
+with less weak response; real fine crossings remain missing. This is an
+implemented useful error/response alternative, not broad weak-detail recovery.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

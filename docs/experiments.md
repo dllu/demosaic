@@ -17,6 +17,9 @@ held-out sensor prediction on the building/cab contexts. The
 quieter2.690% weak-response operating point. [Native512 ablations](neural-nuisance-context512.md)
 fit the far edge better but lose that response; the
 [full256 source/CFA/noise panel](neural-nuisance-full-panel.md) is running.
+The [Hann512 carrier follow-up](neural-nuisance-hann512.md) completes all48
+cases/audits/native viewing: analytic weak response2.702% with weak-increment
+error−0.093% versus parent; stronger noise/strong-response tradeoffs remain.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

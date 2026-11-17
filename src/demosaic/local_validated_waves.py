@@ -30,6 +30,7 @@ class LocalWaveConfig:
     support_unit: str = "direction"
     background: str = "step"
     edge_search: str = "bounded-grid"
+    frequency_weighting: str = "uniform"
     split_seed: int = 202611160909
 
     def __post_init__(self):
@@ -64,6 +65,8 @@ class LocalWaveConfig:
             or self.support_unit not in ("direction", "harmonic")
             or self.background not in ("step", "piecewise_affine")
             or self.edge_search not in ("bounded-grid", "full-frame")
+            or self.frequency_weighting
+            not in ("uniform", "inverse-variance", "hann-inverse-variance")
         ):
             raise ValueError("Invalid local-wave geometry")
 
@@ -110,15 +113,20 @@ def _harmonic_count(frequency, maximum):
     return max(1, min(maximum, int(np.floor((0.24 + 1e-12) / np.linalg.norm(frequency)))))
 
 
-def _residual_peak(raw, selected, nuisance, *, avoid=None, family_degrees=20.0):
+def _residual_peak(raw, selected, nuisance, *, avoid=None, family_degrees=20.0, weights=None):
     """Choose a green A-only FFT peak after refitting all competing columns."""
-    fitted = (
-        nuisance[selected]
-        @ np.linalg.lstsq(nuisance[selected], raw.ravel()[selected], rcond=1e-10)[0]
-    )
-    residual = np.zeros(raw.size)
-    residual[selected] = raw.ravel()[selected] - fitted
-    power = np.abs(np.fft.fft2(residual.reshape(raw.shape))) ** 2
+    if weights is None:
+        fitted = (
+            nuisance[selected]
+            @ np.linalg.lstsq(nuisance[selected], raw.ravel()[selected], rcond=1e-10)[0]
+        )
+        residual = np.zeros(raw.size)
+        residual[selected] = raw.ravel()[selected] - fitted
+        power = np.abs(np.fft.fft2(residual.reshape(raw.shape))) ** 2
+    else:
+        from .carrier_spectrum import weighted_spectrum
+
+        power = weighted_spectrum(raw, selected, nuisance, weights)
     fy, fx = np.meshgrid(np.fft.fftfreq(raw.shape[0]), np.fft.fftfreq(raw.shape[1]), indexing="ij")
     radius = np.hypot(fx, fy)
     allowed = (radius >= 1 / 64) & (radius <= 0.24) & ((fy > 0) | ((fy == 0) & (fx > 0)))
@@ -143,9 +151,15 @@ def _refine_frequency(
     avoid=None,
     family_degrees=20.0,
     harmonics=1,
+    weights=None,
 ):
-    q, _ = np.linalg.qr(nuisance[selected], mode="reduced")
+    basis = nuisance[selected]
     values = raw.ravel()[selected]
+    if weights is not None:
+        sigma = np.sqrt(weights / weights.mean())
+        basis = basis * sigma[:, None]
+        values = values * sigma
+    q, _ = np.linalg.qr(basis, mode="reduced")
     residual = values - q @ (q.T @ values)
     chosen = np.asarray(frequency)
     radius = 0.5 / min(raw.shape)
@@ -165,6 +179,8 @@ def _refine_frequency(
             ) * np.linalg.norm(candidate) * np.linalg.norm(avoid):
                 continue
             waves = _wave_columns(xx, yy, candidate, harmonics)[selected]
+            if weights is not None:
+                waves = waves * sigma[:, None]
             waves = waves - q @ (q.T @ waves)
             coefficient = np.linalg.lstsq(waves, residual, rcond=1e-10)[0]
             benefit = float(np.sum((waves @ coefficient) ** 2))
@@ -203,6 +219,19 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
         step = nuisance[:, 3]
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
         first_frequency = _residual_peak(raw, green, nuisance)
+    weights = None
+    if config.frequency_weighting != "uniform":
+        from .carrier_spectrum import discovery_weights
+
+        weights = discovery_weights(
+            raw,
+            green,
+            nuisance,
+            shot=shot,
+            read=read,
+            hann=config.frequency_weighting == "hann-inverse-variance",
+        )
+        first_frequency = _residual_peak(raw, green, nuisance, weights=weights)
     first_harmonics = _harmonic_count(first_frequency, config.harmonics)
     first = _refine_frequency(
         raw,
@@ -213,10 +242,11 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
         first_frequency,
         config.frequency_refinements,
         harmonics=first_harmonics,
+        weights=weights,
     )
     one = np.column_stack((nuisance, _wave_columns(xx, yy, first, first_harmonics)))
     second_frequency = _residual_peak(
-        raw, green, one, avoid=first, family_degrees=config.family_degrees
+        raw, green, one, avoid=first, family_degrees=config.family_degrees, weights=weights
     )
     second_harmonics = _harmonic_count(second_frequency, config.harmonics)
     second = _refine_frequency(
@@ -230,6 +260,7 @@ def fit_local_candidate(raw, colors, discovery_mask, *, shot, read, config=_DEFA
         avoid=first,
         family_degrees=config.family_degrees,
         harmonics=second_harmonics,
+        weights=weights,
     )
     frequencies = (first, second)
     counts = (first_harmonics, second_harmonics)

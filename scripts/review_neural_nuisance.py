@@ -161,7 +161,7 @@ def review(root, output):
         ("quiet_error_RMS_DN16", "Quiet-region absolute error"),
         ("weak_increment_error_RMS_DN16", "Weak-increment error"),
     ):
-        fig, axes = plt.subplots(3, 2, figsize=(10, 10), squeeze=False)
+        fig, axes = plt.subplots(3, 2, figsize=(10, 10), squeeze=False, layout="constrained")
         for i, profile in enumerate(("iso400", "iso1600", "iso6400")):
             for j, placement in enumerate(("near", "far")):
                 ax = axes[i, j]
@@ -211,10 +211,10 @@ def review(root, output):
                 ax.set_title(profile + " / " + placement)
                 ax.set_xlabel(title + " change vs V143 (%)")
                 ax.set_ylabel("Weak response (% of GT increment)")
+                ax.ticklabel_format(axis="both", style="plain", useOffset=False)
                 ax.grid(alpha=0.2)
         axes[0, 0].legend(fontsize=6)
         fig.suptitle("Two reused sources; fixed thresholds 0/2/4; global/shared CFA split")
-        fig.tight_layout()
         path = output / (
             "quiet-tradeoff.png" if error_key.startswith("quiet") else "increment-tradeoff.png"
         )

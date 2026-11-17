@@ -32,6 +32,7 @@ def prepare(
     full_panel=False,
     geometry_window=256,
     edge_search="bounded-grid",
+    frequency_weighting="uniform",
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
 
@@ -68,7 +69,10 @@ def prepare(
     )
     assert geometry_window in (256, 512) and (not full_panel or geometry_window == 256)
     geometry = LocalWaveConfig(
-        window=geometry_window, stride=geometry_window // 2, edge_search=edge_search
+        window=geometry_window,
+        stride=geometry_window // 2,
+        edge_search=edge_search,
+        frequency_weighting=frequency_weighting,
     ).to_dict()
     if prediction_cache is not None:
         prior_plan = read_json(checked(read_json(checked(prediction_cache))["plan"]))
@@ -194,7 +198,11 @@ def prepare(
         )
     if geometry_window == 512:
         plan["scope"] += (
-            " Discovery window512/stride256 for native512/768 contexts, native256 input-size-only fallback for materials. Validation129/window and all other fitting/threshold rules unchanged. Compare matched512 analytic/neural arms, retaining256 separately. No hidden templates/GT in inference."
+            " Discovery window512/stride256 for native512/768 contexts, native256 input-size-only fallback for materials. Amplitude/validation129/threshold/delivery rules unchanged. Compare matched512 analytic/neural arms, retaining256 separately. No hidden templates/GT in inference."
+        )
+    if frequency_weighting != "uniform":
+        plan["scope"] += (
+            f" Analytic frequency discovery/refinement uses {frequency_weighting}: A-only shot/read variance proxy, weighted nuisance projection and exact sinusoid Gram energy. Optional pixel-centered separable Hann is fixed by native dimensions, without template/GT/reference geometry. Neural nuisance uses the declared fixed/reselected frequency source."
         )
     if full_panel and prediction_cache is None:
         plan["scope"] = plan["scope"].replace(
@@ -629,6 +637,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--edge-search", choices=("bounded-grid", "full-frame"), default="bounded-grid"
     )
+    parser.add_argument(
+        "--frequency-weighting",
+        choices=("uniform", "inverse-variance", "hann-inverse-variance"),
+        default="uniform",
+    )
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -639,6 +652,7 @@ if __name__ == "__main__":
                 full_panel=args.full_panel,
                 geometry_window=args.geometry_window,
                 edge_search=args.edge_search,
+                frequency_weighting=args.frequency_weighting,
             )
         )
     elif args.mode == "score":

@@ -27,6 +27,10 @@ source-dependent low-prior gain with costs versus the parent. The
 added errors; its [native512 controls](neural-nuisance-context512.md) lose weak
 response despite improved edge geometry. A [full256 review](neural-nuisance-full-panel.md)
 is running.
+The [Hann512 discovery follow-up](neural-nuisance-hann512.md) recovers compact
+carrier proposals and improves low-prior weak-increment error versus parent,
+with weaker strong response/higher full RGB error than256 neural. The complete
+native review still finds missing fine cab crossings and soft foliage.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

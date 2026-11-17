@@ -7,6 +7,11 @@ background-model limitation but leaves weak response at0.957%. Keep native256
 as the useful experimental operating point; V120 remains the general photo
 recommendation. These are two-source development ablations, not independent
 camera/generalization evidence.
+The later [Hann-weighted discovery follow-up](neural-nuisance-hann512.md)
+recovers2.702% far/400 weak response with lower weak-increment error than parent
+and256 neural, at weaker strong response/higher full RGB error than256 neural.
+That separately completed option addresses carrier discovery after this
+edge-coverage fix; the original512 results below remain unchanged.
 
 Both48-case studies are complete, independently audited and actually viewed:
 [bounded512 gallery](images/neural-nuisance-context512-v1/native-viewer.html)
