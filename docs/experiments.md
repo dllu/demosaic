@@ -34,16 +34,23 @@ increment errors. All68 native figures/saved baseline panels are reviewed.
 The [guided phase pilot](neural-guided-phase-pooling.md) retains much stronger
 analytic400/far weak28.702%, lower increment error and smaller building bands
 than unguided phase, with quiet/error costs and missing fine crossings. Its
-[full source/CFA/noise comparison](neural-guided-phase-full-panel.md) is running
-from its original frozen broad-only source, all2320 fields cached, zero fresh
-neural calls. The separate [fine-band pilot](fine-frequency-proposals.md) is
+[full source/CFA/noise comparison](neural-guided-phase-full-panel.md) has completed
+all1164 corrections and audits from its frozen broad-only source, all2320
+fields cached, zero fresh neural calls;70 actual native views remain pending.
+The separate [fine-band pilot](fine-frequency-proposals.md) is
 complete:1600/far analytic weak0.989%→2.037%, same quiet/slightly lower increment
 error, source1-driven. Real cab lattice is more visible with false purple/green
 grid; building/neural1600 errors rise. All44 figures were actually inspected.
 The [sinusoidal fine control](fine-sinusoidal-carriers.md) is complete with
 46 actual native figures/210 passing tests: NN1600/far increment−3.017%
 versus fine phase with less weak response; the cab grid persists and building
-bands increase. The separate full broad-only guided run continues unchanged.
+bands increase. [Joint-colour fine support](joint-fine-colour-support.md) now
+reduces real cab tint with the lattice retained, losing the extra1600/far
+synthetic response;46 actual figures/217 tests complete. The
+[fresh coloured-wire benchmark](coloured-fine-wire-benchmark.md) has48 new V120
+parents/96 genuine A-only fields and has closed all192 corrections/scored400
+rows;40 actual native views/final audit remain, no quality conclusion yet.
+The full broad-only guided native review remains separate.
 
 **The competing-orientation model trial completed all 900 updates and 100 ADC
 skips (November 16); raw/EMA quality review is complete.** It changes carrier

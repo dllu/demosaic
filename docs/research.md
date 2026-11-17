@@ -73,6 +73,17 @@ RGB amplitudes/phases where summing conditional differences loses a faint red
 coefficient. This implementation check does not establish real colour fidelity.
 Next useful evidence is end-to-end coloured fine-wire GT and per-colour
 background/evidence diagnostics at the now identified fine frequencies.
+The [joint-colour support follow-up](joint-fine-colour-support.md) identifies
+strongly unequal R/G/B shrinkage despite nonzero RAW colour fits. Pooling
+held-out actual-CFA full/null gains before normalization keeps independent
+RGB coefficients and visibly reduces purple/green cab tint in both profiles/
+ROIs, with the lattice retained. All48 cases/46 native figures are reviewed;
+the extra1600/far weak-response gain is lost and building bands remain.
+Its [new coloured-wire comparison](coloured-fine-wire-benchmark.md) has48 fresh
+observations,48 V120 parents/96 true A-only fields, and four completed variants.
+Signed green contrast and all four CFAs test true colour recovery rather than
+rewarding neutralization.192 corrections/400 metric rows/40 native figures
+are prepared; actual viewing/final audit and quality conclusions remain pending.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

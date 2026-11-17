@@ -106,7 +106,7 @@ improves the analytic-nuisance option:28.70% weak response, increment error
 smaller building bands. The neural-nuisance arm worsens increment error;
 higher-noise detail and fine real crossings remain unresolved.
 Its [full guided source/CFA/noise review](docs/neural-guided-phase-full-panel.md)
-is running with all cached fields and no neural replay.
+has completed all1164 corrections/audits;70 native figures await actual review.
 The [additional fine-band pilot](docs/fine-frequency-proposals.md) makes both
 cab mesh directions more visible, with a purple/green grid. Analytic1600/far
 weak response0.989%→2.037% has unchanged quiet error and slightly lower
@@ -117,6 +117,12 @@ The [sinusoidal fine-carrier control](docs/fine-sinusoidal-carriers.md) lowers
 NN1600/far increment error3.017% versus fine phase, with less weak response.
 The cab colour grid persists and building bands increase; both options and
 their measured costs remain available.
+The [joint-colour fine support](docs/joint-fine-colour-support.md) keeps separate
+RGB amplitudes and visibly reduces cab purple/green tint while retaining the
+lattice. Extra1600/far synthetic weak response is lost; building bands remain.
+Its [fresh coloured-wire comparison](docs/coloured-fine-wire-benchmark.md) has
+closed all192 corrections across four CFAs with genuine A-only fields;40 native
+figures await actual review.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -270,6 +276,16 @@ The sinusoidal NN-nuisance alternative retains native1600/far triplets for
 [source0](docs/images/neural-nuisance-fine-sinusoidal129-v1/triplets/iso1600-index0008-role2-triplet.png)
 and [source1](docs/images/neural-nuisance-fine-sinusoidal129-v1/triplets/iso1600-index0024-role2-triplet.png)
 under those identical ROI/noise/display conditions. [Lower error, response loss and real-scene costs](docs/fine-sinusoidal-carriers.md).
+
+Joint colour support retains matched exact-GT triplets for
+[source0](docs/images/neural-nuisance-joint-fine129-v1/triplets/iso1600-index0008-role2-analytic-triplet.png)
+and [source1](docs/images/neural-nuisance-joint-fine129-v1/triplets/iso1600-index0024-role2-analytic-triplet.png)
+under those same conditions. The following DSCF3842/3835 right cab comparison
+uses native160 pixels at`[426,189,160,160]`, exposure16/contrast1, nominal
+shot/read`0.00128/6.5536e-6`; the ISO100/AHD/JPEG views are independent
+qualitative references, not GT. [Checkpoint/configuration and costs](docs/joint-fine-colour-support.md).
+
+![Cab colour: noisy, independent support, joint support, ISO100 reference and JPEG](docs/images/neural-nuisance-joint-fine129-v1/cab-before-after/mesh-nominal-right-before-after.png)
 
 ![Source1: noisy, broad plus fine analytic phase, exact constructed GT](docs/images/neural-nuisance-fine-phase129-v1/triplets/iso1600-index0024-role2-analytic-triplet.png)
 

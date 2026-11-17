@@ -174,6 +174,10 @@ cause or rule out a contribution from higher harmonics in phase pooling.
 The next useful test targets
 per-colour evidence/background leakage at the identified fine frequencies,
 with end-to-end coloured fine-wire GT and genuine A-only guide predictions.
+The completed [joint-colour support comparison](joint-fine-colour-support.md)
+now reduces the real cab tint while retaining the lattice, with synthetic
+weak-response losses. The [new coloured-wire benchmark](coloured-fine-wire-benchmark.md)
+has genuine V120 parent/masked fields and four running reconstruction variants.
 
 All 210 regression tests pass, including the new colour/actual-withholding
 checks; Ruff passes. An initial wider test invocation omitted `scripts` from

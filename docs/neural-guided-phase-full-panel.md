@@ -1,6 +1,7 @@
 # Full source/CFA/noise review of neural-guided phase pooling
 
-**The1164-case guided follow-up is running; full quality results are pending.**
+**All1164 corrections, independent audits and rendering are complete;
+the70-figure actual native review/final report are pending.**
 The completed [pilot](neural-guided-phase-pooling.md) improves the analytic-
 nuisance phase option:400/far weak28.702%, weak-increment error−0.946% versus
 parent with both sources improving, quiet+0.541%, and much smaller building

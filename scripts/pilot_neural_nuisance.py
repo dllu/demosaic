@@ -40,6 +40,7 @@ def prepare(
     phase_guide=False,
     add_fine_carriers=False,
     fine_reconstruction="phase",
+    fine_support="independent",
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
     from demosaic.phase_aggregation import PhaseAggregateConfig
@@ -51,6 +52,8 @@ def prepare(
     )
     assert fine_reconstruction in ("phase", "sinusoidal")
     assert fine_reconstruction == "phase" or add_fine_carriers
+    assert fine_support in ("independent", "joint")
+    assert fine_support != "joint" or (add_fine_carriers and fine_reconstruction == "sinusoidal")
     aggregation = (
         PhaseAggregateConfig(bins=32, window=129, query_stride=32).to_dict()
         if phase_aggregation
@@ -120,6 +123,7 @@ def prepare(
             or prior_plan.get("phase_guide", False) != phase_guide
             or prior_plan.get("add_fine_carriers", False) != add_fine_carriers
             or prior_plan.get("fine_reconstruction", "phase") != fine_reconstruction
+            or prior_plan.get("fine_support", "independent") != fine_support
         ):
             invalid_cache = prediction_cache
             prediction_cache = None
@@ -184,6 +188,7 @@ def prepare(
             )
     model["add_fine_carriers"] = add_fine_carriers
     model["fine_reconstruction"] = fine_reconstruction
+    model["fine_support"] = fine_support
     if add_fine_carriers:
         model["fine_proposal_source"] = reference(work / "src/demosaic/fine_carrier_proposals.py")
         model["fine_proposal_policy"] = (
@@ -196,6 +201,13 @@ def prepare(
             model["fine_delivery"] = (
                 "Keep broad guided phase exactly. Fine pair uses native129/stride32 per-color local H1 WLS full-fit carrier coefficients for delivery and full/null predictions for conditional support, with fixed global joint-fit nuisance including broad carriers. Separate RGB coefficients; same A-only variance and A/B geometry matching. Identical fixed full-fit RAW/parent carrier map. Fine branch has no phase/range/edge-side pooling. Not a strict spectral cutoff or isolated harmonic-only ablation."
             )
+            if fine_support == "joint":
+                model["joint_colour_source"] = reference(
+                    work / "src/demosaic/joint_colour_evidence.py"
+                )
+                model["joint_colour_support"] = (
+                    "For fine H1 only, sum held-out variance-normalized full/null improvement and energy over all actual CFA colours before dividing by2sqrt(total energy). One scalar local/global support preserves separately fitted RGB coefficients/phases. Both fold scores required with original matching and0/2/4 thresholds. Can admit noisy weak-colour coefficients; not calibrated confidence or green-only evidence. Broad phase support/H1 unchanged."
+                )
     write_json(root / "analytic-model.json", model)
     positive = sum(r["noise"]["shot"] + r["noise"]["read"] > 0 for r in previous["rows"])
     inputs = [reference(source / "plan.json"), reference(root / "analytic-model.json"), checkpoint]
@@ -214,6 +226,7 @@ def prepare(
         "phase_guide": phase_guide,
         "add_fine_carriers": add_fine_carriers,
         "fine_reconstruction": fine_reconstruction,
+        "fine_support": fine_support,
         "small_context_geometry_policy": "Use native minimum axis when smaller than declared window, half-window stride; only native256 materials use this input-dimension-only fallback.",
         "background_configuration": background_config,
         "background_cache": cache,
@@ -295,6 +308,8 @@ def prepare(
         )
         if fine_reconstruction == "sinusoidal":
             plan["scope"] += " " + model["fine_delivery"]
+            if fine_support == "joint":
+                plan["scope"] += " " + model["joint_colour_support"]
     write_json(root / "plan.json", plan)
     verify_plan(plan)
     return root / "plan.json"
@@ -540,6 +555,9 @@ def predict(root):
         assert prior_plan.get("fine_reconstruction", "phase") == plan.get(
             "fine_reconstruction", "phase"
         )
+        assert prior_plan.get("fine_support", "independent") == plan.get(
+            "fine_support", "independent"
+        )
         assert prior_plan["background_configuration"] == plan["background_configuration"]
         for name in ("neural_nuisance.py", "local_validated_waves.py"):
             assert (
@@ -634,6 +652,7 @@ def predict(root):
                 phase_guide=plan.get("phase_guide", False),
                 add_fine_carriers=plan.get("add_fine_carriers", False),
                 fine_reconstruction=plan.get("fine_reconstruction", "phase"),
+                fine_support=plan.get("fine_support", "independent"),
             )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
@@ -748,6 +767,7 @@ if __name__ == "__main__":
     parser.add_argument("--phase-guide", action="store_true")
     parser.add_argument("--add-fine-carriers", action="store_true")
     parser.add_argument("--fine-reconstruction", choices=("phase", "sinusoidal"), default="phase")
+    parser.add_argument("--fine-support", choices=("independent", "joint"), default="independent")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -768,6 +788,7 @@ if __name__ == "__main__":
                 phase_guide=args.phase_guide,
                 add_fine_carriers=args.add_fine_carriers,
                 fine_reconstruction=args.fine_reconstruction,
+                fine_support=args.fine_support,
             )
         )
     elif args.mode == "score":

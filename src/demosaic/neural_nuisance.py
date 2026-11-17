@@ -271,6 +271,7 @@ def restore_neural_nuisance(
     phase_guide=False,
     add_fine_carriers=False,
     fine_reconstruction="phase",
+    fine_support="independent",
 ):
     """Matched analytic/neural nuisances; optional fixed-background phase delivery."""
     if type(phase_guide) is not bool or (phase_guide and aggregation_config is None):
@@ -285,6 +286,10 @@ def restore_neural_nuisance(
         fine_reconstruction != "phase" and not add_fine_carriers
     ):
         raise ValueError("Require an enabled fine pair for sinusoidal fine reconstruction")
+    if fine_support not in ("independent", "joint") or (
+        fine_support == "joint" and (not add_fine_carriers or fine_reconstruction != "sinusoidal")
+    ):
+        raise ValueError("Joint colour support requires enabled sinusoidal fine carriers")
     if aggregation_config is not None:
         from .phase_aggregation import PhaseAggregateConfig
 
@@ -438,8 +443,13 @@ def restore_neural_nuisance(
                         for c, b in zip(candidates, local_backgrounds, strict=True)
                     ]
                 predictors = candidates if spatial is None else [s.predict(tile) for s in spatial]
+                score_function = conditional_scores
+                if fine_sinusoidal and fine_support == "joint":
+                    from .joint_colour_evidence import joint_conditional_scores
+
+                    score_function = joint_conditional_scores
                 reference_scores = [
-                    conditional_scores(
+                    score_function(
                         c,
                         tile,
                         layout,
@@ -613,6 +623,7 @@ def restore_neural_nuisance(
                         tile_records[record_key]["carrier_delivery"] = (
                             "Sinusoidal full-fit coefficients; full/null used for validation."
                         )
+                        tile_records[record_key]["colour_support"] = fine_support
                 if not prefix:
                     column = candidates[0].wave_slices[0][0] - 1
                     tile_records[record_key]["neural_nuisance_coefficients_by_color"] = [
@@ -653,6 +664,7 @@ def restore_neural_nuisance(
         "phase_guide": phase_guide,
         "add_fine_carriers": add_fine_carriers,
         "fine_reconstruction": fine_reconstruction,
+        "fine_support": fine_support,
         "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent."
         + (
             " Conditional/neural delivery uses local signed phase averages after a fixed global joint-fit background and per-direction global competing H1 fit. Identical composite linear map projects RAW and parent. H1 control retains its own original H1 validation scores."
@@ -672,6 +684,11 @@ def restore_neural_nuisance(
         + (
             " Fine delivery instead uses native local sinusoidal full-fit coefficients, with full/null prediction for validation, the same query window/stride and frozen global broad/background nuisance. Separate RGB coefficients; identical full-fit RAW/parent carrier map, no phase/range/edge-side fine pooling. Broad guided phase and H1 controls unchanged. This changes the fine waveform, fit, delivery and support model, not an isolated harmonic-only ablation or strict spectral cutoff."
             if fine_reconstruction == "sinusoidal"
+            else ""
+        )
+        + (
+            " Fine support pools held-out variance-normalized full/null gains and energies over all actual CFA colours before normalization. One scalar support per direction/pixel preserves independently fitted RGB amplitudes/phases. It can admit noisy weak colour coefficients; it is not green-only validation or calibrated colour confidence. Broad support and raw-H1 controls unchanged."
+            if fine_support == "joint"
             else ""
         ),
     }

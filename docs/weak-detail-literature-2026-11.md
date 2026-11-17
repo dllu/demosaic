@@ -130,6 +130,16 @@ also expose faint-colour loss from summing conditional differences and verify
 full-fit colour amplitudes/phases with known correct geometry on all4CFAs.
 Actual colour/background discrimination remains open; the test is not a
 real-scene recovery or calibrated inference claim.
+The [joint-colour support follow-up](joint-fine-colour-support.md) makes a
+useful real-camera gain: much less cab purple/green tint with the lattice
+retained in both profiles/ROIs. The RAW-only diagnostic finds green support
+dominating weak R/B despite nonzero fits; joint actual-CFA gain aggregation
+keeps separate RGB amplitudes/phases. All48 cases/46 figures are reviewed,
+with extra1600/far synthetic response lost and persistent building bands.
+The [fresh coloured benchmark](coloured-fine-wire-benchmark.md) adds neutral
+and signed-colour fine wires across allCFAs, genuine A-only predictions and
+four fixed reconstruction variants;192 corrections/scoring/rendering complete,
+40 actual native views/final independent audit and quality conclusions pending.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small
