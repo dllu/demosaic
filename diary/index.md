@@ -24,7 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
-Latest results are recorded in the [weighted RAW refit entry](2026-11-17-13-23-46-phase-refit-delivery.md).
+Latest results are recorded in the [30k training coverage entry](2026-11-17-13-34-39-full-corpus-long30k-prefix.md)
+and the [weighted RAW refit entry](2026-11-17-13-23-46-phase-refit-delivery.md).
 See also the [donor harmonics and 50k review entry](2026-11-17-13-08-54-donor-phase-support-and-50k-queue.md)
 and the [joint Bayer phase-profile entry](2026-11-17-12-48-30-joint-phase-profile-support.md).
 

@@ -1,6 +1,6 @@
 # Full-corpus scaling and whole-scene context training
 
-**Both schedules have reached 20,000 updates. The 100k run continues.**
+**The 20k control is complete and the 100k run has passed 30,000 updates.**
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
@@ -121,6 +121,25 @@ receipt. It uses the same 110 inputs and reuses the 220 verified V120
 and long-schedule 20k control predictions. The 50k EMA requires 110
 new CPU restoration calls. Numerical results and native viewing
 follow the checkpoint.
+
+### Observed source and crop coverage through 30k
+
+The running 100k schedule records 480,000 example slots through
+update 30,000. There are 160,479 ordinary photo visits and 8,383
+reviewed photo visits. All 90,778 ordinary sources appear, with
+69,701 visited twice and 21,077 once. The source prefix audit checks
+all draw offsets and data seeds against the fixed order and all
+120 saved conditioning chunks. The first 20,000 logged step rows
+match the archived prefix byte for byte.
+
+The second ordinary visit uses a different cached crop rectangle
+for 69,688 of the 69,701 repeated photos. Across those second visits,
+the 10th, median and 90th percentile rectangle intersections over
+union are 0.266, 0.634 and 0.851. Only 694 pairs are disjoint.
+These rectangles precede geometry and sensor corruption. The 30k
+checkpoint write is logged, and quality is assessed on the declared
+immutable milestones.
+[30k source, crop, and conditioning audit](results/full-corpus-long30k-prefix-v1/publication.json).
 
 The long arm also retains its10k state
 `6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.
