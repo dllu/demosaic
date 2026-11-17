@@ -41,6 +41,11 @@ neural local-fit building bands while retaining4.695% low-prior weak response,
 with source-dependent error/noise costs and missing cab crossings. Its
 [full-cohort comparison](global-background-full-panel.md) now checks this point
 against the completed256 neural baseline without replaying neural predictions.
+The [phase reconstruction follow-up](global-background-phase-reconstruction.md)
+raises400/far neural weak response4.695%→27.390% on both constructed sources,
+with higher quiet/increment errors and building bands. The analytic phase arm
+has lower mean increment error but much larger real bands. Complete native
+review still finds missing cab crossings; discrimination remains unresolved.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

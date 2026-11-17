@@ -93,6 +93,11 @@ reduces the neural building correction41.87→15.55 DN16, with weak response4.69
 and explicit noise/error costs. Fine crossings remain missing. Its
 [full source/CFA/noise comparison](docs/global-background-full-panel.md) is running
 with cached fields and no new neural forwards.
+The [phase measurement follow-up](docs/global-background-phase-reconstruction.md)
+raises two-source400/far neural weak response4.70%→27.39%, with quiet/increment
+errors+2.35%/+0.43% versus parent and larger building artifacts. Its analytic
+arm reaches28.56% with lower increment error but severe real bands. Both are
+implemented experimental choices; fine cab crossings remain missing.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -218,6 +223,15 @@ and source1 noisy → restored → exact-GT triplets with the same native160 ROI
 noise and display conditions above. [Configuration, checkpoint and tradeoffs](docs/neural-nuisance-hann512.md).
 
 ![Source1: noisy, Hann analytic correction, exact constructed GT](docs/images/neural-nuisance-hann512-v1/triplets/iso400-index0024-role2-analytic-triplet.png)
+
+The phase option retains native noisy/restored/exact-GT triplets for
+[source0](docs/images/neural-nuisance-phase129-v1/triplets/iso400-index0008-role2-triplet.png)
+and [source1](docs/images/neural-nuisance-phase129-v1/triplets/iso400-index0024-role2-triplet.png).
+These400/far crops use the same native160 ROI`[176,176,160,160]`, exposure2,
+shot/read`8e-5/2.56e-8` and unchanged source calibration; pixels are unresized.
+[Checkpoint/configuration, errors and real-scene failures](docs/global-background-phase-reconstruction.md).
+
+![Noisy, V143, sinusoidal NN, phase NN and exact constructed GT](docs/images/neural-nuisance-phase129-v1/paired/iso400-index0024-role2-paired.png)
 
 The full neural panel retains [source1](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0024-role2-triplet.png)
 and [source7](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0120-role2-triplet.png)

@@ -134,18 +134,23 @@ def review(root, output):
         for arm in ("H1-", "neural"):
             tiles = [r["arms"][arm] for r in record["aux"]["records"]]
             mses = np.asarray([r["heldout_full_standardized_MSE_by_color"] for r in tiles])
-            eigenvalues = np.asarray(
-                [r["wave_residual_Gram_eigenvalues_by_direction_color"] for r in tiles]
-            )
             entry["arms"][arm] = {
                 "unweighted_tile_fold_color_MSE_mean": float(mses.mean()),
                 "MSE_median": float(np.median(mses)),
                 "MSE_maximum": float(mses.max()),
-                "residual_Gram_eigenvalue_quantiles": np.quantile(
-                    eigenvalues, [0, 0.1, 0.5, 0.9, 1]
-                ).tolist(),
                 "matched_direction_pairs": sum(len(r["matched"]) for r in tiles),
             }
+            if plan.get("aggregation_config"):
+                entry["arms"][arm]["MSE_scope"] = (
+                    "Mean of two direction-specific phase full models; H1 Gram spectrum does not describe the phase kernel."
+                )
+            else:
+                eigenvalues = np.asarray(
+                    [r["wave_residual_Gram_eigenvalues_by_direction_color"] for r in tiles]
+                )
+                entry["arms"][arm]["residual_Gram_eigenvalue_quantiles"] = np.quantile(
+                    eigenvalues, [0, 0.1, 0.5, 0.9, 1]
+                ).tolist()
             if arm == "neural":
                 coefficients = np.asarray(
                     [r["neural_nuisance_coefficients_by_color"] for r in tiles]
@@ -180,7 +185,11 @@ def review(root, output):
                 )
                 for prefix, label, color in zip(
                     ("H1-", "conditional-", ""),
-                    ("Analytic raw wave", "Analytic conditional", "Neural conditional"),
+                    (
+                        ("Analytic raw wave", "Analytic phase", "Neural phase")
+                        if plan.get("aggregation_config")
+                        else ("Analytic raw wave", "Analytic conditional", "Neural conditional")
+                    ),
                     colors,
                     strict=True,
                 ):

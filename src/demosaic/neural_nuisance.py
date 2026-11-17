@@ -267,8 +267,14 @@ def restore_neural_nuisance(
     thresholds=(0.0, 2.0, 4.0),
     config=_DEFAULT,
     reselect_frequencies=True,
+    aggregation_config=None,
 ):
-    """Matched analytic/neural-nuisance H1 corrections under one global CFA split."""
+    """Matched analytic/neural nuisances; optional fixed-background phase delivery."""
+    if aggregation_config is not None:
+        from .phase_aggregation import PhaseAggregateConfig
+
+        if not isinstance(aggregation_config, PhaseAggregateConfig) or config.amplitude_window:
+            raise ValueError("Phase aggregation replaces the amplitude model; require no local WLS")
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
     if (
         parent.ndim != 3
@@ -379,7 +385,7 @@ def restore_neural_nuisance(
                         for c, b in zip(candidates, local_backgrounds, strict=True)
                     ]
                 predictors = candidates if spatial is None else [s.predict(tile) for s in spatial]
-                scores = [
+                reference_scores = [
                     conditional_scores(
                         c,
                         tile,
@@ -390,6 +396,32 @@ def restore_neural_nuisance(
                     )
                     for c in predictors
                 ]
+                scores = reference_scores
+                phase = None
+                phase_predictors = None
+                if aggregation_config is not None:
+                    from .background_phase_aggregation import BackgroundPhaseOperator
+
+                    phase = [
+                        BackgroundPhaseOperator(c, layout, aggregation_config) for c in candidates
+                    ]
+                    phase_predictors = [p.predict(tile) for p in phase]
+                    scores = []
+                    for pair in phase_predictors:
+                        evaluated = [
+                            conditional_scores(
+                                p,
+                                tile,
+                                layout,
+                                ~p.discovery_mask,
+                                window=config.validation_window,
+                                stride=config.validation_stride,
+                            )
+                            for p in pair
+                        ]
+                        scores.append(
+                            tuple(np.concatenate([v[i] for v in evaluated]) for i in (0, 1))
+                        )
                 matched = match_directions(
                     candidates[0].frequencies_xy,
                     candidates[1].frequencies_xy,
@@ -399,7 +431,13 @@ def restore_neural_nuisance(
                 )
                 # Only this final projection may consume the full-input parent.
                 rgb = parent[:, region[0], region[1]]
-                if spatial is None:
+                if phase is not None:
+                    components = [p.components(tile, rgb) for p in phase]
+                    unique = None
+                    legacy = (
+                        [replacement_components(c, rgb) for c in candidates] if prefix else None
+                    )
+                elif spatial is None:
                     unique = [
                         conditional_components(c, rgb, tile, layout, b)
                         for c, b in zip(candidates, local_backgrounds, strict=True)
@@ -411,7 +449,8 @@ def restore_neural_nuisance(
                     local_components = [s.components(tile, rgb) for s in spatial]
                     unique = [value[0] for value in local_components]
                     legacy = [value[1] for value in local_components] if prefix else None
-                components = [u[0] for u in unique]
+                if unique is not None:
+                    components = [u[0] for u in unique]
                 maxima = []
                 for a, b, _distance in matched:
                     component = (components[0][a] + components[1][b]) / 2
@@ -421,24 +460,28 @@ def restore_neural_nuisance(
                     if legacy is not None:
                         deliveries.append(("H1-", (legacy[0][a] + legacy[1][b]) / 2))
                     for destination, delivered in deliveries:
+                        delivered_local, delivered_global = local, glob
+                        if phase is not None and destination == "H1-":
+                            delivered_local = np.minimum(
+                                reference_scores[0][0][a], reference_scores[1][0][b]
+                            )
+                            delivered_global = np.minimum(
+                                reference_scores[0][1][a], reference_scores[1][1][b]
+                            )
                         for t in thresholds:
                             totals[destination + "local", float(t)][:, region[0], region[1]] += (
-                                delivered * support_weight(local, t) * blend
+                                delivered * support_weight(delivered_local, t) * blend
                             )
                             totals[destination + "global", float(t)][:, region[0], region[1]] += (
-                                delivered * support_weight(glob, t)[:, None, None] * blend
+                                delivered
+                                * support_weight(delivered_global, t)[:, None, None]
+                                * blend
                             )
                     maxima.append(float(local.max()))
                 tile_records[prefix or "neural"] = {
                     "frequencies": [c.frequencies_xy for c in candidates],
                     "matched": matched,
                     "local_max": maxima,
-                    "wave_residual_energy_fraction_by_direction_color": [
-                        u[1].tolist() for u in unique
-                    ],
-                    "wave_residual_Gram_eigenvalues_by_direction_color": [
-                        u[2].tolist() for u in unique
-                    ],
                     "heldout_full_standardized_MSE_by_color": [
                         [
                             float(
@@ -456,6 +499,39 @@ def restore_neural_nuisance(
                         for c in predictors
                     ],
                 }
+                if unique is not None:
+                    tile_records[prefix or "neural"].update(
+                        wave_residual_energy_fraction_by_direction_color=[
+                            u[1].tolist() for u in unique
+                        ],
+                        wave_residual_Gram_eigenvalues_by_direction_color=[
+                            u[2].tolist() for u in unique
+                        ],
+                    )
+                if phase_predictors is not None:
+                    arm = tile_records[prefix or "neural"]
+                    arm["H1_diagnostics_scope"] = "Not phase-kernel diagnostics; omitted."
+                    arm["heldout_full_standardized_MSE_by_color"] = [
+                        [
+                            float(
+                                np.mean(
+                                    [
+                                        np.mean(
+                                            (tile[selected] - p.full_cfa[selected]) ** 2
+                                            / p.variance_cfa[selected]
+                                        )
+                                        for p in pair
+                                    ]
+                                )
+                            )
+                            for color in range(3)
+                            for selected in [(~pair[0].discovery_mask) & (layout == color)]
+                        ]
+                        for pair in phase_predictors
+                    ]
+                    arm["heldout_MSE_scope"] = (
+                        "Mean of the two direction-specific phase full models."
+                    )
                 if spatial is not None:
                     tile_records[prefix or "neural"]["wave_diagnostic_scope"] = (
                         "Energy-weighted local-query averages; normalized Gram inverse cutoff1e-8. Geometry/global variance unchanged."
@@ -474,6 +550,10 @@ def restore_neural_nuisance(
                             if config.amplitude_nuisance == "global"
                             else "Global discovery coefficients only; actual prediction/delivery use local-query coefficients."
                         )
+                    if phase is not None:
+                        tile_records["neural"]["neural_coefficient_scope"] = (
+                            "Global joint-fit background coefficients used in both phase full/null models."
+                        )
             denominator[region] += blend
             records.append({"xy": [int(x), int(y)], "arms": tile_records})
     for key in outputs:
@@ -489,5 +569,11 @@ def restore_neural_nuisance(
         else "fixed-analytic-proposals",
         "parent_used_for_discovery_or_validation": False,
         "geometry_config": config.to_dict(),
-        "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent.",
+        "aggregation_config": aggregation_config.to_dict() if aggregation_config else None,
+        "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent."
+        + (
+            " Conditional/neural delivery uses local signed phase averages after a fixed global joint-fit background and per-direction global competing H1 fit. Identical composite linear map projects RAW and parent. H1 control retains its own original H1 validation scores."
+            if aggregation_config is not None
+            else ""
+        ),
     }

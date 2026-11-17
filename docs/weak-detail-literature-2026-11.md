@@ -87,6 +87,15 @@ reduces the neural building maximum41.87→15.55 DN16, at weak response6.043%→
 coefficient changes as the sole cause. Mean synthetic gains still depend on
 source1 and real crossings remain missing. A [full source/CFA/noise comparison](global-background-full-panel.md)
 is running with all cached fields and an explicit paired256-neural baseline.
+The [fixed-background phase reconstruction](global-background-phase-reconstruction.md)
+raises two-source400/far neural weak response4.695%→27.390%, now on both
+sources, with quiet/increment errors+2.352%/+0.434% versus parent. Its analytic
+arm reaches28.558% with increment−0.539%, but both add larger real building
+bands and still miss fine cab crossings. All48 cases/38 actual native figures
+are reviewed. This establishes useful additional reconstruction capacity with
+mixed error costs, without resolving nuisance discrimination. The global
+competing-direction fit also differs from the prior local sinusoidal fit, so
+the comparison does not isolate waveform capacity alone.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small

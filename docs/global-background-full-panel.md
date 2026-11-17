@@ -49,6 +49,12 @@ protected context. Saved prior256 neural panels will use identical ROIs and
 display transforms, with no neural replay. Noisy/restored/exact constructed-GT
 triplets and maximum-correction stress views follow numerical closure; actual
 viewing/publication are still required.
+The [saved-baseline panel helper](../scripts/add_neural_nuisance_baseline_panels.py)
+now has a completed [self-join rehearsal](results/fixed-bg129-full-setup-v1/baseline-panels-rehearsal-v1.json):
+all64 existing audited256 neural cells reproduce exactly, with every original
+board pixel preserved. It requires closed collections and the audited paired
+input match before rendering actual current-versus-prior boards. This separate
+postprocessing helper does not change either running snapshot.
 
 DSCF3879/3880 sky, building, foliage and coarse fence and DSCF3842/3835 cab
 mesh remain included, both profiles/left-right ROIs/JPEGs. Independent ISO100/AHD

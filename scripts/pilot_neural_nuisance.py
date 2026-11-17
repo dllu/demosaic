@@ -36,8 +36,17 @@ def prepare(
     amplitude_window=0,
     amplitude_nuisance="local",
     prediction_collection=None,
+    phase_aggregation=False,
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
+    from demosaic.phase_aggregation import PhaseAggregateConfig
+
+    assert not phase_aggregation or (not full_panel and not amplitude_window)
+    aggregation = (
+        PhaseAggregateConfig(bins=32, window=129, query_stride=32).to_dict()
+        if phase_aggregation
+        else None
+    )
 
     source = REPO / ".cache/experiments/phase-aggregation-projected-pilot-v1"
     previous = read_json(source / "plan.json")
@@ -98,6 +107,7 @@ def prepare(
         if (
             previous_package != current_package
             or LocalWaveConfig(**prior_plan["geometry_config"]).to_dict() != geometry
+            or prior_plan.get("aggregation_config") != aggregation
         ):
             invalid_cache = prediction_cache
             prediction_cache = None
@@ -147,6 +157,13 @@ def prepare(
         "nuisance": "One own-color neural CFA coordinate, upper-censored at sensor white; same analytic A-only edge and variance proxy. Frequency source explicitly declared above, joint per-color WLS. No neural training update.",
         "delivery": "Unique full-minus-conditional-null prediction for both analytic and neural nuisance arms. Raw-sinusoid H1 control retained separately. Parent projected after all scores; empirical support is not calibrated confidence.",
     }
+    if aggregation:
+        model.update(
+            kind="Fixed global background with local phase-aligned measurement reconstruction",
+            aggregation_config=aggregation,
+            phase_source=reference(work / "src/demosaic/background_phase_aggregation.py"),
+            delivery="Global joint-fit nuisance background shared by full/null; global competing H1 fit on its residual, local129 same-color/edge-side phase average minus local mean. Identical composite operator projects RAW and parent after A/B support scores. Analytic and neural phase arms share geometry. Raw-H1 control retains its own original validation scores.",
+        )
     write_json(root / "analytic-model.json", model)
     positive = sum(r["noise"]["shot"] + r["noise"]["read"] > 0 for r in previous["rows"])
     inputs = [reference(source / "plan.json"), reference(root / "analytic-model.json"), checkpoint]
@@ -161,6 +178,7 @@ def prepare(
         "script": reference(work / "scripts/pilot_neural_nuisance.py"),
         "model": reference(root / "analytic-model.json"),
         "geometry_config": geometry,
+        "aggregation_config": aggregation,
         "small_context_geometry_policy": "Use native minimum axis when smaller than declared window, half-window stride; only native256 materials use this input-dimension-only fallback.",
         "background_configuration": background_config,
         "background_cache": cache,
@@ -227,6 +245,10 @@ def prepare(
     if full_panel and prediction_collection is not None:
         plan["scope"] += (
             " Explicit completed pilot prediction cache selected above; threshold2 outputs adopted only with identical complete package source, canonical geometry and actual physical input/parent fingerprints. No numerical replay for valid adopted predictions."
+        )
+    if aggregation:
+        plan["scope"] += (
+            " Conditional analytic/neural modes instead use local129/stride32/bins32 phase measurement reconstruction after fixed global joint-fit background and global competing H1 subtraction. Circular [1,2,3,2,1]/9 phase smoothing, edge stopping and difference of normalized averages unchanged from original phase kernel. RAW and parent use the same composite linear operator. H1 controls retain original H1 scores; no local background coefficient fit, no target-derived frequency/profile/envelope. All48 outputs close before scoring."
         )
     write_json(root / "plan.json", plan)
     verify_plan(plan)
@@ -448,6 +470,7 @@ def predict(root):
     from demosaic.experiments.runtime import owner_identity
     from demosaic.local_validated_waves import LocalWaveConfig, restore_local_waves
     from demosaic.neural_nuisance import WithheldBackground, restore_neural_nuisance
+    from demosaic.phase_aggregation import PhaseAggregateConfig
     from demosaic.prediction_archive import fingerprint
 
     plan = read_json(root / "plan.json")
@@ -466,6 +489,7 @@ def predict(root):
         prior_plan = read_json(checked(prior["plan"]))
         assert prior_plan["fixed_analytic_frequencies"] == plan["fixed_analytic_frequencies"]
         assert prior_plan["geometry_config"] == plan["geometry_config"]
+        assert prior_plan.get("aggregation_config") == plan.get("aggregation_config")
         assert prior_plan["background_configuration"] == plan["background_configuration"]
         for name in ("neural_nuisance.py", "local_validated_waves.py"):
             assert (
@@ -554,6 +578,9 @@ def predict(root):
                 thresholds=tuple(plan["thresholds"]),
                 config=case_config,
                 reselect_frequencies=not plan.get("fixed_analytic_frequencies", False),
+                aggregation_config=PhaseAggregateConfig(**plan["aggregation_config"])
+                if plan.get("aggregation_config")
+                else None,
             )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
@@ -664,6 +691,7 @@ if __name__ == "__main__":
     parser.add_argument("--amplitude-window", type=int, default=0)
     parser.add_argument("--amplitude-nuisance", choices=("local", "global"), default="local")
     parser.add_argument("--prediction-cache", type=Path)
+    parser.add_argument("--phase-aggregation", action="store_true")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -680,6 +708,7 @@ if __name__ == "__main__":
                 prediction_collection=args.prediction_cache.resolve()
                 if args.prediction_cache
                 else None,
+                phase_aggregation=args.phase_aggregation,
             )
         )
     elif args.mode == "score":
