@@ -7,7 +7,9 @@ The20k endpoint is admitted at SHA633053… after successful training. Its
 [110-input native review](full-corpus-control20k-review.md) is complete; its own
 three-case preflight passes with bit-exact V120 predictions/metrics. The full
 3,162-case benchmark is running, with broader offline analysis waiting for
-completion. Complete primary scores remain missing; V120 stays recommended.
+completion. The [complete camera panels](full-corpus-control20k-camera-review.md)
+are audited/native-viewed: known +0.03285/unseen−0.04067 dB. Full427 photos and
+complete three-panel coverage remain missing; V120 stays recommended.
 
 [Qualification, frozen sources and bound job observations](results/full-corpus-execution-followup-v1/publication.json) ·
 [Three-case result](results/full-corpus-execution-followup-v1/primary-preflight.json) ·

@@ -106,8 +106,17 @@ Every65,536-code CPU/CUDA table matches under both codecs; four actual output
 comparisons are bit-exact, with zero module forwards and a2GiB process cap.
 That is physical qualification under concurrent training, not a speed benchmark.
 
-The complete pre-existing **588 ADC-only cases** (147 colors/all four CFAs) now
-have a frozen plan and fresh matched CPU collection running. No complete-palette
-result is claimed yet. Full427 faint-detail coverage, positive-noise evidence
-and real-scene reconstruction remain open; this subset does not replace the
-running full-model benchmarks or justify changing V120's default.
+The [complete588-case color review](full-corpus-control20k-color-review.md)
+now passes independent audit/native viewing:147 colors/all four CFAs,all eight
+policies and4,704 metric rows. V120 bins improves worst bias13.554→13.039 DN16,
+worst centered RMS15.150→15.137 and mean MSE2.15% versus exact Malvar. On20k,
+mean MSE improves1.76% but worst bias/RMS worsen slightly versus exact Malvar.
+The full grid also exposes raw20k bias765.656 DN16 versus V12055.525, missed by
+the earlier two-color spot check; Malvar/bins repair most of it. These are
+complete color results,not a general photo/detail score.
+
+The new427-photo faint study is still running,all IDs val/disjoint current
+training,with original-source masks and1708 image/CFA cases/model; its16 legacy
+physical inputs/targets reproduce exactly. No result is claimed yet. Positive-
+noise and real-scene fine reconstruction remain open; this helper bypasses
+positive noise and changes no default. [Completed camera tradeoff](full-corpus-control20k-camera-review.md).

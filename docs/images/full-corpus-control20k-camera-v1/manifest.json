@@ -1,0 +1,1881 @@
+{
+  "models": {
+    "V120": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000,
+      "weights": "EMA",
+      "display_label": "V120 EMA"
+    },
+    "scale-control20k": {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "step": 20000,
+      "weights": "EMA",
+      "display_label": "Corpus20k EMA",
+      "retained_progress": true,
+      "training_horizon": 20000
+    }
+  },
+  "images": [
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-known-2pilesofplates.png",
+        "sha256": "25f7df14e11426b9a4163c187e9a005786ee6333b2bde1c563b8d507049f44e9"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "known-2pilesofplates",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/known/result.json",
+        "sha256": "2e128d93b229ffeb969a91cc0b38fefd1ed1f7ce14e70a898e5a7fa3b25b34f9"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00000/result.json",
+        "sha256": "7bfa0fbb77b4581f01cf61cc7ef35029cfa59e49c00362138410f4024e2fb716"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/known-00000.npz",
+        "sha256": "38eb89dbc9c3388fc69c85d1569753f702e132155073f546a76586cd773a4b3e"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw",
+        "file_id": 28686,
+        "bytes": 49112576,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "b68f3f538b448e5f76ccff5dc308df4e"
+        },
+        "sha1": "31fac4e2aeaa235193744d7e49c503734b6346b2",
+        "iso_label": 2000,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/28686",
+        "sha256": "4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1",
+        "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw",
+        "camera": "ILCE-7C",
+        "pattern": "RGGB",
+        "black_levels": [
+          512.0,
+          512.0,
+          512.0,
+          512.0
+        ],
+        "white_levels": [
+          15360.0,
+          15360.0,
+          15360.0,
+          15360.0
+        ],
+        "white_balance": [
+          2.40625,
+          1.0,
+          1.69140625
+        ],
+        "camera_to_srgb": [
+          [
+            1.6353747641867242,
+            -0.42196120206077053,
+            -0.21341356212595397
+          ],
+          [
+            -0.13106821045315706,
+            1.5426731789357453,
+            -0.411604968482588
+          ],
+          [
+            0.011429855280569487,
+            -0.4196218028471881,
+            1.4081919475666185
+          ]
+        ],
+        "flip": 0,
+        "iso": 2000
+      },
+      "conditioning": {
+        "shot": 0.00022425719328779764,
+        "read": 9.48210212944349e-08
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        2.40625,
+        1.0,
+        1.69140625
+      ],
+      "camera_to_sRGB": [
+        [
+          1.6353747844696045,
+          -0.4219611883163452,
+          -0.2134135663509369
+        ],
+        [
+          -0.13106821477413177,
+          1.5426732301712036,
+          -0.41160497069358826
+        ],
+        [
+          0.011429855599999428,
+          -0.4196217954158783,
+          1.4081919193267822
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/known-2pilesofplates.png",
+        "sha256": "25f7df14e11426b9a4163c187e9a005786ee6333b2bde1c563b8d507049f44e9"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-known-7D-1.png",
+        "sha256": "00b4e41ab172172573ba751137018e96ee93ff4a3990bc88a761c5046353c2b1"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "known-7D-1",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/known/result.json",
+        "sha256": "2e128d93b229ffeb969a91cc0b38fefd1ed1f7ce14e70a898e5a7fa3b25b34f9"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00006/result.json",
+        "sha256": "3b7739cd8f392ef63a049200727f97a831eec93f831355638eb55eaddecf2b5f"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/known-00006.npz",
+        "sha256": "5ab03d16b265db8344894102db826b5a81bdcd72bed36d1fc678090bc2cff46a"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_7D-1_ISO1600_sha1=9b21ad6490fbd55426bad0791a6f3990d8b0e395.cr2",
+        "file_id": 29233,
+        "bytes": 26746549,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "f55dd94e8423aacfad4de32659a5f48f"
+        },
+        "sha1": "9b21ad6490fbd55426bad0791a6f3990d8b0e395",
+        "iso_label": 1600,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/29233",
+        "sha256": "eaa8fd439aaccef097701842c51f23280b92331ec9250e6f36982e0cc60256cf",
+        "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_7D-1_ISO1600_sha1=9b21ad6490fbd55426bad0791a6f3990d8b0e395.cr2"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_7D-1_ISO1600_sha1=9b21ad6490fbd55426bad0791a6f3990d8b0e395.cr2",
+        "camera": "Canon EOS 7D",
+        "pattern": "GBRG",
+        "black_levels": [
+          2047.0,
+          2046.0,
+          2047.0,
+          2046.0
+        ],
+        "white_levels": [
+          15094.0,
+          15094.0,
+          15094.0,
+          15094.0
+        ],
+        "white_balance": [
+          2.0986328125,
+          1.0,
+          1.654296875
+        ],
+        "camera_to_srgb": [
+          [
+            1.9204999025301575,
+            -1.0413495812710656,
+            0.12084967874090806
+          ],
+          [
+            -0.24696281331132816,
+            1.7593124803218942,
+            -0.5123496670105661
+          ],
+          [
+            -0.006956121305943532,
+            -0.4895846857258788,
+            1.4965408070318222
+          ]
+        ],
+        "flip": 0,
+        "iso": 1600
+      },
+      "conditioning": {
+        "shot": 0.0005918457435588024,
+        "read": 2.2157751772176863e-06
+      },
+      "CFA_pattern": "GBRG",
+      "WB": [
+        2.0986328125,
+        1.0,
+        1.654296875
+      ],
+      "camera_to_sRGB": [
+        [
+          1.9204999208450317,
+          -1.0413495302200317,
+          0.12084967643022537
+        ],
+        [
+          -0.24696281552314758,
+          1.7593125104904175,
+          -0.5123496651649475
+        ],
+        [
+          -0.006956121418625116,
+          -0.48958468437194824,
+          1.4965407848358154
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/known-7D-1.png",
+        "sha256": "00b4e41ab172172573ba751137018e96ee93ff4a3990bc88a761c5046353c2b1"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-known-MuseeL-CopteArch-C500D.png",
+        "sha256": "d27bbed6b5ec5d268f94c7790ae423a1eaf6915ec08c794b4276802adf336661"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "known-MuseeL-CopteArch-C500D",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/known/result.json",
+        "sha256": "2e128d93b229ffeb969a91cc0b38fefd1ed1f7ce14e70a898e5a7fa3b25b34f9"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00012/result.json",
+        "sha256": "98e1f3c5e9a39e41ea265a0b2f237a1cf78fd87c4eae41f4c218807f1849c3b9"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/known-00012.npz",
+        "sha256": "6a88f7f1e83757b6385d8c02064ede292de88c3fcdf7e0fad812f6c97bb8499b"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_MuseeL-CopteArch-C500D_ISO1600_sha1=2351db79789f9a7be865949295e910444290f5e1.cr2",
+        "file_id": 30254,
+        "bytes": 21836662,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "2d080310cd019312580941390ff967c1"
+        },
+        "sha1": "2351db79789f9a7be865949295e910444290f5e1",
+        "iso_label": 1600,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/30254",
+        "sha256": "eaeee7bf990cc88c2d0809b5df1cad25965bc526fd411ac97edef5224e97914a",
+        "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_MuseeL-CopteArch-C500D_ISO1600_sha1=2351db79789f9a7be865949295e910444290f5e1.cr2"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_MuseeL-CopteArch-C500D_ISO1600_sha1=2351db79789f9a7be865949295e910444290f5e1.cr2",
+        "camera": "Canon EOS 500D",
+        "pattern": "RGGB",
+        "black_levels": [
+          1024.0,
+          1024.0,
+          1024.0,
+          1024.0
+        ],
+        "white_levels": [
+          15974.0,
+          15974.0,
+          15974.0,
+          15974.0
+        ],
+        "white_balance": [
+          1.6419098143236075,
+          1.0,
+          1.8152077807250222
+        ],
+        "camera_to_srgb": [
+          [
+            2.2434195214753636,
+            -1.4847493839358654,
+            0.24132986246050184
+          ],
+          [
+            -0.08914846337084845,
+            1.547145692956045,
+            -0.4579972295851967
+          ],
+          [
+            0.02404551917051935,
+            -0.608321495524518,
+            1.5842759763539986
+          ]
+        ],
+        "flip": 0,
+        "iso": 1600
+      },
+      "conditioning": {
+        "shot": 0.0005135602220723912,
+        "read": 1.298822832396085e-06
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        1.6419098377227783,
+        1.0,
+        1.815207839012146
+      ],
+      "camera_to_sRGB": [
+        [
+          2.2434194087982178,
+          -1.484749436378479,
+          0.2413298636674881
+        ],
+        [
+          -0.08914846181869507,
+          1.5471457242965698,
+          -0.45799723267555237
+        ],
+        [
+          0.024045519530773163,
+          -0.608321487903595,
+          1.5842759609222412
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/known-MuseeL-CopteArch-C500D.png",
+        "sha256": "d27bbed6b5ec5d268f94c7790ae423a1eaf6915ec08c794b4276802adf336661"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-known-D60-2.png",
+        "sha256": "aced67575c02944b999957b662274aec426fa7c0f07dd7f53f07aec943d234b9"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "known-D60-2",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/known/result.json",
+        "sha256": "2e128d93b229ffeb969a91cc0b38fefd1ed1f7ce14e70a898e5a7fa3b25b34f9"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/known-00018/result.json",
+        "sha256": "01216a4519b9e170bb26a35129155ae5223fb8e08c0a6e7591ad7785059b1c7a"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/known-00018.npz",
+        "sha256": "594fe457437235817d7c3f130d6f427ddfed33f5bcb765809688549ef247c9d3"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_D60-2_ISO800_sha1=67a5e80d99f1c3c44f17e04cf2b4292154d073cf.crw",
+        "file_id": 29189,
+        "bytes": 7398216,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "e1a81ad03c9348ede50172245bf97739"
+        },
+        "sha1": "67a5e80d99f1c3c44f17e04cf2b4292154d073cf",
+        "iso_label": 800,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/29189",
+        "sha256": "bec4a494a7f76f0014c73e3d255284e3ca79c657ee94a093a67c6f8a3f616601",
+        "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_D60-2_ISO800_sha1=67a5e80d99f1c3c44f17e04cf2b4292154d073cf.crw"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_D60-2_ISO800_sha1=67a5e80d99f1c3c44f17e04cf2b4292154d073cf.crw",
+        "camera": "Canon EOS D60",
+        "pattern": "RGGB",
+        "black_levels": [
+          132.0,
+          132.0,
+          132.0,
+          131.0
+        ],
+        "white_levels": [
+          4000.0,
+          4000.0,
+          4000.0,
+          4000.0
+        ],
+        "white_balance": [
+          1.887706855791962,
+          1.0,
+          1.5780141843971631
+        ],
+        "camera_to_srgb": [
+          [
+            1.576069457951723,
+            -0.6723545241759883,
+            0.09628506622426548
+          ],
+          [
+            0.0032496919551647995,
+            1.3965132845334578,
+            -0.39976297648862275
+          ],
+          [
+            0.06447709344447952,
+            -0.4647536827453767,
+            1.4002765893008973
+          ]
+        ],
+        "flip": 0,
+        "iso": 800
+      },
+      "conditioning": {
+        "shot": 0.0002617722900517909,
+        "read": 7.031910895109717e-06
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        1.8877068758010864,
+        1.0,
+        1.5780141353607178
+      ],
+      "camera_to_sRGB": [
+        [
+          1.5760694742202759,
+          -0.672354519367218,
+          0.09628506749868393
+        ],
+        [
+          0.0032496920321136713,
+          1.3965133428573608,
+          -0.39976298809051514
+        ],
+        [
+          0.0644770935177803,
+          -0.4647536873817444,
+          1.4002765417099
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/known-D60-2.png",
+        "sha256": "aced67575c02944b999957b662274aec426fa7c0f07dd7f53f07aec943d234b9"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "known-2pilesofplates",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-8ff2f2b19d9c54c9.png",
+        "sha256": "4ddea727b688e2ca541f488bb148102eb34be4beb3c4dee2dbe1a34b71492c22"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-8ff2f2b19d9c54c9.json",
+        "sha256": "1ae431d3eae8aed96e20eb1681426a5d37f96b7ec4b0438d44a46369cb268d80"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-8ff2f2b19d9c54c9.png",
+        "sha256": "4ddea727b688e2ca541f488bb148102eb34be4beb3c4dee2dbe1a34b71492c22"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "known-7D-1",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-f91facf30106d754.png",
+        "sha256": "b7b0c549d8ec2737d29180404b973e62355f96a90e1f17dab7852544abc1e8e1"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-f91facf30106d754.json",
+        "sha256": "f2a4144eff3395df36aecf4b968a50ecd1c9784e9eb97f068fd1745b3c0591bf"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-f91facf30106d754.png",
+        "sha256": "b7b0c549d8ec2737d29180404b973e62355f96a90e1f17dab7852544abc1e8e1"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "known-MuseeL-CopteArch-C500D",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-c0597ef07d4fbe2c.png",
+        "sha256": "b5ce0af446515d5025bd6ce5edbf80c4bed505ef0518724c9fcd57a6fca29e5f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-c0597ef07d4fbe2c.json",
+        "sha256": "6c323e5fe6aef148ffc7dcd05626e8f65bf7bff69a7536814909c7e31204383e"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-c0597ef07d4fbe2c.png",
+        "sha256": "b5ce0af446515d5025bd6ce5edbf80c4bed505ef0518724c9fcd57a6fca29e5f"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "known-D60-2",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-15b8f8055cf582fa.png",
+        "sha256": "618348771cbf8e02d148de31bdfc503832af8a9949bc9e7bad04ffa511f2144c"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-15b8f8055cf582fa.json",
+        "sha256": "7a60d217b2e1ed41856cf3dec8a38d70e5ef70b3698831391a1da133961f259c"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/known-native-v3/triplets/crop-15b8f8055cf582fa.png",
+        "sha256": "618348771cbf8e02d148de31bdfc503832af8a9949bc9e7bad04ffa511f2144c"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-unseen-LucieB_3apples.png",
+        "sha256": "edeba35df5114b80ad268ab00f8d392b5ec230a7446d9fcaa397dd281ec0cf60"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "unseen-LucieB_3apples",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/unseen/result.json",
+        "sha256": "bf80673b41f8dc792c5d2b63b1f86a2787cd088945b6130ab45b4a53c69f1f42"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00000/result.json",
+        "sha256": "8d1ef114b42aa19a29ab620455175f719342f8639c852f8dcccb04e5c672c09b"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/unseen-00000.npz",
+        "sha256": "d080c2eb91e26af484f0aa8b881894b9aa0d342a58a872a1b4a61f80d12b05d0"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_UNK_LucieB_3apples_ISO1600_sha1=f28389e43e270ededf4d50a7157c48f1ac89f105.cr2",
+        "file_id": 29519,
+        "bytes": 36801196,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "d4047513eb8fb9b7aa476781288d31a6"
+        },
+        "sha1": "f28389e43e270ededf4d50a7157c48f1ac89f105",
+        "iso_label": 1600,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/29519",
+        "sha256": "9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f",
+        "path": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_3apples_ISO1600_sha1=f28389e43e270ededf4d50a7157c48f1ac89f105.cr2"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_3apples_ISO1600_sha1=f28389e43e270ededf4d50a7157c48f1ac89f105.cr2",
+        "camera": "Canon EOS M100",
+        "pattern": "RGGB",
+        "black_levels": [
+          2048.0,
+          2048.0,
+          2048.0,
+          2048.0
+        ],
+        "white_levels": [
+          14338.0,
+          14338.0,
+          14338.0,
+          14338.0
+        ],
+        "white_balance": [
+          0.9775390625,
+          1.0,
+          2.1748046875
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "flip": 0,
+        "iso": 1600,
+        "adc_white_level": 16383.0
+      },
+      "conditioning": {
+        "shot": 0.0006616256626047161,
+        "read": 7.436489908776232e-06
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        0.9775390625,
+        1.0,
+        2.1748046875
+      ],
+      "camera_to_sRGB": [
+        [
+          2.0060677528381348,
+          -1.2336652278900146,
+          0.22759754955768585
+        ],
+        [
+          -0.2370671033859253,
+          1.80068838596344,
+          -0.5636212825775146
+        ],
+        [
+          -0.01570664718747139,
+          -0.5551683902740479,
+          1.5708750486373901
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/unseen-LucieB_3apples.png",
+        "sha256": "edeba35df5114b80ad268ab00f8d392b5ec230a7446d9fcaa397dd281ec0cf60"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-unseen-LucieB_Coulicoco.png",
+        "sha256": "6588cadfe2db8318f1658bc8d23412e9dcb5d3ed8d9fde1e31422bc401cbf181"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "unseen-LucieB_Coulicoco",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/unseen/result.json",
+        "sha256": "bf80673b41f8dc792c5d2b63b1f86a2787cd088945b6130ab45b4a53c69f1f42"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00006/result.json",
+        "sha256": "edbbee929201cf79336cfa3b1a53a5ce32d732001b4a4290002f68f3653fac2f"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/unseen-00006.npz",
+        "sha256": "51b0c3836359802fed7f07575e108494cfcb177794b0df7f4ca4b24f725fe2cb"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_UNK_LucieB_Coulicoco_ISO1600_sha1=09e5623609002d41ccb2fffb473cc6e3ec0cabcc.cr2",
+        "file_id": 29417,
+        "bytes": 33949560,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "c83bb927d1fd7364c6a1e829ba12f8d8"
+        },
+        "sha1": "09e5623609002d41ccb2fffb473cc6e3ec0cabcc",
+        "iso_label": 1600,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/29417",
+        "sha256": "45cd233e97341a02c908d5fcb6540e2797ef78a7b0ba375be1829a691f3532c7",
+        "path": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_Coulicoco_ISO1600_sha1=09e5623609002d41ccb2fffb473cc6e3ec0cabcc.cr2"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_Coulicoco_ISO1600_sha1=09e5623609002d41ccb2fffb473cc6e3ec0cabcc.cr2",
+        "camera": "Canon EOS M100",
+        "pattern": "RGGB",
+        "black_levels": [
+          2047.0,
+          2048.0,
+          2048.0,
+          2048.0
+        ],
+        "white_levels": [
+          14338.0,
+          14338.0,
+          14338.0,
+          14338.0
+        ],
+        "white_balance": [
+          0.9853515625,
+          1.0,
+          2.0283203125
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "flip": 0,
+        "iso": 1600,
+        "adc_white_level": 16383.0
+      },
+      "conditioning": {
+        "shot": 0.0007022181951965978,
+        "read": 3.501161916398528e-06
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        0.9853515625,
+        1.0,
+        2.0283203125
+      ],
+      "camera_to_sRGB": [
+        [
+          2.0060677528381348,
+          -1.2336652278900146,
+          0.22759754955768585
+        ],
+        [
+          -0.2370671033859253,
+          1.80068838596344,
+          -0.5636212825775146
+        ],
+        [
+          -0.01570664718747139,
+          -0.5551683902740479,
+          1.5708750486373901
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/unseen-LucieB_Coulicoco.png",
+        "sha256": "6588cadfe2db8318f1658bc8d23412e9dcb5d3ed8d9fde1e31422bc401cbf181"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-unseen-LucieB_bedroom_tapestry.png",
+        "sha256": "7cb428df98844ca67a43e20d0e0db82de59b2efe8a0917a831ddaebc0aba78f7"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "unseen-LucieB_bedroom_tapestry",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/unseen/result.json",
+        "sha256": "bf80673b41f8dc792c5d2b63b1f86a2787cd088945b6130ab45b4a53c69f1f42"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00012/result.json",
+        "sha256": "b7f65aee66477d54ba21245d20404f974d48be52de699af549128567af3d39be"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/unseen-00012.npz",
+        "sha256": "91ecdf31f5a5513f51941d2e7b34844091dae6d2b2efd4b5f2fc9db8d5706202"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_UNK_LucieB_bedroom_tapestry_ISO1600_sha1=2274238cc220ba4b8f4d455985f9607df13647b9.cr2",
+        "file_id": 29868,
+        "bytes": 38147190,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "9d25ca29966912a37c406fc968f26b35"
+        },
+        "sha1": "2274238cc220ba4b8f4d455985f9607df13647b9",
+        "iso_label": 1600,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/29868",
+        "sha256": "7d05c1da35f834823fd50421f94a2d7042149fba01354a9124d7c809dafa3b31",
+        "path": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_bedroom_tapestry_ISO1600_sha1=2274238cc220ba4b8f4d455985f9607df13647b9.cr2"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_bedroom_tapestry_ISO1600_sha1=2274238cc220ba4b8f4d455985f9607df13647b9.cr2",
+        "camera": "Canon EOS M100",
+        "pattern": "RGGB",
+        "black_levels": [
+          2048.0,
+          2048.0,
+          2048.0,
+          2048.0
+        ],
+        "white_levels": [
+          14338.0,
+          14338.0,
+          14338.0,
+          14338.0
+        ],
+        "white_balance": [
+          0.94140625,
+          1.0,
+          2.072265625
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "flip": 0,
+        "iso": 1600,
+        "adc_white_level": 16383.0
+      },
+      "conditioning": {
+        "shot": 0.0007170014385633219,
+        "read": 4.780976684706798e-06
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        0.94140625,
+        1.0,
+        2.072265625
+      ],
+      "camera_to_sRGB": [
+        [
+          2.0060677528381348,
+          -1.2336652278900146,
+          0.22759754955768585
+        ],
+        [
+          -0.2370671033859253,
+          1.80068838596344,
+          -0.5636212825775146
+        ],
+        [
+          -0.01570664718747139,
+          -0.5551683902740479,
+          1.5708750486373901
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/unseen-LucieB_bedroom_tapestry.png",
+        "sha256": "7cb428df98844ca67a43e20d0e0db82de59b2efe8a0917a831ddaebc0aba78f7"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-unseen-LucieB_stick_figurine.png",
+        "sha256": "043b02b1ddf3fc9bc0dbf70796977b6be8b1f1e25dcb7fb8d468169346d6a4d9"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "unseen-LucieB_stick_figurine",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/unseen/result.json",
+        "sha256": "bf80673b41f8dc792c5d2b63b1f86a2787cd088945b6130ab45b4a53c69f1f42"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00018/result.json",
+        "sha256": "a97961535d87d6c3ed4f6c0b91369f5ccb7c75d869cdde1113449c0143b94f97"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/unseen-00018.npz",
+        "sha256": "be1325837ae58ed4f199ebc27257b32b0efb9ebb1866df7a55c431a38c539059"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_UNK_LucieB_stick_figurine_ISO1600_sha1=b19afad1d506e70f2ba82e6211dfb581501623b9.cr2",
+        "file_id": 30140,
+        "bytes": 34806914,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "860f67c675dff5c6b3d74ecc710fcc99"
+        },
+        "sha1": "b19afad1d506e70f2ba82e6211dfb581501623b9",
+        "iso_label": 1600,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/30140",
+        "sha256": "93f4442b142998ca49c7efe9c7c4c698cc86b021bfb8511847672c1bdd373b7b",
+        "path": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_stick_figurine_ISO1600_sha1=b19afad1d506e70f2ba82e6211dfb581501623b9.cr2"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_stick_figurine_ISO1600_sha1=b19afad1d506e70f2ba82e6211dfb581501623b9.cr2",
+        "camera": "Canon EOS M100",
+        "pattern": "RGGB",
+        "black_levels": [
+          2048.0,
+          2048.0,
+          2048.0,
+          2048.0
+        ],
+        "white_levels": [
+          14338.0,
+          14338.0,
+          14338.0,
+          14338.0
+        ],
+        "white_balance": [
+          0.921875,
+          1.0,
+          2.2373046875
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "flip": 0,
+        "iso": 1600,
+        "adc_white_level": 16383.0
+      },
+      "conditioning": {
+        "shot": 0.0008555630602079563,
+        "read": 2.085225603110822e-06
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        0.921875,
+        1.0,
+        2.2373046875
+      ],
+      "camera_to_sRGB": [
+        [
+          2.0060677528381348,
+          -1.2336652278900146,
+          0.22759754955768585
+        ],
+        [
+          -0.2370671033859253,
+          1.80068838596344,
+          -0.5636212825775146
+        ],
+        [
+          -0.01570664718747139,
+          -0.5551683902740479,
+          1.5708750486373901
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/unseen-LucieB_stick_figurine.png",
+        "sha256": "043b02b1ddf3fc9bc0dbf70796977b6be8b1f1e25dcb7fb8d468169346d6a4d9"
+      }
+    },
+    {
+      "kind": "board",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/board-unseen-LucieB_top_of_Expedit.png",
+        "sha256": "e0d7f9bc2c2625c4632a44823b87cdb706637c8877173300c5532fee0f00091b"
+      },
+      "panels": [
+        {
+          "label": "Noisy (Malvar)",
+          "png_xywh": [
+            8,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "V120 EMA",
+          "png_xywh": [
+            176,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Corpus20k EMA",
+          "png_xywh": [
+            344,
+            24,
+            160,
+            160
+          ]
+        },
+        {
+          "label": "Independent AHD ref",
+          "png_xywh": [
+            512,
+            24,
+            160,
+            160
+          ]
+        }
+      ],
+      "id": "unseen-LucieB_top_of_Expedit",
+      "selection": "First capture/first native crop of every fixed scene; center160, declared independently of scores.",
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/unseen/result.json",
+        "sha256": "bf80673b41f8dc792c5d2b63b1f86a2787cd088945b6130ab45b4a53c69f1f42"
+      },
+      "case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k/collection/unseen-00024/result.json",
+        "sha256": "5bc4ae81f15da2e8fb075ca14e68db28e89bd6d15a2b7cbc6fabf77d698b41c7"
+      },
+      "canonical_arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/unseen-00024.npz",
+        "sha256": "52ed631ab82601be1135ff930e221ed6e6f4a62012374fdc4037c844823a219c"
+      },
+      "native_context_xywh": [
+        160,
+        160,
+        512,
+        512
+      ],
+      "ROI_xywh": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "absolute_native_ROI_xywh": [
+        336,
+        336,
+        160,
+        160
+      ],
+      "source_noisy_RAW": {
+        "filename": "Bayer_UNK_LucieB_top_of_Expedit_ISO1600_sha1=81a6c4cab65dcc0a2021243b7dda950a611c3288.cr2",
+        "file_id": 30350,
+        "bytes": 35156352,
+        "publisher_checksum": {
+          "type": "MD5",
+          "value": "0b4d6c9c13aab6f6f1d8a5216538c5e4"
+        },
+        "sha1": "81a6c4cab65dcc0a2021243b7dda950a611c3288",
+        "iso_label": 1600,
+        "role": "noisy",
+        "url": "https://dataverse.uclouvain.be/api/access/datafile/30350",
+        "sha256": "4d9d218313b3d1b9e2f455bd5458602f5fd08271c0365dcd97078be5a461d9d5",
+        "path": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_top_of_Expedit_ISO1600_sha1=81a6c4cab65dcc0a2021243b7dda950a611c3288.cr2"
+      },
+      "capture_metadata": {
+        "source": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_top_of_Expedit_ISO1600_sha1=81a6c4cab65dcc0a2021243b7dda950a611c3288.cr2",
+        "camera": "Canon EOS M100",
+        "pattern": "RGGB",
+        "black_levels": [
+          2048.0,
+          2048.0,
+          2048.0,
+          2048.0
+        ],
+        "white_levels": [
+          14338.0,
+          14338.0,
+          14338.0,
+          14338.0
+        ],
+        "white_balance": [
+          0.8740234375,
+          1.0,
+          2.416015625
+        ],
+        "camera_to_srgb": [
+          [
+            2.0060677171962595,
+            -1.2336652639354324,
+            0.22759754673917293
+          ],
+          [
+            -0.23706710137989376,
+            1.8006883583827236,
+            -0.5636212570028296
+          ],
+          [
+            -0.015706646354080415,
+            -0.555168390672119,
+            1.5708750370261992
+          ]
+        ],
+        "flip": 0,
+        "iso": 1600,
+        "adc_white_level": 16383.0
+      },
+      "conditioning": {
+        "shot": 0.0007880478044712238,
+        "read": 3.037522867715004e-06
+      },
+      "CFA_pattern": "RGGB",
+      "WB": [
+        0.8740234375,
+        1.0,
+        2.416015625
+      ],
+      "camera_to_sRGB": [
+        [
+          2.0060677528381348,
+          -1.2336652278900146,
+          0.22759754955768585
+        ],
+        [
+          -0.2370671033859253,
+          1.80068838596344,
+          -0.5636212825775146
+        ],
+        [
+          -0.01570664718747139,
+          -0.5551683902740479,
+          1.5708750486373901
+        ]
+      ],
+      "display_exposure": 1.0,
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-control20k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+            "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "Corpus20k EMA",
+          "retained_progress": true,
+          "training_horizon": 20000
+        }
+      },
+      "weights": "EMA",
+      "reference": "Independent low-noise/aligned reference demosaiced with AHD; auxiliary RGB comparison, not exact RGB GT. Primary numerical score uses only the measured-CFA reference mask.",
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/unseen-LucieB_top_of_Expedit.png",
+        "sha256": "e0d7f9bc2c2625c4632a44823b87cdb706637c8877173300c5532fee0f00091b"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "unseen-LucieB_3apples",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-67a529e6a7694059.png",
+        "sha256": "e8e69d87bba26199d31d94cf99afb8114bb66946e02e94b05ffbaf713fa0ed17"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-67a529e6a7694059.json",
+        "sha256": "70debf10cdc85de1d56020ad54707f7f8e54b1c3be7cebf8f780d689f1397e25"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-67a529e6a7694059.png",
+        "sha256": "e8e69d87bba26199d31d94cf99afb8114bb66946e02e94b05ffbaf713fa0ed17"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "unseen-LucieB_Coulicoco",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-4825d1080d5a076f.png",
+        "sha256": "40370067d66bb73a08b1e8a01f00741fbfb0de45d78f27d1e23b586bc906973a"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-4825d1080d5a076f.json",
+        "sha256": "dc1492777c4e7f62e6e1f3b21bd12afefc26be1888a5f40e12996748c6b13e83"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-4825d1080d5a076f.png",
+        "sha256": "40370067d66bb73a08b1e8a01f00741fbfb0de45d78f27d1e23b586bc906973a"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "unseen-LucieB_bedroom_tapestry",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-574a8be8fb135bb6.png",
+        "sha256": "3acec7422e1a828188f89b0c17be869e906cb932154ca642a3cd6ef567e43a0d"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-574a8be8fb135bb6.json",
+        "sha256": "d186c0b8ee238e8d900a1f5a5abb48f9c7f1303075483618704edce23a9e7355"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-574a8be8fb135bb6.png",
+        "sha256": "3acec7422e1a828188f89b0c17be869e906cb932154ca642a3cd6ef567e43a0d"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "unseen-LucieB_stick_figurine",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-2233eb3a3bdbac9d.png",
+        "sha256": "15987f53e4806c674cc8a0b2c73d3223eed642687c9033ef21a2aa9d6bd6cac9"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-2233eb3a3bdbac9d.json",
+        "sha256": "8d431232aa01af6b09d7ce6a552e4413d31af8c0320fdef650d375935b335835"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-2233eb3a3bdbac9d.png",
+        "sha256": "15987f53e4806c674cc8a0b2c73d3223eed642687c9033ef21a2aa9d6bd6cac9"
+      }
+    },
+    {
+      "kind": "triplet",
+      "id": "unseen-LucieB_top_of_Expedit",
+      "image": {
+        "path": "/home/dllu/proj/demosaic/docs/images/full-corpus-control20k-camera-v1/triplet-crop-f9962501c4a8db95.png",
+        "sha256": "7b458cd5cf6759bc89f8de4f45bc6f895fe43d14602985728ab8b8cbfb56053f"
+      },
+      "metadata": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-f9962501c4a8db95.json",
+        "sha256": "18181ffbfc493b3c315b7c34d5e34aec92b818766039531ffa72823b829d95f3"
+      },
+      "original_image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/work/artifacts/unseen-native-v3/triplets/crop-f9962501c4a8db95.png",
+        "sha256": "7b458cd5cf6759bc89f8de4f45bc6f895fe43d14602985728ab8b8cbfb56053f"
+      }
+    }
+  ],
+  "actual_native_viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-camera-review-v2/actual-native-viewing-v1.json",
+    "sha256": "8e8d1df832e63d882d3c08e92698e6d6be612f3ab7563fa6e164080af8a7534a"
+  },
+  "scope": "Exact original9 native boards and9 subset triplets.160px cells,center of512-native context,exposure1,shared WB/matrix/clipped sRGB,no resizing. Independent AHD references are auxiliary RGB,not exact GT. Fixed first-capture/first-crop selection; all9 boards actually viewed."
+}

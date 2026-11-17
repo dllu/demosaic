@@ -1,0 +1,141 @@
+{
+  "recorded_UTC": "2026-11-17T17:47:07.757378+00:00",
+  "observations": [
+    {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-review-queue-v1/primary20k-launch.json",
+        "sha256": "b0409fac19fa62beca9b4dcddedca8a5d9b4355d73c5508afe4c7bc455faa24b"
+      },
+      "actual_owner": {
+        "pid": 1529566,
+        "create_time": 1794930992.36
+      },
+      "progress_snapshot": {
+        "completed_cases": 205,
+        "total_cases": 3162,
+        "stage": "photo",
+        "seconds": 6625.908338317997,
+        "counts": {
+          "root": 410,
+          "local_DINO_requests": 410,
+          "local_DINO_executions": 205,
+          "local_DINO_replays": 205
+        }
+      }
+    },
+    {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-v1/full-launch.json",
+        "sha256": "132dad1238ed755c6bf8b1307043dc2c8f0238b251eb787684048f4dd228a274"
+      },
+      "actual_owner": {
+        "pid": 1299986,
+        "create_time": 1794915597.99
+      },
+      "progress_snapshot": {
+        "completed_cases": 504,
+        "total_cases": 3162,
+        "stage": "photo",
+        "seconds": 22016.192822071025,
+        "counts": {
+          "new_roots": 1999,
+          "local_DINO_requests": 1999,
+          "local_DINO_executions": 501,
+          "local_DINO_replays": 1498,
+          "adopted_preflight_roots": 9,
+          "reused_parent_CPU_predictions": 5
+        },
+        "scene_DINO_executions": 1812
+      }
+    },
+    {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/launch.json",
+        "sha256": "2ba539038289bdd84b53d4537e775c60b1556dd026885c1ce397922cacf85cd4"
+      },
+      "actual_owner": {
+        "pid": 2626311,
+        "create_time": 1794936409.63
+      },
+      "progress_snapshot": {
+        "completed": 24,
+        "planned": 428,
+        "seconds": 1167.15722765401,
+        "root_calls": {
+          "V120": {
+            "root": 24
+          },
+          "scale-control20k": {
+            "root": 24
+          }
+        },
+        "local_DINO": {
+          "requests": 48,
+          "executions": 24,
+          "replays": 24
+        }
+      }
+    },
+    {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-full-adc-palette-v1/launch.json",
+        "sha256": "a9c851ab197d257ec751927219dc349db73aa739d6b95561b38852d450e0059f"
+      },
+      "actual_owner": {
+        "pid": 1584997,
+        "create_time": 1794934974.74
+      },
+      "progress_snapshot": {
+        "completed": 454,
+        "planned": 588,
+        "seconds": 2639.747583374032,
+        "root_calls": {
+          "V120": {
+            "root": 454
+          },
+          "scale-control20k": {
+            "root": 454
+          }
+        },
+        "local_DINO": {
+          "requests": 908,
+          "executions": 454,
+          "replays": 454
+        }
+      }
+    },
+    {
+      "launch": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-adc-palette-analysis-v1/launch.json",
+        "sha256": "9e5adebe27bfad3cdcca41309df69543337a862ef0bddece5d03f7c019f1fd9e"
+      },
+      "actual_owner": {
+        "pid": 3331945,
+        "create_time": 1794937268.88
+      },
+      "progress_snapshot": {
+        "status": "waiting-for-complete588",
+        "owner": {
+          "producer": {
+            "path": "/home/dllu/proj/demosaic/.cache/prepare-control20k-full-color-v1.py",
+            "sha256": "2e32b4983923eedbb741ac44078a3f9a3805272d7657afaa2a54eb9c11431c53"
+          },
+          "pid": 1584997,
+          "create_time": 1794934974.74,
+          "command": [
+            "/home/dllu/proj/demosaic/.venv/bin/python",
+            "/home/dllu/proj/demosaic/.cache/experiments/control20k-full-adc-palette-v1/work/scripts/collect_full_corpus_checkpoint_review.py",
+            "/home/dllu/proj/demosaic/.cache/experiments/control20k-full-adc-palette-v1/plan.json"
+          ],
+          "plan": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/control20k-full-adc-palette-v1/plan.json",
+            "sha256": "2ea555aa21b2d00ebad16ceba64b6b8e739d8fbcd06460c06f36c8d558289ae5"
+          },
+          "log": "/home/dllu/proj/demosaic/.cache/experiments/control20k-full-adc-palette-v1/collection.log",
+          "no_automatic_retry": true
+        }
+      }
+    }
+  ],
+  "scope": "Live owned worker identities plus actual progress. Full primary/scenes/palette/faint results remain incomplete; no restarts."
+}

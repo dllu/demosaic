@@ -8,9 +8,10 @@ fence families still lack convincing new faithful crossings. V120 remains the
 general recommendation; the original100k trajectory has actually resumed.
 
 Training, the110-input numerical review and actual viewing of all26 native
-boards are complete. The full427/known/unseen benchmark is **running**, followed
-by the queued broader weak-band audit. Those complete primary scores are missing;
-no history point is added. The [scene-context benchmark](whole-scene-context-camera-review.md)
+boards are complete. The [complete camera follow-up](full-corpus-control20k-camera-review.md)
+adds known +0.03285/unseen−0.04067 dB versus V120. Full427 photos are **running**,
+followed by the queued broader weak-band audit. Complete three-panel coverage
+is missing; no history point is added. The [scene-context benchmark](whole-scene-context-camera-review.md)
 continues independently.
 
 [Exact receipts/frozen executed sources](results/full-corpus-control20k-review-v1/publication.json) ·
@@ -113,7 +114,12 @@ Gain moves closer to one for all four, yet error worsens for three. Wood's PSNR
 gain does not establish fine-band improvement. The separate120 original-source
 strata preserve their original masks. Two preselected flat colors/all CFAs show
 maximum mean bias15.0789→13.6928 DN16 but centered RMS4.6402→7.1299 DN16. These
-eight inputs do not substitute for the full588-case color panel.
+eight inputs do not substitute for the full588-case color panel. The
+[completed full color review](full-corpus-control20k-color-review.md) now finds
+a much larger adverse tail: worst raw mean bias55.525→765.656 DN16 and centered
+RMS24.873→255.184. Exact Malvar/bin corrections reduce the20k maximum bias
+to17.325/17.767 DN16. The original spot-check numbers remain valid for those
+eight inputs; they did not cover the tail.
 
 ## Native images and both real fences
 
@@ -168,6 +174,6 @@ closure. The running queue/source/primary worker were not edited or restarted.
 The first completed-training audit rejected a trailing Python-repr summary in
 the mixed log. Its source/log survive; v2 parses JSON records without changing
 training receipts. Independent numeric/native checks agree within1.42e-14 dB;
-all22 raw triplets are exact board subsets. Broad benchmarks and subsequent
-96,075-block analysis remain pending. V120/V131 remain the latest complete
+all22 raw triplets are exact board subsets. Both camera panels now have a separate completed review. Full427 photos and
+subsequent96,075-block analysis remain pending. V120/V131 remain the latest complete
 three-panel history measurements; no old score is assigned to this endpoint.

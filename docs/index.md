@@ -41,6 +41,8 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [primary benchmark admission](whole-scene-context-primary-admission.md) ·
 [full-corpus scaling](full-corpus-scaling.md) ·
 [completed20k corpus review](full-corpus-control20k-review.md) ·
+[completed20k camera panels](full-corpus-control20k-camera-review.md) ·
+[complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·
 [historical10k midpoint](full-corpus-control10k-review.md) ·
 [execution/raw-EMA follow-up](training-execution-quality.md) ·

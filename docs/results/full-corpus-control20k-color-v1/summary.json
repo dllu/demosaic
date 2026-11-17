@@ -1,0 +1,100 @@
+{
+  "models": {
+    "V120": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000,
+      "weights": "EMA",
+      "display_label": "V120 EMA"
+    },
+    "scale-control20k": {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "step": 20000,
+      "weights": "EMA",
+      "display_label": "Corpus20k EMA",
+      "retained_progress": true,
+      "training_horizon": 20000
+    }
+  },
+  "summary": [
+    {
+      "model": "V120",
+      "policy": "raw",
+      "max_bias_DN16": 55.52484198472229,
+      "max_bias_case": "h000-s0.50-l0.90-RGGB",
+      "max_centered_RMS_DN16": 24.872678819129906,
+      "max_centered_RMS_case": "h000-s0.50-l0.90-RGGB",
+      "mean_camera_RGB_MSE": 1.931477247065079e-08
+    },
+    {
+      "model": "V120",
+      "policy": "exact-Malvar",
+      "max_bias_DN16": 13.554213246611472,
+      "max_bias_case": "h105-s0.98-l0.90-GRBG",
+      "max_centered_RMS_DN16": 15.150068533469199,
+      "max_centered_RMS_case": "h120-s0.98-l0.90-GRBG",
+      "mean_camera_RGB_MSE": 4.138508465151931e-09
+    },
+    {
+      "model": "V120",
+      "policy": "exact-sites",
+      "max_bias_DN16": 37.74117110447696,
+      "max_bias_case": "h060-s0.98-l0.90-RGGB",
+      "max_centered_RMS_DN16": 24.606866747349834,
+      "max_centered_RMS_case": "h000-s0.50-l0.90-RGGB",
+      "mean_camera_RGB_MSE": 1.236587885242492e-08
+    },
+    {
+      "model": "V120",
+      "policy": "ADC-bins",
+      "max_bias_DN16": 13.039348981125658,
+      "max_bias_case": "h105-s0.98-l0.90-GRBG",
+      "max_centered_RMS_DN16": 15.136804480223997,
+      "max_centered_RMS_case": "h120-s0.98-l0.90-GRBG",
+      "mean_camera_RGB_MSE": 4.0494620705697026e-09
+    },
+    {
+      "model": "scale-control20k",
+      "policy": "raw",
+      "max_bias_DN16": 765.6561767904669,
+      "max_bias_case": "h285-s0.50-l0.90-GRBG",
+      "max_centered_RMS_DN16": 255.1844359224672,
+      "max_centered_RMS_case": "h285-s0.50-l0.90-GRBG",
+      "mean_camera_RGB_MSE": 2.2992174981290263e-07
+    },
+    {
+      "model": "scale-control20k",
+      "policy": "exact-Malvar",
+      "max_bias_DN16": 17.325167000864166,
+      "max_bias_case": "h300-s0.98-l0.90-GBRG",
+      "max_centered_RMS_DN16": 14.44664940188523,
+      "max_centered_RMS_case": "h120-s0.98-l0.90-RGGB",
+      "mean_camera_RGB_MSE": 4.183915867529052e-09
+    },
+    {
+      "model": "scale-control20k",
+      "policy": "exact-sites",
+      "max_bias_DN16": 573.3664295169292,
+      "max_bias_case": "h285-s0.50-l0.90-GRBG",
+      "max_centered_RMS_DN16": 292.7470218367002,
+      "max_centered_RMS_case": "h285-s0.50-l0.90-GRBG",
+      "mean_camera_RGB_MSE": 1.4990050273615965e-07
+    },
+    {
+      "model": "scale-control20k",
+      "policy": "ADC-bins",
+      "max_bias_DN16": 17.767021525686143,
+      "max_bias_case": "h300-s0.98-l0.90-GBRG",
+      "max_centered_RMS_DN16": 14.453483479561344,
+      "max_centered_RMS_case": "h120-s0.98-l0.90-RGGB",
+      "mean_camera_RGB_MSE": 4.110315565225584e-09
+    }
+  ],
+  "neural_collection_seconds": 3449.8979807730066,
+  "scope": "All588 ADC-only inputs/147 colors/four CFAs,all8 fixed model/physical policies.4704 color rows,1176 actual ADC-bin feasibility/error checks. Neural1176 roots/588DINOexec/588replays;no new learning/GPU/RAW/noise. Physical3528 corrections retained locally with hashes; no general fine/photo score."
+}

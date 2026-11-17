@@ -6,7 +6,11 @@ all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
 improve slightly. Both protected fence families still lack convincing new fine
 crossings. V120 remains recommended. The [full endpoint benchmark](full-corpus-primary-admission.md)
-is running, with subsequent broader weak-band analysis queued.
+is running, with subsequent broader weak-band analysis queued. The
+[complete camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
+known/lose0.04067 unseen. The [complete color panel](full-corpus-control20k-color-review.md)
+finds worst ADC bias765.7 DN16 versus V12055.5,largely repaired by physical
+Malvar/bin correction. Broad photo results remain pending.
 
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
 [64-source study](whole-scene-context-development64.md) and
@@ -78,6 +82,15 @@ distinct IDs remain unrecorded. Reported retained-loop windows total12,490.150s;
 attempted controller phases total20,104.376s including stalls/replay/concurrency.
 Training completion, targeted numerical/native completion and pending broad
 scores are distinguished in the [endpoint report](full-corpus-control20k-review.md).
+The long arm retains its10k state
+`6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.
+[Independent actual-prefix comparison](results/full-corpus-control20k-camera-v1/long-control-source-identity.json)
+checks all10k source/crop/data-seed rows against control10k,apart from their
+declared different order-header hashes. First160k order positions,all40
+conditioning chunks and all3 RNG states match. Native/paired individual IDs
+remain unlogged; full GPU sample hashes stay in the running phase until close,
+so this is not an all-noise-tensor or quality equivalence claim.
+
 The earlier [first-epoch/18k receipts](results/full-corpus-execution-followup-v1/actual-first-epoch.json)
 remain preserved snapshots.
 

@@ -113,8 +113,9 @@ def collect(plan_path):
                "weights": {k: v.get("weights", "EMA") for k, v in plan["models"].items()},
                "root_calls": counters, "local_DINO": totals,
                "full_model_before": before, "full_model_after": after, "CPU_rng_unchanged": True,
+               "observation_batch_sizes": [o["output_shape"][0] for o in plan["observations"]],
                "seconds": time.monotonic() - began,
-               "scope": "Complete declared retained-observation CPU IEEE FP32 contiguous B1 review with explicit raw/EMA state selection. Identical checked frozen local DINO requests shared; learned trunks still execute separately. Zero new GPU/RAW/noise/optimizer calls. Targets are not read by this collector. Retained checkpoints/profiles, not a full427/camera score; numerical/native analysis separate."})
+               "scope": "Complete declared retained-observation CPU IEEE FP32 contiguous review at recorded batch sizes with explicit raw/EMA state selection. Identical checked frozen local DINO requests shared; learned trunks still execute separately. Zero new GPU/RAW/noise/optimizer calls. Targets are not read by this collector. Retained checkpoints/profiles, not a standard full427/camera score; numerical/native analysis separate."})
     print("Completed", len(records), "fixed inputs", counters, totals)
 
 

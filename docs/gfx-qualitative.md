@@ -31,7 +31,8 @@ historical boards. Use these reports for the current completed comparisons:
   both cab ROIs/profiles/JPEGs viewed. Sky smooth, foliage/building soft, coarse
   fence similar; no convincing new faithful fine crossings. The separate
   [ADC-bin diagnostic](adc-bin-consistency.md) bypasses these positive-noise
-  inputs identically and adds no new GFX image. Broad primary scores pending.
+  inputs identically and adds no new GFX image. The [camera follow-up](full-corpus-control20k-camera-review.md)
+  now completes its separate known/unseen panels; full427 photos are pending.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

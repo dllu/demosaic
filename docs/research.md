@@ -29,9 +29,19 @@ has repeatedly come with extra flat-region error or false color. The
    0.02061 dB below V120 with higher fine-band error for3/4 materials. Both fences
    remain incomplete. Coverage, reviewed quota and execution co-vary; they do not
    isolate a cause. [Broader primary/weak-band evidence](full-corpus-primary-admission.md)
-   is collecting/queued. The [calibrated ADC-bin diagnostic](adc-bin-consistency.md)
+   is collecting/queued. The [complete camera panels](full-corpus-control20k-camera-review.md)
+   gain0.03285 dB known/lose0.04067 unseen; most added unseen arithmetic MSE is
+   channel DC,with spatial error also higher. Track both separately. The
+   [calibrated ADC-bin diagnostic](adc-bin-consistency.md)
    improves selected zero-noise errors with material regressions; the full588
-   palette is collecting. Preserve the long trajectory before changing its data.
+   [palette review](full-corpus-control20k-color-review.md) is complete: raw20k
+   worst bias765.7 DN16 versus V12055.5,mostly repaired by Malvar/bins; bins gives
+   small V120 aggregate gains versus exact Malvar with20k tail tradeoffs. A new
+   427-photo faint study uses original-source masks
+   and1708 image/CFA observations/model. Its16 legacy inputs reproduce exactly
+   and all427 IDs are val/disjoint currenttrain. The long trajectory retains10k
+   state,with recorded data/conditioning/RNG matching the control10k prefix
+   apart from declared order-header identities. Preserve its original schedule.
    [Coverage and pipeline rationale](training-scale-pipeline-review-2026-11-17.md).
 3. **Evaluate the delivered correction.** Better background prediction or a
    stronger synthetic mesh response does not guarantee lower final-image error.
@@ -54,7 +64,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
 | [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study and both camera panels complete/native-viewed. Small quiet gains/partial unseen repair versus local-only; unseen remains below V120 and fine crossings missing. Full427 photos collecting |
-| [Full-corpus scaling](full-corpus-scaling.md), [20k review](full-corpus-control20k-review.md) | Control complete/all90,778 photos visited; most midpoint faint loss repaired, small ordinary/shadow gains but mixed spatial/color costs. Both fences viewed. Original100k trajectory and full primary collections running |
+| [Full-corpus scaling](full-corpus-scaling.md), [20k review](full-corpus-control20k-review.md) | Control complete/all90,778 photos visited; most midpoint faint loss repaired, small ordinary/shadow gains but mixed spatial/color costs. Both fences viewed. [Camera panels](full-corpus-control20k-camera-review.md) known +0.03285/unseen−0.04067 dB. Original100k trajectory/full primary photos and expanded427-source faint study running |
 
 These are research proposals and bounded experiment conclusions. They do not
 establish broad state-of-the-art quality. Dates describe the source review;

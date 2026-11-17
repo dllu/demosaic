@@ -1,0 +1,39 @@
+{
+  "models": {
+    "V120": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000,
+      "weights": "EMA",
+      "display_label": "V120 EMA"
+    },
+    "scale-control20k": {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+        "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+      },
+      "step": 20000,
+      "weights": "EMA",
+      "display_label": "Corpus20k EMA",
+      "retained_progress": true,
+      "training_horizon": 20000
+    }
+  },
+  "measured_CFA_PSNR": {
+    "known": {
+      "V120": 54.31271764967177,
+      "scale-control20k": 54.345566272735596
+    },
+    "unseen": {
+      "V120": 54.00872213575575,
+      "scale-control20k": 53.9680490705702
+    }
+  },
+  "camera_neural_inference_seconds": {
+    "known": 1536.3897901137825,
+    "unseen": 1909.7795591932954
+  },
+  "scope": "Complete4known/5unseen scenes,72/90 native crops per model,18captures. Learned outputs collected earlier by existing primary worker; all324 numeric rows audited and9 native boards actually viewed. No population/general fine-detail claim."
+}
