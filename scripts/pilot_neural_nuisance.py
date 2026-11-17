@@ -37,11 +37,13 @@ def prepare(
     amplitude_nuisance="local",
     prediction_collection=None,
     phase_aggregation=False,
+    phase_guide=False,
 ):
     from demosaic.local_validated_waves import LocalWaveConfig
     from demosaic.phase_aggregation import PhaseAggregateConfig
 
-    assert not phase_aggregation or (not full_panel and not amplitude_window)
+    assert not phase_aggregation or not amplitude_window
+    assert not phase_guide or phase_aggregation
     aggregation = (
         PhaseAggregateConfig(bins=32, window=129, query_stride=32).to_dict()
         if phase_aggregation
@@ -108,6 +110,7 @@ def prepare(
             previous_package != current_package
             or LocalWaveConfig(**prior_plan["geometry_config"]).to_dict() != geometry
             or prior_plan.get("aggregation_config") != aggregation
+            or prior_plan.get("phase_guide", False) != phase_guide
         ):
             invalid_cache = prediction_cache
             prediction_cache = None
@@ -164,6 +167,12 @@ def prepare(
             phase_source=reference(work / "src/demosaic/background_phase_aggregation.py"),
             delivery="Global joint-fit nuisance background shared by full/null; global competing H1 fit on its residual, local129 same-color/edge-side phase average minus local mean. Identical composite operator projects RAW and parent after A/B support scores. Analytic and neural phase arms share geometry. Raw-H1 control retains its own original validation scores.",
         )
+        model["phase_guide"] = phase_guide
+        if phase_guide:
+            model["guide_source"] = reference(work / "src/demosaic/guided_phase_aggregation.py")
+            model["range_guidance"] = (
+                "Both analytic/neural phase arms use own-color A-only neural RGB guides, clipped0..1, exact physical shot/read square-root variance stabilization, fixed two-noise-unit bins and [1,2,1]/4 range smoothing. Four-dimensional phase/range/native query histogram, positive normalized weights. RGB amplitudes stay separate; RAW/parent share the identical fixed operator."
+            )
     write_json(root / "analytic-model.json", model)
     positive = sum(r["noise"]["shot"] + r["noise"]["read"] > 0 for r in previous["rows"])
     inputs = [reference(source / "plan.json"), reference(root / "analytic-model.json"), checkpoint]
@@ -179,6 +188,7 @@ def prepare(
         "model": reference(root / "analytic-model.json"),
         "geometry_config": geometry,
         "aggregation_config": aggregation,
+        "phase_guide": phase_guide,
         "small_context_geometry_policy": "Use native minimum axis when smaller than declared window, half-window stride; only native256 materials use this input-dimension-only fallback.",
         "background_configuration": background_config,
         "background_cache": cache,
@@ -248,8 +258,12 @@ def prepare(
         )
     if aggregation:
         plan["scope"] += (
-            " Conditional analytic/neural modes instead use local129/stride32/bins32 phase measurement reconstruction after fixed global joint-fit background and global competing H1 subtraction. Circular [1,2,3,2,1]/9 phase smoothing, edge stopping and difference of normalized averages unchanged from original phase kernel. RAW and parent use the same composite linear operator. H1 controls retain original H1 scores; no local background coefficient fit, no target-derived frequency/profile/envelope. All48 outputs close before scoring."
+            f" Conditional analytic/neural modes instead use local129/stride32/bins32 phase measurement reconstruction after fixed global joint-fit background and global competing H1 subtraction. Circular [1,2,3,2,1]/9 phase smoothing, edge stopping and difference of normalized averages unchanged from original phase kernel. RAW and parent use the same composite linear operator. H1 controls retain original H1 scores; no local background coefficient fit, no target-derived frequency/profile/envelope. All{len(previous['rows'])} outputs close before scoring."
         )
+        if phase_guide:
+            plan["scope"] += (
+                " Both phase arms condition their same-color measurement averages on the matching own-color A-only neural guide. Physical variance stabilization and fixed two-noise-unit range bins/[1,2,1]/4 smoothing restrict pooling across different predicted signal levels; no shared RGB amplitude or green-derived red/blue reconstruction. Native query histograms preserve phase/range assignment exactly. H1 controls keep their unguided original scores. No bandwidth/threshold tuning from GT/reference outcomes."
+            )
     write_json(root / "plan.json", plan)
     verify_plan(plan)
     return root / "plan.json"
@@ -490,6 +504,7 @@ def predict(root):
         assert prior_plan["fixed_analytic_frequencies"] == plan["fixed_analytic_frequencies"]
         assert prior_plan["geometry_config"] == plan["geometry_config"]
         assert prior_plan.get("aggregation_config") == plan.get("aggregation_config")
+        assert prior_plan.get("phase_guide", False) == plan.get("phase_guide", False)
         assert prior_plan["background_configuration"] == plan["background_configuration"]
         for name in ("neural_nuisance.py", "local_validated_waves.py"):
             assert (
@@ -581,6 +596,7 @@ def predict(root):
                 aggregation_config=PhaseAggregateConfig(**plan["aggregation_config"])
                 if plan.get("aggregation_config")
                 else None,
+                phase_guide=plan.get("phase_guide", False),
             )
         if row["id"] in plan["standalone_H1_checks"]:
             expected, _ = restore_local_waves(
@@ -692,6 +708,7 @@ if __name__ == "__main__":
     parser.add_argument("--amplitude-nuisance", choices=("local", "global"), default="local")
     parser.add_argument("--prediction-cache", type=Path)
     parser.add_argument("--phase-aggregation", action="store_true")
+    parser.add_argument("--phase-guide", action="store_true")
     args = parser.parse_args()
     if args.mode == "prepare":
         print(
@@ -709,6 +726,7 @@ if __name__ == "__main__":
                 if args.prediction_cache
                 else None,
                 phase_aggregation=args.phase_aggregation,
+                phase_guide=args.phase_guide,
             )
         )
     elif args.mode == "score":

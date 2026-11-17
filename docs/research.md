@@ -46,6 +46,12 @@ raises400/far neural weak response4.695%→27.390% on both constructed sources,
 with higher quiet/increment errors and building bands. The analytic phase arm
 has lower mean increment error but much larger real bands. Complete native
 review still finds missing cab crossings; discrimination remains unresolved.
+The [neural-guided pooling follow-up](neural-guided-phase-pooling.md) improves
+the analytic-nuisance phase option:28.702% weak response with mean increment
+error−0.946% versus parent on two improving sources, quiet+0.541%, and much
+smaller building bands. The neural-nuisance primary arm worsens increment
+error. This is an available measured alternative; high-noise weak detail and
+fine real crossings remain unresolved.
 The [full-model attention comparison](raw-spatial-continuation.md)
 completes both20k arms: [V131 targeted/native quality](v131-endpoint-quality.md)
 finds faint-ADC +0.14555 dB with a bark regression, small ordinary/shadow gains

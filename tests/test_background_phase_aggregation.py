@@ -88,9 +88,13 @@ def test_global_null_matches_independent_two_stage_wls_and_annihilates_nuisance(
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
-def test_fixed_map_excludes_B_and_parent_difference_matches_actual_prediction(layout):
+@pytest.mark.parametrize("guided", [False, True])
+def test_fixed_map_excludes_B_and_parent_difference_matches_actual_prediction(layout, guided):
     candidate, colors = fixture(layout)
-    operator = BackgroundPhaseOperator(candidate, colors, CONFIG)
+    guide = np.full((3, *colors.shape), 0.03) if guided else None
+    operator = BackgroundPhaseOperator(
+        candidate, colors, CONFIG, guide_rgb=guide, shot=8e-5, read=2.56e-8
+    )
     rng = np.random.default_rng(73)
     raw, other = rng.normal(size=(2, *colors.shape))
     parent = rng.normal(size=(3, *colors.shape))
@@ -130,7 +134,8 @@ def test_phase_kernel_recovers_narrow_periodic_profile_beyond_H1():
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
-def test_integrated_H1_control_identity_and_ADC_bypass(layout):
+@pytest.mark.parametrize("guided", [False, True])
+def test_integrated_H1_control_identity_and_ADC_bypass(layout, guided):
     candidate, colors = fixture(layout)
     yy, xx = np.indices(colors.shape)
     rgb = np.stack([0.03 + 0.004 * np.cos(2 * np.pi * (5 * xx + 3 * yy) / 64)] * 3)
@@ -154,11 +159,15 @@ def test_integrated_H1_control_identity_and_ADC_bypass(layout):
         "config": config,
         "thresholds": (0.0, 2.0),
         "reselect_frequencies": False,
+        "phase_guide": guided,
     }
     phase, aux = restore_neural_nuisance(
         rgb, packed, np.asarray(layout), fields, aggregation_config=CONFIG, **kwargs
     )
-    baseline, _ = restore_neural_nuisance(rgb, packed, np.asarray(layout), fields, **kwargs)
+    baseline_kwargs = {**kwargs, "phase_guide": False}
+    baseline, _ = restore_neural_nuisance(
+        rgb, packed, np.asarray(layout), fields, **baseline_kwargs
+    )
     assert aux["aggregation_config"] == CONFIG.to_dict()
     for key, value in phase.items():
         if key[0].startswith("H1-"):
@@ -170,7 +179,9 @@ def test_integrated_H1_control_identity_and_ADC_bypass(layout):
     attenuated, _ = restore_neural_nuisance(
         rgb * 0.4, packed, np.asarray(layout), fields, aggregation_config=CONFIG, **kwargs
     )
-    control, _ = restore_neural_nuisance(rgb * 0.4, packed, np.asarray(layout), fields, **kwargs)
+    control, _ = restore_neural_nuisance(
+        rgb * 0.4, packed, np.asarray(layout), fields, **baseline_kwargs
+    )
     for key, value in control.items():
         if key[0].startswith("H1-"):
             np.testing.assert_array_equal(attenuated[key], value)

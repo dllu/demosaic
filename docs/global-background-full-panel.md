@@ -55,6 +55,10 @@ all64 existing audited256 neural cells reproduce exactly, with every original
 board pixel preserved. It requires closed collections and the audited paired
 input match before rendering actual current-versus-prior boards. This separate
 postprocessing helper does not change either running snapshot.
+Its [publication queue](results/fixed-bg129-full-setup-v1/publication-queue-v1.json)
+now waits for both exact original owners to finish, then prepares all64 saved-
+baseline boards, two additional building stress views and two exact-GT
+triplets. All68 figures still require actual inspection before publication.
 
 DSCF3879/3880 sky, building, foliage and coarse fence and DSCF3842/3835 cab
 mesh remain included, both profiles/left-right ROIs/JPEGs. Independent ISO100/AHD

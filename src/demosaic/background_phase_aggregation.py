@@ -18,7 +18,7 @@ _DEFAULT = PhaseAggregateConfig()
 class BackgroundPhaseOperator:
     """A-only fixed background, competing direction and signed phase kernel."""
 
-    def __init__(self, candidate, colors, config=_DEFAULT):
+    def __init__(self, candidate, colors, config=_DEFAULT, *, guide_rgb=None, shot=None, read=None):
         if config.parent_projection != "conditional_null":
             raise ValueError("Require the same global null projection for RAW and parent")
         self.candidate = candidate
@@ -37,7 +37,17 @@ class BackgroundPhaseOperator:
         ):
             raise ValueError("Require two H1 directions and a positive native A-only CFA fit")
         self.nuisance_columns = candidate.wave_slices[0][0]
-        self.kernels = [PhaseAggregateOperator(candidate, colors, d, config) for d in (0, 1)]
+        if guide_rgb is None:
+            self.kernels = [PhaseAggregateOperator(candidate, colors, d, config) for d in (0, 1)]
+        else:
+            from .guided_phase_aggregation import GuidedPhaseOperator
+
+            self.kernels = [
+                GuidedPhaseOperator(
+                    candidate, colors, d, guide_rgb, shot=shot, read=read, config=config
+                )
+                for d in (0, 1)
+            ]
         self.groups = []
         for color in range(3):
             selected = candidate.selected_indices[color]

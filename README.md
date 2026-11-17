@@ -98,6 +98,13 @@ raises two-source400/far neural weak response4.70%→27.39%, with quiet/incremen
 errors+2.35%/+0.43% versus parent and larger building artifacts. Its analytic
 arm reaches28.56% with lower increment error but severe real bands. Both are
 implemented experimental choices; fine cab crossings remain missing.
+Its [neural-guided pooling follow-up](docs/neural-guided-phase-pooling.md)
+improves the analytic-nuisance option:28.70% weak response, increment error
+−0.946% versus parent with both sources improving, quiet+0.541%, and much
+smaller building bands. The neural-nuisance arm worsens increment error;
+higher-noise detail and fine real crossings remain unresolved.
+Its [full guided source/CFA/noise review](docs/neural-guided-phase-full-panel.md)
+is running with all cached fields and no neural replay.
 The [full-model RAW-attention comparison](docs/raw-spatial-continuation.md) has
 completed **both20k arms**: [V131 targeted native review](docs/v131-endpoint-quality.md)
 finds faint-ADC +0.146 dB across four sources, with fur/grass/wood gains and a
@@ -231,7 +238,14 @@ These400/far crops use the same native160 ROI`[176,176,160,160]`, exposure2,
 shot/read`8e-5/2.56e-8` and unchanged source calibration; pixels are unresized.
 [Checkpoint/configuration, errors and real-scene failures](docs/global-background-phase-reconstruction.md).
 
-![Noisy, V143, sinusoidal NN, phase NN and exact constructed GT](docs/images/neural-nuisance-phase129-v1/paired/iso400-index0024-role2-paired.png)
+The guided analytic-nuisance option retains matching native triplets for
+[source0](docs/images/neural-nuisance-guided-phase129-v1/triplets/iso400-index0008-role2-analytic-triplet.png)
+and [source1](docs/images/neural-nuisance-guided-phase129-v1/triplets/iso400-index0024-role2-analytic-triplet.png)
+under those same noise/display conditions. [Gains, errors and checkpoint bindings](docs/neural-guided-phase-pooling.md).
+The [prior sinusoidal/phase comparison](docs/images/neural-nuisance-phase129-v1/paired/iso400-index0024-role2-paired.png)
+remains available.
+
+![Noisy, guided analytic-nuisance phase and exact constructed GT](docs/images/neural-nuisance-guided-phase129-v1/triplets/iso400-index0024-role2-analytic-triplet.png)
 
 The full neural panel retains [source1](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0024-role2-triplet.png)
 and [source7](docs/images/neural-nuisance-full-panel-v1/triplets/iso400-index0120-role2-triplet.png)

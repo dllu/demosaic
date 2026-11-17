@@ -6,6 +6,10 @@ artifacts.** Mean quiet error is+2.352% and weak-increment error+0.434% versus
 parent. The matched analytic phase arm has28.558% response and−0.539%
 increment error, with much worse real bands. Both remain experimental
 reconstruction choices; V120 remains the general recommendation.
+The [completed neural-guided follow-up](neural-guided-phase-pooling.md) retains
+the analytic phase response with lower quiet/increment error and much smaller
+building bands. Its neural-nuisance arm instead worsens increment error; both
+useful gains and remaining weaknesses are retained.
 
 All48 cases, independent audits and actual inspection of38 figures are
 complete. [Native viewer](images/neural-nuisance-phase129-v1/native-viewer.html) ·

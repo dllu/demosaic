@@ -268,8 +268,11 @@ def restore_neural_nuisance(
     config=_DEFAULT,
     reselect_frequencies=True,
     aggregation_config=None,
+    phase_guide=False,
 ):
     """Matched analytic/neural nuisances; optional fixed-background phase delivery."""
+    if type(phase_guide) is not bool or (phase_guide and aggregation_config is None):
+        raise ValueError("Range guidance requires the phase reconstruction option")
     if aggregation_config is not None:
         from .phase_aggregation import PhaseAggregateConfig
 
@@ -403,7 +406,17 @@ def restore_neural_nuisance(
                     from .background_phase_aggregation import BackgroundPhaseOperator
 
                     phase = [
-                        BackgroundPhaseOperator(c, layout, aggregation_config) for c in candidates
+                        BackgroundPhaseOperator(
+                            c,
+                            layout,
+                            aggregation_config,
+                            guide_rgb=backgrounds[fold].rgb[:, region[0], region[1]]
+                            if phase_guide
+                            else None,
+                            shot=shot,
+                            read=read,
+                        )
+                        for fold, c in enumerate(candidates)
                     ]
                     phase_predictors = [p.predict(tile) for p in phase]
                     scores = []
@@ -570,10 +583,16 @@ def restore_neural_nuisance(
         "parent_used_for_discovery_or_validation": False,
         "geometry_config": config.to_dict(),
         "aggregation_config": aggregation_config.to_dict() if aggregation_config else None,
+        "phase_guide": phase_guide,
         "scope": "Own-color A-only neural nuisance coordinate, upper-censored at sensor white; declared frequency source and joint WLS. Matched analytic control shares global split, edge, noise weights and validation rules. Parent projected only after scoring. Empirical scores, not calibrated confidence; final RGB retains full-input parent."
         + (
             " Conditional/neural delivery uses local signed phase averages after a fixed global joint-fit background and per-direction global competing H1 fit. Identical composite linear map projects RAW and parent. H1 control retains its own original H1 validation scores."
             if aggregation_config is not None
+            else ""
+        )
+        + (
+            " Both phase arms also condition normalized averages on their own-color A-only neural field, clipped0..1 and transformed by physical shot/read standard-deviation units. Fixed two-noise-unit range bins and [1,2,1]/4 range smoothing; RGB amplitudes remain separate."
+            if phase_guide
             else ""
         ),
     }

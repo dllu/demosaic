@@ -96,6 +96,16 @@ are reviewed. This establishes useful additional reconstruction capacity with
 mixed error costs, without resolving nuisance discrimination. The global
 competing-direction fit also differs from the prior local sinusoidal fit, so
 the comparison does not isolate waveform capacity alone.
+The [withheld neural-guidance follow-up](neural-guided-phase-pooling.md)
+retains28.702% weak response for analytic nuisance while lowering mean quiet/
+increment error versus unguided phase; increment error is−0.946% versus parent
+with both sources improving. Severe analytic building bands are much smaller,
+531.58→130.59 DN16 maximum correction. The primary neural-nuisance arm instead
+worsens increment error on both sources. All48 cases/38 actual figures are
+reviewed. Guidance helps this measured analytic operating point without
+recovering high-noise weak detail or fine real crossings. An input-only
+168-operator diagnostic finds only1.01549 maximum global residual amplification,
+so a large oblique-projection gain does not explain the checked failure.
 The [existing full-model RAW-attention comparison](raw-spatial-continuation.md)
 completes both original20k arms: [V131 targeted quality](v131-endpoint-quality.md)
 has faint-ADC +0.14555 dB across four sources with a bark regression, small
