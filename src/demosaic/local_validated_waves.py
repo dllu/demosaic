@@ -542,6 +542,12 @@ def support_weight(score, threshold):
     return np.where(score > threshold, 1 - (threshold / np.maximum(score, threshold)) ** 2, 0)
 
 
+def pooled_support_score(first, second):
+    """Average the fold scores only where both predictions reduce held-out error."""
+    lower = np.minimum(first, second)
+    return np.where(lower > 0, (first + second) / 2, lower)
+
+
 def _match_units(first, second, matched_directions, maximum_native_bins):
     """Match the same harmonic; apply the radius in its actual frequency bins."""
     lookup = {key: index for index, key in enumerate(second.unit_keys)}
@@ -586,6 +592,7 @@ def restore_local_waves(
     guide_frequencies_xy=None,
     phase_bins=0,
     shrink_phase_fit=False,
+    compare_pooled_support=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -617,6 +624,8 @@ def restore_local_waves(
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config)
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
+    if type(compare_pooled_support) is not bool:
+        raise ValueError("Require an explicit boolean pooled-support choice")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
@@ -628,7 +637,8 @@ def restore_local_waves(
             raise ValueError("Require a native boolean global discovery mask")
     for threshold in thresholds:
         support_weight(0, threshold)
-    outputs = {(mode, float(t)): parent.copy() for mode in ["global", "local"] for t in thresholds}
+    modes = ("global", "local", "pooled-local") if compare_pooled_support else ("global", "local")
+    outputs = {(mode, float(t)): parent.copy() for mode in modes for t in thresholds}
     if shot + read == 0:
         return outputs, {"patches": 0, "identity_zero_noise": True}
     raw = np.empty((h, w), np.float64)
@@ -722,8 +732,11 @@ def restore_local_waves(
                     ) / 2
                 else:
                     component = (components[0][a] + components[1][b]) / 2
-                local = np.minimum(scores[0][0][a], scores[1][0][b])
+                first, second = scores[0][0][a], scores[1][0][b]
+                local = np.minimum(first, second)
                 global_score = np.minimum(scores[0][1][a], scores[1][1][b])
+                if compare_pooled_support:
+                    pooled = pooled_support_score(first, second)
                 for threshold in thresholds:
                     totals["local", float(threshold)][:, y : y + n, x : x + n] += (
                         component * support_weight(local, threshold) * blend
@@ -731,6 +744,10 @@ def restore_local_waves(
                     totals["global", float(threshold)][:, y : y + n, x : x + n] += (
                         component * support_weight(global_score, threshold)[:, None, None] * blend
                     )
+                    if compare_pooled_support:
+                        totals["pooled-local", float(threshold)][:, y : y + n, x : x + n] += (
+                            component * support_weight(pooled, threshold) * blend
+                        )
                 local_max.append(float(np.max(local)))
                 global_max.append(global_score.tolist())
             denominator[region] += blend
@@ -771,6 +788,7 @@ def restore_local_waves(
         "parent_used_for_discovery_or_validation": False,
         **guide,
         **({"shrink_phase_fit": True} if shrink_phase_fit else {}),
+        **({"compare_pooled_support": True} if compare_pooled_support else {}),
         "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }

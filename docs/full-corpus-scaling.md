@@ -105,6 +105,8 @@ The same 110 retained inputs are now running through fresh V120, the
 completed 20k control and the long-schedule 20k EMA. The comparison will
 measure what the different schedules deliver at the same update count.
 Training continues independently toward the 50k and 100k checkpoints.
+The first 27 of these input cases reproduced both control RGB predictions
+byte for byte. [Early control check](results/fold-support-pooling-setup-v1/long20k-early-control-check.json).
 
 The long arm also retains its10k state
 `6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.

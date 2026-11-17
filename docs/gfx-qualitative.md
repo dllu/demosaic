@@ -43,6 +43,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Phase-fit shrinkage](guided-phase-fit-shrinkage.md) still gives exactly
   zero correction in sky and building. The coarse fence keeps its existing
   crossings and foliage stays soft.
+- [Pooled RAW support](fold-support-pooling.md) reproduces the sky exactly.
+  The building changes by 0.42 DN16 RMS, the coarse lattice stays coherent,
+  and foliage remains soft.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

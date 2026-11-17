@@ -73,6 +73,33 @@ fits. Recovering crossings at the same quiet error remains the open test.
 Each panel shows the three tested thresholds. The point marked 0 uses the
 least restrictive held-out gate. Axis scales vary between panels.
 
+## ISO6400 at equal measured quiet error
+
+For each geometry at threshold 0, a single scalar attenuates the unshrunk
+correction equally across every pixel, color, and role. The scalar makes
+its quiet RMS equal to the shrunken fit's across all four Bayer layouts.
+All 16 geometry and edge-distance pairs admit a match. The calculation
+uses the exact targets to choose the scalar, so it measures the tradeoff
+possible with uniform attenuation on this panel. The table averages the
+eight geometry values. Here each geometry's RMS comes from pooled CFA
+MSE, so the means can differ slightly from the fixed-threshold table.
+
+| Edge distance | Treatment | Weak response | Strong response | Weak-increment RMS DN16 | Mean absolute absent projection |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Far, quiet RMS 7.680 | Uniform attenuation | 8.424% | 27.560% | 22.621 | 1.278% |
+| Far, quiet RMS 7.680 | Discovery-only shrinkage | 5.958% | 29.798% | 22.596 | 1.024% |
+| Near, quiet RMS 23.136 | Uniform attenuation | 7.729% | 15.591% | 30.916 | 4.129% |
+| Near, quiet RMS 23.136 | Discovery-only shrinkage | 7.027% | 19.804% | 30.932 | 3.842% |
+
+At the same quiet error, shrinkage improves query RGB RMS in seven of eight
+geometries at each distance. It also has higher mean strong response and
+lower mean absolute absent projection. Weak response falls on average, and
+near-edge weak-increment RMS increases in seven of eight geometries. Both
+arms leave the weak-increment RMS above V143. This comparison gives a
+specific way to test the next gate's claim of weak recovery at equal quiet
+error. [Matched geometry scores and audit](results/matched-quiet-phase-shrinkage-v1/publication.json) ·
+[Pooled RAW support experiment](fold-support-pooling.md).
+
 ## Native comparisons
 
 Both triplets show noisy Malvar, the shrunken phase fit at threshold 2 and

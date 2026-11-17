@@ -78,10 +78,10 @@ def restore(parent, packed, colors, frequencies, noise, config):
     return outputs, statistics
 
 
-def collect(path):
+def collect(path, *, restore_view=restore, driver=__file__):
     plan = read_json(path)
     verify_plan(plan)
-    assert plan["driver"] == reference(__file__)
+    assert plan["driver"] == reference(driver)
     config = LocalWaveConfig(**plan["config"])
     adopted = read_json(checked(plan["adopted_collection"]))
     old_groups = {row["id"]: row for row in adopted["synthetic"]}
@@ -98,7 +98,7 @@ def collect(path):
         rows = []
         for old in old_groups[key]["rows"]:
             role = old["role"]
-            outputs, stats = restore(
+            outputs, stats = restore_view(
                 parent[role],
                 packed[role],
                 colors[role],
@@ -137,7 +137,7 @@ def collect(path):
             )
         noise = next(o["noise"] for o in native["observations"] if o["id"] == row["query"])
         parent = np.load(checked(row["parent_prediction"]))[0, :, y : y + height, x : x + width]
-        outputs, stats = restore(parent, packed, colors, row["guide"], noise, config)
+        outputs, stats = restore_view(parent, packed, colors, row["guide"], noise, config)
         destination = output / f"{key}.npz"
         with destination.open("xb") as stream:
             np.savez(stream, **outputs)

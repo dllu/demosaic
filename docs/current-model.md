@@ -63,6 +63,12 @@ ISO6400 weak recovery at conservative settings and real cab crossings
 remain open. [Direction-guide review](scene-wave-guides.md) ·
 [Phase-profile results](guided-phase-profiles.md) · [Shrinkage results](guided-phase-fit-shrinkage.md).
 
+Pooling positive evidence from both RAW folds raises held-out ISO400 far
+weak response from 14.19% to 16.89% at nearly equal mean quiet error.
+ISO6400 gains are smaller and have mixed increment errors. Both standing
+families retain the same remaining fine-detail limitations.
+[Pooled support and native crops](fold-support-pooling.md).
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

@@ -87,6 +87,19 @@ def test_discovery_reliability_subtracts_fit_noise_and_shrinks_the_validated_pre
     assert not field.any() and not global_scores.any()
 
 
+def test_pooled_support_preserves_veto_and_can_admit_unequal_positive_scores():
+    first = np.array([3.0, -1.0, 0.0, 1.5, 2.0, 1.0])
+    second = np.array([3.0, 4.0, 3.0, 2.8, 1.0, -2.0])
+    score = local.pooled_support_score(first, second)
+    np.testing.assert_array_equal(score, local.pooled_support_score(second, first))
+    np.testing.assert_allclose(score, [3, -1, 0, 2.15, 1.5, -2], rtol=0, atol=1e-14)
+    np.testing.assert_array_equal(
+        local.support_weight(score, 0), local.support_weight(np.minimum(first, second), 0)
+    )
+    assert local.support_weight(score, 2)[3] > 0
+    assert local.support_weight(np.minimum(first, second), 2)[3] == 0
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
 def test_phase_bins_recover_periodic_profile_and_ignore_withheld_measurements(layout):
     height = width = 64

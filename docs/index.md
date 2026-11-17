@@ -45,6 +45,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [disjoint RAW direction guides](scene-wave-guides.md) ·
 [phase profiles fitted from query RAW](guided-phase-profiles.md) ·
 [discovery-only phase-fit shrinkage](guided-phase-fit-shrinkage.md) ·
+[pooled RAW support under a quiet-error budget](fold-support-pooling.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

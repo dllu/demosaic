@@ -25,9 +25,13 @@ has repeatedly come with extra flat-region error or false color. The
    Fitting a phase profile from query RAW improves lower-noise recovery beyond
    a sine wave on a different retained draw across all four CFAs. ISO6400 still
    trades weak response for higher quiet and increment errors. Shrinking the
-   fit reduces both costs at the permissive threshold while attenuating weak
-   response. The next useful comparison is at matched quiet error.
-   [Phase-profile test](guided-phase-profiles.md) · [Shrinkage test](guided-phase-fit-shrinkage.md).
+   fit reduces both costs at the permissive threshold. At equal measured
+   quiet error, it has lower false weak projection and lower weak response
+   than uniform attenuation. Calibrating pooled scores on seven geometries
+   and evaluating on the eighth gives a repeatable lower-noise gain. It
+   leaves high-noise weak recovery and real fine crossings open.
+   [Phase-profile test](guided-phase-profiles.md) · [Equal-quiet shrinkage](guided-phase-fit-shrinkage.md#iso6400-at-equal-measured-quiet-error) ·
+   [Pooled RAW support](fold-support-pooling.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
