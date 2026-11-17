@@ -39,6 +39,7 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Can CFA colors share a waveform while estimating signed amplitudes? | Lower far-edge chroma error with smaller weak response. At matched quiet RMS, ISO400 near recovers 7.65% with the shared fit versus 12.00% with independent profiles. Fine real crossings remain incomplete | [Shared waveform test](shared-phase-shape.md) |
 | Can a disjoint RAW patch supply a waveform? | At matched quiet RMS, donor shape slightly lowers far-edge increment error and reduces ISO400 near response from 12.16% to 7.54%. Sky matches V120 and the cab lattice stays incomplete | [Donor waveform test](donor-waveform.md) |
 | Does held-out evidence need to cross a strong edge? | At matched quiet RMS, same-side evidence raises ISO400 dark-side response from 8.19% to 11.84% while bright-side response falls. Separate profiles lose more overall response. Both real fences reproduce the guarded fit | [Edge-side comparison](phase-edge-side.md) |
+| Does the bright side benefit from cross-edge evidence? | The eight fresh ISO400 near scenes favor same-side validation for response at matched quiet RMS. Fixing accurate donor guides raises response from 3.94% to 6.12% with lower increment error. The real fences retain the earlier fit | [Fresh asymmetric validation](asymmetric-phase-evidence.md) |
 
 V131 also changes the training cohort, so its gain is not an isolated test of
 training duration. The 100k run has saved its 20k checkpoint and continues

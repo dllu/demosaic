@@ -59,6 +59,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [shared waveform with signed Bayer amplitudes](shared-phase-shape.md) ·
 [waveform shape from a disjoint RAW patch](donor-waveform.md) ·
 [same-side RAW validation at strong edges](phase-edge-side.md) ·
+[bright-side cross-edge evidence on fresh geometries](asymmetric-phase-evidence.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

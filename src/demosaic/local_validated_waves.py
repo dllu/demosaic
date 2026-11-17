@@ -752,6 +752,7 @@ def conditional_scores(
     stride=16,
     reliability=None,
     orientation=None,
+    bright_cross_edge_weight=0.0,
 ):
     """Assess each fixed direction/harmonic and color against its A-only null."""
     raw, colors, mask = np.asarray(raw, np.float64), np.asarray(colors), np.asarray(validation_mask)
@@ -778,6 +779,12 @@ def conditional_scores(
         from scipy.signal import fftconvolve
 
     side_map = getattr(candidate, "phase_bright_side", None)
+    if (
+        not np.isfinite(bright_cross_edge_weight)
+        or not 0 <= bright_cross_edge_weight <= 1
+        or (bright_cross_edge_weight and getattr(candidate, "phase_side_profiles", False))
+    ):
+        raise ValueError("Bright cross-edge weight must be in [0, 1] for shared edge profiles")
     local, global_scores = np.zeros((units, 3, h, w)), np.zeros((units, 3))
     for direction in range(units):
         sides = (None,)
@@ -810,8 +817,13 @@ def conditional_scores(
             energy[selected] = (full - base) ** 2 / variance
             for side in sides:
                 side_mask = side_map == side if side is not None else None
-                signal = improvement if side_mask is None else np.where(side_mask, improvement, 0)
-                power = energy if side_mask is None else np.where(side_mask, energy, 0)
+                cross = bright_cross_edge_weight if side == 1 else 0.0
+                if side_mask is None or cross == 1:
+                    signal, power = improvement, energy
+                else:
+                    signal = np.where(side_mask, improvement, cross * improvement)
+                    # The held-out score variance contains the squared sample weights.
+                    power = np.where(side_mask, energy, cross**2 * energy)
                 if orientation is None:
                     numerator = _box_sums(signal, ay, ax, window)
                     support_energy = _box_sums(power, ay, ax, window)
@@ -1037,6 +1049,7 @@ def restore_local_waves(
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
+    bright_cross_edge_weight=0.0,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -1074,6 +1087,14 @@ def restore_local_waves(
         donor_phase_templates, phase_bins, phase_harmonics, shared_phase_shape
     )
     _phase_side_option(phase_edge_side, phase_bins, phase_harmonics, shared_phase_shape, templates)
+    if (
+        not np.isfinite(bright_cross_edge_weight)
+        or not 0 <= bright_cross_edge_weight <= 1
+        or (bright_cross_edge_weight and phase_edge_side != "validation")
+    ):
+        raise ValueError(
+            "Bright cross-edge weight requires same-side validation and a value in [0, 1]"
+        )
     if phase_edge_side is not None and (compare_joint_colour_support or compare_phase_agreement):
         raise ValueError("Edge-side support uses per-color fold evidence")
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
@@ -1208,6 +1229,7 @@ def restore_local_waves(
                     ~c.discovery_mask,
                     window=config.validation_window,
                     stride=config.validation_stride,
+                    bright_cross_edge_weight=bright_cross_edge_weight,
                     **({"reliability": weight} if weight is not None else {}),
                 )
                 for c, weight in zip(predictors, reliability, strict=True)
@@ -1223,6 +1245,7 @@ def restore_local_waves(
                         stride=config.validation_stride,
                         reliability=weight,
                         orientation=mode,
+                        bright_cross_edge_weight=bright_cross_edge_weight,
                     )[0]
                     for c, weight in zip(predictors, reliability, strict=True)
                 ]
@@ -1408,6 +1431,11 @@ def restore_local_waves(
         "config": config.to_dict(),
         "parent_used_for_discovery_or_validation": False,
         **guide,
+        **(
+            {"bright_cross_edge_weight": float(bright_cross_edge_weight)}
+            if bright_cross_edge_weight
+            else {}
+        ),
         **({"shrink_phase_fit": True} if shrink_phase_fit else {}),
         **({"compare_pooled_support": True} if compare_pooled_support else {}),
         **({"compare_phase_agreement": True} if compare_phase_agreement else {}),

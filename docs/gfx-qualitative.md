@@ -82,6 +82,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Same-side validation](phase-edge-side.md) activates only on the
   building. Sky matches V120, and foliage and coarse fence reproduce
   the original guarded fit.
+- [Bright-side cross-edge validation](asymmetric-phase-evidence.md)
+  matches V120 on sky and building. Foliage and the coarse fence
+  reproduce the same-side validation fit.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

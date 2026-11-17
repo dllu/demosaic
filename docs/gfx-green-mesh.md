@@ -28,6 +28,7 @@ preserves its original comparison pixels and provenance.
 | [Shared RAW waveform](shared-phase-shape.md) | Both ROIs, profiles and JPEGs viewed. Modulation changes slightly, with the fine lattice still incomplete |
 | [Disjoint-donor waveform](donor-waveform.md) | Both ROIs, profiles and JPEGs viewed for donor and scrambled shapes. Fine crossings remain incomplete |
 | [Same-side validation](phase-edge-side.md) | No activation on either side or noise profile. Both variants reproduce the guarded cab views, and fine crossings remain incomplete |
+| [Bright-side cross-edge validation](asymmetric-phase-evidence.md) | Both weights reproduce the existing cab views for both crop sides and profiles. Fine crossings remain incomplete |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |

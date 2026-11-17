@@ -24,7 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
-Latest results are in the [same-side validation entry](2026-11-17-14-58-32-phase-edge-side.md).
+Latest results are in the [fresh asymmetric validation entry](2026-11-17-15-24-49-asymmetric-phase-evidence.md).
+See also the [same-side validation entry](2026-11-17-14-58-32-phase-edge-side.md).
 See also the [disjoint-donor waveform entry](2026-11-17-14-46-52-donor-waveform.md).
 See also the [shared waveform entry](2026-11-17-14-37-42-shared-phase-shape.md).
 See also the [edge-exclusion entry](2026-11-17-14-27-46-phase-guide-edge-guard.md) and the

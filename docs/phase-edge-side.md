@@ -11,6 +11,12 @@ same measured quiet error, with a bright-side cost. Splitting the waveform
 itself loses more signal overall. At ISO6400, neither arm improves the measured
 quiet-error tradeoff, and the real cab views keep the earlier fit.
 
+The [fresh-geometry follow-up](asymmetric-phase-evidence.md) finds
+a bright-side gain from same-side validation at matched quiet
+error. Restoring cross-edge evidence lowers that gain. Holding
+accurate donor frequencies fixed gives a larger ISO400 benefit
+on those scenes.
+
 ## Detection, fits and evidence
 
 Each discovery fold uses its original affine-plus-step nuisance. The green step

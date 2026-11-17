@@ -202,6 +202,24 @@ def test_same_side_validation_and_profiles_do_not_cross_a_strong_step():
     np.testing.assert_array_equal(clean[..., ~side], damaged[..., ~side])
     assert np.max(abs(clean[..., side] - damaged[..., side])) > 0.1
 
+    cross = local.conditional_scores(
+        check, raw, colors, ~fold, window=33, stride=8, bright_cross_edge_weight=1
+    )[0]
+    original = local.conditional_scores(plain, raw, colors, ~fold, window=33, stride=8)[0]
+    np.testing.assert_array_equal(cross[..., ~side], clean[..., ~side])
+    np.testing.assert_array_equal(cross[..., side], original[..., side])
+
+    half = local.conditional_scores(
+        check, raw, colors, ~fold, window=33, stride=1, bright_cross_edge_weight=0.5
+    )[0]
+    scope = (~fold) & (colors == 1) & (abs(y - 30) <= 16) & (abs(x - 37) <= 16)
+    null, full = check.conditional_null_cfa[0][scope], check.full_cfa[scope]
+    scale = np.where(side[scope], 1, 0.5)
+    variance = check.variance_cfa[scope]
+    expected = np.sum(scale * ((raw[scope] - null) ** 2 - (raw[scope] - full) ** 2) / variance)
+    expected /= 2 * np.sqrt(np.sum((scale * (full - null)) ** 2 / variance))
+    np.testing.assert_allclose(half[0, 1, 30, 37], expected, rtol=0, atol=1e-12)
+
 
 @pytest.mark.parametrize("layout", LAYOUTS)
 def test_shared_phase_shape_keeps_signed_color_and_withheld_independence(layout):

@@ -141,6 +141,12 @@ quiet RMS. Bright-side recovery falls from 6.87% to 5.22%.
 Separate profiles lose more overall response, and the real
 fine cab views retain the guarded fit.
 
+On [new wire geometries](asymmetric-phase-evidence.md), cross-edge
+evidence lowers the ISO400 near-edge response compared with same-side
+validation at matched quiet RMS. Holding the accurate donor frequencies
+fixed raises recovery from 3.94% to 6.12% with lower increment error.
+That fixed-guide replay covers ISO400 near scenes.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)
