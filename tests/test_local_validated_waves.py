@@ -221,6 +221,46 @@ def test_same_side_validation_and_profiles_do_not_cross_a_strong_step():
     np.testing.assert_allclose(half[0, 1, 30, 37], expected, rtol=0, atol=1e-12)
 
 
+def test_guide_crosscheck_uses_discovery_only_and_retains_a_coherent_move():
+    y, x = np.indices((64, 64))
+    freq = (5 / 64, 2 / 64)
+    displaced = (6 / 64, 2 / 64)
+    raw = 0.08 + 0.006 * np.cos(2 * np.pi * (freq[0] * x + freq[1] * y))
+    raw += 0.004 * np.sin(2 * np.pi * (3 / 64 * x - 7 / 64 * y))
+    raw += (x > 32) * 0.03
+    colors = np.tile([[0, 1], [1, 2]], (32, 32))
+    outer = stratified_split(raw.shape, 121)
+    radius = np.asarray(freq) / np.linalg.norm(freq)
+    seed = tuple(np.asarray(freq) + radius / 64)
+    options = {
+        "guide_frequencies_xy": (seed, (3 / 64, -7 / 64)),
+        "phase_bins": 8,
+        "recenter_phase_guides": True,
+        "phase_guide_crosscheck": True,
+        "shot": 8e-5,
+        "read": 1e-8,
+        "config": CONFIG,
+    }
+    expected = local.fit_local_candidate(raw, colors, outer, **options)
+    damaged = local.fit_local_candidate(np.where(outer, raw, np.nan), colors, outer, **options)
+    np.testing.assert_allclose(expected.frequencies_xy[0], freq, atol=1e-15, rtol=0)
+    assert expected.guide_crosschecks == damaged.guide_crosschecks
+    assert expected.guide_crosschecks[0]["accepted"]
+    np.testing.assert_array_equal(expected.full_cfa, damaged.full_cfa)
+
+    green = (colors == 1) & outer
+    a, b = x[green], y[green]
+    split = stratified_split(raw.shape, 202611170713)[green]
+    affine = np.column_stack((np.ones(len(a)), a, b))
+    proposal = 0.08 + 0.012 * np.cos(2 * np.pi * (displaced[0] * a + displaced[1] * b))
+    original = 0.08 + 0.006 * np.cos(2 * np.pi * (freq[0] * a + freq[1] * b))
+    signal = np.where(split, proposal, original)
+    held = local._crosscheck_guide_move(
+        a, b, signal, affine, affine, freq, displaced, split, 8e-5, 1e-8
+    )
+    assert min(held) < 0
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
 def test_shared_phase_shape_keeps_signed_color_and_withheld_independence(layout):
     _, colors, _ = scene(layout)

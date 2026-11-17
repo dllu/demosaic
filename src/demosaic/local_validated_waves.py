@@ -110,6 +110,7 @@ class LocalCandidate:
     donor_phase_shifts: tuple = ()
     phase_bright_side: np.ndarray | None = None
     phase_side_profiles: bool = False
+    guide_crosschecks: tuple = ()
 
 
 def _wave_columns(xx, yy, frequency, harmonics=1):
@@ -269,11 +270,13 @@ def _guide_frequencies(value, family_degrees):
     return tuple(tuple(float(v) for v in row) for row in frequencies)
 
 
-def _validate_guide_search(recenter, guard_px, bins, harmonics):
+def _validate_guide_search(recenter, guard_px, bins, harmonics, crosscheck=False):
     if type(recenter) is not bool or (recenter and (not bins or harmonics is not None)):
         raise ValueError("Guide recentering requires the full interpolated phase basis")
     if type(guard_px) is not int or guard_px < 0 or (guard_px and not recenter):
         raise ValueError("An edge guard requires phase-guide recentering and a native pixel width")
+    if type(crosscheck) is not bool or (crosscheck and not recenter):
+        raise ValueError("Guide cross-check requires phase-guide recentering")
 
 
 def _validate_shared_phase_shape(shared, bins, harmonics):
@@ -402,7 +405,31 @@ def _bright_edge_side(raw, green, nuisance, selected, shot, read):
     return bright.reshape(raw.shape)
 
 
-def _recenter_phase_guides(raw, green, nuisance, xx, yy, frequencies, bins, shot, read, family):
+def _crosscheck_guide_move(
+    x, y, values, background, competitor, origin, proposal, split, shot, read
+):
+    """Measure held-out error reductions in both directions within discovery."""
+    if min(split.sum(), (~split).sum()) <= competitor.shape[1] + 2:
+        return (0.0, 0.0)
+    designs = [np.column_stack((competitor, _wave_columns(x, y, f))) for f in (origin, proposal)]
+    reductions = []
+    for train in (split, ~split):
+        test = ~train
+        coef = np.linalg.lstsq(background[train], values[train], rcond=1e-10)[0]
+        inv_sigma = 1 / np.sqrt(read + shot * np.maximum(background @ coef, 1e-6))
+        target = values[train] * inv_sigma[train]
+        errors = []
+        for design in designs:
+            coef = np.linalg.lstsq(design[train] * inv_sigma[train, None], target, rcond=1e-10)[0]
+            residual = (values[test] - design[test] @ coef) * inv_sigma[test]
+            errors.append(residual @ residual)
+        reductions.append(float(errors[0] - errors[1]))
+    return tuple(reductions)
+
+
+def _recenter_phase_guides(
+    raw, green, nuisance, xx, yy, frequencies, bins, shot, read, family, crosschecks=None
+):
     """Search a bounded frequency cross using only one fold's green measurements."""
     x, y = xx.ravel()[green], yy.ravel()[green]
     background = nuisance[green]
@@ -412,6 +439,8 @@ def _recenter_phase_guides(raw, green, nuisance, xx, yy, frequencies, bins, shot
     spacing = 1 / min(raw.shape)
     cosine = np.cos(np.deg2rad(family))
     chosen = [np.asarray(f) for f in frequencies]
+    if crosschecks is not None:
+        split = stratified_split(raw.shape, 202611170713).ravel()[green]
     for index, origin in enumerate(chosen.copy()):
         other = chosen[1 - index]
         knot = _phase_bin_weights(x, y, other, bins)
@@ -439,6 +468,23 @@ def _recenter_phase_guides(raw, green, nuisance, xx, yy, frequencies, bins, shot
             scores[i] = projection @ projection
         best = int(np.argmax(scores))
         if scores[best] > scores[0] + 4:
+            if crosschecks is not None:
+                gains = _crosscheck_guide_move(
+                    x, y, values, background, design, origin, candidates[best], split, shot, read
+                )
+                accepted = min(gains) > 0
+                crosschecks.append(
+                    {
+                        "direction": index,
+                        "origin_xy": origin.tolist(),
+                        "proposed_xy": candidates[best].tolist(),
+                        "full_discovery_gain": float(scores[best] - scores[0]),
+                        "nested_error_reductions": gains,
+                        "accepted": accepted,
+                    }
+                )
+                if not accepted:
+                    continue
             chosen[index] = candidates[best]
     return tuple(tuple(float(v) for v in f) for f in chosen)
 
@@ -456,6 +502,7 @@ def fit_local_candidate(
     phase_harmonics=None,
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
+    phase_guide_crosscheck=False,
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
@@ -467,7 +514,11 @@ def fit_local_candidate(
     """
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
     _validate_guide_search(
-        recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
+        recenter_phase_guides,
+        phase_guide_edge_guard_px,
+        phase_bins,
+        phase_harmonics,
+        phase_guide_crosscheck,
     )
     _validate_shared_phase_shape(shared_phase_shape, phase_bins, phase_harmonics)
     templates = _donor_templates(
@@ -500,6 +551,7 @@ def fit_local_candidate(
         step = nuisance[:, 3]
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
     excluded = 0
+    crosschecks = [] if phase_guide_crosscheck else None
     if guide_frequencies_xy is not None:
         frequencies = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
         search = green
@@ -522,6 +574,7 @@ def fit_local_candidate(
                 shot,
                 read,
                 config.family_degrees,
+                **({"crosschecks": crosschecks} if crosschecks is not None else {}),
             )
         counts = tuple(_harmonic_count(f, config.harmonics) for f in frequencies)
     else:
@@ -684,6 +737,7 @@ def fit_local_candidate(
         shifts,
         bright,
         split_profiles,
+        tuple(crosschecks or ()),
     )
 
 
@@ -1046,6 +1100,7 @@ def restore_local_waves(
     compare_pooled_refit=False,
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
+    phase_guide_crosscheck=False,
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
@@ -1080,7 +1135,11 @@ def restore_local_waves(
         raise ValueError("Require an explicit boolean conditional-delivery choice")
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
     _validate_guide_search(
-        recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
+        recenter_phase_guides,
+        phase_guide_edge_guard_px,
+        phase_bins,
+        phase_harmonics,
+        phase_guide_crosscheck,
     )
     _validate_shared_phase_shape(shared_phase_shape, phase_bins, phase_harmonics)
     templates = _donor_templates(
@@ -1137,6 +1196,8 @@ def restore_local_waves(
         guide["recenter_phase_guides"] = True
     if phase_guide_edge_guard_px:
         guide["phase_guide_edge_guard_px"] = phase_guide_edge_guard_px
+    if phase_guide_crosscheck:
+        guide["phase_guide_crosscheck"] = True
     if shared_phase_shape:
         guide["shared_phase_shape"] = True
     if templates is not None:
@@ -1399,6 +1460,11 @@ def restore_local_waves(
                     **(
                         {"guide_search_excluded": [c.guide_search_excluded for c in candidates]}
                         if phase_guide_edge_guard_px
+                        else {}
+                    ),
+                    **(
+                        {"guide_crosschecks": [c.guide_crosschecks for c in candidates]}
+                        if phase_guide_crosscheck
                         else {}
                     ),
                     **(

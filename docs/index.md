@@ -60,9 +60,11 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [waveform shape from a disjoint RAW patch](donor-waveform.md) ·
 [same-side RAW validation at strong edges](phase-edge-side.md) ·
 [bright-side cross-edge evidence on fresh geometries](asymmetric-phase-evidence.md) ·
+[RAW cross-check for donor frequency moves](phase-guide-crosscheck.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·
+[427-photo faint ADC comparison](full427-faint-adc.md) ·
 [historical10k midpoint](full-corpus-control10k-review.md) ·
 [execution/raw-EMA follow-up](training-execution-quality.md) ·
 [qualified endpoint benchmark](full-corpus-primary-admission.md) ·

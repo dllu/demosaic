@@ -10,9 +10,11 @@ is running, with subsequent broader weak-band analysis queued. The
 [complete camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
 known/lose0.04067 unseen. The [complete color panel](full-corpus-control20k-color-review.md)
 finds worst ADC bias765.7 DN16 versus V12055.5,largely repaired by physical
-Malvar/bin correction. Broad photo results remain pending. The separate faint-ADC suite has a completed qualification
-and live reporting queue using original-source local-band masks
-and four-CFA, equal-source pooling. [Faint analysis status](adc-bin-consistency.md).
+Malvar/bin correction. Standard broad photo results remain pending. The separate
+[427-photo faint ADC suite](full427-faint-adc.md) is complete. Projection lowers
+the weakest-band Corpus20k error from 2.594 to 1.901 DN16, essentially matching
+projected V120. The protocol uses original-source masks and four-CFA,
+equal-source pooling.
 
 The [three-way 20k checkpoint review](full-corpus-long20k-native.md)
 is now complete. The long schedule lowers faint fine-band error for

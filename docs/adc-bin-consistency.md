@@ -115,15 +115,10 @@ The full grid also exposes raw20k bias765.656 DN16 versus V12055.525, missed by
 the earlier two-color spot check; Malvar/bins repair most of it. These are
 complete color results,not a general photo/detail score.
 
-The new427-photo faint study is still running,all IDs val/disjoint current
-training,with original-source masks and1708 image/CFA cases/model; its16 legacy
-physical inputs/targets reproduce exactly. No result is claimed yet. Positive-
-noise and real-scene fine reconstruction remain open; this helper bypasses
-positive noise and changes no default. [Completed camera tradeoff](full-corpus-control20k-camera-review.md).
-
-The faint study now has a queued analysis for the four declared policies over
-both checkpoints. It pools four CFA observations per source and balances
-sources equally. Local band masks come from the original target, and error
-uses the contrast-reduced target. The first four batches pass independent DCT
-and ADC re-encoding checks for all 128 policy rows. The full report starts
-after the collection receipt closes. [Analysis implementation](../scripts/report_full_faint_photo_panel.py).
+The [427-photo faint study](full427-faint-adc.md) is complete. It pools four
+CFA observations per source and weights each source equally. Local band masks
+come from the original images, and errors use the contrast-reduced exact targets.
+Corpus20k's weakest-band RMS falls from 2.594 to 1.901 DN16 with ADC-bin
+projection, effectively matching projected V120. All validation IDs are disjoint
+from the current training set. The helper returns both standing positive-noise
+GFX families unchanged. [Analysis implementation](../scripts/report_full_faint_photo_panel.py).

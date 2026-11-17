@@ -166,6 +166,12 @@ worsens this20k faint mean67.46006→67.42407 dB. A new
 [calibrated ADC-bin experiment](adc-bin-consistency.md) has bounded selected
 gains/costs; it does not change this raw-model result or default inference.
 
+The separate [427-photo faint ADC comparison](full427-faint-adc.md) uses
+contrast-reduced natural scenes. ADC-bin projection lowers this checkpoint's
+weakest-band RMS from 2.594 to 1.901 DN16, effectively matching projected V120.
+The helper returns the positive-noise inputs underlying both real-scene reviews
+unchanged.
+
 The native reporter initially lacked a frozen helper module. The original
 failure and a first recovery admission's copied-path mismatch are preserved.
 Recovery v2 admits identical helper **bytes** from the sealed template and runs

@@ -83,6 +83,9 @@ has repeatedly come with extra flat-region error or false color. The
    reduces response at matched quiet error. Replaying with fixed accurate
    donor frequencies improves ISO400 recovery and increment error.
    [Fresh asymmetric test](asymmetric-phase-evidence.md).
+   A RAW cross-check on two disjoint discovery subsets helps with already
+   accurate donor guides and rejects some useful repairs of shifted guides.
+   Fine cab crossings remain incomplete. [Guide cross-check](phase-guide-crosscheck.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
@@ -104,10 +107,10 @@ has repeatedly come with extra flat-region error or false color. The
    improves selected zero-noise errors with material regressions; the full588
    [palette review](full-corpus-control20k-color-review.md) is complete: raw20k
    worst bias765.7 DN16 versus V12055.5,mostly repaired by Malvar/bins; bins gives
-   small V120 aggregate gains versus exact Malvar with20k tail tradeoffs. A new
-   427-photo faint study uses original-source masks
-   and1708 image/CFA observations/model. Its16 legacy inputs reproduce exactly
-   and all427 IDs are val/disjoint currenttrain. The long trajectory retains10k
+   small V120 aggregate gains versus exact Malvar with20k tail tradeoffs. The
+   [427-photo faint ADC study](full427-faint-adc.md) finds higher raw Corpus20k
+   weak-band error than V120. ADC-bin projection lowers it from 2.594 to 1.901
+   DN16, effectively matching projected V120. The long trajectory retains10k
    state,with recorded data/conditioning/RNG matching the control10k prefix
    apart from declared order-header identities. Preserve its original schedule.
    [Coverage and pipeline rationale](training-scale-pipeline-review-2026-11-17.md).

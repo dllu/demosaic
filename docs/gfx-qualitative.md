@@ -85,6 +85,11 @@ historical boards. Use these reports for the current completed comparisons:
 - [Bright-side cross-edge validation](asymmetric-phase-evidence.md)
   matches V120 on sky and building. Foliage and the coarse fence
   reproduce the same-side validation fit.
+- [RAW guide cross-check](phase-guide-crosscheck.md) matches V120 on sky,
+  makes small changes to the building and foliage, and alters local coarse-fence
+  modulation. The visible crossings persist.
+- [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
+  their original positive-noise output for this scene.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

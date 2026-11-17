@@ -147,13 +147,18 @@ validation at matched quiet RMS. Holding the accurate donor frequencies
 fixed raises recovery from 3.94% to 6.12% with lower increment error.
 That fixed-guide replay covers ISO400 near scenes.
 
-These are useful, bounded tradeoffs, not a general replacement for V120. The
-[new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
-zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)
-confirms small V120 aggregate gains over exact Malvar;20k has lower mean MSE
-but slightly worse maxima versus exact Malvar. The new427-photo faint protocol also runs with original-source masks
-and all source IDs held out from current training. The helper is opt-in and
-bypasses positive noise identically:
+The [RAW frequency cross-check](phase-guide-crosscheck.md) tests proposed guide
+moves on two disjoint discovery subsets before separate confirmation. At matched
+quiet error, ISO400 near-edge recovery rises from 3.94% to 4.35% with nominal
+guides. Far-edge recovery falls from 22.33% to 19.92% with shifted guides.
+The real cab mesh remains incomplete.
+
+The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
+scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
+it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively
+matching projected V120 at 1.900 DN16. Both standing positive-noise GFX sets
+bypass the helper exactly. The [588-color review](full-corpus-control20k-color-review.md)
+still shows slightly worse Corpus20k worst-case bias and RMS than exact Malvar.
 
 | Component family | What worked | What remains unresolved |
 | --- | --- | --- |

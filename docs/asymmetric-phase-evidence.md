@@ -12,6 +12,9 @@ The two cross-edge weights recover less ISO400 near-edge signal than
 same-side validation at matched quiet error. The new geometries also
 expose frequency drift from already accurate donor guides. A separate
 fixed-guide replay recovers more signal at the same quiet error.
+The [follow-up RAW cross-check](phase-guide-crosscheck.md) verifies guide moves
+on disjoint discovery subsets. It recovers part of the fixed-guide gain near
+the edge and blocks some useful repairs of deliberately shifted far-edge guides.
 
 ## Frozen comparison
 
