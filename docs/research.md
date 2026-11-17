@@ -118,8 +118,9 @@ has repeatedly come with extra flat-region error or false color. The
    stronger synthetic mesh response does not guarantee lower final-image error.
    The [full guided panel](neural-guided-phase-full-panel.md) and
    [colored-wire study](coloured-fine-wire-benchmark.md) expose this gap.
-   The [A-only innovation control](parent-innovation-validation.md) has completed
-   numerical review; its published native review is still pending.
+   The [A-only innovation control](parent-innovation-validation.md) reduces
+   building fringing at the fixed crop. The native review confirms little
+   change in cab crossings and a small increase in signed-color increment error.
 4. **Establish a production speed baseline, then optimize against it.** Separate
    decoding, context encoding, trunk, overlap, transfer and output costs. Benchmark
    batch/precision changes on the current model before selecting them. Shared

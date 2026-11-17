@@ -61,6 +61,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [same-side RAW validation at strong edges](phase-edge-side.md) ·
 [bright-side cross-edge evidence on fresh geometries](asymmetric-phase-evidence.md) ·
 [RAW cross-check for donor frequency moves](phase-guide-crosscheck.md) ·
+[A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

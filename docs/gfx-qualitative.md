@@ -90,6 +90,9 @@ historical boards. Use these reports for the current completed comparisons:
   modulation. The visible crossings persist.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
+- [A-only innovation validation](parent-innovation-validation.md) matches
+  V120 on sky and weakens the prior analytic fit's building fringe. Foliage
+  stays soft and the coarse lattice remains visible.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

@@ -5,6 +5,10 @@ and40 actually viewed native figures.** Joint support has a small neutral-wire
 gain but essentially no signed-colour weak-response gain. All-stage increment
 and colour errors remain above V120. The real cab tint improvement does not
 establish faithful coloured-wire reconstruction.
+The [A-only innovation follow-up](parent-innovation-validation.md) compares
+the same color observations and the standing GFX scenes with a different
+validation target. The new gate weakens building fringing, with essentially
+unchanged signed-color weak response.
 
 [Native100% viewer](images/coloured-fine-wire-v1/native-viewer.html) ·
 [131 exact archives,164 executed sources and viewing receipts](results/coloured-fine-wire-v1/publication.json) ·

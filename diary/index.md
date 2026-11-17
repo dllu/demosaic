@@ -24,7 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
-Latest results are in the [RAW guide cross-check and faint ADC entry](2026-11-17-15-40-04-weak-guide-and-faint-adc.md).
+Latest results are in the [A-only fine innovation native review](2026-11-17-15-51-18-parent-innovation-native.md).
+See also the [RAW guide cross-check and faint ADC entry](2026-11-17-15-40-04-weak-guide-and-faint-adc.md).
 See also the [fresh asymmetric validation entry](2026-11-17-15-24-49-asymmetric-phase-evidence.md).
 See also the [same-side validation entry](2026-11-17-14-58-32-phase-edge-side.md).
 See also the [disjoint-donor waveform entry](2026-11-17-14-46-52-donor-waveform.md).
