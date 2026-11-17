@@ -72,6 +72,10 @@ has repeatedly come with extra flat-region error or false color. The
    Fitting one waveform with signed Bayer amplitudes lowers far-edge
    chroma error slightly. Near-edge weak response falls even at
    matched quiet error. [Shared waveform](shared-phase-shape.md).
+   A disjoint donor shape retains more ISO400 far response than a
+   harmonic-phase scramble at the original settings. At matched quiet
+   error the independent fit still recovers more true near-edge detail.
+   [Donor waveform](donor-waveform.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

@@ -127,6 +127,44 @@ def test_edge_guard_subsets_only_the_frequency_search(monkeypatch):
 
 
 @pytest.mark.parametrize("layout", LAYOUTS)
+def test_donor_template_refits_query_phase_and_signed_amplitudes(layout):
+    _, colors, _ = scene(layout)
+    guide = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))
+    x, y, _, _ = local.geometry(colors.shape)
+    templates = (
+        np.array([0.6, -0.1, -0.4, -0.4, -0.1, 0.0, 0.1, 0.3]),
+        np.array([-0.4, -0.4, 0.1, 0.4, 0.5, 0.2, -0.2, -0.2]),
+    )
+    translation = (1 / 8, 1 / 3)
+    fields = [
+        (local._phase_bin_weights(x, y, f, 8) @ local.shifted_donor_knots(shape, [turns])).reshape(
+            colors.shape
+        )
+        for f, shape, turns in zip(guide, templates, translation, strict=True)
+    ]
+    rgb = 0.06 + np.array([0.02, 0.03, 0.01])[:, None, None] * fields[0]
+    rgb += np.array([0.015, -0.005, 0.01])[:, None, None] * fields[1]
+    raw = np.take_along_axis(rgb, colors[None], axis=0)[0]
+    mask = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 8e-5,
+        "read": 2.56e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": guide,
+        "phase_bins": 8,
+        "donor_phase_templates": templates,
+    }
+    fitted = local.fit_local_candidate(raw, colors, mask, **options)
+    withheld = local.fit_local_candidate(np.where(mask, raw, np.nan), colors, mask, **options)
+    assert translation == fitted.donor_phase_shifts == withheld.donor_phase_shifts
+    np.testing.assert_array_equal(fitted.full_cfa, withheld.full_cfa)
+    np.testing.assert_allclose(fitted.full_cfa, raw, rtol=0, atol=1e-13)
+    start, _ = fitted.unit_slices[1]
+    amp = fitted.coefficients[:, start]
+    np.testing.assert_allclose(amp / amp[0], [1, -1 / 3, 2 / 3], rtol=0, atol=1e-13)
+
+
+@pytest.mark.parametrize("layout", LAYOUTS)
 def test_shared_phase_shape_keeps_signed_color_and_withheld_independence(layout):
     _, colors, _ = scene(layout)
     frequencies = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))

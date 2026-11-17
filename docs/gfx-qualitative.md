@@ -76,6 +76,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Shared RAW waveform](shared-phase-shape.md) matches the V120 sky,
   preserves visible coarse-fence crossings and leaves foliage and fine
   building hardware soft.
+- [Disjoint-donor waveform](donor-waveform.md) matches the V120 sky
+  and the independent building fit. Foliage remains soft and coarse
+  crossings remain visible.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

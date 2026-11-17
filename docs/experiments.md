@@ -37,6 +37,7 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Does guided phase pooling generalize? | Weak response and full RGB error improve, but quiet/increment error worsens on the full eight-source panel; the pilot increment gain does not persist | [Full guided comparison](neural-guided-phase-full-panel.md) |
 | Can extra fine frequencies restore the green fence faithfully? | Fine proposals make both directions more visible. Joint color support reduces tint; fresh signed-color wires still have no useful weak-response gain | [Fine proposal pilot](fine-frequency-proposals.md), [joint color](joint-fine-colour-support.md), [colored-wire validation](coloured-fine-wire-benchmark.md) |
 | Can CFA colors share a waveform while estimating signed amplitudes? | Lower far-edge chroma error with smaller weak response. At matched quiet RMS, ISO400 near recovers 7.65% with the shared fit versus 12.00% with independent profiles. Fine real crossings remain incomplete | [Shared waveform test](shared-phase-shape.md) |
+| Can a disjoint RAW patch supply a waveform? | At matched quiet RMS, donor shape slightly lowers far-edge increment error and reduces ISO400 near response from 12.16% to 7.54%. Sky matches V120 and the cab lattice stays incomplete | [Donor waveform test](donor-waveform.md) |
 
 V131 also changes the training cohort, so its gain is not an isolated test of
 training duration. The 100k run has saved its 20k checkpoint and continues

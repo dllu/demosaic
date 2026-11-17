@@ -130,6 +130,11 @@ far-edge chroma error but weakens near-edge recovery. At the same
 measured quiet RMS, ISO400 near gives 12.00% weak response with
 independent waveforms and 7.65% with one shared shape.
 
+A [disjoint-donor waveform](donor-waveform.md) gives a small
+far-edge increment and chroma error reduction. Near-edge ISO400
+response at matched quiet RMS falls from 12.16% to 7.54%.
+The real fine cab crossings remain incomplete.
+
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated
 zero-noise errors with material PSNR regressions. The [full588-color review](full-corpus-control20k-color-review.md)

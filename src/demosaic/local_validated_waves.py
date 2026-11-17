@@ -107,6 +107,7 @@ class LocalCandidate:
     variance_cfa: np.ndarray
     guide_search_excluded: int = 0
     phase_reliability_degrees: int | None = None
+    donor_phase_shifts: tuple = ()
 
 
 def _wave_columns(xx, yy, frequency, harmonics=1):
@@ -278,6 +279,29 @@ def _validate_shared_phase_shape(shared, bins, harmonics):
         raise ValueError("A shared phase shape requires the full interpolated phase basis")
 
 
+def _donor_templates(value, bins, harmonics, shared):
+    if value is None:
+        return None
+    profiles = np.asarray(value, np.float64)
+    if (
+        bins != 8
+        or harmonics is not None
+        or shared
+        or profiles.shape != (2, bins)
+        or not np.isfinite(profiles).all()
+        or np.any(np.ptp(profiles, axis=1) == 0)
+    ):
+        raise ValueError("Require two finite nonconstant eight-knot donor profiles")
+    return tuple(tuple(row) for row in profiles)
+
+
+def signed_knot_shape(coefficient, precision):
+    """Return a unit waveform, with the DC handled by the nuisance intercept."""
+    knots = np.column_stack((coefficient, -coefficient.sum(axis=1)))
+    _, _, directions = np.linalg.svd(np.asarray(precision)[:, None] * knots, full_matrices=False)
+    return directions[0]
+
+
 def _shared_phase_fields(waves, nuisance, values, indices, variances):
     """Estimate one signed-amplitude waveform subspace per direction."""
     design = np.column_stack((nuisance, *waves))
@@ -295,15 +319,45 @@ def _shared_phase_fields(waves, nuisance, values, indices, variances):
     start = nuisance.shape[1]
     for wave in waves:
         stop = start + wave.shape[1]
-        reduced = coefficients[:, start:stop]
-        knots = np.column_stack((reduced, -reduced.sum(axis=1)))
-        _, _, directions = np.linalg.svd(
-            np.asarray(precision)[:, None] * knots, full_matrices=False
-        )
-        # The opposing end of the same basis permits negative color amplitudes.
-        fields.append(wave @ directions[0, :-1, None])
+        shape = signed_knot_shape(coefficients[:, start:stop], precision)
+        fields.append(wave @ shape[:-1, None])
         start = stop
     return fields
+
+
+def shifted_donor_knots(profile, turns):
+    """Evaluate cyclic translations of one eight-knot Fourier interpolant."""
+    spectrum = np.fft.rfft(profile)
+    spectrum[0] = 0
+    rotation = np.exp(-2j * np.pi * np.arange(len(spectrum))[:, None] * np.asarray(turns))
+    return np.fft.irfft(spectrum[:, None] * rotation, n=len(profile), axis=0)
+
+
+def _donor_phase_fields(waves, templates, nuisance, values, indices, variances):
+    """Select query phase on discovery samples after projecting out competitors."""
+    search = np.arange(24) / 24
+    fields, phases = [], []
+    for direction, template in enumerate(templates):
+        trials = shifted_donor_knots(template, search)
+        norms = np.linalg.norm(trials, axis=0)
+        usable = norms > norms.max() * 1e-10
+        trials = np.divide(trials, norms, out=np.zeros_like(trials), where=usable)[:-1]
+        competitor = np.column_stack((nuisance, waves[1 - direction]))
+        energy = np.zeros(len(search))
+        for measured, noise in zip(indices, variances, strict=True):
+            whitener = 1 / np.sqrt(noise[measured])
+            null = competitor[measured] * whitener[:, None]
+            joint = np.column_stack((waves[direction][measured], values[measured]))
+            joint *= whitener[:, None]
+            joint -= null @ np.linalg.lstsq(null, joint, rcond=1e-10)[0]
+            basis, residual = joint[:, :-1], joint[:, -1]
+            cross = (basis.T @ residual) @ trials
+            power = np.sum(trials * ((basis.T @ basis) @ trials), axis=0)
+            energy += np.divide(cross**2, power, out=np.zeros_like(power), where=power > 0)
+        best = np.argmax(energy)
+        fields.append(waves[direction] @ trials[:, best, None])
+        phases.append(float(search[best]))
+    return fields, tuple(phases)
 
 
 def _edge_guarded_green(raw, green, nuisance, x, y, angle, offset, width, shot, read):
@@ -375,6 +429,7 @@ def fit_local_candidate(
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
     shared_phase_shape=False,
+    donor_phase_templates=None,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
@@ -386,6 +441,9 @@ def fit_local_candidate(
         recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
     )
     _validate_shared_phase_shape(shared_phase_shape, phase_bins, phase_harmonics)
+    templates = _donor_templates(
+        donor_phase_templates, phase_bins, phase_harmonics, shared_phase_shape
+    )
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
         np.asarray(colors),
@@ -509,8 +567,13 @@ def fit_local_candidate(
         proxy = nuisance @ background_coeff
         indices.append(selected)
         noise_fields.append(read + shot * np.maximum(proxy, 1e-6))
+    shifts = ()
     if shared_phase_shape:
         waves = _shared_phase_fields(waves, nuisance, raw.ravel(), indices, noise_fields)
+    if templates is not None:
+        waves, shifts = _donor_phase_fields(
+            waves, templates, nuisance, raw.ravel(), indices, noise_fields
+        )
     n = nuisance.shape[1]
     split = n + waves[0].shape[1]
     wave_slices = ((n, split), (split, split + waves[1].shape[1]))
@@ -569,7 +632,8 @@ def fit_local_candidate(
         nulls.reshape(len(unit_slices), *raw.shape),
         variance.reshape(raw.shape),
         excluded,
-        phase_bins - 1 if shared_phase_shape else None,
+        phase_bins - 1 if shared_phase_shape or shifts else None,
+        shifts,
     )
 
 
@@ -899,6 +963,7 @@ def restore_local_waves(
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
     shared_phase_shape=False,
+    donor_phase_templates=None,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -932,6 +997,9 @@ def restore_local_waves(
         recenter_phase_guides, phase_guide_edge_guard_px, phase_bins, phase_harmonics
     )
     _validate_shared_phase_shape(shared_phase_shape, phase_bins, phase_harmonics)
+    templates = _donor_templates(
+        donor_phase_templates, phase_bins, phase_harmonics, shared_phase_shape
+    )
     if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
         raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if type(compare_pooled_support) is not bool:
@@ -943,6 +1011,7 @@ def restore_local_waves(
             or phase_harmonics is not None
             or recenter_phase_guides
             or shared_phase_shape
+            or templates is not None
             or not compare_pooled_support
         )
     ):
@@ -973,6 +1042,8 @@ def restore_local_waves(
         guide["phase_guide_edge_guard_px"] = phase_guide_edge_guard_px
     if shared_phase_shape:
         guide["shared_phase_shape"] = True
+    if templates is not None:
+        guide["donor_phase_templates"] = templates
     if discovery_mask is not None:
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
@@ -1218,6 +1289,11 @@ def restore_local_waves(
                     **(
                         {"guide_search_excluded": [c.guide_search_excluded for c in candidates]}
                         if phase_guide_edge_guard_px
+                        else {}
+                    ),
+                    **(
+                        {"donor_phase_shifts": [c.donor_phase_shifts for c in candidates]}
+                        if templates is not None
                         else {}
                     ),
                     **({"phase_agreement": agreements} if compare_phase_agreement else {}),

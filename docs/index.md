@@ -57,6 +57,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [bounded guide-error and recentering test](phase-guide-recenter.md) ·
 [strong-edge exclusions for guide selection](phase-guide-edge-guard.md) ·
 [shared waveform with signed Bayer amplitudes](shared-phase-shape.md) ·
+[waveform shape from a disjoint RAW patch](donor-waveform.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

@@ -2,11 +2,33 @@
 
 import numpy as np
 
-from .local_validated_waves import fit_local_candidate, stratified_split
+from .local_validated_waves import fit_local_candidate, signed_knot_shape, stratified_split
 
 PHASE_BINS = 8
 FUNDAMENTAL = ((1,), (1,))
 ALL_HARMONICS = ((1, 2, 3, 4),) * 2
+
+
+def donor_phase_templates(raw, colors, frequencies, *, shot, read, config):
+    """Recover two shape-only knot profiles in a donor disjoint from the query."""
+    fit = fit_local_candidate(
+        raw,
+        colors,
+        np.ones(raw.shape, dtype=bool),
+        shot=shot,
+        read=read,
+        config=config,
+        guide_frequencies_xy=frequencies,
+        phase_bins=PHASE_BINS,
+    )
+    variance = fit.variance_cfa.ravel()
+    precision = [np.sqrt(np.sum(1 / variance[i])) for i in fit.selected_indices]
+    return np.stack(
+        [
+            signed_knot_shape(fit.coefficients[:, start:stop], precision)
+            for start, stop in fit.wave_slices
+        ]
+    )
 
 
 def donor_harmonic_scores(raw, colors, frequencies, *, shot, read, config):

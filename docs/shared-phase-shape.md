@@ -6,6 +6,10 @@ cases even at matched quiet RMS. The standing sky matches V120 and the
 fine real fence remains incomplete. The independent fit remains the baseline.
 [Executed sources, measurements, and native boards](results/shared-phase-shape-v2/publication.json).
 
+A [disjoint RAW donor follow-up](donor-waveform.md) estimates the shape
+from a stronger nearby patch and fits phase in the query. The small
+far-edge error gain persists. Near-edge recovery remains weaker.
+
 ## Discovery and validation
 
 The [joint Bayer gate](joint-phase-profile-support.md) pools withheld

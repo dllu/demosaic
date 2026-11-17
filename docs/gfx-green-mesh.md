@@ -26,6 +26,7 @@ preserves its original comparison pixels and provenance.
 | [Bounded guide recentering](phase-guide-recenter.md) | Both ROIs and both profiles viewed with the two JPEGs. Subtle changes to the existing diagonals, with fine crossings still unresolved |
 | [Edge exclusions during guide selection](phase-guide-edge-guard.md) | Neither width activates on the cab views. Both ROIs and profiles reproduce the unguarded result, with fine crossings still unresolved |
 | [Shared RAW waveform](shared-phase-shape.md) | Both ROIs, profiles and JPEGs viewed. Modulation changes slightly, with the fine lattice still incomplete |
+| [Disjoint-donor waveform](donor-waveform.md) | Both ROIs, profiles and JPEGs viewed for donor and scrambled shapes. Fine crossings remain incomplete |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |
