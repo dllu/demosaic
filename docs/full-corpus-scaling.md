@@ -1,6 +1,6 @@
 # Full-corpus scaling and whole-scene context training
 
-**The matched20k control is complete; the original100k trajectory has resumed.**
+**Both schedules have reached 20,000 updates. The 100k run continues.**
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
@@ -84,15 +84,29 @@ distinct IDs remain unrecorded. Reported retained-loop windows total12,490.150s;
 attempted controller phases total20,104.376s including stalls/replay/concurrency.
 Training completion, targeted numerical/native completion and pending broad
 scores are distinguished in the [endpoint report](full-corpus-control20k-review.md).
-The long run reached its own first complete ordinary-source epoch at update
-17,039. Through update 17,250 it processed 276,000 target slots, including
-92,049 ordinary and 4,847 reviewed photo visits. The audit checks all 90,778
-ordinary IDs, 17,250 source/crop rows and 69 conditioning chunks. Their
-recorded values match the short-schedule control apart from the distinct
-order-header ID. A matched 110-input native comparison is queued for the
-long run’s retained 20k milestone. [First-epoch audit](results/scene-wave-guides-v1/long100k-first-epoch.json).
 
-The long arm retains its10k state
+### Long-schedule 20k milestone
+
+The 100k run has saved update 20,000, with an intact raw/EMA/Adam/RNG state
+and its original cosine horizon. This is its first equal-budget checkpoint
+against the separately annealed control. The saved checkpoint SHA256 is
+`a4e64a3b553e5e70683850bc93e6a99f1ad020d7b2c663936bad8098d604bf70`.
+All 90,778 ordinary training sources were visited by update 17,039. Across
+320,000 target slots, both schedules recorded the same 106,823 ordinary
+visits, 5,601 reviewed visits, crop choices and data seeds. All 80
+conditioning chunks and saved Python, CPU and CUDA RNG states match. The
+order-header hashes differ, as declared. Of 91 raw and 91 EMA tensors,
+89 in each group differ between the two states. Native and paired RAW
+source IDs are unlogged, and the audit covers the recorded inputs.
+[Milestone state, independent audit and launch](results/full-corpus-long20k-progress-v1/publication.json) ·
+[First-epoch audit](results/scene-wave-guides-v1/long100k-first-epoch.json).
+
+The same 110 retained inputs are now running through fresh V120, the
+completed 20k control and the long-schedule 20k EMA. The comparison will
+measure what the different schedules deliver at the same update count.
+Training continues independently toward the 50k and 100k checkpoints.
+
+The long arm also retains its10k state
 `6cd409de7ac06d27e528fcd3c9e70944eb03fd75e74f1a59fb342359b5d765a2`.
 [Independent actual-prefix comparison](results/full-corpus-control20k-camera-v1/long-control-source-identity.json)
 checks all10k source/crop/data-seed rows against control10k,apart from their

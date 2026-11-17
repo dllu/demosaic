@@ -5,7 +5,9 @@ recovers most of its10k faint-detail loss. It does not establish better general
 fine-detail reconstruction.** Ordinary/shadow means improve slightly against
 V120; faint ADC remains0.02061 dB lower, with mixed material results. Both real
 fence families still lack convincing new faithful crossings. V120 remains the
-general recommendation; the original100k trajectory has actually resumed.
+general recommendation. The original 100k trajectory has reached its
+[audited 20k milestone](full-corpus-scaling.md#long-schedule-20k-milestone)
+and is running the matched 110-input review.
 
 Training, the110-input numerical review and actual viewing of all26 native
 boards are complete. The [complete camera follow-up](full-corpus-control20k-camera-review.md)

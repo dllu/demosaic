@@ -427,7 +427,28 @@ def _box_sums(field, centers_y, centers_x, window):
     )
 
 
-def conditional_scores(candidate, raw, colors, validation_mask, *, window=65, stride=16):
+def phase_fit_reliability(candidate, colors):
+    """Estimate supported phase-profile energy using the discovery sites only.
+
+    Whitened full/null differences contain fit noise as well as signal.
+    Subtract one unit of expected noise energy per added knot coefficient.
+    This plug-in shrinkage uses a nominal dimension and an estimated sensor
+    variance. It is not a probability or a calibrated noise test.
+    """
+    reliability = np.zeros((len(candidate.unit_slices), 3), dtype=np.float64)
+    for direction, (start, stop) in enumerate(candidate.unit_slices):
+        difference = candidate.full_cfa - candidate.conditional_null_cfa[direction]
+        for color in range(3):
+            selected = candidate.discovery_mask & (colors == color)
+            energy = np.sum(difference[selected] ** 2 / candidate.variance_cfa[selected])
+            if energy > stop - start:
+                reliability[direction, color] = 1 - (stop - start) / energy
+    return reliability
+
+
+def conditional_scores(
+    candidate, raw, colors, validation_mask, *, window=65, stride=16, reliability=None
+):
     """Assess each fixed direction/harmonic and color against its A-only null."""
     raw, colors, mask = np.asarray(raw, np.float64), np.asarray(colors), np.asarray(validation_mask)
     if (
@@ -441,6 +462,12 @@ def conditional_scores(candidate, raw, colors, validation_mask, *, window=65, st
     h, w = raw.shape
     ay, ax = [np.unique(np.r_[np.arange(0, n, stride), n - 1]) for n in raw.shape]
     units = len(candidate.unit_keys)
+    if reliability is not None and (
+        reliability.shape != (units, 3)
+        or not np.isfinite(reliability).all()
+        or np.any((reliability < 0) | (reliability > 1))
+    ):
+        raise ValueError("Require finite per-direction and color reliability in [0, 1]")
     local, global_scores = np.zeros((units, 3, h, w)), np.zeros((units, 3))
     for direction in range(units):
         for color in range(3):
@@ -455,6 +482,8 @@ def conditional_scores(candidate, raw, colors, validation_mask, *, window=65, st
                     candidate.variance_cfa,
                 ]
             ]
+            if reliability is not None:
+                full = base + reliability[direction, color] * (full - base)
             improvement[selected] = ((value - base) ** 2 - (value - full) ** 2) / variance
             energy[selected] = (full - base) ** 2 / variance
             numerator = _box_sums(improvement, ay, ax, window)
@@ -556,6 +585,7 @@ def restore_local_waves(
     conditional_delivery=False,
     guide_frequencies_xy=None,
     phase_bins=0,
+    shrink_phase_fit=False,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -585,6 +615,8 @@ def restore_local_waves(
     if type(conditional_delivery) is not bool:
         raise ValueError("Require an explicit boolean conditional-delivery choice")
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config)
+    if type(shrink_phase_fit) is not bool or (shrink_phase_fit and not phase_bins):
+        raise ValueError("Require phase bins for discovery-only phase-fit shrinkage")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
@@ -643,6 +675,11 @@ def restore_local_waves(
                     for c in candidates
                 ]
             predictors = candidates if spatial is None else [s.predict(tile) for s in spatial]
+            reliability = (
+                [phase_fit_reliability(c, layout) for c in candidates]
+                if shrink_phase_fit
+                else [None, None]
+            )
             scores = [
                 conditional_scores(
                     c,
@@ -651,8 +688,9 @@ def restore_local_waves(
                     ~c.discovery_mask,
                     window=config.validation_window,
                     stride=config.validation_stride,
+                    **({"reliability": weight} if weight is not None else {}),
                 )
-                for c in predictors
+                for c, weight in zip(predictors, reliability, strict=True)
             ]
             matched = match_directions(
                 candidates[0].frequencies_xy,
@@ -677,7 +715,13 @@ def restore_local_waves(
             units = _match_units(*candidates, matched, config.match_native_bins)
             local_max, global_max = [], []
             for a, b, _distance in units:
-                component = (components[0][a] + components[1][b]) / 2
+                if shrink_phase_fit:
+                    component = (
+                        reliability[0][a, :, None, None] * components[0][a]
+                        + reliability[1][b, :, None, None] * components[1][b]
+                    ) / 2
+                else:
+                    component = (components[0][a] + components[1][b]) / 2
                 local = np.minimum(scores[0][0][a], scores[1][0][b])
                 global_score = np.minimum(scores[0][1][a], scores[1][1][b])
                 for threshold in thresholds:
@@ -710,6 +754,11 @@ def restore_local_waves(
                     "matched_units": units,
                     "local_max": local_max,
                     "global_scores": global_max,
+                    **(
+                        {"discovery_reliability": [weight.tolist() for weight in reliability]}
+                        if shrink_phase_fit
+                        else {}
+                    ),
                 }
             )
     for key in outputs:
@@ -721,6 +770,7 @@ def restore_local_waves(
         "config": config.to_dict(),
         "parent_used_for_discovery_or_validation": False,
         **guide,
+        **({"shrink_phase_fit": True} if shrink_phase_fit else {}),
         "delivery": "conditional-full-minus-null" if conditional_delivery else "raw-wave",
         "scope": "Raw-only A/B conditional predictive scores and per-color/local support, with parent projection after scoring. Empirical plug-in scores, not calibrated confidence; parent has seen all RAW and the final corrected output is not an independent prediction.",
     }

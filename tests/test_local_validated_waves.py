@@ -47,6 +47,46 @@ def test_guided_query_refits_phase_from_only_its_discovery_samples():
     assert not np.allclose(original.coefficients[:, -4:], changed.coefficients[:, -4:])
 
 
+def test_discovery_reliability_subtracts_fit_noise_and_shrinks_the_validated_prediction():
+    raw, colors, _ = scene()
+    split = stratified_split(raw.shape, 81)
+    frequencies = ((0.078, 0.045), (-0.064, 0.108))
+    options = {
+        "shot": 8e-5,
+        "read": 2.56e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": frequencies,
+        "phase_bins": 8,
+    }
+    fit = local.fit_local_candidate(raw, colors, split, **options)
+    damaged = local.fit_local_candidate(np.where(split, raw, np.nan), colors, split, **options)
+    reliability = local.phase_fit_reliability(fit, colors)
+    np.testing.assert_array_equal(reliability, local.phase_fit_reliability(damaged, colors))
+    for direction in range(2):
+        for color in range(3):
+            samples = split & (colors == color)
+            difference = fit.full_cfa[samples] - fit.conditional_null_cfa[direction, samples]
+            energy = np.linalg.norm(difference / np.sqrt(fit.variance_cfa[samples])) ** 2
+            expected = max(0, 1 - 7 / energy) if energy else 0
+            assert reliability[direction, color] == pytest.approx(expected, abs=1e-14)
+    _, observed = local.conditional_scores(fit, raw, colors, ~split, reliability=reliability)
+    for direction in range(2):
+        for color in range(3):
+            samples = ~split & (colors == color)
+            base = fit.conditional_null_cfa[direction, samples]
+            delta = reliability[direction, color] * (fit.full_cfa[samples] - base)
+            noise = np.sqrt(fit.variance_cfa[samples])
+            norm = np.linalg.norm(delta / noise)
+            if norm:
+                similarity = np.dot((raw[samples] - base) / noise, delta / noise) / norm
+                assert observed[direction, color] == pytest.approx(similarity - norm / 2)
+            else:
+                assert observed[direction, color] == 0
+    zero = np.zeros_like(reliability)
+    field, global_scores = local.conditional_scores(fit, raw, colors, ~split, reliability=zero)
+    assert not field.any() and not global_scores.any()
+
+
 @pytest.mark.parametrize("layout", LAYOUTS)
 def test_phase_bins_recover_periodic_profile_and_ignore_withheld_measurements(layout):
     height = width = 64

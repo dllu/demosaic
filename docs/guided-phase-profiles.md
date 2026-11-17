@@ -9,6 +9,10 @@ sinusoidal control. At ISO6400, the weak wire remains largely absent at both
 conservative thresholds. Both real cab regions still lack convincing new
 crossings. [Paired scores and receipts](results/phase-profile-probe-v1/publication.json).
 
+The [discovery-only shrinkage follow-up](guided-phase-fit-shrinkage.md)
+reduces the high-noise fit's quiet and increment errors at threshold 0,
+with lower weak response and little change at the conservative thresholds.
+
 ## Measurement and validation
 
 The donor contributes only two frequencies. For each direction, each query

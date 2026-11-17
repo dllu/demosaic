@@ -24,14 +24,18 @@ has repeatedly come with extra flat-region error or false color. The
    and stronger diagonal modulation on the other. [Direction-guide test](scene-wave-guides.md).
    Fitting a phase profile from query RAW improves lower-noise recovery beyond
    a sine wave on a different retained draw across all four CFAs. ISO6400 still
-   trades weak response for higher quiet and increment errors. [Phase-profile test](guided-phase-profiles.md).
+   trades weak response for higher quiet and increment errors. Shrinking the
+   fit reduces both costs at the permissive threshold while attenuating weak
+   response. The next useful comparison is at matched quiet error.
+   [Phase-profile test](guided-phase-profiles.md) · [Shrinkage test](guided-phase-fit-shrinkage.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
-   The [100k full-corpus continuation](full-corpus-scaling.md) has resumed its
-   original1k state. The [completed20k control](full-corpus-control20k-review.md)
+   The [100k full-corpus continuation](full-corpus-scaling.md#long-schedule-20k-milestone)
+   has saved its 20k state and begun the matched image review. The
+   [completed20k control](full-corpus-control20k-review.md)
    actually covers all90,778 photos and recovers most10k faint loss, but remains
    0.02061 dB below V120 with higher fine-band error for3/4 materials. Both fences
    remain incomplete. Coverage, reviewed quota and execution co-vary; they do not

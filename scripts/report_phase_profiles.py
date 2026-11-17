@@ -22,6 +22,12 @@ def rms(value):
 
 
 def report_synthetic(plan, collection, output):
+    methods = ("V143", *plan["methods"]) if "methods" in plan else METHODS
+    comparison = ("V143", "sinusoid-t2", "phase-profile-t2")
+    labels = ("V143 EMA", "Sinusoid", "Phase bins")
+    if "shrunken-profile-t2" in methods:
+        comparison = ("V143", "phase-profile-t2", "shrunken-profile-t2")
+        labels = ("V143 EMA", "Phase bins", "Shrunken phase fit")
     scores, boards = [], []
     by_case = {row["id"]: row for row in collection["synthetic"]}
     for group in plan["groups"]:
@@ -34,11 +40,19 @@ def report_synthetic(plan, collection, output):
         quiet = arrays["quiet"][128:384, 128:384]
         region = np.s_[..., 128:384, 128:384]
         assert quiet.any()
-        output_by_method = {name: parent.copy() for name in METHODS}
+        output_by_method = {name: parent.copy() for name in methods}
         for sample in by_case[group["id"]]["rows"]:
-            with np.load(checked(sample["prediction"])) as data:
-                for method in METHODS[1:]:
-                    output_by_method[method][sample["role"]][region] = data[method]
+            bindings = [sample["prediction"]]
+            if "adopted_prediction" in sample:
+                bindings.append(sample["adopted_prediction"])
+            loaded = set()
+            for binding in bindings:
+                with np.load(checked(binding)) as data:
+                    assert loaded.isdisjoint(data.files)
+                    for method in data.files:
+                        output_by_method[method][sample["role"]][region] = data[method]
+                    loaded.update(data.files)
+            assert loaded == set(methods[1:])
         for method, rgb in output_by_method.items():
             metrics = measure(arrays, rgb)
             error = rgb.astype(np.float64) - truth
@@ -58,10 +72,7 @@ def report_synthetic(plan, collection, output):
             context["packed"] = arrays["packed"][2:3, :, 64:192, 64:192]
             values = [
                 noisy_malvar(context)[0],
-                *[
-                    output_by_method[k][2][region]
-                    for k in ("V143", "sinusoid-t2", "phase-profile-t2")
-                ],
+                *[output_by_method[k][2][region] for k in comparison],
                 truth[2][region],
             ]
             boards.append(
@@ -71,11 +82,11 @@ def report_synthetic(plan, collection, output):
                     values,
                     context,
                     {"group": group, "role": 2},
-                    labels=("Noisy Malvar", "V143 EMA", "Sinusoid", "Phase bins", "Exact GT"),
+                    labels=("Noisy Malvar", *labels, "Exact GT"),
                     triplet_indices=(0, 3, 4),
                 )
             )
-    assert len(scores) == 896 and len(boards) == 4
+    assert len(scores) == 128 * len(methods) and len(boards) == 4
     return scores, boards
 
 
@@ -83,16 +94,22 @@ def report_real(plan, collection, output):
     real = read_json(checked(plan["camera_guide_source"]))
     original = read_json(Path(real["plan"]["path"]).with_name("result.json"))
     old = {v["id"]: v for v in original["boards"]}
+    adopted = {}
+    if "adopted_report" in plan:
+        prior = read_json(checked(plan["adopted_report"]))
+        adopted = {v["id"]: v for v in prior["camera_boards"]}
+        assert adopted.keys() == old.keys()
     by_case = {row["id"]: row for row in collection["camera"]}
     boards = []
     for row in plan["camera_cases"]:
         key = row["id"]
         baseline = old[key]
-        source = np.asarray(Image.open(checked(baseline["image"])))
+        original_panels = adopted.get(key, baseline)
+        source = np.asarray(Image.open(checked(original_panels["image"])))
         aligned = by_case[key]
         with np.load(checked(row["query_arrays"])) as data:
             calibration = {k: data[k] for k in ("wb", "matrix")}
-        with np.load(checked(aligned["prediction"])) as data:
+        with np.load(checked(aligned.get("adopted_prediction", aligned["prediction"]))) as data:
             phase, sinusoid = [data[k] for k in ("phase-profile-t2", "sinusoid-t2")]
         with np.load(checked(row["prediction"])) as data:
             parent = data["parent"]
@@ -102,16 +119,24 @@ def report_real(plan, collection, output):
         assert w == h == 160
         roi = np.s_[:, y : y + h, x : x + w]
         exposure = baseline["display_exposure"]
-        srgb = display(phase[None], calibration, exposure=exposure)[0][roi]
-        phase_pixels = np.rint(srgb.transpose(1, 2, 0) * 255).astype(np.uint8)
+        added, added_label = phase, "Phase bins guide"
+        additions = {}
+        if adopted:
+            with np.load(checked(aligned["prediction"])) as data:
+                added = data["shrunken-profile-t2"]
+            added_label = "Shrunken phase fit"
+            additions["shrunken_correction_RMS_DN16"] = rms(
+                added[roi].astype(np.float64) - parent[roi]
+            )
+        srgb = display(added[None], calibration, exposure=exposure)[0][roi]
+        added_pixels = np.rint(srgb.transpose(1, 2, 0) * 255).astype(np.uint8)
         pixels = []
-        for i, panel in enumerate(baseline["panels"]):
+        for i, panel in enumerate(original_panels["panels"]):
             px, py, pw, ph = panel["png_xywh"]
-            if i == 3:
-                pixels.append(("Sinusoid guide", source[py : py + ph, px : px + pw]))
-                pixels.append(("Phase bins guide", phase_pixels))
-            else:
-                pixels.append((panel["label"], source[py : py + ph, px : px + pw]))
+            label = "Sinusoid guide" if i == 3 and not adopted else panel["label"]
+            pixels.append((label, source[py : py + ph, px : px + pw]))
+            if i == (4 if adopted else 3):
+                pixels.append((added_label, added_pixels))
         image = Image.new("RGB", (8 + 168 * len(pixels), 192), "#eeeeee")
         draw = ImageDraw.Draw(image)
         panels = []
@@ -137,6 +162,7 @@ def report_real(plan, collection, output):
                 "prediction": aligned["prediction"],
                 "phase_correction_RMS_DN16": rms(phase[roi].astype(np.float64) - parent[roi]),
                 "sinusoid_correction_RMS_DN16": rms(sinusoid[roi].astype(np.float64) - parent[roi]),
+                **additions,
             }
         )
     assert len(boards) == 8

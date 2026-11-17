@@ -11,7 +11,9 @@ The [completed full-corpus20k control](full-corpus-control20k-review.md) has
 actually visited all90,778 photos. Faint mean recovers0.59370 dB from10k,
 remaining0.02061 dB below V120; ordinary/shadow gains are small and three faint
 materials have higher fine-band error. Both real fence families were viewed
-without convincing new crossings. The original100k trajectory has resumed.
+without convincing new crossings. The original 100k trajectory has reached
+its [audited 20k milestone](full-corpus-scaling.md#long-schedule-20k-milestone)
+and its matched 110-input review is running.
 The20k control's [full427 benchmark](full-corpus-primary-admission.md) is running. The
 [completed camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
 known and lose0.04067 unseen versus V120, with mostly channel-mean unseen costs.
@@ -55,8 +57,11 @@ The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens
 some lower-noise synthetic wires compared with the sinusoid and lowers their
-paired increment error. ISO6400 weak recovery and cab crossings remain open.
-[Direction-guide review](scene-wave-guides.md) · [Phase-profile results](guided-phase-profiles.md).
+paired increment error. Discovery-only shrinkage reduces excess quiet error
+at the permissive ISO6400 setting while attenuating wire response too.
+ISO6400 weak recovery at conservative settings and real cab crossings
+remain open. [Direction-guide review](scene-wave-guides.md) ·
+[Phase-profile results](guided-phase-profiles.md) · [Shrinkage results](guided-phase-fit-shrinkage.md).
 
 These are useful, bounded tradeoffs, not a general replacement for V120. The
 [new ADC-bin helper](adc-bin-consistency.md) improves selected calibrated

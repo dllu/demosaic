@@ -24,6 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
+Latest scaling and weak-detail work is recorded in the [20k milestone and phase-fit shrinkage entry](2026-11-17-11-22-54-phase-fit-shrinkage-long20k.md).
+
 Latest context review: [64-source analysis and canonical primary admission](2026-11-17-04-17-00-scene-development64-primary-admission.md).
 
 Training follow-up: [checkpoint-write recovery with retained6k state](2026-11-17-04-36-50-full-corpus-checkpoint-recovery.md).
