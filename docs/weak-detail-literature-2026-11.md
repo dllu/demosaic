@@ -345,6 +345,11 @@ retains some response lost under the standard repeat loss.
 Calibrating to the ordinary control's response lowers coupled
 error by 0.085 DN16 and raises independent error by 0.049 DN16
 on the additional sources.
+The [completed standard repeat run](paired-repeat-stability.md#final-1200-update-evaluation)
+confirms the gain reduction. Its stronger loss leaves ISO6400
+independent response 0.58 percentage points below Corpus 100k.
+Its lighter loss gives higher variance at response matched on
+a separate set of photos.
 
 The [readout-row stress test](withheld-row-noise.md) shows that
 disjoint Bayer pixels can still validate the same simulated noise.

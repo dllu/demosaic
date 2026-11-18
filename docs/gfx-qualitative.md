@@ -15,6 +15,8 @@ historical boards. Use these reports for the current completed comparisons:
   also keeps both coarse crossing directions and a smooth sky.
   [Completed projected repeat heads](paired-shape-stability.md#standing-gfx100s-comparisons)
   keep the sky smooth and coarse fence coherent, with soft thin wires and foliage.
+  [Standard repeat endpoint](paired-repeat-stability.md#standing-gfx100s-comparisons)
+  shows similar sky and coarse crossings with both repeat-loss weights.
 - [V120/V121 primary and full-frame review](v120-v121-primary.md): the general
   baseline, including matched full-frame noise conditioning.
 - [V131 20k endpoint](v131-endpoint-quality.md) and

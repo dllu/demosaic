@@ -100,6 +100,9 @@ change in independent-draw error at matched correction strength.
 [Three same-law redraws](paired-repeat-stability.md#starting-model-on-64-photos-with-three-redraws)
 show the paired head's independent-draw variance increase
 offsetting its reduction in shared increment error.
+[Completed standard repeat training](paired-repeat-stability.md#final-1200-update-evaluation)
+reduces ISO6400 independent error with the stronger weight
+while losing 0.58 percentage points of response versus Corpus 100k.
 [Bayer innovation smoothing](paired-feedback-paths.md) slightly
 reduces error versus a response-matched paired head. The standing
 fine mesh and the tradeoff versus Corpus 100k remain.

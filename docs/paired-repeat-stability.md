@@ -32,7 +32,11 @@ standing GFX families and the fixed evaluation sources.
 The raw and EMA weights are saved separately. Three qualification
 updates ran on six sources outside the training schedule and
 verified finite gradients, identical initial head outputs, exact
-repeat targets and a frozen parent. The 1,200-update run is active.
+repeat targets and a frozen parent. Training completed all 1,200
+updates in 4,385.56 seconds. The checkpoint holds raw and EMA
+weights for the three heads and their optimizer states at SHA256
+`42f8e4efb77ba5c221af557d771faae19c08e8a60a80a78bfdc86705a2a6b528`.
+The evaluation uses the EMA weights and CUDA IEEE FP32.
 [Frozen plan and qualification evidence](results/paired-repeat-stability-v2/preflight.json).
 
 ## Native evaluation design
@@ -51,7 +55,7 @@ cycles/pixel luminance band. On each source, the mean product of
 different-draw errors estimates error shared across redraws.
 The sample variance estimates the draw-sensitive part. These
 terms sum to the mean squared error of the three individual
-predictions. The report will also score exact-flat texture, low
+predictions. The report also scores exact-flat texture, low
 bands and color bias, with source-level resampling. The matched
 control, original paired head, frozen Corpus 100k and V120 enter
 the comparisons. Both standing GFX families have fixed native
@@ -121,7 +125,6 @@ increment RMS by +0.003 DN16 [−0.012, 0.023], flat RMS by
 [−5.4, 20.5]. The scalar was fitted on these same 16 sources
 as a descriptive control. Most of the apparent variance gain
 at this checkpoint can be reproduced by weakening the correction.
-The 96-photo endpoint evaluation and actual GFX viewing are pending.
 [Interim metrics and source intervals](results/paired-repeat-stability-v2/checkpoint300-summary.json) ·
 [Frozen checkpoint evaluation](results/paired-repeat-stability-v2/checkpoint300-evidence.tar.xz).
 
@@ -168,3 +171,108 @@ repeat term whose value stays fixed when the starting correction
 is uniformly weakened. Its eventual response matching uses
 the original 64 photos to set the scales and the additional 32
 to measure transfer at those scales.
+
+## Final 1,200-update evaluation
+
+Numerical evaluation covers all 96 photos, both noise priors,
+both within-pair laws and three independent complete redraws
+per law. The scored weights are the EMA heads above frozen
+Corpus 100k with the two-window RAW support guard. Evaluation
+took 183.44 seconds with saved parent predictions.
+
+| ISO6400 method | Aligned response, coupled / independent | Fine-increment RMS, coupled / independent (DN16) | Flat RMS, coupled / independent (DN16) |
+| --- | ---: | ---: | ---: |
+| V120 EMA | 66.230% / 66.955% | 96.694 / 117.321 | 4.920 / 4.888 |
+| Corpus 100k EMA | 66.623% / 67.308% | 96.043 / 116.867 | 4.397 / 4.329 |
+| Starting paired EMA | 67.068% / 67.756% | 95.049 / 117.238 | 4.474 / 4.403 |
+| Matched ordinary control | 66.835% / 67.519% | 95.506 / 116.983 | 4.430 / 4.361 |
+| Repeat loss 0.25 | 66.627% / 67.311% | 95.882 / 116.861 | 4.407 / 4.339 |
+| Repeat loss 0.75 | 66.047% / 66.726% | 96.815 / 116.647 | 4.459 / 4.391 |
+
+The 0.25 endpoint returns independent response and increment
+error close to Corpus 100k. The 0.75 endpoint lowers independent
+increment error by 0.220 DN16 and variance by 293 DN16² against
+Corpus 100k. It also loses 0.582 percentage points of aligned
+response and adds 0.062 DN16 of exact-flat error. At ISO400
+the same endpoint lowers independent increment RMS by 0.205
+DN16, lowers flat RMS by 0.061 DN16 and loses 0.418 percentage
+points of aligned response. The ordinary control has higher
+response than either repeat loss at both noise levels.
+
+### Separate calibration and transfer at the endpoint
+
+The original 64 photos set the scalar matches. On the additional
+32 ISO6400 photos at nominal strength, the 0.25 head reduces
+independent variance by 116.9 DN16² versus ordinary control
+and loses 0.189 percentage points of aligned response.
+At equal calibration response, the ordinary control needs
+only 3.21% of its nominal strength. On the 32 independent
+holdouts the 0.25 head then adds 27.6 DN16² of variance
+[8.5, 52.1] and changes increment error by +0.010 DN16
+[−0.039, 0.077]. Matching exact-flat error instead changes
+increment RMS by −0.056 DN16 [−0.097, −0.024] and loses
+0.103 percentage points of response.
+The 0.75 correction has negative added response on the
+calibration photos, leaving no positive same-response match
+to the ordinary control.
+
+These results preserve the early finding that the variance
+penalty tends to lower the correction's recovered response.
+The complete score includes both nominal and matched
+strength comparisons. The fixed broad PSNR panels measure
+the full-model checkpoints separately.
+[Endpoint checkpoint, scores and source hashes](results/paired-repeat-stability-v2/endpoint-summary.json) ·
+[Source-level archive and strength sweep](results/paired-repeat-stability-v2/endpoint-evidence.tar.xz) ·
+[PSNR history](performance-history.md).
+
+## Native exact-target crops
+
+These triplets show noisy Malvar, the 0.75 EMA result, and
+exact GT. Each native 160×160 crop uses `[48,48,160,160]`
+inside the saved 256×256 independent ISO6400 query. The
+shot/read pair is `0.00128/6.5536e-6`, with ADC16 black
+fraction 0.03, capture exposure 0.33, display exposure ×3.0303
+and contrast ×2. The EMA checkpoint is bound above and in the
+publication receipt.
+
+![Amsterdam windows, noisy, high-repeat weight and exact GT](images/paired-repeat-stability-v2/094-iso6400-independent-r0-role0-triplet.png)
+
+The largest independent fine-increment error reduction
+versus ordinary control is on the Amsterdam source. Strong
+windows and bars remain visible, with softer low-contrast
+detail. Query origin `[380,118]`, GRBG. Slaunger, CC BY-SA 4.0.
+[Source photo](https://commons.wikimedia.org/wiki/File:Couple_selfie_stick_Konigssluis_Amsterdam_2016-09-13-6621.jpg) ·
+[All methods](images/paired-repeat-stability-v2/094-iso6400-independent-r0-role0-comparison.png) ·
+[Flat comparison](images/paired-repeat-stability-v2/094-iso6400-independent-r0-role2-comparison.png).
+
+![Black kite, noisy, high-repeat weight and exact GT](images/paired-repeat-stability-v2/067-iso6400-independent-r0-role0-triplet.png)
+
+The largest regression is on the bird edge. The sky stays
+clean and the feather detail remains soft. Query origin
+`[228,102]`, GBRG. Tisha Mukherjee, CC BY-SA 4.0.
+[Source photo](https://commons.wikimedia.org/wiki/File:Black_Kite_in_Baruipur_October_2025_by_Tisha_Mukherjee_01.jpg) ·
+[All methods](images/paired-repeat-stability-v2/067-iso6400-independent-r0-role0-comparison.png).
+
+## Standing GFX100S comparisons
+
+All eight native 160×160 boards were viewed. The main
+DSCF3879 crops use the nominal ISO6400 profile and ×4
+display exposure. DSCF3842 uses ×16, the nominal profile,
+and transferred DSCF3879 shot/read
+`0.0014635776/1.0715704e-6`. The DSCF3880 and DSCF3835
+ISO100 AHD and the two cab camera JPEGs provide qualitative
+references. Aperture, exposure and moving subjects differ.
+
+| View | Native comparisons |
+| --- | --- |
+| DSCF3879 main scene | [Sky](images/paired-repeat-stability-v2/main-overcast-sky-main-overcast-sky.png) · [Building](images/paired-repeat-stability-v2/main-building-detail-main-building-detail.png) · [Foliage](images/paired-repeat-stability-v2/main-foliage-main-foliage.png) · [Coarse fence](images/paired-repeat-stability-v2/main-chain-link-fence-main-chain-link-fence.png) |
+| DSCF3842 nominal | [Left](images/paired-repeat-stability-v2/mesh-nominal-fine-green-mesh-left.png) · [Right](images/paired-repeat-stability-v2/mesh-nominal-fine-green-mesh-right.png) |
+| DSCF3842 transferred | [Left](images/paired-repeat-stability-v2/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/paired-repeat-stability-v2/mesh-profile3879-fine-green-mesh-right.png) |
+
+The strong-repeat head changes the sky by 0.0018 DN16 RMS.
+The sky stays smooth and the coarse fence keeps its crossing
+directions. Thin wires and fine foliage stay soft. Changes
+in the cab range from 0.182 to 0.986 DN16 RMS in camera RGB,
+with incomplete fine crossings and remaining background mottle.
+[Main GFX map](gfx-qualitative.md) ·
+[Cab mesh map](gfx-green-mesh.md).
