@@ -304,6 +304,13 @@ The [distant RAW follow-up](distant-row-reference.md) restores
 reference strips and zero observed null activations. The same
 estimator can transfer genuine stripe texture from bad references.
 
+On the [64-photo measured-donor test](natural-raw-donor-evidence.md),
+including the donor's coarse structure in the query fit reduces
+false accepts on masked-detail targets. An independently observed
+registered copy improves 7/64 coupled ISO6400 crops above Corpus
+100k. A luminance-only lift avoids the added color speckles. No
+disjoint donor qualifies on the eight standing GFX comparisons.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

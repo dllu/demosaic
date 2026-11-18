@@ -76,6 +76,9 @@ historical boards. Use these reports for the current completed comparisons:
   compares the first localized EMA with V120, Corpus 100k and spatial 12k.
   The sky stays visibly smooth and both coarse fence directions survive.
   Thin cables and fine leaves remain soft.
+- [Disjoint RAW patch search](natural-raw-donor-evidence.md#standing-gfx100s-scenes)
+  keeps the Corpus 100k crop bytes in all four main contexts.
+  The foliage coarse match fails the local fine-detail check.
 - [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
   compares both 800-update endpoints against 100k and V120. The sky
   stays smooth and the coarse lattice and dark foliage look close to 100k.
