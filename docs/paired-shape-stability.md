@@ -58,3 +58,37 @@ correction strength on every source.
 
 Endpoint numerical evaluation and both GFX100S native
 reviews are pending.
+
+## First checkpoint at 96 updates
+
+The checkpoint EMA
+`1f8b3e76b529e13ed691933cf9408604eb2c6c573e5190dbc0e036db8d26fc95`
+was tested on all 96 photos at ISO6400. The first 16 also have a
+separate numerical review with all three frequency bands.
+For the additional 32 photos, the nominal projected head recovers
+0.046 percentage points more aligned detail than the standard
+repeat head with independent pairs. Its increment RMS is
+0.069 DN16 higher, flat RMS is 0.012 DN16 higher and
+between-draw variance is 43.5 DN16² higher.
+
+| Independent-pair comparison on 32 additional photos | Aligned response difference (percentage points) | Fine-increment RMS difference (DN16) | Flat RMS difference (DN16) | Between-draw variance difference (DN16²) |
+| --- | ---: | ---: | ---: | ---: |
+| Projected versus standard repeat, calibrated to the same response | +0.001 | −0.008 | +0.0050 | −0.4 |
+| Projected versus ordinary control, calibrated to the same response | −0.005 | +0.014 | −0.0014 | +6.4 |
+| Projected versus ordinary control, calibrated to the same flat error | −0.005 | +0.015 | −0.0013 | +7.0 |
+
+Each calibration uses only the original 64 photos. The scales stay
+fixed for the 32 additional sources, so small response or flat
+differences can remain there. Against standard repeat at calibrated
+response, the independent variance interval is [−7.0, 4.6] DN16².
+The same comparison lowers coupled increment RMS by 0.021 DN16,
+with interval [−0.034, −0.009], and increases flat RMS by 0.005 DN16.
+Compared with the ordinary control calibrated to the same response,
+the independent variance difference is +6.4 DN16² [1.0, 13.4].
+
+The projection retains some nominal response lost by standard
+repeat training. Its first checkpoint still shows the independent
+detail versus noise tradeoff against the ordinary control.
+Training and actual native endpoint viewing are pending.
+[Numerical results and frozen scales](results/paired-shape-stability-v1/checkpoint96-summary.json) ·
+[Exact source-level evidence](results/paired-shape-stability-v1/checkpoint96-evidence.tar.xz).
