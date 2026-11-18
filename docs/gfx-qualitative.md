@@ -98,6 +98,9 @@ historical boards. Use these reports for the current completed comparisons:
   fallback in all four areas. The sky stays smooth and visible coarse
   crossings remain. The [50k ADC projection](full-corpus-long50k-native.md#calibrated-adc-follow-up)
   also verifies exact bypass on these positive-noise inputs.
+- [Opposing donor checks](bracket-phase-geometry.md) reproduce all
+  four guarded crops in both orientations. The donor neighborhood
+  view shows an interruption in the coarse lattice above the query.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

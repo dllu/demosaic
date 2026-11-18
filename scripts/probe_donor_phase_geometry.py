@@ -93,7 +93,7 @@ def restore(parent, packed, colors, geometry, noise, cfg, thresholds, near, curv
     return {t: output["weighted-refit", t] for t in thresholds}, diagnostics
 
 
-def synthetic_donor(plan, case, seed, noise, output):
+def sample_donor_raw(case, noise, box, repeat):
     from demosaic.experiments.data.edge_response import edge_observation
 
     recipe = case["metadata"]["recipe"] | {
@@ -104,13 +104,17 @@ def synthetic_donor(plan, case, seed, noise, output):
         "mask_radii": [116.0, 116.0],
         "amplitude": 0.055,
         "weak_fraction": 1.0,
-        "phase_position_offset_xy": plan["donor_xywh"][:2],
+        "phase_position_offset_xy": box[:2],
         "phase_reference_size": 512,
     }
-    data, metadata = edge_observation(
-        recipe, "far", "RGGB", plan["donor_noise_repeat"], condition=noise
+    data, metadata = edge_observation(recipe, "far", "RGGB", repeat, condition=noise)
+    return data["packed"][2], data["colors"][2], metadata
+
+
+def synthetic_donor(plan, case, seed, noise, output):
+    packed, colors, metadata = sample_donor_raw(
+        case, noise, plan["donor_xywh"], plan["donor_noise_repeat"]
     )
-    packed, colors = data["packed"][2], data["colors"][2]
     fit = transport_donor_geometry(
         packed,
         colors,
@@ -251,6 +255,10 @@ def report(path):
     receipt = root / "output/collection.json"
     done = read_json(receipt)
     assert done["plan"] == reference(path)
+    options = plan.get("rendering", {})
+    labels = options.get("labels", ("Guarded guide", "Fixed planar", "Donor curvature"))
+    picture_sources = options.get("sources", (80, 83))
+    caption = options.get("camera_label", "Donor curvature")
     output = root / "review"
     output.mkdir()
     rows, boards = [], []
@@ -284,7 +292,7 @@ def report(path):
                     "iso400",
                     "far",
                     0.02,
-                ) and case["source"] in (80, 83):
+                ) and case["source"] in picture_sources:
                     p = parent[2][ROI]
                     with np.load(checked(case["sensor"])) as f:
                         ctx = {k: f[k][2:3] for k in ("colors", "wb", "matrix")}
@@ -301,23 +309,17 @@ def report(path):
                             ],
                             ctx,
                             {"case_receipt": record["case"], "operating_point": setting},
-                            labels=(
-                                "Noisy Malvar",
-                                "V143 EMA",
-                                "Guarded guide",
-                                "Fixed planar",
-                                "Donor curvature",
-                                "Exact GT",
-                            ),
-                            triplet_indices=(0, 4, 5),
+                            labels=("Noisy Malvar", "V143 EMA", *labels, "Exact GT"),
+                            triplet_indices=(0, len(labels) + 1, len(labels) + 2),
+                            contrast=options.get("contrast", 1),
                         )
                     )
     old = read_json(checked(plan["camera_baseline"]))
     cameras = [
-        make_camera_board(output, a, b, label="Donor curvature")
+        make_camera_board(output, a, b, label=caption)
         for a, b in zip(old["camera"], done["camera"], strict=True)
     ]
-    assert len(rows) == 192 and len(boards) == 2 and len(cameras) == 8
+    assert len(rows) == 64 * len(plan["arms"]) and len(boards) == 2 and len(cameras) == 8
     write_json(
         output / "result.json",
         {

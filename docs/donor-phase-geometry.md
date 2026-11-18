@@ -69,6 +69,11 @@ gain from single-donor geometry. The final analysis independently
 recomputes 1,152 scalar reductions without fresh neural forwards.
 [Independent error and geometry audit](results/donor-phase-geometry-v2/independent-audit.json).
 
+The [opposing-donor follow-up](bracket-phase-geometry.md) improves
+weak response on the lower-noise far panel. Testing each donor
+against its own planar fit prevents false curvature in the four
+period-mismatch checks.
+
 ## Native crops
 
 The two displayed cases are the ISO400 far scenes with an accepted

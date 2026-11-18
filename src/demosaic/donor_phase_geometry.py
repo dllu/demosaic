@@ -139,7 +139,7 @@ def _model_columns(background, coords, models):
     return np.column_stack((background, *[_phase_basis(coords, value) for value in models]))
 
 
-def _fit_fold(raw, cfa, discovery, frequencies, center_delta, shot, read):
+def _fold_fields(raw, cfa, discovery, shot, read):
     xx, yy, affine, _ = geometry(raw.shape)
     span = min(raw.shape)
     coords = np.column_stack(
@@ -155,6 +155,15 @@ def _fit_fold(raw, cfa, discovery, frequencies, center_delta, shot, read):
     y_train = raw.ravel()[selected]
     fitted = np.linalg.lstsq(background[selected], y_train, rcond=1e-10)[0]
     inverse_sigma = 1 / np.sqrt(read + shot * np.maximum(background @ fitted, 1e-6))
+    return coords, background, selected, green & ~discovery.ravel(), inverse_sigma, fitted
+
+
+def _fit_fold(raw, cfa, discovery, frequencies, center_delta, shot, read, fields=None):
+    if fields is None:
+        fields = _fold_fields(raw, cfa, discovery, shot, read)
+    coords, background, selected, testing, inverse_sigma, fitted = fields
+    span = min(raw.shape)
+    y_train = raw.ravel()[selected]
     residual = np.zeros(raw.size)
     residual[selected] = (y_train - background[selected] @ fitted) * inverse_sigma[selected]
     guesses = _initial_models(residual.reshape(raw.shape), frequencies, span)
@@ -179,7 +188,6 @@ def _fit_fold(raw, cfa, discovery, frequencies, center_delta, shot, read):
                 raw.shape,
                 curved=use_hessian,
             )
-    testing = green & ~discovery.ravel()
     gains = []
     for k in (0, 1):
         errors = []

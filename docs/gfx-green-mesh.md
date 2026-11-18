@@ -33,6 +33,7 @@ preserves its original comparison pixels and provenance.
 | [RAW guide cross-check](phase-guide-crosscheck.md) | Both ROIs and profiles viewed with both JPEGs. The left stays identical to the guarded fit. The right changes slightly, with fine crossings still incomplete |
 | [RAW phase drift](phase-drift.md) | All four cab ROIs/profile combinations reproduce the prior cross-check exactly. Fine crossings remain incomplete |
 | [Measured donor geometry](donor-phase-geometry.md) | Neither adjacent donor passes the transfer checks under either profile. Both sides reproduce the guarded result, with incomplete crossings |
+| [Opposing RAW donors](bracket-phase-geometry.md) | All vertical checks reproduce the guarded fit. The transferred-profile left crop changes subtly with horizontal donors, with fine crossings still incomplete |
 | [Faint ADC follow-up](full427-faint-adc.md) | Positive-noise projection returns the earlier Corpus20k and V120 output on both ROIs and profiles, verified against the inputs underlying the retained boards |
 | [50k ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up) | The bin projection also bypasses the original 50k outputs exactly for both positive-noise profiles |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |

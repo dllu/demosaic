@@ -166,6 +166,10 @@ geometry estimation on stronger measurements as a possible next step.
 The [measured donor test](donor-phase-geometry.md) gives a small gain
 on the lower-noise far curved subset with the same fixed planar
 center frequencies. All reviewed GFX queries use the guarded fallback.
+The [opposing-donor comparison](bracket-phase-geometry.md) gives stronger
+ISO400 far weak response with matched quiet error. The ISO6400 far
+weak-increment error rises slightly, and the visible cab crossings
+remain incomplete.
 
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),

@@ -104,6 +104,11 @@ has repeatedly come with extra flat-region error or false color. The
    from 2.60% to 4.29% at matched quiet error. Only one curved source's
    weak direction is accepted under either profile. Both real fences
    fall back to the guarded fit. [Measured donor geometry](donor-phase-geometry.md).
+   Opposing donors improve lower-noise far recovery. The individual
+   planar checks resolve period-mismatch failures on the stress panel.
+   Real donor neighborhoods reveal rails and cab geometry interrupting
+   the lattice. Scene context can help choose compatible donor regions
+   before comparing their RAW evidence. [Opposing donors](bracket-phase-geometry.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
