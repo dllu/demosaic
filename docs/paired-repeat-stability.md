@@ -125,6 +125,44 @@ The 96-photo endpoint evaluation and actual GFX viewing are pending.
 [Interim metrics and source intervals](results/paired-repeat-stability-v2/checkpoint300-summary.json) ·
 [Frozen checkpoint evaluation](results/paired-repeat-stability-v2/checkpoint300-evidence.tar.xz).
 
+## Response matching at 600 updates on separate photos
+
+This ISO6400 replay evaluates EMA checkpoint
+`4a04d60af2838ed68a6f27275d6db58cbf6c9f12fbbcf010f6d05fff9a417b4d`.
+The original 64 photos set one response-matching scale per noise
+law. The additional 32 photos measure the resulting tradeoff
+with those scales fixed. At nominal strength, the 0.25 repeat loss
+lowers independent-draw variance by 102.4 DN16² against its matched
+control and loses 0.153 percentage points of aligned response.
+With the higher repeat weight, the independent response
+change versus the parent falls from the control's +0.271
+percentage points to −0.025 on the calibration photos.
+There is no positive matched-response scale for that arm.
+
+| 0.25 repeat loss versus response-matched control on the additional 32 photos | Coupled | Independent |
+| --- | ---: | ---: |
+| Frozen control scale from the original 64 | 0.361 | 0.366 |
+| Aligned response difference (percentage points) | −0.006 | −0.011 |
+| Fine-increment RMS difference (DN16) | −0.063 | +0.018 |
+| Exact-flat RMS difference (DN16) | +0.0025 | +0.0026 |
+| Between-draw variance difference (DN16²) | −3.7 | +17.5 |
+
+The independent-draw intervals are [−0.036, 0.014] percentage
+points for aligned response, [−0.009, 0.058] DN16 for increment
+RMS and [5.2, 32.4] DN16² for variance. Coupled increment error
+falls at matched response, with interval [−0.114, −0.023] DN16.
+
+The starting head adds 315.2 DN16² of independent-draw variance
+on the additional photos. Of that, 80.9 DN16² is the correction's
+own variance and 234.3 DN16² comes from twice its covariance
+with the parent's fine-increment error. Under coupled noise that
+covariance term is −27.7 DN16². The original correction moves
+with the parent's errors on independently noisy pairs, so
+suppressing only the correction's own variance leaves most
+of this cost.
+[600-update metrics and covariance decomposition](results/paired-repeat-stability-v2/checkpoint600-summary.json) ·
+[Source-level evidence](results/paired-repeat-stability-v2/checkpoint600-evidence.tar.xz).
+
 The [projected repeat follow-up](paired-shape-stability.md) tests a
 repeat term whose value stays fixed when the starting correction
 is uniformly weakened. Its eventual response matching uses

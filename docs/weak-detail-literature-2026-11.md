@@ -326,6 +326,11 @@ the paired head lowers the shared fine-increment error by about
 increases by 405 DN16² for independent pairs and falls by
 39 DN16² for coupled pairs. The follow-up trains against the
 draw-dependent term with matched controls.
+[At 600 updates on separate photos](paired-repeat-stability.md#response-matching-at-600-updates-on-separate-photos),
+the lighter repeat term loses its variance benefit at matched
+independent-draw response. About three quarters of the starting
+head's added variance on these photos comes from positive
+covariance with the parent's fine-increment error.
 
 The [readout-row stress test](withheld-row-noise.md) shows that
 disjoint Bayer pixels can still validate the same simulated noise.
