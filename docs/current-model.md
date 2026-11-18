@@ -189,6 +189,11 @@ ISO400 gap error and exterior attenuation at matched strength. It
 adds no fresh ISO6400 admissions and cuts some genuinely continuous
 wires at ISO400. Fine cab crossings remain soft.
 
+A [curved foreground and smoothly varying rear model](mesh-gap-information.md)
+prevents six false cuts on continuous ISO400 wires and preserves
+the control’s gap outputs when used only in the audit. Joint
+nomination and audit increase error in the independent ISO6400 repeats.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

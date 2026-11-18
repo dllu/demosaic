@@ -177,3 +177,8 @@ This is a scoped inference experiment using existing checkpoints.
 The fresh high-noise misses and false cuts on continuous wires
 keep geometry refinement experimental. The fixed full427 and
 known/unseen camera benchmarks apply to full checkpoints.
+
+The follow-up separates exact template alignment and nuisance
+projection, then compares curved foregrounds and affine rear
+contrast on fresh continuous and gapped scenes.
+[Smooth contrast comparison](mesh-gap-information.md).

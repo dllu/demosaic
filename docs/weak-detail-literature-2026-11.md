@@ -268,6 +268,12 @@ archived angle miss. Four of five high-noise gaps that reach the
 averaged audit in the fresh panel still fail it. Several continuous
 ISO400 wires receive spurious cuts. [Refined gap geometry](mesh-refined-footprint.md).
 
+Projecting out the continuing wave retains 85–95% of the exact
+ISO6400 test-template norm. Curvature and smoothly changing rear
+contrast prevent false cuts in a fresh ISO400 set. The joint
+nomination slightly worsens the independent ISO6400 gap errors.
+[Gap evidence and smooth contrast](mesh-gap-information.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

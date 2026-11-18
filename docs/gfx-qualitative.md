@@ -142,6 +142,9 @@ historical boards. Use these reports for the current completed comparisons:
   pixels identical to the adjacent-donor path. Coarse crossings
   remain visible after a small local contrast cut.
   [Refined footprint review](mesh-refined-footprint.md#standing-gfx100s-review).
+- A curved foreground and affine rear contrast preserve the
+  adjacent-donor coarse crossings. The sky, foliage and building
+  retain their previous pixels. [Native nuisance comparison](mesh-gap-information.md#standing-gfx100s-review).
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

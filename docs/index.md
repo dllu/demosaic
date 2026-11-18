@@ -57,6 +57,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [averaged gap nominations](mesh-averaged-gap.md) ·
 [tapered gap strength](mesh-tapered-strength.md) ·
 [off-grid gap refinement](mesh-refined-footprint.md) ·
+[curvature and smooth wire contrast](mesh-gap-information.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·
