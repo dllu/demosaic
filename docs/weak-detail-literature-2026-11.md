@@ -217,6 +217,11 @@ fallback adds visible crossings and keeps the smooth sky. The exterior
 phase fit improves continuous ISO6400 synthetic weak-wire response and
 extends some patterns into gaps. The right-cab gains still leave uneven
 contrast and overly regular crossings in places.
+The [smooth support follow-up](smooth-mesh-support.md) removes some
+synthetic ISO400 gap texture and exposes false cuts beside steps.
+A reserve-fitted step restores those continuous cases in a retrospective
+replay. The largest tested ISO6400 false continuation has weak held-out
+support for a cut even with exact gap geometry and background.
 
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.

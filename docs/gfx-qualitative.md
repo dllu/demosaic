@@ -115,6 +115,9 @@ historical boards. Use these reports for the current completed comparisons:
   keep the earlier main-scene crops and show new crossings in the
   separate right fine cab crop. The sky stays smooth and the main
   fence crossings remain visible.
+- [Smooth RAW support](smooth-mesh-support.md#standing-gfx100s-review)
+  slightly reduces coarse fence contrast. Sky, foliage and building
+  retain the same pixels in the smooth and step variants.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

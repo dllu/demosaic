@@ -99,6 +99,11 @@ added gap RMS from 83.19 to 30.55 DN16 at nearly equal response. Total
 gap error remains high because the local prediction has additional
 errors. The fixed exterior-phase fit remains an experiment.
 
+The [smooth-support follow-up](smooth-mesh-support.md) tests new gaps
+and continuous wires near steps. It improves gap localization at
+ISO400. A large high-noise false continuation survives even when the
+gap's exact support is supplied to the predictive check.
+
 The two ISO6400 triplets share the native `[80,80,160,160]` region inside
 320-pixel fields, noisy Malvar, ADC16 black fraction 0.03, shot/read
 `0.00128/6.5536e-6`, identity WB and matrix, exposure ×1 and shared

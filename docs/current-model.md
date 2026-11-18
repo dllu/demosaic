@@ -140,6 +140,12 @@ regular than parts of the ISO100 reference. Use `adjacent_donors=True`
 in the experimental crop helper. The exterior phase fit helps
 continuous synthetic ISO6400 wires and can extend texture into gaps.
 
+The [smooth RAW support study](smooth-mesh-support.md) localizes some
+ISO400 gaps and fades continuous wires alongside steps. A retrospective
+fit with a shared step restores the continuous cases and lowers added
+gap texture. The largest ISO6400 gap persists even with known support
+and phase in the audit. The new masks remain research variants.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens
