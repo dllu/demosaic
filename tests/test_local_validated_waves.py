@@ -52,6 +52,71 @@ def test_direction_selection_keeps_unsupported_guides_out_of_delivery():
     assert np.max(np.abs(one[target] - parent)) > 0.0001
 
 
+def test_guide_envelopes_limit_each_direction_across_overlapping_tiles():
+    raw, _, rgb = scene(size=128)
+    packed = raw.reshape(64, 2, 64, 2).transpose(1, 3, 0, 2).reshape(4, 64, 64)
+    parent = np.broadcast_to(rgb.mean((1, 2), keepdims=True), rgb.shape).copy()
+    options = {
+        "shot": 0,
+        "read": 1e-8,
+        "thresholds": (2.0,),
+        "config": replace(CONFIG, validation_window=63),
+        "guide_frequencies_xy": ((5 / 128, 3 / 128), (-4 / 128, 7 / 128)),
+        "phase_bins": 8,
+        "shrink_phase_fit": True,
+        "compare_pooled_support": True,
+        "compare_pooled_refit": True,
+    }
+    colors = np.array(LAYOUTS[0])
+    uniform, _ = local.restore_local_waves(parent, packed, colors, **options)
+    same, witness = local.restore_local_waves(
+        parent, packed, colors, guide_envelopes=np.ones((2, 128, 128)), **options
+    )
+    assert witness["guide_envelopes_applied"]
+    for key, pixels in uniform.items():
+        np.testing.assert_array_equal(pixels, same[key])
+
+    envelopes = np.zeros((2, 128, 128))
+    envelopes[0, :, :63] = 1
+    envelopes[1, :, 65:] = 1
+    target = ("weighted-refit", 2.0)
+    for direction in range(2):
+        restored, _ = local.restore_local_waves(
+            parent,
+            packed,
+            colors,
+            guide_envelopes=envelopes,
+            active_guide_directions=[i == direction for i in range(2)],
+            **options,
+        )
+        outside = envelopes[direction] == 0
+        np.testing.assert_array_equal(restored[target][:, outside], parent[:, outside])
+        assert np.max(np.abs(restored[target][:, ~outside] - parent[:, ~outside])) > 1e-4
+
+
+def test_guide_envelope_rejects_bad_dimensions_or_adaptive_frequencies():
+    raw, colors, _ = scene()
+    options = {
+        "shot": 0,
+        "read": 1e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": ((5 / 64, 3 / 64), (-4 / 64, 7 / 64)),
+        "phase_bins": 8,
+    }
+    split = stratified_split(raw.shape, 26)
+    with pytest.raises(ValueError, match="two native guide envelopes"):
+        local.fit_local_candidate(raw, colors, split, guide_envelopes=np.ones(raw.shape), **options)
+    with pytest.raises(ValueError, match="fixed frequencies"):
+        local.fit_local_candidate(
+            raw,
+            colors,
+            split,
+            guide_envelopes=np.ones((2, *raw.shape)),
+            recenter_phase_guides=True,
+            **options,
+        )
+
+
 def test_query_evidence_removes_screening_sites_from_both_folds():
     raw, _, rgb = scene()
     from demosaic.search_donor_geometry import screening_mask
@@ -319,6 +384,17 @@ def test_same_side_validation_and_profiles_do_not_cross_a_strong_step():
     )[0]
     np.testing.assert_array_equal(clean[..., ~side], damaged[..., ~side])
     assert np.max(abs(clean[..., side] - damaged[..., side])) > 0.1
+
+    harmonic = local.fit_local_candidate(
+        raw, colors, fold, phase_edge_side="validation", phase_harmonics=((1,), (1,)), **options
+    )
+    np.testing.assert_array_equal(harmonic.phase_bright_side, side)
+    assert harmonic.unit_fields[0].shape[-1] == 2
+    clean_harmonic = local.conditional_scores(harmonic, raw, colors, ~fold, window=33, stride=8)[0]
+    changed_harmonic = local.conditional_scores(
+        harmonic, raw + 0.08 * (side & ~fold), colors, ~fold, window=33, stride=8
+    )[0]
+    np.testing.assert_array_equal(clean_harmonic[..., ~side], changed_harmonic[..., ~side])
 
     cross = local.conditional_scores(
         check, raw, colors, ~fold, window=33, stride=8, bright_cross_edge_weight=1

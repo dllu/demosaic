@@ -323,6 +323,21 @@ def _validate_phase_hessians(value, shape, guide, bins, harmonics, adaptive, tem
     return tuple(tuple(tuple(float(v) for v in row) for row in hessian) for hessian in hessians)
 
 
+def _validate_guide_envelopes(value, shape, guide, bins, adaptive, shared_shape, templates):
+    if value is None:
+        return None
+    if guide is None or not bins or adaptive or shared_shape or templates is not None:
+        raise ValueError("Guide envelopes require fixed frequencies and color-specific phase fits")
+    envelopes = np.asarray(value, np.float64)
+    if (
+        envelopes.shape != (2, *shape)
+        or not np.isfinite(envelopes).all()
+        or np.any((envelopes < 0) | (envelopes > 1))
+    ):
+        raise ValueError("Require two native guide envelopes in [0, 1]")
+    return envelopes
+
+
 def phase_gradient_in_annulus(frequency, hessian, shape):
     """Conservatively bound the frequency norm throughout a native rectangle."""
     hy, hx = (np.asarray(shape, dtype=np.float64) - 1) / 2
@@ -440,9 +455,11 @@ def _edge_guarded_green(raw, green, nuisance, x, y, angle, offset, width, shot, 
 
 def _phase_side_option(mode, bins, harmonics, shared, templates):
     if mode not in (None, "validation", "profiles") or (
-        mode is not None and (not bins or harmonics is not None or shared or templates is not None)
+        mode is not None and (not bins or shared or templates is not None)
     ):
-        raise ValueError("Edge-side phase support requires independent full phase profiles")
+        raise ValueError("Edge-side phase support requires independent color profiles")
+    if mode == "profiles" and harmonics is not None:
+        raise ValueError("Separate edge-side fits require full phase profiles")
 
 
 def _bright_edge_side(raw, green, nuisance, selected, shot, read):
@@ -659,6 +676,7 @@ def fit_local_candidate(
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
+    guide_envelopes=None,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
@@ -691,6 +709,15 @@ def fit_local_candidate(
         phase_bins,
         phase_harmonics,
         phase_drift_search or recenter_phase_guides,
+        templates,
+    )
+    envelopes = _validate_guide_envelopes(
+        guide_envelopes,
+        raw.shape,
+        guide_frequencies_xy,
+        phase_bins,
+        phase_drift_search or recenter_phase_guides,
+        shared_phase_shape,
         templates,
     )
     initial = fit_candidate(
@@ -868,6 +895,10 @@ def fit_local_candidate(
     else:
         waves = [
             _wave_columns(xx, yy, f, count) for f, count in zip(frequencies, counts, strict=True)
+        ]
+    if envelopes is not None:
+        waves = [
+            wave * envelope.reshape(-1, 1) for wave, envelope in zip(waves, envelopes, strict=True)
         ]
     indices, noise_fields = [], []
     for color in range(3):
@@ -1345,8 +1376,13 @@ def restore_local_waves(
     phase_edge_side=None,
     bright_cross_edge_weight=0.0,
     active_guide_directions=None,
+    guide_envelopes=None,
 ):
-    """Return paired global/local support variants with one input-only discovery pass."""
+    """Restore crossed-fold RAW waves with optional input-only guide envelopes.
+
+    An envelope scales its direction's basis in both validation and final refit.
+    It must be fixed independently of the query evidence used by either fold.
+    """
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
     if (
         parent.ndim != 3
@@ -1460,6 +1496,7 @@ def restore_local_waves(
             or phase_edge_side == "profiles"
             or guide_frequencies_xy is None
             or guide_phase_hessians_xy is not None
+            or guide_envelopes is not None
             or recenter_phase_guides
             or phase_drift_search
         )
@@ -1474,6 +1511,15 @@ def restore_local_waves(
         phase_bins,
         phase_harmonics,
         phase_drift_search or recenter_phase_guides,
+        templates,
+    )
+    envelopes = _validate_guide_envelopes(
+        guide_envelopes,
+        (h, w),
+        guide_frequencies_xy,
+        phase_bins,
+        phase_drift_search or recenter_phase_guides,
+        shared_phase_shape,
         templates,
     )
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
@@ -1573,6 +1619,8 @@ def restore_local_waves(
                     **guide,
                     "guide_frequencies_xy": tuple(map(tuple, local_frequencies)),
                 }
+            if envelopes is not None:
+                patch_guide = {**patch_guide, "guide_envelopes": envelopes[:, *region]}
             candidates = [
                 fit_local_candidate(
                     tile, layout, mask, shot=shot, read=read, config=config, **patch_guide
@@ -1963,6 +2011,7 @@ def restore_local_waves(
             else {}
         ),
         **guide,
+        **({"guide_envelopes_applied": True} if envelopes is not None else {}),
         **(
             {"bright_cross_edge_weight": float(bright_cross_edge_weight)}
             if bright_cross_edge_weight

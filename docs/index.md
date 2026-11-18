@@ -77,6 +77,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [curved boundaries for RAW validation](flexible-query-edges.md) ·
 [nested screening for curved query boundaries](screened-query-edges.md) ·
 [cross-color RAW validation for screened refits](cross-colour-refit.md) ·
+[finite wire support beside rails](wire-envelopes.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
 [scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·

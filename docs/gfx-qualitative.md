@@ -141,6 +141,9 @@ historical boards. Use these reports for the current completed comparisons:
   keeps sky at V120 and increases the full-frame coarse-fence correction
   with joint evidence. The visible lattice persists without new crossings.
   Spectral foliage corrections increase without clear recovery of fine leaves.
+- The [uniform fundamental fit](wire-envelopes.md#native-gfx100s-review)
+  keeps the sky and coarse crossings. The spectral building correction
+  falls from 2.94 to 1.46 DN16 RMS relative to V120. Foliage stays soft.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

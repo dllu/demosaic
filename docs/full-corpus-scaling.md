@@ -168,6 +168,23 @@ evaluation is the retained 50k checkpoint.
 [58k source audit](results/full-corpus-long58k-prefix-v1/source-audit.json) ·
 [Audit code](results/full-corpus-long58k-prefix-v1/audit.py.gz).
 
+### Fourth photographic epoch and the 72k prefix
+
+The source ledger completes the fourth ordinary-photo epoch at
+update **68,269**. Through update 72,000 it records **1,152,000** target
+slots and **383,272** ordinary photo draws. All **90,778** ordinary
+photos appear at least four times, and 20,160 appear for a fifth visit.
+The median fifth crop adds **1.26%** of the cached image to the union of
+the prior four rectangles. This subset reaches **84.01%** median total
+coverage. The fifth crop is fully within the prior union for 3,202
+images. These are cached rectangles before geometric augmentation.
+
+The audit binds the published 58k prefix, verifies source order and
+draw seeds, and checks 56 additional saved conditioning chunks. The
+latest image-quality review is the 50k checkpoint.
+[72k source audit](results/full-corpus-long72k-prefix-v1/source-audit.json) ·
+[Audit code](results/full-corpus-long72k-prefix-v1/audit.py.gz).
+
 ### Observed source and crop coverage through 30k
 
 The running 100k schedule records 480,000 example slots through

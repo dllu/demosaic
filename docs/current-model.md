@@ -248,6 +248,13 @@ The bounded gate increases complex-rail false correction, recovers
 essentially the same faint signal beside rails and leaves the fine cab
 mesh at V120. The screened per-color gate remains the experimental baseline.
 
+[Finite wire support](wire-envelopes.md) with a known ellipse and a
+fundamental fit improves ISO400 synthetic weak and strong response beside
+rails. A centered broader footprint retains most of the gain, while
+misregistration loses it. ISO6400 increment error rises. On GFX, the
+uniform fundamental fit produces a smaller spectral building correction
+and preserves the coarse lattice. The fine cab crops stay at V120.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

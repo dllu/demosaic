@@ -165,11 +165,15 @@ has repeatedly come with extra flat-region error or false color. The
    [Cross-color validation](cross-colour-refit.md) changes only the gate
    and recovers little extra near those rails, even with exact frequencies.
    Bounded partner support helps ordinary ISO400 wires slightly and raises
-   false rail RMS. A next diagnostic can hold the per-color gate fixed
-   and ask whether a known spatial wire envelope separates real faint-wire
-   sites from the rail residual. Compare the exact mask with a displaced
-   mask on paired wire-present and wire-absent observations before using a
-   whole-frame estimate of support.
+   false rail RMS.
+   [Fixed finite envelopes](wire-envelopes.md) and a fundamental-frequency
+   fit improve fresh ISO400 response from 0.86% to 13.77% beside complex
+   rails, with lower increment error. A correctly centered broader
+   footprint retains 12.14% response and reduces complex-rail false
+   correction. Displacing it by 40 pixels loses nearly all recovery.
+   ISO6400 increment error rises despite greater average response.
+   A context-derived footprint needs a reliable location and reserved
+   RAW validation for straight rails and high-noise cases.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
