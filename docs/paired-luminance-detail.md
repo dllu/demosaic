@@ -149,6 +149,11 @@ the layout effect on a fixed scene unresolved.
 [Joint training coverage and subgroup intervals](results/paired-repeat-stability-v2/prior-phase-audit.json) ·
 [Balanced repeat-training study](paired-repeat-stability.md).
 
+The [orientation-average replay](paired-head-symmetry.md) applies
+the existing head in eight exact orientations above the same
+parent prediction. At matched correction strength, independent
+pair error and flat RMS stay near the canonical correction.
+
 ## Native exact-target crops
 
 Both triplets show noisy Malvar, the paired EMA above Corpus 100k with

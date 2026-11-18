@@ -7,6 +7,8 @@ historical boards. Use these reports for the current completed comparisons:
   compares the frozen Corpus 100k plus each head against Corpus 100k and V120.
   With both support windows the sky stays smooth, the coarse fence keeps its
   crossings, and thin cables and foliage remain soft.
+  [Exact orientation averaging](paired-head-symmetry.md#standing-gfx100s-comparisons)
+  gives similar native results across all four main crops.
 - [V120/V121 primary and full-frame review](v120-v121-primary.md): the general
   baseline, including matched full-frame noise conditioning.
 - [V131 20k endpoint](v131-endpoint-quality.md) and

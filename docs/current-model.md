@@ -95,6 +95,8 @@ percentage points of target-aligned ISO6400 fine response on the
 with coupled noise and rises 0.31 DN16 with independent noise. Two
 green support windows reduce excess flat texture against a
 strength-matched wider guard. Fine cab crossings remain incomplete.
+[Eight-orientation replay](paired-head-symmetry.md) finds little
+change in independent-draw error at matched correction strength.
 
 The [isolated RAW line fit](isolated-raw-line.md) recovers about 81%
 of the weak increment through interrupted synthetic ISO400 wires.
