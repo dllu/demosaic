@@ -129,6 +129,16 @@ def localize_donor_geometry(
         return baseline
 
     left, right, matches = best
+    return (
+        baseline
+        | _confirm_pair(
+            left, right, matches, shot, read, refined_edge=refined_edge, parallel_edge=parallel_edge
+        )
+        | ({"screened_query_score": float(best_rank[0])} if query_power is not None else {})
+    )
+
+
+def _confirm_pair(left, right, matches, shot, read, *, refined_edge, parallel_edge):
     gains = []
     for (_, raw, cfa, discovery, _), column, seed in zip(
         (left, right), (2, 3), (202611170720, 202611170721), strict=True
@@ -152,7 +162,7 @@ def localize_donor_geometry(
     if len(frequencies) == 1:
         fx, fy = frequencies[0]
         frequencies.append(np.array([-fy, fx]))
-    return baseline | {
+    return {
         "status": "evaluated",
         "windows": [left[0], right[0]],
         "active": active.tolist(),
@@ -160,6 +170,5 @@ def localize_donor_geometry(
         "heldout_planar_reduction": np.asarray(gains).tolist(),
         "screened_frequencies_xy": [m[1].tolist() for m in matches],
         "donor_frequencies_xy": [[m[k].tolist() for m in matches] for k in (2, 3)],
-        "score": float(best_rank[1]),
-        **({"screened_query_score": float(best_rank[0])} if query_power is not None else {}),
+        "score": float(sum(m[0] for m in matches)),
     }

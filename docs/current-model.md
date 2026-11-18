@@ -198,6 +198,14 @@ response. V120 fallback removes diagonal cab banding when donor
 validation fails. The fine crossings remain incomplete and ISO6400
 faint-wire response is below 1% on the occlusion replay.
 
+[Whole-frame ranking of localized RAW windows](scene-window-donors.md)
+recovers 4.80% of the faint ISO400 wire increment within the declared
+quiet allowance, versus 0.89% for spectral ranking and 9.02% with
+fixed brackets. At V143's quiet RMS, near and full-frame ranking
+both recover less than 1%. Full-frame ranking avoids visible building
+bands introduced by the wider spectral search. The cab crossings
+remain soft.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

@@ -131,6 +131,12 @@ has repeatedly come with extra flat-region error or false color. The
    while preserving weak response. The fixed-bracket replay leaves
    how often whole-frame context can place both windows on the same
    surface unresolved.
+   [Searching both windows](scene-window-donors.md) improves on
+   spectral ranking under the ISO400 quiet allowance, with near and
+   full-frame context choosing the intended frames equally often.
+   Full-frame appearance protects the building. The fixed-bracket
+   lead and the cab donor crops point to the remaining selection
+   problem. A straight-path appearance score does little to solve it.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

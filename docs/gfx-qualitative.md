@@ -113,6 +113,10 @@ historical boards. Use these reports for the current completed comparisons:
 - [Localized donor validation](localized-donor-validation.md#native-gfx100s-comparisons)
   returns the sky, building and coarse fence to exact V120. Foliage
   changes by 1.223 DN16 RMS and fine leaves stay soft.
+- [Full-frame window ranking](scene-window-donors.md#native-gfx100s-review)
+  keeps the sky, building and foliage at V120 and avoids the wider
+  spectral search's purple/green building bands. The coarse fence
+  changes by 8.93 DN16 RMS, with the visible crossings retained.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

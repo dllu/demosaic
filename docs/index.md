@@ -70,6 +70,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [whole-frame scene context for donor selection](screened-scene-donors.md) ·
 [appearance-first donor ranking and curved-wire recovery](affinity-first-donors.md) ·
 [localized donor validation beside rails](localized-donor-validation.md) ·
+[whole-frame ranking of localized RAW windows](scene-window-donors.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
 [scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·

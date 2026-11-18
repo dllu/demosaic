@@ -9,6 +9,10 @@ single-edge fit. The positive-noise GFX cab views still have missing
 fine crossings. Returning to V120 when no guide passes removes the
 diagonal banding left by the older fallback.
 
+The [window-search follow-up](scene-window-donors.md) lifts the
+fixed-bracket constraint and compares full and near appearance
+against spectral ranking with the same confirmation.
+
 ## Fixed brackets and reserved samples
 
 The real donor boxes are fixed by the saved
