@@ -112,6 +112,12 @@ at ISO12800. The two head variants stay experimental.
 [Per-source metrics and noise conditions](results/scene-spectral-detail-v1/summary.json) ·
 [Alignment intervention](results/scene-spectral-detail-v1/alignment.json).
 
+A [follow-up gain test](scene-spectral-gain-headroom.md) keeps the learned
+proposal and its support fixed. Even unbounded nonnegative gains with exact
+local targets reduce ISO12800 weak fine-band error by only about 1.1%.
+Source-disjoint calibration slightly improves aggregate PSNR while raising
+fine and quiet error.
+
 ## Native crops
 
 The two triplets show noisy Malvar, V120 EMA plus the spatial spectral EMA

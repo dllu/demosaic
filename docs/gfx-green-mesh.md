@@ -37,6 +37,7 @@ preserves its original comparison pixels and provenance.
 | [A-only innovation validation](parent-innovation-validation.md) | Both ROIs, profiles and JPEGs viewed. Slight modulation changes retain a soft lattice with incomplete crossings |
 | [Spatial preview intervention](scene-context-extent.md) | Both ROIs, profiles and JPEGs viewed. Near and distant context blurs change tones slightly. Fine crossings remain incomplete |
 | [Trained scene spectral gain](scene-spectral-detail.md) | Both ROIs, noise profiles and JPEGs viewed. Changes from V120 are below 0.49 DN16 RMS with no convincing new fine crossings |
+| [Spectral gain follow-up](scene-spectral-gain-headroom.md) | Both camera profiles and ROIs retain soft crossings under both retunings. JPEG references viewed alongside the same native crops |
 
 The protected pair is **DSCF3842 ISO6400 / DSCF3835 ISO100 f/5.6**, with both
 camera JPEGs. The separate reference differs in aperture, exposure and moving

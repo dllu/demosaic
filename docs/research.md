@@ -25,6 +25,9 @@ has repeatedly come with extra flat-region error or false color. The
    whole-image context to the strength of measured RAW detail. Both trained
    heads improve longer-band error slightly and worsen fine and quiet errors.
    Aligned features and shifted features yield nearly identical predictions.
+   The [fixed-proposal gain fits](scene-spectral-gain-headroom.md) find little
+   extra weak-detail recovery even with exact local targets. The source-disjoint
+   calibration favors higher gains and raises fine and quiet error.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

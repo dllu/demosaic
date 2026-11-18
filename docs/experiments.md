@@ -44,6 +44,7 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Does held-out validation of the proposed fine correction improve delivery? | The analytic building fringe weakens at the fixed crop. Cab crossings stay soft and signed-color weak response is essentially unchanged | [A-only innovation review](parent-innovation-validation.md) |
 | Does the spatial model use context beyond the tile? | With local RAW fixed, blurring distant preview regions changes foliage and coarse-fence output by 4.14 and 5.15 DN16 RMS. Thin cords and fine cab crossings remain incomplete | [Near and distant preview intervention](scene-context-extent.md) |
 | Can scene context guide the gain on measured RAW detail? | Both 800-update heads lower longer-band error slightly. Finer and quiet-region error rise. Shifting spatial features barely changes the delivered result, and both GFX families look close to V120 | [Scene spectral pilot](scene-spectral-detail.md) |
+| Can better gains recover the fine detail missing from that proposal? | With fixed support, exact local targets yield only 1.1% lower ISO12800 fine error with unbounded nonnegative gains. Source-disjoint calibration raises fine and quiet error. Both GFX families viewed | [Scene spectral gain headroom](scene-spectral-gain-headroom.md) |
 
 V131 also changes the training cohort, so its gain is not an isolated test of
 training duration. The 100k run has saved its 20k checkpoint and continues

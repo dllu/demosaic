@@ -99,6 +99,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Trained scene spectral gain](scene-spectral-detail.md) changes the
   fixed sky and coarse fence by less than 0.76 DN16 RMS. The sky stays smooth,
   and fine building and foliage detail remain soft.
+- [Spectral gain follow-up](scene-spectral-gain-headroom.md) retains visible
+  coarse fence diamonds and a smooth sky. Fine leaves and building metal
+  detail remain soft after retuning.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO
