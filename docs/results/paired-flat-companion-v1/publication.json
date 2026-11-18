@@ -1,0 +1,2701 @@
+{
+  "policy_plan": {
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/run_feedback.py",
+      "sha256": "d99353bd02221bbf803a95323e9a19a7d7c90e0d24aa721e002f8819fff40301"
+    },
+    "head_interventions": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/feedback_heads.py",
+      "sha256": "272152c0d21637ab8f2e43f91f99b9235dc7bc5ea0b283fda889ccdae2c3a2dc"
+    },
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/input-plan.json",
+      "sha256": "ab5666df78ca61db73ba8f4e760665e4246a4ad03d65619b27add5273777c8c4"
+    },
+    "prior_parent_predictions": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/parent-predictions/complete.json",
+      "sha256": "ea747573ea2d92c0087f879815dcf4a512ceee0c0871f96677528ba7fd0cd157"
+    },
+    "new_donor_parents": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/new-parent/complete.json",
+      "sha256": "bc7d8cc9b99782179b8342a7dc8ab7282c096b0da39eabdea36498dcfb041d93"
+    },
+    "strength_math": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-shape-stability-v1/strength_moments.py",
+      "sha256": "877e2180e195f1ca0b0f8bed87082858d6ca391b3831671403be45676092c1d4"
+    },
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-luminance-detail-v1/training/step001200.pt",
+      "sha256": "02f8d5e6664bd580bafe2abeb3b8584b070b60bfadfefaff587cadd8bd643d7f"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+      "type": "base",
+      "step": 100000
+    },
+    "V120": {
+      "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "type": "base",
+      "step": 20000
+    },
+    "guard": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-luminance-detail-v1/local-support-calibration.json",
+      "sha256": "c456737c0c4267400a9c1306904d7671e5fecd2c24b321d0cf00ea9b0c66e0d5"
+    },
+    "guard_long": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-luminance-detail-v1/support-calibration.json",
+      "sha256": "691a2193e3105f2dd83ce0817ef37600b6387b965fb172cf5b1f2aef32c51a42"
+    },
+    "policies": [
+      "canonical",
+      "donor-guide",
+      "donor-mosaic",
+      "donor-both",
+      "smooth-guide",
+      "smooth-innovation",
+      "smooth-both"
+    ],
+    "fixed_queries": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "precision": "CUDA IEEE FP32. Exact native placements. Alignment and variance measured on two independent query/donor pairs."
+  },
+  "evidence": {
+    "path": "/home/dllu/proj/demosaic/docs/results/paired-flat-companion-v1/evidence.tar.xz",
+    "sha256": "916c74bc528d083e55ea097b1920e77f42859e9ccd6b218c3340d21086a1be88"
+  },
+  "numeric_scope": "Two native queries per ISO6400 independent group. Predetermined smoothing strengths. Paired source bootstrap. Scales for both parent budgets determined on original64 and evaluated once on fresh32.",
+  "strengths": [
+    0.05,
+    0.15
+  ],
+  "two_parent_budgets_in_detail_only_replay": [
+    {
+      "policy": "canonical",
+      "original64": {
+        "increment": {
+          "initial_gradient_DN16_per_strength": 0.044489711704527285,
+          "parent_RMS_DN16": 124.89247675289198,
+          "nominal_RMS_DN16": 125.21530282505896,
+          "maximum_allowed_scale": 0.0
+        },
+        "flat": {
+          "initial_gradient_DN16_per_strength": 0.00818460699131829,
+          "parent_RMS_DN16": 4.4873924690223825,
+          "nominal_RMS_DN16": 4.573583848595119,
+          "maximum_allowed_scale": 0.0
+        }
+      },
+      "joint_scale": 0.0,
+      "joint_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "increment_only_budget_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "policy": "smooth-guide",
+      "original64": {
+        "increment": {
+          "initial_gradient_DN16_per_strength": 0.04348774460377135,
+          "parent_RMS_DN16": 124.89247675289198,
+          "nominal_RMS_DN16": 125.15890671347893,
+          "maximum_allowed_scale": 0.0
+        },
+        "flat": {
+          "initial_gradient_DN16_per_strength": 0.00785853997567554,
+          "parent_RMS_DN16": 4.4873924690223825,
+          "nominal_RMS_DN16": 4.566983376895413,
+          "maximum_allowed_scale": 0.0
+        }
+      },
+      "joint_scale": 0.0,
+      "joint_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "increment_only_budget_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "policy": "smooth-innovation",
+      "original64": {
+        "increment": {
+          "initial_gradient_DN16_per_strength": -0.0015974574854731444,
+          "parent_RMS_DN16": 124.89247675289198,
+          "nominal_RMS_DN16": 124.943729231876,
+          "maximum_allowed_scale": 0.030200244628785764
+        },
+        "flat": {
+          "initial_gradient_DN16_per_strength": 0.0022246746124744638,
+          "parent_RMS_DN16": 4.4873924690223825,
+          "nominal_RMS_DN16": 4.502131618452131,
+          "maximum_allowed_scale": 0.0
+        }
+      },
+      "joint_scale": 0.0,
+      "joint_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "increment_only_budget_fresh32": {
+        "increment_DN16": [
+          0.0012734462206225594,
+          -0.000698174111666175,
+          0.004118548699461534
+        ],
+        "present_DN16": [
+          -0.0013239644284576968,
+          -0.0035352680221519433,
+          0.000823168913105642
+        ],
+        "flat_DN16": [
+          0.00011452573782060049,
+          5.225184317417999e-05,
+          0.0001964248717981362
+        ],
+        "variance_DN16_squared": [
+          2.6421253121330954,
+          1.1070975350106032,
+          4.430175767045285
+        ],
+        "shared_DN16_squared": [
+          -2.3621889441692683,
+          -4.131089599108493,
+          -0.9247731636510425
+        ],
+        "response_percentage_points": [
+          0.005153404171430911,
+          0.0031518489372116174,
+          0.006877984478956758
+        ]
+      }
+    },
+    {
+      "policy": "smooth-both",
+      "original64": {
+        "increment": {
+          "initial_gradient_DN16_per_strength": 0.004679499275927264,
+          "parent_RMS_DN16": 124.89247675289198,
+          "nominal_RMS_DN16": 124.93820456968572,
+          "maximum_allowed_scale": 0.0
+        },
+        "flat": {
+          "initial_gradient_DN16_per_strength": 0.002185110454996672,
+          "parent_RMS_DN16": 4.4873924690223825,
+          "nominal_RMS_DN16": 4.500917612889908,
+          "maximum_allowed_scale": 0.0
+        }
+      },
+      "joint_scale": 0.0,
+      "joint_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "increment_only_budget_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "policy": "oriented-innovation",
+      "original64": {
+        "increment": {
+          "initial_gradient_DN16_per_strength": 0.00557352742300251,
+          "parent_RMS_DN16": 124.89247675289198,
+          "nominal_RMS_DN16": 124.98721915757022,
+          "maximum_allowed_scale": 0.0
+        },
+        "flat": {
+          "initial_gradient_DN16_per_strength": 0.003214427332005066,
+          "parent_RMS_DN16": 4.4873924690223825,
+          "nominal_RMS_DN16": 4.513768964902424,
+          "maximum_allowed_scale": 0.0
+        }
+      },
+      "joint_scale": 0.0,
+      "joint_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "increment_only_budget_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "policy": "independent-capture-lift",
+      "original64": {
+        "increment": {
+          "initial_gradient_DN16_per_strength": -0.8074107567915932,
+          "parent_RMS_DN16": 124.89247675289198,
+          "nominal_RMS_DN16": 124.35940091713223,
+          "maximum_allowed_scale": 1.0
+        },
+        "flat": {
+          "initial_gradient_DN16_per_strength": 0.001422097474568892,
+          "parent_RMS_DN16": 4.4873924690223825,
+          "nominal_RMS_DN16": 4.570075523936028,
+          "maximum_allowed_scale": 0.0
+        }
+      },
+      "joint_scale": 0.0,
+      "joint_fresh32": {
+        "increment_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "present_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "flat_DN16": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "variance_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "shared_DN16_squared": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "response_percentage_points": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "increment_only_budget_fresh32": {
+        "increment_DN16": [
+          -0.2520434813423906,
+          -0.4649180964769053,
+          -0.05903815583995066
+        ],
+        "present_DN16": [
+          -0.458166952023901,
+          -0.726304288359566,
+          -0.22520256059229662
+        ],
+        "flat_DN16": [
+          0.0394879214557311,
+          0.017508058801148484,
+          0.06879604588885685
+        ],
+        "variance_DN16_squared": [
+          84.54410698370384,
+          32.02503842313829,
+          151.1600886453669
+        ],
+        "shared_DN16_squared": [
+          -185.7518634154497,
+          -311.6741892225761,
+          -82.27672968144044
+        ],
+        "response_percentage_points": [
+          0.3567731642687799,
+          0.2217701624025865,
+          0.49727253093641616
+        ]
+      }
+    }
+  ],
+  "metrics": {
+    "quiet-0.05": {
+      "nominal_fresh32": {
+        "increment_DN16": [
+          -0.010545762278693721,
+          -0.02011576603860517,
+          -0.002999874307097349
+        ],
+        "present_DN16": [
+          -0.007421859773973465,
+          -0.01373282230094705,
+          -0.0022632579060366813
+        ],
+        "flat_DN16": [
+          -0.05881993114225671,
+          -0.07401952399519614,
+          -0.045687234713822626
+        ],
+        "variance_DN16_squared": [
+          -1.510922867759222,
+          -3.372205668500593,
+          -0.26854473332163814
+        ],
+        "shared_DN16_squared": [
+          0.7676837590699594,
+          0.00617752365404624,
+          2.030448889163509
+        ],
+        "response_percentage_points": [
+          -0.001283622224283917,
+          -0.0042723266843924645,
+          -8.122522008210947e-06
+        ]
+      },
+      "limit_for_both_parent_budgets": 1.0,
+      "fixed_joint_strength_fresh32": {
+        "increment_DN16": [
+          -0.010545762278693721,
+          -0.02001019548071977,
+          -0.0030963935215024365
+        ],
+        "present_DN16": [
+          -0.007421859773973465,
+          -0.013882809717593467,
+          -0.0022392405317955884
+        ],
+        "flat_DN16": [
+          -0.05881993114225671,
+          -0.07405947536013595,
+          -0.045285826106420915
+        ],
+        "variance_DN16_squared": [
+          -1.510922867759222,
+          -3.3963425412531403,
+          -0.27272942449558757
+        ],
+        "shared_DN16_squared": [
+          0.7676837590699594,
+          0.006703047076260649,
+          2.0465036979101323
+        ],
+        "response_percentage_points": [
+          -0.001283622224283917,
+          -0.004412465440815126,
+          -7.997187708712055e-06
+        ]
+      }
+    },
+    "box-quiet-0.05": {
+      "nominal_fresh32": {
+        "increment_DN16": [
+          0.08102088769199689,
+          -0.007667502200367783,
+          0.219494780703784
+        ],
+        "present_DN16": [
+          -0.0185350113858515,
+          -0.09693146282224842,
+          0.08129831028928539
+        ],
+        "flat_DN16": [
+          -0.050884825739712536,
+          -0.06821228197137448,
+          -0.03477184518890441
+        ],
+        "variance_DN16_squared": [
+          99.96907319630557,
+          41.457873929022185,
+          167.66531015424772
+        ],
+        "shared_DN16_squared": [
+          -76.37788980625459,
+          -134.17398150489777,
+          -29.63403679098818
+        ],
+        "response_percentage_points": [
+          0.16935751776560795,
+          0.1003488945680357,
+          0.2274354549414849
+        ]
+      },
+      "limit_for_both_parent_budgets": 0.5417504679773404,
+      "fixed_joint_strength_fresh32": {
+        "increment_DN16": [
+          0.031213688412134732,
+          -0.011324074512162061,
+          0.09497892603448298
+        ],
+        "present_DN16": [
+          -0.018455495466519194,
+          -0.05937304553252108,
+          0.028857703893402368
+        ],
+        "flat_DN16": [
+          -0.028814594688923036,
+          -0.03739511002786732,
+          -0.02063838894375333
+        ],
+        "variance_DN16_squared": [
+          50.56926603344199,
+          21.48074449464205,
+          85.51422588540058
+        ],
+        "shared_DN16_squared": [
+          -41.65280907862805,
+          -71.36004495839161,
+          -17.049447343484132
+        ],
+        "response_percentage_points": [
+          0.09174951450499993,
+          0.05496185562581806,
+          0.12351686384036809
+        ]
+      }
+    },
+    "oriented-quiet-0.05": {
+      "nominal_fresh32": {
+        "increment_DN16": [
+          0.14896831375883157,
+          -0.008109135447900845,
+          0.3815566807568567
+        ],
+        "present_DN16": [
+          -0.054480727055008116,
+          -0.1943092096286745,
+          0.11073450518405933
+        ],
+        "flat_DN16": [
+          -0.04715164795437764,
+          -0.06627312570210893,
+          -0.029549487188436665
+        ],
+        "variance_DN16_squared": [
+          147.60461441165808,
+          58.82602804171961,
+          247.65955548252916
+        ],
+        "shared_DN16_squared": [
+          -104.43093815026029,
+          -176.18018468602722,
+          -41.75586005325475
+        ],
+        "response_percentage_points": [
+          0.25104547182609777,
+          0.15237847263999266,
+          0.34166356315045265
+        ]
+      },
+      "limit_for_both_parent_budgets": 0.2419791908954787,
+      "fixed_joint_strength_fresh32": {
+        "increment_DN16": [
+          0.020516097080628445,
+          -0.0098749374851345,
+          0.065954404176135
+        ],
+        "present_DN16": [
+          -0.023757680105137978,
+          -0.056920052346671884,
+          0.008792542590721241
+        ],
+        "flat_DN16": [
+          -0.012909657567620546,
+          -0.01694318655571259,
+          -0.009240473031245788
+        ],
+        "variance_DN16_squared": [
+          31.576980860898498,
+          13.351194957518778,
+          53.20900329331969
+        ],
+        "shared_DN16_squared": [
+          -25.850326586730144,
+          -44.02577591424166,
+          -10.39268518314379
+        ],
+        "response_percentage_points": [
+          0.060747780150451736,
+          0.03796270935226132,
+          0.08298049860270829
+        ]
+      }
+    },
+    "quiet-0.15": {
+      "nominal_fresh32": {
+        "increment_DN16": [
+          -0.030080172670222977,
+          -0.05745650968379184,
+          -0.009109077349940443
+        ],
+        "present_DN16": [
+          -0.02104789898265802,
+          -0.03875307009073524,
+          -0.006772582749919886
+        ],
+        "flat_DN16": [
+          -0.17172187206031003,
+          -0.2170097898673093,
+          -0.13320037478759345
+        ],
+        "variance_DN16_squared": [
+          -4.364495894807835,
+          -9.84683363370827,
+          -0.7260725014030962
+        ],
+        "shared_DN16_squared": [
+          2.3185181662606653,
+          0.021637666806136983,
+          6.203095149630174
+        ],
+        "response_percentage_points": [
+          -0.0038509029645070994,
+          -0.012895995274360927,
+          -2.287926441340094e-05
+        ]
+      },
+      "limit_for_both_parent_budgets": 1.0,
+      "fixed_joint_strength_fresh32": {
+        "increment_DN16": [
+          -0.030080172670222977,
+          -0.057706333737342276,
+          -0.00880553266283819
+        ],
+        "present_DN16": [
+          -0.02104789898265802,
+          -0.0397679662049957,
+          -0.0065071110138460045
+        ],
+        "flat_DN16": [
+          -0.17172187206031003,
+          -0.21758432631188884,
+          -0.13181557928765766
+        ],
+        "variance_DN16_squared": [
+          -4.364495894807835,
+          -9.550441586834223,
+          -0.7488084443972547
+        ],
+        "shared_DN16_squared": [
+          2.3185181662606653,
+          0.017583351648037867,
+          6.139600003040907
+        ],
+        "response_percentage_points": [
+          -0.0038509029645070994,
+          -0.012397871900101028,
+          -2.2565109227932073e-05
+        ]
+      }
+    },
+    "box-quiet-0.15": {
+      "nominal_fresh32": {
+        "increment_DN16": [
+          0.061484194080145244,
+          -0.03359937636607626,
+          0.19575012435868058
+        ],
+        "present_DN16": [
+          -0.03216557695874478,
+          -0.10962404914017465,
+          0.06643373858229079
+        ],
+        "flat_DN16": [
+          -0.16364481021148738,
+          -0.2095617517584323,
+          -0.12302732991048708
+        ],
+        "variance_DN16_squared": [
+          97.1155383448494,
+          39.29279071948359,
+          167.73232866196295
+        ],
+        "shared_DN16_squared": [
+          -74.82708991143053,
+          -130.73124431849578,
+          -28.7904596835594
+        ],
+        "response_percentage_points": [
+          0.16679023703384177,
+          0.09751983313315281,
+          0.22731867406529563
+        ]
+      },
+      "limit_for_both_parent_budgets": 1.0,
+      "fixed_joint_strength_fresh32": {
+        "increment_DN16": [
+          0.061484194080145244,
+          -0.029787436144272466,
+          0.19467847188575355
+        ],
+        "present_DN16": [
+          -0.03216557695874478,
+          -0.10945620985180403,
+          0.0674287210442619
+        ],
+        "flat_DN16": [
+          -0.16364481021148738,
+          -0.2090228795463337,
+          -0.12164532399627523
+        ],
+        "variance_DN16_squared": [
+          97.1155383448494,
+          39.29269371541938,
+          168.14418562443265
+        ],
+        "shared_DN16_squared": [
+          -74.82708991143053,
+          -132.495027069654,
+          -28.565996707348507
+        ],
+        "response_percentage_points": [
+          0.16679023703384177,
+          0.09517669633912408,
+          0.2249344935016497
+        ]
+      }
+    },
+    "oriented-quiet-0.15": {
+      "nominal_fresh32": {
+        "increment_DN16": [
+          0.1294260968668119,
+          -0.029909832762501882,
+          0.3653565220657981
+        ],
+        "present_DN16": [
+          -0.06811927722135547,
+          -0.212826076012916,
+          0.09767154936411793
+        ],
+        "flat_DN16": [
+          -0.15984805325246748,
+          -0.2069183154981473,
+          -0.11607417874597578
+        ],
+        "variance_DN16_squared": [
+          144.75108232841265,
+          59.48050269042673,
+          245.17138119192964
+        ],
+        "shared_DN16_squared": [
+          -102.88014263131163,
+          -177.6873789144384,
+          -41.999865919295985
+        ],
+        "response_percentage_points": [
+          0.24847819108587513,
+          0.1501547817077485,
+          0.3379932280536018
+        ]
+      },
+      "limit_for_both_parent_budgets": 0.8204499623556846,
+      "fixed_joint_strength_fresh32": {
+        "increment_DN16": [
+          0.09347007705086033,
+          -0.031049737526096674,
+          0.27264089680734077
+        ],
+        "present_DN16": [
+          -0.06459613480431164,
+          -0.1799026573657406,
+          0.057517636151830774
+        ],
+        "flat_DN16": [
+          -0.1333475366450234,
+          -0.17297045282537435,
+          -0.09769529364112843
+        ],
+        "variance_DN16_squared": [
+          115.40285843850998,
+          46.499319674758176,
+          192.96619327998033
+        ],
+        "shared_DN16_squared": [
+          -84.8770211304793,
+          -146.76802543042666,
+          -35.101679958440734
+        ],
+        "response_percentage_points": [
+          0.20386392252261415,
+          0.12372345112857412,
+          0.28017130021070014
+        ]
+      }
+    }
+  },
+  "review": {
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/render_flat_companion.py",
+      "sha256": "218d07130a97b0cbd47fe77c7128b938de4b56d65b6977da43228a76904eb873"
+    },
+    "scoring": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion.json",
+      "sha256": "92b5d1a9f4b56def7a09f7324b836c35ce2969234606aaf49065d8544c38f834"
+    },
+    "standing": [
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "058375cae463f6e2f26ef730e0ebb0092c933c4f2cccb2db354aa56d0baa9998"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-overcast-sky-main-overcast-sky",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/main-overcast-sky.npz",
+          "sha256": "87006578ec943093d84fb6bcaff739ba4276b65d37ae12fbcb8ca34844d4f2ac"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "e81c6c963b6f5b66a89370fb0560a9d3623078b92414df21ba981a9a33eb5a1f"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-overcast-sky-RGB-f32.npy",
+          "sha256": "81ea6f37bbf950cf0b4c351f83b337b981e2c4f8242b6f8bdc69cc43fe9f0a9a"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.189799979543856,
+            "changed_native_RGB_values": 76789
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.18980047082690357,
+            "changed_native_RGB_values": 76789
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.18980047082690357,
+            "changed_native_RGB_values": 76789
+          }
+        },
+        "native_review": "Sky remains smooth in all three policies."
+      },
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/main-building-detail-main-building-detail.png",
+          "sha256": "8362ce893aa30cb6a7b5432f06a06140e31fe9e8d1726b202f11aa5983af1353"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-building-detail-main-building-detail",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/main-building-detail.npz",
+          "sha256": "541fc9509b31226166c86551e198ea4d3efd5e7412a510928e1881e02a5f8b23"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-building-detail-main-building-detail.png",
+          "sha256": "63b075c1dcdd13111b6a1e446b0c1ffb11c8df44ebf842ff28eff108cb293461"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-building-detail-RGB-f32.npy",
+          "sha256": "3d33e65ad3e27d114f4a9557a1623179d23231b07e748c6a8632ff70fe977694"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.16523188898671715,
+            "changed_native_RGB_values": 1737
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.0210020776593063,
+            "changed_native_RGB_values": 61908
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.641646474721455,
+            "changed_native_RGB_values": 61917
+          }
+        },
+        "native_review": "The smallest wires and diagonal braces remain soft."
+      },
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/main-foliage-main-foliage.png",
+          "sha256": "69a048190077ff916324e2f28a49952977cbef543ed15b94898368d17d3b9338"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-foliage-main-foliage",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/main-foliage.npz",
+          "sha256": "baa49e4ca8627e6b56fb362d8dc739e820ecbaabf50659f612c395811ad8f127"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-foliage-main-foliage.png",
+          "sha256": "099395ccafbeaa0683e3cbd66581ff53169ad8e6f051b46e64e216e3342af483"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-foliage-RGB-f32.npy",
+          "sha256": "107933ad4412b5456ddfb75652f85ab6b8162a180287833700b327c5bfbb7d80"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.0,
+            "changed_native_RGB_values": 0
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 1.541895498497537,
+            "changed_native_RGB_values": 68542
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 1.735444386755232,
+            "changed_native_RGB_values": 68549
+          }
+        },
+        "native_review": "No obvious changes in visible leaf edges, which remain soft."
+      },
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "dedb22de89ef96e1046459b5e9a71da52cf07dde09a7eee4acc346fb142aa40c"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/main-chain-link-fence.npz",
+          "sha256": "dae5a39501b92a6b5f092c554087414eea040bf2591e55afab87e78060e3fcbc"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "d0f08af6159f60fde07827ee5cde65284082d3f0850f97700d238899fc3cbb56"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-chain-link-fence-RGB-f32.npy",
+          "sha256": "3215efefed0599b23f9070b17e10429cd5b672aaa7afe8b6a309fa8feb45896b"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.0,
+            "changed_native_RGB_values": 0
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.1933831277507882,
+            "changed_native_RGB_values": 76796
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.24237579816819005,
+            "changed_native_RGB_values": 76788
+          }
+        },
+        "native_review": "Both coarse crossing directions remain visible."
+      },
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "fa6fd60502a6cefb0f1643ab2d94167b44ccb878d14ae4ff2c2fc0aa89984b96"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/mesh-nominal.npz",
+          "sha256": "52a4595801968ddd8faadd58ab822c45bc632a5bc3aa0a56ba5163d487b37852"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "637b8cc59897e274277f5d481f67438f15ce0dd4a261443753cdd5715ce1450e"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.966854459214039,
+            "changed_native_RGB_values": 45935
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.9670722296676186,
+            "changed_native_RGB_values": 63207
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.967170637311241,
+            "changed_native_RGB_values": 63210
+          }
+        },
+        "native_review": "Most thin diagonals remain missing and background mottle persists around the post."
+      },
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "223397f97578b6a60a5d117b98ab6de1fe41bc578f3685d0a67acd33ff22e07b"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/mesh-nominal.npz",
+          "sha256": "52a4595801968ddd8faadd58ab822c45bc632a5bc3aa0a56ba5163d487b37852"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "2048675c0c8f530e9bad68d4b7484a833ce659d454210f74df5827c824e9f019"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.98875372225097,
+            "changed_native_RGB_values": 54735
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.9888048197827154,
+            "changed_native_RGB_values": 58940
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 0.9888031663136603,
+            "changed_native_RGB_values": 58947
+          }
+        },
+        "native_review": "Faint near-horizontal and diagonal structures look similar. Fine crossings remain incomplete."
+      },
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "5ac6674077d8efbc916d003e3c9f2e0e073cf127905c99574dbd4386946d0643"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/mesh-profile3879.npz",
+          "sha256": "ac18fe343e5f8c2af15c931a6139d423361a2e8b69f81b640eca67a9782e200c"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "882e0d085d78eb4ab5331e364670b74ba31afb2c031e57256d8453935b378a70"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.7763126739468453,
+            "changed_native_RGB_values": 43100
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.777771111914773,
+            "changed_native_RGB_values": 63240
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 2.7791087792374736,
+            "changed_native_RGB_values": 63242
+          }
+        },
+        "native_review": "Some faint repeating detail remains. Mottle and incomplete crossings persist."
+      },
+      {
+        "image": {
+          "path": "docs/images/paired-flat-companion-v1/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "128eb58f67c9ad3d11cbc72ed0fc4b5e1f4ee571c77e84a8ac213e453b42593b"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Quiet smoothing",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Uniform + quiet",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Directional + quiet",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-feedback-paths-v1/flat-companion-native/real-arrays/mesh-profile3879.npz",
+          "sha256": "ac18fe343e5f8c2af15c931a6139d423361a2e8b69f81b640eca67a9782e200c"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "6db292f0cb09e6bdcb8c31dbc80650b8a9a4d28e9262459dafeb773b48be2656"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-0.15": {
+            "camera_RGB_RMS_DN16": 1.8353515639250586,
+            "changed_native_RGB_values": 40754
+          },
+          "box-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 1.8359541732100442,
+            "changed_native_RGB_values": 51600
+          },
+          "oriented-quiet-0.15": {
+            "camera_RGB_RMS_DN16": 1.8362583953831442,
+            "changed_native_RGB_values": 51602
+          }
+        },
+        "native_review": "Some of both diagonal directions remains visible. Small crossings remain broken or soft."
+      }
+    ],
+    "synthetic": [
+      {
+        "id": "086-iso6400-independent-r0-role0",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 3.0303030303030303,
+        "display_contrast": 2,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source_photo": {
+          "attribution": null,
+          "author": "mattbuck (category)",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/13/139b61b3d9b95f49a82907efe74e47181680986a.npy",
+          "cache_sha256": "02f802694e6042d9b94fd0476e013932f172e0eaaead2e6f0a56b254e829c113",
+          "color_space": "linear-sRGB",
+          "credit": "Own work by mattbuck.",
+          "download_path": "images/13/9b/139b61b3d9b95f49a82907efe74e47181680986a.jpg",
+          "dtype": "uint16",
+          "height": 3740,
+          "id": "139b61b3d9b95f49a82907efe74e47181680986a",
+          "license": "CC BY-SA 3.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Bedminster_railway_station_MMB_26.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Bedminster_railway_station_MMB_26.jpg",
+          "sha1": "139b61b3d9b95f49a82907efe74e47181680986a",
+          "sha1_hex": "139b61b3d9b95f49a82907efe74e47181680986a",
+          "shape": [
+            935,
+            622,
+            3
+          ],
+          "split": "val",
+          "title": "File:Bedminster railway station MMB 26.jpg",
+          "width": 2488
+        },
+        "bbox_native": [
+          308,
+          208,
+          256,
+          256
+        ],
+        "CFA": "GRBG",
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "selection": "Largest fine-increment error reduction with uniform detail plus quiet smoothing",
+        "exact_input": {
+          "repeat": 0,
+          "file": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/observations/086-iso6400-independent-r0.npz",
+            "sha256": "001f1bf8655a71b6d705467d93928fbc20d2ba6402287d266c45f71db9f0d589"
+          },
+          "original": null,
+          "scored_physical_seeds": [
+            1974734551073686313,
+            1172542186473609721,
+            2227686896266955753,
+            3478883942302357144
+          ],
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "55e82e7059b03616fc8f588f480558cfb4601f2d4229a1c8e068ec04a8399883"
+            },
+            "variance": {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "9e2cb07213fc619763bc9a36992981af74fc4ee1e828570bd371f781ba38d97e"
+            },
+            "colors": {
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "7911968d3fb1ac96b52a66a70b0751b78e02bfd4affcdb72e3624f2b38b1bc30"
+            },
+            "wb": {
+              "shape": [
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "87d34d6befab0e1fbed79bb06879bbfd8d40fda71c9b26a4e92ea4e044e7f34e"
+            },
+            "matrix": {
+              "shape": [
+                3,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "06d5cc49d3f39eb2a88880dc779381e2d78368ac6dbef5a49f73b8a756e5c82f"
+            },
+            "target": {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "1279ed0e3b568dcfd9c8cd470e75f6088fae55c4d7ee5a3bde5f52fab67bb7d5"
+            }
+          }
+        },
+        "scope": "Full-strength combined policy; three methods use quiet damping at 15 percent.",
+        "board": {
+          "image": {
+            "path": "docs/images/paired-flat-companion-v1/086-iso6400-independent-r0-role0-comparison.png",
+            "sha256": "0ad3305c87a76e97fdff952f9c8ee2eaf1c8150d7a086564d47282ceae7e09f3"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Quiet smoothing",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Uniform + quiet",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional + quiet",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/images/paired-flat-companion-v1/086-iso6400-independent-r0-role0-triplet.png",
+            "sha256": "0ecaee4d995e79cb0aa881e6a99256e41c94382ffe7781428fd20312b63c6b7f"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Uniform + quiet",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "native_review": "The combined result stays smooth in the sky and keeps the broad clouds. The faint wisps in the exact reference remain soft."
+      },
+      {
+        "id": "094-iso6400-independent-r0-role0",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 3.0303030303030303,
+        "display_contrast": 2,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source_photo": {
+          "attribution": null,
+          "author": "Slaunger",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/29/292fc07b0b4210d9225e422da0a9c766c17d09fa.npy",
+          "cache_sha256": "1d88d257e7a17d88d0fe203dda22e86f4e7466e871524c6c6bec0ba4d5e96267",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/29/2f/292fc07b0b4210d9225e422da0a9c766c17d09fa.jpg",
+          "dtype": "uint16",
+          "height": 3037,
+          "id": "292fc07b0b4210d9225e422da0a9c766c17d09fa",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Couple_selfie_stick_Konigssluis_Amsterdam_2016-09-13-6621.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Couple_selfie_stick_Konigssluis_Amsterdam_2016-09-13-6621.jpg",
+          "sha1": "292fc07b0b4210d9225e422da0a9c766c17d09fa",
+          "sha1_hex": "292fc07b0b4210d9225e422da0a9c766c17d09fa",
+          "shape": [
+            759,
+            1012,
+            3
+          ],
+          "split": "val",
+          "title": "File:Couple selfie stick Konigssluis Amsterdam 2016-09-13-6621.jpg",
+          "width": 4050
+        },
+        "bbox_native": [
+          380,
+          118,
+          256,
+          256
+        ],
+        "CFA": "GRBG",
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "selection": "Largest fine-increment error increase with uniform detail plus quiet smoothing",
+        "exact_input": {
+          "repeat": 0,
+          "file": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/observations/094-iso6400-independent-r0.npz",
+            "sha256": "a131e2258d8e52b0d8a40801a7afa4759544cec3a24297f84f6be900af51c1db"
+          },
+          "original": null,
+          "scored_physical_seeds": [
+            3700976104898655757,
+            1219126000301948163,
+            3352711318116667439,
+            1334891097353875102
+          ],
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "773d3db64dedecc93b669048147e8ddae4e341f45920199a496ab284d0698bf7"
+            },
+            "variance": {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "f6252b379fd9a29d0091ffb140edd5a405222d7827a983b6ca4976462720eab5"
+            },
+            "colors": {
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "7911968d3fb1ac96b52a66a70b0751b78e02bfd4affcdb72e3624f2b38b1bc30"
+            },
+            "wb": {
+              "shape": [
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "889326d72c4991af4aa8a259da28c37bbceb37edac8cf82dfa0eb5b496afa451"
+            },
+            "matrix": {
+              "shape": [
+                3,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "92d47dcf6228b697ba46113b544a037eff1d4ea3f5b040a64e826a8e215670f0"
+            },
+            "target": {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "438813414426ada565d4116b1a0f3620c43642d8c0e37ce65eaa63b34875f9e8"
+            }
+          }
+        },
+        "scope": "Full-strength combined policy; three methods use quiet damping at 15 percent.",
+        "board": {
+          "image": {
+            "path": "docs/images/paired-flat-companion-v1/094-iso6400-independent-r0-role0-comparison.png",
+            "sha256": "83b8e28c314f8875dc60ece84b12ff67e8037f9adc4af9245e3735e950714e43"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Quiet smoothing",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Uniform + quiet",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional + quiet",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/images/paired-flat-companion-v1/094-iso6400-independent-r0-role0-triplet.png",
+            "sha256": "a87dd13a0fd6678ac56d711931a82d2b2cec624bb9157cecf7d2176bb46e4cd2"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Uniform + quiet",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "native_review": "Stronger bars and window patterns remain. Low-contrast detail along the building face and bars is still blurred."
+      },
+      {
+        "id": "086-iso6400-independent-r0-role2",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 3.0303030303030303,
+        "display_contrast": 2,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source_photo": {
+          "attribution": null,
+          "author": "mattbuck (category)",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/13/139b61b3d9b95f49a82907efe74e47181680986a.npy",
+          "cache_sha256": "02f802694e6042d9b94fd0476e013932f172e0eaaead2e6f0a56b254e829c113",
+          "color_space": "linear-sRGB",
+          "credit": "Own work by mattbuck.",
+          "download_path": "images/13/9b/139b61b3d9b95f49a82907efe74e47181680986a.jpg",
+          "dtype": "uint16",
+          "height": 3740,
+          "id": "139b61b3d9b95f49a82907efe74e47181680986a",
+          "license": "CC BY-SA 3.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Bedminster_railway_station_MMB_26.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Bedminster_railway_station_MMB_26.jpg",
+          "sha1": "139b61b3d9b95f49a82907efe74e47181680986a",
+          "sha1_hex": "139b61b3d9b95f49a82907efe74e47181680986a",
+          "shape": [
+            935,
+            622,
+            3
+          ],
+          "split": "val",
+          "title": "File:Bedminster railway station MMB 26.jpg",
+          "width": 2488
+        },
+        "bbox_native": [
+          308,
+          208,
+          256,
+          256
+        ],
+        "CFA": "GRBG",
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "selection": "Largest flat error reduction with the combined policy",
+        "exact_input": {
+          "repeat": 0,
+          "file": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/observations/086-iso6400-independent-r0.npz",
+            "sha256": "001f1bf8655a71b6d705467d93928fbc20d2ba6402287d266c45f71db9f0d589"
+          },
+          "original": null,
+          "scored_physical_seeds": [
+            1974734551073686313,
+            1172542186473609721,
+            2227686896266955753,
+            3478883942302357144
+          ],
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "55e82e7059b03616fc8f588f480558cfb4601f2d4229a1c8e068ec04a8399883"
+            },
+            "variance": {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "9e2cb07213fc619763bc9a36992981af74fc4ee1e828570bd371f781ba38d97e"
+            },
+            "colors": {
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "7911968d3fb1ac96b52a66a70b0751b78e02bfd4affcdb72e3624f2b38b1bc30"
+            },
+            "wb": {
+              "shape": [
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "87d34d6befab0e1fbed79bb06879bbfd8d40fda71c9b26a4e92ea4e044e7f34e"
+            },
+            "matrix": {
+              "shape": [
+                3,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "06d5cc49d3f39eb2a88880dc779381e2d78368ac6dbef5a49f73b8a756e5c82f"
+            },
+            "target": {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "1279ed0e3b568dcfd9c8cd470e75f6088fae55c4d7ee5a3bde5f52fab67bb7d5"
+            }
+          }
+        },
+        "scope": "Full-strength combined policy; three methods use quiet damping at 15 percent.",
+        "board": {
+          "image": {
+            "path": "docs/images/paired-flat-companion-v1/086-iso6400-independent-r0-role2-comparison.png",
+            "sha256": "012318f8b7b1bbc1f13a97c9a2fc26aacb1cc349169429074cfb272b51813ec9"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Quiet smoothing",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Uniform + quiet",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional + quiet",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/images/paired-flat-companion-v1/086-iso6400-independent-r0-role2-triplet.png",
+            "sha256": "dbe5ade45fa5924fbb8a8c3f2631e3b60d3e496ed2c3abea57c60bf5088e3312"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Uniform + quiet",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "native_review": "The exact-flat core stays smooth, with subtle residual variation and soft boundaries."
+      }
+    ],
+    "weights": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-luminance-detail-v1/training/step001200.pt",
+      "sha256": "02f8d5e6664bd580bafe2abeb3b8584b070b60bfadfefaff587cadd8bd643d7f"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+      "type": "base",
+      "step": 100000
+    },
+    "actual_native_viewing_complete": true
+  }
+}

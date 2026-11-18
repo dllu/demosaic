@@ -103,6 +103,9 @@ offsetting its reduction in shared increment error.
 [Bayer innovation smoothing](paired-feedback-paths.md) slightly
 reduces error versus a response-matched paired head. The standing
 fine mesh and the tradeoff versus Corpus 100k remain.
+[Quiet-region smoothing plus the fine lift](paired-flat-companion.md)
+reduces exact-flat RMS by 0.164 DN16 with a small positive
+fine response. High-noise increment error remains mixed.
 
 The [isolated RAW line fit](isolated-raw-line.md) recovers about 81%
 of the weak increment through interrupted synthetic ISO400 wires.

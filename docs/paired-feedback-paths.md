@@ -172,3 +172,8 @@ This is an inference-only study of frozen weights. It contributes
 scoped ISO6400 fine-detail results. The 427-photo and measured-CFA
 scores apply to the separately evaluated full-model checkpoints.
 [PSNR history](performance-history.md).
+
+The [quiet-region follow-up](paired-flat-companion.md) adds a
+separate correction for low-support regions. Its combined
+uniform policy reduces exact-flat error while retaining a small
+positive fine response on the additional ISO6400 photos.
