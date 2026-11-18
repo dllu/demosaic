@@ -7,6 +7,11 @@ Grass fine-band error remains slightly higher than V120. The real
 fine cab fence still lacks clear new crossings.
 [Audited measurements and native crops](results/full-corpus-long86k-native-v1/publication.json).
 
+The [ADC and noise follow-up](full-corpus-long86k-adc.md) tests 64 held-out
+faint photographs, the color palette and three positive-noise priors.
+The larger ADC subset favors bin Malvar. At the ISO100 and ISO6400
+priors, the four faint materials show little fine-band gain.
+
 ## Checkpoint and observations
 
 The 86k state comes from the original 100k trajectory initialized with
@@ -105,8 +110,8 @@ the independent captures. The cab display uses exposure ×16.
 | Nominal | `.00128/6.5536e-6` | [Left](images/full-corpus-long86k-native-v1/mesh-nominal-fine-green-mesh-left.png) · [Right](images/full-corpus-long86k-native-v1/mesh-nominal-fine-green-mesh-right.png) |
 | DSCF3879 profile | `.0014635775921166604/1.0715704128646712e-6` | [Left](images/full-corpus-long86k-native-v1/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/full-corpus-long86k-native-v1/mesh-profile3879-fine-green-mesh-right.png) |
 
-The 100k training run continues. Standard full427, known/unseen camera
-and full ADC-palette results are pending for this retained milestone.
+The 100k training run continues. Standard full427 and known/unseen camera
+results are pending for this retained milestone.
 The scoped result supports using 86k for weak-detail comparisons.
 V120 remains the general inference recommendation.
 [Comparable broad-panel coverage](performance-history.md).

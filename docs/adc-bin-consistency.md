@@ -122,3 +122,10 @@ Corpus20k's weakest-band RMS falls from 2.594 to 1.901 DN16 with ADC-bin
 projection, effectively matching projected V120. All validation IDs are disjoint
 from the current training set. The helper returns both standing positive-noise
 GFX families unchanged. [Analysis implementation](../scripts/report_full_faint_photo_panel.py).
+
+The [86k follow-up](full-corpus-long86k-adc.md) separates bin clamping from
+missing-channel interpolation. All four bin modes use the same measured
+values. Malvar has lower weakest-band error than bilinear or site-only
+transfer on the 64-photo subset. The flat-aware mode matches bilinear
+on all 588 constant inputs and nearly matches Malvar's scores on the
+photos. All four modes retain the positive-noise identity behavior.

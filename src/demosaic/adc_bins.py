@@ -4,8 +4,9 @@ import math
 from functools import lru_cache
 
 import torch
+from torch.nn.functional import max_pool2d
 
-from .cfa import malvar, mosaic
+from .cfa import bilinear, malvar, mosaic
 from .precision import ieee_fp32
 
 
@@ -96,18 +97,33 @@ def adc_bin_bounds(packed, *, bit_depth, black_level, quantizer_precision):
 
 
 def adc_bin_projection(
-    prediction, packed, colors, wb=None, *, bit_depth, black_level, quantizer_precision, shot, read
+    prediction,
+    packed,
+    colors,
+    wb=None,
+    *,
+    bit_depth,
+    black_level,
+    quantizer_precision,
+    shot,
+    read,
+    mode="malvar",
 ):
-    """Lift the nearest ADC-bin correction with the existing WB-aware Malvar.
+    """Clamp measured ADC sites and optionally lift their residual into missing colors.
 
     Positive photon/read noise returns the original prediction object. At zero
     noise, only incompatible measured predictions are clamped to their nearest
-    feasible float32 value; that residual is interpolated into missing colors.
+    feasible float32 value. Malvar lifts the residual with cross-color terms,
+    bilinear interpolation uses only same-color residuals, and sites leaves
+    missing channels unchanged. Flat-aware delivery uses bilinear where each
+    phase's measured codes are constant across its packed 3x3 neighborhood.
     Measured channels are restored exactly after FP32 interpolation. Their
     camera-space squared error cannot increase when truth is in the declared
     bins. Missing-color, rendered-color and spatial errors have no such bound.
     This helper is opt-in; no model config or default inference path calls it.
     """
+    if mode not in ("malvar", "bilinear", "sites", "flat-aware"):
+        raise ValueError("ADC bin projection mode must be malvar, bilinear, sites or flat-aware")
     if any(not math.isfinite(v) or v < 0 for v in (shot, read)):
         raise ValueError("Noise coefficients must be finite and nonnegative")
     if shot > 0 or read > 0:
@@ -139,8 +155,19 @@ def adc_bin_projection(
         residual = nearest - observed
         if not residual.count_nonzero():
             return prediction
-        correction = malvar(residual, colors, wb)
-        output = torch.where(correction != 0, p + correction, p)
+        if mode == "sites":
+            output = p.clone()
+        else:
+            correction = (
+                bilinear(residual, colors) if mode == "bilinear" else malvar(residual, colors, wb)
+            )
+            if mode == "flat-aware":
+                high = max_pool2d(packed, 3, stride=1, padding=1)
+                low = -max_pool2d(-packed, 3, stride=1, padding=1)
+                flat = (low == high).all(dim=1, keepdim=True)
+                flat_pixels = flat.repeat_interleave(2, dim=-2).repeat_interleave(2, dim=-1)
+                correction = torch.where(flat_pixels, bilinear(residual, colors), correction)
+            output = torch.where(correction != 0, p + correction, p)
         for b in range(len(p)):
             for phase, channel in enumerate(colors[b]):
                 y, x = divmod(phase, 2)

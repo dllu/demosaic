@@ -35,12 +35,20 @@ of it. These costs keep the completed control experimental.
 | [Corpus control20k](full-corpus-control20k-review.md) | Completed320k target slots/all90,778 photos. Ordinary/shadow +0.00852/+0.01047 dB; substantial faint recovery from10k | Faint−0.02061 dB versus V120; fine-band error higher for3/4 materials, selected flat spatial RMS worse. Known/unseen +0.03285/−0.04067 dB; worst ADC mean error765.7 versus55.5 DN16. [Camera](full-corpus-control20k-camera-review.md)/[color](full-corpus-control20k-color-review.md) reviews complete, no faithful new fence crossings; full427 photos collecting |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
 | [Long schedule at 50k](full-corpus-long50k-native.md) | Retained ordinary and shadow sRGB are +0.020/+0.044 dB over V120 | Faint fine-band RMS rises on all four materials versus V120. Bright orange ADC mean error reaches 1,490 DN16 in a BGGR spot check, with visible unevenness. Fine cab crossings still incomplete |
-| [Long schedule at 86k](full-corpus-long86k-native.md) | Faint ADC sRGB +0.569 dB versus V120, with lower fine-band error on bark, fur and wood. Worst flat bias drops from 1,490 to 20.58 DN16 since 50k | Grass fine-band RMS and selected flat errors exceed V120. Both GFX families still lack convincing new fine crossings. Full427 and held-out-camera coverage pending |
+| [Long schedule at 86k](full-corpus-long86k-native.md) | Faint ADC sRGB +0.569 dB versus V120 on four materials, with lower fine-band error on bark, fur and wood. Worst bias in the two-color spot check drops from 1,490 to 20.58 DN16 since 50k | Weakest-band error rises in the larger raw photo subset. A bright yellow case still shows a large bias. Both GFX families lack convincing new fine crossings. Full427 and held-out-camera coverage pending |
 
 The [calibrated ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up)
 reduces the 50k worst spot-check bias to 11.16 DN16 and improves faint
 sRGB. Compared with V120 using the same projection, 50k still has
 higher mean fine-band RMS and higher flat bias.
+
+The [86k ADC follow-up](full-corpus-long86k-adc.md) gains 0.518 dB in
+rendered PSNR on 64 faint photos, with worse weakest-band RMS in raw
+86k. Bin Malvar brings that band to 2.208 DN16 versus projected V120 at
+2.269. The full flat-color grid exposes a worst raw bias of 1,429.92 DN16,
+which bin Malvar reduces to 12.87. The four-material noise sweep gains
+detail at very small positive noise and stays near V120 at the ISO100
+and ISO6400 priors.
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes

@@ -24,8 +24,12 @@ the short schedule. Both standing GFX families were reviewed.
 The latest [long-schedule 86k review](full-corpus-long86k-native.md)
 gains 0.569 dB faint ADC sRGB over V120 on the retained material panel.
 Fine-band error improves on bark, fur and wood. Worst ADC flat bias
-falls from 1,489.97 DN16 at 50k to 20.58 at 86k, with V120 at 15.08.
-Both GFX scenes still lack convincing new fine crossings.
+on the two-color spot check falls from 1,489.97 DN16 at 50k to 20.58
+at 86k, with V120 at 15.08. The [broader ADC follow-up](full-corpus-long86k-adc.md)
+finds higher raw 86k weakest-band error across 64 faint photographs and
+a 1,429.92 DN16 raw bias on the full flat-color grid. Bin Malvar reduces
+both errors below matched projected V120. Both GFX scenes still lack
+convincing new fine crossings.
 
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
 [64-source study](whole-scene-context-development64.md) and

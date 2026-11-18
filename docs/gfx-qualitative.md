@@ -60,7 +60,8 @@ historical boards. Use these reports for the current completed comparisons:
   and foliage remain soft against the independent reference.
 - [Long-schedule 86k checkpoint](full-corpus-long86k-native.md#native-gfx100s-review)
   retains the smooth sky and visible coarse crossings. Small hardware,
-  cables and fine leaves remain soft.
+  cables and fine leaves remain soft. [All four ADC-bin modes](full-corpus-long86k-adc.md#standing-gfx-review)
+  reproduce those positive-noise outputs exactly.
 - [Oriented RAW support](oriented-raw-support.md) gives the same sky
   pixels. The rectangles make small changes to the building, foliage,
   and coarse fence, with the main crossings still visible.

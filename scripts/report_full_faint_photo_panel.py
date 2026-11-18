@@ -90,10 +90,10 @@ def band_sums(prediction, target, masks):
     return result
 
 
-def physical_outputs(value, arrays):
+def physical_outputs(value, arrays, *, lift_modes=(), calibration=ADC):
     packed, colors, wb = [torch.from_numpy(arrays[k]) for k in ("packed", "colors", "wb")]
     prediction = torch.from_numpy(value)
-    return {
+    outputs = {
         "raw": value,
         "existing-exact-Malvar": adc_cfa_projection(
             prediction, packed, colors, wb, mode="malvar"
@@ -101,8 +101,20 @@ def physical_outputs(value, arrays):
         "existing-exact-sites": adc_cfa_projection(
             prediction, packed, colors, wb, mode="sites"
         ).numpy(),
-        "ADC-bins-Malvar": adc_bin_projection(prediction, packed, colors, wb, **ADC).numpy(),
+        "ADC-bins-Malvar": adc_bin_projection(
+            prediction, packed, colors, wb, **calibration
+        ).numpy(),
     }
+    for mode in lift_modes:
+        corrected = adc_bin_projection(prediction, packed, colors, wb, **calibration, mode=mode)
+        torch.testing.assert_close(
+            mosaic(corrected, colors),
+            mosaic(torch.from_numpy(outputs["ADC-bins-Malvar"]), colors),
+            rtol=0.0,
+            atol=0.0,
+        )
+        outputs[f"ADC-bins-{mode}"] = corrected.numpy()
+    return outputs
 
 
 def check_bin_projection(variants, inputs, target):
@@ -121,7 +133,7 @@ def check_bin_projection(variants, inputs, target):
     assert np.all((corrected - truth) ** 2 <= (old - truth) ** 2)
 
 
-def score(batch, record, models):
+def score(batch, record, models, *, lift_modes=()):
     assert (
         batch["id"] == record["id"] and batch["input_fingerprints"] == record["input_fingerprints"]
     )
@@ -131,7 +143,9 @@ def score(batch, record, models):
     for variant in record["variants"]:
         model = variant["label"]
         assert variant["checkpoint"] == models[model]["checkpoint"]
-        predictions[model] = physical_outputs(np.load(checked(variant["prediction"])), inputs)
+        predictions[model] = physical_outputs(
+            np.load(checked(variant["prediction"])), inputs, lift_modes=lift_modes
+        )
     # All physical operators above receive only the observed packed codes,
     # Bayer indices, WB and the model output. Target opens start here.
     with np.load(checked(batch["target"])) as data:
