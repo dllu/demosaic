@@ -100,6 +100,10 @@ has repeatedly come with extra flat-region error or false color. The
    leaves both real fences unchanged. Exact curvature helps lower-noise
    far-edge weak response. Test geometry measured in stronger, disjoint
    parts of a scene with query-local amplitude and support. [Phase drift](phase-drift.md).
+   A stronger adjacent donor raises lower-noise far curved response
+   from 2.60% to 4.29% at matched quiet error. Only one curved source's
+   weak direction is accepted under either profile. Both real fences
+   fall back to the guarded fit. [Measured donor geometry](donor-phase-geometry.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

@@ -64,6 +64,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [bright-side cross-edge evidence on fresh geometries](asymmetric-phase-evidence.md) ·
 [RAW cross-check for donor frequency moves](phase-guide-crosscheck.md) ·
 [RAW phase with changing wire geometry](phase-drift.md) ·
+[measured phase geometry from a disjoint RAW donor](donor-phase-geometry.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
 [scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·

@@ -18,7 +18,7 @@ from demosaic.archive_metrics import display, noisy_malvar
 from demosaic.experiments.artifacts import checked, read_json, reference, write_json
 
 
-def make_camera_board(output, old, new):
+def make_camera_board(output, old, new, *, label="Phase drift"):
     assert old["id"] == new["id"]
     a, b, w, h = old["ROI_xywh"]
     scene = old["source"]
@@ -39,7 +39,7 @@ def make_camera_board(output, old, new):
         old["id"],
         old | {"panels": selected},
         "Cross-checked guide",
-        [("Phase drift", rendered)],
+        [(label, rendered)],
     )
     return old | {
         "comparison_source": old["image"],

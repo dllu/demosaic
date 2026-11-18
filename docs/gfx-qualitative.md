@@ -94,6 +94,10 @@ historical boards. Use these reports for the current completed comparisons:
 - [RAW phase drift](phase-drift.md) reproduces the cross-checked sky and
   coarse fence in linear RGB. The small foliage and building shifts
   leave thin details soft.
+- [Measured donor geometry](donor-phase-geometry.md) uses the planar
+  fallback in all four areas. The sky stays smooth and visible coarse
+  crossings remain. The [50k ADC projection](full-corpus-long50k-native.md#calibrated-adc-follow-up)
+  also verifies exact bypass on these positive-noise inputs.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

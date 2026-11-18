@@ -80,6 +80,10 @@ far-edge result motivates estimating phase geometry in a cleaner
 surrounding region before local validation.
 [Independent reductions and geometry counts](results/phase-drift-v1/independent-audit.json).
 
+The [measured donor follow-up](donor-phase-geometry.md) recovers a
+little more weak response on curved lower-noise far cases, with
+mixed results overall and fallback on both real fences.
+
 ## Native comparisons
 
 The triplets use 160×160 cells at `[176,176,160,160]` in the original

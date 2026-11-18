@@ -32,7 +32,9 @@ preserves its original comparison pixels and provenance.
 | [Bright-side cross-edge validation](asymmetric-phase-evidence.md) | Both weights reproduce the existing cab views for both crop sides and profiles. Fine crossings remain incomplete |
 | [RAW guide cross-check](phase-guide-crosscheck.md) | Both ROIs and profiles viewed with both JPEGs. The left stays identical to the guarded fit. The right changes slightly, with fine crossings still incomplete |
 | [RAW phase drift](phase-drift.md) | All four cab ROIs/profile combinations reproduce the prior cross-check exactly. Fine crossings remain incomplete |
+| [Measured donor geometry](donor-phase-geometry.md) | Neither adjacent donor passes the transfer checks under either profile. Both sides reproduce the guarded result, with incomplete crossings |
 | [Faint ADC follow-up](full427-faint-adc.md) | Positive-noise projection returns the earlier Corpus20k and V120 output on both ROIs and profiles, verified against the inputs underlying the retained boards |
+| [50k ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up) | The bin projection also bypasses the original 50k outputs exactly for both positive-noise profiles |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |

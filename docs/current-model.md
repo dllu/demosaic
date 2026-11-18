@@ -36,6 +36,11 @@ of it. These costs keep the completed control experimental.
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
 | [Long schedule at 50k](full-corpus-long50k-native.md) | Retained ordinary and shadow sRGB are +0.020/+0.044 dB over V120 | Faint fine-band RMS rises on all four materials versus V120. Bright orange ADC mean error reaches 1,490 DN16 in a BGGR spot check, with visible unevenness. Fine cab crossings still incomplete |
 
+The [calibrated ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up)
+reduces the 50k worst spot-check bias to 11.16 DN16 and improves faint
+sRGB. Compared with V120 using the same projection, 50k still has
+higher mean fine-band RMS and higher flat bias.
+
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes
 only comparable completed broad panels. A higher mean score alone does not
@@ -158,6 +163,9 @@ The [RAW phase-drift search](phase-drift.md) lowers ISO400 far weak response
 at the same quiet error and leaves both real fences unchanged. Exact
 geometry helps a smaller lower-noise far-edge diagnostic, pointing to
 geometry estimation on stronger measurements as a possible next step.
+The [measured donor test](donor-phase-geometry.md) gives a small gain
+on the lower-noise far curved subset with the same fixed planar
+center frequencies. All reviewed GFX queries use the guarded fallback.
 
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),

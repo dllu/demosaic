@@ -64,6 +64,41 @@ The eight spot checks cover two colors and four Bayer layouts.
 [Per-material and flat summary](results/full-corpus-long50k-native-v1/native-summary.json) ·
 [Orange BGGR crop](images/full-corpus-long50k-native-v1/flat-h030-s0.98-l0.90-BGGR.png).
 
+## Calibrated ADC follow-up
+
+Applying the existing [ADC-bin projection](adc-bin-consistency.md) to
+saved 50k predictions lowers worst spot-check color bias from
+**1,490 to 11.16 DN16**, with centered RMS falling from 148.52 to
+7.39 DN16. The earlier exact Malvar correction reaches 10.64 DN16
+bias and 7.39 DN16 RMS on the same grid. Both remove the visible
+orange shift and unevenness. This follow-up covers 16 faint inputs
+and eight flat inputs with their original CPU quantizers and zero
+shot/read conditioning. The bin fits remain within the measured CFA
+intervals and improve or preserve measured-site error on every case.
+
+| Model and policy | Faint sRGB dB | Mean fine-band RMS, DN16 | Worst flat bias, DN16 |
+| --- | ---: | ---: | ---: |
+| V120 | 67.48067 | 6.5080 | 15.08 |
+| V120 + ADC bins | 67.61383 | 5.8066 | 3.82 |
+| Long 50k | 67.42286 | 6.7213 | 1,489.97 |
+| Long 50k + exact Malvar | 67.65069 | 5.9171 | 10.64 |
+| Long 50k + ADC bins | 67.72013 | 5.9185 | 11.16 |
+
+The corrected 50k output scores better on faint sRGB than corrected
+V120, with slightly higher mean fine-band error and higher flat
+bias. All positive-noise inputs from both GFX scenes bypass the
+operator exactly for both models and retain their viewed native
+pixels. Four ADC boards were viewed. The two exact-target triplets
+below use the same RGGB provenance and display as the raw triplets
+in the native comparison section.
+[Saved-output receipts](results/full-corpus-long50k-adc-spot-v1/publication.json) ·
+[Orange BGGR](images/full-corpus-long50k-adc-spot-v1/flat-h030-s0.98-l0.90-BGGR-comparison.png) ·
+[Orange RGGB](images/full-corpus-long50k-adc-spot-v1/flat-h030-s0.98-l0.90-RGGB-comparison.png).
+
+![Bark ADC correction, noisy Malvar, restored and exact GT](images/full-corpus-long50k-adc-spot-v1/bark-contrast0p025-adc-RGGB-triplet.png)
+
+![Fur ADC correction, noisy Malvar, restored and exact GT](images/full-corpus-long50k-adc-spot-v1/raccoon-fur-contrast0p025-adc-RGGB-triplet.png)
+
 ## Native comparisons
 
 The bark and fur triplets show noisy Malvar, 50k EMA and exact

@@ -290,6 +290,37 @@ def _validate_phase_drift(enabled, bins, harmonics, templates):
         raise ValueError("Phase drift requires the full query-fitted phase basis")
 
 
+def _validate_phase_hessians(value, shape, guide, bins, harmonics, adaptive, templates):
+    if value is None:
+        return None
+    if guide is None or not bins or harmonics is not None or adaptive or templates is not None:
+        raise ValueError(
+            "Fixed phase Hessians require fixed frequencies and a query-fitted phase basis"
+        )
+    hessians = np.asarray(value, np.float64)
+    if (
+        hessians.shape != (2, 2, 2)
+        or not np.isfinite(hessians).all()
+        or not np.array_equal(hessians, hessians.transpose(0, 2, 1))
+    ):
+        raise ValueError("Require two finite symmetric native phase Hessians")
+    if any(
+        not phase_gradient_in_annulus(frequency, hessian, shape)
+        for frequency, hessian in zip(guide, hessians, strict=True)
+    ):
+        raise ValueError("Fixed phase geometry leaves the native frequency annulus")
+    return tuple(tuple(tuple(float(v) for v in row) for row in hessian) for hessian in hessians)
+
+
+def phase_gradient_in_annulus(frequency, hessian, shape):
+    """Conservatively bound the frequency norm throughout a native rectangle."""
+    hy, hx = (np.asarray(shape, dtype=np.float64) - 1) / 2
+    corners = np.array([[-hx, -hy], [-hx, hy], [hx, -hy], [hx, hy]])
+    deviation = np.max(np.linalg.norm(corners @ np.asarray(hessian), axis=1))
+    radius = np.linalg.norm(frequency)
+    return radius - deviation >= 1 / 64 and radius + deviation <= 0.24
+
+
 def _validate_shared_phase_shape(shared, bins, harmonics):
     if type(shared) is not bool or (shared and (not bins or harmonics is not None)):
         raise ValueError("A shared phase shape requires the full interpolated phase basis")
@@ -520,6 +551,14 @@ def _drift_offset(x, y, shape, frequency, drift):
     return 0.5 * (drift[0] * normal**2 + drift[1] * tangent**2)
 
 
+def _fixed_phase_offset(xx, yy, shape, hessian):
+    if not np.any(hessian):
+        return None
+    x, y = xx - (shape[1] - 1) / 2, yy - (shape[0] - 1) / 2
+    (xx_coef, xy_coef), (_, yy_coef) = hessian
+    return 0.5 * (xx_coef * x**2 + 2 * xy_coef * x * y + yy_coef * y**2)
+
+
 def _search_phase_drifts(raw, green, nuisance, xx, yy, frequencies, bins, shot, read):
     """Fit quadratic phase on one fold and cross-check it within that fold."""
     chosen, trials = [(0, 0), (0, 0)], []
@@ -605,6 +644,7 @@ def fit_local_candidate(
     phase_guide_edge_guard_px=0,
     phase_guide_crosscheck=False,
     phase_drift_search=False,
+    guide_phase_hessians_xy=None,
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
@@ -632,6 +672,15 @@ def fit_local_candidate(
         np.asarray(raw, np.float64),
         np.asarray(colors),
         np.asarray(discovery_mask),
+    )
+    hessians = _validate_phase_hessians(
+        guide_phase_hessians_xy,
+        raw.shape,
+        guide_frequencies_xy,
+        phase_bins,
+        phase_harmonics,
+        phase_drift_search or recenter_phase_guides,
+        templates,
     )
     initial = fit_candidate(
         raw,
@@ -741,7 +790,11 @@ def fit_local_candidate(
     elif phase_bins:
         waves = []
         for index, frequency in enumerate(frequencies):
-            offset = _drift_offset(xx, yy, raw.shape, frequency, drifts[index]) if drifts else None
+            offset = None
+            if drifts:
+                offset = _drift_offset(xx, yy, raw.shape, frequency, drifts[index])
+            elif hessians is not None:
+                offset = _fixed_phase_offset(xx, yy, raw.shape, hessians[index])
             weights = _phase_bin_weights(xx, yy, frequency, phase_bins, offset=offset)
             # Parameterize a zero-mean knot profile. The existing nuisance
             # intercept handles the DC shared across phase bins.
@@ -1213,6 +1266,7 @@ def restore_local_waves(
     phase_guide_edge_guard_px=0,
     phase_guide_crosscheck=False,
     phase_drift_search=False,
+    guide_phase_hessians_xy=None,
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
@@ -1301,6 +1355,15 @@ def restore_local_waves(
         raise ValueError("Refit requires shrunken phase profiles and pooled RAW-wave support")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
+    hessians = _validate_phase_hessians(
+        guide_phase_hessians_xy,
+        (h, w),
+        guide_frequencies_xy,
+        phase_bins,
+        phase_harmonics,
+        phase_drift_search or recenter_phase_guides,
+        templates,
+    )
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
     if phase_bins:
         guide["phase_bins"] = phase_bins
@@ -1314,6 +1377,8 @@ def restore_local_waves(
         guide["phase_guide_crosscheck"] = True
     if phase_drift_search:
         guide["phase_drift_search"] = True
+    if hessians is not None:
+        guide["guide_phase_hessians_xy"] = hessians
     if shared_phase_shape:
         guide["shared_phase_shape"] = True
     if templates is not None:
@@ -1363,15 +1428,25 @@ def restore_local_waves(
                 if discovery_mask is None
                 else discovery_mask[region]
             )
+            patch_guide = guide
+            if hessians is not None:
+                center_delta = np.array([x + (n - w) / 2, y + (n - h) / 2])
+                local_frequencies = (
+                    np.asarray(guide_frequencies_xy) + np.asarray(hessians) @ center_delta
+                )
+                patch_guide = {
+                    **guide,
+                    "guide_frequencies_xy": tuple(map(tuple, local_frequencies)),
+                }
             candidates = [
                 fit_local_candidate(
-                    tile, layout, mask, shot=shot, read=read, config=config, **guide
+                    tile, layout, mask, shot=shot, read=read, config=config, **patch_guide
                 )
                 for mask in [split, ~split]
             ]
             active_sides = [c.phase_bright_side is not None for c in candidates]
             if phase_edge_side is not None and active_sides[0] != active_sides[1]:
-                plain = {k: v for k, v in guide.items() if k != "phase_edge_side"}
+                plain = {k: v for k, v in patch_guide.items() if k != "phase_edge_side"}
                 candidates = [
                     fit_local_candidate(
                         tile, layout, mask, shot=shot, read=read, config=config, **plain
