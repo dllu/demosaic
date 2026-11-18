@@ -290,8 +290,11 @@ used byte-identical observations across 4,800 training photos. On the
 eight-photo ISO6400 pilot, spatial context leaves almost the same
 coupled increment error and adds more flat-core variation than the
 local arm. The matched scene slightly reduces flat-core variation
-against the spatial model's own masked preview. Three endpoints'
-standing reviews are complete and the localized local arm is training.
+against the spatial model's own masked preview. The [initial matched
+four-arm review](scene-local-contrast-2400.md#initial-four-arm-numerical-and-native-review)
+finds small scene effects in both recipes at ISO6400. All four standing
+reviews are complete, with incomplete fine cab crossings. The full
+64-photo and fixed photo/camera evaluations are in progress.
 
 The [64-photo natural-texture evaluation](full-corpus-faint-noise.md)
 finds that corpus scaling mainly lowers ISO6400 output variance.

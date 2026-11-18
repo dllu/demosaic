@@ -2,12 +2,12 @@
 
 Four matched 2,400-update continuations test whether training on locally
 weakened texture helps a whole-image restoration model recover faint detail
-while keeping flat areas smooth. The localized spatial, plain local and
-plain spatial arms have finished their eight-photo and standing-camera
-reviews. The localized local arm is training. An
-eight-photo pilot with existing checkpoints shows slightly cleaner
-flat cores when the spatial model sees the matching scene, with no increase
-in true fine-detail response. [Run, pilot and review bindings](results/scene-local-contrast-2400-v1/publication.json).
+while keeping flat areas smooth. All four arms have finished training
+and their initial eight-photo and standing-camera reviews. On the
+matched ISO6400 replay, scene features leave fine-increment error
+nearly identical and raise flat-core variation slightly with coupled
+draws. The full held-out and fixed panels are in progress.
+[Training and initial reviews](results/scene-local-contrast-2400-v1/matched-early-publication.json).
 
 ## Training and corpus coverage
 
@@ -379,7 +379,78 @@ intervals. The observed geometry leaves open whether preview scale
 contributes to the weaker real fine-detail result.
 [Measured geometry from all 19,200 training crops and both standing captures](results/scene-local-contrast-2400-v1/preview-scale.json).
 
-The full matched 64-photo weak-detail and fixed 427-photo and
-known/unseen camera evaluations are queued behind the localized local
-endpoint. Plain spatial is the latest endpoint evaluated on the
-eight-photo and standing GFX scope.
+### Localized local and matched training closure
+
+Localized local completed 2,400 updates in **1,271.02 seconds** of
+measured training. Its raw and EMA checkpoint SHA256 is
+`8e1ebee6f40609c6022b3fb1b5c70443241916bcd25d9e87db9c3a40a9c8796b`.
+It starts from the same Corpus 100k EMA and uses the same uniformly
+scheduled 4,800 photos and 19,200 native crops as the other arms.
+The 2,386 localized changes use the same source coordinates, draw
+seeds and camera recipe as ordinary draws. Each local arm's complete
+observed trace is byte-identical to the corresponding spatial arm.
+The two recipes also reproduce every observation on the 2,414
+unmodified draws.
+[Matched training receipt](results/scene-local-contrast-2400-v1/matched-training.json) · [Fourth checkpoint binding](results/scene-local-contrast-2400-v1/localized-none-verified.json) · [Frozen fourth training evidence](results/scene-local-contrast-2400-v1/localized-none-training-evidence.tar.xz).
+
+The full matched 64-photo weak-detail test and fixed 427-photo and
+known/unseen camera panels began after the training closure.
+
+#### Initial four-arm numerical and native review
+
+The first eight sources of the full CUDA IEEE FP32 collector use the
+same physical queries and preview fingerprints as the preceding pilot.
+Localized local reduces coupled ISO6400 flat RMS slightly versus
+plain local, from 4.69 to 4.66 DN16, with higher fine-increment RMS.
+Within the localized recipe, the scene arm changes coupled fine-
+increment RMS from 84.35 to 84.40 DN16 and flat-core RMS from
+4.66 to 4.85. Within the plain recipe it changes 84.16 to 84.16
+and 4.69 to 4.86, respectively. Corpus 100k gives 4.21 flat-core RMS
+and 68.18% fine response, compared with 67.34–67.61% for the
+four trained arms.
+
+The exploratory spatial-by-recipe increment contrast is +0.048 DN16
+with a source-paired interval of −0.040 to +0.167. The flat RMS
+contrast is +0.022 DN16 (0.005–0.043). Independent ISO6400 draws
+put the spatial increment errors about 0.15 DN16 lower than their
+local counterparts in both recipes. All figures in this section
+describe the small initial set.
+[Eight-photo metrics](results/scene-local-contrast-2400-v1/matched-early-heldout.json) · [Paired differences](results/scene-local-contrast-2400-v1/matched-early-interaction.json).
+
+The native stone and cathedral triplets compare noisy Malvar,
+localized local EMA and exact synthetic GT. They use ROI
+`[48,48,160,160]`, shot/read `0.00128 / 6.5536e-6`, ADC16
+black fraction 0.03, display exposure ×3.0303 and contrast ×2.
+Fine grain and masonry remain soft. The same checkpoint leaves
+the exact flat core smooth in the third viewed crop.
+[Sources and native viewing](results/scene-local-contrast-2400-v1/matched-early-native-viewing.json).
+
+![Stone, noisy Malvar, localized local EMA and exact GT](images/scene-local-contrast-2400-matched/000-iso6400-coupled-role0-triplet.png)
+
+![Cathedral, noisy Malvar, localized local EMA and exact GT](images/scene-local-contrast-2400-matched/001-iso6400-coupled-role0-triplet.png)
+
+#### Matched standing GFX review
+
+All four 2,400-update EMAs were viewed together at the same native
+coordinates and noise/display settings as the earlier boards. Localized
+local retains the smooth sky and both coarse fence directions at
+exposure ×4. Fine cables and leaf tips remain soft. The two local-only
+predictions differ by 0.48 DN16 RMS in the sky and 1.61 in the coarse
+fence. The fine cab mesh retains faint repeat structure under
+transferred conditioning at exposure ×16. Its crossings remain
+incomplete under both priors. Both camera JPEGs and independently
+demosaiced ISO100 AHD remain qualitative references.
+[Viewed images, checkpoint and conditioning bindings](results/scene-local-contrast-2400-v1/matched-standing-viewing.json) · [Measured differences](results/scene-local-contrast-2400-v1/matched-standing-deltas.json).
+
+[Sky](images/scene-local-contrast-2400-matched/main-overcast-sky-main-overcast-sky.png) · [Building](images/scene-local-contrast-2400-matched/main-building-detail-main-building-detail.png) · [Foliage](images/scene-local-contrast-2400-matched/main-foliage-main-foliage.png) · [Coarse fence](images/scene-local-contrast-2400-matched/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | All four matched endpoints |
+| --- | --- |
+| Nominal | [Left](images/scene-local-contrast-2400-matched/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-matched/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-local-contrast-2400-matched/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-matched/mesh-profile3879-fine-green-mesh-right.png) |
+
+Localized local is the latest checkpoint evaluated on this scope.
+The remaining 64-photo cases are collecting. The fixed 427-photo
+and known/unseen panels passed the three-case preflight and are
+collecting.
+[Preflight receipt](results/scene-local-contrast-2400-v1/matched-canonical-preflight.json) · [Current publication manifest](results/scene-local-contrast-2400-v1/matched-early-publication.json).

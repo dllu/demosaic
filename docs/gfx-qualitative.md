@@ -81,6 +81,9 @@ historical boards. Use these reports for the current completed comparisons:
   The [plain spatial control](scene-local-contrast-2400.md#plain-spatial-standing-gfx-review)
   keeps a smooth sky and visible coarse crossings, with soft leaf tips
   and smaller bracket cables.
+  The [four-arm comparison](scene-local-contrast-2400.md#matched-standing-gfx-review)
+  includes localized local, which keeps the existing coarse crossings
+  and smooth sky. Fine foliage and bracket details remain soft.
 - [Disjoint RAW patch search](natural-raw-donor-evidence.md#standing-gfx100s-scenes)
   keeps the Corpus 100k crop bytes in all four main contexts.
   The foliage coarse match fails the local fine-detail check.
