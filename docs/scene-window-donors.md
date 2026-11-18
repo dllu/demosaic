@@ -7,6 +7,10 @@ before running that same check. It compares spectra alone, near and
 whole-frame appearance, and whole-frame appearance along the route
 from the query to each donor.
 
+The [query-fit follow-up](query-rail-background.md) holds these
+guides fixed and isolates the effect of the local background
+and validation score on false texture.
+
 ## A shared catalog and independent checks
 
 The synthetic replay reuses the 16 source 88–95 observations and exact

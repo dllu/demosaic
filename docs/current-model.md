@@ -206,6 +206,14 @@ both recover less than 1%. Full-frame ranking avoids visible building
 bands introduced by the wider spectral search. The cab crossings
 remain soft.
 
+[Two-boundary query validation](query-rail-background.md) lowers
+rail-only correction RMS from 7.29 to 0.79 DN16 with forced guides
+and retains about 4.80% ISO400 weak response with full-frame guides
+at the same quiet limit. It suppresses the building's color bands
+when the spectral guide is held fixed. The finer cab mesh still
+falls back to V120, and removing the held-out amplitude penalty
+weakens recovery at matched quiet error.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

@@ -85,3 +85,13 @@ def parallel_edges(values, coordinates, angle, offset):
         if best is None or error < best[0]:
             best = (error, float(normal), *map(float, thresholds))
     return best
+
+
+def supported_parallel_edges(values, coordinates, angle, offset, old_error, shot, read):
+    """Keep a second boundary when its A-only fit pays the fixed noise penalty."""
+    candidate = parallel_edges(values, coordinates, angle, offset)
+    penalty = 12 * (read + shot * max(1e-6, values.mean()))
+    if candidate is None or old_error - candidate[0] <= penalty:
+        return None
+    _, normal, first, second = candidate
+    return normal, first, second

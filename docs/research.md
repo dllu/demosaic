@@ -137,6 +137,11 @@ has repeatedly come with extra flat-region error or false color. The
    Full-frame appearance protects the building. The fixed-bracket
    lead and the cab donor crops point to the remaining selection
    problem. A straight-path appearance score does little to solve it.
+   [Query background and score controls](query-rail-background.md)
+   find that a two-boundary fit suppresses rail and building artifacts
+   with similar weak response. Dropping the amplitude penalty in a
+   fixed-shape matched score produces more quiet error and less
+   recovery after quiet matching, even with exact center frequencies.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

@@ -167,18 +167,22 @@ def _fold_fields(
     y_train = raw.ravel()[selected]
     fitted = np.linalg.lstsq(background[selected], y_train, rcond=1e-10)[0]
     if parallel_edge:
-        from .full_frame_edge import parallel_edges
+        from .full_frame_edge import supported_parallel_edges
 
-        candidate = parallel_edges(
-            y_train, np.column_stack((x[selected], y[selected])), angle, offset
+        candidate = supported_parallel_edges(
+            y_train,
+            np.column_stack((x[selected], y[selected])),
+            angle,
+            offset,
+            np.sum((y_train - background[selected] @ fitted) ** 2),
+            shot,
+            read,
         )
         if candidate is not None:
-            error, normal, low, high = candidate
-            old_error = np.sum((y_train - background[selected] @ fitted) ** 2)
-            if old_error - error > 12 * (read + shot * max(1e-6, y_train.mean())):
-                coordinate = x * np.cos(normal) + y * np.sin(normal)
-                background = np.column_stack((affine, coordinate > low, coordinate > high))
-                fitted = np.linalg.lstsq(background[selected], y_train, rcond=1e-10)[0]
+            normal, first, second = candidate
+            coordinate = x * np.cos(normal) + y * np.sin(normal)
+            background = np.column_stack((affine, coordinate > first, coordinate > second))
+            fitted = np.linalg.lstsq(background[selected], y_train, rcond=1e-10)[0]
     inverse_sigma = 1 / np.sqrt(read + shot * np.maximum(background @ fitted, 1e-6))
     testing = green & ~discovery.ravel()
     if eligible is not None:

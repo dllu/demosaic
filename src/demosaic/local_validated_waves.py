@@ -68,7 +68,7 @@ class LocalWaveConfig:
             or self.matching not in ("legacy", "cardinality")
             or not 1 <= self.harmonics <= 4
             or self.support_unit not in ("direction", "harmonic")
-            or self.background not in ("step", "piecewise_affine")
+            or self.background not in ("step", "piecewise_affine", "parallel_step")
             or self.edge_search not in ("bounded-grid", "full-frame")
             or self.frequency_weighting
             not in ("uniform", "inverse-variance", "hann-inverse-variance")
@@ -113,6 +113,7 @@ class LocalCandidate:
     guide_crosschecks: tuple = ()
     phase_drifts: tuple = ()
     phase_drift_trials: tuple = ()
+    parallel_edges: tuple | None = None
 
 
 def _phase_cycles(xx, yy, frequency, offset):
@@ -699,9 +700,31 @@ def fit_local_candidate(
     nuisance = np.column_stack((affine, (x * np.cos(angle) + y * np.sin(angle) > offset).ravel()))
     green = ((colors == 1) & discovery_mask).ravel()
     first_frequency = initial.frequencies_xy[0]
+    edge_for_validation = nuisance
+    parallel = None
     if config.background == "piecewise_affine":
         step = nuisance[:, 3]
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
+        edge_for_validation = nuisance
+    elif config.background == "parallel_step":
+        from .full_frame_edge import supported_parallel_edges
+
+        values = raw.ravel()[green]
+        single = nuisance[green]
+        residual = values - single @ np.linalg.lstsq(single, values, rcond=1e-10)[0]
+        parallel = supported_parallel_edges(
+            values,
+            np.column_stack((x.ravel()[green], y.ravel()[green])),
+            angle,
+            offset,
+            residual @ residual,
+            shot,
+            read,
+        )
+        if parallel is not None:
+            normal, first, second = parallel
+            pos = (x * np.cos(normal) + y * np.sin(normal)).ravel()
+            nuisance = np.column_stack((affine, pos > first, pos > second))
     excluded = 0
     crosschecks = [] if phase_guide_crosscheck else None
     drifts, drift_trials = (), ()
@@ -735,7 +758,7 @@ def fit_local_candidate(
                 raw, search, nuisance, xx, yy, frequencies, phase_bins, shot, read
             )
     else:
-        if config.background == "piecewise_affine":
+        if config.background != "step":
             first_frequency = _residual_peak(raw, green, nuisance)
         weights = None
         if config.frequency_weighting != "uniform":
@@ -820,7 +843,7 @@ def fit_local_candidate(
             waves, templates, nuisance, raw.ravel(), indices, noise_fields
         )
     bright = (
-        _bright_edge_side(raw, green, nuisance, indices, shot, read)
+        _bright_edge_side(raw, green, edge_for_validation, indices, shot, read)
         if phase_edge_side is not None
         else None
     )
@@ -902,6 +925,7 @@ def fit_local_candidate(
         tuple(crosschecks or ()),
         drifts,
         drift_trials,
+        parallel,
     )
 
 
@@ -1263,6 +1287,7 @@ def restore_local_waves(
     compare_oriented_support=False,
     compare_joint_colour_support=False,
     compare_pooled_refit=False,
+    compare_matched_refit=False,
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
     phase_guide_crosscheck=False,
@@ -1363,6 +1388,16 @@ def restore_local_waves(
         and (not shrink_phase_fit or not compare_pooled_support or conditional_delivery)
     ):
         raise ValueError("Refit requires shrunken phase profiles and pooled RAW-wave support")
+    if type(compare_matched_refit) is not bool or (
+        compare_matched_refit
+        and (
+            not compare_pooled_refit
+            or config.amplitude_window
+            or bright_cross_edge_weight
+            or phase_edge_side == "profiles"
+        )
+    ):
+        raise ValueError("Matched refit requires shared profiles and default spatial weights")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     hessians = _validate_phase_hessians(
@@ -1416,6 +1451,10 @@ def restore_local_waves(
         modes += ("joint", "joint-veto")
     refit_modes = ("all-site-refit", "weighted-refit") if compare_pooled_refit else ()
     modes += refit_modes
+    matched_modes = ("matched-refit", "orthogonal-refit") if compare_matched_refit else ()
+    modes += matched_modes
+    if compare_matched_refit:
+        from .matched_query_evidence import matched_query_scores
     outputs = {(mode, float(t)): parent.copy() for mode in modes for t in thresholds}
     if shot + read == 0:
         return outputs, {"patches": 0, "identity_zero_noise": True}
@@ -1585,9 +1624,41 @@ def restore_local_waves(
                     for fold, c in enumerate(candidates)
                 ]
                 paired_refits = tuple(zip(refitted[0], refitted[1], strict=True))
+            if compare_matched_refit:
+                contrasts = [
+                    matched_query_scores(
+                        c,
+                        tile,
+                        layout,
+                        test,
+                        weight,
+                        window=config.validation_window,
+                        stride=config.validation_stride,
+                    )
+                    for c, test, weight in zip(candidates, validation, reliability, strict=True)
+                ]
+                alternative = []
+                for mode in range(len(matched_modes)):
+                    scores_by_pair = [
+                        pooled_support_score(contrasts[0][mode, a], contrasts[1][mode, b])
+                        for a, b, _ in units
+                    ]
+                    refits = [
+                        _refit_phase_components(
+                            c,
+                            tile,
+                            layout,
+                            rgb,
+                            {pair[fold]: p for pair, p in zip(units, scores_by_pair, strict=True)},
+                        )[1]
+                        for fold, c in enumerate(candidates)
+                    ]
+                    alternative.append((scores_by_pair, refits))
             local_max, global_max = [], []
             agreements = []
-            for (a, b, _distance), pooled in zip(units, pooled_scores, strict=True):
+            for pair_index, ((a, b, _distance), pooled) in enumerate(
+                zip(units, pooled_scores, strict=True)
+            ):
                 if shrink_phase_fit:
                     component = (
                         reliability[0][a, :, None, None] * components[0][a]
@@ -1608,6 +1679,18 @@ def restore_local_waves(
                         for left, right in paired_refits
                     ]
                     if compare_pooled_refit
+                    else ()
+                )
+                matched_delivery = (
+                    [
+                        (
+                            fit[0][a] * reliability[0][a, :, None, None] / 2
+                            + fit[1][b] * reliability[1][b, :, None, None] / 2,
+                            contrast[pair_index],
+                        )
+                        for contrast, fit in alternative
+                    ]
+                    if compare_matched_refit
                     else ()
                 )
                 if compare_joint_colour_support:
@@ -1646,6 +1729,12 @@ def restore_local_waves(
                             totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
                                 fitted * weight * blend
                             )
+                        for mode, (fitted, contrast) in zip(
+                            matched_modes, matched_delivery, strict=True
+                        ):
+                            totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
+                                fitted * support_weight(contrast, threshold) * blend
+                            )
                     for mode, score in oriented_pooled:
                         totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
                             component * support_weight(score, threshold) * blend
@@ -1664,6 +1753,11 @@ def restore_local_waves(
                     "xy": [int(x), int(y)],
                     "frequencies": [c.frequencies_xy for c in candidates],
                     "edges": [c.edge_geometry for c in candidates],
+                    **(
+                        {"parallel_edges": [c.parallel_edges for c in candidates]}
+                        if config.background == "parallel_step"
+                        else {}
+                    ),
                     **(
                         {"phase_bins": phase_bins}
                         if phase_bins
@@ -1739,6 +1833,7 @@ def restore_local_waves(
         ),
         **({"shrink_phase_fit": True} if shrink_phase_fit else {}),
         **({"compare_pooled_support": True} if compare_pooled_support else {}),
+        **({"compare_matched_refit": True} if compare_matched_refit else {}),
         **({"compare_phase_agreement": True} if compare_phase_agreement else {}),
         **({"compare_oriented_support": True} if compare_oriented_support else {}),
         **({"compare_joint_colour_support": True} if compare_joint_colour_support else {}),

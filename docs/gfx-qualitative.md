@@ -117,6 +117,11 @@ historical boards. Use these reports for the current completed comparisons:
   keeps the sky, building and foliage at V120 and avoids the wider
   spectral search's purple/green building bands. The coarse fence
   changes by 8.93 DN16 RMS, with the visible crossings retained.
+- [Two-boundary query fit](query-rail-background.md#native-gfx100s-review)
+  weakens the purple/green building bands even with the spectral
+  guide fixed, reducing correction RMS from 31.55 to 3.92 DN16.
+  The full-frame guide arm keeps the sky, building and foliage at
+  V120 and retains the visible coarse crossings.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches
