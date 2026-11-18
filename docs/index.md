@@ -42,6 +42,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [multiple RAW line guides](multiple-raw-line-guides.md) ·
 [longer local line support](weak-line-pooled-evidence.md) ·
 [joint mesh phase](joint-mesh-phase.md) ·
+[localized RAW donors for the fine mesh](local-donor-mesh.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·

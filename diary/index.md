@@ -24,6 +24,9 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
+The [local donor mesh entry](2026-11-18-05-54-46-local-donor-mesh.md) records
+the left cab reconstruction, measured RAW support and its limits.
+
 The [joint mesh phase entry](2026-11-18-05-29-18-joint-mesh-phase.md) records junction
 errors, exterior phase tests and the matched training prefix.
 

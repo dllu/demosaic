@@ -90,6 +90,10 @@ historical boards. Use these reports for the current completed comparisons:
   tests a broader bank of two-direction exterior phase proposals.
   All four replays return their local-only 2k parent. The sky stays
   smooth and the existing coarse crossings remain visible.
+- [Localized donor mesh](local-donor-mesh.md#standing-gfx100s-checks)
+  admits both measured directions on the coarse fence. The extra query
+  check rejects the building correction and returns the sky and foliage
+  to the local-only 2k parent.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

@@ -10,6 +10,10 @@ pattern make the synthetic gains possible. Both standing GFX scenes
 still lack supported pairs of exterior phases under these checks.
 [Executed evidence and native crops](results/joint-mesh-phase-v1/publication.json).
 
+The [local donor follow-up](local-donor-mesh.md) uses phase-independent
+frequency proposals from smaller windows and validates phase on the query.
+It exposes measurable support for two directions in the left cab crop.
+
 ## Two linked phase profiles
 
 The fresh panel has 72 exact-reference pairs, six geometries, two

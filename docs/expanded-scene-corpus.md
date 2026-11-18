@@ -99,9 +99,9 @@ development and both standing GFX views are complete. The spatial
 arm is training. The fixed broad comparison is queued on both bound
 endpoints.
 [Checkpoint bindings, preflight and start evidence](results/expanded-scene-12000-v2/publication.json).
-The spatial arm's first 3,000 updates match all 6,000 realized local-arm
+The spatial arm's first 6,000 updates match all 12,000 realized local-arm
 scene records byte for byte, including crop and noise fingerprints.
-[Matched observation prefix](results/expanded-scene-local12k-v1/matched-spatial-prefix-3000.json).
+[Matched observation prefix](results/expanded-scene-local12k-v1/matched-spatial-prefix-6000.json).
 
 Both standing GFX families use the existing fixed native inputs with a
 matched V120 and 100k comparison. The earlier 64 scene development

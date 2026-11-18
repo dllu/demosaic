@@ -103,6 +103,12 @@ still extend periodic support across missing sections. Both GFX scenes
 return their local parents because the exterior phase checks reject
 the tested pairs.
 
+The [local donor mesh trial](local-donor-mesh.md) admits two directions
+in the left fine cab crop under both priors. Their predictions improve
+held-out RAW error, and the native fit shows a faint lattice. The right
+crop and non-fence controls return their parents after the extra check.
+ISO6400 recovery on the retained synthetic panel stays weak.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens
