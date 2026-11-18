@@ -62,6 +62,7 @@ EMA directly at batch 1 with CPU IEEE FP32. The 110 new cases took
 It verified the pixels on 26 boards and 22 triplet subsets, plus all
 220 saved V120/86k predictions. All 26 comparison boards were viewed.
 [Numerical and pixel audit](results/full-corpus-long100k-native-v1/independent-audit.json) ·
+[Audit scope correction](results/full-corpus-long100k-native-v1/audit-scope-correction.json) ·
 [Viewing record](results/full-corpus-long100k-native-v1/actual-native-viewing.json).
 
 | Mean PSNR, dB | V120 | Long 86k | Long 100k |
@@ -143,5 +144,6 @@ passed. All 3,162 new observations run through the IEEE FP32 CPU
 path with preflighted matched V120 controls. The complete scores
 are pending. V131 remains the latest endpoint with all three
 comparable completed broad panels.
-[Primary review admission](results/full-corpus-long100k-review-queue-v1/publication.json) ·
+[Primary preflight and start receipt](results/full-corpus-long100k-training-v1/primary-start.json) ·
+[Review admission](results/full-corpus-long100k-review-queue-v1/publication.json) ·
 [Comparable PSNR history](performance-history.md).
