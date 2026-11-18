@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def best_threshold(values, coordinates, angle):
+def best_threshold(values, coordinates, angle, *, companion=None):
     """Exact least-squares step benefit over all distinct offsets at one angle.
 
     Suffix sums evaluate every sensor-coordinate partition after residualizing
@@ -20,7 +20,9 @@ def best_threshold(values, coordinates, angle):
     ):
         raise ValueError("Require finite discovery values and native normalized coordinates")
     basis = np.column_stack((np.ones(len(values)), coordinates))
-    if np.linalg.matrix_rank(basis) != 3:
+    if companion is not None:
+        basis = np.column_stack((basis, companion))
+    if np.linalg.matrix_rank(basis) != basis.shape[1]:
         raise ValueError("Require two-dimensional discovery support")
     q, _ = np.linalg.qr(basis, mode="reduced")
     residual = values - q @ (q.T @ values)
@@ -60,3 +62,26 @@ def search_edge(values, coordinates, refinements=3):
         chosen = max(results, key=lambda row: row[2])
         radius /= 4
     return chosen[:2]
+
+
+def parallel_edges(values, coordinates, angle, offset):
+    """Optimize two parallel half-planes on discovery values only."""
+    x, y = coordinates.T
+    affine = np.column_stack((np.ones(len(values)), coordinates))
+    best = None
+    for normal in angle + np.deg2rad([-3.75, 0, 3.75]):
+        position = x * np.cos(normal) + y * np.sin(normal)
+        first = position > offset
+        if not first.any() or first.all():
+            continue
+        second, _ = best_threshold(values, coordinates, normal, companion=first)
+        thresholds = [offset, second]
+        for index in (0, 1, 0):
+            companion = position > thresholds[1 - index]
+            thresholds[index], _ = best_threshold(values, coordinates, normal, companion=companion)
+        basis = np.column_stack((affine, *(position > t for t in thresholds)))
+        fitted = basis @ np.linalg.lstsq(basis, values, rcond=1e-10)[0]
+        error = float(np.sum((values - fitted) ** 2))
+        if best is None or error < best[0]:
+            best = (error, float(normal), *map(float, thresholds))
+    return best

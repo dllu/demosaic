@@ -191,6 +191,13 @@ search helps a retained curved subset and leaves the real outputs exact.
 The cab has more plausible donor choices with missing fine crossings,
 and a fallback can reintroduce banding.
 
+[Localized donor validation](localized-donor-validation.md) uses a
+two-boundary background fit that reduces rail-only false guide acceptance
+from 23/24 to 2/24 while preserving the refined fit's synthetic wire
+response. V120 fallback removes diagonal cab banding when donor
+validation fails. The fine crossings remain incomplete and ISO6400
+faint-wire response is below 1% on the occlusion replay.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

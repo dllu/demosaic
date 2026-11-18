@@ -8,6 +8,10 @@ limit the improvement is from **1.48% to 1.57%**. On camera, one
 left-cab pair fails donor validation and the saved fallback brings
 back visible diagonal modulation. Fine crossings remain unresolved.
 
+The [localized donor follow-up](localized-donor-validation.md) tests
+smaller windows and a two-boundary check. Returning to V120 when
+validation fails removes the diagonal banding.
+
 ## Selection and validation
 
 Candidates use the same RAW spectra, bracketing constraints, spatial

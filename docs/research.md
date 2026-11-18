@@ -125,6 +125,12 @@ has repeatedly come with extra flat-region error or false color. The
    Same-paint pairs demonstrate the remaining support limitation.
    Widening the second-family search recovers curved donor geometry in
    four retained two-family views. The extra query delivery stays small.
+   [Localized validation](localized-donor-validation.md) finds that
+   narrower donor windows make rail boundaries easy to mistake for
+   repeated structure. Modeling two boundaries reduces false approvals
+   while preserving weak response. The fixed-bracket replay leaves
+   how often whole-frame context can place both windows on the same
+   surface unresolved.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

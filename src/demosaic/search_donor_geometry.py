@@ -51,9 +51,44 @@ def _native(packed, colors, box):
     return raw, np.tile(colors.reshape(2, 2), (h // 2, w // 2))
 
 
-def _screen_peaks(raw, layout, mask, shot, read):
-    _, nuisance, selected, _, _, _ = _fold_fields(raw, layout, mask, shot, read)
+def _native_view(packed, colors, box):
+    w, h = box[2:]
+    packed, colors = np.asarray(packed), np.asarray(colors)
+    if (
+        min(w, h) < 64
+        or w % 4
+        or h % 4
+        or packed.shape != (4, h // 2, w // 2)
+        or sorted(colors.tolist()) != [0, 1, 1, 2]
+    ):
+        raise ValueError("Require native Bayer samples with matching dimensions")
+    return _native(packed, colors, box)
+
+
+def _native_donor(donor, query):
+    if _overlaps(donor[2], query):
+        raise ValueError("Require native Bayer donors disjoint from the query")
+    return _native_view(*donor)
+
+
+def _validate_search(query, shot, read):
+    if not np.isfinite([shot, read]).all() or min(shot, read) < 0 or shot + read <= 0:
+        raise ValueError("Require a positive sensor noise profile")
+    if len(query) != 4 or min(query[2:]) <= 0:
+        raise ValueError("Require positive query dimensions")
+
+
+def _screen_power(raw, layout, mask, shot, read, *, refined_edge=False):
+    _, nuisance, selected, _, _, _ = _fold_fields(
+        raw, layout, mask, shot, read, refined_edge=refined_edge
+    )
     weights = discovery_weights(raw, selected, nuisance, shot=shot, read=read, hann=True)
+    return weighted_spectrum(raw, selected, nuisance, weights) * weights.mean()
+
+
+def _screen_peaks(
+    raw, layout, mask, shot, read, *, minimum=_MIN_SEARCH_BENEFIT, refined_edge=False
+):
     grid = np.stack(
         np.meshgrid(np.fft.fftfreq(raw.shape[1]), np.fft.fftfreq(raw.shape[0])), axis=-1
     )
@@ -63,12 +98,12 @@ def _screen_peaks(raw, layout, mask, shot, read):
         & (radius <= _MAX_RADIUS)
         & ((grid[..., 1] > 0) | ((grid[..., 1] == 0) & (grid[..., 0] > 0)))
     )
-    power = weighted_spectrum(raw, selected, nuisance, weights) * weights.mean()
+    power = _screen_power(raw, layout, mask, shot, read, refined_edge=refined_edge)
     remaining = np.where(valid, power, 0)
     peaks = []
     for _ in range(6):
         iy, ix = np.unravel_index(remaining.argmax(), remaining.shape)
-        if remaining[iy, ix] < _MIN_SEARCH_BENEFIT:
+        if remaining[iy, ix] < minimum:
             break
         coarse = grid[iy, ix]
         point = coarse.copy()
@@ -128,13 +163,22 @@ def _matching_peaks(left, right, fraction, *, first=None):
     return selected
 
 
-def _verify_planes(raw, layout, eligible, seeds, seed, shot, read):
+def _verify_planes(
+    raw, layout, eligible, seeds, seed, shot, read, *, refined_edge=False, parallel_edge=False
+):
     split = stratified_split(raw.shape, seed)
     gains = []
     models = np.pad(seeds * min(raw.shape), ((0, 0), (0, 3)))
     for fold in (split, ~split):
         xy, nuisance, train, test, precision, _ = _fold_fields(
-            raw, layout, fold & eligible, shot, read, eligible
+            raw,
+            layout,
+            fold & eligible,
+            shot,
+            read,
+            eligible,
+            refined_edge=refined_edge,
+            parallel_edge=parallel_edge,
         )
         full = _model_columns(nuisance, xy, models)
         errors = []
@@ -160,10 +204,7 @@ def search_donor_geometry(
     donors, query, *, shot, read, fit_curvature=False, donor_affinity=None, affinity_first=False
 ):
     """Rank brackets with optional screening-only affinity, then validate independently."""
-    if not np.isfinite([shot, read]).all() or min(shot, read) < 0 or shot + read <= 0:
-        raise ValueError("Require a positive sensor noise profile")
-    if len(query) != 4 or min(query[2:]) <= 0:
-        raise ValueError("Require positive query dimensions")
+    _validate_search(query, shot, read)
     if affinity_first and donor_affinity is None:
         raise ValueError("Affinity ranking requires screening affinities")
     affinity = np.ones(len(donors)) if donor_affinity is None else np.asarray(donor_affinity)
@@ -174,19 +215,9 @@ def search_donor_geometry(
     ):
         raise ValueError("Require one screening affinity in [0, 1] per donor")
     tiles = []
-    for packed, colors, box in donors:
-        w, h = box[2:]
-        packed, colors = np.asarray(packed), np.asarray(colors)
-        if (
-            min(w, h) < 64
-            or w % 4
-            or h % 4
-            or packed.shape != (4, h // 2, w // 2)
-            or sorted(colors.tolist()) != [0, 1, 1, 2]
-            or _overlaps(box, query)
-        ):
-            raise ValueError("Require native Bayer donors disjoint from the query")
-        raw, layout = _native(packed, colors, box)
+    for donor in donors:
+        box = donor[2]
+        raw, layout = _native_donor(donor, query)
         screen = screening_mask(box)
         peaks = _screen_peaks(raw, layout, screen, shot, read)
         tiles.append((raw, layout, screen, peaks))

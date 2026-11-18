@@ -139,13 +139,25 @@ def _model_columns(background, coords, models):
     return np.column_stack((background, *[_phase_basis(coords, value) for value in models]))
 
 
-def _fold_fields(raw, cfa, discovery, shot, read, eligible=None):
+def _fold_fields(
+    raw, cfa, discovery, shot, read, eligible=None, *, refined_edge=False, parallel_edge=False
+):
     xx, yy, affine, _ = geometry(raw.shape)
     span = min(raw.shape)
     coords = np.column_stack(
         ((xx.ravel() - (raw.shape[1] - 1) / 2) / span, (yy.ravel() - (raw.shape[0] - 1) / 2) / span)
     )
-    initial = fit_candidate(raw, cfa, discovery, shot=shot, read=read, nuisance="step", peaks=1)
+    initial = fit_candidate(
+        raw,
+        cfa,
+        discovery,
+        shot=shot,
+        read=read,
+        nuisance="step",
+        peaks=1,
+        edge_refinements=3 if refined_edge else 0,
+        edge_search="full-frame" if refined_edge else "bounded-grid",
+    )
     angle, offset = initial.edge_geometry
     x = 2 * (xx.ravel() + 0.5) / raw.shape[1] - 1
     y = 2 * (yy.ravel() + 0.5) / raw.shape[0] - 1
@@ -154,6 +166,19 @@ def _fold_fields(raw, cfa, discovery, shot, read, eligible=None):
     selected = discovery.ravel() & green
     y_train = raw.ravel()[selected]
     fitted = np.linalg.lstsq(background[selected], y_train, rcond=1e-10)[0]
+    if parallel_edge:
+        from .full_frame_edge import parallel_edges
+
+        candidate = parallel_edges(
+            y_train, np.column_stack((x[selected], y[selected])), angle, offset
+        )
+        if candidate is not None:
+            error, normal, low, high = candidate
+            old_error = np.sum((y_train - background[selected] @ fitted) ** 2)
+            if old_error - error > 12 * (read + shot * max(1e-6, y_train.mean())):
+                coordinate = x * np.cos(normal) + y * np.sin(normal)
+                background = np.column_stack((affine, coordinate > low, coordinate > high))
+                fitted = np.linalg.lstsq(background[selected], y_train, rcond=1e-10)[0]
     inverse_sigma = 1 / np.sqrt(read + shot * np.maximum(background @ fitted, 1e-6))
     testing = green & ~discovery.ravel()
     if eligible is not None:

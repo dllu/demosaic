@@ -110,6 +110,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Appearance-first ranking](affinity-first-donors.md) keeps the sky and
   coarse fence identical to V120. Building and foliage detail remain
   soft. The second-direction follow-up reproduces all four outputs.
+- [Localized donor validation](localized-donor-validation.md#native-gfx100s-comparisons)
+  returns the sky, building and coarse fence to exact V120. Foliage
+  changes by 1.223 DN16 RMS and fine leaves stay soft.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches
