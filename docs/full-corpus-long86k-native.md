@@ -1,5 +1,8 @@
 # Long-schedule 86k checkpoint review
 
+The [completed 100k endpoint review](full-corpus-long100k.md) compares
+this same checkpoint and V120 on identical inputs.
+
 The 86k EMA improves faint ADC sRGB PSNR by **0.569 dB** over V120 on
 the matched material panel. It lowers fine-band error on bark, fur and
 wood, and the bright-orange flat-field failure at 50k largely clears.

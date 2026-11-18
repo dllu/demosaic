@@ -62,6 +62,10 @@ historical boards. Use these reports for the current completed comparisons:
   retains the smooth sky and visible coarse crossings. Small hardware,
   cables and fine leaves remain soft. [All four ADC-bin modes](full-corpus-long86k-adc.md#standing-gfx-review)
   reproduce those positive-noise outputs exactly.
+- [Full-corpus 100k endpoint](full-corpus-long100k.md#native-gfx100s-review)
+  compares V120, 86k and 100k on all four main regions and both cab
+  profiles. The overcast sky stays smooth and the coarse lattice remains
+  coherent. Fine building hardware and foliage stay soft.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

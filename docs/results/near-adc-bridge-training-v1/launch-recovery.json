@@ -1,0 +1,127 @@
+{
+  "evidence": {
+    "path": "/home/dllu/proj/demosaic/docs/results/near-adc-bridge-training-v1/launch-recovery.tar.xz",
+    "sha256": "28cb548beb5663cd16780decad41385599853b23d07dbebf6a4ac3e9d6ea5530"
+  },
+  "members": [
+    {
+      "member": "launch.json",
+      "sha256": "d2432f7318d3c4d3e8817cabff85a06aed9ae99ca3b8ee8604730c3561d8a147"
+    },
+    {
+      "member": "dispatch.py",
+      "sha256": "90e2d299c0914ad2f5a5851617fb2d2359d899a8c70301488f26258b0ffa72b0"
+    },
+    {
+      "member": "execution-plan.json",
+      "sha256": "3936d25e2f0254ed383329aa13972c2d11eafa66fd1466dac6fa1fb8743797f1"
+    },
+    {
+      "member": "dispatch.log",
+      "sha256": "0b5a18f2338b088e27ebccd447a6863e1a11fafcc0fc408f2e0479a28fce7024"
+    },
+    {
+      "member": "train-control.log",
+      "sha256": "cd06f69a754aa0c1fba7710a7360ca216843671de58610909577132640411cb1"
+    },
+    {
+      "member": "train-control-launch.json",
+      "sha256": "f90ce55b32c1e9892ae204f1906d5f5132839d2d0bfc0cb1ff7f4b453cffca6f"
+    },
+    {
+      "member": "train-control-exit.json",
+      "sha256": "b9f87d4ceb14f54a8787da14c5985aa499e13197fe39c8f0f4ecf87e7a01957e"
+    },
+    {
+      "member": "evaluation-waiter.log",
+      "sha256": "0cd95ad488ff186a484825916244312471f6022169d4baae01ec4adc76f7955d"
+    },
+    {
+      "member": "dispatch-retry-launch.json",
+      "sha256": "9ef479b76009899061468728a481a776f2f42a28b5548787c781c91d617b9465"
+    },
+    {
+      "member": "dispatch-retry.py",
+      "sha256": "6346d80ae8a417757817181a0b7668672dce667574d9aa40a62b7d3230371a9e"
+    },
+    {
+      "member": "retry-execution-plan.json",
+      "sha256": "6f286080695334171416251b30cffbdb6b4599deabc326e1cb62f4d39dfb6c6d"
+    },
+    {
+      "member": "dispatch-retry.log",
+      "sha256": "63565ded34e1c00465b06db8e9ecf706644c0096d02ddd23020df2105c168166"
+    },
+    {
+      "member": "evaluation-waiter-retry.log",
+      "sha256": "9a48546414e21a1b66fbee533745796716137b1f86c8aea98f3052e9313866fb"
+    },
+    {
+      "member": "control-retry.yaml",
+      "sha256": "524eebce80f3bcb3cdc5aa30a932c46edcd13eb00b7a558f70b0852f2049dcaf"
+    },
+    {
+      "member": "bridge-retry.yaml",
+      "sha256": "5062f78eec9d69cab327dbcff9a1706a49b4ab7cbb90f0fe343b465661ee187d"
+    },
+    {
+      "member": "control-adoption.json",
+      "sha256": "0e8f1c3f70744a5058382fc8e6ca4c22b6b6f305f79e6d863fdc2815817b22bc"
+    },
+    {
+      "member": "dispatch-adopt-launch.json",
+      "sha256": "99e292421fe6885a9b314f89176b396ca1617cb74827089c2fafa1410bd6159e"
+    },
+    {
+      "member": "dispatch-adopt.py",
+      "sha256": "6943e881a079c7e8e58b96ce342059bb86573d35adc33202a8e259be8b1655a8"
+    },
+    {
+      "member": "evaluation-waiter-adopted-launch.json",
+      "sha256": "928c6a461ba15e91801c6b1ae432778963f33ee974750ccd84cf835136795cf8"
+    },
+    {
+      "member": "evaluate-adopted.py",
+      "sha256": "b3ab27b94e9147a3f0658b0f8ace9385838d7c2aceb60f7efd7108c03fec9487"
+    },
+    {
+      "member": "review-declaration-adopted.json",
+      "sha256": "04d3ffbc51f91d9ecbd0925b476876c409b5be6cc8c953e6a25d918adac2d266"
+    }
+  ],
+  "parent": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "execution_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/retry-execution-plan.json",
+    "sha256": "6f286080695334171416251b30cffbdb6b4599deabc326e1cb62f4d39dfb6c6d"
+  },
+  "adopted_control": {
+    "pid": 3040616,
+    "created": 1794999393.3,
+    "command": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/scripts/run_full_corpus_continuation_v7.py",
+      "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/retry-execution-plan.json",
+      "control",
+      "--updates",
+      "800"
+    ]
+  },
+  "active_dispatcher": {
+    "pid": 3040750,
+    "created": 1794999442.93,
+    "command": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/dispatch-adopt.py"
+    ],
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/dispatch-adopt.py",
+      "sha256": "6943e881a079c7e8e58b96ce342059bb86573d35adc33202a8e259be8b1655a8"
+    }
+  },
+  "first_attempt_completed_training_updates": 0,
+  "second_attempt": "The worker was launched with the corrected output path. Its launcher hit a collision with the first launch receipt.",
+  "recovery": "Preserved and adopted the corrected worker. No data, recipe, checkpoint or schedule changes."
+}

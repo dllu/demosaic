@@ -19,11 +19,10 @@ V132's matched attention trial does not improve faint-detail quality.
 Version numbers identify experiments, not releases: V198/V200 are separate
 small detail-head studies, not successors to the full V131/V132 models.
 
-The 100k continuation has trained on all 90,778 ordinary photos.
-At 50k it improves ordinary and shadow scores on a retained material
-panel, with higher fine-band error on all four faint materials.
-[Training coverage](docs/full-corpus-scaling.md) ·
-[Matched 50k images and metrics](docs/full-corpus-long50k-native.md).
+The completed 100k continuation used 90,778 ordinary photos.
+It lowers faint fine-band error on three of four retained materials.
+Fine cab crossings remain incomplete and the broad benchmark is collecting.
+[100k training coverage and native comparisons](docs/full-corpus-long100k.md).
 
 ## Setup and inference
 

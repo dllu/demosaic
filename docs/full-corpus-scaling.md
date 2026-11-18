@@ -1,6 +1,10 @@
 # Full-corpus scaling and whole-scene context training
 
-**The 20k control is complete and the 100k run has completed five ordinary-photo passes.**
+**Both corpus training runs are complete.** The [100k endpoint](full-corpus-long100k.md)
+used 1.6 million target slots and visited all 90,778 ordinary photos at least
+five times. It improves faint ADC on the retained four-material panel, with
+small changes versus 86k and no convincing new fine GFX crossings.
+
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
@@ -31,13 +35,12 @@ a 1,429.92 DN16 raw bias on the full flat-color grid. Bin Malvar reduces
 both errors below matched projected V120. Both GFX scenes still lack
 convincing new fine crossings.
 
-The 100k endpoint observer is running. It verified the 110 native
-inputs and all 220 saved V120/86k predictions. Once the training
-controller records successful completion, it checks the retained
-checkpoint and starts the native comparison and fixed 3,162-case CPU
-benchmark. The primary comparison uses the existing, matched V120
-predictions. The adoption path reproduced the existing 54 camera
-batches in a dry run. Endpoint scores and native inspection are pending.
+The 100k observer verified the completed checkpoint and all
+220 saved V120/86k native predictions across the 110 fixed cases. The
+retained-panel measurements and actual native inspection are complete.
+The fixed 3,162-case CPU benchmark is collecting the endpoint with
+matched V120 controls. The adoption path reproduced all 54 known and
+unseen camera batches in a dry run. Comparable broad scores are pending.
 [Bound review queue and preflight receipts](results/full-corpus-long100k-review-queue-v1/publication.json).
 
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
@@ -46,7 +49,7 @@ All three whole-scene comparison arms are trained. Their [native review](whole-s
 unseen-camera gains with mixed detail/color costs; their full427 collection runs
 separately. [Checkpoint recovery](full-corpus-checkpoint-cpu-recovery.md)
 preserves both failures, exact replay and the completed20k state. The long arm
-continues from its original1k Adam/EMA/RNG state and100k horizon.
+resumed from its original1k Adam/EMA/RNG state at the declared100k horizon.
 This implements the [training-scale review](training-scale-pipeline-review-2026-11-17.md)
 and complements the [scene-context experiment](whole-scene-context-next-test.md).
 The separate [expanded scene corpus](expanded-scene-corpus.md) qualifies 90,692
@@ -84,7 +87,7 @@ locations and corruption draws are useful dimensions to test separately.
 |Complete ordinary-photo epochs|1|5|
 |Partial next epoch|16,045|78,013|
 
-The20k column is now independently confirmed by actual execution. The100k
+Both columns are independently confirmed by actual execution. The100k
 column remains a planned full-horizon order; its continuation is running.
 Source-order totals do not establish quality or lifetime novelty.
 The first complete ordinary-photo epoch occurs at step17,039. The first320k
@@ -115,7 +118,7 @@ scores are distinguished in the [endpoint report](full-corpus-control20k-review.
 
 ### Long-schedule 20k milestone
 
-The 100k run has saved update 20,000, with an intact raw/EMA/Adam/RNG state
+At this milestone the 100k run saved update 20,000, with an intact raw/EMA/Adam/RNG state
 and its original cosine horizon. This is its first equal-budget checkpoint
 against the separately annealed control. The saved checkpoint SHA256 is
 `a4e64a3b553e5e70683850bc93e6a99f1ad020d7b2c663936bad8098d604bf70`.
@@ -236,7 +239,7 @@ the next verified prefix and its separate image-quality results.
 
 ### Observed source and crop coverage through 30k
 
-The running 100k schedule records 480,000 example slots through
+At the 30k milestone the long schedule had recorded 480,000 example slots through
 update 30,000. There are 160,479 ordinary photo visits and 8,383
 reviewed photo visits. All 90,778 ordinary sources appear, with
 69,701 visited twice and 21,077 once. The source prefix audit checks
@@ -346,7 +349,8 @@ preserves the failure/partial bytes, retains best by atomic link to the complete
 last checkpoint, and continues the remaining14k in a new frozen output tree.
 The long arm subsequently resumed its original1k state. Old worker/controller
 identities describe their historical allocation; the recovery has new bound
-ownership. The20k horizon is now complete; the100k horizon continues. Training completion
+ownership. At that recovery cutoff the20k horizon was complete and the100k horizon
+had resumed. Training completion
 alone establishes no quality gain.
 The first actual post-repair7k checkpoint has since passed complete raw/EMA/
 Adam/RNG validation and atomic last/best retention. A later first-last write

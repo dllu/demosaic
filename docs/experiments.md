@@ -1,6 +1,6 @@
 # Experiment status and workflow
 
-Reviewed November 17, 2026. This page tracks research outcomes and the next
+Reviewed November 18, 2026. This page tracks research outcomes and the next
 questions. Use the [model guide](current-model.md) to choose an implementation;
 individual reports retain exact measurements, native comparisons and receipts.
 
@@ -9,9 +9,9 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Work | Evidence available | Next unresolved question |
 | --- | --- | --- |
 | [Whole-scene context](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study, both camera panels and33 final native boards complete, including both GFX families. Spatial unseen +0.01739 dB vs local-only, still−0.05477 vs V120; no convincing new fine crossings | Full427 photos running on CPU with exact canonical inputs/matched CPU V120. Camera costs and quiet gains are documented; V120/V131 remain last complete three-panel evaluations |
-| [Expanded scene corpus](expanded-scene-corpus.md) | 90,692 eligible photos with audited shuffled source epochs. Local and spatial arms completed discarded two-update checks on identical observations | Quality with the broader cohort remains open. The existing full-model 100k run uses a separate data path |
-| [Near-ADC training coverage](near-adc-bridge-training.md) | Matched 800-update recipes admitted. Actual CPU preflight reproduces 23 near-ADC replacements and preserves the other inputs | Training waits on the immutable 100k EMA. Native GFX and faint-detail collection is queued |
-| [Full-corpus scaling](full-corpus-scaling.md), [short 20k](full-corpus-control20k-review.md), [long 86k](full-corpus-long86k-native.md) | All 90,778 ordinary photos completed five visits by [update 85,233](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233). Long 86k gains 0.569 dB faint ADC sRGB over V120 and lowers fine-band error on three of four materials. The 50k flat ADC failure largely clears. Both GFX sets viewed | The short 20k full427 evaluation continues. The live 100k endpoint observer will start the native and primary reviews after training. The latest evaluated long checkpoint is 86k |
+| [Expanded scene corpus](expanded-scene-corpus.md) | 90,692 eligible photos with audited shuffled source epochs. Local and spatial arms completed discarded two-update checks on identical observations | Quality with the broader scene cohort remains open. The completed full-model 100k run uses a separate data path |
+| [Near-ADC training coverage](near-adc-bridge-training.md) | Actual CPU preflight reproduces 23 near-ADC replacements and preserves the other inputs. The first 800-update arm is training from the completed 100k EMA | Second arm and the matched faint, flat, edge and native GFX reviews are pending |
+| [Full-corpus scaling](full-corpus-scaling.md), [short 20k](full-corpus-control20k-review.md), [long 100k](full-corpus-long100k.md) | 100k training complete with 1.6M target slots and all 90,778 ordinary photos visited five or six times. Retained faint ADC sRGB +0.575 dB versus V120, with lower fine-band error on three of four materials. Both standing GFX comparisons were viewed | Selected ADC color bias grows slightly from 86k and the real cab crossings stay incomplete. The fixed broad benchmarks for 20k and 100k are collecting |
 | [Disjoint RAW direction guides](scene-wave-guides.md) | Matching guide improves lower-noise far weak response from 2.75% to 4.18% and lowers increment error on all eight geometries. Both GFX families viewed | ISO6400 weak response stays near the parent. Cab correction trades some right-side stripe suppression for stronger left-side modulation. Fine crossings remain unresolved |
 | [Guided RAW phase profiles](guided-phase-profiles.md), [fit shrinkage](guided-phase-fit-shrinkage.md) | ISO400 far weak response 4.23% to 14.33% versus sine at threshold 2. ISO6400 far shrinkage at threshold 0 reduces quiet RMS from 8.349 to 7.640 DN16 while weak response drops from 11.58% to 5.96%. Both GFX families viewed | Conservative thresholds preserve quiet regions and deliver little high-noise weak response. Cab crossings remain unresolved |
 | [Pooled RAW support](fold-support-pooling.md) | ISO400 far weak response 14.19% to 16.89% across held-out geometries at nearly equal mean quiet error. Increment RMS falls from 10.0391 to 10.0222 DN16. Both GFX families viewed | ISO6400 still shows a response/error tradeoff. The small building correction returns and fine cab crossings remain unresolved |
@@ -74,8 +74,8 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Can better gains recover the fine detail missing from that proposal? | With fixed support, exact local targets yield only 1.1% lower ISO12800 fine error with unbounded nonnegative gains. Source-disjoint calibration raises fine and quiet error. Both GFX families viewed | [Scene spectral gain headroom](scene-spectral-gain-headroom.md) |
 
 V131 also changes the training cohort, so its gain is not an isolated test of
-training duration. The 100k run has completed five ordinary-photo passes and continues
-on its declared schedule. Its checkpoints use a100k schedule, distinct from the annealed20k
+training duration. The 100k run completed five full ordinary-photo passes and
+78,013 sixth visits. Its checkpoints use a100k schedule, distinct from the annealed20k
 control whose completed20k review recovers most of the earlier faint loss but
 still has mixed fine-detail/color costs.
 [Budget, source/crop/noise coverage and runtime evidence](full-corpus-scaling.md).

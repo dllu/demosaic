@@ -1,9 +1,10 @@
 # Natural fine-detail gallery: V112 and earlier comparisons
 
-**Historical gallery; scope checked November 17, 2026.** The general baseline
+**Historical gallery, scope checked November 18, 2026.** The general baseline
 is [V120](current-model.md). Newer native comparisons and provenance are in
 [V120/V121](v120-v121-primary.md), [V131](v131-endpoint-quality.md) and
-[V132](v132-endpoint-quality.md); broad weak-band measurements are in the
+[V132](v132-endpoint-quality.md), with the latest retained material crops in
+the [100k corpus review](full-corpus-long100k.md). Broad weak-band measurements are in the
 [V131 broad review](v131-broad-primary.md). The original gallery below remains
 bound to its named checkpoints and noise draws.
 

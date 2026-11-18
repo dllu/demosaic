@@ -45,6 +45,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [long-schedule 20k native review](full-corpus-long20k-native.md) ·
 [long-schedule 50k native review](full-corpus-long50k-native.md) ·
 [long-schedule 86k native review](full-corpus-long86k-native.md) ·
+[full-corpus 100k training and native review](full-corpus-long100k.md) ·
 [86k ADC corrections and noise sweep](full-corpus-long86k-adc.md) ·
 [near-ADC residual and conditioning checks](noisy-cfa-residual.md) ·
 [coarse intermediate-noise color](coarse-adc-color.md) ·

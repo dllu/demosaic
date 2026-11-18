@@ -211,11 +211,12 @@ has repeatedly come with extra flat-region error or false color. The
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
-   The [100k full-corpus continuation](full-corpus-scaling.md) reaches
-   five complete ordinary-photo passes. The [86k image review](full-corpus-long86k-native.md)
-   gains 0.569 dB on retained faint ADC fields versus V120, improves
-   three of four fine bands and largely clears the 50k orange bias.
-   Real fine crossings remain incomplete. The
+   The completed [100k full-corpus continuation](full-corpus-long100k.md)
+   covers five complete ordinary-photo passes and 78,013 sixth visits.
+   It gains 0.575 dB on retained faint ADC fields versus V120 and improves
+   fine-band error on three of four materials. The gain over 86k is
+   0.006 dB, selected flat-color bias rises, and fine GFX crossings
+   remain incomplete. The
    [completed20k control](full-corpus-control20k-review.md)
    actually covers all90,778 photos and recovers most10k faint loss, but remains
    0.02061 dB below V120 with higher fine-band error for3/4 materials. Both fences
@@ -257,7 +258,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
 | [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study and both camera panels complete/native-viewed. Small quiet gains/partial unseen repair versus local-only; unseen remains below V120 and fine crossings missing. Full427 photos collecting |
-| [Full-corpus scaling](full-corpus-scaling.md), [20k review](full-corpus-control20k-review.md) | Control complete/all90,778 photos visited; most midpoint faint loss repaired, small ordinary/shadow gains but mixed spatial/color costs. Both fences viewed. [Camera panels](full-corpus-control20k-camera-review.md) known +0.03285/unseen−0.04067 dB. Original100k trajectory/full primary photos and expanded427-source faint study running |
+| [Full-corpus scaling](full-corpus-scaling.md), [20k review](full-corpus-control20k-review.md), [100k review](full-corpus-long100k.md) | Both training runs and scoped native reviews complete. 100k retains faint low-noise gains, with small improvement over 86k and no convincing new fine GFX crossings. [20k camera panels](full-corpus-control20k-camera-review.md) known +0.03285/unseen−0.04067 dB. Both broad photo evaluations are collecting |
 
 These are research proposals and bounded experiment conclusions. They do not
 establish broad state-of-the-art quality. Dates describe the source review;

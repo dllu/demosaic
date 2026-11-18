@@ -11,9 +11,9 @@ prediction itself.
 
 ## Matched training
 
-Both arms wait for the existing 100k trajectory to finish successfully,
-then initialize all restoration weights from its immutable EMA
-checkpoint. Each arm uses fresh AdamW state and completes 800 updates
+Both arms initialize all restoration weights from the
+[completed 100k trajectory](full-corpus-long100k.md) EMA checkpoint.
+Each arm uses fresh AdamW state and is scheduled for 800 updates
 of 16 native 256×256 patches, or 12,800 example slots. The schedule uses
 a 40-update warmup and peak learning rate of 0.000003. The architecture,
 restoration loss, photo and RAW readers, random exposure, source order,
@@ -72,9 +72,13 @@ the parent and both train branches on exact faint-photo, flat and
 edge inputs. It will use the same CPU IEEE FP32 policy and verified
 saved V120 and parent controls where the observations match.
 
-The 100k parent and both training endpoints are pending at this
-publication cutoff. Numerical review, actual native viewing and
-the canonical 427-photo plus known/unseen-camera evaluation close
-separately. The latest evaluated long-run checkpoint is 86k.
-[Parent run and endpoint review](full-corpus-scaling.md) ·
+The 100k parent is trained and its retained native review is complete.
+The first control launch stopped before training because it pointed
+outside the frozen source workspace. The corrected control is training
+in that workspace. Its dispatcher stopped while writing a launch
+receipt, and a new runner verified and took ownership of the same
+training process. Both 800-update endpoints and their numerical,
+native and canonical reviews are pending.
+[Parent endpoint](full-corpus-long100k.md) ·
+[Launch recovery](results/near-adc-bridge-training-v1/launch-recovery.json) ·
 [Comparable PSNR history](performance-history.md).
