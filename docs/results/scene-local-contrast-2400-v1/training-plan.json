@@ -1,0 +1,76 @@
+{
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plan_training.py",
+    "sha256": "1bdb7464755dfe86e6d2ab84179c0f4e2880885a4ad5aab82bfb32350868048b"
+  },
+  "repo_commit": "0c875881376bef2eea613454730370ef2f4e0924",
+  "parent": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "training_script": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/work/scripts/train_scene_context.py",
+    "sha256": "b8ba2eec1374c2824fc90fac275793843b7ac1332c47ac1488ed913fe930a056"
+  },
+  "plans": {
+    "plain": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/plan.json",
+      "sha256": "2b8bafec01e250b0caf79c10704f09022c325e14275fcee1f9518f685524cad4"
+    },
+    "localized": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/localized/plan.json",
+      "sha256": "9711067914f89850ce2d4ac18fe8724985182e2cd727e75e9d0ef2d5b5102832"
+    }
+  },
+  "source_order": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/planned-source-order.json",
+    "sha256": "e929b4e4da26bb79271a773ef5dea17dc8dedb14d4abbcab62df292b3ca8c6ea"
+  },
+  "source_cohort": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-epoch-corpus-v1/manifest-train.jsonl",
+    "sha256": "1edcde03824d47bc6498e41578a0f0b337cadce0dbc5b6816332f464f368fcd1"
+  },
+  "steps_per_arm": 2400,
+  "scenes_per_arm": 4800,
+  "native_crops_per_arm": 19200,
+  "localized_draws_per_augmented_arm": 2386,
+  "factors": {
+    "plain": 0.0,
+    "localized": 0.5
+  },
+  "questions": [
+    "Does aligned spatial context restore more true faint structure within each training-data recipe?",
+    "Does local augmentation change the benefit from the aligned scene relative to a matched local-only trunk?",
+    "What happens to quiet, low-frequency and Bayer/chroma error under incorrect or neutral context?"
+  ],
+  "sequence": [
+    [
+      "localized",
+      "spatial"
+    ],
+    [
+      "plain",
+      "none"
+    ],
+    [
+      "plain",
+      "spatial"
+    ],
+    [
+      "localized",
+      "none"
+    ]
+  ],
+  "standing_camera_protocols": [
+    {
+      "path": "/home/dllu/proj/demosaic/configs/gfx-qualitative-20231231.json",
+      "sha256": "23efd86ccf2b39ec8b37af21d7d7908c19b868a890544a454c88bdb6a056399a"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/configs/gfx-green-mesh-20231231.json",
+      "sha256": "c998ceade0eeb509a11af97806161dbddaaa4bbc5e16cefff14884f6c9d5369f"
+    }
+  ],
+  "benchmark_contract": "Every completed full-model endpoint receives the fixed 427-photo and known/unseen camera panels and both native standing GFX families. Their results are separate from target-localized and context interventions.",
+  "numeric_detail_contract": "Same held-out camera/CFA draws and targets. Hold the query RAW fixed across matched and altered scene previews. Summarize signed fine response, fine residual, quiet-region change, rendered metrics and current-V120 comparison."
+}

@@ -15,6 +15,11 @@ matched study vary local visibility while keeping edges, illumination and
 scene context more representative of the source photograph.
 [Reader implementation](../src/demosaic/scene_training_data.py).
 
+The [matched four-arm training run](scene-local-contrast-2400.md)
+compares this recipe with ordinary training for local-only and
+spatial models. Its held-out photo panel measures true paired
+fine-detail response and spurious texture in exact flat cores.
+
 ## Native data path
 
 The whole-scene training plan accepts `local_contrast_fraction`

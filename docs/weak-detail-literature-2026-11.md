@@ -282,8 +282,12 @@ disagrees. [Signed RAW tint check](mesh-donor-tint.md).
 
 A [localized training intervention](scene-local-contrast-training.md)
 weakens fine structure inside the native crop while preserving the
-rest of each scene. Data and discarded CUDA updates pass. Learned
-quality remains unmeasured.
+rest of each scene. The [matched four-arm run](scene-local-contrast-2400.md)
+tests the interaction with spatial scene features. Its 64-photo panel
+measures the known fine residual separately from false variation in
+an exact flat core. The eight-photo pilot finds slightly cleaner cores
+from aligned spatial 12k context with slightly lower fine response.
+Quality evaluation of the new endpoints is queued after training.
 
 The [64-photo natural-texture evaluation](full-corpus-faint-noise.md)
 finds that corpus scaling mainly lowers ISO6400 output variance.
