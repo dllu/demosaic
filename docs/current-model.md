@@ -97,6 +97,11 @@ exterior geometry. Both GFX scenes still have missing fine detail.
 continuous parallel-wire response from 6.3% to 36.6% with noisy exterior
 guides. Interrupted wires still have limited evidence at ISO6400, and
 ISO400 gap selection trades lower wire error for some false extension.
+The [joint crossing fit](joint-mesh-phase.md) reduces that separate
+additive model's ISO400 junction error with known geometry. It can
+still extend periodic support across missing sections. Both GFX scenes
+return their local parents because the exterior phase checks reject
+the tested pairs.
 
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab

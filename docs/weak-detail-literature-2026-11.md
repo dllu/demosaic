@@ -416,6 +416,11 @@ support. In Bayer data, retain sensor offsets and separate color amplitudes;
 do not impose identical RGB values or infer red/blue waves from green alone.
 V199 already shows that shared RGB gains by themselves do not fix color errors.
 
+The [joint mesh follow-up](joint-mesh-phase.md) fits the rear wire on the
+part of each phase cycle left uncovered by the front wire. It suppresses
+the additive fit's junction error on constructed occlusions. Uncertain
+local support and unsupported real exterior phases still limit delivery.
+
 ### 5. Give coarse mottle and fine response distinct training routes
 
 The existing history contains actual parameter-gradient conflict between

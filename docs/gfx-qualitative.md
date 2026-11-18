@@ -86,6 +86,10 @@ historical boards. Use these reports for the current completed comparisons:
   compares continuous, gap and edge fits on the same local-only 2k parent.
   Sky, foliage and coarse fence match that parent exactly. Small building
   corrections leave the fine hardware soft.
+- [Joint mesh phase](joint-mesh-phase.md#standing-gfx100s-checks)
+  tests a broader bank of two-direction exterior phase proposals.
+  All four replays return their local-only 2k parent. The sky stays
+  smooth and the existing coarse crossings remain visible.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The
