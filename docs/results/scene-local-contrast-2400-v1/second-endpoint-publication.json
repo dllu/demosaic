@@ -1,0 +1,145 @@
+{
+  "scope": "Second arm completed with CUDA eight-photo and CPU standing evaluations. Canonical photo/camera and full 64-photo held-out evaluation wait for all endpoints.",
+  "training": {
+    "completed": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/none/completed.json",
+      "sha256": "72f4bbab41eebb2028efa110a0f87a3a4f79c52a06898127537e02a066afe70d"
+    },
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/none/step002400.pt",
+      "sha256": "d8dfa59759b12422526cd361e1023b1f4e83ec3467cae79c7288ed9544608098"
+    },
+    "raw_and_ema_weights": true,
+    "review_policy": "EMA",
+    "training_trace": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/none/train.jsonl",
+      "sha256": "feb947246cf9782d8d2aea7a208b37d7a577196b8bb5f050f5772a9c71add47e"
+    },
+    "observations": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/none/observations.jsonl",
+      "sha256": "6239a3eaaf7a5a4645741a860993063bb5d1578d1770b896da769b17079fb0d7"
+    },
+    "wall_training_seconds": 1715.3936676789308,
+    "steps": 2400,
+    "native_crops": 19200,
+    "distinct_scenes": 4800,
+    "localized_scene_count": 0
+  },
+  "next_training_arm": {
+    "stage": "plain-spatial",
+    "owner": {
+      "pid": 3708320,
+      "created": 1795030396.34
+    },
+    "child": {
+      "pid": 3817675,
+      "created": 1795034144.02,
+      "command": [
+        "taskset",
+        "-c",
+        "12,13",
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/work/scripts/train_scene_context.py",
+        "train",
+        "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/plan.json",
+        "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/spatial",
+        "--mode",
+        "spatial"
+      ],
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/plan.json",
+        "sha256": "2b8bafec01e250b0caf79c10704f09022c325e14275fcee1f9518f685524cad4"
+      }
+    }
+  },
+  "files": {
+    "second-endpoint-evidence.tar.xz": {
+      "path": "docs/results/scene-local-contrast-2400-v1/second-endpoint-evidence.tar.xz",
+      "sha256": "cbef57e23c30c83449952948f322827d121c98b92a982873cb387574830044c9"
+    },
+    "second-endpoint-standing-viewing.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/second-endpoint-standing-viewing.json",
+      "sha256": "2fbc98c83c6bb9817b57710f83000a5fabfb3bbe09dee7ab6aa833646f48c562"
+    },
+    "second-endpoint-heldout.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/second-endpoint-heldout.json",
+      "sha256": "2abf12acb75d6b7645ad32d120facddef911c45fb0fedba9b76c3afba7a5c9de"
+    },
+    "second-endpoint-heldout-viewing.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/second-endpoint-heldout-viewing.json",
+      "sha256": "4a7f09e0fb9af7e759f6c992f76b5386a4e4656bbff3da8403dc9af11e7ae350"
+    },
+    "second-endpoint-heldout-plan.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/second-endpoint-heldout-plan.json",
+      "sha256": "39f0f325a8aa3d1352d7a701cd81f782ad4c957bc6cd10003655534472b4eb42"
+    },
+    "second-endpoint-standing-deltas.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/second-endpoint-standing-deltas.json",
+      "sha256": "516df3f549b6e33eb08810e6b33dfa57514221c798ee5814f33514b833bf3875"
+    },
+    "two-arm-inputs.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/two-arm-inputs.json",
+      "sha256": "4a2c25104fb63c5713961340a56aee19cad7e0c308c38603d7f271ac6a724aa4"
+    },
+    "plain-none-verified.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/plain-none-verified.json",
+      "sha256": "6345e3d90c11c3a2d8cb23f9351399e459390b3084be11a47b97c638e361e9ad"
+    },
+    "mesh-nominal-fine-green-mesh-right.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/mesh-nominal-fine-green-mesh-right.png",
+      "sha256": "a10e2523b2de0d1ad5f5032778cbfafd65d681d4cc36546055834cdadb7a9dd0"
+    },
+    "000-iso6400-coupled-role0-triplet.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/000-iso6400-coupled-role0-triplet.png",
+      "sha256": "3babcc43dddaeb057b36745397cca156375c917016b9ca3742e08667b1e4266c"
+    },
+    "001-iso6400-coupled-role0-comparison.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/001-iso6400-coupled-role0-comparison.png",
+      "sha256": "35ea5dcf37943e9c68591ba6fe1812cee924366ab7397a31e566aa93e4e48cbe"
+    },
+    "main-chain-link-fence-main-chain-link-fence.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/main-chain-link-fence-main-chain-link-fence.png",
+      "sha256": "5ff9e8f00d6e348d297765bfc3b4c70ea8cb07d0c21645190ed9079a26a79b8d"
+    },
+    "mesh-profile3879-fine-green-mesh-right.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/mesh-profile3879-fine-green-mesh-right.png",
+      "sha256": "ae24a4ec56beeb43787216511a183676044c45d07e34146ac9f6398917751bf7"
+    },
+    "000-iso6400-coupled-role2-triplet.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/000-iso6400-coupled-role2-triplet.png",
+      "sha256": "afe64767955298098de9faaf76d9f5f105b983e7c5e55e8e536700bcc058d51a"
+    },
+    "main-foliage-main-foliage.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/main-foliage-main-foliage.png",
+      "sha256": "b5488804ac10fb27a1f7c1b89908fb791741185c6c3f7996aef73d47d7a589ed"
+    },
+    "main-overcast-sky-main-overcast-sky.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/main-overcast-sky-main-overcast-sky.png",
+      "sha256": "d4edba2ea02392b2d86e836963a481354c41a254add9a2ba09132347a54a0b26"
+    },
+    "001-iso6400-coupled-role0-triplet.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/001-iso6400-coupled-role0-triplet.png",
+      "sha256": "55d755b89951d7b598a28f29ae750891485003682b851901fb50697992601480"
+    },
+    "000-iso6400-coupled-role0-comparison.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/000-iso6400-coupled-role0-comparison.png",
+      "sha256": "fdaf98714d802f331f57b8481e4a296dca33fc1c724a700d08c223c5b37a32d9"
+    },
+    "000-iso6400-coupled-role2-comparison.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/000-iso6400-coupled-role2-comparison.png",
+      "sha256": "781659258695a0e60489ba14309a2db03ef43a8c6bf9f75be7e31315093d8502"
+    },
+    "mesh-nominal-fine-green-mesh-left.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/mesh-nominal-fine-green-mesh-left.png",
+      "sha256": "a9ab0bd03888a2f0561f19e7f8c313fc503d70d5e87e6062e374cef0dd6242fe"
+    },
+    "main-building-detail-main-building-detail.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/main-building-detail-main-building-detail.png",
+      "sha256": "df4cb1c55d94cf2c8c55ca9f57779c45dcfdc83d4c4d568a605270224741b1a2"
+    },
+    "mesh-profile3879-fine-green-mesh-left.png": {
+      "path": "docs/images/scene-local-contrast-2400-second/mesh-profile3879-fine-green-mesh-left.png",
+      "sha256": "2a0fd9be1aa70ea29f0947996dd9641cf70f17437e46bb18ca15a4a808a1bf07"
+    }
+  }
+}

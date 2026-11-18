@@ -2,8 +2,8 @@
 
 Four matched 2,400-update continuations test whether training on locally
 weakened texture helps a whole-image restoration model recover faint detail
-while keeping flat areas smooth. The localized spatial arm has finished.
-The plain local arm started immediately after its endpoint audit. An
+while keeping flat areas smooth. The localized spatial and plain local
+arms have finished. The plain spatial arm is training. An
 eight-photo pilot with existing checkpoints shows slightly cleaner
 flat cores when the spatial model sees the matching scene, with no increase
 in true fine-detail response. [Run, pilot and review bindings](results/scene-local-contrast-2400-v1/publication.json).
@@ -194,10 +194,10 @@ EMA above. Stone grain, fine masonry and narrow trim remain soft.
 
 | Deliverable | Status |
 | --- | --- |
-| Training | Localized spatial completed 2,400 updates. Plain local is running and the other two arms are queued. [Milestone and analysis bindings](results/scene-local-contrast-2400-v1/milestone-and-analysis.json). |
-| Held-out weak detail and flat cores | The first endpoint completed the eight-photo replay. All 256 observation groups are ready for the full four-arm comparison. |
+| Training | Localized spatial and plain local completed 2,400 updates each. Plain spatial is running and localized local is queued. [Milestone and analysis bindings](results/scene-local-contrast-2400-v1/milestone-and-analysis.json). |
+| Held-out weak detail and flat cores | Both completed endpoints have eight-photo replays. All 256 observation groups are ready for the full four-arm comparison. |
 | Fixed 427-photo and known/unseen camera panels | All three are queued for the verified endpoints. No new checkpoint has broad scores. [PSNR history](performance-history.md). |
-| Standing DSCF3879/3880 and DSCF3842/3835 | The first endpoint has completed collection and actual viewing on all eight standing boards. The other EMA endpoints are queued as each completes training. [Main scene](gfx-qualitative.md) · [Fine cab mesh](gfx-green-mesh.md). |
+| Standing DSCF3879/3880 and DSCF3842/3835 | The first two endpoints have completed collection and actual viewing of both standing scenes. The other EMA endpoints are queued as each completes training. [Main scene](gfx-qualitative.md) · [Fine cab mesh](gfx-green-mesh.md). |
 
 ### First endpoint standing GFX review
 
@@ -242,3 +242,52 @@ DSCF3842 uses exposure ×16 and native 160×160 boxes starting at
 The first endpoint's eight-photo replay and standing review are
 complete. The fixed photo and known/unseen camera panels await the
 full matched checkpoint set. [Combined publication record](results/scene-local-contrast-2400-v1/first-endpoint-publication.json).
+
+### Plain local control
+
+Plain local completed 2,400 updates in 1,715.39 seconds of measured
+training. Its raw and EMA checkpoint SHA256 is
+`d8dfa59759b12422526cd361e1023b1f4e83ec3467cae79c7288ed9544608098`.
+It uses the same Corpus 100k parent, frozen DINO, and 4,800
+source visits with 19,200 native crops. The two finished traces
+agree on every source, crop coordinate, camera recipe and draw
+seed. All 2,414 draws without augmentation reproduce their full
+observation record.
+[Training and evaluation receipts](results/scene-local-contrast-2400-v1/second-endpoint-publication.json) · [Input trace comparison](results/scene-local-contrast-2400-v1/two-arm-inputs.json).
+
+On the eight-photo EMA replay, coupled ISO6400 increment RMS is
+84.16 DN16 for plain local, 84.40 for localized spatial and
+84.22 for Corpus 100k. Independent ISO6400 reverses the two new
+arms, with 104.22 for plain local and 103.93 for localized spatial.
+Coupled flat-core RMS is 4.69 DN16 for plain local, 4.85 for
+localized spatial and 4.21 for Corpus 100k. These comparisons
+change both the context path and the augmentation. The two
+remaining arms are required to measure the separate effects.
+[Matched eight-photo metrics](results/scene-local-contrast-2400-v1/second-endpoint-heldout.json).
+
+The plain local EMA retains the visibly smooth exact flat core.
+Both ISO6400 triplets use the same sources, 160-pixel ROI,
+noise conditioning and exposure as the localized spatial triplets
+above. Stone grain and fine masonry stay soft.
+[Noise, source coordinates and all native boards](results/scene-local-contrast-2400-v1/second-endpoint-heldout-viewing.json).
+
+![Stone, noisy Malvar, plain local EMA and exact GT](images/scene-local-contrast-2400-second/000-iso6400-coupled-role0-triplet.png)
+
+![Cathedral, noisy Malvar, plain local EMA and exact GT](images/scene-local-contrast-2400-second/001-iso6400-coupled-role0-triplet.png)
+
+The plain local GFX review uses the same eight crops, camera
+priors and display settings as the localized spatial review.
+It uses CPU IEEE FP32 native inference and no whole-image
+guide. The sky remains smooth and the coarse fence keeps both
+visible directions. Fine leaves, bracket cables and fine cab
+crossings remain unresolved. Cab predictions differ from localized
+spatial by 2.10–4.41 camera-linear DN16 RMS. The transferred prior
+still retains more visible diagonals in the right crop.
+[Standing RAW provenance and actual viewing](results/scene-local-contrast-2400-v1/second-endpoint-standing-viewing.json) · [Model-to-model deltas](results/scene-local-contrast-2400-v1/second-endpoint-standing-deltas.json).
+
+[Sky](images/scene-local-contrast-2400-second/main-overcast-sky-main-overcast-sky.png) · [Building](images/scene-local-contrast-2400-second/main-building-detail-main-building-detail.png) · [Foliage](images/scene-local-contrast-2400-second/main-foliage-main-foliage.png) · [Coarse fence](images/scene-local-contrast-2400-second/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | Plain local and localized spatial boards |
+| --- | --- |
+| Nominal | [Left](images/scene-local-contrast-2400-second/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-second/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-local-contrast-2400-second/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-second/mesh-profile3879-fine-green-mesh-right.png) |

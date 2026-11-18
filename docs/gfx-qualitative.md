@@ -76,6 +76,8 @@ historical boards. Use these reports for the current completed comparisons:
   compares the first localized EMA with V120, Corpus 100k and spatial 12k.
   The sky stays visibly smooth and both coarse fence directions survive.
   Thin cables and fine leaves remain soft.
+  The [plain local control](scene-local-contrast-2400.md#plain-local-control)
+  has the same visible limitations on all four standing crops.
 - [Disjoint RAW patch search](natural-raw-donor-evidence.md#standing-gfx100s-scenes)
   keeps the Corpus 100k crop bytes in all four main contexts.
   The foliage coarse match fails the local fine-detail check.
