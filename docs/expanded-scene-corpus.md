@@ -93,8 +93,11 @@ expected the original V120 digest. The corrected loader binds the
 digest in the training plan and the saved scene checkpoint. Both
 arms then passed two discarded optimizer updates on identical first
 four scene observations from the new parent. The production
-local-only arm has passed 500 updates. Training and all quality
-comparisons are still pending.
+[local-only arm](expanded-scene-local12k.md) completed 12,000 updates,
+24,000 distinct source visits and 96,000 native crops. Its scoped
+development and both standing GFX views are complete. The spatial
+arm is training. The fixed broad comparison is queued on both bound
+endpoints.
 [Checkpoint bindings, preflight and start evidence](results/expanded-scene-12000-v2/publication.json).
 
 Both standing GFX families use the existing fixed native inputs with a

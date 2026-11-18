@@ -36,6 +36,7 @@ Start with the [README](../README.md) for installation and inference.
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·
+[expanded scene local-only endpoint](expanded-scene-local12k.md) ·
 [distant wire and gap intervention](scene-wire-gap.md) ·
 [isolated RAW line support](isolated-raw-line.md) ·
 [multiple RAW line guides](multiple-raw-line-guides.md) ·

@@ -24,6 +24,9 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
+The [expanded local-only endpoint entry](2026-11-18-05-08-05-expanded-scene-local12k.md) records
+12k training completion and both standing native camera reviews.
+
 The [weak-line pooling and 20k audit entry](2026-11-18-05-02-09-weak-line-pooling-and-20k-audit.md) records
 local support limits and completed photo-band evidence.
 

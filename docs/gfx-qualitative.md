@@ -66,6 +66,9 @@ historical boards. Use these reports for the current completed comparisons:
   compares V120, 86k and 100k on all four main regions and both cab
   profiles. The overcast sky stays smooth and the coarse lattice remains
   coherent. Fine building hardware and foliage stay soft.
+- [Expanded scene local-only 12k](expanded-scene-local12k.md#native-crops-and-standing-gfx-scenes)
+  compares the new EMA with its 100k parent and V120. The smooth sky and
+  coherent coarse lattice hold. Fine building hardware and foliage remain soft.
 - [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
   compares both 800-update endpoints against 100k and V120. The sky
   stays smooth and the coarse lattice and dark foliage look close to 100k.
