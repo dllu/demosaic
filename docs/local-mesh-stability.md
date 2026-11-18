@@ -162,6 +162,11 @@ The [audited gap option](local-mesh-gap-support.md) adds the
 correction inside a predicted break after two crossed RAW forecasts and
 a separate audit.
 
+Use `adjacent_donors=True` to try two frequencies from an adjacent RAW
+tile when the regular donor fit yields no correction. The local Bayer
+checks support both directions in the right cab under both priors and
+the crop shows new crossings. [Adjacent donor comparison](donor-phase-transport.md).
+
 The numerical panel and actual native review are complete. The experiment adds
 an inference component with no new training endpoint or primary-panel score.
 [Comparable primary panel history](performance-history.md).

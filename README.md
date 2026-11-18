@@ -62,6 +62,8 @@ in the [GFX100S scene](docs/gfx-qualitative.md), plus the difficult
 [green cab mesh](docs/gfx-green-mesh.md). Separate ISO100 captures are qualitative
 references, not exact GT. The [Q2/Sony/GFX50R gallery](docs/cross-camera-qualitative.md)
 currently covers V104/V114/V115; newer models have not been published on that panel.
+The opt-in crop fit shows new crossings in the right cab ROI.
+[Native comparison and measured RAW support](docs/donor-phase-transport.md#standing-gfx100s-review).
 
 ## Development
 

@@ -8,8 +8,7 @@ from demosaic.mesh_refinement import refine_local_raw_mesh
 pytest.importorskip("scipy.ndimage")
 
 
-def mesh_scene():
-    native_size = 512
+def mesh_scene(native_size=512):
     y, x = np.indices((native_size, native_size))
     p = 0.074 * x + 0.048 * y - 0.2
     q = 0.070 * x - 0.053 * y + 0.1
@@ -77,3 +76,32 @@ def test_gap_support_attenuates_false_extension_of_a_measured_wire():
     assert np.linalg.norm((output - old)[:, ~missing]) < 0.1 * np.linalg.norm(
         (old - crop)[:, ~missing]
     )
+
+
+def test_adjacent_donor_recovers_the_query_only_with_local_wire_evidence():
+    box = (192, 192, 256, 256)
+    roi = (240, 240, 160, 160)
+    region = np.s_[:, 240:400, 240:400]
+    colors = PATTERNS["GBRG"]
+    noise = {"shot": 8e-5, "read": 2.56e-8}
+    base, parent, _, texture, detail = mesh_scene(native_size=640)
+    y, x = np.indices(parent.shape[-2:])
+    donor = (x < 160) & (y >= 240) & (y < 400)
+    exterior = np.broadcast_to(base + np.where(donor, texture, 0), parent.shape)
+    measured = mosaic(np.where(donor, exterior, parent + detail), colors)
+    flat = mosaic(exterior, colors)
+    variance = np.full_like(measured, 0.29 * noise["shot"] + noise["read"])
+    options = noise | {"donor_span": 224}
+    default = refine_local_raw_mesh(parent, measured, variance, colors, box, roi, **options)
+    np.testing.assert_array_equal(default, parent[region])
+    restored = refine_local_raw_mesh(
+        parent, measured, variance, colors, box, roi, adjacent_donors=True, **options,
+    )
+    expected = (parent + detail)[region]
+    assert np.linalg.norm(restored - expected) < 0.65 * np.linalg.norm(default - expected)
+
+    flat_parent = base.astype(np.float32)
+    unchanged = refine_local_raw_mesh(
+        flat_parent, flat, variance, colors, box, roi, adjacent_donors=True, **options,
+    )
+    np.testing.assert_array_equal(unchanged, flat_parent[region])

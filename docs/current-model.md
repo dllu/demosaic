@@ -132,6 +132,14 @@ panel. It weakens one continuous wire beside an intensity step, and
 both GFX scenes reproduce the column audit exactly. The distributed
 assignment remains a research variant.
 
+The [adjacent donor fallback](donor-phase-transport.md) uses a nearby
+tile to propose both directions missed by the usual donor search. The
+right cab shows new crossings under both priors with positive local
+RAW prediction gains. Some crossings are soft and the lattice is more
+regular than parts of the ISO100 reference. Use `adjacent_donors=True`
+in the experimental crop helper. The exterior phase fit helps
+continuous synthetic ISO6400 wires and can extend texture into gaps.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

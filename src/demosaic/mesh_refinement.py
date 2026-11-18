@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from ._mesh_frequency import infer_prior, query_phases
+from ._mesh_frequency import ADJACENT_SEARCH, adjacent_prior, infer_prior, query_phases
 from ._mesh_profiles import extra_query_check, ribbon, supported_patch
 from .cfa import PATTERNS
 from .isolated_line import native_sites
@@ -26,7 +26,8 @@ def _contains(outer, inner):
 
 
 def refine_local_raw_mesh(
-    parent, scene, variance, colors, box, roi, *, shot, read, donor_span=80, suppress_gaps=False
+    parent, scene, variance, colors, box, roi, *,
+    shot, read, donor_span=80, suppress_gaps=False, adjacent_donors=False,
 ):
     """Return camera-linear RGB for ``roi`` using Bayer evidence in ``box``.
 
@@ -42,6 +43,8 @@ def refine_local_raw_mesh(
     Unsupported crops return the parent pixels. Requires the ``eval`` extra.
     ``suppress_gaps`` further attenuates the correction where the central
     RAW query supports a break in the rear wire in three separate checks.
+    ``adjacent_donors`` also tries a pair of frequencies from a nearby
+    disjoint RAW tile when the usual donor fit yields no correction.
     """
     if scene.ndim != 3 or scene.shape[0] != 4 or variance.shape != scene.shape:
         raise ValueError("scene and variance must be packed Bayer arrays with matching shapes")
@@ -63,18 +66,47 @@ def refine_local_raw_mesh(
     source = _crop(parent, roi)
     noise = {"shot": shot, "read": read}
     prior = infer_prior(scene, colors, box, noise, span=donor_span)
-    if prior is None:
+    correction, central_carriers = _overlap_correction(
+        parent, scene, variance, colors, box, roi, noise, prior,
+    )
+    if adjacent_donors and (correction is None or not np.any(correction)):
+        nearby = adjacent_prior(scene, colors, box, noise)
+        correction, central_carriers = _overlap_correction(
+            parent, scene, variance, colors, box, roi, noise, nearby, search=ADJACENT_SEARCH,
+        )
+    if correction is None:
         return source
+    if suppress_gaps and central_carriers is not None and np.any(correction):
+        from ._mesh_gap import confirmed_gap
+
+        raw = _crop(scene, box, 2)
+        x, y = native_sites(raw.shape[-2:], (-(w - 1) / 2, -(h - 1) / 2))
+        front, rear = (ribbon(x, y, guide) for guide in central_carriers)
+        mask = confirmed_gap(raw, colors, front, rear, shot, read)
+        if mask is not None:
+            inside = (roi[0] - left, roi[1] - top, roi[2], roi[3])
+            correction = (correction * (1 - _crop(mask, inside))).astype(parent.dtype)
+    return source + correction
+
+
+def _overlap_correction(parent, scene, variance, colors, box, roi, noise, prior, **phase_options):
+    if prior is None:
+        return None, None
+    left, top, width, height = box
+    field = (0, 0, parent.shape[2], parent.shape[1])
+    shot, read = noise["shot"], noise["read"]
     corrections = []
     central_carriers = None
     for dx, dy in TRANSLATIONS:
-        query = (left + dx, top + dy, w, h)
+        query = (left + dx, top + dy, width, height)
         if not _contains(field, query) or not _contains(query, roi):
             continue
         raw = _crop(scene, query, 2)
         offset = dx // 2
-        carriers, reserve, scores = query_phases(raw, colors, prior, noise, packed_offset=offset)
-        if suppress_gaps and dx == dy == 0:
+        carriers, reserve, scores = query_phases(
+            raw, colors, prior, noise, packed_offset=offset, **phase_options,
+        )
+        if dx == dy == 0:
             central_carriers = carriers
         current = _crop(parent, query)
         restored = current
@@ -98,16 +130,6 @@ def refine_local_raw_mesh(
         corrections.append(_crop(restored - current, inside))
     active = sum(bool(np.any(delta)) for delta in corrections)
     if len(corrections) < 3 or 2 * active <= len(corrections):
-        return source
+        return None, None
     correction = np.median(np.stack(corrections), axis=0)
-    if suppress_gaps and central_carriers is not None and np.any(correction):
-        from ._mesh_gap import confirmed_gap
-
-        raw = _crop(scene, box, 2)
-        x, y = native_sites(raw.shape[-2:], (-(w - 1) / 2, -(h - 1) / 2))
-        front, rear = (ribbon(x, y, guide) for guide in central_carriers)
-        mask = confirmed_gap(raw, colors, front, rear, shot, read)
-        if mask is not None:
-            inside = (roi[0] - left, roi[1] - top, roi[2], roi[3])
-            correction = (correction * (1 - _crop(mask, inside))).astype(parent.dtype)
-    return source + correction
+    return correction, central_carriers

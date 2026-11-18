@@ -211,6 +211,12 @@ The [near-ADC training continuation](near-adc-bridge-training.md#positive-noise-
 gives small positive-noise gains with large saturated-color errors.
 The existing bounded RAW corrections yield larger weak-band gains and
 repair most of that bias on the retained panels.
+The [adjacent donor study](donor-phase-transport.md) finds both directions
+in the right GFX cab with local held-out RAW gains. The optional crop
+fallback adds visible crossings and keeps the smooth sky. The exterior
+phase fit improves continuous ISO6400 synthetic weak-wire response and
+extends some patterns into gaps. The right-cab gains still leave uneven
+contrast and overly regular crossings in places.
 
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.

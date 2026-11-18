@@ -159,29 +159,63 @@ def infer_prior(packed, colors, box, noise, *, span):
     return result
 
 
-def query_phases(raw, colors, frequencies, noise, *, packed_offset=0):
+def query_phases(raw, colors, frequencies, noise, *, packed_offset=0, search=((2, 384), (2, 1536))):
     h, w = raw.shape[-2:]
     reserved = (np.indices((h, w))[1] + packed_offset) % 4 == 0
     win = np.outer(np.hanning(h), np.hanning(w))
     green = residual_sensor(raw, colors, noise, reserved, win)
-    steps = np.arange(-2, 3) / 384
-    deltas = np.array(list(itertools.product(steps, repeat=2)))
+    grids = [
+        np.array(list(itertools.product(np.arange(-radius, radius + 1), repeat=2))) / scale
+        for radius, scale in search
+    ]
     answer = []
     for frequency in frequencies:
-        bank = frequency + deltas
-        amps = native_modulation((h, w), green, reserved, win, bank)
-        score = np.abs(amps)
-        j = int(np.argmax(score))
-        closer = np.array(list(itertools.product(np.arange(-2, 3) / 1536, repeat=2)))
-        bank = bank[j] + closer
-        amps = native_modulation((h, w), green, reserved, win, bank)
-        score = np.abs(amps)
-        j = int(np.argmax(score))
+        for grid in grids:
+            bank = frequency + grid
+            amps = native_modulation((h, w), green, reserved, win, bank)
+            score = np.abs(amps)
+            j = int(np.argmax(score))
+            frequency = bank[j]
         answer.append(
             (
                 float(score[j]),
-                Carrier(tuple(bank[j]), float(np.angle(amps[j]) / (2 * np.pi) % 1), 0.08),
+                Carrier(tuple(frequency), float(np.angle(amps[j]) / (2 * np.pi) % 1), 0.08),
             )
         )
     answer.sort(key=lambda t: t[0], reverse=True)
     return [line for _, line in answer], reserved, [s for s, _ in answer]
+
+
+ADJACENT_SEARCH = ((1, 640), (1, 1920))
+
+
+def adjacent_prior(packed, colors, box, noise):
+    """Nominate one pair from disjoint nearby donors and the query phase reserve."""
+    left, top, width, height = box
+    span, gap = 160, 32
+    side_x, side_y = left + (width - span) // 2, top + (height - span) // 2
+    starts = (
+        (left - gap - span, side_y), (left + width + gap, side_y),
+        (side_x, top - gap - span), (side_x, top + height + gap),
+    )
+    raw_height, raw_width = np.asarray(packed.shape[-2:]) * 2
+    raw = packed[:, top // 2 : (top + height) // 2, left // 2 : (left + width) // 2]
+    best, strength = None, 0.0
+    for x, y in starts:
+        if x < 0 or y < 0 or x + span > raw_width or y + span > raw_height:
+            continue
+        donor = packed[:, y // 2 : (y + span) // 2, x // 2 : (x + span) // 2]
+        peaks = donor_peaks(donor, colors, noise)
+        pairs = [(first, second) for first, second in itertools.combinations(peaks, 2)
+                 if separation(first, second) > 0.5]
+        scores = {}
+        for first, second in pairs:
+            frequencies = first.frequency, second.frequency
+            for frequency in frequencies:
+                if frequency not in scores:
+                    _, _, found = query_phases(raw, colors, (frequency,), noise, search=ADJACENT_SEARCH)
+                    scores[frequency] = found[0]
+            support = min(scores[frequency] for frequency in frequencies)
+            if support > strength:
+                best, strength = frequencies, support
+    return best if strength >= 4 else None

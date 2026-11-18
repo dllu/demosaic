@@ -1,8 +1,10 @@
 # Fine green fence beside the red train
 
-**Review map updated November 18, 2026.** Faithful weak, colored crossings remain
-unresolved. Newer reports are linked here; the version-specific gallery below
+**Review map updated November 18, 2026.** The optional adjacent-donor
+fit shows both directions in the right cab ROI, with uneven contrast and
+an overly regular lattice in places. The version-specific gallery below
 preserves its original comparison pixels and provenance.
+[Latest native comparison](donor-phase-transport.md#standing-gfx100s-review).
 
 | Review | Relevant outcome |
 | --- | --- |
@@ -32,6 +34,7 @@ preserves its original comparison pixels and provenance.
 | [Donor perspective and short support](local-mesh-projective.md#standing-gfx100s-review) | A wider RAW donor region finds no new qualifying tiles in the fine cab views. The short support visibly fades the left lattice under both priors. Both right views keep the local-only 2k parent |
 | [Audited mesh gap support](local-mesh-gap-support.md#standing-gfx100s-review) | Crossed RAW predictions preserve all four wider-donor views. The final audit alone fades part of the left lattice under the transferred profile. Both JPEGs and the ISO100 AHD were viewed |
 | [Distributed Bayer gap audit](local-mesh-distributed-audit.md#standing-gfx100s-review) | Both audit layouts agree pixel for pixel on both ROIs and noise profiles. The faint left lattice remains and right crossings are incomplete. Both JPEGs and the ISO100 AHD were viewed |
+| [Adjacent RAW donors](donor-phase-transport.md#standing-gfx100s-review) | The right ROI gains visible crossings under both priors. Both directions improve withheld RAW prediction at all 13 placements. The left keeps its earlier result. ISO100 AHD and both JPEGs are qualitative references |
 | [Expanded scene local-only 12k](expanded-scene-local12k.md#native-crops-and-standing-gfx-scenes) | Compared with its 100k parent and V120 under both priors. The transferred prior retains soft diagonals and the fine crossings remain incomplete. Both JPEGs and the independent AHD reference were viewed |
 | [Expanded scene spatial 12k](expanded-scene-spatial12k.md#matched-development-and-standing-gfx-review) | Both 12k arms viewed with V120, 100k, the independent AHD and both JPEGs. Soft diagonal modulation persists under the transferred prior. Fine crossings remain incomplete across both ROIs and profiles |
 | [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons) | Both experimental noise-weighted corrections above 86k, both ROIs, both profiles and both JPEGs viewed. Slight added grain and no convincing new fine crossings. The bounded and [coarse color corrections](coarse-adc-color.md) bypass both profiles exactly |

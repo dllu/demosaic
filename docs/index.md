@@ -48,6 +48,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [donor perspective and short support for mesh gaps](local-mesh-projective.md) ·
 [audited adaptive gap support](local-mesh-gap-support.md) ·
 [distributed Bayer gap audit](local-mesh-distributed-audit.md) ·
+[adjacent donors and exterior phase](donor-phase-transport.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·
