@@ -1,0 +1,1677 @@
+{
+  "summary_scope": "Existing paired head before continuation. 64 original exact-target photos at ISO6400 only. Decompose draw error separately for three independent complete redraws of each fixed within-pair law.",
+  "prior_component_scope": "Existing paired EMA above unchanged frozen Corpus 100k with both support windows.",
+  "inputs": {
+    "training_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/plan.json",
+      "sha256": "fb93cb2c49ece85f36861545716a34a0a65ca4f81746548d5c4d8b45336796c8"
+    },
+    "evaluation_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/evaluation-plan.json",
+      "sha256": "dcb055a2eb7567500ddd234ac28a4f8bacda30e650e942d52a1a2449b58b6c2f"
+    },
+    "parent_plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/parent-predictions/plan.json",
+      "sha256": "6030b88bd34c73641f2d66ab00ae551bd35ca513f4c967ae5339c7f1a29d7370"
+    },
+    "observation_shards": [
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/observation-shard-0.json",
+        "sha256": "560717300313fe41c8b9efaa117abb3e6e2489c279867b59a1dac803ce0391a1"
+      },
+      {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/observation-shard-1.json",
+        "sha256": "70deb7ccdae36294528edcf66d71d5c3e84ed6a4f8e33dced0f148f09f863c2c"
+      }
+    ]
+  },
+  "component": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-luminance-detail-v1/training/step001200.pt",
+    "sha256": "02f8d5e6664bd580bafe2abeb3b8584b070b60bfadfefaff587cadd8bd643d7f"
+  },
+  "models": {
+    "V120": {
+      "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "type": "base",
+      "step": 20000
+    },
+    "100k": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+      "type": "base",
+      "step": 100000
+    }
+  },
+  "metrics": {
+    "coupled": {
+      "sources": 64,
+      "table": {
+        "lower": {
+          "V120": {
+            "mean_increment_RMS_DN16": 40.32836744657681,
+            "mean_quiet_RMS_DN16": 13.806682132642246,
+            "mean_present_RMS_DN16": 97.80082441839075,
+            "increment_MSE_DN16_squared": 2282.1056075694382,
+            "shared_error_product_DN16_squared": 1338.674577225399,
+            "swapped_draw_variance_DN16_squared": 943.4310303440391,
+            "quiet_RMS_source_p90_DN16": 22.96750168307122,
+            "increment_RMS_source_p90_DN16": 72.08976847657344,
+            "target_aligned_response": 0.9487562156440514
+          },
+          "100k": {
+            "mean_increment_RMS_DN16": 40.04913694617384,
+            "mean_quiet_RMS_DN16": 13.209029735267704,
+            "mean_present_RMS_DN16": 97.51325356634486,
+            "increment_MSE_DN16_squared": 2253.212307042369,
+            "shared_error_product_DN16_squared": 1313.2931760440342,
+            "swapped_draw_variance_DN16_squared": 939.9191309983356,
+            "quiet_RMS_source_p90_DN16": 22.977303362634583,
+            "increment_RMS_source_p90_DN16": 71.15866955611652,
+            "target_aligned_response": 0.9489076249119116
+          },
+          "paired-init": {
+            "mean_increment_RMS_DN16": 39.902683528613096,
+            "mean_quiet_RMS_DN16": 13.212206657389613,
+            "mean_present_RMS_DN16": 97.51571586275533,
+            "increment_MSE_DN16_squared": 2235.301708804555,
+            "shared_error_product_DN16_squared": 1297.3227200826636,
+            "swapped_draw_variance_DN16_squared": 937.9789887218917,
+            "quiet_RMS_source_p90_DN16": 22.975224081675613,
+            "increment_RMS_source_p90_DN16": 70.65132218641483,
+            "target_aligned_response": 0.9491084439582247
+          }
+        },
+        "fine": {
+          "V120": {
+            "mean_increment_RMS_DN16": 104.22459169364325,
+            "mean_quiet_RMS_DN16": 5.08633717465504,
+            "mean_present_RMS_DN16": 116.51651825245106,
+            "increment_MSE_DN16_squared": 16542.916074188965,
+            "shared_error_product_DN16_squared": 13188.65465152068,
+            "swapped_draw_variance_DN16_squared": 3354.2614226682763,
+            "quiet_RMS_source_p90_DN16": 8.252226007118843,
+            "increment_RMS_source_p90_DN16": 197.4696482870785,
+            "target_aligned_response": 0.6518026555920661
+          },
+          "100k": {
+            "mean_increment_RMS_DN16": 103.56922988222085,
+            "mean_quiet_RMS_DN16": 4.595152753172152,
+            "mean_present_RMS_DN16": 115.95732319967836,
+            "increment_MSE_DN16_squared": 16312.143060142975,
+            "shared_error_product_DN16_squared": 12766.127628035896,
+            "swapped_draw_variance_DN16_squared": 3546.015432107076,
+            "quiet_RMS_source_p90_DN16": 7.248255482242748,
+            "increment_RMS_source_p90_DN16": 195.9996762450267,
+            "target_aligned_response": 0.6559167749684877
+          },
+          "paired-init": {
+            "mean_increment_RMS_DN16": 102.48190210210322,
+            "mean_quiet_RMS_DN16": 4.686822819342281,
+            "mean_present_RMS_DN16": 115.79312441357062,
+            "increment_MSE_DN16_squared": 15972.363156653602,
+            "shared_error_product_DN16_squared": 12465.028744954363,
+            "swapped_draw_variance_DN16_squared": 3507.3344116992434,
+            "quiet_RMS_source_p90_DN16": 7.253971120323859,
+            "increment_RMS_source_p90_DN16": 194.29711187691998,
+            "target_aligned_response": 0.6605094011799313
+          }
+        },
+        "upper": {
+          "V120": {
+            "mean_increment_RMS_DN16": 90.44377561311394,
+            "mean_quiet_RMS_DN16": 2.162476720809977,
+            "mean_present_RMS_DN16": 89.82477663220654,
+            "increment_MSE_DN16_squared": 13037.126114560755,
+            "shared_error_product_DN16_squared": 11849.775860806252,
+            "swapped_draw_variance_DN16_squared": 1187.350253754497,
+            "quiet_RMS_source_p90_DN16": 3.4079059136242504,
+            "increment_RMS_source_p90_DN16": 172.27925795000286,
+            "target_aligned_response": 0.25090060947229315
+          },
+          "100k": {
+            "mean_increment_RMS_DN16": 90.06675285001488,
+            "mean_quiet_RMS_DN16": 1.9545521167054456,
+            "mean_present_RMS_DN16": 89.56284956928864,
+            "increment_MSE_DN16_squared": 12909.662873899008,
+            "shared_error_product_DN16_squared": 11531.194106772165,
+            "swapped_draw_variance_DN16_squared": 1378.4687671268357,
+            "quiet_RMS_source_p90_DN16": 3.1813977464753944,
+            "increment_RMS_source_p90_DN16": 170.86969930232164,
+            "target_aligned_response": 0.2643452919061109
+          },
+          "paired-init": {
+            "mean_increment_RMS_DN16": 88.90172662481187,
+            "mean_quiet_RMS_DN16": 2.15483399150845,
+            "mean_present_RMS_DN16": 89.5979818504879,
+            "increment_MSE_DN16_squared": 12591.51470206876,
+            "shared_error_product_DN16_squared": 11222.0377153432,
+            "swapped_draw_variance_DN16_squared": 1369.4769867255552,
+            "quiet_RMS_source_p90_DN16": 3.293621048745396,
+            "increment_RMS_source_p90_DN16": 168.0415632731363,
+            "target_aligned_response": 0.2753661950026988
+          }
+        },
+        "flat_color": {
+          "V120": {
+            "mean_worst_channel_abs_bias_DN16": 32.294608657173995,
+            "mean_centered_RGB_RMS_DN16": 36.77562053150243
+          },
+          "100k": {
+            "mean_worst_channel_abs_bias_DN16": 30.735513392489544,
+            "mean_centered_RGB_RMS_DN16": 34.47612055953073
+          },
+          "paired-init": {
+            "mean_worst_channel_abs_bias_DN16": 30.736270863813058,
+            "mean_centered_RGB_RMS_DN16": 34.510955019054734
+          }
+        }
+      },
+      "contrasts": {
+        "V120-vs-100k": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.2792305004029919,
+              "percentiles_95": [
+                -0.03464374379697854,
+                0.5342786572698146
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.5976523973745383,
+              "percentiles_95": [
+                0.29669898130519906,
+                0.9321041774791795
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.287570852045924,
+              "percentiles_95": [
+                -0.06510791269056214,
+                0.5483804263302878
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 28.89330052706803,
+              "percentiles_95": [
+                -11.245291040762117,
+                62.96789616853111
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 25.381401181364307,
+              "percentiles_95": [
+                -10.699700340643608,
+                55.01222549030658
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 3.511899345703614,
+              "percentiles_95": [
+                -7.882598621040501,
+                14.960449830181663
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.0001514092678603901,
+              "percentiles_95": [
+                -0.0033591473959066276,
+                0.0035281554575619534
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.655361811422392,
+              "percentiles_95": [
+                0.19127170152960352,
+                1.1308667411912774
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.49118442148288965,
+              "percentiles_95": [
+                0.30795578639283455,
+                0.6685320890595168
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.5591950527726927,
+              "percentiles_95": [
+                0.34163425829919264,
+                0.8047796571854379
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 230.77301404598137,
+              "percentiles_95": [
+                64.27996717138411,
+                404.22107807578743
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 422.5270234847794,
+              "percentiles_95": [
+                154.12965182336944,
+                747.3808252081257
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -191.75400943879777,
+              "percentiles_95": [
+                -382.67675033214874,
+                -64.57532647928049
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.004114119376421583,
+              "percentiles_95": [
+                -0.009133574400033408,
+                0.0011966510047582827
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.3770227630990368,
+              "percentiles_95": [
+                -0.034272863184416594,
+                0.7147866108130885
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.20792460410453123,
+              "percentiles_95": [
+                0.14506900412045415,
+                0.27141243566637413
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.2619270629178393,
+              "percentiles_95": [
+                -0.2654117209639513,
+                0.6303372336068592
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 127.46324066174822,
+              "percentiles_95": [
+                0.786998126084929,
+                243.41409684802366
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 318.5817540340883,
+              "percentiles_95": [
+                167.9908371590403,
+                503.9079821969292
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -191.11851337233892,
+              "percentiles_95": [
+                -326.43156462829296,
+                -85.04719813684892
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.013444682433817733,
+              "percentiles_95": [
+                -0.0171227649192006,
+                -0.009178932208053285
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": 1.5590952646844591,
+              "percentiles_95": [
+                0.28506564155392833,
+                2.822023156012395
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": 2.29949997197169,
+              "percentiles_95": [
+                1.7927768717057813,
+                2.8579136280453263
+              ]
+            }
+          }
+        },
+        "V120-vs-paired-init": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.4256839179637262,
+              "percentiles_95": [
+                0.10972273359851836,
+                0.6974191287786091
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.5944754752526262,
+              "percentiles_95": [
+                0.29309842574015615,
+                0.9304567469698545
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.2851085556354168,
+              "percentiles_95": [
+                -0.07074892074446372,
+                0.5466039701688177
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 46.803898764883044,
+              "percentiles_95": [
+                6.570047674291991,
+                85.28367195428147
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 41.351857142735746,
+              "percentiles_95": [
+                5.143095100102988,
+                73.55111777809515
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 5.452041622147192,
+              "percentiles_95": [
+                -6.242075290197735,
+                17.29910176561021
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.00035222831417332294,
+              "percentiles_95": [
+                -0.003598440398568439,
+                0.0032824925117019136
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 1.7426895915400307,
+              "percentiles_95": [
+                1.2049435988991946,
+                2.3561086238861506
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.39951435531275503,
+              "percentiles_95": [
+                0.21582616758289003,
+                0.5876922929936992
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.7233938388804223,
+              "percentiles_95": [
+                0.47306789278830924,
+                1.0044830988180946
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 570.5529175353475,
+              "percentiles_95": [
+                354.74114810516403,
+                831.5203784217109
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 723.6259065663153,
+              "percentiles_95": [
+                421.6245929874206,
+                1085.5242436497042
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -153.07298903096662,
+              "percentiles_95": [
+                -340.60409071475976,
+                -26.83771676304637
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.008706745587865312,
+              "percentiles_95": [
+                -0.013392053408077054,
+                -0.0036351994372549835
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 1.5420489883020265,
+              "percentiles_95": [
+                1.0356897956215019,
+                2.0673155639027883
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.0076427293015262025,
+              "percentiles_95": [
+                -0.12747948178010374,
+                0.1327732507103075
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.22679478171861533,
+              "percentiles_95": [
+                -0.3497496016483976,
+                0.6517673783370751
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 445.61141249199363,
+              "percentiles_95": [
+                272.984795384142,
+                637.9332881349616
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 627.7381454630535,
+              "percentiles_95": [
+                415.834232240337,
+                881.8975886568061
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -182.12673297105843,
+              "percentiles_95": [
+                -313.2618341990404,
+                -77.84131827622116
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.024465585530405714,
+              "percentiles_95": [
+                -0.02896907336366838,
+                -0.020095578694872492
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": 1.5583377933609317,
+              "percentiles_95": [
+                0.2847019139643393,
+                2.8214713473101627
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": 2.26466551244768,
+              "percentiles_95": [
+                1.7580270984762827,
+                2.8263324743458527
+              ]
+            }
+          }
+        },
+        "100k-vs-paired-init": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.14645341756073416,
+              "percentiles_95": [
+                0.10430707169997036,
+                0.19129931876012546
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": -0.003176922121912139,
+              "percentiles_95": [
+                -0.006782315226350511,
+                -0.0006376354797319883
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": -0.002462296410507138,
+              "percentiles_95": [
+                -0.012395961038537674,
+                0.006640393895893292
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 17.910598237815023,
+              "percentiles_95": [
+                11.84858957269447,
+                25.106747139508542
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 15.970455961371439,
+              "percentiles_95": [
+                10.521739469589045,
+                22.417207896051682
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 1.9401422764435778,
+              "percentiles_95": [
+                1.1988059680396148,
+                2.84711348215038
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.00020081904631293285,
+              "percentiles_95": [
+                -0.0003312410050769892,
+                -0.00010060370731885434
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 1.0873277801176382,
+              "percentiles_95": [
+                0.808184233366986,
+                1.391003052346618
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": -0.09167006617013458,
+              "percentiles_95": [
+                -0.14531897347903489,
+                -0.04678684157973168
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.1641987861077296,
+              "percentiles_95": [
+                0.07663001707679225,
+                0.25871373751980914
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 339.7799034893661,
+              "percentiles_95": [
+                231.53858690121052,
+                466.22984657339276
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 301.09888308153603,
+              "percentiles_95": [
+                208.314334944358,
+                410.5168895108175
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 38.68102040783111,
+              "percentiles_95": [
+                22.16973906093952,
+                59.44841216157437
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.00459262621144373,
+              "percentiles_95": [
+                -0.0053084202254136195,
+                -0.0038094046995946853
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 1.1650262252029897,
+              "percentiles_95": [
+                0.8650057664955335,
+                1.4898533181908076
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": -0.20028187480300502,
+              "percentiles_95": [
+                -0.3172331021101359,
+                -0.0977131678763145
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": -0.03513228119922403,
+              "percentiles_95": [
+                -0.18882501324038678,
+                0.09858756697119594
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 318.1481718302456,
+              "percentiles_95": [
+                218.16167279444207,
+                436.59320468689106
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 309.1563914289653,
+              "percentiles_95": [
+                214.61549360744712,
+                421.6857414790161
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 8.99178040128048,
+              "percentiles_95": [
+                -0.7706317786255614,
+                21.34841000831268
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.01102090309658798,
+              "percentiles_95": [
+                -0.013854026303497883,
+                -0.008398420614188511
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": -0.000757471323526257,
+              "percentiles_95": [
+                -0.002266248893871565,
+                0.000719250340757931
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": -0.0348344595240091,
+              "percentiles_95": [
+                -0.056866774472988595,
+                -0.0163348903400137
+              ]
+            }
+          }
+        },
+        "paired-init-vs-100k": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": -0.14645341756073416,
+              "percentiles_95": [
+                -0.19129931876012546,
+                -0.10430707169997036
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.003176922121912139,
+              "percentiles_95": [
+                0.0006376354797319894,
+                0.006782315226350513
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.002462296410507138,
+              "percentiles_95": [
+                -0.0066403938958932915,
+                0.012395961038537674
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": -17.910598237815023,
+              "percentiles_95": [
+                -25.106747139508542,
+                -11.848589572694467
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": -15.970455961371439,
+              "percentiles_95": [
+                -22.417207896051675,
+                -10.521739469589045
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -1.9401422764435778,
+              "percentiles_95": [
+                -2.8471134821503794,
+                -1.1988059680396146
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": 0.00020081904631293285,
+              "percentiles_95": [
+                0.00010060370731885435,
+                0.00033124100507698925
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": -1.0873277801176382,
+              "percentiles_95": [
+                -1.391003052346618,
+                -0.8081842333669859
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.09167006617013458,
+              "percentiles_95": [
+                0.0467868415797317,
+                0.14531897347903489
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": -0.1641987861077296,
+              "percentiles_95": [
+                -0.2587137375198091,
+                -0.07663001707679225
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": -339.7799034893661,
+              "percentiles_95": [
+                -466.2298465733927,
+                -231.5385869012105
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": -301.09888308153603,
+              "percentiles_95": [
+                -410.5168895108175,
+                -208.31433494435797
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -38.68102040783111,
+              "percentiles_95": [
+                -59.44841216157437,
+                -22.16973906093952
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": 0.00459262621144373,
+              "percentiles_95": [
+                0.0038094046995946857,
+                0.0053084202254136195
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": -1.1650262252029897,
+              "percentiles_95": [
+                -1.4898533181908076,
+                -0.8650057664955334
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.20028187480300502,
+              "percentiles_95": [
+                0.09771316787631452,
+                0.3172331021101359
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.03513228119922403,
+              "percentiles_95": [
+                -0.09858756697119592,
+                0.1888250132403868
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": -318.1481718302456,
+              "percentiles_95": [
+                -436.59320468689106,
+                -218.16167279444204
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": -309.1563914289653,
+              "percentiles_95": [
+                -421.6857414790161,
+                -214.61549360744712
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -8.99178040128048,
+              "percentiles_95": [
+                -21.34841000831268,
+                0.7706317786255615
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": 0.01102090309658798,
+              "percentiles_95": [
+                0.008398420614188511,
+                0.013854026303497883
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": 0.000757471323526257,
+              "percentiles_95": [
+                -0.0007192503407579306,
+                0.0022662488938715655
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": 0.0348344595240091,
+              "percentiles_95": [
+                0.016334890340013702,
+                0.0568667744729886
+              ]
+            }
+          }
+        }
+      }
+    },
+    "independent": {
+      "sources": 64,
+      "table": {
+        "lower": {
+          "V120": {
+            "mean_increment_RMS_DN16": 116.55063750960156,
+            "mean_quiet_RMS_DN16": 13.688534481650125,
+            "mean_present_RMS_DN16": 98.8121982408514,
+            "increment_MSE_DN16_squared": 17342.553299291307,
+            "shared_error_product_DN16_squared": 1274.845622171992,
+            "swapped_draw_variance_DN16_squared": 16067.707677119317,
+            "quiet_RMS_source_p90_DN16": 22.131294810104695,
+            "increment_RMS_source_p90_DN16": 201.60215227198424,
+            "target_aligned_response": 0.9503546584066148
+          },
+          "100k": {
+            "mean_increment_RMS_DN16": 116.33653512710126,
+            "mean_quiet_RMS_DN16": 13.04218121001314,
+            "mean_present_RMS_DN16": 98.61631596123519,
+            "increment_MSE_DN16_squared": 17283.880748547886,
+            "shared_error_product_DN16_squared": 1269.6173803434256,
+            "swapped_draw_variance_DN16_squared": 16014.263368204456,
+            "quiet_RMS_source_p90_DN16": 21.862027918628236,
+            "increment_RMS_source_p90_DN16": 202.11664695172757,
+            "target_aligned_response": 0.9509379735307214
+          },
+          "paired-init": {
+            "mean_increment_RMS_DN16": 116.34527390735364,
+            "mean_quiet_RMS_DN16": 13.044894459645958,
+            "mean_present_RMS_DN16": 98.62481149966027,
+            "increment_MSE_DN16_squared": 17287.95060391276,
+            "shared_error_product_DN16_squared": 1254.174001431639,
+            "swapped_draw_variance_DN16_squared": 16033.776602481119,
+            "quiet_RMS_source_p90_DN16": 21.85990860960695,
+            "increment_RMS_source_p90_DN16": 202.01780614366334,
+            "target_aligned_response": 0.9511488194821978
+          }
+        },
+        "fine": {
+          "V120": {
+            "mean_increment_RMS_DN16": 125.61655080800236,
+            "mean_quiet_RMS_DN16": 4.988519272136955,
+            "mean_present_RMS_DN16": 116.27228691295322,
+            "increment_MSE_DN16_squared": 23365.034358974157,
+            "shared_error_product_DN16_squared": 13068.09734957634,
+            "swapped_draw_variance_DN16_squared": 10296.937009397827,
+            "quiet_RMS_source_p90_DN16": 8.043013089628271,
+            "increment_RMS_source_p90_DN16": 232.4482837754576,
+            "target_aligned_response": 0.658309187490997
+          },
+          "100k": {
+            "mean_increment_RMS_DN16": 125.16934825820809,
+            "mean_quiet_RMS_DN16": 4.448314187074139,
+            "mean_present_RMS_DN16": 115.7056013741911,
+            "increment_MSE_DN16_squared": 23252.305142443176,
+            "shared_error_product_DN16_squared": 12681.512697801134,
+            "swapped_draw_variance_DN16_squared": 10570.792444642044,
+            "quiet_RMS_source_p90_DN16": 7.0481621005793205,
+            "increment_RMS_source_p90_DN16": 233.12605013913137,
+            "target_aligned_response": 0.6617752283671066
+          },
+          "paired-init": {
+            "mean_increment_RMS_DN16": 125.49387915018762,
+            "mean_quiet_RMS_DN16": 4.5351414715520315,
+            "mean_present_RMS_DN16": 115.51231458954062,
+            "increment_MSE_DN16_squared": 23361.615708688205,
+            "shared_error_product_DN16_squared": 12386.188072549756,
+            "swapped_draw_variance_DN16_squared": 10975.427636138447,
+            "quiet_RMS_source_p90_DN16": 7.055155645531539,
+            "increment_RMS_source_p90_DN16": 233.0323118718064,
+            "target_aligned_response": 0.666466142942451
+          }
+        },
+        "upper": {
+          "V120": {
+            "mean_increment_RMS_DN16": 92.0267310748215,
+            "mean_quiet_RMS_DN16": 2.1347818625692994,
+            "mean_present_RMS_DN16": 89.92444111210906,
+            "increment_MSE_DN16_squared": 13418.965564323402,
+            "shared_error_product_DN16_squared": 11881.465923434747,
+            "swapped_draw_variance_DN16_squared": 1537.4996408886636,
+            "quiet_RMS_source_p90_DN16": 3.4119265290073026,
+            "increment_RMS_source_p90_DN16": 172.60600258287872,
+            "target_aligned_response": 0.25071688758581584
+          },
+          "100k": {
+            "mean_increment_RMS_DN16": 91.85105716865708,
+            "mean_quiet_RMS_DN16": 1.9056484552862687,
+            "mean_present_RMS_DN16": 89.77475601654142,
+            "increment_MSE_DN16_squared": 13375.169141060545,
+            "shared_error_product_DN16_squared": 11591.36637545887,
+            "swapped_draw_variance_DN16_squared": 1783.8027656016736,
+            "quiet_RMS_source_p90_DN16": 3.0782718830872375,
+            "increment_RMS_source_p90_DN16": 171.66684497451845,
+            "target_aligned_response": 0.2640308756532728
+          },
+          "paired-init": {
+            "mean_increment_RMS_DN16": 92.16444854939151,
+            "mean_quiet_RMS_DN16": 2.1102946289936715,
+            "mean_present_RMS_DN16": 89.8155232028415,
+            "increment_MSE_DN16_squared": 13425.268769413593,
+            "shared_error_product_DN16_squared": 11284.422082152942,
+            "swapped_draw_variance_DN16_squared": 2140.846687260646,
+            "quiet_RMS_source_p90_DN16": 3.2009062872302203,
+            "increment_RMS_source_p90_DN16": 172.01437238351707,
+            "target_aligned_response": 0.27514088026034317
+          }
+        },
+        "flat_color": {
+          "V120": {
+            "mean_worst_channel_abs_bias_DN16": 30.95963037398955,
+            "mean_centered_RGB_RMS_DN16": 36.26043883714386
+          },
+          "100k": {
+            "mean_worst_channel_abs_bias_DN16": 30.660334337530784,
+            "mean_centered_RGB_RMS_DN16": 33.85389254713543
+          },
+          "paired-init": {
+            "mean_worst_channel_abs_bias_DN16": 30.660856276837404,
+            "mean_centered_RGB_RMS_DN16": 33.88916825886307
+          }
+        }
+      },
+      "contrasts": {
+        "V120-vs-100k": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.21410238250029598,
+              "percentiles_95": [
+                -0.21235716712748637,
+                0.6032038596269422
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.646353271636984,
+              "percentiles_95": [
+                0.4114930211178791,
+                0.8850354291532075
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.1958822796161966,
+              "percentiles_95": [
+                -0.37440398988196183,
+                0.543645343308848
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 58.67255074342579,
+              "percentiles_95": [
+                -53.322528205669144,
+                179.32455993746757
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 5.228241828566583,
+              "percentiles_95": [
+                -68.08455830873338,
+                61.85154140409814
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 53.44430891485868,
+              "percentiles_95": [
+                -41.51379930017253,
+                160.1466361424475
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.000583315124106668,
+              "percentiles_95": [
+                -0.003870291710493633,
+                0.0031774007064807775
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.4472025497942682,
+              "percentiles_95": [
+                0.2216252000091988,
+                0.6628075660910423
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.5402050850628171,
+              "percentiles_95": [
+                0.4052892525328409,
+                0.6779036042143624
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.5666855387622102,
+              "percentiles_95": [
+                0.35279336787490234,
+                0.7792107423219558
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 112.72921653097949,
+              "percentiles_95": [
+                42.61183462524546,
+                182.33964885017593
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 386.58465177520065,
+              "percentiles_95": [
+                133.2150752986969,
+                690.8067469456678
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -273.85543524421837,
+              "percentiles_95": [
+                -560.3902002293953,
+                -30.21319463615802
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.003466040876109614,
+              "percentiles_95": [
+                -0.00843520287335948,
+                0.0019197585393734954
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.17567390616447912,
+              "percentiles_95": [
+                -0.5151235172856238,
+                0.6049408571474371
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.22913340728303022,
+              "percentiles_95": [
+                0.1862433630504883,
+                0.27745173326760436
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.1496850955676507,
+              "percentiles_95": [
+                -0.5756801684930721,
+                0.5979620379317816
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 43.79642326285675,
+              "percentiles_95": [
+                -176.60573570208257,
+                187.44363087164734
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 290.09954797586795,
+              "percentiles_95": [
+                128.5627254616824,
+                482.79896481523105
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -246.30312471301093,
+              "percentiles_95": [
+                -445.19184052047177,
+                -100.76388356804559
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.013313988067456985,
+              "percentiles_95": [
+                -0.017115403919773828,
+                -0.008722332977451817
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": 0.29929603645877767,
+              "percentiles_95": [
+                -0.4922162136390819,
+                1.1316195375291083
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": 2.4065462900084134,
+              "percentiles_95": [
+                1.8629467371852055,
+                3.0066101477727245
+              ]
+            }
+          }
+        },
+        "V120-vs-paired-init": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.20536360224795058,
+              "percentiles_95": [
+                -0.2109356155523987,
+                0.5865424356818659
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.6436400220041628,
+              "percentiles_95": [
+                0.4086129732913273,
+                0.8823700431215742
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.18738674119115073,
+              "percentiles_95": [
+                -0.3819399843465697,
+                0.5341873684819626
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 54.60269537854905,
+              "percentiles_95": [
+                -53.21491690355702,
+                171.08292745329163
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 20.671620740352804,
+              "percentiles_95": [
+                -52.072383431351916,
+                78.96603708785463
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 33.93107463819632,
+              "percentiles_95": [
+                -56.674997963998486,
+                134.80115079406
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.0007941610755829542,
+              "percentiles_95": [
+                -0.0040451436370545725,
+                0.002933002340539214
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.12267165781475708,
+              "percentiles_95": [
+                -0.12695943778041616,
+                0.3707785163224594
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.45337780058492533,
+              "percentiles_95": [
+                0.3051634744935259,
+                0.6046782595246727
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.7599723234126864,
+              "percentiles_95": [
+                0.5413757398782232,
+                0.9786348853781339
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 3.418650285953852,
+              "percentiles_95": [
+                -89.13896700368504,
+                93.6831635682401
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 681.9092770265761,
+              "percentiles_95": [
+                402.108504491332,
+                1012.176407086896
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -678.4906267406208,
+              "percentiles_95": [
+                -1022.9691228327525,
+                -397.28750831440766
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.00815695545145395,
+              "percentiles_95": [
+                -0.012798398815032464,
+                -0.003063160198944954
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": -0.1377174745699473,
+              "percentiles_95": [
+                -0.9148098611484232,
+                0.4302948835204252
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.024487233575627397,
+              "percentiles_95": [
+                -0.1083813373750065,
+                0.13992479970893087
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.10891790926754277,
+              "percentiles_95": [
+                -0.6585320294944421,
+                0.624110737881688
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": -6.303205090185463,
+              "percentiles_95": [
+                -245.600657876393,
+                168.2899365326251
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 597.0438412817994,
+              "percentiles_95": [
+                374.22059412307857,
+                858.4354985127949
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -603.3470463719834,
+              "percentiles_95": [
+                -881.260819811386,
+                -383.2659677425244
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.02442399267452736,
+              "percentiles_95": [
+                -0.02913588419417811,
+                -0.01988376740515362
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": 0.2987740971521551,
+              "percentiles_95": [
+                -0.4926007573541388,
+                1.1313006464795812
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": 2.3712705782807815,
+              "percentiles_95": [
+                1.8277990111572002,
+                2.967258461975279
+              ]
+            }
+          }
+        },
+        "100k-vs-paired-init": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": -0.008738780252345396,
+              "percentiles_95": [
+                -0.027841995036724364,
+                0.010852657740765888
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": -0.002713249632820783,
+              "percentiles_95": [
+                -0.004898545007183642,
+                -0.0009007481118915799
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": -0.008495538425045857,
+              "percentiles_95": [
+                -0.020575361792853207,
+                0.0025045149385797797
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": -4.069855364876738,
+              "percentiles_95": [
+                -11.227082090771274,
+                2.1300354360655067
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 15.44337891178621,
+              "percentiles_95": [
+                9.640797920620667,
+                22.389508516390865
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -19.51323427666236,
+              "percentiles_95": [
+                -29.58590434763985,
+                -11.21001143930326
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.00021084595147628603,
+              "percentiles_95": [
+                -0.00039409336097096165,
+                -5.3685504815738316e-05
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": -0.32453089197951107,
+              "percentiles_95": [
+                -0.4792816844935846,
+                -0.18369238835485494
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": -0.08682728447789187,
+              "percentiles_95": [
+                -0.13745926546343978,
+                -0.045923744535876956
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.19328678465047625,
+              "percentiles_95": [
+                0.10049959634068838,
+                0.29447448421246863
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": -109.31056624502563,
+              "percentiles_95": [
+                -176.84452114190455,
+                -52.43687266183236
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 295.3246252513753,
+              "percentiles_95": [
+                203.1201393138839,
+                402.1762867090168
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -404.6351914964025,
+              "percentiles_95": [
+                -563.5759258190677,
+                -270.6012717813648
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.0046909145753443356,
+              "percentiles_95": [
+                -0.0054322952482464245,
+                -0.003879418255346331
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": -0.3133913807344264,
+              "percentiles_95": [
+                -0.6218582954843821,
+                -0.06944290483734808
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": -0.20464617370740285,
+              "percentiles_95": [
+                -0.3255405204103114,
+                -0.10486953062515657
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": -0.040767186300107894,
+              "percentiles_95": [
+                -0.21082933282383845,
+                0.09227898541545787
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": -50.09962835304222,
+              "percentiles_95": [
+                -116.95321856593955,
+                5.050919753906464
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": 306.9442933059314,
+              "percentiles_95": [
+                208.63509932039028,
+                417.90240246155014
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": -357.0439216589724,
+              "percentiles_95": [
+                -498.3884870035849,
+                -236.89511886952394
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": -0.011110004607070373,
+              "percentiles_95": [
+                -0.014126870844196586,
+                -0.008395249305486708
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": -0.000521939306622865,
+              "percentiles_95": [
+                -0.0014321277356432044,
+                0.00029448654015523315
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": -0.035275711727631914,
+              "percentiles_95": [
+                -0.05864929965637459,
+                -0.016580979614483345
+              ]
+            }
+          }
+        },
+        "paired-init-vs-100k": {
+          "lower": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.008738780252345396,
+              "percentiles_95": [
+                -0.01085265774076588,
+                0.02784199503672437
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.002713249632820783,
+              "percentiles_95": [
+                0.00090074811189158,
+                0.004898545007183644
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.008495538425045857,
+              "percentiles_95": [
+                -0.002504514938579773,
+                0.020575361792853207
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 4.069855364876738,
+              "percentiles_95": [
+                -2.1300354360655045,
+                11.22708209077128
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": -15.44337891178621,
+              "percentiles_95": [
+                -22.389508516390865,
+                -9.640797920620667
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 19.51323427666236,
+              "percentiles_95": [
+                11.21001143930326,
+                29.585904347639858
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": 0.00021084595147628603,
+              "percentiles_95": [
+                5.368550481573834e-05,
+                0.0003940933609709617
+              ]
+            }
+          },
+          "fine": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.32453089197951107,
+              "percentiles_95": [
+                0.183692388354855,
+                0.47928168449358466
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.08682728447789187,
+              "percentiles_95": [
+                0.04592374453587696,
+                0.1374592654634398
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": -0.19328678465047625,
+              "percentiles_95": [
+                -0.29447448421246863,
+                -0.10049959634068838
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 109.31056624502563,
+              "percentiles_95": [
+                52.436872661832375,
+                176.84452114190455
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": -295.3246252513753,
+              "percentiles_95": [
+                -402.1762867090168,
+                -203.12013931388387
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 404.6351914964025,
+              "percentiles_95": [
+                270.60127178136486,
+                563.5759258190678
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": 0.0046909145753443356,
+              "percentiles_95": [
+                0.003879418255346331,
+                0.0054322952482464245
+              ]
+            }
+          },
+          "upper": {
+            "mean_increment_RMS_DN16": {
+              "mean_delta": 0.3133913807344264,
+              "percentiles_95": [
+                0.06944290483734815,
+                0.6218582954843822
+              ]
+            },
+            "mean_quiet_RMS_DN16": {
+              "mean_delta": 0.20464617370740285,
+              "percentiles_95": [
+                0.10486953062515657,
+                0.32554052041031145
+              ]
+            },
+            "mean_present_RMS_DN16": {
+              "mean_delta": 0.040767186300107894,
+              "percentiles_95": [
+                -0.09227898541545787,
+                0.21082933282383845
+              ]
+            },
+            "increment_MSE_DN16_squared": {
+              "mean_delta": 50.09962835304222,
+              "percentiles_95": [
+                -5.050919753906443,
+                116.95321856593958
+              ]
+            },
+            "shared_error_product_DN16_squared": {
+              "mean_delta": -306.9442933059314,
+              "percentiles_95": [
+                -417.90240246155014,
+                -208.63509932039025
+              ]
+            },
+            "swapped_draw_variance_DN16_squared": {
+              "mean_delta": 357.0439216589724,
+              "percentiles_95": [
+                236.89511886952394,
+                498.3884870035849
+              ]
+            },
+            "aligned_response_fraction": {
+              "mean_delta": 0.011110004607070373,
+              "percentiles_95": [
+                0.008395249305486711,
+                0.014126870844196586
+              ]
+            }
+          },
+          "flat_color": {
+            "mean_worst_channel_abs_bias_DN16": {
+              "mean_delta": 0.000521939306622865,
+              "percentiles_95": [
+                -0.0002944865401552331,
+                0.0014321277356432046
+              ]
+            },
+            "mean_centered_RGB_RMS_DN16": {
+              "mean_delta": 0.035275711727631914,
+              "percentiles_95": [
+                0.016580979614483356,
+                0.0586492996563746
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "duration_seconds": 45.39554939302616,
+  "exact_per_source_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/paired-repeat-stability-v2/starting64-iso6400.json",
+    "sha256": "47797ff99f2b076a9dcf5cf966e9326bfc98b3d3873b71c22069e23fffe6af6a"
+  },
+  "frozen_source_and_results": {
+    "path": "/home/dllu/proj/demosaic/docs/results/paired-repeat-stability-v2/start64-evidence.tar.xz",
+    "sha256": "6d8d3ab3ef91c4788a93330b9da606e5b1f66dbaa9f25490b4a0365e88f82dc5"
+  }
+}

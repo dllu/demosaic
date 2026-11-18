@@ -320,6 +320,13 @@ draw-sensitive output. Requiring support in both 18- and 42-pixel
 green windows lowers excess flat RMS at matched correction strength.
 The fine GFX cab crossings remain incomplete.
 
+In the [three-redraw follow-up](paired-repeat-stability.md#starting-model-on-64-photos-with-three-redraws),
+the paired head lowers the shared fine-increment error by about
+300 DN16² under each ISO6400 coupling law. Between-draw variance
+increases by 405 DN16² for independent pairs and falls by
+39 DN16² for coupled pairs. The follow-up trains against the
+draw-dependent term with matched controls.
+
 The [readout-row stress test](withheld-row-noise.md) shows that
 disjoint Bayer pixels can still validate the same simulated noise.
 Holding out complete rows rejects the false bands and often

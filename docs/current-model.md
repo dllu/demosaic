@@ -97,6 +97,9 @@ green support windows reduce excess flat texture against a
 strength-matched wider guard. Fine cab crossings remain incomplete.
 [Eight-orientation replay](paired-head-symmetry.md) finds little
 change in independent-draw error at matched correction strength.
+[Three same-law redraws](paired-repeat-stability.md#starting-model-on-64-photos-with-three-redraws)
+show the paired head's independent-draw variance increase
+offsetting its reduction in shared increment error.
 
 The [isolated RAW line fit](isolated-raw-line.md) recovers about 81%
 of the weak increment through interrupted synthetic ISO400 wires.

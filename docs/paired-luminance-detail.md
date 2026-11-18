@@ -122,6 +122,12 @@ within-pair noise coupling.
 [Two-draw calculation](results/paired-luminance-detail-v1/repeat-decomposition.json) ·
 [Correction-strength sweep](results/paired-luminance-detail-v1/gain-curve.json).
 
+The [three-redraw follow-up](paired-repeat-stability.md#starting-model-on-64-photos-with-three-redraws)
+estimates variance separately under each ISO6400 coupling law.
+Shared error falls by about 300 DN16² with either law. Variance
+rises by 405 DN16² with independent pairs and falls by 39 DN16²
+with coupled pairs.
+
 ![Fine response, increment error and flat error over the correction-strength sweep](images/paired-luminance-detail-v1/gain-frontier.png)
 
 The numerical photo and standing-query review ran in 91.30 seconds

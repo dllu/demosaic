@@ -57,3 +57,35 @@ control, original paired head, frozen Corpus 100k and V120 enter
 the comparisons. Both standing GFX families have fixed native
 ROIs and matched render settings. Their ISO100 captures and
 cab JPEGs are qualitative references.
+
+## Starting model on 64 photos with three redraws
+
+Before the new heads finish training, the frozen starting EMA
+was evaluated at ISO6400 on all 64 original sources with three
+complete redraws per law. In the earlier [two-draw comparison](paired-luminance-detail.md#matched-64-photo-results),
+the two draws used different within-pair laws. This replay holds
+the law fixed when estimating the variance.
+
+| Guarded starting head minus Corpus 100k | Coupled | Independent |
+| --- | ---: | ---: |
+| Target-aligned response (percentage points) | +0.459 | +0.469 |
+| Fine-increment RMS (DN16) | −1.087 | +0.325 |
+| Fine RMS on the present target (DN16) | −0.164 | −0.193 |
+| Exact-flat fine RMS (DN16) | +0.092 | +0.087 |
+| Repeat-shared fine-increment error (DN16²) | −301.1 | −295.3 |
+| Fine-increment variance between draws (DN16²) | −38.7 | +404.6 |
+| Mean fine-increment squared error of a single draw (DN16²) | −339.8 | +109.3 |
+
+For independent pairs, the source-bootstrap 95% intervals are
+[−402.2, −203.1] DN16² for the change in shared error and
+[270.6, 563.6] DN16² for variance. The coupled variance
+interval is [−59.4, −22.2] DN16². The shared-error reduction
+is similar under both simulated coupling laws. A rise in draw
+variance offsets it only with independent pairs. The existing
+head slightly improves the fine-band fit to the single present
+target under both laws, with extra variation on exact-flat
+controls. Repeat-stability training tests whether it can reduce
+that independent-draw cost. The table contains only the frozen
+starting model and its parents.
+[Metrics and source intervals](results/paired-repeat-stability-v2/start64-summary.json) ·
+[Per-source inputs and frozen analysis](results/paired-repeat-stability-v2/start64-evidence.tar.xz).
