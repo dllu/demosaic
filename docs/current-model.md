@@ -228,6 +228,13 @@ geometry sets, with greater RMS on the fresh rail controls.
 Bounding local energy lowers rail RMS and peaks with weaker
 wire recovery. Both variants return the fine cab crops to V120.
 
+[Flexible query boundaries](flexible-query-edges.md) reduce forced-guide
+complex rail RMS from 5.16 to 0.97 DN16 with up to four boundaries.
+They slightly weaken response on the main ISO400 wire panel,
+increase errors on the straight controls and recover little of
+the faint signal deliberately added beside rails. The fine cab
+crossings remain incomplete.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

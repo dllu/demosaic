@@ -77,6 +77,13 @@ class SurfacePhaseOperator(PhaseAggregateOperator):
 
     def _regions(self, candidate, x, y, angle, offset):
         parallel = getattr(candidate, "parallel_edges", None)
+        flexible = getattr(candidate, "flexible_edges", None)
+        if self.config.edge_stopping and flexible is not None:
+            from .flexible_edge import edge_terms
+
+            region = edge_terms(np.column_stack((x.ravel(), y.ravel())), *flexible) > 0.5
+            weights = 1 << np.arange(region.shape[1])
+            return (region @ weights).reshape(self.shape)
         if not self.config.edge_stopping or parallel is None:
             return super()._regions(candidate, x, y, angle, offset)
         normal, first, second = parallel

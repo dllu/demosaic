@@ -68,7 +68,14 @@ class LocalWaveConfig:
             or self.matching not in ("legacy", "cardinality")
             or not 1 <= self.harmonics <= 4
             or self.support_unit not in ("direction", "harmonic")
-            or self.background not in ("step", "piecewise_affine", "parallel_step")
+            or self.background
+            not in (
+                "step",
+                "piecewise_affine",
+                "parallel_step",
+                "curved_step",
+                "curved4_step",
+            )
             or self.edge_search not in ("bounded-grid", "full-frame")
             or self.frequency_weighting
             not in ("uniform", "inverse-variance", "hann-inverse-variance")
@@ -114,6 +121,7 @@ class LocalCandidate:
     phase_drifts: tuple = ()
     phase_drift_trials: tuple = ()
     parallel_edges: tuple | None = None
+    flexible_edges: tuple | None = None
 
 
 def _phase_cycles(xx, yy, frequency, offset):
@@ -702,11 +710,12 @@ def fit_local_candidate(
     first_frequency = initial.frequencies_xy[0]
     edge_for_validation = nuisance
     parallel = None
+    flexible = None
     if config.background == "piecewise_affine":
         step = nuisance[:, 3]
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
         edge_for_validation = nuisance
-    elif config.background == "parallel_step":
+    elif config.background in ("parallel_step", "curved_step", "curved4_step"):
         from .full_frame_edge import supported_parallel_edges
 
         values = raw.ravel()[green]
@@ -725,6 +734,23 @@ def fit_local_candidate(
             normal, first, second = parallel
             pos = (x * np.cos(normal) + y * np.sin(normal)).ravel()
             nuisance = np.column_stack((affine, pos > first, pos > second))
+        if config.background != "parallel_step":
+            from .flexible_edge import edge_terms, fit_flexible_edges
+
+            xy = affine[:, 1:]
+            normal, *offsets = parallel if parallel is not None else (angle, offset)
+            flexible = fit_flexible_edges(
+                values,
+                xy[green],
+                normal,
+                offsets,
+                min(raw.shape),
+                shot,
+                read,
+                maximum=4 if config.background == "curved4_step" else 2,
+            )
+            if flexible is not None:
+                nuisance = np.column_stack((affine, edge_terms(xy, *flexible)))
     excluded = 0
     crosschecks = [] if phase_guide_crosscheck else None
     drifts, drift_trials = (), ()
@@ -926,6 +952,7 @@ def fit_local_candidate(
         drifts,
         drift_trials,
         parallel,
+        flexible,
     )
 
 
@@ -1817,7 +1844,12 @@ def restore_local_waves(
                     "edges": [c.edge_geometry for c in candidates],
                     **(
                         {"parallel_edges": [c.parallel_edges for c in candidates]}
-                        if config.background == "parallel_step"
+                        if config.background in ("parallel_step", "curved_step", "curved4_step")
+                        else {}
+                    ),
+                    **(
+                        {"flexible_edges": [c.flexible_edges for c in candidates]}
+                        if config.background in ("curved_step", "curved4_step")
                         else {}
                     ),
                     **(

@@ -150,6 +150,12 @@ has repeatedly come with extra flat-region error or false color. The
    recovery. All fresh complex rails still trigger corrections
    when given misleading guides. Suppressing those admissions
    requires improving the predictive background or evidence.
+   [Flexible query boundaries](flexible-query-edges.md) suppress
+   many complex-rail artifacts, while straight steps and rails
+   regress at the original gate. With exact guides and finite
+   wire added beside rails, the faint increment remains mostly
+   unrecovered. Preserve the parallel fallback where additional
+   shape parameters have little predictive support.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

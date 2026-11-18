@@ -130,6 +130,10 @@ historical boards. Use these reports for the current completed comparisons:
   keep sky, building and foliage at V120 with full-frame guides.
   Both retain the visible coarse crossings. The local-energy
   correction is smaller than the signed peak correction.
+- [Flexible query boundaries](flexible-query-edges.md#native-gfx100s-review)
+  keep sky, building and foliage at V120 with full-frame guides
+  and retain the coarse crossings. With the fixed spectral
+  guide, four boundaries reduce the building correction to 2.94 DN16.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

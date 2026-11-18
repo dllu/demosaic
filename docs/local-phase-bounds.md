@@ -7,6 +7,10 @@ The phase-average predictor, both fitted query boundaries, its
 selected guides, the independent wave gate and the neural parent
 come from the same saved run.
 
+The [flexible-background follow-up](flexible-query-edges.md)
+tests whether the RAW gate admits fewer false guides after it
+accounts for bends, wedges and pairs of rails.
+
 ## Two native bounds
 
 The signed-peak arm clips each color's correction to the range of
