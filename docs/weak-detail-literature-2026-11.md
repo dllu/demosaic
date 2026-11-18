@@ -319,9 +319,11 @@ The [mesh transmission test](mesh-background-transmission.md) lets a
 shared wire geometry change contrast with the local background. In
 24 natural-background simulations at ISO6400, delivery with a local
 sensor check lowers true transmissive-wire error and adds less variation
-in known gaps than an affine lift. Affine does better on additive wires
-and at ISO400. The existing adjacent-donor option still shows the two
-fine GFX cab directions more clearly.
+in known gaps than an affine lift. A disjoint 24-photo replay reproduces
+the gap improvement, and its wire-error difference against affine spans
+zero. Affine does better on additive wires and on ISO400 wire error.
+The existing adjacent-donor option still shows the two fine GFX cab
+directions more clearly.
 
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.

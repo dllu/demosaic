@@ -29,6 +29,12 @@ from a 90,692-photo pool. The broad photo evaluations are collecting.
 The [64-photo repeat analysis](full-corpus-faint-noise.md) separates
 weak-detail signal from noise-to-noise variation. At faint ISO6400
 the 100k model improves weak-band RMS mostly through lower variance.
+The [scene preview geometry audit](scene-local-contrast-2400.md#preview-scale-in-training-and-gfx)
+finds that a median native query occupies 10.02% of its training
+scene, compared with 0.26–0.58% on the standing GFX checks. The
+same preview cap therefore yields much coarser sampling of the GFX
+neighborhood. Source count and the spatial scale of training contexts
+are separate coverage measures.
 
 ## What the existing coverage audit actually shows
 

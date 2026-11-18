@@ -366,6 +366,19 @@ as qualitative references.
 | Nominal | [Left](images/scene-local-contrast-2400-third/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-third/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred | [Left](images/scene-local-contrast-2400-third/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-third/mesh-profile3879-fine-green-mesh-right.png) |
 
+#### Preview scale in training and GFX
+
+The median training query covers **10.02%** of its scene. The GFX
+queries cover **0.26%** for the main crop and **0.58%** for the
+cab. Grid spacing at the coarsest encoder level is 64 native pixels
+for the median training scene and about 364 for both GFX previews.
+The training query spans four coarsest-grid intervals per dimension,
+while the main and cab queries span 1.40 and 2.11 respectively.
+Both use the same 1,024-pixel preview cap. These are sampling
+intervals. The observed geometry leaves open whether preview scale
+contributes to the weaker real fine-detail result.
+[Measured geometry from all 19,200 training crops and both standing captures](results/scene-local-contrast-2400-v1/preview-scale.json).
+
 The full matched 64-photo weak-detail and fixed 427-photo and
 known/unseen camera evaluations are queued behind the localized local
 endpoint. Plain spatial is the latest endpoint evaluated on the

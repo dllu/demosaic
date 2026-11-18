@@ -147,6 +147,49 @@ The broken-mesh control still shows some line extension into the gap.
 The no-rear car retains the strong foreground by construction.
 [Statue local comparison](images/mesh-background-transmission-v1/local/019-iso6400-role0-comparison.png) · [Blue car local comparison](images/mesh-background-transmission-v1/local/018-iso6400-role0-comparison.png) · [Known gap](images/mesh-background-transmission-v1/local/035-iso6400-role2-comparison.png) · [Absent rear wire](images/mesh-background-transmission-v1/local/016-iso6400-role3-comparison.png).
 
+## Replication on 24 different photographs
+
+The frozen fit, sensor check and display pipeline were replayed on
+24 different held-out photographs, again six per CFA and with separate
+noise draws. At ISO6400 the raw transmissive error is 61.93 DN16
+against 92.42 for affine. On the no-rear raw inputs, transmission
+accepts 6/24 and local delivery reduces the added variation.
+[Source separation and frozen implementation](results/mesh-background-transmission-replication-v1/publication.json).
+
+| ISO6400 delivered fit | Transmissive wire RMS, DN16 | Additive wire RMS, DN16 | Gap addition, DN16 | No-rear addition, DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| Corpus 100k | 287.45 | 247.86 | 0 | 0 |
+| Affine rear amplitude | 266.51 | 237.60 | 27.42 | 9.60 |
+| Global wire transmission | 258.19 | 239.03 | 29.19 | 6.48 |
+| Local wire transmission | 263.51 | 241.38 | 12.96 | 1.82 |
+| Scalar fixed on development photos | 267.60 | 240.64 | 15.15 | 3.36 |
+
+The local method cuts gap addition relative to affine by 14.46 DN16
+with a paired interval of 8.12–20.80. The mean transmissive wire
+error is 3.00 DN16 lower, with an interval spanning a 3.01 DN16
+increase to an 8.64 DN16 reduction. Relative to the frozen scalar
+control, local support lowers transmissive wire error by 4.09 DN16
+(0.55–8.38) and lowers mean gap addition by 2.19 DN16, with an
+interval spanning zero. At ISO400 the local method has higher wire
+error than affine while adding less texture in gaps. Additive
+wire error favors affine at both noise levels.
+[Paired distributions and matched-strength comparison](results/mesh-background-transmission-replication-v1/fixed-strength.json).
+
+The native triplets use the same ISO6400 conditioning, exposure ×4,
+contrast ×2, ROI and Corpus 100k EMA as the development views. In
+the chapel sky crop, the local lift preserves part of the transverse
+direction, with much weaker crossings than the exact target. In the
+Delos crop, it restores a faint diagonal across the violet band.
+Local support also fades a spurious line through the dark gap of
+the snow-covered pears control.
+[Chapel photo by Jacek Halicki, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:2025_Kaplica_%C5%9Bw._Floriana_w_Bystrzycy_K%C5%82odzkiej_(05).jpg) ·
+[Delos photo by Bernard Gagnon, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:House_of_the_Lake,_Delos_02.jpg) ·
+[Native viewing, controls and licensing](results/mesh-background-transmission-replication-v1/viewing.json).
+
+![Chapel sky with simulated mesh, noisy Malvar, local transmission and exact GT](images/mesh-background-transmission-replication-v1/020-iso6400-role0-triplet.png)
+
+![Delos with simulated mesh, noisy Malvar, local transmission and exact GT](images/mesh-background-transmission-replication-v1/038-iso6400-role0-triplet.png)
+
 ## Standing GFX100S checks
 
 The review replays the [packaged adjacent-donor correction](donor-phase-transport.md)
