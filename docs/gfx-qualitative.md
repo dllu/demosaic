@@ -100,6 +100,10 @@ historical boards. Use these reports for the current completed comparisons:
 - [Crop-placement mesh review](local-mesh-stability.md#standing-gfx100s-crops)
   keeps the coarse fence correction across 13 overlapping queries. The
   combined fit returns sky, building and foliage to the local-only 2k parent.
+- [Wider donor geometry](local-mesh-projective.md#standing-gfx100s-review)
+  finds 21 additional coarse-fence tiles supporting the same pair. The
+  wider fit accepts perspective and keeps coherent crossings. Sky,
+  building and foliage retain the local-only 2k parent.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

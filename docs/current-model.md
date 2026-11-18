@@ -118,6 +118,11 @@ recovers 76.32% of the target weak contrast against 31.02% for the trunk.
 Every synthetic ISO6400 case keeps the parent. The opt-in crop API still
 has limited support for broken or changing wire geometry.
 
+The [donor-perspective trial](local-mesh-projective.md) uses shorter
+query support to reduce added texture inside known ISO400 mesh gaps
+from 3.34 to 0.16 DN16 RMS at near-equal weak response. It also reduces
+response on the continuous synthetic mesh and fades the real cab lattice.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

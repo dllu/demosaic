@@ -9,6 +9,10 @@ the faint left cab lattice and the coarse fence changes. The sky, building,
 foliage and both right-cab outputs equal their local-only parents.
 [Executed code, inputs and results](results/local-mesh-stability-v1/publication.json).
 
+The [perspective and gap follow-up](local-mesh-projective.md) uses donor
+spacing changes and shorter Bayer support windows. The short fit suppresses
+added texture in synthetic gaps and fades the real left-cab lattice.
+
 ## What changes when the crop moves
 
 All 13 placements retain the same native 160×160 output region and the same
