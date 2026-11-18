@@ -39,6 +39,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and held-out pilot](scene-local-contrast-2400.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
+[distant RAW row references](distant-row-reference.md) ·
 [expanded scene local-only endpoint](expanded-scene-local12k.md) ·
 [expanded scene spatial endpoint](expanded-scene-spatial12k.md) ·
 [64-photo noise and repeat analysis](full-corpus-faint-noise.md) ·

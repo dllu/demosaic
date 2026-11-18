@@ -299,6 +299,10 @@ disjoint Bayer pixels can still validate the same simulated noise.
 Holding out complete rows rejects the false bands and often
 suppresses weak real waves. The earlier GFX sky correlation check
 did not show clear evidence of such dependence at its tested offsets.
+The [distant RAW follow-up](distant-row-reference.md) restores
+98.19% of the weak horizontal waveform with clean simulated
+reference strips and zero observed null activations. The same
+estimator can transfer genuine stripe texture from bad references.
 
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.

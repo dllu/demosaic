@@ -26,7 +26,7 @@ of each Bayer phase. The pixel split samples throughout the crop.
 The row split sends an entire pair of adjacent native rows to one
 side. Randomizing row pairs keeps the four phases balanced. Each
 side fits its background, phase and amplitude without using
-the other side. A two-direction gate checks both predictions.
+the other side, then uses the other side to check its prediction.
 The covariance-adjusted arm uses the same complete-row fit and
 scales its score by the known row covariance. It accounts for
 repeated row contributions in the score variance while leaving
@@ -47,7 +47,7 @@ of the score variance from a dense covariance matrix.
 
 ## Recovery and false texture at the same descriptive cutoff
 
-Both directions must score above 2. Weak response is the signed
+Both held-out checks must score above 2. Weak response is the signed
 projection onto the true weak wave, including zero correction when
 the gate rejects a crop. Counts are over 96 noisy observations of
 48 source scenes for each role and read fraction.
@@ -118,3 +118,8 @@ changes no real-camera noise estimate or default. Its large known
 row fractions show how a biased confidence test could arise in a
 different acquisition. A row-block fallback alone trades away
 too much true texture to justify general use.
+
+With independent distant RAW support, the [row reference
+follow-up](distant-row-reference.md) recovers most of the weak
+horizontal waveform in the fully shared simulation. Real stripes
+in all three distant strips can create false texture in the query.
