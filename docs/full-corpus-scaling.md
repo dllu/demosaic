@@ -133,6 +133,11 @@ validation and checkpoint write follow that observation. Native evaluation
 has a separate timing and reuses the 220 verified V120/long-20k controls.
 [Checkpoint and launch audit](results/full-corpus-long50k-prefix-v1/checkpoint-verified.json).
 
+The [completed 110-input review](full-corpus-long50k-native.md) finds
+small ordinary/shadow gains, weaker fine-band fidelity on all four faint
+materials than V120, and severe orange ADC color error in two Bayer
+layouts. Both standing GFX scenes were inspected. V120 remains recommended.
+
 The prefix contains 800,000 target slots and 266,909 ordinary photo
 draws, with 85,353 sources seen three times and 5,425 seen twice. It
 also records 14,002 reviewed-region draws from 33 sources. Across sources

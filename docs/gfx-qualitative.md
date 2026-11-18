@@ -55,6 +55,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Long-schedule 20k checkpoint](full-corpus-long20k-native.md) compares
   all four areas with V120 and short 20k. The coarse crossings remain
   visible, and foliage and building details remain soft.
+- [Long-schedule 50k checkpoint](full-corpus-long50k-native.md) retains
+  the smooth sky and visible coarse crossings. Small building features
+  and foliage remain soft against the independent reference.
 - [Oriented RAW support](oriented-raw-support.md) gives the same sky
   pixels. The rectangles make small changes to the building, foliage,
   and coarse fence, with the main crossings still visible.
@@ -88,6 +91,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [RAW guide cross-check](phase-guide-crosscheck.md) matches V120 on sky,
   makes small changes to the building and foliage, and alters local coarse-fence
   modulation. The visible crossings persist.
+- [RAW phase drift](phase-drift.md) reproduces the cross-checked sky and
+  coarse fence in linear RGB. The small foliage and building shifts
+  leave thin details soft.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

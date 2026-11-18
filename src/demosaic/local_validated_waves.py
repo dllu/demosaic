@@ -111,11 +111,17 @@ class LocalCandidate:
     phase_bright_side: np.ndarray | None = None
     phase_side_profiles: bool = False
     guide_crosschecks: tuple = ()
+    phase_drifts: tuple = ()
+    phase_drift_trials: tuple = ()
 
 
-def _wave_columns(xx, yy, frequency, harmonics=1):
-    fx, fy = frequency
-    phase = 2 * np.pi * (xx * fx + yy * fy)
+def _phase_cycles(xx, yy, frequency, offset):
+    phase = xx * frequency[0] + yy * frequency[1]
+    return phase if offset is None else phase + offset
+
+
+def _wave_columns(xx, yy, frequency, harmonics=1, *, offset=None):
+    phase = 2 * np.pi * _phase_cycles(xx, yy, frequency, offset)
     return np.column_stack(
         [
             column.ravel()
@@ -125,9 +131,9 @@ def _wave_columns(xx, yy, frequency, harmonics=1):
     )
 
 
-def _phase_bin_weights(xx, yy, frequency, bins):
+def _phase_bin_weights(xx, yy, frequency, bins, *, offset=None):
     """Circular linear-interpolation weights for a native periodic profile."""
-    phase = np.remainder(xx * frequency[0] + yy * frequency[1], 1).ravel() * bins
+    phase = np.remainder(_phase_cycles(xx, yy, frequency, offset), 1).ravel() * bins
     left = np.floor(phase).astype(np.int64)
     fraction = phase - left
     weights = np.zeros((phase.size, bins), dtype=np.float64)
@@ -279,6 +285,11 @@ def _validate_guide_search(recenter, guard_px, bins, harmonics, crosscheck=False
         raise ValueError("Guide cross-check requires phase-guide recentering")
 
 
+def _validate_phase_drift(enabled, bins, harmonics, templates):
+    if type(enabled) is not bool or (enabled and (not bins or harmonics or templates is not None)):
+        raise ValueError("Phase drift requires the full query-fitted phase basis")
+
+
 def _validate_shared_phase_shape(shared, bins, harmonics):
     if type(shared) is not bool or (shared and (not bins or harmonics is not None)):
         raise ValueError("A shared phase shape requires the full interpolated phase basis")
@@ -409,9 +420,14 @@ def _crosscheck_guide_move(
     x, y, values, background, competitor, origin, proposal, split, shot, read
 ):
     """Measure held-out error reductions in both directions within discovery."""
+    columns = [_wave_columns(x, y, f) for f in (origin, proposal)]
+    return _crosscheck_phase_columns(values, background, competitor, columns, split, shot, read)
+
+
+def _crosscheck_phase_columns(values, background, competitor, columns, split, shot, read):
     if min(split.sum(), (~split).sum()) <= competitor.shape[1] + 2:
         return (0.0, 0.0)
-    designs = [np.column_stack((competitor, _wave_columns(x, y, f))) for f in (origin, proposal)]
+    designs = [np.column_stack((competitor, wave)) for wave in columns]
     reductions = []
     for train in (split, ~split):
         test = ~train
@@ -489,6 +505,91 @@ def _recenter_phase_guides(
     return tuple(tuple(float(v) for v in f) for f in chosen)
 
 
+def _phase_coordinates(x, y, shape, frequency):
+    h, w = shape
+    x = (x - (w - 1) / 2) / min(shape)
+    y = (y - (h - 1) / 2) / min(shape)
+    fx, fy = np.asarray(frequency) / np.linalg.norm(frequency)
+    return fx * x + fy * y, -fy * x + fx * y
+
+
+def _drift_offset(x, y, shape, frequency, drift):
+    if drift == (0, 0):
+        return None
+    normal, tangent = _phase_coordinates(x, y, shape, frequency)
+    return 0.5 * (drift[0] * normal**2 + drift[1] * tangent**2)
+
+
+def _search_phase_drifts(raw, green, nuisance, xx, yy, frequencies, bins, shot, read):
+    """Fit quadratic phase on one fold and cross-check it within that fold."""
+    chosen, trials = [(0, 0), (0, 0)], []
+    background, values = nuisance[green], raw.ravel()[green]
+    if len(values) < 2 * (nuisance.shape[1] + bins + 2):
+        return tuple(chosen), ()
+    x, y = xx.ravel()[green], yy.ravel()[green]
+    fitted = background @ np.linalg.lstsq(background, values, rcond=1e-10)[0]
+    inverse_sigma = 1 / np.sqrt(read + shot * np.maximum(fitted, 1e-6))
+    split = stratified_split(raw.shape, 202611170714).ravel()[green]
+    for index, frequency in enumerate(frequencies):
+        other = 1 - index
+        offset = _drift_offset(x, y, raw.shape, frequencies[other], chosen[other])
+        knot = _phase_bin_weights(x, y, frequencies[other], bins, offset=offset)
+        design = np.column_stack((background, knot[:, :-1] - knot[:, -1:]))
+        u, s, _ = np.linalg.svd(design * inverse_sigma[:, None], full_matrices=False)
+        basis = u[:, s > 1e-10 * s[0]]
+        target = values * inverse_sigma
+        target -= basis @ (basis.T @ target)
+        std_axes = _phase_coordinates(xx, yy, raw.shape, frequency)
+        radius = np.linalg.norm(frequency)
+        drift_grid = [(0, 0)]
+        for axis, coordinate in enumerate(std_axes):
+            for q in (-12, -8, -4, 4, 8, 12):
+                deviation = abs(q) * np.max(np.abs(coordinate)) / min(raw.shape)
+                if radius - deviation >= 1 / 64 and radius + deviation <= 0.24:
+                    drift_grid.append((q, 0) if axis == 0 else (0, q))
+        waves, scores = [], []
+        for drift in drift_grid:
+            offset = _drift_offset(x, y, raw.shape, frequency, drift)
+            wave = _wave_columns(x, y, frequency, offset=offset)
+            columns = wave * inverse_sigma[:, None]
+            columns -= basis @ (basis.T @ columns)
+            fit = columns @ np.linalg.lstsq(columns, target, rcond=1e-10)[0]
+            scores.append(float(fit @ fit))
+            waves.append(wave)
+        best = int(np.argmax(scores))
+        gain = scores[best] - scores[0]
+        if gain > 4:
+            reductions = _crosscheck_phase_columns(
+                values, background, design, (waves[0], waves[best]), split, shot, read
+            )
+            accepted = min(reductions) > 0
+            if accepted:
+                chosen[index] = drift_grid[best]
+            trials.append(
+                {
+                    "direction": index,
+                    "proposed": drift_grid[best],
+                    "full_discovery_gain": gain,
+                    "nested_error_reductions": reductions,
+                    "accepted": accepted,
+                }
+            )
+    return tuple(chosen), tuple(trials)
+
+
+def _compatible_drifts(candidates, direction_a, direction_b, xx, yy):
+    frequencies = [c.frequencies_xy[k] for c, k in zip(candidates, (direction_a, direction_b))]
+    offsets = [
+        _drift_offset(xx, yy, xx.shape, f, c.phase_drifts[k])
+        for c, k, f in zip(candidates, (direction_a, direction_b), frequencies, strict=True)
+    ]
+    if offsets[0] is None and offsets[1] is None:
+        return True
+    a, b = [0.0 if offset is None else offset for offset in offsets]
+    sign = np.sign(np.dot(*frequencies))
+    return np.std(a - sign * b) <= 0.25
+
+
 def fit_local_candidate(
     raw,
     colors,
@@ -503,6 +604,7 @@ def fit_local_candidate(
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
     phase_guide_crosscheck=False,
+    phase_drift_search=False,
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
@@ -524,6 +626,7 @@ def fit_local_candidate(
     templates = _donor_templates(
         donor_phase_templates, phase_bins, phase_harmonics, shared_phase_shape
     )
+    _validate_phase_drift(phase_drift_search, phase_bins, phase_harmonics, templates)
     _phase_side_option(phase_edge_side, phase_bins, phase_harmonics, shared_phase_shape, templates)
     raw, colors, discovery_mask = (
         np.asarray(raw, np.float64),
@@ -552,6 +655,7 @@ def fit_local_candidate(
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
     excluded = 0
     crosschecks = [] if phase_guide_crosscheck else None
+    drifts, drift_trials = (), ()
     if guide_frequencies_xy is not None:
         frequencies = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
         search = green
@@ -577,6 +681,10 @@ def fit_local_candidate(
                 **({"crosschecks": crosschecks} if crosschecks is not None else {}),
             )
         counts = tuple(_harmonic_count(f, config.harmonics) for f in frequencies)
+        if phase_drift_search:
+            drifts, drift_trials = _search_phase_drifts(
+                raw, search, nuisance, xx, yy, frequencies, phase_bins, shot, read
+            )
     else:
         if config.background == "piecewise_affine":
             first_frequency = _residual_peak(raw, green, nuisance)
@@ -632,8 +740,9 @@ def fit_local_candidate(
         ]
     elif phase_bins:
         waves = []
-        for frequency in frequencies:
-            weights = _phase_bin_weights(xx, yy, frequency, phase_bins)
+        for index, frequency in enumerate(frequencies):
+            offset = _drift_offset(xx, yy, raw.shape, frequency, drifts[index]) if drifts else None
+            weights = _phase_bin_weights(xx, yy, frequency, phase_bins, offset=offset)
             # Parameterize a zero-mean knot profile. The existing nuisance
             # intercept handles the DC shared across phase bins.
             waves.append(weights[:, :-1] - weights[:, -1:])
@@ -738,6 +847,8 @@ def fit_local_candidate(
         bright,
         split_profiles,
         tuple(crosschecks or ()),
+        drifts,
+        drift_trials,
     )
 
 
@@ -1101,6 +1212,7 @@ def restore_local_waves(
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
     phase_guide_crosscheck=False,
+    phase_drift_search=False,
     shared_phase_shape=False,
     donor_phase_templates=None,
     phase_edge_side=None,
@@ -1145,6 +1257,7 @@ def restore_local_waves(
     templates = _donor_templates(
         donor_phase_templates, phase_bins, phase_harmonics, shared_phase_shape
     )
+    _validate_phase_drift(phase_drift_search, phase_bins, phase_harmonics, templates)
     _phase_side_option(phase_edge_side, phase_bins, phase_harmonics, shared_phase_shape, templates)
     if (
         not np.isfinite(bright_cross_edge_weight)
@@ -1166,6 +1279,7 @@ def restore_local_waves(
             not phase_bins
             or phase_harmonics is not None
             or recenter_phase_guides
+            or phase_drift_search
             or shared_phase_shape
             or templates is not None
             or not compare_pooled_support
@@ -1198,6 +1312,8 @@ def restore_local_waves(
         guide["phase_guide_edge_guard_px"] = phase_guide_edge_guard_px
     if phase_guide_crosscheck:
         guide["phase_guide_crosscheck"] = True
+    if phase_drift_search:
+        guide["phase_drift_search"] = True
     if shared_phase_shape:
         guide["shared_phase_shape"] = True
     if templates is not None:
@@ -1332,6 +1448,13 @@ def restore_local_waves(
                 config.match_native_bins,
                 matching=config.matching,
             )
+            if phase_drift_search:
+                yy, xx = np.indices(tile.shape)
+                matched = [
+                    (a, b, distance)
+                    for a, b, distance in matched
+                    if _compatible_drifts(candidates, a, b, xx, yy)
+                ]
             rgb = parent[:, y : y + n, x : x + n]
             if spatial is None:
                 if conditional_delivery:
@@ -1465,6 +1588,14 @@ def restore_local_waves(
                     **(
                         {"guide_crosschecks": [c.guide_crosschecks for c in candidates]}
                         if phase_guide_crosscheck
+                        else {}
+                    ),
+                    **(
+                        {
+                            "phase_drifts": [c.phase_drifts for c in candidates],
+                            "phase_drift_trials": [c.phase_drift_trials for c in candidates],
+                        }
+                        if phase_drift_search
                         else {}
                     ),
                     **(

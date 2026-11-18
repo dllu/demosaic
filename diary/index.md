@@ -24,6 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
+The [phase drift and 50k native review](2026-11-17-17-29-13-phase-drift-and-50k-native.md)
+records both completed image comparisons.
 The [50k prefix audit](2026-11-17-17-18-24-full-corpus-50k-prefix.md) records
 the halfway checkpoint and realized crop coverage.
 See also the [expanded whole-scene corpus entry](2026-11-17-16-51-37-expanded-scene-corpus.md).

@@ -34,6 +34,7 @@ of it. These costs keep the completed control experimental.
 | [Scene-context2k arms](whole-scene-context-camera-review.md) | Scene/tile API, 64-source quiet-coarse gains. Spatial unseen-camera +0.01739 dB versus matched local-only. [Distant context changes foliage and coarse-fence output](scene-context-extent.md) | Unseen −0.05477 dB versus V120, known nearly ties local-only. Fine crossings remain incomplete. Full427 photos running |
 | [Corpus control20k](full-corpus-control20k-review.md) | Completed320k target slots/all90,778 photos. Ordinary/shadow +0.00852/+0.01047 dB; substantial faint recovery from10k | Faint−0.02061 dB versus V120; fine-band error higher for3/4 materials, selected flat spatial RMS worse. Known/unseen +0.03285/−0.04067 dB; worst ADC mean error765.7 versus55.5 DN16. [Camera](full-corpus-control20k-camera-review.md)/[color](full-corpus-control20k-color-review.md) reviews complete, no faithful new fence crossings; full427 photos collecting |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
+| [Long schedule at 50k](full-corpus-long50k-native.md) | Retained ordinary and shadow sRGB are +0.020/+0.044 dB over V120 | Faint fine-band RMS rises on all four materials versus V120. Bright orange ADC mean error reaches 1,490 DN16 in a BGGR spot check, with visible unevenness. Fine cab crossings still incomplete |
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes
@@ -152,6 +153,11 @@ moves on two disjoint discovery subsets before separate confirmation. At matched
 quiet error, ISO400 near-edge recovery rises from 3.94% to 4.35% with nominal
 guides. Far-edge recovery falls from 22.33% to 19.92% with shifted guides.
 The real cab mesh remains incomplete.
+
+The [RAW phase-drift search](phase-drift.md) lowers ISO400 far weak response
+at the same quiet error and leaves both real fences unchanged. Exact
+geometry helps a smaller lower-noise far-edge diagnostic, pointing to
+geometry estimation on stronger measurements as a possible next step.
 
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),

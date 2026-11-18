@@ -19,6 +19,7 @@ preserves its original comparison pixels and provenance.
 | [Phase-profile agreement](phase-profile-agreement.md) | Both ROIs, profiles and JPEGs viewed. High agreement in both fitted directions, slight attenuation of modulation, crossings still incomplete |
 | [Donor subharmonics](donor-subharmonics.md) | Both ROIs and profiles match the previous pooled result exactly. Both JPEG comparisons still show missing fine crossings |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Matched V120 and short schedule, both ROIs/profiles/JPEGs viewed. Fine crossings are largely erased at nominal conditioning and soft or incomplete with the transferred profile |
+| [Long schedule at 50k](full-corpus-long50k-native.md) | Both ROIs, profiles and JPEGs viewed. The transferred profile retains soft diagonal repeat structure. Fine crossings remain incomplete |
 | [Oriented RAW support](oriented-raw-support.md) | Both rectangular footprints reviewed on both ROIs and noise profiles. Subtle changes to diagonal modulation, with no convincing additional crossings |
 | [Joint Bayer phase-profile evidence](joint-phase-profile-support.md) | Both joint gates, both ROIs and both profiles viewed with the two JPEGs. The strongest change is subtle diagonal modulation on the left at the transferred prior. Fine crossings remain unresolved |
 | [Donor-selected waveform harmonics](donor-phase-support.md) | Both reduced bases, both ROIs and both profiles viewed with the two JPEGs. The donor fit reduces the correction on the right under both profiles. Fine crossings remain unresolved |
@@ -30,6 +31,7 @@ preserves its original comparison pixels and provenance.
 | [Same-side validation](phase-edge-side.md) | No activation on either side or noise profile. Both variants reproduce the guarded cab views, and fine crossings remain incomplete |
 | [Bright-side cross-edge validation](asymmetric-phase-evidence.md) | Both weights reproduce the existing cab views for both crop sides and profiles. Fine crossings remain incomplete |
 | [RAW guide cross-check](phase-guide-crosscheck.md) | Both ROIs and profiles viewed with both JPEGs. The left stays identical to the guarded fit. The right changes slightly, with fine crossings still incomplete |
+| [RAW phase drift](phase-drift.md) | All four cab ROIs/profile combinations reproduce the prior cross-check exactly. Fine crossings remain incomplete |
 | [Faint ADC follow-up](full427-faint-adc.md) | Positive-noise projection returns the earlier Corpus20k and V120 output on both ROIs and profiles, verified against the inputs underlying the retained boards |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |

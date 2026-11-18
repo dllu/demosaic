@@ -43,6 +43,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [full-corpus scaling](full-corpus-scaling.md) ·
 [completed20k corpus review](full-corpus-control20k-review.md) ·
 [long-schedule 20k native review](full-corpus-long20k-native.md) ·
+[long-schedule 50k native review](full-corpus-long50k-native.md) ·
 [completed20k camera panels](full-corpus-control20k-camera-review.md) ·
 [disjoint RAW direction guides](scene-wave-guides.md) ·
 [phase profiles fitted from query RAW](guided-phase-profiles.md) ·
@@ -62,6 +63,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [same-side RAW validation at strong edges](phase-edge-side.md) ·
 [bright-side cross-edge evidence on fresh geometries](asymmetric-phase-evidence.md) ·
 [RAW cross-check for donor frequency moves](phase-guide-crosscheck.md) ·
+[RAW phase with changing wire geometry](phase-drift.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
 [scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·

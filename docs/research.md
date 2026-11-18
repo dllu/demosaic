@@ -96,15 +96,19 @@ has repeatedly come with extra flat-region error or false color. The
    A RAW cross-check on two disjoint discovery subsets helps with already
    accurate donor guides and rejects some useful repairs of shifted guides.
    Fine cab crossings remain incomplete. [Guide cross-check](phase-guide-crosscheck.md).
+   Searching the noisy query for curvature worsens ISO400 response and
+   leaves both real fences unchanged. Exact curvature helps lower-noise
+   far-edge weak response. Test geometry measured in stronger, disjoint
+   parts of a scene with query-local amplitude and support. [Phase drift](phase-drift.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
-   The [100k full-corpus continuation](full-corpus-scaling.md#long-schedule-20k-milestone)
-   has completed the [matched 20k image review](full-corpus-long20k-native.md),
-   with lower fine-band error in three faint materials, worse flat spot checks,
-   and lower mean faint sRGB PSNR versus the shorter schedule. The
+   The [100k full-corpus continuation](full-corpus-scaling.md#long-schedule-50k-milestone)
+   has completed the [50k image review](full-corpus-long50k-native.md),
+   with small positive-noise mean gains, higher faint fine-band error
+   and severe bright-orange ADC bias in two Bayer layouts. The
    [completed20k control](full-corpus-control20k-review.md)
    actually covers all90,778 photos and recovers most10k faint loss, but remains
    0.02061 dB below V120 with higher fine-band error for3/4 materials. Both fences

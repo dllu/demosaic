@@ -87,6 +87,68 @@ def test_phase_recenter_does_not_move_the_guide_on_a_flat():
     assert fit.frequencies_xy == original
 
 
+@pytest.mark.parametrize("drift", [(4, 0), (0, -4)])
+def test_phase_drift_uses_only_discovery_and_predicts_warped_wires(drift):
+    y, x = np.indices((64, 64))
+    frequencies = ((6 / 64, 1 / 64), (-1 / 64, 7 / 64))
+    fx, fy = np.asarray(frequencies[0]) / np.linalg.norm(frequencies[0])
+    normal = ((x - 31.5) * fx + (y - 31.5) * fy) / 64
+    tangent = (-(x - 31.5) * fy + (y - 31.5) * fx) / 64
+    phase = x * frequencies[0][0] + y * frequencies[0][1]
+    phase += 0.5 * (drift[0] * normal**2 + drift[1] * tangent**2)
+    raw = 0.08 + 0.006 * np.cos(2 * np.pi * phase)
+    raw += 0.004 * np.sin(2 * np.pi * (-x + 7 * y) / 64)
+    raw += (x > 32) * 0.03
+    colors = np.tile([[0, 1], [1, 2]], (32, 32))
+    mask = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 8e-5,
+        "read": 1e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": frequencies,
+        "phase_bins": 8,
+    }
+    planar = local.fit_local_candidate(raw, colors, mask, **options)
+    curved = local.fit_local_candidate(raw, colors, mask, phase_drift_search=True, **options)
+    damaged = local.fit_local_candidate(
+        np.where(mask, raw, np.nan), colors, mask, phase_drift_search=True, **options
+    )
+    assert curved.phase_drifts == damaged.phase_drifts == (drift, (0, 0))
+    assert curved.phase_drift_trials == damaged.phase_drift_trials
+    assert curved.phase_drift_trials[0]["accepted"]
+    np.testing.assert_array_equal(curved.full_cfa, damaged.full_cfa)
+    assert np.mean((curved.full_cfa[~mask] - raw[~mask]) ** 2) < 0.05 * np.mean(
+        (planar.full_cfa[~mask] - raw[~mask]) ** 2
+    )
+
+
+def test_phase_drift_leaves_a_flat_fit_bit_exact():
+    raw, colors, _ = scene()
+    raw.fill(0.07)
+    mask = stratified_split(raw.shape, 81)
+    options = {
+        "shot": 8e-5,
+        "read": 1e-8,
+        "config": CONFIG,
+        "guide_frequencies_xy": ((5 / 64, 3 / 64), (-4 / 64, 7 / 64)),
+        "phase_bins": 8,
+    }
+    before = local.fit_local_candidate(raw, colors, mask, **options)
+    after = local.fit_local_candidate(raw, colors, mask, phase_drift_search=True, **options)
+    assert after.phase_drifts == ((0, 0), (0, 0))
+    assert after.phase_drift_trials == ()
+    np.testing.assert_array_equal(before.full_cfa, after.full_cfa)
+
+
+def test_phase_drift_pairing_checks_signed_phase_fields():
+    y, x = np.indices((256, 256))
+    left = SimpleNamespace(frequencies_xy=((0.08, 0.03),), phase_drifts=((8, 0),))
+    equivalent = SimpleNamespace(frequencies_xy=((-0.08, -0.03),), phase_drifts=((-8, 0),))
+    different = SimpleNamespace(frequencies_xy=left.frequencies_xy, phase_drifts=((0, -12),))
+    assert local._compatible_drifts((left, equivalent), 0, 0, x, y)
+    assert not local._compatible_drifts((left, different), 0, 0, x, y)
+
+
 def test_edge_guard_subsets_only_the_frequency_search(monkeypatch):
     raw, colors, _ = scene()
     raw[:, 30:] += 0.1

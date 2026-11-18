@@ -71,16 +71,19 @@ def render_scene(recipe, placement):
     radius = ((x - center) / rx) ** 2 + ((y - center) / ry) ** 2
     envelope = torch.where(radius < 1, 0.5 * (1 + torch.cos(math.pi * radius.clamp_max(1))), 0)
     components = []
+    drifts = recipe.get("phase_drifts")
     for i in range(2):
         angle, period, width, phase = (
             recipe[k][i] for k in ("wire_angles", "periods", "widths", "phases")
         )
-        d = (
-            torch.remainder(
-                x * math.cos(angle) + y * math.sin(angle) + phase * period + period / 2, period
-            )
-            - period / 2
-        )
+        cosine, sine = math.cos(angle), math.sin(angle)
+        position = x * cosine + y * sine
+        if drifts is not None and any(drifts[i]):
+            normal = ((x - center) * cosine + (y - center) * sine) / (size / 2)
+            tangent = (-(x - center) * sine + (y - center) * cosine) / (size / 2)
+            q_normal, q_tangent = drifts[i]
+            position += 0.5 * period * (q_normal * normal.square() + q_tangent * tangent.square())
+        d = torch.remainder(position + phase * period + period / 2, period) - period / 2
         wire = torch.exp(-0.5 * (d / width) ** 2)
         field = envelope * (wire - (wire * envelope).sum() / envelope.sum())
         field /= field.abs().max().clamp_min(0.1)
