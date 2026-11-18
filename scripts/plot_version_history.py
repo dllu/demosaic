@@ -17,7 +17,8 @@ COVERAGE_NOTE = (
     "[all three comparable panels](full-corpus-control20k-primary.md). "
     "The 100k endpoint has completed camera scores and its full427 panel is collecting. "
     "Both matched scene 12k endpoints have [completed fixed camera panels](expanded-scene-12000-cameras.md). "
-    "Their full427 scores are pending. "
+    "The matched near-ADC 800-update endpoints also have [completed camera panels](near-adc-bridge-cameras.md). "
+    "All four full427 scores are pending. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -470,23 +471,21 @@ def collect_corpus_endpoints():
     return [short_point, long_point], evidence
 
 
-def collect_expanded_scene_endpoints():
-    """Bind finished camera panels from the exact matched 12k collection."""
-    path = REPO / "docs/results/expanded-scene-12000-v2/matched-primary-cameras.json"
-    report = "expanded-scene-12000-cameras.md"
+def collect_matched_camera_endpoints(path, report, prefix, labels, step):
+    """Bind selected EMA checkpoints from a completed camera-only archive."""
     record = json.loads(path.read_text())
     assert record["complete_camera_panels"] and record["weights"] == "EMA"
     source = REPO / record["archive"]["path"]
     assert digest(source) == record["archive"]["sha256"]
     points = []
-    for arm, label in (("none", "Local-only 12k"), ("spatial", "Spatial 12k")):
+    for arm, label in labels.items():
         model = record["models"][arm]
-        assert model["kind"] == "scene" and model["step"] == 12000
+        assert model["step"] == step
         points.append(
             {
                 "version": None,
                 "label": label,
-                "endpoint": f"expanded-scene-12000-{arm}",
+                "endpoint": f"{prefix}-{arm}",
                 "step": model["step"],
                 "checkpoint_sha256": model["checkpoint"]["sha256"],
                 "inference_policy": "EMA, CPU IEEE FP32, exact canonical inputs",
@@ -506,7 +505,7 @@ def collect_expanded_scene_endpoints():
             analyzed = json.loads(raw)
             assert analyzed["models"] == record["models"] and analyzed["stage"] == stage
             assert len(analyzed["cases"]) == batches
-            for point, arm in zip(points, ("none", "spatial"), strict=True):
+            for point, arm in zip(points, labels, strict=True):
                 metric = next(r for r in analyzed["summary"]["overall"] if r["model"] == arm)
                 mean = metric["metrics"]["sensor_psnr"]["mean"]
                 assert metric["metrics"]["sensor_psnr"]["count"] == scenes
@@ -533,6 +532,41 @@ def collect_expanded_scene_endpoints():
     return points, evidence
 
 
+def collect_expanded_scene_endpoints():
+    path = REPO / "docs/results/expanded-scene-12000-v2/matched-primary-cameras.json"
+    models = json.loads(path.read_text())["models"]
+    assert all(models[arm]["kind"] == "scene" for arm in ("none", "spatial"))
+    return collect_matched_camera_endpoints(
+        path, "expanded-scene-12000-cameras.md", "expanded-scene-12000",
+        {"none": "Local-only 12k", "spatial": "Spatial 12k"}, 12000,
+    )
+
+
+def collect_near_adc_endpoints():
+    directory = REPO / "docs/results"
+    path = directory / "near-adc-camera-audit-v1/publication.json"
+    training = directory / "near-adc-bridge-training-v1/completed-training.json"
+    trained = json.loads(training.read_text())["models"]
+    measured = json.loads(path.read_text())
+    labels = {"bridge-control": "Noise control 800", "bridge-trained": "Near-ADC 800"}
+    for arm, key in (("bridge-control", "control"), ("bridge-trained", "bridge")):
+        expected, actual = trained[key], measured["models"][arm]
+        assert expected["checkpoint"] == actual["checkpoint"]
+        assert expected["weights_for_review"] == actual["weights"] == "EMA"
+        assert expected["step"] == actual["step"] == 800
+    report = "near-adc-bridge-cameras.md"
+    points, evidence = collect_matched_camera_endpoints(path, report, "near-adc", labels, 800)
+    evidence.append(
+        {
+            "path": str(training.relative_to(REPO)),
+            "sha256": digest(training),
+            "endpoints": [point["endpoint"] for point in points],
+            "report": report,
+        }
+    )
+    return points, evidence
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -556,11 +590,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v3.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v4.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v2.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v3.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v2.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v1.json"
         if not destination.exists():
@@ -581,6 +617,9 @@ def main():
         scene_points, scene_evidence = collect_expanded_scene_endpoints()
         points.extend(scene_points)
         evidence.extend(scene_evidence)
+        bridge_points, bridge_evidence = collect_near_adc_endpoints()
+        points.extend(bridge_points)
+        evidence.extend(bridge_evidence)
         result = {
             "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",
@@ -693,7 +732,7 @@ def main():
             offset, alignment = (0, 7), "center"
             if 0 < latest - preferred <= 15:
                 if version == preferred:
-                    offset, alignment = (-12, 20), "right"
+                    offset, alignment = (5, -20), "left"
                 elif version == latest and not named:
                     offset, alignment = (12, 6), "left"
             photo.annotate(
@@ -721,13 +760,13 @@ def main():
     )
     for axis in axes[1]:
         axis.set_xlabel(
-            "Model version and corpus training budget"
+            "Model version or training endpoint"
             if named
             else "Model version (unequal training budgets)"
         )
     fig.suptitle("PSNR by model endpoint" if named else "PSNR by model version", fontsize=15)
     fig.supxlabel(
-        f"Evaluated reference: V{preferred}. Pending metrics are omitted. ADC labels: ADC-only sample projection.\nTraining budgets/data differ. Full values and provenance: CSV/JSON.",
+        f"Evaluated reference: V{preferred}. Pending metrics are omitted. (ADC) marks ADC-only sample projection.\nTraining budgets/data differ. Full values and provenance: CSV/JSON.",
         fontsize=9,
         color="#4b5563",
     )

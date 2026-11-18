@@ -236,6 +236,13 @@ identical to the adjacent-donor result. A reduced-amplitude forecast
 recovers the high-noise approval in a retrospective diagnostic.
 [Refined RAW edge check](mesh-refined-edge.md).
 
+The finite footprint test selects a possible gap on reserved Bayer
+sites, then checks the actual proposed attenuation in disjoint forecasts.
+It reduces added texture in every fresh ISO400 gap and leaves the
+continuous two-wire outputs alone. Most high-noise gap continuation
+persists, including under exact guide geometry.
+[Finite weak-wire support](mesh-shrunk-footprint.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

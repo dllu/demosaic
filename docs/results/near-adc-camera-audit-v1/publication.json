@@ -1,0 +1,350 @@
+{
+  "archive": {
+    "path": "docs/results/near-adc-camera-audit-v1/evidence.tar.xz",
+    "sha256": "17ac24dc3fde4084162f6b31136e5ff2377413e76294726bf95bb3a16d1814d8"
+  },
+  "native_manifest": {
+    "path": "docs/images/near-adc-camera-audit-v1/manifest.json",
+    "sha256": "03df4985c0c7eae299c6a0f271b73fd3ca6766c57f15152d6b547cb9b067cd18"
+  },
+  "canonical_inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/result.json",
+    "sha256": "64cacba459e09a90eb2727bf85b876f295ab21e13135585cbc501cc7738e3b09"
+  },
+  "models": {
+    "bridge-control": {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+        "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+      },
+      "step": 800,
+      "weights": "EMA",
+      "display_label": "Matched control"
+    },
+    "bridge-trained": {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+        "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+      },
+      "step": 800,
+      "weights": "EMA",
+      "display_label": "Near-ADC EMA"
+    },
+    "V120": {
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000,
+      "weights": "EMA",
+      "display_label": "V120 EMA"
+    },
+    "scale-long100k": {
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "step": 100000,
+      "training_horizon": 100000,
+      "retained_progress": true,
+      "weights": "EMA",
+      "display_label": "Corpus 100k EMA"
+    }
+  },
+  "weights": "EMA",
+  "complete_camera_panels": true,
+  "complete_full427": false,
+  "panels": {
+    "known": {
+      "batches": 24,
+      "scenes": 4,
+      "crops_per_model": 72,
+      "overall": {
+        "V120": {
+          "sensor_psnr": 54.31271764967177,
+          "ahd_srgb_psnr": 40.1388849152459,
+          "ahd_srgb_ssim": 0.9324970369537671
+        },
+        "bridge-control": {
+          "sensor_psnr": 54.32990434434679,
+          "ahd_srgb_psnr": 40.15505520502726,
+          "ahd_srgb_ssim": 0.9324382560120689
+        },
+        "bridge-trained": {
+          "sensor_psnr": 54.332692464192704,
+          "ahd_srgb_psnr": 40.14737696117825,
+          "ahd_srgb_ssim": 0.932418265276485
+        },
+        "scale-long100k": {
+          "sensor_psnr": 54.337075233459466,
+          "ahd_srgb_psnr": 40.157681094275574,
+          "ahd_srgb_ssim": 0.9324617286523185
+        }
+      },
+      "per_scene": [
+        {
+          "arm": "V120",
+          "scene": "2pilesofplates",
+          "sensor_psnr": 62.59555901421441,
+          "ahd_srgb_psnr": 47.39367251925998
+        },
+        {
+          "arm": "V120",
+          "scene": "7D-1",
+          "sensor_psnr": 48.92552291022407,
+          "ahd_srgb_psnr": 35.556621339586044
+        },
+        {
+          "arm": "V120",
+          "scene": "D60-2",
+          "sensor_psnr": 51.466712951660156,
+          "ahd_srgb_psnr": 38.67607582939996
+        },
+        {
+          "arm": "V120",
+          "scene": "MuseeL-CopteArch-C500D",
+          "sensor_psnr": 54.26307572258843,
+          "ahd_srgb_psnr": 38.92916997273763
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "2pilesofplates",
+          "sensor_psnr": 62.59032524956597,
+          "ahd_srgb_psnr": 47.38961198594835
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "7D-1",
+          "sensor_psnr": 48.91121398078071,
+          "ahd_srgb_psnr": 35.484273486667206
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "D60-2",
+          "sensor_psnr": 51.565754148695206,
+          "ahd_srgb_psnr": 38.808776431613495
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "MuseeL-CopteArch-C500D",
+          "sensor_psnr": 54.25232399834527,
+          "ahd_srgb_psnr": 38.93755891587999
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "2pilesofplates",
+          "sensor_psnr": 62.594477335611984,
+          "ahd_srgb_psnr": 47.38810793558757
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "7D-1",
+          "sensor_psnr": 48.9116588168674,
+          "ahd_srgb_psnr": 35.48398653666178
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "D60-2",
+          "sensor_psnr": 51.57096417744954,
+          "ahd_srgb_psnr": 38.77719158596463
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "MuseeL-CopteArch-C500D",
+          "sensor_psnr": 54.253669526841904,
+          "ahd_srgb_psnr": 38.94022178649902
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "2pilesofplates",
+          "sensor_psnr": 62.601827197604706,
+          "ahd_srgb_psnr": 47.39001931084527
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "7D-1",
+          "sensor_psnr": 48.916846381293404,
+          "ahd_srgb_psnr": 35.492133882310654
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "D60-2",
+          "sensor_psnr": 51.57288508945041,
+          "ahd_srgb_psnr": 38.80574247572157
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "MuseeL-CopteArch-C500D",
+          "sensor_psnr": 54.256742265489365,
+          "ahd_srgb_psnr": 38.94282870822482
+        }
+      ],
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-camera-audit-v1/known/result.json",
+        "sha256": "824a6677f90c974c51b40f9cf80150be9eaec953e166090ea4f55c2f307478c0"
+      }
+    },
+    "unseen": {
+      "batches": 30,
+      "scenes": 5,
+      "crops_per_model": 90,
+      "overall": {
+        "V120": {
+          "sensor_psnr": 54.00872213575575,
+          "ahd_srgb_psnr": 38.91208860609267,
+          "ahd_srgb_ssim": 0.9247643576727972
+        },
+        "bridge-control": {
+          "sensor_psnr": 53.97660547892254,
+          "ahd_srgb_psnr": 38.85315986209446,
+          "ahd_srgb_ssim": 0.9241440011395348
+        },
+        "bridge-trained": {
+          "sensor_psnr": 53.972585211859816,
+          "ahd_srgb_psnr": 38.85351763831244,
+          "ahd_srgb_ssim": 0.9241309033499825
+        },
+        "scale-long100k": {
+          "sensor_psnr": 53.978261481391066,
+          "ahd_srgb_psnr": 38.87235679626465,
+          "ahd_srgb_ssim": 0.9243850436475542
+        }
+      },
+      "per_scene": [
+        {
+          "arm": "V120",
+          "scene": "LucieB_3apples",
+          "sensor_psnr": 49.35275544060601,
+          "ahd_srgb_psnr": 37.90019904242621
+        },
+        {
+          "arm": "V120",
+          "scene": "LucieB_Coulicoco",
+          "sensor_psnr": 57.46324496799045,
+          "ahd_srgb_psnr": 39.962965435451935
+        },
+        {
+          "arm": "V120",
+          "scene": "LucieB_bedroom_tapestry",
+          "sensor_psnr": 51.79386647542317,
+          "ahd_srgb_psnr": 37.92360093858507
+        },
+        {
+          "arm": "V120",
+          "scene": "LucieB_stick_figurine",
+          "sensor_psnr": 56.18416044447157,
+          "ahd_srgb_psnr": 39.608757442898224
+        },
+        {
+          "arm": "V120",
+          "scene": "LucieB_top_of_Expedit",
+          "sensor_psnr": 55.24958335028754,
+          "ahd_srgb_psnr": 39.16492017110188
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "LucieB_3apples",
+          "sensor_psnr": 49.37006823221843,
+          "ahd_srgb_psnr": 37.91146914164225
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "LucieB_Coulicoco",
+          "sensor_psnr": 57.344078699747726,
+          "ahd_srgb_psnr": 39.822072982788086
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "LucieB_bedroom_tapestry",
+          "sensor_psnr": 51.770069970024956,
+          "ahd_srgb_psnr": 37.84682326846652
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "LucieB_stick_figurine",
+          "sensor_psnr": 56.18508402506511,
+          "ahd_srgb_psnr": 39.60813691880968
+        },
+        {
+          "arm": "bridge-control",
+          "scene": "LucieB_top_of_Expedit",
+          "sensor_psnr": 55.21372646755643,
+          "ahd_srgb_psnr": 39.07729699876573
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "LucieB_3apples",
+          "sensor_psnr": 49.3695863087972,
+          "ahd_srgb_psnr": 37.911749521891274
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "LucieB_Coulicoco",
+          "sensor_psnr": 57.32953092787001,
+          "ahd_srgb_psnr": 39.81914520263672
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "LucieB_bedroom_tapestry",
+          "sensor_psnr": 51.76809544033475,
+          "ahd_srgb_psnr": 37.84930472903781
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "LucieB_stick_figurine",
+          "sensor_psnr": 56.18435520595975,
+          "ahd_srgb_psnr": 39.60996966891818
+        },
+        {
+          "arm": "bridge-trained",
+          "scene": "LucieB_top_of_Expedit",
+          "sensor_psnr": 55.21135817633734,
+          "ahd_srgb_psnr": 39.07741906907823
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "LucieB_3apples",
+          "sensor_psnr": 49.364066017998596,
+          "ahd_srgb_psnr": 37.914088779025604
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "LucieB_Coulicoco",
+          "sensor_psnr": 57.32712448967828,
+          "ahd_srgb_psnr": 39.82049221462674
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "LucieB_bedroom_tapestry",
+          "sensor_psnr": 51.78233528137207,
+          "ahd_srgb_psnr": 37.87721803453233
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "LucieB_stick_figurine",
+          "sensor_psnr": 56.183952755398224,
+          "ahd_srgb_psnr": 39.62219683329265
+        },
+        {
+          "arm": "scale-long100k",
+          "scene": "LucieB_top_of_Expedit",
+          "sensor_psnr": 55.23382886250814,
+          "ahd_srgb_psnr": 39.12778811984592
+        }
+      ],
+      "analysis": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-camera-audit-v1/unseen/result.json",
+        "sha256": "d9116785a8544e394fa809af3be625478496e25a5d62123abe58d068766375b7"
+      }
+    }
+  },
+  "original_near_ADC_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/primary-verified/full/plan.json",
+    "sha256": "17fbfc270ac53b555b0902006e27e9d23e79580f054661596f0cd944fb608311"
+  },
+  "parents_camera_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-review-v1/canonical-camera/collection/result.json",
+    "sha256": "509cb5449c5331a2d6e39f8dcfab6885b52ef2f15852ce40417bef04d17f1751"
+  },
+  "scope": "Four EMA endpoints on the exact fixed known and unseen observations. Recomputed every measured-CFA score. No full427 result in this registration."
+}

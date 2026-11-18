@@ -232,10 +232,11 @@ the completed training audit above.
 [Small-positive raw comparison](images/near-adc-bridge-positive-v1/repair-exposure-half/small-positive-magenta-comparison.png) ·
 [Intermediate raw comparison](images/near-adc-bridge-positive-v1/repair-exposure-half/intermediate-magenta-comparison.png).
 
-The canonical known and unseen camera predictions are saved. Their
-matched metric audit and native review are pending. The fixed 427-photo
-panel has resumed after a host memory interruption, with all saved
-predictions verified against their recorded hashes.
+The fixed camera audit and all nine native views are complete. The
+near-ADC EMA gains 0.00279 dB known and loses 0.00402 dB unseen versus
+matched control. Both arms trail their 100k parent on both panels.
+The fixed 427-photo panel is collecting.
+[Full camera comparison](near-adc-bridge-cameras.md).
 [Benchmark restart receipt](results/primary-memory-resume-20261118-v1/publication.json).
 [Parent native report](full-corpus-long100k.md) ·
 [Comparable PSNR history](performance-history.md).

@@ -39,7 +39,7 @@ of it. These costs keep the completed control experimental.
 | [Full-corpus 100k](full-corpus-long100k.md) | 1.6M examples and 90,778 ordinary photos. Faint ADC sRGB +0.575 dB versus V120 on four materials, with lower fine-band error on bark, fur and wood. Known CFA +0.02436 dB | Unseen CFA −0.03046 dB. Grass fine-band error and selected orange bias exceed V120. Fine cab crossings remain incomplete. Full427 photos collecting |
 | [Expanded scene local-only 12k](expanded-scene-local12k.md) | +0.093/+0.088 dB over its 100k parent on the two development conditions. Both standing GFX reviews complete | Known/unseen CFA −0.02934/+0.00040 dB versus parent. Thin suspension lines and fine cab crossings remain incomplete. Full427 photos collecting. [Fixed camera comparison](expanded-scene-12000-cameras.md) |
 | [Expanded scene spatial 12k](expanded-scene-spatial12k.md) | +0.0165/+0.0044 dB over local-only at the two development conditions. The aligned guide raises ISO400 weak response by 0.081 percentage points versus the neutral scene | Known/unseen CFA −0.04909/−0.00341 dB versus parent. ISO6400 quiet error rises with the aligned guide. Fine GFX crossings remain incomplete. Full427 photos collecting. [Fixed camera comparison](expanded-scene-12000-cameras.md) |
-| [Matched near-ADC continuation](near-adc-bridge-training.md) | At the smallest positive prior, 0.027 dB faint-photo gain versus control. Fixed RAW corrections reduce weakest-band error from 2.941 to 2.350 DN16 | Raw reserved magenta bias rises from 28,798 to 34,629 DN16 versus control. The fixed repair reduces it to 141 DN16, above the repaired V120's 75. Fine GFX crossings stay incomplete. Broad benchmarks queued |
+| [Matched near-ADC continuation](near-adc-bridge-training.md) | At the smallest positive prior, 0.027 dB faint-photo gain versus control. Fixed RAW corrections reduce weakest-band error from 2.941 to 2.350 DN16 | Raw reserved magenta bias rises from 28,798 to 34,629 DN16 versus control. The fixed repair reduces it to 141 DN16, above the repaired V120's 75. Fine GFX crossings stay incomplete. Known/unseen CFA +0.00279/−0.00402 dB versus matched control. Full427 collecting. [Fixed camera audit](near-adc-bridge-cameras.md) |
 
 The [calibrated ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up)
 reduces the 50k worst spot-check bias to 11.16 DN16 and improves faint
@@ -159,6 +159,12 @@ false-wire error component in two fresh ISO400 controls. It slightly
 raises their total RGB error, misses the ISO6400 gaps and fades a real
 ISO6400 rear wire. All eight standing GFX crops reproduce the packaged
 adjacent-donor outputs. The refined check remains experimental.
+
+The [finite footprint check](mesh-shrunk-footprint.md) lowers added
+texture in all six fresh ISO400 synthetic gaps and leaves the twelve
+continuous two-wire outputs alone. It helps one ISO6400 gap slightly.
+The nominal left cab lattice fades locally. Both right views keep the
+recovered crossings. Finite support remains experimental.
 
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab

@@ -9,7 +9,7 @@ Start with the [README](../README.md) for installation and inference.
 | --- | --- |
 | Choose a model or understand version numbers | [Model choices](current-model.md) |
 | Run inference, set noise priors or export | [Usage](usage.md), [DNG/JPEG](dng-export.md), [hot pixels](hot-pixel-clusters.md) |
-| Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [100k corpus cameras](full-corpus-long100k.md#broader-evaluation), [Matched scene 12k cameras](expanded-scene-12000-cameras.md) |
+| Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [100k corpus cameras](full-corpus-long100k.md#broader-evaluation), [Matched scene 12k cameras](expanded-scene-12000-cameras.md), [Near-ADC cameras](near-adc-bridge-cameras.md) |
 | Understand camera evidence and its gaps | [Real-camera overview](real-camera-quality.md) |
 | Find active work and completed research outcomes | [Experiment index](experiments.md), [research priorities](research.md) |
 | Understand the code and training data | [Architecture](architecture.md), [training pipeline](training-pipeline.md), [source review](current-source-loss-review.md) |
@@ -52,6 +52,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [smooth RAW support and intensity steps](smooth-mesh-support.md) ·
 [continuous wires across contrast steps](mesh-step-continuity.md) ·
 [foreground-edge fits for false weak wires](mesh-refined-edge.md) ·
+[finite RAW wire support](mesh-shrunk-footprint.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·

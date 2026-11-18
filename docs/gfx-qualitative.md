@@ -124,6 +124,9 @@ historical boards. Use these reports for the current completed comparisons:
 - The refined foreground-edge check reproduces the packaged adjacent-donor
   pixels in all four main crops, preserving the smooth sky and coarse fence.
   [Refined edge playback](mesh-refined-edge.md#standing-gfx100s-review).
+- The finite footprint attenuates the coarse fence by 2.18 DN16 RMS.
+  Crossings remain visible, and the sky, building and foliage reproduce
+  the adjacent-donor outputs. [Finite-support playback](mesh-shrunk-footprint.md#standing-gfx100s-review).
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

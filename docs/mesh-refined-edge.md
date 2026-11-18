@@ -102,6 +102,12 @@ The effects are subtle at native scale. [Pixel and source manifest](results/mesh
 [g180 exact positive counterpart](images/mesh-refined-edge-v1/iso400-step-g180-role1-comparison.png) ·
 [g183 ISO6400 real wire loss](images/mesh-refined-edge-v1/iso6400-step-g183-role1-comparison.png).
 
+The fixed half forecast and the hard forecast also agree on the
+24-scene follow-up and a separate set of independent high-noise draws
+with exact guide geometry. A new reserve-nominated footprint reduces
+false continuation mainly at ISO400.
+[Finite support and amplitude follow-up](mesh-shrunk-footprint.md).
+
 ## Standing GFX100S review
 
 The camera playback uses local-only 2k EMA
