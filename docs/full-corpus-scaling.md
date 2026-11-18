@@ -1,6 +1,6 @@
 # Full-corpus scaling and whole-scene context training
 
-**The 20k control is complete and the 100k run has completed two ordinary photo passes.**
+**The 20k control is complete and the 100k run has passed its halfway checkpoint.**
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
@@ -119,12 +119,30 @@ All 110 retained inputs ran through fresh V120, the completed 20k control
 and the long-schedule 20k EMA. All 220 control predictions match the
 earlier review bit for bit. The audit and both GFX families are covered
 in the [completed native review](full-corpus-long20k-native.md).
-Training continues independently toward the 50k and 100k checkpoints.
-The native 50k review is queued on the trainer's immutable checkpoint
-receipt. It uses the same 110 inputs and reuses the 220 verified V120
-and long-schedule 20k control predictions. The 50k EMA requires 110
-new CPU restoration calls. Numerical results and native viewing
-follow the checkpoint.
+
+### Long-schedule 50k milestone
+
+The trainer saved the immutable 50k state and continued on the same
+100k horizon. Checkpoint SHA256 is
+`1560138b11371f58f2df33c52f026f9bd941aa1e5f336c607cefcd0c0a04d431`.
+The checkpoint has 91 raw and 91 EMA tensors, 89 Adam states at step
+50,000, and Python, Torch CPU and CUDA RNG. The retained resumed loop
+elapsed time at the 50,000 training log is 33,736.87 seconds for updates
+1,001–50,000, in addition to the 695.68-second initial loop. The final
+validation and checkpoint write follow that observation. Native evaluation
+has a separate timing and reuses the 220 verified V120/long-20k controls.
+[Checkpoint and launch audit](results/full-corpus-long50k-prefix-v1/checkpoint-verified.json).
+
+The prefix contains 800,000 target slots and 266,909 ordinary photo
+draws, with 85,353 sources seen three times and 5,425 seen twice. It
+also records 14,002 reviewed-region draws from 33 sources. Across sources
+with a third visit, the median original cache field seen in the union
+of crop rectangles grows from **54.4%** after one visit to **69.1%**
+after two and **76.7%** after three. Median additional coverage from the
+third visit is 5.0% of the source field. There are 5,346 third crops
+fully within the earlier union. Those samples still have fresh geometric
+augmentation and sensor corruption. The rectangles describe coverage
+before augmentation. [Source, conditioning and crop audit](results/full-corpus-long50k-prefix-v1/source-and-crop-audit.json).
 
 ### Observed source and crop coverage through 30k
 
