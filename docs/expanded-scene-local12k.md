@@ -34,11 +34,13 @@ Each condition averages eight crops across two development photographs.
 All arms see identical retained Bayer samples, noise, CFA, WB and
 camera transform. Mean rendered gradient error also falls slightly at
 both conditions. The small development panel may include sources the
-100k parent has seen. The fixed 427-photo and known/unseen camera
-comparisons are collecting together with the paired spatial arm. The last
-completed broad three-panel endpoint is [Corpus 20k](full-corpus-control20k-primary.md).
-The [performance history](performance-history.md) has no broad score
-for this local-only endpoint yet.
+100k parent has seen. The fixed known and unseen camera
+comparisons are complete with the paired spatial arm. Local-only
+is −0.02934/+0.00040 dB versus its 100k parent on known/unseen measured CFA.
+The fixed photo panel is collecting. [Fixed camera results](expanded-scene-12000-cameras.md).
+The last completed broad three-panel endpoint is
+[Corpus 20k](full-corpus-control20k-primary.md).
+[Primary-panel history](performance-history.md).
 
 ## Native crops and standing GFX scenes
 

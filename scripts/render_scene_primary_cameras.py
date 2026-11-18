@@ -20,7 +20,11 @@ def render_panel(result_path, output):
     manifest = read_json(checked(plan["stages"][result["stage"]]["manifest"]))
     output.mkdir(parents=True)
     boards, triplets = [], []
-    labels = {"V120": "V120 EMA", "none": "Local-only2k", "pooled": "Pooled2k", "spatial": "Spatial2k"}
+    names = {"none": "Local-only", "pooled": "Pooled", "spatial": "Spatial"}
+    labels = {"V120": "V120 EMA", "parent100k": "Corpus 100k EMA"}
+    for arm, model in result["models"].items():
+        if arm in names:
+            labels[arm] = f"{names[arm]} {model['step'] // 1000}k EMA"
     for item in result["native_selection"]:
         case = read_json(checked(item["case"]))
         canonical, index = item["canonical"], item["sample"]
@@ -35,7 +39,7 @@ def render_panel(result_path, output):
 
         noisy = malvar(batch["packed"], batch["colors"], batch["wb"])
         panels = [("Noisy (Malvar)", display(noisy)),
-                  *[(labels[arm], display(predictions[arm])) for arm in labels],
+                  *[(labels[arm], display(prediction)) for arm, prediction in predictions.items()],
                   ("Independent AHD ref", display(batch["reference_rgb"]))]
         image = Image.new("RGB", (8 + 168 * len(panels), 192), "#eeeeee")
         draw, rectangles = ImageDraw.Draw(image), []
@@ -69,7 +73,7 @@ def render_panel(result_path, output):
         }
         boards.append({"image": reference(path), "panels": rectangles, **metadata})
         triplet = save_triplet(output / "triplets", key,
-                               [panels[0], ("Spatial2k EMA", panels[4][1]), panels[-1]],
+                               [panels[0], (labels["spatial"], display(predictions["spatial"])), panels[-1]],
                                caption=key, metadata=metadata)
         triplets.append({"id": key, "image": reference(output / "triplets" / triplet["image"]),
                          "metadata": reference((output / "triplets" / triplet["image"]).with_suffix(".json"))})

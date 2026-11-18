@@ -6,7 +6,7 @@ raises ISO400 weak contrast recovery by 0.081 percentage points over the
 neutral scene. It slightly lowers recovery and increases quiet-region error
 at ISO6400. Matched native viewing finds smooth sky and visible coarse
 crossings, with no clear new fine cab crossings or canopy cords. The broad
-three-panel evaluation is collecting.
+camera panels are complete and the fixed photo panel is collecting.
 [Matched training and independently verified counts](results/expanded-scene-12000-v2/training-completion.json) ·
 [Scoped intervention](results/expanded-scene-12000-v2/spatial12k-wire-gap.json).
 
@@ -148,6 +148,10 @@ control. The next used an older scene loader with the same assumption for
 the two scene checkpoints. Both failed before case scoring. The corrected
 attempt uses the bound parent hashes at both levels.
 It passed one known-camera, one unseen-camera and one photo case and
-launched the full fixed collection. [Admission and failed-attempt receipts](results/expanded-scene-12000-v2/matched-primary-admission.json).
+launched the full fixed collection. Both camera stages have closed.
+Spatial is 0.04909/0.00341 dB below its 100k parent on known/unseen
+measured-CFA PSNR. All nine native camera boards were viewed. The full427
+photo comparison is still collecting. [Fixed camera results](expanded-scene-12000-cameras.md) ·
+[Admission and failed-attempt receipts](results/expanded-scene-12000-v2/matched-primary-admission.json).
 The last complete three-panel comparison remains [Corpus 20k](full-corpus-control20k-primary.md).
 [Broad panel history](performance-history.md).

@@ -98,7 +98,10 @@ four scene observations from the new parent. The production
 development and both standing GFX views are complete. The spatial
 arm finished its 12,000 updates with identical observations. Its fixed
 weak-wire study and both standing GFX reviews are complete. The broad
-comparison is collecting. [Spatial endpoint and native results](expanded-scene-spatial12k.md).
+camera comparison is complete. Both continuations lose measured-CFA PSNR
+on the known-camera panel versus their 100k parent. The fixed photo panel
+is collecting. [Spatial endpoint and native results](expanded-scene-spatial12k.md) ·
+[Fixed camera panels](expanded-scene-12000-cameras.md).
 [Checkpoint bindings, preflight and start evidence](results/expanded-scene-12000-v2/publication.json).
 The full training traces match all 24,000 scene records byte for byte,
 including crop and noise fingerprints.

@@ -26,7 +26,7 @@ def analyze(root, stage, output):
         tree = ast.parse((Path(plan["work"]) / "src/demosaic" / filename).read_text())
         original = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == function.__name__)
         assert ast.dump(original) == ast.dump(ast.parse(inspect.getsource(function)).body[0])
-    torch.set_num_threads(4)
+    torch.set_num_threads(plan["CPU_threads"])
     canonical = read_json(checked(plan["canonical_inputs"]))
     records = [r for r in canonical["records"] if r["stage"] == stage]
     assert len(records) == plan["stages"][stage]["calls_per_model"]
@@ -52,7 +52,7 @@ def analyze(root, stage, output):
         case = read_json(checked(binding))
         assert case["stage"] == stage and case["batch"] == record["batch"]
         assert case["canonical_arrays"] == record["arrays"]
-        assert [v["arm"] for v in case["variants"]] == ["V120", "none", "pooled", "spatial"]
+        assert [v["arm"] for v in case["variants"]] == list(plan["models"])
         with np.load(checked(record["arrays"]), allow_pickle=False) as data:
             target = torch.from_numpy(data["sensor_reference"].copy())[..., 32:-32, 32:-32]
             mask = torch.from_numpy(data["sensor_mask"].copy())[..., 32:-32, 32:-32]
@@ -94,8 +94,8 @@ def analyze(root, stage, output):
                            "sensor_psnr": float(np.mean([r["metrics"]["sensor_psnr"] for r in values])),
                            "ahd_srgb_psnr": float(np.mean([r["metrics"]["ahd_srgb_psnr"] for r in values]))})
     expected_scenes = 4 if stage == "known" else 5
-    assert len(scene_rows) == expected_scenes * 4
-    assert len(rows) == plan["stages"][stage]["observations_per_model"] * 4
+    assert len(scene_rows) == expected_scenes * len(plan["models"])
+    assert len(rows) == plan["stages"][stage]["observations_per_model"] * len(plan["models"])
     summary = summarize(pairs, comparison_metrics=("sensor_psnr", "ahd_srgb_psnr", "ahd_srgb_ssim"))
     aggregation_checks = []
     for overall in summary["overall"]:
@@ -118,7 +118,7 @@ def analyze(root, stage, output):
         "cases": bindings, "metric_checks": metric_checks, "per_scene": scene_rows,
         "aggregation_checks": aggregation_checks,
         "per_pair": pairs, "summary": summary, "per_crop": reference(table), "native_selection": native,
-        "models": plan["models"], "weights": "EMA", "inference_policy": "Original collector: CPU IEEE FP32 native B4/B1, shared checked frozen local features; full noisy scene for pooled/spatial.",
+        "models": plan["models"], "weights": "EMA", "inference_policy": "Original collector: CPU IEEE FP32 native B4/B1 and checked shared local features, with the declared full noisy scene for context arms.",
         "scope": "Complete fixed camera panel, all captures/native crops. Recomputed measured-CFA metrics from saved predictions exactly; averages crops within capture, captures within scene, then scenes. Independent AHD RGB metrics are auxiliary, not exact RGB GT. This observer makes0 neural/GPU/noise/RAW/optimizer calls. Full427 photo collection and actual native viewing are separate; no partial photo mean or primary chart point is inferred.",
     })
     print(stage, "complete", len(bindings), "batches", expected_scenes, "scenes", len(rows), "crop/model rows")

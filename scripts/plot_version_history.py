@@ -16,6 +16,8 @@ COVERAGE_NOTE = (
     "**Coverage reviewed November 18, 2026.** The larger-corpus 20k control now has "
     "[all three comparable panels](full-corpus-control20k-primary.md). "
     "The 100k endpoint has completed camera scores and its full427 panel is collecting. "
+    "Both matched scene 12k endpoints have [completed fixed camera panels](expanded-scene-12000-cameras.md). "
+    "Their full427 scores are pending. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -468,6 +470,69 @@ def collect_corpus_endpoints():
     return [short_point, long_point], evidence
 
 
+def collect_expanded_scene_endpoints():
+    """Bind finished camera panels from the exact matched 12k collection."""
+    path = REPO / "docs/results/expanded-scene-12000-v2/matched-primary-cameras.json"
+    report = "expanded-scene-12000-cameras.md"
+    record = json.loads(path.read_text())
+    assert record["complete_camera_panels"] and record["weights"] == "EMA"
+    source = REPO / record["archive"]["path"]
+    assert digest(source) == record["archive"]["sha256"]
+    points = []
+    for arm, label in (("none", "Local-only 12k"), ("spatial", "Spatial 12k")):
+        model = record["models"][arm]
+        assert model["kind"] == "scene" and model["step"] == 12000
+        points.append(
+            {
+                "version": None,
+                "label": label,
+                "endpoint": f"expanded-scene-12000-{arm}",
+                "step": model["step"],
+                "checkpoint_sha256": model["checkpoint"]["sha256"],
+                "inference_policy": "EMA, CPU IEEE FP32, exact canonical inputs",
+                "report": report,
+                "source": str(path.relative_to(REPO / "docs/results")),
+                "evaluation_metadata": {},
+            }
+        )
+    with tarfile.open(source) as bundle:
+        for stage, batches, scenes in (("known", 24, 4), ("unseen", 30, 5)):
+            panel = record["panels"][stage]
+            assert (panel["batches"], panel["scenes"], panel["crops_per_model"]) == (
+                batches, scenes, scenes * 18
+            )
+            raw = bundle.extractfile(f"{stage}/analysis.json").read()
+            assert hashlib.sha256(raw).hexdigest() == panel["analysis"]["sha256"]
+            analyzed = json.loads(raw)
+            assert analyzed["models"] == record["models"] and analyzed["stage"] == stage
+            assert len(analyzed["cases"]) == batches
+            for point, arm in zip(points, ("none", "spatial"), strict=True):
+                metric = next(r for r in analyzed["summary"]["overall"] if r["model"] == arm)
+                mean = metric["metrics"]["sensor_psnr"]["mean"]
+                assert metric["metrics"]["sensor_psnr"]["count"] == scenes
+                assert mean == panel["overall"][arm]["sensor_psnr"]
+                checks = [check for check in analyzed["metric_checks"] if check["arm"] == arm]
+                assert len(checks) == batches and all(c["scores_bit_exact"] for c in checks)
+                assert sum(c["native_predictions"] for c in checks) == scenes * 18
+                point[f"{stage}_CFA_PSNR"] = mean
+                point["evaluation_metadata"][stage] = {
+                    "scene_count": scenes,
+                    "native_crops_per_model": scenes * 18,
+                    "canonical_inputs_sha256": record["canonical_inputs"]["sha256"],
+                    "precision": "CPU IEEE FP32 with measured-CFA reference",
+                }
+    evidence = [
+        {
+            "path": str(p.relative_to(REPO)),
+            "sha256": digest(p),
+            "endpoints": [point["endpoint"] for point in points],
+            "report": report,
+        }
+        for p in (path, source)
+    ]
+    return points, evidence
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -491,11 +556,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v2.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v3.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v1.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v2.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v1.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-v131-current-v1.json"
         if not destination.exists():
@@ -511,6 +578,9 @@ def main():
         corpus_points, corpus_evidence = collect_corpus_endpoints()
         points.extend(corpus_points)
         evidence.extend(corpus_evidence)
+        scene_points, scene_evidence = collect_expanded_scene_endpoints()
+        points.extend(scene_points)
+        evidence.extend(scene_evidence)
         result = {
             "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",
@@ -608,6 +678,11 @@ def main():
             axis.grid(axis="y", color="#dce2e8", linewidth=0.6)
             axis.legend(loc="best", frameon=False, fontsize=8)
             axis.set_xticks(ticks, tick_labels)
+            if len(named) > 2:
+                for label in axis.get_xticklabels()[-len(named):]:
+                    label.set_rotation(40)
+                    label.set_ha("right")
+                    label.set_rotation_mode("anchor")
         highlighted = (
             [43, preferred, 72, 92, latest] if row == 0 else [34, 43, 63, preferred, 92, latest]
         )
