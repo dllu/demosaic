@@ -88,8 +88,8 @@ no synthetic or camera reference is silently counted as photo GT.
 
 The targeted publication includes independent audits, actual native crop
 inspection and both protected GFX reviews. The [full primary report](full-corpus-control20k-primary.md)
-now binds the completed collection and scores to the history. A separate
-prediction audit and weak-band analysis are running. An original
+now binds the completed collection and scores to the history. The independent
+prediction audit and weak-band analysis have also completed. An original
 native reporter helper-import failure was recovered with identical sealed helper
 bytes; the full primary worker continued unchanged. [Exact recovery evidence and
 running-job cutoff](results/full-corpus-control20k-review-v1/publication.json). The [scene2k full427 benchmark](whole-scene-context-primary-admission.md)

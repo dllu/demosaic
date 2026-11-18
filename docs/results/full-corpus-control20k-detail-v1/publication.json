@@ -1,0 +1,763 @@
+{
+  "primary": {
+    "path": "docs/results/full-corpus-control20k-primary-v1/primary.json",
+    "sha256": "248ad14dc6e0305a575e3707442d82e656c141beccd3b5aa1a395ffce06f831d"
+  },
+  "audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-analysis-queue-v1/independent-primary-audit/result.json",
+    "sha256": "e5e9845205720d531090a7231f7efe73d26f70a4306aa83f77f12668fad7bf08"
+  },
+  "audit_rows": 25132,
+  "audit_maximum_discrepancies": {
+    "known": {
+      "sensor_psnr": 5.17755475470949e-06,
+      "reference_samples": 0.0,
+      "ahd_srgb_psnr": 4.026336767992689e-06,
+      "ahd_chroma_mae": 2.228702014606121e-09,
+      "ahd_gradient_mae": 1.5521351356961866e-09
+    },
+    "unseen": {
+      "sensor_psnr": 4.885387284048193e-06,
+      "reference_samples": 0.0,
+      "ahd_srgb_psnr": 4.468072972940718e-06,
+      "ahd_chroma_mae": 1.6771299852363919e-09,
+      "ahd_gradient_mae": 1.936889319070767e-09
+    },
+    "photo": {
+      "linear_psnr": 6.112384156153894e-06,
+      "srgb_psnr": 0.0001685827292732256,
+      "chroma_mae": 3.894904151708744e-08,
+      "gradient_mae": 1.524313359346427e-08
+    }
+  },
+  "rows_per_stage_and_model": {
+    "known|V120": 72,
+    "known|scale-control20k": 72,
+    "unseen|V120": 90,
+    "unseen|scale-control20k": 90,
+    "photo|V120": 12404,
+    "photo|scale-control20k": 12404
+  },
+  "detail_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-analysis-queue-v1/broad-local-detail/result-v1.json",
+    "sha256": "d44e2766839da0a97cbb7067d5ebcf4ce18a2a5e8a441a596a3c0477d35aa0ad"
+  },
+  "detail": {
+    "first_manifest": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-analysis-queue-v1/native-photo-archive/records.jsonl",
+      "sha256": "39e1cd41e3fde14bbb0d7f318712d3a54725503dbf01f99cae7cd8e8e4e85040"
+    },
+    "second_manifest": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-analysis-queue-v1/native-photo-archive/records.jsonl",
+      "sha256": "39e1cd41e3fde14bbb0d7f318712d3a54725503dbf01f99cae7cd8e8e4e85040"
+    },
+    "first_checkpoint_sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+    "second_checkpoint_sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795",
+    "photographic_sources": 427,
+    "paired_source_noise_CFA_observations": 5124,
+    "unique_source_blocks": 96075,
+    "block_observations_per_method": 1152900,
+    "summaries": [
+      {
+        "condition": "adc-only",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "first": {
+          "contributing_sources": 326,
+          "pooled": {
+            "blocks": 60032,
+            "GT_projected_gain": 0.9671425578416238,
+            "GT_band_RMS": 0.003806466727983683,
+            "band_error_RMS": 0.0009249636828193672,
+            "orthogonal_band_RMS": 0.0009164688316806597
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9468324011014418,
+            "GT_band_RMS": 0.003961825662701286,
+            "band_error_RMS": 0.0009483357900300593,
+            "orthogonal_band_RMS": 0.0009290100591323858
+          }
+        },
+        "second": {
+          "contributing_sources": 326,
+          "pooled": {
+            "blocks": 60032,
+            "GT_projected_gain": 0.9653561752835156,
+            "GT_band_RMS": 0.003806466727983683,
+            "band_error_RMS": 0.0009040389924959344,
+            "orthogonal_band_RMS": 0.000894369416821704
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9432908290943895,
+            "GT_band_RMS": 0.003961825662701286,
+            "band_error_RMS": 0.000931395683116002,
+            "orthogonal_band_RMS": 0.0009105485559926203
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.003541572007052296,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -1.6940106914057262e-05,
+          "orthogonal_band_RMS": -1.8461503139765526e-05
+        }
+      },
+      {
+        "condition": "adc-only",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "first": {
+          "contributing_sources": 374,
+          "pooled": {
+            "blocks": 27784,
+            "GT_projected_gain": 0.9858635122040297,
+            "GT_band_RMS": 0.014168689952455783,
+            "band_error_RMS": 0.001816416788782858,
+            "orthogonal_band_RMS": 0.0018053397625392936
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9837060351219638,
+            "GT_band_RMS": 0.014046816579457775,
+            "band_error_RMS": 0.0017644269270435699,
+            "orthogonal_band_RMS": 0.0017415139833198035
+          }
+        },
+        "second": {
+          "contributing_sources": 374,
+          "pooled": {
+            "blocks": 27784,
+            "GT_projected_gain": 0.9854327504858592,
+            "GT_band_RMS": 0.014168689952455783,
+            "band_error_RMS": 0.001800968858894664,
+            "orthogonal_band_RMS": 0.0017891026658079824
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9834650391032059,
+            "GT_band_RMS": 0.014046816579457775,
+            "band_error_RMS": 0.0017437474279442516,
+            "orthogonal_band_RMS": 0.0017204863688340586
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.00024099601875782195,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -2.0679499099318308e-05,
+          "orthogonal_band_RMS": -2.1027614485744908e-05
+        }
+      },
+      {
+        "condition": "adc-only",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "first": {
+          "contributing_sources": 412,
+          "pooled": {
+            "blocks": 38848,
+            "GT_projected_gain": 0.9908657956847908,
+            "GT_band_RMS": 0.028742398786996456,
+            "band_error_RMS": 0.0030375985006330067,
+            "orthogonal_band_RMS": 0.0030262316425615646
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.990804669799466,
+            "GT_band_RMS": 0.028070951178715855,
+            "band_error_RMS": 0.0027860773166270866,
+            "orthogonal_band_RMS": 0.002764353968854461
+          }
+        },
+        "second": {
+          "contributing_sources": 412,
+          "pooled": {
+            "blocks": 38848,
+            "GT_projected_gain": 0.9906237460560116,
+            "GT_band_RMS": 0.028742398786996456,
+            "band_error_RMS": 0.0030074165859379537,
+            "orthogonal_band_RMS": 0.002995317414097606
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9906468522770097,
+            "GT_band_RMS": 0.028070951178715855,
+            "band_error_RMS": 0.0027517536833979598,
+            "orthogonal_band_RMS": 0.002729784936378903
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.0001578175224563605,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -3.432363322912685e-05,
+          "orthogonal_band_RMS": -3.456903247555775e-05
+        }
+      },
+      {
+        "condition": "adc-only",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "first": {
+          "contributing_sources": 423,
+          "pooled": {
+            "blocks": 75456,
+            "GT_projected_gain": 0.9927493272894605,
+            "GT_band_RMS": 0.048321788065220604,
+            "band_error_RMS": 0.0043816962840880855,
+            "orthogonal_band_RMS": 0.00436766600868118
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9932078480777776,
+            "GT_band_RMS": 0.046783678622437194,
+            "band_error_RMS": 0.0039751615177900605,
+            "orthogonal_band_RMS": 0.003949266634646806
+          }
+        },
+        "second": {
+          "contributing_sources": 423,
+          "pooled": {
+            "blocks": 75456,
+            "GT_projected_gain": 0.9926555342496116,
+            "GT_band_RMS": 0.048321788065220604,
+            "band_error_RMS": 0.004335258635824189,
+            "orthogonal_band_RMS": 0.004320707702407367
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.993162887842615,
+            "GT_band_RMS": 0.046783678622437194,
+            "band_error_RMS": 0.003929102799074871,
+            "orthogonal_band_RMS": 0.0039042057636867605
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -4.496023516264991e-05,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -4.6058718715189656e-05,
+          "orthogonal_band_RMS": -4.5060870960045817e-05
+        }
+      },
+      {
+        "condition": "adc-only",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "first": {
+          "contributing_sources": 425,
+          "pooled": {
+            "blocks": 142716,
+            "GT_projected_gain": 0.994235629977551,
+            "GT_band_RMS": 0.07431834945419123,
+            "band_error_RMS": 0.005633219862205762,
+            "orthogonal_band_RMS": 0.005616906690566047
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.994033434507543,
+            "GT_band_RMS": 0.06772557935083964,
+            "band_error_RMS": 0.004939560440466801,
+            "orthogonal_band_RMS": 0.004910061773303346
+          }
+        },
+        "second": {
+          "contributing_sources": 425,
+          "pooled": {
+            "blocks": 142716,
+            "GT_projected_gain": 0.9941879691105809,
+            "GT_band_RMS": 0.07431834945419123,
+            "band_error_RMS": 0.005564009306156508,
+            "orthogonal_band_RMS": 0.005547217944752732
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9939842426736442,
+            "GT_band_RMS": 0.06772557935083964,
+            "band_error_RMS": 0.0048753024869816275,
+            "orthogonal_band_RMS": 0.004846517841650496
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -4.919183389884285e-05,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -6.425795348517348e-05,
+          "orthogonal_band_RMS": -6.354393165285046e-05
+        }
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "first": {
+          "contributing_sources": 326,
+          "pooled": {
+            "blocks": 60032,
+            "GT_projected_gain": 0.8689202983845955,
+            "GT_band_RMS": 0.003806466727983683,
+            "band_error_RMS": 0.0013683220489668214,
+            "orthogonal_band_RMS": 0.001274108945645362
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.7857111589319952,
+            "GT_band_RMS": 0.003961825662701286,
+            "band_error_RMS": 0.001414642488358267,
+            "orthogonal_band_RMS": 0.0012725394564922915
+          }
+        },
+        "second": {
+          "contributing_sources": 326,
+          "pooled": {
+            "blocks": 60032,
+            "GT_projected_gain": 0.8726065585076869,
+            "GT_band_RMS": 0.003806466727983683,
+            "band_error_RMS": 0.00136232398107029,
+            "orthogonal_band_RMS": 0.001273098697395334
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.7874453944890165,
+            "GT_band_RMS": 0.003961825662701286,
+            "band_error_RMS": 0.001408231712560978,
+            "orthogonal_band_RMS": 0.0012707586065782797
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": 0.0017342355570213464,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -6.410775797289136e-06,
+          "orthogonal_band_RMS": -1.780849914011836e-06
+        }
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "first": {
+          "contributing_sources": 374,
+          "pooled": {
+            "blocks": 27784,
+            "GT_projected_gain": 0.9754387511889826,
+            "GT_band_RMS": 0.014168689952455783,
+            "band_error_RMS": 0.002297464254618663,
+            "orthogonal_band_RMS": 0.0022709551956507264
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9670820258078823,
+            "GT_band_RMS": 0.014046816579457775,
+            "band_error_RMS": 0.0022237907956787536,
+            "orthogonal_band_RMS": 0.0021866509979436444
+          }
+        },
+        "second": {
+          "contributing_sources": 374,
+          "pooled": {
+            "blocks": 27784,
+            "GT_projected_gain": 0.9759419715226818,
+            "GT_band_RMS": 0.014168689952455783,
+            "band_error_RMS": 0.002288535737063148,
+            "orthogonal_band_RMS": 0.0022630075019958373
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9673003387428949,
+            "GT_band_RMS": 0.014046816579457775,
+            "band_error_RMS": 0.0022118019310458773,
+            "orthogonal_band_RMS": 0.0021755543670956843
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": 0.00021831293501262117,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -1.198886463287625e-05,
+          "orthogonal_band_RMS": -1.1096630847960177e-05
+        }
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "first": {
+          "contributing_sources": 412,
+          "pooled": {
+            "blocks": 38848,
+            "GT_projected_gain": 0.9912318940484545,
+            "GT_band_RMS": 0.028742398786996456,
+            "band_error_RMS": 0.0032747272100598266,
+            "orthogonal_band_RMS": 0.003265015472476807
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9901941378343304,
+            "GT_band_RMS": 0.028070951178715855,
+            "band_error_RMS": 0.003024120679872336,
+            "orthogonal_band_RMS": 0.0030068522081467433
+          }
+        },
+        "second": {
+          "contributing_sources": 412,
+          "pooled": {
+            "blocks": 38848,
+            "GT_projected_gain": 0.9915275416378281,
+            "GT_band_RMS": 0.028742398786996456,
+            "band_error_RMS": 0.003257833849521257,
+            "orthogonal_band_RMS": 0.0032487197472786523
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9903040911890879,
+            "GT_band_RMS": 0.028070951178715855,
+            "band_error_RMS": 0.0030051004415261825,
+            "orthogonal_band_RMS": 0.002988300483724652
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": 0.00010995335475749712,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -1.902023834615338e-05,
+          "orthogonal_band_RMS": -1.855172442209122e-05
+        }
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "first": {
+          "contributing_sources": 423,
+          "pooled": {
+            "blocks": 75456,
+            "GT_projected_gain": 0.9955829535999721,
+            "GT_band_RMS": 0.048321788065220604,
+            "band_error_RMS": 0.004365093120423952,
+            "orthogonal_band_RMS": 0.0043598717292661964
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9949488074266403,
+            "GT_band_RMS": 0.046783678622437194,
+            "band_error_RMS": 0.003985717079542805,
+            "orthogonal_band_RMS": 0.003973234623607516
+          }
+        },
+        "second": {
+          "contributing_sources": 423,
+          "pooled": {
+            "blocks": 75456,
+            "GT_projected_gain": 0.9957678629728934,
+            "GT_band_RMS": 0.048321788065220604,
+            "band_error_RMS": 0.0043398853845770385,
+            "orthogonal_band_RMS": 0.004335064369763713
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9951724652323072,
+            "GT_band_RMS": 0.046783678622437194,
+            "band_error_RMS": 0.00396193736399362,
+            "orthogonal_band_RMS": 0.003950106111119184
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": 0.0002236578056669103,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -2.3779715549184822e-05,
+          "orthogonal_band_RMS": -2.3128512488332018e-05
+        }
+      },
+      {
+        "condition": "iso100-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "first": {
+          "contributing_sources": 425,
+          "pooled": {
+            "blocks": 142716,
+            "GT_projected_gain": 0.9988893297771929,
+            "GT_band_RMS": 0.07431834945419123,
+            "band_error_RMS": 0.0053742745430195955,
+            "orthogonal_band_RMS": 0.005373640617640475
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9970930816423104,
+            "GT_band_RMS": 0.06772557935083964,
+            "band_error_RMS": 0.004729318854735648,
+            "orthogonal_band_RMS": 0.004715468554589528
+          }
+        },
+        "second": {
+          "contributing_sources": 425,
+          "pooled": {
+            "blocks": 142716,
+            "GT_projected_gain": 0.9990196918836026,
+            "GT_band_RMS": 0.07431834945419123,
+            "band_error_RMS": 0.0053349688309555264,
+            "orthogonal_band_RMS": 0.005334471350898435
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9972655351517304,
+            "GT_band_RMS": 0.06772557935083964,
+            "band_error_RMS": 0.004692707440242247,
+            "orthogonal_band_RMS": 0.00467930374735513
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": 0.00017245350942007853,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -3.661141449340117e-05,
+          "orthogonal_band_RMS": -3.616480723439824e-05
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 0,
+        "relative_GT_band_RMS_lower": 0.0,
+        "relative_GT_band_RMS_upper": 0.02,
+        "first": {
+          "contributing_sources": 326,
+          "pooled": {
+            "blocks": 60032,
+            "GT_projected_gain": 0.3760685522542962,
+            "GT_band_RMS": 0.003806466727983683,
+            "band_error_RMS": 0.0030901112703699456,
+            "orthogonal_band_RMS": 0.001976938227353046
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.3647632928240328,
+            "GT_band_RMS": 0.003961825662701286,
+            "band_error_RMS": 0.003181507963221193,
+            "orthogonal_band_RMS": 0.001993577603249416
+          }
+        },
+        "second": {
+          "contributing_sources": 326,
+          "pooled": {
+            "blocks": 60032,
+            "GT_projected_gain": 0.37642275099450834,
+            "GT_band_RMS": 0.003806466727983683,
+            "band_error_RMS": 0.003088054822372963,
+            "orthogonal_band_RMS": 0.0019753435036914194
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.36459363325167843,
+            "GT_band_RMS": 0.003961825662701286,
+            "band_error_RMS": 0.0031797237526022485,
+            "orthogonal_band_RMS": 0.0019919171270607345
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.0001696595723543748,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -1.7842106189444942e-06,
+          "orthogonal_band_RMS": -1.6604761886814846e-06
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 1,
+        "relative_GT_band_RMS_lower": 0.02,
+        "relative_GT_band_RMS_upper": 0.05,
+        "first": {
+          "contributing_sources": 374,
+          "pooled": {
+            "blocks": 27784,
+            "GT_projected_gain": 0.6925610145080183,
+            "GT_band_RMS": 0.014168689952455783,
+            "band_error_RMS": 0.008040399265068167,
+            "orthogonal_band_RMS": 0.00675819632494442
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.6857286209273341,
+            "GT_band_RMS": 0.014046816579457775,
+            "band_error_RMS": 0.0073287803205068225,
+            "orthogonal_band_RMS": 0.006056370515807693
+          }
+        },
+        "second": {
+          "contributing_sources": 374,
+          "pooled": {
+            "blocks": 27784,
+            "GT_projected_gain": 0.6915019375797281,
+            "GT_band_RMS": 0.014168689952455783,
+            "band_error_RMS": 0.008034023865829493,
+            "orthogonal_band_RMS": 0.006740903600910135
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.6850993060975024,
+            "GT_band_RMS": 0.014046816579457775,
+            "band_error_RMS": 0.007320886942998874,
+            "orthogonal_band_RMS": 0.006040987609554266
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.0006293148298317508,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -7.893377507948648e-06,
+          "orthogonal_band_RMS": -1.5382906253426885e-05
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 2,
+        "relative_GT_band_RMS_lower": 0.05,
+        "relative_GT_band_RMS_upper": 0.1,
+        "first": {
+          "contributing_sources": 412,
+          "pooled": {
+            "blocks": 38848,
+            "GT_projected_gain": 0.8653502018258634,
+            "GT_band_RMS": 0.028742398786996456,
+            "band_error_RMS": 0.01095570212743382,
+            "orthogonal_band_RMS": 0.010249355328275022
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.8604563021014705,
+            "GT_band_RMS": 0.028070951178715855,
+            "band_error_RMS": 0.009673587428924624,
+            "orthogonal_band_RMS": 0.008975394950922226
+          }
+        },
+        "second": {
+          "contributing_sources": 412,
+          "pooled": {
+            "blocks": 38848,
+            "GT_projected_gain": 0.8642362815351411,
+            "GT_band_RMS": 0.028742398786996456,
+            "band_error_RMS": 0.010947231176385096,
+            "orthogonal_band_RMS": 0.010228142607085206
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.8594239107952173,
+            "GT_band_RMS": 0.028070951178715855,
+            "band_error_RMS": 0.009662902325410595,
+            "orthogonal_band_RMS": 0.008953241927972241
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.0010323913062532108,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -1.0685103514028807e-05,
+          "orthogonal_band_RMS": -2.2153022949984377e-05
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 3,
+        "relative_GT_band_RMS_lower": 0.1,
+        "relative_GT_band_RMS_upper": 0.2,
+        "first": {
+          "contributing_sources": 423,
+          "pooled": {
+            "blocks": 75456,
+            "GT_projected_gain": 0.9428975674938733,
+            "GT_band_RMS": 0.048321788065220604,
+            "band_error_RMS": 0.012265136142272948,
+            "orthogonal_band_RMS": 0.011950726932921454
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9343936103784934,
+            "GT_band_RMS": 0.046783678622437194,
+            "band_error_RMS": 0.01130205661408176,
+            "orthogonal_band_RMS": 0.010948056490712068
+          }
+        },
+        "second": {
+          "contributing_sources": 423,
+          "pooled": {
+            "blocks": 75456,
+            "GT_projected_gain": 0.9422089161893671,
+            "GT_band_RMS": 0.048321788065220604,
+            "band_error_RMS": 0.01225203298101261,
+            "orthogonal_band_RMS": 0.0119295378501654
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9338195908932866,
+            "GT_band_RMS": 0.046783678622437194,
+            "band_error_RMS": 0.011288021696747481,
+            "orthogonal_band_RMS": 0.01092655147249582
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.0005740194852068559,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -1.4034917334279293e-05,
+          "orthogonal_band_RMS": -2.1505018216247743e-05
+        }
+      },
+      {
+        "condition": "iso12800-prior",
+        "bin": 4,
+        "relative_GT_band_RMS_lower": 0.2,
+        "relative_GT_band_RMS_upper": null,
+        "first": {
+          "contributing_sources": 425,
+          "pooled": {
+            "blocks": 142716,
+            "GT_projected_gain": 0.9795593748678103,
+            "GT_band_RMS": 0.07431834945419123,
+            "band_error_RMS": 0.012089422708190986,
+            "orthogonal_band_RMS": 0.01199359977345026
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9690254271384845,
+            "GT_band_RMS": 0.06772557935083964,
+            "band_error_RMS": 0.011386188706919022,
+            "orthogonal_band_RMS": 0.011225176364353667
+          }
+        },
+        "second": {
+          "contributing_sources": 425,
+          "pooled": {
+            "blocks": 142716,
+            "GT_projected_gain": 0.9790951626169272,
+            "GT_band_RMS": 0.07431834945419123,
+            "band_error_RMS": 0.012065653315220404,
+            "orthogonal_band_RMS": 0.011965211094606765
+          },
+          "source_balanced": {
+            "GT_projected_gain": 0.9686066563445569,
+            "GT_band_RMS": 0.06772557935083964,
+            "band_error_RMS": 0.011364484484526316,
+            "orthogonal_band_RMS": 0.01119899734351387
+          }
+        },
+        "second_minus_first": {
+          "GT_projected_gain": -0.0004187707939276031,
+          "GT_band_RMS": 0.0,
+          "band_error_RMS": -2.1704222392705808e-05,
+          "orthogonal_band_RMS": -2.617902083979634e-05
+        }
+      }
+    ],
+    "per_source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-analysis-queue-v1/broad-local-detail/per-source-v1.json",
+      "sha256": "dd456075299542f994dcb8c18a580499d21276eca3b3b8f0ce504d93ea9118cc"
+    },
+    "retained_inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-analysis-queue-v1/broad-local-detail/selected-inputs-v1.json",
+      "sha256": "3f1e3f2e0e0362f8aa3c83b9411f8e441ebdcdc3cdfdc603126361d04877c14a"
+    },
+    "GT_strata": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-control20k-analysis-queue-v1/broad-local-detail/GT-strata-v1.npz",
+      "sha256": "68234faf36a4defec3bd4d9c5aef9eec7048193d8ca02717bad229aa3bfa2927"
+    },
+    "native16_blocks_transformed": 2401875,
+    "maximum_explicit_cosine_vs_even_FFT_absolute_error": 1.8038359434618956e-14,
+    "array_files_checked": 3852,
+    "seconds": 68.77755287394393,
+    "new_neural_forwards": 0,
+    "new_noise_observations": 0,
+    "RAW_decodes": 0,
+    "scope": "Descriptive local linear-luminance detail audit of matched final20k single-view saved outputs. Three fixed noise priors/four CFAs; GT-only native16 DCT radial[1/8,1/3), RMS/mean bins0/.02/.05/.10/.20, mean .02-.9, band RMS>=1e-5, GT RGB inside[0,1]. Equal source weight after pooling four CFAs within source/condition. Unique block counts do not multiply independent material coverage by noise/CFA count. Coarse-boundary leakage and chance noise/GT correlation remain; no debiasing, SOTA, uncertainty or carrier-recovery claim."
+  },
+  "evidence": {
+    "path": "docs/results/full-corpus-control20k-detail-v1/evidence.tar.xz",
+    "sha256": "ce4b162efa89960198ab202dae9eaddd15863380a42bf0ddcfceb7cd6649a312"
+  },
+  "archive_member_sha256": {
+    "closed-analysis.json": "683c7d2631e24dc7a49bf2c347c7f59d94ff537aaf894479084d0b3cfdb28e92",
+    "analysis-plan.json": "0f312514d8e6a11abddf355db0934211a369d871367f6d6a591256d0a02c4f32",
+    "independent-photometry.json": "e5e9845205720d531090a7231f7efe73d26f70a4306aa83f77f12668fad7bf08",
+    "exact-native-archive.json": "f46cb8f36a6645f06116e492bdad5492804e65aa97cfb83bece762cb82053d4e",
+    "weak-band/result.json": "d44e2766839da0a97cbb7067d5ebcf4ce18a2a5e8a441a596a3c0477d35aa0ad",
+    "weak-band/per-source.json": "dd456075299542f994dcb8c18a580499d21276eca3b3b8f0ce504d93ea9118cc",
+    "weak-band/input-hashes.json": "3f1e3f2e0e0362f8aa3c83b9411f8e441ebdcdc3cdfdc603126361d04877c14a",
+    "weak-band/GT-strata.npz": "68234faf36a4defec3bd4d9c5aef9eec7048193d8ca02717bad229aa3bfa2927",
+    "src/audit_local_primary.py": "5386b0f3de0a305fe0cc18ba0ad0b6bb71e76adf4b39bec67c13ca9a65772b8d",
+    "src/audit_quality_archive.py": "e7f003d8ca942c3a198fe173b4cd8dcbeceef30f59895c60305d4501377d860b",
+    "src/diagnose_archive_local_detail.py": "2aae0c3e0f051a1d9ea2039cfac8256dc3d704ea384031b89b53526e5af3abbb",
+    "src/publish_detail.py": "f066173edce6c5fd3f41693157f0f5f74feb28cfaf746ae6f2e39cb581dd9949",
+    "worker.log": "10369f0645dd36ee1378c03cd6c02e1fe1748d1e794c8a7bb7a1191dfb6be463"
+  },
+  "complete": true
+}

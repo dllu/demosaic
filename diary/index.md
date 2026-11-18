@@ -24,6 +24,9 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
+The [weak-line pooling and 20k audit entry](2026-11-18-05-02-09-weak-line-pooling-and-20k-audit.md) records
+local support limits and completed photo-band evidence.
+
 The [Corpus 20k broad benchmark entry](2026-11-18-04-42-02-corpus-20k-complete-primary.md) binds the
 completed full427 score and camera panels to the updated history.
 

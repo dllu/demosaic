@@ -79,6 +79,10 @@ historical boards. Use these reports for the current completed comparisons:
   The shoulder check returns the sky, foliage and fence crops exactly.
   It makes a small change to the building crop. The existing coarse
   crossings stay coherent and the fine hardware stays soft.
+- [Pooled local line evidence](weak-line-pooled-evidence.md#standing-gfx100s-checks)
+  compares continuous, gap and edge fits on the same local-only 2k parent.
+  Sky, foliage and coarse fence match that parent exactly. Small building
+  corrections leave the fine hardware soft.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

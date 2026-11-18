@@ -185,4 +185,4 @@ the mixed log. Its source/log survive; v2 parses JSON records without changing
 training receipts. Independent numeric/native checks agree within1.42e-14 dB;
 all22 raw triplets are exact board subsets. The [full427 follow-up](full-corpus-control20k-primary.md)
 completes all three comparable panels and adds the 20k point to the PSNR
-history. The separate prediction audit and 96,075-block analysis are running.
+history. The separate prediction audit and 96,075-block analysis are complete.

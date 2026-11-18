@@ -9,6 +9,10 @@ local sampler delivers little of the missing detail. Neither standing GFX
 photo gains convincing new fine crossings.
 [Case receipts and native comparisons](results/multiple-raw-lines-v1/publication.json).
 
+The [longer pooling follow-up](weak-line-pooled-evidence.md) tests whether
+query evidence can support more of the ISO6400 wire once its geometry is
+available.
+
 ## Search and controls
 
 The search sees a 768×768 native synthetic frame with the 256×256 query and

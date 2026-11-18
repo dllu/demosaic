@@ -400,8 +400,9 @@ physical diagnostic, not a new training result or default.
 
 The [20k full427/known/unseen benchmark](full-corpus-control20k-primary.md)
 completes all three panels. The fixed photo mean gains 0.05071 dB over V120.
-The 20k audit and broader 96,075-block analysis, the
-[scene-arm benchmark](whole-scene-context-primary-admission.md), and the
+An independent pixel audit passes, and the broad 96,075-block analysis finds
+lower band error in all 15 measured cells. The
+[scene-arm benchmark](whole-scene-context-primary-admission.md) and the
 100k full427 photo panel are running separately.
 Concurrent physical CUDA input export and CPU reviews preserve
 training recipes/ownership, but wall time is not exclusive or claimed identical

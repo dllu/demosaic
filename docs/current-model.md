@@ -33,7 +33,7 @@ of it. These costs keep the completed control experimental.
 | [V131 ADC Malvar](v131-adc-projection.md) | Same learned weights; ADC-only photo +0.15074 dB over V131 and worst ADC color error reduced to 19.98 DN16 | Opt-in repair for zero shot/read conditioning. Weakest ADC band error +1.43%; positive-noise V131 output and camera costs remain unchanged |
 | [V132 RAW attention](v132-endpoint-quality.md) | Completed 20k ablation with every training input hash matched to V131 | Faint ADC −0.40978 dB versus V131, ordinary material quality essentially tied; no broad-panel or full-frame validation. Retained for reproduction |
 | [Scene-context2k arms](whole-scene-context-camera-review.md) | Scene/tile API, 64-source quiet-coarse gains. Spatial unseen-camera +0.01739 dB versus matched local-only. [Distant context changes foliage and coarse-fence output](scene-context-extent.md) | Unseen −0.05477 dB versus V120, known nearly ties local-only. Fine crossings remain incomplete. Full427 photos running |
-| [Corpus control20k](full-corpus-control20k-primary.md) | 37.09079 dB on the fixed photo panel, +0.05071 dB versus V120, with 420/427 source means improved. Known/unseen +0.03285/−0.04067 dB | Faint −0.02061 dB versus V120 on four retained materials. Fine-band error rises on three and the worst ADC mean error is 765.7 versus 55.5 DN16. Both GFX families retain missing fine crossings. [Native endpoint review](full-corpus-control20k-review.md) |
+| [Corpus control20k](full-corpus-control20k-primary.md) | 37.09079 dB on the fixed photo panel, +0.05071 dB versus V120, with 420/427 source means improved. Weakest ADC band error falls 1.79% across its contributing sources | Known/unseen +0.03285/−0.04067 dB. Fine-band error rises on three of four retained materials. Worst ADC mean error 765.7 versus 55.5 DN16 and missing fine crossings in both GFX families. [Native endpoint review](full-corpus-control20k-review.md) |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
 | [Long schedule at 50k](full-corpus-long50k-native.md) | Retained ordinary and shadow sRGB are +0.020/+0.044 dB over V120 | Faint fine-band RMS rises on all four materials versus V120. Bright orange ADC mean error reaches 1,490 DN16 in a BGGR spot check, with visible unevenness. Fine cab crossings still incomplete |
 | [Full-corpus 100k](full-corpus-long100k.md) | 1.6M examples and 90,778 ordinary photos. Faint ADC sRGB +0.575 dB versus V120 on four materials, with lower fine-band error on bark, fur and wood. Known CFA +0.02436 dB | Unseen CFA −0.03046 dB. Grass fine-band error and selected orange bias exceed V120. Fine cab crossings remain incomplete. Full427 photos collecting |
@@ -91,6 +91,11 @@ and some of the interrupted wire. Confirming both RAW shoulders of each
 ridge removes the measured false correction beside a step on the fresh
 panel. Most ISO6400 query output stays near the parent even with accurate
 exterior geometry. Both GFX scenes still have missing fine detail.
+
+[Longer local pooling](weak-line-pooled-evidence.md) raises the ISO6400
+continuous parallel-wire response from 6.3% to 36.6% with noisy exterior
+guides. Interrupted wires still have limited evidence at ISO6400, and
+ISO400 gap selection trades lower wire error for some false extension.
 
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab

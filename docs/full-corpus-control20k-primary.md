@@ -34,8 +34,10 @@ equally. All 3,162 case receipts, canonical input bindings and model
 identities were checked. An independent aggregation of the retained metric
 rows reproduced the four photographic means to within `1e-11 dB`. Camera
 means match the [published camera panels](full-corpus-control20k-camera-review.md)
-exactly. A separate NumPy audit of the prediction arrays and the broad
-weak-band analysis are running.
+exactly. The separate NumPy audit passed all 25,132 rows, with a largest
+individual photo sRGB PSNR discrepancy of 0.000169 dB and maximum
+measured-CFA camera discrepancy of 0.00000518 dB.
+[Complete audit and weak-band evidence](results/full-corpus-control20k-detail-v1/publication.json).
 
 | Fixed panel | V120 | Corpus 20k | Change |
 | --- | ---: | ---: | ---: |
@@ -50,6 +52,31 @@ The source bootstrap interval for the photographic sRGB gain is
 +0.01705 dB. The [per-condition table in the receipt](results/full-corpus-control20k-primary-v1/primary.json)
 retains exact values. V131's 37.08008 dB mean comes from its own audited
 V120 comparison on the same fixed panel.
+
+## Weak detail across the photo panel
+
+The matching [V131 analysis](v131-broad-primary.md#photo-score-gains-do-not-settle-weak-detail-quality)
+uses the same 5,124 source/noise/CFA observations and 96,075 native
+16×16 target blocks. The transform measures radial DCT frequencies
+`[1/8,1/3)` cycles per pixel over the native interior. Blocks are
+assigned to five bins using the exact target's relative band RMS.
+The weakest bin contributes 326 sources. CFA observations are pooled
+within source before source balancing.
+
+| Weakest-bin prior | Projected target gain, V120 → 20k | Band-error RMS, V120 → 20k | Error change |
+| --- | ---: | ---: | ---: |
+| ADC-only | 0.946832 → 0.943291 | 0.000948336 → 0.000931396 | −1.786% |
+| ISO100 | 0.785711 → 0.787451 | 0.001414642 → 0.001408232 | −0.453% |
+| ISO12800 | 0.364763 → 0.364590 | 0.003181508 → 0.003179724 | −0.056% |
+
+Band error falls in all 15 prior and strength cells. The ADC-only
+weakest-bin improvement is larger than V131's 0.409% with the same
+V120 reference. Its projection on the exact signal also falls more
+than V131's, which shows a trade between lower error and slight
+attenuation. At ISO12800 the weakest projection remains near 0.365
+and the error change is small. This measurement covers one fine
+frequency band. The native fine fence remains a separate check.
+[All bins, source rows and masks](results/full-corpus-control20k-detail-v1/publication.json).
 
 ## Native detail and color
 
