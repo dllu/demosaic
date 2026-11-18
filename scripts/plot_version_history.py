@@ -13,9 +13,12 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 MODEL_SELECTION = REPO / "configs/current-model.json"
 COVERAGE_NOTE = (
-    "**Coverage reviewed November 18, 2026.** The larger-corpus 20k control now has "
-    "[all three comparable panels](full-corpus-control20k-primary.md). "
-    "The 100k endpoint has completed camera scores and its full427 panel is collecting. "
+    "**Coverage reviewed November 18, 2026.** Corpus 20k and Corpus 100k have "
+    "completed the fixed photo and both camera panels. "
+    "Corpus 100k gains 0.20739 dB on the 427-photo panel over V120, with "
+    "a 0.03046 dB unseen-camera loss. "
+    "[Corpus 20k](full-corpus-control20k-primary.md) · "
+    "[Corpus 100k](full-corpus-long100k.md#broader-evaluation). "
     "Both matched scene 12k endpoints have [completed fixed camera panels](expanded-scene-12000-cameras.md). "
     "The matched near-ADC 800-update endpoints also have [completed camera panels](near-adc-bridge-cameras.md). "
     "All four full427 scores are pending. "
@@ -347,17 +350,56 @@ def collect():
     return output, evidence
 
 
+def attach_corpus_photo(point, path, arm, camera_models):
+    """Attach a source-balanced fixed photo score with its verified collector."""
+    photo = json.loads(path.read_text())
+    archive = REPO / photo["archive"]["path"]
+    assert photo["all_complete"] and digest(archive) == photo["archive"]["sha256"]
+    with tarfile.open(archive) as bundle:
+        result_bytes = bundle.extractfile("collector-result.json").read()
+    assert hashlib.sha256(result_bytes).hexdigest() == photo["source_result"]["sha256"]
+    primary = json.loads(result_bytes)
+    assert primary["all_complete"] and primary["kind"] == "full" and primary["cases"] == 3162
+    assert photo["photo_sources"] == len(photo["source_averages"]) == 427
+    assert (photo["noise_conditions"], photo["CFAs"], photo["observations_per_model"]) == (7, 4, 11956)
+    assert primary["models"] == photo["models"]
+    for label in (arm, "V120"):
+        assert photo["models"][label]["checkpoint"] == camera_models[label]["checkpoint"]
+        row = next(
+            row for row in primary["summaries"]["photo"]["overall"]
+            if row["model"] == label and row["kind"] == "photo"
+        )
+        metric = row["metrics"]["srgb_psnr"]
+        assert metric["count"] == 427
+        assert math.isclose(
+            metric["mean"], photo["source_balanced"][label]["srgb_psnr"], rel_tol=0, abs_tol=1e-11
+        )
+        if label == arm:
+            point["photo_srgb_PSNR"] = metric["mean"]
+    point["inference_policy"] = "EMA, CPU IEEE FP32, exact canonical inputs"
+    point["evaluation_metadata"]["photo"] = {
+        "photo_sources": 427,
+        "observations_per_model": photo["observations_per_model"],
+        "conditions": 7,
+        "CFAs": 4,
+        "canonical_inputs_sha256": photo["canonical_inputs"]["sha256"],
+        "precision": "CPU IEEE FP32",
+    }
+    return photo, archive
+
+
 def collect_corpus_endpoints():
     """Bind completed photo and camera panels for the named corpus endpoints."""
     directory = REPO / "docs/results"
     short_camera = directory / "full-corpus-control20k-camera-v1/summary.json"
     short_photo = directory / "full-corpus-control20k-primary-v1/primary.json"
+    long_photo = directory / "full-corpus-long100k-primary-v1/primary.json"
     long_camera = directory / "full-corpus-long100k-camera-v1/publication.json"
     long_training = directory / "full-corpus-long100k-training-v1/publication.json"
     short, long, training = (
         json.loads(path.read_text()) for path in (short_camera, long_camera, long_training)
     )
-    assert long["complete_camera_panels"] and not long["complete_full427"]
+    assert long["complete_camera_panels"]
     short_arm, long_arm = "scale-control20k", "scale-long100k"
     short_model, long_model = short["models"][short_arm], training["model"]
     assert all(model["weights"] == "EMA" for model in (short_model, long_model))
@@ -385,7 +427,7 @@ def collect_corpus_endpoints():
         "step": long_model["step"],
         "checkpoint_sha256": long_model["checkpoint"]["sha256"],
         "report": "full-corpus-long100k.md",
-        "source": str(long_camera.relative_to(directory)),
+        "source": str(long_photo.relative_to(directory)),
         "evaluation_metadata": {},
     }
     short_panels = []
@@ -417,40 +459,16 @@ def collect_corpus_endpoints():
                 "native_crops_per_model": scenes * 18,
                 "precision": "CPU IEEE FP32 with measured-CFA reference",
             }
-    photo = json.loads(short_photo.read_text())
-    archive = REPO / photo["archive"]["path"]
-    assert digest(archive) == photo["archive"]["sha256"]
-    with tarfile.open(archive) as bundle:
-        result_bytes = bundle.extractfile("collector-result.json").read()
-    assert hashlib.sha256(result_bytes).hexdigest() == photo["source_result"]["sha256"]
-    primary = json.loads(result_bytes)
-    assert primary["all_complete"] and primary["kind"] == "full" and primary["cases"] == 3162
-    assert photo["photo_sources"] == len(photo["source_averages"]) == 427
-    assert (photo["noise_conditions"], photo["CFAs"], photo["observations_per_model"]) == (7, 4, 11956)
-    assert primary["models"] == photo["models"]
-    for arm in (short_arm, "V120"):
-        assert photo["models"][arm]["checkpoint"] == short["models"][arm]["checkpoint"]
-        row = next(
-            r for r in primary["summaries"]["photo"]["overall"]
-            if r["model"] == arm and r["kind"] == "photo"
-        )
-        metric = row["metrics"]["srgb_psnr"]
-        assert metric["count"] == 427
-        assert math.isclose(
-            metric["mean"], photo["source_balanced"][arm]["srgb_psnr"], rel_tol=0, abs_tol=1e-11
-        )
-        if arm == short_arm:
-            short_point["photo_srgb_PSNR"] = metric["mean"]
-    assert photo["known_unseen_camera_PSNR"] == short["measured_CFA_PSNR"]
-    short_point["inference_policy"] = "EMA, CPU IEEE FP32, exact canonical inputs"
-    short_point["evaluation_metadata"]["photo"] = {
-        "photo_sources": 427,
-        "observations_per_model": photo["observations_per_model"],
-        "conditions": 7,
-        "CFAs": 4,
-        "canonical_inputs_sha256": photo["canonical_inputs"]["sha256"],
-        "precision": "CPU IEEE FP32",
-    }
+    short_result, short_archive = attach_corpus_photo(short_point, short_photo, short_arm, short["models"])
+    long_result, long_photo_archive = attach_corpus_photo(
+        long_point, long_photo, long_arm, long_panels["known"]["models"]
+    )
+    assert short_result["canonical_inputs"] == long_result["canonical_inputs"]
+    assert short_result["known_unseen_camera_PSNR"] == short["measured_CFA_PSNR"]
+    for stage in ("known", "unseen"):
+        assert long_result["known_unseen_camera_PSNR"][stage] == {
+            arm: long["results"][stage]["overall"][arm]["sensor_psnr"] for arm in ("V120", long_arm)
+        }
     evidence = [
         {
             "path": str(path.relative_to(REPO)),
@@ -460,12 +478,14 @@ def collect_corpus_endpoints():
         }
         for point, path in (
             (short_point, short_photo),
-            (short_point, archive),
+            (short_point, short_archive),
             (short_point, short_camera),
             *((short_point, path) for path in short_panels),
             (long_point, long_camera),
             (long_point, long_archive),
             (long_point, long_training),
+            (long_point, long_photo),
+            (long_point, long_photo_archive),
         )
     ]
     return [short_point, long_point], evidence
@@ -590,11 +610,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v4.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v5.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v3.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v4.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v3.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v2.json"
         if not destination.exists():

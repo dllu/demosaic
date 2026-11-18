@@ -21,8 +21,11 @@ The completed 100k continuation processed 1.6 million target slots in
 visited all 90,778 sources five or six times. It improves the four
 retained faint ADC materials by 0.575 dB in mean sRGB PSNR, with
 color and unseen-camera costs and missing fine GFX crossings.
+The fixed 427-photo gain is 0.20739 dB over V120 and 0.15668 dB
+over the 20k control. Its unseen measured-CFA mean falls by
+0.03046 dB versus V120.
 The matched scene continuations visited 24,000 distinct photos per arm
-from a 90,692-photo pool. The broad photo evaluations are collecting.
+from a 90,692-photo pool. Their broad photo evaluations are collecting.
 [100k training and quality](full-corpus-long100k.md) ·
 [Matched whole-scene continuation](expanded-scene-spatial12k.md).
 

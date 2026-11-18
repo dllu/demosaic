@@ -2,19 +2,21 @@
 
 **Both corpus training runs are complete.** The [100k endpoint](full-corpus-long100k.md)
 used 1.6 million target slots and visited all 90,778 ordinary photos at least
-five times. It improves faint ADC on the retained four-material panel, with
-small changes versus 86k and no convincing new fine GFX crossings.
+five times. It gains 0.20739 dB versus V120 and 0.15668 dB versus
+the short control on the fixed 427-photo benchmark. Unseen-camera
+performance and selected clipped colors remain worse than V120.
+Fine GFX crossings remain incomplete.
 
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
 improve slightly. Both protected fence families still lack convincing new fine
-crossings. V120 remains recommended. The [full endpoint benchmark](full-corpus-primary-admission.md)
-is running, with subsequent broader weak-band analysis queued. The
+crossings. The [full endpoint benchmark](full-corpus-control20k-primary.md)
+and scope-specific weak-band analysis are complete. The
 [complete camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
 known/lose0.04067 unseen. The [complete color panel](full-corpus-control20k-color-review.md)
 finds worst ADC bias765.7 DN16 versus V12055.5,largely repaired by physical
-Malvar/bin correction. Standard broad photo results remain pending. The separate
+Malvar/bin correction. The separate
 [427-photo faint ADC suite](full427-faint-adc.md) is complete. Projection lowers
 the weakest-band Corpus20k error from 2.594 to 1.901 DN16, essentially matching
 projected V120. The protocol uses original-source masks and four-CFA,
@@ -38,11 +40,10 @@ convincing new fine crossings.
 The 100k observer verified the completed checkpoint and all
 220 saved V120/86k native predictions across the 110 fixed cases. The
 retained-panel measurements and actual native inspection are complete.
-The fixed 3,162-case CPU benchmark uses matched V120 controls. Both
-[camera panels](full-corpus-long100k.md#broader-evaluation) are complete,
-with +0.02436 dB known and −0.03046 dB unseen versus V120. The
-fixed full427 photo panel is collecting.
-[Bound review queue and preflight receipts](results/full-corpus-long100k-review-queue-v1/publication.json).
+The [fixed 3,162-case CPU benchmark](full-corpus-long100k.md#broader-evaluation)
+verifies the retained V120 controls. It gives 37.24747 dB on 427 photos,
++0.02436 dB on known cameras and −0.03046 dB on unseen cameras versus V120.
+[Completed receipts and source audit](results/full-corpus-long100k-primary-v1/primary.json).
 
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
 [64-source study](whole-scene-context-development64.md) and
@@ -113,8 +114,9 @@ The complete20k raw/EMA/Adam/RNG checkpoint is
 Domain batches:10,046 Commons/4,965 native/4,989 paired. Native/paired actual
 distinct IDs remain unrecorded. Reported retained-loop windows total12,490.150s;
 attempted controller phases total20,104.376s including stalls/replay/concurrency.
-Training completion, targeted numerical/native completion and pending broad
-scores are distinguished in the [endpoint report](full-corpus-control20k-review.md).
+Training, targeted numerical/native and fixed broad completion are recorded
+in the [endpoint review](full-corpus-control20k-review.md) and
+[fixed benchmark](full-corpus-control20k-primary.md).
 
 ### Long-schedule 20k milestone
 
@@ -402,8 +404,9 @@ The [20k full427/known/unseen benchmark](full-corpus-control20k-primary.md)
 completes all three panels. The fixed photo mean gains 0.05071 dB over V120.
 An independent pixel audit passes, and the broad 96,075-block analysis finds
 lower band error in all 15 measured cells. The
-[scene-arm benchmark](whole-scene-context-primary-admission.md) and the
-100k full427 photo panel are running separately.
+[100k fixed benchmark](full-corpus-long100k.md#broader-evaluation) is
+complete. The [scene-arm benchmark](whole-scene-context-primary-admission.md)
+is collecting.
 Concurrent physical CUDA input export and CPU reviews preserve
 training recipes/ownership, but wall time is not exclusive or claimed identical
 to execution without concurrent activity.

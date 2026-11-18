@@ -1,12 +1,14 @@
 # Full-corpus 100k endpoint
 
-The 100k EMA gains **0.575 dB** in faint ADC sRGB PSNR versus V120 on
-the four retained materials and **0.006 dB** versus the 86k EMA.
-Faint bark, fur and wood have lower fine-band error than V120. Grass
-still has higher error, the orange flat-field spot check has more
-mean color bias, and neither standing GFX comparison shows convincing
-new fine crossings. **V120 Small remains the general recommendation.**
-[Audited native comparisons](results/full-corpus-long100k-native-v1/publication.json).
+The 100k EMA scores **37.24747 dB** on the fixed 427-photo panel,
+**+0.20739 dB versus V120** and **+0.15668 dB versus Corpus 20k**.
+The known measured-CFA score also improves over V120. The unseen
+score falls by 0.03046 dB, selected clipped colors regress and fine
+cab crossings remain incomplete. On the four retained faint ADC
+materials, the mean improves by 0.575 dB versus V120 and 0.006 dB
+versus 86k.
+[Fixed-panel receipts](results/full-corpus-long100k-primary-v1/primary.json) ·
+[Audited target and GFX comparisons](results/full-corpus-long100k-native-v1/publication.json).
 
 ## Training and corpus coverage
 
@@ -142,6 +144,58 @@ The common processed cab display uses exposure ×16.
 
 ## Broader evaluation
 
+The fixed three-panel benchmark verified all 3,162 case receipts
+with the same retained camera inputs, CPU IEEE FP32 and EMA weights.
+The two controls use the same physical data and scoring recipe.
+The 427-photo mean gives every photo equal weight after averaging
+seven noise and exposure conditions and four Bayer orders. All
+427 retained V120 source means reproduce the published Corpus 20k
+comparison. The independently aggregated photo scores agree with
+the collector to within `1e-11 dB`.
+[Completed primary result](results/full-corpus-long100k-primary-v1/primary.json) ·
+[Exact input and recovery archive](results/full-corpus-long100k-primary-v1/primary-evidence.tar.xz).
+
+| Fixed panel mean, dB | V120 | Corpus 20k | Corpus 100k |
+| --- | ---: | ---: | ---: |
+| Photo sRGB PSNR, 427 sources | 37.04008 | 37.09079 | 37.24747 |
+| Photo camera-linear PSNR, 427 sources | 39.95386 | 39.98604 | 40.10338 |
+| Known measured-CFA PSNR, four scenes | 54.31272 | 54.34557 | 54.33708 |
+| Unseen measured-CFA PSNR, five scenes | 54.00872 | 53.96805 | 53.97826 |
+
+The photo gain over V120 has a source bootstrap interval of
+**+0.19632 to +0.21824 dB**. The 100k endpoint improves 423 of
+427 sources versus V120 and 424 versus Corpus 20k. All seven
+condition means improve over V120. ADC-only leads at +0.46300 dB.
+The ISO12800 and shadow means gain +0.08510 and +0.06753 dB.
+The [repeat-noise review](full-corpus-faint-noise.md) finds
+much smaller changes to recovered true fine structure on its
+separate high-noise panel. A fixed photo fine-band audit is
+running on the retained canonical predictions.
+
+### Fixed-photo native evidence
+
+Both triplets are unresized 160×160 crops at `[48,48,160,160]`
+inside the native 256-pixel RGGB query. Each uses noisy Malvar,
+the Corpus 100k EMA quoted above, and the exact benchmark target.
+The median source gain example is a railway scene. It uses ISO12800
+shot/read `0.00256 / 2.62144e-5` and display exposure ×1. The
+rails remain distinct while grass and foliage stay softer than GT.
+[Railway photo by mattbuck, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Birmingham_MMB_07_Grand_Junction_43366.jpg).
+
+![Railway, noisy Malvar, Corpus 100k EMA and exact benchmark target](images/full-corpus-long100k-primary-v1/2047006d0bc8-iso12800-prior-triplet.png)
+
+The largest source-average regression is a yellow dahlia.
+Its worst RGGB condition uses highlight shot/read
+`8e-5 / 2.56e-8` and display exposure ×0.25. The 100k petals
+are much brighter than the exact target. That query scores
+23.71 dB versus 28.87 dB for V120 and 26.28 dB for Corpus 20k.
+[Dahlia photo by Dominicus Johannes Bergsma, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:Dahlia_%27Moonfire%27_005.JPG) ·
+[Native comparison metadata, sources and hashes](results/full-corpus-long100k-primary-v1/native-viewing.json).
+
+![Dahlia highlights, noisy Malvar, Corpus 100k EMA and exact benchmark target](images/full-corpus-long100k-primary-v1/08c294851fc8-highlights-triplet.png)
+
+### Fixed camera evidence
+
 The fixed known and unseen camera panels are complete. The measured
 CFA score uses the original reference mask and 32-pixel border, with
 nine crops per capture, two captures per scene and equal scene
@@ -149,11 +203,6 @@ weights. The audit recomputed all 324 crop/model rows across 54 batches
 and matched the saved values exactly. All nine first-capture native
 comparison boards were viewed at 160×160. The independent AHD
 reference is qualitative.
-
-| Measured-CFA PSNR, dB | V120 | Short 20k | Long 100k |
-| --- | ---: | ---: | ---: |
-| Known, four scenes | 54.31272 | 54.34557 | 54.33708 |
-| Unseen, five scenes | 54.00872 | 53.96805 | 53.97826 |
 
 The long run gains **0.02436 dB** on the known panel and loses
 **0.03046 dB** on the unseen panel versus V120. D60-2 contributes
@@ -165,9 +214,6 @@ lettering and quiet shadow transitions.
 [Native camera manifest](images/full-corpus-long100k-camera-v1/manifest.json) ·
 [Short 20k comparison](full-corpus-control20k-camera-review.md).
 
-The full 427-photo panel is collecting. Its benchmark uses IEEE FP32
-on the CPU with matched V120 controls. V131 remains the latest
-endpoint with all three comparable completed broad panels.
 [Primary preflight and start receipt](results/full-corpus-long100k-training-v1/primary-start.json) ·
 [Review admission](results/full-corpus-long100k-review-queue-v1/publication.json) ·
 [Verified benchmark restart](results/primary-memory-resume-20261118-v1/publication.json) ·

@@ -1,0 +1,364 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-review-v1/render-fixed-photos.py",
+    "sha256": "3dfef4b7401a5048f2dcb6237cd8bd2045ded6bd3109d041b1ac871303e8fb69"
+  },
+  "primary": {
+    "path": "/home/dllu/proj/demosaic/docs/results/full-corpus-long100k-primary-v1/primary.json",
+    "sha256": "54c733a0b129b417624eae71cb4294fdc1d37f7032d05580046bda70c1d11416"
+  },
+  "boards": [
+    {
+      "id": "2047006d0bc8-iso12800-prior",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1.0,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "title": "File:Birmingham MMB 07 Grand Junction 43366.jpg",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Birmingham_MMB_07_Grand_Junction_43366.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/22/Birmingham_MMB_07_Grand_Junction_43366.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "mattbuck (category)",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "attribution": null,
+        "credit": "Own work by mattbuck.",
+        "sha1": "2047006d0bc8fd6657563d506665ee4567327b0b",
+        "sha1_hex": "2047006d0bc8fd6657563d506665ee4567327b0b",
+        "download_path": "images/20/47/2047006d0bc8fd6657563d506665ee4567327b0b.jpg",
+        "width": 3249,
+        "height": 2222,
+        "id": "2047006d0bc8fd6657563d506665ee4567327b0b",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/20/2047006d0bc8fd6657563d506665ee4567327b0b.npy",
+        "shape": [
+          277,
+          406,
+          3
+        ],
+        "cache_sha256": "f2df8b41cc65cb8533ec5d29745327c828b851619d496d8c255578ac834f76b5"
+      },
+      "source_manifest": {
+        "path": "/mnt/external/demosaic/evaluation/manifests/common-8192-44732-val-v1.jsonl",
+        "sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d"
+      },
+      "selection": "median source gain",
+      "source_average_gain_dB": 0.18954944610595703,
+      "fixed_query_scores": {
+        "V120": 32.814231872558594,
+        "scale-long100k": 32.87158203125,
+        "scale-control20k": 32.83213806152344
+      },
+      "CFA": "RGGB",
+      "noise": {
+        "name": "iso12800-prior",
+        "shot": 0.00256,
+        "read": 2.62144e-05,
+        "exposure": 1.0
+      },
+      "target": {
+        "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-077.npy",
+        "sha256": "d8fd756a430ec74c7472d5647b86476700129bbdb0812b383eae498ca26e8d08"
+      },
+      "fixed_native_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-02168.npz",
+        "sha256": "1825057cf2b62a3bea4dcc4f5f2568d4d33aef3b7543fb6df32595e31e8cd535"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "reference_checkpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "scale-long100k": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+        },
+        "scale-control20k": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+          "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+        }
+      },
+      "weights": "EMA",
+      "precision": "CPU IEEE FP32",
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-long100k-primary-v1/2047006d0bc8-iso12800-prior-comparison.png",
+          "sha256": "f96d89438049df39a882a15746d47953db65e7c9c33b440d1311fd6458c51832"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 20k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-long100k-primary-v1/2047006d0bc8-iso12800-prior-triplet.png",
+          "sha256": "96e6334235716aead7fae61def0d7a70fd211ba623492399a671e6c19356dbf5"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "actual_native_viewing": "The rail edges and large foliage remain clear. The 100k reconstruction looks close to V120 and Corpus 20k. The brighter grassy foreground and fine leaves remain substantially softer than exact GT."
+    },
+    {
+      "id": "08c294851fc8-highlights",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 0.25,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "title": "File:Dahlia 'Moonfire' 005.JPG",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Dahlia_'Moonfire'_005.JPG",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Dahlia_%27Moonfire%27_005.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Dominicus Johannes Bergsma",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "attribution": null,
+        "credit": "Own work",
+        "sha1": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "sha1_hex": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "download_path": "images/08/c2/08c294851fc8999cb608dc7a5f53d28767620f49.jpg",
+        "width": 2352,
+        "height": 2659,
+        "id": "08c294851fc8999cb608dc7a5f53d28767620f49",
+        "split": "val",
+        "bin_factor": 8,
+        "color_space": "linear-sRGB",
+        "dtype": "uint16",
+        "cache": "/mnt/external/demosaic/commons-v1/images/08/08c294851fc8999cb608dc7a5f53d28767620f49.npy",
+        "shape": [
+          332,
+          294,
+          3
+        ],
+        "cache_sha256": "9cd5ffd905bacb3c0d67738b3e9a427c6bb034fa3b8bdde4e7f32ef747ef2d50"
+      },
+      "source_manifest": {
+        "path": "/mnt/external/demosaic/evaluation/manifests/common-8192-44732-val-v1.jsonl",
+        "sha256": "7cc76f460019582eeec519b332e9f9f53e030bdf579e2f27b915916a741cce0d"
+      },
+      "selection": "lowest source-average change",
+      "source_average_gain_dB": -0.45838090351649896,
+      "fixed_query_scores": {
+        "V120": 28.87403106689453,
+        "scale-long100k": 23.712444305419922,
+        "scale-control20k": 26.283767700195312
+      },
+      "CFA": "RGGB",
+      "noise": {
+        "name": "highlights",
+        "shot": 8e-05,
+        "read": 2.56e-08,
+        "exposure": 4.0
+      },
+      "target": {
+        "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-023.npy",
+        "sha256": "7844b11d142c3180df14cad5db5cfd68fc8585d3cd263be00228351ae83029bd"
+      },
+      "fixed_native_input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00664.npz",
+        "sha256": "b260d6efab463cc45c398ca75e3dddc1f1d7c4ee6859dd1b9647aa8ccd580615"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "reference_checkpoints": {
+        "V120": {
+          "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+          "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+        },
+        "scale-long100k": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+        },
+        "scale-control20k": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/control20k/phase-013001-020000/end.pt",
+          "sha256": "633053370bdfb455d738ce0e3af686cb61e8dcac7c501954eb3b2293738a3795"
+        }
+      },
+      "weights": "EMA",
+      "precision": "CPU IEEE FP32",
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-long100k-primary-v1/08c294851fc8-highlights-comparison.png",
+          "sha256": "b6439cb51d64bb6bddb31524390ff366a386f5e78e5d47fcebc30fa37d977933"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 20k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-long100k-primary-v1/08c294851fc8-highlights-triplet.png",
+          "sha256": "3c5c10e2fb9ee22b6cfc3b5151c230f31cc9edeba6332b95b3affc5d7e1aee46"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "actual_native_viewing": "All denoisers render the clipped flower petals brighter than the exact benchmark target. Corpus 100k has the strongest overall error in this retained condition. Fine petal structure and the darker surround still differ visibly."
+    }
+  ],
+  "native_comparisons_viewed": 2,
+  "native_triplets_viewed": 2
+}

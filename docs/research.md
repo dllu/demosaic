@@ -267,7 +267,7 @@ has repeatedly come with extra flat-region error or false color. The
 | [Global context and production review](weak-detail-global-context-production-review-2026-11-16.md) | November 16 evidence snapshot, scene-context ideas and runtime plan |
 | [Training scale and pipeline review](training-scale-pipeline-review-2026-11-17.md) | November 17 corpus coverage, training budgets, batch size and pipeline proposals |
 | [Whole-scene context test](whole-scene-context-next-test.md), [64-source review](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | All3 matched2k arms,64-source/intervention study and both camera panels complete/native-viewed. Small quiet gains/partial unseen repair versus local-only; unseen remains below V120 and fine crossings missing. Full427 photos collecting |
-| [Full-corpus scaling](full-corpus-scaling.md), [20k review](full-corpus-control20k-review.md), [100k review](full-corpus-long100k.md) | Both training runs and scoped native reviews complete. 100k retains faint low-noise gains, with small improvement over 86k and no convincing new fine GFX crossings. [20k camera panels](full-corpus-control20k-camera-review.md) known +0.03285/unseen−0.04067 dB. Both broad photo evaluations are collecting |
+| [Full-corpus scaling](full-corpus-scaling.md), [20k review](full-corpus-control20k-primary.md), [100k review](full-corpus-long100k.md) | Both fixed broad evaluations and native reviews are complete. 100k gives +0.20739 dB on 427 photos and −0.03046 dB on unseen measured CFA versus V120. Fine GFX crossings remain incomplete |
 
 These are research proposals and bounded experiment conclusions. They do not
 establish broad state-of-the-art quality. Dates describe the source review;
