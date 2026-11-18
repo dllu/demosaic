@@ -24,6 +24,9 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
+The [multiple RAW line guides entry](2026-11-18-04-33-53-multiple-raw-line-guides.md) records the
+competing-line experiments and both standing camera reviews.
+
 The [opposing RAW donor entry](2026-11-17-18-11-15-bracket-phase-geometry.md)
 records the lower-noise gains, mismatched-donor check and native review.
 The [donor geometry and 50k ADC entry](2026-11-17-17-50-19-donor-phase-geometry-and-50k-adc.md)

@@ -35,6 +35,7 @@ are sparse and both standing photographs return their local parents.
 
 | Question | Finding | Evidence |
 | --- | --- | --- |
+| Can competing exterior lines support weak local reconstruction? | Matching guides recover 100.53% of the continuous and 35.24% of the interrupted ISO400 crossing increments. A RAW shoulder check removes the false correction beside a step on the fresh panel. Accurate exterior geometry yields little local delivery at ISO6400. Both GFX families viewed | [Multi-line RAW pilots](multiple-raw-line-guides.md) |
 | How did the full-model continuation perform? | V131 improves broad photo PSNR by 0.04000 dB, with unseen-camera and severe ADC-color costs. Fixed ADC projection repairs color with a weak-band tradeoff | [Broad V131](v131-broad-primary.md), [ADC option](v131-adc-projection.md) |
 | Does local RAW attention help at the full budget? | V132 at 20k loses 0.40978 dB faint ADC versus V131; ordinary detail is tied. The early 1k advantage did not persist | [Matched training](raw-spatial-continuation.md), [V132 endpoint](v132-endpoint-quality.md) |
 | Do shared edges or better carrier allocation solve weak detail? | Shared-edge training is quieter but weakens response. Competing orientations help some weak sectors and hurt strong ones. Complementary proposals give a small lower-noise gain | [Shared-edge](shared-edge-comparison.md), [competing](competing-edge-response.md), [complementary](complementary-edge-response.md) |

@@ -84,6 +84,13 @@ Its short support check lowers added gap RMS from 8.70 to 2.40 DN16
 versus 64-pixel fits. It still attenuates some true wire ends and
 returns the local parent on both standing GFX families.
 
+The [multi-line RAW pilot](multiple-raw-line-guides.md) extends that fit to
+competing exterior ridges. It recovers much more of the ISO400 continuous wire
+and some of the interrupted wire. Confirming both RAW shoulders of each
+ridge removes the measured false correction beside a step on the fresh
+panel. Most ISO6400 query output stays near the parent even with accurate
+exterior geometry. Both GFX scenes still have missing fine detail.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

@@ -8,6 +8,9 @@ smaller at ISO6400. Both standing GFX scenes fall back to their local
 parent because the exterior contains no accepted isolated line.
 [Executed trials and native crops](results/isolated-raw-line-v1/publication.json).
 
+The [multi-line follow-up](multiple-raw-line-guides.md) tests competing
+exterior ridges, interrupted wires and a misleading guide beside a step.
+
 ## Exterior proposal and query evidence
 
 The [earlier context intervention](scene-wire-gap.md) only changed what

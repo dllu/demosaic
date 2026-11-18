@@ -74,6 +74,11 @@ historical boards. Use these reports for the current completed comparisons:
   finds no eligible isolated ridge in any of the four main contexts.
   Both fits return the local-only 2k parent exactly. All four views
   retain the smooth sky, coherent coarse fence, and soft fine detail.
+- [Multiple RAW line guides](multiple-raw-line-guides.md#standing-gfx100s-scenes)
+  compares two surround searches on the same local-only 2k parent.
+  The shoulder check returns the sky, foliage and fence crops exactly.
+  It makes a small change to the building crop. The existing coarse
+  crossings stay coherent and the fine hardware stays soft.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The
