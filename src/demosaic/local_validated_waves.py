@@ -338,6 +338,21 @@ def _validate_guide_envelopes(value, shape, guide, bins, adaptive, shared_shape,
     return envelopes
 
 
+def _validate_guide_profiles(value, shape, guide, bins, incompatible):
+    if value is None:
+        return None
+    profiles = tuple(None if p is None else np.asarray(p, np.float64) for p in value)
+    if (
+        len(profiles) != 2
+        or not bins
+        or guide is None
+        or incompatible
+        or any(p is not None and (p.shape != shape or not np.isfinite(p).all()) for p in profiles)
+    ):
+        raise ValueError("Require two optional native profiles and fixed whole-direction guides")
+    return profiles
+
+
 def phase_gradient_in_annulus(frequency, hessian, shape):
     """Conservatively bound the frequency norm throughout a native rectangle."""
     hy, hx = (np.asarray(shape, dtype=np.float64) - 1) / 2
@@ -677,6 +692,7 @@ def fit_local_candidate(
     donor_phase_templates=None,
     phase_edge_side=None,
     guide_envelopes=None,
+    guide_profiles=None,
 ):
     """Fit query nuisance, phase and amplitude on the discovery fold.
 
@@ -719,6 +735,17 @@ def fit_local_candidate(
         phase_drift_search or recenter_phase_guides,
         shared_phase_shape,
         templates,
+    )
+    profiles = _validate_guide_profiles(
+        guide_profiles,
+        raw.shape,
+        guide_frequencies_xy,
+        phase_bins,
+        shared_phase_shape
+        or templates is not None
+        or phase_edge_side == "profiles"
+        or recenter_phase_guides
+        or phase_drift_search,
     )
     initial = fit_candidate(
         raw,
@@ -899,6 +926,11 @@ def fit_local_candidate(
     if envelopes is not None:
         waves = [
             wave * envelope.reshape(-1, 1) for wave, envelope in zip(waves, envelopes, strict=True)
+        ]
+    if profiles is not None:
+        waves = [
+            wave if profile is None else profile.reshape(-1, 1)
+            for wave, profile in zip(waves, profiles, strict=True)
         ]
     indices, noise_fields = [], []
     for color in range(3):
@@ -1377,11 +1409,13 @@ def restore_local_waves(
     bright_cross_edge_weight=0.0,
     active_guide_directions=None,
     guide_envelopes=None,
+    guide_profiles=None,
 ):
     """Restore crossed-fold RAW waves with optional input-only guide envelopes.
 
     An envelope scales its direction's basis in both validation and final refit.
     It must be fixed independently of the query evidence used by either fold.
+    A fixed profile replaces its direction's basis and includes any envelope.
     """
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
     if (
@@ -1522,6 +1556,19 @@ def restore_local_waves(
         shared_phase_shape,
         templates,
     )
+    profiles = _validate_guide_profiles(
+        guide_profiles,
+        (h, w),
+        guide_frequencies_xy,
+        phase_bins,
+        shared_phase_shape
+        or templates is not None
+        or phase_edge_side == "profiles"
+        or compare_phase_averages
+        or compare_phase_agreement
+        or recenter_phase_guides
+        or phase_drift_search,
+    )
     guide = {} if guide_frequencies_xy is None else {"guide_frequencies_xy": guide_frequencies_xy}
     if phase_bins:
         guide["phase_bins"] = phase_bins
@@ -1621,6 +1668,11 @@ def restore_local_waves(
                 }
             if envelopes is not None:
                 patch_guide = {**patch_guide, "guide_envelopes": envelopes[:, *region]}
+            if profiles is not None:
+                patch_guide = {
+                    **patch_guide,
+                    "guide_profiles": tuple(None if p is None else p[region] for p in profiles),
+                }
             candidates = [
                 fit_local_candidate(
                     tile, layout, mask, shot=shot, read=read, config=config, **patch_guide
@@ -2012,6 +2064,7 @@ def restore_local_waves(
         ),
         **guide,
         **({"guide_envelopes_applied": True} if envelopes is not None else {}),
+        **({"guide_profiles_applied": [p is not None for p in profiles]} if profiles else {}),
         **(
             {"bright_cross_edge_weight": float(bright_cross_edge_weight)}
             if bright_cross_edge_weight

@@ -282,6 +282,12 @@ companion uses the estimated curvature. Applying the curvature to both
 directions raises increment error. The ISO6400 cases gain no recovery and
 the fine cab crops still match V120 exactly.
 
+[Narrow wire profiles](finite-wire-profiles.md) recover more of the companion
+on two constructed ISO400 wires when confined to a measured footprint. On
+the common-plane group, recovery rises from 1.15% to 6.86% with lower
+increment RMS. The same rule erases the improvement from footprint-only
+fitting on two planar cases. The real fine cab mesh remains unresolved.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

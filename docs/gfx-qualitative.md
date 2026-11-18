@@ -160,6 +160,10 @@ historical boards. Use these reports for the current completed comparisons:
   directions strengthens the coarse-fence correction and adds slight
   mottling, with no clear new crossings. Companion-only transfer keeps
   the coarse-fence result from the planar fit.
+- [Narrow wire profiles](finite-wire-profiles.md#native-gfx100s-review)
+  keep the sky at V120 and retain the coarse-fence correction when
+  focusing on the companion. Replacing the dominant direction with a
+  narrow profile softens the coarse modulation. Fine leaves remain soft.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

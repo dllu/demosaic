@@ -196,6 +196,12 @@ has repeatedly come with extra flat-region error or false color. The
    agreement at ISO400 by letting the stronger direction estimate the
    change in spacing of the companion. The gain is small after independent
    RAW admission, and the native cab mesh is still unresolved.
+   The [narrow-profile study](finite-wire-profiles.md) finds that an exact
+   footprint raises eight-knot representation from 17% to 91% of the
+   constructed weak-wire energy. An estimated footprint helps a compact
+   width/phase fit on selected ISO400 wires. Conditional localization
+   keeps flat and rail corrections small on fresh controls, with mixed
+   results across wire geometries.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
