@@ -37,7 +37,8 @@ Start with the [README](../README.md) for installation and inference.
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
-[matched localized contrast training and held-out pilot](scene-local-contrast-2400.md) ·
+[matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
+[whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
 [distant RAW row references](distant-row-reference.md) ·
 [measured RAW donors for natural weak detail](natural-raw-donor-evidence.md) ·

@@ -2,12 +2,13 @@
 
 Four matched 2,400-update continuations test whether training on locally
 weakened texture helps a whole-image restoration model recover faint detail
-while keeping flat areas smooth. All four arms have finished training
-and their initial eight-photo and standing-camera reviews. On the
-matched ISO6400 replay, scene features leave fine-increment error
-nearly identical and raise flat-core variation slightly with coupled
-draws. The full held-out and fixed panels are in progress.
-[Training and initial reviews](results/scene-local-contrast-2400-v1/matched-early-publication.json).
+while keeping flat areas smooth. All four arms have finished
+training and completed the 64-photo and standing GFX reviews.
+On the matched ISO6400 set, scene features leave fine-increment
+error nearly identical and raise flat-core variation in both
+recipes. The fixed 427-photo and known/unseen panels are
+collecting.
+[Training and 64-photo publication](results/scene-local-contrast-2400-v1/matched-full64-publication.json).
 
 ## Training and corpus coverage
 
@@ -450,7 +451,67 @@ demosaiced ISO100 AHD remain qualitative references.
 | Transferred | [Left](images/scene-local-contrast-2400-matched/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-matched/mesh-profile3879-fine-green-mesh-right.png) |
 
 Localized local is the latest checkpoint evaluated on this scope.
-The remaining 64-photo cases are collecting. The fixed 427-photo
-and known/unseen panels passed the three-case preflight and are
-collecting.
+The fixed 427-photo and known/unseen panels passed the three-case
+preflight and are collecting.
 [Preflight receipt](results/scene-local-contrast-2400-v1/matched-canonical-preflight.json) · [Current publication manifest](results/scene-local-contrast-2400-v1/matched-early-publication.json).
+
+## Completed 64-photo comparison
+
+The full EMA replay covers all 256 declared groups and 768 native
+queries. The exact fine increments and flat cores use identical local
+sensor observations and camera metadata across model and preview
+policies. Signed response is pooled by the exact fine increment's
+energy. The table shows coupled ISO6400. Both draws and both priors are
+available in the evidence.
+[Pooled metrics](results/scene-local-contrast-2400-v1/matched-full64-pooled.json) · [Paired contrasts](results/scene-local-contrast-2400-v1/matched-full64-analysis.json).
+
+| EMA and preview policy | Fine-increment RMS, DN16 | Flat-core fine RMS, DN16 | Fine response |
+| --- | ---: | ---: | ---: |
+| V120 | 103.56 | 4.93 | 65.78% |
+| Corpus 100k | 102.99 | 4.37 | 66.18% |
+| Plain local | 102.66 | 4.73 | 65.81% |
+| Plain spatial, matching | 102.70 | 4.82 | 65.83% |
+| Localized local | 102.95 | 4.67 | 65.67% |
+| Localized spatial, matching | 103.04 | 4.77 | 65.64% |
+
+At ISO6400, spatial context adds 0.090–0.101 DN16 flat-core
+variation against each matched local arm, with each interval above
+zero in both draws. The spatial effects on increment RMS are small
+and their intervals span zero. Averaged over all 64 photos, the
+localized recipe changes the scene arm's effect on signed response
+by −0.055 percentage points in coupled draws and −0.059 in
+independent draws. The coupled increment interaction is a penalty
+of 0.059 DN16 (0.030–0.091). Across the 32 fainter photos all
+three interaction intervals span zero in both draws. The localized
+recipe gives no measured gain in scene-guided reconstruction here.
+
+The ordinary local continuation lowers mean fine-increment error
+by 0.33 DN16 versus Corpus 100k in the coupled ISO6400 draw, and by
+0.03 in the independent draw. Corpus 100k has lower flat-core
+variation and higher pooled fine response in both draws. Against
+the localized spatial model's own masked preview, matching context
+raises flat-core fine RMS by 0.025 DN16 in coupled ISO6400 and
+0.038 in independent ISO6400. The matching versus masked increment
+effect changes sign across draws. Finer scene previews give a
+similarly small effect in a separate input intervention.
+[Preview scale and grid control](scene-preview-scale.md).
+
+These native 160×160 ISO6400 triplets show the largest improvement
+and regression in paired fine error for localized spatial versus
+localized local among the 32 fainter cases. Fine stone grain and water
+ripples remain soft. The third reviewed crop has an exact flat core.
+All use shot/read `0.00128 / 6.5536e-6`, ADC16 black fraction 0.03,
+exposure ×3.0303, contrast ×2 and ROI `[48,48,160,160]`. The
+denoised checkpoint is localized spatial EMA
+`9f3a5cc187d0b9c9cd8de5bb22bf93bf29d0e8d0f67a474fbc834c71727eb789`.
+[Stone photo by Palauenc05, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:Hauroth_Wegekreuz_St-Bartholom%C3%A4us.jpg) ·
+[Thames Barrier by mattbuck, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:London_MMB_%C2%BB119_Thames_Barrier.jpg) ·
+[Native source and display receipts](results/scene-local-contrast-2400-v1/matched-full64-viewing.json).
+
+![Stone, noisy Malvar, localized spatial EMA and exact GT](images/scene-local-contrast-2400-full64/000-iso6400-coupled-role0-triplet.png)
+
+![Water, noisy Malvar, localized spatial EMA and exact GT](images/scene-local-contrast-2400-full64/060-iso6400-coupled-role0-triplet.png)
+
+Both standing GFX reviews are complete. The fixed 427-photo and
+known/unseen camera scores are collecting on their separate inputs.
+[All completed scope and frozen evidence](results/scene-local-contrast-2400-v1/matched-full64-publication.json).

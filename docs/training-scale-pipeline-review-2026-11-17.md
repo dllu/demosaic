@@ -35,6 +35,8 @@ scene, compared with 0.26–0.58% on the standing GFX checks. The
 same preview cap therefore yields much coarser sampling of the GFX
 neighborhood. Source count and the spatial scale of training contexts
 are separate coverage measures.
+[A fixed-input preview sweep](scene-preview-scale.md) measured little
+fine-detail benefit from a denser grid on the current scene adapter.
 
 ## What the existing coverage audit actually shows
 

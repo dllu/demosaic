@@ -90,6 +90,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Local wire transmission](mesh-background-transmission.md#standing-gfx100s-checks)
   keeps the existing coarse crossings with a modest contrast change.
   Sky, foliage and building reproduce the respective parent pixels.
+- [Preview resolution comparison](scene-preview-scale.md#standing-gfx100s-checks)
+  preserves the smooth sky and the two coarse fence directions at 1,024,
+  2,048 and 3,072 pixels. Thin cables and fine leaves stay soft.
 - [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
   compares both 800-update endpoints against 100k and V120. The sky
   stays smooth and the coarse lattice and dark foliage look close to 100k.
