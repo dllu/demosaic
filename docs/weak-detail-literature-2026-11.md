@@ -274,6 +274,12 @@ contrast prevent false cuts in a fresh ISO400 set. The joint
 nomination slightly worsens the independent ISO6400 gap errors.
 [Gap evidence and smooth contrast](mesh-gap-information.md).
 
+Measured exterior tint gives a small ISO6400 gain on independent
+noise draws and more attenuation beyond the gaps. Soft sharing
+keeps the fresh and standing outputs bit-identical to the local
+audit. Hard sharing can reject true detail when the exterior color
+disagrees. [Signed RAW tint check](mesh-donor-tint.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

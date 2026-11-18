@@ -194,6 +194,11 @@ prevents six false cuts on continuous ISO400 wires and preserves
 the control’s gap outputs when used only in the audit. Joint
 nomination and audit increase error in the independent ISO6400 repeats.
 
+[Soft sharing of signed color from nearby RAW](mesh-donor-tint.md)
+adds two conditional ISO6400 admissions over the curved-affine
+local audit, with more exterior attenuation. All fresh matched
+crops and the standing GFX crops retain the local-audit pixels.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

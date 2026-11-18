@@ -170,3 +170,8 @@ JPEGs are qualitative references.
 
 This is a crop-level inference comparison above existing checkpoints.
 No new training or full-model benchmark is attributed to it.
+
+A follow-up tests signed color from nearby measured RAW. It
+improves independent high-noise scores slightly and preserves
+the fresh and standing RGB under soft sharing.
+[Donor tint comparison](mesh-donor-tint.md).
