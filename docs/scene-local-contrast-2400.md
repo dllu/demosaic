@@ -73,6 +73,14 @@ output difference that aligns with the exact paired fine residual.
 Flat-core fine-band RMS measures false variation where every true
 fine-band coefficient is zero.
 
+The matched analysis reports each noise draw separately, with ISO6400 as
+the primary condition. It repeats the comparison on the 32 photos with
+the lowest clean increment RMS, ranked before any new endpoint inference.
+Uncertainty intervals resample complete photos jointly across the arms.
+The primary spatial-by-augmentation contrast reports fine response,
+increment error and flat-core error together.
+[Frozen paired analysis](results/scene-local-contrast-2400-v1/matched-analysis-plan.json).
+
 ## Existing-checkpoint pilot
 
 The first eight declared photos qualify the panel using V120 EMA,
@@ -99,7 +107,10 @@ response in these same comparisons. Corpus 100k has the lowest flat-core
 error in all four conditions. The paired increment RMS from matching and
 neutral spatial context is 35.37 versus 35.24 DN16 at ISO400 and 84.08 versus
 83.96 at ISO6400 for the coupled draws. The pilot gives no visible evidence
-of better weak reconstruction from the matching preview.
+of better weak reconstruction from the matching preview. At ISO6400 the
+matching view raises response on three of eight photos and reduces the
+flat-core RMS on four of eight compared with neutral.
+[Source-paired pilot differences](results/scene-local-contrast-2400-v1/pilot-paired-differences.json).
 
 ### Native 100% pilot crops
 
@@ -134,7 +145,7 @@ Photograph by Berthold Werner, public domain. [Photograph](https://commons.wikim
 
 | Deliverable | Status |
 | --- | --- |
-| Training | Both data preflights passed. Localized spatial is the first live arm. The other three are scheduled behind it. |
+| Training | Both data preflights passed. Localized spatial saved its 800-update milestone after 684 seconds of measured training, with all 1,600 scene draws audited. The remaining updates and three arms are pending. [Milestone and analysis bindings](results/scene-local-contrast-2400-v1/milestone-and-analysis.json). |
 | Held-out weak detail and flat cores | All 256 observation groups verified. The full comparison is queued for the four matched endpoints. |
 | Fixed 427-photo and known/unseen camera panels | All three are queued for the verified endpoints. No new checkpoint has broad scores. [PSNR history](performance-history.md). |
 | Standing DSCF3879/3880 and DSCF3842/3835 | Native collection is queued as each EMA endpoint completes. It uses the cached main sky, building, foliage and fence queries, plus both fine-mesh ROIs at both priors and the established AHD/JPEG references. Viewing is pending. [Main scene](gfx-qualitative.md) · [Fine cab mesh](gfx-green-mesh.md). |
