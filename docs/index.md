@@ -39,6 +39,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
+[paired fine luminance and flat support](paired-luminance-detail.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
 [distant RAW row references](distant-row-reference.md) ·
 [measured RAW donors for natural weak detail](natural-raw-donor-evidence.md) ·

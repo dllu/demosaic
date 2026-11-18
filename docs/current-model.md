@@ -89,6 +89,13 @@ in each linked report. [Package interfaces](architecture.md).
 
 ## Experimental detail components
 
+The [paired luminance head](paired-luminance-detail.md) adds 0.47
+percentage points of target-aligned ISO6400 fine response on the
+64-photo panel above Corpus 100k. Fine-increment RMS drops 1.09 DN16
+with coupled noise and rises 0.31 DN16 with independent noise. Two
+green support windows reduce excess flat texture against a
+strength-matched wider guard. Fine cab crossings remain incomplete.
+
 The [isolated RAW line fit](isolated-raw-line.md) recovers about 81%
 of the weak increment through interrupted synthetic ISO400 wires.
 Its short support check lowers added gap RMS from 8.70 to 2.40 DN16

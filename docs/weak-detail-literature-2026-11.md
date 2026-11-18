@@ -311,6 +311,15 @@ At ISO12800 the recovered fraction stays near 36.5%, while fine
 error falls slightly. This broader panel measures a different
 contrast selection and supports the same high-noise limitation.
 
+The [paired luminance study](paired-luminance-detail.md) tests
+supervision on the signed present-minus-absent increment above the
+frozen Corpus 100k. At ISO6400, both noise draw policies gain about
+0.47 percentage points of target-aligned fine response on 64 photos.
+Independent-draw increment error rises 0.31 DN16, with more
+draw-sensitive output. Requiring support in both 18- and 42-pixel
+green windows lowers excess flat RMS at matched correction strength.
+The fine GFX cab crossings remain incomplete.
+
 The [readout-row stress test](withheld-row-noise.md) shows that
 disjoint Bayer pixels can still validate the same simulated noise.
 Holding out complete rows rejects the false bands and often

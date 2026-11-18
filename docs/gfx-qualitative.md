@@ -3,6 +3,10 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Paired native luminance correction](paired-luminance-detail.md#standing-gfx100s-comparisons)
+  compares the frozen Corpus 100k plus each head against Corpus 100k and V120.
+  With both support windows the sky stays smooth, the coarse fence keeps its
+  crossings, and thin cables and foliage remain soft.
 - [V120/V121 primary and full-frame review](v120-v121-primary.md): the general
   baseline, including matched full-frame noise conditioning.
 - [V131 20k endpoint](v131-endpoint-quality.md) and
