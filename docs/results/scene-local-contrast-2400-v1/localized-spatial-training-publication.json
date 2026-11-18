@@ -1,0 +1,81 @@
+{
+  "scope": "First matched arm completed and verified. Training, collection and native viewing tracked separately.",
+  "training_plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/localized/plan.json",
+    "sha256": "9711067914f89850ce2d4ac18fe8724985182e2cd727e75e9d0ef2d5b5102832"
+  },
+  "training": {
+    "completed": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/localized/spatial/completed.json",
+      "sha256": "4067e39f8c9f4c60f2459f67eb4fe2da0234d3e2418ce311a9f0ac762d1273bc"
+    },
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/localized/spatial/step002400.pt",
+      "sha256": "9f3a5cc187d0b9c9cd8de5bb22bf93bf29d0e8d0f67a474fbc834c71727eb789"
+    },
+    "raw_and_ema_weights": true,
+    "review_policy": "EMA",
+    "training_trace": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/localized/spatial/train.jsonl",
+      "sha256": "13591f9f81a4f63d086e10ebbd9abf21f64b3f3316dd32f8202579dcb440c792"
+    },
+    "observations": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/localized/spatial/observations.jsonl",
+      "sha256": "d80a129836461093cbc2969b4f9e056d3a6333d2c6dbe601ec8be4daf0376108"
+    },
+    "wall_training_seconds": 1725.3098450620892,
+    "steps": 2400,
+    "native_crops": 19200,
+    "distinct_scenes": 4800,
+    "localized_scene_count": 2386
+  },
+  "next_training_arm": {
+    "stage": "plain-none",
+    "owner": {
+      "pid": 3708320,
+      "created": 1795030396.34
+    },
+    "child": {
+      "pid": 3737976,
+      "created": 1795032389.57,
+      "command": [
+        "taskset",
+        "-c",
+        "12,13",
+        "/home/dllu/proj/demosaic/.venv/bin/python",
+        "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/work/scripts/train_scene_context.py",
+        "train",
+        "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/plan.json",
+        "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/none",
+        "--mode",
+        "none"
+      ],
+      "plan": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/plain/plan.json",
+        "sha256": "2b8bafec01e250b0caf79c10704f09022c325e14275fcee1f9518f685524cad4"
+      }
+    }
+  },
+  "standing_at_publication": {
+    "stage": "localized-spatial",
+    "child": {
+      "pid": 3738018,
+      "created": 1795032395.51
+    }
+  },
+  "readout_noise_studies_are_separate": true,
+  "numeric_weak_detail_evaluation": "queued for all four matched endpoints",
+  "canonical_panels": "queued for all four matched endpoints",
+  "native_camera_collection": "running",
+  "native_camera_actual_viewing": "pending",
+  "files": {
+    "localized-spatial-verified.json": {
+      "path": "docs/results/scene-local-contrast-2400-v1/localized-spatial-verified.json",
+      "sha256": "a3af97dc8ace9c9b20fd7bd1db412a624b9e2b8076475087c648661faab4a4df"
+    },
+    "localized-spatial-training-evidence.tar.xz": {
+      "path": "docs/results/scene-local-contrast-2400-v1/localized-spatial-training-evidence.tar.xz",
+      "sha256": "0cdfd63f9653061828c78b0f2fbf431208deaf8cc3a2f7d0553f00136657c76d"
+    }
+  }
+}

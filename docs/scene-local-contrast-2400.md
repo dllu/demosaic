@@ -2,8 +2,9 @@
 
 Four matched 2,400-update continuations test whether training on locally
 weakened texture helps a whole-image restoration model recover faint detail
-while keeping flat areas smooth. Training is in progress as of November 18,
-2026. An eight-photo pilot with existing checkpoints shows slightly cleaner
+while keeping flat areas smooth. The localized spatial arm has finished.
+The plain local arm started immediately after its endpoint audit. An
+eight-photo pilot with existing checkpoints shows slightly cleaner
 flat cores when the spatial model sees the matching scene, with no increase
 in true fine-detail response. [Run, pilot and review bindings](results/scene-local-contrast-2400-v1/publication.json).
 
@@ -143,13 +144,101 @@ Photograph by Berthold Werner, public domain. [Photograph](https://commons.wikim
 
 ## New endpoint review status
 
+The first arm finished in 1,725.31 seconds of measured training. Its
+2,400-update checkpoint contains raw and EMA weights, optimizer state, and
+the fixed Corpus 100k parent and DINO bindings. The controller verified the
+actual order of all 4,800 distinct sources, including 2,386 localized scenes
+and 19,200 native crops. The evaluated weight policy is EMA. Its checkpoint
+SHA256 is `9f3a5cc187d0b9c9cd8de5bb22bf93bf29d0e8d0f67a474fbc834c71727eb789`.
+[Training audit and immutable traces](results/scene-local-contrast-2400-v1/localized-spatial-training-publication.json).
+
+### First trained endpoint on the eight-photo pilot
+
+The new EMA replays all 32 groups from the pilot in CUDA IEEE FP32,
+including exact native inputs and preview interventions. Compared with
+the earlier spatial 12k at ISO6400, aligned localized spatial reduces
+flat-core fine variation on every coupled observation and seven of the
+eight independent ones. The Corpus 100k parent retains lower mean
+flat-core error and higher fine response. The new aligned result gives
+67.34% pooled response at ISO6400, versus 67.47% with its own neutral
+context. The matching and mirrored views are close, with slightly
+less flat-core error in the mirrored view. Its coupled median
+source response is 53.80%, up from 53.39% in the earlier spatial arm.
+[Exact checkpoint and held-out metrics](results/scene-local-contrast-2400-v1/first-endpoint-heldout.json).
+
+| EMA, ISO6400 coupled | Fine response | Paired increment RMS, DN16 | Flat-core RMS, DN16 |
+| --- | ---: | ---: | ---: |
+| V120 | 68.27% | 84.24 | 4.83 |
+| Corpus 100k | 68.18% | 84.22 | 4.21 |
+| Earlier spatial 12k, matching | 67.56% | 84.08 | 5.22 |
+| Localized spatial 2,400, matching | 67.34% | 84.40 | 4.85 |
+
+In the independent repeats, the localized spatial increment RMS is
+103.93 DN16 versus 104.27 for earlier spatial 12k and 103.98 for
+Corpus 100k. The comparisons vary training length and data recipe.
+The comparison with the parent also adds spatial context. The remaining
+three arms supply the matched controls for the augmentation effect.
+
+Both new native triplets keep the pilot's original coordinates and
+camera transforms. The Hauroth stone query starts at `[218,192]`
+with RGGB, and the cathedral at `[22,250]` with BGGR. Each uses
+ROI `[48,48,160,160]` within its 256-pixel query, shot/read
+`0.00128 / 6.5536e-6`, ADC16 black fraction 0.03, exposure ×3.0303
+and contrast ×2. The middle column is the bound localized spatial
+EMA above. Stone grain, fine masonry and narrow trim remain soft.
+[All three new native comparisons](results/scene-local-contrast-2400-v1/first-endpoint-viewing.json).
+
+![Stone using the localized spatial endpoint, native noisy, denoised and exact GT](images/scene-local-contrast-2400-first/000-iso6400-coupled-role0-triplet.png)
+
+![Cathedral using the localized spatial endpoint, native noisy, denoised and exact GT](images/scene-local-contrast-2400-first/001-iso6400-coupled-role0-triplet.png)
+
 | Deliverable | Status |
 | --- | --- |
-| Training | Both data preflights passed. Localized spatial saved its 800-update milestone after 684 seconds of measured training, with all 1,600 scene draws audited. The remaining updates and three arms are pending. [Milestone and analysis bindings](results/scene-local-contrast-2400-v1/milestone-and-analysis.json). |
-| Held-out weak detail and flat cores | All 256 observation groups verified. The full comparison is queued for the four matched endpoints. |
+| Training | Localized spatial completed 2,400 updates. Plain local is running and the other two arms are queued. [Milestone and analysis bindings](results/scene-local-contrast-2400-v1/milestone-and-analysis.json). |
+| Held-out weak detail and flat cores | The first endpoint completed the eight-photo replay. All 256 observation groups are ready for the full four-arm comparison. |
 | Fixed 427-photo and known/unseen camera panels | All three are queued for the verified endpoints. No new checkpoint has broad scores. [PSNR history](performance-history.md). |
-| Standing DSCF3879/3880 and DSCF3842/3835 | Native collection is queued as each EMA endpoint completes. It uses the cached main sky, building, foliage and fence queries, plus both fine-mesh ROIs at both priors and the established AHD/JPEG references. Viewing is pending. [Main scene](gfx-qualitative.md) · [Fine cab mesh](gfx-green-mesh.md). |
+| Standing DSCF3879/3880 and DSCF3842/3835 | The first endpoint has completed collection and actual viewing on all eight standing boards. The other EMA endpoints are queued as each completes training. [Main scene](gfx-qualitative.md) · [Fine cab mesh](gfx-green-mesh.md). |
 
-The last evaluated spatial checkpoint in this report is the earlier
-12k EMA. Its real-photo review still finds missing fine cab crossings.
-[Earlier standing results](expanded-scene-spatial12k.md#matched-development-and-standing-gfx-review).
+### First endpoint standing GFX review
+
+The aligned EMA used cached DSCF3879 and DSCF3842 whole-frame
+Bayer previews, native 512- and 768-pixel queries, and CPU IEEE
+FP32. The predictions use the same Bayer query, conditioning and
+display as V120, Corpus 100k and the earlier spatial 12k. All eight
+standing boards were inspected at native crop scale.
+[Checkpoint identities, native coordinates and viewing notes](results/scene-local-contrast-2400-v1/first-endpoint-standing-viewing.json).
+
+The overcast sky stays visibly smooth. Its prediction differs from
+Corpus 100k by 1.62 camera-linear DN16 RMS. The coarse chain-link
+fence shows both directions and its larger crossings. Its changes
+are stronger than the sky changes at 15.73 DN16 versus Corpus 100k.
+Fine leaf tips, building brackets and thin cables remain soft.
+These measurements compare the two models on the same input.
+[Per-region output differences](results/scene-local-contrast-2400-v1/first-endpoint-standing-deltas.json).
+
+DSCF3879 uses shot/read `0.00128 / 6.5536e-6`, display exposure
+×4 and the independent DSCF3880 ISO100 AHD reference. Native
+160×160 boxes start at sky `[5800,1400]`, building `[5790,2690]`,
+foliage `[8890,5570]` and fence `[2240,6000]`.
+[Sky](images/scene-local-contrast-2400-first/main-overcast-sky-main-overcast-sky.png) · [Building](images/scene-local-contrast-2400-first/main-building-detail-main-building-detail.png) · [Foliage](images/scene-local-contrast-2400-first/main-foliage-main-foliage.png) · [Coarse fence](images/scene-local-contrast-2400-first/main-chain-link-fence-main-chain-link-fence.png).
+
+The fine cab mesh remains incomplete in both ROIs. Transferred
+conditioning retains more diagonal repeat structure, especially
+at right. The new model resembles the earlier spatial EMA, with
+3.73–5.14 DN16 RMS differences across the four boards. Nominal
+conditioning leaves broad green-gray variation at right and little
+visible mesh beside the left post. The separately demosaiced
+DSCF3835 ISO100 capture and both camera JPEGs are qualitative
+references. The apertures, shutter speeds and scene contents differ.
+
+DSCF3842 uses exposure ×16 and native 160×160 boxes starting at
+`[806,6489]` left and `[1026,6449]` right.
+
+| Conditioning, shot/read | Boards |
+| --- | --- |
+| Nominal `0.00128 / 6.5536e-6` | [Left](images/scene-local-contrast-2400-first/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-first/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred `0.0014635775921166604 / 1.0715704128646712e-6` | [Left](images/scene-local-contrast-2400-first/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-first/mesh-profile3879-fine-green-mesh-right.png) |
+
+The first endpoint's eight-photo replay and standing review are
+complete. The fixed photo and known/unseen camera panels await the
+full matched checkpoint set. [Combined publication record](results/scene-local-contrast-2400-v1/first-endpoint-publication.json).

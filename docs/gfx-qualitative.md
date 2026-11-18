@@ -72,6 +72,10 @@ historical boards. Use these reports for the current completed comparisons:
 - [Expanded scene spatial 12k](expanded-scene-spatial12k.md#matched-development-and-standing-gfx-review)
   compares both matched 12k arms with 100k and V120. The sky stays smooth and
   the coarse fence keeps its crossings. Fine hardware and leaves remain soft.
+- [Localized spatial 2,400](scene-local-contrast-2400.md#first-endpoint-standing-gfx-review)
+  compares the first localized EMA with V120, Corpus 100k and spatial 12k.
+  The sky stays visibly smooth and both coarse fence directions survive.
+  Thin cables and fine leaves remain soft.
 - [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
   compares both 800-update endpoints against 100k and V120. The sky
   stays smooth and the coarse lattice and dark foliage look close to 100k.
