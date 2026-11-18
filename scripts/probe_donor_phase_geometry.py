@@ -93,7 +93,7 @@ def restore(parent, packed, colors, geometry, noise, cfg, thresholds, near, curv
     return {t: output["weighted-refit", t] for t in thresholds}, diagnostics
 
 
-def sample_donor_raw(case, noise, box, repeat):
+def sample_donor_raw(case, noise, box, repeat, *, amplitude=0.055):
     from demosaic.experiments.data.edge_response import edge_observation
 
     recipe = case["metadata"]["recipe"] | {
@@ -102,7 +102,7 @@ def sample_donor_raw(case, noise, box, repeat):
         "bright_level": 0.25,
         "edge_jitter": 0.0,
         "mask_radii": [116.0, 116.0],
-        "amplitude": 0.055,
+        "amplitude": amplitude,
         "weak_fraction": 1.0,
         "phase_position_offset_xy": box[:2],
         "phase_reference_size": 512,

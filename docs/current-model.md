@@ -171,6 +171,12 @@ ISO400 far weak response with matched quiet error. The ISO6400 far
 weak-increment error rises slightly, and the visible cab crossings
 remain incomplete.
 
+[Searching surrounding RAW](search-donor-geometry.md) improves straight-wire
+response at ISO400 far and loses most of the fixed donor result on curved
+wires. It preserves the sky and reduces added cab banding toward V120.
+The selected cab donors support coarse structure, and fine crossings
+remain incomplete.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

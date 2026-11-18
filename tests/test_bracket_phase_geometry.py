@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from demosaic.bracket_phase_geometry import bracket_donor_geometry
+from demosaic.search_donor_geometry import screening_mask
 
 
 def example(*, mismatched_planar=False):
@@ -62,3 +63,19 @@ def test_shared_curvature_must_outpredict_individual_planar_donors():
     assert np.all(np.asarray(result["heldout_error_reduction"])[..., 0] > 8)
     assert np.max(np.asarray(result["local_planar_error_reduction"])[..., 0]) < 0
     assert result["accepted"] == [False, False]
+
+
+def test_bracket_refit_ignores_raw_sites_reserved_for_screening():
+    pytest.importorskip("scipy.optimize")
+    frequencies, _, donors = example()
+    scope = [~screening_mask(box) for _, _, box in donors]
+    modified = []
+    for (packed, colors, box), eligible in zip(donors, scope, strict=True):
+        h, w = eligible.shape
+        packed_scope = eligible.reshape(h // 2, 2, w // 2, 2).transpose(1, 3, 0, 2)
+        modified.append((np.where(packed_scope.reshape(packed.shape), packed, 0.4), colors, box))
+    kwargs = {"shot": 8e-5, "read": 2.56e-8, "eligible_masks": scope}
+    original = bracket_donor_geometry(donors, (128, 0, 128, 128), frequencies, **kwargs)
+    changed = bracket_donor_geometry(modified, (128, 0, 128, 128), frequencies, **kwargs)
+    assert any(original["accepted"])
+    assert original == changed

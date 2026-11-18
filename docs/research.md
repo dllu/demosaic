@@ -109,6 +109,11 @@ has repeatedly come with extra flat-region error or false color. The
    Real donor neighborhoods reveal rails and cab geometry interrupting
    the lattice. Scene context can help choose compatible donor regions
    before comparing their RAW evidence. [Opposing donors](bracket-phase-geometry.md).
+   Searching a wider RAW window finds compatible straight-wire donors.
+   On the cab, the search selects a shared coarse carrier from different
+   surfaces. Test spatial context for same-surface donor selection and
+   keep the screening preview independent of query validation.
+   [Screened donor search](search-donor-geometry.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

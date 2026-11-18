@@ -1271,6 +1271,7 @@ def restore_local_waves(
     donor_phase_templates=None,
     phase_edge_side=None,
     bright_cross_edge_weight=0.0,
+    active_guide_directions=None,
 ):
     """Return paired global/local support variants with one input-only discovery pass."""
     parent, packed, colors = np.asarray(parent), np.asarray(packed), np.asarray(colors)
@@ -1300,6 +1301,14 @@ def restore_local_waves(
     if type(conditional_delivery) is not bool:
         raise ValueError("Require an explicit boolean conditional-delivery choice")
     _validate_phase_bins(phase_bins, guide_frequencies_xy, config, phase_harmonics)
+    if active_guide_directions is not None and (
+        guide_frequencies_xy is None
+        or len(active_guide_directions) != 2
+        or any(type(value) is not bool for value in active_guide_directions)
+        or recenter_phase_guides
+        or phase_drift_search
+    ):
+        raise ValueError("Delivery direction selection requires two fixed guide flags")
     _validate_guide_search(
         recenter_phase_guides,
         phase_guide_edge_guard_px,
@@ -1523,6 +1532,12 @@ def restore_local_waves(
                 config.match_native_bins,
                 matching=config.matching,
             )
+            if active_guide_directions is not None:
+                matched = [
+                    (a, b, distance)
+                    for a, b, distance in matched
+                    if a == b and active_guide_directions[a]
+                ]
             if phase_drift_search:
                 yy, xx = np.indices(tile.shape)
                 matched = [
@@ -1702,6 +1717,11 @@ def restore_local_waves(
         "records": records,
         "config": config.to_dict(),
         "parent_used_for_discovery_or_validation": False,
+        **(
+            {"active_guide_directions": list(active_guide_directions)}
+            if active_guide_directions is not None
+            else {}
+        ),
         **guide,
         **(
             {"bright_cross_edge_weight": float(bright_cross_edge_weight)}

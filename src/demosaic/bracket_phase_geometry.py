@@ -132,10 +132,12 @@ def _error_reductions(donors, planar, curved, local_planar):
     return improvements
 
 
-def _fit_bracket(tiles, splits, offsets, frequencies, span, query_shape, shot, read):
+def _fit_bracket(tiles, splits, offsets, frequencies, span, query_shape, shot, read, eligible):
     proposals, donors = [], []
-    for (raw, colors), discovery, offset in zip(tiles, splits, offsets, strict=True):
-        fields = _fold_fields(raw, colors, discovery, shot, read)
+    for (raw, colors), discovery, offset, scope in zip(
+        tiles, splits, offsets, eligible, strict=True
+    ):
+        fields = _fold_fields(raw, colors, discovery, shot, read, scope)
         xy, background, train, test, inverse_sigma, _ = fields
         normalized = xy * (min(raw.shape) / span) + offset
         donors.append((raw, normalized, background, train, test, inverse_sigma, offset))
@@ -174,7 +176,7 @@ def _fit_bracket(tiles, splits, offsets, frequencies, span, query_shape, shot, r
     return curved, _error_reductions(donors, planar, curved, local_planar)
 
 
-def bracket_donor_geometry(donors, query_box, seed_frequencies, *, shot, read):
+def bracket_donor_geometry(donors, query_box, seed_frequencies, *, shot, read, eligible_masks=None):
     """Estimate shared geometry from two disjoint RAW donors that bracket a native query."""
     if (
         len(donors) != 2
@@ -224,8 +226,26 @@ def bracket_donor_geometry(donors, query_box, seed_frequencies, *, shot, read):
         raw = packed.reshape(2, 2, h // 2, w // 2).transpose(2, 0, 3, 1).reshape(h, w)
         tiles.append((raw, np.tile(colors.reshape(2, 2), (h // 2, w // 2))))
     splits = [stratified_split(raw.shape, 202611170720 + i) for i, (raw, _) in enumerate(tiles)]
+    eligible = [None, None] if eligible_masks is None else list(eligible_masks)
+    scopes = []
+    for (raw, _), scope in zip(tiles, eligible, strict=True):
+        if scope is not None and (
+            scope.shape != raw.shape or scope.dtype != bool or not np.any(scope)
+        ):
+            raise ValueError("Each eligible mask must contain native donor samples")
+        scopes.append(np.ones(raw.shape, bool) if scope is None else scope)
     fits = [
-        _fit_bracket(tiles, masks, offsets, frequencies, span, (height, width), shot, read)
+        _fit_bracket(
+            tiles,
+            [mask & scope for mask, scope in zip(masks, scopes, strict=True)],
+            offsets,
+            frequencies,
+            span,
+            (height, width),
+            shot,
+            read,
+            eligible,
+        )
         for masks in (splits, [~v for v in splits])
     ]
     params = np.stack([p for p, _ in fits])

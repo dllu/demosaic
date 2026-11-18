@@ -139,7 +139,7 @@ def _model_columns(background, coords, models):
     return np.column_stack((background, *[_phase_basis(coords, value) for value in models]))
 
 
-def _fold_fields(raw, cfa, discovery, shot, read):
+def _fold_fields(raw, cfa, discovery, shot, read, eligible=None):
     xx, yy, affine, _ = geometry(raw.shape)
     span = min(raw.shape)
     coords = np.column_stack(
@@ -155,7 +155,10 @@ def _fold_fields(raw, cfa, discovery, shot, read):
     y_train = raw.ravel()[selected]
     fitted = np.linalg.lstsq(background[selected], y_train, rcond=1e-10)[0]
     inverse_sigma = 1 / np.sqrt(read + shot * np.maximum(background @ fitted, 1e-6))
-    return coords, background, selected, green & ~discovery.ravel(), inverse_sigma, fitted
+    testing = green & ~discovery.ravel()
+    if eligible is not None:
+        testing &= eligible.ravel()
+    return coords, background, selected, testing, inverse_sigma, fitted
 
 
 def _fit_fold(raw, cfa, discovery, frequencies, center_delta, shot, read, fields=None):

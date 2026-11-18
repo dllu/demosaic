@@ -24,6 +24,34 @@ def scene(layout=LAYOUTS[0], size=64):
     return raw, colors, rgb
 
 
+def test_direction_selection_keeps_unsupported_guides_out_of_delivery():
+    raw, _, rgb = scene(size=128)
+    packed = raw.reshape(64, 2, 64, 2).transpose(1, 3, 0, 2).reshape(4, 64, 64)
+    parent = np.broadcast_to(rgb.mean((1, 2))[:, None, None], rgb.shape).copy()
+    options = {
+        "shot": 0,
+        "read": 1e-8,
+        "config": replace(CONFIG, validation_window=63),
+        "guide_frequencies_xy": ((5 / 128, 3 / 128), (-4 / 128, 7 / 128)),
+        "phase_bins": 8,
+        "shrink_phase_fit": True,
+        "compare_pooled_support": True,
+        "compare_pooled_refit": True,
+    }
+    neither, _ = local.restore_local_waves(
+        parent, packed, np.array(LAYOUTS[0]), active_guide_directions=[False, False], **options
+    )
+    for pixels in neither.values():
+        np.testing.assert_array_equal(pixels, parent)
+    one, _ = local.restore_local_waves(
+        parent, packed, np.array(LAYOUTS[0]), active_guide_directions=[True, False], **options
+    )
+    both, _ = local.restore_local_waves(parent, packed, np.array(LAYOUTS[0]), **options)
+    target = ("weighted-refit", 2.0)
+    assert np.max(np.abs(both[target] - one[target])) > 0.0001
+    assert np.max(np.abs(one[target] - parent)) > 0.0001
+
+
 def test_guided_query_refits_phase_from_only_its_discovery_samples():
     raw, colors, _ = scene()
     frequencies = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))

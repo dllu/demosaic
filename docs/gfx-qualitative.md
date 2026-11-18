@@ -101,6 +101,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Opposing donor checks](bracket-phase-geometry.md) reproduce all
   four guarded crops in both orientations. The donor neighborhood
   view shows an interruption in the coarse lattice above the query.
+- [Searching surrounding RAW](search-donor-geometry.md) keeps the sky
+  identical, retains the coarse crossings and makes small building and
+  foliage changes. The coarse fence returns close to V120.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches
