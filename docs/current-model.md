@@ -1,6 +1,6 @@
 # Current model choices
 
-Reviewed November 17, 2026. **V120 Small is the general inference recommendation.**
+Reviewed November 18, 2026. **V120 Small is the general inference recommendation.**
 The latest completed broad comparison is V131; its higher photo score comes with
 camera and color costs. The [completed64-source scene review](whole-scene-context-development64.md)
 finds small quiet-region gains and mixed detail/color costs; fine crossings
@@ -35,6 +35,7 @@ of it. These costs keep the completed control experimental.
 | [Corpus control20k](full-corpus-control20k-review.md) | Completed320k target slots/all90,778 photos. Ordinary/shadow +0.00852/+0.01047 dB; substantial faint recovery from10k | Faint−0.02061 dB versus V120; fine-band error higher for3/4 materials, selected flat spatial RMS worse. Known/unseen +0.03285/−0.04067 dB; worst ADC mean error765.7 versus55.5 DN16. [Camera](full-corpus-control20k-camera-review.md)/[color](full-corpus-control20k-color-review.md) reviews complete, no faithful new fence crossings; full427 photos collecting |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
 | [Long schedule at 50k](full-corpus-long50k-native.md) | Retained ordinary and shadow sRGB are +0.020/+0.044 dB over V120 | Faint fine-band RMS rises on all four materials versus V120. Bright orange ADC mean error reaches 1,490 DN16 in a BGGR spot check, with visible unevenness. Fine cab crossings still incomplete |
+| [Long schedule at 86k](full-corpus-long86k-native.md) | Faint ADC sRGB +0.569 dB versus V120, with lower fine-band error on bark, fur and wood. Worst flat bias drops from 1,490 to 20.58 DN16 since 50k | Grass fine-band RMS and selected flat errors exceed V120. Both GFX families still lack convincing new fine crossings. Full427 and held-out-camera coverage pending |
 
 The [calibrated ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up)
 reduces the 50k worst spot-check bias to 11.16 DN16 and improves faint
@@ -287,6 +288,11 @@ on two constructed ISO400 wires when confined to a measured footprint. On
 the common-plane group, recovery rises from 1.15% to 6.86% with lower
 increment RMS. The same rule erases the improvement from footprint-only
 fitting on two planar cases. The real fine cab mesh remains unresolved.
+
+[Localized frequency search](localized-guide-frequency.md) cannot recover
+the exact weak frequency from a one-bin shift on the measured reserve.
+On the main real crop, a spectral fallback strengthens a building
+correction without visible new detail. Both cab ROIs stay at V120.
 
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),

@@ -202,15 +202,20 @@ has repeatedly come with extra flat-region error or false color. The
    width/phase fit on selected ISO400 wires. Conditional localization
    keeps flat and rail corrections small on fresh controls, with mixed
    results across wire geometries.
+   The [localized frequency replay](localized-guide-frequency.md) finds
+   that the exact weak frequency fails the carrier-absent check in a
+   reserve fold on all 24 shifted-guide inputs. Better spatial support
+   alone does not make the present waveform evidence discriminative.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
    data, schedule and compute, including weak detail and flat-region errors.
    Failed small-head trials do not establish a full-model scaling limit.
-   The [100k full-corpus continuation](full-corpus-scaling.md#long-schedule-50k-milestone)
-   has completed the [50k image review](full-corpus-long50k-native.md),
-   with small positive-noise mean gains, higher faint fine-band error
-   and severe bright-orange ADC bias in two Bayer layouts. The
+   The [100k full-corpus continuation](full-corpus-scaling.md) reaches
+   five complete ordinary-photo passes. The [86k image review](full-corpus-long86k-native.md)
+   gains 0.569 dB on retained faint ADC fields versus V120, improves
+   three of four fine bands and largely clears the 50k orange bias.
+   Real fine crossings remain incomplete. The
    [completed20k control](full-corpus-control20k-review.md)
    actually covers all90,778 photos and recovers most10k faint loss, but remains
    0.02061 dB below V120 with higher fine-band error for3/4 materials. Both fences

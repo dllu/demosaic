@@ -6,8 +6,8 @@ Repository HEAD at review was `90a24f7f`; another agent is implementing scene
 data/model integration. This note supplements the
 [context and production review](weak-detail-global-context-production-review-2026-11-16.md).
 
-Follow-up measurements cover four ordinary-photo passes and fifth-visit
-crop coverage through update 80,000. [80k executed coverage audit](full-corpus-scaling.md#source-and-crop-coverage-through-80k).
+Follow-up measurements verify five complete ordinary-photo passes and
+fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233).
 
 **The corpus supports a substantially larger full-model training experiment.
 We have not established that its useful examples, or the model's capacity to

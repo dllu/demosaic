@@ -1,6 +1,6 @@
 # Full-corpus scaling and whole-scene context training
 
-**The 20k control is complete and the 100k run has passed update 80,000.**
+**The 20k control is complete and the 100k run has completed five ordinary-photo passes.**
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
@@ -20,6 +20,12 @@ The [three-way 20k checkpoint review](full-corpus-long20k-native.md)
 is now complete. The long schedule lowers faint fine-band error for
 three of four materials and loses 0.19124 dB mean faint sRGB PSNR versus
 the short schedule. Both standing GFX families were reviewed.
+
+The latest [long-schedule 86k review](full-corpus-long86k-native.md)
+gains 0.569 dB faint ADC sRGB over V120 on the retained material panel.
+Fine-band error improves on bark, fur and wood. Worst ADC flat bias
+falls from 1,489.97 DN16 at 50k to 20.58 at 86k, with V120 at 15.08.
+Both GFX scenes still lack convincing new fine crossings.
 
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
 [64-source study](whole-scene-context-development64.md) and
@@ -180,8 +186,7 @@ coverage. The fifth crop is fully within the prior union for 3,202
 images. These are cached rectangles before geometric augmentation.
 
 The audit binds the published 58k prefix, verifies source order and
-draw seeds, and checks 56 additional saved conditioning chunks. The
-latest image-quality review is the 50k checkpoint.
+draw seeds, and checks 56 additional saved conditioning chunks.
 [72k source audit](results/full-corpus-long72k-prefix-v1/source-audit.json) ·
 [Audit code](results/full-corpus-long72k-prefix-v1/audit.py.gz).
 
@@ -197,9 +202,24 @@ augmentation.
 
 The audit verifies the published 72k source prefix, the fixed source
 order and draw seeds, and 32 additional saved conditioning chunks.
-The run continues and the latest image-quality review is at 50k.
 [80k source audit](results/full-corpus-long80k-prefix-v1/source-audit.json) ·
 [Audit code](results/full-corpus-long80k-prefix-v1/audit.py.gz).
+
+### Fifth photographic epoch at update 85,233
+
+The executed ledger completes the fifth ordinary-photo pass at update
+**85,233**. Through update 85,250 it records **1,364,000** target slots
+and **453,999** ordinary draws. All **90,778** ordinary photos have five
+visits and 109 already have a sixth. The fifth crop adds a median
+**1.22%** of the cached image, and the five crops together cover a median
+**84.24%**. The fifth crop adds zero new cached pixels for 14,528 images.
+These measurements use cache rectangles before augmentation.
+
+The audit verifies the 80k prefix and 21 additional saved conditioning
+chunks. The [86k checkpoint review](full-corpus-long86k-native.md) binds
+the next verified prefix and its separate image-quality results.
+[Fifth-epoch source audit](results/full-corpus-long85250-prefix-v1/source-audit.json) ·
+[Audit code](results/full-corpus-long85250-prefix-v1/audit.py.gz).
 
 ### Observed source and crop coverage through 30k
 

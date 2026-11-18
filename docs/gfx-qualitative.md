@@ -1,6 +1,6 @@
 # GFX100S qualitative comparisons
 
-**Review map updated November 17, 2026.** This page retains checkpoint-specific
+**Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
 - [V120/V121 primary and full-frame review](v120-v121-primary.md): the general
@@ -58,6 +58,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Long-schedule 50k checkpoint](full-corpus-long50k-native.md) retains
   the smooth sky and visible coarse crossings. Small building features
   and foliage remain soft against the independent reference.
+- [Long-schedule 86k checkpoint](full-corpus-long86k-native.md#native-gfx100s-review)
+  retains the smooth sky and visible coarse crossings. Small hardware,
+  cables and fine leaves remain soft.
 - [Oriented RAW support](oriented-raw-support.md) gives the same sky
   pixels. The rectangles make small changes to the building, foliage,
   and coarse fence, with the main crossings still visible.
@@ -164,6 +167,9 @@ historical boards. Use these reports for the current completed comparisons:
   keep the sky at V120 and retain the coarse-fence correction when
   focusing on the companion. Replacing the dominant direction with a
   narrow profile softens the coarse modulation. Fine leaves remain soft.
+- [Localized frequency search](localized-guide-frequency.md#native-gfx100s-review)
+  keeps the sky and visible coarse crossings. The uniform spectral
+  fallback strengthens the building correction without clear new detail.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

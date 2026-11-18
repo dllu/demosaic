@@ -1,6 +1,6 @@
 # Fine green fence beside the red train
 
-**Review map updated November 17, 2026.** Faithful weak, colored crossings remain
+**Review map updated November 18, 2026.** Faithful weak, colored crossings remain
 unresolved. Newer reports are linked here; the version-specific gallery below
 preserves its original comparison pixels and provenance.
 
@@ -20,6 +20,7 @@ preserves its original comparison pixels and provenance.
 | [Donor subharmonics](donor-subharmonics.md) | Both ROIs and profiles match the previous pooled result exactly. Both JPEG comparisons still show missing fine crossings |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Matched V120 and short schedule, both ROIs/profiles/JPEGs viewed. Fine crossings are largely erased at nominal conditioning and soft or incomplete with the transferred profile |
 | [Long schedule at 50k](full-corpus-long50k-native.md) | Both ROIs, profiles and JPEGs viewed. The transferred profile retains soft diagonal repeat structure. Fine crossings remain incomplete |
+| [Long schedule at 86k](full-corpus-long86k-native.md#native-gfx100s-review) | Both ROIs, profiles and JPEGs viewed against V120 and 50k. Transferred conditioning reveals soft repeat structure, particularly on the right. Fine crossings remain incomplete |
 | [Oriented RAW support](oriented-raw-support.md) | Both rectangular footprints reviewed on both ROIs and noise profiles. Subtle changes to diagonal modulation, with no convincing additional crossings |
 | [Joint Bayer phase-profile evidence](joint-phase-profile-support.md) | Both joint gates, both ROIs and both profiles viewed with the two JPEGs. The strongest change is subtle diagonal modulation on the left at the transferred prior. Fine crossings remain unresolved |
 | [Donor-selected waveform harmonics](donor-phase-support.md) | Both reduced bases, both ROIs and both profiles viewed with the two JPEGs. The donor fit reduces the correction on the right under both profiles. Fine crossings remain unresolved |
@@ -51,6 +52,7 @@ preserves its original comparison pixels and provenance.
 | [Wider donor frequency bank](donor-frequency-bank.md#native-gfx100s-review) | All three policies reproduce the conditioned V120 pixels on both ROIs and profiles with both guide families. AHD and both JPEGs viewed. Fine crossings remain incomplete |
 | [Shared perspective](shared-projective-phase.md#native-gfx100s-review) | Planar, shared and companion-only fits all reproduce conditioned V120 on both ROIs and profiles, with both guide families. AHD and both JPEGs viewed. Fine crossings remain incomplete |
 | [Narrow wire profiles](finite-wire-profiles.md#native-gfx100s-review) | Compact profiles and the focused companion fit reproduce conditioned V120 on both native ROIs and profiles. AHD and both JPEGs viewed. Fine crossings remain incomplete |
+| [Localized frequency search](localized-guide-frequency.md#native-gfx100s-review) | Fixed guides and both reserve searches match conditioned V120 on both native ROIs and profiles. AHD and both JPEGs viewed. Fine crossings remain incomplete |
 | [Faint ADC follow-up](full427-faint-adc.md) | Positive-noise projection returns the earlier Corpus20k and V120 output on both ROIs and profiles, verified against the inputs underlying the retained boards |
 | [50k ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up) | The bin projection also bypasses the original 50k outputs exactly for both positive-noise profiles |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |

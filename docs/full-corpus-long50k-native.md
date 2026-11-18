@@ -9,6 +9,9 @@ color bias and visible unevenness in two Bayer layouts. The native
 GFX cab crops still lack convincing new fine crossings. V120 remains
 the recommended model. [Audited measurements and native evidence](results/full-corpus-long50k-native-v1/publication.json).
 
+The [later 86k review](full-corpus-long86k-native.md) repeats the same
+inputs. Faint ADC fidelity improves and the large flat color shift clears.
+
 ## Checkpoints and observations
 
 The 50k EMA comes from the original 100k trajectory with a B16 batch,
