@@ -229,6 +229,13 @@ two independent ISO400 repeats. The largest ISO6400 false continuation
 persists, and exact clean backgrounds remove residual false admission
 on two synthetic controls where exact strong-wire geometry does little.
 
+The refined foreground step rejects two false ISO400 rear directions
+while retaining their true counterparts on fresh draws. Its rear check
+weakens one true ISO6400 wire and leaves all eight standing camera crops
+identical to the adjacent-donor result. A reduced-amplitude forecast
+recovers the high-noise approval in a retrospective diagnostic.
+[Refined RAW edge check](mesh-refined-edge.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

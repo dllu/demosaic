@@ -121,6 +121,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Side-dependent step fit](mesh-step-continuity.md#standing-gfx100s-review)
   keeps the coarse crossings with mild contrast changes. Sky, foliage
   and building retain their pixels. The direct rear rescale was also viewed.
+- The refined foreground-edge check reproduces the packaged adjacent-donor
+  pixels in all four main crops, preserving the smooth sky and coarse fence.
+  [Refined edge playback](mesh-refined-edge.md#standing-gfx100s-review).
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

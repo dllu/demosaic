@@ -154,6 +154,12 @@ preserves all four cab crops and misses the largest high-noise gap.
 Direct rear attenuation improves wire error on the studied ISO400
 cases and both independent ISO400 repeats.
 
+The [refined foreground-edge check](mesh-refined-edge.md) reduces a
+false-wire error component in two fresh ISO400 controls. It slightly
+raises their total RGB error, misses the ISO6400 gaps and fades a real
+ISO6400 rear wire. All eight standing GFX crops reproduce the packaged
+adjacent-donor outputs. The refined check remains experimental.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

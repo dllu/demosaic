@@ -8,9 +8,17 @@ as `c06ed5ac` while this review was being written.
 This document records findings and proposed experiments only. No models,
 training jobs, inference settings, or experiment artifacts were changed.
 
-Current follow-up: [scene-context implementation and data feasibility](whole-scene-context-next-test.md).
-That later work confirms the missing whole-image input and adds tested preview/
-coordinate utilities; it does not change this review's historical cutoff.
+Subsequent matched training adds spatial whole-image conditioning
+and tests it on 24,000 identical scene visits per arm. The aligned guide
+adds 0.081 percentage points of weak response over neutral at ISO400,
+loses response at ISO6400 and leaves the fine cab crossings incomplete.
+An adjacent-donor RAW path recovers visible crossings in the right cab
+while the overcast sky stays smooth. Refining its local foreground model
+reduces some false wire response in synthetic edge controls.
+[Scene implementation](whole-scene-context-next-test.md) ·
+[Matched 12k result](expanded-scene-spatial12k.md) ·
+[Adjacent donors](donor-phase-transport.md) ·
+[Refined edge check](mesh-refined-edge.md).
 
 **Start production optimization of V120 now. For the next quality architecture,
 test whole-image context once per photograph, coupled to a smaller native-detail

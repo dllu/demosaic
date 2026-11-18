@@ -232,7 +232,10 @@ the completed training audit above.
 [Small-positive raw comparison](images/near-adc-bridge-positive-v1/repair-exposure-half/small-positive-magenta-comparison.png) ·
 [Intermediate raw comparison](images/near-adc-bridge-positive-v1/repair-exposure-half/intermediate-magenta-comparison.png).
 
-The canonical 427-photo and known/unseen camera review remains queued
-for the CPU allocation after the 20k corpus control finishes collecting.
+The canonical known and unseen camera predictions are saved. Their
+matched metric audit and native review are pending. The fixed 427-photo
+panel has resumed after a host memory interruption, with all saved
+predictions verified against their recorded hashes.
+[Benchmark restart receipt](results/primary-memory-resume-20261118-v1/publication.json).
 [Parent native report](full-corpus-long100k.md) ·
 [Comparable PSNR history](performance-history.md).

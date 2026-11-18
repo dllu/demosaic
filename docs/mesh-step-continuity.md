@@ -85,6 +85,11 @@ model error even with accurate front geometry. These controls use the
 synthetic targets and produce no correction. [Admission probe](results/mesh-step-continuity-v1/admission-probe.json) ·
 [Known-background replay](results/mesh-step-continuity-v1/negative-oracle.json).
 
+A follow-up local RAW fit recovers the missing step placement and rejects
+the g174 false rear proposals. Fresh tests find a small reduction in
+wire-shaped error and a high-noise loss on one real rear wire.
+[Refined foreground-edge study](mesh-refined-edge.md).
+
 ## Rescaling a wire without cutting it
 
 In a further replay, a separate held-out comparison tests whether

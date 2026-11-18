@@ -51,6 +51,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [adjacent donors and exterior phase](donor-phase-transport.md) ·
 [smooth RAW support and intensity steps](smooth-mesh-support.md) ·
 [continuous wires across contrast steps](mesh-step-continuity.md) ·
+[foreground-edge fits for false weak wires](mesh-refined-edge.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·

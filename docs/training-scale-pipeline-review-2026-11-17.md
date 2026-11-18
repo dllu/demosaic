@@ -16,6 +16,16 @@ second; it does not establish convergence as the number of examples increases.
 The earlier 10× continuation of a small detail model is insufficient evidence
 against longer training of the full restoration network with diverse crops.
 
+The completed 100k continuation processed 1.6 million target slots in
+19 h 12 min of recorded worker time. Its ordinary-photo schedule
+visited all 90,778 sources five or six times. It improves the four
+retained faint ADC materials by 0.575 dB in mean sRGB PSNR, with
+color and unseen-camera costs and missing fine GFX crossings.
+The matched scene continuations visited 24,000 distinct photos per arm
+from a 90,692-photo pool. The broad photo evaluations are collecting.
+[100k training and quality](full-corpus-long100k.md) ·
+[Matched whole-scene continuation](expanded-scene-spatial12k.md).
+
 ## What the existing coverage audit actually shows
 
 The [executed source-selector audit](training-source-schedule-coverage.md)

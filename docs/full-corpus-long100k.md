@@ -165,4 +165,5 @@ on the CPU with matched V120 controls. V131 remains the latest
 endpoint with all three comparable completed broad panels.
 [Primary preflight and start receipt](results/full-corpus-long100k-training-v1/primary-start.json) ·
 [Review admission](results/full-corpus-long100k-review-queue-v1/publication.json) ·
+[Verified benchmark restart](results/primary-memory-resume-20261118-v1/publication.json) ·
 [Comparable PSNR history](performance-history.md).
