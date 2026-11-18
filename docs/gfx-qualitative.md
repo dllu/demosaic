@@ -148,6 +148,9 @@ historical boards. Use these reports for the current completed comparisons:
   keep the sky at V120. The low-margin spectral arm adds a faint building
   modulation. The partner-only arm retains the uniform coarse fence and
   adds no new crossings.
+- [Eight-knot footprint transfer](scene-wire-footprint.md#native-gfx100s-review)
+  keeps the sky and coarse fence. The spectral foliage correction grows
+  slightly, with no clear new leaf detail.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

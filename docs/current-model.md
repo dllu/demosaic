@@ -262,6 +262,13 @@ raises increment error. Partner-only false rail RMS is close to uniform,
 and the confirmed real crop variants recover no new fine crossings.
 The ISO6400 offset panel has essentially no weak response.
 
+[Whole-image footprint replay](scene-wire-footprint.md) finds that
+the sinusoid gains do not carry over to finite narrow wires. The
+eight-knot basis preserves more weak response than the fundamental,
+and the untapered fit has lower ISO400 increment error. Requiring
+the partner's own reserve gains largely restores the uniform result,
+with one admitted two-direction capture per ISO400 panel.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

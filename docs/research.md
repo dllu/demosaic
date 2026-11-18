@@ -180,6 +180,12 @@ has repeatedly come with extra flat-region error or false color. The
    to 7.58%, with increment RMS falling from 5.90 to 5.77 DN16.
    The simpler two-direction taper raises error. ISO6400 locations are
    unreliable, and the estimate leaves the fine cab crossings unresolved.
+   The [whole-image guide replay](scene-wire-footprint.md) retains the
+   sinusoid gain and shows regressions on ordinary finite wires. Using all
+   eight knots prevents most of the fundamental loss. A companion
+   validation check limits the regression but seldom admits a taper.
+   The exact-center comparison and the low number of accurate weak
+   proposals separate losses from the waveform fit and missed geometry.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

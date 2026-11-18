@@ -86,6 +86,7 @@ def select_wire_footprint(
     shot,
     read,
     config,
+    record_partner=False,
 ):
     """Compare local vs uniform carriers on disjoint parts of the reserved RAW.
 
@@ -93,6 +94,8 @@ def select_wire_footprint(
     validation must use the complement of the screening mask. The two choices
     require positive gains over both references in both reserve folds, at
     thresholds zero and one respectively.
+    The optional partner receipt records the other direction's scores at the
+    selected center.
     """
     _validate_search(query, shot, read)
     raw, cfa = _native_view(packed, colors, query)
@@ -124,6 +127,13 @@ def select_wire_footprint(
     gain = float(ranks[direction, index])
     center = centers[index]
     footprint = wire_footprint(raw.shape, center) if gain > 0 else None
+    evidence = {}
+    if record_partner and all(active):
+        peer = scores[:, 1 - direction, index]
+        evidence["partner"] = {
+            "wave_scores": peer[:, 0].tolist(),
+            "localization_scores": peer[:, 1].tolist(),
+        }
     return {
         "screened": footprint,
         "confirmed": footprint if gain > MINIMUM_LOCALIZATION else None,
@@ -137,4 +147,5 @@ def select_wire_footprint(
         "admitted": gain > 0,
         "confirmed": gain > MINIMUM_LOCALIZATION,
         "reason": "localized" if gain > 0 else "uniform",
+        **evidence,
     }

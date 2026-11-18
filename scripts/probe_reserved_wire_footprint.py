@@ -36,7 +36,7 @@ PROSPECTIVE_SEED = 202611172151
 PANELS = ("fresh400", "fresh6400", "offset400", "offset6400", "null400", "null6400", "camera")
 
 
-def prepare(root, envelopes, screened, partner_only=False):
+def prepare(root, envelopes, screened, partner_only=False, full_profile=False):
     source = reference(envelopes / "plan.json")
     plan = read_json(checked(source))
     archive = {p: reference(envelopes / f"{p}.json") for p in ("iso400", "iso6400")}
@@ -73,6 +73,7 @@ def prepare(root, envelopes, screened, partner_only=False):
             "null_source": null_source,
             "modes": ("uniform", "partner") if partner_only else MODES,
             "partner_only": partner_only,
+            "full_profile": full_profile,
             "prospective_geometry": {
                 "seed": PROSPECTIVE_SEED,
                 "along_limit": 67,
@@ -116,6 +117,7 @@ def predict(
     edge_side=False,
     oracle_envelope=None,
     partner_only=False,
+    full_profile=False,
 ):
     stops = (threshold, threshold + 1)
     arms = ("uniform", "partner") if partner_only else MODES
@@ -164,7 +166,7 @@ def predict(
                 evidence_mask=evidence,
                 guide_frequencies_xy=guide["frequencies_xy"],
                 phase_bins=8,
-                phase_harmonics=((1,), (1,)),
+                phase_harmonics=None if full_profile else ((1,), (1,)),
                 guide_envelopes=(
                     np.broadcast_to(envelope, (2, *parent.shape[1:]))
                     if envelope is not None
@@ -182,7 +184,18 @@ def predict(
 
 
 def camera_predict(
-    parent, packed, colors, guide, noise, query, config, threshold, *, edge_side, partner_only
+    parent,
+    packed,
+    colors,
+    guide,
+    noise,
+    query,
+    config,
+    threshold,
+    *,
+    edge_side,
+    partner_only,
+    full_profile=False,
 ):
     images, trace = predict(
         parent,
@@ -195,6 +208,7 @@ def camera_predict(
         threshold,
         edge_side=edge_side,
         partner_only=partner_only,
+        full_profile=full_profile,
     )
     return {(a, int(t - threshold)): x for (a, t), x in images.items()}, trace
 
@@ -232,6 +246,7 @@ def positives(root, recipe, plan, config, profile, panel, noise, setting):
                 setting["threshold"],
                 oracle_envelope=None if archived or plan.get("partner_only") else fields["exact"],
                 partner_only=plan.get("partner_only", False),
+                full_profile=plan.get("full_profile", False),
             )
             if trace["winner"] is not None:
                 trace["center_error_px"] = float(
@@ -254,8 +269,9 @@ def positives(root, recipe, plan, config, profile, panel, noise, setting):
             assert old["case"] == i and old["CFA"] == cfa
             with np.load(checked(old["predictions"])) as saved:
                 np.testing.assert_array_equal(raw, saved["packed"])
+            control = "uniform" if plan.get("full_profile", False) else "uniform-fundamental"
             for suffix in ("", "-strict"):
-                assert metrics[f"uniform{suffix}"] == old["metrics"][f"uniform-fundamental{suffix}"]
+                assert metrics[f"uniform{suffix}"] == old["metrics"][control + suffix]
             references = {a: old["metrics"][a] for a in ("uniform", "exact-fundamental", "broad")}
         prediction = write_array(
             root / f"{panel}-{i}.npz",
@@ -305,6 +321,7 @@ def nulls(recipe, plan, config, profile, noise, setting):
             config,
             setting["threshold"],
             partner_only=plan.get("partner_only", False),
+            full_profile=plan.get("full_profile", False),
         )
         metrics = {}
         for (a, t), image in images.items():
@@ -340,7 +357,11 @@ def run(path, panel):
             rows,
             out,
             config,
-            predictor=partial(camera_predict, partner_only=plan.get("partner_only", False)),
+            predictor=partial(
+                camera_predict,
+                partner_only=plan.get("partner_only", False),
+                full_profile=plan.get("full_profile", False),
+            ),
         )
     else:
         profile = "iso6400" if panel.endswith("6400") else "iso400"
@@ -369,6 +390,7 @@ if __name__ == "__main__":
     setup.add_argument("envelopes", type=Path)
     setup.add_argument("screened", type=Path)
     setup.add_argument("--partner-only", action="store_true")
+    setup.add_argument("--full-profile", action="store_true")
     execute = actions.add_parser("run")
     execute.add_argument("plan", type=Path)
     execute.add_argument("panel", choices=PANELS)
@@ -379,6 +401,7 @@ if __name__ == "__main__":
             args.envelopes.resolve(),
             args.screened.resolve(),
             args.partner_only,
+            args.full_profile,
         )
     else:
         run(args.plan.resolve(), args.panel)
