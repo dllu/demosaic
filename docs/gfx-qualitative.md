@@ -151,6 +151,10 @@ historical boards. Use these reports for the current completed comparisons:
 - [Eight-knot footprint transfer](scene-wire-footprint.md#native-gfx100s-review)
   keeps the sky and coarse fence. The spectral foliage correction grows
   slightly, with no clear new leaf detail.
+- The [wider donor bank](donor-frequency-bank.md#native-gfx100s-review)
+  keeps the sky and coarse crossings. Both reserve rules reproduce
+  the original guide fit. Donor-only selection reduces the spectral
+  building correction from 2.94 to 1.74 DN16 RMS relative to V120.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

@@ -269,6 +269,13 @@ and the untapered fit has lower ISO400 increment error. Requiring
 the partner's own reserve gains largely restores the uniform result,
 with one admitted two-direction capture per ISO400 panel.
 
+[Wider donor frequency banks](donor-frequency-bank.md) increase
+candidate coverage on the main ISO6400 panel. Independent query
+reservation rejects those replacements, and picking the closest
+donor-confirmed frequency using the synthetic target raises
+weak response only from 0.66% to 0.92%. Donor-only replacement
+loses ISO400 detail on both panels.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

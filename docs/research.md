@@ -186,6 +186,12 @@ has repeatedly come with extra flat-region error or false color. The
    validation check limits the regression but seldom admits a taper.
    The exact-center comparison and the low number of accurate weak
    proposals separate losses from the waveform fit and missed geometry.
+   The [wider frequency bank](donor-frequency-bank.md) adds an accurate
+   candidate on six of eight main ISO6400 cases, while the reserved
+   query chooses none. Selecting the nearest confirmed frequency with
+   the known target still recovers less than 1% of the weak amplitude.
+   Better candidate coverage alone leaves little leverage under the
+   existing query fit and admission policy.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

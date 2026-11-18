@@ -142,10 +142,9 @@ def _bracket_fraction(first, second, query):
     return fraction
 
 
-def _matching_peaks(left, right, fraction, *, first=None):
-    options = []
-    minimum_cosine = _MATCH_COSINE if first is None else np.sqrt(0.5)
-    max_difference = 0.045 if first is None else 0.06
+def _compatible_peak_pairs(left, right, fraction, *, widened=False):
+    minimum_cosine = np.sqrt(0.5) if widened else _MATCH_COSINE
+    max_difference = 0.06 if widened else 0.045
     for (a, score_a), (b, score_b) in product(left, right):
         angle = _cosine(a, b)
         b = b if angle >= 0 else -b
@@ -153,7 +152,11 @@ def _matching_peaks(left, right, fraction, *, first=None):
         if abs(angle) >= minimum_cosine and difference <= max_difference:
             center = (1 - fraction) * a + fraction * b
             score = min(score_a, score_b) / (1 + (difference / 0.025) ** 2)
-            options.append((score, center, a, b))
+            yield score, center, a, b
+
+
+def _matching_peaks(left, right, fraction, *, first=None):
+    options = _compatible_peak_pairs(left, right, fraction, widened=first is not None)
     selected = [] if first is None else [first]
     for entry in sorted(options, key=lambda p: p[0], reverse=True):
         if not selected or abs(_cosine(entry[1], selected[0][1])) <= _FAMILY_COSINE:
