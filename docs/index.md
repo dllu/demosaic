@@ -67,6 +67,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [measured phase geometry from a disjoint RAW donor](donor-phase-geometry.md) ·
 [phase geometry fitted across opposing RAW donors](bracket-phase-geometry.md) ·
 [screened search for RAW donor patches](search-donor-geometry.md) ·
+[whole-frame scene context for donor selection](screened-scene-donors.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
 [scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·

@@ -153,12 +153,19 @@ def _verify_planes(raw, layout, eligible, seeds, seed, shot, read):
     return np.stack(gains)
 
 
-def search_donor_geometry(donors, query, *, shot, read, fit_curvature=False):
-    """Screen once, then validate the selected pair on separate donor samples."""
+def search_donor_geometry(donors, query, *, shot, read, fit_curvature=False, donor_affinity=None):
+    """Rank brackets with optional screening-only affinity, then validate independently."""
     if not np.isfinite([shot, read]).all() or min(shot, read) < 0 or shot + read <= 0:
         raise ValueError("Require a positive sensor noise profile")
     if len(query) != 4 or min(query[2:]) <= 0:
         raise ValueError("Require positive query dimensions")
+    affinity = np.ones(len(donors)) if donor_affinity is None else np.asarray(donor_affinity)
+    if (
+        affinity.shape != (len(donors),)
+        or not np.isfinite(affinity).all()
+        or np.any((affinity < 0) | (affinity > 1))
+    ):
+        raise ValueError("Require one screening affinity in [0, 1] per donor")
     tiles = []
     for packed, colors, box in donors:
         w, h = box[2:]
@@ -186,7 +193,7 @@ def search_donor_geometry(donors, query, *, shot, read, fit_curvature=False):
         if fraction is None:
             continue
         matches = _matching_peaks(tiles[i][3], tiles[j][3], fraction)
-        score = sum(row[0] for row in matches)
+        score = sum(row[0] for row in matches) * min(affinity[i], affinity[j])
         if score > best_score:
             best_score, best = score, (i, j, matches)
     result = {
@@ -231,6 +238,7 @@ def search_donor_geometry(donors, query, *, shot, read, fit_curvature=False):
         "status": "evaluated",
         "donor_boxes": [list(donors[k][2]) for k in (i, j)],
         "score": float(best_score),
+        **({"selected_affinity": affinity[[i, j]].tolist()} if donor_affinity is not None else {}),
         "screened_frequencies_xy": [row[1].tolist() for row in matches],
         "donor_frequencies_xy": [[row[k].tolist() for row in matches] for k in (2, 3)],
         "heldout_planar_reduction": gains.tolist(),

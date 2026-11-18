@@ -104,6 +104,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Searching surrounding RAW](search-donor-geometry.md) keeps the sky
   identical, retains the coarse crossings and makes small building and
   foliage changes. The coarse fence returns close to V120.
+- [Whole-frame donor ranking](screened-scene-donors.md) reproduces its
+  matched spectral search on all four main crops. The near-context
+  control changes the coarse fence slightly while retaining its crossings.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

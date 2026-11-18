@@ -16,11 +16,11 @@ _NOISE = {"shot": 8e-5, "read": 2.56e-8}
 _FREQUENCY = np.array([7.3, 2.1]) / 64
 
 
-def _donor(box, phase, wave):
+def _donor(box, phase, wave, *, amplitude=0.014):
     x, y, w, h = box
     yy, xx = np.mgrid[y : y + h, x : x + w]
     angle = 2 * np.pi * (xx * _FREQUENCY[0] + yy * _FREQUENCY[1] + phase)
-    raw = 0.12 + (0.014 * np.cos(angle) if wave else 0 * xx)
+    raw = 0.12 + (amplitude * np.cos(angle) if wave else 0 * xx)
     packed = raw.reshape(h // 2, 2, w // 2, 2).transpose(1, 3, 0, 2).reshape(4, h // 2, w // 2)
     return packed, _COLORS, box
 
@@ -73,3 +73,18 @@ def test_camera_candidates_include_bayer_aligned_abutting_boxes():
     for x, y, w, h in boxes:
         assert x % 2 == y % 2 == 0
         assert x + w <= 136 or x >= 392 or y + h <= 148 or y >= 404
+
+
+def test_context_changes_the_selection_before_reserved_donor_scoring():
+    query = (0, 0, 64, 64)
+    left = _donor((-64, 0, 64, 64), 0.17, True)
+    right = _donor((64, 0, 64, 64), 0.81, True)
+    top = _donor((0, -64, 64, 64), 0.23, True, amplitude=0.022)
+    bottom = _donor((0, 64, 64, 64), 0.46, True, amplitude=0.022)
+    views = [left, right, top, bottom]
+    spectral = search_donor_geometry(views, query, **_NOISE)
+    contextual = search_donor_geometry(views, query, donor_affinity=[1, 1, 0.01, 0.01], **_NOISE)
+    assert spectral["donor_boxes"] == [list(top[2]), list(bottom[2])]
+    assert contextual["donor_boxes"] == [list(left[2]), list(right[2])]
+    assert contextual["active"] == spectral["active"] == [True, False]
+    np.testing.assert_allclose(contextual["frequencies_xy"][0], _FREQUENCY, atol=0.0005, rtol=0)

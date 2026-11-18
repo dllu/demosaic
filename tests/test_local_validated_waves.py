@@ -52,6 +52,34 @@ def test_direction_selection_keeps_unsupported_guides_out_of_delivery():
     assert np.max(np.abs(one[target] - parent)) > 0.0001
 
 
+def test_query_evidence_removes_screening_sites_from_both_folds():
+    raw, _, rgb = scene()
+    from demosaic.search_donor_geometry import screening_mask
+
+    evidence = ~screening_mask((0, 0, 64, 64))
+    modified_raw = np.where(evidence, raw, 0.10)
+    parent = np.broadcast_to(rgb.mean((1, 2))[:, None, None], rgb.shape).copy()
+    options = {
+        "shot": 0,
+        "read": 1e-8,
+        "config": replace(CONFIG, validation_window=63),
+        "guide_frequencies_xy": ((5 / 64, 3 / 64), (-4 / 64, 7 / 64)),
+        "phase_bins": 8,
+        "shrink_phase_fit": True,
+        "compare_pooled_support": True,
+        "evidence_mask": evidence,
+    }
+    predictions = []
+    for values in (raw, modified_raw):
+        packed = values.reshape(32, 2, 32, 2).transpose(1, 3, 0, 2).reshape(4, 32, 32)
+        predictions.append(
+            local.restore_local_waves(parent, packed, np.array(LAYOUTS[0]), **options)
+        )
+    assert predictions[0][1] == predictions[1][1]
+    for key in predictions[0][0]:
+        np.testing.assert_array_equal(predictions[0][0][key], predictions[1][0][key])
+
+
 def test_guided_query_refits_phase_from_only_its_discovery_samples():
     raw, colors, _ = scene()
     frequencies = ((5 / 64, 3 / 64), (-4 / 64, 7 / 64))

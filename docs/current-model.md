@@ -177,6 +177,13 @@ wires. It preserves the sky and reduces added cab banding toward V120.
 The selected cab donors support coarse structure, and fine crossings
 remain incomplete.
 
+[Whole-frame context for donor ranking](screened-scene-donors.md)
+produces the same synthetic outputs as near-context ranking. The
+two left cab brackets shift toward more visible mesh on one side, with
+the train body on the other side and fine crossings still missing.
+The synthetic affinity ranks suggest a stronger role for context
+in pair selection before query-local RAW validation.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

@@ -1252,6 +1252,7 @@ def restore_local_waves(
     thresholds=(2.0,),
     config=_DEFAULT_CONFIG,
     discovery_mask=None,
+    evidence_mask=None,
     conditional_delivery=False,
     guide_frequencies_xy=None,
     phase_bins=0,
@@ -1398,6 +1399,10 @@ def restore_local_waves(
         discovery_mask = np.asarray(discovery_mask)
         if discovery_mask.shape != (h, w) or discovery_mask.dtype != bool:
             raise ValueError("Require a native boolean global discovery mask")
+    if evidence_mask is not None:
+        evidence_mask = np.asarray(evidence_mask)
+        if evidence_mask.shape != (h, w) or evidence_mask.dtype != bool:
+            raise ValueError("Require a native boolean mask for fit and validation samples")
     for threshold in thresholds:
         support_weight(0, threshold)
     modes = ("global", "local", "pooled-local") if compare_pooled_support else ("global", "local")
@@ -1437,6 +1442,10 @@ def restore_local_waves(
                 if discovery_mask is None
                 else discovery_mask[region]
             )
+            folds = (split, ~split)
+            if evidence_mask is not None:
+                folds = tuple(mask & evidence_mask[region] for mask in folds)
+            validation = folds[::-1]
             patch_guide = guide
             if hessians is not None:
                 center_delta = np.array([x + (n - w) / 2, y + (n - h) / 2])
@@ -1451,7 +1460,7 @@ def restore_local_waves(
                 fit_local_candidate(
                     tile, layout, mask, shot=shot, read=read, config=config, **patch_guide
                 )
-                for mask in [split, ~split]
+                for mask in folds
             ]
             active_sides = [c.phase_bright_side is not None for c in candidates]
             if phase_edge_side is not None and active_sides[0] != active_sides[1]:
@@ -1460,7 +1469,7 @@ def restore_local_waves(
                     fit_local_candidate(
                         tile, layout, mask, shot=shot, read=read, config=config, **plain
                     )
-                    for mask in (split, ~split)
+                    for mask in folds
                 ]
             spatial = None
             if config.amplitude_window:
@@ -1487,13 +1496,13 @@ def restore_local_waves(
                     c,
                     tile,
                     layout,
-                    ~c.discovery_mask,
+                    test,
                     window=config.validation_window,
                     stride=config.validation_stride,
                     bright_cross_edge_weight=bright_cross_edge_weight,
                     **({"reliability": weight} if weight is not None else {}),
                 )
-                for c, weight in zip(predictors, reliability, strict=True)
+                for c, test, weight in zip(predictors, validation, reliability, strict=True)
             ]
             oriented_scores = {
                 mode: [
@@ -1501,14 +1510,14 @@ def restore_local_waves(
                         c,
                         tile,
                         layout,
-                        ~c.discovery_mask,
+                        test,
                         window=config.validation_window,
                         stride=config.validation_stride,
                         reliability=weight,
                         orientation=mode,
                         bright_cross_edge_weight=bright_cross_edge_weight,
                     )[0]
-                    for c, weight in zip(predictors, reliability, strict=True)
+                    for c, test, weight in zip(predictors, validation, reliability, strict=True)
                 ]
                 for mode in orientations
             }
@@ -1518,12 +1527,12 @@ def restore_local_waves(
                         c,
                         tile,
                         layout,
-                        ~c.discovery_mask,
+                        test,
                         window=config.validation_window,
                         stride=config.validation_stride,
                         reliability=weight,
                     )[0]
-                    for c, weight in zip(predictors, reliability, strict=True)
+                    for c, test, weight in zip(predictors, validation, reliability, strict=True)
                 ]
             matched = match_directions(
                 candidates[0].frequencies_xy,

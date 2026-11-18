@@ -95,7 +95,9 @@ def prepare(root, previous):
     )
 
 
-def deliver(parent, packed, colors, fit, noise, cfg, thresholds, near, curved):
+def deliver(
+    parent, packed, colors, fit, noise, cfg, thresholds, near, curved, *, evidence_mask=None
+):
     hessians = fit["hessians_xy"] if curved else None
     output, _ = restore_local_waves(
         parent,
@@ -105,6 +107,7 @@ def deliver(parent, packed, colors, fit, noise, cfg, thresholds, near, curved):
         read=noise["read"],
         config=cfg,
         thresholds=thresholds,
+        evidence_mask=evidence_mask,
         guide_frequencies_xy=fit["frequencies_xy"],
         guide_phase_hessians_xy=hessians,
         phase_bins=8,

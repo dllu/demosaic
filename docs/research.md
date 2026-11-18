@@ -114,6 +114,12 @@ has repeatedly come with extra flat-region error or false color. The
    surfaces. Test spatial context for same-surface donor selection and
    keep the screening preview independent of query validation.
    [Screened donor search](search-donor-geometry.md).
+   Full-frame DINO affinities shift the left cab donors slightly, with
+   train geometry still supplying one side. In a synthetic ambiguity
+   test, spectral-score weighting selects the intended pair in 9/96
+   cases. Ranking spectrally viable pairs by affinity alone identifies
+   the intended pair in 75/96. Test the delivered result under independent
+   RAW validation. [Whole-frame donor ranking](screened-scene-donors.md).
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

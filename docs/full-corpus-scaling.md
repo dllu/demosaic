@@ -149,6 +149,25 @@ fully within the earlier union. Those samples still have fresh geometric
 augmentation and sensor corruption. The rectangles describe coverage
 before augmentation. [Source, conditioning and crop audit](results/full-corpus-long50k-prefix-v1/source-and-crop-audit.json).
 
+### Third photographic epoch and the 58k prefix
+
+The executed source ledger completes the third ordinary-photo epoch at
+update **51,009**. By update 58,000, the run has processed **928,000**
+target slots, including 309,471 ordinary photo draws. All 90,778 photos
+appear at least three times and 37,137 appear four times. The median
+fourth crop adds **2.38%** of its source's cached area to the union of
+earlier crops. The cumulative median for this subset is **81.21%**.
+For 4,138 fourth visits, the new rectangle falls entirely within the
+previous union. The coverage measurement uses pre-augmentation rectangles
+and the audited draw seeds advance throughout the run.
+
+The prefix audit matches every recorded ordinary identity and every
+update seed to the fixed schedule, verifies the original 50k log prefix
+and checks 32 additional conditioning chunks. The latest image-quality
+evaluation is the retained 50k checkpoint.
+[58k source audit](results/full-corpus-long58k-prefix-v1/source-audit.json) ·
+[Audit code](results/full-corpus-long58k-prefix-v1/audit.py.gz).
+
 ### Observed source and crop coverage through 30k
 
 The running 100k schedule records 480,000 example slots through
