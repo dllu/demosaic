@@ -202,6 +202,11 @@ RAW fixed across three whole-scene contexts. The existing spatial 2k
 EMA gives almost the same weak response for aligned and orthogonal
 guides at both priors. The [expanded matched scene run](expanded-scene-corpus.md#matched-12000-update-continuation)
 tests the same adapter on a larger corpus from the 100k parent.
+The [isolated RAW line fit](isolated-raw-line.md) uses a measured
+exterior guide and disjoint local Bayer support. On fresh partial
+ISO400 wires it recovers about 81% of the increment, with 2.40 DN16
+of added gap RMS after the short-window support check. Its isolated
+geometry rule leaves the standing GFX predictions at their parents.
 The [near-ADC training continuation](near-adc-bridge-training.md#positive-noise-results)
 gives small positive-noise gains with large saturated-color errors.
 The existing bounded RAW corrections yield larger weak-band gains and

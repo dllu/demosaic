@@ -78,6 +78,12 @@ in each linked report. [Package interfaces](architecture.md).
 
 ## Experimental detail components
 
+The [isolated RAW line fit](isolated-raw-line.md) recovers about 81%
+of the weak increment through interrupted synthetic ISO400 wires.
+Its short support check lowers added gap RMS from 8.70 to 2.40 DN16
+versus 64-pixel fits. It still attenuates some true wire ends and
+returns the local parent on both standing GFX families.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

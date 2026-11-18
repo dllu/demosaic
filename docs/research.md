@@ -25,6 +25,11 @@ has repeatedly come with extra flat-region error or false color. The
    continuation and an orthogonal guide produce almost the same native weak
    response at ISO400 and ISO6400. The [expanded matched run](expanded-scene-corpus.md#matched-12000-update-continuation)
    starts both arms at 100k and uses the same 24,000 distinct context scenes.
+   The [explicit RAW line fit](isolated-raw-line.md) instead estimates one
+   isolated outer line and checks independent local Bayer samples. It recovers
+   about 81% of the partial ISO400 increment with 2.40 DN16 added gap RMS
+   on fresh cases. High-noise support and proposals for repeated real mesh
+   remain open.
    The [scene-conditioned spectral pilot](scene-spectral-detail.md) routes
    whole-image context to the strength of measured RAW detail. Both trained
    heads improve longer-band error slightly and worsen fine and quiet errors.

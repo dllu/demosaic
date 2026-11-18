@@ -28,6 +28,11 @@ individual reports retain exact measurements, native comparisons and receipts.
 
 ## Completed comparisons that guide the next work
 
+The [isolated RAW line study](isolated-raw-line.md) raises partial
+ISO400 weak response from 11.12% to 80.58% on fresh examples.
+Shorter support lowers added gap RMS to 2.40 DN16. ISO6400 gains
+are sparse and both standing photographs return their local parents.
+
 | Question | Finding | Evidence |
 | --- | --- | --- |
 | How did the full-model continuation perform? | V131 improves broad photo PSNR by 0.04000 dB, with unseen-camera and severe ADC-color costs. Fixed ADC projection repairs color with a weak-band tradeoff | [Broad V131](v131-broad-primary.md), [ADC option](v131-adc-projection.md) |

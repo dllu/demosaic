@@ -85,7 +85,9 @@ def inputs():
 
 @pytest.mark.parametrize("mode", ["pooled", "spatial"])
 def test_heterogeneous_scenes_keep_crop_assignment_and_original_local_batch(mode):
-    model = WholeSceneRestorer(Base(), mode=mode, adapter_width=4).eval()
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(733)
+        model = WholeSceneRestorer(Base(), mode=mode, adapter_width=4).eval()
     raw, args, _ = inputs()
     other = torch.rand(4, 80, 128, generator=torch.Generator().manual_seed(222))
     scenes = [model.encode_scene(r, args[2][0], args[3][0], args[4][0]) for r in [raw, other]]
