@@ -89,3 +89,38 @@ that independent-draw cost. The table contains only the frozen
 starting model and its parents.
 [Metrics and source intervals](results/paired-repeat-stability-v2/start64-summary.json) ·
 [Per-source inputs and frozen analysis](results/paired-repeat-stability-v2/start64-evidence.tar.xz).
+
+On the 32 additional photos, independently drawn ISO6400
+pairs reproduce the tradeoff. Aligned response rises 0.390
+percentage points, shared error falls 183 DN16² and variance
+rises 315 DN16². Fine-increment RMS rises 0.462 DN16 and flat
+RMS rises 0.049 DN16. The change in single-present fine RMS
+is +0.025 DN16 with an interval spanning zero.
+[All 96 starting-model results](results/paired-repeat-stability-v2/starting-all96-summary.json) ·
+[Per-source evidence](results/paired-repeat-stability-v2/starting-all96-evidence.tar.xz).
+
+## First checkpoint at 300 updates
+
+The first 16 original photos have an early ISO6400 numerical
+check with three redraws per law. The three EMA heads share
+the checkpoint `1940c84a459b5815d48e7c0b7b19dd940d682e5d663a11b4a0eedd0bf54281b1`.
+Compared with the matched control, the higher repeat weight
+reduces independent-draw fine-increment variance by 154.4
+DN16² and raises shared error by 121.4 DN16². Fine-increment
+RMS decreases 0.114 DN16 and exact-flat fine RMS decreases
+0.029 DN16. Target-aligned response falls 0.203 percentage
+points. In the coupled comparison, target-aligned response
+falls 0.190 percentage points and increment RMS rises
+0.470 DN16.
+
+Scaling the control correction to 25.5% of its strength gives
+the same pooled independent-draw response as the higher-repeat
+head. Against this response-matched control, that head changes
+increment RMS by +0.003 DN16 [−0.012, 0.023], flat RMS by
++0.0001 DN16 [−0.0014, 0.0026] and draw variance by +6.2 DN16²
+[−5.4, 20.5]. The scalar was fitted on these same 16 sources
+as a descriptive control. Most of the apparent variance gain
+at this checkpoint can be reproduced by weakening the correction.
+The 96-photo endpoint evaluation and actual GFX viewing are pending.
+[Interim metrics and source intervals](results/paired-repeat-stability-v2/checkpoint300-summary.json) ·
+[Frozen checkpoint evaluation](results/paired-repeat-stability-v2/checkpoint300-evidence.tar.xz).
