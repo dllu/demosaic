@@ -174,6 +174,12 @@ has repeatedly come with extra flat-region error or false color. The
    ISO6400 increment error rises despite greater average response.
    A context-derived footprint needs a reliable location and reserved
    RAW validation for straight rails and high-noise cases.
+   [Reserved RAW footprint selection](reserved-wire-footprint.md) estimates
+   that location from the stronger direction and tapers only the other.
+   At the uniform quiet limit the ISO400 offset response rises from 1.67%
+   to 7.58%, with increment RMS falling from 5.90 to 5.77 DN16.
+   The simpler two-direction taper raises error. ISO6400 locations are
+   unreliable, and the estimate leaves the fine cab crossings unresolved.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

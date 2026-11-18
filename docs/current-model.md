@@ -255,6 +255,13 @@ misregistration loses it. ISO6400 increment error rises. On GFX, the
 uniform fundamental fit produces a smaller spectral building correction
 and preserves the coarse lattice. The fine cab crops stay at V120.
 
+[Reserved RAW footprint selection](reserved-wire-footprint.md) gives
+better ISO400 weak response and lower increment error when the stronger
+direction locates a footprint for the other. Confining both directions
+raises increment error. Partner-only false rail RMS is close to uniform,
+and the confirmed real crop variants recover no new fine crossings.
+The ISO6400 offset panel has essentially no weak response.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

@@ -144,6 +144,10 @@ historical boards. Use these reports for the current completed comparisons:
 - The [uniform fundamental fit](wire-envelopes.md#native-gfx100s-review)
   keeps the sky and coarse crossings. The spectral building correction
   falls from 2.94 to 1.46 DN16 RMS relative to V120. Foliage stays soft.
+- [Reserved RAW footprints](reserved-wire-footprint.md#native-gfx100s-review)
+  keep the sky at V120. The low-margin spectral arm adds a faint building
+  modulation. The partner-only arm retains the uniform coarse fence and
+  adds no new crossings.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

@@ -64,7 +64,7 @@ def setup(root, base, controls=None, fundamental_footprints=False):
     )
 
 
-def targets(index, seed):
+def targets(index, seed, *, along_limit=35):
     rng = np.random.default_rng(np.random.SeedSequence([seed, 0, index]))
     style = "bent-rail" if index % 2 == 0 else "two-rails"
     angle, width, shift, level, height = rng.uniform(
@@ -72,7 +72,7 @@ def targets(index, seed):
     )
     rail = fresh_structure(style, angle, width, shift, level, height)
     yy, xx = np.indices(rail.shape[1:]) - 127.5
-    along = -np.sin(angle) * xx + np.cos(angle) * yy - rng.uniform(-35, 35)
+    along = -np.sin(angle) * xx + np.cos(angle) * yy - rng.uniform(-along_limit, along_limit)
     across = np.cos(angle) * xx + np.sin(angle) * yy - (shift + rng.uniform(3, 11))
     radii = rng.uniform([71, 41], [103, 70])
 
