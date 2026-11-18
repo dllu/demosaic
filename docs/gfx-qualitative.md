@@ -13,6 +13,8 @@ historical boards. Use these reports for the current completed comparisons:
   keeps the sky and coarse fence intact. Cables and foliage remain soft.
   [Separate quiet smoothing](paired-flat-companion.md#standing-gfx100s-comparisons)
   also keeps both coarse crossing directions and a smooth sky.
+  [Completed projected repeat heads](paired-shape-stability.md#standing-gfx100s-comparisons)
+  keep the sky smooth and coarse fence coherent, with soft thin wires and foliage.
 - [V120/V121 primary and full-frame review](v120-v121-primary.md): the general
   baseline, including matched full-frame noise conditioning.
 - [V131 20k endpoint](v131-endpoint-quality.md) and

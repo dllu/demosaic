@@ -340,6 +340,11 @@ guarded correction to an independent exposure brings the
 parent-correction covariance near zero and improves increment
 error over Corpus 100k. Same-frame innovation smoothing gives
 only a small benefit over the response-matched paired head.
+The [projected repeat endpoint](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
+retains some response lost under the standard repeat loss.
+Calibrating to the ordinary control's response lowers coupled
+error by 0.085 DN16 and raises independent error by 0.049 DN16
+on the additional sources.
 
 The [readout-row stress test](withheld-row-noise.md) shows that
 disjoint Bayer pixels can still validate the same simulated noise.

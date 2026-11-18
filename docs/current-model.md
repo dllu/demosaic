@@ -106,6 +106,11 @@ fine mesh and the tradeoff versus Corpus 100k remain.
 [Quiet-region smoothing plus the fine lift](paired-flat-companion.md)
 reduces exact-flat RMS by 0.164 DN16 with a small positive
 fine response. High-noise increment error remains mixed.
+[Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
+recovers some of the response lost by standard repeat training,
+with higher independent-draw error than the ordinary control
+at matched response. Both standing GFX scenes remain soft in
+the finest structures.
 
 The [isolated RAW line fit](isolated-raw-line.md) recovers about 81%
 of the weak increment through interrupted synthetic ISO400 wires.
