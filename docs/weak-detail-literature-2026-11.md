@@ -280,6 +280,11 @@ keeps the fresh and standing outputs bit-identical to the local
 audit. Hard sharing can reject true detail when the exterior color
 disagrees. [Signed RAW tint check](mesh-donor-tint.md).
 
+A [localized training intervention](scene-local-contrast-training.md)
+weakens fine structure inside the native crop while preserving the
+rest of each scene. Data and discarded CUDA updates pass. Learned
+quality remains unmeasured.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

@@ -7,6 +7,9 @@ neutral scene. It slightly lowers recovery and increases quiet-region error
 at ISO6400. Matched native viewing finds smooth sky and visible coarse
 crossings, with no clear new fine cab crossings or canopy cords. The broad
 camera panels are complete and the fixed photo panel is collecting.
+
+The [localized contrast preflight](scene-local-contrast-training.md)
+adds an opt-in data intervention for future matched scene training.
 [Matched training and independently verified counts](results/expanded-scene-12000-v2/training-completion.json) ·
 [Scoped intervention](results/expanded-scene-12000-v2/spatial12k-wire-gap.json).
 

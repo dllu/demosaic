@@ -10,6 +10,7 @@ import numpy as np
 import torch
 from torch.nn import functional as F
 
+from .data import validate_probability
 from .experiments.artifacts import reference
 from .photo_epoch_order import PhotoEpochOrder, reader_policy
 from .prediction_archive import fingerprint
@@ -19,6 +20,30 @@ from .scene_data import SceneObservation, observe_scene, sample_scene_recipe, sc
 def scene_seed(seed, index, purpose):
     data = f"{seed}:{index}:{purpose}".encode()
     return int.from_bytes(hashlib.sha256(data).digest()[:8], "little") % 2**62
+
+
+def _attenuate_local_contrast(rgb, box, scale):
+    """Reduce texture inside one crop with a smooth taper into the original scene."""
+    x, y, width, height = box
+    crop = rgb[:, y : y + height, x : x + width]
+    center = crop[:, height // 2, width // 2, None, None]
+    centered = crop - center
+    low = F.avg_pool2d(centered[None], kernel_size=9, stride=1, padding=4, count_include_pad=False)[
+        0
+    ]
+    size = min(width, height)
+    radius, taper = size * (72 / 256), size * (20 / 256)
+
+    def axis(count):
+        distance = (torch.arange(count, dtype=rgb.dtype, device=rgb.device) - (count - 1) / 2).abs()
+        u = ((radius - distance) / taper).clamp(0, 1)
+        return u.square() * (3 - 2 * u)
+
+    support = axis(height)[:, None] * axis(width)[None, :]
+    changed = crop + (1 - scale) * support * (low - centered)
+    scene = rgb.clone()
+    scene[:, y : y + height, x : x + width] = torch.where(support > 0, changed, crop)
+    return scene
 
 
 @dataclass(frozen=True)
@@ -31,9 +56,9 @@ class SceneTrainingSample:
 class ScenePhotoDataset:
     """Retain a complete binned source, then camera/noise once before cropping.
 
-    Only global D4 augmentation is applied. Integer area reduction is explicit;
-    there is no independent crop resize, optical PSF or projective transform.
-    Each selected cache's actual bytes are checked once per dataset instance.
+    Integer area reduction and global D4 precede optional local contrast
+    attenuation in one crop. Each selected cache's bytes are checked once
+    per dataset instance.
     """
 
     def __init__(
@@ -44,6 +69,7 @@ class ScenePhotoDataset:
         patch_size=256,
         crops_per_scene=4,
         reduction=1,
+        local_contrast_fraction=0.0,
         photo_epoch_order=None,
         photo_epoch_order_sha256=None,
     ):
@@ -78,6 +104,9 @@ class ScenePhotoDataset:
                 )
         self.seed, self.patch_size, self.crops_per_scene = seed, patch_size, crops_per_scene
         self.reduction = reduction
+        self.local_contrast_fraction = validate_probability(
+            local_contrast_fraction, "Scene local contrast fraction"
+        )
         self.checked_files = set()
         if photo_epoch_order is None and photo_epoch_order_sha256 is not None:
             raise ValueError("Photographic epoch order hash requires its header")
@@ -121,13 +150,21 @@ class ScenePhotoDataset:
         if mirror:
             rgb = rgb.flip(-1)
         recipe = sample_scene_recipe(scene_seed(self.seed, index, "camera-noise"))
-        observation = observe_scene(rgb.contiguous(), recipe)
         boxes = scene_crop_boxes(
             rgb.shape[-2:],
             patch_size=self.patch_size,
             count=self.crops_per_scene,
             seed=scene_seed(self.seed, index, "crops"),
         )
+        local_contrast = None
+        if self.local_contrast_fraction:
+            contrast_rng = random.Random(scene_seed(self.seed, index, "local-contrast"))
+            if contrast_rng.random() < self.local_contrast_fraction:
+                box = contrast_rng.choice(boxes)
+                scale = 2 ** contrast_rng.uniform(-3, -1)
+                rgb = _attenuate_local_contrast(rgb, box, scale)
+                local_contrast = {"box_xywh": list(box), "scale": scale}
+        observation = observe_scene(rgb.contiguous(), recipe)
         crops = observation.crops(boxes)
         metadata = {
             "index": index,
@@ -148,4 +185,10 @@ class ScenePhotoDataset:
         }
         if self.photo_epoch_order is not None:
             metadata["photo_epoch_order_sha256"] = self.photo_epoch_order.sha256
+        if local_contrast is not None:
+            metadata["local_contrast"] = local_contrast
+            metadata["scope"] = (
+                "One complete camera/noise observation with localized contrast attenuation "
+                "before Bayer sampling. Preview and crops share observed RAW."
+            )
         return SceneTrainingSample(observation, crops, metadata)

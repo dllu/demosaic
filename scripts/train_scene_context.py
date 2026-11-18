@@ -125,6 +125,7 @@ def training_dataset(plan):
         seed=plan["data_seed"],
         patch_size=plan["patch_size"],
         crops_per_scene=plan["crops_per_scene"],
+        local_contrast_fraction=plan.get("local_contrast_fraction", 0.0),
         photo_epoch_order=checked(order) if order is not None else None,
         photo_epoch_order_sha256=order["sha256"] if order is not None else None,
     )

@@ -9,7 +9,7 @@ from prepare_scene_epoch_corpus import write_order
 from train_scene_context import training_dataset
 
 from demosaic.experiments.artifacts import reference
-from demosaic.scene_training_data import ScenePhotoDataset
+from demosaic.scene_training_data import ScenePhotoDataset, _attenuate_local_contrast
 
 
 def test_full_source_replay_covers_augmentation_noise_coordinates_and_targets(tmp_path):
@@ -84,3 +84,66 @@ def test_prepared_scene_epochs_drive_the_training_reader(tmp_path):
         dataset[6]
     with pytest.raises(ValueError, match="training layout/horizon"):
         training_dataset(plan | {"scenes_per_step": 3})
+
+
+def test_local_contrast_keeps_context_targets_and_replays_full_raw(tmp_path):
+    y, x = np.indices((128, 160))
+    texture = (2500 * (-1) ** (x + y) + 30 * x).astype(np.int32)
+    image = np.stack([16000 + texture, 18000 + texture, 20000 + texture], axis=-1)
+    path = tmp_path / "texture.npy"
+    np.save(path, image.astype(np.uint16))
+    manifest = tmp_path / "manifest.jsonl"
+    manifest.write_text(
+        json.dumps(
+            {
+                "id": "fixture",
+                "cache": path.name,
+                "cache_sha256": reference(path)["sha256"],
+                "shape": list(image.shape),
+                "bin_factor": 4,
+                "color_space": "linear-sRGB",
+                "dtype": "uint16",
+            }
+        )
+        + "\n"
+    )
+    plan = {
+        "train_manifest": reference(manifest),
+        "data_seed": 91,
+        "patch_size": 64,
+        "crops_per_scene": 2,
+    }
+    original = training_dataset(plan)[3]
+    explicit_off = training_dataset(plan | {"local_contrast_fraction": 0})[3]
+    assert original.metadata == explicit_off.metadata
+    augmented = training_dataset(plan | {"local_contrast_fraction": 1})
+    sample = augmented[3]
+    assert sample.metadata == augmented[3].metadata
+    assert sample.metadata["recipe"] == original.metadata["recipe"]
+    assert sample.metadata["boxes_xywh"] == original.metadata["boxes_xywh"]
+    assert sample.metadata["source_id"] == original.metadata["source_id"]
+    choice = sample.metadata["local_contrast"]
+    assert 0.125 < choice["scale"] < 0.5
+    target = sample.observation.sensor_target
+    prior = original.observation.sensor_target
+    u, v, _, _ = choice["box_xywh"]
+    core = (..., slice(v + 14, v + 50), slice(u + 14, u + 50))
+    outside = torch.ones(target.shape[-2:], dtype=torch.bool)
+    outside[core[1:]] = False
+    torch.testing.assert_close(target[:, outside], prior[:, outside], rtol=0, atol=0)
+    assert (target[core] - prior[core]).abs().max() > 1e-3
+    assert (
+        target[..., v + 24 : v + 40, u + 24 : u + 40].std(dim=(-2, -1)).mean()
+        < prior[..., v + 24 : v + 40, u + 24 : u + 40].std(dim=(-2, -1)).mean()
+    )
+    exact_crop = sample.observation.crops(sample.metadata["boxes_xywh"])
+    for key in sample.crops:
+        torch.testing.assert_close(sample.crops[key], exact_crop[key], rtol=0, atol=0)
+    with pytest.raises(ValueError, match="Scene local contrast fraction"):
+        training_dataset(plan | {"local_contrast_fraction": 1.1})
+
+
+def test_local_contrast_keeps_constant_color_exact():
+    flat = torch.tensor([0.03, 0.33333, 0.42])[:, None, None].expand(3, 128, 160)
+    adjusted = _attenuate_local_contrast(flat, (12, 18, 64, 64), 0.125)
+    torch.testing.assert_close(adjusted, flat, rtol=0, atol=0)
