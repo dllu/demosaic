@@ -235,6 +235,13 @@ increase errors on the straight controls and recover little of
 the faint signal deliberately added beside rails. The fine cab
 crossings remain incomplete.
 
+[Nested RAW background screening](screened-query-edges.md) retains
+the curved fit's reduction on the new complex rail controls, from
+5.61 to 1.31 DN16 RMS over parallel steps. It retains the parallel
+refit's predictions on the archived positive panels and cuts the
+unscreened straight-edge error. Fine crossing recovery beside rails
+remains negligible.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

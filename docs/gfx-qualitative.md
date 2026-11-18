@@ -134,6 +134,9 @@ historical boards. Use these reports for the current completed comparisons:
   keep sky, building and foliage at V120 with full-frame guides
   and retain the coarse crossings. With the fixed spectral
   guide, four boundaries reduce the building correction to 2.94 DN16.
+- [Nested background screening](screened-query-edges.md#native-gfx100s-review)
+  reproduces the unscreened curves on all fixed crops at the
+  nominal gate. The sky stays smooth and the coarse crossings persist.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

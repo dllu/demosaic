@@ -14,6 +14,8 @@ import numpy as np
 
 from .experiments.evaluation.withheld import fit_candidate, geometry, stratified_split
 
+_FLEXIBLE_BACKGROUNDS = {"curved_step": 2, "curved4_step": 4, "screened_curved4_step": 4}
+
 
 @dataclass(frozen=True)
 class LocalWaveConfig:
@@ -73,8 +75,7 @@ class LocalWaveConfig:
                 "step",
                 "piecewise_affine",
                 "parallel_step",
-                "curved_step",
-                "curved4_step",
+                *_FLEXIBLE_BACKGROUNDS,
             )
             or self.edge_search not in ("bounded-grid", "full-frame")
             or self.frequency_weighting
@@ -122,6 +123,7 @@ class LocalCandidate:
     phase_drift_trials: tuple = ()
     parallel_edges: tuple | None = None
     flexible_edges: tuple | None = None
+    flexible_screen: dict | None = None
 
 
 def _phase_cycles(xx, yy, frequency, offset):
@@ -711,11 +713,12 @@ def fit_local_candidate(
     edge_for_validation = nuisance
     parallel = None
     flexible = None
+    screen = None
     if config.background == "piecewise_affine":
         step = nuisance[:, 3]
         nuisance = np.column_stack((nuisance, x.ravel() * step, y.ravel() * step))
         edge_for_validation = nuisance
-    elif config.background in ("parallel_step", "curved_step", "curved4_step"):
+    elif config.background in ("parallel_step", *_FLEXIBLE_BACKGROUNDS):
         from .full_frame_edge import supported_parallel_edges
 
         values = raw.ravel()[green]
@@ -734,21 +737,35 @@ def fit_local_candidate(
             normal, first, second = parallel
             pos = (x * np.cos(normal) + y * np.sin(normal)).ravel()
             nuisance = np.column_stack((affine, pos > first, pos > second))
-        if config.background != "parallel_step":
+        if config.background in _FLEXIBLE_BACKGROUNDS:
             from .flexible_edge import edge_terms, fit_flexible_edges
 
             xy = affine[:, 1:]
             normal, *offsets = parallel if parallel is not None else (angle, offset)
-            flexible = fit_flexible_edges(
-                values,
-                xy[green],
-                normal,
-                offsets,
-                min(raw.shape),
-                shot,
-                read,
-                maximum=4 if config.background == "curved4_step" else 2,
-            )
+            if config.background == "screened_curved4_step":
+                from .flexible_edge import screen_flexible_edges
+
+                nested = stratified_split(raw.shape, config.split_seed + 810540).ravel()[green]
+                screen = screen_flexible_edges(
+                    values,
+                    xy[green],
+                    nested,
+                    min(raw.shape),
+                    shot,
+                    read,
+                    refinements=config.edge_refinements,
+                )
+            if screen is None or screen["accepted"]:
+                flexible = fit_flexible_edges(
+                    values,
+                    xy[green],
+                    normal,
+                    offsets,
+                    min(raw.shape),
+                    shot,
+                    read,
+                    maximum=_FLEXIBLE_BACKGROUNDS[config.background],
+                )
             if flexible is not None:
                 nuisance = np.column_stack((affine, edge_terms(xy, *flexible)))
     excluded = 0
@@ -953,6 +970,7 @@ def fit_local_candidate(
         drift_trials,
         parallel,
         flexible,
+        screen,
     )
 
 
@@ -1844,12 +1862,17 @@ def restore_local_waves(
                     "edges": [c.edge_geometry for c in candidates],
                     **(
                         {"parallel_edges": [c.parallel_edges for c in candidates]}
-                        if config.background in ("parallel_step", "curved_step", "curved4_step")
+                        if config.background in ("parallel_step", *_FLEXIBLE_BACKGROUNDS)
                         else {}
                     ),
                     **(
                         {"flexible_edges": [c.flexible_edges for c in candidates]}
-                        if config.background in ("curved_step", "curved4_step")
+                        if config.background in _FLEXIBLE_BACKGROUNDS
+                        else {}
+                    ),
+                    **(
+                        {"flexible_screen": [c.flexible_screen for c in candidates]}
+                        if config.background == "screened_curved4_step"
                         else {}
                     ),
                     **(

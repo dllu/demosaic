@@ -7,6 +7,10 @@ changes the query's predictive background. The guides, reserved
 Bayer sites, phase fit, correction scale, wave gate and parent
 are shared with the parallel-step refit.
 
+The [nested-screen follow-up](screened-query-edges.md) checks each
+curved fit against hard and smooth parallel predictions. It keeps
+the complex-rail gains while avoiding most straight-edge regressions.
+
 ## Discovery and validation
 
 Each fold starts from its own supported parallel steps. The new

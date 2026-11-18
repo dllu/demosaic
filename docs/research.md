@@ -156,6 +156,12 @@ has repeatedly come with extra flat-region error or false color. The
    wire added beside rails, the faint increment remains mostly
    unrecovered. Preserve the parallel fallback where additional
    shape parameters have little predictive support.
+   [Nested screening](screened-query-edges.md) compares curved
+   shapes on reserved discovery samples against both hard and
+   smooth parallel models. It retains the complex-rail mitigation
+   and most straight-edge behavior. The positive archive
+   returns to the parallel refit, with the same weak response
+   beside rails as the unscreened curves.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

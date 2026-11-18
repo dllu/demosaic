@@ -91,7 +91,11 @@ def predict(parent, packed, colors, guide, noise, query, configs, threshold, *, 
                 active_guide_directions=guide["active"],
             )
             receipts[arm] = [
-                {"parallel_edges": r["parallel_edges"], "flexible_edges": r["flexible_edges"]}
+                {
+                    "parallel_edges": r["parallel_edges"],
+                    "flexible_edges": r.get("flexible_edges"),
+                    **({"flexible_screen": r["flexible_screen"]} if "flexible_screen" in r else {}),
+                }
                 for r in aux["records"]
             ]
         else:
