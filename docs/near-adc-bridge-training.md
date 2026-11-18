@@ -12,7 +12,9 @@ prediction itself.
 Both 800-update runs and the retained native review are complete.
 The new arm loses 0.061 dB on the four-material ADC panel versus
 its matched control. Both standing fences and the quiet sky look
-close to the parent. The separate positive-noise study is collecting.
+close to the parent. The positive-noise study finds small photo gains
+and substantially worse color bias on the reserved magenta field.
+The existing RAW corrections repair most of that bias.
 [Completed checkpoint and training audit](results/near-adc-bridge-training-v1/completed-training.json).
 
 ## Matched training
@@ -162,14 +164,75 @@ AHD and both camera JPEGs as independent qualitative references.
 | Nominal | `.00128/6.5536e-6` | [Left](images/near-adc-bridge-native-v1/mesh-nominal-fine-green-mesh-left.png) · [Right](images/near-adc-bridge-native-v1/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred DSCF3879 | `.0014635775921166604/1.0715704128646712e-6` | [Left](images/near-adc-bridge-native-v1/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/near-adc-bridge-native-v1/mesh-profile3879-fine-green-mesh-right.png) |
 
-### Positive-noise and primary coverage
+### Positive-noise results
 
-The independent positive-noise photo, color and edge review is
-collecting. It tests the range that the new training samples add.
-The canonical 427-photo and known/unseen camera review is queued for
-the CPU allocation after the 20k corpus control finishes collecting.
-The matched noisy and exact-target panels use the same reductions as the previous
-near-ADC study. Their scorer exactly replayed all 512 prior saved
-photo rows and 128 flat/edge rows before seeing the new outputs.
+The completed panel uses 16 held-out photos, four CFA layouts and
+four positive-noise priors. The same observations also bind the
+existing V120 predictions. Replaying the scorer with V120 and the
+fixed corrections reproduces all 768 initial photo scores and 288 flat/edge
+rows exactly. There are eight exact flat/edge or palette controls
+across the two sets. Ten positive-noise boards and two additional
+color repair boards were viewed.
+[Numerical results and native evidence](results/near-adc-bridge-positive-v1/publication.json).
+
+| Noise and metric | V120 | 100k parent | Control | Near-ADC |
+| --- | ---: | ---: | ---: | ---: |
+| Small positive, sRGB PSNR | 66.5591 | 67.2522 | 67.2369 | 67.2638 |
+| Small positive, weakest-band RMS DN16 | 2.8964 | 2.9287 | 2.9464 | 2.9411 |
+| Intermediate, sRGB PSNR | 66.1395 | 66.5901 | 66.5961 | 66.5991 |
+| Intermediate, weakest-band RMS DN16 | 4.1390 | 4.0034 | 3.9592 | 3.9698 |
+| ISO6400, sRGB PSNR | 52.2183 | 52.2324 | 52.3225 | 52.3595 |
+| ISO6400, weakest-band RMS DN16 | 9.6491 | 8.7741 | 9.1261 | 9.0879 |
+
+At the smallest positive prior the candidate gains 0.02687 dB and
+lowers weakest-band error by 0.0053 DN16 versus its control. At
+ISO6400 both continuations improve overall PSNR and leave higher
+weakest-band error than the 100k parent. The roof and steeple
+contours look close under both 800-update branches. The ISO6400
+outputs lose most of these faint structures.
+
+At the smallest positive prior, the worst reserved magenta bias
+increases from **28,798 to 34,629 DN16** versus the matched control.
+V120 is at 179.30 DN16 and 100k is at 14,071.70. The worst candidate
+case is GBRG. Its mean blue is 1.428 versus the target 0.900 in
+normalized camera-linear units. At the intermediate prior the
+candidate lowers the original yellow/gray control's worst flat
+bias from 841 to 615 DN16, yet worsens the reserved palette peak
+from 23,476 to 26,914 DN16. The small-positive quiet slanted-edge
+error also rises from 622 to 683 DN16 versus the control.
+
+### Existing measurement corrections
+
+Replaying the [bounded near-ADC residual](noisy-cfa-residual.md)
+and [coarse intermediate correction](coarse-adc-color.md) uses
+their original thresholds. At the smallest positive prior the
+candidate reaches **68.0196 dB** and **2.3495 DN16** weakest-band
+RMS, versus the raw candidate's 67.2638 dB and 2.9411 DN16.
+The corrected equal-budget control reaches 68.0038 dB and
+2.3519 DN16. Most of the measured gain comes from the existing
+measurement correction. It also reduces the candidate's worst
+reserved bias to **141.10 DN16** at small positive and **1,003.29
+DN16** at intermediate. Corrected control and V120 remain lower
+on the smallest prior at 91.51 and 75.18 DN16. All 192 photo
+prediction batches from the other three priors and all 24 GFX
+predictions return their original values exactly.
+
+The two triplets below use the same reserved GBRG magenta,
+`[48,48,160,160]` native ROI, ADC16 black 0.03 and shared
+exposure ×0.5 to expose red/blue bias before display clipping.
+The small-positive shot/read are `1e-8/1e-10` and intermediate
+`3.2e-7/1e-10`. The repaired column uses the near-ADC EMA from
+the completed training audit above.
+[Native provenance](images/near-adc-bridge-positive-v1/manifest.json).
+
+![Small-positive magenta, noisy / repaired / exact GT](images/near-adc-bridge-positive-v1/repair-exposure-half/small-positive-magenta-triplet.png)
+
+![Intermediate magenta, noisy / repaired / exact GT](images/near-adc-bridge-positive-v1/repair-exposure-half/intermediate-magenta-triplet.png)
+
+[Small-positive raw comparison](images/near-adc-bridge-positive-v1/repair-exposure-half/small-positive-magenta-comparison.png) ·
+[Intermediate raw comparison](images/near-adc-bridge-positive-v1/repair-exposure-half/intermediate-magenta-comparison.png).
+
+The canonical 427-photo and known/unseen camera review remains queued
+for the CPU allocation after the 20k corpus control finishes collecting.
 [Parent native report](full-corpus-long100k.md) ·
 [Comparable PSNR history](performance-history.md).

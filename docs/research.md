@@ -21,6 +21,10 @@ has repeatedly come with extra flat-region error or false color. The
    With local RAW fixed, the [near/distant preview intervention](scene-context-extent.md)
    finds distant influence on the real foliage and coarse fence. Blurring near
    the tile changes the two development sources more, with mixed weak-band errors.
+   In the [wire and gap test](scene-wire-gap.md), a stronger aligned distant
+   continuation and an orthogonal guide produce almost the same native weak
+   response at ISO400 and ISO6400. The [expanded matched run](expanded-scene-corpus.md#matched-12000-update-continuation)
+   starts both arms at 100k and uses the same 24,000 distinct context scenes.
    The [scene-conditioned spectral pilot](scene-spectral-detail.md) routes
    whole-image context to the strength of measured RAW detail. Both trained
    heads improve longer-band error slightly and worsen fine and quiet errors.

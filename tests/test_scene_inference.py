@@ -5,8 +5,14 @@ import torch
 from test_scene_restoration import Base
 
 from demosaic.cfa import PATTERNS, pack
+from demosaic.experiments.artifacts import reference
 from demosaic.inference import restore_tiled
-from demosaic.scene_inference import SceneInferenceSession, perturb_scene, restore_scene_tiled
+from demosaic.scene_inference import (
+    SceneInferenceSession,
+    load_scene_checkpoint,
+    perturb_scene,
+    restore_scene_tiled,
+)
 from demosaic.scene_restoration import WholeSceneRestorer
 
 
@@ -67,6 +73,44 @@ def test_tile_blend_matches_existing_inference_for_local_only_model():
     torch.testing.assert_close(actual, expected, atol=0, rtol=0)
     assert stats["scene_encoder_calls"] == 0
     assert stats["native_hw"] == [130, 194]
+
+
+def test_scene_checkpoint_loads_its_bound_continuation_parent(tmp_path, monkeypatch):
+    class Parent(Base):
+        def restoration_state_dict(self):
+            return {
+                k: v for k, v in self.state_dict().items() if not k.startswith("context.backbone.")
+            }
+
+    parent_path = tmp_path / "continuation.pt"
+    parent_path.write_bytes(b"continuation weights")
+    bound_parent = reference(parent_path)
+    model = WholeSceneRestorer(Parent(), mode="spatial", adapter_width=4)
+    checkpoint = tmp_path / "scene.pt"
+    torch.save(
+        {
+            "mode": "spatial",
+            "adapter_width": 4,
+            "base_parent": bound_parent,
+            "ema": model.restoration_state_dict(),
+        },
+        checkpoint,
+    )
+
+    def load_parent(name, *, checkpoint, expected_sha256, device):
+        assert name == "v120"
+        assert checkpoint == parent_path and expected_sha256 == bound_parent["sha256"]
+        return Parent().to(device), {"loaded_sha256": expected_sha256}
+
+    monkeypatch.setattr("demosaic.models.load_model", load_parent)
+    loaded, state = load_scene_checkpoint(checkpoint)
+    assert state["loaded_weights"] == "ema"
+    for key, value in loaded.restoration_state_dict().items():
+        torch.testing.assert_close(value, model.restoration_state_dict()[key])
+
+    parent_path.write_bytes(b"different continuation weights")
+    with pytest.raises(ValueError, match="Artifact digest mismatch"):
+        load_scene_checkpoint(checkpoint)
 
 
 def test_feature_interventions_preserve_values_and_affect_delivered_rgb():

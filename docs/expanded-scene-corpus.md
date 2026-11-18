@@ -74,3 +74,34 @@ admitted size, a crop covers a greater fraction of the field than in a
 full GFX frame. The effect of that difference needs real-frame testing.
 Restoration quality and long-run throughput remain open.
 [Prior scene evidence and review protocol](whole-scene-context-next-test.md).
+
+## Matched 12,000-update continuation
+
+The expanded training has started from the verified full-corpus 100k
+EMA `87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760`.
+The local-only and spatial arms each have a fixed horizon of 12,000
+updates, 24,000 distinct scene visits and 96,000 native bin4 crops.
+They use the same initial trunk, common shuffled epoch prefix and
+canonical sensor-valid objective. Both optimizer schedules use a
+100-update warmup with peak trunk rate `3e-6` and adapter rate `1e-4`.
+The spatial arm adds the existing zero-output adapter at eighth
+resolution. The architecture and loss otherwise match the prior
+matched scene trial.
+
+The first attempt stopped before any update because the scene loader
+expected the original V120 digest. The corrected loader binds the
+digest in the training plan and the saved scene checkpoint. Both
+arms then passed two discarded optimizer updates on identical first
+four scene observations from the new parent. The production
+local-only arm has passed 500 updates. Training and all quality
+comparisons are still pending.
+[Checkpoint bindings, preflight and start evidence](results/expanded-scene-12000-v2/publication.json).
+
+Both standing GFX families use the existing fixed native inputs with a
+matched V120 and 100k comparison. The earlier 64 scene development
+photos are excluded from this order, but the 100k parent has prior
+exposure. The independent quality checks use the canonical held-out
+panels and the constructed wire/gap intervention. The latter finds
+negligible guide-specific response from the old spatial 2k endpoint.
+[Wire and gap test](scene-wire-gap.md) ·
+[100k parent](full-corpus-long100k.md).

@@ -24,7 +24,13 @@ from demosaic.scene_training_data import ScenePhotoDataset
 
 def make_model(plan, mode):
     torch.manual_seed(plan["model_seed"])
-    base, payload = load_model("v120", checkpoint=checked(plan["parent"]), device="cuda")
+    parent_binding = plan["parent"]
+    base, payload = load_model(
+        "v120",
+        checkpoint=checked(parent_binding),
+        expected_sha256=parent_binding["sha256"],
+        device="cuda",
+    )
     assert len(base.restoration_state_dict()) == 91
     parent = payload.get("ema", payload["model"])
     assert all(torch.equal(v.cpu(), parent[k]) for k, v in base.restoration_state_dict().items())

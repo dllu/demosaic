@@ -46,8 +46,14 @@ def load_scene_checkpoint(path, *, device="cpu", weights="ema", expected_sha256=
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     if expected_sha256 is not None and digest != expected_sha256:
         raise ValueError("Scene checkpoint digest differs")
-    base, parent = load_model("v120", checkpoint=checked(state["base_parent"]), device=device)
-    if parent["loaded_sha256"] != state["base_parent"]["sha256"]:
+    parent_binding = state["base_parent"]
+    base, parent = load_model(
+        "v120",
+        checkpoint=checked(parent_binding),
+        expected_sha256=parent_binding["sha256"],
+        device=device,
+    )
+    if parent["loaded_sha256"] != parent_binding["sha256"]:
         raise ValueError("Scene parent identity differs")
     model = WholeSceneRestorer(base, mode=state["mode"], adapter_width=state["adapter_width"])
     model.to(device)

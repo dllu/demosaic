@@ -27,24 +27,30 @@ def collect(plan_path, arm):
     assert reference(__file__) == plan["script"]
     for path, digest in plan["sources"].items():
         checked({"path": path, "sha256": digest})
-    os.sched_setaffinity(0, [8, 9])
+    os.sched_setaffinity(0, plan.get("CPU_affinity", [8, 9]))
     os.nice(10)
     torch.set_num_threads(2)
     root = Path(plan["root"])
     training = read_json(checked(plan["training_plan"]))
     endpoint = None
     if arm == "parent":
-        base, _ = load_model("v120", checkpoint=checked(plan["parent"]), device="cpu")
+        bound = plan["parent"]
+        base, _ = load_model(
+            "v120", checkpoint=checked(bound), expected_sha256=bound["sha256"], device="cpu"
+        )
         model = WholeSceneRestorer(base, mode="none", adapter_width=training["adapter_width"])
     else:
-        terminal = read_json(Path(training["work"]) / "artifacts/train" / arm / "completed.json")
-        assert terminal["steps"] == training["steps"] == 2000 and terminal["DINO_unchanged"]
+        training_root = Path(
+            plan.get("training_output_root", Path(training["work"]) / "artifacts/train")
+        )
+        terminal = read_json(training_root / arm / "completed.json")
+        assert terminal["steps"] == training["steps"] and terminal["DINO_unchanged"]
         assert terminal["plan"] == plan["training_plan"]
         endpoint = terminal["checkpoints"][-1]
         model, state = load_scene_checkpoint(
             checked(endpoint), weights="ema", expected_sha256=endpoint["sha256"]
         )
-        assert state["step"] == 2000 and model.mode == arm
+        assert state["step"] == training["steps"] and model.mode == arm
         del state
     model.eval().to(memory_format=torch.contiguous_format)
     assert model_hash(model.base.context.backbone) == plan["DINO_sha256"]

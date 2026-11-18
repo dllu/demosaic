@@ -1,0 +1,3204 @@
+{
+  "groups": {
+    "positive": [
+      {
+        "id": "small-positive-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast20",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 20,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "faint-photo-009-RGGB-small-positive",
+          "kind": "faint-photo",
+          "source_ids": [
+            "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+            "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+            "0377265873e0920b35d068a0dfc5ea76d8984783",
+            "039a221ab23b6e79f59111752337744617f857f8"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+            "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+            "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+          },
+          "original_canonical": {
+            "stage": "photo",
+            "batch": 252,
+            "arrays": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+              "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+            },
+            "fingerprints": {
+              "packed": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+              },
+              "variance": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+              },
+              "colors": {
+                "shape": [
+                  4,
+                  4
+                ],
+                "dtype": "<i8",
+                "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+              },
+              "wb": {
+                "shape": [
+                  4,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+              },
+              "matrix": {
+                "shape": [
+                  4,
+                  3,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+              },
+              "target": {
+                "shape": [
+                  4,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+              }
+            },
+            "context": {
+              "ids": [
+                "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+                "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+                "0377265873e0920b35d068a0dfc5ea76d8984783",
+                "039a221ab23b6e79f59111752337744617f857f8"
+              ],
+              "condition": {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              "pattern": "RGGB",
+              "seed": 20261014,
+              "clean_RGB": {
+                "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+                "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+              }
+            },
+            "historic_five_arguments_exact": true
+          },
+          "input_fingerprints": {
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+            }
+          },
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            8,
+            8,
+            240,
+            240
+          ],
+          "noise": {
+            "name": "small-positive",
+            "shot": 1e-08,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          },
+          "ADC_parent": "faint-photo-009-RGGB",
+          "seed": 2970521409687950525
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast20-comparison.png",
+            "sha256": "1600c8c69ec2c17008ae53a95667883a04d4e72145b2060a995be7b5837c8dfe"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast20-triplet.png",
+            "sha256": "0408ed52246a235cb76b7947d52994d646c93498af38161e1bb154fcea652c2d"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "small-positive-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast1",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "faint-photo-009-RGGB-small-positive",
+          "kind": "faint-photo",
+          "source_ids": [
+            "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+            "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+            "0377265873e0920b35d068a0dfc5ea76d8984783",
+            "039a221ab23b6e79f59111752337744617f857f8"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+            "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+            "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+          },
+          "original_canonical": {
+            "stage": "photo",
+            "batch": 252,
+            "arrays": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+              "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+            },
+            "fingerprints": {
+              "packed": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+              },
+              "variance": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+              },
+              "colors": {
+                "shape": [
+                  4,
+                  4
+                ],
+                "dtype": "<i8",
+                "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+              },
+              "wb": {
+                "shape": [
+                  4,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+              },
+              "matrix": {
+                "shape": [
+                  4,
+                  3,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+              },
+              "target": {
+                "shape": [
+                  4,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+              }
+            },
+            "context": {
+              "ids": [
+                "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+                "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+                "0377265873e0920b35d068a0dfc5ea76d8984783",
+                "039a221ab23b6e79f59111752337744617f857f8"
+              ],
+              "condition": {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              "pattern": "RGGB",
+              "seed": 20261014,
+              "clean_RGB": {
+                "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+                "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+              }
+            },
+            "historic_five_arguments_exact": true
+          },
+          "input_fingerprints": {
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+            }
+          },
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            8,
+            8,
+            240,
+            240
+          ],
+          "noise": {
+            "name": "small-positive",
+            "shot": 1e-08,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          },
+          "ADC_parent": "faint-photo-009-RGGB",
+          "seed": 2970521409687950525
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast1-comparison.png",
+            "sha256": "6348e97ae8549f0b35737ac5bca76c697c21a78f3cd90046ce919632879c536c"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast1-triplet.png",
+            "sha256": "c2882f8e1c27623badd8416ebbe4ecf7efcd32b2601ace944564c287a156a81e"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "small-positive-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast20",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 20,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "faint-photo-009-RGGB-small-positive",
+          "kind": "faint-photo",
+          "source_ids": [
+            "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+            "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+            "0377265873e0920b35d068a0dfc5ea76d8984783",
+            "039a221ab23b6e79f59111752337744617f857f8"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+            "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+            "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+          },
+          "original_canonical": {
+            "stage": "photo",
+            "batch": 252,
+            "arrays": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+              "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+            },
+            "fingerprints": {
+              "packed": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+              },
+              "variance": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+              },
+              "colors": {
+                "shape": [
+                  4,
+                  4
+                ],
+                "dtype": "<i8",
+                "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+              },
+              "wb": {
+                "shape": [
+                  4,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+              },
+              "matrix": {
+                "shape": [
+                  4,
+                  3,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+              },
+              "target": {
+                "shape": [
+                  4,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+              }
+            },
+            "context": {
+              "ids": [
+                "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+                "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+                "0377265873e0920b35d068a0dfc5ea76d8984783",
+                "039a221ab23b6e79f59111752337744617f857f8"
+              ],
+              "condition": {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              "pattern": "RGGB",
+              "seed": 20261014,
+              "clean_RGB": {
+                "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+                "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+              }
+            },
+            "historic_five_arguments_exact": true
+          },
+          "input_fingerprints": {
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+            }
+          },
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            8,
+            8,
+            240,
+            240
+          ],
+          "noise": {
+            "name": "small-positive",
+            "shot": 1e-08,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          },
+          "ADC_parent": "faint-photo-009-RGGB",
+          "seed": 2970521409687950525
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast20-comparison.png",
+            "sha256": "63657dcd5295650ac46499b51418906346faac1e296c25926e19e1be3acf7d91"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast20-triplet.png",
+            "sha256": "ef3a7e0a9073d88bda4067416b21a9b844983ed9b637268e9acb996af8816669"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "small-positive-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast1",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "faint-photo-009-RGGB-small-positive",
+          "kind": "faint-photo",
+          "source_ids": [
+            "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+            "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+            "0377265873e0920b35d068a0dfc5ea76d8984783",
+            "039a221ab23b6e79f59111752337744617f857f8"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+            "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+            "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+          },
+          "original_canonical": {
+            "stage": "photo",
+            "batch": 252,
+            "arrays": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+              "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+            },
+            "fingerprints": {
+              "packed": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+              },
+              "variance": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+              },
+              "colors": {
+                "shape": [
+                  4,
+                  4
+                ],
+                "dtype": "<i8",
+                "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+              },
+              "wb": {
+                "shape": [
+                  4,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+              },
+              "matrix": {
+                "shape": [
+                  4,
+                  3,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+              },
+              "target": {
+                "shape": [
+                  4,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+              }
+            },
+            "context": {
+              "ids": [
+                "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+                "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+                "0377265873e0920b35d068a0dfc5ea76d8984783",
+                "039a221ab23b6e79f59111752337744617f857f8"
+              ],
+              "condition": {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              "pattern": "RGGB",
+              "seed": 20261014,
+              "clean_RGB": {
+                "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+                "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+              }
+            },
+            "historic_five_arguments_exact": true
+          },
+          "input_fingerprints": {
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+            }
+          },
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            8,
+            8,
+            240,
+            240
+          ],
+          "noise": {
+            "name": "small-positive",
+            "shot": 1e-08,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          },
+          "ADC_parent": "faint-photo-009-RGGB",
+          "seed": 2970521409687950525
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast1-comparison.png",
+            "sha256": "e5464e21666ba2e2b314d98949cc617733c67eb080bf1abdd8bbadb84831a3bb"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast1-triplet.png",
+            "sha256": "e0ab26eeae0f8d30636cdb03df77c19db42452cf4c63ab2bdf2511bfbe5f834b"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "iso6400-prior-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast4",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 4,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "faint-photo-009-RGGB-iso6400-prior",
+          "kind": "faint-photo",
+          "source_ids": [
+            "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+            "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+            "0377265873e0920b35d068a0dfc5ea76d8984783",
+            "039a221ab23b6e79f59111752337744617f857f8"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-iso6400-prior.npz",
+            "sha256": "ac701bc9eab6a960ca197e2d130b9d62dd8ab4ac59ff4396985ac0b2ae416a37"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+            "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+          },
+          "original_canonical": {
+            "stage": "photo",
+            "batch": 252,
+            "arrays": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+              "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+            },
+            "fingerprints": {
+              "packed": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+              },
+              "variance": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+              },
+              "colors": {
+                "shape": [
+                  4,
+                  4
+                ],
+                "dtype": "<i8",
+                "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+              },
+              "wb": {
+                "shape": [
+                  4,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+              },
+              "matrix": {
+                "shape": [
+                  4,
+                  3,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+              },
+              "target": {
+                "shape": [
+                  4,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+              }
+            },
+            "context": {
+              "ids": [
+                "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+                "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+                "0377265873e0920b35d068a0dfc5ea76d8984783",
+                "039a221ab23b6e79f59111752337744617f857f8"
+              ],
+              "condition": {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              "pattern": "RGGB",
+              "seed": 20261014,
+              "clean_RGB": {
+                "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+                "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+              }
+            },
+            "historic_five_arguments_exact": true
+          },
+          "input_fingerprints": {
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "1393305937711fac1a868d90fd4a424d51545315cb0e74bfe5843d59dbb1a069"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "68fbbc5a896691ce060724387ad7d317402a182d1548687d582f584f64d9517a"
+            }
+          },
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            8,
+            8,
+            240,
+            240
+          ],
+          "noise": {
+            "name": "iso6400-prior",
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          },
+          "ADC_parent": "faint-photo-009-RGGB",
+          "seed": 88351529214160084
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/iso6400-prior-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast4-comparison.png",
+            "sha256": "48b25bc59001ecaa46e2a91f24d253c02bf5da3e66ae848924b51a2dda17f668"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/iso6400-prior-034fe53d538446fdc93f2e4d926aae0eb32afc3b-contrast4-triplet.png",
+            "sha256": "480b2ffbbd2d6f6440db5f1179e83dd84fd65b08050611bf868749d5e426a31d"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "iso6400-prior-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast4",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 4,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "faint-photo-009-RGGB-iso6400-prior",
+          "kind": "faint-photo",
+          "source_ids": [
+            "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+            "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+            "0377265873e0920b35d068a0dfc5ea76d8984783",
+            "039a221ab23b6e79f59111752337744617f857f8"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-iso6400-prior.npz",
+            "sha256": "ac701bc9eab6a960ca197e2d130b9d62dd8ab4ac59ff4396985ac0b2ae416a37"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+            "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+          },
+          "original_canonical": {
+            "stage": "photo",
+            "batch": 252,
+            "arrays": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+              "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+            },
+            "fingerprints": {
+              "packed": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+              },
+              "variance": {
+                "shape": [
+                  4,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+              },
+              "colors": {
+                "shape": [
+                  4,
+                  4
+                ],
+                "dtype": "<i8",
+                "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+              },
+              "wb": {
+                "shape": [
+                  4,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+              },
+              "matrix": {
+                "shape": [
+                  4,
+                  3,
+                  3
+                ],
+                "dtype": "<f4",
+                "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+              },
+              "target": {
+                "shape": [
+                  4,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+              }
+            },
+            "context": {
+              "ids": [
+                "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+                "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+                "0377265873e0920b35d068a0dfc5ea76d8984783",
+                "039a221ab23b6e79f59111752337744617f857f8"
+              ],
+              "condition": {
+                "name": "adc-only",
+                "shot": 0.0,
+                "read": 0.0,
+                "exposure": 1.0
+              },
+              "pattern": "RGGB",
+              "seed": 20261014,
+              "clean_RGB": {
+                "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+                "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+              }
+            },
+            "historic_five_arguments_exact": true
+          },
+          "input_fingerprints": {
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "1393305937711fac1a868d90fd4a424d51545315cb0e74bfe5843d59dbb1a069"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "68fbbc5a896691ce060724387ad7d317402a182d1548687d582f584f64d9517a"
+            }
+          },
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            8,
+            8,
+            240,
+            240
+          ],
+          "noise": {
+            "name": "iso6400-prior",
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          },
+          "ADC_parent": "faint-photo-009-RGGB",
+          "seed": 88351529214160084
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/iso6400-prior-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast4-comparison.png",
+            "sha256": "6c459fe23b5098d02f35843d2a2e390b64c64935962f569168dcf3828b4788f8"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/iso6400-prior-03768ece408913d3c727b3e29b8ece77a57e5d9c-contrast4-triplet.png",
+            "sha256": "132f4e2dca3dff0faaa16b890965c863fedfc53b46470b8cbfbd84585fe2a24b"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "intermediate-slanted-edge-contrast1",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "slanted-edge",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "intermediate-RGGB",
+          "kind": "null-control",
+          "source_ids": [
+            "neutral-grey",
+            "green",
+            "bright-yellow",
+            "slanted-edge"
+          ],
+          "pattern": "RGGB",
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/targets.npz",
+            "sha256": "7867aca3364b6cfebf8d161f8d0463e01718d044026887f408169bce69a05f4a"
+          },
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/intermediate-RGGB.npz",
+            "sha256": "96a5537dc0bfd3bd4e686774f8e4bb0bbb7527aa65938a91d2584f7cfcc4e5dc"
+          },
+          "seed": 8129144728798860123,
+          "input_fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "ab18bcef2fd7097159e969afecd5fedce131973cefa3e9c2cfe0b8b5c1450276"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "1b3385ca1796cff3c95d71919b03533c90ebe11eaf9f29dd48d5fae831d82e29"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+            }
+          },
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "noise": {
+            "name": "intermediate",
+            "shot": 3.2e-07,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          }
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/intermediate-slanted-edge-contrast1-comparison.png",
+            "sha256": "96af05dc5283f1e258495dbbf73679869721acfbe799ce4bd82bbac7c58cd39f"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/intermediate-slanted-edge-contrast1-triplet.png",
+            "sha256": "a9d46ec1b0335878a5d7ad03b76e306339463cade5d6a2ed9684f2ded18fdd0b"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "small-positive-cyan-contrast1",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "cyan",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "small-positive-RGGB",
+          "kind": "reserved-color",
+          "source_ids": [
+            "orange",
+            "cyan",
+            "magenta",
+            "light-neutral"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/small-positive-RGGB.npz",
+            "sha256": "c81abd0d69a3fda68ce9e640e32c9286955994bc88739fe0c4e4caa554c55159"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+            "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+          },
+          "seed": 7515983152320191160,
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "input_fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "3e33464405a372ac6342c4af393cef42a84afb04394c3ac0ea400e10e2d25391"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "e86971e4de4d9a5a687474b0d424cba678794a944eb2bf6b71100a727c85b0f5"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+            }
+          },
+          "noise": {
+            "name": "small-positive",
+            "shot": 1e-08,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          }
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-cyan-contrast1-comparison.png",
+            "sha256": "5204e523773197860a2a40fa0948519523607d4c4f186d1b41cda9769b9fbcbe"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-cyan-contrast1-triplet.png",
+            "sha256": "f112aeb6f237c279fd4d3580db49e0542ecbc45ff9a9760fc7ca2de9d6c86230"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "small-positive-magenta-contrast1",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "magenta",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "small-positive-RGGB",
+          "kind": "reserved-color",
+          "source_ids": [
+            "orange",
+            "cyan",
+            "magenta",
+            "light-neutral"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/small-positive-RGGB.npz",
+            "sha256": "c81abd0d69a3fda68ce9e640e32c9286955994bc88739fe0c4e4caa554c55159"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+            "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+          },
+          "seed": 7515983152320191160,
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "input_fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "3e33464405a372ac6342c4af393cef42a84afb04394c3ac0ea400e10e2d25391"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "e86971e4de4d9a5a687474b0d424cba678794a944eb2bf6b71100a727c85b0f5"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+            }
+          },
+          "noise": {
+            "name": "small-positive",
+            "shot": 1e-08,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          }
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-magenta-contrast1-comparison.png",
+            "sha256": "a520096b04a2f8dc4daba432814c9418d663b587e23730fd70ed5d3b1c90e50e"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/small-positive-magenta-contrast1-triplet.png",
+            "sha256": "7997aed5d9e324cde04ebca3d90bcc1734cc9da49db8c34b3de50626abcda382"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "intermediate-magenta-contrast1",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 1,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source": "magenta",
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "intermediate-RGGB",
+          "kind": "reserved-color",
+          "source_ids": [
+            "orange",
+            "cyan",
+            "magenta",
+            "light-neutral"
+          ],
+          "pattern": "RGGB",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/intermediate-RGGB.npz",
+            "sha256": "30e7c4c4675d3c80126d37151bd9e66e1b9a7dc951331455ccde87ba1be24f86"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+            "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+          },
+          "seed": 2766235082801905075,
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "input_fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "bebb69082570c0fbdbaf3d5e5940046a97b5d7fd17db2103c95fe09247a07645"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "8509988225d5bae7b575f6607986d3e79223080e259ec701897c85154a66dd0b"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+            }
+          },
+          "noise": {
+            "name": "intermediate",
+            "shot": 3.2e-07,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          }
+        },
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/intermediate-magenta-contrast1-comparison.png",
+            "sha256": "bff407c53dc3fa32225fdb4adb4d193e8ca65341936b828b9616309d814ada36"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "100k parent EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 control EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/positive/intermediate-magenta-contrast1-triplet.png",
+            "sha256": "f0fda0cc597411fde31200cdc30764037b0ea5d6e56d2475b9ce346ee4feb5ed"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "800 near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact constructed GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "repair-exposure-half": [
+      {
+        "id": "small-positive-magenta",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 0.5,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "small-positive-GBRG",
+          "kind": "reserved-color",
+          "source_ids": [
+            "orange",
+            "cyan",
+            "magenta",
+            "light-neutral"
+          ],
+          "pattern": "GBRG",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/small-positive-GBRG.npz",
+            "sha256": "b787b8c9f8aa3f4df8ef4185dfb7b5c49e225b219867034c5a10631038cc4b09"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+            "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+          },
+          "seed": 2921304340723052735,
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "input_fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "2dd48acb433a250767a7c9bd6148986f4d727763cc4f24c99f74d0d709496346"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "a301d68948a8ae2f3b5731f51d77e1d242a45ed1939443fca13b85a2056e86fe"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "f06c4ab6c9c55c4c255079a6cc38cb0950555e579f464ff67053db487fcca33c"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+            }
+          },
+          "noise": {
+            "name": "small-positive",
+            "shot": 1e-08,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          }
+        },
+        "source": "Reserved magenta GBRG",
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/repair-exposure-half/small-positive-magenta-comparison.png",
+            "sha256": "220230ebb48b28976e2b156207fadf008e9e3ac12b451d48516dd312faa44c66"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed repair",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/repair-exposure-half/small-positive-magenta-triplet.png",
+            "sha256": "083d3b4da4daa54269c0f6a5e48f15ac9306344c20b5d47ebe8f8b32f99b310e"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed repair",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "intermediate-magenta",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 0.5,
+        "display_contrast": 1,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "models": {
+          "bridge-control": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+              "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-control",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "bridge-trained": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+              "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+            },
+            "step": 800,
+            "weights": "EMA",
+            "display_label": "bridge-trained",
+            "retained_progress": true,
+            "training_horizon": 800
+          },
+          "scale-long100k": {
+            "checkpoint": {
+              "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+              "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+            },
+            "step": 100000,
+            "weights": "EMA",
+            "display_label": "Long schedule 100k EMA",
+            "retained_progress": true,
+            "training_horizon": 100000
+          }
+        },
+        "observation": {
+          "id": "intermediate-GBRG",
+          "kind": "reserved-color",
+          "source_ids": [
+            "orange",
+            "cyan",
+            "magenta",
+            "light-neutral"
+          ],
+          "pattern": "GBRG",
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/intermediate-GBRG.npz",
+            "sha256": "0eb111a4b75fcceca863dc09fa0581043832b7f045903b40e9695c42e62bc5dc"
+          },
+          "target": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+            "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+          },
+          "seed": 4054191680045797574,
+          "output_shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "ROI_xywh": [
+            48,
+            48,
+            160,
+            160
+          ],
+          "input_fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "4a82e5ba145d10acb19961361fd6bef5e257fb47a4c59daea74995528379f37c"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "1a31f47ce35c322d5eb0dd958d85d553b5b9c9a9fb9cc09dead9d4d22dd3abbc"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "f06c4ab6c9c55c4c255079a6cc38cb0950555e579f464ff67053db487fcca33c"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+            }
+          },
+          "noise": {
+            "name": "intermediate",
+            "shot": 3.2e-07,
+            "read": 1e-10,
+            "ADC_bits": 16,
+            "black_level": 0.03,
+            "CPU_precision": "float32"
+          }
+        },
+        "source": "Reserved magenta GBRG",
+        "board": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/repair-exposure-half/intermediate-magenta-comparison.png",
+            "sha256": "762014559375fedffcccb2bab2822dfc6ed666c5ee08cbe149a400ee416a0f15"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Near-ADC EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed repair",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "/home/dllu/proj/demosaic/docs/images/near-adc-bridge-positive-v1/repair-exposure-half/intermediate-magenta-triplet.png",
+            "sha256": "8132537414edb67b724e30ce35007bd1a3e88ae9570a203b2f953537a55f60b7"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed repair",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "viewing": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/fixed-projection-replay/actual-viewing.json",
+    "sha256": "ae2e249d4dbadc38deca7024fff7b7c82176b6e27581af297c04c3f817272f08"
+  }
+}

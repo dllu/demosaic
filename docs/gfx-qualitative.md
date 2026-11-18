@@ -69,6 +69,7 @@ historical boards. Use these reports for the current completed comparisons:
 - [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
   compares both 800-update endpoints against 100k and V120. The sky
   stays smooth and the coarse lattice and dark foliage look close to 100k.
+  The fixed measurement corrections return the same predictions.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

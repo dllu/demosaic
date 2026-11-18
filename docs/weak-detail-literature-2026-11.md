@@ -197,6 +197,16 @@ with similar error costs and the same building bands. An
 predicts withheld noisy building/cab sensor samples better than the analytic
 fit, with blur/artifacts still present. This supports testing a richer nuisance
 competitor, without claiming improved delivered detail or calibrated confidence.
+The [distant wire/gap intervention](scene-wire-gap.md) holds native
+RAW fixed across three whole-scene contexts. The existing spatial 2k
+EMA gives almost the same weak response for aligned and orthogonal
+guides at both priors. The [expanded matched scene run](expanded-scene-corpus.md#matched-12000-update-continuation)
+tests the same adapter on a larger corpus from the 100k parent.
+The [near-ADC training continuation](near-adc-bridge-training.md#positive-noise-results)
+gives small positive-noise gains with large saturated-color errors.
+The existing bounded RAW corrections yield larger weak-band gains and
+repair most of that bias on the retained panels.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

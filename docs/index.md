@@ -36,6 +36,7 @@ Start with the [README](../README.md) for installation and inference.
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·
+[distant wire and gap intervention](scene-wire-gap.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·
