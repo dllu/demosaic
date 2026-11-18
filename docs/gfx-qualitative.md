@@ -104,6 +104,10 @@ historical boards. Use these reports for the current completed comparisons:
   finds 21 additional coarse-fence tiles supporting the same pair. The
   wider fit accepts perspective and keeps coherent crossings. Sky,
   building and foliage retain the local-only 2k parent.
+- [Audited mesh gap support](local-mesh-gap-support.md#standing-gfx100s-review)
+  returns every main native crop to its exact wider-donor output with
+  crossed checks. The local-deficit ablation slightly reduces part of
+  the coarse-fence correction. Sky, building and foliage keep the parent.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

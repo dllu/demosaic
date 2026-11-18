@@ -122,6 +122,10 @@ The [donor-perspective trial](local-mesh-projective.md) uses shorter
 query support to reduce added texture inside known ISO400 mesh gaps
 from 3.34 to 0.16 DN16 RMS at near-equal weak response. It also reduces
 response on the continuous synthetic mesh and fades the real cab lattice.
+The [crossed gap option](local-mesh-gap-support.md) preserves all eight
+archived GFX outputs and reduces spill in two of six fresh ISO400 round
+gaps. It misses the six rotated strip gaps. Enable it with
+`suppress_gaps=True` in the experimental planar crop helper.
 
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab

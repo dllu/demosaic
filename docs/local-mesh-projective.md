@@ -8,6 +8,10 @@ mesh and fades the faint real cab lattice. A wider donor region helps
 estimate perspective on the coarse GFX fence. The fine cab never has
 enough supporting tiles for that estimate.
 
+The [adaptive gap follow-up](local-mesh-gap-support.md) tests where to
+restrict the wide correction. Crossed RAW checks preserve the real cab
+lattice and remove part of the spill in two fresh round gaps.
+
 ## Where the earlier fit loses the weak direction
 
 The local crop uses the same 48 observations as the anchored mesh study.

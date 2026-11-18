@@ -157,6 +157,11 @@ A full-image inference run would also need consistent donor selection across
 regions and a way to limit fits to relevant surface neighborhoods. The code
 implements crop inference only. [Crop API](../src/demosaic/mesh_refinement.py).
 
+The [audited gap option](local-mesh-gap-support.md) adds the
+`suppress_gaps=True` keyword. It can attenuate the delivered broad
+correction inside a predicted break after two crossed RAW forecasts and
+a separate audit.
+
 The numerical panel and actual native review are complete. The experiment adds
 an inference component with no new training endpoint or primary-panel score.
 [Comparable primary panel history](performance-history.md).

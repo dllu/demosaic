@@ -3,8 +3,9 @@
 import numpy as np
 
 from ._mesh_frequency import infer_prior, query_phases
-from ._mesh_profiles import extra_query_check, supported_patch
+from ._mesh_profiles import extra_query_check, ribbon, supported_patch
 from .cfa import PATTERNS
+from .isolated_line import native_sites
 
 TRANSLATIONS = ((0, 0),) + tuple(
     shift
@@ -24,7 +25,9 @@ def _contains(outer, inner):
     return x <= u and y <= v and u + w <= x + width and v + h <= y + height
 
 
-def refine_local_raw_mesh(parent, scene, variance, colors, box, roi, *, shot, read, donor_span=80):
+def refine_local_raw_mesh(
+    parent, scene, variance, colors, box, roi, *, shot, read, donor_span=80, suppress_gaps=False
+):
     """Return camera-linear RGB for ``roi`` using Bayer evidence in ``box``.
 
     ``parent`` is one float RGB prediction shaped [3, 2H, 2W]. ``scene`` and
@@ -37,6 +40,8 @@ def refine_local_raw_mesh(parent, scene, variance, colors, box, roi, *, shot, re
     Donors propose frequencies. The query establishes phase, verifies both
     directions on disjoint sensor samples, and limits the eligible footprint.
     Unsupported crops return the parent pixels. Requires the ``eval`` extra.
+    ``suppress_gaps`` further attenuates the correction where the central
+    RAW query supports a break in the rear wire in three separate checks.
     """
     if scene.ndim != 3 or scene.shape[0] != 4 or variance.shape != scene.shape:
         raise ValueError("scene and variance must be packed Bayer arrays with matching shapes")
@@ -61,6 +66,7 @@ def refine_local_raw_mesh(parent, scene, variance, colors, box, roi, *, shot, re
     if prior is None:
         return source
     corrections = []
+    central_carriers = None
     for dx, dy in TRANSLATIONS:
         query = (left + dx, top + dy, w, h)
         if not _contains(field, query) or not _contains(query, roi):
@@ -68,6 +74,8 @@ def refine_local_raw_mesh(parent, scene, variance, colors, box, roi, *, shot, re
         raw = _crop(scene, query, 2)
         offset = dx // 2
         carriers, reserve, scores = query_phases(raw, colors, prior, noise, packed_offset=offset)
+        if suppress_gaps and dx == dy == 0:
+            central_carriers = carriers
         current = _crop(parent, query)
         restored = current
         if max(scores) >= 3:
@@ -91,4 +99,15 @@ def refine_local_raw_mesh(parent, scene, variance, colors, box, roi, *, shot, re
     active = sum(bool(np.any(delta)) for delta in corrections)
     if len(corrections) < 3 or 2 * active <= len(corrections):
         return source
-    return source + np.median(np.stack(corrections), axis=0)
+    correction = np.median(np.stack(corrections), axis=0)
+    if suppress_gaps and central_carriers is not None and np.any(correction):
+        from ._mesh_gap import confirmed_gap
+
+        raw = _crop(scene, box, 2)
+        x, y = native_sites(raw.shape[-2:], (-(w - 1) / 2, -(h - 1) / 2))
+        front, rear = (ribbon(x, y, guide) for guide in central_carriers)
+        mask = confirmed_gap(raw, colors, front, rear, shot, read)
+        if mask is not None:
+            inside = (roi[0] - left, roi[1] - top, roi[2], roi[3])
+            correction = (correction * (1 - _crop(mask, inside))).astype(parent.dtype)
+    return source + correction

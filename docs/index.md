@@ -46,6 +46,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [localized RAW donors for the fine mesh](local-donor-mesh.md) ·
 [crop-placement stability and optional mesh inference](local-mesh-stability.md) ·
 [donor perspective and short support for mesh gaps](local-mesh-projective.md) ·
+[audited adaptive gap support](local-mesh-gap-support.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·
