@@ -105,7 +105,7 @@ def predict(parent, packed, colors, guide, noise, query, configs, threshold, *, 
     return values, receipts
 
 
-def synth(plan, table, configs, split, out):
+def synth(plan, table, configs, split, out, *, predictor=predict):
     if split == "synthetic":
         preceding = read_json(checked(plan["source"]["original_guides"]))["synthetic"]
         by_id = {r["id"]: r for r in preceding}
@@ -136,7 +136,7 @@ def synth(plan, table, configs, split, out):
             )
             corrected, fit_details = {}, {}
             for g, guess in choices.items():
-                images, receipts = predict(rgb, raw, cfa, guess, noise, query, configs, threshold)
+                images, receipts = predictor(rgb, raw, cfa, guess, noise, query, configs, threshold)
                 corrected.update({field(g, arm, t): x for (arm, t), x in images.items()})
                 fit_details[g] = receipts
             cases.append(corrected)
@@ -154,7 +154,7 @@ def synth(plan, table, configs, split, out):
     return rows
 
 
-def camera(plan, current, out, configs):
+def camera(plan, current, out, configs, *, predictor=predict):
     previous = read_json(checked(plan["previous"]))["camera"]
     baseline = read_json(checked(plan["camera_baseline"]))["camera"]
     conditioning = {
@@ -175,7 +175,7 @@ def camera(plan, current, out, configs):
             pixels = dict(f)
         receipts = {}
         for guide, fit in prior["fits"].items():
-            values, receipts[guide] = predict(
+            values, receipts[guide] = predictor(
                 pixels["parent"],
                 packed,
                 colors,

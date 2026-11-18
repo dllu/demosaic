@@ -162,6 +162,14 @@ has repeatedly come with extra flat-region error or false color. The
    and most straight-edge behavior. The positive archive
    returns to the parallel refit, with the same weak response
    beside rails as the unscreened curves.
+   [Cross-color validation](cross-colour-refit.md) changes only the gate
+   and recovers little extra near those rails, even with exact frequencies.
+   Bounded partner support helps ordinary ISO400 wires slightly and raises
+   false rail RMS. A next diagnostic can hold the per-color gate fixed
+   and ask whether a known spatial wire envelope separates real faint-wire
+   sites from the rail residual. Compare the exact mask with a displaced
+   mask on paired wire-present and wire-absent observations before using a
+   whole-frame estimate of support.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

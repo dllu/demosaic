@@ -242,6 +242,12 @@ refit's predictions on the archived positive panels and cuts the
 unscreened straight-edge error. Fine crossing recovery beside rails
 remains negligible.
 
+[Cross-color RAW validation](cross-colour-refit.md) gives small ISO400
+gains on ordinary wires when another color corroborates the direction.
+The bounded gate increases complex-rail false correction, recovers
+essentially the same faint signal beside rails and leaves the fine cab
+mesh at V120. The screened per-color gate remains the experimental baseline.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

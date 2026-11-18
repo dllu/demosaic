@@ -1332,6 +1332,7 @@ def restore_local_waves(
     compare_oriented_support=False,
     compare_joint_colour_support=False,
     compare_pooled_refit=False,
+    compare_cross_colour_refit=False,
     compare_matched_refit=False,
     compare_phase_averages=False,
     recenter_phase_guides=False,
@@ -1434,6 +1435,11 @@ def restore_local_waves(
         and (not shrink_phase_fit or not compare_pooled_support or conditional_delivery)
     ):
         raise ValueError("Refit requires shrunken phase profiles and pooled RAW-wave support")
+    if type(compare_cross_colour_refit) is not bool or (
+        compare_cross_colour_refit
+        and (not compare_pooled_refit or bright_cross_edge_weight or phase_edge_side == "profiles")
+    ):
+        raise ValueError("Cross-color refit requires shared profiles and default spatial weights")
     if type(compare_matched_refit) is not bool or (
         compare_matched_refit
         and (
@@ -1506,12 +1512,15 @@ def restore_local_waves(
         modes += ("phase-agreement",)
     orientations = ("along", "across") if compare_oriented_support else ()
     modes += orientations
-    if compare_joint_colour_support:
-        from .joint_colour_evidence import joint_conditional_scores
+    if compare_joint_colour_support or compare_cross_colour_refit:
+        from .joint_colour_evidence import bounded_partner_score, joint_conditional_scores
 
+    if compare_joint_colour_support:
         modes += ("joint", "joint-veto")
     refit_modes = ("all-site-refit", "weighted-refit") if compare_pooled_refit else ()
     modes += refit_modes
+    colour_refit_modes = ("joint-refit", "partner-refit") if compare_cross_colour_refit else ()
+    modes += colour_refit_modes
     matched_modes = ("matched-refit", "orthogonal-refit") if compare_matched_refit else ()
     modes += matched_modes
     if compare_matched_refit:
@@ -1629,7 +1638,7 @@ def restore_local_waves(
                 ]
                 for mode in orientations
             }
-            if compare_joint_colour_support:
+            if compare_joint_colour_support or compare_cross_colour_refit:
                 joint_scores = [
                     joint_conditional_scores(
                         c,
@@ -1639,7 +1648,8 @@ def restore_local_waves(
                         window=config.validation_window,
                         stride=config.validation_stride,
                         reliability=weight,
-                    )[0]
+                        return_partners=compare_cross_colour_refit,
+                    )
                     for c, test, weight in zip(predictors, validation, reliability, strict=True)
                 ]
             matched = match_directions(
@@ -1781,9 +1791,15 @@ def restore_local_waves(
                     if compare_matched_refit
                     else ()
                 )
+                if compare_joint_colour_support or compare_cross_colour_refit:
+                    joint = pooled_support_score(joint_scores[0][0][a], joint_scores[1][0][b])
                 if compare_joint_colour_support:
-                    joint = pooled_support_score(joint_scores[0][a], joint_scores[1][b])
                     color_veto = local > 0
+                if compare_cross_colour_refit:
+                    peers = pooled_support_score(joint_scores[0][2][a], joint_scores[1][2][b])
+                    colour_scores = (joint, bounded_partner_score(pooled, peers))
+                else:
+                    colour_scores = ()
                 oriented_pooled = [
                     (mode, pooled_support_score(folds[0][a], folds[1][b]))
                     for mode, folds in oriented_scores.items()
@@ -1828,6 +1844,10 @@ def restore_local_waves(
                         for mode, fitted in zip(refit_modes, refit_components, strict=True):
                             totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
                                 fitted * weight * blend
+                            )
+                        for mode, score in zip(colour_refit_modes, colour_scores, strict=True):
+                            totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
+                                refit_components[-1] * support_weight(score, threshold) * blend
                             )
                         for mode, (fitted, contrast) in zip(
                             matched_modes, matched_delivery, strict=True
@@ -1955,6 +1975,7 @@ def restore_local_waves(
         **({"compare_phase_agreement": True} if compare_phase_agreement else {}),
         **({"compare_oriented_support": True} if compare_oriented_support else {}),
         **({"compare_joint_colour_support": True} if compare_joint_colour_support else {}),
+        **({"compare_cross_colour_refit": True} if compare_cross_colour_refit else {}),
         **(
             {"compare_pooled_refit": True, "refit_weight_floor": 0.25, "refit_weight_threshold": 1}
             if compare_pooled_refit

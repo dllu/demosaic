@@ -44,6 +44,7 @@ preserves its original comparison pixels and provenance.
 | [Local phase bounds](local-phase-bounds.md#native-gfx100s-review) | Both local bounds return all four cab crops to exact V120. Both ROIs, profiles and JPEGs viewed, with no convincing new fine crossings |
 | [Flexible query boundaries](flexible-query-edges.md#native-gfx100s-review) | Both flexible backgrounds return all four cab crops to exact V120. Both profiles, ROIs and JPEGs viewed, with no convincing new fine crossings |
 | [Nested background screening](screened-query-edges.md#native-gfx100s-review) | All four native cab crops remain exact V120 at the nominal gate. The transferred-right spectral query changes slightly outside the crop. Both profiles, ROIs and JPEGs viewed, with fine crossings incomplete |
+| [Cross-color validation](cross-colour-refit.md#native-gfx100s-review) | Both cross-color gates reproduce the conditioned V120 pixels in all four cab crops with both guide families. Both ROIs, profiles, ISO100 AHD and JPEGs viewed. Fine crossings remain incomplete |
 | [Faint ADC follow-up](full427-faint-adc.md) | Positive-noise projection returns the earlier Corpus20k and V120 output on both ROIs and profiles, verified against the inputs underlying the retained boards |
 | [50k ADC follow-up](full-corpus-long50k-native.md#calibrated-adc-follow-up) | The bin projection also bypasses the original 50k outputs exactly for both positive-noise profiles |
 | [Fine-frequency proposals](fine-frequency-proposals.md) | Both directions more visible, with a purple/green grid and building artifacts |

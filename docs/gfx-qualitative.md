@@ -137,6 +137,10 @@ historical boards. Use these reports for the current completed comparisons:
 - [Nested background screening](screened-query-edges.md#native-gfx100s-review)
   reproduces the unscreened curves on all fixed crops at the
   nominal gate. The sky stays smooth and the coarse crossings persist.
+- [Cross-color validation](cross-colour-refit.md#native-gfx100s-review)
+  keeps sky at V120 and increases the full-frame coarse-fence correction
+  with joint evidence. The visible lattice persists without new crossings.
+  Spectral foliage corrections increase without clear recovery of fine leaves.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

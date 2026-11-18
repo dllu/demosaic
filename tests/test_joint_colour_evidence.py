@@ -6,8 +6,8 @@ import numpy as np
 import pytest
 
 from demosaic.experiments.evaluation.withheld import stratified_split
-from demosaic.joint_colour_evidence import joint_conditional_scores
-from demosaic.local_validated_waves import conditional_scores
+from demosaic.joint_colour_evidence import bounded_partner_score, joint_conditional_scores
+from demosaic.local_validated_waves import conditional_scores, pooled_support_score
 
 
 @pytest.mark.parametrize("phases", [[0, 1, 1, 2], [2, 1, 1, 0], [1, 0, 2, 1], [1, 2, 0, 1]])
@@ -76,6 +76,53 @@ def test_adverse_red_prediction_can_reject_a_positive_green_direction():
     _, joint = joint_conditional_scores(candidate, raw, colors, ~mask, window=17, stride=8)
     assert independent[0, 1] > 0 and independent[0, 0] < 0
     assert (joint < 0).all()
+
+
+def test_partner_scores_exclude_own_color_and_keep_evidence_on_each_edge_side():
+    yy, xx = np.indices((32, 32))
+    colors = np.tile([[0, 1], [1, 2]], (16, 16))
+    discovery = stratified_split(colors.shape, 19)
+    bright = xx >= 16
+    null = np.full(colors.shape, 0.3)
+    full = null + np.array([0.02, -0.01, 0.015])[colors]
+    variance = np.array([0.007, 0.01, 0.02])[colors]
+    raw = np.where(bright, full, null)
+    raw[discovery] = np.nan
+    candidate = SimpleNamespace(
+        full_cfa=full,
+        conditional_null_cfa=null[None],
+        variance_cfa=variance,
+        discovery_mask=discovery,
+        unit_keys=((0, 0),),
+        phase_bright_side=bright,
+        phase_side_profiles=False,
+    )
+    joint, _, peers = joint_conditional_scores(
+        candidate, raw, colors, ~discovery, window=17, stride=8, return_partners=True
+    )
+    for y, x in ((8, 8), (8, 16), (16, 16)):
+        local = ~discovery & (abs(yy - y) <= 8) & (abs(xx - x) <= 8) & (bright == bright[y, x])
+        for color in (None, 0, 1, 2):
+            selected = local if color is None else local & (colors != color)
+            energy = np.sum((full[selected] - null[selected]) ** 2 / variance[selected])
+            expected = np.sqrt(energy) / 2 * (1 if bright[y, x] else -1)
+            actual = joint[0, 0, y, x] if color is None else peers[0, color, y, x]
+            assert actual == pytest.approx(expected, abs=1e-14)
+    changed = raw.copy()
+    changed[colors == 0] += 0.1
+    _, _, revised = joint_conditional_scores(
+        candidate, changed, colors, ~discovery, window=17, stride=8, return_partners=True
+    )
+    np.testing.assert_array_equal(peers[:, 0], revised[:, 0])
+    assert np.any(peers[:, 1] != revised[:, 1])
+
+
+def test_partner_support_requires_both_own_and_both_partner_folds():
+    own = pooled_support_score(np.array([1.0, 0.0, -1.0, 0.7, 4.0, 1.0]), np.full(6, 2.0))
+    peers = pooled_support_score(
+        np.array([7.0, 7.0, 7.0, 2.1, 1.0, 3.0]), np.array([7, 7, 7, 2.5, 1, -1])
+    )
+    np.testing.assert_allclose(bounded_partner_score(own, peers), [3.0, 0.0, -1.0, 2.3, 3.0, 1.5])
 
 
 def test_zero_prediction_difference_has_zero_support():
