@@ -63,6 +63,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [RAW cross-check for donor frequency moves](phase-guide-crosscheck.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
+[scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·
 [CUDA local-primary replay](local-primary-cuda-probe.md) ·
 [complete588-color review](full-corpus-control20k-color-review.md) ·
 [calibrated ADC-bin diagnostic](adc-bin-consistency.md) ·

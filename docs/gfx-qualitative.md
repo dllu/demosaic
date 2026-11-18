@@ -96,6 +96,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Spatial preview intervention](scene-context-extent.md) changes foliage
   and coarse-fence output when blurring context outside an unchanged RAW tile.
   Sky stays smooth and the existing coarse crossings persist.
+- [Trained scene spectral gain](scene-spectral-detail.md) changes the
+  fixed sky and coarse fence by less than 0.76 DN16 RMS. The sky stays smooth,
+  and fine building and foliage detail remain soft.
 - [Fine green mesh](gfx-green-mesh.md): the separate DSCF3842/3835 test.
 
 The standing main scene is **DSCF3879 ISO6400 / DSCF3880 ISO100**. The low-ISO

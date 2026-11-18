@@ -15,6 +15,24 @@ class EncodedScene:
     grid: SceneGrid
 
 
+def encode_scene(context, packed, colors, wb, matrix, *, long_side=1024, exposure=1.0):
+    """Encode one complete noisy observation with the shared frozen backbone."""
+    preview, grid = scene_preview(
+        packed, colors, wb, matrix, long_side=long_side, exposure=exposure
+    )
+    preview = preview.to(context.mean.device)
+    preview = F.pad(
+        preview,
+        (0, grid.padded_hw[1] - grid.preview_hw[1], 0, grid.padded_hw[0] - grid.preview_hw[0]),
+        mode="replicate",
+    )
+    with torch.no_grad():
+        features = context.backbone(
+            pixel_values=(preview - context.mean) / context.std, output_hidden_states=True
+        ).hidden_states[1:]
+    return EncodedScene(tuple(f.detach() for f in features), grid)
+
+
 class SceneAdapter(nn.Module):
     """Trainable coarse conditioning; no scene RGB is copied into native output."""
 
@@ -96,24 +114,9 @@ class WholeSceneRestorer(nn.Module):
         return self
 
     def encode_scene(self, packed, colors, wb, matrix, *, long_side=1024, exposure=1.0):
-        """Encode one complete noisy observation once, without any clean target."""
-        preview, grid = scene_preview(
-            packed, colors, wb, matrix, long_side=long_side, exposure=exposure
+        return encode_scene(
+            self.base.context, packed, colors, wb, matrix, long_side=long_side, exposure=exposure
         )
-        # Inference may build the small preview on the CPU. Transfer only that
-        # preview; a complete100MP packed observation need not live on CUDA.
-        preview = preview.to(self.base.context.mean.device)
-        preview = F.pad(
-            preview,
-            (0, grid.padded_hw[1] - grid.preview_hw[1], 0, grid.padded_hw[0] - grid.preview_hw[0]),
-            mode="replicate",
-        )
-        context = self.base.context
-        with torch.no_grad():
-            features = context.backbone(
-                pixel_values=(preview - context.mean) / context.std, output_hidden_states=True
-            ).hidden_states[1:]
-        return EncodedScene(tuple(f.detach() for f in features), grid)
 
     def forward(self, packed, variance, colors, wb, matrix, *, scene=None, boxes_xywh=None):
         if self.mode == "none":

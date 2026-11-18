@@ -21,6 +21,10 @@ has repeatedly come with extra flat-region error or false color. The
    With local RAW fixed, the [near/distant preview intervention](scene-context-extent.md)
    finds distant influence on the real foliage and coarse fence. Blurring near
    the tile changes the two development sources more, with mixed weak-band errors.
+   The [scene-conditioned spectral pilot](scene-spectral-detail.md) routes
+   whole-image context to the strength of measured RAW detail. Both trained
+   heads improve longer-band error slightly and worsen fine and quiet errors.
+   Aligned features and shifted features yield nearly identical predictions.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

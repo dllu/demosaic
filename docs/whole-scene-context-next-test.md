@@ -54,6 +54,9 @@ V120 stays the general recommendation.
 [A fixed-RAW preview intervention](scene-context-extent.md) finds that the
 surrounding photo contributes to the spatial model's leaves and coarse-fence
 output. The remaining fine crossings and canopy cords stay soft.
+[A matched scene spectral pilot](scene-spectral-detail.md) then tests scene
+conditioning on the gain of a late RAW residual. It gains slightly on longer
+bands and raises fine and quiet error, with almost no effect from alignment.
 [Exact model/data/preflight receipts](results/whole-scene-context-training-setup-v1/publication.json).
 [Independent source/checkpoint audit](results/whole-scene-context-training-setup-v1/independent-review.json).
 

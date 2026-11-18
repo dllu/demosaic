@@ -66,12 +66,16 @@ class LateSpectralDetail(nn.Module):
             self.register_buffer(f"band_{size}", band, persistent=False)
             size *= 2
 
-    def analysis(self, values, size=None):
-        """Weighted affine removal and tapered orthonormal full FFT frames."""
-        batch, channels, height, width = values.shape
+    def frame_layout(self, height, width, size=None):
         size = size or min(self.max_window, 1 << int(math.log2(min(height, width))))
         hop = size // 2
         padding = (hop, hop + (-width % hop), hop, hop + (-height % hop))
+        return size, hop, padding
+
+    def analysis(self, values, size=None):
+        """Weighted affine removal and tapered orthonormal full FFT frames."""
+        batch, channels, height, width = values.shape
+        size, hop, padding = self.frame_layout(height, width, size)
         centered = values - values[..., :1, :1]
         padded = F.pad(centered, padding, mode="replicate")
         columns = F.unfold(padded, size, stride=hop)
@@ -128,7 +132,7 @@ class LateSpectralDetail(nn.Module):
         return torch.cat(((packed - _box(packed)) / sigma, (parent - _box(parent)) / sigma,
                           proposal / sigma, torch.log1p(variance.clamp_min(0) / sigma.square()), placement), 1)
 
-    def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False):
+    def forward(self, base, packed, variance, colors, wb=None, *, return_aux=False, frame_scale=None):
         if packed.ndim != 4 or packed.shape[1] != 4 or packed.shape != variance.shape:
             raise ValueError("Late spectral detail needs matching four-phase RAW and variance")
         batch, _, height, width = packed.shape
@@ -150,6 +154,10 @@ class LateSpectralDetail(nn.Module):
             layouts = colors[:, None].expand(-1, count, -1).reshape(batch * count, 4)
             innovation = observed - parent_spectrum
             gain = self.frequency_gain(observed, innovation, noise, layouts)
+            if frame_scale is not None:
+                if frame_scale.shape != gain.shape:
+                    raise ValueError("Spectral scale must match the frame-frequency geometry")
+                gain = gain * frame_scale
             spectral_delta = self.apply_frequency_gain(gain, innovation)
             proposal = self.synthesis(spectral_delta, geometry)
             local = self.local_features(packed, parent, variance, proposal, colors, observed, noise, geometry)
