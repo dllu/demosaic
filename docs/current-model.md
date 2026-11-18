@@ -100,6 +100,9 @@ change in independent-draw error at matched correction strength.
 [Three same-law redraws](paired-repeat-stability.md#starting-model-on-64-photos-with-three-redraws)
 show the paired head's independent-draw variance increase
 offsetting its reduction in shared increment error.
+[Bayer innovation smoothing](paired-feedback-paths.md) slightly
+reduces error versus a response-matched paired head. The standing
+fine mesh and the tradeoff versus Corpus 100k remain.
 
 The [isolated RAW line fit](isolated-raw-line.md) recovers about 81%
 of the weak increment through interrupted synthetic ISO400 wires.

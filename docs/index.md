@@ -43,6 +43,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [exact orientation averaging](paired-head-symmetry.md) ·
 [independent-repeat training](paired-repeat-stability.md) ·
 [repeat training at fixed correction strength](paired-shape-stability.md) ·
+[parent feedback in the paired correction](paired-feedback-paths.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
 [distant RAW row references](distant-row-reference.md) ·
 [measured RAW donors for natural weak detail](natural-raw-donor-evidence.md) ·

@@ -10,6 +10,7 @@ preserves its original comparison pixels and provenance.
 | --- | --- |
 | [Paired native luminance correction](paired-luminance-detail.md#standing-gfx100s-comparisons) | Both ROIs, both noise priors, ISO100 AHD and both JPEGs were viewed. Guarded output remains close to the 100k parent, with soft diagonals, mottle and incomplete crossings |
 | [Exact orientation averaging](paired-head-symmetry.md#standing-gfx100s-comparisons) | All four cab boards were viewed with both JPEGs and independent AHD. The result changes little at matched correction strength and the fine crossings remain incomplete |
+| [Bayer innovation smoothing](paired-feedback-paths.md#standing-gfx100s-comparisons) | Uniform and directional smoothing leave both ROIs and priors close to the 100k parent. The independent AHD and both JPEGs were viewed. Fine crossings and background mottle remain |
 | [V120 baseline](#v120-after-correcting-the-paired-data-mix) | Soft/irregular lattice, strongly affected by noise conditioning |
 | [V131 endpoint](v131-endpoint-quality.md), [V132 endpoint](v132-endpoint-quality.md) | Both 20k reviews complete; no clear new fine crossings |
 | [Matched2k whole-scene arms](whole-scene-context-native-review.md), [64-source follow-up](whole-scene-context-development64.md), [camera panels](whole-scene-context-camera-review.md) | Same endpoints/unchanged GFX pixels; both native ROIs/profiles/JPEGs viewed. Nominal erases mesh, nearby profile soft/incomplete; no convincing new crossings. Separate camera scores now complete, photos pending |

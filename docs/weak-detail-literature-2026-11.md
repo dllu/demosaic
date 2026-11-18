@@ -332,6 +332,15 @@ independent-draw response. About three quarters of the starting
 head's added variance on these photos comes from positive
 covariance with the parent's fine-increment error.
 
+In the [paired-head input replay](paired-feedback-paths.md),
+an independent guide barely changes variance. Subtracting a
+mosaic from a different exposure raises variance when the
+innovation still contains the query RAW. Moving the entire
+guarded correction to an independent exposure brings the
+parent-correction covariance near zero and improves increment
+error over Corpus 100k. Same-frame innovation smoothing gives
+only a small benefit over the response-matched paired head.
+
 The [readout-row stress test](withheld-row-noise.md) shows that
 disjoint Bayer pixels can still validate the same simulated noise.
 Holding out complete rows rejects the false bands and often

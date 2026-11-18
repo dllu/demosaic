@@ -9,6 +9,8 @@ historical boards. Use these reports for the current completed comparisons:
   crossings, and thin cables and foliage remain soft.
   [Exact orientation averaging](paired-head-symmetry.md#standing-gfx100s-comparisons)
   gives similar native results across all four main crops.
+  [Bayer innovation smoothing](paired-feedback-paths.md#standing-gfx100s-comparisons)
+  keeps the sky and coarse fence intact. Cables and foliage remain soft.
 - [V120/V121 primary and full-frame review](v120-v121-primary.md): the general
   baseline, including matched full-frame noise conditioning.
 - [V131 20k endpoint](v131-endpoint-quality.md) and
