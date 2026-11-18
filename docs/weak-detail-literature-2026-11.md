@@ -243,6 +243,12 @@ continuous two-wire outputs alone. Most high-noise gap continuation
 persists, including under exact guide geometry.
 [Finite weak-wire support](mesh-shrunk-footprint.md).
 
+The pooled gap study separates available Bayer evidence from locating
+the gap. Exact predictions and three quarters of the samples detect
+381 of 384 fresh ISO6400 gaps in six fixed geometries. A larger
+footprint search helps an earlier miss and loses one true gap on
+the new panel. [Known and measured gap evidence](mesh-pooled-gap-evidence.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

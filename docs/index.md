@@ -53,6 +53,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [continuous wires across contrast steps](mesh-step-continuity.md) ·
 [foreground-edge fits for false weak wires](mesh-refined-edge.md) ·
 [finite RAW wire support](mesh-shrunk-footprint.md) ·
+[pooled Bayer gap evidence](mesh-pooled-gap-evidence.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·

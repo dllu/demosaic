@@ -166,6 +166,12 @@ continuous two-wire outputs alone. It helps one ISO6400 gap slightly.
 The nominal left cab lattice fades locally. Both right views keep the
 recovered crossings. Finite support remains experimental.
 
+The [pooled gap audit](mesh-pooled-gap-evidence.md) finds enough RAW
+evidence to detect six earlier synthetic ISO6400 gaps when the hypotheses
+are fully specified. A larger elliptical search reduces spill in one
+prior case. On fresh gaps it trails the earlier finite-support check
+and slightly softens both right GFX cab views.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

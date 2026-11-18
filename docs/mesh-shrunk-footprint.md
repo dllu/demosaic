@@ -109,6 +109,12 @@ pattern remains, and the strong foreground strands stay visible.
 [Front-only g190](images/mesh-shrunk-footprint-v1/iso400-step-g190-role0-comparison.png) ·
 [Real-wire g190 counterpart](images/mesh-shrunk-footprint-v1/iso400-step-g190-role1-comparison.png).
 
+A follow-up supplies known continuing and gap predictions to measure
+available sensor evidence. A pooled check and an expanded footprint
+search then test actual RAW nominations. The expanded search helps
+one earlier high-noise ellipse and trails the footprint check on fresh
+high-noise gaps overall. [Pooled gap evidence](mesh-pooled-gap-evidence.md).
+
 ## Standing GFX100S review
 
 The playback uses the existing local-only 2k EMA

@@ -127,6 +127,10 @@ historical boards. Use these reports for the current completed comparisons:
 - The finite footprint attenuates the coarse fence by 2.18 DN16 RMS.
   Crossings remain visible, and the sky, building and foliage reproduce
   the adjacent-donor outputs. [Finite-support playback](mesh-shrunk-footprint.md#standing-gfx100s-review).
+- The pooled and elliptical audits retain the smooth sky, soft
+  building rails and foliage. The half-site ellipse check makes
+  a small contrast cut on the coarse fence and keeps its crossings.
+  [Native pooled comparisons](mesh-pooled-gap-evidence.md#standing-gfx100s-review).
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The
