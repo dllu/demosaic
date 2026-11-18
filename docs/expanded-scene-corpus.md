@@ -96,18 +96,19 @@ four scene observations from the new parent. The production
 [local-only arm](expanded-scene-local12k.md) completed 12,000 updates,
 24,000 distinct source visits and 96,000 native crops. Its scoped
 development and both standing GFX views are complete. The spatial
-arm is training. The fixed broad comparison is queued on both bound
-endpoints.
+arm finished its 12,000 updates with identical observations. Its fixed
+weak-wire study and both standing GFX reviews are complete. The broad
+comparison is collecting. [Spatial endpoint and native results](expanded-scene-spatial12k.md).
 [Checkpoint bindings, preflight and start evidence](results/expanded-scene-12000-v2/publication.json).
-The spatial arm's first 6,000 updates match all 12,000 realized local-arm
-scene records byte for byte, including crop and noise fingerprints.
-[Matched observation prefix](results/expanded-scene-local12k-v1/matched-spatial-prefix-6000.json).
+The full training traces match all 24,000 scene records byte for byte,
+including crop and noise fingerprints.
+[Completed observation audit](results/expanded-scene-12000-v2/training-completion.json).
 
 Both standing GFX families use the existing fixed native inputs with a
 matched V120 and 100k comparison. The earlier 64 scene development
 photos are excluded from this order, but the 100k parent has prior
 exposure. The independent quality checks use the canonical held-out
-panels and the constructed wire/gap intervention. The latter finds
-negligible guide-specific response from the old spatial 2k endpoint.
-[Wire and gap test](scene-wire-gap.md) ·
+panels and the constructed wire/gap intervention. The guide-specific
+response remains small after expanding the scene training.
+[2k wire and gap test](scene-wire-gap.md) ·
 [100k parent](full-corpus-long100k.md).

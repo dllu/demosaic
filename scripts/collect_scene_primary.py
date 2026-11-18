@@ -235,7 +235,9 @@ def collect(plan_path, action):
     for arm, specification in plan["models"].items():
         binding = specification["checkpoint"]
         if specification["kind"] == "parent":
-            base, payload = load_model("v120", checkpoint=checked(binding), device="cpu")
+            base, payload = load_model(
+                "v120", checkpoint=checked(binding), expected_sha256=binding["sha256"], device="cpu"
+            )
             model = WholeSceneRestorer(base, mode="none", adapter_width=32)
         else:
             model, payload = load_scene_checkpoint(
@@ -476,7 +478,7 @@ def collect(plan_path, action):
             "RAW_decodes": fields.RAW_decodes,
             "seconds": time.monotonic() - began,
             "DINO_unchanged": True,
-            "scope": "Same-CPU EMA parent and3 scene endpoints, exact historical scored inputs and targets. Native B4 retained; frozen local DINO requests checked identical and replayed, full noisy scene fields/features saved.0 GPU or optimizer work. Preflight is3 cases, not a primary score; only complete full427/known/unseen coverage is eligible. All metrics use original formulas with CPU reference SSIM convolution. Real AHD RGB is auxiliary, not exact GT. Actual native viewing/PSNR-history publication separate.",
+            "scope": "Bound EMA endpoints evaluated on the same CPU with the exact historical scored inputs and targets. Native B4 retained; frozen local DINO requests checked identical and replayed, full noisy scene fields and features saved. Preflight covers three cases. Primary scores require complete full427, known and unseen coverage. Metrics use the original formulas with CPU reference SSIM convolution. Real AHD RGB is an auxiliary reference. Native viewing and PSNR history publication are separate.",
         },
     )
 

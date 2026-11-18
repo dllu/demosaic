@@ -69,6 +69,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Expanded scene local-only 12k](expanded-scene-local12k.md#native-crops-and-standing-gfx-scenes)
   compares the new EMA with its 100k parent and V120. The smooth sky and
   coherent coarse lattice hold. Fine building hardware and foliage remain soft.
+- [Expanded scene spatial 12k](expanded-scene-spatial12k.md#matched-development-and-standing-gfx-review)
+  compares both matched 12k arms with 100k and V120. The sky stays smooth and
+  the coarse fence keeps its crossings. Fine hardware and leaves remain soft.
 - [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
   compares both 800-update endpoints against 100k and V120. The sky
   stays smooth and the coarse lattice and dark foliage look close to 100k.

@@ -4,7 +4,9 @@ The local-only continuation improves the two fixed development conditions
 by **0.09259 dB in shadows** and **0.08775 dB at ISO12800** versus its 100k
 parent. Native GFX detail stays close to that parent. Fine suspension
 lines and the finer cab fence crossings remain incomplete. The matched
-spatial arm is training on the same declared scene schedule.
+spatial arm finished on the same observations. Its fixed synthetic
+guide intervention shows little extra recovery from distant context.
+[Completed spatial arm](expanded-scene-spatial12k.md).
 [Checkpoint, realized training order and native results](results/expanded-scene-local12k-v1/publication.json).
 
 ## Endpoint and scoped scores
@@ -33,7 +35,7 @@ All arms see identical retained Bayer samples, noise, CFA, WB and
 camera transform. Mean rendered gradient error also falls slightly at
 both conditions. The small development panel may include sources the
 100k parent has seen. The fixed 427-photo and known/unseen camera
-comparisons are queued together with the paired spatial arm. The last
+comparisons are collecting together with the paired spatial arm. The last
 completed broad three-panel endpoint is [Corpus 20k](full-corpus-control20k-primary.md).
 The [performance history](performance-history.md) has no broad score
 for this local-only endpoint yet.

@@ -8,6 +8,10 @@ aligned guide produces no visible false continuation in the retained
 gap crops.
 [Complete metrics and exact native comparisons](results/scene-wire-gap-v1/publication.json).
 
+The [matched 12k follow-up](expanded-scene-spatial12k.md#distant-guide-with-a-fixed-local-raw)
+reuses the same fixed observations. It finds a small aligned-guide effect
+at ISO400 and lower recovery at ISO6400 versus the neutral scene.
+
 The [explicit RAW line fit](isolated-raw-line.md) tests the same
 idea on fresh geometries. Local fitting recovers much more of the
 ISO400 wire. Shorter support reduces false extension into true gaps.
