@@ -26,6 +26,10 @@ from a 90,692-photo pool. The broad photo evaluations are collecting.
 [100k training and quality](full-corpus-long100k.md) ·
 [Matched whole-scene continuation](expanded-scene-spatial12k.md).
 
+The [64-photo repeat analysis](full-corpus-faint-noise.md) separates
+weak-detail signal from noise-to-noise variation. At faint ISO6400
+the 100k model improves weak-band RMS mostly through lower variance.
+
 ## What the existing coverage audit actually shows
 
 The [executed source-selector audit](training-source-schedule-coverage.md)

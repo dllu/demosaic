@@ -46,6 +46,12 @@ reduces the 50k worst spot-check bias to 11.16 DN16 and improves faint
 sRGB. Compared with V120 using the same projection, 50k still has
 higher mean fine-band RMS and higher flat bias.
 
+The [64-photo noise follow-up](full-corpus-faint-noise.md) finds 100k
+reduces faint ISO6400 weak-band RMS by 0.76 DN16 versus V120,
+with almost the same signed detail. Lower variation accounts for
+95% of the MSE reduction. The fixed bounded lift helps at tiny
+noise across all five checkpoints.
+
 The [86k ADC follow-up](full-corpus-long86k-adc.md) gains 0.518 dB in
 rendered PSNR on 64 faint photos, with worse weakest-band RMS in raw
 86k. Bin Malvar brings that band to 2.208 DN16 versus projected V120 at

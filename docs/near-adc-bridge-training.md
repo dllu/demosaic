@@ -1,5 +1,9 @@
 # Training across the near-ADC noise gap
 
+The [64-photo follow-up](full-corpus-faint-noise.md) finds small
+raw gains and near parity with the matched control after using
+the same bounded RAW lift at the tiny positive noise prior.
+
 The [86k noise audit](noisy-cfa-residual.md) found no positive training
 prior below about 156 ADC codes RMS at full signal. On the held-out
 near-ADC tests, small positive conditioning produced large flat-color

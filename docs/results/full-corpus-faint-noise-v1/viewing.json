@@ -1,0 +1,1666 @@
+{
+  "native": [
+    {
+      "id": "056ea4c22db1faea173e109d83ecba1df10a1e53-adc",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1.0,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source_id": "056ea4c22db1faea173e109d83ecba1df10a1e53",
+      "all_checkpoints": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "condition": {
+        "name": "adc",
+        "shot": 0.0,
+        "read": 0.0,
+        "draws": 1,
+        "target": "target",
+        "gain": 1.0,
+        "exposure": 1.0
+      },
+      "treatment": "ADC-bin Malvar above 100k",
+      "CFA": "RGGB",
+      "draw": 0,
+      "output_record": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/collection/faint-photo-013-RGGB-adc-0.npz",
+        "sha256": "1cf12877623e3a03e850764781efef661652552065cdf9e4feae5996e1e1aa2b"
+      },
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "seed": null,
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-adc-comparison.png",
+          "sha256": "21e858122e2be706b121cd8c9a0026b1e0b1cb3a02426d04f9b017858da711e6"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Bridge control EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 ADC Malvar",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k ADC Malvar",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-adc-triplet.png",
+          "sha256": "c21b212475e2c4e9956c88effe46bbca60621eb5466d2c1c128c13e0d4f0c5eb"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k ADC Malvar",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "observation": "The thin line through the light field and the blue-fringed boundary are clearer with the ADC-bin outputs. Fine mottling remains below the exact target.",
+      "source_scope": "base"
+    },
+    {
+      "id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580-adc",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1.0,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source_id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+      "all_checkpoints": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "condition": {
+        "name": "adc",
+        "shot": 0.0,
+        "read": 0.0,
+        "draws": 1,
+        "target": "target",
+        "gain": 1.0,
+        "exposure": 1.0
+      },
+      "treatment": "ADC-bin Malvar above 100k",
+      "CFA": "RGGB",
+      "draw": 0,
+      "output_record": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/collection/faint-photo-013-RGGB-adc-0.npz",
+        "sha256": "1cf12877623e3a03e850764781efef661652552065cdf9e4feae5996e1e1aa2b"
+      },
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "seed": null,
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-adc-comparison.png",
+          "sha256": "4a2a4d32c38ec4f531ccd2c6a8bdf69ec7aab8abb8b08f03b1f3089cb09caa07"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Bridge control EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 ADC Malvar",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k ADC Malvar",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-adc-triplet.png",
+          "sha256": "7395665767112950b6a57dad26aba1ba72214602a3d1b6828b1055d31756424b"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k ADC Malvar",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "observation": "Fine ornament spacing and dark trim are visible. The ADC-bin outputs recover some blue and gold modulation along the sweep.",
+      "source_scope": "base"
+    },
+    {
+      "id": "056ea4c22db1faea173e109d83ecba1df10a1e53-iso6400",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1.0,
+      "display_contrast": 4,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source_id": "056ea4c22db1faea173e109d83ecba1df10a1e53",
+      "all_checkpoints": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "condition": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "draws": 4,
+        "target": "target",
+        "gain": 1.0,
+        "exposure": 1.0
+      },
+      "treatment": "100k EMA",
+      "CFA": "RGGB",
+      "draw": 0,
+      "output_record": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/collection/faint-photo-013-RGGB-iso6400-0.npz",
+        "sha256": "e6731ab85f60fb7da925fd501478688ece41988f01236e2a7a52a272d02f78e4"
+      },
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "seed": 6706711909421328797,
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-iso6400-comparison.png",
+          "sha256": "4d2d343eebdaafe47e78d64f3ec00705273399da463ac22dc24a401b281727ab"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Bridge control EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-iso6400-triplet.png",
+          "sha256": "10e92ba7499ea42962f695b8ac27a25580f8c9b5edf99e560fe5e83c0e65a45c"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "observation": "All five models retain the broad boundary and omit the fine narrow line. Mild mottle remains even on the smoothest light field.",
+      "source_scope": "base"
+    },
+    {
+      "id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580-iso6400",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1.0,
+      "display_contrast": 4,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source_id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+      "all_checkpoints": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "condition": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "draws": 4,
+        "target": "target",
+        "gain": 1.0,
+        "exposure": 1.0
+      },
+      "treatment": "100k EMA",
+      "CFA": "RGGB",
+      "draw": 0,
+      "output_record": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/collection/faint-photo-013-RGGB-iso6400-0.npz",
+        "sha256": "e6731ab85f60fb7da925fd501478688ece41988f01236e2a7a52a272d02f78e4"
+      },
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "seed": 3896837056734775151,
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-iso6400-comparison.png",
+          "sha256": "69fdecd9f18b55f5448be90ce8bd69cfa86b00798218d9841d6505beb1ef3990"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Bridge control EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-iso6400-triplet.png",
+          "sha256": "62ffc021e56645461f146ff2072148baf178e6bf4eb081687eec09c095dc27e6"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "observation": "The broad ornamental shapes survive. Most fine gold and blue decorations in the faint target disappear.",
+      "source_scope": "base"
+    },
+    {
+      "id": "056ea4c22db1faea173e109d83ecba1df10a1e53-natural-shadow",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 8.0,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source_id": "056ea4c22db1faea173e109d83ecba1df10a1e53",
+      "all_checkpoints": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "condition": {
+        "name": "natural-shadow",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "draws": 1,
+        "target": "original_target",
+        "gain": 0.125,
+        "exposure": 8.0
+      },
+      "treatment": "100k EMA",
+      "CFA": "RGGB",
+      "draw": 0,
+      "output_record": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/collection/faint-photo-013-RGGB-natural-shadow-0.npz",
+        "sha256": "45f150911f076313eb686ef9bcacc8a1fb92df70d029e1f87bef3b27e22b8147"
+      },
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "seed": 6092024368644906691,
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-natural-shadow-comparison.png",
+          "sha256": "f2a17a79c18d7c5d6f10aafe629dca73eeb6a8fe900f33fc07e9aad716d80dda"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Bridge control EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-natural-shadow-triplet.png",
+          "sha256": "f85e9fb14aaa6f3d916e4fce227e6f966e33c73913cb4657644fd78e0fce3368"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "observation": "The thin separating line and irregular dark boundary survive at native contrast. Smaller cracks and mottling are still attenuated.",
+      "source_scope": "base"
+    },
+    {
+      "id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580-natural-shadow",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 8.0,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source_id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+      "all_checkpoints": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "condition": {
+        "name": "natural-shadow",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "draws": 1,
+        "target": "original_target",
+        "gain": 0.125,
+        "exposure": 8.0
+      },
+      "treatment": "100k EMA",
+      "CFA": "RGGB",
+      "draw": 0,
+      "output_record": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/collection/faint-photo-013-RGGB-natural-shadow-0.npz",
+        "sha256": "45f150911f076313eb686ef9bcacc8a1fb92df70d029e1f87bef3b27e22b8147"
+      },
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "seed": 3678194036442450970,
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-natural-shadow-comparison.png",
+          "sha256": "5da5b4354e5e92248c76b36415fdc8a25c3c9cc5461441f99637220a501f4c3a"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Bridge control EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-natural-shadow-triplet.png",
+          "sha256": "77541bcc0b61bdfdcfb08dcc01d674a99accfa36535b90c3e13a7b5376d77ce2"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "observation": "Core gold trim and the sharp large shapes remain readable. Small blue highlights and texture inside the patterns look soft.",
+      "source_scope": "base"
+    },
+    {
+      "id": "056ea4c22db1faea173e109d83ecba1df10a1e53-tiny-lift",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "CFA": "RGGB",
+      "draw": 0,
+      "source_id": "056ea4c22db1faea173e109d83ecba1df10a1e53",
+      "profiles": {
+        "name": "tiny",
+        "shot": 1e-08,
+        "read": 1e-10,
+        "draws": 1,
+        "target": "target",
+        "gain": 1.0,
+        "exposure": 1.0
+      },
+      "fixed_input_slice": 0,
+      "treatment": "100k with bounded near-ADC lift",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "observation": "The bounded outputs show slightly more of the thin line and less color breakup along the irregular boundary.",
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-tiny-lift-comparison.png",
+          "sha256": "b0f8e93801a1abe61148c66cdc528638527c11203d59a75df71821ce427580a4"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 bounded",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k bounded",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Control",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Control bounded",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC bounded",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/056ea4c22db1faea173e109d83ecba1df10a1e53-tiny-lift-triplet.png",
+          "sha256": "dc390d5dfb52e83eadc7fd72505e5c3ab8d008ea8b364d7f19323a9014697fa4"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k bounded",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_scope": "tiny"
+    },
+    {
+      "id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580-tiny-lift",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "CFA": "RGGB",
+      "draw": 0,
+      "source_id": "059947d9a94d2e5c6d21c270bd5d9204bd91b580",
+      "profiles": {
+        "name": "tiny",
+        "shot": 1e-08,
+        "read": 1e-10,
+        "draws": 1,
+        "target": "target",
+        "gain": 1.0,
+        "exposure": 1.0
+      },
+      "fixed_input_slice": 1,
+      "treatment": "100k with bounded near-ADC lift",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        },
+        "100k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+            "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+          },
+          "step": 100000,
+          "training_horizon": 100000,
+          "retained_progress": true,
+          "weights": "EMA",
+          "display_label": "Long schedule 100k EMA"
+        },
+        "bridge-control": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/control/step000800.pt",
+            "sha256": "925a62a9e78af94469354752b8cd767c9e89e1dbe2785bfa5a841e46804a0346"
+          },
+          "step": 800,
+          "weights": "EMA"
+        },
+        "bridge-near": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/near-adc-bridge-training-v1/work/artifacts/near-adc-bridge/bridge/step000800.pt",
+            "sha256": "42c5cc828c38d6c79aa40424735a05b428de01814010f0f3c6f8723117c6ec63"
+          },
+          "step": 800,
+          "weights": "EMA"
+        }
+      },
+      "observation": "The fixed lift improves definition of some fine ornaments. The target retains slightly sharper blue detail.",
+      "target": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-013.npz",
+        "sha256": "fb34fb4e10decba7aefcb2fac59ab42eb1145de31c17c8bfeac92e88f253ed38"
+      },
+      "board": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-tiny-lift-comparison.png",
+          "sha256": "aeddab027fc666c856c9c2f3f41abfb87c4410872474fc16250eb7851fb25cd1"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 bounded",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k bounded",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Control",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Control bounded",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Near-ADC bounded",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "docs/images/full-corpus-faint-noise-v1/059947d9a94d2e5c6d21c270bd5d9204bd91b580-tiny-lift-triplet.png",
+          "sha256": "6bb146e4d47f94a5b4d82cbcbb34ec4df47c30735b0c8c1446e57b311156a221"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "100k bounded",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_scope": "tiny"
+    }
+  ],
+  "plot": {
+    "path": "docs/images/full-corpus-faint-noise-v1/faint-noise-bands.png",
+    "sha256": "d748721cdd27b69a86e87d4f5d88407643a355429c8257a232e2d73baeef20a1"
+  },
+  "actual_native_viewing": true,
+  "existing_GFX_review": {
+    "scope": "Earlier matched boards, newly re-viewed for context. No new GFX predictions or scoring.",
+    "references": "Independent ISO100 RAW comparisons and the camera JPEGs are qualitative references.",
+    "boards": [
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/main-overcast-sky.png",
+        "sha256": "cd088f6644359f9d2da212f17a14f21f0b4bd41fea204a253ec3c3af80adbb4e"
+      },
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/main-building-detail.png",
+        "sha256": "bc412b87e24cf89b1ed86442dbb156f6a7406b4168648be9e59c44cdeaad8198"
+      },
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/main-foliage.png",
+        "sha256": "28cb4a4d14322920e71296701b64337c23cb1b70a12ac9edea4db208d0496128"
+      },
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/main-chain-link-fence.png",
+        "sha256": "a11197e77894e043353badc24e6a54e466fa61ddc06fc492f08a450c34debb62"
+      },
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/mesh-nominal-fine-green-mesh-left.png",
+        "sha256": "6be6477642894c7ac081e42108faefba27eb3938386f85e4bb2dfb28c884c594"
+      },
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/mesh-nominal-fine-green-mesh-right.png",
+        "sha256": "a7d0280a221e7a51c3cda23b8af4d212326abe055fadf124c10d360983a448ca"
+      },
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/mesh-profile3879-fine-green-mesh-left.png",
+        "sha256": "6f74b5e971379c63a6e991776dc3ea69bf886c54c23a25af0d96ea18e5665160"
+      },
+      {
+        "path": "docs/images/near-adc-bridge-native-v1/mesh-profile3879-fine-green-mesh-right.png",
+        "sha256": "eb48a24ca0aca0e06efcf83be750b6acbcbe3c1cc8c86756ed7b1d7ac5cd5915"
+      }
+    ]
+  },
+  "scope": "Viewed all eight published photo comparisons, their eight triplets and the summary plot, plus eight earlier GFX boards."
+}

@@ -285,6 +285,11 @@ weakens fine structure inside the native crop while preserving the
 rest of each scene. Data and discarded CUDA updates pass. Learned
 quality remains unmeasured.
 
+The [64-photo natural-texture evaluation](full-corpus-faint-noise.md)
+finds that corpus scaling mainly lowers ISO6400 output variance.
+Signed faint fine-band response remains near 12%, with persistent
+error after taking the mean across four independent observations.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

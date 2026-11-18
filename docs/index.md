@@ -39,6 +39,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [expanded scene local-only endpoint](expanded-scene-local12k.md) ·
 [expanded scene spatial endpoint](expanded-scene-spatial12k.md) ·
+[64-photo noise and repeat analysis](full-corpus-faint-noise.md) ·
 [distant wire and gap intervention](scene-wire-gap.md) ·
 [isolated RAW line support](isolated-raw-line.md) ·
 [multiple RAW line guides](multiple-raw-line-guides.md) ·

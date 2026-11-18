@@ -1,0 +1,357 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/verify.py",
+    "sha256": "f4ca193e27d48cdec4ba06a19cee9c156220598ca42277b0fb4f9ca036911701"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-faint-noise-v1/plan.json",
+    "sha256": "5d4b60c56d12880ca76fdcaff5eff3523ab518f839b7445cead333854b462978"
+  },
+  "results": [
+    {
+      "case": "faint-photo-013-BGGR",
+      "adcbins_code_exact_and_no_CFA_MSE_increase": true,
+      "matched_CPU_ADC_backend_delta": {
+        "V120": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/collection/V120/prediction-053.npy",
+            "sha256": "2c45a45c4aef0434a5a4d98eb2b3d809b14679b151c654fcb5ae2332b212c2d7"
+          },
+          "sRGB_PSNR_delta": [
+            3.8144605696288636e-08,
+            1.5990171391422336e-06,
+            7.103882353476365e-07,
+            2.9985674956378716e-06
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.009765475988388062,
+          "RGB_RMS_delta_DN16": 0.0009059184254675839
+        },
+        "86k": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-adc-panels-v1/faint-0/collection/scale-long86k/prediction-009.npy",
+            "sha256": "f97b96372c9649b6ff3d1517492499258a8918bda06d8fcae76e4dddc0bcdc53"
+          },
+          "sRGB_PSNR_delta": [
+            -2.4840951624582885e-06,
+            4.3595271392860013e-07,
+            4.243521658509053e-07,
+            3.35114620497734e-07
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.009765475988388062,
+          "RGB_RMS_delta_DN16": 0.000891390114666688
+        }
+      },
+      "independent_repeated_check": {
+        "verified_blocks": 128,
+        "model_audit": [
+          {
+            "model": "V120",
+            "pair_product_bias_squared": 0.0007994020944085446,
+            "pair_difference_variance": 0.0005869975504581941,
+            "per_draw_mse": 0.0013863996448667387
+          },
+          {
+            "model": "86k",
+            "pair_product_bias_squared": 0.0008045243804387772,
+            "pair_difference_variance": 0.00036600584554052267,
+            "per_draw_mse": 0.0011705302259792999
+          },
+          {
+            "model": "100k",
+            "pair_product_bias_squared": 0.0008033561932360425,
+            "pair_difference_variance": 0.00037169320827663805,
+            "per_draw_mse": 0.0011750494015126804
+          },
+          {
+            "model": "bridge-control",
+            "pair_product_bias_squared": 0.0008017985849967336,
+            "pair_difference_variance": 0.00038702207113314906,
+            "per_draw_mse": 0.0011888206561298828
+          },
+          {
+            "model": "bridge-near",
+            "pair_product_bias_squared": 0.0008022526195822802,
+            "pair_difference_variance": 0.00038606278405944075,
+            "per_draw_mse": 0.0011883154036417209
+          }
+        ]
+      }
+    },
+    {
+      "case": "faint-photo-013-GBRG",
+      "adcbins_code_exact_and_no_CFA_MSE_increase": true,
+      "matched_CPU_ADC_backend_delta": {
+        "V120": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/collection/V120/prediction-055.npy",
+            "sha256": "dbb1c7851f0dea08f1e152fe32b6efafd014db00dd41407b7c1e0dae4c590c32"
+          },
+          "sRGB_PSNR_delta": [
+            -9.287409454827866e-07,
+            -7.405825925843601e-07,
+            4.270921891702528e-07,
+            5.563838101352303e-07
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.011718571186065674,
+          "RGB_RMS_delta_DN16": 0.0009147016996499748
+        },
+        "86k": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-adc-panels-v1/faint-0/collection/scale-long86k/prediction-011.npy",
+            "sha256": "93500fd59e0bdaaed77f54e550cb232642b40d4ab6887b86e0749070a626332b"
+          },
+          "sRGB_PSNR_delta": [
+            -3.508975510158052e-07,
+            1.466496847513099e-06,
+            -1.7357965020892152e-07,
+            -5.830714826515759e-07
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.009765475988388062,
+          "RGB_RMS_delta_DN16": 0.0008941574080917362
+        }
+      },
+      "independent_repeated_check": {
+        "verified_blocks": 128,
+        "model_audit": [
+          {
+            "model": "V120",
+            "pair_product_bias_squared": 0.000798928793800811,
+            "pair_difference_variance": 0.0006173608085497312,
+            "per_draw_mse": 0.001416289602350542
+          },
+          {
+            "model": "86k",
+            "pair_product_bias_squared": 0.0007965491196578906,
+            "pair_difference_variance": 0.0003752397918713132,
+            "per_draw_mse": 0.0011717889115292041
+          },
+          {
+            "model": "100k",
+            "pair_product_bias_squared": 0.0007966778755832747,
+            "pair_difference_variance": 0.0003570745827868554,
+            "per_draw_mse": 0.0011537524583701301
+          },
+          {
+            "model": "bridge-control",
+            "pair_product_bias_squared": 0.0007963382986456931,
+            "pair_difference_variance": 0.00037552942140113273,
+            "per_draw_mse": 0.001171867720046826
+          },
+          {
+            "model": "bridge-near",
+            "pair_product_bias_squared": 0.0007950504225826724,
+            "pair_difference_variance": 0.00037417468802761623,
+            "per_draw_mse": 0.0011692251106102886
+          }
+        ]
+      }
+    },
+    {
+      "case": "faint-photo-013-GRBG",
+      "adcbins_code_exact_and_no_CFA_MSE_increase": true,
+      "matched_CPU_ADC_backend_delta": {
+        "V120": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/collection/V120/prediction-054.npy",
+            "sha256": "95a46881e5dd68eedbc1ca6eecd1d32883248a5efb491ddf885bbffede6ccefb"
+          },
+          "sRGB_PSNR_delta": [
+            3.3383302309175633e-06,
+            -1.23095084347824e-07,
+            4.187409388123342e-07,
+            -2.5605747993040495e-06
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.007812380790710449,
+          "RGB_RMS_delta_DN16": 0.000893453155361133
+        },
+        "86k": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-adc-panels-v1/faint-0/collection/scale-long86k/prediction-010.npy",
+            "sha256": "871e85c1f7c100f554813d04a55bd102e287ba592d065a19da5d477eb39df8a7"
+          },
+          "sRGB_PSNR_delta": [
+            3.727522283725193e-06,
+            -1.3968864749358545e-06,
+            9.911533851436616e-07,
+            -3.9925362216308713e-07
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.009765475988388062,
+          "RGB_RMS_delta_DN16": 0.0008957957193607901
+        }
+      },
+      "independent_repeated_check": {
+        "verified_blocks": 128,
+        "model_audit": [
+          {
+            "model": "V120",
+            "pair_product_bias_squared": 0.0007869021623205983,
+            "pair_difference_variance": 0.0009200126882154387,
+            "per_draw_mse": 0.0017069148505360373
+          },
+          {
+            "model": "86k",
+            "pair_product_bias_squared": 0.0007812216911675199,
+            "pair_difference_variance": 0.0007648227438627772,
+            "per_draw_mse": 0.0015460444350302975
+          },
+          {
+            "model": "100k",
+            "pair_product_bias_squared": 0.0007836633057993209,
+            "pair_difference_variance": 0.0006353931560173012,
+            "per_draw_mse": 0.001419056461816622
+          },
+          {
+            "model": "bridge-control",
+            "pair_product_bias_squared": 0.0007801237291321295,
+            "pair_difference_variance": 0.0008134091346669091,
+            "per_draw_mse": 0.0015935328637990385
+          },
+          {
+            "model": "bridge-near",
+            "pair_product_bias_squared": 0.0007807562657456728,
+            "pair_difference_variance": 0.0007910476330317871,
+            "per_draw_mse": 0.0015718038987774597
+          }
+        ]
+      }
+    },
+    {
+      "case": "faint-photo-013-RGGB",
+      "adcbins_code_exact_and_no_CFA_MSE_increase": true,
+      "matched_CPU_ADC_backend_delta": {
+        "V120": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/collection/V120/prediction-052.npy",
+            "sha256": "d2911919ecd281fdd69cd9541302b8db951c40d0b957efe1ca6f1f2b8bf978aa"
+          },
+          "sRGB_PSNR_delta": [
+            -3.96936064817055e-06,
+            -5.946452361627053e-07,
+            -4.360625212029845e-07,
+            5.6094593361422085e-06
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.009765475988388062,
+          "RGB_RMS_delta_DN16": 0.0008975362173111409
+        },
+        "86k": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-adc-panels-v1/faint-0/collection/scale-long86k/prediction-008.npy",
+            "sha256": "2ebc0d53ee30a538bd2b998c582095e6dfb3eac1df10f5f75d8f86ea670102b5"
+          },
+          "sRGB_PSNR_delta": [
+            -5.835851339952569e-07,
+            1.2478864164222614e-08,
+            8.418949875022008e-07,
+            -4.818826084829197e-07
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.009765475988388062,
+          "RGB_RMS_delta_DN16": 0.0008890076392739487
+        }
+      },
+      "independent_repeated_check": {
+        "verified_blocks": 128,
+        "model_audit": [
+          {
+            "model": "V120",
+            "pair_product_bias_squared": 0.000784535170142316,
+            "pair_difference_variance": 0.0007410705054432973,
+            "per_draw_mse": 0.0015256056755856135
+          },
+          {
+            "model": "86k",
+            "pair_product_bias_squared": 0.0007805302596366805,
+            "pair_difference_variance": 0.0005163401971654274,
+            "per_draw_mse": 0.001296870456802108
+          },
+          {
+            "model": "100k",
+            "pair_product_bias_squared": 0.0007812346559560324,
+            "pair_difference_variance": 0.0004628927736493428,
+            "per_draw_mse": 0.001244127429605375
+          },
+          {
+            "model": "bridge-control",
+            "pair_product_bias_squared": 0.0007790641557009815,
+            "pair_difference_variance": 0.0005031600157778549,
+            "per_draw_mse": 0.0012822241714788363
+          },
+          {
+            "model": "bridge-near",
+            "pair_product_bias_squared": 0.0007801369631938796,
+            "pair_difference_variance": 0.0004928912863780903,
+            "per_draw_mse": 0.00127302824957197
+          }
+        ]
+      }
+    },
+    {
+      "case": "faint-photo-019-BGGR",
+      "adcbins_code_exact_and_no_CFA_MSE_increase": true,
+      "matched_CPU_ADC_backend_delta": {
+        "V120": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/collection/V120/prediction-077.npy",
+            "sha256": "ba3781b6f762f8e5be50b9d8e2f9812b7a7bcccf2e8e3aa303005dddcdad82fb"
+          },
+          "sRGB_PSNR_delta": [
+            1.4237904792935296e-06,
+            -4.16920471479898e-08,
+            2.677508632586978e-07,
+            5.834918965774705e-07
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.005859285593032837,
+          "RGB_RMS_delta_DN16": 0.0005310465944315325
+        },
+        "86k": {
+          "cpu_reference": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-adc-panels-v1/faint-1/collection/scale-long86k/prediction-013.npy",
+            "sha256": "54be3ecdf617c5c3f7e453507f3a58a83ef95ddbfdebd34d622504f9d0e108d5"
+          },
+          "sRGB_PSNR_delta": [
+            -1.6836011695886555e-06,
+            -1.216572684370476e-06,
+            -6.838799180286514e-07,
+            -9.797626319141273e-07
+          ],
+          "maximum_RGB_absolute_delta_DN16": 0.005859285593032837,
+          "RGB_RMS_delta_DN16": 0.0005250177059623223
+        }
+      },
+      "independent_repeated_check": {
+        "verified_blocks": 19,
+        "model_audit": [
+          {
+            "model": "V120",
+            "pair_product_bias_squared": 0.0003605629669876966,
+            "pair_difference_variance": 0.0001722992152340282,
+            "per_draw_mse": 0.0005328621822217248
+          },
+          {
+            "model": "86k",
+            "pair_product_bias_squared": 0.0003595926691802635,
+            "pair_difference_variance": 0.0001647577206875857,
+            "per_draw_mse": 0.0005243503898678493
+          },
+          {
+            "model": "100k",
+            "pair_product_bias_squared": 0.00034994394652092703,
+            "pair_difference_variance": 0.00016222540805183126,
+            "per_draw_mse": 0.0005121693545727583
+          },
+          {
+            "model": "bridge-control",
+            "pair_product_bias_squared": 0.0003456024137735246,
+            "pair_difference_variance": 0.00018454565944953384,
+            "per_draw_mse": 0.0005301480732230584
+          },
+          {
+            "model": "bridge-near",
+            "pair_product_bias_squared": 0.0003444604498014523,
+            "pair_difference_variance": 0.0001830936212872249,
+            "per_draw_mse": 0.0005275540710886772
+          }
+        ]
+      }
+    }
+  ]
+}

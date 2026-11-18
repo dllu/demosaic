@@ -93,6 +93,11 @@ errors are larger than the four-material panel suggests.
 [100k native summary](results/full-corpus-long100k-native-v1/native-summary.json) ·
 [86k broader ADC study](full-corpus-long86k-adc.md).
 
+The [64-photo noise follow-up](full-corpus-faint-noise.md) expands
+the faint analysis across four Bayer orders and a native-contrast
+shadow condition. At ISO6400, most weak-band MSE reduction comes
+from lower variation across independent noise draws.
+
 ### Native synthetic crops
 
 Noisy Malvar, 100k EMA and exact synthetic GT for the bark and fur
