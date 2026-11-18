@@ -294,6 +294,12 @@ finds that corpus scaling mainly lowers ISO6400 output variance.
 Signed faint fine-band response remains near 12%, with persistent
 error after taking the mean across four independent observations.
 
+The [readout-row stress test](withheld-row-noise.md) shows that
+disjoint Bayer pixels can still validate the same simulated noise.
+Holding out complete rows rejects the false bands and often
+suppresses weak real waves. The earlier GFX sky correlation check
+did not show clear evidence of such dependence at its tested offsets.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
