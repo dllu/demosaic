@@ -13,9 +13,9 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 MODEL_SELECTION = REPO / "configs/current-model.json"
 COVERAGE_NOTE = (
-    "**Coverage reviewed November 18, 2026.** V131 has the most recent completed "
-    "three-panel comparison. The larger-corpus 20k and 100k endpoints have completed "
-    "camera scores and pending full427 photo scores. "
+    "**Coverage reviewed November 18, 2026.** The larger-corpus 20k control now has "
+    "[all three comparable panels](full-corpus-control20k-primary.md). "
+    "The 100k endpoint has completed camera scores and its full427 panel is collecting. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -344,10 +344,11 @@ def collect():
     return output, evidence
 
 
-def collect_corpus_cameras():
-    """Bind the measured camera panels for the two named corpus endpoints."""
+def collect_corpus_endpoints():
+    """Bind completed photo and camera panels for the named corpus endpoints."""
     directory = REPO / "docs/results"
     short_camera = directory / "full-corpus-control20k-camera-v1/summary.json"
+    short_photo = directory / "full-corpus-control20k-primary-v1/primary.json"
     long_camera = directory / "full-corpus-long100k-camera-v1/publication.json"
     long_training = directory / "full-corpus-long100k-training-v1/publication.json"
     short, long, training = (
@@ -370,8 +371,8 @@ def collect_corpus_cameras():
         "endpoint": short_arm,
         "step": short_model["step"],
         "checkpoint_sha256": short_model["checkpoint"]["sha256"],
-        "report": "full-corpus-control20k-camera-review.md",
-        "source": str(short_camera.relative_to(directory)),
+        "report": "full-corpus-control20k-primary.md",
+        "source": str(short_photo.relative_to(directory)),
         "evaluation_metadata": {},
     }
     long_point = {
@@ -413,6 +414,40 @@ def collect_corpus_cameras():
                 "native_crops_per_model": scenes * 18,
                 "precision": "CPU IEEE FP32 with measured-CFA reference",
             }
+    photo = json.loads(short_photo.read_text())
+    archive = REPO / photo["archive"]["path"]
+    assert digest(archive) == photo["archive"]["sha256"]
+    with tarfile.open(archive) as bundle:
+        result_bytes = bundle.extractfile("collector-result.json").read()
+    assert hashlib.sha256(result_bytes).hexdigest() == photo["source_result"]["sha256"]
+    primary = json.loads(result_bytes)
+    assert primary["all_complete"] and primary["kind"] == "full" and primary["cases"] == 3162
+    assert photo["photo_sources"] == len(photo["source_averages"]) == 427
+    assert (photo["noise_conditions"], photo["CFAs"], photo["observations_per_model"]) == (7, 4, 11956)
+    assert primary["models"] == photo["models"]
+    for arm in (short_arm, "V120"):
+        assert photo["models"][arm]["checkpoint"] == short["models"][arm]["checkpoint"]
+        row = next(
+            r for r in primary["summaries"]["photo"]["overall"]
+            if r["model"] == arm and r["kind"] == "photo"
+        )
+        metric = row["metrics"]["srgb_psnr"]
+        assert metric["count"] == 427
+        assert math.isclose(
+            metric["mean"], photo["source_balanced"][arm]["srgb_psnr"], rel_tol=0, abs_tol=1e-11
+        )
+        if arm == short_arm:
+            short_point["photo_srgb_PSNR"] = metric["mean"]
+    assert photo["known_unseen_camera_PSNR"] == short["measured_CFA_PSNR"]
+    short_point["inference_policy"] = "EMA, CPU IEEE FP32, exact canonical inputs"
+    short_point["evaluation_metadata"]["photo"] = {
+        "photo_sources": 427,
+        "observations_per_model": photo["observations_per_model"],
+        "conditions": 7,
+        "CFAs": 4,
+        "canonical_inputs_sha256": photo["canonical_inputs"]["sha256"],
+        "precision": "CPU IEEE FP32",
+    }
     evidence = [
         {
             "path": str(path.relative_to(REPO)),
@@ -421,6 +456,8 @@ def collect_corpus_cameras():
             "report": point["report"],
         }
         for point, path in (
+            (short_point, short_photo),
+            (short_point, archive),
             (short_point, short_camera),
             *((short_point, path) for path in short_panels),
             (long_point, long_camera),
@@ -454,11 +491,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v1.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v2.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-v131-current-v1.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v1.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-v131-current-v1.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history.json"
     if destination.resolve().parent != (REPO / "docs/results").resolve():
@@ -469,7 +508,7 @@ def main():
     preferred = selected if args.preferred_version is None else args.preferred_version
     if args.refresh_sources:
         points, evidence = collect()
-        corpus_points, corpus_evidence = collect_corpus_cameras()
+        corpus_points, corpus_evidence = collect_corpus_endpoints()
         points.extend(corpus_points)
         evidence.extend(corpus_evidence)
         result = {
@@ -580,7 +619,7 @@ def main():
             if 0 < latest - preferred <= 15:
                 if version == preferred:
                     offset, alignment = (-12, 20), "right"
-                elif version == latest:
+                elif version == latest and not named:
                     offset, alignment = (12, 6), "left"
             photo.annotate(
                 f"V{version}" + (" (ADC)" if p.get("inference_policy") else ""),

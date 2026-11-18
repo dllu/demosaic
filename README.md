@@ -9,7 +9,7 @@ mesh, neon and dark-field mottle remain weaknesses. The 100MP-in-10-seconds
 speed target is still unmet.
 
 [Model choices and tradeoffs](docs/current-model.md) ·
-[PSNR history including corpus camera panels](docs/performance-history.md) ·
+[PSNR history including the broad Corpus 20k result](docs/performance-history.md) ·
 [Research status](docs/experiments.md) · [All documentation](docs/index.md)
 
 V131 improves the same photo benchmark by 0.04000 dB, with unseen-camera and

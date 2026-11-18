@@ -24,6 +24,9 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
+The [Corpus 20k broad benchmark entry](2026-11-18-04-42-02-corpus-20k-complete-primary.md) binds the
+completed full427 score and camera panels to the updated history.
+
 The [multiple RAW line guides entry](2026-11-18-04-33-53-multiple-raw-line-guides.md) records the
 competing-line experiments and both standing camera reviews.
 

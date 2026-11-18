@@ -183,6 +183,6 @@ closure. The running queue/source/primary worker were not edited or restarted.
 The first completed-training audit rejected a trailing Python-repr summary in
 the mixed log. Its source/log survive; v2 parses JSON records without changing
 training receipts. Independent numeric/native checks agree within1.42e-14 dB;
-all22 raw triplets are exact board subsets. Both camera panels now have a separate completed review. Full427 photos and
-subsequent96,075-block analysis remain pending. V120/V131 remain the latest complete
-three-panel history measurements; no old score is assigned to this endpoint.
+all22 raw triplets are exact board subsets. The [full427 follow-up](full-corpus-control20k-primary.md)
+completes all three comparable panels and adds the 20k point to the PSNR
+history. The separate prediction audit and 96,075-block analysis are running.

@@ -31,8 +31,8 @@ historical boards. Use these reports for the current completed comparisons:
   both cab ROIs/profiles/JPEGs viewed. Sky smooth, foliage/building soft, coarse
   fence similar; no convincing new faithful fine crossings. The separate
   [ADC-bin diagnostic](adc-bin-consistency.md) bypasses these positive-noise
-  inputs identically and adds no new GFX image. The [camera follow-up](full-corpus-control20k-camera-review.md)
-  now completes its separate known/unseen panels; full427 photos are pending.
+  inputs identically and adds no new GFX image. The [separate full427 and
+  known/unseen panels](full-corpus-control20k-primary.md) are complete.
 - [Disjoint RAW direction-guide stress](scene-wave-guides.md): the coarse
   fence guide leaves the sky unchanged. Building and foliage changes are
   slight, and the coarse lattice remains visible. The companion cab test

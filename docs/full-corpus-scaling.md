@@ -398,12 +398,12 @@ mean nearly returns to V120, with higher spatial error for three materials.
 The [ADC-bin follow-up](adc-bin-consistency.md) is a separate opt-in zero-noise
 physical diagnostic, not a new training result or default.
 
-The20k [full427/known/unseen benchmark](full-corpus-primary-admission.md) and the
-[scene-arm benchmark](whole-scene-context-primary-admission.md) are running on
-CPU. Complete comparable results and the broader96,075-block analysis remain
-pending;32-photo monitoring and four-material means do not fill those gaps.
-No history point is added; V120/V131 remain the latest complete three-panel
-measurements. Concurrent physical CUDA input export and CPU reviews preserve
+The [20k full427/known/unseen benchmark](full-corpus-control20k-primary.md)
+completes all three panels. The fixed photo mean gains 0.05071 dB over V120.
+The 20k audit and broader 96,075-block analysis, the
+[scene-arm benchmark](whole-scene-context-primary-admission.md), and the
+100k full427 photo panel are running separately.
+Concurrent physical CUDA input export and CPU reviews preserve
 training recipes/ownership, but wall time is not exclusive or claimed identical
 to execution without concurrent activity.
 

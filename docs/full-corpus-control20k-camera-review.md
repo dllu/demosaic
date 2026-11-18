@@ -4,7 +4,8 @@
 the unseen-scene mean by0.04067 dB against V120.** All324 model/crop rows pass
 independent audit; all nine native scene comparisons were actually viewed.
 They show no convincing new fine reconstruction. V120 remains recommended.
-The larger427-photo benchmark is still running, so no new history point is added.
+The [completed follow-up](full-corpus-control20k-primary.md) adds the fixed
+427-photo benchmark and binds all three panels to the PSNR history.
 
 This follows the [completed20k targeted review](full-corpus-control20k-review.md),
 including both protected GFX families. It adds the complete fixed public camera

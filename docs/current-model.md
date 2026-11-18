@@ -1,8 +1,9 @@
 # Current model choices
 
 Reviewed November 18, 2026. **V120 Small is the general inference recommendation.**
-The latest completed broad comparison is V131; its higher photo score comes with
-camera and color costs. The [completed64-source scene review](whole-scene-context-development64.md)
+The latest completed broad comparison is the [Corpus 20k control](full-corpus-control20k-primary.md).
+Its gain of 0.05071 dB on the fixed photo panel comes with unseen-camera and
+color costs. The [completed64-source scene review](whole-scene-context-development64.md)
 finds small quiet-region gains and mixed detail/color costs; fine crossings
 remain missing. The [completed camera panels](whole-scene-context-camera-review.md)
 find a partial unseen-camera repair over local-only, still below V120.
@@ -15,7 +16,7 @@ without convincing new crossings. The original 100k trajectory's
 [matched 20k review](full-corpus-long20k-native.md) improves faint
 fine-band error on bark, fur, and wood while losing mean faint sRGB PSNR
 against the short schedule.
-The20k control's [full427 benchmark](full-corpus-primary-admission.md) is running. The
+The 20k control's [full427 benchmark](full-corpus-control20k-primary.md) is complete. The
 [completed camera panels](full-corpus-control20k-camera-review.md) gain0.03285 dB
 known and lose0.04067 unseen versus V120, with mostly channel-mean unseen costs.
 The [complete ADC-color panel](full-corpus-control20k-color-review.md) exposes
@@ -32,7 +33,7 @@ of it. These costs keep the completed control experimental.
 | [V131 ADC Malvar](v131-adc-projection.md) | Same learned weights; ADC-only photo +0.15074 dB over V131 and worst ADC color error reduced to 19.98 DN16 | Opt-in repair for zero shot/read conditioning. Weakest ADC band error +1.43%; positive-noise V131 output and camera costs remain unchanged |
 | [V132 RAW attention](v132-endpoint-quality.md) | Completed 20k ablation with every training input hash matched to V131 | Faint ADC −0.40978 dB versus V131, ordinary material quality essentially tied; no broad-panel or full-frame validation. Retained for reproduction |
 | [Scene-context2k arms](whole-scene-context-camera-review.md) | Scene/tile API, 64-source quiet-coarse gains. Spatial unseen-camera +0.01739 dB versus matched local-only. [Distant context changes foliage and coarse-fence output](scene-context-extent.md) | Unseen −0.05477 dB versus V120, known nearly ties local-only. Fine crossings remain incomplete. Full427 photos running |
-| [Corpus control20k](full-corpus-control20k-review.md) | Completed320k target slots/all90,778 photos. Ordinary/shadow +0.00852/+0.01047 dB; substantial faint recovery from10k | Faint−0.02061 dB versus V120; fine-band error higher for3/4 materials, selected flat spatial RMS worse. Known/unseen +0.03285/−0.04067 dB; worst ADC mean error765.7 versus55.5 DN16. [Camera](full-corpus-control20k-camera-review.md)/[color](full-corpus-control20k-color-review.md) reviews complete, no faithful new fence crossings; full427 photos collecting |
+| [Corpus control20k](full-corpus-control20k-primary.md) | 37.09079 dB on the fixed photo panel, +0.05071 dB versus V120, with 420/427 source means improved. Known/unseen +0.03285/−0.04067 dB | Faint −0.02061 dB versus V120 on four retained materials. Fine-band error rises on three and the worst ADC mean error is 765.7 versus 55.5 DN16. Both GFX families retain missing fine crossings. [Native endpoint review](full-corpus-control20k-review.md) |
 | [Long schedule at 20k](full-corpus-long20k-native.md) | Fine-band RMS improves for bark, fur, and wood against both V120 and short 20k; faint camera-RGB PSNR is +0.15853 dB over short | Rendered faint PSNR is −0.19124 dB versus short. Grass, flat spot checks, and fine cab crossings remain weak. This checkpoint has a scoped native review |
 | [Long schedule at 50k](full-corpus-long50k-native.md) | Retained ordinary and shadow sRGB are +0.020/+0.044 dB over V120 | Faint fine-band RMS rises on all four materials versus V120. Bright orange ADC mean error reaches 1,490 DN16 in a BGGR spot check, with visible unevenness. Fine cab crossings still incomplete |
 | [Full-corpus 100k](full-corpus-long100k.md) | 1.6M examples and 90,778 ordinary photos. Faint ADC sRGB +0.575 dB versus V120 on four materials, with lower fine-band error on bark, fur and wood. Known CFA +0.02436 dB | Unseen CFA −0.03046 dB. Grass fine-band error and selected orange bias exceed V120. Fine cab crossings remain incomplete. Full427 photos collecting |
@@ -58,7 +59,7 @@ ADC codes RMS at full signal. The separate
 [coarse color correction](coarse-adc-color.md) reduces the worst
 intermediate-noise palette bias from 6,703 to 810 DN16.
 
-V131's broad mean, the four-source faint-detail means, and ADC-only photo means
+The broad PSNR means, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes
 only comparable completed broad panels. A higher mean score alone does not
 establish better weak-detail recovery or cleaner flat regions.
