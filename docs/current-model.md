@@ -110,8 +110,9 @@ crop and non-fence controls return their parents after the extra check.
 ISO6400 recovery on the retained synthetic panel stays weak.
 
 The [overlapping, sensor-anchored mesh fit](local-mesh-stability.md) keeps
-the left-cab lattice across crop shifts and returns the five other control
-views to the local-only parent. On a fresh ISO400 occluded-wire panel it
+the left-cab lattice across crop shifts and returns the five control
+views to their parent. The correction also transfers to V120 and Corpus
+100k on the same camera observations. On a fresh ISO400 occluded-wire panel it
 recovers 76.32% of the target weak contrast against 31.02% for the trunk.
 Every synthetic ISO6400 case keeps the parent. The opt-in crop API still
 has limited support for broken or changing wire geometry.

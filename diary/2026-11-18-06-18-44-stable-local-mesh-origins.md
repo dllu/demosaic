@@ -22,3 +22,8 @@ This is component inference using the existing 2k checkpoints. The scoped
 numerical and native reviews are complete. The comparative PSNR history
 covers independently evaluated broad endpoints.
 [PSNR history](../docs/performance-history.md).
+
+The follow-up applied the same native crop helper to the V120 and Corpus
+100k EMAs. It preserved the faint left-cab lattice under both priors and
+returned the other five control views bit for bit. All eight composed
+boards were viewed. [Checkpoint transfer](../docs/local-mesh-stability.md#applying-the-crop-correction-to-v120-and-corpus-100k).

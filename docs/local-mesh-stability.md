@@ -117,6 +117,27 @@ references. Exact native coordinates and display bindings are in the receipt.
 | Nominal `0.00128/6.5536e-6` | [Left](images/local-mesh-stability-v1/mesh-nominal-fine-green-mesh-left.png) · [Right](images/local-mesh-stability-v1/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred `0.0014635775921166604/1.0715704128646712e-6` | [Left](images/local-mesh-stability-v1/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/local-mesh-stability-v1/mesh-profile3879-fine-green-mesh-right.png) |
 
+## Applying the crop correction to V120 and Corpus 100k
+
+The same input and fit preserve the left cab lattice with both V120 and
+Corpus 100k EMA predictions. The nominal correction is 11.55 and 11.04 DN16
+RMS respectively, and the transferred result is 10.39 and 9.76 DN16 RMS.
+For both left crops and both parents, the signed correction has cosine
+similarity above 0.999 to the local-only 2k correction. The coarse fence
+correction also remains visible, with magnitudes of 29.86 and 26.66 DN16 RMS.
+Both parents are returned bit for bit on the two right views and the sky,
+building and foliage. All eight composed boards were viewed. The faint left
+crossings remain weaker and more regular than in the qualitative references.
+
+V120 EMA SHA256 is `a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb`.
+Corpus 100k EMA SHA256 is
+`87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760`.
+The extension uses the same ROIs, exposures and shot/read settings above.
+[Coarse fence](images/local-mesh-stability-v1/parent-transfer/main-chain-link-fence-main-chain-link-fence.png) ·
+[Nominal left](images/local-mesh-stability-v1/parent-transfer/mesh-nominal-fine-green-mesh-left.png) ·
+[Transferred left](images/local-mesh-stability-v1/parent-transfer/mesh-profile3879-fine-green-mesh-left.png) ·
+[Transfer receipt](results/local-mesh-stability-v1/parent-transfer.json).
+
 ## Experimental inference
 
 `demosaic.mesh_refinement.refine_local_raw_mesh` accepts a camera-linear RGB
