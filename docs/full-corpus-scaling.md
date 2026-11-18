@@ -87,8 +87,7 @@ locations and corruption draws are useful dimensions to test separately.
 |Complete ordinary-photo epochs|1|5|
 |Partial next epoch|16,045|78,013|
 
-Both columns are independently confirmed by actual execution. The100k
-column remains a planned full-horizon order; its continuation is running.
+Both columns are independently confirmed by actual execution.
 Source-order totals do not establish quality or lifetime novelty.
 The first complete ordinary-photo epoch occurs at step17,039. The first320k
 source slots of the two orders match exactly. In the100k ordinary sequence,
@@ -236,6 +235,29 @@ chunks. The [86k checkpoint review](full-corpus-long86k-native.md) binds
 the next verified prefix and its separate image-quality results.
 [Fifth-epoch source audit](results/full-corpus-long85250-prefix-v1/source-audit.json) ·
 [Audit code](results/full-corpus-long85250-prefix-v1/audit.py.gz).
+
+### Added crop area at the sixth visit
+
+The first five ordinary crops cover a median 84.26% of the cached
+frame among the 78,013 photos with a sixth visit. Holding the sixth
+crop dimensions fixed, testing three additional uniform positions
+and keeping the position with the most new area increases the median
+added area from **0.68% to 3.41%** of the frame. It reduces the count
+of sixth crops with no new area from 16,540 to 2,247. The exact
+best-position calculation gives an 8.91% median. It agrees with
+exhaustive pixel occupancy on 64 small fixtures.
+
+| Cached short side | Sources | Actual median | Best of four median | Exact maximum median |
+| --- | ---: | ---: | ---: | ---: |
+| 512–639 | 29,981 | 0.22% | 1.82% | 5.71% |
+| 640–767 | 26,757 | 0.74% | 3.44% | 8.97% |
+| 768 or larger | 21,275 | 1.77% | 5.59% | 12.71% |
+
+These are cache rectangle unions before geometry and downsampling.
+Choosing for newly covered area changes the distribution of crop
+positions and may favor image boundaries. Its effect on restoration
+quality remains open.
+[Source-bound placement audit](results/sixth-visit-spatial-coverage-v1/publication.json).
 
 ### Observed source and crop coverage through 30k
 

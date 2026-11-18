@@ -10,8 +10,8 @@ keeping the original native measurements available to the restoration path.
 
 The full-model 100k experiment is a separate run using 90,778 photos,
 bin4 → geometry → area2 and its mixture of photographic, procedural, native
-and paired examples. Its first two passes through the ordinary photo stream
-have been verified from executed rows. The new scene schedule uses native
+and paired examples. Its five complete ordinary-photo passes and 78,013
+sixth visits have been verified from executed rows. The scene schedule uses native
 bin4 targets, four crops per scene and global D4 transforms, as in the
 original scene pilot. The matched context comparison can use a local-only
 control on these exact observations. [Full-model training and review status](full-corpus-scaling.md).

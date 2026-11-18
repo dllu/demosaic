@@ -41,12 +41,15 @@ The five complete ordinary epochs finish at updates 17,039, 33,985,
 51,009, 68,269 and 85,233. For the photos visited a sixth time, the
 median newly covered area is 0.68% of the registered cache frame.
 16,540 sixth crops add zero registered area. Repeat visits often
-overlap earlier cache pixels.
+overlap earlier cache pixels. A post-run placement audit finds that
+selecting the best of four positions at the same crop size raises
+median newly covered area to 3.41%.
 The recorded conditions include 119,898 ADC-only slots and zero
 positive-noise slots at or below eight ADC codes RMS at full signal
 with reference black 0.03. The subsequent matched continuation tests
 this low-noise coverage gap.
 [Actual source order, crop rectangles and conditioning audit](results/full-corpus-long100k-training-v1/source-audit.json) ·
+[Sixth-visit placement audit](full-corpus-scaling.md#added-crop-area-at-the-sixth-visit) ·
 [Matched near-ADC training](near-adc-bridge-training.md).
 
 ## Retained material and color panels
