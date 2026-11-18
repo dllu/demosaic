@@ -124,3 +124,9 @@ at this checkpoint can be reproduced by weakening the correction.
 The 96-photo endpoint evaluation and actual GFX viewing are pending.
 [Interim metrics and source intervals](results/paired-repeat-stability-v2/checkpoint300-summary.json) ·
 [Frozen checkpoint evaluation](results/paired-repeat-stability-v2/checkpoint300-evidence.tar.xz).
+
+The [projected repeat follow-up](paired-shape-stability.md) tests a
+repeat term whose value stays fixed when the starting correction
+is uniformly weakened. Its eventual response matching uses
+the original 64 photos to set the scales and the additional 32
+to measure transfer at those scales.
