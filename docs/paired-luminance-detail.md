@@ -131,6 +131,24 @@ from the training duration. The component study does not supply a
 separate evaluations on those panels.
 [PSNR history](performance-history.md).
 
+### Noise level and Bayer coverage
+
+A follow-up audit of the training trace found that the ISO400 examples
+used GRBG and GBRG, while ISO6400 used RGGB and BGGR. There were 600
+photos per observed ISO/layout combination. The held-out panel tested
+all four layouts at both noise levels, with a different set of 16 photos
+per layout.
+
+At ISO6400 with independent draws, the paired head with both support
+windows gains 0.424 percentage points of target-aligned response on
+the two layouts seen at that noise level and 0.515 on the other two.
+Fine-increment RMS increases 0.274 and 0.350 DN16 respectively.
+The same direction of change appears in both groups. The layout
+groups contain different source photos, so this comparison leaves
+the layout effect on a fixed scene unresolved.
+[Joint training coverage and subgroup intervals](results/paired-repeat-stability-v2/prior-phase-audit.json) ·
+[Balanced repeat-training study](paired-repeat-stability.md).
+
 ## Native exact-target crops
 
 Both triplets show noisy Malvar, the paired EMA above Corpus 100k with
