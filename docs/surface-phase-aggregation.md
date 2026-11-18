@@ -6,6 +6,10 @@ This replay holds the selected planar guides and those A-only fits
 fixed. It tests whether local, phase-aligned samples can recover
 more of the faint direction than the existing phase-profile refit.
 
+The [local-bound follow-up](local-phase-bounds.md) reduces peak
+rail errors while retaining most of the whole-query cap's ISO400
+response gain. The stronger local energy bound gives up more response.
+
 ## Matched ways to pool measurements
 
 Each fold uses the eight-knot phase profiles, conditional null,

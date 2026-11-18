@@ -221,6 +221,13 @@ to 6.98% on separate geometries, with lower quiet RMS in both.
 Increment error changes only slightly. Forced-guide rail peaks rise
 despite similar RMS, and the fine cab mesh remains unresolved.
 
+[Local bounds on phase averaging](local-phase-bounds.md) remove
+the large peaks from whole-query energy scaling. The signed peak
+bound retains most of the small ISO400 response gain on both
+geometry sets, with greater RMS on the fresh rail controls.
+Bounding local energy lowers rail RMS and peaks with weaker
+wire recovery. Both variants return the fine cab crops to V120.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

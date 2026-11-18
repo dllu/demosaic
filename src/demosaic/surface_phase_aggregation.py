@@ -3,6 +3,7 @@
 from types import SimpleNamespace
 
 import numpy as np
+from scipy.ndimage import maximum_filter, minimum_filter, uniform_filter
 
 from .local_validated_waves import conditional_scores
 from .phase_aggregation import (
@@ -14,8 +15,7 @@ from .phase_aggregation import (
 SURFACE_AGGREGATION = PhaseAggregateConfig(bins=24, window=97, query_stride=24)
 
 
-def bound_phase_average(parent, refit, average):
-    """Limit each emitted color correction to the paired wave refit's norm."""
+def _phase_corrections(parent, refit, average):
     parent, refit, average = (np.asarray(a) for a in (parent, refit, average))
     if (
         parent.ndim != 3
@@ -27,11 +27,40 @@ def bound_phase_average(parent, refit, average):
     ):
         raise ValueError("Require finite matching camera RGB")
     origin = parent.astype(np.float64)
-    delta = average - origin
-    allowable = np.linalg.norm((refit - origin).reshape(3, -1), axis=1)
+    return origin, refit - origin, average - origin, parent.dtype
+
+
+def bound_phase_average(parent, refit, average):
+    """Limit each emitted color correction to the paired wave refit's norm."""
+    origin, wave, delta, dtype = _phase_corrections(parent, refit, average)
+    allowable = np.linalg.norm(wave.reshape(3, -1), axis=1)
     observed = np.linalg.norm(delta.reshape(3, -1), axis=1)
     scale = np.divide(allowable, observed, out=np.ones_like(observed), where=observed > allowable)
-    return (origin + scale[:, None, None] * delta).astype(parent.dtype)
+    return (origin + scale[:, None, None] * delta).astype(dtype)
+
+
+def bound_phase_average_locally(parent, refit, average, *, peak_window=9, energy_window=None):
+    """Limit signed peaks and optionally the norm of every local color window.
+
+    Zero belongs to every peak interval. An energy window sets a maximum scale
+    for every sample inside it, so each sample takes the minimum over the
+    windows that contain it. The bounds apply before conversion to parent dtype.
+    """
+    windows = (peak_window,) if energy_window is None else (peak_window, energy_window)
+    if any(type(n) is not int or n < 1 or n % 2 == 0 for n in windows):
+        raise ValueError("Require odd positive native window sizes")
+    origin, wave, delta, dtype = _phase_corrections(parent, refit, average)
+    peak_size = (1, peak_window, peak_window)
+    minimum = np.minimum(0, minimum_filter(wave, size=peak_size, mode="constant", cval=0))
+    maximum = np.maximum(0, maximum_filter(wave, size=peak_size, mode="constant", cval=0))
+    clipped = np.clip(delta, minimum, maximum)
+    if energy_window is not None:
+        size = (1, energy_window, energy_window)
+        observed = np.maximum(0, uniform_filter(clipped**2, size=size, mode="constant", cval=0))
+        allowed = np.maximum(0, uniform_filter(wave**2, size=size, mode="constant", cval=0))
+        ratio = np.divide(allowed, observed, out=np.ones_like(observed), where=observed > allowed)
+        clipped *= minimum_filter(np.sqrt(ratio), size=size, mode="constant", cval=1)
+    return (origin + clipped).astype(dtype)
 
 
 class SurfacePhaseOperator(PhaseAggregateOperator):

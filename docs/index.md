@@ -73,6 +73,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [whole-frame ranking of localized RAW windows](scene-window-donors.md) ·
 [query validation and two-boundary rail fits](query-rail-background.md) ·
 [phase averages inside fitted surfaces](surface-phase-aggregation.md) ·
+[signed local bounds for phase averaging](local-phase-bounds.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
 [scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·

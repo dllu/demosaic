@@ -144,9 +144,12 @@ has repeatedly come with extra flat-region error or false color. The
    recovery after quiet matching, even with exact center frequencies.
    [Same-color phase pooling](surface-phase-aggregation.md) gives
    a small ISO400 response gain with the original wave gate on two
-   geometry sets. A whole-query energy cap limits RMS, with peak
-   rail errors still above the wave refit. Testing peak or local
-   energy control should preserve the independent RAW gate.
+   geometry sets. [Signed local bounds](local-phase-bounds.md)
+   control peak errors while retaining most of that response.
+   Local energy control also lowers rail RMS, with weaker wire
+   recovery. All fresh complex rails still trigger corrections
+   when given misleading guides. Suppressing those admissions
+   requires improving the predictive background or evidence.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

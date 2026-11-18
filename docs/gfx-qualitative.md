@@ -126,6 +126,10 @@ historical boards. Use these reports for the current completed comparisons:
   keeps the same sky, building and foliage outputs with full-frame
   guides. The energy cap reduces added color in the spectral building
   arm and retains the visible coarse-fence crossings.
+- [Local phase bounds](local-phase-bounds.md#native-gfx100s-review)
+  keep sky, building and foliage at V120 with full-frame guides.
+  Both retain the visible coarse crossings. The local-energy
+  correction is smaller than the signed peak correction.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

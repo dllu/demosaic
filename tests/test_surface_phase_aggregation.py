@@ -5,7 +5,11 @@ import numpy as np
 from demosaic.experiments.evaluation.withheld import stratified_split
 from demosaic.local_validated_waves import LocalWaveConfig, restore_local_waves
 from demosaic.phase_aggregation import PhaseAggregateConfig
-from demosaic.surface_phase_aggregation import SurfacePhaseOperator, bound_phase_average
+from demosaic.surface_phase_aggregation import (
+    SurfacePhaseOperator,
+    bound_phase_average,
+    bound_phase_average_locally,
+)
 
 
 def test_tangent_kernel_agrees_with_direct_phase_weights_inside_rail():
@@ -90,3 +94,38 @@ def test_bound_operates_in_each_color_and_keeps_the_smaller_estimate_exact():
     np.testing.assert_array_equal(result[0], parent[0])
     np.testing.assert_allclose(result[1], parent[1] - 0.001, atol=8e-9)
     np.testing.assert_array_equal(result[2], proposed[2])
+
+
+def test_local_peak_bound_keeps_each_color_in_its_signed_neighborhood():
+    parent = np.zeros((3, 8, 8))
+    wave = parent.copy()
+    wave[0, 3, 3], wave[1, 3, 3], wave[1, 3, 4] = 3, -2, 1
+    tangent = np.ones_like(wave) * 10
+    tangent[0, 3, 2] = -1
+    tangent[1, 3, 3] = -10
+    measured = bound_phase_average_locally(parent, wave, tangent, peak_window=3)
+    assert measured[0, 3, 2] == 0
+    assert measured[0, 3, 3] == 3
+    assert measured[0, 3, 5] == 0
+    assert measured[1, 3, 3] == -2
+    assert measured[1, 3, 4] == 1
+    np.testing.assert_array_equal(measured[2], 0)
+
+
+def test_energy_bound_holds_inside_every_clipped_window():
+    rng = np.random.default_rng(779)
+    parent = np.full((3, 13, 15), 0.1)
+    wave = rng.normal(size=parent.shape) / 100
+    wave[:2, 2:7, :5] = 0
+    proposed = rng.normal(size=parent.shape) / 80
+    result = bound_phase_average_locally(
+        parent, parent + wave, parent + proposed, peak_window=3, energy_window=5
+    )
+    delta = result - parent
+    for y in range(13):
+        for x in range(15):
+            local = np.s_[:, max(0, y - 2) : y + 3, max(0, x - 2) : x + 3]
+            assert np.all(
+                np.sum(delta[local] ** 2, axis=(1, 2))
+                <= np.sum(wave[local] ** 2, axis=(1, 2)) + 1e-16
+            )
