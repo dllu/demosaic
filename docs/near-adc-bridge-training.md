@@ -9,8 +9,10 @@ whether exposure to the missing noise range improves the learned
 prediction itself.
 [Locked recipes and live dispatch receipt](results/near-adc-bridge-training-v1/publication.json).
 
-Both 800-update training runs are complete. The matched native and
-faint-detail evaluations are collecting.
+Both 800-update runs and the retained native review are complete.
+The new arm loses 0.061 dB on the four-material ADC panel versus
+its matched control. Both standing fences and the quiet sky look
+close to the parent. The separate positive-noise study is collecting.
 [Completed checkpoint and training audit](results/near-adc-bridge-training-v1/completed-training.json).
 
 ## Matched training
@@ -103,17 +105,70 @@ the pending reviews.
 
 ## Quality review
 
-The evaluation workers are collecting the 110 existing native inputs
-with both standing GFX scenes. They also compare the parent and both
-train branches on exact faint-photo, flat and edge inputs. They use
-the same CPU IEEE FP32 policy and verified saved V120 and parent
-controls where the observations match.
+The 110-case native review compares both 800-update EMAs with
+matched 100k and V120 EMAs using CPU IEEE FP32. The audit checked
+384 material rows, 240 band strata, 32 flat checks and all native
+pixels on 26 boards and 22 triplets. It verified all 220 saved
+V120/100k predictions. All 26 boards were actually viewed.
+[Scoped native results and crops](results/near-adc-bridge-native-v1/publication.json).
 
-Numerical review and actual native inspection are pending.
+| Fixed material means | V120 | 100k parent | Control | Near-ADC |
+| --- | ---: | ---: | ---: | ---: |
+| Ordinary sRGB, dB | 32.30426 | 32.33392 | 32.33420 | 32.33427 |
+| Shadows sRGB, dB | 25.90197 | 25.96247 | 25.95906 | 25.96035 |
+| Faint ADC sRGB, dB | 67.48067 | 68.05613 | 67.85194 | 67.79139 |
+
+At zero-noise conditioning, the near-ADC arm has slightly lower
+fine-band error than the equal-budget control on fur and wood,
+with higher error on bark and grass. The worst selected gray/orange
+mean color bias is 21.34 DN16 for the near-ADC arm, 20.01 for the
+control, 23.28 for 100k and 15.08 for V120. The high-noise material
+outputs remain close and fine fur and grass still look soft.
+[Per-material, band and flat summary](results/near-adc-bridge-native-v1/native-summary.json).
+
+### Native synthetic detail
+
+These bark and fur triplets show noisy Malvar, near-ADC EMA and exact
+constructed GT. Both use RGGB draw 0, native ROI `[48,48,160,160]`,
+zero shot/read, ADC16 black 0.03 and exposure ×1.
+[Source and display provenance](images/near-adc-bridge-native-v1/manifest.json).
+
+![Noisy bark, near-ADC EMA and exact GT](images/near-adc-bridge-native-v1/bark-contrast0p025-adc-RGGB-triplet.png)
+
+![Noisy fur, near-ADC EMA and exact GT](images/near-adc-bridge-native-v1/raccoon-fur-contrast0p025-adc-RGGB-triplet.png)
+
+[Bark with shared ×20 contrast](images/near-adc-bridge-native-v1/bark-contrast0p025-adc-RGGB-contrast20.png) ·
+[Fur with shared ×20 contrast](images/near-adc-bridge-native-v1/raccoon-fur-contrast0p025-adc-RGGB-contrast20.png).
+
+### Standing GFX scenes
+
+The DSCF3879 sky remains quiet and the coarse chain-link crossings
+remain coherent. Building hardware, cables and darker foliage stay
+soft. Display exposure is ×4 with `.00128/6.5536e-6` shot/read.
+DSCF3880 ISO100 AHD is the independent qualitative reference.
+[Sky](images/near-adc-bridge-native-v1/main-overcast-sky.png) ·
+[Building](images/near-adc-bridge-native-v1/main-building-detail.png) ·
+[Foliage](images/near-adc-bridge-native-v1/main-foliage.png) ·
+[Coarse fence](images/near-adc-bridge-native-v1/main-chain-link-fence.png).
+
+On DSCF3842 the transferred profile retains stronger modulation
+on the right. Both crops and profiles still show incomplete crossings
+with subtle differences from the parent and no obvious new tint.
+The processed cab display uses exposure ×16 and the DSCF3835 ISO100
+AHD and both camera JPEGs as independent qualitative references.
+
+| Cab profile | Shot/read | Native boards |
+| --- | --- | --- |
+| Nominal | `.00128/6.5536e-6` | [Left](images/near-adc-bridge-native-v1/mesh-nominal-fine-green-mesh-left.png) · [Right](images/near-adc-bridge-native-v1/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred DSCF3879 | `.0014635775921166604/1.0715704128646712e-6` | [Left](images/near-adc-bridge-native-v1/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/near-adc-bridge-native-v1/mesh-profile3879-fine-green-mesh-right.png) |
+
+### Positive-noise and primary coverage
+
+The independent positive-noise photo, color and edge review is
+collecting. It tests the range that the new training samples add.
 The canonical 427-photo and known/unseen camera review is queued for
 the CPU allocation after the 20k corpus control finishes collecting.
-The latest evaluated parent remains the 100k EMA. The matched noisy
-and exact-target panels use the same reductions as the previous
+The matched noisy and exact-target panels use the same reductions as the previous
 near-ADC study. Their scorer exactly replayed all 512 prior saved
 photo rows and 128 flat/edge rows before seeing the new outputs.
 [Parent native report](full-corpus-long100k.md) ·

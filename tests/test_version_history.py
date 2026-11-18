@@ -79,3 +79,10 @@ def test_each_camera_series_uses_only_its_own_completed_endpoints():
     ]
     assert history.metric_points(points, "known_CFA_PSNR") == ([102, 104], [54.2, 54.3])
     assert history.metric_points(points, "unseen_CFA_PSNR") == ([102], [53.9])
+
+
+def test_named_camera_endpoint_uses_plot_position_without_a_version_or_photo_score():
+    point = {"version": None, "label": "Corpus 100k", "plot_position": 143, "known_CFA_PSNR": 54.3}
+    assert history.endpoint_label(point) == "Corpus 100k"
+    assert history.metric_points([point], "known_CFA_PSNR") == ([143], [54.3])
+    assert history.metric_points([point], "photo_srgb_PSNR") == ([], [])

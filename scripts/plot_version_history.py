@@ -7,12 +7,15 @@ import hashlib
 import json
 import math
 import re
+import tarfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 MODEL_SELECTION = REPO / "configs/current-model.json"
 COVERAGE_NOTE = (
-    "**Coverage reviewed November 17, 2026: completed broad panels through V131.** "
+    "**Coverage reviewed November 18, 2026.** V131 has the most recent completed "
+    "three-panel comparison. The larger-corpus 20k and 100k endpoints have completed "
+    "camera scores and pending full427 photo scores. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -143,8 +146,12 @@ def metric_points(points, field):
             or not isinstance(value, (int, float))
             or not math.isfinite(value)
         ):
-            raise ValueError(f"Completed {field} must be finite: V{point['version']}")
-    return [p["version"] for p in completed], [p[field] for p in completed]
+            raise ValueError(f"Completed {field} must be finite: {endpoint_label(point)}")
+    return [p.get("plot_position", p["version"]) for p in completed], [p[field] for p in completed]
+
+
+def endpoint_label(point):
+    return point.get("label", f"V{point['version']}")
 
 
 def metric_text(point, field):
@@ -337,6 +344,93 @@ def collect():
     return output, evidence
 
 
+def collect_corpus_cameras():
+    """Bind the measured camera panels for the two named corpus endpoints."""
+    directory = REPO / "docs/results"
+    short_camera = directory / "full-corpus-control20k-camera-v1/summary.json"
+    long_camera = directory / "full-corpus-long100k-camera-v1/publication.json"
+    long_training = directory / "full-corpus-long100k-training-v1/publication.json"
+    short, long, training = (
+        json.loads(path.read_text()) for path in (short_camera, long_camera, long_training)
+    )
+    assert long["complete_camera_panels"] and not long["complete_full427"]
+    short_arm, long_arm = "scale-control20k", "scale-long100k"
+    short_model, long_model = short["models"][short_arm], training["model"]
+    assert all(model["weights"] == "EMA" for model in (short_model, long_model))
+    long_archive = long_camera.with_name(Path(long["archive"]["path"]).name)
+    assert digest(long_archive) == long["archive"]["sha256"]
+    with tarfile.open(long_archive) as archive:
+        long_panels = {
+            stage: json.load(archive.extractfile(f"{stage}/analysis.json"))
+            for stage in ("known", "unseen")
+        }
+    short_point = {
+        "version": None,
+        "label": "Corpus 20k",
+        "endpoint": short_arm,
+        "step": short_model["step"],
+        "checkpoint_sha256": short_model["checkpoint"]["sha256"],
+        "report": "full-corpus-control20k-camera-review.md",
+        "source": str(short_camera.relative_to(directory)),
+        "evaluation_metadata": {},
+    }
+    long_point = {
+        "version": None,
+        "label": "Corpus 100k",
+        "endpoint": long_arm,
+        "step": long_model["step"],
+        "checkpoint_sha256": long_model["checkpoint"]["sha256"],
+        "report": "full-corpus-long100k.md",
+        "source": str(long_camera.relative_to(directory)),
+        "evaluation_metadata": {},
+    }
+    short_panels = []
+    for stage, batches, scenes in (("known", 24, 4), ("unseen", 30, 5)):
+        short_path = short_camera.with_name(f"{stage}.json")
+        short_panels.append(short_path)
+        paired_panels = (
+            (json.loads(short_path.read_text()), short_arm, short_model),
+            (long_panels[stage], long_arm, long_model),
+        )
+        camera = long["results"][stage]
+        assert (camera["batches"], camera["metric_rows"]) == (batches, scenes * 36)
+        assert len(camera["scenes"]) == scenes * 2
+        assert camera["overall"]["V120"]["sensor_psnr"] == short["measured_CFA_PSNR"][stage]["V120"]
+        field = f"{stage}_CFA_PSNR"
+        short_point[field] = short["measured_CFA_PSNR"][stage][short_arm]
+        long_point[field] = camera["overall"][long_arm]["sensor_psnr"]
+        for point, (panel, arm, model) in zip(
+            (short_point, long_point), paired_panels, strict=True
+        ):
+            assert panel["models"][arm]["checkpoint"]["sha256"] == model["checkpoint"]["sha256"]
+            assert panel["models"]["V120"]["checkpoint"] == short["models"]["V120"]["checkpoint"]
+            assert len(panel["cases"]) == batches and len(panel["per_scene"]) == 2 * scenes
+            assert all(check["scores_bit_exact"] for check in panel["metric_checks"])
+            actual = next(row for row in panel["summary"]["overall"] if row["model"] == arm)
+            assert actual["metrics"]["sensor_psnr"]["mean"] == point[field]
+            point["evaluation_metadata"][stage] = {
+                "scene_count": scenes,
+                "native_crops_per_model": scenes * 18,
+                "precision": "CPU IEEE FP32 with measured-CFA reference",
+            }
+    evidence = [
+        {
+            "path": str(path.relative_to(REPO)),
+            "sha256": digest(path),
+            "endpoints": [point["endpoint"]],
+            "report": point["report"],
+        }
+        for point, path in (
+            (short_point, short_camera),
+            *((short_point, path) for path in short_panels),
+            (long_point, long_camera),
+            (long_point, long_archive),
+            (long_point, long_training),
+        )
+    ]
+    return [short_point, long_point], evidence
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -360,11 +454,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-v131-current-v1.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v1.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history.json"
+        destination = REPO / "docs/results/version-PSNR-history-v131-current-v1.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history.json"
     if destination.resolve().parent != (REPO / "docs/results").resolve():
         parser.error("--data must name a JSON in this repository's docs/results directory")
     if destination.suffix != ".json":
@@ -373,6 +469,9 @@ def main():
     preferred = selected if args.preferred_version is None else args.preferred_version
     if args.refresh_sources:
         points, evidence = collect()
+        corpus_points, corpus_evidence = collect_corpus_cameras()
+        points.extend(corpus_points)
+        evidence.extend(corpus_evidence)
         result = {
             "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",
@@ -395,10 +494,15 @@ def main():
     else:
         result = json.loads(destination.read_text())
         points, evidence = result["points"], result["sources"]
+    latest = max(p["version"] for p in points if p["version"] is not None)
+    named = [p for p in points if p["version"] is None]
+    for index, p in enumerate(named, 1):
+        p["plot_position"] = latest + 8 * index
     for field in METRICS.values():
         metric_points(points, field)
     columns = [
         "version",
+        *(["label"] if named else []),
         "endpoint",
         "checkpoint_sha256",
         "inference_policy",
@@ -419,12 +523,14 @@ def main():
         }
     )
     fig, axes = plt.subplots(2, 2, figsize=(11, 7.6), sharex=True, layout="constrained")
-    latest = points[-1]["version"]
     ticks = [32, 43, 63, 72, 78, 84, 92]
     if latest - ticks[-1] < 5:
         ticks[-1] = latest
     else:
         ticks.append(latest)
+    tick_labels = [str(x) for x in ticks]
+    ticks.extend(p["plot_position"] for p in named)
+    tick_labels.extend(p["label"].removeprefix("Corpus ") for p in named)
     reference = next(p for p in points if p["version"] == preferred)
     assert all(field in reference for field in METRICS.values()), "Reference panels are incomplete"
     for row in range(2):
@@ -457,9 +563,12 @@ def main():
         camera.set_ylabel("Measured-CFA PSNR (dB)")
         for axis in (photo, camera):
             axis.axvline(preferred, color="#d98b14", linewidth=1, alpha=0.5)
+            if named:
+                axis.axvline(latest + 4, color="#a1aab5", linewidth=0.75, linestyle=":")
+                axis.tick_params(axis="x", labelsize=9)
             axis.grid(axis="y", color="#dce2e8", linewidth=0.6)
             axis.legend(loc="best", frameon=False, fontsize=8)
-            axis.set_xticks(ticks)
+            axis.set_xticks(ticks, tick_labels)
         highlighted = (
             [43, preferred, 72, 92, latest] if row == 0 else [34, 43, 63, preferred, 92, latest]
         )
@@ -497,8 +606,12 @@ def main():
         "Camera detail: V72/V73 omitted only from this zoom", loc="left", fontsize=10
     )
     for axis in axes[1]:
-        axis.set_xlabel("Model version (unequal training budgets)")
-    fig.suptitle("PSNR by model version", fontsize=15)
+        axis.set_xlabel(
+            "Model version and corpus training budget"
+            if named
+            else "Model version (unequal training budgets)"
+        )
+    fig.suptitle("PSNR by model endpoint" if named else "PSNR by model version", fontsize=15)
     fig.supxlabel(
         f"Evaluated reference: V{preferred}. Pending metrics are omitted. ADC labels: ADC-only sample projection.\nTraining budgets/data differ. Full values and provenance: CSV/JSON.",
         fontsize=9,
@@ -516,8 +629,10 @@ def main():
         photo_value, known_value, unseen_value = [
             metric_text(p, field) for field in METRICS.values()
         ]
+        label = endpoint_label(p)
+        endpoint = f"{label} / {p['endpoint']}" if p["version"] is not None else label
         rows.append(
-            f"| V{p['version']} / {p['endpoint']} | {photo_value} | {known_value} | {unseen_value} | [Review]({p['report']}) |"
+            f"| {endpoint} | {photo_value} | {known_value} | {unseen_value} | [Review]({p['report']}) |"
         )
     original = next(p for p in points if p["version"] == 43)
     pending_photo = [p for p in points if "photo_srgb_PSNR" not in p]
@@ -525,7 +640,7 @@ def main():
     if pending_photo:
         pending_note = (
             "\n\nCompleted camera panels with pending full-photo results: "
-            + ", ".join(f"[V{p['version']}]({p['report']})" for p in pending_photo)
+            + ", ".join(f"[{endpoint_label(p)}]({p['report']})" for p in pending_photo)
             + ". Selected material means are not substituted for full427 scores."
         )
     data_link = destination.relative_to(REPO / "docs").as_posix()

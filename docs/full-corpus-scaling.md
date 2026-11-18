@@ -38,9 +38,10 @@ convincing new fine crossings.
 The 100k observer verified the completed checkpoint and all
 220 saved V120/86k native predictions across the 110 fixed cases. The
 retained-panel measurements and actual native inspection are complete.
-The fixed 3,162-case CPU benchmark is collecting the endpoint with
-matched V120 controls. The adoption path reproduced all 54 known and
-unseen camera batches in a dry run. Comparable broad scores are pending.
+The fixed 3,162-case CPU benchmark uses matched V120 controls. Both
+[camera panels](full-corpus-long100k.md#broader-evaluation) are complete,
+with +0.02436 dB known and −0.03046 dB unseen versus V120. The
+fixed full427 photo panel is collecting.
 [Bound review queue and preflight receipts](results/full-corpus-long100k-review-queue-v1/publication.json).
 
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),

@@ -66,6 +66,9 @@ historical boards. Use these reports for the current completed comparisons:
   compares V120, 86k and 100k on all four main regions and both cab
   profiles. The overcast sky stays smooth and the coarse lattice remains
   coherent. Fine building hardware and foliage stay soft.
+- [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
+  compares both 800-update endpoints against 100k and V120. The sky
+  stays smooth and the coarse lattice and dark foliage look close to 100k.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

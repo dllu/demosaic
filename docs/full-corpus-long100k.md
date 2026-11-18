@@ -137,13 +137,32 @@ The common processed cab display uses exposure ×16.
 
 ## Broader evaluation
 
-Training, retained-panel measurements and actual native viewing are
-complete. The fixed 427-photo and known/unseen-camera benchmark
-started after the new checkpoint and three-case canonical preflight
-passed. All 3,162 new observations run through the IEEE FP32 CPU
-path with preflighted matched V120 controls. The complete scores
-are pending. V131 remains the latest endpoint with all three
-comparable completed broad panels.
+The fixed known and unseen camera panels are complete. The measured
+CFA score uses the original reference mask and 32-pixel border, with
+nine crops per capture, two captures per scene and equal scene
+weights. The audit recomputed all 324 crop/model rows across 54 batches
+and matched the saved values exactly. All nine first-capture native
+comparison boards were viewed at 160×160. The independent AHD
+reference is qualitative.
+
+| Measured-CFA PSNR, dB | V120 | Short 20k | Long 100k |
+| --- | ---: | ---: | ---: |
+| Known, four scenes | 54.31272 | 54.34557 | 54.33708 |
+| Unseen, five scenes | 54.00872 | 53.96805 | 53.97826 |
+
+The long run gains **0.02436 dB** on the known panel and loses
+**0.03046 dB** on the unseen panel versus V120. D60-2 contributes
+the largest known gain at +0.10617 dB. The largest unseen loss is
+−0.13612 dB on Coulicoco. The selected native camera crops look
+close overall, with soft tapestry texture and largely similar
+lettering and quiet shadow transitions.
+[Complete camera results](results/full-corpus-long100k-camera-v1/publication.json) ·
+[Native camera manifest](images/full-corpus-long100k-camera-v1/manifest.json) ·
+[Short 20k comparison](full-corpus-control20k-camera-review.md).
+
+The full 427-photo panel is collecting. Its benchmark uses IEEE FP32
+on the CPU with matched V120 controls. V131 remains the latest
+endpoint with all three comparable completed broad panels.
 [Primary preflight and start receipt](results/full-corpus-long100k-training-v1/primary-start.json) ·
 [Review admission](results/full-corpus-long100k-review-queue-v1/publication.json) ·
 [Comparable PSNR history](performance-history.md).
