@@ -118,6 +118,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Smooth RAW support](smooth-mesh-support.md#standing-gfx100s-review)
   slightly reduces coarse fence contrast. Sky, foliage and building
   retain the same pixels in the smooth and step variants.
+- [Side-dependent step fit](mesh-step-continuity.md#standing-gfx100s-review)
+  keeps the coarse crossings with mild contrast changes. Sky, foliage
+  and building retain their pixels. The direct rear rescale was also viewed.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

@@ -72,6 +72,12 @@ That choice was made after seeing the smooth mask's false cuts.
 [Recomputed scores](results/mesh-envelope-support-v1/summary.json) ·
 [Step replay](results/mesh-envelope-support-v1/step-followup.json).
 
+The [prospective contrast-step panel](mesh-step-continuity.md) finds
+that a continuous wire with changing contrast can still trigger the
+background-only step mask. A side-dependent fit preserves more of
+those wires. Direct rear attenuation lowers measured error in the
+tested ISO400 rescale cases.
+
 Rotated exteriors and flat roles keep the parent. The wide fit adds
 some texture to two front-only controls at ISO400, both using geometry
 g163. The step replay leaves those inherited corrections in place.

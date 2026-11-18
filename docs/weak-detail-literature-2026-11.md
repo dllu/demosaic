@@ -222,6 +222,12 @@ synthetic ISO400 gap texture and exposes false cuts beside steps.
 A reserve-fitted step restores those continuous cases in a retrospective
 replay. The largest tested ISO6400 false continuation has weak held-out
 support for a cut even with exact gap geometry and background.
+The [fresh contrast-step panel](mesh-step-continuity.md) finds that
+separate wire amplitudes preserve more continuous ISO400 cases and
+keep the recovered cab crossings. Direct rear rescaling improves
+two independent ISO400 repeats. The largest ISO6400 false continuation
+persists, and exact clean backgrounds remove residual false admission
+on two synthetic controls where exact strong-wire geometry does little.
 
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.

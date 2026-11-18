@@ -146,6 +146,14 @@ fit with a shared step restores the continuous cases and lowers added
 gap texture. The largest ISO6400 gap persists even with known support
 and phase in the audit. The new masks remain research variants.
 
+The [contrast-step study](mesh-step-continuity.md) tests true gaps and
+continuous wires that change contrast across an edge. Fitting both
+wire amplitudes on each side changes one of six continuous ISO400
+outputs, compared with five for the earlier step mask. The new mask
+preserves all four cab crops and misses the largest high-noise gap.
+Direct rear attenuation improves wire error on the studied ISO400
+cases and both independent ISO400 repeats.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens
