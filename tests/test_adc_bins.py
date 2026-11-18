@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import torch
 
-from demosaic.adc_bins import adc_bin_bounds, adc_bin_projection
+from demosaic.adc_bins import adc_bin_bounds, adc_bin_projection, near_adc_residual_projection
 from demosaic.cfa import color_indices, mosaic
 
 
@@ -146,3 +146,37 @@ def test_flat_aware_lift_uses_per_phase_constancy():
     assert not torch.equal(malvar[0], bilinear[0])
     assert torch.equal(result[0], bilinear[0])
     assert torch.equal(result[1], malvar[1])
+
+
+@pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+def test_near_adc_measured_update_matches_independent_formula(pattern):
+    colors = color_indices(pattern)
+    prediction = torch.linspace(0.12, 0.35, 3 * 8 * 8).reshape(1, 3, 8, 8)
+    measured = mosaic(prediction, colors).numpy().astype(np.float64)
+    packed = (measured + np.tile([0.08, -0.00002, -0.12, 0.00001], (4, 1))).astype(np.float32)
+    packed[..., 0, 0] = 1
+    packed[..., 0, 1] = np.float32(-0.03 / 0.97)
+    shot, read = 1e-8, 1e-10
+    sigma = np.sqrt(shot * measured + read + (1 / (65535 * 0.97)) ** 2 / 12)
+    weight = 4 / (4 + 65535 * sigma)
+    residual = packed - measured
+    excess = np.sign(residual) * np.maximum(np.abs(residual) - 4 * sigma, 0)
+    updated = measured + weight * residual + (1 - weight) * excess
+    updated[..., 0, :2] = measured[..., 0, :2]
+    projected = near_adc_residual_projection(
+        prediction, torch.from_numpy(packed), colors, shot=shot, read=read, black_level=0.03
+    )
+    np.testing.assert_allclose(mosaic(projected, colors).numpy(), updated, rtol=0, atol=6e-8)
+
+
+@pytest.mark.parametrize("shot,read", [(0.0, 0.0), (3.2e-7, 1e-10), (0.0, 1e-5)])
+def test_near_adc_falls_back_to_original_object_outside_range(shot, read):
+    prediction = torch.zeros(1, 3, 8, 8)
+    colors = color_indices("RGGB")
+    packed = torch.full((1, 4, 4, 4), 0.2)
+    assert (
+        near_adc_residual_projection(
+            prediction, packed, colors, shot=shot, read=read, black_level=0.03
+        )
+        is prediction
+    )

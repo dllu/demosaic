@@ -31,6 +31,15 @@ a 1,429.92 DN16 raw bias on the full flat-color grid. Bin Malvar reduces
 both errors below matched projected V120. Both GFX scenes still lack
 convincing new fine crossings.
 
+The 100k endpoint observer is running. It verified the 110 native
+inputs and all 220 saved V120/86k predictions. Once the training
+controller records successful completion, it checks the retained
+checkpoint and starts the native comparison and fixed 3,162-case CPU
+benchmark. The primary comparison uses the existing, matched V120
+predictions. The adoption path reproduced the existing 54 camera
+batches in a dry run. Endpoint scores and native inspection are pending.
+[Bound review queue and preflight receipts](results/full-corpus-long100k-review-queue-v1/publication.json).
+
 All three whole-scene comparison arms are trained. Their [native review](whole-scene-context-native-review.md),
 [64-source study](whole-scene-context-development64.md) and
 [camera review](whole-scene-context-camera-review.md) find small quiet/partial

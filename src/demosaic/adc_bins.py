@@ -1,4 +1,4 @@
-"""Experimental ADC-bin consistency for explicitly calibrated zero-noise inputs."""
+"""Experimental measurement corrections for calibrated ADC and near-ADC inputs."""
 
 import math
 from functools import lru_cache
@@ -96,6 +96,23 @@ def adc_bin_bounds(packed, *, bit_depth, black_level, quantizer_precision):
     return lower[codes], upper[codes]
 
 
+def _projection_colors(prediction, packed, colors):
+    if packed.ndim != 4 or packed.shape[1] != 4:
+        raise ValueError("Expected four packed CFA phases")
+    if prediction.shape != (len(packed), 3, packed.shape[2] * 2, packed.shape[3] * 2):
+        raise ValueError("Prediction and packed dimensions differ")
+    if not torch.isfinite(prediction).all():
+        raise ValueError("Prediction must be finite")
+    if colors.ndim == 1:
+        colors = colors[None].expand(len(packed), -1)
+    if colors.shape != (len(packed), 4):
+        raise ValueError("One four-phase CFA description is required per image")
+    patterns = colors.new_tensor([[0, 1, 1, 2], [2, 1, 1, 0], [1, 0, 2, 1], [1, 2, 0, 1]])
+    if not ((colors[:, None] == patterns[None]).all(-1).any(-1)).all():
+        raise ValueError("Expected a Bayer color pattern")
+    return colors
+
+
 def adc_bin_projection(
     prediction,
     packed,
@@ -128,19 +145,7 @@ def adc_bin_projection(
         raise ValueError("Noise coefficients must be finite and nonnegative")
     if shot > 0 or read > 0:
         return prediction
-    if packed.ndim != 4 or packed.shape[1] != 4:
-        raise ValueError("Expected four packed CFA phases")
-    if prediction.shape != (len(packed), 3, packed.shape[2] * 2, packed.shape[3] * 2):
-        raise ValueError("Prediction and packed dimensions differ")
-    if not torch.isfinite(prediction).all():
-        raise ValueError("Prediction must be finite")
-    if colors.ndim == 1:
-        colors = colors[None].expand(len(packed), -1)
-    if colors.shape != (len(packed), 4):
-        raise ValueError("One four-phase CFA description is required per image")
-    patterns = colors.new_tensor([[0, 1, 1, 2], [2, 1, 1, 0], [1, 0, 2, 1], [1, 2, 0, 1]])
-    if not ((colors[:, None] == patterns[None]).all(-1).any(-1)).all():
-        raise ValueError("Expected a Bayer color pattern")
+    colors = _projection_colors(prediction, packed, colors)
     with torch.autocast(prediction.device.type, enabled=False), ieee_fp32():
         p = prediction.float()
         lower, upper = adc_bin_bounds(
@@ -173,3 +178,35 @@ def adc_bin_projection(
                 y, x = divmod(phase, 2)
                 output[b, int(channel), y::2, x::2] = nearest[b, phase]
         return output
+
+
+def near_adc_residual_projection(prediction, packed, colors, wb=None, *, shot, read, black_level):
+    """Lift a robust measured residual for a calibrated 16-bit low-noise input.
+
+    The original prediction is returned at zero noise and above eight codes
+    RMS at full signal. Within that range, the update blends a noise-weighted
+    measured residual with its excess above four estimated standard deviations.
+    Samples near clipping are excluded. Malvar lifts the update onto native RGB.
+    This separate opt-in operation does not constrain output to ADC bins.
+    """
+    if any(not math.isfinite(v) or v < 0 for v in (shot, read)):
+        raise ValueError("Noise coefficients must be finite and nonnegative")
+    levels, _ = _settings(16, black_level, "float32")
+    step = 1 / (levels * (1 - black_level))
+    if shot + read == 0 or math.sqrt(shot + read) > 8 * step:
+        return prediction
+    colors = _projection_colors(prediction, packed, colors)
+    if packed.dtype != torch.float32 or not torch.isfinite(packed).all():
+        raise ValueError("Near-ADC projection requires finite float32 packed observations")
+    with torch.autocast(prediction.device.type, enabled=False), ieee_fp32():
+        p = prediction.float()
+        measured = mosaic(p, colors)
+        sigma = (shot * measured.clamp(0, 1) + read + step**2 / 12).sqrt()
+        floor = -black_level / (1 - black_level)
+        valid = (packed > floor + 2 * sigma) & (packed < 1 - 2 * sigma)
+        residual = torch.where(valid, packed - measured, 0)
+        sigma_dn16 = sigma * levels
+        weight = 4 / (4 + sigma_dn16)
+        excess = residual.sign() * (residual.abs() - 4 * sigma_dn16 / levels).clamp_min(0)
+        correction = weight * residual + (1 - weight) * excess
+        return p + malvar(correction, colors, wb)

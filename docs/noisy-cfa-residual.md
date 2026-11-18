@@ -1,11 +1,13 @@
 # Measured Bayer residuals just above the ADC limit
 
-In the first four held-out photographs, adding a noise-weighted Bayer
-residual to the 86k EMA lowers weakest-band error from **3.65 to 2.49
-DN16** at the smallest positive-noise prior. It raises weakest-band
-error at the other three priors. On exact flat colors, the same
-correction only partly repairs a much larger bright-yellow bias.
-[Evidence and frozen study inputs](results/noisy-cfa-residual-preflight-v1/publication.json).
+On the complete 16-photo faint panel, a noise-weighted Bayer residual
+lowers 86k's weakest-band error from **2.95 to 2.38 DN16** at the
+smallest positive-noise prior. It raises error at the three higher
+priors. A bounded version preserves nearly all of that fine-band gain
+on the prospective subset and repairs much larger flat-color errors.
+It is available as an experimental, opt-in 16-bit correction.
+[Complete evidence and native crops](results/noisy-cfa-residual-closed-v1/publication.json) ·
+[Frozen preflight](results/noisy-cfa-residual-preflight-v1/publication.json).
 
 ## Method and scope
 
@@ -68,6 +70,58 @@ aliasing. Some of the exact target's fine contours remain soft.
 
 ![Red engraving, noisy / 86k single lift / exact GT](images/noisy-cfa-residual-preflight-v1/photos/278bfc48952f160c3ba0c7381df34efb1b217c32-triplet.png)
 
+## Complete held-out photo results
+
+The complete panel uses 16 source photographs, four Bayer layouts and
+four fresh noise profiles. Thirteen source photographs and 448 native
+blocks contribute to the weakest band. The single lift improves that
+band on 12 of 13 sources at the smallest noise prior. Every eligible
+source has higher weakest-band error with the lift at each of the
+three higher noise priors. The intermediate prior still gains
+rendered PSNR alongside lower block-mean error.
+
+| Shot/read | 86k raw PSNR dB | 86k single PSNR dB | Raw weakest RMS DN16 | Single weakest RMS DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| `1e-8/1e-10` | 67.034 | 67.834 | 2.953 | 2.382 |
+| `3.2e-7/1e-10` | 66.454 | 66.618 | 4.022 | 4.901 |
+| `2e-5/1.6e-9` | 60.731 | 60.726 | 5.999 | 7.168 |
+| `.00128/6.5536e-6` | 52.329 | 52.335 | 8.769 | 9.789 |
+
+The prospective comparison excludes the four photographs inspected
+before choosing the eight-code limit. It uses the smallest positive
+prior for all twelve remaining sources. In the zero-conditioned arm
+only model shot/read metadata change. The actual Bayer observations,
+variance tensors, WB, matrix and CFA are identical to the positive
+conditioning arm. The bounded arm combines the weighted residual
+with its excess above four estimated standard deviations and keeps the
+actual noise conditioning.
+
+| 86k policy on the remaining photos | Mean sRGB PSNR dB | Weakest RMS DN16 | Sources with lower fine error |
+| --- | ---: | ---: | ---: |
+| Raw positive conditioning | 67.067 | 2.744 | — |
+| Zero conditioning | 67.428 | 2.434 | 8/10 |
+| Guarded single lift | 67.885 | 2.352 | 9/10 |
+| Guarded bounded lift | **67.903** | 2.360 | 9/10 |
+
+V120 with the bounded lift attains 2.398 DN16 and 67.284 dB in the
+same comparison. The bounded and single lifts resolve the tested
+detail about equally well. In the fixed native crops the bounded
+lift clarifies some roof-edge lines and small steeple contours.
+Thin branches and interior steeple edges remain partly suppressed.
+At ISO6400 the unconditional lifts mostly add noise in these crops
+and leave the faint roof and tower poorly resolved.
+[Independent source pooling and matched-control audit](results/noisy-cfa-residual-closed-v1/independent-audit.json).
+
+These native triplets show noisy Malvar, 86k bounded lift and exact
+contrast-reduced GT. Both use RGGB at `1e-8/1e-10`, ROI
+`[48,48,160,160]`, exposure ×1 and a shared contrast-20 display
+centered on the matching clean crop.
+[Source and display provenance](images/noisy-cfa-residual-closed-v1/manifest.json).
+
+![Roof edge, noisy / 86k bounded lift / exact GT](images/noisy-cfa-residual-closed-v1/crossed-photo/034fe53d538446fdc93f2e4d926aae0eb32afc3b-bounded-triplet.png)
+
+![Steeple, noisy / 86k bounded lift / exact GT](images/noisy-cfa-residual-closed-v1/crossed-photo/03768ece408913d3c727b3e29b8ece77a57e5d9c-bounded-triplet.png)
+
 ## Exact flat and edge controls
 
 Three exact constant colors and a slanted blurred step cover every CFA
@@ -116,6 +170,35 @@ visible shift on both layouts, with residual error on GBRG.
 [RGGB replay](images/noisy-cfa-residual-preflight-v1/conditioning/yellow-RGGB-comparison.png) ·
 [GBRG replay](images/noisy-cfa-residual-preflight-v1/conditioning/yellow-GBRG-comparison.png).
 
+### Isolating the read-noise feature
+
+Across 1,272,795 positive-shot training slots through 86k, the largest
+read-noise value expressed in electrons, `sqrt(read)/shot`, was 7.52.
+The largest synthetic value was 5.00. The two low-noise tests use
+1,000 and 31.25 electrons in those units. Their third stabilized
+photometry coordinate is outside the observed training range.
+
+Keeping the Bayer inputs, transform, inverse, black/white coordinates
+and DINO features fixed, the replay either caps that one coordinate
+at `log(1 + 5)/3` or substitutes the ADC-associated value of −2.
+All eight original model outputs reproduce bit for bit.
+
+| 86k bright-yellow case | Original bias DN16 | Read feature capped | ADC feature only |
+| --- | ---: | ---: | ---: |
+| Smallest positive, RGGB | 7,429 | 1,736 | 166 |
+| Smallest positive, GBRG | 7,111 | 3,616 | 4,371 |
+| Intermediate, RGGB | 7,041 | 6,801 | 2,236 |
+| Intermediate, GBRG | 7,880 | 7,528 | 9,428 |
+
+The feature is part of the failure. Capping it leaves large residual
+bias and increases spatial error on two of the four yellow cases.
+The ADC feature alone makes intermediate GBRG worse. The complete
+zero-conditioned path above also changes the transform and noise
+proxy. Both slanted-edge displays remain visibly smooth across
+the feature-only variants.
+[Read feature evidence](results/noisy-cfa-residual-closed-v1/family-review.json) ·
+[Read feature native comparisons](images/noisy-cfa-residual-closed-v1/manifest.json).
+
 A separate exploratory replay keeps the positive model conditioning.
 Where the measured residual exceeds four estimated standard
 deviations, it adds the excess to the weighted correction, with
@@ -123,6 +206,15 @@ an eight-code full-signal noise limit. On the small-positive nulls,
 this brings the worst 86k flat bias to **87.67 DN16** and worst centered
 RMS to **58.08 DN16**. Those same controls motivated the excess term.
 [Bounded-residual crop](images/noisy-cfa-residual-preflight-v1/interval/yellow-large-disagreement-comparison.png).
+
+Four reserved colors with fresh noise draws test the same bounded rule
+across all Bayer layouts. On the smallest prior, worst 86k mean bias
+falls from **19,449 to 105 DN16**. Magenta GBRG gives the largest raw
+error, and its visible cast largely clears. Worst centered error drops
+from 2,217 to 87 DN16. Bounded V120 reaches 75 DN16 worst mean error
+and 26 DN16 worst centered error. At the intermediate prior the guard
+bypasses the correction and 86k retains a worst bias of 6,703 DN16.
+[Reserved magenta comparison](images/noisy-cfa-residual-closed-v1/adverse-flats/worst-magenta-GBRG-comparison.png).
 
 ## Both standing GFX100S comparisons
 
@@ -149,12 +241,12 @@ references with different acquisition settings.
 | Nominal | [Left](images/noisy-cfa-residual-preflight-v1/gfx/mesh-nominal-fine-green-mesh-left.png) · [Right](images/noisy-cfa-residual-preflight-v1/gfx/mesh-nominal-fine-green-mesh-right.png) |
 | DSCF3879 profile | [Left](images/noisy-cfa-residual-preflight-v1/gfx/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/noisy-cfa-residual-preflight-v1/gfx/mesh-profile3879-fine-green-mesh-right.png) |
 
-The broader 16-source analysis and a prospective check on the 12 photos
-outside the first viewed group remain pending. The latter restricts
-the single lift to priors with full-signal sigma at most eight ADC
-codes. The four viewed photos informed that restriction. A paired
-zero-conditioning replay for those same 12 other photos has also
-started, with their sensor inputs held fixed at the smallest positive
-prior. The
-calibrated zero-noise projection remains the earlier opt-in path.
-V120 remains the general inference recommendation.
+The [`near_adc_residual_projection` helper](../src/demosaic/adc_bins.py) applies only to
+calibrated 16-bit inputs with positive full-signal noise at or below
+eight ADC codes RMS. It leaves the supplied model prediction untouched
+at zero noise and above that limit. Its output matches all 48 active
+prototype batches bit for bit, and all 18 saved positive-noise GFX
+predictions bypass it by object identity. The standard
+[fixed 427-photo and measured-CFA panels](performance-history.md)
+have no comparable point for these opt-in variants. V120 is the general
+inference recommendation.

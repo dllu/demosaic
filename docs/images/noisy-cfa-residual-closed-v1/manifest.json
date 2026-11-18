@@ -1,0 +1,3970 @@
+{
+  "full-photo": [
+    {
+      "id": "034fe53d538446fdc93f2e4d926aae0eb32afc3b-small-positive",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "faint-photo-009-RGGB-small-positive",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+          "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 2970521409687950525
+      },
+      "conditioning": {
+        "name": "small-positive",
+        "shot": 1e-08,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "CFA": "RGGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/review/034fe53d538446fdc93f2e4d926aae0eb32afc3b-small-positive-comparison.png",
+          "sha256": "5e40eca3986380195108c0193d0178e39f8902722747e7653aff29b25d7e5ff6"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k raw EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k split",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "full-photo/034fe53d538446fdc93f2e4d926aae0eb32afc3b-small-positive-comparison.png",
+        "sha256": "5e40eca3986380195108c0193d0178e39f8902722747e7653aff29b25d7e5ff6"
+      },
+      "credit": {
+        "attribution": null,
+        "author": "GT1976",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/034fe53d538446fdc93f2e4d926aae0eb32afc3b.npy",
+        "cache_sha256": "27e39ba79f7b44914a037c6ac143b3f5af864b4020fc1ff177edc0614485025e",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/03/4f/034fe53d538446fdc93f2e4d926aae0eb32afc3b.jpg",
+        "dtype": "uint16",
+        "height": 3000,
+        "id": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/2018-01-04_%28300%29_40_81_9446_330-8_at_Bahnhof_St._P%C3%B6lten-Spratzern.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:2018-01-04_(300)_40_81_9446_330-8_at_Bahnhof_St._P%C3%B6lten-Spratzern.jpg",
+        "sha1": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "sha1_hex": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "shape": [
+          750,
+          1000,
+          3
+        ],
+        "split": "val",
+        "title": "File:2018-01-04 (300) 40 81 9446 330-8 at Bahnhof St. P\u00f6lten-Spratzern.jpg",
+        "width": 4000
+      },
+      "actual_viewing": "The single and split lifts clarify portions of the roof edge. Fine tree branches remain soft."
+    },
+    {
+      "id": "03768ece408913d3c727b3e29b8ece77a57e5d9c-small-positive",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "faint-photo-009-RGGB-small-positive",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+          "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 2970521409687950525
+      },
+      "conditioning": {
+        "name": "small-positive",
+        "shot": 1e-08,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "CFA": "RGGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/review/03768ece408913d3c727b3e29b8ece77a57e5d9c-small-positive-comparison.png",
+          "sha256": "f19fd03109e3ba582934ccb97f8228b4466a764d93986a46a1d6bfc946c4ed2a"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k raw EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k split",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "full-photo/03768ece408913d3c727b3e29b8ece77a57e5d9c-small-positive-comparison.png",
+        "sha256": "f19fd03109e3ba582934ccb97f8228b4466a764d93986a46a1d6bfc946c4ed2a"
+      },
+      "credit": {
+        "attribution": null,
+        "author": "Krzysztof Golik",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/03768ece408913d3c727b3e29b8ece77a57e5d9c.npy",
+        "cache_sha256": "a5c82223c804fc81e615c6b133170b077f78e9973a5ce1fb28528d2c79e2df42",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/03/76/03768ece408913d3c727b3e29b8ece77a57e5d9c.jpg",
+        "dtype": "uint16",
+        "height": 3893,
+        "id": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Notre-Dame_la_Blanche_church_of_Selles-sur-Cher_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Notre-Dame_la_Blanche_church_of_Selles-sur-Cher_03.jpg",
+        "sha1": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "sha1_hex": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "shape": [
+          973,
+          598,
+          3
+        ],
+        "split": "val",
+        "title": "File:Notre-Dame la Blanche church of Selles-sur-Cher 03.jpg",
+        "width": 2395
+      },
+      "actual_viewing": "The single/split lifts add a little steeple contour without obvious new ringing."
+    },
+    {
+      "id": "034fe53d538446fdc93f2e4d926aae0eb32afc3b-iso6400-prior",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 4,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "faint-photo-009-RGGB-iso6400-prior",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-iso6400-prior.npz",
+          "sha256": "ac701bc9eab6a960ca197e2d130b9d62dd8ab4ac59ff4396985ac0b2ae416a37"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "1393305937711fac1a868d90fd4a424d51545315cb0e74bfe5843d59dbb1a069"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "68fbbc5a896691ce060724387ad7d317402a182d1548687d582f584f64d9517a"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 88351529214160084
+      },
+      "conditioning": {
+        "name": "iso6400-prior",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "CFA": "RGGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/review/034fe53d538446fdc93f2e4d926aae0eb32afc3b-iso6400-prior-comparison.png",
+          "sha256": "1d7ef1c83f878182e0f2805dec8460bfd601be45ef5010e3a9d474f5c08bfb5b"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k raw EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k split",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "full-photo/034fe53d538446fdc93f2e4d926aae0eb32afc3b-iso6400-prior-comparison.png",
+        "sha256": "1d7ef1c83f878182e0f2805dec8460bfd601be45ef5010e3a9d474f5c08bfb5b"
+      },
+      "credit": {
+        "attribution": null,
+        "author": "GT1976",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/034fe53d538446fdc93f2e4d926aae0eb32afc3b.npy",
+        "cache_sha256": "27e39ba79f7b44914a037c6ac143b3f5af864b4020fc1ff177edc0614485025e",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/03/4f/034fe53d538446fdc93f2e4d926aae0eb32afc3b.jpg",
+        "dtype": "uint16",
+        "height": 3000,
+        "id": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/2018-01-04_%28300%29_40_81_9446_330-8_at_Bahnhof_St._P%C3%B6lten-Spratzern.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:2018-01-04_(300)_40_81_9446_330-8_at_Bahnhof_St._P%C3%B6lten-Spratzern.jpg",
+        "sha1": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "sha1_hex": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "shape": [
+          750,
+          1000,
+          3
+        ],
+        "split": "val",
+        "title": "File:2018-01-04 (300) 40 81 9446 330-8 at Bahnhof St. P\u00f6lten-Spratzern.jpg",
+        "width": 4000
+      },
+      "actual_viewing": "The roof and sky are both blurred in the learned columns. Added lift introduces faint grain."
+    },
+    {
+      "id": "03768ece408913d3c727b3e29b8ece77a57e5d9c-iso6400-prior",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 4,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "faint-photo-009-RGGB-iso6400-prior",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-iso6400-prior.npz",
+          "sha256": "ac701bc9eab6a960ca197e2d130b9d62dd8ab4ac59ff4396985ac0b2ae416a37"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "1393305937711fac1a868d90fd4a424d51545315cb0e74bfe5843d59dbb1a069"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "68fbbc5a896691ce060724387ad7d317402a182d1548687d582f584f64d9517a"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "iso6400-prior",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 88351529214160084
+      },
+      "conditioning": {
+        "name": "iso6400-prior",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "CFA": "RGGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/review/03768ece408913d3c727b3e29b8ece77a57e5d9c-iso6400-prior-comparison.png",
+          "sha256": "a6c27a1e32666faf110919955e030c484995e089df45d9e97b7bf1d197587cc3"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k raw EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k split",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "full-photo/03768ece408913d3c727b3e29b8ece77a57e5d9c-iso6400-prior-comparison.png",
+        "sha256": "a6c27a1e32666faf110919955e030c484995e089df45d9e97b7bf1d197587cc3"
+      },
+      "credit": {
+        "attribution": null,
+        "author": "Krzysztof Golik",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/03768ece408913d3c727b3e29b8ece77a57e5d9c.npy",
+        "cache_sha256": "a5c82223c804fc81e615c6b133170b077f78e9973a5ce1fb28528d2c79e2df42",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/03/76/03768ece408913d3c727b3e29b8ece77a57e5d9c.jpg",
+        "dtype": "uint16",
+        "height": 3893,
+        "id": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Notre-Dame_la_Blanche_church_of_Selles-sur-Cher_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Notre-Dame_la_Blanche_church_of_Selles-sur-Cher_03.jpg",
+        "sha1": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "sha1_hex": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "shape": [
+          973,
+          598,
+          3
+        ],
+        "split": "val",
+        "title": "File:Notre-Dame la Blanche church of Selles-sur-Cher 03.jpg",
+        "width": 2395
+      },
+      "actual_viewing": "All restorations show a broad tower outline with the fine internal structure mostly missing."
+    }
+  ],
+  "crossed-photo": [
+    {
+      "id": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+      "original": {
+        "id": "faint-photo-009-RGGB-small-positive",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+          "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 2970521409687950525
+      },
+      "replay": {
+        "id": "faint-photo-009-RGGB-small-positive-as-zero",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+          "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "conditioning-zero",
+          "shot": 0.0,
+          "read": 0.0,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 2970521409687950525,
+        "positive_input": "faint-photo-009-RGGB-small-positive",
+        "positive_plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/plan.json",
+          "sha256": "8f7512291f08e8b37556bd62f2842f8321300a5044918bb294ede43fd6869d13"
+        },
+        "measurement_noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/photo-conditioning-review/034fe53d538446fdc93f2e4d926aae0eb32afc3b-comparison.png",
+          "sha256": "f49a2d308ee5a0489df74df7c369f100137bf9919958b6c7708b41feb8b46843"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k positive cond.",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single lift",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k bounded",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k zero cond.",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "crossed-photo/034fe53d538446fdc93f2e4d926aae0eb32afc3b-comparison.png",
+        "sha256": "f49a2d308ee5a0489df74df7c369f100137bf9919958b6c7708b41feb8b46843"
+      },
+      "triplet": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/native-display-closed/034fe53d538446fdc93f2e4d926aae0eb32afc3b-bounded-triplet.png",
+          "sha256": "0ba3135c9e08a59cf83587f198ef97ce3d2c18145efc4041b149da7a8eed9df4"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k bounded",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "source_board": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/photo-conditioning-review/034fe53d538446fdc93f2e4d926aae0eb32afc3b-comparison.png",
+          "sha256": "f49a2d308ee5a0489df74df7c369f100137bf9919958b6c7708b41feb8b46843"
+        },
+        "file": "crossed-photo/034fe53d538446fdc93f2e4d926aae0eb32afc3b-bounded-triplet.png",
+        "sha256": "0ba3135c9e08a59cf83587f198ef97ce3d2c18145efc4041b149da7a8eed9df4"
+      },
+      "credit": {
+        "attribution": null,
+        "author": "GT1976",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/034fe53d538446fdc93f2e4d926aae0eb32afc3b.npy",
+        "cache_sha256": "27e39ba79f7b44914a037c6ac143b3f5af864b4020fc1ff177edc0614485025e",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/03/4f/034fe53d538446fdc93f2e4d926aae0eb32afc3b.jpg",
+        "dtype": "uint16",
+        "height": 3000,
+        "id": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/2018-01-04_%28300%29_40_81_9446_330-8_at_Bahnhof_St._P%C3%B6lten-Spratzern.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:2018-01-04_(300)_40_81_9446_330-8_at_Bahnhof_St._P%C3%B6lten-Spratzern.jpg",
+        "sha1": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "sha1_hex": "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+        "shape": [
+          750,
+          1000,
+          3
+        ],
+        "split": "val",
+        "title": "File:2018-01-04 (300) 40 81 9446 330-8 at Bahnhof St. P\u00f6lten-Spratzern.jpg",
+        "width": 4000
+      },
+      "actual_viewing": "Held-out roof, all methods and bounded triplet viewed. The single and bounded corrections clarify parts of the roofline, while faint branches remain soft."
+    },
+    {
+      "id": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 20,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+      "original": {
+        "id": "faint-photo-009-RGGB-small-positive",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+          "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 2970521409687950525
+      },
+      "replay": {
+        "id": "faint-photo-009-RGGB-small-positive-as-zero",
+        "kind": "faint-photo",
+        "source_ids": [
+          "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+          "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+          "0377265873e0920b35d068a0dfc5ea76d8984783",
+          "039a221ab23b6e79f59111752337744617f857f8"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/inputs/faint-photo-009-RGGB-small-positive.npz",
+          "sha256": "72f94c064b1a1f581e0c81a3ec80a44312cedc3d5f34eca5aa391251065c8552"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full427-faint-adc-v1/inputs/target-009.npz",
+          "sha256": "d71287800fac55735a40599e68a1e9c94fe1c85f3c626989310f28abcfff53ec"
+        },
+        "original_canonical": {
+          "stage": "photo",
+          "batch": 252,
+          "arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/photo-00252.npz",
+            "sha256": "472760a7172caa9adad768bfa47906fedb037d6159ff3cd65949fe90f05e759a"
+          },
+          "fingerprints": {
+            "packed": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "0ccb7a84cefecaf3f1016fc2083bae36db3cc16ce7cf081681c6867f5e2ce267"
+            },
+            "variance": {
+              "shape": [
+                4,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+            },
+            "colors": {
+              "shape": [
+                4,
+                4
+              ],
+              "dtype": "<i8",
+              "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+            },
+            "wb": {
+              "shape": [
+                4,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+            },
+            "matrix": {
+              "shape": [
+                4,
+                3,
+                3
+              ],
+              "dtype": "<f4",
+              "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+            },
+            "target": {
+              "shape": [
+                4,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f34636be94c967609f26828d3f4819c7eda938f4aa2cc26ea66be0efc3e2852f"
+            }
+          },
+          "context": {
+            "ids": [
+              "034fe53d538446fdc93f2e4d926aae0eb32afc3b",
+              "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+              "0377265873e0920b35d068a0dfc5ea76d8984783",
+              "039a221ab23b6e79f59111752337744617f857f8"
+            ],
+            "condition": {
+              "name": "adc-only",
+              "shot": 0.0,
+              "read": 0.0,
+              "exposure": 1.0
+            },
+            "pattern": "RGGB",
+            "seed": 20261014,
+            "clean_RGB": {
+              "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-009.npy",
+              "sha256": "0c3f2b35f405ab9526e19216577255dddf1148701264b1b381177e6c75e7436a"
+            }
+          },
+          "historic_five_arguments_exact": true
+        },
+        "input_fingerprints": {
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "955a64fd9938b03bf29794a4af2302d649c648a34862f6df66a6371f34e76c5e"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "a93bddb00401ffca54db05e8fc2ccea169e373809d731e8e154e7ec8b1a38c81"
+          },
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "4335396e700191e0e07acd8fda5371e6a7e15491d87146de353408017eb8ccac"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "a30b60eee4c386d5c4a4b7e2bed11bde14cb02f11fe38bf56c9159032a4dea65"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8,
+          8,
+          240,
+          240
+        ],
+        "noise": {
+          "name": "conditioning-zero",
+          "shot": 0.0,
+          "read": 0.0,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        },
+        "ADC_parent": "faint-photo-009-RGGB",
+        "seed": 2970521409687950525,
+        "positive_input": "faint-photo-009-RGGB-small-positive",
+        "positive_plan": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/heldout-0/plan.json",
+          "sha256": "8f7512291f08e8b37556bd62f2842f8321300a5044918bb294ede43fd6869d13"
+        },
+        "measurement_noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/photo-conditioning-review/03768ece408913d3c727b3e29b8ece77a57e5d9c-comparison.png",
+          "sha256": "e9cf5bec96f2bc14aba1fc8b7dbc0ee6f419e589944965a55823ef9346d761e0"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k positive cond.",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single lift",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k bounded",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k zero cond.",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "crossed-photo/03768ece408913d3c727b3e29b8ece77a57e5d9c-comparison.png",
+        "sha256": "e9cf5bec96f2bc14aba1fc8b7dbc0ee6f419e589944965a55823ef9346d761e0"
+      },
+      "triplet": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/native-display-closed/03768ece408913d3c727b3e29b8ece77a57e5d9c-bounded-triplet.png",
+          "sha256": "f3f5f10043eeaeafb2ef0620e548b032b10027caec93717ee42c754ca9fc0240"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k bounded",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "source_board": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/photo-conditioning-review/03768ece408913d3c727b3e29b8ece77a57e5d9c-comparison.png",
+          "sha256": "e9cf5bec96f2bc14aba1fc8b7dbc0ee6f419e589944965a55823ef9346d761e0"
+        },
+        "file": "crossed-photo/03768ece408913d3c727b3e29b8ece77a57e5d9c-bounded-triplet.png",
+        "sha256": "f3f5f10043eeaeafb2ef0620e548b032b10027caec93717ee42c754ca9fc0240"
+      },
+      "credit": {
+        "attribution": null,
+        "author": "Krzysztof Golik",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/03768ece408913d3c727b3e29b8ece77a57e5d9c.npy",
+        "cache_sha256": "a5c82223c804fc81e615c6b133170b077f78e9973a5ce1fb28528d2c79e2df42",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/03/76/03768ece408913d3c727b3e29b8ece77a57e5d9c.jpg",
+        "dtype": "uint16",
+        "height": 3893,
+        "id": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Notre-Dame_la_Blanche_church_of_Selles-sur-Cher_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Notre-Dame_la_Blanche_church_of_Selles-sur-Cher_03.jpg",
+        "sha1": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "sha1_hex": "03768ece408913d3c727b3e29b8ece77a57e5d9c",
+        "shape": [
+          973,
+          598,
+          3
+        ],
+        "split": "val",
+        "title": "File:Notre-Dame la Blanche church of Selles-sur-Cher 03.jpg",
+        "width": 2395
+      },
+      "actual_viewing": "Held-out tower, all methods and bounded triplet viewed. The lattice-like open steeple and trim are visible but softened; no new broad speckle in the sky."
+    }
+  ],
+  "family": [
+    {
+      "id": "small-positive-RGGB-bright-yellow",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "bright-yellow",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "small-positive-RGGB",
+        "kind": "null-control",
+        "source_ids": [
+          "neutral-grey",
+          "green",
+          "bright-yellow",
+          "slanted-edge"
+        ],
+        "pattern": "RGGB",
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/targets.npz",
+          "sha256": "7867aca3364b6cfebf8d161f8d0463e01718d044026887f408169bce69a05f4a"
+        },
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/small-positive-RGGB.npz",
+          "sha256": "cd3425a3b806eaa02b3f6d68f8fd234bd0a04d291c42f004f004f588e70f0ffd"
+        },
+        "seed": 545868395764889954,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "d3c6b2908b13d927f457b86e5993ccbac73f550ec692036f4435aae63d25f5b0"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "ef3eb4b7ce9e15f68ff3feed36640ddb81769da9676f7f04f838bb02bacf4f55"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "source_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/shard-0/small-positive-RGGB.json",
+        "sha256": "2e36a96bbf890bc4a98469889f835632941e93656eae47367494e96baf826139"
+      },
+      "illumination": {
+        "name": "small-positive",
+        "shot": 1e-08,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "display_transform": "shared clipped sRGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/review/small-positive-RGGB-bright-yellow-comparison.png",
+          "sha256": "6acfe455f8dfa880e93200e68824628f202b88844247510f635d82bd3c8d80b2"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k original",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k read feature capped",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k ADC feature only",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "family/small-positive-RGGB-bright-yellow-comparison.png",
+        "sha256": "6acfe455f8dfa880e93200e68824628f202b88844247510f635d82bd3c8d80b2"
+      },
+      "actual_viewing": "The cap reduces the cast in this crop. Substituting only the ADC feature gets closer to the reference."
+    },
+    {
+      "id": "small-positive-RGGB-slanted-edge",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "slanted-edge",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "small-positive-RGGB",
+        "kind": "null-control",
+        "source_ids": [
+          "neutral-grey",
+          "green",
+          "bright-yellow",
+          "slanted-edge"
+        ],
+        "pattern": "RGGB",
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/targets.npz",
+          "sha256": "7867aca3364b6cfebf8d161f8d0463e01718d044026887f408169bce69a05f4a"
+        },
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/small-positive-RGGB.npz",
+          "sha256": "cd3425a3b806eaa02b3f6d68f8fd234bd0a04d291c42f004f004f588e70f0ffd"
+        },
+        "seed": 545868395764889954,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "d3c6b2908b13d927f457b86e5993ccbac73f550ec692036f4435aae63d25f5b0"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "ef3eb4b7ce9e15f68ff3feed36640ddb81769da9676f7f04f838bb02bacf4f55"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "source_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/shard-0/small-positive-RGGB.json",
+        "sha256": "2e36a96bbf890bc4a98469889f835632941e93656eae47367494e96baf826139"
+      },
+      "illumination": {
+        "name": "small-positive",
+        "shot": 1e-08,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "display_transform": "shared clipped sRGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/review/small-positive-RGGB-slanted-edge-comparison.png",
+          "sha256": "351ba1781fdb55454cb73f15760739edd1a49dfdda5f877b3c1a65a275f3d3bf"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k original",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k read feature capped",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k ADC feature only",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "family/small-positive-RGGB-slanted-edge-comparison.png",
+        "sha256": "351ba1781fdb55454cb73f15760739edd1a49dfdda5f877b3c1a65a275f3d3bf"
+      },
+      "actual_viewing": "The four restored/target surfaces retain smooth plateaus and smooth edge with subtle variations in hue."
+    },
+    {
+      "id": "small-positive-GBRG-bright-yellow",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "bright-yellow",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "small-positive-GBRG",
+        "kind": "null-control",
+        "source_ids": [
+          "neutral-grey",
+          "green",
+          "bright-yellow",
+          "slanted-edge"
+        ],
+        "pattern": "GBRG",
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/targets.npz",
+          "sha256": "7867aca3364b6cfebf8d161f8d0463e01718d044026887f408169bce69a05f4a"
+        },
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/small-positive-GBRG.npz",
+          "sha256": "b443bd9f53e74c045dac9040315277bb1b7cec4119ac4429defdd4e0252924ba"
+        },
+        "seed": 290336621948622237,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "ebe40f977508bf43517bd7f8cb87d3defe0fe2ed21e34bf6d646c75db103a7ad"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "705d05be371b3ace5293885235f0c7e05aa7b2efefe3d1d0cca54b1b105a864e"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "f06c4ab6c9c55c4c255079a6cc38cb0950555e579f464ff67053db487fcca33c"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "source_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/shard-0/small-positive-GBRG.json",
+        "sha256": "183ea2cc0176d9be8796751e72dcdcf7b4770eddf220fb81904e4b29ca9ad5a4"
+      },
+      "illumination": {
+        "name": "small-positive",
+        "shot": 1e-08,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "display_transform": "shared clipped sRGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/review/small-positive-GBRG-bright-yellow-comparison.png",
+          "sha256": "027b9ec5610589ae92b109ee80dad6f8517bc75e77284650700eef7ff63c3863"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k original",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k read feature capped",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k ADC feature only",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "family/small-positive-GBRG-bright-yellow-comparison.png",
+        "sha256": "027b9ec5610589ae92b109ee80dad6f8517bc75e77284650700eef7ff63c3863"
+      },
+      "actual_viewing": "Both changes leave a hue shift, more visible in the ADC feature only arm."
+    },
+    {
+      "id": "intermediate-RGGB-bright-yellow",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "bright-yellow",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "intermediate-RGGB",
+        "kind": "null-control",
+        "source_ids": [
+          "neutral-grey",
+          "green",
+          "bright-yellow",
+          "slanted-edge"
+        ],
+        "pattern": "RGGB",
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/targets.npz",
+          "sha256": "7867aca3364b6cfebf8d161f8d0463e01718d044026887f408169bce69a05f4a"
+        },
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/intermediate-RGGB.npz",
+          "sha256": "96a5537dc0bfd3bd4e686774f8e4bb0bbb7527aa65938a91d2584f7cfcc4e5dc"
+        },
+        "seed": 8129144728798860123,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "ab18bcef2fd7097159e969afecd5fedce131973cefa3e9c2cfe0b8b5c1450276"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "1b3385ca1796cff3c95d71919b03533c90ebe11eaf9f29dd48d5fae831d82e29"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "name": "intermediate",
+          "shot": 3.2e-07,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "source_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/shard-1/intermediate-RGGB.json",
+        "sha256": "91f1c0cf59af38b389cf54ac5dcb66412c800758b491d5a44e4481f124839746"
+      },
+      "illumination": {
+        "name": "intermediate",
+        "shot": 3.2e-07,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "display_transform": "shared clipped sRGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/review/intermediate-RGGB-bright-yellow-comparison.png",
+          "sha256": "2ea499690ed46a622cd94cf039412924a56fa56f7fad0d89bf858cbc990fee9b"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k original",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k read feature capped",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k ADC feature only",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "family/intermediate-RGGB-bright-yellow-comparison.png",
+        "sha256": "2ea499690ed46a622cd94cf039412924a56fa56f7fad0d89bf858cbc990fee9b"
+      },
+      "actual_viewing": "The cap barely changes rendered hue. ADC feature alone reduces the tint in the fixed crop."
+    },
+    {
+      "id": "intermediate-RGGB-slanted-edge",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "slanted-edge",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "intermediate-RGGB",
+        "kind": "null-control",
+        "source_ids": [
+          "neutral-grey",
+          "green",
+          "bright-yellow",
+          "slanted-edge"
+        ],
+        "pattern": "RGGB",
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/targets.npz",
+          "sha256": "7867aca3364b6cfebf8d161f8d0463e01718d044026887f408169bce69a05f4a"
+        },
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/intermediate-RGGB.npz",
+          "sha256": "96a5537dc0bfd3bd4e686774f8e4bb0bbb7527aa65938a91d2584f7cfcc4e5dc"
+        },
+        "seed": 8129144728798860123,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "ab18bcef2fd7097159e969afecd5fedce131973cefa3e9c2cfe0b8b5c1450276"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "1b3385ca1796cff3c95d71919b03533c90ebe11eaf9f29dd48d5fae831d82e29"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "name": "intermediate",
+          "shot": 3.2e-07,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "source_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/shard-1/intermediate-RGGB.json",
+        "sha256": "91f1c0cf59af38b389cf54ac5dcb66412c800758b491d5a44e4481f124839746"
+      },
+      "illumination": {
+        "name": "intermediate",
+        "shot": 3.2e-07,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "display_transform": "shared clipped sRGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/review/intermediate-RGGB-slanted-edge-comparison.png",
+          "sha256": "190d8c9180f83c7081d0c283dd278450e2d8576584831fa4019208e1feb6a852"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k original",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k read feature capped",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k ADC feature only",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "family/intermediate-RGGB-slanted-edge-comparison.png",
+        "sha256": "190d8c9180f83c7081d0c283dd278450e2d8576584831fa4019208e1feb6a852"
+      },
+      "actual_viewing": "No new discrete edge or fine patterns are obvious; color differences around the step are slight."
+    },
+    {
+      "id": "intermediate-GBRG-bright-yellow",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "bright-yellow",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "intermediate-GBRG",
+        "kind": "null-control",
+        "source_ids": [
+          "neutral-grey",
+          "green",
+          "bright-yellow",
+          "slanted-edge"
+        ],
+        "pattern": "GBRG",
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/targets.npz",
+          "sha256": "7867aca3364b6cfebf8d161f8d0463e01718d044026887f408169bce69a05f4a"
+        },
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/nulls/inputs/intermediate-GBRG.npz",
+          "sha256": "6f7c1f23ca8e231d8410eadb5b09b0cbc7f3ccb76316272dfa933f0413af9dcb"
+        },
+        "seed": 2846772207774735197,
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "7aee6fa68ab5a7ef3ea0420530aa2643bd756f484760a9e98fcbe4c0d7075f07"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "3ffe365ec08e8f37b74425cfef8e7289b9e8d93dbd566274f1138ff435cf0048"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "f06c4ab6c9c55c4c255079a6cc38cb0950555e579f464ff67053db487fcca33c"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "noise": {
+          "name": "intermediate",
+          "shot": 3.2e-07,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "source_case": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/shard-1/intermediate-GBRG.json",
+        "sha256": "154306e9729ce7733d4cf1813ae26c7a61a6845ea453e59c92b73885c44610d7"
+      },
+      "illumination": {
+        "name": "intermediate",
+        "shot": 3.2e-07,
+        "read": 1e-10,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "CPU_precision": "float32"
+      },
+      "display_transform": "shared clipped sRGB",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/low-noise-family-probe-v1/review/intermediate-GBRG-bright-yellow-comparison.png",
+          "sha256": "6f4d76f338ced4ac7aaddd97c019431da8c519ad1d9b39232a6747fd922a0e28"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k original",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k read feature capped",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k ADC feature only",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "family/intermediate-GBRG-bright-yellow-comparison.png",
+        "sha256": "6f4d76f338ced4ac7aaddd97c019431da8c519ad1d9b39232a6747fd922a0e28"
+      },
+      "actual_viewing": "Both variants still show a tint. ADC feature alone remains markedly off in the measured camera channels."
+    }
+  ],
+  "reserved-flats": [
+    {
+      "id": "cyan",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "cyan",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "small-positive-RGGB",
+        "kind": "reserved-color",
+        "source_ids": [
+          "orange",
+          "cyan",
+          "magenta",
+          "light-neutral"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/small-positive-RGGB.npz",
+          "sha256": "c81abd0d69a3fda68ce9e640e32c9286955994bc88739fe0c4e4caa554c55159"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+          "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+        },
+        "seed": 7515983152320191160,
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "3e33464405a372ac6342c4af393cef42a84afb04394c3ac0ea400e10e2d25391"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "e86971e4de4d9a5a687474b0d424cba678794a944eb2bf6b71100a727c85b0f5"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/review/cyan-comparison.png",
+          "sha256": "146f810654c3ef0779c1ace9e2a87d918794e35bbb65e8cd9f712c96b87ce775"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k raw",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k bounded",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "reserved-flats/cyan-comparison.png",
+        "sha256": "146f810654c3ef0779c1ace9e2a87d918794e35bbb65e8cd9f712c96b87ce775"
+      },
+      "actual_viewing": "The representative RGGB cyan comparison remains visually even across all displayed methods."
+    },
+    {
+      "id": "magenta",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "magenta",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "small-positive-RGGB",
+        "kind": "reserved-color",
+        "source_ids": [
+          "orange",
+          "cyan",
+          "magenta",
+          "light-neutral"
+        ],
+        "pattern": "RGGB",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/small-positive-RGGB.npz",
+          "sha256": "c81abd0d69a3fda68ce9e640e32c9286955994bc88739fe0c4e4caa554c55159"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+          "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+        },
+        "seed": 7515983152320191160,
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "3e33464405a372ac6342c4af393cef42a84afb04394c3ac0ea400e10e2d25391"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "e86971e4de4d9a5a687474b0d424cba678794a944eb2bf6b71100a727c85b0f5"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/review/magenta-comparison.png",
+          "sha256": "588e37a9a358b165801f50bd61b05b6d22af334ca4ee1187e85f5c4dc2f4e564"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k raw",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k bounded",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "reserved-flats/magenta-comparison.png",
+        "sha256": "588e37a9a358b165801f50bd61b05b6d22af334ca4ee1187e85f5c4dc2f4e564"
+      },
+      "actual_viewing": "The representative RGGB magenta comparison is nearly uniform. The larger shift appears in the separate GBRG adverse view."
+    }
+  ],
+  "adverse-flats": [
+    {
+      "id": "worst-magenta-GBRG",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 1,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": "magenta",
+      "models": {
+        "V120": {
+          "checkpoint": {
+            "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+            "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+          },
+          "step": 20000,
+          "weights": "EMA",
+          "display_label": "V120 EMA"
+        },
+        "scale-long86k": {
+          "checkpoint": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long86k-native-v1/step086000.pt",
+            "sha256": "17a93ce546ee1c3282374b4a020c713251becbf919414966bb7a58f306b5c555"
+          },
+          "weights": "EMA",
+          "step": 86000,
+          "display_label": "Long schedule 86k EMA",
+          "retained_progress": true,
+          "training_horizon": 100000
+        }
+      },
+      "observation": {
+        "id": "small-positive-GBRG",
+        "kind": "reserved-color",
+        "source_ids": [
+          "orange",
+          "cyan",
+          "magenta",
+          "light-neutral"
+        ],
+        "pattern": "GBRG",
+        "arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/small-positive-GBRG.npz",
+          "sha256": "b787b8c9f8aa3f4df8ef4185dfb7b5c49e225b219867034c5a10631038cc4b09"
+        },
+        "target": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-residual-reserved-palette-v1/inputs/target.npz",
+          "sha256": "ea263f4f1db86f8a2080827396e64f7b141ab924bc52c1b55a7327e17b91d8c6"
+        },
+        "seed": 2921304340723052735,
+        "output_shape": [
+          4,
+          3,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "input_fingerprints": {
+          "packed": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "2dd48acb433a250767a7c9bd6148986f4d727763cc4f24c99f74d0d709496346"
+          },
+          "variance": {
+            "shape": [
+              4,
+              4,
+              128,
+              128
+            ],
+            "dtype": "<f4",
+            "sha256": "a301d68948a8ae2f3b5731f51d77e1d242a45ed1939443fca13b85a2056e86fe"
+          },
+          "colors": {
+            "shape": [
+              4,
+              4
+            ],
+            "dtype": "<i8",
+            "sha256": "f06c4ab6c9c55c4c255079a6cc38cb0950555e579f464ff67053db487fcca33c"
+          },
+          "wb": {
+            "shape": [
+              4,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "6ea78411bee8a810b9a18819c5a4ac7c827e71678cc4d1db9a0ab8c8d8a9b2e2"
+          },
+          "matrix": {
+            "shape": [
+              4,
+              3,
+              3
+            ],
+            "dtype": "<f4",
+            "sha256": "4fa2e844c34f38854e14169319a6740c749edfb416bb510c5bf530647f8473b8"
+          }
+        },
+        "noise": {
+          "name": "small-positive",
+          "shot": 1e-08,
+          "read": 1e-10,
+          "ADC_bits": 16,
+          "black_level": 0.03,
+          "CPU_precision": "float32"
+        }
+      },
+      "selection": "Largest raw bias in the reserved palette.",
+      "comparison": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/noisy-cfa-residual-v1/native-display-closed/worst-magenta-GBRG-comparison.png",
+          "sha256": "21fe0a0c4b03e81be883c93bc7f39521ebca6a6bec6ccaf8178a922713b66ad1"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k raw",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k single",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "86k bounded",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "file": "adverse-flats/worst-magenta-GBRG-comparison.png",
+        "sha256": "21fe0a0c4b03e81be883c93bc7f39521ebca6a6bec6ccaf8178a922713b66ad1"
+      },
+      "actual_viewing": "The raw method drives magenta toward a brighter pink. The single lift only partly changes it. The bounded lift restores the reference hue with a smooth crop."
+    }
+  ]
+}
