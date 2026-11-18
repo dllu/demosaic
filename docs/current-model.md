@@ -276,6 +276,12 @@ donor-confirmed frequency using the synthetic target raises
 weak response only from 0.66% to 0.92%. Donor-only replacement
 loses ISO400 detail on both panels.
 
+[Shared perspective](shared-projective-phase.md) raises weak response from
+0.38% to 1.15% on constructed ISO400 wires on one plane when only the
+companion uses the estimated curvature. Applying the curvature to both
+directions raises increment error. The ISO6400 cases gain no recovery and
+the fine cab crops still match V120 exactly.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

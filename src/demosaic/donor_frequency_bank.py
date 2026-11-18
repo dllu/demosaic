@@ -140,16 +140,20 @@ def _companion_predictions(raw, cfa, fold, test, anchor, candidates, config, sho
     for f in candidates:
         weights = _phase_bin_weights(x, y, f, 8)
         basis.append(np.column_stack((null, weights[:, :-1] - weights[:, -1:])))
-    predictions = [np.empty(np.count_nonzero(test)) for _ in range(len(basis) + 1)]
+    return _predict_designs(raw, cfa, fold, test, fixed.variance_cfa, [null, *basis])
+
+
+def _predict_designs(raw, cfa, fold, test, variance, designs):
+    predictions = [np.empty(np.count_nonzero(test)) for _ in designs]
     observed = np.empty_like(predictions[0])
-    sigma = np.sqrt(fixed.variance_cfa)
+    sigma = np.sqrt(variance)
     for color in range(3):
         source = fold & (cfa == color)
         target = test & (cfa == color)
         placement = (cfa == color)[test]
         observed[placement] = raw[target] / sigma[target]
         values = raw[source] / sigma[source]
-        for dst, design in zip(predictions, [null, *basis], strict=True):
+        for dst, design in zip(predictions, designs, strict=True):
             coefficients = np.linalg.lstsq(
                 design[source.ravel()] / sigma[source, None], values, rcond=1e-10
             )[0]

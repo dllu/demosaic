@@ -7,7 +7,7 @@ data/model integration. This note supplements the
 [context and production review](weak-detail-global-context-production-review-2026-11-16.md).
 
 Follow-up measurements cover four ordinary-photo passes and fifth-visit
-crop coverage. [72k executed coverage audit](full-corpus-scaling.md#fourth-photographic-epoch-and-the-72k-prefix).
+crop coverage through update 80,000. [80k executed coverage audit](full-corpus-scaling.md#source-and-crop-coverage-through-80k).
 
 **The corpus supports a substantially larger full-model training experiment.
 We have not established that its useful examples, or the model's capacity to

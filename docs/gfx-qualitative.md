@@ -155,6 +155,11 @@ historical boards. Use these reports for the current completed comparisons:
   keeps the sky and coarse crossings. Both reserve rules reproduce
   the original guide fit. Donor-only selection reduces the spectral
   building correction from 2.94 to 1.74 DN16 RMS relative to V120.
+- [Shared perspective](shared-projective-phase.md#native-gfx100s-review)
+  leaves the sky at V120. Applying the same estimated plane to both
+  directions strengthens the coarse-fence correction and adds slight
+  mottling, with no clear new crossings. Companion-only transfer keeps
+  the coarse-fence result from the planar fit.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

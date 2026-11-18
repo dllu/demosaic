@@ -81,6 +81,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [wire footprints from reserved RAW](reserved-wire-footprint.md) ·
 [wire footprints with whole-image guide proposals](scene-wire-footprint.md) ·
 [wider donor frequency banks](donor-frequency-bank.md) ·
+[shared perspective for two wire directions](shared-projective-phase.md) ·
 [A-only innovation validation and native comparison](parent-innovation-validation.md) ·
 [near and distant whole-scene context intervention](scene-context-extent.md) ·
 [scene-conditioned RAW spectral gain](scene-spectral-detail.md) ·

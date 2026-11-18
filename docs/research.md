@@ -192,6 +192,10 @@ has repeatedly come with extra flat-region error or false color. The
    the known target still recovers less than 1% of the weak amplitude.
    Better candidate coverage alone leaves little leverage under the
    existing query fit and admission policy.
+   [Shared perspective](shared-projective-phase.md) improves geometric
+   agreement at ISO400 by letting the stronger direction estimate the
+   change in spacing of the companion. The gain is small after independent
+   RAW admission, and the native cab mesh is still unresolved.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

@@ -1,6 +1,6 @@
 # Full-corpus scaling and whole-scene context training
 
-**The 20k control is complete and the 100k run has passed its halfway checkpoint.**
+**The 20k control is complete and the 100k run has passed update 80,000.**
 The [20k review](full-corpus-control20k-review.md) verifies all320,000 target slots,
 all90,778 photo IDs and the first full ordinary epoch at17,039. Faint fidelity
 recovers0.59370 dB from10k, remaining0.02061 dB below V120; ordinary/shadow means
@@ -184,6 +184,22 @@ draw seeds, and checks 56 additional saved conditioning chunks. The
 latest image-quality review is the 50k checkpoint.
 [72k source audit](results/full-corpus-long72k-prefix-v1/source-audit.json) ·
 [Audit code](results/full-corpus-long72k-prefix-v1/audit.py.gz).
+
+### Source and crop coverage through 80k
+
+The source ledger records **1,280,000** target slots and **425,965**
+ordinary-photo draws through update 80,000. Of the **90,778** ordinary
+photos, 62,853 have five visits and 27,925 have four. The median fifth
+crop adds **1.23%** of the cached image, and the five crops together
+cover a median **84.20%** in that subset. The fifth crop adds zero new
+cached pixels for 10,060 images. Coverage uses cache rectangles before
+augmentation.
+
+The audit verifies the published 72k source prefix, the fixed source
+order and draw seeds, and 32 additional saved conditioning chunks.
+The run continues and the latest image-quality review is at 50k.
+[80k source audit](results/full-corpus-long80k-prefix-v1/source-audit.json) ·
+[Audit code](results/full-corpus-long80k-prefix-v1/audit.py.gz).
 
 ### Observed source and crop coverage through 30k
 
