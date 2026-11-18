@@ -216,6 +216,12 @@ and 26 DN16 worst centered error. At the intermediate prior the guard
 bypasses the correction and 86k retains a worst bias of 6,703 DN16.
 [Reserved magenta comparison](images/noisy-cfa-residual-closed-v1/adverse-flats/worst-magenta-GBRG-comparison.png).
 
+A [separate coarse repair](coarse-adc-color.md) lowers that
+intermediate bias to 810 DN16, while retaining the existing
+photo predictions on this panel. The
+[matched noise-range continuation](near-adc-bridge-training.md)
+tests whether this gap can be improved through training.
+
 ## Both standing GFX100S comparisons
 
 Applying the two lifted corrections unconditionally changes the

@@ -8,6 +8,7 @@ from torch.nn.functional import max_pool2d
 
 from .cfa import bilinear, malvar, mosaic
 from .precision import ieee_fp32
+from .prior import box_mean
 
 
 def _settings(bit_depth, black_level, quantizer_precision):
@@ -210,3 +211,46 @@ def near_adc_residual_projection(prediction, packed, colors, wb=None, *, shot, r
         excess = residual.sign() * (residual.abs() - 4 * sigma_dn16 / levels).clamp_min(0)
         correction = weight * residual + (1 - weight) * excess
         return p + malvar(correction, colors, wb)
+
+
+def coarse_adc_color_projection(prediction, packed, colors, *, shot, read, black_level):
+    """Correct coherent color errors in the 8–160 ADC code RMS gap.
+
+    For calibrated 16-bit inputs, use a local same-phase mean of the
+    measured residual. Apply only the part exceeding both the local
+    sensor-noise and residual-scatter thresholds. Share the coarse green
+    correction between the two green phases and interpolate by color.
+    This experimental correction does not lift individual fine residuals.
+    """
+    if any(not math.isfinite(v) or v < 0 for v in (shot, read)):
+        raise ValueError("Noise coefficients must be finite and nonnegative")
+    levels, _ = _settings(16, black_level, "float32")
+    step = 1 / (levels * (1 - black_level))
+    full_signal_codes = math.sqrt(shot + read) / step
+    if not 8 < full_signal_codes <= 160:
+        return prediction
+    colors = _projection_colors(prediction, packed, colors)
+    if packed.dtype != torch.float32 or not torch.isfinite(packed).all():
+        raise ValueError("Coarse ADC color projection requires finite float32 packed observations")
+    with torch.autocast(prediction.device.type, enabled=False), ieee_fp32():
+        p = prediction.float()
+        measured = mosaic(p, colors)
+        variance = shot * measured.clamp(0, 1) + read + step**2 / 12
+        black_floor = -black_level / (1 - black_level)
+        margin = 2 * variance.sqrt()
+        valid = (packed > black_floor + margin) & (packed < 1 - margin)
+        residual = torch.where(valid, packed - measured, 0)
+        window = 7
+        support = box_mean(valid.float(), window)
+        divisor = support.clamp_min(1 / window**2)
+        mean = box_mean(residual, window) / divisor
+        scatter = (box_mean(residual.square(), window) / divisor - mean.square()).clamp_min(0)
+        threshold = torch.maximum(8 * box_mean(variance, window).sqrt(), 3 * scatter.sqrt())
+        excess = mean.sign() * (mean.abs() - threshold).clamp_min(0)
+        excess = torch.where((support >= 0.8) & valid, excess, 0)
+        if not excess.count_nonzero():
+            return prediction
+        green = colors[:, :, None, None] == 1
+        green_mean = (excess * green).sum(1, keepdim=True) / 2
+        correction = torch.where(green, green_mean, excess)
+        return p + bilinear(correction, colors)

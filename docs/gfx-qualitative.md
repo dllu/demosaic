@@ -66,6 +66,7 @@ historical boards. Use these reports for the current completed comparisons:
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The
   opt-in bounded correction returns these higher-noise predictions exactly.
+  The [coarse color correction](coarse-adc-color.md) also returns them exactly.
 - [Oriented RAW support](oriented-raw-support.md) gives the same sky
   pixels. The rectangles make small changes to the building, foliage,
   and coarse fence, with the main crossings still visible.

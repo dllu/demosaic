@@ -31,6 +31,7 @@ from .losses import (
     validate_reconstruction_objective,
 )
 from .model import JointDemosaic, ModelConfig
+from .near_adc_training import bridge_fraction, bridge_noise_batch, require_resume_near_adc_bridge
 from .noise_pairs import (
     POLICY as NOISE_PAIR_POLICY,
 )
@@ -423,7 +424,8 @@ def prepare_training_batch(data_step, domain, clean, *, model, device, config, s
             validate_camera_supervision(config.get("camera_supervision", "reference-white-v1"))
             == "sensor-valid-v1"
         ) or noise_draws == 2
-        noise_options = {"retain_noise_settings": True} if noise_draws == 2 else {}
+        bridge = bridge_fraction(config)
+        noise_options = {"retain_noise_settings": True} if noise_draws == 2 or bridge else {}
         if domain == "paired":
             return {key: value.to(device) for key, value in clean.items()}
         if domain == "native":
@@ -432,7 +434,7 @@ def prepare_training_batch(data_step, domain, clean, *, model, device, config, s
                 reconstruct_highlights=config.get("reconstruct_highlights", False),
                 preserve_negative_read_noise=config.get("preserve_negative_read_noise", False),
                 noise_free_fraction=config.get("noise_free_fraction", 0.0),
-                retain_sensor_target=retain_sensor_target,
+                retain_sensor_target=retain_sensor_target or bool(bridge),
                 **noise_options,
             )
         elif domain == "commons":
@@ -448,11 +450,17 @@ def prepare_training_batch(data_step, domain, clean, *, model, device, config, s
                 physical_fp32=model.config.physical_fp32,
                 noise_free_fraction=config.get("noise_free_fraction", 0.0),
                 broad_camera=config.get("broad_camera", False),
-                retain_sensor_target=retain_sensor_target,
+                retain_sensor_target=retain_sensor_target or bool(bridge),
                 **noise_options,
             )
         else:
             raise ValueError("Unknown training domain")
+        if bridge:
+            batch = bridge_noise_batch(batch, bridge, seed=seed, step=data_step, domain=domain)
+            if noise_draws == 1:
+                del batch["adc_black_level"], batch["adc_bit_depth"]
+            if not retain_sensor_target:
+                del batch["sensor_target"]
         return (
             independent_noise_view(batch, seed=seed, step=data_step, domain=domain)
             if noise_draws == 2
@@ -583,6 +591,7 @@ def train(config_path, *, resume=None, initialize=None, stop_after=None):
 
 def _train(config, *, resume=None, initialize=None, stop_after=None):
     spatial_lr_multiplier(config)
+    bridge_fraction(config)
     feature_weight, feature_policy = feature_options(config)
     config.update(dino_feature_weight=feature_weight, dino_feature_policy=feature_policy)
     source_loss_every = validate_source_loss_every(config.get("source_loss_every", 0))
@@ -835,6 +844,7 @@ def _train(config, *, resume=None, initialize=None, stop_after=None):
         require_resume_photo_epoch_order(resume_state["config"], config)
         require_resume_features(resume_state["config"], config)
         require_resume_noise_pairs(resume_state["config"], config)
+        require_resume_near_adc_bridge(resume_state["config"], config)
         require_resume_reviewed_shadows(resume_state["config"], config)
         require_resume_rois(resume_state["config"], config)
         if validate_late_rgb_only(resume_state["config"]) != late_only:

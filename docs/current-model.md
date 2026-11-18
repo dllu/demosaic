@@ -53,8 +53,9 @@ The [near-ADC follow-up](noisy-cfa-residual.md) finds that an opt-in
 bounded residual lowers 86k's weakest-band error from 2.744 to 2.360
 DN16 on the prospective subset and reduces the reserved palette's
 worst bias from 19,449 to 105 DN16. It applies only up to eight
-ADC codes RMS at full signal. At the intermediate tested prior,
-the 86k magenta error remains large.
+ADC codes RMS at full signal. The separate
+[coarse color correction](coarse-adc-color.md) reduces the worst
+intermediate-noise palette bias from 6,703 to 810 DN16.
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes

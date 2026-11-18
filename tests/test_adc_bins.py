@@ -4,7 +4,12 @@ import numpy as np
 import pytest
 import torch
 
-from demosaic.adc_bins import adc_bin_bounds, adc_bin_projection, near_adc_residual_projection
+from demosaic.adc_bins import (
+    adc_bin_bounds,
+    adc_bin_projection,
+    coarse_adc_color_projection,
+    near_adc_residual_projection,
+)
 from demosaic.cfa import color_indices, mosaic
 
 
@@ -176,6 +181,36 @@ def test_near_adc_falls_back_to_original_object_outside_range(shot, read):
     packed = torch.full((1, 4, 4, 4), 0.2)
     assert (
         near_adc_residual_projection(
+            prediction, packed, colors, shot=shot, read=read, black_level=0.03
+        )
+        is prediction
+    )
+
+
+@pytest.mark.parametrize("pattern", ["RGGB", "BGGR", "GRBG", "GBRG"])
+def test_coarse_adc_color_reduces_bias_without_lifting_flat_texture(pattern):
+    colors = color_indices(pattern)
+    truth = torch.full((1, 3, 32, 32), 0.22)
+    packed_truth = mosaic(truth, colors)
+    rng = torch.Generator().manual_seed(199)
+    packed = packed_truth + 0.0003 * torch.randn(packed_truth.shape, generator=rng)
+    prediction = truth.clone()
+    prediction[:, 0] -= 0.12
+    projected = coarse_adc_color_projection(
+        prediction, packed, colors, shot=3.2e-7, read=1e-10, black_level=0.03
+    )
+    assert torch.equal(projected[:, 1:], truth[:, 1:])
+    assert (projected[:, 0] - truth[:, 0]).abs().max() < 0.003
+    assert projected[:, 0].std() < 0.0001
+
+
+@pytest.mark.parametrize("shot,read", [(0.0, 0.0), (1e-8, 1e-10), (2e-5, 1.6e-9)])
+def test_coarse_adc_color_bypasses_other_noise_ranges(shot, read):
+    colors = color_indices("GBRG")
+    prediction = torch.full((1, 3, 16, 16), 0.22)
+    packed = torch.full((1, 4, 8, 8), 0.5)
+    assert (
+        coarse_adc_color_projection(
             prediction, packed, colors, shot=shot, read=read, black_level=0.03
         )
         is prediction
