@@ -126,6 +126,11 @@ The [crossed gap option](local-mesh-gap-support.md) preserves all eight
 archived GFX outputs and reduces spill in two of six fresh ISO400 round
 gaps. It misses the six rotated strip gaps. Enable it with
 `suppress_gaps=True` in the experimental planar crop helper.
+The [distributed Bayer audit](local-mesh-distributed-audit.md) reduces
+added strip-gap texture from 9.76 to 5.42 DN16 RMS in a fresh ISO400
+panel. It weakens one continuous wire beside an intensity step, and
+both GFX scenes reproduce the column audit exactly. The distributed
+assignment remains a research variant.
 
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab

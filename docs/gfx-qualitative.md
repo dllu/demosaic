@@ -108,6 +108,9 @@ historical boards. Use these reports for the current completed comparisons:
   returns every main native crop to its exact wider-donor output with
   crossed checks. The local-deficit ablation slightly reduces part of
   the coarse-fence correction. Sky, building and foliage keep the parent.
+- [Distributed Bayer gap audit](local-mesh-distributed-audit.md#standing-gfx100s-review)
+  reproduces the column audit on all four main native crops. Both views
+  keep the coarse crossings, smooth sky, and the same soft thin braces.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

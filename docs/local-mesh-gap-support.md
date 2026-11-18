@@ -6,6 +6,10 @@ eight standing GFX crops. It misses the six rotated strip gaps. The
 short-window correction suppresses more gap texture overall and fades
 some continuous crossings. [Native boards, metrics and sources](results/local-mesh-gap-support-v1/publication.json).
 
+A [follow-up with distributed Bayer samples](local-mesh-distributed-audit.md)
+reduces added texture in three fresh strip gaps and attenuates one true
+continuous wire. Both standing GFX scenes reproduce the column audit.
+
 ## Test a break against a continuing wire
 
 The existing donor fit supplies a two-direction phase model. The first
