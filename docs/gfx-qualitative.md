@@ -78,6 +78,9 @@ historical boards. Use these reports for the current completed comparisons:
   Thin cables and fine leaves remain soft.
   The [plain local control](scene-local-contrast-2400.md#plain-local-control)
   has the same visible limitations on all four standing crops.
+  The [plain spatial control](scene-local-contrast-2400.md#plain-spatial-standing-gfx-review)
+  keeps a smooth sky and visible coarse crossings, with soft leaf tips
+  and smaller bracket cables.
 - [Disjoint RAW patch search](natural-raw-donor-evidence.md#standing-gfx100s-scenes)
   keeps the Corpus 100k crop bytes in all four main contexts.
   The foliage coarse match fails the local fine-detail check.

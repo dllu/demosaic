@@ -26,6 +26,14 @@ fresh ISO6400 gaps with averaged footprints. The standing sky
 stays smooth, and the fine cab crossings remain incomplete.
 [Reserved Bayer footprint refinement](mesh-refined-footprint.md).
 
+The [matched ordinary-data controls](scene-local-contrast-2400.md#plain-spatial-control)
+compare whole-image features against the local-only arm after training
+on byte-identical observations from 4,800 photos. Their eight-photo
+replay shows almost identical ISO6400 coupled increment error, with
+more flat-core variation in the spatial model. Within that model,
+the matching preview slightly reduces flat variation compared with
+masking the preview. Both GFX families retain incomplete fine detail.
+
 **Start production optimization of V120 now. For the next quality architecture,
 test whole-image context once per photograph, coupled to a smaller native-detail
 path that still requires RAW evidence.** The strongest recent result is improved

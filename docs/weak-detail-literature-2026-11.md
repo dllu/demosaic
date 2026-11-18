@@ -285,9 +285,13 @@ weakens fine structure inside the native crop while preserving the
 rest of each scene. The [matched four-arm run](scene-local-contrast-2400.md)
 tests the interaction with spatial scene features. Its 64-photo panel
 measures the known fine residual separately from false variation in
-an exact flat core. The eight-photo pilot finds slightly cleaner cores
-from aligned spatial 12k context with slightly lower fine response.
-Quality evaluation of the new endpoints is queued after training.
+an exact flat core. The [ordinary-data pair](scene-local-contrast-2400.md#plain-spatial-control)
+used byte-identical observations across 4,800 training photos. On the
+eight-photo ISO6400 pilot, spatial context leaves almost the same
+coupled increment error and adds more flat-core variation than the
+local arm. The matched scene slightly reduces flat-core variation
+against the spatial model's own masked preview. Three endpoints'
+standing reviews are complete and the localized local arm is training.
 
 The [64-photo natural-texture evaluation](full-corpus-faint-noise.md)
 finds that corpus scaling mainly lowers ISO6400 output variance.

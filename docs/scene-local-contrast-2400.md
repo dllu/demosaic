@@ -2,8 +2,9 @@
 
 Four matched 2,400-update continuations test whether training on locally
 weakened texture helps a whole-image restoration model recover faint detail
-while keeping flat areas smooth. The localized spatial and plain local
-arms have finished. The plain spatial arm is training. An
+while keeping flat areas smooth. The localized spatial, plain local and
+plain spatial arms have finished their eight-photo and standing-camera
+reviews. The localized local arm is training. An
 eight-photo pilot with existing checkpoints shows slightly cleaner
 flat cores when the spatial model sees the matching scene, with no increase
 in true fine-detail response. [Run, pilot and review bindings](results/scene-local-contrast-2400-v1/publication.json).
@@ -261,8 +262,8 @@ On the eight-photo EMA replay, coupled ISO6400 increment RMS is
 arms, with 104.22 for plain local and 103.93 for localized spatial.
 Coupled flat-core RMS is 4.69 DN16 for plain local, 4.85 for
 localized spatial and 4.21 for Corpus 100k. These comparisons
-change both the context path and the augmentation. The two
-remaining arms are required to measure the separate effects.
+change both the context path and the augmentation. The ordinary-data
+pair below isolates the effect of the context path under that recipe.
 [Matched eight-photo metrics](results/scene-local-contrast-2400-v1/second-endpoint-heldout.json).
 
 The plain local EMA retains the visibly smooth exact flat core.
@@ -291,3 +292,81 @@ still retains more visible diagonals in the right crop.
 | --- | --- |
 | Nominal | [Left](images/scene-local-contrast-2400-second/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-second/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred | [Left](images/scene-local-contrast-2400-second/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-second/mesh-profile3879-fine-green-mesh-right.png) |
+
+### Plain spatial control
+
+Plain spatial completed 2,400 updates in 1,542.04 seconds of measured
+training. Its raw and EMA checkpoint SHA256 is
+`0ff44f0d0aa52e9c60f2170072e312a3b3c35287035f24f57da274e17c66fd62`.
+It uses Corpus 100k as its parent. Its entire observed data trace
+is byte-identical to plain local across 4,800 distinct photos and
+19,200 native crops, including source coordinates, physical whole-scene
+and query fingerprints, camera metadata and noise. The difference is
+the learned native path with or without the spatial scene adapter.
+[Endpoint and frozen sources](results/scene-local-contrast-2400-v1/third-endpoint-publication.json) · [Matched data trace](results/scene-local-contrast-2400-v1/plain-matched-inputs.json).
+
+The CUDA IEEE FP32 EMA evaluation replays identical native observations
+and verifies all intervention preview fingerprints against the earlier
+pilot. At ISO6400, the matching scene raises flat-core fine variation
+versus the plain local arm, with almost identical increment error in
+the coupled draws. The matching scene lowers flat-core variation
+slightly compared with blanking its own adapter input, with a small
+loss of fine response. Corpus 100k keeps the cleanest flat cores.
+
+| EMA and preview policy | Coupled fine RMS, DN16 | Coupled flat RMS, DN16 | Coupled fine response | Independent fine RMS, DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| V120 | 84.24 | 4.83 | 68.27% | 103.84 |
+| Corpus 100k | 84.22 | 4.21 | 68.18% | 103.98 |
+| Localized spatial, matching | 84.40 | 4.85 | 67.34% | 103.93 |
+| Plain local | 84.16 | 4.69 | 67.61% | 104.21 |
+| Plain spatial, matching | 84.16 | 4.86 | 67.51% | 104.07 |
+| Plain spatial, neutral | 84.13 | 4.92 | 67.63% | 104.26 |
+
+The coupled matching-minus-local flat RMS difference is +0.17 DN16.
+Its exploratory source-bootstrap interval spans −0.07 to +0.59 DN16.
+Matching-minus-neutral gives −0.06 DN16, with an interval of −0.13 to
++0.001 DN16. At ISO400 the matching preview also reduces flat-core
+variation versus neutral, from 4.91 to 4.69 DN16 with coupled draws
+and from 4.37 to 4.18 with independent draws. The eight-photo
+comparison gives little evidence of better fine reconstruction.
+[All noise/draw/context results](results/scene-local-contrast-2400-v1/third-endpoint-heldout.json) · [Paired differences](results/scene-local-contrast-2400-v1/third-endpoint-paired.json).
+
+These two native triplets use the original stone and cathedral queries,
+with ROI `[48,48,160,160]`. They show noisy Malvar, the plain spatial
+EMA with the matching scene, and exact synthetic GT. Shot/read
+are `0.00128 / 6.5536e-6`, ADC16 black fraction is 0.03, with the
+same display exposure ×3.0303 and contrast ×2 as above. Stone grain
+and fine masonry remain softer than the target. The separate flat
+view remains visibly smooth.
+[Bound sources and all viewed comparisons](results/scene-local-contrast-2400-v1/third-endpoint-heldout-viewing.json).
+
+![Stone, noisy Malvar, plain spatial EMA and exact GT](images/scene-local-contrast-2400-third/000-iso6400-coupled-role0-triplet.png)
+
+![Cathedral, noisy Malvar, plain spatial EMA and exact GT](images/scene-local-contrast-2400-third/001-iso6400-coupled-role0-triplet.png)
+
+#### Plain spatial standing GFX review
+
+The matching scene CPU IEEE FP32 review uses DSCF3879/3880 and
+DSCF3842/3835 at the same native 160×160 coordinates, noise priors,
+and display exposures as the prior two endpoints. The overcast sky
+appears smooth and the coarse grid keeps both visible directions.
+Compared with plain local, camera-linear changes are 1.71 DN16 RMS
+in sky and 8.21 DN16 in the coarse fence. Fine bracket cables and leaf
+edges remain soft. The fine cab retains more obvious diagonal structure
+under the transferred prior and incomplete crossings under both.
+Cab differences versus plain local range from 2.38 to 4.26 DN16 RMS.
+The differently exposed ISO100 AHD and both camera JPEGs were viewed
+as qualitative references.
+[Actual native review with coordinates and inputs](results/scene-local-contrast-2400-v1/third-endpoint-standing-viewing.json) · [Model-to-model deltas](results/scene-local-contrast-2400-v1/third-endpoint-standing-deltas.json).
+
+[Sky](images/scene-local-contrast-2400-third/main-overcast-sky-main-overcast-sky.png) · [Building](images/scene-local-contrast-2400-third/main-building-detail-main-building-detail.png) · [Foliage](images/scene-local-contrast-2400-third/main-foliage-main-foliage.png) · [Coarse fence](images/scene-local-contrast-2400-third/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | Plain spatial and matched comparators |
+| --- | --- |
+| Nominal | [Left](images/scene-local-contrast-2400-third/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-third/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-local-contrast-2400-third/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-local-contrast-2400-third/mesh-profile3879-fine-green-mesh-right.png) |
+
+The full matched 64-photo weak-detail and fixed 427-photo and
+known/unseen camera evaluations are queued behind the localized local
+endpoint. Plain spatial is the latest endpoint evaluated on the
+eight-photo and standing GFX scope.
