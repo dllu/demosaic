@@ -24,7 +24,8 @@ For a concise view of the evidence, start with the
 
 Documentation: [November 17 cleanup and PSNR refresh](2026-11-17-00-29-47-documentation-cleanup.md)
 
-Latest results are in the [scene spectral gain headroom review](2026-11-17-16-33-57-scene-spectral-gain-headroom.md).
+Latest data work is in the [expanded whole-scene corpus entry](2026-11-17-16-51-37-expanded-scene-corpus.md).
+See also the [scene spectral gain headroom review](2026-11-17-16-33-57-scene-spectral-gain-headroom.md).
 See also the [trained scene spectral gain review](2026-11-17-16-17-49-scene-spectral-detail.md).
 See also the [near and distant context intervention](2026-11-17-15-57-57-scene-context-extent.md).
 See also the [A-only fine innovation native review](2026-11-17-15-51-18-parent-innovation-native.md).

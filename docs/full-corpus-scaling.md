@@ -30,6 +30,8 @@ preserves both failures, exact replay and the completed20k state. The long arm
 continues from its original1k Adam/EMA/RNG state and100k horizon.
 This implements the [training-scale review](training-scale-pipeline-review-2026-11-17.md)
 and complements the [scene-context experiment](whole-scene-context-next-test.md).
+The separate [expanded scene corpus](expanded-scene-corpus.md) qualifies 90,692
+photos for future matched whole-scene training.
 
 [Exact admission, profiles, source snapshots and launch receipts](results/full-corpus-training-setup-v1/publication.json) ·
 [Independent saved-state/source audit](results/full-corpus-training-setup-v1/independent-review.json) ·

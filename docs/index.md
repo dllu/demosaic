@@ -35,6 +35,7 @@ Start with the [README](../README.md) for installation and inference.
 [Training scale review](training-scale-pipeline-review-2026-11-17.md).
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
+[expanded scene corpus](expanded-scene-corpus.md) ·
 [matched2k native review](whole-scene-context-native-review.md) ·
 [completed64-source/intervention study](whole-scene-context-development64.md) ·
 [completed camera panels](whole-scene-context-camera-review.md) ·

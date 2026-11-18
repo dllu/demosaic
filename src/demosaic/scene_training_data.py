@@ -11,6 +11,7 @@ import torch
 from torch.nn import functional as F
 
 from .experiments.artifacts import reference
+from .photo_epoch_order import PhotoEpochOrder, reader_policy
 from .prediction_archive import fingerprint
 from .scene_data import SceneObservation, observe_scene, sample_scene_recipe, scene_crop_boxes
 
@@ -35,7 +36,17 @@ class ScenePhotoDataset:
     Each selected cache's actual bytes are checked once per dataset instance.
     """
 
-    def __init__(self, manifest, *, seed, patch_size=256, crops_per_scene=4, reduction=1):
+    def __init__(
+        self,
+        manifest,
+        *,
+        seed,
+        patch_size=256,
+        crops_per_scene=4,
+        reduction=1,
+        photo_epoch_order=None,
+        photo_epoch_order_sha256=None,
+    ):
         self.manifest = Path(manifest)
         self.rows = [
             json.loads(line) for line in self.manifest.read_text().splitlines() if line.strip()
@@ -68,10 +79,28 @@ class ScenePhotoDataset:
         self.seed, self.patch_size, self.crops_per_scene = seed, patch_size, crops_per_scene
         self.reduction = reduction
         self.checked_files = set()
+        if photo_epoch_order is None and photo_epoch_order_sha256 is not None:
+            raise ValueError("Photographic epoch order hash requires its header")
+        self.photo_epoch_order = (
+            None
+            if photo_epoch_order is None
+            else PhotoEpochOrder(
+                photo_epoch_order,
+                self.manifest,
+                self.rows,
+                reader_policy(seed, 0, 0, 0, None),
+                expected_sha256=photo_epoch_order_sha256,
+            )
+        )
+
+    def source_row(self, index):
+        if self.photo_epoch_order is not None:
+            return self.photo_epoch_order.ordinary(index)
+        chooser = random.Random(scene_seed(self.seed, index, "source"))
+        return self.rows[chooser.randrange(len(self.rows))]
 
     def __getitem__(self, index):
-        chooser = random.Random(scene_seed(self.seed, index, "source"))
-        row = self.rows[chooser.randrange(len(self.rows))]
+        row = self.source_row(index)
         path = (self.manifest.parent / row["cache"]).resolve()
         if path not in self.checked_files:
             if reference(path)["sha256"] != row["cache_sha256"]:
@@ -117,4 +146,6 @@ class ScenePhotoDataset:
             "crop_fingerprints": {k: fingerprint(v) for k, v in crops.items()},
             "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
         }
+        if self.photo_epoch_order is not None:
+            metadata["photo_epoch_order_sha256"] = self.photo_epoch_order.sha256
         return SceneTrainingSample(observation, crops, metadata)

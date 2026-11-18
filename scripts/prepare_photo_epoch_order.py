@@ -11,7 +11,12 @@ import numpy as np
 import yaml
 
 from demosaic.data import CleanDataset
-from demosaic.photo_epoch_order import file_hash, reader_policy, training_policy
+from demosaic.photo_epoch_order import (
+    file_hash,
+    reader_policy,
+    shuffled_photo_rows,
+    training_policy,
+)
 from demosaic.train import training_domain
 
 READER_KEYS = (
@@ -81,10 +86,7 @@ def build_order(reader, config):
             old_visits[previous["id"]] += 1
             if offset == count:
                 epoch += 1
-                permutation = list(range(count))
-                random.Random(f"photo-epoch-v1:{reader.seed}:{epoch}:{manifest_hash}").shuffle(
-                    permutation
-                )
+                permutation = shuffled_photo_rows(count, reader.seed, epoch, manifest_hash)
                 offset = 0
             position = permutation[offset]
             offset += 1

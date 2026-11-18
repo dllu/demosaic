@@ -135,6 +135,10 @@ only context control uses exactly the same bin4 scenes. The separate100k scaling
 run retains bin4→geometry→area2 and its larger90,778-source pool. Gains from one
 data choice must not be credited to the other architecture experiment.
 
+The [expanded scene corpus](expanded-scene-corpus.md) adds 66,032 of the
+smaller bin4 caches, for 90,692 eligible photos. Shuffled source epochs
+preserve complete observation and crop lineage across matched arms.
+
 ## Prospective matched test
 
 The implemented [scene restorer](../src/demosaic/scene_restoration.py) compares

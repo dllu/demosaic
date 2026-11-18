@@ -1,0 +1,1556 @@
+{
+  "producer": {
+    "path": "/home/dllu/proj/demosaic/scripts/prepare_scene_epoch_corpus.py",
+    "sha256": "59c8faf81bce99912683f7adca3e5b4db6147cd699987b625432b010bf5cdf45"
+  },
+  "input": {
+    "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V124-source-loss-5600-to11200-review-v1/future-cohort-v1/manifest4.jsonl",
+    "sha256": "73bb83775dbd586037af779c4acf39319fd95ac5851bd4ef4c3facb1d3c73c63"
+  },
+  "pilot_train": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v1/manifest-train.jsonl",
+    "sha256": "7e8e181b3ca707bdf7c7461750450202ddb944d650c5afe359bca48466f2e60c"
+  },
+  "pilot_development": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/whole-scene-context-ablation-v1/manifest-development.jsonl",
+    "sha256": "a2367a977580b307c77e4f76a7ccb569b15edc8b55d901615c2e086d26f4d457"
+  },
+  "train_manifest": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-epoch-corpus-v1/manifest-train.jsonl",
+    "sha256": "1edcde03824d47bc6498e41578a0f0b337cadce0dbc5b6816332f464f368fcd1"
+  },
+  "photo_epoch_order": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-epoch-corpus-v1/photo-epoch-order.json",
+    "sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be"
+  },
+  "order_payload": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-epoch-corpus-v1/ordinary-photo-order.npy",
+    "sha256": "7fcc38ba47702a7649e4f45aa476f10882a522a386a8f36b1f79199c796bb68e"
+  },
+  "seed": 202611170021,
+  "steps": 50000,
+  "scenes_per_step": 2,
+  "crops_per_scene": 4,
+  "crop_native_side": 256,
+  "eligible": 90692,
+  "added": 66032,
+  "excluded": {
+    "val": 2303,
+    "test": 2255,
+    "pilot-development": 64,
+    "scene-size": 22
+  },
+  "coverage": {
+    "2000": {
+      "scene_draws": 4000,
+      "expanded_shuffled_epochs": 4000,
+      "expanded_replacement": 3916,
+      "pilot_replacement": 3701
+    },
+    "20000": {
+      "scene_draws": 40000,
+      "expanded_shuffled_epochs": 40000,
+      "expanded_replacement": 32397,
+      "pilot_replacement": 19778
+    },
+    "50000": {
+      "scene_draws": 100000,
+      "expanded_shuffled_epochs": 90692,
+      "expanded_replacement": 60509,
+      "pilot_replacement": 24239
+    }
+  },
+  "first_complete_pass_scene_draw": 90692,
+  "first_complete_pass_update": 45346,
+  "sample_checks": {
+    "short-512-to-767/RGGB": {
+      "index": 0,
+      "source_id": "69df1808d1a8e0fff9df357b7676717a1db2cb02",
+      "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/69/69df1808d1a8e0fff9df357b7676717a1db2cb02.npy",
+      "cache_sha256": "40c05344f96664b9e8ac2c153b10fd2369e600317219a84e8ff0a4914deddf61",
+      "cache_shape": [
+        569,
+        655,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 3,
+      "mirror_x": false,
+      "native_hw": [
+        654,
+        568
+      ],
+      "boxes_xywh": [
+        [
+          76,
+          222,
+          256,
+          256
+        ],
+        [
+          16,
+          26,
+          256,
+          256
+        ],
+        [
+          198,
+          314,
+          256,
+          256
+        ],
+        [
+          290,
+          266,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          0.8926535589720639,
+          1.0,
+          3.0072217478154424
+        ],
+        "camera_inverse": [
+          [
+            0.4440463632155791,
+            0.5493611508856515,
+            0.006592485898769352
+          ],
+          [
+            0.015309050515355352,
+            0.830061013692643,
+            0.1546299357920017
+          ],
+          [
+            0.044692245727781875,
+            0.20211509593322097,
+            0.7531926583389972
+          ]
+        ],
+        "exposure": 1.2479280449045378,
+        "shot": 0.0019736924309588246,
+        "read": 4.541444470127492e-05,
+        "black": 0.020683478197529803,
+        "noise_seed": 3434814513198111724
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          327,
+          284
+        ],
+        "dtype": "<f4",
+        "sha256": "7861af6dd05804d0fea5839f114dc4f799e6ff0669c1c951c7ba72e517bc75f7"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          327,
+          284
+        ],
+        "dtype": "<f4",
+        "sha256": "0049af367e32ebdddc28026eccbe7467e812e7cd16ce7746504b99aeeb33ed3a"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "1a803b87d39209d61c3d50246a0cfa85ee3ace166ee7355ad396b2a26fdaa17a"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "4dd18aba6d4e6d942e5efd3b11726d4830a0d078c2d300379d36f21875341844"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "48d1b8a050adb119e2f0f68f56dea05d708a94ae7d44d5cadec82908b79a0348"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "655f1219f2ad0fc98c8ad4116be79f629141c0434c06c04f45c5a4fb3d53d3b9"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "c3739f258d875ed1a2b5fc31fa128105aa58ad129c5f97592afcdeea4bebead3"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "05ca153e439fed7b0f98b2dc8e38813f8f5ffbfda7c8a811398445104dcc9e74"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "2c854d06acf5155c331fac8cec478ddc999d0b6e2e478f3554caa715154dd901"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "bceb6354d4920445c3cd11b2721816a175796ea8ca86f2a7f8d55f9ad3a7a8bc"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        327,
+        284
+      ],
+      "reader_seconds": 0.06239221594296396
+    },
+    "short-512-to-767/BGGR": {
+      "index": 1,
+      "source_id": "6ac65f5e18f108ed1058607e7756ae4c87b7a92d",
+      "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/6a/6ac65f5e18f108ed1058607e7756ae4c87b7a92d.npy",
+      "cache_sha256": "793cb48cca5b864423045d6c911199336e535f639ab4058bd05c0a49b0ad3f09",
+      "cache_shape": [
+        525,
+        813,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 1,
+      "mirror_x": false,
+      "native_hw": [
+        812,
+        524
+      ],
+      "boxes_xywh": [
+        [
+          66,
+          398,
+          256,
+          256
+        ],
+        [
+          84,
+          254,
+          256,
+          256
+        ],
+        [
+          252,
+          160,
+          256,
+          256
+        ],
+        [
+          74,
+          414,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "BGGR",
+        "wb": [
+          0.9316421936333061,
+          1.0,
+          2.999189454652537
+        ],
+        "camera_inverse": [
+          [
+            0.4168853755199019,
+            0.38608033854306534,
+            0.19703428593703276
+          ],
+          [
+            0.017806625794706217,
+            0.6534197193360018,
+            0.328773654869292
+          ],
+          [
+            0.0501511624903901,
+            0.10698234882493717,
+            0.8428664886846727
+          ]
+        ],
+        "exposure": 2.3217275185710897,
+        "shot": 0.003709332437273852,
+        "read": 6.260166377802037e-05,
+        "black": 0.03428389787557228,
+        "noise_seed": 17100512815414219
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          406,
+          262
+        ],
+        "dtype": "<f4",
+        "sha256": "5d8311abe1ebfc42dfddfd96acd52c479851d099f8638ebd54c26e08b094be6b"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          406,
+          262
+        ],
+        "dtype": "<f4",
+        "sha256": "63f6e7dd960fae260e600fd928e124bc889bbd4776f4c1a92650e9f06408dfc0"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "bd3a0b0dc3ed1b639fb6a6f57b5aa94cf626bc8c214a3b5f3e6f4926b5a9c8c1"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "480ff9c1851bf6e46a0b767b5d9997d740b3a5cff58a9e35551db860ac956a55"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "8ef596743136d08fafbdff66589c458e5875229dd0da741d1526bfac4e32c717"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "09f04ddbf9e64f7dd71ebb6ed72b59a4caeefe814d6db97147e8dce140dbd48c"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "9329cd3b0f3759313ffa5ca860e15e5ae9eb07386495022804079533dfb58411"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "1a64e323eaca0c31b2f5eef15bc2150e149ac416928ec0d9469a5833f7cc7f65"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "1be79f320fb2cd48529edffa3425d3e06bab09e0ca7254dff4aa604b3f25b001"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "434ea4a5916a85b0b5a8f8abff25b35011aa3c01e44a5170c90f25fcad21e766"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "cac7bd1bd1a3c1e89d684a2fc434fd951a1a6405300c36c7c69fc81d8a8a2b63"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        406,
+        262
+      ],
+      "reader_seconds": 0.03942330798599869
+    },
+    "short-at-least-768/BGGR": {
+      "index": 2,
+      "source_id": "16be91993004ae202ff3702506d7ec96e0258296",
+      "cache": "/mnt/external/demosaic/commons-incoming-20261016-v2-quarantine/extension4/prepared4/images/16/16be91993004ae202ff3702506d7ec96e0258296.npy",
+      "cache_sha256": "b7400183d7fda3e08a1fcfee3ee3b782311003f5130f6ffa1d1ca4e077afb488",
+      "cache_shape": [
+        823,
+        1233,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 1,
+      "mirror_x": true,
+      "native_hw": [
+        1232,
+        822
+      ],
+      "boxes_xywh": [
+        [
+          232,
+          264,
+          256,
+          256
+        ],
+        [
+          520,
+          82,
+          256,
+          256
+        ],
+        [
+          124,
+          322,
+          256,
+          256
+        ],
+        [
+          156,
+          862,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "BGGR",
+        "wb": [
+          1.587820286971814,
+          1.0,
+          2.8356266855415284
+        ],
+        "camera_inverse": [
+          [
+            0.6244067671010993,
+            0.2615563005327426,
+            0.11403693236615808
+          ],
+          [
+            0.11442479031992889,
+            0.5506258796481253,
+            0.3349493300319459
+          ],
+          [
+            0.11764206088312017,
+            0.06314885537602032,
+            0.8192090837408595
+          ]
+        ],
+        "exposure": 0.8961181544361397,
+        "shot": 0.0006547559302178966,
+        "read": 1.799937158254553e-06,
+        "black": 0.033902104897195785,
+        "noise_seed": 3187404842425911880
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          616,
+          411
+        ],
+        "dtype": "<f4",
+        "sha256": "5d53ab80f8e77085148a71714e98e3d6768f7837aefd62bacd81cd71157e5ec0"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          616,
+          411
+        ],
+        "dtype": "<f4",
+        "sha256": "27bb4fdd8d6490bcc39c1af60bd3d8cd3d8816af3f09fbb19d1af6a979d09e41"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "66e79a61a31ea5ba713605d4ad8f485fe70b940657dc1cee44de5e99b956af05"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "bcc914b3c2beb25d2272ae35b4200db6b98fe443eb6e010af82a3f7ca4b69fde"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "7a425f57fd2e6639818a475b32c470905d7147bc340ae500b0c3ee501fa385f7"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "7a425f57fd2e6639818a475b32c470905d7147bc340ae500b0c3ee501fa385f7"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "9329cd3b0f3759313ffa5ca860e15e5ae9eb07386495022804079533dfb58411"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "e1ae2ee80a9d106ec92205bc9353b68dbd3c5beec757064d4740dae68225877f"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "e38c58107cf2fdbb2f9a10069d896ea36f26de00f3c1939bf4c0a9d43186f129"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "6c0afc6ef8b4f4f6794b3712ae97a0db77462918abfd9460773d1a04e26c5607"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "b0e34aea84e5431c75d8448ab917563a252749c2dba35ac48d9a26323d232587"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        616,
+        411
+      ],
+      "reader_seconds": 0.11894494900479913
+    },
+    "short-512-to-767/GBRG": {
+      "index": 3,
+      "source_id": "fda87792a16333e1dbb51d2baa6a5ae34fe0505a",
+      "cache": "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/prepared4/images/fd/fda87792a16333e1dbb51d2baa6a5ae34fe0505a.npy",
+      "cache_sha256": "e13c36bb325bbfd0685e0823588c69c3e3fcbbc43bd920c6803fd64bf5ecda40",
+      "cache_shape": [
+        811,
+        648,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 0,
+      "mirror_x": true,
+      "native_hw": [
+        810,
+        648
+      ],
+      "boxes_xywh": [
+        [
+          26,
+          434,
+          256,
+          256
+        ],
+        [
+          246,
+          486,
+          256,
+          256
+        ],
+        [
+          22,
+          166,
+          256,
+          256
+        ],
+        [
+          80,
+          190,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "GBRG",
+        "wb": [
+          2.470124646959201,
+          1.0,
+          1.5569670041710637
+        ],
+        "camera_inverse": [
+          [
+            0.8548874014174705,
+            0.11004106446739409,
+            0.035071534115135396
+          ],
+          [
+            0.06547329891540318,
+            0.5996512933991522,
+            0.3348754076854446
+          ],
+          [
+            0.10661805844044946,
+            0.2780026618935742,
+            0.6153792796659763
+          ]
+        ],
+        "exposure": 0.3462940329307845,
+        "shot": 3.28822627652321e-05,
+        "read": 2.4626327823387215e-08,
+        "black": 0.008987748408088244,
+        "noise_seed": 379899232365033000
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          405,
+          324
+        ],
+        "dtype": "<f4",
+        "sha256": "fd610d92ff0ae78ccaa6f59c57b824ed6d96c684a5e9f786ec6cdf1b281aebfe"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          405,
+          324
+        ],
+        "dtype": "<f4",
+        "sha256": "b342a31f57f7698651e2a786c116c0379fa85b7e61c34b20479ca024084484bc"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "4612f2d4dda5a8d4b3beecc2a8936f97535389a59a4aa2622a691cfe5a0a5dce"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "1ae76dc896a01c3956a2694a16e3739d1a577d6e26f1f1b03450ba1c340fafc2"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "a583c7a24ccd04d9b307f39da6f89accd4df45ef8bb695ab254e2b318f442cd9"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "a583c7a24ccd04d9b307f39da6f89accd4df45ef8bb695ab254e2b318f442cd9"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "f06c4ab6c9c55c4c255079a6cc38cb0950555e579f464ff67053db487fcca33c"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "40affd967e6e9fde2f590f5659899c7525a880a59ad1633117bc341d5b28df76"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "316a9bfb52cd3fa5aaa6164be4a2a2c7c56bb914c852646214f477d07043509e"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "d3f9b9c320d67ee7f394de4cae3a07fc709d9231382f04df0fd187388b0aa352"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "2692a78c460f0beaf5c134d3bd5884ccbf3a121637614c6a55e11b542c6bae53"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        405,
+        324
+      ],
+      "reader_seconds": 0.06745385797694325
+    },
+    "short-512-to-767/GRBG": {
+      "index": 6,
+      "source_id": "770c8dd11713235c992f3c13537539fa93d24506",
+      "cache": "/mnt/external/demosaic/commons-incoming-20261016-v3-quarantine/extension4/prepared4/images/77/770c8dd11713235c992f3c13537539fa93d24506.npy",
+      "cache_sha256": "290f87940d23bbe4c4580a828cc5a92c54f81749d465a2a3709589c7087de62f",
+      "cache_shape": [
+        667,
+        998,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 0,
+      "mirror_x": true,
+      "native_hw": [
+        666,
+        998
+      ],
+      "boxes_xywh": [
+        [
+          560,
+          324,
+          256,
+          256
+        ],
+        [
+          650,
+          68,
+          256,
+          256
+        ],
+        [
+          188,
+          222,
+          256,
+          256
+        ],
+        [
+          630,
+          144,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "GRBG",
+        "wb": [
+          1.857602694443838,
+          1.0,
+          1.2278849644622583
+        ],
+        "camera_inverse": [
+          [
+            0.8039128894202898,
+            0.08493980162692435,
+            0.11114730895278585
+          ],
+          [
+            0.0223856302092345,
+            0.8630253214431729,
+            0.11458904834759259
+          ],
+          [
+            0.012266321581226269,
+            0.1625125290842352,
+            0.8252211493345385
+          ]
+        ],
+        "exposure": 0.4300916669445678,
+        "shot": 8.897056476206511e-05,
+        "read": 1.456956643169451e-08,
+        "black": 0.039256519227752806,
+        "noise_seed": 2614589394915788238
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          333,
+          499
+        ],
+        "dtype": "<f4",
+        "sha256": "29af48582aec0ac6f71f04595e3de52437f0593cacd185be74cf650584baf7c7"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          333,
+          499
+        ],
+        "dtype": "<f4",
+        "sha256": "67d91530471e538fa81d3726e9f94553628bfbde0b85aed5ed366294b1355d67"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "0d4ac001ceb70bfe671a288b26c632dd4fc79b5916825481b4b1110a230a6a64"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "e4cd5ae9639906bc22b835229329285d500a3b2c56b6a17b71c70e57256760b5"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "459141b26431e49d707f13e33fc7de95847ccc49c603bbd0103017b280f2f9f4"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "459141b26431e49d707f13e33fc7de95847ccc49c603bbd0103017b280f2f9f4"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "61e9ac3c868af220722340c11275c0ae5362be8eac93bb91068a43bf9871b0d2"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "8d1c66670421398f8375fb6767f526b72c1ac0c932660b9cb1e7228628dedd4c"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "6ce853aafab56bd30e8fddbdac269180da68498839cac66e9b951ab042066877"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "1548f3a0234760f8a334c2ed8bb9903b0ff691e83a15672da934ca89ed11ff27"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "2f681432b91e539ff689a6ca0123b44ab6b5a582bcd5388b51b8d424ab844cee"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        333,
+        499
+      ],
+      "reader_seconds": 0.0780907750595361
+    },
+    "short-at-least-768/RGGB": {
+      "index": 10,
+      "source_id": "a36bfbade818eb30a0f48a371d1ea7a1653bcb05",
+      "cache": "/mnt/external/demosaic/commons-post4557-preparation-20261019-v1/work/outputs/prepared4/images/a3/a36bfbade818eb30a0f48a371d1ea7a1653bcb05.npy",
+      "cache_sha256": "9556c27cf4d4eb14ec58cca974177e07457f4f982331e4a507920ed2ba2445cf",
+      "cache_shape": [
+        1295,
+        971,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 2,
+      "mirror_x": false,
+      "native_hw": [
+        1294,
+        970
+      ],
+      "boxes_xywh": [
+        [
+          312,
+          778,
+          256,
+          256
+        ],
+        [
+          50,
+          272,
+          256,
+          256
+        ],
+        [
+          496,
+          918,
+          256,
+          256
+        ],
+        [
+          18,
+          416,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "RGGB",
+        "wb": [
+          2.99581105368941,
+          1.0,
+          1.851535046029196
+        ],
+        "camera_inverse": [
+          [
+            0.4258743534020012,
+            0.39826675419277724,
+            0.17585889240522157
+          ],
+          [
+            0.10157417466692614,
+            0.7005835317815288,
+            0.19784229355154515
+          ],
+          [
+            0.10909886633384379,
+            0.24835888159766203,
+            0.6425422520684942
+          ]
+        ],
+        "exposure": 0.6219436105480979,
+        "shot": 6.93771208692915e-05,
+        "read": 3.339946647914261e-08,
+        "black": 0.006437006248834411,
+        "noise_seed": 110625901203240139
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          647,
+          485
+        ],
+        "dtype": "<f4",
+        "sha256": "bbb17248b928b9ad744b63abf5f90bb753f69a99b4cb5b5ed94f0d0457c79708"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          647,
+          485
+        ],
+        "dtype": "<f4",
+        "sha256": "969130acf4885e07dc7330e53a96753687b6bd6d319de4747c5136976ce73945"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "4607135dbfe8a9b1f9da31b28bde31b30fe3fd2cec8a6354c86d546dba4b5072"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "0f918f5e4a9f422f98b933a3119f32182286306d61a38e3a9d66da2de6da06af"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "fe1aebeb1a789f6b60c35c43909ae2483d1293f00ea01993e46abd2ffe70f4ee"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "fe1aebeb1a789f6b60c35c43909ae2483d1293f00ea01993e46abd2ffe70f4ee"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "cc44447e99e47868d95c2656cad237927cd3dc6bcba08e5a3269cf66b496c439"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "fa0814b571a60b216a93a89efec5debb2a9f53ff3e45b0a3a69ca2c0535904cf"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "422cb27641f3d07b0befdce7ca68bf674a17e33ff16e90c9e095388d01380e3f"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "8767fb7a7523f1c3785b59f8bdcdd4390fade1ed33337d786d2cb7a394ce99a1"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "33c9ce97f1e3255763553ce82930f65f63697ae801767201317953ab4ab163f6"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        647,
+        485
+      ],
+      "reader_seconds": 0.12161732302047312
+    },
+    "short-at-least-768/GBRG": {
+      "index": 23,
+      "source_id": "15ba807b114ce5cdbd9aeb663e7caad45b1a1093",
+      "cache": "/mnt/external/demosaic/commons-qi-local-preparation-memory-recovery-20261019-v1/work/outputs/prepared4/images/15/15ba807b114ce5cdbd9aeb663e7caad45b1a1093.npy",
+      "cache_sha256": "4f411e7cb4bf63a08a8087f3e51d1463e408470563c78fda3c06bbf985c70828",
+      "cache_shape": [
+        1189,
+        792,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 0,
+      "mirror_x": false,
+      "native_hw": [
+        1188,
+        792
+      ],
+      "boxes_xywh": [
+        [
+          162,
+          680,
+          256,
+          256
+        ],
+        [
+          166,
+          740,
+          256,
+          256
+        ],
+        [
+          252,
+          834,
+          256,
+          256
+        ],
+        [
+          300,
+          216,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "GBRG",
+        "wb": [
+          1.2793469000511062,
+          1.0,
+          1.448814783037982
+        ],
+        "camera_inverse": [
+          [
+            0.35,
+            0.4669491405569308,
+            0.18305085944306923
+          ],
+          [
+            0.07876067176077144,
+            0.8633692132494866,
+            0.05787011498974201
+          ],
+          [
+            0.06063798828261801,
+            0.2714083000037549,
+            0.6679537117136272
+          ]
+        ],
+        "exposure": 2.4900110539091123,
+        "shot": 5.69758033816649e-05,
+        "read": 2.0290681917053065e-08,
+        "black": 0.04716102176681839,
+        "noise_seed": 2286165137221183548
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          594,
+          396
+        ],
+        "dtype": "<f4",
+        "sha256": "58efb39f352014881b5119e9d72a5cd582538cc9d472651f40e1c31415b42910"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          594,
+          396
+        ],
+        "dtype": "<f4",
+        "sha256": "b11c166a75bacecb8bd56c57263f7fa2ea4ddbdb6bab80b71496a49c5f78d935"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "f53f9fc56534fe774197262814e8b8f842ae967839b1e6ae0687ffb532185c2a"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "74e87ea0cc47101dd15665d94c2f1fa9fd7f9cfc7849cceab6a34552dce19a7d"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "3c763600aa6f4005c6511c91de1be35d31d5f805b8794d7cc84f22fc0b034085"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "41c000207ad6c177c47bd070be6217cbbe71d6c562057d3a6ddb54ebe0f21dac"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "f06c4ab6c9c55c4c255079a6cc38cb0950555e579f464ff67053db487fcca33c"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "971c02886bfb8844322b277136aaa871b37013d05e9de711047d464742eb170e"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "94ff251c0217fd5c96f836643b830ec967583f5c075839445727a7c9db475945"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "87e0778fc6d799fe12fe3d95e08498a4d058ca17ae3b4d2ffdddb7e2fe18dee6"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "9c9071b0941de5b58b961c13b832aa6a9c6b8bfca8489f7a55bd6305a9852cf9"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        594,
+        396
+      ],
+      "reader_seconds": 0.05891187395900488
+    },
+    "short-at-least-768/GRBG": {
+      "index": 35,
+      "source_id": "039c4f01e4ad304d8781c9a32b889f4b8db59d73",
+      "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/03/039c4f01e4ad304d8781c9a32b889f4b8db59d73.npy",
+      "cache_sha256": "f9d7cd40aa7da0602f718bca27d8629a5d1226c6eabb203c6d071661cae59f73",
+      "cache_shape": [
+        979,
+        1469,
+        3
+      ],
+      "reduction": 1,
+      "D4_quarter_turns": 2,
+      "mirror_x": true,
+      "native_hw": [
+        978,
+        1468
+      ],
+      "boxes_xywh": [
+        [
+          688,
+          448,
+          256,
+          256
+        ],
+        [
+          234,
+          378,
+          256,
+          256
+        ],
+        [
+          1016,
+          386,
+          256,
+          256
+        ],
+        [
+          938,
+          190,
+          256,
+          256
+        ]
+      ],
+      "recipe": {
+        "pattern": "GRBG",
+        "wb": [
+          0.6870138071396049,
+          1.0,
+          1.5681587733573203
+        ],
+        "camera_inverse": [
+          [
+            0.7980029720118936,
+            0.19978848440583746,
+            0.002208543582268896
+          ],
+          [
+            0.057119025839797874,
+            0.6661204047223039,
+            0.2767605694378981
+          ],
+          [
+            0.1072546484326682,
+            0.2294407760282181,
+            0.6633045755391137
+          ]
+        ],
+        "exposure": 0.4977252513108891,
+        "shot": 0.00014220062457281283,
+        "read": 1.9229205199067704e-07,
+        "black": 0.022985075166184907,
+        "noise_seed": 2022557957402226122
+      },
+      "scene_packed": {
+        "shape": [
+          4,
+          489,
+          734
+        ],
+        "dtype": "<f4",
+        "sha256": "a58b49e768e1ecdffaf8c56262a0939252a64a16fb698e167ffaaa2bd6cffe5e"
+      },
+      "scene_variance": {
+        "shape": [
+          4,
+          489,
+          734
+        ],
+        "dtype": "<f4",
+        "sha256": "4ee2c6bd47bcf5560e540bbc37fce3925881d9275a9ed0629117817b0d1c6a8e"
+      },
+      "crop_fingerprints": {
+        "packed": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "631c89355cb11f9ef1a20004a4b1bc36ba331d0ee5db883597d082d0086f8ae6"
+        },
+        "variance": {
+          "shape": [
+            4,
+            4,
+            128,
+            128
+          ],
+          "dtype": "<f4",
+          "sha256": "229495d7759ab2a8a0933ca9647f659b25a51494fd8e541541238021303093c4"
+        },
+        "target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "3102637744e33e27ee8c2ffbe804963be9e1a730a20999878500dcdd59f2390b"
+        },
+        "sensor_target": {
+          "shape": [
+            4,
+            3,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "sha256": "3102637744e33e27ee8c2ffbe804963be9e1a730a20999878500dcdd59f2390b"
+        },
+        "colors": {
+          "shape": [
+            4,
+            4
+          ],
+          "dtype": "<i8",
+          "sha256": "61e9ac3c868af220722340c11275c0ae5362be8eac93bb91068a43bf9871b0d2"
+        },
+        "wb": {
+          "shape": [
+            4,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "cb30d676024ba5eb90177d4802c1e055214fc5413648653c99a0c39a4559c623"
+        },
+        "matrix": {
+          "shape": [
+            4,
+            3,
+            3
+          ],
+          "dtype": "<f4",
+          "sha256": "6d2db8fdbf1c25311aff6c24ca9dafd5811042564a6ea56feb8dc52295cebedf"
+        },
+        "shot": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "e4cb2bee4f48f8aae1403b0de54f915ca6ca609c68e90fc0bf292e420743e7af"
+        },
+        "read": {
+          "shape": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "sha256": "f7e8963f25defca04d58fcdc67a6213c072b3420246c81270c8cc7ac9bc191ae"
+        }
+      },
+      "scope": "One complete camera/noise observation; preview and native crops share actual RAW samples. Targets never enter scene encoding. Global D4 only; no independent crop resize/homography.",
+      "photo_epoch_order_sha256": "572eb9a74f3f4f499789fd34682ab8066f5397e652d316cce182d4d0da8684be",
+      "preview_hw": [
+        489,
+        734
+      ],
+      "reader_seconds": 0.18558582896366715
+    }
+  },
+  "scope": "Declared future source order and actual CPU reader/preview checks only. No model forwards, training, inference or quality measurement."
+}

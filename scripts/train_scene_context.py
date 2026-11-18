@@ -112,14 +112,28 @@ def checkpoint(model, plan, step, ema, target, *, optimizer):
     return reference(target)
 
 
-def preflight(plan, output):
-    output.mkdir()
+def training_dataset(plan):
+    order = plan.get("photo_epoch_order")
     dataset = ScenePhotoDataset(
         checked(plan["train_manifest"]),
         seed=plan["data_seed"],
         patch_size=plan["patch_size"],
         crops_per_scene=plan["crops_per_scene"],
+        photo_epoch_order=checked(order) if order is not None else None,
+        photo_epoch_order_sha256=order["sha256"] if order is not None else None,
     )
+    if dataset.photo_epoch_order is not None:
+        dataset.photo_epoch_order.require_training(
+            {"steps": plan["steps"], "batch_size": plan["scenes_per_step"]}
+        )
+    return dataset
+
+
+def preflight(plan, output):
+    output.mkdir()
+    dataset = training_dataset(plan)
+    first = 0 if dataset.photo_epoch_order is not None else 2**30
+    first_update = first if dataset.photo_epoch_order is not None else first + 1
     results = []
     for mode in plan["modes"]:
         model = make_model(plan, mode)
@@ -132,7 +146,7 @@ def preflight(plan, output):
                 lambda *_, count=calls: count.__setitem__("DINO", count["DINO"] + 1)
             ),
         ]
-        sample = dataset[2**30]
+        sample = dataset[first]
         obs = sample.observation
         batch = {k: v.cuda() for k, v in sample.crops.items()}
         model.base.set_noise(obs.recipe.shot, obs.recipe.read)
@@ -166,10 +180,12 @@ def preflight(plan, output):
         optimizer = optimizer_for(model, plan)
         began = time.monotonic()
         losses = []
+        observations = []
         for step in range(2):
             optimizer.zero_grad(set_to_none=True)
             for j in range(plan["scenes_per_step"]):
-                sample = dataset[2**30 + 1 + step * plan["scenes_per_step"] + j]
+                sample = dataset[first_update + step * plan["scenes_per_step"] + j]
+                observations.append(sample.metadata)
                 _, loss, _ = sample_forward(model, sample, plan)
                 assert torch.isfinite(loss)
                 (loss / plan["scenes_per_step"]).backward()
@@ -206,6 +222,7 @@ def preflight(plan, output):
                 "actual_calls": calls,
                 "discarded_updates": 2,
                 "losses": losses,
+                "training_observations": observations,
                 "seconds": time.monotonic() - began,
                 "roundtrip_checkpoint": bound,
                 "DINO_unchanged": True,
@@ -222,21 +239,19 @@ def preflight(plan, output):
             "all_modes_passed": True,
             "script": reference(__file__),
             "owner": owner_identity(),
-            "scope": "All three actual model/optimizer/roundtrip checks passed. Full production restarts from untouched V120 EMA and zero-output adapters, never from these discarded updates.",
+            "scope": "All declared model, optimizer and roundtrip checks passed. These discarded updates are separate from production initialization and quality evaluation.",
         },
     )
-    print(results, flush=True)
+    print(
+        [{k: v for k, v in row.items() if k != "training_observations"} for row in results],
+        flush=True,
+    )
 
 
 def train(plan, mode, output):
     output.mkdir(parents=True)
     write_json(output / "owner.json", owner_identity())
-    dataset = ScenePhotoDataset(
-        checked(plan["train_manifest"]),
-        seed=plan["data_seed"],
-        patch_size=plan["patch_size"],
-        crops_per_scene=plan["crops_per_scene"],
-    )
+    dataset = training_dataset(plan)
     model = make_model(plan, mode)
     optimizer = optimizer_for(model, plan)
     ema = {k: v.detach().clone() for k, v in model.restoration_state_dict().items()}

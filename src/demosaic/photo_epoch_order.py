@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import random
 from pathlib import Path
 
 import numpy as np
@@ -10,6 +11,12 @@ import numpy as np
 def file_hash(path):
     with Path(path).open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def shuffled_photo_rows(count, seed, epoch, manifest_hash):
+    rows = list(range(count))
+    random.Random(f"photo-epoch-v1:{seed}:{epoch}:{manifest_hash}").shuffle(rows)
+    return rows
 
 
 def reader_policy(seed, flat, synthetic, reviewed, catalogue_hash):
