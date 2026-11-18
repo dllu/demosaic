@@ -11,6 +11,10 @@ uneven and overly regular sections, and the independent reference
 captures cannot establish the location of every crossing.
 [Bound data, native crops and executed code](results/local-donor-mesh-v1/publication.json).
 
+The [crop-placement follow-up](local-mesh-stability.md) tests how moving the
+query changes phase and support and packages the overlapping fit as an opt-in
+crop helper.
+
 ## Donor frequencies and local evidence
 
 An exterior window fits an affine background and noise scale on one

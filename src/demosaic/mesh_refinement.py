@@ -1,0 +1,94 @@
+"""Opt-in RAW-supported correction for a crop of a fine, two-direction mesh."""
+
+import numpy as np
+
+from ._mesh_frequency import infer_prior, query_phases
+from ._mesh_profiles import extra_query_check, supported_patch
+from .cfa import PATTERNS
+
+TRANSLATIONS = ((0, 0),) + tuple(
+    shift
+    for distance in (2, 8, 16)
+    for shift in ((distance, 0), (-distance, 0), (0, distance), (0, -distance))
+)
+
+
+def _crop(array, box, scale=1):
+    x, y, width, height = (v // scale for v in box)
+    return array[..., y : y + height, x : x + width]
+
+
+def _contains(outer, inner):
+    x, y, width, height = outer
+    u, v, w, h = inner
+    return x <= u and y <= v and u + w <= x + width and v + h <= y + height
+
+
+def refine_local_raw_mesh(parent, scene, variance, colors, box, roi, *, shot, read, donor_span=80):
+    """Return camera-linear RGB for ``roi`` using Bayer evidence in ``box``.
+
+    ``parent`` is one float RGB prediction shaped [3, 2H, 2W]. ``scene`` and
+    ``variance`` are co-registered packed Bayer arrays shaped [4, H, W].
+    ``colors`` gives their CFA plane colors. ``box`` is an even-aligned 256×256
+    fitting window. Both rectangles use native (x, y, width, height) pixels.
+    ``shot`` and ``read`` are the RAW variance coefficients. The surrounding
+    region should contain several nearby ``donor_span``-pixel windows.
+
+    Donors propose frequencies. The query establishes phase, verifies both
+    directions on disjoint sensor samples, and limits the eligible footprint.
+    Unsupported crops return the parent pixels. Requires the ``eval`` extra.
+    """
+    if scene.ndim != 3 or scene.shape[0] != 4 or variance.shape != scene.shape:
+        raise ValueError("scene and variance must be packed Bayer arrays with matching shapes")
+    width, height = 2 * scene.shape[2], 2 * scene.shape[1]
+    if parent.shape != (3, height, width) or not np.issubdtype(parent.dtype, np.floating):
+        raise ValueError("parent must be a floating-point camera RGB prediction matching the RAW")
+    if tuple(colors) not in PATTERNS.values():
+        raise ValueError("colors must describe a Bayer CFA pattern")
+    if not np.isfinite((shot, read)).all() or shot < 0 or read < 0 or shot + read == 0:
+        raise ValueError("shot and read must describe positive RAW noise variance")
+    if donor_span < 64 or donor_span % 2:
+        raise ValueError("donor_span must be even and at least 64 native pixels")
+    left, top, w, h = box
+    field = (0, 0, width, height)
+    if (w, h) != (256, 256) or left % 2 or top % 2 or not _contains(field, box):
+        raise ValueError("box must be an even-aligned 256×256 native window inside the input")
+    if min(roi[2:]) <= 0 or not _contains(box, roi):
+        raise ValueError("roi must have positive area and be contained in box")
+    source = _crop(parent, roi)
+    noise = {"shot": shot, "read": read}
+    prior = infer_prior(scene, colors, box, noise, span=donor_span)
+    if prior is None:
+        return source
+    corrections = []
+    for dx, dy in TRANSLATIONS:
+        query = (left + dx, top + dy, w, h)
+        if not _contains(field, query) or not _contains(query, roi):
+            continue
+        raw = _crop(scene, query, 2)
+        offset = dx // 2
+        carriers, reserve, scores = query_phases(raw, colors, prior, noise, packed_offset=offset)
+        current = _crop(parent, query)
+        restored = current
+        if max(scores) >= 3:
+            try:
+                if extra_query_check(raw, colors, carriers, shot, read, offset):
+                    restored = supported_patch(
+                        current,
+                        raw,
+                        _crop(variance, query, 2),
+                        colors,
+                        carriers,
+                        reserve,
+                        shot,
+                        read,
+                    )
+            except np.linalg.LinAlgError:
+                # A degenerate candidate has no reproducible amplitude estimate.
+                pass
+        inside = (roi[0] - query[0], roi[1] - query[1], roi[2], roi[3])
+        corrections.append(_crop(restored - current, inside))
+    active = sum(bool(np.any(delta)) for delta in corrections)
+    if len(corrections) < 3 or 2 * active <= len(corrections):
+        return source
+    return source + np.median(np.stack(corrections), axis=0)

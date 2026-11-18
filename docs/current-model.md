@@ -109,6 +109,13 @@ held-out RAW error, and the native fit shows a faint lattice. The right
 crop and non-fence controls return their parents after the extra check.
 ISO6400 recovery on the retained synthetic panel stays weak.
 
+The [overlapping, sensor-anchored mesh fit](local-mesh-stability.md) keeps
+the left-cab lattice across crop shifts and returns the five other control
+views to the local-only parent. On a fresh ISO400 occluded-wire panel it
+recovers 76.32% of the target weak contrast against 31.02% for the trunk.
+Every synthetic ISO6400 case keeps the parent. The opt-in crop API still
+has limited support for broken or changing wire geometry.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

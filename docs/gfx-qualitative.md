@@ -94,6 +94,9 @@ historical boards. Use these reports for the current completed comparisons:
   admits both measured directions on the coarse fence. The extra query
   check rejects the building correction and returns the sky and foliage
   to the local-only 2k parent.
+- [Crop-placement mesh review](local-mesh-stability.md#standing-gfx100s-crops)
+  keeps the coarse fence correction across 13 overlapping queries. The
+  combined fit returns sky, building and foliage to the local-only 2k parent.
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The
