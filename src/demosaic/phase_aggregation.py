@@ -85,11 +85,7 @@ class PhaseAggregateOperator:
         if not np.isfinite([angle, offset]).all():
             raise ValueError("Require finite A-only edge geometry")
         x, y = 2 * (xx + 0.5) / w - 1, 2 * (yy + 0.5) / h - 1
-        self.side = (
-            x * np.cos(angle) + y * np.sin(angle) > offset
-            if config.edge_stopping
-            else np.zeros(self.shape, bool)
-        )
+        self.side = self._regions(candidate, x, y, angle, offset)
         self.ay, self.ax = [
             np.unique(np.r_[np.arange(0, n, config.query_stride), n - 1]) for n in self.shape
         ]
@@ -100,8 +96,9 @@ class PhaseAggregateOperator:
         )
         self.spatial_coordinates = self.coordinates[1:]
         self.groups = []
+        regions = np.unique(self.side)
         for color in range(3):
-            for side in (False, True):
+            for side in regions:
                 indices = np.flatnonzero(
                     (self.mask & (self.colors == color) & (self.side == side)).ravel()
                 )
@@ -121,6 +118,11 @@ class PhaseAggregateOperator:
                 group["phase_denominator"] = self._phase_query(histogram)
                 group["local_denominator"] = self._spatial_query(histogram.sum(0))
                 self.groups.append(group)
+
+    def _regions(self, candidate, x, y, angle, offset):
+        if self.config.edge_stopping:
+            return x * np.cos(angle) + y * np.sin(angle) > offset
+        return np.zeros(self.shape, bool)
 
     def _histogram(self, group, values):
         h, w = self.shape

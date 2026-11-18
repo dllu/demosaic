@@ -122,6 +122,10 @@ historical boards. Use these reports for the current completed comparisons:
   guide fixed, reducing correction RMS from 31.55 to 3.92 DN16.
   The full-frame guide arm keeps the sky, building and foliage at
   V120 and retains the visible coarse crossings.
+- [Surface-constrained phase averaging](surface-phase-aggregation.md#native-gfx100s-review)
+  keeps the same sky, building and foliage outputs with full-frame
+  guides. The energy cap reduces added color in the spectral building
+  arm and retains the visible coarse-fence crossings.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

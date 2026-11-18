@@ -142,6 +142,11 @@ has repeatedly come with extra flat-region error or false color. The
    with similar weak response. Dropping the amplitude penalty in a
    fixed-shape matched score produces more quiet error and less
    recovery after quiet matching, even with exact center frequencies.
+   [Same-color phase pooling](surface-phase-aggregation.md) gives
+   a small ISO400 response gain with the original wave gate on two
+   geometry sets. A whole-query energy cap limits RMS, with peak
+   rail errors still above the wave refit. Testing peak or local
+   energy control should preserve the independent RAW gate.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched

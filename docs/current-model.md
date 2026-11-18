@@ -214,6 +214,13 @@ when the spectral guide is held fixed. The finer cab mesh still
 falls back to V120, and removing the held-out amplitude penalty
 weakens recovery at matched quiet error.
 
+[Surface-constrained phase averaging](surface-phase-aggregation.md)
+uses the existing wave gate and a per-color energy cap. ISO400 weak
+response rises from 4.80% to 5.03% on the main panel and from 6.44%
+to 6.98% on separate geometries, with lower quiet RMS in both.
+Increment error changes only slightly. Forced-guide rail peaks rise
+despite similar RMS, and the fine cab mesh remains unresolved.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

@@ -7,6 +7,10 @@ changes the validation and background models inside the query. It
 also checks fixed-bracket guides and exact nominal center frequencies
 to separate missed nominations from losses during query delivery.
 
+The [phase-averaging follow-up](surface-phase-aggregation.md) reuses
+the two-boundary nuisance and the wave gate to limit which local
+measurement estimates reach the output.
+
 ## Disjoint evidence and the delivery comparison
 
 The predictive score compares the held-out errors of a fixed wave

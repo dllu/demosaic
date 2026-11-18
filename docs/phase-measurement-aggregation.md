@@ -14,6 +14,11 @@ is available with explicit matched H1 controls and its measured costs.
 [Complete receipts and executed sources](results/phase-aggregation-v1/publication.json).
 [Viewing, absolute-role and follow-up evidence](results/phase-aggregation-v1/publication-addendum.json).
 
+The [surface-constrained follow-up](surface-phase-aggregation.md)
+tests phase averages with two fitted boundaries and a shared wave
+gate. It measures a small ISO400 response gain on separate
+geometries and larger peak rail errors.
+
 The first figures/table below describe the **initial innovation-projection arm**.
 The current default applies a consistent conditional-null projection. Its
 separate matched48-input audit/native review is also complete, with similar

@@ -1288,6 +1288,7 @@ def restore_local_waves(
     compare_joint_colour_support=False,
     compare_pooled_refit=False,
     compare_matched_refit=False,
+    compare_phase_averages=False,
     recenter_phase_guides=False,
     phase_guide_edge_guard_px=0,
     phase_guide_crosscheck=False,
@@ -1398,6 +1399,21 @@ def restore_local_waves(
         )
     ):
         raise ValueError("Matched refit requires shared profiles and default spatial weights")
+    if type(compare_phase_averages) is not bool or (
+        compare_phase_averages
+        and (
+            not compare_pooled_refit
+            or config.amplitude_window
+            or config.support_unit != "direction"
+            or bright_cross_edge_weight
+            or phase_edge_side == "profiles"
+            or guide_frequencies_xy is None
+            or guide_phase_hessians_xy is not None
+            or recenter_phase_guides
+            or phase_drift_search
+        )
+    ):
+        raise ValueError("Phase averages require fixed planar guides and shared direction profiles")
     if guide_frequencies_xy is not None:
         guide_frequencies_xy = _guide_frequencies(guide_frequencies_xy, config.family_degrees)
     hessians = _validate_phase_hessians(
@@ -1455,6 +1471,14 @@ def restore_local_waves(
     modes += matched_modes
     if compare_matched_refit:
         from .matched_query_evidence import matched_query_scores
+    average_modes = (
+        ("square-average", "tangent-average", "tangent-predictive-gate")
+        if compare_phase_averages
+        else ()
+    )
+    modes += average_modes
+    if compare_phase_averages:
+        from .surface_phase_aggregation import SurfacePhaseProposal
     outputs = {(mode, float(t)): parent.copy() for mode in modes for t in thresholds}
     if shot + read == 0:
         return outputs, {"patches": 0, "identity_zero_noise": True}
@@ -1593,7 +1617,27 @@ def restore_local_waves(
                     for a, b, distance in matched
                     if _compatible_drifts(candidates, a, b, xx, yy)
                 ]
+            units = _match_units(*candidates, matched, config.match_native_bins)
+            if compare_phase_averages and units:
+                proposals = {
+                    (fold, index, tangent): SurfacePhaseProposal(
+                        candidates[fold],
+                        tile,
+                        layout,
+                        validation[fold],
+                        reliability[fold],
+                        index,
+                        config,
+                        tangent=tangent,
+                    )
+                    for pair in units
+                    for fold, index in enumerate(pair[:2])
+                    for tangent in (False, True)
+                }
             rgb = parent[:, y : y + n, x : x + n]
+            if compare_phase_averages and units:
+                yy, xx = np.indices(tile.shape)
+                parent_cfa = rgb[layout, yy, xx]
             if spatial is None:
                 if conditional_delivery:
                     from .neural_nuisance import conditional_components
@@ -1606,7 +1650,6 @@ def restore_local_waves(
             else:
                 values = [s.components(tile, rgb) for s in spatial]
                 components = [value[0][0] if conditional_delivery else value[1] for value in values]
-            units = _match_units(*candidates, matched, config.match_native_bins)
             pooled_scores = (
                 [pooled_support_score(scores[0][0][a], scores[1][0][b]) for a, b, _ in units]
                 if compare_pooled_support
@@ -1700,6 +1743,18 @@ def restore_local_waves(
                     (mode, pooled_support_score(folds[0][a], folds[1][b]))
                     for mode, folds in oriented_scores.items()
                 ]
+                if compare_phase_averages:
+                    measured = []
+                    for tangent in (False, True):
+                        left, right = proposals[0, a, tangent], proposals[1, b, tangent]
+                        pooled_raw = pooled_support_score(left.scores, right.scores)
+                        estimate = (
+                            reliability[0][a, :, None, None] * left.correction(parent_cfa, layout)
+                            + reliability[1][b, :, None, None]
+                            * right.correction(parent_cfa, layout)
+                        ) / 2
+                        measured.append((estimate, pooled_raw))
+                    measured.append((measured[-1][0], pooled))
                 if compare_phase_agreement:
                     slices = [slice(*c.unit_slices[index]) for c, index in zip(candidates, (a, b))]
                     agreement = phase_profile_agreement(
@@ -1734,6 +1789,13 @@ def restore_local_waves(
                         ):
                             totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
                                 fitted * support_weight(contrast, threshold) * blend
+                            )
+                    if compare_phase_averages:
+                        for mode, (measured_component, local_score) in zip(
+                            average_modes, measured, strict=True
+                        ):
+                            totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
+                                measured_component * support_weight(local_score, threshold) * blend
                             )
                     for mode, score in oriented_pooled:
                         totals[mode, float(threshold)][:, y : y + n, x : x + n] += (
@@ -1834,6 +1896,7 @@ def restore_local_waves(
         **({"shrink_phase_fit": True} if shrink_phase_fit else {}),
         **({"compare_pooled_support": True} if compare_pooled_support else {}),
         **({"compare_matched_refit": True} if compare_matched_refit else {}),
+        **({"compare_phase_averages": True} if compare_phase_averages else {}),
         **({"compare_phase_agreement": True} if compare_phase_agreement else {}),
         **({"compare_oriented_support": True} if compare_oriented_support else {}),
         **({"compare_joint_colour_support": True} if compare_joint_colour_support else {}),
