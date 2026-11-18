@@ -35,6 +35,7 @@ preserves its original comparison pixels and provenance.
 | [Joint-color support](joint-fine-colour-support.md) | Reduced cab tint with lattice retained; extra synthetic weak response lost |
 | [Fresh colored-wire test](coloured-fine-wire-benchmark.md) | Small gain almost entirely neutral; signed-color weak recovery remains missing |
 | [A-only innovation validation](parent-innovation-validation.md) | Both ROIs, profiles and JPEGs viewed. Slight modulation changes retain a soft lattice with incomplete crossings |
+| [Spatial preview intervention](scene-context-extent.md) | Both ROIs, profiles and JPEGs viewed. Near and distant context blurs change tones slightly. Fine crossings remain incomplete |
 
 The protected pair is **DSCF3842 ISO6400 / DSCF3835 ISO100 f/5.6**, with both
 camera JPEGs. The separate reference differs in aperture, exposure and moving

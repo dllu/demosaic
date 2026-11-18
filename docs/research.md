@@ -18,6 +18,9 @@ has repeatedly come with extra flat-region error or false color. The
    placement. The [completed camera panels](whole-scene-context-camera-review.md)
    show partial unseen repair versus local-only but regression versus V120.
    Full427 photos are still collecting.
+   With local RAW fixed, the [near/distant preview intervention](scene-context-extent.md)
+   finds distant influence on the real foliage and coarse fence. Blurring near
+   the tile changes the two development sources more, with mixed weak-band errors.
    A disjoint RAW direction guide also improves the ISO400 far-wire result
    in eight reused synthetic geometries, with no clear ISO6400 weak-detail
    benefit. The real cab comparisons show stripe suppression on one side

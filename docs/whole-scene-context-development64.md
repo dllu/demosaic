@@ -7,6 +7,10 @@ detail than the matched local-only continuation. Most of the approximately
 0.04 dB gain over V120 also occurs without scene conditioning. V120 remains
 the general recommendation; [full primary evaluation is running](whole-scene-context-primary-admission.md).
 
+A [follow-up fixed-RAW preview intervention](scene-context-extent.md) separates
+near and distant scene contributions. It finds small, measurable distant
+effects on real crops and mixed weak-band error on two development sources.
+
 [Exact receipts, executed sources, failures and crop metadata](results/whole-scene-context-development64-v1/publication.json) ·
 [Independent saved-output audit](results/whole-scene-context-development64-v1/independent-review.json) ·
 [First native review and both protected GFX families](whole-scene-context-native-review.md).

@@ -42,6 +42,7 @@ individual reports retain exact measurements, native comparisons and receipts.
 | Can disjoint RAW samples verify guide moves? | At matched quiet RMS, ISO400 recovery rises from 3.94% to 4.35% near the edge with nominal guides and falls from 22.33% to 19.92% far from the edge with shifted guides. Cab crossings remain incomplete | [RAW guide cross-check](phase-guide-crosscheck.md) |
 | Does ADC projection preserve faint detail across photos? | Across 427 held-out photos, Corpus20k's weakest-band RMS falls from 2.594 to 1.901 DN16, effectively matching projected V120. Both standing positive-noise GFX sets bypass the projection exactly | [427-photo faint ADC study](full427-faint-adc.md) |
 | Does held-out validation of the proposed fine correction improve delivery? | The analytic building fringe weakens at the fixed crop. Cab crossings stay soft and signed-color weak response is essentially unchanged | [A-only innovation review](parent-innovation-validation.md) |
+| Does the spatial model use context beyond the tile? | With local RAW fixed, blurring distant preview regions changes foliage and coarse-fence output by 4.14 and 5.15 DN16 RMS. Thin cords and fine cab crossings remain incomplete | [Near and distant preview intervention](scene-context-extent.md) |
 
 V131 also changes the training cohort, so its gain is not an isolated test of
 training duration. The 100k run has saved its 20k checkpoint and continues

@@ -51,6 +51,9 @@ analysis and eight further native boards: small quiet-coarse gains coexist with
 detail/color costs. [Both camera panels are complete](whole-scene-context-camera-review.md);
 full427 photos are still collecting on CPU.
 V120 stays the general recommendation.
+[A fixed-RAW preview intervention](scene-context-extent.md) finds that the
+surrounding photo contributes to the spatial model's leaves and coarse-fence
+output. The remaining fine crossings and canopy cords stay soft.
 [Exact model/data/preflight receipts](results/whole-scene-context-training-setup-v1/publication.json).
 [Independent source/checkpoint audit](results/whole-scene-context-training-setup-v1/independent-review.json).
 
