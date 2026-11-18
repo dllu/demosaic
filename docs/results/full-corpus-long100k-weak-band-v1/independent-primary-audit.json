@@ -1,0 +1,52 @@
+{
+  "producer": {
+    "path": "/home/dllu/proj/demosaic/scripts/audit_local_primary.py",
+    "sha256": "5386b0f3de0a305fe0cc18ba0ad0b6bb71e76adf4b39bec67c13ca9a65772b8d"
+  },
+  "original_tolerance_helper": {
+    "path": "/home/dllu/proj/demosaic/scripts/audit_quality_archive.py",
+    "sha256": "e7f003d8ca942c3a198fe173b4cd8dcbeceef30f59895c60305d4501377d860b"
+  },
+  "source_result": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-review-v1/canonical-combined/collection/result.json",
+    "sha256": "f1378fa6287fd4dda2069236cd477f879ff7ef8a8b72a04e80fae9a6a6994065"
+  },
+  "kind": "full",
+  "stage_model_observation_counts": {
+    "photo|V120": 12404,
+    "photo|scale-long100k": 12404,
+    "known|V120": 72,
+    "known|scale-long100k": 72,
+    "unseen|V120": 90,
+    "unseen|scale-long100k": 90
+  },
+  "maximum_discrepancies": {
+    "photo": {
+      "linear_psnr": 6.112384156153894e-06,
+      "srgb_psnr": 0.00016590373526526037,
+      "chroma_mae": 3.894904151708744e-08,
+      "gradient_mae": 1.5502165208632068e-08
+    },
+    "known": {
+      "sensor_psnr": 5.128510110807838e-06,
+      "reference_samples": 0.0,
+      "ahd_srgb_psnr": 4.11424191071319e-06,
+      "ahd_chroma_mae": 2.3091759372706466e-09,
+      "ahd_gradient_mae": 1.6850624159903127e-09
+    },
+    "unseen": {
+      "sensor_psnr": 5.602498433177061e-06,
+      "reference_samples": 0.0,
+      "ahd_srgb_psnr": 4.468072972940718e-06,
+      "ahd_chroma_mae": 1.6105910780397914e-09,
+      "ahd_gradient_mae": 2.317180142208386e-09
+    }
+  },
+  "status": "passed",
+  "scope": "Independent NumPy64 original photometry/measured-CFA subsets, fixed borders and original5e-4dB/2e-6 tolerances. Canonical array/model/prediction SHA identities and row uniqueness checked. Full means require all3162 cases/427 photos/known72/unseen90 crop observations per model;3-case qualification is not broad evaluation. SSIM/additional masked metrics retain the collector's original implementation. No neural/RAW/noise/GPU/optimizer calls.",
+  "retained_audit": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-long100k-fixed-detail-v1/audit/result.json",
+    "sha256": "ee86104eca435a87f94147f94f3657decc67bd17087afbd03f835cbb4fd669f3"
+  },
+  "rows_verified": 25132
+}

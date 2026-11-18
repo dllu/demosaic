@@ -305,6 +305,11 @@ The [64-photo natural-texture evaluation](full-corpus-faint-noise.md)
 finds that corpus scaling mainly lowers ISO6400 output variance.
 Signed faint fine-band response remains near 12%, with persistent
 error after taking the mean across four independent observations.
+In the [fixed 427-photo fine-band audit](full-corpus-long100k-weak-band.md),
+Corpus 100k recovers more of the weakest band at ADC-only and ISO100.
+At ISO12800 the recovered fraction stays near 36.5%, while fine
+error falls slightly. This broader panel measures a different
+contrast selection and supports the same high-noise limitation.
 
 The [readout-row stress test](withheld-row-noise.md) shows that
 disjoint Bayer pixels can still validate the same simulated noise.

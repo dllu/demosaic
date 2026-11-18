@@ -73,7 +73,8 @@ def test_duplicate_and_policy_rejected(tmp_path):
         read_records(path, "a" * 64)
 
 
-def test_full_closed_form_source_and_CFA_reduction(tmp_path, monkeypatch):
+@pytest.mark.parametrize("second_step", [20000, 100000])
+def test_full_closed_form_source_and_CFA_reduction(tmp_path, monkeypatch, second_step):
     monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "")
     x = np.arange(256)
     target = (
@@ -94,6 +95,7 @@ def test_full_closed_form_source_and_CFA_reduction(tmp_path, monkeypatch):
         for condition in sorted(CONDITIONS):
             for pattern in sorted(PATTERNS):
                 row = metadata(method * 64)
+                row["model"]["step"] = 20000 if method == "a" else second_step
                 row["index"] = len(records)
                 row["context"]["condition"]["name"] = condition
                 row["context"]["pattern"] = pattern
@@ -108,7 +110,13 @@ def test_full_closed_form_source_and_CFA_reduction(tmp_path, monkeypatch):
         manifest.write_text("".join(json.dumps(r) + "\n" for r in records))
         manifests.append(manifest)
     result = analyze(
-        manifests[0], "a" * 64, manifests[1], "b" * 64, tmp_path / "output", expected_images=1
+        manifests[0],
+        "a" * 64,
+        manifests[1],
+        "b" * 64,
+        tmp_path / "output",
+        second_step=second_step,
+        expected_images=1,
     )
     assert result["unique_source_blocks"] == 225
     assert result["paired_source_noise_CFA_observations"] == 12

@@ -24,7 +24,7 @@ def fingerprint(value):
     }
 
 
-def read_records(path, sha256):
+def read_records(path, sha256, *, expected_step=20000):
     rows = {}
     for index, line in enumerate(Path(path).read_text().splitlines()):
         row = json.loads(line)
@@ -32,8 +32,8 @@ def read_records(path, sha256):
             raise ValueError("Archive schema or sequential index differs")
         if row["model"]["sha256"] != sha256:
             continue
-        if row["model"].get("self_ensemble", "none") != "none" or row["model"]["step"] != 20000:
-            raise ValueError("Expected final20k single-view predictions")
+        if row["model"].get("self_ensemble", "none") != "none" or row["model"]["step"] != expected_step:
+            raise ValueError(f"Expected single-view predictions at step {expected_step}")
         context = row["context"]
         if context["condition"]["name"] not in CONDITIONS:
             continue
@@ -66,6 +66,8 @@ def analyze(
     second_sha,
     output,
     *,
+    first_step=20000,
+    second_step=20000,
     expected_images=427,
     source_ids=None,
     maximum_seconds=600,
@@ -75,8 +77,8 @@ def analyze(
         raise RuntimeError("Explicit CPU-only environment required")
     sources = None if source_ids is None else set(source_ids)
     first, second = (
-        read_records(first_manifest, first_sha),
-        read_records(second_manifest, second_sha),
+        read_records(first_manifest, first_sha, expected_step=first_step),
+        read_records(second_manifest, second_sha, expected_step=second_step),
     )
     if first.keys() != second.keys():
         raise ValueError("Matched photographic coverage differs")
@@ -291,6 +293,8 @@ def analyze(
         "second_manifest": binding(second_manifest),
         "first_checkpoint_sha256": first_sha,
         "second_checkpoint_sha256": second_sha,
+        "first_checkpoint_step": first_step,
+        "second_checkpoint_step": second_step,
         "photographic_sources": len(gt),
         "paired_source_noise_CFA_observations": len(coverage),
         "unique_source_blocks": len(gt) * 225,
@@ -306,7 +310,7 @@ def analyze(
         "new_neural_forwards": 0,
         "new_noise_observations": 0,
         "RAW_decodes": 0,
-        "scope": "Descriptive local linear-luminance detail audit of matched final20k single-view saved outputs. Three fixed noise priors/four CFAs; GT-only native16 DCT radial[1/8,1/3), RMS/mean bins0/.02/.05/.10/.20, mean .02-.9, band RMS>=1e-5, GT RGB inside[0,1]. Equal source weight after pooling four CFAs within source/condition. Unique block counts do not multiply independent material coverage by noise/CFA count. Coarse-boundary leakage and chance noise/GT correlation remain; no debiasing, SOTA, uncertainty or carrier-recovery claim.",
+        "scope": "Descriptive local linear-luminance audit of matched single-view saved outputs at the declared steps. The three priors and four CFAs use exact native 16x16 targets. The radial DCT band spans [1/8,1/3) cycles per pixel. Relative contrast boundaries are 0, .02, .05, .10 and .20. Eligible blocks have mean luminance .02 to .9, band RMS at least 1e-5 and target RGB inside [0,1]. Four CFAs pool within each source and condition before equal source weighting. Coarse-boundary leakage and chance noise correlation can affect the projection.",
     }
     save("result-v1.json", result)
     return result

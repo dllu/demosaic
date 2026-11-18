@@ -169,8 +169,10 @@ condition means improve over V120. ADC-only leads at +0.46300 dB.
 The ISO12800 and shadow means gain +0.08510 and +0.06753 dB.
 The [repeat-noise review](full-corpus-faint-noise.md) finds
 much smaller changes to recovered true fine structure on its
-separate high-noise panel. A fixed photo fine-band audit is
-running on the retained canonical predictions.
+separate high-noise panel. The [fixed photo fine-band audit](full-corpus-long100k-weak-band.md)
+confirms lower fine error in all 15 measured cells. In the weakest
+contrast bin, the ISO100 response rises from 78.57% to 79.47% and
+ISO12800 remains about 36.5%.
 
 ### Fixed-photo native evidence
 
