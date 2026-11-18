@@ -7,6 +7,7 @@ from demosaic.search_donor_geometry import (
     _screen_peaks,
     _verify_planes,
     candidate_boxes,
+    recover_curved_direction,
     screening_mask,
     search_donor_geometry,
 )
@@ -83,8 +84,39 @@ def test_context_changes_the_selection_before_reserved_donor_scoring():
     bottom = _donor((0, 64, 64, 64), 0.46, True, amplitude=0.022)
     views = [left, right, top, bottom]
     spectral = search_donor_geometry(views, query, **_NOISE)
-    contextual = search_donor_geometry(views, query, donor_affinity=[1, 1, 0.01, 0.01], **_NOISE)
+    affinity = [1, 1, 0.8, 0.8]
+    weighted = search_donor_geometry(views, query, donor_affinity=affinity, **_NOISE)
+    contextual = search_donor_geometry(
+        views, query, donor_affinity=affinity, affinity_first=True, **_NOISE
+    )
     assert spectral["donor_boxes"] == [list(top[2]), list(bottom[2])]
+    assert weighted["donor_boxes"] == spectral["donor_boxes"]
     assert contextual["donor_boxes"] == [list(left[2]), list(right[2])]
     assert contextual["active"] == spectral["active"] == [True, False]
     np.testing.assert_allclose(contextual["frequencies_xy"][0], _FREQUENCY, atol=0.0005, rtol=0)
+    views[0] = _donor(left[2], 0, False)
+    held = search_donor_geometry(
+        views, query, donor_affinity=affinity, affinity_first=True, **_NOISE
+    )
+    assert held["donor_boxes"] == spectral["donor_boxes"]
+
+
+def test_reserved_donor_folds_verify_an_extra_swept_direction():
+    width = 128
+    query = (0, 0, width, width)
+    weak = np.array([-0.019, 0.072])
+    views = []
+    for origin in (-width, width):
+        y, x = np.mgrid[:width, origin : origin + width] - (width - 1) / 2
+        first = 0.116 * x + 0.025 * y
+        second = weak[0] * x + weak[1] * y + 0.00008 * x**2
+        raw = 0.12 + 0.020 * np.cos(2 * np.pi * first) + 0.017 * np.cos(2 * np.pi * second)
+        packed = raw.reshape(64, 2, 64, 2).transpose(1, 3, 0, 2).reshape(4, 64, 64)
+        views.append((packed, _COLORS, (origin, 0, width, width)))
+    first = search_donor_geometry(views, query, **_NOISE)
+    assert first["active"] == [True, False]
+    expanded = recover_curved_direction(views, query, first, **_NOISE)
+    assert expanded["curved_direction_added"]
+    assert expanded["active"] == [True, True]
+    np.testing.assert_array_equal(expanded["frequencies_xy"][0], first["frequencies_xy"][0])
+    np.testing.assert_allclose(expanded["frequencies_xy"][1], weak, atol=0.001, rtol=0)

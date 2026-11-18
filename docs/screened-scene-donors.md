@@ -8,6 +8,8 @@ On the synthetic comparison, near and full-frame context produce
 identical restorations. Both make small improvements over spectral
 ranking while retaining weak-response limits.
 [Published evidence](results/screened-scene-donors-v3/publication.json).
+The [appearance-first follow-up](affinity-first-donors.md) evaluates
+restoration under the alternate ranking rule on retained and fresh fields.
 
 ## Matched comparison
 

@@ -107,6 +107,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Whole-frame donor ranking](screened-scene-donors.md) reproduces its
   matched spectral search on all four main crops. The near-context
   control changes the coarse fence slightly while retaining its crossings.
+- [Appearance-first ranking](affinity-first-donors.md) keeps the sky and
+  coarse fence identical to V120. Building and foliage detail remain
+  soft. The second-direction follow-up reproduces all four outputs.
 - [Faint ADC follow-up](full427-faint-adc.md) verified that both models return
   their original positive-noise output for this scene.
 - [A-only innovation validation](parent-innovation-validation.md) matches

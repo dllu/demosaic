@@ -8,6 +8,7 @@ from .bracket_phase_geometry import _center, _overlaps, bracket_donor_geometry
 from .carrier_spectrum import discovery_weights, weighted_spectrum
 from .donor_phase_geometry import _fold_fields, _model_columns
 from .experiments.evaluation.withheld import stratified_split
+from .local_validated_waves import _guide_frequencies
 
 _MIN_RADIUS = 0.035
 _MAX_RADIUS = 0.23
@@ -106,17 +107,19 @@ def _bracket_fraction(first, second, query):
     return fraction
 
 
-def _matching_peaks(left, right, fraction):
+def _matching_peaks(left, right, fraction, *, first=None):
     options = []
+    minimum_cosine = _MATCH_COSINE if first is None else np.sqrt(0.5)
+    max_difference = 0.045 if first is None else 0.06
     for (a, score_a), (b, score_b) in product(left, right):
         angle = _cosine(a, b)
         b = b if angle >= 0 else -b
         difference = np.linalg.norm(a - b)
-        if abs(angle) >= _MATCH_COSINE and difference <= 0.045:
+        if abs(angle) >= minimum_cosine and difference <= max_difference:
             center = (1 - fraction) * a + fraction * b
             score = min(score_a, score_b) / (1 + (difference / 0.025) ** 2)
             options.append((score, center, a, b))
-    selected = []
+    selected = [] if first is None else [first]
     for entry in sorted(options, key=lambda p: p[0], reverse=True):
         if not selected or abs(_cosine(entry[1], selected[0][1])) <= _FAMILY_COSINE:
             selected.append(entry)
@@ -153,12 +156,16 @@ def _verify_planes(raw, layout, eligible, seeds, seed, shot, read):
     return np.stack(gains)
 
 
-def search_donor_geometry(donors, query, *, shot, read, fit_curvature=False, donor_affinity=None):
+def search_donor_geometry(
+    donors, query, *, shot, read, fit_curvature=False, donor_affinity=None, affinity_first=False
+):
     """Rank brackets with optional screening-only affinity, then validate independently."""
     if not np.isfinite([shot, read]).all() or min(shot, read) < 0 or shot + read <= 0:
         raise ValueError("Require a positive sensor noise profile")
     if len(query) != 4 or min(query[2:]) <= 0:
         raise ValueError("Require positive query dimensions")
+    if affinity_first and donor_affinity is None:
+        raise ValueError("Affinity ranking requires screening affinities")
     affinity = np.ones(len(donors)) if donor_affinity is None else np.asarray(donor_affinity)
     if (
         affinity.shape != (len(donors),)
@@ -193,7 +200,10 @@ def search_donor_geometry(donors, query, *, shot, read, fit_curvature=False, don
         if fraction is None:
             continue
         matches = _matching_peaks(tiles[i][3], tiles[j][3], fraction)
-        score = sum(row[0] for row in matches) * min(affinity[i], affinity[j])
+        if not matches:
+            continue
+        prior = min(affinity[i], affinity[j])
+        score = prior if affinity_first else sum(row[0] for row in matches) * prior
         if score > best_score:
             best_score, best = score, (i, j, matches)
     result = {
@@ -247,3 +257,39 @@ def search_donor_geometry(donors, query, *, shot, read, fit_curvature=False, don
         "hessians_xy": hessians,
         "bracket": bracket,
     }
+
+
+def recover_curved_direction(donors, query, fit, *, shot, read):
+    """Try one extra swept direction on an already selected, validated bracket."""
+    result = fit | {"curved_direction_added": False}
+    if fit["active"] != [True, False] or len(fit["screened_frequencies_xy"]) != 1:
+        return result
+    pair = [next(d for d in donors if tuple(d[2]) == tuple(box)) for box in fit["donor_boxes"]]
+    fraction = _bracket_fraction(pair[0][2], pair[1][2], query)
+    spectra, eligible = [], []
+    for packed, colors, box in pair:
+        raw, layout = _native(packed, colors, box)
+        screen = screening_mask(box)
+        spectra.append(_screen_peaks(raw, layout, screen, shot, read))
+        eligible.append(~screen)
+    first = np.asarray(fit["frequencies_xy"][0])
+    candidates = _matching_peaks(*spectra, fraction, first=(0, first, None, None))
+    if len(candidates) < 2:
+        return result
+    reference = [first, candidates[1][1]]
+    check = bracket_donor_geometry(
+        pair, query, reference, shot=shot, read=read, eligible_masks=eligible
+    )
+    result["curved_direction_check"] = check
+    if not check["accepted"][1]:
+        return result
+    frequencies = [first.tolist(), check["frequencies_xy"][1]]
+    try:
+        _guide_frequencies(frequencies, 20)
+    except ValueError:
+        return result
+    result["curved_direction_added"] = True
+    result["active"] = [True, True]
+    result["frequencies_xy"] = frequencies
+    result["hessians_xy"] = [fit["hessians_xy"][0], check["hessians_xy"][1]]
+    return result

@@ -184,6 +184,13 @@ the train body on the other side and fine crossings still missing.
 The synthetic affinity ranks suggest a stronger role for context
 in pair selection before query-local RAW validation.
 
+[Appearance-first ranking](affinity-first-donors.md) modestly improves
+matched-quiet recovery on fresh ISO400 fields with distinct paints.
+The same-paint cases show negligible recovery. A wider second-family
+search helps a retained curved subset and leaves the real outputs exact.
+The cab has more plausible donor choices with missing fine crossings,
+and a fallback can reintroduce banding.
+
 The opt-in [ADC-bin helper](adc-bin-consistency.md) improves selected zero-noise
 scores with material-specific costs. In the [427-photo faint comparison](full427-faint-adc.md),
 it lowers Corpus20k's weakest-band RMS from 2.594 to 1.901 DN16, effectively

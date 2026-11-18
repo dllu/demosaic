@@ -120,6 +120,11 @@ has repeatedly come with extra flat-region error or false color. The
    cases. Ranking spectrally viable pairs by affinity alone identifies
    the intended pair in 75/96. Test the delivered result under independent
    RAW validation. [Whole-frame donor ranking](screened-scene-donors.md).
+   The [appearance-first replay](affinity-first-donors.md) improves
+   measured recovery on fresh ISO400 fields with distinct paints.
+   Same-paint pairs demonstrate the remaining support limitation.
+   Widening the second-family search recovers curved donor geometry in
+   four retained two-family views. The extra query delivery stays small.
    [Implementation](whole-scene-context-next-test.md).
 2. **Test longer full-model training with broader data coverage.** Many possible
    crop/noise examples remain unused. Measure held-out learning curves at matched
