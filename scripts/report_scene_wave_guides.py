@@ -71,7 +71,7 @@ def native_board(
 
     return {
         "id": key,
-        "ROI_xywh": [176, 176, 160, 160],
+        "ROI_xywh": list(roi),
         "display_exposure": exposure,
         "display_contrast": contrast,
         "ADC_bits": 16,

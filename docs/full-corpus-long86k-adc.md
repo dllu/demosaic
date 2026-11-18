@@ -152,9 +152,18 @@ rendered gain at ISO6400 does not extend to this band. At ISO100 both
 native renders preserve bark fissures and large fur shapes, while many
 fine bark ridges and individual strands stay soft. All four bin modes
 bypass every positive-noise output in this sweep, giving 384 identity
-checks across the two models.
+checks across the two models. The two ISO100 boards and triplets use
+native ROI `[48,48,160,160]`. The renderer wrote a stale ROI to their
+original manifest. All 14 display cells were independently reproduced
+from the actual coordinates.
+[Native ROI addendum](results/full-corpus-long86k-adc-panels-v1/native-roi-correction.json).
 [Noisy, V120, 86k and exact constructed bark target](images/full-corpus-long86k-adc-panels-v1/noise/bark-contrast0p025-iso100-prior-RGGB-comparison.png) ·
 [Corresponding fur comparison](images/full-corpus-long86k-adc-panels-v1/noise/raccoon-fur-contrast0p025-iso100-prior-RGGB-comparison.png).
+
+The [near-ADC conditioning follow-up](noisy-cfa-residual.md) tests
+positive-noise measurement correction and exposes a larger bright-yellow
+error with tiny positive conditioning. On matched RAW, the bias follows
+the model's noise conditioning.
 
 ## Standing GFX review
 

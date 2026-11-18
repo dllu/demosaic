@@ -46,6 +46,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [long-schedule 50k native review](full-corpus-long50k-native.md) ·
 [long-schedule 86k native review](full-corpus-long86k-native.md) ·
 [86k ADC corrections and noise sweep](full-corpus-long86k-adc.md) ·
+[near-ADC residual and conditioning checks](noisy-cfa-residual.md) ·
 [completed20k camera panels](full-corpus-control20k-camera-review.md) ·
 [disjoint RAW direction guides](scene-wave-guides.md) ·
 [phase profiles fitted from query RAW](guided-phase-profiles.md) ·

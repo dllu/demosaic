@@ -62,6 +62,9 @@ historical boards. Use these reports for the current completed comparisons:
   retains the smooth sky and visible coarse crossings. Small hardware,
   cables and fine leaves remain soft. [All four ADC-bin modes](full-corpus-long86k-adc.md#standing-gfx-review)
   reproduce those positive-noise outputs exactly.
+- [Near-ADC residual preflight](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
+  compares two experimental positive-noise corrections above 86k. The
+  sky stays smooth and the coarse fence keeps the same crossings.
 - [Oriented RAW support](oriented-raw-support.md) gives the same sky
   pixels. The rectangles make small changes to the building, foliage,
   and coarse fence, with the main crossings still visible.

@@ -49,6 +49,10 @@ rendered PSNR on 64 faint photos, with worse weakest-band RMS in raw
 which bin Malvar reduces to 12.87. The four-material noise sweep gains
 detail at very small positive noise and stays near V120 at the ISO100
 and ISO6400 priors.
+The [near-ADC follow-up](noisy-cfa-residual.md) exposes a 7,429 DN16
+bright-yellow bias with tiny positive conditioning. Keeping the same
+RAW and supplying zero conditioning drops that case to 10.6 DN16.
+The photographed-detail check of that intervention is still collecting.
 
 V131's broad mean, the four-source faint-detail means, and ADC-only photo means
 are different measurements. The [PSNR history](performance-history.md) includes
