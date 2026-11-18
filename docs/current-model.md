@@ -172,6 +172,12 @@ are fully specified. A larger elliptical search reduces spill in one
 prior case. On fresh gaps it trails the earlier finite-support check
 and slightly softens both right GFX cab views.
 
+[Averaged gap proposals](mesh-averaged-gap.md) raise conditional
+high-noise admissions from 21/32 to 27/32 and improve placement at
+matched correction strength. They leave more gap error at the fixed
+ISO6400 strength. Refitting strength reduces that error with more
+attenuation outside the gap. The nominal right cab keeps its crossings.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens

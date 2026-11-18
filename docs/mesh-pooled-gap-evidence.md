@@ -119,6 +119,10 @@ Both crops retain some of the false rear pattern inside the gap.
 [Continuous g203 attenuation](images/mesh-pooled-gap-evidence-v1/iso400-step-g203-comparison.png) ·
 [Missed g204 ellipse](images/mesh-pooled-gap-evidence-v1/iso6400-ellipse-g204-comparison.png).
 
+A follow-up averages candidate footprints before the audit. Independent high-noise
+draws admit more true gaps, and the averaged shape gives lower gap error at
+matched correction strength. [Average nomination and bounded refit](mesh-averaged-gap.md).
+
 ## Standing GFX100S review
 
 The two sets of native comparisons use the cached standing observations

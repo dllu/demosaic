@@ -249,6 +249,13 @@ the gap. Exact predictions and three quarters of the samples detect
 footprint search helps an earlier miss and loses one true gap on
 the new panel. [Known and measured gap evidence](mesh-pooled-gap-evidence.md).
 
+Average nomination improves the number of admitted high-noise gaps
+on independent noise draws. At equal correction strength, the averaged
+footprint also lowers fresh crop gap error. The default amplitude
+leaves more high-noise gap texture. A bounded refit reduces it with
+more attenuation away from the true defect.
+[Averaged weak-wire proposals](mesh-averaged-gap.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

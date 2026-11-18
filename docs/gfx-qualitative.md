@@ -131,6 +131,9 @@ historical boards. Use these reports for the current completed comparisons:
   building rails and foliage. The half-site ellipse check makes
   a small contrast cut on the coarse fence and keeps its crossings.
   [Native pooled comparisons](mesh-pooled-gap-evidence.md#standing-gfx100s-review).
+- Averaging RAW gap proposals and refitting their strength keep the
+  sky smooth and the coarse fence crossings visible. The refit gives
+  a larger coarse contrast cut. [Native mean and refit comparisons](mesh-averaged-gap.md#standing-gfx100s-review).
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The
