@@ -81,6 +81,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Disjoint RAW patch search](natural-raw-donor-evidence.md#standing-gfx100s-scenes)
   keeps the Corpus 100k crop bytes in all four main contexts.
   The foliage coarse match fails the local fine-detail check.
+- [Local wire transmission](mesh-background-transmission.md#standing-gfx100s-checks)
+  keeps the existing coarse crossings with a modest contrast change.
+  Sky, foliage and building reproduce the respective parent pixels.
 - [Matched near-ADC continuation](near-adc-bridge-training.md#standing-gfx-scenes)
   compares both 800-update endpoints against 100k and V120. The sky
   stays smooth and the coarse lattice and dark foliage look close to 100k.

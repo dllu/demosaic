@@ -41,6 +41,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
 [distant RAW row references](distant-row-reference.md) ·
 [measured RAW donors for natural weak detail](natural-raw-donor-evidence.md) ·
+[mesh contrast over changing backgrounds](mesh-background-transmission.md) ·
 [expanded scene local-only endpoint](expanded-scene-local12k.md) ·
 [expanded scene spatial endpoint](expanded-scene-spatial12k.md) ·
 [64-photo noise and repeat analysis](full-corpus-faint-noise.md) ·
