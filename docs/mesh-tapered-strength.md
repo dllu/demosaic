@@ -155,3 +155,8 @@ independent DSCF3835 ISO100 AHD as qualitative references.
 | `0.0014635775921166604/1.0715704128646712e-6` | [Left](images/mesh-tapered-strength-v1/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/mesh-tapered-strength-v1/mesh-profile3879-fine-green-mesh-right.png) |
 
 These crop-level strength fits remain experimental.
+
+The next comparison refines the nominated angle and location at
+fixed delivery strength. It improves fresh ISO400 gap placement
+and partly corrects the g223 angle miss.
+[Refined footprints](mesh-refined-footprint.md).

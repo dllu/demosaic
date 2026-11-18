@@ -262,6 +262,12 @@ small fresh ISO6400 gain. The largest remaining spatial errors
 include an incorrect fitted gap direction, which strength changes
 only partly compensate. [Tapered rear strength](mesh-tapered-strength.md).
 
+Refining angle, position and width on the same nomination sites
+lowers ISO400 gap error at matched strength and partly corrects one
+archived angle miss. Four of five high-noise gaps that reach the
+averaged audit in the fresh panel still fail it. Several continuous
+ISO400 wires receive spurious cuts. [Refined gap geometry](mesh-refined-footprint.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

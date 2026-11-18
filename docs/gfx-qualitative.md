@@ -138,6 +138,10 @@ historical boards. Use these reports for the current completed comparisons:
   cut relative to the uniform strength refit. The coarse crossings
   stay visible and the sky remains smooth.
   [Tapered refit review](mesh-tapered-strength.md#independent-noise-and-standing-photos).
+- Off-grid footprint refinement leaves sky, building and foliage
+  pixels identical to the adjacent-donor path. Coarse crossings
+  remain visible after a small local contrast cut.
+  [Refined footprint review](mesh-refined-footprint.md#standing-gfx100s-review).
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

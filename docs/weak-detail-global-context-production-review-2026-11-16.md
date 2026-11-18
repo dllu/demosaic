@@ -20,6 +20,12 @@ reduces some false wire response in synthetic edge controls.
 [Adjacent donors](donor-phase-transport.md) ·
 [Refined edge check](mesh-refined-edge.md).
 
+Off-grid refinement of the RAW footprint cuts less intact wire on
+fresh ISO400 gap scenes. The fixed audit still admits one of six
+fresh ISO6400 gaps with averaged footprints. The standing sky
+stays smooth, and the fine cab crossings remain incomplete.
+[Reserved Bayer footprint refinement](mesh-refined-footprint.md).
+
 **Start production optimization of V120 now. For the next quality architecture,
 test whole-image context once per photograph, coupled to a smaller native-detail
 path that still requires RAW evidence.** The strongest recent result is improved
