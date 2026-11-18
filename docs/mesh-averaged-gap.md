@@ -138,6 +138,12 @@ candidate shape and strength.
 [Native g215 refit](images/mesh-averaged-gap-v1/refit-iso400-ellipse-g215-comparison.png) ·
 [Native g213 refit](images/mesh-averaged-gap-v1/refit-iso6400-band-g213-comparison.png).
 
+A follow-up tapers the post-audit strength and fits a separate
+fringe coefficient. The taper reduces attenuation outside the
+known gap on independent high-noise draws. Fresh crop gains
+are small and still depend on localizing the true footprint.
+[Tapered strength refit](mesh-tapered-strength.md).
+
 ## Standing GFX100S review
 
 Both passes use cached standing observations and local-only 2k EMA

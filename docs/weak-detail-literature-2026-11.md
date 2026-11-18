@@ -256,6 +256,12 @@ leaves more high-noise gap texture. A bounded refit reduces it with
 more attenuation away from the true defect.
 [Averaged weak-wire proposals](mesh-averaged-gap.md).
 
+Tapering refit strength reduces exterior attenuation on independent
+high-noise gap draws. Separate center and fringe strengths give a
+small fresh ISO6400 gain. The largest remaining spatial errors
+include an incorrect fitted gap direction, which strength changes
+only partly compensate. [Tapered rear strength](mesh-tapered-strength.md).
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

@@ -134,6 +134,10 @@ historical boards. Use these reports for the current completed comparisons:
 - Averaging RAW gap proposals and refitting their strength keep the
   sky smooth and the coarse fence crossings visible. The refit gives
   a larger coarse contrast cut. [Native mean and refit comparisons](mesh-averaged-gap.md#standing-gfx100s-review).
+- Tapering gives a small reduction in the coarse-fence contrast
+  cut relative to the uniform strength refit. The coarse crossings
+  stay visible and the sky remains smooth.
+  [Tapered refit review](mesh-tapered-strength.md#independent-noise-and-standing-photos).
 - [Near-ADC residual comparison](noisy-cfa-residual.md#both-standing-gfx100s-comparisons)
   compares two experimental positive-noise corrections above 86k. The
   sky stays smooth and the coarse fence keeps the same crossings. The

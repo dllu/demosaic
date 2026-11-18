@@ -178,6 +178,12 @@ matched correction strength. They leave more gap error at the fixed
 ISO6400 strength. Refitting strength reduces that error with more
 attenuation outside the gap. The nominal right cab keeps its crossings.
 
+The [tapered strength refit](mesh-tapered-strength.md) reduces
+attenuation outside the true gap on independent high-noise draws,
+with a small increase in residual rear signal. Separate strengths
+give a small improvement on fresh ISO6400 gaps. Both retain the
+nominal right cab while the fitted gap angle can still drift.
+
 The disjoint RAW direction-guide probe improves lower-noise synthetic
 far-wire response with a small reduction in increment error. The real cab
 tradeoff and near-edge costs keep it experimental. A phase-bin fit sharpens
