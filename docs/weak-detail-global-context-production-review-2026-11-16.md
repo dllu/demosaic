@@ -17,6 +17,7 @@ while the overcast sky stays smooth. Refining its local foreground model
 reduces some false wire response in synthetic edge controls.
 [Scene implementation](whole-scene-context-next-test.md) ·
 [Matched 12k result](expanded-scene-spatial12k.md) ·
+[Matched full-epoch continuation](scene-full-epoch.md) ·
 [Adjacent donors](donor-phase-transport.md) ·
 [Refined edge check](mesh-refined-edge.md).
 

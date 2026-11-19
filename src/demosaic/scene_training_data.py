@@ -22,15 +22,11 @@ def scene_seed(seed, index, purpose):
     return int.from_bytes(hashlib.sha256(data).digest()[:8], "little") % 2**62
 
 
-def _attenuate_local_contrast(rgb, box, scale):
+def _attenuate_local_contrast(rgb, box, scale, *, flat_core=False):
     """Reduce texture inside one crop with a smooth taper into the original scene."""
     x, y, width, height = box
     crop = rgb[:, y : y + height, x : x + width]
     center = crop[:, height // 2, width // 2, None, None]
-    centered = crop - center
-    low = F.avg_pool2d(centered[None], kernel_size=9, stride=1, padding=4, count_include_pad=False)[
-        0
-    ]
     size = min(width, height)
     radius, taper = size * (72 / 256), size * (20 / 256)
 
@@ -40,7 +36,16 @@ def _attenuate_local_contrast(rgb, box, scale):
         return u.square() * (3 - 2 * u)
 
     support = axis(height)[:, None] * axis(width)[None, :]
-    changed = crop + (1 - scale) * support * (low - centered)
+    if flat_core:
+        level = crop[:, height // 4 : height - height // 4, width // 4 : width - width // 4]
+        level = level.mean(dim=(-2, -1), keepdim=True)
+        changed = torch.where(support == 1, level, torch.lerp(crop, level, support))
+    else:
+        centered = crop - center
+        low = F.avg_pool2d(
+            centered[None], kernel_size=9, stride=1, padding=4, count_include_pad=False
+        )[0]
+        changed = crop + (1 - scale) * support * (low - centered)
     scene = rgb.clone()
     scene[:, y : y + height, x : x + width] = torch.where(support > 0, changed, crop)
     return scene
@@ -57,7 +62,7 @@ class ScenePhotoDataset:
     """Retain a complete binned source, then camera/noise once before cropping.
 
     Integer area reduction and global D4 precede optional local contrast
-    attenuation in one crop. Each selected cache's bytes are checked once
+    attenuation or flattening in one crop. Each selected cache's bytes are checked once
     per dataset instance.
     """
 
@@ -70,6 +75,7 @@ class ScenePhotoDataset:
         crops_per_scene=4,
         reduction=1,
         local_contrast_fraction=0.0,
+        local_flat_core_fraction=0.0,
         photo_epoch_order=None,
         photo_epoch_order_sha256=None,
     ):
@@ -107,6 +113,11 @@ class ScenePhotoDataset:
         self.local_contrast_fraction = validate_probability(
             local_contrast_fraction, "Scene local contrast fraction"
         )
+        self.local_flat_core_fraction = validate_probability(
+            local_flat_core_fraction, "Scene flat fraction within local contrast selection"
+        )
+        if self.local_flat_core_fraction and not self.local_contrast_fraction:
+            raise ValueError("Scene flat cores require a positive local contrast fraction")
         self.checked_files = set()
         if photo_epoch_order is None and photo_epoch_order_sha256 is not None:
             raise ValueError("Photographic epoch order hash requires its header")
@@ -162,8 +173,13 @@ class ScenePhotoDataset:
             if contrast_rng.random() < self.local_contrast_fraction:
                 box = contrast_rng.choice(boxes)
                 scale = 2 ** contrast_rng.uniform(-3, -1)
-                rgb = _attenuate_local_contrast(rgb, box, scale)
-                local_contrast = {"box_xywh": list(box), "scale": scale}
+                flat = bool(self.local_flat_core_fraction) and (
+                    contrast_rng.random() < self.local_flat_core_fraction
+                )
+                rgb = _attenuate_local_contrast(rgb, box, scale, flat_core=flat)
+                local_contrast = {"box_xywh": list(box), "scale": 0.0 if flat else scale}
+                if flat:
+                    local_contrast["exact_flat_core"] = True
         observation = observe_scene(rgb.contiguous(), recipe)
         crops = observation.crops(boxes)
         metadata = {
@@ -188,7 +204,10 @@ class ScenePhotoDataset:
         if local_contrast is not None:
             metadata["local_contrast"] = local_contrast
             metadata["scope"] = (
-                "One complete camera/noise observation with localized contrast attenuation "
+                "One complete camera/noise observation with localized flat core "
+                "before Bayer sampling. Preview and crops share observed RAW."
+                if local_contrast.get("exact_flat_core")
+                else "One complete camera/noise observation with localized contrast attenuation "
                 "before Bayer sampling. Preview and crops share observed RAW."
             )
         return SceneTrainingSample(observation, crops, metadata)

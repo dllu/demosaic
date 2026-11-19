@@ -126,6 +126,7 @@ def training_dataset(plan):
         patch_size=plan["patch_size"],
         crops_per_scene=plan["crops_per_scene"],
         local_contrast_fraction=plan.get("local_contrast_fraction", 0.0),
+        local_flat_core_fraction=plan.get("local_flat_core_fraction", 0.0),
         photo_epoch_order=checked(order) if order is not None else None,
         photo_epoch_order_sha256=order["sha256"] if order is not None else None,
     )
@@ -255,20 +256,46 @@ def preflight(plan, output):
     )
 
 
-def train(plan, mode, output):
+def train(plan, mode, output, *, stop_step=None, resume=None):
+    stop_step = plan["steps"] if stop_step is None else stop_step
+    first_step = 0
+    plan_binding = reference(Path(plan["root"]) / "plan.json")
+    state = None
+    if resume is not None:
+        state = torch.load(checked(resume), map_location="cpu", weights_only=True)
+        first_step = state["step"]
+        if (
+            state["mode"] != mode
+            or state["plan"] != plan_binding
+            or state["scene_draw_index"] != first_step * plan["scenes_per_step"]
+        ):
+            raise ValueError("Scene continuation requires matching plan, mode and draw index")
+    if not 0 <= first_step < stop_step <= plan["steps"]:
+        raise ValueError("Scene phase must advance within the declared schedule")
     output.mkdir(parents=True)
     write_json(output / "owner.json", owner_identity())
     dataset = training_dataset(plan)
     model = make_model(plan, mode)
     optimizer = optimizer_for(model, plan)
     ema = {k: v.detach().clone() for k, v in model.restoration_state_dict().items()}
+    if state is not None:
+        model.load_restoration_state_dict(state["model"])
+        optimizer.load_state_dict(state["optimizer"])
+        for k, value in state["ema"].items():
+            ema[k].copy_(value)
+        torch.set_rng_state(state["torch_rng"])
+        random.setstate(state["python_rng"])
+        torch.cuda.set_rng_state_all(state["cuda_rng"])
+        del state
     checkpoints = []
+    data_seconds = 0.0
+    checkpoint_seconds = 0.0
     began = time.monotonic()
     with (
         (output / "observations.jsonl").open("x") as observations,
         (output / "train.jsonl").open("x") as log,
     ):
-        for step in range(plan["steps"]):
+        for step in range(first_step, stop_step):
             if psutil.virtual_memory().available < plan["minimum_runtime_RAM_GiB"] * 2**30:
                 raise RuntimeError("Training RAM reserve unavailable")
             if time.monotonic() - began > plan["maximum_arm_seconds"]:
@@ -290,7 +317,9 @@ def train(plan, mode, output):
             terms_sum = {}
             for j in range(plan["scenes_per_step"]):
                 index = step * plan["scenes_per_step"] + j
+                data_started = time.monotonic()
                 sample = dataset[index]
+                data_seconds += time.monotonic() - data_started
                 observations.write(json.dumps(sample.metadata, sort_keys=True) + "\n")
                 _, loss, terms = sample_forward(model, sample, plan)
                 if not torch.isfinite(loss):
@@ -318,6 +347,8 @@ def train(plan, mode, output):
                 "gradient_norm": float(gradient),
                 "terms": terms_sum,
                 "learning_rates": [g["lr"] for g in optimizer.param_groups],
+                "data_seconds": data_seconds,
+                "checkpoint_seconds": checkpoint_seconds,
             }
             log.write(json.dumps(entry) + "\n")
             if (step + 1) % plan["log_every"] == 0:
@@ -327,7 +358,8 @@ def train(plan, mode, output):
                 write_json(
                     output / "progress.json", entry | {"owner": owner_identity()}, replace=True
                 )
-            if (step + 1) % plan["checkpoint_every"] == 0 or step + 1 == plan["steps"]:
+            if (step + 1) % plan["checkpoint_every"] == 0 or step + 1 == stop_step:
+                checkpoint_started = time.monotonic()
                 checkpoints.append(
                     checkpoint(
                         model,
@@ -338,6 +370,7 @@ def train(plan, mode, output):
                         optimizer=optimizer,
                     )
                 )
+                checkpoint_seconds += time.monotonic() - checkpoint_started
         observations.flush()
         log.flush()
     assert model_hash(model.base.context.backbone) == plan["DINO_sha256"]
@@ -345,14 +378,19 @@ def train(plan, mode, output):
         output / "completed.json",
         {
             "mode": mode,
-            "steps": plan["steps"],
+            "start_step_exclusive": first_step,
+            "steps": stop_step,
+            "schedule_steps": plan["steps"],
+            "resume": resume,
             "seconds": time.monotonic() - began,
+            "data_seconds": data_seconds,
+            "checkpoint_seconds": checkpoint_seconds,
             "checkpoints": checkpoints,
             "observations": reference(output / "observations.jsonl"),
             "script": reference(__file__),
-            "plan": reference(Path(plan["root"]) / "plan.json"),
+            "plan": plan_binding,
             "DINO_unchanged": True,
-            "scope": "Complete fixed matched continuation horizon; no quality-based stopping/restarts. Scene/crop input/target fingerprints retained for every update; context and local paths share frozen DINO weights. Whole-scene semantics effectiveness/false-detail quality review remains required.",
+            "scope": "Completed phase on the original schedule with scene/crop fingerprints. Context and local paths share frozen DINO weights. Quality evaluation is separate.",
         },
     )
 
@@ -363,6 +401,8 @@ if __name__ == "__main__":
     parser.add_argument("plan", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--mode", choices=["none", "pooled", "spatial"])
+    parser.add_argument("--stop-step", type=int)
+    parser.add_argument("--resume-receipt", type=Path)
     args = parser.parse_args()
     plan = read_json(args.plan)
     verify_plan(plan)
@@ -380,4 +420,5 @@ if __name__ == "__main__":
         preflight(plan, args.output)
     else:
         assert args.mode is not None
-        train(plan, args.mode, args.output)
+        resume = read_json(args.resume_receipt)["checkpoints"][-1] if args.resume_receipt else None
+        train(plan, args.mode, args.output, stop_step=args.stop_step, resume=resume)

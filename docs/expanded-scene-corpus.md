@@ -115,3 +115,7 @@ panels and the constructed wire/gap intervention. The guide-specific
 response remains small after expanding the scene training.
 [2k wire and gap test](scene-wire-gap.md) ·
 [100k parent](full-corpus-long100k.md).
+
+The [matched full-epoch continuation](scene-full-epoch.md) now schedules
+all 90,692 eligible scenes per arm on a common 50,000-update horizon.
+Its first full pass ends at update 45,346.

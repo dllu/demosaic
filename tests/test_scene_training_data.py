@@ -141,6 +141,24 @@ def test_local_contrast_keeps_context_targets_and_replays_full_raw(tmp_path):
         torch.testing.assert_close(sample.crops[key], exact_crop[key], rtol=0, atol=0)
     with pytest.raises(ValueError, match="Scene local contrast fraction"):
         training_dataset(plan | {"local_contrast_fraction": 1.1})
+    with pytest.raises(ValueError, match="require a positive local contrast fraction"):
+        training_dataset(plan | {"local_flat_core_fraction": 1})
+
+    flat_dataset = training_dataset(
+        plan | {"local_contrast_fraction": 1, "local_flat_core_fraction": 1}
+    )
+    flat = flat_dataset[3]
+    assert flat.metadata == flat_dataset[3].metadata
+    assert flat.metadata["local_contrast"] == {
+        "box_xywh": choice["box_xywh"],
+        "scale": 0.0,
+        "exact_flat_core": True,
+    }
+    flat_target = flat.observation.sensor_target
+    torch.testing.assert_close(flat_target[:, outside], prior[:, outside], rtol=0, atol=0)
+    flat_core = flat_target[..., v + 24 : v + 40, u + 24 : u + 40]
+    torch.testing.assert_close(flat_core, flat_core[:, :1, :1].expand_as(flat_core), rtol=0, atol=0)
+    assert flat.metadata["scene_packed"] != original.metadata["scene_packed"]
 
 
 def test_local_contrast_keeps_constant_color_exact():

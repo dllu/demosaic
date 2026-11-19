@@ -8,6 +8,8 @@ data/model integration. This note supplements the
 
 Follow-up measurements verify five complete ordinary-photo passes and
 fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233).
+The [matched full-epoch scene continuation](scene-full-epoch.md) extends
+the separate native-context study to 90,692 eligible photos per arm.
 
 **The corpus supports a substantially larger full-model training experiment.
 We have not established that its useful examples, or the model's capacity to

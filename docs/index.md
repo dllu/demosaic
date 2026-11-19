@@ -36,6 +36,7 @@ Start with the [README](../README.md) for installation and inference.
 
 Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [expanded scene corpus](expanded-scene-corpus.md) ·
+[full-epoch scene context continuation](scene-full-epoch.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
