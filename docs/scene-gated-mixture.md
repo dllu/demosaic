@@ -13,6 +13,9 @@ remain close to Corpus 100k, with incomplete fine cab crossings.
 [Fitted coefficients](results/scene-gated-mixture-v1/mixture-coefficients.json) ·
 [Frozen drivers and receipts](results/scene-gated-mixture-v1/evidence.tar.xz) ·
 [Native crop provenance](images/scene-gated-mixture-v1/manifest.json).
+The follow-up filters the signed boost after gating and removes the
+upper-band regression on two exact-photo cohorts.
+[Band-limited refit](scene-mixture-upper-band.md).
 
 ## Composition and fitting
 

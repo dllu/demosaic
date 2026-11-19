@@ -272,7 +272,11 @@ error. Fine cab crossings remain incomplete.
 100k with spatial 40k. It lowers fine-flat RMS by 0.209 DN16 at nearly
 parent-level fine response. Upper-band error rises and fine cab crossings
 remain incomplete. The additional registered exterior descriptors yield
-little benefit over local gate features.
+little benefit over local gate features. The [band-limited refit](scene-mixture-upper-band.md)
+lowers fine-flat RMS by 0.421 DN16 on the fixed independent ISO6400 test
+and 0.186 DN16 on a separate cohort, with near-parent fine response.
+Upper-band RMS improves in both tests. Both neural forwards are required
+and the fine cab crossings remain incomplete.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

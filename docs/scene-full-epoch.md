@@ -309,8 +309,8 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. Matched training now verifies 43,500 updates on 87,000 distinct
-photos and 348,000 queries per arm. The latest completed paired quality
+pair. Matched training now verifies 45,000 updates on 90,000 distinct
+photos and 360,000 queries per arm. The latest completed paired quality
 review is [40k](scene-full-epoch-40k.md).
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
@@ -354,6 +354,11 @@ review is [40k](scene-full-epoch-40k.md).
 [43,000 paired audit](results/scene-full-epoch-v1/paired-prefix-043000.json) ·
 [43,500 paired audit](results/scene-full-epoch-v1/paired-prefix-043500.json) ·
 [43,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-043500.tar.xz) ·
+[44,000 paired audit](results/scene-full-epoch-v1/paired-prefix-044000.json) ·
+[44,500 paired audit](results/scene-full-epoch-v1/paired-prefix-044500.json) ·
+[44,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-044500.tar.xz) ·
+[45,000 paired audit](results/scene-full-epoch-v1/paired-prefix-045000.json) ·
+[45,000 segment receipts](results/scene-full-epoch-v1/paired-prefix-045000.tar.xz) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·

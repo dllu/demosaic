@@ -643,6 +643,14 @@ Replacing the spatial checkpoint with its matched local counterpart
 weakens the flat benefit, while shuffling the outer gate features
 changes little. Fine cab crossings remain incomplete.
 
+A [band-limited refit](scene-mixture-upper-band.md) filters the actual
+signed correction after spatial gating. It lowers both fine-flat and
+upper-flat RMS on the fixed 48 photos and a separate 32-photo
+confirmation at independent ISO6400. Fine response remains close to
+Corpus 100k. The other draws retain the flat benefit, with small fine
+increment costs in two conditions. Both standing GFX scenes retain their
+existing fine crossing limits.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points
