@@ -61,7 +61,7 @@ verification, augmentation, sensor simulation and CPU fingerprinting.
 ## Quality comparisons
 
 The scheduled monitor replays the fixed held-out scene panel at matched
-2k, 12k and 25k states on eight photos, and at 50k on all 64. It compares
+2k, 5k, 12k and 25k states on eight photos, and at 50k on all 64. It compares
 V120, Corpus 100k and both new EMAs. The aligned arm also receives a masked
 guide, a blurred distant view and a mirrored distant view with the query
 and its preview halo preserved exactly. The primary texture measures are
@@ -84,6 +84,13 @@ The native renderer now writes its output inside the frozen worker's
 directory. The intermediate review verified that path, and the
 corrected endpoint worker is waiting for the 50k checkpoints.
 [Native collector recovery receipt](results/scene-full-epoch-v1/endpoint-native-recovery.json).
+
+The previous waiters were bound to the first training controller and exited
+after its RAM-floor stop. Seven receipt-driven workers now wait for verified
+matched checkpoints across controller restarts. These include a new matched
+5k monitor and both standing GFX families at 5k, the three already planned
+12k, 25k and 50k monitors, and the original two endpoint collectors.
+[Replacement queue and older failure logs](results/scene-full-epoch-v1/resilient-review-queue.json).
 
 ## Execution status
 
@@ -125,6 +132,13 @@ stop came after update 4,939. The controller kept update 4,500 and queued the
 last 500-update segment for automatic retry under the original limits.
 The matched and reviewed milestones remain unchanged.
 [Automatic retry and local prefix audit](results/scene-full-epoch-v1/automatic-memory-recovery-005000.json).
+
+The retry completed the local 5,000 milestone. Its verified prefix contains
+10,000 distinct photos, 10,000 noise seeds and 40,000 native queries. The
+retained training segments total 2,349.22 s of worker time. The spatial
+arm is advancing its corresponding milestone. Matched checkpoints remain
+verified through 2,500 and the most recent completed quality review is 2,000.
+[Local 5,000 prefix and checkpoint](results/scene-full-epoch-v1/local-005000-prefix.json).
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 

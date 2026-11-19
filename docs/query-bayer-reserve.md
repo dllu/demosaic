@@ -142,6 +142,9 @@ aligned amplitude, respectively. Overlapping crops share RAW, so this
 measures placement stability on these captures. All displayed versions
 use the single fixed placement.
 [Delivered-field stability](results/query-bayer-reserve-v1/placement-delivery.json).
+[Anchoring Bayer groups and sharing confirmed frequencies](query-frequency-consensus.md)
+raises the same worst-crop agreement to about 0.95 under both profiles.
+The median then retains 97% of the center correction's aligned amplitude.
 
 The main sky stays pixel-identical. Both coarse fence directions stay
 visible, and the checked query fit changes the modulation slightly.

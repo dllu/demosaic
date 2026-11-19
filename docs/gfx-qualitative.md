@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Sensor-anchored Bayer fits](query-frequency-consensus.md#standing-gfx100s-comparisons)
+  keep the sky, foliage and building at the 100k parent. The two coarse
+  fence directions remain visible.
 - [Reserved Bayer query search](query-bayer-reserve.md#standing-gfx100s-comparisons)
   returns the same sky and foliage as Corpus 100k. It retains both coarse
   fence directions. The thinnest building cables remain soft.

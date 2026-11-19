@@ -53,6 +53,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [local RAW support and exterior phase](green-gap-validation.md) ·
 [narrow exterior RAW peaks](donor-peak-prominence.md) ·
 [reserved Bayer query search](query-bayer-reserve.md) ·
+[sensor-anchored Bayer placements](query-frequency-consensus.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
 [distant RAW row references](distant-row-reference.md) ·
 [measured RAW donors for natural weak detail](natural-raw-donor-evidence.md) ·
