@@ -123,6 +123,11 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Per-direction wire shape](query-shape-routing.md) uses automatically
+measured frequencies. It suppresses a spurious weak-wire harmonic
+when the stronger wire alone supports a narrow shape. True narrow wires
+lose some high-band response. The two GFX left-cab outputs use the softer
+restricted fit.
 [Checked donor wire shape](query-donor-bandlimit.md) reduces error on
 soft patterned ISO6400 controls at equal response and weakens actual
 narrow wires. In both real left-cab profiles the limited version softens
@@ -189,6 +194,8 @@ Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
 shows a small ISO6400 independent fine-response benefit over mirroring and
 near-identical response to the local arm. Fine flat noise drops from 7.5k
 on coupled draws. Both standing reviews still show incomplete fine crossings.
+The [training prefix](scene-full-epoch.md#execution-status) is now verified
+through 10,500 matched updates and 12,000 local-only updates.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

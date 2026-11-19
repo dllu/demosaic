@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Per-direction wire shape](query-shape-routing.md#standing-gfx100s-comparisons) | Neither left profile confirms a second harmonic. Both routing policies use the softer restricted result. Right crops retain their earlier crossings. Both native ROIs and JPEG references viewed |
 | [Checked donor wire shape](query-donor-bandlimit.md#standing-gfx100s-comparisons) | Post-filtering the donor lift softens the left lattice under both profiles and at equal RGB correction RMS. Right outputs reproduce the previous result. Both JPEG references viewed |
 | [Exterior donor fallback with checked bands](query-donor-composition.md#standing-gfx100s-comparisons) | Both left profiles show a faint lattice and the right retains the checked-band reconstruction. One additional left band passes the reserved RAW test and contributes little beyond the exterior fit. Both JPEG references viewed |
 | [Checked Bayer harmonics](query-checked-junctions.md#standing-gfx100s-comparisons) | Both right profiles support a second harmonic and a difference band. Some crossings look slightly clearer. Mottling and incomplete crossings remain. Both left crops match the previous output |

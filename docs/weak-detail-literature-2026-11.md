@@ -414,6 +414,12 @@ matched projection and weakens true sharp wires. With known candidate
 directions, a reserved second-harmonic test recognizes 15 of 16 narrow
 ISO6400 cases and admits one smooth case. Fine cab crossings remain soft.
 
+The [automatic per-direction shape test](query-shape-routing.md) finds that
+evidence for a sharp wire cannot be shared freely with its smoother neighbor.
+Keeping only supported second harmonics reduces the other wire's shape error
+at matched response. Truly narrow ISO6400 wires retain sharper profiles
+with the earlier full ribbon. Gap spill remains.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

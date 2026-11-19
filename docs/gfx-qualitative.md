@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Per-direction wire shape](query-shape-routing.md#standing-gfx100s-comparisons)
+  checks both routing policies. The main sky stays smooth and all four main
+  crops reproduce the earlier exterior result.
 - [Checked donor wire shape](query-donor-bandlimit.md#standing-gfx100s-comparisons)
   reproduces the sky, building, foliage and coarse fence from the
   exterior-donor comparison. The test only changes the left cab.

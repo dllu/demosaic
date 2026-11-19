@@ -11,6 +11,12 @@ detail to restore.
 [Executed sources and original receipts](results/query-donor-bandlimit-v1/evidence.tar.xz) ·
 [Native image bindings](images/query-donor-bandlimit-v1/manifest.json).
 
+The [automatic shape follow-up](query-shape-routing.md) starts with measured
+exterior frequencies. It checks the two wire directions separately and
+reduces the spurious second harmonic on the smoother wire of a mixed pair.
+When both wires are narrow, the restricted correction loses some real
+second-harmonic signal.
+
 ## Measuring which bands the RAW supports
 
 The [exterior-donor fallback](query-donor-composition.md) uses two measured
