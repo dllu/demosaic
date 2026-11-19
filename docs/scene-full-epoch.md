@@ -256,9 +256,9 @@ The local checkpoint SHA256 is
 `7d2e041b563651d7dd9af24a18cb32f8cd94b8a094a05005eb55a43bb0fd30cb`.
 The spatial checkpoint SHA256 is
 `53a3232a26c9997024dbd4349c09e7040c6a9d53ffef8d03dd7f95b5ba8d8114`.
-Both store raw and EMA weights. The 15k EMA numerical monitor and both
-standing GFX collections run through the matched review queue. The
-last completed numerical and native pair is at 12k. The continuation
+Both store raw and EMA weights. The 15k EMA exact-target monitor and its
+native triplets are complete. Both standing GFX collections are running.
+The last completed standing pair is at 12k. The continuation
 advances on the original 50k schedule.
 [Paired 15k source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-015000.json) ·
 [Segment receipts](results/scene-full-epoch-v1/paired-prefix-015000.tar.xz) ·
@@ -761,3 +761,52 @@ references.
 | --- | --- |
 | Nominal | [Left](images/scene-full-epoch-v1/standing-012000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-012000/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred | [Left](images/scene-full-epoch-v1/standing-012000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-012000/mesh-profile3879-fine-green-mesh-right.png) |
+
+## Matched exact-target monitor at 15,000 updates
+
+The local and spatial EMA checkpoints complete the same 32-group monitor
+over eight development photos. The matched local and spatial training
+traces cover 30,000 photos each. These eight monitor photos are separate
+from this continuation and previously appeared in Corpus 100k training.
+[Paired training audit](results/scene-full-epoch-v1/paired-prefix-015000.json) ·
+[Exact-target results](results/scene-full-epoch-v1/matched-015000-pilot.json) ·
+[Bandwise intervals](results/scene-full-epoch-v1/matched-015000-band-context.json).
+
+| ISO6400, independent draws | Fine increment RMS, DN16 | Fine response | Lower-band flat RMS, DN16 |
+| --- | ---: | ---: | ---: |
+| Corpus 100k | 103.983 | 67.145% | 13.868 |
+| Local 15k | 103.696 | 66.526% | 11.881 |
+| Spatial 15k, matching | 103.645 | 66.320% | 11.670 |
+| Spatial 15k, masked | 103.514 | 66.497% | 12.036 |
+| Spatial 15k, mirrored distant view | 103.663 | 66.247% | 11.632 |
+
+The matching spatial arm gains 0.254 fine-response points
+[0.122, 0.306] over its 12k predecessor. It trails the matched local arm
+by 0.206 points [0.070, 0.316]. The fine-response difference from the
+mirrored view is +0.073 points [−0.046, +0.149]. Lower-band flat RMS falls
+2.198 DN16 [1.098, 3.425] versus Corpus 100k. Differences versus matching
+local, masked and mirrored inputs remain smaller on these eight photos.
+
+Both native triplets use independent ISO6400, shot/read
+`0.00128/6.5536e-6`, capture exposure 0.33, 16-bit ADC with black 0.03,
+display exposure ×3.0303 and contrast ×2. Each 160×160 cell uses unchanged
+pixels at query ROI `[48,48,160,160]`. Corpus 100k and V120 are shown in
+the linked comparisons along with the matched local and context controls.
+
+**Hauroth**, Palauenc05, CC BY-SA 4.0, query `[218,192]`, RGGB. Fine stone
+grain stays softer than GT, while the exact-flat center looks smooth.
+[Comparison](images/scene-full-epoch-v1/pilot-015000/000-iso6400-independent-role0-comparison.png) ·
+[Source](https://commons.wikimedia.org/wiki/File:Hauroth_Wegekreuz_St-Bartholom%C3%A4us.jpg).
+
+![Hauroth, noisy, matching spatial 15k and exact GT](images/scene-full-epoch-v1/pilot-015000/000-iso6400-independent-role0-triplet.png)
+
+**Limburg Cathedral**, Berthold Werner, public domain, query `[22,250]`,
+BGGR. Arch shapes and trim stay clear. The lower arch bricks are still
+softer than GT. [Comparison](images/scene-full-epoch-v1/pilot-015000/001-iso6400-independent-role0-comparison.png) ·
+[Source](https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg).
+
+![Limburg Cathedral, noisy, matching spatial 15k and exact GT](images/scene-full-epoch-v1/pilot-015000/001-iso6400-independent-role0-triplet.png)
+
+The exact-target numerical and native review is complete. Both standing
+15k GFX reviews are collecting. The broad panels are queued for the full
+50k checkpoints.
