@@ -120,6 +120,9 @@ exact-target scaling also gives little gain with the fixed proposal.
 [Native-green innovation smoothing](green-phase-innovation.md)
 reduces near-step error and increases whole-core error at similar
 response, with fine real crossings still incomplete.
+[Native green alias separation](quincunx-green.md) extracts a small
+additional aligned component in planted aliases. Exterior RAW reduces
+added flat variation, with little weak-detail gain at matched strength.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

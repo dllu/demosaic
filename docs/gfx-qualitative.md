@@ -3,6 +3,10 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Green alias separation and exterior RAW](quincunx-green.md#standing-gfx100s-comparisons)
+  keep the sky smooth and both coarse crossing directions visible.
+  Dense reconstruction at original strength changes the coarse fence more
+  than the calibrated lift. Fine foliage and small cables remain soft.
 - [Surrounding RAW strength](context-strength.md#standing-gfx100s-comparisons)
   compares aligned and mirrored whole-frame information. Native output
   changes are small and the main sky remains smooth.

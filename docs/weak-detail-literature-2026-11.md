@@ -391,6 +391,16 @@ with higher whole-core error and incomplete fine crossings. The
 [full-epoch scene trial](scene-full-epoch.md) is training separately on
 the matched larger source schedule.
 
+The [green alias follow-up](quincunx-green.md) separates two native
+frequency classes missed by one packed plane alone. On 32 planted
+cases with a stronger shared alias, it adds 0.086 percentage points
+of weak response over principal-only at matched flat addition.
+Disjoint fold agreement and exterior RAW substantially reduce unscaled
+flat correction, with limited delivered gain on the exact-target
+and standing native reviews. This tests phase accuracy and noise
+rejection within a fixed reconstruction, with fine cab junctions
+still missing.
+
 **The next useful step is better discrimination between weak structure and
 noise/edge leakage, coupled with training that rewards that distinction.**
 The project has demonstrated real detail gains, but increasing response alone
