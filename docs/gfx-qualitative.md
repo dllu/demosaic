@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Checked donor wire shape](query-donor-bandlimit.md#standing-gfx100s-comparisons)
+  reproduces the sky, building, foliage and coarse fence from the
+  exterior-donor comparison. The test only changes the left cab.
 - [Exterior donor fallback with checked bands](query-donor-composition.md#standing-gfx100s-comparisons)
   preserves all four main crops from the checked-band review. The sky
   is smooth, the coarse diamonds remain visible and fine wires stay soft.

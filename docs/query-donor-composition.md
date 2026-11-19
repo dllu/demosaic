@@ -12,6 +12,11 @@ enable three additional recoveries and rotated surrounds enable none.
 [Executed sources and archived attempts](results/query-donor-composition-v1/evidence.tar.xz) ·
 [Native board bindings](images/query-donor-composition-v1/manifest.json).
 
+The [wire-shape follow-up](query-donor-bandlimit.md) restores only the measured
+fundamentals and checked bands. This lowers error on the active soft-pattern
+replays and loses some true sharp wire detail. Reserved second harmonics
+support the narrow profile in most new tests with supplied geometry.
+
 ## How the surroundings enter the reconstruction
 
 The reconstruction starts with Corpus 100k EMA

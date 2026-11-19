@@ -123,6 +123,11 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Checked donor wire shape](query-donor-bandlimit.md) reduces error on
+soft patterned ISO6400 controls at equal response and weakens actual
+narrow wires. In both real left-cab profiles the limited version softens
+the lattice. Reserved second harmonics distinguish most narrow profiles
+in the separate test with supplied frequencies.
 [Exterior donor fallback with checked bands](query-donor-composition.md)
 adds a faint left-cab lattice under both profiles and preserves the
 earlier right-cab result. The extra harmonic makes little visual
@@ -180,9 +185,8 @@ overly regular spacing in places.
 regains a small amount of independent ISO6400 response relative to 5k,
 with more flat variation. Coupled weak response stays below Corpus 100k.
 Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
-The [later training prefix](scene-full-epoch.md#execution-status) has matched
-inputs through 9,000 updates, while local-only has reached 10,000 on 20,000
-distinct photos.
+The [later training checkpoints](scene-full-epoch.md#execution-status) match
+inputs through 10,000 updates on 20,000 distinct photos per arm.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

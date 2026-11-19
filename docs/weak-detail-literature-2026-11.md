@@ -408,6 +408,12 @@ surrounds enable three extra recoveries. The additional checked band changes
 one of them. Both real left-cab profiles show a faint lattice and retain
 most of the appearance from the earlier donor fit.
 
+The [wire-shape comparison](query-donor-bandlimit.md) removes unsupported
+harmonics from the donor response. It lowers exact soft-pattern error at
+matched projection and weakens true sharp wires. With known candidate
+directions, a reserved second-harmonic test recognizes 15 of 16 narrow
+ISO6400 cases and admits one smooth case. Fine cab crossings remain soft.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

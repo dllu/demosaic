@@ -174,6 +174,16 @@ now matched through **9,000 updates**, covering 18,000 distinct photos and
 [8,500 retry verification](results/scene-full-epoch-v1/paired-prefix-008500.json) ·
 [9,000 source and checkpoint verification](results/scene-full-epoch-v1/paired-prefix-009000.json).
 
+The next two spatial segments complete and both arms verify the
+**10,000-update milestone**. Each arm has 20,000 distinct source photos,
+20,000 distinct noise seeds and 80,000 native queries. The input traces
+match byte for byte. The independent 9,500 prefix audit records the
+preceding matched checkpoint. The fixed numerical monitor and both
+standing GFX families are collecting at 10,000. The previous matched
+quality review remains at 7,500.
+[9,500 source and checkpoint verification](results/scene-full-epoch-v1/paired-prefix-009500.json) ·
+[Matched 10k training and review bindings](results/scene-full-epoch-v1/matched-010000-training.json).
+
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 
