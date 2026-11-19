@@ -22,3 +22,14 @@ observations from 20,000 photos and 80,000 native crops per arm. The
 intermediate numerical and native workers started from that matched
 receipt. The 50,000-update schedule remains active.
 [Checkpoint, inputs and intermediate review bindings](../docs/scene-full-epoch.md#execution-status).
+
+The 10k reviews subsequently complete. The aligned preview improves
+independent ISO6400 fine response by 0.233 points over a mirrored distant
+view. Its weak response is essentially tied with the local arm. Coupled
+fine-increment error remains above Corpus 100k. All native monitor boards
+and both standing GFX families were viewed, with smooth sky and no
+convincing new fine cab lattice. The retained training loops process
+17.01 native queries per second locally and 13.19 with spatial context,
+excluding launch, retry and review time.
+[Matched quality and both standing reviews](../docs/scene-full-epoch.md#matched-quality-comparison-at-10000-updates) ·
+[Throughput receipt](../docs/results/scene-full-epoch-v1/matched-010000-throughput.json).

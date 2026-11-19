@@ -12,9 +12,15 @@ The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
 two arms match through 10,000 updates on 20,000 distinct photos and
 80,000 native queries per arm. The latest complete matched quality
-review is at 7,500.
+review is at 10,000.
 [Coverage and source audit](scene-full-epoch.md#execution-status) ·
-[Intermediate quality review](scene-full-epoch.md#matched-quality-comparison-at-7500-updates).
+[Intermediate quality review](scene-full-epoch.md#matched-quality-comparison-at-10000-updates).
+
+At 10,000 updates, the retained loops process 17.01 native queries per
+second locally and 13.19 with spatial features. Reading and CPU
+fingerprinting are 27.2% and 20.9% of those loop times. The last five
+saved segments per arm have median initialization times of about 35 s.
+[Measured throughput and timing method](results/scene-full-epoch-v1/matched-010000-throughput.json).
 
 **The corpus supports a substantially larger full-model training experiment.
 We have not established that its useful examples, or the model's capacity to

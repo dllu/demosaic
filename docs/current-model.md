@@ -185,8 +185,10 @@ overly regular spacing in places.
 regains a small amount of independent ISO6400 response relative to 5k,
 with more flat variation. Coupled weak response stays below Corpus 100k.
 Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
-The [later training checkpoints](scene-full-epoch.md#execution-status) match
-inputs through 10,000 updates on 20,000 distinct photos per arm.
+[Full-epoch scene training at update 10,000](scene-full-epoch.md#matched-quality-comparison-at-10000-updates)
+shows a small ISO6400 independent fine-response benefit over mirroring and
+near-identical response to the local arm. Fine flat noise drops from 7.5k
+on coupled draws. Both standing reviews still show incomplete fine crossings.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

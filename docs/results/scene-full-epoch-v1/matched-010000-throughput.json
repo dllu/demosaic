@@ -1,0 +1,183 @@
+{
+  "training": {
+    "path": "/home/dllu/proj/demosaic/docs/results/scene-full-epoch-v1/matched-010000-training.json",
+    "sha256": "1b4929f6f0a427d25a070f2f3aa05c216e6b66e481b4b4597c368ac012814f3b"
+  },
+  "driver": "\"\"\"Reduce retained training speed and worker startup times without rerunning training.\"\"\"\nimport statistics\nimport subprocess\nfrom pathlib import Path\n\nfrom demosaic.experiments.artifacts import checked, read_json, reference, write_json\n\nROOT=Path(__file__).resolve().parent\nOUT=Path(\"docs/results/scene-full-epoch-v1\")\n\n\ndef main():\n    audit=reference(OUT/\"matched-010000-training.json\")\n    training=read_json(checked(audit))\n    results={}\n    for key,mode in ((\"none\",\"local\"),(\"spatial\",\"spatial\")):\n        a=training[\"arms\"][key]\n        phase=read_json(checked(a[\"phases\"][-1][\"receipt\"]))\n        init=[]\n        segments=[]\n        for record in phase[\"segments\"]:\n            mark=checked(record)\n            receipt=read_json(mark)\n            launch=reference(mark.parents[1]/\"launch.json\")\n            job=read_json(checked(launch))[\"child\"]\n            log=reference(mark.parent/\"train.jsonl\")\n            creation=int(subprocess.check_output([\"stat\",\"-c\",\"%W\",checked(log)],text=True))\n            if creation<=0:\n                raise RuntimeError(\"The filesystem has no usable creation time for worker logs\")\n            seconds=creation-job[\"created\"]\n            assert 0<seconds<900\n            init.append(seconds)\n            segments.append({\"start\":receipt[\"start_step_exclusive\"],\"stop\":receipt[\"steps\"],\n                             \"initialization_seconds\":seconds,\"launch\":launch,\"worker_log\":log,\n                             \"training_seconds\":receipt[\"seconds\"],\"data_seconds\":receipt[\"data_seconds\"]})\n        median=statistics.median(init)\n        results[mode]={\"retained_training_loop_seconds\":a[\"training_seconds\"],\n                       \"reader_and_CPU_fingerprint_seconds\":a[\"reader_and_cpu_fingerprints_seconds\"],\n                       \"checkpoint_write_seconds\":a[\"checkpoint_seconds\"],\n                       \"native_queries_per_retained_loop_second\":a[\"native_queries\"]/a[\"training_seconds\"],\n                       \"photos_per_retained_loop_second\":a[\"photos\"]/a[\"training_seconds\"],\n                       \"reader_share_of_retained_loop\":a[\"reader_and_cpu_fingerprints_seconds\"]/a[\"training_seconds\"],\n                       \"median_worker_initialization_latest_five_segments_seconds\":median,\"segments\":segments}\n    write_json(OUT/\"matched-010000-throughput.json\",{\"training\":audit,\"driver\":Path(__file__).read_text(),\n                \"method\":\"Worker startup is launch process creation to filesystem creation of train.jsonl. Clock resolution is one second.\",\n                \"scope\":\"Retained loops through 10k and the final five accepted segment starts. Attempt retries, waiting and evaluation are excluded.\",\n                \"results\":results})\n    print({k:{a:round(b,3)for a,b in v.items()if a!=\"segments\"}for k,v in results.items()})\n\n\nif __name__==\"__main__\":\n    main()\n",
+  "method": "Worker startup is launch process creation to filesystem creation of train.jsonl. Clock resolution is one second.",
+  "scope": "Retained loops through 10k and the final five accepted segment starts. Attempt retries, waiting and evaluation are excluded.",
+  "results": {
+    "local": {
+      "retained_training_loop_seconds": 4702.644486097153,
+      "reader_and_CPU_fingerprint_seconds": 1280.7954737903783,
+      "checkpoint_write_seconds": 11.419713593670167,
+      "native_queries_per_retained_loop_second": 17.01170484745575,
+      "photos_per_retained_loop_second": 4.2529262118639375,
+      "reader_share_of_retained_loop": 0.27235643212598953,
+      "median_worker_initialization_latest_five_segments_seconds": 34.74000000953674,
+      "segments": [
+        {
+          "start": 7500,
+          "stop": 8000,
+          "initialization_seconds": 37.890000104904175,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-008000/attempt-01/launch.json",
+            "sha256": "8ed88dbc3a06213098e2891bbda7ecad3bbae29748d7b4b1eed11cfbf9fde957"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-008000/attempt-01/work/train.jsonl",
+            "sha256": "7be906eae60777d2a31d8515437cd5768c7bf330a8512a7c398006a68a6d354f"
+          },
+          "training_seconds": 263.6010582820745,
+          "data_seconds": 59.78898348938674
+        },
+        {
+          "start": 8000,
+          "stop": 8500,
+          "initialization_seconds": 35.80999994277954,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-008500/attempt-01/launch.json",
+            "sha256": "5fa73d48664e33b151f77151e6fd9c0ada96a93ab5b3de8b4861ad15052b1200"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-008500/attempt-01/work/train.jsonl",
+            "sha256": "9479e6aeff01383dfa80cc31891e1cbd543b43ef172a98d904c9f8cc71e55c28"
+          },
+          "training_seconds": 251.35910095099825,
+          "data_seconds": 64.24321479012724
+        },
+        {
+          "start": 8500,
+          "stop": 9000,
+          "initialization_seconds": 34.71000003814697,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-009000/attempt-01/launch.json",
+            "sha256": "453f784ccdf38c5a5fdf979d6a14d4720babba742defe6ddae8633b123e621e3"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-009000/attempt-01/work/train.jsonl",
+            "sha256": "d4131bdf804a46b95071b15267b8b8089cc497e53891fdc06dfad170cd7138a4"
+          },
+          "training_seconds": 206.3089803289622,
+          "data_seconds": 58.018346919561736
+        },
+        {
+          "start": 9000,
+          "stop": 9500,
+          "initialization_seconds": 34.74000000953674,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-009500/attempt-01/launch.json",
+            "sha256": "dd1232027b5ae495df08c8305f501cc2f34f89a9fd724e0256d9e01db4092a93"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-009500/attempt-01/work/train.jsonl",
+            "sha256": "eabd9fb6b1e6dabe0007b36a820029d609ae4afe540ba49d1e42fa759feacea3"
+          },
+          "training_seconds": 220.40567902603652,
+          "data_seconds": 59.82928567728959
+        },
+        {
+          "start": 9500,
+          "stop": 10000,
+          "initialization_seconds": 34.420000076293945,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-010000/attempt-01/launch.json",
+            "sha256": "f2cf4651bb7de95e2881c5c46c642402ddaa8c5bc7d830e76815bcd975b68c40"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-010000/segments/through-010000/attempt-01/work/train.jsonl",
+            "sha256": "35bdc3742c5e751d6eb67a40946383f174e9acf4616717feea85b6bc055617f7"
+          },
+          "training_seconds": 203.22152905305848,
+          "data_seconds": 57.95892734127119
+        }
+      ]
+    },
+    "spatial": {
+      "retained_training_loop_seconds": 6064.52800045209,
+      "reader_and_CPU_fingerprint_seconds": 1267.681659013033,
+      "checkpoint_write_seconds": 10.836401745327748,
+      "native_queries_per_retained_loop_second": 13.191463539130542,
+      "photos_per_retained_loop_second": 3.2978658847826354,
+      "reader_share_of_retained_loop": 0.20903220480118676,
+      "median_worker_initialization_latest_five_segments_seconds": 36.44000005722046,
+      "segments": [
+        {
+          "start": 7500,
+          "stop": 8000,
+          "initialization_seconds": 37.3199999332428,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008000/attempt-01/launch.json",
+            "sha256": "c360871811686f580bc5f9fc5563490b66f018663d9db866bdb432aeaa5c3e22"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008000/attempt-01/work/train.jsonl",
+            "sha256": "968997027e9e62a47c579594af7b123ba97ad52df89083a23b71d7e71a79584b"
+          },
+          "training_seconds": 307.09044666809496,
+          "data_seconds": 57.58284962922335
+        },
+        {
+          "start": 8000,
+          "stop": 8500,
+          "initialization_seconds": 40.94000005722046,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008500/attempt-02/launch.json",
+            "sha256": "a1fb9fdf470e2e43b83acb4231397992927e239dd42d9eed6d25a19514d396ee"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-008500/attempt-02/work/train.jsonl",
+            "sha256": "1e7cb7c82e2e9b155798cd7555a49db2c044987a8a327f460a3d729afa87d9b2"
+          },
+          "training_seconds": 281.7117382310098,
+          "data_seconds": 60.297929063555785
+        },
+        {
+          "start": 8500,
+          "stop": 9000,
+          "initialization_seconds": 36.44000005722046,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-009000/attempt-03/launch.json",
+            "sha256": "8c06329bbd7c8db109c8d663c3c67ffde2d458bda5143c29fdba41a4b5c49d22"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-009000/attempt-03/work/train.jsonl",
+            "sha256": "bf97124228b820a3bd51578abbf9db34c419b17d8b496c8493801886b9775618"
+          },
+          "training_seconds": 289.8835730869323,
+          "data_seconds": 59.59621124586556
+        },
+        {
+          "start": 9000,
+          "stop": 9500,
+          "initialization_seconds": 34.49000000953674,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-009500/attempt-01/launch.json",
+            "sha256": "85010181f90a5041f7bcd5f67dd74aaaa49c7687f9220f180e6febac908d2a43"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-009500/attempt-01/work/train.jsonl",
+            "sha256": "7f9c6e85c967a56b8f572e529e0d0f344c674fd59a896cefc1269e74c6c805ac"
+          },
+          "training_seconds": 292.73237035400234,
+          "data_seconds": 60.888043886981905
+        },
+        {
+          "start": 9500,
+          "stop": 10000,
+          "initialization_seconds": 35.609999895095825,
+          "launch": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-010000/attempt-01/launch.json",
+            "sha256": "962b103025ccf670d165935c4db1d8c6117cbee384e11734ffdc3946b6d3ccdc"
+          },
+          "worker_log": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-010000/segments/through-010000/attempt-01/work/train.jsonl",
+            "sha256": "864b981e453c8b35b5ec3a865397bcfa519b5cd4d871f6447a2a778af0ccfaeb"
+          },
+          "training_seconds": 297.03153649601154,
+          "data_seconds": 64.43512485653628
+        }
+      ]
+    }
+  }
+}

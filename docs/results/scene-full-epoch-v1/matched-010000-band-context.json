@@ -1,0 +1,1758 @@
+{
+  "driver_source": "\"\"\"Make photo-paired context comparisons for coarse and fine quiet/weak structure.\"\"\"\nfrom pathlib import Path\n\nimport numpy as np\n\nfrom demosaic.experiments.artifacts import checked, read_json, reference, write_json\n\nROOT=Path(__file__).resolve().parent\nOUTPUT=Path(\"docs/results/scene-full-epoch-v1\")\nBANDS=(\"lower\",\"fine\",\"upper\")\nPOLICIES=(\"spatial/matching\",\"spatial/neutral\",\"spatial/wrong-distant\",\"none\",\"100k\")\nUNIFORM=(\"quiet_RGB_mean_absolute_bias_DN16\",\"quiet_RGB_centered_RMS_DN16\")\nSEED=17905\n\n\ndef array(rows,model,band):\n    if band==\"flat\":\n        return {k:np.array([r[\"metrics\"][model][\"uniform_core\"][k]for r in rows])for k in UNIFORM}\n    fields=[r[\"metrics\"][model][\"band\"][band]for r in rows]\n    dot=np.array([r[\"aligned_increment_dot\"]for r in fields])\n    power=np.array([r[\"exact_paired_increment_sq\"]for r in fields])\n    return {key:np.array([r[key]for r in fields])for key in (\"increment_RMS_DN16\",\"quiet_RMS_DN16\")}|{\n        \"aligned_numerator\":dot,\"aligned_denominator\":power}\n\n\ndef summary(rows,model,band,resamples):\n    totals=array(rows,model,band)\n    if band==\"flat\":\n        return {k:r[resamples].mean(1)for k,r in totals.items()}\n    dot,power=(totals.pop(k)for k in (\"aligned_numerator\",\"aligned_denominator\"))\n    return {k:r[resamples].mean(1)for k,r in totals.items()}|{\n        \"aligned_response_pct\":100*dot[resamples].sum(1)/power[resamples].sum(1)}\n\n\ndef main():\n    before,after=(reference(ROOT/f\"review-{s:06d}/pilot/results.json\")for s in (7500,10000))\n    rows0,rows1=(read_json(checked(r))[\"source_metrics\"]for r in (before,after))\n    def cases(rows,noise,draw):\n        result=sorted((r for r in rows if r[\"profile\"]==noise and r[\"draw\"]==draw),key=lambda r:r[\"source\"])\n        assert len(result)==8\n        return result\n    rng=np.random.default_rng(SEED)\n    draws=np.vstack((np.arange(8),rng.integers(8,size=(10000,8))))\n    summary_rows={}\n    for noise in (\"iso400\",\"iso6400\"):\n        for draw in (\"coupled\",\"independent\"):\n            a,b=(cases(rows,noise,draw)for rows in (rows0,rows1))\n            assert [r[\"source\"]for r in a]==[r[\"source\"]for r in b]\n            gains={}\n            for band in (*BANDS,\"flat\"):\n                m={policy:summary(b,policy,band,draws)for policy in POLICIES}\n                prior=summary(a,\"spatial/matching\",band,draws)\n                after_matching=m[\"spatial/matching\"]\n                options={k:v for k,v in m.items() if k!=\"spatial/matching\"}\n                options[\"matching-7.5k\"]=prior\n                deltas={}\n                for key,choice in options.items():\n                    effects={n:after_matching[n]-choice[n]for n in after_matching}\n                    deltas[key]={k:[float(v[0]),*[float(x)for x in np.quantile(v[1:],[.025,.975])]]for k,v in effects.items()}\n                gains[band]={\"means\":{k:{n:float(a[0])for n,a in f.items()}for k,f in m.items()},\n                             \"matching-minus\":deltas}\n            summary_rows[f\"{noise}/{draw}\"]=gains\n    out=OUTPUT/\"matched-010000-band-context.json\"\n    write_json(out,{\"driver_source\":Path(__file__).read_text(),\"previous\":before,\"current\":after,\"groups\":summary_rows,\n        \"scope\":\"8 fixed photo IDs and matched context interventions. Source-paired bootstrap, reused 10000 draws across each metric in the comparison.\"})\n\n\nif __name__==\"__main__\":\n    main()\n",
+  "previous": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-007500/pilot/results.json",
+    "sha256": "c5a8e7c0c8cbbec73e75d75027db95cc6a4ace031e32173d5851d2f5f4b89faa"
+  },
+  "current": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-010000/pilot/results.json",
+    "sha256": "003c2d239500d7df43e3636b4ab5931a5c3caefb515c7bab62dc2a172844470d"
+  },
+  "groups": {
+    "iso400/coupled": {
+      "lower": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 16.830788970102226,
+            "quiet_RMS_DN16": 4.5657655340445435,
+            "aligned_response_pct": 98.31232575388061
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 16.700875021489814,
+            "quiet_RMS_DN16": 5.506866616799705,
+            "aligned_response_pct": 98.28586561033237
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 17.11921107836205,
+            "quiet_RMS_DN16": 4.556493439177791,
+            "aligned_response_pct": 98.34283576086554
+          },
+          "none": {
+            "increment_RMS_DN16": 17.271922388853433,
+            "quiet_RMS_DN16": 5.068445244519267,
+            "aligned_response_pct": 98.50467565595658
+          },
+          "100k": {
+            "increment_RMS_DN16": 16.03221879696519,
+            "quiet_RMS_DN16": 6.02425621245602,
+            "aligned_response_pct": 98.26119220447394
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              0.1299139486124119,
+              -0.0012601420886070077,
+              0.33459919503500546
+            ],
+            "quiet_RMS_DN16": [
+              -0.9411010827551616,
+              -1.6456871718444233,
+              -0.34111659330381244
+            ],
+            "aligned_response_pct": [
+              0.026460143548248993,
+              -0.07890886485228066,
+              0.0862772502366198
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.28842210825982306,
+              -0.8093016138473246,
+              -0.0014321582419630904
+            ],
+            "quiet_RMS_DN16": [
+              0.009272094866752845,
+              -0.09422550864935977,
+              0.11832680482849423
+            ],
+            "aligned_response_pct": [
+              -0.030510006984926008,
+              -0.06075187296611908,
+              0.012890920353769531
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.4411334187512068,
+              -1.2829701841959285,
+              0.005937904625277213
+            ],
+            "quiet_RMS_DN16": [
+              -0.5026797104747232,
+              -0.9825689910005831,
+              -0.03672762787467443
+            ],
+            "aligned_response_pct": [
+              -0.1923499020759607,
+              -0.5119368913637601,
+              -0.026895378583413933
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              0.7985701731370369,
+              -0.16526453023744736,
+              2.6027371242733666
+            ],
+            "quiet_RMS_DN16": [
+              -1.4584906784114766,
+              -2.105111234229973,
+              -0.8301424563108154
+            ],
+            "aligned_response_pct": [
+              0.051133549406671364,
+              -0.04561008366819905,
+              0.23750192049904228
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              0.5489515889237708,
+              -0.05611030534142358,
+              1.6855610430329584
+            ],
+            "quiet_RMS_DN16": [
+              -0.28260397270899773,
+              -0.5070002549521725,
+              -0.04165215716527446
+            ],
+            "aligned_response_pct": [
+              0.05014108202448142,
+              -0.060592494918623174,
+              0.16016299154927227
+            ]
+          }
+        }
+      },
+      "fine": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 35.75383959692107,
+            "quiet_RMS_DN16": 2.4356473951601663,
+            "aligned_response_pct": 94.04961431731235
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 35.52446850276347,
+            "quiet_RMS_DN16": 3.6551937975669935,
+            "aligned_response_pct": 94.04914560587184
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 35.749696090020535,
+            "quiet_RMS_DN16": 2.491594291823014,
+            "aligned_response_pct": 94.02696018532339
+          },
+          "none": {
+            "increment_RMS_DN16": 35.69779285125473,
+            "quiet_RMS_DN16": 2.9792713863857,
+            "aligned_response_pct": 93.95176751152148
+          },
+          "100k": {
+            "increment_RMS_DN16": 35.9379179620645,
+            "quiet_RMS_DN16": 3.1360582387433213,
+            "aligned_response_pct": 94.46876571147669
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              0.2293710941575995,
+              0.020884454108276884,
+              0.4451641084889175
+            ],
+            "quiet_RMS_DN16": [
+              -1.2195464024068272,
+              -2.5326593418002377,
+              -0.301936994680835
+            ],
+            "aligned_response_pct": [
+              0.00046871144050442126,
+              -0.17251880367131775,
+              0.15375284361210995
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              0.0041435069005331115,
+              -0.0852600274508788,
+              0.08949134216487377
+            ],
+            "quiet_RMS_DN16": [
+              -0.05594689666284758,
+              -0.14756688591460954,
+              0.024236951161187046
+            ],
+            "aligned_response_pct": [
+              0.022654131988957715,
+              0.005736738374574558,
+              0.0649791912857168
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              0.05604674566633605,
+              -0.18223083818698313,
+              0.3702655278204403
+            ],
+            "quiet_RMS_DN16": [
+              -0.5436239912255338,
+              -1.3519538726240814,
+              0.05842297660815771
+            ],
+            "aligned_response_pct": [
+              0.09784680579086569,
+              0.01677188071838601,
+              0.2220132522961933
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              -0.184078365143435,
+              -0.46029081870695876,
+              0.0807716664160591
+            ],
+            "quiet_RMS_DN16": [
+              -0.7004108435831551,
+              -1.3889542691590084,
+              -0.08759968366151005
+            ],
+            "aligned_response_pct": [
+              -0.419151394164345,
+              -0.8177760571829967,
+              -0.14793245544564723
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              0.09914636972967372,
+              -0.10446520714439433,
+              0.2954107511258144
+            ],
+            "quiet_RMS_DN16": [
+              -0.20956889348160335,
+              -0.44039056929480974,
+              -0.014109459868561509
+            ],
+            "aligned_response_pct": [
+              -0.1197486492390567,
+              -0.38197244724224716,
+              0.005559734671948391
+            ]
+          }
+        }
+      },
+      "upper": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 48.05983361237392,
+            "quiet_RMS_DN16": 1.6198729627632913,
+            "aligned_response_pct": 72.18896420243183
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 47.957341090435555,
+            "quiet_RMS_DN16": 2.5387321177474265,
+            "aligned_response_pct": 72.11251686443418
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 48.28142719865155,
+            "quiet_RMS_DN16": 1.6717742429012825,
+            "aligned_response_pct": 72.20416986200476
+          },
+          "none": {
+            "increment_RMS_DN16": 48.289577338094304,
+            "quiet_RMS_DN16": 2.0678349645763245,
+            "aligned_response_pct": 72.15083831487324
+          },
+          "100k": {
+            "increment_RMS_DN16": 47.71779376154614,
+            "quiet_RMS_DN16": 1.274433205406102,
+            "aligned_response_pct": 70.79479565225387
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              0.10249252193836611,
+              -0.06756590410596904,
+              0.2527330302701074
+            ],
+            "quiet_RMS_DN16": [
+              -0.9188591549841352,
+              -2.0364236513433216,
+              -0.1996621568012138
+            ],
+            "aligned_response_pct": [
+              0.07644733799764936,
+              -0.25729531183369825,
+              0.2394124547639819
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.2215935862776277,
+              -0.6464949141816646,
+              0.012008735705507156
+            ],
+            "quiet_RMS_DN16": [
+              -0.051901280137991224,
+              -0.10806682689989033,
+              -0.0003627608465195452
+            ],
+            "aligned_response_pct": [
+              -0.015205659572927743,
+              -0.2809488455193357,
+              0.3047310286720659
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.22974372572038249,
+              -0.7454664588966157,
+              0.09573690524547392
+            ],
+            "quiet_RMS_DN16": [
+              -0.44796200181303325,
+              -1.1027440829761628,
+              0.014539710953628084
+            ],
+            "aligned_response_pct": [
+              0.03812588755859281,
+              -0.5783994525901903,
+              0.7018569794318665
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              0.3420398508277813,
+              -0.7984747688198462,
+              2.239284641657669
+            ],
+            "quiet_RMS_DN16": [
+              0.34543975735718924,
+              -0.0025999979590731748,
+              0.6959499260136937
+            ],
+            "aligned_response_pct": [
+              1.394168550177966,
+              0.2672742174037097,
+              2.8428038217788028
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              0.6161621419416647,
+              -0.02521558315835648,
+              1.7818098079827627
+            ],
+            "quiet_RMS_DN16": [
+              -0.12808489726732675,
+              -0.3126707359135447,
+              0.004902878852539594
+            ],
+            "aligned_response_pct": [
+              0.2205285486230224,
+              -0.36310004922933603,
+              1.0015930922478602
+            ]
+          }
+        }
+      },
+      "flat": {
+        "means": {
+          "spatial/matching": {
+            "quiet_RGB_mean_absolute_bias_DN16": 7.53490825800784,
+            "quiet_RGB_centered_RMS_DN16": 12.240760707260645
+          },
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": 7.263871760340649,
+            "quiet_RGB_centered_RMS_DN16": 13.695688919113273
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": 7.5376117487686995,
+            "quiet_RGB_centered_RMS_DN16": 12.293450852294086
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": 7.609272975436562,
+            "quiet_RGB_centered_RMS_DN16": 12.972742422485414
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": 6.4651003330261885,
+            "quiet_RGB_centered_RMS_DN16": 13.701922347727027
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.2710364976671906,
+              -0.3894559669162717,
+              0.9811898130872514
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -1.4549282118526286,
+              -2.7176398866488523,
+              -0.5088803624957148
+            ]
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -0.00270349076085985,
+              -0.1548786947087777,
+              0.15979133887535113
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.05269014503344138,
+              -0.26067680246298597,
+              0.17054055123331402
+            ]
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -0.07436471742872186,
+              -1.1040075502752396,
+              0.7904799642959647
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.7319817152247694,
+              -1.6251350723745137,
+              0.03502545761232872
+            ]
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              1.0698079249816512,
+              -1.233795490620186,
+              4.111770615270025
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -1.4611616404663827,
+              -2.4287489123706942,
+              -0.4968526901694722
+            ]
+          },
+          "matching-7.5k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.5366684304092688,
+              -0.281061133188346,
+              1.3056278392247653
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.03360105821568027,
+              -0.358121074393468,
+              0.2276758729290318
+            ]
+          }
+        }
+      }
+    },
+    "iso400/independent": {
+      "lower": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 39.02761988899912,
+            "quiet_RMS_DN16": 4.92327790940641,
+            "aligned_response_pct": 97.71173129045836
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 39.28988867662787,
+            "quiet_RMS_DN16": 5.7139820981004155,
+            "aligned_response_pct": 97.68155344172735
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 39.117799213223066,
+            "quiet_RMS_DN16": 4.94585725608781,
+            "aligned_response_pct": 97.74835668600575
+          },
+          "none": {
+            "increment_RMS_DN16": 39.520273644207364,
+            "quiet_RMS_DN16": 5.130680796853165,
+            "aligned_response_pct": 97.89906903184071
+          },
+          "100k": {
+            "increment_RMS_DN16": 39.60659770265407,
+            "quiet_RMS_DN16": 6.092109001672124,
+            "aligned_response_pct": 97.62022065654092
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              -0.2622687876287486,
+              -0.6709355616157973,
+              0.118330687540638
+            ],
+            "quiet_RMS_DN16": [
+              -0.7907041886940052,
+              -1.3623960448739982,
+              -0.3640927360443058
+            ],
+            "aligned_response_pct": [
+              0.03017784873101448,
+              -0.04944131653685737,
+              0.09689840051798662
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.09017932422394637,
+              -0.3692995730184663,
+              0.10773303498908167
+            ],
+            "quiet_RMS_DN16": [
+              -0.022579346681399493,
+              -0.1352329671368826,
+              0.0768241804327093
+            ],
+            "aligned_response_pct": [
+              -0.03662539554738942,
+              -0.10808379747651102,
+              0.005567648609662607
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.49265375520824506,
+              -1.3291781393544824,
+              0.18069971032809992
+            ],
+            "quiet_RMS_DN16": [
+              -0.2074028874467544,
+              -0.576020949664855,
+              0.20061865830307468
+            ],
+            "aligned_response_pct": [
+              -0.1873377413823505,
+              -0.5904465777123565,
+              0.0301516293123015
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              -0.5789778136549515,
+              -1.3286499389890047,
+              0.05037001089068301
+            ],
+            "quiet_RMS_DN16": [
+              -1.1688310922657141,
+              -1.7146134848779784,
+              -0.6318604616803034
+            ],
+            "aligned_response_pct": [
+              0.09151063391743719,
+              -0.024675030341652256,
+              0.27554048421676214
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              0.08119047371328492,
+              -0.25922634714331155,
+              0.5486204177801071
+            ],
+            "quiet_RMS_DN16": [
+              -0.2472981679696309,
+              -0.47641589592863287,
+              -0.01620023760944713
+            ],
+            "aligned_response_pct": [
+              0.06631790532155435,
+              -0.05687716011427355,
+              0.25217083704139387
+            ]
+          }
+        }
+      },
+      "fine": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 50.77764945438847,
+            "quiet_RMS_DN16": 2.4154679669507093,
+            "aligned_response_pct": 94.26836152744103
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 50.9132831297845,
+            "quiet_RMS_DN16": 3.356671395079594,
+            "aligned_response_pct": 94.28580447902938
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 50.82633989748485,
+            "quiet_RMS_DN16": 2.446130413732808,
+            "aligned_response_pct": 94.24805923014635
+          },
+          "none": {
+            "increment_RMS_DN16": 50.80678285440947,
+            "quiet_RMS_DN16": 2.755162872344565,
+            "aligned_response_pct": 94.18736073287451
+          },
+          "100k": {
+            "increment_RMS_DN16": 50.74881614986679,
+            "quiet_RMS_DN16": 2.722566064979616,
+            "aligned_response_pct": 94.72516519120639
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              -0.13563367539603632,
+              -0.4241137079983872,
+              0.13630561307911926
+            ],
+            "quiet_RMS_DN16": [
+              -0.9412034281288846,
+              -2.021908482244189,
+              -0.25674834605854735
+            ],
+            "aligned_response_pct": [
+              -0.017442951588350297,
+              -0.19499541116845515,
+              0.12518767013578186
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.04869044309638326,
+              -0.1193423093459959,
+              0.011938320172990555
+            ],
+            "quiet_RMS_DN16": [
+              -0.03066244678209884,
+              -0.1151541155137248,
+              0.057650675503813295
+            ],
+            "aligned_response_pct": [
+              0.02030229729467692,
+              0.0023249272127401355,
+              0.07227785171522497
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.029133400021002842,
+              -0.36504841040282604,
+              0.3402780317818925
+            ],
+            "quiet_RMS_DN16": [
+              -0.3396949053938556,
+              -1.0796563801919916,
+              0.22865231204297817
+            ],
+            "aligned_response_pct": [
+              0.08100079456652054,
+              0.007536811539143074,
+              0.18341495552178413
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              0.028833304521675984,
+              -0.5324466817045781,
+              0.5587043661904758
+            ],
+            "quiet_RMS_DN16": [
+              -0.30709809802890664,
+              -0.5930420991549538,
+              -0.04452156624480352
+            ],
+            "aligned_response_pct": [
+              -0.4568036637653563,
+              -0.9897237293807564,
+              -0.11843315397290155
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              -0.06088059972267246,
+              -0.2491748443523889,
+              0.09353694919268207
+            ],
+            "quiet_RMS_DN16": [
+              -0.11977034287537114,
+              -0.3186142819801129,
+              0.07403972675510406
+            ],
+            "aligned_response_pct": [
+              -0.13386371672277164,
+              -0.372280141062161,
+              0.009727135296145661
+            ]
+          }
+        }
+      },
+      "upper": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 51.372266096062845,
+            "quiet_RMS_DN16": 1.6321436100243423,
+            "aligned_response_pct": 72.48906328194028
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 51.548476559045326,
+            "quiet_RMS_DN16": 2.373972493267698,
+            "aligned_response_pct": 72.51432645310156
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 51.58826160712315,
+            "quiet_RMS_DN16": 1.668936178225673,
+            "aligned_response_pct": 72.4780610027652
+          },
+          "none": {
+            "increment_RMS_DN16": 51.85352785322785,
+            "quiet_RMS_DN16": 1.9585115690369408,
+            "aligned_response_pct": 72.46384478433306
+          },
+          "100k": {
+            "increment_RMS_DN16": 50.66280946441374,
+            "quiet_RMS_DN16": 1.1401254174985984,
+            "aligned_response_pct": 71.33637462341136
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              -0.17621046298248189,
+              -0.4073203364846947,
+              0.03656233134192765
+            ],
+            "quiet_RMS_DN16": [
+              -0.7418288832433557,
+              -1.6542587009726266,
+              -0.18455319042498883
+            ],
+            "aligned_response_pct": [
+              -0.02526317116128496,
+              -0.28604415978782105,
+              0.12759813466696812
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.21599551106030646,
+              -0.5786972678437369,
+              -0.014603158129681049
+            ],
+            "quiet_RMS_DN16": [
+              -0.03679256820133081,
+              -0.09432110631943737,
+              0.026843256257759414
+            ],
+            "aligned_response_pct": [
+              0.011002279175073681,
+              -0.2513057748200843,
+              0.34459994900079527
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.48126175716500796,
+              -1.540771263806008,
+              0.18646006259778858
+            ],
+            "quiet_RMS_DN16": [
+              -0.3263679590125985,
+              -0.9269771196355066,
+              0.11433191594470199
+            ],
+            "aligned_response_pct": [
+              0.025218497607212953,
+              -0.4498464716748174,
+              0.5240413630669202
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              0.709456631649104,
+              0.016459774647707093,
+              1.7473024186337371
+            ],
+            "quiet_RMS_DN16": [
+              0.49201819252574386,
+              0.17581540327243483,
+              0.846613497505361
+            ],
+            "aligned_response_pct": [
+              1.1526886585289162,
+              0.30594689974423345,
+              2.2179555877709594
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              0.5985189985206958,
+              -0.04502091534622821,
+              1.7259194802233253
+            ],
+            "quiet_RMS_DN16": [
+              -0.08430718127291059,
+              -0.23874929867931982,
+              0.04863907362707512
+            ],
+            "aligned_response_pct": [
+              0.12086849014428935,
+              -0.4336313187831994,
+              0.8313136007505196
+            ]
+          }
+        }
+      },
+      "flat": {
+        "means": {
+          "spatial/matching": {
+            "quiet_RGB_mean_absolute_bias_DN16": 9.455888518799597,
+            "quiet_RGB_centered_RMS_DN16": 11.758093715307218
+          },
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": 8.806865458108517,
+            "quiet_RGB_centered_RMS_DN16": 12.528282901708614
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": 9.297937597586575,
+            "quiet_RGB_centered_RMS_DN16": 11.789199827950949
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": 9.30085293727086,
+            "quiet_RGB_centered_RMS_DN16": 11.766374598918198
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": 11.567357909362064,
+            "quiet_RGB_centered_RMS_DN16": 12.773910826379815
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.6490230606910803,
+              -0.477296165981965,
+              2.031030738038727
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.7701891864013959,
+              -1.5270381039718972,
+              -0.18498671265726602
+            ]
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.1579509212130219,
+              -0.06601233550117723,
+              0.42490482529858026
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.0311061126437302,
+              -0.34037744962861277,
+              0.23834588197725814
+            ]
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.1550355815287361,
+              -0.46764430086891906,
+              0.8039055906362097
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.008280883610979117,
+              -0.55377461009125,
+              0.5879688638558633
+            ]
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -2.1114693905624673,
+              -5.747571114214605,
+              1.132293572727793
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -1.0158171110725966,
+              -1.7459555261773847,
+              -0.34427158893816273
+            ]
+          },
+          "matching-7.5k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.010348395921841558,
+              -0.7106682171201284,
+              0.6228409766981943
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              0.028037515966122584,
+              -0.367665325690755,
+              0.3806821803307443
+            ]
+          }
+        }
+      }
+    },
+    "iso6400/coupled": {
+      "lower": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 34.70851685336487,
+            "quiet_RMS_DN16": 10.868874634010941,
+            "aligned_response_pct": 94.24075640805336
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 34.5314257238044,
+            "quiet_RMS_DN16": 11.3699344557388,
+            "aligned_response_pct": 94.20982600103505
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 34.79150226601668,
+            "quiet_RMS_DN16": 11.000387637873025,
+            "aligned_response_pct": 94.1607893758349
+          },
+          "none": {
+            "increment_RMS_DN16": 34.683066271825425,
+            "quiet_RMS_DN16": 11.142403043203908,
+            "aligned_response_pct": 94.15010092128745
+          },
+          "100k": {
+            "increment_RMS_DN16": 33.95227833757069,
+            "quiet_RMS_DN16": 12.377190371107622,
+            "aligned_response_pct": 94.3685661179179
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              0.17709112956047335,
+              0.03028306623395524,
+              0.3187238837252906
+            ],
+            "quiet_RMS_DN16": [
+              -0.5010598217278588,
+              -1.1331847183758412,
+              0.029763090729602527
+            ],
+            "aligned_response_pct": [
+              0.030930407018303185,
+              -0.16330425798551573,
+              0.19274126436400585
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.08298541265180859,
+              -0.2656831797992824,
+              0.04258095724467993
+            ],
+            "quiet_RMS_DN16": [
+              -0.13151300386208398,
+              -0.5490047890815628,
+              0.26813715993671006
+            ],
+            "aligned_response_pct": [
+              0.07996703221846246,
+              0.059092338352229136,
+              0.11109382537336321
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              0.02545058153944524,
+              -0.20264144147933755,
+              0.1911391285417281
+            ],
+            "quiet_RMS_DN16": [
+              -0.2735284091929664,
+              -0.6602822559104301,
+              0.05957568599641749
+            ],
+            "aligned_response_pct": [
+              0.09065548676591106,
+              -0.0008871362188926923,
+              0.1345001149596498
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              0.7562385157941804,
+              0.1663192972056522,
+              1.7728244083908267
+            ],
+            "quiet_RMS_DN16": [
+              -1.5083157370966802,
+              -3.1813729645009445,
+              0.06460491166409987
+            ],
+            "aligned_response_pct": [
+              -0.1278097098645361,
+              -0.47494376088513945,
+              0.5955466995686155
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              0.40835639578228466,
+              -0.06034315312173533,
+              1.2107978496131546
+            ],
+            "quiet_RMS_DN16": [
+              -0.0935723046619561,
+              -0.28239429862308185,
+              0.09509964583282304
+            ],
+            "aligned_response_pct": [
+              -0.039539990501211264,
+              -0.3425589175720063,
+              0.15853605905327584
+            ]
+          }
+        }
+      },
+      "fine": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 85.00927513990081,
+            "quiet_RMS_DN16": 4.146532784652649,
+            "aligned_response_pct": 67.02141350798553
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 84.85490459279382,
+            "quiet_RMS_DN16": 4.442631968005973,
+            "aligned_response_pct": 67.02960665077151
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 85.1324169011342,
+            "quiet_RMS_DN16": 4.270667908510935,
+            "aligned_response_pct": 66.83577583893036
+          },
+          "none": {
+            "increment_RMS_DN16": 84.75781595892833,
+            "quiet_RMS_DN16": 4.241599708003977,
+            "aligned_response_pct": 67.06939120768094
+          },
+          "100k": {
+            "increment_RMS_DN16": 84.21769434374181,
+            "quiet_RMS_DN16": 4.2082914072913145,
+            "aligned_response_pct": 68.1751032183761
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              0.15437054710699272,
+              -0.12310923218585151,
+              0.4534126803270613
+            ],
+            "quiet_RMS_DN16": [
+              -0.2960991833533235,
+              -0.7035735967637021,
+              -0.013958858414815367
+            ],
+            "aligned_response_pct": [
+              -0.008193142785984264,
+              -0.30587350015969167,
+              0.11261697451433861
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.12314176123339848,
+              -0.3388612599693001,
+              0.05589396180423023
+            ],
+            "quiet_RMS_DN16": [
+              -0.12413512385828618,
+              -0.3190854284935414,
+              -0.005193605730859474
+            ],
+            "aligned_response_pct": [
+              0.18563766905516843,
+              -0.04275651520022485,
+              0.3049971472106705
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              0.2514591809724749,
+              -0.014187526560391817,
+              0.5362504029518391
+            ],
+            "quiet_RMS_DN16": [
+              -0.09506692335132794,
+              -0.3193811883546681,
+              0.06858403266460154
+            ],
+            "aligned_response_pct": [
+              -0.04797769969540866,
+              -0.15700088637297024,
+              0.0439249384906823
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              0.7915807961589962,
+              0.17447715135498199,
+              1.5812457331474283
+            ],
+            "quiet_RMS_DN16": [
+              -0.06175862263866527,
+              -0.3987698158935082,
+              0.26018185622214274
+            ],
+            "aligned_response_pct": [
+              -1.153689710390566,
+              -1.619665657942221,
+              -0.5760247323981805
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              0.2207940116607432,
+              -0.1756436543569274,
+              0.6396388108307889
+            ],
+            "quiet_RMS_DN16": [
+              -0.18790449185503544,
+              -0.48098801478091546,
+              -0.01663243158787534
+            ],
+            "aligned_response_pct": [
+              -0.14002519398630398,
+              -0.62003853135728,
+              0.13869670398775
+            ]
+          }
+        }
+      },
+      "upper": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 76.34630455909938,
+            "quiet_RMS_DN16": 2.209709346507014,
+            "aligned_response_pct": 26.484544067154022
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 76.31296310046109,
+            "quiet_RMS_DN16": 2.3466346965462304,
+            "aligned_response_pct": 26.548059636502227
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 76.63259526469588,
+            "quiet_RMS_DN16": 2.260755130305254,
+            "aligned_response_pct": 26.437972847391404
+          },
+          "none": {
+            "increment_RMS_DN16": 76.754962995177,
+            "quiet_RMS_DN16": 2.2897477702292846,
+            "aligned_response_pct": 26.72960684058846
+          },
+          "100k": {
+            "increment_RMS_DN16": 75.51394937810184,
+            "quiet_RMS_DN16": 1.7638401209230823,
+            "aligned_response_pct": 25.93039574072151
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              0.03334145863829008,
+              -0.06289981196464786,
+              0.13216151574717327
+            ],
+            "quiet_RMS_DN16": [
+              -0.13692535003921646,
+              -0.30862770296360464,
+              -0.01615637648967372
+            ],
+            "aligned_response_pct": [
+              -0.06351556934820479,
+              -0.3180275899797442,
+              0.15311720377055948
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.2862907055964996,
+              -0.7836981158765504,
+              -0.009474923614236297
+            ],
+            "quiet_RMS_DN16": [
+              -0.05104578379824032,
+              -0.11538213959988398,
+              -0.011318690687776023
+            ],
+            "aligned_response_pct": [
+              0.04657121976261891,
+              -0.14530188939387756,
+              0.19676179805635347
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.40865843607761576,
+              -1.518837931718295,
+              0.2642517454196895
+            ],
+            "quiet_RMS_DN16": [
+              -0.08003842372227066,
+              -0.18472272453197425,
+              0.004243343931445764
+            ],
+            "aligned_response_pct": [
+              -0.24506277343443728,
+              -0.5490485437600666,
+              0.014211438050684498
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              0.8323551809975385,
+              -0.4629876006344137,
+              2.896153264454959
+            ],
+            "quiet_RMS_DN16": [
+              0.4458692255839316,
+              0.31350722383794477,
+              0.6014445148939149
+            ],
+            "aligned_response_pct": [
+              0.5541483264325109,
+              -0.6294593173131633,
+              1.6585493307898957
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              1.1029801566876074,
+              -0.1383866230785104,
+              3.270630599471507
+            ],
+            "quiet_RMS_DN16": [
+              -0.04983117492720801,
+              -0.16323421758240675,
+              0.023522660245703274
+            ],
+            "aligned_response_pct": [
+              0.180868284709657,
+              -0.6396877899226625,
+              1.101373042958425
+            ]
+          }
+        }
+      },
+      "flat": {
+        "means": {
+          "spatial/matching": {
+            "quiet_RGB_mean_absolute_bias_DN16": 26.20804181586554,
+            "quiet_RGB_centered_RMS_DN16": 29.079293537552978
+          },
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": 26.18738737978235,
+            "quiet_RGB_centered_RMS_DN16": 29.338248249400596
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": 26.648724672796497,
+            "quiet_RGB_centered_RMS_DN16": 28.933648498321062
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": 26.272199866184675,
+            "quiet_RGB_centered_RMS_DN16": 29.49380958469005
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": 24.314138571094333,
+            "quiet_RGB_centered_RMS_DN16": 31.538814924209362
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.020654436083187733,
+              -1.6272024092208714,
+              1.4798012665182292
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.2589547118476183,
+              -1.17125706672347,
+              0.7209663450172901
+            ]
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -0.4406828569309589,
+              -1.7310251391243234,
+              0.6806737257710944
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              0.14564503923191552,
+              -0.45976296706439435,
+              0.8158626251855452
+            ]
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -0.06415805031913635,
+              -1.0180307946878508,
+              0.9305525735283028
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.4145160471370737,
+              -1.182216669287513,
+              0.27020731181889346
+            ]
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              1.8939032447712059,
+              -3.943680450767168,
+              11.004094848419196
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -2.459521386656384,
+              -4.5148665892899515,
+              -0.6764034178578342
+            ]
+          },
+          "matching-7.5k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              1.138121832609503,
+              -1.0714554939776957,
+              3.3925935329350025
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.35470175583680685,
+              -1.303562941054821,
+              0.44963991318481433
+            ]
+          }
+        }
+      }
+    },
+    "iso6400/independent": {
+      "lower": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 96.80313967696043,
+            "quiet_RMS_DN16": 12.071378841855296,
+            "aligned_response_pct": 94.20154264632566
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 97.12100162646136,
+            "quiet_RMS_DN16": 12.46062535251314,
+            "aligned_response_pct": 94.16075868573074
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 96.47564334145011,
+            "quiet_RMS_DN16": 12.191044945771766,
+            "aligned_response_pct": 94.1435060545244
+          },
+          "none": {
+            "increment_RMS_DN16": 97.45907486132475,
+            "quiet_RMS_DN16": 12.221423968363741,
+            "aligned_response_pct": 94.25980020781019
+          },
+          "100k": {
+            "increment_RMS_DN16": 97.46364179657485,
+            "quiet_RMS_DN16": 13.868021012884645,
+            "aligned_response_pct": 94.45015882867321
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              -0.31786194950093716,
+              -0.9213084735811892,
+              0.2430639931833313
+            ],
+            "quiet_RMS_DN16": [
+              -0.3892465106578449,
+              -0.8686977739064684,
+              0.04608199527678458
+            ],
+            "aligned_response_pct": [
+              0.040783960594922064,
+              -0.0852905751143588,
+              0.11577553358016246
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              0.3274963355103182,
+              0.0033618214739732366,
+              0.714168991104458
+            ],
+            "quiet_RMS_DN16": [
+              -0.11966610391647059,
+              -0.43866254214503186,
+              0.2299957504933215
+            ],
+            "aligned_response_pct": [
+              0.058036591801268855,
+              0.021877526658794368,
+              0.15287307843631517
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.6559351843643242,
+              -2.1894084535669265,
+              0.4551945810440543
+            ],
+            "quiet_RMS_DN16": [
+              -0.15004512650844504,
+              -0.573034188350747,
+              0.3205699557211485
+            ],
+            "aligned_response_pct": [
+              -0.05825756148452399,
+              -0.3654035712052039,
+              0.12979979642847858
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              -0.6605021196144207,
+              -2.2072916034280734,
+              0.5995198795526501
+            ],
+            "quiet_RMS_DN16": [
+              -1.7966421710293492,
+              -2.919809790776232,
+              -0.7398494564644067
+            ],
+            "aligned_response_pct": [
+              -0.248616182347547,
+              -0.498889949613158,
+              -0.015132968478652486
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              -0.48429426520048935,
+              -1.529249685064869,
+              0.17057697112873163
+            ],
+            "quiet_RMS_DN16": [
+              -0.0257812659136043,
+              -0.24477233724020303,
+              0.16385369255392299
+            ],
+            "aligned_response_pct": [
+              -0.0424674188983829,
+              -0.22803338263317235,
+              0.14176822505785935
+            ]
+          }
+        }
+      },
+      "fine": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 103.57190961647781,
+            "quiet_RMS_DN16": 4.119703269161369,
+            "aligned_response_pct": 66.23327841519284
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 103.8233216750973,
+            "quiet_RMS_DN16": 4.236000966599262,
+            "aligned_response_pct": 66.28731713589266
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 103.66012160241576,
+            "quiet_RMS_DN16": 4.151329796472389,
+            "aligned_response_pct": 66.00015295605336
+          },
+          "none": {
+            "increment_RMS_DN16": 103.85634166902594,
+            "quiet_RMS_DN16": 4.111023464236215,
+            "aligned_response_pct": 66.23175960738652
+          },
+          "100k": {
+            "increment_RMS_DN16": 103.98270053213282,
+            "quiet_RMS_DN16": 4.126567371043436,
+            "aligned_response_pct": 67.14528466526085
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              -0.25141205861949345,
+              -0.49631456743415076,
+              -0.006603173296625187
+            ],
+            "quiet_RMS_DN16": [
+              -0.11629769743789264,
+              -0.23222880772187504,
+              -0.011656767429852178
+            ],
+            "aligned_response_pct": [
+              -0.05403872069982185,
+              -0.45467017577409374,
+              0.2318413756076955
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.08821198593794577,
+              -0.2548233252650469,
+              0.06082423050990504
+            ],
+            "quiet_RMS_DN16": [
+              -0.03162652731101989,
+              -0.06968146168638434,
+              0.0050599763377539245
+            ],
+            "aligned_response_pct": [
+              0.23312545913948668,
+              0.08870069235349086,
+              0.32913062141979627
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.28443205254812653,
+              -0.5730541726580046,
+              0.002871633419697558
+            ],
+            "quiet_RMS_DN16": [
+              0.008679804925153967,
+              -0.0632326110621453,
+              0.08916609147118716
+            ],
+            "aligned_response_pct": [
+              0.0015188078063204102,
+              -0.3192066050759479,
+              0.22713851587218414
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              -0.4107909156550136,
+              -1.179269579627487,
+              0.3160843385487451
+            ],
+            "quiet_RMS_DN16": [
+              -0.006864101882066542,
+              -0.23990650452452703,
+              0.24436037829496096
+            ],
+            "aligned_response_pct": [
+              -0.9120062500680035,
+              -1.5576900702075993,
+              0.014608332457161935
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              -0.13535504603929382,
+              -0.6295939417327574,
+              0.34744553839469866
+            ],
+            "quiet_RMS_DN16": [
+              -0.06002549890319475,
+              -0.1510873432508668,
+              0.010130812131488486
+            ],
+            "aligned_response_pct": [
+              -0.2860019593798171,
+              -0.9465060426600902,
+              0.15960397810214033
+            ]
+          }
+        }
+      },
+      "upper": {
+        "means": {
+          "spatial/matching": {
+            "increment_RMS_DN16": 82.57910463837919,
+            "quiet_RMS_DN16": 2.128806487407086,
+            "aligned_response_pct": 20.851034052794137
+          },
+          "spatial/neutral": {
+            "increment_RMS_DN16": 82.58188079552029,
+            "quiet_RMS_DN16": 2.1983090258284532,
+            "aligned_response_pct": 20.988001758312418
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": 82.74856559208597,
+            "quiet_RMS_DN16": 2.1452192969665798,
+            "aligned_response_pct": 20.81504323863337
+          },
+          "none": {
+            "increment_RMS_DN16": 83.06434365722232,
+            "quiet_RMS_DN16": 2.1656637470231215,
+            "aligned_response_pct": 21.0053291535979
+          },
+          "100k": {
+            "increment_RMS_DN16": 80.46581415711545,
+            "quiet_RMS_DN16": 1.7466008935892492,
+            "aligned_response_pct": 19.798571714801106
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "increment_RMS_DN16": [
+              -0.0027761571410991337,
+              -0.13464007982672682,
+              0.12934025509713287
+            ],
+            "quiet_RMS_DN16": [
+              -0.06950253842136744,
+              -0.13031832705930121,
+              -0.010473600928825013
+            ],
+            "aligned_response_pct": [
+              -0.13696770551828052,
+              -0.23669780069279991,
+              -0.057672638626067946
+            ]
+          },
+          "spatial/wrong-distant": {
+            "increment_RMS_DN16": [
+              -0.16946095370677483,
+              -0.4637189416352602,
+              0.003352380946906827
+            ],
+            "quiet_RMS_DN16": [
+              -0.01641280955949398,
+              -0.023907765462479146,
+              -0.006830154996086315
+            ],
+            "aligned_response_pct": [
+              0.03599081416076899,
+              -0.09580992438685607,
+              0.11972813564257123
+            ]
+          },
+          "none": {
+            "increment_RMS_DN16": [
+              -0.4852390188431315,
+              -1.5571258472129443,
+              0.14145391116310607
+            ],
+            "quiet_RMS_DN16": [
+              -0.0368572596160357,
+              -0.08389995559731167,
+              0.017663931237977725
+            ],
+            "aligned_response_pct": [
+              -0.1542951008037612,
+              -0.3867486524238927,
+              0.015196639832669945
+            ]
+          },
+          "100k": {
+            "increment_RMS_DN16": [
+              2.1132904812637463,
+              -0.26583620077097725,
+              6.346702291000533
+            ],
+            "quiet_RMS_DN16": [
+              0.3822055938178366,
+              0.26888661967529964,
+              0.5028487556059758
+            ],
+            "aligned_response_pct": [
+              1.0524623379930311,
+              -0.08002778068581255,
+              2.248514648620895
+            ]
+          },
+          "matching-7.5k": {
+            "increment_RMS_DN16": [
+              1.0046926258437736,
+              -0.20218847054800798,
+              3.233658187304655
+            ],
+            "quiet_RMS_DN16": [
+              0.009626596928565156,
+              -0.01388315372341875,
+              0.03742819376438722
+            ],
+            "aligned_response_pct": [
+              0.38900884150542936,
+              -0.16456971285932384,
+              0.994129765536564
+            ]
+          }
+        }
+      },
+      "flat": {
+        "means": {
+          "spatial/matching": {
+            "quiet_RGB_mean_absolute_bias_DN16": 24.655554736312368,
+            "quiet_RGB_centered_RMS_DN16": 31.654012538609393
+          },
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": 24.868274641601232,
+            "quiet_RGB_centered_RMS_DN16": 32.02341977972428
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": 24.730421587561594,
+            "quiet_RGB_centered_RMS_DN16": 31.589884594080534
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": 24.276863202442936,
+            "quiet_RGB_centered_RMS_DN16": 31.95157852710759
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": 27.07205381254719,
+            "quiet_RGB_centered_RMS_DN16": 34.779637852998036
+          }
+        },
+        "matching-minus": {
+          "spatial/neutral": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -0.2127199052888642,
+              -2.4053501251153317,
+              1.5290778547960926
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.3694072411148852,
+              -1.295952613904847,
+              0.39097528922690583
+            ]
+          },
+          "spatial/wrong-distant": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -0.07486685124922587,
+              -1.0605438590759062,
+              0.9816569801176165
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              0.06412794452885962,
+              -0.7750463359920872,
+              0.9529080811769876
+            ]
+          },
+          "none": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.3786915338694321,
+              -2.140516455410128,
+              2.2116156057865424
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.2975659884981958,
+              -1.6212825659658494,
+              0.729044336585233
+            ]
+          },
+          "100k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              -2.416499076234821,
+              -7.209042216142131,
+              2.3608349512701454
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -3.1256253143886426,
+              -4.7623678648157295,
+              -1.563211284970773
+            ]
+          },
+          "matching-7.5k": {
+            "quiet_RGB_mean_absolute_bias_DN16": [
+              0.7594059395084614,
+              -1.8250250030149755,
+              4.3476467720826335
+            ],
+            "quiet_RGB_centered_RMS_DN16": [
+              -0.1086467429441278,
+              -1.2488240135076296,
+              0.8516829847849356
+            ]
+          }
+        }
+      }
+    }
+  },
+  "scope": "8 fixed photo IDs and matched context interventions. Source-paired bootstrap, reused 10000 draws across each metric in the comparison."
+}

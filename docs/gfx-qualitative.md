@@ -39,6 +39,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Local RAW support and exterior phase](green-gap-validation.md#standing-gfx100s-comparisons)
   preserves the overcast sky pixel for pixel. The coarse fence keeps both
   directions, with little change to fine foliage or thin building cables.
+- [Full-epoch scene run at update 10,000](scene-full-epoch.md#standing-gfx100s-at-update-10000)
+  shows a smooth sky and both coarse fence directions in the matched
+  EMAs. Fine leaf margins and building cables remain soft.
 - [Full-epoch scene run at update 7,500](scene-full-epoch.md#standing-gfx100s-at-update-7500)
   shows coarse crossings and a smooth sky in both EMAs. Fine foliage
   and building details remain soft.

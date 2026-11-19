@@ -179,10 +179,20 @@ The next two spatial segments complete and both arms verify the
 20,000 distinct noise seeds and 80,000 native queries. The input traces
 match byte for byte. The independent 9,500 prefix audit records the
 preceding matched checkpoint. The fixed numerical monitor and both
-standing GFX families are collecting at 10,000. The previous matched
-quality review remains at 7,500.
+standing GFX reviews are complete at 10,000. Training is advancing on
+the original schedule toward 12,000.
 [9,500 source and checkpoint verification](results/scene-full-epoch-v1/paired-prefix-009500.json) ·
-[Matched 10k training and review bindings](results/scene-full-epoch-v1/matched-010000-training.json).
+[Matched 10k training and review bindings](results/scene-full-epoch-v1/matched-010000-training.json) ·
+[10k quality review](#matched-quality-comparison-at-10000-updates).
+
+The retained loops through 10k process 17.01 native queries per second
+locally and 13.19 with spatial context. The totals are 4,702.64 s and
+6,064.53 s. Reading and CPU fingerprinting account for 27.2% and 20.9%
+of those loops. The last five successful segments per arm take median
+34.74 s and 36.44 s to initialize, measured from process launch to the
+creation of the training log. Retry, queue and quality-review time are
+outside these measurements.
+[Throughput and segment timings](results/scene-full-epoch-v1/matched-010000-throughput.json).
 
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
@@ -478,3 +488,102 @@ and measured input fingerprints match across arms.
 | --- | --- |
 | Nominal | [Left](images/scene-full-epoch-v1/standing-007500/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-007500/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred | [Left](images/scene-full-epoch-v1/standing-007500/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-007500/mesh-profile3879-fine-green-mesh-right.png) |
+
+## Matched quality comparison at 10,000 updates
+
+Both EMAs are from the verified sequence of 20,000 distinct photos and
+80,000 native queries per arm. The checkpoint SHA256 values are
+`4e7d58622ca609ece938112cd66b5e705c9979c73254a5ced423490f30678933`
+for local and
+`ad1020252d6d66722e701450e0ecd390f6ca64e63e566f4818a89516033fbb1a`
+for spatial. The numerical monitor covers the same eight development
+photo backgrounds as the previous checkpoints, excluded from this
+continuation. Its 32 groups took 83.39 s for CUDA IEEE FP32 collection.
+All eight exact-target boards were viewed at native scale.
+[Training and checkpoint audit](results/scene-full-epoch-v1/matched-010000-training.json) ·
+[Per-photo metrics and exact native crops](results/scene-full-epoch-v1/matched-010000-pilot.json) ·
+[Fine-band paired intervals](results/scene-full-epoch-v1/matched-010000-pilot-paired.json) ·
+[Bandwise and flat-color comparison](results/scene-full-epoch-v1/matched-010000-band-context.json).
+
+| ISO6400, independent draws | Fine-increment RMS, DN16 | Fine flat RMS, DN16 | Fine weak response | Lower-band flat RMS, DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| Corpus 100k | 103.983 | 4.127 | 67.145% | 13.868 |
+| Local 10k | 103.856 | 4.111 | 66.232% | 12.221 |
+| Spatial 10k, matching | 103.572 | 4.120 | 66.233% | 12.071 |
+| Spatial 10k, masked | 103.823 | 4.236 | 66.287% | 12.461 |
+| Spatial 10k, mirrored distant view | 103.660 | 4.151 | 66.000% | 12.191 |
+
+On independent ISO6400 draws, the matching preview raises fine response
+by 0.233 percentage points over the mirrored view [0.089, 0.329].
+Matched local and spatial weak response differ by +0.002 points
+[−0.319, +0.227]. Against masking, the matching preview lowers fine
+increment RMS by 0.251 DN16 [0.007, 0.496] and fine flat RMS by
+0.116 DN16 [0.012, 0.232]. The mirrored view gives lower increment
+RMS in the lower frequency band by 0.327 DN16 [0.003, 0.714].
+The lower band covers 1/32 to 1/8 cycles per native pixel.
+
+Compared with the matching 7,500-update state, fine flat RMS falls
+by 0.188 DN16 on coupled ISO6400 draws [0.017, 0.481]. On independent
+draws the matching fine response falls 0.286 percentage points
+[−0.947, +0.160], and the increment-RMS difference is uncertain.
+The coupled matching result still has 0.792 DN16 more fine-increment
+error than Corpus 100k [0.175, 1.581]. The independent lower-band flat
+RMS is 1.797 DN16 below Corpus 100k [0.740, 2.920], with much smaller
+differences versus matched local and mirrored context. The source count
+is eight, so these are development comparisons.
+
+The two triplets display native noisy Malvar, spatial 10k EMA with
+the matching preview and exact GT. Both use 160×160 pixels at
+ROI `[48,48,160,160]` in their 256-pixel queries, independent ISO6400
+noise with shot/read `0.00128/6.5536e-6`, ADC16 black fraction 0.03,
+capture exposure 0.33 and display exposure ×3.0303 with contrast ×2.
+
+Hauroth, Palauenc05, CC BY-SA 4.0. Query `[218,192]`, RGGB.
+The stone grain remains softer than the exact target and the flat
+control is visibly smooth.
+[All methods](images/scene-full-epoch-v1/pilot-010000/000-iso6400-independent-role0-comparison.png) ·
+[Exact flat](images/scene-full-epoch-v1/pilot-010000/000-iso6400-independent-role2-comparison.png).
+
+![Hauroth, noisy, matched spatial 10k and exact GT](images/scene-full-epoch-v1/pilot-010000/000-iso6400-independent-role0-triplet.png)
+
+Limburg Cathedral, query `[22,250]`, BGGR. The frame and arch
+openings are clear, while fine brickwork and trim remain soft.
+[All methods](images/scene-full-epoch-v1/pilot-010000/001-iso6400-independent-role0-comparison.png) ·
+[Exact flat](images/scene-full-epoch-v1/pilot-010000/001-iso6400-independent-role2-comparison.png).
+
+![Limburg Cathedral, noisy, matched spatial 10k and exact GT](images/scene-full-epoch-v1/pilot-010000/001-iso6400-independent-role0-triplet.png)
+
+Comparable full427 and measured-camera panels are scheduled for the
+full endpoints.
+
+### Standing GFX100S at update 10,000
+
+Both EMAs keep the sky smooth and both coarse-fence directions visible.
+Fine building hardware and leaf margins remain soft. Both left-cab
+crops show faint traces at the green post and incomplete crossings.
+The transferred noise profile preserves more of the diagonals on the
+right. Both 10k outputs still show mottled paint and uneven crossings
+there. Neither profile shows a convincing new lattice improvement.
+All eight native boards were viewed with the independent ISO100 AHD
+and both cab camera JPEGs.
+
+The spatial and local outputs differ by 1.35 DN16 camera RGB RMS in
+the sky, 7.85 on the coarse fence, and 2.30–3.60 in the four cab
+views. CPU IEEE FP32 collection of ten archived observations took
+266.57 s local and 273.78 s spatial. Main DSCF3879 uses the nominal
+shot/read `0.00128/6.5536e-6` and display exposure ×4. The DSCF3842
+cab uses display exposure ×16 and the same nominal or transferred
+`0.0014635775921166604/1.0715704128646712e-6` noise profile.
+The receipt records matching native coordinates and Bayer samples
+across arms. Independent ISO100 views are qualitative comparisons.
+[Complete native review and provenance](results/scene-full-epoch-v1/matched-010000-standing.json) ·
+[Collection archive](results/scene-full-epoch-v1/matched-010000-standing.tar.xz) ·
+[Sky](images/scene-full-epoch-v1/standing-010000/main-overcast-sky-main-overcast-sky.png) ·
+[Building](images/scene-full-epoch-v1/standing-010000/main-building-detail-main-building-detail.png) ·
+[Foliage](images/scene-full-epoch-v1/standing-010000/main-foliage-main-foliage.png) ·
+[Coarse fence](images/scene-full-epoch-v1/standing-010000/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | Native views |
+| --- | --- |
+| Nominal | [Left](images/scene-full-epoch-v1/standing-010000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-010000/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-full-epoch-v1/standing-010000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-010000/mesh-profile3879-fine-green-mesh-right.png) |

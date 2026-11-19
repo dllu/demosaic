@@ -1,0 +1,434 @@
+{
+  "script": "\"\"\"Resample eight matched photo IDs for the 7.5k preview and checkpoint differences.\"\"\"\nfrom pathlib import Path\n\nimport numpy as np\n\nfrom demosaic.experiments.artifacts import checked,read_json,reference,write_json\n\nROOT = Path(__file__).resolve().parent\nOUTPUT = Path(\"docs/results/scene-full-epoch-v1\")\n\n\ndef summarize(a,b,indices):\n    def samples(v):\n        dots = np.array([s[\"aligned_increment_dot\"]for s in v])\n        power = np.array([s[\"exact_paired_increment_sq\"]for s in v])\n        result = {\"weak_response_percentage_points\":100*dots[indices].sum(1)/power[indices].sum(1)}\n        for metric in (\"increment_RMS_DN16\",\"quiet_RMS_DN16\"):\n            result[metric] = np.array([s[metric]for s in v])[indices].mean(1)\n        return result\n\n    a,b = map(samples,(a,b))\n    return {name:[float((v-b[name])[0]),*[float(x)for x in np.quantile((v-b[name])[1:],[.025,.975])]]\n            for name,v in a.items()}\n\n\ndef run():\n    old,new = (reference(ROOT/f\"review-{step:06d}/pilot/results.json\")for step in (7500,10000))\n    prior,latest = (read_json(checked(item))[\"source_metrics\"]for item in (old,new))\n    indices = np.vstack((np.arange(8),np.random.default_rng(17905).integers(8,size=(10000,8))))\n    results = {}\n    for prior_name in (\"iso400\",\"iso6400\"):\n        results[prior_name] = {}\n        for draw in (\"coupled\",\"independent\"):\n            def group(source):\n                selected = [q for q in source if (q[\"profile\"],q[\"draw\"])==(prior_name,draw)]\n                return {r[\"source\"]:r[\"metrics\"]for r in selected}\n\n            first,second = group(prior),group(latest)\n            assert len(first)==len(second)==8 and set(first)==set(second)\n            ordered = sorted(first)\n\n            def band(src,arm):\n                return [src[key][arm][\"band\"][\"fine\"]for key in ordered]\n\n            opposing = {\n                \"matching_vs_neutral\":(second,\"spatial/matching\",second,\"spatial/neutral\"),\n                \"matching_vs_wrong\":(second,\"spatial/matching\",second,\"spatial/wrong-distant\"),\n                \"matching_vs_local\":(second,\"spatial/matching\",second,\"none\"),\n                \"matching_vs_parent\":(second,\"spatial/matching\",second,\"100k\"),\n                \"matching_vs_V120\":(second,\"spatial/matching\",second,\"V120\"),\n                \"matching_10000_vs_7500\":(second,\"spatial/matching\",first,\"spatial/matching\"),\n            }\n            results[prior_name][draw] = {\n                key:summarize(band(a,an),band(b,bn),indices)\n                for key,(a,an,b,bn) in opposing.items()\n            }\n    write_json(OUTPUT/\"matched-010000-pilot-paired.json\",{\n        \"script\":Path(__file__).read_text(),\"source_007500\":old,\"source_010000\":new,\n        \"method\":\"Paired photo-ID bootstrap, 10,000 resamples. Triples contain full-sample difference and 2.5th and 97.5th percentiles.\",\n        \"fine_band\":results,\n    })\n\n\nif __name__==\"__main__\":\n    run()\n",
+  "source_007500": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-007500/pilot/results.json",
+    "sha256": "c5a8e7c0c8cbbec73e75d75027db95cc6a4ace031e32173d5851d2f5f4b89faa"
+  },
+  "source_010000": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-010000/pilot/results.json",
+    "sha256": "003c2d239500d7df43e3636b4ab5931a5c3caefb515c7bab62dc2a172844470d"
+  },
+  "method": "Paired photo-ID bootstrap, 10,000 resamples. Triples contain full-sample difference and 2.5th and 97.5th percentiles.",
+  "fine_band": {
+    "iso400": {
+      "coupled": {
+        "matching_vs_neutral": {
+          "weak_response_percentage_points": [
+            0.00046871144050442126,
+            -0.17251880367131775,
+            0.15375284361210995
+          ],
+          "increment_RMS_DN16": [
+            0.2293710941575995,
+            0.020884454108276884,
+            0.4451641084889175
+          ],
+          "quiet_RMS_DN16": [
+            -1.2195464024068272,
+            -2.5326593418002377,
+            -0.301936994680835
+          ]
+        },
+        "matching_vs_wrong": {
+          "weak_response_percentage_points": [
+            0.022654131988957715,
+            0.005736738374574558,
+            0.0649791912857168
+          ],
+          "increment_RMS_DN16": [
+            0.0041435069005331115,
+            -0.0852600274508788,
+            0.08949134216487377
+          ],
+          "quiet_RMS_DN16": [
+            -0.05594689666284758,
+            -0.14756688591460954,
+            0.024236951161187046
+          ]
+        },
+        "matching_vs_local": {
+          "weak_response_percentage_points": [
+            0.09784680579086569,
+            0.01677188071838601,
+            0.2220132522961933
+          ],
+          "increment_RMS_DN16": [
+            0.05604674566633605,
+            -0.18223083818698313,
+            0.3702655278204403
+          ],
+          "quiet_RMS_DN16": [
+            -0.5436239912255338,
+            -1.3519538726240814,
+            0.05842297660815771
+          ]
+        },
+        "matching_vs_parent": {
+          "weak_response_percentage_points": [
+            -0.419151394164345,
+            -0.8177760571829967,
+            -0.14793245544564723
+          ],
+          "increment_RMS_DN16": [
+            -0.184078365143435,
+            -0.46029081870695876,
+            0.0807716664160591
+          ],
+          "quiet_RMS_DN16": [
+            -0.7004108435831551,
+            -1.3889542691590084,
+            -0.08759968366151005
+          ]
+        },
+        "matching_vs_V120": {
+          "weak_response_percentage_points": [
+            -0.3243253166902065,
+            -1.0709806027235658,
+            0.07960956662651597
+          ],
+          "increment_RMS_DN16": [
+            -0.4516029504748076,
+            -0.9986640966434308,
+            -0.04169932019310352
+          ],
+          "quiet_RMS_DN16": [
+            -1.2954084857395864,
+            -2.1997764100967565,
+            -0.4701943753456484
+          ]
+        },
+        "matching_10000_vs_7500": {
+          "weak_response_percentage_points": [
+            -0.1197486492390567,
+            -0.38197244724224716,
+            0.005559734671948391
+          ],
+          "increment_RMS_DN16": [
+            0.09914636972967372,
+            -0.10446520714439433,
+            0.2954107511258144
+          ],
+          "quiet_RMS_DN16": [
+            -0.20956889348160335,
+            -0.44039056929480974,
+            -0.014109459868561509
+          ]
+        }
+      },
+      "independent": {
+        "matching_vs_neutral": {
+          "weak_response_percentage_points": [
+            -0.017442951588350297,
+            -0.19499541116845515,
+            0.12518767013578186
+          ],
+          "increment_RMS_DN16": [
+            -0.13563367539603632,
+            -0.4241137079983872,
+            0.13630561307911926
+          ],
+          "quiet_RMS_DN16": [
+            -0.9412034281288846,
+            -2.021908482244189,
+            -0.25674834605854735
+          ]
+        },
+        "matching_vs_wrong": {
+          "weak_response_percentage_points": [
+            0.02030229729467692,
+            0.0023249272127401355,
+            0.07227785171522497
+          ],
+          "increment_RMS_DN16": [
+            -0.04869044309638326,
+            -0.1193423093459959,
+            0.011938320172990555
+          ],
+          "quiet_RMS_DN16": [
+            -0.03066244678209884,
+            -0.1151541155137248,
+            0.057650675503813295
+          ]
+        },
+        "matching_vs_local": {
+          "weak_response_percentage_points": [
+            0.08100079456652054,
+            0.007536811539143074,
+            0.18341495552178413
+          ],
+          "increment_RMS_DN16": [
+            -0.029133400021002842,
+            -0.36504841040282604,
+            0.3402780317818925
+          ],
+          "quiet_RMS_DN16": [
+            -0.3396949053938556,
+            -1.0796563801919916,
+            0.22865231204297817
+          ]
+        },
+        "matching_vs_parent": {
+          "weak_response_percentage_points": [
+            -0.4568036637653563,
+            -0.9897237293807564,
+            -0.11843315397290155
+          ],
+          "increment_RMS_DN16": [
+            0.028833304521675984,
+            -0.5324466817045781,
+            0.5587043661904758
+          ],
+          "quiet_RMS_DN16": [
+            -0.30709809802890664,
+            -0.5930420991549538,
+            -0.04452156624480352
+          ]
+        },
+        "matching_vs_V120": {
+          "weak_response_percentage_points": [
+            -0.4735587938099144,
+            -1.1796328412958133,
+            -0.039556988813662514
+          ],
+          "increment_RMS_DN16": [
+            -0.11205053261971898,
+            -0.9997507545779328,
+            0.6569600717232333
+          ],
+          "quiet_RMS_DN16": [
+            -0.9037982849540622,
+            -1.6672763111614861,
+            -0.2541692030955147
+          ]
+        },
+        "matching_10000_vs_7500": {
+          "weak_response_percentage_points": [
+            -0.13386371672277164,
+            -0.372280141062161,
+            0.009727135296145661
+          ],
+          "increment_RMS_DN16": [
+            -0.06088059972267246,
+            -0.2491748443523889,
+            0.09353694919268207
+          ],
+          "quiet_RMS_DN16": [
+            -0.11977034287537114,
+            -0.3186142819801129,
+            0.07403972675510406
+          ]
+        }
+      }
+    },
+    "iso6400": {
+      "coupled": {
+        "matching_vs_neutral": {
+          "weak_response_percentage_points": [
+            -0.008193142785984264,
+            -0.30587350015969167,
+            0.11261697451433861
+          ],
+          "increment_RMS_DN16": [
+            0.15437054710699272,
+            -0.12310923218585151,
+            0.4534126803270613
+          ],
+          "quiet_RMS_DN16": [
+            -0.2960991833533235,
+            -0.7035735967637021,
+            -0.013958858414815367
+          ]
+        },
+        "matching_vs_wrong": {
+          "weak_response_percentage_points": [
+            0.18563766905516843,
+            -0.04275651520022485,
+            0.3049971472106705
+          ],
+          "increment_RMS_DN16": [
+            -0.12314176123339848,
+            -0.3388612599693001,
+            0.05589396180423023
+          ],
+          "quiet_RMS_DN16": [
+            -0.12413512385828618,
+            -0.3190854284935414,
+            -0.005193605730859474
+          ]
+        },
+        "matching_vs_local": {
+          "weak_response_percentage_points": [
+            -0.04797769969540866,
+            -0.15700088637297024,
+            0.0439249384906823
+          ],
+          "increment_RMS_DN16": [
+            0.2514591809724749,
+            -0.014187526560391817,
+            0.5362504029518391
+          ],
+          "quiet_RMS_DN16": [
+            -0.09506692335132794,
+            -0.3193811883546681,
+            0.06858403266460154
+          ]
+        },
+        "matching_vs_parent": {
+          "weak_response_percentage_points": [
+            -1.153689710390566,
+            -1.619665657942221,
+            -0.5760247323981805
+          ],
+          "increment_RMS_DN16": [
+            0.7915807961589962,
+            0.17447715135498199,
+            1.5812457331474283
+          ],
+          "quiet_RMS_DN16": [
+            -0.06175862263866527,
+            -0.3987698158935082,
+            0.26018185622214274
+          ]
+        },
+        "matching_vs_V120": {
+          "weak_response_percentage_points": [
+            -1.2534631531416949,
+            -2.6185860633021463,
+            0.8010015929119418
+          ],
+          "increment_RMS_DN16": [
+            0.7664439520170845,
+            -0.5147137258934436,
+            2.0370782107288763
+          ],
+          "quiet_RMS_DN16": [
+            -0.6855542039049736,
+            -1.0792486661918623,
+            -0.2714164813054083
+          ]
+        },
+        "matching_10000_vs_7500": {
+          "weak_response_percentage_points": [
+            -0.14002519398630398,
+            -0.62003853135728,
+            0.13869670398775
+          ],
+          "increment_RMS_DN16": [
+            0.2207940116607432,
+            -0.1756436543569274,
+            0.6396388108307889
+          ],
+          "quiet_RMS_DN16": [
+            -0.18790449185503544,
+            -0.48098801478091546,
+            -0.01663243158787534
+          ]
+        }
+      },
+      "independent": {
+        "matching_vs_neutral": {
+          "weak_response_percentage_points": [
+            -0.05403872069982185,
+            -0.45467017577409374,
+            0.2318413756076955
+          ],
+          "increment_RMS_DN16": [
+            -0.25141205861949345,
+            -0.49631456743415076,
+            -0.006603173296625187
+          ],
+          "quiet_RMS_DN16": [
+            -0.11629769743789264,
+            -0.23222880772187504,
+            -0.011656767429852178
+          ]
+        },
+        "matching_vs_wrong": {
+          "weak_response_percentage_points": [
+            0.23312545913948668,
+            0.08870069235349086,
+            0.32913062141979627
+          ],
+          "increment_RMS_DN16": [
+            -0.08821198593794577,
+            -0.2548233252650469,
+            0.06082423050990504
+          ],
+          "quiet_RMS_DN16": [
+            -0.03162652731101989,
+            -0.06968146168638434,
+            0.0050599763377539245
+          ]
+        },
+        "matching_vs_local": {
+          "weak_response_percentage_points": [
+            0.0015188078063204102,
+            -0.3192066050759479,
+            0.22713851587218414
+          ],
+          "increment_RMS_DN16": [
+            -0.28443205254812653,
+            -0.5730541726580046,
+            0.002871633419697558
+          ],
+          "quiet_RMS_DN16": [
+            0.008679804925153967,
+            -0.0632326110621453,
+            0.08916609147118716
+          ]
+        },
+        "matching_vs_parent": {
+          "weak_response_percentage_points": [
+            -0.9120062500680035,
+            -1.5576900702075993,
+            0.014608332457161935
+          ],
+          "increment_RMS_DN16": [
+            -0.4107909156550136,
+            -1.179269579627487,
+            0.3160843385487451
+          ],
+          "quiet_RMS_DN16": [
+            -0.006864101882066542,
+            -0.23990650452452703,
+            0.24436037829496096
+          ]
+        },
+        "matching_vs_V120": {
+          "weak_response_percentage_points": [
+            -1.266023209405276,
+            -2.4176059735522952,
+            -0.033438840631625055
+          ],
+          "increment_RMS_DN16": [
+            -0.26626617841651523,
+            -1.3324696346281262,
+            1.0000996365065875
+          ],
+          "quiet_RMS_DN16": [
+            -0.5868358520280355,
+            -0.8590151719796417,
+            -0.27655133278763966
+          ]
+        },
+        "matching_10000_vs_7500": {
+          "weak_response_percentage_points": [
+            -0.2860019593798171,
+            -0.9465060426600902,
+            0.15960397810214033
+          ],
+          "increment_RMS_DN16": [
+            -0.13535504603929382,
+            -0.6295939417327574,
+            0.34744553839469866
+          ],
+          "quiet_RMS_DN16": [
+            -0.06002549890319475,
+            -0.1510873432508668,
+            0.010130812131488486
+          ]
+        }
+      }
+    }
+  }
+}
