@@ -217,6 +217,11 @@ result at display precision.
 [Bend-aligned donor spectra](bayer-warped-spacing.md) find more bent
 candidates on development fields. Neither independent bent candidate
 passes the local check. The standing crops reproduce the preceding path.
+[Cross-green carrier agreement](bayer-cross-evidence.md) recovers two
+additional eligible bent captures versus the calibrated residual gate on
+24 held-out backgrounds. Applying only the less-supported direction
+gains 0.10 response points and lowers fine-increment RMS 0.09 DN16,
+with higher absolute gap RMS and no new standing fine crossings.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

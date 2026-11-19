@@ -552,6 +552,14 @@ A crop-checked fallback adds 5.24 weak-response points on development
 fields. Both exterior proposals fail the central check on independently
 replayed bent fields, and the standing crops reproduce the prior output.
 
+[Cross-green carrier agreement](bayer-cross-evidence.md) pools local
+sine and cosine agreement after exterior nomination. On 24 further bent
+backgrounds it passes two more present draws than the calibrated held
+residual, with no new activation on 12 eligible absent-detail draws.
+The weak-only correction gains 0.10 response points with 0.09 DN16 lower
+increment RMS, at higher absolute gap RMS. Sparse exterior proposals
+and incomplete standing fine crossings remain the main limits.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

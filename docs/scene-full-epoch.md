@@ -309,8 +309,9 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. Matched training now verifies 35,000 updates on 70,000 photos
-and 280,000 queries per arm.
+pair. Matched training now verifies 37,500 updates on 75,000 distinct
+photos and 300,000 queries per arm. The retained training loops total
+18,277.59 s local and 24,094.89 s spatial.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
@@ -333,6 +334,11 @@ and 280,000 queries per arm.
 [34,000 paired audit](results/scene-full-epoch-v1/paired-prefix-034000.json) ·
 [34,500 paired audit](results/scene-full-epoch-v1/paired-prefix-034500.json) ·
 [35,000 paired audit](results/scene-full-epoch-v1/paired-prefix-035000.json) ·
+[35,500 paired audit](results/scene-full-epoch-v1/paired-prefix-035500.json) ·
+[36,000 paired audit](results/scene-full-epoch-v1/paired-prefix-036000.json) ·
+[36,500 paired audit](results/scene-full-epoch-v1/paired-prefix-036500.json) ·
+[37,000 paired audit](results/scene-full-epoch-v1/paired-prefix-037000.json) ·
+[37,500 paired audit](results/scene-full-epoch-v1/paired-prefix-037500.json) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
@@ -375,7 +381,8 @@ The 35k paired photo scores, exact crops and both standing GFX reviews
 are complete. The local and spatial EMAs lower independent ISO6400
 fine-increment and quiet-region error versus their 30k EMAs. The
 correct distant view is close to the mismatched view. Fine cab
-crossings remain incomplete. The broad panels are queued at 50k.
+crossings remain incomplete. The 35k pair is the latest image-quality
+review. The 50k fixed photo and camera evaluation and native review are queued.
 [35k exact-photo and standing GFX review](scene-full-epoch-35k.md) ·
 [35k launch receipt](results/scene-full-epoch-v1/queue-full-035000-launch.json) ·
 [35k review drivers](results/scene-full-epoch-v1/queue-full-035000.tar.xz).

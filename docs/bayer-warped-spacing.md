@@ -9,6 +9,8 @@ The fallback leaves both standing GFX scene families unchanged.
 [Machine results](results/bayer-warped-spacing-v1/publication.json) ·
 [Frozen drivers and receipts](results/bayer-warped-spacing-v1/evidence.tar.xz) ·
 [Native crop provenance](images/bayer-warped-spacing-v1/manifest.json).
+The [cross-green agreement follow-up](bayer-cross-evidence.md) recovers
+some of the missed crop checks at the same development false-activation budget.
 
 ## Using the donor spectra
 

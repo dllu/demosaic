@@ -10,9 +10,9 @@ Follow-up measurements verify five complete ordinary-photo passes and
 fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233).
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
-two arms match through 35,000 updates on 70,000 distinct photos and
-280,000 native queries per arm. The local arm verifies 75,000 distinct
-photos at 37,500 updates. The completed 35k review finds lower independent
+two arms match through 37,500 updates on 75,000 distinct photos and
+300,000 native queries per arm. Quality has been reviewed through 35k.
+That review finds lower independent
 ISO6400 fine-increment and flat-region error than at 30k. Both models
 still recover less fine detail than Corpus 100k. Fine cab crossings stay
 incomplete in the viewed 35k standing scenes.

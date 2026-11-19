@@ -6,6 +6,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons)
   reproduces the ordinary FP16 values in all four viewed crops. The sky is
   smooth, coarse crossings are coherent and fine wires and leaves are soft.
+- [Cross-green carrier agreement](bayer-cross-evidence.md#standing-gfx100s-comparisons)
+  finds no eligible exterior proposal in the four main crops. The
+  viewed prior fit keeps a smooth sky and coherent coarse crossings.
 - [Corpus 100k FP16 tile settings](corpus100k-fp16-throughput.md#standing-gfx100s-comparisons)
   retain the smooth sky and the visible coarse crossings. Larger tiles
   change some clipped light fringes elsewhere in the full-frame output.
