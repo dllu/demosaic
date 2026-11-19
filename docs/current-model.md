@@ -260,6 +260,11 @@ fine-increment RMS over Corpus 100k. At full strength it adds
 0.655 points and 1.673 DN16 of error. Swapping corrections between
 two independent captures removes 0.596 DN16 of excess error at the
 same correction energy. Fine cab crossings stay incomplete.
+[Complementary Bayer checks](split-bayer-neural.md) suppress false detail
+from checking a half-input proposal on its own samples. At matched quiet
+strength the opposite-half correction above full-input Corpus 100k adds
+0.003 response points with a small increase in fine-increment and flat
+error. Fine cab crossings remain incomplete.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

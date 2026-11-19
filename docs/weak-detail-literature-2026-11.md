@@ -619,6 +619,13 @@ energy. This is evidence of same-capture parent and correction error
 coupling. A stricter whole-parent-pattern lift offers little recovery.
 Both standing fine fences remain incomplete.
 
+[Complementary Bayer checks](split-bayer-neural.md) improve noise rejection
+when the tested measurements come from the opposite half of the mosaic.
+The half-input guides lose fine detail and can add flat structure. At a
+matched quiet dose, checking an addition above the full-input estimate
+gains only 0.003 ISO6400 response points with more fine-increment error.
+Both standing fence families keep incomplete fine cab crossings.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

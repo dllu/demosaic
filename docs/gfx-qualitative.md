@@ -9,6 +9,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons)
   reproduces the ordinary FP16 values in all four viewed crops. The sky is
   smooth, coarse crossings are coherent and fine wires and leaves are soft.
+- [Complementary Bayer checks](split-bayer-neural.md#standing-gfx100s-comparisons)
+  keep the full-input sky smooth and coarse crossings coherent. Quincunx
+  half-input guides add visible sky mottle and coarse-fence moiré.
 - [Exterior texture covariance](scene-raw-covariance.md#standing-gfx100s-comparisons)
   changes the sky by 0.024 DN16 RGB RMS in the whole-pattern arm. The
   unscaled coefficient lift changes some fence and foliage contrast.

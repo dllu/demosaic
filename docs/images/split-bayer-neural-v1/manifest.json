@@ -1,0 +1,4911 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/split-bayer-neural-v1/native-extended.py",
+    "sha256": "42f5a1ed0f1c78dc033cf6705e22c87cf7443e6f395574040d75f538ef7c2b22"
+  },
+  "neighbor": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/split-bayer-neural-v1/score.json",
+    "sha256": "c7d4c57ad3ddc120b7ce8f6032b868e504ca71e9676f01a71ab815e62acb87e8"
+  },
+  "lattice": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/split-bayer-neural-v1/score-lattice.json",
+    "sha256": "3e131eaf1ed9a547d98d284c54a7d735753d60941741282763c1c37a7d92c3b1"
+  },
+  "inflated": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/split-bayer-neural-v1/score-inflated.json",
+    "sha256": "a60082f56dc11a09fcdb690193d367c9f487c9fc95ab5e43a6c88a6722b6ad72"
+  },
+  "exact": [
+    {
+      "id": "027-iso6400-split",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "attribution": null,
+        "author": "Fernando Losada Rodr\u00edguez",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/0b/0bc6e96632f1f72e994178971eae37a61797fb40.npy",
+        "cache_sha256": "5fc0bbc7dd39046e9a5c7bd519ec4c709f12ca8db5500a2baedd8ed010b55729",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/0b/c6/0bc6e96632f1f72e994178971eae37a61797fb40.jpg",
+        "dtype": "uint16",
+        "height": 3192,
+        "id": "0bc6e96632f1f72e994178971eae37a61797fb40",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Calex%C3%B3n_dos_Perigos.001_-_Ribadeo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Calex%C3%B3n_dos_Perigos.001_-_Ribadeo.jpg",
+        "sha1": "0bc6e96632f1f72e994178971eae37a61797fb40",
+        "sha1_hex": "0bc6e96632f1f72e994178971eae37a61797fb40",
+        "shape": [
+          798,
+          1030,
+          3
+        ],
+        "split": "val",
+        "title": "File:Calex\u00f3n dos Perigos.001 - Ribadeo.jpg",
+        "width": 4120
+      },
+      "CFA": "GBRG",
+      "query": [
+        174,
+        460,
+        256,
+        256
+      ],
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "black": 0.03,
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+        "type": "base",
+        "step": 100000
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/027-iso6400-independent.npz",
+        "sha256": "511fa460a1c08347eeabede37de23c95943350267c6258298ff78798cbffc288"
+      },
+      "selection_gradient": {
+        "source": "0bc6e96632f1f72e994178971eae37a61797fb40",
+        "index": 27,
+        "paired_delta_DN16": -0.009893890600963573
+      },
+      "dose": {
+        "neighbor": {
+          "full_other_unadjusted": 0.3452893898268207,
+          "full_same": 0.027158523222532135,
+          "full_other": 0.25626199464172955,
+          "full_signed": 0.18261317324486323,
+          "all_guide": 0.3362652693892716
+        },
+        "lattice": {
+          "full_other_unadjusted": 0.9097089695900884,
+          "full_same": 0.01135789465359225,
+          "full_other": 0.18704376641208975,
+          "full_signed": 0.1146973909766604,
+          "all_guide": 0.3362652693892716
+        },
+        "inflated": {
+          "full_other_unadjusted": 0.5739551568130008,
+          "full_same": 0.03815751284448575,
+          "full_other": 0.33659175231222765,
+          "full_signed": 0.22047936470754015,
+          "all_guide": 0.3362652693892716
+        }
+      },
+      "board": {
+        "image": {
+          "path": "exact/027-iso6400-split-comparison.png",
+          "sha256": "ad69ce16ff66d7dc7b5ad281e89bafe7c5151011f12b7459201d007cfd6eb9ab"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Neighbor-filled average",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice-filled average",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Neighbor other-half check",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice other-half check",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice other-half signed",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice double-noise average",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice double-noise lift",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/027-iso6400-split-triplet.png",
+          "sha256": "3a1edfa6098cdbfc51750bca6c51cbb3ff518da650f6c6a5c492fcad7b355434"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice other-half check",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "038-iso6400-split",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "attribution": null,
+        "author": "Bernard Gagnon",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/04/04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4.npy",
+        "cache_sha256": "6562dab0f72eec9edb5fcfe32df47e1b634305c3c191aafddae6cb14d4dd9f6c",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/04/65/04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4.jpg",
+        "dtype": "uint16",
+        "height": 3456,
+        "id": "04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/House_of_the_Lake%2C_Delos_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:House_of_the_Lake,_Delos_02.jpg",
+        "sha1": "04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4",
+        "sha1_hex": "04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4",
+        "shape": [
+          864,
+          648,
+          3
+        ],
+        "split": "val",
+        "title": "File:House of the Lake, Delos 02.jpg",
+        "width": 2592
+      },
+      "CFA": "GRBG",
+      "query": [
+        138,
+        248,
+        256,
+        256
+      ],
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "black": 0.03,
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+        "type": "base",
+        "step": 100000
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/038-iso6400-independent.npz",
+        "sha256": "a8dbe76f03c8e45df0be13513b1b2d2c6368aba22f972207c9d3ab6410171265"
+      },
+      "selection_gradient": {
+        "source": "04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4",
+        "index": 38,
+        "paired_delta_DN16": 0.06248920666612179
+      },
+      "dose": {
+        "neighbor": {
+          "full_other_unadjusted": 0.3452893898268207,
+          "full_same": 0.027158523222532135,
+          "full_other": 0.25626199464172955,
+          "full_signed": 0.18261317324486323,
+          "all_guide": 0.3362652693892716
+        },
+        "lattice": {
+          "full_other_unadjusted": 0.9097089695900884,
+          "full_same": 0.01135789465359225,
+          "full_other": 0.18704376641208975,
+          "full_signed": 0.1146973909766604,
+          "all_guide": 0.3362652693892716
+        },
+        "inflated": {
+          "full_other_unadjusted": 0.5739551568130008,
+          "full_same": 0.03815751284448575,
+          "full_other": 0.33659175231222765,
+          "full_signed": 0.22047936470754015,
+          "all_guide": 0.3362652693892716
+        }
+      },
+      "board": {
+        "image": {
+          "path": "exact/038-iso6400-split-comparison.png",
+          "sha256": "607279acd870b8ed656bb3b7242a8c9ee503b0f76eaa187769604c7dbe6d1182"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Neighbor-filled average",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice-filled average",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Neighbor other-half check",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice other-half check",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice other-half signed",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice double-noise average",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice double-noise lift",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/038-iso6400-split-triplet.png",
+          "sha256": "83ff706346d7b87ef98238f2a6e98ef4fac7df57b1a21094f65a8d0189dab3bd"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Lattice other-half check",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "standing": {
+    "rows": [
+      {
+        "id": "main-overcast-sky-main-overcast-sky",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "native_box": [
+          5752,
+          1352,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "main-overcast-sky",
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-overcast-sky-RGB-f32.npy",
+          "sha256": "81ea6f37bbf950cf0b4c351f83b337b981e2c4f8242b6f8bdc69cc43fe9f0a9a"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "cbb654e1e463fa19807b81a9832b27b88f25f91a281bc7ee754997824a6d0dec"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "main-overcast-sky-main-overcast-sky",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "46835d3b59fb4396fc9471dabde2f1789ce827e605d6901a40bb46eb1c7c0905"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-overcast-sky",
+          "case": {
+            "name": "main-overcast-sky",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+            "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a01d29e16f54dd956b05c7dbcc64cbdd6199ff94541bba92983191382b07e1be"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "d3c816278604654e226a904dabded61181294baf90697f211ad9b4c56569c6e8"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "50458e8691a80fd63804503a8f3bd9f293462d3534368dad78471dd08156e1e5"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "6d86152f8bcc6ca79f7d09eff75f9734dea270f601b7521e51999cb825da29e7"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              1,
+              0
+            ],
+            "full_other_unadjusted": [
+              1,
+              0
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              7,
+              9
+            ],
+            "full_signed": [
+              11,
+              10
+            ],
+            "all_guide": [
+              34,
+              46
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "bbf47f3b6d02f882dcdf00cbeaca14b3b8ab0097903023b145c626cc761c0993"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "1c4e0920f3158fe5a1000d09d58c3d56e7753e091f42117b86998385f29e84de"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "5e400fae5bdca7ce5eed607d2451c70426bd5040929b7693c09d02f16070dd4b"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7b72d056506825d9a085cb78ffda185b3bd06d1ef8a7f5a267472d29c3592f9d"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              0,
+              0
+            ],
+            "full_other_unadjusted": [
+              0,
+              0
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              6,
+              6
+            ],
+            "full_signed": [
+              11,
+              7
+            ],
+            "all_guide": [
+              34,
+              46
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "bbf47f3b6d02f882dcdf00cbeaca14b3b8ab0097903023b145c626cc761c0993"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "ac3afe39abc02c2425f0ec04388faaf478358a886eadfad8fbc314ee1445481a"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "5e400fae5bdca7ce5eed607d2451c70426bd5040929b7693c09d02f16070dd4b"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a9f271ce2f55780be28b21ee8f70ae28b1a923ee441d2a7a9df7510cc2280bf6"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              2,
+              1
+            ],
+            "full_other_unadjusted": [
+              2,
+              1
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              5,
+              5
+            ],
+            "full_signed": [
+              9,
+              9
+            ],
+            "all_guide": [
+              34,
+              46
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 33.8666706654573,
+          "Lattice-filled guide": 46.10770433878799,
+          "Neighbor other-half check": 0.5050075012051108,
+          "Lattice other-half check": 0.3003024546594421,
+          "Lattice signed lift": 0.2233928684583746,
+          "Double-noise lattice guide": 18.2625154782191,
+          "Double-noise other-half lift": 0.3770500475124599
+        }
+      },
+      {
+        "id": "main-building-detail-main-building-detail",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "native_box": [
+          5742,
+          2642,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "main-building-detail",
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-building-detail-RGB-f32.npy",
+          "sha256": "3d33e65ad3e27d114f4a9557a1623179d23231b07e748c6a8632ff70fe977694"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-building-detail-main-building-detail.png",
+            "sha256": "ca666a97a07b891c00e54bdd76cff219a6c472bce9017998e354e85637e2cb8b"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "main-building-detail-main-building-detail",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-building-detail-main-building-detail.png",
+            "sha256": "35ea2ba3c8e4b82685d7807f0691e67d3ae307375ccb80bee0f6b915e79df767"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-building-detail",
+          "case": {
+            "name": "main-building-detail",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+            "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "804b59c84dcf4f1c6b2afca50456b7a56f0e8db04d2cb9026f545bb161a7f28c"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "747a9e3ba46e734dd2c61cf143744f247eb6d836303ab1f93c98b1f9ef82661b"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a8d5b9a59a89a20b8c669a9e882c4c5cde6d9d639023b7a6bcd866a48ffe8eee"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "ea33601f0259697633d69f8d6ff02f5f90e117c147ab8e831f9ce089c54bd99b"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              55,
+              53
+            ],
+            "half_other": [
+              12,
+              17
+            ],
+            "full_other_unadjusted": [
+              12,
+              17
+            ],
+            "full_same": [
+              31,
+              23
+            ],
+            "full_other": [
+              1,
+              1
+            ],
+            "full_signed": [
+              13,
+              13
+            ],
+            "all_guide": [
+              5,
+              2
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a16bd1e22d5bdba7b8e5bb1c58852adda738eb7d621f6a4942270e88f4643ff8"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "562039d9a6e52703270d6b5c7e262fe372ef1aea26564ea6280b92b29449be30"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "c0e8659030bcc9d0850f5ca5ffd38dc18d75f5d55c9015c3628b1197a90cf739"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7865240abf601a364d90b81e661c423d8d3ea822e6f461fda0e1bd202e4ae334"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              15,
+              12
+            ],
+            "half_other": [
+              1,
+              0
+            ],
+            "full_other_unadjusted": [
+              1,
+              0
+            ],
+            "full_same": [
+              34,
+              36
+            ],
+            "full_other": [
+              1,
+              1
+            ],
+            "full_signed": [
+              14,
+              12
+            ],
+            "all_guide": [
+              5,
+              2
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a16bd1e22d5bdba7b8e5bb1c58852adda738eb7d621f6a4942270e88f4643ff8"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "04878e39ee9c9c697a8f04fa8169773977748304878c0194b1445eb8423a6d18"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "c0e8659030bcc9d0850f5ca5ffd38dc18d75f5d55c9015c3628b1197a90cf739"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a97537fca634779cec5ee42f1c82d1ef10ecabf17699c7f5ba78804db540919e"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              18,
+              8
+            ],
+            "half_other": [
+              1,
+              1
+            ],
+            "full_other_unadjusted": [
+              1,
+              1
+            ],
+            "full_same": [
+              27,
+              16
+            ],
+            "full_other": [
+              1,
+              1
+            ],
+            "full_signed": [
+              13,
+              14
+            ],
+            "all_guide": [
+              5,
+              2
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 69.85487370899334,
+          "Lattice-filled guide": 52.46307344353491,
+          "Neighbor other-half check": 0.09408909796618585,
+          "Lattice other-half check": 0.031026487374511913,
+          "Lattice signed lift": 0.2680384559439423,
+          "Double-noise lattice guide": 45.183020362469165,
+          "Double-noise other-half lift": 0.08888855397913852
+        }
+      },
+      {
+        "id": "main-foliage-main-foliage",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "native_box": [
+          8842,
+          5522,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "main-foliage",
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-foliage-RGB-f32.npy",
+          "sha256": "107933ad4412b5456ddfb75652f85ab6b8162a180287833700b327c5bfbb7d80"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-foliage-main-foliage.png",
+            "sha256": "c90ccd53392654380e842f0cffe80a25bcf12ebdb6836e9dbe5e7ba9f0a650e6"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "main-foliage-main-foliage",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-foliage-main-foliage.png",
+            "sha256": "86d8440771081fbc4a38bf8b21f9f891731566ea651b7da8235b8f38a99e0583"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-foliage",
+          "case": {
+            "name": "main-foliage",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+            "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "eaa0eb9530615c2ca1b949ee45e25db1fe6e57bdea8e7094865ce4e4b21ac619"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7bb2225f9890afd2f47436da615acae0f8c6a58383fde55540bc4e2960e03227"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "f15c6eabdd811f2b0b64fd5db1788b525cc7a98dfe22431d07542dcc3ae1bbc8"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a5f334aa6c0e88ad019017394b9124a1ff2ab8337a9ee123ac574064f3447d4a"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              79,
+              77
+            ],
+            "half_other": [
+              41,
+              40
+            ],
+            "full_other_unadjusted": [
+              41,
+              40
+            ],
+            "full_same": [
+              48,
+              54
+            ],
+            "full_other": [
+              5,
+              1
+            ],
+            "full_signed": [
+              18,
+              13
+            ],
+            "all_guide": [
+              26,
+              16
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "8f93c0c3b49c26fa64b425a00b340d5430216b12aa79d94dddcb3f29ae2599a8"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "696119b713e809127f43cf6e529409cde6fb9bbfef042c521b73655cb5d7bc75"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "379c300fa82cc7b6304684b032390915af8f1448d12fb7dbe51d490bb4a0e03e"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "349445302623476ec3361360cd4804d50232034916885213f34b17faec758a48"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              22,
+              23
+            ],
+            "half_other": [
+              6,
+              0
+            ],
+            "full_other_unadjusted": [
+              6,
+              0
+            ],
+            "full_same": [
+              56,
+              63
+            ],
+            "full_other": [
+              3,
+              1
+            ],
+            "full_signed": [
+              18,
+              20
+            ],
+            "all_guide": [
+              26,
+              16
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "8f93c0c3b49c26fa64b425a00b340d5430216b12aa79d94dddcb3f29ae2599a8"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "3d2d09000d0377116469227d1361ce935911efbb18068d055f872b28380a81ad"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "379c300fa82cc7b6304684b032390915af8f1448d12fb7dbe51d490bb4a0e03e"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "a2b86b0891fff4e7ada430b65bee295b1adda00fcde98caf1236217985e9de58"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              27,
+              31
+            ],
+            "half_other": [
+              7,
+              1
+            ],
+            "full_other_unadjusted": [
+              7,
+              1
+            ],
+            "full_same": [
+              48,
+              58
+            ],
+            "full_other": [
+              3,
+              1
+            ],
+            "full_signed": [
+              17,
+              14
+            ],
+            "all_guide": [
+              26,
+              16
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 144.02406543946984,
+          "Lattice-filled guide": 122.1516778969663,
+          "Neighbor other-half check": 0.20367502357255665,
+          "Lattice other-half check": 0.11381792977656409,
+          "Lattice signed lift": 0.43117479360144345,
+          "Double-noise lattice guide": 120.23800920936743,
+          "Double-noise other-half lift": 0.2630931885822883
+        }
+      },
+      {
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "native_box": [
+          2192,
+          5952,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "main-chain-link-fence",
+          "ROI_xywh": [
+            176,
+            176,
+            160,
+            160
+          ],
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-chain-link-fence-RGB-f32.npy",
+          "sha256": "3215efefed0599b23f9070b17e10429cd5b672aaa7afe8b6a309fa8feb45896b"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "bad6b9494d9ee813be7e2adf481802a1b92fc7e1149e1fca5c548d2d8c174f01"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "main-chain-link-fence-main-chain-link-fence",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "b3bf6b87f781eb8937e18818db0dfd1ca8db9198732f255331d0584d8188b116"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-chain-link-fence",
+          "case": {
+            "name": "main-chain-link-fence",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+            "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "95da9741daa439f5c71be0915036dd674d7d49c70d0100b1554caf83f1131c67"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "0e6db0fc09684ced5ab37beee1a9c886b239c0e33042322cbbcfb11ec57a8691"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "eba67a20bc1cefe298e20b4cb11ad39643d0feeb0cc503b210bbf771785b7df4"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "3be3e52af7caf1cb8fc5eff072f4196502dcf7f04a50dd38c707c194d3dc716c"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              52,
+              52
+            ],
+            "full_other_unadjusted": [
+              52,
+              52
+            ],
+            "full_same": [
+              72,
+              59
+            ],
+            "full_other": [
+              3,
+              4
+            ],
+            "full_signed": [
+              22,
+              13
+            ],
+            "all_guide": [
+              13,
+              16
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "fb8767033bc991a39644f494210aa4fd626a8b9965c1af6ea52465f9ba8179f5"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "fdb25cc3e4534e29d60baf12b1a891e8b41846946eb240f0f7cac2110bf24ec3"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "d5b3340c6d93e71252714214e195835e6d2ecc12b0d87931bc7d27557e0d19d7"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "02687f323f636fca78c9b553ff6ea023c0390602751ca9de3e5ac3863a024fe5"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              79,
+              79
+            ],
+            "half_other": [
+              5,
+              7
+            ],
+            "full_other_unadjusted": [
+              5,
+              7
+            ],
+            "full_same": [
+              75,
+              67
+            ],
+            "full_other": [
+              3,
+              4
+            ],
+            "full_signed": [
+              25,
+              20
+            ],
+            "all_guide": [
+              13,
+              16
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "fb8767033bc991a39644f494210aa4fd626a8b9965c1af6ea52465f9ba8179f5"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "f98d03d39e75a8c386b28e56e0295d628c3b387ab673c098f189ebcd1d4c7bad"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "d5b3340c6d93e71252714214e195835e6d2ecc12b0d87931bc7d27557e0d19d7"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "08e9d95027bcfcc9ab3eca7d69836417948533b1efce8f0e6c684d6e39fd83d6"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              67,
+              59
+            ],
+            "half_other": [
+              4,
+              5
+            ],
+            "full_other_unadjusted": [
+              4,
+              5
+            ],
+            "full_same": [
+              68,
+              53
+            ],
+            "full_other": [
+              3,
+              4
+            ],
+            "full_signed": [
+              23,
+              15
+            ],
+            "all_guide": [
+              13,
+              16
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 170.95630708269942,
+          "Lattice-filled guide": 180.10422800413016,
+          "Neighbor other-half check": 1.6536233693740694,
+          "Lattice other-half check": 1.1421503626880791,
+          "Lattice signed lift": 0.7114687149376743,
+          "Double-noise lattice guide": 169.06981391826724,
+          "Double-noise other-half lift": 1.9402801896445965
+        }
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "fine-green-mesh-left",
+          "ROI_xywh": [
+            206,
+            229,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            806,
+            6489,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            805,
+            6489,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+              },
+              "xywh": [
+                760,
+                6500,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+              },
+              "xywh": [
+                759,
+                6501,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          },
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "0d4255e8971f85a902e48865dca4e8b3c5dc9a630fc11952a1e1421138d56cff"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "mesh-nominal-fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "986fedf60e5ac08dfeafa3b7e3c4e29f3d7280d2f1fc427d58ffc564578f9e4f"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-nominal",
+          "case": {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "2cc5005ac72843497f07ae95ebfaec2ab2282c36287ca57a4a9a311e66819366"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "fce8215331522d5e3b169174c8533d96237da34ca29329d2e7df98c75961a4a7"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7f976f36531436ff8079020361d387d53516a7eaee54070ff0afe67344e7c78b"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "87440405c2211aa857cd0455ccd6fc3f4931e8967b988b7b6d128b697ee342e1"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              80
+            ],
+            "half_other": [
+              0,
+              2
+            ],
+            "full_other_unadjusted": [
+              0,
+              2
+            ],
+            "full_same": [
+              81,
+              77
+            ],
+            "full_other": [
+              4,
+              1
+            ],
+            "full_signed": [
+              5,
+              6
+            ],
+            "all_guide": [
+              51,
+              54
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7a178ea0fe4a8dad48431e137fc6d7d2acd1afa7af03638e2db2a28370541a90"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "d54fbf535fb2f295f36fc94a4cec0ee1a6d5ae6bf617dd40441c1b4d741b8de4"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "1364ae6d2733cec1c840daa81938e617f982257278475647e0f0db118d2623d2"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "64cefc1a22ab9a97171dde00c6cede07a213826485f754ba1fea0a9b3c835392"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              63,
+              72
+            ],
+            "half_other": [
+              0,
+              0
+            ],
+            "full_other_unadjusted": [
+              0,
+              0
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              8,
+              4
+            ],
+            "full_signed": [
+              9,
+              6
+            ],
+            "all_guide": [
+              51,
+              54
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7a178ea0fe4a8dad48431e137fc6d7d2acd1afa7af03638e2db2a28370541a90"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "5ed4b656b85fcb49cae732248fe614d166c92c55767ba735da91a291e3407930"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "1364ae6d2733cec1c840daa81938e617f982257278475647e0f0db118d2623d2"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "ac00551dde3358ac97084795b933f2ce1511ce918df12eee27bc921a84e18219"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              67,
+              74
+            ],
+            "half_other": [
+              2,
+              3
+            ],
+            "full_other_unadjusted": [
+              2,
+              3
+            ],
+            "full_same": [
+              81,
+              74
+            ],
+            "full_other": [
+              5,
+              0
+            ],
+            "full_signed": [
+              7,
+              5
+            ],
+            "all_guide": [
+              51,
+              54
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 35.61632775605187,
+          "Lattice-filled guide": 42.544310284268875,
+          "Neighbor other-half check": 0.049689297792175346,
+          "Lattice other-half check": 0.10917196126755513,
+          "Lattice signed lift": 0.08184387622063967,
+          "Double-noise lattice guide": 34.75985182668461,
+          "Double-noise other-half lift": 0.07646001922539929
+        }
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "fine-green-mesh-right",
+          "ROI_xywh": [
+            426,
+            189,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            1026,
+            6449,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            1025,
+            6449,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+              },
+              "xywh": [
+                980,
+                6460,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+              },
+              "xywh": [
+                979,
+                6461,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          },
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "009ee993cf0d4e7e0a44ac93712168f1768d122f8872d94866689cf24892ece1"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "mesh-nominal-fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "29f6e9d5e0a574737924aa10d1471c628e784dc2e9420d2aff5d8d60b7ffa44e"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-nominal",
+          "case": {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "9c025f9e5dd0a32e4fd65e6d60293bb6e4bcc7d7f4dd5f14f20b087bf53c6a9f"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "b593a5811c0365349207fc322f4447aab7a94ada4acd77688a4ac7a43ec260be"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "ba369598fec68cf7bc9717d968727a4ac839a55606953026738317736aee3035"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "b025c2ca0db80b67d4c95a389f491d5489e34ceaa6fca5ed9866fa3667f6a176"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              0,
+              3
+            ],
+            "full_other_unadjusted": [
+              0,
+              3
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              6,
+              8
+            ],
+            "full_signed": [
+              10,
+              9
+            ],
+            "all_guide": [
+              76,
+              79
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "01817f1451122f9213ad2142d28d8bd3433f9d5a968dbe66d3921fbaeb60542a"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "87be0d189169baf54703c22d6edb4e803e42ff126978a976e4833914ed9ade67"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "dc66ea34a0899068e951bcfbb2b3650a85479f383dfaded3b59f24ef2534ad68"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "128e976163e9410cce68d66afc49b9a7d85131e5b52345a3c6abe9451328d2b9"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              76
+            ],
+            "half_other": [
+              0,
+              0
+            ],
+            "full_other_unadjusted": [
+              0,
+              0
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              14,
+              18
+            ],
+            "full_signed": [
+              14,
+              18
+            ],
+            "all_guide": [
+              76,
+              79
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "01817f1451122f9213ad2142d28d8bd3433f9d5a968dbe66d3921fbaeb60542a"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "8b43d21f167fbd052cfbba20f92324863a75ca8fdecd606915cf412a244da2e7"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "dc66ea34a0899068e951bcfbb2b3650a85479f383dfaded3b59f24ef2534ad68"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "13cb75091fb240ff91fe92be60eb6958061f2a897515ecb0bc478106c020d2c8"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              2,
+              4
+            ],
+            "full_other_unadjusted": [
+              2,
+              4
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              5,
+              8
+            ],
+            "full_signed": [
+              10,
+              9
+            ],
+            "all_guide": [
+              76,
+              79
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 22.14932714183454,
+          "Lattice-filled guide": 33.90152616697222,
+          "Neighbor other-half check": 0.28274849168796296,
+          "Lattice other-half check": 0.3901718508745006,
+          "Lattice signed lift": 0.23925781225648649,
+          "Double-noise lattice guide": 15.574759874690791,
+          "Double-noise other-half lift": 0.34065156439513333
+        }
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "fine-green-mesh-left",
+          "ROI_xywh": [
+            206,
+            229,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            806,
+            6489,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            805,
+            6489,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+              },
+              "xywh": [
+                760,
+                6500,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+              },
+              "xywh": [
+                759,
+                6501,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          },
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "a87f5a58dc852e83e10a3cddc7f93d82a52944c2c9790b743896ebe499648cae"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "mesh-profile3879-fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "67d8b6fb0cc033935e56dd3dff831608535434756780ccf0921d43fe951c713d"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-profile3879",
+          "case": {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit",
+            "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "2cc5005ac72843497f07ae95ebfaec2ab2282c36287ca57a4a9a311e66819366"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "c238412607238c376957e176075eb81541a04f0b62d96f7d6f0b7c946dd70791"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7f976f36531436ff8079020361d387d53516a7eaee54070ff0afe67344e7c78b"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "9f8177b1afa7318db3c3a5aac6d42863889722466bba578c137a74158e4e80ea"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              0,
+              6
+            ],
+            "full_other_unadjusted": [
+              0,
+              6
+            ],
+            "full_same": [
+              81,
+              78
+            ],
+            "full_other": [
+              9,
+              3
+            ],
+            "full_signed": [
+              14,
+              9
+            ],
+            "all_guide": [
+              57,
+              68
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7a178ea0fe4a8dad48431e137fc6d7d2acd1afa7af03638e2db2a28370541a90"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "8cc7d086d90d2715bbc3fdb280a68c282df8bb11ebb61912d5b398d6d878392f"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "1364ae6d2733cec1c840daa81938e617f982257278475647e0f0db118d2623d2"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "22ab79c7822fc05fe2428b23b3c4a65d0aaaab2dc21c409a0a636e8f9ec68a7f"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              75,
+              81
+            ],
+            "half_other": [
+              0,
+              4
+            ],
+            "full_other_unadjusted": [
+              0,
+              4
+            ],
+            "full_same": [
+              81,
+              79
+            ],
+            "full_other": [
+              12,
+              8
+            ],
+            "full_signed": [
+              14,
+              13
+            ],
+            "all_guide": [
+              57,
+              68
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "7a178ea0fe4a8dad48431e137fc6d7d2acd1afa7af03638e2db2a28370541a90"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "51d6163b3b3965acc1038d62a5314ea470cb10fcdb6462e18a440778d4067fae"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "1364ae6d2733cec1c840daa81938e617f982257278475647e0f0db118d2623d2"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "793b934f2a59962aee106d25732ddd6af7ed4ba5224c8dd17270f52306dcd27c"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              70,
+              78
+            ],
+            "half_other": [
+              0,
+              2
+            ],
+            "full_other_unadjusted": [
+              0,
+              2
+            ],
+            "full_same": [
+              81,
+              77
+            ],
+            "full_other": [
+              7,
+              4
+            ],
+            "full_signed": [
+              10,
+              11
+            ],
+            "all_guide": [
+              57,
+              68
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 34.67191792831941,
+          "Lattice-filled guide": 36.388592589992,
+          "Neighbor other-half check": 0.22482886215653589,
+          "Lattice other-half check": 0.18571445375818327,
+          "Lattice signed lift": 0.15165154270223843,
+          "Double-noise lattice guide": 33.86359502583689,
+          "Double-noise other-half lift": 0.2447232250910335
+        }
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "source_crop": {
+          "name": "fine-green-mesh-right",
+          "ROI_xywh": [
+            426,
+            189,
+            160,
+            160
+          ],
+          "noisy_raw_xywh": [
+            1026,
+            6449,
+            160,
+            160
+          ],
+          "reference_raw_xywh": [
+            1025,
+            6449,
+            160,
+            160
+          ],
+          "camera_JPEGs": {
+            "noisy_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+              },
+              "xywh": [
+                980,
+                6460,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            },
+            "reference_camera_jpeg": {
+              "pixels": {
+                "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+              },
+              "xywh": [
+                979,
+                6461,
+                160,
+                160
+              ],
+              "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+            }
+          },
+          "crop_index": 0
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ],
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "8e560e31fea6cea4dc87f3d197642b793daecf13de09d161a52e43de0678a8d2"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor-filled guide",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice-filled guide",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Neighbor other-half check",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice other-half check",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Lattice signed lift",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise lattice guide",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Double-noise other-half lift",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "reference_board": {
+          "id": "mesh-profile3879-fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "f0150938f863a54ad2218a3a57ba0579dcf39d3214149689b0b6703a8a6e7431"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-profile3879",
+          "case": {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit",
+            "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "neighbor": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "9c025f9e5dd0a32e4fd65e6d60293bb6e4bcc7d7f4dd5f14f20b087bf53c6a9f"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "62cfd377bdbcf5fe2496bf8f7e0cfadc6e22615c7d42216adfe270d496e6c5dd"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "ba369598fec68cf7bc9717d968727a4ac839a55606953026738317736aee3035"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "f94e140f6836d6e57c2be58859862457be6c1319f9d53577b15783ae497f4ed2"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              1,
+              1
+            ],
+            "full_other_unadjusted": [
+              1,
+              1
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              4,
+              8
+            ],
+            "full_signed": [
+              19,
+              15
+            ],
+            "all_guide": [
+              75,
+              80
+            ]
+          }
+        },
+        "lattice": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "01817f1451122f9213ad2142d28d8bd3433f9d5a968dbe66d3921fbaeb60542a"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "3eee7734caf5e7bd810295a6daac31c7572ec29f78c841375c7b1ebd68317c76"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "dc66ea34a0899068e951bcfbb2b3650a85479f383dfaded3b59f24ef2534ad68"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "76ec4ce60dc3af22de71497d0224f8dd059cc128d258a129fe498750cd31d7dd"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              0,
+              0
+            ],
+            "full_other_unadjusted": [
+              0,
+              0
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              6,
+              8
+            ],
+            "full_signed": [
+              13,
+              11
+            ],
+            "all_guide": [
+              75,
+              80
+            ]
+          }
+        },
+        "inflated": {
+          "folds": [
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "01817f1451122f9213ad2142d28d8bd3433f9d5a968dbe66d3921fbaeb60542a"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "9992b424fb683864fa6d1ad590b865974e5cfbbd71e67cbd03c91c3c7b7bc2ab"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            },
+            {
+              "filled": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "dc66ea34a0899068e951bcfbb2b3650a85479f383dfaded3b59f24ef2534ad68"
+              },
+              "variance": {
+                "shape": [
+                  1,
+                  4,
+                  128,
+                  128
+                ],
+                "dtype": "<f4",
+                "sha256": "558a4041066c3eeba6401b9ed960646159e5d2ed26500d7446f1b3a3ca1c9a84"
+              },
+              "observed_count": 8192,
+              "missing_count": 8192
+            }
+          ],
+          "counts": {
+            "half_same": [
+              81,
+              81
+            ],
+            "half_other": [
+              1,
+              0
+            ],
+            "full_other_unadjusted": [
+              1,
+              0
+            ],
+            "full_same": [
+              81,
+              81
+            ],
+            "full_other": [
+              4,
+              8
+            ],
+            "full_signed": [
+              14,
+              14
+            ],
+            "all_guide": [
+              75,
+              80
+            ]
+          }
+        },
+        "RGB_RMS_DN16": {
+          "Neighbor-filled guide": 28.603321184917903,
+          "Lattice-filled guide": 28.83759439372265,
+          "Neighbor other-half check": 0.20719277522266474,
+          "Lattice other-half check": 0.19512358399704138,
+          "Lattice signed lift": 0.13458031308339163,
+          "Double-noise lattice guide": 22.901810966431917,
+          "Double-noise other-half lift": 0.272592599291911
+        }
+      }
+    ],
+    "operator_source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/result.json",
+      "sha256": "ddd41dadef6244f01f0e5dd3a46f8bf44bda1330708fcb3bbafa3809dd57dc71"
+    }
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/split-bayer-neural-v1/native-extended.json",
+    "sha256": "24e0c9bdf58eed90dbb2e90bf770bda10f39b4e9818a07d71ef8e28a8af5dec5"
+  },
+  "viewed_local": "2026-11-19T08:53:06.454314-08:00"
+}
