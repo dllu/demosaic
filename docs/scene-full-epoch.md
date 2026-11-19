@@ -309,8 +309,8 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. Matched training now verifies 42,500 updates on 85,000 distinct
-photos and 340,000 queries per arm. The latest completed paired quality
+pair. Matched training now verifies 43,500 updates on 87,000 distinct
+photos and 348,000 queries per arm. The latest completed paired quality
 review is [40k](scene-full-epoch-40k.md).
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
@@ -351,6 +351,9 @@ review is [40k](scene-full-epoch-40k.md).
 [42,000 paired audit](results/scene-full-epoch-v1/paired-prefix-042000.json) ·
 [42,500 paired audit](results/scene-full-epoch-v1/paired-prefix-042500.json) ·
 [42,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-042500.tar.xz) ·
+[43,000 paired audit](results/scene-full-epoch-v1/paired-prefix-043000.json) ·
+[43,500 paired audit](results/scene-full-epoch-v1/paired-prefix-043500.json) ·
+[43,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-043500.tar.xz) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
@@ -358,16 +361,17 @@ review is [40k](scene-full-epoch-40k.md).
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
 
-Local-only verifies 44,500 updates, 89,000 distinct photos and
-356,000 native queries on the 50k schedule. The retained loop took
-21,537.19 s. The first 44k attempt exhausted local storage. The worker
+Local-only verifies 45,000 updates, 90,000 distinct photos and
+360,000 native queries on the 50k schedule. The retained loop took
+21,730.41 s. The first 44k attempt exhausted local storage. The worker
 resumed from the verified 43.5k checkpoint after checksum-verified cache
 relocation to the SSD. The first 100 reprocessed observation rows match
 the interrupted attempt byte for byte. Both arms retain the same input
 plan and source order. Output directories through 50k now write to the
 SSD. [Recovery and 44k local audit](results/scene-full-epoch-v1/storage-recovery-044000.json) ·
 [Recovery receipts](results/scene-full-epoch-v1/storage-recovery-044000.tar.xz) ·
-[44.5k local prefix](results/scene-full-epoch-v1/local-044500-prefix.json).
+[44.5k local prefix](results/scene-full-epoch-v1/local-044500-prefix.json) ·
+[45k local prefix](results/scene-full-epoch-v1/local-045000-prefix.json).
 [25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
 [26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
 [26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json) ·

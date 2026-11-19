@@ -635,6 +635,14 @@ the gain to the measured band preserves much of the coarse structure.
 The half mix still raises fine-increment error by 0.65 DN16 and keeps
 fine cab crossings incomplete.
 
+A [regional endpoint mixture](scene-gated-mixture.md) uses local
+activity and optional disjoint scene texture to combine Corpus 100k and
+spatial 40k. A bounded luminance boost preserves most parent response
+and lowers exact fine-flat RMS by 0.209 DN16. Upper-band error rises.
+Replacing the spatial checkpoint with its matched local counterpart
+weakens the flat benefit, while shuffling the outer gate features
+changes little. Fine cab crossings remain incomplete.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

@@ -268,6 +268,11 @@ from checking a half-input proposal on its own samples. At matched quiet
 strength the opposite-half correction above full-input Corpus 100k adds
 0.003 response points with a small increase in fine-increment and flat
 error. Fine cab crossings remain incomplete.
+[The regional endpoint mixture](scene-gated-mixture.md) combines Corpus
+100k with spatial 40k. It lowers fine-flat RMS by 0.209 DN16 at nearly
+parent-level fine response. Upper-band error rises and fine cab crossings
+remain incomplete. The additional registered exterior descriptors yield
+little benefit over local gate features.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

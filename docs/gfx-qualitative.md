@@ -12,6 +12,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons)
   reproduces the ordinary FP16 values in all four viewed crops. The sky is
   smooth, coarse crossings are coherent and fine wires and leaves are soft.
+- [Regional endpoint mixture](scene-gated-mixture.md#standing-gfx100s-comparisons)
+  keeps the sky smooth and coarse crossings coherent. The sky and fence
+  change by 0.78 and 3.46 DN16 camera-RGB RMS versus Corpus 100k.
 - [Full-sampling opposite-view checks](full-sampling-detail-check.md#standing-gfx100s-comparisons)
   keep a smooth sky and coherent coarse crossings in the confined-band mix.
   The unconfined boost visibly adds outlines around leaves and coarse mesh.
