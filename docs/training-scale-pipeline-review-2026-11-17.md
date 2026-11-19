@@ -11,8 +11,9 @@ fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fif
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The two arms
 have verified matching first 5,000 updates, with 10,000 unique photos and
-40,000 native queries per arm. Local-only subsequently reaches 7,500
-updates, 15,000 photos and 60,000 native queries. [Coverage and intermediate review](scene-full-epoch.md#matched-quality-comparison-at-5000-updates).
+40,000 native queries per arm. Both arms subsequently reach 7,500
+updates on matching traces from 15,000 photos and 60,000 queries.
+[Coverage and intermediate review](scene-full-epoch.md#matched-quality-comparison-at-7500-updates).
 
 **The corpus supports a substantially larger full-model training experiment.
 We have not established that its useful examples, or the model's capacity to

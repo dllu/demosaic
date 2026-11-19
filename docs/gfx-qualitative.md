@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Three-quarter weak amplitude](query-local-gap.md#standing-gfx100s-comparisons)
+  reproduces the previous exterior-checked crops. Sky remains smooth
+  and both coarse fence directions stay visible.
 - [Exterior bent-phase witness](query-exterior-witness.md#standing-gfx100s-comparisons)
   rejects faint building modulation from the unguarded pooled proposal
   and returns all main crops to the wide fit. The sky stays smooth.
@@ -27,6 +30,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Local RAW support and exterior phase](green-gap-validation.md#standing-gfx100s-comparisons)
   preserves the overcast sky pixel for pixel. The coarse fence keeps both
   directions, with little change to fine foliage or thin building cables.
+- [Full-epoch scene run at update 7,500](scene-full-epoch.md#standing-gfx100s-at-update-7500)
+  shows coarse crossings and a smooth sky in both EMAs. Fine foliage
+  and building details remain soft.
 - [Full-epoch scene run at update 5,000](scene-full-epoch.md#standing-gfx100s-at-update-5000)
   compares both matched EMAs. The sky stays smooth, both coarse crossing
   directions survive, and fine leaf edges and building cables stay soft.

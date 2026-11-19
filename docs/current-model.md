@@ -123,6 +123,10 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Three-quarter weak amplitude](query-local-gap.md) reduces added texture
+in unrelated gaps at matched intact correction strength. Wide support
+retains more of the intact signal than the compact alternatives. The
+standing GFX outputs match the exterior fallback.
 [Exterior bent-phase witness](query-exterior-witness.md) adds 10.45 points of
 weak response on occluded ISO6400 fields while lowering signed-increment
 error. A disjoint 36-photo validation confirms a 9.55-point occluded
@@ -162,11 +166,10 @@ added flat variation. Coherent gap leakage rises. The automatic GFX
 frequency search misses the fine mesh. Supplying prior noisy-RAW peaks
 makes more of the right cab lattice visible, with irregular coverage and
 overly regular spacing in places.
-[Full-epoch scene training at update 5,000](scene-full-epoch.md#matched-quality-comparison-at-5000-updates)
-improves ISO6400 coupled flat-core variation over masked preview.
-Mirroring the distant view gives a similar flat result. Aligned weak
-response falls below Corpus 100k on the eight-photo monitor. Both standing
-GFX reviews find smooth skies and incomplete fine cab crossings.
+[Full-epoch scene training at update 7,500](scene-full-epoch.md#matched-quality-comparison-at-7500-updates)
+regains a small amount of independent ISO6400 response relative to 5k,
+with more flat variation. Coupled weak response stays below Corpus 100k.
+Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

@@ -1,0 +1,3560 @@
+{
+  "study": "query-local-gap-v1",
+  "training_performed": false,
+  "numeric_evaluation_complete": true,
+  "actual_native_viewing_complete": true,
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+    "type": "base",
+    "step": 100000
+  },
+  "audit": {
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/query-local-gap-v1/audit.py",
+      "sha256": "0789dfbf9140778d80cd78c2688193a4eb5a53f9b432b2f994b3ba46b179bc82"
+    },
+    "restoration": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/query-local-gap-v1/restoration-fresh.json",
+      "sha256": "58461688bb0b54bed2bae7dfccc171688e86101b66f8e4bbe6cda35b1b77367f"
+    },
+    "train_manifest": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-epoch-corpus-v1/manifest-train.jsonl",
+      "sha256": "1edcde03824d47bc6498e41578a0f0b337cadce0dbc5b6816332f464f368fcd1"
+    },
+    "overlap": 0,
+    "trained_source_count": 90692,
+    "noise_free_CFA_fit_error": {
+      "RGGB-three-wide": 9.313225746154785e-10,
+      "RGGB-three-close": 1.3969838619232178e-09,
+      "RGGB-two-close": 1.862645149230957e-09,
+      "GRBG-three-wide": 9.313225746154785e-10,
+      "GRBG-three-close": 1.3969838619232178e-09,
+      "GRBG-two-close": 1.3969838619232178e-09,
+      "GBRG-three-wide": 9.313225746154785e-10,
+      "GBRG-three-close": 1.3969838619232178e-09,
+      "GBRG-two-close": 1.3969838619232178e-09,
+      "BGGR-three-wide": 9.313225746154785e-10,
+      "BGGR-three-close": 1.3969838619232178e-09,
+      "BGGR-two-close": 1.862645149230957e-09
+    },
+    "checks": [
+      {
+        "index": 3,
+        "repeat": 0,
+        "parent_fixed": true,
+        "proposal_isolation": true,
+        "aperture_excludes_Q0": true,
+        "CPU_GPU_max_abs": {
+          "three-wide": 1.1641532182693481e-10,
+          "three-close": 1.1641532182693481e-10,
+          "two-close": 2.3283064365386963e-10
+        }
+      },
+      {
+        "index": 6,
+        "repeat": 0,
+        "parent_fixed": true,
+        "proposal_isolation": true,
+        "aperture_excludes_Q0": true,
+        "CPU_GPU_max_abs": {
+          "three-wide": 2.3283064365386963e-10,
+          "three-close": 2.3283064365386963e-10,
+          "two-close": 2.3283064365386963e-10
+        }
+      },
+      {
+        "index": 9,
+        "repeat": 0,
+        "parent_fixed": true,
+        "proposal_isolation": true,
+        "aperture_excludes_Q0": true,
+        "CPU_GPU_max_abs": {
+          "three-wide": 2.3283064365386963e-10,
+          "three-close": 2.3283064365386963e-10,
+          "two-close": 2.3283064365386963e-10
+        }
+      },
+      {
+        "index": 10,
+        "repeat": 1,
+        "parent_fixed": true,
+        "proposal_isolation": true,
+        "aperture_excludes_Q0": true,
+        "CPU_GPU_max_abs": {
+          "three-wide": 0.0,
+          "three-close": 0.0,
+          "two-close": 0.0
+        }
+      }
+    ],
+    "scope": "Footprint tests hold the measured exterior waveform fixed. All four CFA noiseless phases are checked. The aperture reads Q1-Q3 and holds full-input parent fixed."
+  },
+  "strength_calibration": {
+    "three-wide": 1.0456157929033305,
+    "three-close": 1.1669297284091016,
+    "two-close": 1.062647186891936
+  },
+  "fresh_groups": {
+    "independent": {
+      "intact_weak_response": {
+        "mean": {
+          "baseline": 27.39294913670642,
+          "wide": 36.94984728912251,
+          "screened": 43.279865950418035,
+          "gap": 43.279865950418035,
+          "sharp": 43.279865950418035,
+          "half-gap": 43.279865950418035,
+          "half-sharp": 43.279865950418035,
+          "three-wide": 43.17642276976264,
+          "three-close": 41.966934936176486,
+          "two-close": 42.39469850184546,
+          "matched-three-wide": 43.460452947384454,
+          "matched-three-close": 42.80443601450389,
+          "matched-two-close": 42.735803113367695
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -6.3300186612955125,
+            -9.690370965874491,
+            -2.9825867121430587
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.10344318065539564,
+            -0.6727157901761741,
+            0.4291863766665801
+          ],
+          "three-close-vs-screened": [
+            -1.3129310142415385,
+            -2.3697077612287742,
+            -0.43251671709407563
+          ],
+          "two-close-vs-screened": [
+            -0.8851674485725711,
+            -1.3773492611316156,
+            -0.40869104164564457
+          ],
+          "matched-three-wide-vs-screened": [
+            0.18058699696642577,
+            -0.37771216824465254,
+            0.7747026325835673
+          ],
+          "matched-three-close-vs-screened": [
+            -0.47542993591412647,
+            -1.3267679818886926,
+            0.27228796600563554
+          ],
+          "matched-two-close-vs-screened": [
+            -0.5440628370503333,
+            -0.9020855492641731,
+            -0.21550946709453642
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -0.6560169328805522,
+            -1.1038455678676697,
+            -0.2580679730897373
+          ],
+          "three-close-vs-two-close": [
+            -0.42776356566896734,
+            -1.2732119200384362,
+            0.26678770929789736
+          ]
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "mean": {
+          "baseline": 189.3623718062319,
+          "wide": 186.46756701482798,
+          "screened": 184.7380149946405,
+          "gap": 184.7380149946405,
+          "sharp": 184.7380149946405,
+          "half-gap": 184.7380149946405,
+          "half-sharp": 184.7380149946405,
+          "three-wide": 184.66666313890303,
+          "three-close": 184.97374815853564,
+          "two-close": 184.95172587779268,
+          "matched-three-wide": 184.61448773172265,
+          "matched-three-close": 184.81819956310446,
+          "matched-two-close": 184.9001142233536
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            1.729552020187467,
+            0.5763056606889544,
+            3.081172623809177
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.07135185573745062,
+            -0.23617047801686106,
+            0.07714995246058957
+          ],
+          "three-close-vs-screened": [
+            0.2357331638951455,
+            0.013471693672266838,
+            0.5155912960501027
+          ],
+          "two-close-vs-screened": [
+            0.21371088315220987,
+            0.0673926319831347,
+            0.3812450801108922
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.12352726291784204,
+            -0.29384883054780886,
+            0.027024524472279172
+          ],
+          "matched-three-close-vs-screened": [
+            0.08018456846395239,
+            -0.0786945587084354,
+            0.2600545026620839
+          ],
+          "matched-two-close-vs-screened": [
+            0.16209922871307234,
+            0.055717060699341424,
+            0.28102400639146685
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.2037118313817944,
+            0.0721896315157539,
+            0.3401479436629688
+          ],
+          "three-close-vs-two-close": [
+            0.022022280742935624,
+            -0.13090733062963267,
+            0.1817371348472783
+          ]
+        }
+      },
+      "strong_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 5.103288612503772,
+          "screened": 5.1245320730961685,
+          "gap": 5.124531270862639,
+          "sharp": 5.124531270862639,
+          "half-gap": 5.124531411742357,
+          "half-sharp": 5.124531411742357,
+          "three-wide": 5.108488062033303,
+          "three-close": 5.1167651649255665,
+          "two-close": 5.135838901675665,
+          "matched-three-wide": 5.108725239046254,
+          "matched-three-close": 5.119014802161227,
+          "matched-two-close": 5.137878085724804
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -0.021243460592396984,
+            -0.06373038177719095,
+            0.0
+          ],
+          "gap-vs-screened": [
+            -8.022335302032557e-07,
+            -2.406700590609767e-06,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            -8.022335302032557e-07,
+            -2.406700590609767e-06,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            -6.613538124089491e-07,
+            -1.9840614372268472e-06,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            -6.613538124089491e-07,
+            -1.9840614372268472e-06,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.016044011062865505,
+            -0.04813203318859651,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            -0.007766908170602824,
+            -0.02330072451180847,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.011306828579496761,
+            0.0,
+            0.03392048573849028
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.015806834049915064,
+            -0.04742050214974519,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            -0.005517270934941682,
+            -0.016551812804825046,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.01334601262863501,
+            0.0,
+            0.04003803788590503
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.010289563114973381,
+            0.0,
+            0.030868689344920142
+          ],
+          "three-close-vs-two-close": [
+            -0.019073736750099584,
+            -0.057221210250298755,
+            0.0
+          ]
+        }
+      },
+      "strong_only_absolute_RMS": {
+        "mean": {
+          "baseline": 144.63771569319093,
+          "wide": 143.67055676310812,
+          "screened": 143.67099032951816,
+          "gap": 143.67098949688915,
+          "sharp": 143.67098949688915,
+          "half-gap": 143.6709896490439,
+          "half-sharp": 143.6709896490439,
+          "three-wide": 143.67065550674448,
+          "three-close": 143.6710531917625,
+          "two-close": 143.671309478359,
+          "matched-three-wide": 143.6706601629206,
+          "matched-three-close": 143.67114022368204,
+          "matched-two-close": 143.67136494054688
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -0.00043356641005113755,
+            -0.0013006992301534126,
+            0.0
+          ],
+          "gap-vs-screened": [
+            -8.32629002189833e-07,
+            -2.497887006569499e-06,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            -8.32629002189833e-07,
+            -2.497887006569499e-06,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            -6.804742570902059e-07,
+            -2.041422771270618e-06,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            -6.804742570902059e-07,
+            -2.041422771270618e-06,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.00033482277367961427,
+            -0.0010044683210388428,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            6.286224432490901e-05,
+            0.0,
+            0.00018858673297472706
+          ],
+          "two-close-vs-screened": [
+            0.0003191488408352446,
+            0.0,
+            0.0009574465225057338
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.00033016659756768263,
+            -0.0009904997927030479,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.00014989416388644372,
+            0.0,
+            0.00044968249165933116
+          ],
+          "matched-two-close-vs-screened": [
+            0.00037461102869921586,
+            0.0,
+            0.0011238330860976475
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.00048006076145412635,
+            0.0,
+            0.001440182284362379
+          ],
+          "three-close-vs-two-close": [
+            -0.0002562865965103356,
+            -0.0007688597895310068,
+            0.0
+          ]
+        }
+      },
+      "flat_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 0.0,
+          "screened": 0.0,
+          "gap": 0.0,
+          "sharp": 0.0,
+          "half-gap": 0.0,
+          "half-sharp": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0,
+          "two-close": 0.0,
+          "matched-three-wide": 0.0,
+          "matched-three-close": 0.0,
+          "matched-two-close": 0.0
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "outside_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 6.884796391015189,
+          "screened": 7.148308093159753,
+          "gap": 7.148308093159753,
+          "sharp": 7.148308093159753,
+          "half-gap": 7.148308093159753,
+          "half-sharp": 7.148308093159753,
+          "three-wide": 7.03873539143314,
+          "three-close": 7.07067036018508,
+          "two-close": 7.229543547353969,
+          "matched-three-wide": 7.045757440995952,
+          "matched-three-close": 7.101698251376931,
+          "matched-two-close": 7.251140986887588
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -0.2635117021445646,
+            -0.7905351064336937,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.10957270172661299,
+            -0.32871810517983896,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            -0.07763773297467365,
+            -0.23291319892402096,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.08123545419421592,
+            0.0,
+            0.24370636258264777
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.10255065216380192,
+            -0.30765195649140575,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            -0.046609841782822015,
+            -0.13982952534846604,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.10283289372783506,
+            0.0,
+            0.3084986811835052
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0559408103809799,
+            0.0,
+            0.1678224311429397
+          ],
+          "three-close-vs-two-close": [
+            -0.15887318716888957,
+            -0.4766195615066688,
+            0.0
+          ]
+        }
+      },
+      "spurious_gap_response": {
+        "mean": {
+          "baseline": 2.0613797967733825,
+          "wide": 2.2709084433657836,
+          "screened": 2.519943094906596,
+          "gap": 2.519943094906596,
+          "sharp": 2.519943094906596,
+          "half-gap": 2.519943094906596,
+          "half-sharp": 2.519943094906596,
+          "three-wide": 2.358121500211593,
+          "three-close": 2.3431121013689165,
+          "two-close": 2.5176644307683476,
+          "matched-three-wide": 2.3646986146152122,
+          "matched-three-close": 2.364675354158603,
+          "matched-two-close": 2.5366921329889034
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -0.24903465154081258,
+            -0.5024660154085319,
+            -0.04159647457454101
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.16182159469500307,
+            -0.3368978820186327,
+            -0.02709585511648799
+          ],
+          "three-close-vs-screened": [
+            -0.17683099353767942,
+            -0.3705584010088368,
+            -0.025574672884476162
+          ],
+          "two-close-vs-screened": [
+            -0.0022786641382487177,
+            -0.10123545885382733,
+            0.10506144677990495
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.15524448029138382,
+            -0.3257614523696076,
+            -0.02549858176571636
+          ],
+          "matched-three-close-vs-screened": [
+            -0.1552677407479929,
+            -0.3385393453026295,
+            -0.015031692503386688
+          ],
+          "matched-two-close-vs-screened": [
+            0.016749038082307436,
+            -0.08439214621862724,
+            0.13090480936132964
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -2.3260456609085673e-05,
+            -0.04854190070470024,
+            0.04485545936010857
+          ],
+          "three-close-vs-two-close": [
+            -0.17455232939943074,
+            -0.38427813301124303,
+            -0.00615432710838082
+          ]
+        }
+      },
+      "gap_absolute_RMS": {
+        "mean": {
+          "baseline": 146.35879247813497,
+          "wide": 145.67791172636296,
+          "screened": 145.74385073473596,
+          "gap": 145.74385073473596,
+          "sharp": 145.74385073473596,
+          "half-gap": 145.74385073473596,
+          "half-sharp": 145.74385073473596,
+          "three-wide": 145.71453159487,
+          "three-close": 145.70356086076166,
+          "two-close": 145.74055584365897,
+          "matched-three-wide": 145.71759432494684,
+          "matched-three-close": 145.71353555463517,
+          "matched-two-close": 145.75179803312926
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -0.06593900837296356,
+            -0.16562817835542004,
+            -0.0041355932951097985
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.02931913986589881,
+            -0.08181900803857821,
+            0.02345821045844882
+          ],
+          "three-close-vs-screened": [
+            -0.04028987397427267,
+            -0.07765381941602396,
+            -0.009938198256408034
+          ],
+          "two-close-vs-screened": [
+            -0.003294891076996246,
+            -0.027274534947293132,
+            0.02652996868095093
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.026256409789120028,
+            -0.07655396860624997,
+            0.027322787574690376
+          ],
+          "matched-three-close-vs-screened": [
+            -0.030315180100772682,
+            -0.05807524182636928,
+            -0.005656765969882715
+          ],
+          "matched-two-close-vs-screened": [
+            0.007947298393341148,
+            -0.0233141195856561,
+            0.04957554217772979
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -0.004058770311652656,
+            -0.0480087566241516,
+            0.03057230233137915
+          ],
+          "three-close-vs-two-close": [
+            -0.03699498289727643,
+            -0.09945712600959261,
+            0.009344615817483989
+          ]
+        }
+      },
+      "gap_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 13.39719394016552,
+          "screened": 15.664594699972483,
+          "gap": 15.664594699972483,
+          "sharp": 15.664594699972483,
+          "half-gap": 15.664594699972483,
+          "half-sharp": 15.664594699972483,
+          "three-wide": 14.655151771719188,
+          "three-close": 14.589212954011094,
+          "two-close": 15.773871646057705,
+          "matched-three-wide": 14.712534515644462,
+          "matched-three-close": 14.788196364250817,
+          "matched-two-close": 15.922763818480627
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -2.2674007598069625,
+            -3.7426549447241575,
+            -0.9252827375659116
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -1.009442928253297,
+            -1.8203272883317707,
+            -0.3456758082312216
+          ],
+          "three-close-vs-screened": [
+            -1.0753817459613908,
+            -1.9664613112237324,
+            -0.3304011296044546
+          ],
+          "two-close-vs-screened": [
+            0.1092769460852201,
+            -0.22582366695646852,
+            0.4711603438886285
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.9520601843280222,
+            -1.7502675306542326,
+            -0.31474870043509556
+          ],
+          "matched-three-close-vs-screened": [
+            -0.876398335721666,
+            -1.7305919882992684,
+            -0.18046965429207015
+          ],
+          "matched-two-close-vs-screened": [
+            0.25816911850814583,
+            -0.11771510898604776,
+            0.6840340781039354
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.07566184860635623,
+            -0.20474704086233042,
+            0.39469529510018597
+          ],
+          "three-close-vs-two-close": [
+            -1.1846586920466107,
+            -2.1576821901365215,
+            -0.3770756301705358
+          ]
+        }
+      },
+      "fallback_added_gap_RMS": {
+        "mean": {
+          "baseline": 13.39719394016552,
+          "wide": 0.0,
+          "screened": 2.267400759806963,
+          "gap": 2.267400759806963,
+          "sharp": 2.267400759806963,
+          "half-gap": 2.267400759806963,
+          "half-sharp": 2.267400759806963,
+          "three-wide": 1.2579578315536655,
+          "three-close": 1.1920190138455715,
+          "two-close": 2.376677705892183,
+          "matched-three-wide": 1.3153405754789407,
+          "matched-three-close": 1.3910024240852967,
+          "matched-two-close": 2.5255698783151086
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -2.267400759806963,
+            -3.742654944724158,
+            -0.9252827375659116
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -1.0094429282532973,
+            -1.8203272883317707,
+            -0.34567580823122174
+          ],
+          "three-close-vs-screened": [
+            -1.075381745961391,
+            -1.9664613112237328,
+            -0.33040112960445506
+          ],
+          "two-close-vs-screened": [
+            0.10927694608522011,
+            -0.22582366695646852,
+            0.4711603438886281
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.952060184328022,
+            -1.750267530654232,
+            -0.3147487004350955
+          ],
+          "matched-three-close-vs-screened": [
+            -0.8763983357216659,
+            -1.7305919882992682,
+            -0.18046965429206985
+          ],
+          "matched-two-close-vs-screened": [
+            0.25816911850814567,
+            -0.1177151089860483,
+            0.6840340781039341
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.07566184860635616,
+            -0.2047470408623306,
+            0.3946952951001864
+          ],
+          "three-close-vs-two-close": [
+            -1.1846586920466111,
+            -2.1576821901365215,
+            -0.3770756301705361
+          ]
+        }
+      }
+    },
+    "occluded": {
+      "intact_weak_response": {
+        "mean": {
+          "baseline": 35.91466205961739,
+          "wide": 38.808411934807275,
+          "screened": 44.75637768744172,
+          "gap": 44.75637768744172,
+          "sharp": 44.75637768744172,
+          "half-gap": 44.75637768744172,
+          "half-sharp": 44.75637768744172,
+          "three-wide": 44.299755644912324,
+          "three-close": 43.259191277432194,
+          "two-close": 43.990216611209014,
+          "matched-three-wide": 44.550247642353476,
+          "matched-three-close": 44.002158664305405,
+          "matched-two-close": 44.314842097209045
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -5.947965752634442,
+            -15.653715920782432,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.45662204252939276,
+            -1.5739861626229548,
+            0.2041200350347765
+          ],
+          "three-close-vs-screened": [
+            -1.497186410009525,
+            -3.855973561598559,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            -0.7661610762326999,
+            -1.8604877758363532,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.2061300450882341,
+            -0.9816815549873308,
+            0.36329141972262846
+          ],
+          "matched-three-close-vs-screened": [
+            -0.7542190231363115,
+            -1.8865796337394478,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            -0.4415355902326728,
+            -0.9963808343968855,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -0.5480889780480774,
+            -1.1663606935326498,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            -0.731025333776825,
+            -1.995485785762206,
+            0.0
+          ]
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "mean": {
+          "baseline": 151.64676773835942,
+          "wide": 151.39333695475398,
+          "screened": 149.57293815410196,
+          "gap": 149.57293815410196,
+          "sharp": 149.57293815410196,
+          "half-gap": 149.57293815410196,
+          "half-sharp": 149.57293815410196,
+          "three-wide": 149.59315030114954,
+          "three-close": 149.95742371520603,
+          "two-close": 149.8466909809987,
+          "matched-three-wide": 149.537594143064,
+          "matched-three-close": 149.8054263705037,
+          "matched-two-close": 149.79053309172755
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            1.8203988006520244,
+            0.0,
+            4.640028854218457
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.02021214704756839,
+            -0.18870224922682155,
+            0.24933869036952672
+          ],
+          "three-close-vs-screened": [
+            0.3844855611040809,
+            0.0,
+            0.9663994022332076
+          ],
+          "two-close-vs-screened": [
+            0.2737528268967253,
+            0.0,
+            0.6089420273260657
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.03534401103792817,
+            -0.24017915743746698,
+            0.13414712432368248
+          ],
+          "matched-three-close-vs-screened": [
+            0.23248821640174575,
+            0.0,
+            0.5951629982857417
+          ],
+          "matched-two-close-vs-screened": [
+            0.2175949376255867,
+            0.0,
+            0.46834020075296223
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.2678322274396739,
+            0.0,
+            0.5410755931078816
+          ],
+          "three-close-vs-two-close": [
+            0.11073273420735556,
+            -0.037888758427612856,
+            0.37008696104967953
+          ]
+        }
+      },
+      "strong_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 1.0743362253237863,
+          "screened": 1.0743362253237863,
+          "gap": 1.0743362253237863,
+          "sharp": 1.0743362253237863,
+          "half-gap": 1.0743362253237863,
+          "half-sharp": 1.0743362253237863,
+          "three-wide": 1.0743362253237863,
+          "three-close": 1.0743362253237863,
+          "two-close": 1.0743362253237863,
+          "matched-three-wide": 1.0743362253237863,
+          "matched-three-close": 1.0743362253237863,
+          "matched-two-close": 1.0743362253237863
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "strong_only_absolute_RMS": {
+        "mean": {
+          "baseline": 135.6547876667312,
+          "wide": 135.64316817707092,
+          "screened": 135.64316817707092,
+          "gap": 135.64316817707092,
+          "sharp": 135.64316817707092,
+          "half-gap": 135.64316817707092,
+          "half-sharp": 135.64316817707092,
+          "three-wide": 135.64316817707092,
+          "three-close": 135.64316817707092,
+          "two-close": 135.64316817707092,
+          "matched-three-wide": 135.64316817707092,
+          "matched-three-close": 135.64316817707092,
+          "matched-two-close": 135.64316817707092
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "flat_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 0.0,
+          "screened": 0.0,
+          "gap": 0.0,
+          "sharp": 0.0,
+          "half-gap": 0.0,
+          "half-sharp": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0,
+          "two-close": 0.0,
+          "matched-three-wide": 0.0,
+          "matched-three-close": 0.0,
+          "matched-two-close": 0.0
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "outside_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 0.40431821627711395,
+          "screened": 0.40431821627711395,
+          "gap": 0.40431821627711395,
+          "sharp": 0.40431821627711395,
+          "half-gap": 0.40431821627711395,
+          "half-sharp": 0.40431821627711395,
+          "three-wide": 0.40431821627711395,
+          "three-close": 0.40431821627711395,
+          "two-close": 0.40431821627711395,
+          "matched-three-wide": 0.40431821627711395,
+          "matched-three-close": 0.40431821627711395,
+          "matched-two-close": 0.40431821627711395
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "spurious_gap_response": {
+        "mean": {
+          "baseline": 0.5077648700833244,
+          "wide": 0.7241354245214594,
+          "screened": 0.7241343622471218,
+          "gap": 0.7241343622471218,
+          "sharp": 0.7241343622471218,
+          "half-gap": 0.7241343622471218,
+          "half-sharp": 0.7241343622471218,
+          "three-wide": 0.7241355976777313,
+          "three-close": 0.7241355344504071,
+          "two-close": 0.7241335893145237,
+          "matched-three-wide": 0.7241356055763918,
+          "matched-three-close": 0.7241355528008167,
+          "matched-two-close": 0.7241334743439717
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            1.062274337761589e-06,
+            -1.1625254880964775e-07,
+            3.3030755620944152e-06
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            1.2354306094900884e-06,
+            0.0,
+            3.4374809842196985e-06
+          ],
+          "three-close-vs-screened": [
+            1.1722032854470192e-06,
+            0.0,
+            3.3742536601766293e-06
+          ],
+          "two-close-vs-screened": [
+            -7.729325980920798e-07,
+            -2.2412960950698078e-06,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            1.2433292701045466e-06,
+            0.0,
+            3.4453796448341567e-06
+          ],
+          "matched-three-close-vs-screened": [
+            1.1905536948612443e-06,
+            0.0,
+            3.3926040695908544e-06
+          ],
+          "matched-two-close-vs-screened": [
+            -8.879031499949471e-07,
+            -2.5862077507784096e-06,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -5.277557524330234e-08,
+            -1.5832672572990703e-07,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            1.945135883539099e-06,
+            0.0,
+            5.615549755246437e-06
+          ]
+        }
+      },
+      "gap_absolute_RMS": {
+        "mean": {
+          "baseline": 148.50268116353996,
+          "wide": 147.8680786358516,
+          "screened": 147.86807811201092,
+          "gap": 147.86807811201092,
+          "sharp": 147.86807811201092,
+          "half-gap": 147.86807811201092,
+          "half-sharp": 147.86807811201092,
+          "three-wide": 147.86807828242874,
+          "three-close": 147.86807841146143,
+          "two-close": 147.86807789492676,
+          "matched-three-wide": 147.86807826631085,
+          "matched-three-close": 147.86807837401022,
+          "matched-two-close": 147.8680778485707
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            5.238406567779444e-07,
+            0.0,
+            1.413308782597748e-06
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            1.7041782266839314e-07,
+            -8.229487207245256e-07,
+            1.334202188729705e-06
+          ],
+          "three-close-vs-screened": [
+            2.9945050764960496e-07,
+            -4.3585066578089027e-07,
+            1.334202188729705e-06
+          ],
+          "two-close-vs-screened": [
+            -2.1708417108357025e-07,
+            -8.885722948548391e-07,
+            2.3731978160412837e-07
+          ],
+          "matched-three-wide-vs-screened": [
+            1.5429991388297518e-07,
+            -8.713024470807795e-07,
+            1.334202188729705e-06
+          ],
+          "matched-three-close-vs-screened": [
+            2.619993063982899e-07,
+            -5.482042695348355e-07,
+            1.334202188729705e-06
+          ],
+          "matched-two-close-vs-screened": [
+            -2.63440246802323e-07,
+            -1.0276405220110973e-06,
+            2.3731978160412837e-07
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            1.0769939251531468e-07,
+            0.0,
+            3.2309817754594405e-07
+          ],
+          "three-close-vs-two-close": [
+            5.165346787331752e-07,
+            -6.731704473850186e-07,
+            2.2227744835845442e-06
+          ]
+        }
+      },
+      "gap_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 5.722875629093703,
+          "screened": 5.722961180342469,
+          "gap": 5.722961180342469,
+          "sharp": 5.722961180342469,
+          "half-gap": 5.722961180342469,
+          "half-sharp": 5.722961180342469,
+          "three-wide": 5.722923602990245,
+          "three-close": 5.7229060855127045,
+          "two-close": 5.723000332157206,
+          "matched-three-wide": 5.722925791357575,
+          "matched-three-close": 5.722911169594457,
+          "matched-two-close": 5.723008144453334
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -8.55512487655836e-05,
+            -0.00023518147468029537,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -3.757735222226508e-05,
+            -0.00022444533887206768,
+            0.00011171328220527244
+          ],
+          "three-close-vs-screened": [
+            -5.509482976368283e-05,
+            -0.00022444533887206768,
+            5.916084958101919e-05
+          ],
+          "two-close-vs-screened": [
+            3.9151814738986534e-05,
+            -3.2208407424683116e-05,
+            0.00014966385164164273
+          ],
+          "matched-three-wide-vs-screened": [
+            -3.538898489254732e-05,
+            -0.00022444533887206768,
+            0.00011827838419442571
+          ],
+          "matched-three-close-vs-screened": [
+            -5.001074801105259e-05,
+            -0.00022444533887206768,
+            7.44130948389099e-05
+          ],
+          "matched-two-close-vs-screened": [
+            4.696411086505488e-05,
+            -3.2208407424683116e-05,
+            0.00017310074001984776
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -1.4621763118505271e-05,
+            -4.386528935551581e-05,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            -9.424664450266936e-05,
+            -0.0003741091905137104,
+            9.136925700570231e-05
+          ]
+        }
+      },
+      "fallback_added_gap_RMS": {
+        "mean": {
+          "baseline": 5.722875629093703,
+          "wide": 0.0,
+          "screened": 8.555124876581866e-05,
+          "gap": 8.555124876581866e-05,
+          "sharp": 8.555124876581866e-05,
+          "half-gap": 8.555124876581866e-05,
+          "half-sharp": 8.555124876581866e-05,
+          "three-wide": 4.797389654348328e-05,
+          "three-close": 3.045641900198017e-05,
+          "two-close": 0.00012470306350457013,
+          "matched-three-wide": 5.016226387304255e-05,
+          "matched-three-close": 3.554050075479045e-05,
+          "matched-two-close": 0.0001325153596306385
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -8.555124876581866e-05,
+            -0.00023518147468053045,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -3.7577352222335394e-05,
+            -0.00022444533887206768,
+            0.0001117132822050615
+          ],
+          "three-close-vs-screened": [
+            -5.50948297638385e-05,
+            -0.00022444533887206768,
+            5.916084958055218e-05
+          ],
+          "two-close-vs-screened": [
+            3.9151814738751466e-05,
+            -3.220840742538833e-05,
+            0.00014966385164164273
+          ],
+          "matched-three-wide-vs-screened": [
+            -3.538898489277613e-05,
+            -0.00022444533887206768,
+            0.0001182783841937393
+          ],
+          "matched-three-close-vs-screened": [
+            -5.0010748011028217e-05,
+            -0.00022444533887206768,
+            7.441309483898303e-05
+          ],
+          "matched-two-close-vs-screened": [
+            4.6964110864819806e-05,
+            -3.220840742538833e-05,
+            0.00017310074001984776
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -1.4621763118252091e-05,
+            -4.3865289354756275e-05,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            -9.424664450258996e-05,
+            -0.0003741091905137104,
+            9.136925700594051e-05
+          ]
+        }
+      }
+    },
+    "dip": {
+      "intact_weak_response": {
+        "mean": {
+          "baseline": 13.511479039999239,
+          "wide": 21.726004872173586,
+          "screened": 29.74701800624364,
+          "gap": 29.74701800624364,
+          "sharp": 29.74701800624364,
+          "half-gap": 29.74701800624364,
+          "half-sharp": 29.74701800624364,
+          "three-wide": 29.84861491566957,
+          "three-close": 28.119988141474593,
+          "two-close": 28.74498997095286,
+          "matched-three-wide": 30.21913421324822,
+          "matched-three-close": 29.187334032071334,
+          "matched-two-close": 29.1847096422278
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -8.021013134070062,
+            -16.82149976305576,
+            -1.5735382426071791
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.10159690942592665,
+            -0.6094468017825161,
+            0.7791135173474881
+          ],
+          "three-close-vs-screened": [
+            -1.6270298647690524,
+            -4.310386735634979,
+            -0.13131012313438065
+          ],
+          "two-close-vs-screened": [
+            -1.0020280352907829,
+            -2.6059606489117084,
+            -0.07338175633077644
+          ],
+          "matched-three-wide-vs-screened": [
+            0.4721162070045744,
+            -0.11758215953109759,
+            1.166589867723933
+          ],
+          "matched-three-close-vs-screened": [
+            -0.55968397417231,
+            -2.4281079562018077,
+            0.6522987385083722
+          ],
+          "matched-two-close-vs-screened": [
+            -0.5623083640158401,
+            -1.7731194829617056,
+            0.06939464466769903
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -1.0318001811768844,
+            -2.586310329835705,
+            -0.12130916666214613
+          ],
+          "three-close-vs-two-close": [
+            -0.6250018294782697,
+            -1.6625476102976393,
+            -0.02209763348006355
+          ]
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "mean": {
+          "baseline": 175.86735478116057,
+          "wide": 172.70983415110194,
+          "screened": 170.64001859073127,
+          "gap": 170.64001859073127,
+          "sharp": 170.64001859073127,
+          "half-gap": 170.64001859073127,
+          "half-sharp": 170.64001859073127,
+          "three-wide": 170.5302954901803,
+          "three-close": 171.03016418240176,
+          "two-close": 170.95127928471834,
+          "matched-three-wide": 170.4574395304956,
+          "matched-three-close": 170.82663065195462,
+          "matched-two-close": 170.8798936660886
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            2.0698155603706945,
+            0.26064164044809485,
+            5.0975823244296
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.10972310055094663,
+            -0.20580662568765717,
+            -0.030435186419685085
+          ],
+          "three-close-vs-screened": [
+            0.39014559167054114,
+            -0.0032240936084709424,
+            1.1267778961560235
+          ],
+          "two-close-vs-screened": [
+            0.31126069398709433,
+            0.01501985562271102,
+            0.842134323442508
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.18257906023562498,
+            -0.34753202062043914,
+            -0.042440530061611526
+          ],
+          "matched-three-close-vs-screened": [
+            0.18661206122339516,
+            -0.09092589655033123,
+            0.668637984317011
+          ],
+          "matched-two-close-vs-screened": [
+            0.2398750753573798,
+            0.005652251526394518,
+            0.6745326113123346
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.36919112145902017,
+            0.02735341779816262,
+            0.9797122125388048
+          ],
+          "three-close-vs-two-close": [
+            0.0788848976834468,
+            -0.049895707280839474,
+            0.2907526964644849
+          ]
+        }
+      },
+      "strong_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 4.7702855885900375,
+          "screened": 4.7702855885900375,
+          "gap": 4.7702855885900375,
+          "sharp": 4.7702855885900375,
+          "half-gap": 4.7702855885900375,
+          "half-sharp": 4.7702855885900375,
+          "three-wide": 4.7702855885900375,
+          "three-close": 4.7702855885900375,
+          "two-close": 4.7702855885900375,
+          "matched-three-wide": 4.7702855885900375,
+          "matched-three-close": 4.7702855885900375,
+          "matched-two-close": 4.7702855885900375
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "strong_only_absolute_RMS": {
+        "mean": {
+          "baseline": 139.40805112217149,
+          "wide": 139.1526206299507,
+          "screened": 139.1526206299507,
+          "gap": 139.1526206299507,
+          "sharp": 139.1526206299507,
+          "half-gap": 139.1526206299507,
+          "half-sharp": 139.1526206299507,
+          "three-wide": 139.1526206299507,
+          "three-close": 139.1526206299507,
+          "two-close": 139.1526206299507,
+          "matched-three-wide": 139.1526206299507,
+          "matched-three-close": 139.1526206299507,
+          "matched-two-close": 139.1526206299507
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "flat_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 0.0,
+          "screened": 0.0,
+          "gap": 0.0,
+          "sharp": 0.0,
+          "half-gap": 0.0,
+          "half-sharp": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0,
+          "two-close": 0.0,
+          "matched-three-wide": 0.0,
+          "matched-three-close": 0.0,
+          "matched-two-close": 0.0
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "outside_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 3.0807368661294188,
+          "screened": 3.0807368661294188,
+          "gap": 3.0807368661294188,
+          "sharp": 3.0807368661294188,
+          "half-gap": 3.0807368661294188,
+          "half-sharp": 3.0807368661294188,
+          "three-wide": 3.0807368661294188,
+          "three-close": 3.0807368661294188,
+          "two-close": 3.0807368661294188,
+          "matched-three-wide": 3.0807368661294188,
+          "matched-three-close": 3.0807368661294188,
+          "matched-two-close": 3.0807368661294188
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "contrast": {
+      "intact_weak_response": {
+        "mean": {
+          "baseline": 40.2125443393405,
+          "wide": 50.04090929962182,
+          "screened": 53.90239496737164,
+          "gap": 53.90239496737164,
+          "sharp": 53.90239496737164,
+          "half-gap": 53.90239496737164,
+          "half-sharp": 53.871598223409364,
+          "three-wide": 54.38478926973189,
+          "three-close": 53.68385198315312,
+          "two-close": 53.707542260199084,
+          "matched-three-wide": 54.58293879884536,
+          "matched-three-close": 54.291967415924915,
+          "matched-two-close": 53.93724650054449
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -3.861485667749823,
+            -7.263506609747969,
+            -0.779242133073577
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            -0.030796743962279532,
+            -0.09239023188683859,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.4823943023602529,
+            -0.7302767115454584,
+            1.8078255691666303
+          ],
+          "three-close-vs-screened": [
+            -0.21854298421852292,
+            -1.3599058926376333,
+            0.6720776001991583
+          ],
+          "two-close-vs-screened": [
+            -0.19485270717256617,
+            -0.7653330058548052,
+            0.3832951022642857
+          ],
+          "matched-three-wide-vs-screened": [
+            0.6805438314737119,
+            -0.6044922951464476,
+            2.072788668054681
+          ],
+          "matched-three-close-vs-screened": [
+            0.38957244855326795,
+            -0.5465757337841239,
+            1.4521126085360467
+          ],
+          "matched-two-close-vs-screened": [
+            0.03485153317284192,
+            -0.5127977646021383,
+            0.7712846576235487
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            -0.29097138292044394,
+            -0.6363628926429499,
+            0.0541780704306755
+          ],
+          "three-close-vs-two-close": [
+            -0.02369027704595676,
+            -1.7253836312803525,
+            1.2503083529828558
+          ]
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "mean": {
+          "baseline": 166.21593034941063,
+          "wide": 164.85746632238832,
+          "screened": 164.43551450723365,
+          "gap": 164.43551450723365,
+          "sharp": 164.43551450723365,
+          "half-gap": 164.43551450723365,
+          "half-sharp": 164.438189140042,
+          "three-wide": 164.25395757099182,
+          "three-close": 164.4036945863801,
+          "two-close": 164.53572319191974,
+          "matched-three-wide": 164.2351900684813,
+          "matched-three-close": 164.35675812454974,
+          "matched-two-close": 164.5288928818618
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.4219518151546424,
+            -0.03840777144062694,
+            1.0970221092892463
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0026746328083267676,
+            0.0,
+            0.008023898424980302
+          ],
+          "three-wide-vs-screened": [
+            -0.1815569362418472,
+            -0.3804902242956037,
+            -0.028497185299187322
+          ],
+          "three-close-vs-screened": [
+            -0.03181992085351245,
+            -0.1068607671434781,
+            0.05820564998609257
+          ],
+          "two-close-vs-screened": [
+            0.10020868468610426,
+            0.03183133656904147,
+            0.17157291101131497
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.2003244387523703,
+            -0.4230508888982172,
+            -0.028120774080870586
+          ],
+          "matched-three-close-vs-screened": [
+            -0.07875638268389196,
+            -0.23636325633840252,
+            0.062189508140752046
+          ],
+          "matched-two-close-vs-screened": [
+            0.09337837462812122,
+            0.03174011081905329,
+            0.15501663843718916
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.12156805606847836,
+            0.037068032346856704,
+            0.21239190785068254
+          ],
+          "three-close-vs-two-close": [
+            -0.1320286055396167,
+            -0.2579053121450177,
+            -0.027444410289239347
+          ]
+        }
+      },
+      "strong_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 1.3312064858219463,
+          "screened": 1.3312064858219463,
+          "gap": 1.3312064858219463,
+          "sharp": 1.3312064858219463,
+          "half-gap": 1.3312064858219463,
+          "half-sharp": 1.3312064858219463,
+          "three-wide": 1.3312064858219463,
+          "three-close": 1.3312064858219463,
+          "two-close": 1.3312064858219463,
+          "matched-three-wide": 1.3312064858219463,
+          "matched-three-close": 1.3312064858219463,
+          "matched-two-close": 1.3312064858219463
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "strong_only_absolute_RMS": {
+        "mean": {
+          "baseline": 133.57476274215728,
+          "wide": 133.48237818523413,
+          "screened": 133.48237818523413,
+          "gap": 133.48237818523413,
+          "sharp": 133.48237818523413,
+          "half-gap": 133.48237818523413,
+          "half-sharp": 133.48237818523413,
+          "three-wide": 133.48237818523413,
+          "three-close": 133.48237818523413,
+          "two-close": 133.48237818523413,
+          "matched-three-wide": 133.48237818523413,
+          "matched-three-close": 133.48237818523413,
+          "matched-two-close": 133.48237818523413
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "flat_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 0.0,
+          "screened": 0.0,
+          "gap": 0.0,
+          "sharp": 0.0,
+          "half-gap": 0.0,
+          "half-sharp": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0,
+          "two-close": 0.0,
+          "matched-three-wide": 0.0,
+          "matched-three-close": 0.0,
+          "matched-two-close": 0.0
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-wide-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close-vs-two-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "outside_only_added_RMS": {
+        "mean": {
+          "baseline": 0.0,
+          "wide": 1.3949242546666574,
+          "screened": 1.74528973858292,
+          "gap": 1.74528973858292,
+          "sharp": 1.74528973858292,
+          "half-gap": 1.74528973858292,
+          "half-sharp": 1.74528973858292,
+          "three-wide": 1.4942053425337802,
+          "three-close": 1.5565941647804085,
+          "two-close": 1.8548904812733176,
+          "matched-three-wide": 1.4987341280771445,
+          "matched-three-close": 1.5835816789676211,
+          "matched-two-close": 1.883706071435524
+        },
+        "paired_95pct": {
+          "wide-vs-screened": [
+            -0.3503654839162627,
+            -1.0510964517487882,
+            0.0
+          ],
+          "gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-gap-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "half-sharp-vs-screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide-vs-screened": [
+            -0.2510843960491398,
+            -0.7532531881474194,
+            0.0
+          ],
+          "three-close-vs-screened": [
+            -0.18869557380251165,
+            -0.5660867214075349,
+            0.0
+          ],
+          "two-close-vs-screened": [
+            0.10960074269039748,
+            0.0,
+            0.3288022280711924
+          ],
+          "matched-three-wide-vs-screened": [
+            -0.24655561050577568,
+            -0.739666831517327,
+            0.0
+          ],
+          "matched-three-close-vs-screened": [
+            -0.16170805961529902,
+            -0.4851241788458971,
+            0.0
+          ],
+          "matched-two-close-vs-screened": [
+            0.13841633285260388,
+            0.0,
+            0.4152489985578116
+          ],
+          "matched-three-close-vs-matched-three-wide": [
+            0.08484755089047664,
+            0.0,
+            0.25454265267142995
+          ],
+          "three-close-vs-two-close": [
+            -0.2982963164929091,
+            -0.8948889494787272,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "nominations": {
+    "fit": {
+      "occluded/present": {
+        "draws": 36,
+        "eligible": 18,
+        "gap": 1,
+        "sharp": 1,
+        "half-gap": 1,
+        "half-sharp": 1
+      },
+      "occluded/outside-only": {
+        "draws": 36,
+        "eligible": 3
+      },
+      "occluded/strong-only": {
+        "draws": 36,
+        "eligible": 1,
+        "gap": 1,
+        "sharp": 1
+      },
+      "occluded/quiet-query": {
+        "draws": 36
+      },
+      "contrast/present": {
+        "draws": 18,
+        "eligible": 5,
+        "sharp": 2
+      },
+      "contrast/outside-only": {
+        "draws": 18
+      },
+      "contrast/strong-only": {
+        "draws": 18
+      },
+      "contrast/quiet-query": {
+        "draws": 18
+      },
+      "independent/present": {
+        "draws": 18,
+        "eligible": 11,
+        "sharp": 1
+      },
+      "independent/outside-only": {
+        "draws": 18
+      },
+      "independent/strong-only": {
+        "draws": 18,
+        "eligible": 1
+      },
+      "independent/quiet-query": {
+        "draws": 18
+      }
+    },
+    "fresh": {
+      "independent/present": {
+        "draws": 24,
+        "eligible": 7,
+        "exact_geometry_tested": 7,
+        "oracle-gap": 3,
+        "oracle-sharp": 0
+      },
+      "independent/outside-only": {
+        "draws": 24,
+        "eligible": 1
+      },
+      "independent/strong-only": {
+        "draws": 24,
+        "eligible": 1,
+        "gap": 1,
+        "sharp": 1,
+        "half-gap": 1,
+        "half-sharp": 1
+      },
+      "independent/quiet-query": {
+        "draws": 24
+      },
+      "dip/present": {
+        "draws": 12,
+        "eligible": 6
+      },
+      "dip/outside-only": {
+        "draws": 12
+      },
+      "dip/strong-only": {
+        "draws": 12
+      },
+      "dip/quiet-query": {
+        "draws": 12
+      },
+      "contrast/present": {
+        "draws": 12,
+        "eligible": 5,
+        "half-sharp": 1
+      },
+      "contrast/outside-only": {
+        "draws": 12,
+        "eligible": 1
+      },
+      "contrast/strong-only": {
+        "draws": 12
+      },
+      "contrast/quiet-query": {
+        "draws": 12
+      },
+      "occluded/present": {
+        "draws": 12,
+        "eligible": 3
+      },
+      "occluded/outside-only": {
+        "draws": 12
+      },
+      "occluded/strong-only": {
+        "draws": 12
+      },
+      "occluded/quiet-query": {
+        "draws": 12
+      }
+    }
+  },
+  "disjoint_replay": {
+    "occluded": {
+      "intact_weak_response": {
+        "means": {
+          "screened": 50.318253372668956,
+          "three-wide": 52.058379295328365,
+          "three-close": 51.340131665614
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            1.7401259226594068,
+            0.3116583413084821,
+            3.402920318477684
+          ],
+          "three-close": [
+            1.0218782929450534,
+            -0.42634494475913637,
+            2.6287692671210903
+          ]
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "means": {
+          "screened": 156.55285326758386,
+          "three-wide": 156.02264649893962,
+          "three-close": 156.4233180085527
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.5302067686442052,
+            -1.0685331593885314,
+            -0.06110243517686539
+          ],
+          "three-close": [
+            -0.12953525903113375,
+            -0.5364984824463518,
+            0.3192562628913838
+          ]
+        }
+      },
+      "strong_only_added_RMS": {
+        "means": {
+          "screened": 0.949445284478421,
+          "three-wide": 0.934998223182351,
+          "three-close": 0.9948875410412751
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.014447061296069855,
+            -0.04334118388820957,
+            0.0
+          ],
+          "three-close": [
+            0.04544225656285411,
+            0.0,
+            0.13632676968856233
+          ]
+        }
+      },
+      "strong_only_absolute_RMS": {
+        "means": {
+          "screened": 142.6328622176368,
+          "three-wide": 142.6379600109675,
+          "three-close": 142.64171049088105
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.005097793330676836,
+            0.0,
+            0.015293379992030509
+          ],
+          "three-close": [
+            0.00884827324422588,
+            0.0,
+            0.026544819732677638
+          ]
+        }
+      },
+      "flat_added_RMS": {
+        "means": {
+          "screened": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "outside_only_added_RMS": {
+        "means": {
+          "screened": 2.7356935100405604,
+          "three-wide": 2.7356935100405604,
+          "three-close": 2.7356935100405604
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "spurious_gap_response": {
+        "means": {
+          "screened": 0.5685287489802239,
+          "three-wide": 0.5696467254081597,
+          "three-close": 0.5697579113355843
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0011179764279359433,
+            -0.00021437570772318837,
+            0.0035683049915310183
+          ],
+          "three-close": [
+            0.0012291623553603859,
+            0.0,
+            0.003667393411497124
+          ]
+        }
+      },
+      "gap_absolute_RMS": {
+        "means": {
+          "screened": 152.48946421461633,
+          "three-wide": 152.48924385071322,
+          "three-close": 152.48920043843196
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.00022036390307296946,
+            -0.0006371931037800019,
+            0.0
+          ],
+          "three-close": [
+            -0.00026377618433789013,
+            -0.0007988709634432212,
+            7.542410429550728e-06
+          ]
+        }
+      },
+      "gap_added_RMS": {
+        "means": {
+          "screened": 6.717191062268394,
+          "three-wide": 6.658860329147347,
+          "three-close": 6.6555168354332395
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.05833073312104631,
+            -0.1827539060873704,
+            0.007761706724231478
+          ],
+          "three-close": [
+            -0.06167422683515356,
+            -0.18459222284527335,
+            0.0
+          ]
+        }
+      },
+      "fallback_added_gap_RMS": {
+        "means": {
+          "screened": 0.07265939208185823,
+          "three-wide": 0.014328658960811425,
+          "three-close": 0.010985165246704384
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.0583307331210468,
+            -0.1827539060873714,
+            0.0077617067242310095
+          ],
+          "three-close": [
+            -0.061674226835153854,
+            -0.1845922228452743,
+            0.0
+          ]
+        }
+      }
+    },
+    "contrast": {
+      "intact_weak_response": {
+        "means": {
+          "screened": 45.23745435421531,
+          "three-wide": 44.92655163314131,
+          "three-close": 44.08049500426231
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.310902721073998,
+            -1.2339592266581185,
+            0.3012510634361245
+          ],
+          "three-close": [
+            -1.1569593499529904,
+            -2.652429845592016,
+            0.0
+          ]
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "means": {
+          "screened": 162.70324486881353,
+          "three-wide": 162.8087841414342,
+          "three-close": 163.05501778302755
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.10553927262065106,
+            -0.07649145115733802,
+            0.3931092690192912
+          ],
+          "three-close": [
+            0.351772914214024,
+            0.0,
+            0.9297308805749083
+          ]
+        }
+      },
+      "strong_only_added_RMS": {
+        "means": {
+          "screened": 2.143874908694345,
+          "three-wide": 2.143874908694345,
+          "three-close": 2.143874908694345
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "strong_only_absolute_RMS": {
+        "means": {
+          "screened": 127.25628329641224,
+          "three-wide": 127.25628329641224,
+          "three-close": 127.25628329641224
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "flat_added_RMS": {
+        "means": {
+          "screened": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "outside_only_added_RMS": {
+        "means": {
+          "screened": 3.000103501154389,
+          "three-wide": 3.000103501154389,
+          "three-close": 3.000103501154389
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "independent": {
+      "intact_weak_response": {
+        "means": {
+          "screened": 47.745337882520516,
+          "three-wide": 47.546732871325695,
+          "three-close": 47.09635666372466
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.19860501119481574,
+            -1.0506617808591265,
+            0.533644650582783
+          ],
+          "three-close": [
+            -0.6489812187958469,
+            -1.6929087753178933,
+            0.16055715643190638
+          ]
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "means": {
+          "screened": 177.86125969445186,
+          "three-wide": 177.73229097631716,
+          "three-close": 177.9249614627728
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.1289687181346769,
+            -0.27790995205138813,
+            -0.010254269648598324
+          ],
+          "three-close": [
+            0.06370176832093932,
+            0.0024353578263287545,
+            0.14016298784723347
+          ]
+        }
+      },
+      "strong_only_added_RMS": {
+        "means": {
+          "screened": 0.6724841478768154,
+          "three-wide": 0.7857318760423017,
+          "three-close": 0.7900165551507539
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.1132477281654863,
+            0.0,
+            0.3397431844964589
+          ],
+          "three-close": [
+            0.11753240727393847,
+            0.0,
+            0.3525972218218154
+          ]
+        }
+      },
+      "strong_only_absolute_RMS": {
+        "means": {
+          "screened": 144.5720750512964,
+          "three-wide": 144.58836807078887,
+          "three-close": 144.59324428687407
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.016293019492475008,
+            0.0,
+            0.04887905847742502
+          ],
+          "three-close": [
+            0.021169235577680467,
+            0.0,
+            0.0635077067330414
+          ]
+        }
+      },
+      "flat_added_RMS": {
+        "means": {
+          "screened": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "outside_only_added_RMS": {
+        "means": {
+          "screened": 0.0,
+          "three-wide": 0.0,
+          "three-close": 0.0
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-close": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "spurious_gap_response": {
+        "means": {
+          "screened": 3.5274920307112065,
+          "three-wide": 3.403203796507649,
+          "three-close": 3.3916539338448857
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.12428823420355757,
+            -0.3253501633178914,
+            0.009287742815656882
+          ],
+          "three-close": [
+            -0.13583809686632117,
+            -0.39148303020614844,
+            0.025766836747100525
+          ]
+        }
+      },
+      "gap_absolute_RMS": {
+        "means": {
+          "screened": 161.61863960425922,
+          "three-wide": 161.57441603431104,
+          "three-close": 161.59458540962012
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.04422356994818225,
+            -0.09991469187410947,
+            -0.00781276650070121
+          ],
+          "three-close": [
+            -0.024054194639051712,
+            -0.05403636833869996,
+            -0.003287227383502511
+          ]
+        }
+      },
+      "gap_added_RMS": {
+        "means": {
+          "screened": 14.869385552037983,
+          "three-wide": 14.247956147205906,
+          "three-close": 14.347363936292366
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.6214294048320752,
+            -1.7827554399432506,
+            0.03567335870693652
+          ],
+          "three-close": [
+            -0.5220216157456171,
+            -1.7135907930195957,
+            0.15600756930680748
+          ]
+        }
+      },
+      "fallback_added_gap_RMS": {
+        "means": {
+          "screened": 1.8397806124391145,
+          "three-wide": 1.2183512076070373,
+          "three-close": 1.3177589966934955
+        },
+        "paired_95pct": {
+          "screened": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "three-wide": [
+            -0.6214294048320772,
+            -1.7827554399432526,
+            0.03567335870693681
+          ],
+          "three-close": [
+            -0.522021615745619,
+            -1.7135907930195966,
+            0.15600756930680268
+          ]
+        }
+      }
+    }
+  },
+  "replay_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/query-local-gap-v1/replay.json",
+    "sha256": "5c8a46e2727824f077fee4025bb0c6fc5e42d0ddb89bbc8e71001f06ada08936"
+  },
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/query-local-gap-v1/manifest.json",
+    "sha256": "07130d969f3c69b48d6872400e23a9e7bd061a83bfebc2d93544289f5bbd4901"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/query-local-gap-v1/evidence.tar.xz",
+    "sha256": "1c5aadcf8cb6fc8777a7e7a1b3606f034696f39961ec89620e3b7cd96e13bec8"
+  },
+  "scope": "30 new exact-target photos, 36 calibration photos, 24 disjoint earlier exterior phase photos replayed, all eight standing GFX crops reviewed. No comparable full427 or measured-camera panel scores."
+}

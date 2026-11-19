@@ -391,6 +391,12 @@ checking the fitted peak against neighboring frequencies. The extra check
 removes an automatic building proposal. Independent gaps retain more added
 texture and two strong-only controls still receive new corrections.
 
+The [extra-RAW-quarter follow-up](query-local-gap.md) reduces added
+texture in photometric gaps while preserving average weak response at
+matched calibration strength. Direct localized gap nomination fails
+on the new admitted ISO6400 cases. Both standing outputs match the
+preceding exterior-aware fit.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

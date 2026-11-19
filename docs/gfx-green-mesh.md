@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Three-quarter weak amplitude](query-local-gap.md#standing-gfx100s-comparisons) | Both ROIs and both profiles reproduce the exterior-checked output. The right lattice has faint, incomplete crossings |
 | [Exterior bent-phase witness](query-exterior-witness.md#standing-gfx100s-comparisons) | Both priors, ROIs and camera JPEGs viewed. The adjacent-frequency fallback matches the wide fit, with both right directions visible and fine crossings still soft |
 | [Scene-contour Bayer aggregation](query-contour-support.md#standing-gfx100s-comparisons) | Both cab priors and both ROIs were viewed. Right crops are visually close to the wide fit and crossings remain incomplete. Both left crops equal the parent |
 | [Local weak-carrier support](query-phase-support.md#standing-gfx100s-comparisons) | Compact fits give less even right crossings. The deficit check looks like the wide fit under both priors. Both left crops return Corpus 100k, with fine reference crossings still weak |
@@ -16,6 +17,7 @@ preserves its original comparison pixels and provenance.
 | [Reserved Bayer query search](query-bayer-reserve.md#standing-gfx100s-comparisons) | Both directions become clearer on the right under both noise profiles with automatic local nominations. Some intersections remain soft or uneven. Both left crops match Corpus 100k. Both JPEG references viewed |
 | [Narrow exterior RAW peaks](donor-peak-prominence.md#standing-gfx100s-comparisons) | Both left-cab bands have nearby exterior candidates but lose the final ranking. The right cab lacks two supporting tiles near either earlier peak. Both ROIs and priors were viewed. Crossings stay incomplete |
 | [Local RAW support and exterior phase](green-gap-validation.md#standing-gfx100s-comparisons) | Automatic exterior frequencies barely change both ROIs. Previously measured cab RAW peaks make both directions visible on more of the right crop. Some crossings remain overly regular or incomplete. Both priors and JPEGs viewed |
+| [Full-epoch scene run at update 7,500](scene-full-epoch.md#standing-gfx100s-at-update-7500) | Both ROIs, priors and camera JPEGs reviewed. Transferred noise retains weak right-cab directions with mottled paint and incomplete crossings |
 | [Full-epoch scene run at update 5,000](scene-full-epoch.md#standing-gfx100s-at-update-5000) | Both arms and both profiles reviewed with the AHD and JPEG references. The transferred profile retains faint diagonal families, with mottled paint and incomplete crossings |
 | [Full-epoch scene run at update 2,000](scene-full-epoch.md#standing-gfx100s-at-update-2000) | Both profiles, ROIs and their JPEG references viewed for the matched spatial and local-only checkpoints. The transferred profile retains weak diagonal texture, with incomplete crossings |
 | [Green alias separation and exterior RAW](quincunx-green.md#standing-gfx100s-comparisons) | Both profiles, both ROIs and the separate JPEGs were viewed for both variants. Added modulation at original strength leaves fine junctions missing |

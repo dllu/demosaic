@@ -12,6 +12,10 @@ checks also admit two false proposals on strong-only controls.
 [Executed sources and score archive](results/query-exterior-witness-v1/evidence.tar.xz) ·
 [Native crops and provenance](images/query-exterior-witness-v1/manifest.json).
 
+The [three-quarter amplitude follow-up](query-local-gap.md) reduces
+fallback-added texture in new unrelated gaps from 2.267 to 1.315 DN16
+at matched calibration strength. Fine standing crossings remain soft.
+
 ## What phase transport changes
 
 The [earlier one-sided search](query-contour-support.md#testing-nominations-from-one-visible-side)
