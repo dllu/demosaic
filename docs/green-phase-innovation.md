@@ -123,3 +123,37 @@ ISO100 AHD and the camera JPEGs are qualitative references.
 [Nominal right](images/green-phase-innovation-v1/mesh-nominal-fine-green-mesh-right.png) ·
 [Transferred left](images/green-phase-innovation-v1/mesh-profile3879-fine-green-mesh-left.png) ·
 [Transferred right](images/green-phase-innovation-v1/mesh-profile3879-fine-green-mesh-right.png).
+
+## Restricting the change to quieter bands on separate photos
+
+A follow-up keeps the same-phase lift and adds part of the difference
+from native-green smoothing. A reflect-padded Fourier taper keeps either
+the bands where the native filter has lower input transfer or the bands
+where it has higher transfer. The [separate 64-photo panel](context-strength.md)
+uses 32 photos to match response on coupled inputs and the other 32 to
+score both draw laws. The parent, paired EMA and quiet path above
+remain fixed. All 256 groups were scored with cached parent RGB.
+
+At ISO6400 with independent draws, the lower-transfer route reduces
+absent-detail RMS by 0.0023 DN16 [−0.0035, −0.0013]. Its true
+increment RMS difference is +0.0015 DN16 [−0.0007, +0.0040],
+versus +0.0179 DN16 with the full native-green change. The coupled
+increment difference is +0.0020 DN16. At ISO400, the lower-transfer
+route improves coupled increment RMS by 0.0027 DN16, with an
+interval spanning zero under independent noise. Restricting the
+change removes most of the all-band penalty, with little effect
+on delivered weak detail.
+[Numbers, source and viewing record](results/green-transfer-band-v1/publication.json).
+
+The two native triplets reuse `[48,48,160,160]` within the 256-pixel
+query, ISO6400 shot/read `0.00128/6.5536e-6`, ADC16 black 0.03,
+display exposure ×3.0303 and contrast ×2. The Bush Hopper crop is
+`[34,346]`, BGGR, Sandipoutsider, CC BY-SA 4.0. The Calocochlia
+crop is `[756,396]`, GRBG, H. Zell, CC BY-SA 3.0. Wing, leaf and
+shell detail remain soft. Both standing GFX families and all eight
+boards were inspected at the same coordinates and exposure as above.
+Fine cab crossings remain incomplete.
+[Bush Hopper triplet](images/green-transfer-band-v1/045-iso6400-independent-role0-triplet.png) ·
+[Calocochlia triplet](images/green-transfer-band-v1/042-iso6400-independent-role0-triplet.png) ·
+[Standing sky](images/green-transfer-band-v1/main-overcast-sky-main-overcast-sky.png) ·
+[Transferred right cab](images/green-transfer-band-v1/mesh-profile3879-fine-green-mesh-right.png).

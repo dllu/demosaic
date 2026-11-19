@@ -100,3 +100,11 @@ and 552 exact-flat examples. Measured training-loop time is 882.57 s,
 including 257.88 s inside the reader and CPU fingerprinting.
 The spatial arm is working through the matching source prefix.
 [Local prefix audit](results/scene-full-epoch-v1/local-2000-source-audit.json).
+
+An end-to-end monitor qualification used the matched update-eight
+checkpoints. It ran all seven policies on 32 test groups, checking
+the fixed local input and the preserved near-preview support in 96
+native queries. The monitor generated four native boards and the
+expected summary. The matched update-2,000 quality collection is
+waiting for the spatial training phase to complete.
+[Monitor qualification](results/scene-full-epoch-v1/monitor-preflight.json).
