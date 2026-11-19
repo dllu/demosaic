@@ -752,6 +752,14 @@ strong carrier that continues through the gap rises. A separate photo
 cohort with fresh noise confirms lower fine-flat and increment error.
 The data support a quieter operating point with lower response.
 
+The [phase-aligned green follow-up](green-covariance-refit.md) separates
+directional covariance from the learned restoration and compares a
+direct measured-green residual. Both fits select zero added correction
+under the previous error budget. On 24 fresh natural photos the
+local-only 47.5k EMA lowers fine increment and flat error versus
+Corpus 100k. The matching spatial checkpoint loses weak-wire response
+relative to reversed exterior on the 24 fresh wire backgrounds.
+
 ## What the existing work establishes
 
 | Evidence | Progress | What remains unresolved |

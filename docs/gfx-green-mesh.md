@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Local and spatial 47.5k with frozen blends](green-covariance-refit.md#standing-gfx100s-comparisons) | Both ROIs, both priors, both JPEGs and AHD reviewed. The newer blend changes the four crops by 0.243–0.991 DN16 RGB RMS. Transferred right diagonals are clearest and fine crossings remain incomplete |
 | [Bayer-gated regional damping](scene-mixture-wire-gaps.md#standing-gfx100s-comparisons) | All four crops change by at most 0.811 DN16 RGB RMS versus the band-limited mixture. The transferred right diagonals stay clearest with incomplete crossings. Both JPEGs and AHD were viewed |
 | [Corpus 100k with compiled DINO](corpus100k-trt-dino.md#standing-gfx100s-comparisons) | Both ROIs, both priors, both JPEGs and the AHD reference were viewed. The four crops differ from IEEE FP32 by 0.091–0.109 DN16 RGB RMS. Fine crossings remain incomplete |
 | [Corpus 100k TensorRT kernel selection](corpus100k-trt-tactics.md#standing-gfx100s-comparisons) | The four native crops change by 0.078–0.109 DN16 RGB RMS versus eager FP16. Both ROIs, both priors, JPEGs and AHD were viewed, with incomplete crossings |

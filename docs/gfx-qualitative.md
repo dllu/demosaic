@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Local and spatial 47.5k with frozen blends](green-covariance-refit.md#standing-gfx100s-comparisons)
+  keep a smooth sky and coherent coarse crossings. Updating the blend's
+  spatial checkpoint changes the four crops by 0.310–1.103 DN16 RGB RMS.
 - [Bayer-gated regional damping](scene-mixture-wire-gaps.md#standing-gfx100s-comparisons)
   reproduces the band-limited sky crop. Foliage and coarse fence change
   by 2.300 and 2.789 DN16 camera-RGB RMS. Coarse crossings stay coherent.

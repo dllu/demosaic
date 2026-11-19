@@ -12,6 +12,9 @@ The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. Both
 arms completed the same first pass through all 90,692 photos in 45,346
 updates, with 362,768 native queries per arm. [First-epoch audit](results/scene-full-epoch-v1/paired-prefix-045346.json).
+The paired continuation reaches 47,500 updates and 380,000 native
+queries per arm, including 4,308 photos in the new permutation.
+[Matched second-pass audit](results/scene-full-epoch-v1/paired-prefix-047500.json).
 The matched 40k photo and both standing
 reviews are complete. Spatial 40k slightly lowers independent ISO6400
 flat-region error and fine response versus 35k. Both arms still recover

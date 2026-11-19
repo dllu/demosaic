@@ -287,6 +287,15 @@ additional photos by 0.188 and 0.155 DN16. On planted wires it improves
 increment error by 0.370 DN16, loses 0.109 response points and raises
 continuing strong-wire error inside true gaps. The real fine cab
 crossings remain incomplete.
+[The matched 47.5k review](green-covariance-refit.md) finds that
+local-only 47.5k lowers fine-increment RMS by 1.734 DN16 and fine-flat
+RMS by 1.243 on 24 new ISO6400 photos versus Corpus 100k. On a
+separate 24-wire panel it lowers total error inside true gaps by 1.499
+DN16, with mixed intact-wire changes. The aligned spatial arm has
+weaker natural response than its local match. A phase-aligned green
+recovery fit selects zero positive correction at the retained error
+budgets. Both standing GFX comparisons are complete. The 50k broad
+photo and camera panels are queued.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

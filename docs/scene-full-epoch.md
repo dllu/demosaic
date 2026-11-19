@@ -319,13 +319,21 @@ paired quality review is [40k](scene-full-epoch-40k.md).
 [First-epoch audit](results/scene-full-epoch-v1/paired-prefix-045346.json) ·
 [First-epoch segment receipts and source order](results/scene-full-epoch-v1/paired-prefix-045346.tar.xz).
 
-The local-only arm has reached update 47,500. Its next five segments
-contain 4,308 distinct second-pass visits and 17,232 native queries,
-with fresh noise seeds and source IDs in the frozen second-epoch order.
-Their retained loops take 1,304.67 s. The spatial arm continues toward
-the same checkpoint and the paired proof still ends at 45,346.
-[Local second-epoch audit](results/scene-full-epoch-v1/local-047500-second-epoch.json) ·
-[Continuation receipts](results/scene-full-epoch-v1/local-047500-second-epoch.tar.xz).
+Both arms match through update 47,500. Five additional matched segments
+contain 4,308 distinct second-pass visits and 17,232 native queries per
+arm, with fresh noise seeds and source IDs in the frozen second-epoch order.
+The cumulative count is 95,000 observations and 380,000 native queries
+per arm. The additional retained loops take 1,304.67 s local-only and
+1,242.47 s with spatial context. The original 50,000-update program continues.
+[Matched 47,500 audit](results/scene-full-epoch-v1/paired-prefix-047500.json) ·
+[Continuation receipts](results/scene-full-epoch-v1/paired-prefix-047500.tar.xz) ·
+[Local second-epoch source-order proof](results/scene-full-epoch-v1/local-047500-second-epoch.json).
+
+A scoped 47.5k review uses 24 new natural photos, 24 planted-wire
+backgrounds and both standing GFX scenes. The local-only arm improves
+natural fine-flat and increment error against Corpus 100k, with
+mixed intact-wire changes. The paired fixed photo and camera panels
+remain queued at 50k. [Matched 47.5k scope and native review](green-covariance-refit.md).
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·

@@ -7,6 +7,8 @@ fine-increment and exact-flat error. Error on the continuing strong
 wire inside a true gap increases slightly. The fine cab crossings
 remain incomplete.
 
+[Phase-aligned green recovery and the matched 47.5k follow-up](green-covariance-refit.md).
+
 [Machine results](results/scene-mixture-wire-gaps-v1/publication.json) ·
 [Frozen drivers and receipts](results/scene-mixture-wire-gaps-v1/evidence.tar.xz) ·
 [Native crop provenance](images/scene-mixture-wire-gaps-v1/manifest.json).
