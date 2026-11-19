@@ -61,6 +61,21 @@ RMS by 0.160 DN16, with 0.303 DN16 higher whole-core error.
 The change reduces error near the step at this operating point
 and remains a mixed reconstruction tradeoff.
 
+### Transfer by frequency and direction
+
+An analytic split of the fine band separates 63 DCT bins where
+the native-green input filter passes at least 0.02 more amplitude
+from 16 bins where it passes at least 0.02 less. Six bins fall
+between them. The input filter predicts different transfer across
+the band. On held-out ISO6400 common-step crops, the higher-transfer
+bins add 0.027 DN16 increment RMS and 8.24 DN16² of repeat variance.
+In those bins, the aligned response difference has a confidence
+interval spanning zero. The lower-transfer bins reduce increment
+RMS by 0.022 DN16 and lose 0.040 percentage points of aligned
+response. Preserving more input amplitude in some orientations
+still leaves the frozen head's signal and noise entangled.
+[Orientation-stratified measurements](results/green-phase-innovation-v1/orientation-evidence.json).
+
 ## Native comparison
 
 The triplets show noisy Malvar, native-green smoothing, and exact GT.
