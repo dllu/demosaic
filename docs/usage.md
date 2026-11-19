@@ -444,7 +444,8 @@ on 102 MP and roughly double peak CUDA allocation.
 Full-frame cuDNN search in FP16 gives no repeatable gain. Use the
 standard FP16 command for Corpus 100k.
 [CUDA tile transport](corpus100k-device-tiles.md) ·
-[FP16 full-frame autotuning](corpus100k-cudnn-fp16.md).
+[FP16 full-frame autotuning](corpus100k-cudnn-fp16.md) ·
+[Compiled DINO prototype](corpus100k-trt-dino.md).
 
 CUDA `infer` uploads the checkpoint from pinned CPU memory when available.
 The sidecar reports `checkpoint_setup_seconds`. In the paired Corpus 100k

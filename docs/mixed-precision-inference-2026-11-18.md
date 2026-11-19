@@ -23,7 +23,10 @@ RGB16 exports. The [fixed-batch TensorRT follow-up](corpus100k-trt-tactics.md)
 interleaves the engines on every batch of the full 102 MP tile grid. The
 previous TensorRT FP16 plan cuts forward time by 12.4% versus eager FP16.
 The new fixed plan ties its time. Its largest changes versus eager FP16
-are on two exact-target contexts.
+are on two exact-target contexts. The [full DINO compilation follow-up](corpus100k-trt-dino.md)
+keeps normalization and residual arithmetic in FP32. It cuts resident
+DINO time by 35.3% and saves 4.1% in the paired 102 MP tile loop versus
+the TensorRT trunk with eager DINO.
 
 ## Where the time and precision go
 
