@@ -12,6 +12,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons)
   reproduces the ordinary FP16 values in all four viewed crops. The sky is
   smooth, coarse crossings are coherent and fine wires and leaves are soft.
+- [Full-sampling opposite-view checks](full-sampling-detail-check.md#standing-gfx100s-comparisons)
+  keep a smooth sky and coherent coarse crossings in the confined-band mix.
+  The unconfined boost visibly adds outlines around leaves and coarse mesh.
 - [Complementary Bayer checks](split-bayer-neural.md#standing-gfx100s-comparisons)
   keep the full-input sky smooth and coarse crossings coherent. Quincunx
   half-input guides add visible sky mottle and coarse-fence moiré.

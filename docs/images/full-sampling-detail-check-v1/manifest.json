@@ -1,0 +1,3763 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-sampling-detail-check-v1/native.py",
+    "sha256": "94d62c45fafa4c41e92a926a611eaeeaf0fff9b91abca02038486da21e3c9c0a"
+  },
+  "source": {
+    "evaluation": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-sampling-detail-check-v1/evaluation.json",
+      "sha256": "cdf398911d9ec2dd5c9e9c40bc74ff1c360c5ceb2a66be2ca32e17fc6b043760"
+    },
+    "compensated": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-sampling-detail-check-v1/compensated.json",
+      "sha256": "0f7fd7133ef101e26f0d7cdd59de89336fc25cba81d58a882f5ea1bcc3f7d019"
+    },
+    "bandlimited-iso6400-summary": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-sampling-detail-check-v1/bandlimited-iso6400-summary.json",
+      "sha256": "d386b0466dd4ebd73106d550c64e8af547c2a550ffb528277dab9de3b322ef39"
+    }
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+    "type": "base",
+    "step": 100000
+  },
+  "exact": [
+    {
+      "id": "038-iso6400-independent-full-sampling",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "photo": {
+        "attribution": null,
+        "author": "Bernard Gagnon",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/04/04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4.npy",
+        "cache_sha256": "6562dab0f72eec9edb5fcfe32df47e1b634305c3c191aafddae6cb14d4dd9f6c",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/04/65/04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4.jpg",
+        "dtype": "uint16",
+        "height": 3456,
+        "id": "04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/House_of_the_Lake%2C_Delos_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:House_of_the_Lake,_Delos_02.jpg",
+        "sha1": "04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4",
+        "sha1_hex": "04657f4f22ce5b2cbc9e06c8187f4771c58c6fa4",
+        "shape": [
+          864,
+          648,
+          3
+        ],
+        "split": "val",
+        "title": "File:House of the Lake, Delos 02.jpg",
+        "width": 2592
+      },
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "capture_black": 0.03,
+      "CFA": "GRBG",
+      "query_xywh": [
+        138,
+        248,
+        256,
+        256
+      ],
+      "native_ROI": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "fine_increment_change_DN16": -2.10805526549661,
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/038-iso6400-independent.npz",
+        "sha256": "a8dbe76f03c8e45df0be13513b1b2d2c6368aba22f972207c9d3ab6410171265"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+        "type": "base",
+        "step": 100000
+      },
+      "paired_forwards": [
+        {
+          "seed": 18189277663223524331,
+          "noisy_inputs": [
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "9e39253dbc70e0b372ea70896d0f159a977edaa5c9b773418bec6aa0aff1bb5e"
+            },
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "e51bddf5c672e0b18e9a53015c63c32b35cb605fb94ee12fd61191ef6fc559a2"
+            }
+          ],
+          "model_outputs": [
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "5301de2f2a1e9b7d32469223684b831fa49adb220679d8007d86b303f64c8435"
+            },
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "f5ad4997b96620c88d093b917fc229d6fb5338e212394349a072d513109004c5"
+            }
+          ]
+        },
+        {
+          "seed": 2447929579206737982,
+          "noisy_inputs": [
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "812d9184f4c2bb5591b8ae24f74b3476aacb00ccd5b44ba39b8ee30dd6a89b5b"
+            },
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "33ccbcee8320318cfe3c0736984f6290d5c667d3078eb41c9362ab051aaaae59"
+            }
+          ],
+          "model_outputs": [
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "7f5bfbe577497b52d55cf5409ae6b4b5f4cf2828131b3d0fe229d9a91f74d5a3"
+            },
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "27f2b913a9fa3f6b54bf8ba162f2c1aa3aa2fc4468f3f9c2d9632dd0c5b75323"
+            }
+          ]
+        }
+      ],
+      "draw": "independent",
+      "gain": {
+        "parent": 0.0,
+        "double_prior": 1.2602317731578563,
+        "pair": 0.5778178422402873,
+        "repeat": 0.5725275845153882,
+        "half_mix": 0.2738486414215689
+      },
+      "band_gain": {
+        "parent": 0.0,
+        "double_prior": 0.6095849843284613,
+        "pair": 0.21437776333461148,
+        "repeat": 0.21265687869010325,
+        "half_mix": 0.0961093086288695
+      },
+      "doses": {
+        "same": 0.22145041648781458,
+        "opposite": 1.0,
+        "signed_opposite": 0.7031647975896654,
+        "opposite_first": 0.8178942784956087,
+        "dither_extrapolation": 0.10284392203581622
+      },
+      "board": {
+        "image": {
+          "path": "exact/038-iso6400-independent-full-sampling-comparison.png",
+          "sha256": "dcf426340204eb5ea04c2ac8d219baa8f6dabce9ad8515f434068a0d6b5cb51a"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Four-guide average",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Opposite-view lift",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Signed opposite lift",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Doubled prior with gain",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "One pair with gain",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Two pairs with gain",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Half parent with gain",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Fine-band replacement",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Half fine-band mix",
+            "png_xywh": [
+              1688,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Doubled prior in fine band",
+            "png_xywh": [
+              1856,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              2024,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/038-iso6400-independent-full-sampling-triplet.png",
+          "sha256": "db486ede27afa43ef3ee5a029487724aec77b5db3eeefa766f9bfe21bb50450c"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Fine-band replacement",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "025-iso6400-independent-full-sampling",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "photo": {
+        "attribution": "Johan Fredriksson",
+        "author": "Esquilo",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/2d/2d35d70ec52e48d6722894825dc6979817b98571.npy",
+        "cache_sha256": "707e6ef6ae1c1686bd0cb354505f6210fb99fc270c62134b0de613c8c3e126f4",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/2d/35/2d35d70ec52e48d6722894825dc6979817b98571.jpg",
+        "dtype": "uint16",
+        "height": 2500,
+        "id": "2d35d70ec52e48d6722894825dc6979817b98571",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Bj%C3%B6rkboda_herrg%C3%A5rd.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Bj%C3%B6rkboda_herrg%C3%A5rd.jpg",
+        "sha1": "2d35d70ec52e48d6722894825dc6979817b98571",
+        "sha1_hex": "2d35d70ec52e48d6722894825dc6979817b98571",
+        "shape": [
+          625,
+          1000,
+          3
+        ],
+        "split": "val",
+        "title": "File:Bj\u00f6rkboda herrg\u00e5rd.jpg",
+        "width": 4000
+      },
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "capture_black": 0.03,
+      "CFA": "BGGR",
+      "query_xywh": [
+        378,
+        184,
+        256,
+        256
+      ],
+      "native_ROI": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "fine_increment_change_DN16": 15.188366744206064,
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/025-iso6400-independent.npz",
+        "sha256": "045d2e94fd64048db8a1ce12a07da2a56214c21d4e058bfff473bf2d9b6ef888"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+        "type": "base",
+        "step": 100000
+      },
+      "paired_forwards": [
+        {
+          "seed": 4118465797947582844,
+          "noisy_inputs": [
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "cf5e3a060f2413a4b78d495fdf6ec18c95514b206f417f24bebba1f0ddb98598"
+            },
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "3f33566bd97cbac3beb6efdb4a3887db6d0316b3836df115049cba7fce7fcfe6"
+            }
+          ],
+          "model_outputs": [
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "b5350d1d71e2a44eb6a3336693918113c897727fad93753a64add5367d90556c"
+            },
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "8203e77f8b2fa9742698577831507916f9bc9e050b00c6aeb4b19d6bda5378c1"
+            }
+          ]
+        },
+        {
+          "seed": 2623289108211216400,
+          "noisy_inputs": [
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "a9266a601afba8277444125519cac5a6c5a978d1fa2ffd36abfd50c0b700369c"
+            },
+            {
+              "shape": [
+                3,
+                4,
+                128,
+                128
+              ],
+              "dtype": "<f4",
+              "sha256": "cf14d0cbbe4d0b6b9d4825b648188439c557b4b9d2788dc0d7da7ab0ce9900ed"
+            }
+          ],
+          "model_outputs": [
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "8450c9f514fd4a07d55d16017c6dfaf58fe9219bc2e1bb3f1bb1db8d81d13a6b"
+            },
+            {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "<f4",
+              "sha256": "e7b454f95e92638f4b0bc4db9bf57281f3a08706f801d0c6a6dd901fa9761788"
+            }
+          ]
+        }
+      ],
+      "draw": "independent",
+      "gain": {
+        "parent": 0.0,
+        "double_prior": 1.2602317731578563,
+        "pair": 0.5778178422402873,
+        "repeat": 0.5725275845153882,
+        "half_mix": 0.2738486414215689
+      },
+      "band_gain": {
+        "parent": 0.0,
+        "double_prior": 0.6095849843284613,
+        "pair": 0.21437776333461148,
+        "repeat": 0.21265687869010325,
+        "half_mix": 0.0961093086288695
+      },
+      "doses": {
+        "same": 0.22145041648781458,
+        "opposite": 1.0,
+        "signed_opposite": 0.7031647975896654,
+        "opposite_first": 0.8178942784956087,
+        "dither_extrapolation": 0.10284392203581622
+      },
+      "board": {
+        "image": {
+          "path": "exact/025-iso6400-independent-full-sampling-comparison.png",
+          "sha256": "d63074d6e69d9a5abd5899a164e03a8e3a47908af1afe150484fb8a44bd12960"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Four-guide average",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Opposite-view lift",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Signed opposite lift",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Doubled prior with gain",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "One pair with gain",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Two pairs with gain",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Half parent with gain",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Fine-band replacement",
+            "png_xywh": [
+              1520,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Half fine-band mix",
+            "png_xywh": [
+              1688,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Doubled prior in fine band",
+            "png_xywh": [
+              1856,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              2024,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/025-iso6400-independent-full-sampling-triplet.png",
+          "sha256": "b7c0837f7615eaa186d54cfc99ece3d6cbb38321ac74ff1807e310aacf071cca"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Fine-band replacement",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "standing": {
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/result.json",
+      "sha256": "ddd41dadef6244f01f0e5dd3a46f8bf44bda1330708fcb3bbafa3809dd57dc71"
+    },
+    "rows": [
+      {
+        "id": "main-overcast-sky-main-overcast-sky",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "a0c8444e7417fdde9970210470fb29f0793bed315c6d6626deacf708b5258460"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "main-overcast-sky-main-overcast-sky",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "46835d3b59fb4396fc9471dabde2f1789ce827e605d6901a40bb46eb1c7c0905"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-overcast-sky",
+          "case": {
+            "name": "main-overcast-sky",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+            "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-overcast-sky-RGB-f32.npy",
+          "sha256": "81ea6f37bbf950cf0b4c351f83b337b981e2c4f8242b6f8bdc69cc43fe9f0a9a"
+        },
+        "native_shape": [
+          512,
+          512
+        ],
+        "roi": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 7780419223047565605,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "d1020bfafd9e39bf2a82b3f7ca6f6d0a26e96032ceeb81cb688f2157b2d89460"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "ebf56c8a9cfe748a3f1c3df0653ed6af31701d7a577488c1fa08c59633f30a98"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "58301bfbaeb5a66e0984bc0b37c2f5f2094c002891bea37623740e03ce315454"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "931b76c581d09f94a786a9b27c23e0594d43591ffc6075eeb120eeaa3659e0e0"
+              }
+            ]
+          },
+          {
+            "seed": 6472921236121544090,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "5aa4c033b89f076e4d93f181f196665a479ab5b82079e0d917f8dbf881387cb9"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "3b93de10bf53f94af14182fbad06e318bea94deaf97d5feb1911102f425473bf"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "39111a5c6cc98493777fc19d9f363e815011307bd2756e1dec85b205545f2bd3"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "833ddc6ce9cfb5a2630d4ab6cea033e0219adb5d0b042a570a01fc5d3f88caf1"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 3.665281161379595,
+          "opposite": 0.11555736367517357,
+          "repeat": 3.723858269526731,
+          "band_double_prior": 1.2965535677447961,
+          "band_repeat": 0.7895843831551711,
+          "band_half_mix": 0.35684864436108227
+        }
+      },
+      {
+        "id": "main-building-detail-main-building-detail",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/main-building-detail-main-building-detail.png",
+            "sha256": "c24c093185b4d3bb3a2b16fb2e721bf681cbbe997c1c1f0c36216a0f879612d1"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "main-building-detail-main-building-detail",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-building-detail-main-building-detail.png",
+            "sha256": "35ea2ba3c8e4b82685d7807f0691e67d3ae307375ccb80bee0f6b915e79df767"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-building-detail",
+          "case": {
+            "name": "main-building-detail",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+            "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-building-detail-RGB-f32.npy",
+          "sha256": "3d33e65ad3e27d114f4a9557a1623179d23231b07e748c6a8632ff70fe977694"
+        },
+        "native_shape": [
+          512,
+          512
+        ],
+        "roi": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 4748119355486738568,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "c6e57b59bd7619708a376020ecd484f5dbe6f83814a1243059be32951f6f8e87"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "107c3fe2bf340b769136811932d11be39a8958de1bc9713ac3fe4733d4eb62dc"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "e19d39fef44eff877d3f6e4043085165f017821cdc8cecc9cb6b174b610566b7"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "62459472afb74d921b50876f72ef65c133a2e8f5d80394a31827e944f7770fdb"
+              }
+            ]
+          },
+          {
+            "seed": 5192161209054313374,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "1fdd5fd0ced1c506fd633990d5b69131a5d62b7a802e75b7b53388446ef1a3f9"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "8187f53b966fc9fadc3943e31aabd9f9fa2259b8ca47a06e72d702f29cf3f3d4"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "390ef5c651365723a9ccfdacff08b67b300e68247c9e7f4abffb279fae76e8c0"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "cf8f2dd4a229d848824ec6b95c834b98b5b3ada025fe17183cf7c2b7cce946c6"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 24.895950144431833,
+          "opposite": 0.42028266437653483,
+          "repeat": 104.04525360735296,
+          "band_double_prior": 46.592890515541264,
+          "band_repeat": 19.038088774922898,
+          "band_half_mix": 8.60417662008231
+        }
+      },
+      {
+        "id": "main-foliage-main-foliage",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/main-foliage-main-foliage.png",
+            "sha256": "ad082beb962e5287313347887c82ede0a09a61898aa878950248857d56b378a9"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "main-foliage-main-foliage",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-foliage-main-foliage.png",
+            "sha256": "86d8440771081fbc4a38bf8b21f9f891731566ea651b7da8235b8f38a99e0583"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-foliage",
+          "case": {
+            "name": "main-foliage",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+            "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-foliage-RGB-f32.npy",
+          "sha256": "107933ad4412b5456ddfb75652f85ab6b8162a180287833700b327c5bfbb7d80"
+        },
+        "native_shape": [
+          512,
+          512
+        ],
+        "roi": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 10778139777217916032,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "888a90b0bdbfd51d0f64d78fbfb923cb7d48dee647391edefee7f336d8d82d5b"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "bef2d96d84c6066e9454072e953ce3ea6d35f320507e565ac86568a2af704997"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "555f1364fa1b09ca936974efe6d448eae78b0feadb46333f1d97aba310b65faa"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "e2df130c5fb1afe37e177deaf3b7bd6c3b80ec18afbfe452485ed3e81f062ee7"
+              }
+            ]
+          },
+          {
+            "seed": 7864979582922229849,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "9c0c791f81595164079a5022d9da9dd102ee1254fb1bbfc2ec5ba603f971cd5c"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "962788353bf82b086a0ae94d1846f09fe9c8302d088186bf0ce37de6d8ad7bdf"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "5aa9755ff7cb496409cf5303a162648a0e4cefc1725708c651b0ed3b4396fe28"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "d4d3e255fb5f3d0247c74dbefbac3280657fd4281194c46db0846984cc7d8506"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 43.648777010565496,
+          "opposite": 0.7397401252935341,
+          "repeat": 194.53109112586827,
+          "band_double_prior": 87.47556036811896,
+          "band_repeat": 28.70102143142372,
+          "band_half_mix": 12.971294768661199
+        }
+      },
+      {
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "0265acdfebabbd59678a7566dcbd3aacb54b52005bb2e66d7a82a72d9dd1062d"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "main-chain-link-fence-main-chain-link-fence",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "b3bf6b87f781eb8937e18818db0dfd1ca8db9198732f255331d0584d8188b116"
+          },
+          "panels": [
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "main-chain-link-fence",
+          "case": {
+            "name": "main-chain-link-fence",
+            "ROI_xywh": [
+              176,
+              176,
+              160,
+              160
+            ],
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.553600000000001e-06
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+            "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+          },
+          "display_exposure": 4.0,
+          "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-chain-link-fence-RGB-f32.npy",
+          "sha256": "3215efefed0599b23f9070b17e10429cd5b672aaa7afe8b6a309fa8feb45896b"
+        },
+        "native_shape": [
+          512,
+          512
+        ],
+        "roi": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 10302059013768309627,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "9252646a19b45ed75b90303c695ae166ae254e47764f05b21e947309223fb60b"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "20578e70dc4aebbfafa03414e708f444be9e43a18465c248fd82e2be2463ae6a"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "255e95475d323a5f20d8cc264f958f01d4153e842d78913d4ceb80d78dd15669"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "02b18486fef026a60c680ba9e8ed82537530e17a27ff262c8a4822e240941753"
+              }
+            ]
+          },
+          {
+            "seed": 3424098467371488635,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "aa9900ff1510c29ea1ed010645c38810ce1e7ac934e0a83d9f3f9de6f4203330"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  256,
+                  256
+                ],
+                "dtype": "<f4",
+                "sha256": "260cffdfc508f2d9938006be1cfae1ac22919d8812b76bdfa20cb3e3ce6a95ad"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "35ac96070bb57556bd65ef4dfd82a66ed0b068f071c961f800494ea16e322854"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  512,
+                  512
+                ],
+                "dtype": "<f4",
+                "sha256": "9fdae90f7846126347d5c13b22339566dccc68b229d52c205714e2d16f558803"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 48.33607511608071,
+          "opposite": 5.236186155583626,
+          "repeat": 134.2481088670642,
+          "band_double_prior": 49.224406719347485,
+          "band_repeat": 29.052116478730497,
+          "band_half_mix": 13.129969883755903
+        }
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "05ba75259844e9bd5efe6f22b327468920daf0ec6b1555c01656fac5a4f92947"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "mesh-nominal-fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "986fedf60e5ac08dfeafa3b7e3c4e29f3d7280d2f1fc427d58ffc564578f9e4f"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-nominal",
+          "case": {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "native_shape": [
+          768,
+          768
+        ],
+        "roi": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "exposure": 16.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 17361027784547046298,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "8fb0e9dc2c900e4d54077f7974539d0ff35a03d21a42b9a3ab7a8ebc1d9ce6a1"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "0ae822b0f4f3ade26701d5ed3a5ebc7fb7440ce74635e26dbf25f8993233ede5"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "e5c497ba22b3b47615749b7a30e5aea6dd6ec0fda883980adbfa0e0e0581f70c"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "8b2b149d6d15ab1d74c0157bc358ae2b1fb33beeb167b05614000343a71cf44c"
+              }
+            ]
+          },
+          {
+            "seed": 1022294268674405049,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "97a4419d09f9a5f74efa6a899ac0194a40653ec91d99f954402fa9f61a557977"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "6e7243b7a9c8ebc8a62b0898cb7878b39c142d20fa0620a084ccfe8f9a26307a"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "57d43d9f6e9810c8826a577e0c7b20ad8b7f1a7ade863a86e6e1115a65a92b4e"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "63ee3a22a0aedf36035941dff4e355aedb3529fcad59d69b233b93a29c23c552"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 18.473525431721935,
+          "opposite": 0.12599302237858645,
+          "repeat": 24.22389362462161,
+          "band_double_prior": 7.47341278529272,
+          "band_repeat": 5.55330689910473,
+          "band_half_mix": 2.50979092256823
+        }
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "bd340860ace7aa36d7a816dafab1ad940fa1e3a3140ff83cdd8bf95ded901f51"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "mesh-nominal-fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "29f6e9d5e0a574737924aa10d1471c628e784dc2e9420d2aff5d8d60b7ffa44e"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-nominal",
+          "case": {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.00128,
+            "read": 6.5536e-06,
+            "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+            "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "native_shape": [
+          768,
+          768
+        ],
+        "roi": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "exposure": 16.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 8785335864741936113,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "64b9164bd30ec9b7a860963f64a38280e03589511a0858daa9e8279e191f0677"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "6c1edb59f737360de52084dfbebe8221e70b3c2ca0832385cc939d0ac6abaf81"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "ccb0d814134b66e93c9acf817328a466a0913981c9c566e35c7fc707220ea627"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "58bb6ba094dd612f632859b1c175dbed94cefab2d25cf934f71ee9f958fde981"
+              }
+            ]
+          },
+          {
+            "seed": 5099594326804409251,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "93839914db67c1d48dc1407a0397db9654f3b220930b3c731a0e73214d14271c"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "57e5c57e27fa237c5ec48f525a71130afdcf1eb319871bdfc86a12c63bed41be"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "c333e0edbc9f0d2dc84af9c87b5184a04d969868733f72a6d564c2ce84a0b2bf"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "dc7e161738665c24147782d6e161695b41dfe52bc587e22eeaf2ecb706143fde"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 21.333268398449817,
+          "opposite": 0.08595091586015018,
+          "repeat": 19.66806338364509,
+          "band_double_prior": 3.6875970418450237,
+          "band_repeat": 8.079658829542138,
+          "band_half_mix": 3.651564282217054
+        }
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "eb6ffc0420ebc0102f98b9fdeeabf2b690b258373295c26b7180c9dbe1c05385"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "mesh-profile3879-fine-green-mesh-left",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "67d8b6fb0cc033935e56dd3dff831608535434756780ccf0921d43fe951c713d"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-profile3879",
+          "case": {
+            "name": "fine-green-mesh-left",
+            "ROI_xywh": [
+              206,
+              229,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              806,
+              6489,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              805,
+              6489,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-noisy_camera_jpeg-native.npy",
+                  "sha256": "60c90045b89c53740f8dcbf5b997d69e4e817ba6d61c576eb975c4ebf46ab0ad"
+                },
+                "xywh": [
+                  760,
+                  6500,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-left-reference_camera_jpeg-native.npy",
+                  "sha256": "5b41f300c8a198df73c3189f51a288c7c208eaba32f4b604965d0888152e3557"
+                },
+                "xywh": [
+                  759,
+                  6501,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit",
+            "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "native_shape": [
+          768,
+          768
+        ],
+        "roi": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "exposure": 16.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 12001388979239400375,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "0802d7a20378f9a6cbabd1ea30909293975c986c4ae3cf615ab7fac0f9c7226a"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "9392c8bc4227067418bbe85ad4542e1a93a54c80b4d5746a33ddff5a29a94fce"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "efb7220d66c86df0c503837c954c64b8d07988390004d9718d0261c45792cc2f"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "d2cfb2d8594fea63e3e98a88dc2242de38d509d3dda453dbbc6b4278cb3fedf8"
+              }
+            ]
+          },
+          {
+            "seed": 14480405985579483677,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "b2bec797325e1873b307f807bf92c85598971677e9f8cb7aba867184e9618918"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "3dc74432143eb43116bff092a6ef393bd34cb0a3ed54573f0639b19e6ca49a25"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "43e5db5c23fb82501b8b58ea4143bc42871b9039ba0af90c054d227f2a62f5e9"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "a8a7b92914d06f1cdca331f02d6599987095ed5346b4ed8491ccb6e778853719"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 16.70940370592679,
+          "opposite": 0.9080173661549583,
+          "repeat": 23.368961525405833,
+          "band_double_prior": 10.034440244259395,
+          "band_repeat": 7.171730436494324,
+          "band_half_mix": 3.241230290736689
+        }
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "checkpoint": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "type": "base",
+          "step": 100000
+        },
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "4dcc239a95073b8c3ab327a03acc350f3dbfd0c9ad0e4ede991862b323db2b86"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Four-guide average",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Opposite-view lift",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Two pairs with gain",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Doubled prior in fine band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fine-band replacement",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Half fine-band mix",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "old_board": {
+          "id": "mesh-profile3879-fine-green-mesh-right",
+          "image": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-040000/work/render/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "f0150938f863a54ad2218a3a57ba0579dcf39d3214149689b0b6703a8a6e7431"
+          },
+          "panels": [
+            {
+              "label": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local-only 40k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 40k EMA",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 AHD reference",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "ISO100 camera JPEG",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ],
+          "observation": "mesh-profile3879",
+          "case": {
+            "name": "fine-green-mesh-right",
+            "ROI_xywh": [
+              426,
+              189,
+              160,
+              160
+            ],
+            "noisy_raw_xywh": [
+              1026,
+              6449,
+              160,
+              160
+            ],
+            "reference_raw_xywh": [
+              1025,
+              6449,
+              160,
+              160
+            ],
+            "camera_JPEGs": {
+              "noisy_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-noisy_camera_jpeg-native.npy",
+                  "sha256": "db0718b241bf9d9c9794e5a518e0c779986093b2ed843f7c0d99f819d2ba94b5"
+                },
+                "xywh": [
+                  980,
+                  6460,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              },
+              "reference_camera_jpeg": {
+                "pixels": {
+                  "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/fine-green-mesh-right-reference_camera_jpeg-native.npy",
+                  "sha256": "faf44e4a1fe312d846a9ca2209449e282dd727c19f8ecae10398983f577bd5d2"
+                },
+                "xywh": [
+                  979,
+                  6461,
+                  160,
+                  160
+                ],
+                "scope": "Native camera-rendered sRGB8 pixels; no resizing/warping."
+              }
+            },
+            "crop_index": 0
+          },
+          "noise": {
+            "shot": 0.0014635775921166604,
+            "read": 1.0715704128646712e-06,
+            "source": "input Haar fit",
+            "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+          },
+          "input_arrays": {
+            "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+            "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+          },
+          "display_exposure": 16.0,
+          "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "native_shape": [
+          768,
+          768
+        ],
+        "roi": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "exposure": 16.0,
+        "gains": {
+          "parent": 0.0,
+          "double_prior": 1.2602317731578563,
+          "pair": 0.5778178422402873,
+          "repeat": 0.5725275845153882,
+          "half_mix": 0.2738486414215689
+        },
+        "band_gains": {
+          "parent": 0.0,
+          "double_prior": 0.6095849843284613,
+          "pair": 0.21437776333461148,
+          "repeat": 0.21265687869010325,
+          "half_mix": 0.0961093086288695
+        },
+        "doses": {
+          "same": 0.22145041648781458,
+          "opposite": 1.0,
+          "signed_opposite": 0.7031647975896654,
+          "opposite_first": 0.8178942784956087,
+          "dither_extrapolation": 0.10284392203581622
+        },
+        "paired_forwards": [
+          {
+            "seed": 13696495711167811662,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "b44a9646d4712bd4b08ca8608f94cb74760f4cf122838c51b1ef0e800bafc5f4"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "7fcb74ab2ded759e63705d14d41921f7705c423bc8145e7d147b18e6c16a7a4c"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "a65bca9a3cb1c1acfa2577e038bd85b63c14d5a0f47063916aa27d66346fca1b"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "1d2b31e2e2d2b4e4e3b2d9f5501c467709745878f852af584014d3ee74718242"
+              }
+            ]
+          },
+          {
+            "seed": 2218362324054733851,
+            "noisy_inputs": [
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "585cb2e695191526d6a308c80970a4492ac3eda868fa5b54da6fc86f50d4c931"
+              },
+              {
+                "shape": [
+                  1,
+                  4,
+                  384,
+                  384
+                ],
+                "dtype": "<f4",
+                "sha256": "a80fc8e29c44642aeace20c949a3ba74b7b42de4327c8672a89c52dfcd596727"
+              }
+            ],
+            "model_outputs": [
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "c930c4383abdf7275f6161b6cf5b064edb89c7ec9c315892c77152a46c0cfac5"
+              },
+              {
+                "shape": [
+                  1,
+                  3,
+                  768,
+                  768
+                ],
+                "dtype": "<f4",
+                "sha256": "9edac7cfe03af295bc74a5071741e38cfcc956f8b9d7feca96e184dceb41ef7e"
+              }
+            ]
+          }
+        ],
+        "RMS_DN16": {
+          "repeat_average": 21.6810450663369,
+          "opposite": 1.3729546094338871,
+          "repeat": 19.17243876755599,
+          "band_double_prior": 15.418874669616171,
+          "band_repeat": 9.096856383899487,
+          "band_half_mix": 4.1112820137817945
+        }
+      }
+    ]
+  },
+  "viewed_local": "2026-11-19T09:15:19.407922-08:00"
+}

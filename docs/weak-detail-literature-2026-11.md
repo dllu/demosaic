@@ -626,6 +626,15 @@ matched quiet dose, checking an addition above the full-input estimate
 gains only 0.003 ISO6400 response points with more fine-increment error.
 Both standing fence families keep incomplete fine cab crossings.
 
+[Paired full-sampling checks](full-sampling-detail-check.md) retain every
+Bayer site by adding and subtracting the same simulated perturbation.
+The opposite-view check reduces same-view fine error, with just 0.018
+ISO6400 response points added above Corpus 100k. Calibrating a wide
+boost to match fine response over-amplifies coarser contrast. Confining
+the gain to the measured band preserves much of the coarse structure.
+The half mix still raises fine-increment error by 0.65 DN16 and keeps
+fine cab crossings incomplete.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

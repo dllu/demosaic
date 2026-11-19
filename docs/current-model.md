@@ -268,6 +268,11 @@ from checking a half-input proposal on its own samples. At matched quiet
 strength the opposite-half correction above full-input Corpus 100k adds
 0.003 response points with a small increase in fine-increment and flat
 error. Fine cab crossings remain incomplete.
+[Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
+checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
+response points above Corpus 100k with more increment and flat error.
+The response-calibrated confined-band mix trades 0.11 DN16 lower flat
+RMS for 0.65 DN16 higher fine-increment error, with incomplete cab crossings.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
