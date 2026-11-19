@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Corpus 100k FP16 tile settings](corpus100k-fp16-throughput.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed with both JPEGs and ISO100 AHD. Larger tiles change background modulation slightly. Fine crossings stay incomplete |
 | [Corpus 100k TensorRT inference](corpus100k-faster-inference.md#standing-gfx100s-comparisons) | TensorRT FP16 and selective FP8 keep the same visible diagonals and incomplete fine crossings as eager FP16 across both ROIs and noise profiles |
 | [Disjoint exterior Bayer phase](bayer-phase-quadrature.md#standing-gfx100s-comparisons) | Both cab ROIs and profiles show mottling and incomplete fine crossings. The transferred right diagonals remain visible. Both JPEGs and the ISO100 AHD were inspected at native scale |
 | [Distant Bayer phase gating](bayer-distant-phase-gate.md#standing-gfx100s-comparisons) | The distant and near Bayer gates retain transferred right diagonals. Fine crossings remain incomplete on both sides with some mottling under both profiles |

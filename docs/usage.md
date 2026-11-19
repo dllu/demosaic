@@ -434,6 +434,11 @@ For Corpus 100k on the GB10, use `--precision float16`. Tiled restore on
 the 102 MP GFX frame falls from 287.38 to 53.40 seconds versus IEEE FP32.
 Weak-wire response and the native GFX crops stay visually close to FP32.
 [Full RGB16 differences and fixed quality panels](corpus100k-mixed-precision.md).
+Use `--tile 512 --overlap 64 --batch-size 4` to reproduce that geometry.
+`--batch-size 2` lowers peak PyTorch CUDA allocation from 2.12 to 1.24 GB
+on the 102 MP frame, with similar speed and small RGB16 differences.
+Larger tiles with less overlap change some clipped colors.
+[Tile settings and native evidence](corpus100k-fp16-throughput.md).
 
 CUDA `infer` uploads the checkpoint from pinned CPU memory when available.
 The sidecar reports `checkpoint_setup_seconds`. In the paired Corpus 100k

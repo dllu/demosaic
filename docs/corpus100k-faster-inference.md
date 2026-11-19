@@ -143,6 +143,8 @@ different aperture, exposure time and motion conditions.
 Both real scene families, both exact-target comparisons and both outliers
 were viewed at native scale. The new production change is weight staging.
 The TensorRT pilot covers these crops, the full GFX export and the wire
-panel. The fixed 427-photo and measured-camera panels are available for
-eager FP16 and remain untested on these TensorRT engines.
-[Existing broad FP16 panel results](corpus100k-mixed-precision.md#fixed-photo-and-measured-camera-panels).
+panel. A follow-up evaluates the same FP16 engines on all 427 fixed photos
+and both measured-camera panels. The separate broad FP16 comparisons
+include the largest photo differences.
+[TensorRT FP16 fixed panels](corpus100k-fp16-throughput.md#tensorrt-fp16-on-the-fixed-panels) ·
+[Eager FP16 fixed panels](corpus100k-mixed-precision.md#fixed-photo-and-measured-camera-panels).

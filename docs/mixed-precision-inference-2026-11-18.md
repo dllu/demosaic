@@ -10,7 +10,10 @@ error. The [TensorRT and startup follow-up](corpus100k-faster-inference.md)
 measures a further 11.9% warm restore reduction from FP16 and saves 50.07 s
 of CLI checkpoint setup via pinned upload, with identical RGB16 exports.
 The selective FP8 gains little extra time and raises quiet chroma error.
-Two native DINO NVFP4 projections show no material speedup.
+Two native DINO NVFP4 projections show no material speedup. The
+[tile and fixed-panel follow-up](corpus100k-fp16-throughput.md) completes
+the broad quality comparison for TensorRT FP16 and identifies clipped-color
+changes from faster eager tile geometry.
 
 ## Where the time and precision go
 

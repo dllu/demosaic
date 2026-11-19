@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Corpus 100k FP16 tile settings](corpus100k-fp16-throughput.md#standing-gfx100s-comparisons)
+  retain the smooth sky and the visible coarse crossings. Larger tiles
+  change some clipped light fringes elsewhere in the full-frame output.
 - [Corpus 100k TensorRT inference](corpus100k-faster-inference.md#standing-gfx100s-comparisons)
   preserves the visually smooth sky and coarse chain-link crossings in
   the FP16 engine. Fine foliage and building wires stay soft.

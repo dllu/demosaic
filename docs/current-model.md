@@ -30,9 +30,12 @@ EMA with standard CUDA autocast. It restores the 102 MP GFX frame in
 53.40 s versus 287.38 s with IEEE FP32. Native sky, fine detail and both
 fences look alike, with a small additional error on the clipped dahlia.
 [CUDA checkpoint staging](corpus100k-faster-inference.md) drops setup from
-52.59 to 2.52 s with identical RGB16 export. The TensorRT FP16 pilot
-saves another 11.9% of warmed restore time. Selective FP8 reduces
-weak-wire response and adds chroma variation on quiet fields.
+52.59 to 2.52 s with identical RGB16 export. TensorRT FP16 saves another
+11.9% of warmed restore time and changes the fixed photo and camera mean
+scores by less than 0.0002 dB versus eager FP16. Keep 512-pixel tiles with
+64 pixels of overlap in the supported CUDA CLI. Larger, narrower-overlap
+tiles save 19.5% in a paired screen and change clipped colors. Selective FP8
+adds chroma variation on quiet fields. [Inference speed and quality](corpus100k-fp16-throughput.md).
 
 ## Full-model choices
 
