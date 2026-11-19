@@ -1,0 +1,2660 @@
+{
+  "exact": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/training/step000672.pt",
+      "sha256": "273bddd1862dfb6fa8a1c994e1796ee19c068b9f3fdd4bbea9b0cd216d7ca518"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/render_mixture.py",
+      "sha256": "cdd2b3ee0f281023d75ec95c026a1f0ebae9eacbae3dc52be586e1a8fbf4c912"
+    },
+    "frozen_phase": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "policies": [
+      "Bayer-gated",
+      "local_power",
+      "edge_contrast",
+      "constant",
+      "conditional",
+      "gap-supervised"
+    ],
+    "prior_exact": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/exact-final/manifest.json",
+      "sha256": "32c16295f37c2cb9a9604daa0d7bfd822a1ef7725f2a1e5568d40bd60934583b"
+    },
+    "rows": [
+      {
+        "ADC_bits": 16,
+        "CFA": "BGGR",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/001-iso6400-independent-comparison.png",
+            "sha256": "19658517eb868b359ccd8c8187224dccca535a8d518f0ec68c91fe0f303b0aea"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed learned blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Gap-trained blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 2.0,
+        "display_exposure": 3.0303030303030303,
+        "id": "001-iso6400-independent",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/001-iso6400-independent.npz",
+          "sha256": "4471b52c84c9f3f281f0cd6633a8bcc5b2bcb924c810aacaa2e3c121cf1137a5"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-020000/evaluation/predictions/001-iso6400-independent.npz",
+          "sha256": "2496a9a4c36da50fc8fd8f4458c7fac952abb9ef7c0e8abd2f965175a749da34"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "name": "iso6400",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "constant": {
+            "image": {
+              "path": "exact/001-iso6400-independent-constant-triplet.png",
+              "sha256": "d369dcf7fce386ea901673ff15274e31c2aa49e9b2a5d188918d0667bc0c9251"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Fixed learned blend",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "gap-supervised": {
+            "image": {
+              "path": "exact/001-iso6400-independent-gap-supervised-triplet.png",
+              "sha256": "c1bf2d0cb074b54ead54afa74b3c381d6675f4fc469551e7e4035255dc627637"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Gap-trained blend",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          22,
+          250,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "Berthold Werner",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/07/076545ab6d57bfb3be7884c3cae690b536090956.npy",
+          "cache_sha256": "02e50df398205439bc361661d3c128e0d974164c4bb06772b2f729cbe4db6b4d",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/07/65/076545ab6d57bfb3be7884c3cae690b536090956.jpg",
+          "dtype": "uint16",
+          "height": 3366,
+          "id": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "license": "Public domain",
+          "license_url": null,
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Limburger_Dom_BW_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg",
+          "sha1": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "sha1_hex": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "shape": [
+            841,
+            541,
+            3
+          ],
+          "split": "val",
+          "title": "File:Limburger Dom BW 1.jpg",
+          "width": 2166
+        },
+        "triplet": {
+          "image": {
+            "path": "exact/001-iso6400-independent-triplet.png",
+            "sha256": "ed45c166d527292bc1c958aff2fe87c6b33b49907ce838ed387c4926d93675da"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "RGGB",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/012-iso6400-comparison.png",
+            "sha256": "5a8fd110dc6d6ff67aefa7c361e02c4b9852874f93dfc42a979c324285d7578c"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed learned blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Gap-trained blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "ellipse",
+        "id": "012-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/012-iso6400.npz",
+          "sha256": "caeba10076a8701b00589737a870775f791fd45459c9f5b52b24f570f8fc70b0"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/wire-parent/012-iso6400.npy",
+          "sha256": "b0f9b837209d5b8135f9c365be57a7893c2a95e010ec7013b6c88cf08bba6f2e"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "constant": {
+            "image": {
+              "path": "exact/012-iso6400-constant-triplet.png",
+              "sha256": "40590a60939f5989f6bf555a33c7dfc9256a32f0a398f8d17adad66161ad1c7d"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Fixed learned blend",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "gap-supervised": {
+            "image": {
+              "path": "exact/012-iso6400-gap-supervised-triplet.png",
+              "sha256": "2eaa34df06f7270ce20d801f68be46a38c4ea58a4b7bc27a5eac6f42490e80b9"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Gap-trained blend",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "GT1976",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ed/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.npy",
+          "cache_sha256": "eb7ec09162ad4d3e87a4bf7548bcd8cd741fecd489cfaeeb6d6b92bceea933e5",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/ed/8a/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.jpg",
+          "dtype": "uint16",
+          "height": 3000,
+          "id": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/2018-05-04_%28217%29_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:2018-05-04_(217)_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg",
+          "sha1": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "sha1_hex": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "shape": [
+            750,
+            1000,
+            3
+          ],
+          "split": "val",
+          "title": "File:2018-05-04 (217) 33 53 9332 586-5 at Bahnhof St. Valentin.jpg",
+          "width": 4000
+        },
+        "source_box": [
+          376,
+          16,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/012-iso6400-triplet.png",
+            "sha256": "4c179a6886a1ca04b49d47d683c1c82f4eacf5df0443447228ff6a516b6d1ad0"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "GRBG",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/014-iso6400-comparison.png",
+            "sha256": "2c20a7600cb74a2219dbb33a01966e81f3f918e72380c8f35bb838a4faed5745"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed learned blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Gap-trained blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "smooth-dip",
+        "id": "014-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/014-iso6400.npz",
+          "sha256": "b222c3a103b8fcea84dd06550d4de5ecc7db94ebeefef457884f41ec664631f6"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/wire-parent/014-iso6400.npy",
+          "sha256": "fe98f037193ebb2354c807ae2c9a69bb92753e99a22099d94806d2d845fc716e"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "constant": {
+            "image": {
+              "path": "exact/014-iso6400-constant-triplet.png",
+              "sha256": "2a86a92b976a9dd9968767e104df69ff8a352c3d25f26976954e2eb45b2a8ed5"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Fixed learned blend",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "gap-supervised": {
+            "image": {
+              "path": "exact/014-iso6400-gap-supervised-triplet.png",
+              "sha256": "ce84f8c25ebb0597b3a4b5426bbf300d2372f5805ec6bdf29e39844c0ddd046d"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Gap-trained blend",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "Uoaei1",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/30/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.npy",
+          "cache_sha256": "fab4b796912d34e59e347fad7e5907b1f8c5ac910e44dc43f769762c84ae47fa",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/30/7d/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.jpg",
+          "dtype": "uint16",
+          "height": 2318,
+          "id": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Dianthus_superbus_Auernig_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Dianthus_superbus_Auernig_01.jpg",
+          "sha1": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "sha1_hex": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "shape": [
+            579,
+            579,
+            3
+          ],
+          "split": "val",
+          "title": "File:Dianthus superbus Auernig 01.jpg",
+          "width": 2318
+        },
+        "source_box": [
+          66,
+          32,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/014-iso6400-triplet.png",
+            "sha256": "ad8ca3c7a58bbf4e274befa71fbb0dd03d1654fa41bebbc4f392b42f46bed5f5"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/training/completed.json",
+      "sha256": "9dbf0ba8787b126b1b1b0d48e8d09f5b981283b374b583d00d857dcb7d8fbc15"
+    }
+  },
+  "flat": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/training/step000672.pt",
+      "sha256": "273bddd1862dfb6fa8a1c994e1796ee19c068b9f3fdd4bbea9b0cd216d7ca518"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/flat_mixture.py",
+      "sha256": "8cbc322c2518d7a890f6648474638f30d53b95d6568344172fa8482aba790509"
+    },
+    "frozen_phase": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "rows": [
+      {
+        "ADC_bits": 16,
+        "CFA": "RGGB",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "flat/000-iso6400-independent-flat-comparison.png",
+            "sha256": "7dbbd3b74c7a87a93d2a972452fa4542eba47f933a88a5900fa260ae826cbfb7"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed learned blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Gap-trained blend",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 2.0,
+        "display_exposure": 3.0303030303030303,
+        "id": "000-iso6400-independent-flat",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/000-iso6400-independent.npz",
+          "sha256": "5b7c3ba5dc7a7cbe961b79737cee7b457bbace06c03d6962ecf7e140b27b3f8f"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-020000/evaluation/predictions/000-iso6400-independent.npz",
+          "sha256": "91b8c1c9dd77a6e66adeabc4ecce576c966f603a0d4c598ba962d2a7d9869da9"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "name": "iso6400",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          218,
+          192,
+          256,
+          256
+        ],
+        "role": "exact-flat",
+        "source": {
+          "attribution": null,
+          "author": "Palauenc05",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/0b/0bf743c903a6423b4d8de1ea05becdff955780f8.npy",
+          "cache_sha256": "c05a4e6b332aa6f633ed5ab5d601476b086f4f039e51af132d8fb059bf1c9d80",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/0b/f7/0bf743c903a6423b4d8de1ea05becdff955780f8.jpg",
+          "dtype": "uint16",
+          "height": 2858,
+          "id": "0bf743c903a6423b4d8de1ea05becdff955780f8",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Hauroth_Wegekreuz_St-Bartholom%C3%A4us.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Hauroth_Wegekreuz_St-Bartholom%C3%A4us.jpg",
+          "sha1": "0bf743c903a6423b4d8de1ea05becdff955780f8",
+          "sha1_hex": "0bf743c903a6423b4d8de1ea05becdff955780f8",
+          "shape": [
+            714,
+            695,
+            3
+          ],
+          "split": "val",
+          "title": "File:Hauroth Wegekreuz St-Bartholomäus.jpg",
+          "width": 2780
+        },
+        "triplet": {
+          "image": {
+            "path": "flat/000-iso6400-independent-flat-triplet.png",
+            "sha256": "a74262924859e825916fc5fd8d4bf56baa53a5577660d9b3dd259149e580f835"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "BGGR",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "flat/001-iso6400-independent-flat-comparison.png",
+            "sha256": "4bffb5416523f88494415453d41f2ae371588c05f9e04a448de118e8b65cb3d5"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Edge contrast",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed learned blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Gap-trained blend",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 2.0,
+        "display_exposure": 3.0303030303030303,
+        "id": "001-iso6400-independent-flat",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/001-iso6400-independent.npz",
+          "sha256": "4471b52c84c9f3f281f0cd6633a8bcc5b2bcb924c810aacaa2e3c121cf1137a5"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-020000/evaluation/predictions/001-iso6400-independent.npz",
+          "sha256": "2496a9a4c36da50fc8fd8f4458c7fac952abb9ef7c0e8abd2f965175a749da34"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "name": "iso6400",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          22,
+          250,
+          256,
+          256
+        ],
+        "role": "exact-flat",
+        "source": {
+          "attribution": null,
+          "author": "Berthold Werner",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/07/076545ab6d57bfb3be7884c3cae690b536090956.npy",
+          "cache_sha256": "02e50df398205439bc361661d3c128e0d974164c4bb06772b2f729cbe4db6b4d",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/07/65/076545ab6d57bfb3be7884c3cae690b536090956.jpg",
+          "dtype": "uint16",
+          "height": 3366,
+          "id": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "license": "Public domain",
+          "license_url": null,
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Limburger_Dom_BW_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg",
+          "sha1": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "sha1_hex": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "shape": [
+            841,
+            541,
+            3
+          ],
+          "split": "val",
+          "title": "File:Limburger Dom BW 1.jpg",
+          "width": 2166
+        },
+        "triplet": {
+          "image": {
+            "path": "flat/001-iso6400-independent-flat-triplet.png",
+            "sha256": "b197fdfa37d202f2195576c2e64194ea06eddcfce76d737ec4bbf1829665b481"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/evaluation/collected.json",
+      "sha256": "4a313695347e2057d964d3849cf07961d05957ea213f21596e5e1f739a4e167f"
+    },
+    "weights": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/training/completed.json",
+      "sha256": "9dbf0ba8787b126b1b1b0d48e8d09f5b981283b374b583d00d857dcb7d8fbc15"
+    }
+  },
+  "native_image_review": {
+    "completed": true,
+    "exact_comparisons": 3,
+    "exact_triplets": 9,
+    "flat_comparisons": 2,
+    "flat_triplets": 2,
+    "notes": "The sky and exact-flat cores stay visually smooth. The coarse lattice keeps coherent crossed wires. Fine building and foliage remain soft. On the nominal right cab the blends retain more existing modulation than the fixed power gate, with less definition than the fixed edge contrast. None resolves the fine junctions.",
+    "standing": 8
+  },
+  "standing": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/training/step000672.pt",
+      "sha256": "273bddd1862dfb6fa8a1c994e1796ee19c068b9f3fdd4bbea9b0cd216d7ca518"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/render_mixture.py",
+      "sha256": "cdd2b3ee0f281023d75ec95c026a1f0ebae9eacbae3dc52be586e1a8fbf4c912"
+    },
+    "frozen_phase": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "policies": [
+      "Bayer-gated",
+      "local_power",
+      "edge_contrast",
+      "constant",
+      "conditional",
+      "gap-supervised"
+    ],
+    "prior_native": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/standing/manifest.json",
+      "sha256": "24341944d8bf4111e89ab783682c0cb0d0b6b0c12e93db9031717966be211a70"
+    },
+    "rows": [
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "4b48e39c4b10183690fd1c5c04195f4ea0d21629404ac05c773dd2f083ee34d8"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 1.7904884240870702,
+          "conditional": 0.7658908174101046,
+          "constant": 0.6226822910785966,
+          "edge_contrast": 1.0960533575979319,
+          "gap-supervised": 0.574262596230958,
+          "local_power": 1.0575516812879633
+        },
+        "display_exposure": 4.0,
+        "id": "main-overcast-sky-main-overcast-sky",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "ea00e14ddb14f021dd099e07c020589af8e132ae02650981b9ee843522f66a95"
+        },
+        "native_box": [
+          5752,
+          1352,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-overcast-sky-RGB-f32.npy",
+          "sha256": "f2527cae11c6621c7b36491310f7a965e7910532842eb765bdcf64fcb07b6c26"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-building-detail-main-building-detail.png",
+            "sha256": "58db6b9e6d59af3e31b740a0f3a50d68b2ebbca078d6f040012042164a6a94bb"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.8485682396461725,
+          "conditional": 7.238841266433488,
+          "constant": 5.12896945006305,
+          "edge_contrast": 6.596568493298769,
+          "gap-supervised": 3.4106752398270324,
+          "local_power": 9.140948136195233
+        },
+        "display_exposure": 4.0,
+        "id": "main-building-detail-main-building-detail",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-building-detail-main-building-detail.png",
+          "sha256": "30d438f8129e23331424dc4e6871ff9a786e6fea635752c98437c43e828858ca"
+        },
+        "native_box": [
+          5742,
+          2642,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-building-detail-RGB-f32.npy",
+          "sha256": "f68f30c44e8a541ccbafdf7a582bf953c973bf57d8bb5b2be4123ac2847cb470"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-foliage-main-foliage.png",
+            "sha256": "5184e29716cbf5ed75b313d353fe87b22101be2f5ec2624da84f62933cc8c8bf"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.8885571273757815,
+          "conditional": 7.600743126853201,
+          "constant": 5.1821275176140285,
+          "edge_contrast": 5.895528547769485,
+          "gap-supervised": 2.8961125996238426,
+          "local_power": 10.190916227475357
+        },
+        "display_exposure": 4.0,
+        "id": "main-foliage-main-foliage",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-foliage-main-foliage.png",
+          "sha256": "d83c6f7a7ece3241c465f74c8c3aa444230636b15ce552803804ee004f95547c"
+        },
+        "native_box": [
+          8842,
+          5522,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-foliage-RGB-f32.npy",
+          "sha256": "6708ed14ecbce7437f8c4f009cfd03f521f7bfa0842f8f8b40bc0fd235ed1700"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "9d27ce57cf4b231ae2dcdb5bf44bfc0ca98692d567de53ca38326025284e4ffa"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 15.998412819000286,
+          "conditional": 21.05811933176504,
+          "constant": 16.053919303725813,
+          "edge_contrast": 18.705271515411614,
+          "gap-supervised": 11.260635945972021,
+          "local_power": 23.99761920240819
+        },
+        "display_exposure": 4.0,
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "10cee20009a6d396f3e0b8e261c1a8bc2899e40664794a155806ed8b4126955a"
+        },
+        "native_box": [
+          2192,
+          5952,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-chain-link-fence-RGB-f32.npy",
+          "sha256": "ef48b06d7c8d3c39db0db3873590cbbc4ff056edfde5bab1878a8eb6ee955efc"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "6009e63c55e9b62c8197c7c96bac1704bae0ddca7e5b40444dba67884f2040dd"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 3.613730059767534,
+          "conditional": 2.3462528820795447,
+          "constant": 1.9468534812993141,
+          "edge_contrast": 4.072547980496556,
+          "gap-supervised": 1.9155421085921513,
+          "local_power": 1.4343086110519931
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "49aa16a3a7762ea8747bc3b1c423d5840f8fd57cfa22efeaa666ab8ed43297ba"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-nominal-RGB-f32.npy",
+          "sha256": "fce832ace548686fe634da956bafab1cd14ce4995950597b80c441c92d94f511"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "b1cf41835bd54676a2a6501bbd3aa2c88c0b88c584eef07836e9167ae8253301"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 7.5553929231441375,
+          "conditional": 4.72696769485508,
+          "constant": 4.661916438580185,
+          "edge_contrast": 9.483675383572987,
+          "gap-supervised": 4.874538394515758,
+          "local_power": 1.2156278137528127
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "d098cbceaa0bbdd294ccfd8e918f5b70f331571def6da2dba733358ffcae0faf"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-nominal-RGB-f32.npy",
+          "sha256": "fce832ace548686fe634da956bafab1cd14ce4995950597b80c441c92d94f511"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "7867079bcacf29ed703f1fb10e576d332d5074f6567ce372f6ffdbf77db2497f"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 4.235374040573767,
+          "conditional": 4.630023130986572,
+          "constant": 3.353421850461929,
+          "edge_contrast": 4.693446168570198,
+          "gap-supervised": 2.7505509007693023,
+          "local_power": 5.071420566562723
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "2ffdf9d349bad9b9d43800e366fbbc2d0f431bcc092879ec0f6d98e274ae5fb1"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-profile3879-RGB-f32.npy",
+          "sha256": "fd8ba8fa4b0ff48786e8b679d60cc7b7c85462f276b7e49e412de05a31cf5c98"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "45fb9813dad7e52a392417199f03600ec2e891905f35bcffa63d57ab074dc7c3"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Edge contrast",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Fixed learned blend",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap-trained blend",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.185193349300662,
+          "conditional": 7.240333858130061,
+          "constant": 5.601451477389824,
+          "edge_contrast": 7.570380506652255,
+          "gap-supervised": 4.789067852088183,
+          "local_power": 7.44348902872894
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "e090aab4265494ae78f3e22ab1e1e4d461b4cc4340d0a608590a68a8c9af9904"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-profile3879-RGB-f32.npy",
+          "sha256": "fd8ba8fa4b0ff48786e8b679d60cc7b7c85462f276b7e49e412de05a31cf5c98"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/phase-correction-mixture-v1/training/completed.json",
+      "sha256": "9dbf0ba8787b126b1b1b0d48e8d09f5b981283b374b583d00d857dcb7d8fbc15"
+    }
+  }
+}

@@ -483,6 +483,15 @@ photo-calibrated contrast retains more nominal right-cab diagonals
 than local power with incomplete crossings. Natural-photo response
 still favors local power at similar flat RMS.
 
+[Learned mixtures of local power and edge contrast](phase-correction-mixture.md)
+bound each complex correction within its fixed expert gains. On
+held-out ISO6400 wires the conditional mixture gains 1.42 response
+points and lowers absolute gap RMS by 1.70 DN16 versus local power,
+with greater change inside the gaps. On independently corrupted
+natural photos, scaled local power retains 0.10 more response points
+at similar flat RMS. The mixture primarily draws on edge evidence
+for the nominal right cab, where the fine crossings remain incomplete.
+
 A [dense regional context replay](scene-regional-context.md) gives that
 trial's spatial 12k checkpoint a registered higher-resolution neighborhood.
 In the additional 48 fixed fields, quiet error falls versus coarse,

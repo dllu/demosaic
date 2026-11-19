@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Learned phase gate mixtures](phase-correction-mixture.md#standing-gfx100s-comparisons)
+  retain a smooth sky and coherent coarse crossings. Fine foliage and
+  building wires remain soft.
 - [Reserved Bayer waveform checks with a local edge](phase-edge-validation.md#standing-gfx100s-comparisons)
   retain coherent coarse crossings and a visually smooth sky. Fine
   building wires and foliage stay soft.

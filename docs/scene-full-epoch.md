@@ -287,9 +287,9 @@ photo sources and both standing GFX scenes.
 [20,000 paired source audit](results/scene-full-epoch-v1/paired-prefix-020000.json) ·
 [20,000 segment receipts](results/scene-full-epoch-v1/paired-prefix-020000.tar.xz).
 
-The matched continuation verifies identical inputs through **23,500 updates**,
-with 47,000 distinct photos, 47,000 seeds and 188,000 native queries per arm.
-Retained training loops total 11,738.50 s local and 15,224.17 s spatial.
+The matched continuation verifies identical inputs through **25,000 updates**,
+with 50,000 distinct photos, 50,000 seeds and 200,000 native queries per arm.
+Retained training loops total 12,399.77 s local and 16,025.42 s spatial.
 These later checkpoints establish training coverage. The latest matched
 numerical and native review covers 20k.
 [20,500 audit](results/scene-full-epoch-v1/paired-prefix-020500.json) ·
@@ -300,14 +300,20 @@ numerical and native review covers 20k.
 [22,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-022500.tar.xz) ·
 [23,000 paired audit](results/scene-full-epoch-v1/paired-prefix-023000.json) ·
 [23,500 paired audit](results/scene-full-epoch-v1/paired-prefix-023500.json) ·
-[23,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-023500.tar.xz).
+[23,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-023500.tar.xz) ·
+[24,000 paired audit](results/scene-full-epoch-v1/paired-prefix-024000.json) ·
+[24,500 paired audit](results/scene-full-epoch-v1/paired-prefix-024500.json) ·
+[24,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-024500.tar.xz) ·
+[25,000 paired audit](results/scene-full-epoch-v1/paired-prefix-025000.json) ·
+[25,000 segment receipts](results/scene-full-epoch-v1/paired-prefix-025000.tar.xz).
 [Earlier local audit](results/scene-full-epoch-v1/local-022500-prefix.json).
 
-The local-only arm verifies **25,000 updates** on 50,000 distinct photos
-and 200,000 native queries. Its retained loops total 12,399.77 s on the
-same schedule. The matched 25k interim review awaits the spatial
-checkpoint under the active training controller. The latest matched
-numerical and native results use 20k EMA for both arms.
+The full 64-source numerical review has started from the verified 25k EMA
+pair. Both standing GFX scenes run afterward. The latest completed
+matched quality review uses 20k EMA for both arms.
+[Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
+[Full 25k photo and native review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
+
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
 [24,000 local audit](results/scene-full-epoch-v1/local-024000-prefix.json) ·
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·

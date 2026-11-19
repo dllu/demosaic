@@ -163,6 +163,11 @@ reduce false correction in constructed gaps versus the same affine
 fit. The photo-calibrated version retains some nominal right-cab
 diagonals and delivers less natural-photo response than the local
 power gate at similar flat RMS. Fine junctions remain incomplete.
+[Conditional mixtures of the frozen phase gates](phase-correction-mixture.md)
+improve over fixed local power on held-out ISO6400 wire response
+and absolute gap error. They add more texture in the true gaps,
+and fixed local power recovers slightly more fine signal on natural
+photos at similar flat RMS. Fine cab crossings remain incomplete.
 [Indexed Bayer phase extraction](compact-spectral-witness.md) reproduces
 the earlier transported head and reduces median feature time from 52.6
 to 30.7 ms on a fine-cab query. The added neighbor-pair head lowers
