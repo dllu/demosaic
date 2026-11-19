@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Exterior bent-phase witness](query-exterior-witness.md#standing-gfx100s-comparisons)
+  rejects faint building modulation from the unguarded pooled proposal
+  and returns all main crops to the wide fit. The sky stays smooth.
 - [Scene-contour Bayer aggregation](query-contour-support.md#standing-gfx100s-comparisons)
   leaves the sky, building and foliage at Corpus 100k. The coarse fence
   retains both crossing directions and looks like the wide fit.

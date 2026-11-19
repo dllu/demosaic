@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Exterior bent-phase witness](query-exterior-witness.md#standing-gfx100s-comparisons) | Both priors, ROIs and camera JPEGs viewed. The adjacent-frequency fallback matches the wide fit, with both right directions visible and fine crossings still soft |
 | [Scene-contour Bayer aggregation](query-contour-support.md#standing-gfx100s-comparisons) | Both cab priors and both ROIs were viewed. Right crops are visually close to the wide fit and crossings remain incomplete. Both left crops equal the parent |
 | [Local weak-carrier support](query-phase-support.md#standing-gfx100s-comparisons) | Compact fits give less even right crossings. The deficit check looks like the wide fit under both priors. Both left crops return Corpus 100k, with fine reference crossings still weak |
 | [Checked Bayer curvature](query-phase-curvature.md#standing-gfx100s-comparisons) | Independent Bayer groups support small right-cab center shifts under both priors. None of the four cab crops accepts curvature. Visual changes are slight and both references remain in the boards |

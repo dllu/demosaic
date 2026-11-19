@@ -13,6 +13,11 @@ frequencies. The existing search finds no correct pair on any of
 [Source, prediction bindings and logs](results/query-contour-support-v1/evidence.tar.xz) ·
 [Native crops and provenance](images/query-contour-support-v1/manifest.json).
 
+The [exterior bent-phase follow-up](query-exterior-witness.md) combines a
+phase supplied by pixels outside the query with a wider held Bayer check.
+On new occluded fields it gains 10.45 points of weak response over the
+wide fit, with increased leakage in unrelated gaps.
+
 ## Coarse guide and fixed fine geometry
 
 The [local deficit check](query-phase-support.md) lost real detail when

@@ -148,7 +148,10 @@ The local-only arm subsequently reached **7,500 updates**, with 15,000
 distinct photos and 60,000 native queries. Its five 500-update segments
 resume from the verified 5k checkpoint on the original schedule. The
 spatial arm is following that same source and crop schedule toward 7,500.
-The last matched, numerically checked and natively reviewed pair is 5,000.
+The first three post-5,000 segments match byte for byte through **6,500**,
+covering 13,000 distinct photos and 52,000 native queries per arm.
+The latest numerical and native review is at 5,000.
+[Matched input traces and both 6,500 checkpoints](results/scene-full-epoch-v1/paired-prefix-006500.json).
 [Local 7,500 coverage, durations and checkpoint](results/scene-full-epoch-v1/local-007500-prefix.json) ·
 [Original segment receipts and spatial launch](results/scene-full-epoch-v1/local-007500-evidence.tar.xz).
 

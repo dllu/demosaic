@@ -385,6 +385,12 @@ texture. Supplying exact geometry exposes recovery and false-flat headroom.
 The [one-sided frequency screen](query-contour-support.md#testing-nominations-from-one-visible-side)
 finds five plausible occluded pairs and admits none on the reserved quarter.
 
+The [bent exterior witness](query-exterior-witness.md) obtains 10.45
+points more recovery on occluded fields and lowers increment error after
+checking the fitted peak against neighboring frequencies. The extra check
+removes an automatic building proposal. Independent gaps retain more added
+texture and two strong-only controls still receive new corrections.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
