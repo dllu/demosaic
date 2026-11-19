@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Weak-edge teacher and measured-step gate](weak-edge-distill.md#standing-gfx100s-comparisons)
+  cover all four main crops against V120 and Corpus 100k. Sky remains smooth
+  and coarse crossings are visible. Thin cables and fine foliage remain soft.
 - [Paired native luminance correction](paired-luminance-detail.md#standing-gfx100s-comparisons)
   compares the frozen Corpus 100k plus each head against Corpus 100k and V120.
   With both support windows the sky stays smooth, the coarse fence keeps its

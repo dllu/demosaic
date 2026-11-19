@@ -51,7 +51,7 @@ joint cell. Every source has two independent redraws with
 present, absent and flat roles. Four qualification updates
 verified the initial equivalence of the students, distinct
 teacher observations, finite gradients and frozen upstream
-weights. Training is active.
+weights. All three arms completed training and native review.
 [Frozen training and panel receipts](results/weak-edge-distill-v1/qualification.json) ·
 [Source and input archive](results/weak-edge-distill-v1/qualification.tar.xz).
 
@@ -116,3 +116,132 @@ and the edges of the white band remain soft. Query origin
 The earlier [standing GFX boards](paired-flat-companion.md#standing-gfx100s-comparisons)
 cover the originating quiet-region composition. The 48-photo
 transfer uses exact synthetic targets.
+
+## Attenuating the detail lift near measured steps
+
+An inference-only policy detects a coherent parent-luminance
+gradient and scales the detail lift by its strength relative to
+local Bayer noise. It uses a 17-pixel support window. The quiet
+path and the existing detail evidence stay fixed. On the ISO6400
+shared-step cases, the local gate keeps 69.3% of the fixed lift
+near the step and 87.1% farther away on average. At its original
+strength it reduces near-region increment error by 0.376 DN16
+and loses 0.040 percentage points of response versus the fixed lift.
+
+A separate comparison fits a scalar multiplier of 0.833 for the
+uniform lift on the first 24 sources. On the other 24, the measured
+gate reduces near-step increment RMS by 0.185 DN16
+[−0.301, −0.088] and absent-detail RMS by 0.059 DN16
+[−0.101, −0.023]. The signed response difference is
+−0.019 percentage points [−0.040, +0.007] and the flat RMS
+difference is below 0.001 DN16. The gated result still has higher
+near-step increment error than Corpus 100k alone on these sources
+(+0.361 DN16).
+[Response-matched measures and all eight GFX boards](results/weak-edge-distill-v1/guard-publication.json) ·
+[Exact-target foliage](images/weak-edge-distill-v1/guard/043-same-edge-iso6400-r0-role0-triplet.png) ·
+[Exact-target clownfish](images/weak-edge-distill-v1/guard/009-same-edge-iso6400-r0-role0-triplet.png).
+
+The GFX sky stays smooth and both coarse-fence directions remain
+visible. Thin building cables, fine foliage and cab crossings remain
+soft. Both cab profiles and JPEG references were viewed. The transferred
+profile preserves more diagonal modulation, with most fine crossings still
+missing. The gate on its own leaves the real images close to the fixed lift.
+[Sky](images/weak-edge-distill-v1/guard/main-overcast-sky-main-overcast-sky.png) ·
+[Coarse fence](images/weak-edge-distill-v1/guard/main-chain-link-fence-main-chain-link-fence.png) ·
+[Right cab, transferred profile](images/weak-edge-distill-v1/guard/mesh-profile3879-fine-green-mesh-right.png).
+
+## Completed independent-exposure supervision
+
+Run `weak-edge-distill-v1` completed 384 updates in 1,021.39 seconds of
+measured training time. It used 768 distinct training photos and 4,608
+target observations per arm. The checkpoint holds the three raw states,
+EMAs and Adam states, SHA256
+`69d9cd376ccdf8465fdf5dc4f80450cd546324c5e478f539385302da615b336d`.
+The evaluation uses each EMA composed with the same 0.15 quiet path and
+frozen Corpus 100k trunk. It takes one noisy Bayer image per prediction.
+Network training, numerical collection and actual native inspection
+are complete. The previously restored parents were reused at their
+verified inputs. Component scoring took 142.40 seconds.
+[Endpoint, parent bindings, per-condition scores and native provenance](results/weak-edge-distill-v1/endpoint-publication.json) ·
+[Source and training archive](results/weak-edge-distill-v1/endpoint-archive.tar.xz).
+
+The table gives ISO6400 differences over Corpus 100k on the 48 common-step
+photos. The unchanged quiet path supplies the flat improvement in all arms.
+The same-draw teacher lowers whole-core increment error most, while adding
+the largest near-step penalty.
+
+| EMA and composition | Aligned response (percentage points) | Increment RMS (DN16) | Near-step increment RMS (DN16) | Flat RMS (DN16) |
+| --- | ---: | ---: | ---: | ---: |
+| V120 | +0.087 | +0.323 | +0.134 | +0.414 |
+| Supervised | −0.0005 | −0.002 | +0.008 | −0.201 |
+| Same-draw teacher | +0.018 | −0.084 | +0.144 | −0.202 |
+| Independent teacher | +0.00002 | −0.001 | +0.011 | −0.201 |
+
+Compared with the same-draw teacher, the independent teacher reduces ISO6400
+near-step increment error by 0.134 DN16 [−0.205, −0.071]. It increases
+whole-core increment RMS by 0.083 DN16 [+0.065, +0.101] and repeated-noise
+variance by 17.52 DN16². Its whole-core scores are close to supervised-only.
+The response-matched test scales the same-draw fine adjustment to
+0.0205 of its original strength on 24 calibration photos. The other 24
+show slightly higher whole-core increment error from the independent
+teacher, +0.0050 DN16 [+0.0028, +0.0079], and similar response,
+−0.0007 percentage points [−0.0033, +0.0014].
+At ISO1600 the independent teacher also reduces near-step error
+versus same-draw, by 0.265 DN16, while increasing whole-core error
+by 0.075 DN16. This leaves little evidence of a useful independent-teacher
+advantage for the delivered single-frame correction.
+
+These are scoped weak-detail component results. The fixed 427-photo and
+measured-camera scores in the [PSNR history](performance-history.md)
+remain tied to their evaluated full-model checkpoints.
+
+### Independent-teacher native examples
+
+Each triplet is noisy Malvar, independent-teacher EMA composition
+and exact GT. The 160×160 ROI starts at `[48,48]` in the 256×256
+native query. All panels use identical coordinates and the same WB and matrix,
+with ISO6400 shot/read `0.00128/6.5536e-6`, ADC16 black 0.03,
+capture exposure 0.33, display exposure ×3.0303 and contrast ×2.
+
+![Clownfish, noisy, independent-teacher output and exact GT](images/weak-edge-distill-v1/endpoint/009-same-edge-iso6400-r0-role0-triplet.png)
+
+The largest near-step reduction versus the same-draw teacher retains the
+strong diagonal and the white band. Fine orange texture remains soft.
+Query origin `[100,258]`, BGGR. Esquilo, CC BY-SA 3.0.
+[Source photo](https://commons.wikimedia.org/wiki/File:Clownfisk.jpg) ·
+[All methods](images/weak-edge-distill-v1/endpoint/009-same-edge-iso6400-r0-role0-comparison.png).
+
+![Coffee-tree bark, noisy, independent-teacher output and exact GT](images/weak-edge-distill-v1/endpoint/022-same-edge-iso6400-r0-role0-triplet.png)
+
+The adverse near-step example retains broad bark markings and the diagonal
+edge. Granular bark remains indistinct. Query origin `[236,68]`, GRBG.
+Derek Ramsey, CC BY-SA 2.5.
+[Source photo](https://commons.wikimedia.org/wiki/File:Kentucky_Coffee-tree_Gymnocladus_dioicus_3264px.jpg) ·
+[All methods](images/weak-edge-distill-v1/endpoint/022-same-edge-iso6400-r0-role0-comparison.png) ·
+[Absent-detail control](images/weak-edge-distill-v1/endpoint/018-same-edge-iso6400-r0-role1-comparison.png).
+
+### Standing GFX100S comparisons
+
+All eight boards were inspected. The main DSCF3879/3880 comparisons use
+the fixed 160×160 crop at `[176,176]` inside each 512px query, ISO6400
+shot/read `0.00128/6.5536e-6`, and display exposure ×4. The sky stays
+smooth. Both crossing directions are visible in the coarse fence.
+The thinnest wires and leaf boundaries remain soft.
+[Sky](images/weak-edge-distill-v1/endpoint/main-overcast-sky-main-overcast-sky.png) ·
+[Building](images/weak-edge-distill-v1/endpoint/main-building-detail-main-building-detail.png) ·
+[Foliage](images/weak-edge-distill-v1/endpoint/main-foliage-main-foliage.png) ·
+[Chain link](images/weak-edge-distill-v1/endpoint/main-chain-link-fence-main-chain-link-fence.png).
+
+The cab DSCF3842/3835 crops use fixed 160×160 ROIs at `[206,229]`
+left and `[426,189]` right within the masked 768px sensor contexts,
+with display exposure ×16. The nominal profile uses the same shot/read
+pair as the main scene. The transferred DSCF3879 profile uses
+`0.0014635775921166604/1.0715704128646712e-6`. Subtle diagonals survive
+under both profiles, more visibly under the transferred profile. Neither
+teacher restores convincing new crossings, and background mottle persists.
+The ISO100 AHD and both camera JPEGs are qualitative references. Their
+capture and rendering differ from the ISO6400 input.
+[Left nominal](images/weak-edge-distill-v1/endpoint/mesh-nominal-fine-green-mesh-left.png) ·
+[Right nominal](images/weak-edge-distill-v1/endpoint/mesh-nominal-fine-green-mesh-right.png) ·
+[Left transferred](images/weak-edge-distill-v1/endpoint/mesh-profile3879-fine-green-mesh-left.png) ·
+[Right transferred](images/weak-edge-distill-v1/endpoint/mesh-profile3879-fine-green-mesh-right.png).

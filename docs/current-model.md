@@ -109,6 +109,11 @@ fine mesh and the tradeoff versus Corpus 100k remain.
 [Quiet-region smoothing plus the fine lift](paired-flat-companion.md)
 reduces exact-flat RMS by 0.164 DN16 with a small positive
 fine response. High-noise increment error remains mixed.
+[Weak-edge training and a measured-step gate](weak-edge-distill.md)
+find smaller near-step errors from local attenuation.
+The independent-exposure teacher reduces near-step error versus
+the same-draw teacher while increasing whole-core error.
+Both variants leave the fine cab crossings incomplete.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

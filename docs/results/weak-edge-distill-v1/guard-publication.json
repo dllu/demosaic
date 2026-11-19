@@ -1,0 +1,2622 @@
+{
+  "parent_and_correction": {
+    "V120": {
+      "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+      "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb",
+      "type": "base",
+      "step": 20000
+    },
+    "100k": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+      "type": "base",
+      "step": 100000
+    }
+  },
+  "correction_checkpoint": null,
+  "frozen_archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/weak-edge-distill-v1/guard-archive.tar.xz",
+    "sha256": "5a5e8f41ff343c1f63a64902b1e3f6e7d0ec3b1ab92738603e73e8dad37baf58"
+  },
+  "native": {
+    "analytic": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-detail-strength.json",
+      "sha256": "4b3ffcee8896bb70dda15a5ea5d9b34f04fbc82912b608579ce7d4ddc52398c5"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/render_guard.py",
+      "sha256": "5db1c34f1b33efe05ad78bd75bc309191b613741c9d20652e35d81f5c9f6a4f6"
+    },
+    "photo": [
+      {
+        "id": "009-same-edge-iso6400-r0-role0",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 3.0303030303030303,
+        "display_contrast": 2,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source_photo": {
+          "attribution": "Johan Fredriksson",
+          "author": "Esquilo",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/04/04515a5457360e19996c82ee3a38c049f058337d.npy",
+          "cache_sha256": "43d3b4a8a1b113205f84795911fe1ba3ba02fc644e6f8171891e341b8c522b78",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/04/51/04515a5457360e19996c82ee3a38c049f058337d.jpg",
+          "dtype": "uint16",
+          "height": 2400,
+          "id": "04515a5457360e19996c82ee3a38c049f058337d",
+          "license": "CC BY-SA 3.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Clownfisk.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Clownfisk.jpg",
+          "sha1": "04515a5457360e19996c82ee3a38c049f058337d",
+          "sha1_hex": "04515a5457360e19996c82ee3a38c049f058337d",
+          "shape": [
+            600,
+            800,
+            3
+          ],
+          "split": "val",
+          "title": "File:Clownfisk.jpg",
+          "width": 3200
+        },
+        "bbox_native": [
+          100,
+          258,
+          256,
+          256
+        ],
+        "CFA": "BGGR",
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "physical": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/physical/009-same-edge-iso6400.npz",
+          "sha256": "8320f3c200bd71afd32368699d79e6024e62a8adcd1d78a6e7d186bde111d9df"
+        },
+        "checkpoint": null,
+        "board": {
+          "image": {
+            "path": "docs/images/weak-edge-distill-v1/guard/009-same-edge-iso6400-r0-role0-comparison.png",
+            "sha256": "21e2edf76da623f597d9773dfe906a1a13564940840676b9d92d045e529a3ec3"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed two routes",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Measured-edge gate",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/images/weak-edge-distill-v1/guard/009-same-edge-iso6400-r0-role0-triplet.png",
+            "sha256": "2bf4bbdf1f60e2c9b2f0d2217d2ad7ac923e53e5c3cefd4005b2581578908b2c"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Measured-edge gate",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "viewed": "Orange texture and fine boundaries remain soft while the strong diagonal is coherent."
+      },
+      {
+        "id": "043-same-edge-iso6400-r0-role0",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 3.0303030303030303,
+        "display_contrast": 2,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source_photo": {
+          "attribution": null,
+          "author": "Solomon203",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/02/0205370aad781838d5e8c86725433e3617f97e9a.npy",
+          "cache_sha256": "24d07f3a00c6f4faaa0fcaf072e479d9ed12cf4290b289207ab52ed2469248d8",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/02/05/0205370aad781838d5e8c86725433e3617f97e9a.jpg",
+          "dtype": "uint16",
+          "height": 4000,
+          "id": "0205370aad781838d5e8c86725433e3617f97e9a",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/A-Pan_as_Sakura_Kinomoto_standing%2C_front_view_20230610a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:A-Pan_as_Sakura_Kinomoto_standing,_front_view_20230610a.jpg",
+          "sha1": "0205370aad781838d5e8c86725433e3617f97e9a",
+          "sha1_hex": "0205370aad781838d5e8c86725433e3617f97e9a",
+          "shape": [
+            1000,
+            750,
+            3
+          ],
+          "split": "val",
+          "title": "File:A-Pan as Sakura Kinomoto standing, front view 20230610a.jpg",
+          "width": 3000
+        },
+        "bbox_native": [
+          480,
+          718,
+          256,
+          256
+        ],
+        "CFA": "GBRG",
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "physical": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/physical/043-same-edge-iso6400.npz",
+          "sha256": "41888a9c6fb07a3723f98e9976fbdb8c4a9225925440015d613c1efa9f9cefe0"
+        },
+        "checkpoint": null,
+        "board": {
+          "image": {
+            "path": "docs/images/weak-edge-distill-v1/guard/043-same-edge-iso6400-r0-role0-comparison.png",
+            "sha256": "fc01cfcd8ed8a8ddd855818ec4d901f8aaa3eb87c87727d8e935fdd67b2cd158"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed two routes",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Measured-edge gate",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/images/weak-edge-distill-v1/guard/043-same-edge-iso6400-r0-role0-triplet.png",
+            "sha256": "5bbe7b51fb9ad8b30600b092e5c4455bcd84a69d61f24f4d1a842e779e3d6022"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Measured-edge gate",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "viewed": "The strong diagonal is retained. Irregular foliage remains soft, with little visible difference from the fixed lift."
+      },
+      {
+        "id": "000-same-edge-iso6400-r0-role1",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "display_exposure": 3.0303030303030303,
+        "display_contrast": 2,
+        "ADC_bits": 16,
+        "black_level": 0.03,
+        "source_photo": {
+          "attribution": null,
+          "author": "Aleksandr Abrosimov",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/22/22307bd8e69133cb133241332ca6c3875e5efc24.npy",
+          "cache_sha256": "f8a410508d9667a57ad54d4b6f65c8e6bc43ac523bafe82723c0c2b3caf9d308",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/22/30/22307bd8e69133cb133241332ca6c3875e5efc24.jpg",
+          "dtype": "uint16",
+          "height": 2830,
+          "id": "22307bd8e69133cb133241332ca6c3875e5efc24",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Russalka_%28monument%29._02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Russalka_(monument)._02.jpg",
+          "sha1": "22307bd8e69133cb133241332ca6c3875e5efc24",
+          "sha1_hex": "22307bd8e69133cb133241332ca6c3875e5efc24",
+          "shape": [
+            707,
+            1065,
+            3
+          ],
+          "split": "val",
+          "title": "File:Russalka (monument). 02.jpg",
+          "width": 4261
+        },
+        "bbox_native": [
+          696,
+          96,
+          256,
+          256
+        ],
+        "CFA": "RGGB",
+        "profile": {
+          "name": "iso6400",
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "exposure": 0.33
+        },
+        "physical": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/physical/000-same-edge-iso6400.npz",
+          "sha256": "227df2ec08dc10b70356d85c13b8811d93c25f9c57850aef517ea05ba9a98d07"
+        },
+        "checkpoint": null,
+        "board": {
+          "image": {
+            "path": "docs/images/weak-edge-distill-v1/guard/000-same-edge-iso6400-r0-role1-comparison.png",
+            "sha256": "cb2c0957011b5e0666c4d1f7d2a625f2bd0ae4e21c31e262f34e92cdc2e7408d"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Fixed two routes",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Measured-edge gate",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "triplet": {
+          "image": {
+            "path": "docs/images/weak-edge-distill-v1/guard/000-same-edge-iso6400-r0-role1-triplet.png",
+            "sha256": "315698bb862a999482d5bd8f6a21debaf0b94b597cbecadd971d293ffcc78964"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Measured-edge gate",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "viewed": "The absent-detail flower scene keeps the added step and smooth lower field without obvious added ripples."
+      }
+    ],
+    "camera": [
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "7d64cf388822b14ed013556b769df9e1d1d7e45a3a4c030d6e2998a816473130"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-overcast-sky-main-overcast-sky",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/main-overcast-sky.npz",
+          "sha256": "9f830bb4ea6b7c8b08ac320757a9b747169345d351eb44d86648921a85305a75"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "e81c6c963b6f5b66a89370fb0560a9d3623078b92414df21ba981a9a33eb5a1f"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-overcast-sky-RGB-f32.npy",
+          "sha256": "81ea6f37bbf950cf0b4c351f83b337b981e2c4f8242b6f8bdc69cc43fe9f0a9a"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 0.18980047082690357,
+            "changed_native_RGB_values": 76789
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 0.18980047082690357,
+            "changed_native_RGB_values": 76789
+          }
+        },
+        "viewed": "Smooth gray across the corrected output, with no visible colored grain or repetitive texture."
+      },
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/main-building-detail-main-building-detail.png",
+          "sha256": "d16c6b313678886d023527995cae7d29d61dfd8033d564544f883d95c602bc1f"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-building-detail-main-building-detail",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/main-building-detail.npz",
+          "sha256": "89afb8b8034fc23a0b730681f54d8c99c20e959fe893c41a513543d10b73e9a0"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-building-detail-main-building-detail.png",
+          "sha256": "63b075c1dcdd13111b6a1e446b0c1ffb11c8df44ebf842ff28eff108cb293461"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-building-detail-RGB-f32.npy",
+          "sha256": "3d33e65ad3e27d114f4a9557a1623179d23231b07e748c6a8632ff70fe977694"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 2.0210020776779425,
+            "changed_native_RGB_values": 61908
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 1.0536968723485867,
+            "changed_native_RGB_values": 61899
+          }
+        },
+        "viewed": "The bracket and larger wires are continuous. Small cables and fine horizontal structure stay soft."
+      },
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/main-foliage-main-foliage.png",
+          "sha256": "638f4d44c0c8c7e6b9f97acfbeaaf731c87b404bb7d4fe6b8b6ecd9dd545a7fc"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-foliage-main-foliage",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/main-foliage.npz",
+          "sha256": "3d56a2a4ca47fde8829064d419a78b3f9699eb8aac5488a231638a07c0269454"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-foliage-main-foliage.png",
+          "sha256": "099395ccafbeaa0683e3cbd66581ff53169ad8e6f051b46e64e216e3342af483"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-foliage-RGB-f32.npy",
+          "sha256": "107933ad4412b5456ddfb75652f85ab6b8162a180287833700b327c5bfbb7d80"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 1.541895498497537,
+            "changed_native_RGB_values": 68542
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 1.5234402424338107,
+            "changed_native_RGB_values": 68541
+          }
+        },
+        "viewed": "Broad leaf silhouettes remain, with missed fine leaf edges and no obvious new color pattern."
+      },
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "f6dd0650bc396b3ca03bac17a273c96439093911cd2932e551fe86952335a1a5"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/main-chain-link-fence.npz",
+          "sha256": "4a622b6a11e6b529e2da2b198141f1d903c5b291d9b9cf3e024c1d234e47c6fa"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "d0f08af6159f60fde07827ee5cde65284082d3f0850f97700d238899fc3cbb56"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/main-chain-link-fence-RGB-f32.npy",
+          "sha256": "3215efefed0599b23f9070b17e10429cd5b672aaa7afe8b6a309fa8feb45896b"
+        },
+        "ROI_xywh": [
+          176,
+          176,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "display_exposure": 4.0,
+        "reference_role": "DSCF3880 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 0.1933831277507882,
+            "changed_native_RGB_values": 76796
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 0.1933831277507882,
+            "changed_native_RGB_values": 76796
+          }
+        },
+        "viewed": "Both coarse directions and their crosses remain visible. The gate introduces no visible new crossing family."
+      },
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "e65f34bf306638c793f3c4e0b4da161d7ccf992aaad8b2caa370632bdecbc2d8"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/mesh-nominal.npz",
+          "sha256": "07be4816f254775bcbe50dbbd99a1e54a5e68113c07b1b5f4d8d81b458759048"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "637b8cc59897e274277f5d481f67438f15ce0dd4a261443753cdd5715ce1450e"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 2.9670722296676186,
+            "changed_native_RGB_values": 63207
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 2.9670308051441543,
+            "changed_native_RGB_values": 63206
+          }
+        },
+        "viewed": "The green upright survives, with very faint diagonals and incomplete mesh on both sides."
+      },
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "39ed6f2ebbc9767d606e804ea2773bb5bbe0b98c3d2f58e457a23d2f97c26410"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/mesh-nominal.npz",
+          "sha256": "07be4816f254775bcbe50dbbd99a1e54a5e68113c07b1b5f4d8d81b458759048"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "2048675c0c8f530e9bad68d4b7484a833ce659d454210f74df5827c824e9f019"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-nominal-RGB-f32.npy",
+          "sha256": "dee065f110ecb2f726e594ed91484f11c256db1ff16681cda5dc9c3bc972964d"
+        },
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 0.9888048197408339,
+            "changed_native_RGB_values": 58940
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 0.9888034850642047,
+            "changed_native_RGB_values": 58940
+          }
+        },
+        "viewed": "A slanted ridge and faint diagonals remain. Most fine crossings seen in the AHD and JPEG are absent."
+      },
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "42df7d51617a91b11f90df1eb19b0388c6ef0b862d5865bbcc81dccc5b07b337"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/mesh-profile3879.npz",
+          "sha256": "1e815c64da62f576e5dd09219c4c5eabbc12753db49232b546d3822196b4c443"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "882e0d085d78eb4ab5331e364670b74ba31afb2c031e57256d8453935b378a70"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "ROI_xywh": [
+          206,
+          229,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 2.777771111914773,
+            "changed_native_RGB_values": 63240
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 2.7774911710581,
+            "changed_native_RGB_values": 63240
+          }
+        },
+        "viewed": "A little diagonal contrast survives below the rail, with persistent background mottle and soft crossings."
+      },
+      {
+        "image": {
+          "path": "docs/images/weak-edge-distill-v1/guard/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "e127592363da822178f45b5226439f989ea6aef974a576d79c3e4252219fa3b6"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Fixed two routes",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Measured-edge gate",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          }
+        ],
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "output_arrays": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/weak-edge-distill-v1/guard-native/real-arrays/mesh-profile3879.npz",
+          "sha256": "1e815c64da62f576e5dd09219c4c5eabbc12753db49232b546d3822196b4c443"
+        },
+        "prediction_input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "parent_region": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/reviews/standing/render/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "6db292f0cb09e6bdcb8c31dbc80650b8a9a4d28e9262459dafeb773b48be2656"
+        },
+        "parent_linear_RGB": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/expanded-scene-12000-native-v1/parent/mesh-profile3879-RGB-f32.npy",
+          "sha256": "b870dbc6cae889b49d673604dbfb0d5a996f4865c0503d3c17b8ae5d37a305ea"
+        },
+        "ROI_xywh": [
+          426,
+          189,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "display_exposure": 16.0,
+        "reference_role": "DSCF3835 ISO100 independent AHD reference; not GT",
+        "camera_rgb_changes": {
+          "quiet-lift": {
+            "camera_RGB_RMS_DN16": 1.8359541732415683,
+            "changed_native_RGB_values": 51600
+          },
+          "measured-step": {
+            "camera_RGB_RMS_DN16": 1.8359517599944972,
+            "changed_native_RGB_values": 51600
+          }
+        },
+        "viewed": "More visible weak diagonal pattern than nominal, with no convincing new junctions versus the fixed lift."
+      }
+    ],
+    "actual_native_viewing_complete": true
+  },
+  "numeric": {
+    "iso1600": {
+      "natural": {
+        "measured-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              -0.10693573099380116,
+              -0.1436180583040576,
+              -0.07347929962588971
+            ],
+            "flat_DN16": [
+              -0.010906294727295202,
+              -0.018615779444749223,
+              -0.005052830490481877
+            ],
+            "present_DN16": [
+              -0.03160491491413975,
+              -0.04683242859169048,
+              -0.01900694066417295
+            ],
+            "near_increment_DN16": [
+              -0.25788283502407006,
+              -0.36575833495443266,
+              -0.16214071056444254
+            ],
+            "far_increment_DN16": [
+              -0.22583338329228284,
+              -0.3169563534017018,
+              -0.14617472650513522
+            ],
+            "near_absent_DN16": [
+              -0.05064934039480332,
+              -0.10396241375785242,
+              -0.006788907781803746
+            ],
+            "variance_DN16_squared": [
+              -17.493790952344234,
+              -23.81706247177964,
+              -11.941539523844016
+            ],
+            "shared_DN16_squared": [
+              2.2373569213029465,
+              1.168533592200568,
+              3.5659932366048315
+            ],
+            "response_pp": [
+              -0.055500974850897375,
+              -0.07453168030732499,
+              -0.04230543735443694
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.2427594253569265,
+              0.1301209087304671,
+              0.36173775073106684
+            ],
+            "flat_DN16": [
+              -0.07202617720338744,
+              -0.10513563868704949,
+              -0.04846498999712445
+            ],
+            "present_DN16": [
+              0.04317938559489729,
+              0.010704435942892549,
+              0.07895801593964191
+            ],
+            "near_increment_DN16": [
+              0.41868424648142755,
+              0.21354820764386098,
+              0.6751189861979432
+            ],
+            "far_increment_DN16": [
+              0.4131828044393806,
+              0.20743634884683532,
+              0.6432717486219985
+            ],
+            "near_absent_DN16": [
+              -0.07360857225534566,
+              -0.158922707338533,
+              -0.00012472417471136513
+            ],
+            "variance_DN16_squared": [
+              63.270167319834,
+              39.16184252670781,
+              90.53376754269705
+            ],
+            "shared_DN16_squared": [
+              -16.448859443626475,
+              -26.19107788588993,
+              -7.980818182417201
+            ],
+            "response_pp": [
+              0.3125547865963857,
+              0.22509900650724918,
+              0.39898792626245433
+            ]
+          },
+          "mean_gate_near": 0.8168388120830059,
+          "mean_gate_far": 0.8093326029678186,
+          "response_match": {
+            "scales": {
+              "measured-step": 1.0,
+              "quiet-lift": 0.876076150883706
+            },
+            "heldout24": {
+              "increment_DN16": [
+                -0.06149980612584397,
+                -0.09566273625784331,
+                -0.029189818489597407
+              ],
+              "flat_DN16": [
+                -0.0057215270587330875,
+                -0.011511770402950669,
+                -0.0014735032912442944
+              ],
+              "present_DN16": [
+                -0.014255241132781057,
+                -0.02666658311654825,
+                -0.003520942575838057
+              ],
+              "near_increment_DN16": [
+                -0.1273172069830076,
+                -0.2208563780681852,
+                -0.03325183357352747
+              ],
+              "far_increment_DN16": [
+                -0.11459472223770699,
+                -0.1878361928698058,
+                -0.04632243137222037
+              ],
+              "near_absent_DN16": [
+                -0.013814628750564939,
+                -0.04065408000086289,
+                0.012043173942647513
+              ],
+              "variance_DN16_squared": [
+                -8.55316139401105,
+                -14.92020949051336,
+                -2.6646412207490084
+              ],
+              "shared_DN16_squared": [
+                -0.32236160933051866,
+                -1.62902387013955,
+                1.2648464821287264
+              ],
+              "response_pp": [
+                -0.007135432863443339,
+                -0.03188828824972937,
+                0.011343264504927857
+              ]
+            }
+          }
+        },
+        "oracle-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "flat_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "present_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "near_increment_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "far_increment_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "near_absent_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "variance_DN16_squared": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "shared_DN16_squared": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "response_pp": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.3588211960480427,
+              0.21777681054770834,
+              0.5081398363929948
+            ],
+            "flat_DN16": [
+              -0.06391135522514052,
+              -0.09862415984551284,
+              -0.0377503516317084
+            ],
+            "present_DN16": [
+              0.07195943957734213,
+              0.030821731398692674,
+              0.11494400833197958
+            ],
+            "near_increment_DN16": [
+              0.6624524752750252,
+              0.3851193709556503,
+              0.9604432351856868
+            ],
+            "far_increment_DN16": [
+              0.6411289641904186,
+              0.37746008161756534,
+              0.9304768051847007
+            ],
+            "near_absent_DN16": [
+              -0.046308838259495,
+              -0.145501241439725,
+              0.048086093489865145
+            ],
+            "variance_DN16_squared": [
+              83.23520438649969,
+              52.706736802600076,
+              116.9614799815203
+            ],
+            "shared_DN16_squared": [
+              -18.36855007959434,
+              -28.891139555660423,
+              -8.734847685064993
+            ],
+            "response_pp": [
+              0.3649128208811968,
+              0.2745348434905689,
+              0.45255498390614995
+            ]
+          },
+          "mean_gate_near": 0.8168388120830059,
+          "mean_gate_far": 0.8093326029678186,
+          "response_match": {
+            "scales": {
+              "oracle-step": 1.0,
+              "quiet-lift": 1.0
+            },
+            "heldout24": {
+              "increment_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "flat_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "present_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "near_increment_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "far_increment_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "near_absent_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "variance_DN16_squared": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "shared_DN16_squared": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "response_pp": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          }
+        }
+      },
+      "same-edge": {
+        "measured-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              -0.15360075382930605,
+              -0.19358868082060385,
+              -0.11992833846773096
+            ],
+            "flat_DN16": [
+              -0.005849110949103957,
+              -0.008788515323660815,
+              -0.0034194367483883358
+            ],
+            "present_DN16": [
+              -0.047050906656889234,
+              -0.06255994727550605,
+              -0.03352405951177414
+            ],
+            "near_increment_DN16": [
+              -0.6234149064370306,
+              -0.785516469348474,
+              -0.48621204049662636
+            ],
+            "far_increment_DN16": [
+              -0.21206317110615505,
+              -0.330756882007007,
+              -0.1255364166704088
+            ],
+            "near_absent_DN16": [
+              -0.1941456311170601,
+              -0.29350097442689815,
+              -0.10703540995687921
+            ],
+            "variance_DN16_squared": [
+              -25.05318784146438,
+              -31.901298762032912,
+              -19.039237517097842
+            ],
+            "shared_DN16_squared": [
+              3.764363689334584,
+              2.3735255383408673,
+              5.208081926246953
+            ],
+            "response_pp": [
+              -0.08270764497490073,
+              -0.11116725546177528,
+              -0.060146727297788735
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.27657152988454214,
+              0.18894191986557538,
+              0.3766796604812513
+            ],
+            "flat_DN16": [
+              -0.06517024884990381,
+              -0.07532334578036601,
+              -0.05527819771776074
+            ],
+            "present_DN16": [
+              0.059325122614176586,
+              0.032506827071406105,
+              0.08961512460110187
+            ],
+            "near_increment_DN16": [
+              0.5896232723496739,
+              0.40532187061357955,
+              0.8090660456550782
+            ],
+            "far_increment_DN16": [
+              0.37872191399464455,
+              0.19071223769351894,
+              0.6011222483968061
+            ],
+            "near_absent_DN16": [
+              0.0030484560758243795,
+              -0.05649376741402523,
+              0.06073000077854634
+            ],
+            "variance_DN16_squared": [
+              71.97735751399445,
+              45.63465775456646,
+              100.89727980459394
+            ],
+            "shared_DN16_squared": [
+              -17.692378159221708,
+              -27.956025638743437,
+              -9.029188537959064
+            ],
+            "response_pp": [
+              0.3333977946294872,
+              0.25394827188171526,
+              0.39496799715254716
+            ]
+          },
+          "mean_gate_near": 0.6790221898506085,
+          "mean_gate_far": 0.8137238857646784,
+          "response_match": {
+            "scales": {
+              "measured-step": 1.0,
+              "quiet-lift": 0.8268772735958573
+            },
+            "heldout24": {
+              "increment_DN16": [
+                -0.060440855220504686,
+                -0.08717073226595386,
+                -0.03301381031803387
+              ],
+              "flat_DN16": [
+                -0.003713349120509598,
+                -0.0067925315969068565,
+                -0.0014940378318552487
+              ],
+              "present_DN16": [
+                -0.017801559890645358,
+                -0.031930311603337716,
+                -0.004307162559345633
+              ],
+              "near_increment_DN16": [
+                -0.2548739786526169,
+                -0.3756135792891881,
+                -0.14415137113100346
+              ],
+              "far_increment_DN16": [
+                -0.06102730110985962,
+                -0.12827297887382022,
+                -2.5249120912614663e-05
+              ],
+              "near_absent_DN16": [
+                -0.056586758019072946,
+                -0.10861465323294413,
+                -0.008320058561565655
+              ],
+              "variance_DN16_squared": [
+                -7.797927159817227,
+                -13.262247154222615,
+                -2.1268270817278467
+              ],
+              "shared_DN16_squared": [
+                0.10645666555217896,
+                -1.5696769856457595,
+                1.803004427716016
+              ],
+              "response_pp": [
+                -0.013994062409733938,
+                -0.04642819335905694,
+                0.014989134516011497
+              ]
+            }
+          }
+        },
+        "oracle-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              -0.1726720783259482,
+              -0.20195436352571597,
+              -0.14523523290565404
+            ],
+            "flat_DN16": [
+              -0.0022957826709824555,
+              -0.004370257581143844,
+              -0.0007832955105257203
+            ],
+            "present_DN16": [
+              -0.05099984445766229,
+              -0.06640317034103238,
+              -0.03694473262666041
+            ],
+            "near_increment_DN16": [
+              -0.9700558930695085,
+              -1.1404552008717128,
+              -0.8098751970570839
+            ],
+            "far_increment_DN16": [
+              -0.006416428679671349,
+              -0.008657411841208445,
+              -0.004341015568375168
+            ],
+            "near_absent_DN16": [
+              -0.2085260806454742,
+              -0.3219940769974523,
+              -0.10054463910101641
+            ],
+            "variance_DN16_squared": [
+              -32.49903492964312,
+              -38.91243155635423,
+              -26.601639723521156
+            ],
+            "shared_DN16_squared": [
+              6.3638875806058595,
+              3.8600761486517947,
+              9.533149667297291
+            ],
+            "response_pp": [
+              -0.12846404030217443,
+              -0.15034937238280904,
+              -0.10409496277959347
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.25526989563254227,
+              0.1702133276012339,
+              0.34889795474370666
+            ],
+            "flat_DN16": [
+              -0.061223103901506835,
+              -0.07281470626531411,
+              -0.0494723915705759
+            ],
+            "present_DN16": [
+              0.05133581834028115,
+              0.02259306995661008,
+              0.08220266681212607
+            ],
+            "near_increment_DN16": [
+              0.2122274116173338,
+              0.1549149672392682,
+              0.27223709802069235
+            ],
+            "far_increment_DN16": [
+              0.5716502919274817,
+              0.32614918440234764,
+              0.83868808174073
+            ],
+            "near_absent_DN16": [
+              -0.030345752424993783,
+              -0.06510409101054787,
+              0.001783714339292843
+            ],
+            "variance_DN16_squared": [
+              65.54244197840406,
+              40.6994227375907,
+              92.53493942834692
+            ],
+            "shared_DN16_squared": [
+              -16.382004613268464,
+              -25.529271630190177,
+              -8.652176105538047
+            ],
+            "response_pp": [
+              0.3036876063609407,
+              0.225353286101493,
+              0.36365281548306977
+            ]
+          },
+          "mean_gate_near": 0.6790221898506085,
+          "mean_gate_far": 0.8137238857646784,
+          "response_match": {
+            "scales": {
+              "oracle-step": 1.0,
+              "quiet-lift": 0.6869803367713047
+            },
+            "heldout24": {
+              "increment_DN16": [
+                -0.018046343920785562,
+                -0.03778832354131696,
+                0.003699253091441971
+              ],
+              "flat_DN16": [
+                0.002204371555064829,
+                0.0004347321437566683,
+                0.004215643252896977
+              ],
+              "present_DN16": [
+                -0.00825973834719155,
+                -0.01969090966336687,
+                0.0037462152407235503
+              ],
+              "near_increment_DN16": [
+                -0.4522945152947762,
+                -0.567183085298253,
+                -0.3431906900326439
+              ],
+              "far_increment_DN16": [
+                0.2332985162542778,
+                0.1385786854955046,
+                0.3395646770490882
+              ],
+              "near_absent_DN16": [
+                -0.05744287898036049,
+                -0.10670766361828829,
+                -0.011145339100265703
+              ],
+              "variance_DN16_squared": [
+                0.3906028453557819,
+                -4.274856484549242,
+                5.8806717414146945
+              ],
+              "shared_DN16_squared": [
+                -1.5488774301484345,
+                -3.0491950757879955,
+                -0.14784825382989603
+              ],
+              "response_pp": [
+                0.01506994877576674,
+                -0.0020269861359506983,
+                0.03403177150744602
+              ]
+            }
+          }
+        }
+      }
+    },
+    "iso6400": {
+      "natural": {
+        "measured-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              -0.0714798940140254,
+              -0.1110985779221513,
+              -0.03933075338582152
+            ],
+            "flat_DN16": [
+              -0.0012834099569636788,
+              -0.0022580929506009527,
+              -0.0005019756396177137
+            ],
+            "present_DN16": [
+              -0.026522418329090008,
+              -0.04498896146274333,
+              -0.011700231613788989
+            ],
+            "near_increment_DN16": [
+              -0.19578873153935375,
+              -0.33255722746098365,
+              -0.0873940765441878
+            ],
+            "far_increment_DN16": [
+              -0.15216066549322826,
+              -0.2716724400486075,
+              -0.06674801901192806
+            ],
+            "near_absent_DN16": [
+              -0.049017659415692104,
+              -0.0963083738679976,
+              -0.011513879627120988
+            ],
+            "variance_DN16_squared": [
+              -16.388591636113436,
+              -24.923998257117265,
+              -9.207528078020006
+            ],
+            "shared_DN16_squared": [
+              2.2257360921559655,
+              0.3910512811489036,
+              4.181988698911678
+            ],
+            "response_pp": [
+              -0.04499084545701203,
+              -0.06668934457204231,
+              -0.026441646583085017
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.14802331279116884,
+              0.014839274678275559,
+              0.2683688299054748
+            ],
+            "flat_DN16": [
+              -0.15241596768899915,
+              -0.2014873333848722,
+              -0.1174939235776855
+            ],
+            "present_DN16": [
+              0.03210794372627331,
+              -0.010534454902226965,
+              0.06854850231241683
+            ],
+            "near_increment_DN16": [
+              0.25655608491392884,
+              0.0738962614977101,
+              0.4418297549528691
+            ],
+            "far_increment_DN16": [
+              0.24666373166259106,
+              0.05403593937576825,
+              0.4553685955670472
+            ],
+            "near_absent_DN16": [
+              0.013465063878122463,
+              -0.045208569061212685,
+              0.07103599307292618
+            ],
+            "variance_DN16_squared": [
+              55.3347170436946,
+              29.59391032472379,
+              84.38168899656749
+            ],
+            "shared_DN16_squared": [
+              -6.058873457297647,
+              -12.066822555402418,
+              0.21240542312886349
+            ],
+            "response_pp": [
+              0.21088432347213562,
+              0.1306994755736304,
+              0.28429316427148277
+            ]
+          },
+          "mean_gate_near": 0.8569146071871122,
+          "mean_gate_far": 0.8616397107640902,
+          "response_match": {
+            "scales": {
+              "measured-step": 1.0,
+              "quiet-lift": 0.8074145964711771
+            },
+            "heldout24": {
+              "increment_DN16": [
+                -0.01941710398646516,
+                -0.04441263079950134,
+                0.0036657754046200146
+              ],
+              "flat_DN16": [
+                -0.0004039860185876913,
+                -0.0010483374744863208,
+                7.420029742324372e-05
+              ],
+              "present_DN16": [
+                -0.009613057630441327,
+                -0.02474004098582001,
+                0.0031327426148202776
+              ],
+              "near_increment_DN16": [
+                -0.0852111978432557,
+                -0.17667482564205225,
+                -0.01097339162130843
+              ],
+              "far_increment_DN16": [
+                -0.036980597191127416,
+                -0.09591863521163616,
+                0.02061776726260463
+              ],
+              "near_absent_DN16": [
+                -0.026258812205211868,
+                -0.0665258053519486,
+                0.0024721235275633364
+              ],
+              "variance_DN16_squared": [
+                -4.1084956682645695,
+                -12.011504084186274,
+                2.383377602265317
+              ],
+              "shared_DN16_squared": [
+                1.5995628593579643,
+                -0.2545058934481296,
+                3.8112729004195547
+              ],
+              "response_pp": [
+                -0.0056360659925349475,
+                -0.02308210461310531,
+                0.01294708600249279
+              ]
+            }
+          }
+        },
+        "oracle-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "flat_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "present_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "near_increment_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "far_increment_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "near_absent_DN16": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "variance_DN16_squared": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "shared_DN16_squared": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "response_pp": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.227504154785703,
+              0.06805519365689246,
+              0.38407894914887714
+            ],
+            "flat_DN16": [
+              -0.15131120050168317,
+              -0.1998002781821313,
+              -0.11581667438074426
+            ],
+            "present_DN16": [
+              0.06182153348775158,
+              0.006806492739707323,
+              0.11306600639747487
+            ],
+            "near_increment_DN16": [
+              0.4727455209869104,
+              0.1905547600186781,
+              0.7864464224676222
+            ],
+            "far_increment_DN16": [
+              0.4007003367442123,
+              0.15153904214623193,
+              0.6841447150861492
+            ],
+            "near_absent_DN16": [
+              0.07336198253414677,
+              -0.02423878721528647,
+              0.19139515458563822
+            ],
+            "variance_DN16_squared": [
+              75.77812102323037,
+              41.1859352894518,
+              118.05443247513146
+            ],
+            "shared_DN16_squared": [
+              -9.44694082793376,
+              -18.105629851581146,
+              -1.4211614199869917
+            ],
+            "response_pp": [
+              0.2681784812011397,
+              0.1659255268147986,
+              0.3719247957443233
+            ]
+          },
+          "mean_gate_near": 0.8569146071871122,
+          "mean_gate_far": 0.8616397107640902,
+          "response_match": {
+            "scales": {
+              "oracle-step": 1.0,
+              "quiet-lift": 1.0
+            },
+            "heldout24": {
+              "increment_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "flat_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "present_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "near_increment_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "far_increment_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "near_absent_DN16": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "variance_DN16_squared": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "shared_DN16_squared": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "response_pp": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          }
+        }
+      },
+      "same-edge": {
+        "measured-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              -0.09436120437996427,
+              -0.13590772013952448,
+              -0.061545527311002046
+            ],
+            "flat_DN16": [
+              -0.0004469553929481729,
+              -0.0007991356455839184,
+              -0.00015756305489577783
+            ],
+            "present_DN16": [
+              -0.02934741387611169,
+              -0.04655416388542421,
+              -0.01619323930469526
+            ],
+            "near_increment_DN16": [
+              -0.3763580283607039,
+              -0.5533968710305823,
+              -0.2380415904973329
+            ],
+            "far_increment_DN16": [
+              -0.10242284161315544,
+              -0.17556495473867084,
+              -0.046052545224451534
+            ],
+            "near_absent_DN16": [
+              -0.13904266453001726,
+              -0.21028176689983796,
+              -0.08057379557254378
+            ],
+            "variance_DN16_squared": [
+              -23.890789614281022,
+              -35.02407616961286,
+              -14.76228422300323
+            ],
+            "shared_DN16_squared": [
+              3.249070806169106,
+              1.4305020967982005,
+              5.438943383739342
+            ],
+            "response_pp": [
+              -0.03950960027729563,
+              -0.05948428262786949,
+              -0.022482326984416285
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.18300994494102843,
+              0.10987505465619349,
+              0.26931995696940947
+            ],
+            "flat_DN16": [
+              -0.16075412140053333,
+              -0.1926358126421053,
+              -0.13441301410774859
+            ],
+            "present_DN16": [
+              0.04425887462265088,
+              0.02663506238321621,
+              0.06328472456157068
+            ],
+            "near_increment_DN16": [
+              0.3613834677550205,
+              0.21943638969411608,
+              0.5302261486978744
+            ],
+            "far_increment_DN16": [
+              0.163798320387213,
+              0.047761197103339564,
+              0.31431634943793485
+            ],
+            "near_absent_DN16": [
+              0.05559652076659235,
+              0.020226910107555916,
+              0.09663117442666609
+            ],
+            "variance_DN16_squared": [
+              58.217775730381184,
+              32.02031048671699,
+              89.85666677454513
+            ],
+            "shared_DN16_squared": [
+              -7.67589292587112,
+              -15.526055155420787,
+              -2.2305159463432203
+            ],
+            "response_pp": [
+              0.14370493953371793,
+              0.08871457385801053,
+              0.19726565052952497
+            ]
+          },
+          "mean_gate_near": 0.692589092378815,
+          "mean_gate_far": 0.8708076402544975,
+          "response_match": {
+            "scales": {
+              "measured-step": 1.0,
+              "quiet-lift": 0.8326722075948404
+            },
+            "heldout24": {
+              "increment_DN16": [
+                -0.04566852908355553,
+                -0.07024067309854728,
+                -0.022562720124819035
+              ],
+              "flat_DN16": [
+                -9.23075701123599e-05,
+                -0.0004124169488154842,
+                0.00016448127725198126
+              ],
+              "present_DN16": [
+                -0.01226696068606096,
+                -0.024686812910327642,
+                -0.0016586655631735331
+              ],
+              "near_increment_DN16": [
+                -0.18521755654631486,
+                -0.30119790105379046,
+                -0.08789281730853292
+              ],
+              "far_increment_DN16": [
+                -0.042348218839903584,
+                -0.08964446582292679,
+                -0.004582504100033435
+              ],
+              "near_absent_DN16": [
+                -0.0587777894304334,
+                -0.10126363421179828,
+                -0.023199923315107448
+              ],
+              "variance_DN16_squared": [
+                -12.887186109746404,
+                -21.94255514835645,
+                -5.047239195065804
+              ],
+              "shared_DN16_squared": [
+                2.4846659229881616,
+                0.46140327486574767,
+                4.738256357822179
+              ],
+              "response_pp": [
+                -0.018589137094579666,
+                -0.04017031389520723,
+                0.007234879173258868
+              ]
+            }
+          }
+        },
+        "oracle-step_vs_quiet-lift": {
+          "all48_nominal_vs_fixed": {
+            "increment_DN16": [
+              -0.1050549416275035,
+              -0.13830102030185756,
+              -0.07797665918540848
+            ],
+            "flat_DN16": [
+              -0.00034293470917926006,
+              -0.0006687509478376788,
+              -9.629018674542701e-05
+            ],
+            "present_DN16": [
+              -0.03394265868304447,
+              -0.0463681573859143,
+              -0.024215857742279235
+            ],
+            "near_increment_DN16": [
+              -0.5527376584677636,
+              -0.7500629456674291,
+              -0.39445196637778157
+            ],
+            "far_increment_DN16": [
+              -0.002854123604063933,
+              -0.004590223005709052,
+              -0.001568633979064709
+            ],
+            "near_absent_DN16": [
+              -0.16029476614081659,
+              -0.24333164221289652,
+              -0.09215771998940135
+            ],
+            "variance_DN16_squared": [
+              -28.71277045884513,
+              -38.72333909142249,
+              -20.439456959483014
+            ],
+            "shared_DN16_squared": [
+              4.526898374634001,
+              2.729634475728512,
+              6.757660963816041
+            ],
+            "response_pp": [
+              -0.05065522912720637,
+              -0.0671198730710114,
+              -0.03546635360384435
+            ]
+          },
+          "heldout24_nominal_vs_100k": {
+            "increment_DN16": [
+              0.16945755788814942,
+              0.09827197828950066,
+              0.2595548486085471
+            ],
+            "flat_DN16": [
+              -0.1607426935291174,
+              -0.19212071620976684,
+              -0.13464616914339675
+            ],
+            "present_DN16": [
+              0.035071585626495295,
+              0.016082411046007876,
+              0.05784774514743765
+            ],
+            "near_increment_DN16": [
+              0.1587276838541444,
+              0.0918890279184492,
+              0.23799453231877724
+            ],
+            "far_increment_DN16": [
+              0.26974843446857616,
+              0.10581171607952998,
+              0.4746430906955316
+            ],
+            "near_absent_DN16": [
+              0.020709663322845035,
+              -0.0007084552334681407,
+              0.04552245963502104
+            ],
+            "variance_DN16_squared": [
+              53.43530790768276,
+              27.74320023458471,
+              84.13721012680325
+            ],
+            "shared_DN16_squared": [
+              -6.612094922900828,
+              -13.95564115362576,
+              -0.9999440196026805
+            ],
+            "response_pp": [
+              0.14129357357416025,
+              0.08358083115525833,
+              0.19273204779201458
+            ]
+          },
+          "mean_gate_near": 0.692589092378815,
+          "mean_gate_far": 0.8708076402544975,
+          "response_match": {
+            "scales": {
+              "oracle-step": 1.0,
+              "quiet-lift": 0.7031738621850935
+            },
+            "heldout24": {
+              "increment_DN16": [
+                -0.02022860958041406,
+                -0.03709602740935822,
+                -0.005572875765793039
+              ],
+              "flat_DN16": [
+                0.00013967357363039076,
+                -5.66278146071954e-06,
+                0.00029547995427166713
+              ],
+              "present_DN16": [
+                -0.010504386314995026,
+                -0.01642643378367104,
+                -0.005036868346054696
+              ],
+              "near_increment_DN16": [
+                -0.28505765746726447,
+                -0.4036881994808233,
+                -0.17695241892834354
+              ],
+              "far_increment_DN16": [
+                0.11096919500494447,
+                0.053257572706693755,
+                0.18350625627805037
+              ],
+              "near_absent_DN16": [
+                -0.06514607335048013,
+                -0.10135114173032765,
+                -0.03323030338476266
+              ],
+              "variance_DN16_squared": [
+                -5.746926019976239,
+                -9.766445961971845,
+                -2.1433439888867527
+              ],
+              "shared_DN16_squared": [
+                1.974907095272144,
+                0.8260936650162239,
+                3.2639035872979996
+              ],
+              "response_pp": [
+                0.004243359693005422,
+                -0.015929946850815557,
+                0.02532472451546599
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "seconds": 56.475816349033266,
+  "scope": "Inference-only gate on a frozen component. Identical quiet path kept for every detail strength. First 24 fitted, other 24 used for response-matched contrasts. Native GFX uses nominal gate strength."
+}
