@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Signed wire supervision](local-wire-response.md#standing-gfx100s-comparisons)
+  preserves the smooth sky and coherent coarse crossings. The full-band control
+  softens small leaves and fine transitions. Building bracing and cables remain soft.
 - [Repeat and gap losses](local-redraw-stability.md#standing-gfx100s-comparisons)
   leave the overcast sky smooth and the coarse crossings coherent. Fine
   bracing, cables and leaf edges remain soft across the three continuations.

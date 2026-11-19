@@ -11,6 +11,9 @@ from repeat alone and reduces total error in the gap. The measured
 weak-direction residue inside the gap moves by **+0.05 DN16** with
 an interval spanning zero. Fine cab crossings remain incomplete across all three arms.
 
+[Signed wire supervision](local-wire-response.md) follows up with a direct
+clean-phase objective and separate three-draw wire measurements.
+
 [Scope and measurements](results/local-redraw-stability-v1/publication.json) ·
 [Native provenance](images/local-redraw-stability-v1/manifest.json) ·
 [Prior mean-redraw study](local-redraw-average.md).

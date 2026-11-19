@@ -74,6 +74,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [Paired local continuation](local-paired-continuation.md) ·
 [Mean versus individual redraw loss](local-redraw-average.md) ·
 [Repeat and gap losses](local-redraw-stability.md) ·
+[Signed wire supervision](local-wire-response.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [paired fine luminance and flat support](paired-luminance-detail.md) ·
 [exact orientation averaging](paired-head-symmetry.md) ·

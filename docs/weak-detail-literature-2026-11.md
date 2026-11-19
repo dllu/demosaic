@@ -1011,6 +1011,14 @@ inside planted gaps restores a little wire response and lowers total
 gap error, with a small and uncertain change in weak-direction residue.
 [Repeat and gap losses](local-redraw-stability.md).
 
+On 16 held-out wire backgrounds, the exact clean increment accounts for
+93% of the repeat model's shared error and 0.11% of its draw-sensitive
+variance. An aligned signed loss gains 1.26 weak-response points over
+its matched repeat control across fresh draws. Flat and weak-direction
+gap error are nearly unchanged. Most of the added variance is outside
+the target, and the real fine cab crossings remain incomplete.
+[Signed wire supervision](local-wire-response.md).
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate
