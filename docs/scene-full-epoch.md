@@ -309,8 +309,8 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. The latest matched training coverage is 32,500 updates on 65,000
-photos and 260,000 queries per arm.
+pair. The latest matched training coverage is 34,000 updates on 68,000
+photos and 272,000 queries per arm.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
@@ -328,6 +328,9 @@ photos and 260,000 queries per arm.
 [31,500 paired audit](results/scene-full-epoch-v1/paired-prefix-031500.json) ·
 [32,000 paired audit](results/scene-full-epoch-v1/paired-prefix-032000.json) ·
 [32,500 paired audit](results/scene-full-epoch-v1/paired-prefix-032500.json) ·
+[33,000 paired audit](results/scene-full-epoch-v1/paired-prefix-033000.json) ·
+[33,500 paired audit](results/scene-full-epoch-v1/paired-prefix-033500.json) ·
+[34,000 paired audit](results/scene-full-epoch-v1/paired-prefix-034000.json) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
@@ -335,8 +338,8 @@ photos and 260,000 queries per arm.
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
 
-Local-only verifies 33,500 updates, 67,000 distinct photos and
-268,000 native queries on the 50k schedule.
+Local-only verifies 35,000 updates, 70,000 distinct photos and
+280,000 native queries on the 50k schedule.
 [25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
 [26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
 [26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json) ·
@@ -352,7 +355,8 @@ Local-only verifies 33,500 updates, 67,000 distinct photos and
 [32,000 local audit](results/scene-full-epoch-v1/local-032000-prefix.json) ·
 [32,500 local audit](results/scene-full-epoch-v1/local-032500-prefix.json) ·
 [33,000 local audit](results/scene-full-epoch-v1/local-033000-prefix.json) ·
-[33,500 local audit](results/scene-full-epoch-v1/local-033500-prefix.json).
+[33,500 local audit](results/scene-full-epoch-v1/local-033500-prefix.json) ·
+[35,000 local audit](results/scene-full-epoch-v1/local-035000-prefix.json).
 
 The verified matched 30k pair completes the 64-photo numerical evaluation,
 native exact-crop viewing and both standing GFX reviews. Its scoring driver

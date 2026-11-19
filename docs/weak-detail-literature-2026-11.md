@@ -524,6 +524,14 @@ ISO400 weak-band gap error by 1.176 DN16 over the 64-pixel fit while losing
 number of accepted local fits with little impact on gap error. The Python
 crop API reproduces the base fit on all tested synthetic and standing crops.
 
+[Joint geometry across disjoint Bayer windows](bayer-shared-phase.md)
+allows each window its own amplitude and phase. It loses 0.211 planted
+ISO6400 response points versus the fixed 64-pixel fit. With true geometry
+supplied, the same delivery gains 1.51 weak-response points on bent fields
+and slightly increases the weak-wave projection inside gaps. The central
+greens provide inadequate evidence for the weak bend. Both standing
+fence reviews retain their existing intersections.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

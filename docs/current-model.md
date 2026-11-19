@@ -198,6 +198,10 @@ adds some weak-family signal in true gaps. The lattice can look overly regular.
 The [crop API](usage.md#repeating-mesh-crops) reproduces the original fit.
 A [local amplitude check](bayer-amplitude-envelope.md) lowers ISO400
 weak-family gap error by 1.18 DN16 and produces little change at ISO6400.
+[Shared phase geometry](bayer-shared-phase.md) shows a small benefit from
+the true bend on constructed wires. Estimating it from the center Bayer
+windows weakens planted ISO6400 response and leaves the fine cab crossings
+incomplete. Keep the fixed 64-pixel fit for this crop path.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

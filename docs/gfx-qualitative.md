@@ -18,6 +18,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [64-pixel Bayer carrier fitting](bayer-carrier-scale.md#standing-gfx100s-comparisons)
   retains both directions of the coarse fence. Sky, building and foliage
   crops reproduce the distant gate pixel for pixel.
+- [Shared Bayer phase geometry](bayer-shared-phase.md#standing-gfx100s-comparisons)
+  finds support for small spacing shifts in the coarse fence. Its
+  intersections stay coherent. Sky, building and foliage match the fixed fit.
 - [Local amplitude envelopes](bayer-amplitude-envelope.md#standing-gfx100s-comparisons)
   preserve the visible coarse weave. Checked green and all-color fits
   reproduce the sky, building and foliage at display precision.
