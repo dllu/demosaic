@@ -545,6 +545,13 @@ Splitting reduces SNR, so compare detection power with full-data methods rather
 than assuming it will improve final images. Correlated row/read noise requires
 appropriate blocks/covariance and may invalidate simple independence.
 
+The [reserved Bayer replay](query-bayer-reserve.md) uses separate
+quarters for nomination and conditional testing, then fits the remaining
+two quarters. It automatically makes both directions from the standing
+right cab clearer and leaves the sky unchanged. Fresh planted weak-signal
+tests show lower gap leakage and slightly lower recovery than the exterior
+full fit. The frozen neural parent still sees every sample.
+
 Calibrate the complete selection-and-validation procedure on fresh exact flats
 and edge-only scenes, including the search over all candidates. Measure false
 activation per patch/frame, not just per chosen coefficient. Formal risk control

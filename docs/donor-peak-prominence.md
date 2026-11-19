@@ -141,7 +141,9 @@ output changes the cab crops by 1.08–1.84 camera-linear RGB DN16 and
 leaves the crossings incomplete. In the left crop candidate ranking remains
 a limitation. In the right crop the tested exterior tiles supply
 insufficient evidence. The [replay with locally measured frequencies](green-gap-validation.md#standing-gfx100s-comparisons)
-still shows more of the right cab lattice.
+still shows more of the right cab lattice. The [reserved Bayer follow-up](query-bayer-reserve.md)
+finds and delivers both right-cab directions automatically on separate
+sample groups.
 
 | Cab conditioning | Left | Right |
 | --- | --- | --- |

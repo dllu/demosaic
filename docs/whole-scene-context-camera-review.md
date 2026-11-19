@@ -141,6 +141,9 @@ GFX reviews provide different context/detail checks.
 V120/V131 remain the last completed three-panel primary evaluations. The new
 camera results are source-bound here; the PSNR history waits for the missing
 full427 component rather than substituting a development/partial-photo score.
+After a second RAM-floor stop, the fixed CPU collector verified 3,040
+of 3,162 canonical cases and resumed at the first missing photo batch.
+[Second recovery receipt](results/primary-memory-resume-20261118-v1/second-memory-recovery.json).
 The [larger-corpus model](full-corpus-scaling.md) is still training and has no
 endpoint quality result yet. Its repaired step7,000 checkpoint is a validated
 training/IO milestone, not a model quality promotion.

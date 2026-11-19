@@ -53,4 +53,6 @@ display settings are bound in the viewing record. [Native viewing and provenance
 
 The matched standing GFX review includes fine cab mesh, coarse fence,
 foliage, building and overcast sky. The [full427 photo panel](performance-history.md)
-is still collecting for both scene endpoints. [Standing GFX review](expanded-scene-spatial12k.md#matched-development-and-standing-gfx-review).
+resumed from 1,026 of 3,162 checked canonical cases after a second
+RAM-floor stop. [Second recovery receipt](results/primary-memory-resume-20261118-v1/second-memory-recovery.json).
+[Standing GFX review](expanded-scene-spatial12k.md#matched-development-and-standing-gfx-review).

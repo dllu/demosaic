@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Reserved Bayer query search](query-bayer-reserve.md#standing-gfx100s-comparisons)
+  returns the same sky and foliage as Corpus 100k. It retains both coarse
+  fence directions. The thinnest building cables remain soft.
 - [Narrow exterior RAW peaks](donor-peak-prominence.md#standing-gfx100s-comparisons)
   leave the sky pixel-identical and retain both coarse-fence directions.
   Building corrections are smaller and fine cables and foliage stay soft.

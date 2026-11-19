@@ -123,6 +123,11 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Reserved Bayer query search](query-bayer-reserve.md) finds two fine
+directions automatically on the right cab and preserves the sky and
+standing left pair. The right lattice is more visible, with soft and
+uneven intersections. Fresh exact-target tests show less gap leakage
+and a small average loss of weak response versus exterior selection.
 [Narrow peaks in exterior RAW](donor-peak-prominence.md) find planted
 frequencies more often and retain a weak-detail gain with a joint
 calibration limit on flat texture and gap changes. Both standing GFX

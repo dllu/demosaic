@@ -118,6 +118,13 @@ state. The last verified matched pair remains at update 2,500.
 [Recovery controller](../scripts/resume_scene_full_epoch.py) ·
 [First durable segment and original worker identity](results/scene-full-epoch-v1/segmented-recovery.json) ·
 [Second failure and durable restart evidence](results/scene-full-epoch-v1/segmented-recovery.tar.xz).
+
+The local arm subsequently verified update 4,500, covering 9,000 distinct
+photos and 36,000 native queries across its durable prefix. A third RAM-floor
+stop came after update 4,939. The controller kept update 4,500 and queued the
+last 500-update segment for automatic retry under the original limits.
+The matched and reviewed milestones remain unchanged.
+[Automatic retry and local prefix audit](results/scene-full-epoch-v1/automatic-memory-recovery-005000.json).
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 
