@@ -54,3 +54,65 @@ teacher observations, finite gradients and frozen upstream
 weights. Training is active.
 [Frozen training and panel receipts](results/weak-edge-distill-v1/qualification.json) ·
 [Source and input archive](results/weak-edge-distill-v1/qualification.tar.xz).
+
+## Fixed-policy transfer to the weak-edge panel
+
+The completed fixed-policy replay uses the original paired
+EMA `02f8d5e6664bd580bafe2abeb3b8584b070b60bfadfefaff587cadd8bd643d7f`
+over Corpus 100k EMA
+`87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760`.
+It compares the previous quiet and uniform-detail policy at
+its original strength on all 48 photos. The four conditions
+each have two independent repetitions. Differences below
+are relative to the same Corpus 100k parent.
+
+| Fixed two-route condition | Aligned response (percentage points) | Increment RMS (DN16) | Exact-flat RMS (DN16) | Near-region increment RMS (DN16) | Near-region absent-detail RMS (DN16) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ISO1600 photographic base | +0.418 | +0.335 | −0.058 | +0.660 | −0.023 |
+| ISO1600 shared step | +0.436 | +0.413 | −0.062 | +1.192 | +0.184 |
+| ISO6400 photographic base | +0.218 | +0.198 | −0.158 | +0.404 | +0.037 |
+| ISO6400 shared step | +0.178 | +0.248 | −0.200 | +0.695 | +0.179 |
+
+Adding the step increases the correction's ISO6400 near-region
+increment penalty by 0.291 DN16 [0.180, 0.419] and its
+absent-detail penalty by 0.141 DN16 [0.079, 0.215]. The
+far-region increment penalty falls by 0.130 DN16. The
+measured increase concentrates around the added step.
+The quiet-only path changes
+near-step error by less than rounding precision at both
+priors. It lowers ISO6400 shared-step flat RMS by 0.201 DN16
+and whole-core increment RMS by 0.004 DN16.
+[Scores, intervals and viewing evidence](results/weak-edge-distill-v1/fixed-publication.json) ·
+[Source-level fixed replay](results/weak-edge-distill-v1/fixed-archive.tar.xz).
+
+### Fixed-policy native examples
+
+The triplets show noisy Malvar, the fixed two-route policy
+and the exact target for ISO6400 redraw zero. Each uses a
+native 160×160 crop at `[48,48,160,160]` inside its 256×256
+query, with shot/read `0.00128/6.5536e-6`, ADC16 black
+level 0.03, capture exposure 0.33, display exposure ×3.0303
+and contrast ×2.
+
+![Brooklyn, noisy, fixed two-route output and exact GT](images/weak-edge-distill-v1/fixed/002-same-edge-iso6400-r0-role0-triplet.png)
+
+The largest measured near-edge improvement keeps the
+strong added diagonal coherent. Fine cloud and facade
+texture stays soft. Query origin `[246,258]`, GRBG.
+King of Hearts, CC BY-SA 4.0.
+[Source photo](https://commons.wikimedia.org/wiki/File:Downtown_Brooklyn_New_York_August_2013.jpg) ·
+[Comparison](images/weak-edge-distill-v1/fixed/002-same-edge-iso6400-r0-role0-comparison.png).
+
+![Clownfish, noisy, fixed two-route output and exact GT](images/weak-edge-distill-v1/fixed/009-same-edge-iso6400-r0-role0-triplet.png)
+
+The largest measured near-edge regression preserves the
+strong diagonal and coarse markings. Fine orange texture
+and the edges of the white band remain soft. Query origin
+`[100,258]`, BGGR. Esquilo, CC BY-SA 3.0.
+[Source photo](https://commons.wikimedia.org/wiki/File:Clownfisk.jpg) ·
+[Comparison](images/weak-edge-distill-v1/fixed/009-same-edge-iso6400-r0-role0-comparison.png) ·
+[Matched absent-detail comparison](images/weak-edge-distill-v1/fixed/009-same-edge-iso6400-r0-role1-comparison.png).
+
+The earlier [standing GFX boards](paired-flat-companion.md#standing-gfx100s-comparisons)
+cover the originating quiet-region composition. The 48-photo
+transfer uses exact synthetic targets.

@@ -108,3 +108,8 @@ incomplete small crossings and background mottle under both
 noise profiles. The numeric observations and boards are from
 frozen weights and this scoped ISO6400 evaluation.
 [Fixed PSNR history](performance-history.md).
+
+The [48-photo weak-edge transfer](weak-edge-distill.md#fixed-policy-transfer-to-the-weak-edge-panel)
+confirms the flat-region error reduction. At ISO6400 its
+positive response is accompanied by higher increment error,
+especially close to the shared strong step.
