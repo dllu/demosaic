@@ -1,9 +1,18 @@
 """Protect the paired-reduction distinction and single-draw observation replay."""
 
+import random
+
 import numpy as np
 import pytest
 import torch
-from train_local_paired_continuation import CORE, PATCH, PairedBands, gap_projection, observations
+from train_local_paired_continuation import (
+    CORE,
+    PATCH,
+    PairedBands,
+    gap_projection,
+    observations,
+    wire_pair,
+)
 
 from demosaic.experiments.artifacts import reference
 
@@ -134,3 +143,38 @@ def test_second_draw_keeps_clean_pair_and_original_observations(tmp_path, law):
         assert torch.equal(double[key][:2], double[key][2:4])
     assert not torch.equal(double["packed"][:2], double["packed"][2:4])
     assert len(set(record["seeds"].values())) == 8
+
+
+def test_continuing_wire_supervision_respects_true_double_gaps_and_support():
+    bands, _, batch = _paired_sinusoid()
+    photo = torch.full((3, PATCH, PATCH), 0.2)
+    present, absent, wire = wire_pair(photo, random.Random(91), strong_continues=True)
+    double, double_absent, meta = wire_pair(photo, random.Random(91), strong_continues=False)
+    assert not meta["strong_continues"]
+    projection = gap_projection(wire, continuing=True)
+    assert torch.equal(projection, gap_projection(meta, continuing=True))
+    keep = projection.reshape(96, 96) != 0
+    inner = (..., CORE, CORE)
+    assert torch.equal(present[inner][:, keep], absent[inner][:, keep])
+    assert torch.equal(double[inner][:, keep], double_absent[inner][:, keep])
+    torch.testing.assert_close(double[inner][:, keep], torch.full_like(double[inner][:, keep], 0.2))
+    clean = torch.stack((present, absent, present, absent))
+    blank = torch.stack((double, double_absent, double, double_absent))
+    batch["sensor_target"] = clean
+    assert bands.continuing_wire_loss(clean, batch, projection).item() == 0
+    missing = bands.continuing_wire_loss(blank.requires_grad_(), batch, projection)
+    assert missing.item() > 1e-4
+    (gradient,) = torch.autograd.grad(missing, blank)
+    assert gradient[..., CORE, CORE][..., ~keep].count_nonzero() == 0
+    assert gradient[..., CORE, CORE][..., keep].count_nonzero() > 0
+    assert torch.equal(gradient[0], gradient[3])
+    batch["sensor_target"] = blank.detach()
+    torch.testing.assert_close(bands.continuing_wire_loss(clean, batch, projection), missing)
+
+    # Clipped pixels outside the tapered footprint keep the supervision valid.
+    outside = (~keep).nonzero()[0] + CORE.start
+    batch["sensor_target"][:, :, outside[0], outside[1]] = 1
+    assert bands.continuing_wire_loss(clean, batch, projection).item() > 1e-4
+    inside = keep.nonzero()[0] + CORE.start
+    batch["sensor_target"][:, :, inside[0], inside[1]] = 1
+    assert bands.continuing_wire_loss(clean, batch, projection).item() == 0

@@ -37,6 +37,7 @@ from demosaic.scene_training_data import _attenuate_local_contrast, scene_seed
 SEED = 202611191117
 STABILITY_SEED = 202611191231
 WIRE_RESPONSE_SEED = 202611191309
+CONTINUING_WIRE_SEED = 202611191401
 PATCH = 256
 BOX = (0, 0, PATCH, PATCH)
 CORE = slice(80, 176)
@@ -44,6 +45,7 @@ FORWARD_ARGS = ("packed", "variance", "colors", "wb", "matrix")
 MODES = ("absolute", "paired")
 STABILITY_MODES = ("mean", "repeat", "repeat-gap")
 WIRE_RESPONSE_MODES = ("repeat", "wire-mean", "wire-aligned")
+CONTINUING_WIRE_MODES = ("wire-aligned", "strong-gap")
 PROFILES = {"ISO400": (8e-5, 2.56e-8), "ISO6400": (0.00128, 6.5536e-6)}
 
 
@@ -170,7 +172,19 @@ def prepare_redraw(root, prior):
     )
 
 
-def prepare_objective_trial(root, completed_path, scene_path, *, wire_response):
+def prepare_objective_trial(root, completed_path, scene_path, *, trial):
+    continuing = trial == "continuing-wire"
+    wire_response = trial != "stability"
+    comparison = None
+    if continuing:
+        comparison = reference(completed_path)
+        compared = read_json(checked(comparison))
+        matched_plan = read_json(checked(compared["plan"]))
+        assert tuple(matched_plan["mode_weights"]) == WIRE_RESPONSE_MODES
+        assert not compared["qualification"] and compared["DINO_unchanged"]
+        assert compared["updates_per_arm"] == matched_plan["steps_per_arm"]
+        assert compared["parent"] == matched_plan["parent"]
+        completed_path = checked(matched_plan["parent_completion"])
     completed = read_json(completed_path)
     previous = read_json(checked(completed["plan"]))
     scene = read_json(scene_path)
@@ -194,6 +208,9 @@ def prepare_objective_trial(root, completed_path, scene_path, *, wire_response):
         earlier = read_json(checked(previous["parent_completion"]))
         assert earlier["checkpoints"]["mean"] == previous["parent"]
         ancestors.append(read_json(checked(earlier["plan"])))
+    if continuing:
+        assert matched_plan["parent"] == parent
+        ancestors.append(matched_plan)
     excluded = {
         case["source"]["id"]
         for plan in ancestors
@@ -207,7 +224,11 @@ def prepare_objective_trial(root, completed_path, scene_path, *, wire_response):
     ]
     assert len(rows) == 90692 and all(row["split"] == "train" for row in rows)
     eligible = [row for row in rows if row["id"] not in excluded]
-    seed = WIRE_RESPONSE_SEED if wire_response else STABILITY_SEED
+    seed = {
+        "stability": STABILITY_SEED,
+        "wire-response": WIRE_RESPONSE_SEED,
+        "continuing-wire": CONTINUING_WIRE_SEED,
+    }[trial]
     rng = random.Random(seed)
     cells = list(product(("natural", "wire"), PROFILES, PATTERNS, ("coupled", "independent")))
     cases = cells * 10
@@ -222,13 +243,23 @@ def prepare_objective_trial(root, completed_path, scene_path, *, wire_response):
         (schedule, sources[: len(cases)], cases),
         (qualification, sources[len(cases) :], qualification_cases),
     ):
-        write_json(
-            path,
-            [
-                {"source": row, "kind": cell[0], "iso": cell[1], "pattern": cell[2], "law": cell[3]}
-                for row, cell in zip(selected, recipes, strict=True)
-            ],
-        )
+        visits = dict.fromkeys(cells, 0)
+        records = []
+        for row, cell in zip(selected, recipes, strict=True):
+            record = {
+                "source": row,
+                "kind": cell[0],
+                "iso": cell[1],
+                "pattern": cell[2],
+                "law": cell[3],
+            }
+            if continuing and cell[0] == "wire":
+                record["strong_continues"] = (
+                    visits[cell] % 5 != 0 if path == schedule else len(records) % 2 == 0
+                )
+                visits[cell] += 1
+            records.append(record)
+        write_json(path, records)
     objective = {
         "mode_weights": dict.fromkeys(STABILITY_MODES, 0.8),
         "repeat_weight": 0.5,
@@ -249,6 +280,18 @@ def prepare_objective_trial(root, completed_path, scene_path, *, wire_response):
             "All three start from the repeat EMA and use the same fresh source schedule. "
             "The extra losses use no inference inputs or operators.",
         }
+    if continuing:
+        objective |= {
+            "mode_weights": dict.fromkeys(CONTINUING_WIRE_MODES, 0.8),
+            "strong_gap_weight": 1.6,
+            "response_weight": matched_plan["response_weight"],
+            "repeat_weight": matched_plan["repeat_weight"],
+            "comparison_completion": comparison,
+            "scope": "Both arms retain the aligned weak response objective and the independent "
+            "repeat penalty. The strong-gap arm adds a signed absolute error on the strongest "
+            "wire's true shape within the weak gap. Both arms see continuing strong wires in "
+            "80% of the wire groups and clean double gaps in the others. Single-frame inference.",
+        }
     write_json(
         root / "plan.json",
         previous
@@ -259,6 +302,7 @@ def prepare_objective_trial(root, completed_path, scene_path, *, wire_response):
                 parent,
                 reference(scene_path),
                 *previous["inputs"],
+                *([comparison, compared["plan"], *matched_plan["inputs"]] if continuing else []),
                 reference(schedule),
                 reference(qualification),
             ],
@@ -291,8 +335,8 @@ def clean_crop(row, rng):
     return patch, {"crop_xywh": [x, y, PATCH, PATCH], "D4": [turns, mirror]}
 
 
-def wire_pair(photo, rng):
-    """Keep one continuous direction and a natural background in both members."""
+def wire_pair(photo, rng, *, strong_continues=None):
+    """Place a faint interrupted direction over a common strong wire and background."""
     axis = torch.arange(PATCH) - (PATCH - 1) / 2
     y, x = torch.meshgrid(axis, axis, indexing="ij")
     angle = rng.uniform(0, math.tau)
@@ -307,8 +351,6 @@ def wire_pair(photo, rng):
         return torch.exp(-0.5 * ((u - u.round()) / width).square()) - math.sqrt(math.tau) * width
 
     strong, weak = (lines(*args) for args in zip(angles, periods, widths, phases, strict=True))
-    # Natural texture and the strong direction persist through the interruption.
-    absence = 0.05 + 0.75 * photo + strengths[0] * strong
     center = (rng.uniform(-16, 16), rng.uniform(-16, 16))
     gap_axes = (rng.uniform(9, 28), rng.uniform(12, 32))
     gap_angle = rng.uniform(0, math.tau)
@@ -316,6 +358,9 @@ def wire_pair(photo, rng):
     c, s = math.cos(gap_angle), math.sin(gap_angle)
     radius = torch.hypot((c * dx + s * dy) / gap_axes[0], (-s * dx + c * dy) / gap_axes[1])
     gap = ((radius - 1) * 2.5).clamp(0, 1)
+    absence = (
+        0.05 + 0.75 * photo + strengths[0] * (strong * gap if strong_continues is False else strong)
+    )
     border = ((105 - torch.maximum(x.abs(), y.abs())) / 28).clamp(0, 1)
     tint = torch.tensor([rng.uniform(0.4, 1.1), 1.0, rng.uniform(0.4, 1.1)])[:, None, None]
     addition = strengths[1] * weak * tint * gap * border
@@ -323,7 +368,8 @@ def wire_pair(photo, rng):
     return (
         absence + addition,
         absence,
-        {
+        ({"strong_continues": strong_continues} if strong_continues is not None else {})
+        | {
             "angles": angles,
             "periods": periods,
             "widths": widths,
@@ -350,7 +396,9 @@ def observations(case, index, *, pair_draws=1, seed=SEED):
         absent = _attenuate_local_contrast(crop, BOX, 0.0)
         geometry["contrast"] = contrast
     else:
-        present, absent, geometry["wire"] = wire_pair(crop, rng)
+        present, absent, geometry["wire"] = wire_pair(
+            crop, rng, strong_continues=case.get("strong_continues")
+        )
     flat = _attenuate_local_contrast(absent, BOX, 0.0, flat_core=True)
     assert torch.equal(flat[:, CORE, CORE], flat[:, 80:81, 80:81].expand(3, 96, 96))
 
@@ -495,10 +543,22 @@ class PairedBands:
         valid = ((clean >= 0) & (clean < 0.98)).all()
         return ((response.square().sum(1) + 1e-8).sqrt() - 1e-4).mean() * valid
 
+    def continuing_wire_loss(self, prediction, batch, projection):
+        """Signed absolute gap error averaged over all four observations of the target."""
+        clean = batch["sensor_target"][:4, :, CORE, CORE].flatten(2)
+        residual = prediction[:4, :, CORE, CORE].float().flatten(2) - clean
+        weights = (self.luminance @ batch["matrix"][0]) * batch["wb"][0]
+        aligned = ((residual @ projection) * weights).sum(1).mean()
+        valid = ((((clean >= 0) & (clean < 0.98)).all(dim=(0, 1))) | (projection == 0)).all()
+        return ((aligned.square() + 1e-8).sqrt() - 1e-4) * valid
 
-def gap_projection(wire):
-    """Unit-energy weak quadratures with compact support and strong-wire rejection."""
-    axis = torch.arange(CORE.start, CORE.stop) - (PATCH - 1) / 2
+
+def gap_projection(wire, *, continuing=False):
+    """Localized weak quadratures or the signed continuing-wire shape."""
+    axis = (
+        torch.arange(CORE.start, CORE.stop, dtype=torch.float64 if continuing else None)
+        - (PATCH - 1) / 2
+    )
     y, x = (coords.flatten() for coords in torch.meshgrid(axis, axis, indexing="ij"))
     dx, dy = x - wire["gap_center"][0], y - wire["gap_center"][1]
     c, s = math.cos(wire["gap_angle"]), math.sin(wire["gap_angle"])
@@ -512,9 +572,19 @@ def gap_projection(wire):
         )
     )
     nuisance = [torch.ones_like(x), x / 32, y / 32]
+    rejected = weak if continuing else strong
     for harmonic in (1, 2, 3):
-        nuisance.extend([(strong * harmonic).cos(), (strong * harmonic).sin()])
+        nuisance.extend([(rejected * harmonic).cos(), (rejected * harmonic).sin()])
     basis, _ = torch.linalg.qr(taper * torch.stack(nuisance, dim=1))
+    if continuing:
+        cycles = strong / math.tau
+        width = wire["widths"][0]
+        pulse = torch.exp(-0.5 * ((cycles - cycles.round()) / width).square())
+        target = taper[:, 0] * (pulse - math.sqrt(math.tau) * width)
+        direction = target - basis @ (basis.T @ target)
+        return (
+            direction * taper[:, 0] / (direction.norm().clamp_min(1e-12) * taper.norm())
+        ).float()
     target = taper * torch.stack((weak.cos(), weak.sin()), dim=1)
     direction, _ = torch.linalg.qr(target - basis @ (basis.T @ target))
     return direction * taper / taper.norm()
@@ -532,13 +602,15 @@ def train(plan_path, output, *, qualification):
     pair_draws = plan.get("pair_draws", 1)
     modes = tuple(plan["mode_weights"])
     stability = modes == STABILITY_MODES
-    response = modes == WIRE_RESPONSE_MODES
+    continuing = modes == CONTINUING_WIRE_MODES
+    response = modes == WIRE_RESPONSE_MODES or continuing
     matched = stability or response
     if (pair_draws, modes) not in (
         (1, MODES),
         (2, ("individual", "mean")),
         (2, STABILITY_MODES),
         (2, WIRE_RESPONSE_MODES),
+        (2, CONTINUING_WIRE_MODES),
     ):
         raise ValueError("Unexpected paired training mode or draw count")
     models, optimizers, averages = {}, {}, {}
@@ -591,6 +663,11 @@ def train(plan_path, output, *, qualification):
                 batch[key] = batch[key].contiguous(memory_format=torch.channels_last)
             wire = about["geometry"].get("wire")
             gap = gap_projection(wire).cuda() if stability and wire is not None else None
+            strong_gap = (
+                gap_projection(wire, continuing=True).cuda()
+                if continuing and wire is not None
+                else None
+            )
             data_seconds += time.monotonic() - mark
             warmup = policy["warmup"]
             progress = max(0, step - warmup) / (plan["steps_per_arm"] - warmup)
@@ -635,8 +712,12 @@ def train(plan_path, output, *, qualification):
                 if response and wire is not None and mode != "repeat":
                     loss += (
                         plan["response_weight"]
-                        * redraw["aligned" if mode == "wire-aligned" else "mean"]
+                        * redraw["mean" if mode == "wire-mean" else "aligned"]
                     )
+                if strong_gap is not None:
+                    redraw["strong_gap"] = bands.continuing_wire_loss(prediction, batch, strong_gap)
+                    if mode == "strong-gap":
+                        loss += plan["strong_gap_weight"] * redraw["strong_gap"]
                 if not torch.isfinite(loss):
                     raise FloatingPointError(f"Nonfinite loss in {mode} arm")
                 if step == 1:
@@ -726,7 +807,8 @@ if __name__ == "__main__":
     redraw.add_argument("prior_plan", type=Path)
     stability = subcommands.add_parser("prepare-stability")
     response = subcommands.add_parser("prepare-wire-response")
-    for command in (stability, response):
+    continuing = subcommands.add_parser("prepare-continuing-wire")
+    for command in (stability, response, continuing):
         for key in ("root", "completion", "scene_plan"):
             command.add_argument(key, type=Path)
     run = subcommands.add_parser("train")
@@ -744,12 +826,12 @@ if __name__ == "__main__":
         )
     elif args.command == "prepare-redraw":
         prepare_redraw(args.root.absolute(), args.prior_plan)
-    elif args.command in ("prepare-stability", "prepare-wire-response"):
+    elif args.command in ("prepare-stability", "prepare-wire-response", "prepare-continuing-wire"):
         prepare_objective_trial(
             args.root.absolute(),
             args.completion,
             args.scene_plan,
-            wire_response=args.command == "prepare-wire-response",
+            trial=args.command.removeprefix("prepare-"),
         )
     else:
         train(args.plan, args.output, qualification=args.qualification)
