@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Corpus 100k FP32 and FP16](corpus100k-mixed-precision.md#standing-gfx100s-comparisons)
+  compare the actual full-frame outputs on the sky, building, foliage and coarse
+  fence. Both precisions keep the sky smooth and preserve the visible crossings.
 - [Exterior-frequency wire colour](query-exterior-colour.md#standing-gfx100s-comparisons)
   reproduces the prior four main comparisons, including the smooth sky and
   coherent coarse fence crossings.

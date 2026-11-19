@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Corpus 100k FP32 and FP16](corpus100k-mixed-precision.md#standing-gfx100s-comparisons) | Both precisions were viewed on each ROI and noise profile alongside both camera JPEGs and ISO100 AHD. The faint diagonal modulation and incomplete crossings look alike |
 | [Exterior-frequency wire colour](query-exterior-colour.md#standing-gfx100s-comparisons) | Both profiles and ROIs reproduce the preceding colour check. The fine crossings remain incomplete |
 | [Reserved Bayer wire colour](query-signed-colour.md#standing-gfx100s-comparisons) | Confirmed colour preserves both prior profiles and both native ROIs. An unchecked correction changes the left views slightly. The weaker crossings stay incomplete |
 | [Dense regional scene context](scene-regional-context.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed with JPEGs and AHD. The hybrid and 3,072-pixel full preview retain faint diagonals and incomplete crossings |

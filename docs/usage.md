@@ -395,6 +395,10 @@ compute precision. New checkpoints keep physical interpolation, the variance
 prior, color conversion and overlap accumulation in FP32. Explicit `float32`
 also disables TF32; CPU inference uses FP32. Training defaults to BF16.
 The output sidecar records the effective compute precision and memory layout.
+For Corpus 100k on the GB10, use `--precision float16`. Tiled restore on
+the 102 MP GFX frame falls from 287.38 to 53.40 seconds versus IEEE FP32.
+Weak-wire response and the native GFX crops stay visually close to FP32.
+[Full RGB16 differences and fixed quality panels](corpus100k-mixed-precision.md).
 
 For CUDA FP32 inference, optional `infer --cudnn-benchmark --precision float32`
 searches convolution algorithms with a limit of 10 and a 16GiB PyTorch CUDA
@@ -411,8 +415,7 @@ have different startup scopes; see [the full report, RGB16 checks and native cro
 
 FP16 gives a small measured quality gain for V6: a matched 427-photo comparison
 finds +0.0218 dB and +0.000723 SSIM over BF16. The 16-photo FP32 reference is
-close to FP16. Use the explicit flag when reproducing those results; final-model
-checks remain pending. Neither half-precision option makes the learned feature
+close to FP16. Use the explicit flag when reproducing those V6 results. Neither half-precision option makes the learned feature
 stream equivalent to full FP32 computation.
 
 ```bash

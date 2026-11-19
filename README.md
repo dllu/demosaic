@@ -22,7 +22,8 @@ small detail-head studies, not successors to the full V131/V132 models.
 Corpus 100k used 90,778 ordinary photos and leads the fixed photo panel at
 37.24747 dB. Its unseen-camera score is slightly lower, clipped-color
 failures remain, and the fine cab crossings stay incomplete.
-[100k scores and native comparisons](docs/full-corpus-long100k.md).
+[100k scores and native comparisons](docs/full-corpus-long100k.md) ·
+[Fast FP16 inference on GB10](docs/corpus100k-mixed-precision.md).
 
 ## Setup and inference
 

@@ -2,6 +2,11 @@
 
 November 18, 2026. **Start with hidden FP16 on V120 Small. Then use NVIDIA Model Optimizer to test NVFP4 on the frozen DINO encoder’s pointwise linear layers and FP8 on expensive DRUNet convolutions.** Keep native measurement and final RGB arithmetic in FP32, with one conversion to unsigned 16-bit at export. These are proposed experiments. The timing evidence below comes from earlier runs.
 
+The completed [Corpus 100k FP16 benchmark](corpus100k-mixed-precision.md)
+finds a 5.38× tiled-restore speedup on the full 102 MP GFX frame. Standard
+FP16 gives nearly the speed of the explicit hidden cast with lower output
+error. The original proposals below retain their historical timing scope.
+
 ## Where the time and precision go
 
 V120 took 329.42 and 363.95 seconds to restore 101.996 MP in two archived FP32 runs with different noise conditioning on a shared GB10. They used batches of four 512-pixel tiles, overlap 64, and processed 136.3 MP across 520 tiles. Decode, startup and export add separate costs. DRUNet alone has 56 dense 3×3 convolutions in its residual blocks, an estimated 206 trillion multiply-accumulates per 100 MP before overlap. The split of elapsed time between DINO and DRUNet still needs measurement. The strongest local speed result is hidden FP16 on V43/V63, which cut resident four-tile forward time by about 4×. A subsequent same-policy replay exceeded the study’s one-DN16 maximum discrepancy on three V43 crops. These observations justify a fresh V120 measurement against its own FP32 output. [Full-frame timing and compute estimate](weak-detail-global-context-production-review-2026-11-16.md) · [FP16 timing](mature-mixed-precision-pilot-review.md) · [Replay investigation](mature-hidden-FP16-full-quality.md)

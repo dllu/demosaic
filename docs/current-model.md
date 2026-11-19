@@ -25,6 +25,11 @@ worst raw mean bias765.7 DN16 versus V12055.5; physical corrections repair most
 of it. These costs keep the completed control experimental.
 [Research status](experiments.md).
 
+[Corpus 100k FP16 inference](corpus100k-mixed-precision.md) uses the same
+EMA with standard CUDA autocast. It restores the 102 MP GFX frame in
+53.40 s versus 287.38 s with IEEE FP32. Native sky, fine detail and both
+fences look alike, with a small additional error on the clipped dahlia.
+
 ## Full-model choices
 
 | Model | Useful result | Limits and intended use |
