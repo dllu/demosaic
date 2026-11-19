@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Scene-contour Bayer aggregation](query-contour-support.md#standing-gfx100s-comparisons)
+  leaves the sky, building and foliage at Corpus 100k. The coarse fence
+  retains both crossing directions and looks like the wide fit.
 - [Local weak-carrier support](query-phase-support.md#standing-gfx100s-comparisons)
   keeps the sky, foliage and building at Corpus 100k. Both coarse fence
   directions remain visible and the deficit check changes them very little.

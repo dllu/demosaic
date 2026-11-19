@@ -144,6 +144,14 @@ training segments. The frozen schedule has advanced into the next phase.
 [Matched 5,000 update, source, time and checkpoint audit](results/scene-full-epoch-v1/matched-005000-training.json) ·
 [Earlier paired segment prefix](results/scene-full-epoch-v1/paired-prefix-004000.json) ·
 [Earlier local 5,000 prefix](results/scene-full-epoch-v1/local-005000-prefix.json).
+The local-only arm subsequently reached **7,500 updates**, with 15,000
+distinct photos and 60,000 native queries. Its five 500-update segments
+resume from the verified 5k checkpoint on the original schedule. The
+spatial arm is following that same source and crop schedule toward 7,500.
+The last matched, numerically checked and natively reviewed pair is 5,000.
+[Local 7,500 coverage, durations and checkpoint](results/scene-full-epoch-v1/local-007500-prefix.json) ·
+[Original segment receipts and spatial launch](results/scene-full-epoch-v1/local-007500-evidence.tar.xz).
+
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 

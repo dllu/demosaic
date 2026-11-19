@@ -54,6 +54,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [narrow exterior RAW peaks](donor-peak-prominence.md) ·
 [reserved Bayer query search](query-bayer-reserve.md) ·
 [sensor-anchored Bayer placements](query-frequency-consensus.md) ·
+[scene-contour Bayer aggregation](query-contour-support.md) ·
 [local weak-carrier support](query-phase-support.md) ·
 [checked Bayer curvature](query-phase-curvature.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·

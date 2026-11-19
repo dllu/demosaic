@@ -123,6 +123,10 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Scene-contour Bayer aggregation](query-contour-support.md) gives a small
+near-edge gain on continuous patterns and increases leakage in independent
+gaps. A one-sided reserved search admits no new pairs. Standing GFX crops
+look like the wide fit, with soft fine crossings.
 [Local weak-carrier support](query-phase-support.md) loses real weak detail
 with a compact aperture at ISO6400. The local deficit check matches the
 false-gap response of uniform attenuation at matched correction strength.

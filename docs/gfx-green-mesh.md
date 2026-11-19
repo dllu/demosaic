@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Scene-contour Bayer aggregation](query-contour-support.md#standing-gfx100s-comparisons) | Both cab priors and both ROIs were viewed. Right crops are visually close to the wide fit and crossings remain incomplete. Both left crops equal the parent |
 | [Local weak-carrier support](query-phase-support.md#standing-gfx100s-comparisons) | Compact fits give less even right crossings. The deficit check looks like the wide fit under both priors. Both left crops return Corpus 100k, with fine reference crossings still weak |
 | [Checked Bayer curvature](query-phase-curvature.md#standing-gfx100s-comparisons) | Independent Bayer groups support small right-cab center shifts under both priors. None of the four cab crops accepts curvature. Visual changes are slight and both references remain in the boards |
 | [Sensor-anchored Bayer fits](query-frequency-consensus.md#standing-gfx100s-comparisons) | Right-cab diagonal families persist when median-pooled across nine placements. The worst shifted correction cosine rises to about 0.95 under both priors. Left crops match Corpus 100k and some right intersections remain soft |

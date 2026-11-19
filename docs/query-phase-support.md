@@ -12,6 +12,10 @@ has soft, uneven crossings.
 [Frozen inputs, scores and source archive](results/query-phase-support-v1/evidence.tar.xz) ·
 [Native crops and capture provenance](images/query-phase-support-v1/manifest.json).
 
+The [scene-contour follow-up](query-contour-support.md) rotates the
+amplitude aperture using coarse RAW. It gives a small continuous-edge
+gain and increases coherent response inside independent gaps.
+
 ## Same phase and stronger correction
 
 The [whole-image context review](weak-detail-global-context-production-review-2026-11-16.md)

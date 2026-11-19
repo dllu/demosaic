@@ -378,6 +378,13 @@ zero. Affine does better on additive wires and on ISO400 wire error.
 The existing adjacent-donor option still shows the two fine GFX cab
 directions more clearly.
 
+The [scene-contour aggregation follow-up](query-contour-support.md)
+uses disjoint Bayer samples to orient the amplitude aperture. Continuous
+near-edge response rises slightly, and independent gaps show more coherent
+texture. Supplying exact geometry exposes recovery and false-flat headroom.
+The [one-sided frequency screen](query-contour-support.md#testing-nominations-from-one-visible-side)
+finds five plausible occluded pairs and admits none on the reserved quarter.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
