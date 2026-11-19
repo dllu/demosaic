@@ -71,12 +71,15 @@ measure false structure and color bias under coupled and independent draws.
 
 The completed endpoints require the fixed 427-photo and known/unseen
 camera panels, 100% exact-target triplets, and both standing GFX100S
-comparisons. The main scene covers fence, foliage, sky and building.
+comparisons. Collection jobs wait for the matched 50k endpoints. The
+fixed-panel worker first qualifies both endpoints on three archived cases.
+The main scene covers fence, foliage, sky and building.
 The fine green cab review covers left and right crops under both noise
 profiles. Its ISO100 and camera JPEGs are independent qualitative references.
 Training, numerical collection and native viewing are recorded separately.
 Full-frame GFX preview resolution relative to a native query remains a
 known distribution difference.
+[Endpoint collection queue](results/scene-full-epoch-v1/endpoint-review-queue.json).
 
 ## Execution status
 
