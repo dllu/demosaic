@@ -1031,6 +1031,16 @@ four backgrounds with coherent projected texture. With the gap and clean
 waveform supplied, replacing only the recovered strong component lowers
 gap error more than the full trained update. [Continuing-wire supervision](local-continuing-wire.md).
 
+A frozen-parent luminance correction with signed gap supervision nearly
+shuts off when its confidence sigmoid can approach zero. Keeping a 0.25
+minimum gain on the band-filtered output restores 0.49 weak-response
+points and adds 0.35 DN16 flat-region error. Just 5.47% of delivered
+energy in the gaps aligns with the true continuing wire. The separate
+double-gap test retains the gain on true continuations; the standing
+cab crops still have incomplete crossings. Separate supervision for
+support and signed direction is the remaining question for this route.
+[Factored luminance correction](local-factored-wire.md).
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate

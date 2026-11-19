@@ -3,6 +3,10 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Factored luminance correction](local-factored-wire.md#standing-gfx100s-comparisons)
+  keeps the overcast sky smooth and coarse crossings coherent. The minimum-gain
+  head delivers 0.92 DN16 luminance RMS in the sky and 2.37 in the fence.
+  Thin cables, bracing and leaf subdivisions stay soft.
 - [Continuing-wire supervision](local-continuing-wire.md#standing-gfx100s-comparisons)
   keeps the overcast sky smooth and the coarse crossings coherent. Thin
   building features and leaf subdivisions remain soft.

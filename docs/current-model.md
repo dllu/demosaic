@@ -364,6 +364,12 @@ points of strong response inside exact weak gaps and raises weak response
 RMS. Exact-flat and intact-wire error rise. Unseen measured-CFA PSNR falls
 0.12905 dB against the aligned control. The standing cab scenes show
 stronger traces with incomplete crossings.
+[Factored luminance correction](local-factored-wire.md) tests a frozen
+aligned-control parent with a separate band-filtered detail head. Both
+original gates nearly close. A 0.25 gain floor adds 0.49 weak-wire
+response points and raises exact-flat wire RMS by 0.35 DN16. Only 5.47%
+of delivered lift energy in the gaps aligns with the true continuing
+wire. The coarse GFX fence stays coherent, with incomplete fine cab crossings.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

@@ -13,6 +13,10 @@ No convincing new fine cab crossings were visible.
 [Native provenance](images/local-continuing-wire-v1/manifest.json) ·
 [Previous signed weak-wire study](local-wire-response.md).
 
+The [factored-luminance follow-up](local-factored-wire.md) freezes this
+study's aligned control and measures a separate post-gate detail lift,
+including apparent continuations in double gaps and both standing fences.
+
 ## Matched training
 
 Both arms start from the repeat-loss EMA
