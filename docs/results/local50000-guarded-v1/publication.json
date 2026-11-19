@@ -1,0 +1,275 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/score_full_guard.py",
+    "sha256": "09add6be55ef87e63101526ec238729e42a772667c79ee18b3c773494c246698"
+  },
+  "arms": {
+    "fp32": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/fp32/result.json",
+      "sha256": "ff481f7efb4a1ac362b78de801f91ac2a5dfbcf1426c329510dbff23dc771f38"
+    },
+    "fp16": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/fp16/result.json",
+      "sha256": "6cfae4069a1329605cfe934e0df016aa5fe55b4336d0816dfd6dc3ef36cfd578"
+    },
+    "guarded": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/guarded/result.json",
+      "sha256": "fb18272ec44cb481dac260b960fa99474fd9cb7f9d78b551a7b2ace652a4f0de"
+    }
+  },
+  "comparisons_vs_FP32": {
+    "fp16": {
+      "overall": {
+        "count": 305987556,
+        "RMS_DN16": 0.3038674892999264,
+        "within1": 0.9980626597769224,
+        "p999_DN16": 2,
+        "maximum_DN16": 47
+      },
+      "near_clip_r5": {
+        "count": 1105584,
+        "RMS_DN16": 2.4943823553988778,
+        "within1": 0.7619466273028553,
+        "p999_DN16": 20,
+        "maximum_DN16": 47
+      },
+      "away_from_clip": {
+        "count": 304881972,
+        "RMS_DN16": 0.26477886033638487,
+        "within1": 0.9989188799920252,
+        "p999_DN16": 2,
+        "maximum_DN16": 26
+      },
+      "at_clip": {
+        "count": 346368,
+        "RMS_DN16": 3.258407472697373,
+        "within1": 0.7134377309682187,
+        "p999_DN16": 23,
+        "maximum_DN16": 47
+      },
+      "worst_yxc": [
+        3426,
+        8403,
+        0
+      ]
+    },
+    "guarded": {
+      "overall": {
+        "count": 305987556,
+        "RMS_DN16": 0.21466814676105175,
+        "within1": 0.9994720765703295,
+        "p999_DN16": 1,
+        "maximum_DN16": 29
+      },
+      "near_clip_r5": {
+        "count": 1105584,
+        "RMS_DN16": 0.04571977666462372,
+        "within1": 1.0,
+        "p999_DN16": 1,
+        "maximum_DN16": 1
+      },
+      "away_from_clip": {
+        "count": 304881972,
+        "RMS_DN16": 0.2150393928360832,
+        "within1": 0.9994701621780379,
+        "p999_DN16": 1,
+        "maximum_DN16": 29
+      },
+      "at_clip": {
+        "count": 346368,
+        "RMS_DN16": 0.05014645034189451,
+        "within1": 1.0,
+        "p999_DN16": 1,
+        "maximum_DN16": 1
+      },
+      "worst_yxc": [
+        4878,
+        4311,
+        2
+      ]
+    }
+  },
+  "boards": {
+    "overcast-sky": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/review/overcast-sky.png",
+        "sha256": "ce96bf2d9bbe82e0adb1593b10ef4d9012932ae310c097f7a957d0373b22a277"
+      },
+      "box": [
+        5800,
+        1400,
+        160,
+        160
+      ],
+      "display_exposure": 4.0
+    },
+    "building-detail": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/review/building-detail.png",
+        "sha256": "1353e5cffef1d1d3f2bb1f3133fdcd4868f349665ad00027ce082ccf257c5ffa"
+      },
+      "box": [
+        5790,
+        2690,
+        160,
+        160
+      ],
+      "display_exposure": 4.0
+    },
+    "foliage": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/review/foliage.png",
+        "sha256": "51146fc7b08b8c03ca279f49ea2ae65ee453f9cfb42e32625a63dcfc0440e4b4"
+      },
+      "box": [
+        8890,
+        5570,
+        160,
+        160
+      ],
+      "display_exposure": 4.0
+    },
+    "chain-link-fence": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/review/chain-link-fence.png",
+        "sha256": "df85c7d26f23fcce33c7fcb57f5d26f3470c8bcc7e933662b1a1245dd8630aaa"
+      },
+      "box": [
+        2240,
+        6000,
+        160,
+        160
+      ],
+      "display_exposure": 4.0
+    },
+    "fp16-largest-change": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/review/fp16-largest-change.png",
+        "sha256": "018c3d83926c51c5594a39dd0e934074c8a90c01878616c9e8b19eff236ee7bf"
+      },
+      "box": [
+        8323,
+        3346,
+        160,
+        160
+      ],
+      "display_exposure": 1.0
+    },
+    "guarded-largest-change": {
+      "image": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/review/guarded-largest-change.png",
+        "sha256": "a5a6a66efcc16255e42d5431721be99913eae78425849fc78ce77ccfc3559b0b"
+      },
+      "box": [
+        4231,
+        4798,
+        160,
+        160
+      ],
+      "display_exposure": 1.0
+    }
+  },
+  "timing": {
+    "fp32": {
+      "seconds": 561.1046061780071,
+      "tile_seconds": 561.0048835229827,
+      "compute_transfer_seconds": 555.6135302563198,
+      "blend_seconds": 5.29757929360494,
+      "megapixels": 101.995852,
+      "tiles": 520,
+      "tile": 512,
+      "overlap": 64,
+      "tile_grid_alignment": 2,
+      "tile_stride": 448,
+      "batch_size": 4,
+      "self_ensemble": "none",
+      "model_views_per_tile": 1,
+      "compute_precision": "float32",
+      "refinement_compute_precision": "float32",
+      "memory_format": "channels_last",
+      "peak_cuda_gb": 3.161718784,
+      "raw_decode_seconds": 0.6267764179501683,
+      "load_seconds": 5.127012326032855,
+      "rgb16_encode_seconds": 1.09796018502675
+    },
+    "fp16": {
+      "seconds": 89.7629353980301,
+      "tile_seconds": 89.66604097606614,
+      "compute_transfer_seconds": 88.766379206907,
+      "blend_seconds": 0.8430114631773904,
+      "megapixels": 101.995852,
+      "tiles": 520,
+      "tile": 512,
+      "overlap": 64,
+      "tile_grid_alignment": 2,
+      "tile_stride": 448,
+      "batch_size": 4,
+      "self_ensemble": "none",
+      "model_views_per_tile": 1,
+      "compute_precision": "float16",
+      "refinement_compute_precision": "float32",
+      "memory_format": "channels_last",
+      "peak_cuda_gb": 2.121381376,
+      "raw_decode_seconds": 0.7030153340892866,
+      "load_seconds": 4.9974710260285065,
+      "rgb16_encode_seconds": 1.1445739869959652
+    },
+    "guarded": {
+      "seconds": 182.25000694801565,
+      "tile_seconds": 182.1054307440063,
+      "compute_transfer_seconds": 181.2171575933462,
+      "blend_seconds": 0.8147918394533917,
+      "megapixels": 101.995852,
+      "tiles": 520,
+      "tile": 512,
+      "overlap": 64,
+      "tile_grid_alignment": 2,
+      "tile_stride": 448,
+      "batch_size": 4,
+      "self_ensemble": "none",
+      "model_views_per_tile": 1,
+      "compute_precision": "float32",
+      "refinement_compute_precision": "float32",
+      "memory_format": "channels_last",
+      "peak_cuda_gb": 3.163815936,
+      "raw_decode_seconds": 1.0181772339856252,
+      "load_seconds": 5.466732850065455,
+      "rgb16_encode_seconds": 0.7359384479932487
+    }
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+    "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+  },
+  "raw": {
+    "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+    "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+  },
+  "noise": {
+    "shot": 0.00128,
+    "read": 6.5536e-06
+  },
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/review/result.json",
+    "sha256": "01214af416aada3eb2e57032f90f01a2c970da4f786eb783303bc9281fbe61fa"
+  },
+  "highlight_replay": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/guarded-full-frame/highlight-replay.json",
+    "sha256": "5c9a5193af03609fe4486fa5302b4471752f24cdd70eb505293ccccccbf1bcf8"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local50000-guarded-v1/evidence.tar.xz",
+    "sha256": "d5e40eca4d5d8d04876361ee3fd4864ee087f115f8d0d48e4ce65c4a46722bee"
+  },
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/local50000-guarded-v1/manifest.json",
+    "sha256": "90e8a18793371e136699d2571f7e626f8ebdeaffc434bc5d72dc017c3f600603"
+  },
+  "image_review": true,
+  "full_frame": true,
+  "full_panel_fp16_complete": false,
+  "guard_threshold": 0.98,
+  "routed_fp32_tiles": 131,
+  "total_tiles": 520,
+  "scope": "One shared-GB10 timing per arm, same fixed full-frame geometry."
+}

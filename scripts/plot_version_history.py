@@ -13,7 +13,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 MODEL_SELECTION = REPO / "configs/current-model.json"
 COVERAGE_NOTE = (
-    "**Coverage reviewed November 18, 2026.** Corpus 20k and Corpus 100k have "
+    "**Coverage reviewed November 19, 2026.** Corpus 20k and Corpus 100k have "
     "completed the fixed photo and both camera panels. "
     "Corpus 100k gains 0.20739 dB on the 427-photo panel over V120, with "
     "a 0.03046 dB unseen-camera loss. "
@@ -21,7 +21,9 @@ COVERAGE_NOTE = (
     "[Corpus 100k](full-corpus-long100k.md#broader-evaluation). "
     "Both matched scene 12k endpoints have [completed fixed camera panels](expanded-scene-12000-cameras.md). "
     "The matched near-ADC 800-update endpoints also have [completed camera panels](near-adc-bridge-cameras.md). "
-    "All four full427 scores are pending. "
+    "The matched scene 50k pair and two 512-update continuations have "
+    "[completed fixed camera panels](scene-50000-cameras.md). "
+    "These eight full427 scores are pending. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -587,6 +589,82 @@ def collect_near_adc_endpoints():
     return points, evidence
 
 
+def collect_compact_scene_endpoints():
+    """Bind the final scene and continuation checkpoints to complete CUDA camera cases."""
+    path = REPO / "docs/results/scene-050000-camera-v1/publication.json"
+    report = "scene-50000-cameras.md"
+    record = json.loads(path.read_text())
+    assert record["complete_camera_panels"] and record["weights"] == "EMA"
+    assert max(map(abs, record["V120_minus_archived_dB"].values())) < 1e-4
+    archive = REPO / record["archive"]["path"]
+    assert digest(archive) == record["archive"]["sha256"]
+    names = {
+        "none": ("Local 50k", 50000),
+        "spatial": ("Spatial 50k", 50000),
+        "absolute": ("Absolute +512", 512),
+        "paired": ("Paired +512", 512),
+    }
+    points = []
+    with tarfile.open(archive) as evidence:
+        plan_data = evidence.extractfile("plan.json").read()
+        assert hashlib.sha256(plan_data).hexdigest() == record["plan"]["sha256"]
+        assert json.loads(plan_data)["models"] == record["models"]
+        stage_results = {}
+        for stage, count, scenes in (("known", 24, 4), ("unseen", 30, 5)):
+            data = evidence.extractfile(f"{stage}/analysis.json").read()
+            assert hashlib.sha256(data).hexdigest() == record["analysis"][stage]["sha256"]
+            panel = json.loads(data)
+            assert panel == record["panels"][stage] and panel["matching_canonical_arrays"]
+            assert (panel["batches"], panel["scenes"], panel["crops_per_model"]) == (
+                count, scenes, 18 * scenes,
+            )
+            assert len(panel["cases"]) == count
+            for sequence, case in enumerate(panel["cases"]):
+                raw = evidence.extractfile(f"{stage}/cases/{sequence:05d}.json").read()
+                assert hashlib.sha256(raw).hexdigest() == case["sha256"]
+                value = json.loads(raw)
+                assert value["stage"] == stage and value["batch"] == sequence
+                assert value["plan"] == record["plan"]
+            stage_results[stage] = panel
+        for arm, (label, step) in names.items():
+            specification = record["models"][arm]
+            assert specification["step"] == step and specification["kind"] == "scene"
+            point = {
+                "version": None,
+                "label": label,
+                "endpoint": f"scene-050000-{arm}",
+                "step": step,
+                "checkpoint_sha256": specification["checkpoint"]["sha256"],
+                "inference_policy": "EMA, CUDA IEEE FP32, exact canonical inputs",
+                "source": str(path.relative_to(REPO / "docs/results")),
+                "report": report,
+                "evaluation_metadata": {},
+            }
+            for stage, panel in stage_results.items():
+                measurement = panel["overall"][arm]
+                values = list(measurement["per_scene"].values())
+                assert len(values) == panel["scenes"]
+                assert math.isclose(sum(values) / len(values), measurement["sensor_psnr"])
+                point[f"{stage}_CFA_PSNR"] = measurement["sensor_psnr"]
+                point["evaluation_metadata"][stage] = {
+                    "scene_count": panel["scenes"],
+                    "native_crops_per_model": panel["crops_per_model"],
+                    "canonical_inputs_sha256": record["canonical_inputs"]["sha256"],
+                    "precision": record["precision"],
+                }
+            points.append(point)
+    sources = [
+        {
+            "path": str(p.relative_to(REPO)),
+            "sha256": digest(p),
+            "endpoints": [point["endpoint"] for point in points],
+            "report": report,
+        }
+        for p in (path, archive)
+    ]
+    return points, sources
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -610,11 +688,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v5.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v6.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v4.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v5.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v4.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v3.json"
         if not destination.exists():
@@ -642,6 +722,9 @@ def main():
         bridge_points, bridge_evidence = collect_near_adc_endpoints()
         points.extend(bridge_points)
         evidence.extend(bridge_evidence)
+        fixed_points, fixed_evidence = collect_compact_scene_endpoints()
+        points.extend(fixed_points)
+        evidence.extend(fixed_evidence)
         result = {
             "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",

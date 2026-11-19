@@ -1,0 +1,403 @@
+{
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+    "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+  },
+  "weights": "ema",
+  "exact": [
+    {
+      "id": "12-wire-iso6400",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "source": {
+          "attribution": null,
+          "author": "Tobias \"ToMar\" Maier",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ad/ad0b3ba2652514f25bd0da0daf373dca0ba09c8b.npy",
+          "cache_sha256": "78f6cd8498940a30743e9e90c803d92726c78ae23ded5c0043d3ddad4a12eb4f",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/ad/0b/ad0b3ba2652514f25bd0da0daf373dca0ba09c8b.jpg",
+          "dtype": "uint16",
+          "height": 2102,
+          "id": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+          "license": "CC BY-SA 3.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Concord_Eye-Q_1M_Camera_rear_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Concord_Eye-Q_1M_Camera_rear_view.jpg",
+          "sha1": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+          "sha1_hex": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+          "shape": [
+            525,
+            700,
+            3
+          ],
+          "split": "val",
+          "title": "File:Concord Eye-Q 1M Camera rear view.jpg",
+          "width": 2802
+        },
+        "index": 12,
+        "box": [
+          180,
+          4,
+          512,
+          512
+        ],
+        "camera": {
+          "pattern": "GBRG",
+          "wb": [
+            1.6067786325577211,
+            1.0,
+            1.3708790471593986
+          ],
+          "camera_inverse": [
+            [
+              0.8625788132550156,
+              0.10724719743786934,
+              0.030173989307115002
+            ],
+            [
+              0.03583862582658379,
+              0.9357174364551699,
+              0.02844393771824635
+            ],
+            [
+              0.013085025968556869,
+              0.09460856145315415,
+              0.892306412578289
+            ]
+          ],
+          "exposure": 0.7905762168799332,
+          "shot": 0.00014897918438741805,
+          "read": 8.337760943062196e-08,
+          "black": 0.03,
+          "noise_seed": 1253738468077806002
+        },
+        "kind": "wire",
+        "geometry": {
+          "family": "ellipse",
+          "frequency": [
+            [
+              0.0912391388192916,
+              0.06608114039034557
+            ],
+            [
+              0.08887352308170532,
+              -0.07330690797987081
+            ]
+          ],
+          "phase": [
+            2.5826001338113196,
+            -2.1769649825830366
+          ],
+          "strength": [
+            0.01456746427942367,
+            0.007234215161915719
+          ],
+          "width": [
+            0.12765798452235602,
+            0.1265432393864863
+          ],
+          "edge": -10.16894669337608,
+          "gap_center": [
+            19.307771216009456,
+            17.845015079692708
+          ],
+          "gap_width": 21.763983768800912,
+          "gap_length": 43.45677592914153,
+          "gap_orientation": 1.5110439988666589,
+          "angle": 0.43172087201439835,
+          "tint": [
+            0.12094686297959371,
+            0.11458922972514139,
+            0.11546867214939108
+          ]
+        }
+      },
+      "query": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/12-capture.npz",
+        "sha256": "32e4b238f778a8d66ff07668c82e2df0a3a5d7a545197a8a4daeac76871d23c0"
+      },
+      "iso_profile": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "12-wire-iso6400-comparison.png",
+          "sha256": "06e20c60ac7be9a8e3bc591834a9706c0041ecab9e991c50a5f67696d6785327"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "12-wire-iso6400-triplet.png",
+          "sha256": "8a37a9d1f5af872d860b9126e8e984dcd2744c5be9171b218fe5ecadcb6f8789"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "30-natural-iso6400",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "source": {
+          "attribution": null,
+          "author": "Charles J. Sharp",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/70/70a6e28469b000f533ff90b289240fdc2bdc65fd.npy",
+          "cache_sha256": "624f8aadd8fe097018020a38d3d4330fa447c9afffa6765682ccf74612866263",
+          "color_space": "linear-sRGB",
+          "credit": "Own work, from Sharp Photography, sharpphotography",
+          "download_path": "images/70/a6/70a6e28469b000f533ff90b289240fdc2bdc65fd.jpg",
+          "dtype": "uint16",
+          "height": 2527,
+          "id": "70a6e28469b000f533ff90b289240fdc2bdc65fd",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Cuban_green_woodpecker_%28Xiphidiopicus_percussus_percussus%29_female.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Cuban_green_woodpecker_(Xiphidiopicus_percussus_percussus)_female.JPG",
+          "sha1": "70a6e28469b000f533ff90b289240fdc2bdc65fd",
+          "sha1_hex": "70a6e28469b000f533ff90b289240fdc2bdc65fd",
+          "shape": [
+            631,
+            631,
+            3
+          ],
+          "split": "val",
+          "title": "File:Cuban green woodpecker (Xiphidiopicus percussus percussus) female.JPG",
+          "width": 2527
+        },
+        "index": 30,
+        "box": [
+          14,
+          320,
+          256,
+          256
+        ],
+        "camera": {
+          "pattern": "BGGR",
+          "wb": [
+            2.1311648196260276,
+            1.0,
+            0.9844431114813756
+          ],
+          "camera_inverse": [
+            [
+              0.7404909781734593,
+              0.19610348179154138,
+              0.06340554003499932
+            ],
+            [
+              0.0898912833321977,
+              0.5838537442797331,
+              0.32625497238806916
+            ],
+            [
+              0.0199794989697528,
+              0.07886020784602739,
+              0.9011602931842198
+            ]
+          ],
+          "exposure": 0.18008162622824667,
+          "shot": 1.8539962304072114e-05,
+          "read": 6.410008995200706e-09,
+          "black": 0.03,
+          "noise_seed": 1070821994788301672
+        },
+        "kind": "natural"
+      },
+      "query": [
+        14,
+        320,
+        256,
+        256
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/30-capture.npz",
+        "sha256": "9799ea4919c05c27b4e0d639691a4a1c734d9eb559dcbb8dd544c7b4824d3af3"
+      },
+      "iso_profile": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "30-natural-iso6400-comparison.png",
+          "sha256": "b1cb141950dfa5c186120dcc42b117a74e1a3e5fe916d5a00a5850dd4e134349"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "30-natural-iso6400-triplet.png",
+          "sha256": "56902b22a713978ea8658532af160c1381ed31a42d13256ea58139fcc153d2f5"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/fp16-extra/result.json",
+    "sha256": "039800a26a324175e325d95089ca53b7f967d58a88fe7c2dd4e031fa07e640f4"
+  },
+  "native_actual_review_complete": true
+}

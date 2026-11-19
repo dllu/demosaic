@@ -41,9 +41,10 @@ def numbers(metrics):
 class ContextFields:
     """Bounded RAM cache; actual noisy fields/features are saved for replay."""
 
-    def __init__(self, plan, output, encoder_model, inherited):
+    def __init__(self, plan, output, encoder_model, inherited, *, save_arrays=True):
         self.plan, self.output, self.encoder_model = plan, output, encoder_model
-        self.output.mkdir()
+        self.save_arrays = save_arrays
+        self.output.mkdir(exist_ok=not save_arrays)
         self.inventory = {
             r["id"]: r for r in read_json(checked(plan["photo_inventory"]))["sources"]
         }
@@ -158,25 +159,26 @@ class ContextFields:
             exposure=self.plan["preview_exposure"],
         )
         self.new_scene_executions += 1
-        path = self.output / (key + ".npz")
-        with path.open("xb") as stream:
-            np.savez(
-                stream,
-                packed=packed.numpy(),
-                **{f"feature{i}": value.numpy() for i, value in enumerate(encoded.features)},
-                native=np.array(encoded.grid.native_hw),
-                preview=np.array(encoded.grid.preview_hw),
-                padded=np.array(encoded.grid.padded_hw),
-            )
         item = {
             "key": key,
-            "arrays": reference(path),
             "metadata": metadata,
             "packed_fingerprint": fingerprint(packed),
             "feature_fingerprints": [fingerprint(t) for t in encoded.features],
         }
-        write_json(path.with_suffix(".json"), item)
-        self.saved[key] = item
+        if self.save_arrays:
+            path = self.output / (key + ".npz")
+            with path.open("xb") as stream:
+                np.savez(
+                    stream,
+                    packed=packed.numpy(),
+                    **{f"feature{i}": value.numpy() for i, value in enumerate(encoded.features)},
+                    native=np.array(encoded.grid.native_hw),
+                    preview=np.array(encoded.grid.preview_hw),
+                    padded=np.array(encoded.grid.padded_hw),
+                )
+            item = {"key": key, "arrays": reference(path), **item}
+            write_json(path.with_suffix(".json"), item)
+            self.saved[key] = item
         return self.remember(key, (packed, encoded, item))
 
     def queries(self, record, batch):

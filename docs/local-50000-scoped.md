@@ -37,12 +37,12 @@ order, with 100,000 distinct noise seeds across both passes
 combined. The retained training loop takes **24,213.00 s**.
 [Full data and training recipe](scene-full-epoch.md).
 
-Training is complete for local-only 50k. A scoped numerical and actual
-native review is complete at the bound 50k EMA. The spatial arm is
-still completing its matched schedule. Its completion triggers the
-queued common 427-photo and known/unseen measured-camera evaluations.
-The latest paired scoped checkpoint review for both arms is 47.5k.
-The 50k EMA has no broad score plotted yet.
+Training is complete for both 50k arms. A scoped numerical and actual
+native review is complete at this local-only EMA. The known/unseen
+measured-camera panels score 54.22726/53.97844 dB. The common fixed
+427-photo evaluation is running.
+[Two-arm training audit](results/scene-full-epoch-v1/paired-prefix-050000.json) ·
+[Fixed camera panels](scene-50000-cameras.md) ·
 [Paired 47.5k review](green-covariance-refit.md) ·
 [Comparable performance history](performance-history.md).
 
@@ -145,3 +145,59 @@ transferred `0.0014635775921166604/1.0715704128646712e-6`.
 | --- | --- | --- |
 | Nominal | [Native review](images/local50000-scoped-v1/standing/mesh-nominal-fine-green-mesh-left.png) | [Native review](images/local50000-scoped-v1/standing/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred | [Native review](images/local50000-scoped-v1/standing/mesh-profile3879-fine-green-mesh-left.png) | [Native review](images/local50000-scoped-v1/standing/mesh-profile3879-fine-green-mesh-right.png) |
+
+## FP16 inference at fixed geometry
+
+The same local 50k EMA ran in IEEE FP32 and standard FP16 autocast on
+the GB10. Full-precision Bayer, camera transforms and the native RGB
+output boundaries stay in place. Twelve interleaved timings of a
+resident batch of four 512-pixel tiles give medians of **2,018.2 ms in
+IEEE FP32 and 325.8 ms in FP16**, or a **6.19×** speedup
+[5.52×, 7.15× across paired bootstrap draws]. This test repeats one
+native RAW query across the batch with the same camera and shot/read
+profile. RAW decode, tile packing and transfer, blending and TIFF
+export are outside the measurement.
+[Machine results](results/local50000-fp16-v1/publication.json) ·
+[Frozen drivers and receipts](results/local50000-fp16-v1/evidence.tar.xz).
+
+Across the same 24 natural and 24 wire contexts at ISO6400, the mean
+shift in natural fine response is −0.0051 percentage points. The mean
+shift in weak-wire response is −0.0096 points. Natural fine-increment
+error changes by −0.0033 DN16, natural exact-flat fine RMS by +0.0066
+DN16 and mean absolute error within the twelve true gaps by +0.0098
+DN16. The largest camera-RGB difference in any 256-pixel natural
+context is 0.822 DN16 RMS.
+
+All eight native GFX crops were viewed side by side, with IEEE FP32 on
+the left and FP16 on the right. Their RMS differences range from
+0.049 to 0.154 DN16 in camera RGB. The sky stays smooth, and the
+coarse lattice and fine cab retain the same visible crossings and
+softness.
+[Native comparison sheet](images/local50000-fp16-v1/standing.png) ·
+[Corpus 100k full-frame FP16 benchmark](corpus100k-mixed-precision.md).
+
+An 11-batch canonical excerpt checks shadows, ADC-only cases, highlights
+across all four Bayer layouts, and two batches per measured-camera panel.
+The largest absolute per-case PSNR shift is 0.01792 dB in the highlights
+and 0.00294 dB on the camera crops. The most affected highlight batch
+changes by 38.26 DN16 RMS and 424.08 DN16 at the largest camera-RGB
+pixel difference. The excerpt uses the full panels' exact observations
+and borders. The guarded follow-up completes the 102 MP restore and
+repeats the four canonical highlight batches. The full FP16 photo
+and camera panels remain open for this checkpoint.
+[Canonical excerpt](results/local50000-fp16-v1/fixed-panel-excerpt.json) ·
+[Frozen excerpt evidence](results/local50000-fp16-v1/fixed-panel-excerpt.tar.xz) ·
+[Full-frame guarded precision](local50000-guarded-precision.md).
+
+The FP16 wire and woodpecker triplets use the same targets, coordinates,
+and display transforms as the scoped IEEE FP32 review. The wire ROI
+is `[48,48,160,160]` in native query `[128,128,256,256]`, display ×2.
+The woodpecker uses the same ROI in query `[14,320,256,256]`,
+display ×3.03 and contrast ×2. Both use shot/read
+`0.00128/6.5536e-6` and a 16-bit ADC. The modes show the same
+softness around the faint diagonal and the foreground contour.
+[Native crop provenance](images/local50000-fp16-v1/manifest.json).
+
+![Native wire crop with noisy, local 50k FP16 and exact target](images/local50000-fp16-v1/12-wire-iso6400-triplet.png)
+
+![Native woodpecker crop with noisy, local 50k FP16 and exact target](images/local50000-fp16-v1/30-natural-iso6400-triplet.png)

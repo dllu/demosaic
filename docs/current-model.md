@@ -303,7 +303,28 @@ is almost the same. [Local-only 50k](local-50000-scoped.md) has
 finished training. On the same 24 natural photos it keeps the
 1.11 DN16 fine-increment gain over Corpus 100k and the 0.33 DN16
 upper-band flat cost. Both GFX reviews are complete at that EMA.
-The spatial arm and paired broad evaluations are pending.
+The [matched spatial 50k arm](scene-50000-native.md) gains 0.015 dB on
+shadow development queries and 0.020 dB at ISO12800 over local-only.
+In both standing GFX scenes it keeps a smooth sky and coarse crossings.
+Fine cab intersections remain incomplete. Its fixed camera scores
+are −0.12252 dB known and +0.00638 dB unseen versus Corpus 100k.
+[Fixed camera panels](scene-50000-cameras.md).
+[Local 50k FP16](local-50000-scoped.md#fp16-inference-at-fixed-geometry)
+cuts a resident 512-pixel batch-four forward from 2,018 to 326 ms.
+The measured weak responses and standing crops remain similar.
+The most affected clipped batch moves by 38.26 DN16 RGB RMS.
+[A full-frame saturation guard](local50000-guarded-precision.md)
+routes 131 of 520 tiles to FP32 and keeps all near-saturation RGB16
+codes within one of IEEE FP32. It takes 182.25 s versus 89.76 s for
+eager FP16 and 561.10 s for IEEE FP32 in single runs on the shared GB10.
+[Paired fine-detail supervision on local 50k](local-paired-continuation.md)
+reduces natural fine-increment error by 0.70 DN16 versus the absolute
+control under independent noise. It raises exact-flat fine RMS by
+0.16 DN16. Intact planted-wire error falls 12.30 DN16 and weak response
+falls 5.98 points. Both GFX scenes were reviewed and the fine cab
+crossings remain incomplete. On the fixed camera panels it gains
+0.04198 dB known and 0.07490 dB unseen over its matched control.
+The fixed photo evaluation continues. [Camera scores](scene-50000-cameras.md).
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

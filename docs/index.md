@@ -9,8 +9,8 @@ Start with the [README](../README.md) for installation and inference.
 | --- | --- |
 | Choose a model or understand version numbers | [Model choices](current-model.md) |
 | Run inference, set noise priors or export | [Usage](usage.md), [DNG/JPEG](dng-export.md), [hot pixels](hot-pixel-clusters.md) |
-| Run faster 102 MP inference on GB10 | [Compiled DINO and paired restore timing](corpus100k-trt-dino.md), [FP16 tile settings and TensorRT quality](corpus100k-fp16-throughput.md), [Fast checkpoint loading](corpus100k-faster-inference.md), [FP16 versus IEEE FP32](corpus100k-mixed-precision.md), [Full-frame CUDA transport](corpus100k-device-tiles.md), [FP16 cuDNN search](corpus100k-cudnn-fp16.md), [Paired TensorRT kernel timing](corpus100k-trt-tactics.md) |
-| Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [Corpus 100k](full-corpus-long100k.md#broader-evaluation), [Matched scene 12k cameras](expanded-scene-12000-cameras.md), [Near-ADC cameras](near-adc-bridge-cameras.md) |
+| Run faster 102 MP inference on GB10 | [FP16 tile settings and TensorRT quality](corpus100k-fp16-throughput.md), [Compiled DINO and paired restore timing](corpus100k-trt-dino.md), [Local 50k saturation guard](local50000-guarded-precision.md), [Fast checkpoint loading](corpus100k-faster-inference.md), [FP16 versus IEEE FP32](corpus100k-mixed-precision.md), [Full-frame CUDA transport](corpus100k-device-tiles.md), [FP16 cuDNN search](corpus100k-cudnn-fp16.md), [Paired TensorRT kernel timing](corpus100k-trt-tactics.md) |
+| Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [Corpus 100k](full-corpus-long100k.md#broader-evaluation), [Matched scene 50k and paired continuation cameras](scene-50000-cameras.md), [Matched scene 12k cameras](expanded-scene-12000-cameras.md), [Near-ADC cameras](near-adc-bridge-cameras.md) |
 | Understand camera evidence and its gaps | [Real-camera overview](real-camera-quality.md) |
 | Find active work and completed research outcomes | [Experiment index](experiments.md), [research priorities](research.md) |
 | Understand the code and training data | [Architecture](architecture.md), [training pipeline](training-pipeline.md), [source review](current-source-loss-review.md) |
@@ -68,6 +68,8 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [Phase-aligned green recovery and matched 47.5k checkpoints](green-covariance-refit.md) ·
 [Corpus/local frequency mixture](local-band-mixture.md) ·
 [Local-only 50k completion and scoped review](local-50000-scoped.md) ·
+[Matched 50k native review](scene-50000-native.md) ·
+[Paired local continuation](local-paired-continuation.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [paired fine luminance and flat support](paired-luminance-detail.md) ·
 [exact orientation averaging](paired-head-symmetry.md) ·

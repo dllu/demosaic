@@ -1,0 +1,1229 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/fp16_primary_excerpt.py",
+    "sha256": "91d828b079998af0ef949e0a78b2623de22f0ad1a95237e5615830f1b412d18d"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+    "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+  },
+  "weights": "ema",
+  "canonical_inputs": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/result.json",
+    "sha256": "64cacba459e09a90eb2727bf85b876f295ab21e13135585cbc501cc7738e3b09"
+  },
+  "comparison": "CUDA IEEE FP32 and standard FP16 autocast",
+  "rows": [
+    {
+      "stage": "photo",
+      "batch": 0,
+      "context": {
+        "ids": [
+          "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "004bbfea8ed076335d1891b6c38a48c46901fcab",
+          "006a5c59257dc25393bf2e3aec3fd7f36d67e563"
+        ],
+        "condition": {
+          "name": "adc-only",
+          "shot": 0.0,
+          "read": 0.0,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "seed": 20261014,
+        "clean_RGB": {
+          "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-000.npy",
+          "sha256": "c5742fb6458b8181e2ddd644cea1cab53d301000261b9e108cdf23a73b0a2d2a"
+        }
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/photo-00000.npz",
+        "sha256": "09670d34c00086989dcdce42e73aedc9aeede12327b6f15467e9728955cf1c14"
+      },
+      "quality": [
+        {
+          "linear_psnr": [
+            52.217864990234375,
+            48.341094970703125,
+            46.08491897583008,
+            42.46004104614258
+          ],
+          "srgb_psnr": [
+            43.71290588378906,
+            42.402591705322266,
+            40.776004791259766,
+            37.8060302734375
+          ]
+        },
+        {
+          "linear_psnr": [
+            52.21626281738281,
+            48.341590881347656,
+            46.08404541015625,
+            42.46013641357422
+          ],
+          "srgb_psnr": [
+            43.71183395385742,
+            42.402923583984375,
+            40.775413513183594,
+            37.806304931640625
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 1.100826365210175,
+        "max_DN16": 17.308329641819,
+        "code_p999_DN16": 6.708309747129783
+      }
+    },
+    {
+      "stage": "photo",
+      "batch": 12,
+      "context": {
+        "ids": [
+          "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "004bbfea8ed076335d1891b6c38a48c46901fcab",
+          "006a5c59257dc25393bf2e3aec3fd7f36d67e563"
+        ],
+        "condition": {
+          "name": "iso12800-prior",
+          "shot": 0.00256,
+          "read": 2.62144e-05,
+          "exposure": 1.0
+        },
+        "pattern": "RGGB",
+        "seed": 20261014,
+        "clean_RGB": {
+          "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-000.npy",
+          "sha256": "c5742fb6458b8181e2ddd644cea1cab53d301000261b9e108cdf23a73b0a2d2a"
+        }
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/photo-00012.npz",
+        "sha256": "f7ff07d23d626a11fff80a30ae6292436850c5642ca2a6484fc7721334968de8"
+      },
+      "quality": [
+        {
+          "linear_psnr": [
+            45.30271530151367,
+            40.607025146484375,
+            42.573890686035156,
+            37.613975524902344
+          ],
+          "srgb_psnr": [
+            41.851898193359375,
+            36.405662536621094,
+            38.47404098510742,
+            33.31171417236328
+          ]
+        },
+        {
+          "linear_psnr": [
+            45.30247497558594,
+            40.606910705566406,
+            42.57356643676758,
+            37.61402893066406
+          ],
+          "srgb_psnr": [
+            41.85136413574219,
+            36.40566635131836,
+            38.473480224609375,
+            33.31170654296875
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 1.2198538115744897,
+        "max_DN16": 27.726139426231384,
+        "code_p999_DN16": 6.647494268864428
+      }
+    },
+    {
+      "stage": "photo",
+      "batch": 16,
+      "context": {
+        "ids": [
+          "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "004bbfea8ed076335d1891b6c38a48c46901fcab",
+          "006a5c59257dc25393bf2e3aec3fd7f36d67e563"
+        ],
+        "condition": {
+          "name": "shadows",
+          "shot": 0.00064,
+          "read": 1.6384e-06,
+          "exposure": 0.125
+        },
+        "pattern": "RGGB",
+        "seed": 20261014,
+        "clean_RGB": {
+          "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-000.npy",
+          "sha256": "c5742fb6458b8181e2ddd644cea1cab53d301000261b9e108cdf23a73b0a2d2a"
+        }
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/photo-00016.npz",
+        "sha256": "225fe36b605548f7e7a7a5af870961643e634a813a7bd2d30ca88ab4dcc669cc"
+      },
+      "quality": [
+        {
+          "linear_psnr": [
+            62.290733337402344,
+            56.785335540771484,
+            58.94226837158203,
+            54.20527648925781
+          ],
+          "srgb_psnr": [
+            48.97562026977539,
+            42.41199493408203,
+            44.43034362792969,
+            39.4963493347168
+          ]
+        },
+        {
+          "linear_psnr": [
+            62.290306091308594,
+            56.78510665893555,
+            58.94218444824219,
+            54.20524978637695
+          ],
+          "srgb_psnr": [
+            48.97573471069336,
+            42.411781311035156,
+            44.43000793457031,
+            39.49639892578125
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 0.1637768810261327,
+        "max_DN16": 2.6039641723036766,
+        "code_p999_DN16": 0.8551063366793139
+      }
+    },
+    {
+      "stage": "photo",
+      "batch": 20,
+      "context": {
+        "ids": [
+          "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "004bbfea8ed076335d1891b6c38a48c46901fcab",
+          "006a5c59257dc25393bf2e3aec3fd7f36d67e563"
+        ],
+        "condition": {
+          "name": "highlights",
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "exposure": 4.0
+        },
+        "pattern": "RGGB",
+        "seed": 20261014,
+        "clean_RGB": {
+          "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-000.npy",
+          "sha256": "c5742fb6458b8181e2ddd644cea1cab53d301000261b9e108cdf23a73b0a2d2a"
+        }
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/photo-00020.npz",
+        "sha256": "245165624813facb17e6b9a7742ad7d2a645460efe017e75695e8c8b35e83661"
+      },
+      "quality": [
+        {
+          "linear_psnr": [
+            10.473832130432129,
+            13.559723854064941,
+            15.709996223449707,
+            19.884294509887695
+          ],
+          "srgb_psnr": [
+            30.7576904296875,
+            39.54021072387695,
+            39.67633056640625,
+            32.84783172607422
+          ]
+        },
+        {
+          "linear_psnr": [
+            10.473827362060547,
+            13.559883117675781,
+            15.710233688354492,
+            19.88435935974121
+          ],
+          "srgb_psnr": [
+            30.751474380493164,
+            39.54069519042969,
+            39.676170349121094,
+            32.847633361816406
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 27.66275944768647,
+        "max_DN16": 266.464684009552,
+        "code_p999_DN16": 175.62999974548913
+      }
+    },
+    {
+      "stage": "photo",
+      "batch": 21,
+      "context": {
+        "ids": [
+          "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "004bbfea8ed076335d1891b6c38a48c46901fcab",
+          "006a5c59257dc25393bf2e3aec3fd7f36d67e563"
+        ],
+        "condition": {
+          "name": "highlights",
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "exposure": 4.0
+        },
+        "pattern": "BGGR",
+        "seed": 20261014,
+        "clean_RGB": {
+          "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-000.npy",
+          "sha256": "c5742fb6458b8181e2ddd644cea1cab53d301000261b9e108cdf23a73b0a2d2a"
+        }
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/photo-00021.npz",
+        "sha256": "a9eb8901a041bcc7a6f7abfac0d2706b780c0f1d658c950f65178b52f6a6602c"
+      },
+      "quality": [
+        {
+          "linear_psnr": [
+            10.474882125854492,
+            13.570460319519043,
+            15.714354515075684,
+            19.881494522094727
+          ],
+          "srgb_psnr": [
+            31.068695068359375,
+            39.539886474609375,
+            40.028045654296875,
+            32.8066520690918
+          ]
+        },
+        {
+          "linear_psnr": [
+            10.474858283996582,
+            13.570643424987793,
+            15.714422225952148,
+            19.88155174255371
+          ],
+          "srgb_psnr": [
+            31.050779342651367,
+            39.540401458740234,
+            40.02750015258789,
+            32.80624771118164
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 35.99397780033462,
+        "max_DN16": 289.69089210033417,
+        "code_p999_DN16": 221.46981589972987
+      }
+    },
+    {
+      "stage": "photo",
+      "batch": 22,
+      "context": {
+        "ids": [
+          "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "004bbfea8ed076335d1891b6c38a48c46901fcab",
+          "006a5c59257dc25393bf2e3aec3fd7f36d67e563"
+        ],
+        "condition": {
+          "name": "highlights",
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "exposure": 4.0
+        },
+        "pattern": "GRBG",
+        "seed": 20261014,
+        "clean_RGB": {
+          "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-000.npy",
+          "sha256": "c5742fb6458b8181e2ddd644cea1cab53d301000261b9e108cdf23a73b0a2d2a"
+        }
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/photo-00022.npz",
+        "sha256": "951b930c2f0da0a13dce9515d38658cd785826cea71805db9f664574b22ddb42"
+      },
+      "quality": [
+        {
+          "linear_psnr": [
+            10.474432945251465,
+            13.572908401489258,
+            15.715787887573242,
+            19.850099563598633
+          ],
+          "srgb_psnr": [
+            31.477842330932617,
+            39.5720100402832,
+            39.54808807373047,
+            32.68940353393555
+          ]
+        },
+        {
+          "linear_psnr": [
+            10.474396705627441,
+            13.573066711425781,
+            15.716058731079102,
+            19.850122451782227
+          ],
+          "srgb_psnr": [
+            31.464187622070312,
+            39.572147369384766,
+            39.547977447509766,
+            32.6888313293457
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 38.2637016743213,
+        "max_DN16": 424.0794664621353,
+        "code_p999_DN16": 285.1886717373137
+      }
+    },
+    {
+      "stage": "photo",
+      "batch": 23,
+      "context": {
+        "ids": [
+          "0014aa4e075b1827f91ef8a02069e1e318f040ba",
+          "002fc6eeadf637e81d5a327f117b79abb86becd9",
+          "004bbfea8ed076335d1891b6c38a48c46901fcab",
+          "006a5c59257dc25393bf2e3aec3fd7f36d67e563"
+        ],
+        "condition": {
+          "name": "highlights",
+          "shot": 8e-05,
+          "read": 2.56e-08,
+          "exposure": 4.0
+        },
+        "pattern": "GBRG",
+        "seed": 20261014,
+        "clean_RGB": {
+          "path": "/mnt/external/demosaic/V104-dihedral8-full-quality-20261023-v1/full/photo/clean-000.npy",
+          "sha256": "c5742fb6458b8181e2ddd644cea1cab53d301000261b9e108cdf23a73b0a2d2a"
+        }
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/photo-00023.npz",
+        "sha256": "2ff45a1d5b948858de3e23d8e539cf9d16fdcf8f6414830d707bec8baae4bb3a"
+      },
+      "quality": [
+        {
+          "linear_psnr": [
+            10.475151062011719,
+            13.559547424316406,
+            15.709275245666504,
+            19.852088928222656
+          ],
+          "srgb_psnr": [
+            32.27742004394531,
+            39.628353118896484,
+            39.58989334106445,
+            32.651390075683594
+          ]
+        },
+        {
+          "linear_psnr": [
+            10.475138664245605,
+            13.55970287322998,
+            15.709493637084961,
+            19.852149963378906
+          ],
+          "srgb_psnr": [
+            32.265804290771484,
+            39.62879943847656,
+            39.59008026123047,
+            32.65109634399414
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 28.85772870302547,
+        "max_DN16": 358.46328020095825,
+        "code_p999_DN16": 192.90977513551877
+      }
+    },
+    {
+      "stage": "known",
+      "batch": 0,
+      "context": {
+        "ids": [
+          "2pilesofplates:4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1:160:160",
+          "2pilesofplates:4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1:160:2756",
+          "2pilesofplates:4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1:160:5352",
+          "2pilesofplates:4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1:1756:160"
+        ],
+        "case_index": 0,
+        "scene": "2pilesofplates",
+        "raw_source": {
+          "filename": "Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw",
+          "file_id": 28686,
+          "bytes": 49112576,
+          "publisher_checksum": {
+            "type": "MD5",
+            "value": "b68f3f538b448e5f76ccff5dc308df4e"
+          },
+          "sha1": "31fac4e2aeaa235193744d7e49c503734b6346b2",
+          "iso_label": 2000,
+          "role": "noisy",
+          "url": "https://dataverse.uclouvain.be/api/access/datafile/28686",
+          "sha256": "4598b6cf16bb2e85743800c63e7ae6fcc821c3ec768e7959c5fb8fd61dfe8ed1",
+          "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_2pilesofplates_ISO2000_sha1=31fac4e2aeaa235193744d7e49c503734b6346b2.arw"
+        },
+        "crop_xywh": [
+          [
+            160,
+            160,
+            512,
+            512
+          ],
+          [
+            2756,
+            160,
+            512,
+            512
+          ],
+          [
+            5352,
+            160,
+            512,
+            512
+          ],
+          [
+            160,
+            1756,
+            512,
+            512
+          ]
+        ],
+        "noise": {
+          "shot": 0.00022425719328779764,
+          "read": 9.48210212944349e-08
+        },
+        "pattern": "RGGB"
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/known-00000.npz",
+        "sha256": "38eb89dbc9c3388fc69c85d1569753f702e132155073f546a76586cd773a4b3e"
+      },
+      "quality": [
+        {
+          "sensor_psnr": [
+            63.77299499511719,
+            61.506675720214844,
+            63.65106964111328,
+            66.97103118896484
+          ],
+          "reference_samples": [
+            200704.0,
+            200700.0,
+            200704.0,
+            200704.0
+          ],
+          "ahd_srgb_psnr": [
+            49.59734344482422,
+            47.4507942199707,
+            44.38263702392578,
+            48.60672378540039
+          ]
+        },
+        {
+          "sensor_psnr": [
+            63.774227142333984,
+            61.50823974609375,
+            63.65127944946289,
+            66.97139739990234
+          ],
+          "reference_samples": [
+            200704.0,
+            200700.0,
+            200704.0,
+            200704.0
+          ],
+          "ahd_srgb_psnr": [
+            49.59795379638672,
+            47.45149230957031,
+            44.38298034667969,
+            48.60706329345703
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 0.2003913776520288,
+        "max_DN16": 4.710865616798401,
+        "code_p999_DN16": 1.405251994729042
+      }
+    },
+    {
+      "stage": "known",
+      "batch": 23,
+      "context": {
+        "ids": [
+          "D60-2:19dca81acc8d2152848339fc84d9702f0ea66cd7901e20df3af2d1b4547cc0ac:1384:2416"
+        ],
+        "case_index": 7,
+        "scene": "D60-2",
+        "raw_source": {
+          "filename": "Bayer_D60-2_ISO1037_sha1=aaa5a0772e45a487b03bd39beec503f2dc439c87.crw",
+          "file_id": 29262,
+          "bytes": 7380842,
+          "publisher_checksum": {
+            "type": "MD5",
+            "value": "d90abe9211fd473773e0aad1894d9c5f"
+          },
+          "sha1": "aaa5a0772e45a487b03bd39beec503f2dc439c87",
+          "iso_label": 1037,
+          "role": "noisy",
+          "url": "https://dataverse.uclouvain.be/api/access/datafile/29262",
+          "sha256": "19dca81acc8d2152848339fc84d9702f0ea66cd7901e20df3af2d1b4547cc0ac",
+          "path": "/mnt/external/demosaic/references/rawnind-dataset/files/Bayer_D60-2_ISO1037_sha1=aaa5a0772e45a487b03bd39beec503f2dc439c87.crw"
+        },
+        "crop_xywh": [
+          [
+            2416,
+            1384,
+            512,
+            512
+          ]
+        ],
+        "noise": {
+          "shot": 0.0002515145215215365,
+          "read": 7.184181234054655e-06
+        },
+        "pattern": "RGGB"
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/known-00023.npz",
+        "sha256": "4f651c42475da7754db9040dcd7b2be5c51f7104f4634c2352afae81f0a9a1ef"
+      },
+      "quality": [
+        {
+          "sensor_psnr": [
+            54.26651382446289
+          ],
+          "reference_samples": [
+            200704.0
+          ],
+          "ahd_srgb_psnr": [
+            38.58258819580078
+          ]
+        },
+        {
+          "sensor_psnr": [
+            54.26622772216797
+          ],
+          "reference_samples": [
+            200704.0
+          ],
+          "ahd_srgb_psnr": [
+            38.58395004272461
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 0.1550992984133393,
+        "max_DN16": 1.6493888944387436,
+        "code_p999_DN16": 0.723133496940136
+      }
+    },
+    {
+      "stage": "unseen",
+      "batch": 0,
+      "context": {
+        "ids": [
+          "LucieB_3apples:9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f:160:160",
+          "LucieB_3apples:9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f:160:2756",
+          "LucieB_3apples:9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f:160:5352",
+          "LucieB_3apples:9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f:1754:160"
+        ],
+        "case_index": 0,
+        "scene": "LucieB_3apples",
+        "raw_source": {
+          "filename": "Bayer_UNK_LucieB_3apples_ISO1600_sha1=f28389e43e270ededf4d50a7157c48f1ac89f105.cr2",
+          "file_id": 29519,
+          "bytes": 36801196,
+          "publisher_checksum": {
+            "type": "MD5",
+            "value": "d4047513eb8fb9b7aa476781288d31a6"
+          },
+          "sha1": "f28389e43e270ededf4d50a7157c48f1ac89f105",
+          "iso_label": 1600,
+          "role": "noisy",
+          "url": "https://dataverse.uclouvain.be/api/access/datafile/29519",
+          "sha256": "9468ea561f50086a8d53966f1272d2e6a331e083ef909b92e349c4e758180e6f",
+          "path": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_3apples_ISO1600_sha1=f28389e43e270ededf4d50a7157c48f1ac89f105.cr2"
+        },
+        "crop_xywh": [
+          [
+            160,
+            160,
+            512,
+            512
+          ],
+          [
+            2756,
+            160,
+            512,
+            512
+          ],
+          [
+            5352,
+            160,
+            512,
+            512
+          ],
+          [
+            160,
+            1754,
+            512,
+            512
+          ]
+        ],
+        "noise": {
+          "shot": 0.0006616256626047161,
+          "read": 7.436489908776232e-06
+        },
+        "pattern": "RGGB"
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/preflight/unseen-00000.npz",
+        "sha256": "d080c2eb91e26af484f0aa8b881894b9aa0d342a58a872a1b4a61f80d12b05d0"
+      },
+      "quality": [
+        {
+          "sensor_psnr": [
+            47.07831954956055,
+            45.91627502441406,
+            45.30397033691406,
+            50.157127380371094
+          ],
+          "reference_samples": [
+            200678.0,
+            200695.0,
+            200704.0,
+            200704.0
+          ],
+          "ahd_srgb_psnr": [
+            37.263301849365234,
+            40.362464904785156,
+            39.750244140625,
+            37.15434646606445
+          ]
+        },
+        {
+          "sensor_psnr": [
+            47.07844161987305,
+            45.916053771972656,
+            45.304481506347656,
+            50.156776428222656
+          ],
+          "reference_samples": [
+            200678.0,
+            200695.0,
+            200704.0,
+            200704.0
+          ],
+          "ahd_srgb_psnr": [
+            37.262603759765625,
+            40.36213302612305,
+            39.75032424926758,
+            37.15385437011719
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 0.6774764022748121,
+        "max_DN16": 19.195019602775574,
+        "code_p999_DN16": 3.6757251620292664
+      }
+    },
+    {
+      "stage": "unseen",
+      "batch": 29,
+      "context": {
+        "ids": [
+          "LucieB_top_of_Expedit:5ae631ae691e6ff47354f03d42b1f66c42860fe33912546abd0c1ff4195e12b1:3348:5352"
+        ],
+        "case_index": 9,
+        "scene": "LucieB_top_of_Expedit",
+        "raw_source": {
+          "filename": "Bayer_UNK_LucieB_top_of_Expedit_ISO12800_sha1=bb01ff09529830cfbc54789b344873a5ffcd3093.cr2",
+          "file_id": 30188,
+          "bytes": 43082363,
+          "publisher_checksum": {
+            "type": "MD5",
+            "value": "1f57ae7078c3c206c357083490196767"
+          },
+          "sha1": "bb01ff09529830cfbc54789b344873a5ffcd3093",
+          "iso_label": 12800,
+          "role": "noisy",
+          "url": "https://dataverse.uclouvain.be/api/access/datafile/30188",
+          "sha256": "5ae631ae691e6ff47354f03d42b1f66c42860fe33912546abd0c1ff4195e12b1",
+          "path": "/mnt/external/demosaic/references/rawnind-unseen-development/files/Bayer_UNK_LucieB_top_of_Expedit_ISO12800_sha1=bb01ff09529830cfbc54789b344873a5ffcd3093.cr2"
+        },
+        "crop_xywh": [
+          [
+            5352,
+            3348,
+            512,
+            512
+          ]
+        ],
+        "noise": {
+          "shot": 0.003040483276502749,
+          "read": 0.00014358315203565782
+        },
+        "pattern": "RGGB"
+      },
+      "arrays": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-canonical-inputs-v1/full/unseen-00029.npz",
+        "sha256": "bcf80c5068f366dfe4f3ad58ea95d5b0983ff0edbd0ad294c0bfbe568febdb18"
+      },
+      "quality": [
+        {
+          "sensor_psnr": [
+            63.393341064453125
+          ],
+          "reference_samples": [
+            301056.0
+          ],
+          "ahd_srgb_psnr": [
+            36.212913513183594
+          ]
+        },
+        {
+          "sensor_psnr": [
+            63.390403747558594
+          ],
+          "reference_samples": [
+            301056.0
+          ],
+          "ahd_srgb_psnr": [
+            36.2073860168457
+          ]
+        }
+      ],
+      "error": {
+        "RMS_DN16": 0.22245622599310533,
+        "max_DN16": 1.7023971187882125,
+        "code_p999_DN16": 0.7845498819449886
+      }
+    }
+  ],
+  "exact": [
+    {
+      "id": "12-wire-iso6400",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "source": {
+          "attribution": null,
+          "author": "Tobias \"ToMar\" Maier",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ad/ad0b3ba2652514f25bd0da0daf373dca0ba09c8b.npy",
+          "cache_sha256": "78f6cd8498940a30743e9e90c803d92726c78ae23ded5c0043d3ddad4a12eb4f",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/ad/0b/ad0b3ba2652514f25bd0da0daf373dca0ba09c8b.jpg",
+          "dtype": "uint16",
+          "height": 2102,
+          "id": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+          "license": "CC BY-SA 3.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Concord_Eye-Q_1M_Camera_rear_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Concord_Eye-Q_1M_Camera_rear_view.jpg",
+          "sha1": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+          "sha1_hex": "ad0b3ba2652514f25bd0da0daf373dca0ba09c8b",
+          "shape": [
+            525,
+            700,
+            3
+          ],
+          "split": "val",
+          "title": "File:Concord Eye-Q 1M Camera rear view.jpg",
+          "width": 2802
+        },
+        "index": 12,
+        "box": [
+          180,
+          4,
+          512,
+          512
+        ],
+        "camera": {
+          "pattern": "GBRG",
+          "wb": [
+            1.6067786325577211,
+            1.0,
+            1.3708790471593986
+          ],
+          "camera_inverse": [
+            [
+              0.8625788132550156,
+              0.10724719743786934,
+              0.030173989307115002
+            ],
+            [
+              0.03583862582658379,
+              0.9357174364551699,
+              0.02844393771824635
+            ],
+            [
+              0.013085025968556869,
+              0.09460856145315415,
+              0.892306412578289
+            ]
+          ],
+          "exposure": 0.7905762168799332,
+          "shot": 0.00014897918438741805,
+          "read": 8.337760943062196e-08,
+          "black": 0.03,
+          "noise_seed": 1253738468077806002
+        },
+        "kind": "wire",
+        "geometry": {
+          "family": "ellipse",
+          "frequency": [
+            [
+              0.0912391388192916,
+              0.06608114039034557
+            ],
+            [
+              0.08887352308170532,
+              -0.07330690797987081
+            ]
+          ],
+          "phase": [
+            2.5826001338113196,
+            -2.1769649825830366
+          ],
+          "strength": [
+            0.01456746427942367,
+            0.007234215161915719
+          ],
+          "width": [
+            0.12765798452235602,
+            0.1265432393864863
+          ],
+          "edge": -10.16894669337608,
+          "gap_center": [
+            19.307771216009456,
+            17.845015079692708
+          ],
+          "gap_width": 21.763983768800912,
+          "gap_length": 43.45677592914153,
+          "gap_orientation": 1.5110439988666589,
+          "angle": 0.43172087201439835,
+          "tint": [
+            0.12094686297959371,
+            0.11458922972514139,
+            0.11546867214939108
+          ]
+        }
+      },
+      "query": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/12-capture.npz",
+        "sha256": "32e4b238f778a8d66ff07668c82e2df0a3a5d7a545197a8a4daeac76871d23c0"
+      },
+      "iso_profile": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/fp16-extra/12-wire-iso6400-comparison.png",
+          "sha256": "06e20c60ac7be9a8e3bc591834a9706c0041ecab9e991c50a5f67696d6785327"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/fp16-extra/12-wire-iso6400-triplet.png",
+          "sha256": "8a37a9d1f5af872d860b9126e8e984dcd2744c5be9171b218fe5ecadcb6f8789"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "30-natural-iso6400",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "source": {
+          "attribution": null,
+          "author": "Charles J. Sharp",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/70/70a6e28469b000f533ff90b289240fdc2bdc65fd.npy",
+          "cache_sha256": "624f8aadd8fe097018020a38d3d4330fa447c9afffa6765682ccf74612866263",
+          "color_space": "linear-sRGB",
+          "credit": "Own work, from Sharp Photography, sharpphotography",
+          "download_path": "images/70/a6/70a6e28469b000f533ff90b289240fdc2bdc65fd.jpg",
+          "dtype": "uint16",
+          "height": 2527,
+          "id": "70a6e28469b000f533ff90b289240fdc2bdc65fd",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Cuban_green_woodpecker_%28Xiphidiopicus_percussus_percussus%29_female.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Cuban_green_woodpecker_(Xiphidiopicus_percussus_percussus)_female.JPG",
+          "sha1": "70a6e28469b000f533ff90b289240fdc2bdc65fd",
+          "sha1_hex": "70a6e28469b000f533ff90b289240fdc2bdc65fd",
+          "shape": [
+            631,
+            631,
+            3
+          ],
+          "split": "val",
+          "title": "File:Cuban green woodpecker (Xiphidiopicus percussus percussus) female.JPG",
+          "width": 2527
+        },
+        "index": 30,
+        "box": [
+          14,
+          320,
+          256,
+          256
+        ],
+        "camera": {
+          "pattern": "BGGR",
+          "wb": [
+            2.1311648196260276,
+            1.0,
+            0.9844431114813756
+          ],
+          "camera_inverse": [
+            [
+              0.7404909781734593,
+              0.19610348179154138,
+              0.06340554003499932
+            ],
+            [
+              0.0898912833321977,
+              0.5838537442797331,
+              0.32625497238806916
+            ],
+            [
+              0.0199794989697528,
+              0.07886020784602739,
+              0.9011602931842198
+            ]
+          ],
+          "exposure": 0.18008162622824667,
+          "shot": 1.8539962304072114e-05,
+          "read": 6.410008995200706e-09,
+          "black": 0.03,
+          "noise_seed": 1070821994788301672
+        },
+        "kind": "natural"
+      },
+      "query": [
+        14,
+        320,
+        256,
+        256
+      ],
+      "inputs": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-band-mixture-v1/confirmation/30-capture.npz",
+        "sha256": "9799ea4919c05c27b4e0d639691a4a1c734d9eb559dcbb8dd544c7b4824d3af3"
+      },
+      "iso_profile": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/fp16-extra/30-natural-iso6400-comparison.png",
+          "sha256": "b1cb141950dfa5c186120dcc42b117a74e1a3e5fe916d5a00a5850dd4e134349"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k IEEE FP32",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/fp16-extra/30-natural-iso6400-triplet.png",
+          "sha256": "56902b22a713978ea8658532af160c1381ed31a42d13256ea58139fcc153d2f5"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local 50k FP16",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/fp16-extra/result.json",
+    "sha256": "039800a26a324175e325d95089ca53b7f967d58a88fe7c2dd4e031fa07e640f4"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local50000-fp16-v1/fixed-panel-excerpt.tar.xz",
+    "sha256": "66690a84878eba595a146913f99ce3df23092cfc2d15191d2017da2d6796ce98"
+  },
+  "views": {
+    "path": "/home/dllu/proj/demosaic/docs/images/local50000-fp16-v1/manifest.json",
+    "sha256": "89724654456e76592381e37fcd9506ce1d71bd7616c6498bf277b5ddf6e85916"
+  },
+  "fixed_panel_complete": false
+}

@@ -1,6 +1,6 @@
 # Real-camera quality and coverage
 
-Reviewed November 17, 2026. **V120 Small is the general recommendation.**
+Reviewed November 19, 2026. **V120 Small is the general recommendation.**
 V131's newer broad review improves photographic scores but reduces the unseen
 camera mean. Scored camera panels and the unscored three-camera gallery below
 are different evidence sets.
@@ -16,6 +16,11 @@ scores are distinct from auxiliary AHD RGB scores; independently demosaiced RGB
 is not exact GT. These small development panels do not establish broad camera
 superiority. V132 has no completed broad-camera score; ADC-only V131 projection
 does not change its positive-noise camera output.
+
+The scene 50k and paired continuation results extend the scored
+camera panels. Both 50k arms lose known-camera PSNR versus Corpus
+100k. The paired continuation gains 0.07490 dB over its absolute
+control on the unseen panel. [Fixed camera review](scene-50000-cameras.md).
 
 The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) still covers
 V104/V114/V115 and RawNIND, with no clean reference. Newer qualitative reviews

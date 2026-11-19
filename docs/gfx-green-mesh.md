@@ -8,6 +8,8 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Matched local and spatial 50k EMA](scene-50000-native.md#standing-gfx100s-comparisons) | Spatial changes the four crops by 2.17–4.04 DN16 RGB RMS from local-only. Transferred right diagonals remain clearest and fine intersections stay incomplete |
+| [Paired fine-detail continuation](local-paired-continuation.md#standing-gfx100s-comparisons) | The transferred profile keeps the clearest right diagonals. The paired arm slightly softens the lattice and leaves fine crossings incomplete. Both ROI pairs, JPEGs and AHD were viewed |
 | [Local-only 50k EMA](local-50000-scoped.md#standing-gfx100s-comparisons) | All four crops change by 0.054–0.066 DN16 RGB RMS versus 47.5k. Both ROIs, priors, JPEGs and AHD reviewed. Fine crossings stay incomplete |
 | [Registered Corpus/local band blend](local-band-mixture.md#standing-gfx100s-comparisons) | The four crops change by 2.301–2.726 DN16 RGB RMS versus local 47.5k. Both ROIs, priors, JPEGs and AHD reviewed. Transferred right diagonals remain clearest with incomplete crossings |
 | [Local and spatial 47.5k with frozen blends](green-covariance-refit.md#standing-gfx100s-comparisons) | Both ROIs, both priors, both JPEGs and AHD reviewed. The newer blend changes the four crops by 0.243–0.991 DN16 RGB RMS. Transferred right diagonals are clearest and fine crossings remain incomplete |

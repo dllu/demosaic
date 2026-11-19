@@ -3,6 +3,15 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Local 50k guarded precision](local50000-guarded-precision.md#native-crops)
+  compares three full-frame precision policies. The guard holds all
+  near-saturation RGB16 differences within one DN16 of IEEE FP32.
+- [Matched local and spatial 50k EMA](scene-50000-native.md#standing-gfx100s-comparisons)
+  retain a smooth sky and clear coarse fence crossings. The sky changes
+  by 0.832 DN16 camera RGB RMS between arms.
+- [Paired fine-detail continuation](local-paired-continuation.md#standing-gfx100s-comparisons)
+  keeps a smooth sky and coherent coarse fence intersections. Building
+  wires and foliage remain soft.
 - [Local-only 50k EMA](local-50000-scoped.md#standing-gfx100s-comparisons)
   changes the four main crops by 0.050–0.182 DN16 RGB RMS versus
   47.5k. Sky stays smooth and coarse crossings remain coherent.

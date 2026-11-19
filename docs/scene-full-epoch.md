@@ -335,12 +335,45 @@ natural fine-flat and increment error against Corpus 100k, with
 mixed intact-wire changes. The paired fixed photo and camera panels
 remain queued at 50k. [Matched 47.5k scope and native review](green-covariance-refit.md).
 
-Local-only training completed 50,000 updates, 100,000 observations
-and 400,000 native queries. The second pass contains 9,308 distinct
-photos. A scoped numerical and native review is complete at the 50k
-EMA. The spatial arm continues and the paired fixed photo and camera
-reviews remain queued. [Local 50k recipe and scope](local-50000-scoped.md) ·
-[Verified completion](results/scene-full-epoch-v1/local-050000-training.json).
+Both arms completed 50,000 updates on identical inputs, with 100,000
+photo observations, 100,000 distinct sensor seeds and 400,000 native
+queries per arm. The first pass covers 90,692 eligible photographs and
+the second visits 9,308 distinct photographs. Retained training took
+24,213.00 s for local-only and 31,768.12 s for spatial. The spatial
+checkpoint SHA256 is
+`3cfe9517164e621e112c7bff436a02c064d6db5f310a13afc0d3b7d0054c33bf`.
+Both final artifacts contain raw and EMA weights. The local-only
+scoped numerical and native review is complete. The matched native
+development and standing GFX review is complete. Both fixed camera
+panels are complete. The controlled weak-detail and fixed photo
+reviews are running.
+[Matched completion receipt](results/scene-full-epoch-v1/paired-prefix-050000.json) ·
+[Final segment evidence](results/scene-full-epoch-v1/paired-prefix-050000.tar.xz) ·
+[Local 50k scoped review](local-50000-scoped.md) ·
+[Matched native review](scene-50000-native.md) ·
+[Fixed camera panels](scene-50000-cameras.md).
+
+### Compact fixed-panel evaluation
+
+The full CPU collector stopped at its 192 GiB free-space reserve for
+saved prediction arrays.
+The compact CUDA collector checks the canonical Bayer inputs and retains
+per-case metrics, camera/noise provenance and prediction fingerprints.
+The qualification used four photographic batches and two batches from
+each camera panel, with the 47.5k pair, V120 and Corpus 100k. Against
+retained V120 IEEE FP32 CPU outputs, the largest per-batch RMS was
+0.02188 DN16, maximum pixel difference was 0.24218 DN16, and the
+maximum score shift was 0.0000077 dB. The qualification used about 171
+KiB of JSON, excluding model weights and already-cached inputs. The
+50k run passes the same eight-batch check with the final EMAs and the
+two paired continuations. Its fixed camera panels are published.
+The fixed 427-photo replay continues.
+[Preflight audit](results/scene-full-epoch-v1/compact-cuda-preflight.json) ·
+[Frozen receipts](results/scene-full-epoch-v1/compact-cuda-preflight.tar.xz) ·
+[Paired continuations](local-paired-continuation.md).
+
+### Earlier matched audit links
+
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·

@@ -1,0 +1,195 @@
+{
+  "result": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-compact-47500-qualification-v1/preflight/result.json",
+    "sha256": "faabd1671a27356b1424516b4959c26b1e78fd23bc8befb29e884cf1e9ba80c9"
+  },
+  "plan": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-compact-47500-qualification-v1/plan.json",
+    "sha256": "8590acae2f845aa4e3ba1b9baf1d4ecb53aa3c94b90a7f0bf42925ceca44da4e"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/scene-full-epoch-v1/compact-cuda-preflight.tar.xz",
+    "sha256": "5d65935f53b3ad62d77c6e525ff49b999a024422a0aa86ef7c2c716759ef7117"
+  },
+  "counts": {
+    "known": 2,
+    "unseen": 2,
+    "photo": 4
+  },
+  "models": {
+    "V120": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/mnt/external/demosaic/models/v120-final20000.pt",
+        "sha256": "a9d9b6b4f974e24a6b11e5e740aab32314233a7f53c056cf37c7d2aac1c589fb"
+      },
+      "step": 20000
+    },
+    "parent100k": {
+      "kind": "parent",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "step": 100000
+    },
+    "none": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-047500/segments/through-047500/attempt-01/work/step047500.pt",
+        "sha256": "98b0c71988ff0c9540c9dd310b60cc324ef9642fc9d4c14c35d85b57522dba19"
+      },
+      "step": 47500
+    },
+    "spatial": {
+      "kind": "scene",
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-047500/segments/through-047500/attempt-01/work/step047500.pt",
+        "sha256": "11c5940f9ae82d1af07c5d51c4c938dc44182e2aea80a3ea2a6b3710cfc71804"
+      },
+      "step": 47500
+    }
+  },
+  "policy": "CUDA channels-last IEEE FP32. Retain per-case PSNR, input fingerprints and CPU checks.",
+  "V120_CPU_comparisons": [
+    {
+      "stage": "known",
+      "batch": 0,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/known-00000-CPU-f32.npy",
+        "sha256": "60a7cccfaa63028d23baf3af2f2c08edf124be9454ba42cd3ca1077a8559c85c"
+      },
+      "maximum_DN16": 0.01269511878490448,
+      "RMS_DN16": 0.0007599815723543311,
+      "score": "sensor_psnr",
+      "delta_dB": [
+        0.0,
+        0.0,
+        7.62939453125e-06,
+        0.0
+      ]
+    },
+    {
+      "stage": "known",
+      "batch": 23,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/known-00023-CPU-f32.npy",
+        "sha256": "2c7a86e81806506bef5bc431baea33abd240b367a041561e01822e58552c667a"
+      },
+      "maximum_DN16": 0.006835833191871643,
+      "RMS_DN16": 0.000663534341369792,
+      "score": "sensor_psnr",
+      "delta_dB": [
+        0.0
+      ]
+    },
+    {
+      "stage": "unseen",
+      "batch": 0,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/unseen-00000-CPU-f32.npy",
+        "sha256": "42d57e6f809596b287cd0396de9cd3aa0254eb14974e3f5a6d5d7392efce90e7"
+      },
+      "maximum_DN16": 0.027343332767486572,
+      "RMS_DN16": 0.0023335846191029855,
+      "score": "sensor_psnr",
+      "delta_dB": [
+        0.0,
+        -3.814697265625e-06,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "stage": "unseen",
+      "batch": 29,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/unseen-00029-CPU-f32.npy",
+        "sha256": "a9f981b6401f9c91b01c41224df1f21135cd425e8ee7e2740ed9538ee492f16f"
+      },
+      "maximum_DN16": 0.005416787462309003,
+      "RMS_DN16": 0.0009139720837435475,
+      "score": "sensor_psnr",
+      "delta_dB": [
+        0.0
+      ]
+    },
+    {
+      "stage": "photo",
+      "batch": 0,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/photo-00000-CPU-f32.npy",
+        "sha256": "4c5264bd0a31575aa8d4658fc4c73702d830387cea95fa6bc630ef6b7d2dc36d"
+      },
+      "maximum_DN16": 0.027343332767486572,
+      "RMS_DN16": 0.0027979790520618135,
+      "score": "srgb_psnr",
+      "delta_dB": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "stage": "photo",
+      "batch": 12,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/photo-00012-CPU-f32.npy",
+        "sha256": "5b620fb3e7b154f6f57a85fe25bcf7771a8533faa2fa3a3a54fcf8cef6c87964"
+      },
+      "maximum_DN16": 0.04296809434890747,
+      "RMS_DN16": 0.004225550924076012,
+      "score": "srgb_psnr",
+      "delta_dB": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "stage": "photo",
+      "batch": 16,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/photo-00016-CPU-f32.npy",
+        "sha256": "f52fd1d42ef4c85cfeb26becfd123129c042010e9991c630c04fa504bdf9e67e"
+      },
+      "maximum_DN16": 0.005615148693323135,
+      "RMS_DN16": 0.0005488268642385169,
+      "score": "srgb_psnr",
+      "delta_dB": [
+        -3.814697265625e-06,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "stage": "photo",
+      "batch": 20,
+      "reference": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-primary-cpu-compatibility-v1/photo-00020-CPU-f32.npy",
+        "sha256": "575852fd5b82bc9f7e1e51a18cc2ef0030da0dd65e9eb3c1d9ae123e06a2d766"
+      },
+      "maximum_DN16": 0.24218380451202393,
+      "RMS_DN16": 0.021878556355397573,
+      "score": "srgb_psnr",
+      "delta_dB": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "session_seconds": 81.25543219398241,
+  "forward_seconds": {
+    "V120": 19.317205453058705,
+    "parent100k": 16.876654437044635,
+    "none": 16.595476740854792,
+    "spatial": 20.291462202905677
+  },
+  "disk_bytes_without_checkpoints": 175072,
+  "full_photo_and_camera_result": false
+}

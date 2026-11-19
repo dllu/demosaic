@@ -27,6 +27,14 @@ are on two exact-target contexts. The [full DINO compilation follow-up](corpus10
 keeps normalization and residual arithmetic in FP32. It cuts resident
 DINO time by 35.3% and saves 4.1% in the paired 102 MP tile loop versus
 the TensorRT trunk with eager DINO.
+The [local 50k FP16 replay](local-50000-scoped.md#fp16-inference-at-fixed-geometry)
+also preserves the measured ISO6400 weak responses and both standing
+GFX crop sets. Resident 512-pixel batch-four forward time falls 6.19×
+on that checkpoint.
+An [FP32 near-saturation guard](local50000-guarded-precision.md)
+keeps RGB16 differences near saturated RAW samples within one code.
+It restores the 102 MP frame in 182.25 s versus 89.76 s for eager
+FP16 and 561.10 s for IEEE FP32 in shared-device runs.
 
 ## Where the time and precision go
 
