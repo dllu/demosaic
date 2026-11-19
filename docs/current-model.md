@@ -340,6 +340,15 @@ draws and raises draw-to-draw error. The fixed native gap test finds
 0.357 DN16 more error in the absent weak direction. The fine real
 cab crossings remain incomplete, and the known/unseen camera scores
 fall 0.03235/0.04143 dB versus the individual-loss control.
+[Repeat and gap losses](local-redraw-stability.md) lower natural
+fine-increment error by 2.83 DN16 for repeat versus its matched mean
+control. The repeat arm also lowers natural exact-flat fine RMS by
+0.28 DN16 at matched response to a mixture of the earlier endpoints,
+with 3.36 points less weak-wire response than the new mean control.
+The gap arm recovers 0.66 wire points versus repeat and raises exact-flat
+wire RMS by 0.79 DN16. The fine cab crossings remain incomplete in both
+profiles. Repeat gains 0.02439 dB unseen over its parent and finishes
+0.00473 dB above V120 unseen. Its known mean trails V120 by 0.11404 dB.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

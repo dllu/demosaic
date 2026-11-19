@@ -8,6 +8,9 @@ error and **0.14 DN16** of natural exact-flat fine RMS. The learned model
 needs a single RAW exposure per output. The fine cab crossings remain
 incomplete.
 
+[Repeat and gap loss follow-up](local-redraw-stability.md) tests whether
+the strongest mean endpoint's extra response can be made more stable.
+
 [Training audit](results/local-redraw-average-v1/training.json) ·
 [Frozen training evidence](results/local-redraw-average-v1/training-evidence.tar.xz) ·
 [Scoped metrics](results/local-redraw-average-v1/publication.json) ·

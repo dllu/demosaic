@@ -24,6 +24,10 @@ control on the unseen panel. [Fixed camera review](scene-50000-cameras.md).
 The mean redraw loss raises fine response and reduces measured-CFA
 PSNR on both panels against the individual-loss control.
 [Redraw camera review](local-redraw-average.md#fixed-camera-panels).
+The new repeat-loss continuation gains 0.04853 dB known and 0.02439 dB
+unseen over the mean-redraw endpoint it starts from. It trails V120 by
+0.11404 dB known and leads by 0.00473 dB unseen.
+[Repeat and gap camera review](local-redraw-stability.md#fixed-camera-panels).
 
 The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) still covers
 V104/V114/V115 and RawNIND, with no clean reference. Newer qualitative reviews

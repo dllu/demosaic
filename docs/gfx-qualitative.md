@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Repeat and gap losses](local-redraw-stability.md#standing-gfx100s-comparisons)
+  leave the overcast sky smooth and the coarse crossings coherent. Fine
+  bracing, cables and leaf edges remain soft across the three continuations.
 - [Mean and individual redraw losses](local-redraw-average.md#standing-gfx100s-comparisons)
   keep the sky smooth and coarse crossings coherent. Main 160-pixel
   crop changes span 2.54–16.29 DN16 RGB RMS for mean loss versus Local 50k.

@@ -1003,6 +1003,14 @@ draw-sensitive variance rises more than shared error falls. The planted
 wire tests also show additional weak-direction residue in true gaps.
 [Mean versus individual redraw loss](local-redraw-average.md).
 
+In a matched continuation from the mean endpoint, penalizing the
+variation across pairs lowers exact-flat fine error even at matched
+natural response to a mixture of the previous endpoints. The cost is
+lower weak-wire response. Direct supervision of the absent direction
+inside planted gaps restores a little wire response and lowers total
+gap error, with a small and uncertain change in weak-direction residue.
+[Repeat and gap losses](local-redraw-stability.md).
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate

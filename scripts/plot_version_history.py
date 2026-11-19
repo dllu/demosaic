@@ -25,7 +25,9 @@ COVERAGE_NOTE = (
     "[completed fixed camera panels](scene-50000-cameras.md). "
     "The two independent-redraw endpoints also have "
     "[completed fixed camera panels](local-redraw-average.md#fixed-camera-panels). "
-    "These ten full427 scores are pending. "
+    "The three repeat and gap continuations have "
+    "[completed fixed camera panels](local-redraw-stability.md#fixed-camera-panels). "
+    "These thirteen full427 scores are pending. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -680,6 +682,18 @@ def collect_redraw_endpoints():
     )
 
 
+def collect_stability_endpoints():
+    path = REPO / "docs/results/local-redraw-stability-camera-v1/publication.json"
+    names = {
+        "mean": ("Mean +320", 320),
+        "repeat": ("Repeat +320", 320),
+        "repeat-gap": ("Gap +320", 320),
+    }
+    return collect_compact_camera_endpoints(
+        path, "local-redraw-stability.md", "local-redraw-stability", names
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -703,11 +717,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v7.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v8.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v6.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v7.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v6.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v5.json"
         if not destination.exists():
@@ -745,6 +761,9 @@ def main():
         redraw_points, redraw_evidence = collect_redraw_endpoints()
         points.extend(redraw_points)
         evidence.extend(redraw_evidence)
+        stability_points, stability_evidence = collect_stability_endpoints()
+        points.extend(stability_points)
+        evidence.extend(stability_evidence)
         result = {
             "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",
@@ -795,7 +814,8 @@ def main():
             "axes.spines.right": False,
         }
     )
-    fig, axes = plt.subplots(2, 2, figsize=(11, 7.6), sharex=True, layout="constrained")
+    chart_width = 13 if len(named) > 12 else 11
+    fig, axes = plt.subplots(2, 2, figsize=(chart_width, 7.6), sharex=True, layout="constrained")
     ticks = [32, 43, 63, 72, 78, 84, 92]
     if latest - ticks[-1] < 5:
         ticks[-1] = latest
@@ -843,7 +863,7 @@ def main():
             axis.legend(loc="best", frameon=False, fontsize=8)
             axis.set_xticks(ticks, tick_labels)
             if len(named) > 2:
-                for label in axis.get_xticklabels()[-len(named):]:
+                for label in axis.get_xticklabels():
                     label.set_rotation(40)
                     label.set_ha("right")
                     label.set_rotation_mode("anchor")

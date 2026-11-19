@@ -1,0 +1,3260 @@
+{
+  "training": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-redraw-stability-v1/training.json",
+    "sha256": "ba8e4fb29616a7e28f45a69d95759d4694b81c1029e336d58c3b6a0d739280c4"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-redraw-stability-v1/evidence.tar.xz",
+    "sha256": "1098ef1b8ca0794a270e6dc70e9388e0b50d23ca84a3d4bb99ec1a56a115fe88"
+  },
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/local-redraw-stability-v1/manifest.json",
+    "sha256": "92ff1b37f260db528ef02d23b9ec3d932fe84b2a8f0da4cc74578c122acfced8"
+  },
+  "matched_response": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-redraw-stability-v1/matched-response.json",
+    "sha256": "ae4690913b1ad973e4b1f4b4f58d77b5921b8b0283e912e83a09acf523ee638c"
+  },
+  "models": {
+    "mean": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/mean.pt",
+      "sha256": "d771a3256db49e7d2fdbc98f76e0bc2d6e3a95f103d711a20749f15a1bd4764a"
+    },
+    "repeat": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/repeat.pt",
+      "sha256": "cc5a3cd5d33096f9696d250627d380ecc2f0ed53971da8c2d3f9772550cf9a7a"
+    },
+    "repeat-gap": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/repeat-gap.pt",
+      "sha256": "d9b68e30fea57cfe0e84509688c1326c5f5ce6f5286fe2b6a16e4775a2cba533"
+    }
+  },
+  "parent": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-average-v1/training/mean.pt",
+    "sha256": "c9083e7be3ec87e2f9bd2c2d4372cf0bce005d9d46d43b89c50e7af9e9bc272c"
+  },
+  "reviews": {
+    "native_metrics_complete": true,
+    "independent_redraw_metrics_complete": true,
+    "native_image_view_complete": true,
+    "fixed_427_complete": false
+  },
+  "training_seconds": 730.8535009850748,
+  "native_evaluation_seconds": 180.60842485399917,
+  "redraw_evaluation_seconds": 199.16961773403455,
+  "exact_metrics": {
+    "photo": {
+      "exact_flat_fine_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 4.367081272098839,
+          "V120": 5.726401681248898,
+          "Corpus 100k": 5.569110008495102,
+          "Local 50k EMA": 4.48883092909789,
+          "Mean control": 4.242932887724033,
+          "Repeat loss": 3.9820046095509807,
+          "Repeat + gap loss": 4.098397733707964
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.260928278173052,
+            "interval": [
+              -0.4325888884594908,
+              -0.10745552925155953
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.11639312415698333,
+            "interval": [
+              0.052560291551693686,
+              0.18748318529919838
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.14453515401606865,
+            "interval": [
+              -0.27210751957131174,
+              -0.0314741315667642
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.12414838437480658,
+            "interval": [
+              -0.22615335423407054,
+              -0.028429630409512383
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.24589804137385762,
+            "interval": [
+              -0.5413352209873987,
+              -0.006409297551394419
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -1.326177120771069,
+            "interval": [
+              -2.7608831205766298,
+              -0.2755654795983576
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -1.4834687935248656,
+            "interval": [
+              -2.289648244407558,
+              -0.8568144194575898
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.38507666254785855,
+            "interval": [
+              -0.5739775547880372,
+              -0.20357419562886891
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.5068263195469096,
+            "interval": [
+              -0.8979777736160733,
+              -0.2050458496999288
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -1.587105398944121,
+            "interval": [
+              -3.137643737562253,
+              -0.4092237996019867
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -1.7443970716979176,
+            "interval": [
+              -2.635590214007382,
+              -1.0371093612058702
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.2686835383908752,
+            "interval": [
+              -0.418689281099062,
+              -0.13683124739743593
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.39043319538992627,
+            "interval": [
+              -0.7429704641267914,
+              -0.10702279721553572
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -1.4707122747871377,
+            "interval": [
+              -2.9661454097144806,
+              -0.34184138881503523
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -1.6280039475409342,
+            "interval": [
+              -2.479370262612991,
+              -0.9494464465584616
+            ]
+          }
+        }
+      },
+      "exact_flat_upper_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 2.38386388070711,
+          "V120": 2.271487158949504,
+          "Corpus 100k": 2.150352216598752,
+          "Local 50k EMA": 2.483369771518768,
+          "Mean control": 2.400036716539181,
+          "Repeat loss": 2.352359896965485,
+          "Repeat + gap loss": 2.3911441526581645
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.04767681957369607,
+            "interval": [
+              -0.08200674290200599,
+              -0.015605532899591825
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.038784255692679626,
+            "interval": [
+              0.01480670356344348,
+              0.06611238656866118
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.008892563881016446,
+            "interval": [
+              -0.030258972117869164,
+              0.010626183174961923
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.016172835832070742,
+            "interval": [
+              -0.02588259226000968,
+              0.06232408039848176
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.0833330549795872,
+            "interval": [
+              -0.20630699494332577,
+              0.010855751552239884
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": 0.24968449994042885,
+            "interval": [
+              -0.12195613898659492,
+              0.535013945822722
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": 0.12854955758967712,
+            "interval": [
+              -0.041559927433910744,
+              0.31036748204182224
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.03150398374162533,
+            "interval": [
+              -0.06731722426168686,
+              0.002861197977769354
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.13100987455328328,
+            "interval": [
+              -0.27547127903280094,
+              -0.024519002809562186
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": 0.20200768036673278,
+            "interval": [
+              -0.1848727649086139,
+              0.48769516547040803
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": 0.08087273801598105,
+            "interval": [
+              -0.08841221254901768,
+              0.25420701010723334
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 0.007280271951054296,
+            "interval": [
+              -0.03370772639600676,
+              0.05114836580649066
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.09222561886060365,
+            "interval": [
+              -0.21972584210429702,
+              0.009078164142710317
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": 0.2407919360594124,
+            "interval": [
+              -0.13056732597914017,
+              0.522430083928018
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": 0.11965699370866067,
+            "interval": [
+              -0.04906409755337623,
+              0.2986618289238443
+            ]
+          }
+        }
+      },
+      "fine_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 137.84206226344352,
+          "V120": 137.344205377762,
+          "Corpus 100k": 137.44661296918724,
+          "Local 50k EMA": 136.33534173457852,
+          "Mean control": 138.74316142664583,
+          "Repeat loss": 135.90895311452894,
+          "Repeat + gap loss": 135.82062825101974
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -2.8342083121168855,
+            "interval": [
+              -3.6198396221538203,
+              -2.044597991788996
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.08832486350920021,
+            "interval": [
+              -0.1767184944019206,
+              0.00740177093667668
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -2.9225331756260857,
+            "interval": [
+              -3.7251133684961033,
+              -2.107016444160991
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.9010991632023035,
+            "interval": [
+              0.11065862737822203,
+              1.9085671748732607
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 2.4078196920673065,
+            "interval": [
+              1.4345672531212414,
+              3.430014078977813
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": 1.2965484574585844,
+            "interval": [
+              0.28268628951842417,
+              2.43682950927435
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": 1.3989560488838322,
+            "interval": [
+              0.09889293881959706,
+              2.770823803278387
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -1.933109148914582,
+            "interval": [
+              -2.698272920045352,
+              -1.149786928723877
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.426388620049579,
+            "interval": [
+              -0.8663942450348084,
+              0.020828944672571688
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -1.5376598546583011,
+            "interval": [
+              -2.2650477852788815,
+              -0.7267376867471785
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -1.4352522632330533,
+            "interval": [
+              -2.286340642837498,
+              -0.5186542711021261
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -2.021434012423782,
+            "interval": [
+              -2.845383185865023,
+              -1.170164740450562
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.5147134835587792,
+            "interval": [
+              -0.9394388380129624,
+              -0.03806024337009968
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -1.6259847181675013,
+            "interval": [
+              -2.3919750955916377,
+              -0.756436785607
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -1.5235771267422535,
+            "interval": [
+              -2.385786959880138,
+              -0.5843485268991445
+            ]
+          }
+        }
+      },
+      "fine_response_pp": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 61.58286623592864,
+          "V120": 58.22359956436171,
+          "Corpus 100k": 58.3143007122336,
+          "Local 50k EMA": 58.010222900652956,
+          "Mean control": 63.108855162846275,
+          "Repeat loss": 59.531361106189934,
+          "Repeat + gap loss": 59.396630568609645
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -3.5774940566563416,
+            "interval": [
+              -4.195099752065681,
+              -2.925406329553928
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.13473053758028897,
+            "interval": [
+              -0.2313261988104843,
+              -0.03237334586443518
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -3.7122245942366305,
+            "interval": [
+              -4.341826509675908,
+              -3.039536307605757
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 1.525988926917634,
+            "interval": [
+              0.9729889007667831,
+              2.098163037001433
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 5.09863226219332,
+            "interval": [
+              3.6790674310342606,
+              6.735354316157511
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": 4.794554450612672,
+            "interval": [
+              3.2462475234131993,
+              6.745100397368935
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": 4.885255598484562,
+            "interval": [
+              3.2096164412655837,
+              6.884552556419705
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -2.0515051297387075,
+            "interval": [
+              -2.6203752942505707,
+              -1.4763963106876767
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 1.5211382055369782,
+            "interval": [
+              0.3827586575411358,
+              2.8320301673212263
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": 1.2170603939563307,
+            "interval": [
+              -0.0979128703046505,
+              2.8655853050813263
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": 1.3077615418282207,
+            "interval": [
+              -0.0764688723784827,
+              2.9986140737964253
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -2.1862356673189964,
+            "interval": [
+              -2.7455338699512604,
+              -1.640431733231353
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 1.3864076679566892,
+            "interval": [
+              0.2833468566909741,
+              2.6598709383413706
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": 1.0823298563760417,
+            "interval": [
+              -0.22002987175661004,
+              2.720993491735711
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": 1.1730310042479317,
+            "interval": [
+              -0.1736971247981426,
+              2.8424498065818304
+            ]
+          }
+        }
+      },
+      "flat_chroma_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 33.74895157841277,
+          "V120": 34.85169414490233,
+          "Corpus 100k": 34.26261617998115,
+          "Local 50k EMA": 32.5340820179519,
+          "Mean control": 33.30677411298153,
+          "Repeat loss": 33.126097032149886,
+          "Repeat + gap loss": 32.80990216220706
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.1806770808316429,
+            "interval": [
+              -0.5757429729827211,
+              0.1690977674672637
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.31619486994282653,
+            "interval": [
+              -0.7578975527360796,
+              0.14057599886091082
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.49687195077446944,
+            "interval": [
+              -1.1693993160924296,
+              0.059501038430942836
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.4421774654312429,
+            "interval": [
+              -2.4124663953799326,
+              1.179993465960475
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 0.7726920950296261,
+            "interval": [
+              -0.5586674565277755,
+              2.2533029477595803
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -0.9558420669996224,
+            "interval": [
+              -2.981036900197904,
+              1.2841027599909598
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -1.5449200319208032,
+            "interval": [
+              -4.397709955563427,
+              0.9263177621616341
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.6228545462628858,
+            "interval": [
+              -2.6711716883478442,
+              1.0108391191676724
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 0.5920150141979832,
+            "interval": [
+              -0.5456834758049302,
+              1.7842669450814908
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -1.1365191478312653,
+            "interval": [
+              -2.9172214040703572,
+              0.8318823210846272
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -1.725597112752446,
+            "interval": [
+              -4.558526703914953,
+              0.7999422402568162
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.9390494162057124,
+            "interval": [
+              -2.673500604883629,
+              0.4788156933115964
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 0.27582014425515666,
+            "interval": [
+              -0.5787043477710581,
+              1.2147555005275474
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -1.4527140177740918,
+            "interval": [
+              -3.1929082522996404,
+              0.47134237734320134
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -2.0417919826952726,
+            "interval": [
+              -4.962194323515104,
+              0.4929959829500546
+            ]
+          }
+        }
+      },
+      "upper_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 86.94956995063703,
+          "V120": 87.33307758580965,
+          "Corpus 100k": 87.30669254907727,
+          "Local 50k EMA": 86.97145045072135,
+          "Mean control": 87.16309484092253,
+          "Repeat loss": 86.92063624483359,
+          "Repeat + gap loss": 86.92565182512965
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.24245859608893738,
+            "interval": [
+              -0.5648735325786923,
+              0.007968818472261708
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.005015580296060307,
+            "interval": [
+              -0.02476098335214658,
+              0.03243176243808179
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.23744301579287708,
+            "interval": [
+              -0.5758759751268151,
+              0.03266119973726075
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.21352489028549826,
+            "interval": [
+              -0.08645209834144083,
+              0.5838346411199907
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 0.1916443902011764,
+            "interval": [
+              -0.38497075577639955,
+              0.8480210470938103
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -0.1435977081547435,
+            "interval": [
+              -1.3233145027910087,
+              1.084070685257461
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -0.16998274488712184,
+            "interval": [
+              -1.4725764211744792,
+              1.1968513265416385
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.028933705803439125,
+            "interval": [
+              -0.31485476953305847,
+              0.177452961624218
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.05081420588776098,
+            "interval": [
+              -0.41046332843549,
+              0.3267185148794122
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -0.38605630424368087,
+            "interval": [
+              -1.3438895112542533,
+              0.5533507692695891
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -0.4124413409760592,
+            "interval": [
+              -1.492333098626966,
+              0.6786292225539234
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.023918125507378818,
+            "interval": [
+              -0.3230974865466301,
+              0.19096493336513473
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.04579862559170067,
+            "interval": [
+              -0.39441700061555346,
+              0.32048268893177034
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -0.38104072394762056,
+            "interval": [
+              -1.3154506883755979,
+              0.5482055523904296
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -0.4074257606799989,
+            "interval": [
+              -1.4636451720022285,
+              0.6708541380510878
+            ]
+          }
+        }
+      },
+      "upper_response_pp": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 23.651216165108263,
+          "V120": 18.78906550644198,
+          "Corpus 100k": 18.86026316067488,
+          "Local 50k EMA": 20.779791842965782,
+          "Mean control": 24.228722058481505,
+          "Repeat loss": 22.848545255628185,
+          "Repeat + gap loss": 22.855655006703767
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -1.3801768028533203,
+            "interval": [
+              -1.6513888037641935,
+              -1.1049598464080663
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.007109751075581983,
+            "interval": [
+              -0.08730178008790608,
+              0.09622998239213602
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -1.3730670517777384,
+            "interval": [
+              -1.6079619812579722,
+              -1.1380432769734565
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.5775058933732424,
+            "interval": [
+              0.20087603509340363,
+              0.9785757445879308
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 3.4489302155157233,
+            "interval": [
+              2.546010828539426,
+              4.448079277596005
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": 5.368458897806626,
+            "interval": [
+              4.106864778346267,
+              6.738894978501767
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": 5.439656552039526,
+            "interval": [
+              4.210333918253315,
+              6.7375768623121255
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.8026709094800779,
+            "interval": [
+              -1.2272040021750559,
+              -0.3871721903190707
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 2.068753412662403,
+            "interval": [
+              1.268720568669142,
+              2.9308381296245605
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": 3.9882820949533055,
+            "interval": [
+              2.9077059410707875,
+              5.182694637632304
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": 4.059479749186206,
+            "interval": [
+              2.9887127528385973,
+              5.209203989522807
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.7955611584044959,
+            "interval": [
+              -1.2235007221807561,
+              -0.37580608780618263
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 2.075863163737985,
+            "interval": [
+              1.2625591837047268,
+              2.9698270029950034
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": 3.9953918460288875,
+            "interval": [
+              2.8879064127515193,
+              5.226757781032103
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": 4.066589500261788,
+            "interval": [
+              2.963325199663318,
+              5.247708545656206
+            ]
+          }
+        }
+      }
+    },
+    "wire": {
+      "exact_flat_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 20.16970814347611,
+          "V120": 22.556857417200217,
+          "Corpus 100k": 22.196329545479852,
+          "Local 50k EMA": 20.490460529309214,
+          "Mean control": 21.122033512280467,
+          "Repeat loss": 19.72753973354321,
+          "Repeat + gap loss": 20.51918006344657
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -1.3944937787372567,
+            "interval": [
+              -1.7742829851524589,
+              -1.0253975556124946
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.791640329903359,
+            "interval": [
+              0.6046967366518706,
+              0.9875597580150975
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.6028534488338977,
+            "interval": [
+              -0.9808721568897779,
+              -0.22610484395843605
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.952325368804356,
+            "interval": [
+              0.5718537177261505,
+              1.3263337746484845
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 0.6315729829712531,
+            "interval": [
+              0.22425611030663328,
+              1.0430978264137396
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -1.074296033199385,
+            "interval": [
+              -1.6909459440339198,
+              -0.4560650097356185
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -1.4348239049197495,
+            "interval": [
+              -2.165714541223755,
+              -0.744814296984631
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.44216840993290063,
+            "interval": [
+              -0.9130716155041206,
+              0.01000381910169279
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.7629207957660036,
+            "interval": [
+              -1.2149934362300914,
+              -0.2825682957397221
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -2.4687898119366416,
+            "interval": [
+              -3.2822839529078447,
+              -1.7070371002558022
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -2.829317683657006,
+            "interval": [
+              -3.7980297336804454,
+              -1.951405072790939
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 0.34947191997045834,
+            "interval": [
+              -0.07841031564213177,
+              0.8060776299665248
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 0.028719534137355396,
+            "interval": [
+              -0.49212148704019115,
+              0.5851241873226254
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -1.6771494820332826,
+            "interval": [
+              -2.4621136177009557,
+              -0.9365630196934319
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -2.0376773537536472,
+            "interval": [
+              -2.9244072721045735,
+              -1.221196887042987
+            ]
+          }
+        }
+      },
+      "exterior_only_weak_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Mean parent": 8.60428919323282,
+          "V120": 8.819658838011039,
+          "Corpus 100k": 9.041533582042923,
+          "Local 50k EMA": 8.749833264009899,
+          "Mean control": 8.378834473619973,
+          "Repeat loss": 7.293282481153972,
+          "Repeat + gap loss": 7.32929911324207
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -1.0855519924660006,
+            "interval": [
+              -1.6964640114487273,
+              -0.5782513771388161
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.03601663208809747,
+            "interval": [
+              -0.06328094175159417,
+              0.13378032246314212
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -1.0495353603779032,
+            "interval": [
+              -1.6234278700915055,
+              -0.5661954797518121
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.2254547196128467,
+            "interval": [
+              -0.39579060565965396,
+              -0.05638166713939463
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.3709987903899261,
+            "interval": [
+              -0.879451043968893,
+              0.14829189068922247
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -0.6626991084229505,
+            "interval": [
+              -1.137149919429004,
+              -0.16432226147565807
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -0.44082436439106587,
+            "interval": [
+              -1.1339698809368794,
+              0.2438300575523985
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -1.3110067120788473,
+            "interval": [
+              -1.9702167152653045,
+              -0.7202803566845957
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -1.4565507828559268,
+            "interval": [
+              -2.3174700352857025,
+              -0.7510297779810964
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -1.7482511008889512,
+            "interval": [
+              -2.5851750402222318,
+              -1.0993055464285741
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -1.5263763568570665,
+            "interval": [
+              -2.5698121434282766,
+              -0.6113685916480128
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -1.2749900799907499,
+            "interval": [
+              -1.9177291530198017,
+              -0.7022204538521191
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -1.4205341507678293,
+            "interval": [
+              -2.2282617683465444,
+              -0.7776380816423244
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -1.7122344688008537,
+            "interval": [
+              -2.5175717704096026,
+              -1.0962855017397248
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -1.490359724768969,
+            "interval": [
+              -2.4876791832360743,
+              -0.6351222934556436
+            ]
+          }
+        }
+      },
+      "fine_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 92.73627303210912,
+          "V120": 92.78033393237143,
+          "Corpus 100k": 95.24429404150167,
+          "Local 50k EMA": 94.04818933852904,
+          "Mean control": 89.53324565592925,
+          "Repeat loss": 81.78841326991711,
+          "Repeat + gap loss": 82.06599593573846
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -7.744832386012135,
+            "interval": [
+              -9.57794769155342,
+              -5.998842307409654
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.27758266582134183,
+            "interval": [
+              0.08296614100365221,
+              0.4723165698601615
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -7.467249720190793,
+            "interval": [
+              -9.341582222140397,
+              -5.6911556949479065
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -3.2030273761798753,
+            "interval": [
+              -4.736365897216403,
+              -1.7248205746464769
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -4.514943682599792,
+            "interval": [
+              -8.567116626166246,
+              -0.47181919043853376
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -5.7110483855724254,
+            "interval": [
+              -10.294494320461702,
+              -0.9512939498230409
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -3.2470882764421845,
+            "interval": [
+              -8.562541328205159,
+              1.9377361115495155
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -10.94785976219201,
+            "interval": [
+              -13.273479709678089,
+              -8.751247718135911
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -12.259776068611927,
+            "interval": [
+              -14.953525711478967,
+              -9.650402392376497
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -13.45588077158456,
+            "interval": [
+              -16.754121698089698,
+              -10.186521941383312
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -10.99192066245432,
+            "interval": [
+              -14.918304854684353,
+              -7.094887955075662
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -10.670277096370668,
+            "interval": [
+              -12.982104972830303,
+              -8.522251475258605
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -11.982193402790585,
+            "interval": [
+              -14.651311319326462,
+              -9.371143601196646
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -13.178298105763218,
+            "interval": [
+              -16.46555125251397,
+              -9.915342686129515
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -10.714337996632977,
+            "interval": [
+              -14.690894826614125,
+              -6.821841562705867
+            ]
+          }
+        }
+      },
+      "fine_response_pp": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 14.791152211967505,
+          "V120": 15.49847172188779,
+          "Corpus 100k": 16.12391548440116,
+          "Local 50k EMA": 16.000446247567012,
+          "Mean control": 13.669296510327058,
+          "Repeat loss": 11.425718958983431,
+          "Repeat + gap loss": 11.742087547087673
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -2.243577551343627,
+            "interval": [
+              -2.846105497103105,
+              -1.6875031016877686
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.3163685881042415,
+            "interval": [
+              0.1957940879616988,
+              0.4420226874163681
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -1.9272089632393854,
+            "interval": [
+              -2.5423500371907566,
+              -1.3706852206868754
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -1.1218557016404471,
+            "interval": [
+              -1.745031109488875,
+              -0.5964521433916219
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -2.3311497372399543,
+            "interval": [
+              -3.178256807260863,
+              -1.456958424837731
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -2.4546189740741013,
+            "interval": [
+              -3.4109337026065516,
+              -1.4997947601298545
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -1.8291752115607327,
+            "interval": [
+              -3.0304768792228587,
+              -0.5269844205623667
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -3.365433252984074,
+            "interval": [
+              -4.296484496765481,
+              -2.5098942744671984
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -4.574727288583581,
+            "interval": [
+              -5.399587227709517,
+              -3.709949808855776
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -4.698196525417728,
+            "interval": [
+              -5.689885252218187,
+              -3.714938398354751
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -4.07275276290436,
+            "interval": [
+              -5.1145623420754305,
+              -3.0012872355363402
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -3.0490646648798325,
+            "interval": [
+              -3.937455551712184,
+              -2.221658671841775
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -4.25835870047934,
+            "interval": [
+              -5.0218939320135565,
+              -3.434810905095763
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -4.381827937313487,
+            "interval": [
+              -5.315948871319053,
+              -3.4433186796803215
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -3.756384174800118,
+            "interval": [
+              -4.820246167324453,
+              -2.6504494140357697
+            ]
+          }
+        }
+      },
+      "flat_chroma_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 28.12085867967635,
+          "V120": 29.723866216893132,
+          "Corpus 100k": 27.111084632666216,
+          "Local 50k EMA": 26.986840786245832,
+          "Mean control": 29.452469216515283,
+          "Repeat loss": 29.530106066068527,
+          "Repeat + gap loss": 29.468602863123795
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": 0.07763684955324379,
+            "interval": [
+              -0.33510349153753605,
+              0.5391556178145934
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.06150320294473133,
+            "interval": [
+              -0.43922162067726306,
+              0.3205131198121409
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": 0.016133646608512464,
+            "interval": [
+              -0.5816387310112342,
+              0.6557797354592108
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 1.3316105368389337,
+            "interval": [
+              -0.07008906599561561,
+              2.788908494457225
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 2.465628430269451,
+            "interval": [
+              1.022708222943186,
+              4.040614325036798
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": 2.3413845838490666,
+            "interval": [
+              0.7031899137930266,
+              4.099052321302412
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -0.2713970003778492,
+            "interval": [
+              -1.9861549125979847,
+              1.5179679644974977
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": 1.4092473863921775,
+            "interval": [
+              0.1458658126727711,
+              2.7514087434334353
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 2.5432652798226947,
+            "interval": [
+              1.1553600833604056,
+              4.050100189965877
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": 2.4190214334023104,
+            "interval": [
+              1.0043606499935729,
+              3.953584737372564
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -0.1937601508246054,
+            "interval": [
+              -1.657104530539997,
+              1.3124703011332233
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 1.3477441834474462,
+            "interval": [
+              0.28291909045954555,
+              2.4353134510619165
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 2.4817620768779634,
+            "interval": [
+              1.2107613618830482,
+              3.7919995715642574
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": 2.357518230457579,
+            "interval": [
+              1.0631140808854012,
+              3.729585140994935
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -0.25526335376933673,
+            "interval": [
+              -1.5118048986407866,
+              1.0617712119352538
+            ]
+          }
+        }
+      },
+      "gap_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Mean parent": 161.79526973685404,
+          "V120": 171.20307613695675,
+          "Corpus 100k": 169.20758565665122,
+          "Local 50k EMA": 168.48812603068347,
+          "Mean control": 162.89473565456782,
+          "Repeat loss": 165.5765205717535,
+          "Repeat + gap loss": 164.68298780108344
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": 2.6817849171856665,
+            "interval": [
+              1.7464955201899153,
+              3.6555569629472155
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.8935327706700491,
+            "interval": [
+              -1.8864380737904076,
+              -0.17012983609497173
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": 1.7882521465156174,
+            "interval": [
+              1.1804393535946338,
+              2.389102205783009
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 1.0994659177137862,
+            "interval": [
+              0.3251706258462967,
+              1.9724711490206304
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -5.59339037611565,
+            "interval": [
+              -9.316277479841363,
+              -2.650938263404564
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -6.312850002083394,
+            "interval": [
+              -9.785755811767231,
+              -3.54117488379946
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -8.308340482388928,
+            "interval": [
+              -12.575101538566232,
+              -4.746790234176094
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": 3.7812508348994527,
+            "interval": [
+              2.4233623869374865,
+              5.471951634233532
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -2.9116054589299836,
+            "interval": [
+              -6.059355927927482,
+              -0.11987508148958062
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -3.6310650848977275,
+            "interval": [
+              -6.715118022255016,
+              -0.8174401441984384
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -5.626555565203262,
+            "interval": [
+              -9.422026973126169,
+              -2.1523015666198004
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 2.8877180642294036,
+            "interval": [
+              1.9004341245862157,
+              3.8146502694901985
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -3.8051382296000327,
+            "interval": [
+              -7.746057878052243,
+              -0.5862713631118419
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -4.524597855567777,
+            "interval": [
+              -8.358192403958405,
+              -1.390208970880829
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -6.520088335873311,
+            "interval": [
+              -11.076448290947319,
+              -2.6876505257821757
+            ]
+          }
+        }
+      },
+      "gap_continuing_strong_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Mean parent": 86.76288315122451,
+          "V120": 100.07892724015532,
+          "Corpus 100k": 96.27357995915753,
+          "Local 50k EMA": 97.06439449066151,
+          "Mean control": 91.47269363314906,
+          "Repeat loss": 100.62091766007849,
+          "Repeat + gap loss": 99.28037775969067
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": 9.148224026929427,
+            "interval": [
+              7.3737955915807785,
+              10.802804105791884
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -1.3405399003878244,
+            "interval": [
+              -2.7233591461919393,
+              -0.28141388482478435
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": 7.807684126541602,
+            "interval": [
+              5.965765045722125,
+              9.59395948783877
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 4.709810481924549,
+            "interval": [
+              3.667564710871668,
+              5.708727171780811
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -5.59170085751245,
+            "interval": [
+              -11.220668889810154,
+              -0.6094669441823226
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -4.800886326008467,
+            "interval": [
+              -10.286013396375191,
+              0.22357150295387399
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -8.60623360700626,
+            "interval": [
+              -15.347941911353608,
+              -2.260638143577335
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": 13.858034508853976,
+            "interval": [
+              11.490802168152126,
+              16.137723178692177
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 3.5565231694169768,
+            "interval": [
+              -1.2118920686534411,
+              7.576160186383793
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": 4.34733770092096,
+            "interval": [
+              -0.2127978322340432,
+              8.466783994361501
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": 0.5419904199231667,
+            "interval": [
+              -5.290797706666408,
+              6.006324186815948
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 12.517494608466151,
+            "interval": [
+              10.412048648027882,
+              14.64508755678289
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 2.2159832690291523,
+            "interval": [
+              -3.5797245904567747,
+              6.983353852391739
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": 3.0067978005331355,
+            "interval": [
+              -2.4794073714813862,
+              7.686040207671991
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -0.7985494804646578,
+            "interval": [
+              -7.628283692710242,
+              5.282910624082135
+            ]
+          }
+        }
+      },
+      "gap_weak_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Mean parent": 8.850678310465936,
+          "V120": 9.462791489912759,
+          "Corpus 100k": 9.800614208387678,
+          "Local 50k EMA": 9.615138435215902,
+          "Mean control": 8.748970745963623,
+          "Repeat loss": 8.471474579802464,
+          "Repeat + gap loss": 8.518493763657874
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.2774961661611588,
+            "interval": [
+              -0.4711758455556053,
+              -0.08110183930354914
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.04701918385540971,
+            "interval": [
+              -0.034316761748081334,
+              0.13681710528768004
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.2304769823057491,
+            "interval": [
+              -0.4268235201223978,
+              -0.038179507935995165
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.10170756450231266,
+            "interval": [
+              -0.27577781159881065,
+              0.08532647530998833
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.8661676892522792,
+            "interval": [
+              -1.4778657209066042,
+              -0.31634953817465783
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -1.051643462424055,
+            "interval": [
+              -1.9246047490669647,
+              -0.27844096618435243
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -0.7138207439491353,
+            "interval": [
+              -1.451664742640421,
+              -0.09942222666262095
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.37920373066347146,
+            "interval": [
+              -0.7057836454917398,
+              -0.04480644126056537
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -1.143663855413438,
+            "interval": [
+              -1.752533094266978,
+              -0.5748648276624226
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -1.3291396285852137,
+            "interval": [
+              -2.1948510501059855,
+              -0.5849496045036031
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -0.9913169101102941,
+            "interval": [
+              -1.7421052208422405,
+              -0.40772111650765824
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.33218454680806175,
+            "interval": [
+              -0.6362253866182497,
+              -0.010630946954412093
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -1.0966446715580283,
+            "interval": [
+              -1.7138301428216698,
+              -0.5441187123988191
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -1.282120444729804,
+            "interval": [
+              -2.1800808652463606,
+              -0.54398873701436
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -0.9442977262548844,
+            "interval": [
+              -1.7079421444464253,
+              -0.3711844623038978
+            ]
+          }
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 180.78168491840822,
+          "V120": 187.93037398908572,
+          "Corpus 100k": 187.8592628847422,
+          "Local 50k EMA": 188.07352502032086,
+          "Mean control": 178.96566191816768,
+          "Repeat loss": 171.47894156471725,
+          "Repeat + gap loss": 172.42581112728507
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -7.486720353450437,
+            "interval": [
+              -8.862251201789483,
+              -6.1786414340337314
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.9468695625678265,
+            "interval": [
+              0.6456811238927891,
+              1.2847462615229333
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -6.5398507908826105,
+            "interval": [
+              -7.855457284083695,
+              -5.301442333296276
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -1.8160230002405342,
+            "interval": [
+              -3.0438666641318313,
+              -0.6459103919032191
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -9.107863102153175,
+            "interval": [
+              -12.005597841262787,
+              -6.125866650139762
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -8.893600966574525,
+            "interval": [
+              -12.038407307783356,
+              -5.6604317890831
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -8.96471207091804,
+            "interval": [
+              -12.953516784449445,
+              -4.801291313191381
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -9.302743353690971,
+            "interval": [
+              -10.980801351854025,
+              -7.703282083603364
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -16.594583455603612,
+            "interval": [
+              -19.159898272230887,
+              -13.94428677704659
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -16.38032132002496,
+            "interval": [
+              -19.41885732436817,
+              -13.402150685267076
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -16.451432424368477,
+            "interval": [
+              -20.17188832443113,
+              -12.610803910174733
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -8.355873791123145,
+            "interval": [
+              -9.82056180472777,
+              -6.944258413126984
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -15.647713893035785,
+            "interval": [
+              -18.275049781061217,
+              -12.860785574396074
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -15.433451757457135,
+            "interval": [
+              -18.49662343206536,
+              -12.363519838768749
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -15.50456286180065,
+            "interval": [
+              -19.27195483535203,
+              -11.528546109417466
+            ]
+          }
+        }
+      },
+      "upper_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 13.237068584279674,
+          "V120": 11.319371490778082,
+          "Corpus 100k": 11.4191178009749,
+          "Local 50k EMA": 13.829324741161413,
+          "Mean control": 12.849250050829953,
+          "Repeat loss": 12.099319474605457,
+          "Repeat + gap loss": 11.897077333987307
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.7499305762244965,
+            "interval": [
+              -1.0507014825011627,
+              -0.4767508514465577
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.20224214061815005,
+            "interval": [
+              -0.31618985393850835,
+              -0.10951540609697887
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.9521727168426466,
+            "interval": [
+              -1.2607720272440803,
+              -0.6636204667637227
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.38781853344972106,
+            "interval": [
+              -0.8059424631255167,
+              0.09212439407084463
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.9800746903314597,
+            "interval": [
+              -2.044231589508698,
+              -0.009816804601392712
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": 1.4301322498550526,
+            "interval": [
+              0.06001966190871506,
+              2.7711489497559345
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": 1.5298785600518716,
+            "interval": [
+              0.08555682356615237,
+              3.0991048625429767
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -1.1377491096742176,
+            "interval": [
+              -1.7048334551632816,
+              -0.5688731114843423
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -1.7300052665559562,
+            "interval": [
+              -2.597883557814527,
+              -0.9648113169859526
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": 0.6802016736305561,
+            "interval": [
+              -0.49775119534032863,
+              1.8255837798550427
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": 0.7799479838273751,
+            "interval": [
+              -0.45370629552092595,
+              2.1445928083303603
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -1.3399912502923677,
+            "interval": [
+              -1.8659490126210196,
+              -0.8347958012541421
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -1.9322474071741063,
+            "interval": [
+              -2.834491161137449,
+              -1.1625543724754985
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": 0.477959533012406,
+            "interval": [
+              -0.7076009281812446,
+              1.5949437468795389
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": 0.577705843209225,
+            "interval": [
+              -0.6601179949331978,
+              1.9004092004470896
+            ]
+          }
+        }
+      },
+      "upper_response_pp": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 8.335634103448923,
+          "V120": 8.770096879099249,
+          "Corpus 100k": 9.39552286959202,
+          "Local 50k EMA": 9.736000721767933,
+          "Mean control": 6.980397017092617,
+          "Repeat loss": 5.992873760668765,
+          "Repeat + gap loss": 6.386587487495478
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.9875232564238523,
+            "interval": [
+              -2.0363765128381712,
+              -0.23331498220403887
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.39371372682671346,
+            "interval": [
+              0.09198167512421293,
+              0.7104971064866504
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.5938095295971388,
+            "interval": [
+              -1.5315054680579858,
+              0.21988270415421907
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -1.355237086356306,
+            "interval": [
+              -2.4294044610534007,
+              -0.5022550579955974
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -2.755603704675316,
+            "interval": [
+              -4.915720059627728,
+              -0.9421692325581201
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -2.4151258524994024,
+            "interval": [
+              -4.761587253724996,
+              -0.5184496064822974
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -1.789699862006632,
+            "interval": [
+              -4.502414477099289,
+              0.5484290515042143
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -2.342760342780158,
+            "interval": [
+              -4.258792997986277,
+              -1.039690014521999
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -3.7431269610991684,
+            "interval": [
+              -6.121395064957601,
+              -1.6325153457380488
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -3.4026491089232547,
+            "interval": [
+              -5.730521506139641,
+              -1.5498834473144114
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -2.7772231184304843,
+            "interval": [
+              -5.402717774034537,
+              -0.571188152745095
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -1.9490466159534447,
+            "interval": [
+              -3.741714929549661,
+              -0.7036353414198941
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -3.349413234272455,
+            "interval": [
+              -5.723958461727044,
+              -1.3086707419717218
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -3.008935382096541,
+            "interval": [
+              -5.401394046057144,
+              -1.2054795094573105
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -2.383509391603771,
+            "interval": [
+              -5.020977586021759,
+              -0.20298363501049538
+            ]
+          }
+        }
+      },
+      "weak_response_pp": {
+        "cases": 24,
+        "values": {
+          "Mean parent": 27.503939578667843,
+          "V120": 31.833565724193942,
+          "Corpus 100k": 32.23021292206046,
+          "Local 50k EMA": 32.37658468692895,
+          "Mean control": 26.77289087822419,
+          "Repeat loss": 23.40940140807538,
+          "Repeat + gap loss": 24.067114477188294
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -3.36348947014881,
+            "interval": [
+              -4.005390117725278,
+              -2.746116491554639
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.6577130691129156,
+            "interval": [
+              0.40249437106687685,
+              0.9592754510415933
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -2.7057764010358945,
+            "interval": [
+              -3.444446801642198,
+              -1.9652980568870007
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.7310487004436546,
+            "interval": [
+              -1.2221690852740144,
+              -0.2653782030635193
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -5.603693808704762,
+            "interval": [
+              -6.612254833457559,
+              -4.561588801529237
+            ]
+          },
+          "Mean control vs Corpus 100k": {
+            "delta": -5.457322043836271,
+            "interval": [
+              -6.662672070265001,
+              -4.289354128149348
+            ]
+          },
+          "Mean control vs V120": {
+            "delta": -5.0606748459697535,
+            "interval": [
+              -6.9237852146096115,
+              -3.270137371861592
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -4.094538170592465,
+            "interval": [
+              -4.8908716693015135,
+              -3.338979488624176
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -8.967183278853572,
+            "interval": [
+              -9.844815641403056,
+              -8.032926526357354
+            ]
+          },
+          "Repeat loss vs Corpus 100k": {
+            "delta": -8.820811513985081,
+            "interval": [
+              -9.96226188838208,
+              -7.689760593758913
+            ]
+          },
+          "Repeat loss vs V120": {
+            "delta": -8.424164316118564,
+            "interval": [
+              -10.176021648978223,
+              -6.78479427670938
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -3.436825101479549,
+            "interval": [
+              -4.239930806423685,
+              -2.6875479339457575
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -8.309470209740656,
+            "interval": [
+              -9.1069871217838,
+              -7.475115063459745
+            ]
+          },
+          "Repeat + gap loss vs Corpus 100k": {
+            "delta": -8.163098444872166,
+            "interval": [
+              -9.269860646937776,
+              -7.064202590910109
+            ]
+          },
+          "Repeat + gap loss vs V120": {
+            "delta": -7.766451247005648,
+            "interval": [
+              -9.488361485987502,
+              -6.169762851571416
+            ]
+          }
+        }
+      }
+    }
+  },
+  "redraw_metrics": {
+    "coupled": {
+      "mean_increment_RMS_DN16": {
+        "cases": 16,
+        "values": {
+          "Mean control": 70.51195950544405,
+          "Repeat loss": 74.14129262203396,
+          "Repeat + gap loss": 74.24069251394657,
+          "Mean parent": 71.54259354040727,
+          "Local 50k EMA": 76.46714653468698
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": 3.6293331165899048,
+            "interval": [
+              2.5794455865971004,
+              4.751770700364492
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.09939989191261134,
+            "interval": [
+              -0.0470051164437045,
+              0.285673311508439
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": 3.728733008502516,
+            "interval": [
+              2.6524879186945785,
+              4.844363376323914
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -1.0306340349632137,
+            "interval": [
+              -1.9709314572207055,
+              -0.20526889941655127
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -5.955187029242921,
+            "interval": [
+              -8.290437280051972,
+              -3.8347029796932026
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": 2.598699081626691,
+            "interval": [
+              1.536526483845523,
+              3.79961303433062
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -2.3258539126530167,
+            "interval": [
+              -3.8423420690818793,
+              -0.9627979966231835
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 2.6980989735393024,
+            "interval": [
+              1.6565925287198187,
+              3.867376779490867
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -2.2264540207404053,
+            "interval": [
+              -3.632206123378524,
+              -0.9351885117674369
+            ]
+          }
+        }
+      },
+      "shared_error_product_DN16_squared": {
+        "cases": 16,
+        "values": {
+          "Mean control": 4917.6957250214855,
+          "Repeat loss": 5686.814332657417,
+          "Repeat + gap loss": 5689.46696591278,
+          "Mean parent": 5112.491395715166,
+          "Local 50k EMA": 6007.941624819054
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": 769.1186076359318,
+            "interval": [
+              429.23132384452424,
+              1172.5987525086064
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 2.652633255363071,
+            "interval": [
+              -33.88842852784403,
+              42.04138199627903
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": 771.7712408912948,
+            "interval": [
+              434.1260420796688,
+              1168.5077402677377
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -194.79567069368022,
+            "interval": [
+              -449.9957880423137,
+              1.6581513420693414
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -1090.2458997975682,
+            "interval": [
+              -1702.643621519583,
+              -580.5726294203034
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": 574.3229369422515,
+            "interval": [
+              276.0722885074926,
+              926.9680793205831
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -321.12729216163643,
+            "interval": [
+              -588.6796819611835,
+              -89.00024307112406
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 576.9755701976146,
+            "interval": [
+              291.2354105226355,
+              903.5568958191808
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -318.47465890627336,
+            "interval": [
+              -569.2098054070664,
+              -99.78328651241799
+            ]
+          }
+        }
+      },
+      "swapped_draw_variance_DN16_squared": {
+        "cases": 16,
+        "values": {
+          "Mean control": 1328.0279631790595,
+          "Repeat loss": 1239.620339891116,
+          "Repeat + gap loss": 1254.181526163851,
+          "Mean parent": 1323.9675900226448,
+          "Local 50k EMA": 1395.405664650925
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -88.40762328794358,
+            "interval": [
+              -139.96156178308277,
+              -45.76813283094944
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 14.561186272735085,
+            "interval": [
+              2.589015546340099,
+              28.790292071598518
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -73.8464370152085,
+            "interval": [
+              -117.61989272447225,
+              -37.600845703338514
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 4.060373156414698,
+            "interval": [
+              -25.464248254513357,
+              31.401724032005973
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -67.37770147186552,
+            "interval": [
+              -191.77398762536518,
+              24.88016553681188
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -84.34725013152888,
+            "interval": [
+              -152.07020520465926,
+              -30.925697361466288
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -155.7853247598091,
+            "interval": [
+              -308.7876569593981,
+              -39.56535110617978
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -69.7860638587938,
+            "interval": [
+              -129.33759922250434,
+              -21.153109763325066
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -141.22413848707401,
+            "interval": [
+              -285.08963796028615,
+              -35.12835372114045
+            ]
+          }
+        }
+      },
+      "mean_present_RMS_DN16": {
+        "cases": 16,
+        "values": {
+          "Mean control": 85.3111829570571,
+          "Repeat loss": 84.45830580031279,
+          "Repeat + gap loss": 84.43202243586745,
+          "Mean parent": 85.24106047918684,
+          "Local 50k EMA": 85.21580119496946
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.852877156744313,
+            "interval": [
+              -1.4063017165962144,
+              -0.32872754577105534
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.026283364445333746,
+            "interval": [
+              -0.10338428312064422,
+              0.05464363931000158
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.8791605211896467,
+            "interval": [
+              -1.4629267719732788,
+              -0.3334724150514044
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.07012247787025672,
+            "interval": [
+              -0.3104388907145669,
+              0.4141639688469896
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 0.09538176208764071,
+            "interval": [
+              -0.6700722048915374,
+              0.8212650894145578
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.7827546788740563,
+            "interval": [
+              -1.5511281542188258,
+              -0.11680754913907118
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.7574953946566723,
+            "interval": [
+              -1.1802206402832272,
+              -0.33447315240290526
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.80903804331939,
+            "interval": [
+              -1.5956550275547368,
+              -0.1248007707931897
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.783778759102006,
+            "interval": [
+              -1.2041803475813093,
+              -0.36885349793943734
+            ]
+          }
+        }
+      },
+      "mean_quiet_RMS_DN16": {
+        "cases": 16,
+        "values": {
+          "Mean control": 3.737439197750774,
+          "Repeat loss": 3.647040464298056,
+          "Repeat + gap loss": 3.674739419154805,
+          "Mean parent": 3.7943255557765068,
+          "Local 50k EMA": 3.8241610279934903
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.0903987334527181,
+            "interval": [
+              -0.1797138645190341,
+              -0.024970999164187404
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.02769895485674878,
+            "interval": [
+              0.009030779718987091,
+              0.048124127608873524
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.06269977859596931,
+            "interval": [
+              -0.14210463873115026,
+              -0.0030427567270515992
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.05688635802573261,
+            "interval": [
+              -0.19175831277796912,
+              0.04868833851341772
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.08672183024271618,
+            "interval": [
+              -0.19423622186769823,
+              0.015978542658314422
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.1472850914784507,
+            "interval": [
+              -0.29288266001098084,
+              -0.05282728208739144
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.17712056369543427,
+            "interval": [
+              -0.2835881660245134,
+              -0.07706757649791635
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.11958613662170192,
+            "interval": [
+              -0.2623201962978986,
+              -0.026722328435676304
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.1494216088386855,
+            "interval": [
+              -0.2531597295107533,
+              -0.0535645396563459
+            ]
+          }
+        }
+      },
+      "pooled_response_pp": {
+        "cases": 16,
+        "values": {
+          "Mean control": 80.0321909314718,
+          "Repeat loss": 77.32965583706435,
+          "Repeat + gap loss": 77.28654626113635,
+          "Mean parent": 79.15251914675258,
+          "Local 50k EMA": 76.49348112924483
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -2.7025350944074518,
+            "interval": [
+              -4.228047017005481,
+              -2.1571296955068435
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.0431095759279998,
+            "interval": [
+              -0.14254183923823652,
+              0.1542357457340662
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -2.7456446703354516,
+            "interval": [
+              -4.110108019445144,
+              -2.2679491311254854
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.8796717847192213,
+            "interval": [
+              0.2737774052370764,
+              1.453980799423215
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 3.5387098022269754,
+            "interval": [
+              2.762482366065601,
+              5.634749035293616
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -1.8228633096882305,
+            "interval": [
+              -3.62946456994089,
+              -1.1726461941941815
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 0.8361747078195236,
+            "interval": [
+              0.13400153047597493,
+              1.8444332529611773
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -1.8659728856162303,
+            "interval": [
+              -3.499317079241348,
+              -1.2813182616272558
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 0.7930651318915238,
+            "interval": [
+              0.13060168289586435,
+              1.7906562956637697
+            ]
+          }
+        }
+      }
+    },
+    "independent": {
+      "mean_increment_RMS_DN16": {
+        "cases": 16,
+        "values": {
+          "Mean control": 95.38861422021407,
+          "Repeat loss": 92.56198705321245,
+          "Repeat + gap loss": 92.50195432741474,
+          "Mean parent": 94.86813679903648,
+          "Local 50k EMA": 93.50466811725573
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -2.826627167001618,
+            "interval": [
+              -3.9029054306882616,
+              -1.8259809244964889
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.06003272579771135,
+            "interval": [
+              -0.1493119197116055,
+              0.02306072897737931
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -2.8866598927993294,
+            "interval": [
+              -4.00607437720451,
+              -1.8660678186290105
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.5204774211775884,
+            "interval": [
+              -0.25148457041339933,
+              1.3037630674722382
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 1.8839461029583333,
+            "interval": [
+              0.5867475436600808,
+              3.2426689915328004
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -2.3061497458240297,
+            "interval": [
+              -3.3797720202392623,
+              -1.4176164848821133
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.9426810640432848,
+            "interval": [
+              -1.649594387323095,
+              -0.28338137357239007
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -2.366182471621741,
+            "interval": [
+              -3.429516968494043,
+              -1.4818878498752528
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -1.0027137898409961,
+            "interval": [
+              -1.6686704318774321,
+              -0.38212740811579626
+            ]
+          }
+        }
+      },
+      "shared_error_product_DN16_squared": {
+        "cases": 16,
+        "values": {
+          "Mean control": 5072.3954138032805,
+          "Repeat loss": 5807.773310683835,
+          "Repeat + gap loss": 5797.149746219291,
+          "Mean parent": 5223.347007336092,
+          "Local 50k EMA": 6083.981193323056
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": 735.3778968805545,
+            "interval": [
+              410.88344622669246,
+              1096.5757507519625
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -10.62356446454396,
+            "interval": [
+              -44.27209124122141,
+              23.840043836804075
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": 724.7543324160106,
+            "interval": [
+              407.3689112550763,
+              1082.7419564175073
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -150.95159353281178,
+            "interval": [
+              -343.79653758867374,
+              6.767712165487725
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -1011.5857795197753,
+            "interval": [
+              -1559.0173895563564,
+              -532.6292696420983
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": 584.4263033477428,
+            "interval": [
+              287.86019771507995,
+              919.6460137086872
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -276.20788263922077,
+            "interval": [
+              -520.3286899629551,
+              -49.80119513334378
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": 573.8027388831988,
+            "interval": [
+              292.19119601038676,
+              893.5185096147791
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -286.83144710376473,
+            "interval": [
+              -514.9105599934043,
+              -70.56846599833025
+            ]
+          }
+        }
+      },
+      "swapped_draw_variance_DN16_squared": {
+        "cases": 16,
+        "values": {
+          "Mean control": 6599.941898340603,
+          "Repeat loss": 5266.0315082280085,
+          "Repeat + gap loss": 5257.95494203026,
+          "Mean parent": 6269.665814058399,
+          "Local 50k EMA": 5138.730064079822
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -1333.9103901125945,
+            "interval": [
+              -2019.201343408466,
+              -794.4649004398705
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -8.076566197748434,
+            "interval": [
+              -50.72171734528094,
+              31.982937844840944
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -1341.986956310343,
+            "interval": [
+              -2059.1912551472064,
+              -788.6781774913278
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 330.27608428220447,
+            "interval": [
+              -18.189690667269787,
+              765.536222689157
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 1461.211834260781,
+            "interval": [
+              727.5000805730589,
+              2436.1790347264455
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -1003.6343058303901,
+            "interval": [
+              -1427.0170054067587,
+              -619.4792662490402
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 127.30144414818642,
+            "interval": [
+              -132.87662255424019,
+              423.29117361131546
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -1011.7108720281385,
+            "interval": [
+              -1446.921271601345,
+              -625.7786172852235
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 119.22487795043799,
+            "interval": [
+              -117.02746521008213,
+              388.5517203258488
+            ]
+          }
+        }
+      },
+      "mean_present_RMS_DN16": {
+        "cases": 16,
+        "values": {
+          "Mean control": 85.7355090656327,
+          "Repeat loss": 84.93258837427217,
+          "Repeat + gap loss": 84.90576589527194,
+          "Mean parent": 85.72754358022299,
+          "Local 50k EMA": 85.85194658513566
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.8029206913605265,
+            "interval": [
+              -1.3444315839364016,
+              -0.2741725128487104
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.026822479000230715,
+            "interval": [
+              -0.0842969872383339,
+              0.04358573832123364
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.8297431703607572,
+            "interval": [
+              -1.3822503162176007,
+              -0.29282807424102697
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.007965485409712869,
+            "interval": [
+              -0.39655225633203767,
+              0.40168169193044806
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.11643751950296632,
+            "interval": [
+              -0.9864409495089156,
+              0.6967435729396027
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.7949552059508136,
+            "interval": [
+              -1.5463192627359559,
+              -0.1614075829516505
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.9193582108634928,
+            "interval": [
+              -1.4413026790570924,
+              -0.43965339887808547
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.8217776849510443,
+            "interval": [
+              -1.5874545011877306,
+              -0.1677790295027884
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.9461806898637235,
+            "interval": [
+              -1.4364917773904318,
+              -0.48124129131886767
+            ]
+          }
+        }
+      },
+      "mean_quiet_RMS_DN16": {
+        "cases": 16,
+        "values": {
+          "Mean control": 3.6912653876204846,
+          "Repeat loss": 3.613192034465662,
+          "Repeat + gap loss": 3.633564658623702,
+          "Mean parent": 3.7707871155890267,
+          "Local 50k EMA": 3.8239289911352037
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -0.07807335315482256,
+            "interval": [
+              -0.12703847726137188,
+              -0.03436529897418174
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": 0.020372624158039976,
+            "interval": [
+              0.0002476175703938556,
+              0.04336656901332474
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -0.05770072899678258,
+            "interval": [
+              -0.10123934012710152,
+              -0.018550687380898098
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": -0.07952172796854207,
+            "interval": [
+              -0.21582526085035778,
+              0.012278616263850734
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": -0.13266360351471906,
+            "interval": [
+              -0.2238081785182699,
+              -0.043653326691137834
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -0.15759508112336462,
+            "interval": [
+              -0.31597666488710396,
+              -0.047501855702510774
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": -0.21073695666954162,
+            "interval": [
+              -0.33263584807997676,
+              -0.09630868772805685
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -0.13722245696532465,
+            "interval": [
+              -0.2885362365515302,
+              -0.03705922107875603
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": -0.19036433251150164,
+            "interval": [
+              -0.3011205125010294,
+              -0.08726234362541746
+            ]
+          }
+        }
+      },
+      "pooled_response_pp": {
+        "cases": 16,
+        "values": {
+          "Mean control": 79.77763890434382,
+          "Repeat loss": 77.14777114683129,
+          "Repeat + gap loss": 77.13518308884068,
+          "Mean parent": 79.02078560263156,
+          "Local 50k EMA": 76.4056841213724
+        },
+        "differences": {
+          "Repeat loss vs Mean control": {
+            "delta": -2.629867757512528,
+            "interval": [
+              -4.2388864653049,
+              -2.115575711612214
+            ]
+          },
+          "Repeat + gap loss vs Repeat loss": {
+            "delta": -0.012588057990612356,
+            "interval": [
+              -0.11608761407718546,
+              0.1535225692873153
+            ]
+          },
+          "Repeat + gap loss vs Mean control": {
+            "delta": -2.6424558155031406,
+            "interval": [
+              -4.114037836752508,
+              -2.1766144044781104
+            ]
+          },
+          "Mean control vs Mean parent": {
+            "delta": 0.7568533017122547,
+            "interval": [
+              0.25260090818750475,
+              1.2911364344698333
+            ]
+          },
+          "Mean control vs Local 50k EMA": {
+            "delta": 3.3719547829714145,
+            "interval": [
+              2.3045754172191777,
+              5.750401579057772
+            ]
+          },
+          "Repeat loss vs Mean parent": {
+            "delta": -1.8730144558002735,
+            "interval": [
+              -3.667069228290917,
+              -1.2035518346929313
+            ]
+          },
+          "Repeat loss vs Local 50k EMA": {
+            "delta": 0.7420870254588863,
+            "interval": [
+              -0.10303816381997705,
+              1.8875005628263495
+            ]
+          },
+          "Repeat + gap loss vs Mean parent": {
+            "delta": -1.8856025137908858,
+            "interval": [
+              -3.524140756758617,
+              -1.2529081870837633
+            ]
+          },
+          "Repeat + gap loss vs Local 50k EMA": {
+            "delta": 0.7294989674682739,
+            "interval": [
+              -0.08498976085170148,
+              1.882372566713638
+            ]
+          }
+        }
+      }
+    }
+  },
+  "standing": {
+    "main-overcast-sky-main-overcast-sky": {
+      "mean": 2.767348897673499,
+      "repeat": 2.5277144561502687,
+      "repeat-gap": 2.4887009221774266
+    },
+    "main-building-detail-main-building-detail": {
+      "mean": 6.526170477547398,
+      "repeat": 5.730498146785951,
+      "repeat-gap": 5.466105190026589
+    },
+    "main-foliage-main-foliage": {
+      "mean": 7.15394765784253,
+      "repeat": 7.631885508161823,
+      "repeat-gap": 7.934373502640308
+    },
+    "main-chain-link-fence-main-chain-link-fence": {
+      "mean": 12.207586613595142,
+      "repeat": 13.051762920908123,
+      "repeat-gap": 13.193491331243747
+    },
+    "mesh-nominal-fine-green-mesh-left": {
+      "mean": 2.852708892553684,
+      "repeat": 2.609729624874758,
+      "repeat-gap": 2.7638147276001193
+    },
+    "mesh-nominal-fine-green-mesh-right": {
+      "mean": 4.132991220963883,
+      "repeat": 4.021624596164686,
+      "repeat-gap": 4.318621842734096
+    },
+    "mesh-profile3879-fine-green-mesh-left": {
+      "mean": 3.0001250821613747,
+      "repeat": 3.8207149995593195,
+      "repeat-gap": 3.4824114179128536
+    },
+    "mesh-profile3879-fine-green-mesh-right": {
+      "mean": 3.278627807858831,
+      "repeat": 4.007821457534472,
+      "repeat-gap": 3.7688062992841838
+    }
+  }
+}
