@@ -191,14 +191,6 @@ added flat variation. Coherent gap leakage rises. The automatic GFX
 frequency search misses the fine mesh. Supplying prior noisy-RAW peaks
 makes more of the right cab lattice visible, with irregular coverage and
 overly regular spacing in places.
-[Full-epoch scene training at update 7,500](scene-full-epoch.md#matched-quality-comparison-at-7500-updates)
-regains a small amount of independent ISO6400 response relative to 5k,
-with more flat variation. Coupled weak response stays below Corpus 100k.
-Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
-[Full-epoch scene training at update 10,000](scene-full-epoch.md#matched-quality-comparison-at-10000-updates)
-shows a small ISO6400 independent fine-response benefit over mirroring and
-near-identical response to the local arm. Fine flat noise drops from 7.5k
-on coupled draws. Both standing reviews still show incomplete fine crossings.
 [Full-epoch scene training at update 12,000](scene-full-epoch.md#matched-quality-comparison-at-12000-updates)
 covers 24,000 distinct photos per arm. Aligned context lowers ISO6400
 lower-band flat variation relative to masking and gives nearly the same

@@ -615,8 +615,11 @@ across arms. Independent ISO100 views are qualitative comparisons.
 ## Matched quality comparison at 12,000 updates
 
 The exact-target monitor reuses the eight photo backgrounds, sensor draws
-and context interventions from 10,000 updates. Collection of 32 groups
-in CUDA IEEE FP32 took 57.21 s. Eight native boards were viewed. Same-query
+and context interventions from 10,000 updates. These photos were reserved
+from this continuation. The Corpus 100k parent had seen them during its
+own training, so this monitor measures development trends on fixed inputs.
+Collection of 32 groups in CUDA IEEE FP32 took 57.21 s. Eight native boards
+were viewed. Same-query
 mirroring preserves the query and its preview halo while changing distant
 context. Masking removes the spatial guide. The spatial 12k state and all
 controls use EMA weights, bound in the training and monitor receipts.
