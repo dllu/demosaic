@@ -1,0 +1,61 @@
+{
+  "archived_review_attempts": {
+    "entries": 13,
+    "path": "early-review-attempts.tar.xz",
+    "scope": "Original review attempts and receipts, including archive schema and case-selection fixes.",
+    "sha256": "5678561a63808777942de2c54eea1b44d811910de05497a1387f422509edd9f6"
+  },
+  "base_spectral_report": "../../learned-spectral-detail.md",
+  "checkpoints": {
+    "training": {
+      "checkpoint": "training/step000672.pt",
+      "native_queries_per_head": 8064,
+      "optimizer": "AdamW .001 to .0001 cosine, 24-update warmup, .001 decay, per-head gradient cap 2, EMA .99.",
+      "parent": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "photo_visits_per_head": 2688,
+      "photos": 448,
+      "receipt": "training/completed.json",
+      "seconds": 27.952219689963385,
+      "sha256": "95337456e8697e741d38c794d5c10d837b95a99220b0fe6d0b65bf4c0d041686",
+      "updates_per_head": 672
+    },
+    "training-witness": {
+      "checkpoint": "training-witness/step000672.pt",
+      "native_queries_per_head": 8064,
+      "optimizer": "AdamW .001 to .0001 cosine, 24-update warmup, .001 decay, per-head gradient cap 2, EMA .99.",
+      "parent": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "photo_visits_per_head": 2688,
+      "photos": 448,
+      "receipt": "training-witness/completed.json",
+      "seconds": 16.591487396042794,
+      "sha256": "f1ef6679e3831fd92c7c500483fdcb17fcaae2dcec44371a68a97ebefe88ce2f",
+      "updates_per_head": 672
+    }
+  },
+  "evidence": {
+    "entries": 40,
+    "path": "evidence.tar.xz",
+    "sha256": "09fbe030c59430362395a39369ca5d428ec8087aa3b4dbfaae9d1cd4551670b9"
+  },
+  "experiment": "learned-spectral-gaps-v1",
+  "fixed_427_photo_or_camera_psnr": "Outside the scored crop study",
+  "native_visual_review": "Complete on both exact targets and both standing GFX100S view sets",
+  "presentation": {
+    "path": "../../images/learned-spectral-gaps-v1/manifest.json",
+    "sha256": "8367834850f68e436a3a398d536e4b5d59ad55127813f1cc5df90e328e595eb0"
+  },
+  "scoped_evaluation": "Complete on wire calibration, independent wire holdout and natural photo replay",
+  "training": "Complete for three gap-loss arms and two matched witness arms",
+  "upstream_sources": {
+    "head_corrected_broad.py": "4a9b9c6702e69cca02a8d2aa133958953ffc5633536b878159571de6e671a52f",
+    "prepare.py": "a0a54f9415ec95491315419d46135f9da1d5642e2c3e10e1dfd6453c23107065",
+    "review_corrected_broad.py": "421cfaa6cee7058efc3d153a2d92d81ad8a05e57d3632b38f431f42d9d4290eb",
+    "v120-wire.json": "6e869a572437c047bd089f4c351428578b045ba116d96a95a417f42c8946a58a"
+  }
+}

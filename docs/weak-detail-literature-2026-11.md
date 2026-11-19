@@ -488,6 +488,11 @@ texture and leaves fine cab crossings incomplete. A [learned wider-band head](le
 adds 0.95 ISO6400 wire-response points over matched total-power
 conditioning. The full correction raises wire error and known-gap
 texture over Corpus 100k. The native fine cab crossings stay incomplete.
+[Exact gap supervision](learned-spectral-gaps.md) lowers paired error in
+known breaks and loses signal in continuous dips. Checking a phase from
+disjoint green windows against local Bayer samples lowers absolute gap
+error slightly at comparable added texture and yields an uncertain
+intact-response gain.
 
 ## What the existing work establishes
 

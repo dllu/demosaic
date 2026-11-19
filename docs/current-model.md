@@ -142,6 +142,10 @@ when the footprint must be found automatically.
 on supported photographic fixtures at fixed luminance. The gain comes
 with small leakage inside true gaps. Neutral replay and both GFX families
 reproduce the preceding fit.
+[Weak-wire gap supervision](learned-spectral-gaps.md) lowers paired error
+inside exact breaks and attenuates genuine weak wires. Checking estimated
+phases against separate Bayer samples lowers absolute gap error slightly
+at similar added texture, with incomplete real cab crossings.
 [Learned spectral corrections](learned-spectral-detail.md) use surrounding
 frequency and direction to raise ISO6400 planted-wire response 0.95 points
 over a matched total-power head. Over Corpus 100k, the wider head gains

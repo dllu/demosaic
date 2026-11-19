@@ -263,13 +263,13 @@ advances on the original 50k schedule.
 [Segment receipts](results/scene-full-epoch-v1/paired-prefix-015000.tar.xz) ·
 [15k review queue](results/scene-full-epoch-v1/queue-review-015000.json).
 
-The arms verify matching observations through **17,500 updates**, with
-35,000 distinct photos, 35,000 noise seeds and 140,000 native queries per arm.
-Retained training loops total 8,855.37 s local and 11,627.41 s spatial.
+The arms verify matching observations through **18,000 updates**, with
+36,000 distinct photos, 36,000 noise seeds and 144,000 native queries per arm.
+Retained training loops total 9,067.62 s local and 11,901.20 s spatial.
 The local checkpoint is
-`a384104a7ab800245eea344c94b546f22e245663eeef6699f4fe0c392cf87ff2`.
+`c7ea6f4475b9a535511f52a49dfada13078b49f2b28c53342e05bdfac2de0a7d`.
 The spatial checkpoint is
-`f69f70ec82bcb60bd6870b6fe8016e1657f894ae1145559aaa182275159c1b10`.
+`2ded24d7d11e4a367094f686979dd051435587e8db5a2e1bfe565db868e4b340`.
 The last completed exact-target and both native qualitative reviews are the
 matched 15k EMA checkpoints. The later prefixes record training progress.
 [15,500 audit](results/scene-full-epoch-v1/paired-prefix-015500.json) ·
@@ -277,8 +277,21 @@ matched 15k EMA checkpoints. The later prefixes record training progress.
 [16,500 audit](results/scene-full-epoch-v1/paired-prefix-016500.json) ·
 [17,000 audit](results/scene-full-epoch-v1/paired-prefix-017000.json) ·
 [17,500 paired audit](results/scene-full-epoch-v1/paired-prefix-017500.json) ·
-[17,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-017500.tar.xz) ·
+[18,000 paired audit](results/scene-full-epoch-v1/paired-prefix-018000.json) ·
+[18,000 segment receipts](results/scene-full-epoch-v1/paired-prefix-018000.tar.xz) ·
 [Earlier local-only 17,500 audit](results/scene-full-epoch-v1/local-017500-prefix.json).
+
+The local-only arm has verified **20,000 updates**, 40,000 distinct photos,
+40,000 noise seeds and 160,000 native queries. The retained training loops
+total 9,987.81 s. The setting uses the same 50k schedule and resumes from
+the matched 17.5k checkpoint. The local checkpoint is
+`b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889`.
+The 20k reviewer waits for the matching spatial checkpoint, then runs
+the full 64-photo exact-target panel and both standing GFX scenes.
+[Local 20,000 audit](results/scene-full-epoch-v1/local-020000-prefix.json) ·
+[Segment receipts](results/scene-full-epoch-v1/local-020000-prefix.tar.xz) ·
+[Review queue](results/scene-full-epoch-v1/queue-review-020000-launch.json) ·
+[Review drivers](results/scene-full-epoch-v1/queue-review-020000.tar.xz).
 
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).

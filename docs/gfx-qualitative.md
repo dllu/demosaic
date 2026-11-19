@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Exact gap supervision and Bayer witnesses](learned-spectral-gaps.md#standing-gfx100s-comparisons)
+  retain a smooth sky and coherent coarse crossings across both sets of
+  native comparisons. Fine building lines and foliage remain soft.
 - [Learned spectral corrections](learned-spectral-detail.md#standing-gfx100s-comparisons)
   match the visually smooth Corpus 100k sky and preserve coarse crossings.
   Fine building detail and foliage stay soft.

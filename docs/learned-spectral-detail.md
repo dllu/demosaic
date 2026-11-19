@@ -188,3 +188,7 @@ gain is better planted-wire response from directional conditioning. The
 error and leakage tradeoff and the real fence review leave V120 as the
 general recommendation and Corpus 100k as the broad photo benchmark.
 [Model guide](current-model.md) · [Broad evaluation](full-corpus-long100k.md).
+
+[The gap-supervised follow-up](learned-spectral-gaps.md) adds explicit
+breaks and continuous dips, and checks neighboring green phases against
+disjoint local Bayer samples.

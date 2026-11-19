@@ -1,0 +1,4168 @@
+{
+  "exact": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training/step000672.pt",
+      "sha256": "95337456e8697e741d38c794d5c10d837b95a99220b0fe6d0b65bf4c0d041686"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/native_gap_head.py",
+      "sha256": "8f3e8487f08c7130084befb30f32f555de59ff6a7f5ebdabd3ca396f66fa9c23"
+    },
+    "rows": [
+      {
+        "ADC_bits": 16,
+        "CFA": "RGGB",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/012-iso6400-comparison.png",
+            "sha256": "bcad58c993e10f2c01f738bb1b12970f853d4634b4e64296b580ee6a1245947f"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Gap correction penalty",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "ellipse",
+        "id": "012-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/012-iso6400.npz",
+          "sha256": "caeba10076a8701b00589737a870775f791fd45459c9f5b52b24f570f8fc70b0"
+        },
+        "metrics": {
+          "100k": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 0.0,
+            "gap_added": 0.0,
+            "gap_exact": 175.6470322663282,
+            "gap_pair": 218.72148129794095,
+            "intact_dot": 0.009910781489348328,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 211.84539018258926,
+            "present_rms": 200.1581732615415,
+            "weak_free_added": 0.0
+          },
+          "V120": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.436355099475952,
+            "gap_added": 22.201133307413087,
+            "gap_exact": 175.4694409913753,
+            "gap_pair": 218.07025826163746,
+            "intact_dot": 0.007986602106350412,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 212.61507697620723,
+            "present_rms": 204.6832780794255,
+            "weak_free_added": 36.725116684837026
+          },
+          "localized": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 7.8460308684326145,
+            "gap_added": 13.725155144676966,
+            "gap_exact": 172.21974485501622,
+            "gap_pair": 211.05642426751854,
+            "intact_dot": 0.008513981451525824,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.74934101700234,
+            "present_rms": 200.06252225671034,
+            "weak_free_added": 14.892713624993148
+          },
+          "localized-raw": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 7.663647250695662,
+            "gap_added": 13.799856279320142,
+            "gap_exact": 172.15657498107097,
+            "gap_pair": 210.91088373203786,
+            "intact_dot": 0.008530660514224991,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.64207353739042,
+            "present_rms": 199.99932279792213,
+            "weak_free_added": 14.909243004307063
+          },
+          "matched": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 11.371971127551321,
+            "gap_added": 15.940408821993392,
+            "gap_exact": 179.11702782338585,
+            "gap_pair": 225.733849635747,
+            "intact_dot": 0.0139584326737713,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 214.93356091071973,
+            "present_rms": 198.0110585232055,
+            "weak_free_added": 19.890613403096616
+          },
+          "matched-at-localized": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.236703374407806,
+            "gap_added": 11.54562115530828,
+            "gap_exact": 178.0246371143985,
+            "gap_pair": 223.65856707181368,
+            "intact_dot": 0.012842489156558926,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 213.76577154980598,
+            "present_rms": 198.339321325464,
+            "weak_free_added": 14.406748662074039
+          },
+          "matched-at-zero-add": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.68041055461509,
+            "gap_added": 12.167578287470366,
+            "gap_exact": 178.1730620356273,
+            "gap_pair": 223.9458714460542,
+            "intact_dot": 0.013000418569109398,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 213.91658886948534,
+            "present_rms": 198.2805850912554,
+            "weak_free_added": 15.18282925573203
+          },
+          "matched-raw": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 12.248414703843817,
+            "gap_added": 16.55386031433124,
+            "gap_exact": 179.22285375934882,
+            "gap_pair": 225.93775453049548,
+            "intact_dot": 0.014165565139888932,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 214.94687715585206,
+            "present_rms": 197.8885964680224,
+            "weak_free_added": 20.715295111926128
+          },
+          "prior": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 5.186301707646857,
+            "gap_added": 10.994597162995005,
+            "gap_exact": 178.2067008143839,
+            "gap_pair": 223.7369041055143,
+            "intact_dot": 0.01211939521491147,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 214.48313950347958,
+            "present_rms": 199.3167005299318,
+            "weak_free_added": 12.64314919121731
+          },
+          "shared-gap": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 0.0,
+            "gap_added": 56.335157591901954,
+            "gap_exact": 169.31410473718168,
+            "gap_pair": 226.1981884187527,
+            "intact_dot": 0.02144729411108888,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 205.7665518750113,
+            "present_rms": 181.56335415581896,
+            "weak_free_added": 0.0
+          },
+          "zero-add": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.863111655146106,
+            "gap_added": 14.239555613907463,
+            "gap_exact": 172.11104769357064,
+            "gap_pair": 210.76039157399566,
+            "intact_dot": 0.008409484513254099,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.58681658938946,
+            "present_rms": 200.1570085434997,
+            "weak_free_added": 15.627370370677946
+          },
+          "zero-add-raw": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.726088285848808,
+            "gap_added": 14.362850051549849,
+            "gap_exact": 172.0395185882245,
+            "gap_pair": 210.58483109265697,
+            "intact_dot": 0.0084153866834877,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.46523248176396,
+            "present_rms": 200.1065218322703,
+            "weak_free_added": 15.70226702039679
+          }
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "selection": "Largest reduction of absolute gap error versus matched training",
+        "source": {
+          "attribution": null,
+          "author": "GT1976",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ed/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.npy",
+          "cache_sha256": "eb7ec09162ad4d3e87a4bf7548bcd8cd741fecd489cfaeeb6d6b92bceea933e5",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/ed/8a/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.jpg",
+          "dtype": "uint16",
+          "height": 3000,
+          "id": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/2018-05-04_%28217%29_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:2018-05-04_(217)_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg",
+          "sha1": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "sha1_hex": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "shape": [
+            750,
+            1000,
+            3
+          ],
+          "split": "val",
+          "title": "File:2018-05-04 (217) 33 53 9332 586-5 at Bahnhof St. Valentin.jpg",
+          "width": 4000
+        },
+        "source_box": [
+          376,
+          16,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/012-iso6400-triplet.png",
+            "sha256": "0cffb5f656fac2008d362cfc8d41aa0629edbc9a84d335a2e1f68cfb953d57ce"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact gap supervision",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "variant_triplets": {
+          "matched": {
+            "image": {
+              "path": "exact/012-iso6400-matched-triplet.png",
+              "sha256": "62a9438f16080e6eb887acbfaf147355a1ea0f004346961d60afaecccb0aa989"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Matched training",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "zero-add": {
+            "image": {
+              "path": "exact/012-iso6400-zero-add-triplet.png",
+              "sha256": "b13a4be37465a8042cdf6e88deded8206bace02d235adf93a75573af67d54bb5"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Gap correction penalty",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "GRBG",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/014-iso6400-comparison.png",
+            "sha256": "0868d8c6dcb34bf3325de1bf49e30ea4625926594f8791f3b064782aeb44b031"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Gap correction penalty",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "smooth-dip",
+        "id": "014-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/014-iso6400.npz",
+          "sha256": "b222c3a103b8fcea84dd06550d4de5ecc7db94ebeefef457884f41ec664631f6"
+        },
+        "metrics": {
+          "100k": {
+            "dip_dot": 0.0024373764687544304,
+            "dip_exact": 224.573420930895,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 0.0,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002796790717172693,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 253.43521488226526,
+            "present_rms": 230.44156159232426,
+            "weak_free_added": 0.0
+          },
+          "V120": {
+            "dip_dot": 0.0025251537442863093,
+            "dip_exact": 224.71515564276388,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 14.562026481734907,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0028172362367952755,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 248.4575652263751,
+            "present_rms": 233.20013673494265,
+            "weak_free_added": 26.98097143865968
+          },
+          "localized": {
+            "dip_dot": 0.0022817314655394815,
+            "dip_exact": 218.74597538778596,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 8.437047096288653,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002725474514382031,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.84628368750236,
+            "present_rms": 231.45226068587198,
+            "weak_free_added": 17.233939840682368
+          },
+          "localized-raw": {
+            "dip_dot": 0.0022815581213103554,
+            "dip_exact": 218.70533415322853,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 8.25402366089659,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027220646798733397,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.7885846929816,
+            "present_rms": 231.43010202030817,
+            "weak_free_added": 17.204626646857868
+          },
+          "matched": {
+            "dip_dot": 0.002744504622477068,
+            "dip_exact": 232.09815751709752,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 13.03419066288911,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027948937505178346,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 263.15390347080705,
+            "present_rms": 230.58298798535606,
+            "weak_free_added": 23.254551105057722
+          },
+          "matched-at-localized": {
+            "dip_dot": 0.0026598295532917803,
+            "dip_exact": 229.86416273098376,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.44064530677934,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027954157126609076,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 260.20736812972797,
+            "present_rms": 230.34468110533973,
+            "weak_free_added": 16.84324023252728
+          },
+          "matched-at-zero-add": {
+            "dip_dot": 0.002671812613847015,
+            "dip_exact": 230.17314396575551,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.949209617613965,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027953417352969048,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 260.61235681825684,
+            "present_rms": 230.36919525419108,
+            "weak_free_added": 17.750574883751224
+          },
+          "matched-raw": {
+            "dip_dot": 0.0027584283966450036,
+            "dip_exact": 232.3065665630194,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 13.94287255700518,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002794194127797007,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 263.45350207147277,
+            "present_rms": 230.63653741724278,
+            "weak_free_added": 24.11246211062575
+          },
+          "prior": {
+            "dip_dot": 0.002614478693422893,
+            "dip_exact": 229.88178470563784,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 5.7061028850335,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002798468737314562,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 259.6254620367171,
+            "present_rms": 230.40967883257065,
+            "weak_free_added": 15.09443240389307
+          },
+          "shared-gap": {
+            "dip_dot": 0.0024373764687544304,
+            "dip_exact": 224.573420930895,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 0.0,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002796790717172693,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 253.43521488226526,
+            "present_rms": 230.44156159232426,
+            "weak_free_added": 0.0
+          },
+          "zero-add": {
+            "dip_dot": 0.0022757868174056966,
+            "dip_exact": 218.52882432601112,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.484525956143198,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002723917070715019,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.61988851384612,
+            "present_rms": 231.51559838633216,
+            "weak_free_added": 17.84407695680246
+          },
+          "zero-add-raw": {
+            "dip_dot": 0.002274679762598331,
+            "dip_exact": 218.45635357562185,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.347930127536605,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002720397124780718,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.53187824763543,
+            "present_rms": 231.49976399462307,
+            "weak_free_added": 17.88202628125246
+          }
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "selection": "Largest decrease of aligned response in a continuous low-amplitude region",
+        "source": {
+          "attribution": null,
+          "author": "Uoaei1",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/30/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.npy",
+          "cache_sha256": "fab4b796912d34e59e347fad7e5907b1f8c5ac910e44dc43f769762c84ae47fa",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/30/7d/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.jpg",
+          "dtype": "uint16",
+          "height": 2318,
+          "id": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Dianthus_superbus_Auernig_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Dianthus_superbus_Auernig_01.jpg",
+          "sha1": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "sha1_hex": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "shape": [
+            579,
+            579,
+            3
+          ],
+          "split": "val",
+          "title": "File:Dianthus superbus Auernig 01.jpg",
+          "width": 2318
+        },
+        "source_box": [
+          66,
+          32,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/014-iso6400-triplet.png",
+            "sha256": "3b5cb4e074fac80d31db6e936675d071ec16a1496b545f9985b2292411e7559d"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact gap supervision",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "variant_triplets": {
+          "matched": {
+            "image": {
+              "path": "exact/014-iso6400-matched-triplet.png",
+              "sha256": "20cb5154ef695739aa7871f5ab78f554873ab6936484449f62876d7418e14999"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Matched training",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "zero-add": {
+            "image": {
+              "path": "exact/014-iso6400-zero-add-triplet.png",
+              "sha256": "dc75082d209558b0d198ab247fb44032ceb877c14e063bffb38e35b5804ebfec"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Gap correction penalty",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "scores": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/wire-scores.json",
+      "sha256": "0890be659aa4c684c7ac52d827fb80d52c2f1d3e3d3512c05ae23d052b9a66be"
+    },
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training/completed.json",
+      "sha256": "7f4dd7954eb070c87efda20baa51181ea72cac5c508f18acc89cecaf03b9a1c2"
+    }
+  },
+  "standing": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training/step000672.pt",
+      "sha256": "95337456e8697e741d38c794d5c10d837b95a99220b0fe6d0b65bf4c0d041686"
+    },
+    "configs": {
+      "main": {
+        "path": "/home/dllu/proj/demosaic/configs/gfx-qualitative-20231231.json",
+        "sha256": "23efd86ccf2b39ec8b37af21d7d7908c19b868a890544a454c88bdb6a056399a"
+      },
+      "mesh": {
+        "path": "/home/dllu/proj/demosaic/configs/gfx-green-mesh-20231231.json",
+        "sha256": "c998ceade0eeb509a11af97806161dbddaaa4bbc5e16cefff14884f6c9d5369f"
+      }
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/native_gap_head.py",
+      "sha256": "8a4d7b836478b134068011b74837aebfea377e3a1a64176fa7bb230ec9c961a5"
+    },
+    "neural_inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/manifest.json",
+      "sha256": "eea4b1ecaaccde50aa47791f8d0b2ab59a78a8de9f702eff542422d92476c21a"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+    },
+    "previous_native_review": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/native-corrected/manifest.json",
+      "sha256": "921f15f60fb76cf01189db802018b70461b24bc518570e1cae2e5762b8f044f6"
+    },
+    "rows": [
+      {
+        "ROI_xywh": [
+          5800,
+          1400,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "b5c009bc5d80c6038dc82fdd54f2b86823f352c045e815f0315273fb78437eb4"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          5752,
+          1352,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.09637226699851453,
+        "id": "main-overcast-sky-main-overcast-sky",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 3.0089325032681304,
+            "max_camera_DN16": 20.27349435724318,
+            "max_scene_linear_chroma_change_DN16": 0.00018269876581900046
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.074862517820582,
+            "max_camera_DN16": 14.16799670085311,
+            "max_scene_linear_chroma_change_DN16": 0.00018679408019561805
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 3.370536185573881,
+            "max_camera_DN16": 23.211559876799583,
+            "max_scene_linear_chroma_change_DN16": 0.00018278609320354633
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-overcast-sky-main-overcast-sky.npz",
+          "sha256": "00b74e81a2466ab50d0365f7a66f48ca13c27b3bbe667cfb77c9dcae3a2c8f84"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/main-overcast-sky-main-overcast-sky.npz",
+          "sha256": "8fc65addb295eadd5b71517eedcb2e28a91864d28f31d7dc4d1a2146e0ed9546"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          5790,
+          2690,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/main-building-detail-main-building-detail.png",
+            "sha256": "2f3e376865600579217fbe138482ee6766cd9c4894ddf9736b70574ef7fb314a"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          5742,
+          2642,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.08345315500628203,
+        "id": "main-building-detail-main-building-detail",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 6.723473959379786,
+            "max_camera_DN16": 77.71805237978697,
+            "max_scene_linear_chroma_change_DN16": 0.0007066388756763048
+          },
+          "matched": {
+            "camera_RMS_DN16": 7.802997596484153,
+            "max_camera_DN16": 111.37525364756584,
+            "max_scene_linear_chroma_change_DN16": 0.0007514866707531848
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 7.052281396728998,
+            "max_camera_DN16": 79.27027478814125,
+            "max_scene_linear_chroma_change_DN16": 0.0007493462738530354
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-building-detail-main-building-detail.npz",
+          "sha256": "d0d352ffcb85573c5f2661a72c96a23a6f09af280eb22115242fa65747c4ed66"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/main-building-detail-main-building-detail.npz",
+          "sha256": "970daab43a8efb4577782c4ee42e9743cf60b3418df0f60da1c88ffeb368c463"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          8890,
+          5570,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/main-foliage-main-foliage.png",
+            "sha256": "74817b69aece9480628da45b31b4b571d0d62272e3158f68d8be7e47be4217e4"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          8842,
+          5522,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.08160948392469436,
+        "id": "main-foliage-main-foliage",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 9.675086718577125,
+            "max_camera_DN16": 108.36846359074116,
+            "max_scene_linear_chroma_change_DN16": 0.0006693435908182721
+          },
+          "matched": {
+            "camera_RMS_DN16": 9.316294027008324,
+            "max_camera_DN16": 80.45970976352692,
+            "max_scene_linear_chroma_change_DN16": 0.0006871605565166305
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 9.985116624702062,
+            "max_camera_DN16": 111.83032482862473,
+            "max_scene_linear_chroma_change_DN16": 0.000877640078797981
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-foliage-main-foliage.npz",
+          "sha256": "215fc464f90633943d820f1c882d48af45f10082b8737d97f09cb88fc6f2357c"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/main-foliage-main-foliage.npz",
+          "sha256": "24ec969d788fa2c632b18161f124651f1336b360d87be9ec69120d8be9c2fe8e"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          2240,
+          6000,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "51e1cdb3e0d767747806db70a426d08961cef79375c7c2281c2c2faee3033220"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          2192,
+          5952,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.081531708012335,
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 8.311327187210944,
+            "max_camera_DN16": 172.4915085732937,
+            "max_scene_linear_chroma_change_DN16": 0.00037719490438803405
+          },
+          "matched": {
+            "camera_RMS_DN16": 8.271111048577422,
+            "max_camera_DN16": 66.31051160395145,
+            "max_scene_linear_chroma_change_DN16": 0.00042466721723144474
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 8.918244274835507,
+            "max_camera_DN16": 177.55197823047638,
+            "max_scene_linear_chroma_change_DN16": 0.00035718896549497003
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-chain-link-fence-main-chain-link-fence.npz",
+          "sha256": "73b2c95aa6f50973f2ca3ce9b40a09f5e7f0df355f9b95014ce4735bb4eb3acb"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/main-chain-link-fence-main-chain-link-fence.npz",
+          "sha256": "90e250a808aa34314b3e1d3d0d36c4c203810f15afb01df130fc870f39f79ffc"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "1c5ea81f0942a8e6cf53ee7fde4031cca77ace94de29de46ccad25c1b05bdee1"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.08542794501408935,
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.593038674380271,
+            "max_camera_DN16": 25.07090650498867,
+            "max_scene_linear_chroma_change_DN16": 0.0005737582660287899
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.56472273082141,
+            "max_camera_DN16": 21.208355580456555,
+            "max_scene_linear_chroma_change_DN16": 0.00019382135583079219
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 2.8176103324793385,
+            "max_camera_DN16": 26.55232921242714,
+            "max_scene_linear_chroma_change_DN16": 0.00034897569529235284
+          }
+        },
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-nominal-fine-green-mesh-left.npz",
+          "sha256": "44201aca1fd13882ee4644f40b537c5802564c15529f95f0521dc6bd6e314ef5"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/mesh-nominal-fine-green-mesh-left.npz",
+          "sha256": "143cf0d34f549449264dea4f27507f9a7a725e375fa04d3b5cdb8967e0151f8a"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      },
+      {
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "18c7b75a366a03b088d9135d711d158e9a6873d3580eff99b5d9dbd6572ed331"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.08673108497168869,
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.795890754223227,
+            "max_camera_DN16": 23.490242147818208,
+            "max_scene_linear_chroma_change_DN16": 8.522465006066682e-05
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.157521418989332,
+            "max_camera_DN16": 11.853456823155284,
+            "max_scene_linear_chroma_change_DN16": 0.00011904157869135901
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 3.0741415048850733,
+            "max_camera_DN16": 25.753513276576996,
+            "max_scene_linear_chroma_change_DN16": 0.00011159753688261276
+          }
+        },
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-nominal-fine-green-mesh-right.npz",
+          "sha256": "32c2ec085a465452d93cdfef6a8e84949a9a8be7cc0bdc4aef5fa0fa0d6fe59e"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/mesh-nominal-fine-green-mesh-right.npz",
+          "sha256": "cfc7170b74b48915ee2bbfc9e7f09ed7dec87457a10ce08290dfae3265b021c3"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      },
+      {
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "634a2464ab7d4734deb3e78ddea05b0feca3fe85441eb5527414a272d8d6a14d"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.093697106000036,
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.747595189681383,
+            "max_camera_DN16": 24.51476264744997,
+            "max_scene_linear_chroma_change_DN16": 0.0006699153202234243
+          },
+          "matched": {
+            "camera_RMS_DN16": 3.0689148345410655,
+            "max_camera_DN16": 23.73267008922994,
+            "max_scene_linear_chroma_change_DN16": 0.00016206140341523678
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 3.010161173127793,
+            "max_camera_DN16": 26.022063866257668,
+            "max_scene_linear_chroma_change_DN16": 0.00015658422036324282
+          }
+        },
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-profile3879-fine-green-mesh-left.npz",
+          "sha256": "d87d6b9f6bf07c915f66340adfd8c9b1c8ec93dd936af7c22779b703c84bd5f7"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/mesh-profile3879-fine-green-mesh-left.npz",
+          "sha256": "faace38b506ed02e698570ee13da787f73bd3785751b3fcafe2af97ab1fb7e82"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      },
+      {
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "0c4f6f18d0ab4610b676661fca26cff8c940c1902d06d4a8e806b2a001409e04"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Gap correction penalty",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.08750455803237855,
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.9300695986446663,
+            "max_camera_DN16": 23.05897431448102,
+            "max_scene_linear_chroma_change_DN16": 9.160296926857825e-05
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.337161743095435,
+            "max_camera_DN16": 14.521506931632757,
+            "max_scene_linear_chroma_change_DN16": 8.956092718959141e-05
+          },
+          "zero-add": {
+            "camera_RMS_DN16": 3.233244765990122,
+            "max_camera_DN16": 25.68820665590465,
+            "max_scene_linear_chroma_change_DN16": 9.097682551129083e-05
+          }
+        },
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-profile3879-fine-green-mesh-right.npz",
+          "sha256": "6549743700f3f8856b7e31a29f823f7d151442efcbeaacf7425295699d9f8078"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/standing-canonical/mesh-profile3879-fine-green-mesh-right.npz",
+          "sha256": "47f302d0597348409e3e7d2932514de36987faab8fc3677d3049d4e80b47ca18"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training/completed.json",
+      "sha256": "7f4dd7954eb070c87efda20baa51181ea72cac5c508f18acc89cecaf03b9a1c2"
+    }
+  },
+  "visual_review": {
+    "exact_boards": 4,
+    "native_triplets": 10,
+    "observations": "Smooth overcast sky, coherent coarse fence, softened building detail and foliage, diffuse left lattice and incomplete right crossings. No convincing new fine crossings under either noise prior.",
+    "standing_boards": 16
+  },
+  "witness-exact": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training-witness/step000672.pt",
+      "sha256": "f1ef6679e3831fd92c7c500483fdcb17fcaae2dcec44371a68a97ebefe88ce2f"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/native_gap_head.py",
+      "sha256": "273c55172d100e198475c792d7411f5e7e3f7d51dbc0adb7daa9f68cc6073d19"
+    },
+    "rows": [
+      {
+        "ADC_bits": 16,
+        "CFA": "RGGB",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "witness-exact/012-iso6400-comparison.png",
+            "sha256": "2f4b42e95bfafc7b79c8f91cdf9d701bd9c2e2d25b616c6d848d524afac21f4c"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer witnesses",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "ellipse",
+        "id": "012-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/012-iso6400.npz",
+          "sha256": "caeba10076a8701b00589737a870775f791fd45459c9f5b52b24f570f8fc70b0"
+        },
+        "metrics": {
+          "100k": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 0.0,
+            "gap_added": 0.0,
+            "gap_exact": 175.6470322663282,
+            "gap_pair": 218.72148129794095,
+            "intact_dot": 0.009910781489348328,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 211.84539018258926,
+            "present_rms": 200.1581732615415,
+            "weak_free_added": 0.0
+          },
+          "V120": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.436355099475952,
+            "gap_added": 22.201133307413087,
+            "gap_exact": 175.4694409913753,
+            "gap_pair": 218.07025826163746,
+            "intact_dot": 0.007986602106350412,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 212.61507697620723,
+            "present_rms": 204.6832780794255,
+            "weak_free_added": 36.725116684837026
+          },
+          "localized": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 7.8460308684326145,
+            "gap_added": 13.725155144676966,
+            "gap_exact": 172.21974485501622,
+            "gap_pair": 211.05642426751854,
+            "intact_dot": 0.008513981451525824,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.74934101700234,
+            "present_rms": 200.06252225671034,
+            "weak_free_added": 14.892713624993148
+          },
+          "localized-raw": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 7.663647250695662,
+            "gap_added": 13.799856279320142,
+            "gap_exact": 172.15657498107097,
+            "gap_pair": 210.91088373203786,
+            "intact_dot": 0.008530660514224991,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.64207353739042,
+            "present_rms": 199.99932279792213,
+            "weak_free_added": 14.909243004307063
+          },
+          "matched": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 11.371971127551321,
+            "gap_added": 15.940408821993392,
+            "gap_exact": 179.11702782338585,
+            "gap_pair": 225.733849635747,
+            "intact_dot": 0.0139584326737713,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 214.93356091071973,
+            "present_rms": 198.0110585232055,
+            "weak_free_added": 19.890613403096616
+          },
+          "matched-at-localized": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.236703374407806,
+            "gap_added": 11.54562115530828,
+            "gap_exact": 178.0246371143985,
+            "gap_pair": 223.65856707181368,
+            "intact_dot": 0.012842489156558926,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 213.76577154980598,
+            "present_rms": 198.339321325464,
+            "weak_free_added": 14.406748662074039
+          },
+          "matched-at-zero-add": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.68041055461509,
+            "gap_added": 12.167578287470366,
+            "gap_exact": 178.1730620356273,
+            "gap_pair": 223.9458714460542,
+            "intact_dot": 0.013000418569109398,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 213.91658886948534,
+            "present_rms": 198.2805850912554,
+            "weak_free_added": 15.18282925573203
+          },
+          "matched-raw": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 12.248414703843817,
+            "gap_added": 16.55386031433124,
+            "gap_exact": 179.22285375934882,
+            "gap_pair": 225.93775453049548,
+            "intact_dot": 0.014165565139888932,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 214.94687715585206,
+            "present_rms": 197.8885964680224,
+            "weak_free_added": 20.715295111926128
+          },
+          "prior": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 5.186301707646857,
+            "gap_added": 10.994597162995005,
+            "gap_exact": 178.2067008143839,
+            "gap_pair": 223.7369041055143,
+            "intact_dot": 0.01211939521491147,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 214.48313950347958,
+            "present_rms": 199.3167005299318,
+            "weak_free_added": 12.64314919121731
+          },
+          "shared-gap": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 0.0,
+            "gap_added": 56.335157591901954,
+            "gap_exact": 169.31410473718168,
+            "gap_pair": 226.1981884187527,
+            "intact_dot": 0.02144729411108888,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 205.7665518750113,
+            "present_rms": 181.56335415581896,
+            "weak_free_added": 0.0
+          },
+          "zero-add": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.863111655146106,
+            "gap_added": 14.239555613907463,
+            "gap_exact": 172.11104769357064,
+            "gap_pair": 210.76039157399566,
+            "intact_dot": 0.008409484513254099,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.58681658938946,
+            "present_rms": 200.1570085434997,
+            "weak_free_added": 15.627370370677946
+          },
+          "zero-add-raw": {
+            "dip_dot": 0.0,
+            "dip_exact": null,
+            "dip_power": 0.0,
+            "flat_added": 8.726088285848808,
+            "gap_added": 14.362850051549849,
+            "gap_exact": 172.0395185882245,
+            "gap_pair": 210.58483109265697,
+            "intact_dot": 0.0084153866834877,
+            "intact_power": 0.04883132591942381,
+            "intact_rms": 206.46523248176396,
+            "present_rms": 200.1065218322703,
+            "weak_free_added": 15.70226702039679
+          }
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "selection": "Largest reduction of absolute gap error versus matched training",
+        "source": {
+          "attribution": null,
+          "author": "GT1976",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ed/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.npy",
+          "cache_sha256": "eb7ec09162ad4d3e87a4bf7548bcd8cd741fecd489cfaeeb6d6b92bceea933e5",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/ed/8a/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.jpg",
+          "dtype": "uint16",
+          "height": 3000,
+          "id": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/2018-05-04_%28217%29_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:2018-05-04_(217)_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg",
+          "sha1": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "sha1_hex": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "shape": [
+            750,
+            1000,
+            3
+          ],
+          "split": "val",
+          "title": "File:2018-05-04 (217) 33 53 9332 586-5 at Bahnhof St. Valentin.jpg",
+          "width": 4000
+        },
+        "source_box": [
+          376,
+          16,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "witness-exact/012-iso6400-triplet.png",
+            "sha256": "e985b1f408488a4b503913fc2d088ed5e006d428b54e182a1c9cfd3bd8c154b6"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "variant_triplets": {
+          "witness-matched": {
+            "image": {
+              "path": "witness-exact/012-iso6400-witness-matched-triplet.png",
+              "sha256": "10a36d7461390d741126f8cb7cb366b966e3fc84827b6347704b8fd8c12083f6"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bayer witnesses",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "GRBG",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "witness-exact/014-iso6400-comparison.png",
+            "sha256": "893f46d545bf189397bf6ff1dd6925b4fd9867b6249ba7bc8a9413e6e87fe766"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer witnesses",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "smooth-dip",
+        "id": "014-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/014-iso6400.npz",
+          "sha256": "b222c3a103b8fcea84dd06550d4de5ecc7db94ebeefef457884f41ec664631f6"
+        },
+        "metrics": {
+          "100k": {
+            "dip_dot": 0.0024373764687544304,
+            "dip_exact": 224.573420930895,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 0.0,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002796790717172693,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 253.43521488226526,
+            "present_rms": 230.44156159232426,
+            "weak_free_added": 0.0
+          },
+          "V120": {
+            "dip_dot": 0.0025251537442863093,
+            "dip_exact": 224.71515564276388,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 14.562026481734907,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0028172362367952755,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 248.4575652263751,
+            "present_rms": 233.20013673494265,
+            "weak_free_added": 26.98097143865968
+          },
+          "localized": {
+            "dip_dot": 0.0022817314655394815,
+            "dip_exact": 218.74597538778596,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 8.437047096288653,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002725474514382031,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.84628368750236,
+            "present_rms": 231.45226068587198,
+            "weak_free_added": 17.233939840682368
+          },
+          "localized-raw": {
+            "dip_dot": 0.0022815581213103554,
+            "dip_exact": 218.70533415322853,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 8.25402366089659,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027220646798733397,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.7885846929816,
+            "present_rms": 231.43010202030817,
+            "weak_free_added": 17.204626646857868
+          },
+          "matched": {
+            "dip_dot": 0.002744504622477068,
+            "dip_exact": 232.09815751709752,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 13.03419066288911,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027948937505178346,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 263.15390347080705,
+            "present_rms": 230.58298798535606,
+            "weak_free_added": 23.254551105057722
+          },
+          "matched-at-localized": {
+            "dip_dot": 0.0026598295532917803,
+            "dip_exact": 229.86416273098376,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.44064530677934,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027954157126609076,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 260.20736812972797,
+            "present_rms": 230.34468110533973,
+            "weak_free_added": 16.84324023252728
+          },
+          "matched-at-zero-add": {
+            "dip_dot": 0.002671812613847015,
+            "dip_exact": 230.17314396575551,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.949209617613965,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.0027953417352969048,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 260.61235681825684,
+            "present_rms": 230.36919525419108,
+            "weak_free_added": 17.750574883751224
+          },
+          "matched-raw": {
+            "dip_dot": 0.0027584283966450036,
+            "dip_exact": 232.3065665630194,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 13.94287255700518,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002794194127797007,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 263.45350207147277,
+            "present_rms": 230.63653741724278,
+            "weak_free_added": 24.11246211062575
+          },
+          "prior": {
+            "dip_dot": 0.002614478693422893,
+            "dip_exact": 229.88178470563784,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 5.7061028850335,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002798468737314562,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 259.6254620367171,
+            "present_rms": 230.40967883257065,
+            "weak_free_added": 15.09443240389307
+          },
+          "shared-gap": {
+            "dip_dot": 0.0024373764687544304,
+            "dip_exact": 224.573420930895,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 0.0,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002796790717172693,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 253.43521488226526,
+            "present_rms": 230.44156159232426,
+            "weak_free_added": 0.0
+          },
+          "zero-add": {
+            "dip_dot": 0.0022757868174056966,
+            "dip_exact": 218.52882432601112,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.484525956143198,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002723917070715019,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.61988851384612,
+            "present_rms": 231.51559838633216,
+            "weak_free_added": 17.84407695680246
+          },
+          "zero-add-raw": {
+            "dip_dot": 0.002274679762598331,
+            "dip_exact": 218.45635357562185,
+            "dip_power": 0.00276325887962675,
+            "flat_added": 9.347930127536605,
+            "gap_added": null,
+            "gap_exact": null,
+            "gap_pair": null,
+            "intact_dot": 0.002720397124780718,
+            "intact_power": 0.0048440702767104,
+            "intact_rms": 246.53187824763543,
+            "present_rms": 231.49976399462307,
+            "weak_free_added": 17.88202628125246
+          }
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "selection": "Largest decrease of aligned response in a continuous low-amplitude region",
+        "source": {
+          "attribution": null,
+          "author": "Uoaei1",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/30/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.npy",
+          "cache_sha256": "fab4b796912d34e59e347fad7e5907b1f8c5ac910e44dc43f769762c84ae47fa",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/30/7d/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.jpg",
+          "dtype": "uint16",
+          "height": 2318,
+          "id": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Dianthus_superbus_Auernig_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Dianthus_superbus_Auernig_01.jpg",
+          "sha1": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "sha1_hex": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "shape": [
+            579,
+            579,
+            3
+          ],
+          "split": "val",
+          "title": "File:Dianthus superbus Auernig 01.jpg",
+          "width": 2318
+        },
+        "source_box": [
+          66,
+          32,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "witness-exact/014-iso6400-triplet.png",
+            "sha256": "2bdc9a95d116c067276eaf432f95fe15a097324cf762aea23ec4b95c5d535e28"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "variant_triplets": {
+          "witness-matched": {
+            "image": {
+              "path": "witness-exact/014-iso6400-witness-matched-triplet.png",
+              "sha256": "f0de5d462ac2dffaace3dbdbcbf79612c2d2930c22f13a1e6760249fe4fcca80"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Bayer witnesses",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "scores": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/wire-scores.json",
+      "sha256": "0890be659aa4c684c7ac52d827fb80d52c2f1d3e3d3512c05ae23d052b9a66be"
+    },
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training-witness/completed.json",
+      "sha256": "8f51dd27021ccc347da298dadd92dc786d3f99b801cbced1c61f4b67a62f1887"
+    }
+  },
+  "witness-standing": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training-witness/step000672.pt",
+      "sha256": "f1ef6679e3831fd92c7c500483fdcb17fcaae2dcec44371a68a97ebefe88ce2f"
+    },
+    "configs": {
+      "main": {
+        "path": "/home/dllu/proj/demosaic/configs/gfx-qualitative-20231231.json",
+        "sha256": "23efd86ccf2b39ec8b37af21d7d7908c19b868a890544a454c88bdb6a056399a"
+      },
+      "mesh": {
+        "path": "/home/dllu/proj/demosaic/configs/gfx-green-mesh-20231231.json",
+        "sha256": "c998ceade0eeb509a11af97806161dbddaaa4bbc5e16cefff14884f6c9d5369f"
+      }
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/native_gap_head.py",
+      "sha256": "273c55172d100e198475c792d7411f5e7e3f7d51dbc0adb7daa9f68cc6073d19"
+    },
+    "neural_inputs": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/manifest.json",
+      "sha256": "eea4b1ecaaccde50aa47791f8d0b2ab59a78a8de9f702eff542422d92476c21a"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+    },
+    "previous_native_review": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/native-corrected/manifest.json",
+      "sha256": "921f15f60fb76cf01189db802018b70461b24bc518570e1cae2e5762b8f044f6"
+    },
+    "rows": [
+      {
+        "ROI_xywh": [
+          5800,
+          1400,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "d37a20218ee90ee4646b926c099f618f8181a2a35252fa92d446a7a20c692186"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          5752,
+          1352,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.14839487301651388,
+        "id": "main-overcast-sky-main-overcast-sky",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 3.0089325032681304,
+            "max_camera_DN16": 20.27349435724318,
+            "max_scene_linear_chroma_change_DN16": 0.00018269876581900046
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.074862517820582,
+            "max_camera_DN16": 14.16799670085311,
+            "max_scene_linear_chroma_change_DN16": 0.00018679408019561805
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 3.0198763033631986,
+            "max_camera_DN16": 20.538871167227626,
+            "max_scene_linear_chroma_change_DN16": 0.00018387202883940468
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 2.6436627605882284,
+            "max_camera_DN16": 17.31162548996508,
+            "max_scene_linear_chroma_change_DN16": 0.00018529963692603957
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-overcast-sky-main-overcast-sky.npz",
+          "sha256": "00b74e81a2466ab50d0365f7a66f48ca13c27b3bbe667cfb77c9dcae3a2c8f84"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/main-overcast-sky-main-overcast-sky.npz",
+          "sha256": "b1ee5bb6131716cbae73353fb3b1f157c86ad319f01ce9c65a3363202f1cf1dd"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          5790,
+          2690,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/main-building-detail-main-building-detail.png",
+            "sha256": "f00429753bd34004f2712b69d7a1370966f9ca61aae0014b21d0bf4ef7b5c349"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          5742,
+          2642,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.11113090196158737,
+        "id": "main-building-detail-main-building-detail",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 6.723473959379786,
+            "max_camera_DN16": 77.71805237978697,
+            "max_scene_linear_chroma_change_DN16": 0.0007066388756763048
+          },
+          "matched": {
+            "camera_RMS_DN16": 7.802997596484153,
+            "max_camera_DN16": 111.37525364756584,
+            "max_scene_linear_chroma_change_DN16": 0.0007514866707531848
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 6.77090636604971,
+            "max_camera_DN16": 79.14674151688814,
+            "max_scene_linear_chroma_change_DN16": 0.000747003899249421
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 8.339948935987815,
+            "max_camera_DN16": 115.14082118868828,
+            "max_scene_linear_chroma_change_DN16": 0.0007410451462241952
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-building-detail-main-building-detail.npz",
+          "sha256": "d0d352ffcb85573c5f2661a72c96a23a6f09af280eb22115242fa65747c4ed66"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/main-building-detail-main-building-detail.npz",
+          "sha256": "be2277e4a4402dbb3374fdbe79e7dac5fbd689bc22bcf37c1d188506b5f5bfb0"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          8890,
+          5570,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/main-foliage-main-foliage.png",
+            "sha256": "2a49067fc3f061dfe0320e23267e52fec5aedbe5a8da860dc107a84caafac0cd"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          8842,
+          5522,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.12728756002616137,
+        "id": "main-foliage-main-foliage",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 9.675086718577125,
+            "max_camera_DN16": 108.36846359074116,
+            "max_scene_linear_chroma_change_DN16": 0.0006693435908182721
+          },
+          "matched": {
+            "camera_RMS_DN16": 9.316294027008324,
+            "max_camera_DN16": 80.45970976352692,
+            "max_scene_linear_chroma_change_DN16": 0.0006871605565166305
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 10.085148868409998,
+            "max_camera_DN16": 112.74339683353901,
+            "max_scene_linear_chroma_change_DN16": 0.0006657679927499771
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 8.657951933753814,
+            "max_camera_DN16": 73.77719454467297,
+            "max_scene_linear_chroma_change_DN16": 0.0009646214904677208
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-foliage-main-foliage.npz",
+          "sha256": "215fc464f90633943d820f1c882d48af45f10082b8737d97f09cb88fc6f2357c"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/main-foliage-main-foliage.npz",
+          "sha256": "4e6491f64decb49f374ef6af75acf94a6aee1db2c54fe9ba50325de0f7571fad"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          2240,
+          6000,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "0634dc6d7243139f114716e020df68085ec3d5b8cef5faf6931c81d8c5a32614"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          2192,
+          5952,
+          256,
+          256
+        ],
+        "exposure": 4.0,
+        "head_seconds": 0.16027009394019842,
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 8.311327187210944,
+            "max_camera_DN16": 172.4915085732937,
+            "max_scene_linear_chroma_change_DN16": 0.00037719490438803405
+          },
+          "matched": {
+            "camera_RMS_DN16": 8.271111048577422,
+            "max_camera_DN16": 66.31051160395145,
+            "max_scene_linear_chroma_change_DN16": 0.00042466721723144474
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 8.619005999205767,
+            "max_camera_DN16": 192.87401005625725,
+            "max_scene_linear_chroma_change_DN16": 0.0006745539074586304
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 7.52952839032948,
+            "max_camera_DN16": 37.61075422167778,
+            "max_scene_linear_chroma_change_DN16": 0.0005236255866911677
+          }
+        },
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/main-chain-link-fence-main-chain-link-fence.npz",
+          "sha256": "73b2c95aa6f50973f2ca3ce9b40a09f5e7f0df355f9b95014ce4735bb4eb3acb"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/main-chain-link-fence-main-chain-link-fence.npz",
+          "sha256": "060a9d29766cb98e5e5277dd94c7c75dcbf2a4c07cd06c9486540a64ac26cf87"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        }
+      },
+      {
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "a0c9867e9838f853134478a6396f04e82a44d78cdc382847e91e615534d08551"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.10334564605727792,
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.593038674380271,
+            "max_camera_DN16": 25.07090650498867,
+            "max_scene_linear_chroma_change_DN16": 0.0005737582660287899
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.56472273082141,
+            "max_camera_DN16": 21.208355580456555,
+            "max_scene_linear_chroma_change_DN16": 0.00019382135583079219
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 2.6231557851475884,
+            "max_camera_DN16": 25.861421786248684,
+            "max_scene_linear_chroma_change_DN16": 0.0007422145058484375
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 2.7654506023648473,
+            "max_camera_DN16": 20.517966945189983,
+            "max_scene_linear_chroma_change_DN16": 0.00018331929199355557
+          }
+        },
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-nominal-fine-green-mesh-left.npz",
+          "sha256": "44201aca1fd13882ee4644f40b537c5802564c15529f95f0521dc6bd6e314ef5"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/mesh-nominal-fine-green-mesh-left.npz",
+          "sha256": "8ef8b90151c254cf42f4273d3c814fe8c309ee1893b5482967b9eb5f97a9f198"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      },
+      {
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "1868613d222c55443933adbda616456b102b575c776a631a57ddb48409ce6bf3"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.10116706404369324,
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.795890754223227,
+            "max_camera_DN16": 23.490242147818208,
+            "max_scene_linear_chroma_change_DN16": 8.522465006066682e-05
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.157521418989332,
+            "max_camera_DN16": 11.853456823155284,
+            "max_scene_linear_chroma_change_DN16": 0.00011904157869135901
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 2.855116436656071,
+            "max_camera_DN16": 24.3557074572891,
+            "max_scene_linear_chroma_change_DN16": 9.128995939899909e-05
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 2.431959306505838,
+            "max_camera_DN16": 13.395211861934513,
+            "max_scene_linear_chroma_change_DN16": 8.891800838095598e-05
+          }
+        },
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-nominal-fine-green-mesh-right.npz",
+          "sha256": "32c2ec085a465452d93cdfef6a8e84949a9a8be7cc0bdc4aef5fa0fa0d6fe59e"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/mesh-nominal-fine-green-mesh-right.npz",
+          "sha256": "c80457f3c08d0e75aa82dd07b41af0320451191edd70a889686801194fe100c2"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      },
+      {
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "c051eab6fe0f1d7958a8811d40813ac80375ab8caeca207cae9c57bbf2653f6b"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.09564450196921825,
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.747595189681383,
+            "max_camera_DN16": 24.51476264744997,
+            "max_scene_linear_chroma_change_DN16": 0.0006699153202234243
+          },
+          "matched": {
+            "camera_RMS_DN16": 3.0689148345410655,
+            "max_camera_DN16": 23.73267008922994,
+            "max_scene_linear_chroma_change_DN16": 0.00016206140341523678
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 2.800629795156578,
+            "max_camera_DN16": 25.196881145238876,
+            "max_scene_linear_chroma_change_DN16": 0.00013178399733781987
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 3.1784342739532665,
+            "max_camera_DN16": 23.314646682702005,
+            "max_scene_linear_chroma_change_DN16": 0.0001699751191814869
+          }
+        },
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-profile3879-fine-green-mesh-left.npz",
+          "sha256": "d87d6b9f6bf07c915f66340adfd8c9b1c8ec93dd936af7c22779b703c84bd5f7"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/mesh-profile3879-fine-green-mesh-left.npz",
+          "sha256": "00a9e1b7d857b69b2d62419681cbc6c17ef1fb3c223e30deb5c51e3a2a46824b"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      },
+      {
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "board": {
+          "image": {
+            "path": "witness-standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "a2b4ff15d22c4a7f143f2ac5292ec63a8ccae8f9b1da79b1340763bdd1095b56"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Earlier spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Matched training",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exact gap supervision",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer witnesses + gap loss",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "exposure": 16.0,
+        "head_seconds": 0.11926615901757032,
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "measurements": {
+          "localized": {
+            "camera_RMS_DN16": 2.9300695986446663,
+            "max_camera_DN16": 23.05897431448102,
+            "max_scene_linear_chroma_change_DN16": 9.160296926857825e-05
+          },
+          "matched": {
+            "camera_RMS_DN16": 2.337161743095435,
+            "max_camera_DN16": 14.521506931632757,
+            "max_scene_linear_chroma_change_DN16": 8.956092718959141e-05
+          },
+          "witness-localized": {
+            "camera_RMS_DN16": 3.0132515097334958,
+            "max_camera_DN16": 24.122556718066335,
+            "max_scene_linear_chroma_change_DN16": 8.778006090892632e-05
+          },
+          "witness-matched": {
+            "camera_RMS_DN16": 2.4479068083166107,
+            "max_camera_DN16": 15.329966275021434,
+            "max_scene_linear_chroma_change_DN16": 9.033357380167084e-05
+          }
+        },
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent_pixels": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-signed-colour-v1/standing/mesh-profile3879-fine-green-mesh-right.npz",
+          "sha256": "6549743700f3f8856b7e31a29f823f7d151442efcbeaacf7425295699d9f8078"
+        },
+        "predictions": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/witness-standing/mesh-profile3879-fine-green-mesh-right.npz",
+          "sha256": "90ed68042ebaf03ed98eb265e175cd17200fbc448a9d11f34c6b901bb38f5e9b"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        }
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-gaps-v1/training-witness/completed.json",
+      "sha256": "8f51dd27021ccc347da298dadd92dc786d3f99b801cbced1c61f4b67a62f1887"
+    }
+  }
+}

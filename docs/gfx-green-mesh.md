@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Exact gap supervision and Bayer witnesses](learned-spectral-gaps.md#standing-gfx100s-comparisons) | Both ROIs and conditioning profiles were reviewed for all new heads alongside both JPEGs and independent AHD. The left lattice stays diffuse and right crossings remain incomplete |
 | [Learned spectral corrections](learned-spectral-detail.md#standing-gfx100s-comparisons) | All four cab views were inspected with both JPEGs and ISO100 AHD. Under both profiles the left lattice stays diffuse and right crossings stay patchy |
 | [Surrounding RAW spectral priors](scene-spectrum-detail.md#standing-gfx100s-comparisons) | All four cab crops were viewed. The parent-phase lift changes them by less than 0.19 DN16 RGB RMS and leaves crossings incomplete |
 | [Local and spatial scene context at 15k](scene-full-epoch.md#standing-gfx100s-at-update-15000) | Both ROIs and profiles were viewed with both JPEGs and ISO100 AHD. The transferred prior shows more right diagonals. Fine crossings stay incomplete |
