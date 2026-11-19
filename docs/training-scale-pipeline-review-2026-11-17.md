@@ -10,8 +10,8 @@ Follow-up measurements verify five complete ordinary-photo passes and
 fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233).
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
-two arms match through 13,000 updates on 26,000 distinct photos and
-104,000 native queries per arm. Local-only reaches 15,000 with 30,000
+two arms match through 13,500 updates on 27,000 distinct photos and
+108,000 native queries per arm. Local-only reaches 15,000 with 30,000
 photos and 120,000 queries. The 12k exact-target monitor and both standing
 GFX reviews are complete. The 15k review waits for its matched checkpoint.
 [Coverage and source audit](scene-full-epoch.md#execution-status) ·

@@ -230,6 +230,16 @@ The next segments verify identical inputs through **13,000 updates** on
 arm. Both training workers retain the original 50,000-update schedule.
 [Paired 13k source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-013000.json).
 
+The first spatial attempt toward 13,500 spent 8 minutes 49 seconds
+before opening its training trace. Two process samples showed advancing
+CPU time with identical I/O counts and no training output. The controller
+restarted from the verified 13k checkpoint. The second attempt completes
+and both arms now verify identical traces through **13,500 updates** on
+27,000 photos and 108,000 native queries per arm. The frozen data and
+schedule are the same. The last completed quality review is at 12k.
+[Paired 13,500 and recovery audit](results/scene-full-epoch-v1/paired-prefix-013500.json) ·
+[Original attempt and restart receipts](results/scene-full-epoch-v1/paired-prefix-013500.tar.xz).
+
 The local-only arm has verified **15,000 updates**, covering 30,000
 distinct photos, 30,000 noise seeds and 120,000 native queries. Its
 retained training loops total 6,911.95 s. The local checkpoint SHA256 is
