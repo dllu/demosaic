@@ -464,6 +464,15 @@ over local 20k. It raises intact error and the exact-flat photo floor.
 Separate attenuation and addition gains fail to recover the Corpus 100k
 natural response at the parent flat RMS on the calibration photos.
 
+A [local RAW activity comparison](phase-activity.md) puts a smooth
+window gate on the same frozen correction. Detrended local self-power
+gives more response at lower exact-flat RMS than fixed scaling on
+independent ISO6400 photos. A stricter gate gains 0.33 response points
+with parent-level flat RMS but suppresses most of the nominal fine-cab
+correction. Green cross-power helps detect controlled stronger waves.
+For the weakest waves its center-window detection is close to chance,
+and many independent exact flats contain at least one active window.
+
 A [dense regional context replay](scene-regional-context.md) gives that
 trial's spatial 12k checkpoint a registered higher-resolution neighborhood.
 In the additional 48 fixed fields, quiet error falls versus coarse,

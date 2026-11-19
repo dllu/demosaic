@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Local RAW activity gates](phase-activity.md#standing-gfx100s-comparisons)
+  keep the sky smooth and reinforce some existing coarse-fence crossings.
+  Fine building lines and foliage remain soft.
 - [Bayer phase on local 20k](quiet-parent-phase.md#standing-gfx100s-comparisons)
   keeps the sky smooth and slightly reinforces existing coarse fence texture.
   The fine building wires and foliage stay soft.

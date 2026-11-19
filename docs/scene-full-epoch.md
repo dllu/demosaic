@@ -300,6 +300,13 @@ numerical and native review covers 20k.
 [22,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-022500.tar.xz).
 [Earlier local audit](results/scene-full-epoch-v1/local-022500-prefix.json).
 
+The local-only arm verifies **24,500 updates** on 49,000 distinct photos
+and 196,000 native queries. Its retained loops total 12,150.01 s on the
+same schedule. Matched training coverage is through 22,500 updates.
+[23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
+[24,000 local audit](results/scene-full-epoch-v1/local-024000-prefix.json) ·
+[24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json).
+
 [Earlier local-only 20,000 audit](results/scene-full-epoch-v1/local-020000-prefix.json) ·
 [Matched 20,000 controller receipt](results/scene-full-epoch-v1/matched-020000-training.json) ·
 [Review queue](results/scene-full-epoch-v1/queue-review-020000-launch.json) ·

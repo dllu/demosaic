@@ -153,6 +153,11 @@ ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
 natural-photo response loss against Corpus 100k with more exact-flat
 error. Some right cab diagonals strengthen, with incomplete crossings.
+[Local RAW activity gates](phase-activity.md) improve the
+fine-response/flat-error tradeoff of the Bayer refit on independent
+ISO6400 photos. The strict gate adds 0.33 response points at
+parent-level flat RMS and removes most of the nominal fine-cab lift.
+Moderate gating retains more response and raises flat error.
 [Indexed Bayer phase extraction](compact-spectral-witness.md) reproduces
 the earlier transported head and reduces median feature time from 52.6
 to 30.7 ms on a fine-cab query. The added neighbor-pair head lowers
