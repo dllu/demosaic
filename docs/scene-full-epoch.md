@@ -309,9 +309,15 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. Matched training now verifies 45,000 updates on 90,000 distinct
-photos and 360,000 queries per arm. The latest completed paired quality
-review is [40k](scene-full-epoch-40k.md).
+pair. Both arms completed their first shuffled pass at 45,346 updates.
+Each arm used all 90,692 eligible photos once, with 90,692 distinct noise
+seeds and 362,768 native queries. The recorded photo IDs match the frozen
+order at every index, and both arms have the same observation trace hashes.
+The retained training loops took 21,865.67 s local-only and 28,652.54 s with
+spatial context. The 50,000-update schedule continues. The latest completed
+paired quality review is [40k](scene-full-epoch-40k.md).
+[First-epoch audit](results/scene-full-epoch-v1/paired-prefix-045346.json) ·
+[First-epoch segment receipts and source order](results/scene-full-epoch-v1/paired-prefix-045346.tar.xz).
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
