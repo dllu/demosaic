@@ -1,0 +1,80 @@
+{
+  "study": "learned-spectral-detail-v1",
+  "scope": "Paired training of bounded achromatic component heads on a frozen Corpus 100k model",
+  "state": {
+    "training": "Complete for all three corrected pairs of context heads",
+    "evaluation": "Complete on the scoped photo and wire panels",
+    "native_visual_review": "Complete for two exact targets and eight standing GFX views",
+    "fixed_427_and_camera_panels": "Outside the scoped component study"
+  },
+  "training": {
+    "paired": {
+      "receipt": "training-corrected-paired/completed.json",
+      "checkpoint_sha256": "b5a74c0d42a93b81d817b3300688f1c74a1ba369decc540b67aa131031adde9a",
+      "updates": 480,
+      "seconds": 13.076339860097505,
+      "photos": 320,
+      "photo_visits": 1920,
+      "native_queries_per_head": 5760,
+      "epoch_count": 6,
+      "optimizer": "AdamW, 24 update warmup, .001→.0001 cosine, decay .001, gradient cap 2, EMA .99",
+      "loss": "Absolute true complex residual for present/attenuated + .65 paired difference + .50 absolute flat residual + .70 flat-core correction energy. Both heads have exactly the same samples and initialization.",
+      "policy": "FP32 component. Two outputs train jointly with no parameter sharing, same geometry and seeds."
+    },
+    "aligned": {
+      "receipt": "training-corrected-aligned/completed.json",
+      "checkpoint_sha256": "e0a7db69ed62f1bd0dcf97f1a5b0ebcb9962ca4bafb94bb240696293aa508f5f",
+      "updates": 480,
+      "seconds": 11.3034711740911,
+      "photos": 320,
+      "photo_visits": 1920,
+      "native_queries_per_head": 5760,
+      "epoch_count": 6,
+      "optimizer": "AdamW, 24 update warmup, .001→.0001 cosine, decay .001, gradient cap 2, EMA .99",
+      "loss": "Absolute true complex residual for present/attenuated + .65 paired difference + .50 absolute flat residual + .70 flat-core correction energy, plus weight 9 on squared error aligned with the exact paired increment. Both heads have exactly the same samples and initialization.",
+      "policy": "FP32 component. Two outputs train jointly with no parameter sharing, same geometry and seeds."
+    },
+    "broad": {
+      "receipt": "training-corrected-broad/completed.json",
+      "checkpoint_sha256": "ef931444c362a1acf0718c734b76fd345c732cc2b2464b991a4c705dfeee79c9",
+      "updates": 480,
+      "seconds": 11.302226839005016,
+      "photos": 320,
+      "photo_visits": 1920,
+      "native_queries_per_head": 5760,
+      "epoch_count": 6,
+      "optimizer": "AdamW, 24 update warmup, .001→.0001 cosine, decay .001, gradient cap 2, EMA .99",
+      "loss": "Absolute true complex residual for present/attenuated + .65 paired difference + .50 absolute flat residual + .70 flat-core correction energy, plus weight 9 on squared error aligned with the exact paired increment. Both heads have exactly the same samples and initialization.",
+      "policy": "FP32 component. Two outputs train jointly with no parameter sharing, same geometry and seeds."
+    }
+  },
+  "parent": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "parent_feature_cache": {
+    "precision": "standard GPU FP16 autocast, FP32 output",
+    "forward_seconds_wall": 40.18954702501651
+  },
+  "evidence": {
+    "path": "evidence.tar.xz",
+    "sha256": "80d49b9d5af62a68ca65ef5a8f23436b79c22d7fb4ee0219ada22bf351f09ae1",
+    "entries": 47
+  },
+  "archived_upstream_source_sha256": {
+    "upstream/scene-spectrum-detail-v1/spectrum.py": "f321a26035fae59a2ff2ab79663ae33951d77eb5a6b755d97f6a4a664776a78c",
+    "upstream/scene-spectrum-detail-v1/evaluate.py": "77b31349991b4dfd5257fe48508b7d887874160fc47a39941723f3be8dc9813d",
+    "upstream/scene-local-contrast-2400-v1/prepare_eval.py": "0511b49df830017e8641a70e0488eeba5d2adffde782ef85e6a92dff1bc71212",
+    "upstream/paired-luminance-detail-v1/render.py": "a8ed29351e0b142b6df3e8b8eccbb02248e8d07734915c12698297f89f0f7983"
+  },
+  "superseded_attempt": {
+    "path": "incorrect-frequency-mapping.tar.xz",
+    "sha256": "7df4e1bec6b33d5347f49ec9425c7c90f1491df83ca27244faa9375bd7cab46b",
+    "entries": 37,
+    "disposition": "Superseded. The packed Bayer indices did not preserve signed frequencies on the native grid."
+  },
+  "presentation": {
+    "path": "../../images/learned-spectral-detail-v1/manifest.json",
+    "sha256": "11e65032369145c014800bf8a8ccad5e07cdf50553d0fda54bdf4d58b19e8fd6"
+  }
+}

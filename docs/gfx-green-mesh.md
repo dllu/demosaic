@@ -1,6 +1,6 @@
 # Fine green fence beside the red train
 
-**Review map updated November 18, 2026.** The optional adjacent-donor
+**Review map updated November 19, 2026.** The optional adjacent-donor
 fit shows both directions in the right cab ROI, with uneven contrast and
 an overly regular lattice in places. The version-specific gallery below
 preserves its original comparison pixels and provenance.
@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Learned spectral corrections](learned-spectral-detail.md#standing-gfx100s-comparisons) | All four cab views were inspected with both JPEGs and ISO100 AHD. Under both profiles the left lattice stays diffuse and right crossings stay patchy |
 | [Surrounding RAW spectral priors](scene-spectrum-detail.md#standing-gfx100s-comparisons) | All four cab crops were viewed. The parent-phase lift changes them by less than 0.19 DN16 RGB RMS and leaves crossings incomplete |
 | [Local and spatial scene context at 15k](scene-full-epoch.md#standing-gfx100s-at-update-15000) | Both ROIs and profiles were viewed with both JPEGs and ISO100 AHD. The transferred prior shows more right diagonals. Fine crossings stay incomplete |
 | [Corpus 100k FP32 and FP16](corpus100k-mixed-precision.md#standing-gfx100s-comparisons) | Both precisions were viewed on each ROI and noise profile alongside both camera JPEGs and ISO100 AHD. The faint diagonal modulation and incomplete crossings look alike |

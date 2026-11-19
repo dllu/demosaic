@@ -484,7 +484,10 @@ A [surrounding RAW spectral prior](scene-spectrum-detail.md) changes the
 native proposal by frequency. Its exact-target test finds a small error
 advantage over transposing the spectrum, with little difference from
 exterior mean power. Matching the retained parent phase reduces false
-texture and leaves fine cab crossings incomplete.
+texture and leaves fine cab crossings incomplete. A [learned wider-band head](learned-spectral-detail.md)
+adds 0.95 ISO6400 wire-response points over matched total-power
+conditioning. The full correction raises wire error and known-gap
+texture over Corpus 100k. The native fine cab crossings stay incomplete.
 
 ## What the existing work establishes
 

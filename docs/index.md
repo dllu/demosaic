@@ -50,6 +50,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [quiet-region smoothing with a separate detail lift](paired-flat-companion.md) ·
 [weak edges and independent-exposure supervision](weak-edge-distill.md) ·
 [whole-image RAW spectral priors](scene-spectrum-detail.md) ·
+[learned spectral corrections and wire-gap tests](learned-spectral-detail.md) ·
 [whole-image RAW strength prior](context-strength.md) ·
 [native Bayer green innovation](green-phase-innovation.md) ·
 [separated Bayer green aliases](quincunx-green.md) ·

@@ -263,13 +263,22 @@ advances on the original 50k schedule.
 [Segment receipts](results/scene-full-epoch-v1/paired-prefix-015000.tar.xz) ·
 [15k review queue](results/scene-full-epoch-v1/queue-review-015000.json).
 
-The local-only checkpoint at **17,500 updates** verifies 35,000 distinct
-photos, 35,000 noise seeds and 140,000 native queries. Its retained loops
-total 8,855.37 s. The spatial arm has resumed from its verified 15k state
-toward the same milestone. The matched qualitative and exact-target evidence
-is complete through 15k.
-[Local 17,500 source and checkpoint audit](results/scene-full-epoch-v1/local-017500-prefix.json) ·
-[Segment receipts](results/scene-full-epoch-v1/local-017500-prefix.tar.xz).
+The arms verify matching observations through **17,500 updates**, with
+35,000 distinct photos, 35,000 noise seeds and 140,000 native queries per arm.
+Retained training loops total 8,855.37 s local and 11,627.41 s spatial.
+The local checkpoint is
+`a384104a7ab800245eea344c94b546f22e245663eeef6699f4fe0c392cf87ff2`.
+The spatial checkpoint is
+`f69f70ec82bcb60bd6870b6fe8016e1657f894ae1145559aaa182275159c1b10`.
+The last completed exact-target and both native qualitative reviews are the
+matched 15k EMA checkpoints. The later prefixes record training progress.
+[15,500 audit](results/scene-full-epoch-v1/paired-prefix-015500.json) ·
+[16,000 audit](results/scene-full-epoch-v1/paired-prefix-016000.json) ·
+[16,500 audit](results/scene-full-epoch-v1/paired-prefix-016500.json) ·
+[17,000 audit](results/scene-full-epoch-v1/paired-prefix-017000.json) ·
+[17,500 paired audit](results/scene-full-epoch-v1/paired-prefix-017500.json) ·
+[17,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-017500.tar.xz) ·
+[Earlier local-only 17,500 audit](results/scene-full-epoch-v1/local-017500-prefix.json).
 
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).

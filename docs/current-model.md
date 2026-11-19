@@ -1,6 +1,6 @@
 # Current model choices
 
-Reviewed November 18, 2026. **V120 Small is the general inference recommendation.**
+Reviewed November 19, 2026. **V120 Small is the general inference recommendation.**
 The [Corpus 100k EMA](full-corpus-long100k.md#broader-evaluation) is the strongest
 measured option for the fixed photo benchmark at 37.24747 dB, +0.20739 dB over
 V120. It loses 0.03046 dB on the unseen measured-CFA panel and has a visible
@@ -142,6 +142,11 @@ when the footprint must be found automatically.
 on supported photographic fixtures at fixed luminance. The gain comes
 with small leakage inside true gaps. Neutral replay and both GFX families
 reproduce the preceding fit.
+[Learned spectral corrections](learned-spectral-detail.md) use surrounding
+frequency and direction to raise ISO6400 planted-wire response 0.95 points
+over a matched total-power head. Over Corpus 100k, the wider head gains
+3.85 response points and increases intact-increment and known-gap error.
+The real sky remains visually smooth and the fine cab crossings incomplete.
 [Surrounding RAW spectral priors](scene-spectrum-detail.md) offer a small
 additional weak response when both greens support the retained parent phase.
 Present error rises slightly and some texture enters attenuated controls.

@@ -1,0 +1,1605 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/native_corrected.py",
+    "sha256": "38ecd38df249cfd21cc0747947374462a8d6736ababe0f879b42ed0a59b8cfe9"
+  },
+  "checkpoints": {
+    "paired": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/training-corrected-paired/step480.pt",
+      "sha256": "b5a74c0d42a93b81d817b3300688f1c74a1ba369decc540b67aa131031adde9a"
+    },
+    "aligned": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/training-corrected-aligned/step480.pt",
+      "sha256": "e0a7db69ed62f1bd0dcf97f1a5b0ebcb9962ca4bafb94bb240696293aa508f5f"
+    },
+    "expanded": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/training-corrected-broad/step480.pt",
+      "sha256": "ef931444c362a1acf0718c734b76fd345c732cc2b2464b991a4c705dfeee79c9"
+    }
+  },
+  "exact": [
+    {
+      "id": "001-iso6400-independent",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2.0,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "attribution": null,
+        "author": "Berthold Werner",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/07/076545ab6d57bfb3be7884c3cae690b536090956.npy",
+        "cache_sha256": "02e50df398205439bc361661d3c128e0d974164c4bb06772b2f729cbe4db6b4d",
+        "color_space": "linear-sRGB",
+        "credit": "Own work",
+        "download_path": "images/07/65/076545ab6d57bfb3be7884c3cae690b536090956.jpg",
+        "dtype": "uint16",
+        "height": 3366,
+        "id": "076545ab6d57bfb3be7884c3cae690b536090956",
+        "license": "Public domain",
+        "license_url": null,
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Limburger_Dom_BW_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg",
+        "sha1": "076545ab6d57bfb3be7884c3cae690b536090956",
+        "sha1_hex": "076545ab6d57bfb3be7884c3cae690b536090956",
+        "shape": [
+          841,
+          541,
+          3
+        ],
+        "split": "val",
+        "title": "File:Limburger Dom BW 1.jpg",
+        "width": 2166
+      },
+      "CFA": "BGGR",
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/001-iso6400-independent.npz",
+        "sha256": "4471b52c84c9f3f281f0cd6633a8bcc5b2bcb924c810aacaa2e3c121cf1137a5"
+      },
+      "query": [
+        22,
+        250,
+        256,
+        256
+      ],
+      "source_box": null,
+      "noise": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "exact/001-iso6400-independent-comparison.png",
+          "sha256": "4738d0474e3da76679117f6f46c07420c50d355f5c05e0a13ee4c179fa9d1049"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Paired spectral head",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Projection loss",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Expanded band",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/001-iso6400-independent-triplet.png",
+          "sha256": "a9907c67d333deb52633c1bd3f2169c4afc9100ca4ad7f4f0a52bf296c5b971f"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Expanded band",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "variant_triplets": {
+        "paired": {
+          "image": {
+            "path": "exact/001-iso6400-independent-paired-triplet.png",
+            "sha256": "92e62bfc350f91ca1a54fe8e95f788de7eb28ae7c8a82101e6d7630ceef957fb"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Paired spectral head",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "aligned": {
+          "image": {
+            "path": "exact/001-iso6400-independent-aligned-triplet.png",
+            "sha256": "e7238145b22e8c70774322f55309a2ee587f600e05927c034e374fdeba7687b5"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Projection loss",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "010-iso6400-wire",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2.0,
+      "display_contrast": 1.0,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "source": {
+        "attribution": null,
+        "author": "Jules Verne Times Two",
+        "bin_factor": 4,
+        "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/80/8094337751ee7123acc5e878e0ce8c242599c2c5.npy",
+        "cache_sha256": "9f031bfaed507a1187c77a5405940246270432c8c391d08630abc94033eb1eb3",
+        "color_space": "linear-sRGB",
+        "credit": "Own work http://julesvernex2.com",
+        "download_path": "images/80/94/8094337751ee7123acc5e878e0ce8c242599c2c5.jpg",
+        "dtype": "uint16",
+        "height": 2592,
+        "id": "8094337751ee7123acc5e878e0ce8c242599c2c5",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Framed_iron_door%2C_Pra%C3%A7a_de_Londres%2C_Lisbon%2C_Portugal_julesvernex2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Framed_iron_door,_Pra%C3%A7a_de_Londres,_Lisbon,_Portugal_julesvernex2.jpg",
+        "sha1": "8094337751ee7123acc5e878e0ce8c242599c2c5",
+        "sha1_hex": "8094337751ee7123acc5e878e0ce8c242599c2c5",
+        "shape": [
+          648,
+          965,
+          3
+        ],
+        "split": "val",
+        "title": "File:Framed iron door, Praça de Londres, Lisbon, Portugal julesvernex2.jpg",
+        "width": 3861
+      },
+      "CFA": "GRBG",
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/010-iso6400.npz",
+        "sha256": "4d9e0f6e14262a6f014aba561b0a1d3fc5a3ee4cb99d0c96abae9c9d9c1c00a5"
+      },
+      "query": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "source_box": [
+        146,
+        12,
+        512,
+        512
+      ],
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "exact/010-iso6400-wire-comparison.png",
+          "sha256": "be5b691b4e35fe79f1501f6905826ed1586b2d0fe80de058e9dcd6474f40d74f"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Corpus 100k",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Paired spectral head",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Projection loss",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Expanded band",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/010-iso6400-wire-triplet.png",
+          "sha256": "40da0a6d770f69c5846b97390d20239adc04efd793dc3cdb80e98f319b42deaf"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Expanded band",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "variant_triplets": {
+        "paired": {
+          "image": {
+            "path": "exact/010-iso6400-wire-paired-triplet.png",
+            "sha256": "1d4eb74943e083f55aceceea7db78876374bf97a63fec1d2c16d03a4cdc5d1d8"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Paired spectral head",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "aligned": {
+          "image": {
+            "path": "exact/010-iso6400-wire-aligned-triplet.png",
+            "sha256": "05be62f54f95b92bcfd301470df9318cea1d168ebe0e60913458003bff978cf7"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Projection loss",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "standing": {
+    "sources": {
+      "paired": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/standing-corrected-paired/manifest.json",
+        "sha256": "b5564848509314b1bec088421f582b8f8840579ebb6e262689dad79d15abbe16"
+      },
+      "aligned": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/standing-corrected-aligned/manifest.json",
+        "sha256": "10800a1251b2a26ec0a8a913936a751e5a3c3ddb1776671ed3d019752f71341b"
+      },
+      "expanded": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/learned-spectral-detail-v1/standing-corrected-broad/manifest.json",
+        "sha256": "c8be6ef45c7d4f4ccdfb820df060854fa9b4c846423832ed747afb191edc2dd7"
+      }
+    },
+    "rows": [
+      {
+        "id": "main-overcast-sky-main-overcast-sky",
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "box": [
+          5752,
+          1352,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          5800,
+          1400,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "536bdb2412ae9e1b8617f04b4a02885ba9356f1dcb6ae8cbbdc41e6239b0f980"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 0.45885809015379053,
+            "max_camera_DN16": 3.231029799208045,
+            "max_scene_linear_chroma_change_DN16": 0.00018531122267173572
+          },
+          "aligned": {
+            "camera_RMS_DN16": 1.4881009675845973,
+            "max_camera_DN16": 10.371789978817105,
+            "max_scene_linear_chroma_change_DN16": 0.00018500162816814658
+          },
+          "expanded": {
+            "camera_RMS_DN16": 1.5038229924271194,
+            "max_camera_DN16": 11.087965574115515,
+            "max_scene_linear_chroma_change_DN16": 0.0001850200446473771
+          }
+        }
+      },
+      {
+        "id": "main-building-detail-main-building-detail",
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "box": [
+          5742,
+          2642,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          5790,
+          2690,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-building-detail-main-building-detail.png",
+            "sha256": "e48ae70e29d451a8d7b321130305bee3d962654b788cbda5041c5c5f27f5bad9"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 3.8847195279497146,
+            "max_camera_DN16": 46.922623850405216,
+            "max_scene_linear_chroma_change_DN16": 0.00074441785149304
+          },
+          "aligned": {
+            "camera_RMS_DN16": 6.734606727424791,
+            "max_camera_DN16": 71.58777482807636,
+            "max_scene_linear_chroma_change_DN16": 0.0007377317343444378
+          },
+          "expanded": {
+            "camera_RMS_DN16": 5.69461519256818,
+            "max_camera_DN16": 74.05941680073738,
+            "max_scene_linear_chroma_change_DN16": 0.0007009367462122995
+          }
+        }
+      },
+      {
+        "id": "main-foliage-main-foliage",
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "box": [
+          8842,
+          5522,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          8890,
+          5570,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-foliage-main-foliage.png",
+            "sha256": "aecbf52b714dc2673b2f08df9d3a120222774c67e09b6670caa927ed814ba968"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 7.2636046057353605,
+            "max_camera_DN16": 75.8240383118391,
+            "max_scene_linear_chroma_change_DN16": 0.0006733771805578215
+          },
+          "aligned": {
+            "camera_RMS_DN16": 9.485137049353517,
+            "max_camera_DN16": 73.78793656826019,
+            "max_scene_linear_chroma_change_DN16": 0.000850513089147853
+          },
+          "expanded": {
+            "camera_RMS_DN16": 7.231797370786997,
+            "max_camera_DN16": 64.31933104991913,
+            "max_scene_linear_chroma_change_DN16": 0.0006233393865269221
+          }
+        }
+      },
+      {
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "box": [
+          2192,
+          5952,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          2240,
+          6000,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.553600000000001e-06
+        },
+        "exposure": 4.0,
+        "board": {
+          "image": {
+            "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "538370d5e68ab95e5381ad4578f53d0f921cb2bd4725104f4b883bb8e00b8e66"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 5.650779223695256,
+            "max_camera_DN16": 128.27148020267487,
+            "max_scene_linear_chroma_change_DN16": 0.0006761718962025043
+          },
+          "aligned": {
+            "camera_RMS_DN16": 7.33233553357594,
+            "max_camera_DN16": 91.56110286712646,
+            "max_scene_linear_chroma_change_DN16": 0.0004347848369690155
+          },
+          "expanded": {
+            "camera_RMS_DN16": 6.209596824911553,
+            "max_camera_DN16": 72.04284600913525,
+            "max_scene_linear_chroma_change_DN16": 0.0008758360410254795
+          }
+        }
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "d231514dd457aa87608e86465dd337d7ae1b632011878213d4068543d9da7a31"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 0.9910782439753377,
+            "max_camera_DN16": 23.27210582792759,
+            "max_scene_linear_chroma_change_DN16": 0.0009217924802129573
+          },
+          "aligned": {
+            "camera_RMS_DN16": 2.6103212240946614,
+            "max_camera_DN16": 22.1896638488397,
+            "max_scene_linear_chroma_change_DN16": 0.000572276214858114
+          },
+          "expanded": {
+            "camera_RMS_DN16": 2.134502392046991,
+            "max_camera_DN16": 19.803286688402295,
+            "max_scene_linear_chroma_change_DN16": 0.0006189515342316376
+          }
+        }
+      },
+      {
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+        },
+        "exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "4c47c4420ef6964d2e694d6c10209efd7a92980c16b5ce869bfb72fb4aa2a39a"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 1.0859926043088501,
+            "max_camera_DN16": 11.228100154548883,
+            "max_scene_linear_chroma_change_DN16": 8.929413628222527e-05
+          },
+          "aligned": {
+            "camera_RMS_DN16": 2.4218732077001492,
+            "max_camera_DN16": 16.268489551730454,
+            "max_scene_linear_chroma_change_DN16": 0.00012020062193940362
+          },
+          "expanded": {
+            "camera_RMS_DN16": 1.7294688963169949,
+            "max_camera_DN16": 13.022140162065625,
+            "max_scene_linear_chroma_change_DN16": 8.580936098123715e-05
+          }
+        }
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          806,
+          6489,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "3a5b1be8e026052f632bcc69373d05a210e2df3d2ae175bad9c4cfe17456fbbd"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 1.1490443845794651,
+            "max_camera_DN16": 22.32192501425743,
+            "max_scene_linear_chroma_change_DN16": 0.00017845960524809357
+          },
+          "aligned": {
+            "camera_RMS_DN16": 3.137874926577236,
+            "max_camera_DN16": 26.40932602342218,
+            "max_scene_linear_chroma_change_DN16": 0.0005199222525433811
+          },
+          "expanded": {
+            "camera_RMS_DN16": 2.5341413810975766,
+            "max_camera_DN16": 22.948807538487017,
+            "max_scene_linear_chroma_change_DN16": 0.0006196242524856288
+          }
+        }
+      },
+      {
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "ROI_xywh": [
+          1026,
+          6449,
+          160,
+          160
+        ],
+        "noise": {
+          "shot": 0.0014635775921166604,
+          "read": 1.0715704128646712e-06,
+          "source": "input Haar fit",
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+        },
+        "exposure": 16.0,
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "d9847c2ac0b40657a08be2c5b82a413369fae302c9c83985220740b311f84944"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Exterior-frequency colour",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Paired spectral head",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Projection loss",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Expanded band",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "measurements": {
+          "paired": {
+            "camera_RMS_DN16": 1.3767175988302924,
+            "max_camera_DN16": 10.379358222708106,
+            "max_scene_linear_chroma_change_DN16": 8.720888742974608e-05
+          },
+          "aligned": {
+            "camera_RMS_DN16": 2.751087667585062,
+            "max_camera_DN16": 18.564169853925705,
+            "max_scene_linear_chroma_change_DN16": 8.916742067022199e-05
+          },
+          "expanded": {
+            "camera_RMS_DN16": 1.99098465849157,
+            "max_camera_DN16": 14.56459709443152,
+            "max_scene_linear_chroma_change_DN16": 0.00013500881246564234
+          }
+        }
+      }
+    ]
+  },
+  "native_visual_review": {
+    "standing": 8,
+    "exact_comparisons": 2,
+    "exact_triplets": 6,
+    "observations": [
+      "Main native sky remains visually smooth. Coarse fence stays coherent and foliage stays soft.",
+      "Building wires and railings remain softer than the independent reference.",
+      "Left cab retains diffuse diagonals and the right cab retains patchy crossings under both profiles.",
+      "Exact cathedral moldings and the planted wire remain softer than the respective exact targets."
+    ]
+  }
+}

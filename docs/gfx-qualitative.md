@@ -1,8 +1,11 @@
 # GFX100S qualitative comparisons
 
-**Review map updated November 18, 2026.** This page retains checkpoint-specific
+**Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Learned spectral corrections](learned-spectral-detail.md#standing-gfx100s-comparisons)
+  match the visually smooth Corpus 100k sky and preserve coarse crossings.
+  Fine building detail and foliage stay soft.
 - [Surrounding RAW spectral priors](scene-spectrum-detail.md#standing-gfx100s-comparisons)
   keep the sky visually smooth. The unbounded RAW-mean lift adds foliage
   and building grain. Matching the retained phase reduces the added grain.
