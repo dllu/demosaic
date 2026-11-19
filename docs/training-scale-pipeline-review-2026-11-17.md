@@ -10,8 +10,8 @@ Follow-up measurements verify five complete ordinary-photo passes and
 fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233).
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
-two arms match through 40,000 updates on 80,000 distinct photos and
-320,000 native queries per arm. The local-only continuation verifies
+two arms match through 41,000 updates on 82,000 distinct photos and
+328,000 native queries per arm. The local-only continuation verifies
 85,000 distinct photos at 42.5k. The matched 40k photo and both standing
 reviews are complete. Spatial 40k slightly lowers independent ISO6400
 flat-region error and fine response versus 35k. Both arms still recover

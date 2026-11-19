@@ -608,6 +608,17 @@ competing step gives little change. The guarded routes abstain on all
 192 captures from 64 sources with unplanted detail and leave both standing
 fence families at their prior outputs.
 
+[Exterior texture covariance](scene-raw-covariance.md) removes the
+requirement for a repeated carrier and learns directional power from
+disjoint measured RAW patches. On 48 held-out natural photographs it
+gains 0.655 points of ISO6400 response with 1.673 DN16 higher increment
+error. Equal directional power gives nearly the same response at
+matched added flat RMS. A same-scene swap across independently drawn
+captures removes 0.596 DN16 of the excess error at the same correction
+energy. This is evidence of same-capture parent and correction error
+coupling. A stricter whole-parent-pattern lift offers little recovery.
+Both standing fine fences remain incomplete.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

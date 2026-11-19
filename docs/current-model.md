@@ -254,6 +254,12 @@ unmatched frequency in the later held-out replay, before delivery.
 0.04 DN16 versus the same fallback. Its residual still exceeds the
 prior pair route. The checked fallback abstains on 64 unplanted
 photo sources and reproduces the standing crops.
+[Exterior texture covariance](scene-raw-covariance.md) gives only
+0.010 ISO6400 response points at a matched quiet budget and increases
+fine-increment RMS over Corpus 100k. At full strength it adds
+0.655 points and 1.673 DN16 of error. Swapping corrections between
+two independent captures removes 0.596 DN16 of excess error at the
+same correction energy. Fine cab crossings stay incomplete.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

@@ -59,6 +59,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [locally measured phase rotation](bayer-local-phase-transfer.md) ·
 [missing-signal phase and single-direction donors](bayer-phase-residual.md) ·
 [checked single-direction delivery](bayer-single-direction.md) ·
+[exterior RAW texture covariance](scene-raw-covariance.md) ·
 [local amplitude checks and crop API replay](bayer-amplitude-envelope.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
