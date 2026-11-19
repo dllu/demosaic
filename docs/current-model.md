@@ -192,6 +192,9 @@ both cab wire directions and some intersections. It gains 12.26 planted
 ISO6400 response points over the distant gate with 2.56 DN16 lower
 intact increment error. The fit stays inactive on the natural holdout and
 adds some weak-family signal in true gaps. The lattice can look overly regular.
+The [crop API](usage.md#repeating-mesh-crops) reproduces the original fit.
+A [local amplitude check](bayer-amplitude-envelope.md) lowers ISO400
+weak-family gap error by 1.18 DN16 and produces little change at ISO6400.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

@@ -11,6 +11,11 @@ natural photo backgrounds receive no added correction at either ISO.
 [Source-bound results](results/bayer-carrier-scale-v1/publication.json) ·
 [Executed code and original receipts](results/bayer-carrier-scale-v1/evidence.tar.xz).
 
+The fixed crop fit is available through the
+[Python API](usage.md#repeating-mesh-crops). The
+[package replay](bayer-amplitude-envelope.md#package-and-native-checks)
+reproduces the original frozen outputs bit for bit.
+
 ![Nominal right-cab mesh, distant Bayer gate, 64-pixel fit and independent ISO100 AHD](images/bayer-carrier-scale-v1/cab-right-native-comparison.png)
 
 ## Finding supported spacing in the high-ISO RAW

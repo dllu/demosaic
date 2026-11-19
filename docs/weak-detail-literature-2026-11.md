@@ -518,6 +518,12 @@ crop correction adds 12.26 planted ISO6400 response points and visibly
 clarifies the real cab lattice. True-gap weak leakage and over-regular
 lattice contrast remain. The path is inactive on the natural-photo panel.
 
+The subsequent [local amplitude check](bayer-amplitude-envelope.md) reduces
+ISO400 weak-band gap error by 1.176 DN16 over the 64-pixel fit while losing
+0.132 intact points. At ISO6400 adding other Bayer colors increases the
+number of accepted local fits with little impact on gap error. The Python
+crop API reproduces the base fit on all tested synthetic and standing crops.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

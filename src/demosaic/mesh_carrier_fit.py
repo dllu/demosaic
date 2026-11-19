@@ -1,0 +1,215 @@
+"""Opt-in restoration for repeating mesh supported by nearby Bayer RAW."""
+
+import numpy as np
+
+from .cfa import PATTERNS
+
+_ROI_SIZE = 160
+_WINDOW = 64
+_DONOR = 128
+_FFT_SIZE = 256
+_FREQUENCIES = np.fft.fftfreq(_FFT_SIZE, d=2)
+_FY, _FX = np.meshgrid(_FREQUENCIES, _FREQUENCIES, indexing="ij")
+_RADIUS = np.hypot(_FX, _FY)
+_SEARCH = (_FX >= 0.021) & (abs(_FY) >= 0.012) & (_RADIUS >= 0.041) & (_RADIUS <= 0.22)
+_SECTORS = (_SEARCH & (_FY > 0), _SEARCH & (_FY < 0))
+_DONOR_TAPER = np.sin(np.pi * (np.arange(_DONOR // 2) + 0.5) / (_DONOR // 2))
+_DONOR_TAPER = np.outer(_DONOR_TAPER, _DONOR_TAPER).astype(np.float32)
+_OVERLAP = np.sin(np.pi * (np.arange(_WINDOW) + 0.5) / _WINDOW) ** 2
+_OVERLAP = np.outer(_OVERLAP, _OVERLAP)
+_X, _Y = np.meshgrid(np.arange(_WINDOW, dtype=np.float64), np.arange(_WINDOW, dtype=np.float64))
+_DCT_ORDER = int(np.ceil(0.066 * _WINDOW))
+_SMOOTH = np.stack(
+    [
+        np.cos(np.pi * i * ((_X + 0.5) / _WINDOW)) * np.cos(np.pi * j * ((_Y + 0.5) / _WINDOW))
+        for i in range(_DCT_ORDER + 1)
+        for j in range(_DCT_ORDER + 1)
+        if np.hypot(i, j) <= _DCT_ORDER
+    ],
+    axis=-1,
+)
+_EDGE = np.minimum(
+    1.0, np.minimum(np.arange(_ROI_SIZE) + 0.5, np.arange(_ROI_SIZE)[::-1] + 0.5) / 12
+)
+
+
+def _positions(colors, x, y):
+    return tuple(
+        (row, column)
+        for row in range(2)
+        for column in range(2)
+        if colors[2 * ((y + row) % 2) + (x + column) % 2] == 1
+    )
+
+
+def _sites(scene, x, y, size, row, column):
+    xx, yy = x + column, y + row
+    plane = 2 * (yy % 2) + (xx % 2)
+    return scene[plane, yy // 2 : yy // 2 + size // 2, xx // 2 : xx // 2 + size // 2]
+
+
+def _peaks(power):
+    coords = [
+        np.unravel_index(np.where(mask, power, -np.inf).argmax(), power.shape) for mask in _SECTORS
+    ]
+    return np.asarray([(_FX[c], _FY[c]) for c in coords])
+
+
+def _spacing(scene, colors, x, y):
+    from scipy.fft import fft2
+
+    boxes = (
+        (x - _DONOR, y + 16),
+        (x + _ROI_SIZE, y + 16),
+        (x + 16, y - _DONOR),
+        (x + 16, y + _ROI_SIZE),
+    )
+    if any(
+        a < 0 or b < 0 or a + _DONOR > 2 * scene.shape[2] or b + _DONOR > 2 * scene.shape[1]
+        for a, b in boxes
+    ):
+        return None
+    powers = []
+    for dx, dy in boxes:
+        channels = []
+        for row, column in _positions(colors, dx, dy):
+            green = _sites(scene, dx, dy, _DONOR, row, column)
+            weighted = (green - (_DONOR_TAPER * green).sum() / _DONOR_TAPER.sum()) * _DONOR_TAPER
+            response = fft2(weighted, s=(_FFT_SIZE, _FFT_SIZE))
+            response *= np.exp(-2j * np.pi * (_FY * row + _FX * column)).astype(np.complex64)
+            channels.append(response / np.sqrt((_DONOR_TAPER**2).sum()))
+        powers.append(abs(np.stack(channels).mean(axis=0)) ** 2)
+    banks = np.stack(powers)
+    banks /= np.maximum(banks[:, _SEARCH].mean(axis=1)[:, None, None], 1e-10)
+    pair = _peaks(banks.mean(axis=0))
+    counts = (np.linalg.norm(np.stack([_peaks(p) for p in banks]) - pair, axis=-1) <= 0.009).all(
+        axis=1
+    )
+    radial, angle = np.linalg.norm(pair, axis=-1), abs(pair[:, 1] / pair[:, 0])
+    if counts.any() and np.all(
+        (radial >= 0.077) & (radial <= 0.195) & (angle >= 0.26) & (angle <= 3.8)
+    ):
+        return pair
+    return None
+
+
+def _fold(design, measurements, positions, shot, read):
+    A, B = [design[y::2, x::2].reshape(-1, design.shape[-1]) for y, x in positions]
+    u, v = measurements
+    gram = A.T @ A
+    moment = A.T @ u
+    coefficients = np.linalg.solve(gram, moment)
+    residual = v - B @ coefficients
+    fit_error = residual @ residual
+    variance = max(2e-11, shot * max(0.0, float(u.mean())) + read)
+    support = []
+    for family in range(2):
+        keep = np.ones(len(moment), dtype=bool)
+        keep[len(moment) - 4 + family :: 2] = False
+        holdout = v - B[:, keep] @ np.linalg.solve(gram[keep][:, keep], moment[keep])
+        support.append((holdout @ holdout - fit_error) / variance)
+    return coefficients[-4:].reshape(2, 2).T, support
+
+
+def _patch(scene, parent, xy, colors, design, carriers, shot, read):
+    x, y = xy
+    sites = _positions(colors, x, y)
+    measures = [_sites(scene, x, y, _WINDOW, r, c).astype(np.float64).ravel() for r, c in sites]
+    first, second = (
+        _fold(design, order, phase, shot, read)
+        for order, phase in ((measures, sites), (measures[::-1], sites[::-1]))
+    )
+    support = np.maximum(0, np.minimum(first[1], second[1]) - 6.0)
+    if not support.any():
+        return None
+    measured = (first[0] + second[0]) * 0.5
+    flattened = design.reshape(-1, design.shape[-1])
+    existing = (
+        np.linalg.solve(flattened.T @ flattened, flattened.T @ parent.ravel())[-4:].reshape(2, 2).T
+    )
+    correction = (measured - existing) * (support / (support + 6))[:, None]
+    extent = np.linalg.norm(measured, axis=-1)
+    correction *= np.minimum(1, extent / np.linalg.norm(correction, axis=-1).clip(min=1e-10))[
+        :, None
+    ]
+    return (carriers @ correction.T.ravel()).astype(np.float32)
+
+
+def refine_raw_mesh_carriers(
+    parent, scene, colors, roi, *, shot, read, white_balance, camera_to_srgb
+):
+    """Refine a co-registered 160×160 linear camera RGB crop using noisy RAW.
+
+    Parent contains restored RGB in the native ROI. Scene contains the
+    surrounding Bayer data as four packed spatial phases. The rectangle
+    uses native (x, y, width, height) coordinates, and colors indexes RGB
+    for each phase. Supply the input shot/read prior, camera gains and
+    camera-to-sRGB matrix. The fit uses four nearby 128-pixel RAW patches
+    and may return the parent when support is weak.
+
+    Requires the eval extra. Calibrated for a repeating two-family mesh.
+    """
+    if scene.ndim != 3 or scene.shape[0] != 4 or not np.issubdtype(scene.dtype, np.floating):
+        raise ValueError("scene must contain four packed floating-point Bayer phases")
+    if (
+        parent.shape != (3, _ROI_SIZE, _ROI_SIZE)
+        or not np.issubdtype(parent.dtype, np.floating)
+        or not np.isfinite(parent).all()
+    ):
+        raise ValueError("parent must be a finite floating-point RGB crop with shape (3, 160, 160)")
+    colors = tuple(colors)
+    if colors not in PATTERNS.values():
+        raise ValueError("colors must describe a Bayer CFA pattern")
+    if not np.isfinite((shot, read)).all() or min(shot, read) < 0 or shot + read == 0:
+        raise ValueError("shot and read must describe positive RAW noise variance")
+    wb, matrix = np.asarray(white_balance), np.asarray(camera_to_srgb)
+    if (
+        wb.shape != (3,)
+        or matrix.shape != (3, 3)
+        or np.any(wb <= 0)
+        or not np.isfinite(wb).all()
+        or not np.isfinite(matrix).all()
+    ):
+        raise ValueError("white_balance and camera_to_srgb must describe valid camera color")
+    x, y, w, h = roi
+    if not all(isinstance(v, (int, np.integer)) for v in roi) or (w, h) != (_ROI_SIZE, _ROI_SIZE):
+        raise ValueError("roi must be a 160×160 native integer rectangle")
+    if min(x, y) < 0 or x + w > 2 * scene.shape[2] or y + h > 2 * scene.shape[1]:
+        raise ValueError("roi must be contained in the Bayer scene")
+    frequencies = _spacing(scene, colors, x, y)
+    if frequencies is None:
+        return parent
+    try:
+        neutral = np.linalg.solve(matrix, np.ones(3)) / wb
+        if neutral[1] == 0:
+            return parent
+        angle = (
+            2
+            * np.pi
+            * (
+                (_X[..., None] - (_WINDOW - 1) / 2) * frequencies[:, 0]
+                + (_Y[..., None] - (_WINDOW - 1) / 2) * frequencies[:, 1]
+            )
+        )
+        carriers = np.concatenate((np.cos(angle), np.sin(angle)), axis=-1)
+        design = np.concatenate((_SMOOTH, carriers), axis=-1)
+        signal = np.zeros((h, w))
+        mass = np.zeros_like(signal)
+        for dy in range(0, h - _WINDOW + 1, _WINDOW // 2):
+            for dx in range(0, w - _WINDOW + 1, _WINDOW // 2):
+                tile = np.s_[dy : dy + _WINDOW, dx : dx + _WINDOW]
+                delta = _patch(
+                    scene, parent[1][tile], (x + dx, y + dy), colors, design, carriers, shot, read
+                )
+                if delta is not None:
+                    signal[tile] += delta * _OVERLAP
+                mass[tile] += _OVERLAP
+    except np.linalg.LinAlgError:
+        return parent
+    if not np.any(signal):
+        return parent
+    delta = (signal / np.maximum(0.02, mass)) * _EDGE[:, None] * _EDGE[None, :]
+    rgb = ((neutral / neutral[1])[:, None, None] * delta).astype(parent.dtype)
+    if not np.isfinite(rgb).all():
+        return parent
+    return parent + np.asarray(0.73, dtype=parent.dtype) * rgb

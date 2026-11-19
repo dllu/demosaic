@@ -84,6 +84,41 @@ that the estimator was skipped. Fixed historical coefficients are a comparison
 convention, not newly verified camera calibration. Omitting the option retains
 automatic input estimation and its nominal-prior fallback.
 
+### Repeating mesh crops
+
+The experimental 64-pixel carrier fit is available through
+`demosaic.mesh_carrier_fit.refine_raw_mesh_carriers` with the `eval` extra.
+It refines a 160×160 linear camera RGB crop using the same exposure's
+native Bayer measurements. Keep the coordinate system and camera metadata
+from the input mosaic. The crop must have four nearby 128-pixel donor
+patches. Weak or incomplete donor support returns the input crop.
+
+```python
+from demosaic.cfa import PATTERNS
+from demosaic.mesh_carrier_fit import refine_raw_mesh_carriers
+
+x, y, size = 1026, 6449, 160
+refined = refine_raw_mesh_carriers(
+    camera_rgb[:, y:y + size, x:x + size],
+    packed_bayer,
+    PATTERNS[metadata.pattern],
+    (x, y, size, size),
+    shot=shot,
+    read=read,
+    white_balance=metadata.white_balance,
+    camera_to_srgb=metadata.camera_to_srgb,
+)
+```
+
+`camera_rgb` is the restored RGB in unrotated sensor coordinates and
+`packed_bayer` has shape `[4, H/2, W/2]` in top-left, top-right,
+bottom-left, bottom-right order. The example coordinates identify the
+standing right cab crop. The published gains use the frozen composed
+parent specified in the report. The method can add weak lines across
+true gaps and can make mesh contrast look overly regular.
+[Native results](bayer-carrier-scale.md) ·
+[Package replay and amplitude tests](bayer-amplitude-envelope.md).
+
 ## Environment and storage
 
 For native RGB16 DNGs plus full-resolution JPEGs from RAW/XMP pairs, use the
