@@ -81,7 +81,8 @@ versus 12 for the single query. The mean improvement is concentrated
 in straight patterns, where their response is 44.94% versus 42.06%.
 For the curved fields the corresponding values are 32.49% and 33.15%.
 The shortlist raises average spurious gap response. These subgroups
-have eight photo fields each.
+have eight photo fields each. A subsequent [checked curvature fit](query-phase-curvature.md)
+improves bent-pattern recovery slightly with the same anchored seeds.
 
 ### Native exact-target examples
 

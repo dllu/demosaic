@@ -8,6 +8,10 @@ In a separate geometry-only diagnostic, supplying the exact phase
 curvature helps the lower-noise far-edge cases. Both real fences
 match the planar fit on every reviewed 160×160 region.
 [Bound results, sources and viewing](results/phase-drift-v1/publication.json).
+A later [reserved-Bayer curvature fit](query-phase-curvature.md)
+builds on a different consensus proposal and retains a small gain on
+planted bends at ISO6400. No standing crop in that follow-up accepts
+curvature.
 
 ## Geometry and test
 

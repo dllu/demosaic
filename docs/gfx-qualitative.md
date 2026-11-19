@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Checked Bayer curvature](query-phase-curvature.md#standing-gfx100s-comparisons)
+  keeps the overcast sky, foliage and building at the 100k parent.
+  Small frequency shifts preserve both coarse fence directions.
 - [Sensor-anchored Bayer fits](query-frequency-consensus.md#standing-gfx100s-comparisons)
   keep the sky, foliage and building at the 100k parent. The two coarse
   fence directions remain visible.

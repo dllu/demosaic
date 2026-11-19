@@ -123,6 +123,11 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Checked Bayer curvature](query-phase-curvature.md) gives a small
+gain on planted bent patterns at similar gap projection. Its wider
+backup recovers more with larger false gap response. On the standing
+cab only small center-frequency changes pass, and fine intersections
+remain soft.
 [Sensor-anchored Bayer fits](query-frequency-consensus.md) retain the
 right-cab correction across nearby crop placements and leave the
 standing sky and left crop smooth. The pooled fit recovers roughly

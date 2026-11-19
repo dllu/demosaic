@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Checked Bayer curvature](query-phase-curvature.md#standing-gfx100s-comparisons) | Independent Bayer groups support small right-cab center shifts under both priors. None of the four cab crops accepts curvature. Visual changes are slight and both references remain in the boards |
 | [Sensor-anchored Bayer fits](query-frequency-consensus.md#standing-gfx100s-comparisons) | Right-cab diagonal families persist when median-pooled across nine placements. The worst shifted correction cosine rises to about 0.95 under both priors. Left crops match Corpus 100k and some right intersections remain soft |
 | [Reserved Bayer query search](query-bayer-reserve.md#standing-gfx100s-comparisons) | Both directions become clearer on the right under both noise profiles with automatic local nominations. Some intersections remain soft or uneven. Both left crops match Corpus 100k. Both JPEG references viewed |
 | [Narrow exterior RAW peaks](donor-peak-prominence.md#standing-gfx100s-comparisons) | Both left-cab bands have nearby exterior candidates but lose the final ranking. The right cab lacks two supporting tiles near either earlier peak. Both ROIs and priors were viewed. Crossings stay incomplete |

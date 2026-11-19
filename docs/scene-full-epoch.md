@@ -135,9 +135,12 @@ The matched and reviewed milestones remain unchanged.
 
 The retry completed the local 5,000 milestone. Its verified prefix contains
 10,000 distinct photos, 10,000 noise seeds and 40,000 native queries. The
-retained training segments total 2,349.22 s of worker time. The spatial
-arm is advancing its corresponding milestone. Matched checkpoints remain
-verified through 2,500 and the most recent completed quality review is 2,000.
+retained training segments total 2,349.22 s of worker time. Both arms
+have byte-identical observation and crop traces through 4,000 updates,
+covering 8,000 photos and 32,000 native queries per arm. The spatial 5,000
+phase is still active. The last complete published matched milestone
+is 2,500 and the most recent completed quality review is 2,000.
+[Verified paired segment prefix](results/scene-full-epoch-v1/paired-prefix-004000.json).
 [Local 5,000 prefix and checkpoint](results/scene-full-epoch-v1/local-005000-prefix.json).
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
