@@ -381,6 +381,16 @@ directions more clearly.
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
+The [whole-image RAW strength prior](context-strength.md) assigns different
+gains to the standing sky and coarse fence with negligible reconstruction
+change at matched response. Exact-target scaling of the fixed proposal lowers
+independent pooled ISO6400 error by about 0.2%. The
+[native Bayer green innovation comparison](green-phase-innovation.md) changes
+the proposal itself and lowers matched-response error near strong steps,
+with higher whole-core error and incomplete fine crossings. The
+[full-epoch scene trial](scene-full-epoch.md) is training separately on
+the matched larger source schedule.
+
 **The next useful step is better discrimination between weak structure and
 noise/edge leakage, coupled with training that rewards that distinction.**
 The project has demonstrated real detail gains, but increasing response alone

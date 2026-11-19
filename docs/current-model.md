@@ -114,6 +114,12 @@ find smaller near-step errors from local attenuation.
 The independent-exposure teacher reduces near-step error versus
 the same-draw teacher while increasing whole-core error.
 Both variants leave the fine cab crossings incomplete.
+[Surrounding RAW strength](context-strength.md) varies across sky and fence,
+with negligible fine-reconstruction effects at matched response. Per-block
+exact-target scaling also gives little gain with the fixed proposal.
+[Native-green innovation smoothing](green-phase-innovation.md)
+reduces near-step error and increases whole-core error at similar
+response, with fine real crossings still incomplete.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

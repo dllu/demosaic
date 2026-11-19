@@ -3,6 +3,11 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Surrounding RAW strength](context-strength.md#standing-gfx100s-comparisons)
+  compares aligned and mirrored whole-frame information. Native output
+  changes are small and the main sky remains smooth.
+  [Native-green innovation](green-phase-innovation.md#standing-gfx100s-comparisons)
+  also retains both coarse crossing directions, with fine foliage and cables soft.
 - [Weak-edge teacher and measured-step gate](weak-edge-distill.md#standing-gfx100s-comparisons)
   cover all four main crops against V120 and Corpus 100k. Sky remains smooth
   and coarse crossings are visible. Thin cables and fine foliage remain soft.

@@ -92,3 +92,11 @@ Long-run training and quality review are in progress. The first matched
 numerical milestone is update 2,000.
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
+
+The local-only arm has completed update 2,000. Its two production logs
+contain 4,000 distinct source IDs, 4,000 distinct scene noise seeds and
+16,000 native crops. The scenes include 1,981 ordinary, 1,467 weak
+and 552 exact-flat examples. Measured training-loop time is 882.57 s,
+including 257.88 s inside the reader and CPU fingerprinting.
+The spatial arm is working through the matching source prefix.
+[Local prefix audit](results/scene-full-epoch-v1/local-2000-source-audit.json).

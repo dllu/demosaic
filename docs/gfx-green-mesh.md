@@ -8,6 +8,8 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Native-green innovation](green-phase-innovation.md#standing-gfx100s-comparisons) | Both ROIs, both profiles and JPEGs viewed. Crossings stay incomplete with same-phase or native-green input smoothing |
+| [Surrounding RAW strength](context-strength.md#standing-gfx100s-comparisons) | Both profiles and both native ROIs were viewed. The matched and mirrored views look alike. Fine crossings remain incomplete |
 | [Weak-edge teacher and measured-step gate](weak-edge-distill.md#standing-gfx100s-comparisons) | Both cab ROIs, profiles and JPEG references viewed. The transferred profile preserves faint diagonal repeats. The fine crossings remain incomplete |
 | [Paired native luminance correction](paired-luminance-detail.md#standing-gfx100s-comparisons) | Both ROIs, both noise priors, ISO100 AHD and both JPEGs were viewed. Guarded output remains close to the 100k parent, with soft diagonals, mottle and incomplete crossings |
 | [Exact orientation averaging](paired-head-symmetry.md#standing-gfx100s-comparisons) | All four cab boards were viewed with both JPEGs and independent AHD. The result changes little at matched correction strength and the fine crossings remain incomplete |
