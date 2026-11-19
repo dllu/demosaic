@@ -482,6 +482,14 @@ apparent detection gain. At similar added gap RMS, the trained head
 lowers intact weak-band error and raises absolute gap error. The right
 cab gains a little diagonal definition with incomplete crossings.
 
+[Adaptive Bayer blending](bayer-phase-shrinkage.md) learns bounded
+weights for the difference between two frozen neighborhood operators.
+Matching the absolute change inside gaps makes the constant and adaptive
+blends effectively tie on planted wires. A 0.061-point natural-photo
+response gain survives at similar flat change, with small RMS costs.
+The ablation attributes nearly all the measured recovery to the
+amplitude change along the original coefficient phase.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

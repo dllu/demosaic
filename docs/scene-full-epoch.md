@@ -310,8 +310,8 @@ numerical and native review covers 25k.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. The latest matched training coverage is 27,500 updates on 55,000
-photos and 220,000 queries per arm.
+pair. The latest matched training coverage is 29,000 updates on 58,000
+photos and 232,000 queries per arm.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
@@ -319,6 +319,9 @@ photos and 220,000 queries per arm.
 [26,500 paired audit](results/scene-full-epoch-v1/paired-prefix-026500.json) ·
 [27,000 paired audit](results/scene-full-epoch-v1/paired-prefix-027000.json) ·
 [27,500 paired audit](results/scene-full-epoch-v1/paired-prefix-027500.json) ·
+[28,000 paired audit](results/scene-full-epoch-v1/paired-prefix-028000.json) ·
+[28,500 paired audit](results/scene-full-epoch-v1/paired-prefix-028500.json) ·
+[29,000 paired audit](results/scene-full-epoch-v1/paired-prefix-029000.json) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·

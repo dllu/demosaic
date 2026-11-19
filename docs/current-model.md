@@ -171,6 +171,10 @@ phase accuracy and lower intact weak-band error. At similar correction
 strength, the eight-donor head adds 0.344 DN16 of absolute gap error.
 Native right cab diagonals strengthen slightly and fine junctions
 remain incomplete.
+[Adaptive Bayer blending](bayer-phase-shrinkage.md) matches a simpler
+constant mixture on planted wires after matching gap correction. Fine
+natural response rises slightly. The separate adaptive correction
+takes about twice the CPU time of eight donors on a fixed 256-pixel query.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
