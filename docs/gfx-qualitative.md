@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Local weak-carrier support](query-phase-support.md#standing-gfx100s-comparisons)
+  keeps the sky, foliage and building at Corpus 100k. Both coarse fence
+  directions remain visible and the deficit check changes them very little.
 - [Checked Bayer curvature](query-phase-curvature.md#standing-gfx100s-comparisons)
   keeps the overcast sky, foliage and building at the 100k parent.
   Small frequency shifts preserve both coarse fence directions.
@@ -18,6 +21,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Local RAW support and exterior phase](green-gap-validation.md#standing-gfx100s-comparisons)
   preserves the overcast sky pixel for pixel. The coarse fence keeps both
   directions, with little change to fine foliage or thin building cables.
+- [Full-epoch scene run at update 5,000](scene-full-epoch.md#standing-gfx100s-at-update-5000)
+  compares both matched EMAs. The sky stays smooth, both coarse crossing
+  directions survive, and fine leaf edges and building cables stay soft.
 - [Full-epoch scene run at update 2,000](scene-full-epoch.md#standing-gfx100s-at-update-2000)
   compares both matched EMAs. Sky stays smooth, both coarse-fence directions
   survive, and the thinnest building and foliage structures remain soft.

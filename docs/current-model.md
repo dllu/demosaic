@@ -123,6 +123,10 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Local weak-carrier support](query-phase-support.md) loses real weak detail
+with a compact aperture at ISO6400. The local deficit check matches the
+false-gap response of uniform attenuation at matched correction strength.
+The standing sky stays smooth and right-cab intersections remain uneven.
 [Checked Bayer curvature](query-phase-curvature.md) gives a small
 gain on planted bent patterns at similar gap projection. Its wider
 backup recovers more with larger false gap response. On the standing
@@ -148,10 +152,11 @@ added flat variation. Coherent gap leakage rises. The automatic GFX
 frequency search misses the fine mesh. Supplying prior noisy-RAW peaks
 makes more of the right cab lattice visible, with irregular coverage and
 overly regular spacing in places.
-[Full-epoch scene training at update 2,000](scene-full-epoch.md#first-matched-quality-comparison-at-2000-updates)
-finds lower coupled flat-core variation with the matched preview
-versus masking, with higher fine-increment error. The first standing
-review finds incomplete fine cab crossings in both arms.
+[Full-epoch scene training at update 5,000](scene-full-epoch.md#matched-quality-comparison-at-5000-updates)
+improves ISO6400 coupled flat-core variation over masked preview.
+Mirroring the distant view gives a similar flat result. Aligned weak
+response falls below Corpus 100k on the eight-photo monitor. Both standing
+GFX reviews find smooth skies and incomplete fine cab crossings.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

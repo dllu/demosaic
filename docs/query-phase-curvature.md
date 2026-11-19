@@ -14,6 +14,11 @@ soft and incomplete intersections.
 [Source, phase selections and scoring archive](results/query-phase-curvature-v1/evidence.tar.xz) ·
 [Native crops and provenance](images/query-phase-curvature-v1/manifest.json).
 
+The [local support follow-up](query-phase-support.md) separates true gaps
+from continuous contrast changes on a new photo panel. The compact fit
+loses intact detail, and the deficit check tracks uniform attenuation at
+matched correction strength.
+
 ## Fit geometry before estimating delivery
 
 The [sensor-anchored consensus](query-frequency-consensus.md) supplies the

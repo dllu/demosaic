@@ -35,6 +35,11 @@ standing replay misses the cab's fine frequencies. Previously measured RAW
 peaks make both directions visible on more of the right cab crop, with
 incomplete crossings and overly regular spacing in places.
 
+The [local support replay](query-phase-support.md) uses new held-out photos
+with genuine gaps and continuous changes in contrast. Tightening the
+RAW aperture loses intact ISO6400 detail, while checking a local amplitude
+deficit gives the same gap leakage as uniformly reducing weak correction.
+
 The [matched ordinary-data controls](scene-local-contrast-2400.md#plain-spatial-control)
 compare whole-image features against the local-only arm after training
 on byte-identical observations from 4,800 photos. Their eight-photo

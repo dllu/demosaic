@@ -80,8 +80,8 @@ Training, numerical collection and native viewing are recorded separately.
 Full-frame GFX preview resolution relative to a native query remains a
 known distribution difference.
 [Endpoint collection queue](results/scene-full-epoch-v1/endpoint-review-queue.json).
-The native renderer now writes its output inside the frozen worker's
-directory. The intermediate review verified that path, and the
+The corrected endpoint renderer writes output inside the frozen worker’s
+directory. The 2,000-update review verified that path. The
 corrected endpoint worker is waiting for the 50k checkpoints.
 [Native collector recovery receipt](results/scene-full-epoch-v1/endpoint-native-recovery.json).
 
@@ -99,14 +99,14 @@ parent prediction exactly and both arms saw identical Bayer inputs and clean
 targets. Both production arms completed eight updates using the same 16 photos
 and 64 crops, including two exact-flat and five weak-texture scenes. The local
 arm then restored its update-eight checkpoint and continued from scene index 16.
-Long-run training and quality review are in progress. Both arms
-have completed 2,500 updates, with verified matching inputs for 5,000
+The first recovery started after both arms
+completed 2,500 updates, with verified matching inputs for 5,000
 distinct scenes and 20,000 native queries each. The local worker reached
 update 4,500 on its way to the 5,000 milestone before the runtime RAM
 reserve stopped it. Its phase had no saved checkpoint. The controller
 restarted from the verified 2,500 checkpoint and the first 942 replayed
-scene records match the interrupted attempt byte for byte. Numerical and
-native review remain complete through 2,000.
+scene records match the interrupted attempt byte for byte. At that point
+numerical and native reviews were complete through 2,000.
 [Restart receipt](results/scene-full-epoch-v1/retry-005000.json) ·
 [Original failure and retry logs](results/scene-full-epoch-v1/retry-005000-evidence.tar.xz).
 
@@ -121,7 +121,7 @@ RAM-floor stop now replays at most one 500-update segment.
 The first local segment now has a verified checkpoint at update 3,000.
 Its 1,000 scene records match each interrupted attempt byte for byte.
 The update-3,500 segment has resumed from that stored optimizer and EMA
-state. The last verified matched pair remains at update 2,500.
+state. The most recent matched pair at this recovery was update 2,500.
 [Recovery controller](../scripts/resume_scene_full_epoch.py) ·
 [First durable segment and original worker identity](results/scene-full-epoch-v1/segmented-recovery.json) ·
 [Second failure and durable restart evidence](results/scene-full-epoch-v1/segmented-recovery.tar.xz).
@@ -130,18 +130,20 @@ The local arm subsequently verified update 4,500, covering 9,000 distinct
 photos and 36,000 native queries across its durable prefix. A third RAM-floor
 stop came after update 4,939. The controller kept update 4,500 and queued the
 last 500-update segment for automatic retry under the original limits.
-The matched and reviewed milestones remain unchanged.
+Those stops left the matched and reviewed milestones at 2,500 and 2,000.
 [Automatic retry and local prefix audit](results/scene-full-epoch-v1/automatic-memory-recovery-005000.json).
 
-The retry completed the local 5,000 milestone. Its verified prefix contains
-10,000 distinct photos, 10,000 noise seeds and 40,000 native queries. The
-retained training segments total 2,349.22 s of worker time. Both arms
-have byte-identical observation and crop traces through 4,000 updates,
-covering 8,000 photos and 32,000 native queries per arm. The spatial 5,000
-phase is still active. The last complete published matched milestone
-is 2,500 and the most recent completed quality review is 2,000.
-[Verified paired segment prefix](results/scene-full-epoch-v1/paired-prefix-004000.json).
-[Local 5,000 prefix and checkpoint](results/scene-full-epoch-v1/local-005000-prefix.json).
+Both arms have now reached **5,000 verified matched updates**. Each has
+seen the same 10,000 distinct photos, 10,000 distinct noise seeds and
+40,000 native queries. The observation traces match byte for byte.
+They contain 4,958 ordinary, 3,785 weak and 1,257 exact-flat scenes.
+The retained worker loops total 2,349.22 s local and 3,117.55 s spatial,
+including 640.54 s and 667.47 s of reader/CPU fingerprinting time.
+Checkpoint writes took 4.90 and 5.01 s. These figures cover retained
+training segments. The frozen schedule has advanced into the next phase.
+[Matched 5,000 update, source, time and checkpoint audit](results/scene-full-epoch-v1/matched-005000-training.json) ·
+[Earlier paired segment prefix](results/scene-full-epoch-v1/paired-prefix-004000.json) ·
+[Earlier local 5,000 prefix](results/scene-full-epoch-v1/local-005000-prefix.json).
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 
@@ -246,3 +248,101 @@ transferred profile uses `0.0014635775921166604/1.0715704128646712e-6`.
 | --- | --- |
 | Nominal | [Left](images/scene-full-epoch-v1/standing-002000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-002000/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred | [Left](images/scene-full-epoch-v1/standing-002000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-002000/mesh-profile3879-fine-green-mesh-right.png) |
+
+## Matched quality comparison at 5,000 updates
+
+The same eight-photo monitor ran 32 paired groups with seven inference
+policies in 109.97 s of CUDA IEEE FP32 inference. The local checkpoint
+SHA256 is `e860f7f7ea2fcdfd18dc3597ec382ea83bc2d00f083c2809735f18765e4ca546`.
+The spatial checkpoint SHA256 is
+`14cff19b95fc19cb051113efb36a22567b6b2ef85bce218bc6571d85c6d88a23`.
+Both use EMA weights. The control metrics for V120 and Corpus 100k
+are identical to the 2,000-update review.
+[Per-photo metrics, checkpoint bindings and reviewed crops](results/scene-full-epoch-v1/matched-005000-pilot.json) ·
+[Paired photo-level intervals](results/scene-full-epoch-v1/matched-005000-pilot-paired.json).
+
+| ISO6400, coupled draws | Fine-increment RMS, DN16 | Fine flat RMS, DN16 | Fine weak response |
+| --- | ---: | ---: | ---: |
+| V120 | 84.243 | 4.832 | 68.275% |
+| Corpus 100k | 84.218 | 4.208 | 68.175% |
+| Local 5k | 84.703 | 4.357 | 67.225% |
+| Spatial 5k, matching | 84.876 | 4.226 | 67.056% |
+| Spatial 5k, masked | 84.564 | 4.643 | 67.385% |
+| Spatial 5k, blurred distant view | 84.883 | 4.163 | 67.105% |
+| Spatial 5k, mirrored distant view | 84.963 | 4.211 | 66.994% |
+
+On coupled ISO6400 draws the aligned preview reduces flat variation
+by **0.417 DN16** versus masking (paired 95% interval −0.958 to −0.037).
+It raises increment error by 0.313 DN16 (+0.142 to +0.488) and reduces
+signed weak response by 0.330 points (−0.478 to −0.081). Against the
+mirrored distant view the matching preview gains 0.061 weak-response
+points (+0.001 to +0.142) with flat RMS essentially tied. This comparison
+preserves the query and nearby preview halo. Against local-only,
+the weak response difference is −0.169 points (−0.374 to +0.119).
+Against Corpus 100k the aligned weak response falls by 1.119 points
+(−1.704 to −0.249), with similar flat variation. On independent draws,
+it gains 0.074 points over mirroring (+0.013 to +0.145) and loses
+0.998 points to Corpus 100k (−1.690 to −0.152).
+Compared with the matching 2k checkpoint, the coupled increment error
+is 0.779 DN16 higher and the independent increment error is 0.358
+DN16 lower. Both draw laws have lower weak response at 5k.
+
+The two triplets show noisy Malvar, spatial 5k with matching preview
+and exact GT at native 160×160. The first independent ISO6400 weak
+roles use shot/read `0.00128/6.5536e-6`, ADC16 black level 0.03,
+capture exposure 0.33, display exposure ×3.0303 and contrast ×2.
+The ROI is `[48,48,160,160]` in both 256-pixel queries.
+
+![Hauroth, noisy, spatial 5k and exact GT](images/scene-full-epoch-v1/pilot-005000/000-iso6400-independent-role0-triplet.png)
+
+Hauroth, query `[218,192]`, RGGB, Palauenc05, CC BY-SA 4.0. The matching
+and mirrored previews show similar stone grain, with the exact patch
+visibly crisper. [Full comparison](images/scene-full-epoch-v1/pilot-005000/000-iso6400-independent-role0-comparison.png) ·
+[Exact-flat comparison](images/scene-full-epoch-v1/pilot-005000/000-iso6400-independent-role2-comparison.png).
+
+![Limburg Cathedral, noisy, spatial 5k and exact GT](images/scene-full-epoch-v1/pilot-005000/001-iso6400-independent-role0-triplet.png)
+
+Limburg Cathedral, query `[22,250]`, BGGR. Both arms restore the arch
+contours and lose fine surface and window-edge detail.
+[Full comparison](images/scene-full-epoch-v1/pilot-005000/001-iso6400-independent-role0-comparison.png) ·
+[Exact-flat comparison](images/scene-full-epoch-v1/pilot-005000/001-iso6400-independent-role2-comparison.png).
+The comparable full427 photo and measured camera panels are scheduled
+for the full endpoints.
+
+### Standing GFX100S at update 5,000
+
+Both intermediate EMAs keep the sky smooth and retain both directions
+of the coarse fence. Neither has a visible gain in coarse crossings.
+Thin building lines and small leaf edges remain soft. The nominal
+profile leaves most of the fine cab mesh faint. The transferred
+DSCF3879 profile leaves both diagonal families faintly visible in
+the right crop, with incomplete crossings and mottled underlying
+paint. Both left and right crops and both camera JPEGs were reviewed.
+The ISO100 AHD renders and JPEGs are independent qualitative references.
+
+The spatial and local outputs differ by 2.08 DN16 camera-RGB RMS in
+the sky, 8.45 in the coarse fence and 2.52–4.14 in the four cab views.
+The comparison uses identical saved RAW, noise and rendering. CPU IEEE
+FP32 inference on the ten archived observations took 265.47 s local
+and 277.44 s spatial. Main views use DSCF3879/3880, native ROI `[176,176,160,160]` in
+512-pixel queries, nominal shot/read `0.00128/6.5536e-6`, and
+display exposure ×4. Cab views use DSCF3842/3835, native ROIs
+`[206,229,160,160]` and `[426,189,160,160]` in a 768-pixel query,
+with display exposure ×16. The transferred shot/read profile is
+`0.0014635775921166604/1.0715704128646712e-6`.
+
+The first renderer stopped at its output-path check. The corrected
+renderer uses the same completed predictions and writes inside the
+frozen worker directory. Both logs and the corrected render receipt
+are included in the archive.
+[Native review and provenance](results/scene-full-epoch-v1/matched-005000-standing.json) ·
+[Collection and renderer evidence](results/scene-full-epoch-v1/matched-005000-standing.tar.xz) ·
+[Sky](images/scene-full-epoch-v1/standing-005000/main-overcast-sky-main-overcast-sky.png) ·
+[Building](images/scene-full-epoch-v1/standing-005000/main-building-detail-main-building-detail.png) ·
+[Foliage](images/scene-full-epoch-v1/standing-005000/main-foliage-main-foliage.png) ·
+[Coarse fence](images/scene-full-epoch-v1/standing-005000/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | Native views |
+| --- | --- |
+| Nominal | [Left](images/scene-full-epoch-v1/standing-005000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-005000/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-full-epoch-v1/standing-005000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-005000/mesh-profile3879-fine-green-mesh-right.png) |
