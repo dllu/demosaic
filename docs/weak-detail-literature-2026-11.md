@@ -1021,6 +1021,14 @@ strong wire by 9.24 points relative to the starting model. Fine cab
 crossings remain incomplete.
 [Signed wire supervision](local-wire-response.md).
 
+With a signed loss on the remaining strong direction, strong-band response
+rises 16.86 points inside exact weak gaps. An independent double-gap test
+gains 8.04 points on true continuation with little change in false strong
+response, while flat error increases. In a Bayer diagnostic with the wire
+shape supplied, exact subtraction of the reference background separates all
+draws. Local affine subtraction leaves eight false continuations, all on
+four backgrounds with coherent projected texture. [Continuing-wire supervision](local-continuing-wire.md).
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate

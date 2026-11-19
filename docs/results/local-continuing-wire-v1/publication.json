@@ -1,0 +1,3661 @@
+{
+  "training": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-continuing-wire-v1/training.json",
+    "sha256": "6393a74c2c0e550113919216d69085cf9d4a5139f4b5f1b30f25cf9d6c675f11"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-continuing-wire-v1/evidence.tar.xz",
+    "sha256": "d96bc935b44355dc6dd9d43ff81a6658d9b571b78c6c2aafea5eaa280cc7a5ec"
+  },
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/local-continuing-wire-v1/manifest.json",
+    "sha256": "ee8db0f17ca29515e11de4de8ef1a5c1de5885e5735c826c8f837cca48f95d98"
+  },
+  "models": {
+    "wire-aligned": {
+      "path": "/mnt/external/demosaic/local-continuing-wire-v1/training/wire-aligned.pt",
+      "sha256": "e1e706a7c5a49da96dfb77a7779126504a2aa85d8626567a09d4690b0b30b9ec"
+    },
+    "strong-gap": {
+      "path": "/mnt/external/demosaic/local-continuing-wire-v1/training/strong-gap.pt",
+      "sha256": "b28fe5d5cb7beaa25bb8e1b54e4df52ac7fab828cc17513660a80c0ec0f5f115"
+    }
+  },
+  "parent": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/local-redraw-stability-v1/training/repeat.pt",
+    "sha256": "cc5a3cd5d33096f9696d250627d380ecc2f0ed53971da8c2d3f9772550cf9a7a"
+  },
+  "training_seconds": 877.4777407189831,
+  "evaluation_seconds": {
+    "native": 205.95733638491947,
+    "double_gap": 111.094566822052,
+    "wire_transfer": 249.2817282479955
+  },
+  "reviews": {
+    "native_metrics_complete": true,
+    "wire_transfer_and_double_gap_complete": true,
+    "native_image_view_complete": true,
+    "fixed_427_complete": false
+  },
+  "exact_results": {
+    "photo": {
+      "exact_flat_fine_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 3.9820046095509807,
+          "Prior aligned wire": 3.985189229977236,
+          "V120": 5.726401681248898,
+          "Corpus 100k": 5.569110008495102,
+          "Local 50k EMA": 4.48883092909789,
+          "Aligned control": 4.109758916419472,
+          "Continuing-wire loss": 5.036911485508478
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 0.9271525690890057,
+            "interval": [
+              0.509340420316519,
+              1.4241294229773425
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": 0.12775430686849143,
+            "interval": [
+              -0.010710024243299076,
+              0.2746574426299423
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.1245696864422361,
+            "interval": [
+              0.04299922780931412,
+              0.2065649231738629
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -0.37907201267841817,
+            "interval": [
+              -0.825182769044846,
+              -0.02132762604223665
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -1.4593510920756296,
+            "interval": [
+              -3.083441946315563,
+              -0.20465233732907986
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -1.6166427648294261,
+            "interval": [
+              -2.5569225498827435,
+              -0.8460027684735852
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 1.054906875957497,
+            "interval": [
+              0.65471983424112,
+              1.5560181307397754
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 1.0517222555312418,
+            "interval": [
+              0.6372199832468292,
+              1.5485715647597909
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": 0.5480805564105875,
+            "interval": [
+              0.040477918480762536,
+              1.1527150219595097
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -0.532198522986624,
+            "interval": [
+              -2.124720932304,
+              0.7539739434887568
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -0.6894901957404205,
+            "interval": [
+              -1.6214539545764064,
+              0.17144268449636174
+            ]
+          }
+        }
+      },
+      "exact_flat_upper_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 2.352359896965485,
+          "Prior aligned wire": 2.245884700220506,
+          "V120": 2.271487158949504,
+          "Corpus 100k": 2.150352216598752,
+          "Local 50k EMA": 2.483369771518768,
+          "Aligned control": 2.1678863895880545,
+          "Continuing-wire loss": 2.3094159492409423
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 0.14152955965288783,
+            "interval": [
+              0.08512191393292012,
+              0.19844326999341586
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -0.1844735073774304,
+            "interval": [
+              -0.2604802335897096,
+              -0.10737317839914377
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": -0.07799831063245133,
+            "interval": [
+              -0.12150182858683299,
+              -0.035049725443984846
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -0.3154833819307137,
+            "interval": [
+              -0.5063826337702771,
+              -0.1705029580631353
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": 0.017534172989302377,
+            "interval": [
+              -0.395680768875784,
+              0.29470726373635087
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -0.10360076936144935,
+            "interval": [
+              -0.2713314776044898,
+              0.04236785622996121
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": -0.042943947724542575,
+            "interval": [
+              -0.09256799148937005,
+              0.009588847392776451
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 0.0635312490204365,
+            "interval": [
+              -0.0048153753812212536,
+              0.12898110491646494
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -0.17395382227782585,
+            "interval": [
+              -0.339528753493006,
+              -0.052770091798229585
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": 0.1590637326421902,
+            "interval": [
+              -0.24454116977309595,
+              0.4271933670433997
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": 0.037928790291438474,
+            "interval": [
+              -0.12437620642826856,
+              0.19567125081987435
+            ]
+          }
+        }
+      },
+      "fine_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 135.90895311452894,
+          "Prior aligned wire": 135.19830571796803,
+          "V120": 137.344205377762,
+          "Corpus 100k": 137.44661296918724,
+          "Local 50k EMA": 136.33534173457852,
+          "Aligned control": 134.81016511731454,
+          "Continuing-wire loss": 135.57752869015894
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 0.7673635728444026,
+            "interval": [
+              0.4025403674887212,
+              1.1080722342288636
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -1.0987879972144015,
+            "interval": [
+              -1.9125297391640501,
+              -0.3303118807668209
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": -0.388140600653486,
+            "interval": [
+              -1.1163577652715644,
+              0.2965029737610131
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -1.5251766172639805,
+            "interval": [
+              -2.1797282548293806,
+              -0.8740774579559317
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -2.6364478518727026,
+            "interval": [
+              -3.6275411582744397,
+              -1.5845791799901623
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -2.534040260447455,
+            "interval": [
+              -3.4691961946365297,
+              -1.6334180614160092
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": -0.33142442436999886,
+            "interval": [
+              -0.9095652360295581,
+              0.19922358125328674
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 0.3792229721909166,
+            "interval": [
+              -0.2438846402933727,
+              1.024331209278429
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -0.7578130444195779,
+            "interval": [
+              -1.1516029830793761,
+              -0.3553116672499955
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -1.8690842790283,
+            "interval": [
+              -2.629737555083705,
+              -1.0624798924277519
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -1.7666766876030522,
+            "interval": [
+              -2.509909216631932,
+              -1.026453181257534
+            ]
+          }
+        }
+      },
+      "fine_response_pp": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 59.531361106189934,
+          "Prior aligned wire": 56.690986961388,
+          "V120": 58.22359956436171,
+          "Corpus 100k": 58.3143007122336,
+          "Local 50k EMA": 58.010222900652956,
+          "Aligned control": 56.92476186994761,
+          "Continuing-wire loss": 58.40380815823041
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 1.4790462882828024,
+            "interval": [
+              0.7090231139083599,
+              2.226895615554403
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -2.6065992362423245,
+            "interval": [
+              -3.5719204396876476,
+              -1.730928783902918
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.23377490855961014,
+            "interval": [
+              -0.6155858061698067,
+              1.029321980402427
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -1.0854610307053463,
+            "interval": [
+              -2.143889899963777,
+              0.08085681465215626
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -1.3895388422859938,
+            "interval": [
+              -2.734218497153653,
+              0.1983343972507479
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -1.2988376944141038,
+            "interval": [
+              -2.4638682948935484,
+              0.1673274614858246
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": -1.127552947959522,
+            "interval": [
+              -1.9374680311650458,
+              -0.3570407638162953
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 1.7128211968424125,
+            "interval": [
+              0.7506146694818623,
+              2.754126354135004
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": 0.3935852575774561,
+            "interval": [
+              -0.5397663194136013,
+              1.4210899239573653
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": 0.0895074459968086,
+            "interval": [
+              -1.064196359946113,
+              1.4926864071605463
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": 0.18020859386869859,
+            "interval": [
+              -0.9716661793740534,
+              1.5431635208030603
+            ]
+          }
+        }
+      },
+      "flat_chroma_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 33.126097032149886,
+          "Prior aligned wire": 34.78753348743268,
+          "V120": 34.85169414490233,
+          "Corpus 100k": 34.26261617998115,
+          "Local 50k EMA": 32.5340820179519,
+          "Aligned control": 31.801646990161657,
+          "Continuing-wire loss": 34.99552281283944
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 3.193875822677782,
+            "interval": [
+              0.7407416753377246,
+              5.474621828732055
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -1.3244500419882286,
+            "interval": [
+              -3.8700760868833117,
+              1.5303076572481187
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": -2.985886497271025,
+            "interval": [
+              -7.2992509087696344,
+              1.0956509604602211
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -0.7324350277902454,
+            "interval": [
+              -3.2362099061539764,
+              1.8713420527054985
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -2.460969189819494,
+            "interval": [
+              -5.97050989472775,
+              0.9270640543361744
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -3.0500471547406747,
+            "interval": [
+              -4.6965945065310795,
+              -1.6067067402199002
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 1.8694257806895536,
+            "interval": [
+              0.6608034036437792,
+              3.695378390774482
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 0.20798932540675708,
+            "interval": [
+              -2.8681624351077,
+              3.63548324287942
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": 2.4614407948875368,
+            "interval": [
+              1.064951925790502,
+              4.1638612502956365
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": 0.7329066328582883,
+            "interval": [
+              -1.5478761764042,
+              3.166421711266029
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": 0.14382866793710747,
+            "interval": [
+              -1.9938486213288187,
+              2.147317814843046
+            ]
+          }
+        }
+      },
+      "upper_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 86.92063624483359,
+          "Prior aligned wire": 86.85108300330144,
+          "V120": 87.33307758580965,
+          "Corpus 100k": 87.30669254907727,
+          "Local 50k EMA": 86.97145045072135,
+          "Aligned control": 86.74062898884699,
+          "Continuing-wire loss": 86.77202633472416
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 0.03139734587716703,
+            "interval": [
+              -0.08759150082535357,
+              0.14110205335082596
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -0.18000725598659528,
+            "interval": [
+              -0.6096914699576285,
+              0.1915007159567284
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": -0.11045401445444725,
+            "interval": [
+              -0.35072544431288294,
+              0.07225857548540683
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -0.23082146187435626,
+            "interval": [
+              -0.43099810456631393,
+              -0.03723910308604755
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -0.5660635602302762,
+            "interval": [
+              -1.235572220980855,
+              0.011096432120990483
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -0.5924485969626545,
+            "interval": [
+              -1.3844598935277548,
+              0.1281853389387673
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": -0.14860991010942826,
+            "interval": [
+              -0.6357987499354565,
+              0.2744363416549148
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": -0.07905666857728022,
+            "interval": [
+              -0.3577229188186326,
+              0.15751941841721329
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -0.19942411599718923,
+            "interval": [
+              -0.4430661188446974,
+              -0.008089289735224804
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -0.5346662143531091,
+            "interval": [
+              -1.1354218305199122,
+              0.01968913372505867
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -0.5610512510854875,
+            "interval": [
+              -1.2866307993228467,
+              0.1189784956688588
+            ]
+          }
+        }
+      },
+      "upper_response_pp": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 22.848545255628185,
+          "Prior aligned wire": 21.41362488107441,
+          "V120": 18.78906550644198,
+          "Corpus 100k": 18.86026316067488,
+          "Local 50k EMA": 20.779791842965782,
+          "Aligned control": 21.2829892086448,
+          "Continuing-wire loss": 21.389652672731312
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 0.1066634640865125,
+            "interval": [
+              -0.2930963177862801,
+              0.4426317328105105
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -1.5655560469833851,
+            "interval": [
+              -2.29448710309091,
+              -0.8439810028252646
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": -0.13063567242960872,
+            "interval": [
+              -0.8344298261562768,
+              0.7069653674445928
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": 0.5031973656790178,
+            "interval": [
+              -0.11724519146990511,
+              1.172385949918228
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": 2.4227260479699204,
+            "interval": [
+              1.3767813232249035,
+              3.6299000361038263
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": 2.493923702202821,
+            "interval": [
+              1.622069465016296,
+              3.4337059093074624
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": -1.4588925828968726,
+            "interval": [
+              -2.2570618814803995,
+              -0.6501324422771931
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": -0.023972208343096213,
+            "interval": [
+              -0.9140524275523493,
+              0.9540630109036948
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": 0.6098608297655304,
+            "interval": [
+              -0.11026882862933104,
+              1.381074543127087
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": 2.529389512056433,
+            "interval": [
+              1.3102751935966732,
+              3.8745554274946703
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": 2.6005871662893334,
+            "interval": [
+              1.5646806684780576,
+              3.6337465203629193
+            ]
+          }
+        }
+      }
+    },
+    "wire": {
+      "exact_flat_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 19.72753973354321,
+          "Prior aligned wire": 18.56915771350891,
+          "V120": 22.556857417200217,
+          "Corpus 100k": 22.196329545479852,
+          "Local 50k EMA": 20.490460529309214,
+          "Aligned control": 19.189896322908282,
+          "Continuing-wire loss": 23.827740736993462
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 4.63784441408518,
+            "interval": [
+              3.4004719831815247,
+              5.994729697716042
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -0.5376434106349279,
+            "interval": [
+              -1.0211733766382445,
+              -0.08422764228848678
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.6207386093993712,
+            "interval": [
+              0.24674955427960174,
+              1.0031704396354852
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -1.3005642064009315,
+            "interval": [
+              -1.991132337607234,
+              -0.6113343101827212
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -3.0064332225715695,
+            "interval": [
+              -4.059913518822478,
+              -2.041926057365623
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -3.366961094291934,
+            "interval": [
+              -4.625877194180111,
+              -2.2203082653286876
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 4.100201003450252,
+            "interval": [
+              2.969111761483565,
+              5.399864288944494
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 5.258583023484551,
+            "interval": [
+              3.9570981709819986,
+              6.723742135807928
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": 3.3372802076842483,
+            "interval": [
+              2.3253560795413413,
+              4.507316538057237
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": 1.6314111915136102,
+            "interval": [
+              0.6887113022419644,
+              2.675851950775731
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": 1.2708833197932456,
+            "interval": [
+              0.17747604501492253,
+              2.4184415933417287
+            ]
+          }
+        }
+      },
+      "exterior_only_weak_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Repeat parent": 7.293282481153972,
+          "Prior aligned wire": 6.332328152447805,
+          "V120": 8.819658838011039,
+          "Corpus 100k": 9.041533582042923,
+          "Local 50k EMA": 8.749833264009899,
+          "Aligned control": 6.734728609360579,
+          "Continuing-wire loss": 7.884471079961187
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 1.1497424706006072,
+            "interval": [
+              0.6025577189192246,
+              1.958477713967694
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -0.5585538717933929,
+            "interval": [
+              -1.0288525008165375,
+              -0.1651714475840176
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.4024004569127744,
+            "interval": [
+              0.21437799811403643,
+              0.6062664383757297
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -2.0151046546493196,
+            "interval": [
+              -3.229736922195647,
+              -1.1738954379109814
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -2.306804972682344,
+            "interval": [
+              -3.520518326082731,
+              -1.4509826671420145
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -2.0849302286504594,
+            "interval": [
+              -3.410745132789318,
+              -1.0429000442055432
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 0.5911885988072143,
+            "interval": [
+              0.18831977381700546,
+              1.0643032649004336
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 1.5521429275133816,
+            "interval": [
+              1.0358101304348712,
+              2.3027254607919487
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -0.8653621840487125,
+            "interval": [
+              -1.376442321661712,
+              -0.4165841658991082
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -1.1570625020817369,
+            "interval": [
+              -1.5982837970934314,
+              -0.7733632986602226
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -0.9351877580498522,
+            "interval": [
+              -1.5669527516771762,
+              -0.341204360910428
+            ]
+          }
+        }
+      },
+      "fine_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 81.78841326991711,
+          "Prior aligned wire": 72.31562471118646,
+          "V120": 92.78033393237143,
+          "Corpus 100k": 95.24429404150167,
+          "Local 50k EMA": 94.04818933852904,
+          "Aligned control": 76.8201116880815,
+          "Continuing-wire loss": 88.37057192945012
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 11.550460241368626,
+            "interval": [
+              9.279793900307421,
+              14.009725666534893
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -4.968301581835618,
+            "interval": [
+              -7.1647487607374885,
+              -2.8189478824238545
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 4.504486976895038,
+            "interval": [
+              2.851467054889821,
+              6.255518529753091
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -17.228077650447545,
+            "interval": [
+              -20.061726076099383,
+              -14.506689671731394
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -18.42418235342018,
+            "interval": [
+              -21.952737737495784,
+              -14.96430100802017
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -15.960222244289938,
+            "interval": [
+              -19.114741844903982,
+              -12.867079769357888
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 6.5821586595330075,
+            "interval": [
+              5.184779736189679,
+              7.967039285011457
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 16.054947218263663,
+            "interval": [
+              13.6645040133704,
+              18.542630072029596
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -5.67761740907892,
+            "interval": [
+              -8.1384435289313,
+              -3.242008744863406
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -6.873722112051553,
+            "interval": [
+              -10.143232852432725,
+              -3.74926140158901
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -4.409762002921312,
+            "interval": [
+              -8.282810007301869,
+              -0.5018404438784732
+            ]
+          }
+        }
+      },
+      "fine_response_pp": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 11.425718958983431,
+          "Prior aligned wire": 10.176765716799073,
+          "V120": 15.49847172188779,
+          "Corpus 100k": 16.12391548440116,
+          "Local 50k EMA": 16.000446247567012,
+          "Aligned control": 11.502272181957386,
+          "Continuing-wire loss": 13.770560249942625
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 2.268288067985239,
+            "interval": [
+              1.5075335637689973,
+              3.2419315593300904
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": 0.0765532229739545,
+            "interval": [
+              -0.690164916143636,
+              0.8454198747585949
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 1.3255064651583126,
+            "interval": [
+              0.6443207313723515,
+              2.1379556827095807
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -4.498174065609627,
+            "interval": [
+              -5.427865218366928,
+              -3.580712965013573
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -4.621643302443774,
+            "interval": [
+              -5.736984221144614,
+              -3.551690362101297
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -3.996199539930405,
+            "interval": [
+              -5.1018950799037395,
+              -2.9361427546025274
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 2.3448412909591934,
+            "interval": [
+              1.6878212713975995,
+              3.082935162295276
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 3.5937945331435515,
+            "interval": [
+              2.608178465506338,
+              4.728760470355156
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -2.229885997624388,
+            "interval": [
+              -3.2274798860638314,
+              -1.0864205817420942
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -2.353355234458535,
+            "interval": [
+              -3.566193274575615,
+              -1.045509276562054
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -1.7279114719451663,
+            "interval": [
+              -3.104393455074318,
+              -0.2003699073208342
+            ]
+          }
+        }
+      },
+      "flat_chroma_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 29.530106066068527,
+          "Prior aligned wire": 28.378277382670962,
+          "V120": 29.723866216893132,
+          "Corpus 100k": 27.111084632666216,
+          "Local 50k EMA": 26.986840786245832,
+          "Aligned control": 29.296543423314176,
+          "Continuing-wire loss": 31.464667469824416
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 2.16812404651024,
+            "interval": [
+              0.9634043845375346,
+              3.400572806316378
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -0.23356264275435024,
+            "interval": [
+              -1.8129388633988301,
+              1.3803292300687144
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.9182660406432142,
+            "interval": [
+              -0.770000265383529,
+              2.727757739497729
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": 2.3097026370683444,
+            "interval": [
+              0.8345591116637818,
+              4.017478866783554
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": 2.18545879064796,
+            "interval": [
+              0.9412288855643836,
+              3.4823164819998476
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -0.42732279357895564,
+            "interval": [
+              -2.205255645021272,
+              1.15134029246803
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 1.9345614037558896,
+            "interval": [
+              0.5304381616291204,
+              3.383511038908858
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 3.086390087153454,
+            "interval": [
+              1.0886354997574585,
+              5.07532301830609
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": 4.477826683578584,
+            "interval": [
+              2.8785218378026727,
+              6.276092016402765
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": 4.3535828371582,
+            "interval": [
+              2.8677911780811987,
+              6.043679304523433
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": 1.7408012529312842,
+            "interval": [
+              0.04484651226197579,
+              3.547240896325203
+            ]
+          }
+        }
+      },
+      "gap_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Repeat parent": 165.5765205717535,
+          "Prior aligned wire": 173.965650253774,
+          "V120": 171.20307613695675,
+          "Corpus 100k": 169.20758565665122,
+          "Local 50k EMA": 168.48812603068347,
+          "Aligned control": 170.2561971484524,
+          "Continuing-wire loss": 159.650189041168
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": -10.606008107284396,
+            "interval": [
+              -18.02624547614701,
+              -5.5524962284519335
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": 4.67967657669891,
+            "interval": [
+              1.5031374993858435,
+              8.905349158765796
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": -3.709453105321586,
+            "interval": [
+              -6.337822685102204,
+              -1.4958693188614225
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": 1.7680711177689261,
+            "interval": [
+              -1.7874848253901687,
+              5.263510294850358
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": 1.0486114918011822,
+            "interval": [
+              -2.780229788353816,
+              4.915027715832996
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -0.946878988504352,
+            "interval": [
+              -4.8615122037238,
+              2.8470303125076044
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": -5.926331530585486,
+            "interval": [
+              -9.453204656508214,
+              -3.5015569961972566
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": -14.315461212605982,
+            "interval": [
+              -21.941397324068127,
+              -8.661280465160557
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -8.83793698951547,
+            "interval": [
+              -15.200033585660028,
+              -3.9731529947815263
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -9.557396615483214,
+            "interval": [
+              -15.745505772228762,
+              -5.010492469493219
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -11.552887095788748,
+            "interval": [
+              -18.516980625737464,
+              -6.234649290181082
+            ]
+          }
+        }
+      },
+      "gap_continuing_strong_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Repeat parent": 100.62091766007849,
+          "Prior aligned wire": 115.9327909757443,
+          "V120": 100.07892724015532,
+          "Corpus 100k": 96.27357995915753,
+          "Local 50k EMA": 97.06439449066151,
+          "Aligned control": 109.57097580399072,
+          "Continuing-wire loss": 83.90184212625748
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": -25.669133677733242,
+            "interval": [
+              -35.64891075438669,
+              -17.726315852307916
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": 8.95005814391223,
+            "interval": [
+              3.365359920181792,
+              14.956890323463078
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": -6.361815171753577,
+            "interval": [
+              -11.604365795394413,
+              -1.43650689065882
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": 12.506581313329207,
+            "interval": [
+              8.309763293848906,
+              16.980904707127195
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": 13.29739584483319,
+            "interval": [
+              8.274712902998946,
+              18.368918470599127
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": 9.492048563835397,
+            "interval": [
+              4.684933384329502,
+              14.136061836161884
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": -16.719075533821012,
+            "interval": [
+              -21.907153660315426,
+              -11.934198311914667
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": -32.03094884948682,
+            "interval": [
+              -41.926872698289635,
+              -23.08565612120505
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -13.162552364404036,
+            "interval": [
+              -22.078063210429686,
+              -6.131891783307937
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -12.371737832900052,
+            "interval": [
+              -20.638140374994368,
+              -5.472262641808821
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -16.177085113897846,
+            "interval": [
+              -25.79417074403731,
+              -7.691822611194091
+            ]
+          }
+        }
+      },
+      "gap_weak_RMS_DN16": {
+        "cases": 12,
+        "values": {
+          "Repeat parent": 8.471474579802464,
+          "Prior aligned wire": 8.316212490606326,
+          "V120": 9.462791489912759,
+          "Corpus 100k": 9.800614208387678,
+          "Local 50k EMA": 9.615138435215902,
+          "Aligned control": 8.33864860430131,
+          "Continuing-wire loss": 8.601762127128582
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 0.26311352282727185,
+            "interval": [
+              0.02968867909537081,
+              0.5178734638104464
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -0.13282597550115405,
+            "interval": [
+              -0.34272695550735477,
+              0.06809625811726178
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.022436113694984883,
+            "interval": [
+              -0.21491164277275207,
+              0.29170508424761005
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -1.276489830914592,
+            "interval": [
+              -1.9708400948934082,
+              -0.6507577229980013
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -1.4619656040863678,
+            "interval": [
+              -2.3830776620804146,
+              -0.6774371519759022
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -1.1241428856114482,
+            "interval": [
+              -1.9784922304445518,
+              -0.46653390324811517
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 0.1302875473261178,
+            "interval": [
+              -0.07114457014194406,
+              0.3574808057406655
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 0.28554963652225673,
+            "interval": [
+              -0.03530131262899649,
+              0.6265897578578657
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -1.0133763080873202,
+            "interval": [
+              -1.7144156159307598,
+              -0.3820590519709948
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -1.198852081259096,
+            "interval": [
+              -2.1869436233591464,
+              -0.3382367166254605
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -0.8610293627841763,
+            "interval": [
+              -1.7250618220545573,
+              -0.15488225195957384
+            ]
+          }
+        }
+      },
+      "intact_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 171.47894156471725,
+          "Prior aligned wire": 161.19184508144542,
+          "V120": 187.93037398908572,
+          "Corpus 100k": 187.8592628847422,
+          "Local 50k EMA": 188.07352502032086,
+          "Aligned control": 168.16623370337047,
+          "Continuing-wire loss": 180.9374703174727
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 12.771236614102236,
+            "interval": [
+              10.584607848673265,
+              15.353734515705462
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -3.31270786134678,
+            "interval": [
+              -5.291224679187538,
+              -1.4906990196499057
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 6.974388621925044,
+            "interval": [
+              5.5142803019200475,
+              8.451442742922723
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -19.907291316950392,
+            "interval": [
+              -22.50705279804315,
+              -17.33755332557742
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -19.69302918137174,
+            "interval": [
+              -22.723714509382607,
+              -16.740683037284988
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -19.764140285715257,
+            "interval": [
+              -23.084508539124457,
+              -16.508455452590734
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 9.458528752755456,
+            "interval": [
+              8.316059867308358,
+              10.726326067531769
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 19.74562523602728,
+            "interval": [
+              17.648165144844228,
+              21.98784414405516
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -7.136054702848156,
+            "interval": [
+              -10.037078500137204,
+              -3.9628931398198923
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -6.921792567269506,
+            "interval": [
+              -10.252161356709225,
+              -3.3849571093525537
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -6.992903671613021,
+            "interval": [
+              -10.92592038767734,
+              -2.6171768886391837
+            ]
+          }
+        }
+      },
+      "upper_increment_RMS_DN16": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 12.099319474605457,
+          "Prior aligned wire": 10.833674868284701,
+          "V120": 11.319371490778082,
+          "Corpus 100k": 11.4191178009749,
+          "Local 50k EMA": 13.829324741161413,
+          "Aligned control": 11.105892409849796,
+          "Continuing-wire loss": 12.524463210138173
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 1.4185708002883768,
+            "interval": [
+              0.9110914810959678,
+              2.073899279949386
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": -0.9934270647556609,
+            "interval": [
+              -1.7358461304190622,
+              -0.3732531982335435
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.2722175415650945,
+            "interval": [
+              -0.28044403669480195,
+              0.8339162998361268
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -2.723432331311617,
+            "interval": [
+              -3.5352797945140764,
+              -2.028036015543298
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -0.31322539112510484,
+            "interval": [
+              -1.3274041729726511,
+              0.5503546028676182
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -0.21347908092828582,
+            "interval": [
+              -1.1097322265382146,
+              0.620581935649991
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 0.4251437355327159,
+            "interval": [
+              -0.08052358520791748,
+              0.956134921259573
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 1.6907883418534713,
+            "interval": [
+              1.1732352462937314,
+              2.3005229437669623
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -1.3048615310232403,
+            "interval": [
+              -1.99794155187686,
+              -0.6537325177974863
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": 1.105345409163272,
+            "interval": [
+              -0.042763982395334924,
+              2.198211314163951
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": 1.205091719360091,
+            "interval": [
+              0.09206286353079843,
+              2.461904155177817
+            ]
+          }
+        }
+      },
+      "upper_response_pp": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 5.992873760668765,
+          "Prior aligned wire": 5.711338077047558,
+          "V120": 8.770096879099249,
+          "Corpus 100k": 9.39552286959202,
+          "Local 50k EMA": 9.736000721767933,
+          "Aligned control": 6.416773038868629,
+          "Continuing-wire loss": 7.4220798498765275
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 1.0053068110078982,
+            "interval": [
+              -0.30037476389711937,
+              2.1966259249766327
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": 0.4238992781998645,
+            "interval": [
+              -0.8184177936438466,
+              1.6264404672074928
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 0.7054349618210711,
+            "interval": [
+              -0.1695705645109313,
+              1.6692933888932826
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -3.319227682899304,
+            "interval": [
+              -5.77285336275056,
+              -1.3247252176438025
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -2.97874983072339,
+            "interval": [
+              -4.838342799928372,
+              -1.3876649563142742
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -2.35332384023062,
+            "interval": [
+              -4.363527811029418,
+              -0.48352593947705164
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 1.4292060892077627,
+            "interval": [
+              0.4023493384417654,
+              2.5709012133618647
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 1.7107417728289693,
+            "interval": [
+              0.46397887789063086,
+              3.008136260732976
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -2.3139208718914057,
+            "interval": [
+              -4.735651541616414,
+              -0.2348856593061516
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -1.973443019715492,
+            "interval": [
+              -4.397925334773842,
+              -0.10727560295978929
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -1.3480170292227216,
+            "interval": [
+              -3.84969559721581,
+              0.7544490597746455
+            ]
+          }
+        }
+      },
+      "weak_response_pp": {
+        "cases": 24,
+        "values": {
+          "Repeat parent": 23.40940140807538,
+          "Prior aligned wire": 22.283615699726454,
+          "V120": 31.833565724193942,
+          "Corpus 100k": 32.23021292206046,
+          "Local 50k EMA": 32.37658468692895,
+          "Aligned control": 24.911220949544838,
+          "Continuing-wire loss": 28.07097334127518
+        },
+        "differences": {
+          "Continuing-wire loss vs Aligned control": {
+            "delta": 3.1597523917303434,
+            "interval": [
+              2.1062353030960144,
+              4.323335628218863
+            ]
+          },
+          "Aligned control vs Repeat parent": {
+            "delta": 1.5018195414694588,
+            "interval": [
+              0.36726245493331083,
+              2.6717645040467914
+            ]
+          },
+          "Aligned control vs Prior aligned wire": {
+            "delta": 2.6276052498183837,
+            "interval": [
+              1.666949969402436,
+              3.676474624302862
+            ]
+          },
+          "Aligned control vs Local 50k EMA": {
+            "delta": -7.465363737384113,
+            "interval": [
+              -8.81523941273581,
+              -6.206476179140794
+            ]
+          },
+          "Aligned control vs Corpus 100k": {
+            "delta": -7.318991972515622,
+            "interval": [
+              -9.048875626613667,
+              -5.709056545088025
+            ]
+          },
+          "Aligned control vs V120": {
+            "delta": -6.922344774649105,
+            "interval": [
+              -9.003298964423676,
+              -4.991852023281848
+            ]
+          },
+          "Continuing-wire loss vs Repeat parent": {
+            "delta": 4.661571933199802,
+            "interval": [
+              3.8582819532483255,
+              5.491103918776024
+            ]
+          },
+          "Continuing-wire loss vs Prior aligned wire": {
+            "delta": 5.787357641548727,
+            "interval": [
+              4.848532252198164,
+              6.741211133913265
+            ]
+          },
+          "Continuing-wire loss vs Local 50k EMA": {
+            "delta": -4.3056113456537695,
+            "interval": [
+              -5.257813412951209,
+              -3.3511974572722494
+            ]
+          },
+          "Continuing-wire loss vs Corpus 100k": {
+            "delta": -4.159239580785279,
+            "interval": [
+              -5.470579339746257,
+              -2.9138442912607485
+            ]
+          },
+          "Continuing-wire loss vs V120": {
+            "delta": -3.7625923829187613,
+            "interval": [
+              -5.638485709994071,
+              -1.9458827926458186
+            ]
+          }
+        }
+      }
+    }
+  },
+  "double_gap": {
+    "continuing_bias_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": -41.85151022147465,
+        "Aligned control": -40.25706856001995,
+        "Continuing-wire loss": -30.431090895059675
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 9.825977664960277,
+          "interval": [
+            4.656439748931461,
+            17.06476686117664
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 1.5944416614546952,
+          "interval": [
+            -0.04389236293793566,
+            3.9896001115676674
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 11.420419326414972,
+          "interval": [
+            5.037047838103966,
+            20.880224510499332
+          ]
+        }
+      }
+    },
+    "continuing_error_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 52.4303696954495,
+        "Aligned control": 50.92782621771603,
+        "Continuing-wire loss": 45.58683299088212
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": -5.340993226833909,
+          "interval": [
+            -11.677576765449706,
+            0.4288614146576806
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -1.502543477733468,
+          "interval": [
+            -3.8832533467768675,
+            0.2479655177397705
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": -6.843536704567377,
+          "interval": [
+            -15.371085841068922,
+            0.014097176739014233
+          ]
+        }
+      }
+    },
+    "double_gap_signed_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 3.8622428146151124,
+        "Aligned control": 3.9964646907933616,
+        "Continuing-wire loss": 2.5924769425007215
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": -1.4039877482926402,
+          "interval": [
+            -4.552690340012621,
+            0.6398996687682204
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 0.1342218761782492,
+          "interval": [
+            -0.4726765224425004,
+            0.8462692223029087
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": -1.269765872114391,
+          "interval": [
+            -4.085182913728648,
+            0.6936768683363442
+          ]
+        }
+      }
+    },
+    "double_gap_strong_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 16.768123502254085,
+        "Aligned control": 17.151614115225232,
+        "Continuing-wire loss": 17.2464631372103
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 0.09484902198506617,
+          "interval": [
+            -0.9901673343347421,
+            1.2709263754385507
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 0.3834906129711477,
+          "interval": [
+            -0.10092807758547746,
+            0.8840044899843021
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 0.4783396349562139,
+          "interval": [
+            -0.7877879810515254,
+            1.801293216699428
+          ]
+        }
+      }
+    },
+    "double_gap_weak_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 34.439431488240345,
+        "Aligned control": 34.603658906290946,
+        "Continuing-wire loss": 34.99688996444915
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 0.39323105815820725,
+          "interval": [
+            -0.7858203752538744,
+            1.569199673025784
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 0.1642274180506007,
+          "interval": [
+            -0.4166500635214911,
+            0.7441668114639056
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 0.557458476208808,
+          "interval": [
+            -0.7591105599927858,
+            1.917072868396106
+          ]
+        }
+      }
+    },
+    "flat_RMS_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 10.546503279061664,
+        "Aligned control": 11.194789223224745,
+        "Continuing-wire loss": 13.58984653562083
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 2.3950573123960837,
+          "interval": [
+            1.4076397501024942,
+            3.552594552918505
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 0.6482859441630815,
+          "interval": [
+            0.40694968522752495,
+            0.9177837014310358
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 3.043343256559165,
+          "interval": [
+            2.0389495732986385,
+            4.17210483652604
+          ]
+        }
+      }
+    },
+    "strong_response_pp": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 66.16026180888059,
+        "Aligned control": 67.19981452857337,
+        "Continuing-wire loss": 75.24089116138134
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 8.041076632807972,
+          "interval": [
+            4.500195681303283,
+            13.054934724992195
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 1.0395527196927787,
+          "interval": [
+            -0.5548505463852904,
+            2.920714443798947
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 9.08062935250075,
+          "interval": [
+            4.737670129919025,
+            15.576295875730219
+          ]
+        }
+      }
+    },
+    "true_projected_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 148.82665928907988,
+        "Aligned control": 148.82665928907988,
+        "Continuing-wire loss": 148.82665928907988
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "wire_transfer": {
+    "aligned_bias_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": -84.07666335721312,
+        "Prior aligned wire": -86.12482236140744,
+        "Aligned control": -81.48183730858324,
+        "Continuing-wire loss": -78.62171652432423
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 2.86012078425901,
+          "interval": [
+            1.9301275284231525,
+            3.7604347157853573
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 2.5948260486298835,
+          "interval": [
+            0.8837743166745113,
+            4.542954152592003
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 4.642985052824201,
+          "interval": [
+            2.978320030066829,
+            6.470964523268337
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 5.4549468328888935,
+          "interval": [
+            3.6300630021347184,
+            7.653776937025586
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 7.503105837083211,
+          "interval": [
+            5.697880992226272,
+            9.487095218683642
+          ]
+        }
+      }
+    },
+    "aligned_variance_DN16_squared": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 23.002439241316097,
+        "Prior aligned wire": 18.248615869142384,
+        "Aligned control": 24.41741923635601,
+        "Continuing-wire loss": 25.63010243322776
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 1.2126831968717475,
+          "interval": [
+            -0.4075510807290875,
+            3.0221800071033185
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 1.4149799950399142,
+          "interval": [
+            0.4478726750677139,
+            2.6329338307574406
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 6.168803367213627,
+          "interval": [
+            2.316982202493565,
+            11.071545846877969
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 2.6276631919116618,
+          "interval": [
+            0.5824862280662685,
+            5.023767804943967
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 7.381486564085375,
+          "interval": [
+            3.339954758010353,
+            12.389831690658449
+          ]
+        }
+      }
+    },
+    "exact_flat_RMS_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 17.730209706156387,
+        "Prior aligned wire": 16.725348249844306,
+        "Aligned control": 17.356800482979168,
+        "Continuing-wire loss": 21.57761580392049
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 4.220815320941323,
+          "interval": [
+            3.403200663408514,
+            5.039338992670292
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -0.3734092231772195,
+          "interval": [
+            -0.5932994443144491,
+            -0.16291477217479003
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 0.631452233134862,
+          "interval": [
+            0.45847821057959737,
+            0.8045429159619624
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 3.847406097764104,
+          "interval": [
+            3.08844785821136,
+            4.636710050097235
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 4.852267554076185,
+          "interval": [
+            3.998806716549701,
+            5.695207428844037
+          ]
+        }
+      }
+    },
+    "flat_chroma_RMS_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 26.30864707783899,
+        "Prior aligned wire": 25.890153262305837,
+        "Aligned control": 26.152486648449216,
+        "Continuing-wire loss": 29.515694732537874
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 3.363208084088658,
+          "interval": [
+            2.1686423263633046,
+            4.762523098643319
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -0.15616042938977515,
+          "interval": [
+            -0.6572993995650409,
+            0.34840724749990104
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 0.26233338614337853,
+          "interval": [
+            -0.19441061610849653,
+            0.704687289270534
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 3.207047654698883,
+          "interval": [
+            2.1174394559019074,
+            4.5324001326072745
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 3.6255414702320365,
+          "interval": [
+            2.2939194611189726,
+            5.150071298918227
+          ]
+        }
+      }
+    },
+    "gap_RMS_DN16": {
+      "cases": 8,
+      "values": {
+        "Repeat parent": 143.6376192556461,
+        "Prior aligned wire": 149.4604657405153,
+        "Aligned control": 144.67301730454597,
+        "Continuing-wire loss": 138.89867177913007
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": -5.774345525415896,
+          "interval": [
+            -8.897768158930205,
+            -2.391940120869403
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 1.0353980488998786,
+          "interval": [
+            -1.6517832201159308,
+            3.8684533704872024
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": -4.787448435969338,
+          "interval": [
+            -8.248181642640313,
+            -1.918070426404796
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": -4.738947476516017,
+          "interval": [
+            -8.085204753500864,
+            -1.8637191046086323
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": -10.561793961385234,
+          "interval": [
+            -15.620319156779555,
+            -6.04674276041291
+          ]
+        }
+      }
+    },
+    "gap_weak_RMS_DN16": {
+      "cases": 8,
+      "values": {
+        "Repeat parent": 8.108377965904513,
+        "Prior aligned wire": 7.814275873776668,
+        "Aligned control": 7.97433619566677,
+        "Continuing-wire loss": 8.30263347088134
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 0.3282972752145694,
+          "interval": [
+            0.21747273641407447,
+            0.4653621394724667
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -0.13404177023774277,
+          "interval": [
+            -0.2625564448287374,
+            -0.02786244671329757
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 0.16006032189010178,
+          "interval": [
+            -0.017469346717644108,
+            0.372287778252903
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 0.19425550497682664,
+          "interval": [
+            0.10983242655698254,
+            0.2870049442834721
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 0.4883575971046712,
+          "interval": [
+            0.22424624960390638,
+            0.8051159879250314
+          ]
+        }
+      }
+    },
+    "intact_draw_variance_DN16_squared": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 20394.225768052136,
+        "Prior aligned wire": 16949.937935214206,
+        "Aligned control": 20136.967046264755,
+        "Continuing-wire loss": 23931.53444111212
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 3794.567394847363,
+          "interval": [
+            2904.20191455166,
+            4746.6205617317055
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -257.25872178738064,
+          "interval": [
+            -1032.2682793596287,
+            467.0627613684043
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 3187.0291110505495,
+          "interval": [
+            2521.6182105386383,
+            4002.4783970211292
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 3537.3086730599825,
+          "interval": [
+            3020.675546255912,
+            4096.004988960147
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 6981.596505897913,
+          "interval": [
+            5954.743970470916,
+            8027.831726676057
+          ]
+        }
+      }
+    },
+    "intact_increment_RMS_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 165.56062920943148,
+        "Prior aligned wire": 155.9363651139325,
+        "Aligned control": 163.5612259053464,
+        "Continuing-wire loss": 173.34727952442108
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 9.786053619074693,
+          "interval": [
+            7.78289876211092,
+            12.101234645402409
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -1.9994033040850923,
+          "interval": [
+            -3.815662799290202,
+            -0.2522045995834868
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 7.62486079141388,
+          "interval": [
+            5.761024168037503,
+            9.727415684635254
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 7.7866503149896005,
+          "interval": [
+            5.907901221855925,
+            9.726620282391721
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 17.410914410488573,
+          "interval": [
+            14.62173049346056,
+            20.226104495510278
+          ]
+        }
+      }
+    },
+    "other_variance_DN16_squared": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 20371.22332881082,
+        "Prior aligned wire": 16931.689319345067,
+        "Aligned control": 20112.5496270284,
+        "Continuing-wire loss": 23905.90433867889
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 3793.3547116504924,
+          "interval": [
+            2892.532417716508,
+            4752.280953480176
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -258.6737017824198,
+          "interval": [
+            -1049.7947107310863,
+            484.595436759061
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 3180.8603076833315,
+          "interval": [
+            2499.5855065698142,
+            4003.843560386192
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 3534.6810098680726,
+          "interval": [
+            3012.6350226946583,
+            4093.8985523525703
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 6974.215019333824,
+          "interval": [
+            5956.002266856297,
+            8016.355354462515
+          ]
+        }
+      }
+    },
+    "shared_DN16_squared": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 7700.9290051902935,
+        "Prior aligned wire": 7974.381996957094,
+        "Aligned control": 7269.8404526767845,
+        "Continuing-wire loss": 6891.86610596026
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": -377.97434671652445,
+          "interval": [
+            -552.7161366826338,
+            -207.6214809873314
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -431.08855251350906,
+          "interval": [
+            -730.2843436842886,
+            -166.2725205673213
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": -704.5415442803096,
+          "interval": [
+            -974.3591198585405,
+            -460.00612876838386
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": -809.0628992300335,
+          "interval": [
+            -1134.354418397178,
+            -521.0883971357215
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": -1082.515890996834,
+          "interval": [
+            -1405.6069163034745,
+            -766.3515424605417
+          ]
+        }
+      }
+    },
+    "true_amplitude_DN16": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 111.58872757445643,
+        "Prior aligned wire": 111.58872757445643,
+        "Aligned control": 111.58872757445643,
+        "Continuing-wire loss": 111.58872757445643
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 0.0,
+          "interval": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "weak_response_pp": {
+      "cases": 16,
+      "values": {
+        "Repeat parent": 23.320716427176926,
+        "Prior aligned wire": 21.441497517314986,
+        "Aligned control": 25.38070071100471,
+        "Continuing-wire loss": 27.887504379825547
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 2.5068036688208366,
+          "interval": [
+            1.7401329178107998,
+            3.2305666010727947
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 2.0599842838277844,
+          "interval": [
+            0.7139891897140159,
+            3.531710896417383
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 3.9392031936897247,
+          "interval": [
+            2.628405916649571,
+            5.3118109383865555
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 4.566787952648621,
+          "interval": [
+            3.3755885503927088,
+            6.033880875185073
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 6.446006862510561,
+          "interval": [
+            5.244009679583334,
+            7.720216211728045
+          ]
+        }
+      }
+    }
+  },
+  "gap_directions": {
+    "aligned_error_DN16_squared": {
+      "cases": 12,
+      "values": {
+        "Repeat parent": 9263.267502772049,
+        "Prior aligned wire": 13096.076366656298,
+        "Aligned control": 11719.166488026121,
+        "Continuing-wire loss": 5747.069275718674
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": -5972.097212307447,
+          "interval": [
+            -9062.612020495168,
+            -3552.8179118918115
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 2455.8989852540726,
+          "interval": [
+            993.1137917707263,
+            4229.386346186565
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": -1376.9098786301765,
+          "interval": [
+            -2435.773801293989,
+            -386.0782597932386
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": -3516.1982270533745,
+          "interval": [
+            -4918.988320898773,
+            -2404.4430383998965
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": -7349.007090937624,
+          "interval": [
+            -10294.190617427426,
+            -5012.842410472111
+          ]
+        }
+      }
+    },
+    "strong_error_DN16_squared": {
+      "cases": 12,
+      "values": {
+        "Repeat parent": 10727.750342203983,
+        "Prior aligned wire": 14224.746075748548,
+        "Aligned control": 13092.700580280225,
+        "Continuing-wire loss": 7642.4121264847445
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": -5450.288453795481,
+          "interval": [
+            -8481.638498294627,
+            -3221.840392530372
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": 2364.9502380762424,
+          "interval": [
+            918.9050494005261,
+            4126.859900119268
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": -1132.0454954683228,
+          "interval": [
+            -2146.134009872176,
+            -195.22732170154944
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": -3085.338215719238,
+          "interval": [
+            -4419.251325978201,
+            -2092.00099760602
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": -6582.333949263803,
+          "interval": [
+            -9527.933161642255,
+            -4385.405341656962
+          ]
+        }
+      }
+    },
+    "strong_response_pp": {
+      "cases": 12,
+      "values": {
+        "Repeat parent": 52.14906187842585,
+        "Prior aligned wire": 42.90485386197489,
+        "Aligned control": 46.876531178090545,
+        "Continuing-wire loss": 63.74108057419712
+      },
+      "differences": {
+        "Continuing-wire loss vs Aligned control": {
+          "delta": 16.864549396106575,
+          "interval": [
+            12.06254052450267,
+            22.397925971920092
+          ]
+        },
+        "Aligned control vs Repeat parent": {
+          "delta": -5.272530700335302,
+          "interval": [
+            -8.609855243190568,
+            -2.1319200410095838
+          ]
+        },
+        "Aligned control vs Prior aligned wire": {
+          "delta": 3.9716773161156524,
+          "interval": [
+            1.2863503419823505,
+            6.863861311353328
+          ]
+        },
+        "Continuing-wire loss vs Repeat parent": {
+          "delta": 11.592018695771273,
+          "interval": [
+            8.570350470626362,
+            14.861985369546934
+          ]
+        },
+        "Continuing-wire loss vs Prior aligned wire": {
+          "delta": 20.836226712222228,
+          "interval": [
+            15.679086386915808,
+            26.606405425647242
+          ]
+        }
+      }
+    }
+  },
+  "raw_gap_evidence": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-continuing-wire-v1/raw-gap-evidence.json",
+    "sha256": "5831aafac1541e0c5ed795c97dfee2a1aaad4d77837c21f30e95c2d048bee6f8"
+  },
+  "matched_mixtures": {
+    "path": "/home/dllu/proj/demosaic/docs/results/local-continuing-wire-v1/matched-mixtures.json",
+    "sha256": "fc0ada5496374c991433e366168b5cd890945aa092b67c55b7613c87d936a6b2"
+  },
+  "background_strata": {
+    "lower_background_projection": {
+      "rows": [
+        {
+          "source": "4489d76cf4fd920270a3dac720568c9e59b63d84",
+          "background": 0.006445876580268667,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 25.451974600100257,
+              "true_projected_DN16": 126.83808179397312,
+              "continuing_bias_DN16": -92.7857032335442,
+              "continuing_error_DN16": 93.5147286410006,
+              "double_gap_signed_DN16": 1.7695821989724205,
+              "double_gap_strong_DN16": 1.7971042266549722,
+              "double_gap_weak_DN16": 3.410711320212052,
+              "flat_RMS_DN16": 9.315591132796621
+            },
+            "Aligned control": {
+              "strong_response_pp": 37.840243944412336,
+              "true_projected_DN16": 126.83808179397312,
+              "continuing_bias_DN16": -76.44629609783529,
+              "continuing_error_DN16": 77.6370571034934,
+              "double_gap_signed_DN16": 2.3959461308850774,
+              "double_gap_strong_DN16": 2.433898149282358,
+              "double_gap_weak_DN16": 3.574092190186733,
+              "flat_RMS_DN16": 10.000150199966102
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 77.5723998960776,
+              "true_projected_DN16": 126.83808179397312,
+              "continuing_bias_DN16": -22.617832464513572,
+              "continuing_error_DN16": 38.436517765355354,
+              "double_gap_signed_DN16": 5.828905299724714,
+              "double_gap_strong_DN16": 7.167195505069458,
+              "double_gap_weak_DN16": 3.6205577078759053,
+              "flat_RMS_DN16": 12.261226918616394
+            }
+          }
+        },
+        {
+          "source": "48a5713c999b9d74273393e33c343f172b5ad471",
+          "background": 0.06225037101138044,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 91.8121668748317,
+              "true_projected_DN16": 131.01704899750283,
+              "continuing_bias_DN16": -22.814430037934123,
+              "continuing_error_DN16": 28.00573723122965,
+              "double_gap_signed_DN16": -12.086972700498677,
+              "double_gap_strong_DN16": 12.429112122549311,
+              "double_gap_weak_DN16": 24.093191191877075,
+              "flat_RMS_DN16": 13.757941502163478
+            },
+            "Aligned control": {
+              "strong_response_pp": 93.66638839670334,
+              "true_projected_DN16": 131.01704899750283,
+              "continuing_bias_DN16": -21.300842456901986,
+              "continuing_error_DN16": 26.64369034662851,
+              "double_gap_signed_DN16": -13.002731439299277,
+              "double_gap_strong_DN16": 13.375169756265436,
+              "double_gap_weak_DN16": 24.467827874304035,
+              "flat_RMS_DN16": 14.670993873387685
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 96.91579419142911,
+              "true_projected_DN16": 131.01704899750283,
+              "continuing_bias_DN16": -17.070432282800688,
+              "continuing_error_DN16": 24.09306385996834,
+              "double_gap_signed_DN16": -13.029596847401601,
+              "double_gap_strong_DN16": 13.51014011498927,
+              "double_gap_weak_DN16": 27.517448316279772,
+              "flat_RMS_DN16": 16.32924465416963
+            }
+          }
+        },
+        {
+          "source": "f73cc7c649ca1dac6650d7b1df4cc387b9ec5cbc",
+          "background": 0.005384723088957051,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 82.52445796270887,
+              "true_projected_DN16": 106.4516991567142,
+              "continuing_bias_DN16": -50.64248741880664,
+              "continuing_error_DN16": 66.26033637291792,
+              "double_gap_signed_DN16": -32.03947598326434,
+              "double_gap_strong_DN16": 33.46369835439707,
+              "double_gap_weak_DN16": 40.08125935724464,
+              "flat_RMS_DN16": 12.902031008278872
+            },
+            "Aligned control": {
+              "strong_response_pp": 82.91669301758367,
+              "true_projected_DN16": 106.4516991567142,
+              "continuing_bias_DN16": -50.771143741614765,
+              "continuing_error_DN16": 66.42323497805415,
+              "double_gap_signed_DN16": -32.58567318667505,
+              "double_gap_strong_DN16": 34.036231207986575,
+              "double_gap_weak_DN16": 39.98496066856876,
+              "flat_RMS_DN16": 12.940174449464136
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 87.45776736464241,
+              "true_projected_DN16": 106.4516991567142,
+              "continuing_bias_DN16": -45.163334197551244,
+              "continuing_error_DN16": 62.33091376927282,
+              "double_gap_signed_DN16": -31.811914445025096,
+              "double_gap_strong_DN16": 32.93707378969011,
+              "double_gap_weak_DN16": 37.20433005669223,
+              "flat_RMS_DN16": 14.361973760242938
+            }
+          }
+        },
+        {
+          "source": "321e59a1cc58c7866de14539220c348385d6e264",
+          "background": 0.024826110808772676,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 8.278059651700577,
+              "true_projected_DN16": 95.00530840497062,
+              "continuing_bias_DN16": -87.50906802881875,
+              "continuing_error_DN16": 87.5792342976383,
+              "double_gap_signed_DN16": -0.3683557258936526,
+              "double_gap_strong_DN16": 0.3721548003842711,
+              "double_gap_weak_DN16": 5.000991147380383,
+              "flat_RMS_DN16": 6.384958278717119
+            },
+            "Aligned control": {
+              "strong_response_pp": 9.668537890268421,
+              "true_projected_DN16": 95.00530840497062,
+              "continuing_bias_DN16": -85.8944015822133,
+              "continuing_error_DN16": 85.94112375515867,
+              "double_gap_signed_DN16": -0.07471741814361077,
+              "double_gap_strong_DN16": 0.11829735235947673,
+              "double_gap_weak_DN16": 5.07714752848769,
+              "flat_RMS_DN16": 7.003813589155024
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 21.880722516273874,
+              "true_projected_DN16": 95.00530840497062,
+              "continuing_bias_DN16": -73.35174599866616,
+              "continuing_error_DN16": 73.69091269163668,
+              "double_gap_signed_DN16": 0.8657144984826008,
+              "double_gap_strong_DN16": 1.0054104769469494,
+              "double_gap_weak_DN16": 5.2833550388231085,
+              "flat_RMS_DN16": 12.220193784540946
+            }
+          }
+        },
+        {
+          "source": "60e4c4c1c744a84c07ef3a34f8d5404d52df1f98",
+          "background": 0.009394324774506602,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 98.39617452131453,
+              "true_projected_DN16": 143.2700914940384,
+              "continuing_bias_DN16": 7.977512434522923,
+              "continuing_error_DN16": 11.237279917456805,
+              "double_gap_signed_DN16": 10.275314665240268,
+              "double_gap_strong_DN16": 21.12557392937253,
+              "double_gap_weak_DN16": 16.475176400852376,
+              "flat_RMS_DN16": 5.323224680023763
+            },
+            "Aligned control": {
+              "strong_response_pp": 99.91802283821735,
+              "true_projected_DN16": 143.2700914940384,
+              "continuing_bias_DN16": 9.37567623263066,
+              "continuing_error_DN16": 12.339423699776267,
+              "double_gap_signed_DN16": 9.493124987320904,
+              "double_gap_strong_DN16": 21.180780132875775,
+              "double_gap_weak_DN16": 16.720076328493093,
+              "flat_RMS_DN16": 5.431350035442023
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 113.54937276461152,
+              "true_projected_DN16": 143.2700914940384,
+              "continuing_bias_DN16": 30.406758990344546,
+              "continuing_error_DN16": 31.350301082622988,
+              "double_gap_signed_DN16": 10.994560233617355,
+              "double_gap_strong_DN16": 26.889059950289084,
+              "double_gap_weak_DN16": 16.622076480375927,
+              "flat_RMS_DN16": 5.840929455149809
+            }
+          }
+        },
+        {
+          "source": "69d2f38e5c536cfd8c2da09727063bd891e857d4",
+          "background": 0.21384833060931585,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 43.30919984497234,
+              "true_projected_DN16": 103.64455596499099,
+              "continuing_bias_DN16": -37.50258068561153,
+              "continuing_error_DN16": 38.943341902897195,
+              "double_gap_signed_DN16": 21.25434740806722,
+              "double_gap_strong_DN16": 22.351514231380364,
+              "double_gap_weak_DN16": 6.698231318215245,
+              "flat_RMS_DN16": 3.3239902532470875
+            },
+            "Aligned control": {
+              "strong_response_pp": 39.607676054510144,
+              "true_projected_DN16": 103.64455596499099,
+              "continuing_bias_DN16": -41.30603334671103,
+              "continuing_error_DN16": 42.79860419555575,
+              "double_gap_signed_DN16": 21.287322643530874,
+              "double_gap_strong_DN16": 22.364584257140866,
+              "double_gap_weak_DN16": 7.105894825712816,
+              "flat_RMS_DN16": 3.636173817908131
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 42.667883552525794,
+              "true_projected_DN16": 103.64455596499099,
+              "continuing_bias_DN16": -41.67995736161535,
+              "continuing_error_DN16": 43.17672355251381,
+              "double_gap_signed_DN16": 17.741660155700817,
+              "double_gap_strong_DN16": 18.888771556897925,
+              "double_gap_weak_DN16": 8.397113429204458,
+              "flat_RMS_DN16": 4.158658393716552
+            }
+          }
+        },
+        {
+          "source": "678c3dbd9402106708223f3f3b1f2504c90fdb89",
+          "background": 0.047919011134065166,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 76.09254401832261,
+              "true_projected_DN16": 240.60813841972328,
+              "continuing_bias_DN16": -48.96919930734179,
+              "continuing_error_DN16": 49.20737884762869,
+              "double_gap_signed_DN16": 8.554085473686936,
+              "double_gap_strong_DN16": 13.676230808722423,
+              "double_gap_weak_DN16": 15.602247742560316,
+              "flat_RMS_DN16": 16.63666435657047
+            },
+            "Aligned control": {
+              "strong_response_pp": 76.37786556198213,
+              "true_projected_DN16": 240.60813841972328,
+              "continuing_bias_DN16": -47.736562425910186,
+              "continuing_error_DN16": 47.73730333643853,
+              "double_gap_signed_DN16": 9.10021550040903,
+              "double_gap_strong_DN16": 15.170253342859057,
+              "double_gap_weak_DN16": 16.744751993209483,
+              "flat_RMS_DN16": 18.58337169234686
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 83.27194501928103,
+              "true_projected_DN16": 240.60813841972328,
+              "continuing_bias_DN16": -31.77714260502327,
+              "continuing_error_DN16": 31.77722501316987,
+              "double_gap_signed_DN16": 8.471919077912514,
+              "double_gap_strong_DN16": 12.540009473923922,
+              "double_gap_weak_DN16": 15.10108789025069,
+              "flat_RMS_DN16": 20.697838194897024
+            }
+          }
+        },
+        {
+          "source": "d2bc2937225730a0b76eff309a031876ecca75d4",
+          "background": -0.002016104414310074,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 55.55838807922106,
+              "true_projected_DN16": 106.66536017064858,
+              "continuing_bias_DN16": -36.99499340965801,
+              "continuing_error_DN16": 37.76010235537555,
+              "double_gap_signed_DN16": 10.408812011282768,
+              "double_gap_strong_DN16": 13.674831307153012,
+              "double_gap_weak_DN16": 15.922686275519943,
+              "flat_RMS_DN16": 8.841103024207976
+            },
+            "Aligned control": {
+              "strong_response_pp": 50.77870962750109,
+              "true_projected_DN16": 106.66536017064858,
+              "continuing_bias_DN16": -38.462552543227694,
+              "continuing_error_DN16": 38.854619292492075,
+              "double_gap_signed_DN16": 14.039514113239111,
+              "double_gap_strong_DN16": 16.439493057499792,
+              "double_gap_weak_DN16": 15.639422693935773,
+              "flat_RMS_DN16": 9.25009875717783
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 63.45231662121064,
+              "true_projected_DN16": 106.66536017064858,
+              "continuing_bias_DN16": -25.998893400693458,
+              "continuing_error_DN16": 27.364530008346826,
+              "double_gap_signed_DN16": 12.984824709320488,
+              "double_gap_strong_DN16": 17.564304299439097,
+              "double_gap_weak_DN16": 14.473685647429118,
+              "flat_RMS_DN16": 9.993306387521027
+            }
+          }
+        }
+      ],
+      "summary": {
+        "strong_response_pp": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 60.17787069414649,
+            "Aligned control": 61.34676716639731,
+            "Continuing-wire loss": 73.3460252407565
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": 11.99925807435919,
+              "interval": [
+                5.799525157925711,
+                20.738118869408385
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": 1.1688964722508217,
+              "interval": [
+                -1.7929703100502332,
+                4.827758421836389
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": 13.168154546610012,
+              "interval": [
+                5.003019954295453,
+                25.228867349573992
+              ]
+            }
+          }
+        },
+        "continuing_error_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 51.563517445768085,
+            "Aligned control": 49.79688208844967,
+            "Continuing-wire loss": 41.52752346786083
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": -8.26935862058884,
+              "interval": [
+                -19.107288585304083,
+                2.1095348122518103
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": -1.766635357318414,
+              "interval": [
+                -6.144106435939118,
+                1.2091127465813862
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": -10.035993977907253,
+              "interval": [
+                -24.94917383107994,
+                2.7274231337412784
+              ]
+            }
+          }
+        },
+        "double_gap_strong_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 14.861277472576743,
+            "Aligned control": 15.639838407033666,
+            "Continuing-wire loss": 16.312745645905725
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": 0.6729072388720585,
+              "interval": [
+                -1.3354495895541005,
+                2.887131122767217
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": 0.7785609344569231,
+              "interval": [
+                0.22063944184511897,
+                1.448014859519664
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": 1.4514681733289816,
+              "interval": [
+                -0.647581425677055,
+                3.6363283267431186
+              ]
+            }
+          }
+        },
+        "double_gap_weak_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 15.910561844232754,
+            "Aligned control": 16.1642717628623,
+            "Continuing-wire loss": 16.0274568208664
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": -0.1368149419958975,
+              "interval": [
+                -1.271331607254343,
+                1.0735244186426365
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": 0.2537099186295446,
+              "interval": [
+                0.0057189571041007525,
+                0.5418537697379087
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": 0.11689497663364712,
+              "interval": [
+                -1.0811716453606444,
+                1.3871394505093753
+              ]
+            }
+          }
+        },
+        "flat_RMS_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 9.560688029500675,
+            "Aligned control": 10.189515801855974,
+            "Continuing-wire loss": 11.982921443606791
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": 1.7934056417508177,
+              "interval": [
+                0.9510122600533412,
+                2.917676158511651
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": 0.6288277723552991,
+              "interval": [
+                0.29269579540716073,
+                1.0589869992056022
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": 2.422233414106117,
+              "interval": [
+                1.335848368778884,
+                3.6723037732571857
+              ]
+            }
+          }
+        }
+      }
+    },
+    "higher_background_projection": {
+      "rows": [
+        {
+          "source": "d21ffef8c27d93336a8842dd228ad8b9692f5b3e",
+          "background": -2.931583341120364,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 70.04581671434818,
+              "true_projected_DN16": 63.414661593477696,
+              "continuing_bias_DN16": 19.988557104193116,
+              "continuing_error_DN16": 48.25247866654157,
+              "double_gap_signed_DN16": 38.983901067879316,
+              "double_gap_strong_DN16": 40.92013806475611,
+              "double_gap_weak_DN16": 60.690985332412424,
+              "flat_RMS_DN16": 4.818057396878532
+            },
+            "Aligned control": {
+              "strong_response_pp": 72.79131077952634,
+              "true_projected_DN16": 63.414661593477696,
+              "continuing_bias_DN16": 20.902638898676255,
+              "continuing_error_DN16": 49.528122677791444,
+              "double_gap_signed_DN16": 38.156937091860634,
+              "double_gap_strong_DN16": 40.22527619298301,
+              "double_gap_weak_DN16": 61.43206443213923,
+              "flat_RMS_DN16": 5.146254805618018
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 76.37000096342884,
+              "true_projected_DN16": 63.414661593477696,
+              "continuing_bias_DN16": 21.33613303173986,
+              "continuing_error_DN16": 52.21471290843715,
+              "double_gap_signed_DN16": 36.321016955323586,
+              "double_gap_strong_DN16": 38.681442908090666,
+              "double_gap_weak_DN16": 62.66711812745931,
+              "flat_RMS_DN16": 7.182852715662943
+            }
+          }
+        },
+        {
+          "source": "8e1a286ebe1992a76728b5e3a093b2183d6a34eb",
+          "background": -2.8325820274015654,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 58.603190981855,
+              "true_projected_DN16": 105.8154694045436,
+              "continuing_bias_DN16": -50.569877691752396,
+              "continuing_error_DN16": 50.98280396084064,
+              "double_gap_signed_DN16": -6.765649910699774,
+              "double_gap_strong_DN16": 11.986511963532157,
+              "double_gap_weak_DN16": 61.3761543576445,
+              "flat_RMS_DN16": 10.508785084255344
+            },
+            "Aligned control": {
+              "strong_response_pp": 59.38980240532868,
+              "true_projected_DN16": 105.8154694045436,
+              "continuing_bias_DN16": -50.29103809133422,
+              "continuing_error_DN16": 50.736641142442366,
+              "double_gap_signed_DN16": -7.319166880420162,
+              "double_gap_strong_DN16": 12.673221344921467,
+              "double_gap_weak_DN16": 63.652889235398796,
+              "flat_RMS_DN16": 11.093017609494902
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 61.954326124700685,
+              "true_projected_DN16": 105.8154694045436,
+              "continuing_bias_DN16": -46.05162638406291,
+              "continuing_error_DN16": 46.68026984101554,
+              "double_gap_signed_DN16": -5.793417984793121,
+              "double_gap_strong_DN16": 13.376577470826739,
+              "double_gap_weak_DN16": 64.40095950741234,
+              "flat_RMS_DN16": 12.074486381187791
+            }
+          }
+        },
+        {
+          "source": "c182db7e9a46e5a6605ffe9f4be0c22e97a3904a",
+          "background": 0.6751985500272271,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 73.34641896143422,
+              "true_projected_DN16": 196.50277425707637,
+              "continuing_bias_DN16": -63.59702044411769,
+              "continuing_error_DN16": 63.88582937730462,
+              "double_gap_signed_DN16": -11.22199426447796,
+              "double_gap_strong_DN16": 17.21134061807946,
+              "double_gap_weak_DN16": 47.43600072442123,
+              "flat_RMS_DN16": 14.488072893908425
+            },
+            "Aligned control": {
+              "strong_response_pp": 75.653740312611,
+              "true_projected_DN16": 196.50277425707637,
+              "continuing_bias_DN16": -58.45602809386993,
+              "continuing_error_DN16": 58.76280086506757,
+              "double_gap_signed_DN16": -10.61495238031848,
+              "double_gap_strong_DN16": 16.531615971745392,
+              "double_gap_weak_DN16": 46.974085646239274,
+              "flat_RMS_DN16": 15.954139541918229
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 79.78776919293851,
+              "true_projected_DN16": 196.50277425707637,
+              "continuing_bias_DN16": -51.24975026135252,
+              "continuing_error_DN16": 51.66006726070381,
+              "double_gap_signed_DN16": -11.5321559862331,
+              "double_gap_strong_DN16": 16.633336445178696,
+              "double_gap_weak_DN16": 50.06268591172299,
+              "flat_RMS_DN16": 15.518746227999195
+            }
+          }
+        },
+        {
+          "source": "4dbfde3489b44204707a12cfc0d88f63c0e703fd",
+          "background": -8.003607916267548,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 86.58574857318229,
+              "true_projected_DN16": 194.60976859068316,
+              "continuing_bias_DN16": -18.219308038652393,
+              "continuing_error_DN16": 60.150204813129406,
+              "double_gap_signed_DN16": 7.886135621249929,
+              "double_gap_strong_DN16": 17.233615190434715,
+              "double_gap_weak_DN16": 99.34660357254796,
+              "flat_RMS_DN16": 16.180984702008192
+            },
+            "Aligned control": {
+              "strong_response_pp": 84.88248445650738,
+              "true_projected_DN16": 194.60976859068316,
+              "continuing_bias_DN16": -18.49430471319708,
+              "continuing_error_DN16": 55.45497298965927,
+              "double_gap_signed_DN16": 10.925857302654451,
+              "double_gap_strong_DN16": 18.696484194953133,
+              "double_gap_weak_DN16": 101.30703314484964,
+              "flat_RMS_DN16": 16.208080589298707
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 95.41145406702648,
+              "true_projected_DN16": 194.60976859068316,
+              "continuing_bias_DN16": -20.066962190215065,
+              "continuing_error_DN16": 66.13554793439091,
+              "double_gap_signed_DN16": -11.137203568378107,
+              "double_gap_strong_DN16": 18.094724459616916,
+              "double_gap_weak_DN16": 106.48867673027486,
+              "flat_RMS_DN16": 24.748136973413942
+            }
+          }
+        },
+        {
+          "source": "64b8aa3e8eeb50e6d71ee61cc1dde6ea7481bd56",
+          "background": -0.5445473486553848,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 92.56803985517936,
+              "true_projected_DN16": 195.62923394305764,
+              "continuing_bias_DN16": -2.5002622675624586,
+              "continuing_error_DN16": 12.665948929464847,
+              "double_gap_signed_DN16": 12.038824430703515,
+              "double_gap_strong_DN16": 12.472435599115506,
+              "double_gap_weak_DN16": 20.241973944855395,
+              "flat_RMS_DN16": 5.287475452845952
+            },
+            "Aligned control": {
+              "strong_response_pp": 94.53285459525763,
+              "true_projected_DN16": 195.62923394305764,
+              "continuing_bias_DN16": -0.4305402675520653,
+              "continuing_error_DN16": 11.74760168100464,
+              "double_gap_signed_DN16": 10.264794406298538,
+              "double_gap_strong_DN16": 11.086484407234005,
+              "double_gap_weak_DN16": 18.403325572829917,
+              "flat_RMS_DN16": 6.027984199954822
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 95.5282214660536,
+              "true_projected_DN16": 195.62923394305764,
+              "continuing_bias_DN16": 0.303266670841355,
+              "continuing_error_DN16": 10.589077355727268,
+              "double_gap_signed_DN16": 9.051372760430985,
+              "double_gap_strong_DN16": 9.916279515673253,
+              "double_gap_weak_DN16": 17.221565063288633,
+              "flat_RMS_DN16": 7.128368608953582
+            }
+          }
+        },
+        {
+          "source": "67debfa12e9172f807080465cf3ddd9b02e6a9d0",
+          "background": 1.5318919517732905,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 64.68938532481036,
+              "true_projected_DN16": 229.85263371700856,
+              "continuing_bias_DN16": -81.61623678558567,
+              "continuing_error_DN16": 82.61196073026726,
+              "double_gap_signed_DN16": -0.45385897299781836,
+              "double_gap_strong_DN16": 10.303648815841479,
+              "double_gap_weak_DN16": 41.25299216937258,
+              "flat_RMS_DN16": 17.332315795668276
+            },
+            "Aligned control": {
+              "strong_response_pp": 64.51248180331784,
+              "true_projected_DN16": 229.85263371700856,
+              "continuing_bias_DN16": -81.87665236093677,
+              "continuing_error_DN16": 82.84173050237791,
+              "double_gap_signed_DN16": -0.3076571450601563,
+              "double_gap_strong_DN16": 10.093686159226776,
+              "double_gap_weak_DN16": 40.07802624426518,
+              "flat_RMS_DN16": 17.412576996802166
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 67.35632257506636,
+              "true_projected_DN16": 229.85263371700856,
+              "continuing_bias_DN16": -72.41745620187778,
+              "continuing_error_DN16": 73.27408954165848,
+              "double_gap_signed_DN16": 2.6148961014167433,
+              "double_gap_strong_DN16": 9.63681300413999,
+              "double_gap_weak_DN16": 43.79560033736994,
+              "flat_RMS_DN16": 20.073923585586826
+            }
+          }
+        },
+        {
+          "source": "e4e67db1e72fbb22f6ee1f5ca309c80a24ac8e56",
+          "background": 2.737531517658783,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 61.42813233359347,
+              "true_projected_DN16": 170.85019901679328,
+              "continuing_bias_DN16": -43.130105845559825,
+              "continuing_error_DN16": 43.66109595540111,
+              "double_gap_signed_DN16": 22.770006826989945,
+              "double_gap_strong_DN16": 29.231109328508897,
+              "double_gap_weak_DN16": 51.52349980444659,
+              "flat_RMS_DN16": 16.06445222061892
+            },
+            "Aligned control": {
+              "strong_response_pp": 62.2099360533688,
+              "true_projected_DN16": 170.85019901679328,
+              "continuing_bias_DN16": -42.1039630196451,
+              "continuing_error_DN16": 42.75662234129575,
+              "double_gap_signed_DN16": 22.460436441747724,
+              "double_gap_strong_DN16": 28.827167375386285,
+              "double_gap_weak_DN16": 52.9890512486027,
+              "flat_RMS_DN16": 17.4712073982188
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 68.3498088499903,
+              "true_projected_DN16": 170.85019901679328,
+              "continuing_bias_DN16": -33.43113770402354,
+              "continuing_error_DN16": 34.30086401788586,
+              "double_gap_signed_DN16": 20.643276864963504,
+              "double_gap_strong_DN16": 26.88118023503436,
+              "double_gap_weak_DN16": 48.56143659511906,
+              "flat_RMS_DN16": 20.63168312270398
+            }
+          }
+        },
+        {
+          "source": "c792ed88dbc11b0638143254bb08f65f361d5917",
+          "background": 1.8475358274477405,
+          "scores": {
+            "Repeat parent": {
+              "strong_response_pp": 69.87449064451458,
+              "true_projected_DN16": 171.05152370007576,
+              "continuing_bias_DN16": -60.73895988736494,
+              "continuing_error_DN16": 64.16745312809776,
+              "double_gap_signed_DN16": -9.20881711239829,
+              "double_gap_strong_DN16": 10.040956675183068,
+              "double_gap_weak_DN16": 41.878199152282825,
+              "flat_RMS_DN16": 7.578404682797612
+            },
+            "Aligned control": {
+              "strong_response_pp": 70.45028472007786,
+              "true_projected_DN16": 171.05152370007576,
+              "continuing_bias_DN16": -60.821053350676685,
+              "continuing_error_DN16": 64.64167057622012,
+              "double_gap_signed_DN16": -10.275815115335828,
+              "double_gap_strong_DN16": 11.173182940884304,
+              "double_gap_weak_DN16": 39.507892873432034,
+              "flat_RMS_DN16": 8.287240015442485
+            },
+            "Continuing-wire loss": {
+              "strong_response_pp": 72.32815341684481,
+              "true_projected_DN16": 171.05152370007576,
+              "continuing_bias_DN16": -58.067341961485006,
+              "continuing_error_DN16": 62.314511251408206,
+              "double_gap_signed_DN16": -10.734226745050737,
+              "double_gap_strong_DN16": 12.221090989558322,
+              "double_gap_weak_DN16": 38.5325425916081,
+              "flat_RMS_DN16": 14.215975405570717
+            }
+          }
+        }
+      ],
+      "summary": {
+        "strong_response_pp": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 72.14265292361468,
+            "Aligned control": 73.05286189074945,
+            "Continuing-wire loss": 77.1357570820062
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": 4.082895191256739,
+              "interval": [
+                2.389226255839018,
+                6.2245277518579964
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": 0.9102089671347784,
+              "interval": [
+                -0.049023110478543686,
+                1.7911823800659739
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": 4.9931041583915174,
+              "interval": [
+                3.4480583655849477,
+                6.618396511713215
+              ]
+            }
+          }
+        },
+        "continuing_error_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 53.2972219451309,
+            "Aligned control": 52.058770346982385,
+            "Continuing-wire loss": 49.6461425139034
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": -2.412627833078986,
+              "interval": [
+                -6.3063056303002405,
+                2.2757530392528422
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": -1.2384515981485151,
+              "interval": [
+                -2.907797575990237,
+                0.13458181680906367
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": -3.651079431227501,
+              "interval": [
+                -7.770708701809085,
+                0.5687663465268965
+              ]
+            }
+          }
+        },
+        "double_gap_strong_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 18.674969531931424,
+            "Aligned control": 18.663389823416797,
+            "Continuing-wire loss": 18.18018062851487
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": -0.48320919490192793,
+              "interval": [
+                -1.1562113221360333,
+                0.21914418245303852
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": -0.01157970851462764,
+              "interval": [
+                -0.6330670083095034,
+                0.6257298081610455
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": -0.49478890341655557,
+              "interval": [
+                -1.6607910194349873,
+                0.6951096097632199
+              ]
+            }
+          }
+        },
+        "double_gap_weak_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 52.968301132247944,
+            "Aligned control": 53.0430460497196,
+            "Continuing-wire loss": 53.9663231080319
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": 0.9232770583123013,
+              "interval": [
+                -1.1268573129190973,
+                2.866903760730053
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": 0.07474491747165501,
+              "interval": [
+                -1.069534476365277,
+                1.2150010692811395
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": 0.9980219757839563,
+              "interval": [
+                -1.4027250733733259,
+                3.515559548485357
+              ]
+            }
+          }
+        },
+        "flat_RMS_DN16": {
+          "cases": 8,
+          "values": {
+            "Repeat parent": 11.532318528622657,
+            "Aligned control": 12.200062644593515,
+            "Continuing-wire loss": 15.19677162763487
+          },
+          "differences": {
+            "Continuing-wire loss vs Aligned control": {
+              "delta": 2.996708983041355,
+              "interval": [
+                1.2578527796784091,
+                4.931572504554426
+              ]
+            },
+            "Aligned control vs Repeat parent": {
+              "delta": 0.6677441159708586,
+              "interval": [
+                0.3261852135439777,
+                1.0255478020514435
+              ]
+            },
+            "Continuing-wire loss vs Repeat parent": {
+              "delta": 3.6644530990122135,
+              "interval": [
+                2.0573207656800596,
+                5.419373013061805
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "standing": {
+    "main-overcast-sky-main-overcast-sky": {
+      "wire-aligned": 3.0836915448224254,
+      "strong-gap": 4.483054843437247
+    },
+    "main-building-detail-main-building-detail": {
+      "wire-aligned": 9.00449844426064,
+      "strong-gap": 11.075052887170338
+    },
+    "main-foliage-main-foliage": {
+      "wire-aligned": 7.421250030489723,
+      "strong-gap": 8.130776808461771
+    },
+    "main-chain-link-fence-main-chain-link-fence": {
+      "wire-aligned": 11.15754608390824,
+      "strong-gap": 14.937656127231618
+    },
+    "mesh-nominal-fine-green-mesh-left": {
+      "wire-aligned": 3.177802852955899,
+      "strong-gap": 3.973201075404391
+    },
+    "mesh-nominal-fine-green-mesh-right": {
+      "wire-aligned": 4.630811306599217,
+      "strong-gap": 5.595601387536626
+    },
+    "mesh-profile3879-fine-green-mesh-left": {
+      "wire-aligned": 4.441747639479694,
+      "strong-gap": 7.123726365684642
+    },
+    "mesh-profile3879-fine-green-mesh-right": {
+      "wire-aligned": 5.752188465507574,
+      "strong-gap": 8.91145420970049
+    }
+  }
+}

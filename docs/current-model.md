@@ -357,6 +357,12 @@ over the control. Against the starting checkpoint, the aligned arm has
 0.04456 dB known CFA and loses 0.00865 dB unseen. Error in the continuing
 strong wire accounts for most of the total gap regression. Fine real cab
 crossings remain incomplete.
+[Continuing-wire supervision](local-continuing-wire.md) restores 16.86
+points of strong response inside exact weak gaps and raises weak response
+3.16 points over its aligned control. The separate double-gap test gains
+8.04 points of true continuation with little change in false strong-line
+RMS. Exact-flat and intact-wire error rise. The standing cab scenes show
+stronger traces with incomplete crossings.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

@@ -12,6 +12,9 @@ fine cab crossings remain incomplete.
 [Native provenance](images/local-wire-response-v1/manifest.json) ·
 [Previous repeat-loss experiment](local-redraw-stability.md).
 
+[Continuing-wire supervision](local-continuing-wire.md) addresses the
+strong-band attenuation measured below and tests actual double gaps.
+
 ## Method
 
 The three arms start from the repeat-loss EMA

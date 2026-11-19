@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Continuing-wire supervision](local-continuing-wire.md#standing-gfx100s-comparisons) | Both ROIs, noise profiles and JPEGs were viewed. Existing diagonals gain contrast under the transferred profile. Fine crossings remain incomplete, with a mostly unresolved nominal left view |
 | [Signed wire supervision](local-wire-response.md#standing-gfx100s-comparisons) | Both ROIs, noise profiles and JPEGs were viewed. Right diagonals remain clearest with transferred conditioning. The full-band arm softens some traces. The aligned arm leaves the fine crossings incomplete |
 | [Repeat and gap losses](local-redraw-stability.md#standing-gfx100s-comparisons) | Both ROIs, noise profiles, camera JPEGs and AHD were reviewed. The transferred right diagonals stay clearest. The nominal left crop is mostly smooth, and fine crossings remain incomplete across all arms |
 | [Mean and individual redraw losses](local-redraw-average.md#standing-gfx100s-comparisons) | Both noise profiles, both ROIs and both camera JPEGs were reviewed. The transferred profile shows clearer right diagonals, with many fine crossings still missing |
