@@ -21,3 +21,9 @@ incomplete. [Main map](../docs/gfx-qualitative.md) ·
 The fixed replay started after the held-out and native reviews.
 [Panel status](../docs/local-continuing-wire.md#fixed-camera-panels) ·
 [PSNR history](../docs/performance-history.md).
+
+Both camera panels finished. The new arm loses 0.02246 dB known and
+0.12905 dB unseen relative to the aligned control. The two scores are
+in the chart for each endpoint. The fixed 427-photo replay is active
+and both scores remain pending. [Camera comparisons](../docs/local-continuing-wire.md#fixed-camera-panels) ·
+[Updated PSNR history](../docs/performance-history.md).

@@ -361,7 +361,8 @@ crossings remain incomplete.
 points of strong response inside exact weak gaps and raises weak response
 3.16 points over its aligned control. The separate double-gap test gains
 8.04 points of true continuation with little change in false strong-line
-RMS. Exact-flat and intact-wire error rise. The standing cab scenes show
+RMS. Exact-flat and intact-wire error rise. Unseen measured-CFA PSNR falls
+0.12905 dB against the aligned control. The standing cab scenes show
 stronger traces with incomplete crossings.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400

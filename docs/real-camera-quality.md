@@ -33,6 +33,9 @@ The aligned wire continuation adds 0.04456 dB known and loses
 scores 0.02881 dB above V120 unseen across five scenes, with less weak-wire
 response on the exact fields.
 [Signed wire camera review](local-wire-response.md#fixed-camera-panels).
+Continuing-wire training loses 0.12905 dB unseen and 0.02246 dB known
+against its matched control, even as exact gap reconstruction improves.
+[Continuing-wire camera review](local-continuing-wire.md#fixed-camera-panels).
 
 The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) still covers
 V104/V114/V115 and RawNIND, with no clean reference. Newer qualitative reviews

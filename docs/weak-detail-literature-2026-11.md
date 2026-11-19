@@ -1027,7 +1027,9 @@ gains 8.04 points on true continuation with little change in false strong
 response, while flat error increases. In a Bayer diagnostic with the wire
 shape supplied, exact subtraction of the reference background separates all
 draws. Local affine subtraction leaves eight false continuations, all on
-four backgrounds with coherent projected texture. [Continuing-wire supervision](local-continuing-wire.md).
+four backgrounds with coherent projected texture. With the gap and clean
+waveform supplied, replacing only the recovered strong component lowers
+gap error more than the full trained update. [Continuing-wire supervision](local-continuing-wire.md).
 
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 

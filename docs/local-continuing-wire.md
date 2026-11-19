@@ -72,6 +72,15 @@ continuation on four source backgrounds and misses on four others at the
 same threshold. Each of the observed false draws comes from those four
 false-positive backgrounds. Both fits use exact waveform and gap geometry,
 with the same noise weights computed at the simulated signal midpoint. [Per-draw Bayer evidence](results/local-continuing-wire-v1/raw-gap-evidence.json).
+
+A separate fit estimates the background from a disjoint Bayer annulus,
+while fitting the known strong and weak carriers there. The affine
+exterior fit keeps 27/32 continuing draws and produces 11/32 false calls.
+The quadratic exterior fit and the model order selected on held-out
+exterior samples both keep 23/32 continuing draws with 8/32 false calls.
+This larger context gives the polynomial fits more data and leaves the
+background ambiguity in the interior. [Exterior results](results/local-continuing-wire-v1/exterior-background.json) ·
+[Diagnostic sources](results/local-continuing-wire-v1/additional-diagnostics.json).
 ## Fixed exact ISO6400 observations
 
 Twenty-four natural and 24 wire fields use the unchanged evaluation inputs.
@@ -102,6 +111,14 @@ weak-wire response points and 11.592 strong-band points in gaps. Total
 gap RMS falls 5.926 DN16, with higher wire flat RMS and intact-wire RMS.
 V120 retains more weak-wire response and cleaner wire flats. The new
 endpoint has lower total gap and weak-direction gap RMS on these fields.
+
+A component diagnostic replaces the aligned control's projection along
+the exact continuing strong wire with the new model's projection. All
+other error components keep their control values. Under that substitution,
+mean gap RMS is 150.93 DN16, down 19.33 DN16 [−30.33, −11.25] from the
+control. The full model delivers a 10.61 DN16 reduction. This calculation
+uses the known gap and clean waveform to isolate the recovered component.
+[Component calculation](results/local-continuing-wire-v1/continuing-component-bound.json).
 
 ### Calibrated output mixtures
 
@@ -220,8 +237,30 @@ from different aperture, exposure or scene timing.
 
 ## Fixed camera panels
 
-The canonical replay is qualifying both saved EMA checkpoints on the
-fixed measured-CFA and photo inputs. The parent camera results are in
-the preceding study. V120 and Corpus 100k still have the last completed
-full427 results among the main references used here. [Parent camera results](local-wire-response.md#fixed-camera-panels) ·
+Both measured-CFA panels are complete. The 72 known and 90 unseen crops
+use the exact canonical Bayer arrays, scoring borders and CUDA IEEE FP32
+policy. The V120 and repeat-parent references reuse their matching case
+receipts. A separate eight-case qualification replays V120 against the
+frozen CPU witness within 0.000008 dB in every case.
+
+| EMA | Known CFA PSNR | Unseen CFA PSNR |
+| --- | ---: | ---: |
+| V120 | 54.31272 dB | 54.00872 dB |
+| Corpus 100k | 54.33708 dB | 53.97826 dB |
+| Repeat parent | 54.19868 dB | 54.01346 dB |
+| Prior aligned wire | 54.24324 dB | 54.00481 dB |
+| Aligned control | 54.24247 dB | 54.03699 dB |
+| Continuing-wire loss | 54.22001 dB | 53.90793 dB |
+
+The continuing-wire loss loses **0.02246 dB known and 0.12905 dB unseen**
+against the aligned control. It gains 0.02133 dB known over its actual
+parent and loses 0.10552 dB unseen. On this fixed camera panel it trails
+V120 by 0.09271 dB known and 0.10079 dB unseen. The aligned control leads
+V120 by 0.02826 dB unseen across five scenes. The stronger exact gap
+response comes with a camera generalisation cost.
+
+The fixed 427-photo replay is running on both saved EMAs. Those two
+scores remain pending. V120 and Corpus 100k have completed fixed photo
+results. [Camera summary](results/local-continuing-wire-camera-v1/publication.json) ·
+[Per-case archive](results/local-continuing-wire-camera-v1/evidence.tar.xz) ·
 [Comparable PSNR history](performance-history.md).
