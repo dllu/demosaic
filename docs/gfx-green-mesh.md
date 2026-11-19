@@ -9,6 +9,7 @@ preserves its original comparison pixels and provenance.
 | Review | Relevant outcome |
 | --- | --- |
 | [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons) | All FP16 transport variants reproduce the same native pixel values in both ROIs and profiles. The transferred right diagonals are clearest and fine intersections are incomplete. Both JPEGs and ISO100 AHD were viewed |
+| [Closer disjoint Bayer donors](bayer-near-donors.md#standing-gfx100s-comparisons) | Nearby RAW strengthens support for the inherited frequencies. Adjustments fail the crop check. Both ROIs and priors keep incomplete intersections, viewed with ISO100 AHD and both JPEGs |
 | [Cross-green carrier agreement](bayer-cross-evidence.md#standing-gfx100s-comparisons) | Both ROIs and priors abstain before the new crop check. Viewed the bound prior output with both JPEGs and ISO100 AHD. Fine intersections remain incomplete |
 | [Corpus 100k FP16 tile settings](corpus100k-fp16-throughput.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed with both JPEGs and ISO100 AHD. Larger tiles change background modulation slightly. Fine crossings stay incomplete |
 | [Corpus 100k TensorRT inference](corpus100k-faster-inference.md#standing-gfx100s-comparisons) | TensorRT FP16 and selective FP8 keep the same visible diagonals and incomplete fine crossings as eager FP16 across both ROIs and noise profiles |

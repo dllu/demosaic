@@ -13,6 +13,8 @@ residual check is small, and both standing GFX families keep the prior fit.
 [Machine results](results/bayer-cross-evidence-v1/publication.json) ·
 [Frozen drivers and receipts](results/bayer-cross-evidence-v1/evidence.tar.xz) ·
 [Native crop provenance](images/bayer-cross-evidence-v1/manifest.json).
+The [near-donor follow-up](bayer-near-donors.md) tests why the existing
+far proposals miss accepted details.
 
 ## Crop evidence and delivered corrections
 

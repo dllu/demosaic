@@ -346,8 +346,9 @@ photos and 300,000 queries per arm. The retained training loops total
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
 
-Local-only verifies 37,500 updates, 75,000 distinct photos and
-300,000 native queries on the 50k schedule.
+Local-only verifies 39,000 updates, 78,000 distinct photos and
+312,000 native queries on the 50k schedule. The retained loop took
+18,864.01 s.
 [25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
 [26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
 [26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json) ·
@@ -367,7 +368,10 @@ Local-only verifies 37,500 updates, 75,000 distinct photos and
 [35,000 local audit](results/scene-full-epoch-v1/local-035000-prefix.json) ·
 [36,000 local audit](results/scene-full-epoch-v1/local-036000-prefix.json) ·
 [37,000 local audit](results/scene-full-epoch-v1/local-037000-prefix.json) ·
-[37,500 local audit](results/scene-full-epoch-v1/local-037500-prefix.json).
+[37,500 local audit](results/scene-full-epoch-v1/local-037500-prefix.json) ·
+[38,000 local audit](results/scene-full-epoch-v1/local-038000-prefix.json) ·
+[38,500 local audit](results/scene-full-epoch-v1/local-038500-prefix.json) ·
+[39,000 local audit](results/scene-full-epoch-v1/local-039000-prefix.json).
 
 The verified matched 30k pair completes the 64-photo numerical evaluation,
 native exact-crop viewing and both standing GFX reviews. Its scoring driver

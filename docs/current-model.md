@@ -222,6 +222,10 @@ additional eligible bent captures versus the calibrated residual gate on
 24 held-out backgrounds. Applying only the less-supported direction
 gains 0.10 response points and lowers fine-increment RMS 0.09 DN16,
 with higher absolute gap RMS and no new standing fine crossings.
+[Closer disjoint donors](bayer-near-donors.md) gain 3.62 response points
+on the eight-photo bent subset and raise coherent gap response by
+0.95 DN16. The gain disappears on the later 24-photo panel.
+A small coarse-fence refit passes while fine-cab changes fail the crop check.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

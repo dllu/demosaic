@@ -53,6 +53,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [exterior Bayer bend estimation](bayer-exterior-bend.md) ·
 [bend-aligned donor spectra](bayer-warped-spacing.md) ·
 [cross-green carrier agreement](bayer-cross-evidence.md) ·
+[closer disjoint Bayer donors](bayer-near-donors.md) ·
 [local amplitude checks and crop API replay](bayer-amplitude-envelope.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·

@@ -560,6 +560,14 @@ The weak-only correction gains 0.10 response points with 0.09 DN16 lower
 increment RMS, at higher absolute gap RMS. Sparse exterior proposals
 and incomplete standing fine crossings remain the main limits.
 
+[Closer disjoint Bayer donors](bayer-near-donors.md) find two previously
+missed bent draws. The eight-photo replay gains 3.62 response points and
+lowers increment RMS 1.80 DN16, with 0.95 DN16 more coherent projection
+in exact gaps. The 24-photo replay delivers no new near fallback.
+Nearby RAW supports the inherited right-cab frequencies, while the
+reserved crop rejects new fine geometry. The checked refit gives a
+small change to the coarse fence.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points
