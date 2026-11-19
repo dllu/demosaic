@@ -45,6 +45,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [repeat training at fixed correction strength](paired-shape-stability.md) ·
 [parent feedback in the paired correction](paired-feedback-paths.md) ·
 [quiet-region smoothing with a separate detail lift](paired-flat-companion.md) ·
+[weak edges and independent-exposure supervision](weak-edge-distill.md) ·
 [shared-readout noise and CFA validation](withheld-row-noise.md) ·
 [distant RAW row references](distant-row-reference.md) ·
 [measured RAW donors for natural weak detail](natural-raw-donor-evidence.md) ·
