@@ -334,6 +334,13 @@ backgrounds and both standing GFX scenes. The local-only arm improves
 natural fine-flat and increment error against Corpus 100k, with
 mixed intact-wire changes. The paired fixed photo and camera panels
 remain queued at 50k. [Matched 47.5k scope and native review](green-covariance-refit.md).
+
+Local-only training completed 50,000 updates, 100,000 observations
+and 400,000 native queries. The second pass contains 9,308 distinct
+photos. A scoped numerical and native review is complete at the 50k
+EMA. The spatial arm continues and the paired fixed photo and camera
+reviews remain queued. [Local 50k recipe and scope](local-50000-scoped.md) ·
+[Verified completion](results/scene-full-epoch-v1/local-050000-training.json).
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·

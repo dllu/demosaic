@@ -3,6 +3,12 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Local-only 50k EMA](local-50000-scoped.md#standing-gfx100s-comparisons)
+  changes the four main crops by 0.050–0.182 DN16 RGB RMS versus
+  47.5k. Sky stays smooth and coarse crossings remain coherent.
+- [Registered Corpus/local band blend](local-band-mixture.md#standing-gfx100s-comparisons)
+  changes the four main crops by 0.792–2.568 DN16 RGB RMS versus
+  local 47.5k. The sky is smooth and fine building wires stay soft.
 - [Local and spatial 47.5k with frozen blends](green-covariance-refit.md#standing-gfx100s-comparisons)
   keep a smooth sky and coherent coarse crossings. Updating the blend's
   spatial checkpoint changes the four crops by 0.310–1.103 DN16 RGB RMS.

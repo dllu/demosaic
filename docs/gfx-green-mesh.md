@@ -8,6 +8,8 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Local-only 50k EMA](local-50000-scoped.md#standing-gfx100s-comparisons) | All four crops change by 0.054–0.066 DN16 RGB RMS versus 47.5k. Both ROIs, priors, JPEGs and AHD reviewed. Fine crossings stay incomplete |
+| [Registered Corpus/local band blend](local-band-mixture.md#standing-gfx100s-comparisons) | The four crops change by 2.301–2.726 DN16 RGB RMS versus local 47.5k. Both ROIs, priors, JPEGs and AHD reviewed. Transferred right diagonals remain clearest with incomplete crossings |
 | [Local and spatial 47.5k with frozen blends](green-covariance-refit.md#standing-gfx100s-comparisons) | Both ROIs, both priors, both JPEGs and AHD reviewed. The newer blend changes the four crops by 0.243–0.991 DN16 RGB RMS. Transferred right diagonals are clearest and fine crossings remain incomplete |
 | [Bayer-gated regional damping](scene-mixture-wire-gaps.md#standing-gfx100s-comparisons) | All four crops change by at most 0.811 DN16 RGB RMS versus the band-limited mixture. The transferred right diagonals stay clearest with incomplete crossings. Both JPEGs and AHD were viewed |
 | [Corpus 100k with compiled DINO](corpus100k-trt-dino.md#standing-gfx100s-comparisons) | Both ROIs, both priors, both JPEGs and the AHD reference were viewed. The four crops differ from IEEE FP32 by 0.091–0.109 DN16 RGB RMS. Fine crossings remain incomplete |

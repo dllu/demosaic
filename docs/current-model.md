@@ -296,6 +296,14 @@ weaker natural response than its local match. A phase-aligned green
 recovery fit selects zero positive correction at the retained error
 budgets. Both standing GFX comparisons are complete. The 50k broad
 photo and camera panels are queued.
+[The local-band blend](local-band-mixture.md) lowers intact-wire
+error by 0.571 DN16 versus local 47.5k using a low-frequency
+correction. Wire-flat luma rises 0.457 DN16 and fine-band response
+is almost the same. [Local-only 50k](local-50000-scoped.md) has
+finished training. On the same 24 natural photos it keeps the
+1.11 DN16 fine-increment gain over Corpus 100k and the 0.33 DN16
+upper-band flat cost. Both GFX reviews are complete at that EMA.
+The spatial arm and paired broad evaluations are pending.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

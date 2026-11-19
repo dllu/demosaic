@@ -15,6 +15,11 @@ updates, with 362,768 native queries per arm. [First-epoch audit](results/scene-
 The paired continuation reaches 47,500 updates and 380,000 native
 queries per arm, including 4,308 photos in the new permutation.
 [Matched second-pass audit](results/scene-full-epoch-v1/paired-prefix-047500.json).
+Local-only training subsequently completes 50,000 updates and
+400,000 native queries. The second pass contains 9,308 ordered
+photos. Its scoped 50k EMA review retains the natural fine-error
+gain observed at 47.5k. The spatial 50k arm and paired broad reviews
+are pending. [Local 50k scope](local-50000-scoped.md).
 The matched 40k photo and both standing
 reviews are complete. Spatial 40k slightly lowers independent ISO6400
 flat-region error and fine response versus 35k. Both arms still recover

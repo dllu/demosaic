@@ -66,6 +66,8 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [full and dense regional scene context](scene-regional-context.md) ·
 [Bayer-gated regional damping and true wire gaps](scene-mixture-wire-gaps.md) ·
 [Phase-aligned green recovery and matched 47.5k checkpoints](green-covariance-refit.md) ·
+[Corpus/local frequency mixture](local-band-mixture.md) ·
+[Local-only 50k completion and scoped review](local-50000-scoped.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [paired fine luminance and flat support](paired-luminance-detail.md) ·
 [exact orientation averaging](paired-head-symmetry.md) ·

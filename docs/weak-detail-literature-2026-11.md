@@ -760,6 +760,15 @@ local-only 47.5k EMA lowers fine increment and flat error versus
 Corpus 100k. The matching spatial checkpoint loses weak-wire response
 relative to reversed exterior on the 24 fresh wire backgrounds.
 
+The [Corpus/local frequency blend](local-band-mixture.md) chooses a
+low-frequency correction with zero weight in its fine branch. On 24
+additional wire backgrounds it lowers intact error by 0.571 DN16
+and raises exact-flat luma 0.457 DN16 versus local 47.5k. A fixed-gain
+reversal test finds little alignment benefit. The [completed local
+50k replay](local-50000-scoped.md) retains the prior checkpoint's
+natural improvements. Upper-band flat noise and incomplete cab
+crossings persist.
+
 ## What the existing work establishes
 
 | Evidence | Progress | What remains unresolved |
