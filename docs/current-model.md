@@ -137,6 +137,11 @@ when the footprint must be found automatically.
 on supported photographic fixtures at fixed luminance. The gain comes
 with small leakage inside true gaps. Neutral replay and both GFX families
 reproduce the preceding fit.
+[Exterior-frequency wire colour](query-exterior-colour.md) recovers some
+weak-wire colour where a green-only fit abstains. Reserved Bayer samples
+confirm colour on five fresh high-noise fixtures. Small colour enters true
+gaps and three lower-noise flat cores. All eight GFX crops reproduce the
+previous result.
 [Per-direction wire shape](query-shape-routing.md) uses automatically
 measured frequencies. It suppresses a spurious weak-wire harmonic
 when the stronger wire alone supports a narrow shape. True narrow wires

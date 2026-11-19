@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Exterior-frequency wire colour](query-exterior-colour.md#standing-gfx100s-comparisons)
+  reproduces the prior four main comparisons, including the smooth sky and
+  coherent coarse fence crossings.
 - [Reserved Bayer wire colour](query-signed-colour.md#standing-gfx100s-comparisons)
   preserves the preceding sky, coarse fence, building and foliage pixels.
 - [Dense regional scene context](scene-regional-context.md#standing-gfx100s-comparisons)

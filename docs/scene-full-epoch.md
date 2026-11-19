@@ -240,6 +240,15 @@ schedule are the same. The last completed quality review is at 12k.
 [Paired 13,500 and recovery audit](results/scene-full-epoch-v1/paired-prefix-013500.json) ·
 [Original attempt and restart receipts](results/scene-full-epoch-v1/paired-prefix-013500.tar.xz).
 
+The pair subsequently reaches **14,500 updates** on identical traces.
+Each arm covers 29,000 distinct photos and noise seeds, with 116,000
+native queries. The retained training loops total 6,682.10 s local and
+9,138.21 s spatial. The local and spatial checkpoints contain raw and EMA
+weights. The queued intermediate quality comparison uses EMA.
+[Paired 14k source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-014000.json) ·
+[Paired 14,500 audit](results/scene-full-epoch-v1/paired-prefix-014500.json) ·
+[Segment receipts](results/scene-full-epoch-v1/paired-prefix-014500.tar.xz).
+
 The local-only arm has verified **15,000 updates**, covering 30,000
 distinct photos, 30,000 noise seeds and 120,000 native queries. Its
 retained training loops total 6,911.95 s. The local checkpoint SHA256 is
