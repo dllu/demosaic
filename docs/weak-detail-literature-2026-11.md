@@ -490,6 +490,14 @@ response gain survives at similar flat change, with small RMS costs.
 The ablation attributes nearly all the measured recovery to the
 amplitude change along the original coefficient phase.
 
+[Disjoint exterior Bayer phase](bayer-phase-quadrature.md) tests a new
+perpendicular correction. An exact-target probe shows substantial residual
+phase error. Cardinal and diagonal RAW neighborhoods estimate enough of this
+error to lower planted ISO6400 intact RMS by 2.58 DN16 and gap RMS by 1.88.
+The same rule adds 0.894 DN16 of exact-flat RMS on natural photos and leaves
+the fine cab crossings incomplete. Local green phase by itself calibrates
+to zero. The useful evidence is strongest for coherent repeated structures.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

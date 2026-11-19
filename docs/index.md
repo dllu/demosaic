@@ -44,6 +44,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [competing-wave validation and donor nomination](competing-wave-validation.md) ·
 [wider Bayer neighborhoods](wide-bayer-neighborhood.md) ·
 [adaptive Bayer blending](bayer-phase-shrinkage.md) ·
+[disjoint exterior Bayer phase](bayer-phase-quadrature.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
 [full and dense regional scene context](scene-regional-context.md) ·

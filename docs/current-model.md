@@ -175,6 +175,10 @@ remain incomplete.
 constant mixture on planted wires after matching gap correction. Fine
 natural response rises slightly. The separate adaptive correction
 takes about twice the CPU time of eight donors on a fixed 256-pixel query.
+[Disjoint exterior Bayer phase](bayer-phase-quadrature.md) reduces ISO6400
+planted-wire and true-gap errors. Transferring the same calibration to
+natural photos weakens response and raises flat RMS. The fine cab junctions
+remain incomplete.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

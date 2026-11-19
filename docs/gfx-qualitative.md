@@ -6,6 +6,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k TensorRT inference](corpus100k-faster-inference.md#standing-gfx100s-comparisons)
   preserves the visually smooth sky and coarse chain-link crossings in
   the FP16 engine. Fine foliage and building wires stay soft.
+- [Disjoint exterior Bayer phase](bayer-phase-quadrature.md#standing-gfx100s-comparisons)
+  keeps a smooth sky and both coarse fence directions. Thin building cables
+  and leaf details remain soft.
 - [Adaptive Bayer blending](bayer-phase-shrinkage.md#standing-gfx100s-comparisons)
   keeps the sky visually smooth and the coarse fence coherent. Building
   wires and fine leaves stay soft.
