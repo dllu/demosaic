@@ -13,6 +13,9 @@ when both directions are narrow.
 [Frozen drivers and full scores](results/query-shape-routing-v1/evidence.tar.xz) ·
 [Reviewed native images](images/query-shape-routing-v1/manifest.json).
 
+A [shared Bayer gap check](query-shared-gap.md) tests the remaining spill
+on additional ellipse and strip targets and preserves all eight standing crops.
+
 ## Automatic frequencies and separate shape checks
 
 The [conditional shape study](query-donor-bandlimit.md) supplied exact

@@ -197,11 +197,11 @@ outside these measurements.
 Local-only completes **12,000 updates** at 24,000 distinct photos,
 24,000 sensor seeds and 96,000 native queries. Its retained loops total
 5,619.00 s, including 1,529.85 s for reading and CPU fingerprints.
-The spatial arm verifies identical input traces through **10,500**,
-covering 21,000 photos and 84,000 native queries per arm. It continues
+The spatial arm verifies identical input traces through **11,500**,
+covering 23,000 photos and 92,000 native queries per arm. It continues
 toward 12,000. Numerical and native reviews remain complete through 10,000.
 [Local 12k checkpoint and source audit](results/scene-full-epoch-v1/local-012000-prefix.json) ·
-[Paired 10,500 source and checkpoint verification](results/scene-full-epoch-v1/paired-prefix-010500.json).
+[Paired 11,500 source and checkpoint verification](results/scene-full-epoch-v1/paired-prefix-011500.json).
 
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).

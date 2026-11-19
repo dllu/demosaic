@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Shared Bayer gap check](query-shared-gap.md#standing-gfx100s-comparisons)
+  reproduces the preceding sky, fence, foliage and building pixel for pixel.
+  The sky stays smooth and the coarse fence retains both directions.
 - [Per-direction wire shape](query-shape-routing.md#standing-gfx100s-comparisons)
   checks both routing policies. The main sky stays smooth and all four main
   crops reproduce the earlier exterior result.

@@ -27,6 +27,11 @@ samples support a second harmonic and a difference band in the right cab.
 Some right crossings become clearer while sky stays smooth. The left cab
 still lacks convincing crossings. This test uses the geometry in the RAW.
 
+The [shared Bayer gap check](query-shared-gap.md) uses that measured
+waveform to verify local deficits. It reduces texture continued into
+additional true gaps and attenuates some neighboring intact wire. The
+eight standing GFX crops stay pixel-identical to the preceding fit.
+
 Off-grid refinement of the RAW footprint cuts less intact wire on
 fresh ISO400 gap scenes. The fixed audit still admits one of six
 fresh ISO6400 gaps with averaged footprints. The standing sky

@@ -420,6 +420,13 @@ Keeping only supported second harmonics reduces the other wire's shape error
 at matched response. Truly narrow ISO6400 wires retain sharper profiles
 with the earlier full ribbon. Gap spill remains.
 
+A [shared weak-waveform deficit test](query-shared-gap.md) lowers added
+gap RMS from 57.77 to 48.64 DN16 on additional ISO6400 photographs with
+elliptical and strip gaps. Nearby intact recovery falls 2.99 points, and
+one continuous dip is cut. Giving the fixed scorer the true footprint
+admits nine of ten active gaps versus seven with the automatic search.
+Both standing GFX families retain the preceding crops pixel for pixel.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 
