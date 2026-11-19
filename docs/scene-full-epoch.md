@@ -309,8 +309,8 @@ This checkpoint pair has its own numerical and native review.
 
 The 64-source numerical and exact native photo review is complete at
 25k EMA. Both standing GFX scenes were viewed at the same checkpoint
-pair. The latest matched training coverage is 34,000 updates on 68,000
-photos and 272,000 queries per arm.
+pair. Matched training now verifies 35,000 updates on 70,000 photos
+and 280,000 queries per arm.
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·
@@ -331,6 +331,8 @@ photos and 272,000 queries per arm.
 [33,000 paired audit](results/scene-full-epoch-v1/paired-prefix-033000.json) ·
 [33,500 paired audit](results/scene-full-epoch-v1/paired-prefix-033500.json) ·
 [34,000 paired audit](results/scene-full-epoch-v1/paired-prefix-034000.json) ·
+[34,500 paired audit](results/scene-full-epoch-v1/paired-prefix-034500.json) ·
+[35,000 paired audit](results/scene-full-epoch-v1/paired-prefix-035000.json) ·
 [Review launch](results/scene-full-epoch-v1/queue-full-025000-launch.json).
 
 [23,500 local audit](results/scene-full-epoch-v1/local-023500-prefix.json) ·
@@ -365,6 +367,11 @@ before reuse.
 [30k exact-photo and standing GFX review](scene-full-epoch-30k.md) ·
 [30k review launch](results/scene-full-epoch-v1/queue-full-030000-launch.json) ·
 [Frozen review drivers](results/scene-full-epoch-v1/queue-full-030000.tar.xz).
+
+The 35k photo evaluator is processing the fixed exact-photo panel.
+The standing GFX review follows in the same queue. The completed 30k
+review remains the latest paired quality comparison.
+[35k review launch](results/scene-full-epoch-v1/queue-full-035000-launch.json).
 
 The 35k review queue waits for the matched pair, then runs the fixed
 64-photo panel and both standing GFX families. Its photo driver checks

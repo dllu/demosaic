@@ -49,6 +49,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [distant Bayer phase gating](bayer-distant-phase-gate.md) ·
 [64-pixel Bayer carrier fitting](bayer-carrier-scale.md) ·
 [shared Bayer phase geometry](bayer-shared-phase.md) ·
+[exterior Bayer bend estimation](bayer-exterior-bend.md) ·
 [local amplitude checks and crop API replay](bayer-amplitude-envelope.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·

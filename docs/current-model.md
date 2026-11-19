@@ -201,7 +201,11 @@ weak-family gap error by 1.18 DN16 and produces little change at ISO6400.
 [Shared phase geometry](bayer-shared-phase.md) shows a small benefit from
 the true bend on constructed wires. Estimating it from the center Bayer
 windows weakens planted ISO6400 response and leaves the fine cab crossings
-incomplete. Keep the fixed 64-pixel fit for this crop path.
+incomplete. [Exterior Bayer bend estimation](bayer-exterior-bend.md)
+gains 1.55 weak-response points with exact spacing. Noisy nomination
+admits three of twenty bent captures and the joint fit gains 0.387
+points across that panel. The real fine mesh retains the fixed 64-pixel
+result at display precision.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

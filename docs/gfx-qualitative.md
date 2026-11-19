@@ -21,6 +21,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Shared Bayer phase geometry](bayer-shared-phase.md#standing-gfx100s-comparisons)
   finds support for small spacing shifts in the coarse fence. Its
   intersections stay coherent. Sky, building and foliage match the fixed fit.
+- [Exterior Bayer bend estimation](bayer-exterior-bend.md#standing-gfx100s-comparisons)
+  slightly changes coarse wire contrast. The other three main crops
+  reproduce the fixed fit at display precision.
 - [Local amplitude envelopes](bayer-amplitude-envelope.md#standing-gfx100s-comparisons)
   preserve the visible coarse weave. Checked green and all-color fits
   reproduce the sky, building and foliage at display precision.

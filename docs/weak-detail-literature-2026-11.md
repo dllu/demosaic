@@ -527,10 +527,18 @@ crop API reproduces the base fit on all tested synthetic and standing crops.
 [Joint geometry across disjoint Bayer windows](bayer-shared-phase.md)
 allows each window its own amplitude and phase. It loses 0.211 planted
 ISO6400 response points versus the fixed 64-pixel fit. With true geometry
-supplied, the same delivery gains 1.51 weak-response points on bent fields
+supplied, the same delivery gains 1.50 weak-response points on bent fields
 and slightly increases the weak-wave projection inside gaps. The central
 greens provide inadequate evidence for the weak bend. Both standing
 fence reviews retain their existing intersections.
+
+[Exterior Bayer bend estimation](bayer-exterior-bend.md) increases the
+spatial baseline to eight disjoint windows. With fixed exact spacing it
+lowers weak phase error to 0.004 cycles and gains 1.55 response points.
+Fitting the center and bend jointly from noisy RAW gains 0.387 points
+after the original eligibility rule. Only three of twenty bent draws
+qualify. The four cab comparisons reproduce the fixed fit at display
+precision.
 
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the

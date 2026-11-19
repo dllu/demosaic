@@ -5,12 +5,17 @@ the coarse fence. They offer little support for bending the fine cab mesh.
 The checked quadratic fit lowers ISO6400 planted-wire response by
 **0.211 percentage points** versus the fixed 64-pixel fit, with essentially
 the same measured gap and quiet errors. Supplying the true bend on ten
-separate constructed backgrounds does recover **1.51 more weak-response
+separate constructed backgrounds does recover **1.50 more weak-response
 points** at the same delivery dose. The delivered gain depends on knowing
 the geometry more accurately than the four central windows estimate it.
 [Machine results](results/bayer-shared-phase-v1/publication.json) ·
 [Frozen drivers and receipts](results/bayer-shared-phase-v1/evidence.tar.xz) ·
 [Native crop provenance](images/bayer-shared-phase-v1/manifest.json).
+
+The numbers in the conditional synthetic delivery section use the serial
+replay. A threaded diagnostic override affected one source in the
+original results. The two published exact-bend examples reproduce
+exactly on replay. [Correction and original receipt](bayer-exterior-bend.md#serial-replay-of-the-preceding-diagnostic).
 
 ## Fitting and checking the geometry
 
@@ -94,13 +99,13 @@ exact-flat error.
 | --- | ---: | ---: | ---: | ---: |
 | Corpus 100k EMA | 28.268% | 184.931 | 141.645 | 3.747 |
 | Fixed exact centers | 45.551% | 178.902 | 139.662 | 5.526 |
-| Checked frequency shift | 45.292% | 178.884 | 139.602 | 5.398 |
-| Checked quadratic | 45.300% | 178.900 | 139.618 | 5.386 |
-| Checked tangent | 45.301% | 178.874 | 139.608 | 5.390 |
-| Exact centers and curvature | 47.056% | 178.561 | 139.667 | 5.730 |
+| Checked frequency shift | 45.330% | 178.876 | 139.600 | 5.369 |
+| Checked quadratic | 45.340% | 178.912 | 139.647 | 5.359 |
+| Checked tangent | 45.341% | 178.869 | 139.617 | 5.362 |
+| Exact centers and curvature | 47.052% | 178.548 | 139.685 | 5.730 |
 
-The exact curvature gains 1.51 response points [0.52, 2.56] and lowers
-increment RMS by 0.341 DN16 [0.092, 0.605] over the fixed exact centers.
+The exact curvature gains 1.50 response points [0.52, 2.56] and lowers
+increment RMS by 0.354 DN16 [0.104, 0.614] over the fixed exact centers.
 The point estimate for coherent weak-wave gap projection rises by
 0.204 DN16 [−0.039, +0.509]. All 40 exact-flat draws reproduce their
 parent. The remaining gap signal and modest upper bound give separate
