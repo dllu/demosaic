@@ -256,9 +256,8 @@ The local checkpoint SHA256 is
 `7d2e041b563651d7dd9af24a18cb32f8cd94b8a094a05005eb55a43bb0fd30cb`.
 The spatial checkpoint SHA256 is
 `53a3232a26c9997024dbd4349c09e7040c6a9d53ffef8d03dd7f95b5ba8d8114`.
-Both store raw and EMA weights. The 15k EMA exact-target monitor and its
-native triplets are complete. Both standing GFX collections are running.
-The last completed standing pair is at 12k. The continuation
+Both store raw and EMA weights. The 15k EMA exact-target monitor, native
+triplets and both standing GFX reviews are complete. The continuation
 advances on the original 50k schedule.
 [Paired 15k source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-015000.json) ·
 [Segment receipts](results/scene-full-epoch-v1/paired-prefix-015000.tar.xz) ·
@@ -807,6 +806,37 @@ softer than GT. [Comparison](images/scene-full-epoch-v1/pilot-015000/001-iso6400
 
 ![Limburg Cathedral, noisy, matching spatial 15k and exact GT](images/scene-full-epoch-v1/pilot-015000/001-iso6400-independent-role0-triplet.png)
 
-The exact-target numerical and native review is complete. Both standing
-15k GFX reviews are collecting. The broad panels are queued for the full
-50k checkpoints.
+The exact-target numerical and native review is complete. The broad
+panels are queued for the full 50k checkpoints.
+
+### Standing GFX100S at update 15,000
+
+Both EMA arms preserve a smooth overcast sky and both coarse fence
+directions. Thin brackets, cables and leaf tips remain soft. The fine
+cab's right diagonal pattern is more visible under transferred noise
+conditioning. Under the nominal profile the spatial arm is slightly
+softer around the narrow right diagonals. Both arms leave most fine
+crossings incomplete, with background mottling and weak wire colour.
+The ISO100 AHD views and both cab camera JPEGs were viewed at native
+scale. Their independently exposed images supply qualitative references.
+
+Camera-linear RGB differences between the spatial and local arms measure
+1.54 DN16 RMS in the sky, 13.01 on the coarse fence and 2.20–4.95 across
+the four cab crops. Both paths use the same native coordinates and display.
+Main DSCF3879 uses shot/read `0.00128/6.5536e-6` and display ×4.
+DSCF3842 uses display ×16 and either the same prior or the transferred
+`0.0014635775921166604/1.0715704128646712e-6` prior.
+[Native provenance and model differences](results/scene-full-epoch-v1/matched-015000-standing.json) ·
+[Collection archive](results/scene-full-epoch-v1/matched-015000-standing.tar.xz) ·
+[Overcast sky](images/scene-full-epoch-v1/standing-015000/main-overcast-sky-main-overcast-sky.png) ·
+[Building](images/scene-full-epoch-v1/standing-015000/main-building-detail-main-building-detail.png) ·
+[Foliage](images/scene-full-epoch-v1/standing-015000/main-foliage-main-foliage.png) ·
+[Coarse fence](images/scene-full-epoch-v1/standing-015000/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | Native comparisons |
+| --- | --- |
+| Nominal | [Left](images/scene-full-epoch-v1/standing-015000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-015000/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-full-epoch-v1/standing-015000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-015000/mesh-profile3879-fine-green-mesh-right.png) |
+
+The fixed-target and both standing intermediate reviews are complete at
+15k. Broad panels remain queued for the full 50k endpoints.
