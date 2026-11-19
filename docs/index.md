@@ -54,6 +54,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [narrow exterior RAW peaks](donor-peak-prominence.md) ·
 [reserved Bayer query search](query-bayer-reserve.md) ·
 [sensor-anchored Bayer placements](query-frequency-consensus.md) ·
+[neighboring Bayer evidence for locating wire gaps](query-gap-shoulders.md) ·
 [shared Bayer waveform for wire gaps](query-shared-gap.md) ·
 [per-direction wire shape from automatic Bayer frequencies](query-shape-routing.md) ·
 [checked donor wire shape](query-donor-bandlimit.md) ·

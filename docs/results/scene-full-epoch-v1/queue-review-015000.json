@@ -1,0 +1,43 @@
+{
+  "launch": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/queue-review-015000-launch.json",
+    "sha256": "8f6cd5c263766ac175e5f3c8d871eee2e05e19120b8dad5fd9dbb4c0f4b4ce0b"
+  },
+  "worker_source": "\"\"\"Run both existing 15k review paths one at a time when the pair is verified.\"\"\"\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nROOT=Path(__file__).resolve().parent\nCOLLECTOR=ROOT/'review_queue_native_fixed.py'\nresults=[]\nfor action in ('monitor','native'):\n    stage=ROOT/f'queue-{action}-015000.log'\n    with stage.open('x') as outcome:\n        status=subprocess.run((sys.executable,'-u',str(COLLECTOR),action,'15000'),\n                              stdout=outcome,stderr=subprocess.STDOUT,check=False).returncode\n    results.append(status)\n    print(action,status,flush=True)\nraise SystemExit(any(results))\n",
+  "bindings": {
+    "step": 15000,
+    "owner": {
+      "pid": 2116863,
+      "created": 1795067646.64
+    },
+    "command": [
+      "/home/dllu/proj/demosaic/.venv/bin/python",
+      "-u",
+      "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-015000.py"
+    ],
+    "plan": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/plan.json",
+      "sha256": "23083ec816deafd7352fb3f3a47d09e25320c31cd0f622bda43da22f8b0ce397"
+    },
+    "worker": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-015000.py",
+      "sha256": "5cdc68638806d711c5facc409299a65705b9ae1aeb06740612ab14863929a496"
+    },
+    "shared_queue": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review_queue_native_fixed.py",
+      "sha256": "17c344978a356bc2829c87aeeb8e78fd9bdea695b90fa00092d2a15e99641cab"
+    },
+    "monitor": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/monitor_bound.py",
+      "sha256": "215f0f5fdd7cfc8efc7161ad89f9987704ea85fd7e894a3755381f07db142e4c"
+    },
+    "native": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/milestone_native_fixed.py",
+      "sha256": "a3b666ddfcc3c3ee31879e4bac0a98d2fb246da8eabe5706f33f5184b77c7cf1"
+    },
+    "log": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/queue-review-015000.log",
+    "scope": "Run fixed photo monitor and both standing GFX comparisons sequentially once matched."
+  },
+  "verified_worker_alive_at_publication": true,
+  "status": "Waiting for the matched 15,000 state. The 12,000 pair remains the last reviewed."
+}

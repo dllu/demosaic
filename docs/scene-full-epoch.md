@@ -218,6 +218,21 @@ review. The 50,000-update continuation remains in training. The exact-target
 [Spatial restart receipt](results/scene-full-epoch-v1/matched-012000-retry.json) ·
 [Prior 11,500 verification](results/scene-full-epoch-v1/paired-prefix-011500.json).
 
+The next paired checkpoint at **12,500 updates** verifies 25,000 distinct
+photos, 25,000 seeds and 100,000 native queries per arm on identical input
+traces. This passes the 24,000-photo coverage of the earlier matched scene
+study. Retained training loops total 5,842.76 s local and 7,468.07 s spatial.
+The 12,000-update checkpoints remain the last numerically and visually
+reviewed pair. [Paired 12,500 source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-012500.json).
+
+The local-only arm has also verified **14,000 updates**, covering 28,000
+distinct photos and 112,000 native queries. The controller is continuing
+the local arm toward the next 15,000-update matched milestone. A live
+worker waits for the matched receipt and runs the numerical monitor and
+both standing GFX collections sequentially.
+[Local 14k source and checkpoint audit](results/scene-full-epoch-v1/local-014000-prefix.json) ·
+[15k review queue](results/scene-full-epoch-v1/queue-review-015000.json).
+
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 

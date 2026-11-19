@@ -427,6 +427,12 @@ one continuous dip is cut. Giving the fixed scorer the true footprint
 admits nine of ten active gaps versus seven with the automatic search.
 Both standing GFX families retain the preceding crops pixel for pixel.
 
+On 24 additional photos, [two-sided gap localization](query-gap-shoulders.md)
+retains the same intact response at equal leakage as uniform attenuation of
+the shared edit. Green with automatic and exact geometry admits the same
+six eligible gaps. Adding red and blue confirms two more known footprints.
+Automatic cross-color nomination has mixed results across the two panels.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

@@ -128,6 +128,11 @@ and total gap error on the additional ISO6400 ellipse and strip panel.
 Nearby intact recovery falls, one continuous dip is cut, and the older
 ISO6400 replay changes little. Both standing GFX families reproduce
 the per-direction output, including the smooth overcast sky.
+[Neighboring Bayer gap localization](query-gap-shoulders.md) confirms
+the shared check's tradeoff on additional photos. Off-grid search yields
+similar intact response at equal leakage. Adding red and blue confirms
+two known footprints on the new panel, with mixed score-only results
+when the footprint must be found automatically.
 [Per-direction wire shape](query-shape-routing.md) uses automatically
 measured frequencies. It suppresses a spurious weak-wire harmonic
 when the stronger wire alone supports a narrow shape. True narrow wires

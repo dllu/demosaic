@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Neighboring Bayer gap localization](query-gap-shoulders.md#standing-gfx100s-comparisons)
+  reproduces the previous comparison in all four main crops, including
+  the smooth sky and both coarse fence directions.
 - [Shared Bayer gap check](query-shared-gap.md#standing-gfx100s-comparisons)
   reproduces the preceding sky, fence, foliage and building pixel for pixel.
   The sky stays smooth and the coarse fence retains both directions.

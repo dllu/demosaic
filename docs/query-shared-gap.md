@@ -4,6 +4,10 @@ On 24 additional held-out photo backgrounds at ISO6400, a local Bayer gap check 
 
 [Publication receipt](results/query-shared-gap-v1/publication.json) · [Frozen drivers and scores](results/query-shared-gap-v1/evidence.tar.xz) · [Reviewed images and provenance](images/query-shared-gap-v1/manifest.json).
 
+A follow-up tests two-sided and off-grid localization on 24 additional
+backgrounds. In its new panel the known-footprint and automatic green checks
+admit the same six of ten eligible gaps. [Neighboring Bayer tests](query-gap-shoulders.md).
+
 ## Candidate and independent check
 
 The donor path keeps the two measured frequencies only where adjacent exterior RAW and the native reserved bands already support them. The new check runs only on an admitted donor path. Q0 identifies the weaker fundamental by amplitude. Q0 and Q1 fit a shared prediction for that direction, with supported second harmonics and sum or difference bands involving it. A component must show consistent coefficients across the two discovery folds above the fixed noise bound. The fit also includes background, a step with per-side amplitudes, the other carrier and local trends.
