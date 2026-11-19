@@ -27,7 +27,9 @@ COVERAGE_NOTE = (
     "[completed fixed camera panels](local-redraw-average.md#fixed-camera-panels). "
     "The three repeat and gap continuations have "
     "[completed fixed camera panels](local-redraw-stability.md#fixed-camera-panels). "
-    "These thirteen full427 scores are pending. "
+    "The three signed wire continuations have "
+    "[completed fixed camera panels](local-wire-response.md#fixed-camera-panels). "
+    "These sixteen full427 scores are pending. "
     "The V131 point uses the independent CPU-to-CPU audit: photo 37.08008 dB, "
     "known/unseen CFA 54.31993/53.96491 dB. Its photo gain has unseen-camera and "
     "ADC-color costs; see the [broad review](v131-broad-primary.md). "
@@ -694,6 +696,18 @@ def collect_stability_endpoints():
     )
 
 
+def collect_wire_response_endpoints():
+    path = REPO / "docs/results/local-wire-response-camera-v1/publication.json"
+    names = {
+        "repeat": ("Repeat control", 320),
+        "wire-mean": ("Full wire band", 320),
+        "wire-aligned": ("Aligned wire", 320),
+    }
+    return collect_compact_camera_endpoints(
+        path, "local-wire-response.md", "local-wire-response", names
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -717,11 +731,13 @@ def main():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    destination = REPO / "docs/results/version-PSNR-history-corpus-v8.json"
+    destination = REPO / "docs/results/version-PSNR-history-corpus-v9.json"
     if args.data is not None:
         destination = args.data if args.data.is_absolute() else REPO / args.data
     elif not args.refresh_sources and not destination.exists():
-        destination = REPO / "docs/results/version-PSNR-history-corpus-v7.json"
+        destination = REPO / "docs/results/version-PSNR-history-corpus-v8.json"
+        if not destination.exists():
+            destination = REPO / "docs/results/version-PSNR-history-corpus-v7.json"
         if not destination.exists():
             destination = REPO / "docs/results/version-PSNR-history-corpus-v6.json"
         if not destination.exists():
@@ -764,6 +780,9 @@ def main():
         stability_points, stability_evidence = collect_stability_endpoints()
         points.extend(stability_points)
         evidence.extend(stability_evidence)
+        wire_points, wire_evidence = collect_wire_response_endpoints()
+        points.extend(wire_points)
+        evidence.extend(wire_evidence)
         result = {
             "coverage_note": COVERAGE_NOTE,
             "description": "Selected fixed primary endpoints, chosen by study scope, never by highest score. Each plotted metric has a completed primary panel; pending metrics remain blank. Version numbers are experiment labels; architectures, data, initialization, training budgets and recorded compute precision differ. This is descriptive history, not a controlled ranking or training curve. Missing versions lack a selected comparable primary report here.",

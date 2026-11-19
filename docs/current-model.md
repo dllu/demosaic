@@ -353,8 +353,10 @@ profiles. Repeat gains 0.02439 dB unseen over its parent and finishes
 response points over its matched repeat control on separate redraws with
 nearly unchanged flat and weak-direction gap error. Variance rises 2.9%
 over the control. Against the starting checkpoint, the aligned arm has
-16.9% less draw variance and 1.88 points less weak-wire response. Fine
-real cab crossings remain incomplete.
+16.9% less draw variance and 1.88 points less weak-wire response. It gains
+0.04456 dB known CFA and loses 0.00865 dB unseen. Error in the continuing
+strong wire accounts for most of the total gap regression. Fine real cab
+crossings remain incomplete.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

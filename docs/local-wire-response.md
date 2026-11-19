@@ -166,6 +166,13 @@ loss falls to 36.83%.
 [Gap error by frequency and background](results/local-wire-response-v1/gap-attribution.json) ·
 [Signed strong-band response](results/local-wire-response-v1/gap-signed.json).
 
+A diagnostic replaces only the new model's projection along the exact
+clean strong component by the starting model's projection. Orthogonality
+lets the other errors retain their measured values. Mean gap RMS would
+fall from 173.97 to 161.67 DN16, 3.91 DN16 below the starting model
+[−5.79, −2.24]. The calculation uses the known clean gap and confirms
+how much the lost strong response matters. [Component replacement calculation](results/local-wire-response-v1/gap-component-bound.json).
+
 ## Natural photos across three draws
 
 Sixteen other source-disjoint photographs replay the established natural
@@ -237,8 +244,30 @@ from different exposure, aperture and moments.
 
 ## Fixed camera panels
 
-The three saved EMA checkpoints entered the canonical camera replay. The
-fixed 427-photo replay follows the camera pass. The latest camera reference
-in this lineage is the repeat-loss parent in the previous completed study.
-V120 and Corpus 100k have completed fixed photo results. [Parent cameras](local-redraw-stability.md#fixed-camera-panels) ·
+Both measured-CFA panels are complete. The 72 known and 90 unseen
+crops use the fixed Bayer arrays and scoring borders with CUDA IEEE FP32.
+V120 and the repeat parent reuse their archived, byte-matched case
+receipts. The eight-case qualification also replays V120 and agrees
+with the saved CPU reference scores within 0.000008 dB.
+
+| EMA | Known CFA PSNR | Unseen CFA PSNR |
+| --- | ---: | ---: |
+| V120 | 54.31272 dB | 54.00872 dB |
+| Corpus 100k | 54.33708 dB | 53.97826 dB |
+| Repeat parent | 54.19868 dB | 54.01346 dB |
+| Repeat control | 54.22980 dB | 54.00495 dB |
+| Full wire band | 54.22485 dB | 54.03753 dB |
+| Aligned wire | 54.24324 dB | 54.00481 dB |
+
+Aligned supervision gains 0.04456 dB known over the starting model and
+loses 0.00865 dB unseen. Against its matched control it gains 0.01344 dB
+known and changes the unseen result by −0.00014 dB. Against V120 it
+trails by 0.06948 dB known and 0.00392 dB unseen. The full-band arm leads
+V120 by 0.02881 dB unseen, with weaker fine-detail recovery on both
+exact wire cohorts. The unseen comparison covers five scenes.
+
+The canonical 427-photo worker is running on the three listed EMAs.
+V120 and Corpus 100k have completed fixed photo results. The three
+new full427 scores remain pending. [Camera summary](results/local-wire-response-camera-v1/publication.json) ·
+[Per-case camera evidence](results/local-wire-response-camera-v1/evidence.tar.xz) ·
 [Comparable PSNR history](performance-history.md).

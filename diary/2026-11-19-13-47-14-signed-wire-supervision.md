@@ -21,3 +21,11 @@ Fine cab crossings remain incomplete under both noise profiles.
 The candidate camera replay is running. The fixed photo replay follows
 it. [Fixed panel status](../docs/local-wire-response.md#fixed-camera-panels) ·
 [PSNR history](../docs/performance-history.md).
+
+The camera pass finished. The aligned arm gains 0.04456 dB known and
+loses 0.00865 dB unseen versus the starting repeat EMA. The full-band
+control improves unseen measured CFA while reducing weak-wire response.
+Both results are in the chart. The three candidate fixed photo scores
+remain pending as the worker collects the 427-source panel.
+[Camera results](../docs/local-wire-response.md#fixed-camera-panels) ·
+[Updated PSNR history](../docs/performance-history.md).

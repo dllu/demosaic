@@ -1016,7 +1016,9 @@ On 16 held-out wire backgrounds, the exact clean increment accounts for
 variance. An aligned signed loss gains 1.26 weak-response points over
 its matched repeat control across fresh draws. Flat and weak-direction
 gap error are nearly unchanged. Most of the added variance is outside
-the target, and the real fine cab crossings remain incomplete.
+the target. In exact gaps, further training attenuates the continuing
+strong wire by 9.24 points relative to the starting model. Fine cab
+crossings remain incomplete.
 [Signed wire supervision](local-wire-response.md).
 
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
