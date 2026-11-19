@@ -199,8 +199,12 @@ Both standing GFX reviews find smooth sky and incomplete fine cab crossings.
 shows a small ISO6400 independent fine-response benefit over mirroring and
 near-identical response to the local arm. Fine flat noise drops from 7.5k
 on coupled draws. Both standing reviews still show incomplete fine crossings.
-The [training prefix](scene-full-epoch.md#execution-status) is now verified
-through 11,500 matched updates and 12,000 local-only updates.
+[Full-epoch scene training at update 12,000](scene-full-epoch.md#matched-quality-comparison-at-12000-updates)
+covers 24,000 distinct photos per arm. Aligned context lowers ISO6400
+lower-band flat variation relative to masking and gives nearly the same
+fine response as local-only. Coupled fine-increment error remains above
+Corpus 100k. In both standing GFX reviews the sky is smooth, the coarse
+fence survives, and the fine cab crossings remain incomplete.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

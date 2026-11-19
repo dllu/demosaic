@@ -194,14 +194,29 @@ creation of the training log. Retry, queue and quality-review time are
 outside these measurements.
 [Throughput and segment timings](results/scene-full-epoch-v1/matched-010000-throughput.json).
 
-Local-only completes **12,000 updates** at 24,000 distinct photos,
-24,000 sensor seeds and 96,000 native queries. Its retained loops total
-5,619.00 s, including 1,529.85 s for reading and CPU fingerprints.
-The spatial arm verifies identical input traces through **11,500**,
-covering 23,000 photos and 92,000 native queries per arm. It continues
-toward 12,000. Numerical and native reviews remain complete through 10,000.
-[Local 12k checkpoint and source audit](results/scene-full-epoch-v1/local-012000-prefix.json) ·
-[Paired 11,500 source and checkpoint verification](results/scene-full-epoch-v1/paired-prefix-011500.json).
+Both arms complete **12,000 updates** with byte-identical training input
+traces. Each saw 24,000 distinct photos, 24,000 sensor seeds and 96,000
+native queries. Those visits include 3,009 flat, 9,008 attenuated and
+11,983 ordinary scenes per arm. The local checkpoint SHA256 is
+`f3a94ec7a3d0f59a1a5245ecc54542ee1593fdd7fa33a759b7c4182a91e72515`
+and the spatial checkpoint is
+`d8279f5dd615b0fe16c8424e4c7b681ea1606ae0ecb376122fa7e5da50ffd1b6`.
+Both checkpoints carry raw and EMA weights, Adam state and RNG state.
+The evaluation uses EMA weights. The first spatial 12k attempt hit the
+runtime memory reserve. The saved 11,500 state resumed on the same schedule.
+
+| Retained loops through update 12,000 | Training seconds | Reader and fingerprint seconds | Native queries per training second |
+| --- | ---: | ---: | ---: |
+| Local-only | 5,619.00 | 1,529.85 | 17.09 |
+| Spatial | 7,184.45 | 1,496.00 | 13.36 |
+
+These measured loops exclude queue time, discarded attempts and quality
+review. The 50,000-update continuation remains in training. The exact-target
+12k numerical and native review and both standing GFX reviews are complete.
+[Matched 12k training audit](results/scene-full-epoch-v1/matched-012000-training.json) ·
+[Phase and checkpoint archive](results/scene-full-epoch-v1/matched-012000-training.tar.xz) ·
+[Spatial restart receipt](results/scene-full-epoch-v1/matched-012000-retry.json) ·
+[Prior 11,500 verification](results/scene-full-epoch-v1/paired-prefix-011500.json).
 
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
@@ -596,3 +611,104 @@ across arms. Independent ISO100 views are qualitative comparisons.
 | --- | --- |
 | Nominal | [Left](images/scene-full-epoch-v1/standing-010000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-010000/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred | [Left](images/scene-full-epoch-v1/standing-010000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-010000/mesh-profile3879-fine-green-mesh-right.png) |
+
+## Matched quality comparison at 12,000 updates
+
+The exact-target monitor reuses the eight photo backgrounds, sensor draws
+and context interventions from 10,000 updates. Collection of 32 groups
+in CUDA IEEE FP32 took 57.21 s. Eight native boards were viewed. Same-query
+mirroring preserves the query and its preview halo while changing distant
+context. Masking removes the spatial guide. The spatial 12k state and all
+controls use EMA weights, bound in the training and monitor receipts.
+[Training and EMA checkpoints](results/scene-full-epoch-v1/matched-012000-training.json) ·
+[Per-photo scores and native crops](results/scene-full-epoch-v1/matched-012000-pilot.json) ·
+[Paired response intervals](results/scene-full-epoch-v1/matched-012000-pilot-paired.json) ·
+[Bandwise and flat comparison](results/scene-full-epoch-v1/matched-012000-band-context.json).
+
+| ISO6400, independent draws | Fine-increment RMS, DN16 | Fine flat RMS, DN16 | Fine weak response | Lower-band flat RMS, DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| Corpus 100k | 103.983 | 4.127 | 67.145% | 13.868 |
+| Local 12k | 103.652 | 4.085 | 66.129% | 11.826 |
+| Spatial 12k, matching | 103.528 | 4.089 | 66.066% | 11.524 |
+| Spatial 12k, masked | 103.502 | 4.187 | 66.126% | 12.178 |
+| Spatial 12k, mirrored distant view | 103.599 | 4.098 | 65.957% | 11.636 |
+
+Matching context adds **0.109 fine-response percentage points [0.020, 0.173]**
+over the mirrored distant view. It trails the masked preview by 0.060 points
+[0.008, 0.165]. The fine-response difference from matched local-only is
+−0.063 points [−0.179, +0.131]. On the same inputs, matching context lowers
+fine flat RMS by 0.098 DN16 [0.001, 0.207] and lower-band flat RMS by
+**0.654 DN16 [0.123, 1.238]** versus masking. The lower band spans 1/32 to 1/8
+cycles per native pixel. Against the masked preview at ISO400, matching
+context also lowers fine flat RMS by 0.810 DN16 [0.231, 1.740] on independent
+draws. These intervals resample whole photos.
+
+At ISO6400, lower-band flat RMS falls **0.548 DN16 [0.111, 1.038]** versus 10k
+on independent draws. Fine response has no resolved increase. Relative to
+Corpus 100k, matching 12k gives 3.58 DN16 lower centered flat RGB variation
+[1.65, 5.66] while retaining 1.08 fewer fine-response points [0.40, 1.58]
+on independent draws. It has 0.655 DN16 higher fine-increment error
+[0.054, 1.389] on coupled draws. Relative to V120, matching 12k lowers
+independent fine flat RMS by 0.618 DN16 [0.311, 0.891], with a 1.43-point
+lower fine response whose interval spans zero [−2.68, +0.13]. The small
+held-out development panel supports a quiet-region benefit under some
+interventions. Fine response remains close to the matched local model.
+
+Both triplets show noisy Malvar, matching spatial 12k EMA and exact GT.
+The 160×160 native cells use ROI `[48,48,160,160]` within their 256-pixel
+queries, independent ISO6400 shot/read `0.00128/6.5536e-6`, ADC16 black
+fraction 0.03, capture exposure 0.33, display exposure ×3.0303 and contrast ×2.
+
+**Hauroth**, Palauenc05, CC BY-SA 4.0. Query `[218,192]`, RGGB. Both models
+retain the broad boundaries and dark openings. Fine stone grain stays
+softer than the exact target. The exact-flat control looks smooth.
+[All methods](images/scene-full-epoch-v1/pilot-012000/000-iso6400-independent-role0-comparison.png) ·
+[Exact flat](images/scene-full-epoch-v1/pilot-012000/000-iso6400-independent-role2-comparison.png) ·
+[Source photo](https://commons.wikimedia.org/wiki/File:Hauroth_Wegekreuz_St-Bartholom%C3%A4us.jpg).
+
+![Hauroth, noisy, matching spatial 12k and exact GT](images/scene-full-epoch-v1/pilot-012000/000-iso6400-independent-role0-triplet.png)
+
+**Limburg Cathedral**, Berthold Werner, public domain. Query `[22,250]`,
+BGGR. The arches and frame remain clear. Faint brick texture and trim stay
+softer than the exact target. The exact-flat control has faint variation
+near the transition.
+[All methods](images/scene-full-epoch-v1/pilot-012000/001-iso6400-independent-role0-comparison.png) ·
+[Exact flat](images/scene-full-epoch-v1/pilot-012000/001-iso6400-independent-role2-comparison.png) ·
+[Source photo](https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg).
+
+![Limburg Cathedral, noisy, matching spatial 12k and exact GT](images/scene-full-epoch-v1/pilot-012000/001-iso6400-independent-role0-triplet.png)
+
+The 12k exact-target review is complete. Comparable full427 and
+measured-camera panels remain queued for the full endpoints.
+
+### Standing GFX100S at update 12,000
+
+Both EMA arms keep the overcast sky smooth and the two coarse-fence
+families visible. Fine brackets, cables and leaf tips remain soft. The
+left cab shows the green post and faint traces of the mesh. The right cab
+shows more diagonal modulation under the transferred noise prior, with
+uneven crossings and dark mottling. Both 12k arms leave much of the fine
+lattice missing under both profiles. All eight native boards were viewed
+with the independent ISO100 AHD and both cab camera JPEGs.
+
+The spatial and local arms differ by 2.05 DN16 camera RGB RMS in the sky,
+9.07 on the coarse fence, and 2.66–4.94 in the four cab crops. These are
+model-to-model differences. CPU IEEE FP32 collection of ten archived
+observations took 236.62 s local and 279.54 s spatial. The main DSCF3879
+scene uses the nominal shot/read `0.00128/6.5536e-6` and display ×4.
+The DSCF3842 cab uses display ×16 and the same nominal prior or the
+transferred `0.0014635775921166604/1.0715704128646712e-6` prior. The receipt
+binds identical Bayer inputs, native coordinates and display across arms.
+The independently exposed ISO100 images and camera JPEGs are qualitative
+references.
+[Native boards and provenance](results/scene-full-epoch-v1/matched-012000-standing.json) ·
+[Collection archive](results/scene-full-epoch-v1/matched-012000-standing.tar.xz) ·
+[Overcast sky](images/scene-full-epoch-v1/standing-012000/main-overcast-sky-main-overcast-sky.png) ·
+[Building](images/scene-full-epoch-v1/standing-012000/main-building-detail-main-building-detail.png) ·
+[Foliage](images/scene-full-epoch-v1/standing-012000/main-foliage-main-foliage.png) ·
+[Coarse fence](images/scene-full-epoch-v1/standing-012000/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | Native comparisons |
+| --- | --- |
+| Nominal | [Left](images/scene-full-epoch-v1/standing-012000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-012000/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-full-epoch-v1/standing-012000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-012000/mesh-profile3879-fine-green-mesh-right.png) |

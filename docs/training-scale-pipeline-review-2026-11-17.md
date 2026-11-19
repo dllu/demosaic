@@ -10,17 +10,38 @@ Follow-up measurements verify five complete ordinary-photo passes and
 fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fifth-photographic-epoch-at-update-85233).
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
-two arms match through 11,500 updates on 23,000 distinct photos and
-92,000 native queries per arm. Local-only has reached 12,000 on 24,000
-distinct photos. The latest complete matched quality review is at 10,000.
+two arms match through 12,000 updates on 24,000 distinct photos and
+96,000 native queries per arm. The 12k exact-target monitor and both
+standing GFX reviews are complete.
 [Coverage and source audit](scene-full-epoch.md#execution-status) ·
-[Intermediate quality review](scene-full-epoch.md#matched-quality-comparison-at-10000-updates).
+[Intermediate quality review](scene-full-epoch.md#matched-quality-comparison-at-12000-updates) ·
+[Standing GFX review](scene-full-epoch.md#standing-gfx100s-at-update-12000).
 
 At 10,000 updates, the retained loops process 17.01 native queries per
 second locally and 13.19 with spatial features. Reading and CPU
 fingerprinting are 27.2% and 20.9% of those loop times. The last five
 saved segments per arm have median initialization times of about 35 s.
 [Measured throughput and timing method](results/scene-full-epoch-v1/matched-010000-throughput.json).
+
+A two-thread CPU replay of 24 retained whole-scene observations assigns
+about 62% of reader time to camera simulation and Bayer packing, 15% to
+full tensor fingerprints and 5% to source SHA checks plus opening the cache.
+Reading source pixels through the memory map is included in the other
+reader work. Hashing the contiguous array buffer directly reduces the
+fingerprint median from 0.189 to 0.171 s per 24 visits. Whole-reader
+median changes from 1.245 to 1.227 s and every retained hash matches.
+
+A separate warm replay of 24 zero-noise and 24 noisy observations
+attributes 0.323 of 1.030 s to Poisson draws in the noisy group. When both
+noise coefficients are zero, the scene owns the generator and discards it
+after that draw. Skipping the unused random samples while retaining the
+same ADC math reduces the median zero-noise reader time from 1.006 to
+0.566 s with identical complete observation receipts. The declared rate
+of such scenes is 10%. Weighting those medians by the declared mix and
+holding the noisy path fixed suggests about 4% of reader time, roughly
+1% of total training-loop time. That extrapolation uses separate CPU replays.
+[Reader profiles and frozen inputs](results/scene-full-epoch-v1/scene-reader-stages.json) ·
+[Original drivers and timings](results/scene-full-epoch-v1/scene-reader-stages.tar.xz).
 
 **The corpus supports a substantially larger full-model training experiment.
 We have not established that its useful examples, or the model's capacity to
