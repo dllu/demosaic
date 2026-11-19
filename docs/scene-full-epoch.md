@@ -80,6 +80,10 @@ Training, numerical collection and native viewing are recorded separately.
 Full-frame GFX preview resolution relative to a native query remains a
 known distribution difference.
 [Endpoint collection queue](results/scene-full-epoch-v1/endpoint-review-queue.json).
+The native renderer now writes its output inside the frozen worker's
+directory. The intermediate review verified that path, and the
+corrected endpoint worker is waiting for the 50k checkpoints.
+[Native collector recovery receipt](results/scene-full-epoch-v1/endpoint-native-recovery.json).
 
 ## Execution status
 
@@ -138,9 +142,9 @@ increment error by 0.276 DN16 [+0.082, +0.502]. Its independent
 increment RMS is 0.115 DN16 higher than local-only with a paired
 interval spanning zero [−0.363, +0.485]. The mirrored distant view
 is also close. The two EMA continuations show no clear weak-detail
-gain on this intermediate panel. The full benchmark and automatic
-standing reviews remain scheduled for the final endpoints. A separate
-standing review of the 2k states is collecting.
+gain on this intermediate panel. The full benchmark and standing
+reviews remain scheduled for the final endpoints. Both standing GFX
+families have also been reviewed at this intermediate checkpoint.
 
 The triplets show noisy Malvar, spatial 2k with the matching preview,
 and exact GT. The two ISO6400 independent draws use shot/read
@@ -162,3 +166,35 @@ stay blurred in both the local and spatial outputs. Query `[22,250]`,
 BGGR. Full source and license details are in the viewing record.
 [All methods](images/scene-full-epoch-v1/pilot-002000/001-iso6400-independent-role0-comparison.png) ·
 [Exact-flat counterpart](images/scene-full-epoch-v1/pilot-002000/001-iso6400-independent-role2-comparison.png).
+
+### Standing GFX100S at update 2,000
+
+All eight standing boards were viewed. Both arms keep the DSCF3879
+sky smooth and both coarse fence directions visible. Thin building
+cables and fine leaf boundaries remain soft. In the separate DSCF3842
+fine cab, faint diagonal modulation appears under the transferred
+DSCF3879 prior and the fine crossings remain incomplete in both ROIs.
+
+The spatial and local outputs differ by 0.92 DN16 camera-RGB RMS in
+the sky, 9.76 DN16 in the coarse fence, and 2.03–4.13 DN16 in the
+four cab views. These measure model differences. The ISO100 AHD
+and camera JPEGs are independent qualitative references. The
+CPU IEEE FP32 review checks identical saved Bayer inputs and noise
+conditioning. Local and spatial collection took 252.24 and 295.52 s
+respectively for the ten archived observations.
+
+The main native 160×160 crops remain at `[176,176]` in their
+512-pixel queries. Shot/read is `0.00128/6.5536e-6` with display
+exposure ×4. The cab crops in the 768-pixel query remain at
+`[206,229]` and `[426,189]` with display exposure ×16. The
+transferred profile uses `0.0014635775921166604/1.0715704128646712e-6`.
+[Complete standing receipt](results/scene-full-epoch-v1/matched-002000-standing.json) ·
+[Sky](images/scene-full-epoch-v1/standing-002000/main-overcast-sky-main-overcast-sky.png) ·
+[Building](images/scene-full-epoch-v1/standing-002000/main-building-detail-main-building-detail.png) ·
+[Foliage](images/scene-full-epoch-v1/standing-002000/main-foliage-main-foliage.png) ·
+[Coarse fence](images/scene-full-epoch-v1/standing-002000/main-chain-link-fence-main-chain-link-fence.png).
+
+| Cab profile | Native views |
+| --- | --- |
+| Nominal | [Left](images/scene-full-epoch-v1/standing-002000/mesh-nominal-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-002000/mesh-nominal-fine-green-mesh-right.png) |
+| Transferred | [Left](images/scene-full-epoch-v1/standing-002000/mesh-profile3879-fine-green-mesh-left.png) · [Right](images/scene-full-epoch-v1/standing-002000/mesh-profile3879-fine-green-mesh-right.png) |

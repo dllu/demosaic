@@ -123,6 +123,10 @@ response, with fine real crossings still incomplete.
 [Native green alias separation](quincunx-green.md) extracts a small
 additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
+[Full-epoch scene training at update 2,000](scene-full-epoch.md#first-matched-quality-comparison-at-2000-updates)
+finds lower coupled flat-core variation with the matched preview
+versus masking, with higher fine-increment error. The first standing
+review finds incomplete fine cab crossings in both arms.
 [Projected repeat training](paired-shape-stability.md#final-performance-on-the-96-photo-panel)
 recovers some of the response lost by standard repeat training,
 with higher independent-draw error than the ordinary control

@@ -3,6 +3,9 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Full-epoch scene run at update 2,000](scene-full-epoch.md#standing-gfx100s-at-update-2000)
+  compares both matched EMAs. Sky stays smooth, both coarse-fence directions
+  survive, and the thinnest building and foliage structures remain soft.
 - [Green alias separation and exterior RAW](quincunx-green.md#standing-gfx100s-comparisons)
   keep the sky smooth and both coarse crossing directions visible.
   Dense reconstruction at original strength changes the coarse fence more

@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Full-epoch scene run at update 2,000](scene-full-epoch.md#standing-gfx100s-at-update-2000) | Both profiles, ROIs and their JPEG references viewed for the matched spatial and local-only checkpoints. The transferred profile retains weak diagonal texture, with incomplete crossings |
 | [Green alias separation and exterior RAW](quincunx-green.md#standing-gfx100s-comparisons) | Both profiles, both ROIs and the separate JPEGs were viewed for both variants. Added modulation at original strength leaves fine junctions missing |
 | [Native-green innovation](green-phase-innovation.md#standing-gfx100s-comparisons) | Both ROIs, both profiles and JPEGs viewed. Crossings stay incomplete with same-phase or native-green input smoothing |
 | [Surrounding RAW strength](context-strength.md#standing-gfx100s-comparisons) | Both profiles and both native ROIs were viewed. The matched and mirrored views look alike. Fine crossings remain incomplete |
