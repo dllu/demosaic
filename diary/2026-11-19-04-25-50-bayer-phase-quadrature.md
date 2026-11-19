@@ -28,3 +28,7 @@ The last complete numerical and native evaluation is the matched 25k pair.
 [29,500 audit](../docs/results/scene-full-epoch-v1/paired-prefix-029500.json) ·
 [30,000 audit](../docs/results/scene-full-epoch-v1/paired-prefix-030000.json) ·
 [25k quality review](../docs/scene-full-epoch-25k.md).
+
+The local-only continuation reached 30,500 verified updates, 61,000
+distinct photos and 244,000 native queries.
+[Local audit](../docs/results/scene-full-epoch-v1/local-030500-prefix.json).
