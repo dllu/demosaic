@@ -134,3 +134,5 @@ and subject-motion differences.
 | --- | --- | --- |
 | Nominal `0.00128/6.5536e-6` | [Native board](images/bayer-local-deficit-v1/standing/mesh-nominal-fine-green-mesh-left.png) | [Native board](images/bayer-local-deficit-v1/standing/mesh-nominal-fine-green-mesh-right.png) |
 | Transferred `0.0014635775921166604/1.0715704128646712e-6` | [Native board](images/bayer-local-deficit-v1/standing/mesh-profile3879-fine-green-mesh-left.png) | [Native board](images/bayer-local-deficit-v1/standing/mesh-profile3879-fine-green-mesh-right.png) |
+
+[Local phase-rotation follow-up](bayer-local-phase-transfer.md) uses the veto to test whether measured phase can improve the delivered correction.

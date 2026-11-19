@@ -231,6 +231,11 @@ projection by 0.107 DN16 over matched attenuation on 24 bent fields
 with a phase veto. The veto also prevents cuts of a continuing
 quarter-cycle-shifted wire. Native fine-cab changes stay below
 0.19 DN16 RGB RMS and crossings remain incomplete.
+[Local Bayer phase rotation](bayer-local-phase-transfer.md) adds 0.93
+ISO6400 response points and lowers shifted-center absolute RMS 1.29 DN16
+on 24 planted-shift photos using noisy-only donor proposals. The
+rotation changes 10 shifted queries. Gains are near zero on smoothly
+varying carriers. The two standing fences show no new crossings.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

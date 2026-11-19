@@ -9,6 +9,7 @@ preserves its original comparison pixels and provenance.
 | Review | Relevant outcome |
 | --- | --- |
 | [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons) | All FP16 transport variants reproduce the same native pixel values in both ROIs and profiles. The transferred right diagonals are clearest and fine intersections are incomplete. Both JPEGs and ISO100 AHD were viewed |
+| [Local Bayer phase rotation](bayer-local-phase-transfer.md#standing-gfx100s-comparisons) | Only the transferred right crop changes, by 0.075 DN16 RMS. Crossings remain incomplete. Both ROIs, both priors, both JPEGs and AHD were viewed |
 | [Local Bayer deficit checks](bayer-local-deficit.md#standing-gfx100s-comparisons) | The phase veto changes both ROIs and priors by 0.064–0.183 DN16 RGB RMS. Right diagonals stay visible, with incomplete intersections. Both JPEGs and AHD were viewed |
 | [Closer disjoint Bayer donors](bayer-near-donors.md#standing-gfx100s-comparisons) | Nearby RAW strengthens support for the inherited frequencies. Adjustments fail the crop check. Both ROIs and priors keep incomplete intersections, viewed with ISO100 AHD and both JPEGs |
 | [Cross-green carrier agreement](bayer-cross-evidence.md#standing-gfx100s-comparisons) | Both ROIs and priors abstain before the new crop check. Viewed the bound prior output with both JPEGs and ISO100 AHD. Fine intersections remain incomplete |

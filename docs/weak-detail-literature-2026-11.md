@@ -577,6 +577,14 @@ the true-gap attenuation. On 24 bent backgrounds the veto retains a
 attenuation. Absolute gap error changes little, and real fine crossings
 stay incomplete.
 
+[Local phase rotation](bayer-local-phase-transfer.md) uses each green's
+inner phase to predict the other green at the surrounding amplitude.
+On 24 held-out backgrounds with planted local shifts, recovery gains
+2.25 response points with supplied geometry and 0.93 with noisy-only
+donors. The opposite rotation raises error. Rotation changes only
+10 automatic shifted crops and gives little gain on smoothly varying
+carriers. The viewed fine cab intersections stay incomplete.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points
