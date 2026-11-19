@@ -176,6 +176,11 @@ independent ISO6400 increment and flat-region error in both arms
 versus 30k. Fine response still trails Corpus 100k. Correct distant
 context gives little change versus the wrong distant view. Both fine
 cab ROIs still lack complete crossings.
+[Matched scene training at 40k](scene-full-epoch-40k.md) lowers
+independent ISO6400 fine-flat RMS by 0.022 DN16 and loses 0.119 fine
+response points in the spatial arm versus 35k. The local change is
+small. Correct and wrong distant views stay close and the viewed fine
+cab crossings remain incomplete.
 [Directional gap supervision](directional-gap-training.md) gains 0.44
 wire response points at similar total gap correction and adds 0.066
 DN16 of weak-band gap error. Nominal right cab diagonals strengthen
@@ -243,6 +248,12 @@ varying carriers. The two standing fences show no new crossings.
 nearly the same errors as the simpler rotation. The one-direction
 donor audit admits six additional planted weak frequencies and one
 unmatched frequency in the later held-out replay, before delivery.
+[Delivering one supported direction](bayer-single-direction.md) adds
+1.42 ISO6400 response points and lowers increment RMS 0.66 DN16 on
+24 bent fields. Local attenuation lowers coherent gap residue by
+0.04 DN16 versus the same fallback. Its residual still exceeds the
+prior pair route. The checked fallback abstains on 64 unplanted
+photo sources and reproduces the standing crops.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

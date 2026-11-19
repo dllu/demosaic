@@ -470,6 +470,11 @@ versus 30k. Mean fine response rises slightly with intervals spanning
 zero and remains below Corpus 100k. Matching the distant preview
 changes fine response by 0.002 points versus the wrong preview.
 The 35k standing crops still have incomplete fine cab crossings.
+The [matched 40k review](scene-full-epoch-40k.md) finds a further
+0.022 DN16 fine-flat reduction and 0.119-point response loss in the
+spatial arm at independent ISO6400. Correct distant conditioning
+gives little fine-band change versus the wrong distant view. Both
+standing fine cab crops retain missing intersections.
 
 [Directional gap supervision](directional-gap-training.md) separates
 strong-wave repair from the missing weak band in exact gaps. It gains
@@ -594,6 +599,14 @@ frequencies and one unmatched frequency on the later 24-photo replay.
 The reciprocal spatial check keeps four of the six weak frequencies
 and the unmatched one. This is evidence about nomination coverage.
 Standing fine crossings are still incomplete.
+
+[Delivering a checked single direction](bayer-single-direction.md) lowers
+fine-increment RMS by 0.66 DN16 and adds 1.42 response points on 24 planted
+bent fields. Coherent gap residue increases. Local deficit attenuation
+recovers 0.036 DN16 of that cost at matched correction energy. Testing a
+competing step gives little change. The guarded routes abstain on all
+192 captures from 64 sources with unplanted detail and leave both standing
+fence families at their prior outputs.
 
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the

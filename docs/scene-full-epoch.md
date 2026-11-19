@@ -351,9 +351,9 @@ photos and 320,000 queries per arm.
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
 
-Local-only verifies 40,000 updates, 80,000 distinct photos and
-320,000 native queries on the 50k schedule. The retained loop took
-19,280.83 s.
+Local-only verifies 42,500 updates, 85,000 distinct photos and
+340,000 native queries on the 50k schedule. The retained loop took
+20,493.16 s.
 [25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
 [26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
 [26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json) ·
@@ -378,7 +378,12 @@ Local-only verifies 40,000 updates, 80,000 distinct photos and
 [38,500 local audit](results/scene-full-epoch-v1/local-038500-prefix.json) ·
 [39,000 local audit](results/scene-full-epoch-v1/local-039000-prefix.json) ·
 [39,500 local audit](results/scene-full-epoch-v1/local-039500-prefix.json) ·
-[40,000 local audit](results/scene-full-epoch-v1/local-040000-prefix.json).
+[40,000 local audit](results/scene-full-epoch-v1/local-040000-prefix.json) ·
+[40,500 local audit](results/scene-full-epoch-v1/local-040500-prefix.json) ·
+[41,000 local audit](results/scene-full-epoch-v1/local-041000-prefix.json) ·
+[41,500 local audit](results/scene-full-epoch-v1/local-041500-prefix.json) ·
+[42,000 local audit](results/scene-full-epoch-v1/local-042000-prefix.json) ·
+[42,500 local audit](results/scene-full-epoch-v1/local-042500-prefix.json).
 
 The verified matched 30k pair completes the 64-photo numerical evaluation,
 native exact-crop viewing and both standing GFX reviews. Its scoring driver
@@ -388,15 +393,13 @@ before reuse.
 [30k review launch](results/scene-full-epoch-v1/queue-full-030000-launch.json) ·
 [Frozen review drivers](results/scene-full-epoch-v1/queue-full-030000.tar.xz).
 
-The 35k paired photo scores, exact crops and both standing GFX reviews
-are complete. The local and spatial EMAs lower independent ISO6400
-fine-increment and quiet-region error versus their 30k EMAs. The
-correct distant view is close to the mismatched view. Fine cab
-crossings remain incomplete. The 35k pair is the latest image-quality
-review. The matched 40k checkpoints are verified and their 64-photo
-evaluation is running. The standing GFX evaluation follows the photo
-pass. The 50k fixed photo and camera evaluation and native review
-are queued.
+The matched 40k photo scoring, exact crops and both standing GFX
+reviews are complete. Spatial 40k lowers independent ISO6400 fine-flat
+RMS by 0.022 DN16 and loses 0.119 points of fine response versus
+spatial 35k. Correct and wrong distant context remain close. Fine
+cab crossings are incomplete. The fixed photo and camera evaluation
+and native reviews for the 50k endpoints are queued.
+[40k exact-photo and standing GFX review](scene-full-epoch-40k.md) ·
 [40k launch receipt](results/scene-full-epoch-v1/queue-full-040000-launch.json) ·
 [40k frozen review drivers](results/scene-full-epoch-v1/queue-full-040000.tar.xz).
 [35k exact-photo and standing GFX review](scene-full-epoch-35k.md) ·

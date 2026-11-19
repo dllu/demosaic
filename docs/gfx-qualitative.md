@@ -9,6 +9,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons)
   reproduces the ordinary FP16 values in all four viewed crops. The sky is
   smooth, coarse crossings are coherent and fine wires and leaves are soft.
+- [Single-direction Bayer fallback](bayer-single-direction.md#standing-gfx100s-comparisons)
+  changes foliage by 0.927 DN16 RMS before its spatial check. The checked
+  version matches all four prior crops.
 - [Missing-signal Bayer phase](bayer-phase-residual.md#standing-gfx100s-comparisons)
   changes the coarse fence by 0.620 DN16 RMS versus the prior rotation.
   Both coarse directions remain coherent and the other three crops match.
@@ -69,6 +72,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Matched local and spatial 30k models](scene-full-epoch-30k.md#standing-gfx100s-comparisons)
   retain the smooth sky and coherent coarse crossings. Fine leaf tips and
   building cables stay soft.
+- [Matched local and spatial 40k models](scene-full-epoch-40k.md#standing-gfx100s-comparisons)
+  keep a smooth sky and coherent coarse crossings. Fine cables and leaves
+  stay soft. Spatial 40k changes the coarse fence by 3.571 DN16 RMS versus 35k.
 - [Matched local and spatial 35k models](scene-full-epoch-35k.md#standing-gfx100s-comparisons)
   retain the smooth sky and coherent coarse crossings. Fine leaf
   and building details stay soft.
