@@ -64,6 +64,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
 [full and dense regional scene context](scene-regional-context.md) ·
+[Bayer-gated regional damping and true wire gaps](scene-mixture-wire-gaps.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [paired fine luminance and flat support](paired-luminance-detail.md) ·
 [exact orientation averaging](paired-head-symmetry.md) ·

@@ -281,6 +281,12 @@ lowers fine-flat RMS by 0.421 DN16 on the fixed independent ISO6400 test
 and 0.186 DN16 on a separate cohort, with near-parent fine response.
 Upper-band RMS improves in both tests. Both neural forwards are required
 and the fine cab crossings remain incomplete.
+[Bayer-gated damping](scene-mixture-wire-gaps.md) above the refit
+reduces independent ISO6400 fine-increment RMS on 48 fixed and 24
+additional photos by 0.188 and 0.155 DN16. On planted wires it improves
+increment error by 0.370 DN16, loses 0.109 response points and raises
+continuing strong-wire error inside true gaps. The real fine cab
+crossings remain incomplete.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

@@ -7,6 +7,8 @@ fine-flat RMS falls by **0.421 DN16**, fine-increment error falls by
 points** of Corpus 100k. A separate 32-photo cohort confirms smaller
 flat and increment gains. The fine cab crossings remain incomplete.
 
+[Held-out wire and Bayer-gated damping follow-up](scene-mixture-wire-gaps.md).
+
 [Machine results](results/scene-mixture-upper-band-v1/publication.json) ·
 [Fitted coefficients](results/scene-mixture-upper-band-v1/coefficients.json) ·
 [Frozen drivers and receipts](results/scene-mixture-upper-band-v1/evidence.tar.xz) ·

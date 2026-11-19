@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Bayer-gated regional damping](scene-mixture-wire-gaps.md#standing-gfx100s-comparisons)
+  reproduces the band-limited sky crop. Foliage and coarse fence change
+  by 2.300 and 2.789 DN16 camera-RGB RMS. Coarse crossings stay coherent.
 - [Corpus 100k with compiled DINO](corpus100k-trt-dino.md#standing-gfx100s-comparisons)
   keeps the sky smooth and coarse crossings coherent. The four native
   crops differ from IEEE FP32 by 0.186–0.301 DN16 RGB RMS.

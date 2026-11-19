@@ -318,6 +318,14 @@ spatial context. The 50,000-update schedule continues. The latest completed
 paired quality review is [40k](scene-full-epoch-40k.md).
 [First-epoch audit](results/scene-full-epoch-v1/paired-prefix-045346.json) ·
 [First-epoch segment receipts and source order](results/scene-full-epoch-v1/paired-prefix-045346.tar.xz).
+
+The local-only arm has reached update 47,500. Its next five segments
+contain 4,308 distinct second-pass visits and 17,232 native queries,
+with fresh noise seeds and source IDs in the frozen second-epoch order.
+Their retained loops take 1,304.67 s. The spatial arm continues toward
+the same checkpoint and the paired proof still ends at 45,346.
+[Local second-epoch audit](results/scene-full-epoch-v1/local-047500-second-epoch.json) ·
+[Continuation receipts](results/scene-full-epoch-v1/local-047500-second-epoch.tar.xz).
 [Matched 25k checkpoint receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [25k exact-photo and GFX review](scene-full-epoch-25k.md) ·
 [25,500 paired audit](results/scene-full-epoch-v1/paired-prefix-025500.json) ·

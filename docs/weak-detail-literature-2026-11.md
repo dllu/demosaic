@@ -744,6 +744,14 @@ reproduces that earlier phase path at lower feature cost. Learning from
 reciprocal green pairs lowers absolute gap error by 0.20 DN16 at comparable
 texture, with little difference in intact response.
 
+The [Bayer-gated regional damping study](scene-mixture-wire-gaps.md) tests
+true interruptions in weak wires above the band-limited regional mixture.
+It improves the ISO6400 intact-increment error by 0.370 DN16 while losing
+0.109 response points. The weak-band gap change is small, and error in the
+strong carrier that continues through the gap rises. A separate photo
+cohort with fresh noise confirms lower fine-flat and increment error.
+The data support a quieter operating point with lower response.
+
 ## What the existing work establishes
 
 | Evidence | Progress | What remains unresolved |
