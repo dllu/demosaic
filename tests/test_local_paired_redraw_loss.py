@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 import torch
-from train_local_paired_continuation import CORE, PATCH, PairedBands, observations
+from train_local_paired_continuation import CORE, PATCH, PairedBands, gap_projection, observations
 
 from demosaic.experiments.artifacts import reference
 
@@ -29,12 +29,14 @@ def test_redraw_mean_cancels_opposing_errors_but_retains_shared_errors():
     prediction[2] -= field
     loss, valid = bands.redraw_losses(prediction, batch)
     assert valid and loss["mean"].item() < 1e-8 and loss["individual"].item() > 1e-4
+    assert loss["repeat"].item() > loss["individual"].item()
 
     prediction[2] += 2 * field
     prediction.requires_grad_()
     loss, valid = bands.redraw_losses(prediction, batch)
     assert valid and loss["mean"].item() > 1e-4
     torch.testing.assert_close(loss["mean"], loss["individual"])
+    assert loss["repeat"].item() == 0
     (gradient,) = torch.autograd.grad(loss["mean"], prediction)
     assert torch.isfinite(gradient).all()
     assert gradient[:4].count_nonzero() > 0
@@ -51,6 +53,39 @@ def test_redraw_excludes_clipped_cores():
     losses, valid = bands.redraw_losses(prediction, batch)
     assert not valid
     assert all(value.item() == 0 for value in losses.values())
+
+
+def test_gap_projection_excludes_intact_area_and_the_continuing_direction():
+    bands, _, batch = _paired_sinusoid()
+    wire = {
+        "gap_center": (3, -5),
+        "gap_axes": (12, 24),
+        "gap_angle": 0,
+        "angles": (0, torch.pi / 2),
+        "periods": (12, 8),
+        "phases": (0, 0),
+    }
+    projection = gap_projection(wire)
+    axis = torch.arange(PATCH) - (PATCH - 1) / 2
+    y, x = torch.meshgrid(axis, axis, indexing="ij")
+    outside = ((x - 3) / 12).square() + ((y + 5) / 24).square() >= 1
+    assert projection[outside[CORE, CORE].flatten()].count_nonzero() == 0
+    pure_strong = (2 * torch.pi * x / 12).cos() + (4 * torch.pi * x / 12).sin()
+    clean = batch["sensor_target"]
+    prediction = clean + 1e-2 * (pure_strong + 0.01 * y + outside)
+    assert bands.gap_loss(prediction, batch, projection).item() < 1e-8
+
+    # Opposite leakage in the two present draws must not cancel in this loss.
+    weak = 3e-3 * (2 * torch.pi * y / 8).sin()
+    prediction[0] += weak
+    prediction[2] -= weak
+    prediction.requires_grad_()
+    loss = bands.gap_loss(prediction, batch, projection)
+    assert loss.item() > 1e-3
+    (gradient,) = torch.autograd.grad(loss, prediction)
+    assert torch.isfinite(gradient).all()
+    assert gradient[..., outside].count_nonzero() == 0
+    assert gradient[[1, 3, 4, 5]].count_nonzero() == 0
 
 
 @pytest.mark.parametrize("law", ["coupled", "independent"])

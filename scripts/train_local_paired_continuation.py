@@ -1,4 +1,4 @@
-"""Compare absolute and paired fine-detail supervision over the local 50k EMA."""
+"""Compare paired fine-detail reductions and stability supervision."""
 
 import argparse
 import json
@@ -26,6 +26,7 @@ from demosaic.experiments.artifacts import (
 )
 from demosaic.experiments.data.paired import paired_observation
 from demosaic.experiments.runtime import owner_identity
+from demosaic.inference import _stage_tiled_cuda
 from demosaic.losses import reconstruction_loss
 from demosaic.precision import amp_context, ieee_fp32
 from demosaic.prediction_archive import fingerprint
@@ -34,11 +35,13 @@ from demosaic.scene_inference import load_scene_checkpoint
 from demosaic.scene_training_data import _attenuate_local_contrast, scene_seed
 
 SEED = 202611191117
+STABILITY_SEED = 202611191231
 PATCH = 256
 BOX = (0, 0, PATCH, PATCH)
 CORE = slice(80, 176)
 FORWARD_ARGS = ("packed", "variance", "colors", "wb", "matrix")
 MODES = ("absolute", "paired")
+STABILITY_MODES = ("mean", "repeat", "repeat-gap")
 PROFILES = {"ISO400": (8e-5, 2.56e-8), "ISO6400": (0.00128, 6.5536e-6)}
 
 
@@ -165,6 +168,92 @@ def prepare_redraw(root, prior):
     )
 
 
+def prepare_stability(root, completed_path, scene_path):
+    completed = read_json(completed_path)
+    previous = read_json(checked(completed["plan"]))
+    scene = read_json(scene_path)
+    if (
+        completed["qualification"]
+        or completed["updates_per_arm"] != previous["steps_per_arm"]
+        or tuple(previous["mode_weights"]) != ("individual", "mean")
+        or completed["pair_draws_per_source"] != 2
+        or completed["parent"] != previous["parent"]
+        or scene["train_manifest"] not in previous["inputs"]
+        or scene["DINO_sha256"] != previous["DINO_sha256"]
+    ):
+        raise ValueError(
+            "Expected the completed matched mean-redraw training and its source corpus"
+        )
+    parent = completed["checkpoints"]["mean"]
+    for binding in [parent, *previous["inputs"]]:
+        checked(binding)
+    excluded = {
+        case["source"]["id"]
+        for key in ("schedule", "qualification_schedule")
+        for case in read_json(checked(previous[key]))
+    }
+    rows = [
+        json.loads(line)
+        for line in checked(scene["train_manifest"]).read_text().splitlines()
+        if line
+    ]
+    assert len(rows) == 90692 and all(row["split"] == "train" for row in rows)
+    eligible = [row for row in rows if row["id"] not in excluded]
+    rng = random.Random(STABILITY_SEED)
+    cells = list(product(("natural", "wire"), PROFILES, PATTERNS, ("coupled", "independent")))
+    cases = cells * 10
+    rng.shuffle(cases)
+    qualification_cases = [cells[i] for i in (0, 3, 8, 11, 17, 18, 25, 26)]
+    sources = rng.sample(eligible, len(cases) + len(qualification_cases))
+
+    root.mkdir(parents=True)
+    work, frozen = freeze_sources(Path.cwd(), root, [Path(__file__).name])
+    schedule, qualification = root / "schedule.json", root / "qualification-schedule.json"
+    for path, selected, recipes in (
+        (schedule, sources[: len(cases)], cases),
+        (qualification, sources[len(cases) :], qualification_cases),
+    ):
+        write_json(
+            path,
+            [
+                {"source": row, "kind": cell[0], "iso": cell[1], "pattern": cell[2], "law": cell[3]}
+                for row, cell in zip(selected, recipes, strict=True)
+            ],
+        )
+    write_json(
+        root / "plan.json",
+        previous
+        | {
+            "inputs": [
+                reference(completed_path),
+                completed["plan"],
+                parent,
+                reference(scene_path),
+                *previous["inputs"],
+                reference(schedule),
+                reference(qualification),
+            ],
+            "frozen_files": frozen,
+            "driver": reference(work / "scripts" / Path(__file__).name),
+            "schedule": reference(schedule),
+            "qualification_schedule": reference(qualification),
+            "parent": parent,
+            "parent_completion": reference(completed_path),
+            "initial_step": completed["updates_per_arm"],
+            "seed": STABILITY_SEED,
+            "steps_per_arm": len(cases),
+            "mode_weights": dict.fromkeys(STABILITY_MODES, 0.8),
+            "repeat_weight": 0.5,
+            "gap_weight": 0.8,
+            "scope": "All arms use the same absolute and mean-first paired losses. Repeat arms "
+            "penalize signed increment variability on independent Bayer pairs. Repeat-gap also "
+            "supervises the absent weak-wire direction in the exact synthetic gap on both "
+            "present draws. Fresh source photos relative to the two-draw study. Single-frame "
+            "inference remains unchanged.",
+        },
+    )
+
+
 def clean_crop(row, rng):
     source = checked({"path": row["cache"], "sha256": row["cache_sha256"]})
     rgb = np.load(source, mmap_mode="r", allow_pickle=False)
@@ -226,10 +315,10 @@ def wire_pair(photo, rng):
     )
 
 
-def observations(case, index, *, pair_draws=1):
+def observations(case, index, *, pair_draws=1, seed=SEED):
     if pair_draws not in (1, 2):
         raise ValueError("Expected one or two complete sensor draws of the clean pair")
-    rng = random.Random(scene_seed(SEED, index, "content"))
+    rng = random.Random(scene_seed(seed, index, "content"))
     row = case["source"]
     crop, geometry = clean_crop(row, rng)
     if case["kind"] == "natural":
@@ -245,7 +334,7 @@ def observations(case, index, *, pair_draws=1):
     shot, read = PROFILES[case["iso"]]
     jitter = 2 ** rng.uniform(-0.4, 0.4)
     common = replace(
-        sample_scene_recipe(scene_seed(SEED, index, "camera")),
+        sample_scene_recipe(scene_seed(seed, index, "camera")),
         pattern=case["pattern"],
         black=0.03,
         shot=shot * jitter,
@@ -253,7 +342,7 @@ def observations(case, index, *, pair_draws=1):
         exposure=2 ** rng.uniform(-2.2, 0.4),
     )
     seeds = {
-        key: scene_seed(SEED, index, key)
+        key: scene_seed(seed, index, key)
         for key in ("pair", "present", "absent", "flat", "ordinary")
     }
 
@@ -288,7 +377,7 @@ def observations(case, index, *, pair_draws=1):
     roles = draw_pair("")
     if pair_draws == 2:
         for key in ("pair-redraw", "present-redraw", "absent-redraw"):
-            seeds[key] = scene_seed(SEED, index, key)
+            seeds[key] = scene_seed(seed, index, key)
         roles.extend(draw_pair("-redraw"))
     roles.extend([observed(flat, "flat"), observed(crop, "ordinary")])
     values = {
@@ -353,7 +442,45 @@ class PairedBands:
             rms = [((power * band).mean(dim=(-2, -1)) + 1e-8).sqrt() - 1e-4 for band in self.bands]
             return torch.stack(rms).mean() * valid
 
-        return {"individual": penalty(spectrum), "mean": penalty(spectrum.mean(0))}, valid
+        return {
+            "individual": penalty(spectrum),
+            "mean": penalty(spectrum.mean(0)),
+            "repeat": penalty((spectrum[0] - spectrum[1]) / math.sqrt(2)),
+        }, valid
+
+    def gap_loss(self, prediction, batch, projection):
+        """Measure each present draw against the exact clean target inside the gap."""
+        clean = batch["sensor_target"][0:4:2, :, CORE, CORE]
+        weights = (self.luminance @ batch["matrix"][0]) * batch["wb"][0]
+        residual = prediction[0:4:2, :, CORE, CORE].float() - clean
+        luminance = (residual * weights[:, None, None]).sum(1).flatten(1)
+        response = luminance @ projection
+        valid = ((clean >= 0) & (clean < 0.98)).all()
+        return ((response.square().sum(1) + 1e-8).sqrt() - 1e-4).mean() * valid
+
+
+def gap_projection(wire):
+    """Unit-energy weak quadratures with compact support and strong-wire rejection."""
+    axis = torch.arange(CORE.start, CORE.stop) - (PATCH - 1) / 2
+    y, x = (coords.flatten() for coords in torch.meshgrid(axis, axis, indexing="ij"))
+    dx, dy = x - wire["gap_center"][0], y - wire["gap_center"][1]
+    c, s = math.cos(wire["gap_angle"]), math.sin(wire["gap_angle"])
+    a, b = wire["gap_axes"]
+    radius_squared = ((c * dx + s * dy) / a).square() + ((-s * dx + c * dy) / b).square()
+    taper = (1 - radius_squared).clamp_min(0)[:, None]
+    strong, weak = (
+        math.tau * ((math.cos(angle) * x + math.sin(angle) * y) / period + phase)
+        for angle, period, phase in zip(
+            wire["angles"], wire["periods"], wire["phases"], strict=True
+        )
+    )
+    nuisance = [torch.ones_like(x), x / 32, y / 32]
+    for harmonic in (1, 2, 3):
+        nuisance.extend([(strong * harmonic).cos(), (strong * harmonic).sin()])
+    basis, _ = torch.linalg.qr(taper * torch.stack(nuisance, dim=1))
+    target = taper * torch.stack((weak.cos(), weak.sin()), dim=1)
+    direction, _ = torch.linalg.qr(target - basis @ (basis.T @ target))
+    return direction * taper / taper.norm()
 
 
 def train(plan_path, output, *, qualification):
@@ -367,7 +494,8 @@ def train(plan_path, output, *, qualification):
     parent = plan["parent"]
     pair_draws = plan.get("pair_draws", 1)
     modes = tuple(plan["mode_weights"])
-    if (pair_draws, modes) not in ((1, MODES), (2, ("individual", "mean"))):
+    stability = modes == STABILITY_MODES
+    if (pair_draws, modes) not in ((1, MODES), (2, ("individual", "mean")), (2, STABILITY_MODES)):
         raise ValueError("Unexpected paired training mode or draw count")
     models, optimizers, averages = {}, {}, {}
     started = time.monotonic()
@@ -375,11 +503,13 @@ def train(plan_path, output, *, qualification):
         model, state = load_scene_checkpoint(
             checked(parent),
             weights="ema",
-            device="cuda",
+            device="cpu" if stability else "cuda",
             expected_sha256=parent["sha256"],
         )
-        assert state["mode"] == "none" and state["step"] == 50000
+        assert state["mode"] == "none" and state["step"] == plan.get("initial_step", 50000)
         assert model_hash(model.base.context.backbone) == plan["DINO_sha256"]
+        if stability:
+            _stage_tiled_cuda(model, torch.device("cuda"))
         model.train().to(memory_format=torch.channels_last)
         models[mode] = model
         optimizers[mode] = torch.optim.AdamW(
@@ -409,11 +539,14 @@ def train(plan_path, output, *, qualification):
                 example,
                 step + (plan["steps_per_arm"] if qualification else 0),
                 pair_draws=pair_draws,
+                seed=plan["seed"],
             )
             trace.write(json.dumps(about, sort_keys=True) + "\n")
             batch = {k: v.cuda() for k, v in values.items()}
             for key in ("packed", "variance", "target", "sensor_target"):
                 batch[key] = batch[key].contiguous(memory_format=torch.channels_last)
+            wire = about["geometry"].get("wire")
+            gap = gap_projection(wire).cuda() if stability and wire is not None else None
             data_seconds += time.monotonic() - mark
             warmup = policy["warmup"]
             progress = max(0, step - warmup) / (plan["steps_per_arm"] - warmup)
@@ -443,10 +576,17 @@ def train(plan_path, output, *, qualification):
                 redraw = {}
                 if pair_draws == 2:
                     redraw, valid = bands.redraw_losses(prediction, batch)
-                    paired = redraw[mode]
+                    paired = redraw["mean" if stability else mode]
                 else:
                     paired, valid = bands.loss(prediction, batch)
                 loss = absolute + plan["mode_weights"][mode] * paired
+                if stability:
+                    if mode != "mean" and about["law"] == "independent":
+                        loss += plan["repeat_weight"] * redraw["repeat"]
+                    if gap is not None:
+                        redraw["gap"] = bands.gap_loss(prediction, batch, gap)
+                        if mode == "repeat-gap":
+                            loss += plan["gap_weight"] * redraw["gap"]
                 if not torch.isfinite(loss):
                     raise FloatingPointError(f"Nonfinite loss in {mode} arm")
                 if step == 1:
@@ -534,6 +674,9 @@ if __name__ == "__main__":
     redraw = subcommands.add_parser("prepare-redraw")
     redraw.add_argument("root", type=Path)
     redraw.add_argument("prior_plan", type=Path)
+    stability = subcommands.add_parser("prepare-stability")
+    for key in ("root", "completion", "scene_plan"):
+        stability.add_argument(key, type=Path)
     run = subcommands.add_parser("train")
     run.add_argument("plan", type=Path)
     run.add_argument("output", type=Path)
@@ -549,5 +692,7 @@ if __name__ == "__main__":
         )
     elif args.command == "prepare-redraw":
         prepare_redraw(args.root.absolute(), args.prior_plan)
+    elif args.command == "prepare-stability":
+        prepare_stability(args.root.absolute(), args.completion, args.scene_plan)
     else:
         train(args.plan, args.output, qualification=args.qualification)

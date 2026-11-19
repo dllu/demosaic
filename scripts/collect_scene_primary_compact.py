@@ -51,7 +51,21 @@ def prepare(
         secondary.append(reference(continuation))
         extended = read_json(checked(secondary[0]))
         assert not extended["qualification"] and extended["DINO_unchanged"]
-        assert extended["parent"] == models["none"]["checkpoint"]
+        continued_parent = None
+        if extended["parent"] != models["none"]["checkpoint"]:
+            training = read_json(checked(extended["plan"]))
+            origin = read_json(checked(training["parent_completion"]))
+            assert origin["parent"] == models["none"]["checkpoint"]
+            assert not origin["qualification"] and origin["DINO_unchanged"]
+            assert extended["parent"] == training["parent"] == origin["checkpoints"]["mean"]
+            assert training["initial_step"] == origin["updates_per_arm"]
+            secondary.extend((extended["plan"], training["parent_completion"]))
+            continued_parent = "prior-mean"
+            models[continued_parent] = {
+                "kind": "scene",
+                "checkpoint": extended["parent"],
+                "step": training["initial_step"],
+            }
         for name, checkpoint in extended["checkpoints"].items():
             models[name] = {
                 "kind": "scene",
@@ -59,7 +73,7 @@ def prepare(
                 "step": extended["updates_per_arm"],
             }
         if only_continuation:
-            keep = {"V120", *extended["checkpoints"]}
+            keep = {"V120", continued_parent, *extended["checkpoints"]}
             models = {name: config for name, config in models.items() if name in keep}
     root.mkdir(parents=True)
     work, sources = freeze_sources(Path.cwd(), root, [Path(__file__).name])
@@ -158,7 +172,7 @@ def collect(plan_path, action):
     torch.set_num_threads(2)
     torch.backends.cudnn.benchmark = False
     root = Path(plan["root"])
-    owner = root / action
+    owner = root / ("full" if action == "cameras" else action)
     owner.mkdir(exist_ok=True)
     with exclusive_run(owner):
         replay(plan_path, plan, owner, action)
@@ -172,7 +186,7 @@ def replay(plan_path, plan, owner, action):
     assert Counter(row["stage"] for row in canonical["records"]) == COUNTS
     archived = read_json(checked(plan["parent_CPU_probes"]))
     probes = {(row["stage"], row["batch"]): row for row in archived["records"]}
-    if action == "full":
+    if action in ("full", "cameras"):
         if plan["probe_only"]:
             raise ValueError("An intermediate-checkpoint probe is limited to preflight")
         qualification = reference(root / "preflight" / "result.json")
@@ -185,7 +199,12 @@ def replay(plan_path, plan, owner, action):
         row
         for stage in ("known", "unseen", "photo")
         for row in canonical["records"]
-        if row["stage"] == stage and (action == "full" or (stage, row["batch"]) in probes)
+        if row["stage"] == stage
+        and (
+            action == "full"
+            or (action == "cameras" and stage != "photo")
+            or (action == "preflight" and (stage, row["batch"]) in probes)
+        )
     ]
     models = load_models(plan)
     fields = (
@@ -287,7 +306,7 @@ def replay(plan_path, plan, owner, action):
                     flush=True,
                 )
     write_json(
-        owner / "result.json",
+        owner / ("camera-result.json" if action == "cameras" else "result.json"),
         {
             "plan": proof,
             "canonical_inputs": plan["canonical_inputs"],
@@ -315,7 +334,7 @@ if __name__ == "__main__":
     setup.add_argument("--probe", action="store_true")
     setup.add_argument("--continuation", type=Path)
     setup.add_argument("--only-continuation", action="store_true")
-    for label in ("preflight", "full"):
+    for label in ("preflight", "cameras", "full"):
         action.add_parser(label).add_argument("plan", type=Path)
     args = parser.parse_args()
     if args.action == "prepare":
