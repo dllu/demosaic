@@ -69,7 +69,10 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [Corpus/local frequency mixture](local-band-mixture.md) ·
 [Local-only 50k completion and scoped review](local-50000-scoped.md) ·
 [Matched 50k native review](scene-50000-native.md) ·
+[Matched 50k distant-context review](scene-50000-controlled.md) ·
+[Aligned-context difference](aligned-context-delta.md) ·
 [Paired local continuation](local-paired-continuation.md) ·
+[Mean versus individual redraw loss](local-redraw-average.md) ·
 [whole-image preview sampling and output-band comparison](scene-preview-scale.md) ·
 [paired fine luminance and flat support](paired-luminance-detail.md) ·
 [exact orientation averaging](paired-head-symmetry.md) ·

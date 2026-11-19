@@ -996,6 +996,13 @@ variance, extending the existing conditional-response work to the new heads.
 Evaluate phase/direction and off-target energy as well as template projection;
 a high projection can coexist with rounded nodes, doubled wires or false color.
 
+In the completed full-trunk redraw study, averaging the signed increment
+before applying its loss raises response and lowers the error shared
+across redraws. For an individual restoration under independent noise,
+draw-sensitive variance rises more than shared error falls. The planted
+wire tests also show additional weak-direction residue in true gaps.
+[Mean versus individual redraw loss](local-redraw-average.md).
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate

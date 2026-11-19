@@ -1,0 +1,75 @@
+"""Protect the paired-reduction distinction and single-draw observation replay."""
+
+import numpy as np
+import pytest
+import torch
+from train_local_paired_continuation import CORE, PATCH, PairedBands, observations
+
+from demosaic.experiments.artifacts import reference
+
+
+def _paired_sinusoid():
+    bands = PairedBands("cpu", [(1 / 32, 1 / 8), (1 / 8, 1 / 3)])
+    field = 1e-3 * torch.cos(2 * torch.pi * torch.arange(PATCH) / 9)
+    target = torch.full((6, 3, PATCH, PATCH), 0.2)
+    target[0] += field
+    target[2] = target[0]
+    batch = {
+        "sensor_target": target,
+        "matrix": torch.eye(3).repeat(6, 1, 1),
+        "wb": torch.ones(6, 3),
+    }
+    return bands, field, batch
+
+
+def test_redraw_mean_cancels_opposing_errors_but_retains_shared_errors():
+    bands, field, batch = _paired_sinusoid()
+    prediction = batch["sensor_target"].clone()
+    prediction[0] += field
+    prediction[2] -= field
+    loss, valid = bands.redraw_losses(prediction, batch)
+    assert valid and loss["mean"].item() < 1e-8 and loss["individual"].item() > 1e-4
+
+    prediction[2] += 2 * field
+    prediction.requires_grad_()
+    loss, valid = bands.redraw_losses(prediction, batch)
+    assert valid and loss["mean"].item() > 1e-4
+    torch.testing.assert_close(loss["mean"], loss["individual"])
+    (gradient,) = torch.autograd.grad(loss["mean"], prediction)
+    assert torch.isfinite(gradient).all()
+    assert gradient[:4].count_nonzero() > 0
+    assert gradient[4:].count_nonzero() == 0
+    assert gradient[:, :, : CORE.start].count_nonzero() == 0
+
+
+def test_redraw_excludes_clipped_cores():
+    bands, field, batch = _paired_sinusoid()
+    target = batch["sensor_target"]
+    prediction = target.clone()
+    prediction[0] += field
+    target[[0, 2], 0, CORE.start, CORE.start] = 1
+    losses, valid = bands.redraw_losses(prediction, batch)
+    assert not valid
+    assert all(value.item() == 0 for value in losses.values())
+
+
+@pytest.mark.parametrize("law", ["coupled", "independent"])
+def test_second_draw_keeps_clean_pair_and_original_observations(tmp_path, law):
+    field = np.random.default_rng(45).integers(5000, 20000, (PATCH, PATCH, 3), dtype=np.uint16)
+    path = tmp_path / "photo.npy"
+    np.save(path, field, allow_pickle=False)
+    source = {
+        "id": "fixture",
+        "cache": str(path),
+        "cache_sha256": reference(path)["sha256"],
+        "shape": list(field.shape),
+    }
+    case = {"source": source, "kind": "wire", "iso": "ISO6400", "pattern": "GBRG", "law": law}
+    single, _ = observations(case, 12)
+    double, record = observations(case, 12, pair_draws=2)
+    for key, first in single.items():
+        assert torch.equal(first, torch.cat([double[key][:2], double[key][4:]]))
+    for key in ("target", "sensor_target", "colors", "wb", "matrix"):
+        assert torch.equal(double[key][:2], double[key][2:4])
+    assert not torch.equal(double["packed"][:2], double["packed"][2:4])
+    assert len(set(record["seeds"].values())) == 8

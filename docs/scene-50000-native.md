@@ -28,12 +28,13 @@ Corpus 100k rows use CPU IEEE FP32 on the same native observations
 and rendering policy. The new native-query forwards total 11.09 s
 local-only and 15.62 s spatial, with full scene preparation and
 load timed separately in the receipt. Both endpoints completed the
-native review below. Both fixed measured-camera panels are complete.
-The separate 64-photo controlled review and canonical 427-photo
-panel are running.
+native review below. Both fixed measured-camera panels and the separate
+64-photo controlled review are complete. The canonical 427-photo panel
+is running.
 [Matched training recipe](scene-full-epoch.md) ·
 [Local-only scope on 48 backgrounds](local-50000-scoped.md) ·
 [Fixed camera panels](scene-50000-cameras.md) ·
+[64-photo distant-context review](scene-50000-controlled.md) ·
 [Comparable PSNR history](performance-history.md).
 
 ## Development exact targets

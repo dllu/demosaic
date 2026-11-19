@@ -12,6 +12,9 @@ is a short continuation of the full restoration trunk from the local
 [Frozen drivers and receipts](results/local-paired-continuation-v1/evidence.tar.xz) ·
 [Native crop provenance](images/local-paired-continuation-v1/manifest.json).
 
+The two-draw follow-up separates the timing of averaging from the
+paired loss itself. [Mean versus individual redraw loss](local-redraw-average.md).
+
 ## Training and review coverage
 
 Both arms start from [Local 50k EMA](local-50000-scoped.md), SHA256

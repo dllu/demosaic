@@ -125,6 +125,46 @@ def prepare(root, parent_audit, scene_plan, photo_panel, prior_panel):
     )
 
 
+def prepare_redraw(root, prior):
+    """Use the same clean targets, with one additional independent pair per source."""
+    source = reference(prior)
+    previous = read_json(checked(source))
+    if previous.get("pair_draws", 1) != 1 or previous["members"] != [
+        "present",
+        "absent",
+        "flat",
+        "ordinary",
+    ]:
+        raise ValueError("Redraw training requires the single-pair continuation plan")
+    for binding in previous["inputs"]:
+        checked(binding)
+    root.mkdir(parents=True)
+    work, frozen = freeze_sources(Path.cwd(), root, [Path(__file__).name])
+    write_json(
+        root / "plan.json",
+        previous
+        | {
+            "inputs": [source, *previous["inputs"]],
+            "frozen_files": frozen,
+            "driver": reference(work / "scripts" / Path(__file__).name),
+            "pair_draws": 2,
+            "members": [
+                "present",
+                "absent",
+                "present-redraw",
+                "absent-redraw",
+                "flat",
+                "ordinary",
+            ],
+            "mode_weights": {"individual": 0.8, "mean": 0.8},
+            "scope": "Fixed two-draw comparison. Both arms optimize the same per-observation "
+            "absolute reconstruction on all six observations. The individual arm averages the "
+            "signed pair band losses across draws. The mean arm computes the same band loss on "
+            "the average signed increment. Each restoration uses a single captured observation.",
+        },
+    )
+
+
 def clean_crop(row, rng):
     source = checked({"path": row["cache"], "sha256": row["cache_sha256"]})
     rgb = np.load(source, mmap_mode="r", allow_pickle=False)
@@ -186,7 +226,9 @@ def wire_pair(photo, rng):
     )
 
 
-def observations(case, index):
+def observations(case, index, *, pair_draws=1):
+    if pair_draws not in (1, 2):
+        raise ValueError("Expected one or two complete sensor draws of the clean pair")
     rng = random.Random(scene_seed(SEED, index, "content"))
     row = case["source"]
     crop, geometry = clean_crop(row, rng)
@@ -218,9 +260,9 @@ def observations(case, index):
     def observed(rgb, key):
         return observe_scene(rgb, replace(common, noise_seed=seeds[key])).crops([BOX])
 
-    if case["law"] == "independent":
-        pair = [observed(present, "present"), observed(absent, "absent")]
-    else:
+    def draw_pair(suffix):
+        if case["law"] == "independent":
+            return [observed(present, "present" + suffix), observed(absent, "absent" + suffix)]
         wb = torch.tensor(common.wb)[None]
         inverse = torch.tensor(common.camera_inverse)[None]
         pair_arrays, _ = paired_observation(
@@ -230,7 +272,7 @@ def observations(case, index):
             [common.pattern],
             wb,
             inverse,
-            seeds["pair"],
+            seeds["pair" + suffix],
         )
         targets = torch.stack([present, absent]) * common.exposure
         clean, reference_rgb = camera_pair(
@@ -241,12 +283,21 @@ def observations(case, index):
         )
         arrays = {key: torch.from_numpy(pair_arrays[key]) for key in (*FORWARD_ARGS, "target")}
         assert torch.equal(arrays["target"], reference_rgb)
-        pair = [arrays | {"sensor_target": clean}]
-    roles = [*pair, observed(flat, "flat"), observed(crop, "ordinary")]
+        return [arrays | {"sensor_target": clean}]
+
+    roles = draw_pair("")
+    if pair_draws == 2:
+        for key in ("pair-redraw", "present-redraw", "absent-redraw"):
+            seeds[key] = scene_seed(SEED, index, key)
+        roles.extend(draw_pair("-redraw"))
+    roles.extend([observed(flat, "flat"), observed(crop, "ordinary")])
     values = {
         key: torch.cat([v[key] for v in roles])
         for key in (*FORWARD_ARGS, "target", "sensor_target")
     }
+    if pair_draws == 2:
+        for key in ("target", "sensor_target", "colors", "wb", "matrix"):
+            assert torch.equal(values[key][:2], values[key][2:4])
     about = {
         "index": index,
         "source_id": row["id"],
@@ -287,6 +338,23 @@ class PairedBands:
         rms = [((energy * band).mean() + 1e-8).sqrt() - 1e-4 for band in self.bands]
         return (torch.stack(rms).mean() * valid), valid
 
+    def redraw_losses(self, prediction, batch):
+        """Reduce robust band losses before or after taking the redraw average."""
+        clean = batch["sensor_target"][:4, :, CORE, CORE]
+        camera_error = prediction[:4, :, CORE, CORE].float() - clean
+        weights = (self.luminance @ batch["matrix"][0]) * batch["wb"][0]
+        luminance = (camera_error * weights[:, None, None]).sum(1)
+        signed = luminance[0:4:2] - luminance[1:4:2]
+        spectrum = torch.fft.fft2(signed * self.window, norm="ortho")
+        valid = ((clean >= 0) & (clean < 0.98)).all()
+
+        def penalty(values):
+            power = values.abs().square()
+            rms = [((power * band).mean(dim=(-2, -1)) + 1e-8).sqrt() - 1e-4 for band in self.bands]
+            return torch.stack(rms).mean() * valid
+
+        return {"individual": penalty(spectrum), "mean": penalty(spectrum.mean(0))}, valid
+
 
 def train(plan_path, output, *, qualification):
     plan = read_json(plan_path)
@@ -297,9 +365,13 @@ def train(plan_path, output, *, qualification):
     write_json(output / "owner.json", owner_identity())
     torch.set_num_threads(2)
     parent = plan["parent"]
+    pair_draws = plan.get("pair_draws", 1)
+    modes = tuple(plan["mode_weights"])
+    if (pair_draws, modes) not in ((1, MODES), (2, ("individual", "mean"))):
+        raise ValueError("Unexpected paired training mode or draw count")
     models, optimizers, averages = {}, {}, {}
     started = time.monotonic()
-    for mode in MODES:
+    for mode in modes:
         model, state = load_scene_checkpoint(
             checked(parent),
             weights="ema",
@@ -322,7 +394,7 @@ def train(plan_path, output, *, qualification):
     bands = PairedBands("cuda", plan["pair_bands_cycles_per_pixel"])
     policy = plan["optimizer"]
     data_seconds = 0.0
-    used = {mode: 0.0 for mode in MODES}
+    used = {mode: 0.0 for mode in modes}
     valid_pairs = 0
     began = time.monotonic()
     with (
@@ -334,7 +406,9 @@ def train(plan_path, output, *, qualification):
             assert psutil.virtual_memory().available > 24 * 2**30
             mark = time.monotonic()
             values, about = observations(
-                example, step + (plan["steps_per_arm"] if qualification else 0)
+                example,
+                step + (plan["steps_per_arm"] if qualification else 0),
+                pair_draws=pair_draws,
             )
             trace.write(json.dumps(about, sort_keys=True) + "\n")
             batch = {k: v.cuda() for k, v in values.items()}
@@ -350,7 +424,7 @@ def train(plan_path, output, *, qualification):
                 * (floor + (1 - floor) * (1 + math.cos(math.pi * progress)) / 2)
             )
             record = {"step": step, "lr": lr}
-            for mode in MODES:
+            for mode in modes:
                 mark = time.monotonic()
                 model, optimizer = models[mode], optimizers[mode]
                 model.base.set_noise(about["camera"]["shot"], about["camera"]["read"])
@@ -366,12 +440,17 @@ def train(plan_path, output, *, qualification):
                     camera_supervision="sensor-valid-v1",
                     reconstruction_charbonnier_epsilon=0.0003,
                 )
-                paired, valid = bands.loss(prediction, batch)
+                redraw = {}
+                if pair_draws == 2:
+                    redraw, valid = bands.redraw_losses(prediction, batch)
+                    paired = redraw[mode]
+                else:
+                    paired, valid = bands.loss(prediction, batch)
                 loss = absolute + plan["mode_weights"][mode] * paired
                 if not torch.isfinite(loss):
                     raise FloatingPointError(f"Nonfinite loss in {mode} arm")
                 if step == 1:
-                    if mode == MODES[0]:
+                    if mode == modes[0]:
                         initial = prediction.detach().clone()
                     else:
                         assert torch.equal(prediction.detach(), initial)
@@ -389,8 +468,9 @@ def train(plan_path, output, *, qualification):
                     "absolute": float(absolute.detach()),
                     "paired": float(paired.detach()),
                     "grad": float(norm),
+                    **{name + "_loss": float(value.detach()) for name, value in redraw.items()},
                 }
-                if mode == "paired":
+                if mode == modes[-1]:
                     valid_pairs += int(valid)
                 used[mode] += time.monotonic() - mark
             log.write(json.dumps(record, sort_keys=True) + "\n")
@@ -398,7 +478,7 @@ def train(plan_path, output, *, qualification):
                 print(step, valid_pairs, round(time.monotonic() - began, 2), record, flush=True)
     elapsed = time.monotonic() - began
     checkpoints = {}
-    for mode in MODES:
+    for mode in modes:
         model = models[mode]
         assert model_hash(model.base.context.backbone) == plan["DINO_sha256"]
         path = output / f"{mode}.pt"
@@ -429,7 +509,8 @@ def train(plan_path, output, *, qualification):
             "qualification": qualification,
             "updates_per_arm": len(schedule),
             "source_photos_per_arm": len(schedule),
-            "native_observations_per_arm": 4 * len(schedule),
+            "native_observations_per_arm": len(plan["members"]) * len(schedule),
+            "pair_draws_per_source": pair_draws,
             "valid_core_pairs": valid_pairs,
             "training_seconds": elapsed,
             "compute_seconds": used,
@@ -450,6 +531,9 @@ if __name__ == "__main__":
     lock = subcommands.add_parser("prepare")
     for key in ("root", "parent_audit", "scene_plan", "photo_panel", "prior_panel"):
         lock.add_argument(key, type=Path)
+    redraw = subcommands.add_parser("prepare-redraw")
+    redraw.add_argument("root", type=Path)
+    redraw.add_argument("prior_plan", type=Path)
     run = subcommands.add_parser("train")
     run.add_argument("plan", type=Path)
     run.add_argument("output", type=Path)
@@ -463,5 +547,7 @@ if __name__ == "__main__":
             args.photo_panel,
             args.prior_panel,
         )
+    elif args.command == "prepare-redraw":
+        prepare_redraw(args.root.absolute(), args.prior_plan)
     else:
         train(args.plan, args.output, qualification=args.qualification)

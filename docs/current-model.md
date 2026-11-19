@@ -309,6 +309,14 @@ In both standing GFX scenes it keeps a smooth sky and coarse crossings.
 Fine cab intersections remain incomplete. Its fixed camera scores
 are −0.12252 dB known and +0.00638 dB unseen versus Corpus 100k.
 [Fixed camera panels](scene-50000-cameras.md).
+The [64-photo distant-context test](scene-50000-controlled.md) finds
+0.378 points more ISO6400 fine response for matching versus swapped
+context in the faintest third. Spatial response remains 0.106 points
+below local-only across all 64 independent ISO6400 cases.
+Applying the [aligned-context difference](aligned-context-delta.md) over
+Local 50k at the relaxed fit changes held-out natural response by
++0.013 points and lowers planted-wire response by 0.131 points.
+The strict flat budget selects zero correction.
 [Local 50k FP16](local-50000-scoped.md#fp16-inference-at-fixed-geometry)
 cuts a resident 512-pixel batch-four forward from 2,018 to 326 ms.
 The measured weak responses and standing crops remain similar.
@@ -325,6 +333,13 @@ falls 5.98 points. Both GFX scenes were reviewed and the fine cab
 crossings remain incomplete. On the fixed camera panels it gains
 0.04198 dB known and 0.07490 dB unseen over its matched control.
 The fixed photo evaluation continues. [Camera scores](scene-50000-cameras.md).
+[Mean redraw loss](local-redraw-average.md) raises natural and wire
+response by 3.07 and 3.31 points over its matched individual-loss
+control. Under independent noise it reduces error shared by repeated
+draws and raises draw-to-draw error. The fixed native gap test finds
+0.357 DN16 more error in the absent weak direction. The fine real
+cab crossings remain incomplete, and the known/unseen camera scores
+fall 0.03235/0.04143 dB versus the individual-loss control.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

@@ -8,6 +8,8 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Mean and individual redraw losses](local-redraw-average.md#standing-gfx100s-comparisons) | Both noise profiles, both ROIs and both camera JPEGs were reviewed. The transferred profile shows clearer right diagonals, with many fine crossings still missing |
+| [Aligned-context difference](aligned-context-delta.md#standing-gfx100s-comparisons) | Both profiles and both JPEG references were reviewed. The relaxed composition changes the four crops by 0.60–1.61 DN16 RGB RMS from Local 50k. Fine cab intersections remain incomplete |
 | [Matched local and spatial 50k EMA](scene-50000-native.md#standing-gfx100s-comparisons) | Spatial changes the four crops by 2.17–4.04 DN16 RGB RMS from local-only. Transferred right diagonals remain clearest and fine intersections stay incomplete |
 | [Paired fine-detail continuation](local-paired-continuation.md#standing-gfx100s-comparisons) | The transferred profile keeps the clearest right diagonals. The paired arm slightly softens the lattice and leaves fine crossings incomplete. Both ROI pairs, JPEGs and AHD were viewed |
 | [Local-only 50k EMA](local-50000-scoped.md#standing-gfx100s-comparisons) | All four crops change by 0.054–0.066 DN16 RGB RMS versus 47.5k. Both ROIs, priors, JPEGs and AHD reviewed. Fine crossings stay incomplete |

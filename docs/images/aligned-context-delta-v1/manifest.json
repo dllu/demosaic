@@ -1,0 +1,1289 @@
+{
+  "viewing": {
+    "timestamp_local": "2026-11-19T12:18:30.649769-08:00",
+    "main": "Sky stays smooth. Fine cables, foliage and existing coarse crossings look much like Local 50k.",
+    "mesh": "Both profiles were inspected. The transferred profile has clearer right diagonals. Fine crossings are still incomplete.",
+    "exact": "The train outline and faint wires look much like Local 50k. The true weak diagonal is visible in the exact target."
+  },
+  "checkpoint": {
+    "none": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-050000/segments/through-050000/attempt-01/work/step050000.pt",
+      "sha256": "62f4e9ce84075c8df1a254a1889033b5787133e8c98c63e0ec3d174a94734959"
+    },
+    "spatial": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/spatial-050000/segments/through-050000/attempt-01/work/step050000.pt",
+      "sha256": "3cfe9517164e621e112c7bff436a02c064d6db5f310a13afc0d3b7d0054c33bf"
+    }
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/aligned-context-delta-v1/review/result.json",
+    "sha256": "34fa0f52d4a1355536bf6b2fc0d25d5815f8ce839aa9c5560576cd97d8251fdf"
+  },
+  "boards": [
+    {
+      "id": "31-natural",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 3.0303030303030303,
+      "display_contrast": 2,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "case": {
+        "source": {
+          "attribution": null,
+          "author": "mattbuck (category)",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/4d/4dbfde3489b44204707a12cfc0d88f63c0e703fd.npy",
+          "cache_sha256": "60450878c40c4271becba5c7b086b1bf0fbee1741bdd3e9f7b49190b31396beb",
+          "color_space": "linear-sRGB",
+          "credit": "Own work by mattbuck.",
+          "download_path": "images/4d/bf/4dbfde3489b44204707a12cfc0d88f63c0e703fd.jpg",
+          "dtype": "uint16",
+          "height": 2544,
+          "id": "4dbfde3489b44204707a12cfc0d88f63c0e703fd",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Reading_railway_station_MMB_87_221137_165124.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Reading_railway_station_MMB_87_221137_165124.jpg",
+          "sha1": "4dbfde3489b44204707a12cfc0d88f63c0e703fd",
+          "sha1_hex": "4dbfde3489b44204707a12cfc0d88f63c0e703fd",
+          "shape": [
+            636,
+            1139,
+            3
+          ],
+          "split": "val",
+          "title": "File:Reading railway station MMB 87 221137 165124.jpg",
+          "width": 4557
+        },
+        "index": 31,
+        "box": [
+          678,
+          86,
+          256,
+          256
+        ],
+        "camera": {
+          "pattern": "GRBG",
+          "wb": [
+            3.3741818442722873,
+            1.0,
+            1.0895197749606724
+          ],
+          "camera_inverse": [
+            [
+              0.9039956445137748,
+              0.0003570626556984235,
+              0.09564729283052677
+            ],
+            [
+              0.061650725073598485,
+              0.8772743734223535,
+              0.06107490150404807
+            ],
+            [
+              0.06608829362166362,
+              0.09124504728320572,
+              0.8426666590951306
+            ]
+          ],
+          "exposure": 0.3350448910698432,
+          "shot": 0.0004231327423132672,
+          "read": 4.3829695983587916e-06,
+          "black": 0.03,
+          "noise_seed": 1539199489347447255
+        },
+        "kind": "natural"
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/green-covariance-refit-v1/fresh/31-input.npz",
+        "sha256": "b01ace20b371b99504492393f0305561217503d656ddddfcf7241c2e9a9d0689"
+      },
+      "predictions": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/spatial-50k-exact/31.npz",
+        "sha256": "e4680844b0463ee544158da3b1bb490d45b50b552ceed7d07fd3c9d2adf69486"
+      },
+      "profile": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "exact/31-natural-comparison.png",
+          "sha256": "cfd7210e4d4411919efaf2a521c7efc24c4adc653547aca2ae8865f643016105"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local-only 50k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Spatial 50k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Aligned half-strength",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/31-natural-triplet.png",
+          "sha256": "5ffa8b3c20ee3323af7512606268e203104f3f5392fd37e00029a1ea43a851cc"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Aligned half-strength",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "19-wire",
+      "ROI_xywh": [
+        48,
+        48,
+        160,
+        160
+      ],
+      "display_exposure": 2,
+      "display_contrast": 1,
+      "ADC_bits": 16,
+      "black_level": 0.03,
+      "case": {
+        "source": {
+          "attribution": null,
+          "author": "Makele-90",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/69/69b3208a59e179a90fc881ba50d7614dde410614.npy",
+          "cache_sha256": "b22a2ff713ae5a07252c4b7140b41312640dd9503583a549ee71dacad3af0137",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/69/b3/69b3208a59e179a90fc881ba50d7614dde410614.jpg",
+          "dtype": "uint16",
+          "height": 2736,
+          "id": "69b3208a59e179a90fc881ba50d7614dde410614",
+          "license": "CC BY-SA 3.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Hirvijoki%2C_Lemu%2C_Myn%C3%A4m%C3%A4ki%2C_10.4.2010_%282%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Hirvijoki,_Lemu,_Myn%C3%A4m%C3%A4ki,_10.4.2010_(2).JPG",
+          "sha1": "69b3208a59e179a90fc881ba50d7614dde410614",
+          "sha1_hex": "69b3208a59e179a90fc881ba50d7614dde410614",
+          "shape": [
+            684,
+            912,
+            3
+          ],
+          "split": "val",
+          "title": "File:Hirvijoki, Lemu, Myn\u00e4m\u00e4ki, 10.4.2010 (2).JPG",
+          "width": 3648
+        },
+        "index": 19,
+        "box": [
+          188,
+          162,
+          512,
+          512
+        ],
+        "camera": {
+          "pattern": "GBRG",
+          "wb": [
+            1.708311662814289,
+            1.0,
+            1.0582839373617996
+          ],
+          "camera_inverse": [
+            [
+              0.8506050706308059,
+              0.06394303297951594,
+              0.08545189638967818
+            ],
+            [
+              0.019572091946956423,
+              0.8875304316651782,
+              0.09289747638786533
+            ],
+            [
+              0.025122254022730186,
+              0.06315421373374851,
+              0.9117235322435213
+            ]
+          ],
+          "exposure": 1.009885694768787,
+          "shot": 0.0021909884293916924,
+          "read": 2.3887364244419992e-06,
+          "black": 0.03,
+          "noise_seed": 4587541365022872269
+        },
+        "kind": "wire",
+        "geometry": {
+          "family": "contrast-step",
+          "frequency": [
+            [
+              0.09114743330532192,
+              0.04442056141566865
+            ],
+            [
+              0.07969570374132479,
+              -0.052570085403612556
+            ]
+          ],
+          "phase": [
+            2.2253649335754337,
+            2.1140140572585526
+          ],
+          "strength": [
+            0.009384122581037949,
+            0.011346778738263213
+          ],
+          "width": [
+            0.11574749570922302,
+            0.13064343871206613
+          ],
+          "edge": -12.557890178088671,
+          "gap_center": [
+            -15.965826162087117,
+            2.842896716329406
+          ],
+          "gap_width": 21.73987208625572,
+          "gap_length": 54.0936708171818,
+          "gap_orientation": 1.289014770531053,
+          "angle": 0.4003956891618756,
+          "tint": [
+            0.12099202214294379,
+            0.1264841993018299,
+            0.12503836929889595
+          ]
+        }
+      },
+      "input": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/green-covariance-refit-v1/fresh/19-input.npz",
+        "sha256": "3e9ccac0c257ef18cd28a994707aa71e8132474f9438aa0279edca0fc1dd969a"
+      },
+      "predictions": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/local-paired-continuation-v1/spatial-50k-exact/19.npz",
+        "sha256": "c3127ea0e9e5182dfaa9884dfe2527afffb3d9752f4426744ebcd737f7ed5be9"
+      },
+      "profile": {
+        "name": "iso6400",
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "exposure": 0.33
+      },
+      "board": {
+        "image": {
+          "path": "exact/19-wire-comparison.png",
+          "sha256": "7eaf3579ceadbc58d0abd63ad8b2f1e0e82c138291d453ab8e2aef55e39ec032"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Local-only 50k EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Spatial 50k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Aligned half-strength",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "triplet": {
+        "image": {
+          "path": "exact/19-wire-triplet.png",
+          "sha256": "3230d12f8dee701380bd28447c899dcbdbe92c2b674b902118a8fa5d43745399"
+        },
+        "panels": [
+          {
+            "label": "Noisy Malvar",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Aligned half-strength",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "label": "Exact GT",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "main-overcast-sky-main-overcast-sky",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+        "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "roi": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "exposure": 4.0,
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "board": {
+        "image": {
+          "path": "standing/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "ffc37927b20093c6c35daac159c4c0185b801824835d84a5bd4eb7c251b35a0b"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/main-overcast-sky-main-overcast-sky.png",
+        "sha256": "7359952418586af41f4ffc06b95c5b8ad58b848e4ef65f1809a4938974c766ac"
+      },
+      "against_local_RMS_DN16": 0.30269374976245106
+    },
+    {
+      "id": "main-building-detail-main-building-detail",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+        "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "roi": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "exposure": 4.0,
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "board": {
+        "image": {
+          "path": "standing/main-building-detail-main-building-detail.png",
+          "sha256": "24442b53fdbd1e6b539622847809af3474abee6711140788aae3cd88539878ab"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/main-building-detail-main-building-detail.png",
+        "sha256": "4f1b84c95ec8ec2c6dfc4adc40445e626f9be5250c7abaca56ed1cb62e529292"
+      },
+      "against_local_RMS_DN16": 5.806776817648511
+    },
+    {
+      "id": "main-foliage-main-foliage",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+        "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "roi": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "exposure": 4.0,
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "board": {
+        "image": {
+          "path": "standing/main-foliage-main-foliage.png",
+          "sha256": "780d44c4dbac674bf675cdcea8d179788a265d11241d52fffd2fe9427ea5479f"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/main-foliage-main-foliage.png",
+        "sha256": "73f38f9b0561c9edf8ef4ad2e733fa7e950ae94580d56dc6ceb9eaa867d348a4"
+      },
+      "against_local_RMS_DN16": 1.7193563209901113
+    },
+    {
+      "id": "main-chain-link-fence-main-chain-link-fence",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+        "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "roi": [
+        176,
+        176,
+        160,
+        160
+      ],
+      "exposure": 4.0,
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.553600000000001e-06
+      },
+      "board": {
+        "image": {
+          "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "a19afb3f53ab805965700be316703a6d161f6df7de306f8d1111d2c8fe316ce0"
+        },
+        "panels": [
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/main-chain-link-fence-main-chain-link-fence.png",
+        "sha256": "9a8d3ccd9d0d189983908cc836f79e3345ba234117f7e8c2eaa3bce9330a1431"
+      },
+      "against_local_RMS_DN16": 2.616762544002293
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-left",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "roi": [
+        206,
+        229,
+        160,
+        160
+      ],
+      "exposure": 16.0,
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "board": {
+        "image": {
+          "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "98bcaac2626f9527fbc2b71fb79eb47ed07b5739fdaf39df5ae10336fe5af3ea"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/mesh-nominal-fine-green-mesh-left.png",
+        "sha256": "2bacb0f535c12a21b3bc1f80f651413ec5dd2835b4ecbd021999d97e5c779265"
+      },
+      "against_local_RMS_DN16": 0.6033984788744152
+    },
+    {
+      "id": "mesh-nominal-fine-green-mesh-right",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+        "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "roi": [
+        426,
+        189,
+        160,
+        160
+      ],
+      "exposure": 16.0,
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06,
+        "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection."
+      },
+      "board": {
+        "image": {
+          "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "b2346fc1316c6ef80cf636011cc1d857a30df738f71effd7fde534b31f9b762a"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/mesh-nominal-fine-green-mesh-right.png",
+        "sha256": "1084d83d4e08da1eaa144e999f871abe3ee6f9bdbd8fd751944b065ef763d8d9"
+      },
+      "against_local_RMS_DN16": 1.1053911520370678
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-left",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "roi": [
+        206,
+        229,
+        160,
+        160
+      ],
+      "exposure": 16.0,
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "board": {
+        "image": {
+          "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "ae1cc4f88733a116fa01bbe703870c9202adf209d73e89ccc0c7e17ba3d77988"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/mesh-profile3879-fine-green-mesh-left.png",
+        "sha256": "d437e4891d57ef371de429c97fae16163b1e6375bcce1b03ec0202004c7d0f48"
+      },
+      "against_local_RMS_DN16": 0.9458840927348635
+    },
+    {
+      "id": "mesh-profile3879-fine-green-mesh-right",
+      "array": {
+        "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+        "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+        "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+      },
+      "roi": [
+        426,
+        189,
+        160,
+        160
+      ],
+      "exposure": 16.0,
+      "noise": {
+        "shot": 0.0014635775921166604,
+        "read": 1.0715704128646712e-06,
+        "source": "input Haar fit",
+        "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration."
+      },
+      "board": {
+        "image": {
+          "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "fee8d75d520740e6d3e53bcf101ea657a15325674865100b72a0f7cdadfc7f8a"
+        },
+        "panels": [
+          {
+            "name": "ISO6400 camera JPEG",
+            "png_xywh": [
+              8,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Noisy (Malvar)",
+            "png_xywh": [
+              176,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "V120 EMA",
+            "png_xywh": [
+              344,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Parent 100k EMA",
+            "png_xywh": [
+              512,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Local-only 50k EMA",
+            "png_xywh": [
+              680,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Spatial 50k EMA",
+            "png_xywh": [
+              848,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "Aligned half-strength",
+            "png_xywh": [
+              1016,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 AHD reference",
+            "png_xywh": [
+              1184,
+              24,
+              160,
+              160
+            ]
+          },
+          {
+            "name": "ISO100 camera JPEG",
+            "png_xywh": [
+              1352,
+              24,
+              160,
+              160
+            ]
+          }
+        ]
+      },
+      "source_board": {
+        "path": "/home/dllu/proj/demosaic/docs/images/scene-050000-native-v1/mesh-profile3879-fine-green-mesh-right.png",
+        "sha256": "46d546702b46b430e84d81bea7f1d0f7819529b6babbc2fb46c1230c3ca50573"
+      },
+      "against_local_RMS_DN16": 1.6056828436612467
+    }
+  ]
+}

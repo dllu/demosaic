@@ -32,7 +32,11 @@ from demosaic.scene_inference import load_scene_checkpoint
 COUNTS = {"photo": 3108, "known": 24, "unseen": 30}
 
 
-def prepare(root, historic_plan, matched, *, probe=False, continuation=None):
+def prepare(
+    root, historic_plan, matched, *, probe=False, continuation=None, only_continuation=False
+):
+    if only_continuation and continuation is None:
+        raise ValueError("A continuation-only replay requires a completed training receipt")
     template = read_json(historic_plan)
     combined = read_json(matched)
     assert combined["matched_input_traces"] and (probe or combined["training_complete"])
@@ -54,6 +58,9 @@ def prepare(root, historic_plan, matched, *, probe=False, continuation=None):
                 "checkpoint": checkpoint,
                 "step": extended["updates_per_arm"],
             }
+        if only_continuation:
+            keep = {"V120", *extended["checkpoints"]}
+            models = {name: config for name, config in models.items() if name in keep}
     root.mkdir(parents=True)
     work, sources = freeze_sources(Path.cwd(), root, [Path(__file__).name])
     required_keys = (
@@ -181,7 +188,11 @@ def replay(plan_path, plan, owner, action):
         if row["stage"] == stage and (action == "full" or (stage, row["batch"]) in probes)
     ]
     models = load_models(plan)
-    fields = ContextFields(plan, owner / "contexts", models["spatial"], [], save_arrays=False)
+    fields = (
+        ContextFields(plan, owner / "contexts", models["spatial"], [], save_arrays=False)
+        if "spatial" in models
+        else None
+    )
     sections, comparisons, cases = defaultdict(list), [], []
     began = time.monotonic()
     elapsed = defaultdict(float)
@@ -197,7 +208,7 @@ def replay(plan_path, plan, owner, action):
                     batch = {k: torch.from_numpy(archive[k]) for k in archive.files}
                 for key in ARGUMENTS:
                     assert fingerprint(batch[key]) == record["fingerprints"][key]
-                scenes, boxes, context = fields.queries(record, batch)
+                scenes, boxes, context = fields.queries(record, batch) if fields else ([], [], [])
                 device_batch = {k: v.cuda() for k, v in batch.items()}
                 for key in ("packed", "variance"):
                     device_batch[key] = device_batch[key].contiguous(
@@ -303,6 +314,7 @@ if __name__ == "__main__":
         setup.add_argument(name, type=Path)
     setup.add_argument("--probe", action="store_true")
     setup.add_argument("--continuation", type=Path)
+    setup.add_argument("--only-continuation", action="store_true")
     for label in ("preflight", "full"):
         action.add_parser(label).add_argument("plan", type=Path)
     args = parser.parse_args()
@@ -313,6 +325,7 @@ if __name__ == "__main__":
             args.matched,
             probe=args.probe,
             continuation=args.continuation,
+            only_continuation=args.only_continuation,
         )
     else:
         collect(args.plan, args.action)

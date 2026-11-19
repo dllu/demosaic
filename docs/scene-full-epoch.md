@@ -345,13 +345,14 @@ checkpoint SHA256 is
 Both final artifacts contain raw and EMA weights. The local-only
 scoped numerical and native review is complete. The matched native
 development and standing GFX review is complete. Both fixed camera
-panels are complete. The controlled weak-detail and fixed photo
-reviews are running.
+panels and the 64-photo controlled weak-detail review are complete.
+The fixed 427-photo replay is running.
 [Matched completion receipt](results/scene-full-epoch-v1/paired-prefix-050000.json) ·
 [Final segment evidence](results/scene-full-epoch-v1/paired-prefix-050000.tar.xz) ·
 [Local 50k scoped review](local-50000-scoped.md) ·
 [Matched native review](scene-50000-native.md) ·
-[Fixed camera panels](scene-50000-cameras.md).
+[Fixed camera panels](scene-50000-cameras.md) ·
+[Controlled distant-context review](scene-50000-controlled.md).
 
 ### Compact fixed-panel evaluation
 

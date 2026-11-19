@@ -21,6 +21,9 @@ The scene 50k and paired continuation results extend the scored
 camera panels. Both 50k arms lose known-camera PSNR versus Corpus
 100k. The paired continuation gains 0.07490 dB over its absolute
 control on the unseen panel. [Fixed camera review](scene-50000-cameras.md).
+The mean redraw loss raises fine response and reduces measured-CFA
+PSNR on both panels against the individual-loss control.
+[Redraw camera review](local-redraw-average.md#fixed-camera-panels).
 
 The [Q2/Sony/GFX50R gallery](cross-camera-qualitative.md) still covers
 V104/V114/V115 and RawNIND, with no clean reference. Newer qualitative reviews

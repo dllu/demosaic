@@ -3,6 +3,12 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Mean and individual redraw losses](local-redraw-average.md#standing-gfx100s-comparisons)
+  keep the sky smooth and coarse crossings coherent. Main 160-pixel
+  crop changes span 2.54–16.29 DN16 RGB RMS for mean loss versus Local 50k.
+- [Aligned-context difference](aligned-context-delta.md#standing-gfx100s-comparisons)
+  changes the sky by 0.30 DN16 RMS versus Local 50k. Existing coarse
+  crossings stay coherent, with soft cables and foliage.
 - [Local 50k guarded precision](local50000-guarded-precision.md#native-crops)
   compares three full-frame precision policies. The guard holds all
   near-saturation RGB16 differences within one DN16 of IEEE FP32.
