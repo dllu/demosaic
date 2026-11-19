@@ -11,14 +11,15 @@ fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fif
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
 two arms match through 35,000 updates on 70,000 distinct photos and
-280,000 native queries per arm. The 35k paired photo evaluation is running.
-The completed 30k exact-photo review finds lower independent
-ISO6400 fine error and weaker true recovery than Corpus 100k. Both standing
-scenes show incomplete fine cab crossings at 30k.
+280,000 native queries per arm. The local arm verifies 75,000 distinct
+photos at 37,500 updates. The completed 35k review finds lower independent
+ISO6400 fine-increment and flat-region error than at 30k. Both models
+still recover less fine detail than Corpus 100k. Fine cab crossings stay
+incomplete in the viewed 35k standing scenes.
 [Coverage and source audit](scene-full-epoch.md#execution-status) ·
 [25k photo review](scene-full-epoch-25k.md) ·
 [30k photo review](scene-full-epoch-30k.md) ·
-[Completed 30k standing GFX review](scene-full-epoch-30k.md#standing-gfx100s-comparisons).
+[35k photo and standing GFX review](scene-full-epoch-35k.md).
 
 At 10,000 updates, the retained loops process 17.01 native queries per
 second locally and 13.19 with spatial features. Reading and CPU

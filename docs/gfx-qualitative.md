@@ -24,6 +24,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Exterior Bayer bend estimation](bayer-exterior-bend.md#standing-gfx100s-comparisons)
   slightly changes coarse wire contrast. The other three main crops
   reproduce the fixed fit at display precision.
+- [Bend-aligned donor spectra](bayer-warped-spacing.md#standing-gfx100s-comparisons)
+  reproduce all four preceding joint-checked crops. The sky stays
+  smooth and coarse crossings remain coherent.
 - [Local amplitude envelopes](bayer-amplitude-envelope.md#standing-gfx100s-comparisons)
   preserve the visible coarse weave. Checked green and all-color fits
   reproduce the sky, building and foliage at display precision.
@@ -45,6 +48,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Matched local and spatial 30k models](scene-full-epoch-30k.md#standing-gfx100s-comparisons)
   retain the smooth sky and coherent coarse crossings. Fine leaf tips and
   building cables stay soft.
+- [Matched local and spatial 35k models](scene-full-epoch-35k.md#standing-gfx100s-comparisons)
+  retain the smooth sky and coherent coarse crossings. Fine leaf
+  and building details stay soft.
 - [Within-window phase localization](local-phase-envelope.md#standing-gfx100s-comparisons)
   keeps the smooth sky and coherent coarse wires. The fine building and
   foliage details remain soft.

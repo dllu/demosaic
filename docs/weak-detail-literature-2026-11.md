@@ -464,6 +464,12 @@ The [matched 30k review](scene-full-epoch-30k.md) recovers 0.121 independent
 ISO6400 fine-response points in the local arm at 0.037 DN16 higher
 flat RMS. The 30k spatial arm still ties the mismatched distant control
 on response and exact-flat error at ISO6400.
+The completed [35k comparison](scene-full-epoch-35k.md) lowers
+independent ISO6400 fine-increment and fine-flat RMS in both arms
+versus 30k. Mean fine response rises slightly with intervals spanning
+zero and remains below Corpus 100k. Matching the distant preview
+changes fine response by 0.002 points versus the wrong preview.
+The 35k standing crops still have incomplete fine cab crossings.
 
 [Directional gap supervision](directional-gap-training.md) separates
 strong-wave repair from the missing weak band in exact gaps. It gains
@@ -539,6 +545,12 @@ Fitting the center and bend jointly from noisy RAW gains 0.387 points
 after the original eligibility rule. Only three of twenty bent draws
 qualify. The four cab comparisons reproduce the fixed fit at display
 precision.
+
+[Bend-aligned donor spectra](bayer-warped-spacing.md) compensate the
+opposite apparent frequency shifts in the exterior RAW windows.
+A crop-checked fallback adds 5.24 weak-response points on development
+fields. Both exterior proposals fail the central check on independently
+replayed bent fields, and the standing crops reproduce the prior output.
 
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the

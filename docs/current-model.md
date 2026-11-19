@@ -165,6 +165,11 @@ fine cab crossings remain incomplete.
 fine-response points in the local arm versus 25k with 0.037 DN16 higher
 fine-flat RMS. Aligned and mismatched distant views give similar ISO6400
 fine response and flat error in the spatial arm.
+[Matched scene training at 35k](scene-full-epoch-35k.md) lowers
+independent ISO6400 increment and flat-region error in both arms
+versus 30k. Fine response still trails Corpus 100k. Correct distant
+context gives little change versus the wrong distant view. Both fine
+cab ROIs still lack complete crossings.
 [Directional gap supervision](directional-gap-training.md) gains 0.44
 wire response points at similar total gap correction and adds 0.066
 DN16 of weak-band gap error. Nominal right cab diagonals strengthen
@@ -206,6 +211,9 @@ gains 1.55 weak-response points with exact spacing. Noisy nomination
 admits three of twenty bent captures and the joint fit gains 0.387
 points across that panel. The real fine mesh retains the fixed 64-pixel
 result at display precision.
+[Bend-aligned donor spectra](bayer-warped-spacing.md) find more bent
+candidates on development fields. Neither independent bent candidate
+passes the local check. The standing crops reproduce the preceding path.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

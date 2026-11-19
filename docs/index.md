@@ -41,6 +41,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [matched 20k exact-target and GFX reviews](scene-full-epoch-20k.md) ·
 [matched 25k exact-photo and standing GFX reviews](scene-full-epoch-25k.md) ·
 [matched 30k exact-photo and standing GFX reviews](scene-full-epoch-30k.md) ·
+[matched 35k exact-photo and standing GFX reviews](scene-full-epoch-35k.md) ·
 [directional weak-wire gap supervision](directional-gap-training.md) ·
 [competing-wave validation and donor nomination](competing-wave-validation.md) ·
 [wider Bayer neighborhoods](wide-bayer-neighborhood.md) ·
@@ -50,6 +51,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [64-pixel Bayer carrier fitting](bayer-carrier-scale.md) ·
 [shared Bayer phase geometry](bayer-shared-phase.md) ·
 [exterior Bayer bend estimation](bayer-exterior-bend.md) ·
+[bend-aligned donor spectra](bayer-warped-spacing.md) ·
 [local amplitude checks and crop API replay](bayer-amplitude-envelope.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
