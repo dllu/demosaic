@@ -82,10 +82,12 @@ class FactoredLuminanceDetail(nn.Module):
             F.pad(field, (0, 0, radius, radius), mode="replicate"), taps.view(1, 1, -1, 1)
         )
 
-    def correction(self, frames, scale):
+    def logits(self, frames):
         activation = self.output(self.blocks(F.silu(self.stem(frames))))
-        with torch.autocast(frames.device.type, enabled=False), ieee_fp32():
-            detail, confidence = F.pixel_shuffle(activation.float(), 2).split(1, dim=1)
+        return F.pixel_shuffle(activation.float(), 2).split(1, dim=1)
+
+    def deliver(self, detail, confidence, scale):
+        with torch.autocast(detail.device.type, enabled=False), ieee_fp32():
             gain = confidence.sigmoid()
             if self.gain_floor:
                 gain = torch.lerp(gain, torch.ones_like(gain), self.gain_floor)
@@ -93,6 +95,9 @@ class FactoredLuminanceDetail(nn.Module):
             if self.band_limited:
                 return self.blur(proposal, self.short) - self.blur(proposal, self.long)
             return proposal
+
+    def correction(self, frames, scale):
+        return self.deliver(*self.logits(frames), scale)
 
     def forward(self, base, packed, variance, colors, wb, matrix):
         frames, scale, direction = self.features(base, packed, variance, colors, wb, matrix)

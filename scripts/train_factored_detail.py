@@ -11,6 +11,7 @@ from pathlib import Path
 import psutil
 import torch
 from profile_raw_kernel_inference import model_hash
+from torch.nn import functional as F
 from train_local_paired_continuation import (
     CORE,
     FORWARD_ARGS,
@@ -37,7 +38,9 @@ from demosaic.precision import amp_context, ieee_fp32
 from demosaic.scene_inference import load_scene_checkpoint
 
 ARMS = {"direct": False, "band-limited": True}
+PHASE_ARMS = {"support-only": True, "phase-support": True}
 SEED = 202611191447
+PHASE_SEED = 202611191529
 
 
 def ancestor_plans(end):
@@ -58,7 +61,7 @@ def ancestor_plans(end):
     return plans.values()
 
 
-def prepare(root, parent_completion, scene_path):
+def prepare(root, parent_completion, scene_path, *, phase_reference=None):
     prior_end = read_json(parent_completion)
     prior = read_json(checked(prior_end["plan"]))
     manifest = read_json(scene_path)["train_manifest"]
@@ -72,7 +75,14 @@ def prepare(root, parent_completion, scene_path):
         raise ValueError("Require the matched continuing-wire endpoints and bound train split")
     parent = prior_end["checkpoints"]["wire-aligned"]
     checked(parent)
-    ancestors = ancestor_plans(parent_completion)
+    ancestors = list(ancestor_plans(parent_completion))
+    phase = phase_reference is not None
+    if phase:
+        previous = reference(phase_reference)
+        previous_plan = read_json(checked(previous))
+        if previous_plan["arms"] != ARMS or previous_plan["parent"] != parent:
+            raise ValueError("Require the original factored trial on this mixed-wire parent")
+        ancestors.append((previous, previous_plan))
     schedule_refs = [
         plan[key] for _, plan in ancestors for key in ("schedule", "qualification_schedule")
     ]
@@ -83,7 +93,8 @@ def prepare(root, parent_completion, scene_path):
     assert len(rows) == 90692 and all(row["split"] == "train" for row in rows)
     eligible = [row for row in rows if row["id"] not in excluded]
 
-    rng = random.Random(SEED)
+    seed = PHASE_SEED if phase else SEED
+    rng = random.Random(seed)
     cells = list(product(("natural", "wire"), PROFILES, PATTERNS, ("coupled", "independent")))
     recipes = cells * 15
     rng.shuffle(recipes)
@@ -101,7 +112,7 @@ def prepare(root, parent_completion, scene_path):
         for row, cell in zip(split, draws, strict=True):
             kind, iso, pattern, law = cell
             case = {"source": row, "kind": kind, "iso": iso, "pattern": pattern, "law": law}
-            if kind == "wire":
+            if kind == "wire" and not phase:
                 case["strong_continues"] = (
                     visits[cell] % 5 != 0 if name == "schedule" else len(cases) % 2 == 0
                 )
@@ -133,9 +144,14 @@ def prepare(root, parent_completion, scene_path):
             "driver": reference(work / "scripts" / Path(__file__).name),
             **schedules,
             "excluding_distinct_prior_ids": len(excluded),
-            "seed": SEED,
+            "seed": seed,
             "steps_per_arm": len(recipes),
-            "arms": ARMS,
+            "arms": PHASE_ARMS if phase else ARMS,
+            **(
+                {"pair_axis": "strong", "support_weight": 0.0015, "phase_weight": 2.0}
+                if phase
+                else {}
+            ),
             "pair_bands_cycles_per_pixel": prior["pair_bands_cycles_per_pixel"],
             "loss_weights": {
                 "pair": 0.8,
@@ -151,9 +167,15 @@ def prepare(root, parent_completion, scene_path):
                 "ema": 0.985,
                 "weight_decay": 0.0001,
             },
-            "scope": "Frozen aligned-control EMA. Same zero start, features, updates, and losses. "
-            "Only the delivered signed correction's band filtering differs. "
-            "Inference uses one Bayer frame; no waveform, reference or scene oracle.",
+            "scope": (
+                "Same frozen parent, band filter, gate support labels and counterfactual Bayer "
+                "pairs. The phase arm alone supervises the ungated signed proposal along the "
+                "exact missing continuing waveform. Single noisy frame at inference."
+                if phase
+                else "Frozen aligned-control EMA. Same zero start, features, updates, and losses. "
+                "Only the delivered signed correction's band filtering differs. "
+                "Inference uses one Bayer frame; no waveform, reference or scene oracle."
+            ),
         },
     )
 
@@ -208,13 +230,50 @@ def objective(prediction, delta, batch, bands, wire, projection, independent, we
     return loss, penalties, valid
 
 
+def phase_labels(base, batch, wire, luma, scale):
+    """Derive the parent deficit and its spatial support from the clean signed pair."""
+    if not wire:
+        return None
+    weights = (luma @ batch["matrix"][0]) * batch["wb"][0]
+    clean = batch["sensor_target"][:2, :, CORE, CORE]
+    visible = ((clean >= 0) & (clean < 0.98)).all(dim=(0, 1), keepdim=True)
+    true_signal = ((clean[0] - clean[1]) * weights[:, None, None]).sum(0, keepdim=True)
+    rgb = base[:4, :, CORE, CORE]
+    measured = ((rgb[0:4:2] - rgb[1:4:2]) * weights[:, None, None]).sum(1).mean(0)
+    power = (visible * true_signal.square()).sum().clamp_min(1e-12)
+    missing = ((visible * true_signal * (true_signal - measured)).sum() / power).clamp(0, 1)
+    coverage = F.avg_pool2d(true_signal.abs().gt(1e-6).float(), 7, 1, 3)
+    valid = visible * (scale[:4, :, CORE, CORE] > 0)
+    return coverage * valid, true_signal * missing
+
+
+def auxiliary_supervision(detail, confidence, scale, labels, *, teach_phase):
+    confidence = confidence[..., CORE, CORE]
+    # Exact-flat negatives on every example, including those with no planted wire.
+    support = F.softplus(confidence[4]).mean()
+    if labels is None:
+        return {"support": support}
+    weights, target = labels
+    positives, negatives = weights[0:4:2], weights[1:4:2]
+    alternatives = (F.softplus(-confidence[0:4:2]) * positives).sum() / positives.sum().clamp_min(
+        1
+    ) + (F.softplus(confidence[1:4:2]) * negatives).sum() / negatives.sum().clamp_min(1)
+    result = {"support": (0.5 * alternatives + support) / 2}
+    if teach_phase:
+        proposal = detail[0:4:2, :, CORE, CORE].tanh() * scale[0:4:2, :, CORE, CORE]
+        error = ((proposal - target).square() + 1e-8).sqrt() - 1e-4
+        result["phase"] = (error * positives).sum() / positives.sum().clamp_min(1)
+    return result
+
+
 def train(plan_path, output, *, qualification):
     plan = read_json(plan_path)
     verify_plan(plan)
     assert checked(plan["driver"]) == Path(__file__)
     arms = plan["arms"]
     gain_floor = plan.get("gain_floor", 0.0)
-    assert arms == (ARMS if gain_floor == 0.0 else {"band-limited": True})
+    phase = plan.get("pair_axis") == "strong"
+    assert arms == (PHASE_ARMS if phase else ARMS if gain_floor == 0.0 else {"band-limited": True})
     key = "qualification_schedule" if qualification else "schedule"
     schedule = read_json(checked(plan[key]))
     output.mkdir()
@@ -268,6 +327,7 @@ def train(plan_path, output, *, qualification):
                 step + (plan["steps_per_arm"] if qualification else 0),
                 pair_draws=2,
                 seed=plan["seed"],
+                pair_axis=plan.get("pair_axis", "weak"),
             )
             trace.write(json.dumps(about, sort_keys=True) + "\n")
             batch = {k: v.cuda() for k, v in values.items()}
@@ -280,6 +340,7 @@ def train(plan_path, output, *, qualification):
             with torch.no_grad(), amp_context("cuda", dtype="bfloat16"):
                 base = parent(*inputs)
                 frames, scale, direction = first_head.features(base, *inputs)
+            labels = phase_labels(base, batch, wire, bands.luminance, scale) if phase else None
             assert base.dtype == torch.float32
             warmup = policy["warmup"]
             progress = max(0, step - warmup) / (plan["steps_per_arm"] - warmup)
@@ -295,7 +356,8 @@ def train(plan_path, output, *, qualification):
                 optimizer.param_groups[0]["lr"] = lr
                 optimizer.zero_grad(set_to_none=True)
                 with amp_context("cuda", dtype="bfloat16"):
-                    delta = head.correction(frames, scale)
+                    detail, confidence = head.logits(frames)
+                delta = head.deliver(detail, confidence, scale)
                 prediction = base + direction * delta
                 if step == 1:
                     assert torch.equal(prediction, base)
@@ -309,6 +371,12 @@ def train(plan_path, output, *, qualification):
                     about["law"] == "independent",
                     plan["loss_weights"],
                 )
+                if phase:
+                    auxiliary = auxiliary_supervision(
+                        detail, confidence, scale, labels, teach_phase=arm == "phase-support"
+                    )
+                    loss += sum(plan[key + "_weight"] * value for key, value in auxiliary.items())
+                    penalties.update(auxiliary)
                 loss.backward()
                 norm = torch.nn.utils.clip_grad_norm_(
                     head.parameters(), 1.0, error_if_nonfinite=True
@@ -374,6 +442,7 @@ if __name__ == "__main__":
     lock = sub.add_parser("prepare")
     for name in ("root", "parent_completion", "scene_plan"):
         lock.add_argument(name, type=Path)
+    lock.add_argument("--strong-pairs-from", type=Path)
     floor = sub.add_parser("prepare-floor")
     floor.add_argument("root", type=Path)
     floor.add_argument("replay_plan", type=Path)
@@ -383,7 +452,12 @@ if __name__ == "__main__":
     run.add_argument("--qualification", action="store_true")
     args = parser.parse_args()
     if args.command == "prepare":
-        prepare(args.root.absolute(), args.parent_completion, args.scene_plan)
+        prepare(
+            args.root.absolute(),
+            args.parent_completion,
+            args.scene_plan,
+            phase_reference=args.strong_pairs_from,
+        )
     elif args.command == "prepare-floor":
         prepare_floor(args.root.absolute(), args.replay_plan)
     else:

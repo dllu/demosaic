@@ -335,7 +335,7 @@ def clean_crop(row, rng):
     return patch, {"crop_xywh": [x, y, PATCH, PATCH], "D4": [turns, mirror]}
 
 
-def wire_pair(photo, rng, *, strong_continues=None):
+def wire_pair(photo, rng, *, strong_continues=None, pair_axis="weak"):
     """Place a faint interrupted direction over a common strong wire and background."""
     axis = torch.arange(PATCH) - (PATCH - 1) / 2
     y, x = torch.meshgrid(axis, axis, indexing="ij")
@@ -365,6 +365,10 @@ def wire_pair(photo, rng, *, strong_continues=None):
     tint = torch.tensor([rng.uniform(0.4, 1.1), 1.0, rng.uniform(0.4, 1.1)])[:, None, None]
     addition = strengths[1] * weak * tint * gap * border
     assert ((addition == 0)[:, radius <= 1]).all() and addition[..., CORE, CORE].abs().max() > 0
+    if pair_axis == "strong":
+        # Use an explicit difference so shared background, exterior and weak wire match.
+        absence = 0.05 + 0.75 * photo + strengths[0] * (strong * gap) + addition
+        addition = strengths[0] * strong * (1 - gap)
     return (
         absence + addition,
         absence,
@@ -384,9 +388,11 @@ def wire_pair(photo, rng, *, strong_continues=None):
     )
 
 
-def observations(case, index, *, pair_draws=1, seed=SEED):
+def observations(case, index, *, pair_draws=1, seed=SEED, pair_axis="weak"):
     if pair_draws not in (1, 2):
         raise ValueError("Expected one or two complete sensor draws of the clean pair")
+    if pair_axis not in ("weak", "strong"):
+        raise ValueError("Select the weak-wire or continuing-wire intervention")
     rng = random.Random(scene_seed(seed, index, "content"))
     row = case["source"]
     crop, geometry = clean_crop(row, rng)
@@ -397,7 +403,7 @@ def observations(case, index, *, pair_draws=1, seed=SEED):
         geometry["contrast"] = contrast
     else:
         present, absent, geometry["wire"] = wire_pair(
-            crop, rng, strong_continues=case.get("strong_continues")
+            crop, rng, strong_continues=case.get("strong_continues"), pair_axis=pair_axis
         )
     flat = _attenuate_local_contrast(absent, BOX, 0.0, flat_core=True)
     assert torch.equal(flat[:, CORE, CORE], flat[:, 80:81, 80:81].expand(3, 96, 96))
