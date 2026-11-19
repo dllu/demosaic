@@ -142,6 +142,12 @@ when the footprint must be found automatically.
 on supported photographic fixtures at fixed luminance. The gain comes
 with small leakage inside true gaps. Neutral replay and both GFX families
 reproduce the preceding fit.
+[Matched scene training at 20k](scene-full-epoch-20k.md) lowers independent
+ISO6400 fine-increment error over Corpus 100k by 0.76 DN16 and loses
+0.75 response points across 64 photos. The local arm is nearly tied.
+With scene features active the exact flats are cleaner than with masking.
+Matching the distant view changes fine error little, and the two 20k
+GFX views retain soft, incomplete fine cab crossings.
 [Indexed Bayer phase extraction](compact-spectral-witness.md) reproduces
 the earlier transported head and reduces median feature time from 52.6
 to 30.7 ms on a fine-cab query. The added neighbor-pair head lowers

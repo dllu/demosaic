@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Matched local and spatial 20k models](scene-full-epoch-20k.md#standing-gfx100s-comparisons) | Both 20k arms, both profiles and both ROIs were viewed with both JPEGs and ISO100 AHD. Some nominal right diagonals look softer than Corpus 100k. Transferred conditioning shows more fragments with incomplete fine crossings |
 | [Indexed Bayer phase and neighbor pairs](compact-spectral-witness.md#standing-gfx100s-comparisons) | Both ROIs and conditioning profiles were reviewed beside both JPEGs and independent AHD. The indexed path reproduces the previous transport output. The added checks leave fine crossings incomplete |
 | [Refined weak-wire phase](subbin-spectral-witness.md#standing-gfx100s-comparisons) | Both profiles and ROIs were viewed with both camera JPEGs and independent AHD. The left diagonals stay diffuse and fine right crossings remain incomplete |
 | [Exact gap supervision and Bayer witnesses](learned-spectral-gaps.md#standing-gfx100s-comparisons) | Both ROIs and conditioning profiles were reviewed for all new heads alongside both JPEGs and independent AHD. The left lattice stays diffuse and right crossings remain incomplete |

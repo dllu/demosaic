@@ -450,8 +450,11 @@ independent pooled ISO6400 error by about 0.2%. The
 [native Bayer green innovation comparison](green-phase-innovation.md) changes
 the proposal itself and lowers matched-response error near strong steps,
 with higher whole-core error and incomplete fine crossings. The
-[full-epoch scene trial](scene-full-epoch.md) is training separately on
-the matched larger source schedule.
+[full-epoch scene trial](scene-full-epoch.md) trains separately on the
+matched larger source schedule. At the [64-photo 20k review](scene-full-epoch-20k.md)
+both arms lower independent ISO6400 fine error over Corpus 100k with
+lower fine response. The correct and mismatched distant views are nearly
+tied, and both standing real scenes retain incomplete fine cab crossings.
 
 A [dense regional context replay](scene-regional-context.md) gives that
 trial's spatial 12k checkpoint a registered higher-resolution neighborhood.

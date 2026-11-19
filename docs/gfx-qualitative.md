@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Matched local and spatial 20k models](scene-full-epoch-20k.md#standing-gfx100s-comparisons)
+  keep the sky smooth and both coarse fence directions coherent. Fine
+  building lines and leaves remain soft.
 - [Indexed Bayer phase and neighbor pairs](compact-spectral-witness.md#standing-gfx100s-comparisons)
   preserve the smooth overcast sky and coherent coarse fence. The additional
   checks leave the fine building lines and foliage soft.

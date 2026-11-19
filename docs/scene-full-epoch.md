@@ -270,10 +270,11 @@ The local checkpoint is
 `b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889`.
 The spatial checkpoint is
 `e56429f491c6712ab931ad4364d5d27ca6a45df5b3d23a7616a915c3aae8dd1f`.
-Both resume the original 50k schedule. The last completed exact-target and
-both standing qualitative reviews use the matched 15k EMA checkpoints.
-The matched 20k worker collects the full 64-photo exact-target panel and
-both standing GFX scenes.
+Both resume the original 50k schedule. The latest complete interim quality
+review uses the matched 20k EMA checkpoints and covers all 64 exact-target
+photo sources and both standing GFX scenes.
+[20k numerical and native review](scene-full-epoch-20k.md) ·
+[Completed review bindings](results/scene-full-epoch-v1/matched-020000-quality-status.json).
 [15,500 audit](results/scene-full-epoch-v1/paired-prefix-015500.json) ·
 [16,000 audit](results/scene-full-epoch-v1/paired-prefix-016000.json) ·
 [16,500 audit](results/scene-full-epoch-v1/paired-prefix-016500.json) ·

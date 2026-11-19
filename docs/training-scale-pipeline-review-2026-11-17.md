@@ -11,12 +11,13 @@ fifth-visit crop coverage. [Fifth-epoch source audit](full-corpus-scaling.md#fif
 The [matched full-epoch scene continuation](scene-full-epoch.md) extends
 the separate native-context study to 90,692 eligible photos per arm. The
 two arms match through 20,000 updates on 40,000 distinct photos and
-160,000 native queries per arm. The 15k exact-target monitor, native
-triplets and both standing 15k GFX reviews are complete. The 20k
-review worker covers 64 exact-target photo sources and both GFX scenes.
+160,000 native queries per arm. The matched 20k review is complete on
+64 exact-target photo sources and both standing GFX scenes. The spatial
+arm has lower independent ISO6400 fine error and weaker true recovery
+than Corpus 100k.
 [Coverage and source audit](scene-full-epoch.md#execution-status) ·
-[Intermediate quality review](scene-full-epoch.md#matched-exact-target-monitor-at-15000-updates) ·
-[Standing GFX review](scene-full-epoch.md#standing-gfx100s-at-update-15000).
+[Intermediate quality review](scene-full-epoch-20k.md) ·
+[Standing GFX review](scene-full-epoch-20k.md#standing-gfx100s-comparisons).
 
 At 10,000 updates, the retained loops process 17.01 native queries per
 second locally and 13.19 with spatial features. Reading and CPU
