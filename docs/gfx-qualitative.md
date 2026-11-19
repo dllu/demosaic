@@ -3,6 +3,8 @@
 **Review map updated November 18, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Reserved Bayer wire colour](query-signed-colour.md#standing-gfx100s-comparisons)
+  preserves the preceding sky, coarse fence, building and foliage pixels.
 - [Dense regional scene context](scene-regional-context.md#standing-gfx100s-comparisons)
   retains smooth sky and both coarse wire directions. Raising the full
   preview to 3,072 changes the coarse fence more than the hybrid does.

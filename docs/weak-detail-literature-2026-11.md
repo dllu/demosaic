@@ -433,6 +433,13 @@ the shared edit. Green with automatic and exact geometry admits the same
 six eligible gaps. Adding red and blue confirms two more known footprints.
 Automatic cross-color nomination has mixed results across the two panels.
 
+The [reserved Bayer colour replay](query-signed-colour.md) uses the
+measured weak phase to condition signed colour at fixed luminance. It
+gains 4.35 aligned chroma points on 16 ISO6400 colour fixtures and
+preserves the neutral replay results. The eight standing GFX outputs
+reproduce the preceding fit. Supplying the planted frequency pair
+recovers chroma confirmation in three of five missed high-noise fields.
+
 The proposals below remain the original November 15
 assessment; measured follow-ups are linked here rather than rewriting history.
 

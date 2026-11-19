@@ -133,6 +133,10 @@ the shared check's tradeoff on additional photos. Off-grid search yields
 similar intact response at equal leakage. Adding red and blue confirms
 two known footprints on the new panel, with mixed score-only results
 when the footprint must be found automatically.
+[Reserved Bayer wire colour](query-signed-colour.md) adds signed chroma
+on supported photographic fixtures at fixed luminance. The gain comes
+with small leakage inside true gaps. Neutral replay and both GFX families
+reproduce the preceding fit.
 [Per-direction wire shape](query-shape-routing.md) uses automatically
 measured frequencies. It suppresses a spurious weak-wire harmonic
 when the stronger wire alone supports a narrow shape. True narrow wires

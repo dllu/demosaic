@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Reserved Bayer wire colour](query-signed-colour.md#standing-gfx100s-comparisons) | Confirmed colour preserves both prior profiles and both native ROIs. An unchecked correction changes the left views slightly. The weaker crossings stay incomplete |
 | [Dense regional scene context](scene-regional-context.md#standing-gfx100s-comparisons) | Both ROIs and profiles viewed with JPEGs and AHD. The hybrid and 3,072-pixel full preview retain faint diagonals and incomplete crossings |
 | [Neighboring Bayer gap localization](query-gap-shoulders.md#standing-gfx100s-comparisons) | Both profiles and ROIs reproduce the shared check with the same faint crossings and mottling. Both JPEG references viewed |
 | [Shared Bayer gap check](query-shared-gap.md#standing-gfx100s-comparisons) | Both left proposals fail the local gap check. All four cab outputs and their incomplete fine crossings reproduce the preceding result. Both ROIs, profiles and camera JPEGs viewed |
