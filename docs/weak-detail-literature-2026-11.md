@@ -496,7 +496,10 @@ intact-response gain. [Refining the phase between FFT bins](subbin-spectral-witn
 raises held-out ISO6400 intact response 0.50 points and lowers absolute
 gap RMS 1.30 DN16 at similar added gap texture. Direct gating of a
 stronger analytic lift loses signal at matched gap change. Real fine
-crossings remain incomplete.
+crossings remain incomplete. [Indexed real Fourier extraction](compact-spectral-witness.md)
+reproduces that earlier phase path at lower feature cost. Learning from
+reciprocal green pairs lowers absolute gap error by 0.20 DN16 at comparable
+texture, with little difference in intact response.
 
 ## What the existing work establishes
 

@@ -184,3 +184,7 @@ a measured mechanism for a narrower development comparison. V120
 remains the general recommendation.
 [Current model guide](current-model.md) ·
 [Comparable PSNR history](performance-history.md).
+
+[Indexed extraction](compact-spectral-witness.md) reproduces this transported
+EMA output on 384 exact synthetic queries and all eight standing GFX views.
+The median feature cost of the real cab query fell from 52.6 to 30.7 ms.

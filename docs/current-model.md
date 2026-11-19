@@ -142,6 +142,11 @@ when the footprint must be found automatically.
 on supported photographic fixtures at fixed luminance. The gain comes
 with small leakage inside true gaps. Neutral replay and both GFX families
 reproduce the preceding fit.
+[Indexed Bayer phase extraction](compact-spectral-witness.md) reproduces
+the earlier transported head and reduces median feature time from 52.6
+to 30.7 ms on a fine-cab query. The added neighbor-pair head lowers
+absolute planted gap error slightly at comparable texture. Fine cab
+crossings remain incomplete.
 [Refined weak-wire phase](subbin-spectral-witness.md) gains 0.50 ISO6400
 intact-response points and lowers absolute gap RMS by 1.30 DN16 versus
 the integer-bin head at similar added gap texture. The trained head

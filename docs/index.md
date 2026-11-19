@@ -53,6 +53,7 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [learned spectral corrections](learned-spectral-detail.md) ·
 [exact gap supervision and Bayer witnesses](learned-spectral-gaps.md) ·
 [between-bin Bayer phase refinement](subbin-spectral-witness.md) ·
+[indexed Fourier extraction and reciprocal Bayer checks](compact-spectral-witness.md) ·
 [whole-image RAW strength prior](context-strength.md) ·
 [native Bayer green innovation](green-phase-innovation.md) ·
 [separated Bayer green aliases](quincunx-green.md) ·
