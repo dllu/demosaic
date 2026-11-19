@@ -9,6 +9,8 @@ The fastest eager geometry cuts a fresh paired restore from a 39.47 s
 median to 31.79 s, with larger RGB16 differences near bright details and
 blend bands. [Original FP16 benchmark](corpus100k-mixed-precision.md) ·
 [Pinned startup and TensorRT timing](corpus100k-faster-inference.md).
+The [CUDA tile transport follow-up](corpus100k-device-tiles.md) tests
+FP16 blending and graph replay with the same 512 / 64 grid.
 
 [Machine results](results/corpus100k-fp16-throughput-v1/publication.json) ·
 [Frozen drivers and case receipts](results/corpus100k-fp16-throughput-v1/evidence.tar.xz) ·

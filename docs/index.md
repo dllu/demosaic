@@ -9,7 +9,7 @@ Start with the [README](../README.md) for installation and inference.
 | --- | --- |
 | Choose a model or understand version numbers | [Model choices](current-model.md) |
 | Run inference, set noise priors or export | [Usage](usage.md), [DNG/JPEG](dng-export.md), [hot pixels](hot-pixel-clusters.md) |
-| Run faster 102 MP inference on GB10 | [FP16 tile settings and TensorRT quality](corpus100k-fp16-throughput.md), [Fast checkpoint loading](corpus100k-faster-inference.md), [FP16 versus IEEE FP32](corpus100k-mixed-precision.md) |
+| Run faster 102 MP inference on GB10 | [FP16 tile settings and TensorRT quality](corpus100k-fp16-throughput.md), [Fast checkpoint loading](corpus100k-faster-inference.md), [FP16 versus IEEE FP32](corpus100k-mixed-precision.md), [Full-frame CUDA transport](corpus100k-device-tiles.md) |
 | Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [Corpus 100k](full-corpus-long100k.md#broader-evaluation), [Matched scene 12k cameras](expanded-scene-12000-cameras.md), [Near-ADC cameras](near-adc-bridge-cameras.md) |
 | Understand camera evidence and its gaps | [Real-camera overview](real-camera-quality.md) |
 | Find active work and completed research outcomes | [Experiment index](experiments.md), [research priorities](research.md) |

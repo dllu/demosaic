@@ -35,7 +35,10 @@ fences look alike, with a small additional error on the clipped dahlia.
 scores by less than 0.0002 dB versus eager FP16. Keep 512-pixel tiles with
 64 pixels of overlap in the supported CUDA CLI. Larger, narrower-overlap
 tiles save 19.5% in a paired screen and change clipped colors. Selective FP8
-adds chroma variation on quiet fields. [Inference speed and quality](corpus100k-fp16-throughput.md).
+adds chroma variation on quiet fields. Keeping the full RAW and FP32 blend
+on CUDA roughly doubles peak CUDA allocation for similar restore time.
+[Tile geometry and TensorRT quality](corpus100k-fp16-throughput.md) ·
+[CUDA tile transport and autotuning](corpus100k-device-tiles.md).
 
 ## Full-model choices
 

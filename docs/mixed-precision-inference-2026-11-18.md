@@ -13,7 +13,10 @@ The selective FP8 gains little extra time and raises quiet chroma error.
 Two native DINO NVFP4 projections show no material speedup. The
 [tile and fixed-panel follow-up](corpus100k-fp16-throughput.md) completes
 the broad quality comparison for TensorRT FP16 and identifies clipped-color
-changes from faster eager tile geometry.
+changes from faster eager tile geometry. The
+[CUDA tile transport follow-up](corpus100k-device-tiles.md) holds the tile
+grid fixed and measures device-resident blending, CUDA Graph replay and
+fresh-process cuDNN FP16 tuning.
 
 ## Where the time and precision go
 
@@ -42,4 +45,4 @@ Run the first screen on V120, the general recommendation. Repeat the winning pre
 - **Longer training produced a broad gain.** Corpus 100k reached 37.24747 dB on the fixed photo panel, +0.20739 dB over V120 with 423/427 sources improving. Unseen-camera PSNR fell 0.03046 dB. In the weakest ISO12800 band, recovered response stayed near 36.5% even as error fell. Both the paired baseline and the separate response/error measurements matter when choosing faster arithmetic. [Broad results](full-corpus-long100k.md) · [Weak-band measurements](full-corpus-long100k-weak-band.md)
 - **Scene context has a measurable flat-region benefit.** On 48 additional photo backgrounds with independent ISO6400 draws, aligned regional context lowered fine flat RMS by 0.118 DN16 versus the coarse full preview and 0.110 versus flipped context. Fine-increment error rose slightly on coupled draws. In the separate 50k training study, both arms had verified identical inputs through 13,500 updates at this review’s cutoff. The 12k quality monitor reuses eight development backgrounds. A fresh held-out check at the next reviewed milestone would distinguish a repeatable gain from a favorable monitor result. [Regional-context comparison](scene-regional-context.md) · [Full-epoch study](scene-full-epoch.md)
 - **The green fence has a visible, bounded improvement.** Fitting wire frequencies from disjoint regions of the noisy scene produces a faint left-cab lattice under both profiles. It still looks overly regular in places. The subsequent chroma check raised aligned chroma response from 34.40% to 38.74% on 16 constructed colored fields. It also added color in some true gaps and reproduced the preceding result in all eight standing real crops. These are good tests for quantization damage. The deployment cost of the optional Bayer correction should be measured separately if it ships. [Exterior-fit native boards](query-donor-composition.md) · [Reserved-color test](query-signed-colour.md)
-- **The current speed evidence concerns evaluation.** A 12-batch probe per checkpoint recorded 377.90 seconds of summed CPU forwards and 36.67 seconds of CUDA FP32 forwards for V120 and Corpus 20k in different sessions. That is progress toward faster feedback. The outstanding production measurement is a present-day end-to-end full-frame timing with the deployed precision policy. [CUDA evaluation probe](local-primary-cuda-probe.md)
+- **Evaluation and production measure different workloads.** A 12-batch probe per checkpoint recorded 377.90 seconds of summed CPU forwards and 36.67 seconds of CUDA FP32 forwards for V120 and Corpus 20k in different sessions. The full-frame measurements linked above include tile transfer and blending, and time export separately. [CUDA evaluation probe](local-primary-cuda-probe.md) · [Full-frame transport comparison](corpus100k-device-tiles.md).

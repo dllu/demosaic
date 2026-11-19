@@ -1,0 +1,603 @@
+{
+  "scope": "Inference-only comparison of the same Corpus 100k EMA and FP16 geometry. Fresh-process cuDNN algorithm search is a separate B4 screen.",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "archived": {
+    "path": "/home/dllu/proj/demosaic/docs/results/corpus100k-device-tiles-v1/evidence.tar.xz",
+    "sha256": "e26073364c2251f2c8ba11b3bb34c524d013a7851d04283022815b4f538c6906"
+  },
+  "native_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-device-tiles-v1/manifest.json",
+    "sha256": "4daf12a92d309a985638d938a4e9049faa71fff9922ec81a4b458ca31b9d0eb5"
+  },
+  "full": {
+    "fixture": {
+      "path": "/home/dllu/proj/demosaic/configs/gfx-qualitative-20231231.json",
+      "sha256": "23efd86ccf2b39ec8b37af21d7d7908c19b868a890544a454c88bdb6a056399a"
+    },
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+    },
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+      "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/benchmark.py",
+      "sha256": "30692f96df3ec4870cda82bb0db54332276aeec4b9919064469f5d7467dac6a2"
+    },
+    "implementation": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/device_tiles.py",
+      "sha256": "94ff51a71168e584443a531e8e1345a30e283c00f72de414090aa606500ce9bc"
+    },
+    "decode_seconds": 0.5740600409917533,
+    "checkpoint_setup_seconds": 2.314460580004379,
+    "versions": {
+      "packages": {
+        "torch": "2.14.1+cu130",
+        "torch-tensorrt": null,
+        "tensorrt": null,
+        "nvidia-modelopt": null,
+        "torchao": null,
+        "rawpy": "0.26.1"
+      },
+      "cuda": "13.0",
+      "cudnn": 92400,
+      "hardware": "NVIDIA GB10",
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false
+    },
+    "settings": {
+      "tile": 512,
+      "overlap": 64,
+      "batch_size": 4,
+      "device": "cuda",
+      "precision": "float16"
+    },
+    "noise": {
+      "shot": 0.00128,
+      "read": 6.5536e-06
+    },
+    "runs": [
+      {
+        "mode": "control",
+        "index": 0,
+        "stats": {
+          "seconds": 40.59458759997506,
+          "tile_seconds": 39.73678232706152,
+          "compute_transfer_seconds": 38.385527037549764,
+          "blend_seconds": 1.2935729710152373,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.121381376
+        },
+        "restore_wall_seconds": 40.5995988920331,
+        "writer_seconds": 1.122347034048289,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/0-control.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "crops": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/0-control-native.npz",
+          "sha256": "a20320fbd5e9b858d9d214b4b79855350c18e3779775fde321aa103b8307558a"
+        },
+        "gpu_jobs": [
+          [
+            327018,
+            "691"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3350907,
+            "2921"
+          ],
+          [
+            3354808,
+            "2629"
+          ]
+        ]
+      },
+      {
+        "mode": "device",
+        "index": 1,
+        "stats": {
+          "seconds": 41.00539151497651,
+          "graph_capture_seconds": 0.0,
+          "setup_seconds": 0.42336009896826,
+          "final_download_seconds": 0.7951128389686346,
+          "peak_cuda_gb": 4.182881792,
+          "tiles": 520
+        },
+        "restore_wall_seconds": 41.005662427982315,
+        "writer_seconds": 0.953448740998283,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/1-device.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "crops": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/1-device-native.npz",
+          "sha256": "a20320fbd5e9b858d9d214b4b79855350c18e3779775fde321aa103b8307558a"
+        },
+        "gpu_jobs": [
+          [
+            327018,
+            "689"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3350907,
+            "2925"
+          ],
+          [
+            3354808,
+            "4577"
+          ]
+        ],
+        "difference": {
+          "channels": 305987556,
+          "fraction_exact": 1.0,
+          "fraction_within_one": 1.0,
+          "RMS_DN16": 0.0,
+          "p95_99_999_DN16": [
+            0,
+            0,
+            0
+          ],
+          "max_DN16_and_sensor_xy_channel": [
+            0,
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "seam_RMS_DN16": 0.0,
+          "interior_RMS_DN16": 0.0
+        }
+      },
+      {
+        "mode": "graph",
+        "index": 2,
+        "stats": {
+          "seconds": 40.16408740496263,
+          "graph_capture_seconds": 0.797903792001307,
+          "setup_seconds": 0.05084788799285889,
+          "final_download_seconds": 0.7687256829813123,
+          "peak_cuda_gb": 4.20908032,
+          "tiles": 520
+        },
+        "restore_wall_seconds": 40.166359010967426,
+        "writer_seconds": 0.8078955430537462,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/2-graph.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "crops": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/2-graph-native.npz",
+          "sha256": "a20320fbd5e9b858d9d214b4b79855350c18e3779775fde321aa103b8307558a"
+        },
+        "gpu_jobs": [
+          [
+            327018,
+            "689"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3350907,
+            "2931"
+          ],
+          [
+            3354808,
+            "4809"
+          ]
+        ],
+        "difference": {
+          "channels": 305987556,
+          "fraction_exact": 1.0,
+          "fraction_within_one": 1.0,
+          "RMS_DN16": 0.0,
+          "p95_99_999_DN16": [
+            0,
+            0,
+            0
+          ],
+          "max_DN16_and_sensor_xy_channel": [
+            0,
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "seam_RMS_DN16": 0.0,
+          "interior_RMS_DN16": 0.0
+        }
+      },
+      {
+        "mode": "cached-control",
+        "index": 3,
+        "stats": {
+          "seconds": 40.20987004006747,
+          "tile_seconds": 40.10868111101445,
+          "compute_transfer_seconds": 39.329350560787134,
+          "blend_seconds": 0.710489924880676,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.1213824
+        },
+        "restore_wall_seconds": 40.21522930194624,
+        "writer_seconds": 0.6021338899154216,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/3-cached-control.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "crops": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/3-cached-control-native.npz",
+          "sha256": "a20320fbd5e9b858d9d214b4b79855350c18e3779775fde321aa103b8307558a"
+        },
+        "gpu_jobs": [
+          [
+            327018,
+            "689"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3350907,
+            "2857"
+          ],
+          [
+            3354808,
+            "4821"
+          ]
+        ],
+        "difference": {
+          "channels": 305987556,
+          "fraction_exact": 1.0,
+          "fraction_within_one": 1.0,
+          "RMS_DN16": 0.0,
+          "p95_99_999_DN16": [
+            0,
+            0,
+            0
+          ],
+          "max_DN16_and_sensor_xy_channel": [
+            0,
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "seam_RMS_DN16": 0.0,
+          "interior_RMS_DN16": 0.0
+        }
+      },
+      {
+        "mode": "control",
+        "index": 4,
+        "stats": {
+          "seconds": 39.90599215310067,
+          "tile_seconds": 39.82046335597988,
+          "compute_transfer_seconds": 38.923352495068684,
+          "blend_seconds": 0.8241760621313006,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.1213824
+        },
+        "restore_wall_seconds": 39.90644287399482,
+        "writer_seconds": 0.6405277700396255,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/4-control.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "crops": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/4-control-native.npz",
+          "sha256": "a20320fbd5e9b858d9d214b4b79855350c18e3779775fde321aa103b8307558a"
+        },
+        "gpu_jobs": [
+          [
+            327018,
+            "689"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3350907,
+            "2855"
+          ],
+          [
+            3354808,
+            "4821"
+          ]
+        ],
+        "difference": {
+          "channels": 305987556,
+          "fraction_exact": 1.0,
+          "fraction_within_one": 1.0,
+          "RMS_DN16": 0.0,
+          "p95_99_999_DN16": [
+            0,
+            0,
+            0
+          ],
+          "max_DN16_and_sensor_xy_channel": [
+            0,
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "seam_RMS_DN16": 0.0,
+          "interior_RMS_DN16": 0.0
+        }
+      },
+      {
+        "mode": "cached",
+        "index": 5,
+        "stats": {
+          "seconds": 39.97361164307222,
+          "graph_capture_seconds": 0.0,
+          "setup_seconds": 0.4619778150226921,
+          "final_download_seconds": 1.3783300430513918,
+          "peak_cuda_gb": 4.182882816,
+          "tiles": 520
+        },
+        "restore_wall_seconds": 39.973998395958915,
+        "writer_seconds": 0.8484504349762574,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/5-cached.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "crops": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/5-cached-native.npz",
+          "sha256": "a20320fbd5e9b858d9d214b4b79855350c18e3779775fde321aa103b8307558a"
+        },
+        "gpu_jobs": [
+          [
+            327018,
+            "689"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3350907,
+            "1337"
+          ],
+          [
+            3354808,
+            "7025"
+          ]
+        ],
+        "difference": {
+          "channels": 305987556,
+          "fraction_exact": 1.0,
+          "fraction_within_one": 1.0,
+          "RMS_DN16": 0.0,
+          "p95_99_999_DN16": [
+            0,
+            0,
+            0
+          ],
+          "max_DN16_and_sensor_xy_channel": [
+            0,
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "seam_RMS_DN16": 0.0,
+          "interior_RMS_DN16": 0.0
+        }
+      },
+      {
+        "mode": "control",
+        "index": 6,
+        "stats": {
+          "seconds": 39.5940541109303,
+          "tile_seconds": 39.43962695100345,
+          "compute_transfer_seconds": 38.17967901006341,
+          "blend_seconds": 1.1674286228371784,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.1213824
+        },
+        "restore_wall_seconds": 39.595620963023975,
+        "writer_seconds": 1.0178160639479756,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/6-control.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "crops": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/6-control-native.npz",
+          "sha256": "a20320fbd5e9b858d9d214b4b79855350c18e3779775fde321aa103b8307558a"
+        },
+        "gpu_jobs": [
+          [
+            327018,
+            "689"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            3350907,
+            "2883"
+          ],
+          [
+            3354808,
+            "7025"
+          ]
+        ],
+        "difference": {
+          "channels": 305987556,
+          "fraction_exact": 1.0,
+          "fraction_within_one": 1.0,
+          "RMS_DN16": 0.0,
+          "p95_99_999_DN16": [
+            0,
+            0,
+            0
+          ],
+          "max_DN16_and_sensor_xy_channel": [
+            0,
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "seam_RMS_DN16": 0.0,
+          "interior_RMS_DN16": 0.0
+        }
+      }
+    ]
+  },
+  "full_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/full.json",
+    "sha256": "ad286c7fbed729a3a1269cdd4cfb41bf24116257f0559379775f2d501b8f07c2"
+  },
+  "timing_summary": {
+    "graph": {
+      "seconds": [
+        40.166359010967426
+      ],
+      "median_seconds": 40.166359010967426
+    },
+    "cached-control": {
+      "seconds": [
+        40.21522930194624
+      ],
+      "median_seconds": 40.21522930194624
+    },
+    "cached": {
+      "seconds": [
+        39.973998395958915
+      ],
+      "median_seconds": 39.973998395958915
+    },
+    "control": {
+      "seconds": [
+        40.5995988920331,
+        39.90644287399482,
+        39.595620963023975
+      ],
+      "median_seconds": 39.90644287399482
+    },
+    "device": {
+      "seconds": [
+        41.005662427982315
+      ],
+      "median_seconds": 41.005662427982315
+    }
+  },
+  "native_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/quality.json",
+    "sha256": "6bfca338b1df68c0e3b60f395135b2e165ea9a1c488fb6dffae8975fc47ff304"
+  },
+  "screen": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/screen.json",
+    "sha256": "ee7fdc931812576c230cc21b588acd98526d30ce20e09e81c36949bb8296e531"
+  },
+  "fresh_autotune": [
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/autotune-first.json",
+      "sha256": "87657daec1129eacefe4cee9507fd89029e3180f68b48a19737165b9979cb029"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/autotune-tune.json",
+      "sha256": "ab0d7bc2f9c5c97433323b1a5b32653354b88e0a0df8cca8b2b52a5a5f3be7d6"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/autotune-final.json",
+      "sha256": "50d71eeed19f0341537886f0fd7fc9deb7c2b9ad567ed237957670963f12cd19"
+    }
+  ],
+  "native_review": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/visual-review.json",
+    "sha256": "500d0b54708a2077d963a6032eb92990458e1482638f24411a52f7245926ef88"
+  },
+  "tail_batches": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/tail-batches.json",
+    "sha256": "4e2e410edb96e30f1b48ba78ba635584b603097251ead41eecb4ade99694675e"
+  },
+  "test_log": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-device-tiles-v1/tests.log",
+    "sha256": "4cc06fc2db04867ea5c1064d19955202a14b78e9646c07f581214fffe36be58f"
+  },
+  "frozen_dependencies": {
+    ".cache/experiments/corpus100k-fp16-throughput-v1/full_throughput.py": "580c13585a027fd74d59cfc888ca200f0143abfc4315156827992f7a95adfd5e",
+    ".cache/experiments/corpus100k-fp16-throughput-v1/screen_throughput.py": "20ea5d416de461cbdc93a668c78e263bbb2f22bc306ac64156eeeb4074ad6948",
+    ".cache/experiments/corpus100k-fp16-throughput-v1/review_throughput.py": "711b06b13c712f21fe46f5f09ef3b16e2ccaac231cc818eecae8ef58df675cb3",
+    ".cache/experiments/corpus100k-fp16-throughput-v1/review_overlap.py": "0769aca410d7716850cb7afa2239ae46a01ca09cbe67842509e981d2b6869511",
+    ".cache/experiments/corpus100k-fp16-throughput-v1/overlap.json": "b2750437c7b884f56f1a609589e23d02230ba37d015f74d5688c52285574f5d4",
+    ".cache/experiments/corpus100k-mixed-precision-v1/screen.py": "5e07bdc083384f5810169bfe85798c555dcdde5cd25b340736f28d7b1545aa0d",
+    ".cache/experiments/corpus100k-mixed-precision-v1/full_production.py": "43b1f3a280263ae70e81dbdd341fbb3e6e81db23fc9bad6dba7cc3e860262cd6",
+    ".cache/experiments/paired-luminance-detail-v1/render.py": "a8ed29351e0b142b6df3e8b8eccbb02248e8d07734915c12698297f89f0f7983",
+    "src/demosaic/inference.py": "75592172984ac77b463b121a7fd2d6bfd954818a2bf0333643107f16e906445f",
+    "src/demosaic/cfa.py": "da90a3863904a0c6517b2e5d9e4270cd31103f620785d5f23e78f8ff1aed8aed",
+    "src/demosaic/pretrained_rgb.py": "374791c4dcaa7e293eef52cf5a52c71456abfd8cdeb97f42974af663a5cd30f6",
+    "scripts/report_scene_wave_guides.py": "2686ea84a8142121a10dd7c698959912e5f8defac907902680a2c345752f3825"
+  }
+}

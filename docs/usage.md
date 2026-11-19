@@ -439,6 +439,9 @@ Use `--tile 512 --overlap 64 --batch-size 4` to reproduce that geometry.
 on the 102 MP frame, with similar speed and small RGB16 differences.
 Larger tiles with less overlap change some clipped colors.
 [Tile settings and native evidence](corpus100k-fp16-throughput.md).
+Device-resident blending and CUDA Graph replay take about the same time
+on 102 MP and roughly double peak CUDA allocation.
+[Full-frame transfer and cuDNN FP16 search](corpus100k-device-tiles.md).
 
 CUDA `infer` uploads the checkpoint from pinned CPU memory when available.
 The sidecar reports `checkpoint_setup_seconds`. In the paired Corpus 100k
