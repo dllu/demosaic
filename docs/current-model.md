@@ -37,8 +37,11 @@ scores by less than 0.0002 dB versus eager FP16. Keep 512-pixel tiles with
 tiles save 19.5% in a paired screen and change clipped colors. Selective FP8
 adds chroma variation on quiet fields. Keeping the full RAW and FP32 blend
 on CUDA roughly doubles peak CUDA allocation for similar restore time.
+Fresh cuDNN FP16 searches give no repeatable full-frame gain and
+differ by 0.242 DN16 RMS between processes.
 [Tile geometry and TensorRT quality](corpus100k-fp16-throughput.md) ·
-[CUDA tile transport and autotuning](corpus100k-device-tiles.md).
+[CUDA tile transport](corpus100k-device-tiles.md) ·
+[Full-frame cuDNN search](corpus100k-cudnn-fp16.md).
 
 ## Full-model choices
 

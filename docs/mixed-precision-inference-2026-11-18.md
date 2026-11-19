@@ -16,7 +16,10 @@ the broad quality comparison for TensorRT FP16 and identifies clipped-color
 changes from faster eager tile geometry. The
 [CUDA tile transport follow-up](corpus100k-device-tiles.md) holds the tile
 grid fixed and measures device-resident blending, CUDA Graph replay and
-fresh-process cuDNN FP16 tuning.
+fresh-process cuDNN FP16 tuning. In the
+[full-frame tuning follow-up](corpus100k-cudnn-fp16.md), warm repeats
+show no speed gain and separate searches produce slightly different
+RGB16 exports.
 
 ## Where the time and precision go
 

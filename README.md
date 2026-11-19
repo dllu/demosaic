@@ -22,6 +22,9 @@ small detail-head studies, not successors to the full V131/V132 models.
 Corpus 100k used 90,778 ordinary photos and leads the fixed photo panel at
 37.24747 dB. Its unseen-camera score is slightly lower, clipped-color
 failures remain, and the fine cab crossings stay incomplete.
+For Corpus 100k on CUDA, use `--precision float16 --tile 512 --overlap 64
+--batch-size 4` without the FP32-only cuDNN benchmark flag. The paired GB10
+test cuts 102 MP restoration from 287 to 53 seconds.
 [100k scores and native comparisons](docs/full-corpus-long100k.md) ·
 [Fast FP16 inference and quality](docs/corpus100k-fp16-throughput.md).
 

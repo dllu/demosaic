@@ -1,0 +1,285 @@
+{
+  "scope": "FP16 algorithm selection on the same standing 102 MP frame, with two process repeats per policy and one complete warm repeat per process. Six exact-target long contexts and eight GFX crops. No new fixed photo or camera coverage.",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "schedule": [
+    "heuristic-a",
+    "tuned-a",
+    "tuned-b",
+    "heuristic-b"
+  ],
+  "settings": {
+    "tile": 512,
+    "overlap": 64,
+    "batch_size": 4,
+    "device": "cuda",
+    "precision": "float16",
+    "shot": 0.00128,
+    "read": 6.5536e-06
+  },
+  "source": {
+    "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+    "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+  },
+  "timing_summary": {
+    "heuristic": {
+      "first_restore_mean": 39.12887395947473,
+      "warm_restore_mean": 34.26399939751718
+    },
+    "tuned": {
+      "first_restore_mean": 37.883528392005246,
+      "warm_restore_mean": 37.15513370250119
+    }
+  },
+  "timing_receipts": {
+    "heuristic-a": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-cudnn-fp16-v1/heuristic-a.json",
+      "sha256": "58211dc2c22d74e8f7452098ce3100fa7b003fd98e39512f111dab03e67d3b3e"
+    },
+    "tuned-a": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-cudnn-fp16-v1/tuned-a.json",
+      "sha256": "a0c1e3264b7980f11efe93c00c8973d476bbdd0ee2146c9d6eb1868e53f2ebfa"
+    },
+    "tuned-b": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-cudnn-fp16-v1/tuned-b.json",
+      "sha256": "213833a8b40e946b560b48933edfa4ffbcdd70fe1757f96b9fb8a9dbb5c92982"
+    },
+    "heuristic-b": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-cudnn-fp16-v1/heuristic-b.json",
+      "sha256": "81593941b07e0e7df1168a22021273e9017da94efbe4f5b2a49fe95af6d0cf19"
+    }
+  },
+  "native_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-cudnn-fp16-v1/native.json",
+    "sha256": "4baf875be180d8556c6e472377becac03ed4b7ba8e49cdfd72db96a5c46352bf"
+  },
+  "outlier_receipt": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-cudnn-fp16-v1/outliers.json",
+    "sha256": "ec8c1a39633ac4f60d39270932b32f610e7ce465669f5eb2b3be5e867c913389"
+  },
+  "manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-cudnn-fp16-v1/manifest.json",
+    "sha256": "cb8376df58d405417c4181b3fe9aa857820d40a38a0e72f5e134c4efc52f6559"
+  },
+  "archive": {
+    "path": "/home/dllu/proj/demosaic/docs/results/corpus100k-cudnn-fp16-v1/evidence.tar.xz",
+    "sha256": "612130487e3dd4c19584ceb476ae91b258559a5a841954fc83522f37ee2b96e1"
+  },
+  "warm_repeat_hashes": {
+    "heuristic-a": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1",
+    "tuned-a": "2ab289199de86c59b293c376593dd69a2e0c6fa63920b371ff1ab536058f258c",
+    "tuned-b": "99d727d04ae9cce71a8b77091dbf62cae477e1d40dff6b967f13f8db624244d4",
+    "heuristic-b": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+  },
+  "cross_process_tuned_delta": {
+    "channels": 305987556,
+    "fraction_exact": 0.9543110308708109,
+    "fraction_within_one": 0.9990619291720477,
+    "RMS_DN16": 0.2419921589179028,
+    "p95_99_999_DN16": [
+      0,
+      1,
+      1
+    ],
+    "max_DN16_and_sensor_xy_channel": [
+      45,
+      [
+        5936,
+        5063,
+        0
+      ]
+    ],
+    "seam_RMS_DN16": 0.2101310733618755,
+    "interior_RMS_DN16": 0.2442914662223134
+  },
+  "exact_contexts": [
+    {
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "scores": {
+        "heuristic": {
+          "linear_psnr": 40.54474839710945,
+          "srgb_psnr": 33.86013914156116,
+          "chroma_mae": 0.006891746518739215,
+          "gradient_mae": 0.014735591176400978
+        },
+        "tuned": {
+          "linear_psnr": 40.544797203887924,
+          "srgb_psnr": 33.86014557031129,
+          "chroma_mae": 0.0068917612994051245,
+          "gradient_mae": 0.01473557654775183
+        }
+      },
+      "delta": {
+        "rms_DN16": 0.5781565893896422,
+        "max_DN16": 10.191250741481781,
+        "channel_mean_DN16": [
+          -0.005868620031571225,
+          -0.00496739675563731,
+          0.007575539984236457
+        ]
+      }
+    },
+    {
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "scores": {
+        "heuristic": {
+          "linear_psnr": 17.104919916972104,
+          "srgb_psnr": 27.757625268218554,
+          "chroma_mae": 0.02104435073073983,
+          "gradient_mae": 0.008016002694027483
+        },
+        "tuned": {
+          "linear_psnr": 17.10491364643319,
+          "srgb_psnr": 27.758588466603975,
+          "chroma_mae": 0.021043550406702964,
+          "gradient_mae": 0.008015982186784329
+        }
+      },
+      "delta": {
+        "rms_DN16": 26.277682209894493,
+        "max_DN16": 273.21458101272583,
+        "channel_mean_DN16": [
+          -2.1513442407530876,
+          -1.5263385767556428,
+          0.038520076665965595
+        ]
+      }
+    },
+    {
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "scores": {
+        "heuristic": {
+          "linear_psnr": 46.176294465554086,
+          "srgb_psnr": 40.40430464303233,
+          "chroma_mae": 0.003138120518658278,
+          "gradient_mae": 0.005016387728013341
+        },
+        "tuned": {
+          "linear_psnr": 46.17646650128491,
+          "srgb_psnr": 40.40437136034221,
+          "chroma_mae": 0.003138060988685394,
+          "gradient_mae": 0.005016386437585127
+        }
+      },
+      "delta": {
+        "rms_DN16": 0.44858253204522636,
+        "max_DN16": 9.26743671298027,
+        "channel_mean_DN16": [
+          0.0013822038086384937,
+          0.007532404891396993,
+          0.00018034987626833754
+        ]
+      }
+    },
+    {
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "scores": {
+        "heuristic": {
+          "linear_psnr": 48.49236165962763,
+          "srgb_psnr": 25.222360308157405,
+          "chroma_mae": 0.03358398458864346,
+          "gradient_mae": 0.002346469008249867
+        },
+        "tuned": {
+          "linear_psnr": 48.49252228872105,
+          "srgb_psnr": 25.221430110864183,
+          "chroma_mae": 0.03358669175155665,
+          "gradient_mae": 0.0023464242769564263
+        }
+      },
+      "delta": {
+        "rms_DN16": 5.45493300759478,
+        "max_DN16": 33.78073453903198,
+        "channel_mean_DN16": [
+          1.81370225102537,
+          0.03900305897382168,
+          2.70521256297925
+        ]
+      }
+    },
+    {
+      "roi": [
+        680,
+        480,
+        160,
+        160
+      ],
+      "scores": {
+        "heuristic": {
+          "linear_psnr": 39.66869179050709,
+          "srgb_psnr": 38.980412944877365,
+          "chroma_mae": 0.004808226673516115,
+          "gradient_mae": 0.006818566114990463
+        },
+        "tuned": {
+          "linear_psnr": 39.66870712525373,
+          "srgb_psnr": 38.98041312151611,
+          "chroma_mae": 0.004808235618722506,
+          "gradient_mae": 0.0068185462525220605
+        }
+      },
+      "delta": {
+        "rms_DN16": 1.2866958779478768,
+        "max_DN16": 41.647801995277405,
+        "channel_mean_DN16": [
+          0.02633772042022702,
+          0.030208599690581116,
+          0.11140918799118253
+        ]
+      }
+    },
+    {
+      "roi": [
+        480,
+        680,
+        160,
+        160
+      ],
+      "scores": {
+        "heuristic": {
+          "linear_psnr": 41.37630577431306,
+          "srgb_psnr": 39.38046081259448,
+          "chroma_mae": 0.006111335887009571,
+          "gradient_mae": 0.009156543228765135
+        },
+        "tuned": {
+          "linear_psnr": 41.376326415484606,
+          "srgb_psnr": 39.38047256337145,
+          "chroma_mae": 0.006111339181512051,
+          "gradient_mae": 0.009156537264288521
+        }
+      },
+      "delta": {
+        "rms_DN16": 1.280835610864409,
+        "max_DN16": 12.382623553276062,
+        "channel_mean_DN16": [
+          0.02619164688466995,
+          0.005684798042148031,
+          0.0029949273638067097
+        ]
+      }
+    }
+  ]
+}

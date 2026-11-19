@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Corpus 100k FP16 cuDNN tuning](corpus100k-cudnn-fp16.md#standing-gfx100s-comparisons)
+  keeps a smooth sky and coherent coarse crossings. All four native crops
+  differ by at most 0.110 DN16 RGB RMS from ordinary FP16.
 - [Corpus 100k FP16 tile transport](corpus100k-device-tiles.md#standing-gfx100s-comparisons)
   reproduces the ordinary FP16 values in all four viewed crops. The sky is
   smooth, coarse crossings are coherent and fine wires and leaves are soft.

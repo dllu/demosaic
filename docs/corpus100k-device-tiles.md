@@ -68,7 +68,9 @@ First forward takes **10.48 s** with search and **6.69/1.96 s** in the
 controls, including first-use setup. The tuned output changes by
 **0.201 DN16 RMS** and up to **35.93 DN16** on these four tiles. The
 two heuristic controls match exactly. Batch timings vary within each
-process. This screen covers a single resident batch shape.
+process. This screen covers a single resident batch shape. The
+[full-frame follow-up](corpus100k-cudnn-fp16.md) finds similar first-restore
+times and slower warm means with search on the shared GB10.
 
 ## Exact native crops
 
