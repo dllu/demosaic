@@ -88,17 +88,18 @@ parent prediction exactly and both arms saw identical Bayer inputs and clean
 targets. Both production arms completed eight updates using the same 16 photos
 and 64 crops, including two exact-flat and five weak-texture scenes. The local
 arm then restored its update-eight checkpoint and continued from scene index 16.
-Long-run training and quality review are in progress. The first matched
-numerical milestone is update 2,000.
+Long-run training and quality review are in progress. Both arms
+have completed the first 2,000 updates.
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
 [Frozen order, first traces and monitor source](results/scene-full-epoch-v1/launch-evidence.tar.xz).
 
-The local-only arm has completed update 2,000. Its two production logs
-contain 4,000 distinct source IDs, 4,000 distinct scene noise seeds and
-16,000 native crops. The scenes include 1,981 ordinary, 1,467 weak
-and 552 exact-flat examples. Measured training-loop time is 882.57 s,
-including 257.88 s inside the reader and CPU fingerprinting.
-The spatial arm is working through the matching source prefix.
+Both arms' first 2,000 updates cover the same 4,000 distinct sources,
+4,000 distinct noise seeds and 16,000 native crops. Their observation
+logs match byte for byte. The scenes include 1,981 ordinary, 1,467 weak
+and 552 exact-flat examples. Summing the two measured phase loops gives
+882.57 s for local-only and 1,152.02 s for spatial. The local reader
+and CPU fingerprinting account for 257.88 s. Both runs continue on
+their original learning-rate schedules.
 [Local prefix audit](results/scene-full-epoch-v1/local-2000-source-audit.json).
 
 An end-to-end monitor qualification used the matched update-eight
@@ -106,5 +107,58 @@ checkpoints. It ran all seven policies on 32 test groups, checking
 the fixed local input and the preserved near-preview support in 96
 native queries. The monitor generated four native boards and the
 expected summary. The matched update-2,000 quality collection is
-waiting for the spatial training phase to complete.
+complete on that same eight-photo panel.
 [Monitor qualification](results/scene-full-epoch-v1/monitor-preflight.json).
+
+## First matched quality comparison at 2,000 updates
+
+The eight-photo monitor contains 32 paired groups across ISO400 and
+ISO6400 and both draw laws. The seven policies process 96 native queries
+each. Local EMA SHA256 is
+`7f59fe60437e278e550a6abeaf65156c7fb0094d80d2711f9fcbbbd918f71383`.
+Spatial EMA SHA256 is
+`25867a55eec2423f79d5c05a302184b8871c504de427d9bfee3e1184584d7f64`.
+The two distant-view interventions retain the exact query and nearby
+preview pixels. Collection used CUDA IEEE FP32 and took 177.9 s
+after loading the checkpoints.
+[Checkpoint bindings and per-source results](results/scene-full-epoch-v1/matched-002000-pilot.json).
+
+| ISO6400 model or preview | Coupled increment RMS, DN16 | Coupled flat RMS, DN16 | Independent increment RMS, DN16 | Independent flat RMS, DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| V120 | 84.243 | 4.832 | 103.838 | 4.707 |
+| Corpus 100k | 84.218 | 4.208 | 103.983 | 4.127 |
+| Local 2k | 83.856 | 4.559 | 104.316 | 4.235 |
+| Spatial 2k, matching | 84.097 | 4.438 | 104.431 | 4.260 |
+| Spatial 2k, masked | 83.822 | 4.800 | 104.422 | 4.343 |
+| Spatial 2k, mirrored distant view | 84.191 | 4.457 | 104.310 | 4.254 |
+
+The correct preview lowers coupled flat RMS by 0.362 DN16
+[−0.894, −0.005] relative to its masked control, while raising
+increment error by 0.276 DN16 [+0.082, +0.502]. Its independent
+increment RMS is 0.115 DN16 higher than local-only with a paired
+interval spanning zero [−0.363, +0.485]. The mirrored distant view
+is also close. The two EMA continuations show no clear weak-detail
+gain on this intermediate panel. The full benchmark and automatic
+standing reviews remain scheduled for the final endpoints. A separate
+standing review of the 2k states is collecting.
+
+The triplets show noisy Malvar, spatial 2k with the matching preview,
+and exact GT. The two ISO6400 independent draws use shot/read
+`0.00128/6.5536e-6`, ADC16 black 0.03, capture exposure 0.33,
+display exposure ×3.0303 and contrast ×2. The native 160×160 windows
+start at `[48,48]` inside the 256-pixel query.
+
+![Hauroth, noisy, spatial 2k and exact GT](images/scene-full-epoch-v1/pilot-002000/000-iso6400-independent-role0-triplet.png)
+
+The stone's fine grain remains soft. Query `[218,192]`, RGGB.
+Palauenc05, CC BY-SA 4.0.
+[All methods](images/scene-full-epoch-v1/pilot-002000/000-iso6400-independent-role0-comparison.png) ·
+[Exact-flat counterpart](images/scene-full-epoch-v1/pilot-002000/000-iso6400-independent-role2-comparison.png).
+
+![Limburg Cathedral, noisy, spatial 2k and exact GT](images/scene-full-epoch-v1/pilot-002000/001-iso6400-independent-role0-triplet.png)
+
+The arches and columns are retained. The fine architectural features
+stay blurred in both the local and spatial outputs. Query `[22,250]`,
+BGGR. Full source and license details are in the viewing record.
+[All methods](images/scene-full-epoch-v1/pilot-002000/001-iso6400-independent-role0-comparison.png) ·
+[Exact-flat counterpart](images/scene-full-epoch-v1/pilot-002000/001-iso6400-independent-role2-comparison.png).
