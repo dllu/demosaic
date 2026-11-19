@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Bayer phase on local 20k](quiet-parent-phase.md#standing-gfx100s-comparisons)
+  keeps the sky smooth and slightly reinforces existing coarse fence texture.
+  The fine building wires and foliage stay soft.
 - [Matched local and spatial 20k models](scene-full-epoch-20k.md#standing-gfx100s-comparisons)
   keep the sky smooth and both coarse fence directions coherent. Fine
   building lines and leaves remain soft.

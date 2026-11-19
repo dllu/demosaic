@@ -287,6 +287,19 @@ photo sources and both standing GFX scenes.
 [20,000 paired source audit](results/scene-full-epoch-v1/paired-prefix-020000.json) ·
 [20,000 segment receipts](results/scene-full-epoch-v1/paired-prefix-020000.tar.xz).
 
+The matched continuation verifies identical inputs through **22,500 updates**,
+with 45,000 distinct photos, 45,000 seeds and 180,000 native queries per arm.
+Retained training loops total 11,336.61 s local and 14,675.24 s spatial.
+These later checkpoints establish training coverage. The latest matched
+numerical and native review covers 20k.
+[20,500 audit](results/scene-full-epoch-v1/paired-prefix-020500.json) ·
+[21,000 audit](results/scene-full-epoch-v1/paired-prefix-021000.json) ·
+[21,500 audit](results/scene-full-epoch-v1/paired-prefix-021500.json) ·
+[22,000 audit](results/scene-full-epoch-v1/paired-prefix-022000.json) ·
+[22,500 paired audit](results/scene-full-epoch-v1/paired-prefix-022500.json) ·
+[22,500 segment receipts](results/scene-full-epoch-v1/paired-prefix-022500.tar.xz).
+[Earlier local audit](results/scene-full-epoch-v1/local-022500-prefix.json).
+
 [Earlier local-only 20,000 audit](results/scene-full-epoch-v1/local-020000-prefix.json) ·
 [Matched 20,000 controller receipt](results/scene-full-epoch-v1/matched-020000-training.json) ·
 [Review queue](results/scene-full-epoch-v1/queue-review-020000-launch.json) ·

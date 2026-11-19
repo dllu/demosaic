@@ -148,6 +148,11 @@ ISO6400 fine-increment error over Corpus 100k by 0.76 DN16 and loses
 With scene features active the exact flats are cleaner than with masking.
 Matching the distant view changes fine error little, and the two 20k
 GFX views retain soft, incomplete fine cab crossings.
+[Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
+ISO6400 planted-wire response points and lowers absolute gap error
+by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
+natural-photo response loss against Corpus 100k with more exact-flat
+error. Some right cab diagonals strengthen, with incomplete crossings.
 [Indexed Bayer phase extraction](compact-spectral-witness.md) reproduces
 the earlier transported head and reduces median feature time from 52.6
 to 30.7 ms on a fine-cab query. The added neighbor-pair head lowers

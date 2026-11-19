@@ -456,6 +456,14 @@ both arms lower independent ISO6400 fine error over Corpus 100k with
 lower fine response. The correct and mismatched distant views are nearly
 tied, and both standing real scenes retain incomplete fine cab crossings.
 
+A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
+attenuation along the parent phase from additions supported by the
+exterior phase and two central Bayer groups. It recovers 7.74 points
+of intact ISO6400 wire response and lowers absolute gap RMS by 3.64 DN16
+over local 20k. It raises intact error and the exact-flat photo floor.
+Separate attenuation and addition gains fail to recover the Corpus 100k
+natural response at the parent flat RMS on the calibration photos.
+
 A [dense regional context replay](scene-regional-context.md) gives that
 trial's spatial 12k checkpoint a registered higher-resolution neighborhood.
 In the additional 48 fixed fields, quiet error falls versus coarse,
