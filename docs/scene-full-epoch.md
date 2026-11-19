@@ -249,14 +249,19 @@ weights. The queued intermediate quality comparison uses EMA.
 [Paired 14,500 audit](results/scene-full-epoch-v1/paired-prefix-014500.json) ·
 [Segment receipts](results/scene-full-epoch-v1/paired-prefix-014500.tar.xz).
 
-The local-only arm has verified **15,000 updates**, covering 30,000
-distinct photos, 30,000 noise seeds and 120,000 native queries. Its
-retained training loops total 6,911.95 s. The local checkpoint SHA256 is
+Both arms now verify **15,000 updates** with identical observations.
+Each covers 30,000 distinct photos, 30,000 noise seeds and 120,000 native
+queries. Retained loops total 6,911.95 s local and 9,646.03 s spatial.
+The local checkpoint SHA256 is
 `7d2e041b563651d7dd9af24a18cb32f8cd94b8a094a05005eb55a43bb0fd30cb`.
-The controller is advancing the spatial arm toward the same milestone.
-A live worker waits for the matched receipt and runs the numerical monitor
-and both standing GFX collections sequentially.
-[Local 15k source and checkpoint audit](results/scene-full-epoch-v1/local-015000-prefix.json) ·
+The spatial checkpoint SHA256 is
+`53a3232a26c9997024dbd4349c09e7040c6a9d53ffef8d03dd7f95b5ba8d8114`.
+Both store raw and EMA weights. The 15k EMA numerical monitor and both
+standing GFX collections run through the matched review queue. The
+last completed numerical and native pair is at 12k. The continuation
+advances on the original 50k schedule.
+[Paired 15k source and checkpoint audit](results/scene-full-epoch-v1/paired-prefix-015000.json) ·
+[Segment receipts](results/scene-full-epoch-v1/paired-prefix-015000.tar.xz) ·
 [15k review queue](results/scene-full-epoch-v1/queue-review-015000.json).
 
 [Launch and state bindings](results/scene-full-epoch-v1/launch-publication.json) ·
