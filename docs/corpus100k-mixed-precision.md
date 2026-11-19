@@ -7,6 +7,10 @@ RGB16 export together take **111.56 s** instead of **334.77 s**. At native
 scale, the sky, foliage, fine building lines and both fences look the same
 as the FP32 render. The 100 MP in 10 seconds target remains unmet.
 
+The [pinned-upload follow-up](corpus100k-faster-inference.md) saves 50.07 s
+of checkpoint setup with identical TIFFs and measures a further 11.9%
+warm restoration gain in the TensorRT FP16 pilot.
+
 [Machine results](results/corpus100k-mixed-precision-v1/publication.json) ·
 [Frozen drivers and receipts](results/corpus100k-mixed-precision-v1/evidence.tar.xz) ·
 [Native crop provenance](images/corpus100k-mixed-precision-v1/manifest.json).
@@ -169,5 +173,6 @@ uv run --no-sync demosaic infer /path/to/corpus-100k.pt photo.raf output-linear.
 
 Supply the noise coefficients for the actual capture. The command above uses
 the standing GFX prior. IEEE FP32 remains available for reference exports.
-Use IEEE FP32 for bit-exact reference comparisons. TensorRT FP8 and
-NVFP4 remain open experiments. [Usage](usage.md) · [Checkpoint](full-corpus-long100k.md).
+Use IEEE FP32 for bit-exact reference comparisons. The follow-up measures
+FP8 and NVFP4 precision tradeoffs. [TensorRT evaluation](corpus100k-faster-inference.md) ·
+[Usage](usage.md) · [Checkpoint](full-corpus-long100k.md).

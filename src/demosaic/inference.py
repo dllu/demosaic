@@ -211,7 +211,28 @@ def restore_tiled(
     }
 
 
-def load_checkpoint(path, device="cpu", *, refinement_precision="float32"):
+def _stage_tiled_cuda(model, device):
+    """Prepare channels-last weights on the host and enqueue pinned uploads."""
+    model.to(memory_format=torch.channels_last)
+    use_pinned = True
+
+    def transfer(tensor):
+        nonlocal use_pinned
+        if use_pinned and tensor.device.type == "cpu" and tensor.layout == torch.strided:
+            try:
+                tensor = tensor.pin_memory()
+            except RuntimeError:
+                # Keep ordinary blocking transfers available if pinning is unavailable.
+                use_pinned = False
+        return tensor.to(device, non_blocking=use_pinned)
+
+    with torch.cuda.device(device):
+        model._apply(transfer)
+        torch.cuda.current_stream().synchronize()
+    return model
+
+
+def load_checkpoint(path, device="cpu", *, refinement_precision="float32", tiled_inference=False):
     from .model import JointDemosaic, ModelConfig
 
     # Hash the same opened inode that was loaded, even if a live trainer
@@ -226,4 +247,6 @@ def load_checkpoint(path, device="cpu", *, refinement_precision="float32"):
     if unexpected or any(not key.startswith("context.backbone.") for key in missing):
         raise ValueError(f"Incompatible checkpoint: missing={missing}, unexpected={unexpected}")
     model.set_refinement_precision(refinement_precision)
+    if tiled_inference and torch.device(device).type == "cuda":
+        return _stage_tiled_cuda(model, torch.device(device)), checkpoint
     return model.to(device), checkpoint

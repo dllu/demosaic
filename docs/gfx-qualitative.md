@@ -3,6 +3,9 @@
 **Review map updated November 19, 2026.** This page retains checkpoint-specific
 historical boards. Use these reports for the current completed comparisons:
 
+- [Corpus 100k TensorRT inference](corpus100k-faster-inference.md#standing-gfx100s-comparisons)
+  preserves the visually smooth sky and coarse chain-link crossings in
+  the FP16 engine. Fine foliage and building wires stay soft.
 - [Directional gap supervision](directional-gap-training.md#standing-gfx100s-comparisons)
   leaves a smooth sky and coherent coarse crossings. Fine foliage and
   building wires remain soft.

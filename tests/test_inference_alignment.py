@@ -5,8 +5,48 @@ import pytest
 import torch
 
 from demosaic.cfa import color_indices, unpack
-from demosaic.inference import restore_tiled
+from demosaic.inference import load_checkpoint, restore_tiled
 from demosaic.model import JointDemosaic, ModelConfig
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="Requires CUDA checkpoint staging")
+@pytest.mark.parametrize("pinning_available", [True, False])
+def test_tiled_cuda_checkpoint_matches_blocking_upload(tmp_path, monkeypatch, pinning_available):
+    config = ModelConfig(
+        restoration_backbone="packed-isotropic",
+        camera_conditioning=True,
+        width=4,
+        isotropic_groups=1,
+        isotropic_blocks=1,
+        isotropic_local_width=4,
+    )
+    checkpoint = tmp_path / "model.pt"
+    model = JointDemosaic(config)
+    torch.save({"model_config": config.to_dict(), "model": model.state_dict()}, checkpoint)
+    blocking, baseline_state = load_checkpoint(checkpoint, "cuda:0")
+    if not pinning_available:
+
+        def fail_pinning(*_args, **_kwargs):
+            raise RuntimeError("Pinned allocation unavailable")
+
+        monkeypatch.setattr(torch.Tensor, "pin_memory", fail_pinning)
+    staged, state = load_checkpoint(checkpoint, "cuda:0", tiled_inference=True)
+    assert state["loaded_sha256"] == baseline_state["loaded_sha256"]
+    assert all(
+        weight.is_contiguous(memory_format=torch.channels_last)
+        for weight in staged.parameters()
+        if weight.ndim == 4
+    )
+    for expected, actual in zip(
+        blocking.state_dict().values(), staged.state_dict().values(), strict=True
+    ):
+        torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+    raw = np.random.default_rng(1).uniform(0.1, 0.2, (63, 95)).astype(np.float32)
+    options = {"shot": 0.00128, "read": 6.5536e-6, "tile": 64, "overlap": 16, "device": "cuda:0"}
+    outputs = [
+        restore_tiled(net, raw, color_indices("RGGB"), **options)[0] for net in (blocking, staged)
+    ]
+    torch.testing.assert_close(*outputs, rtol=0, atol=0)
 
 
 @pytest.mark.parametrize("shape", [(70, 74), (69, 73)])

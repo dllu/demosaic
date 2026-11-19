@@ -29,6 +29,10 @@ of it. These costs keep the completed control experimental.
 EMA with standard CUDA autocast. It restores the 102 MP GFX frame in
 53.40 s versus 287.38 s with IEEE FP32. Native sky, fine detail and both
 fences look alike, with a small additional error on the clipped dahlia.
+[CUDA checkpoint staging](corpus100k-faster-inference.md) drops setup from
+52.59 to 2.52 s with identical RGB16 export. The TensorRT FP16 pilot
+saves another 11.9% of warmed restore time. Selective FP8 reduces
+weak-wire response and adds chroma variation on quiet fields.
 
 ## Full-model choices
 

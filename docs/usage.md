@@ -400,6 +400,11 @@ the 102 MP GFX frame falls from 287.38 to 53.40 seconds versus IEEE FP32.
 Weak-wire response and the native GFX crops stay visually close to FP32.
 [Full RGB16 differences and fixed quality panels](corpus100k-mixed-precision.md).
 
+CUDA `infer` uploads the checkpoint from pinned CPU memory when available.
+The sidecar reports `checkpoint_setup_seconds`. In the paired Corpus 100k
+run, checkpoint setup takes 2.52 s versus 52.59 s and both RGB16 TIFFs are
+identical. [Cold-start and TensorRT measurements](corpus100k-faster-inference.md).
+
 For CUDA FP32 inference, optional `infer --cudnn-benchmark --precision float32`
 searches convolution algorithms with a limit of 10 and a 16GiB PyTorch CUDA
 allocator cap, retaining any stricter existing quota. Refinement must also stay

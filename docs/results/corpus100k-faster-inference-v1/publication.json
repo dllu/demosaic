@@ -1,0 +1,1260 @@
+{
+  "workload": "corpus100k-faster-inference-v1",
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+    "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+  },
+  "archived": {
+    "path": "/home/dllu/proj/demosaic/docs/results/corpus100k-faster-inference-v1/evidence.tar.xz",
+    "sha256": "795971f4f4079ff56b383913774c6b513e24194d6ea8694c8445436a0d6fec75"
+  },
+  "native_manifest": {
+    "path": "/home/dllu/proj/demosaic/docs/images/corpus100k-faster-inference-v1/manifest.json",
+    "sha256": "2ccec0929ea2a47a88d083e0a74f6306ed5f0eb09be901b4247f3e1e941fcdbd"
+  },
+  "native_images_viewed": true,
+  "production_source": [
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/inference.py",
+      "sha256": "75592172984ac77b463b121a7fd2d6bfd954818a2bf0333643107f16e906445f"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/src/demosaic/cli.py",
+      "sha256": "dcd209ea3a291e47b8ad081a069013076c10430edaec29dda3396bcfc1427dc0"
+    },
+    {
+      "path": "/home/dllu/proj/demosaic/tests/test_inference_alignment.py",
+      "sha256": "f389a241a68cc8e700e5b4da8d8f50e64f0cb17591ebaeb50ac650c74577ed9a"
+    }
+  ],
+  "production_CLI": {
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/paired_cli.py",
+      "sha256": "73875dcb689808f3fd0d821d30ee12e7063c331c7545f37536b27846a8d566b5"
+    },
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+      "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+    },
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+      "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+    },
+    "runs": {
+      "pinned": {
+        "sidecar": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/cli-pinned.json",
+          "sha256": "7aa28c5cbfbc1ce5e0992852cf945cbb84ef0fa17f805afb8e32a0664b7f8552"
+        },
+        "TIFF": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/cli-pinned.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "elapsed_seconds": 52.31739079207182,
+        "stats": {
+          "input": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "checkpoint": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "step": 100000,
+          "checkpoint_sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+            "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "adc_cfa_projection_mode": "malvar",
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "raw_directional_residual": false,
+            "raw_directional_bank_context": false,
+            "raw_directional_bank_detach_input": false,
+            "raw_spectral_residual": false,
+            "raw_frequency_features": false,
+            "raw_frequency_window": 64,
+            "raw_spatial_features": false,
+            "raw_global_features": false,
+            "raw_global_conditioning": "legacy-v1",
+            "late_rgb_refinement": "none",
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "pattern": "RGGB",
+          "raw_metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              4101.0,
+              4098.0,
+              4104.0,
+              4106.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 6400,
+            "adc_white_level": 65535.0,
+            "make": "FUJIFILM",
+            "xyz_to_camera": [
+              [
+                1.6211999654769897,
+                -0.8422999978065491,
+                -0.1582999974489212
+              ],
+              [
+                -0.4336000084877014,
+                1.2582999467849731,
+                0.19370000064373016
+              ],
+              [
+                -0.019500000402331352,
+                0.07259999960660934,
+                0.6198999881744385
+              ]
+            ]
+          },
+          "noise_profile": null,
+          "checkpoint_setup_seconds": 2.518844587961212,
+          "end_to_end_seconds": 50.273516208981164,
+          "seconds": 45.51650238898583,
+          "tile_seconds": 45.4561519009294,
+          "compute_transfer_seconds": 44.85205543588381,
+          "blend_seconds": 0.5682776987086982,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.121381376,
+          "cudnn_autotune": {
+            "enabled": false
+          },
+          "phase_harmonic": {
+            "enabled": false
+          }
+        }
+      },
+      "legacy": {
+        "sidecar": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/cli-legacy.json",
+          "sha256": "2e1e3c1014e466703d41f29d9feb6b6a8f59f8db5a76ce0cae2d7b3bc2d8d274"
+        },
+        "TIFF": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/cli-legacy.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "elapsed_seconds": 111.15639928507153,
+        "stats": {
+          "input": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "checkpoint": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+          "step": 100000,
+          "checkpoint_sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760",
+          "model_config": {
+            "restoration_backbone": "pretrained-rgb",
+            "width": 64,
+            "encoder_blocks": [
+              2,
+              2,
+              4
+            ],
+            "middle_blocks": 6,
+            "decoder_blocks": [
+              2,
+              2,
+              2
+            ],
+            "attention": true,
+            "dino": true,
+            "dino_model": "facebook/dinov3-convnext-small-pretrain-lvd1689m",
+            "dino_revision": "421020015aa4266363db803b6049a529999afb1e",
+            "dino_lora_rank": 0,
+            "dino_input_adapter": false,
+            "dino_feature_fusion": "convnext-pyramid",
+            "camera_conditioning": true,
+            "noise_modulation": false,
+            "physical_fp32": true,
+            "baseline": "bilinear",
+            "prior_window": 7,
+            "standardized_noise": false,
+            "noise_refinement": false,
+            "refinement_width": 24,
+            "refinement_blocks": 4,
+            "refinement_window": 63,
+            "coarse_refinement_factor": 0,
+            "coarse_refinement_width": 24,
+            "coarse_refinement_blocks": 4,
+            "coarse_refinement_window": 31,
+            "pyramid_refinement": false,
+            "pyramid_measurements": true,
+            "pyramid_width": 24,
+            "pyramid_blocks": 2,
+            "variance_stabilization": true,
+            "physical_anchors": true,
+            "rgb_processing_scale": 1,
+            "packed_detail_prior": false,
+            "rgb_hidden_autocast": false,
+            "rgb_center_camera_matrix": false,
+            "rgb_middle_skip_fp32": true,
+            "adc_cfa_projection": false,
+            "adc_cfa_projection_mode": "malvar",
+            "raw_kernel_reconstruction": false,
+            "raw_kernel_windows": [
+              1,
+              5,
+              17
+            ],
+            "raw_kernel_phase_conditioning": false,
+            "raw_directional_residual": false,
+            "raw_directional_bank_context": false,
+            "raw_directional_bank_detach_input": false,
+            "raw_spectral_residual": false,
+            "raw_frequency_features": false,
+            "raw_frequency_window": 64,
+            "raw_spatial_features": false,
+            "raw_global_features": false,
+            "raw_global_conditioning": "legacy-v1",
+            "late_rgb_refinement": "none",
+            "isotropic_groups": 6,
+            "isotropic_blocks": 8,
+            "isotropic_local_width": 32,
+            "isotropic_raw_gain": 1.0,
+            "isotropic_residual_scale": 1.0
+          },
+          "shot": 0.00128,
+          "read": 6.5536e-06,
+          "pattern": "RGGB",
+          "raw_metadata": {
+            "source": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+            "camera": "GFX100S",
+            "pattern": "RGGB",
+            "black_levels": [
+              4101.0,
+              4098.0,
+              4104.0,
+              4106.0
+            ],
+            "white_levels": [
+              65535.0,
+              65535.0,
+              65535.0,
+              65535.0
+            ],
+            "white_balance": [
+              1.5132450331125828,
+              1.0,
+              2.2152317880794703
+            ],
+            "camera_to_srgb": [
+              [
+                1.0725188393098881,
+                0.17123593128834644,
+                -0.24375477059823436
+              ],
+              [
+                -0.1267191317089774,
+                1.4310509369654432,
+                -0.3043318052564657
+              ],
+              [
+                -0.009697676902906037,
+                -0.29348063283422965,
+                1.3031783097371357
+              ]
+            ],
+            "flip": 0,
+            "iso": 6400,
+            "adc_white_level": 65535.0,
+            "make": "FUJIFILM",
+            "xyz_to_camera": [
+              [
+                1.6211999654769897,
+                -0.8422999978065491,
+                -0.1582999974489212
+              ],
+              [
+                -0.4336000084877014,
+                1.2582999467849731,
+                0.19370000064373016
+              ],
+              [
+                -0.019500000402331352,
+                0.07259999960660934,
+                0.6198999881744385
+              ]
+            ]
+          },
+          "noise_profile": null,
+          "checkpoint_setup_seconds": 52.59223361394834,
+          "end_to_end_seconds": 109.64110238396097,
+          "seconds": 55.09508936898783,
+          "tile_seconds": 54.98495765496045,
+          "compute_transfer_seconds": 54.29782394191716,
+          "blend_seconds": 0.651482081389986,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.123478528,
+          "cudnn_autotune": {
+            "enabled": false
+          },
+          "phase_harmonic": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    "rgb16_shape": [
+      8746,
+      11662,
+      3
+    ],
+    "mismatched_RGB16_codes": 0,
+    "RGB16_codes": 305987556
+  },
+  "TensorRT": {
+    "full_frame": [
+      {
+        "arm": "eager-fp16",
+        "restore": {
+          "seconds": 41.32910502899904,
+          "tile_seconds": 41.26203753007576,
+          "compute_transfer_seconds": 40.4956113032531,
+          "blend_seconds": 0.6610989413456991,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.123461632
+        },
+        "export_seconds": 1.0658028749749064,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/review-eager-fp16-0.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "jobs_after": [
+          [
+            327018,
+            "688"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            2971920,
+            "2921"
+          ],
+          [
+            2974084,
+            "4389"
+          ]
+        ]
+      },
+      {
+        "arm": "trt-fp16",
+        "restore": {
+          "seconds": 37.050771004054695,
+          "tile_seconds": 36.958092443994246,
+          "compute_transfer_seconds": 36.15452785254456,
+          "blend_seconds": 0.6823731046169996,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.001826816
+        },
+        "export_seconds": 0.9125963249243796,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/review-trt-fp16-1.tiff",
+          "sha256": "40025cc2f6d427f5b2bf4d4aaca0cea64fdad18e91594fc733179070573d48b7"
+        },
+        "jobs_after": [
+          [
+            327018,
+            "688"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            2971920,
+            "1357"
+          ],
+          [
+            2974084,
+            "4389"
+          ]
+        ]
+      },
+      {
+        "arm": "trt-selective-fp8",
+        "restore": {
+          "seconds": 35.607012762106024,
+          "tile_seconds": 35.5325033289846,
+          "compute_transfer_seconds": 34.69413110660389,
+          "blend_seconds": 0.7673508380539715,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.136044544
+        },
+        "export_seconds": 0.7821231050183997,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/review-trt-selective-fp8-2.tiff",
+          "sha256": "adb7c3293d0e5083ccc89699b72753762b9b38ad6fdb94fce2ac41313f1ee03c"
+        },
+        "jobs_after": [
+          [
+            327018,
+            "688"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            2971920,
+            "2891"
+          ],
+          [
+            2974084,
+            "4645"
+          ]
+        ]
+      },
+      {
+        "arm": "eager-fp16",
+        "restore": {
+          "seconds": 42.75428476498928,
+          "tile_seconds": 42.670623947051354,
+          "compute_transfer_seconds": 41.862758953124285,
+          "blend_seconds": 0.72127526672557,
+          "megapixels": 101.995852,
+          "tiles": 520,
+          "tile": 512,
+          "overlap": 64,
+          "tile_grid_alignment": 2,
+          "tile_stride": 448,
+          "batch_size": 4,
+          "self_ensemble": "none",
+          "model_views_per_tile": 1,
+          "compute_precision": "float16",
+          "refinement_compute_precision": "float32",
+          "memory_format": "channels_last",
+          "peak_cuda_gb": 2.391897088
+        },
+        "export_seconds": 0.9250780700240284,
+        "RGB16": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/review-eager-fp16-3.tiff",
+          "sha256": "97016829c933bc6040331de4bf3db2f9a4ebbdcfcfcf9a20092d058488c2d6b1"
+        },
+        "jobs_after": [
+          [
+            327018,
+            "688"
+          ],
+          [
+            2431517,
+            "40"
+          ],
+          [
+            2971920,
+            "2859"
+          ],
+          [
+            2974084,
+            "4645"
+          ]
+        ]
+      }
+    ],
+    "export_fidelity": {
+      "trt-fp16": {
+        "channels": 305987556,
+        "fraction_exact": 0.868201774192412,
+        "fraction_at_most_one": 0.9933943686258927,
+        "rms_DN16": 0.5516602009863214,
+        "max_DN16_and_sensor_xy_channel": [
+          216,
+          [
+            5436,
+            2582,
+            0
+          ]
+        ],
+        "p95_99_999_DN16": [
+          1,
+          1,
+          5
+        ],
+        "seam_RMS_DN16": 0.48176323354694095,
+        "interior_RMS_DN16": 0.5567186535265867
+      },
+      "trt-selective-fp8": {
+        "channels": 305987556,
+        "fraction_exact": 0.357699291535895,
+        "fraction_at_most_one": 0.7754687579517122,
+        "rms_DN16": 3.7682960710873306,
+        "max_DN16_and_sensor_xy_channel": [
+          1532,
+          [
+            7702,
+            3144,
+            1
+          ]
+        ],
+        "p95_99_999_DN16": [
+          4,
+          9,
+          32
+        ],
+        "seam_RMS_DN16": 3.3829434150156033,
+        "interior_RMS_DN16": 3.796571397500376
+      }
+    },
+    "trunk_screen": {
+      "driver": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt_hidden.py",
+        "sha256": "977cea9c16263a46b28fd949f12c4344a0b8cd8006f6463a21ed152b2ad08fa7"
+      },
+      "checkpoint": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/full-corpus-scaling-v3/checkpoint-recovery-v7/work/artifacts/train/long100k/step100000.pt",
+        "sha256": "87b96f3c487b9edaf1c477742b6c38f2a82cc6b20a94716d51cc8cf46a17a760"
+      },
+      "calibration": {
+        "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/calibration.json",
+        "sha256": "4643f5c28663e5343e3debf116ebb8b1660faf386a4cab2e91793449778185cd"
+      },
+      "artifacts": {
+        "trt-fp16": {
+          "engine": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt-fp16-pyramid-b4-512-opt2.plan",
+            "sha256": "e4add621bf1344b1604c6a30e485445a13bf5e9e1dd1b72ee19709d61a7ad3f3"
+          },
+          "inspector": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt-fp16-layers-opt2.json",
+            "sha256": "ece6ea6e0ddedaa4d4242f321c3869a39235560d514dfdbaf2aee705880921f8"
+          },
+          "build_seconds": 35.51984060497489
+        },
+        "trt-selective-fp8": {
+          "engine": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt-selective-fp8-pyramid-b4-512-opt2.plan",
+            "sha256": "895333bfb3a57a94ca014da74a9bc05dc9ce4a96ea7e6ba0518a8231951183af"
+          },
+          "inspector": {
+            "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/trt-selective-fp8-layers-opt2.json",
+            "sha256": "3dfa220aeb2522f9f4cb68fc076c7c1d9dad14c85520a202f97da896118767b8"
+          },
+          "build_seconds": 23.628737790044397
+        }
+      },
+      "backend": {
+        "packages": {
+          "torch": "2.14.1+cu130",
+          "torch-tensorrt": null,
+          "tensorrt": null,
+          "nvidia-modelopt": null,
+          "torchao": null,
+          "rawpy": "0.26.1"
+        },
+        "cuda": "13.0",
+        "cudnn": 92400,
+        "hardware": "NVIDIA GB10",
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": false,
+        "TensorRT": "11.4.0.106"
+      },
+      "timing": "6 interleaved B4 512px resident forward wall times with CUDA sync, warmed immediately before each arm",
+      "full_forward_seconds": {
+        "eager": [
+          0.19706864398904145,
+          0.1950859879143536,
+          0.19770775001961738,
+          0.19536538200918585,
+          0.19532941502984613,
+          0.20026685995981097
+        ],
+        "trt-fp16": [
+          0.1731405119644478,
+          0.2007294810609892,
+          0.17184454493690282,
+          0.1733376830816269,
+          0.1732730920193717,
+          0.17174024309497327
+        ],
+        "trt-selective-fp8": [
+          0.16524874593596905,
+          0.17310857598204166,
+          0.16562170803081244,
+          0.16632284491788596,
+          0.16654713405296206,
+          0.16254682803992182
+        ]
+      },
+      "differences": {
+        "eager": {
+          "ieee_fp32": {
+            "rms_DN16": 0.2107271076175846,
+            "mean_abs_DN16": 0.10311685509359499,
+            "absolute_percentile_DN16": [
+              0.287104994058609,
+              0.5170819535851479,
+              1.2383956540750969,
+              36.960373520851135
+            ],
+            "ROI_RMS_DN16": [
+              0.1043284754397404,
+              0.1573660073626138,
+              0.10757868945105367,
+              0.13336169175392465
+            ],
+            "ROI_channel_mean_DN16": [
+              [
+                -0.024723615089533267,
+                0.03885300478214049,
+                0.00658631288279139
+              ],
+              [
+                -0.0600003051571548,
+                0.024315757457679867,
+                -0.0062313285324307795
+              ],
+              [
+                -0.03050028394509354,
+                0.017679347635385055,
+                0.001027093503478227
+              ],
+              [
+                -0.04049455900399153,
+                0.022653322259247943,
+                0.008741173876842367
+              ]
+            ]
+          },
+          "eager_fp16": {
+            "rms_DN16": 0.0,
+            "mean_abs_DN16": 0.0,
+            "absolute_percentile_DN16": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ROI_RMS_DN16": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ROI_channel_mean_DN16": [
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0
+              ]
+            ]
+          }
+        },
+        "trt-fp16": {
+          "ieee_fp32": {
+            "rms_DN16": 0.5726290687362532,
+            "mean_abs_DN16": 0.2148586886145005,
+            "absolute_percentile_DN16": [
+              0.6071684695780277,
+              1.1096022091805935,
+              2.7671142706835026,
+              101.94375693798065
+            ],
+            "ROI_RMS_DN16": [
+              0.2001612956507868,
+              0.3268204712608631,
+              0.23904513816691775,
+              0.32556235826452284
+            ],
+            "ROI_channel_mean_DN16": [
+              [
+                -0.01565943665045779,
+                0.04759849396941718,
+                0.01418676424818841
+              ],
+              [
+                -0.06543596435412838,
+                0.0231738845941436,
+                -0.014871810839076715
+              ],
+              [
+                -0.026916922876989702,
+                0.018906079528915144,
+                0.0064526154461646
+              ],
+              [
+                -0.04474898481876153,
+                0.0197621942043952,
+                0.01326427634319316
+              ]
+            ]
+          },
+          "eager_fp16": {
+            "rms_DN16": 0.5768065733549237,
+            "mean_abs_DN16": 0.22266042897986052,
+            "absolute_percentile_DN16": [
+              0.6282252771779895,
+              1.1528144404292107,
+              2.886674702167511,
+              99.9594122171402
+            ],
+            "ROI_RMS_DN16": [
+              0.21506663828440503,
+              0.3420157654877716,
+              0.24897756590027145,
+              0.33189506032567223
+            ],
+            "ROI_channel_mean_DN16": [
+              [
+                0.009064178439075476,
+                0.00874548918727669,
+                0.007600451365397021
+              ],
+              [
+                -0.005435659196973574,
+                -0.0011418728635362641,
+                -0.008640482306645936
+              ],
+              [
+                0.003583361068103841,
+                0.0012267318935300863,
+                0.005425521942686373
+              ],
+              [
+                -0.004254425814770002,
+                -0.0028911280548527428,
+                0.004523102466350792
+              ]
+            ]
+          }
+        },
+        "trt-selective-fp8": {
+          "ieee_fp32": {
+            "rms_DN16": 4.39995512577682,
+            "mean_abs_DN16": 2.088078652144036,
+            "absolute_percentile_DN16": [
+              6.375247568590561,
+              11.682438924908638,
+              25.90414794093409,
+              805.518958568573
+            ],
+            "ROI_RMS_DN16": [
+              1.3464120056718987,
+              2.7803554862842503,
+              2.735307428309207,
+              3.771126342415521
+            ],
+            "ROI_channel_mean_DN16": [
+              [
+                -0.3343526318323711,
+                -1.216488834268239,
+                -0.198409626863031
+              ],
+              [
+                -0.4757788049440023,
+                -0.009655427227789915,
+                -0.489140428789824
+              ],
+              [
+                -0.12266247230338649,
+                -0.09141830841040247,
+                0.19527319099308899
+              ],
+              [
+                0.6944366187758988,
+                0.33129580896966215,
+                0.32033849520050806
+              ]
+            ]
+          },
+          "eager_fp16": {
+            "rms_DN16": 4.372001435259671,
+            "mean_abs_DN16": 2.083949645096638,
+            "absolute_percentile_DN16": [
+              6.352930404245853,
+              11.668213067762549,
+              26.028907023570238,
+              815.2688097953796
+            ],
+            "ROI_RMS_DN16": [
+              1.3593119017955728,
+              2.7719520128966995,
+              2.7381797978604094,
+              3.7626038455981607
+            ],
+            "ROI_channel_mean_DN16": [
+              [
+                -0.3096290167428378,
+                -1.2553418390503794,
+                -0.2049959397458224
+              ],
+              [
+                -0.41577849978684756,
+                -0.03397118468546978,
+                -0.4829091002573932
+              ],
+              [
+                -0.09216218835829296,
+                -0.10909765604578751,
+                0.19424609748961075
+              ],
+              [
+                0.7349311777798903,
+                0.3086424867104142,
+                0.3115973213236657
+              ]
+            ]
+          }
+        }
+      },
+      "raw": {
+        "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+        "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+      },
+      "positions": [
+        [
+          5624,
+          1224
+        ],
+        [
+          5614,
+          2514
+        ],
+        [
+          8714,
+          5394
+        ],
+        [
+          2064,
+          5824
+        ]
+      ],
+      "noise": {
+        "shot": 0.00128,
+        "read": 6.5536e-06
+      },
+      "jobs_after": [
+        [
+          327018,
+          "692"
+        ],
+        [
+          2431517,
+          "40"
+        ],
+        [
+          2970180,
+          "6381"
+        ],
+        [
+          2971920,
+          "1051"
+        ]
+      ]
+    },
+    "wire_differences": {
+      "iso400": {
+        "trt-fp16": {
+          "weak_response_pct": {
+            "mean_delta": -0.0026544922081921385,
+            "max_abs_delta": 0.07735061496904905
+          },
+          "increment_RMS_DN16": {
+            "mean_delta": -0.006775391135885951,
+            "max_abs_delta": 0.15376620761041693
+          },
+          "flat_luma_RMS_DN16": {
+            "mean_delta": 0.0065747666743418325,
+            "max_abs_delta": 0.07112148626291592
+          },
+          "flat_chroma_RMS_DN16": {
+            "mean_delta": 0.022760343329147448,
+            "max_abs_delta": 0.2026088198412097
+          },
+          "flat_channel_bias_DN16": {
+            "mean_delta": 0.0006659380349729733,
+            "max_abs_delta": 0.2416286300830084
+          }
+        },
+        "trt-selective-fp8": {
+          "weak_response_pct": {
+            "mean_delta": 0.036620418429797276,
+            "max_abs_delta": 0.419966077941055
+          },
+          "increment_RMS_DN16": {
+            "mean_delta": -0.04929649109878357,
+            "max_abs_delta": 0.824220686550845
+          },
+          "flat_luma_RMS_DN16": {
+            "mean_delta": 0.28401713955428637,
+            "max_abs_delta": 3.1494113832514348
+          },
+          "flat_chroma_RMS_DN16": {
+            "mean_delta": 2.3252910965874687,
+            "max_abs_delta": 13.71297944456808
+          },
+          "flat_channel_bias_DN16": {
+            "mean_delta": 0.20209483616090257,
+            "max_abs_delta": 3.8564522360117017
+          }
+        }
+      },
+      "iso6400": {
+        "trt-fp16": {
+          "weak_response_pct": {
+            "mean_delta": -0.0018319271149496903,
+            "max_abs_delta": 0.15840482621150898
+          },
+          "increment_RMS_DN16": {
+            "mean_delta": -0.006883217905174395,
+            "max_abs_delta": 0.1255820952889053
+          },
+          "flat_luma_RMS_DN16": {
+            "mean_delta": 0.006313582403689437,
+            "max_abs_delta": 0.1127038158042808
+          },
+          "flat_chroma_RMS_DN16": {
+            "mean_delta": 0.024833348543476592,
+            "max_abs_delta": 0.20042213536627784
+          },
+          "flat_channel_bias_DN16": {
+            "mean_delta": -0.006203179568827311,
+            "max_abs_delta": 0.18914228816219492
+          }
+        },
+        "trt-selective-fp8": {
+          "weak_response_pct": {
+            "mean_delta": -0.4312397402586016,
+            "max_abs_delta": 1.2881552694022673
+          },
+          "increment_RMS_DN16": {
+            "mean_delta": 0.1024975555420203,
+            "max_abs_delta": 2.309458246250699
+          },
+          "flat_luma_RMS_DN16": {
+            "mean_delta": 1.4568798943825574,
+            "max_abs_delta": 9.841562568986344
+          },
+          "flat_chroma_RMS_DN16": {
+            "mean_delta": 8.419621141975773,
+            "max_abs_delta": 47.862775470624335
+          },
+          "flat_channel_bias_DN16": {
+            "mean_delta": 0.35004346669990327,
+            "max_abs_delta": 15.67178935523539
+          }
+        }
+      }
+    },
+    "exact_scores": {
+      "railway": {
+        "ieee-fp32": 32.87158124178087,
+        "eager-fp16": 32.87158105311254,
+        "trt-fp16": 32.87165710775073,
+        "trt-selective-fp8": 32.86858007928339
+      },
+      "dahlia": {
+        "ieee-fp32": 23.712438924766882,
+        "eager-fp16": 23.70389674429653,
+        "trt-fp16": 23.71277204733079,
+        "trt-selective-fp8": 23.91766970873897
+      }
+    },
+    "DINO_NVFP4": {
+      "dino-nvfp4.json": {
+        "attempts": {
+          "trt-fp16": {
+            "layers": [
+              {
+                "name": "stages.2.layers.0.pointwise_conv1",
+                "shape": [
+                  4,
+                  32,
+                  32,
+                  384
+                ],
+                "build_seconds": 4.822938472032547,
+                "engine": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-trt-fp16-0.plan",
+                  "sha256": "2181948994682b26836bb4777608905a66bb7b09facdbe2067b64d3c85796d69"
+                },
+                "inspector": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-trt-fp16-0-layers.json",
+                  "sha256": "0bccca6942072771f51ce14bee56519cdd4a74ab956faecd6dae71d610369210"
+                },
+                "activation_absmax": 20.0625
+              },
+              {
+                "name": "stages.2.layers.0.pointwise_conv2",
+                "shape": [
+                  4,
+                  32,
+                  32,
+                  1536
+                ],
+                "build_seconds": 4.628687180927955,
+                "engine": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-trt-fp16-1.plan",
+                  "sha256": "5ad419ea007ba72c07b7745e284d53920209f46f9d881201b3c32a6082c8dfbe"
+                },
+                "inspector": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-trt-fp16-1-layers.json",
+                  "sha256": "c1ba47dbb4bb4eeaa32ac7247c0d4523a0b79b87fe25d8036af64f996ca0ce0b"
+                },
+                "activation_absmax": 3.70703125
+              }
+            ]
+          },
+          "trt-nvfp4": {
+            "error": "TensorRT did not build dino-trt-nvfp4-0.plan"
+          }
+        },
+        "kernel_seconds": {
+          "trt-fp16": [
+            0.00010041542409453542,
+            5.612894892692566e-05
+          ]
+        }
+      },
+      "dino-nvfp4-fp32-dequantizer.json": {
+        "attempts": {
+          "trt-fp16": {
+            "layers": [
+              {
+                "name": "stages.2.layers.0.pointwise_conv1",
+                "shape": [
+                  4,
+                  32,
+                  32,
+                  384
+                ],
+                "build_seconds": 5.8985585229238495,
+                "engine": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-fp16-0.plan",
+                  "sha256": "0e834ccdfff0bcc6f193364d287ba012c2ec62bc9f82ece10e02025104f550d7"
+                },
+                "inspector": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-fp16-0-layers.json",
+                  "sha256": "28d0ab2c707da8d44358d16288363adb75e8f116a3524456b1c361b373bc2240"
+                },
+                "activation_absmax": 20.0625
+              },
+              {
+                "name": "stages.2.layers.0.pointwise_conv2",
+                "shape": [
+                  4,
+                  32,
+                  32,
+                  1536
+                ],
+                "build_seconds": 5.434701811056584,
+                "engine": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-fp16-1.plan",
+                  "sha256": "3db45752d0bb5893896819dbf74b69bd67c88e2090b094e79bf4b3241d260b33"
+                },
+                "inspector": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-fp16-1-layers.json",
+                  "sha256": "779f1ccf6362cc50ea0a04fe9395df4ba65a40da879084bbded60cc8505ea5fd"
+                },
+                "activation_absmax": 3.70703125
+              }
+            ]
+          },
+          "trt-nvfp4": {
+            "layers": [
+              {
+                "name": "stages.2.layers.0.pointwise_conv1",
+                "shape": [
+                  4,
+                  32,
+                  32,
+                  384
+                ],
+                "build_seconds": 4.852301448001526,
+                "engine": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-nvfp4-0.plan",
+                  "sha256": "36f0d7802358b72ccfde47cacd4c8bf235d057fed6804d9f88291932802528db"
+                },
+                "inspector": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-nvfp4-0-layers.json",
+                  "sha256": "b6ad6d3b7bd18fcd56a1159c0f484828de626ef5c1d9b2c7a7234405060717e7"
+                },
+                "activation_absmax": 20.0625
+              },
+              {
+                "name": "stages.2.layers.0.pointwise_conv2",
+                "shape": [
+                  4,
+                  32,
+                  32,
+                  1536
+                ],
+                "build_seconds": 9.867870947928168,
+                "engine": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-nvfp4-1.plan",
+                  "sha256": "1f13f3761f538934373fa20b984132e1b140406e54976b5ad78991bf0fb8cfca"
+                },
+                "inspector": {
+                  "path": "/home/dllu/proj/demosaic/.cache/experiments/corpus100k-faster-inference-v1/dino-fp32-dequantizer-trt-nvfp4-1-layers.json",
+                  "sha256": "5fc9f15cc160942dc93851280f7c4d23ecffa071b9673011ce02a58b27a8f8c8"
+                },
+                "activation_absmax": 3.70703125
+              }
+            ]
+          }
+        },
+        "kernel_seconds": {
+          "trt-fp16": [
+            0.00020270654931664467,
+            0.00018591209955047815
+          ],
+          "trt-nvfp4": [
+            0.00019844532653223723,
+            0.00020000694785267116
+          ]
+        }
+      }
+    }
+  },
+  "scope": "Compiled runtime comparisons cover fixed crops, a 48-case wire panel and full 102 MP for Corpus 100k. No new fixed427 or complete camera panel for TensorRT."
+}

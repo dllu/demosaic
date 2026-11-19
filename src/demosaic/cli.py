@@ -312,9 +312,14 @@ def main(argv=None):
         with cudnn_autotune(
             args.device, enabled=args.cudnn_benchmark, precision=args.precision
         ) as backend_policy:
+            model_setup_started = time.perf_counter()
             model, checkpoint = load_checkpoint(
-                args.checkpoint, args.device, refinement_precision=args.refinement_precision
+                args.checkpoint,
+                args.device,
+                refinement_precision=args.refinement_precision,
+                tiled_inference=True,
             )
+            checkpoint_setup_seconds = time.perf_counter() - model_setup_started
             if args.cudnn_benchmark and model.config.rgb_hidden_autocast:
                 raise ValueError(
                     "Checkpoint forces hidden half precision; choose an FP32 checkpoint "
@@ -380,6 +385,7 @@ def main(argv=None):
                 "pattern": pattern,
                 "raw_metadata": asdict(metadata) if metadata else None,
                 "noise_profile": str(args.noise_profile) if args.noise_profile else None,
+                "checkpoint_setup_seconds": checkpoint_setup_seconds,
                 "end_to_end_seconds": time.perf_counter() - end_to_end_started,
                 **stats,
             },

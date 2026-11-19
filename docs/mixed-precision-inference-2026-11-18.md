@@ -1,11 +1,16 @@
 # Mixed-precision inference for 102 MP Bayer photographs
 
-November 18, 2026. **Start with hidden FP16 on V120 Small. Then use NVIDIA Model Optimizer to test NVFP4 on the frozen DINO encoder’s pointwise linear layers and FP8 on expensive DRUNet convolutions.** Keep native measurement and final RGB arithmetic in FP32, with one conversion to unsigned 16-bit at export. These are proposed experiments. The timing evidence below comes from earlier runs.
+November 18, 2026. **Start with hidden FP16 on V120 Small. Then use NVIDIA Model Optimizer to test NVFP4 on the frozen DINO encoder’s pointwise linear layers and FP8 on expensive DRUNet convolutions.** Keep native measurement and final RGB arithmetic in FP32, with one conversion to unsigned 16-bit at export. These were the original proposals. Earlier timing and the follow-up measurements
+are identified by their workloads.
 
 The completed [Corpus 100k FP16 benchmark](corpus100k-mixed-precision.md)
 finds a 5.38× tiled-restore speedup on the full 102 MP GFX frame. Standard
 FP16 gives nearly the speed of the explicit hidden cast with lower output
-error. The original proposals below retain their historical timing scope.
+error. The [TensorRT and startup follow-up](corpus100k-faster-inference.md)
+measures a further 11.9% warm restore reduction from FP16 and saves 50.07 s
+of CLI checkpoint setup via pinned upload, with identical RGB16 exports.
+The selective FP8 gains little extra time and raises quiet chroma error.
+Two native DINO NVFP4 projections show no material speedup.
 
 ## Where the time and precision go
 
