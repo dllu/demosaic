@@ -9,6 +9,7 @@ Start with the [README](../README.md) for installation and inference.
 | --- | --- |
 | Choose a model or understand version numbers | [Model choices](current-model.md) |
 | Run inference, set noise priors or export | [Usage](usage.md), [DNG/JPEG](dng-export.md), [hot pixels](hot-pixel-clusters.md) |
+| Plan faster 102 MP inference on GB10 | [Mixed precision and NVIDIA Model Optimizer](mixed-precision-inference-2026-11-18.md) |
 | Compare completed broad scores | [PSNR history](performance-history.md), [V120](v120-v121-primary.md), [V131](v131-broad-primary.md), [Corpus 20k](full-corpus-control20k-primary.md), [Corpus 100k](full-corpus-long100k.md#broader-evaluation), [Matched scene 12k cameras](expanded-scene-12000-cameras.md), [Near-ADC cameras](near-adc-bridge-cameras.md) |
 | Understand camera evidence and its gaps | [Real-camera overview](real-camera-quality.md) |
 | Find active work and completed research outcomes | [Experiment index](experiments.md), [research priorities](research.md) |
