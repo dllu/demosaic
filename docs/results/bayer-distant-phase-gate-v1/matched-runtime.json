@@ -1,0 +1,98 @@
+{
+  "driver": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bayer-distant-phase-gate-v1/matched_runtime.py",
+    "sha256": "7cdb863b8cb6518290ffe48e45b1272591a9376c67c5d43470bdb6362730b8dc"
+  },
+  "calibration": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bayer-phase-quadrature-v1/exterior-screen.json",
+    "sha256": "7cf8e84bf415c3a375512f64ffb35b6835f9e7e89c3fcab15d2d406dd6c776f1"
+  },
+  "wide_training": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/completed.json",
+    "sha256": "9eb7e803098fa0472bb16656e683c370b20521fc848a5686a3503a9b0a6ce9fa"
+  },
+  "checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bayer-distant-phase-gate-v1/training/step000672.pt",
+    "sha256": "ca2f3567bc65a3e3f2f8dadf81d97f36b13f0b2b5648ee0412f929be66b0e4c5"
+  },
+  "parent": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+    "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+  },
+  "frozen_phase": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+    "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+  },
+  "doses": {
+    "exterior-only": 0.62,
+    "exterior-local": 0.91,
+    "exterior-phase-locked": 0.39
+  },
+  "prior_frozen_controls": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bayer-phase-shrinkage-v1/training/completed.json",
+    "sha256": "a557ca9f2d2c8a08578482bb57d7a19efcf9aba03a2eaea8580f2d624e47e259"
+  },
+  "training": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/bayer-distant-phase-gate-v1/training/completed.json",
+    "sha256": "427d4cf29e6d2606ddb0e78f9412fec1e7ba4516fb7191b9e35d83c0b9556dca"
+  },
+  "frozen_wide_checkpoint": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/step000672.pt",
+    "sha256": "7b854d681083550de869b06b55d56c2f84224ec4a0545419a2cf34682a38ec68"
+  },
+  "inference": "EMA routers, CUDA FP32 retained parent, FP32 CPU head and native overlap",
+  "input": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/012-iso6400.npz",
+    "sha256": "caeba10076a8701b00589737a870775f791fd45459c9f5b52b24f570f8fc70b0"
+  },
+  "parent_output": {
+    "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/wire-parent/012-iso6400.npy",
+    "sha256": "b0f9b837209d5b8135f9c365be57a7893c2a95e010ec7013b6c88cf08bba6f2e"
+  },
+  "cpu_affinity": [
+    19
+  ],
+  "median_ms": {
+    "fixed phase": 258.8381255045533,
+    "distant gate": 275.25970700662583
+  },
+  "samples_ms": {
+    "fixed phase": [
+      262.83909589983523,
+      248.89510602224618,
+      267.3059570370242,
+      247.66522995196283,
+      266.92547602579,
+      265.35798294935375,
+      234.21833000611514,
+      245.63685699831694,
+      274.4589849608019,
+      242.15374398045242,
+      260.5005940422416,
+      247.64089507516474,
+      286.9306199718267,
+      257.17565696686506,
+      263.2489870302379,
+      245.8029059926048
+    ],
+    "distant gate": [
+      270.223660976626,
+      271.0135349771008,
+      243.65846696309745,
+      310.85009302478284,
+      276.18714899290353,
+      274.33226502034813,
+      261.62526896223426,
+      300.730450078845,
+      267.3178609693423,
+      285.72693606838584,
+      270.95703908707947,
+      277.96094701625407,
+      286.0541370464489,
+      291.2058960646391,
+      270.70913498755544,
+      299.3470219662413
+    ]
+  },
+  "scope": "One warmed 256-pixel Bayer correction on one CPU core. Both arms start with the same retained parent and exterior donation bank. Each delivers one output. Neither includes parent inference or input decode."
+}

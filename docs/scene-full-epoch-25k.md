@@ -11,6 +11,8 @@ remain incomplete at 25k.
 [Training receipt](results/scene-full-epoch-v1/matched-025000-training.json) ·
 [Exact-photo results](results/scene-full-epoch-v1/matched-025000-monitor.json).
 
+[Matched 30k follow-up with both standing GFX scenes](scene-full-epoch-30k.md).
+
 ## Matched budget and fixed inputs
 
 Both EMA models continue from Corpus 100k on identical arrays

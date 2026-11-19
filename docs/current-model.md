@@ -158,6 +158,10 @@ both arms, with 0.20–0.25 fewer fine-response points. Matching
 and mismatched distant views remain nearly tied. Exact photo
 and both standing GFX reviews are complete. The sky stays smooth and
 fine cab crossings remain incomplete.
+[Matched scene training at 30k](scene-full-epoch-30k.md) recovers 0.121
+fine-response points in the local arm versus 25k with 0.037 DN16 higher
+fine-flat RMS. Aligned and mismatched distant views give similar ISO6400
+fine response and flat error in the spatial arm.
 [Directional gap supervision](directional-gap-training.md) gains 0.44
 wire response points at similar total gap correction and adds 0.066
 DN16 of weak-band gap error. Nominal right cab diagonals strengthen
@@ -179,6 +183,10 @@ takes about twice the CPU time of eight donors on a fixed 256-pixel query.
 planted-wire and true-gap errors. Transferring the same calibration to
 natural photos weakens response and raises flat RMS. The fine cab junctions
 remain incomplete.
+[Distant Bayer phase gating](bayer-distant-phase-gate.md) retains the earlier
+planted-wire improvement while cutting its ISO6400 natural flat penalty from
+0.894 to 0.145 DN16. Fine natural response still falls 0.061 points compared
+with ring8. Both fine cab crossings remain incomplete.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the

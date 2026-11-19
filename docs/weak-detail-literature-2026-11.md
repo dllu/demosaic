@@ -460,6 +460,10 @@ ISO6400 flat RMS by about 0.10 DN16 over 20k in both arms. Fine response
 falls another 0.20–0.25 points. The effects of correct and mismatched
 distant context remain nearly tied. Both standing GFX comparisons are
 complete at 25k, with a smooth sky and incomplete fine cab crossings.
+The [matched 30k review](scene-full-epoch-30k.md) recovers 0.121 independent
+ISO6400 fine-response points in the local arm at 0.037 DN16 higher
+flat RMS. The 30k spatial arm still ties the mismatched distant control
+on response and exact-flat error at ISO6400.
 
 [Directional gap supervision](directional-gap-training.md) separates
 strong-wave repair from the missing weak band in exact gaps. It gains
@@ -497,6 +501,14 @@ error to lower planted ISO6400 intact RMS by 2.58 DN16 and gap RMS by 1.88.
 The same rule adds 0.894 DN16 of exact-flat RMS on natural photos and leaves
 the fine cab crossings incomplete. Local green phase by itself calibrates
 to zero. The useful evidence is strongest for coherent repeated structures.
+
+[Distant Bayer phase gating](bayer-distant-phase-gate.md) checks each frozen
+proposal against four disjoint 32-pixel stations 64 pixels away. The new
+gate drops the fixed phase natural-flat cost from 0.894 to 0.145 DN16
+and retains the planted-wire benefit. Its advantage over shifted
+measurements is smaller. Rotating the directional weights changes
+little, suggesting that correctly placed evidence is more important
+than these particular tangent weights.
 
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the

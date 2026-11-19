@@ -9,6 +9,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Disjoint exterior Bayer phase](bayer-phase-quadrature.md#standing-gfx100s-comparisons)
   keeps a smooth sky and both coarse fence directions. Thin building cables
   and leaf details remain soft.
+- [Distant Bayer phase gating](bayer-distant-phase-gate.md#standing-gfx100s-comparisons)
+  retains smooth sky and both coarse fence directions. Fine building wires
+  and foliage remain soft across the near, distant and fixed phase variants.
 - [Adaptive Bayer blending](bayer-phase-shrinkage.md#standing-gfx100s-comparisons)
   keeps the sky visually smooth and the coarse fence coherent. Building
   wires and fine leaves stay soft.
@@ -24,6 +27,9 @@ historical boards. Use these reports for the current completed comparisons:
 - [Matched local and spatial 25k models](scene-full-epoch-25k.md#standing-gfx100s-comparisons)
   show little visible change from 20k in the smooth sky, coarse fence,
   foliage and building details.
+- [Matched local and spatial 30k models](scene-full-epoch-30k.md#standing-gfx100s-comparisons)
+  retain the smooth sky and coherent coarse crossings. Fine leaf tips and
+  building cables stay soft.
 - [Within-window phase localization](local-phase-envelope.md#standing-gfx100s-comparisons)
   keeps the smooth sky and coherent coarse wires. The fine building and
   foliage details remain soft.

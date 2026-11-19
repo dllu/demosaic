@@ -40,11 +40,13 @@ Implementation reports: [whole-scene context](whole-scene-context-next-test.md),
 [full-epoch scene context continuation](scene-full-epoch.md) ·
 [matched 20k exact-target and GFX reviews](scene-full-epoch-20k.md) ·
 [matched 25k exact-photo and standing GFX reviews](scene-full-epoch-25k.md) ·
+[matched 30k exact-photo and standing GFX reviews](scene-full-epoch-30k.md) ·
 [directional weak-wire gap supervision](directional-gap-training.md) ·
 [competing-wave validation and donor nomination](competing-wave-validation.md) ·
 [wider Bayer neighborhoods](wide-bayer-neighborhood.md) ·
 [adaptive Bayer blending](bayer-phase-shrinkage.md) ·
 [disjoint exterior Bayer phase](bayer-phase-quadrature.md) ·
+[distant Bayer phase gating](bayer-distant-phase-gate.md) ·
 [localized contrast training preflight](scene-local-contrast-training.md) ·
 [matched localized contrast training and 64-photo evaluation](scene-local-contrast-2400.md) ·
 [full and dense regional scene context](scene-regional-context.md) ·
