@@ -326,14 +326,24 @@ photos and 220,000 queries per arm.
 [24,500 local audit](results/scene-full-epoch-v1/local-024500-prefix.json) ·
 [25,000 local audit](results/scene-full-epoch-v1/local-025000-prefix.json).
 
-Local-only verifies 28,500 updates, 57,000 distinct photos and
-228,000 native queries on the unchanged 50k schedule.
+Local-only verifies 30,000 updates, 60,000 distinct photos and
+240,000 native queries on the unchanged 50k schedule.
 [25,500 local audit](results/scene-full-epoch-v1/local-025500-prefix.json) ·
 [26,000 local audit](results/scene-full-epoch-v1/local-026000-prefix.json) ·
 [26,500 local audit](results/scene-full-epoch-v1/local-026500-prefix.json) ·
 [27,500 local audit](results/scene-full-epoch-v1/local-027500-prefix.json) ·
 [28,000 local audit](results/scene-full-epoch-v1/local-028000-prefix.json) ·
-[28,500 local audit](results/scene-full-epoch-v1/local-028500-prefix.json).
+[28,500 local audit](results/scene-full-epoch-v1/local-028500-prefix.json) ·
+[29,000 local audit](results/scene-full-epoch-v1/local-029000-prefix.json) ·
+[29,500 local audit](results/scene-full-epoch-v1/local-029500-prefix.json) ·
+[30,000 local audit](results/scene-full-epoch-v1/local-030000-prefix.json).
+
+The 30k review waits for the verified matched pair. It covers the same
+64 exact photo backgrounds and both standing GFX families. Its scoring
+driver verifies the prior FP32 controls against source and checkpoint
+bindings before reuse. The latest complete scoped quality check covers 25k.
+[30k review launch](results/scene-full-epoch-v1/queue-full-030000-launch.json) ·
+[Frozen review drivers](results/scene-full-epoch-v1/queue-full-030000.tar.xz).
 
 [Earlier local-only 20,000 audit](results/scene-full-epoch-v1/local-020000-prefix.json) ·
 [Matched 20,000 controller receipt](results/scene-full-epoch-v1/matched-020000-training.json) ·

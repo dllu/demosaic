@@ -1,0 +1,2914 @@
+{
+  "exact": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/step000672.pt",
+      "sha256": "7b854d681083550de869b06b55d56c2f84224ec4a0545419a2cf34682a38ec68"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/render_wide.py",
+      "sha256": "a2a661976c7f3408ba6ef0c3e15eacca9facbea4ae9db488f5222abcabd27322"
+    },
+    "frozen_phase": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "policies": [
+      "Bayer-gated",
+      "local_power",
+      "conditional",
+      "ring8",
+      "split-axis",
+      "ring8-nearest",
+      "split-axis-nearest",
+      "directional"
+    ],
+    "prior_exact": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/exact-final/manifest.json",
+      "sha256": "32c16295f37c2cb9a9604daa0d7bfd822a1ef7725f2a1e5568d40bd60934583b"
+    },
+    "rows": [
+      {
+        "ADC_bits": 16,
+        "CFA": "BGGR",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/001-iso6400-independent-comparison.png",
+            "sha256": "100ad17c69366e9916a7e8bebdccf5934c7d8dece5f9c1e0713a6f6aee05fb92"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA, near",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional training",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 2.0,
+        "display_exposure": 3.0303030303030303,
+        "id": "001-iso6400-independent",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/001-iso6400-independent.npz",
+          "sha256": "4471b52c84c9f3f281f0cd6633a8bcc5b2bcb924c810aacaa2e3c121cf1137a5"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-020000/evaluation/predictions/001-iso6400-independent.npz",
+          "sha256": "2496a9a4c36da50fc8fd8f4458c7fac952abb9ef7c0e8abd2f965175a749da34"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "name": "iso6400",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "directional": {
+            "image": {
+              "path": "exact/001-iso6400-independent-directional-triplet.png",
+              "sha256": "a81cd3bf4528d6bfcd4367d44c28eeeec62c15ff1cc7c26de4fef55b1a9f5090"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Directional training",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "split-axis": {
+            "image": {
+              "path": "exact/001-iso6400-independent-split-axis-triplet.png",
+              "sha256": "810ef506e718fef68da9101fd0fa2804d1938c021af1ef40fc39c6ce4b543898"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Agreeing-diagonal EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          22,
+          250,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "Berthold Werner",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/07/076545ab6d57bfb3be7884c3cae690b536090956.npy",
+          "cache_sha256": "02e50df398205439bc361661d3c128e0d974164c4bb06772b2f729cbe4db6b4d",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/07/65/076545ab6d57bfb3be7884c3cae690b536090956.jpg",
+          "dtype": "uint16",
+          "height": 3366,
+          "id": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "license": "Public domain",
+          "license_url": null,
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Limburger_Dom_BW_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg",
+          "sha1": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "sha1_hex": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "shape": [
+            841,
+            541,
+            3
+          ],
+          "split": "val",
+          "title": "File:Limburger Dom BW 1.jpg",
+          "width": 2166
+        },
+        "triplet": {
+          "image": {
+            "path": "exact/001-iso6400-independent-triplet.png",
+            "sha256": "50ba2502941be8e98fd4e29c2bd9fe833da730c93374edbba43249d569163046"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "RGGB",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/012-iso6400-comparison.png",
+            "sha256": "6499d3b9d72072bee031aa1ca5f822235d04ee3dda66d255143898c80ce1ec28"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA, near",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional training",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "ellipse",
+        "id": "012-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/012-iso6400.npz",
+          "sha256": "caeba10076a8701b00589737a870775f791fd45459c9f5b52b24f570f8fc70b0"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/wire-parent/012-iso6400.npy",
+          "sha256": "b0f9b837209d5b8135f9c365be57a7893c2a95e010ec7013b6c88cf08bba6f2e"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "directional": {
+            "image": {
+              "path": "exact/012-iso6400-directional-triplet.png",
+              "sha256": "4e0dc786faa18334d911c87cc01b58b430c3057bdbc9b1a948aff8c16adf61a4"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Directional training",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "split-axis": {
+            "image": {
+              "path": "exact/012-iso6400-split-axis-triplet.png",
+              "sha256": "3944eef6d3b4a48ca207e77060af1e132d2ee9ce651ad556cd3c74b8a2875135"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Agreeing-diagonal EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "GT1976",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/ed/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.npy",
+          "cache_sha256": "eb7ec09162ad4d3e87a4bf7548bcd8cd741fecd489cfaeeb6d6b92bceea933e5",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/ed/8a/ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6.jpg",
+          "dtype": "uint16",
+          "height": 3000,
+          "id": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/2018-05-04_%28217%29_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:2018-05-04_(217)_33_53_9332_586-5_at_Bahnhof_St._Valentin.jpg",
+          "sha1": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "sha1_hex": "ed8a83b4b8939ff540e9d5b1f86df39c1cc794c6",
+          "shape": [
+            750,
+            1000,
+            3
+          ],
+          "split": "val",
+          "title": "File:2018-05-04 (217) 33 53 9332 586-5 at Bahnhof St. Valentin.jpg",
+          "width": 4000
+        },
+        "source_box": [
+          376,
+          16,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/012-iso6400-triplet.png",
+            "sha256": "8071b3bc52d04b46626eed910bff2432ee8a7ff62803b7450c034e68751ea878"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "GRBG",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "exact/014-iso6400-comparison.png",
+            "sha256": "c72b8853a9d943d8905409864c5119e00a818320f7b4f7a30d636b8426b46b75"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA, near",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional training",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 1.0,
+        "display_exposure": 2.0,
+        "family": "smooth-dip",
+        "id": "014-iso6400",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/query-exterior-colour-v1/inputs/014-iso6400.npz",
+          "sha256": "b222c3a103b8fcea84dd06550d4de5ecc7db94ebeefef457884f41ec664631f6"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/wire-parent/014-iso6400.npy",
+          "sha256": "fe98f037193ebb2354c807ae2c9a69bb92753e99a22099d94806d2d845fc716e"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "other_triplets": {
+          "directional": {
+            "image": {
+              "path": "exact/014-iso6400-directional-triplet.png",
+              "sha256": "0c06d119c1c3cb23c672af9ac4a51de3ace5ceb7ff031ef25cf374cb99fd4415"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Directional training",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          },
+          "split-axis": {
+            "image": {
+              "path": "exact/014-iso6400-split-axis-triplet.png",
+              "sha256": "bf277aab4dfbd2b1b46bc1f04a82e937ef0fee3525dc82b6bed1039063e8e68d"
+            },
+            "panels": [
+              {
+                "label": "Noisy Malvar",
+                "png_xywh": [
+                  8,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Agreeing-diagonal EMA",
+                "png_xywh": [
+                  176,
+                  24,
+                  160,
+                  160
+                ]
+              },
+              {
+                "label": "Exact GT",
+                "png_xywh": [
+                  344,
+                  24,
+                  160,
+                  160
+                ]
+              }
+            ]
+          }
+        },
+        "query": [
+          128,
+          128,
+          256,
+          256
+        ],
+        "source": {
+          "attribution": null,
+          "author": "Uoaei1",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/30/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.npy",
+          "cache_sha256": "fab4b796912d34e59e347fad7e5907b1f8c5ac910e44dc43f769762c84ae47fa",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/30/7d/307d74d191ba6b72f4b61f2d5212bc7bac3049e1.jpg",
+          "dtype": "uint16",
+          "height": 2318,
+          "id": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Dianthus_superbus_Auernig_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Dianthus_superbus_Auernig_01.jpg",
+          "sha1": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "sha1_hex": "307d74d191ba6b72f4b61f2d5212bc7bac3049e1",
+          "shape": [
+            579,
+            579,
+            3
+          ],
+          "split": "val",
+          "title": "File:Dianthus superbus Auernig 01.jpg",
+          "width": 2318
+        },
+        "source_box": [
+          66,
+          32,
+          512,
+          512
+        ],
+        "triplet": {
+          "image": {
+            "path": "exact/014-iso6400-triplet.png",
+            "sha256": "3f8af6b89790a61ba27abff05237cd16983962e7f108f50151b09d7153ce05b0"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/completed.json",
+      "sha256": "9eb7e803098fa0472bb16656e683c370b20521fc848a5686a3503a9b0a6ce9fa"
+    }
+  },
+  "flat": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/step000672.pt",
+      "sha256": "7b854d681083550de869b06b55d56c2f84224ec4a0545419a2cf34682a38ec68"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/flat_wide.py",
+      "sha256": "1f7e79622321f5ebf465f8ca091c0c98331ecae872eece492615993b32002770"
+    },
+    "frozen_phase": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "rows": [
+      {
+        "ADC_bits": 16,
+        "CFA": "RGGB",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "flat/000-iso6400-independent-flat-comparison.png",
+            "sha256": "6cb199751c840fb1d65bb6da1a766dcf5bdf5a260d4382552b098a46f295b22f"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing EMA, near",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional training",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                2192,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 2.0,
+        "display_exposure": 3.0303030303030303,
+        "id": "000-iso6400-independent-flat",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/000-iso6400-independent.npz",
+          "sha256": "5b7c3ba5dc7a7cbe961b79737cee7b457bbace06c03d6962ecf7e140b27b3f8f"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-020000/evaluation/predictions/000-iso6400-independent.npz",
+          "sha256": "91b8c1c9dd77a6e66adeabc4ecce576c966f603a0d4c598ba962d2a7d9869da9"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "name": "iso6400",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          218,
+          192,
+          256,
+          256
+        ],
+        "role": "exact-flat",
+        "source": {
+          "attribution": null,
+          "author": "Palauenc05",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/0b/0bf743c903a6423b4d8de1ea05becdff955780f8.npy",
+          "cache_sha256": "c05a4e6b332aa6f633ed5ab5d601476b086f4f039e51af132d8fb059bf1c9d80",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/0b/f7/0bf743c903a6423b4d8de1ea05becdff955780f8.jpg",
+          "dtype": "uint16",
+          "height": 2858,
+          "id": "0bf743c903a6423b4d8de1ea05becdff955780f8",
+          "license": "CC BY-SA 4.0",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Hauroth_Wegekreuz_St-Bartholom%C3%A4us.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Hauroth_Wegekreuz_St-Bartholom%C3%A4us.jpg",
+          "sha1": "0bf743c903a6423b4d8de1ea05becdff955780f8",
+          "sha1_hex": "0bf743c903a6423b4d8de1ea05becdff955780f8",
+          "shape": [
+            714,
+            695,
+            3
+          ],
+          "split": "val",
+          "title": "File:Hauroth Wegekreuz St-Bartholomäus.jpg",
+          "width": 2780
+        },
+        "triplet": {
+          "image": {
+            "path": "flat/000-iso6400-independent-flat-triplet.png",
+            "sha256": "ba43bcfda7439d5f697f4a8e56bb9cb8442c3ab7844082ba1597ebd65cef4e6d"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "ADC_bits": 16,
+        "CFA": "BGGR",
+        "ROI_xywh": [
+          48,
+          48,
+          160,
+          160
+        ],
+        "black_level": 0.03,
+        "board": {
+          "image": {
+            "path": "flat/001-iso6400-independent-flat-comparison.png",
+            "sha256": "1ce6584a4f5c158ab00db566997c866e0f7b1731948be127b678c58be6c0cf34"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Corpus 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Spatial 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Conditional blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Agreeing EMA, near",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Directional training",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                2192,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "display_contrast": 2.0,
+        "display_exposure": 3.0303030303030303,
+        "id": "001-iso6400-independent-flat",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/observations/001-iso6400-independent.npz",
+          "sha256": "4471b52c84c9f3f281f0cd6633a8bcc5b2bcb924c810aacaa2e3c121cf1137a5"
+        },
+        "local_parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-020000/evaluation/predictions/001-iso6400-independent.npz",
+          "sha256": "2496a9a4c36da50fc8fd8f4458c7fac952abb9ef7c0e8abd2f965175a749da34"
+        },
+        "noise": {
+          "exposure": 0.33,
+          "name": "iso6400",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "query": [
+          22,
+          250,
+          256,
+          256
+        ],
+        "role": "exact-flat",
+        "source": {
+          "attribution": null,
+          "author": "Berthold Werner",
+          "bin_factor": 4,
+          "cache": "/mnt/external/demosaic/commons-frozen44732-bin4-v1/images/07/076545ab6d57bfb3be7884c3cae690b536090956.npy",
+          "cache_sha256": "02e50df398205439bc361661d3c128e0d974164c4bb06772b2f729cbe4db6b4d",
+          "color_space": "linear-sRGB",
+          "credit": "Own work",
+          "download_path": "images/07/65/076545ab6d57bfb3be7884c3cae690b536090956.jpg",
+          "dtype": "uint16",
+          "height": 3366,
+          "id": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "license": "Public domain",
+          "license_url": null,
+          "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Limburger_Dom_BW_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Limburger_Dom_BW_1.jpg",
+          "sha1": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "sha1_hex": "076545ab6d57bfb3be7884c3cae690b536090956",
+          "shape": [
+            841,
+            541,
+            3
+          ],
+          "split": "val",
+          "title": "File:Limburger Dom BW 1.jpg",
+          "width": 2166
+        },
+        "triplet": {
+          "image": {
+            "path": "flat/001-iso6400-independent-flat-triplet.png",
+            "sha256": "a7e33403888bda6d8a14e6bb1243cbeed054600ceec9c38d938dd42cd820a54f"
+          },
+          "panels": [
+            {
+              "label": "Noisy Malvar",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Eight-donor EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "label": "Exact GT",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "source": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-local-contrast-2400-v1/evaluation/collected.json",
+      "sha256": "4a313695347e2057d964d3849cf07961d05957ea213f21596e5e1f739a4e167f"
+    },
+    "weights": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/completed.json",
+      "sha256": "9eb7e803098fa0472bb16656e683c370b20521fc848a5686a3503a9b0a6ce9fa"
+    }
+  },
+  "native_image_review": {
+    "completed": true,
+    "exact_comparisons": 3,
+    "exact_triplets": 9,
+    "flat_comparisons": 2,
+    "flat_triplets": 2,
+    "notes": "The overcast sky and exact-flat controls are visually smooth. The coarse lattice stays coherent with soft foliage and building detail. Eight donors slightly reinforce existing right-cab diagonals, especially with transferred conditioning. Left lines remain diffuse and the fine crossings stay incomplete. Background mottling persists.",
+    "standing": 8
+  },
+  "standing": {
+    "checkpoint": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/step000672.pt",
+      "sha256": "7b854d681083550de869b06b55d56c2f84224ec4a0545419a2cf34682a38ec68"
+    },
+    "driver": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/render_wide.py",
+      "sha256": "a2a661976c7f3408ba6ef0c3e15eacca9facbea4ae9db488f5222abcabd27322"
+    },
+    "frozen_phase": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/training/step000672.pt",
+      "sha256": "069de3a3d3f18ab0f32cf9b242daa1fb859d03762086ee27244557aced803e54"
+    },
+    "parent": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/none-020000/segments/through-020000/attempt-01/work/step020000.pt",
+      "sha256": "b892a08c8ebbccb05c000e4f42d1f86c3a7d1d5870721ccd6e1c8fe9e82c3889"
+    },
+    "policies": [
+      "Bayer-gated",
+      "local_power",
+      "conditional",
+      "ring8",
+      "split-axis",
+      "ring8-nearest",
+      "split-axis-nearest",
+      "directional"
+    ],
+    "prior_native": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/quiet-parent-phase-v1/standing/manifest.json",
+      "sha256": "24341944d8bf4111e89ab783682c0cb0d0b6b0c12e93db9031717966be211a70"
+    },
+    "rows": [
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-overcast-sky-main-overcast-sky.png",
+            "sha256": "cbef0190b2c77ac46e6641f7e722b13ac02ec9768848e0c46d6da6c115a2af0f"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 1.7904884240870702,
+          "conditional": 0.7658908174101046,
+          "directional": 0.800694289425827,
+          "local_power": 1.0575516812879633,
+          "ring8": 0.8021956208142611,
+          "ring8-nearest": 0.7957752886021078,
+          "split-axis": 0.8106131965832292,
+          "split-axis-nearest": 0.7945065639907639
+        },
+        "display_exposure": 4.0,
+        "id": "main-overcast-sky-main-overcast-sky",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/overcast-sky.npz",
+          "sha256": "9aadd2c213eb5d54787dcadc016c794874272500e38584ad81fe270c6679ee1c"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-overcast-sky-main-overcast-sky.png",
+          "sha256": "ea00e14ddb14f021dd099e07c020589af8e132ae02650981b9ee843522f66a95"
+        },
+        "native_box": [
+          5752,
+          1352,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-overcast-sky-RGB-f32.npy",
+          "sha256": "f2527cae11c6621c7b36491310f7a965e7910532842eb765bdcf64fcb07b6c26"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-building-detail-main-building-detail.png",
+            "sha256": "bf08f57f8854d91715518f1705e0c4ec16053486fc41e2ac40b7c42767cd864f"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.8485682396461725,
+          "conditional": 7.238841266433488,
+          "directional": 6.968618209189353,
+          "local_power": 9.140948136195233,
+          "ring8": 6.888515310758291,
+          "ring8-nearest": 7.017357530047772,
+          "split-axis": 6.941384753366323,
+          "split-axis-nearest": 6.986015131403803
+        },
+        "display_exposure": 4.0,
+        "id": "main-building-detail-main-building-detail",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/building-detail.npz",
+          "sha256": "0670baa84cfc6ed1742b6077f6f145351823ed3a51a64d4ca56996e24fb9c54a"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-building-detail-main-building-detail.png",
+          "sha256": "30d438f8129e23331424dc4e6871ff9a786e6fea635752c98437c43e828858ca"
+        },
+        "native_box": [
+          5742,
+          2642,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-building-detail-RGB-f32.npy",
+          "sha256": "f68f30c44e8a541ccbafdf7a582bf953c973bf57d8bb5b2be4123ac2847cb470"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-foliage-main-foliage.png",
+            "sha256": "e32f40a54a95d724731c1dfed7c434fce1d87e823f2bd742fd3169fe9ecbe2b3"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.8885571273757815,
+          "conditional": 7.600743126853201,
+          "directional": 7.178260288687996,
+          "local_power": 10.190916227475357,
+          "ring8": 6.499305947019568,
+          "ring8-nearest": 7.268250197326926,
+          "split-axis": 7.010851661544643,
+          "split-axis-nearest": 7.199823528987405
+        },
+        "display_exposure": 4.0,
+        "id": "main-foliage-main-foliage",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/foliage.npz",
+          "sha256": "1d898b28661c4af5f9aa20ba54ad68f9ff3c47420700335f49f17b26dbbba50f"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-foliage-main-foliage.png",
+          "sha256": "d83c6f7a7ece3241c465f74c8c3aa444230636b15ce552803804ee004f95547c"
+        },
+        "native_box": [
+          8842,
+          5522,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-foliage-RGB-f32.npy",
+          "sha256": "6708ed14ecbce7437f8c4f009cfd03f521f7bfa0842f8f8b40bc0fd235ed1700"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/main-chain-link-fence-main-chain-link-fence.png",
+            "sha256": "80192107c01a3e386961636709dd5afe55ff71c83a7a8c3c756ed8222cafb709"
+          },
+          "panels": [
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 15.998412819000286,
+          "conditional": 21.05811933176504,
+          "directional": 20.39035593409726,
+          "local_power": 23.99761920240819,
+          "ring8": 21.910397998160608,
+          "ring8-nearest": 20.46408313283826,
+          "split-axis": 21.118368094102376,
+          "split-axis-nearest": 20.441087660571593
+        },
+        "display_exposure": 4.0,
+        "id": "main-chain-link-fence-main-chain-link-fence",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/V123-mid9000-quality-pilot-v1/work-v2/artifacts/inputs/chain-link-fence.npz",
+          "sha256": "e26b57a4466094473feca877d8966ca34c68b358cb1b7891b51b00c908819cfd"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/main-chain-link-fence-main-chain-link-fence.png",
+          "sha256": "10cee20009a6d396f3e0b8e261c1a8bc2899e40664794a155806ed8b4126955a"
+        },
+        "native_box": [
+          2192,
+          5952,
+          256,
+          256
+        ],
+        "noise": {
+          "read": 6.553600000000001e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/main-chain-link-fence-RGB-f32.npy",
+          "sha256": "ef48b06d7c8d3c39db0db3873590cbbc4ff056edfde5bab1878a8eb6ee955efc"
+        },
+        "raw": {
+          "path": "/home/dllu/proj/demosaic/.cache/gfx-qualitative-20231231/2023-12-31-17-13-27_DSCF3879_0412de8b8eaac075351e2fe2605cd2558376d7f4.raf",
+          "sha256": "15b98ea5d27a88a698cc8fd350fa433ff953aa570b379d7feab975c4a8b60634"
+        },
+        "roi": [
+          48,
+          48,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-left.png",
+            "sha256": "06109be5a109f133573369152dd1050aad831eb4df35578bfc1f650b4ae969ee"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2192,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2360,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 3.613730059767534,
+          "conditional": 2.3462528820795447,
+          "directional": 2.7299215403084456,
+          "local_power": 1.4343086110519931,
+          "ring8": 3.0274630039791983,
+          "ring8-nearest": 2.6877482803324995,
+          "split-axis": 2.9038958794285286,
+          "split-axis-nearest": 2.6989311132726264
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-nominal-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-nominal-fine-green-mesh-left.png",
+          "sha256": "49aa16a3a7762ea8747bc3b1c423d5840f8fd57cfa22efeaa666ab8ed43297ba"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-nominal-RGB-f32.npy",
+          "sha256": "fce832ace548686fe634da956bafab1cd14ce4995950597b80c441c92d94f511"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-nominal-fine-green-mesh-right.png",
+            "sha256": "596c36e2276e0cb720b0ea4fe57dde555d2fdc47e586312c82e28f7abd02b03a"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2192,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2360,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 7.5553929231441375,
+          "conditional": 4.72696769485508,
+          "directional": 5.9133846798702425,
+          "local_power": 1.2156278137528127,
+          "ring8": 6.318485313786815,
+          "ring8-nearest": 5.8040110320017755,
+          "split-axis": 6.111305025910343,
+          "split-axis-nearest": 5.816588027836977
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-nominal-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-v1/work/artifacts/inputs-v2/inputs-v1.npz",
+          "sha256": "b64712dd560c5d976c16863dad660855e2c10771b4982208c097cc2b1fa022e4"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-nominal-fine-green-mesh-right.png",
+          "sha256": "d098cbceaa0bbdd294ccfd8e918f5b70f331571def6da2dba733358ffcae0faf"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Disclosed nominal ISO6400 Sensor prior, not measured camera calibration. Reuses established DSCF3842 input-only estimate that was unreliable due insufficient intensity span. No parameter sweep/output selection.",
+          "read": 6.5536e-06,
+          "shot": 0.00128
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-nominal-RGB-f32.npy",
+          "sha256": "fce832ace548686fe634da956bafab1cd14ce4995950597b80c441c92d94f511"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-left.png",
+            "sha256": "2f749b38e29014f6ba5a9b4ef0a13706d5e5ed29a821b407d97f0bfd415ebc36"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2192,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2360,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 4.235374040573767,
+          "conditional": 4.630023130986572,
+          "directional": 4.624364036604285,
+          "local_power": 5.071420566562723,
+          "ring8": 5.020180978350204,
+          "ring8-nearest": 4.6135335518911385,
+          "split-axis": 4.987423478809711,
+          "split-axis-nearest": 4.614832633514483
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-profile3879-fine-green-mesh-left",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-profile3879-fine-green-mesh-left.png",
+          "sha256": "2ffdf9d349bad9b9d43800e366fbbc2d0f431bcc092879ec0f6d98e274ae5fb1"
+        },
+        "native_box": [
+          758,
+          6440,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-profile3879-RGB-f32.npy",
+          "sha256": "fd8ba8fa4b0ff48786e8b679d60cc7b7c85462f276b7e49e412de05a31cf5c98"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      },
+      {
+        "board": {
+          "image": {
+            "path": "standing/mesh-profile3879-fine-green-mesh-right.png",
+            "sha256": "b26bd480ec5fbca0b3b405d51a85deadfc9442ee5eb1139b653b11ef50b27b5a"
+          },
+          "panels": [
+            {
+              "name": "ISO6400 camera JPEG",
+              "png_xywh": [
+                8,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Noisy (Malvar)",
+              "png_xywh": [
+                176,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "V120 EMA",
+              "png_xywh": [
+                344,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Parent 100k EMA",
+              "png_xywh": [
+                512,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local-only 20k EMA",
+              "png_xywh": [
+                680,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Bayer-gated refit",
+              "png_xywh": [
+                848,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Local power",
+              "png_xywh": [
+                1016,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Conditional blend",
+              "png_xywh": [
+                1184,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA",
+              "png_xywh": [
+                1352,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing-diagonal EMA",
+              "png_xywh": [
+                1520,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Eight-donor EMA, near",
+              "png_xywh": [
+                1688,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Agreeing EMA, near",
+              "png_xywh": [
+                1856,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "Directional training",
+              "png_xywh": [
+                2024,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 AHD reference",
+              "png_xywh": [
+                2192,
+                24,
+                160,
+                160
+              ]
+            },
+            {
+              "name": "ISO100 camera JPEG",
+              "png_xywh": [
+                2360,
+                24,
+                160,
+                160
+              ]
+            }
+          ]
+        },
+        "camera_RGB_RMS_DN16": {
+          "Bayer-gated": 6.185193349300662,
+          "conditional": 7.240333858130061,
+          "directional": 7.30336990327128,
+          "local_power": 7.44348902872894,
+          "ring8": 8.125862181159848,
+          "ring8-nearest": 7.2797355646490916,
+          "split-axis": 7.699834778158959,
+          "split-axis-nearest": 7.287174016219095
+        },
+        "display_exposure": 16.0,
+        "id": "mesh-profile3879-fine-green-mesh-right",
+        "input": {
+          "path": "/home/dllu/proj/demosaic/.cache/current-quality-20261023-v1/gfx-green-mesh-profile-transfer-v1/inputs-v1/inputs-v1.npz",
+          "sha256": "b13b77e5c6ce684ec244502983598d4a9516a412d72f46b7d56e366845b03f64"
+        },
+        "matched_display": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/work/render/mesh-profile3879-fine-green-mesh-right.png",
+          "sha256": "e090aab4265494ae78f3e22ab1e1e4d461b4cc4340d0a608590a68a8c9af9904"
+        },
+        "native_box": [
+          978,
+          6400,
+          256,
+          256
+        ],
+        "noise": {
+          "method": "Fixed unmodified input-Haar profile from nearbyDSCF3879, camera/ISO-matched, establishedOct17beforethismeshcase. Not fitted to3842 outputs, reference, JPEG ornewnoiseestimates; notdedicatedflat/darkcalibration.",
+          "read": 1.0715704128646712e-06,
+          "shot": 0.0014635775921166604,
+          "source": "input Haar fit"
+        },
+        "parent": {
+          "path": "/home/dllu/proj/demosaic/.cache/experiments/scene-full-epoch-v1/review-native-020000/none/mesh-profile3879-RGB-f32.npy",
+          "sha256": "fd8ba8fa4b0ff48786e8b679d60cc7b7c85462f276b7e49e412de05a31cf5c98"
+        },
+        "raw": {
+          "path": ".cache/gfx-qualitative-20231231/2023-12-31-17-07-56_DSCF3842_7af769eaa6d030dfad426b272c29c286df13c88b.raf",
+          "sha256": "6b62382150df3d336e2847cfda2a83593e6223295d03f4e481c5326aee72ae7e"
+        },
+        "roi": [
+          48,
+          49,
+          160,
+          160
+        ]
+      }
+    ],
+    "training": {
+      "path": "/home/dllu/proj/demosaic/.cache/experiments/wide-bayer-neighborhood-v1/training/completed.json",
+      "sha256": "9eb7e803098fa0472bb16656e683c370b20521fc848a5686a3503a9b0a6ce9fa"
+    }
+  }
+}

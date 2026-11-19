@@ -9,6 +9,7 @@ preserves its original comparison pixels and provenance.
 | Review | Relevant outcome |
 | --- | --- |
 | [Corpus 100k TensorRT inference](corpus100k-faster-inference.md#standing-gfx100s-comparisons) | TensorRT FP16 and selective FP8 keep the same visible diagonals and incomplete fine crossings as eager FP16 across both ROIs and noise profiles |
+| [Wider Bayer neighborhoods](wide-bayer-neighborhood.md#standing-gfx100s-comparisons) | The eight-donor head slightly strengthens existing right diagonals, especially under transferred conditioning. Fine crossings and mottled patches remain |
 | [Competing-wave validation](competing-wave-validation.md#standing-gfx100s-comparisons) | Both profiles and ROIs were viewed with both JPEGs and ISO100 AHD. Nominal right diagonals soften slightly versus directional training, with incomplete crossings |
 | [Directional gap supervision](directional-gap-training.md#standing-gfx100s-comparisons) | Both profiles and ROIs were viewed with independent AHD and both JPEGs. The nominal right diagonals strengthen, with incomplete fine intersections |
 | [Matched local and spatial 25k models](scene-full-epoch-25k.md#standing-gfx100s-comparisons) | Matched 20k and 25k native views show little change. Transferred conditioning retains more right diagonals than nominal, with incomplete crossings |

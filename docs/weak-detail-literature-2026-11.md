@@ -475,6 +475,13 @@ Subtracting the dominant wave separately in each disjoint donor
 reduces validated weak-phase matches at ISO400. The phase nomination
 and the spatial delivery of any extra correction both matter.
 
+[Wider disjoint Bayer neighborhoods](wide-bayer-neighborhood.md) improve
+planted phase agreement and increase validated ISO6400 intact matches by
+5.47 points with eight donors. An all-bin flat calibration shrinks the
+apparent detection gain. At similar added gap RMS, the trained head
+lowers intact weak-band error and raises absolute gap error. The right
+cab gains a little diagonal definition with incomplete crossings.
+
 A [Bayer-gated refit on local 20k](quiet-parent-phase.md) separates
 attenuation along the parent phase from additions supported by the
 exterior phase and two central Bayer groups. It recovers 7.74 points

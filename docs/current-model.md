@@ -166,6 +166,11 @@ without resolving the missing fine intersections.
 RMS slightly and loses 0.31 ISO6400 wire-response points versus directional
 training. Removing a strong wave in each donor reduces valid ISO400
 weak-phase matches. Fine real crossings remain incomplete.
+[Wider Bayer neighborhoods](wide-bayer-neighborhood.md) improve planted
+phase accuracy and lower intact weak-band error. At similar correction
+strength, the eight-donor head adds 0.344 DN16 of absolute gap error.
+Native right cab diagonals strengthen slightly and fine junctions
+remain incomplete.
 [Bayer-gated phase on local 20k](quiet-parent-phase.md) gains 7.74
 ISO6400 planted-wire response points and lowers absolute gap error
 by 3.64 DN16. Intact error rises 3.37 DN16. The refit recovers the
