@@ -66,8 +66,7 @@ contour set is a separate development replay. The adjacent-frequency
 and quadrant comparisons were added after inspecting the less
 constrained candidates. Their results on these photos are follow-up
 evidence. A second evaluation freezes the existing algorithm on 36
-additional photos, including 18 occlusions. The numeric and visual
-reviews are pending. [Prespecified protocol](results/query-exterior-witness-v1/replication-preregistered.json).
+additional photos, including 18 occlusions. [Completed replication](#prespecified-36-photo-replication).
 
 With exact geometry and measured exterior phase, a single quarter
 detects 13 of 16 occluded draws on the older set. Three quarters
@@ -163,3 +162,49 @@ This inference-only study has no comparable full427 or measured-camera
 panel score. The exterior context used here is an available native RAW
 neighborhood. The concurrent scene training tests the whole-image
 preview separately. [Matched scene training](scene-full-epoch.md).
+
+## Prespecified 36-photo replication
+
+The same thresholds, weights and Corpus 100k EMA were frozen before
+running 36 additional disjoint photos. There are 18 occluded fields,
+nine continuous fields and nine unrelated gaps, each with two
+independent redraws per role. This evaluates the neighboring-frequency
+policy above with the same ISO6400 capture and display settings.
+
+| Replica group | Wide weak response | Checked weak response | Response gain, 95% paired interval | Change in increment RMS, DN16 |
+| --- | ---: | ---: | ---: | ---: |
+| 18 occluded fields | 34.21% | 43.77% | +9.55 points [+5.05, +14.47] | −2.49 [−4.14, −1.12] |
+| Nine continuous fields | 30.51% | 34.23% | +3.72 points [+0.75, +7.81] | −0.30 [−0.67, −0.05] |
+| Nine unrelated gaps | 32.80% | 44.25% | +11.45 points [+6.14, +16.69] | −3.59 [−6.11, −1.47] |
+
+The checked fit admits 18 new occluded draws with correct frequency
+pairs and weaker-direction identity. It also admits three additional
+outside-only draws and two stronger-only draws over the full panel.
+All exact-flat outputs match the parent. In the true occlusions,
+spurious gap projection rises 0.034 points (−0.020 to +0.115) and
+added gap RMS rises 0.623 DN16 (+0.059 to +1.475). For unrelated gaps,
+added luma RMS rises **3.955 DN16** (+1.562 to +6.895), total gap
+error rises 0.249 DN16 (+0.019 to +0.599), and spurious projection
+rises 0.253 points (−0.105 to +0.654). The gain in intact recovery
+replicates. Distinguishing an unrelated gap from continuous texture
+remains unresolved.
+
+[Prespecified protocol](results/query-exterior-witness-v1/replication-preregistered.json) ·
+[Completed replication and native provenance](results/query-exterior-witness-v1/replication-publication.json) ·
+[Executed replication source](results/query-exterior-witness-v1/replication-evidence.tar.xz).
+
+![Lucerne scene, noisy, checked fallback and exact target](images/query-exterior-witness-v1/replication/000-triplet.png)
+
+Ikiwaner, CC BY-SA 3.0. Source `[326,40,512,512]`, RGGB, repeat 1.
+Faint perpendicular detail appears on the supported side and is
+more visible in the exact target.
+[Matched methods](images/query-exterior-witness-v1/replication/000-comparison.png) ·
+[Source and license](https://commons.wikimedia.org/wiki/File:Luzern_Kapellbruecke.jpg).
+
+![Melk bridge scene, noisy, checked fallback and exact target](images/query-exterior-witness-v1/replication/004-triplet.png)
+
+GT1976, CC BY-SA 4.0. Source `[238,214,512,512]`, RGGB, repeat 0.
+The weaker direction is clearer near the middle of the visible side,
+with softer crossings than the target.
+[Matched methods](images/query-exterior-witness-v1/replication/004-comparison.png) ·
+[Source and license](<https://commons.wikimedia.org/wiki/File:2018-07-15_(312)_Wachauer_Radtage_at_Donaubr%C3%BCcke_Melk.jpg>).

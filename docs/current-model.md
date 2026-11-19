@@ -125,7 +125,8 @@ additional aligned component in planted aliases. Exterior RAW reduces
 added flat variation, with little weak-detail gain at matched strength.
 [Exterior bent-phase witness](query-exterior-witness.md) adds 10.45 points of
 weak response on occluded ISO6400 fields while lowering signed-increment
-error. It increases leakage in unrelated gaps. The adjacent-frequency check
+error. A disjoint 36-photo validation confirms a 9.55-point occluded
+gain and finds greater leakage in unrelated gaps. The adjacent-frequency check
 rejects a pooled building proposal and leaves both standing families at the
 wide fit, with incomplete fine cab crossings.
 [Scene-contour Bayer aggregation](query-contour-support.md) gives a small
