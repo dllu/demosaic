@@ -370,6 +370,11 @@ original gates nearly close. A 0.25 gain floor adds 0.49 weak-wire
 response points and raises exact-flat wire RMS by 0.35 DN16. Only 5.47%
 of delivered lift energy in the gaps aligns with the true continuing
 wire. The coarse GFX fence stays coherent, with incomplete fine cab crossings.
+[Separate phase and support](local-wire-gate-support.md) uses paired true
+continuations and double gaps. The support-only head matches the gain
+floor's weak response to within 0.024 points and reduces exact-flat
+wire RMS by 0.17 DN16. A dense signed proposal target suppresses its
+amplitude. Fine cab crossings remain incomplete across both arms.
 [Full-sampling opposite-view checks](full-sampling-detail-check.md) avoid
 checkerboard interpolation. An opposite-view correction adds 0.018 ISO6400
 response points above Corpus 100k with more increment and flat error.

@@ -8,6 +8,7 @@ preserves its original comparison pixels and provenance.
 
 | Review | Relevant outcome |
 | --- | --- |
+| [Separate phase and support](local-wire-gate-support.md#standing-gfx100s-comparisons) | Both ROIs, both noise profiles and both JPEGs were reviewed at the configured and brighter displays. Support-only luma lift is 0.44–1.29 DN16 RMS. The visible fine crossings remain incomplete |
 | [Factored luminance correction](local-factored-wire.md#standing-gfx100s-comparisons) | Both ROIs, both noise profiles and both JPEGs were viewed at the configured and brighter displays. The minimum-gain head changes luminance by 0.73–1.12 DN16 RMS, with the same visible crossing gaps |
 | [Continuing-wire supervision](local-continuing-wire.md#standing-gfx100s-comparisons) | Both ROIs, noise profiles and JPEGs were viewed. Existing diagonals gain contrast under the transferred profile. Fine crossings remain incomplete, with a mostly unresolved nominal left view |
 | [Signed wire supervision](local-wire-response.md#standing-gfx100s-comparisons) | Both ROIs, noise profiles and JPEGs were viewed. Right diagonals remain clearest with transferred conditioning. The full-band arm softens some traces. The aligned arm leaves the fine crossings incomplete |

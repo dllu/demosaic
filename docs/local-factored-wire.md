@@ -11,6 +11,9 @@ remain incomplete.
 [Native crop provenance](images/local-factored-wire-v1/manifest.json) ·
 [Frozen drivers and receipts](results/local-factored-wire-v1/evidence.tar.xz).
 
+The [separate phase and support study](local-wire-gate-support.md) reuses the
+frozen parent and compares confidence labels with an ungated signed loss.
+
 ## A frozen restoration and a separate correction
 
 Both original arms freeze the aligned-control EMA from the

@@ -1041,6 +1041,15 @@ cab crops still have incomplete crossings. Separate supervision for
 support and signed direction is the remaining question for this route.
 [Factored luminance correction](local-factored-wire.md).
 
+Paired support supervision retains the gain-floor head's weak response
+with 0.17 DN16 less exact-flat wire error. Its confidence gate averages
+24.63% with a true continuation and 24.48% in the textured double gap,
+versus 3.94% on the exact flat. Adding a clean signed target to the
+ungated proposal greatly lowers delivered amplitude, with lower
+response at matched natural flat error. Gate confidence distinguishes
+background activity much more strongly than continuation in this trial.
+[Separate phase and support](local-wire-gate-support.md).
+
 ### 6. Check sensor and training-domain mismatch before adding confidence claims
 
 The green-mesh nominal noise coefficients are a prior, and the alternate
